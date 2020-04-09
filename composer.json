@@ -1,0 +1,37 @@
+{
+    "name": "vitexsoftware/multiflexibee-setup",
+    "description": "Tool used to setup FlexiBee multiinstance",
+    "version": "0.0a",
+    "type": "project",
+    "require": {
+        "vitexsoftware/ease-twbootstrap4-widgets-flexibee": "dev-master",
+        "vitexsoftware/ease-fluentpdo": "dev-master",
+        "vlucas/phpdotenv": "dev-master",
+        "vitexsoftware/ease-twbootstrap4-widgets": "dev-master",
+        "robmorgan/phinx": "dev-master"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vítězslav Dvořák",
+            "email": "info@vitexsoftware.cz"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "FlexiPeeHP\\MultiSetup\\": "src/FlexiPeeHP/MultiSetup/",
+            "FlexiPeeHP\\MultiSetup\\Ui\\": "src/FlexiPeeHP/MultiSetup/Ui"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\FlexiPeeHP\\": "vendor/spoje.net/flexibee/testing/src/FlexiPeeHP/",
+            "Test\\FlexiPeeHP\\MultiSetup\\": "tests/FlexiPeeHP/MultiSetup/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "8.5.2"
+    }
+    
+}
