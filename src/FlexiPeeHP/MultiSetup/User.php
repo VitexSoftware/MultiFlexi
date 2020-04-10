@@ -39,14 +39,14 @@ class User extends \Ease\User {
      *
      * @var string
      */
-    public $myCreateColumn = 'DatCreate';
+    public $createColumn = 'DatCreate';
 
     /**
      * Slopecek obsahujici datum poslení modifikace záznamu do shopu.
      *
      * @var string
      */
-    public $myLastModifiedColumn = 'DatSave';
+    public $lastModifiedColumn = 'DatSave';
 
     /**
      * Budeme používat serializovaná nastavení uložená ve sloupečku.

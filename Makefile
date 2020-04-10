@@ -1,6 +1,9 @@
 
-phinx:
+migration: autoload
 	./vendor/bin/phinx migrate -c ./phinx-adapter.php
+
+autoload:
+	composer update
 
 demodata:
 	./vendor/bin/phinx seed:run -c ./phinx-adapter.php

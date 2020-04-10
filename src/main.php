@@ -15,14 +15,17 @@ use FlexiPeeHP\MultiSetup\FlexiBees;
 
 require_once './init.php';
 
+$oPage->onlyForLogged();
+
 $oPage->addItem(new PageTop(_('Multi FlexiBee Setup')));
 
-if(empty($oUser->listingQuery()->count())){
-    $oUser->addStatusMessage(_('There is no administrators in the database.'),'warning');
-    $oPage->container->addItem(new \Ease\TWB4\LinkButton('createaccount.php', _('Create first Administrator Account'), 'success'));
-}
+$oUser->addStatusMessage('HA','info');
+$oUser->addStatusMessage('OK','success');
+$oUser->addStatusMessage('EH','warning');
+$oUser->addStatusMessage('WTF','error');
 
 
+$oPage->addItem('OK');
 
 $oPage->addItem(new PageBottom());
 

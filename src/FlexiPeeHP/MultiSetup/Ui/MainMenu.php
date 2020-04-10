@@ -77,7 +77,7 @@ class MainMenu extends \Ease\Html\DivTag {
                             ], $this->getMenuList(new \FlexiPeeHP\MultiSetup\Company(), 'name'))
             );
 
-            if (\Ease\Shared::user()->getSettingValue('admin') == true) {
+            if (\Ease\Shared::user()->getSettingValue('admin') == true) { 
                 $nav->addDropDownMenu('<img width=30 src=images/users_150.png> ' . _('Admin'),
                         array_merge([
                     'createaccount.php' => _('New Admin'),

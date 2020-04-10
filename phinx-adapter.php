@@ -17,11 +17,13 @@ return array('environments' =>
     array(
         'default_database' => 'development',
         'development' => array(
+            'adapter' => getenv('DB_CONNECTION'),
             'name' => $db->database,
             'connection' => $db->getPdo()
         ),
         'default_database' => 'production',
         'production' => array(
+            'adapter' => getenv('DB_CONNECTION'),
             'name' => $db->database,
             'connection' => $db->getPdo()
         ),

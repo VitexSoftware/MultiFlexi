@@ -24,7 +24,6 @@ use Ease\TWB4\Row;
 use Ease\TWB4\SubmitButton;
 use FlexiPeeHP\MultiSetup\User;
 use PDOException;
-use User as User2;
 
 require_once './init.php';
 
@@ -44,7 +43,7 @@ if ($login) {
 } else {
     $forceID = $oPage->getRequestValue('force_id', 'int');
     if (!is_null($forceID)) {
-        Shared::user(new User2($forceID));
+        Shared::user(new User($forceID));
         $oUser->setSettingValue('admin', true);
         $oUser->addStatusMessage(_('Signed As: ') . $oUser->getUserLogin(),
                 'success');
