@@ -37,21 +37,8 @@ if ($login) {
         echo 'Caught exception: ', $e->getMessage(), "\n";
     }
     if ($oUser->tryToLogin($_POST)) {
-        $oPage->redirect('index.php');
-        exit;
-    }
-} else {
-    $forceID = $oPage->getRequestValue('force_id', 'int');
-    if (!is_null($forceID)) {
-        Shared::user(new User($forceID));
-        $oUser->setSettingValue('admin', true);
-        $oUser->addStatusMessage(_('Signed As: ') . $oUser->getUserLogin(),
-                'success');
-        Shared::user()->loginSuccess();
         $oPage->redirect('main.php');
         exit;
-    } else {
-        $oPage->addStatusMessage(_('Please enter your Login information'));
     }
 }
 
@@ -88,7 +75,7 @@ $passRecoveryColumn = $loginRow->addItem(new Col(4,
 ' . _('Lost password recovery'), 'warning')));
 
 
-$oPage->container->addItem(new Form('Login', null, 'POST', $loginRow));
+$oPage->container->addItem(new Form([],[], $loginRow));
 
 $oPage->addItem(new PageBottom());
 

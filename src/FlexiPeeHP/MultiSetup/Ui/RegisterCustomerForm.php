@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi FlexiBee Setup  - New Customer registration form
  *
@@ -8,27 +9,27 @@
 
 namespace FlexiPeeHP\MultiSetup\Ui;
 
-
 /**
  * Registered FlexiBee instance editor Form
  *
  * @author 
  */
-class RegisterCustomerForm extends ColumnsForm
-{
+class RegisterCustomerForm extends ColumnsForm {
 
-    public function finalize()
-    {
+    public function finalize() {
         $this->addInput(new \Ease\Html\InputTextTag('firstname'),
-            _('First Name'));
+                _('First Name'));
         $this->addInput(new \Ease\Html\InputTextTag('lastname'),
-            _('Lastname'));
-        
+                _('Lastname'));
+
         $this->addInput(new \Ease\Html\InputTextTag('login'),
-            _('Login'));
+                _('Login'));
 
         $this->addInput(new \Ease\Html\InputTextTag('password'),
-            _('Password'));
+                _('Password'));
+        
+        $this->addInput(new \Ease\Html\InputTextTag('email'),
+                _('Email'));
 
         $this->addInput(new \Ease\TWB4\SubmitButton(_('Save'), 'success'));
 
@@ -40,4 +41,5 @@ class RegisterCustomerForm extends ColumnsForm
             $this->fillUp($this->engine->getData());
         }
     }
+
 }

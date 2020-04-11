@@ -15,7 +15,7 @@ use Ease\TWB4\Table;
 use FlexiPeeHP\MultiSetup\FlexiBees;
 
 require_once './init.php';
-
+$oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Multi FlexiBee')));
 
 $flexiBees = new FlexiBees();

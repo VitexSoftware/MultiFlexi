@@ -12,7 +12,7 @@ namespace FlexiPeeHP\MultiSetup\Ui;
 require_once './init.php';
 
 if (empty($oUser->listingQuery()->count())) {
-    $oPage->addStatusMessage(_('Creating first administrato'), 'warning');
+    $oPage->addStatusMessage(_('Creating first administrator'), 'warning');
 } else {
     $oPage->onlyForLogged();
 }

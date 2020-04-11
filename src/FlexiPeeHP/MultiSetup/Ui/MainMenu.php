@@ -1,9 +1,10 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Multi FlexiBee Setup  - Main Menu
+ *
+ * @author     Vítězslav Dvořák <vitex@arachne.cz>
+ * @copyright  2015-2020 Vitex Software
  */
 
 namespace FlexiPeeHP\MultiSetup\Ui;
@@ -52,43 +53,81 @@ class MainMenu extends \Ease\Html\DivTag {
     public function afterAdd() {
         $nav = $this->addItem(new BootstrapMenu('main-menu', null, ['class' => 'navbar navbar-expand-lg navbar-light bg-light']));
 
+
         if (\Ease\Shared::user()->isLogged()) { //Authenticated user
-            $nav->addDropDownMenu('<img width=30 src=images/flexibee-server.svg> ' . _('Servers'),
-                    array_merge([
-                'flexibee.php' => _('Register FlexiBee Server'),
-                'flexibees.php' => _('Instance list'),
-                '' => '',
-                            ], $this->getMenuList(new \FlexiPeeHP\MultiSetup\FlexiBees(), 'name'))
-            );
+            $flexiBees = $this->getMenuList(new \FlexiPeeHP\MultiSetup\FlexiBees(), 'name');
+            $customers = $this->getMenuList(new \FlexiPeeHP\MultiSetup\Customer(), 'name');
+            $companys = $this->getMenuList(new \FlexiPeeHP\MultiSetup\Company(), 'name');
 
-            $nav->addDropDownMenu('<img width=30 src=images/customer.svg> ' . _('Customers'),
-                    array_merge([
-                'customer.php' => _('New Customer'),
-//                'customers.php' => \Ease\TWB4\Part::GlyphIcon('list').'&nbsp;'._('Customers list'),
-                '' => '',
-                            ], $this->getMenuList(new \FlexiPeeHP\MultiSetup\Customer(), 'name'))
-            );
 
-            $nav->addDropDownMenu('<img width=30 src=images/company.svg> ' . _('Companies'),
-                    array_merge([
-                'company.php' => _('New Company'),
-//                'customers.php' => \Ease\TWB4\Part::GlyphIcon('list').'&nbsp;'._('Customers list'),
-                '' => '',
-                            ], $this->getMenuList(new \FlexiPeeHP\MultiSetup\Company(), 'name'))
-            );
+            $this->flexibeesMenuEnabled($nav, $flexiBees);
 
-            if (\Ease\Shared::user()->getSettingValue('admin') == true) { 
-                $nav->addDropDownMenu('<img width=30 src=images/users_150.png> ' . _('Admin'),
-                        array_merge([
-                    'createaccount.php' => _('New Admin'),
-                    'users.php' => new \Ease\TWB4\Widgets\FaIcon('list') . '&nbsp;' . _('Admin Overview'),
-                    '' => '',
-                                ], $this->getMenuList(\Ease\Shared::user(), 'user'))
-                );
+
+            if (empty($flexiBees) && empty($customers) && empty($companys)) { // All empty yet
+                \FlexiPeeHP\MultiSetup\User::singleton()->addStatusMessage(_('No server registered yet. Please register one.'), 'warning');
+                $this->customersMenuDisabled($nav);
+                $this->companysMenuDisabled($nav);
+            } else {
+                if (count($flexiBees) && empty($customers) && empty($companys)) {
+                    $this->customersMenuEnabled($nav, $customers);
+                    $this->companysMenuDisabled($nav);
+                    \FlexiPeeHP\MultiSetup\User::singleton()->addStatusMessage(_('No customer registered yet. Please register one.'), 'warning');
+                } else {
+                    if (count($flexiBees) && count($customers) && empty($companys)) {
+                        \FlexiPeeHP\MultiSetup\User::singleton()->addStatusMessage(_('No company registered yet. Please register one.'), 'warning');
+                        $this->customersMenuEnabled($nav, $customers);
+                        $this->companysMenuEnabled($nav, $companys);
+                    } else { // We Got All
+                        $this->customersMenuEnabled($nav, $customers);
+                        $this->companysMenuEnabled($nav, $companys);
+                    }
+                }
             }
-            
-            $nav->addMenuItem( new \Ease\Html\ATag('logout.php', _('Sign Off')),'right');
+            $nav->addMenuItem(new \Ease\Html\ATag('logout.php', _('Sign Off')), 'right');
         }
+    }
+
+    public function flexibeesMenuEnabled($nav, $flexiBees) {
+        $flexiBeesMenu = ['flexibee.php' => _('Register FlexiBee Server')];
+
+        if (!empty($flexiBees)) {
+            $flexiBeesMenu['flexibees.php'] = _('Instance list');
+        }
+
+        $nav->addDropDownMenu('<img width=30 src=images/flexibee-server.svg> ' . _('Servers'),
+                array_merge($flexiBeesMenu, ['' => ''], $flexiBees)
+        );
+    }
+
+    public function companysMenuEnabled($nav, $companys) {
+        $nav->addDropDownMenu('<img width=30 src=images/company.svg> ' . _('Companies'),
+                array_merge(['company.php' => _('New Company')], ['' => ''], $companys)
+        );
+    }
+
+    public function companysMenuDisabled($nav) {
+        $nav->addMenuItem(new \Ease\Html\ATag('#', '<img width=30 src=images/company.svg> ' . _('Companies'), ['class' => 'nav-link disabled']));
+    }
+
+    public function customersMenuEnabled($nav, $customers) {
+        $customersMenu = ['customer.php' => _('New Customer')];
+        $nav->addDropDownMenu('<img width=30 src=images/customer.svg> ' . _('Customers'),
+                array_merge($customersMenu, ['' => ''], $customers)
+        );
+    }
+
+    public function customersMenuDisabled($nav) {
+        $nav->addMenuItem(new \Ease\Html\ATag('#', '<img width=30 src=images/customer.svg> ' . _('Customers'), ['class' => 'nav-link disabled']));
+    }
+
+    public function usersMenuEnabled($nav) {
+        $nav->addDropDownMenu('<img width=30 src=images/users_150.png> ' . _('Admin'),
+                array_merge([
+            'createaccount.php' => _('New Admin'),
+            'users.php' => new \Ease\TWB4\Widgets\FaIcon('list') . '&nbsp;' . _('Admin Overview'),
+            '' => '',
+                        ], $this->getMenuList(\Ease\Shared::user(), 'user'))
+        );
     }
 
     /**

@@ -28,13 +28,13 @@ class FlexiBees extends \Ease\SQL\Engine {
      * Column with record create time
      * @var string
      */
-    public $myCreateColumn = 'DatCreate';
+    public $createColumn = 'DatCreate';
 
     /**
      * Column with last record upadate time
      * @var string
      */
-    public $myLastModifiedColumn = 'DatSave';
+    public $lastModifiedColumn = 'DatSave';
 
     /**
      * Filter Input data

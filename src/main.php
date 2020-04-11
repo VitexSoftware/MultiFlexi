@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi FlexiBee Setup - Index page.
  *
@@ -19,13 +20,15 @@ $oPage->onlyForLogged();
 
 $oPage->addItem(new PageTop(_('Multi FlexiBee Setup')));
 
-$oUser->addStatusMessage('HA','info');
-$oUser->addStatusMessage('OK','success');
-$oUser->addStatusMessage('EH','warning');
-$oUser->addStatusMessage('WTF','error');
+$mainPageMenu = new \Ease\TWB4\Widgets\MainPageMenu();
+
+$mainPageMenu->addMenuItem(_('Matcher'), 'matcher.php', 'images/matcher.png', _('invoice matching'), _('Configure'));
+$mainPageMenu->addMenuItem(_('Reminder'), 'reminder.php', 'images/reminder.png', _('reminds sender'), _('Configure'));
+$mainPageMenu->addMenuItem(_('Digest'), 'digest.php', 'images/digest.svg', _('modular digest'), _('Configure'));
 
 
-$oPage->addItem('OK');
+$oPage->container->addItem( new Panel( _('Modules Availble'),'default', $mainPageMenu, new DbStatus())  );
+
 
 $oPage->addItem(new PageBottom());
 

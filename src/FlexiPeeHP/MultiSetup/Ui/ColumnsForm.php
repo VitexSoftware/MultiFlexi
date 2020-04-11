@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi FlexiBee Setup  - New Company registration form
  *
@@ -8,8 +9,8 @@
 
 namespace FlexiPeeHP\MultiSetup\Ui;
 
-class ColumnsForm extends \Ease\TWB4\Form
-{
+class ColumnsForm extends \Ease\TWB4\Form {
+
     /**
      * Šířka sloupce.
      *
@@ -52,15 +53,13 @@ class ColumnsForm extends \Ease\TWB4\Form
      *                                 array('enctype' => 'multipart/form-data')
      */
     public function __construct($engine, $formContents = null,
-                                $tagProperties = null)
-    {
+            $tagProperties = null) {
         $this->engine = $engine;
-        parent::__construct(
-            get_class($engine), '', 'POST', $formContents, $tagProperties
-        );
+        $tagProperties['name'] = get_class($engine);
+        parent::__construct($tagProperties, [], $formContents);
         $this->newRow();
         $this->savers = new \Ease\Html\DivTag(null,
-            ['style' => 'text-align: right']);
+                ['style' => 'text-align: right']);
     }
 
     /**
@@ -68,8 +67,7 @@ class ColumnsForm extends \Ease\TWB4\Form
      *
      * @return \Ease\TWB4\Row Nově vložený řádek formuláře
      */
-    public function newRow()
-    {
+    public function newRow() {
         return $this->row = $this->addItem(new \Ease\TWB4\Row());
     }
 
@@ -83,52 +81,47 @@ class ColumnsForm extends \Ease\TWB4\Form
      * @param string $addTagClass CSS třída kterou má být oskiován vložený prvek
      */
     public function addInput($input, $caption = null, $placeholder = null,
-                             $helptext = null, $addTagClass = 'form-control')
-    {
+            $helptext = null, $addTagClass = 'form-control') {
         if ($this->row->getItemsCount() > $this->itemsPerRow) {
             $this->row = $this->addItem(new \Ease\TWB4\Row());
         }
 
         return $this->row->addItem(new \Ease\TWB4\Col($this->colsize,
-                new \Ease\TWB4\FormGroup($caption, $input, $placeholder,
-                $helptext, $addTagClass)));
+                                new \Ease\TWB4\FormGroup($caption, $input, $placeholder,
+                                        $helptext, $addTagClass)));
     }
 
     /**
      * Přidá do formuláře tlačítko "Uložit".
      */
-    public function addSubmitSave()
-    {
+    public function addSubmitSave() {
         $this->savers->addItem(new EaseTWSubmitButton(_('Uložit'), 'default'),
-            ['style' => 'text-align: right']);
+                ['style' => 'text-align: right']);
     }
 
     /**
      * Přidá do formuláře tlačítko "Uložit a zpět na přehled".
      */
-    public function addSubmitSaveAndList()
-    {
+    public function addSubmitSaveAndList() {
         $this->savers->addItem(new \Ease\Html\InputSubmitTag('gotolist',
-            _('Save and back'), ['class' => 'btn btn-info']));
+                        _('Save and back'), ['class' => 'btn btn-info']));
     }
 
     /**
      * Add to form button  "Save next ext".
      */
-    public function addSubmitSaveAndNext()
-    {
+    public function addSubmitSaveAndNext() {
         $this->savers->addItem(new \Ease\Html\InputSubmitTag('gotonew',
-            _('Save and next'), ['class' => 'btn btn-success']));
+                        _('Save and next'), ['class' => 'btn btn-success']));
     }
 
-     public function finalize()
-    {
+    public function finalize() {
         $recordID = $this->engine->getMyKey();
         $this->addItem(new \Ease\Html\InputHiddenTag('class',
-            get_class($this->engine)));
+                        get_class($this->engine)));
         if (!is_null($recordID)) {
             $this->addItem(new \Ease\Html\InputHiddenTag($this->engine->keyColumn,
-                $recordID));
+                            $recordID));
         }
         $this->addItem($this->savers);
         \Ease\TWB4\WebPage::singleton()->includeJavaScript('js/jquery.validate.js');
@@ -136,4 +129,5 @@ class ColumnsForm extends \Ease\TWB4\Form
 
         return parent::finalize();
     }
+
 }

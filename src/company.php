@@ -15,7 +15,7 @@ use FlexiPeeHP\MultiSetup\Company;
 
 
 require_once './init.php';
-
+$oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company')));
 
 $companies    = new Company($oPage->getRequestValue('id', 'int'));

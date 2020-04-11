@@ -11,4 +11,6 @@ class Customer extends \Ease\SQL\Engine
     public $nameColumn = 'login';
     public $myTable = 'customer';
     public $keyword = 'customer';
+    public $createColumn = 'DatCreate';
+    public $updatedColumn = 'DatUpdate';
 }
