@@ -28,22 +28,21 @@ class Company extends AbstractMigration
      */
     public function change()
     {
-        // Migration for table users
         $table = $this->table('company');
         $table
             ->addColumn('enabled', 'boolean', array('default' => false))
             ->addColumn('settings', 'text', ['null' => true])
+            ->addColumn('logo', 'text', ['null' => true])
             ->addColumn('flexibee', 'integer', ['limit' => 128])
             ->addColumn('nazev', 'string', ['null' => true, 'limit' => 32])
             ->addColumn('ic', 'string', ['null' => true, 'limit' => 32])
             ->addColumn('company', 'string', ['comment' => 'Company Code'])
             ->addColumn('rw', 'boolean', ['comment' => 'Write permissions'])
-            ->addColumn('labels', 'boolean', ['comment' => 'Labels established'])
+            ->addColumn('setup', 'boolean', ['comment' => 'SetUP done'])
             ->addColumn('webhook', 'boolean', ['comment' => 'Webhook ready'])
             ->addColumn('DatCreate', 'datetime', [])
-            ->addColumn('datUpdate', 'datetime', ['null' => true])
-            ->addColumn('last_modifier_id', 'integer',
-                ['null' => true, 'signed' => false])
+            ->addColumn('DatUpdate', 'datetime', ['null' => true])
+            ->addIndex(['flexibee', 'company'], ['unique' => true])
             ->create();
     }
 }

@@ -1,22 +1,23 @@
 <?php
+
 namespace FlexiPeeHP\MultiSetup;
+
 /**
  * Multi FlexiBee Setup - Company Management Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2018-2020 Vitex Software
  */
-class Company extends \FlexiPeeHP\Company
-{
+class Company extends \FlexiPeeHP\Company {
 
     use \Ease\SQL\Orm;
+
     public $keyword = 'company';
     public $nameColumn = 'nazev';
 
-    public function __construct($init = null, $options = array())
-    {
-        $this->createColumn       = 'DatCreate';
-        $this->lastModifiedColumn = 'lastUpdate';
+    public function __construct($init = null, $options = array()) {
+        $this->createColumn = 'DatCreate';
+        $this->lastModifiedColumn = 'DatUpdate';
         parent::__construct(null, $options);
         $this->setMyTable('company');
         $this->setKeyColumn('id');
@@ -26,8 +27,7 @@ class Company extends \FlexiPeeHP\Company
         }
     }
 
-    public function prepareCompany($company)
-    {
+    public function prepareCompany($company) {
         $result = ['webhook' => false];
         $this->setCompany($company);
 //        $result['labels'] = $this->addFlexiBeeLabel('TaxTorro') && $this->addFlexiBeeLabel('DataMolino');
@@ -44,13 +44,12 @@ class Company extends \FlexiPeeHP\Company
      * 
      * @return string URL for WebHook
      */
-    public static function webHookUrl($instanceId)
-    {
-        $baseUrl    = \Ease\Document::phpSelf();
-        $urlInfo    = parse_url($baseUrl);
-        $curFile    = basename($urlInfo['path']);
+    public static function webHookUrl($instanceId) {
+        $baseUrl = \Ease\Document::phpSelf();
+        $urlInfo = parse_url($baseUrl);
+        $curFile = basename($urlInfo['path']);
         $webHookUrl = str_replace($curFile,
-            'webhook.php?instanceid='.$instanceId, $baseUrl);
+                'webhook.php?instanceid=' . $instanceId, $baseUrl);
         return $webHookUrl;
     }
 
@@ -61,19 +60,18 @@ class Company extends \FlexiPeeHP\Company
      * 
      * @return boolean
      */
-    public function addFlexiBeeLabel($label)
-    {
-        $result        = true;
+    public function addFlexiBeeLabel($label) {
+        $result = true;
         $evidenceToVsb = array_flip(\FlexiPeeHP\Stitek::$vsbToEvidencePath);
         /**
          * @var \FlexiPeeHP\Stitek Label Object
          */
-        $stitek        = new \FlexiPeeHP\Stitek(null, $this->getConnectionOptions() );
+        $stitek = new \FlexiPeeHP\Stitek(null, $this->getConnectionOptions());
         /**
          * @see https://demo.flexibee.eu/c/demo/stitek/properties
          * @var array initial Label contexts
          */
-        $stitekData    = [
+        $stitekData = [
             "kod" => strtoupper($label),
             "nazev" => $label,
             $evidenceToVsb['adresar'] => true,
@@ -90,7 +88,7 @@ class Company extends \FlexiPeeHP\Company
             $stitek->insertToFlexiBee($stitekData);
             if ($stitek->lastResponseCode == 201) {
                 $stitek->addStatusMessage(sprintf(_('label %s created'), $label),
-                    'success');
+                        'success');
             } else {
                 $result = false;
             }
@@ -103,22 +101,20 @@ class Company extends \FlexiPeeHP\Company
      * 
      * @param string $hookurl
      */
-    public function registerWebHook($hookurl)
-    {
-        $format     = 'json';
-        $hooker     = new \FlexiPeeHP\Hooks(null, $this->getData());
+    public function registerWebHook($hookurl) {
+        $format = 'json';
+        $hooker = new \FlexiPeeHP\Hooks(null, $this->getData());
         $hooker->setDataValue('skipUrlTest', 'true');
         $hookResult = $hooker->register($hookurl, $format);
         if ($hookResult) {
             $hooker->addStatusMessage(sprintf(_('Hook %s was registered'),
-                    $hookurl), 'success');
+                            $hookurl), 'success');
             $hookurl = '';
         } else {
             $hooker->addStatusMessage(sprintf(_('Hook %s not registered'),
-                    $hookurl), 'warning');
+                            $hookurl), 'warning');
         }
-        return (($hooker->lastResponseCode == 201) && ($hooker->lastResponseCode
-            == 200));
+        return (($hooker->lastResponseCode == 201) && ($hooker->lastResponseCode == 200));
     }
 
     /**
@@ -128,9 +124,8 @@ class Company extends \FlexiPeeHP\Company
      * 
      * @return boolean
      */
-    public function changesApi($enable)
-    {
-        $changer     = new \FlexiPeeHP\Changes(null, $this->getData());
+    public function changesApi($enable) {
+        $changer = new \FlexiPeeHP\Changes(null, $this->getData());
         $chapistatus = $changer->getStatus();
 //        $globalVersion = $changer->getGlobalVersion();
 
@@ -138,14 +133,14 @@ class Company extends \FlexiPeeHP\Company
             if ($chapistatus === FALSE) {
                 $changer->enable();
                 $changer->addStatusMessage(_('ChangesAPI was enabled'),
-                    'success');
+                        'success');
                 $chapistatus = true;
             }
         } else {
             if ($chapistatus === TRUE) {
                 $changer->disable();
                 $changer->addStatusMessage(_('ChangesAPI was disabled'),
-                    'warning');
+                        'warning');
                 $chapistatus = false;
             }
         }
@@ -159,8 +154,7 @@ class Company extends \FlexiPeeHP\Company
      * 
      * @return array
      */
-    public function takeData($data)
-    {
+    public function takeData($data) {
         if (isset($data['rw'])) {
             $data['rw'] = true;
         } else {
@@ -186,10 +180,7 @@ class Company extends \FlexiPeeHP\Company
 
         unset($data['class']);
 
-        if (array_key_exists('flexibee', $data) && !empty($data['flexibee'])) {
-            $this->useFlexiBee(intval($data['flexibee']));
-        }
-
+        $data['logo'] = $this->obtainLogo(intval($data['flexibee']),$data['company']);
 
         return parent::takeData($data);
     }
@@ -198,23 +189,25 @@ class Company extends \FlexiPeeHP\Company
      * Use Given FlexiBee for connections
      * 
      * @param int $flexiBeeID
+     * @param string $company Description
      */
-    public function useFlexiBee($flexiBeeID)
-    {
-        $this->disconnect();
+    public function obtainLogo($flexiBeeID,$company) {
         $flexibeer = new FlexiBees($flexiBeeID);
-        $this->setUp($flexibeer->getData());
-        $this->curlInit();
+        $fbOptions = $flexibeer->getData();
+        $fbOptions['company'] = $company;
+        $logoEngine = new \FlexiPeeHP\ui\CompanyLogo(null, $fbOptions);
+        return $logoEngine->getTagProperty('src');
     }
 
+    
+    
     /**
      * Convert data from FlexiBee column names to SQL column names
      * 
      * @param arry $listing
      * @return array
      */
-    public static function convertListingData($listing)
-    {
+    public static function convertListingData($listing) {
         return [
             'company' => $listing['dbNazev'],
             'enabled' => $listing['show'],
@@ -228,16 +221,14 @@ class Company extends \FlexiPeeHP\Company
      * 
      * @return string
      */
-    public function getRecordName()
-    {
+    public function getRecordName() {
         return $this->getDataValue('nazev');
     }
 
     /**
      * 
      */
-    public function prepareRemoteCompany()
-    {
+    public function prepareRemoteCompany() {
         $company = $this->companyPresentInFlexiBee($data);
         if (empty($company)) {
             $companyInfo = $this->createCompanyInFlexiBee($data);
@@ -249,7 +240,7 @@ class Company extends \FlexiPeeHP\Company
         }
 
         $change = $this->prepareCompany($this->getDataValue('company'));
-        $change['id']      = $this->getMyKey();
+        $change['id'] = $this->getMyKey();
         $this->setData($change);
         $this->updateToSQL();
     }
@@ -261,15 +252,14 @@ class Company extends \FlexiPeeHP\Company
      * 
      * @return string company dbNazev code
      */
-    public function companyPresentInFlexiBee($companyData = null)
-    {
+    public function companyPresentInFlexiBee($companyData = null) {
         if (is_null($companyData)) {
             $companyData = $this->getData();
         }
         $companyPresentInFlexiBee = null;
 
         if (array_key_exists('company', $companyData)) {
-            $this->getFlexiData('/c/'.$companyData['company']);
+            $this->getFlexiData('/c/' . $companyData['company']);
             if ($this->lastResponseCode == 200) {
                 $companyPresentInFlexiBee = $companyData['company'];
             }
@@ -277,7 +267,7 @@ class Company extends \FlexiPeeHP\Company
             $candidates = $this->getFlexiData('/c');
             if (count($candidates)) {
                 foreach ($candidates as $candidat) {
-                    $nastaveni = $this->getFlexiData('/c/'.$candidat['dbNazev'].'/nastaveni');
+                    $nastaveni = $this->getFlexiData('/c/' . $candidat['dbNazev'] . '/nastaveni');
                     foreach ($nastaveni['nastaveni'] as $nast) {
                         if (array_key_exists('ic', $nast) || empty($nast['ic'])) {
                             if ($nast['ic'] == $companyData['ic']) {
@@ -286,7 +276,7 @@ class Company extends \FlexiPeeHP\Company
                             }
                         } else {
                             $this->addStatusMessage(sprintf(_('Company with no ID'),
-                                    $candidat['nazev']), 'warning');
+                                            $candidat['nazev']), 'warning');
                         }
                         if (array_key_exists('nazFirmy', $nast) || empty($nast['nazFirmy'])) {
                             if ($nast['nazFirmy'] == $companyData['nazev']) {
@@ -308,8 +298,7 @@ class Company extends \FlexiPeeHP\Company
      * 
      * @return array  new company info
      */
-    public function createCompanyInFlexiBee($companyData = null)
-    {
+    public function createCompanyInFlexiBee($companyData = null) {
         $companyInfo = null;
         if (is_null($companyData)) {
             $companyData = $this->getData();
@@ -325,11 +314,11 @@ class Company extends \FlexiPeeHP\Company
             $this->setCompany($companyInfo['dbNazev']);
 
             $this->addStatusMessage(sprintf(_('Company created'),
-                    $this->getApiURL()), 'success');
+                            $this->getApiURL()), 'success');
 
             if (!empty($companyData['ic'])) {
-                $setter   = new \FlexiPeeHP\Nastaveni(null,
-                    $this->getConnectionOptions());
+                $setter = new \FlexiPeeHP\Nastaveni(null,
+                        $this->getConnectionOptions());
                 $settings = $setter->getAllFromFlexibee();
                 foreach ($settings as $setting) {
                     $this->insertToFlexiBee(['id' => $setting['id'], 'ic' => $companyData['ic']]);
@@ -338,4 +327,5 @@ class Company extends \FlexiPeeHP\Company
         }
         return $companyInfo;
     }
+
 }

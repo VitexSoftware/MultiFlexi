@@ -40,8 +40,6 @@ class Customer extends AbstractMigration
             ->addColumn('login', 'string', ['limit' => 32])
             ->addColumn('DatCreate', 'datetime', [])
             ->addColumn('DatSave', 'datetime', ['null' => true])
-            ->addColumn('last_modifier_id', 'integer',
-                ['null' => true, 'signed' => false])
             ->addIndex(['login', 'email'], ['unique' => true])
             ->create();
     }

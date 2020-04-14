@@ -37,9 +37,9 @@ class RegisterCompanyForm extends ColumnsForm {
                 _('write permission'));
         $this->addItem(new InputHiddenTag('rw'));
 
-        $this->addInput(new SemaforLight($this->engine->getDataValue('labels')),
-                _('Labels deployed'));
-        $this->addItem(new InputHiddenTag('labels'));
+        $this->addInput(new SemaforLight($this->engine->getDataValue('setup')),
+                _('Setup performed'));
+        $this->addItem(new InputHiddenTag('setup'));
 
         $this->addInput(new SemaforLight($this->engine->getDataValue('webhook')),
                 _('WebHook established'));
@@ -47,6 +47,10 @@ class RegisterCompanyForm extends ColumnsForm {
 
 
         $this->addInput(new \Ease\TWB4\Widgets\Toggle('enabled'), _('Enabled'));
+
+        if (strlen($this->engine->getDataValue('logo'))) {
+            $this->addItem(new \Ease\Html\ImgTag($this->engine->getDataValue('logo'), 'logo', ['class' => 'img-fluid']));
+        }
 
         $this->addInput(new SubmitButton(_('Save'), 'success'));
 

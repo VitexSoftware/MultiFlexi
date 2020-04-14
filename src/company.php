@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi FlexiBee Setup - Company instance editor.
  *
@@ -13,27 +14,26 @@ use Ease\TWB4\Panel;
 use Ease\TWB4\Row;
 use FlexiPeeHP\MultiSetup\Company;
 
-
 require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company')));
 
-$companies    = new Company($oPage->getRequestValue('id', 'int'));
-$instanceName = $companies->getRecordIdent();
+$companies = new Company($oPage->getRequestValue('id', 'int'));
+$instanceName = $companies->getDataValue('nazev');
 
 if ($oPage->isPosted()) {
     if ($companies->takeData($_POST) && !is_null($companies->saveToSQL())) {
         $companies->addStatusMessage(_('Company Saved'), 'success');
-        $companies->prepareRemoteCompany();
-        $oPage->redirect('?id='.$companies->getMyKey());
+//        $companies->prepareRemoteCompany(); TODO: Run applications setup on new company
+        $oPage->redirect('?id=' . $companies->getMyKey());
     } else {
         $companies->addStatusMessage(_('Error saving Company'), 'error');
     }
 }
 
 if (strlen($instanceName)) {
-    $instanceLink = new ATag($companies->getApiURL().$companies->getDataValue('company'),
-        $companies->getApiURL().$companies->getDataValue('company'));
+    $instanceLink = new ATag($companies->getApiURL() . $companies->getDataValue('company'),
+            $companies->getApiURL() . $companies->getDataValue('company'));
 } else {
     $instanceName = _('New Company');
     $instanceLink = null;
@@ -51,8 +51,12 @@ $bottomLine->addColumn(8, $instanceLink);
 //        [$delUrl=> _('Remove company') ] ));
 
 $oPage->container->addItem(new Panel($instanceName, 'info',
-        $instanceRow, $bottomLine));
+                $instanceRow, $bottomLine));
 
-//$oPage->addItem(new ui\PageBottom());
+if (!is_null($companies->getMyKey())) {
+    $oPage->container->addItem( new Panel(_('Assigned applications'), 'default', new ServicesForCompanyForm($companies,['id'=>'apptoggle'])) );
+}
+
+$oPage->addItem(new PageBottom());
 
 $oPage->draw();

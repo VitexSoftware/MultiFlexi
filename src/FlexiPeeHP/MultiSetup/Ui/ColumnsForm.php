@@ -53,8 +53,9 @@ class ColumnsForm extends \Ease\TWB4\Form {
      *                                 array('enctype' => 'multipart/form-data')
      */
     public function __construct($engine, $formContents = null,
-            $tagProperties = null) {
+            $tagProperties = []) {
         $this->engine = $engine;
+        $tagProperties['method'] = 'post';
         $tagProperties['name'] = get_class($engine);
         parent::__construct($tagProperties, [], $formContents);
         $this->newRow();
@@ -124,8 +125,8 @@ class ColumnsForm extends \Ease\TWB4\Form {
                             $recordID));
         }
         $this->addItem($this->savers);
-        \Ease\TWB4\WebPage::singleton()->includeJavaScript('js/jquery.validate.js');
-        \Ease\TWB4\WebPage::singleton()->includeJavaScript('js/messages_cs.js');
+//        \Ease\TWB4\WebPage::singleton()->includeJavaScript('js/jquery.validate.js');
+//        \Ease\TWB4\WebPage::singleton()->includeJavaScript('js/messages_cs.js');
 
         return parent::finalize();
     }

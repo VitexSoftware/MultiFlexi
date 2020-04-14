@@ -2,7 +2,7 @@
 
 use Phinx\Seed\AbstractSeed;
 
-class UserSeeder extends AbstractSeed {
+class CustomerSeeder extends AbstractSeed {
 
     /**
      * Run Method.
@@ -17,18 +17,17 @@ class UserSeeder extends AbstractSeed {
             [
                 'id' => 0,
                 'enabled' => true,
-                'email' => 'demo@localhost.localhomain',
-                'login' => 'demo',
-                'password' => 'a26ac720512764602ce1c1ae537efb04:9d',
+                'email' => 'demo@flexibee.eu',
                 'firstname' => 'Demo',
                 'lastname' => 'Demo',
+                'password' => '',
+                'login' => 'demo',
                 'DatCreate' => date('Y-m-d H:i:s')
             ]
         ];
 
-        $posts = $this->table('user');
-        $posts->insert($data)
-                ->save();
+        $posts = $this->table('customer');
+        $posts->insert($data)->save();
     }
 
 }

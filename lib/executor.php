@@ -17,7 +17,10 @@ require_once '../vendor/autoload.php';
 $dotenv = Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
 
-$companys = (new \FlexiPeeHP\MultiSetup\Company())->listingQuery()->select('flexibees.*')->leftJoin('flexibees ON flexibees.id = company.flexibee');
+define('EASE_LOGGER', 'console');
+
+$companer = new \FlexiPeeHP\MultiSetup\Company();
+$companys = $companer->listingQuery()->select('flexibees.*')->leftJoin('flexibees ON flexibees.id = company.flexibee');
 
 
 
@@ -36,11 +39,20 @@ foreach ($companys as $company) {
     ];
 
     foreach ($envNames as $envName => $sqlValue) {
-        echo $envName . '=' . $sqlValue . "\n";
+//        echo $envName . '=' . $sqlValue . "\n";
         putenv($envName . '=' . $sqlValue);
     }
 
-
-    $command = 'flexibee-client-config-checker';
-     system($command);
+    $ap2c = new AppToCompany(['company_id' => $company['id']]);
+    if (empty($ap2c->getData())) {
+        $companer->addStatusMessage(sprintf(_('No applications enabled for %s'), $company['nazev']), 'warning');
+    } else {
+        foreach ($ap2c->getData() as $servData) {
+            $app = new Application(intval($servData['app_id']));
+            $exec = $app->getDataValue('executable');
+            $app->addStatusMessage('begin' . $exec . '@' . $company['nazev']);
+            $app->addStatusMessage(shell_exec($exec), 'debug');
+            $app->addStatusMessage('end' . $exec . '@' . $company['nazev']);
+        }
+    }
 }

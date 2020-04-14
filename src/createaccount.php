@@ -78,7 +78,7 @@ if ($oPage->isPosted()) {
                     'lastname' => $lastname,
                 ])) {
 
-            if ($userID == 1) {
+            if ($newAdmin->getUserID() == 1) {
                 $newAdmin->setSettingValue('admin', true);
                 $oUser->addStatusMessage(_('Admin account created'), 'success');
                 $newAdmin->setDataValue('enabled', true);
@@ -99,7 +99,7 @@ if ($oPage->isPosted()) {
 
             $email = $oPage->addItem(new \Ease\HtmlMailer(SEND_INFO_TO,
                             sprintf(_('New Sign On to %s: %s'),
-                                    constant('EASE_APPNAME'), $newAdmin->GetUserLogin())));
+                                    constant('APP_NAME'), $newAdmin->GetUserLogin())));
             $email->setMailHeaders(['From' => EMAIL_FROM]);
             $email->addItem(new \Ease\Html\DivTag(_("New User:\n")));
             $email->addItem(new \Ease\Html\DivTag(' Login: ' . $newAdmin->GetUserLogin() . "\n"));

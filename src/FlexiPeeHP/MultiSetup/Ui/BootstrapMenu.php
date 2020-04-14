@@ -19,6 +19,13 @@ class BootstrapMenu extends \Ease\TWB4\Navbar {
     public $nav = null;
 
     /**
+     * Brand icon link
+     * 
+     * @var string 
+     */
+    public $mainpage = 'main.php';
+
+    /**
      * Hlavní menu aplikace.
      *
      * @param string $name
@@ -27,6 +34,7 @@ class BootstrapMenu extends \Ease\TWB4\Navbar {
      */
     public function __construct($name = null, $content = null,
             $properties = []) {
+
         parent::__construct(new \Ease\Html\ImgTag('images/project-logo.svg', 'Project logo', ['width' => 30, 'height' => 30, 'class' => 'img-rounded d-inline-block align-top']), 'main-menu', ['class' => 'navbar-fixed-top' . (array_key_exists('class', $properties) ? $properties['class'] : '')]);
 
         if (\Ease\Shared::user()->isLogged() === false) {
@@ -34,6 +42,8 @@ class BootstrapMenu extends \Ease\TWB4\Navbar {
             $loginForm->addItem(new \Ease\Html\InputTextTag('login', '', ['class' => 'form-control mr-sm-2', 'placeholder' => _('Login')]));
             $loginForm->addItem(new \Ease\Html\InputPasswordTag('password', '', ['class' => 'form-control mr-sm-2', 'placeholder' => _('Password')]));
             $loginForm->addItem(new \Ease\TWB4\SubmitButton(_('Sign In'), 'success my-2 my-sm-0'));
+            $loginForm->addItem('&nbsp;&nbsp;&nbsp;');
+            $loginForm->addItem(new \Ease\TWB4\LinkButton('passwordrecovery.php', _('Password recovery'), 'warning my-2 my-sm-0'));
             $this->addMenuItem($loginForm);
         }
     }

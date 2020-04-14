@@ -27,20 +27,25 @@ class MainMenu extends \Ease\Html\DivTag {
      * Data source.
      *
      * @param type   $source
-     * @param string $icon   Description
+     * @param string $icon   Icon column
      *
      * @return string
      */
-    protected function getMenuList($source, $icon = '') {
+    protected function getMenuList($source, $icon = null) {
         $keycolumn = $source->getkeyColumn();
         $namecolumn = $source->nameColumn;
-        $lister = $source->getColumnsFromSQL([$source->getkeyColumn(), $namecolumn],
+        $lister = $source->getColumnsFromSQL([$source->getkeyColumn(), $namecolumn, $icon],
                 null, $namecolumn, $keycolumn);
 
         $itemList = [];
         if ($lister) {
             foreach ($lister as $uID => $uInfo) {
-                $itemList[$source->keyword . '.php?' . $keycolumn . '=' . $uInfo[$keycolumn]] = new \Ease\TWB4\Widgets\FaIcon($icon) . '&nbsp;' . $uInfo[$namecolumn];
+                if ($icon) {
+                    $logo = new \Ease\Html\ImgTag($uInfo[$icon], $uInfo[$namecolumn], ['height' => 20]) . '&nbsp;';
+                } else {
+                    $logo = '';
+                }
+                $itemList[$source->keyword . '.php?' . $keycolumn . '=' . $uInfo[$keycolumn]] = $logo . $uInfo[$namecolumn];
             }
         }
 
@@ -55,10 +60,10 @@ class MainMenu extends \Ease\Html\DivTag {
 
 
         if (\Ease\Shared::user()->isLogged()) { //Authenticated user
-            $flexiBees = $this->getMenuList(new \FlexiPeeHP\MultiSetup\FlexiBees(), 'name');
-            $customers = $this->getMenuList(new \FlexiPeeHP\MultiSetup\Customer(), 'name');
-            $companys = $this->getMenuList(new \FlexiPeeHP\MultiSetup\Company(), 'name');
-
+            $flexiBees = $this->getMenuList(new \FlexiPeeHP\MultiSetup\FlexiBees());
+            $customers = $this->getMenuList(new \FlexiPeeHP\MultiSetup\Customer());
+            $companys = $this->getMenuList(new \FlexiPeeHP\MultiSetup\Company(), 'logo');
+            $apps = $this->getMenuList(new \FlexiPeeHP\MultiSetup\Application(), 'image');
 
             $this->flexibeesMenuEnabled($nav, $flexiBees);
 
@@ -76,15 +81,35 @@ class MainMenu extends \Ease\Html\DivTag {
                     if (count($flexiBees) && count($customers) && empty($companys)) {
                         \FlexiPeeHP\MultiSetup\User::singleton()->addStatusMessage(_('No company registered yet. Please register one.'), 'warning');
                         $this->customersMenuEnabled($nav, $customers);
-                        $this->companysMenuEnabled($nav, $companys);
+                        $nav->addMenuItem(new \Ease\TWB4\LinkButton('company.php', '<img width=30 src=images/company.svg> ' . _('Companies'), 'warning'), 'right');
                     } else { // We Got All
                         $this->customersMenuEnabled($nav, $customers);
                         $this->companysMenuEnabled($nav, $companys);
                     }
                 }
             }
-            $nav->addMenuItem(new \Ease\Html\ATag('logout.php', _('Sign Off')), 'right');
+
+
+            if (empty($apps)) {
+                \FlexiPeeHP\MultiSetup\User::singleton()->addStatusMessage(_('No application registered yet. Please register one.'), 'warning');
+                $nav->addMenuItem(new \Ease\TWB4\LinkButton('app.php', '<img width=30 src=images/apps.svg> ' . _('Applications'), 'warning'), 'right');
+            } else {
+                $this->appsMenuEnabled($nav, $apps);
+            }
+            $nav->addMenuItem(new \Ease\Html\ATag('logout.php', '<img height=30 src=images/application-exit.svg> ' . _('Sign Off')), 'right');
         }
+    }
+
+    public function appsMenuEnabled($nav, $apps) {
+        $appsMenu = ['app.php' => _('Register Application')];
+
+        if (!empty($apps)) {
+            $appsMenu['apps.php'] = _('Application list');
+        }
+
+        $nav->addDropDownMenu('<img width=30 src=images/apps.svg> ' . _('Applications'),
+                array_merge($appsMenu, ['' => ''], $apps)
+        );
     }
 
     public function flexibeesMenuEnabled($nav, $flexiBees) {

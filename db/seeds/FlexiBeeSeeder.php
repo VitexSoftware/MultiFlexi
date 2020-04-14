@@ -2,7 +2,7 @@
 
 use Phinx\Seed\AbstractSeed;
 
-class UserSeeder extends AbstractSeed {
+class FlexiBeeSeeder extends AbstractSeed {
 
     /**
      * Run Method.
@@ -13,20 +13,19 @@ class UserSeeder extends AbstractSeed {
      * http://docs.phinx.org/en/latest/seeding.html
      */
     public function run() {
+
         $data = [
             [
                 'id' => 0,
-                'enabled' => true,
-                'email' => 'demo@localhost.localhomain',
-                'login' => 'demo',
-                'password' => 'a26ac720512764602ce1c1ae537efb04:9d',
-                'firstname' => 'Demo',
-                'lastname' => 'Demo',
+                'url' => 'https://demo.flexibee.eu:5434',
+                'name' => 'Demo EU',
+                'user' => 'winstrom',
+                'password' => 'winstrom',
                 'DatCreate' => date('Y-m-d H:i:s')
             ]
         ];
 
-        $posts = $this->table('user');
+        $posts = $this->table('flexibees');
         $posts->insert($data)
                 ->save();
     }

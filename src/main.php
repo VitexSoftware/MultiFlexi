@@ -1,5 +1,11 @@
 <?php
 
+
+use FlexiPeeHP\MultiSetup\Ui\AppsMenu;
+use FlexiPeeHP\MultiSetup\Ui\DbStatus;
+use FlexiPeeHP\MultiSetup\Ui\PageBottom;
+use FlexiPeeHP\MultiSetup\Ui\PageTop;
+
 /**
  * Multi FlexiBee Setup - Index page.
  *
@@ -9,25 +15,15 @@
 
 namespace FlexiPeeHP\MultiSetup\Ui;
 
-use Ease\Html\ATag;
-use Ease\TWB4\Panel;
-use Ease\TWB4\Row;
-use FlexiPeeHP\MultiSetup\FlexiBees;
-
 require_once './init.php';
 
 $oPage->onlyForLogged();
 
 $oPage->addItem(new PageTop(_('Multi FlexiBee Setup')));
 
-$mainPageMenu = new \Ease\TWB4\Widgets\MainPageMenu();
+$mainPageMenu = new AppsMenu();
 
-$mainPageMenu->addMenuItem(_('Matcher'), 'matcher.php', 'images/matcher.png', _('invoice matching'), _('Configure'));
-$mainPageMenu->addMenuItem(_('Reminder'), 'reminder.php', 'images/reminder.png', _('reminds sender'), _('Configure'));
-$mainPageMenu->addMenuItem(_('Digest'), 'digest.php', 'images/digest.svg', _('modular digest'), _('Configure'));
-
-
-$oPage->container->addItem( new Panel( _('Modules Availble'),'default', $mainPageMenu, new DbStatus())  );
+$oPage->container->addItem( new \Ease\TWB4\Panel( _('Modules Availble'),'default', $mainPageMenu, new DbStatus())  );
 
 
 $oPage->addItem(new PageBottom());
