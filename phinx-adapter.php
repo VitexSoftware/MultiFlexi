@@ -11,26 +11,33 @@ include_once './vendor/autoload.php';
 $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-$db = new \Ease\SQL\Engine(null, ['database' => 'db/' . basename(getenv('DB_DATABASE'))]);
 
-return array('environments' =>
-    array(
+if (strstr(getenv('DB_CONNECTION'), 'sqlite')) {
+    $engine = new \Ease\SQL\Engine(null, ['database' => 'db/' . basename(getenv('DB_DATABASE'))]);
+} else {
+    $engine = new \Ease\SQL\Engine(null);
+}
+
+$cfg = [
+    'paths' => [ 
+        'migrations' => ['db/migrations'],
+        'seeds' => ['db/seeds']
+        ],
+    'environments' =>
+    [
         'default_database' => 'development',
-        'development' => array(
+        'development' => [
             'adapter' => getenv('DB_CONNECTION'),
-            'name' => $db->database,
-            'connection' => $db->getPdo()
-        ),
+            'name' => $engine->database,
+            'connection' => $engine->getPdo()
+        ],
         'default_database' => 'production',
-        'production' => array(
+        'production' => [
             'adapter' => getenv('DB_CONNECTION'),
-            'name' => $db->database,
-            'connection' => $db->getPdo()
-        ),
-    ),
-    'paths' => [
-        'migrations' => 'db/migrations',
-        'seeds' => 'db/seeds'
+            'name' => $engine->database,
+            'connection' => $engine->getPdo()
+        ],
     ]
-);
+];
 
+return $cfg;

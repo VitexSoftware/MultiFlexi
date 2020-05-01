@@ -33,10 +33,10 @@ class AppToCompany extends AbstractMigration {
         $table = $this->table('appcompany');
         $table->addColumn('app_id', 'integer', array('null' => false))
         ->addColumn('company_id', 'integer', array('null' => false))
+        ->addColumn('interval','string',['length'=>1])
         ->addIndex(['app_id', 'company_id'], ['unique' => true])
         ->addForeignKey('app_id', 'apps', ['id'], ['constraint' => 'app_must_exist'])
         ->addForeignKey('company_id', 'company', ['id'], ['constraint' => 'company_must_exist']);
-
         $table->save();
     }
 

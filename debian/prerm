@@ -1,0 +1,33 @@
+#!/bin/sh
+# prerm script for multi-flexibee-setup
+#
+# see: dh_installdeb(1)
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ -f /usr/share/dbconfig-common/dpkg/prerm ]; then
+    . /usr/share/dbconfig-common/dpkg/prerm
+    dbc_go multi-flexibee-setup "$@"
+fi
+
+case "$1" in
+    remove|upgrade|deconfigure)
+    rm -rf /usr/lib/multi-flexibee-setup/composer.lock /var/lib/multi-flexibee-setup /usr/share/multi-flexibee-setup/.env
+    ;;
+
+    failed-upgrade)
+    ;;
+
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0
+
+

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+MAX_TMPFILE_LIFETIME=5
+# MAX_TMPFILE_LIFETIME can be overridden in this file
+if [ -r /etc/default/multi-flexibee-setup-core ]; then
+	. /etc/default/multi-flexibee-setup-core
+fi
+
+if [ -d /var/lib/multi-flexibee-setup/temp ]; then
+	find /var/lib/multi-flexibee-setup/temp -type f -mtime +$MAX_TMPFILE_LIFETIME -delete
+fi

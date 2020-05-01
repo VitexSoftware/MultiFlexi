@@ -1,2 +1,7 @@
 /vendor/
 composer.lock
+/debian/multi-flexibee-setup/
+/debian/multi-flexibee-setup.substvars
+/debian/multi-flexibee-setup.debhelper.log
+/debian/debhelper-build-stamp
+/debian/files

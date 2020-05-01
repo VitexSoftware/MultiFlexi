@@ -1,0 +1,15 @@
+src/*.php                                 usr/share/multi-flexibee-setup
+src/favicon.ico                           usr/share/multi-flexibee-setup
+src/js/*.js                               usr/share/multi-flexibee-setup/js
+src/images/*                              usr/share/multi-flexibee-setup/images
+db/migrations/*				  usr/lib/multi-flexibee-setup/db/migrations
+db/seeds/*				  usr/lib/multi-flexibee-setup/db/seeds
+debian/conf/composer.json                 usr/lib/multi-flexibee-setup
+debian/conf/.env.template                 usr/lib/multi-flexibee-setup
+phinx-adapter.php			  usr/lib/multi-flexibee-setup
+src/FlexiPeeHP/MultiSetup/*.php           usr/lib/multi-flexibee-setup/FlexiPeeHP/
+src/FlexiPeeHP/MultiSetup/Ui/*.php        usr/lib/multi-flexibee-setup/FlexiPeeHP/Ui/
+debian/conf/multi-flexibee-setup.conf     etc/apache2/sites-available
+debian/conf/multi-flexibee-setup.service  etc/avahi/services
+bin/*					  usr/bin
+lib/*					  usr/lib/multi-flexibee-setup

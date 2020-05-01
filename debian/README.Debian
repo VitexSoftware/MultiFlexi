@@ -1,0 +1,13 @@
+Multi FlexiBee setup
+--------------------
+
+
+You can install initial demo data using command:
+
+```
+sudo phinx seed:run -c /usr/lib/multi-flexibee-setup/phinx-adapter.php
+```
+
+
+Then you can log in as user "demo" with password "demo" on  http://localhost/multi-flexibee-setup/
+

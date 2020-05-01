@@ -1,0 +1,16 @@
+Source: multi-flexibee-setup
+Section: web
+Priority: optional
+Maintainer: "Vítězslav Dvořák" <info@vitexsoftware.cz>
+Build-Depends: debhelper (>=11~)
+Standards-Version: 4.1.4
+Homepage: https://github.com/VitexSoftware/MultiFlexiBeeSetup
+
+Package: multi-flexibee-setup
+Multi-Arch: foreign
+Depends: ${misc:Depends}, php-flexibee-bricks, php-cli, locales-all, php-robmorgan-phinx, php-ease-twbootstrap4-widgets-flexibee,php-ease-fluentpdo, php-flexibee-bricks
+Suggests: flexibee-server,php-flexibee-config, flexibee-digest, flexibee-matcher, flexibee-reminder
+Architecture: all
+Description: run several tools on defined flexibee servers
+ Define server, customets and its companies. Then specify
+ which services/commands run upon it.

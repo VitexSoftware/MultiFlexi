@@ -1,0 +1,26 @@
+#!/usr/bin/make -f
+# You must remove unused comment lines for the released package.
+#export DH_VERBOSE = 1
+#export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+#export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
+#export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+
+%:
+	dh $@
+
+#override_dh_auto_install:
+#       dh_auto_install -- prefix=/usr
+
+override_dh_install:
+	dh_install
+	sed -i -e 's/..\/vendor/\/var\/lib\/multi-flexibee-setup/g' debian/multi-flexibee-setup/usr/share/multi-flexibee-setup/init.php
+	sed -i -e 's/..\/vendor/\/var\/lib\/multi-flexibee-setup/g' debian/multi-flexibee-setup/usr/lib/multi-flexibee-setup/executor.php
+	sed -i -e 's/dirname(__DIR__)/"\/usr\/lib\/multi-flexibee-setup\/"/g' debian/multi-flexibee-setup/usr/lib/multi-flexibee-setup/executor.php
+	sed -i -e 's/dirname(__DIR__)/"\/usr\/lib\/multi-flexibee-setup\/"/g' debian/multi-flexibee-setup/usr/share/multi-flexibee-setup/init.php
+	sed -i -e 's/.\/vendor/\/var\/lib\/multi-flexibee-setup/g' debian/multi-flexibee-setup/usr/lib/multi-flexibee-setup/phinx-adapter.php
+	sed -i -e "s/db\/migrations/\/usr\/lib\/multi-flexibee-setup\/db\/migrations/g" debian/multi-flexibee-setup/usr/lib/multi-flexibee-setup/phinx-adapter.php
+	sed -i -e "s/db\/seeds/\/usr\/lib\/multi-flexibee-setup\/db\/seeds/g" debian/multi-flexibee-setup/usr/lib/multi-flexibee-setup/phinx-adapter.php
+	sed -i -e "s/'db/'\/var\/lib\/multi-flexibee-setup/g" debian/multi-flexibee-setup/usr/lib/multi-flexibee-setup/phinx-adapter.php
+	sed -i -e 's/composer\.json/\/usr\/lib\/multi-flexibee-setup\/composer\.json/g' debian/multi-flexibee-setup/usr/lib/multi-flexibee-setup/FlexiPeeHP/Ui/PageBottom.php
+
+          

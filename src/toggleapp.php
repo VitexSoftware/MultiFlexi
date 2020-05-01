@@ -16,12 +16,14 @@ $oPage->onlyForLogged();
 
 $app_id = \Ease\TWB4\WebPage::getRequestValue('app');
 $company_id = \Ease\TWB4\WebPage::getRequestValue('company');
-$state = \Ease\TWB4\WebPage::getRequestValue('state','boolean');
+$interval = \Ease\TWB4\WebPage::getRequestValue('interval');
+$state = $interval != 'n';
+
 $result = false;
 
 if (!is_null($app_id) && !is_null($company_id)) {
     $switcher = new \FlexiPeeHP\MultiSetup\AppToCompany();
-    $switcher->setData(['app_id'=>$app_id,'company_id'=>$company_id]);
+    $switcher->setData(['app_id' => (int)$app_id, 'company_id' => (int)$company_id, 'interval' => $interval]);
     if ($switcher->setState($state)) {
         $result = 201;
     } else {

@@ -22,37 +22,42 @@ define('EASE_LOGGER', 'console');
 $companer = new \FlexiPeeHP\MultiSetup\Company();
 $companys = $companer->listingQuery()->select('flexibees.*')->leftJoin('flexibees ON flexibees.id = company.flexibee');
 
+$interval = $argc == 2 ? $argv[1] : null;
 
+if ($interval) {
 
-foreach ($companys as $company) {
+    foreach ($companys as $company) {
 
-    $envNames = [
-        'FLEXIBEE_URL' => $company['url'],
-        'FLEXIBEE_LOGIN' => $company['user'],
-        'FLEXIBEE_PASSWORD' => $company['password'],
-        'FLEXIBEE_COMPANY' => $company['company'],
-//        ''=>$company[''],
-//        ''=>$company[''],
-//        ''=>$company[''],
-//        ''=>$company[''],
-//        ''=>$company[''],
-    ];
+        $envNames = [
+            'FLEXIBEE_URL' => $company['url'],
+            'FLEXIBEE_LOGIN' => $company['user'],
+            'FLEXIBEE_PASSWORD' => $company['password'],
+            'FLEXIBEE_COMPANY' => $company['company'],
+            'EASE_LOGGER' => 'syslog',
+        ];
 
-    foreach ($envNames as $envName => $sqlValue) {
+        foreach ($envNames as $envName => $sqlValue) {
 //        echo $envName . '=' . $sqlValue . "\n";
-        putenv($envName . '=' . $sqlValue);
-    }
+            putenv($envName . '=' . $sqlValue);
+        }
 
-    $ap2c = new AppToCompany(['company_id' => $company['id']]);
-    if (empty($ap2c->getData())) {
-        $companer->addStatusMessage(sprintf(_('No applications enabled for %s'), $company['nazev']), 'warning');
-    } else {
-        foreach ($ap2c->getData() as $servData) {
-            $app = new Application(intval($servData['app_id']));
-            $exec = $app->getDataValue('executable');
-            $app->addStatusMessage('begin' . $exec . '@' . $company['nazev']);
-            $app->addStatusMessage(shell_exec($exec), 'debug');
-            $app->addStatusMessage('end' . $exec . '@' . $company['nazev']);
+        $ap2c = new AppToCompany(['company_id' => $company['id']]);
+        if (empty($ap2c->getData())) {
+            $companer->addStatusMessage(sprintf(_('No applications enabled for %s'), $company['nazev']), 'warning');
+        } else {
+            foreach ($ap2c->getData() as $servData) {
+                if (!is_null($interval) && ($interval != $servData['interval'])) {
+                    continue;
+                }
+                $app = new Application(intval($servData['app_id']));
+                $exec = $app->getDataValue('executable');
+                $app->addStatusMessage('begin' . $exec . '@' . $company['nazev']);
+                $app->addStatusMessage(shell_exec($exec), 'debug');
+                $app->addStatusMessage('end' . $exec . '@' . $company['nazev']);
+            }
         }
     }
+} else {
+    echo "interval y/m/w/d/h missing\n";
+    exit(1);
 }

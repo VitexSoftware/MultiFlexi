@@ -27,21 +27,15 @@ class ServicesForCompanyForm extends \Ease\TWB4\Form {
         $apps = (new \FlexiPeeHP\MultiSetup\Application())->getAll();
         $glue = new \FlexiPeeHP\MultiSetup\AppToCompany();
 
-        $assigned = $glue->getColumnsFromSQL(['app_id'], ['company_id' => $companyID], 'id', 'app_id');
+        $assigned = $glue->getColumnsFromSQL(['app_id', 'interval'], ['company_id' => $companyID], 'id', 'app_id');
         parent::__construct($tagProperties);
 
         foreach ($apps as $appData) {
             $code = $appData['id'];
             $twbsw = $this->addInput(
-                    new \Ease\TWB4\Widgets\Toggle($code, array_key_exists($code, $assigned), 1, [
-                        'data-company' => $companyID,
-                        'data-app' => $code,
-                        'data-on' => _('enabled'),
-                        'data-off' => _('disabled'),
-                        'data-onstyle' => 'success',
-                        'data-offstyle' => 'outline-dark',
-                        'labelWidth' => 10, 'handleWidth' => 200]),
-                    new \Ease\Html\ImgTag($appData['image'], $appData['nazev'], ['height' => '30']) . '&nbsp;' . $appData['nazev'] . '&nbsp;'
+                    new IntervalChooser($code . '_interval', array_key_exists($code, $assigned) ? $assigned[$code]['interval'] : 'n', ['id' => $code . '_interval', 'data-company' => $companyID, 'checked' => 'true',
+                        'data-app' => $code]),
+                    new \Ease\Html\ImgTag($appData['image'], $appData['nazev'], ['height' => '30']) . '&nbsp;' . $appData['nazev']
             );
         }
     }
@@ -50,14 +44,14 @@ class ServicesForCompanyForm extends \Ease\TWB4\Form {
         \Ease\TWB4\Part::twBootstrapize();
         $this->addJavaScript('
 
-$(\'#' . $this->getTagID() . ' input\').change( function(event, state) {
+$(\'#' . $this->getTagID() . ' select\').change( function(event, state) {
 
 $.ajax({
    url: \'toggleapp.php\',
         data: {
                 app: $(this).attr("data-app"),
                 company: $(this).attr("data-company"),
-                state: $(this).prop("checked")
+                interval: $(this).val()
         },
         error: function() {
             console.log("not saved");

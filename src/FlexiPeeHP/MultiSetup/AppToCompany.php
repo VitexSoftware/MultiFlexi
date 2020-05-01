@@ -22,12 +22,22 @@ class AppToCompany extends Engine {
     }
 
     public function setState(bool $state) {
-        if ($state === true) {
-            $result = $this->insertToSQL();
-        } else {
-            $result = $this->deleteFromSQL();
+        return $state ? $this->dbsync() : $this->deleteFromSQL() ;
+    }
+
+/**
+ * Delete record ignoring interval
+ * 
+ * @param array $data
+ * 
+ * @return int
+ */    
+    public function deleteFromSQL($data = null) {
+        if(is_null($data)){
+            $data = $this->getData();
         }
-        return $result;
+        unset($data['interval']);
+        return parent::deleteFromSQL($data);
     }
 
 }
