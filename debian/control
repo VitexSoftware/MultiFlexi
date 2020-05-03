@@ -18,6 +18,7 @@ Description: run several tools on defined flexibee servers
 Package: multi-flexibee-setup-sqlite
 Multi-Arch: foreign
 Depends: ${misc:Depends},multi-flexibee-setup, dbconfig-sqlite3, php-sqlite3
+Conflicts: multi-flexibee-setup-mysql, multi-flexibee-setup-pgsql
 Suggests: sqlite3
 Architecture: all
 Description: sqlite support for multiflexibee setup
@@ -26,6 +27,7 @@ Description: sqlite support for multiflexibee setup
 Package: multi-flexibee-setup-mysql
 Multi-Arch: foreign
 Depends: ${misc:Depends},multi-flexibee-setup, dbconfig-mysql, php-mysql
+Conflicts: multi-flexibee-setup-sqlite, multi-flexibee-setup-pgsql
 Suggests: mariadb-server
 Architecture: all
 Description: mariadb support for multiflexibee setup
@@ -34,6 +36,7 @@ Description: mariadb support for multiflexibee setup
 Package: multi-flexibee-setup-pgsql
 Multi-Arch: foreign
 Depends: ${misc:Depends},multi-flexibee-setup, dbconfig-pgsql, php-pgsql
+Conflicts: multi-flexibee-setup-mysql, multi-flexibee-setup-sqlite
 Suggests: postgresql
 Architecture: all
 Description: postgres support for multiflexibee setup
