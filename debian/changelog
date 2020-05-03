@@ -1,9 +1,12 @@
-multi-flexibee-setup (0.2) UNRELEASED; urgency=medium
+multi-flexibee-setup (0.3.2) UNRELEASED; urgency=medium
 
   * Ability choose run interval between hour and year
   * Debian package
+  * Export notification email
+  * new packages with database support
+  * sql adapters dependency fix
 
- -- CyberVitexus <vitex@exiv.jinonice.czf>  Sat, 02 May 2020 01:33:38 +0200
+ -- CyberVitexus <vitex@exiv.jinonice.czf>  Mon, 04 May 2020 00:56:58 +0200
 
 multi-flexibee-setup (0.1) experimental; urgency=medium
 

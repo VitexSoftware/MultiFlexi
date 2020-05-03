@@ -8,9 +8,34 @@ Homepage: https://github.com/VitexSoftware/MultiFlexiBeeSetup
 
 Package: multi-flexibee-setup
 Multi-Arch: foreign
-Depends: ${misc:Depends}, php-flexibee-bricks, php-cli, locales-all, php-robmorgan-phinx, php-ease-twbootstrap4-widgets-flexibee,php-ease-fluentpdo, php-flexibee-bricks, dbconfig-common
+Depends: ${misc:Depends}, php-flexibee-bricks, php-cli, locales-all, php-robmorgan-phinx, php-ease-twbootstrap4-widgets-flexibee,php-ease-fluentpdo, php-flexibee-bricks, multi-flexibee-setup-sqlite|multi-flexibee-setup-mysql|multi-flexibee-setup-pgsql
 Suggests: flexibee-server,php-flexibee-config, flexibee-digest, flexibee-matcher, flexibee-reminder, flexibee-contract-invoices
 Architecture: all
 Description: run several tools on defined flexibee servers
  Define server, customets and its companies. Then specify
  which services/commands run upon it.
+
+Package: multi-flexibee-setup-sqlite
+Multi-Arch: foreign
+Depends: ${misc:Depends},multi-flexibee-setup, dbconfig-sqlite3, php-sqlite3
+Suggests: sqlite3
+Architecture: all
+Description: sqlite support for multiflexibee setup
+ Mandatory dependencies for use Multi FlexiBee setup with SQLite database
+
+Package: multi-flexibee-setup-mysql
+Multi-Arch: foreign
+Depends: ${misc:Depends},multi-flexibee-setup, dbconfig-mysql, php-mysql
+Suggests: mariadb-server
+Architecture: all
+Description: mariadb support for multiflexibee setup
+ Mandatory dependencies for use Multi FlexiBee setup with MySQL/MariaDB databas
+
+Package: multi-flexibee-setup-pgsql
+Multi-Arch: foreign
+Depends: ${misc:Depends},multi-flexibee-setup, dbconfig-pgsql, php-pgsql
+Suggests: postgresql
+Architecture: all
+Description: postgres support for multiflexibee setup
+ Mandatory dependencies for use Multi FlexiBee setup with PostgreSQL database
+

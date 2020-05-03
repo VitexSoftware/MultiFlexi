@@ -5,3 +5,14 @@ composer.lock
 /debian/multi-flexibee-setup.debhelper.log
 /debian/debhelper-build-stamp
 /debian/files
+/debian/multi-flexibee-setup-pgsql/
+/debian/multi-flexibee-setup-mysql/
+/debian/multi-flexibee-setup-sqlite/
+/debian/multi-flexibee-setup-sqlite.debhelper.log
+/debian/multi-flexibee-setup-mysql.substvars
+/debian/multi-flexibee-setup-pgsql.substvars
+/debian/multi-flexibee-setup-pgsql.debhelper.log
+/debian/multi-flexibee-setup-mysql.debhelper.log
+/debian/multi-flexibee-setup-sqlite.substvars
+/.vagrant/
+/debian/.debhelper/
