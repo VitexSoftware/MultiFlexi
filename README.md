@@ -46,3 +46,12 @@ Editace firmy a nastavení spouštěných služeb
 Instance FlexiBee serveru:
 ![MFB](doc/instance.png?raw=true)
 
+Pluginy:
+--------
+
+ * https://github.com/VitexSoftware/flexibee-contract-invoices
+ * https://github.com/VitexSoftware/php-flexibee-matcher
+ * https://github.com/VitexSoftware/php-flexibee-reminder
+ * https://github.com/VitexSoftware/FlexiBee-Digest
+
+
