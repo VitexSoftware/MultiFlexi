@@ -24,7 +24,7 @@ class ServicesForCompanyForm extends \Ease\TWB4\Form {
     public function __construct($company, $tagProperties = array()) {
         $companyID = $company->getMyKey();
 
-        $apps = (new \FlexiPeeHP\MultiSetup\Application())->getAll();
+        $apps = (new \FlexiPeeHP\MultiSetup\Application())->listingQuery()->where('enabled',1)->fetchAll();
         $glue = new \FlexiPeeHP\MultiSetup\AppToCompany();
 
         $assigned = $glue->getColumnsFromSQL(['app_id', 'interval'], ['company_id' => $companyID], 'id', 'app_id');

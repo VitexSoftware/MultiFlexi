@@ -18,7 +18,7 @@ require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company')));
 
-$companies = new Company($oPage->getRequestValue('id', 'int'));
+$companies = new Company(WebPage::getRequestValue('id', 'int'));
 $instanceName = $companies->getDataValue('nazev');
 
 if ($oPage->isPosted()) {
@@ -28,6 +28,13 @@ if ($oPage->isPosted()) {
         $oPage->redirect('?id=' . $companies->getMyKey());
     } else {
         $companies->addStatusMessage(_('Error saving Company'), 'error');
+    }
+} else {
+    if (!empty(WebPage::getGetValue('company'))) {
+        $companies->setDataValue('company', WebPage::getGetValue('company'));
+        $companies->setDataValue('nazev', WebPage::getGetValue('nazev'));
+        $companies->setDataValue('ic', WebPage::getGetValue('ic'));
+        $companies->setDataValue('email', WebPage::getGetValue('email'));
     }
 }
 
@@ -40,7 +47,7 @@ if (strlen($instanceName)) {
 }
 
 $instanceRow = new Row();
-$instanceRow->addColumn(8, new RegisterCompanyForm($companies));
+$instanceRow->addColumn(8, new RegisterCompanyForm($companies, ['target' => 'company.php']));
 //$instanceRow->addColumn(4, new ui\FlexiBeeInstanceStatus($companies));
 
 $bottomLine = new Row();
@@ -54,7 +61,7 @@ $oPage->container->addItem(new Panel($instanceName, 'info',
                 $instanceRow, $bottomLine));
 
 if (!is_null($companies->getMyKey())) {
-    $oPage->container->addItem( new Panel(_('Assigned applications'), 'default', new ServicesForCompanyForm($companies,['id'=>'apptoggle'])) );
+    $oPage->container->addItem(new Panel(_('Assigned applications'), 'default', new ServicesForCompanyForm($companies, ['id' => 'apptoggle'])));
 }
 
 $oPage->addItem(new PageBottom());

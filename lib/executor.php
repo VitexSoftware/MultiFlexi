@@ -33,6 +33,7 @@ if ($interval) {
             'FLEXIBEE_LOGIN' => $company['user'],
             'FLEXIBEE_PASSWORD' => $company['password'],
             'FLEXIBEE_COMPANY' => $company['company'],
+            'EASE_MAILTO' => $company['email'],
             'EASE_LOGGER' => 'syslog',
         ];
 

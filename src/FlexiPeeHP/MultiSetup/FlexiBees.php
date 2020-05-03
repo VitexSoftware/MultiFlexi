@@ -6,7 +6,7 @@ namespace FlexiPeeHP\MultiSetup;
  * Multi FlexiBee Setup - Instance Management Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2020 Vitex Software
+ * @copyright  2020 Vitex Software
  */
 class FlexiBees extends \Ease\SQL\Engine {
 
@@ -44,8 +44,8 @@ class FlexiBees extends \Ease\SQL\Engine {
      */
     public function takeData($data) {
         unset($data['class']);
-        if (isset($data['id'])) {
-            if (empty($data['id'])) {
+        if (array_key_exists('id', $data)) {
+            if (is_null($data['id'])) {
                 unset($data['id']);
             } else {
                 $data['id'] = intval($data['id']);
@@ -123,8 +123,6 @@ class FlexiBees extends \Ease\SQL\Engine {
         //Setup Reminder
         //Setup Invoicer
         //Setup any other apps 
-        
-        
 //        $companyData['ic'] = $companyDetails['ic'];
 //        unset($companyData['ic']);
 //        $companyData['nazev'] = $companyDetails['nazFirmy'];

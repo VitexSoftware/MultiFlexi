@@ -13,7 +13,7 @@ if [ -f /usr/share/dbconfig-common/dpkg/prerm ]; then
 fi
 
 case "$1" in
-    remove|upgrade|deconfigure)
+    remove|upgrade|deconfigure|purge)
     rm -rf /usr/lib/multi-flexibee-setup/composer.lock /var/lib/multi-flexibee-setup /usr/share/multi-flexibee-setup/.env
     ;;
 

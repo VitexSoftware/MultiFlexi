@@ -1,9 +1,10 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Multi FlexiBee Setup  - Database use overview
+ *
+ * @author     Vítězslav Dvořák <vitex@arachne.cz>
+ * @copyright  2015-2020 Vitex Software
  */
 
 namespace FlexiPeeHP\MultiSetup\Ui;

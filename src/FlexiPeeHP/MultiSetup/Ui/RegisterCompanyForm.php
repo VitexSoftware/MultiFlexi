@@ -9,10 +9,13 @@
 
 namespace FlexiPeeHP\MultiSetup\Ui;
 
+use Ease\Html\ImgTag;
+use Ease\Html\InputEmailTag;
 use Ease\Html\InputHiddenTag;
 use Ease\Html\InputTextTag;
 use Ease\TWB4\SubmitButton;
 use Ease\TWB4\Widgets\SemaforLight;
+use Ease\TWB4\Widgets\Toggle;
 
 /**
  * Registered FlexiBee instance editor Form
@@ -30,6 +33,8 @@ class RegisterCompanyForm extends ColumnsForm {
 
         $this->addInput(new InputTextTag('ic'), _('Organization ID'));
 
+        $this->addInput(new InputEmailTag('email'), _('Send notification to'));
+        
         $this->addInput(new CustomerSelect('customer'), _('Customer'));
         $this->addInput(new FlexiBeeSelect('flexibee'), _('FlexiBee server'));
 
@@ -46,10 +51,10 @@ class RegisterCompanyForm extends ColumnsForm {
         $this->addItem(new InputHiddenTag('webhook'));
 
 
-        $this->addInput(new \Ease\TWB4\Widgets\Toggle('enabled'), _('Enabled'));
+        $this->addInput(new Toggle('enabled'), _('Enabled'));
 
         if (strlen($this->engine->getDataValue('logo'))) {
-            $this->addItem(new \Ease\Html\ImgTag($this->engine->getDataValue('logo'), 'logo', ['class' => 'img-fluid']));
+            $this->addItem(new ImgTag($this->engine->getDataValue('logo'), 'logo', ['class' => 'img-fluid']));
         }
 
         $this->addInput(new SubmitButton(_('Save'), 'success'));

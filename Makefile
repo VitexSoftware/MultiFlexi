@@ -18,6 +18,7 @@ dbreset:
 	sudo rm -f db/multiflexibee.sqlite
 	echo > db/multiflexibee.sqlite
 	chmod 666 db/multiflexibee.sqlite
+	chmod ugo+rwX db
 
 demo: dbreset migration demodata
 

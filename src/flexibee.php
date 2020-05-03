@@ -25,7 +25,6 @@ if ($oPage->isPosted()) {
     if ($flexiBees->takeData($_POST) && !is_null($flexiBees->saveToSQL())) {
         $flexiBees->addStatusMessage(_('FlexiBee instance Saved'), 'success');
         $flexiBees->prepareRemoteFlexiBee();
-        $oPage->redirect('flexibees.php');
     } else {
         $flexiBees->addStatusMessage(_('Error saving FlexiBee instance'),
                 'error');
@@ -42,10 +41,14 @@ if (strlen($instanceName)) {
 
 $instanceRow = new Row();
 $instanceRow->addColumn(8, new RegisterFlexiBeeForm($flexiBees));
-//$instanceRow->addColumn(4, new ui\FlexiBeeInstanceStatus($flexiBees));
+
 
 $oPage->container->addItem(new Panel($instanceName, 'info',
                 $instanceRow, $instanceLink));
+
+if(!is_null($flexiBees->getMyKey())){
+    $oPage->container->addItem(new FlexiBeeInstanceStatus($flexiBees));
+}
 
 $oPage->addItem(new PageBottom());
 
