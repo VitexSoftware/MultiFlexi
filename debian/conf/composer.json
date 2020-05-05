@@ -1,69 +1,68 @@
 {
-    "name": "vitexsoftware/multiflexibee-setup",
-    "description": "Tool used to setup FlexiBee multiinstance",
-    "version": "0.1a",
-    "type": "project",
-    "require": {
-        "deb/ease-twbootstrap4-widgets-flexibee": "*",
-        "deb/ease-fluentpdo": "*",
-	"deb/flexibee-bricks": "*",
-        "vlucas/phpdotenv": "*",
-        "deb/ease-twbootstrap4-widgets": "*"
+  "name": "vitexsoftware/multiflexibee-setup",
+  "description": "Tool used to setup FlexiBee multiinstance",
+  "version": "0.3.3",
+  "type": "project",
+  "require": {
+    "deb/ease-twbootstrap4-widgets-flexibee": "*",
+    "deb/ease-fluentpdo": "*",
+    "deb/flexibee-bricks": "*",
+    "vlucas/phpdotenv": "*",
+    "deb/ease-twbootstrap4-widgets": "*"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Vítězslav Dvořák",
+      "email": "info@vitexsoftware.cz"
+    }
+  ],
+  "config": {
+    "vendor-dir": "/var/lib/multi-flexibee-setup"
+  },
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "FlexiPeeHP\\MultiSetup\\": "FlexiPeeHP",
+      "FlexiPeeHP\\MultiSetup\\Ui\\": "FlexiPeeHP/Ui"
+    }
+  },
+  "repositories": [
+    {
+      "type": "path",
+      "url": "/usr/share/php/Ease/"
     },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Vítězslav Dvořák",
-            "email": "info@vitexsoftware.cz"
-        }
-    ],
-    "config": {
-        "vendor-dir": "/var/lib/multi-flexibee-setup"
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseHtml/"
     },
-    "minimum-stability": "dev",
-    "autoload": {
-        "psr-4": {
-            "FlexiPeeHP\\MultiSetup\\": "FlexiPeeHP",
-            "FlexiPeeHP\\MultiSetup\\Ui\\": "FlexiPeeHP/Ui"
-        }
+    {
+      "type": "path",
+      "url": "/usr/share/php/FlexiPeeHP"
     },
-    "repositories": [
-        {   
-            "type": "path",
-            "url": "/usr/share/php/Ease/"
-        },
-        {   
-            "type": "path",
-            "url": "/usr/share/php/EaseHtml/"
-        },
-        {   
-            "type": "path",
-            "url": "/usr/share/php/FlexiPeeHP"
-        },
-        {   
-            "type": "path",
-            "url": "/usr/share/php/EaseBricks/"
-        },
-        {   
-            "type": "path",
-            "url": "/usr/share/php/EaseTWB4/"
-        },
-	{
-	    "type": "path",
-	    "url": "/usr/share/php/EaseFluentPDO/"
-	},
-        {   
-            "type": "path",
-            "url": "/usr/share/php/FlexiPeeHPBricks/"
-        },
-        {   
-            "type": "path",
-            "url": "/usr/share/php/EaseTWB4Widgets/"
-        },
-        {   
-            "type": "path",
-            "url": "/usr/share/php/EaseTWB4WidgetsFlexiBee"
-        }
-    ]
-    
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseBricks/"
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseTWB4/"
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseFluentPDO/"
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/FlexiPeeHPBricks/"
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseTWB4Widgets/"
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseTWB4WidgetsFlexiBee"
+    }
+  ]
 }

@@ -13,6 +13,7 @@
 
 override_dh_install:
 	dh_install
+	jq '.version = "$(shell dpkg-parsechangelog --show-field Version)"' debian/conf/composer.json | sponge debian/conf/composer.json
 	sed -i -e 's/..\/vendor/\/var\/lib\/multi-flexibee-setup/g' debian/multi-flexibee-setup/usr/share/multi-flexibee-setup/init.php
 	sed -i -e 's/..\/vendor/\/var\/lib\/multi-flexibee-setup/g' debian/multi-flexibee-setup/usr/lib/multi-flexibee-setup/executor.php
 	sed -i -e 's/dirname(__DIR__)/"\/usr\/lib\/multi-flexibee-setup\/"/g' debian/multi-flexibee-setup/usr/lib/multi-flexibee-setup/executor.php
@@ -23,4 +24,3 @@ override_dh_install:
 	sed -i -e "s/'db/'\/var\/lib\/multi-flexibee-setup/g" debian/multi-flexibee-setup/usr/lib/multi-flexibee-setup/phinx-adapter.php
 	sed -i -e 's/composer\.json/\/usr\/lib\/multi-flexibee-setup\/composer\.json/g' debian/multi-flexibee-setup/usr/lib/multi-flexibee-setup/FlexiPeeHP/Ui/PageBottom.php
 
-          
