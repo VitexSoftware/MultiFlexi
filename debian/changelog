@@ -7,8 +7,9 @@ multi-flexibee-setup (0.3.3) UNRELEASED; urgency=medium
   * sql adapters dependency fix
   * Conflict defined between DB pacakges
   * Conflict defined between DB pacakges
+  * Auto update package version in debian's composer.json at every build
 
- -- CyberVitexus <vitex@exiv.jinonice.czf>  Tue, 05 May 2020 16:26:21 +0200
+ -- CyberVitexus <vitex@exiv.jinonice.czf>  Tue, 05 May 2020 16:58:00 +0200
 
 multi-flexibee-setup (0.1) experimental; urgency=medium
 
