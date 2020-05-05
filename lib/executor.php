@@ -25,16 +25,14 @@ $companys = $companer->listingQuery()->select('flexibees.*')->leftJoin('flexibee
 $interval = $argc == 2 ? $argv[1] : null;
 
 if ($interval) {
-
     foreach ($companys as $company) {
-
         $envNames = [
             'FLEXIBEE_URL' => $company['url'],
             'FLEXIBEE_LOGIN' => $company['user'],
             'FLEXIBEE_PASSWORD' => $company['password'],
             'FLEXIBEE_COMPANY' => $company['company'],
             'EASE_MAILTO' => $company['email'],
-            'EASE_LOGGER' => 'syslog',
+            'EASE_LOGGER' => empty($company['email']) ? 'syslog' : 'syslog|email',
         ];
 
         foreach ($envNames as $envName => $sqlValue) {

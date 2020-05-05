@@ -1,3 +1,5 @@
+repoversion=$(shell LANG=C aptitude show multi-flexibee-setup | grep Version: | awk '{print $$2}')
+nextversion=$(shell echo $(repoversion) | perl -ne 'chomp; print join(".", splice(@{[split/\./,$$_]}, 0, -1), map {++$$_} pop @{[split/\./,$$_]}), "\n";')
 
 clean:
 	rm -rf vendor composer.lock db/multiflexibee.sqlite
@@ -33,5 +35,19 @@ dimage:
 	docker build -t vitexsoftware/multi-flexibee-setup .
 
 drun: dimage
-	docker run  -dit --name MultiFlexiBeeSetup -p 2323:80 vitexsoftware/multi-flexibee-setup
+	docker run  -dit --name MultiFlexiBeeSetup -p 8080:80 vitexsoftware/multi-flexibee-setup
+	firefox http://localhost:8080/multi-flexibee-setup?login=demo\&password=demo
 
+vagrant:
+	vagrant destroy -f
+	vagrant up
+	firefox http://localhost:8080/multi-flexibee-setup?login=demo\&password=demo
+
+release:
+	echo Release v$(nextversion)
+	docker build -t vitexsoftware/multi-flexibee-setup:$(nextversion) .
+	dch -v $(nextversion) `git log -1 --pretty=%B | head -n 1`
+	debuild -i -us -uc -b
+	git commit -a -m "Release v$(nextversion)"
+	git tag -a $(nextversion) -m "version $(nextversion)"
+	docker publish

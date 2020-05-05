@@ -39,8 +39,8 @@ class BootstrapMenu extends \Ease\TWB4\Navbar {
 
         if (\Ease\Shared::user()->isLogged() === false) {
             $loginForm = new \Ease\TWB4\Form(['action' => 'login.php', 'class' => 'form-inline my-2 my-lg-0']);
-            $loginForm->addItem(new \Ease\Html\InputTextTag('login', '', ['class' => 'form-control mr-sm-2', 'placeholder' => _('Login')]));
-            $loginForm->addItem(new \Ease\Html\InputPasswordTag('password', '', ['class' => 'form-control mr-sm-2', 'placeholder' => _('Password')]));
+            $loginForm->addItem(new \Ease\Html\InputTextTag('login', WebPage::getRequestValue('login'), ['class' => 'form-control mr-sm-2', 'placeholder' => _('Login')]));
+            $loginForm->addItem(new \Ease\Html\InputPasswordTag('password', WebPage::getRequestValue('password'), ['class' => 'form-control mr-sm-2', 'placeholder' => _('Password')]));
             $loginForm->addItem(new \Ease\TWB4\SubmitButton(_('Sign In'), 'success my-2 my-sm-0'));
             $loginForm->addItem('&nbsp;&nbsp;&nbsp;');
             $loginForm->addItem(new \Ease\TWB4\LinkButton('passwordrecovery.php', _('Password recovery'), 'warning my-2 my-sm-0'));

@@ -36,6 +36,7 @@
 ./db/migrations/20180310143606_companys_owner_is_customer.php
 ./db/migrations/20200413063021_applications.php
 ./db/migrations/20200413150836_app_to_company.php
+./db/migrations/20200503154326_company_notify_email.php
 ./db/seeds/AppSeeder.php
 ./db/seeds/CompanySeeder.php
 ./db/seeds/CustomerSeeder.php
@@ -56,6 +57,7 @@
 ./src/FlexiPeeHP/MultiSetup/Ui/ColumnsForm.php
 ./src/FlexiPeeHP/MultiSetup/Ui/CustomerSelect.php
 ./src/FlexiPeeHP/MultiSetup/Ui/DbStatus.php
+./src/FlexiPeeHP/MultiSetup/Ui/FlexiBeeInstanceStatus.php
 ./src/FlexiPeeHP/MultiSetup/Ui/FlexiBeeSelect.php
 ./src/FlexiPeeHP/MultiSetup/Ui/IntervalChooser.php
 ./src/FlexiPeeHP/MultiSetup/Ui/MainMenu.php
