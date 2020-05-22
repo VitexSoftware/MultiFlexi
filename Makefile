@@ -13,8 +13,11 @@ autoload:
 demodata:
 	./vendor/bin/phinx seed:run -c ./phinx-adapter.php
 
-newphinx:
+newmigration:
 	read -p "Enter CamelCase migration name : " migname ; ./vendor/bin/phinx create $$migname -c ./phinx-adapter.php
+
+newseed:
+	read -p "Enter CamelCase seed name : " migname ; ./vendor/bin/phinx seed:create $$migname -c ./phinx-adapter.php
 
 dbreset:
 	sudo rm -f db/multiflexibee.sqlite
@@ -50,4 +53,5 @@ release:
 	debuild -i -us -uc -b
 	git commit -a -m "Release v$(nextversion)"
 	git tag -a $(nextversion) -m "version $(nextversion)"
-	docker publish
+	docker push vitexsoftware/multi-flexibee-setup:$(nextversion)
+

@@ -32,6 +32,7 @@ class RegisterAppForm extends ColumnsForm {
 
         $this->addInput(new Toggle('enabled', $this->engine->getDataValue('enabled') == 1) , _('Enabled'));
 
+        
         $this->addInput(new SubmitButton(_('Save'), 'success'));
 
         if (!is_null($this->engine->getDataValue('id'))) {

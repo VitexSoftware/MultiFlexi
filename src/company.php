@@ -35,6 +35,7 @@ if ($oPage->isPosted()) {
         $companies->setDataValue('nazev', WebPage::getGetValue('nazev'));
         $companies->setDataValue('ic', WebPage::getGetValue('ic'));
         $companies->setDataValue('email', WebPage::getGetValue('email'));
+        $companies->setDataValue('flexibee', WebPage::getGetValue('flexibee','int'));
     }
 }
 
@@ -47,7 +48,7 @@ if (strlen($instanceName)) {
 }
 
 $instanceRow = new Row();
-$instanceRow->addColumn(8, new RegisterCompanyForm($companies, ['target' => 'company.php']));
+$instanceRow->addColumn(8, new RegisterCompanyForm($companies, null, ['target' => 'company.php']));
 //$instanceRow->addColumn(4, new ui\FlexiBeeInstanceStatus($companies));
 
 $bottomLine = new Row();

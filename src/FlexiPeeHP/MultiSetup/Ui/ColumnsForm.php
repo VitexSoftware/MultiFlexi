@@ -47,9 +47,9 @@ class ColumnsForm extends \Ease\TWB4\Form {
     /**
      * Formulář Bootstrapu.
      *
-     * @param SysEngine $engine        jméno formuláře
-     * @param mixed     $formContents  prvky uvnitř formuláře
-     * @param array     $tagProperties vlastnosti tagu například:
+     * @param Engine $engine        jméno formuláře
+     * @param mixed  $formContents  prvky uvnitř formuláře
+     * @param array  $tagProperties vlastnosti tagu například:
      *                                 array('enctype' => 'multipart/form-data')
      */
     public function __construct($engine, $formContents = null,
@@ -80,6 +80,8 @@ class ColumnsForm extends \Ease\TWB4\Form {
      * @param string $placeholder předvysvětlující text
      * @param string $helptext    Dodatečná nápověda
      * @param string $addTagClass CSS třída kterou má být oskiován vložený prvek
+     * 
+     * @return \Ease\TWB4\Row New item
      */
     public function addInput($input, $caption = null, $placeholder = null,
             $helptext = null, $addTagClass = 'form-control') {
@@ -116,18 +118,21 @@ class ColumnsForm extends \Ease\TWB4\Form {
                         _('Save and next'), ['class' => 'btn btn-success']));
     }
 
+    /**
+     * Add Submit buttons
+     * @return boolean
+     */
     public function finalize() {
         $recordID = $this->engine->getMyKey();
         $this->addItem(new \Ease\Html\InputHiddenTag('class',
                         get_class($this->engine)));
         if (!is_null($recordID)) {
-            $this->addItem(new \Ease\Html\InputHiddenTag($this->engine->keyColumn,
+            $this->addItem(new \Ease\Html\InputHiddenTag($this->engine->getKeyColumn(),
                             $recordID));
         }
-        $this->addItem($this->savers);
-//        \Ease\TWB4\WebPage::singleton()->includeJavaScript('js/jquery.validate.js');
-//        \Ease\TWB4\WebPage::singleton()->includeJavaScript('js/messages_cs.js');
 
+        $this->newRow();
+        $this->addItem($this->savers);
         return parent::finalize();
     }
 

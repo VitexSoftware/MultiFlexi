@@ -32,6 +32,7 @@ class FlexiBeeInstanceStatus extends \Ease\Html\TableTag {
             $registerParams = [
                 'company' => $companyData['dbNazev'],
                 'nazev' => $companyData['nazev'],
+                'flexibee' => $flexiBees->getMyKey(),
                 'ic' => array_key_exists('ic', $companyDetail) ? $companyDetail['ic'] : '',
                 'email' => array_key_exists('email', $companyDetail) ? $companyDetail['email'] : '',
             ];

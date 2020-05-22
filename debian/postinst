@@ -26,6 +26,7 @@ if [ -f /usr/share/dbconfig-common/dpkg/postinst ]; then
     dbc_go multi-flexibee-setup "$@"
     phinx migrate -c /usr/lib/multi-flexibee-setup/phinx-adapter.php
     echo 'run "sudo phinx seed:run -c /usr/lib/multi-flexibee-setup/phinx-adapter.php" to load demo data'
+    echo 'run "sudo phinx seed:run -c /usr/lib/multi-flexibee-setup/phinx-adapter.php -s AppSeeder" to load only plugins demo setup'
 
 
 	if [ -f /var/lib/multi-flexibee-setup/multiflexibeesetup ] ; then

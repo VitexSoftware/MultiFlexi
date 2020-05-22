@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi FlexiBee Setup - Customer instance editor.
  *
@@ -20,14 +21,14 @@ $oPage->onlyForLogged();
 
 $oPage->addItem(new PageTop(_('Application')));
 
-$apps    = new Application($oPage->getRequestValue('id', 'int'));
+$apps = new Application($oPage->getRequestValue('id', 'int'));
 $instanceName = $apps->getDataValue('nazev');
 
 if ($oPage->isPosted()) {
     if ($apps->takeData($_POST) && !is_null($apps->saveToSQL())) {
         $apps->addStatusMessage(_('Application Saved'), 'success');
 //        $apps->prepareRemoteFlexiBee();
-        $oPage->redirect('?id='.$apps->getMyKey());
+        $oPage->redirect('?id=' . $apps->getMyKey());
     } else {
         $apps->addStatusMessage(_('Error saving Application'), 'error');
     }
@@ -44,7 +45,10 @@ $instanceRow = new Row();
 $instanceRow->addColumn(8, new RegisterAppForm($apps));
 
 $oPage->container->addItem(new Panel($instanceName, 'info',
-        $instanceRow, $instanceLink));
+                $instanceRow,
+                is_null($apps->getMyKey()) ?
+                        new \Ease\TWB4\LinkButton('', _('Config fields'), 'inverse disabled') :
+                        new \Ease\TWB4\LinkButton('conffield.php?app_id=' . $apps->getMyKey(), _('Config fields'), 'warning') ));
 
 $oPage->addItem(new PageBottom());
 
