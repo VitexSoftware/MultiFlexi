@@ -205,6 +205,7 @@ class Company extends \FlexiPeeHP\Company {
      * Convert data from FlexiBee column names to SQL column names
      * 
      * @param arry $listing
+     * 
      * @return array
      */
     public static function convertListingData($listing) {

@@ -9,39 +9,57 @@
 
 namespace FlexiPeeHP\MultiSetup\Ui;
 
+use Ease\Html\ATag;
+use Ease\Html\ImgTag;
+use Ease\TWB4\Form;
+use Ease\TWB4\FormGroup;
+use Ease\TWB4\Part;
+use Ease\TWB4\Row;
+use FlexiPeeHP\MultiSetup\Application;
+use FlexiPeeHP\MultiSetup\AppToCompany;
+use FlexiPeeHP\MultiSetup\Company;
+
 /**
  * Description of ServicesForCompanyForm
  *
  * @author vitex
  */
-class ServicesForCompanyForm extends \Ease\TWB4\Form {
+class ServicesForCompanyForm extends Form {
 
     /**
+     * Assign Services for company
      * 
-     * @param \FlexiPeeHP\MultiSetup\Company $company
+     * @param Company $company
      * @param array $tagProperties
      */
     public function __construct($company, $tagProperties = array()) {
         $companyID = $company->getMyKey();
 
-        $apps = (new \FlexiPeeHP\MultiSetup\Application())->listingQuery()->where('enabled',1)->fetchAll();
-        $glue = new \FlexiPeeHP\MultiSetup\AppToCompany();
+        $apps = (new Application())->listingQuery()->where('enabled', 1)->fetchAll();
+        $glue = new AppToCompany();
 
         $assigned = $glue->getColumnsFromSQL(['app_id', 'interval'], ['company_id' => $companyID], 'id', 'app_id');
         parent::__construct($tagProperties);
 
         foreach ($apps as $appData) {
             $code = $appData['id'];
-            $twbsw = $this->addInput(
-                    new IntervalChooser($code . '_interval', array_key_exists($code, $assigned) ? $assigned[$code]['interval'] : 'n', ['id' => $code . '_interval', 'data-company' => $companyID, 'checked' => 'true',
-                        'data-app' => $code]),
-                    new \Ease\Html\ImgTag($appData['image'], $appData['nazev'], ['height' => '30']) . '&nbsp;' . $appData['nazev']
-            );
+
+            $appRow = new Row();
+            $appRow->setTagProperty('style', 'border-bottom: 1px solid #bdbdbd; padding: 5px');
+
+            $appRow->addColumn(2, new ATag('app.php?id=' . $code, new ImgTag($appData['image'], $appData['nazev'], ['class' => 'img-fluid'])));
+
+            $appRow->addColumn(4, new FormGroup('<strong>' . $appData['nazev'] . '</strong> ', new IntervalChooser($code . '_interval', array_key_exists($code, $assigned) ? $assigned[$code]['interval'] : 'n', ['id' => $code . '_interval', 'data-company' => $companyID, 'checked' => 'true',
+                                'data-app' => $code])));
+
+            $appRow->addColumn(6, new ConfiguredFieldBadges($companyID, $code));
+
+            $this->addItem($appRow);
         }
     }
 
     public function finalize() {
-        \Ease\TWB4\Part::twBootstrapize();
+        Part::twBootstrapize();
         $this->addJavaScript('
 
 $(\'#' . $this->getTagID() . ' select\').change( function(event, state) {

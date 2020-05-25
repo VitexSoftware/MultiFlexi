@@ -8,9 +8,10 @@
 
 namespace FlexiPeeHP\MultiSetup\Ui;
 
-use Ease\Html\InputSubmitTag;
+use Ease\Html\InputHiddenTag;
 use Ease\Html\InputTextTag;
 use Ease\TWB4\Form;
+use Ease\TWB4\SubmitButton;
 
 /**
  * Description of ConfFieldsForm
@@ -21,11 +22,11 @@ class ConfFieldsForm extends Form {
 
     public function __construct($conffields, $formContents, $tagProperties = array()) {
         parent::__construct(['method' => 'post', 'action' => 'conffield.php'], $tagProperties, $formContents);
-        $this->addItem(new \Ease\Html\InputHiddenTag('id', $conffields->getMyKey()));
+        $this->addItem(new InputHiddenTag('id', $conffields->getMyKey()));
         $this->addInput(new ConfigFields('type'), _('New config field type'));
         $this->addInput(new InputTextTag('keyname'), _('New config field Keyword'));
         $this->addInput(new InputTextTag('description'), _('New config field description'));
-        $this->addItem(new InputSubmitTag('add', _('Add')));
+        $this->addItem(new SubmitButton( _('Add'),'success btn-block'));
     }
 
 }

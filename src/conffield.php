@@ -21,10 +21,14 @@ $appId = WebPage::getRequestValue('app_id', 'int');
 $confId = WebPage::getRequestValue('id', 'int');
 
 $conffields = new Conffield($confId);
-$conffields->setDataValue('app_id',$appId);
+$conffields->setDataValue('app_id', $appId);
 
 $delete = WebPage::getRequestValue('delete', 'int');
 if (!is_null($delete)) {
+    $conffields->loadFromSQL($delete);
+    $cnf = new \FlexiPeeHP\MultiSetup\Configuration();
+    $conffields->addStatusMessage(sprintf(_('%d used configurations removed'), $cnf->deleteFromSQL(['app_id' => $appId, 'key' => $conffields->getDataValue('keyname')])));
+
     if ($conffields->deleteFromSQL($delete)) {
         $conffields->addStatusMessage(_('Configuration removed'));
     }

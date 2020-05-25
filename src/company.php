@@ -35,7 +35,7 @@ if ($oPage->isPosted()) {
         $companies->setDataValue('nazev', WebPage::getGetValue('nazev'));
         $companies->setDataValue('ic', WebPage::getGetValue('ic'));
         $companies->setDataValue('email', WebPage::getGetValue('email'));
-        $companies->setDataValue('flexibee', WebPage::getGetValue('flexibee','int'));
+        $companies->setDataValue('flexibee', WebPage::getGetValue('flexibee', 'int'));
     }
 }
 

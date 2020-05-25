@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi FlexiBee Setup  - WebPage class
  *
@@ -8,17 +9,19 @@
 
 namespace FlexiPeeHP\MultiSetup\Ui;
 
-
 /**
  * Description of Confiffields
  *
  * @author vitex
  */
 class ConfigFieldsBadges extends \Ease\Container {
+
     public function __construct($content = null, $properties = array()) {
         parent::__construct(null, $properties);
-        foreach ($content as $conf){
-            $this->addItem( new \Ease\TWB4\Badge('success',$conf['type'] . ' '. $conf['keyname']) );
+        foreach ($content as $conf) {
+            $this->addItem(new \Ease\TWB4\Badge(array_key_exists('state', $conf) ? $conf['state'] : 'secondary', $conf['type'] . ' ' . $conf['keyname']));
+            $this->addItem(' ');
         }
     }
+
 }
