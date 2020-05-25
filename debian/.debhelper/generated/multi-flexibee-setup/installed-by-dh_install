@@ -2,8 +2,10 @@
 ./src/app.php
 ./src/apps.php
 ./src/company.php
+./src/conffield.php
 ./src/createaccount.php
 ./src/customer.php
+./src/custserviceconfig.php
 ./src/flexibee.php
 ./src/flexibees.php
 ./src/index.php
@@ -37,10 +39,12 @@
 ./db/migrations/20200413063021_applications.php
 ./db/migrations/20200413150836_app_to_company.php
 ./db/migrations/20200503154326_company_notify_email.php
+./db/migrations/20200520140331_config_registry.php
 ./db/seeds/AppSeeder.php
 ./db/seeds/CompanySeeder.php
 ./db/seeds/CustomerSeeder.php
 ./db/seeds/FlexiBeeSeeder.php
+./db/seeds/ImapToInvoice.php
 ./db/seeds/UserSeeder.php
 ./debian/conf/composer.json
 ./debian/conf/.env.template
@@ -48,6 +52,8 @@
 ./src/FlexiPeeHP/MultiSetup/Application.php
 ./src/FlexiPeeHP/MultiSetup/AppToCompany.php
 ./src/FlexiPeeHP/MultiSetup/Company.php
+./src/FlexiPeeHP/MultiSetup/Conffield.php
+./src/FlexiPeeHP/MultiSetup/Configuration.php
 ./src/FlexiPeeHP/MultiSetup/Customer.php
 ./src/FlexiPeeHP/MultiSetup/Engine.php
 ./src/FlexiPeeHP/MultiSetup/FlexiBees.php
@@ -55,6 +61,11 @@
 ./src/FlexiPeeHP/MultiSetup/Ui/AppsMenu.php
 ./src/FlexiPeeHP/MultiSetup/Ui/BootstrapMenu.php
 ./src/FlexiPeeHP/MultiSetup/Ui/ColumnsForm.php
+./src/FlexiPeeHP/MultiSetup/Ui/ConfFieldsForm.php
+./src/FlexiPeeHP/MultiSetup/Ui/ConfigFields.php
+./src/FlexiPeeHP/MultiSetup/Ui/ConfigFieldsBadges.php
+./src/FlexiPeeHP/MultiSetup/Ui/ConfiguredFieldBadges.php
+./src/FlexiPeeHP/MultiSetup/Ui/CustomAppConfigForm.php
 ./src/FlexiPeeHP/MultiSetup/Ui/CustomerSelect.php
 ./src/FlexiPeeHP/MultiSetup/Ui/DbStatus.php
 ./src/FlexiPeeHP/MultiSetup/Ui/FlexiBeeInstanceStatus.php

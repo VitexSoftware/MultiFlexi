@@ -1,4 +1,4 @@
-multi-flexibee-setup (0.3.3) UNRELEASED; urgency=medium
+multi-flexibee-setup (0.3.4) UNRELEASED; urgency=medium
 
   * Ability choose run interval between hour and year
   * Debian package
@@ -8,8 +8,9 @@ multi-flexibee-setup (0.3.3) UNRELEASED; urgency=medium
   * Conflict defined between DB pacakges
   * Conflict defined between DB pacakges
   * Auto update package version in debian's composer.json at every build
+  * Added Additional Environment setup for each app/company run
 
- -- CyberVitexus <vitex@exiv.jinonice.czf>  Tue, 05 May 2020 16:58:00 +0200
+ -- CyberVitexus <vitex@exiv.jinonice.czf>  Mon, 25 May 2020 22:15:13 +0200
 
 multi-flexibee-setup (0.1) experimental; urgency=medium
 
