@@ -6,7 +6,7 @@
     "require": {
         "vitexsoftware/ease-twbootstrap4-widgets-flexibee": "dev-master",
         "vitexsoftware/ease-fluentpdo": "dev-master",
-        "vlucas/phpdotenv": "dev-master",
+        "vlucas/phpdotenv": "^3",
         "vitexsoftware/ease-twbootstrap4-widgets": "dev-master",
         "robmorgan/phinx": "dev-master"
     },

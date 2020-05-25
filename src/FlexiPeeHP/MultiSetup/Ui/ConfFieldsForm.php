@@ -20,7 +20,8 @@ use Ease\TWB4\Form;
 class ConfFieldsForm extends Form {
 
     public function __construct($conffields, $formContents, $tagProperties = array()) {
-        parent::__construct(['method' => 'post','action'=>'conffiled.php'], $tagProperties, $formContents);
+        parent::__construct(['method' => 'post', 'action' => 'conffield.php'], $tagProperties, $formContents);
+        $this->addItem(new \Ease\Html\InputHiddenTag('id', $conffields->getMyKey()));
         $this->addInput(new ConfigFields('type'), _('New config field type'));
         $this->addInput(new InputTextTag('keyname'), _('New config field Keyword'));
         $this->addInput(new InputTextTag('description'), _('New config field description'));

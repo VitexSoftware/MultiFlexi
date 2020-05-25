@@ -9,10 +9,13 @@
 
 namespace FlexiPeeHP\MultiSetup\Ui;
 
-use Ease\Html\ATag;
+use Ease\TWB4\LinkButton;
 use Ease\TWB4\Panel;
 use Ease\TWB4\Row;
 use FlexiPeeHP\MultiSetup\Application;
+use FlexiPeeHP\MultiSetup\Ui\PageBottom;
+use FlexiPeeHP\MultiSetup\Ui\PageTop;
+use FlexiPeeHP\MultiSetup\Ui\RegisterAppForm;
 
 require_once './init.php';
 
@@ -47,8 +50,11 @@ $instanceRow->addColumn(8, new RegisterAppForm($apps));
 $oPage->container->addItem(new Panel($instanceName, 'info',
                 $instanceRow,
                 is_null($apps->getMyKey()) ?
-                        new \Ease\TWB4\LinkButton('', _('Config fields'), 'inverse disabled') :
-                        new \Ease\TWB4\LinkButton('conffield.php?app_id=' . $apps->getMyKey(), _('Config fields'), 'warning') ));
+                        new LinkButton('', _('Config fields'), 'inverse disabled') :
+                        [new LinkButton('conffield.php?app_id=' . $apps->getMyKey(), _('Config fields'), 'warning'),
+                    new ConfigFieldsBadges(\FlexiPeeHP\MultiSetup\Conffield::getAppConfigs($apps->getMyKey()))
+                        ]
+));
 
 $oPage->addItem(new PageBottom());
 

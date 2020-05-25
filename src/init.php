@@ -14,7 +14,8 @@ use FlexiPeeHP\MultiSetup\Ui\WebPage;
 
 require_once '../vendor/autoload.php';
 
-$dotenv = Dotenv::createImmutable(dirname(__DIR__));
+//$dotenv = Dotenv::createImmutable(dirname(__DIR__));
+$dotenv = Dotenv::create(dirname(__DIR__));
 $dotenv->load();
 
 session_start();

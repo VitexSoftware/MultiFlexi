@@ -23,6 +23,10 @@ class Conffield extends \Ease\SQL\Engine {
         if (array_key_exists('app_id', $data)) {
             $checked = true;
         }
+        if (array_key_exists('id', $data) && ($data['id'] == '')) {
+            unset($data['id']);
+            $checked = true;
+        }
         return $checked ? parent::takeData($data) : 0;
     }
 
@@ -36,4 +40,8 @@ class Conffield extends \Ease\SQL\Engine {
         return $this->getColumnsFromSQL(['*'], ['app_id' => $appId], 'keyname', 'keyname');
     }
 
+    public static function getAppConfigs($appId) {
+        return (new self)->appConfigs($appId);
+    }
+    
 }

@@ -18,9 +18,10 @@ require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Config Fields')));
 $appId = WebPage::getRequestValue('app_id', 'int');
+$confId = WebPage::getRequestValue('id', 'int');
 
-$conffields = new Conffield(['app_id' => $appId]);
-
+$conffields = new Conffield($confId);
+$conffields->setDataValue('app_id',$appId);
 
 $delete = WebPage::getRequestValue('delete', 'int');
 if (!is_null($delete)) {
@@ -53,7 +54,7 @@ $instanceRow->addColumn(8, new ConfFieldsForm($conffields, new \Ease\Html\InputH
 $cfgs = new \Ease\Html\UlTag();
 
 foreach ($conffields->appConfigs($appId) as $configInfo) {
-    $cfgs->addItemSmart($configInfo['type'] . ' ' . $configInfo['keyname'] . ' ' . $configInfo['description'] . new \Ease\TWB4\LinkButton('?app_id=' . $appId . '&delete=' . $configInfo['id'], 'X', 'danger btn-sm'));
+    $cfgs->addItemSmart($configInfo['type'] . ' ' . new \Ease\TWB4\Badge('success', $configInfo['keyname']) . ' ' . $configInfo['description'] . new \Ease\TWB4\LinkButton('?app_id=' . $appId . '&delete=' . $configInfo['id'], 'X', 'danger btn-sm'));
 }
 
 $cfgs->addItem(new \Ease\TWB4\LinkButton('app.php?id=' . WebPage::getRequestValue('app_id', 'int'), _('Back to app'), 'warning'));
