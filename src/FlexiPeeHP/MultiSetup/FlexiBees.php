@@ -75,12 +75,12 @@ class FlexiBees extends \Ease\SQL\Engine {
             $this->addStatusMessage(_('Company code cannot be empty'), 'warning');
             $result = false;
         }
-        if( substr($data['url'],-1) == '/'){
+        if (substr($data['url'], -1) == '/') {
             $this->addStatusMessage(_('FlexiBee API URL cannot end with slash'),
                     'warning');
             $result = false;
         }
-        
+
         return $result;
     }
 
@@ -138,6 +138,15 @@ class FlexiBees extends \Ease\SQL\Engine {
 //                        $prepareResult));
 //        $companer->addStatusMessage(sprintf(_('Saving Company %s'),
 //                        $companyData['nazev']), $result ? 'success' : 'error');
+    }
+
+    public function setEnvironment() {
+        $envNames = [
+            'FLEXIBEE_URL' => $this->getDataValue('url'),
+            'FLEXIBEE_LOGIN' => $this->getDataValue('user'),
+            'FLEXIBEE_PASSWORD' => $this->getDataValue('password'),
+        ];
+        $this->exportEnv($envNames);
     }
 
 }

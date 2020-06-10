@@ -1,14 +1,14 @@
 {
   "name": "vitexsoftware/multiflexibee-setup",
   "description": "Tool used to setup FlexiBee multiinstance",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "type": "project",
   "require": {
-    "deb/ease-twbootstrap4-widgets-flexibee": "*",
+    "deb/ease-bootstrap4-widgets-flexibee": "*",
     "deb/ease-fluentpdo": "*",
     "deb/flexibee-bricks": "*",
-    "vlucas/phpdotenv": "*",
-    "deb/ease-twbootstrap4-widgets": "*"
+    "vlucas/phpdotenv": "^3",
+    "deb/ease-bootstrap4-widgets": "*"
   },
   "license": "MIT",
   "authors": [
@@ -30,7 +30,7 @@
   "repositories": [
     {
       "type": "path",
-      "url": "/usr/share/php/Ease/"
+      "url": "/usr/share/php/EaseCore/"
     },
     {
       "type": "path",

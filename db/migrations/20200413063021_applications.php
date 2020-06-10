@@ -35,7 +35,7 @@ class Applications extends AbstractMigration {
                 ->addColumn('enabled', 'boolean', array('default' => false))
                 ->addColumn('image', 'text', ['null' => true])
                 ->addColumn('nazev', 'string', ['null' => true, 'limit' => 32])
-                 ->addColumn('popis', 'string', ['comment' => 'App Description'])
+                ->addColumn('popis', 'string', ['comment' => 'App Description'])
                 ->addColumn('executable', 'string', ['comment' => '/usr/bin/runme'])
                 ->addColumn('DatCreate', 'datetime', [])
                 ->addColumn('DatUpdate', 'datetime', ['null' => true])

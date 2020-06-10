@@ -1,4 +1,4 @@
-# Automatically added by dh_installdebconf/12.1.1
+# Automatically added by dh_installdebconf/13~bpo10+1
 if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
 	. /usr/share/debconf/confmodule
 	db_purge

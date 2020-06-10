@@ -329,4 +329,16 @@ class Company extends \FlexiPeeHP\Company {
         return $companyInfo;
     }
 
+    public function setEnvironment() {
+        $envNames = [
+            'FLEXIBEE_URL' => $this->getDataValue('url'),
+            'FLEXIBEE_LOGIN' => $this->getDataValue('user'),
+            'FLEXIBEE_PASSWORD' => $this->getDataValue('password'),
+            'FLEXIBEE_COMPANY' => $this->getDataValue('company'),
+            'EASE_MAILTO' => $this->getDataValue('email'),
+            'EASE_LOGGER' => empty($this->getDataValue('email')) ? 'syslog' : 'syslog|email'
+        ];
+        $this->exportEnv($envNames);
+    }
+
 }

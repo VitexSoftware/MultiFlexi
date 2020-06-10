@@ -25,6 +25,11 @@ class AppToCompany extends Engine {
         return $state ? $this->dbsync() : $this->deleteFromSQL();
     }
 
+    public function performInit() {
+        $this->setEnvironment();
+        $app->runInit();
+    }
+
     /**
      * Delete record ignoring interval
      * 
@@ -38,6 +43,28 @@ class AppToCompany extends Engine {
         }
         unset($data['interval']);
         return parent::deleteFromSQL($data);
+    }
+
+    public function setEnvironment() {
+        $cmp = new Company((int) $this->getDataValue('company_id'));
+        $cmp->setEnvironment();
+
+
+        $envNames = [
+            'EASE_MAILTO' => $this->getDataValue('email'),
+            'EASE_LOGGER' => empty($this->getDataValue('email')) ? 'syslog' : 'syslog|email'
+        ];
+        $this->exportEnv($envNames);
+
+
+        $customConfig = new Configuration();
+        $customConfig->setEnvironment($cmp->getMyKey(), $app->getMyKey());
+
+
+        $exec = $app->getDataValue('setup');
+        $cmp->addStatusMessage('setup begin' . $exec . '@' . $cmp->getDataValue('nazev'));
+        $cmp->addStatusMessage(shell_exec($exec), 'debug');
+        $cmp->addStatusMessage('setu end' . $exec . '@' . $cmp->getDataValue('nazev'));
     }
 
 }

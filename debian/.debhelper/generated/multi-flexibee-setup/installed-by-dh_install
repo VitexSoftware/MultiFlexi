@@ -32,7 +32,6 @@
 ./src/images/slidehandle.png
 ./db/migrations/20160203130652_user.php
 ./db/migrations/20160825235219_flexi_bees.php
-./db/migrations/20160904185038_company_details.php
 ./db/migrations/20180208121253_customer.php
 ./db/migrations/20180208122200_company.php
 ./db/migrations/20180310143606_companys_owner_is_customer.php
@@ -40,6 +39,7 @@
 ./db/migrations/20200413150836_app_to_company.php
 ./db/migrations/20200503154326_company_notify_email.php
 ./db/migrations/20200520140331_config_registry.php
+./db/migrations/20200529215717_app_setup.php
 ./db/seeds/AppSeeder.php
 ./db/seeds/CompanySeeder.php
 ./db/seeds/CustomerSeeder.php

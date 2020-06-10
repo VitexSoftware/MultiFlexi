@@ -1,4 +1,4 @@
-multi-flexibee-setup (0.3.4) UNRELEASED; urgency=medium
+multi-flexibee-setup (0.3.5) UNRELEASED; urgency=medium
 
   * Ability choose run interval between hour and year
   * Debian package
