@@ -1,7 +1,7 @@
 {
   "name": "vitexsoftware/multiflexibee-setup",
   "description": "Tool used to setup FlexiBee multiinstance",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "type": "project",
   "require": {
     "deb/ease-bootstrap4-widgets-flexibee": "*",

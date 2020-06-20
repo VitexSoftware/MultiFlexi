@@ -4,10 +4,10 @@
     "version": "0.3",
     "type": "project",
     "require": {
-        "vitexsoftware/ease-bootstrap4-widgets-flexibee": "dev-master",
+        "vitexsoftware/ease-twbootstrap4-widgets-flexibee": "dev-master",
         "vitexsoftware/ease-fluentpdo": "dev-master",
         "vlucas/phpdotenv": "^3",
-        "vitexsoftware/ease-bootstrap4-widgets": "dev-master",
+        "vitexsoftware/ease-twbootstrap4-widgets": "dev-master",
         "robmorgan/phinx": "dev-master"
     },
     "license": "MIT",

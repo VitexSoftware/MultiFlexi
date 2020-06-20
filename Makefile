@@ -5,13 +5,13 @@ clean:
 	rm -rf vendor composer.lock db/multiflexibee.sqlite
 
 migration: autoload
-	./vendor/bin/phinx migrate -c ./phinx-adapter.php
+	cd src ; ../vendor/bin/phinx migrate -c ../phinx-adapter.php ; cd ..
 
 autoload:
 	composer update
 
 demodata:
-	./vendor/bin/phinx seed:run -c ./phinx-adapter.php
+	cd src ; ../vendor/bin/phinx seed:run -c ../phinx-adapter.php ; cd ..
 
 newmigration:
 	read -p "Enter CamelCase migration name : " migname ; ./vendor/bin/phinx create $$migname -c ./phinx-adapter.php
