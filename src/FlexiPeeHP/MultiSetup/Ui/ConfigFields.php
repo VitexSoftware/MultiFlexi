@@ -23,6 +23,7 @@ class ConfigFields extends \Ease\Html\SelectTag {
                     'date' => _('Date'),
                     'email' => _('Email'),
                     'password' => _('Password'),
+                    'checkbox' => _('Yes/No')
                 ]
                 , $defaultValue, $properties);
     }

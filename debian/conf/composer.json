@@ -38,7 +38,7 @@
     },
     {
       "type": "path",
-      "url": "/usr/share/php/FlexiPeeHP"
+      "url": "/usr/share/php/FlexiPeeHP/"
     },
     {
       "type": "path",
@@ -62,7 +62,7 @@
     },
     {
       "type": "path",
-      "url": "/usr/share/php/EaseTWB4WidgetsFlexiBee"
+      "url": "/usr/share/php/EaseTWB4WidgetsFlexiBee/"
     }
   ]
 }

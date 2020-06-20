@@ -1,4 +1,12 @@
 <?php
+namespace FlexiPeeHP\MultiSetup\Ui;
+
+use Ease\Html\H1Tag;
+use FlexiPeeHP\MultiSetup\Configuration;
+use FlexiPeeHP\MultiSetup\Ui\CustomAppConfigForm;
+use FlexiPeeHP\MultiSetup\Ui\PageBottom;
+use FlexiPeeHP\MultiSetup\Ui\PageTop;
+use FlexiPeeHP\MultiSetup\Ui\WebPage;
 
 /**
  * Multi FlexiBee Setup - Config fields editor.
@@ -7,12 +15,6 @@
  * @copyright  2020 Vitex Software
  */
 
-namespace FlexiPeeHP\MultiSetup\Ui;
-
-use Ease\Html\ATag;
-use Ease\TWB4\Panel;
-use Ease\TWB4\Row;
-use FlexiPeeHP\MultiSetup\Conffield;
 
 require_once './init.php';
 $oPage->onlyForLogged();
@@ -20,7 +22,7 @@ $oPage->addItem(new PageTop(_('App custom config Fields')));
 $appId = WebPage::getRequestValue('app_id', 'int');
 $companyId = WebPage::getRequestValue('company_id', 'int');
 
-$configurator = new \FlexiPeeHP\MultiSetup\Configuration(['app_id' => $appId, 'company_id' => $companyId],['autoload'=>false]);
+$configurator = new Configuration(['app_id' => $appId, 'company_id' => $companyId], ['autoload' => false]);
 $configurator->setDataValue('app_id', $appId);
 
 
@@ -33,7 +35,7 @@ if ($oPage->isPosted()) {
     }
 }
 
-$oPage->container->addItem(new \Ease\Html\H1Tag($configurator->getName()));
+$oPage->container->addItem(new H1Tag($configurator->getName()));
 
 $oPage->container->addItem(new CustomAppConfigForm($configurator));
 

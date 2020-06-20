@@ -14,6 +14,10 @@ class AppSeeder extends AbstractSeed {
      */
     public function run() {
         $id = 0;
+        
+        $lastAppID = $this->fetchRow('SELECT id FROM apps ORDER BY id DESC LIMIT 1');
+        $id = empty($lastAppID) ? 0 : current($lastAppID);
+        
         $data = [
             [
                 'id' => $id++,

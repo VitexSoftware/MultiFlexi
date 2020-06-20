@@ -42,23 +42,42 @@ class Configuration extends \Ease\SQL\Engine {
         $result = 0;
         unset($data['app_id']);
         unset($data['company_id']);
+        $this->deleteFromSQL(['app_id' => $this->getDataValue('app_id'), 'company_id' => $this->getDataValue('company_id')]);
         foreach ($data as $column => $value) {
-            $result += parent::saveToSQL(
-                            ['app_id' => $this->getDataValue('app_id'), 'company_id' => $this->getDataValue('company_id'), 'key' => $column, 'value' => $value],
-                            ['app_id' => $this->getDataValue('app_id'), 'company_id' => $this->getDataValue('company_id'), 'key' => $column]
-            );
+            $result += $this->insertToSQL(['app_id' => $this->getDataValue('app_id'), 'company_id' => $this->getDataValue('company_id'), 'key' => $column, 'value' => $value]);
         }
         return $result;
     }
 
-    public function setEnvironment($companyId,$appId) {
-        
+    /**
+     * Převezme data do aktuálního pole dat.
+     *
+     * @param array $data asociativní pole dat
+     *
+     * @return int
+     */
+    public function takeData($data) {
+        $cfgs = new Conffield();
+        foreach ($cfgs->appConfigs($this->getDataValue('app_id')) as $cfg){
+            if($cfg['type'] == 'checkbox'){
+                $data[$cfg['keyname']] = array_key_exists($cfg['keyname'], $data) ? 'true' : 'false';
+            }
+        }
+        return parent::takeData($data);
+    }
+
+    /**
+     * Apply Configuration
+     * 
+     * @param type $companyId
+     * @param type $appId
+     */
+    public function setEnvironment($companyId, $appId) {
+
         foreach ($customConfig->getColumnsFromSQL(['key', 'value'], ['company_id' => $companyId, 'app_id' => $appId]) as $cfgRaw) {
             $companer->addStatusMessage(sprintf(_('Setting Environment %s to %s'), $cfgRaw['key'], $cfgRaw['value']), 'debug');
             putenv($cfgRaw['key'] . '=' . $cfgRaw['value']);
         }
-
-
     }
 
 }
