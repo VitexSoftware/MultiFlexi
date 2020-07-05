@@ -1,4 +1,5 @@
 ./src/about.php
+./src/ajax2db.php
 ./src/app.php
 ./src/apps.php
 ./src/company.php
@@ -12,6 +13,7 @@
 ./src/init.php
 ./src/login.php
 ./src/logout.php
+./src/logs.php
 ./src/main.php
 ./src/passwordrecovery.php
 ./src/toggleapp.php
@@ -25,6 +27,7 @@
 ./src/images/customer.svg
 ./src/images/digest.svg
 ./src/images/flexibee-server.svg
+./src/images/log.svg
 ./src/images/matcher.png
 ./src/images/password.png
 ./src/images/project-logo.svg
@@ -40,6 +43,7 @@
 ./db/migrations/20200503154326_company_notify_email.php
 ./db/migrations/20200520140331_config_registry.php
 ./db/migrations/20200529215717_app_setup.php
+./db/migrations/20200704143315_logger.php
 ./db/seeds/AppSeeder.php
 ./db/seeds/CompanySeeder.php
 ./db/seeds/CustomerSeeder.php
@@ -55,8 +59,11 @@
 ./src/FlexiPeeHP/MultiSetup/Conffield.php
 ./src/FlexiPeeHP/MultiSetup/Configuration.php
 ./src/FlexiPeeHP/MultiSetup/Customer.php
+./src/FlexiPeeHP/MultiSetup/DBEngine.php
 ./src/FlexiPeeHP/MultiSetup/Engine.php
 ./src/FlexiPeeHP/MultiSetup/FlexiBees.php
+./src/FlexiPeeHP/MultiSetup/Logger.php
+./src/FlexiPeeHP/MultiSetup/LogToSQL.php
 ./src/FlexiPeeHP/MultiSetup/User.php
 ./src/FlexiPeeHP/MultiSetup/Ui/AppsMenu.php
 ./src/FlexiPeeHP/MultiSetup/Ui/BootstrapMenu.php
@@ -67,10 +74,12 @@
 ./src/FlexiPeeHP/MultiSetup/Ui/ConfiguredFieldBadges.php
 ./src/FlexiPeeHP/MultiSetup/Ui/CustomAppConfigForm.php
 ./src/FlexiPeeHP/MultiSetup/Ui/CustomerSelect.php
+./src/FlexiPeeHP/MultiSetup/Ui/DBDataTable.php
 ./src/FlexiPeeHP/MultiSetup/Ui/DbStatus.php
 ./src/FlexiPeeHP/MultiSetup/Ui/FlexiBeeInstanceStatus.php
 ./src/FlexiPeeHP/MultiSetup/Ui/FlexiBeeSelect.php
 ./src/FlexiPeeHP/MultiSetup/Ui/IntervalChooser.php
+./src/FlexiPeeHP/MultiSetup/Ui/LogViewer.php
 ./src/FlexiPeeHP/MultiSetup/Ui/MainMenu.php
 ./src/FlexiPeeHP/MultiSetup/Ui/PageBottom.php
 ./src/FlexiPeeHP/MultiSetup/Ui/PageTop.php
@@ -84,3 +93,6 @@
 ./debian/conf/multi-flexibee-setup.service
 ./bin/multi-flexibee-executor
 ./lib/executor.php
+./debian/cz.vitexsoftware.multi_flexibee_setup.metainfo.xml
+./debian/cz.vitexsoftware.multi_flexibee_setup.desktop
+./multi-flexibee-setup.svg

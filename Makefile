@@ -58,7 +58,7 @@ vagrant:
 
 release:
 	echo Release v$(nextversion)
-	docker build -t vitexsoftware/multi-flexibee-setup: .
+	docker build -t vitexsoftware/multi-flexibee-setup:$(nextversion) .
 	dch -v $(nextversion) `git log -1 --pretty=%B | head -n 1`
 	debuild -i -us -uc -b
 	git commit -a -m "Release v$(nextversion)"
