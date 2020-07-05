@@ -8,7 +8,7 @@ Homepage: https://github.com/VitexSoftware/MultiFlexiBeeSetup
 
 Package: multi-flexibee-setup
 Multi-Arch: foreign
-Depends: ${misc:Depends}, php-flexibee-bricks, php-cli, locales-all, php-robmorgan-phinx, php-ease-bootstrap4-widgets-flexibee,php-ease-fluentpdo, php-flexibee-bricks, multi-flexibee-setup-sqlite|multi-flexibee-setup-mysql|multi-flexibee-setup-pgsql
+Depends: ${misc:Depends}, php-flexibee-bricks, php-cli, locales-all, php-robmorgan-phinx, php-ease-bootstrap4-widgets-flexibee,php-ease-fluentpdo, php-flexibee-bricks, multi-flexibee-setup-sqlite|multi-flexibee-setup-mysql|multi-flexibee-setup-pgsql, libjs-jquery-datatables
 Suggests: flexibee-server,php-flexibee-config, flexibee-digest, flexibee-matcher, flexibee-reminder, flexibee-contract-invoices
 Architecture: all
 Description: run several tools on defined flexibee servers

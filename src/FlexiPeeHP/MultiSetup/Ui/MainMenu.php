@@ -90,12 +90,15 @@ class MainMenu extends \Ease\Html\DivTag {
             }
 
 
+
             if (empty($apps)) {
                 \FlexiPeeHP\MultiSetup\User::singleton()->addStatusMessage(_('No application registered yet. Please register one.'), 'warning');
                 $nav->addMenuItem(new \Ease\TWB4\LinkButton('app.php', '<img width=30 src=images/apps.svg> ' . _('Applications'), 'warning'), 'right');
             } else {
                 $this->appsMenuEnabled($nav, $apps);
             }
+
+            $nav->addMenuItem(new \Ease\Html\ATag('logs.php', '<img height=30 src=images/log.svg> ' . _('Logs')), 'right');
             $nav->addMenuItem(new \Ease\Html\ATag('logout.php', '<img height=30 src=images/application-exit.svg> ' . _('Sign Off')), 'right');
         }
     }
@@ -160,7 +163,7 @@ class MainMenu extends \Ease\Html\DivTag {
      */
     public function finalize() {
 
-        if (!empty(\Ease\Shared::singleton()->getStatusMessages())) {
+        if (!empty(\Ease\Shared::logger()->getMessages())) {
 
             WebPage::singleton()->addCss('
 #smdrag { height: 8px; 
@@ -176,7 +179,7 @@ class MainMenu extends \Ease\Html\DivTag {
 
             $this->addItem(WebPage::singleton()->getStatusMessagesBlock(['id' => 'status-messages', 'title' => _('Click to hide messages')]));
             $this->addItem(new \Ease\Html\DivTag(null, ['id' => 'smdrag', 'style' => 'margin-bottom: 5px']));
-            \Ease\Shared::singleton()->cleanMessages();
+            \Ease\Shared::logger()->cleanMessages();
             WebPage::singleton()->addCss('.dropdown-menu { overflow-y: auto } ');
             WebPage::singleton()->addJavaScript("$('.dropdown-menu').css('max-height',$(window).height()-100);",
                     null, true);

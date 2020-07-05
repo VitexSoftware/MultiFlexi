@@ -13,3 +13,6 @@ debian/conf/multi-flexibee-setup.conf     etc/apache2/sites-available
 debian/conf/multi-flexibee-setup.service  etc/avahi/services
 bin/*					  usr/bin
 lib/*					  usr/lib/multi-flexibee-setup
+debian/cz.vitexsoftware.multi_flexibee_setup.metainfo.xml    usr/share/metainfo/
+debian/cz.vitexsoftware.multi_flexibee_setup.desktop         usr/share/applications/
+multi-flexibee-setup.svg                  usr/share/icons/hicolor/scalable/apps/

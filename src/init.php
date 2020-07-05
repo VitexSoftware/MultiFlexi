@@ -10,6 +10,7 @@
 namespace FlexiPeeHP\MultiSetup;
 
 use Dotenv\Dotenv;
+use Ease\Shared;
 use FlexiPeeHP\MultiSetup\Ui\WebPage;
 
 require_once '../vendor/autoload.php';
@@ -20,5 +21,7 @@ $dotenv->load();
 
 session_start();
 
-$oUser = \Ease\Shared::user(null, 'FlexiPeeHP\MultiSetup\User');
+define('EASE_LOGGER', 'syslog|\FlexiPeeHP\MultiSetup\LogToSQL');
+
+$oUser = Shared::user(null, 'FlexiPeeHP\MultiSetup\User');
 $oPage = new WebPage();

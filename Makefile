@@ -2,7 +2,7 @@ repoversion=$(shell LANG=C aptitude show multi-flexibee-setup | grep Version: | 
 nextversion=$(shell echo $(repoversion) | perl -ne 'chomp; print join(".", splice(@{[split/\./,$$_]}, 0, -1), map {++$$_} pop @{[split/\./,$$_]}), "\n";')
 
 clean:
-	rm -rf vendor composer.lock db/multiflexibee.sqlite
+	rm -rf vendor composer.lock db/multiflexibee.sqlite src/*/*dataTables*
 
 migration: autoload
 	cd src ; ../vendor/bin/phinx migrate -c ../phinx-adapter.php ; cd ..
@@ -27,6 +27,16 @@ dbreset:
 
 demo: dbreset migration demodata
 
+hourly:
+	cd lib; php -f executor.php h
+daily:
+	cd lib; php -f executor.php d
+monthly:
+	cd lib; php -f executor.php m
+
+postinst:
+	DEBCONF_DEBUG=developer /usr/share/debconf/frontend /var/lib/dpkg/info/multi-flexibee-setup.postinst configure $(nextversion)
+
 redeb:
 	 sudo apt -y purge multi-flexibee-setup; rm ../multi-flexibee-setup_*_all.deb ; debuild -us -uc ; sudo gdebi  -n ../multi-flexibee-setup_*_all.deb ; sudo apache2ctl restart
 
@@ -48,7 +58,7 @@ vagrant:
 
 release:
 	echo Release v$(nextversion)
-	docker build -t vitexsoftware/multi-flexibee-setup:$(nextversion) .
+	docker build -t vitexsoftware/multi-flexibee-setup: .
 	dch -v $(nextversion) `git log -1 --pretty=%B | head -n 1`
 	debuild -i -us -uc -b
 	git commit -a -m "Release v$(nextversion)"

@@ -186,6 +186,16 @@ class User extends \Ease\User {
     }
 
     /**
+     * Set logging
+     * 
+     * @return boolean
+     */
+    public function loginSuccess() {
+        LogToSQL::singleton()->setUser($this->getUserID());
+        return parent::loginSuccess();
+    }
+
+    /**
      * Zašifruje heslo.
      *
      * @param string $plainTextPassword nešifrované heslo (plaintext)
@@ -211,7 +221,7 @@ class User extends \Ease\User {
      * @return string password hash
      */
     public function passwordChange($newPassword) {
-        return $this->dbsync([$this->passwordColumn => $this->encryptPassword($newPassword) , $this->getKeyColumn() => $this->getUserID()]);
+        return $this->dbsync([$this->passwordColumn => $this->encryptPassword($newPassword), $this->getKeyColumn() => $this->getUserID()]);
     }
 
     /**

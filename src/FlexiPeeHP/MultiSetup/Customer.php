@@ -1,5 +1,6 @@
 <?php
 namespace FlexiPeeHP\MultiSetup;
+
 /**
  * Multi FlexiBee Setup - Customer Management Class
  *

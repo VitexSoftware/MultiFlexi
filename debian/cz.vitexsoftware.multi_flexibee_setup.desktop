@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+
+Name=Multi FlexiBee setup
+Comment=several accounting tools launcher
+Categories=Office;Finance;
+
+Icon=multi-flexibee-setup
+Exec=sensible-browser http://localhost/multi-flexibee-setup/
+Terminal=false
+

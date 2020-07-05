@@ -42,12 +42,6 @@ class PageBottom extends \Ease\Html\FooterTag {
 
         $footrow->addColumn(4, [$author]);
 
-
-        if (\Ease\Shared::instanced()->getConfigValue('FLEXIBEE_URL')) {
-            $footrow->addColumn(6);
-            $footrow->addColumn(4, [new \FlexiPeeHP\ui\FlexiBeeLogo(), '&nbsp;', new \FlexiPeeHP\ui\TWB4\StatusInfoBox()], 'right');
-        }
-
         $this->addItem(new \Ease\TWB4\Container($footrow));
     }
 

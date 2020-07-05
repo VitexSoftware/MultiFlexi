@@ -16,17 +16,18 @@ if (file_exists('./vendor/autoload.php')) {
 $dotenv = \Dotenv\Dotenv::create(__DIR__);
 $dotenv->load();
 
+$prefix = file_exists('./db/') ? './db/' : '../db/';
+
+$sqlOptions = [];
 
 if (strstr(getenv('DB_CONNECTION'), 'sqlite')) {
-    $engine = new \Ease\SQL\Engine(null, ['database' => '../db/' . basename(getenv('DB_DATABASE'))]);
-} else {
-    $engine = new \Ease\SQL\Engine(null);
+    $sqlOptions['database'] = $prefix . basename(getenv('DB_DATABASE'));
 }
-
+$engine = new \Ease\SQL\Engine(null,$sqlOptions);
 $cfg = [
     'paths' => [
-        'migrations' => ['../db/migrations'],
-        'seeds' => ['../db/seeds']
+        'migrations' => [$prefix . 'migrations'],
+        'seeds' => [$prefix . 'seeds']
     ],
     'environments' =>
     [
@@ -34,13 +35,13 @@ $cfg = [
         'development' => [
             'adapter' => getenv('DB_CONNECTION'),
             'name' => $engine->database,
-            'connection' => $engine->getPdo()
+            'connection' => $engine->getPdo($sqlOptions)
         ],
         'default_database' => 'production',
         'production' => [
             'adapter' => getenv('DB_CONNECTION'),
             'name' => $engine->database,
-            'connection' => $engine->getPdo()
+            'connection' => $engine->getPdo($sqlOptions)
         ],
     ]
 ];
