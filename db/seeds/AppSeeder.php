@@ -72,6 +72,7 @@ class AppSeeder extends AbstractSeed {
                 'nazev' => _('Recieved invoices Matcher'),
                 'popis' => _('Match recieved invoices with outcoming payments'),
                 'executable' => 'flexibee-matcher-in',
+                'setup' => 'flexibee-matcher-init',
                 'DatCreate' => date('Y-m-d H:i:s')
             ],
             [
