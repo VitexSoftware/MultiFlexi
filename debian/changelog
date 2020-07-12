@@ -1,4 +1,4 @@
-multi-flexibee-setup (0.3.9) UNRELEASED; urgency=medium
+multi-flexibee-setup (0.3.10) UNRELEASED; urgency=medium
 
   * Ability choose run interval between hour and year
   * Debian package
@@ -13,8 +13,9 @@ multi-flexibee-setup (0.3.9) UNRELEASED; urgency=medium
   * Release v0.3.6
   * Support for Boolean config values
   * Show logs in datatable
+  * Add Setup commands for reminder & matcher
 
- -- CyberVitexus <vitex@exiv.jinonice.czf>  Sun, 05 Jul 2020 12:33:22 +0200
+ -- CyberVitexus <vitex@exiv.jinonice.czf>  Mon, 13 Jul 2020 00:15:11 +0200
 
 multi-flexibee-setup (0.1) experimental; urgency=medium
 

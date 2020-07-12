@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi FlexiBee Setup - Customer instance editor.
  *
@@ -20,14 +21,14 @@ $oPage->onlyForLogged();
 
 $oPage->addItem(new PageTop(_('Customer')));
 
-$customers    = new Customer($oPage->getRequestValue('id', 'int'));
+$customers = new Customer($oPage->getRequestValue('id', 'int'));
 $instanceName = $customers->getRecordName();
 
 if ($oPage->isPosted()) {
     if ($customers->takeData($_POST) && !is_null($customers->saveToSQL())) {
         $customers->addStatusMessage(_('Customer Saved'), 'success');
 //        $customers->prepareRemoteFlexiBee();
-        $oPage->redirect('?id='.$customers->getMyKey());
+        $oPage->redirect('?id=' . $customers->getMyKey());
     } else {
         $customers->addStatusMessage(_('Error saving Customer'), 'error');
     }
@@ -35,7 +36,7 @@ if ($oPage->isPosted()) {
 
 if (strlen($instanceName)) {
     $instanceLink = new ATag($customers->getLink(),
-        $customers->getLink());
+            $customers->getLink());
 } else {
     $instanceName = _('New Customer');
     $instanceLink = null;
@@ -43,10 +44,11 @@ if (strlen($instanceName)) {
 
 $instanceRow = new Row();
 $instanceRow->addColumn(8, new RegisterCustomerForm($customers));
+$instanceRow->addColumn(2, new \Ease\Html\ImgTag(\Ease\User::getGravatar($customers->getDataValue('email'), 400, 'mm', 'g'),'Gravatar',['class'=>'img-fluid'])  );
 //$instanceRow->addColumn(4, new ui\FlexiBeeInstanceStatus($customers));
 
 $oPage->container->addItem(new Panel($instanceName, 'info',
-        $instanceRow, $instanceLink));
+                $instanceRow, $instanceLink));
 
 $oPage->addItem(new PageBottom());
 

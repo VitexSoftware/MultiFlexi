@@ -40,7 +40,7 @@ class PageBottom extends \Ease\Html\FooterTag {
 
         $author = 'Multi FlexiBee Setup v.: ' . $appInfo->version . '&nbsp;&nbsp; &copy; 2020 <a href="http://vitexsoftware.cz/">Vitex Software</a>';
 
-        $footrow->addColumn(4, [$author]);
+        $footrow->addColumn(6, [$author]);
 
         $this->addItem(new \Ease\TWB4\Container($footrow));
     }

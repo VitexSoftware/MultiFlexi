@@ -14,7 +14,7 @@ namespace FlexiPeeHP\MultiSetup\Ui;
  *
  * @author 
  */
-class RegisterCustomerForm extends ColumnsForm {
+class RegisterCustomerForm extends EngineForm {
 
     public function finalize() {
         $this->addInput(new \Ease\Html\InputTextTag('firstname'),

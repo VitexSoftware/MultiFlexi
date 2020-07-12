@@ -16,25 +16,23 @@ class CompanySeeder extends AbstractSeed {
 
         $data = [
             [
-                'id' => 0,
                 'enabled' => true,
                 'flexibee' => 0,
                 'nazev' => 'Demo Firma',
                 'ic' => '12345678',
                 'company' => 'demo',
-                'rw' => 'true',
+                'rw' => true,
                 'setup' => false,
                 'webhook' => false,
                 'DatCreate' => date('Y-m-d H:i:s')
             ],
             [
-                'id' => 1,
                 'enabled' => true,
                 'flexibee' => 0,
                 'nazev' => 'Ja Zivnostnik',
                 'ic' => '87654321',
                 'company' => 'demo_de',
-                'rw' => 'true',
+                'rw' => true,
                 'setup' => false,
                 'webhook' => false,
                 'DatCreate' => date('Y-m-d H:i:s')

@@ -61,15 +61,17 @@ if ($interval) {
                 $app = new Application(intval($servData['app_id']));
                 LogToSQL::singleton()->setApplication($app->getMyKey());
 
+                $cmdparams = $app->getDataValue('cmdparams');
                 foreach ($customConfig->getColumnsFromSQL(['key', 'value'], ['company_id' => $company['company_id'], 'app_id' => $app->getMyKey()]) as $cfgRaw) {
                     $companer->addStatusMessage(sprintf(_('Setting Environment %s to %s'), $cfgRaw['key'], $cfgRaw['value']), 'debug');
                     putenv($cfgRaw['key'] . '=' . $cfgRaw['value']);
+                    $cmdparams = str_replace('{' . $cfgRaw['key'] . '}', $cfgRaw['value'], $cmdparams);
                 }
 
                 $exec = $app->getDataValue('executable');
-                $companer->addStatusMessage('begin' . $exec . '@' . $company['nazev']);
+                $companer->addStatusMessage('begin' . $exec . ' ' . $cmdparams . '@' . $company['nazev']);
 
-                foreach (explode("\n", shell_exec($exec)) as $row) {
+                foreach (explode("\n", shell_exec($exec . ' ' . $cmdparams)) as $row) {
                     $companer->addStatusMessage($row, 'debug');
                 }
 

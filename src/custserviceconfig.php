@@ -1,4 +1,5 @@
 <?php
+
 namespace FlexiPeeHP\MultiSetup\Ui;
 
 use Ease\Html\H1Tag;
@@ -14,8 +15,6 @@ use FlexiPeeHP\MultiSetup\Ui\WebPage;
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
  */
-
-
 require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('App custom config Fields')));

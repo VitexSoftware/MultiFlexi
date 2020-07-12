@@ -19,7 +19,7 @@ class ConfiguredFieldBadges extends ConfigFieldsBadges {
         $conffield = new \FlexiPeeHP\MultiSetup\Conffield();
         $appFields = $conffield->appConfigs($appID);
         $configs = new \FlexiPeeHP\MultiSetup\Configuration();
-        $appConfigs = $configs->getColumnsFromSQL(['key', 'value'], ['app_id' => $appID], 'key', 'key');
+        $appConfigs = $configs->getColumnsFromSQL(['key', 'value'], ['app_id' => $appID]);
 
         if (!empty($appFields)) {
             foreach ($appFields as $key => $fieldInfo) {

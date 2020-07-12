@@ -1,9 +1,10 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Multi FlexiBee Setup - Configuration Flield Class
+ *
+ * @author Vítězslav Dvořák <info@vitexsoftware.cz>
+ * @copyright  2018-2020 Vitex Software
  */
 
 namespace FlexiPeeHP\MultiSetup;

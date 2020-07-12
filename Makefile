@@ -4,7 +4,7 @@ nextversion=$(shell echo $(repoversion) | perl -ne 'chomp; print join(".", splic
 clean:
 	rm -rf vendor composer.lock db/multiflexibee.sqlite src/*/*dataTables*
 
-migration: autoload
+migration:
 	cd src ; ../vendor/bin/phinx migrate -c ../phinx-adapter.php ; cd ..
 
 autoload:

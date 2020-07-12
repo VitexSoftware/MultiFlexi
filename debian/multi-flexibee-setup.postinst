@@ -6,6 +6,7 @@ set -e
 
 db_get composer/WEB_USER
 WEBUSER=$RET
+mkdir -p /var/lib/multi-flexibee-setup /var/lib/composer
 chown $WEBUSER /var/lib/multi-flexibee-setup /var/lib/composer -R
 echo '{}' > /usr/lib/multi-flexibee-setup/composer.lock
 chown $WEBUSER /usr/lib/multi-flexibee-setup/composer.lock

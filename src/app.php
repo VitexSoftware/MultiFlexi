@@ -47,6 +47,9 @@ if (strlen($instanceName)) {
 $instanceRow = new Row();
 $instanceRow->addColumn(8, new RegisterAppForm($apps));
 
+$instanceRow->addColumn(4, new \Ease\Html\ImgTag(empty($apps->getDataValue('image')) ? 'images/apps.svg' : $apps->getDataValue('image'),'Logo',['class'=>'img-fluid']));
+
+
 $oPage->container->addItem(new Panel($instanceName, 'info',
                 $instanceRow,
                 is_null($apps->getMyKey()) ?

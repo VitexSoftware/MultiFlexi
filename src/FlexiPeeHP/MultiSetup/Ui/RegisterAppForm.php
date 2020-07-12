@@ -19,17 +19,17 @@ use Ease\TWB4\Widgets\Toggle;
  *
  * @author vitex
  */
-class RegisterAppForm extends ColumnsForm {
+class RegisterAppForm extends EngineForm {
 
     function afterAdd() {
         $this->setTagProperty('enctype', 'multipart/form-data');
         $this->addInput(new InputTextTag('nazev'), _('Application name'));
         $this->addInput(new InputTextTag('popis'), _('Application Description'));
         $this->addInput(new InputTextTag('executable'), _('Path to binary'));
-        $this->addInput(new InputTextTag('setup'), _('Command'),'', _('Command used to setup new company for use with command'));
+        $this->addInput(new InputTextTag('setup'), _('Command'), '', _('Command used to setup new company for use with command'));
+        $this->addInput(new InputTextTag('cmdparams'), _('Command arguments'), '', _('you can use macros like {FLEXIBEE_URL} or custom defined config fields.'));
 
         $imgInput = $this->addInput(new InputFileTag('imageraw'), _('Application Icon'));
-        $imgInput->addItem(new \Ease\Html\ImgTag($this->engine->getDataValue('image')));
 
         $this->addInput(new Toggle('enabled', $this->engine->getDataValue('enabled') == 1), _('Enabled'));
 

@@ -54,7 +54,7 @@ class AppsMenu extends MainPageMenu {
             $properties['class'] = 'text-white bg-warning mb-3';
         }
         if ($statusFound != boolval($status)) {
-            $this->apper->updateToSQL(['id' => $id, 'enabled' => $statusFound]);
+            $this->apper->updateToSQL(['id' => $id, 'enabled' => ($statusFound ? 1 : 0) ]);
             $this->apper->addStatusMessage(sprintf(_('Updating availbility status of application %s to %s'), $nazev, $statusFound ? _('enabled') : _('disabled')), 'warning');
         }
         $this->addMenuItem($nazev, 'app.php?id=' . $id, $image, $popis, _('Configure'), $properties);
