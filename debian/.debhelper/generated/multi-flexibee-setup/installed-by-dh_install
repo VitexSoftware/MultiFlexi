@@ -46,6 +46,7 @@
 ./db/migrations/20200704143315_logger.php
 ./db/migrations/20200710133202_commandline_params.php
 ./db/migrations/20200712203245_default_option.php
+./db/migrations/20200713143202_app_interval_to_interv.php
 ./db/seeds/AppSeeder.php
 ./db/seeds/CompanySeeder.php
 ./db/seeds/CustomerSeeder.php
