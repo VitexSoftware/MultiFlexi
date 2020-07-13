@@ -1,5 +1,5 @@
-Multi Flexi BeeSetup
-====================
+Multi Flexi Bee Setup
+=====================
 
 ![MFB](src/images/project-logo.svg?raw=true)
 
@@ -15,6 +15,7 @@ Spouštěným skriptům jsou nastavoavány tyto proměnné prostředí:
  * **FLEXIBEE_PASSWORD**
  * **FLEXIBEE_COMPANY**
 
++ proměnné prostředí dle individuální konfigurace každého modulu pro každou firmu
 
 
 instalace
@@ -58,5 +59,4 @@ Jako plugin je možné použít jakýkoliv spustitelný skript nebo binárku. Ty
  * https://github.com/VitexSoftware/php-flexibee-matcher
  * https://github.com/VitexSoftware/php-flexibee-reminder
  * https://github.com/VitexSoftware/FlexiBee-Digest
-
- 
+ * https://github.com/Vitexus/ISDOC-via-IMAP-to-FlexiBee

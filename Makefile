@@ -64,4 +64,6 @@ release:
 	git commit -a -m "Release v$(nextversion)"
 	git tag -a $(nextversion) -m "version $(nextversion)"
 	docker push vitexsoftware/multi-flexibee-setup:$(nextversion)
+	docker push vitexsoftware/multi-flexibee-setup:latest
+
 
