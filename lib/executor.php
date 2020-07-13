@@ -33,7 +33,7 @@ if ($interval) {
     $ap2c = new AppToCompany();
     foreach ($companys as $company) {
         LogToSQL::singleton()->setCompany($company['company_id']);
-        $appsForCompany = $ap2c->getColumnsFromSQL(['*'], ['company_id' => $company['company_id'], 'interval' => $interval]);
+        $appsForCompany = $ap2c->getColumnsFromSQL(['*'], ['company_id' => $company['company_id'], 'interv' => $interval]);
 
         if (empty($appsForCompany)) {
             $companer->addStatusMessage(sprintf(_('No applications enabled for %s'), $company['nazev']), 'warning');
@@ -54,7 +54,7 @@ if ($interval) {
             }
 
             foreach ($appsForCompany as $servData) {
-                if (!is_null($interval) && ($interval != $servData['interval'])) {
+                if (!is_null($interval) && ($interval != $servData['interv'])) {
                     continue;
                 }
 

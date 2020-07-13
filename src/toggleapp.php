@@ -23,7 +23,7 @@ $result = false;
 
 if (!is_null($app_id) && !is_null($company_id)) {
     $switcher = new \FlexiPeeHP\MultiSetup\AppToCompany();
-    $switcher->setData(['app_id' => (int) $app_id, 'company_id' => (int) $company_id, 'interval' => $interval]);
+    $switcher->setData(['app_id' => (int) $app_id, 'company_id' => (int) $company_id, 'interv' => $interval]);
     if ($switcher->setState($state)) {
         $switcher->performInit();
         $result = 201;

@@ -38,7 +38,7 @@ class ServicesForCompanyForm extends Form {
         $apps = (new Application())->listingQuery()->where('enabled', 1)->fetchAll();
         $glue = new AppToCompany();
 
-        $assigned = $glue->getColumnsFromSQL(['app_id', 'interval'], ['company_id' => $companyID], 'id', 'app_id');
+        $assigned = $glue->getColumnsFromSQL(['app_id', 'interv'], ['company_id' => $companyID], 'id', 'app_id');
         parent::__construct($tagProperties);
 
         foreach ($apps as $appData) {

@@ -1,4 +1,5 @@
 <?php
+namespace FlexiPeeHP\MultiSetup\Ui;
 
 use Ease\TWB4\LinkButton;
 use FlexiPeeHP\MultiSetup\Ui\PageBottom;
@@ -10,8 +11,6 @@ use FlexiPeeHP\MultiSetup\Ui\PageTop;
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
  */
-
-namespace FlexiPeeHP\MultiSetup\Ui;
 
 require_once './init.php';
 

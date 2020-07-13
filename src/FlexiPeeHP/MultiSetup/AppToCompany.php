@@ -41,7 +41,7 @@ class AppToCompany extends Engine {
         if (is_null($data)) {
             $data = $this->getData();
         }
-        unset($data['interval']);
+        unset($data['interv']);
         return parent::deleteFromSQL($data);
     }
 
