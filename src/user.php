@@ -30,15 +30,15 @@ $oPage->addItem(new ui\PageTop(_('Uživatel')));
 switch ($oPage->getRequestValue('action')) {
     case 'delete':
 
-        $confirmBlock = new \Ease\TWB\Well();
+        $confirmBlock = new \Ease\TWB4\Well();
 
         $confirmBlock->addItem($user);
 
-        $confirmator = $confirmBlock->addItem(new \Ease\TWB\Panel(_('Opravdu smazat ?')), 'danger');
-        $confirmator->addItem(new \Ease\TWB\LinkButton('user.php?id=' . $user->getId(), _('Ne') . ' ' . \Ease\TWB\Part::glyphIcon('ok'), 'success'));
-        $confirmator->addItem(new \Ease\TWB\LinkButton('?delete=true&' . $user->keyColumn . '=' . $user->getID(), _('Ano') . ' ' . \Ease\TWB\Part::glyphIcon('remove'), 'danger'));
+        $confirmator = $confirmBlock->addItem(new \Ease\TWB4\Panel(_('Opravdu smazat ?')), 'danger');
+        $confirmator->addItem(new \Ease\TWB4\LinkButton('user.php?id=' . $user->getId(), _('Ne') . ' ' . \Ease\TWB4\Part::glyphIcon('ok'), 'success'));
+        $confirmator->addItem(new \Ease\TWB4\LinkButton('?delete=true&' . $user->keyColumn . '=' . $user->getID(), _('Ano') . ' ' . \Ease\TWB4\Part::glyphIcon('remove'), 'danger'));
 
-        $oPage->container->addItem(new \Ease\TWB\Panel('<strong>' . $user->getUserName() . '</strong>', 'info', $confirmBlock));
+        $oPage->container->addItem(new \Ease\TWB4\Panel('<strong>' . $user->getUserName() . '</strong>', 'info', $confirmBlock));
 
         break;
     default :
@@ -47,7 +47,7 @@ switch ($oPage->getRequestValue('action')) {
 //        $operationsMenu->setTagCss(['float' => 'right']);
 //        $operationsMenu->dropdown->addTagClass('pull-right');
 
-        $oPage->container->addItem(new \Ease\TWB\Panel(['<strong>' . $user->getUserName() . '</strong>', /* $operationsMenu */], 'info', new UserForm($user)));
+        $oPage->container->addItem(new \Ease\TWB4\Panel(['<strong>' . $user->getUserName() . '</strong>', /* $operationsMenu */], 'info', new UserForm($user)));
         break;
 }
 

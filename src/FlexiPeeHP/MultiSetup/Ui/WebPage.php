@@ -25,7 +25,9 @@ class WebPage extends \Ease\TWB4\WebPage {
     public function __construct($pageTitle = null) {
         parent::__construct($pageTitle);
         $this->container = $this->addItem(new \Ease\TWB4\Container());
-    }
 
+        $this->addCSS('
+');
+    }
 
 }

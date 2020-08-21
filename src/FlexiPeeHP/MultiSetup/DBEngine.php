@@ -653,10 +653,10 @@ class DBEngine extends \Ease\SQL\Engine {
                             $row[$key] = '<em>NULL</em>';
                         } else {
                             if ($value === '0') {
-                                $row[$key] = new \Ease\TWB\GlyphIcon('unchecked');
+                                $row[$key] = new \Ease\TWB4\GlyphIcon('unchecked');
                             } else {
                                 if ($value === '1') {
-                                    $row[$key] = new \Ease\TWB\GlyphIcon('check');
+                                    $row[$key] = new \Ease\TWB4\GlyphIcon('check');
                                 }
                             }
                         }

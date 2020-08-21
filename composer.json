@@ -4,12 +4,12 @@
     "version": "0.3",
     "type": "project",
     "require": {
-        "vitexsoftware/ease-twbootstrap4-widgets-flexibee": "dev-master",
-        "vitexsoftware/ease-fluentpdo": "dev-master",
+        "vitexsoftware/ease-twbootstrap4-widgets-flexibee": "*",
+        "vitexsoftware/ease-fluentpdo": "*",
         "vlucas/phpdotenv": "^3",
-        "vitexsoftware/ease-twbootstrap4-widgets": "dev-master",
-        "robmorgan/phinx": "dev-master",
-        "datatables/datatables": "dev-master"
+        "vitexsoftware/ease-twbootstrap4-widgets": "*",
+        "robmorgan/phinx": "*",
+        "datatables/datatables": "*"
     },
     "license": "MIT",
     "authors": [

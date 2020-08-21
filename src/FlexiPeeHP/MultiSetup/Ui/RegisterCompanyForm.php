@@ -22,7 +22,7 @@ use Ease\TWB4\Widgets\Toggle;
  *
  * @author 
  */
-class RegisterCompanyForm extends ColumnsForm {
+class RegisterCompanyForm extends EngineForm {
 
     public function afterAdd() {
         $this->addInput(new InputTextTag('nazev'), _('Company name'));
@@ -52,10 +52,6 @@ class RegisterCompanyForm extends ColumnsForm {
 
 
         $this->addInput(new Toggle('enabled'), _('Enabled'));
-
-        if (strlen($this->engine->getDataValue('logo'))) {
-            $this->addItem(new ImgTag($this->engine->getDataValue('logo'), 'logo', ['class' => 'img-fluid']));
-        }
 
         $this->addInput(new SubmitButton(_('Save'), 'success'));
 

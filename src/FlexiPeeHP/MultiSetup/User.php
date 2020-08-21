@@ -106,6 +106,10 @@ class User extends \Ease\User {
         }
     }
 
+    public function getRecordName() {
+        return $this->getUserName();
+    }
+    
     public function getEmail() {
         return $this->getDataValue('email');
     }

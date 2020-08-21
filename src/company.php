@@ -49,7 +49,13 @@ if (strlen($instanceName)) {
 
 $instanceRow = new Row();
 $instanceRow->addColumn(8, new RegisterCompanyForm($companies, null, ['target' => 'company.php']));
+
 //$instanceRow->addColumn(4, new ui\FlexiBeeInstanceStatus($companies));
+
+if (strlen($companies->getDataValue('logo'))) {
+    $instanceRow->addColumn(4, new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']));
+}
+
 
 $bottomLine = new Row();
 $bottomLine->addColumn(8, $instanceLink);

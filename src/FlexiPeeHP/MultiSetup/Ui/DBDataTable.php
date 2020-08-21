@@ -105,23 +105,23 @@ class DBDataTable extends \Ease\Html\TableTag {
 //
 //        $this->includeJavaScript('assets/Responsive-2.2.2/js/dataTables.responsive.min.js');
 //        $this->includeJavaScript('assets/Responsive-2.2.2/js/responsive.bootstrap.min.js');
-//        $this->includeJavaScript('js/selectize.min.js');
-//        $this->includeCss('css/selectize.css');
-//        $this->includeCss('css/selectize.bootstrap4.css');
+        $this->includeJavaScript('js/selectize.min.js');
+        $this->includeCss('css/selectize.css');
+        $this->includeCss('css/selectize.bootstrap4.css');
 
 
         $this->setTagClass('table table-bordered');
 
-//        $this->includeJavaScript('assets/Buttons-1.5.6/js/dataTables.buttons.js');
-//        $this->includeJavaScript('assets/Buttons-1.5.6/js/buttons.bootstrap.min.js');
-//        $this->includeCss('assets/Buttons-1.5.6/css/buttons.bootstrap.min.css');
+        $this->includeJavaScript('assets/Buttons-1.5.6/js/dataTables.buttons.js');
+        $this->includeJavaScript('assets/Buttons-1.5.6/js/buttons.bootstrap.min.js');
+        $this->includeCss('assets/Buttons-1.5.6/css/buttons.bootstrap.min.css');
 //
 //        $this->includeJavaScript('assets/JSZip-2.5.0/jszip.min.js');
 //        $this->includeJavaScript('assets/pdfmake-0.1.36/pdfmake.min.js');
 //        $this->includeJavaScript('assets/pdfmake-0.1.36/vfs_fonts.js');
-//        $this->includeJavaScript('assets/Buttons-1.5.6/js/buttons.html5.min.js');
-//        $this->includeJavaScript('assets/Buttons-1.5.6/js/buttons.print.min.js');
-//        $this->includeJavaScript('assets/Buttons-1.5.6/js/buttons.colVis.min.js');
+        $this->includeJavaScript('assets/Buttons-1.5.6/js/buttons.html5.min.js');
+        $this->includeJavaScript('assets/Buttons-1.5.6/js/buttons.print.min.js');
+        $this->includeJavaScript('assets/Buttons-1.5.6/js/buttons.colVis.min.js');
 //        $this->includeCss('assets/RowGroup-1.1.0/css/rowGroup.bootstrap.min.css');
 //        $this->includeJavaScript('assets/RowGroup-1.1.0/js/rowGroup.bootstrap.min.js');
 //        $this->includeJavaScript('assets/RowGroup-1.1.0/js/dataTables.rowGroup.min.js');
@@ -165,7 +165,7 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
             $this->addButton($button);
         }
 
-        //      $this->includeJavaScript('js/advancedfilter.js');
+        $this->includeJavaScript('js/advancedfilter.js');
     }
 
     /**
@@ -244,7 +244,7 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
 
     public function finalize() {
         $this->addRowHeaderColumns(self::columnsToHeader($this->columns));
-//        $this->addItem(new FilterDialog($this->getTagID(), $this->columns));
+        $this->addItem(new FilterDialog($this->getTagID(), $this->columns));
         $this->addJavascript($this->javaScript($this->columns));
         if ($this->showFooter) {
             $this->addFooter();
