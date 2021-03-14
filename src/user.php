@@ -7,7 +7,7 @@
  * @copyright  2020 Vitex Software
  */
 
-namespace FlexiPeeHP\MultiSetup\Ui;
+namespace AbraFlexi\MultiSetup\Ui;
 
 $oPage->onlyForLogged();
 

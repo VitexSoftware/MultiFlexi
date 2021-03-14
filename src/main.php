@@ -1,10 +1,10 @@
 <?php
 
 
-use FlexiPeeHP\MultiSetup\Ui\AppsMenu;
-use FlexiPeeHP\MultiSetup\Ui\DbStatus;
-use FlexiPeeHP\MultiSetup\Ui\PageBottom;
-use FlexiPeeHP\MultiSetup\Ui\PageTop;
+use AbraFlexi\MultiSetup\Ui\AppsMenu;
+use AbraFlexi\MultiSetup\Ui\DbStatus;
+use AbraFlexi\MultiSetup\Ui\PageBottom;
+use AbraFlexi\MultiSetup\Ui\PageTop;
 
 /**
  * Multi FlexiBee Setup - Index page.
@@ -13,7 +13,7 @@ use FlexiPeeHP\MultiSetup\Ui\PageTop;
  * @copyright  2020 Vitex Software
  */
 
-namespace FlexiPeeHP\MultiSetup\Ui;
+namespace AbraFlexi\MultiSetup\Ui;
 
 require_once './init.php';
 

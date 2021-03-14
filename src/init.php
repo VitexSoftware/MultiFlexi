@@ -7,21 +7,18 @@
  * @copyright  2020 Vitex Software
  */
 
-namespace FlexiPeeHP\MultiSetup;
+namespace AbraFlexi\MultiSetup;
 
-use Dotenv\Dotenv;
 use Ease\Shared;
-use FlexiPeeHP\MultiSetup\Ui\WebPage;
+use AbraFlexi\MultiSetup\Ui\WebPage;
 
 require_once '../vendor/autoload.php';
 
-//$dotenv = Dotenv::createImmutable(dirname(__DIR__));
-$dotenv = Dotenv::create(dirname(__DIR__));
-$dotenv->load();
-
 session_start();
 
-define('EASE_LOGGER', 'syslog|\FlexiPeeHP\MultiSetup\LogToSQL');
+\Ease\Shared::singleton()->loadConfig(dirname(__DIR__) . '/.env', true);
 
-$oUser = Shared::user(null, 'FlexiPeeHP\MultiSetup\User');
+define('EASE_LOGGER', 'syslog|\AbraFlexi\MultiSetup\LogToSQL');
+
+$oUser = Shared::user(null, 'AbraFlexi\MultiSetup\User');
 $oPage = new WebPage();

@@ -1,17 +1,17 @@
 <?php
-namespace FlexiPeeHP\MultiSetup\Ui;
+
+namespace AbraFlexi\MultiSetup\Ui;
 
 use Ease\TWB4\LinkButton;
-use FlexiPeeHP\MultiSetup\Ui\PageBottom;
-use FlexiPeeHP\MultiSetup\Ui\PageTop;
+use AbraFlexi\MultiSetup\Ui\PageBottom;
+use AbraFlexi\MultiSetup\Ui\PageTop;
 
 /**
  * Multi FlexiBee Setup - Index page.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * @copyright  2020-2021 Vitex Software
  */
-
 require_once './init.php';
 
 $oPage->addItem(new PageTop(_('Multi FlexiBee Setup')));

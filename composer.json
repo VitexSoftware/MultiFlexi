@@ -6,7 +6,6 @@
     "require": {
         "vitexsoftware/ease-twbootstrap4-widgets-flexibee": "*",
         "vitexsoftware/ease-fluentpdo": "*",
-        "vlucas/phpdotenv": "^3",
         "vitexsoftware/ease-twbootstrap4-widgets": "*",
         "robmorgan/phinx": "*",
         "datatables/datatables": "*"
@@ -21,14 +20,14 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "FlexiPeeHP\\MultiSetup\\": "src/FlexiPeeHP/MultiSetup/",
-            "FlexiPeeHP\\MultiSetup\\Ui\\": "src/FlexiPeeHP/MultiSetup/Ui"
+            "AbraFlexi\\MultiSetup\\": "src/AbraFlexi/MultiSetup/",
+            "AbraFlexi\\MultiSetup\\Ui\\": "src/AbraFlexi/MultiSetup/Ui"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Test\\FlexiPeeHP\\": "vendor/spoje.net/flexibee/testing/src/FlexiPeeHP/",
-            "Test\\FlexiPeeHP\\MultiSetup\\": "tests/FlexiPeeHP/MultiSetup/"
+            "Test\\AbraFlexi\\": "vendor/spoje.net/flexibee/testing/src/AbraFlexi/",
+            "Test\\AbraFlexi\\MultiSetup\\": "tests/AbraFlexi/MultiSetup/"
         }
     },
     "require-dev": {

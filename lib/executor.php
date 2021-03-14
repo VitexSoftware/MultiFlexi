@@ -7,12 +7,12 @@
  * @copyright  2020 Vitex Software
  */
 
-namespace FlexiPeeHP\MultiSetup;
+namespace AbraFlexi\MultiSetup;
 
 use Dotenv\Dotenv;
-use FlexiPeeHP\MultiSetup\Application;
-use FlexiPeeHP\MultiSetup\Company;
-use FlexiPeeHP\MultiSetup\Configuration;
+use AbraFlexi\MultiSetup\Application;
+use AbraFlexi\MultiSetup\Company;
+use AbraFlexi\MultiSetup\Configuration;
 
 require_once '../vendor/autoload.php';
 
@@ -20,8 +20,8 @@ require_once '../vendor/autoload.php';
 $dotenv = Dotenv::create(dirname(__DIR__));
 $dotenv->load();
 
-define('EASE_LOGGER', 'syslog|\FlexiPeeHP\MultiSetup\LogToSQL');
-//Sdefine('EASE_LOGGER', '\FlexiPeeHP\MultiSetup\LogToSQL');
+define('EASE_LOGGER', 'syslog|\AbraFlexi\MultiSetup\LogToSQL');
+//Sdefine('EASE_LOGGER', '\AbraFlexi\MultiSetup\LogToSQL');
 
 $companer = new Company();
 $companys = $companer->listingQuery()->select('flexibees.*')->select('company.id AS company_id')->leftJoin('flexibees ON flexibees.id = company.flexibee');

@@ -1,13 +1,13 @@
 <?php
 
-namespace FlexiPeeHP\MultiSetup\Ui;
+namespace AbraFlexi\MultiSetup\Ui;
 
 use Ease\Html\H1Tag;
-use FlexiPeeHP\MultiSetup\Configuration;
-use FlexiPeeHP\MultiSetup\Ui\CustomAppConfigForm;
-use FlexiPeeHP\MultiSetup\Ui\PageBottom;
-use FlexiPeeHP\MultiSetup\Ui\PageTop;
-use FlexiPeeHP\MultiSetup\Ui\WebPage;
+use AbraFlexi\MultiSetup\Configuration;
+use AbraFlexi\MultiSetup\Ui\CustomAppConfigForm;
+use AbraFlexi\MultiSetup\Ui\PageBottom;
+use AbraFlexi\MultiSetup\Ui\PageTop;
+use AbraFlexi\MultiSetup\Ui\WebPage;
 
 /**
  * Multi FlexiBee Setup - Config fields editor.

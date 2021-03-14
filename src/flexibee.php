@@ -7,12 +7,12 @@
  * @copyright  2020 Vitex Software
  */
 
-namespace FlexiPeeHP\MultiSetup\Ui;
+namespace AbraFlexi\MultiSetup\Ui;
 
 use Ease\Html\ATag;
 use Ease\TWB4\Panel;
 use Ease\TWB4\Row;
-use FlexiPeeHP\MultiSetup\FlexiBees;
+use AbraFlexi\MultiSetup\FlexiBees;
 
 require_once './init.php';
 $oPage->onlyForLogged();

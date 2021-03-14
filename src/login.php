@@ -7,7 +7,7 @@
  * @copyright  2020 Vitex Software
  */
 
-namespace FlexiPeeHP\MultiSetup\Ui;
+namespace AbraFlexi\MultiSetup\Ui;
 
 use Ease\Html\DivTag;
 use Ease\Html\ImgTag;
@@ -22,7 +22,7 @@ use Ease\TWB4\LinkButton;
 use Ease\TWB4\Panel;
 use Ease\TWB4\Row;
 use Ease\TWB4\SubmitButton;
-use FlexiPeeHP\MultiSetup\User;
+use AbraFlexi\MultiSetup\User;
 use PDOException;
 
 require_once './init.php';
@@ -31,11 +31,11 @@ $shared = Shared::singleton();
 
 $login = $oPage->getRequestValue('login');
 if ($login) {
-    try {
-        $oUser = Shared::user(new User());
-    } catch (PDOException $e) {
-        echo 'Caught exception: ', $e->getMessage(), "\n";
-    }
+//    try {
+//        $oUser = Shared::user(new User());
+//    } catch (PDOException $e) {
+//        echo 'Caught exception: ', $e->getMessage(), "\n";
+//    }
     if ($oUser->tryToLogin($_POST)) {
         $oPage->redirect('main.php');
         exit;

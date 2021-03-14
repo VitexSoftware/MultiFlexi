@@ -7,12 +7,12 @@
  * @copyright  2017-2020 Vitex Software
  */
 
-namespace FlexiPeeHP\MultiSetup\Ui;
+namespace AbraFlexi\MultiSetup\Ui;
 
 use Ease\Html\ATag;
 use Ease\TWB4\Panel;
 use Ease\TWB4\Row;
-use FlexiPeeHP\MultiSetup\Customer;
+use AbraFlexi\MultiSetup\Customer;
 
 require_once './init.php';
 
@@ -44,7 +44,7 @@ if (strlen($instanceName)) {
 
 $instanceRow = new Row();
 $instanceRow->addColumn(8, new RegisterCustomerForm($customers));
-$instanceRow->addColumn(2, new \Ease\Html\ImgTag(\Ease\User::getGravatar($customers->getDataValue('email'), 400, 'mm', 'g'),'Gravatar',['class'=>'img-fluid'])  );
+$instanceRow->addColumn(2, new \Ease\Html\ImgTag(\Ease\User::getGravatar(strval($customers->getDataValue('email')) , 400, 'mm', 'g'),'Gravatar',['class'=>'img-fluid'])  );
 //$instanceRow->addColumn(4, new ui\FlexiBeeInstanceStatus($customers));
 
 $oPage->container->addItem(new Panel($instanceName, 'info',
