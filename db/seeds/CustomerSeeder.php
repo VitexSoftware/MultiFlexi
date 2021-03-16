@@ -17,7 +17,7 @@ class CustomerSeeder extends AbstractSeed {
             [
                 'id' => 0,
                 'enabled' => true,
-                'email' => 'demo@flexibee.eu',
+                'email' => 'demo@abraflexi.eu',
                 'firstname' => 'Demo',
                 'lastname' => 'Demo',
                 'password' => '',

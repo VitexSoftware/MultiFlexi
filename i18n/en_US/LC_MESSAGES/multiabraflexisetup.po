@@ -1,0 +1,961 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: TaxTorro\n"
+"POT-Creation-Date: 2021-03-16 17:24+0100\n"
+"PO-Revision-Date: 2021-03-16 17:25+0100\n"
+"Last-Translator: Vítězslav Dvořák <info@vitexsoftware.cz>\n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: ../src\n"
+"X-Poedit-SearchPathExcluded-0: ../vendor\n"
+
+#: ../src/AbraFlexi/MultiSetup/AbraFlexis.php:56
+msgid "Instance name cannot be empty"
+msgstr "Instance name cannot be empty"
+
+#: ../src/AbraFlexi/MultiSetup/AbraFlexis.php:61
+msgid "AbraFlexi API URL cannot be empty"
+msgstr "AbraFlexi API URL cannot be empty"
+
+#: ../src/AbraFlexi/MultiSetup/AbraFlexis.php:66
+msgid "User name cannot be empty"
+msgstr "User name cannot be empty"
+
+#: ../src/AbraFlexi/MultiSetup/AbraFlexis.php:70
+msgid "API User password cannot be empty"
+msgstr "API User password cannot be empty"
+
+#: ../src/AbraFlexi/MultiSetup/AbraFlexis.php:75
+msgid "Company code cannot be empty"
+msgstr "Company code cannot be empty"
+
+#: ../src/AbraFlexi/MultiSetup/AbraFlexis.php:79
+msgid "AbraFlexi API URL cannot end with slash"
+msgstr "AbraFlexi API URL cannot end with slash"
+
+#: ../src/AbraFlexi/MultiSetup/Application.php:39
+msgid "Name is empty"
+msgstr "Name is empty"
+
+#: ../src/AbraFlexi/MultiSetup/Application.php:46
+#, php-format
+msgid "Executable %s does not exist in search PATH"
+msgstr "Executable %s does not exist in search PATH"
+
+#: ../src/AbraFlexi/MultiSetup/Application.php:50
+#, php-format
+msgid "Executable %s found as %s"
+msgstr "Executable %s found as %s"
+
+#: ../src/AbraFlexi/MultiSetup/Company.php:90
+#, php-format
+msgid "label %s created"
+msgstr "label %s created"
+
+#: ../src/AbraFlexi/MultiSetup/Company.php:110
+#, php-format
+msgid "Hook %s was registered"
+msgstr "Hook %s was registered"
+
+#: ../src/AbraFlexi/MultiSetup/Company.php:114
+#, php-format
+msgid "Hook %s not registered"
+msgstr "Hook %s not registered"
+
+#: ../src/AbraFlexi/MultiSetup/Company.php:135
+msgid "ChangesAPI was enabled"
+msgstr "ChangesAPI was enabled"
+
+#: ../src/AbraFlexi/MultiSetup/Company.php:142
+msgid "ChangesAPI was disabled"
+msgstr "ChangesAPI was disabled"
+
+#: ../src/AbraFlexi/MultiSetup/Company.php:279
+#, php-format
+msgid "Company with no ID"
+msgstr "Company with no ID"
+
+#: ../src/AbraFlexi/MultiSetup/Company.php:317
+#, php-format
+msgid "Company created"
+msgstr "Company created"
+
+#: ../src/AbraFlexi/MultiSetup/Configuration.php:78
+#: ../src/AbraFlexi/MultiSetup/Engine.php:40
+#, php-format
+msgid "Setting Environment %s to %s"
+msgstr "Setting Environment %s to %s"
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:153
+#, php-format
+msgid "New %s"
+msgstr "New %s"
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:154
+#, php-format
+msgid "Edit %s"
+msgstr "Edit %s"
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:155
+#, php-format
+msgid "Remove %s"
+msgstr "Remove %s"
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:156
+#, php-format
+msgid "Create new %s"
+msgstr "Create new %s"
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:157
+#, php-format
+msgid "Editing %s"
+msgstr "Editing %s"
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:158
+#, php-format
+msgid "Removing %s"
+msgstr "Removing %s"
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:159
+#, php-format
+msgid "Are you sure you wish to delete %%d row of %s ?"
+msgstr "Are you sure you wish to delete %%d row of %s ?"
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:198
+#, php-format
+msgid "Missing ColumnInfo name for %s/%s"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:202
+#, php-format
+msgid "Missing ColumnInfo type for %s/%s"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:213
+msgid "Id"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:220
+msgid "Updated"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:226
+#: ../src/AbraFlexi/MultiSetup/Logger.php:114
+msgid "Created"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:484
+#, php-format
+msgid "%s is not valid email"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:512
+#, php-format
+msgid "A %s is required"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:517
+#, php-format
+msgid "A %s is not unique"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:640
+#, php-format
+msgid "Field Type is not set for %s "
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:846
+#, php-format
+msgid "Column \"%s\" of %s without type definition"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:995
+msgid "Yes"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:995
+msgid "No"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/DBEngine.php:1115
+msgid "Dismis"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Logger.php:110 ../src/apps.php:26
+#: ../src/flexibees.php:26
+msgid "ID"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Logger.php:111
+msgid "Status"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Logger.php:112
+msgid "Subject"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Logger.php:113
+msgid "Message"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Logger.php:116 ../src/app.php:25
+msgid "Application"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Logger.php:124 ../src/company.php:19
+msgid "Company"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Logger.php:132
+msgid "User"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/AppsMenu.php:58
+#, php-format
+msgid "Updating availbility status of application %s to %s"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/AppsMenu.php:58
+msgid "enabled"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/AppsMenu.php:58
+msgid "disabled"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/AppsMenu.php:60
+#: ../src/AbraFlexi/MultiSetup/Ui/ConfiguredFieldBadges.php:33
+msgid "Configure"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/BootstrapMenu.php:42
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCustomerForm.php:26
+msgid "Login"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/BootstrapMenu.php:43
+#: ../src/AbraFlexi/MultiSetup/Ui/ConfigFields.php:25
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCustomerForm.php:29
+#: ../src/createaccount.php:135 ../src/login.php:67
+#: ../src/passwordrecovery.php:46
+msgid "Password"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/BootstrapMenu.php:44 ../src/login.php:45
+msgid "Sign In"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/BootstrapMenu.php:46
+msgid "Password recovery"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/ColumnsForm.php:110
+msgid "Uložit"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/ColumnsForm.php:119
+msgid "Save and back"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/ColumnsForm.php:127
+msgid "Save and next"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/ConfFieldsForm.php:26
+msgid "New config field type"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/ConfFieldsForm.php:27
+msgid "New config field Keyword"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/ConfFieldsForm.php:28
+msgid "Default value"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/ConfFieldsForm.php:29
+msgid "New config field description"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/ConfFieldsForm.php:30
+msgid "Add"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/ConfigFields.php:21
+msgid "Text"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/ConfigFields.php:22
+msgid "Number"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/ConfigFields.php:23
+msgid "Date"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/ConfigFields.php:24
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCustomerForm.php:32
+#: ../src/passwordrecovery.php:79
+msgid "Email"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/ConfigFields.php:26
+msgid "Yes/No"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/CustomAppConfigForm.php:35
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:37
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:56
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCustomerForm.php:34
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterFlexiBeeForm.php:30
+msgid "Save"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/CustomerSelect.php:33
+msgid "Choose customer"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/DBDataTable.php:135
+msgid "Reload"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/DBDataTable.php:145
+msgid "Filter"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/DBDataTable.php:322
+msgid "All pages"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/DbStatus.php:30
+msgid "Apps"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/DbStatus.php:31
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:125
+msgid "Servers"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/DbStatus.php:32
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:142
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:148
+msgid "Customers"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/DbStatus.php:33
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:84
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:131
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:137
+msgid "Companies"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/DbStatus.php:34
+msgid "Assigned"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/FilterDialog.php:46
+#: ../src/AbraFlexi/MultiSetup/Ui/FilterDialog.php:71
+msgid "From"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/FilterDialog.php:57
+#: ../src/AbraFlexi/MultiSetup/Ui/FilterDialog.php:79
+msgid "To"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/FlexiBeeInstanceStatus.php:23
+msgid "Code"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/FlexiBeeInstanceStatus.php:23
+#: ../src/apps.php:26 ../src/flexibees.php:26
+msgid "Name"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/FlexiBeeInstanceStatus.php:23
+msgid "Show"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/FlexiBeeInstanceStatus.php:23
+msgid "State"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/FlexiBeeInstanceStatus.php:23
+msgid "watching Changes"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/FlexiBeeInstanceStatus.php:44
+msgid "Edit"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/FlexiBeeInstanceStatus.php:44
+#: ../src/createaccount.php:142
+msgid "Register"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/FlexiBeeSelect.php:47
+msgid "Choose AbraFlexi server"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/IntervalChooser.php:28
+msgid "Disabled"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/IntervalChooser.php:29
+msgid "Yearly"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/IntervalChooser.php:30
+msgid "Monthly"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/IntervalChooser.php:31
+msgid "Weekly"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/IntervalChooser.php:32
+msgid "Daily"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/IntervalChooser.php:33
+msgid "Hourly"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:72
+msgid "No server registered yet. Please register one."
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:79
+msgid "No customer registered yet. Please register one."
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:82
+msgid "No company registered yet. Please register one."
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:95
+msgid "No application registered yet. Please register one."
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:96
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:113 ../src/apps.php:19
+msgid "Applications"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:101 ../src/logs.php:16
+msgid "Logs"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:102 ../src/logout.php:28
+msgid "Sign Off"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:107
+msgid "Register Application"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:110
+msgid "Application list"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:119
+msgid "Register AbraFlexi Server"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:122
+msgid "Instance list"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:132 ../src/company.php:46
+msgid "New Company"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:141 ../src/customer.php:41
+msgid "New Customer"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:152
+msgid "Admin"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:154
+msgid "New Admin"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:155
+msgid "Admin Overview"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:180
+msgid "Click to hide messages"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:26
+msgid "Application name"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:27
+msgid "Application Description"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:28
+msgid "Path to binary"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:29
+msgid "Command"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:29
+msgid "Command used to setup new company for use with command"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:30
+msgid "Command arguments"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:30
+msgid ""
+"you can use macros like {ABRAFLEXI_URL} or custom defined config fields."
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:32
+msgid "Application Icon"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:34
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:54 ../src/apps.php:26
+msgid "Enabled"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:28
+msgid "Company name"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:31
+msgid "AbraFlexi company code"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:34
+msgid "Organization ID"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:36
+msgid "Send notification to"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:38
+#: ../src/customer.php:22
+msgid "Customer"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:39
+msgid "AbraFlexi server"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:42
+msgid "write permission"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:46
+msgid "Setup performed"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:50
+msgid "WebHook established"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCustomerForm.php:21
+msgid "First Name"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCustomerForm.php:23
+#: ../src/createaccount.php:131
+msgid "Lastname"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterFlexiBeeForm.php:22
+msgid "AbraFlexi instance Name"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterFlexiBeeForm.php:24
+msgid "RestAPI endpoint url"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterFlexiBeeForm.php:26
+msgid "REST API Username"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/Ui/RegisterFlexiBeeForm.php:28
+msgid "Rest API Password"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/User.php:132
+msgid "missing login"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/User.php:137
+msgid "missing password"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/User.php:155
+msgid "invalid password"
+msgstr ""
+
+#: ../src/AbraFlexi/MultiSetup/User.php:162
+#, php-format
+msgid "user %s does not exist"
+msgstr ""
+
+#: ../src/about.php:16
+msgid "About"
+msgstr ""
+
+#: ../src/about.php:20
+msgid "O Programu"
+msgstr ""
+
+#: ../src/about.php:22
+msgid "Vitex Software"
+msgstr ""
+
+#: ../src/app.php:32
+msgid "Application Saved"
+msgstr ""
+
+#: ../src/app.php:36
+msgid "Error saving Application"
+msgstr ""
+
+#: ../src/app.php:43
+msgid "New Application"
+msgstr ""
+
+#: ../src/app.php:56 ../src/app.php:57
+msgid "Config fields"
+msgstr ""
+
+#: ../src/apps.php:26
+msgid "Image"
+msgstr ""
+
+#: ../src/apps.php:26
+msgid "Description"
+msgstr ""
+
+#: ../src/apps.php:26
+msgid "Executable"
+msgstr ""
+
+#: ../src/apps.php:26
+msgid "Modified"
+msgstr ""
+
+#: ../src/apps.php:29
+msgid "Icon"
+msgstr ""
+
+#: ../src/apps.php:33 ../src/flexibees.php:40
+msgid "AbraFlexi Instances"
+msgstr ""
+
+#: ../src/apps.php:33 ../src/flexibees.php:40
+msgid "Register new"
+msgstr ""
+
+#: ../src/company.php:26
+msgid "Company Saved"
+msgstr ""
+
+#: ../src/company.php:30
+msgid "Error saving Company"
+msgstr ""
+
+#: ../src/company.php:71
+msgid "Assigned applications"
+msgstr ""
+
+#: ../src/conffield.php:19
+msgid "Config Fields"
+msgstr ""
+
+#: ../src/conffield.php:32
+#, php-format
+msgid "%d used configurations removed"
+msgstr ""
+
+#: ../src/conffield.php:35
+msgid "Configuration removed"
+msgstr ""
+
+#: ../src/conffield.php:42
+msgid "Config field Saved"
+msgstr ""
+
+#: ../src/conffield.php:44
+msgid "Error saving Config field"
+msgstr ""
+
+#: ../src/conffield.php:53
+msgid "App custom configuration fields"
+msgstr ""
+
+#: ../src/conffield.php:71
+msgid "Back to app"
+msgstr ""
+
+#: ../src/createaccount.php:15
+msgid "Creating first administrator"
+msgstr ""
+
+#: ../src/createaccount.php:39
+msgid "invalid mail address"
+msgstr ""
+
+#: ../src/createaccount.php:46
+#, php-format
+msgid "Mail address %s is already registered"
+msgstr ""
+
+#: ../src/createaccount.php:54
+msgid "password is too short"
+msgstr ""
+
+#: ../src/createaccount.php:57
+msgid "Password control does not match"
+msgstr ""
+
+#: ../src/createaccount.php:66
+#, php-format
+msgid "Username %s is used. Please choose another one"
+msgstr ""
+
+#: ../src/createaccount.php:83
+msgid "Admin account created"
+msgstr ""
+
+#: ../src/createaccount.php:87
+msgid "User account created"
+msgstr ""
+
+#: ../src/createaccount.php:93
+msgid "Sign On info"
+msgstr ""
+
+#: ../src/createaccount.php:95
+#, php-format
+msgid "Your new %s account:"
+msgstr ""
+
+#: ../src/createaccount.php:101
+#, php-format
+msgid "New Sign On to %s: %s"
+msgstr ""
+
+#: ../src/createaccount.php:104
+msgid "New User:\n"
+msgstr ""
+
+#: ../src/createaccount.php:113
+msgid "Administrator create failed"
+msgstr ""
+
+#: ../src/createaccount.php:118
+msgid "New Administrator"
+msgstr ""
+
+#: ../src/createaccount.php:120
+msgid "Singn On"
+msgstr ""
+
+#: ../src/createaccount.php:129
+msgid "Firstname"
+msgstr ""
+
+#: ../src/createaccount.php:133
+msgid "User name"
+msgstr ""
+
+#: ../src/createaccount.php:137
+msgid "Password confirmation"
+msgstr ""
+
+#: ../src/createaccount.php:139
+msgid "eMail address"
+msgstr ""
+
+#: ../src/createaccount.php:143
+msgid "finish registration"
+msgstr ""
+
+#: ../src/customer.php:29
+msgid "Customer Saved"
+msgstr ""
+
+#: ../src/customer.php:33
+msgid "Error saving Customer"
+msgstr ""
+
+#: ../src/custserviceconfig.php:20
+msgid "App custom config Fields"
+msgstr ""
+
+#: ../src/custserviceconfig.php:30
+msgid "Config fields Saved"
+msgstr ""
+
+#: ../src/custserviceconfig.php:32
+msgid "Error saving Config fields"
+msgstr ""
+
+#: ../src/flexibee.php:19
+msgid "AbraFlexi instance"
+msgstr ""
+
+#: ../src/flexibee.php:26
+msgid "AbraFlexi instance Saved"
+msgstr ""
+
+#: ../src/flexibee.php:29
+msgid "Error saving AbraFlexi instance"
+msgstr ""
+
+#: ../src/flexibee.php:38
+msgid "New AbraFlexi instance"
+msgstr ""
+
+#: ../src/flexibees.php:19
+msgid "Multi AbraFlexi"
+msgstr ""
+
+#: ../src/flexibees.php:26
+msgid "Url"
+msgstr ""
+
+#: ../src/flexibees.php:26 ../src/login.php:63 ../src/passwordrecovery.php:45
+msgid "Username"
+msgstr ""
+
+#: ../src/flexibees.php:26 ../src/flexibees.php:36
+msgid "Add company"
+msgstr ""
+
+#: ../src/index.php:17 ../src/main.php:22
+msgid "Multi AbraFlexi Setup"
+msgstr ""
+
+#: ../src/index.php:20
+msgid "There is no administrators in the database."
+msgstr ""
+
+#: ../src/index.php:21
+msgid "Create first Administrator Account"
+msgstr ""
+
+#: ../src/login.php:55
+msgid "Welcome to Multi AbraFlexi Setup"
+msgstr ""
+
+#: ../src/login.php:59
+msgid "Sign in"
+msgstr ""
+
+#: ../src/login.php:65
+msgid "the username you chose"
+msgstr ""
+
+#: ../src/login.php:75 ../src/passwordrecovery.php:56
+msgid "Lost password recovery"
+msgstr ""
+
+#: ../src/logout.php:32
+msgid "Good bye"
+msgstr ""
+
+#: ../src/logout.php:37
+msgid "Thank you for your patronage and look forward to another visit"
+msgstr ""
+
+#: ../src/logs.php:21
+msgid "Dismis All"
+msgstr ""
+
+#: ../src/main.php:26
+msgid "Modules Availble"
+msgstr ""
+
+#: ../src/passwordrecovery.php:19
+msgid "Please enter your email."
+msgstr ""
+
+#: ../src/passwordrecovery.php:28
+#, php-format
+msgid "unknow email address %s"
+msgstr ""
+
+#: ../src/passwordrecovery.php:39
+#, php-format
+msgid "New password for %s"
+msgstr ""
+
+#: ../src/passwordrecovery.php:43
+msgid "Sign On informations was changed"
+msgstr ""
+
+#: ../src/passwordrecovery.php:50
+#, php-format
+msgid "Your new password was sent to %s"
+msgstr ""
+
+#: ../src/passwordrecovery.php:67
+msgid "Tip"
+msgstr ""
+
+#: ../src/passwordrecovery.php:70
+msgid ""
+"Forgot your password? Enter your e-mail address you entered during the "
+"registration and we will send you a new one."
+msgstr ""
+
+#: ../src/passwordrecovery.php:74
+msgid "Password Recovery"
+msgstr ""
+
+#: ../src/passwordrecovery.php:78
+msgid "Sent New Password"
+msgstr ""
+
+#: ../src/passwordrecovery.php:92
+msgid "Continue"
+msgstr ""
+
+#: ../src/user.php:28
+msgid "Uživatel"
+msgstr ""
+
+#: ../src/user.php:37
+msgid "Opravdu smazat ?"
+msgstr ""
+
+#: ../src/user.php:38
+msgid "Ne"
+msgstr ""
+
+#: ../src/user.php:39
+msgid "Ano"
+msgstr ""
+
+#: ../src/users.php:17
+msgid "Přehled uživatelů"
+msgstr ""
+
+#: ../src/users.php:19
+msgid "Uživatelé"
+msgstr ""

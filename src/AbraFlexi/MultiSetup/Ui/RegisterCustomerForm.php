@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup  - New Customer registration form
+ * Multi AbraFlexi Setup  - New Customer registration form
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2015-2020 Vitex Software
@@ -10,7 +10,7 @@
 namespace AbraFlexi\MultiSetup\Ui;
 
 /**
- * Registered FlexiBee instance editor Form
+ * Registered AbraFlexi instance editor Form
  *
  * @author 
  */

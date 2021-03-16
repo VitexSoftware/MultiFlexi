@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup - Recovery password.
+ * Multi AbraFlexi Setup - Recovery password.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software

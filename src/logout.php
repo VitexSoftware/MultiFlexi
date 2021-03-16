@@ -9,7 +9,7 @@ use AbraFlexi\MultiSetup\Ui\PageBottom;
 use AbraFlexi\MultiSetup\Ui\PageTop;
 
 /**
- * Multi FlexiBee Setup - Sign off page.
+ * Multi AbraFlexi Setup - Sign off page.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software

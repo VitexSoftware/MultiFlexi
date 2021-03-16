@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup  - Run interval select
+ * Multi AbraFlexi Setup  - Run interval select
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2015-2020 Vitex Software

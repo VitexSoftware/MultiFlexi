@@ -1,15 +1,17 @@
 Source: multi-abraflexi-setup
 Section: web
 Priority: optional
-Maintainer: "Vítězslav Dvořák" <info@vitexsoftware.cz>t
+Maintainer: "Vítězslav Dvořák" <info@vitexsoftware.cz>
 Build-Depends: debhelper (>=11~), jq, moreutils
 Standards-Version: 4.1.4
 Homepage: https://github.com/VitexSoftware/MultiAbraFlexiSetup
 
 Package: multi-abraflexi-setup
 Multi-Arch: foreign
-Depends: ${misc:Depends}, php-vitexsoftware-abraflexi-bricks, php-cli, locales-all, php-robmorgan-phinx, php-vitexsoftware-ease-bootstrap4-widgets-abraflexi ,php-vitexsoftware-ease-fluentpdo, multi-abraflexi-setup-sqlite|multi-abraflexi-setup-mysql|multi-abraflexi-setup-pgsql, libjs-jquery-datatables
+Depends: ${misc:Depends}, php-vitexsoftware-abraflexi-bricks, php-cli, locales-all, php-vitexsoftware-ease-bootstrap4-widgets-abraflexi ,php-vitexsoftware-ease-fluentpdo, multi-abraflexi-setup-sqlite|multi-abraflexi-setup-mysql|multi-abraflexi-setup-pgsql, libjs-jquery-datatables
 Suggests: abraflexi-server,php-abraflexi-config, abraflexi-digest, abraflexi-matcher, abraflexi-reminder, abraflexi-contract-invoices, abraflexi-mailer, abraflexi-email-importer
+Pre-Depends: php-robmorgan-phinx
+Replaces: multi-flexibee-setup
 Architecture: all
 Description: run several tools on defined abraflexi servers
  Define server, customets and its companies. Then specify
@@ -17,17 +19,18 @@ Description: run several tools on defined abraflexi servers
 
 Package: multi-abraflexi-setup-sqlite
 Multi-Arch: foreign
-Depends: ${misc:Depends},multi-abraflexi-setup, dbconfig-sqlite3, php-sqlite3
+Depends: ${misc:Depends},multi-abraflexi-setup, dbconfig-sqlite3, php-sqlite3, sqlite3
 Conflicts: multi-abraflexi-setup-mysql, multi-abraflexi-setup-pgsql
-Suggests: sqlite3
+Replaces: multi-flexibee-setup-sqlite
 Architecture: all
 Description: sqlite support for multiabraflexi setup
  Mandatory dependencies for use Multi FlexiBee setup with SQLite database
 
 Package: multi-abraflexi-setup-mysql
 Multi-Arch: foreign
-Depends: ${misc:Depends},multi-abraflexi-setup, dbconfig-mysql, php-mysql
+Depends: ${misc:Depends},multi-abraflexi-setup, dbconfig-mysql, php-mysql, php-robmorgan-phinx
 Conflicts: multi-abraflexi-setup-sqlite, multi-abraflexi-setup-pgsql
+Replaces: multi-flexibee-setup-mysql
 Suggests: mariadb-server
 Architecture: all
 Description: mariadb support for multiabraflexi setup
@@ -35,9 +38,10 @@ Description: mariadb support for multiabraflexi setup
 
 Package: multi-abraflexi-setup-pgsql
 Multi-Arch: foreign
-Depends: ${misc:Depends},multi-abraflexi-setup, dbconfig-pgsql, php-pgsql
+Depends: ${misc:Depends},multi-abraflexi-setup, dbconfig-pgsql, php-pgsql, php-robmorgan-phinx
 Conflicts: multi-abraflexi-setup-mysql, multi-abraflexi-setup-sqlite
 Suggests: postgresql
+Replaces: multi-flexibee-setup-pqsql
 Architecture: all
 Description: postgres support for multiabraflexi setup
  Mandatory dependencies for use Multi FlexiBee setup with PostgreSQL database

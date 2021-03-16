@@ -1,2 +1,0 @@
-#!/bin/sh
-php -q -f /usr/lib/multi-flexibee-setup/executor.php $1

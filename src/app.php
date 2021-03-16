@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup - Customer instance editor.
+ * Multi AbraFlexi Setup - Customer instance editor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2017-2020 Vitex Software
@@ -30,7 +30,7 @@ $instanceName = $apps->getDataValue('nazev');
 if ($oPage->isPosted()) {
     if ($apps->takeData($_POST) && !is_null($apps->saveToSQL())) {
         $apps->addStatusMessage(_('Application Saved'), 'success');
-//        $apps->prepareRemoteFlexiBee();
+//        $apps->prepareRemoteAbraFlexi();
         $oPage->redirect('?id=' . $apps->getMyKey());
     } else {
         $apps->addStatusMessage(_('Error saving Application'), 'error');

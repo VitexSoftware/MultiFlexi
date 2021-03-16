@@ -1,0 +1,143 @@
+#!/bin/sh
+# postinst script for multi-abraflexi-setup
+set -e
+
+. /usr/share/debconf/confmodule
+
+db_get composer/WEB_USER
+WEBUSER=$RET
+mkdir -p /var/lib/multi-abraflexi-setup /var/lib/composer
+chown $WEBUSER /var/lib/multi-abraflexi-setup /var/lib/composer -R
+echo '{}' > /usr/lib/multi-abraflexi-setup/composer.lock
+chown $WEBUSER /usr/lib/multi-abraflexi-setup/composer.lock
+su - $WEBUSER -s /bin/bash -c 'COMPOSER_HOME="/var/lib/composer" composer -o install -d /usr/lib/multi-abraflexi-setup/'
+
+
+if [ -f /usr/share/dbconfig-common/dpkg/postinst ]; then
+    . /usr/share/dbconfig-common/dpkg/postinst
+    dbc_generate_include_args="-o template_infile=/usr/lib/multi-abraflexi-setup/.env.template"
+    dbc_generate_include=template:/usr/lib/multi-abraflexi-setup/.env
+    dbc_generate_include_owner="root:www-data"
+    dbc_generate_include_perms="664"
+    dbc_dbfile_owner="www-data:www-data"
+    dbc_dbfile_perms="0664"
+    dbc_dbuser=multiabraflexisetup
+    dbc_dbname=multiabraflexisetup
+
+    dbc_go multi-abraflexi-setup "$@"
+    phinx migrate -c /usr/lib/multi-abraflexi-setup/phinx-adapter.php
+    echo 'run "multi-abraflexi-setup-phinx seed:run" to load demo data'
+    echo 'run "multi-abraflexi-setup-phinx seed:run  -s AppSeeder" to load only plugins demo setup'
+
+	if [ -f /var/lib/multi-abraflexi-setup/multiabraflexisetup ] ; then
+            chown root:www-data /var/lib/multi-abraflexi-setup/
+            chmod ug+rw /var/lib/multi-abraflexi-setup/
+            chown root:www-data /var/lib/multi-abraflexi-setup/multiabraflexisetup
+            chmod ug+rw /var/lib/multi-abraflexi-setup/multiabraflexisetup
+        fi
+    
+
+fi
+
+
+
+pathfind() {
+    OLDIFS="$IFS"
+    IFS=:
+    for p in $PATH; do
+        if [ -x "$p/$*" ]; then
+            IFS="$OLDIFS"
+            return 0
+        fi
+    done
+    IFS="$OLDIFS"
+    return 1
+}
+
+
+lighttpd_install() {
+	if [ -d /etc/lighttpd/conf-available ] && [ ! -f /etc/lighttpd/conf-available/50-multi-abraflexi-setup.conf ] ; then
+		if pathfind lighty-enable-mod; then
+			ln -s /etc/multi-abraflexi-setup/lighttpd.conf /etc/lighttpd/conf-available/50-multi-abraflexi-setup.conf
+			if ! { lighty-enable-mod multi-abraflexi-setup fastcgi fastcgi-php || [ $? -eq 2 ]; } then
+				return 1
+			fi
+		fi
+	fi
+}
+
+[ ! -e /usr/share/apache2/apache2-maintscript-helper ] || \
+    . /usr/share/apache2/apache2-maintscript-helper
+apache_install() {
+        if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
+	    if [ -d /etc/apache2/conf-available ] && [ ! -e /etc/apache2/conf-available/multi-abraflexi-setup.conf ]; then
+                ln -s /etc/multi-abraflexi-setup/apache.conf /etc/apache2/conf-available/multi-abraflexi-setup.conf
+	    fi
+            # Remove old symlink if present
+            if [ -d /etc/apache2/conf.d ] && [ -h /etc/apache2/conf.d/multi-abraflexi-setup ]; then
+                rm /etc/apache2/conf.d/multi-abraflexi-setup
+            fi
+            # Enable the configuration
+            apache2_invoke enconf multi-abraflexi-setup.conf
+        fi
+}
+
+    . /usr/share/debconf/confmodule
+
+
+case "$1" in
+    configure)
+	# Handle webserver reconfiguration/restart ; stolen from zabbix package
+	db_get multi-abraflexi-setup/reconfigure-webserver || true
+	webservers="$RET"
+	restart=""
+
+	for webserver in $webservers; do
+            webserver=${webserver%,}
+            case "$webserver" in
+                lighttpd)
+		    lighttpd_install
+                    ;;
+                apache2)
+		    apache_install
+                    ;;
+            esac
+            pathfind $webserver || continue
+            restart="$restart $webserver"
+        done
+
+        db_get multi-abraflexi-setup/restart-webserver || true
+	res="$RET"
+	db_stop || true
+	if [ "$res" = "true" ]; then
+            for webserver in $restart; do
+		webserver=${webserver%,}
+		# Redirection of 3 is needed because Debconf uses it and it might
+                # be inherited by webserver. See bug #446324.
+		if pathfind invoke-rc.d; then
+                    invoke-rc.d $webserver reload 3>/dev/null || true
+		else
+                    /etc/init.d/$webserver reload 3>/dev/null || true
+		fi
+            done
+	fi
+
+
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+
+#DEBHELPER#
+
+exit 0

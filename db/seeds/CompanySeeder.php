@@ -17,7 +17,7 @@ class CompanySeeder extends AbstractSeed {
         $data = [
             [
                 'enabled' => true,
-                'flexibee' => 0,
+                'abraflexi' => 0,
                 'nazev' => 'Demo Firma',
                 'ic' => '12345678',
                 'company' => 'demo',
@@ -28,7 +28,7 @@ class CompanySeeder extends AbstractSeed {
             ],
             [
                 'enabled' => true,
-                'flexibee' => 0,
+                'abraflexi' => 0,
                 'nazev' => 'Ja Zivnostnik',
                 'ic' => '87654321',
                 'company' => 'demo_de',

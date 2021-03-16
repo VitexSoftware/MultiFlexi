@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup - Customer instance editor.
+ * Multi AbraFlexi Setup - Customer instance editor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2017-2020 Vitex Software
@@ -27,7 +27,7 @@ $instanceName = $customers->getRecordName();
 if ($oPage->isPosted()) {
     if ($customers->takeData($_POST) && !is_null($customers->saveToSQL())) {
         $customers->addStatusMessage(_('Customer Saved'), 'success');
-//        $customers->prepareRemoteFlexiBee();
+//        $customers->prepareRemoteAbraFlexi();
         $oPage->redirect('?id=' . $customers->getMyKey());
     } else {
         $customers->addStatusMessage(_('Error saving Customer'), 'error');
@@ -45,7 +45,7 @@ if (strlen($instanceName)) {
 $instanceRow = new Row();
 $instanceRow->addColumn(8, new RegisterCustomerForm($customers));
 $instanceRow->addColumn(2, new \Ease\Html\ImgTag(\Ease\User::getGravatar(strval($customers->getDataValue('email')) , 400, 'mm', 'g'),'Gravatar',['class'=>'img-fluid'])  );
-//$instanceRow->addColumn(4, new ui\FlexiBeeInstanceStatus($customers));
+//$instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($customers));
 
 $oPage->container->addItem(new Panel($instanceName, 'info',
                 $instanceRow, $instanceLink));

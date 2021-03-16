@@ -27,7 +27,7 @@ class RegisterAppForm extends EngineForm {
         $this->addInput(new InputTextTag('popis'), _('Application Description'));
         $this->addInput(new InputTextTag('executable'), _('Path to binary'));
         $this->addInput(new InputTextTag('setup'), _('Command'), '', _('Command used to setup new company for use with command'));
-        $this->addInput(new InputTextTag('cmdparams'), _('Command arguments'), '', _('you can use macros like {FLEXIBEE_URL} or custom defined config fields.'));
+        $this->addInput(new InputTextTag('cmdparams'), _('Command arguments'), '', _('you can use macros like {ABRAFLEXI_URL} or custom defined config fields.'));
 
         $imgInput = $this->addInput(new InputFileTag('imageraw'), _('Application Icon'));
 

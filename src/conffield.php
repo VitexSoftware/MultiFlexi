@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup - Config fields editor.
+ * Multi AbraFlexi Setup - Config fields editor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software

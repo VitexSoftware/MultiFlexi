@@ -3,7 +3,7 @@
 namespace AbraFlexi\MultiSetup;
 
 /**
- * Multi FlexiBee Setup - Company Management Class
+ * Multi AbraFlexi Setup - Company Management Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2018-2020 Vitex Software
@@ -30,7 +30,7 @@ class Company extends \AbraFlexi\Company {
     public function prepareCompany($company) {
         $result = ['webhook' => false];
         $this->setCompany($company);
-//        $result['labels'] = $this->addFlexiBeeLabel('TaxTorro') && $this->addFlexiBeeLabel('DataMolino');
+//        $result['labels'] = $this->addAbraFlexiLabel('TaxTorro') && $this->addAbraFlexiLabel('DataMolino');
         if ($this->changesApi(true)) {
             $result['webhook'] = $this->registerWebHook(self::webHookUrl($this->getMyKey()));
         }
@@ -38,7 +38,7 @@ class Company extends \AbraFlexi\Company {
     }
 
     /**
-     * WebHook url for Given ID of FlexiBee instance
+     * WebHook url for Given ID of AbraFlexi instance
      * 
      * @param int $instanceId
      * 
@@ -54,13 +54,13 @@ class Company extends \AbraFlexi\Company {
     }
 
     /**
-     * Add requied FlexiBee label to company
+     * Add requied AbraFlexi label to company
      * 
      * @param string $label
      * 
      * @return boolean
      */
-    public function addFlexiBeeLabel($label) {
+    public function addAbraFlexiLabel($label) {
         $result = true;
         $evidenceToVsb = array_flip(\AbraFlexi\Stitek::$vsbToEvidencePath);
         /**
@@ -68,7 +68,7 @@ class Company extends \AbraFlexi\Company {
          */
         $stitek = new \AbraFlexi\Stitek(null, $this->getConnectionOptions());
         /**
-         * @see https://demo.flexibee.eu/c/demo/stitek/properties
+         * @see https://demo.abraflexi.eu/c/demo/stitek/properties
          * @var array initial Label contexts
          */
         $stitekData = [
@@ -82,10 +82,10 @@ class Company extends \AbraFlexi\Company {
             $evidenceToVsb['objednavka-prijata'] => true,
         ];
 
-        $stitekID = $stitek->getColumnsFromFlexibee('id', $stitekData);
+        $stitekID = $stitek->getColumnsFromAbraFlexi('id', $stitekData);
 
         if (!isset($stitekID[0]['id'])) {
-            $stitek->insertToFlexiBee($stitekData);
+            $stitek->insertToAbraFlexi($stitekData);
             if ($stitek->lastResponseCode == 201) {
                 $stitek->addStatusMessage(sprintf(_('label %s created'), $label),
                         'success');
@@ -180,20 +180,20 @@ class Company extends \AbraFlexi\Company {
 
         unset($data['class']);
 
-        $data['logo'] = $this->obtainLogo(intval($data['flexibee']),$data['company']);
+        $data['logo'] = $this->obtainLogo(intval($data['abraflexi']),$data['company']);
 
         return parent::takeData($data);
     }
 
     /**
-     * Use Given FlexiBee for connections
+     * Use Given AbraFlexi for connections
      * 
-     * @param int $flexiBeeID
+     * @param int $abraflexiID
      * @param string $company Description
      */
-    public function obtainLogo($flexiBeeID,$company) {
-        $flexibeer = new FlexiBees($flexiBeeID);
-        $fbOptions = $flexibeer->getData();
+    public function obtainLogo($abraflexiID,$company) {
+        $abraflexir = new AbraFlexis($abraflexiID);
+        $fbOptions = $abraflexir->getData();
         $fbOptions['company'] = $company;
         $logoEngine = new \AbraFlexi\ui\CompanyLogo(null, $fbOptions);
         return $logoEngine->getTagProperty('src');
@@ -202,7 +202,7 @@ class Company extends \AbraFlexi\Company {
     
     
     /**
-     * Convert data from FlexiBee column names to SQL column names
+     * Convert data from AbraFlexi column names to SQL column names
      * 
      * @param arry $listing
      * 
@@ -230,9 +230,9 @@ class Company extends \AbraFlexi\Company {
      * 
      */
     public function prepareRemoteCompany() {
-        $company = $this->companyPresentInFlexiBee($data);
+        $company = $this->companyPresentInAbraFlexi($data);
         if (empty($company)) {
-            $companyInfo = $this->createCompanyInFlexiBee($data);
+            $companyInfo = $this->createCompanyInAbraFlexi($data);
             if (!empty($companyInfo)) {
                 $this->setDataValue('company', $companyInfo ['dbNazev']);
             }
@@ -247,22 +247,22 @@ class Company extends \AbraFlexi\Company {
     }
 
     /**
-     * Check for given company presence in FlexiBee
+     * Check for given company presence in AbraFlexi
      * 
      * @param array $companyData
      * 
      * @return string company dbNazev code
      */
-    public function companyPresentInFlexiBee($companyData = null) {
+    public function companyPresentInAbraFlexi($companyData = null) {
         if (is_null($companyData)) {
             $companyData = $this->getData();
         }
-        $companyPresentInFlexiBee = null;
+        $companyPresentInAbraFlexi = null;
 
         if (array_key_exists('company', $companyData)) {
             $this->getFlexiData('/c/' . $companyData['company']);
             if ($this->lastResponseCode == 200) {
-                $companyPresentInFlexiBee = $companyData['company'];
+                $companyPresentInAbraFlexi = $companyData['company'];
             }
         } elseif (array_key_exists('ic', $companyData)) {
             $candidates = $this->getFlexiData('/c');
@@ -272,7 +272,7 @@ class Company extends \AbraFlexi\Company {
                     foreach ($nastaveni['nastaveni'] as $nast) {
                         if (array_key_exists('ic', $nast) || empty($nast['ic'])) {
                             if ($nast['ic'] == $companyData['ic']) {
-                                $companyPresentInFlexiBee = $candidat['dbNazev'];
+                                $companyPresentInAbraFlexi = $candidat['dbNazev'];
                                 break;
                             }
                         } else {
@@ -281,7 +281,7 @@ class Company extends \AbraFlexi\Company {
                         }
                         if (array_key_exists('nazFirmy', $nast) || empty($nast['nazFirmy'])) {
                             if ($nast['nazFirmy'] == $companyData['nazev']) {
-                                $companyPresentInFlexiBee = $candidat['dbNazev'];
+                                $companyPresentInAbraFlexi = $candidat['dbNazev'];
                                 break;
                             }
                         }
@@ -289,24 +289,24 @@ class Company extends \AbraFlexi\Company {
                 }
             }
         }
-        return $companyPresentInFlexiBee;
+        return $companyPresentInAbraFlexi;
     }
 
     /**
-     * Create new FlexiBee company
+     * Create new AbraFlexi company
      * 
      * @param string $companyData
      * 
      * @return array  new company info
      */
-    public function createCompanyInFlexiBee($companyData = null) {
+    public function createCompanyInAbraFlexi($companyData = null) {
         $companyInfo = null;
         if (is_null($companyData)) {
             $companyData = $this->getData();
         }
 
         if ($this->createNew($companyData['nazev'])) {
-            $companies = $this->getColumnsFromFlexibee(['dbNazev',
+            $companies = $this->getColumnsFromAbraFlexi(['dbNazev',
                 'createDt'], [], 'createDt');
             ksort($companies);
 
@@ -320,9 +320,9 @@ class Company extends \AbraFlexi\Company {
             if (!empty($companyData['ic'])) {
                 $setter = new \AbraFlexi\Nastaveni(null,
                         $this->getConnectionOptions());
-                $settings = $setter->getAllFromFlexibee();
+                $settings = $setter->getAllFromAbraFlexi();
                 foreach ($settings as $setting) {
-                    $this->insertToFlexiBee(['id' => $setting['id'], 'ic' => $companyData['ic']]);
+                    $this->insertToAbraFlexi(['id' => $setting['id'], 'ic' => $companyData['ic']]);
                 }
             }
         }
@@ -331,10 +331,10 @@ class Company extends \AbraFlexi\Company {
 
     public function setEnvironment() {
         $envNames = [
-            'FLEXIBEE_URL' => $this->getDataValue('url'),
-            'FLEXIBEE_LOGIN' => $this->getDataValue('user'),
-            'FLEXIBEE_PASSWORD' => $this->getDataValue('password'),
-            'FLEXIBEE_COMPANY' => $this->getDataValue('company'),
+            'ABRAFLEXI_URL' => $this->getDataValue('url'),
+            'ABRAFLEXI_LOGIN' => $this->getDataValue('user'),
+            'ABRAFLEXI_PASSWORD' => $this->getDataValue('password'),
+            'ABRAFLEXI_COMPANY' => $this->getDataValue('company'),
             'EASE_MAILTO' => $this->getDataValue('email'),
             'EASE_LOGGER' => empty($this->getDataValue('email')) ? 'syslog' : 'syslog|email'
         ];

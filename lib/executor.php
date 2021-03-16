@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup - Scheduled actions executor.
+ * Multi AbraFlexi Setup - Scheduled actions executor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
@@ -9,22 +9,22 @@
 
 namespace AbraFlexi\MultiSetup;
 
-use Dotenv\Dotenv;
 use AbraFlexi\MultiSetup\Application;
 use AbraFlexi\MultiSetup\Company;
 use AbraFlexi\MultiSetup\Configuration;
 
 require_once '../vendor/autoload.php';
 
-//$dotenv = Dotenv::createImmutable(dirname(__DIR__));
-$dotenv = Dotenv::create(dirname(__DIR__));
-$dotenv->load();
+$shared = \Ease\Shared::instanced();
+if (file_exists('../.env')) {
+    $shared->loadConfig('../.env', true);
+}
 
 define('EASE_LOGGER', 'syslog|\AbraFlexi\MultiSetup\LogToSQL');
 //Sdefine('EASE_LOGGER', '\AbraFlexi\MultiSetup\LogToSQL');
 
 $companer = new Company();
-$companys = $companer->listingQuery()->select('flexibees.*')->select('company.id AS company_id')->leftJoin('flexibees ON flexibees.id = company.flexibee');
+$companys = $companer->listingQuery()->select('abraflexis.*')->select('company.id AS company_id')->leftJoin('abraflexis ON abraflexis.id = company.abraflexi');
 $customConfig = new Configuration();
 
 $interval = $argc == 2 ? $argv[1] : null;
@@ -40,10 +40,10 @@ if ($interval) {
         } else {
 
             $envNames = [
-                'FLEXIBEE_URL' => $company['url'],
-                'FLEXIBEE_LOGIN' => $company['user'],
-                'FLEXIBEE_PASSWORD' => $company['password'],
-                'FLEXIBEE_COMPANY' => $company['company'],
+                'ABRAFLEXI_URL' => $company['url'],
+                'ABRAFLEXI_LOGIN' => $company['user'],
+                'ABRAFLEXI_PASSWORD' => $company['password'],
+                'ABRAFLEXI_COMPANY' => $company['company'],
                 'EASE_MAILTO' => $company['email'],
                 'EASE_LOGGER' => empty($company['email']) ? 'syslog' : 'syslog|email',
             ];

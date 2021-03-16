@@ -1,6 +1,6 @@
 <?php
 /**
- * Multi FlexiBee Setup  - FlexiBee server select
+ * Multi AbraFlexi Setup  - AbraFlexi server select
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2015-2020 Vitex Software
@@ -10,17 +10,17 @@ namespace AbraFlexi\MultiSetup\Ui;
 
 
 /**
- * Description of FlexiBeeSelect
+ * Description of AbraFlexiSelect
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class FlexiBeeSelect extends \Ease\Html\Select
+class AbraFlexiSelect extends \Ease\Html\Select
 {
 
     use \Ease\SQL\Orm;
 
     /**
-     * FlexiBee chooser
+     * AbraFlexi chooser
      * 
      * @param string $name
      * @param string $defaultValue
@@ -38,18 +38,18 @@ class FlexiBeeSelect extends \Ease\Html\Select
     }
 
     /**
-     * obtain Availble FlexiBee servers
+     * obtain Availble AbraFlexi servers
      * 
      * @return array
      */
     public function loadItems()
     {
-        $flexiBees    = ['' => _('Choose FlexiBee server')];
-        $this->setMyTable('flexibees');
-        $flexiBeesRaw = $this->getColumnsFromSQL(['id', 'name'], null, 'name');
-        foreach ($flexiBeesRaw as $flexiBee) {
-            $flexiBees[$flexiBee['id']] = $flexiBee['name'];
+        $abraflexis    = ['' => _('Choose AbraFlexi server')];
+        $this->setMyTable('abraflexis');
+        $abraflexisRaw = $this->getColumnsFromSQL(['id', 'name'], null, 'name');
+        foreach ($abraflexisRaw as $abraflexi) {
+            $abraflexis[$abraflexi['id']] = $abraflexi['name'];
         }
-        return $flexiBees;
+        return $abraflexis;
     }
 }

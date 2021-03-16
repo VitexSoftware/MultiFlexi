@@ -1,6 +1,6 @@
 <?php
 /**
- * Multi FlexiBee Setup  - New FlexiBee registration form
+ * Multi AbraFlexi Setup  - New AbraFlexi registration form
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2015-2020 Vitex Software
@@ -9,17 +9,17 @@
 namespace AbraFlexi\MultiSetup\Ui;
 
 /**
- * Registered FlexiBee instance editor Form
+ * Registered AbraFlexi instance editor Form
  *
  * @author 
  */
-class RegisterFlexiBeeForm extends ColumnsForm
+class RegisterAbraFlexiForm extends ColumnsForm
 {
 
     public function afterAdd()
     {
         $this->addInput(new \Ease\Html\InputTextTag('name'),
-            _('FlexiBee instance Name'));
+            _('AbraFlexi instance Name'));
         $this->addInput(new \Ease\Html\InputTextTag('url'),
             _('RestAPI endpoint url'));
         $this->addInput(new \Ease\Html\InputTextTag('user'),

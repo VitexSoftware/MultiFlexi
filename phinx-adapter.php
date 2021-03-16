@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Multi FlexiBee Setup - Phinx database adapter.
+ * Multi AbraFlexi Setup - Phinx database adapter.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * @copyright  2021 Vitex Software
  */
 if (file_exists('./vendor/autoload.php')) {
     include_once './vendor/autoload.php';
@@ -12,18 +12,19 @@ if (file_exists('./vendor/autoload.php')) {
     include_once '../vendor/autoload.php';
 }
 
-//$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv = \Dotenv\Dotenv::create(__DIR__);
-$dotenv->load();
+$shared = \Ease\Shared::instanced();
+if (file_exists('../.env')) {
+    $shared->loadConfig('../.env', true);
+}
 
 $prefix = file_exists('./db/') ? './db/' : '../db/';
 
 $sqlOptions = [];
 
-if (strstr(getenv('DB_CONNECTION'), 'sqlite')) {
-    $sqlOptions['database'] = $prefix . basename(getenv('DB_DATABASE'));
+if (strstr(\Ease\Functions::cfg('DB_CONNECTION'), 'sqlite')) {
+    $sqlOptions['database'] = $prefix . basename(\Ease\Functions::cfg('DB_DATABASE'));
 }
-$engine = new \Ease\SQL\Engine(null,$sqlOptions);
+$engine = new \Ease\SQL\Engine(null, $sqlOptions);
 $cfg = [
     'paths' => [
         'migrations' => [$prefix . 'migrations'],
@@ -33,13 +34,13 @@ $cfg = [
     [
         'default_database' => 'development',
         'development' => [
-            'adapter' => getenv('DB_CONNECTION'),
+            'adapter' => \Ease\Functions::cfg('DB_CONNECTION'),
             'name' => $engine->database,
             'connection' => $engine->getPdo($sqlOptions)
         ],
         'default_database' => 'production',
         'production' => [
-            'adapter' => getenv('DB_CONNECTION'),
+            'adapter' => \Ease\Functions::cfg('DB_CONNECTION'),
             'name' => $engine->database,
             'connection' => $engine->getPdo($sqlOptions)
         ],

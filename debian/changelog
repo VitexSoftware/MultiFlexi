@@ -1,12 +1,11 @@
-multi-flexibee-setup (0.3.11) UNRELEASED; urgency=medium
+multi-abraflexi-setup (0.3.11) UNRELEASED; urgency=medium
 
   * Ability choose run interval between hour and year
   * Debian package
   * Export notification email
   * new packages with database support
   * sql adapters dependency fix
-  * Conflict defined between DB pacakges
-  * Conflict defined between DB pacakges
+  * Conflict defined between DB packages
   * Auto update package version in debian's composer.json at every build
   * Added Additional Environment setup for each app/company run
   * twbootstrap renamed to bootstrap
@@ -18,7 +17,7 @@ multi-flexibee-setup (0.3.11) UNRELEASED; urgency=medium
 
  -- CyberVitexus <vitex@exiv.jinonice.czf>  Mon, 13 Jul 2020 16:45:53 +0200
 
-multi-flexibee-setup (0.1) experimental; urgency=medium
+multi-abraflexi-setup (0.1) experimental; urgency=medium
 
   * Initial release.
 

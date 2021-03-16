@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup - Company instance editor.
+ * Multi AbraFlexi Setup - Company instance editor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
@@ -35,7 +35,7 @@ if ($oPage->isPosted()) {
         $companies->setDataValue('nazev', WebPage::getGetValue('nazev'));
         $companies->setDataValue('ic', WebPage::getGetValue('ic'));
         $companies->setDataValue('email', WebPage::getGetValue('email'));
-        $companies->setDataValue('flexibee', WebPage::getGetValue('flexibee', 'int'));
+        $companies->setDataValue('abraflexi', WebPage::getGetValue('abraflexi', 'int'));
     }
 }
 
@@ -50,7 +50,7 @@ if (strlen($instanceName)) {
 $instanceRow = new Row();
 $instanceRow->addColumn(8, new RegisterCompanyForm($companies, null, ['target' => 'company.php']));
 
-//$instanceRow->addColumn(4, new ui\FlexiBeeInstanceStatus($companies));
+//$instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($companies));
 
 if (strlen($companies->getDataValue('logo'))) {
     $instanceRow->addColumn(4, new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']));

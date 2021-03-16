@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup - Custom Application Config form Class
+ * Multi AbraFlexi Setup - Custom Application Config form Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2018-2020 Vitex Software

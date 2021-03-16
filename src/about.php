@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup - About page.
+ * Multi AbraFlexi Setup - About page.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
@@ -28,9 +28,9 @@ $listing = $infoBlock->addItem(new \Ease\Html\UlTag());
 if (file_exists('../README.md')) {
     $listing->addItem(implode('<br>', file('../README.md')));
 } else {
-    if (file_exists('/usr/share/doc/multiflexibeesetup/README.md')) {
+    if (file_exists('/usr/share/doc/multiabraflexisetup/README.md')) {
         $listing->addItem(implode('<br>',
-                        file('/usr/share/doc/multiflexibeesetup/README.md')));
+                        file('/usr/share/doc/multiabraflexisetup/README.md')));
     }
 }
 

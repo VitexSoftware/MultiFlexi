@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup - Company instance editor.
+ * Multi AbraFlexi Setup - Company instance editor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
@@ -17,6 +17,8 @@ require_once '../vendor/autoload.php';
 session_start();
 
 \Ease\Shared::singleton()->loadConfig(dirname(__DIR__) . '/.env', true);
+
+\Ease\Locale::singleton(null,'../i18n','multiabraflexisetup');
 
 define('EASE_LOGGER', 'syslog|\AbraFlexi\MultiSetup\LogToSQL');
 

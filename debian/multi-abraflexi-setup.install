@@ -1,0 +1,20 @@
+src/*.php                                 usr/share/multi-abraflexi-setup
+src/favicon.ico                           usr/share/multi-abraflexi-setup
+src/js/*.js                               usr/share/multi-abraflexi-setup/js
+src/images/*                              usr/share/multi-abraflexi-setup/images
+db/migrations/*				  usr/lib/multi-abraflexi-setup/db/migrations
+db/seeds/*				  usr/lib/multi-abraflexi-setup/db/seeds
+debian/conf/composer.json                 usr/lib/multi-abraflexi-setup
+phinx-adapter.php			  usr/lib/multi-abraflexi-setup
+src/AbraFlexi/MultiSetup/*.php            usr/lib/multi-abraflexi-setup/AbraFlexi/
+src/AbraFlexi/MultiSetup/Ui/*.php         usr/lib/multi-abraflexi-setup/AbraFlexi/Ui/
+debian/conf/multi-abraflexi-setup.conf    etc/apache2/conf-available
+debian/conf/multi-abraflexi-setup.service etc/avahi/services
+bin/*					  usr/bin
+lib/*					  usr/lib/multi-abraflexi-setup
+debian/cz.vitexsoftware.multi_abraflexi_setup.metainfo.xml    usr/share/metainfo/
+debian/cz.vitexsoftware.multi_abraflexi_setup.desktop         usr/share/applications/
+multi-abraflexi-setup.svg                 usr/share/icons/hicolor/scalable/apps/
+i18n/cs_CZ/LC_MESSAGES/*.mo               usr/share/locale/cs_CZ/LC_MESSAGES/
+i18n/en_US/LC_MESSAGES/*.mo               usr/share/locale/en_US/LC_MESSAGES/
+

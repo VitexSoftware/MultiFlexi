@@ -99,7 +99,7 @@ class Logger extends DBEngine {
 //  [DatUpdate] => null
 //  [setup] => null
 //  [logo] => null
-//  [flexibee] => null
+//  [abraflexi] => null
 //  [ic] => null
 //  [company] => null
 //  [rw] => null

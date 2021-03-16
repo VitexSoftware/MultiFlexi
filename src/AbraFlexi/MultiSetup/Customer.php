@@ -2,7 +2,7 @@
 namespace AbraFlexi\MultiSetup;
 
 /**
- * Multi FlexiBee Setup - Customer Management Class
+ * Multi AbraFlexi Setup - Customer Management Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2018-2020 Vitex Software

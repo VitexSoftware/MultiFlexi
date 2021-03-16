@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup - Index page.
+ * Multi AbraFlexi Setup - Index page.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
@@ -18,9 +18,9 @@ require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Applications')));
 
-$flexiBees = new Application();
+$abraflexis = new Application();
 
-$allAppData = $flexiBees->getAll();
+$allAppData = $abraflexis->getAll();
 
 $fbtable = new Table();
 $fbtable->addRowHeaderColumns([_('ID'), _('Enabled'), _('Image'), _('Name'),_('Description'),_('Executable'),_('Modified')]);
@@ -30,7 +30,7 @@ foreach ($allAppData as $appData) {
     $fbtable->addRowColumns($appData);
 }
 
-$oPage->container->addItem(new Panel(_('FlexiBee Instances'), 'default', $fbtable, new LinkButton('app.php', _('Register new'))));
+$oPage->container->addItem(new Panel(_('AbraFlexi Instances'), 'default', $fbtable, new LinkButton('app.php', _('Register new'))));
 
 $oPage->addItem(new PageBottom());
 

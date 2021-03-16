@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup  - Main Menu
+ * Multi AbraFlexi Setup  - Main Menu
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2015-2020 Vitex Software
@@ -60,25 +60,25 @@ class MainMenu extends \Ease\Html\DivTag {
 
 
         if (\Ease\Shared::user()->isLogged()) { //Authenticated user
-            $flexiBees = $this->getMenuList(new \AbraFlexi\MultiSetup\FlexiBees());
+            $abraflexis = $this->getMenuList(new \AbraFlexi\MultiSetup\AbraFlexis());
             $customers = $this->getMenuList(new \AbraFlexi\MultiSetup\Customer());
             $companys = $this->getMenuList(new \AbraFlexi\MultiSetup\Company(), 'logo');
             $apps = $this->getMenuList(new \AbraFlexi\MultiSetup\Application(), 'image');
 
-            $this->flexibeesMenuEnabled($nav, $flexiBees);
+            $this->abraflexisMenuEnabled($nav, $abraflexis);
 
 
-            if (empty($flexiBees) && empty($customers) && empty($companys)) { // All empty yet
+            if (empty($abraflexis) && empty($customers) && empty($companys)) { // All empty yet
                 \AbraFlexi\MultiSetup\User::singleton()->addStatusMessage(_('No server registered yet. Please register one.'), 'warning');
                 $this->customersMenuDisabled($nav);
                 $this->companysMenuDisabled($nav);
             } else {
-                if (count($flexiBees) && empty($customers) && empty($companys)) {
+                if (count($abraflexis) && empty($customers) && empty($companys)) {
                     $this->customersMenuEnabled($nav, $customers);
                     $this->companysMenuDisabled($nav);
                     \AbraFlexi\MultiSetup\User::singleton()->addStatusMessage(_('No customer registered yet. Please register one.'), 'warning');
                 } else {
-                    if (count($flexiBees) && count($customers) && empty($companys)) {
+                    if (count($abraflexis) && count($customers) && empty($companys)) {
                         \AbraFlexi\MultiSetup\User::singleton()->addStatusMessage(_('No company registered yet. Please register one.'), 'warning');
                         $this->customersMenuEnabled($nav, $customers);
                         $nav->addMenuItem(new \Ease\TWB4\LinkButton('company.php', '<img width=30 src=images/company.svg> ' . _('Companies'), 'warning'), 'right');
@@ -115,15 +115,15 @@ class MainMenu extends \Ease\Html\DivTag {
         );
     }
 
-    public function flexibeesMenuEnabled($nav, $flexiBees) {
-        $flexiBeesMenu = ['flexibee.php' => _('Register FlexiBee Server')];
+    public function abraflexisMenuEnabled($nav, $abraflexis) {
+        $abraflexisMenu = ['abraflexi.php' => _('Register AbraFlexi Server')];
 
-        if (!empty($flexiBees)) {
-            $flexiBeesMenu['flexibees.php'] = _('Instance list');
+        if (!empty($abraflexis)) {
+            $abraflexisMenu['abraflexis.php'] = _('Instance list');
         }
 
-        $nav->addDropDownMenu('<img width=30 src=images/flexibee-server.svg> ' . _('Servers'),
-                array_merge($flexiBeesMenu, ['' => ''], $flexiBees)
+        $nav->addDropDownMenu('<img width=30 src=images/abraflexi-server.svg> ' . _('Servers'),
+                array_merge($abraflexisMenu, ['' => ''], $abraflexis)
         );
     }
 

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup  - PillBox
+ * Multi AbraFlexi Setup  - PillBox
  * 
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright (c) 2017-2019, Vítězslav Dvořák

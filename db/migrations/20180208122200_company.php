@@ -14,7 +14,7 @@ class Company extends AbstractMigration
             ->addColumn('enabled', 'boolean', array('default' => false))
             ->addColumn('settings', 'text', ['null' => true])
             ->addColumn('logo', 'text', ['null' => true])
-            ->addColumn('flexibee', 'integer', ['limit' => 128])
+            ->addColumn('abraflexi', 'integer', ['limit' => 128])
             ->addColumn('nazev', 'string', ['null' => true, 'limit' => 32])
             ->addColumn('ic', 'string', ['null' => true, 'limit' => 32])
             ->addColumn('company', 'string', ['comment' => 'Company Code'])
@@ -23,7 +23,7 @@ class Company extends AbstractMigration
             ->addColumn('webhook', 'boolean', ['comment' => 'Webhook ready'])
             ->addColumn('DatCreate', 'datetime', [])
             ->addColumn('DatUpdate', 'datetime', ['null' => true])
-            ->addIndex(['flexibee', 'company'], ['unique' => true])
+            ->addIndex(['abraflexi', 'company'], ['unique' => true])
             ->create();
     }
 }

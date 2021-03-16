@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup  - Shared page bottom class
+ * Multi AbraFlexi Setup  - Shared page bottom class
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2015-2020 Vitex Software
@@ -38,7 +38,7 @@ class PageBottom extends \Ease\Html\FooterTag {
         $this->addItem('<hr>');
         $footrow = new \Ease\TWB4\Row();
 
-        $author = 'Multi FlexiBee Setup v.: ' . $appInfo->version . '&nbsp;&nbsp; &copy; 2020 <a href="http://vitexsoftware.cz/">Vitex Software</a>';
+        $author = 'Multi AbraFlexi Setup v.: ' . $appInfo->version . '&nbsp;&nbsp; &copy; 2020-2021 <a href="https://vitexsoftware.cz/">Vitex Software</a>';
 
         $footrow->addColumn(6, [$author]);
 

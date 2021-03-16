@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup - Company instance editor.
+ * Multi AbraFlexi Setup - Company instance editor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software

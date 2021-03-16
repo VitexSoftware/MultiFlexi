@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup - Show avilble applications as cards.
+ * Multi AbraFlexi Setup - Show avilble applications as cards.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software

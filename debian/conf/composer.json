@@ -1,14 +1,12 @@
 {
-  "name": "vitexsoftware/multiflexibee-setup",
-  "description": "Tool used to setup FlexiBee multiinstance",
+  "name": "vitexsoftware/multi-abraflexi-setup",
+  "description": "Tool used to setup AbraFlexi multiinstance",
   "version": "0.3.11",
   "type": "project",
   "require": {
-    "deb/ease-bootstrap4-widgets-flexibee": "*",
-    "deb/ease-fluentpdo": "*",
-    "deb/flexibee-bricks": "*",
-    "vlucas/phpdotenv": "^3",
-    "deb/ease-bootstrap4-widgets": "*"
+    "deb/ease-bootstrap4-widgets-abraflexi": "*",
+    "deb/ease-bootstrap4-widgets": "*",
+    "deb/ease-fluentpdo": "*"
   },
   "license": "MIT",
   "authors": [
@@ -18,13 +16,13 @@
     }
   ],
   "config": {
-    "vendor-dir": "/var/lib/multi-flexibee-setup"
+    "vendor-dir": "/var/lib/multi-abraflexi-setup"
   },
   "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
-      "FlexiPeeHP\\MultiSetup\\": "FlexiPeeHP",
-      "FlexiPeeHP\\MultiSetup\\Ui\\": "FlexiPeeHP/Ui"
+      "AbraFlexi\\MultiSetup\\": "AbraFlexi",
+      "AbraFlexi\\MultiSetup\\Ui\\": "AbraFlexi/Ui"
     }
   },
   "repositories": [
@@ -38,7 +36,7 @@
     },
     {
       "type": "path",
-      "url": "/usr/share/php/FlexiPeeHP/"
+      "url": "/usr/share/php/AbraFlexi/"
     },
     {
       "type": "path",
@@ -54,7 +52,7 @@
     },
     {
       "type": "path",
-      "url": "/usr/share/php/FlexiPeeHPBricks/"
+      "url": "/usr/share/php/AbraFlexiBricks/"
     },
     {
       "type": "path",
@@ -62,7 +60,7 @@
     },
     {
       "type": "path",
-      "url": "/usr/share/php/EaseTWB4WidgetsFlexiBee/"
+      "url": "/usr/share/php/EaseTWB4WidgetsAbraFlexi/"
     }
   ]
 }

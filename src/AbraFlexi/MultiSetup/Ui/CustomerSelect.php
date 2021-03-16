@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup  - Customer Select
+ * Multi AbraFlexi Setup  - Customer Select
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2015-2020 Vitex Software
@@ -25,7 +25,7 @@ class CustomerSelect extends \Ease\Html\Select {
     }
 
     /**
-     * obtain Availble FlexiBee servers
+     * obtain Availble AbraFlexi servers
      * 
      * @return array
      */

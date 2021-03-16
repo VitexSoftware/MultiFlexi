@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup  - App class
+ * Multi AbraFlexi Setup  - App class
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2020 Vitex Software

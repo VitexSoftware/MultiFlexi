@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup - Toggle app status.
+ * Multi AbraFlexi Setup - Toggle app status.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2017-2020 Vitex Software

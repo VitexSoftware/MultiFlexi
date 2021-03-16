@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi FlexiBee Setup  - Common menu class
+ * Multi AbraFlexi Setup  - Common menu class
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2015-2020 Vitex Software
