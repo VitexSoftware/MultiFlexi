@@ -37,12 +37,17 @@ Vagrant.configure("2") do |config|
     apt -y install  php-tools php-xdebug
     echo "xdebug.force_display_errors = 1" >> /etc/php/*/cli/conf.d/20-xdebug.ini
     echo "xdebug.mode=develop"  >> /etc/php/*/cli/conf.d/20-xdebug.ini
-
-
     
     php-devconf
     phpenmod xdebug
     
+    echo '<a href="multi-abraflexi-setup?login=demo&password=demo">Multi AbraFlexi Setup</a><?php phpinfo();' > /var/www/html/index.php
+    rm -rf /var/www/html/index.html
+
     apache2ctl restart
+
+    apt-get  -y install links
+    links -dump http://localhost/multi-abraflexi-setup
+
   SHELL
 end

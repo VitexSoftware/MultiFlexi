@@ -18,7 +18,7 @@ require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('AbraFlexi instance')));
 
-$abraflexis = new AbraFlexis($oPage->getRequestValue('id', 'int'));
+$abraflexis = new AbraFlexis($oPage->getRequestValue('id', 'int'),['autoload'=>true]);
 $instanceName = $abraflexis->getRecordName();
 
 if ($oPage->isPosted()) {

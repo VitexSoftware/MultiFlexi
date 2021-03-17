@@ -21,9 +21,9 @@ class CompanySeeder extends AbstractSeed {
                 'nazev' => 'Demo Firma',
                 'ic' => '12345678',
                 'company' => 'demo',
-                'rw' => true,
-                'setup' => false,
-                'webhook' => false,
+                'rw' => 0,
+                'setup' => 0,
+                'webhook' => 0,
                 'DatCreate' => date('Y-m-d H:i:s')
             ],
             [
@@ -32,9 +32,9 @@ class CompanySeeder extends AbstractSeed {
                 'nazev' => 'Ja Zivnostnik',
                 'ic' => '87654321',
                 'company' => 'demo_de',
-                'rw' => true,
-                'setup' => false,
-                'webhook' => false,
+                'rw' => 0,
+                'setup' => 0,
+                'webhook' => 0,
                 'DatCreate' => date('Y-m-d H:i:s')
             ]
         ];

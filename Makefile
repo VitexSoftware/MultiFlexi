@@ -8,6 +8,10 @@ clean:
 migration:
 	cd src ; ../vendor/bin/phinx migrate -c ../phinx-adapter.php ; cd ..
 
+seed:
+	cd src ; ../vendor/bin/phinx seed:run -c ../phinx-adapter.php ; cd ..
+
+
 autoload:
 	composer update
 
@@ -15,16 +19,17 @@ demodata:
 	cd src ; ../vendor/bin/phinx seed:run -c ../phinx-adapter.php ; cd ..
 
 newmigration:
-	read -p "Enter CamelCase migration name : " migname ; ./vendor/bin/phinx create $$migname -c ./phinx-adapter.php
+	read -p "Enter CamelCase migration name : " migname ; cd src ; ../vendor/bin/phinx create $$migname -c ../phinx-adapter.php ; cd ..
 
 newseed:
-	read -p "Enter CamelCase seed name : " migname ; ./vendor/bin/phinx seed:create $$migname -c ./phinx-adapter.php
+	read -p "Enter CamelCase seed name : " migname ; cd src ; ../vendor/bin/phinx seed:create $$migname -c ./phinx-adapter.php ; cd ..
 
 dbreset:
 	sudo rm -f db/multiabraflexi.sqlite
 	echo > db/multiabraflexi.sqlite
 	chmod 666 db/multiabraflexi.sqlite
 	chmod ugo+rwX db
+	
 
 demo: dbreset migration demodata
 
@@ -62,7 +67,7 @@ vagrant: deb
 	mv ../multi-abraflexi-setup-mysql_$(currentversion)_all.deb  deb
 	cd deb ; dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz; cd ..
 	vagrant up
-	firefox http://localhost:8080/multi-abraflexi-setup?login=demo\&password=demo
+	sensible-browser http://localhost:8080/multi-abraflexi-setup?login=demo\&password=demo
 
 release:
 	echo Release v$(nextversion)

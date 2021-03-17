@@ -22,8 +22,6 @@ use Ease\TWB4\LinkButton;
 use Ease\TWB4\Panel;
 use Ease\TWB4\Row;
 use Ease\TWB4\SubmitButton;
-use AbraFlexi\MultiSetup\User;
-use PDOException;
 
 require_once './init.php';
 
@@ -38,6 +36,7 @@ if ($login) {
 //    }
     if ($oUser->tryToLogin($_POST)) {
         $oPage->redirect('main.php');
+        session_write_close();
         exit;
     }
 }

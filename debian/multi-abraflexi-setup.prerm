@@ -14,7 +14,16 @@ fi
 
 case "$1" in
     remove|upgrade|deconfigure|purge)
-    rm -rf /usr/lib/multi-abraflexi-setup/composer.lock /var/lib/multi-abraflexi-setup /usr/lib/multi-abraflexi-setup/.env
+
+     if [ "$1" = "purge" ]; then
+         rm -f /etc/multi-abraflexi-setup/.env
+         if which ucf >/dev/null 2>&1; then
+             ucf --purge /etc/multi-abraflexi-setup/.env
+             ucfr --purge /etc/multi-abraflexi-setup/.env
+         fi
+     fi
+
+        rm -rf /usr/lib/multi-abraflexi-setup/composer.lock /var/lib/multi-abraflexi-setup /etc/multi-abraflexi-setup/
     ;;
 
     failed-upgrade)
