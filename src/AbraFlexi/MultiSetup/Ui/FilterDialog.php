@@ -4,7 +4,7 @@
  * broker.dbfinance.cz
  * 
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright (c) 2017-2019, Vítězslav Dvořák
+ * @copyright (c) 2017-2021, Vítězslav Dvořák
  */
 
 namespace AbraFlexi\MultiSetup\Ui;

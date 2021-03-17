@@ -13,7 +13,7 @@ namespace AbraFlexi\MultiSetup\Ui;
  *
  * @author 
  */
-class RegisterAbraFlexiForm extends ColumnsForm
+class RegisterAbraFlexiForm extends EngineForm
 {
 
     public function afterAdd()

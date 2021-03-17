@@ -40,11 +40,11 @@ class RegisterCompanyForm extends EngineForm {
 
         $this->addInput(new SemaforLight($this->engine->getDataValue('rw')),
                 _('write permission'));
-        $this->addItem(new InputHiddenTag('rw'));
+        $this->addItem(new InputHiddenTag('rw',false));
 
         $this->addInput(new SemaforLight($this->engine->getDataValue('setup')),
                 _('Setup performed'));
-        $this->addItem(new InputHiddenTag('setup'));
+        $this->addItem(new InputHiddenTag('setup'),false);
 
         $this->addInput(new SemaforLight($this->engine->getDataValue('webhook')),
                 _('WebHook established'));
@@ -57,11 +57,8 @@ class RegisterCompanyForm extends EngineForm {
 
         if (!is_null($this->engine->getDataValue('id'))) {
             $this->addItem(new InputHiddenTag('id'));
-        }
+        } 
 
-        if ($this->engine->getDataCount()) {
-            $this->fillUp($this->engine->getData());
-        }
     }
 
 }

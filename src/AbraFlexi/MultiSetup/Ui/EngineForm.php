@@ -33,13 +33,11 @@ class EngineForm extends Form {
      * @param array  $tagProperties vlastnosti tagu například:
      *                                 array('enctype' => 'multipart/form-data')
      */
-    public function __construct($engine, $formContents = null,
-            $tagProperties = []) {
+    public function __construct($engine, $formContents = null, $tagProperties = []) {
         $this->engine = $engine;
         $tagProperties['method'] = 'post';
         $tagProperties['name'] = get_class($engine);
         parent::__construct($tagProperties, [], $formContents);
-
     }
 
     /**
@@ -49,12 +47,11 @@ class EngineForm extends Form {
      */
     public function finalize() {
         $recordID = $this->engine->getMyKey();
-        $this->addItem(new InputHiddenTag('class',
-                        get_class($this->engine)));
+        $this->addItem(new InputHiddenTag('class', get_class($this->engine)));
         if (!is_null($recordID)) {
-            $this->addItem(new InputHiddenTag($this->engine->getKeyColumn(),
-                            $recordID));
+            $this->addItem(new InputHiddenTag($this->engine->getKeyColumn(), $recordID));
         }
+        $this->fillUp($this->engine->getData());
         return parent::finalize();
     }
 

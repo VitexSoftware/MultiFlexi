@@ -27,6 +27,11 @@ class Company extends \AbraFlexi\Company {
         }
     }
 
+    /**
+     * 
+     * @param type $company
+     * @return type
+     */
     public function prepareCompany($company) {
         $result = ['webhook' => false];
         $this->setCompany($company);
@@ -170,6 +175,11 @@ class Company extends \AbraFlexi\Company {
         } else {
             $data['enabled'] = false;
         }
+        if (isset($data['setup'])) {
+            $data['setup'] = true;
+        } else {
+            $data['setup'] = false;
+        }
 
         if (array_key_exists('company', $data) && empty($data['company'])) {
             unset($data['company']);
@@ -180,7 +190,7 @@ class Company extends \AbraFlexi\Company {
 
         unset($data['class']);
 
-        $data['logo'] = $this->obtainLogo(intval($data['abraflexi']),$data['company']);
+        $data['logo'] = $this->obtainLogo(intval($data['abraflexi']), $data['company']);
 
         return parent::takeData($data);
     }
@@ -191,7 +201,7 @@ class Company extends \AbraFlexi\Company {
      * @param int $abraflexiID
      * @param string $company Description
      */
-    public function obtainLogo($abraflexiID,$company) {
+    public function obtainLogo($abraflexiID, $company) {
         $abraflexir = new AbraFlexis($abraflexiID);
         $fbOptions = $abraflexir->getData();
         $fbOptions['company'] = $company;
@@ -199,8 +209,6 @@ class Company extends \AbraFlexi\Company {
         return $logoEngine->getTagProperty('src');
     }
 
-    
-    
     /**
      * Convert data from AbraFlexi column names to SQL column names
      * 

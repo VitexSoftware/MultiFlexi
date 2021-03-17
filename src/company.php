@@ -48,7 +48,7 @@ if (strlen($instanceName)) {
 }
 
 $instanceRow = new Row();
-$instanceRow->addColumn(8, new RegisterCompanyForm($companies, null, ['target' => 'company.php']));
+$instanceRow->addColumn(8, new RegisterCompanyForm($companies, null, ['action' => 'company.php']));
 
 //$instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($companies));
 
