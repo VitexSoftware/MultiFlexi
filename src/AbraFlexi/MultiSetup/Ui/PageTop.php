@@ -1,9 +1,5 @@
 <?php
 
-use Ease\Html\DivTag;
-use Ease\Shared;
-use AbraFlexi\MultiSetup\Ui\WebPage;
-
 /**
  * Multi AbraFlexi Setup  - Shared page top class
  *
@@ -12,6 +8,8 @@ use AbraFlexi\MultiSetup\Ui\WebPage;
  */
 
 namespace AbraFlexi\MultiSetup\Ui;
+
+use AbraFlexi\MultiSetup\Ui\WebPage;
 
 /**
  * Page TOP.

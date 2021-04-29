@@ -1,13 +1,5 @@
 <?php
 
-use Ease\Anonym;
-use Ease\Html\ATag;
-use Ease\Html\H1Tag;
-use Ease\Shared;
-use Ease\TWB4\Row;
-use AbraFlexi\MultiSetup\Ui\PageBottom;
-use AbraFlexi\MultiSetup\Ui\PageTop;
-
 /**
  * Multi AbraFlexi Setup - Sign off page.
  *
@@ -16,6 +8,11 @@ use AbraFlexi\MultiSetup\Ui\PageTop;
  */
 
 namespace AbraFlexi\MultiSetup\Ui;
+
+use AbraFlexi\MultiSetup\Ui\PageBottom;
+use AbraFlexi\MultiSetup\Ui\PageTop;
+
+
 
 require_once './init.php';
 

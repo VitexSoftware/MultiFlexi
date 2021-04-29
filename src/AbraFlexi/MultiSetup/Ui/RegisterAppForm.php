@@ -1,10 +1,11 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Multi AbraFlexi Setup - Company Management Class
+ *
+ * @author Vítězslav Dvořák <info@vitexsoftware.cz>
+ * @copyright  2018-2020 Vitex Software
  */
+
 
 namespace AbraFlexi\MultiSetup\Ui;
 
@@ -26,7 +27,7 @@ class RegisterAppForm extends EngineForm {
         $this->addInput(new InputTextTag('nazev'), _('Application name'));
         $this->addInput(new InputTextTag('popis'), _('Application Description'));
         $this->addInput(new InputTextTag('executable'), _('Path to binary'));
-        $this->addInput(new InputTextTag('setup'), _('Command'), '', _('Command used to setup new company for use with command'));
+        $this->addInput(new InputTextTag('setup'), _('Setup Command'), '', _('Command used to setup new company for use with command'));
         $this->addInput(new InputTextTag('cmdparams'), _('Command arguments'), '', _('you can use macros like {ABRAFLEXI_URL} or custom defined config fields.'));
 
         $imgInput = $this->addInput(new InputFileTag('imageraw'), _('Application Icon'));

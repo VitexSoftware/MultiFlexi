@@ -15,6 +15,27 @@ namespace AbraFlexi\MultiSetup;
  */
 class Engine extends \Ease\SQL\Engine {
 
+    /**
+     * MultiSetup Engine
+     * 
+     * @param mixed $identifier
+     * @param array $options
+     */
+    public function __construct($identifier = null, $options = []) {
+        if (array_key_exists('autoload', $options) === false) {
+            $options['autoload'] = true;
+        }
+        parent::__construct($identifier, $options);
+    }
+
+    /**
+     * Save data
+     * 
+     * @param array $data
+     * @param boolean $searchForID
+     * 
+     * @return int
+     */
     public function saveToSQL($data = null, $searchForID = false) {
         if (is_null($data)) {
             $data = $this->getData();

@@ -14,7 +14,7 @@ Pre-Depends: php-robmorgan-phinx
 Replaces: multi-flexibee-setup
 Architecture: all
 Description: run several tools on defined abraflexi servers
- Define server, customets and its companies. Then specify
+ Define server, customers and its companies. Then specify
  which services/commands run upon it.
 
 Package: multi-abraflexi-setup-sqlite

@@ -1,11 +1,6 @@
 <?php
 
 
-use AbraFlexi\MultiSetup\Ui\AppsMenu;
-use AbraFlexi\MultiSetup\Ui\DbStatus;
-use AbraFlexi\MultiSetup\Ui\PageBottom;
-use AbraFlexi\MultiSetup\Ui\PageTop;
-
 /**
  * Multi AbraFlexi Setup - Index page.
  *
@@ -14,6 +9,13 @@ use AbraFlexi\MultiSetup\Ui\PageTop;
  */
 
 namespace AbraFlexi\MultiSetup\Ui;
+
+use AbraFlexi\MultiSetup\Ui\AppsMenu;
+use AbraFlexi\MultiSetup\Ui\DbStatus;
+use AbraFlexi\MultiSetup\Ui\PageBottom;
+use AbraFlexi\MultiSetup\Ui\PageTop;
+
+
 
 require_once './init.php';
 

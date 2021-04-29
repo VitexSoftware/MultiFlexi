@@ -23,7 +23,7 @@ case "$1" in
          fi
      fi
 
-        rm -rf /usr/lib/multi-abraflexi-setup/composer.lock /var/lib/multi-abraflexi-setup /etc/multi-abraflexi-setup/
+        rm -rf /usr/lib/multi-abraflexi-setup/composer.lock /var/lib/multi-abraflexi-setup
     ;;
 
     failed-upgrade)
