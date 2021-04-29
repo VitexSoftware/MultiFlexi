@@ -7,7 +7,7 @@ namespace AbraFlexi\MultiSetup;
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2018-2020 Vitex Software
  */
-class Customer extends \Ease\SQL\Engine
+class Customer extends Engine
 {
     public $nameColumn = 'login';
     public $myTable = 'customer';

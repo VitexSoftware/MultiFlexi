@@ -14,9 +14,9 @@ $oPage->onlyForLogged();
 
 Engine::doThings($oPage);
 
-$oPage->addItem(new ui\PageTop(_('Přehled uživatelů')));
+$oPage->addItem(new ui\PageTop(_('Users')));
 
-$oPage->addItem(new \Ease\TWB4\Container(new DataGrid(_('Uživatelé'), new User())));
+$oPage->addItem(new \Ease\TWB4\Container(new DataGrid(_('Users'), new User())));
 
 $oPage->addItem(new ui\PageBottom());
 
