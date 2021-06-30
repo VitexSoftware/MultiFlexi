@@ -8,7 +8,7 @@ Homepage: https://github.com/VitexSoftware/MultiAbraFlexiSetup
 
 Package: multi-abraflexi-setup
 Multi-Arch: foreign
-Depends: ${misc:Depends}, php-vitexsoftware-abraflexi-bricks, php-cli, locales-all, php-vitexsoftware-ease-bootstrap4-widgets-abraflexi ,php-vitexsoftware-ease-fluentpdo, multi-abraflexi-setup-sqlite|multi-abraflexi-setup-mysql|multi-abraflexi-setup-pgsql, libjs-jquery-datatables
+Depends: ${misc:Depends}, php-vitexsoftware-ease-bricks, php-vitexsoftware-abraflexi-bricks, php-cli, locales-all, php-vitexsoftware-ease-bootstrap4-widgets-abraflexi ,php-vitexsoftware-ease-fluentpdo, multi-abraflexi-setup-sqlite|multi-abraflexi-setup-mysql|multi-abraflexi-setup-pgsql, libjs-jquery-datatables
 Suggests: abraflexi-server,php-abraflexi-config, abraflexi-digest, abraflexi-matcher, abraflexi-reminder, abraflexi-contract-invoices, abraflexi-mailer, abraflexi-email-importer
 Pre-Depends: php-robmorgan-phinx
 Replaces: multi-flexibee-setup
