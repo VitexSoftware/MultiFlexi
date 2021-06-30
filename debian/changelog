@@ -1,4 +1,4 @@
-multi-abraflexi-setup (1.0) UNRELEASED; urgency=medium
+multi-abraflexi-setup (1.1) UNRELEASED; urgency=medium
 
   * Ability choose run interval between hour and year
   * Debian package
@@ -14,8 +14,9 @@ multi-abraflexi-setup (1.0) UNRELEASED; urgency=medium
   * Show logs in datatable
   * Add Setup commands for reminder & matcher
   * MySQL Compatibility
+  * New Version
 
- -- CyberVitexus <vitex@exiv.jinonice.czf>  Mon, 13 Jul 2020 16:45:53 +0200
+ -- CyberVitexus <vitex@exiv.jinonice.czf>  Thu, 29 Apr 2021 12:14:01 +0200
 
 multi-abraflexi-setup (0.1) experimental; urgency=medium
 

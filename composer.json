@@ -17,7 +17,7 @@
             "email": "info@vitexsoftware.cz"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "AbraFlexi\\MultiSetup\\": "src/AbraFlexi/MultiSetup/",

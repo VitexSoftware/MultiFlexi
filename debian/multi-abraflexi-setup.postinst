@@ -4,15 +4,6 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-db_get composer/WEB_USER
-WEBUSER=$RET
-mkdir -p /var/lib/multi-abraflexi-setup /var/lib/composer
-chown $WEBUSER /var/lib/multi-abraflexi-setup /var/lib/composer -R
-echo '{}' > /usr/lib/multi-abraflexi-setup/composer.lock
-chown $WEBUSER /usr/lib/multi-abraflexi-setup/composer.lock
-su - $WEBUSER -s /bin/bash -c 'COMPOSER_HOME="/var/lib/composer" composer -o install -d /usr/lib/multi-abraflexi-setup/'
-
-
 if [ -f /usr/share/dbconfig-common/dpkg/postinst ]; then
     . /usr/share/dbconfig-common/dpkg/postinst
     dbc_generate_include_args="-U -o template_infile=/usr/lib/multi-abraflexi-setup/.env.template"
@@ -87,6 +78,9 @@ apache_install() {
 
 case "$1" in
     configure)
+
+	composer-debian 
+
 	# Handle webserver reconfiguration/restart ; stolen from zabbix package
 	db_get multi-abraflexi-setup/reconfigure-webserver || true
 	webservers="$RET"

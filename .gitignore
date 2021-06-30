@@ -30,3 +30,4 @@ composer.lock
 /debian/multi-abraflexi-setup.debhelper.log
 /debian/multi-abraflexi-setup.postrm.debhelper
 /deb/
+/nbproject/private/
