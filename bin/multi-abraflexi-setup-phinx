@@ -1,6 +1,2 @@
 #!/bin/bash
-if [ ! -f /var/lib/composer/multi-abraflexi-setup/autoload.php ]; then
-	composer-debian multi-abraflexi-setup
-fi
-
-sudo phinx $1 -c /usr/lib/multi-abraflexi-setup/phinx-adapter.php $2 $3
+phinx $1 -c /usr/lib/multi-abraflexi-setup/phinx-adapter.php $2 $3
