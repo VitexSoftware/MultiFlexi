@@ -79,7 +79,7 @@ apache_install() {
 case "$1" in
     configure)
 
-	composer-debian 
+	composer-debian multi-abraflexi-setup
 
 	# Handle webserver reconfiguration/restart ; stolen from zabbix package
 	db_get multi-abraflexi-setup/reconfigure-webserver || true
