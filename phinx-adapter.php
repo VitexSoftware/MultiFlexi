@@ -1,9 +1,4 @@
 <?php
-
-if(file_exists('/usr/lib/multi-abraflexi-setup/phinx-adapter.php')){
-    fpassthru('/usr/lib/multi-abraflexi-setup/phinx-adapter.php');
-}
-
 /**
  * Multi AbraFlexi Setup - Phinx database adapter.
  *
