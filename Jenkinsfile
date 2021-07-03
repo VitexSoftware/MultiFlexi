@@ -165,7 +165,7 @@ def installPackages() {
     sh 'sudo apt-get update'
     sh 'echo "${GREEN} INSTALATION ${ENDCOLOR}"'
     sh 'sudo apt -y install mariadb-server postgresql'
-    sh 'systemctl start mysql'
-    sh 'systemctl start postgres'
+    sh 'service mysql start'
+    sh 'service postgres start'
     sh 'IFS="\n\b"; for package in  `ls $WORKSPACE/dist/debian/ | grep .deb | awk -F_ \'{print \$1}\'` ; do  echo -e "${GREEN} installing ${package} on `lsb_release -sc` ${ENDCOLOR} " ; sudo  DEBIAN_FRONTEND=noninteractive DEBCONF_DEBUG=developer apt-get -y install $package ; done;'
 }
