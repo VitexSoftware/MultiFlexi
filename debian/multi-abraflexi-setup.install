@@ -5,7 +5,7 @@ src/images/*                              usr/share/multi-abraflexi-setup/images
 db/migrations/*				  usr/lib/multi-abraflexi-setup/db/migrations
 db/seeds/*				  usr/lib/multi-abraflexi-setup/db/seeds
 debian/conf/composer.json                 usr/lib/multi-abraflexi-setup
-phinx-adapter.php			  usr/lib/multi-abraflexi-setup
+debian/conf/phinx-adapter.php	          usr/lib/multi-abraflexi-setup
 src/AbraFlexi/MultiSetup/*.php            usr/lib/multi-abraflexi-setup/AbraFlexi/
 src/AbraFlexi/MultiSetup/Ui/*.php         usr/lib/multi-abraflexi-setup/AbraFlexi/Ui/
 debian/conf/multi-abraflexi-setup.conf    etc/apache2/conf-available
