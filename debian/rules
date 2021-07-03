@@ -14,19 +14,19 @@
 override_dh_install:
 	dh_install
 	jq '.version = "$(shell dpkg-parsechangelog --show-field Version)"' debian/conf/composer.json | sponge debian/conf/composer.json
-	sed -i -e 's/..\/vendor/\/var\/lib\/composer\/multi-abraflexi-setup/g' debian/multi-abraflexi-setup/usr/share/multi-abraflexi-setup/init.php
-	sed -i -e 's/..\/vendor/\/var\/lib\/composer\/multi-abraflexi-setup/g' debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/executor.php
+	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multi-abraflexi-setup/g' debian/multi-abraflexi-setup/usr/share/multi-abraflexi-setup/init.php
+	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multi-abraflexi-setup/g' debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/executor.php
 	sed -i -e 's/dirname(__DIR__)/"\/etc\/multi-abraflexi-setup\/"/g' debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/executor.php
 	sed -i -e 's/dirname(__DIR__)/"\/etc\/multi-abraflexi-setup\/"/g' debian/multi-abraflexi-setup/usr/share/multi-abraflexi-setup/init.php
 	sed -i -e 's/composer\.json/\/usr\/lib\/multi-abraflexi-setup\/composer\.json/g' debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/AbraFlexi/Ui/PageBottom.php
 	sed -i -e 's/js\/jquery.dataTables.js/\/javascript\/jquery-datatables\/jquery.dataTables.js/g' debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/AbraFlexi/Ui/DBDataTable.php
 	sed -i -e 's/js\/dataTables.bootstrap4.js/\/javascript\/jquery-datatables\/dataTables.bootstrap4.js/g' debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/AbraFlexi/Ui/DBDataTable.php
 	sed -i -e 's/css\/dataTables.bootstrap4.css/\/javascript\/jquery-datatables\/css\/dataTables.bootstrap4.css/g' debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/AbraFlexi/Ui/DBDataTable.php
-	sed -i -e 's/..\/vendor/\/var\/lib\/composer\/multi-abraflexi-setup/g' debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/phinx-adapter.php
+	sed -i -e 's/\.\.\/vendor/\/var\/lib\/composer\/multi-abraflexi-setup/g' debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/phinx-adapter.php
 	sed -i '/prefix =/c\ $$prefix = "\/usr\/lib\/multi-abraflexi-setup\/db\/";' debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/phinx-adapter.php
 	sed -i '/DB_DATABASE/c\ $$sqlOptions["database"] = "\/var\/lib\/dbconfig-common\/sqlite3\/multi-abraflexi-setup\/".basename(\\Ease\\Functions::cfg("DB_DATABASE"));' debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/phinx-adapter.php
 	sed -i -e 's/\.\.\/.env/\/etc\/multi-abraflexi-setup\/\.env/g'  debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/phinx-adapter.php
-	sed -i -e 's/..\/i18n/\/usr\/share\/locale/g'            	     debian/multi-abraflexi-setup/usr/share/multi-abraflexi-setup/init.php
+	sed -i -e 's/\.\.\/i18n/\/usr\/share\/locale/g'            	     debian/multi-abraflexi-setup/usr/share/multi-abraflexi-setup/init.php
 	mkdir -p                                                             debian/multi-abraflexi-setup-sqlite/usr/lib/multi-abraflexi-setup
 	cp debian/conf/.env.template                                         debian/multi-abraflexi-setup-sqlite/usr/lib/multi-abraflexi-setup
 	mkdir -p                                                             debian/multi-abraflexi-setup-mysql/usr/lib/multi-abraflexi-setup
