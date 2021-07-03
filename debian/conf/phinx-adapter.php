@@ -7,7 +7,13 @@
  * @copyright  2021 Vitex Software
  */
 
-include_once '/var/lib/composer/multi-abraflexi-setup/autoload.php';
+if(file_exists('/var/lib/composer/multi-abraflexi-setup/autoload.php')){
+    include_once '/var/lib/composer/multi-abraflexi-setup/autoload.php';
+} else {
+    include_once '/usr/share/php/EaseCore/Atom.php';
+    include_once '/usr/share/php/EaseCore/Functions.php';
+    include_once '/usr/share/php/EaseCore/Shared.php';
+}
 
 $shared = \Ease\Shared::instanced();
 if (file_exists('/etc/multi-abraflexi-setup/.env')) {
