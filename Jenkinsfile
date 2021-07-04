@@ -167,5 +167,6 @@ def installPackages() {
 //    sh 'sudo apt -y install mariadb-server postgresql; sudo mkdir -p /var/run/mysqld; sudo chmod uog+rwX /var/run/mysqld'
 //    sh 'service mysql start'
 //    sh 'service postgres start'
-    sh 'IFS="\n\b"; for package in  `ls $WORKSPACE/dist/debian/ | grep .deb | awk -F_ \'{print \$1}\'` ; do  echo -e "${GREEN} installing ${package} on `lsb_release -sc` ${ENDCOLOR} " ; sudo  DEBIAN_FRONTEND=noninteractive DEBCONF_DEBUG=developer apt-get -y install $package ; done;'
+//    sh 'IFS="\n\b"; for package in  `ls $WORKSPACE/dist/debian/ | grep .deb | awk -F_ \'{print \$1}\'` ; do  echo -e "${GREEN} installing ${package} on `lsb_release -sc` ${ENDCOLOR} " ; sudo  DEBIAN_FRONTEND=noninteractive DEBCONF_DEBUG=developer apt-get -y install $package ; done;'
+    sh 'sudo apt install multiflexi-sqlite'
 }
