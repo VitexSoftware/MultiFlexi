@@ -13,7 +13,7 @@
 
 override_dh_install:
 	dh_install
-	jq '.version = "$(shell dpkg-parsechangelog --show-field Version)"' debian/conf/composer.json | sponge debian/conf/composer.json
+	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/conf/composer.json |sponge debian/conf/composer.json
 	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multi-abraflexi-setup/g' debian/multi-abraflexi-setup/usr/share/multi-abraflexi-setup/init.php
 	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multi-abraflexi-setup/g' debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/executor.php
 	sed -i -e 's/dirname(__DIR__)/"\/etc\/multi-abraflexi-setup\/"/g' debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/executor.php
