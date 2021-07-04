@@ -43,16 +43,16 @@ function loadConfig($configFile, $defineConstants) {
     }
 }
 
-if (file_exists('/etc/multi-abraflexi-setup/.env')) {
-    loadConfig('/etc/multi-abraflexi-setup/.env', true);
+if (file_exists('/etc/multiflexi/.env')) {
+    loadConfig('/etc/multiflexi/.env', true);
 }
 
-$prefix = "/usr/lib/multi-abraflexi-setup/db/";
+$prefix = "/usr/lib/multiflexi/db/";
 
 $sqlOptions = [];
 
 if (strstr(cfg('DB_CONNECTION'), 'sqlite')) {
-    $sqlOptions["database"] = "/var/lib/dbconfig-common/sqlite3/multi-abraflexi-setup/" . basename(cfg("DB_DATABASE"));
+    $sqlOptions["database"] = "/var/lib/dbconfig-common/sqlite3/multiflexi/" . basename(cfg("DB_DATABASE"));
 }
 $engine = new \Ease\SQL\Engine(null, $sqlOptions);
 $cfg = [
