@@ -12,8 +12,8 @@ if [ -f /usr/share/dbconfig-common/dpkg/postinst ]; then
     dbc_generate_include_perms="664"
     dbc_dbfile_owner="www-data:www-data"
     dbc_dbfile_perms="0664"
-    dbc_dbuser=multiabraflexisetup
-    dbc_dbname=multiabraflexisetup
+    dbc_dbuser=multiflexi
+    dbc_dbname=multiflexi
 
     dbc_go multiflexi "$@"
     cat /usr/lib/multiflexi/phinx-adapter.php
@@ -21,11 +21,11 @@ if [ -f /usr/share/dbconfig-common/dpkg/postinst ]; then
     echo 'run "multiflexi-phinx seed:run" to load demo data'
     echo 'run "multiflexi-phinx seed:run  -s AppSeeder" to load only plugins demo setup'
 
-	if [ -f /var/lib/multiflexi/multiabraflexisetup ] ; then
+	if [ -f /var/lib/multiflexi/multiflexi ] ; then
             chown root:www-data /var/lib/multiflexi/
             chmod ug+rw /var/lib/multiflexi/
-            chown root:www-data /var/lib/multiflexi/multiabraflexisetup
-            chmod ug+rw /var/lib/multiflexi/multiabraflexisetup
+            chown root:www-data /var/lib/multiflexi/multiflexi
+            chmod ug+rw /var/lib/multiflexi/multiflexi
         fi
     
 
