@@ -165,7 +165,7 @@ def installPackages() {
     sh 'sudo apt-get update'
     sh 'echo "${GREEN} INSTALATION ${ENDCOLOR}"'
     
-    if ( true ) { // Test all packages
+    if ( false ) { // Test all packages
         sh 'sudo apt -y install mariadb-server postgresql; sudo mkdir -p /var/run/mysqld; sudo chmod uog+rwX /var/run/mysqld'
         sh 'sudo service mysql status'
 	sh 'sudo service mysql start'
