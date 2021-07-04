@@ -7,6 +7,15 @@
  * @copyright  2021 Vitex Software
  */
 
+
+include_once '/usr/share/php/EaseCore/Atom.php';
+include_once '/usr/share/php/EaseCore/Molecule.php';
+include_once '/usr/share/php/EaseCore/Sand.php';
+include_once '/usr/share/php/EaseCore/Brick.php';
+include_once '/usr/share/php/EaseFluentPDO/Orm.php';
+include_once '/usr/share/php/EaseFluentPDO/Engine.php';
+
+
 /**
  * Get configuration from constant or environment
  * 
@@ -64,13 +73,13 @@ $cfg = [
     [
         'default_database' => 'development',
         'development' => [
-            'adapter' => \Ease\Functions::cfg('DB_CONNECTION'),
+            'adapter' => cfg('DB_CONNECTION'),
             'name' => $engine->database,
             'connection' => $engine->getPdo($sqlOptions)
         ],
         'default_database' => 'production',
         'production' => [
-            'adapter' => \Ease\Functions::cfg('DB_CONNECTION'),
+            'adapter' => cfg('DB_CONNECTION'),
             'name' => $engine->database,
             'connection' => $engine->getPdo($sqlOptions)
         ],
