@@ -16,6 +16,7 @@ if [ -f /usr/share/dbconfig-common/dpkg/postinst ]; then
     dbc_dbname=multiabraflexisetup
 
     dbc_go multi-abraflexi-setup "$@"
+    cat /usr/lib/multi-abraflexi-setup/phinx-adapter.php
     phinx migrate -c /usr/lib/multi-abraflexi-setup/phinx-adapter.php
     echo 'run "multi-abraflexi-setup-phinx seed:run" to load demo data'
     echo 'run "multi-abraflexi-setup-phinx seed:run  -s AppSeeder" to load only plugins demo setup'
