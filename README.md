@@ -1,7 +1,7 @@
 Multi Flexi
 ===========
 
-![MFB](src/images/project-logo.svg?raw=true)
+![MFB](multiflexi-socilal-preview.svg?raw=true)
 
 Umožňuje spouštět zvolené nástroje nad určitými účetními jednotkami AbraFlexi v daných intervalech. 
 
