@@ -27,8 +27,8 @@ pipeline {
             steps {
                 dir('build/debian/package') {
                     checkout scm
-		            buildPackage()
-		            installPackages()
+                    buildPackage()
+                    installPackages()
                 }
                 stash includes: 'dist/**', name: 'dist-buster'
             }
@@ -50,8 +50,8 @@ pipeline {
             steps {
                 dir('build/debian/package') {
                     checkout scm
-		            buildPackage()
-		            installPackages()
+                    buildPackage()
+                    installPackages()
                 }
                 stash includes: 'dist/**', name: 'dist-bullseye'
             }
@@ -70,8 +70,8 @@ pipeline {
             steps {
                 dir('build/debian/package') {
                     checkout scm
-		            buildPackage()
-		            installPackages()
+                    buildPackage()
+                    installPackages()
                 }
                 stash includes: 'dist/**', name: 'dist-focal'
             }
@@ -90,8 +90,8 @@ pipeline {
             steps {
                 dir('build/debian/package') {
                     checkout scm
-		            buildPackage()
-		            installPackages()
+                    buildPackage()
+                    installPackages()
                 }
                 stash includes: 'dist/**', name: 'dist-hirsute'
             }
@@ -108,12 +108,12 @@ pipeline {
 
 def copyArtifact(){
     step ([$class: 'CopyArtifact',
-        projectName: '${JOB_NAME}',
-        filter: "**/*.deb",
-        target: '/var/tmp/deb',
-        flatten: true,
-        selector: specific('${BUILD_NUMBER}')
-    ]);
+            projectName: '${JOB_NAME}',
+            filter: "**/*.deb",
+            target: '/var/tmp/deb',
+            flatten: true,
+            selector: specific('${BUILD_NUMBER}')
+        ]);
 }
 
 def buildPackage() {
@@ -140,19 +140,19 @@ def buildPackage() {
     ).trim()
 
     ansiColor('vga') {
-      echo '\033[42m\033[90mBuild debian package ' + SOURCE + ' v' + VERSION  + ' for ' + DISTRO  + '\033[0m'
+        echo '\033[42m\033[90mBuild debian package ' + SOURCE + ' v' + VERSION  + ' for ' + DISTRO  + '\033[0m'
     }
 
     def VER = VERSION + '~' + DIST + '~' + env.BUILD_NUMBER 
 
-//Buster problem: Can't continue: dpkg-parsechangelog is not new enough(needs to be at least 1.17.0)
-//
-//    debianPbuilder additionalBuildResults: '', 
-//	    components: '', 
-//	    distribution: DIST, 
-//	    keyring: '', 
-//	    mirrorSite: 'http://deb.debian.org/debian/', 
-//	    pristineTarName: ''
+    //Buster problem: Can't continue: dpkg-parsechangelog is not new enough(needs to be at least 1.17.0)
+    //
+    //    debianPbuilder additionalBuildResults: '', 
+    //	    components: '', 
+    //	    distribution: DIST, 
+    //	    keyring: '', 
+    //	    mirrorSite: 'http://deb.debian.org/debian/', 
+    //	    pristineTarName: ''
     sh 'dch -b -v ' + VER  + ' "' + env.BUILD_TAG  + '"'
     sh 'sudo apt-get update'
     sh 'debuild-pbuilder  -i -us -uc -b'
@@ -164,9 +164,13 @@ def installPackages() {
     sh 'echo "deb [trusted=yes] file:///$WORKSPACE/dist/debian/ ./" | sudo tee /etc/apt/sources.list.d/local.list'
     sh 'sudo apt-get update'
     sh 'echo "${GREEN} INSTALATION ${ENDCOLOR}"'
-//    sh 'sudo apt -y install mariadb-server postgresql; sudo mkdir -p /var/run/mysqld; sudo chmod uog+rwX /var/run/mysqld'
-//    sh 'service mysql start'
-//    sh 'service postgres start'
-//    sh 'IFS="\n\b"; for package in  `ls $WORKSPACE/dist/debian/ | grep .deb | awk -F_ \'{print \$1}\'` ; do  echo -e "${GREEN} installing ${package} on `lsb_release -sc` ${ENDCOLOR} " ; sudo  DEBIAN_FRONTEND=noninteractive DEBCONF_DEBUG=developer apt-get -y install $package ; done;'
-    sh 'sudo apt install multiflexi-sqlite'
+    
+    if ( true ) { // Test all packages
+        sh 'sudo apt -y install mariadb-server postgresql; sudo mkdir -p /var/run/mysqld; sudo chmod uog+rwX /var/run/mysqld'
+        sh 'service mysql start'
+        sh 'service postgres start'
+        sh 'IFS="\n\b"; for package in  `ls $WORKSPACE/dist/debian/ | grep .deb | awk -F_ \'{print \$1}\'` ; do  echo -e "${GREEN} installing ${package} on `lsb_release -sc` ${ENDCOLOR} " ; sudo  DEBIAN_FRONTEND=noninteractive DEBCONF_DEBUG=developer apt-get -y install $package ; done;'
+    } else { // Test only  sqlite
+        sh 'sudo apt -y install multiflexi-sqlite'
+    }
 }
