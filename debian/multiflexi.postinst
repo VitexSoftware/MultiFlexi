@@ -16,7 +16,6 @@ if [ -f /usr/share/dbconfig-common/dpkg/postinst ]; then
     dbc_dbname=multiflexi
 
     dbc_go multiflexi "$@"
-    cat /usr/lib/multiflexi/phinx-adapter.php
     phinx migrate -c /usr/lib/multiflexi/phinx-adapter.php
     echo 'run "multiflexi-phinx seed:run" to load demo data'
     echo 'run "multiflexi-phinx seed:run  -s AppSeeder" to load only plugins demo setup'
