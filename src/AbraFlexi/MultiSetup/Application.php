@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi AbraFlexi Setup  - App class
+ * Multi Flexi  - App class
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2020 Vitex Software

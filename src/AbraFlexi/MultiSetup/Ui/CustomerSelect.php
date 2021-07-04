@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi AbraFlexi Setup  - Customer Select
+ * Multi Flexi  - Customer Select
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2015-2020 Vitex Software

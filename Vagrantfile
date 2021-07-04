@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.provision "shell", inline: <<-SHELL
 
-    export APACHE_DOCUMENT_ROOT=/usr/share/multi-abraflexi-setup/
+    export APACHE_DOCUMENT_ROOT=/usr/share/multiflexi/
     export DEBIAN_FRONTEND=noninteractive
         
     apt install lsb-release wget
@@ -17,14 +17,14 @@ Vagrant.configure("2") do |config|
     apt-get install -y apache2 libapache2-mod-php
 
 
-    #apt -y install multi-abraflexi-setup-sqlite
+    #apt -y install multiflexi-sqlite
 
     apt -y install mariadb-server
     systemctl start mysql
-    apt -y install multi-abraflexi-setup-mysql
+    apt -y install multiflexi-mysql
 
-    phinx seed:run -c /usr/lib/multi-abraflexi-setup/phinx-adapter.php
-    a2enconf multi-abraflexi-setup
+    phinx seed:run -c /usr/lib/multiflexi/phinx-adapter.php
+    a2enconf multiflexi
 
     echo ServerName MultiAbraFlexi >> /etc/apache2/apache2.conf
     #sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
@@ -41,13 +41,13 @@ Vagrant.configure("2") do |config|
     php-devconf
     phpenmod xdebug
     
-    echo '<a href="multi-abraflexi-setup?login=demo&password=demo">Multi AbraFlexi Setup</a><?php phpinfo();' > /var/www/html/index.php
+    echo '<a href="multiflexi?login=demo&password=demo">Multi Flexi</a><?php phpinfo();' > /var/www/html/index.php
     rm -rf /var/www/html/index.html
 
     apache2ctl restart
 
     apt-get  -y install links
-    links -dump http://localhost/multi-abraflexi-setup
+    links -dump http://localhost/multiflexi
 
   SHELL
 end

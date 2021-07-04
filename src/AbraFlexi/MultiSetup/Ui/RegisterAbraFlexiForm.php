@@ -1,6 +1,6 @@
 <?php
 /**
- * Multi AbraFlexi Setup  - New AbraFlexi registration form
+ * Multi Flexi  - New AbraFlexi registration form
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2015-2020 Vitex Software

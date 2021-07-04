@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi AbraFlexi Setup - Configuration Flield Class
+ * Multi Flexi - Configuration Flield Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2018-2020 Vitex Software

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi AbraFlexi Setup - Recovery password.
+ * Multi Flexi - Recovery password.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software

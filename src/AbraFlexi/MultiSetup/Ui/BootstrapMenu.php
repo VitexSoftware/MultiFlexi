@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi AbraFlexi Setup  - Common menu class
+ * Multi Flexi  - Common menu class
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2015-2020 Vitex Software

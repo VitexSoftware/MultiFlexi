@@ -1,0 +1,20 @@
+src/*.php                                 usr/share/multiflexi
+src/favicon.ico                           usr/share/multiflexi
+src/js/*.js                               usr/share/multiflexi/js
+src/images/*                              usr/share/multiflexi/images
+db/migrations/*				  usr/lib/multiflexi/db/migrations
+db/seeds/*				  usr/lib/multiflexi/db/seeds
+debian/conf/composer.json                 usr/lib/multiflexi
+debian/conf/phinx-adapter.php	          usr/lib/multiflexi
+src/AbraFlexi/MultiSetup/*.php            usr/lib/multiflexi/AbraFlexi/
+src/AbraFlexi/MultiSetup/Ui/*.php         usr/lib/multiflexi/AbraFlexi/Ui/
+debian/conf/multiflexi.conf    etc/apache2/conf-available
+debian/conf/multiflexi.service etc/avahi/services
+bin/*					  usr/bin
+lib/*					  usr/lib/multiflexi
+debian/cz.vitexsoftware.multiflexi.metainfo.xml    usr/share/metainfo/
+debian/cz.vitexsoftware.multiflexi.desktop         usr/share/applications/
+multiflexi.svg                 usr/share/icons/hicolor/scalable/apps/
+i18n/cs_CZ/LC_MESSAGES/*.mo               usr/share/locale/cs_CZ/LC_MESSAGES/
+i18n/en_US/LC_MESSAGES/*.mo               usr/share/locale/en_US/LC_MESSAGES/
+

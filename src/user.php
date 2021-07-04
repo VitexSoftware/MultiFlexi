@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi AbraFlexi Setup - User editor.
+ * Multi Flexi - User editor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software

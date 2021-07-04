@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi AbraFlexi Setup - Customer instance editor.
+ * Multi Flexi - Customer instance editor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2017-2020 Vitex Software

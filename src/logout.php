@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi AbraFlexi Setup - Sign off page.
+ * Multi Flexi - Sign off page.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software

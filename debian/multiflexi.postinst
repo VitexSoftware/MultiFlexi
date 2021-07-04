@@ -1,13 +1,13 @@
 #!/bin/sh
-# postinst script for multi-abraflexi-setup
+# postinst script for multiflexi
 set -e
 
 . /usr/share/debconf/confmodule
 
 if [ -f /usr/share/dbconfig-common/dpkg/postinst ]; then
     . /usr/share/dbconfig-common/dpkg/postinst
-    dbc_generate_include_args="-U -o template_infile=/usr/lib/multi-abraflexi-setup/.env.template"
-    dbc_generate_include=template:/etc/multi-abraflexi-setup/.env
+    dbc_generate_include_args="-U -o template_infile=/usr/lib/multiflexi/.env.template"
+    dbc_generate_include=template:/etc/multiflexi/.env
     dbc_generate_include_owner="root:www-data"
     dbc_generate_include_perms="664"
     dbc_dbfile_owner="www-data:www-data"
@@ -15,17 +15,17 @@ if [ -f /usr/share/dbconfig-common/dpkg/postinst ]; then
     dbc_dbuser=multiabraflexisetup
     dbc_dbname=multiabraflexisetup
 
-    dbc_go multi-abraflexi-setup "$@"
-    cat /usr/lib/multi-abraflexi-setup/phinx-adapter.php
-    phinx migrate -c /usr/lib/multi-abraflexi-setup/phinx-adapter.php
-    echo 'run "multi-abraflexi-setup-phinx seed:run" to load demo data'
-    echo 'run "multi-abraflexi-setup-phinx seed:run  -s AppSeeder" to load only plugins demo setup'
+    dbc_go multiflexi "$@"
+    cat /usr/lib/multiflexi/phinx-adapter.php
+    phinx migrate -c /usr/lib/multiflexi/phinx-adapter.php
+    echo 'run "multiflexi-phinx seed:run" to load demo data'
+    echo 'run "multiflexi-phinx seed:run  -s AppSeeder" to load only plugins demo setup'
 
-	if [ -f /var/lib/multi-abraflexi-setup/multiabraflexisetup ] ; then
-            chown root:www-data /var/lib/multi-abraflexi-setup/
-            chmod ug+rw /var/lib/multi-abraflexi-setup/
-            chown root:www-data /var/lib/multi-abraflexi-setup/multiabraflexisetup
-            chmod ug+rw /var/lib/multi-abraflexi-setup/multiabraflexisetup
+	if [ -f /var/lib/multiflexi/multiabraflexisetup ] ; then
+            chown root:www-data /var/lib/multiflexi/
+            chmod ug+rw /var/lib/multiflexi/
+            chown root:www-data /var/lib/multiflexi/multiabraflexisetup
+            chmod ug+rw /var/lib/multiflexi/multiabraflexisetup
         fi
     
 
@@ -48,10 +48,10 @@ pathfind() {
 
 
 lighttpd_install() {
-	if [ -d /etc/lighttpd/conf-available ] && [ ! -f /etc/lighttpd/conf-available/50-multi-abraflexi-setup.conf ] ; then
+	if [ -d /etc/lighttpd/conf-available ] && [ ! -f /etc/lighttpd/conf-available/50-multiflexi.conf ] ; then
 		if pathfind lighty-enable-mod; then
-			ln -s /etc/multi-abraflexi-setup/lighttpd.conf /etc/lighttpd/conf-available/50-multi-abraflexi-setup.conf
-			if ! { lighty-enable-mod multi-abraflexi-setup fastcgi fastcgi-php || [ $? -eq 2 ]; } then
+			ln -s /etc/multiflexi/lighttpd.conf /etc/lighttpd/conf-available/50-multiflexi.conf
+			if ! { lighty-enable-mod multiflexi fastcgi fastcgi-php || [ $? -eq 2 ]; } then
 				return 1
 			fi
 		fi
@@ -62,15 +62,15 @@ lighttpd_install() {
     . /usr/share/apache2/apache2-maintscript-helper
 apache_install() {
         if [ -e /usr/share/apache2/apache2-maintscript-helper ] ; then
-	    if [ -d /etc/apache2/conf-available ] && [ ! -e /etc/apache2/conf-available/multi-abraflexi-setup.conf ]; then
-                ln -s /etc/multi-abraflexi-setup/apache.conf /etc/apache2/conf-available/multi-abraflexi-setup.conf
+	    if [ -d /etc/apache2/conf-available ] && [ ! -e /etc/apache2/conf-available/multiflexi.conf ]; then
+                ln -s /etc/multiflexi/apache.conf /etc/apache2/conf-available/multiflexi.conf
 	    fi
             # Remove old symlink if present
-            if [ -d /etc/apache2/conf.d ] && [ -h /etc/apache2/conf.d/multi-abraflexi-setup ]; then
-                rm /etc/apache2/conf.d/multi-abraflexi-setup
+            if [ -d /etc/apache2/conf.d ] && [ -h /etc/apache2/conf.d/multiflexi ]; then
+                rm /etc/apache2/conf.d/multiflexi
             fi
             # Enable the configuration
-            apache2_invoke enconf multi-abraflexi-setup.conf
+            apache2_invoke enconf multiflexi.conf
         fi
 }
 
@@ -80,10 +80,10 @@ apache_install() {
 case "$1" in
     configure)
 
-	composer-debian multi-abraflexi-setup
+	composer-debian multiflexi
 
 	# Handle webserver reconfiguration/restart ; stolen from zabbix package
-	db_get multi-abraflexi-setup/reconfigure-webserver || true
+	db_get multiflexi/reconfigure-webserver || true
 	webservers="$RET"
 	restart=""
 
@@ -101,7 +101,7 @@ case "$1" in
             restart="$restart $webserver"
         done
 
-        db_get multi-abraflexi-setup/restart-webserver || true
+        db_get multiflexi/restart-webserver || true
 	res="$RET"
 	db_stop || true
 	if [ "$res" = "true" ]; then

@@ -14,19 +14,19 @@
 override_dh_install:
 	dh_install
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/conf/composer.json |sponge debian/conf/composer.json
-	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multi-abraflexi-setup/g' debian/multi-abraflexi-setup/usr/share/multi-abraflexi-setup/init.php
-	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multi-abraflexi-setup/g' debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/executor.php
-	sed -i -e 's/dirname(__DIR__)/"\/etc\/multi-abraflexi-setup\/"/g' debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/executor.php
-	sed -i -e 's/dirname(__DIR__)/"\/etc\/multi-abraflexi-setup\/"/g' debian/multi-abraflexi-setup/usr/share/multi-abraflexi-setup/init.php
-	sed -i -e 's/composer\.json/\/usr\/lib\/multi-abraflexi-setup\/composer\.json/g' debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/AbraFlexi/Ui/PageBottom.php
-	sed -i -e 's/js\/jquery.dataTables.js/\/javascript\/jquery-datatables\/jquery.dataTables.js/g' debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/AbraFlexi/Ui/DBDataTable.php
-	sed -i -e 's/js\/dataTables.bootstrap4.js/\/javascript\/jquery-datatables\/dataTables.bootstrap4.js/g' debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/AbraFlexi/Ui/DBDataTable.php
-	sed -i -e 's/css\/dataTables.bootstrap4.css/\/javascript\/jquery-datatables\/css\/dataTables.bootstrap4.css/g' debian/multi-abraflexi-setup/usr/lib/multi-abraflexi-setup/AbraFlexi/Ui/DBDataTable.php
-	sed -i -e 's/\.\.\/i18n/\/usr\/share\/locale/g'            	     debian/multi-abraflexi-setup/usr/share/multi-abraflexi-setup/init.php
-	mkdir -p                                                             debian/multi-abraflexi-setup-sqlite/usr/lib/multi-abraflexi-setup
-	cp debian/conf/.env.template                                         debian/multi-abraflexi-setup-sqlite/usr/lib/multi-abraflexi-setup
-	mkdir -p                                                             debian/multi-abraflexi-setup-mysql/usr/lib/multi-abraflexi-setup
-	cp debian/conf/.env.template                                         debian/multi-abraflexi-setup-mysql/usr/lib/multi-abraflexi-setup
-	mkdir -p                                                             debian/multi-abraflexi-setup-pgsql/usr/lib/multi-abraflexi-setup
-	cp debian/conf/.env.template                                         debian/multi-abraflexi-setup-pgsql/usr/lib/multi-abraflexi-setup
-	sed -i '/DB_DATABASE/c\DB_DATABASE=_DBC_DBNAME_'                     debian/multi-abraflexi-setup-*sql/usr/lib/multi-abraflexi-setup/.env.template
+	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multiflexi/g' debian/multiflexi/usr/share/multiflexi/init.php
+	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multiflexi/g' debian/multiflexi/usr/lib/multiflexi/executor.php
+	sed -i -e 's/dirname(__DIR__)/"\/etc\/multiflexi\/"/g' debian/multiflexi/usr/lib/multiflexi/executor.php
+	sed -i -e 's/dirname(__DIR__)/"\/etc\/multiflexi\/"/g' debian/multiflexi/usr/share/multiflexi/init.php
+	sed -i -e 's/composer\.json/\/usr\/lib\/multiflexi\/composer\.json/g' debian/multiflexi/usr/lib/multiflexi/AbraFlexi/Ui/PageBottom.php
+	sed -i -e 's/js\/jquery.dataTables.js/\/javascript\/jquery-datatables\/jquery.dataTables.js/g' debian/multiflexi/usr/lib/multiflexi/AbraFlexi/Ui/DBDataTable.php
+	sed -i -e 's/js\/dataTables.bootstrap4.js/\/javascript\/jquery-datatables\/dataTables.bootstrap4.js/g' debian/multiflexi/usr/lib/multiflexi/AbraFlexi/Ui/DBDataTable.php
+	sed -i -e 's/css\/dataTables.bootstrap4.css/\/javascript\/jquery-datatables\/css\/dataTables.bootstrap4.css/g' debian/multiflexi/usr/lib/multiflexi/AbraFlexi/Ui/DBDataTable.php
+	sed -i -e 's/\.\.\/i18n/\/usr\/share\/locale/g'            	     debian/multiflexi/usr/share/multiflexi/init.php
+	mkdir -p                                                             debian/multiflexi-sqlite/usr/lib/multiflexi
+	cp debian/conf/.env.template                                         debian/multiflexi-sqlite/usr/lib/multiflexi
+	mkdir -p                                                             debian/multiflexi-mysql/usr/lib/multiflexi
+	cp debian/conf/.env.template                                         debian/multiflexi-mysql/usr/lib/multiflexi
+	mkdir -p                                                             debian/multiflexi-pgsql/usr/lib/multiflexi
+	cp debian/conf/.env.template                                         debian/multiflexi-pgsql/usr/lib/multiflexi
+	sed -i '/DB_DATABASE/c\DB_DATABASE=_DBC_DBNAME_'                     debian/multiflexi-*sql/usr/lib/multiflexi/.env.template

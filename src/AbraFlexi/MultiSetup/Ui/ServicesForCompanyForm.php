@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi AbraFlexi Setup  - Services for Company
+ * Multi Flexi  - Services for Company
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2015-2020 Vitex Software

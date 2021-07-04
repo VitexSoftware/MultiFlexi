@@ -3,7 +3,7 @@
 namespace AbraFlexi\MultiSetup;
 
 /**
- * Multi AbraFlexi Setup - Instance Management Class
+ * Multi Flexi - Instance Management Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software

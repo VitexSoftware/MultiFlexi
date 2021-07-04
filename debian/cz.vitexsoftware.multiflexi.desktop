@@ -2,11 +2,11 @@
 Version=1.0
 Type=Application
 
-Name=Multi FlexiBee setup
+Name=Multi Flexi
 Comment=several accounting tools launcher
 Categories=Office;Finance;
 
-Icon=multi-flexibee-setup
-Exec=sensible-browser http://localhost/multi-flexibee-setup/
+Icon=multiflexi
+Exec=sensible-browser http://localhost/multiflexi/
 Terminal=false
 

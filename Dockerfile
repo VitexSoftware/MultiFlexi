@@ -1,6 +1,6 @@
 FROM debian:latest
 
-ENV APACHE_DOCUMENT_ROOT /usr/share/multi-abraflexi-setup/
+ENV APACHE_DOCUMENT_ROOT /usr/share/multiflexi/
 env DEBIAN_FRONTEND=noninteractive
 
 RUN apt update ; apt install -y wget libapache2-mod-php; echo "deb http://repo.vitexsoftware.cz buster main" | tee /etc/apt/sources.list.d/vitexsoftware.list ; wget -O /etc/apt/trusted.gpg.d/vitexsoftware.gpg http://repo.vitexsoftware.cz/keyring.gpg
@@ -13,10 +13,10 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 
 RUN apt update
 
-RUN aptitude -y install multi-abraflexi-setup-sqlite abraflexi-matcher abraflexi-reminder abraflexi-contract-invoices abraflexi-digest
+RUN aptitude -y install multiflexi-sqlite abraflexi-matcher abraflexi-reminder abraflexi-contract-invoices abraflexi-digest
 
-RUN phinx seed:run -c /usr/lib/multi-abraflexi-setup/phinx-adapter.php
-RUN a2ensite multi-abraflexi-setup
+RUN phinx seed:run -c /usr/lib/multiflexi/phinx-adapter.php
+RUN a2ensite multiflexi
 
 CMD /usr/sbin/cron
 CMD [ "/usr/sbin/apache2ctl", "-D", "FOREGROUND" ]

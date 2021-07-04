@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi AbraFlexi Setup  - DataTable 
+ * Multi Flexi  - DataTable 
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2020 Vitex Software
