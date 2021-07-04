@@ -5,7 +5,7 @@ namespace AbraFlexi\MultiSetup;
 use Ease\SQL\Orm;
 
 /**
- * Multi AbraFlexi Setup - Instance Management Class
+ * Multi Flexi - Instance Management Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2015-2020 Vitex Software

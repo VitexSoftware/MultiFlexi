@@ -1,4 +1,4 @@
-multi-abraflexi-setup (1.1) UNRELEASED; urgency=medium
+multiflexi (1.1) UNRELEASED; urgency=medium
 
   * Ability choose run interval between hour and year
   * Debian package
@@ -18,7 +18,7 @@ multi-abraflexi-setup (1.1) UNRELEASED; urgency=medium
 
  -- CyberVitexus <vitex@exiv.jinonice.czf>  Thu, 29 Apr 2021 12:14:01 +0200
 
-multi-abraflexi-setup (0.1) experimental; urgency=medium
+multiflexi (0.1) experimental; urgency=medium
 
   * Initial release.
 

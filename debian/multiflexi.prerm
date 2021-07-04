@@ -1,5 +1,5 @@
 #!/bin/sh
-# prerm script for multi-abraflexi-setup
+# prerm script for multiflexi
 #
 # see: dh_installdeb(1)
 
@@ -9,21 +9,21 @@ set -e
 
 if [ -f /usr/share/dbconfig-common/dpkg/prerm ]; then
     . /usr/share/dbconfig-common/dpkg/prerm
-    dbc_go multi-abraflexi-setup "$@"
+    dbc_go multiflexi "$@"
 fi
 
 case "$1" in
     remove|upgrade|deconfigure|purge)
 
      if [ "$1" = "purge" ]; then
-         rm -f /etc/multi-abraflexi-setup/.env
+         rm -f /etc/multiflexi/.env
          if which ucf >/dev/null 2>&1; then
-             ucf --purge /etc/multi-abraflexi-setup/.env
-             ucfr --purge /etc/multi-abraflexi-setup/.env
+             ucf --purge /etc/multiflexi/.env
+             ucfr --purge /etc/multiflexi/.env
          fi
      fi
 
-        rm -rf /usr/lib/multi-abraflexi-setup/composer.lock /var/lib/multi-abraflexi-setup
+        rm -rf /usr/lib/multiflexi/composer.lock /var/lib/multiflexi
     ;;
 
     failed-upgrade)

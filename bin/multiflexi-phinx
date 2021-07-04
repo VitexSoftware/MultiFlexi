@@ -1,0 +1,2 @@
+#!/bin/bash
+phinx $1 -c /usr/lib/multiflexi/phinx-adapter.php $2 $3

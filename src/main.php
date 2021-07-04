@@ -2,7 +2,7 @@
 
 
 /**
- * Multi AbraFlexi Setup - Index page.
+ * Multi Flexi - Index page.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
@@ -21,7 +21,7 @@ require_once './init.php';
 
 $oPage->onlyForLogged();
 
-$oPage->addItem(new PageTop(_('Multi AbraFlexi Setup')));
+$oPage->addItem(new PageTop(_('Multi Flexi')));
 
 $mainPageMenu = new AppsMenu();
 

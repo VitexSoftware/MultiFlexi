@@ -1,6 +1,6 @@
 <?php
 /**
- * Multi AbraFlexi Setup - Webhook acceptor.
+ * Multi Flexi - Webhook acceptor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software

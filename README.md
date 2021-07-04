@@ -26,10 +26,10 @@ sudo apt install lsb-release wget
 echo "deb http://repo.vitexsoftware.cz $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/vitexsoftware.list
 sudo wget -O /etc/apt/trusted.gpg.d/vitexsoftware.gpg http://repo.vitexsoftware.cz/keyring.gpg
 sudo apt update
-sudo apt install multi-abraflexi-setup-DATABASE 
+sudo apt install multiflexi-DATABASE 
 ```
 
-k dispozici jsou tyto databázové adaptéry: **multi-abraflexi-setup-mysql**, **multi-abraflexi-setup-pgsql** a **multi-abraflexi-setup-sqlite**
+k dispozici jsou tyto databázové adaptéry: **multiflexi-mysql**, **multiflexi-pgsql** a **multiflexi-sqlite**
 
 
 Screenshoty

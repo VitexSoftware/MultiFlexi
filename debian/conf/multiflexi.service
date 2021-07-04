@@ -1,10 +1,10 @@
 <?xml version="1.0" standalone='no'?>
 <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
 <service-group>
- <name replace-wildcards="yes">Multi FlexiBee setup on %h</name>
+ <name replace-wildcards="yes">Multi Flexi on %h</name>
   <service>
    <type>_http._tcp</type>
    <port>80</port>
-   <txt-record>path=/multi-flexibee-setup/</txt-record>
+   <txt-record>path=/multiflexi/</txt-record>
   </service>
 </service-group>

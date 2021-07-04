@@ -1,5 +1,5 @@
 {
-  "name": "vitexsoftware/multi-abraflexi-setup",
+  "name": "vitexsoftware/multiflexi",
   "description": "Tool used to setup AbraFlexi multiinstance",
   "version": "1.1",
   "type": "project",
@@ -16,7 +16,7 @@
     }
   ],
   "config": {
-    "vendor-dir": "/var/lib/composer/multi-abraflexi-setup"
+    "vendor-dir": "/var/lib/composer/multiflexi"
   },
   "minimum-stability": "dev",
   "autoload": {

@@ -11,7 +11,7 @@
 
 
 /**
- * Multi AbraFlexi Setup - Index page.
+ * Multi Flexi - Index page.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software

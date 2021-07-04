@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi AbraFlexi Setup - Login page.
+ * Multi Flexi - Login page.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
@@ -51,7 +51,7 @@ $loginRow = new Row();
 $infoColumn = $loginRow->addItem(new Col(4));
 
 $infoBlock = $infoColumn->addItem(new Card(new ImgTag('images/project-logo.svg')));
-$infoBlock->addItem(new DivTag(_('Welcome to Multi AbraFlexi Setup'), ['style' => 'text-align: center;']));
+$infoBlock->addItem(new DivTag(_('Welcome to Multi Flexi'), ['style' => 'text-align: center;']));
 
 $loginColumn = $loginRow->addItem(new Col(4));
 
