@@ -15,11 +15,16 @@ namespace AbraFlexi\MultiSetup\Ui;
  */
 class ConfiguredFieldBadges extends ConfigFieldsBadges {
 
-    public function __construct($companyID, $appID) {
+    /**
+     * 
+     * @param int $companyID
+     * @param int $appID
+     */
+    public function __construct(int $companyID, int $appID) {
         $conffield = new \AbraFlexi\MultiSetup\Conffield();
         $appFields = $conffield->appConfigs($appID);
         $configs = new \AbraFlexi\MultiSetup\Configuration();
-        $appConfigs = $configs->getColumnsFromSQL(['key', 'value'], ['app_id' => $appID]);
+        $appConfigs = $configs->getColumnsFromSQL(['name', 'value'], ['app_id' => $appID]);
 
         if (!empty($appFields)) {
             foreach ($appFields as $key => $fieldInfo) {

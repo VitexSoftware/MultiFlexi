@@ -14,7 +14,7 @@ namespace AbraFlexi\MultiSetup\Ui;
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class CustomerSelect extends \Ease\Html\Select {
+class CustomerSelect extends \Ease\Html\SelectTag {
 
     use \Ease\SQL\Orm;
 
@@ -30,7 +30,7 @@ class CustomerSelect extends \Ease\Html\Select {
      * @return array
      */
     public function loadItems() {
-        $customer = ['' => _('Choose customer')];
+        $customers = ['' => _('Choose customer')];
         $this->setMyTable('customer');
         $customersRaw = $this->getColumnsFromSQL(['id', 'firstname', 'lastname'], null, 'lastname');
         if (count($customersRaw)) {

@@ -19,7 +19,7 @@ class CustomAppConfigForm extends EngineForm {
     public function __construct($engine) {
         parent::__construct($engine, null, ['method' => 'post', 'action' => 'custserviceconfig.php']);
 
-        $values = $engine->getColumnsFromSQL(['key', 'value'], ['app_id' => $engine->getDataValue('app_id'), 'company_id' => $engine->getDataValue('company_id')], '`key`', 'key');
+        $values = $engine->getColumnsFromSQL(['name', 'value'], ['app_id' => $engine->getDataValue('app_id'), 'company_id' => $engine->getDataValue('company_id')], '`key`', 'name');
 
         foreach (\AbraFlexi\MultiSetup\Conffield::getAppConfigs($engine->getDataValue('app_id')) as $fieldInfo) {
             if ($fieldInfo['type'] == 'checkbox') {

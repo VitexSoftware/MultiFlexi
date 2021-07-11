@@ -1,10 +1,10 @@
 {
     "name": "vitexsoftware/multiflexi",
-    "description": "Tool used to setup AbraFlexi multiinstance",
-    "version": "0.3",
+    "description": "Tool used to run tools upon AbraFlexi servers",
+    "version": "1.2",
     "type": "project",
     "require": {
-        "vitexsoftware/ease-twbootstrap4-widgets-flexibee": "*",
+        "vitexsoftware/ease-twbootstrap4-widgets-abraflexi": "*",
         "vitexsoftware/ease-fluentpdo": "*",
         "vitexsoftware/ease-twbootstrap4-widgets": "*",
         "robmorgan/phinx": "*",

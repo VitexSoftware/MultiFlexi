@@ -29,7 +29,7 @@ $delete = WebPage::getRequestValue('delete', 'int');
 if (!is_null($delete)) {
     $conffields->loadFromSQL($delete);
     $cnf = new \AbraFlexi\MultiSetup\Configuration();
-    $conffields->addStatusMessage(sprintf(_('%d used configurations removed'), $cnf->deleteFromSQL(['app_id' => $appId, 'key' => $conffields->getDataValue('keyname')])));
+    $conffields->addStatusMessage(sprintf(_('%d used configurations removed'), $cnf->deleteFromSQL(['app_id' => $appId, 'name' => $conffields->getDataValue('keyname')])));
 
     if ($conffields->deleteFromSQL($delete)) {
         $conffields->addStatusMessage(_('Configuration removed'));
