@@ -34,8 +34,11 @@ class MainMenu extends \Ease\Html\DivTag {
     protected function getMenuList($source, $icon = null) {
         $keycolumn = $source->getkeyColumn();
         $namecolumn = $source->nameColumn;
-        $lister = $source->getColumnsFromSQL([$source->getkeyColumn(), $namecolumn, $icon],
-                null, $namecolumn, $keycolumn);
+        $columns = [$source->getkeyColumn(), $namecolumn];
+        if($icon){
+           $columns[] = $icon; 
+        }
+        $lister = $source->getColumnsFromSQL($columns, null, $namecolumn, $keycolumn);
 
         $itemList = [];
         if ($lister) {

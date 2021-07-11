@@ -14,7 +14,7 @@ namespace AbraFlexi\MultiSetup\Ui;
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class AbraFlexiSelect extends \Ease\Html\Select
+class AbraFlexiSelect extends \Ease\Html\SelectTag
 {
 
     use \Ease\SQL\Orm;

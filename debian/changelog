@@ -1,5 +1,6 @@
-multiflexi (1.1) UNRELEASED; urgency=medium
+multiflexi (1.2) UNRELEASED; urgency=medium
 
+  [ CyberVitexus ]
   * Ability choose run interval between hour and year
   * Debian package
   * Export notification email
@@ -16,7 +17,10 @@ multiflexi (1.1) UNRELEASED; urgency=medium
   * MySQL Compatibility
   * New Version
 
- -- CyberVitexus <vitex@exiv.jinonice.czf>  Thu, 29 Apr 2021 12:14:01 +0200
+  [ Vitex ]
+  * Update
+
+ -- Vitex <vitex@exiv>  Sun, 11 Jul 2021 11:33:58 +0200
 
 multiflexi (0.1) experimental; urgency=medium
 

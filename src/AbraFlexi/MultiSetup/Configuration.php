@@ -74,9 +74,9 @@ class Configuration extends \Ease\SQL\Engine {
      */
     public function setEnvironment($companyId, $appId) {
 
-        foreach ($customConfig->getColumnsFromSQL(['key', 'value'], ['company_id' => $companyId, 'app_id' => $appId]) as $cfgRaw) {
-            $companer->addStatusMessage(sprintf(_('Setting Environment %s to %s'), $cfgRaw['key'], $cfgRaw['value']), 'debug');
-            putenv($cfgRaw['key'] . '=' . $cfgRaw['value']);
+        foreach ($customConfig->getColumnsFromSQL(['name', 'value'], ['company_id' => $companyId, 'app_id' => $appId]) as $cfgRaw) {
+            $companer->addStatusMessage(sprintf(_('Setting Environment %s to %s'), $cfgRaw['name'], $cfgRaw['value']), 'debug');
+            putenv($cfgRaw['name'] . '=' . $cfgRaw['value']);
         }
     }
 

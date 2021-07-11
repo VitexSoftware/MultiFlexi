@@ -213,3 +213,20 @@ Processing triggers for mime-support (3.64ubuntu1) ...
  create mode 100644 dbconfig-common/multiflexi.conf
  create mode 100644 multiflexi/.env
 ```
+
+Po instalaci je pak možné načíst buď kompletní demo data ( uživatel **demo** heslo **demo** )
+
+```shell
+multiflexi-phinx seed:run
+```
+
+Doporučenou možností je však založit si vlastního uživatele a zaregistrovat AbraFlexi server a poté pouze načíst demo aplikace příkazem:
+
+```shell
+multiflexi-phinx seed:run  -s AppSeeder
+```
+
+Tím se načtou pouze ukázkové aplikace. Jsou li tyto také nainstalovány (nalezeny na disku) jsou rovnou aktivovány aby je bylo možné přiřadit k firmám a intervalům.
+
+![AppSeeder](doc/appseeder.png?raw=true)
+

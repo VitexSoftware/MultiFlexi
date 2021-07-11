@@ -26,23 +26,28 @@ class AbraFlexiInstanceStatus extends \Ease\Html\TableTag {
         $registered = $companer->getColumnsFromSQL(['id', 'company'], ['abraflexi' => $abraflexis->getMyKey()], 'id', 'company');
 
         foreach ($this->companys($abraflexis->getData()) as $companyData) {
-            $setter = new \AbraFlexi\Nastaveni(1, array_merge($abraflexis->getData(), ['company' => $companyData['dbNazev']]));
-            $companyDetail = $setter->getData();
+            try {
+                $setter = new \AbraFlexi\Nastaveni(1, array_merge($abraflexis->getData(), ['company' => $companyData['dbNazev']]));
 
-            $registerParams = [
-                'company' => $companyData['dbNazev'],
-                'nazev' => $companyData['nazev'],
-                'abraflexi' => $abraflexis->getMyKey(),
-                'ic' => array_key_exists('ic', $companyDetail) ? $companyDetail['ic'] : '',
-                'email' => array_key_exists('email', $companyDetail) ? $companyDetail['email'] : '',
-            ];
+                $companyDetail = $setter->getData();
 
-            unset($companyData['id']);
-            unset($companyData['licenseGroup']);
-            unset($companyData['createDt']);
+                $registerParams = [
+                    'company' => $companyData['dbNazev'],
+                    'nazev' => $companyData['nazev'],
+                    'abraflexi' => $abraflexis->getMyKey(),
+                    'ic' => array_key_exists('ic', $companyDetail) ? $companyDetail['ic'] : '',
+                    'email' => array_key_exists('email', $companyDetail) ? $companyDetail['email'] : '',
+                ];
 
-            $companyData['action'] = array_key_exists($companyData['dbNazev'], $registered) ? new \Ease\TWB4\LinkButton('company.php?id=' . $registered[$companyData['dbNazev']]['id'], _('Edit'), 'success') : new \Ease\TWB4\LinkButton('company.php?' . http_build_query($registerParams), _('Register'), 'warning');
-            $this->addRowColumns($companyData);
+                unset($companyData['id']);
+                unset($companyData['licenseGroup']);
+                unset($companyData['createDt']);
+
+                $companyData['action'] = array_key_exists($companyData['dbNazev'], $registered) ? new \Ease\TWB4\LinkButton('company.php?id=' . $registered[$companyData['dbNazev']]['id'], _('Edit'), 'success') : new \Ease\TWB4\LinkButton('company.php?' . http_build_query($registerParams), _('Register'), 'warning');
+                $this->addRowColumns($companyData);
+            } catch (\AbraFlexi\Exception $exc) {
+                $this->addStatusMessage($exc->getMessage());
+            }
         }
     }
 
