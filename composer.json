@@ -4,7 +4,7 @@
     "version": "1.2",
     "type": "project",
     "require": {
-        "vitexsoftware/ease-twbootstrap4-widgets-abraflexi": "*",
+        "vitexsoftware/ease-bootstrap4-widgets-abraflexi": "*",
         "vitexsoftware/ease-fluentpdo": "*",
         "vitexsoftware/ease-twbootstrap4-widgets": "*",
         "robmorgan/phinx": "*",
@@ -17,7 +17,7 @@
             "email": "info@vitexsoftware.cz"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "AbraFlexi\\MultiSetup\\": "src/AbraFlexi/MultiSetup/",
