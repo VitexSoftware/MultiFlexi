@@ -9,7 +9,7 @@ pipeline {
     options {
         ansiColor('xterm')
         copyArtifactPermission('*');
-	disableConcurrentBuilds()
+	//disableConcurrentBuilds()
     }
 
     environment {
@@ -20,15 +20,15 @@ pipeline {
     
     stages {
 
-        stage('debian-stable') {
+        stage('debian-buster') {
             agent {
-                docker { image 'vitexsoftware/debian:stable' }
+                docker { image 'vitexsoftware/debian:oldstable' }
             }
             steps {
                 dir('build/debian/package') {
                     checkout scm
-                    buildPackage()
-                    installPackages()
+		            buildPackage()
+		            installPackages()
                 }
                 stash includes: 'dist/**', name: 'dist-buster'
             }
@@ -38,22 +38,39 @@ pipeline {
                     copyArtifact()
                 }
             }
-
-
-            
         }
 
-        stage('debian-testing') {
+        stage('debian-bullseye') {
+            agent {
+                docker { image 'vitexsoftware/debian:stable' }
+            }
+            steps {
+                dir('build/debian/package') {
+                    checkout scm
+		            buildPackage()
+		            installPackages()
+                }
+                stash includes: 'dist/**', name: 'dist-bullseye'
+            }
+            post {
+                success {
+                    archiveArtifacts 'dist/debian/'
+                    copyArtifact()
+                }
+            }
+        }
+
+        stage('debian-bookworm') {
             agent {
                 docker { image 'vitexsoftware/debian:testing' }
             }
             steps {
                 dir('build/debian/package') {
                     checkout scm
-                    buildPackage()
-                    installPackages()
+		            buildPackage()
+		            installPackages()
                 }
-                stash includes: 'dist/**', name: 'dist-bullseye'
+                stash includes: 'dist/**', name: 'dist-bookworm'
             }
             post {
                 success {
@@ -70,8 +87,8 @@ pipeline {
             steps {
                 dir('build/debian/package') {
                     checkout scm
-                    buildPackage()
-                    installPackages()
+		            buildPackage()
+		            installPackages()
                 }
                 stash includes: 'dist/**', name: 'dist-focal'
             }
@@ -90,8 +107,8 @@ pipeline {
             steps {
                 dir('build/debian/package') {
                     checkout scm
-                    buildPackage()
-                    installPackages()
+		            buildPackage()
+		            installPackages()
                 }
                 stash includes: 'dist/**', name: 'dist-hirsute'
             }
@@ -108,12 +125,12 @@ pipeline {
 
 def copyArtifact(){
     step ([$class: 'CopyArtifact',
-            projectName: '${JOB_NAME}',
-            filter: "**/*.deb",
-            target: '/var/tmp/deb',
-            flatten: true,
-            selector: specific('${BUILD_NUMBER}')
-        ]);
+        projectName: '${JOB_NAME}',
+        filter: "**/*.deb",
+        target: '/var/tmp/deb',
+        flatten: true,
+        selector: specific('${BUILD_NUMBER}')
+    ]);
 }
 
 def buildPackage() {
@@ -140,23 +157,23 @@ def buildPackage() {
     ).trim()
 
     ansiColor('vga') {
-        echo '\033[42m\033[90mBuild debian package ' + SOURCE + ' v' + VERSION  + ' for ' + DISTRO  + '\033[0m'
+      echo '\033[42m\033[90mBuild debian package ' + SOURCE + ' v' + VERSION  + ' for ' + DISTRO  + '\033[0m'
     }
 
     def VER = VERSION + '~' + DIST + '~' + env.BUILD_NUMBER 
 
-    //Buster problem: Can't continue: dpkg-parsechangelog is not new enough(needs to be at least 1.17.0)
-    //
-    //    debianPbuilder additionalBuildResults: '', 
-    //	    components: '', 
-    //	    distribution: DIST, 
-    //	    keyring: '', 
-    //	    mirrorSite: 'http://deb.debian.org/debian/', 
-    //	    pristineTarName: ''
+//Buster problem: Can't continue: dpkg-parsechangelog is not new enough(needs to be at least 1.17.0)
+//
+//    debianPbuilder additionalBuildResults: '', 
+//	    components: '', 
+//	    distribution: DIST, 
+//	    keyring: '', 
+//	    mirrorSite: 'http://deb.debian.org/debian/', 
+//	    pristineTarName: ''
     sh 'dch -b -v ' + VER  + ' "' + env.BUILD_TAG  + '"'
     sh 'sudo apt-get update'
     sh 'debuild-pbuilder  -i -us -uc -b'
-    sh 'mkdir -p $WORKSPACE/dist/debian/ ; rm -rf $WORKSPACE/dist/debian/* ; mv ../' + SOURCE + '*_' + VER + '_*.deb ../' + SOURCE + '*_' + VER + '_*.changes ../' + SOURCE + '*_' + VER + '_*.build $WORKSPACE/dist/debian/'
+    sh 'mkdir -p $WORKSPACE/dist/debian/ ; rm -rf $WORKSPACE/dist/debian/* ; for deb in $(cat debian/files | awk \'{print $1}\'); do mv "../$deb" $WORKSPACE/dist/debian/; done'
 }
 
 def installPackages() {
@@ -164,14 +181,5 @@ def installPackages() {
     sh 'echo "deb [trusted=yes] file:///$WORKSPACE/dist/debian/ ./" | sudo tee /etc/apt/sources.list.d/local.list'
     sh 'sudo apt-get update'
     sh 'echo "${GREEN} INSTALATION ${ENDCOLOR}"'
-    
-    if ( false ) { // Test all packages
-        sh 'sudo apt -y install mariadb-server postgresql; sudo mkdir -p /var/run/mysqld; sudo chmod uog+rwX /var/run/mysqld'
-        sh 'sudo service mysql status'
-	sh 'sudo service mysql start'
-        sh 'sudo service postgresql start'
-        sh 'IFS="\n\b"; for package in  `ls $WORKSPACE/dist/debian/ | grep .deb | awk -F_ \'{print \$1}\'` ; do  echo -e "${GREEN} installing ${package} on `lsb_release -sc` ${ENDCOLOR} " ; sudo  DEBIAN_FRONTEND=noninteractive DEBCONF_DEBUG=developer apt-get -y install $package ; done;'
-    } else { // Test only  sqlite
-        sh 'sudo DEBIAN_FRONTEND=noninteractive DEBCONF_DEBUG=developer apt -y install multiflexi-sqlite'
-    }
+    sh 'IFS="\n\b"; for package in  `ls $WORKSPACE/dist/debian/ | grep .deb | awk -F_ \'{print \$1}\'` ; do  echo -e "${GREEN} installing ${package} on `lsb_release -sc` ${ENDCOLOR} " ; sudo  DEBIAN_FRONTEND=noninteractive DEBCONF_DEBUG=developer apt-get -y install $package ; done;'
 }
