@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Multi Flexi - Company Management Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2018-2020 Vitex Software
  */
-
 
 namespace AbraFlexi\MultiSetup\Ui;
 
@@ -33,7 +33,6 @@ class RegisterAppForm extends EngineForm {
         $imgInput = $this->addInput(new InputFileTag('imageraw'), _('Application Icon'));
 
         $this->addInput(new Toggle('enabled', $this->engine->getDataValue('enabled') == 1), _('Enabled'));
-
 
         $this->addInput(new SubmitButton(_('Save'), 'success'));
 

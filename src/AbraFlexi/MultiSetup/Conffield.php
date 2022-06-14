@@ -44,5 +44,5 @@ class Conffield extends \Ease\SQL\Engine {
     public static function getAppConfigs($appId) {
         return (new self)->appConfigs($appId);
     }
-    
+
 }

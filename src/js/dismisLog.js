@@ -12,7 +12,7 @@ function dismisLog(logRowID, button) {
             "action": "edit"
         }
     }).done(function (response) { //
-        $("#row_" + logRowID).css("filter","brightness(85%)");
-        $(button).parent().text('✓').css('color','green').css('font-size','xx-large').css('padding','1px');
+        $("#row_" + logRowID).css("filter", "brightness(85%)");
+        $(button).parent().text('✓').css('color', 'green').css('font-size', 'xx-large').css('padding', '1px');
     });
 }

@@ -25,7 +25,7 @@ class PageBottom extends \Ease\Html\FooterTag {
         if (!file_exists($composer)) {
             $composer = '../' . $composer;
         }
-        
+
         $this->includeCSS('https://use.fontawesome.com/releases/v5.3.1/css/all.css');
 
         $appInfo = json_decode(file_get_contents($composer));

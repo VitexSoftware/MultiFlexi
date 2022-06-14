@@ -58,8 +58,8 @@ class Configuration extends \Ease\SQL\Engine {
      */
     public function takeData($data) {
         $cfgs = new Conffield();
-        foreach ($cfgs->appConfigs($this->getDataValue('app_id')) as $cfg){
-            if($cfg['type'] == 'checkbox'){
+        foreach ($cfgs->appConfigs($this->getDataValue('app_id')) as $cfg) {
+            if ($cfg['type'] == 'checkbox') {
                 $data[$cfg['keyname']] = array_key_exists($cfg['keyname'], $data) ? 'true' : 'false';
             }
         }

@@ -343,7 +343,6 @@ class DBEngine extends \Ease\SQL\Engine {
 
         $recordsFiltered = count($query);
 
-
         if (array_key_exists('length', $conditions)) {
             $query->limit($conditions['length']);
             unset($conditions['length']);
@@ -653,10 +652,10 @@ class DBEngine extends \Ease\SQL\Engine {
                             $row[$key] = '<em>NULL</em>';
                         } else {
                             if ($value === '0') {
-                                $row[$key] = new \Ease\TWB4\GlyphIcon('unchecked');
+                                $row[$key] = '✘';
                             } else {
                                 if ($value === '1') {
-                                    $row[$key] = new \Ease\TWB4\GlyphIcon('check');
+                                    $row[$key] = '✔';
                                 }
                             }
                         }
@@ -681,7 +680,7 @@ class DBEngine extends \Ease\SQL\Engine {
                         if (isset($this->keywordsInfo[$key]['refdata']) && strlen(trim($value))) {
                             $table = $this->keywordsInfo[$key]['refdata']['table'];
                             $searchColumn = $this->keywordsInfo[$key]['refdata']['captioncolumn'];
-                            $row[$key] = '<a title="' . $table . '" href="search.php?search=' . $value . '&table=' . $table . '&column=' . $searchColumn . '">' . $value . '</a> ' . EaseTWBPart::glyphIcon('search');
+                            $row[$key] = '<a title="' . $table . '" href="search.php?search=' . $value . '&table=' . $table . '&column=' . $searchColumn . '">' . $value . '</a> ' . \Ease\TWB4\Part::glyphIcon('search');
                         }
                         if (strstr($key, 'image') && strlen(trim($value))) {
                             $row[$key] = '<img title="' . $value . '" src="logos/' . $value . '" class="gridimg">';
@@ -732,7 +731,7 @@ class DBEngine extends \Ease\SQL\Engine {
         if ($this->getMyKey($data)) {
             $data = $this->prepareToSave($data, 'edit', $this->getMyKey($data));
         }
-        $result = parent::saveToSQL($data, $searchForId);
+        $result = parent::saveToSQL($data);
         $this->finishProcess(null);
         return $result;
     }
@@ -844,7 +843,7 @@ class DBEngine extends \Ease\SQL\Engine {
 
             if (!array_key_exists('type', $columnInfo)) {
                 throw new \Exception(sprintf(_('Column "%s" of %s without type definition'),
-                                $columnInfo['name'], get_class($this)));
+                                        $columnInfo['name'], get_class($this)));
             }
 
             switch ($columnInfo['type']) {
@@ -1219,7 +1218,7 @@ class DBEngine extends \Ease\SQL\Engine {
     public function completeDataRow(array $dataRowRaw) {
         foreach ($this->columnsCache as $colName => $colProps) {
             if (array_key_exists($colName . '_value', $dataRowRaw)) {
-                if(array_key_exists($colName,    $dataRowRaw)){
+                if (array_key_exists($colName, $dataRowRaw)) {
                     $dataRowRaw[$colName . '_id'] = $dataRowRaw[$colName];
                 }
                 $dataRowRaw[$colName] = $dataRowRaw[$colName . '_value'];

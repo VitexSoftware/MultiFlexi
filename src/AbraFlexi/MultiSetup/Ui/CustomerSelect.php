@@ -20,8 +20,7 @@ class CustomerSelect extends \Ease\Html\SelectTag {
 
     public function __construct($name, $defaultValue = null, $itemsIDs = false,
             $properties = array()) {
-        parent::__construct($name, $this->loadItems(), $defaultValue, $itemsIDs,
-                $properties);
+        parent::__construct($name, $this->loadItems(), $defaultValue, $properties);
     }
 
     /**

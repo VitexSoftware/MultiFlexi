@@ -24,7 +24,6 @@ $companyId = WebPage::getRequestValue('company_id', 'int');
 $configurator = new Configuration(['app_id' => $appId, 'company_id' => $companyId], ['autoload' => false]);
 $configurator->setDataValue('app_id', $appId);
 
-
 if ($oPage->isPosted()) {
     if ($configurator->takeData($_POST) && !is_null($configurator->saveToSQL())) {
         $configurator->addStatusMessage(_('Config fields Saved'), 'success');

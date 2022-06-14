@@ -16,7 +16,6 @@ use AbraFlexi\MultiSetup\Customer;
 
 require_once './init.php';
 
-
 $oPage->onlyForLogged();
 
 $oPage->addItem(new PageTop(_('Customer')));
@@ -44,7 +43,7 @@ if (strlen($instanceName)) {
 
 $instanceRow = new Row();
 $instanceRow->addColumn(8, new RegisterCustomerForm($customers));
-$instanceRow->addColumn(2, new \Ease\Html\ImgTag(\Ease\User::getGravatar(strval($customers->getDataValue('email')) , 400, 'mm', 'g'),'Gravatar',['class'=>'img-fluid'])  );
+$instanceRow->addColumn(2, new \Ease\Html\ImgTag(\Ease\User::getGravatar(strval($customers->getDataValue('email')), 400, 'mm', 'g'), 'Gravatar', ['class' => 'img-fluid']));
 //$instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($customers));
 
 $oPage->container->addItem(new Panel($instanceName, 'info',

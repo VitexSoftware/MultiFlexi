@@ -9,17 +9,25 @@
 
 namespace AbraFlexi\MultiSetup\Ui;
 
+use Ease\Container;
+use Ease\TWB4\Badge;
+
 /**
  * Description of Confiffields
  *
  * @author vitex
  */
-class ConfigFieldsBadges extends \Ease\Container {
+class ConfigFieldsBadges extends Container {
 
-    public function __construct($content = null, $properties = array()) {
-        parent::__construct(null, $properties);
+    /**
+     * 
+     * @param mixed $content
+     * @param array $properties
+     */
+    public function __construct($content = null) {
+        parent::__construct();
         foreach ($content as $conf) {
-            $this->addItem(new \Ease\TWB4\Badge(array_key_exists('state', $conf) ? $conf['state'] : 'secondary', $conf['type'] . ' ' . $conf['keyname']));
+            $this->addItem(new Badge(array_key_exists('state', $conf) ? $conf['state'] : 'secondary', $conf['type'] . ' ' . $conf['keyname']));
             $this->addItem(' ');
         }
     }

@@ -16,6 +16,15 @@ namespace AbraFlexi\MultiSetup;
  */
 class Application extends Engine {
 
+    public $lastModifiedColumn;
+    public $keyword;
+
+    /**
+     * 
+     * 
+     * @param mixed $identifier
+     * @param array $options
+     */
     public function __construct($identifier = null, $options = array()) {
         $this->myTable = 'apps';
         $this->createColumn = 'DatCreate';
@@ -34,7 +43,7 @@ class Application extends Engine {
      */
     public function takeData($data) {
         $check = true;
-        $data['enabled'] = (($data['enabled'] == 'on') || ($data['enabled'] == 1)  );
+        $data['enabled'] = (($data['enabled'] == 'on') || ($data['enabled'] == 1) );
         if (array_key_exists('nazev', $data) && empty($data['nazev'])) {
             $this->addStatusMessage(_('Name is empty'), 'warning');
             $check = false;

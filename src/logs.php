@@ -27,7 +27,6 @@ $oPage->addJavaScript('$.fn.dataTable.ext.buttons.dismisAll = {
     }
 };');
 
-
 $oPage->includeJavascript('js/dismisLog.js');
 
 //$oPage->container->addItem( new ui\DashboardMessages());
@@ -41,7 +40,5 @@ $oPage->addJavaScript('
       Molecule.ajax.reload();
 }, 300000);
 ');
-
-
 
 $oPage->draw();

@@ -2,169 +2,169 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   id="svg3041"
-   sodipodi:docname="customer.svg"
-   viewBox="0 0 211.86 226.87"
-   version="1.1"
-   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   width="225.98399"
-   height="241.99466">
-  <defs
-     id="defs26" />
-  <sodipodi:namedview
-     id="base"
-     bordercolor="#666666"
-     inkscape:pageshadow="2"
-     inkscape:window-y="0"
-     fit-margin-left="0"
-     pagecolor="#ffffff"
-     fit-margin-top="0"
-     inkscape:window-maximized="1"
-     inkscape:zoom="2.9761035"
-     inkscape:window-x="1920"
-     inkscape:window-height="1051"
-     showgrid="false"
-     borderopacity="1.0"
-     inkscape:current-layer="g3938"
-     inkscape:cx="23.845419"
-     inkscape:cy="113.18403"
-     fit-margin-right="0"
-     fit-margin-bottom="0"
-     inkscape:window-width="1920"
-     inkscape:pageopacity="0.0"
-     inkscape:document-units="px" />
-  <g
-     id="layer1"
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     transform="translate(-38.124,-9.8279)">
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    id="svg3041"
+    sodipodi:docname="customer.svg"
+    viewBox="0 0 211.86 226.87"
+    version="1.1"
+    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+    width="225.98399"
+    height="241.99466">
+    <defs
+        id="defs26" />
+    <sodipodi:namedview
+        id="base"
+        bordercolor="#666666"
+        inkscape:pageshadow="2"
+        inkscape:window-y="0"
+        fit-margin-left="0"
+        pagecolor="#ffffff"
+        fit-margin-top="0"
+        inkscape:window-maximized="1"
+        inkscape:zoom="2.9761035"
+        inkscape:window-x="1920"
+        inkscape:window-height="1051"
+        showgrid="false"
+        borderopacity="1.0"
+        inkscape:current-layer="g3938"
+        inkscape:cx="23.845419"
+        inkscape:cy="113.18403"
+        fit-margin-right="0"
+        fit-margin-bottom="0"
+        inkscape:window-width="1920"
+        inkscape:pageopacity="0.0"
+        inkscape:document-units="px" />
     <g
-       id="g3938"
-       transform="matrix(0.70983,0,0,0.70983,-96.744,-57.251)">
-      <g
-         id="g833"
-         transform="matrix(1.7240583,0,0,1.7240583,-127.43948,-84.065592)">
+        id="layer1"
+        inkscape:label="Layer 1"
+        inkscape:groupmode="layer"
+        transform="translate(-38.124,-9.8279)">
         <g
-           transform="matrix(0.75345489,0,0,0.70884859,61.04457,-12.56565)"
-           id="g837">
-          <rect
-             id="rect2985"
-             style="fill:#333333"
-             ry="21.399"
-             height="138.46001"
-             width="180"
-             y="275.64999"
-             x="190" />
-          <path
-             id="path2987"
-             style="fill:#ffffff"
-             sodipodi:type="star"
-             d="M 291.42856,526.64789 207.30037,380.93361 123.1722,235.21933 l 168.25636,-1e-5 168.25635,1e-5 -84.12817,145.71428 z"
-             sodipodi:r1="194.28571"
-             inkscape:flatsided="false"
-             inkscape:transform-center-y="49.708298"
-             transform="matrix(0.42427,0,0,0.45087,157.56,169.37)"
-             sodipodi:arg2="2.6179939"
-             sodipodi:arg1="1.5707963"
-             inkscape:randomized="0"
-             sodipodi:cy="332.36218"
-             sodipodi:cx="291.42856"
-             inkscape:rounded="0"
-             sodipodi:r2="97.14286"
-             sodipodi:sides="3" />
-          <path
-             id="path2989"
-             d="m 281.16,393.97 -20.037,-78.034 18.11,-36.511 19.652,33.648 z"
-             sodipodi:nodetypes="ccccc"
-             style="fill:#ff0000"
-             inkscape:connector-curvature="0" />
-          <circle
-             id="path2992"
-             style="fill:#333333"
-             transform="matrix(0.3695,0,0,0.3695,416.72,85.194)"
-             cx="-370"
-             cy="379.50504"
-             r="132.85715" />
+            id="g3938"
+            transform="matrix(0.70983,0,0,0.70983,-96.744,-57.251)">
+            <g
+                id="g833"
+                transform="matrix(1.7240583,0,0,1.7240583,-127.43948,-84.065592)">
+                <g
+                    transform="matrix(0.75345489,0,0,0.70884859,61.04457,-12.56565)"
+                    id="g837">
+                    <rect
+                        id="rect2985"
+                        style="fill:#333333"
+                        ry="21.399"
+                        height="138.46001"
+                        width="180"
+                        y="275.64999"
+                        x="190" />
+                    <path
+                        id="path2987"
+                        style="fill:#ffffff"
+                        sodipodi:type="star"
+                        d="M 291.42856,526.64789 207.30037,380.93361 123.1722,235.21933 l 168.25636,-1e-5 168.25635,1e-5 -84.12817,145.71428 z"
+                        sodipodi:r1="194.28571"
+                        inkscape:flatsided="false"
+                        inkscape:transform-center-y="49.708298"
+                        transform="matrix(0.42427,0,0,0.45087,157.56,169.37)"
+                        sodipodi:arg2="2.6179939"
+                        sodipodi:arg1="1.5707963"
+                        inkscape:randomized="0"
+                        sodipodi:cy="332.36218"
+                        sodipodi:cx="291.42856"
+                        inkscape:rounded="0"
+                        sodipodi:r2="97.14286"
+                        sodipodi:sides="3" />
+                    <path
+                        id="path2989"
+                        d="m 281.16,393.97 -20.037,-78.034 18.11,-36.511 19.652,33.648 z"
+                        sodipodi:nodetypes="ccccc"
+                        style="fill:#ff0000"
+                        inkscape:connector-curvature="0" />
+                    <circle
+                        id="path2992"
+                        style="fill:#333333"
+                        transform="matrix(0.3695,0,0,0.3695,416.72,85.194)"
+                        cx="-370"
+                        cy="379.50504"
+                        r="132.85715" />
+                </g>
+                <g
+                    id="g4525"
+                    transform="matrix(0.04673022,0,0,-0.04673022,243.26079,247.6327)">
+                    <path
+                        d="M 1708.68,0 1842.46,231.617 1976.17,0 Z"
+                        style="fill:#f9ae2d;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                        id="path22"
+                        inkscape:connector-curvature="0" />
+                    <path
+                        d="m 1708.68,0 -133.75,231.617 h 267.53 z"
+                        style="fill:#d28b25;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                        id="path24"
+                        inkscape:connector-curvature="0" />
+                    <path
+                        d="m 1574.93,231.617 133.75,231.68 133.78,-231.68 z"
+                        style="fill:#936327;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                        id="path26"
+                        inkscape:connector-curvature="0" />
+                    <path
+                        d="M 1708.68,463.297 H 1441.21 L 1173.65,0 h 267.56 l 267.47,463.297"
+                        style="fill:#767a7c;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                        id="path28"
+                        inkscape:connector-curvature="0" />
+                </g>
+            </g>
         </g>
-        <g
-           id="g4525"
-           transform="matrix(0.04673022,0,0,-0.04673022,243.26079,247.6327)">
-          <path
-             d="M 1708.68,0 1842.46,231.617 1976.17,0 Z"
-             style="fill:#f9ae2d;fill-opacity:1;fill-rule:nonzero;stroke:none"
-             id="path22"
-             inkscape:connector-curvature="0" />
-          <path
-             d="m 1708.68,0 -133.75,231.617 h 267.53 z"
-             style="fill:#d28b25;fill-opacity:1;fill-rule:nonzero;stroke:none"
-             id="path24"
-             inkscape:connector-curvature="0" />
-          <path
-             d="m 1574.93,231.617 133.75,231.68 133.78,-231.68 z"
-             style="fill:#936327;fill-opacity:1;fill-rule:nonzero;stroke:none"
-             id="path26"
-             inkscape:connector-curvature="0" />
-          <path
-             d="M 1708.68,463.297 H 1441.21 L 1173.65,0 h 267.56 l 267.47,463.297"
-             style="fill:#767a7c;fill-opacity:1;fill-rule:nonzero;stroke:none"
-             id="path28"
-             inkscape:connector-curvature="0" />
-        </g>
-      </g>
     </g>
-  </g>
-  <metadata
-     id="metadata23">
-    <rdf:RDF>
-      <cc:Work>
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <cc:license
-           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
-        <dc:publisher>
-          <cc:Agent
-             rdf:about="http://openclipart.org/">
-            <dc:title>Openclipart</dc:title>
-          </cc:Agent>
-        </dc:publisher>
-        <dc:title />
-        <dc:date>2012-01-07T08:22:20</dc:date>
-        <dc:description>Help desk</dc:description>
-        <dc:source>https://openclipart.org/detail/166905/help-desk-by-gsagri04</dc:source>
-        <dc:creator>
-          <cc:Agent>
-            <dc:title>gsagri04</dc:title>
-          </cc:Agent>
-        </dc:creator>
-        <dc:subject>
-          <rdf:Bag>
-            <rdf:li>Help</rdf:li>
-            <rdf:li>care</rdf:li>
-            <rdf:li>corporate</rdf:li>
-            <rdf:li>customer</rdf:li>
-            <rdf:li>desk</rdf:li>
-            <rdf:li>office</rdf:li>
-            <rdf:li>reception</rdf:li>
-          </rdf:Bag>
-        </dc:subject>
-      </cc:Work>
-      <cc:License
-         rdf:about="http://creativecommons.org/licenses/publicdomain/">
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#Reproduction" />
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#Distribution" />
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
-      </cc:License>
-    </rdf:RDF>
-  </metadata>
+    <metadata
+        id="metadata23">
+        <rdf:RDF>
+            <cc:Work>
+                <dc:format>image/svg+xml</dc:format>
+                <dc:type
+                    rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+                <cc:license
+                    rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+                <dc:publisher>
+                    <cc:Agent
+                        rdf:about="http://openclipart.org/">
+                        <dc:title>Openclipart</dc:title>
+                    </cc:Agent>
+                </dc:publisher>
+                <dc:title />
+                <dc:date>2012-01-07T08:22:20</dc:date>
+                <dc:description>Help desk</dc:description>
+                <dc:source>https://openclipart.org/detail/166905/help-desk-by-gsagri04</dc:source>
+                <dc:creator>
+                    <cc:Agent>
+                        <dc:title>gsagri04</dc:title>
+                    </cc:Agent>
+                </dc:creator>
+                <dc:subject>
+                    <rdf:Bag>
+                        <rdf:li>Help</rdf:li>
+                        <rdf:li>care</rdf:li>
+                        <rdf:li>corporate</rdf:li>
+                        <rdf:li>customer</rdf:li>
+                        <rdf:li>desk</rdf:li>
+                        <rdf:li>office</rdf:li>
+                        <rdf:li>reception</rdf:li>
+                    </rdf:Bag>
+                </dc:subject>
+            </cc:Work>
+            <cc:License
+                rdf:about="http://creativecommons.org/licenses/publicdomain/">
+                <cc:permits
+                    rdf:resource="http://creativecommons.org/ns#Reproduction" />
+                <cc:permits
+                    rdf:resource="http://creativecommons.org/ns#Distribution" />
+                <cc:permits
+                    rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+            </cc:License>
+        </rdf:RDF>
+    </metadata>
 </svg>

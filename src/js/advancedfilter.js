@@ -31,9 +31,9 @@ function updateFiltering(input, columnName, gridId) {
 
     var colIndex = getIndexByName(columnName, aoColumns);
     dataTable.column(colIndex).search($(input).val());
-    
+
     dataTable.draw();
-    
+
     if ($(input).val().length == 0) {
         unsetFilterLabel(columnName);
         $(input).removeClass('tablefilter');
@@ -45,7 +45,7 @@ function updateFiltering(input, columnName, gridId) {
         $(dataTable.column(colIndex).nodes()).addClass('filtered');
         aoColumns[colIndex]['sClass'] = 'filtered';
     }
-    
+
 }
 
 /**

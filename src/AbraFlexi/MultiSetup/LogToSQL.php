@@ -85,7 +85,7 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable {
      */
     public function addToLog($caller, $message, $type = 'message') {
         return $this->insertToSQL([
-                    'venue' => $caller,
+                    'venue' => self::venuize($caller),
                     'severity' => $type,
                     'message' => $message,
                     'apps_id' => $this->applicationId,
@@ -94,4 +94,26 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable {
         ]);
     }
 
+    /**
+     * Prepare venue able to be saved into sql column
+     * 
+     * @param mixed $caller
+     */
+    public static function venuize($caller) {
+        switch (gettype($caller)) {
+            case 'object':
+                if(method_exists($caller, 'getObjectName')){
+                    $venue = $caller->getObjectName();
+                } else {
+                    $venue = get_class($caller);
+                }
+                break;
+            case 'string':
+            default:
+                $venue = $caller;
+                break;
+        }
+        return substr($venue,254);
+    }
+    
 }

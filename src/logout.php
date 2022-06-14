@@ -12,11 +12,7 @@ namespace AbraFlexi\MultiSetup\Ui;
 use AbraFlexi\MultiSetup\Ui\PageBottom;
 use AbraFlexi\MultiSetup\Ui\PageTop;
 
-
-
 require_once './init.php';
-
-
 
 if (!is_null($oUser->getUserID())) {
     $oUser->logout();
@@ -27,7 +23,6 @@ $oPage->addItem(new PageTop(_('Sign Off')));
 $byerow = new \Ease\TWB4\Row();
 $byerow->addColumn(6);
 $byeInfo = $byerow->addColumn(6, new \Ease\Html\H1Tag(_('Good bye')));
-
 
 $byeInfo->addItem('<br/><br/><br/><br/>');
 $byeInfo->addItem(new \Ease\Html\DivTag(new \Ease\Html\ATag('login.php',

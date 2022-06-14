@@ -1,4 +1,5 @@
 <?php
+
 namespace AbraFlexi\MultiSetup;
 
 /**
@@ -7,11 +8,12 @@ namespace AbraFlexi\MultiSetup;
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2018-2020 Vitex Software
  */
-class Customer extends Engine
-{
+class Customer extends Engine {
+
     public $nameColumn = 'login';
     public $myTable = 'customer';
     public $keyword = 'customer';
     public $createColumn = 'DatCreate';
     public $updatedColumn = 'DatUpdate';
+
 }

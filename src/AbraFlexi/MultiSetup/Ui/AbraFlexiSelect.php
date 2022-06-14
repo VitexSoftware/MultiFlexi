@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi Flexi  - AbraFlexi server select
  *
@@ -8,14 +9,12 @@
 
 namespace AbraFlexi\MultiSetup\Ui;
 
-
 /**
  * Description of AbraFlexiSelect
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class AbraFlexiSelect extends \Ease\Html\SelectTag
-{
+class AbraFlexiSelect extends \Ease\Html\SelectTag {
 
     use \Ease\SQL\Orm;
 
@@ -28,13 +27,11 @@ class AbraFlexiSelect extends \Ease\Html\SelectTag
      * @param array  $properties
      */
     public function __construct($name, $defaultValue = null, $itemsIDs = false,
-                                $properties = array())
-    {
-        $items    = $this->loadItems();
+            $properties = array()) {
+        $items = $this->loadItems();
         $itemsIDs = array_keys($items);
         $this->errorNumber = 0;
-        parent::__construct($name, $items, end($itemsIDs), $itemsIDs,
-            $properties);
+        parent::__construct($name, $items, empty($itemsIDs) ? $defaultValue : end($itemsIDs), $properties);
     }
 
     /**
@@ -42,9 +39,8 @@ class AbraFlexiSelect extends \Ease\Html\SelectTag
      * 
      * @return array
      */
-    public function loadItems()
-    {
-        $abraflexis    = ['' => _('Choose AbraFlexi server')];
+    public function loadItems() {
+        $abraflexis = ['' => _('Choose AbraFlexi server')];
         $this->setMyTable('abraflexis');
         $abraflexisRaw = $this->getColumnsFromSQL(['id', 'name'], null, 'name');
         foreach ($abraflexisRaw as $abraflexi) {
@@ -52,4 +48,5 @@ class AbraFlexiSelect extends \Ease\Html\SelectTag
         }
         return $abraflexis;
     }
+
 }

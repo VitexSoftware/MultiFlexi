@@ -32,7 +32,7 @@ if (empty($emailTo)) {
         $controlUser->loadFromSQL((int) $controlData[0][$controlUser->getkeyColumn()]);
         $userLogin = $controlUser->getUserLogin();
         $newPassword = \Ease\Functions::randomString(8);
-            
+
         $controlUser->passwordChange($newPassword);
 
         $email = $oPage->addItem(new \Ease\HtmlMailer($userEmail,
@@ -81,7 +81,7 @@ if (!$success) {
                             ['type' => 'email'])));
     $loginPanel->body->setTagProperties(['style' => 'margin: 20px']);
 
-    $mailForm = $columnII->addItem(new \Ease\TWB4\Form(['name'=>'PasswordRecovery']));
+    $mailForm = $columnII->addItem(new \Ease\TWB4\Form(['name' => 'PasswordRecovery']));
     $mailForm->addItem($loginPanel);
 
     if ($oPage->isPosted()) {

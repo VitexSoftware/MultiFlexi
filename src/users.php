@@ -1,6 +1,13 @@
 <?php
 
-namespace TaxTorro;
+/**
+ * Multi Flexi - Users listing.
+ *
+ * @author Vítězslav Dvořák <info@vitexsoftware.cz>
+ * @copyright  2020-2022 Vitex Software
+ */
+
+namespace AbraFlexi\MultiSetup\Ui;
 
 /**
  * TaxTorro - Přehled uživatelů.
