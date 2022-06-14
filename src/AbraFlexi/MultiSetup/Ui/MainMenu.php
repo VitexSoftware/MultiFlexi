@@ -35,8 +35,8 @@ class MainMenu extends \Ease\Html\DivTag {
         $keycolumn = $source->getkeyColumn();
         $namecolumn = $source->nameColumn;
         $columns = [$source->getkeyColumn(), $namecolumn];
-        if($icon){
-           $columns[] = $icon; 
+        if ($icon) {
+            $columns[] = $icon;
         }
         $lister = $source->getColumnsFromSQL($columns, null, $namecolumn, $keycolumn);
 
@@ -61,7 +61,6 @@ class MainMenu extends \Ease\Html\DivTag {
     public function afterAdd() {
         $nav = $this->addItem(new BootstrapMenu('main-menu', null, ['class' => 'navbar navbar-expand-lg navbar-light bg-light']));
 
-
         if (\Ease\Shared::user()->isLogged()) { //Authenticated user
             $abraflexis = $this->getMenuList(new \AbraFlexi\MultiSetup\AbraFlexis());
             $customers = $this->getMenuList(new \AbraFlexi\MultiSetup\Customer());
@@ -69,7 +68,6 @@ class MainMenu extends \Ease\Html\DivTag {
             $apps = $this->getMenuList(new \AbraFlexi\MultiSetup\Application(), 'image');
 
             $this->abraflexisMenuEnabled($nav, $abraflexis);
-
 
             if (empty($abraflexis) && empty($customers) && empty($companys)) { // All empty yet
                 \AbraFlexi\MultiSetup\User::singleton()->addStatusMessage(_('No server registered yet. Please register one.'), 'warning');

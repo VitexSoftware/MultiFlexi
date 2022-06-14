@@ -72,7 +72,6 @@ $cfgs->addItem(new \Ease\TWB4\LinkButton('app.php?id=' . WebPage::getRequestValu
 
 $oPage->container->addItem(new Panel($instanceName, 'info', $instanceRow, $cfgs));
 
-
 $oPage->addItem(new PageBottom());
 
 $oPage->draw();

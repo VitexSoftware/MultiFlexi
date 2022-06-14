@@ -27,7 +27,7 @@ class ConfFieldsForm extends Form {
         $this->addInput(new InputTextTag('keyname'), _('New config field Keyword'));
         $this->addInput(new InputTextTag('defval'), _('Default value'));
         $this->addInput(new InputTextTag('description'), _('New config field description'));
-        $this->addItem(new SubmitButton( _('Add'),'success btn-block'));
+        $this->addItem(new SubmitButton(_('Add'), 'success btn-block'));
     }
 
 }

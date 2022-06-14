@@ -9,6 +9,7 @@
 
 namespace AbraFlexi\MultiSetup\Ui;
 
+use AbraFlexi\MultiSetup\Engine;
 use Ease\Html\DivTag;
 use Ease\Html\InputHiddenTag;
 use Ease\Html\InputSubmitTag;
@@ -16,7 +17,7 @@ use Ease\TWB4\Col;
 use Ease\TWB4\Form;
 use Ease\TWB4\FormGroup;
 use Ease\TWB4\Row;
-use AbraFlexi\MultiSetup\Engine;
+use Ease\TWB4\SubmitButton;
 
 class ColumnsForm extends Form {
 
@@ -107,7 +108,7 @@ class ColumnsForm extends Form {
      * Přidá do formuláře tlačítko "Uložit".
      */
     public function addSubmitSave() {
-        $this->savers->addItem(new EaseTWSubmitButton(_('Uložit'), 'default'),
+        $this->savers->addItem(new SubmitButton(_('Uložit'), 'default'),
                 ['style' => 'text-align: right']);
     }
 

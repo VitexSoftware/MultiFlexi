@@ -73,8 +73,7 @@ $passRecoveryColumn = $loginRow->addItem(new Col(4,
                 new LinkButton('passwordrecovery.php', '<i class="fa fa-key"></i>
 ' . _('Lost password recovery'), 'warning')));
 
-
-$oPage->container->addItem(new Form([],[], $loginRow));
+$oPage->container->addItem(new Form([], [], $loginRow));
 
 $oPage->addItem(new PageBottom());
 

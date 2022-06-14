@@ -18,7 +18,7 @@ session_start();
 
 \Ease\Shared::singleton()->loadConfig(dirname(__DIR__) . '/.env', true);
 
-\Ease\Locale::singleton(null,'../i18n','multiabraflexisetup');
+\Ease\Locale::singleton(null, '../i18n', 'multiabraflexisetup');
 
 define('EASE_LOGGER', 'syslog|\AbraFlexi\MultiSetup\LogToSQL');
 

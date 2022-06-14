@@ -19,7 +19,6 @@ use AbraFlexi\MultiSetup\Ui\RegisterAppForm;
 
 require_once './init.php';
 
-
 $oPage->onlyForLogged();
 
 $oPage->addItem(new PageTop(_('Application')));
@@ -47,8 +46,7 @@ if (strlen($instanceName)) {
 $instanceRow = new Row();
 $instanceRow->addColumn(8, new RegisterAppForm($apps));
 
-$instanceRow->addColumn(4, new \Ease\Html\ImgTag(empty($apps->getDataValue('image')) ? 'images/apps.svg' : $apps->getDataValue('image'),'Logo',['class'=>'img-fluid']));
-
+$instanceRow->addColumn(4, new \Ease\Html\ImgTag(empty($apps->getDataValue('image')) ? 'images/apps.svg' : $apps->getDataValue('image'), 'Logo', ['class' => 'img-fluid']));
 
 $oPage->container->addItem(new Panel($instanceName, 'info',
                 $instanceRow,

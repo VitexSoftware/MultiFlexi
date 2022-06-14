@@ -49,17 +49,14 @@ class AppToCompany extends Engine {
         $cmp = new Company((int) $this->getDataValue('company_id'));
         $cmp->setEnvironment();
 
-
         $envNames = [
             'EASE_MAILTO' => $this->getDataValue('email'),
             'EASE_LOGGER' => empty($this->getDataValue('email')) ? 'syslog' : 'syslog|email'
         ];
         $this->exportEnv($envNames);
 
-
         $customConfig = new Configuration();
         $customConfig->setEnvironment($cmp->getMyKey(), $app->getMyKey());
-
 
         $exec = $app->getDataValue('setup');
         $cmp->addStatusMessage('setup begin' . $exec . '@' . $cmp->getDataValue('nazev'));

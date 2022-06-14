@@ -46,11 +46,15 @@ postinst:
 redeb:
 	 sudo apt -y purge multiflexi; rm ../multiflexi_*_all.deb ; debuild -us -uc ; sudo gdebi  -n ../multiflexi_*_all.deb ; sudo apache2ctl restart
 
-deb:
+debs:
 	debuild -i -us -uc -b
 
+debs2deb: debs
+	mkdir -p ./dist/; rm -rf ./dist/* ; for deb in $$(cat debian/files | awk '{print $$1}'); do mv "../$$deb" ./dist/; done
+	debs2deb ./dist/ multi-flexi-dist
+	mv multi-flexi-dist_*_all.deb dist
 
-dimage:
+dimage: debs2deb
 	docker build -t vitexsoftware/multiflexi .
 
 drun: dimage

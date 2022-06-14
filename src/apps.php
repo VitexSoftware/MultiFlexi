@@ -23,10 +23,10 @@ $abraflexis = new Application();
 $allAppData = $abraflexis->getAll();
 
 $fbtable = new Table();
-$fbtable->addRowHeaderColumns([_('ID'), _('Enabled'), _('Image'), _('Name'),_('Description'),_('Executable'),_('Modified')]);
+$fbtable->addRowHeaderColumns([_('ID'), _('Enabled'), _('Image'), _('Name'), _('Description'), _('Executable'), _('Modified')]);
 
 foreach ($allAppData as $appData) {
-    $appData['image'] = new \Ease\Html\ImgTag($appData['image'],_('Icon'),['height'=>40]);
+    $appData['image'] = new \Ease\Html\ImgTag($appData['image'], _('Icon'), ['height' => 40]);
     $fbtable->addRowColumns($appData);
 }
 

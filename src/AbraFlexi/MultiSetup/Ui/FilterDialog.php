@@ -31,7 +31,7 @@ class FilterDialog extends \Ease\Html\DivTag {
                 case 'checkbox':
                     $controls->addItem(
                             new \Ease\TWB4\FormGroup($columnProperies['label'],
-                                    new \Ease\ui\TWBSwitch($columnName, null, null,
+                                    new Ease\TWB4\Widgets\Toggle($columnName, null, null,
                                             ['indeterminate' => true, 'id' => $columnName . 'sw'])));
                     $controls->addItem('&nbsp;' . new \Ease\Html\ATag('#',
                                     '<i class="fas fa-yin-yang"></i>',

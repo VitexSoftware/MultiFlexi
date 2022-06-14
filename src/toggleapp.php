@@ -11,7 +11,6 @@ namespace AbraFlexi\MultiSetup\Ui;
 
 require_once './init.php';
 
-
 $oPage->onlyForLogged();
 
 $app_id = \Ease\TWB4\WebPage::getRequestValue('app');

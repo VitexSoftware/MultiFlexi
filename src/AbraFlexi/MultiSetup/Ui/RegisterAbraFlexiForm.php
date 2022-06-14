@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi Flexi  - New AbraFlexi registration form
  *
@@ -13,19 +14,17 @@ namespace AbraFlexi\MultiSetup\Ui;
  *
  * @author 
  */
-class RegisterAbraFlexiForm extends EngineForm
-{
+class RegisterAbraFlexiForm extends EngineForm {
 
-    public function afterAdd()
-    {
+    public function afterAdd() {
         $this->addInput(new \Ease\Html\InputTextTag('name'),
-            _('AbraFlexi instance Name'));
+                _('AbraFlexi instance Name'));
         $this->addInput(new \Ease\Html\InputTextTag('url'),
-            _('RestAPI endpoint url'));
+                _('RestAPI endpoint url'));
         $this->addInput(new \Ease\Html\InputTextTag('user'),
-            _('REST API Username'));
+                _('REST API Username'));
         $this->addInput(new \Ease\Html\InputTextTag('password'),
-            _('Rest API Password'));
+                _('Rest API Password'));
 
         $this->addInput(new \Ease\TWB4\SubmitButton(_('Save'), 'success'));
 
@@ -37,4 +36,5 @@ class RegisterAbraFlexiForm extends EngineForm
             $this->fillUp($this->engine->getData());
         }
     }
+
 }

@@ -92,8 +92,6 @@ class DBDataTable extends \Ease\Html\TableTag {
         $this->includeJavaScript('js/dataTables.bootstrap4.js');
         $this->includeCss('css/dataTables.bootstrap4.css');
 
-
-
 //        $this->includeJavaScript('assets/DataTables-1.10.19/js/jquery.dataTables.min.js');
 //        $this->includeJavaScript('assets/DataTables-1.10.19/js/dataTables.bootstrap.min.js');
 //        $this->includeJavaScript('assets/Select-1.3.0/js/dataTables.select.min.js');
@@ -108,7 +106,6 @@ class DBDataTable extends \Ease\Html\TableTag {
         $this->includeJavaScript('js/selectize.min.js');
         $this->includeCss('css/selectize.css');
         $this->includeCss('css/selectize.bootstrap4.css');
-
 
         $this->setTagClass('table table-bordered');
 
@@ -137,7 +134,6 @@ class DBDataTable extends \Ease\Html\TableTag {
         dt.ajax.reload();
     }
 };');
-
 
         $this->addJavaScript('
 $("#gridFilter' . $gridTagID . '").hide( );
@@ -344,7 +340,7 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
     //    '.self::columnIndexNames($columns,$tableID).'
     public static function columnIndexNames($columns, $of) {
         $colsCode[] = 'var tableColumnIndex = [];';
-        foreach (Sand::reindexArrayBy($columns, 'name') as $colName => $columnInfo) {
+        foreach (\Ease\Functions::reindexArrayBy($columns, 'name') as $colName => $columnInfo) {
             $colsCode[] = "tableColumnIndex['" . $colName . "'] = " . $of . ".column('" . $colName . ":name').index();";
         }
         return implode("\n", $colsCode);
@@ -376,6 +372,7 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
      * @return array
      */
     public static function columnsToHeader($columns) {
+        $header = [];
         foreach ($columns as $properties) {
             if (array_key_exists('hidden', $properties) && ($properties['hidden'] == true)) {
                 continue;

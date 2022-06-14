@@ -8,7 +8,7 @@ namespace AbraFlexi\MultiSetup;
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
  */
-class AbraFlexis extends \Ease\SQL\Engine {
+class AbraFlexis extends DBEngine {
 
     public $keyword = 'abraflexi';
 

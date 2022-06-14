@@ -25,7 +25,7 @@ if ($oPage->getGetValue('delete', 'bool') == 'true') {
     }
 }
 
-$oPage->addItem(new ui\PageTop(_('Uživatel')));
+$oPage->addItem(new ui\PageTop(_('User')));
 
 switch ($oPage->getRequestValue('action')) {
     case 'delete':
@@ -34,7 +34,7 @@ switch ($oPage->getRequestValue('action')) {
 
         $confirmBlock->addItem($user);
 
-        $confirmator = $confirmBlock->addItem(new \Ease\TWB4\Panel(_('Opravdu smazat ?')), 'danger');
+        $confirmator = $confirmBlock->addItem(new \Ease\TWB4\Panel(_('Are you sure ?')), 'danger');
         $confirmator->addItem(new \Ease\TWB4\LinkButton('user.php?id=' . $user->getId(), _('Ne') . ' ' . \Ease\TWB4\Part::glyphIcon('ok'), 'success'));
         $confirmator->addItem(new \Ease\TWB4\LinkButton('?delete=true&' . $user->keyColumn . '=' . $user->getID(), _('Ano') . ' ' . \Ease\TWB4\Part::glyphIcon('remove'), 'danger'));
 

@@ -12,7 +12,7 @@ namespace AbraFlexi\MultiSetup\Ui;
 require_once './init.php';
 
 if (empty($oUser->listingQuery()->count())) {
-    $oPage->addStatusMessage(_('Creating first administrator'), 'warning');
+    $oPage->addStatusMessage(_('No Administrator found'), 'warning');
 } else {
     $oPage->onlyForLogged();
 }
@@ -35,19 +35,19 @@ if ($oPage->isPosted()) {
 
     $error = false;
 
-        if (!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
-            $oUser->addStatusMessage(_('invalid mail address'), 'warning');
-        } else {
-            $testuser = new \AbraFlexi\MultiSetup\User();
-            $testuser->setkeyColumn('email');
-            $testuser->loadFromSQL(addSlashes($emailAddress));
-            if ($testuser->getUserName()) {
-                $error = true;
-                $oUser->addStatusMessage(sprintf(_('Mail address %s is already registered'),
-                                $emailAddress), 'warning');
-            }
-            unset($testuser);
+    if (!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
+        $oUser->addStatusMessage(_('invalid mail address'), 'warning');
+    } else {
+        $testuser = new \AbraFlexi\MultiSetup\User();
+        $testuser->setkeyColumn('email');
+        $testuser->loadFromSQL(addSlashes($emailAddress));
+        if ($testuser->getUserName()) {
+            $error = true;
+            $oUser->addStatusMessage(sprintf(_('Mail address %s is already registered'),
+                            $emailAddress), 'warning');
         }
+        unset($testuser);
+    }
 
     if (strlen($password) < 5) {
         $error = true;
@@ -92,7 +92,7 @@ if ($oPage->isPosted()) {
             $email = $oPage->addItem(new \Ease\HtmlMailer($newAdmin->getDataValue('email'),
                             _('Sign On info')));
             $email->setMailHeaders(['From' => \Ease\Functions::cfg('EMAIL_FROM')]);
-            $email->addItem(new \Ease\Html\DivTag( sprintf( _("Your new %s account:")."\n", \Ease\Shared::appName()) ));
+            $email->addItem(new \Ease\Html\DivTag(sprintf(_("Your new %s account:") . "\n", \Ease\Shared::appName())));
             $email->addItem(new \Ease\Html\DivTag(' Login: ' . $newAdmin->getUserLogin() . "\n"));
             $email->addItem(new \Ease\Html\DivTag(' Password: ' . $_POST['password'] . "\n"));
             $email->send();

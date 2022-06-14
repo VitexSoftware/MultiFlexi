@@ -18,7 +18,7 @@ require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('AbraFlexi instance')));
 
-$abraflexis = new AbraFlexis($oPage->getRequestValue('id', 'int'),['autoload'=>true]);
+$abraflexis = new AbraFlexis($oPage->getRequestValue('id', 'int'), ['autoload' => true]);
 $instanceName = $abraflexis->getRecordName();
 
 if ($oPage->isPosted()) {
@@ -42,11 +42,10 @@ if (strlen($instanceName)) {
 $instanceRow = new Row();
 $instanceRow->addColumn(8, new RegisterAbraFlexiForm($abraflexis));
 
-
 $oPage->container->addItem(new Panel($instanceName, 'info',
                 $instanceRow, $instanceLink));
 
-if(!is_null($abraflexis->getMyKey())){
+if (!is_null($abraflexis->getMyKey())) {
     $oPage->container->addItem(new AbraFlexiInstanceStatus($abraflexis));
 }
 
