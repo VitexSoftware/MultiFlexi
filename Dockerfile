@@ -15,10 +15,10 @@ COPY dist/multi-flexi-dist_*_all.deb /tmp/multi-flexi-dist_all.deb
 
 RUN apt update && dpkg -i /tmp/multi-flexi-dist_all.deb && apt update
 
-RUN aptitude -y install multiflexi-sqlite abraflexi-matcher abraflexi-reminder abraflexi-contract-invoices abraflexi-digest
+RUN aptitude -y install multiflexi-sqlite abraflexi-matcher abraflexi-reminder abraflexi-contract-invoices abraflexi-digest abraflexi-mailer abraflexi-email-importer
 
 RUN phinx seed:run -c /usr/lib/multiflexi/phinx-adapter.php
-RUN a2ensite multiflexi
+#RUN a2ensite multiflexi
 
 CMD /usr/sbin/cron
 CMD [ "/usr/sbin/apache2ctl", "-D", "FOREGROUND" ]
