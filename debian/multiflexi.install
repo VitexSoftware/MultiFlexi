@@ -8,8 +8,8 @@ debian/conf/composer.json                 usr/lib/multiflexi
 debian/conf/phinx-adapter.php	          usr/lib/multiflexi
 src/AbraFlexi/MultiSetup/*.php            usr/lib/multiflexi/AbraFlexi/
 src/AbraFlexi/MultiSetup/Ui/*.php         usr/lib/multiflexi/AbraFlexi/Ui/
-debian/conf/multiflexi.conf    etc/apache2/conf-available
-debian/conf/multiflexi.service etc/avahi/services
+debian/conf/multiflexi.conf    		  etc/apache2/conf-available
+debian/conf/multiflexi.service 		  etc/avahi/services
 bin/*					  usr/bin
 lib/*					  usr/lib/multiflexi
 debian/cz.vitexsoftware.multiflexi.metainfo.xml    usr/share/metainfo/
