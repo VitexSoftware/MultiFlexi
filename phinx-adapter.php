@@ -23,6 +23,7 @@ $sqlOptions = [];
 if (strstr(\Ease\Functions::cfg('DB_CONNECTION'), 'sqlite')) {
     $sqlOptions['database'] = $prefix . basename(\Ease\Functions::cfg('DB_DATABASE'));
 }
+
 $engine = new \Ease\SQL\Engine(null, $sqlOptions);
 $cfg = [
     'paths' => [
