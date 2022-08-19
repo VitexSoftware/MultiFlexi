@@ -16,8 +16,8 @@ override_dh_install:
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/conf/composer.json |sponge debian/conf/composer.json
 	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multiflexi/g' debian/multiflexi/usr/share/multiflexi/init.php
 	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multiflexi/g' debian/multiflexi/usr/lib/multiflexi/executor.php
-	sed -i -e 's/dirname(__DIR__)/"\/etc\/multiflexi\/"/g' debian/multiflexi/usr/lib/multiflexi/executor.php
-	sed -i -e 's/dirname(__DIR__)/"\/etc\/multiflexi\/"/g' debian/multiflexi/usr/share/multiflexi/init.php
+	sed -i -e  's/\.\.\/\.env/\/etc\/multiflexi\/multiflexi\.env/g' debian/multiflexi/usr/lib/multiflexi/executor.php
+	sed -i -e  's/\.\.\/\.env/\/etc\/multiflexi\/multiflexi\.env/g' debian/multiflexi/usr/share/multiflexi/init.php
 	sed -i -e 's/composer\.json/\/usr\/lib\/multiflexi\/composer\.json/g' debian/multiflexi/usr/lib/multiflexi/AbraFlexi/Ui/PageBottom.php
 	sed -i -e 's/js\/jquery.dataTables.js/\/javascript\/jquery-datatables\/jquery.dataTables.js/g' debian/multiflexi/usr/lib/multiflexi/AbraFlexi/Ui/DBDataTable.php
 	sed -i -e 's/js\/dataTables.bootstrap4.js/\/javascript\/jquery-datatables\/dataTables.bootstrap4.js/g' debian/multiflexi/usr/lib/multiflexi/AbraFlexi/Ui/DBDataTable.php
