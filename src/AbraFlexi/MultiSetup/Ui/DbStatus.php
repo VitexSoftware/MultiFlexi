@@ -7,7 +7,7 @@
  * @copyright  2015-2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 /**
  * Description of DbStatus
@@ -21,11 +21,11 @@ class DbStatus extends \Ease\TWB4\Row {
      */
     public function __construct() {
         parent::__construct();
-        $abraflexis = (string) (new \AbraFlexi\MultiSetup\AbraFlexis())->listingQuery()->count();
-        $customers = (string) (new \AbraFlexi\MultiSetup\Customer())->listingQuery()->count();
-        $companys = (string) (new \AbraFlexi\MultiSetup\Company())->listingQuery()->count();
-        $apps = (string) (new \AbraFlexi\MultiSetup\Application())->listingQuery()->count();
-        $assigned = (string) (new \AbraFlexi\MultiSetup\AppToCompany())->listingQuery()->count();
+        $abraflexis = (string) (new \AbraFlexi\MultiFlexi\AbraFlexis())->listingQuery()->count();
+        $customers = (string) (new \AbraFlexi\MultiFlexi\Customer())->listingQuery()->count();
+        $companys = (string) (new \AbraFlexi\MultiFlexi\Company())->listingQuery()->count();
+        $apps = (string) (new \AbraFlexi\MultiFlexi\Application())->listingQuery()->count();
+        $assigned = (string) (new \AbraFlexi\MultiFlexi\AppToCompany())->listingQuery()->count();
 
         $this->addColumn(2, new \Ease\Html\ButtonTag([_('Apps') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $apps)], ['class' => 'btn btn-default', 'type' => 'button']));
         $this->addColumn(2, new \Ease\Html\ButtonTag([_('Servers') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $abraflexis)], ['class' => 'btn btn-default', 'type' => 'button']));

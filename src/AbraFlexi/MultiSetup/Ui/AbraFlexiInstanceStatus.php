@@ -7,7 +7,7 @@
  * @copyright  2015-2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 /**
  * Description of AbraFlexiInstanceStatus
@@ -22,7 +22,7 @@ class AbraFlexiInstanceStatus extends \Ease\Html\TableTag {
 
         $this->addRowHeaderColumns([_('Code'), _('Name'), _('Show'), _('State'), _('watching Changes'), '']);
 
-        $companer = new \AbraFlexi\MultiSetup\Company();
+        $companer = new \AbraFlexi\MultiFlexi\Company();
         $registered = $companer->getColumnsFromSQL(['id', 'company'], ['abraflexi' => $abraflexis->getMyKey()], 'id', 'company');
 
         foreach ($this->companys($abraflexis->getData()) as $companyData) {

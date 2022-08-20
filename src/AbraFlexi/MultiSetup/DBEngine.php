@@ -7,7 +7,7 @@
  * @copyright  2018-2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup;
+namespace AbraFlexi\MultiFlexi;
 
 //use DataTables\Editor,
 //    DataTables\Editor\Field,

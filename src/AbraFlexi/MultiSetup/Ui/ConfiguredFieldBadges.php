@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 /**
  * Description of ConfiguredFieldBadges
@@ -21,9 +21,9 @@ class ConfiguredFieldBadges extends ConfigFieldsBadges {
      * @param int $appID
      */
     public function __construct(int $companyID, int $appID) {
-        $conffield = new \AbraFlexi\MultiSetup\Conffield();
+        $conffield = new \AbraFlexi\MultiFlexi\Conffield();
         $appFields = $conffield->appConfigs($appID);
-        $configs = new \AbraFlexi\MultiSetup\Configuration();
+        $configs = new \AbraFlexi\MultiFlexi\Configuration();
         $appConfigs = $configs->getColumnsFromSQL(['name', 'value'], ['app_id' => $appID]);
 
         if (!empty($appFields)) {

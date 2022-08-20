@@ -1,6 +1,6 @@
 <?php
 
-namespace AbraFlexi\MultiSetup;
+namespace AbraFlexi\MultiFlexi;
 
 use Ease\SQL\Orm;
 

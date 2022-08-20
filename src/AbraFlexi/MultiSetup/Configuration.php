@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace AbraFlexi\MultiSetup;
+namespace AbraFlexi\MultiFlexi;
 
 /**
  * Description of Configuration

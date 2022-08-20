@@ -1,13 +1,13 @@
 <?php
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 use Ease\Html\H1Tag;
-use AbraFlexi\MultiSetup\Configuration;
-use AbraFlexi\MultiSetup\Ui\CustomAppConfigForm;
-use AbraFlexi\MultiSetup\Ui\PageBottom;
-use AbraFlexi\MultiSetup\Ui\PageTop;
-use AbraFlexi\MultiSetup\Ui\WebPage;
+use AbraFlexi\MultiFlexi\Configuration;
+use AbraFlexi\MultiFlexi\Ui\CustomAppConfigForm;
+use AbraFlexi\MultiFlexi\Ui\PageBottom;
+use AbraFlexi\MultiFlexi\Ui\PageTop;
+use AbraFlexi\MultiFlexi\Ui\WebPage;
 
 /**
  * Multi Flexi - Config fields editor.

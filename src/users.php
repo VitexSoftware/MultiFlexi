@@ -7,7 +7,7 @@
  * @copyright  2020-2022 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 /**
  * TaxTorro - Přehled uživatelů.

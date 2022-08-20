@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace AbraFlexi\MultiSetup;
+namespace AbraFlexi\MultiFlexi;
 
 /**
  * Description of Engine
@@ -16,7 +16,7 @@ namespace AbraFlexi\MultiSetup;
 class Engine extends \Ease\SQL\Engine {
 
     /**
-     * MultiSetup Engine
+     * MultiFlexi Engine
      * 
      * @param mixed $identifier
      * @param array $options

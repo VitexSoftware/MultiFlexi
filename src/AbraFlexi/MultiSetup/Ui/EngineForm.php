@@ -7,7 +7,7 @@
  * @copyright  2015-2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 use Ease\Html\DivTag;
 use Ease\Html\InputHiddenTag;
@@ -16,7 +16,7 @@ use Ease\TWB4\Col;
 use Ease\TWB4\Form;
 use Ease\TWB4\FormGroup;
 use Ease\TWB4\Row;
-use AbraFlexi\MultiSetup\Engine;
+use AbraFlexi\MultiFlexi\Engine;
 
 class EngineForm extends Form {
 

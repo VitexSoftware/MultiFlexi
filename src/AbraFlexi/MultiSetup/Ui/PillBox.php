@@ -7,7 +7,7 @@
  * @copyright (c) 2017-2019, Vítězslav Dvořák
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 /**
  * Description of GroupChooser

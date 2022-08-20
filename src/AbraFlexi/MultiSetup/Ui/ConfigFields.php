@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 /**
  * Description of ConfigFields

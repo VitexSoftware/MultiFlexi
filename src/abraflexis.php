@@ -7,12 +7,12 @@
  * @copyright  2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 use Ease\TWB4\LinkButton;
 use Ease\TWB4\Panel;
 use Ease\TWB4\Table;
-use AbraFlexi\MultiSetup\AbraFlexis;
+use AbraFlexi\MultiFlexi\AbraFlexis;
 
 require_once './init.php';
 $oPage->onlyForLogged();

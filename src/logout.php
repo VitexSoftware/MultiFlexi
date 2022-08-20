@@ -7,10 +7,10 @@
  * @copyright  2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
-use AbraFlexi\MultiSetup\Ui\PageBottom;
-use AbraFlexi\MultiSetup\Ui\PageTop;
+use AbraFlexi\MultiFlexi\Ui\PageBottom;
+use AbraFlexi\MultiFlexi\Ui\PageTop;
 
 require_once './init.php';
 

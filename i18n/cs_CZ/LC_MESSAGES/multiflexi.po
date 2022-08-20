@@ -16,621 +16,621 @@ msgstr ""
 "X-Poedit-SearchPath-0: ../src\n"
 "X-Poedit-SearchPathExcluded-0: ../vendor\n"
 
-#: ../src/AbraFlexi/MultiSetup/AbraFlexis.php:56
+#: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:56
 msgid "Instance name cannot be empty"
 msgstr "Jméno instance nemůže být prázdné"
 
-#: ../src/AbraFlexi/MultiSetup/AbraFlexis.php:61
+#: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:61
 msgid "AbraFlexi API URL cannot be empty"
 msgstr "AbraFlexi API URL nemůže být prázdné"
 
-#: ../src/AbraFlexi/MultiSetup/AbraFlexis.php:66
+#: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:66
 msgid "User name cannot be empty"
 msgstr "Jméno uživatele nemůže být prázdné"
 
-#: ../src/AbraFlexi/MultiSetup/AbraFlexis.php:70
+#: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:70
 msgid "API User password cannot be empty"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/AbraFlexis.php:75
+#: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:75
 msgid "Company code cannot be empty"
 msgstr "Kód firmy nemůže být prázdný"
 
-#: ../src/AbraFlexi/MultiSetup/AbraFlexis.php:79
+#: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:79
 msgid "AbraFlexi API URL cannot end with slash"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/Application.php:48
+#: ../src/AbraFlexi/MultiFlexi/Application.php:48
 msgid "Name is empty"
 msgstr "Jméno je prázdné"
 
-#: ../src/AbraFlexi/MultiSetup/Application.php:55
+#: ../src/AbraFlexi/MultiFlexi/Application.php:55
 #, php-format
 msgid "Executable %s does not exist in search PATH"
 msgstr "Příkaz %s není v prohledávané cestě"
 
-#: ../src/AbraFlexi/MultiSetup/Application.php:59
+#: ../src/AbraFlexi/MultiFlexi/Application.php:59
 #, php-format
 msgid "Executable %s found as %s"
 msgstr "Binárka %s nalezena jako %s"
 
-#: ../src/AbraFlexi/MultiSetup/Company.php:95
+#: ../src/AbraFlexi/MultiFlexi/Company.php:95
 #, php-format
 msgid "label %s created"
 msgstr "štítek %s byl vytvořen"
 
-#: ../src/AbraFlexi/MultiSetup/Company.php:115
+#: ../src/AbraFlexi/MultiFlexi/Company.php:115
 #, fuzzy, php-format
 msgid "Hook %s was registered"
 msgstr "Hook %s byl registrován"
 
-#: ../src/AbraFlexi/MultiSetup/Company.php:119
+#: ../src/AbraFlexi/MultiFlexi/Company.php:119
 #, fuzzy, php-format
 msgid "Hook %s not registered"
 msgstr "Hook %s nebyl registrován"
 
-#: ../src/AbraFlexi/MultiSetup/Company.php:140
+#: ../src/AbraFlexi/MultiFlexi/Company.php:140
 #, fuzzy
 msgid "ChangesAPI was enabled"
 msgstr "API Změn bylo povoleno"
 
-#: ../src/AbraFlexi/MultiSetup/Company.php:147
+#: ../src/AbraFlexi/MultiFlexi/Company.php:147
 #, fuzzy
 msgid "ChangesAPI was disabled"
 msgstr "API změn bylo zakázáno"
 
-#: ../src/AbraFlexi/MultiSetup/Company.php:287
+#: ../src/AbraFlexi/MultiFlexi/Company.php:287
 #, fuzzy, php-format
 #| msgid "Company Code"
 msgid "Company with no ID"
 msgstr "Kód společnosti"
 
-#: ../src/AbraFlexi/MultiSetup/Company.php:325
+#: ../src/AbraFlexi/MultiFlexi/Company.php:325
 #, fuzzy, php-format
 #| msgid "Company Code"
 msgid "Company created"
 msgstr "Kód společnosti"
 
-#: ../src/AbraFlexi/MultiSetup/Configuration.php:78
-#: ../src/AbraFlexi/MultiSetup/Engine.php:61
+#: ../src/AbraFlexi/MultiFlexi/Configuration.php:78
+#: ../src/AbraFlexi/MultiFlexi/Engine.php:61
 #, php-format
 msgid "Setting Environment %s to %s"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:153
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:153
 #, php-format
 msgid "New %s"
 msgstr "Nový %s"
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:154
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:154
 #, php-format
 msgid "Edit %s"
 msgstr "Uprav %s"
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:155
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:155
 #, php-format
 msgid "Remove %s"
 msgstr "Odstranit %s"
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:156
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:156
 #, php-format
 msgid "Create new %s"
 msgstr "Vytvořit nový %s"
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:157
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:157
 #, php-format
 msgid "Editing %s"
 msgstr "Upravuji %s"
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:158
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:158
 #, php-format
 msgid "Removing %s"
 msgstr "Odstraňuji %s"
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:159
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:159
 #, php-format
 msgid "Are you sure you wish to delete %%d row of %s ?"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:198
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:198
 #, php-format
 msgid "Missing ColumnInfo name for %s/%s"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:202
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:202
 #, php-format
 msgid "Missing ColumnInfo type for %s/%s"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:213
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:213
 msgid "Id"
 msgstr "Id"
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:220
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:220
 msgid "Updated"
 msgstr "Aktualizováno"
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:226
-#: ../src/AbraFlexi/MultiSetup/Logger.php:114
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:226
+#: ../src/AbraFlexi/MultiFlexi/Logger.php:114
 msgid "Created"
 msgstr "Vytvořeno"
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:483
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:483
 #, php-format
 msgid "%s is not valid email"
 msgstr "%s není platným emailem"
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:511
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:511
 #, php-format
 msgid "A %s is required"
 msgstr "%s je vyžadován"
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:516
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:516
 #, php-format
 msgid "A %s is not unique"
 msgstr "%s není jedinečný"
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:639
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:639
 #, php-format
 msgid "Field Type is not set for %s "
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:845
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:845
 #, php-format
 msgid "Column \"%s\" of %s without type definition"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:994
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:994
 msgid "Yes"
 msgstr "Ano"
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:994
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:994
 msgid "No"
 msgstr "Ne"
 
-#: ../src/AbraFlexi/MultiSetup/DBEngine.php:1114
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:1114
 msgid "Dismis"
 msgstr "Zrušit"
 
-#: ../src/AbraFlexi/MultiSetup/Logger.php:110 ../src/abraflexis.php:26
+#: ../src/AbraFlexi/MultiFlexi/Logger.php:110 ../src/abraflexis.php:26
 #: ../src/apps.php:26
 msgid "ID"
 msgstr "ID"
 
-#: ../src/AbraFlexi/MultiSetup/Logger.php:111
+#: ../src/AbraFlexi/MultiFlexi/Logger.php:111
 msgid "Status"
 msgstr "Stav"
 
-#: ../src/AbraFlexi/MultiSetup/Logger.php:112
+#: ../src/AbraFlexi/MultiFlexi/Logger.php:112
 msgid "Subject"
 msgstr "Předmět"
 
-#: ../src/AbraFlexi/MultiSetup/Logger.php:113
+#: ../src/AbraFlexi/MultiFlexi/Logger.php:113
 msgid "Message"
 msgstr "Zpráva"
 
-#: ../src/AbraFlexi/MultiSetup/Logger.php:116 ../src/app.php:24
+#: ../src/AbraFlexi/MultiFlexi/Logger.php:116 ../src/app.php:24
 msgid "Application"
 msgstr "Aplikace"
 
-#: ../src/AbraFlexi/MultiSetup/Logger.php:124 ../src/company.php:19
+#: ../src/AbraFlexi/MultiFlexi/Logger.php:124 ../src/company.php:19
 #, fuzzy
 #| msgid "Company Code"
 msgid "Company"
 msgstr "Kód společnosti"
 
-#: ../src/AbraFlexi/MultiSetup/Logger.php:132 ../src/user.php:28
+#: ../src/AbraFlexi/MultiFlexi/Logger.php:132 ../src/user.php:28
 #, fuzzy
 msgid "User"
 msgstr "Uživatelé"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/AbraFlexiInstanceStatus.php:23
+#: ../src/AbraFlexi/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:23
 msgid "Code"
 msgstr "Kód"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/AbraFlexiInstanceStatus.php:23
+#: ../src/AbraFlexi/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:23
 #: ../src/abraflexis.php:26 ../src/apps.php:26
 msgid "Name"
 msgstr "Jméno"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/AbraFlexiInstanceStatus.php:23
+#: ../src/AbraFlexi/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:23
 msgid "Show"
 msgstr "Zobrazit"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/AbraFlexiInstanceStatus.php:23
+#: ../src/AbraFlexi/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:23
 msgid "State"
 msgstr "Stav"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/AbraFlexiInstanceStatus.php:23
+#: ../src/AbraFlexi/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:23
 msgid "watching Changes"
 msgstr "sledování změn"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/AbraFlexiInstanceStatus.php:46
+#: ../src/AbraFlexi/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:46
 msgid "Edit"
 msgstr "Upravit"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/AbraFlexiInstanceStatus.php:46
+#: ../src/AbraFlexi/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:46
 #: ../src/createaccount.php:142
 msgid "Register"
 msgstr "Registrovat"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/AbraFlexiSelect.php:43
+#: ../src/AbraFlexi/MultiFlexi/Ui/AbraFlexiSelect.php:43
 msgid "Choose AbraFlexi server"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/Ui/AppsMenu.php:58
+#: ../src/AbraFlexi/MultiFlexi/Ui/AppsMenu.php:58
 #, php-format
 msgid "Updating availbility status of application %s to %s"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/Ui/AppsMenu.php:58
+#: ../src/AbraFlexi/MultiFlexi/Ui/AppsMenu.php:58
 msgid "enabled"
 msgstr "povoleno"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/AppsMenu.php:58
+#: ../src/AbraFlexi/MultiFlexi/Ui/AppsMenu.php:58
 msgid "disabled"
 msgstr "zakázáno"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/AppsMenu.php:60
-#: ../src/AbraFlexi/MultiSetup/Ui/ConfiguredFieldBadges.php:38
+#: ../src/AbraFlexi/MultiFlexi/Ui/AppsMenu.php:60
+#: ../src/AbraFlexi/MultiFlexi/Ui/ConfiguredFieldBadges.php:38
 msgid "Configure"
 msgstr "Konfigurace"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/BootstrapMenu.php:42
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCustomerForm.php:26
+#: ../src/AbraFlexi/MultiFlexi/Ui/BootstrapMenu.php:42
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCustomerForm.php:26
 msgid "Login"
 msgstr "Login"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/BootstrapMenu.php:43
-#: ../src/AbraFlexi/MultiSetup/Ui/ConfigFields.php:25
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCustomerForm.php:29
+#: ../src/AbraFlexi/MultiFlexi/Ui/BootstrapMenu.php:43
+#: ../src/AbraFlexi/MultiFlexi/Ui/ConfigFields.php:25
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCustomerForm.php:29
 #: ../src/createaccount.php:135 ../src/login.php:66
 #: ../src/passwordrecovery.php:46
 msgid "Password"
 msgstr "Heslo"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/BootstrapMenu.php:44 ../src/login.php:44
+#: ../src/AbraFlexi/MultiFlexi/Ui/BootstrapMenu.php:44 ../src/login.php:44
 msgid "Sign In"
 msgstr "Přihlásit"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/BootstrapMenu.php:46
+#: ../src/AbraFlexi/MultiFlexi/Ui/BootstrapMenu.php:46
 #, fuzzy
 msgid "Password recovery"
 msgstr "Obnova hesla"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/ColumnsForm.php:111
+#: ../src/AbraFlexi/MultiFlexi/Ui/ColumnsForm.php:111
 #, fuzzy
 msgid "Uložit"
 msgstr "Uložit"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/ColumnsForm.php:120
+#: ../src/AbraFlexi/MultiFlexi/Ui/ColumnsForm.php:120
 #, fuzzy
 msgid "Save and back"
 msgstr "Ulož & další"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/ColumnsForm.php:128
+#: ../src/AbraFlexi/MultiFlexi/Ui/ColumnsForm.php:128
 #, fuzzy
 msgid "Save and next"
 msgstr "Ulož & další"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/ConfFieldsForm.php:26
+#: ../src/AbraFlexi/MultiFlexi/Ui/ConfFieldsForm.php:26
 msgid "New config field type"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/Ui/ConfFieldsForm.php:27
+#: ../src/AbraFlexi/MultiFlexi/Ui/ConfFieldsForm.php:27
 msgid "New config field Keyword"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/Ui/ConfFieldsForm.php:28
+#: ../src/AbraFlexi/MultiFlexi/Ui/ConfFieldsForm.php:28
 msgid "Default value"
 msgstr "Výchozí hodnota"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/ConfFieldsForm.php:29
+#: ../src/AbraFlexi/MultiFlexi/Ui/ConfFieldsForm.php:29
 msgid "New config field description"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/Ui/ConfFieldsForm.php:30
+#: ../src/AbraFlexi/MultiFlexi/Ui/ConfFieldsForm.php:30
 msgid "Add"
 msgstr "Přidat"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/ConfigFields.php:21
+#: ../src/AbraFlexi/MultiFlexi/Ui/ConfigFields.php:21
 msgid "Text"
 msgstr "Text"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/ConfigFields.php:22
+#: ../src/AbraFlexi/MultiFlexi/Ui/ConfigFields.php:22
 msgid "Number"
 msgstr "Číslo"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/ConfigFields.php:23
+#: ../src/AbraFlexi/MultiFlexi/Ui/ConfigFields.php:23
 msgid "Date"
 msgstr "Datum"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/ConfigFields.php:24
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCustomerForm.php:32
+#: ../src/AbraFlexi/MultiFlexi/Ui/ConfigFields.php:24
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCustomerForm.php:32
 #: ../src/passwordrecovery.php:79
 msgid "Email"
 msgstr "Email"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/ConfigFields.php:26
+#: ../src/AbraFlexi/MultiFlexi/Ui/ConfigFields.php:26
 msgid "Yes/No"
 msgstr "Ano/Ne"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/CustomAppConfigForm.php:35
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAbraFlexiForm.php:29
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:37
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:54
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCustomerForm.php:34
+#: ../src/AbraFlexi/MultiFlexi/Ui/CustomAppConfigForm.php:35
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAbraFlexiForm.php:29
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:37
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:54
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCustomerForm.php:34
 msgid "Save"
 msgstr "Ulož"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/CustomerSelect.php:32
+#: ../src/AbraFlexi/MultiFlexi/Ui/CustomerSelect.php:32
 msgid "Choose customer"
 msgstr "Zvol zákazníka"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/DBDataTable.php:132
+#: ../src/AbraFlexi/MultiFlexi/Ui/DBDataTable.php:132
 msgid "Reload"
 msgstr "Obnovit"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/DBDataTable.php:141
+#: ../src/AbraFlexi/MultiFlexi/Ui/DBDataTable.php:141
 msgid "Filter"
 msgstr "Filtrovat"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/DBDataTable.php:318
+#: ../src/AbraFlexi/MultiFlexi/Ui/DBDataTable.php:318
 msgid "All pages"
 msgstr "Všechny stránky"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/DbStatus.php:30
+#: ../src/AbraFlexi/MultiFlexi/Ui/DbStatus.php:30
 msgid "Apps"
 msgstr "Appky"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/DbStatus.php:31
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:126
+#: ../src/AbraFlexi/MultiFlexi/Ui/DbStatus.php:31
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:126
 msgid "Servers"
 msgstr "Servery"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/DbStatus.php:32
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:143
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:149
+#: ../src/AbraFlexi/MultiFlexi/Ui/DbStatus.php:32
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:143
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:149
 msgid "Customers"
 msgstr "Zákazníci"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/DbStatus.php:33
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:85
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:132
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:138
+#: ../src/AbraFlexi/MultiFlexi/Ui/DbStatus.php:33
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:85
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:132
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:138
 #, fuzzy
 #| msgid "Company Code"
 msgid "Companies"
 msgstr "Kód společnosti"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/DbStatus.php:34
+#: ../src/AbraFlexi/MultiFlexi/Ui/DbStatus.php:34
 msgid "Assigned"
 msgstr "Přiřazeno"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/FilterDialog.php:46
-#: ../src/AbraFlexi/MultiSetup/Ui/FilterDialog.php:71
+#: ../src/AbraFlexi/MultiFlexi/Ui/FilterDialog.php:46
+#: ../src/AbraFlexi/MultiFlexi/Ui/FilterDialog.php:71
 msgid "From"
 msgstr "Od"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/FilterDialog.php:57
-#: ../src/AbraFlexi/MultiSetup/Ui/FilterDialog.php:79
+#: ../src/AbraFlexi/MultiFlexi/Ui/FilterDialog.php:57
+#: ../src/AbraFlexi/MultiFlexi/Ui/FilterDialog.php:79
 msgid "To"
 msgstr "Do"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/IntervalChooser.php:28
+#: ../src/AbraFlexi/MultiFlexi/Ui/IntervalChooser.php:28
 msgid "Disabled"
 msgstr "Zakázáno"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/IntervalChooser.php:29
+#: ../src/AbraFlexi/MultiFlexi/Ui/IntervalChooser.php:29
 msgid "Yearly"
 msgstr "Ročně"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/IntervalChooser.php:30
+#: ../src/AbraFlexi/MultiFlexi/Ui/IntervalChooser.php:30
 msgid "Monthly"
 msgstr "Měsíčně"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/IntervalChooser.php:31
+#: ../src/AbraFlexi/MultiFlexi/Ui/IntervalChooser.php:31
 msgid "Weekly"
 msgstr "Týdně"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/IntervalChooser.php:32
+#: ../src/AbraFlexi/MultiFlexi/Ui/IntervalChooser.php:32
 msgid "Daily"
 msgstr "Denně"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/IntervalChooser.php:33
+#: ../src/AbraFlexi/MultiFlexi/Ui/IntervalChooser.php:33
 msgid "Hourly"
 msgstr "Hodinově"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:73
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:73
 msgid "No server registered yet. Please register one."
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:80
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:80
 msgid "No customer registered yet. Please register one."
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:83
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:83
 msgid "No company registered yet. Please register one."
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:96
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:96
 msgid "No application registered yet. Please register one."
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:97
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:114 ../src/apps.php:19
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:97
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:114 ../src/apps.php:19
 msgid "Applications"
 msgstr "Aplikace"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:102 ../src/logs.php:16
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:102 ../src/logs.php:16
 msgid "Logs"
 msgstr "Logy"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:103 ../src/logout.php:21
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:103 ../src/logout.php:21
 msgid "Sign Off"
 msgstr "Odhlášení"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:108
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:108
 msgid "Register Application"
 msgstr "Registuj Aplikaci"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:111
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:111
 msgid "Application list"
 msgstr "Seznam aplikací"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:120
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:120
 #, fuzzy
 msgid "Register AbraFlexi Server"
 msgstr "Iniciace AbraFlexi"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:123
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:123
 msgid "Instance list"
 msgstr "Seznam instancí"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:133 ../src/company.php:46
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:133 ../src/company.php:46
 msgid "New Company"
 msgstr "Nová společnost"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:142 ../src/customer.php:40
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:142 ../src/customer.php:40
 msgid "New Customer"
 msgstr "Nový uživatel"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:153
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:153
 msgid "Admin"
 msgstr "Admin"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:155
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:155
 msgid "New Admin"
 msgstr "Nový Admin"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:156
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:156
 msgid "Admin Overview"
 msgstr "Přehled administrátorů"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/MainMenu.php:181
+#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:181
 #, fuzzy
 msgid "Click to hide messages"
 msgstr "Klikněte pro skrytí zpráv"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAbraFlexiForm.php:21
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAbraFlexiForm.php:21
 msgid "AbraFlexi instance Name"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAbraFlexiForm.php:23
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAbraFlexiForm.php:23
 msgid "RestAPI endpoint url"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAbraFlexiForm.php:25
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAbraFlexiForm.php:25
 msgid "REST API Username"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAbraFlexiForm.php:27
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAbraFlexiForm.php:27
 msgid "Rest API Password"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:27
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:27
 msgid "Application name"
 msgstr "Jméno aplikace"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:28
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:28
 msgid "Application Description"
 msgstr "Popisek aplikace"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:29
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:29
 msgid "Path to binary"
 msgstr "Cesta k binárce"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:30
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:30
 #, fuzzy
 #| msgid "Command"
 msgid "Setup Command"
 msgstr "Příkaz"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:30
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:30
 msgid "Command used to setup new company for use with command"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:31
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:31
 msgid "Command arguments"
 msgstr "Parametry příkazu"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:31
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:31
 msgid ""
 "you can use macros like {ABRAFLEXI_URL} or custom defined config fields."
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:33
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:33
 msgid "Application Icon"
 msgstr "Ikona Aplikace"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterAppForm.php:35
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:52 ../src/apps.php:26
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:35
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:52 ../src/apps.php:26
 msgid "Enabled"
 msgstr "Povoleno"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:28
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:28
 msgid "Company name"
 msgstr "Název společnosti"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:31
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:31
 #, fuzzy
 #| msgid "AbraFlexi instance"
 msgid "AbraFlexi company code"
 msgstr "Instance AbraFlexi"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:33
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:33
 msgid "Organization ID"
 msgstr "ID Organizace"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:35
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:35
 msgid "Send notification to"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:37
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:37
 #: ../src/customer.php:21
 msgid "Customer"
 msgstr "Zákazník"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:38
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:38
 #, fuzzy
 #| msgid "AbraFlexi instance"
 msgid "AbraFlexi server"
 msgstr "Instance AbraFlexi"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:41
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:41
 msgid "write permission"
 msgstr "právo zápisu"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:45
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:45
 msgid "Setup performed"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCompanyForm.php:49
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:49
 msgid "WebHook established"
 msgstr ""
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCustomerForm.php:21
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCustomerForm.php:21
 msgid "First Name"
 msgstr "Jméno"
 
-#: ../src/AbraFlexi/MultiSetup/Ui/RegisterCustomerForm.php:23
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCustomerForm.php:23
 #: ../src/createaccount.php:131
 msgid "Lastname"
 msgstr "Příjmení"
 
-#: ../src/AbraFlexi/MultiSetup/User.php:132
+#: ../src/AbraFlexi/MultiFlexi/User.php:132
 msgid "missing login"
 msgstr "chybějící přihlašovací jméno"
 
-#: ../src/AbraFlexi/MultiSetup/User.php:137
+#: ../src/AbraFlexi/MultiFlexi/User.php:137
 msgid "missing password"
 msgstr "chybí heslo"
 
-#: ../src/AbraFlexi/MultiSetup/User.php:155
+#: ../src/AbraFlexi/MultiFlexi/User.php:155
 msgid "invalid password"
 msgstr "chybné heslo"
 
-#: ../src/AbraFlexi/MultiSetup/User.php:162
+#: ../src/AbraFlexi/MultiFlexi/User.php:162
 #, php-format
 msgid "user %s does not exist"
 msgstr "uživatel %s neexistuje"

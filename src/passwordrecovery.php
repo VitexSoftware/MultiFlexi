@@ -7,7 +7,7 @@
  * @copyright  2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 require_once './init.php';
 
@@ -20,7 +20,7 @@ if (empty($emailTo)) {
 } else {
     $userEmail = addSlashes($emailTo);
 
-    $controlUser = new \AbraFlexi\MultiSetup\User();
+    $controlUser = new \AbraFlexi\MultiFlexi\User();
     $controlData = $controlUser->getColumnsFromSql([$controlUser->getkeyColumn()],
             ['email' => $userEmail]);
 
