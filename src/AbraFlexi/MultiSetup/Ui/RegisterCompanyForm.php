@@ -7,7 +7,7 @@
  * @copyright  2015-2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 use Ease\Html\ImgTag;
 use Ease\Html\InputEmailTag;

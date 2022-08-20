@@ -7,12 +7,12 @@
  * @copyright  2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 use Ease\Html\ATag;
 use Ease\TWB4\Panel;
 use Ease\TWB4\Row;
-use AbraFlexi\MultiSetup\Conffield;
+use AbraFlexi\MultiFlexi\Conffield;
 
 require_once './init.php';
 $oPage->onlyForLogged();
@@ -28,7 +28,7 @@ $conffields->setDataValue('app_id', $appId);
 $delete = WebPage::getRequestValue('delete', 'int');
 if (!is_null($delete)) {
     $conffields->loadFromSQL($delete);
-    $cnf = new \AbraFlexi\MultiSetup\Configuration();
+    $cnf = new \AbraFlexi\MultiFlexi\Configuration();
     $conffields->addStatusMessage(sprintf(_('%d used configurations removed'), $cnf->deleteFromSQL(['app_id' => $appId, 'name' => $conffields->getDataValue('keyname')])));
 
     if ($conffields->deleteFromSQL($delete)) {

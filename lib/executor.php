@@ -7,11 +7,11 @@
  * @copyright  2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup;
+namespace AbraFlexi\MultiFlexi;
 
-use AbraFlexi\MultiSetup\Application;
-use AbraFlexi\MultiSetup\Company;
-use AbraFlexi\MultiSetup\Configuration;
+use AbraFlexi\MultiFlexi\Application;
+use AbraFlexi\MultiFlexi\Company;
+use AbraFlexi\MultiFlexi\Configuration;
 
 require_once '../vendor/autoload.php';
 
@@ -20,8 +20,8 @@ if (file_exists('../.env')) {
     $shared->loadConfig('../.env', true);
 }
 
-define('EASE_LOGGER', 'syslog|\AbraFlexi\MultiSetup\LogToSQL');
-//Sdefine('EASE_LOGGER', '\AbraFlexi\MultiSetup\LogToSQL');
+define('EASE_LOGGER', 'syslog|\AbraFlexi\MultiFlexi\LogToSQL');
+//Sdefine('EASE_LOGGER', '\AbraFlexi\MultiFlexi\LogToSQL');
 
 $companer = new Company();
 $companys = $companer->listingQuery()->select('abraflexis.*')->select('company.id AS company_id')->leftJoin('abraflexis ON abraflexis.id = company.abraflexi');

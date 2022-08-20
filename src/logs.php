@@ -7,7 +7,7 @@
  * @copyright  2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 require_once './init.php';
 
@@ -30,7 +30,7 @@ $oPage->addJavaScript('$.fn.dataTable.ext.buttons.dismisAll = {
 $oPage->includeJavascript('js/dismisLog.js');
 
 //$oPage->container->addItem( new ui\DashboardMessages());
-$oPage->container->addItem(new DBDataTable(new \AbraFlexi\MultiSetup\Logger(),
+$oPage->container->addItem(new DBDataTable(new \AbraFlexi\MultiFlexi\Logger(),
                 ['buttons' => ['dismisAll']]));
 
 $oPage->addItem(new PageBottom());

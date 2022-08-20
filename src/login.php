@@ -7,7 +7,7 @@
  * @copyright  2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 use Ease\Html\DivTag;
 use Ease\Html\ImgTag;

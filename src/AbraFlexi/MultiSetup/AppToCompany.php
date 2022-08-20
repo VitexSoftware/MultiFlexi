@@ -7,7 +7,7 @@
  * @copyright  2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup;
+namespace AbraFlexi\MultiFlexi;
 
 /**
  * Description of AppToCompany

@@ -4,13 +4,13 @@
  * Multi Flexi - Company instance editor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * @copyright  2020-2022 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup;
+namespace AbraFlexi\MultiFlexi;
 
 use Ease\Shared;
-use AbraFlexi\MultiSetup\Ui\WebPage;
+use AbraFlexi\MultiFlexi\Ui\WebPage;
 
 require_once '../vendor/autoload.php';
 
@@ -18,9 +18,9 @@ session_start();
 
 \Ease\Shared::singleton()->loadConfig(dirname(__DIR__) . '/.env', true);
 
-\Ease\Locale::singleton(null, '../i18n', 'multiabraflexisetup');
+\Ease\Locale::singleton(null, '../i18n', 'multiflexi');
 
-define('EASE_LOGGER', 'syslog|\AbraFlexi\MultiSetup\LogToSQL');
+define('EASE_LOGGER', 'syslog|\AbraFlexi\MultiFlexi\LogToSQL');
 
-$oUser = Shared::user(null, 'AbraFlexi\MultiSetup\User');
+$oUser = Shared::user(null, 'AbraFlexi\MultiFlexi\User');
 $oPage = new WebPage();

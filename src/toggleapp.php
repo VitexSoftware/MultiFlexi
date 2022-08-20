@@ -7,7 +7,7 @@
  * @copyright  2017-2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 require_once './init.php';
 
@@ -21,7 +21,7 @@ $state = $interval != 'n';
 $result = false;
 
 if (!is_null($app_id) && !is_null($company_id)) {
-    $switcher = new \AbraFlexi\MultiSetup\AppToCompany();
+    $switcher = new \AbraFlexi\MultiFlexi\AppToCompany();
     $switcher->setData(['app_id' => (int) $app_id, 'company_id' => (int) $company_id, 'interv' => $interval]);
     if ($switcher->setState($state)) {
         $switcher->performInit();

@@ -7,9 +7,9 @@
  * @copyright  2015-2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
-use AbraFlexi\MultiSetup\Ui\WebPage;
+use AbraFlexi\MultiFlexi\Ui\WebPage;
 
 /**
  * Page TOP.

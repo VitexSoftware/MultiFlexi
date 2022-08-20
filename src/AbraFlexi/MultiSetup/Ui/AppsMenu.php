@@ -7,10 +7,10 @@
  * @copyright  2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 use Ease\TWB4\Widgets\MainPageMenu;
-use AbraFlexi\MultiSetup\Application;
+use AbraFlexi\MultiFlexi\Application;
 
 /**
  * Description of AppsMenu

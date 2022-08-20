@@ -1,10 +1,10 @@
 <?php
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 use Ease\TWB4\LinkButton;
-use AbraFlexi\MultiSetup\Ui\PageBottom;
-use AbraFlexi\MultiSetup\Ui\PageTop;
+use AbraFlexi\MultiFlexi\Ui\PageBottom;
+use AbraFlexi\MultiFlexi\Ui\PageTop;
 
 /**
  * Multi Flexi - Index page.

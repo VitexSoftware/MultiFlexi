@@ -7,7 +7,7 @@
  * @copyright  2015-2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 /**
  * Registered AbraFlexi instance editor Form

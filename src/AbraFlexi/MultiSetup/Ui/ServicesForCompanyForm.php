@@ -7,7 +7,7 @@
  * @copyright  2015-2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 use Ease\Html\ATag;
 use Ease\Html\ImgTag;
@@ -15,9 +15,9 @@ use Ease\TWB4\Form;
 use Ease\TWB4\FormGroup;
 use Ease\TWB4\Part;
 use Ease\TWB4\Row;
-use AbraFlexi\MultiSetup\Application;
-use AbraFlexi\MultiSetup\AppToCompany;
-use AbraFlexi\MultiSetup\Company;
+use AbraFlexi\MultiFlexi\Application;
+use AbraFlexi\MultiFlexi\AppToCompany;
+use AbraFlexi\MultiFlexi\Company;
 
 /**
  * Description of ServicesForCompanyForm

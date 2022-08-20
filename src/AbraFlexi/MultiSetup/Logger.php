@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace AbraFlexi\MultiSetup;
+namespace AbraFlexi\MultiFlexi;
 
 use DateTime;
 use Ease\ui\LiveAge;
@@ -79,7 +79,7 @@ class Logger extends DBEngine {
 //  [app_id] => null
 //  [user_id] => (string) 0
 //  [severity] => (string) info
-//  [venue] => (string) AbraFlexi\MultiSetup\Ui\WebPage
+//  [venue] => (string) AbraFlexi\MultiFlexi\Ui\WebPage
 //  [message] => (string) logged
 //  [created] => (string) 2020-07-04 22:27:45
 //  [enabled] => null
@@ -118,7 +118,7 @@ class Logger extends DBEngine {
                         'detailPage' => 'app.php',
                         'idColumn' => 'apps',
                         'valueColumn' => 'apps.nazev',
-                        'engine' => '\AbraFlexi\MultiSetup\Application',
+                        'engine' => '\AbraFlexi\MultiFlexi\Application',
                         'filterby' => 'name',
                     ],
                     ['name' => 'company', 'type' => 'selectize', 'label' => _('Company'),
@@ -126,7 +126,7 @@ class Logger extends DBEngine {
                         'detailPage' => 'company.php',
                         'idColumn' => 'company',
                         'valueColumn' => 'company.nazev',
-                        'engine' => '\AbraFlexi\MultiSetup\Company',
+                        'engine' => '\AbraFlexi\MultiFlexi\Company',
                         'filterby' => 'name',
                     ],
                     ['name' => 'user', 'type' => 'selectize', 'label' => _('User'),
@@ -134,7 +134,7 @@ class Logger extends DBEngine {
                         'detailPage' => 'user.php',
                         'idColumn' => 'user',
                         'valueColumn' => 'user.login',
-                        'engine' => '\AbraFlexi\MultiSetup\User',
+                        'engine' => '\AbraFlexi\MultiFlexi\User',
                         'filterby' => 'name',
                     ],
         ]);

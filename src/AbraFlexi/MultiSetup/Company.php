@@ -1,6 +1,6 @@
 <?php
 
-namespace AbraFlexi\MultiSetup;
+namespace AbraFlexi\MultiFlexi;
 
 /**
  * Multi Flexi - Company Management Class

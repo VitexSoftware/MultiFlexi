@@ -7,9 +7,9 @@
  * @copyright  2015-2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
-use AbraFlexi\MultiSetup\Engine;
+use AbraFlexi\MultiFlexi\Engine;
 use Ease\Html\DivTag;
 use Ease\Html\InputHiddenTag;
 use Ease\Html\InputSubmitTag;

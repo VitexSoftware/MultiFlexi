@@ -7,7 +7,7 @@
  * @copyright  2018-2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 /**
  * Description of CustomAppConfigForm
@@ -21,7 +21,7 @@ class CustomAppConfigForm extends EngineForm {
 
         $values = $engine->getColumnsFromSQL(['name', 'value'], ['app_id' => $engine->getDataValue('app_id'), 'company_id' => $engine->getDataValue('company_id')], '`key`', 'name');
 
-        foreach (\AbraFlexi\MultiSetup\Conffield::getAppConfigs($engine->getDataValue('app_id')) as $fieldInfo) {
+        foreach (\AbraFlexi\MultiFlexi\Conffield::getAppConfigs($engine->getDataValue('app_id')) as $fieldInfo) {
             if ($fieldInfo['type'] == 'checkbox') {
                 $input = new \Ease\TWB4\Widgets\Toggle($fieldInfo['keyname'], array_key_exists($fieldInfo['keyname'], $values) ? ($values[$fieldInfo['keyname']]['value'] == 'true' ? true : false ) : $fieldInfo['defval'], 'true', []);
             } else {

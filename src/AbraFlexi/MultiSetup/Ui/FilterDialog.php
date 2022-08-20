@@ -7,7 +7,7 @@
  * @copyright (c) 2017-2021, Vítězslav Dvořák
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 /**
  * Description of filterDialog

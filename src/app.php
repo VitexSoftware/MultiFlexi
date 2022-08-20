@@ -7,15 +7,15 @@
  * @copyright  2017-2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 use Ease\TWB4\LinkButton;
 use Ease\TWB4\Panel;
 use Ease\TWB4\Row;
-use AbraFlexi\MultiSetup\Application;
-use AbraFlexi\MultiSetup\Ui\PageBottom;
-use AbraFlexi\MultiSetup\Ui\PageTop;
-use AbraFlexi\MultiSetup\Ui\RegisterAppForm;
+use AbraFlexi\MultiFlexi\Application;
+use AbraFlexi\MultiFlexi\Ui\PageBottom;
+use AbraFlexi\MultiFlexi\Ui\PageTop;
+use AbraFlexi\MultiFlexi\Ui\RegisterAppForm;
 
 require_once './init.php';
 
@@ -53,7 +53,7 @@ $oPage->container->addItem(new Panel($instanceName, 'info',
                 is_null($apps->getMyKey()) ?
                         new LinkButton('', _('Config fields'), 'inverse disabled') :
                         [new LinkButton('conffield.php?app_id=' . $apps->getMyKey(), _('Config fields'), 'warning'),
-                    new ConfigFieldsBadges(\AbraFlexi\MultiSetup\Conffield::getAppConfigs($apps->getMyKey()))
+                    new ConfigFieldsBadges(\AbraFlexi\MultiFlexi\Conffield::getAppConfigs($apps->getMyKey()))
                         ]
 ));
 

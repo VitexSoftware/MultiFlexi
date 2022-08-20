@@ -7,7 +7,7 @@
  * @copyright  2018-2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 use Ease\Html\InputFileTag;
 use Ease\Html\InputHiddenTag;

@@ -7,7 +7,7 @@
  * @copyright  2018-2020 Vitex@hippy.cz (G)
  */
 
-namespace AbraFlexi\MultiSetup;
+namespace AbraFlexi\MultiFlexi;
 
 /**
  * Description of LogToSQL

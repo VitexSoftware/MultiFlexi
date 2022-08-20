@@ -7,12 +7,12 @@
  * @copyright  2017-2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiSetup\Ui;
+namespace AbraFlexi\MultiFlexi\Ui;
 
 use Ease\Html\ATag;
 use Ease\TWB4\Panel;
 use Ease\TWB4\Row;
-use AbraFlexi\MultiSetup\Customer;
+use AbraFlexi\MultiFlexi\Customer;
 
 require_once './init.php';
 
