@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>cz.vitexsoftware.multi_flexibee_setup</id>
+  <id>com.vitexsoftware.multi_flexibee_setup</id>
   
   <name>Multi FlexiBee setup</name>
   <summary>several accounting tools launcher</summary>
@@ -10,11 +10,11 @@
   
   <description>
     <p>
-      Umoźňuje spouštět zvolené nástroje nad určitými účetními jednotkami FlexiBee v daných intervalech.
+      Umožňuje spouštět zvolené nástroje nad určitými účetními jednotkami FlexiBee v daných intervalech.
     </p>
   </description>
   
-  <launchable type="desktop-id">io.github.vitexsoftware.multi_flexibee_setup.desktop</launchable>
+  <launchable type="desktop-id">io.github.vitexsoftware.multiflexi.desktop</launchable>
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/VitexSoftware/MultiFlexiBeeSetup/master/doc/MultiFlexiBeeSetup.png</image>
