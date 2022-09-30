@@ -6,7 +6,8 @@
   "require": {
     "deb/ease-bootstrap4-widgets-abraflexi": "*",
     "deb/ease-bootstrap4-widgets": "*",
-    "deb/ease-fluentpdo": "*"
+    "deb/ease-fluentpdo": "*",
+    "sensiolabs/ansi-to-html": "*"
   },
   "license": "MIT",
   "authors": [

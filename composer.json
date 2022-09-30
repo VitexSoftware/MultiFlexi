@@ -9,7 +9,8 @@
         "vitexsoftware/ease-twbootstrap4-widgets": "*",
         "robmorgan/phinx": "*",
         "datatables/datatables": "*",
-        "symfony/process": "5.4.x-dev"
+        "symfony/process": "5.4.x-dev",
+        "sensiolabs/ansi-to-html": "1.2.x-dev"
     },
     "license": "MIT",
     "authors": [
