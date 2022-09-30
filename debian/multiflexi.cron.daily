@@ -1,2 +1,2 @@
 #!/bin/sh
-multiflexi-executor d
+sudo -u www-data multiflexi-executor d
