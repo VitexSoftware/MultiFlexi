@@ -18,7 +18,7 @@ if [ -f /usr/share/dbconfig-common/dpkg/postinst ]; then
     dbc_go multiflexi "$@"
     
     echo "############################"
-    cat /etc/multiflexi/multiflexi.env
+    cat /etc/multiflexi/.env
     echo "############################"
 
     phinx migrate -c /usr/lib/multiflexi/phinx-adapter.php
