@@ -11,6 +11,7 @@ namespace AbraFlexi\MultiFlexi;
 use DateTime;
 use Ease\ui\LiveAge;
 use Envms\FluentPDO\Literal;
+use SensioLabs\AnsiConverter\AnsiToHtmlConverter;
 
 /**
  * Description of Dashboarder
@@ -185,9 +186,9 @@ class Logger extends DBEngine {
                 $dataRowRaw['DT_RowClass'] = 'text-dark';
                 break;
         }
-
-        $dataRowRaw['message'] = str_replace('.........', '......... ',
-                $dataRowRaw['message']);
+        
+        $dataRowRaw['message'] = (new AnsiToHtmlConverter())->convert(str_replace('.........', '......... ',
+                $dataRowRaw['message']));
 //        $dataRowRaw['created'] = (new LiveAge((new DateTime($dataRowRaw['created']))->getTimestamp()))->__toString();
 
         return parent::completeDataRow($dataRowRaw);
