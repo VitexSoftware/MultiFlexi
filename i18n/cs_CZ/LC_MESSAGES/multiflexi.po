@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Multi Flexi\n"
-"POT-Creation-Date: 2022-08-19 09:30+0200\n"
-"PO-Revision-Date: 2022-08-19 09:31+0200\n"
+"POT-Creation-Date: 2022-08-20 10:23+0200\n"
+"PO-Revision-Date: 2022-08-20 10:23+0200\n"
 "Last-Translator: Vítězslav Dvořák <info@vitexsoftware.cz>\n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -30,7 +30,7 @@ msgstr "Jméno uživatele nemůže být prázdné"
 
 #: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:70
 msgid "API User password cannot be empty"
-msgstr ""
+msgstr "AbraFlexi API Heslo nemůže být prázdné"
 
 #: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:75
 msgid "Company code cannot be empty"
@@ -38,7 +38,7 @@ msgstr "Kód firmy nemůže být prázdný"
 
 #: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:79
 msgid "AbraFlexi API URL cannot end with slash"
-msgstr ""
+msgstr "AbraFlexi API URL nemůže končit lomítkem"
 
 #: ../src/AbraFlexi/MultiFlexi/Application.php:48
 msgid "Name is empty"
@@ -60,42 +60,38 @@ msgid "label %s created"
 msgstr "štítek %s byl vytvořen"
 
 #: ../src/AbraFlexi/MultiFlexi/Company.php:115
-#, fuzzy, php-format
+#, php-format
 msgid "Hook %s was registered"
 msgstr "Hook %s byl registrován"
 
 #: ../src/AbraFlexi/MultiFlexi/Company.php:119
-#, fuzzy, php-format
+#, php-format
 msgid "Hook %s not registered"
 msgstr "Hook %s nebyl registrován"
 
 #: ../src/AbraFlexi/MultiFlexi/Company.php:140
-#, fuzzy
 msgid "ChangesAPI was enabled"
 msgstr "API Změn bylo povoleno"
 
 #: ../src/AbraFlexi/MultiFlexi/Company.php:147
-#, fuzzy
 msgid "ChangesAPI was disabled"
 msgstr "API změn bylo zakázáno"
 
 #: ../src/AbraFlexi/MultiFlexi/Company.php:287
-#, fuzzy, php-format
-#| msgid "Company Code"
+#, php-format
 msgid "Company with no ID"
-msgstr "Kód společnosti"
+msgstr "Společnost bez ID"
 
 #: ../src/AbraFlexi/MultiFlexi/Company.php:325
-#, fuzzy, php-format
-#| msgid "Company Code"
+#, php-format
 msgid "Company created"
-msgstr "Kód společnosti"
+msgstr "Společnos byla vytvořena"
 
 #: ../src/AbraFlexi/MultiFlexi/Configuration.php:78
 #: ../src/AbraFlexi/MultiFlexi/Engine.php:61
 #, php-format
 msgid "Setting Environment %s to %s"
-msgstr ""
+msgstr "Nastavuji prostředí %s na %s"
 
 #: ../src/AbraFlexi/MultiFlexi/DBEngine.php:153
 #, php-format
@@ -130,17 +126,17 @@ msgstr "Odstraňuji %s"
 #: ../src/AbraFlexi/MultiFlexi/DBEngine.php:159
 #, php-format
 msgid "Are you sure you wish to delete %%d row of %s ?"
-msgstr ""
+msgstr "Opravdu chceš smazat %%d řádků z %s ?"
 
 #: ../src/AbraFlexi/MultiFlexi/DBEngine.php:198
 #, php-format
 msgid "Missing ColumnInfo name for %s/%s"
-msgstr ""
+msgstr "Chybí informace o jménu pro %s/%s"
 
 #: ../src/AbraFlexi/MultiFlexi/DBEngine.php:202
 #, php-format
 msgid "Missing ColumnInfo type for %s/%s"
-msgstr ""
+msgstr "Chybí informace o typu pro %s/%s"
 
 #: ../src/AbraFlexi/MultiFlexi/DBEngine.php:213
 msgid "Id"
@@ -173,22 +169,26 @@ msgstr "%s není jedinečný"
 #: ../src/AbraFlexi/MultiFlexi/DBEngine.php:639
 #, php-format
 msgid "Field Type is not set for %s "
-msgstr ""
+msgstr "Typ políčka není nastaven pr  %s "
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:845
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:738
+msgid "Error saving record"
+msgstr "Chyba ukládání záznamu"
+
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:850
 #, php-format
 msgid "Column \"%s\" of %s without type definition"
-msgstr ""
+msgstr "Políčko \"%s\" z %s bez definice typu"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:994
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:999
 msgid "Yes"
 msgstr "Ano"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:994
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:999
 msgid "No"
 msgstr "Ne"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:1114
+#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:1119
 msgid "Dismis"
 msgstr "Zrušit"
 
@@ -214,15 +214,12 @@ msgid "Application"
 msgstr "Aplikace"
 
 #: ../src/AbraFlexi/MultiFlexi/Logger.php:124 ../src/company.php:19
-#, fuzzy
-#| msgid "Company Code"
 msgid "Company"
-msgstr "Kód společnosti"
+msgstr "Společnost"
 
 #: ../src/AbraFlexi/MultiFlexi/Logger.php:132 ../src/user.php:28
-#, fuzzy
 msgid "User"
-msgstr "Uživatelé"
+msgstr "Uživatel"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:23
 msgid "Code"
@@ -256,12 +253,12 @@ msgstr "Registrovat"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/AbraFlexiSelect.php:43
 msgid "Choose AbraFlexi server"
-msgstr ""
+msgstr "Zvolte server AbraFlexi"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/AppsMenu.php:58
 #, php-format
 msgid "Updating availbility status of application %s to %s"
-msgstr ""
+msgstr "Aktualizuji status aplikace %s na %s"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/AppsMenu.php:58
 msgid "enabled"
@@ -294,32 +291,33 @@ msgid "Sign In"
 msgstr "Přihlásit"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/BootstrapMenu.php:46
-#, fuzzy
 msgid "Password recovery"
 msgstr "Obnova hesla"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/ColumnsForm.php:111
-#, fuzzy
-msgid "Uložit"
-msgstr "Uložit"
+#: ../src/AbraFlexi/MultiFlexi/Ui/CustomAppConfigForm.php:35
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAbraFlexiForm.php:29
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:37
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:54
+#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCustomerForm.php:34
+msgid "Save"
+msgstr "Ulož"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/ColumnsForm.php:120
-#, fuzzy
 msgid "Save and back"
-msgstr "Ulož & další"
+msgstr "Ulož a vrať se"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/ColumnsForm.php:128
-#, fuzzy
 msgid "Save and next"
-msgstr "Ulož & další"
+msgstr "Ulož a pokračuj"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/ConfFieldsForm.php:26
 msgid "New config field type"
-msgstr ""
+msgstr "Typ nového konfiguračního políčka"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/ConfFieldsForm.php:27
 msgid "New config field Keyword"
-msgstr ""
+msgstr "Klíčové slovo nového konfiguračního políčka"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/ConfFieldsForm.php:28
 msgid "Default value"
@@ -327,7 +325,7 @@ msgstr "Výchozí hodnota"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/ConfFieldsForm.php:29
 msgid "New config field description"
-msgstr ""
+msgstr "Popisek nového konfiguračního pole"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/ConfFieldsForm.php:30
 msgid "Add"
@@ -354,14 +352,6 @@ msgstr "Email"
 #: ../src/AbraFlexi/MultiFlexi/Ui/ConfigFields.php:26
 msgid "Yes/No"
 msgstr "Ano/Ne"
-
-#: ../src/AbraFlexi/MultiFlexi/Ui/CustomAppConfigForm.php:35
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAbraFlexiForm.php:29
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:37
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:54
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCustomerForm.php:34
-msgid "Save"
-msgstr "Ulož"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/CustomerSelect.php:32
 msgid "Choose customer"
@@ -398,10 +388,8 @@ msgstr "Zákazníci"
 #: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:85
 #: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:132
 #: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:138
-#, fuzzy
-#| msgid "Company Code"
 msgid "Companies"
-msgstr "Kód společnosti"
+msgstr "Společnosti"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/DbStatus.php:34
 msgid "Assigned"
@@ -443,19 +431,19 @@ msgstr "Hodinově"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:73
 msgid "No server registered yet. Please register one."
-msgstr ""
+msgstr "Žádný server není zatím registrován. Zaregistrujte prosím nějaký."
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:80
 msgid "No customer registered yet. Please register one."
-msgstr ""
+msgstr "Žádný zákazník není zatím registrován. Zaregistrujte prosím nějaký."
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:83
 msgid "No company registered yet. Please register one."
-msgstr ""
+msgstr "Žádná společnost není zatím registrován. Zaregistrujte prosím nějaký."
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:96
 msgid "No application registered yet. Please register one."
-msgstr ""
+msgstr "Žádná aplikace není zatím registrována. Zaregistrujte prosím nějakou."
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:97
 #: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:114 ../src/apps.php:19
@@ -479,9 +467,8 @@ msgid "Application list"
 msgstr "Seznam aplikací"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:120
-#, fuzzy
 msgid "Register AbraFlexi Server"
-msgstr "Iniciace AbraFlexi"
+msgstr "Zaregistruj nový AbraFlexi server"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:123
 msgid "Instance list"
@@ -508,25 +495,24 @@ msgid "Admin Overview"
 msgstr "Přehled administrátorů"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:181
-#, fuzzy
 msgid "Click to hide messages"
 msgstr "Klikněte pro skrytí zpráv"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAbraFlexiForm.php:21
 msgid "AbraFlexi instance Name"
-msgstr ""
+msgstr "Jméno instance AbraFlexi"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAbraFlexiForm.php:23
 msgid "RestAPI endpoint url"
-msgstr ""
+msgstr "Koncový bod RestAPI"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAbraFlexiForm.php:25
 msgid "REST API Username"
-msgstr ""
+msgstr "Uživatelské jméno pro RestAPI"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAbraFlexiForm.php:27
 msgid "Rest API Password"
-msgstr ""
+msgstr "Heslo pro RestAPI"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:27
 msgid "Application name"
@@ -541,14 +527,12 @@ msgid "Path to binary"
 msgstr "Cesta k binárce"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:30
-#, fuzzy
-#| msgid "Command"
 msgid "Setup Command"
-msgstr "Příkaz"
+msgstr "Příkaz pro nastavení"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:30
 msgid "Command used to setup new company for use with command"
-msgstr ""
+msgstr "Příkaz použitý pro nastavení nové společnosti pro použití s příkazem"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:31
 msgid "Command arguments"
@@ -558,6 +542,7 @@ msgstr "Parametry příkazu"
 msgid ""
 "you can use macros like {ABRAFLEXI_URL} or custom defined config fields."
 msgstr ""
+"Je možné použít makra jako {ABRAFLEXI_URL} nebo uživatelsky definovaná pole."
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:33
 msgid "Application Icon"
@@ -573,10 +558,8 @@ msgid "Company name"
 msgstr "Název společnosti"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:31
-#, fuzzy
-#| msgid "AbraFlexi instance"
 msgid "AbraFlexi company code"
-msgstr "Instance AbraFlexi"
+msgstr "Kód společnosti  AbraFlexi"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:33
 msgid "Organization ID"
@@ -584,7 +567,7 @@ msgstr "ID Organizace"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:35
 msgid "Send notification to"
-msgstr ""
+msgstr "Zasílat upozornění na"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:37
 #: ../src/customer.php:21
@@ -592,10 +575,8 @@ msgid "Customer"
 msgstr "Zákazník"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:38
-#, fuzzy
-#| msgid "AbraFlexi instance"
 msgid "AbraFlexi server"
-msgstr "Instance AbraFlexi"
+msgstr "Server AbraFlexi"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:41
 msgid "write permission"
@@ -603,11 +584,11 @@ msgstr "právo zápisu"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:45
 msgid "Setup performed"
-msgstr ""
+msgstr "Prvotní nastavení provedeno"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:49
 msgid "WebHook established"
-msgstr ""
+msgstr "Webhook nastaven"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCustomerForm.php:21
 msgid "First Name"
@@ -640,8 +621,7 @@ msgid "About"
 msgstr "O Programu"
 
 #: ../src/about.php:20
-#, fuzzy
-msgid "O Programu"
+msgid "About Program"
 msgstr "O Programu"
 
 #: ../src/about.php:22
@@ -654,7 +634,7 @@ msgstr "Instance AbraFlexi"
 
 #: ../src/abraflexi.php:26
 msgid "AbraFlexi instance Saved"
-msgstr ""
+msgstr "Instance AbraFlexi uložena"
 
 #: ../src/abraflexi.php:29
 msgid "Error saving AbraFlexi instance"
@@ -662,12 +642,11 @@ msgstr "Chyba ukládání AbraFlexi instance"
 
 #: ../src/abraflexi.php:38
 msgid "New AbraFlexi instance"
-msgstr ""
+msgstr "Nová instance AbraFlexi"
 
 #: ../src/abraflexis.php:19
-#, fuzzy
 msgid "Multi AbraFlexi"
-msgstr "Iniciace AbraFlexi"
+msgstr "Multi AbraFlexi"
 
 #: ../src/abraflexis.php:26
 msgid "Url"
@@ -682,8 +661,6 @@ msgid "Add company"
 msgstr "Přidat společnost"
 
 #: ../src/abraflexis.php:40 ../src/apps.php:33
-#, fuzzy
-#| msgid "AbraFlexi instance"
 msgid "AbraFlexi Instances"
 msgstr "Instance AbraFlexi"
 
@@ -696,18 +673,16 @@ msgid "Application Saved"
 msgstr "Aplikace uložena"
 
 #: ../src/app.php:35
-#, fuzzy
-#| msgid "Error saving AbraFlexi instance"
 msgid "Error saving Application"
-msgstr "Chyba ukládání AbraFlexi instance"
+msgstr "Chyba ukládání Aplikace"
 
 #: ../src/app.php:42
 msgid "New Application"
-msgstr ""
+msgstr "Nová Aplikace"
 
 #: ../src/app.php:54 ../src/app.php:55
 msgid "Config fields"
-msgstr ""
+msgstr "Pole nastavení"
 
 #: ../src/apps.php:26
 msgid "Image"
@@ -715,7 +690,7 @@ msgstr "Obrázek"
 
 #: ../src/apps.php:26
 msgid "Description"
-msgstr ""
+msgstr "Popis"
 
 #: ../src/apps.php:26
 msgid "Executable"
@@ -730,91 +705,81 @@ msgid "Icon"
 msgstr "Ikona"
 
 #: ../src/company.php:26
-#, fuzzy
-#| msgid "Company Code"
 msgid "Company Saved"
-msgstr "Kód společnosti"
+msgstr "Společnost uložen"
 
 #: ../src/company.php:30
 msgid "Error saving Company"
-msgstr ""
+msgstr "Chyba ukládání společnosti"
 
 #: ../src/company.php:71
 msgid "Assigned applications"
-msgstr ""
+msgstr "Přiřazené aplikace"
 
 #: ../src/conffield.php:19
 msgid "Config Fields"
-msgstr ""
+msgstr "Konfigurační pole"
 
 #: ../src/conffield.php:32
 #, php-format
 msgid "%d used configurations removed"
-msgstr ""
+msgstr "%d použitých konfigurací bylo odstraněno"
 
 #: ../src/conffield.php:35
 msgid "Configuration removed"
-msgstr ""
+msgstr "Konfigurace odstraněna"
 
 #: ../src/conffield.php:42
 msgid "Config field Saved"
-msgstr ""
+msgstr "Konfigurační položka uložena"
 
 #: ../src/conffield.php:44
-#, fuzzy
-#| msgid "Error saving AbraFlexi instance"
 msgid "Error saving Config field"
-msgstr "Chyba ukládání AbraFlexi instance"
+msgstr "Chyba ukládání požky nastavení"
 
 #: ../src/conffield.php:53
 msgid "App custom configuration fields"
-msgstr ""
+msgstr "Políčka uživatelské konfigurace aplikace"
 
 #: ../src/conffield.php:71
 msgid "Back to app"
 msgstr "Zpět do apky"
 
 #: ../src/createaccount.php:15
-#, fuzzy
-#| msgid "New Administrator"
 msgid "No Administrator found"
-msgstr "Nový Administrátor"
+msgstr "Administrátor nenalezen"
 
 #: ../src/createaccount.php:39
 msgid "invalid mail address"
 msgstr "neplatná mailová adresa"
 
 #: ../src/createaccount.php:46
-#, fuzzy, php-format
+#, php-format
 msgid "Mail address %s is already registered"
 msgstr "Mailová adresa %s je již registrována"
 
 #: ../src/createaccount.php:54
-#, fuzzy
 msgid "password is too short"
-msgstr "Heslo je příliš krátké"
+msgstr "heslo je příliš krátké"
 
 #: ../src/createaccount.php:57
-#, fuzzy
 msgid "Password control does not match"
 msgstr "Kontrola hesla nesouhlasí"
 
 #: ../src/createaccount.php:66
-#, fuzzy, php-format
+#, php-format
 msgid "Username %s is used. Please choose another one"
 msgstr "Uživatelské jméno %s je již použito. Prosím zvolte jiné"
 
 #: ../src/createaccount.php:83
 msgid "Admin account created"
-msgstr ""
+msgstr "Účet administrátora vytvořen"
 
 #: ../src/createaccount.php:87
-#, fuzzy
 msgid "User account created"
 msgstr "Úživatelský účet byl vytvořen"
 
 #: ../src/createaccount.php:93
-#, fuzzy
 msgid "Sign On info"
 msgstr "Přihlašovací údaje"
 
@@ -826,16 +791,15 @@ msgstr "Tvůj nový účet %s:"
 #: ../src/createaccount.php:101
 #, php-format
 msgid "New Sign On to %s: %s"
-msgstr ""
+msgstr "Nové přihlášení k %s: %s"
 
 #: ../src/createaccount.php:104
-#, fuzzy
-msgid "New User:\n"
+msgid "New User"
 msgstr "Nový uživatel"
 
 #: ../src/createaccount.php:113
 msgid "Administrator create failed"
-msgstr ""
+msgstr "Nepodařilo se vytvořit adminstrátora"
 
 #: ../src/createaccount.php:118
 msgid "New Administrator"
@@ -850,19 +814,16 @@ msgid "Firstname"
 msgstr "Jméno"
 
 #: ../src/createaccount.php:133
-#, fuzzy
 msgid "User name"
 msgstr "Uživatelské Jméno"
 
 #: ../src/createaccount.php:137
-#, fuzzy
 msgid "Password confirmation"
 msgstr "Potvrzení hesla"
 
 #: ../src/createaccount.php:139
-#, fuzzy
 msgid "eMail address"
-msgstr "Emailová adresa"
+msgstr "emailová adresa"
 
 #: ../src/createaccount.php:143
 msgid "finish registration"
@@ -870,42 +831,39 @@ msgstr "ukončit registraci"
 
 #: ../src/customer.php:28
 msgid "Customer Saved"
-msgstr ""
+msgstr "Zákazník uložen"
 
 #: ../src/customer.php:32
-#, fuzzy
-#| msgid "Error saving AbraFlexi instance"
 msgid "Error saving Customer"
-msgstr "Chyba ukládání AbraFlexi instance"
+msgstr "Chyba ukládání uživatele"
 
 #: ../src/custserviceconfig.php:20
 msgid "App custom config Fields"
-msgstr ""
+msgstr "Uživatelská konfigurace aplikace"
 
 #: ../src/custserviceconfig.php:29
 msgid "Config fields Saved"
-msgstr ""
+msgstr "Konfigurační položka uložena"
 
 #: ../src/custserviceconfig.php:31
 msgid "Error saving Config fields"
-msgstr ""
+msgstr "Chyba ukládání konfiguračního políčka"
 
 #: ../src/index.php:17 ../src/main.php:21
-#, fuzzy
 msgid "Multi Flexi"
-msgstr "Iniciace AbraFlexi"
+msgstr "Multi Flexi"
 
 #: ../src/index.php:21
 msgid "There is no administrators in the database."
-msgstr ""
+msgstr "V databázi není zatím žádný administrátor."
 
 #: ../src/index.php:22
 msgid "Create first Administrator Account"
-msgstr ""
+msgstr "Nejprve vytvořte účet administrátora"
 
 #: ../src/login.php:54
 msgid "Welcome to Multi Flexi"
-msgstr ""
+msgstr "Vítejte do MultiFlexi"
 
 #: ../src/login.php:58
 msgid "Sign in"
@@ -913,7 +871,7 @@ msgstr "Přihlásit"
 
 #: ../src/login.php:64
 msgid "the username you chose"
-msgstr ""
+msgstr "vaše uživatelské jméno"
 
 #: ../src/login.php:74 ../src/passwordrecovery.php:56
 msgid "Lost password recovery"
@@ -933,7 +891,7 @@ msgstr "Zrušit vśe"
 
 #: ../src/main.php:25
 msgid "Modules Availble"
-msgstr ""
+msgstr "Dostupné moduly"
 
 #: ../src/passwordrecovery.php:19
 msgid "Please enter your email."
@@ -942,7 +900,7 @@ msgstr "Prosím zadejte svůj email."
 #: ../src/passwordrecovery.php:28
 #, php-format
 msgid "unknow email address %s"
-msgstr ""
+msgstr "neznámá mailová adresa %s"
 
 #: ../src/passwordrecovery.php:39
 #, php-format
@@ -950,12 +908,11 @@ msgid "New password for %s"
 msgstr "Nové heslo pro %s"
 
 #: ../src/passwordrecovery.php:43
-#, fuzzy
 msgid "Sign On informations was changed"
-msgstr "Přihlašovací údaje byly změněny\n"
+msgstr "Přihlašovací údaje byly změněny"
 
 #: ../src/passwordrecovery.php:50
-#, fuzzy, php-format
+#, php-format
 msgid "Your new password was sent to %s"
 msgstr "Vaše nové heslo bylo odesláno na %s"
 
@@ -964,7 +921,6 @@ msgid "Tip"
 msgstr "Tip"
 
 #: ../src/passwordrecovery.php:70
-#, fuzzy
 msgid ""
 "Forgot your password? Enter your e-mail address you entered during the "
 "registration and we will send you a new one."
@@ -973,13 +929,12 @@ msgstr ""
 "během registrace a my vám pošleme nové."
 
 #: ../src/passwordrecovery.php:74
-#, fuzzy
 msgid "Password Recovery"
 msgstr "Obnova hesla"
 
 #: ../src/passwordrecovery.php:78
 msgid "Sent New Password"
-msgstr ""
+msgstr "Nastav nové heslo"
 
 #: ../src/passwordrecovery.php:92
 msgid "Continue"
@@ -987,20 +942,23 @@ msgstr "Pokračuj"
 
 #: ../src/user.php:37
 msgid "Are you sure ?"
-msgstr ""
+msgstr "Opravdu ?"
 
 #: ../src/user.php:38
 msgid "Ne"
-msgstr ""
+msgstr "No"
 
 #: ../src/user.php:39
 msgid "Ano"
-msgstr ""
+msgstr "Yes"
 
 #: ../src/users.php:24 ../src/users.php:26
-#, fuzzy
 msgid "Users"
 msgstr "Uživatelé"
+
+#, fuzzy
+#~ msgid "Uložit"
+#~ msgstr "Uložit"
 
 #, fuzzy
 #~ msgid "Přehled výsledků"

@@ -4,7 +4,7 @@
  * Multi Flexi - Company instance editor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * @copyright  2020-2022 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi\Ui;
@@ -101,7 +101,7 @@ if ($oPage->isPosted()) {
                             sprintf(_('New Sign On to %s: %s'),
                                     \Ease\Shared::appName(), $newAdmin->getUserLogin())));
             $email->setMailHeaders(['From' => \Ease\Functions::cfg('EMAIL_FROM')]);
-            $email->addItem(new \Ease\Html\DivTag(_("New User:\n")));
+            $email->addItem(new \Ease\Html\DivTag(_("New User").":\n"));
             $email->addItem(new \Ease\Html\DivTag(' Login: ' . $newAdmin->getUserLogin() . "\n"));
             $email->send();
 

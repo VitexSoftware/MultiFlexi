@@ -8,7 +8,8 @@
         "vitexsoftware/ease-fluentpdo": "*",
         "vitexsoftware/ease-twbootstrap4-widgets": "*",
         "robmorgan/phinx": "*",
-        "datatables/datatables": "*"
+        "datatables/datatables": "*",
+        "symfony/process": "5.4.x-dev"
     },
     "license": "MIT",
     "authors": [

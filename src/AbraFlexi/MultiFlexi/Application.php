@@ -18,6 +18,11 @@ class Application extends Engine {
 
     public $lastModifiedColumn;
     public $keyword;
+    /**
+     * 
+     * @var type
+     */
+    private $company;
 
     /**
      * 
@@ -32,8 +37,13 @@ class Application extends Engine {
         $this->keyword = 'app';
         $this->nameColumn = 'nazev';
         parent::__construct($identifier, $options);
+        $this->company = new Company($this->getDataValue('company'));
     }
 
+    public function getCompany() {
+        return $this->company->getConnectionOptions();
+    }
+    
     /**
      * Check data before accepting
      * 
