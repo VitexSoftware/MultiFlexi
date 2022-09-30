@@ -52,8 +52,10 @@ class ServicesForCompanyForm extends Form {
             $appRow->addColumn(4, new FormGroup('<strong>' . $appData['nazev'] . '</strong> ', new IntervalChooser($code . '_interval', array_key_exists($code, $assigned) ? $assigned[$code]['interv'] : 'n', ['id' => $code . '_interval', 'data-company' => $companyID, 'checked' => 'true',
                                 'data-app' => $code])));
 
-            $appRow->addColumn(6, new ConfiguredFieldBadges($companyID, $code));
-
+            $appRow->addColumn(6, [new ConfiguredFieldBadges($companyID, $code)]);
+            
+            //new \Ease\Html\DivTag(new LaunchButton($companyID,$code ))
+            
             $this->addItem($appRow);
         }
     }

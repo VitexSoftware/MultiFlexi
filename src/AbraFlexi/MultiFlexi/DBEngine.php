@@ -115,7 +115,8 @@ class DBEngine extends \Ease\SQL\Engine {
     }
 
     public function loadFromSQL($id = null) {
-        return $this->takeData($this->getOneRow($id));
+        $record = $this->getOneRow($id);
+        return $this->takeData($record ? $record : []);
     }
 
     public function takemyTable($myTable) {
@@ -731,8 +732,13 @@ class DBEngine extends \Ease\SQL\Engine {
         if ($this->getMyKey($data)) {
             $data = $this->prepareToSave($data, 'edit', $this->getMyKey($data));
         }
-        $result = parent::saveToSQL($data);
-        $this->finishProcess(null);
+        try {
+            $result = parent::saveToSQL($data);
+            $this->finishProcess(null);
+        } catch (\Envms\FluentPDO\Exception $exc) {
+            $this->addStatusMessage(_('Error saving record'), 'error');
+            $result = false;
+        }
         return $result;
     }
 
@@ -1180,16 +1186,16 @@ class DBEngine extends \Ease\SQL\Engine {
      * @return DataTableSaver
      */
     public function finishProcess($saver) {
-
         $_SESSION['feedCache'][is_null($saver) ? get_class($this) : get_class($saver->engine)] = $this->feedSelectize([]);
-
         $out = [];
-        $dataRaw = $saver->data();
-        foreach ($dataRaw['data'] as $id => $outline) {
-            $out[$id] = $this->completeDataRow($outline);
+        if (is_object($saver) && method_exists($saver, 'data')) {
+            $dataRaw = $saver->data();
+            foreach ($dataRaw['data'] as $id => $outline) {
+                $out[$id] = $this->completeDataRow($outline);
+            }
+            $dataRaw['data'] = $out;
+            $saver->setData($dataRaw);
         }
-        $dataRaw['data'] = $out;
-        $saver->setData($dataRaw);
         return $saver;
     }
 

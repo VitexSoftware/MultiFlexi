@@ -17,9 +17,9 @@ $oPage->addItem(new PageTop(_('About')));
 
 $infoBlock = $oPage->container->addItem(
         new \Ease\TWB4\Panel(
-                _('O Programu'), 'info', null,
+                _('About Program'), 'info', null,
                 new \Ease\TWB4\LinkButton(
-                        'http://v.s.cz/', _('Vitex Software'), 'info'
+                        'http://vitexsoftware.com/', _('Vitex Software'), 'info'
                 )
         )
 );

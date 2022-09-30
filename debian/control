@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: "Vítězslav Dvořák" <info@vitexsoftware.cz>
 Build-Depends: debhelper (>=11~), jq, moreutils
 Standards-Version: 4.1.4
-Homepage: https://github.com/VitexSoftware/MultiAbraFlexiSetup
+Homepage: https://github.com/VitexSoftware/MultiFlexi
 
 Package: multiflexi
 Multi-Arch: foreign

@@ -108,7 +108,7 @@ class ColumnsForm extends Form {
      * Přidá do formuláře tlačítko "Uložit".
      */
     public function addSubmitSave() {
-        $this->savers->addItem(new SubmitButton(_('Uložit'), 'default'),
+        $this->savers->addItem(new SubmitButton(_('Save'), 'default'),
                 ['style' => 'text-align: right']);
     }
 
