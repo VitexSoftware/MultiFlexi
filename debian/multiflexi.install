@@ -1,6 +1,9 @@
 src/*.php                                 usr/share/multiflexi
 src/favicon.ico                           usr/share/multiflexi
 src/js/*.js                               usr/share/multiflexi/js
+src/assets/Buttons-1.5.6/js/*             usr/share/multiflexi/assets/Buttons-1.5.6/js/
+src/assets/Buttons-1.5.6/css/*             usr/share/multiflexi/assets/Buttons-1.5.6/css/
+src/assets/Buttons-1.5.6/swf/*             usr/share/multiflexi/assets/Buttons-1.5.6/swf/
 src/images/*                              usr/share/multiflexi/images
 db/migrations/*				  usr/lib/multiflexi/db/migrations
 db/seeds/*				  usr/lib/multiflexi/db/seeds
