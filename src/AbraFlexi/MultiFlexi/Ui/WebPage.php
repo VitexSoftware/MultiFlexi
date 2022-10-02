@@ -22,12 +22,26 @@ class WebPage extends \Ease\TWB4\WebPage {
      */
     public $container = null;
 
+    /**
+     * Current Customer
+     * @var \AbraFlexi\MultiSetup\Customer
+     */
+    public $customer = null;
+
+    /**
+     * 
+     * @param string $pageTitle
+     */
     public function __construct($pageTitle = null) {
         parent::__construct($pageTitle);
         $this->container = $this->addItem(new \Ease\TWB4\Container());
 
         $this->addCSS('
 ');
+    }
+    
+    public function __sleep() {
+        return ['customer'];
     }
 
 }

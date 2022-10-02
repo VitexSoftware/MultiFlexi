@@ -4,7 +4,7 @@
  * Multi Flexi  - Main Menu
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2015-2020 Vitex Software
+ * @copyright  2015-2022 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi\Ui;
@@ -28,10 +28,11 @@ class MainMenu extends \Ease\Html\DivTag {
      *
      * @param type   $source
      * @param string $icon   Icon column
+     * @param \AbraFlexi\MultiFlexi\Engine $nest Object place
      *
      * @return string
      */
-    protected function getMenuList($source, $icon = null) {
+    protected function getMenuList($source, $icon = null, $nest = null) {
         $keycolumn = $source->getkeyColumn();
         $namecolumn = $source->nameColumn;
         $columns = [$source->getkeyColumn(), $namecolumn];
@@ -43,6 +44,10 @@ class MainMenu extends \Ease\Html\DivTag {
         $itemList = [];
         if ($lister) {
             foreach ($lister as $uID => $uInfo) {
+                if(!is_null($nest) && ($nest->getMyKey() == $uID)) {
+                    $uInfo[$namecolumn] .= ' ✓';
+                }
+                
                 if ($icon) {
                     $logo = new \Ease\Html\ImgTag($uInfo[$icon], $uInfo[$namecolumn], ['height' => 20]) . '&nbsp;';
                 } else {
@@ -62,8 +67,11 @@ class MainMenu extends \Ease\Html\DivTag {
         $nav = $this->addItem(new BootstrapMenu('main-menu', null, ['class' => 'navbar navbar-expand-lg navbar-light bg-light']));
 
         if (\Ease\Shared::user()->isLogged()) { //Authenticated user
+            
+            $oPage = WebPage::singleton();
+            
             $abraflexis = $this->getMenuList(new \AbraFlexi\MultiFlexi\AbraFlexis());
-            $customers = $this->getMenuList(new \AbraFlexi\MultiFlexi\Customer());
+            $customers = $this->getMenuList(new \AbraFlexi\MultiFlexi\Customer(),null,$oPage->customer);
             $companys = $this->getMenuList(new \AbraFlexi\MultiFlexi\Company(), 'logo');
             $apps = $this->getMenuList(new \AbraFlexi\MultiFlexi\Application(), 'image');
 
@@ -90,8 +98,6 @@ class MainMenu extends \Ease\Html\DivTag {
                 }
             }
 
-
-
             if (empty($apps)) {
                 \AbraFlexi\MultiFlexi\User::singleton()->addStatusMessage(_('No application registered yet. Please register one.'), 'warning');
                 $nav->addMenuItem(new \Ease\TWB4\LinkButton('app.php', '<img width=30 src=images/apps.svg> ' . _('Applications'), 'warning'), 'right');
@@ -104,6 +110,11 @@ class MainMenu extends \Ease\Html\DivTag {
         }
     }
 
+    /**
+     * 
+     * @param type $nav
+     * @param type $apps
+     */
     public function appsMenuEnabled($nav, $apps) {
         $appsMenu = ['app.php' => _('Register Application')];
 
@@ -116,6 +127,11 @@ class MainMenu extends \Ease\Html\DivTag {
         );
     }
 
+    /**
+     * 
+     * @param type $nav
+     * @param type $abraflexis
+     */
     public function abraflexisMenuEnabled($nav, $abraflexis) {
         $abraflexisMenu = ['abraflexi.php' => _('Register AbraFlexi Server')];
 
@@ -128,16 +144,30 @@ class MainMenu extends \Ease\Html\DivTag {
         );
     }
 
+    /**
+     * 
+     * @param type $nav
+     * @param type $companys
+     */
     public function companysMenuEnabled($nav, $companys) {
         $nav->addDropDownMenu('<img width=30 src=images/company.svg> ' . _('Companies'),
                 array_merge(['company.php' => _('New Company')], ['' => ''], $companys)
         );
     }
 
+    /**
+     * 
+     * @param type $nav
+     */
     public function companysMenuDisabled($nav) {
         $nav->addMenuItem(new \Ease\Html\ATag('#', '<img width=30 src=images/company.svg> ' . _('Companies'), ['class' => 'nav-link disabled']));
     }
 
+    /**
+     * 
+     * @param type $nav
+     * @param type $customers
+     */
     public function customersMenuEnabled($nav, $customers) {
         $customersMenu = ['customer.php' => _('New Customer')];
         $nav->addDropDownMenu('<img width=30 src=images/customer.svg> ' . _('Customers'),
@@ -145,10 +175,18 @@ class MainMenu extends \Ease\Html\DivTag {
         );
     }
 
+    /**
+     * 
+     * @param type $nav
+     */
     public function customersMenuDisabled($nav) {
         $nav->addMenuItem(new \Ease\Html\ATag('#', '<img width=30 src=images/customer.svg> ' . _('Customers'), ['class' => 'nav-link disabled']));
     }
 
+    /**
+     * 
+     * @param type $nav
+     */
     public function usersMenuEnabled($nav) {
         $nav->addDropDownMenu('<img width=30 src=images/users_150.png> ' . _('Admin'),
                 array_merge([
@@ -163,7 +201,9 @@ class MainMenu extends \Ease\Html\DivTag {
      * Přidá do stránky javascript pro skrývání oblasti stavových zpráv.
      */
     public function finalize() {
-
+        if (\Ease\Shared::user()->isLogged()) { //Authenticated user
+            $this->addItem(new Breadcrumb());
+        }
         if (!empty(\Ease\Shared::logger()->getMessages())) {
 
             WebPage::singleton()->addCss('
