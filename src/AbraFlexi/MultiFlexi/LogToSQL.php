@@ -4,7 +4,7 @@
  * Database Engine class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2020 Vitex@hippy.cz (G)
+ * @copyright  2018-2022 Vitex@hippy.cz (G)
  */
 
 namespace AbraFlexi\MultiFlexi;

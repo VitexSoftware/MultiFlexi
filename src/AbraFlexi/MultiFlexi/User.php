@@ -200,6 +200,16 @@ class User extends \Ease\User {
     }
 
     /**
+     * Perform User signoff
+     * 
+     * @return boolean
+     */
+    public function logout() {
+        $this->dataReset();
+        return parent::logout();
+    }
+    
+    /**
      * Zašifruje heslo.
      *
      * @param string $plainTextPassword nešifrované heslo (plaintext)

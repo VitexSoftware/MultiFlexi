@@ -1,9 +1,10 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Engine class
+ *
+ * @author Vítězslav Dvořák <info@vitexsoftware.cz>
+ * @copyright  2018-2022 Vitex@hippy.cz (G)
  */
 
 namespace AbraFlexi\MultiFlexi;
@@ -14,6 +15,8 @@ namespace AbraFlexi\MultiFlexi;
  * @author vitex
  */
 class Engine extends \Ease\SQL\Engine {
+
+    public $filter = [];
 
     /**
      * MultiFlexi Engine
