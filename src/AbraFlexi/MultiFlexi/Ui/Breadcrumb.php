@@ -20,12 +20,26 @@ class Breadcrumb extends \Ease\TWB4\Breadcrumb {
         /**
          * @var \AbraFlexi\MultiFlexi\Ui\WebPage Description
          */
-        $oPage = WebPage::singleton();
-        if(empty($oPage->customer)){
-            $this->addPage('Choose Customer', 'customers.php');
+
+        if(empty($_SESSION['customer'])){
+            $this->addPage(_('choose Customer'), 'customers.php');
         } else {
-            $this->addPage(_('Customer').': '.$oPage->customer->getUserName(), $oPage->customer->getLink());
+            $this->addPage(_('Customer').': '.$_SESSION['customer']->getUserName(), $_SESSION['customer']->getLink());
         }
+        
+        if(empty($_SESSION['server'])){
+            $this->addPage(_('choose Server'), 'abraflexis.php');
+        } else {
+            $this->addPage(_('Server').': '.$_SESSION['server']->getRecordName(), $_SESSION['server']->getLink());
+        }
+        
+        if(empty($_SESSION['company'])){
+            $this->addPage(_('choose Company'), 'companies.php');
+        } else {
+            $this->addPage(_('Company').': '.$_SESSION['company']->getRecordName(), $_SESSION['company']->getLink());
+        }
+        
+        
 //        $this->addCurrentPage('Service');
     }
 }

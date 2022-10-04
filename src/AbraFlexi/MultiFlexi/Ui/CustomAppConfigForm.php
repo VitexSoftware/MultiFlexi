@@ -4,7 +4,7 @@
  * Multi Flexi - Custom Application Config form Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2020 Vitex Software
+ * @copyright  2018-2022 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi\Ui;
@@ -19,7 +19,7 @@ class CustomAppConfigForm extends EngineForm {
     public function __construct($engine) {
         parent::__construct($engine, null, ['method' => 'post', 'action' => 'custserviceconfig.php']);
 
-        $values = $engine->getColumnsFromSQL(['name', 'value'], ['app_id' => $engine->getDataValue('app_id'), 'company_id' => $engine->getDataValue('company_id')], '`key`', 'name');
+        $values = $engine->getColumnsFromSQL(['name', 'value'], ['app_id' => $engine->getDataValue('app_id'), 'company_id' => $engine->getDataValue('company_id')], 'name', 'name');
 
         foreach (\AbraFlexi\MultiFlexi\Conffield::getAppConfigs($engine->getDataValue('app_id')) as $fieldInfo) {
             if ($fieldInfo['type'] == 'checkbox') {
