@@ -20,7 +20,7 @@ $oPage->onlyForLogged();
 
 $customers = new Customer($oPage->getRequestValue('id', 'int'));
 $instanceName = $customers->getRecordName();
-$oPage->customer = $customers;
+$_SESSION['customer'] = &$customers;
 
 $oPage->addItem(new PageTop(_('Customer')));
 
@@ -34,11 +34,11 @@ if ($oPage->isPosted()) {
     }
 }
 
-if (strlen($instanceName)) {
-    $instanceLink = new ATag($customers->getLink(), $customers->getLink());
-} else {
+if (empty($instanceName)) {
     $instanceName = _('New Customer');
     $instanceLink = null;
+} else {
+    $instanceLink = new ATag($customers->getLink(), $customers->getLink());
 }
 
 $instanceRow = new Row();
@@ -53,3 +53,4 @@ $oPage->addItem(new PageBottom());
 
 $oPage->draw();
 
+session_commit();

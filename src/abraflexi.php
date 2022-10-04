@@ -16,10 +16,12 @@ use AbraFlexi\MultiFlexi\AbraFlexis;
 
 require_once './init.php';
 $oPage->onlyForLogged();
-$oPage->addItem(new PageTop(_('AbraFlexi instance')));
 
 $abraflexis = new AbraFlexis($oPage->getRequestValue('id', 'int'), ['autoload' => true]);
 $instanceName = $abraflexis->getRecordName();
+$_SESSION['server'] = &$abraflexis;
+
+$oPage->addItem(new PageTop(_('AbraFlexi instance')));
 
 if ($oPage->isPosted()) {
     if ($abraflexis->takeData($_POST) && !is_null($abraflexis->saveToSQL())) {
@@ -52,3 +54,5 @@ if (!is_null($abraflexis->getMyKey())) {
 $oPage->addItem(new PageBottom());
 
 $oPage->draw();
+
+session_commit();

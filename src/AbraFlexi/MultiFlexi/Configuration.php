@@ -44,7 +44,7 @@ class Configuration extends \Ease\SQL\Engine {
         unset($data['company_id']);
         $this->deleteFromSQL(['app_id' => $this->getDataValue('app_id'), 'company_id' => $this->getDataValue('company_id')]);
         foreach ($data as $column => $value) {
-            $result += $this->insertToSQL(['app_id' => $this->getDataValue('app_id'), 'company_id' => $this->getDataValue('company_id'), '`key`' => $column, 'value' => $value]);
+            $result += $this->insertToSQL(['app_id' => $this->getDataValue('app_id'), 'company_id' => $this->getDataValue('company_id'), 'name' => $column, 'value' => $value]);
         }
         return $result;
     }
