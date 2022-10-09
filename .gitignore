@@ -31,3 +31,4 @@ composer.lock
 /debian/multiflexi.postrm.debhelper
 /deb/
 /nbproject/private/
+/OpenAPI/node_modules/
