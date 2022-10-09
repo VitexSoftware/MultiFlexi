@@ -1,0 +1,6 @@
+---
+additionalProperties:
+    apiPackage: Api
+    invokerPackage: AbraFlexi\MultiFlexi
+    artifactVersion: '0.1'
+    
