@@ -152,12 +152,16 @@ For instance, when abstract class located at `./lib/Api/AbstractPetApi.php` you 
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AbstractAppApi* | **listApps** | **GET** /apps | Show All Apps
+*AbstractAppApi* | **getAppById** | **GET** /app/{appId} | Find App by ID
 *AbstractDefaultApi* | **exampleGet** | **GET** /example | Server example operation
 *AbstractDefaultApi* | **pingGet** | **GET** /ping | Server heartbeat operation
 
 
 ## Models
 
+* AbraFlexi\MultiFlexi\Model\App
+* AbraFlexi\MultiFlexi\Model\Tag
 
 
 ## Authentication
