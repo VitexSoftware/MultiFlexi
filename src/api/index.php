@@ -19,15 +19,17 @@
  */
 require_once __DIR__ . '/../../vendor/autoload.php';
 
+use AbraFlexi\MultiFlexi\App\RegisterDependencies;
+use AbraFlexi\MultiFlexi\App\RegisterMiddlewares;
+use AbraFlexi\MultiFlexi\App\RegisterRoutes;
+use AbraFlexi\MultiFlexi\App\ResponseEmitter as Response;
 use DI\Bridge\Slim\Bridge;
 use DI\ContainerBuilder;
-use AbraFlexi\MultiFlexi\App\RegisterDependencies;
-use AbraFlexi\MultiFlexi\App\RegisterRoutes;
-use AbraFlexi\MultiFlexi\App\RegisterMiddlewares;
-use AbraFlexi\MultiFlexi\App\ResponseEmitter;
 use Neomerx\Cors\Contracts\AnalyzerInterface;
 use Slim\Factory\ServerRequestCreatorFactory;
 use Slim\Middleware\ErrorMiddleware;
+
+\Ease\Shared::singleton()->loadConfig(dirname(__DIR__) . '/../.env', true);
 
 // Instantiate PHP-DI ContainerBuilder
 $builder = new ContainerBuilder();
@@ -82,9 +84,14 @@ $request = $serverRequestCreator->createServerRequestFromGlobals();
 // also anti-pattern, of course we know
 $errorMiddleware = $container->get(ErrorMiddleware::class);
 
+$app->get('/', function ($name, Response $response) {
+    $response->getBody()->write('Hello ' . $name);
+    return $response;
+});
+
 // Run App & Emit Response
 $response = $app->handle($request);
-$responseEmitter = (new ResponseEmitter())
+$responseEmitter = (new Response())
         ->setRequest($request)
         ->setErrorMiddleware($errorMiddleware)
         ->setAnalyzer($container->get(AnalyzerInterface::class));

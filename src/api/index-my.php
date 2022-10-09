@@ -46,17 +46,6 @@ $customErrorHandler = function (
 $errorMiddleware = $app->addErrorMiddleware(true, true, true, new Slim\Logger());
 $errorMiddleware->setDefaultErrorHandler($customErrorHandler);
 
-//$app->get('/hello/{name}', function (Request $request, Response $response) {
-//    $response->withHeader('Content-type', 'application/json')->getBody()->write('Hello!');
-//    return $response;
-//});
-//
-//$app->get('/', function (Request $request, Response $response) {
-//    $response->getBody()->write('<a href="/hello/world">Try /hello/world</a>');
-//    return $response;
-//});
-
-
 $app->run();
 
 

@@ -6,6 +6,7 @@ composer.json
 config/.htaccess
 config/dev/default.inc.php
 config/prod/default.inc.php
+lib/Api/AbstractAppApi.php
 lib/Api/AbstractDefaultApi.php
 lib/App/RegisterDependencies.php
 lib/App/RegisterMiddlewares.php
@@ -13,10 +14,15 @@ lib/App/RegisterRoutes.php
 lib/App/ResponseEmitter.php
 lib/Auth/AbstractAuthenticator.php
 lib/BaseModel.php
+lib/Model/App.php
+lib/Model/Tag.php
 logs/.htaccess
 phpcs.xml.dist
 phpunit.xml.dist
 public/.htaccess
 public/index.php
+tests/Api/AppApiTest.php
 tests/Api/DefaultApiTest.php
 tests/BaseModelTest.php
+tests/Model/AppTest.php
+tests/Model/TagTest.php
