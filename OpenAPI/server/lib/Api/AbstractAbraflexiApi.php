@@ -29,40 +29,40 @@ use Psr\Http\Message\ResponseInterface;
 use Slim\Exception\HttpNotImplementedException;
 
 /**
- * AbstractAppApi Class Doc Comment
+ * AbstractAbraflexiApi Class Doc Comment
  *
  * @package AbraFlexi\MultiFlexi\Api
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  */
-abstract class AbstractAppApi
+abstract class AbstractAbraflexiApi
 {
     /**
-     * GET getAppById
-     * Summary: Get App by ID
-     * Notes: Returns a single App
+     * GET getAbraFlexiById
+     * Summary: Get AbraFlexi by ID
+     * Notes: Returns a single AbraFlexi
      * Output-Formats: [application/json]
      *
      * @param ServerRequestInterface $request  Request
      * @param ResponseInterface      $response Response
-     * @param int $appId ID of app to return
+     * @param int $abraflexiId ID of app to return
      *
      * @return ResponseInterface
      * @throws HttpNotImplementedException to force implementation class to override this method
      */
-    public function getAppById(
+    public function getAbraFlexiById(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        int $appId
+        int $abraflexiId
     ): ResponseInterface {
-        $message = "How about implementing getAppById as a GET method in AbraFlexi\MultiFlexi\Api\AppApi class?";
+        $message = "How about implementing getAbraFlexiById as a GET method in AbraFlexi\MultiFlexi\Api\AbraflexiApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 
     /**
-     * GET listApps
-     * Summary: Show All Apps
-     * Notes: All apps registeres
+     * GET listAbraFlexis
+     * Summary: Show All AbraFlexis
+     * Notes: All AbraFlexi servers registered
      * Output-Formats: [application/json]
      *
      * @param ServerRequestInterface $request  Request
@@ -71,18 +71,18 @@ abstract class AbstractAppApi
      * @return ResponseInterface
      * @throws HttpNotImplementedException to force implementation class to override this method
      */
-    public function listApps(
+    public function listAbraFlexis(
         ServerRequestInterface $request,
         ResponseInterface $response
     ): ResponseInterface {
-        $message = "How about implementing listApps as a GET method in AbraFlexi\MultiFlexi\Api\AppApi class?";
+        $message = "How about implementing listAbraFlexis as a GET method in AbraFlexi\MultiFlexi\Api\AbraflexiApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 
     /**
-     * POST setAppById
-     * Summary: Create or Update Application
-     * Notes: Create or Update App by ID
+     * POST setAbraFlexiById
+     * Summary: Create or Update AbraFlexi record
+     * Notes: Create or Upda single AbraFlexi record
      * Output-Formats: [application/json]
      *
      * @param ServerRequestInterface $request  Request
@@ -91,13 +91,13 @@ abstract class AbstractAppApi
      * @return ResponseInterface
      * @throws HttpNotImplementedException to force implementation class to override this method
      */
-    public function setAppById(
+    public function setAbraFlexiById(
         ServerRequestInterface $request,
         ResponseInterface $response
     ): ResponseInterface {
         $queryParams = $request->getQueryParams();
-        $appId = (key_exists('appId', $queryParams)) ? $queryParams['appId'] : null;
-        $message = "How about implementing setAppById as a POST method in AbraFlexi\MultiFlexi\Api\AppApi class?";
+        $abraflexiId = (key_exists('abraflexiId', $queryParams)) ? $queryParams['abraflexiId'] : null;
+        $message = "How about implementing setAbraFlexiById as a POST method in AbraFlexi\MultiFlexi\Api\AbraflexiApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 }

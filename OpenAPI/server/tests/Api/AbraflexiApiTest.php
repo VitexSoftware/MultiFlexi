@@ -23,18 +23,18 @@
 namespace AbraFlexi\MultiFlexi\Api;
 
 use PHPUnit\Framework\TestCase;
-use AbraFlexi\MultiFlexi\Api\AppApi;
+use AbraFlexi\MultiFlexi\Api\AbraflexiApi;
 
 /**
- * AppApiTest Class Doc Comment
+ * AbraflexiApiTest Class Doc Comment
  *
  * @package AbraFlexi\MultiFlexi\Api
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  *
- * @coversDefaultClass \AbraFlexi\MultiFlexi\Api\AppApi
+ * @coversDefaultClass \AbraFlexi\MultiFlexi\Api\AbraflexiApi
  */
-class AppApiTest extends TestCase
+class AbraflexiApiTest extends TestCase
 {
 
     /**
@@ -66,44 +66,44 @@ class AppApiTest extends TestCase
     }
 
     /**
-     * Test case for getAppById
+     * Test case for getAbraFlexiById
      *
-     * Get App by ID.
+     * Get AbraFlexi by ID.
      *
-     * @covers ::getAppById
+     * @covers ::getAbraFlexiById
      */
-    public function testGetAppById()
+    public function testGetAbraFlexiById()
     {
         $this->markTestIncomplete(
-            'Test of "getAppById" method has not been implemented yet.'
+            'Test of "getAbraFlexiById" method has not been implemented yet.'
         );
     }
 
     /**
-     * Test case for listApps
+     * Test case for listAbraFlexis
      *
-     * Show All Apps.
+     * Show All AbraFlexis.
      *
-     * @covers ::listApps
+     * @covers ::listAbraFlexis
      */
-    public function testListApps()
+    public function testListAbraFlexis()
     {
         $this->markTestIncomplete(
-            'Test of "listApps" method has not been implemented yet.'
+            'Test of "listAbraFlexis" method has not been implemented yet.'
         );
     }
 
     /**
-     * Test case for setAppById
+     * Test case for setAbraFlexiById
      *
-     * Create or Update Application.
+     * Create or Update AbraFlexi record.
      *
-     * @covers ::setAppById
+     * @covers ::setAbraFlexiById
      */
-    public function testSetAppById()
+    public function testSetAbraFlexiById()
     {
         $this->markTestIncomplete(
-            'Test of "setAppById" method has not been implemented yet.'
+            'Test of "setAbraFlexiById" method has not been implemented yet.'
         );
     }
 }

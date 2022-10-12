@@ -42,7 +42,146 @@ class RegisterRoutes
         [
             'httpMethod' => 'GET',
             'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
-            'path' => '/apps',
+            'path' => '/abraflexis/',
+            'apiPackage' => 'AbraFlexi\MultiFlexi\Api',
+            'classname' => 'AbstractAbraflexiApi',
+            'userClassname' => 'AbraflexiApi',
+            'operationId' => 'listAbraFlexis',
+            'responses' => [
+                '200' => [
+                    'jsonSchema' => '{
+  "description" : "successful operation",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/AbraFlexi"
+        }
+      }
+    }
+  }
+}',
+                ],
+                '400' => [
+                    'jsonSchema' => '{
+  "description" : "Invalid status value"
+}',
+                ],
+            ],
+            'authMethods' => [
+                // oauth2 security schema named 'application'
+                [
+                    'type' => 'oauth2',
+                    'isBasic' => false,
+                    'isBearer' => false,
+                    'isApiKey' => false,
+                    'isOAuth' => true,
+                    'scopes' => [
+                        'read', // allows reading resources
+                        'write', // allows modifying resources
+                    ],
+                ],
+            ],
+        ],
+        [
+            'httpMethod' => 'POST',
+            'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
+            'path' => '/abraflexi/',
+            'apiPackage' => 'AbraFlexi\MultiFlexi\Api',
+            'classname' => 'AbstractAbraflexiApi',
+            'userClassname' => 'AbraflexiApi',
+            'operationId' => 'setAbraFlexiById',
+            'responses' => [
+                '201' => [
+                    'jsonSchema' => '{
+  "description" : "record created or updated",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/AbraFlexi"
+      }
+    }
+  }
+}',
+                ],
+                '400' => [
+                    'jsonSchema' => '{
+  "description" : "Invalid ID supplied"
+}',
+                ],
+                '404' => [
+                    'jsonSchema' => '{
+  "description" : "App not found"
+}',
+                ],
+            ],
+            'authMethods' => [
+                // oauth2 security schema named 'application'
+                [
+                    'type' => 'oauth2',
+                    'isBasic' => false,
+                    'isBearer' => false,
+                    'isApiKey' => false,
+                    'isOAuth' => true,
+                    'scopes' => [
+                        'read', // allows reading resources
+                        'write', // allows modifying resources
+                    ],
+                ],
+            ],
+        ],
+        [
+            'httpMethod' => 'GET',
+            'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
+            'path' => '/abraflexi/{abraflexiId}',
+            'apiPackage' => 'AbraFlexi\MultiFlexi\Api',
+            'classname' => 'AbstractAbraflexiApi',
+            'userClassname' => 'AbraflexiApi',
+            'operationId' => 'getAbraFlexiById',
+            'responses' => [
+                '200' => [
+                    'jsonSchema' => '{
+  "description" : "successful operation",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/AbraFlexi"
+      }
+    }
+  }
+}',
+                ],
+                '400' => [
+                    'jsonSchema' => '{
+  "description" : "Invalid ID supplied"
+}',
+                ],
+                '404' => [
+                    'jsonSchema' => '{
+  "description" : "App not found"
+}',
+                ],
+            ],
+            'authMethods' => [
+                // oauth2 security schema named 'application'
+                [
+                    'type' => 'oauth2',
+                    'isBasic' => false,
+                    'isBearer' => false,
+                    'isApiKey' => false,
+                    'isOAuth' => true,
+                    'scopes' => [
+                        'read', // allows reading resources
+                        'write', // allows modifying resources
+                    ],
+                ],
+            ],
+        ],
+        [
+            'httpMethod' => 'GET',
+            'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
+            'path' => '/apps/',
             'apiPackage' => 'AbraFlexi\MultiFlexi\Api',
             'classname' => 'AbstractAppApi',
             'userClassname' => 'AppApi',
@@ -85,23 +224,18 @@ class RegisterRoutes
             ],
         ],
         [
-            'httpMethod' => 'GET',
+            'httpMethod' => 'POST',
             'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
-            'path' => '/app/{appId}',
+            'path' => '/app/',
             'apiPackage' => 'AbraFlexi\MultiFlexi\Api',
             'classname' => 'AbstractAppApi',
             'userClassname' => 'AppApi',
-            'operationId' => 'getAppById',
+            'operationId' => 'setAppById',
             'responses' => [
-                '200' => [
+                '201' => [
                     'jsonSchema' => '{
-  "description" : "successful operation",
+  "description" : "application created or updated",
   "content" : {
-    "application/xml" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/App"
-      }
-    },
     "application/json" : {
       "schema" : {
         "$ref" : "#/components/schemas/App"
@@ -139,13 +273,108 @@ class RegisterRoutes
         [
             'httpMethod' => 'GET',
             'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
-            'path' => '/example',
+            'path' => '/app/{appId}',
+            'apiPackage' => 'AbraFlexi\MultiFlexi\Api',
+            'classname' => 'AbstractAppApi',
+            'userClassname' => 'AppApi',
+            'operationId' => 'getAppById',
+            'responses' => [
+                '200' => [
+                    'jsonSchema' => '{
+  "description" : "successful operation",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/App"
+      }
+    }
+  }
+}',
+                ],
+                '400' => [
+                    'jsonSchema' => '{
+  "description" : "Invalid ID supplied"
+}',
+                ],
+                '404' => [
+                    'jsonSchema' => '{
+  "description" : "App not found"
+}',
+                ],
+            ],
+            'authMethods' => [
+                // oauth2 security schema named 'application'
+                [
+                    'type' => 'oauth2',
+                    'isBasic' => false,
+                    'isBearer' => false,
+                    'isApiKey' => false,
+                    'isOAuth' => true,
+                    'scopes' => [
+                        'read', // allows reading resources
+                        'write', // allows modifying resources
+                    ],
+                ],
+            ],
+        ],
+        [
+            'httpMethod' => 'GET',
+            'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
+            'path' => '/',
             'apiPackage' => 'AbraFlexi\MultiFlexi\Api',
             'classname' => 'AbstractDefaultApi',
             'userClassname' => 'DefaultApi',
-            'operationId' => 'exampleGet',
+            'operationId' => 'getApiIndex',
             'responses' => [
                 '200' => [
+                    'jsonSchema' => '{
+  "description" : "OK"
+}',
+                ],
+            ],
+            'authMethods' => [
+            ],
+        ],
+        [
+            'httpMethod' => 'GET',
+            'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
+            'path' => '/login',
+            'apiPackage' => 'AbraFlexi\MultiFlexi\Api',
+            'classname' => 'AbstractDefaultApi',
+            'userClassname' => 'DefaultApi',
+            'operationId' => 'loginGet',
+            'responses' => [
+                '201' => [
+                    'jsonSchema' => '{
+  "description" : "OK"
+}',
+                ],
+            ],
+            'authMethods' => [
+                // oauth2 security schema named 'application'
+                [
+                    'type' => 'oauth2',
+                    'isBasic' => false,
+                    'isBearer' => false,
+                    'isApiKey' => false,
+                    'isOAuth' => true,
+                    'scopes' => [
+                        'read', // allows reading resources
+                        'write', // allows modifying resources
+                    ],
+                ],
+            ],
+        ],
+        [
+            'httpMethod' => 'POST',
+            'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
+            'path' => '/login',
+            'apiPackage' => 'AbraFlexi\MultiFlexi\Api',
+            'classname' => 'AbstractDefaultApi',
+            'userClassname' => 'DefaultApi',
+            'operationId' => 'loginPost',
+            'responses' => [
+                '201' => [
                     'jsonSchema' => '{
   "description" : "OK"
 }',

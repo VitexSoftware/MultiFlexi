@@ -70,6 +70,19 @@ class User extends \Ease\User {
     public $nameColumn = 'login';
 
     /**
+     * MultiFlexi User
+     * 
+     * @param int|string $userID
+     */
+    public function __construct($userID = null) {
+        if($userID){
+            $this->setKeyColumn( is_numeric($userID) ? 'id' : 'login');
+            $this->loadFromSQL($userID);
+            parent::__construct($userID);
+        }
+    }
+  
+    /**
      * Vrací odkaz na ikonu.
      *
      * @return string

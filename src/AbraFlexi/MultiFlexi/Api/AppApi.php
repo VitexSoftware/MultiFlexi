@@ -8,6 +8,8 @@
  */
 
 namespace AbraFlexi\MultiFlexi\Api;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Description of DefaultApi
@@ -15,6 +17,15 @@ namespace AbraFlexi\MultiFlexi\Api;
  * @author vitex
  */
 class AppApi extends AbstractAppApi {
+
+    public $engine = null;
+
+    /**
+     * App Handler Engine
+     */
+    public function __construct() {
+        $this->engine = new \AbraFlexi\MultiFlexi\Application();
+    }
 
     /**
      * App Info by ID
@@ -28,9 +39,9 @@ class AppApi extends AbstractAppApi {
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function getAppById(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, int $appId): \Psr\Http\Message\ResponseInterface {
-        $app = new \AbraFlexi\MultiFlexi\Application($appId);
+        $this->engine->loadFromSQL($appId);
         $response->getBody()->write(
-                json_encode(['id' => $app->getMyKey(), 'name' => $app->getRecordName(), 'executable' => $app->getDataValue('executable')], JSON_UNESCAPED_UNICODE)
+                json_encode(['id' => $this->engine->getMyKey(), 'name' => $this->engine->getRecordName(), 'executable' => $this->engine->getDataValue('executable')], JSON_UNESCAPED_UNICODE)
         );
         return $response->withHeader('Content-type', 'application/json');
     }
@@ -54,6 +65,22 @@ class AppApi extends AbstractAppApi {
                 json_encode($appsList, JSON_UNESCAPED_UNICODE)
         );
         return $response->withHeader('Content-type', 'application/json');
+    }
+
+    /**
+     * POST setAppById
+     * Summary: Create or Update Application
+     * Notes: Create or Update App by ID
+     * Output-Formats: [application/xml, application/json]
+     *
+     * @param ServerRequestInterface $request  Request
+     * @param ResponseInterface      $response Response
+     *
+     * @return ResponseInterface
+     */
+    public function setAppById(ServerRequestInterface $request,ResponseInterface $response): ResponseInterface {
+        $queryParams = $request->getQueryParams();
+        $appId = (key_exists('appId', $queryParams)) ? $queryParams['appId'] : null;
     }
 
 }

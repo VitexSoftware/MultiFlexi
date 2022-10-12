@@ -38,9 +38,9 @@ use Slim\Exception\HttpNotImplementedException;
 abstract class AbstractDefaultApi
 {
     /**
-     * GET exampleGet
-     * Summary: Server example operation
-     * Notes: This is an example operation to show how security is applied to the call.
+     * GET getApiIndex
+     * Summary: Endpoints listing
+     * Notes: Show current API
      *
      * @param ServerRequestInterface $request  Request
      * @param ResponseInterface      $response Response
@@ -48,11 +48,55 @@ abstract class AbstractDefaultApi
      * @return ResponseInterface
      * @throws HttpNotImplementedException to force implementation class to override this method
      */
-    public function exampleGet(
+    public function getApiIndex(
         ServerRequestInterface $request,
         ResponseInterface $response
     ): ResponseInterface {
-        $message = "How about implementing exampleGet as a GET method in AbraFlexi\MultiFlexi\Api\DefaultApi class?";
+        $message = "How about implementing getApiIndex as a GET method in AbraFlexi\MultiFlexi\Api\DefaultApi class?";
+        throw new HttpNotImplementedException($request, $message);
+    }
+
+    /**
+     * GET loginGet
+     * Summary: Return User&#39;s token
+     * Notes: Send login &amp; password to obtain oAuth token
+     *
+     * @param ServerRequestInterface $request  Request
+     * @param ResponseInterface      $response Response
+     *
+     * @return ResponseInterface
+     * @throws HttpNotImplementedException to force implementation class to override this method
+     */
+    public function loginGet(
+        ServerRequestInterface $request,
+        ResponseInterface $response
+    ): ResponseInterface {
+        $queryParams = $request->getQueryParams();
+        $username = (key_exists('username', $queryParams)) ? $queryParams['username'] : null;
+        $password = (key_exists('password', $queryParams)) ? $queryParams['password'] : null;
+        $message = "How about implementing loginGet as a GET method in AbraFlexi\MultiFlexi\Api\DefaultApi class?";
+        throw new HttpNotImplementedException($request, $message);
+    }
+
+    /**
+     * POST loginPost
+     * Summary: Return User&#39;s token
+     * Notes: Send login &amp; password to obtain oAuth token
+     *
+     * @param ServerRequestInterface $request  Request
+     * @param ResponseInterface      $response Response
+     *
+     * @return ResponseInterface
+     * @throws HttpNotImplementedException to force implementation class to override this method
+     */
+    public function loginPost(
+        ServerRequestInterface $request,
+        ResponseInterface $response
+    ): ResponseInterface {
+        $queryParams = $request->getQueryParams();
+        $username = (key_exists('username', $queryParams)) ? $queryParams['username'] : null;
+        $password = (key_exists('password', $queryParams)) ? $queryParams['password'] : null;
+        $message = "How about implementing loginPost as a POST method in AbraFlexi\MultiFlexi\Api\DefaultApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 

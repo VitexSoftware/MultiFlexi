@@ -27,7 +27,8 @@
         "psr-4": {
             "AbraFlexi\\MultiFlexi\\": "src/AbraFlexi/MultiFlexi/",
             "AbraFlexi\\MultiFlexi\\Ui\\": "src/AbraFlexi/MultiFlexi/Ui",
-            "AbraFlexi\\MultiFlexi\\Api\\": "src/AbraFlexi/MultiFlexi/Api"
+            "AbraFlexi\\MultiFlexi\\Api\\": "src/AbraFlexi/MultiFlexi/Api",
+            "AbraFlexi\\MultiFlexi\\Auth\\": "src/AbraFlexi/MultiFlexi/Auth"
         }
     },
     "autoload-dev": {
