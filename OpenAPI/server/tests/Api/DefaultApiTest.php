@@ -66,16 +66,44 @@ class DefaultApiTest extends TestCase
     }
 
     /**
-     * Test case for exampleGet
+     * Test case for getApiIndex
      *
-     * Server example operation.
+     * Endpoints listing.
      *
-     * @covers ::exampleGet
+     * @covers ::getApiIndex
      */
-    public function testExampleGet()
+    public function testGetApiIndex()
     {
         $this->markTestIncomplete(
-            'Test of "exampleGet" method has not been implemented yet.'
+            'Test of "getApiIndex" method has not been implemented yet.'
+        );
+    }
+
+    /**
+     * Test case for loginGet
+     *
+     * Return User's token.
+     *
+     * @covers ::loginGet
+     */
+    public function testLoginGet()
+    {
+        $this->markTestIncomplete(
+            'Test of "loginGet" method has not been implemented yet.'
+        );
+    }
+
+    /**
+     * Test case for loginPost
+     *
+     * Return User's token.
+     *
+     * @covers ::loginPost
+     */
+    public function testLoginPost()
+    {
+        $this->markTestIncomplete(
+            'Test of "loginPost" method has not been implemented yet.'
         );
     }
 

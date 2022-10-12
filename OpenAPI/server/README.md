@@ -152,16 +152,28 @@ For instance, when abstract class located at `./lib/Api/AbstractPetApi.php` you 
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AbstractAppApi* | **listApps** | **GET** /apps | Show All Apps
-*AbstractAppApi* | **getAppById** | **GET** /app/{appId} | Find App by ID
-*AbstractDefaultApi* | **exampleGet** | **GET** /example | Server example operation
+*AbstractAbraflexiApi* | **listAbraFlexis** | **GET** /abraflexis/ | Show All AbraFlexis
+*AbstractAbraflexiApi* | **setAbraFlexiById** | **POST** /abraflexi/ | Create or Update AbraFlexi record
+*AbstractAbraflexiApi* | **getAbraFlexiById** | **GET** /abraflexi/{abraflexiId} | Get AbraFlexi by ID
+*AbstractAppApi* | **listApps** | **GET** /apps/ | Show All Apps
+*AbstractAppApi* | **setAppById** | **POST** /app/ | Create or Update Application
+*AbstractAppApi* | **getAppById** | **GET** /app/{appId} | Get App by ID
+*AbstractDefaultApi* | **getApiIndex** | **GET** / | Endpoints listing
+*AbstractDefaultApi* | **loginGet** | **GET** /login | Return User's token
+*AbstractDefaultApi* | **loginPost** | **POST** /login | Return User's token
 *AbstractDefaultApi* | **pingGet** | **GET** /ping | Server heartbeat operation
 
 
 ## Models
 
+* AbraFlexi\MultiFlexi\Model\AbraFlexi
 * AbraFlexi\MultiFlexi\Model\App
+* AbraFlexi\MultiFlexi\Model\AppCompany
+* AbraFlexi\MultiFlexi\Model\ConfField
+* AbraFlexi\MultiFlexi\Model\Configuration
+* AbraFlexi\MultiFlexi\Model\Customer
 * AbraFlexi\MultiFlexi\Model\Tag
+* AbraFlexi\MultiFlexi\Model\User
 
 
 ## Authentication
