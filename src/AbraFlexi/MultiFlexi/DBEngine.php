@@ -4,7 +4,7 @@
  * Multi Flexi - Company Management Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2020 Vitex Software
+ * @copyright  2018-2022 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi;
@@ -961,34 +961,68 @@ class DBEngine extends \Ease\SQL\Engine {
         return $selectized;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getCustomerID() {
         return $this->getDataValue('client_id');
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getResume() {
         return implode(' ', $this->getData());
     }
 
+    /**
+     * 
+     * @param type $datableSaver
+     * @param type $id
+     * @param type $row
+     */
     public function postCreate($datableSaver, $id, $row) {
         
     }
 
+    /**
+     * 
+     * @param type $saver
+     */
     public function validation($saver) {
         
     }
 
+    /**
+     * 
+     * @return string
+     */
     public function editorOpenJS() {
         return '';
     }
 
+    /**
+     * 
+     * @return string
+     */
     public function editorPostCreateJS() {
         return '';
     }
 
+    /**
+     * 
+     * @return string
+     */
     public function editorCreateJS() {
         return '';
     }
 
+    /**
+     * 
+     * @return string
+     */
     public function editorSubmitCompleteJS() {
         return '';
     }
@@ -1065,6 +1099,12 @@ class DBEngine extends \Ease\SQL\Engine {
 ';
     }
 
+    /**
+     * 
+     * @param type $columns
+     * @param type $target
+     * @return type
+     */
     public static function renderDate($columns, $target = 'calendar.php') {
         return '
             {
@@ -1083,6 +1123,12 @@ class DBEngine extends \Ease\SQL\Engine {
             ';
     }
 
+    /**
+     * 
+     * @param type $columns
+     * @param type $target
+     * @return type
+     */
     public static function renderDocumentLink($columns, $target = 'document.php') {
         return '
             {
@@ -1108,6 +1154,12 @@ class DBEngine extends \Ease\SQL\Engine {
             ';
     }
 
+    /**
+     * 
+     * @param type $columns
+     * @param type $target
+     * @return type
+     */
     public static function renderDismisButton($columns, $target = 'dismis.php') {
         return '
             {
@@ -1128,6 +1180,11 @@ class DBEngine extends \Ease\SQL\Engine {
             ';
     }
 
+    /**
+     * 
+     * @param type $types
+     * @return type
+     */
     public function getColumnsOfType($types) {
         $columns = [];
         $columnsRaw = $this->columns();
@@ -1156,10 +1213,19 @@ class DBEngine extends \Ease\SQL\Engine {
         return $data ? $data : [];
     }
 
+    /**
+     * 
+     * @param type $recordID
+     * @return type
+     */
     public function getUrlForRecord($recordID) {
         return isset($this->detailPage) ? $this->detailPage . '?id=' . $recordID : null;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getAttachments() {
         $attachments = $this->getFluentPDO()->from($this->keyword . '_file')->where($this->keyword . '_id',
                         $this->getMyKey())->fetchAll();
@@ -1221,6 +1287,12 @@ class DBEngine extends \Ease\SQL\Engine {
         return null;
     }
 
+    /**
+     * 
+     * @param array $dataRowRaw
+     * 
+     * @return string
+     */
     public function completeDataRow(array $dataRowRaw) {
         foreach ($this->columnsCache as $colName => $colProps) {
             if (array_key_exists($colName . '_value', $dataRowRaw)) {
@@ -1243,4 +1315,13 @@ class DBEngine extends \Ease\SQL\Engine {
         return array_key_exists($columnName, $this->columnsCache) ? $this->columnsCache[$columnName] : null;
     }
 
+    /**
+     * Link to record's page
+     * 
+     * @return \Ease\Html\ATag
+     */
+    public function getLink() {
+        return new \Ease\Html\ATag($this->keyword.'.php?id='.$this->getMyKey(), $this->getRecordName());
+    }
+    
 }

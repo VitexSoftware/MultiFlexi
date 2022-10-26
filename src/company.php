@@ -4,7 +4,7 @@
  * Multi Flexi - Company instance editor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * @copyright  2020-2022 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi\Ui;
@@ -19,6 +19,7 @@ $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company')));
 
 $companies = new Company(WebPage::getRequestValue('id', 'int'));
+$_SESSION['company'] = &$companies;
 $instanceName = $companies->getDataValue('nazev');
 
 if ($oPage->isPosted()) {

@@ -349,4 +349,21 @@ class Company extends \AbraFlexi\Company {
         $this->exportEnv($envNames);
     }
 
+    /**
+     * Link to record's page
+     * 
+     * @return \Ease\Html\ATag
+     */
+    public function getLink() {
+        return $this->keyword.'.php?id='.$this->getMyKey();
+    }
+    
+    public function __destruct(){
+        unset($this->pdo);
+    }
+    
+    public function __sleep() {
+        return ['data','objectName','evidence'];
+    }
+    
 }
