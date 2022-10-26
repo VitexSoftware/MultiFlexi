@@ -54,5 +54,3 @@ if (!is_null($abraflexis->getMyKey())) {
 $oPage->addItem(new PageBottom());
 
 $oPage->draw();
-
-session_commit();

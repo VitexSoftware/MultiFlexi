@@ -49,7 +49,7 @@ if ($interval) {
             ];
 
             foreach ($envNames as $envName => $sqlValue) {
-                $companer->addStatusMessage(sprintf(_('Setting Environment %s to %s'), $envName, $sqlValue), 'debug');
+                $companer->addStatusMessage(sprintf(_('Setting Environment: export %s=%s'), $envName, $sqlValue), 'debug');
                 putenv($envName . '=' . $sqlValue);
             }
 
@@ -63,19 +63,19 @@ if ($interval) {
 
                 $cmdparams = $app->getDataValue('cmdparams');
                 foreach ($customConfig->getColumnsFromSQL(['name', 'value'], ['company_id' => $company['company_id'], 'app_id' => $app->getMyKey()]) as $cfgRaw) {
-                    $companer->addStatusMessage(sprintf(_('Setting Environment %s to %s'), $cfgRaw['name'], $cfgRaw['value']), 'debug');
+                    $companer->addStatusMessage(sprintf(_('Setting custom Environment: export %s=%s'), $cfgRaw['name'], $cfgRaw['value']), 'debug');
                     putenv($cfgRaw['name'] . '=' . $cfgRaw['value']);
                     $cmdparams = str_replace('{' . $cfgRaw['name'] . '}', $cfgRaw['value'], $cmdparams);
                 }
 
                 $exec = $app->getDataValue('executable');
-                $companer->addStatusMessage('begin' . $exec . ' ' . $cmdparams . '@' . $company['nazev']);
+                $companer->addStatusMessage('command begin: ' . $exec . ' ' . $cmdparams . '@' . $company['nazev']);
 
                 foreach (explode("\n", shell_exec($exec . ' ' . $cmdparams)) as $row) {
                     $companer->addStatusMessage($row, 'debug');
                 }
 
-                $companer->addStatusMessage('end' . $exec . '@' . $company['nazev']);
+                $companer->addStatusMessage('command end: ' . $exec . '@' . $company['nazev']);
             }
         }
     }
