@@ -152,16 +152,17 @@ For instance, when abstract class located at `./lib/Api/AbstractPetApi.php` you 
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AbstractAbraflexiApi* | **listAbraFlexis** | **GET** /abraflexis/ | Show All AbraFlexis
+*AbstractAbraflexiApi* | **listAbraFlexis** | **GET** /abraflexis | Show All AbraFlexis
 *AbstractAbraflexiApi* | **setAbraFlexiById** | **POST** /abraflexi/ | Create or Update AbraFlexi record
-*AbstractAbraflexiApi* | **getAbraFlexiById** | **GET** /abraflexi/{abraflexiId} | Get AbraFlexi by ID
-*AbstractAppApi* | **listApps** | **GET** /apps/ | Show All Apps
+*AbstractAbraflexiApi* | **getAbraFlexiById** | **GET** /abraflexi/{abraflexiId}.{suffix} | Get AbraFlexi by ID
 *AbstractAppApi* | **setAppById** | **POST** /app/ | Create or Update Application
-*AbstractAppApi* | **getAppById** | **GET** /app/{appId} | Get App by ID
-*AbstractDefaultApi* | **getApiIndex** | **GET** / | Endpoints listing
-*AbstractDefaultApi* | **loginGet** | **GET** /login | Return User's token
-*AbstractDefaultApi* | **loginPost** | **POST** /login | Return User's token
-*AbstractDefaultApi* | **pingGet** | **GET** /ping | Server heartbeat operation
+*AbstractAppApi* | **getAppById** | **GET** /app/{appId}.{suffix} | Get App by ID
+*AbstractAppApi* | **listApps** | **GET** /apps.{suffix} | Show All Apps
+*AbstractDefaultApi* | **rootGet** | **GET** / | Redirect to index
+*AbstractDefaultApi* | **getApiIndex** | **GET** /index.{suffix} | Endpoints listing
+*AbstractDefaultApi* | **loginSuffixGet** | **GET** /login.{suffix} | Return User's token
+*AbstractDefaultApi* | **loginSuffixPost** | **POST** /login.{suffix} | Return User's token
+*AbstractDefaultApi* | **pingSuffixGet** | **GET** /ping.{suffix} | Server heartbeat operation
 
 
 ## Models
@@ -178,12 +179,8 @@ Class | Method | HTTP request | Description
 
 ## Authentication
 
-### Security schema `application`
-> Important! To make OAuth authentication work you need to extend [\AbraFlexi\MultiFlexi\Auth\AbstractAuthenticator](./lib/Auth/AbstractAuthenticator.php) class by [\AbraFlexi\MultiFlexi\Auth\OAuthAuthenticator](./src/Auth/OAuthAuthenticator.php) class.
-
-Scope list:
-* `write` - allows modifying resources
-* `read` - allows reading resources
+### Security schema `basicAuth`
+> Important! To make Basic authentication work you need to extend [\AbraFlexi\MultiFlexi\Auth\AbstractAuthenticator](./lib/Auth/AbstractAuthenticator.php) class by [\AbraFlexi\MultiFlexi\Auth\BasicAuthenticator](./src/Auth/BasicAuthenticator.php) class.
 
 ### Advanced middleware configuration
 Ref to used Slim Token Middleware [dyorg/slim-token-authentication](https://github.com/dyorg/slim-token-authentication/tree/1.x#readme)

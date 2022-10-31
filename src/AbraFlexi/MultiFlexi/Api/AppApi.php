@@ -8,6 +8,7 @@
  */
 
 namespace AbraFlexi\MultiFlexi\Api;
+
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -38,12 +39,19 @@ class AppApi extends AbstractAppApi {
      * 
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getAppById(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, int $appId): \Psr\Http\Message\ResponseInterface {
-        $this->engine->loadFromSQL($appId);
-        $response->getBody()->write(
-                json_encode(['id' => $this->engine->getMyKey(), 'name' => $this->engine->getRecordName(), 'executable' => $this->engine->getDataValue('executable')], JSON_UNESCAPED_UNICODE)
-        );
-        return $response->withHeader('Content-type', 'application/json');
+    public function getAppById(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, string $appId, string $suffix): \Psr\Http\Message\ResponseInterface {
+        $this->engine->loadFromSQL(intval($appId));
+        $appData = $this->engine->getData();
+        switch ($suffix) {
+            case 'html':
+//                $appData['nazev'] = new \Ease\Html\ATag($appData['id'] . '.html', $appData['nazev']);
+                $appData['image'] = new \Ease\Html\ATag($appData['id'] . '.html', new \Ease\Html\ImgTag($appData['image'], $appData['nazev'], ['width' => '64']));
+                
+                break;
+            default:
+                break;
+        }
+        return DefaultApi::prepareResponse($response, [$appData], $suffix, $appData['nazev']);
     }
 
     /**
@@ -56,15 +64,19 @@ class AppApi extends AbstractAppApi {
      * 
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function listApps(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response): \Psr\Http\Message\ResponseInterface {
-        $apps = new \AbraFlexi\MultiFlexi\Application();
-        foreach ($apps->getAll() as $app) {
-            $appsList[] = ['id' => $app['id'], 'name' => $app['nazev'], 'executable' => $app['executable']];
+    public function listApps(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, string $suffix): \Psr\Http\Message\ResponseInterface {
+        foreach ($this->engine->getAll() as $app) {
+            $appsList[$app['id']] = $app;
+            switch ($suffix) {
+                case 'html':
+                    $appsList[$app['id']]['nazev'] = new \Ease\Html\ATag('app/' . $app['id'] . '.html', $app['nazev']);
+                    $appsList[$app['id']]['image'] = new \Ease\Html\ATag('app/' . $app['id'] . '.html', new \Ease\Html\ImgTag($app['image'], $app['nazev'], ['width' => '64']));
+                    break;
+                default:
+                    break;
+            }
         }
-        $response->getBody()->write(
-                json_encode($appsList, JSON_UNESCAPED_UNICODE)
-        );
-        return $response->withHeader('Content-type', 'application/json');
+        return DefaultApi::prepareResponse($response, $appsList, $suffix, 'apps');
     }
 
     /**
@@ -78,9 +90,11 @@ class AppApi extends AbstractAppApi {
      *
      * @return ResponseInterface
      */
-    public function setAppById(ServerRequestInterface $request,ResponseInterface $response): ResponseInterface {
+    public function setAppById(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface {
         $queryParams = $request->getQueryParams();
         $appId = (key_exists('appId', $queryParams)) ? $queryParams['appId'] : null;
+        $appInfo = ['id' => $appId, 'success' => $this->engine->dbsync($queryParams)];
+        return DefaultApi::prepareResponse($response, $appInfo, $suffix, 'app' . $appId);
     }
 
 }

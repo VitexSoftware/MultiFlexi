@@ -66,6 +66,7 @@ $container = $builder->build();
 // Instantiate the app
 $app = Bridge::create($container);
 $app->setBasePath('/EASE/MultiFlexi/src/api');
+$path = '/EASE/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/';
 
 // Register middleware
 $middleware = new RegisterMiddlewares();
@@ -84,10 +85,42 @@ $request = $serverRequestCreator->createServerRequestFromGlobals();
 // also anti-pattern, of course we know
 $errorMiddleware = $container->get(ErrorMiddleware::class);
 
-$app->get('/', function ($name, Response $response) {
-    $response->getBody()->write('Hello ' . $name);
-    return $response;
-});
+//$app->add(new Slim\Middleware\TokenAuthentication([
+//            'path' => $app->getBasePath() . '/api',
+//            'passthrough' => ['/', '/ping', '/login'], /* or ['/api/auth', '/api/test'] */
+//            "authenticator" => function ($arguments) {
+//                return (bool) rand(0, 1);
+//            }
+//        ]));
+
+
+//route0 → (unnamed) → /{routes:.*}
+//route1 → listAbraFlexis → /VitexSoftware/MultiFlexi/1.0.0/abraflexis/
+//route2 → setAbraFlexiById → /VitexSoftware/MultiFlexi/1.0.0/abraflexi/
+//route3 → getAbraFlexiById → /VitexSoftware/MultiFlexi/1.0.0/abraflexi/{abraflexiId}
+//route4 → listApps → /VitexSoftware/MultiFlexi/1.0.0/apps/
+//route5 → setAppById → /VitexSoftware/MultiFlexi/1.0.0/app/
+//route6 → getAppById → /VitexSoftware/MultiFlexi/1.0.0/app/{appId}
+//route7 → getApiIndex → /VitexSoftware/MultiFlexi/1.0.0/
+//route8 → loginGet → /VitexSoftware/MultiFlexi/1.0.0/login
+//route9 → loginPost → /VitexSoftware/MultiFlexi/1.0.0/login
+//route10 → pingGet → /VitexSoftware/MultiFlexi/1.0.0/ping
+//route11 → (unnamed) → /
+
+
+        
+$app->add(new \Tuupola\Middleware\HttpBasicAuthentication([
+            'relaxed' => ['localhost'],
+//            'path' => ['/EASE/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/apps/', $path . '/apps', $path . '/users'],
+//            "ignore" => [$path . '/', $path . '/ping', $path . '/authorize'],
+//            'path' => '/',
+            'ignore' => [ $path . '/', $path . '/ping/'],
+//            "authenticator" => new AbraFlexi\MultiFlexi\Auth\BasicAuthenticator()
+            "authenticator" => function ($arguments) {
+                $prober = new AbraFlexi\MultiFlexi\User($arguments['user']);
+                return $prober->getUserID() && strlen($arguments['password']) && $prober->isAccountEnabled() && $prober->passwordValidation($arguments['password'], $prober->getDataValue($prober->passwordColumn));
+            }
+        ]));
 
 // Run App & Emit Response
 $response = $app->handle($request);

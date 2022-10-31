@@ -46,6 +46,7 @@ abstract class AbstractAbraflexiApi
      * @param ServerRequestInterface $request  Request
      * @param ResponseInterface      $response Response
      * @param int $abraflexiId ID of app to return
+     * @param string $suffix force format suffix
      *
      * @return ResponseInterface
      * @throws HttpNotImplementedException to force implementation class to override this method
@@ -53,7 +54,8 @@ abstract class AbstractAbraflexiApi
     public function getAbraFlexiById(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        int $abraflexiId
+        int $abraflexiId,
+        string $suffix
     ): ResponseInterface {
         $message = "How about implementing getAbraFlexiById as a GET method in AbraFlexi\MultiFlexi\Api\AbraflexiApi class?";
         throw new HttpNotImplementedException($request, $message);
