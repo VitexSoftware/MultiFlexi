@@ -44,78 +44,104 @@ abstract class AbstractDefaultApi
      *
      * @param ServerRequestInterface $request  Request
      * @param ResponseInterface      $response Response
+     * @param string $suffix force format suffix
      *
      * @return ResponseInterface
      * @throws HttpNotImplementedException to force implementation class to override this method
      */
     public function getApiIndex(
         ServerRequestInterface $request,
-        ResponseInterface $response
+        ResponseInterface $response,
+        string $suffix
     ): ResponseInterface {
         $message = "How about implementing getApiIndex as a GET method in AbraFlexi\MultiFlexi\Api\DefaultApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 
     /**
-     * GET loginGet
+     * GET loginSuffixGet
      * Summary: Return User&#39;s token
      * Notes: Send login &amp; password to obtain oAuth token
      *
      * @param ServerRequestInterface $request  Request
      * @param ResponseInterface      $response Response
+     * @param string $suffix force format suffix
      *
      * @return ResponseInterface
      * @throws HttpNotImplementedException to force implementation class to override this method
      */
-    public function loginGet(
+    public function loginSuffixGet(
         ServerRequestInterface $request,
-        ResponseInterface $response
+        ResponseInterface $response,
+        string $suffix
     ): ResponseInterface {
         $queryParams = $request->getQueryParams();
         $username = (key_exists('username', $queryParams)) ? $queryParams['username'] : null;
         $password = (key_exists('password', $queryParams)) ? $queryParams['password'] : null;
-        $message = "How about implementing loginGet as a GET method in AbraFlexi\MultiFlexi\Api\DefaultApi class?";
+        $message = "How about implementing loginSuffixGet as a GET method in AbraFlexi\MultiFlexi\Api\DefaultApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 
     /**
-     * POST loginPost
+     * POST loginSuffixPost
      * Summary: Return User&#39;s token
      * Notes: Send login &amp; password to obtain oAuth token
      *
      * @param ServerRequestInterface $request  Request
      * @param ResponseInterface      $response Response
+     * @param string $suffix force format suffix
      *
      * @return ResponseInterface
      * @throws HttpNotImplementedException to force implementation class to override this method
      */
-    public function loginPost(
+    public function loginSuffixPost(
         ServerRequestInterface $request,
-        ResponseInterface $response
+        ResponseInterface $response,
+        string $suffix
     ): ResponseInterface {
         $queryParams = $request->getQueryParams();
         $username = (key_exists('username', $queryParams)) ? $queryParams['username'] : null;
         $password = (key_exists('password', $queryParams)) ? $queryParams['password'] : null;
-        $message = "How about implementing loginPost as a POST method in AbraFlexi\MultiFlexi\Api\DefaultApi class?";
+        $message = "How about implementing loginSuffixPost as a POST method in AbraFlexi\MultiFlexi\Api\DefaultApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 
     /**
-     * GET pingGet
+     * GET pingSuffixGet
      * Summary: Server heartbeat operation
      * Notes: This operation shows how to override the global security defined above, as we want to open it up for all users.
      *
      * @param ServerRequestInterface $request  Request
      * @param ResponseInterface      $response Response
+     * @param string $suffix force format suffix
      *
      * @return ResponseInterface
      * @throws HttpNotImplementedException to force implementation class to override this method
      */
-    public function pingGet(
+    public function pingSuffixGet(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        string $suffix
+    ): ResponseInterface {
+        $message = "How about implementing pingSuffixGet as a GET method in AbraFlexi\MultiFlexi\Api\DefaultApi class?";
+        throw new HttpNotImplementedException($request, $message);
+    }
+
+    /**
+     * GET rootGet
+     * Summary: Redirect to index
+     *
+     * @param ServerRequestInterface $request  Request
+     * @param ResponseInterface      $response Response
+     *
+     * @return ResponseInterface
+     * @throws HttpNotImplementedException to force implementation class to override this method
+     */
+    public function rootGet(
         ServerRequestInterface $request,
         ResponseInterface $response
     ): ResponseInterface {
-        $message = "How about implementing pingGet as a GET method in AbraFlexi\MultiFlexi\Api\DefaultApi class?";
+        $message = "How about implementing rootGet as a GET method in AbraFlexi\MultiFlexi\Api\DefaultApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 }

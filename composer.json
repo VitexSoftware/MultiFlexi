@@ -4,6 +4,8 @@
     "version": "1.2",
     "type": "project",
     "require": {
+        "ext-yaml": "*",
+        "ext-simplexml": "*",
         "vitexsoftware/ease-bootstrap4-widgets-abraflexi": "*",
         "vitexsoftware/ease-fluentpdo": "*",
         "vitexsoftware/ease-twbootstrap4-widgets": "*",
@@ -13,7 +15,9 @@
         "sensiolabs/ansi-to-html": "1.2.x-dev",
         "php-di/slim-bridge": "*",
         "slim/psr7": "dev-master",
-        "vitexsoftware/multiflexiapiserver": "*"
+        "vitexsoftware/multiflexiapiserver": "*",
+        "dyorg/slim-token-authentication": "dev-master",
+        "tuupola/slim-basic-auth": "4.x-dev"
     },
     "license": "MIT",
     "authors": [
@@ -37,13 +41,13 @@
             "Test\\AbraFlexi\\MultiFlexi\\": "tests/AbraFlexi/MultiFlexi/"
         }
     },
-   "repositories": [
-    {
-      "type": "path",
-      "url": "OpenAPI/server/"
-    }
-   ],
-   "require-dev": {
+    "repositories": [
+        {
+            "type": "path",
+            "url": "OpenAPI/server/"
+        }
+    ],
+    "require-dev": {
         "phpunit/phpunit": "^9"
     },
     "scripts": {
@@ -54,5 +58,4 @@
             "php -r \"copy('vendor/datatables/datatables/media/js/dataTables.bootstrap4.js', 'src/js/dataTables.bootstrap4.js');copy('vendor/datatables/datatables/media/js/jquery.dataTables.js', 'src/js/jquery.dataTables.js');copy('vendor/datatables/datatables/media/css/dataTables.bootstrap4.css','src/css/dataTables.bootstrap4.css');\""
         ]
     }
-    
 }

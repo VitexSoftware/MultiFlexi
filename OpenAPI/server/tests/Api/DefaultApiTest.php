@@ -80,44 +80,58 @@ class DefaultApiTest extends TestCase
     }
 
     /**
-     * Test case for loginGet
+     * Test case for loginSuffixGet
      *
      * Return User's token.
      *
-     * @covers ::loginGet
+     * @covers ::loginSuffixGet
      */
-    public function testLoginGet()
+    public function testLoginSuffixGet()
     {
         $this->markTestIncomplete(
-            'Test of "loginGet" method has not been implemented yet.'
+            'Test of "loginSuffixGet" method has not been implemented yet.'
         );
     }
 
     /**
-     * Test case for loginPost
+     * Test case for loginSuffixPost
      *
      * Return User's token.
      *
-     * @covers ::loginPost
+     * @covers ::loginSuffixPost
      */
-    public function testLoginPost()
+    public function testLoginSuffixPost()
     {
         $this->markTestIncomplete(
-            'Test of "loginPost" method has not been implemented yet.'
+            'Test of "loginSuffixPost" method has not been implemented yet.'
         );
     }
 
     /**
-     * Test case for pingGet
+     * Test case for pingSuffixGet
      *
      * Server heartbeat operation.
      *
-     * @covers ::pingGet
+     * @covers ::pingSuffixGet
      */
-    public function testPingGet()
+    public function testPingSuffixGet()
     {
         $this->markTestIncomplete(
-            'Test of "pingGet" method has not been implemented yet.'
+            'Test of "pingSuffixGet" method has not been implemented yet.'
+        );
+    }
+
+    /**
+     * Test case for rootGet
+     *
+     * Redirect to index.
+     *
+     * @covers ::rootGet
+     */
+    public function testRootGet()
+    {
+        $this->markTestIncomplete(
+            'Test of "rootGet" method has not been implemented yet.'
         );
     }
 }

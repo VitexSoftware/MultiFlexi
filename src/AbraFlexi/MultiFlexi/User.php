@@ -78,7 +78,7 @@ class User extends \Ease\User {
         if($userID){
             $this->setKeyColumn( is_numeric($userID) ? 'id' : 'login');
             $this->loadFromSQL($userID);
-            parent::__construct($userID);
+            parent::__construct($this->getDataValue('id'));
         }
     }
   
