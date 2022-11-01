@@ -12,6 +12,7 @@ include_once '/usr/share/php/EaseCore/Atom.php';
 include_once '/usr/share/php/EaseCore/Shared.php';
 include_once '/usr/share/php/EaseCore/Molecule.php';
 include_once '/usr/share/php/EaseCore/Logger/Logging.php';
+include_once '/usr/share/php/EaseCore/Logger/Loggingable.php';
 include_once '/usr/share/php/EaseCore/Logger/ToMemory.php';
 include_once '/usr/share/php/EaseCore/Logger/ToStd.php';
 include_once '/usr/share/php/EaseCore/Logger/ToSyslog.php';
