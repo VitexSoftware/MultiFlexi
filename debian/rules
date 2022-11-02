@@ -23,6 +23,7 @@ override_dh_install:
 	sed -i -e 's/js\/jquery.dataTables.js/\/javascript\/jquery-datatables\/jquery.dataTables.js/g' debian/multiflexi/usr/lib/multiflexi/MultiFlexi/Ui/DBDataTable.php
 	sed -i -e 's/js\/dataTables.bootstrap4.js/\/javascript\/jquery-datatables\/dataTables.bootstrap4.js/g' debian/multiflexi/usr/lib/multiflexi/MultiFlexi/Ui/DBDataTable.php
 	sed -i -e 's/css\/dataTables.bootstrap4.css/\/javascript\/jquery-datatables\/css\/dataTables.bootstrap4.css/g' debian/multiflexi/usr/lib/multiflexi/MultiFlexi/Ui/DBDataTable.php
+        sed -i 's/css\/selectize/\/javascript\/selectize.js\/css\/selectize/' debian/multiflexi/usr/lib/multiflexi/MultiFlexi/Ui/DBDataTable.php
 	sed -i -e 's/\.\.\/i18n/\/usr\/share\/locale/g'            	     debian/multiflexi/usr/share/multiflexi/init.php
 	mkdir -p                                                             debian/multiflexi-sqlite/usr/lib/multiflexi
 	cp debian/conf/.env.template                                         debian/multiflexi-sqlite/usr/lib/multiflexi
