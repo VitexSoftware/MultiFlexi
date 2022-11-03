@@ -9,77 +9,44 @@
 
 namespace AbraFlexi\MultiFlexi;
 
-use Ease\TWB4\LinkButton;
-use Ease\TWB4\Panel;
-use Ease\TWB4\Row;
 use AbraFlexi\MultiFlexi\Application;
-use AbraFlexi\MultiFlexi\Ui\PageBottom;
-use AbraFlexi\MultiFlexi\Ui\PageTop;
-use AbraFlexi\MultiFlexi\Ui\RegisterAppForm;
 use Symfony\Component\Process\Process;
 
 require_once './init.php';
 
-$apps = new Application($oPage->getRequestValue('id', 'int'));
-
-$customConfig = new Configuration();
-
-$company = $apps->getCompany();
-
-$envNames = [
-    'ABRAFLEXI_URL' => $company['url'],
-    'ABRAFLEXI_LOGIN' => $company['user'],
-    'ABRAFLEXI_PASSWORD' => $company['password'],
-    'ABRAFLEXI_COMPANY' => $company['company'],
-    'EASE_MAILTO' => $company['email'],
-    'EASE_LOGGER' => empty($company['email']) ? 'syslog' : 'syslog|email',
-];
-
-foreach ($envNames as $envName => $sqlValue) {
-    $companer->addStatusMessage(sprintf(_('Setting Environment %s to %s'), $envName, $sqlValue), 'debug');
-    putenv($envName . '=' . $sqlValue);
+$appCompany = new AppToCompany($oPage->getRequestValue('id', 'int'));
+$appInfo = $appCompany->getAppInfo();
+$cmdparams = array_key_exists('cmdparams', $appInfo) ? $appInfo['cmdparams'] : '';
+$appEnvironment = $appCompany->getAppEnvironment();
+foreach ($appEnvironment as $envName => $envValue) {
+    if ($envName == strtoupper($envName)) {
+        if (strtolower(\Ease\Functions::cfg('APP_DEBUG')) == 'true') {
+            $appCompany->addStatusMessage(sprintf(_('Setting Environment %s to %s'), $envName, $envValue), 'debug');
+        }
+        putenv($envName . '=' . $envValue);
+    }
+    $cmdparams = str_replace('{' . $envName . '}', $envValue, $cmdparams);
 }
 
-foreach ($appsForCompany as $servData) {
-    if (!is_null($interval) && ($interval != $servData['interv'])) {
-        continue;
-    }
+$exec = $appInfo['executable'];
+$appCompany->addStatusMessage('begin' . $exec . ' ' . $cmdparams . '@' . $appInfo['nazev']);
 
-    $app = new Application(intval($servData['app_id']));
-    LogToSQL::singleton()->setApplication($app->getMyKey());
+echo new \Ease\Html\H2Tag(str_replace(' ', '&nbsp;', $exec . ' ' . $cmdparams), ['style' => 'color: green']);
 
-    $cmdparams = $app->getDataValue('cmdparams');
-    foreach ($customConfig->getColumnsFromSQL(['name', 'value'], ['company_id' => $company['company_id'], 'app_id' => $app->getMyKey()]) as $cfgRaw) {
-        $companer->addStatusMessage(sprintf(_('Setting Environment %s to %s'), $cfgRaw['name'], $cfgRaw['value']), 'debug');
-        putenv($cfgRaw['name'] . '=' . $cfgRaw['value']);
-        $cmdparams = str_replace('{' . $cfgRaw['name'] . '}', $cfgRaw['value'], $cmdparams);
-    }
-
-    $exec = $app->getDataValue('executable');
-    $companer->addStatusMessage('begin' . $exec . ' ' . $cmdparams . '@' . $company['nazev']);
-
-    foreach (explode("\n", shell_exec($exec . ' ' . $cmdparams)) as $row) {
-        $companer->addStatusMessage($row, 'debug');
-    }
-
-    $companer->addStatusMessage('end' . $exec . '@' . $company['nazev']);
-}
-
-
-
-
-
-
-
-$process = new Process(['ls', '-lsa']);
+$process = new Process(array_merge([$exec, explode(' ', $cmdparams)]), null, $appEnvironment, null, 32767);
 $process->run(function ($type, $buffer) {
+    $logger = new \Ease\Sand();
+    $logger->setObjectName('Runner');
     if (Process::ERR === $type) {
-        echo nl2br($buffer);
+        echo new \Ease\Html\DivTag(str_replace(' ', '&nbsp;', nl2br($buffer)), ['style' => 'color: red']);
+        $logger->addStatusMessage($buffer, 'success');
     } else {
-        echo nl2br($buffer);
+        $logger->addStatusMessage($buffer, 'error');
+        echo nl2br(str_replace(' ', '&nbsp;', $buffer));
     }
 });
+$appCompany->addStatusMessage('end' . $exec . '@' . $appInfo['nazev']);
 
-WebPage::singleton()->addJavascript("$('body').css('font-family', 'Courier');");
+\Ease\WebPage::singleton()->addJavascript("$('body').css('font-family', 'Courier');");
 
 $oPage->draw();

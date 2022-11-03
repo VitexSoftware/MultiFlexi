@@ -4,7 +4,7 @@
  * Multi Flexi  - AppToCompany class
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2020 Vitex Software
+ * @copyright  2020-2022 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi;
@@ -45,6 +45,50 @@ class AppToCompany extends Engine {
         return parent::deleteFromSQL($data);
     }
 
+    /**
+     * 
+     * @return array
+     */
+    public function getAppEnvironment() {
+        $connectionData = $this->getAppInfo();
+        $customConfig = new Configuration();
+
+        $conConfig = [
+            'ABRAFLEXI_URL' => $connectionData['url'],
+            'ABRAFLEXI_LOGIN' => $connectionData['user'],
+            'ABRAFLEXI_PASSWORD' => $connectionData['password'],
+            'ABRAFLEXI_COMPANY' => $connectionData['company'],
+            'EASE_MAILTO' => $connectionData['email'],
+            'EASE_LOGGER' => empty($connectionData['email']) ? 'syslog' : 'syslog|email',
+        ];
+
+
+        foreach ($customConfig->getAppConfig($connectionData['company_id'], $connectionData['app_id']) as $cfg) {
+            $appConfig[$cfg['name']] = $cfg['value'];
+        }
+
+        return array_merge($conConfig, $appConfig);
+    }
+
+    /**
+     * 
+     * @return array
+     */
+    public function getAppInfo() {
+        return $this->listingQuery()
+                        ->select('apps.*')
+                        ->select('company.*')
+                        ->select('abraflexis.*')
+                        ->where([$this->getMyTable() . '.' . $this->getKeyColumn() => $this->getMyKey()])
+                        ->leftJoin('apps ON apps.id = appcompany.app_id')
+                        ->leftJoin('company ON company.id = appcompany.company_id')
+                        ->leftJoin('abraflexis ON abraflexis.id = company.abraflexi')
+                        ->fetch();
+    }
+
+    /**
+     * 
+     */
     public function setEnvironment() {
         $cmp = new Company((int) $this->getDataValue('company_id'));
         $cmp->setEnvironment();

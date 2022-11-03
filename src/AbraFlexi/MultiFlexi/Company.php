@@ -6,7 +6,7 @@ namespace AbraFlexi\MultiFlexi;
  * Multi Flexi - Company Management Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2020 Vitex Software
+ * @copyright  2018-2022 Vitex Software
  */
 class Company extends \AbraFlexi\Company {
 
@@ -26,6 +26,7 @@ class Company extends \AbraFlexi\Company {
             $this->setCompany($this->getDataValue('company'));
         }
     }
+
 
     /**
      * 
@@ -337,6 +338,9 @@ class Company extends \AbraFlexi\Company {
         return $companyInfo;
     }
 
+    /**
+     * 
+     */
     public function setEnvironment() {
         $envNames = [
             'ABRAFLEXI_URL' => $this->getDataValue('url'),
@@ -358,10 +362,17 @@ class Company extends \AbraFlexi\Company {
         return $this->keyword.'.php?id='.$this->getMyKey();
     }
     
+    /**
+     * 
+     */
     public function __destruct(){
         unset($this->pdo);
     }
     
+    /**
+     * 
+     * @return type
+     */
     public function __sleep() {
         return ['data','objectName','evidence'];
     }
