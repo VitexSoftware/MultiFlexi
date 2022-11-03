@@ -38,7 +38,7 @@ class ServicesForCompanyForm extends Form {
         $apps = (new Application())->listingQuery()->where('enabled', 1)->fetchAll();
         $glue = new AppToCompany();
 
-        $assigned = $glue->getColumnsFromSQL(['app_id', 'interv'], ['company_id' => $companyID], 'id', 'app_id');
+        $assigned = $glue->getColumnsFromSQL(['app_id', 'interv', 'id'], ['company_id' => $companyID], 'id', 'app_id');
         parent::__construct($tagProperties);
 
         foreach ($apps as $appData) {
@@ -50,12 +50,11 @@ class ServicesForCompanyForm extends Form {
             $appRow->addColumn(2, new ATag('app.php?id=' . $code, new ImgTag($appData['image'], $appData['nazev'], ['class' => 'img-fluid'])));
 
             $intervalChooser = new IntervalChooser($code . '_interval', array_key_exists($code, $assigned) ? $assigned[$code]['interv'] : 'n', ['id' => $code . '_interval', 'data-company' => $companyID, 'checked' => 'true', 'data-app' => $code]);
-            $launchButton = new \Ease\Html\DivTag(new LaunchButton($companyID,$code));
-            
+            $launchButton = new \Ease\Html\DivTag(new LaunchButton($assigned[$code]['id']));
+
             $appRow->addColumn(4, new FormGroup('<strong>' . $appData['nazev'] . '</strong> ', $intervalChooser))->addItem($launchButton);
 
             $appRow->addColumn(6, [new ConfiguredFieldBadges($companyID, $code)]);
-            
 
             $this->addItem($appRow);
         }

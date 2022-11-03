@@ -73,11 +73,23 @@ class Configuration extends \Ease\SQL\Engine {
      * @param type $appId
      */
     public function setEnvironment($companyId, $appId) {
-
-        foreach ($customConfig->getColumnsFromSQL(['name', 'value'], ['company_id' => $companyId, 'app_id' => $appId]) as $cfgRaw) {
+        foreach ($this->getAppConfig($companyId, $appId) as $cfgRaw) {
             $companer->addStatusMessage(sprintf(_('Setting Environment %s to %s'), $cfgRaw['name'], $cfgRaw['value']), 'debug');
             putenv($cfgRaw['name'] . '=' . $cfgRaw['value']);
         }
     }
 
+    /**
+     * App Configuration values
+     * 
+     * @param int $companyId
+     * @param int $appId
+     * 
+     * @return array
+     */
+    public function getAppConfig($companyId, $appId) {
+        return $this->getColumnsFromSQL(['name', 'value'], ['company_id' => $companyId, 'app_id' => $appId]);
+    }
+    
+    
 }

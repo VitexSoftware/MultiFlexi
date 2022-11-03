@@ -23,7 +23,9 @@ $oPage->onlyForLogged();
 
 $oPage->addItem(new PageTop(_('Application')));
 
-$apps = new Application($oPage->getRequestValue('id', 'int'));
+$appCompany = new \AbraFlexi\MultiFlexi\AppToCompany($oPage->getRequestValue('id', 'int'));
+$appInfo = $appCompany->getAppInfo();
+$apps = new Application($appInfo['app_id']);
 $instanceName = $apps->getDataValue('nazev');
 
 if ($oPage->isPosted()) {
@@ -41,7 +43,7 @@ $instanceRow->addColumn(8, new AppInfo($apps, \Ease\WebPage::getRequestValue('co
 
 $instanceRow->addColumn(4, new \Ease\Html\ImgTag(empty($apps->getDataValue('image')) ? 'images/apps.svg' : $apps->getDataValue('image'), 'Logo', ['class' => 'img-fluid']));
 
-$oPage->container->addItem(new Panel($instanceName, 'info', $instanceRow, new \Ease\Html\DivTag(new \Ease\Html\IframeTag('run.php?company='.\Ease\WebPage::getRequestValue('company').'&id=' . $apps->getMyKey(), ['id' => 'shell']), ['class' => 'iframe-container'])));
+$oPage->container->addItem(new Panel($instanceName, 'info', $instanceRow, new \Ease\Html\DivTag(new \Ease\Html\IframeTag('run.php?id=' . \Ease\WebPage::getRequestValue('id'), ['id' => 'shell']), ['class' => 'iframe-container'])));
 
 $oPage->addItem(new PageBottom());
 
