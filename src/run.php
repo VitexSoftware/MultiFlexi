@@ -33,20 +33,21 @@ $appCompany->addStatusMessage('begin' . $exec . ' ' . $cmdparams . '@' . $appInf
 
 echo new \Ease\Html\H2Tag(str_replace(' ', '&nbsp;', $exec . ' ' . $cmdparams), ['style' => 'color: green']);
 
-$process = new Process(array_merge([$exec, explode(' ', $cmdparams)]), null, $appEnvironment, null, 32767);
+$process = new Process(array_merge([$exec], explode(' ', $cmdparams)), null, $appEnvironment, null, 32767);
 $process->run(function ($type, $buffer) {
     $logger = new \Ease\Sand();
     $logger->setObjectName('Runner');
     if (Process::ERR === $type) {
-        echo new \Ease\Html\DivTag(str_replace(' ', '&nbsp;', nl2br($buffer)), ['style' => 'color: red']);
-        $logger->addStatusMessage($buffer, 'success');
-    } else {
+        $outline = (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert($buffer);
         $logger->addStatusMessage($buffer, 'error');
-        echo nl2br(str_replace(' ', '&nbsp;', $buffer));
+    } else {
+        $logger->addStatusMessage($buffer, 'success');
+        $outline = (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert($buffer);
     }
+    echo new \Ease\Html\DivTag(nl2br($outline));
 });
 $appCompany->addStatusMessage('end' . $exec . '@' . $appInfo['nazev']);
 
-\Ease\WebPage::singleton()->addJavascript("$('body').css('font-family', 'Courier');");
+\Ease\WebPage::singleton()->addJavascript("$('body').css('font-family', 'Courier').css('background-color','black');");
 
 $oPage->draw();
