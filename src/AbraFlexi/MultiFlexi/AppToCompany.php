@@ -62,7 +62,7 @@ class AppToCompany extends Engine {
             'EASE_LOGGER' => empty($connectionData['email']) ? 'syslog' : 'syslog|email',
         ];
 
-
+        $appConfig = [];
         foreach ($customConfig->getAppConfig($connectionData['company_id'], $connectionData['app_id']) as $cfg) {
             $appConfig[$cfg['name']] = $cfg['value'];
         }
@@ -77,6 +77,7 @@ class AppToCompany extends Engine {
     public function getAppInfo() {
         return $this->listingQuery()
                         ->select('apps.*')
+                        ->select('apps.nazev as app_name')
                         ->select('company.*')
                         ->select('abraflexis.*')
                         ->where([$this->getMyTable() . '.' . $this->getKeyColumn() => $this->getMyKey()])
@@ -108,4 +109,9 @@ class AppToCompany extends Engine {
         $cmp->addStatusMessage('setu end' . $exec . '@' . $cmp->getDataValue('nazev'));
     }
 
+    public function getAppsForCompany($companyID) {
+        return $this->getColumnsFromSQL(['app_id', 'interv', 'id'], ['company_id' => $companyID], 'id', 'app_id');
+    }
+    
+    
 }

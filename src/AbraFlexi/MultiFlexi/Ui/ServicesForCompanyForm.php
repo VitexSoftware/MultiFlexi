@@ -38,7 +38,7 @@ class ServicesForCompanyForm extends Form {
         $apps = (new Application())->listingQuery()->where('enabled', 1)->fetchAll();
         $glue = new AppToCompany();
 
-        $assigned = $glue->getColumnsFromSQL(['app_id', 'interv', 'id'], ['company_id' => $companyID], 'id', 'app_id');
+        $assigned = $glue->getAppsForCompany($companyID);
         parent::__construct($tagProperties);
 
         foreach ($apps as $appData) {
@@ -50,7 +50,13 @@ class ServicesForCompanyForm extends Form {
             $appRow->addColumn(2, new ATag('app.php?id=' . $code, new ImgTag($appData['image'], $appData['nazev'], ['class' => 'img-fluid'])));
 
             $intervalChooser = new IntervalChooser($code . '_interval', array_key_exists($code, $assigned) ? $assigned[$code]['interv'] : 'n', ['id' => $code . '_interval', 'data-company' => $companyID, 'checked' => 'true', 'data-app' => $code]);
-            $launchButton = new \Ease\Html\DivTag(new LaunchButton($assigned[$code]['id']));
+
+            if (array_key_exists($code, $assigned)) {
+                $launchButton = new \Ease\Html\DivTag(new LaunchButton($assigned[$code]['id']));
+            } else {
+//                $launchButton = new \Ease\TWB4\LinkButton('id=' . $code . '&company=' . $companyID, sprintf(_('Assign to %s'), $_SESSION['company']->getRecordName()), 'success');
+                $launchButton = null;
+            }
 
             $appRow->addColumn(4, new FormGroup('<strong>' . $appData['nazev'] . '</strong> ', $intervalChooser))->addItem($launchButton);
 

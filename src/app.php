@@ -46,7 +46,14 @@ if (strlen($instanceName)) {
 $instanceRow = new Row();
 $instanceRow->addColumn(8, new RegisterAppForm($apps));
 
-$instanceRow->addColumn(4, new \Ease\Html\ImgTag(empty($apps->getDataValue('image')) ? 'images/apps.svg' : $apps->getDataValue('image'), 'Logo', ['class' => 'img-fluid']));
+$panel[] = new \Ease\Html\ImgTag(empty($apps->getDataValue('image')) ? 'images/apps.svg' : $apps->getDataValue('image'), 'Logo', ['class' => 'img-fluid']);
+
+$panel[] = new \Ease\Html\HrTag();
+
+if (array_key_exists('company', $_SESSION) && is_object($_SESSION['company']) && $_SESSION['company']->getMyKey()) {
+    $panel[] = new \Ease\TWB4\LinkButton('id=' . $apps->getMyKey() . '&company=' . $_SESSION['company']->getMyKey(), sprintf(_('Assign to %s'), $_SESSION['company']->getRecordName()), 'success');
+}
+$instanceRow->addColumn(4, $panel);
 
 $oPage->container->addItem(new Panel($instanceName, 'info',
                 $instanceRow,
