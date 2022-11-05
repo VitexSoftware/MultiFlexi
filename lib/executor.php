@@ -44,7 +44,7 @@ if ($interval) {
                 'ABRAFLEXI_LOGIN' => $company['user'],
                 'ABRAFLEXI_PASSWORD' => $company['password'],
                 'ABRAFLEXI_COMPANY' => $company['company'],
-                'EASE_MAILTO' => $company['email'],
+                'EASE_EMAILTO' => $company['email'],
                 'EASE_LOGGER' => empty($company['email']) ? 'syslog' : 'syslog|email',
             ];
 
