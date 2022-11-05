@@ -58,7 +58,7 @@ class AppToCompany extends Engine {
             'ABRAFLEXI_LOGIN' => $connectionData['user'],
             'ABRAFLEXI_PASSWORD' => $connectionData['password'],
             'ABRAFLEXI_COMPANY' => $connectionData['company'],
-            'EASE_MAILTO' => $connectionData['email'],
+            'EASE_EMAILTO' => $connectionData['email'],
             'EASE_LOGGER' => empty($connectionData['email']) ? 'syslog' : 'syslog|email',
         ];
 
@@ -95,7 +95,7 @@ class AppToCompany extends Engine {
         $cmp->setEnvironment();
 
         $envNames = [
-            'EASE_MAILTO' => $this->getDataValue('email'),
+            'EASE_EMAILTO' => $this->getDataValue('email'),
             'EASE_LOGGER' => empty($this->getDataValue('email')) ? 'syslog' : 'syslog|email'
         ];
         $this->exportEnv($envNames);

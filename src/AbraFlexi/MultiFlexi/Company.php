@@ -347,7 +347,7 @@ class Company extends \AbraFlexi\Company {
             'ABRAFLEXI_LOGIN' => $this->getDataValue('user'),
             'ABRAFLEXI_PASSWORD' => $this->getDataValue('password'),
             'ABRAFLEXI_COMPANY' => $this->getDataValue('company'),
-            'EASE_MAILTO' => $this->getDataValue('email'),
+            'EASE_EMAILTO' => $this->getDataValue('email'),
             'EASE_LOGGER' => empty($this->getDataValue('email')) ? 'syslog' : 'syslog|email'
         ];
         $this->exportEnv($envNames);
