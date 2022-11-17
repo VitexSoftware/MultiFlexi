@@ -32,4 +32,4 @@ override_dh_install:
 	mkdir -p                                                             debian/multiflexi-pgsql/usr/lib/multiflexi
 	cp debian/conf/.env.template                                         debian/multiflexi-pgsql/usr/lib/multiflexi
 	sed -i '/DB_DATABASE/c\DB_DATABASE=_DBC_DBNAME_'                     debian/multiflexi-*sql/usr/lib/multiflexi/.env.template
-	sed -i "s/'';/'${BUILD_NUMBER}';/"  src/AbraFlexi/MultiFlexi/Ui/PageBottom.php
+	sed -i "s/'';/'$(BUILD_NUMBER)';/"  src/AbraFlexi/MultiFlexi/Ui/PageBottom.php
