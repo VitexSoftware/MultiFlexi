@@ -28,6 +28,12 @@ class User extends \Ease\User {
     ];
 
     /**
+     * 
+     * @var array
+     */
+    public $filter = [];
+
+    /**
      * Tabulka uživatelů.
      *
      * @var string
@@ -75,13 +81,13 @@ class User extends \Ease\User {
      * @param int|string $userID
      */
     public function __construct($userID = null) {
-        if($userID){
-            $this->setKeyColumn( is_numeric($userID) ? 'id' : 'login');
+        if ($userID) {
+            $this->setKeyColumn(is_numeric($userID) ? 'id' : 'login');
             $this->loadFromSQL($userID);
             parent::__construct($this->getDataValue('id'));
         }
     }
-  
+
     /**
      * Vrací odkaz na ikonu.
      *
@@ -221,7 +227,7 @@ class User extends \Ease\User {
         $this->dataReset();
         return parent::logout();
     }
-    
+
     /**
      * Zašifruje heslo.
      *
@@ -249,6 +255,20 @@ class User extends \Ease\User {
      */
     public function passwordChange($newPassword) {
         return $this->dbsync([$this->passwordColumn => $this->encryptPassword($newPassword), $this->getKeyColumn() => $this->getUserID()]);
+    }
+
+    /**
+     * @link https://datatables.net/examples/advanced_init/column_render.html 
+     * 
+     * @return string Column rendering
+     */
+    public function columnDefs() {
+        return '
+"columnDefs": [
+           // { "visible": false,  "targets": [ 0 ] }
+        ]            
+,
+';
     }
 
     /**

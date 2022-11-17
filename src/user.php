@@ -9,13 +9,21 @@
 
 namespace AbraFlexi\MultiFlexi\Ui;
 
+require_once './init.php';
+
 $oPage->onlyForLogged();
 
 $user_id = $oPage->getRequestValue('id', 'int');
 
 //$user = Engine::doThings($oPage);
 //if (is_null($user)) {
-$user = new User($user_id);
+$user = new \AbraFlexi\MultiFlexi\User($user_id);
+
+if ($oPage->isPosted()) {
+    unset($_REQUEST['class']);
+    $user->addStatusMessage(_('Update'), $user->takeData($_REQUEST) && $user->dbsync() ? 'success' : 'error' );
+}
+
 //}
 
 if ($oPage->getGetValue('delete', 'bool') == 'true') {
@@ -25,7 +33,7 @@ if ($oPage->getGetValue('delete', 'bool') == 'true') {
     }
 }
 
-$oPage->addItem(new ui\PageTop(_('User')));
+$oPage->addItem(new PageTop(_('User')));
 
 switch ($oPage->getRequestValue('action')) {
     case 'delete':
@@ -51,6 +59,6 @@ switch ($oPage->getRequestValue('action')) {
         break;
 }
 
-$oPage->addItem(new ui\PageBottom());
+$oPage->addItem(new PageBottom());
 
 $oPage->draw();
