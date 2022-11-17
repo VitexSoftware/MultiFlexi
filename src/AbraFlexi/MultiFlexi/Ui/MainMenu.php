@@ -105,6 +105,7 @@ class MainMenu extends \Ease\Html\DivTag {
                 $this->appsMenuEnabled($nav, $apps);
             }
 
+            $this->usersMenuEnabled($nav);
             $nav->addMenuItem(new \Ease\Html\ATag('logs.php', '<img height=30 src=images/log.svg> ' . _('Logs')), 'right');
             $nav->addMenuItem(new \Ease\Html\ATag('logout.php', '<img height=30 src=images/application-exit.svg> ' . _('Sign Off')), 'right');
         }
@@ -188,12 +189,12 @@ class MainMenu extends \Ease\Html\DivTag {
      * @param type $nav
      */
     public function usersMenuEnabled($nav) {
-        $nav->addDropDownMenu('<img width=30 src=images/users_150.png> ' . _('Admin'),
+        $nav->addDropDownMenu('<img width=30 src=images/system-users.svg> ' . _('Admin'),
                 array_merge([
             'createaccount.php' => _('New Admin'),
-            'users.php' => new \Ease\TWB4\Widgets\FaIcon('list') . '&nbsp;' . _('Admin Overview'),
+//            'users.php' => new \Ease\TWB4\Widgets\FaIcon('list') . '&nbsp;' . _('Admin Overview'),
             '' => '',
-                        ], $this->getMenuList(\Ease\Shared::user(), 'user'))
+                        ], $this->getMenuList(\Ease\Shared::user(), 'login'))
         );
     }
 

@@ -36,7 +36,7 @@ if (empty($emailTo)) {
         $controlUser->passwordChange($newPassword);
 
         $email = $oPage->addItem(new \Ease\HtmlMailer($userEmail,
-                        constant('EASE_APPNAME') . ' -' . sprintf(_('New password for %s'),
+                        \Ease\Shared::appName() . ' -' . sprintf(_('New password for %s'),
                                 $_SERVER['SERVER_NAME'])));
 
         $email->setMailHeaders(['From' => constant('EMAIL_FROM')]);

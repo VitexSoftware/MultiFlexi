@@ -15,10 +15,10 @@ $oPage->onlyForLogged();
 
 //Engine::doThings($oPage);
 
-$oPage->addItem(new ui\PageTop(_('Users')));
+$oPage->addItem(new PageTop(_('Users')));
 
-$oPage->addItem(new \Ease\TWB4\Container(new DBDataTable(new User())));
+$oPage->addItem(new \Ease\TWB4\Container(new DBDataTable(new \AbraFlexi\MultiFlexi\User())));
 
-$oPage->addItem(new ui\PageBottom());
+$oPage->addItem(new PageBottom());
 
 $oPage->draw();

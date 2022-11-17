@@ -24,7 +24,7 @@ class WebPage extends \Ease\TWB4\WebPage {
 
     /**
      * Current Customer
-     * @var \AbraFlexi\MultiSetup\Customer
+     * @var \AbraFlexi\MultiFlexi\Customer
      */
     public $customer = null;
 
@@ -39,7 +39,7 @@ class WebPage extends \Ease\TWB4\WebPage {
         $this->addCSS('
 ');
     }
-    
+
     public function __sleep() {
         return ['customer'];
     }
