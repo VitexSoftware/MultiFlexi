@@ -21,14 +21,19 @@ $oPage->addItem(new PageTop(_('Company')));
 $companies = new Company(WebPage::getRequestValue('id', 'int'));
 $_SESSION['company'] = &$companies;
 $instanceName = $companies->getDataValue('nazev');
+$companyEnver = new \AbraFlexi\MultiFlexi\CompanyEnv($companies->getMyKey());
 
 if ($oPage->isPosted()) {
-    if ($companies->takeData($_POST) && !is_null($companies->saveToSQL())) {
-        $companies->addStatusMessage(_('Company Saved'), 'success');
-//        $companies->prepareRemoteCompany(); TODO: Run applications setup on new company
-        $oPage->redirect('?id=' . $companies->getMyKey());
+    if (array_key_exists('env', $_POST)) {
+        $companyEnver->addEnv($_POST['env']['newkey'], $_POST['env']['newvalue']);
     } else {
-        $companies->addStatusMessage(_('Error saving Company'), 'error');
+        if ($companies->takeData($_POST) && !is_null($companies->saveToSQL())) {
+            $companies->addStatusMessage(_('Company Saved'), 'success');
+//        $companies->prepareRemoteCompany(); TODO: Run applications setup on new company
+            $oPage->redirect('?id=' . $companies->getMyKey());
+        } else {
+            $companies->addStatusMessage(_('Error saving Company'), 'error');
+        }
     }
 } else {
     if (!empty(WebPage::getGetValue('company'))) {
@@ -53,10 +58,15 @@ $instanceRow->addColumn(8, new RegisterCompanyForm($companies, null, ['action' =
 
 //$instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($companies));
 
+
 if (strlen($companies->getDataValue('logo'))) {
-    $instanceRow->addColumn(4, new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']));
+    $rightColumn[] = new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']);
 }
 
+$rightColumn['envs'] = new EnvsForm($companyEnver->getData());
+$rightColumn['envs']->addItem(new \Ease\Html\InputHiddenTag('id', $companies->getMyKey()));
+
+$instanceRow->addColumn(4, $rightColumn);
 
 $bottomLine = new Row();
 $bottomLine->addColumn(8, $instanceLink);
