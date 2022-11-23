@@ -67,7 +67,8 @@ class AppToCompany extends Engine {
             $appConfig[$cfg['name']] = $cfg['value'];
         }
 
-        return array_merge($conConfig, $appConfig);
+        $companyEnv = new CompanyEnv($connectionData['company_id']);
+        return array_merge($conConfig, $companyEnv->getData(), $appConfig);
     }
 
     /**
@@ -112,6 +113,5 @@ class AppToCompany extends Engine {
     public function getAppsForCompany($companyID) {
         return $this->getColumnsFromSQL(['app_id', 'interv', 'id'], ['company_id' => $companyID], 'id', 'app_id');
     }
-    
-    
+
 }
