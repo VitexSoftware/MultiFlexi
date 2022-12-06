@@ -1,6 +1,6 @@
 #!groovy
 
-String[] distributions = ['debian:buster', 'debian:bullseye', 'ubuntu:focal', 'ubuntu:jammy']
+String[] distributions = ['debian:buster', 'debian:bullseye', 'ubuntu:focal', 'ubuntu:jammy', 'ubuntu:kinetic']
 
 String vendor = 'vitexsoftware'
 String distribution = ''
@@ -9,8 +9,8 @@ String distroCodename = ''
 String ver = ''
 
 properties([
-    copyArtifactPermission('*')
-])
+        copyArtifactPermission('*')
+    ])
 node() {
     ansiColor('xterm') {
         stage('SCM Checkout') {
