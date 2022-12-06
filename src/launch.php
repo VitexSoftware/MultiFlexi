@@ -27,18 +27,18 @@ $apps = new Application($appInfo['app_id']);
 $instanceName = $appInfo['app_name'];
 
 $instanceRow = new Row();
-$instanceRow->addColumn(2, new \Ease\Html\ImgTag(empty($apps->getDataValue('image')) ? 'images/apps.svg' : $apps->getDataValue('image'), 'Logo', ['class' => 'img-fluid', 'style' => 'height: 64px']));
+$instanceRow->addColumn(2, new \Ease\Html\ImgTag(empty($appInfo['image']) ? 'images/apps.svg' : $appInfo['image'], 'Logo', ['class' => 'img-fluid', 'style' => 'height: 64px']));
 $instanceRow->addColumn(8, new \Ease\Html\H1Tag($instanceName));
 
-$envTable = new \Ease\Html\TableTag(null,['class'=>'table']);
+$envTable = new \Ease\Html\TableTag(null, ['class' => 'table']);
 foreach ($appCompany->getAppEnvironment() as $key => $value) {
-    if( stristr($key,'pass')){
-        $value = preg_replace('(.)','*',$value);
+    if (stristr($key, 'pass')) {
+        $value = preg_replace('(.)', '*', $value);
     }
     $envTable->addRowColumns([$key, $value]);
 }
 
-$oPage->container->addItem(new Panel(_('App Run'), 'info', [$instanceRow, $envTable], new \Ease\Html\DivTag(new \Ease\Html\IframeTag('run.php?id=' . \Ease\WebPage::getRequestValue('id'), ['id' => 'shell','title'=>$instanceName]), ['class' => 'iframe-container'])));
+$oPage->container->addItem(new Panel(_('App Run'), 'info', [$instanceRow, $envTable], new \Ease\Html\DivTag(new \Ease\Html\IframeTag('run.php?id=' . \Ease\WebPage::getRequestValue('id'), ['id' => 'shell', 'title' => $instanceName]), ['class' => 'iframe-container'])));
 
 $oPage->addItem(new PageBottom());
 

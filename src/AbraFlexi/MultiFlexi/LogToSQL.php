@@ -113,7 +113,7 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable {
                 $venue = $caller;
                 break;
         }
-        return substr($venue,254);
+        return substr($venue,0,254);
     }
     
 }

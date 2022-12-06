@@ -40,6 +40,10 @@ class Application extends Engine {
         $this->company = new Company($this->getDataValue('company'));
     }
 
+    /**
+     *
+     * @return array
+     */
     public function getCompany() {
         return $this->company->getConnectionOptions();
     }

@@ -71,9 +71,23 @@ if ($interval) {
                 $exec = $app->getDataValue('executable');
                 $companer->addStatusMessage('command begin: ' . $exec . ' ' . $cmdparams . '@' . $company['nazev']);
 
-                foreach (explode("\n", shell_exec($exec . ' ' . $cmdparams)) as $row) {
-                    $companer->addStatusMessage($row, 'debug');
-                }
+                $jobber = new Job();
+                $runId = $jobber->runBegin($app_id, $companyId);
+                $process = new \Symfony\Component\Process\Process(array_merge([$exec], explode(' ', $cmdparams)), null, $appEnvironment, null, 32767);
+                $process->run(function ($type, $buffer) {
+                    $logger = new \Ease\Sand();
+                    $logger->setObjectName('Runner');
+                    if (Process::ERR === $type) {
+                        $outline = (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert($buffer);
+                        $logger->addStatusMessage($buffer, 'error');
+                    } else {
+                        $logger->addStatusMessage($buffer, 'success');
+                        $outline = (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert($buffer);
+                    }
+                    echo new \Ease\Html\DivTag(nl2br($outline));
+                });
+                $appCompany->addStatusMessage('end' . $exec . '@' . $appInfo['nazev']);
+                $jobber->runEnd($runId, $process->getExitCode());
 
                 $companer->addStatusMessage('command end: ' . $exec . '@' . $company['nazev']);
             }
