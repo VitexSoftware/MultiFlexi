@@ -33,6 +33,8 @@ $appCompany->addStatusMessage('begin' . $exec . ' ' . $cmdparams . '@' . $appInf
 
 echo new \Ease\Html\H2Tag(str_replace(' ', '&nbsp;', $exec . ' ' . $cmdparams), ['style' => 'color: green']);
 
+$jobber = new Job();
+$runId = $jobber->runBegin($appInfo['app_id'], $appInfo['company_id']);
 $process = new Process(array_merge([$exec], explode(' ', $cmdparams)), null, $appEnvironment, null, 32767);
 $process->run(function ($type, $buffer) {
     $logger = new \Ease\Sand();
@@ -47,6 +49,7 @@ $process->run(function ($type, $buffer) {
     echo new \Ease\Html\DivTag(nl2br($outline));
 });
 $appCompany->addStatusMessage('end' . $exec . '@' . $appInfo['nazev']);
+$jobber->runEnd($runId, $process->getExitCode());
 
 \Ease\WebPage::singleton()->addJavascript("$('body').css('font-family', 'Courier').css('background-color','black');");
 

@@ -33,16 +33,16 @@ include_once '/usr/share/php/EaseFluentPDO/Orm.php';
 include_once '/usr/share/php/EaseFluentPDO/Engine.php';
 
 
-if (file_exists('/etc/multiflexi/multiflexi.env')) {
-    \Ease\Shared::instanced()->loadConfig('/etc/multiflexi/multiflexi.env', true);
+if (file_exists('/etc/debs2sql/.env')) {
+    \Ease\Shared::instanced()->loadConfig('/etc/debs2sql/.env', true);
 }
 
-$prefix = "/usr/lib/multiflexi/db/";
+$prefix = "/usr/lib/debs2sql/db/";
 
 $sqlOptions = [];
 
 if (strstr(\Ease\Functions::cfg('DB_CONNECTION'), 'sqlite')) {
-    $sqlOptions["database"] = "/var/lib/dbconfig-common/sqlite3/multiflexi/" . basename(\Ease\Functions::cfg("DB_DATABASE"));
+    $sqlOptions["database"] = "/var/lib/dbconfig-common/sqlite3/debs2sql/" . basename(\Ease\Functions::cfg("DB_DATABASE"));
 }
 $engine = new \Ease\SQL\Engine(null, $sqlOptions);
 $cfg = [
