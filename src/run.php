@@ -37,8 +37,7 @@ $jobber = new Job();
 $runId = $jobber->runBegin($appInfo['app_id'], $appInfo['company_id']);
 $process = new Process(array_merge([$exec], explode(' ', $cmdparams)), null, $appEnvironment, null, 32767);
 $process->run(function ($type, $buffer) {
-    $logger = new \Ease\Sand();
-    $logger->setObjectName('Runner');
+    $logger = new Runner();
     if (Process::ERR === $type) {
         $outline = (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert($buffer);
         $logger->addStatusMessage($buffer, 'error');

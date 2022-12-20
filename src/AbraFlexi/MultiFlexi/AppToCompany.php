@@ -97,7 +97,7 @@ class AppToCompany extends Engine {
 
         $envNames = [
             'EASE_EMAILTO' => $this->getDataValue('email'),
-            'EASE_LOGGER' => empty($this->getDataValue('email')) ? 'syslog' : 'syslog|email'
+            'EASE_LOGGER' => $this->getDataValue('email') ? 'console|email' : 'console'
         ];
         $this->exportEnv($envNames);
 
