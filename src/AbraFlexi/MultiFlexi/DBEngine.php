@@ -318,7 +318,11 @@ class DBEngine extends \Ease\SQL\Engine {
                 }
             }
 
-            foreach ($conditions as $condName => $condValue) {
+            if(array_key_exists('apps_id', $conditions)){
+                $query->where('apps_id', $conditions['apps_id']);
+            }
+
+                foreach ($conditions as $condName => $condValue) {
 
                 switch ($condName) {
                     case 'type':
