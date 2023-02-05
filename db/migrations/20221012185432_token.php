@@ -23,7 +23,7 @@ final class Token extends AbstractMigration {
                 ->addColumn('token', 'string', ['limit' => 64])
                 ->addColumn('start', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
                 ->addColumn('until', 'datetime', ['null' => true])
-                ->addColumn('user_id', 'integer', ['null' => false, 'length' => 11])
+                ->addColumn('user_id', 'biginteger', ['null' => false, 'signed'=>false])
                 ->addForeignKey('user_id', 'user', 'id', ['constraint' => 'user_must_exist'])
                 ->create();
     }

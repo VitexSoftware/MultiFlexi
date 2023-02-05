@@ -9,7 +9,7 @@ class Applications extends AbstractMigration {
     public function change() {
         $table = $this->table('apps');
         $table
-                ->addColumn('enabled', 'boolean', array('default' => false))
+                ->addColumn('enabled', 'boolean', ['default' => false])
                 ->addColumn('image', 'text', ['null' => true])
                 ->addColumn('nazev', 'string', ['null' => true, 'limit' => 32])
                 ->addColumn('popis', 'string', ['comment' => 'App Description'])
@@ -19,6 +19,10 @@ class Applications extends AbstractMigration {
                 ->addIndex(['nazev'], ['unique' => true])
                 ->addIndex(['executable'], ['unique' => true])
                 ->create();
+        
+        $table
+            ->changeColumn('id', 'biginteger', ['identity' => true, 'signed' => false])
+            ->save();        
     }
 
 }

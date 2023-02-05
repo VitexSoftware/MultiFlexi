@@ -8,8 +8,8 @@ class AppToCompany extends AbstractMigration {
      */
     public function change() {
         $table = $this->table('appcompany');
-        $table->addColumn('app_id', 'integer', array('null' => false))
-        ->addColumn('company_id', 'integer', array('null' => false))
+        $table->addColumn('app_id', 'biginteger', ['null' => false,'signed' => false])
+        ->addColumn('company_id', 'biginteger', ['null' => false,'signed' => false])
         ->addColumn('interval','string',['length'=>1])
         ->addIndex(['app_id', 'company_id'], ['unique' => true])
         ->addForeignKey('app_id', 'apps', ['id'], ['constraint' => 'a2p-app_must_exist'])
