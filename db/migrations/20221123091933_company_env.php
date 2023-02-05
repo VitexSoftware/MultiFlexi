@@ -21,7 +21,7 @@ final class CompanyEnv extends AbstractMigration
         $table = $this->table('companyenv');
         $table->addColumn('keyword', 'string', array('null' => false))
                 ->addColumn('value', 'string', array('null' => false))
-        ->addColumn('company_id', 'integer', array('null' => false))
+        ->addColumn('company_id', 'biginteger', ['null' => false,'signed'=>false])
         ->addIndex(['keyword', 'company_id'], ['unique' => true])
         ->addForeignKey('company_id', 'company', ['id'], ['constraint' => 'env-company_must_exist']);
         $table->save();

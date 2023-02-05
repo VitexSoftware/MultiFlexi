@@ -22,6 +22,10 @@ class User extends AbstractMigration {
                 ->addColumn('last_modifier_id', 'integer', ['null' => true, 'signed' => false])
                 ->addIndex(['login', 'email'], ['unique' => true])
                 ->create();
+        $table
+            ->changeColumn('id', 'biginteger', ['identity' => true, 'signed' => false])
+            ->save();        
+        
     }
 
 }
