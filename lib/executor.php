@@ -4,7 +4,7 @@
  * Multi Flexi - Scheduled actions executor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * @copyright  2020-2023 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi;
@@ -39,18 +39,18 @@ if ($interval) {
             $companer->addStatusMessage(sprintf(_('No applications enabled for %s'), $company['nazev']), 'warning');
         } else {
 
-            $envNames = [
+            $appEnvironment = [
                 'ABRAFLEXI_URL' => $company['url'],
                 'ABRAFLEXI_LOGIN' => $company['user'],
                 'ABRAFLEXI_PASSWORD' => $company['password'],
                 'ABRAFLEXI_COMPANY' => $company['company'],
+                'LC_ALL' => 'cs_CZ', //TODO: Configure somehow
                 'EASE_EMAILTO' => $company['email'],
-                'EASE_LOGGER' => empty($company['email']) ? 'syslog' : 'syslog|email',
+                'EASE_LOGGER' => empty($company['email']) ? 'console|syslog' : 'console|syslog|email',
             ];
 
-            foreach ($envNames as $envName => $sqlValue) {
+            foreach ($appEnvironment as $envName => $sqlValue) {
                 $companer->addStatusMessage(sprintf(_('Setting Environment: export %s=%s'), $envName, $sqlValue), 'debug');
-                putenv($envName . '=' . $sqlValue);
             }
 
             foreach ($appsForCompany as $servData) {
@@ -64,31 +64,27 @@ if ($interval) {
                 $cmdparams = $app->getDataValue('cmdparams');
                 foreach ($customConfig->getColumnsFromSQL(['name', 'value'], ['company_id' => $company['company_id'], 'app_id' => $app->getMyKey()]) as $cfgRaw) {
                     $companer->addStatusMessage(sprintf(_('Setting custom Environment: export %s=%s'), $cfgRaw['name'], $cfgRaw['value']), 'debug');
-                    putenv($cfgRaw['name'] . '=' . $cfgRaw['value']);
                     $cmdparams = str_replace('{' . $cfgRaw['name'] . '}', $cfgRaw['value'], $cmdparams);
+                    $appEnvironment[$cfgRaw['name']] = $cfgRaw['value'];
                 }
 
                 $exec = $app->getDataValue('executable');
                 $companer->addStatusMessage('command begin: ' . $exec . ' ' . $cmdparams . '@' . $company['nazev']);
 
                 $jobber = new Job();
-                $runId = $jobber->runBegin($app_id, $companyId);
+                $runId = $jobber->runBegin($app->getMyKey(), $company['company_id']);
                 $process = new \Symfony\Component\Process\Process(array_merge([$exec], explode(' ', $cmdparams)), null, $appEnvironment, null, 32767);
                 $process->run(function ($type, $buffer) {
                     $logger = new \Ease\Sand();
                     $logger->setObjectName('Runner');
-                    if (Process::ERR === $type) {
-                        $outline = (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert($buffer);
+                    if (\Symfony\Component\Process\Process::ERR === $type) {
                         $logger->addStatusMessage($buffer, 'error');
                     } else {
                         $logger->addStatusMessage($buffer, 'success');
-                        $outline = (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert($buffer);
                     }
-                    echo new \Ease\Html\DivTag(nl2br($outline));
                 });
-                $appCompany->addStatusMessage('end' . $exec . '@' . $appInfo['nazev']);
+                $app->addStatusMessage('end' . $exec . '@' . $app->getDataValue('name'));
                 $jobber->runEnd($runId, $process->getExitCode());
-
                 $companer->addStatusMessage('command end: ' . $exec . '@' . $company['nazev']);
             }
         }
