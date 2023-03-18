@@ -4,7 +4,7 @@
  * Multi Flexi - Command Runner.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2017-2022 Vitex Software
+ * @copyright  2017-2023 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi;
@@ -13,6 +13,8 @@ use AbraFlexi\MultiFlexi\Application;
 use Symfony\Component\Process\Process;
 
 require_once './init.php';
+
+$oPage->onlyForLogged();
 
 $appCompany = new AppToCompany($oPage->getRequestValue('id', 'int'));
 $appInfo = $appCompany->getAppInfo();
@@ -23,7 +25,6 @@ foreach ($appEnvironment as $envName => $envValue) {
         if (strtolower(\Ease\Functions::cfg('APP_DEBUG')) == 'true') {
             $appCompany->addStatusMessage(sprintf(_('Setting Environment %s to %s'), $envName, $envValue), 'debug');
         }
-        putenv($envName . '=' . $envValue);
     }
     $cmdparams = str_replace('{' . $envName . '}', $envValue, $cmdparams);
 }

@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Multi Flexi - Customer instance editor.
+ * Multi Flexi - Job Run.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2017-2020 Vitex Software
+ * @copyright  2017-2023 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi\Ui;

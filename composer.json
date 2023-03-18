@@ -14,10 +14,10 @@
         "symfony/process": "5.4.x-dev",
         "sensiolabs/ansi-to-html": "1.2.x-dev",
         "php-di/slim-bridge": "*",
-        "slim/psr7": "dev-master",
+        "slim/psr7": "*",
         "vitexsoftware/multiflexiapiserver": "*",
-        "dyorg/slim-token-authentication": "dev-master",
-        "tuupola/slim-basic-auth": "4.x-dev"
+        "dyorg/slim-token-authentication": "*",
+        "tuupola/slim-basic-auth": "*"
     },
     "license": "MIT",
     "authors": [

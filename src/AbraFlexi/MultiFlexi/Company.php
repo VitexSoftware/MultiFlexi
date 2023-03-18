@@ -350,7 +350,7 @@ class Company extends \AbraFlexi\Company {
             'EASE_EMAILTO' => $this->getDataValue('email'),
             'EASE_LOGGER' => empty($this->getDataValue('email')) ? 'syslog' : 'syslog|email'
         ];
-        $this->exportEnv($envNames);
+        // $this->exportEnv($envNames);
     }
 
     /**
