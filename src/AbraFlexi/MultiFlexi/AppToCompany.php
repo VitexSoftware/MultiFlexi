@@ -21,13 +21,39 @@ class AppToCompany extends Engine {
         parent::__construct($identifier, $options);
     }
 
+    /**
+     * Get id by App & Company
+     * 
+     * SELECT appcompany.id, appcompany.interv, appcompany.prepared, apps.nazev AS app, company.nazev AS company   FROM appcompany LEFT JOIN apps ON appcompany.app_id=apps.id LEFT JOIN company ON appcompany.company_id=company.id;
+     * 
+     * @param int $appId
+     * @param int $companyId
+     * 
+     * @return int
+     */
+    public function appCompanyID(int $appId, int $companyId) {
+        return intval($this->listingQuery()->where('company_id=' . $companyId . ' AND app_id=' . $appId)->select('id', true)->fetchColumn());
+    }
+
+    /**
+     * Set APP State
+     * 
+     * @param bool $state
+     * 
+     * @return bool
+     */
     public function setState(bool $state) {
         return $state ? $this->dbsync() : $this->deleteFromSQL();
     }
 
     public function performInit() {
-        $this->setEnvironment();
-        $app->runInit();
+        $app = new Application((int) $this->getDataValue('app_id'));
+//        $this->setEnvironment();
+        if (empty($app->getDataValue('setup')) == false) {
+            $this->setDataValue('prepared', 0);
+            $this->dbsync();
+        }
+//        $app->runInit();
     }
 
     /**
@@ -78,6 +104,7 @@ class AppToCompany extends Engine {
     public function getAppInfo() {
         return $this->listingQuery()
                         ->select('apps.*')
+                        ->select('apps.id as apps_id')
                         ->select('apps.nazev as app_name')
                         ->select('company.*')
                         ->select('abraflexis.*')
@@ -112,6 +139,17 @@ class AppToCompany extends Engine {
 
     public function getAppsForCompany($companyID) {
         return $this->getColumnsFromSQL(['app_id', 'interv', 'id'], ['company_id' => $companyID], 'id', 'app_id');
+    }
+
+    /**
+     * Set Provision state
+     * 
+     * @param int|null $status 0: Unprovisioned, 1: provisioned, 
+     * 
+     * @return boolean save status
+     */
+    public function setProvision($status) {
+        return $this->dbsync(['prepared' => $status]);
     }
 
 }

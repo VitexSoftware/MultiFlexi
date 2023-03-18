@@ -1,4 +1,4 @@
-multiflexi (1.2) UNRELEASED; urgency=medium
+multiflexi (1.3.0) UNRELEASED; urgency=medium
 
   [ CyberVitexus ]
   * Ability choose run interval between hour and year
@@ -20,7 +20,11 @@ multiflexi (1.2) UNRELEASED; urgency=medium
   [ Vitex ]
   * Update
 
- -- Vitex <vitex@exiv>  Sun, 11 Jul 2021 11:33:58 +0200
+  [ vitex ]
+  * executor rewrited
+  * provisioning added
+
+ -- vitex <info@vitexsoftware.cz>  Sat, 18 Mar 2023 11:23:01 +0100
 
 multiflexi (0.1) experimental; urgency=medium
 
