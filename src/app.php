@@ -50,11 +50,33 @@ $panel[] = new \Ease\Html\ImgTag(empty($apps->getDataValue('image')) ? 'images/a
 
 $panel[] = new \Ease\Html\HrTag();
 
-$panel[] = new LinkButton('logs.php?apps_id='.$apps->getMyKey(), _('Application Log'),'info');
+$panel[] = new LinkButton('logs.php?apps_id=' . $apps->getMyKey(), _('Application Log'), 'info');
 
 if (array_key_exists('company', $_SESSION) && is_object($_SESSION['company']) && $_SESSION['company']->getMyKey()) {
     $panel[] = new \Ease\TWB4\LinkButton('id=' . $apps->getMyKey() . '&company=' . $_SESSION['company']->getMyKey(), sprintf(_('Assign to %s'), $_SESSION['company']->getRecordName()), 'success');
 }
+
+
+$jobber = new \AbraFlexi\MultiFlexi\Job();
+$jobs = $jobber->listingQuery()->select(['job.id', 'job.company_id', 'job.begin', 'job.exitcode', 'user.login', 'job.launched_by', 'company.nazev'], true)->leftJoin('company ON company.id = job.company_id')
+                ->leftJoin('user ON user.id = job.launched_by')
+                ->where('app_id', $apps->getMyKey())->limit(10)->fetchAll();
+
+$jobList = new \Ease\TWB4\Table();
+$jobList->addRowHeaderColumns([_('Job ID'), _('Company'), _('Launch time'), _('Exit Code'), _('Launched by')]);
+
+foreach ($jobs as $job) {
+    $job['id'] = new \Ease\Html\ATag('job.php?id=' . $job['id'], $job['id']);
+    $job['company_id'] = new \Ease\Html\ATag('company.php?id=' . $job['company_id'], $job['nazev']);
+    unset($job['nazev']);
+    $job['launched_by'] = new \Ease\Html\ATag('user.php?id' . $job['launched_by'], $job['login']);
+    unset($job['login']);
+    $job['begin'] = [$job['begin'],'<br>', new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job['begin']))->getTimestamp())) ] ;
+    $jobList->addRowColumns($job);
+}
+
+$panel[] = [new \Ease\Html\H3Tag(_('Last 10 Jobs')), $jobList];
+
 $instanceRow->addColumn(4, $panel);
 
 $oPage->container->addItem(new Panel($instanceName, 'info',

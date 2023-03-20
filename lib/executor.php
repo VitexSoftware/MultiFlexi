@@ -84,7 +84,7 @@ if ($interval) {
                     }
                 });
                 $app->addStatusMessage('end' . $exec . '@' . $app->getDataValue('name'));
-                $jobber->runEnd($runId, $process->getExitCode());
+                $jobber->runEnd($runId, $process->getExitCode(), $process->getOutput(), $process->getErrorOutput());
                 $companer->addStatusMessage('command end: ' . $exec . '@' . $company['nazev']);
             }
         }

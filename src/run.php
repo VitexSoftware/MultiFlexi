@@ -49,7 +49,7 @@ $process->run(function ($type, $buffer) {
     echo new \Ease\Html\DivTag(nl2br($outline));
 });
 $appCompany->addStatusMessage('end' . $exec . '@' . $appInfo['nazev']);
-$jobber->runEnd($runId, $process->getExitCode());
+$jobber->runEnd($runId, $process->getExitCode(), $process->getOutput(), $process->getErrorOutput());
 
 \Ease\WebPage::singleton()->addJavascript("$('body').css('font-family', 'Courier').css('background-color','black');");
 
