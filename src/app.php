@@ -60,7 +60,7 @@ if (array_key_exists('company', $_SESSION) && is_object($_SESSION['company']) &&
 $jobber = new \AbraFlexi\MultiFlexi\Job();
 $jobs = $jobber->listingQuery()->select(['job.id', 'job.company_id', 'job.begin', 'job.exitcode', 'user.login', 'job.launched_by', 'company.nazev'], true)->leftJoin('company ON company.id = job.company_id')
                 ->leftJoin('user ON user.id = job.launched_by')
-                ->where('app_id', $apps->getMyKey())->limit(10)->fetchAll();
+                ->where('app_id', $apps->getMyKey())->limit(10)->orderBy('job.id DESC')->fetchAll();
 
 $jobList = new \Ease\TWB4\Table();
 $jobList->addRowHeaderColumns([_('Job ID'), _('Company'), _('Launch time'), _('Exit Code'), _('Launched by')]);

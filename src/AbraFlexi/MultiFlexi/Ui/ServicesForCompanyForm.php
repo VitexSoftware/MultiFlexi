@@ -61,7 +61,7 @@ class ServicesForCompanyForm extends Form {
 
             $appRow->addColumn(4, new FormGroup('<strong>' . $appData['nazev'] . '</strong> ', $intervalChooser))->addItem($launchButton);
 
-            $jobs = $jobber->listingQuery()->select(['id','begin','exitcode'],true)->where('company_id',$companyID)->where('app_id',$code)->limit(10)->fetchAll();
+            $jobs = $jobber->listingQuery()->select(['id','begin','exitcode'],true)->where('company_id',$companyID)->where('app_id',$code)->limit(10)->orderBy('job.id DESC')->fetchAll();
             
             $jobList = new \Ease\TWB4\Table();
             $jobList->addRowHeaderColumns([_('Job ID'),_('Launch time'),_('Exit Code')]);
