@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Multi Flexi - Job Run.
+ * Multi Flexi - Job Run archive.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2017-2023 Vitex Software
+ * @copyright  2023 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi\Ui;
@@ -19,17 +19,14 @@ require_once './init.php';
 
 $oPage->onlyForLogged();
 
-$oPage->addItem(new PageTop(_('Application')));
+$oPage->addItem(new PageTop(_('Archived Job Run')));
 
-$companyId = $oPage->getRequestValue('company_id');
-$appId = $oPage->getRequestValue('app_id');
+$jobID = $oPage->getRequestValue('id', 'int');
 
-$appCompany = new \AbraFlexi\MultiFlexi\AppToCompany($oPage->getRequestValue('id', 'int'));
-if ($companyId && $appId) {
-    if ($appCompany->appCompanyID($appId, $companyId) == 0) {
-        $appCompany->dbsync(['app_id' => $appId, 'company_id' => $companyId, 'interv' => 'n']);
-    }
-}
+$jobber = new \AbraFlexi\MultiFlexi\Job($jobID);
+
+$appCompany = new \AbraFlexi\MultiFlexi\AppToCompany();
+$appCompany->setMyKey($appCompany->appCompanyID($jobber->getDataValue('app_id'), $jobber->getDataValue('company_id')));
 
 $appInfo = $appCompany->getAppInfo();
 $apps = new Application($appInfo['app_id']);
@@ -39,15 +36,10 @@ $instanceRow = new Row();
 $instanceRow->addColumn(2, new \Ease\Html\ImgTag(empty($appInfo['image']) ? 'images/apps.svg' : $appInfo['image'], 'Logo', ['class' => 'img-fluid', 'style' => 'height: 64px']));
 $instanceRow->addColumn(8, new \Ease\Html\H1Tag($instanceName));
 
-$envTable = new \Ease\Html\TableTag(null, ['class' => 'table']);
-foreach ($appCompany->getAppEnvironment() as $key => $value) {
-    if (stristr($key, 'pass')) {
-        $value = preg_replace('(.)', '*', $value);
-    }
-    $envTable->addRowColumns([$key, $value]);
-}
-
-$oPage->container->addItem(new Panel(_('App Run'), 'info', [$instanceRow, $envTable], new \Ease\Html\DivTag(new \Ease\Html\IframeTag('run.php?id=' . $appCompany->getMyKey(), ['id' => 'shell', 'title' => $instanceName]), ['class' => 'iframe-container'])));
+$oPage->container->addItem(
+        new Panel([_('App Run'), $instanceRow], 'info', new \Ease\Html\DivTag((new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert($jobber->getDataValue('stdout')), ['style' => 'font-family: monospace; background-color: black;'])
+                , $jobber->getDataValue('stderr'))
+);
 
 $oPage->addItem(new PageBottom());
 

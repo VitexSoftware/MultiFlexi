@@ -32,3 +32,4 @@ composer.lock
 /deb/
 /nbproject/private/
 /OpenAPI/node_modules/
+/.php_cs.cache

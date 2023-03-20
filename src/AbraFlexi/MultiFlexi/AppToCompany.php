@@ -85,7 +85,7 @@ class AppToCompany extends Engine {
             'ABRAFLEXI_PASSWORD' => $connectionData['password'],
             'ABRAFLEXI_COMPANY' => $connectionData['company'],
             'EASE_EMAILTO' => $connectionData['email'],
-            'EASE_LOGGER' => empty($connectionData['email']) ? 'syslog' : 'syslog|email',
+            'EASE_LOGGER' => 'syslog|console',
         ];
 
         $appConfig = [];

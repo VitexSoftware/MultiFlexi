@@ -41,6 +41,8 @@ class ServicesForCompanyForm extends Form {
         $assigned = $glue->getAppsForCompany($companyID);
         parent::__construct($tagProperties);
 
+        $jobber = new \AbraFlexi\MultiFlexi\Job();
+                
         foreach ($apps as $appData) {
             $code = $appData['id'];
 
@@ -54,13 +56,21 @@ class ServicesForCompanyForm extends Form {
             if (array_key_exists($code, $assigned)) {
                 $launchButton = new \Ease\Html\DivTag(new LaunchButton($assigned[$code]['id']));
             } else {
-//                $launchButton = new \Ease\TWB4\LinkButton('id=' . $code . '&company=' . $companyID, sprintf(_('Assign to %s'), $_SESSION['company']->getRecordName()), 'success');
-                $launchButton = null;
+                $launchButton = new \Ease\TWB4\LinkButton('launch.php?app_id='.$code.'&company_id=' . $companyID, [_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg btn-block ');
             }
 
             $appRow->addColumn(4, new FormGroup('<strong>' . $appData['nazev'] . '</strong> ', $intervalChooser))->addItem($launchButton);
 
-            $appRow->addColumn(6, [new ConfiguredFieldBadges($companyID, $code)]);
+            $jobs = $jobber->listingQuery()->select(['id','begin','exitcode'],true)->where('company_id',$companyID)->where('app_id',$code)->limit(10)->fetchAll();
+            
+            $jobList = new \Ease\TWB4\Table();
+            $jobList->addRowHeaderColumns([_('Job ID'),_('Launch time'),_('Exit Code')]);
+            foreach ($jobs as $job) {
+                $job['id'] = new ATag('job.php?id='.$job['id'], $job['id']);
+                $jobList->addRowColumns($job);
+            }
+            
+            $appRow->addColumn(6, [new ConfiguredFieldBadges($companyID, $code),$jobList]);
 
             $this->addItem($appRow);
         }
