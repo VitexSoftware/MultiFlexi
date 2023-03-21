@@ -21,7 +21,8 @@ if (file_exists('../.env')) {
 }
 
 define('EASE_LOGGER', 'syslog|\AbraFlexi\MultiFlexi\LogToSQL');
-//Sdefine('EASE_LOGGER', '\AbraFlexi\MultiFlexi\LogToSQL');
+
+\Ease\Shared::user(new \Ease\Anonym());
 
 $companer = new Company();
 $companys = $companer->listingQuery()->select('abraflexis.*')->select('company.id AS company_id')->leftJoin('abraflexis ON abraflexis.id = company.abraflexi');

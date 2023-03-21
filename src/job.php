@@ -37,7 +37,7 @@ $instanceRow->addColumn(2, new \Ease\Html\ImgTag(empty($appInfo['image']) ? 'ima
 $instanceRow->addColumn(8, new \Ease\Html\H1Tag($instanceName));
 
 $oPage->container->addItem(
-        new Panel([_('App Run'), $instanceRow], 'info', new \Ease\Html\DivTag((new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert($jobber->getDataValue('stdout')), ['style' => 'font-family: monospace; background-color: black;'])
+        new Panel([_('App Run'), $instanceRow], 'info', new \Ease\Html\DivTag((new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(nl2br($jobber->getDataValue('stdout'))), ['style' => 'font-family: monospace; background-color: black;'])
                 , $jobber->getDataValue('stderr'))
 );
 
