@@ -82,8 +82,8 @@ class Job extends Engine {
         $sqlLogger->setCompany(0);
         $sqlLogger->setApplication(0);
         return $this->updateToSQL(['end' => new \Envms\FluentPDO\Literal('NOW()'),
-                    'stdout' => $stdout,
-                    'stderr' => $stderr,
+                    'stdout' => addslashes($stdout),
+                    'stderr' => addslashes($stderr),
                     'exitcode' => $statusCode], ['id' => $runId]);
     }
 

@@ -18,7 +18,7 @@ require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Multi AbraFlexi')));
 
-$abraflexis = new AbraFlexis();
+$abraflexis = new \AbraFlexis();
 
 $allFbData = $abraflexis->getAll();
 

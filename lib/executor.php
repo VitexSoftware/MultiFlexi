@@ -37,7 +37,7 @@ if ($interval) {
         $appsForCompany = $ap2c->getColumnsFromSQL(['*'], ['company_id' => $company['company_id'], 'interv' => $interval]);
 
         if (empty($appsForCompany)) {
-            $companer->addStatusMessage(sprintf(_('No applications enabled for %s'), $company['nazev']), 'warning');
+            $companer->addStatusMessage(sprintf(_('No applications to run %s'), $company['nazev']), 'debug');
         } else {
 
             $appEnvironment = [
