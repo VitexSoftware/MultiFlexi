@@ -115,9 +115,9 @@ $app->add(new \Tuupola\Middleware\HttpBasicAuthentication([
 //            "ignore" => [$path . '/', $path . '/ping', $path . '/authorize'],
 //            'path' => '/',
             'ignore' => [ $path . '/', $path . '/ping/'],
-//            "authenticator" => new AbraFlexi\MultiFlexi\Auth\BasicAuthenticator()
+//            "authenticator" => new \AbraFlexi\MultiFlexi\Auth\BasicAuthenticator()
             "authenticator" => function ($arguments) {
-                $prober = new AbraFlexi\MultiFlexi\User($arguments['user']);
+                $prober = new \AbraFlexi\MultiFlexi\User($arguments['user']);
                 return $prober->getUserID() && strlen($arguments['password']) && $prober->isAccountEnabled() && $prober->passwordValidation($arguments['password'], $prober->getDataValue($prober->passwordColumn));
             }
         ]));

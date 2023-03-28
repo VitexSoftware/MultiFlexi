@@ -70,7 +70,7 @@ class AbraFlexiTest extends TestCase
      */
     public function testAbraFlexi()
     {
-        $testAbraFlexi = new AbraFlexi();
+        $testAbraFlexi = new \AbraFlexi();
         $namespacedClassname = AbraFlexi::getModelsNamespace() . '\\AbraFlexi';
         $this->assertSame('\\' . AbraFlexi::class, $namespacedClassname);
         $this->assertTrue(

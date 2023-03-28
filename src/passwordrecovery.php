@@ -39,7 +39,7 @@ if (empty($emailTo)) {
                         \Ease\Shared::appName() . ' -' . sprintf(_('New password for %s'),
                                 $_SERVER['SERVER_NAME'])));
 
-        $email->setMailHeaders(['From' => constant('EMAIL_FROM')]);
+        $email->setMailHeaders(['From' => \Ease\Functions::cfg('EMAIL_FROM')]);
         $email->addItem(_('Sign On informations was changed') . ":\n");
 
         $email->addItem(_('Username') . ': ' . $userLogin . "\n");

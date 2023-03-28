@@ -45,7 +45,7 @@ class AppInfo extends \Ease\Html\TableTag {
 //        $this->addInput(new InputEmailTag('email'), _('Send notification to'));
 //
 //        $this->addInput(new CustomerSelect('customer'), _('Customer'));
-//        $this->addInput(new AbraFlexiSelect('abraflexi'), _('AbraFlexi server'));
+//        $this->addInput(new \AbraFlexiSelect('abraflexi'), _('AbraFlexi server'));
 //
 //        $this->addInput(new SemaforLight($this->engine->getDataValue('rw')),
 //                _('write permission'));

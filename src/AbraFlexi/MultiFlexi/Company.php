@@ -203,7 +203,7 @@ class Company extends \AbraFlexi\Company {
      * @param string $company Description
      */
     public function obtainLogo($abraflexiID, $company) {
-        $abraflexir = new AbraFlexis($abraflexiID);
+        $abraflexir = new \AbraFlexis($abraflexiID);
         $fbOptions = $abraflexir->getData();
         $fbOptions['company'] = $company;
         $logoEngine = new \AbraFlexi\ui\CompanyLogo(null, $fbOptions);
@@ -302,7 +302,7 @@ class Company extends \AbraFlexi\Company {
     }
 
     /**
-     * Create new AbraFlexi company
+     * Create new \AbraFlexi company
      * 
      * @param string $companyData
      * 

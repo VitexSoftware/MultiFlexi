@@ -21,7 +21,7 @@ class BasicAuthenticator extends Authenticator {
     }
 
     public function __invoke(\Psr\Http\Message\ServerRequestInterface &$request, \Dyorg\TokenAuthentication\TokenSearch $tokenSearch) {
-        $prober = new AbraFlexi\MultiFlexi\User($arguments['user']);
+        $prober = new \AbraFlexi\MultiFlexi\User($arguments['user']);
         return $prober->getUserID() && strlen($arguments['password']) && $prober->isAccountEnabled() && $prober->passwordValidation($arguments['password'], $prober->getDataValue($prober->passwordColumn));
     }
 
