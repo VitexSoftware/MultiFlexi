@@ -26,9 +26,8 @@ final class LongTexts extends AbstractMigration
         
         $table = $this->table('job');
         $table
-           ->changeColumn('stdout', 'text', ['limit'=> Phinx\Db\Adapter\MysqlAdapter::TEXT_LONG ])
+           ->changeColumn('stdout', 'longblob', ['comment'=> 'Job Stdout store' ])
            ->update();
-                
 
     }
 }
