@@ -61,12 +61,14 @@ class ServicesForCompanyForm extends Form {
 
             $appRow->addColumn(4, new FormGroup('<strong>' . $appData['nazev'] . '</strong> ', $intervalChooser))->addItem($launchButton);
 
-            $jobs = $jobber->listingQuery()->select(['id','begin','exitcode'],true)->where('company_id',$companyID)->where('app_id',$code)->limit(10)->orderBy('job.id DESC')->fetchAll();
+            $jobs = $jobber->listingQuery()->select(['job.id','begin','exitcode','launched_by','login'],true)->leftJoin('user ON user.id = job.launched_by')->where('company_id',$companyID)->where('app_id',$code)->limit(10)->orderBy('job.id DESC')->fetchAll();
             
             $jobList = new \Ease\TWB4\Table();
-            $jobList->addRowHeaderColumns([_('Job ID'),_('Launch time'),_('Exit Code')]);
+            $jobList->addRowHeaderColumns([_('Job ID'),_('Launch time'),_('Exit Code'),_('Launcher')]);
             foreach ($jobs as $job) {
                 $job['id'] = new ATag('job.php?id='.$job['id'], $job['id']);
+                $job['launched_by'] =  $job['launched_by'] ? new ATag('user.php?id='.$job['launched_by'] , $job['login']) : _('Timer');
+                unset($job['login']);
                 $jobList->addRowColumns($job);
             }
             
