@@ -24,7 +24,8 @@ use AbraFlexi\MultiFlexi\Company;
  *
  * @author vitex
  */
-class ServicesForCompanyForm extends Form {
+class ServicesForCompanyForm extends Form
+{
 
     /**
      * Assign Services for company
@@ -32,48 +33,40 @@ class ServicesForCompanyForm extends Form {
      * @param Company $company
      * @param array $tagProperties
      */
-    public function __construct($company, $tagProperties = array()) {
+    public function __construct($company, $tagProperties = array())
+    {
         $companyID = $company->getMyKey();
-
         $apps = (new Application())->listingQuery()->where('enabled', 1)->fetchAll();
         $glue = new AppToCompany();
-
         $assigned = $glue->getAppsForCompany($companyID);
         parent::__construct($tagProperties);
-
         $jobber = new \AbraFlexi\MultiFlexi\Job();
-                
         foreach ($apps as $appData) {
             $code = $appData['id'];
-
             $appRow = new Row();
             $appRow->setTagProperty('style', 'border-bottom: 1px solid #bdbdbd; padding: 5px');
-
             $appRow->addColumn(2, new ATag('app.php?id=' . $code, new ImgTag($appData['image'], $appData['nazev'], ['class' => 'img-fluid'])));
-
             $intervalChooser = new IntervalChooser($code . '_interval', array_key_exists($code, $assigned) ? $assigned[$code]['interv'] : 'n', ['id' => $code . '_interval', 'data-company' => $companyID, 'checked' => 'true', 'data-app' => $code]);
-
             if (array_key_exists($code, $assigned)) {
                 $launchButton = new \Ease\Html\DivTag(new LaunchButton($assigned[$code]['id']));
             } else {
-                $launchButton = new \Ease\TWB4\LinkButton('launch.php?app_id='.$code.'&company_id=' . $companyID, [_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg btn-block ');
+                $launchButton = new \Ease\TWB4\LinkButton('launch.php?app_id=' . $code . '&company_id=' . $companyID, [_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg btn-block ');
             }
 
             $appRow->addColumn(4, new FormGroup('<strong>' . $appData['nazev'] . '</strong> ', $intervalChooser))->addItem($launchButton);
-
-            $jobs = $jobber->listingQuery()->select(['job.id','begin','exitcode','launched_by','login'],true)->leftJoin('user ON user.id = job.launched_by')->where('company_id',$companyID)->where('app_id',$code)->limit(10)->orderBy('job.id DESC')->fetchAll();
-            
+            $jobs = $jobber->listingQuery()->select(['job.id', 'begin', 'exitcode', 'launched_by', 'login'], true)->leftJoin('user ON user.id = job.launched_by')->where('company_id', $companyID)->where('app_id', $code)->limit(10)->orderBy('job.id DESC')->fetchAll();
             $jobList = new \Ease\TWB4\Table();
-            $jobList->addRowHeaderColumns([_('Job ID'),_('Launch time'),_('Exit Code'),_('Launcher')]);
+            $jobList->addRowHeaderColumns([_('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher')]);
             foreach ($jobs as $job) {
-                $job['id'] = new ATag('job.php?id='.$job['id'], $job['id']);
-                $job['launched_by'] =  $job['launched_by'] ? new ATag('user.php?id='.$job['launched_by'] , $job['login']) : _('Timer');
+                $job['id'] = new ATag('job.php?id=' . $job['id'], $job['id']);
+                $job['begin'] = [$job['begin'], ' ', new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
+                $job['exitcode'] = new ExitCode($job['exitcode']);
+                $job['launched_by'] = $job['launched_by'] ? new ATag('user.php?id=' . $job['launched_by'], $job['login']) : _('Timer');
                 unset($job['login']);
                 $jobList->addRowColumns($job);
             }
-            
-            $appRow->addColumn(6, [new ConfiguredFieldBadges($companyID, $code),$jobList]);
 
+            $appRow->addColumn(6, [new ConfiguredFieldBadges($companyID, $code), $jobList]);
             $this->addItem($appRow);
         }
     }
@@ -81,7 +74,8 @@ class ServicesForCompanyForm extends Form {
     /**
      * 
      */
-    public function finalize() {
+    public function finalize()
+    {
         Part::twBootstrapize();
         $this->addJavaScript('
 
@@ -106,5 +100,4 @@ $.ajax({
 });
 ');
     }
-
 }
