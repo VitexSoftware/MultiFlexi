@@ -14,7 +14,8 @@ namespace AbraFlexi\MultiFlexi;
  *
  * @author vitex
  */
-class Job extends Engine {
+class Job extends Engine
+{
 
     public $myTable = 'job';
 
@@ -26,15 +27,20 @@ class Job extends Engine {
      *
      * @return int Job ID
      */
-    public function runBegin($appId, $companyId) {
-        $jobId = $this->insertToSQL(['company_id' => $companyId, 'app_id' => $appId,
-            'exitcode' => -1, 'launched_by' => \Ease\Shared::user()->getMyKey()]);
+    public function runBegin($appId, $companyId, $environment = [])
+    {
+        $jobId = $this->insertToSQL([
+            'company_id' => $companyId,
+            'app_id' => $appId,
+            'env' => \Opis\Closure\serialize($environment),
+            'exitcode' => -1,
+            'launched_by' => \Ease\Shared::user()->getMyKey()
+        ]);
         $this->setMyKey($jobId);
         $this->setObjectName();
         $sqlLogger = LogToSQL::singleton();
         $sqlLogger->setCompany($companyId);
         $sqlLogger->setApplication($appId);
-
         $this->addStatusMessage('JOB: ' . $jobId, 'debug');
         if ($this->isProvisioned($appId, $companyId) == 0) {
             $this->addStatusMessage(_('Perform initial setup'), 'warning');
@@ -47,7 +53,6 @@ class Job extends Engine {
                 $appInfo = $appCompany->getAppInfo();
                 $appEnvironment = $appCompany->getAppEnvironment();
                 $process = new \Symfony\Component\Process\Process(explode(' ', $setupCommand), null, $appEnvironment, null, 32767);
-
                 $result = $process->run(function ($type, $buffer) {
                     $logger = new Runner();
                     if (\Symfony\Component\Process\Process::ERR === $type) {
@@ -77,7 +82,8 @@ class Job extends Engine {
      * 
      * @return int
      */
-    public function runEnd($runId, $statusCode, $stdout, $stderr) {
+    public function runEnd($runId, $statusCode, $stdout, $stderr)
+    {
         $sqlLogger = LogToSQL::singleton();
         $sqlLogger->setCompany(0);
         $sqlLogger->setApplication(0);
@@ -95,11 +101,11 @@ class Job extends Engine {
      * 
      * @return boolean|null application with setup command provision state or setup command is not set
      */
-    public function isProvisioned($appId, $companyId) {
+    public function isProvisioned($appId, $companyId)
+    {
         $appCompany = new AppToCompany();
         $appCompany->setMyKey($appCompany->appCompanyID($appId, $companyId));
         $appInfo = $appCompany->getAppInfo();
         return $appInfo['prepared'];
     }
-
 }

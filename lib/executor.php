@@ -73,7 +73,7 @@ if ($interval) {
                 $companer->addStatusMessage('command begin: ' . $exec . ' ' . $cmdparams . '@' . $company['nazev']);
 
                 $jobber = new Job();
-                $runId = $jobber->runBegin($app->getMyKey(), $company['company_id']);
+                $runId = $jobber->runBegin($app->getMyKey(), $company['company_id'], $appEnvironment);
                 $process = new \Symfony\Component\Process\Process(array_merge([$exec], explode(' ', $cmdparams)), null, $appEnvironment, null, 32767);
                 $process->run(function ($type, $buffer) {
                     $logger = new \Ease\Sand();

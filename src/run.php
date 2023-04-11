@@ -35,7 +35,7 @@ $appCompany->addStatusMessage('begin' . $exec . ' ' . $cmdparams . '@' . $appInf
 echo new \Ease\Html\H2Tag(str_replace(' ', '&nbsp;', $exec . ' ' . $cmdparams), ['style' => 'color: green']);
 
 $jobber = new Job();
-$runId = $jobber->runBegin($appInfo['app_id'], $appInfo['company_id']);
+$runId = $jobber->runBegin($appInfo['app_id'], $appInfo['company_id'],$appEnvironment);
 $process = new Process(array_merge([$exec], explode(' ', $cmdparams)), null, $appEnvironment, null, 32767);
 $process->run(function ($type, $buffer) {
     $logger = new Runner();
