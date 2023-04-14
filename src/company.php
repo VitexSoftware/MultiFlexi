@@ -17,12 +17,10 @@ use AbraFlexi\MultiFlexi\Company;
 require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company')));
-
 $companies = new Company(WebPage::getRequestValue('id', 'int'));
 $_SESSION['company'] = &$companies;
 $instanceName = $companies->getDataValue('nazev');
 $companyEnver = new \AbraFlexi\MultiFlexi\CompanyEnv($companies->getMyKey());
-
 if ($oPage->isPosted()) {
     if (array_key_exists('env', $_POST)) {
         $companyEnver->addEnv($_POST['env']['newkey'], $_POST['env']['newvalue']);
@@ -55,7 +53,6 @@ if (strlen($instanceName)) {
 
 $instanceRow = new Row();
 $instanceRow->addColumn(8, new RegisterCompanyForm($companies, null, ['action' => 'company.php']));
-
 //$instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($companies));
 
 
@@ -65,9 +62,7 @@ if (strlen($companies->getDataValue('logo'))) {
 
 $rightColumn['envs'] = new EnvsForm($companyEnver->getData());
 $rightColumn['envs']->addItem(new \Ease\Html\InputHiddenTag('id', $companies->getMyKey()));
-
 $instanceRow->addColumn(4, $rightColumn);
-
 $bottomLine = new Row();
 $bottomLine->addColumn(8, $instanceLink);
 //$delUrl = 'company.php?delete='.$myId = $companies->getMyKey();
@@ -75,13 +70,10 @@ $bottomLine->addColumn(8, $instanceLink);
 //    new \Ease\TWB4\ButtonDropdown( _('Company operations'), 'warning', 'sm',
 //        [$delUrl=> _('Remove company') ] ));
 
+$bottomLine->addColumn(4, new \Ease\TWB4\LinkButton('tasks.php?company_id='.$companies->getMyKey(), _('Tasks'), 'warning') );
+
 $oPage->container->addItem(new Panel($instanceName, 'info',
                 $instanceRow, $bottomLine));
 
-if (!is_null($companies->getMyKey())) {
-    $oPage->container->addItem(new Panel(_('Assigned applications'), 'default', new ServicesForCompanyForm($companies, ['id' => 'apptoggle'])));
-}
-
 $oPage->addItem(new PageBottom());
-
 $oPage->draw();

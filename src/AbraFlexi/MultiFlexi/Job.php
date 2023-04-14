@@ -32,7 +32,7 @@ class Job extends Engine
         $jobId = $this->insertToSQL([
             'company_id' => $companyId,
             'app_id' => $appId,
-            'env' => \Opis\Closure\serialize($environment),
+            'env' => \serialize($environment),
             'exitcode' => -1,
             'launched_by' => \Ease\Shared::user()->getMyKey()
         ]);
