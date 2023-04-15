@@ -52,7 +52,26 @@ if (strlen($instanceName)) {
 }
 
 $instanceRow = new Row();
-$instanceRow->addColumn(8, new RegisterCompanyForm($companies, null, ['action' => 'company.php']));
+$jobber = new \AbraFlexi\MultiFlexi\Job();
+$jobs = $jobber->listingQuery()->select(['apps.nazev AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id'], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->where('company_id', $companies->getMyKey())->limit(20)->orderBy('job.id DESC')->fetchAll();
+$jobList = new \Ease\TWB4\Table();
+$jobList->addRowHeaderColumns([_('Application'), _('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher')]);
+foreach ($jobs as $job) {
+    $job['appimage'] = new ATag('app.php?id=' . $job['app_id'], [ new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], $job['appname'], ['height' => 30, 'title' => $job['appname']]),'&nbsp;', $job['appname']])]);
+    unset($job['appname']);
+    unset($job['app_id']);
+    $job['id'] = new ATag('job.php?id=' . $job['id'], new \Ease\TWB4\Badge('info', $job['id']));
+    $job['begin'] = [$job['begin'], ' ', new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
+    $job['exitcode'] = new ExitCode($job['exitcode']);
+    $job['launched_by'] = $job['launched_by'] ? new ATag('user.php?id=' . $job['launched_by'], new \Ease\TWB4\Badge('info', $job['login'])) : _('Timer');
+    unset($job['login']);
+    $jobList->addRowColumns($job);
+}
+
+
+
+$instanceRow->addColumn(6, [$jobList, new \Ease\TWB4\LinkButton('tasks.php?company_id=' . $companies->getMyKey(), _('Setup tasks'), 'warning')]);
+$instanceRow->addColumn(2, new RegisterCompanyForm($companies, null, ['action' => 'company.php']));
 //$instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($companies));
 
 
@@ -69,11 +88,8 @@ $bottomLine->addColumn(8, $instanceLink);
 //$bottomLine->addColumn(4,
 //    new \Ease\TWB4\ButtonDropdown( _('Company operations'), 'warning', 'sm',
 //        [$delUrl=> _('Remove company') ] ));
-
-$bottomLine->addColumn(4, new \Ease\TWB4\LinkButton('tasks.php?company_id='.$companies->getMyKey(), _('Tasks'), 'warning') );
-
+//$bottomLine->addColumn(4, );
 $oPage->container->addItem(new Panel($instanceName, 'info',
                 $instanceRow, $bottomLine));
-
 $oPage->addItem(new PageBottom());
 $oPage->draw();
