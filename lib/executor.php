@@ -37,10 +37,12 @@ if ($interval) {
         $appsForCompany = $ap2c->getColumnsFromSQL(['*'], ['company_id' => $company['company_id'], 'interv' => $interval]);
 
         if (empty($appsForCompany)) {
-            $companer->addStatusMessage(sprintf(_('No applications to run %s'), $company['nazev']), 'debug');
+            $companer->addStatusMessage(sprintf(_('No applications to run for %s'), $company['nazev']), 'debug');
         } else {
 
-            $appEnvironment = [
+            $companyEnver = new \AbraFlexi\MultiFlexi\CompanyEnv($company['company_id']);
+            
+            $appEnvironment = array_merge([
                 'ABRAFLEXI_URL' => $company['url'],
                 'ABRAFLEXI_LOGIN' => $company['user'],
                 'ABRAFLEXI_PASSWORD' => $company['password'],
@@ -48,8 +50,9 @@ if ($interval) {
                 'LC_ALL' => 'cs_CZ', //TODO: Configure somehow
                 'EASE_EMAILTO' => $company['email'],
                 'EASE_LOGGER' => empty($company['email']) ? 'console|syslog' : 'console|syslog|email',
-            ];
+            ], $companyEnver->getData());
 
+            
             foreach ($appEnvironment as $envName => $sqlValue) {
                 $companer->addStatusMessage(sprintf(_('Setting Environment: export %s=%s'), $envName, $sqlValue), 'debug');
             }

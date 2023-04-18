@@ -57,7 +57,7 @@ $jobs = $jobber->listingQuery()->select(['apps.nazev AS appname', 'apps.image AS
 $jobList = new \Ease\TWB4\Table();
 $jobList->addRowHeaderColumns([_('Application'), _('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher')]);
 foreach ($jobs as $job) {
-    $job['appimage'] = new ATag('app.php?id=' . $job['app_id'], [ new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], $job['appname'], ['height' => 30, 'title' => $job['appname']]),'&nbsp;', $job['appname']])]);
+    $job['appimage'] = new ATag('app.php?id=' . $job['app_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], $job['appname'], ['height' => 30, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);
     unset($job['appname']);
     unset($job['app_id']);
     $job['id'] = new ATag('job.php?id=' . $job['id'], new \Ease\TWB4\Badge('info', $job['id']));
@@ -79,6 +79,8 @@ if (strlen($companies->getDataValue('logo'))) {
     $rightColumn[] = new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']);
 }
 
+$rightColumn[] = new EnvironmentView($companyEnver->getData());
+
 $rightColumn['envs'] = new EnvsForm($companyEnver->getData());
 $rightColumn['envs']->addItem(new \Ease\Html\InputHiddenTag('id', $companies->getMyKey()));
 $instanceRow->addColumn(4, $rightColumn);
@@ -89,7 +91,7 @@ $bottomLine->addColumn(8, $instanceLink);
 //    new \Ease\TWB4\ButtonDropdown( _('Company operations'), 'warning', 'sm',
 //        [$delUrl=> _('Remove company') ] ));
 //$bottomLine->addColumn(4, );
-$oPage->container->addItem(new Panel($instanceName, 'info',
+$oPage->container->addItem(new Panel($instanceName, 'light',
                 $instanceRow, $bottomLine));
 $oPage->addItem(new PageBottom());
 $oPage->draw();

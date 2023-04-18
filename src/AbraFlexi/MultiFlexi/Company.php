@@ -386,4 +386,9 @@ class Company extends \AbraFlexi\Company
     {
         return ['data', 'objectName', 'evidence'];
     }
+
+    public function getEnvironment()
+    {
+        return $appEnvironment;
+    }
 }

@@ -13,9 +13,7 @@ use AbraFlexi\MultiFlexi\Application;
 use Symfony\Component\Process\Process;
 
 require_once './init.php';
-
 $oPage->onlyForLogged();
-
 $appCompany = new AppToCompany($oPage->getRequestValue('id', 'int'));
 $appInfo = $appCompany->getAppInfo();
 $cmdparams = array_key_exists('cmdparams', $appInfo) ? $appInfo['cmdparams'] : '';
@@ -31,11 +29,9 @@ foreach ($appEnvironment as $envName => $envValue) {
 
 $exec = $appInfo['executable'];
 $appCompany->addStatusMessage('begin' . $exec . ' ' . $cmdparams . '@' . $appInfo['nazev']);
-
 echo new \Ease\Html\H2Tag(str_replace(' ', '&nbsp;', $exec . ' ' . $cmdparams), ['style' => 'color: green']);
-
 $jobber = new Job();
-$runId = $jobber->runBegin($appInfo['app_id'], $appInfo['company_id'],$appEnvironment);
+$runId = $jobber->runBegin($appInfo['app_id'], $appInfo['company_id'], $appEnvironment);
 $process = new Process(array_merge([$exec], explode(' ', $cmdparams)), null, $appEnvironment, null, 32767);
 $process->run(function ($type, $buffer) {
     $logger = new Runner();
@@ -50,7 +46,5 @@ $process->run(function ($type, $buffer) {
 });
 $appCompany->addStatusMessage('end' . $exec . '@' . $appInfo['nazev']);
 $jobber->runEnd($runId, $process->getExitCode(), $process->getOutput(), $process->getErrorOutput());
-
 \Ease\WebPage::singleton()->addJavascript("$('body').css('font-family', 'Courier').css('background-color','black');");
-
 $oPage->draw();
