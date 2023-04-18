@@ -41,7 +41,7 @@ class Job extends Engine
         $sqlLogger = LogToSQL::singleton();
         $sqlLogger->setCompany($companyId);
         $sqlLogger->setApplication($appId);
-        $this->addStatusMessage('JOB: ' . $jobId, 'debug');
+        $this->addStatusMessage('JOB: ' . $jobId.' '. json_encode($environment), 'debug');
         if ($this->isProvisioned($appId, $companyId) == 0) {
             $this->addStatusMessage(_('Perform initial setup'), 'warning');
             $app = new Application((int) $appId);
