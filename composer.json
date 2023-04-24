@@ -17,7 +17,8 @@
         "slim/psr7": "*",
         "vitexsoftware/multiflexiapiserver": "*",
         "dyorg/slim-token-authentication": "*",
-        "tuupola/slim-basic-auth": "*"
+        "tuupola/slim-basic-auth": "*",
+        "mittwald/vault-php": "dev-master"
     },
     "license": "MIT",
     "authors": [

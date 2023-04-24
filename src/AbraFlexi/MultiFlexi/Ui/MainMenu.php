@@ -90,7 +90,7 @@ class MainMenu extends \Ease\Html\DivTag {
                     if (count($abraflexis) && count($customers) && empty($companys)) {
                         \AbraFlexi\MultiFlexi\User::singleton()->addStatusMessage(_('No company registered yet. Please register one.'), 'warning');
                         $this->customersMenuEnabled($nav, $customers);
-                        $nav->addMenuItem(new \Ease\TWB4\LinkButton('company.php', '<img width=30 src=images/company.svg> ' . _('Companies'), 'warning'), 'right');
+                        $nav->addMenuItem(new \Ease\TWB4\LinkButton('companysetup.php', '<img width=30 src=images/company.svg> ' . _('Companies'), 'warning'), 'right');
                     } else { // We Got All
                         $this->customersMenuEnabled($nav, $customers);
                         $this->companysMenuEnabled($nav, $companys);

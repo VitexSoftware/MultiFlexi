@@ -6,6 +6,7 @@ use Phinx\Migration\AbstractMigration;
 
 final class LongTexts extends AbstractMigration
 {
+
     /**
      * Change Method.
      *
@@ -19,16 +20,14 @@ final class LongTexts extends AbstractMigration
      */
     public function change(): void
     {
-        
+
 // TODO: Choose proper adapter
 //        $phinxManager = Container::build()->get(\Phinx\Migration\Manager::class);
 //        $pdo = $phinxManager->getEnvironment('development')->getAdapter()->getConnection();    
-        
+
         $table = $this->table('job');
         $table
-           ->changeColumn('stdout', 'longblob', ['comment'=> 'Job Stdout store' ])
-           ->update();
-
+                ->changeColumn('stdout', 'blob', ['comment' => 'Job Stdout store', 'limit' => \Phinx\Db\Adapter\MysqlAdapter::BLOB_LONG])
+                ->update();
     }
 }
-

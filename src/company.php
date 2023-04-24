@@ -19,37 +19,7 @@ $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company')));
 $companies = new Company(WebPage::getRequestValue('id', 'int'));
 $_SESSION['company'] = &$companies;
-$instanceName = $companies->getDataValue('nazev');
 $companyEnver = new \AbraFlexi\MultiFlexi\CompanyEnv($companies->getMyKey());
-if ($oPage->isPosted()) {
-    if (array_key_exists('env', $_POST)) {
-        $companyEnver->addEnv($_POST['env']['newkey'], $_POST['env']['newvalue']);
-    } else {
-        if ($companies->takeData($_POST) && !is_null($companies->saveToSQL())) {
-            $companies->addStatusMessage(_('Company Saved'), 'success');
-//        $companies->prepareRemoteCompany(); TODO: Run applications setup on new company
-            $oPage->redirect('?id=' . $companies->getMyKey());
-        } else {
-            $companies->addStatusMessage(_('Error saving Company'), 'error');
-        }
-    }
-} else {
-    if (!empty(WebPage::getGetValue('company'))) {
-        $companies->setDataValue('company', WebPage::getGetValue('company'));
-        $companies->setDataValue('nazev', WebPage::getGetValue('nazev'));
-        $companies->setDataValue('ic', WebPage::getGetValue('ic'));
-        $companies->setDataValue('email', WebPage::getGetValue('email'));
-        $companies->setDataValue('abraflexi', WebPage::getGetValue('abraflexi', 'int'));
-    }
-}
-
-if (strlen($instanceName)) {
-    $instanceLink = new ATag($companies->getApiURL() . $companies->getDataValue('company'),
-            $companies->getApiURL() . $companies->getDataValue('company'));
-} else {
-    $instanceName = _('New Company');
-    $instanceLink = null;
-}
 
 $instanceRow = new Row();
 $jobber = new \AbraFlexi\MultiFlexi\Job();
@@ -71,8 +41,6 @@ foreach ($jobs as $job) {
 
 
 $instanceRow->addColumn(6, [$jobList, new \Ease\TWB4\LinkButton('tasks.php?company_id=' . $companies->getMyKey(), _('Setup tasks'), 'warning')]);
-$instanceRow->addColumn(2, new RegisterCompanyForm($companies, null, ['action' => 'company.php']));
-//$instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($companies));
 
 
 if (strlen($companies->getDataValue('logo'))) {
@@ -80,18 +48,13 @@ if (strlen($companies->getDataValue('logo'))) {
 }
 
 $rightColumn[] = new EnvironmentView($companyEnver->getData());
-
-$rightColumn['envs'] = new EnvsForm($companyEnver->getData());
-$rightColumn['envs']->addItem(new \Ease\Html\InputHiddenTag('id', $companies->getMyKey()));
-$instanceRow->addColumn(4, $rightColumn);
+$rightColumn[] = new \Ease\Html\HrTag();
+$rightColumn[] = new \Ease\TWB4\LinkButton('companysetup.php?id='.$companies->getMyKey(), '⚙&nbsp;'.  _('Company setup'),'light');
+        
+$instanceRow->addColumn(6, $rightColumn);
 $bottomLine = new Row();
-$bottomLine->addColumn(8, $instanceLink);
-//$delUrl = 'company.php?delete='.$myId = $companies->getMyKey();
-//$bottomLine->addColumn(4,
-//    new \Ease\TWB4\ButtonDropdown( _('Company operations'), 'warning', 'sm',
-//        [$delUrl=> _('Remove company') ] ));
-//$bottomLine->addColumn(4, );
-$oPage->container->addItem(new Panel($instanceName, 'light',
+
+$oPage->container->addItem(new Panel($companies->getRecordName(), 'light',
                 $instanceRow, $bottomLine));
 $oPage->addItem(new PageBottom());
 $oPage->draw();
