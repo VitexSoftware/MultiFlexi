@@ -33,8 +33,8 @@ class CompanyEnv extends \Ease\SQL\Engine {
 
     /**
      * 
-     * @param type $companyID
-     * @param type $options
+     * @param int $companyID
+     * @param array $options
      */
     public function __construct($companyID = null, $options = []) {
         parent::__construct(null, $options);
@@ -66,4 +66,8 @@ class CompanyEnv extends \Ease\SQL\Engine {
         }
     }
 
+    public function getEnvFields()
+    {
+        return $this->listingQuery()->where('company_id', $this->companyID)->fetchAll();
+    }
 }

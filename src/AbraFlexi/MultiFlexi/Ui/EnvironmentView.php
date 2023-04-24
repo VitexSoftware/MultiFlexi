@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Multi Flexi - 
+ * Multi Flexi - Envirnnment view
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * @copyright  2023 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi\Ui;
@@ -17,6 +17,11 @@ namespace AbraFlexi\MultiFlexi\Ui;
 class EnvironmentView extends \Ease\Html\TableTag
 {
 
+    /**
+     * 
+     * @param array $environment
+     * @param array $properties
+     */
     public function __construct($environment = null, $properties = [])
     {
         $properties['class'] = 'table';
@@ -25,7 +30,7 @@ class EnvironmentView extends \Ease\Html\TableTag
             if (stristr($key, 'pass')) {
                 $value = preg_replace('(.)', '*', $value);
             }
-            parent::addRowColumns([$key, $value]);
+            $this->addRowColumns([$key, $value]);
         }
     }
 }
