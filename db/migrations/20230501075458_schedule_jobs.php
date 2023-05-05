@@ -20,19 +20,10 @@ final class ScheduleJobs extends AbstractMigration
      */
     public function change(): void
     {
-        $table = $this->table('user');
+        $table = $this->table('schedule');
         $table
-                ->addColumn('enabled', 'boolean', array('default' => false))
-                ->addColumn('settings', 'text', ['null' => true])
-                ->addColumn('email', 'string', ['limit' => 128])
-                ->addColumn('firstname', 'string', ['null' => true, 'limit' => 32])
-                ->addColumn('lastname', 'string', ['null' => true, 'limit' => 32])
-                ->addColumn('password', 'string', ['limit' => 40])
-                ->addColumn('login', 'string', ['limit' => 32])
-                ->addColumn('DatCreate', 'datetime', [])
-                ->addColumn('DatSave', 'datetime', ['null' => true])
-                ->addColumn('last_modifier_id', 'integer', ['null' => true, 'signed' => false])
-                ->addIndex(['login', 'email'], ['unique' => true])
+                ->addColumn('after', 'datetime')
+                ->addColumn('companyapp', 'integer')
                 ->create();
         $table
                 ->changeColumn('id', 'biginteger', ['identity' => true, 'signed' => false])
