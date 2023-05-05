@@ -20,9 +20,7 @@ $oPage->onlyForLogged();
 
 $oPage->addItem(new PageTop(_('Multi Flexi')));
 
-$mainPageMenu = new AppsMenu();
-
-$oPage->container->addItem(new \Ease\TWB4\Panel(_('Modules Availble'), 'default', $mainPageMenu, new DbStatus()));
+$oPage->container->addItem(new \Ease\TWB4\Panel(_('Last 20 Jobs'), 'default', new JobHistoryTable(), new DbStatus()));
 
 $oPage->addItem(new PageBottom());
 

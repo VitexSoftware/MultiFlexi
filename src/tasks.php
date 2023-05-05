@@ -18,13 +18,11 @@ require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company Tasks')));
 $companies = new Company(\Ease\Document::getRequestValue('company_id', 'int'));
-
-if(strlen($companies->getDataValue('logo'))) {
-      $companyTasksHeading[] =  new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']);
+if (strlen($companies->getDataValue('logo'))) {
+    $companyTasksHeading[] = new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']);
 }
-$companyTasksHeading[] = $companies->getDataValue('nazev').'&nbsp;';
+$companyTasksHeading[] = new \Ease\Html\SpanTag($companies->getDataValue('nazev') . '&nbsp;', ['style' => 'font-size: xxx-large;']);
 $companyTasksHeading[] = _('Assigned applications');
-
-$oPage->container->addItem(new Panel( $companyTasksHeading  , 'default', new ServicesForCompanyForm($companies, ['id' => 'apptoggle'])));
+$oPage->container->addItem(new Panel($companyTasksHeading, 'default', new ServicesForCompanyForm($companies, ['id' => 'apptoggle'])));
 $oPage->addItem(new PageBottom());
 $oPage->draw();
