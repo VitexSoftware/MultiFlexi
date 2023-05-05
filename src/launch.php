@@ -21,8 +21,8 @@ $oPage->onlyForLogged();
 
 $oPage->addItem(new PageTop(_('Application')));
 
-$companyId = $oPage->getRequestValue('company_id');
-$appId = $oPage->getRequestValue('app_id');
+$companyId = $oPage->getRequestValue('company_id','int');
+$appId = $oPage->getRequestValue('app_id','int');
 
 $appCompany = new \AbraFlexi\MultiFlexi\AppToCompany($oPage->getRequestValue('id', 'int'));
 if ($companyId && $appId) {

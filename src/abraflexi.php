@@ -17,7 +17,7 @@ use AbraFlexi\MultiFlexi\AbraFlexis;
 require_once './init.php';
 $oPage->onlyForLogged();
 
-$abraflexis = new \AbraFlexis($oPage->getRequestValue('id', 'int'), ['autoload' => true]);
+$abraflexis = new AbraFlexis($oPage->getRequestValue('id', 'int'), ['autoload' => true]);
 $instanceName = $abraflexis->getRecordName();
 $_SESSION['server'] = &$abraflexis;
 
@@ -48,7 +48,7 @@ $oPage->container->addItem(new Panel($instanceName, 'info',
                 $instanceRow, $instanceLink));
 
 if (!is_null($abraflexis->getMyKey())) {
-    $oPage->container->addItem(new \AbraFlexiInstanceStatus($abraflexis));
+    $oPage->container->addItem(new AbraFlexiInstanceStatus($abraflexis));
 }
 
 $oPage->addItem(new PageBottom());

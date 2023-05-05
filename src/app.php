@@ -4,7 +4,7 @@
  * Multi Flexi - Customer instance editor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2017-2020 Vitex Software
+ * @copyright  2017-2023 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi\Ui;
@@ -80,7 +80,7 @@ $panel[] = [new \Ease\Html\H3Tag(_('Last 10 Jobs')), $jobList];
 
 $instanceRow->addColumn(4, $panel);
 
-$oPage->container->addItem(new Panel($instanceName, 'info',
+$oPage->container->addItem(new Panel($instanceName, 'inverse',
                 $instanceRow,
                 is_null($apps->getMyKey()) ?
                         new LinkButton('', _('Config fields'), 'inverse disabled') :

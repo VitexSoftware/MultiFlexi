@@ -45,6 +45,7 @@ class EnvironmentEditor extends \Ease\Html\TableTag
         $this->includeJavaScript('js/bootstrap-editable.js');
         $this->includeCss('css/bootstrap-editable.css');
         $this->addJavaScript("$.fn.editable.defaults.mode = 'inline';");
+//        $this->addJavaScript("$.fn.editable.options.savenochange = true;");
         $this->addJavaScript("      $.fn.editableform.buttons =
         '<button type=\"submit\" class=\"btn btn-primary btn-sm editable-submit\">' +
         '<i class=\"fa fa-fw fa-check\"></i>' +

@@ -42,19 +42,24 @@ class ServicesForCompanyForm extends Form
         parent::__construct($tagProperties);
         $jobber = new \AbraFlexi\MultiFlexi\Job();
         foreach ($apps as $appData) {
-            $code = $appData['id'];
+            $appId = $appData['id'];
             $appRow = new Row();
             $appRow->setTagProperty('style', 'border-bottom: 1px solid #bdbdbd; padding: 5px');
-            $appRow->addColumn(2, new ATag('app.php?id=' . $code, new ImgTag($appData['image'], $appData['nazev'], ['class' => 'img-fluid'])));
-            $intervalChooser = new IntervalChooser($code . '_interval', array_key_exists($code, $assigned) ? $assigned[$code]['interv'] : 'n', ['id' => $code . '_interval', 'data-company' => $companyID, 'checked' => 'true', 'data-app' => $code]);
-            if (array_key_exists($code, $assigned)) {
-                $launchButton = new \Ease\Html\DivTag(new LaunchButton($assigned[$code]['id']));
+            $logoColumn = $appRow->addColumn(2, [ new \Ease\Html\H2Tag($appData['nazev']), new \Ease\Html\PTag($appData['popis']) , new ATag('app.php?id=' . $appId, new ImgTag($appData['image'], $appData['nazev'], ['class' => 'img-fluid']))]);
+            $intervalChooser = new IntervalChooser($appId . '_interval', array_key_exists($appId, $assigned) ? $assigned[$appId]['interv'] : 'n', ['id' => $appId . '_interval', 'data-company' => $companyID, 'checked' => 'true', 'data-app' => $appId]);
+            if (array_key_exists($appId, $assigned)) {
+                $launchButton = new \Ease\Html\DivTag(new LaunchButton($assigned[$appId]['id']));
             } else {
-                $launchButton = new \Ease\TWB4\LinkButton('launch.php?app_id=' . $code . '&company_id=' . $companyID, [_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg btn-block ');
+                $launchButton = new \Ease\TWB4\LinkButton('launch.php?app_id=' . $appId . '&company_id=' . $companyID, [_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg btn-block ');
             }
-
-            $appRow->addColumn(4, new FormGroup('<strong>' . $appData['nazev'] . '</strong> ', $intervalChooser))->addItem($launchButton);
-            $jobs = $jobber->listingQuery()->select(['job.id', 'begin', 'exitcode', 'launched_by', 'login'], true)->leftJoin('user ON user.id = job.launched_by')->where('company_id', $companyID)->where('app_id', $code)->limit(10)->orderBy('job.id DESC')->fetchAll();
+            $logoColumn->addItem($launchButton);
+            
+            $appConfColumn = $appRow->addColumn(4, new FormGroup(new \Ease\Html\H3Tag('Job Config'), $intervalChooser));
+            
+            $appConfColumn->addItem(new CustomAppEnvironmentView((int)$assigned[$appId]['id']));
+            $appConfColumn->addItem(new \Ease\TWB4\LinkButton('custserviceconfig.php?app_id=' . $appId . '&amp;company_id=' . $companyID , _('Configure App Environment').' '. new \Ease\Html\ImgTag('images/set.svg',_('Set'),['height'=>'30px']) , 'success btn-sm  btn-block'));
+            
+            $jobs = $jobber->listingQuery()->select(['job.id', 'begin', 'exitcode', 'launched_by', 'login'], true)->leftJoin('user ON user.id = job.launched_by')->where('company_id', $companyID)->where('app_id', $appId)->limit(10)->orderBy('job.id DESC')->fetchAll();
             $jobList = new \Ease\TWB4\Table();
             $jobList->addRowHeaderColumns([_('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher')]);
             foreach ($jobs as $job) {
@@ -66,7 +71,10 @@ class ServicesForCompanyForm extends Form
                 $jobList->addRowColumns($job);
             }
 
-            $appRow->addColumn(6, [new ConfiguredFieldBadges($companyID, $code), $jobList]);
+            $historyButton = (new \Ease\TWB4\LinkButton('joblist.php?app_id=' . $appId . '&amp;company_id=' . $companyID , _('Job History').' '. new \Ease\Html\ImgTag('images/log.svg',_('Set'),['height'=>'30px']) , 'info btn-sm  btn-block'));
+            
+            
+            $appRow->addColumn(6, [new \Ease\Html\H3Tag(_('Last 10 jobs')), $jobList,$historyButton]);
             $this->addItem($appRow);
         }
     }
