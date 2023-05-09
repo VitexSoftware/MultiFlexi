@@ -41,7 +41,12 @@ class EnvironmentEditor extends \Ease\Html\TableTag
             $tableRow->addItem(new \Ease\Html\TdTag($valueInput, ['style' => 'width: 80%']));
         }
 
-        $this->addRowFooterColumns([new \Ease\TWB4\LinkButton('+', '+', 'success editable'), sprintf(_('%s items'), count($this->fields))]);
+        $newItemForm = new \Ease\TWB4\Form();
+        $newItemForm->addInput(new \Ease\Html\InputTextTag('env[newkey]'), _('New Config field'), _('Keyword'), _('Create New field here'));
+        $newItemForm->addInput(new \Ease\Html\InputTextTag('env[newvalue]'), _('New Config value'), _('Value'), _('Enter New field value here'));
+        $newItemForm->addItem(new \Ease\TWB4\SubmitButton(_('Add new field'), 'success'));
+        
+        $this->addRowFooterColumns([new \Ease\Html\DivTag($newItemForm, ['class' => 'form-row']), sprintf(_('%s items'), count($this->fields))]);
         $this->includeJavaScript('js/bootstrap-editable.js');
         $this->includeCss('css/bootstrap-editable.css');
         $this->addJavaScript("$.fn.editable.defaults.mode = 'inline';");
@@ -52,10 +57,7 @@ class EnvironmentEditor extends \Ease\Html\TableTag
         '</button>' +
         '<button type=\"button\" class=\"btn btn-inverse btn-sm editable-cancel\">' +
         '<i class=\"fa fa-fw fa-times\"></i>' +
-        '</button>' +
-        '<button type=\"button\" class=\"btn btn-danger btn-sm editable-delete\">' +
-        '<i class=\"fa fa-fw fa-trash\"></i>' +
-        '</button>';
+        '</button>' 
         ");
         $this->addJavaScript("$('.editable').editable();", null, true);
     }

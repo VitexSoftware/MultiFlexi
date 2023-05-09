@@ -18,12 +18,17 @@ $pk = \Ease\TWB4\WebPage::getRequestValue('pk', 'int');
 if (!is_null($pk)) {
     $companyEnver = new \AbraFlexi\MultiFlexi\CompanyEnv();
     $companyEnver->setMyKey($pk);
-    $companyEnver->setDataValue($name, $value);
-    if ($companyEnver->dbsync()) {
-        $result = 201;
+    if ($name == 'keyword' && empty($value)) {
+        $result = $companyEnver->deleteFromSQL() ? 201 : 500;
     } else {
-        $result = 400;
+        $companyEnver->setDataValue($name, $value);
+        if ($companyEnver->dbsync()) {
+            $result = 201;
+        } else {
+            $result = 400;
+        }
     }
+
     http_response_code($result);
 } else {
     http_response_code(404);

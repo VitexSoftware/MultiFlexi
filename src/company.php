@@ -27,7 +27,7 @@ $jobList->addRowHeaderColumns([_('Application'), _('Job ID'), _('Launch time'), 
 foreach ($jobs as $job) {
     $job['launch'] = new \Ease\TWB4\LinkButton('launch.php?id='.$job['appcompanyid'].'&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg');
     $job['schedule'] = new \Ease\TWB4\LinkButton('schedule.php?id='.$job['appcompanyid'].'&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Schedule') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
-    $job['appimage'] = new ATag('app.php?id=' . $job['app_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], $job['appname'], ['height' => 50, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);
+    $job['appimage'] = new ATag('companyapp.php?id=' . $job['appcompanyid'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], $job['appname'], ['height' => 50, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);
     unset($job['appname']);
     unset($job['appcompanyid']);
     unset($job['app_id']);

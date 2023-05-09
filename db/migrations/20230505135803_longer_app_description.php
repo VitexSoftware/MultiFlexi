@@ -20,6 +20,7 @@ final class LongerAppDescription extends AbstractMigration
      */
     public function change(): void
     {
+        $table = $this->table('apps');
         $table
                 ->changeColumn('popis', 'string', ['comment' => 'App Description', 'null' => true, 'limit' => 255])
                 ->save();
