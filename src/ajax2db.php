@@ -11,27 +11,22 @@
 
 
 /**
- * Multi Flexi - Index page.
+ * Multi Flexi - DataTable feeder.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * @copyright  2020-2023 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi\Ui;
 
 require_once './init.php';
-
 $oPage->onlyForLogged();
-
 header('Content-Type: application/json');
-
 $class = \Ease\WebPage::getRequestValue('class');
-
 /**
  * @var Engine Data Source
  */
 $engine = new $class;
-
 // DataTables PHP library
 //include( './lib/DataTables.php' );
 //if ($oPage->getRequestValue('columns')) {

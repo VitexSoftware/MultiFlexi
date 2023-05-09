@@ -50,7 +50,6 @@ $panel[] = new \Ease\Html\ImgTag(empty($apps->getDataValue('image')) ? 'images/a
 
 $panel[] = new \Ease\Html\HrTag();
 
-$panel[] = new LinkButton('logs.php?apps_id=' . $apps->getMyKey(), _('Application Log'), 'info');
 
 if (array_key_exists('company', $_SESSION) && is_object($_SESSION['company']) && $_SESSION['company']->getMyKey()) {
     $panel[] = new \Ease\TWB4\LinkButton('id=' . $apps->getMyKey() . '&company=' . $_SESSION['company']->getMyKey(), sprintf(_('Assign to %s'), $_SESSION['company']->getRecordName()), 'success');
@@ -77,6 +76,8 @@ foreach ($jobs as $job) {
 }
 
 $panel[] = [new \Ease\Html\H3Tag(_('Last 10 Jobs')), $jobList];
+$panel[] = new LinkButton('logs.php?apps_id=' . $apps->getMyKey(), _('Application Log'), 'info');
+$panel[] = new LinkButton('joblist.php?app_id=' . $apps->getMyKey(), _('All Application Jobs history'), 'info');
 
 $instanceRow->addColumn(4, $panel);
 

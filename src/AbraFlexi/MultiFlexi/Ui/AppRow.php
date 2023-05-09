@@ -38,10 +38,10 @@ class AppRow extends \Ease\TWB4\Row
     public function __construct($appData, $properties = [])
     {
         parent::__construct(null, $properties);
-        $appId = $appData['id'];
+        $appId = $appData['app_id'];
         $appRow = &$this;
         $appRow->setTagProperty('style', 'border-bottom: 1px solid #bdbdbd; padding: 5px');
-        $logoColumn = $appRow->addColumn(2, [new \Ease\Html\H2Tag($appData['nazev']), new \Ease\Html\PTag($appData['popis']), new ATag('app.php?id=' . $appId, new ImgTag($appData['image'], $appData['nazev'], ['class' => 'img-fluid']))]);
+        $logoColumn = $appRow->addColumn(2, [new \Ease\Html\H2Tag($appData['app_name']), new \Ease\Html\PTag($appData['popis']), new ATag('app.php?id=' . $appId, new ImgTag($appData['image'], $appData['nazev'], ['class' => 'img-fluid']))]);
         $intervalChooser = new \AbraFlexi\MultiFlexi\Ui\IntervalChooser($appId . '_interval', array_key_exists('interv', $appData) ? $appData['interv'] : 'n', ['id' => $appId . '_interval', 'data-company' => $appData['company_id'], 'checked' => 'true', 'data-app' => $appId]);
         if (array_key_exists('appcompanyid', $appData)) {
             $launchButton = new \Ease\Html\DivTag(new \AbraFlexi\MultiFlexi\Ui\LaunchButton($appData['appcompanyid']));

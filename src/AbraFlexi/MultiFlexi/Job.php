@@ -108,4 +108,19 @@ class Job extends Engine
         $appInfo = $appCompany->getAppInfo();
         return $appInfo['prepared'];
     }
+
+    /**
+     * @link https://datatables.net/examples/advanced_init/column_render.html 
+     * 
+     * @return string Column rendering
+     */
+    public function columnDefs() {
+        return '
+"columnDefs": [
+           // { "visible": false,  "targets": [ 0 ] }
+        ]            
+,
+';
+    }
+
 }
