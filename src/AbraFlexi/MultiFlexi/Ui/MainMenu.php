@@ -4,7 +4,7 @@
  * Multi Flexi  - Main Menu
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2015-2022 Vitex Software
+ * @copyright  2015-2023 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi\Ui;
