@@ -19,7 +19,6 @@ $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company Tasks')));
 $companyApp = new \AbraFlexi\MultiFlexi\AppToCompany(\Ease\Document::getRequestValue('id', 'int'));
 $appData = $companyApp->getAppInfo();
-
 $companies = new Company($companyApp->getDataValue('company_id'));
 if (strlen($companies->getDataValue('logo'))) {
     $companyTasksHeading[] = new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']);

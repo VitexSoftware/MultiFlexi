@@ -14,12 +14,14 @@ namespace AbraFlexi\MultiFlexi\Ui;
  *
  * @author vitex
  */
-class MainMenu extends \Ease\Html\DivTag {
+class MainMenu extends \Ease\Html\DivTag
+{
 
     /**
      * Vytvoří hlavní menu.
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct(null, ['id' => 'MainMenu']);
     }
 
@@ -32,7 +34,8 @@ class MainMenu extends \Ease\Html\DivTag {
      *
      * @return string
      */
-    protected function getMenuList($source, $icon = null, $nest = null) {
+    protected function getMenuList($source, $icon = null, $nest = null)
+    {
         $keycolumn = $source->getkeyColumn();
         $namecolumn = $source->nameColumn;
         $columns = [$source->getkeyColumn(), $namecolumn];
@@ -40,14 +43,13 @@ class MainMenu extends \Ease\Html\DivTag {
             $columns[] = $icon;
         }
         $lister = $source->getColumnsFromSQL($columns, null, $namecolumn, $keycolumn);
-
         $itemList = [];
         if ($lister) {
             foreach ($lister as $uID => $uInfo) {
-                if(!is_null($nest) && ($nest->getMyKey() == $uID)) {
+                if (!is_null($nest) && ($nest->getMyKey() == $uID)) {
                     $uInfo[$namecolumn] .= ' ✓';
                 }
-                
+
                 if ($icon) {
                     $logo = new \Ease\Html\ImgTag($uInfo[$icon], $uInfo[$namecolumn], ['height' => 20]) . '&nbsp;';
                 } else {
@@ -63,20 +65,16 @@ class MainMenu extends \Ease\Html\DivTag {
     /**
      * Insert menu.
      */
-    public function afterAdd() {
+    public function afterAdd()
+    {
         $nav = $this->addItem(new BootstrapMenu('main-menu', null, ['class' => 'navbar navbar-expand-lg navbar-light bg-light']));
-
         if (\Ease\Shared::user()->isLogged()) { //Authenticated user
-            
             $oPage = WebPage::singleton();
-            
             $abraflexis = $this->getMenuList(new \AbraFlexi\MultiFlexi\AbraFlexis());
-            $customers = $this->getMenuList(new \AbraFlexi\MultiFlexi\Customer(),null,$oPage->customer);
+            $customers = $this->getMenuList(new \AbraFlexi\MultiFlexi\Customer(), null, $oPage->customer);
             $companys = $this->getMenuList(new \AbraFlexi\MultiFlexi\Company(), 'logo');
             $apps = $this->getMenuList(new \AbraFlexi\MultiFlexi\Application(), 'image');
-
             $this->abraflexisMenuEnabled($nav, $abraflexis);
-
             if (empty($abraflexis) && empty($customers) && empty($companys)) { // All empty yet
                 \AbraFlexi\MultiFlexi\User::singleton()->addStatusMessage(_('No server registered yet. Please register one.'), 'warning');
                 $this->customersMenuDisabled($nav);
@@ -106,7 +104,9 @@ class MainMenu extends \Ease\Html\DivTag {
             }
 
             $this->usersMenuEnabled($nav);
-            $nav->addMenuItem(new \Ease\Html\ATag('logs.php', '<img height=30 src=images/log.svg> ' . _('Logs')), 'right');
+            //$nav->addMenuItem(new \Ease\Html\ATag('logs.php', '<img height=30 src=images/log.svg> ' . _('Logs')), 'right');
+
+            $nav->addDropDownMenu('<img height=30 src=images/log.svg> '._('Logs'), ['logs.php' => _('System'), 'joblist.php' => _('Jobs')]);
             $nav->addMenuItem(new \Ease\Html\ATag('logout.php', '<img height=30 src=images/application-exit.svg> ' . _('Sign Off')), 'right');
         }
     }
@@ -116,9 +116,9 @@ class MainMenu extends \Ease\Html\DivTag {
      * @param type $nav
      * @param type $apps
      */
-    public function appsMenuEnabled($nav, $apps) {
+    public function appsMenuEnabled($nav, $apps)
+    {
         $appsMenu = ['app.php' => _('Register Application')];
-
         if (!empty($apps)) {
             $appsMenu['apps.php'] = _('Application list');
         }
@@ -133,9 +133,9 @@ class MainMenu extends \Ease\Html\DivTag {
      * @param type $nav
      * @param type $abraflexis
      */
-    public function abraflexisMenuEnabled($nav, $abraflexis) {
+    public function abraflexisMenuEnabled($nav, $abraflexis)
+    {
         $abraflexisMenu = ['abraflexi.php' => _('Register AbraFlexi Server')];
-
         if (!empty($abraflexis)) {
             $abraflexisMenu['abraflexis.php'] = _('Instance list');
         }
@@ -150,7 +150,8 @@ class MainMenu extends \Ease\Html\DivTag {
      * @param type $nav
      * @param type $companys
      */
-    public function companysMenuEnabled($nav, $companys) {
+    public function companysMenuEnabled($nav, $companys)
+    {
         $nav->addDropDownMenu('<img width=30 src=images/company.svg> ' . _('Companies'),
                 array_merge(['company.php' => _('New Company')], ['' => ''], $companys)
         );
@@ -160,7 +161,8 @@ class MainMenu extends \Ease\Html\DivTag {
      * 
      * @param type $nav
      */
-    public function companysMenuDisabled($nav) {
+    public function companysMenuDisabled($nav)
+    {
         $nav->addMenuItem(new \Ease\Html\ATag('#', '<img width=30 src=images/company.svg> ' . _('Companies'), ['class' => 'nav-link disabled']));
     }
 
@@ -169,7 +171,8 @@ class MainMenu extends \Ease\Html\DivTag {
      * @param type $nav
      * @param type $customers
      */
-    public function customersMenuEnabled($nav, $customers) {
+    public function customersMenuEnabled($nav, $customers)
+    {
         $customersMenu = ['customer.php' => _('New Customer')];
         $nav->addDropDownMenu('<img width=30 src=images/customer.svg> ' . _('Customers'),
                 array_merge($customersMenu, ['' => ''], $customers)
@@ -180,7 +183,8 @@ class MainMenu extends \Ease\Html\DivTag {
      * 
      * @param type $nav
      */
-    public function customersMenuDisabled($nav) {
+    public function customersMenuDisabled($nav)
+    {
         $nav->addMenuItem(new \Ease\Html\ATag('#', '<img width=30 src=images/customer.svg> ' . _('Customers'), ['class' => 'nav-link disabled']));
     }
 
@@ -188,7 +192,8 @@ class MainMenu extends \Ease\Html\DivTag {
      * 
      * @param type $nav
      */
-    public function usersMenuEnabled($nav) {
+    public function usersMenuEnabled($nav)
+    {
         $nav->addDropDownMenu('<img width=30 src=images/system-users.svg> ' . _('Admin'),
                 array_merge([
             'createaccount.php' => _('New Admin'),
@@ -201,7 +206,8 @@ class MainMenu extends \Ease\Html\DivTag {
     /**
      * Přidá do stránky javascript pro skrývání oblasti stavových zpráv.
      */
-    public function finalize() {
+    public function finalize()
+    {
         if (\Ease\Shared::user()->isLogged()) { //Authenticated user
             $this->addItem(new Breadcrumb());
         }
@@ -218,7 +224,6 @@ class MainMenu extends \Ease\Html\DivTag {
 #smdrag:hover { background-color: #f5ad66; }
 
 ');
-
             $this->addItem(WebPage::singleton()->getStatusMessagesBlock(['id' => 'status-messages', 'title' => _('Click to hide messages')]));
             $this->addItem(new \Ease\Html\DivTag(null, ['id' => 'smdrag', 'style' => 'margin-bottom: 5px']));
             \Ease\Shared::logger()->cleanMessages();
@@ -228,5 +233,4 @@ class MainMenu extends \Ease\Html\DivTag {
             WebPage::singleton()->includeJavaScript('js/slideupmessages.js');
         }
     }
-
 }
