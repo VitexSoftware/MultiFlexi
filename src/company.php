@@ -19,14 +19,17 @@ $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company')));
 $companies = new Company(WebPage::getRequestValue('id', 'int'));
 $_SESSION['company'] = &$companies;
+$_SESSION['server'] = new \AbraFlexi\MultiFlexi\AbraFlexis($companies->getDataValue('abraflexi'));
+$_SESSION['customer'] = new \AbraFlexi\MultiFlexi\Customer($companies->getDataValue('customer'));
+        
 $companyEnver = new \AbraFlexi\MultiFlexi\CompanyEnv($companies->getMyKey());
 $jobber = new \AbraFlexi\MultiFlexi\Job();
 $jobs = $jobber->listingQuery()->select(['apps.nazev AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'appcompany.id AS appcompanyid'], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->leftJoin('appcompany ON appcompany.company_id = job.company_id AND appcompany.app_id = job.app_id')->where('job.company_id', $companies->getMyKey())->limit(20)->orderBy('job.id DESC')->fetchAll();
 $jobList = new \Ease\TWB4\Table();
 $jobList->addRowHeaderColumns([_('Application'), _('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'), _('Launch now'), _('Launch in Background')]);
 foreach ($jobs as $job) {
-    $job['launch'] = new \Ease\TWB4\LinkButton('launch.php?id='.$job['appcompanyid'].'&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg');
-    $job['schedule'] = new \Ease\TWB4\LinkButton('schedule.php?id='.$job['appcompanyid'].'&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Schedule') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
+    $job['launch'] = new \Ease\TWB4\LinkButton('launch.php?id=' . $job['appcompanyid'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg');
+    $job['schedule'] = new \Ease\TWB4\LinkButton('schedule.php?id=' . $job['appcompanyid'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Schedule') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
     $job['appimage'] = new ATag('companyapp.php?id=' . $job['appcompanyid'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], $job['appname'], ['height' => 50, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);
     unset($job['appname']);
     unset($job['appcompanyid']);

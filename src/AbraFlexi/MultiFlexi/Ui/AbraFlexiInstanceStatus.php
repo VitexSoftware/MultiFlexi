@@ -43,7 +43,7 @@ class AbraFlexiInstanceStatus extends \Ease\Html\TableTag {
                 unset($companyData['licenseGroup']);
                 unset($companyData['createDt']);
 
-                $companyData['action'] = array_key_exists($companyData['dbNazev'], $registered) ? new \Ease\TWB4\LinkButton('company.php?id=' . $registered[$companyData['dbNazev']]['id'], _('Edit'), 'success') : new \Ease\TWB4\LinkButton('company.php?' . http_build_query($registerParams), _('Register'), 'warning');
+                $companyData['action'] = array_key_exists($companyData['dbNazev'], $registered) ? new \Ease\TWB4\LinkButton('company.php?id=' . $registered[$companyData['dbNazev']]['id'], _('Edit'), 'success') : new \Ease\TWB4\LinkButton('companysetup.php?' . http_build_query($registerParams), _('Register'), 'warning');
                 $this->addRowColumns($companyData);
             } catch (\AbraFlexi\Exception $exc) {
                 $this->addStatusMessage($exc->getMessage());

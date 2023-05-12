@@ -4,7 +4,7 @@
  * Multi Flexi - Login page.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2022 Vitex Software
+ * @copyright  2020-2023 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi\Ui;
@@ -55,10 +55,10 @@ $infoBlock->addItem(new DivTag(_('Welcome to Multi Flexi'), ['style' => 'text-al
 
 $loginColumn = $loginRow->addItem(new Col(4));
 
-$submit = new SubmitButton(_('Sign in'), 'success', ['id' => 'signin']);
+$submit = new SubmitButton(_('Sign in'), 'success btn-lg', ['id' => 'signin']);
 
 $loginPanel = new Panel(new ImgTag('images/project-logo.svg', 'logo', ['width' => 20]),
-        'success', null, $submit);
+        'secondary', null, $submit);
 $loginPanel->addItem(new FormGroup(_('Username'),
                 new InputTextTag('login', $login),
                 '', _('the username you chose')));

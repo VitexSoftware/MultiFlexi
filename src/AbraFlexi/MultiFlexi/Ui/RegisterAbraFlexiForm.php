@@ -23,7 +23,7 @@ class RegisterAbraFlexiForm extends EngineForm {
                 _('RestAPI endpoint url'));
         $this->addInput(new \Ease\Html\InputTextTag('user'),
                 _('REST API Username'));
-        $this->addInput(new \Ease\Html\InputTextTag('password'),
+        $this->addInput(new \Ease\Html\InputPasswordTag('password'),
                 _('Rest API Password'));
 
         $this->addInput(new \Ease\TWB4\SubmitButton(_('Save'), 'success'));

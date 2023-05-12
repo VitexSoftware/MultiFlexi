@@ -65,4 +65,14 @@ class Customer extends DBEngine {
         ]);
     }
 
+    /**
+     * Serialize only data storage
+     * 
+     * @return array
+     */
+    public function __sleep()
+    {
+        return ['data'];
+    }
+
 }

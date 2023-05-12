@@ -22,6 +22,12 @@ use Ease\TWB4\SubmitButton;
 class ConfFieldsForm extends Form
 {
 
+    /**
+     * 
+     * @param array $conffields
+     * @param mixed $formContents
+     * @param array $tagProperties
+     */
     public function __construct($conffields, $formContents, $tagProperties = array())
     {
         parent::__construct(['method' => 'post', 'action' => 'conffield.php'], $tagProperties, $formContents);

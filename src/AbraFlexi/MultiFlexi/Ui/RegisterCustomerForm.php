@@ -25,7 +25,7 @@ class RegisterCustomerForm extends EngineForm {
         $this->addInput(new \Ease\Html\InputTextTag('login'),
                 _('Login'));
 
-        $this->addInput(new \Ease\Html\InputTextTag('password'),
+        $this->addInput(new \Ease\Html\InputPasswordTag('password'),
                 _('Password'));
 
         $this->addInput(new \Ease\Html\InputTextTag('email'),

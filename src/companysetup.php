@@ -19,7 +19,6 @@ $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company')));
 $companies = new Company(WebPage::getRequestValue('id', 'int'));
 $_SESSION['company'] = &$companies;
-$instanceName = $companies->getDataValue('nazev');
 $companyEnver = new \AbraFlexi\MultiFlexi\CompanyEnv($companies->getMyKey());
 if ($oPage->isPosted()) {
     if (array_key_exists('env', $_POST)) {
@@ -42,7 +41,7 @@ if ($oPage->isPosted()) {
         $companies->setDataValue('abraflexi', WebPage::getGetValue('abraflexi', 'int'));
     }
 }
-
+$instanceName = $companies->getDataValue('nazev');
 if (strlen($instanceName)) {
     $instanceLink = new ATag($companies->getApiURL() . $companies->getDataValue('company'),
             $companies->getApiURL() . $companies->getDataValue('company'));
@@ -61,11 +60,7 @@ if (strlen($companies->getDataValue('logo'))) {
 }
 
 $rightColumn[] = new EnvironmentEditor($companyEnver->getEnvFields());
-
-
 $instanceRow->addColumn(8, $rightColumn);
-
-
-$oPage->container->addItem(new Panel($instanceName, 'light',$instanceRow));
+$oPage->container->addItem(new Panel($instanceName, 'light', $instanceRow));
 $oPage->addItem(new PageBottom());
 $oPage->draw();
