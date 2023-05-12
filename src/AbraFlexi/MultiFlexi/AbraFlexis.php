@@ -6,9 +6,10 @@ namespace AbraFlexi\MultiFlexi;
  * Multi Flexi - Instance Management Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * @copyright  2020-2023 Vitex Software
  */
-class AbraFlexis extends DBEngine {
+class AbraFlexis extends DBEngine
+{
 
     public $keyword = 'abraflexi';
 
@@ -42,7 +43,8 @@ class AbraFlexis extends DBEngine {
      * @param array $data
      * @return int data taken count
      */
-    public function takeData($data) {
+    public function takeData($data)
+    {
         unset($data['class']);
         if (array_key_exists('id', $data)) {
             if (is_null($data['id'])) {
@@ -89,8 +91,9 @@ class AbraFlexis extends DBEngine {
      *
      * @return string
      */
-    function getLink() {
-        return $this->getDataValue('url') . '/c/' . $this->getDataValue('company');
+    public function getLink()
+    {
+        return 'abraflexi.php?id=' . $this->getMyKey();
     }
 
 //    /**
@@ -120,11 +123,11 @@ class AbraFlexis extends DBEngine {
 //        return parent::saveToSQL($data, $searchForID);
 //    }
 
-    public function prepareRemoteAbraFlexi() {
+    public function prepareRemoteAbraFlexi()
+    {
         $companer = new Company(null, $this->getData());
         $settinger = new \AbraFlexi\Nastaveni(null,
                 array_merge($this->getData(), ['detail' => 'full']));
-
         //Setup Reminder
         //Setup Invoicer
         //Setup any other apps 
@@ -140,7 +143,8 @@ class AbraFlexis extends DBEngine {
 //                        $companyData['nazev']), $result ? 'success' : 'error');
     }
 
-    public function setEnvironment() {
+    public function setEnvironment()
+    {
         $envNames = [
             'ABRAFLEXI_URL' => $this->getDataValue('url'),
             'ABRAFLEXI_LOGIN' => $this->getDataValue('user'),
@@ -148,5 +152,4 @@ class AbraFlexis extends DBEngine {
         ];
         $this->exportEnv($envNames);
     }
-
 }

@@ -4,7 +4,7 @@
  * Multi Flexi - Customer instance editor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2017-2022 Vitex Software
+ * @copyright  2017-2023 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi\Ui;
@@ -52,5 +52,3 @@ $oPage->container->addItem(new Panel($instanceName, 'info',
 $oPage->addItem(new PageBottom());
 
 $oPage->draw();
-
-session_commit();

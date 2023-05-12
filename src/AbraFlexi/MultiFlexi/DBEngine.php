@@ -23,7 +23,8 @@ namespace AbraFlexi\MultiFlexi;
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class DBEngine extends \Ease\SQL\Engine {
+class DBEngine extends \Ease\SQL\Engine
+{
 
     /**
      *
@@ -100,7 +101,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * @param int $init
      * @param int $filter Initial conditons
      */
-    public function __construct($init = null, $filter = []) {
+    public function __construct($init = null, $filter = [])
+    {
         parent::__construct();
         if (is_numeric($init)) {
             $this->loadFromSQL($init);
@@ -114,12 +116,14 @@ class DBEngine extends \Ease\SQL\Engine {
         }
     }
 
-    public function loadFromSQL($id = null) {
+    public function loadFromSQL($id = null)
+    {
         $record = $this->getOneRow($id);
         return $this->takeData($record ? $record : []);
     }
 
-    public function takemyTable($myTable) {
+    public function takemyTable($myTable)
+    {
         if (is_null($this->subject)) {
             $this->subject = $myTable;
         }
@@ -134,7 +138,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @param string $detailPage
      */
-    public function setDetailPage($detailPage = null) {
+    public function setDetailPage($detailPage = null)
+    {
         $this->detailPage = empty($detailPage) ? ( empty($this->keyword) ? null : $this->keyword . '.php' ) : $detailPage;
     }
 
@@ -143,14 +148,16 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return string
      */
-    public function getNameColumn() {
+    public function getNameColumn()
+    {
         return $this->nameColumn;
     }
 
     /**
      * 
      */
-    public function translate() {
+    public function translate()
+    {
         $this->newSubmitText = sprintf(_('New %s'), $this->subject);
         $this->editSubmitText = sprintf(_('Edit %s'), $this->subject);
         $this->removeSubmitText = sprintf(_('Remove %s'), $this->subject);
@@ -165,7 +172,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return string
      */
-    public function getRecordName() {
+    public function getRecordName()
+    {
         return $this->getDataValue($this->nameColumn);
     }
 
@@ -186,7 +194,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return array
      */
-    public function columns($columns = []) {
+    public function columns($columns = [])
+    {
         if (empty($this->columnsCache)) {
 
             $columns = \Ease\Functions::reindexArrayBy($columns, 'name');
@@ -238,7 +247,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return array
      */
-    public function editableColumns($columnsToFilter) {
+    public function editableColumns($columnsToFilter)
+    {
         $columnsToEdit = [];
         $keyColum = $this->getKeyColumn();
         foreach ($columnsToFilter as $id => $values) {
@@ -268,11 +278,13 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return array
      */
-    public function getAll() {
+    public function getAll()
+    {
         return $this->listingQuery()->fetchAll();
     }
 
-    public function getColumnType($colName) {
+    public function getColumnType($colName)
+    {
         return $this->columns()[$colName]['type'];
     }
 
@@ -282,7 +294,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return string
      */
-    public function getAllForDataTable($conditions = []) {
+    public function getAllForDataTable($conditions = [])
+    {
         $data = [];
         $tableColumns = $this->columns();
         $dtColumns = array_key_exists('columns', $conditions) ? $conditions['columns'] : array_keys($tableColumns);
@@ -290,9 +303,7 @@ class DBEngine extends \Ease\SQL\Engine {
         unset($conditions['_']);
         unset($conditions['class']);
         $query = $this->listingQuery();
-
         $recordsTotal = count($query);
-
         if ($recordsTotal) {
 
             if (array_key_exists('search', $conditions) && $conditions['search']['value']) { //All Columns Search
@@ -318,11 +329,11 @@ class DBEngine extends \Ease\SQL\Engine {
                 }
             }
 
-            if(array_key_exists('apps_id', $conditions)){
+            if (array_key_exists('apps_id', $conditions)) {
                 $query->where('apps_id', $conditions['apps_id']);
             }
 
-                foreach ($conditions as $condName => $condValue) {
+            foreach ($conditions as $condName => $condValue) {
 
                 switch ($condName) {
                     case 'type':
@@ -332,7 +343,6 @@ class DBEngine extends \Ease\SQL\Engine {
                     case 'order':
                     case 'search':
                         break;
-
                     default:
                         if (array_key_exists($condName, $this->columns())) {
                             $query->where($this->getMyTable() . '.' . $condName,
@@ -347,7 +357,6 @@ class DBEngine extends \Ease\SQL\Engine {
         }
 
         $recordsFiltered = count($query);
-
         if (array_key_exists('length', $conditions)) {
             $query->limit($conditions['length']);
             unset($conditions['length']);
@@ -364,10 +373,8 @@ class DBEngine extends \Ease\SQL\Engine {
             foreach ($conditions['order'] as $order) {
                 if ($dtColumns[$order['column']]['searchable'] == 'true') {
                     $colProps = $this->columnsCache[$dtColumns[$order['column']]['data']];
-
                     $orderBy = array_key_exists('column', $colProps) ? $colProps['column'] : $this->getMyTable() . '.' . $colProps['name'];
                     $orderColumn = array_key_exists('valueColumn', $colProps) ? $colProps['valueColumn'] : $orderBy;
-
                     $query->orderBy($orderColumn . ' ' . $order['dir']);
                 }
             }
@@ -375,7 +382,6 @@ class DBEngine extends \Ease\SQL\Engine {
         }
 
         $this->addSelectizeValues($query);
-
         foreach ($query as $dataRow) {
             $dataRow['DT_RowId'] = 'row_' . $dataRow['id'];
 //            $dataRow['DT_RowClass'] = $this->getRowColor($this->checkRow($dataRow));
@@ -397,7 +403,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return \Envms\FluentPDO
      */
-    public function addSelectizeValues($query) {
+    public function addSelectizeValues($query)
+    {
         foreach ($this->columns() as $colName => $colProps) {
             if (array_key_exists('valueColumn', $colProps)) {
                 $query->select($colProps['valueColumn'] . ' as ' . $colName . '_value');
@@ -410,7 +417,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return \Envms\FluentPDO
      */
-    public function listingQuery() {
+    public function listingQuery()
+    {
         return $this->getFluentPDO()->from($this->getMyTable());
     }
 
@@ -421,7 +429,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return array
      */
-    public function getOneRow($id = null) {
+    public function getOneRow($id = null)
+    {
         if (is_null($id)) {
             $id = $this->getMyKey();
         }
@@ -432,7 +441,8 @@ class DBEngine extends \Ease\SQL\Engine {
     /**
      * 
      */
-    public function editorForm($id = null) {
+    public function editorForm($id = null)
+    {
         if (is_null($id)) {
             $id = $this->getObjectName();
         }
@@ -449,7 +459,6 @@ class DBEngine extends \Ease\SQL\Engine {
                 case 'created_at':
                 case 'updated_at':
                     break;
-
                 default:
                     switch ($column['type']) {
                         case 'string':
@@ -469,7 +478,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return array
      */
-    public function getSaverFields() {
+    public function getSaverFields()
+    {
         $saverFields = [];
         foreach ($this->columns() as $column) {
             if ($column['type'] == 'readonly') { //
@@ -482,12 +492,10 @@ class DBEngine extends \Ease\SQL\Engine {
                 continue;
             }
             $field = Field::inst($column['name']);
-
             switch ($column['type']) {
                 case 'email':
                     $field->validator(Validate::email(ValidateOptions::inst()->message(sprintf(_('%s is not valid email'),
                                                     $column['label']))));
-
                     break;
                 case 'currency':
 //                    $field->validator(Validate::numeric(ValidateOptions::inst()->message(sprintf(_('A %s must be a nuber'),
@@ -574,7 +582,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return array
      */
-    public function preprocessPost($formPost) {
+    public function preprocessPost($formPost)
+    {
         if (array_key_exists('action', $formPost) && array_key_exists('data',
                         $formPost)) {
             foreach ($formPost['data'] as $recordId => $recordData) {
@@ -593,12 +602,12 @@ class DBEngine extends \Ease\SQL\Engine {
      *
      * @return array
      */
-    public function htmlizeData($data) {
+    public function htmlizeData($data)
+    {
         if (is_array($data) && count($data)) {
             $usedCache = array();
             foreach ($data as $rowId => $row) {
                 $htmlized = $this->htmlizeRow($row);
-
                 if (is_array($htmlized)) {
                     foreach ($htmlized as $key => $value) {
                         if (!is_null($value)) {
@@ -626,9 +635,9 @@ class DBEngine extends \Ease\SQL\Engine {
      *
      * @return array
      */
-    public function htmlizeRow($row) {
+    public function htmlizeRow($row)
+    {
         $columns = self::reindexArrayBy($this->columns(), 'name');
-
         if (is_array($row) && count($row)) {
             foreach ($row as $key => $value) {
                 if ($key == str_replace($this->getMyTable() . '.', '',
@@ -647,11 +656,9 @@ class DBEngine extends \Ease\SQL\Engine {
                 }
 
                 $fType = preg_replace('/\(.*\)/', '', $fieldType);
-
                 switch ($fType) {
                     case 'hidden':
                         break;
-
                     case 'boolean':
                         if (is_null($value) || !strlen($value)) {
                             $row[$key] = '<em>NULL</em>';
@@ -708,7 +715,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return type
      */
-    public function foterCallback() {
+    public function foterCallback()
+    {
         return null;
     }
 
@@ -717,7 +725,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return string Column rendering
      */
-    public function columnDefs() {
+    public function columnDefs()
+    {
         return '';
     }
 
@@ -729,7 +738,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return int
      */
-    public function saveToSQL($data = null, $searchForId = null) {
+    public function saveToSQL($data = null, $searchForId = null)
+    {
         if (is_null($data)) {
             $data = $this->getData();
         }
@@ -755,7 +765,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return array
      */
-    public function prepareToSave($data, $action, $recordId = null) {
+    public function prepareToSave($data, $action, $recordId = null)
+    {
         $now = new \DateTime();
         switch ($action) {
             case 'create':
@@ -774,7 +785,6 @@ class DBEngine extends \Ease\SQL\Engine {
                     $data[$this->modifiedColumn] = date('Y-m-d H:i:s');
                 }
                 break;
-
             default:
                 break;
         }
@@ -789,7 +799,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return array pole výsledků
      */
-    public function searchString($what) {
+    public function searchString($what)
+    {
         $results = [];
         $conds = [];
         $what = str_replace('.', '\.', $what);
@@ -805,7 +816,6 @@ class DBEngine extends \Ease\SQL\Engine {
         }
         if (count($conds)) {
             $found = $this->listingQuery()->where('(' . implode(' OR ', $conds) . ')');
-
             foreach (self::fixIterator($found) as $result) {
                 $this->setData($result);
                 $occurences = '';
@@ -821,7 +831,8 @@ class DBEngine extends \Ease\SQL\Engine {
         return $results;
     }
 
-    public function getSqlColumns() {
+    public function getSqlColumns()
+    {
         $sqlColumns = [];
         foreach ($this->columns() as $columnInfo) {
             if (array_key_exists('virtual', $columnInfo)) {
@@ -844,7 +855,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @throws \Exception
      */
-    public function getGetDataTableColumns() {
+    public function getGetDataTableColumns()
+    {
         $dataTableColumns = [];
         foreach ($this->columns() as $columnInfo) {
             if (array_key_exists('hidden', $columnInfo) && ($columnInfo['hidden'] == true)) {
@@ -875,7 +887,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return string
      */
-    public function preTableCode($tableID) {
+    public function preTableCode($tableID)
+    {
         return '';
     }
 
@@ -886,7 +899,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return string
      */
-    public function tableCode($tableID) {
+    public function tableCode($tableID)
+    {
         return '';
     }
 
@@ -897,14 +911,16 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return string
      */
-    public function postTableCode($tableID) {
+    public function postTableCode($tableID)
+    {
         return '';
     }
 
     /**
      * 
      */
-    public function feedSelectize($options = []) {
+    public function feedSelectize($options = [])
+    {
         $result = [];
         $candidates = $this->listingQuery();
         foreach (self::fixIterator($candidates) as $candidat) {
@@ -920,7 +936,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return array
      */
-    public function feedSelectizeCached($options = []) {
+    public function feedSelectizeCached($options = [])
+    {
         if (!isset($_SESSION['feedCache'][get_class($this)]) || empty($_SESSION['feedCache'][get_class($this)])) {
             $_SESSION['feedCache'][get_class($this)] = $this->feedSelectize($options);
         }
@@ -931,7 +948,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return array
      */
-    public function getFilterOptions() {
+    public function getFilterOptions()
+    {
         $result = [];
         $candidates = $this->listingQuery()->orderBy($this->nameColumn);
         foreach (self::fixIterator($candidates) as $candidat) {
@@ -944,7 +962,8 @@ class DBEngine extends \Ease\SQL\Engine {
     /**
      * 
      */
-    public function getHiddenTagets($extra = []) {
+    public function getHiddenTagets($extra = [])
+    {
         $hiddenColumns = [];
         foreach (array_values($this->columns()) as $columnId => $columnInfo) {
             if (array_key_exists('hidden', $columnInfo) && ($columnInfo['hidden'] == true)) {
@@ -957,7 +976,8 @@ class DBEngine extends \Ease\SQL\Engine {
     /**
      * 
      */
-    static function selectize($rawdata) {
+    static function selectize($rawdata)
+    {
         $selectized = [];
         foreach ($rawdata as $key => $value) {
             $selectized[] = ['label' => $value, 'value' => $key];
@@ -969,7 +989,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return type
      */
-    public function getCustomerID() {
+    public function getCustomerID()
+    {
         return $this->getDataValue('client_id');
     }
 
@@ -977,7 +998,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return type
      */
-    public function getResume() {
+    public function getResume()
+    {
         return implode(' ', $this->getData());
     }
 
@@ -987,7 +1009,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * @param type $id
      * @param type $row
      */
-    public function postCreate($datableSaver, $id, $row) {
+    public function postCreate($datableSaver, $id, $row)
+    {
         
     }
 
@@ -995,7 +1018,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @param type $saver
      */
-    public function validation($saver) {
+    public function validation($saver)
+    {
         
     }
 
@@ -1003,7 +1027,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return string
      */
-    public function editorOpenJS() {
+    public function editorOpenJS()
+    {
         return '';
     }
 
@@ -1011,7 +1036,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return string
      */
-    public function editorPostCreateJS() {
+    public function editorPostCreateJS()
+    {
         return '';
     }
 
@@ -1019,7 +1045,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return string
      */
-    public function editorCreateJS() {
+    public function editorCreateJS()
+    {
         return '';
     }
 
@@ -1027,11 +1054,13 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return string
      */
-    public function editorSubmitCompleteJS() {
+    public function editorSubmitCompleteJS()
+    {
         return '';
     }
 
-    public static function renderYesNo($columns) {
+    public static function renderYesNo($columns)
+    {
         return '
             {
                 "render": function ( data, type, row ) {
@@ -1049,7 +1078,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return string
      */
-    public static function renderSelectize($columns) {
+    public static function renderSelectize($columns)
+    {
         return '
             {
                 "render": function ( data, type, row, opts ) {
@@ -1073,7 +1103,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return string
      */
-    public static function renderSelectized($columns) {
+    public static function renderSelectized($columns)
+    {
         return '
             {
                 "render": function ( data, type, row, opts ) {
@@ -1093,7 +1124,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return string
      */
-    public static function renderIdLink($columns) {
+    public static function renderIdLink($columns)
+    {
         return '
             {
                 "render": function ( data, type, row, opts ) { return renderIdLink( data, type, row, opts ); }, 
@@ -1109,7 +1141,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * @param type $target
      * @return type
      */
-    public static function renderDate($columns, $target = 'calendar.php') {
+    public static function renderDate($columns, $target = 'calendar.php')
+    {
         return '
             {
                 "render": function ( data, type, row ) {
@@ -1133,7 +1166,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * @param type $target
      * @return type
      */
-    public static function renderDocumentLink($columns, $target = 'document.php') {
+    public static function renderDocumentLink($columns, $target = 'document.php')
+    {
         return '
             {
                 "render": function ( data, type, row ) {
@@ -1164,7 +1198,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * @param type $target
      * @return type
      */
-    public static function renderDismisButton($columns, $target = 'dismis.php') {
+    public static function renderDismisButton($columns, $target = 'dismis.php')
+    {
         return '
             {
                 "render": function ( data, type, row ) {
@@ -1189,7 +1224,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * @param type $types
      * @return type
      */
-    public function getColumnsOfType($types) {
+    public function getColumnsOfType($types)
+    {
         $columns = [];
         $columnsRaw = $this->columns();
         if (!is_array($types)) {
@@ -1212,7 +1248,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return array
      */
-    public static function fixIterator($query) {
+    public static function fixIterator($query)
+    {
         $data = $query->execute();
         return $data ? $data : [];
     }
@@ -1222,7 +1259,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * @param type $recordID
      * @return type
      */
-    public function getUrlForRecord($recordID) {
+    public function getUrlForRecord($recordID)
+    {
         return isset($this->detailPage) ? $this->detailPage . '?id=' . $recordID : null;
     }
 
@@ -1230,7 +1268,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return type
      */
-    public function getAttachments() {
+    public function getAttachments()
+    {
         $attachments = $this->getFluentPDO()->from($this->keyword . '_file')->where($this->keyword . '_id',
                         $this->getMyKey())->fetchAll();
         return empty($attachments) ? [] : $attachments;
@@ -1243,7 +1282,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return boolean
      */
-    public function presaveCheck($dataToSave) {
+    public function presaveCheck($dataToSave)
+    {
         $this->loadFromSQL();
         return true;
     }
@@ -1255,7 +1295,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return DataTableSaver
      */
-    public function finishProcess($saver) {
+    public function finishProcess($saver)
+    {
         $_SESSION['feedCache'][is_null($saver) ? get_class($this) : get_class($saver->engine)] = $this->feedSelectize([]);
         $out = [];
         if (is_object($saver) && method_exists($saver, 'data')) {
@@ -1276,7 +1317,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return string
      */
-    public function checkRow($dataRows) {
+    public function checkRow($dataRows)
+    {
         return null;
     }
 
@@ -1287,7 +1329,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return string css class name(s)
      */
-    public function getRowColor($checkRowResult) {
+    public function getRowColor($checkRowResult)
+    {
         return null;
     }
 
@@ -1297,7 +1340,8 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return string
      */
-    public function completeDataRow(array $dataRowRaw) {
+    public function completeDataRow(array $dataRowRaw)
+    {
         foreach ($this->columnsCache as $colName => $colProps) {
             if (array_key_exists($colName . '_value', $dataRowRaw)) {
                 if (array_key_exists($colName, $dataRowRaw)) {
@@ -1315,7 +1359,8 @@ class DBEngine extends \Ease\SQL\Engine {
         return $dataRowRaw;
     }
 
-    public function getColumnInfo($columnName) {
+    public function getColumnInfo($columnName)
+    {
         return array_key_exists($columnName, $this->columnsCache) ? $this->columnsCache[$columnName] : null;
     }
 
@@ -1324,8 +1369,18 @@ class DBEngine extends \Ease\SQL\Engine {
      * 
      * @return \Ease\Html\ATag
      */
-    public function getLink() {
-        return new \Ease\Html\ATag($this->keyword.'.php?id='.$this->getMyKey(), $this->getRecordName());
+    public function getLink()
+    {
+        return new \Ease\Html\ATag($this->keyword . '.php?id=' . $this->getMyKey(), $this->getRecordName());
     }
-    
+
+    /**
+     * Serialize only Data Field
+     * 
+     * @return array
+     */
+    public function __sleep()
+    {
+        return ['data'];
+    }
 }

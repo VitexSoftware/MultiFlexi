@@ -36,7 +36,7 @@ class ServicesForCompanyForm extends Form
     public function __construct($company, $tagProperties = array())
     {
         $companyID = $company->getMyKey();
-        $allEnabledApps = (new Application())->listingQuery()->where('enabled', 1)->fetchAll();
+        $allEnabledApps = (new Application())->listingQuery()->select('id AS app_id')->select('nazev AS app_name')->where('enabled', 1)->fetchAll();
         $glue = new AppToCompany();
         $assigned = $glue->getAppsForCompany($companyID);
         parent::__construct($tagProperties);
