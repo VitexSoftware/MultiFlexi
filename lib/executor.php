@@ -37,7 +37,7 @@ if ($interval) {
         $appsForCompany = $ap2c->getColumnsFromSQL(['*'], ['company_id' => $company['company_id'], 'interv' => $interval]);
 
         if (empty($appsForCompany)) {
-            $companer->addStatusMessage(sprintf(_('No applications to run for %s'), $company['nazev']), 'debug');
+            $companer->addStatusMessage(sprintf(_('No applications to run for %s in interval %s'), $company['nazev'],$interval), 'debug');
         } else {
 
             $companyEnver = new \AbraFlexi\MultiFlexi\CompanyEnv($company['company_id']);

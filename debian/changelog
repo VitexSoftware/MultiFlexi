@@ -1,4 +1,4 @@
-multiflexi (1.4.4) UNRELEASED; urgency=medium
+multiflexi (1.4.5) UNRELEASED; urgency=medium
 
   [ CyberVitexus ]
   * Ability choose run interval between hour and year
@@ -28,8 +28,9 @@ multiflexi (1.4.4) UNRELEASED; urgency=medium
   * Keep job env
   * Last company's jobs overview
   * company enviroment injecting fix
+  * Deleting of company added
 
- -- vitex <info@vitexsoftware.cz>  Tue, 18 Apr 2023 15:55:04 +0200
+ -- vitex <info@vitexsoftware.cz>  Sat, 13 May 2023 14:35:54 +0200
 
 multiflexi (0.1) experimental; urgency=medium
 
