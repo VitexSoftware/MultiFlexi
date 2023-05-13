@@ -21,7 +21,6 @@ $companies = new Company(WebPage::getRequestValue('id', 'int'));
 $_SESSION['company'] = &$companies;
 $_SESSION['server'] = new \AbraFlexi\MultiFlexi\AbraFlexis($companies->getDataValue('abraflexi'));
 $_SESSION['customer'] = new \AbraFlexi\MultiFlexi\Customer($companies->getDataValue('customer'));
-        
 $companyEnver = new \AbraFlexi\MultiFlexi\CompanyEnv($companies->getMyKey());
 $jobber = new \AbraFlexi\MultiFlexi\Job();
 $jobs = $jobber->listingQuery()->select(['apps.nazev AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'appcompany.id AS appcompanyid'], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->leftJoin('appcompany ON appcompany.company_id = job.company_id AND appcompany.app_id = job.app_id')->where('job.company_id', $companies->getMyKey())->limit(20)->orderBy('job.id DESC')->fetchAll();
@@ -46,7 +45,8 @@ foreach ($jobs as $job) {
 $companyPanelContents = [];
 $headRow = new Row();
 $logo = new \Ease\Html\ImgTag(strlen($companies->getDataValue('logo')) ? $companies->getDataValue('logo') : 'src\company.svg', 'logo', ['class' => 'img-fluid', 'min-width' => '100%']);
-$headRow->addColumn(2, [$logo, '<p></p>', new \Ease\TWB4\LinkButton('companysetup.php?id=' . $companies->getMyKey(), '⚙&nbsp;' . _('Company setup'), 'primary btn-lg btn-block '), '<p></p>', new \Ease\TWB4\LinkButton('tasks.php?company_id=' . $companies->getMyKey(), _('Setup tasks'), 'primary btn-lg btn-block')]);
+$deleteButton = new \Ease\TWB4\LinkButton('companydelete.php?id='.$companies->getMyKey(), '☠️&nbsp;' . _('Delete company'),'danger');
+$headRow->addColumn(2, [$logo, '<p></p>', new \Ease\TWB4\LinkButton('companysetup.php?id=' . $companies->getMyKey(), '🛠️&nbsp;' . _('Company setup'), 'primary btn-lg btn-block '), '<p></p>', new \Ease\TWB4\LinkButton('tasks.php?company_id=' . $companies->getMyKey(), '🔧&nbsp;'. _('Setup tasks'), 'primary btn-lg btn-block'), '<p></p>', $deleteButton]);
 $headRow->addColumn(10, new EnvironmentView($companyEnver->getData()));
 $companyPanelContents[] = $headRow;
 $companyPanelContents[] = new \Ease\Html\HrTag();

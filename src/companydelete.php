@@ -33,27 +33,24 @@ if (is_null($abraFlexiId) === false) {
 $_SESSION['company'] = &$companies;
 $companyEnver = new \AbraFlexi\MultiFlexi\CompanyEnv($companies->getMyKey());
 if ($oPage->isPosted()) {
-    if (array_key_exists('env', $_POST)) {
-        $companyEnver->addEnv($_POST['env']['newkey'], $_POST['env']['newvalue']);
+    $companyEnver->deleteFromSQL(['company_id' => $companies->getMyKey()]);
+    $appToCompany = new \AbraFlexi\MultiFlexi\AppToCompany();
+    $appToCompany->deleteFromSQL(['company_id' => $companies->getMyKey()]);
+    $logger = new \AbraFlexi\MultiFlexi\Logger();
+    $logger->deleteFromSQL(['company_id' => $companies->getMyKey()]);
+    $jobber = new \AbraFlexi\MultiFlexi\Job();
+    $jobber->deleteFromSQL(['company_id' => $companies->getMyKey()]);
+    $confer = new \AbraFlexi\MultiFlexi\Configuration();
+    $confer->deleteFromSQL(['company_id' => $companies->getMyKey()]);
+    
+    if ($companies->deleteFromSQL(['id' => $companies->getMyKey()])) {
+        $companies->addStatusMessage(_('Company Deleted'), 'success');
+        $oPage->redirect('abraflexi.php?id=' . $companies->getDataValue('abraflexi'));
     } else {
-        if ($companies->takeData($_POST) && !is_null($companies->saveToSQL())) {
-            $companies->addStatusMessage(_('Company Saved'), 'success');
-//        $companies->prepareRemoteCompany(); TODO: Run applications setup on new company
-            $oPage->redirect('?id=' . $companies->getMyKey());
-        } else {
-            $companies->addStatusMessage(_('Error saving Company') . ' ' . $companies->getDataValue('nazev'), 'error');
-        }
-    }
-} else {
-    if (!empty(WebPage::getGetValue('company'))) {
-        $companies->setDataValue('company', WebPage::getGetValue('company'));
-        $companies->setDataValue('nazev', WebPage::getGetValue('nazev'));
-        $companies->setDataValue('ic', WebPage::getGetValue('ic'));
-        $companies->setDataValue('email', WebPage::getGetValue('email'));
-        $companies->abraflexiId = WebPage::getGetValue('abraflexi', 'int');
-        $companies->loadFromAbraFlexi();
+        $companies->addStatusMessage(_('Error deleting Company') . ' ' . $companies->getDataValue('nazev'), 'error');
     }
 }
+
 $instanceName = $companies->getDataValue('nazev');
 if (strlen($instanceName)) {
     $instanceLink = new ATag($companies->getApiURL() . $companies->getDataValue('company'),
@@ -64,15 +61,12 @@ if (strlen($instanceName)) {
 }
 
 $instanceRow = new Row();
-$instanceRow->addColumn(4, new RegisterCompanyForm($companies, null, ['action' => 'companysetup.php']));
-//$instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($companies));
-
-
+$instanceRow->addColumn(4, new DeleteCompanyForm($companies, null, ['action' => 'companydelete.php']));
 if (strlen($companies->getDataValue('logo'))) {
     $rightColumn[] = new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']);
 }
 
-$rightColumn[] = new EnvironmentEditor($companyEnver->getEnvFields());
+$rightColumn[] = new EnvironmentView($companyEnver->getEnvFields());
 $instanceRow->addColumn(8, $rightColumn);
 $oPage->container->addItem(new Panel($instanceName, 'light', $instanceRow));
 $oPage->addItem(new PageBottom());

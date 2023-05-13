@@ -6,7 +6,7 @@ namespace AbraFlexi\MultiFlexi;
  * Multi Flexi - Company Management Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2022 Vitex Software
+ * @copyright  2018-2023 Vitex Software
  */
 class Company extends \AbraFlexi\Company
 {
@@ -18,15 +18,30 @@ class Company extends \AbraFlexi\Company
     public $createColumn = 'DatCreate';
     public $lastModifiedColumn = 'DatUpdate';
 
-    public function __construct($init = null, $options = array())
+    /**
+     * 
+     * @var int
+     */
+    public $abraflexiId;
+
+    public function __construct($init = null, $options = [])
     {
         parent::__construct(null, $options);
         $this->setMyTable('company');
         $this->setKeyColumn('id');
+        $this->setupProperty($options, 'company', 'ABRAFLEXI_COMPANY');
+        $this->setupProperty($options, 'url', 'ABRAFLEXI_URL');
+        $this->setupProperty($options, 'user', 'ABRAFLEXI_LOGIN');
+        $this->setupProperty($options, 'password', 'ABRAFLEXI_PASSWORD');
+        $this->setupProperty($options, 'authSessionId', 'ABRAFLEXI_AUTHSESSID');
+        $this->setupProperty($options, 'timeout', 'ABRAFLEXI_TIMEOUT');
+        $this->setupProperty($options, 'nativeTypes', 'ABRAFLEXI_NATIVE_TYPES');
         if (is_integer($init)) {
             $this->loadFromSQL($init);
             $this->setCompany($this->getDataValue('company'));
         }
+        $this->updateApiURL();
+        $this->curlInit();
     }
 
     /**
@@ -40,7 +55,6 @@ class Company extends \AbraFlexi\Company
     {
         $result = ['webhook' => false];
         $this->setCompany($company);
-//        $result['labels'] = $this->addAbraFlexiLabel('TaxTorro') && $this->addAbraFlexiLabel('DataMolino');
         if ($this->changesApi(true)) {
             $result['webhook'] = $this->registerWebHook(self::webHookUrl($this->getMyKey()));
         }
@@ -199,6 +213,34 @@ class Company extends \AbraFlexi\Company
         unset($data['class']);
         $data['logo'] = $this->obtainLogo(intval($data['abraflexi']), $data['company']);
         return parent::takeData($data);
+    }
+
+    /**
+     * Načte záznam z AbraFlexi a uloží v sobě jeho data
+     * Read AbraFlexi record and store it inside od object
+     *
+     * @param int|string|array $id ID or conditions
+     *
+     * @return int počet načtených položek
+     */
+    public function loadFromAbraFlexi($id = null)
+    {
+        $data = [];
+        if (is_null($id)) {
+            $id = $this->getMyKey();
+        }
+
+        $flexidata = $this->getFlexiData($this->getEvidenceUrl() . '/' . (is_array($id) ? '' : self::urlizeId($id)), (is_array($id) ? $id : ''));
+        if ($this->lastResponseCode == 200) {
+            $this->apiURL = $this->curlInfo['url'];
+            if (is_array($flexidata) && (count($flexidata) == 1) && is_array(current($flexidata))) {
+                $data = current($flexidata);
+            }
+            $data['abraflexi'] = $this->abraflexiId;
+            $data['company'] = $this->getCompany();
+            unset($data['id']);
+        }
+        return $this->takeData($data);
     }
 
     /**

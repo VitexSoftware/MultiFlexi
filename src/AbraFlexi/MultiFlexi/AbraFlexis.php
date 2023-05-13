@@ -152,4 +152,18 @@ class AbraFlexis extends DBEngine
         ];
         $this->exportEnv($envNames);
     }
+
+    /**
+     * Connection info for \AbraFlexi\RO
+     * 
+     * @return array
+     */
+    public function getConnectionDetails()
+    {
+        $connectionInfo = $this->getData();
+        unset($connectionInfo['id']);
+        unset($connectionInfo['DatCreate']);
+        unset($connectionInfo['DatSave']);
+        return $connectionInfo;
+    }
 }
