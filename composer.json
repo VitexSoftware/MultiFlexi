@@ -18,7 +18,8 @@
         "vitexsoftware/multiflexiapiserver": "*",
         "dyorg/slim-token-authentication": "*",
         "tuupola/slim-basic-auth": "*",
-        "mittwald/vault-php": "dev-master"
+        "mittwald/vault-php": "dev-master",
+        "zarplata/zabbix-sender": "dev-master"
     },
     "license": "MIT",
     "authors": [
