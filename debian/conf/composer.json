@@ -8,7 +8,8 @@
     "deb/ease-bootstrap4-widgets": "*",
     "deb/ease-fluentpdo": "*",
     "symfony/process": "*",
-    "sensiolabs/ansi-to-html": "*"
+    "sensiolabs/ansi-to-html": "*",
+    "zarplata/zabbix-sender": "dev-master"
   },
   "license": "MIT",
   "authors": [
