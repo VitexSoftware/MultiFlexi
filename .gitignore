@@ -33,3 +33,4 @@ composer.lock
 /nbproject/private/
 /OpenAPI/node_modules/
 /.php_cs.cache
+.env
