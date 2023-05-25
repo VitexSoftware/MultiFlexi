@@ -48,7 +48,11 @@ class AppRow extends \Ease\TWB4\Row
         } else {
             $launchButton = new \Ease\TWB4\LinkButton('launch.php?app_id=' . $appId . '&company_id=' . $appData['company_id'], [_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg btn-block ');
         }
+
         $logoColumn->addItem($launchButton);
+
+//        $logoColumn->addItem(new \Ease\TWB4\LinkButton('?id=' . $appId, _('Clone'), 'info btn-sm  btn-block')); 
+
         $appConfColumn = $appRow->addColumn(4, new FormGroup(new \Ease\Html\H3Tag(_('Job Config')), $intervalChooser));
         if (array_key_exists('appcompanyid', $appData)) {
             $appConfColumn->addItem(new \AbraFlexi\MultiFlexi\Ui\CustomAppEnvironmentView($appData['appcompanyid']));

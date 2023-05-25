@@ -139,7 +139,7 @@ class Job extends Engine
                 if ($result == 0) {
                     $appCompany->setProvision(1);
                     if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
-                        $this->reportToZabbix([]); //TODO: report provision done
+                        $this->reportToZabbix(['phase'=>'setup']); //TODO: report provision done
                     }
                     $this->addStatusMessage('provision done', 'success');
                 }
@@ -223,7 +223,7 @@ class Job extends Engine
                 'app_id' => $companyApp->getDataValue('app_id'),
                 'app_name' => $this->application->getDataValue('nazev'),
                 'begin' => null,
-                'done' => null,
+                'end' => null,
                 'company_id' => $companyApp->getDataValue('company_id'),
                 'company_name' => $this->company->getDataValue('nazev'),
                 'exitcode' => null,
