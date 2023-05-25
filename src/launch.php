@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi Flexi - Job Run.
+ * Multi Flexi - AdHoc Job Run.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2017-2023 Vitex Software
