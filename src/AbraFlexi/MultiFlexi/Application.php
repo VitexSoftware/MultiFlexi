@@ -20,9 +20,9 @@ class Application extends Engine {
     public $keyword;
     /**
      * 
-     * @var type
+     * @var Company
      */
-    private $company;
+    public $company;
 
     /**
      * 
@@ -37,7 +37,7 @@ class Application extends Engine {
         $this->keyword = 'app';
         $this->nameColumn = 'nazev';
         parent::__construct($identifier, $options);
-        $this->company = new Company($this->getDataValue('company'));
+        $this->company = new Company();
     }
 
     /**

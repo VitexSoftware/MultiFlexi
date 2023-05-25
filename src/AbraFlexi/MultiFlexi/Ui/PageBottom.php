@@ -4,7 +4,7 @@
  * Multi Flexi  - Shared page bottom class
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2015-2020 Vitex Software
+ * @copyright  2015-2023 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi\Ui;
@@ -46,7 +46,7 @@ class PageBottom extends \Ease\Html\FooterTag
 //        }
         $this->addItem('<hr>');
         $footrow = new \Ease\TWB4\Row();
-        $author = 'Multi Flexi v.: ' . $appInfo->version . (empty(self::BUILD) ? '' : '&nbsp;' . _('build') . ' #' . self::BUILD) .'&nbsp;'._('age').'&nbsp;'. new \Ease\ui\LiveAge(filemtime($composer)) . '&nbsp;&nbsp; &copy; 2020-2023 <a href="https://vitexsoftware.cz/">Vitex Software</a>';
+        $author = 'Multi Flexi v.: ' . $appInfo->version . (empty(self::BUILD) ? '' : '&nbsp;' . _('build') . ' #' . self::BUILD) . '<br>' . _('age') . '&nbsp;' . new \Ease\ui\LiveAge(filemtime($composer)) . '&nbsp;&nbsp; &copy; 2020-2023 <a href="https://vitexsoftware.cz/">Vitex Software</a>';
         $footrow->addColumn(6, [$author]);
         $this->addItem(new \Ease\TWB4\Container($footrow));
     }
