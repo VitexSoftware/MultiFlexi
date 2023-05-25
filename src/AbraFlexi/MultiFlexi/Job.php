@@ -53,6 +53,13 @@ class Job extends Engine
     public $company = null;
 
     /**
+     * @var array
+     */
+    public $outputCache = [];
+
+
+
+    /**
      * Job Object
      * 
      * @param int $identifier
@@ -78,11 +85,11 @@ class Job extends Engine
     public function newJob($companyId, $appId, $environment)
     {
         return $this->insertToSQL([
-                    'company_id' => $companyId,
-                    'app_id' => $appId,
-                    'env' => \serialize($environment),
-                    'exitcode' => -1,
-                    'launched_by' => \Ease\Shared::user()->getMyKey()
+            'company_id' => $companyId,
+            'app_id' => $appId,
+            'env' => \serialize($environment),
+            'exitcode' => -1,
+            'launched_by' => \Ease\Shared::user()->getMyKey()
         ]);
     }
 
@@ -94,16 +101,16 @@ class Job extends Engine
      *
      * @return int Job ID
      */
-    public function runBegin($appId, $companyId, $environment = [])
+    public function runBegin()
     {
-
-        $appId = $this->getDataValue('app_id');
-        $companyId = $this->getDataValue('company_id');
+        $appId = $this->application->getMyKey();
+        $companyId = $this->company->getMyKey();
         $this->setObjectName();
         $sqlLogger = LogToSQL::singleton();
         $sqlLogger->setCompany($companyId);
         $sqlLogger->setApplication($appId);
-        $this->addStatusMessage('JOB: ' . $jobId . ' ' . json_encode($environment), 'debug');
+        $jobId = $this->getMyKey();
+        $this->addStatusMessage('JOB: ' . $jobId . ' ' . json_encode($this->environment), 'debug');
         if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
             $this->reportToZabbix(['phase' => 'jobStart', 'begin' => (new \DateTime())->format('Y-m-d H:i:s')]);
         }
@@ -132,7 +139,7 @@ class Job extends Engine
                 if ($result == 0) {
                     $appCompany->setProvision(1);
                     if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
-                        $this->reportToZabbix([]);
+                        $this->reportToZabbix([]); //TODO: report provision done
                     }
                     $this->addStatusMessage('provision done', 'success');
                 }
@@ -159,10 +166,12 @@ class Job extends Engine
         if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
             $this->reportToZabbix(['phase' => 'jobDone', 'stdout' => $stdout, 'stderr' => $stderr, 'exitcode' => $statusCode, 'end' => (new \DateTime())->format('Y-m-d H:i:s')]);
         }
-        return $this->updateToSQL(['end' => new \Envms\FluentPDO\Literal('NOW()'),
-                    'stdout' => addslashes($stdout),
-                    'stderr' => addslashes($stderr),
-                    'exitcode' => $statusCode], ['id' => $this->getMyKey()]);
+        return $this->updateToSQL([
+            'end' => new \Envms\FluentPDO\Literal('NOW()'),
+            'stdout' => addslashes($stdout),
+            'stderr' => addslashes($stderr),
+            'exitcode' => $statusCode
+        ], ['id' => $this->getMyKey()]);
     }
 
     /**
@@ -220,13 +229,14 @@ class Job extends Engine
                 'exitcode' => null,
                 'stdout' => null,
                 'stderr' => null,
-                'launched_by' => \Ease\Shared::user()->getMyKey()
+                'launched_by_id' => \Ease\Shared::user()->getMyKey(),
+                'launched_by' => \Ease\Shared::user()->getUserLogin()
             ];
         }
     }
 
     /**
-     * Send Job phse Message to zabbix
+     * Send Job phase Message to zabbix
      * 
      * @param array $messageData override fields
      */
@@ -240,17 +250,16 @@ class Job extends Engine
         $this->addStatusMessage($me . ': Job phase ' . $this->zabbixMessageData['phase'] . ' reported to zabbix ' . \Ease\Functions::cfg('ZABBIX_SERVER'), 'debug');
     }
 
-    public function performJob($appCompanyId)
+    /**
+     * Perform Job
+     */
+    public function performJob()
     {
-        $this->prepareJob($appCompanyId);
+        $this->runBegin();
         LogToSQL::singleton()->setApplication($this->application->getMyKey());
-        $cmdparams = $this->application->getDataValue('cmdparams');
-        foreach ($this->environment as $envKey => $envValue) {
-            $this->addStatusMessage(sprintf(_('Setting custom Environment: export %s=%s'), $envKey, $envValue), 'debug');
-            $cmdparams = str_replace('{' . $envKey . '}', $envValue, $cmdparams);
-        }
-
+        
         $exec = $this->application->getDataValue('executable');
+        $cmdparams = $this->getCmdParams();
         $this->addStatusMessage('command begin: ' . $exec . ' ' . $cmdparams . '@' . $this->company->getDataValue('nazev'));
         $process = new \Symfony\Component\Process\Process(array_merge([$exec], explode(' ', $cmdparams)), null, $this->environment, null, 32767);
         $process->run(function ($type, $buffer) {
@@ -258,11 +267,71 @@ class Job extends Engine
             $logger->setObjectName('Runner');
             if (\Symfony\Component\Process\Process::ERR === $type) {
                 $logger->addStatusMessage($buffer, 'error');
+                $this->addOutput($buffer, 'error');
             } else {
                 $logger->addStatusMessage($buffer, 'success');
+                $this->addOutput($buffer, 'success');
             }
         });
         $this->addStatusMessage('end' . $exec . '@' . $this->application->getDataValue('name'));
         $this->runEnd($process->getExitCode(), $process->getOutput(), $process->getErrorOutput());
     }
+
+    /**
+     * Add Output line into cache
+     */
+
+    public function addOutput($line, $type)
+    {
+        $this->outputCache[microtime()] = ['line' => $line, 'type' => $type];
+    }
+
+    /**
+     * Get Output cache as plaintext
+     */
+    public function getOutputCachePlaintext()
+    {
+        $output = '';
+        foreach ($this->outputCache as $line) {
+            $output .= $line['line'] . "\n";
+        }
+        return $output;
+    }
+
+    /**
+     * Obtain Full Job Command Line
+     * 
+     * @return string  command line
+     */
+    public function getCmdline()
+    {
+        return $this->application->getDataValue('executable') . ' ' . $this->getCmdParams();
+    }
+
+    /**
+     * Obtain Job Command Line Parameters
+     * 
+     * @return string  command line parameters
+     */
+    public function getCmdParams()
+    {
+        $cmdparams = $this->application->getDataValue('cmdparams');
+        foreach ($this->environment as $envKey => $envValue) {
+            $this->addStatusMessage(sprintf(_('Setting custom Environment: export %s=%s'), $envKey, $envValue), 'debug');
+            $cmdparams = str_replace('{' . $envKey . '}', $envValue, $cmdparams);
+        }
+        return $cmdparams;
+
+    }
+
+    /**
+     * Obtain Job Output
+     * 
+     * @return string job output
+     */
+    public function getOutput()
+    {
+        return $this->getDataValue('stdout');
+    }
+
 }

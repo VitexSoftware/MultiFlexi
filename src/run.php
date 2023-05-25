@@ -14,37 +14,14 @@ use Symfony\Component\Process\Process;
 
 require_once './init.php';
 $oPage->onlyForLogged();
-$appCompany = new AppToCompany($oPage->getRequestValue('id', 'int'));
-$appInfo = $appCompany->getAppInfo();
-$cmdparams = array_key_exists('cmdparams', $appInfo) ? $appInfo['cmdparams'] : '';
-$appEnvironment = $appCompany->getAppEnvironment();
-foreach ($appEnvironment as $envName => $envValue) {
-    if ($envName == strtoupper($envName)) {
-        if (strtolower(\Ease\Functions::cfg('APP_DEBUG')) == 'true') {
-            $appCompany->addStatusMessage(sprintf(_('Setting Environment %s to %s'), $envName, $envValue), 'debug');
-        }
-    }
-    $cmdparams = str_replace('{' . $envName . '}', $envValue, $cmdparams);
-}
 
-$exec = $appInfo['executable'];
-$appCompany->addStatusMessage('begin' . $exec . ' ' . $cmdparams . '@' . $appInfo['nazev']);
-echo new \Ease\Html\H2Tag(str_replace(' ', '&nbsp;', $exec . ' ' . $cmdparams), ['style' => 'color: green']);
 $jobber = new Job();
-$runId = $jobber->runBegin($appInfo['app_id'], $appInfo['company_id'], $appEnvironment);
-$process = new Process(array_merge([$exec], explode(' ', $cmdparams)), null, $appEnvironment, null, 32767);
-$process->run(function ($type, $buffer) {
-    $logger = new Runner();
-    if (Process::ERR === $type) {
-        $outline = (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert($buffer);
-        $logger->addStatusMessage($buffer, 'error');
-    } else {
-        $logger->addStatusMessage($buffer, 'success');
-        $outline = (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert($buffer);
-    }
-    echo new \Ease\Html\DivTag(nl2br($outline));
-});
-$appCompany->addStatusMessage('end' . $exec . '@' . $appInfo['nazev']);
-$jobber->runEnd($runId, $process->getExitCode(), $process->getOutput(), $process->getErrorOutput());
+$jobber->prepareJob($oPage->getRequestValue('id', 'int'));  
+echo new \Ease\Html\H2Tag(str_replace(' ', '&nbsp;', $jobber->getCmdline()), ['style' => 'color: green']);
+
+$jobber->performJob();
+
+echo new \Ease\Html\DivTag(nl2br((new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert($jobber->getOutputCachePlaintext())));
+
 \Ease\WebPage::singleton()->addJavascript("$('body').css('font-family', 'Courier').css('background-color','black');");
 $oPage->draw();

@@ -13,6 +13,7 @@ use AbraFlexi\MultiFlexi\Application;
 use AbraFlexi\MultiFlexi\Company;
 use AbraFlexi\MultiFlexi\Configuration;
 
+echo getcwd();
 require_once '../vendor/autoload.php';
 \Ease\Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
 
@@ -30,11 +31,12 @@ if ($interval) {
         if (empty($appsForCompany)) {
             $companer->addStatusMessage(sprintf(_('No applications to run for %s in interval %s'), $company['nazev'], $interval), 'debug');
         } else {
+            $jobber = new Job();
             foreach ($appsForCompany as $servData) {
                 if (!is_null($interval) && ($interval != $servData['interv'])) {
                     continue;
                 }
-                $jobber = new Job();
+                $jobber->prepareJob($servData['id']);
                 $jobber->performJob($servData['id']);
             }
         }
