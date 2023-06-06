@@ -208,11 +208,12 @@ class Job extends Engine
     /**
      * 
      * @param int $companyAppId
+     * @param array $envOverride
      */
-    public function prepareJob($companyAppId)
+    public function prepareJob(int $companyAppId, $envOverride = [])
     {
         $companyApp = new AppToCompany($companyAppId);
-        $this->environment = $companyApp->getAppEnvironment();
+        $this->environment = array_merge($companyApp->getAppEnvironment(), $envOverride);
         $this->application = new Application($companyApp->getDataValue('app_id'));
         $this->company = new Company($companyApp->getDataValue('company_id'));
         $this->loadFromSQL($this->newJob($companyApp->getDataValue('company_id'), $companyApp->getDataValue('app_id'), $this->environment));
@@ -226,11 +227,11 @@ class Job extends Engine
                 'end' => null,
                 'company_id' => $companyApp->getDataValue('company_id'),
                 'company_name' => $this->company->getDataValue('nazev'),
-                'exitcode' => null,
+                'exitcode' => -1,
                 'stdout' => null,
                 'stderr' => null,
-                'launched_by_id' => \Ease\Shared::user()->getMyKey(),
-                'launched_by' => \Ease\Shared::user()->getUserLogin()
+                'launched_by_id' => intval(\Ease\Shared::user()->getMyKey()),
+                'launched_by' => empty(\Ease\Shared::user()->getUserLogin()) ? 'cron' : \Ease\Shared::user()->getUserLogin()
             ];
         }
     }

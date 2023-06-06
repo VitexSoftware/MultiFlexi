@@ -27,8 +27,28 @@ $jobs = $jobber->listingQuery()->select(['apps.nazev AS appname', 'apps.image AS
 $jobList = new \Ease\TWB4\Table();
 $jobList->addRowHeaderColumns([_('Application'), _('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'), _('Launch now'), _('Launch in Background')]);
 foreach ($jobs as $job) {
+
+        /* check if app requires upload fields */
+        $appFields = \AbraFlexi\MultiFlexi\Conffield::getAppConfigs($job['app_id']);
+
+        /* if any of fields is upload type then add file input button */
+        $uploadFields = array_filter($appFields, function($field) {
+            return $field['type'] == 'file';
+        });
+
+
+
     $job['launch'] = new \Ease\TWB4\LinkButton('launch.php?id=' . $job['appcompanyid'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg');
-    $job['schedule'] = new \Ease\TWB4\LinkButton('schedule.php?id=' . $job['appcompanyid'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Schedule') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
+
+    // use AppLaunchForm instead of LaunchButton
+//    $job['launch'] = new AppLaunchForm($job['app_id'], $companies->getMyKey());
+
+    if(empty($uploadFields)){
+        $job['schedule'] = new \Ease\TWB4\LinkButton('schedule.php?id=' . $job['appcompanyid'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Schedule') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
+    } else {
+        $job['schedule'] = new \Ease\TWB4\Badge('info',_('Upload field does not allow application scheduling'));
+    }
+
     $job['appimage'] = new ATag('companyapp.php?id=' . $job['appcompanyid'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], $job['appname'], ['height' => 50, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);
     unset($job['appname']);
     unset($job['appcompanyid']);

@@ -3,6 +3,7 @@
         "cmdline",
         "cmdparams",
         "exitcode",
+        "Flexi",
         "nazev"
     ]
 }

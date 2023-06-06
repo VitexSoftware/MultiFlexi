@@ -36,9 +36,18 @@ if ($oPage->isPosted()) {
     if (array_key_exists('env', $_POST)) {
         $companyEnver->addEnv($_POST['env']['newkey'], $_POST['env']['newvalue']);
     } else {
-        if ($companies->takeData($_POST) && !is_null($companies->saveToSQL())) {
-            $companies->addStatusMessage(_('Company Saved'), 'success');
-//        $companies->prepareRemoteCompany(); TODO: Run applications setup on new company
+        if ($companies->takeData($_POST)) {
+
+            /* try to save company or cath error */
+            try {
+                $companies->saveToSQL();
+                $companies->addStatusMessage(_('Company Saved'), 'success');
+            } catch (\Exception $exc) {
+                $companies->addStatusMessage($exc->getMessage(), 'error');
+            }
+
+
+            //        $companies->prepareRemoteCompany(); TODO: Run applications setup on new company
             $oPage->redirect('?id=' . $companies->getMyKey());
         } else {
             $companies->addStatusMessage(_('Error saving Company') . ' ' . $companies->getDataValue('nazev'), 'error');
@@ -56,8 +65,10 @@ if ($oPage->isPosted()) {
 }
 $instanceName = $companies->getDataValue('nazev');
 if (strlen($instanceName)) {
-    $instanceLink = new ATag($companies->getApiURL() . $companies->getDataValue('company'),
-            $companies->getApiURL() . $companies->getDataValue('company'));
+    $instanceLink = new ATag(
+        $companies->getApiURL() . $companies->getDataValue('company'),
+        $companies->getApiURL() . $companies->getDataValue('company')
+    );
 } else {
     $instanceName = _('New Company');
     $instanceLink = null;
