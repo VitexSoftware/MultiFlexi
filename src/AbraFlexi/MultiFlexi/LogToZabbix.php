@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace AbraFlexi\MultiFlexi;
 
-use \Zarplata\Zabbix\Request\Packet as ZabbixPacket;
-use \Zarplata\Zabbix\Request\Metric as ZabbixMetric;
+use \AbraFlexi\MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
+use \AbraFlexi\MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
 
 /**
  * Send All Log messages to zabbix
