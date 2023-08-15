@@ -4,12 +4,11 @@
  * Multi Flexi - Index page.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2022 Vitex Software
+ * @copyright  2020-2023 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi\Ui;
 
-use AbraFlexi\MultiFlexi\Ui\AppsMenu;
 use AbraFlexi\MultiFlexi\Ui\DbStatus;
 use AbraFlexi\MultiFlexi\Ui\PageBottom;
 use AbraFlexi\MultiFlexi\Ui\PageTop;
