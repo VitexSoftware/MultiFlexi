@@ -4,14 +4,12 @@
  * Multi Flexi - About page.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2022 Vitex Software
+ * @copyright  2020-2023 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi\Ui;
 
 require_once './init.php';
-
-$oPage->onlyForLogged();
 
 $oPage->addItem(new PageTop(_('About')));
 
