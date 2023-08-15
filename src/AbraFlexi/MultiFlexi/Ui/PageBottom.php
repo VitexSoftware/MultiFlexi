@@ -25,28 +25,22 @@ class PageBottom extends \Ease\Html\FooterTag
      */
     public function finalize()
     {
-        $composer = 'composer.json';
-        if (!file_exists($composer)) {
-            $composer = '../' . $composer;
-        }
-
-        $composer = '/usr/lib/multiflexi/composer.json';
-        if (!file_exists($composer)) {
-            $composer = '../composer.json';
-            if (!file_exists($composer)) {
-                $composer = '../../composer.json';
-            }
-        }
-        $appInfo = json_decode(file_get_contents($composer));
         $this->includeCSS('https://use.fontawesome.com/releases/v5.3.1/css/all.css');
-        $appInfo = json_decode(file_get_contents($composer));
         $container = $this->setTagID('footer');
 //        if (\Ease\Shared::user()->getUserID()) {
 //        $this->addItem(new \Ease\ui\BrowsingHistory());
 //        }
         $this->addItem('<hr>');
         $footrow = new \Ease\TWB4\Row();
-        $author = 'Multi Flexi v.: ' . $appInfo->version . (empty(self::BUILD) ? '' : '&nbsp;' . _('build') . ' #' . self::BUILD) . '<br>' . _('age') . '&nbsp;' . new \Ease\ui\LiveAge(filemtime($composer)) . '&nbsp;&nbsp; &copy; 2020-2023 <a href="https://vitexsoftware.cz/">Vitex Software</a>';
+        
+        if (method_exists('Composer\InstalledVersions', 'getRootPackage')) {
+            $composer = \Composer\InstalledVersions::getRootPackage()['install_path'].'composer.lock';
+        } else {
+            $composer = '../composer.lock';
+        }
+
+        
+        $author = 'Multi Flexi v.: ' . \Ease\Shared::appVersion() . (empty(self::BUILD) ? '' : '&nbsp;' . _('build') . ' #' . self::BUILD) . '<br>' . _('age') . '&nbsp;' . new \Ease\ui\LiveAge(filemtime($composer)) . '&nbsp;&nbsp; &copy; 2020-2023 <a href="https://vitexsoftware.cz/">Vitex Software</a>';
         $footrow->addColumn(6, [$author]);
         $this->addItem(new \Ease\TWB4\Container($footrow));
     }
