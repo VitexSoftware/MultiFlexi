@@ -9,8 +9,8 @@
 
 namespace AbraFlexi\MultiFlexi;
 
-use \Zarplata\Zabbix\Request\Packet as ZabbixPacket;
-use \Zarplata\Zabbix\Request\Metric as ZabbixMetric;
+use \AbraFlexi\MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
+use \AbraFlexi\MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
 
 /**
  * Description of Job

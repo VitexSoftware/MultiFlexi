@@ -19,7 +19,7 @@
         "dyorg/slim-token-authentication": "*",
         "tuupola/slim-basic-auth": "*",
         "mittwald/vault-php": "dev-master",
-        "zarplata/zabbix-sender": "dev-master"
+        "vitexsoftware/ease-core": "dev-main"
     },
     "license": "MIT",
     "authors": [
@@ -34,7 +34,8 @@
             "AbraFlexi\\MultiFlexi\\": "src/AbraFlexi/MultiFlexi/",
             "AbraFlexi\\MultiFlexi\\Ui\\": "src/AbraFlexi/MultiFlexi/Ui",
             "AbraFlexi\\MultiFlexi\\Api\\": "src/AbraFlexi/MultiFlexi/Api",
-            "AbraFlexi\\MultiFlexi\\Auth\\": "src/AbraFlexi/MultiFlexi/Auth"
+            "AbraFlexi\\MultiFlexi\\Auth\\": "src/AbraFlexi/MultiFlexi/Auth",
+            "AbraFlexi\\MultiFlexi\\Zabbix\\": "src/AbraFlexi/MultiFlexi/Zabbix"
         }
     },
     "autoload-dev": {
