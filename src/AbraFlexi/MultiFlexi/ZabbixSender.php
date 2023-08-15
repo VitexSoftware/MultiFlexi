@@ -10,17 +10,17 @@ declare(strict_types=1);
 
 namespace AbraFlexi\MultiFlexi;
 
-use \Zarplata\Zabbix\Request\Packet as ZabbixPacket;
-use \Zarplata\Zabbix\Response as ZabbixResponse;
-use \Zarplata\Zabbix\Exception\ZabbixNetworkException;
-use \Zarplata\Zabbix\Exception\ZabbixResponseException;
+use \AbraFlexi\MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
+use \AbraFlexi\MultiFlexi\Zabbix\Response as ZabbixResponse;
+use \AbraFlexi\MultiFlexi\Zabbix\Exception\ZabbixNetworkException;
+use \AbraFlexi\MultiFlexi\Zabbix\Exception\ZabbixResponseException;
 
 /**
  * Description of ZabbixSender
  *
  * @author vitex
  */
-class ZabbixSender extends \Zarplata\Zabbix\ZabbixSender
+class ZabbixSender extends \AbraFlexi\MultiFlexi\Zabbix\ZabbixSender
 {
 
     /**
