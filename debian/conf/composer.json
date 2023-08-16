@@ -25,7 +25,8 @@
   "autoload": {
     "psr-4": {
       "AbraFlexi\\MultiFlexi\\": "MultiFlexi",
-      "AbraFlexi\\MultiFlexi\\Ui\\": "MultiFlexi/Ui"
+      "AbraFlexi\\MultiFlexi\\Ui\\": "MultiFlexi/Ui",
+      "AbraFlexi\\MultiFlexi\\Zabbix\\": "MultiFlexi/Zabbix"
     }
   },
   "repositories": [

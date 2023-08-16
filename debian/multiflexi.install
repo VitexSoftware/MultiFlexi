@@ -11,6 +11,9 @@ debian/conf/composer.json                 usr/lib/multiflexi
 debian/conf/phinx-adapter.php	          usr/lib/multiflexi
 src/AbraFlexi/MultiFlexi/*.php            usr/lib/multiflexi/MultiFlexi/
 src/AbraFlexi/MultiFlexi/Ui/*.php         usr/lib/multiflexi/MultiFlexi/Ui/
+src/AbraFlexi/MultiFlexi/Zabbix/*.php     usr/lib/multiflexi/MultiFlexi/Zabbix/
+src/AbraFlexi/MultiFlexi/Zabbix/Exception/*.php     usr/lib/multiflexi/MultiFlexi/Zabbix/Exception/
+src/AbraFlexi/MultiFlexi/Zabbix/Request/*.php       usr/lib/multiflexi/MultiFlexi/Zabbix/Request/
 debian/conf/multiflexi.conf    		  etc/apache2/conf-available
 debian/conf/multiflexi.service 		  etc/avahi/services
 bin/*					  usr/bin
