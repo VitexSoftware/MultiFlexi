@@ -34,11 +34,10 @@ class PageBottom extends \Ease\Html\FooterTag
         $footrow = new \Ease\TWB4\Row();
         
         if (method_exists('Composer\InstalledVersions', 'getRootPackage')) {
-            $composer = \Composer\InstalledVersions::getRootPackage()['install_path'].'composer.lock';
+            $composer = \Composer\InstalledVersions::getRootPackage()['install_path'].'/composer.lock';
         } else {
             $composer = '../composer.lock';
         }
-
         
         $author = 'Multi Flexi v.: ' . \Ease\Shared::appVersion() . (empty(self::BUILD) ? '' : '&nbsp;' . _('build') . ' #' . self::BUILD) . '<br>' . _('age') . '&nbsp;' . new \Ease\ui\LiveAge(filemtime($composer)) . '&nbsp;&nbsp; &copy; 2020-2023 <a href="https://vitexsoftware.cz/">Vitex Software</a>';
         $footrow->addColumn(6, [$author]);
