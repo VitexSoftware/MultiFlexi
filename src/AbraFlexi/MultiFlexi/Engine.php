@@ -51,7 +51,7 @@ class Engine extends \Ease\SQL\Engine {
                 $data[$this->getKeyColumn()] = (intval($found[0]['id']));
             }
         }
-        return parent::saveToSQL($data, $searchForID);
+        return parent::saveToSQL($data);
     }
 
     /**

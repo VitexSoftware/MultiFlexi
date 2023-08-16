@@ -23,7 +23,7 @@ class AbraFlexiApi extends AbstractAbraFlexiApi {
      * Api Handler Engine
      * @var \AbraFlexi\MultiFlexi\AbraFlexis
      */
-    public $enfine = null;
+    public $engine = null;
 
     /**
      * Prepare AbraFlexis engine
@@ -60,6 +60,7 @@ class AbraFlexiApi extends AbstractAbraFlexiApi {
      * @return ResponseInterface
      */
     public function listAbraFlexis(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface {
+        $abraflexisList = [];
         foreach ($this->engine->getAll() as $abraflexi) {
             $abraflexisList[] = ['id' => $abraflexi['id'], 'name' => $abraflexi['nazev'], 'executable' => $abraflexi['executable']];
         }
