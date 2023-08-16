@@ -10,15 +10,12 @@ Protokol spouštění je zapisován do systémového logu.
 
 Spouštěným skriptům jsou nastavoavány tyto proměnné prostředí:
 
- * **ABRAFLEXI_URL**
- * **ABRAFLEXI_LOGIN** 
- * **ABRAFLEXI_PASSWORD**
- * **ABRAFLEXI_COMPANY**
+* **ABRAFLEXI_URL**
+* **ABRAFLEXI_LOGIN**
+* **ABRAFLEXI_PASSWORD**
+* **ABRAFLEXI_COMPANY**
 
-+ proměnné prostředí dle individuální konfigurace každého modulu pro každou firmu
-
-
-
+⊕ proměnné prostředí dle individuální konfigurace každého modulu pro každou firmu
 
 Screenshoty
 -----------
@@ -38,19 +35,16 @@ Editace firmy a nastavení spouštěných služeb
 Instance AbraFlexi serveru:
 ![MFB](doc/instance.png?raw=true)
 
-Pluginy:
---------
+Pluginy
+-------
 
 Jako plugin je možné použít jakýkoliv spustitelný skript nebo binárku. Tyto jsou však připraveny k použití:
 
- * https://github.com/VitexSoftware/abraflexi-contract-invoices
- * https://github.com/VitexSoftware/php-abraflexi-matcher
- * https://github.com/VitexSoftware/php-abraflexi-reminder
- * https://github.com/VitexSoftware/AbraFlexi-Digest
- * https://github.com/Vitexus/ISDOC-via-IMAP-to-AbraFlexi
-
-
-
+* https://github.com/VitexSoftware/abraflexi-contract-invoices
+* https://github.com/VitexSoftware/php-abraflexi-matcher
+* https://github.com/VitexSoftware/php-abraflexi-reminder
+* https://github.com/VitexSoftware/AbraFlexi-Digest
+* https://github.com/Vitexus/ISDOC-via-IMAP-to-AbraFlexi
 
 instalace
 ---------
@@ -229,4 +223,3 @@ multiflexi-phinx seed:run  -s AppSeeder
 Tím se načtou pouze ukázkové aplikace. Jsou li tyto také nainstalovány (nalezeny na disku) jsou rovnou aktivovány aby je bylo možné přiřadit k firmám a intervalům.
 
 ![AppSeeder](doc/appseeder.png?raw=true)
-
