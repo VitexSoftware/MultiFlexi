@@ -34,3 +34,4 @@ composer.lock
 /OpenAPI/node_modules/
 /.php_cs.cache
 .env
+.vscode/settings.json

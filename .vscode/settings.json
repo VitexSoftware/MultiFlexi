@@ -1,9 +1,26 @@
 {
     "cSpell.words": [
+        "Abra",
         "cmdline",
         "cmdparams",
         "exitcode",
         "Flexi",
         "nazev"
-    ]
+    ],
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#004369",
+        "activityBar.foreground": "#E5DDC8",
+        "activityBar.inactiveForeground": "#d7d7d7",
+        "activityBar.activeBorder": "#ffbc96",
+        "activityBar.activeBackground": "#DB1F48",
+        "activityBar.border": "#DB1F48",
+        "titleBar.activeBackground": "#004369",
+        "titleBar.activeForeground": "#E5DDC8",
+        "titleBar.inactiveBackground": "#0d3f5c",
+        "titleBar.inactiveForeground": "#d7d7d7",
+        "titleBar.border": "#DB1F48",
+        "statusBar.background": "#004369",
+        "statusBar.foreground": "#E5DDC8",
+        "statusBar.border": "#DB1F48"
+    }
 }
