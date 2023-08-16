@@ -28,25 +28,20 @@ $jobList = new \Ease\TWB4\Table();
 $jobList->addRowHeaderColumns([_('Application'), _('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'), _('Launch now'), _('Launch in Background')]);
 foreach ($jobs as $job) {
 
-        /* check if app requires upload fields */
-        $appFields = \AbraFlexi\MultiFlexi\Conffield::getAppConfigs($job['app_id']);
-
-        /* if any of fields is upload type then add file input button */
-        $uploadFields = array_filter($appFields, function($field) {
-            return $field['type'] == 'file';
-        });
-
-
-
+    /* check if app requires upload fields */
+    $appFields = \AbraFlexi\MultiFlexi\Conffield::getAppConfigs($job['app_id']);
+    /* if any of fields is upload type then add file input button */
+    $uploadFields = array_filter($appFields, function ($field) {
+        return $field['type'] == 'file';
+    });
     $job['launch'] = new \Ease\TWB4\LinkButton('launch.php?id=' . $job['appcompanyid'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg');
-
     // use AppLaunchForm instead of LaunchButton
 //    $job['launch'] = new AppLaunchForm($job['app_id'], $companies->getMyKey());
 
-    if(empty($uploadFields)){
+    if (empty($uploadFields)) {
         $job['schedule'] = new \Ease\TWB4\LinkButton('schedule.php?id=' . $job['appcompanyid'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Schedule') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
     } else {
-        $job['schedule'] = new \Ease\TWB4\Badge('info',_('Upload field does not allow application scheduling'));
+        $job['schedule'] = new \Ease\TWB4\Badge('info', _('Upload field does not allow application scheduling'));
     }
 
     $job['appimage'] = new ATag('companyapp.php?id=' . $job['appcompanyid'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], $job['appname'], ['height' => 50, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);
@@ -65,8 +60,8 @@ foreach ($jobs as $job) {
 $companyPanelContents = [];
 $headRow = new Row();
 $logo = new \Ease\Html\ImgTag(strlen($companies->getDataValue('logo')) ? $companies->getDataValue('logo') : 'src\company.svg', 'logo', ['class' => 'img-fluid', 'min-width' => '100%']);
-$deleteButton = new \Ease\TWB4\LinkButton('companydelete.php?id='.$companies->getMyKey(), '☠️&nbsp;' . _('Delete company'),'danger');
-$headRow->addColumn(2, [$logo, '<p></p>', new \Ease\TWB4\LinkButton('companysetup.php?id=' . $companies->getMyKey(), '🛠️&nbsp;' . _('Company setup'), 'primary btn-lg btn-block '), '<p></p>', new \Ease\TWB4\LinkButton('tasks.php?company_id=' . $companies->getMyKey(), '🔧&nbsp;'. _('Setup tasks'), 'primary btn-lg btn-block'), '<p></p>', $deleteButton]);
+$deleteButton = new \Ease\TWB4\LinkButton('companydelete.php?id=' . $companies->getMyKey(), '☠️&nbsp;' . _('Delete company'), 'danger');
+$headRow->addColumn(2, [$logo, '<p></p>', new \Ease\TWB4\LinkButton('companysetup.php?id=' . $companies->getMyKey(), '🛠️&nbsp;' . _('Company setup'), 'primary btn-lg btn-block '), '<p></p>', new \Ease\TWB4\LinkButton('tasks.php?company_id=' . $companies->getMyKey(), '🔧&nbsp;' . _('Setup tasks'), 'primary btn-lg btn-block'), '<p></p>', $deleteButton]);
 $headRow->addColumn(10, new EnvironmentView($companyEnver->getData()));
 $companyPanelContents[] = $headRow;
 $companyPanelContents[] = new \Ease\Html\HrTag();

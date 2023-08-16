@@ -35,7 +35,7 @@ use Slim\Middleware\ErrorMiddleware;
 $builder = new ContainerBuilder();
 
 // consider prod by default
-$env;
+
 switch (strtolower($_SERVER['APP_ENV'] ?? 'prod')) {
     case 'development':
     case 'dev':

@@ -19,11 +19,23 @@ class Company extends \AbraFlexi\Company
     public $lastModifiedColumn = 'DatUpdate';
 
     /**
+     * SQL Table we use
+     * @var string
+     */
+    public $myTable = 'company';
+
+    /**
      * 
      * @var int
      */
     public $abraflexiId;
 
+    /**
+     * MultiFlexi Company
+     * 
+     * @param mixed $init
+     * @param array $options
+     */
     public function __construct($init = null, $options = [])
     {
         parent::__construct(null, $options);
