@@ -37,31 +37,60 @@ class Response
      */
     private $secondSpent;
     
+    /**
+     * 
+     * @param array $response
+     */
     public function __construct(array $response)
     {
         $this->parseZabbixResponse($response);
     }
 
+    /**
+     * 
+     * @return bool
+     */
     public function isSuccess(): bool
     {
         return $this->responceStatus === self::SUCCESS_RESPONSE;
     }
 
+    /**
+     * 
+     * @return int
+     */
     public function getProcessedCount(): int
     {
         return $this->processedItems;
     }
 
+    /**
+     * 
+     * @return int
+     */
     public function getFailedCount(): int
     {
         return $this->failedItems;
     }
 
+    /**
+     * 
+     * @return int
+     */
     public function getTotalCount(): int
     {
         return $this->totalItems;
     }
 
+    /**
+     * 
+     * @return float
+     */
+    public function getSecondsSpent(): float
+    {
+        return $this->secondSpent;
+    }
+    
     /**
      * Parse array to Response class properties
      *
@@ -139,4 +168,5 @@ class Response
         $this->totalItems = intval($matches[3]);
         $this->secondSpent = floatval($matches[4]);
     }
+    
 }

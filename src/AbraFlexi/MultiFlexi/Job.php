@@ -38,17 +38,17 @@ class Job extends Engine
      * 
      * @var array
      */
-    private $zabbixMessageData;
+    private $zabbixMessageData = [];
 
     /**
      * 
-     * @var type
+     * @var App
      */
     public $application = null;
 
     /**
      * 
-     * @var type
+     * @var Company
      */
     public $company = null;
 
@@ -56,8 +56,6 @@ class Job extends Engine
      * @var array
      */
     public $outputCache = [];
-
-
 
     /**
      * Job Object
@@ -70,6 +68,12 @@ class Job extends Engine
         parent::__construct($identifier, $options);
         if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
             $this->zabbixSender = new ZabbixSender(\Ease\Functions::cfg('ZABBIX_SERVER'));
+        }
+        if (is_null($this->getDataValue('company_id')) === false) {
+            $this->company = new Company(intval($this->getDataValue('company_id')));
+        }
+        if (is_null($this->getDataValue('app_id')) === false) {
+            $this->application = new Application(intval($this->getDataValue('app_id')));
         }
     }
 
@@ -85,19 +89,16 @@ class Job extends Engine
     public function newJob($companyId, $appId, $environment)
     {
         return $this->insertToSQL([
-            'company_id' => $companyId,
-            'app_id' => $appId,
-            'env' => \serialize($environment),
-            'exitcode' => -1,
-            'launched_by' => \Ease\Shared::user()->getMyKey()
+                    'company_id' => $companyId,
+                    'app_id' => $appId,
+                    'env' => \serialize($environment),
+                    'exitcode' => -1,
+                    'launched_by' => \Ease\Shared::user()->getMyKey()
         ]);
     }
 
     /**
      * Begin the Job
-     *
-     * @param int $appId
-     * @param int $companyId
      *
      * @return int Job ID
      */
@@ -120,8 +121,8 @@ class Job extends Engine
             $setupCommand = $app->getDataValue('setup');
             if (!empty(trim($setupCommand))) {
                 $app->addStatusMessage(_('Setup command') . ': ' . $setupCommand, 'debug');
-                $appCompany = new AppToCompany();
-                $appCompany->setMyKey($appCompany->appCompanyID($appId, $companyId));
+                $appCompany = new RunTemplate();
+                $appCompany->setMyKey($appCompany->runTemplateID($appId, $companyId));
                 $appInfo = $appCompany->getAppInfo();
                 $appEnvironment = $appCompany->getAppEnvironment();
                 $process = new \Symfony\Component\Process\Process(explode(' ', $setupCommand), null, $appEnvironment, null, 32767);
@@ -139,7 +140,7 @@ class Job extends Engine
                 if ($result == 0) {
                     $appCompany->setProvision(1);
                     if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
-                        $this->reportToZabbix(['phase'=>'setup']); //TODO: report provision done
+                        $this->reportToZabbix(['phase' => 'setup']); //TODO: report provision done
                     }
                     $this->addStatusMessage('provision done', 'success');
                 }
@@ -152,7 +153,7 @@ class Job extends Engine
     /**
      * Action at Job run finish
      * 
-     * @param int $statusCode
+     * @param int    $statusCode
      * @param string $stdout Job Output
      * @param string $stderr Job error output
      * 
@@ -167,11 +168,11 @@ class Job extends Engine
             $this->reportToZabbix(['phase' => 'jobDone', 'stdout' => $stdout, 'stderr' => $stderr, 'exitcode' => $statusCode, 'end' => (new \DateTime())->format('Y-m-d H:i:s')]);
         }
         return $this->updateToSQL([
-            'end' => new \Envms\FluentPDO\Literal('NOW()'),
-            'stdout' => addslashes($stdout),
-            'stderr' => addslashes($stderr),
-            'exitcode' => $statusCode
-        ], ['id' => $this->getMyKey()]);
+                    'end' => new \Envms\FluentPDO\Literal('NOW()'),
+                    'stdout' => addslashes($stdout),
+                    'stderr' => addslashes($stderr),
+                    'exitcode' => $statusCode
+                        ], ['id' => $this->getMyKey()]);
     }
 
     /**
@@ -184,8 +185,8 @@ class Job extends Engine
      */
     public function isProvisioned($appId, $companyId)
     {
-        $appCompany = new AppToCompany();
-        $appCompany->setMyKey($appCompany->appCompanyID($appId, $companyId));
+        $appCompany = new RunTemplate();
+        $appCompany->setMyKey($appCompany->runTemplateID($appId, $companyId));
         $appInfo = $appCompany->getAppInfo();
         return $appInfo['prepared'];
     }
@@ -206,13 +207,14 @@ class Job extends Engine
     }
 
     /**
+     * Prepare Job for run
      * 
-     * @param int $companyAppId
-     * @param array $envOverride
+     * @param int   $runTemplateId
+     * @param array $envOverride use to change default env
      */
-    public function prepareJob(int $companyAppId, $envOverride = [])
+    public function prepareJob(int $runTemplateId, $envOverride = [])
     {
-        $companyApp = new AppToCompany($companyAppId);
+        $companyApp = new RunTemplate($runTemplateId);
         $this->environment = array_merge($companyApp->getAppEnvironment(), $envOverride);
         $this->application = new Application($companyApp->getDataValue('app_id'));
         $this->company = new Company($companyApp->getDataValue('company_id'));
@@ -237,6 +239,19 @@ class Job extends Engine
     }
 
     /**
+     * Schedule job execution
+     * 
+     * @param \DateTime $when
+     * 
+     * @return int schedule ID
+     */
+    public function scheduleJobRun($when)
+    {
+        $scheduler = new Scheduler();
+        return $scheduler->addJob($this, $when);
+    }
+
+    /**
      * Send Job phase Message to zabbix
      * 
      * @param array $messageData override fields
@@ -258,7 +273,6 @@ class Job extends Engine
     {
         $this->runBegin();
         LogToSQL::singleton()->setApplication($this->application->getMyKey());
-        
         $exec = $this->application->getDataValue('executable');
         $cmdparams = $this->getCmdParams();
         $this->addStatusMessage('command begin: ' . $exec . ' ' . $cmdparams . '@' . $this->company->getDataValue('nazev'));
@@ -281,7 +295,6 @@ class Job extends Engine
     /**
      * Add Output line into cache
      */
-
     public function addOutput($line, $type)
     {
         $this->outputCache[microtime()] = ['line' => $line, 'type' => $type];
@@ -319,10 +332,9 @@ class Job extends Engine
         $cmdparams = $this->application->getDataValue('cmdparams');
         foreach ($this->environment as $envKey => $envValue) {
             $this->addStatusMessage(sprintf(_('Setting custom Environment: export %s=%s'), $envKey, $envValue), 'debug');
-            $cmdparams = str_replace('{' . $envKey . '}', $envValue, $cmdparams);
+            $cmdparams = str_replace('{' . $envKey . '}', $envValue, strval($cmdparams));
         }
         return $cmdparams;
-
     }
 
     /**
@@ -334,5 +346,4 @@ class Job extends Engine
     {
         return $this->getDataValue('stdout');
     }
-
 }

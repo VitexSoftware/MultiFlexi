@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi Flexi - Scheduled actions executor.
+ * Multi Flexi - Cron Scheduled actions executor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020-2023 Vitex Software
@@ -9,22 +9,23 @@
 
 namespace AbraFlexi\MultiFlexi;
 
-use AbraFlexi\MultiFlexi\Application;
-use AbraFlexi\MultiFlexi\Company;
-use AbraFlexi\MultiFlexi\Configuration;
+use \AbraFlexi\MultiFlexi\Company,
+    \AbraFlexi\MultiFlexi\Configuration,
+    \Ease\Anonym,
+    \Ease\Logger\LogToSQL,
+    \Ease\Shared;
 
-echo getcwd();
 require_once '../vendor/autoload.php';
-\Ease\Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
+Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
 
 define('EASE_LOGGER', 'syslog|\AbraFlexi\MultiFlexi\LogToSQL');
-\Ease\Shared::user(new \Ease\Anonym());
+Shared::user(new Anonym());
 $companer = new Company();
 $companys = $companer->listingQuery()->select('abraflexis.*')->select('company.id AS company_id')->leftJoin('abraflexis ON abraflexis.id = company.abraflexi');
 $customConfig = new Configuration();
 $interval = $argc == 2 ? $argv[1] : null;
 if ($interval) {
-    $ap2c = new AppToCompany();
+    $ap2c = new \AbraFlexi\MultiFlexi\RunTemplate();
     foreach ($companys as $company) {
         LogToSQL::singleton()->setCompany($company['company_id']);
         $appsForCompany = $ap2c->getColumnsFromSQL(['id', 'interv'], ['company_id' => $company['company_id'], 'interv' => $interval]);
@@ -37,7 +38,7 @@ if ($interval) {
                     continue;
                 }
                 $jobber->prepareJob($servData['id']);
-                $jobber->performJob($servData['id']);
+                $jobber->performJob();
             }
         }
     }

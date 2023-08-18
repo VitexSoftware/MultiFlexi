@@ -25,7 +25,7 @@ class DbStatus extends \Ease\TWB4\Row {
         $customers = (string) (new \AbraFlexi\MultiFlexi\Customer())->listingQuery()->count();
         $companys = (string) (new \AbraFlexi\MultiFlexi\Company())->listingQuery()->count();
         $apps = (string) (new \AbraFlexi\MultiFlexi\Application())->listingQuery()->count();
-        $assigned = (string) (new \AbraFlexi\MultiFlexi\AppToCompany())->listingQuery()->count();
+        $assigned = (string) (new \AbraFlexi\MultiFlexi\RunTemplate())->listingQuery()->count();
 
         $this->addColumn(2, new \Ease\Html\ButtonTag([_('Apps') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $apps)], ['class' => 'btn btn-default', 'type' => 'button']));
         $this->addColumn(2, new \Ease\Html\ButtonTag([_('Servers') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $abraflexis)], ['class' => 'btn btn-default', 'type' => 'button']));

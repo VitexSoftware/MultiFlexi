@@ -93,7 +93,7 @@ class AbraFlexis extends DBEngine
      */
     public function getLink()
     {
-        return 'abraflexi.php?id=' . $this->getMyKey();
+        return  new \Ease\Html\ATag('abraflexi.php?id=' . $this->getMyKey());
     }
 
 //    /**

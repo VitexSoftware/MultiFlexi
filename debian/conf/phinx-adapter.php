@@ -52,7 +52,7 @@ $cfg = [
     ],
     'environments' =>
     [
-        'default_database' => 'production',
+        'default_environment' => 'production',
         'production' => [
             'adapter' => \Ease\Functions::cfg('DB_CONNECTION'),
             'name' => $engine->database,

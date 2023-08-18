@@ -81,7 +81,7 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable {
      * @param string $message zpráva
      * @param string $type    typ zprávy (success|info|error|warning|*)
      *
-     * @return bool byl report zapsán ?
+     * @return int ID of log in databae
      */
     public function addToLog($caller, $message, $type = 'message') {
         return $this->insertToSQL([

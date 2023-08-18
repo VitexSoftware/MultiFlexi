@@ -17,7 +17,7 @@ use AbraFlexi\MultiFlexi\Company;
 require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company Tasks')));
-$companyApp = new \AbraFlexi\MultiFlexi\AppToCompany(\Ease\Document::getRequestValue('id', 'int'));
+$companyApp = new \AbraFlexi\MultiFlexi\RunTemplate(\Ease\Document::getRequestValue('id', 'int'));
 $appData = $companyApp->getAppInfo();
 $companies = new Company($companyApp->getDataValue('company_id'));
 if (strlen($companies->getDataValue('logo'))) {

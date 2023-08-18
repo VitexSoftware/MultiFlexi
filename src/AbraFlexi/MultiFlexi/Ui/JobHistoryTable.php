@@ -24,11 +24,17 @@ namespace AbraFlexi\MultiFlexi\Ui;
 class JobHistoryTable extends \Ease\TWB4\Table
 {
 
+    /**
+     * Job History presented as table
+     * 
+     * @param mixed $content
+     * @param array $properties
+     */
     public function __construct($content = null, $properties = [])
     {
         parent::__construct($content, $properties);
         $jobber = new \AbraFlexi\MultiFlexi\Job();
-        $jobs = $jobber->listingQuery()->select(['apps.nazev AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id',  'job.company_id', 'company.nazev' ], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->limit(50)->orderBy('job.id DESC')->fetchAll();
+        $jobs = $jobber->listingQuery()->select(['apps.nazev AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id',  'job.company_id', 'company.nazev' ], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->limit(50)->where('begin IS NOT NULL')->orderBy('job.id DESC')->fetchAll();
         $this->addRowHeaderColumns([_('Application'), _('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'),_('Company')]);
         foreach ($jobs as $job) {
             $job['appimage'] = new \Ease\Html\ATag('app.php?id=' . $job['app_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], $job['appname'], ['height' => 30, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);

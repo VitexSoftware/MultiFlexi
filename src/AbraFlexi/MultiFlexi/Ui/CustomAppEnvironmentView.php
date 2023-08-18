@@ -27,7 +27,7 @@ class CustomAppEnvironmentView extends EnvironmentView
 
     public function __construct(int $appCompanyID, $properties = [])
     {
-        $appToCompany = new \AbraFlexi\MultiFlexi\AppToCompany($appCompanyID);
+        $appToCompany = new \AbraFlexi\MultiFlexi\RunTemplate($appCompanyID);
         $companyId = $appToCompany->getDataValue('company_id');
         $appId = $appToCompany->getDataValue('app_id');
         $customConfig = new \AbraFlexi\MultiFlexi\Configuration();

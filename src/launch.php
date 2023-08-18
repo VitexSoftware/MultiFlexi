@@ -24,14 +24,14 @@ $oPage->addItem(new PageTop(_('Application')));
 $companyId = $oPage->getRequestValue('company_id','int');
 $appId = $oPage->getRequestValue('app_id','int');
 
-$appCompany = new \AbraFlexi\MultiFlexi\AppToCompany($oPage->getRequestValue('id', 'int'));
+$runTemplate = new \AbraFlexi\MultiFlexi\RunTemplate($oPage->getRequestValue('id', 'int'));
 if ($companyId && $appId) {
-    if ($appCompany->appCompanyID($appId, $companyId) == 0) {
-        $appCompany->dbsync(['app_id' => $appId, 'company_id' => $companyId, 'interv' => 'n']);
+    if ($runTemplate->runTemplateID($appId, $companyId) == 0) {
+        $runTemplate->dbsync(['app_id' => $appId, 'company_id' => $companyId, 'interv' => 'n']);
     }
 }
 
-$appInfo = $appCompany->getAppInfo();
+$appInfo = $runTemplate->getAppInfo();
 $apps = new Application($appInfo['app_id']);
 $instanceName = $appInfo['app_name'];
 
@@ -39,9 +39,9 @@ $instanceRow = new Row();
 $instanceRow->addColumn(2, new \Ease\Html\ImgTag(empty($appInfo['image']) ? 'images/apps.svg' : $appInfo['image'], 'Logo', ['class' => 'img-fluid', 'style' => 'height: 64px']));
 $instanceRow->addColumn(8, new \Ease\Html\H1Tag($instanceName));
 
-$envTable = new EnvironmentView($appCompany->getAppEnvironment());
+$envTable = new EnvironmentView($runTemplate->getAppEnvironment());
 
-$oPage->container->addItem(new Panel(_('App Run'), 'info', [$instanceRow, $envTable], new \Ease\Html\DivTag(new \Ease\Html\IframeTag('run.php?id=' . $appCompany->getMyKey(), ['id' => 'shell', 'title' => $instanceName]), ['class' => 'iframe-container'])));
+$oPage->container->addItem(new Panel(_('App Run'), 'info', [$instanceRow, $envTable], new \Ease\Html\DivTag(new \Ease\Html\IframeTag('run.php?id=' . $runTemplate->getMyKey(), ['id' => 'shell', 'title' => $instanceName]), ['class' => 'iframe-container'])));
 
 $oPage->addItem(new PageBottom());
 
