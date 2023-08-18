@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Multi Flexi - 
+ * Multi Flexi - API Base
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2022 Vitex Software
+ * @copyright  2022-2023 Vitex Software
  */
 
 namespace AbraFlexi\MultiFlexi\Api;
@@ -88,7 +88,7 @@ class AbraFlexiApi extends AbstractAbraFlexiApi {
             $this->engine->setMyKey($queryParams['abraflexiId']);
             $this->engine->updateToSQL($queryParams);
         } else {
-            $this->engine->insertIntoSQL($queryParams);
+            $this->engine->insertToSQL($queryParams);
         }
     }
 

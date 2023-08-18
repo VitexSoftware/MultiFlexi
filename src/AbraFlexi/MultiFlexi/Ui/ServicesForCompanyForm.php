@@ -16,7 +16,7 @@ use Ease\TWB4\FormGroup;
 use Ease\TWB4\Part;
 use Ease\TWB4\Row;
 use AbraFlexi\MultiFlexi\Application;
-use AbraFlexi\MultiFlexi\AppToCompany;
+use AbraFlexi\MultiFlexi\RunTemplate;
 use AbraFlexi\MultiFlexi\Company;
 
 /**
@@ -37,7 +37,7 @@ class ServicesForCompanyForm extends Form
     {
         $companyID = $company->getMyKey();
         $allEnabledApps = (new Application())->listingQuery()->select('id AS app_id')->select('nazev AS app_name')->where('enabled', 1)->fetchAll();
-        $glue = new AppToCompany();
+        $glue = new RunTemplate();
         $assigned = $glue->getAppsForCompany($companyID);
         parent::__construct($tagProperties);
         $jobber = new \AbraFlexi\MultiFlexi\Job();
@@ -45,7 +45,7 @@ class ServicesForCompanyForm extends Form
             $appData['company_id'] = $companyID;
             if(array_key_exists($appData['id'], $assigned)){
                 $appData['interv'] = $assigned[$appData['id']]['interv'];
-                $appData['appcompanyid'] = $assigned[$appData['id']]['id'];
+                $appData['runtemplateid'] = $assigned[$appData['id']]['id'];
             }
             $this->addItem(new AppRow($appData));
         }

@@ -83,4 +83,8 @@ release:
 	docker push vitexsoftware/multiflexi:$(nextversion)
 	docker push vitexsoftware/multiflexi:latest
 
+baseline:
+	phpstan analyse --level 7   --configuration phpstan.neon   src/ --generate-baseline
 
+daemon:
+	export $(grep -v '#' .env | xargs) && cd lib && php -f ./daemon.php

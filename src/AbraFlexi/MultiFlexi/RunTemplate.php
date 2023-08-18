@@ -14,24 +14,24 @@ namespace AbraFlexi\MultiFlexi;
  *
  * @author vitex
  */
-class AppToCompany extends Engine {
+class RunTemplate extends Engine {
 
     public function __construct($identifier = null, $options = []) {
-        $this->myTable = 'appcompany';
+        $this->myTable = 'runtemplate';
         parent::__construct($identifier, $options);
     }
 
     /**
      * Get id by App & Company
      * 
-     * SELECT appcompany.id, appcompany.interv, appcompany.prepared, apps.nazev AS app, company.nazev AS company   FROM appcompany LEFT JOIN apps ON appcompany.app_id=apps.id LEFT JOIN company ON appcompany.company_id=company.id;
+     * SELECT runtemplate.id, runtemplate.interv, runtemplate.prepared, apps.nazev AS app, company.nazev AS company   FROM runtemplate LEFT JOIN apps ON runtemplate.app_id=apps.id LEFT JOIN company ON runtemplate.company_id=company.id;
      * 
      * @param int $appId
      * @param int $companyId
      * 
      * @return int
      */
-    public function appCompanyID(int $appId, int $companyId) {
+    public function runTemplateID(int $appId, int $companyId) {
         return intval($this->listingQuery()->where('company_id=' . $companyId . ' AND app_id=' . $appId)->select('id', true)->fetchColumn());
     }
 
@@ -109,8 +109,8 @@ class AppToCompany extends Engine {
                         ->select('company.*')
                         ->select('abraflexis.*')
                         ->where([$this->getMyTable() . '.' . $this->getKeyColumn() => $this->getMyKey()])
-                        ->leftJoin('apps ON apps.id = appcompany.app_id')
-                        ->leftJoin('company ON company.id = appcompany.company_id')
+                        ->leftJoin('apps ON apps.id = runtemplate.app_id')
+                        ->leftJoin('company ON company.id = runtemplate.company_id')
                         ->leftJoin('abraflexis ON abraflexis.id = company.abraflexi')
                         ->fetch();
     }

@@ -67,6 +67,12 @@ class DBDataTable extends \Ease\Html\TableTag
      * @var handle 
      */
     public $rndId;
+    
+    /**
+     * 
+     * @var array
+     */
+    private $columnDefs = [];
 
     /**
      * Common database engine

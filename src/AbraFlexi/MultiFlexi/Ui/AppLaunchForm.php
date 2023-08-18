@@ -19,7 +19,10 @@ class AppLaunchForm extends \Ease\TWB4\Form
     public function __construct(int $app, int $company)
     {
         parent::__construct(['name' => 'appLaunchForm', 'action' => 'newjob.php', 'method' => 'post', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']);
-
+        
+        $this->addItem('APP ID: '.$app);
+        $this->addItem('Company ID: '.$company);
+        
         $this->addItem(new \Ease\Html\InputHiddenTag('app_id', $app));
         $this->addItem(new \Ease\Html\InputHiddenTag('company_id', $company));
         $this->addItem(new \Ease\TWB4\SubmitButton([_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg btn-block '));

@@ -1,0 +1,10 @@
+# Defaults for multiflexi initscript
+# sourced by /etc/init.d/multiflexi
+# installed at /etc/default/multiflexi by the maintainer scripts
+
+#
+# This is a POSIX shell fragment
+#
+
+# Additional options that are passed to the Daemon.
+DAEMON_OPTS=""

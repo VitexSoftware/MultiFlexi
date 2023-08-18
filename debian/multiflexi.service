@@ -1,0 +1,15 @@
+#!/bin/sh
+# If this exists, it is installed into lib/systemd/system/multiflexi.service in multiflexi
+# See dh_systemd_enable(1).
+
+[Unit]
+Description=Run MultiFlexi scheduled jobs
+After=multi-user.target
+
+[Service]
+EnvironmentFile=/etc/multiflexi/multiflexi.env
+ExecStart=/usr/bin/php /usr/lib/multiflexi/daemon.php
+Type=simple
+
+[Install]
+WantedBy=multi-user.target

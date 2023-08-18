@@ -60,8 +60,8 @@ class AppRow extends \Ease\TWB4\Row
 
 
 
-        if (array_key_exists('appcompanyid', $appData)) {
-            $launchButton = new \Ease\Html\DivTag(new \AbraFlexi\MultiFlexi\Ui\LaunchButton($appData['appcompanyid']));
+        if (array_key_exists('runtemplateid', $appData)) {
+            $launchButton = new \Ease\Html\DivTag(new \AbraFlexi\MultiFlexi\Ui\LaunchButton($appData['runtemplateid']));
         } else {
             $launchButton = new \Ease\TWB4\LinkButton('launch.php?app_id=' . $appId . '&company_id=' . $appData['company_id'], [_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg btn-block ');
         }
@@ -77,8 +77,8 @@ class AppRow extends \Ease\TWB4\Row
 //        $logoColumn->addItem(new \Ease\TWB4\LinkButton('?id=' . $appId, _('Clone'), 'info btn-sm  btn-block')); 
 
         $appConfColumn = $appRow->addColumn(4, new FormGroup(new \Ease\Html\H3Tag(_('Job Config')), $intervalChooser));
-        if (array_key_exists('appcompanyid', $appData)) {
-            $appConfColumn->addItem(new \AbraFlexi\MultiFlexi\Ui\CustomAppEnvironmentView($appData['appcompanyid']));
+        if (array_key_exists('runtemplateid', $appData)) {
+            $appConfColumn->addItem(new \AbraFlexi\MultiFlexi\Ui\CustomAppEnvironmentView($appData['runtemplateid']));
         }
         $appConfColumn->addItem(new \Ease\TWB4\LinkButton('custserviceconfig.php?app_id=' . $appId . '&amp;company_id=' . $appData['company_id'], _('Configure App Environment') . ' ' . new \Ease\Html\ImgTag('images/set.svg', _('Set'), ['height' => '30px']), 'success btn-sm  btn-block'));
         $jobs = (new \AbraFlexi\MultiFlexi\Job())->listingQuery()->select(['job.id', 'begin', 'exitcode', 'launched_by', 'login'], true)->leftJoin('user ON user.id = job.launched_by')->where('company_id', $appData['company_id'])->where('app_id', $appId)->limit(10)->orderBy('job.id DESC')->fetchAll();

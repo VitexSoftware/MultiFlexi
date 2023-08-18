@@ -34,7 +34,7 @@ $_SESSION['company'] = &$companies;
 $companyEnver = new \AbraFlexi\MultiFlexi\CompanyEnv($companies->getMyKey());
 if ($oPage->isPosted()) {
     $companyEnver->deleteFromSQL(['company_id' => $companies->getMyKey()]);
-    $appToCompany = new \AbraFlexi\MultiFlexi\AppToCompany();
+    $appToCompany = new \AbraFlexi\MultiFlexi\RunTemplate();
     $appToCompany->deleteFromSQL(['company_id' => $companies->getMyKey()]);
     $logger = new \AbraFlexi\MultiFlexi\Logger();
     $logger->deleteFromSQL(['company_id' => $companies->getMyKey()]);

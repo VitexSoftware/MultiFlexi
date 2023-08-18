@@ -65,6 +65,7 @@ class AppApi extends AbstractAppApi {
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function listApps(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, string $suffix): \Psr\Http\Message\ResponseInterface {
+        $appsList = [];
         foreach ($this->engine->getAll() as $app) {
             $appsList[$app['id']] = $app;
             switch ($suffix) {

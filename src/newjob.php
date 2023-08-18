@@ -8,7 +8,9 @@
  */
 
 namespace AbraFlexi\MultiFlexi\Ui;
-use AbraFlexi\MultiFlexi\Applications;
+
+use \AbraFlexi\MultiFlexi\Application,
+    \Ease\TWB4\Row;
 
 
 require_once './init.php';
@@ -20,13 +22,15 @@ $oPage->addItem(new PageTop(_('Schedule Job run')));
 $companyId = $oPage->getRequestValue('company_id','int');
 $appId = $oPage->getRequestValue('app_id','int');
 
-$appCompany = new \AbraFlexi\MultiFlexi\AppToCompany();
+$runTemplate = new \AbraFlexi\MultiFlexi\RunTemplate();
 if ($companyId && $appId) {
-    if ($appCompany->appCompanyID($appId, $companyId) == 0) {
-        $appCompany->dbsync(['app_id' => $appId, 'company_id' => $companyId, 'interv' => 'n']);
+    $runTemplateId = $runTemplate->runTemplateID($appId, $companyId);
+    if ($runTemplateId == 0) {
+        $runTemplate->dbsync(['app_id' => $appId, 'company_id' => $companyId, 'interv' => 'n']);
+    } else {
+        $runTemplate->setMyKey($runTemplateId);
     }
 }
-
 
 $jobber = new \AbraFlexi\MultiFlexi\Job();
 
@@ -45,17 +49,21 @@ if (!empty($_FILES)) {
   }
 }
 
-$jobber->prepareJob($appCompany->getMyKey(), $uploadEnv);
+$jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv);
+$jobber->scheduleJobRun(new \DateTime);
 
-
-$appInfo = $appCompany->getAppInfo();
-$apps = new Applications($appInfo['app_id']);
+$appInfo = $runTemplate->getAppInfo();
+$apps = new Application($appInfo['app_id']);
 $instanceName = $appInfo['app_name'];
 
 $instanceRow = new Row();
 $instanceRow->addColumn(2, new \Ease\Html\ImgTag(empty($appInfo['image']) ? 'images/apps.svg' : $appInfo['image'], 'Logo', ['class' => 'img-fluid', 'style' => 'height: 64px']));
 $instanceRow->addColumn(8, new \Ease\Html\H1Tag($instanceName));
 
-$envTable = new EnvironmentView($appCompany->getAppEnvironment());
+$envTable = new \AbraFlexi\MultiFlexi\Ui\EnvironmentView($runTemplate->getAppEnvironment());
+
+$oPage->container->addItem($envTable);
+
+$oPage->container->addItem(new \Ease\TWB4\LinkButton('job.php?id='.$jobber->getMyKey(), _('Job details'),'info btn-block'));
 
 $oPage->draw();

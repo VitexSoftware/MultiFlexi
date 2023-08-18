@@ -22,5 +22,13 @@ if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
 }
 
 define('EASE_LOGGER', implode('|', $loggers));
+
+/**
+ * @global User $oUser
+ */
 $oUser = Shared::user(null, 'AbraFlexi\MultiFlexi\User');
+
+/**
+ * @global WebPage $oPage
+ */
 $oPage = new WebPage();

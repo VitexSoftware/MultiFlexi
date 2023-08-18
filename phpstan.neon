@@ -1,0 +1,6 @@
+#includes:
+#	- phpstan-baseline.neon
+
+parameters:
+	ignoreErrors:
+		- '#Variable \$oPage might not be defined\.#'

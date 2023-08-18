@@ -62,7 +62,7 @@ class Logger extends DBEngine {
 
     /**
      * 
-     * @return array
+     * @return bool|int|PDOStatement
      */
     public function dismis() {
         return $this->getFluentPDO()->update($this->getMyTable())->set(['resolved' => new Literal('NOW()')])->where('id',

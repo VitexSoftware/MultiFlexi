@@ -23,33 +23,27 @@ $_SESSION['server'] = new \AbraFlexi\MultiFlexi\AbraFlexis($companies->getDataVa
 $_SESSION['customer'] = new \AbraFlexi\MultiFlexi\Customer($companies->getDataValue('customer'));
 $companyEnver = new \AbraFlexi\MultiFlexi\CompanyEnv($companies->getMyKey());
 $jobber = new \AbraFlexi\MultiFlexi\Job();
-$jobs = $jobber->listingQuery()->select(['apps.nazev AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'appcompany.id AS appcompanyid'], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->leftJoin('appcompany ON appcompany.company_id = job.company_id AND appcompany.app_id = job.app_id')->where('job.company_id', $companies->getMyKey())->limit(20)->orderBy('job.id DESC')->fetchAll();
+$jobs = $jobber->listingQuery()->select(['apps.nazev AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'runtemplate.id AS runtemplateid'], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->leftJoin('runtemplate ON runtemplate.company_id = job.company_id AND runtemplate.app_id = job.app_id')->where('job.company_id', $companies->getMyKey())->limit(20)->orderBy('job.id DESC')->fetchAll();
 $jobList = new \Ease\TWB4\Table();
 $jobList->addRowHeaderColumns([_('Application'), _('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'), _('Launch now'), _('Launch in Background')]);
 foreach ($jobs as $job) {
 
-    /* check if app requires upload fields */
-    $appFields = \AbraFlexi\MultiFlexi\Conffield::getAppConfigs($job['app_id']);
-    /* if any of fields is upload type then add file input button */
-    $uploadFields = array_filter($appFields, function ($field) {
-        return $field['type'] == 'file';
-    });
-    $job['launch'] = new \Ease\TWB4\LinkButton('launch.php?id=' . $job['appcompanyid'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg');
+    $job['launch'] = new \Ease\TWB4\LinkButton('launch.php?id=' . $job['runtemplateid'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg');
     // use AppLaunchForm instead of LaunchButton
 //    $job['launch'] = new AppLaunchForm($job['app_id'], $companies->getMyKey());
 
-    if (empty($uploadFields)) {
-        $job['schedule'] = new \Ease\TWB4\LinkButton('schedule.php?id=' . $job['appcompanyid'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Schedule') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
-    } else {
-        $job['schedule'] = new \Ease\TWB4\Badge('info', _('Upload field does not allow application scheduling'));
-    }
+        $job['schedule'] = new \Ease\TWB4\LinkButton('schedule.php?id=' . $job['runtemplateid'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Schedule') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
 
-    $job['appimage'] = new ATag('companyapp.php?id=' . $job['appcompanyid'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], $job['appname'], ['height' => 50, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);
+    $job['appimage'] = new ATag('companyapp.php?id=' . $job['runtemplateid'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], $job['appname'], ['height' => 50, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);
     unset($job['appname']);
-    unset($job['appcompanyid']);
+    unset($job['runtemplateid']);
     unset($job['app_id']);
     $job['id'] = new ATag('job.php?id=' . $job['id'], new \Ease\TWB4\Badge('info', $job['id']));
-    $job['begin'] = [$job['begin'], '<br>', new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
+    if($job['begin']){
+        $job['begin'] = [$job['begin'], '<br>', new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
+    } else {
+        $job['begin'] = _('Scheduled');
+    }
     $job['exitcode'] = new ExitCode($job['exitcode']);
     $job['launched_by'] = $job['launched_by'] ? new ATag('user.php?id=' . $job['launched_by'], new \Ease\TWB4\Badge('info', $job['login'])) : _('Timer');
     unset($job['login']);
