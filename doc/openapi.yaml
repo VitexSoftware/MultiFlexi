@@ -1,0 +1,585 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/VitexSoftware/MultiFlexi/1.0.0
+info:
+  version: "1.0.0"
+  title: MultiFlexi API
+  description: >-
+    This is an example of using OAuth2 Application Flow in a specification to
+    describe security to your API.
+paths:
+  '/':
+    get:
+      summary: 'Redirect to index'
+      responses:
+        '301':
+          description: redirect to index.html
+          
+  '/index.{suffix}':
+    get:
+      summary: Endpoints listing
+      description: Show current API
+      operationId: getApiIndex
+      security: []
+      responses:
+        '200':
+          description: OK
+      parameters:
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: json
+          required: true
+  '/login.{suffix}':
+    get:
+      summary: Return User's token
+      description: Send login & password to obtain oAuth token
+      parameters: 
+        - name: username
+          in: query
+          required: true
+          description: existing user name
+          schema:
+            type: string
+        - name: password
+          in: query
+          required: true
+          description: existing user password
+          schema:
+            type: string
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: json
+          required: true
+      responses:
+        '201':
+          description: OK
+    post:
+      summary: Return User's token
+      description: Send login & password to obtain oAuth token
+      parameters: 
+        - name: username
+          in: query
+          required: true
+          description: existing user name
+          schema:
+            type: string
+        - name: password
+          in: query
+          required: true
+          description: existing user password
+          schema:
+            type: string
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: json
+          required: true
+      responses:
+        '201':
+          description: OK
+          
+  '/ping.{suffix}':
+    get:
+      summary: Server heartbeat operation
+      description: >-
+        This operation shows how to override the global security defined above,
+        as we want to open it up for all users.
+      security: []
+      responses:
+        '200':
+          description: OK
+      parameters:
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: json
+          required: true
+          
+  '/app/{appId}.{suffix}':
+    get:
+      tags:
+        - app
+      summary: Get App by ID
+      description: Returns a single App
+      operationId: getAppById
+      parameters:
+        - name: appId
+          in: path
+          description: ID of app to return
+          required: true
+          schema:
+            type: string
+            pattern: '^\d+'
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: .json
+          required: true
+            
+      responses:
+        '200':
+          description: successful operation
+          content:
+            # application/xml:
+            #   schema:
+            #     $ref: '#/components/schemas/App'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        '400':
+          description: Invalid ID supplied
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: App not found
+      security:
+        - basicAuth: []      
+        # - bearerAuth: []
+        # - api_key: []
+        # - multiflexi_auth:
+        #     - 'write:apps'
+        #     - 'read:apps'
+  /app/:
+    post:
+      tags:
+        - app
+      summary: Create or Update Application
+      description: Create or Update App by ID
+      operationId: setAppById
+      parameters:
+        - name: appId
+          in: query
+          required: false
+          description: ID of app to return
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '201':
+          description: application created or updated
+          content:
+            # application/xml:
+            #   schema:
+            #     $ref: '#/components/schemas/App'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        '400':
+          description: Invalid ID supplied
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: App not found
+      security:
+        - basicAuth: []      
+        # - bearerAuth: []
+        # - api_key: []
+        # - multiflexi_auth:
+        #     - 'write:apps'
+        #     - 'read:apps'  
+
+  '/abraflexi/{abraflexiId}.{suffix}':
+    get:
+      tags:
+        - abraflexi
+      summary: Get AbraFlexi by ID
+      description: Returns a single AbraFlexi
+      operationId: getAbraFlexiById
+      parameters:
+        - name: abraflexiId
+          in: path
+          description: ID of app to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: json
+          required: true
+            
+      responses:
+        '200':
+          description: successful operation
+          content:
+            # application/xml:
+            #   schema:
+            #     $ref: '#/components/schemas/AbraFlexi'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AbraFlexi'
+        '400':
+          description: Invalid ID supplied
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: App not found
+      security:
+        - basicAuth: []      
+        # - bearerAuth: []
+        # - api_key: []
+        # - multiflexi_auth:
+        #     - 'write:abraflexis'
+        #     - 'read:abraflexis'  
+  /abraflexi/:
+    post:
+      tags:
+        - abraflexi
+      summary: Create or Update AbraFlexi record
+      description: Create or Upda single AbraFlexi record
+      operationId: setAbraFlexiById
+      parameters:
+        - name: abraflexiId
+          in: query
+          description: ID of app to return
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '201':
+          description: record created or updated
+          content:
+            # application/xml:
+            #   schema:
+            #     $ref: '#/components/schemas/AbraFlexi'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AbraFlexi'
+        '400':
+          description: Invalid ID supplied
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: App not found
+      security:
+        - basicAuth: []      
+        # - bearerAuth: []
+        # - api_key: []
+        # - multiflexi_auth:
+        #     - 'write:abraflexis'
+        #     - 'read:abraflexis'  
+
+
+  '/apps.{suffix}':
+    get:
+      tags:
+        - app
+      summary: Show All Apps
+      description: All apps registeres
+      operationId: listApps
+      parameters:
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: json
+          required: true
+      
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/App'
+        '400':
+          description: Invalid status value
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+
+      security:
+        - basicAuth: []      
+        # - bearerAuth: []
+        # - api_key: []
+        # - multiflexi_auth:
+        #     - 'write:apps'
+        #     - 'read:apps'  
+
+  /abraflexis:
+    get:
+      tags:
+        - abraflexi
+      summary: Show All AbraFlexis
+      description: All AbraFlexi servers registered
+      operationId: listAbraFlexis
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AbraFlexi'
+        '400':
+          description: Invalid status value
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - basicAuth: []      
+        # - bearerAuth: []
+        # - api_key: []
+        # - multiflexi_auth:
+        #     - 'write:abraflexis'
+        #     - 'read:abraflexis'  
+
+components:
+  schemas:
+    App:
+      x-swagger-router-model: com.vitexsoftware.multiflexi.model.App
+      required:
+        - name
+        - executable
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: matcher
+        executable:
+          type: string
+          example: abraflexi-matcher
+        tags:
+          type: array
+          xml:
+            wrapped: true
+          items:
+            $ref: '#/components/schemas/Tag'
+        status:
+          type: string
+          description: App status in the store
+          enum:
+            - available
+            - pending
+            - sold
+      xml:
+        name: App
+      type: object
+    
+    User:
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        enabled:
+          type: boolean
+          example: true
+        settings:
+          type: string
+        email:
+          type: string
+          format: email
+        firstname:
+          type: string
+        lastname:
+          type: string
+        password:
+          type: string
+        login:
+          type: string
+        DatCreate:
+          type: string
+          format: date-time
+        DatSave:
+          type: string
+          format: date-time
+        last_modifier_id:
+          type: integer
+          format: int64
+          example: 10
+    
+    AbraFlexi:
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+        url:
+          type: string
+        user:
+          type: string
+        password:
+          type: string
+        DatCreate:
+          type: string
+          format: date-time
+        DatSave:
+          type: string
+          format: date-time
+
+    ConfField:
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        app_id:
+          type: integer
+          format: int64
+          example: 10
+        keyname:
+          type: string
+        type:
+          type: string
+          enum: 
+            - text
+            - number
+            - date
+            - email
+            - password
+            - checkbox
+        description:
+          type: string
+        defval:
+          type: string
+
+    Configuration:
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        app_id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+        value:
+          type: string
+
+    Customer:
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        enabled:
+          type: boolean
+          example: true
+        settings:
+          type: string
+        email:
+          type: string
+          format: email
+        firstname:
+          type: string
+        lastname:
+          type: string
+        password:
+          type: string
+        login:
+          type: string
+        DatCreate:
+          type: string
+          format: date-time
+        DatSave:
+          type: string
+          format: date-time
+    AppCompany:
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        app_id:
+          type: integer
+          format: int64
+          example: 10
+        iterv:
+          type: string
+          description: interval
+          enum: 
+            - h
+            - d
+            - w
+            - m
+            - y
+
+    Tag:
+      x-swagger-router-model: com.vitexsoftware.multiflexi.model.Tag
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      xml:
+        name: tag
+      type: object
+    
+  responses:
+    UnauthorizedError:
+      description: Authentication information is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string    
+    
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic  
+    # multiflexi_auth:
+    #   type: oauth2
+    #   flows:
+    #     implicit:
+    #       authorizationUrl: /api/VitexSoftware/MultiFlexi/1.0.0/login
+    #       scopes:
+    #         write:apps: modify apps in your account
+    #         read:apps: read your apps
+    #         write:abraflexis: modify abraflexi instance in your account
+    #         read:abraflexis: read your abraflexi instances
+    # api_key:
+    #   type: apiKey
+    #   in: header
+    #   name: X-API-KEY
+    # bearerAuth:
+    #   type: http
+    #   scheme: bearer
