@@ -33,7 +33,7 @@ class Packet implements \JsonSerializable
      * 
      * @return mixed
      */
-    public function jsonSerialize(): mixed
+    public function jsonSerialize()
     {
         return $this->packet;
     }

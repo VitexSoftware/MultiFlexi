@@ -12,7 +12,6 @@ namespace AbraFlexi\MultiFlexi;
 use \AbraFlexi\MultiFlexi\Company,
     \AbraFlexi\MultiFlexi\Configuration,
     \Ease\Anonym,
-    \Ease\Logger\LogToSQL,
     \Ease\Shared;
 
 require_once '../vendor/autoload.php';
