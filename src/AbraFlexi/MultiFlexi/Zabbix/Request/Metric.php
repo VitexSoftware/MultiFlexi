@@ -63,7 +63,7 @@ class Metric implements \JsonSerializable
      * 
      * @return mixed
      */
-    public function jsonSerialize(): mixed
+    public function jsonSerialize()
     {
         return [
             'host' => $this->hostname,
