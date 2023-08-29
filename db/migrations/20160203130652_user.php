@@ -23,7 +23,7 @@ class User extends AbstractMigration {
                 ->addIndex(['login', 'email'], ['unique' => true])
                 ->create();
         $table
-            ->changeColumn('id', 'biginteger', ['identity' => true, 'signed' => false])
+            ->changeColumn('id', 'integer', ['identity' => true, 'signed' => false])
             ->save();        
         
     }
