@@ -88,3 +88,6 @@ baseline:
 
 daemon:
 	export $(grep -v '#' .env | xargs) && cd lib && php -f ./daemon.php
+
+packages:
+	debuild -us -uc

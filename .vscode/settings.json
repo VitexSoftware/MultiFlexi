@@ -5,6 +5,7 @@
         "cmdparams",
         "exitcode",
         "Flexi",
+        "multiflexiapiserver",
         "nazev"
     ],
     "workbench.colorCustomizations": {
