@@ -16,7 +16,7 @@ override_dh_install:
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/conf/composer.json |sponge debian/conf/composer.json
 	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multiflexi/g' debian/multiflexi/usr/share/multiflexi/init.php
 	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multiflexi/g' debian/multiflexi/usr/lib/multiflexi/*.php
-	sed -i -e 's/\.\.\/\.env/\/etc\/multiflexi\/\.env/g' debian/multiflexi/usr/lib/multiflexi/*.php
+	sed -i -e 's/\.\.\/\.env/\/etc\/multiflexi\/\multiflexi\.env/g' debian/multiflexi/usr/lib/multiflexi/*.php
 	sed -i -e 's/dirname(__DIR__)/"\/etc\/multiflexi"/' debian/multiflexi/usr/share/multiflexi/init.php
 	sed -i -e 's/\.\.\/\.env/\/etc\/multiflexi\/\.env/g' debian/multiflexi/usr/lib/multiflexi/phinx-adapter.php
 	sed -i -e 's/composer\.json/\/usr\/lib\/multiflexi\/composer\.json/g' debian/multiflexi/usr/lib/multiflexi/MultiFlexi/Ui/PageBottom.php
