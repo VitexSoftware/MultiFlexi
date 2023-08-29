@@ -26,8 +26,5 @@ class Company extends AbstractMigration
             ->addIndex(['abraflexi', 'company'], ['unique' => true])
             ->create();
         
-        $table
-            ->changeColumn('id', 'biginteger', ['identity' => true, 'signed' => false])
-            ->save();        
     }
 }
