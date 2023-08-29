@@ -34,7 +34,7 @@ distributions.each {
         ansiColor('xterm') {
             stage('Checkout ' + distribution) {
                 buildImage = docker.image(vendor + '/' + distribution)
-		sh 'git checkout debian/changelog'
+                sh 'git checkout debian/changelog'
                 def VERSION = sh (
                     script: 'dpkg-parsechangelog --show-field Version',
                     returnStdout: true
@@ -59,12 +59,8 @@ distributions.each {
                     sh 'sudo apt-get update --allow-releaseinfo-change'
                     sh 'echo "INSTALATION"'
                     sh 'IFS="\n\b"; for package in  `ls $WORKSPACE/dist/debian/ | grep .deb | grep sqlite | awk -F_ \'{print \$1}\'` ; do  echo -e "${GREEN} installing ${package} on `lsb_release -sc` ${ENDCOLOR} " ; sudo  DEBIAN_FRONTEND=noninteractive DEBCONF_DEBUG=' + debconf_debug  + ' apt-get -y install $package ; done;'
+                    sh '/etc/cron.daily/multiflexi'
                     stash includes: 'dist/**', name: 'dist-' + distroCodename
-                }
-            }
-            stage('Executior fuctionality Test ' + distribution) {
-                buildImage.inside {
-                    sh 'ABRAFLEXI_URL=https://demo.flexibee.eu:5434 ABRAFLEXI_LOGIN=winstrom ABRAFLEXI_PASSWORD=winstrom ABRAFLEXI_COMPANY=demo_de /etc/cron.daily/multiflexi'
                 }
             }
             stage('Copy artifacts ' + distribution ) {
