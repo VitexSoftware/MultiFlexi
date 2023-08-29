@@ -25,8 +25,10 @@ final class ScheduleJobs extends AbstractMigration
                 ->addColumn('after', 'datetime')
                 ->addColumn('companyapp', 'integer')
                 ->create();
-        $table
-                ->changeColumn('id', 'biginteger', ['identity' => true, 'signed' => false])
-                ->save();
-    }
+                if ($this->adapter->getAdapterType() != 'sqlite') {
+                    $table
+                        ->changeColumn('id', 'biginteger', ['identity' => true, 'signed' => false])
+                        ->save();
+                }
+            }
 }

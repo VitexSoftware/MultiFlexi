@@ -21,6 +21,16 @@ final class Logger extends AbstractMigration {
                 ->addIndex(['apps_id', 'company_id'], ['unique' => true])
                 ->addIndex('user_id')
                 ->create();
+
+                if ($this->adapter->getAdapterType() != 'sqlite') {
+                    $table
+                        ->changeColumn('id', 'biginteger', ['identity' => true, 'signed' => false])
+                        ->save();
+                }
+        
+
     }
+
+
 
 }

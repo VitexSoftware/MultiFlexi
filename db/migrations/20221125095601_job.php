@@ -29,6 +29,13 @@ final class Job extends AbstractMigration {
                 ->addForeignKey('company_id', 'company', ['id'],
                         ['constraint' => 'job-company_must_exist']);
         $table->save();
+
+        if ($this->adapter->getAdapterType() != 'sqlite') {
+            $table
+                ->changeColumn('id', 'biginteger', ['identity' => true, 'signed' => false])
+                ->save();
+        }
+
     }
 
 }

@@ -44,6 +44,20 @@
             ]
         },
         {
+            "name": "Debug Database Migration",
+            "type": "php",
+            "request": "launch",
+            "program": "${fileWorkspaceFolder}/vendor/bin/phinx",
+            "cwd": "${fileWorkspaceFolder}/src/",
+            "externalConsole": false,
+            "port": 9003,
+            "args": [
+                "migrate",
+                "-c",
+                "../phinx-adapter.php"
+            ]
+        },
+        {
             "name": "Listen for Xdebug",
             "type": "php",
             "request": "launch",
