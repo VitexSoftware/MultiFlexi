@@ -1,9 +1,9 @@
 {
     "name": "vitexsoftware/multiflexi",
     "description": "Tool used to run tools upon AbraFlexi servers",
-    "version": "1.2",
     "type": "project",
     "require": {
+        "php": "^8.0|^8.1|^8.2",
         "ext-yaml": "*",
         "ext-simplexml": "*",
         "vitexsoftware/ease-bootstrap4-widgets-abraflexi": "*",

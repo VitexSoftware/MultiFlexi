@@ -2,26 +2,28 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "debian/buster64"
+  config.vm.box = "debian/bullseye64"
   config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.provision "shell", inline: <<-SHELL
 
     export APACHE_DOCUMENT_ROOT=/usr/share/multiflexi/
     export DEBIAN_FRONTEND=noninteractive
-        
+
     apt install lsb-release wget
-    echo "deb https://repo.vitexsoftware.cz $(lsb_release -sc) main backports" | tee /etc/apt/sources.list.d/vitexsoftware.list
-    wget -O /etc/apt/trusted.gpg.d/vitexsoftware.gpg https://repo.vitexsoftware.cz/keyring.gpg
+
+    wget -qO- https://repo.vitexsoftware.com/keyring.gpg | sudo tee /etc/apt/trusted.gpg.d/vitexsoftware.gpg
+    echo "deb [signed-by=/etc/apt/trusted.gpg.d/vitexsoftware.gpg]  https://repo.vitexsoftware.com  $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/vitexsoftware.list
+
     echo "deb [trusted=yes] file:///vagrant/deb ./" > /etc/apt/sources.list.d/local.list
     apt-get update
     apt-get install -y apache2 libapache2-mod-php
 
 
-    #apt -y install multiflexi-sqlite
+    apt -y install multiflexi-sqlite
 
-    apt -y install mariadb-server
-    systemctl start mysql
-    apt -y install multiflexi-mysql
+    #apt -y install mariadb-server
+    #systemctl start mysql
+    #apt -y install multiflexi-mysql
 
     phinx seed:run -c /usr/lib/multiflexi/phinx-adapter.php
     a2enconf multiflexi

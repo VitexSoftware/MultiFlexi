@@ -1,4 +1,6 @@
-SPECURI=https://api.swaggerhub.com/apis/VitexSoftware/MultiFlexi/1.0.0/swagger.yaml
+#SPECURI=https://api.swaggerhub.com/apis/VitexSoftware/MultiFlexi/1.0.0/swagger.yaml
+
+SPECURI="../doc/openapi.yaml"
 
 all: clean server 
 # client

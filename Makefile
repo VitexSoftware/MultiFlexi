@@ -11,6 +11,9 @@ migration:
 seed:
 	cd src ; ../vendor/bin/phinx seed:run -c ../phinx-adapter.php ; cd ..
 
+probeapp:
+	cd src ; ../vendor/bin/phinx seed:run -c ../phinx-adapter.php -s MultiFlexiProbeApp ; cd ..
+
 
 autoload:
 	composer update
@@ -61,14 +64,12 @@ drun: dimage
 	docker run  -dit --name MultiAbraFlexiSetup -p 8080:80 vitexsoftware/multiflexi
 	firefox http://localhost:8080?login=demo\&password=demo
 
-vagrant: deb
+vagrant: packages
 	vagrant destroy -f
 	mkdir -p deb
 	debuild -us -uc
-	mv ../multiflexi-sqlite_$(currentversion)_all.deb deb
-	mv ../multiflexi-pgsql_$(currentversion)_all.deb  deb
-	mv ../multiflexi_$(currentversion)_all.deb        deb
-	mv ../multiflexi-mysql_$(currentversion)_all.deb  deb
+	mv ../multiflexi-*_$(currentversion)_all.deb deb
+	mv ../multiflexi_$(currentversion)_all.deb deb
 	cd deb ; dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz; cd ..
 	vagrant up
 	sensible-browser http://localhost:8080/multiflexi?login=demo\&password=demo

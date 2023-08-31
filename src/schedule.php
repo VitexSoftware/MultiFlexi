@@ -40,14 +40,9 @@ if (is_null($app->getMyKey())) {
         $runTemplate = new \AbraFlexi\MultiFlexi\RunTemplate();
         if ($company->getMyKey() && $app->getMyKey()) {
             $runTemplateId = $runTemplate->runTemplateID($app->getMyKey(), $company->getMyKey());
-            if ($runTemplateId == 0) {
-                $runTemplate->dbsync(['app_id' => $app->getMyKey(), 'company_id' => $company->getMyKey(), 'interv' => 'n']);
-            } else {
-                $runTemplate->setMyKey($runTemplateId);
-            }
         }
 
-        $jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv);
+        $jobber->prepareJob($runTemplateId, $uploadEnv);
         $jobber->scheduleJobRun(new \DateTime(WebPage::getRequestValue('when')));
         $envTable = new \AbraFlexi\MultiFlexi\Ui\EnvironmentView($runTemplate->getAppEnvironment());
         $oPage->container->addItem($envTable);

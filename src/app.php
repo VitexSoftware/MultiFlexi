@@ -32,7 +32,7 @@ if ($oPage->isPosted()) {
     }
 }
 
-if (strlen($instanceName)) {
+if (empty($instanceName) === false) {
     $instanceLink = '';
 } else {
     $instanceName = _('New Application');

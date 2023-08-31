@@ -5,7 +5,7 @@ echo $0 $1 $2
 
 if [ -f "$1" ]; then
     echo "File $1 exists."
-    cat $1
+    ls -la $1
 else
     echo "File does not exist."
 fi

@@ -41,7 +41,7 @@ class JobScheduleForm extends Form
     {
         $this->company = $company;
         $this->app = $app;
-        parent::__construct();
+        parent::__construct(['enctype' => 'multipart/form-data']);
     }
 
     /**
@@ -76,7 +76,7 @@ class JobScheduleForm extends Form
             return $field['type'] == 'file';
         });
         foreach ($uploadFields as $uploadField) {
-            $this->addInput(new \Ease\Html\InputFileTag($uploadField['name']), $uploadField['caption']);
+            $this->addInput(new \Ease\Html\InputFileTag($uploadField['keyname']), $uploadField['description']);
         }
     }
 }
