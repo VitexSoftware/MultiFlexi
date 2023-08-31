@@ -86,7 +86,11 @@ class AppRow extends \Ease\TWB4\Row
         $jobList->addRowHeaderColumns([_('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher')]);
         foreach ($jobs as $job) {
             $job['id'] = new ATag('job.php?id=' . $job['id'], $job['id']);
-            $job['begin'] = [$job['begin'], ' ', new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
+            if(empty($job['begin'])){
+                $job['begin'] = _('Not launched yet');
+            } else {
+                $job['begin'] = [$job['begin'], ' ', new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
+            }
             $job['exitcode'] = new \AbraFlexi\MultiFlexi\Ui\ExitCode($job['exitcode']);
             $job['launched_by'] = $job['launched_by'] ? new ATag('user.php?id=' . $job['launched_by'], $job['login']) : _('Timer');
             unset($job['login']);

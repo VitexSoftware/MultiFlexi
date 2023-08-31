@@ -23,14 +23,9 @@ $companyId = $oPage->getRequestValue('company_id','int');
 $appId = $oPage->getRequestValue('app_id','int');
 
 $runTemplate = new \AbraFlexi\MultiFlexi\RunTemplate();
-if ($companyId && $appId) {
-    $runTemplateId = $runTemplate->runTemplateID($appId, $companyId);
-    if ($runTemplateId == 0) {
-        $runTemplate->dbsync(['app_id' => $appId, 'company_id' => $companyId, 'interv' => 'n']);
-    } else {
-        $runTemplate->setMyKey($runTemplateId);
-    }
-}
+
+$runTemplateId = $runTemplate->runTemplateID($appId, $companyId);
+$runTemplate->setMyKey($runTemplateId);
 
 $jobber = new \AbraFlexi\MultiFlexi\Job();
 
@@ -59,6 +54,8 @@ $instanceName = $appInfo['app_name'];
 $instanceRow = new Row();
 $instanceRow->addColumn(2, new \Ease\Html\ImgTag(empty($appInfo['image']) ? 'images/apps.svg' : $appInfo['image'], 'Logo', ['class' => 'img-fluid', 'style' => 'height: 64px']));
 $instanceRow->addColumn(8, new \Ease\Html\H1Tag($instanceName));
+
+$oPage->container->addItem($instanceRow);
 
 $envTable = new \AbraFlexi\MultiFlexi\Ui\EnvironmentView($runTemplate->getAppEnvironment());
 

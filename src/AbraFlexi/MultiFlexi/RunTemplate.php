@@ -32,7 +32,8 @@ class RunTemplate extends Engine {
      * @return int
      */
     public function runTemplateID(int $appId, int $companyId) {
-        return intval($this->listingQuery()->where('company_id=' . $companyId . ' AND app_id=' . $appId)->select('id', true)->fetchColumn());
+        $runTemplateId = intval($this->listingQuery()->where('company_id=' . $companyId . ' AND app_id=' . $appId)->select('id', true)->fetchColumn());
+        return $runTemplateId ? $runTemplateId : $this->dbsync(['app_id' => $appId, 'company_id' => $companyId, 'interv' => 'n']);
     }
 
     /**

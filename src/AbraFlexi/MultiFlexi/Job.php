@@ -346,4 +346,9 @@ class Job extends Engine
     {
         return $this->getDataValue('stdout');
     }
+
+    public function cleanUp()
+    {
+        // TODO: Delete Uploaded files if any
+    }
 }
