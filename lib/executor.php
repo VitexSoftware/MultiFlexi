@@ -17,8 +17,16 @@ use \AbraFlexi\MultiFlexi\Company,
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
 
-define('EASE_LOGGER', 'syslog|\AbraFlexi\MultiFlexi\LogToSQL');
+$loggers = ['syslog', '\AbraFlexi\MultiFlexi\LogToSQL'];
+if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
+    $loggers[] = '\AbraFlexi\MultiFlexi\LogToZabbix';
+}
+define('EASE_LOGGER', implode('|', $loggers));
 Shared::user(new Anonym());
+
+$jobber = new Job();
+$jobber->logBanner();
+
 $companer = new Company();
 $companys = $companer->listingQuery()->select('abraflexis.*')->select('company.id AS company_id')->leftJoin('abraflexis ON abraflexis.id = company.abraflexi');
 $customConfig = new Configuration();
