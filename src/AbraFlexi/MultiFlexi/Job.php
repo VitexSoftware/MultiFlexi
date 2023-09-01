@@ -75,6 +75,7 @@ class Job extends Engine
         if (is_null($this->getDataValue('app_id')) === false) {
             $this->application = new Application(intval($this->getDataValue('app_id')));
         }
+        $this->setObjectName();
     }
 
     /**
@@ -146,7 +147,7 @@ class Job extends Engine
                 }
             }
         }
-
+        $this->updateToSQL(['id'=> $this->getMyKey(), 'begin' => new \Envms\FluentPDO\Literal('NOW()')]);
         return $jobId;
     }
 
