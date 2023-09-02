@@ -46,10 +46,10 @@ class LogToZabbix implements \Ease\Logger\Loggingable
     public function addToLog($caller, $message, $type = 'message')
     {
         $packet = new ZabbixPacket();
-        $me = \Ease\Functions::cfg('ZABBIX_SOURCE');
+        $me = \Ease\Functions::cfg('ZABBIX_HOST');
         $packet->addMetric((new ZabbixMetric('multiflexi.message', json_encode(['caller' => \Ease\Logger\LogToSQL::venuize($caller), 'message' => $message, 'type' => $type])))->withHostname($me));
         $this->sender->send($packet);
-        //system('zabbix_sender -z ' . \Ease\Functions::cfg('ZABBIX_SERVER') . ' -p 10051 -s "' . \Ease\Functions::cfg('ZABBIX_SOURCE') . '" -k ' . \Ease\Functions::cfg('ZABBIX_FIELD', 'multi.message') . ' -o "' . $message . '"');
+        //system('zabbix_sender -z ' . \Ease\Functions::cfg('ZABBIX_SERVER') . ' -p 10051 -s "' . \Ease\Functions::cfg('ZABBIX_HOST') . '" -k ' . \Ease\Functions::cfg('ZABBIX_FIELD', 'multi.message') . ' -o "' . $message . '"');
     }
 
     /**
