@@ -264,7 +264,6 @@ class Job extends Engine
         $this->zabbixMessageData = array_merge($this->zabbixMessageData, $messageData);
         $packet->addMetric((new ZabbixMetric('multiflexi.job', json_encode($this->zabbixMessageData)))->withHostname($me));
         $this->zabbixSender->send($packet);
-        $this->addStatusMessage($me . ': Job phase ' . $this->zabbixMessageData['phase'] . ' reported to zabbix ' . \Ease\Functions::cfg('ZABBIX_SERVER'), 'debug');
     }
 
     /**
