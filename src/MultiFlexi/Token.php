@@ -32,10 +32,10 @@ class Token extends Engine {
     public $createColumn = 'start';
     /**
      * 
-     * @return \AbraFlexi\MultiFlexi\User
+     * @return \MultiFlexi\User
      */
     public function getUser() {
-        return $this->getDataValue('user') ? new \AbraFlexi\MultiFlexi\User($this->getDataValue('user')) : null;
+        return $this->getDataValue('user') ? new \MultiFlexi\User($this->getDataValue('user')) : null;
     }
 
     /**

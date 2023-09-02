@@ -9,7 +9,7 @@
 
 namespace MultiFlexi\Ui;
 
-use AbraFlexi\MultiFlexi\Ui\WebPage;
+use MultiFlexi\Ui\WebPage;
 
 /**
  * Page TOP.

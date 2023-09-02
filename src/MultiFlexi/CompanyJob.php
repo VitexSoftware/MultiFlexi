@@ -9,8 +9,8 @@
 
 namespace MultiFlexi;
 
-use AbraFlexi\MultiFlexi\DBEngine;
-use AbraFlexi\MultiFlexi\DatabaseEngine;
+use MultiFlexi\DBEngine;
+use MultiFlexi\DatabaseEngine;
 
 class CompanyJob extends DBEngine implements DatabaseEngine
 {
@@ -69,7 +69,7 @@ class CompanyJob extends DBEngine implements DatabaseEngine
                         'detailPage' => 'app.php',
                         'idColumn' => 'app',
                         'valueColumn' => 'apps.nazev',
-                        'engine' => '\AbraFlexi\MultiFlexi\Application',
+                        'engine' => '\MultiFlexi\Application',
                         'filterby' => 'name',
                     ],
                     ['name' => 'exitcode', 'type' => 'text', 'label' => _('Exit Code')],
@@ -82,7 +82,7 @@ class CompanyJob extends DBEngine implements DatabaseEngine
                         'detailPage' => 'company.php',
                         'idColumn' => 'company',
                         'valueColumn' => 'company.nazev',
-                        'engine' => '\AbraFlexi\MultiFlexi\Company',
+                        'engine' => '\MultiFlexi\Company',
                         'filterby' => 'name',
                     ],
                     ['name' => 'launched_by', 'type' => 'selectize', 'label' => _('Launcher'),
@@ -90,7 +90,7 @@ class CompanyJob extends DBEngine implements DatabaseEngine
                         'detailPage' => 'user.php',
                         'idColumn' => 'user',
                         'valueColumn' => 'user.login',
-                        'engine' => '\AbraFlexi\MultiFlexi\User',
+                        'engine' => '\MultiFlexi\User',
                         'filterby' => 'name',
                     ],
         ]);

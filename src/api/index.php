@@ -19,10 +19,10 @@
  */
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-use AbraFlexi\MultiFlexi\App\RegisterDependencies;
-use AbraFlexi\MultiFlexi\App\RegisterMiddlewares;
-use AbraFlexi\MultiFlexi\App\RegisterRoutes;
-use AbraFlexi\MultiFlexi\App\ResponseEmitter as Response;
+use MultiFlexi\App\RegisterDependencies;
+use MultiFlexi\App\RegisterMiddlewares;
+use MultiFlexi\App\RegisterRoutes;
+use MultiFlexi\App\ResponseEmitter as Response;
 use DI\Bridge\Slim\Bridge;
 use DI\ContainerBuilder;
 use Neomerx\Cors\Contracts\AnalyzerInterface;
@@ -115,9 +115,9 @@ $app->add(new \Tuupola\Middleware\HttpBasicAuthentication([
 //            "ignore" => [$path . '/', $path . '/ping', $path . '/authorize'],
 //            'path' => '/',
             'ignore' => [ $path . '/', $path . '/ping/'],
-//            "authenticator" => new \AbraFlexi\MultiFlexi\Auth\BasicAuthenticator()
+//            "authenticator" => new \MultiFlexi\Auth\BasicAuthenticator()
             "authenticator" => function ($arguments) {
-                $prober = new \AbraFlexi\MultiFlexi\User($arguments['user']);
+                $prober = new \MultiFlexi\User($arguments['user']);
                 return $prober->getUserID() && strlen($arguments['password']) && $prober->isAccountEnabled() && $prober->passwordValidation($arguments['password'], $prober->getDataValue($prober->passwordColumn));
             }
         ]));

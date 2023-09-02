@@ -7,7 +7,7 @@
  * @copyright  2022 Vitex Software
  */
 use Psr\Http\Message\ServerRequestInterface as Request;
-use AbraFlexi\MultiFlexi\App\ResponseEmitter as Response;
+use MultiFlexi\App\ResponseEmitter as Response;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 

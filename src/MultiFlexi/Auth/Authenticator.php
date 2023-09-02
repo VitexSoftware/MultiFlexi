@@ -21,7 +21,7 @@ class Authenticator extends AbstractAuthenticator {
     }
 
     protected function getUserByToken(string $token): array {
-        $tokener = new \AbraFlexi\MultiFlexi\Token($token);
+        $tokener = new \MultiFlexi\Token($token);
         return $tokener->getUser();
     }
 

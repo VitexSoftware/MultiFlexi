@@ -12,14 +12,14 @@ namespace MultiFlexi\Ui;
 use Ease\Html\ATag;
 use Ease\TWB4\Panel;
 use Ease\TWB4\Row;
-use AbraFlexi\MultiFlexi\Company;
+use MultiFlexi\Company;
 
 require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company')));
 $abraFlexiId = WebPage::getRequestValue('abraflexi', 'int');
 if ($abraFlexiId) {
-    $abraFlexiServer = new \AbraFlexi\MultiFlexi\AbraFlexis($abraFlexiId);
+    $abraFlexiServer = new \MultiFlexi\AbraFlexis($abraFlexiId);
     $companyConfig = $abraFlexiServer->getConnectionDetails();
     $companyConfig['company'] = WebPage::getGetValue('company');
 } else {
@@ -31,7 +31,7 @@ if (is_null($abraFlexiId) === false) {
     $companies->setDataValue('abraflexi', $abraFlexiId);
 }
 $_SESSION['company'] = &$companies;
-$companyEnver = new \AbraFlexi\MultiFlexi\CompanyEnv($companies->getMyKey());
+$companyEnver = new \MultiFlexi\CompanyEnv($companies->getMyKey());
 if ($oPage->isPosted()) {
     if (array_key_exists('env', $_POST)) {
         $companyEnver->addEnv($_POST['env']['newkey'], $_POST['env']['newvalue']);

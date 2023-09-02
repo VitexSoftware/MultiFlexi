@@ -3,11 +3,11 @@
 namespace MultiFlexi\Ui;
 
 use Ease\Html\H1Tag;
-use AbraFlexi\MultiFlexi\Configuration;
-use AbraFlexi\MultiFlexi\Ui\CustomAppConfigForm;
-use AbraFlexi\MultiFlexi\Ui\PageBottom;
-use AbraFlexi\MultiFlexi\Ui\PageTop;
-use AbraFlexi\MultiFlexi\Ui\WebPage;
+use MultiFlexi\Configuration;
+use MultiFlexi\Ui\CustomAppConfigForm;
+use MultiFlexi\Ui\PageBottom;
+use MultiFlexi\Ui\PageTop;
+use MultiFlexi\Ui\WebPage;
 
 /**
  * Multi Flexi - Config fields editor.

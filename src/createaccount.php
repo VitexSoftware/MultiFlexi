@@ -38,7 +38,7 @@ if ($oPage->isPosted()) {
     if (!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
         $oUser->addStatusMessage(_('invalid mail address'), 'warning');
     } else {
-        $testuser = new \AbraFlexi\MultiFlexi\User();
+        $testuser = new \MultiFlexi\User();
         $testuser->setkeyColumn('email');
         $testuser->loadFromSQL(addSlashes($emailAddress));
         if ($testuser->getUserName()) {
@@ -57,7 +57,7 @@ if ($oPage->isPosted()) {
         $oUser->addStatusMessage(_('Password control does not match'), 'warning');
     }
 
-    $testuser = new \AbraFlexi\MultiFlexi\User();
+    $testuser = new \MultiFlexi\User();
     $testuser->setkeyColumn('login');
     $testuser->loadFromSQL(addslashes($login));
 
@@ -68,7 +68,7 @@ if ($oPage->isPosted()) {
     }
 
     if ($error == false) {
-        $newAdmin = new \AbraFlexi\MultiFlexi\User();
+        $newAdmin = new \MultiFlexi\User();
 
         if ($newAdmin->dbsync([
                     'email' => $emailAddress,
@@ -119,7 +119,7 @@ $oPage->addItem(new PageTop(_('New Administrator')));
 
 $regFace = $oPage->container->addItem(new \Ease\TWB4\Panel(_('Singn On')));
 
-$regForm = $regFace->addItem(new ColumnsForm(new \AbraFlexi\MultiFlexi\User()));
+$regForm = $regFace->addItem(new ColumnsForm(new \MultiFlexi\User()));
 if ($oUser->getUserID()) {
     $regForm->addItem(new \Ease\Html\InputHiddenTag('parent',
                     $oUser->GetUserID()));

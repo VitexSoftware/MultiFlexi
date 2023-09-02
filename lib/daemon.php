@@ -12,9 +12,9 @@ namespace MultiFlexi;
 require_once '../vendor/autoload.php';
 \Ease\Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
 
-$loggers = ['syslog', '\AbraFlexi\MultiFlexi\LogToSQL'];
+$loggers = ['syslog', '\MultiFlexi\LogToSQL'];
 if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
-    $loggers[] = '\AbraFlexi\MultiFlexi\LogToZabbix';
+    $loggers[] = '\MultiFlexi\LogToZabbix';
 }
 define('EASE_LOGGER', implode('|', $loggers));
 

@@ -16,8 +16,8 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use \AbraFlexi\MultiFlexi\Application,
-    \AbraFlexi\MultiFlexi\Company,
+use \MultiFlexi\Application,
+    \MultiFlexi\Company,
     \Ease\TWB4\Form;
 
 /**
@@ -70,7 +70,7 @@ class JobScheduleForm extends Form
     public function uploadFields()
     {
         /* check if app requires upload fields */
-        $appFields = \AbraFlexi\MultiFlexi\Conffield::getAppConfigs($this->app->getMyKey());
+        $appFields = \MultiFlexi\Conffield::getAppConfigs($this->app->getMyKey());
         /* if any of fields is upload type then add file input button */
         $uploadFields = array_filter($appFields, function ($field) {
             return $field['type'] == 'file';

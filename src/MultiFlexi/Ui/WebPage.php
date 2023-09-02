@@ -23,7 +23,7 @@ class WebPage extends \Ease\TWB4\WebPage
 
     /**
      * Current Customer
-     * @var \AbraFlexi\MultiFlexi\Customer
+     * @var \MultiFlexi\Customer
      */
     public $customer = null;
 

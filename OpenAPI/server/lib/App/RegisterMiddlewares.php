@@ -30,7 +30,7 @@ namespace MultiFlexi\App;
  * Recommendations from template creator:
  *
  * There is no way to add route related middlewares here, add global ones. Route related middlewares
- * can be applied in \AbraFlexi\MultiFlexi\App\RegisterRoutes class.
+ * can be applied in \MultiFlexi\App\RegisterRoutes class.
  *
  * I add middlewares by full class names(\Slim\Middleware\ErrorMiddleware::class) because that way
  * Slim initiates them with options from Container. They already configured, don't need to pass any

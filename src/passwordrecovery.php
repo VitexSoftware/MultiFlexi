@@ -20,7 +20,7 @@ if (empty($emailTo)) {
 } else {
     $userEmail = addSlashes($emailTo);
 
-    $controlUser = new \AbraFlexi\MultiFlexi\User();
+    $controlUser = new \MultiFlexi\User();
     $controlData = $controlUser->getColumnsFromSql([$controlUser->getkeyColumn()],
             ['email' => $userEmail]);
 

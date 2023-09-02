@@ -3,8 +3,8 @@
 namespace MultiFlexi\Ui;
 
 use Ease\TWB4\LinkButton;
-use AbraFlexi\MultiFlexi\Ui\PageBottom;
-use AbraFlexi\MultiFlexi\Ui\PageTop;
+use MultiFlexi\Ui\PageBottom;
+use MultiFlexi\Ui\PageTop;
 
 /**
  * Multi Flexi - Index page.

@@ -30,7 +30,7 @@ use Dyorg\TokenAuthentication\Exceptions\UnauthorizedExceptionInterface;
 /**
  * AbstractAuthenticator Class Doc Comment
  *
- * @package AbraFlexi\MultiFlexi\Auth
+ * @package MultiFlexi\Auth
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  */

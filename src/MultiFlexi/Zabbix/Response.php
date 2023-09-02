@@ -2,7 +2,7 @@
 
 namespace MultiFlexi\Zabbix;
 
-use AbraFlexi\MultiFlexi\Zabbix\Exception\ZabbixResponseException;
+use MultiFlexi\Zabbix\Exception\ZabbixResponseException;
 
 /**
  * Response class - represents a Zabbix response.

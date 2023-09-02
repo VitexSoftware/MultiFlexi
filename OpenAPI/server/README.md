@@ -128,9 +128,9 @@ All URIs are relative to *https://virtserver.swaggerhub.com/VitexSoftware/MultiF
 ```php
 // src/Api/PetApi.php
 
-namespace AbraFlexi\MultiFlexi\Api;
+namespace MultiFlexi\Api;
 
-use AbraFlexi\MultiFlexi\Api\AbstractPetApi;
+use MultiFlexi\Api\AbstractPetApi;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -167,20 +167,20 @@ Class | Method | HTTP request | Description
 
 ## Models
 
-* AbraFlexi\MultiFlexi\Model\AbraFlexi
-* AbraFlexi\MultiFlexi\Model\App
-* AbraFlexi\MultiFlexi\Model\AppCompany
-* AbraFlexi\MultiFlexi\Model\ConfField
-* AbraFlexi\MultiFlexi\Model\Configuration
-* AbraFlexi\MultiFlexi\Model\Customer
-* AbraFlexi\MultiFlexi\Model\Tag
-* AbraFlexi\MultiFlexi\Model\User
+* MultiFlexi\Model\AbraFlexi
+* MultiFlexi\Model\App
+* MultiFlexi\Model\AppCompany
+* MultiFlexi\Model\ConfField
+* MultiFlexi\Model\Configuration
+* MultiFlexi\Model\Customer
+* MultiFlexi\Model\Tag
+* MultiFlexi\Model\User
 
 
 ## Authentication
 
 ### Security schema `basicAuth`
-> Important! To make Basic authentication work you need to extend [\AbraFlexi\MultiFlexi\Auth\AbstractAuthenticator](./lib/Auth/AbstractAuthenticator.php) class by [\AbraFlexi\MultiFlexi\Auth\BasicAuthenticator](./src/Auth/BasicAuthenticator.php) class.
+> Important! To make Basic authentication work you need to extend [\MultiFlexi\Auth\AbstractAuthenticator](./lib/Auth/AbstractAuthenticator.php) class by [\MultiFlexi\Auth\BasicAuthenticator](./src/Auth/BasicAuthenticator.php) class.
 
 ### Advanced middleware configuration
 Ref to used Slim Token Middleware [dyorg/slim-token-authentication](https://github.com/dyorg/slim-token-authentication/tree/1.x#readme)

@@ -25,7 +25,7 @@ class CompanyAppEnvironmentView extends EnvironmentView
 {
     public function __construct(int $runTemplateId, $properties = [])
     {
-        $appToCompany = new \AbraFlexi\MultiFlexi\RunTemplate($runTemplateId);
+        $appToCompany = new \MultiFlexi\RunTemplate($runTemplateId);
         parent::__construct($appToCompany->getAppEnvironment(), $properties);
     }
 }

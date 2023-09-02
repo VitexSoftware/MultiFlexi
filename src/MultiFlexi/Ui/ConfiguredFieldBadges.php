@@ -21,9 +21,9 @@ class ConfiguredFieldBadges extends ConfigFieldsBadges {
      * @param int $appID
      */
     public function __construct(int $companyID, int $appID) {
-        $conffield = new \AbraFlexi\MultiFlexi\Conffield();
+        $conffield = new \MultiFlexi\Conffield();
         $appFields = $conffield->appConfigs($appID);
-        $configs = new \AbraFlexi\MultiFlexi\Configuration();
+        $configs = new \MultiFlexi\Configuration();
         $appConfigs = $configs->getColumnsFromSQL(['name', 'value'], ['app_id' => $appID]);
 
         if (!empty($appFields)) {

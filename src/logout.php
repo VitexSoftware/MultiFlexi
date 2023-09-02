@@ -9,8 +9,8 @@
 
 namespace MultiFlexi\Ui;
 
-use AbraFlexi\MultiFlexi\Ui\PageBottom;
-use AbraFlexi\MultiFlexi\Ui\PageTop;
+use MultiFlexi\Ui\PageBottom;
+use MultiFlexi\Ui\PageTop;
 
 require_once './init.php';
 

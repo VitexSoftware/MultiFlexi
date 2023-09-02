@@ -21,12 +21,12 @@
  */
 namespace MultiFlexi\Model;
 
-use AbraFlexi\MultiFlexi\BaseModel;
+use MultiFlexi\BaseModel;
 
 /**
  * ConfField
  *
- * @package AbraFlexi\MultiFlexi\Model
+ * @package MultiFlexi\Model
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  */
@@ -36,7 +36,7 @@ class ConfField extends BaseModel
      * @var string Models namespace.
      * Can be required for data deserialization when model contains referenced schemas.
      */
-    protected const MODELS_NAMESPACE = '\AbraFlexi\MultiFlexi\Model';
+    protected const MODELS_NAMESPACE = '\MultiFlexi\Model';
 
     /**
      * @var string Constant with OAS schema of current class.

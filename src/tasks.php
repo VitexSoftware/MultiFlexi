@@ -12,7 +12,7 @@ namespace MultiFlexi\Ui;
 use Ease\Html\ATag;
 use Ease\TWB4\Panel;
 use Ease\TWB4\Row;
-use AbraFlexi\MultiFlexi\Company;
+use MultiFlexi\Company;
 
 require_once './init.php';
 $oPage->onlyForLogged();

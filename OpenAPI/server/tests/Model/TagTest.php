@@ -23,16 +23,16 @@
 namespace MultiFlexi\Model;
 
 use PHPUnit\Framework\TestCase;
-use AbraFlexi\MultiFlexi\Model\Tag;
+use MultiFlexi\Model\Tag;
 
 /**
  * TagTest Class Doc Comment
  *
- * @package AbraFlexi\MultiFlexi\Model
+ * @package MultiFlexi\Model
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  *
- * @coversDefaultClass \AbraFlexi\MultiFlexi\Model\Tag
+ * @coversDefaultClass \MultiFlexi\Model\Tag
  */
 class TagTest extends TestCase
 {

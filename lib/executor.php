@@ -9,17 +9,17 @@
 
 namespace MultiFlexi;
 
-use \AbraFlexi\MultiFlexi\Company,
-    \AbraFlexi\MultiFlexi\Configuration,
+use \MultiFlexi\Company,
+    \MultiFlexi\Configuration,
     \Ease\Anonym,
     \Ease\Shared;
 
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
 
-$loggers = ['syslog', '\AbraFlexi\MultiFlexi\LogToSQL'];
+$loggers = ['syslog', '\MultiFlexi\LogToSQL'];
 if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
-    $loggers[] = '\AbraFlexi\MultiFlexi\LogToZabbix';
+    $loggers[] = '\MultiFlexi\LogToZabbix';
 }
 define('EASE_LOGGER', implode('|', $loggers));
 Shared::user(new Anonym());
@@ -32,7 +32,7 @@ $companys = $companer->listingQuery()->select('abraflexis.*')->select('company.i
 $customConfig = new Configuration();
 $interval = $argc == 2 ? $argv[1] : null;
 if ($interval) {
-    $ap2c = new \AbraFlexi\MultiFlexi\RunTemplate();
+    $ap2c = new \MultiFlexi\RunTemplate();
     foreach ($companys as $company) {
         LogToSQL::singleton()->setCompany($company['company_id']);
         $appsForCompany = $ap2c->getColumnsFromSQL(['id', 'interv'], ['company_id' => $company['company_id'], 'interv' => $interval]);

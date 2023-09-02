@@ -31,7 +31,7 @@ use Slim\Exception\HttpNotImplementedException;
 /**
  * AbstractDefaultApi Class Doc Comment
  *
- * @package AbraFlexi\MultiFlexi\Api
+ * @package MultiFlexi\Api
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  */
@@ -54,7 +54,7 @@ abstract class AbstractDefaultApi
         ResponseInterface $response,
         string $suffix
     ): ResponseInterface {
-        $message = "How about implementing getApiIndex as a GET method in AbraFlexi\MultiFlexi\Api\DefaultApi class?";
+        $message = "How about implementing getApiIndex as a GET method in MultiFlexi\Api\DefaultApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 
@@ -78,7 +78,7 @@ abstract class AbstractDefaultApi
         $queryParams = $request->getQueryParams();
         $username = (key_exists('username', $queryParams)) ? $queryParams['username'] : null;
         $password = (key_exists('password', $queryParams)) ? $queryParams['password'] : null;
-        $message = "How about implementing loginSuffixGet as a GET method in AbraFlexi\MultiFlexi\Api\DefaultApi class?";
+        $message = "How about implementing loginSuffixGet as a GET method in MultiFlexi\Api\DefaultApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 
@@ -102,7 +102,7 @@ abstract class AbstractDefaultApi
         $queryParams = $request->getQueryParams();
         $username = (key_exists('username', $queryParams)) ? $queryParams['username'] : null;
         $password = (key_exists('password', $queryParams)) ? $queryParams['password'] : null;
-        $message = "How about implementing loginSuffixPost as a POST method in AbraFlexi\MultiFlexi\Api\DefaultApi class?";
+        $message = "How about implementing loginSuffixPost as a POST method in MultiFlexi\Api\DefaultApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 
@@ -123,7 +123,7 @@ abstract class AbstractDefaultApi
         ResponseInterface $response,
         string $suffix
     ): ResponseInterface {
-        $message = "How about implementing pingSuffixGet as a GET method in AbraFlexi\MultiFlexi\Api\DefaultApi class?";
+        $message = "How about implementing pingSuffixGet as a GET method in MultiFlexi\Api\DefaultApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 
@@ -141,7 +141,7 @@ abstract class AbstractDefaultApi
         ServerRequestInterface $request,
         ResponseInterface $response
     ): ResponseInterface {
-        $message = "How about implementing rootGet as a GET method in AbraFlexi\MultiFlexi\Api\DefaultApi class?";
+        $message = "How about implementing rootGet as a GET method in MultiFlexi\Api\DefaultApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 }

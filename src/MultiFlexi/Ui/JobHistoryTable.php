@@ -33,7 +33,7 @@ class JobHistoryTable extends \Ease\TWB4\Table
     public function __construct($content = null, $properties = [])
     {
         parent::__construct($content, $properties);
-        $jobber = new \AbraFlexi\MultiFlexi\Job();
+        $jobber = new \MultiFlexi\Job();
         $jobs = $jobber->listingQuery()->select(['apps.nazev AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id',  'job.company_id', 'company.nazev' ], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->limit(50)->where('begin IS NOT NULL')->orderBy('job.id DESC')->fetchAll();
         $this->addRowHeaderColumns([_('Application'), _('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'),_('Company')]);
         foreach ($jobs as $job) {

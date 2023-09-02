@@ -11,9 +11,9 @@ namespace MultiFlexi\Ui;
 
 use Ease\TWB4\Panel;
 use Ease\TWB4\Row;
-use AbraFlexi\MultiFlexi\Application;
-use AbraFlexi\MultiFlexi\Ui\PageBottom;
-use AbraFlexi\MultiFlexi\Ui\PageTop;
+use MultiFlexi\Application;
+use MultiFlexi\Ui\PageBottom;
+use MultiFlexi\Ui\PageTop;
 
 require_once './init.php';
 
@@ -24,7 +24,7 @@ $oPage->addItem(new PageTop(_('Application')));
 $companyId = $oPage->getRequestValue('company_id','int');
 $appId = $oPage->getRequestValue('app_id','int');
 
-$runTemplate = new \AbraFlexi\MultiFlexi\RunTemplate($oPage->getRequestValue('id', 'int'));
+$runTemplate = new \MultiFlexi\RunTemplate($oPage->getRequestValue('id', 'int'));
 if ($companyId && $appId) {
     if ($runTemplate->runTemplateID($appId, $companyId) == 0) {
         $runTemplate->dbsync(['app_id' => $appId, 'company_id' => $companyId, 'interv' => 'n']);

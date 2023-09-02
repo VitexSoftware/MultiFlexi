@@ -22,7 +22,7 @@ class AbraFlexiInstanceStatus extends \Ease\Html\TableTag {
 
         $this->addRowHeaderColumns([_('Code'), _('Name'), _('Show'), _('State'), _('watching Changes'), '']);
 
-        $companer = new \AbraFlexi\MultiFlexi\Company();
+        $companer = new \MultiFlexi\Company();
         $registered = $companer->getColumnsFromSQL(['id', 'company'], ['abraflexi' => $abraflexis->getMyKey()], 'id', 'company');
 
         foreach ($this->companys($abraflexis->getData()) as $companyData) {

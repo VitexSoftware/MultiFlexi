@@ -2,7 +2,7 @@
 
 namespace MultiFlexi\Zabbix\Request;
 
-use AbraFlexi\MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
+use MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
 
 /**
  * Packet class - represents a set of Metrics

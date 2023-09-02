@@ -11,8 +11,8 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 $oPage->onlyForLogged();
-$app = new \AbraFlexi\MultiFlexi\Application(WebPage::getRequestValue('app_id', 'int'));
-$company = new \AbraFlexi\MultiFlexi\Company(WebPage::getRequestValue('company_id', 'int'));
+$app = new \MultiFlexi\Application(WebPage::getRequestValue('app_id', 'int'));
+$company = new \MultiFlexi\Company(WebPage::getRequestValue('company_id', 'int'));
 $oPage->addItem(new PageTop(_('About')));
 $oPage->container->addItem(new ApplicationInfo($app, $company));
 if (is_null($app->getMyKey())) {
@@ -21,7 +21,7 @@ if (is_null($app->getMyKey())) {
 } else {
 
     if (WebPage::isPosted() && WebPage::getRequestValue('when')) {
-        $jobber = new \AbraFlexi\MultiFlexi\Job();
+        $jobber = new \MultiFlexi\Job();
         $uploadEnv = [];
         /**
          * Save all uploaded files into temporary directory and prepare job environment
@@ -37,14 +37,14 @@ if (is_null($app->getMyKey())) {
             }
         }
 
-        $runTemplate = new \AbraFlexi\MultiFlexi\RunTemplate();
+        $runTemplate = new \MultiFlexi\RunTemplate();
         if ($company->getMyKey() && $app->getMyKey()) {
             $runTemplateId = $runTemplate->runTemplateID($app->getMyKey(), $company->getMyKey());
         }
 
         $jobber->prepareJob($runTemplateId, $uploadEnv);
         $jobber->scheduleJobRun(new \DateTime(WebPage::getRequestValue('when')));
-        $envTable = new \AbraFlexi\MultiFlexi\Ui\EnvironmentView($runTemplate->getAppEnvironment());
+        $envTable = new \MultiFlexi\Ui\EnvironmentView($runTemplate->getAppEnvironment());
         $oPage->container->addItem($envTable);
         $oPage->container->addItem(new \Ease\TWB4\LinkButton('job.php?id=' . $jobber->getMyKey(), _('Job details'), 'info btn-block'));
     } else {

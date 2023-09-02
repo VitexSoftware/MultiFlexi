@@ -24,7 +24,7 @@
 namespace MultiFlexi;
 
 use PHPUnit\Framework\TestCase;
-use AbraFlexi\MultiFlexi\BaseModel;
+use MultiFlexi\BaseModel;
 use OpenAPIServer\Mock\OpenApiModelInterface;
 use InvalidArgumentException;
 use StdClass;
@@ -33,7 +33,7 @@ use StdClass;
  * BaseModelTest
  *
  * phpcs:disable Squiz.Commenting,Generic.Commenting,PEAR.Commenting
- * @coversDefaultClass \AbraFlexi\MultiFlexi\BaseModel
+ * @coversDefaultClass \MultiFlexi\BaseModel
  */
 class BaseModelTest extends TestCase
 {
