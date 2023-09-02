@@ -8,7 +8,7 @@ use Ease\SQL\Orm;
  * Multi Flexi - Instance Management Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2015-2020 Vitex Software
+ * @copyright  2015-2023 Vitex Software
  */
 class User extends \Ease\User {
 
