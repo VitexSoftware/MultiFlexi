@@ -26,7 +26,7 @@ define('EASE_LOGGER', implode('|', $loggers));
 /**
  * @global User $oUser
  */
-$oUser = Shared::user(null, 'MultiFlexi\User');
+$oUser = Shared::user(null, '\MultiFlexi\User');
 
 /**
  * @global WebPage $oPage
