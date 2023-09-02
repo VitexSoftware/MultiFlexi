@@ -1,6 +1,6 @@
 <?php
 
-namespace AbraFlexi\MultiFlexi\Ui;
+namespace MultiFlexi\Ui;
 
 use Ease\TWB4\LinkButton;
 use AbraFlexi\MultiFlexi\Ui\PageBottom;

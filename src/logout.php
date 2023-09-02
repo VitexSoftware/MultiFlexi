@@ -7,7 +7,7 @@
  * @copyright  2020-2022 Vitex Software
  */
 
-namespace AbraFlexi\MultiFlexi\Ui;
+namespace MultiFlexi\Ui;
 
 use AbraFlexi\MultiFlexi\Ui\PageBottom;
 use AbraFlexi\MultiFlexi\Ui\PageTop;

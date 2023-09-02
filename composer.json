@@ -31,11 +31,11 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "AbraFlexi\\MultiFlexi\\": "src/AbraFlexi/MultiFlexi/",
-            "AbraFlexi\\MultiFlexi\\Ui\\": "src/AbraFlexi/MultiFlexi/Ui",
-            "AbraFlexi\\MultiFlexi\\Api\\": "src/AbraFlexi/MultiFlexi/Api",
-            "AbraFlexi\\MultiFlexi\\Auth\\": "src/AbraFlexi/MultiFlexi/Auth",
-            "AbraFlexi\\MultiFlexi\\Zabbix\\": "src/AbraFlexi/MultiFlexi/Zabbix"
+            "MultiFlexi\\": "src/AbraFlexi/MultiFlexi/",
+            "MultiFlexi\\Ui\\": "src/AbraFlexi/MultiFlexi/Ui",
+            "MultiFlexi\\Api\\": "src/AbraFlexi/MultiFlexi/Api",
+            "MultiFlexi\\Auth\\": "src/AbraFlexi/MultiFlexi/Auth",
+            "MultiFlexi\\Zabbix\\": "src/AbraFlexi/MultiFlexi/Zabbix"
         }
     },
     "autoload-dev": {

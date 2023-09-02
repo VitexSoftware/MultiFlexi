@@ -7,7 +7,7 @@
  * @copyright  2017-2020 Vitex Software
  */
 
-namespace AbraFlexi\MultiFlexi\Ui;
+namespace MultiFlexi\Ui;
 
 require_once './init.php';
 

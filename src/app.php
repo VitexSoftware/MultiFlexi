@@ -7,7 +7,7 @@
  * @copyright  2017-2023 Vitex Software
  */
 
-namespace AbraFlexi\MultiFlexi\Ui;
+namespace MultiFlexi\Ui;
 
 use Ease\TWB4\LinkButton;
 use Ease\TWB4\Panel;

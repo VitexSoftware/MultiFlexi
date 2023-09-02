@@ -22,7 +22,7 @@ declare(strict_types=1);
  * https://github.com/openapitools/openapi-generator
  * Do not edit the class manually.
  */
-namespace AbraFlexi\MultiFlexi\App;
+namespace MultiFlexi\App;
 
 use Neomerx\Cors\Contracts\AnalysisResultInterface;
 use Neomerx\Cors\Contracts\AnalyzerInterface;

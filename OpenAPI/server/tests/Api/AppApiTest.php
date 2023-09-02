@@ -20,7 +20,7 @@
  * https://github.com/openapitools/openapi-generator
  * Please update the test case below to test the endpoint.
  */
-namespace AbraFlexi\MultiFlexi\Api;
+namespace MultiFlexi\Api;
 
 use PHPUnit\Framework\TestCase;
 use AbraFlexi\MultiFlexi\Api\AppApi;

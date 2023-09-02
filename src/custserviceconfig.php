@@ -1,6 +1,6 @@
 <?php
 
-namespace AbraFlexi\MultiFlexi\Ui;
+namespace MultiFlexi\Ui;
 
 use Ease\Html\H1Tag;
 use AbraFlexi\MultiFlexi\Configuration;

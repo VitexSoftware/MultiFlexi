@@ -23,7 +23,7 @@
 
 declare(strict_types=1);
 
-namespace AbraFlexi\MultiFlexi;
+namespace MultiFlexi;
 
 use OpenAPIServer\Mock\OpenApiModelInterface;
 use OpenAPIServer\Mock\OpenApiDataMockerInterface as IMocker;

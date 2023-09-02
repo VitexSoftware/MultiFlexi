@@ -20,7 +20,7 @@
  * https://github.com/openapitools/openapi-generator
  * Do not edit the class manually.
  */
-namespace AbraFlexi\MultiFlexi\Auth;
+namespace MultiFlexi\Auth;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Dyorg\TokenAuthentication;
