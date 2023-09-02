@@ -260,7 +260,7 @@ class Job extends Engine
     public function reportToZabbix($messageData)
     {
         $packet = new ZabbixPacket();
-        $me = \Ease\Functions::cfg('ZABBIX_SOURCE');
+        $me = \Ease\Functions::cfg('ZABBIX_HOST');
         $this->zabbixMessageData = array_merge($this->zabbixMessageData, $messageData);
         $packet->addMetric((new ZabbixMetric('multiflexi.job', json_encode($this->zabbixMessageData)))->withHostname($me));
         $this->zabbixSender->send($packet);
