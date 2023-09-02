@@ -12,10 +12,10 @@ namespace MultiFlexi\Ui;
 use Ease\TWB4\LinkButton;
 use Ease\TWB4\Panel;
 use Ease\TWB4\Row;
-use AbraFlexi\MultiFlexi\Application;
-use AbraFlexi\MultiFlexi\Ui\PageBottom;
-use AbraFlexi\MultiFlexi\Ui\PageTop;
-use AbraFlexi\MultiFlexi\Ui\RegisterAppForm;
+use MultiFlexi\Application;
+use MultiFlexi\Ui\PageBottom;
+use MultiFlexi\Ui\PageTop;
+use MultiFlexi\Ui\RegisterAppForm;
 
 require_once './init.php';
 $oPage->onlyForLogged();
@@ -48,7 +48,7 @@ if (array_key_exists('company', $_SESSION) && is_object($_SESSION['company']) &&
 }
 
 
-$jobber = new \AbraFlexi\MultiFlexi\Job();
+$jobber = new \MultiFlexi\Job();
 $jobs = $jobber->listingQuery()->select(['job.id', 'job.company_id', 'job.begin', 'job.exitcode', 'user.login', 'job.launched_by', 'company.nazev'], true)->leftJoin('company ON company.id = job.company_id')
                 ->leftJoin('user ON user.id = job.launched_by')
                 ->where('app_id', $apps->getMyKey())->limit(10)->orderBy('job.id DESC')->fetchAll();
@@ -74,7 +74,7 @@ $oPage->container->addItem(new Panel($instanceName, 'inverse',
                 is_null($apps->getMyKey()) ?
                         new LinkButton('', _('Config fields'), 'inverse disabled') :
                         [new LinkButton('conffield.php?app_id=' . $apps->getMyKey(), _('Config fields'), 'warning'),
-                    new ConfigFieldsBadges(\AbraFlexi\MultiFlexi\Conffield::getAppConfigs($apps->getMyKey()))
+                    new ConfigFieldsBadges(\MultiFlexi\Conffield::getAppConfigs($apps->getMyKey()))
                         ]
 ));
 $oPage->addItem(new PageBottom());

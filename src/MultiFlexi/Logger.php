@@ -81,7 +81,7 @@ class Logger extends DBEngine {
 //  [app_id] => null
 //  [user_id] => (string) 0
 //  [severity] => (string) info
-//  [venue] => (string) AbraFlexi\MultiFlexi\Ui\WebPage
+//  [venue] => (string) MultiFlexi\Ui\WebPage
 //  [message] => (string) logged
 //  [created] => (string) 2020-07-04 22:27:45
 //  [enabled] => null
@@ -120,7 +120,7 @@ class Logger extends DBEngine {
                         'detailPage' => 'app.php',
                         'idColumn' => 'apps',
                         'valueColumn' => 'apps.nazev',
-                        'engine' => '\AbraFlexi\MultiFlexi\Application',
+                        'engine' => '\MultiFlexi\Application',
                         'filterby' => 'name',
                     ],
                     ['name' => 'company_id', 'type' => 'selectize', 'label' => _('Company'),
@@ -128,7 +128,7 @@ class Logger extends DBEngine {
                         'detailPage' => 'company.php',
                         'idColumn' => 'company',
                         'valueColumn' => 'company.nazev',
-                        'engine' => '\AbraFlexi\MultiFlexi\Company',
+                        'engine' => '\MultiFlexi\Company',
                         'filterby' => 'name',
                     ],
                     ['name' => 'user_id', 'type' => 'selectize', 'label' => _('User'),
@@ -136,7 +136,7 @@ class Logger extends DBEngine {
                         'detailPage' => 'user.php',
                         'idColumn' => 'user',
                         'valueColumn' => 'user.login',
-                        'engine' => '\AbraFlexi\MultiFlexi\User',
+                        'engine' => '\MultiFlexi\User',
                         'filterby' => 'name',
                     ],
         ]);

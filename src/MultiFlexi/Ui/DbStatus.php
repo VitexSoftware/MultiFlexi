@@ -21,11 +21,11 @@ class DbStatus extends \Ease\TWB4\Row {
      */
     public function __construct() {
         parent::__construct();
-        $abraflexis = (string) (new \AbraFlexi\MultiFlexi\AbraFlexis())->listingQuery()->count();
-        $customers = (string) (new \AbraFlexi\MultiFlexi\Customer())->listingQuery()->count();
-        $companys = (string) (new \AbraFlexi\MultiFlexi\Company())->listingQuery()->count();
-        $apps = (string) (new \AbraFlexi\MultiFlexi\Application())->listingQuery()->count();
-        $assigned = (string) (new \AbraFlexi\MultiFlexi\RunTemplate())->listingQuery()->count();
+        $abraflexis = (string) (new \MultiFlexi\AbraFlexis())->listingQuery()->count();
+        $customers = (string) (new \MultiFlexi\Customer())->listingQuery()->count();
+        $companys = (string) (new \MultiFlexi\Company())->listingQuery()->count();
+        $apps = (string) (new \MultiFlexi\Application())->listingQuery()->count();
+        $assigned = (string) (new \MultiFlexi\RunTemplate())->listingQuery()->count();
 
         $this->addColumn(2, new \Ease\Html\ButtonTag([_('Apps') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $apps)], ['class' => 'btn btn-default', 'type' => 'button']));
         $this->addColumn(2, new \Ease\Html\ButtonTag([_('Servers') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $abraflexis)], ['class' => 'btn btn-default', 'type' => 'button']));

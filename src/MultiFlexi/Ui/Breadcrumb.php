@@ -18,7 +18,7 @@ class Breadcrumb extends \Ease\TWB4\Breadcrumb {
     public function __construct($content = null, $properties = []) {
         parent::__construct( $content, $properties);
         /**
-         * @var \AbraFlexi\MultiFlexi\Ui\WebPage Description
+         * @var \MultiFlexi\Ui\WebPage Description
          */
 
         if(empty($_SESSION['customer'])){

@@ -11,16 +11,16 @@ namespace MultiFlexi\Ui;
 
 use Ease\TWB4\Panel;
 use Ease\TWB4\Row;
-use AbraFlexi\MultiFlexi\Application;
-use AbraFlexi\MultiFlexi\Ui\PageBottom;
-use AbraFlexi\MultiFlexi\Ui\PageTop;
+use MultiFlexi\Application;
+use MultiFlexi\Ui\PageBottom;
+use MultiFlexi\Ui\PageTop;
 
 require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Archived Job Run')));
 $jobID = $oPage->getRequestValue('id', 'int');
-$jobber = new \AbraFlexi\MultiFlexi\Job($jobID);
-$runTemplate = new \AbraFlexi\MultiFlexi\RunTemplate();
+$jobber = new \MultiFlexi\Job($jobID);
+$runTemplate = new \MultiFlexi\RunTemplate();
 $runTemplate->setMyKey($runTemplate->runTemplateID($jobber->getDataValue('app_id'), $jobber->getDataValue('company_id')));
 $appInfo = $runTemplate->getAppInfo();
 $apps = new Application($appInfo['app_id']);

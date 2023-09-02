@@ -31,7 +31,7 @@ use Slim\Exception\HttpNotImplementedException;
 /**
  * AbstractAbraflexiApi Class Doc Comment
  *
- * @package AbraFlexi\MultiFlexi\Api
+ * @package MultiFlexi\Api
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  */
@@ -57,7 +57,7 @@ abstract class AbstractAbraflexiApi
         int $abraflexiId,
         string $suffix
     ): ResponseInterface {
-        $message = "How about implementing getAbraFlexiById as a GET method in AbraFlexi\MultiFlexi\Api\AbraflexiApi class?";
+        $message = "How about implementing getAbraFlexiById as a GET method in MultiFlexi\Api\AbraflexiApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 
@@ -77,7 +77,7 @@ abstract class AbstractAbraflexiApi
         ServerRequestInterface $request,
         ResponseInterface $response
     ): ResponseInterface {
-        $message = "How about implementing listAbraFlexis as a GET method in AbraFlexi\MultiFlexi\Api\AbraflexiApi class?";
+        $message = "How about implementing listAbraFlexis as a GET method in MultiFlexi\Api\AbraflexiApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 
@@ -99,7 +99,7 @@ abstract class AbstractAbraflexiApi
     ): ResponseInterface {
         $queryParams = $request->getQueryParams();
         $abraflexiId = (key_exists('abraflexiId', $queryParams)) ? $queryParams['abraflexiId'] : null;
-        $message = "How about implementing setAbraFlexiById as a POST method in AbraFlexi\MultiFlexi\Api\AbraflexiApi class?";
+        $message = "How about implementing setAbraFlexiById as a POST method in MultiFlexi\Api\AbraflexiApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 }

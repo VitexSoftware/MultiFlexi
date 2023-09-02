@@ -16,7 +16,7 @@ use Ease\TWB4\Col;
 use Ease\TWB4\Form;
 use Ease\TWB4\FormGroup;
 use Ease\TWB4\Row;
-use AbraFlexi\MultiFlexi\Engine;
+use MultiFlexi\Engine;
 
 class EngineForm extends Form {
 

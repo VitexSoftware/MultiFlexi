@@ -2,10 +2,10 @@
 
 namespace MultiFlexi\Zabbix;
 
-use AbraFlexi\MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
-use AbraFlexi\MultiFlexi\Zabbix\Response as ZabbixResponse;
-use AbraFlexi\MultiFlexi\Zabbix\Exception\ZabbixNetworkException;
-use AbraFlexi\MultiFlexi\Zabbix\Exception\ZabbixResponseException;
+use MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
+use MultiFlexi\Zabbix\Response as ZabbixResponse;
+use MultiFlexi\Zabbix\Exception\ZabbixNetworkException;
+use MultiFlexi\Zabbix\Exception\ZabbixResponseException;
 
 class ZabbixSender
 {

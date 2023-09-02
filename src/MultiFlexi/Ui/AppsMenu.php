@@ -10,7 +10,7 @@
 namespace MultiFlexi\Ui;
 
 use Ease\TWB4\Widgets\MainPageMenu;
-use AbraFlexi\MultiFlexi\Application;
+use MultiFlexi\Application;
 
 /**
  * Description of AppsMenu

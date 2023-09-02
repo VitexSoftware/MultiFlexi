@@ -31,7 +31,7 @@ use Slim\Exception\HttpNotImplementedException;
 /**
  * AbstractAppApi Class Doc Comment
  *
- * @package AbraFlexi\MultiFlexi\Api
+ * @package MultiFlexi\Api
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  */
@@ -57,7 +57,7 @@ abstract class AbstractAppApi
         string $appId,
         string $suffix
     ): ResponseInterface {
-        $message = "How about implementing getAppById as a GET method in AbraFlexi\MultiFlexi\Api\AppApi class?";
+        $message = "How about implementing getAppById as a GET method in MultiFlexi\Api\AppApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 
@@ -79,7 +79,7 @@ abstract class AbstractAppApi
         ResponseInterface $response,
         string $suffix
     ): ResponseInterface {
-        $message = "How about implementing listApps as a GET method in AbraFlexi\MultiFlexi\Api\AppApi class?";
+        $message = "How about implementing listApps as a GET method in MultiFlexi\Api\AppApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 
@@ -101,7 +101,7 @@ abstract class AbstractAppApi
     ): ResponseInterface {
         $queryParams = $request->getQueryParams();
         $appId = (key_exists('appId', $queryParams)) ? $queryParams['appId'] : null;
-        $message = "How about implementing setAppById as a POST method in AbraFlexi\MultiFlexi\Api\AppApi class?";
+        $message = "How about implementing setAppById as a POST method in MultiFlexi\Api\AppApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 }

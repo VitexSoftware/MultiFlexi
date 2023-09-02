@@ -9,7 +9,7 @@
 
 namespace MultiFlexi\Ui;
 
-use AbraFlexi\MultiFlexi\User;
+use MultiFlexi\User;
 use Ease\Html\InputHiddenTag;
 use Ease\Html\InputTag;
 use Ease\TWB4\Form;

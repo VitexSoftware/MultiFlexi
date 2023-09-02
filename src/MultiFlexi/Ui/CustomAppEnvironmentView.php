@@ -27,11 +27,11 @@ class CustomAppEnvironmentView extends EnvironmentView
 
     public function __construct(int $appCompanyID, $properties = [])
     {
-        $appToCompany = new \AbraFlexi\MultiFlexi\RunTemplate($appCompanyID);
+        $appToCompany = new \MultiFlexi\RunTemplate($appCompanyID);
         $companyId = $appToCompany->getDataValue('company_id');
         $appId = $appToCompany->getDataValue('app_id');
-        $customConfig = new \AbraFlexi\MultiFlexi\Configuration();
-        $appFields = \AbraFlexi\MultiFlexi\Conffield::getAppConfigs($appId);
+        $customConfig = new \MultiFlexi\Configuration();
+        $appFields = \MultiFlexi\Conffield::getAppConfigs($appId);
         
         $appConfig = array_combine(array_keys($appFields), array_fill(0,count($appFields), new \Ease\TWB4\Badge('warning', 'unset') ) );
         

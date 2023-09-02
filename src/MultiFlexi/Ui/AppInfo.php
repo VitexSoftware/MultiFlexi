@@ -31,7 +31,7 @@ class AppInfo extends \Ease\Html\TableTag {
         
         
         $this->addItem([new \Ease\TWB4\LinkButton('conffield.php?app_id=' . $apps->getMyKey(), _('Config fields'), 'warning'),
-                    new ConfigFieldsBadges(\AbraFlexi\MultiFlexi\Conffield::getAppConfigs($apps->getMyKey()))
+                    new ConfigFieldsBadges(\MultiFlexi\Conffield::getAppConfigs($apps->getMyKey()))
                         ]);
     }
     

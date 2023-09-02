@@ -23,16 +23,16 @@
 namespace MultiFlexi\Api;
 
 use PHPUnit\Framework\TestCase;
-use AbraFlexi\MultiFlexi\Api\AppApi;
+use MultiFlexi\Api\AppApi;
 
 /**
  * AppApiTest Class Doc Comment
  *
- * @package AbraFlexi\MultiFlexi\Api
+ * @package MultiFlexi\Api
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  *
- * @coversDefaultClass \AbraFlexi\MultiFlexi\Api\AppApi
+ * @coversDefaultClass \MultiFlexi\Api\AppApi
  */
 class AppApiTest extends TestCase
 {

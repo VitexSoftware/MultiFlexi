@@ -30,7 +30,7 @@ class MainMenu extends \Ease\Html\DivTag
      *
      * @param type   $source
      * @param string $icon   Icon column
-     * @param \AbraFlexi\MultiFlexi\Engine $nest Object place
+     * @param \MultiFlexi\Engine $nest Object place
      *
      * @return string
      */
@@ -70,23 +70,23 @@ class MainMenu extends \Ease\Html\DivTag
         $nav = $this->addItem(new BootstrapMenu('main-menu', null, ['class' => 'navbar navbar-expand-lg navbar-light bg-light']));
         if (\Ease\Shared::user()->isLogged()) { //Authenticated user
             $oPage = WebPage::singleton();
-            $abraflexis = $this->getMenuList(new \AbraFlexi\MultiFlexi\AbraFlexis());
-            $customers = $this->getMenuList(new \AbraFlexi\MultiFlexi\Customer(), null, $oPage->customer);
-            $companys = $this->getMenuList(new \AbraFlexi\MultiFlexi\Company(), 'logo');
-            $apps = $this->getMenuList(new \AbraFlexi\MultiFlexi\Application(), 'image');
+            $abraflexis = $this->getMenuList(new \MultiFlexi\AbraFlexis());
+            $customers = $this->getMenuList(new \MultiFlexi\Customer(), null, $oPage->customer);
+            $companys = $this->getMenuList(new \MultiFlexi\Company(), 'logo');
+            $apps = $this->getMenuList(new \MultiFlexi\Application(), 'image');
             $this->abraflexisMenuEnabled($nav, $abraflexis);
             if (empty($abraflexis) && empty($customers) && empty($companys)) { // All empty yet
-                \AbraFlexi\MultiFlexi\User::singleton()->addStatusMessage(_('No server registered yet. Please register one.'), 'warning');
+                \MultiFlexi\User::singleton()->addStatusMessage(_('No server registered yet. Please register one.'), 'warning');
                 $this->customersMenuDisabled($nav);
                 $this->companysMenuDisabled($nav);
             } else {
                 if (count($abraflexis) && empty($customers) && empty($companys)) {
                     $this->customersMenuEnabled($nav, $customers);
                     $this->companysMenuDisabled($nav);
-                    \AbraFlexi\MultiFlexi\User::singleton()->addStatusMessage(_('No customer registered yet. Please register one.'), 'warning');
+                    \MultiFlexi\User::singleton()->addStatusMessage(_('No customer registered yet. Please register one.'), 'warning');
                 } else {
                     if (count($abraflexis) && count($customers) && empty($companys)) {
-                        \AbraFlexi\MultiFlexi\User::singleton()->addStatusMessage(_('No company registered yet. Please register one.'), 'warning');
+                        \MultiFlexi\User::singleton()->addStatusMessage(_('No company registered yet. Please register one.'), 'warning');
                         $this->customersMenuEnabled($nav, $customers);
                         $nav->addMenuItem(new \Ease\TWB4\LinkButton('companysetup.php', '<img width=30 src=images/company.svg> ' . _('Companies'), 'warning'), 'right');
                     } else { // We Got All
@@ -97,7 +97,7 @@ class MainMenu extends \Ease\Html\DivTag
             }
 
             if (empty($apps)) {
-                \AbraFlexi\MultiFlexi\User::singleton()->addStatusMessage(_('No application registered yet. Please register one.'), 'warning');
+                \MultiFlexi\User::singleton()->addStatusMessage(_('No application registered yet. Please register one.'), 'warning');
                 $nav->addMenuItem(new \Ease\TWB4\LinkButton('app.php', '<img width=30 src=images/apps.svg> ' . _('Applications'), 'warning'), 'right');
             } else {
                 $this->appsMenuEnabled($nav, $apps);

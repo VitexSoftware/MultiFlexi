@@ -9,7 +9,7 @@
 
 namespace MultiFlexi;
 
-use AbraFlexi\MultiFlexi\Application;
+use MultiFlexi\Application;
 use Symfony\Component\Process\Process;
 
 require_once './init.php';

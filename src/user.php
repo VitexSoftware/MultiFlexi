@@ -17,7 +17,7 @@ $user_id = $oPage->getRequestValue('id', 'int');
 
 //$user = Engine::doThings($oPage);
 //if (is_null($user)) {
-$user = new \AbraFlexi\MultiFlexi\User($user_id);
+$user = new \MultiFlexi\User($user_id);
 
 if ($oPage->isPosted()) {
     unset($_REQUEST['class']);

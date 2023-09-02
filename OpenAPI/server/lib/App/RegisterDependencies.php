@@ -77,7 +77,7 @@ final class RegisterDependencies
             // DataMocker
             // @see https://github.com/ybelenko/openapi-data-mocker-server-middleware
             \OpenAPIServer\Mock\OpenApiDataMockerInterface::class => \DI\create(\OpenAPIServer\Mock\OpenApiDataMocker::class)
-                ->method('setModelsNamespace', 'AbraFlexi\MultiFlexi\Model\\'),
+                ->method('setModelsNamespace', 'MultiFlexi\Model\\'),
 
             \OpenAPIServer\Mock\OpenApiDataMockerRouteMiddlewareFactory::class => \DI\autowire()
                 ->constructorParameter('getMockStatusCodeCallback', \DI\get('mocker.getMockStatusCodeCallback'))

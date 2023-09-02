@@ -15,9 +15,9 @@ use Ease\TWB4\Form;
 use Ease\TWB4\FormGroup;
 use Ease\TWB4\Part;
 use Ease\TWB4\Row;
-use AbraFlexi\MultiFlexi\Application;
-use AbraFlexi\MultiFlexi\RunTemplate;
-use AbraFlexi\MultiFlexi\Company;
+use MultiFlexi\Application;
+use MultiFlexi\RunTemplate;
+use MultiFlexi\Company;
 
 /**
  * Description of ServicesForCompanyForm
@@ -40,7 +40,7 @@ class ServicesForCompanyForm extends Form
         $glue = new RunTemplate();
         $assigned = $glue->getAppsForCompany($companyID);
         parent::__construct($tagProperties);
-        $jobber = new \AbraFlexi\MultiFlexi\Job();
+        $jobber = new \MultiFlexi\Job();
         foreach ($allEnabledApps as $appData) {
             $appData['company_id'] = $companyID;
             if(array_key_exists($appData['id'], $assigned)){

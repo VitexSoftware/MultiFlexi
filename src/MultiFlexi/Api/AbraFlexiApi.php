@@ -21,7 +21,7 @@ class AbraFlexiApi extends AbstractAbraFlexiApi {
 
     /**
      * Api Handler Engine
-     * @var \AbraFlexi\MultiFlexi\AbraFlexis
+     * @var \MultiFlexi\AbraFlexis
      */
     public $engine = null;
 
@@ -29,7 +29,7 @@ class AbraFlexiApi extends AbstractAbraFlexiApi {
      * Prepare AbraFlexis engine
      */
     public function __construct() {
-        $this->engine = new \AbraFlexi\MultiFlexi\AbraFlexis();
+        $this->engine = new \MultiFlexi\AbraFlexis();
     }
 
     /**

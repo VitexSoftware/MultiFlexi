@@ -28,7 +28,7 @@ class AppLaunchForm extends \Ease\TWB4\Form
         $this->addItem(new \Ease\TWB4\SubmitButton([_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg btn-block '));
 
         /* check if app requires upload fields */
-        $appFields = \AbraFlexi\MultiFlexi\Conffield::getAppConfigs($app);
+        $appFields = \MultiFlexi\Conffield::getAppConfigs($app);
 
         /* if any of fields is upload type then add file input button */
         $uploadFields = array_filter($appFields, function ($field) {

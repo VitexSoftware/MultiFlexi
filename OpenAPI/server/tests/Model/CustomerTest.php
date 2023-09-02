@@ -23,16 +23,16 @@
 namespace MultiFlexi\Model;
 
 use PHPUnit\Framework\TestCase;
-use AbraFlexi\MultiFlexi\Model\Customer;
+use MultiFlexi\Model\Customer;
 
 /**
  * CustomerTest Class Doc Comment
  *
- * @package AbraFlexi\MultiFlexi\Model
+ * @package MultiFlexi\Model
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  *
- * @coversDefaultClass \AbraFlexi\MultiFlexi\Model\Customer
+ * @coversDefaultClass \MultiFlexi\Model\Customer
  */
 class CustomerTest extends TestCase
 {

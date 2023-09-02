@@ -12,14 +12,14 @@ namespace MultiFlexi\Ui;
 use Ease\Html\ATag;
 use Ease\TWB4\Panel;
 use Ease\TWB4\Row;
-use AbraFlexi\MultiFlexi\Company;
+use MultiFlexi\Company;
 
 require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company')));
 $abraFlexiId = WebPage::getRequestValue('abraflexi', 'int');
 if ($abraFlexiId) {
-    $abraFlexiServer = new \AbraFlexi\MultiFlexi\AbraFlexis($abraFlexiId);
+    $abraFlexiServer = new \MultiFlexi\AbraFlexis($abraFlexiId);
     $companyConfig = $abraFlexiServer->getConnectionDetails();
     $companyConfig['company'] = WebPage::getGetValue('company');
 } else {
@@ -31,16 +31,16 @@ if (is_null($abraFlexiId) === false) {
     $companies->setDataValue('abraflexi', $abraFlexiId);
 }
 $_SESSION['company'] = &$companies;
-$companyEnver = new \AbraFlexi\MultiFlexi\CompanyEnv($companies->getMyKey());
+$companyEnver = new \MultiFlexi\CompanyEnv($companies->getMyKey());
 if ($oPage->isPosted()) {
     $companyEnver->deleteFromSQL(['company_id' => $companies->getMyKey()]);
-    $appToCompany = new \AbraFlexi\MultiFlexi\RunTemplate();
+    $appToCompany = new \MultiFlexi\RunTemplate();
     $appToCompany->deleteFromSQL(['company_id' => $companies->getMyKey()]);
-    $logger = new \AbraFlexi\MultiFlexi\Logger();
+    $logger = new \MultiFlexi\Logger();
     $logger->deleteFromSQL(['company_id' => $companies->getMyKey()]);
-    $jobber = new \AbraFlexi\MultiFlexi\Job();
+    $jobber = new \MultiFlexi\Job();
     $jobber->deleteFromSQL(['company_id' => $companies->getMyKey()]);
-    $confer = new \AbraFlexi\MultiFlexi\Configuration();
+    $confer = new \MultiFlexi\Configuration();
     $confer->deleteFromSQL(['company_id' => $companies->getMyKey()]);
     
     if ($companies->deleteFromSQL(['id' => $companies->getMyKey()])) {

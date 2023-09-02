@@ -16,8 +16,8 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use \AbraFlexi\MultiFlexi\Application,
-    \AbraFlexi\MultiFlexi\Company,
+use \MultiFlexi\Application,
+    \MultiFlexi\Company,
     \Ease\TWB4\Panel;
 
 /**

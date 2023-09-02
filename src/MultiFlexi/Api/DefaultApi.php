@@ -40,11 +40,11 @@ class DefaultApi extends AbstractDefaultApi {
         $queryParams = $request->getQueryParams();
         $payload = [];
 
-        $user = new \AbraFlexi\MultiFlexi\User($queryParams['username']);
+        $user = new \MultiFlexi\User($queryParams['username']);
         if ($user->getMyKey()) {
             if ($user->passwordValidation($queryParams['password'], $user->getDataValue($user->passwordColumn))) {
                 if ($user->isAccountEnabled()) {
-                    $token = new \AbraFlexi\MultiFlexi\Token();
+                    $token = new \MultiFlexi\Token();
                     $token->setDataValue('user_id', $user->getDataValue('id'));
                     $token->generate()->dbSync();
                     $payload['token'] = $token->getRecordName();

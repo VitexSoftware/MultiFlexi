@@ -16,7 +16,7 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use \AbraFlexi\MultiFlexi\Application,
+use \MultiFlexi\Application,
     \Ease\Html\ImgTag;
 
 /**

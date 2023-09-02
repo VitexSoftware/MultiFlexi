@@ -9,7 +9,7 @@
 
 namespace MultiFlexi\Ui;
 
-use \AbraFlexi\MultiFlexi\Application,
+use \MultiFlexi\Application,
     \Ease\TWB4\Row;
 
 
@@ -22,12 +22,12 @@ $oPage->addItem(new PageTop(_('Schedule Job run')));
 $companyId = $oPage->getRequestValue('company_id','int');
 $appId = $oPage->getRequestValue('app_id','int');
 
-$runTemplate = new \AbraFlexi\MultiFlexi\RunTemplate();
+$runTemplate = new \MultiFlexi\RunTemplate();
 
 $runTemplateId = $runTemplate->runTemplateID($appId, $companyId);
 $runTemplate->setMyKey($runTemplateId);
 
-$jobber = new \AbraFlexi\MultiFlexi\Job();
+$jobber = new \MultiFlexi\Job();
 
 $uploadEnv = [];
 /**
@@ -57,7 +57,7 @@ $instanceRow->addColumn(8, new \Ease\Html\H1Tag($instanceName));
 
 $oPage->container->addItem($instanceRow);
 
-$envTable = new \AbraFlexi\MultiFlexi\Ui\EnvironmentView($runTemplate->getAppEnvironment());
+$envTable = new \MultiFlexi\Ui\EnvironmentView($runTemplate->getAppEnvironment());
 
 $oPage->container->addItem($envTable);
 

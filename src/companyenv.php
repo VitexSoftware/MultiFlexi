@@ -16,7 +16,7 @@ $name = \Ease\TWB4\WebPage::getRequestValue('name');
 $value = \Ease\TWB4\WebPage::getRequestValue('value');
 $pk = \Ease\TWB4\WebPage::getRequestValue('pk', 'int');
 if (!is_null($pk)) {
-    $companyEnver = new \AbraFlexi\MultiFlexi\CompanyEnv();
+    $companyEnver = new \MultiFlexi\CompanyEnv();
     $companyEnver->setMyKey($pk);
     if ($name == 'keyword' && empty($value)) {
         $result = $companyEnver->deleteFromSQL() ? 201 : 500;

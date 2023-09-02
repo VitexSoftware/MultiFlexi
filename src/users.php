@@ -17,7 +17,7 @@ $oPage->onlyForLogged();
 
 $oPage->addItem(new PageTop(_('Users')));
 
-$oPage->addItem(new \Ease\TWB4\Container(new DBDataTable(new \AbraFlexi\MultiFlexi\User())));
+$oPage->addItem(new \Ease\TWB4\Container(new DBDataTable(new \MultiFlexi\User())));
 
 $oPage->addItem(new PageBottom());
 

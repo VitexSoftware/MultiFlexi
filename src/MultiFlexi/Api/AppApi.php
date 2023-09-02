@@ -25,7 +25,7 @@ class AppApi extends AbstractAppApi {
      * App Handler Engine
      */
     public function __construct() {
-        $this->engine = new \AbraFlexi\MultiFlexi\Application();
+        $this->engine = new \MultiFlexi\Application();
     }
 
     /**

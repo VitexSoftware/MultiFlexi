@@ -14,7 +14,7 @@ ini_set('display_errors', '0');
  * This is the first file with production defaults. It contains all data which can be safely committed
  * to VCS(version control system). For sensitive values(passwords, api keys, emails) use config.inc.php
  * and make sure it's excluded from VCS by .gitignore.
- * do not add dependencies here, use AbraFlexi\MultiFlexi\App\RegisterDependencies class
+ * do not add dependencies here, use MultiFlexi\App\RegisterDependencies class
  * @see https://php-di.org/doc/php-definitions.html#values
  */
 return [

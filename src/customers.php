@@ -9,14 +9,14 @@
 
 namespace MultiFlexi\Ui;
 
-use AbraFlexi\MultiFlexi\Customer;
+use MultiFlexi\Customer;
 use Ease\TWB4\Container;
 
 require_once './init.php';
 
 $oPage->onlyForLogged();
 
-//\AbraFlexi\MultiFlexi\Engine::doThings($oPage);
+//\MultiFlexi\Engine::doThings($oPage);
 
 $oPage->addItem(new PageTop(_('Customers')));
 

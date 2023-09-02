@@ -44,7 +44,7 @@ class AppRow extends \Ease\TWB4\Row
         $logoColumn = $appRow->addColumn(2, [new \Ease\Html\H2Tag($appData['app_name']), new \Ease\Html\PTag($appData['popis']), new ATag('app.php?id=' . $appId, new ImgTag($appData['image'], $appData['nazev'], ['class' => 'img-fluid']))]);
 
         /* check if app requires upload fields */
-        $appFields = \AbraFlexi\MultiFlexi\Conffield::getAppConfigs($appId);
+        $appFields = \MultiFlexi\Conffield::getAppConfigs($appId);
 
         /* if any of fields is upload type then add file input button */
         $uploadFields = array_filter($appFields, function($field) {
@@ -52,7 +52,7 @@ class AppRow extends \Ease\TWB4\Row
         });
     
         if(empty($uploadFields)){
-            $intervalChooser = new \AbraFlexi\MultiFlexi\Ui\IntervalChooser($appId . '_interval', array_key_exists('interv', $appData) ? $appData['interv'] : 'n', ['id' => $appId . '_interval', 'data-company' => $appData['company_id'], 'checked' => 'true', 'data-app' => $appId]);
+            $intervalChooser = new \MultiFlexi\Ui\IntervalChooser($appId . '_interval', array_key_exists('interv', $appData) ? $appData['interv'] : 'n', ['id' => $appId . '_interval', 'data-company' => $appData['company_id'], 'checked' => 'true', 'data-app' => $appId]);
         } else {
             $intervalChooser = new \Ease\TWB4\Badge('info',_('Upload field does not allow application scheduling')); 
         }
@@ -61,7 +61,7 @@ class AppRow extends \Ease\TWB4\Row
 
 
         if (array_key_exists('runtemplateid', $appData)) {
-            $launchButton = new \Ease\Html\DivTag(new \AbraFlexi\MultiFlexi\Ui\LaunchButton($appData['runtemplateid']));
+            $launchButton = new \Ease\Html\DivTag(new \MultiFlexi\Ui\LaunchButton($appData['runtemplateid']));
         } else {
             $launchButton = new \Ease\TWB4\LinkButton('launch.php?app_id=' . $appId . '&company_id=' . $appData['company_id'], [_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg btn-block ');
         }
@@ -78,10 +78,10 @@ class AppRow extends \Ease\TWB4\Row
 
         $appConfColumn = $appRow->addColumn(4, new FormGroup(new \Ease\Html\H3Tag(_('Job Config')), $intervalChooser));
         if (array_key_exists('runtemplateid', $appData)) {
-            $appConfColumn->addItem(new \AbraFlexi\MultiFlexi\Ui\CustomAppEnvironmentView($appData['runtemplateid']));
+            $appConfColumn->addItem(new \MultiFlexi\Ui\CustomAppEnvironmentView($appData['runtemplateid']));
         }
         $appConfColumn->addItem(new \Ease\TWB4\LinkButton('custserviceconfig.php?app_id=' . $appId . '&amp;company_id=' . $appData['company_id'], _('Configure App Environment') . ' ' . new \Ease\Html\ImgTag('images/set.svg', _('Set'), ['height' => '30px']), 'success btn-sm  btn-block'));
-        $jobs = (new \AbraFlexi\MultiFlexi\Job())->listingQuery()->select(['job.id', 'begin', 'exitcode', 'launched_by', 'login'], true)->leftJoin('user ON user.id = job.launched_by')->where('company_id', $appData['company_id'])->where('app_id', $appId)->limit(10)->orderBy('job.id DESC')->fetchAll();
+        $jobs = (new \MultiFlexi\Job())->listingQuery()->select(['job.id', 'begin', 'exitcode', 'launched_by', 'login'], true)->leftJoin('user ON user.id = job.launched_by')->where('company_id', $appData['company_id'])->where('app_id', $appId)->limit(10)->orderBy('job.id DESC')->fetchAll();
         $jobList = new \Ease\TWB4\Table();
         $jobList->addRowHeaderColumns([_('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher')]);
         foreach ($jobs as $job) {
@@ -91,7 +91,7 @@ class AppRow extends \Ease\TWB4\Row
             } else {
                 $job['begin'] = [$job['begin'], ' ', new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
             }
-            $job['exitcode'] = new \AbraFlexi\MultiFlexi\Ui\ExitCode($job['exitcode']);
+            $job['exitcode'] = new \MultiFlexi\Ui\ExitCode($job['exitcode']);
             $job['launched_by'] = $job['launched_by'] ? new ATag('user.php?id=' . $job['launched_by'], $job['login']) : _('Timer');
             unset($job['login']);
             $jobList->addRowColumns($job);

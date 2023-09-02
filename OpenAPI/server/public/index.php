@@ -24,10 +24,10 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use DI\Bridge\Slim\Bridge;
 use DI\ContainerBuilder;
-use AbraFlexi\MultiFlexi\App\RegisterDependencies;
-use AbraFlexi\MultiFlexi\App\RegisterRoutes;
-use AbraFlexi\MultiFlexi\App\RegisterMiddlewares;
-use AbraFlexi\MultiFlexi\App\ResponseEmitter;
+use MultiFlexi\App\RegisterDependencies;
+use MultiFlexi\App\RegisterRoutes;
+use MultiFlexi\App\RegisterMiddlewares;
+use MultiFlexi\App\ResponseEmitter;
 use Neomerx\Cors\Contracts\AnalyzerInterface;
 use Slim\Factory\ServerRequestCreatorFactory;
 use Slim\Middleware\ErrorMiddleware;

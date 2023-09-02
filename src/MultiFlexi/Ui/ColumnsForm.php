@@ -9,7 +9,7 @@
 
 namespace MultiFlexi\Ui;
 
-use AbraFlexi\MultiFlexi\Engine;
+use MultiFlexi\Engine;
 use Ease\Html\DivTag;
 use Ease\Html\InputHiddenTag;
 use Ease\Html\InputSubmitTag;

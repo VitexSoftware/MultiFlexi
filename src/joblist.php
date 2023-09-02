@@ -14,7 +14,7 @@ $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Job history')));
 $appId = $oPage->getRequestValue('app_id');
 $companyId = $oPage->getRequestValue('company_id');
-$engine = new \AbraFlexi\MultiFlexi\CompanyJob();
+$engine = new \MultiFlexi\CompanyJob();
 $engine->setCompany($companyId);
 $engine->setApp($appId);
 $oPage->addJavaScript('$.fn.dataTable.ext.buttons.dismisAll = {

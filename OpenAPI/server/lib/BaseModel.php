@@ -63,7 +63,7 @@ SCHEMA;
      * @var string Models namespace.
      * Can be required for data deserialization when model contains referenced schemas.
      */
-    protected const MODELS_NAMESPACE = '\AbraFlexi\MultiFlexi\Model';
+    protected const MODELS_NAMESPACE = '\MultiFlexi\Model';
 
     /**
      * @var mixed Data container.
