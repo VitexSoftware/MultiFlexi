@@ -7,7 +7,7 @@
  * @copyright  2023 Vitex Software
  */
 
-namespace AbraFlexi\MultiFlexi\Ui;
+namespace MultiFlexi\Ui;
 
 use Ease\Html\ATag;
 use Ease\TWB4\Panel;

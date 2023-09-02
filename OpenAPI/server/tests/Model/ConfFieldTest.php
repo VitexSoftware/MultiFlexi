@@ -20,7 +20,7 @@
  * https://github.com/openapitools/openapi-generator
  * Please update the test case below to test the model.
  */
-namespace AbraFlexi\MultiFlexi\Model;
+namespace MultiFlexi\Model;
 
 use PHPUnit\Framework\TestCase;
 use AbraFlexi\MultiFlexi\Model\ConfField;

@@ -7,7 +7,7 @@
  * @copyright  2020-2023 Vitex Software
  */
 
-namespace AbraFlexi\MultiFlexi;
+namespace MultiFlexi;
 
 use \AbraFlexi\MultiFlexi\Company,
     \AbraFlexi\MultiFlexi\Configuration,

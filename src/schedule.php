@@ -7,7 +7,7 @@
  * @copyright  2020-2023 Vitex Software
  */
 
-namespace AbraFlexi\MultiFlexi\Ui;
+namespace MultiFlexi\Ui;
 
 require_once './init.php';
 $oPage->onlyForLogged();

@@ -24,9 +24,9 @@
   "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
-      "AbraFlexi\\MultiFlexi\\": "MultiFlexi",
-      "AbraFlexi\\MultiFlexi\\Ui\\": "MultiFlexi/Ui",
-      "AbraFlexi\\MultiFlexi\\Zabbix\\": "MultiFlexi/Zabbix"
+      "MultiFlexi\\": "MultiFlexi",
+      "MultiFlexi\\Ui\\": "MultiFlexi/Ui",
+      "MultiFlexi\\Zabbix\\": "MultiFlexi/Zabbix"
     }
   },
   "repositories": [

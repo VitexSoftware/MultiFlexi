@@ -22,7 +22,7 @@ declare(strict_types=1);
  * https://github.com/openapitools/openapi-generator
  * Do not edit the class manually.
  */
-namespace AbraFlexi\MultiFlexi\App;
+namespace MultiFlexi\App;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

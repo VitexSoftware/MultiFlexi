@@ -21,7 +21,7 @@
  * Do not edit the class manually.
  */
 
-namespace AbraFlexi\MultiFlexi;
+namespace MultiFlexi;
 
 use PHPUnit\Framework\TestCase;
 use AbraFlexi\MultiFlexi\BaseModel;

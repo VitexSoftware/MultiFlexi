@@ -7,7 +7,7 @@
  * @copyright  2017-2023 Vitex Software
  */
 
-namespace AbraFlexi\MultiFlexi;
+namespace MultiFlexi;
 
 use AbraFlexi\MultiFlexi\Application;
 use Symfony\Component\Process\Process;

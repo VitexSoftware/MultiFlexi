@@ -22,7 +22,7 @@
  * Extend this class with your controller. You can inject dependencies via class constructor,
  * @see https://github.com/PHP-DI/Slim-Bridge basic example.
  */
-namespace AbraFlexi\MultiFlexi\Api;
+namespace MultiFlexi\Api;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;

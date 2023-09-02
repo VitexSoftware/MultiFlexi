@@ -7,7 +7,7 @@
  * @copyright  2020-2023 Vitex Software
  */
 
-namespace AbraFlexi\MultiFlexi;
+namespace MultiFlexi;
 
 require_once '../vendor/autoload.php';
 \Ease\Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');

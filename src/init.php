@@ -7,7 +7,7 @@
  * @copyright  2020-2022 Vitex Software
  */
 
-namespace AbraFlexi\MultiFlexi;
+namespace MultiFlexi;
 
 use Ease\Shared;
 use AbraFlexi\MultiFlexi\Ui\WebPage;
