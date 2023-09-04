@@ -40,6 +40,7 @@ if (is_null($app->getMyKey())) {
         $runTemplate = new \MultiFlexi\RunTemplate();
         if ($company->getMyKey() && $app->getMyKey()) {
             $runTemplateId = $runTemplate->runTemplateID($app->getMyKey(), $company->getMyKey());
+            $runTemplate->setMyKey($runTemplateId);
         }
 
         $jobber->prepareJob($runTemplateId, $uploadEnv);

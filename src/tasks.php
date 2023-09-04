@@ -9,20 +9,21 @@
 
 namespace MultiFlexi\Ui;
 
-use Ease\Html\ATag;
-use Ease\TWB4\Panel;
-use Ease\TWB4\Row;
-use MultiFlexi\Company;
+use \Ease\Document,
+    \Ease\Html\ImgTag,
+    \Ease\Html\SpanTag,
+    \Ease\TWB4\Panel,
+    \MultiFlexi\Company;
 
 require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company Tasks')));
-$companies = new Company(\Ease\Document::getRequestValue('company_id', 'int'));
+$companies = new Company(Document::getRequestValue('company_id', 'int'));
 if (strlen($companies->getDataValue('logo'))) {
-    $companyTasksHeading[] = new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']);
+    $companyTasksHeading[] = new ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']);
 }
-$companyTasksHeading[] = new \Ease\Html\SpanTag($companies->getDataValue('nazev') . '&nbsp;', ['style' => 'font-size: xxx-large;']);
+$companyTasksHeading[] = new SpanTag($companies->getDataValue('nazev') . '&nbsp;', ['style' => 'font-size: xxx-large;']);
 $companyTasksHeading[] = _('Assigned applications');
-$oPage->container->addItem(new Panel($companyTasksHeading, 'default', new ServicesForCompanyForm($companies, ['id' => 'apptoggle'])));
+$oPage->container->addItem(new Panel($companyTasksHeading, 'default', new \MultiFlexi\Ui\ServicesForCompanyForm($companies, ['id' => 'apptoggle'])));
 $oPage->addItem(new PageBottom());
 $oPage->draw();

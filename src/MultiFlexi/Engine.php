@@ -29,8 +29,21 @@ class Engine extends \Ease\SQL\Engine {
             $options['autoload'] = true;
         }
         parent::__construct($identifier, $options);
+        $this->setObjectName();
     }
 
+    /**
+     * Set my key value and object name accordigly
+     * 
+     * @param mixed $param
+     * 
+     * @return bool
+     */
+    public function setMyKey($key)
+    {
+        return parent::setMyKey($key) && $this->setObjectName();
+    }
+  
     /**
      * Save data
      * 
