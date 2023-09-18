@@ -10,7 +10,8 @@ use Ease\SQL\Orm;
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2015-2023 Vitex Software
  */
-class User extends \Ease\User {
+class User extends \Ease\User
+{
 
     use Orm;
 
@@ -80,7 +81,8 @@ class User extends \Ease\User {
      * 
      * @param int|string $userID
      */
-    public function __construct($userID = null) {
+    public function __construct($userID = null)
+    {
         if ($userID) {
             $this->setKeyColumn(is_numeric($userID) ? 'id' : 'login');
             $this->loadFromSQL($userID);
@@ -93,7 +95,8 @@ class User extends \Ease\User {
      *
      * @return string
      */
-    public function getIcon() {
+    public function getIcon()
+    {
         $Icon = $this->GetSettingValue('icon');
         if (is_null($Icon)) {
             return parent::getIcon();
@@ -107,7 +110,8 @@ class User extends \Ease\User {
      *
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return (int) $this->getMyKey();
     }
 
@@ -116,7 +120,8 @@ class User extends \Ease\User {
      *
      * @return string
      */
-    public function getUserName() {
+    public function getUserName()
+    {
         $longname = trim($this->getDataValue('firstname') . ' ' . $this->getDataValue('lastname'));
         if (strlen($longname)) {
             return $longname;
@@ -125,11 +130,13 @@ class User extends \Ease\User {
         }
     }
 
-    public function getRecordName() {
+    public function getRecordName()
+    {
         return $this->getUserName();
     }
 
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->getDataValue('email');
     }
 
@@ -141,20 +148,19 @@ class User extends \Ease\User {
      *
      * @return null|boolean
      */
-    public function tryToLogin($formData) {
-        if (empty($formData)) {
-            return;
+    public function tryToLogin($formData)
+    {
+        if (empty($formData) === true) {
+            return false;
         }
         $login = addSlashes($formData[$this->loginColumn]);
         $password = addSlashes($formData[$this->passwordColumn]);
         if (empty($login)) {
             $this->addStatusMessage(_('missing login'), 'error');
-
             return;
         }
         if (empty($password)) {
             $this->addStatusMessage(_('missing password'), 'error');
-
             return;
         }
         if ($this->loadFromSQL([$this->loginColumn => $login])) {
@@ -165,7 +171,6 @@ class User extends \Ease\User {
                     return $this->loginSuccess();
                 } else {
                     $this->userID = null;
-
                     return false;
                 }
             } else {
@@ -174,13 +179,11 @@ class User extends \Ease\User {
                     $this->addStatusMessage(_('invalid password'), 'error');
                 }
                 $this->dataReset();
-
                 return false;
             }
         } else {
             $this->addStatusMessage(sprintf(_('user %s does not exist'), $login,
                             'error'));
-
             return false;
         }
         return $result;
@@ -194,7 +197,8 @@ class User extends \Ease\User {
      *
      * @return bool
      */
-    public static function passwordValidation($plainPassword, $encryptedPassword) {
+    public static function passwordValidation($plainPassword, $encryptedPassword)
+    {
         if ($plainPassword && $encryptedPassword) {
             $passwordStack = explode(':', $encryptedPassword);
             if (sizeof($passwordStack) != 2) {
@@ -213,7 +217,8 @@ class User extends \Ease\User {
      * 
      * @return boolean
      */
-    public function loginSuccess() {
+    public function loginSuccess()
+    {
         LogToSQL::singleton()->setUser($this->getUserID());
         return parent::loginSuccess();
     }
@@ -223,7 +228,8 @@ class User extends \Ease\User {
      * 
      * @return boolean
      */
-    public function logout() {
+    public function logout()
+    {
         $this->dataReset();
         return parent::logout();
     }
@@ -235,14 +241,14 @@ class User extends \Ease\User {
      *
      * @return string Encrypted password
      */
-    public static function encryptPassword($plainTextPassword) {
+    public static function encryptPassword($plainTextPassword)
+    {
         $encryptedPassword = '';
         for ($i = 0; $i < 10; ++$i) {
             $encryptedPassword .= \Ease\Functions::randomNumber();
         }
         $passwordSalt = substr(md5($encryptedPassword), 0, 2);
         $encryptedPassword = md5($passwordSalt . $plainTextPassword) . ':' . $passwordSalt;
-
         return $encryptedPassword;
     }
 
@@ -253,7 +259,8 @@ class User extends \Ease\User {
      *
      * @return string password hash
      */
-    public function passwordChange($newPassword) {
+    public function passwordChange($newPassword)
+    {
         return $this->dbsync([$this->passwordColumn => $this->encryptPassword($newPassword), $this->getKeyColumn() => $this->getUserID()]);
     }
 
@@ -262,7 +269,8 @@ class User extends \Ease\User {
      * 
      * @return string Column rendering
      */
-    public function columnDefs() {
+    public function columnDefs()
+    {
         return '
 "columnDefs": [
            // { "visible": false,  "targets": [ 0 ] }
@@ -276,11 +284,11 @@ class User extends \Ease\User {
      * 
      * @return User
      */
-    public static function singleton($user = null) {
+    public static function singleton($user = null)
+    {
         if (!isset(self::$instance)) {
             self::$instance = is_null($user) ? new self() : $user;
         }
         return self::$instance;
     }
-
 }

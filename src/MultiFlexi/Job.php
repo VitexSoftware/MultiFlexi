@@ -42,7 +42,7 @@ class Job extends Engine
 
     /**
      * 
-     * @var App
+     * @var Application
      */
     public $application = null;
 

@@ -16,15 +16,6 @@ class Customer extends DBEngine {
     public $createColumn = 'DatCreate';
     public $modifiedColumn = 'DatSave';
 
-    /**
-     * Customer's page link
-     * 
-     * @return string
-     */
-    public function getLink() {
-        return 'customer.php?id=' . $this->getMyKey();
-    }
-
     public function getUserName() {
         return $this->getRecordName();
     }

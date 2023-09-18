@@ -42,7 +42,7 @@ switch ($oPage->getRequestValue('action')) {
 
         $confirmBlock->addItem($user);
 
-        $confirmator = $confirmBlock->addItem(new \Ease\TWB4\Panel(_('Are you sure ?')), 'danger');
+        $confirmator = $confirmBlock->addItem(new \Ease\TWB4\Panel(_('Are you sure ?'), 'danger'));
         $confirmator->addItem(new \Ease\TWB4\LinkButton('user.php?id=' . $user->getId(), _('Ne') . ' ' . \Ease\TWB4\Part::glyphIcon('ok'), 'success'));
         $confirmator->addItem(new \Ease\TWB4\LinkButton('?delete=true&' . $user->keyColumn . '=' . $user->getID(), _('Ano') . ' ' . \Ease\TWB4\Part::glyphIcon('remove'), 'danger'));
 

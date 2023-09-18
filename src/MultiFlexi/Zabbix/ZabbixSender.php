@@ -87,7 +87,7 @@ class ZabbixSender
      *
      * @param array $options Configuration options 
      *
-     * @return Configurated instance
+     * @return ZabbixSender Configurated instance
      */
     public function configure(array $options = array()) 
     {

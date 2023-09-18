@@ -90,6 +90,7 @@ class AbraFlexiApi extends AbstractAbraFlexiApi {
         } else {
             $this->engine->insertToSQL($queryParams);
         }
+        return $response;
     }
 
 }

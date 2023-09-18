@@ -123,7 +123,7 @@ class ZabbixSender extends \MultiFlexi\Zabbix\ZabbixSender
      *
      * @return void
      *
-     * @throws Exception
+     * @throws \Exception
      * @throws ZabbixNetworkException
      */
     public function send(ZabbixPacket $packet)

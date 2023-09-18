@@ -22,20 +22,26 @@ use Ease\TWB4\Widgets\Toggle;
  *
  * @author 
  */
-class AppInfo extends \Ease\Html\TableTag {
+class AppInfo extends \Ease\Html\TableTag
+{
 
-    public function __construct($apps,$companyID, $properties = []) {
-        parent::__construct(new \Ease\Html\LabelTag('semafor', new SemaforLight($apps->getDataValue('setup'),['id'=>'semafor'])), $properties);
-      
-        $this->addItem( new \Ease\TWB4\Label( ($apps->getDataValue('enabled') ? 'success' : 'danger'), ($apps->getDataValue('enabled') ? _('Enabled') : _('Disabled'))));
-        
-        
-        $this->addItem([new \Ease\TWB4\LinkButton('conffield.php?app_id=' . $apps->getMyKey(), _('Config fields'), 'warning'),
-                    new ConfigFieldsBadges(\MultiFlexi\Conffield::getAppConfigs($apps->getMyKey()))
-                        ]);
+    /**
+     * 
+     * @param \MultiFlexi\Application $apps
+     * @param int                     $companyID
+     * @param array                   $properties
+     */
+    public function __construct($apps, $companyID, $properties = [])
+    {
+        parent::__construct(new \Ease\Html\LabelTag('semafor', new SemaforLight($apps->getDataValue('setup'), ['id' => 'semafor'])), $properties);
+        $this->addItem(new \Ease\TWB4\Label(($apps->getDataValue('enabled') ? 'success' : 'danger'), ($apps->getDataValue('enabled') ? _('Enabled') : _('Disabled'))));
+        $this->addItem([new \Ease\TWB4\LinkButton('conffield.php?app_id=' . $apps->getMyKey().'&company_id='.$companyID, _('Config fields'), 'warning'),
+            new ConfigFieldsBadges(\MultiFlexi\Conffield::getAppConfigs($apps->getMyKey()))
+        ]);
     }
-    
-    public function afterAdd() {
+
+    public function afterAdd()
+    {
 
 //        $this->addInput(new InputTextTag('company'),
 //                _('AbraFlexi company code'));
@@ -58,7 +64,5 @@ class AppInfo extends \Ease\Html\TableTag {
 //        $this->addItem(new InputHiddenTag('webhook'));
 //
 //        $this->addInput(new Toggle('enabled'), _('Enabled'));
-
     }
-
 }

@@ -13,15 +13,18 @@ namespace MultiFlexi;
  *
  * @author vitex
  */
-class Configuration extends \Ease\SQL\Engine {
+class Configuration extends \Ease\SQL\Engine
+{
 
     public $myTable = 'configuration';
 
-    public function __construct($identifier = null, $options = array()) {
+    public function __construct($identifier = null, $options = array())
+    {
         parent::__construct($identifier, $options);
     }
 
-    public function getName() {
+    public function getName()
+    {
         $app = new Application((int) $this->getDataValue('app_id'));
         $cmp = new Company((int) $this->getDataValue('company_id'));
         return [new \Ease\TWB4\LinkButton('app.php?id=' . $app->getMyKey(), $app->getDataValue('nazev'), 'info'), ' @ ', new \Ease\TWB4\LinkButton('company.php?id=' . $cmp->getMyKey(), $cmp->getRecordName(), 'info')];
@@ -33,9 +36,10 @@ class Configuration extends \Ease\SQL\Engine {
      * @param array $data        asociativní pole dat
      * @param bool  $searchForID Zjistit zdali updatovat nebo insertovat
      *
-     * @return int ID záznamu nebo null v případě neůspěchu
+     * @return int|null ID záznamu nebo null v případě neůspěchu
      */
-    public function saveToSQL($data = null, $searchForID = false) {
+    public function saveToSQL($data = null, $searchForID = false)
+    {
         if (is_null($data)) {
             $data = $this->getData();
         }
@@ -56,7 +60,8 @@ class Configuration extends \Ease\SQL\Engine {
      *
      * @return int
      */
-    public function takeData($data) {
+    public function takeData($data)
+    {
         $cfgs = new Conffield();
         foreach ($cfgs->appConfigs($this->getDataValue('app_id')) as $cfg) {
             if ($cfg['type'] == 'checkbox') {
@@ -72,7 +77,8 @@ class Configuration extends \Ease\SQL\Engine {
      * @param int $companyId
      * @param int $appId
      */
-    public function setEnvironment($companyId, $appId) {
+    public function setEnvironment($companyId, $appId)
+    {
         foreach ($this->getAppConfig($companyId, $appId) as $cfgRaw) {
             $this->addStatusMessage(sprintf(_('Setting Environment %s to %s'), $cfgRaw['name'], $cfgRaw['value']), 'debug');
             putenv($cfgRaw['name'] . '=' . $cfgRaw['value']);
@@ -87,9 +93,8 @@ class Configuration extends \Ease\SQL\Engine {
      * 
      * @return array
      */
-    public function getAppConfig($companyId, $appId) {
+    public function getAppConfig($companyId, $appId)
+    {
         return $this->getColumnsFromSQL(['name', 'value'], ['company_id' => $companyId, 'app_id' => $appId]);
     }
-    
-    
 }
