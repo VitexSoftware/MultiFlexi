@@ -70,7 +70,7 @@ class Application extends Engine {
                 $data['enabled'] = false;
             } else {
                 if ($data['executable'] != $executable) {
-                    $this->addStatusMessage(sprintf(_('Executable %s found as %s'), $data['executable'], $executable), 'success');
+//                    $this->addStatusMessage(sprintf(_('Executable %s found as %s'), $data['executable'], $executable), 'success');
                     $data['executable'] = $executable;
                 }
             }

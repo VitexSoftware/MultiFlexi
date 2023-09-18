@@ -147,7 +147,7 @@ class Job extends Engine
                 }
             }
         }
-        $this->updateToSQL(['id'=> $this->getMyKey(), 'begin' => new \Envms\FluentPDO\Literal('NOW()')]);
+        $this->updateToSQL(['id' => $this->getMyKey(), 'begin' => new \Envms\FluentPDO\Literal('NOW()')]);
         return $jobId;
     }
 
@@ -330,9 +330,10 @@ class Job extends Engine
     public function getCmdParams()
     {
         $cmdparams = $this->application->getDataValue('cmdparams');
-        foreach ($this->environment as $envKey => $envValue) {
-            $this->addStatusMessage(sprintf(_('Setting custom Environment: export %s=%s'), $envKey, $envValue), 'debug');
-            $cmdparams = str_replace('{' . $envKey . '}', $envValue, strval($cmdparams));
+        if (is_array($this->environment)) {
+            foreach ($this->environment as $envKey => $envValue) {
+                $cmdparams = str_replace('{' . $envKey . '}', $envValue, strval($cmdparams));
+            }
         }
         return $cmdparams;
     }
@@ -350,5 +351,27 @@ class Job extends Engine
     public function cleanUp()
     {
         // TODO: Delete Uploaded files if any
+    }
+
+    /**
+     * #Generate Job Launcher
+     * 
+     * @return string
+     */
+    public function launcherScript()
+    {
+        $launcher[] = '#!/bin/bash';
+        $launcher[] = '';
+        $launcher[] = '# ' . \Ease\Shared::appName() . ' v' . \Ease\Shared::AppVersion() . ' job #' . $this->getMyKey() . ' launcher. Generated ' . (new \DateTime)->format('Y-m-d H:i:s') . ' for company: ' . $this->company->getDataValue('nazev');
+        $launcher[] = '';
+        $environment = $this->getDataValue('env') ? unserialize($this->getDataValue('env')) : [];
+        foreach ($environment as $key => $value) {
+            if (is_string($value)) {
+                $launcher[] = 'export ' . $key . '=' . (strstr($value, '"') ? "'$value'" : $value);
+            }
+        }
+        $launcher[] = '';
+        $launcher[] = $this->application->getDataValue('executable') . ' ' . $this->getCmdParams();
+        return implode("\n", $launcher);
     }
 }
