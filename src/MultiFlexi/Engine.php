@@ -35,7 +35,7 @@ class Engine extends \Ease\SQL\Engine {
     /**
      * Set my key value and object name accordigly
      * 
-     * @param mixed $param
+     * @param mixed $key value of object indentifier to be set
      * 
      * @return bool
      */
