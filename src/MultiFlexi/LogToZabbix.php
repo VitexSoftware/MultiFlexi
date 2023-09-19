@@ -47,7 +47,7 @@ class LogToZabbix implements \Ease\Logger\Loggingable
     {
         $packet = new ZabbixPacket();
         $me = \Ease\Functions::cfg('ZABBIX_HOST');
-        $packet->addMetric((new ZabbixMetric('ease.message', json_encode(['caller' => \Ease\Logger\LogToSQL::venuize($caller), 'message' => $message, 'type' => $type])))->withHostname($me));
+        $packet->addMetric((new ZabbixMetric('ease.message', json_encode(['caller' => \Ease\Logger\Message::getCallerName($caller), 'message' => $message, 'type' => $type])))->withHostname($me));
         $this->sender->send($packet);
         //system('zabbix_sender -z ' . \Ease\Functions::cfg('ZABBIX_SERVER') . ' -p 10051 -s "' . \Ease\Functions::cfg('ZABBIX_HOST') . '" -k ' . \Ease\Functions::cfg('ZABBIX_FIELD', 'multi.message') . ' -o "' . $message . '"');
     }
