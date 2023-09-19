@@ -367,7 +367,7 @@ class Job extends Engine
         $environment = $this->getDataValue('env') ? unserialize($this->getDataValue('env')) : [];
         foreach ($environment as $key => $value) {
             if (is_string($value)) {
-                $launcher[] = 'export ' . $key . '=' . (strstr($value, '"') ? "'$value'" : $value);
+                $launcher[] = 'export ' . $key . "='" . $value . "'";
             }
         }
         $launcher[] = '';
