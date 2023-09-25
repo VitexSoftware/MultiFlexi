@@ -44,6 +44,19 @@
             ]
         },
         {
+            "name": "Launch weekly script in console ",
+            "type": "php",
+            "request": "launch",
+            "program": "${fileWorkspaceFolder}/lib/executor.php",
+            "cwd": "${fileWorkspaceFolder}/lib/",
+            "externalConsole": false,
+            "port": 9003,
+            "args": [
+                "w"
+            ]
+        },
+
+        {
             "name": "Debug Database Migration",
             "type": "php",
             "request": "launch",

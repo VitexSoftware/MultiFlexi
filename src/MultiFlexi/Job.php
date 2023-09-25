@@ -22,6 +22,16 @@ class Job extends Engine
 
     public $myTable = 'job';
 
+    public static $intervalCode = [
+        'i'=>'instant',
+        'n'=>'disabled', 
+        'y'=>'yearly', 
+        'h'=>'hourly', 
+        'm'=>'monthly',
+        'w'=>'weekly',
+        'd'=>'daily' 
+    ];
+
     /**
      * 
      * @var ZabbixSender
@@ -112,7 +122,7 @@ class Job extends Engine
         $sqlLogger->setCompany($companyId);
         $sqlLogger->setApplication($appId);
         $jobId = $this->getMyKey();
-        $this->addStatusMessage('JOB: ' . $jobId . ' ' . json_encode($this->environment), 'debug');
+        //$this->addStatusMessage('JOB: ' . $jobId . ' ' . json_encode($this->environment), 'debug');
         if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
             $this->reportToZabbix(['phase' => 'jobStart', 'begin' => (new \DateTime())->format('Y-m-d H:i:s')]);
         }
@@ -373,5 +383,17 @@ class Job extends Engine
         $launcher[] = '';
         $launcher[] = $this->application->getDataValue('executable') . ' ' . $this->getCmdParams();
         return implode("\n", $launcher);
+    }
+
+    /**
+     * Get Job Interval by Code
+     * 
+     * @param string $code
+     * 
+     * @return string
+     */
+    public static function codeToInterval($code)
+    {
+        return  array_key_exists($code, self::$intervalCode) ? self::$intervalCode[$code] : 'n/a';
     }
 }

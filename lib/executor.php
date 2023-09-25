@@ -25,18 +25,19 @@ define('EASE_LOGGER', implode('|', $loggers));
 Shared::user(new Anonym());
 
 $jobber = new Job();
-$jobber->logBanner();
+
+$interval = $argc == 2 ? $argv[1] : null;
+$jobber->logBanner( \Ease\Shared::appName(). ' Interval: ' . Job::codeToInterval($interval));
 
 $companer = new Company();
 $companys = $companer->listingQuery()->select('abraflexis.*')->select('company.id AS company_id')->leftJoin('abraflexis ON abraflexis.id = company.abraflexi');
 $customConfig = new Configuration();
-$interval = $argc == 2 ? $argv[1] : null;
 if ($interval) {
     $ap2c = new \MultiFlexi\RunTemplate();
     foreach ($companys as $company) {
         LogToSQL::singleton()->setCompany($company['company_id']);
         $appsForCompany = $ap2c->getColumnsFromSQL(['id', 'interv'], ['company_id' => $company['company_id'], 'interv' => $interval]);
-        if (empty($appsForCompany)) {
+        if (empty($appsForCompany) && ($interval!='i')) {
             $companer->addStatusMessage(sprintf(_('No applications to run for %s in interval %s'), $company['nazev'], $interval), 'debug');
         } else {
             $jobber = new Job();
