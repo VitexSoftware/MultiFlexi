@@ -16,8 +16,10 @@ use MultiFlexi\Company;
 
 require_once './init.php';
 $oPage->onlyForLogged();
-$oPage->addItem(new PageTop(_('Company')));
+
 $companies = new Company(WebPage::getRequestValue('id', 'int'));
+$oPage->addItem(new PageTop(_('Company').': '.$companies->getRecordName()));
+
 $_SESSION['company'] = &$companies;
 $_SESSION['server'] = new \MultiFlexi\AbraFlexis($companies->getDataValue('abraflexi'));
 $_SESSION['customer'] = new \MultiFlexi\Customer($companies->getDataValue('customer'));
