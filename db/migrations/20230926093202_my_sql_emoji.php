@@ -21,12 +21,10 @@ final class MySqlEmoji extends AbstractMigration
     public function up(): void
     {
         $adapterType = $this->adapter->getAdapterType();
-        if ($adapterType != 'mysql') {
+        if ($adapterType == 'mysql') {
             $this->execute('ALTER DATABASE multiflexi CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;');
             $this->execute('ALTER TABLE job CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;');
             $this->execute('ALTER TABLE log CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;');
-        } else {
-            echo $adapterType . ' do not change COLLATE utf8mb4_unicode_ci';
         }
     }
 
