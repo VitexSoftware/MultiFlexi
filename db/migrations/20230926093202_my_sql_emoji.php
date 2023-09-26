@@ -6,6 +6,7 @@ use Phinx\Migration\AbstractMigration;
 
 final class MySqlEmoji extends AbstractMigration
 {
+
     /**
      * Change Method.
      *
@@ -19,21 +20,21 @@ final class MySqlEmoji extends AbstractMigration
      */
     public function up(): void
     {
-        if ($this->adapter->getAdapterType() != 'mysql') {
+        $adapterType = $this->adapter->getAdapterType();
+        if ($adapterType != 'mysql') {
             $this->execute('ALTER DATABASE multiflexi CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;');
             $this->execute('ALTER TABLE job CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;');
             $this->execute('ALTER TABLE log CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;');
+        } else {
+            echo $adapterType . ' do not change COLLATE utf8mb4_unicode_ci';
         }
-
     }
-    
-    
+
     /**
      * Migrate Down.
      */
     public function down()
     {
-
+        
     }
-    
 }
