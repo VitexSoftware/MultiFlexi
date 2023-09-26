@@ -21,6 +21,9 @@ $loggers = ['syslog', '\MultiFlexi\LogToSQL','console'];
 if (\Ease\Functions::cfg('ZABBIX_SERVER') && \Ease\Functions::cfg('ZABBIX_HOST')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
+if (\Ease\Functions::cfg('APP_DEBUG') == 'true') {
+    $loggers[] = 'console';
+}
 define('EASE_LOGGER', implode('|', $loggers));
 Shared::user(new Anonym());
 
