@@ -10,7 +10,6 @@ namespace MultiFlexi;
  */
 class AbraFlexis extends DBEngine
 {
-
     public $keyword = 'abraflexi';
 
     /**
@@ -55,13 +54,17 @@ class AbraFlexis extends DBEngine
         }
         $result = parent::takeData($data);
         if (array_key_exists('name', $data) && !strlen($data['name'])) {
-            $this->addStatusMessage(_('Instance name cannot be empty'),
-                    'warning');
+            $this->addStatusMessage(
+                _('Instance name cannot be empty'),
+                'warning'
+            );
             $result = false;
         }
         if (array_key_exists('url', $data) && !strlen($data['url'])) {
-            $this->addStatusMessage(_('AbraFlexi API URL cannot be empty'),
-                    'warning');
+            $this->addStatusMessage(
+                _('AbraFlexi API URL cannot be empty'),
+                'warning'
+            );
             $result = false;
         }
         if (array_key_exists('user', $data) && !strlen($data['user'])) {
@@ -69,8 +72,10 @@ class AbraFlexis extends DBEngine
             $result = false;
         }
         if (array_key_exists('password', $data) && !strlen($data['password'])) {
-            $this->addStatusMessage(_('API User password cannot be empty'),
-                    'warning');
+            $this->addStatusMessage(
+                _('API User password cannot be empty'),
+                'warning'
+            );
             $result = false;
         }
         if (array_key_exists('company', $data) && !strlen($data['company'])) {
@@ -78,8 +83,10 @@ class AbraFlexis extends DBEngine
             $result = false;
         }
         if (substr($data['url'], -1) == '/') {
-            $this->addStatusMessage(_('AbraFlexi API URL cannot end with slash'),
-                    'warning');
+            $this->addStatusMessage(
+                _('AbraFlexi API URL cannot end with slash'),
+                'warning'
+            );
             $result = false;
         }
 
@@ -126,11 +133,13 @@ class AbraFlexis extends DBEngine
     public function prepareRemoteAbraFlexi()
     {
         $companer = new Company(null, $this->getData());
-        $settinger = new \AbraFlexi\Nastaveni(null,
-                array_merge($this->getData(), ['detail' => 'full']));
+        $settinger = new \AbraFlexi\Nastaveni(
+            null,
+            array_merge($this->getData(), ['detail' => 'full'])
+        );
         //Setup Reminder
         //Setup Invoicer
-        //Setup any other apps 
+        //Setup any other apps
 //        $companyData['ic'] = $companyDetails['ic'];
 //        unset($companyData['ic']);
 //        $companyData['nazev'] = $companyDetails['nazFirmy'];
@@ -155,7 +164,7 @@ class AbraFlexis extends DBEngine
 
     /**
      * Connection info for \AbraFlexi\RO
-     * 
+     *
      * @return array
      */
     public function getConnectionDetails()

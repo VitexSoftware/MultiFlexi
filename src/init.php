@@ -14,7 +14,10 @@ use MultiFlexi\Ui\WebPage;
 
 require_once '../vendor/autoload.php';
 session_start();
-\Ease\Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], dirname(__DIR__) . '/.env');
+\Ease\Shared::init(
+    ['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'],
+    dirname(__DIR__) . '/.env'
+);
 \Ease\Locale::singleton(null, '../i18n', 'multiflexi');
 $loggers = ['syslog', '\MultiFlexi\LogToSQL'];
 if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
@@ -23,10 +26,7 @@ if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
 
 define('EASE_LOGGER', implode('|', $loggers));
 
-/**
- * @global User $oUser
- */
-$oUser = Shared::user(null, '\MultiFlexi\User');
+Shared::user(null, '\MultiFlexi\User');
 
 /**
  * @global WebPage $oPage

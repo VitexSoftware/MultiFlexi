@@ -9,8 +9,8 @@
 
 namespace MultiFlexi;
 
-use \MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
-use \MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
+use MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
+use MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
 
 /**
  * Description of Job
@@ -19,45 +19,44 @@ use \MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
  */
 class Job extends Engine
 {
-
     public $myTable = 'job';
 
     public static $intervalCode = [
-        'i'=>'instant',
-        'n'=>'disabled', 
-        'y'=>'yearly', 
-        'h'=>'hourly', 
-        'm'=>'monthly',
-        'w'=>'weekly',
-        'd'=>'daily' 
+        'i' => 'instant',
+        'n' => 'disabled',
+        'y' => 'yearly',
+        'h' => 'hourly',
+        'm' => 'monthly',
+        'w' => 'weekly',
+        'd' => 'daily'
     ];
 
     /**
-     * 
+     *
      * @var ZabbixSender
      */
     public $zabbixSender = null;
 
     /**
-     * Environment for Current Job 
+     * Environment for Current Job
      * @var array
      */
     private $environment;
 
     /**
-     * 
+     *
      * @var array
      */
     private $zabbixMessageData = [];
 
     /**
-     * 
+     *
      * @var Application
      */
     public $application = null;
 
     /**
-     * 
+     *
      * @var Company
      */
     public $company = null;
@@ -69,7 +68,7 @@ class Job extends Engine
 
     /**
      * Job Object
-     * 
+     *
      * @param int $identifier
      * @param array $options
      */
@@ -90,11 +89,11 @@ class Job extends Engine
 
     /**
      * Create New Job Record in database
-     * 
+     *
      * @param int $companyId
      * @param int $appId
      * @param array $environment
-     * 
+     *
      * @return int new job ID
      */
     public function newJob($companyId, $appId, $environment)
@@ -163,11 +162,11 @@ class Job extends Engine
 
     /**
      * Action at Job run finish
-     * 
+     *
      * @param int    $statusCode
      * @param string $stdout Job Output
      * @param string $stderr Job error output
-     * 
+     *
      * @return int
      */
     public function runEnd($statusCode, $stdout, $stderr)
@@ -187,11 +186,11 @@ class Job extends Engine
     }
 
     /**
-     * Check App Provisionning state 
-     * 
+     * Check App Provisionning state
+     *
      * @param int $appId
      * @param int $companyId
-     * 
+     *
      * @return boolean|null application with setup command provision state or setup command is not set
      */
     public function isProvisioned($appId, $companyId)
@@ -203,8 +202,8 @@ class Job extends Engine
     }
 
     /**
-     * @link https://datatables.net/examples/advanced_init/column_render.html 
-     * 
+     * @link https://datatables.net/examples/advanced_init/column_render.html
+     *
      * @return string Column rendering
      */
     public function columnDefs()
@@ -219,7 +218,7 @@ class Job extends Engine
 
     /**
      * Prepare Job for run
-     * 
+     *
      * @param int   $runTemplateId
      * @param array $envOverride use to change default env
      */
@@ -251,9 +250,9 @@ class Job extends Engine
 
     /**
      * Schedule job execution
-     * 
+     *
      * @param \DateTime $when
-     * 
+     *
      * @return int schedule ID
      */
     public function scheduleJobRun($when)
@@ -264,7 +263,7 @@ class Job extends Engine
 
     /**
      * Send Job phase Message to zabbix
-     * 
+     *
      * @param array $messageData override fields
      */
     public function reportToZabbix($messageData)
@@ -324,7 +323,7 @@ class Job extends Engine
 
     /**
      * Obtain Full Job Command Line
-     * 
+     *
      * @return string  command line
      */
     public function getCmdline()
@@ -334,7 +333,7 @@ class Job extends Engine
 
     /**
      * Obtain Job Command Line Parameters
-     * 
+     *
      * @return string  command line parameters
      */
     public function getCmdParams()
@@ -350,7 +349,7 @@ class Job extends Engine
 
     /**
      * Obtain Job Output
-     * 
+     *
      * @return string job output
      */
     public function getOutput()
@@ -365,14 +364,14 @@ class Job extends Engine
 
     /**
      * #Generate Job Launcher
-     * 
+     *
      * @return string
      */
     public function launcherScript()
     {
         $launcher[] = '#!/bin/bash';
         $launcher[] = '';
-        $launcher[] = '# ' . \Ease\Shared::appName() . ' v' . \Ease\Shared::AppVersion() . ' job #' . $this->getMyKey() . ' launcher. Generated ' . (new \DateTime)->format('Y-m-d H:i:s') . ' for company: ' . $this->company->getDataValue('nazev');
+        $launcher[] = '# ' . \Ease\Shared::appName() . ' v' . \Ease\Shared::AppVersion() . ' job #' . $this->getMyKey() . ' launcher. Generated ' . (new \DateTime())->format('Y-m-d H:i:s') . ' for company: ' . $this->company->getDataValue('nazev');
         $launcher[] = '';
         $environment = $this->getDataValue('env') ? unserialize($this->getDataValue('env')) : [];
         foreach ($environment as $key => $value) {
@@ -387,9 +386,9 @@ class Job extends Engine
 
     /**
      * Get Job Interval by Code
-     * 
+     *
      * @param string $code
-     * 
+     *
      * @return string
      */
     public static function codeToInterval($code)

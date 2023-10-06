@@ -14,23 +14,24 @@ namespace MultiFlexi;
  *
  * @author vitex
  */
-class Application extends Engine {
-
+class Application extends Engine
+{
     public $lastModifiedColumn;
     public $keyword;
     /**
-     * 
+     *
      * @var Company
      */
     public $company;
 
     /**
-     * 
-     * 
+     *
+     *
      * @param mixed $identifier
      * @param array $options
      */
-    public function __construct($identifier = null, $options = array()) {
+    public function __construct($identifier = null, $options = array())
+    {
         $this->myTable = 'apps';
         $this->createColumn = 'DatCreate';
         $this->lastModifiedColumn = 'DatUpdate';
@@ -44,18 +45,20 @@ class Application extends Engine {
      *
      * @return array
      */
-    public function getCompany() {
+    public function getCompany()
+    {
         return $this->company->getConnectionOptions();
     }
-    
+
     /**
      * Check data before accepting
-     * 
+     *
      * @param array $data
-     * 
+     *
      * @return boolean
      */
-    public function takeData($data) {
+    public function takeData($data)
+    {
         $check = true;
         $data['enabled'] = (($data['enabled'] == 'on') || ($data['enabled'] == 1) );
         if (array_key_exists('nazev', $data) && empty($data['nazev'])) {
@@ -91,12 +94,13 @@ class Application extends Engine {
 
     /**
      * Find real path for given binary name
-     * 
-     * @param sring $binary
-     * 
+     *
+     * @param string $binary full realpath
+     *
      * @return string
      */
-    public static function findBinaryInPath($binary) {
+    public static function findBinaryInPath($binary)
+    {
         $found = null;
         if ($binary[0] == '/') {
             $found = file_exists($binary) && is_executable($binary) ? $binary : null;
@@ -112,23 +116,24 @@ class Application extends Engine {
     }
 
     /**
-     * 
+     *
      * @param string $binary
-     * 
+     *
      * @return boolean
      */
-    public static function doesBinaryExist($binary) {
+    public static function doesBinaryExist($binary)
+    {
         return ($binary[0] == '/') ? file_exists($binary) : self::isBinaryInPath($binary);
     }
 
     /**
-     * 
+     *
      * @param string $binary
-     * 
+     *
      * @return boolean
      */
-    public static function isBinaryInPath($binary) {
+    public static function isBinaryInPath($binary)
+    {
         return !empty(self::findBinaryInPath($binary));
     }
-
 }

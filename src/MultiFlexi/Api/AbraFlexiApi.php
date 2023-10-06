@@ -14,11 +14,11 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * Description of DefaultApi
- * 
+ *
  * @author vitex
  */
-class AbraFlexiApi extends AbstractAbraFlexiApi {
-
+class AbraFlexiApi extends AbstractAbraFlexiApi
+{
     /**
      * Api Handler Engine
      * @var \MultiFlexi\AbraFlexis
@@ -28,22 +28,24 @@ class AbraFlexiApi extends AbstractAbraFlexiApi {
     /**
      * Prepare AbraFlexis engine
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->engine = new \MultiFlexi\AbraFlexis();
     }
 
     /**
      * AbraFlexi info by ID
-     * 
+     *
      * @url http://localhost/EASE/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/abraflexi/1
-     * 
+     *
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param int $abraflexiId
-     * 
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getAbraFlexiById(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, int $abraflexiId, string $suffix): \Psr\Http\Message\ResponseInterface {
+    public function getAbraFlexiById(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, int $abraflexiId, string $suffix): \Psr\Http\Message\ResponseInterface
+    {
         $this->engine->loadFromSQL($abraflexiId);
         return DefaultApi::prepareResponse($response, ['id' => $this->engine->getMyKey(), 'name' => $this->engine->getRecordName(), 'executable' => $this->engine->getDataValue('executable')], $suffix);
     }
@@ -59,7 +61,8 @@ class AbraFlexiApi extends AbstractAbraFlexiApi {
      *
      * @return ResponseInterface
      */
-    public function listAbraFlexis(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface {
+    public function listAbraFlexis(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    {
         $abraflexisList = [];
         foreach ($this->engine->getAll() as $abraflexi) {
             $abraflexisList[] = ['id' => $abraflexi['id'], 'name' => $abraflexi['nazev'], 'executable' => $abraflexi['executable']];
@@ -80,8 +83,8 @@ class AbraFlexiApi extends AbstractAbraFlexiApi {
      * @return ResponseInterface
      */
     public function setAbraFlexiById(
-            ServerRequestInterface $request,
-            ResponseInterface $response
+        ServerRequestInterface $request,
+        ResponseInterface $response
     ): ResponseInterface {
         $queryParams = $request->getQueryParams();
         if (key_exists('abraflexiId', $queryParams)) {
@@ -92,5 +95,4 @@ class AbraFlexiApi extends AbstractAbraFlexiApi {
         }
         return $response;
     }
-
 }

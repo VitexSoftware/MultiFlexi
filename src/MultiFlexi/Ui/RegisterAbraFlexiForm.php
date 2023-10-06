@@ -12,19 +12,28 @@ namespace MultiFlexi\Ui;
 /**
  * Registered AbraFlexi instance editor Form
  *
- * @author 
+ * @author
  */
-class RegisterAbraFlexiForm extends EngineForm {
-
-    public function afterAdd() {
-        $this->addInput(new \Ease\Html\InputTextTag('name'),
-                _('AbraFlexi instance Name'));
-        $this->addInput(new \Ease\Html\InputTextTag('url'),
-                _('RestAPI endpoint url'));
-        $this->addInput(new \Ease\Html\InputTextTag('user'),
-                _('REST API Username'));
-        $this->addInput(new \Ease\Html\InputPasswordTag('password'),
-                _('Rest API Password'));
+class RegisterAbraFlexiForm extends EngineForm
+{
+    public function afterAdd()
+    {
+        $this->addInput(
+            new \Ease\Html\InputTextTag('name'),
+            _('AbraFlexi instance Name')
+        );
+        $this->addInput(
+            new \Ease\Html\InputTextTag('url'),
+            _('RestAPI endpoint url')
+        );
+        $this->addInput(
+            new \Ease\Html\InputTextTag('user'),
+            _('REST API Username')
+        );
+        $this->addInput(
+            new \Ease\Html\InputPasswordTag('password'),
+            _('Rest API Password')
+        );
 
         $this->addInput(new \Ease\TWB4\SubmitButton(_('Save'), 'success'));
 
@@ -36,5 +45,4 @@ class RegisterAbraFlexiForm extends EngineForm {
             $this->fillUp($this->engine->getData());
         }
     }
-
 }

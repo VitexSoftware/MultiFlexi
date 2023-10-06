@@ -1,14 +1,16 @@
 <?php
 
 declare(strict_types=1);
+
 /**
- * Multi Flexi - 
+ * Multi Flexi -
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
  */
+
 /**
- * 
+ *
  *
  * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software
@@ -23,10 +25,9 @@ namespace MultiFlexi\Ui;
  */
 class JobHistoryTable extends \Ease\TWB4\Table
 {
-
     /**
      * Job History presented as table
-     * 
+     *
      * @param mixed $content
      * @param array $properties
      */
@@ -47,7 +48,7 @@ class JobHistoryTable extends \Ease\TWB4\Table
             unset($job['login']);
             $job['company_id'] = new \Ease\Html\ATag('company.php?id=' . $job['company_id'], $job['nazev']);
             unset($job['nazev']);
-            
+
             $this->addRowColumns($job);
         }
     }

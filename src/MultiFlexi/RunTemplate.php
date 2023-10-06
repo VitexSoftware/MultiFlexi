@@ -14,40 +14,44 @@ namespace MultiFlexi;
  *
  * @author vitex
  */
-class RunTemplate extends Engine {
-
-    public function __construct($identifier = null, $options = []) {
+class RunTemplate extends Engine
+{
+    public function __construct($identifier = null, $options = [])
+    {
         $this->myTable = 'runtemplate';
         parent::__construct($identifier, $options);
     }
 
     /**
      * Get id by App & Company
-     * 
+     *
      * SELECT runtemplate.id, runtemplate.interv, runtemplate.prepared, apps.nazev AS app, company.nazev AS company   FROM runtemplate LEFT JOIN apps ON runtemplate.app_id=apps.id LEFT JOIN company ON runtemplate.company_id=company.id;
-     * 
+     *
      * @param int $appId
      * @param int $companyId
-     * 
+     *
      * @return int
      */
-    public function runTemplateID(int $appId, int $companyId) {
+    public function runTemplateID(int $appId, int $companyId)
+    {
         $runTemplateId = intval($this->listingQuery()->where('company_id=' . $companyId . ' AND app_id=' . $appId)->select('id', true)->fetchColumn());
         return $runTemplateId ? $runTemplateId : $this->dbsync(['app_id' => $appId, 'company_id' => $companyId, 'interv' => 'n']);
     }
 
     /**
      * Set APP State
-     * 
+     *
      * @param bool $state
-     * 
+     *
      * @return bool
      */
-    public function setState(bool $state) {
+    public function setState(bool $state)
+    {
         return $state ? $this->dbsync() : $this->deleteFromSQL();
     }
 
-    public function performInit() {
+    public function performInit()
+    {
         $app = new Application((int) $this->getDataValue('app_id'));
 //        $this->setEnvironment();
         if (empty($app->getDataValue('setup')) == false) {
@@ -59,12 +63,13 @@ class RunTemplate extends Engine {
 
     /**
      * Delete record ignoring interval
-     * 
+     *
      * @param array $data
-     * 
+     *
      * @return int
      */
-    public function deleteFromSQL($data = null) {
+    public function deleteFromSQL($data = null)
+    {
         if (is_null($data)) {
             $data = $this->getData();
         }
@@ -73,10 +78,11 @@ class RunTemplate extends Engine {
     }
 
     /**
-     * 
+     *
      * @return array
      */
-    public function getAppEnvironment() {
+    public function getAppEnvironment()
+    {
         $connectionData = $this->getAppInfo();
         $customConfig = new Configuration();
 
@@ -99,10 +105,11 @@ class RunTemplate extends Engine {
     }
 
     /**
-     * 
+     *
      * @return array
      */
-    public function getAppInfo() {
+    public function getAppInfo()
+    {
         return $this->listingQuery()
                         ->select('apps.*')
                         ->select('apps.id as apps_id')
@@ -117,9 +124,10 @@ class RunTemplate extends Engine {
     }
 
     /**
-     * 
+     *
      */
-    public function setEnvironment() {
+    public function setEnvironment()
+    {
         $cmp = new Company((int) $this->getDataValue('company_id'));
         $cmp->setEnvironment();
 
@@ -138,19 +146,20 @@ class RunTemplate extends Engine {
         $cmp->addStatusMessage('setu end' . $exec . '@' . $cmp->getDataValue('nazev'));
     }
 
-    public function getAppsForCompany($companyID) {
+    public function getAppsForCompany($companyID)
+    {
         return $this->getColumnsFromSQL(['app_id', 'interv', 'id'], ['company_id' => $companyID], 'id', 'app_id');
     }
 
     /**
      * Set Provision state
-     * 
-     * @param int|null $status 0: Unprovisioned, 1: provisioned, 
-     * 
+     *
+     * @param int|null $status 0: Unprovisioned, 1: provisioned,
+     *
      * @return boolean save status
      */
-    public function setProvision($status) {
+    public function setProvision($status)
+    {
         return $this->dbsync(['prepared' => $status]);
     }
-
 }

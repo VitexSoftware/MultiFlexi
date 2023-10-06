@@ -16,7 +16,6 @@ namespace MultiFlexi\Ui;
  */
 class MainMenu extends \Ease\Html\DivTag
 {
-
     /**
      * Vytvoří hlavní menu.
      */
@@ -106,13 +105,13 @@ class MainMenu extends \Ease\Html\DivTag
             $this->usersMenuEnabled($nav);
             //$nav->addMenuItem(new \Ease\Html\ATag('logs.php', '<img height=30 src=images/log.svg> ' . _('Logs')), 'right');
 
-            $nav->addDropDownMenu('<img height=30 src=images/log.svg> '._('Logs'), ['logs.php' => _('System'), 'joblist.php' => _('Jobs')]);
+            $nav->addDropDownMenu('<img height=30 src=images/log.svg> ' . _('Logs'), ['logs.php' => _('System'), 'joblist.php' => _('Jobs')]);
             $nav->addMenuItem(new \Ease\Html\ATag('logout.php', '<img height=30 src=images/application-exit.svg> ' . _('Sign Off')), 'right');
         }
     }
 
     /**
-     * 
+     *
      * @param type $nav
      * @param type $apps
      */
@@ -123,13 +122,14 @@ class MainMenu extends \Ease\Html\DivTag
             $appsMenu['apps.php'] = _('Application list');
         }
 
-        $nav->addDropDownMenu('<img width=30 src=images/apps.svg> ' . _('Applications'),
-                array_merge($appsMenu, ['' => ''], $apps)
+        $nav->addDropDownMenu(
+            '<img width=30 src=images/apps.svg> ' . _('Applications'),
+            array_merge($appsMenu, ['' => ''], $apps)
         );
     }
 
     /**
-     * 
+     *
      * @param type $nav
      * @param type $abraflexis
      */
@@ -140,25 +140,27 @@ class MainMenu extends \Ease\Html\DivTag
             $abraflexisMenu['abraflexis.php'] = _('Instance list');
         }
 
-        $nav->addDropDownMenu('<img width=30 src=images/abraflexi-server.svg> ' . _('Servers'),
-                array_merge($abraflexisMenu, ['' => ''], $abraflexis)
+        $nav->addDropDownMenu(
+            '<img width=30 src=images/abraflexi-server.svg> ' . _('Servers'),
+            array_merge($abraflexisMenu, ['' => ''], $abraflexis)
         );
     }
 
     /**
-     * 
+     *
      * @param type $nav
      * @param type $companys
      */
     public function companysMenuEnabled($nav, $companys)
     {
-        $nav->addDropDownMenu('<img width=30 src=images/company.svg> ' . _('Companies'),
-                array_merge(['company.php' => _('New Company')], ['' => ''], $companys)
+        $nav->addDropDownMenu(
+            '<img width=30 src=images/company.svg> ' . _('Companies'),
+            array_merge(['company.php' => _('New Company')], ['' => ''], $companys)
         );
     }
 
     /**
-     * 
+     *
      * @param type $nav
      */
     public function companysMenuDisabled($nav)
@@ -167,20 +169,21 @@ class MainMenu extends \Ease\Html\DivTag
     }
 
     /**
-     * 
+     *
      * @param type $nav
      * @param type $customers
      */
     public function customersMenuEnabled($nav, $customers)
     {
         $customersMenu = ['customer.php' => _('New Customer')];
-        $nav->addDropDownMenu('<img width=30 src=images/customer.svg> ' . _('Customers'),
-                array_merge($customersMenu, ['' => ''], $customers)
+        $nav->addDropDownMenu(
+            '<img width=30 src=images/customer.svg> ' . _('Customers'),
+            array_merge($customersMenu, ['' => ''], $customers)
         );
     }
 
     /**
-     * 
+     *
      * @param type $nav
      */
     public function customersMenuDisabled($nav)
@@ -189,15 +192,16 @@ class MainMenu extends \Ease\Html\DivTag
     }
 
     /**
-     * 
+     *
      * @param type $nav
      */
     public function usersMenuEnabled($nav)
     {
-        $nav->addDropDownMenu('<img width=30 src=images/system-users.svg> ' . _('Admin'),
-                array_merge([
+        $nav->addDropDownMenu(
+            '<img width=30 src=images/system-users.svg> ' . _('Admin'),
+            array_merge([
             'createaccount.php' => _('New Admin'),
-//            'users.php' => new \Ease\TWB4\Widgets\FaIcon('list') . '&nbsp;' . _('Admin Overview'),
+            //            'users.php' => new \Ease\TWB4\Widgets\FaIcon('list') . '&nbsp;' . _('Admin Overview'),
             '' => '',
                         ], $this->getMenuList(\Ease\Shared::user(), 'login'))
         );
@@ -212,7 +216,6 @@ class MainMenu extends \Ease\Html\DivTag
             $this->addItem(new Breadcrumb());
         }
         if (!empty(\Ease\Shared::logger()->getMessages())) {
-
             WebPage::singleton()->addCss('
 #smdrag { height: 8px; 
           background-image:  url( images/slidehandle.png ); 
@@ -228,8 +231,11 @@ class MainMenu extends \Ease\Html\DivTag
             $this->addItem(new \Ease\Html\DivTag(null, ['id' => 'smdrag', 'style' => 'margin-bottom: 5px']));
             \Ease\Shared::logger()->cleanMessages();
             WebPage::singleton()->addCss('.dropdown-menu { overflow-y: auto } ');
-            WebPage::singleton()->addJavaScript("$('.dropdown-menu').css('max-height',$(window).height()-100);",
-                    null, true);
+            WebPage::singleton()->addJavaScript(
+                "$('.dropdown-menu').css('max-height',$(window).height()-100);",
+                null,
+                true
+            );
             WebPage::singleton()->includeJavaScript('js/slideupmessages.js');
         }
     }

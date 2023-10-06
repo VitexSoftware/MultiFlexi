@@ -18,8 +18,8 @@ use Ease\TWB4\FormGroup;
 use Ease\TWB4\Row;
 use MultiFlexi\Engine;
 
-class EngineForm extends Form {
-
+class EngineForm extends Form
+{
     /**
      * @var SysEngine
      */
@@ -33,7 +33,8 @@ class EngineForm extends Form {
      * @param array  $tagProperties vlastnosti tagu například:
      *                                 array('enctype' => 'multipart/form-data')
      */
-    public function __construct($engine, $formContents = null, $tagProperties = []) {
+    public function __construct($engine, $formContents = null, $tagProperties = [])
+    {
         $this->engine = $engine;
         $tagProperties['method'] = 'post';
         $tagProperties['name'] = get_class($engine);
@@ -42,10 +43,11 @@ class EngineForm extends Form {
 
     /**
      * Add Hidden ID & Class field
-     * 
+     *
      * @return boolean
      */
-    public function finalize() {
+    public function finalize()
+    {
         $recordID = $this->engine->getMyKey();
         $this->addItem(new InputHiddenTag('class', get_class($this->engine)));
         if (!is_null($recordID)) {
@@ -54,5 +56,4 @@ class EngineForm extends Form {
         $this->fillUp($this->engine->getData());
         return parent::finalize();
     }
-
 }

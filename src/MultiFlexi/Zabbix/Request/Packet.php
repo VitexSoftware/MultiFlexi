@@ -30,7 +30,7 @@ class Packet implements \JsonSerializable
     }
 
     /**
-     * 
+     *
      * @return mixed
      */
     #[\ReturnTypeWillChange]

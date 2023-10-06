@@ -20,23 +20,25 @@ use Ease\TWB4\Widgets\Toggle;
 /**
  * Registered AbraFlexi instance editor Form
  *
- * @author 
+ * @author
  */
-class DeleteCompanyForm extends EngineForm {
+class DeleteCompanyForm extends EngineForm
+{
+    public function afterAdd()
+    {
+        $this->addInput(new InputTextTag('nazev', null, ['disabled' => true]), _('Company name'));
 
-    public function afterAdd() {
-        $this->addInput(new InputTextTag('nazev',null,['disabled'=>true]), _('Company name'));
+        $this->addInput(
+            new InputTextTag('company', null, ['disabled' => true]),
+            _('AbraFlexi company code')
+        );
 
-        $this->addInput(new InputTextTag('company',null,['disabled'=>true]),
-                _('AbraFlexi company code'));
+        $this->addInput(new InputTextTag('ic', null, ['disabled' => true]), _('Organization ID'));
 
-        $this->addInput(new InputTextTag('ic',null,['disabled'=>true]), _('Organization ID'));
+        $this->addInput(new InputEmailTag('email', null, ['disabled' => true]), _('Send notification to'));
 
-        $this->addInput(new InputEmailTag('email',null,['disabled'=>true]), _('Send notification to'));
-
-        $this->addInput(new SubmitButton('☠️☠️☠️&nbsp;'. _('Confirm company Delete').'&nbsp;☠️☠️☠️', 'danger'));
+        $this->addInput(new SubmitButton('☠️☠️☠️&nbsp;' . _('Confirm company Delete') . '&nbsp;☠️☠️☠️', 'danger'));
 
         $this->addItem(new InputHiddenTag('id'));
     }
-
 }

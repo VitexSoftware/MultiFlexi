@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi Flexi - 
+ * Multi Flexi -
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software
@@ -14,35 +14,37 @@ namespace MultiFlexi;
  *
  * @author vitex
  */
-class CompanyEnv extends \Ease\SQL\Engine {
-
+class CompanyEnv extends \Ease\SQL\Engine
+{
     public $myTable = 'companyenv';
 
     /**
-     * 
+     *
      * @var int
      */
     private $companyID;
 
     /**
-     * 
+     *
      * @var array
      */
     public $data = [];
 
 
     /**
-     * 
+     *
      * @param int $companyID
      * @param array $options
      */
-    public function __construct($companyID = null, $options = []) {
+    public function __construct($companyID = null, $options = [])
+    {
         parent::__construct(null, $options);
         $this->companyID = $companyID;
         $this->loadEnv();
     }
 
-    public function addEnv($key, $value) {
+    public function addEnv($key, $value)
+    {
         try {
             if (!is_null($this->insertToSQL(['company_id' => $this->companyID, 'keyword' => $key, 'value' => $value]))) {
                 $this->setDataValue($key, $value);
@@ -52,15 +54,16 @@ class CompanyEnv extends \Ease\SQL\Engine {
         }
     }
 
-    public function updateEnv() {
-        
+    public function updateEnv()
+    {
     }
 
-    public function removeEnv() {
-        
+    public function removeEnv()
+    {
     }
 
-    public function loadEnv() {
+    public function loadEnv()
+    {
         foreach ($this->listingQuery()->where('company_id', $this->companyID)->fetchAll() as $companyEnvRow) {
             $this->setDataValue($companyEnvRow['keyword'], $companyEnvRow['value']);
         }

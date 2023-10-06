@@ -92,3 +92,8 @@ daemon:
 
 packages:
 	debuild -us -uc
+
+# Use phpcs to reformat code to PSR12
+codingstandards:
+	phpcbf --colors --standard=PSR12 --extensions=php --ignore=vendor/ src/ 
+

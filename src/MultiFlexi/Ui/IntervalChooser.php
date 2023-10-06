@@ -14,16 +14,17 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class IntervalChooser extends \Ease\Html\SelectTag {
-
+class IntervalChooser extends \Ease\Html\SelectTag
+{
     /**
      * Script run interval chooser
-     * 
+     *
      * @param string $name
      * @param string $defaultValue
      * @param array  $properties
      */
-    public function __construct($name, $defaultValue = null, $properties = array()) {
+    public function __construct($name, $defaultValue = null, $properties = array())
+    {
         parent::__construct($name, [
             'n' => _('Disabled'),
             'y' => _('Yearly'),
@@ -33,5 +34,4 @@ class IntervalChooser extends \Ease\Html\SelectTag {
             'h' => _('Hourly')
                 ], $defaultValue, $properties);
     }
-
 }

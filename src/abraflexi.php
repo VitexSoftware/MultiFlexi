@@ -28,14 +28,18 @@ if ($oPage->isPosted()) {
         $abraflexis->addStatusMessage(_('AbraFlexi instance Saved'), 'success');
         $abraflexis->prepareRemoteAbraFlexi();
     } else {
-        $abraflexis->addStatusMessage(_('Error saving AbraFlexi instance'),
-                'error');
+        $abraflexis->addStatusMessage(
+            _('Error saving AbraFlexi instance'),
+            'error'
+        );
     }
 }
 
 if (strlen($instanceName)) {
-    $instanceLink = new ATag($abraflexis->getLink(),
-            $abraflexis->getLink());
+    $instanceLink = new ATag(
+        $abraflexis->getLink(),
+        $abraflexis->getLink()
+    );
 } else {
     $instanceName = _('New AbraFlexi instance');
     $instanceLink = null;
@@ -44,8 +48,12 @@ if (strlen($instanceName)) {
 $instanceRow = new Row();
 $instanceRow->addColumn(8, new RegisterAbraFlexiForm($abraflexis));
 
-$oPage->container->addItem(new Panel($instanceName, 'info',
-                $instanceRow, $instanceLink));
+$oPage->container->addItem(new Panel(
+    $instanceName,
+    'info',
+    $instanceRow,
+    $instanceLink
+));
 
 if (!is_null($abraflexis->getMyKey())) {
     $oPage->container->addItem(new AbraFlexiInstanceStatus($abraflexis));

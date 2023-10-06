@@ -2,7 +2,7 @@
 
 /**
  * Multi Flexi  - PillBox
- * 
+ *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright (c) 2017-2019, Vítězslav Dvořák
  */
@@ -14,13 +14,19 @@ namespace MultiFlexi\Ui;
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class PillBox extends \Ease\Html\InputTextTag {
-
-    public function __construct($name, $valuesAvailble, $valuesShown,
-            $properties = array()) {
-        parent::__construct($name,
-                is_array($valuesShown) ? implode(',', $valuesShown) : $valuesShown,
-                $properties);
+class PillBox extends \Ease\Html\InputTextTag
+{
+    public function __construct(
+        $name,
+        $valuesAvailble,
+        $valuesShown,
+        $properties = array()
+    ) {
+        parent::__construct(
+            $name,
+            is_array($valuesShown) ? implode(',', $valuesShown) : $valuesShown,
+            $properties
+        );
         $this->setTagID($name . 'pillBox');
 
         $this->addJavaScript("
@@ -35,5 +41,4 @@ $('#" . $this->getTagID() . "').selectize({
 });
 ");
     }
-
 }

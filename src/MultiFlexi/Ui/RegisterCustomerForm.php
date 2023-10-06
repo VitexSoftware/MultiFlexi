@@ -12,24 +12,35 @@ namespace MultiFlexi\Ui;
 /**
  * Registered AbraFlexi instance editor Form
  *
- * @author 
+ * @author
  */
-class RegisterCustomerForm extends EngineForm {
+class RegisterCustomerForm extends EngineForm
+{
+    public function finalize()
+    {
+        $this->addInput(
+            new \Ease\Html\InputTextTag('firstname'),
+            _('First Name')
+        );
+        $this->addInput(
+            new \Ease\Html\InputTextTag('lastname'),
+            _('Lastname')
+        );
 
-    public function finalize() {
-        $this->addInput(new \Ease\Html\InputTextTag('firstname'),
-                _('First Name'));
-        $this->addInput(new \Ease\Html\InputTextTag('lastname'),
-                _('Lastname'));
+        $this->addInput(
+            new \Ease\Html\InputTextTag('login'),
+            _('Login')
+        );
 
-        $this->addInput(new \Ease\Html\InputTextTag('login'),
-                _('Login'));
+        $this->addInput(
+            new \Ease\Html\InputPasswordTag('password'),
+            _('Password')
+        );
 
-        $this->addInput(new \Ease\Html\InputPasswordTag('password'),
-                _('Password'));
-
-        $this->addInput(new \Ease\Html\InputTextTag('email'),
-                _('Email'));
+        $this->addInput(
+            new \Ease\Html\InputTextTag('email'),
+            _('Email')
+        );
 
         $this->addInput(new \Ease\TWB4\SubmitButton(_('Save'), 'success'));
 
@@ -41,5 +52,4 @@ class RegisterCustomerForm extends EngineForm {
             $this->fillUp($this->engine->getData());
         }
     }
-
 }

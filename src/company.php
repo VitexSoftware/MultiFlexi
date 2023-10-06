@@ -18,7 +18,7 @@ require_once './init.php';
 $oPage->onlyForLogged();
 
 $companies = new Company(WebPage::getRequestValue('id', 'int'));
-$oPage->addItem(new PageTop(_('Company').': '.$companies->getRecordName()));
+$oPage->addItem(new PageTop(_('Company') . ': ' . $companies->getRecordName()));
 
 $_SESSION['company'] = &$companies;
 $_SESSION['server'] = new \MultiFlexi\AbraFlexis($companies->getDataValue('abraflexi'));
@@ -29,7 +29,6 @@ $jobs = $jobber->listingQuery()->select(['apps.nazev AS appname', 'apps.image AS
 $jobList = new \Ease\TWB4\Table();
 $jobList->addRowHeaderColumns([_('Application'), _('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'), _('Launch now'), _('Launch in Background')]);
 foreach ($jobs as $job) {
-
     $job['launch'] = new \Ease\TWB4\LinkButton('launch.php?id=' . $job['runtemplateid'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg');
     // use AppLaunchForm instead of LaunchButton
 //    $job['launch'] = new AppLaunchForm($job['app_id'], $companies->getMyKey());
@@ -41,7 +40,7 @@ foreach ($jobs as $job) {
     unset($job['runtemplateid']);
     unset($job['app_id']);
     $job['id'] = new ATag('job.php?id=' . $job['id'], new \Ease\TWB4\Badge('info', $job['id']));
-    if($job['begin']){
+    if ($job['begin']) {
         $job['begin'] = [$job['begin'], '<br>', new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
     } else {
         $job['begin'] = _('Scheduled');
@@ -63,7 +62,11 @@ $companyPanelContents[] = $headRow;
 $companyPanelContents[] = new \Ease\Html\HrTag();
 $companyPanelContents[] = $jobList;
 $bottomLine = new Row();
-$oPage->container->addItem(new Panel($companies->getRecordName(), 'light',
-                $companyPanelContents, $bottomLine));
+$oPage->container->addItem(new Panel(
+    $companies->getRecordName(),
+    'light',
+    $companyPanelContents,
+    $bottomLine
+));
 $oPage->addItem(new PageBottom());
 $oPage->draw();

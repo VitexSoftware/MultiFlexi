@@ -9,7 +9,8 @@
 
 namespace MultiFlexi\Ui;
 
-use \Ease\Document,
+use Ease\Document,
+
     \Ease\Html\ImgTag,
     \Ease\Html\SpanTag,
     \Ease\TWB4\Panel,

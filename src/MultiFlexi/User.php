@@ -12,7 +12,6 @@ use Ease\SQL\Orm;
  */
 class User extends \Ease\User
 {
-
     use Orm;
 
     public $useKeywords = [
@@ -29,7 +28,7 @@ class User extends \Ease\User
     ];
 
     /**
-     * 
+     *
      * @var array
      */
     public $filter = [];
@@ -78,7 +77,7 @@ class User extends \Ease\User
 
     /**
      * MultiFlexi User
-     * 
+     *
      * @param int|string $userID
      */
     public function __construct($userID = null)
@@ -165,8 +164,12 @@ class User extends \Ease\User
         }
         if ($this->loadFromSQL([$this->loginColumn => $login])) {
             $this->setObjectName();
-            if ($this->passwordValidation($password,
-                            $this->getDataValue($this->passwordColumn))) {
+            if (
+                $this->passwordValidation(
+                    $password,
+                    $this->getDataValue($this->passwordColumn)
+                )
+            ) {
                 if ($this->isAccountEnabled()) {
                     return $this->loginSuccess();
                 } else {
@@ -182,8 +185,11 @@ class User extends \Ease\User
                 return false;
             }
         } else {
-            $this->addStatusMessage(sprintf(_('user %s does not exist'), $login,
-                            'error'));
+            $this->addStatusMessage(sprintf(
+                _('user %s does not exist'),
+                $login,
+                'error'
+            ));
             return false;
         }
         return $result;
@@ -214,7 +220,7 @@ class User extends \Ease\User
 
     /**
      * Set logging
-     * 
+     *
      * @return boolean
      */
     public function loginSuccess()
@@ -225,7 +231,7 @@ class User extends \Ease\User
 
     /**
      * Perform User signoff
-     * 
+     *
      * @return boolean
      */
     public function logout()
@@ -265,8 +271,8 @@ class User extends \Ease\User
     }
 
     /**
-     * @link https://datatables.net/examples/advanced_init/column_render.html 
-     * 
+     * @link https://datatables.net/examples/advanced_init/column_render.html
+     *
      * @return string Column rendering
      */
     public function columnDefs()
@@ -281,7 +287,7 @@ class User extends \Ease\User
 
     /**
      * Common instance of User class
-     * 
+     *
      * @return User
      */
     public static function singleton($user = null)

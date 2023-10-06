@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi Flexi  - DataTable 
+ * Multi Flexi  - DataTable
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2020 Vitex Software
@@ -18,41 +18,40 @@ use Ease\Sand;
  */
 class DBDataTable extends \Ease\Html\TableTag
 {
-
     /**
      * Where to get/put data
-     * @var string 
+     * @var string
      */
     public $ajax2db = 'ajax2db.php';
 
     /**
      * Enable Editor ?
-     * @var boolean 
+     * @var boolean
      */
     public $rw = false;
 
     /**
      * Buttons to render on top of the datatable
-     * @var array 
+     * @var array
      */
     public $buttons = null;
 
     /**
      * Buttons to show by default
-     * @var array 
+     * @var array
      */
     public $defaultButtons = ['reload', 'copy', 'excel', 'print', 'pdf', 'pageLength',
         'colvis'];
 
     /**
      *
-     * @var array 
+     * @var array
      */
     public $columns = null;
 
     /**
      * Add footer columns
-     * @var boolean 
+     * @var boolean
      */
     public $showFooter = false;
 
@@ -64,19 +63,19 @@ class DBDataTable extends \Ease\Html\TableTag
 
     /**
      *
-     * @var handle 
+     * @var handle
      */
     public $rndId;
-    
+
     /**
-     * 
+     *
      * @var array
      */
     private $columnDefs = [];
 
     /**
      * Common database engine
-     * 
+     *
      * @param DatabaseEngine $engine
      * @param array $properties
      */
@@ -85,8 +84,10 @@ class DBDataTable extends \Ease\Html\TableTag
         $this->engine = $engine;
         $this->ajax2db = $this->dataSourceURI($engine);
         $this->columnDefs = $engine->columnDefs();
-        parent::__construct(null,
-                ['class' => 'display', 'style' => 'width: 100%']);
+        parent::__construct(
+            null,
+            ['class' => 'display', 'style' => 'width: 100%']
+        );
         $gridTagID = $this->setTagId($engine->getObjectName());
         $this->columns = $this->prepareColumns($engine->getGetDataTableColumns());
 //        $this->includeJavaScript('assets/datatables.js');
@@ -166,9 +167,9 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
 
     /**
      * Only columns with date type
-     * 
+     *
      * @param array $columns
-     * 
+     *
      * @return array
      */
     public static function getDateColumns($columns)
@@ -189,7 +190,6 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
     {
         $dataTablesColumns = [];
         foreach ($easeColumns as $column) {
-
             switch ($column['type']) {
                 case '':
                 case 'email':
@@ -228,7 +228,7 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
                 case 'datetime':
                 case 'date':
                     break;
-                default :
+                default:
                     $this->addStatusMessage('Uknown column ' . $column['name'] . ' type ' . $column['type']);
                     break;
             }
@@ -252,7 +252,7 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
     }
 
     /**
-     * 
+     *
      * @return type
      */
     public static function getUri()
@@ -262,10 +262,10 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
     }
 
     /**
-     * Prepare DataSource URI 
-     * 
+     * Prepare DataSource URI
+     *
      * @param \DBFinance\Engine $engine
-     * 
+     *
      * @return string Data Source URI
      */
     public function dataSourceURI($engine)
@@ -279,7 +279,7 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
 
     /**
      * Add TOP button
-     * 
+     *
      * @param string $function create|edit|remove
      */
     public function addButton($function)
@@ -288,11 +288,12 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
     }
 
     /**
-     * 
+     *
      */
-    public function addCustomButton($caption,
-            $callFunction = "alert( 'Button activated' );")
-    {
+    public function addCustomButton(
+        $caption,
+        $callFunction = "alert( 'Button activated' );"
+    ) {
         $this->buttons[] = '{
                 text: \'' . $caption . '\',
                 action: function ( e, dt, node, config ) {
@@ -302,9 +303,9 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
     }
 
     /**
-     * 
+     *
      * @param arrays $columns
-     * 
+     *
      * @return string
      */
     public function javaScript($columns)
@@ -341,7 +342,7 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
             $(\'.tablefilter\').change( function() { ' . $tableID . '.draw(); } );
 ';
 //    $("#'.$tableID.'_filter").css(\'border\', \'1px solid red\');
-//setInterval( function () { '.$tableID.'.ajax.reload( null, false ); }, 30000 );        
+//setInterval( function () { '.$tableID.'.ajax.reload( null, false ); }, 30000 );
     }
 
     //    '.self::columnIndexNames($columns,$tableID).'
@@ -355,10 +356,10 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
     }
 
     /**
-     * Gives You Columns JS 
-     * 
+     * Gives You Columns JS
+     *
      * @param array $columns
-     * 
+     *
      * @return string
      */
     public static function getColumnsScript($columns)
@@ -375,9 +376,9 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
 
     /**
      * Engine columns to Table Header columns format
-     * 
+     *
      * @param array $columns
-     * 
+     *
      * @return array
      */
     public static function columnsToHeader($columns)
@@ -398,9 +399,9 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
 
     /**
      * Define footer Callback code
-     * 
+     *
      * @param string $initialContent
-     * 
+     *
      * @return string
      */
     public function footerCallback($initialContent = null)
@@ -428,7 +429,7 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
     }
 
     /**
-     * 
+     *
      */
     public function addFooter()
     {

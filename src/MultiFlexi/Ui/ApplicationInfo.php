@@ -1,14 +1,16 @@
 <?php
 
 declare(strict_types=1);
+
 /**
- * Multi Flexi - 
+ * Multi Flexi -
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
  */
+
 /**
- * 
+ *
  *
  * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software
@@ -16,7 +18,7 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use \MultiFlexi\Application,
+use MultiFlexi\Application,
     \MultiFlexi\Company,
     \Ease\TWB4\Panel;
 
@@ -27,10 +29,9 @@ use \MultiFlexi\Application,
  */
 class ApplicationInfo extends Panel
 {
-
     /**
      * Application Info panel
-     * 
+     *
      * @param Application $application
      * @param Company $company
      */
@@ -39,12 +40,12 @@ class ApplicationInfo extends Panel
         parent::__construct($this->headerRow($application), 'info', 'body', 'footer');
     }
 
-    
+
     /**
      * logo, name and caption in one TWB Row div
-     * 
+     *
      * @param Application $application
-     * 
+     *
      * @return \Ease\TWB4\Row
      */
     public function headerRow($application)

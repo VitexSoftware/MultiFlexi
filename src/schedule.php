@@ -19,7 +19,6 @@ if (is_null($app->getMyKey())) {
     $oPage->container->addItem(new \Ease\TWB4\Alert('error', _('app_id not specified')));
     $app->addStatusMessage(_('app_id not specified'), 'error');
 } else {
-
     if (WebPage::isPosted() && WebPage::getRequestValue('when')) {
         $jobber = new \MultiFlexi\Job();
         $uploadEnv = [];

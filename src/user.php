@@ -21,7 +21,7 @@ $user = new \MultiFlexi\User($user_id);
 
 if ($oPage->isPosted()) {
     unset($_REQUEST['class']);
-    $user->addStatusMessage(_('Update'), $user->takeData($_REQUEST) && $user->dbsync() ? 'success' : 'error' );
+    $user->addStatusMessage(_('Update'), $user->takeData($_REQUEST) && $user->dbsync() ? 'success' : 'error');
 }
 
 //}
@@ -37,7 +37,6 @@ $oPage->addItem(new PageTop(_('User')));
 
 switch ($oPage->getRequestValue('action')) {
     case 'delete':
-
         $confirmBlock = new \Ease\TWB4\Well();
 
         $confirmBlock->addItem($user);
@@ -49,8 +48,7 @@ switch ($oPage->getRequestValue('action')) {
         $oPage->container->addItem(new \Ease\TWB4\Panel('<strong>' . $user->getUserName() . '</strong>', 'info', $confirmBlock));
 
         break;
-    default :
-
+    default:
 //        $operationsMenu = $user->operationsMenu();
 //        $operationsMenu->setTagCss(['float' => 'right']);
 //        $operationsMenu->dropdown->addTagClass('pull-right');

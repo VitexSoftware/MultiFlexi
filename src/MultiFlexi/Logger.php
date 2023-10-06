@@ -18,8 +18,8 @@ use SensioLabs\AnsiConverter\AnsiToHtmlConverter;
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class Logger extends DBEngine {
-
+class Logger extends DBEngine
+{
     public $myTable = 'log';
     public $myKeyColumn = 'id';
     public $createColumn = 'created';
@@ -28,28 +28,30 @@ class Logger extends DBEngine {
 
     /**
      * Search resuts targeting to  here
-     * @var string 
+     * @var string
      */
     public $keyword = 'dbmessage';
 
     /**
-     * 
+     *
      * @param int $id
      */
-    public function __construct($id = null) {
+    public function __construct($id = null)
+    {
         parent::__construct($id);
     }
 
     /**
-     * 
+     *
      * @return array
      */
-    public function getActualMessages() {
+    public function getActualMessages()
+    {
         return $this->getColumnsFromSQL('*', ['resolvedby' => 0], 'created');
     }
 
 //    /**
-//     * 
+//     *
 //     * @return array
 //     */
 //    public function listingQuery() {
@@ -60,21 +62,25 @@ class Logger extends DBEngine {
 //    }
 
     /**
-     * 
+     *
      * @return bool|int|\PDOStatement
      */
-    public function dismis() {
-        return $this->getFluentPDO()->update($this->getMyTable())->set(['resolved' => new Literal('NOW()')])->where('id',
-                        $this->getMyKey())->execute();
+    public function dismis()
+    {
+        return $this->getFluentPDO()->update($this->getMyTable())->set(['resolved' => new Literal('NOW()')])->where(
+            'id',
+            $this->getMyKey()
+        )->execute();
     }
 
     /**
-     * 
+     *
      * @param array $columns
-     * 
+     *
      * @return array
      */
-    public function columns($columns = []) {
+    public function columns($columns = [])
+    {
 
 //  [company_id] => null
 //  [app_id] => null
@@ -141,18 +147,20 @@ class Logger extends DBEngine {
         ]);
     }
 
-    public function tableCode($tableId) {
+    public function tableCode($tableId)
+    {
         return '
  "order": [[ 1, "asc" ]],
 ';
     }
 
     /**
-     * @link https://datatables.net/examples/advanced_init/column_render.html 
-     * 
+     * @link https://datatables.net/examples/advanced_init/column_render.html
+     *
      * @return string Column rendering
      */
-    public function columnDefs() {
+    public function columnDefs()
+    {
         return '
 "columnDefs": [
            // { "visible": false,  "targets": [ 0 ] }
@@ -161,11 +169,13 @@ class Logger extends DBEngine {
 ';
     }
 
-    public function getRecordName() {
+    public function getRecordName()
+    {
         return trim($this->getDataValue('title') . ' ' . $this->getDataValue('name'));
     }
 
-    public function completeDataRow(array $dataRowRaw) {
+    public function completeDataRow(array $dataRowRaw)
+    {
         switch ($dataRowRaw['severity']) {
             case 'success':
                 $dataRowRaw['DT_RowClass'] = 'bg-success  text-white';
@@ -186,17 +196,22 @@ class Logger extends DBEngine {
                 $dataRowRaw['DT_RowClass'] = 'text-dark';
                 break;
         }
-        
-        $dataRowRaw['message'] = (new AnsiToHtmlConverter())->convert(str_replace('.........', '......... ',
-                $dataRowRaw['message']));
+
+        $dataRowRaw['message'] = (new AnsiToHtmlConverter())->convert(str_replace(
+            '.........',
+            '......... ',
+            $dataRowRaw['message']
+        ));
 //        $dataRowRaw['created'] = (new LiveAge((new DateTime($dataRowRaw['created']))->getTimestamp()))->__toString();
 
         return parent::completeDataRow($dataRowRaw);
     }
 
-    public static function toRFC3339(string $dateTimePlain) {
-        return ($dateTimePlain == '0000-00-00 00:00:00') ? null : \DateTime::createFromFormat('Y-m-d H:i:s',
-                        $dateTimePlain)->format(DateTime::ATOM);
+    public static function toRFC3339(string $dateTimePlain)
+    {
+        return ($dateTimePlain == '0000-00-00 00:00:00') ? null : \DateTime::createFromFormat(
+            'Y-m-d H:i:s',
+            $dateTimePlain
+        )->format(DateTime::ATOM);
     }
-
 }

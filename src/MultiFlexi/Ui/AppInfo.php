@@ -20,13 +20,12 @@ use Ease\TWB4\Widgets\Toggle;
 /**
  * Registered AbraFlexi instance editor Form
  *
- * @author 
+ * @author
  */
 class AppInfo extends \Ease\Html\TableTag
 {
-
     /**
-     * 
+     *
      * @param \MultiFlexi\Application $apps
      * @param int                     $companyID
      * @param array                   $properties
@@ -35,7 +34,7 @@ class AppInfo extends \Ease\Html\TableTag
     {
         parent::__construct(new \Ease\Html\LabelTag('semafor', new SemaforLight($apps->getDataValue('setup'), ['id' => 'semafor'])), $properties);
         $this->addItem(new \Ease\TWB4\Label(($apps->getDataValue('enabled') ? 'success' : 'danger'), ($apps->getDataValue('enabled') ? _('Enabled') : _('Disabled'))));
-        $this->addItem([new \Ease\TWB4\LinkButton('conffield.php?app_id=' . $apps->getMyKey().'&company_id='.$companyID, _('Config fields'), 'warning'),
+        $this->addItem([new \Ease\TWB4\LinkButton('conffield.php?app_id=' . $apps->getMyKey() . '&company_id=' . $companyID, _('Config fields'), 'warning'),
             new ConfigFieldsBadges(\MultiFlexi\Conffield::getAppConfigs($apps->getMyKey()))
         ]);
     }

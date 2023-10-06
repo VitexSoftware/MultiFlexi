@@ -58,13 +58,13 @@ class Metric implements \JsonSerializable
         $this->timestamp = $timestamp;
         return $this;
     }
-    
+
     /**
-     * 
+     *
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    public function jsonSerialize()  
+    public function jsonSerialize()
     {
         return [
             'host' => $this->hostname,

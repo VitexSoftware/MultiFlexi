@@ -1,11 +1,12 @@
 <?php
 
 /**
- * Multi Flexi - 
+ * Multi Flexi -
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2022 Vitex Software
  */
+
 use Psr\Http\Message\ServerRequestInterface as Request;
 use MultiFlexi\App\ResponseEmitter as Response;
 use Psr\Http\Message\ServerRequestInterface;
@@ -23,12 +24,12 @@ $app->addRoutingMiddleware();
 
 // Define Custom Error Handler
 $customErrorHandler = function (
-        ServerRequestInterface $request,
-        Throwable $exception,
-        bool $displayErrorDetails,
-        bool $logErrors,
-        bool $logErrorDetails,
-        ?LoggerInterface $logger = null
+    ServerRequestInterface $request,
+    Throwable $exception,
+    bool $displayErrorDetails,
+    bool $logErrors,
+    bool $logErrorDetails,
+    ?LoggerInterface $logger = null
 ) use ($app) {
 //    $logger->error($exception->getMessage());
 
@@ -36,7 +37,7 @@ $customErrorHandler = function (
 
     $response = $app->getResponseFactory()->createResponse($exception->getCode())->withHeader('Content-type', 'application/json');
     $response->getBody()->write(
-            json_encode($payload, JSON_UNESCAPED_UNICODE)
+        json_encode($payload, JSON_UNESCAPED_UNICODE)
     );
 
     return $response;
@@ -47,5 +48,3 @@ $errorMiddleware = $app->addErrorMiddleware(true, true, true, new Slim\Logger())
 $errorMiddleware->setDefaultErrorHandler($customErrorHandler);
 
 $app->run();
-
-

@@ -20,9 +20,10 @@ use Ease\TWB4\Widgets\Toggle;
  *
  * @author vitex
  */
-class RegisterAppForm extends EngineForm {
-
-    function afterAdd() {
+class RegisterAppForm extends EngineForm
+{
+    function afterAdd()
+    {
         $this->setTagProperty('enctype', 'multipart/form-data');
         $this->addInput(new InputTextTag('nazev'), _('Application name'));
         $this->addInput(new InputTextTag('popis'), _('Application Description'));
@@ -44,5 +45,4 @@ class RegisterAppForm extends EngineForm {
             $this->fillUp($this->engine->getData());
         }
     }
-
 }

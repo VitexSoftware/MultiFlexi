@@ -10,4 +10,3 @@
 namespace MultiFlexi\Ui;
 
 require_once './init.php';
-

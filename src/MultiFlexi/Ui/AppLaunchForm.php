@@ -1,9 +1,10 @@
 <?php
+
 namespace MultiFlexi\Ui;
 
 /**
  * Multi Flexi - Application Launch Form
- * 
+ *
  * @package AbraFlexi\MultiFlexi
  * @license    https://opensource.org/licenses/MIT MIT
  */
@@ -12,17 +13,17 @@ class AppLaunchForm extends \Ease\TWB4\Form
 {
     /**
      * Application Launch Form
-     * 
+     *
      * @param int $app
      * @param int $company
      */
     public function __construct(int $app, int $company)
     {
         parent::__construct(['name' => 'appLaunchForm', 'action' => 'newjob.php', 'method' => 'post', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']);
-        
-        $this->addItem('APP ID: '.$app);
-        $this->addItem('Company ID: '.$company);
-        
+
+        $this->addItem('APP ID: ' . $app);
+        $this->addItem('Company ID: ' . $company);
+
         $this->addItem(new \Ease\Html\InputHiddenTag('app_id', $app));
         $this->addItem(new \Ease\Html\InputHiddenTag('company_id', $company));
         $this->addItem(new \Ease\TWB4\SubmitButton([_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg btn-block '));
@@ -39,7 +40,5 @@ class AppLaunchForm extends \Ease\TWB4\Form
         foreach ($uploadFields as $field) {
             $this->addInput(new \Ease\Html\InputFileTag($field['keyname'], $field['defval'], ['id' => 'input' . $field['keyname']]), $field['keyname'], $field['defval'], $field['description']);
         }
-
-
     }
 }

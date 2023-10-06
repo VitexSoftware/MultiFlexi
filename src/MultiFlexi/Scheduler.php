@@ -1,14 +1,16 @@
 <?php
 
 declare(strict_types=1);
+
 /**
- * Multi Flexi - 
+ * Multi Flexi -
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
  */
+
 /**
- * 
+ *
  *
  * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software
@@ -23,12 +25,11 @@ namespace MultiFlexi;
  */
 class Scheduler extends Engine
 {
-
     public $myTable = 'schedule';
 
     /**
      * Save Job excution time
-     * 
+     *
      * @param Job $job
      */
     public function addJob(Job $job, \DateTime $when)
@@ -37,11 +38,11 @@ class Scheduler extends Engine
     }
 
     /**
-     * 
+     *
      * @return int
      */
     public function getCurrentJobs()
     {
-        return $this->listingQuery()->where('after > '.(new \DateTime)->getTimestamp());
+        return $this->listingQuery()->where('after > ' . (new \DateTime())->getTimestamp());
     }
 }
