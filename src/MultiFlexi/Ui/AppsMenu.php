@@ -17,18 +17,19 @@ use MultiFlexi\Application;
  *
  * @author vitex
  */
-class AppsMenu extends MainPageMenu {
-
+class AppsMenu extends MainPageMenu
+{
     /**
      *
-     * @var Application 
+     * @var Application
      */
     public $apper = null;
 
     /**
      * Application Status Menu
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->apper = new Application();
         foreach ($this->apper->getAll() as $appData) {
@@ -38,14 +39,15 @@ class AppsMenu extends MainPageMenu {
 
     /**
      * Add Appliaction card
-     * 
+     *
      * @param int $id appliaction ID
      * @param string $nazev
      * @param string $popis
      * @param string $executable
      * @param string $image
      */
-    public function addApp($id, $nazev, $popis, $executable, $image, $status) {
+    public function addApp($id, $nazev, $popis, $executable, $image, $status)
+    {
         if (Application::doesBinaryExist($executable) && ($status == 1)) {
             $statusFound = true;
             $properties['class'] = 'text-white bg-success mb-3';
@@ -59,5 +61,4 @@ class AppsMenu extends MainPageMenu {
         }
         $this->addMenuItem($nazev, 'app.php?id=' . $id, $image, $popis, _('Configure'), $properties);
     }
-
 }

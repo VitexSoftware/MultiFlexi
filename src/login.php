@@ -30,11 +30,11 @@ $shared = Shared::singleton();
 $login = $oPage->getRequestValue('login');
 if ($login) {
 //    try {
-//        $oUser = Shared::user(new User());
+//        \Ease\Shared::user() = Shared::user(new User());
 //    } catch (PDOException $e) {
 //        echo 'Caught exception: ', $e->getMessage(), "\n";
 //    }
-    if ($oUser->tryToLogin($_POST)) {
+    if (\Ease\Shared::user()->tryToLogin($_POST)) {
         $oPage->redirect('main.php');
         session_write_close();
         exit;
@@ -57,11 +57,18 @@ $loginColumn = $loginRow->addItem(new Col(4));
 
 $submit = new SubmitButton(_('Sign in'), 'success btn-lg', ['id' => 'signin']);
 
-$loginPanel = new Panel(new ImgTag('images/project-logo.svg', 'logo', ['width' => 20]),
-        'secondary', null, $submit);
-$loginPanel->addItem(new FormGroup(_('Username'),
-                new InputTextTag('login', $login),
-                '', _('the username you chose')));
+$loginPanel = new Panel(
+    new ImgTag('images/project-logo.svg', 'logo', ['width' => 20]),
+    'secondary',
+    null,
+    $submit
+);
+$loginPanel->addItem(new FormGroup(
+    _('Username'),
+    new InputTextTag('login', $login),
+    '',
+    _('the username you chose')
+));
 
 $loginPanel->addItem(new FormGroup(_('Password'), new InputPasswordTag('password', $login)));
 
@@ -69,9 +76,11 @@ $loginPanel->body->setTagCss(['margin' => '20px']);
 
 $loginColumn->addItem($loginPanel);
 
-$passRecoveryColumn = $loginRow->addItem(new Col(4,
-                new LinkButton('passwordrecovery.php', '<i class="fa fa-key"></i>
-' . _('Lost password recovery'), 'warning')));
+$passRecoveryColumn = $loginRow->addItem(new Col(
+    4,
+    new LinkButton('passwordrecovery.php', '<i class="fa fa-key"></i>
+' . _('Lost password recovery'), 'warning')
+));
 
 $oPage->container->addItem(new Form([], [], $loginRow));
 

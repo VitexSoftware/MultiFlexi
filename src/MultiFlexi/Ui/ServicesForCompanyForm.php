@@ -26,10 +26,9 @@ use MultiFlexi\Company;
  */
 class ServicesForCompanyForm extends Form
 {
-
     /**
      * Assign Services for company
-     * 
+     *
      * @param Company $company
      * @param array $tagProperties
      */
@@ -43,7 +42,7 @@ class ServicesForCompanyForm extends Form
         $jobber = new \MultiFlexi\Job();
         foreach ($allEnabledApps as $appData) {
             $appData['company_id'] = $companyID;
-            if(array_key_exists($appData['id'], $assigned)){
+            if (array_key_exists($appData['id'], $assigned)) {
                 $appData['interv'] = $assigned[$appData['id']]['interv'];
                 $appData['runtemplateid'] = $assigned[$appData['id']]['id'];
             }
@@ -52,7 +51,7 @@ class ServicesForCompanyForm extends Form
     }
 
     /**
-     * 
+     *
      */
     public function finalize()
     {

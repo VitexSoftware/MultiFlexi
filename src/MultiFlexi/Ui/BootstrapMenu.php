@@ -9,8 +9,8 @@
 
 namespace MultiFlexi\Ui;
 
-class BootstrapMenu extends \Ease\TWB4\Navbar {
-
+class BootstrapMenu extends \Ease\TWB4\Navbar
+{
     /**
      * Navigace.
      *
@@ -20,8 +20,8 @@ class BootstrapMenu extends \Ease\TWB4\Navbar {
 
     /**
      * Brand icon link
-     * 
-     * @var string 
+     *
+     * @var string
      */
     public $mainpage = 'main.php';
 
@@ -32,8 +32,11 @@ class BootstrapMenu extends \Ease\TWB4\Navbar {
      * @param mixed  $content
      * @param array  $properties
      */
-    public function __construct($name = null, $content = null,
-            $properties = []) {
+    public function __construct(
+        $name = null,
+        $content = null,
+        $properties = []
+    ) {
 
         parent::__construct(new \Ease\Html\ImgTag('images/project-logo.svg', $name, ['width' => 30, 'height' => 30, 'class' => 'img-rounded d-inline-block align-top']), 'main-menu', ['class' => 'navbar-fixed-top' . (array_key_exists('class', $properties) ? $properties['class'] : '')]);
 
@@ -48,5 +51,4 @@ class BootstrapMenu extends \Ease\TWB4\Navbar {
             $this->addItem($content);
         }
     }
-
 }

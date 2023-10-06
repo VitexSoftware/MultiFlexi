@@ -29,7 +29,7 @@ $oPage->addJavaScript('$.fn.dataTable.ext.buttons.dismisAll = {
 
 $oPage->includeJavascript('js/dismisLog.js');
 
-$oPage->container->addItem(new DBDataTable(new \MultiFlexi\Logger(),['buttons' => ['dismisAll']]));
+$oPage->container->addItem(new DBDataTable(new \MultiFlexi\Logger(), ['buttons' => ['dismisAll']]));
 
 $oPage->addItem(new PageBottom());
 

@@ -15,7 +15,6 @@ namespace MultiFlexi;
  */
 class Configuration extends \Ease\SQL\Engine
 {
-
     public $myTable = 'configuration';
 
     public function __construct($identifier = null, $options = array())
@@ -73,7 +72,7 @@ class Configuration extends \Ease\SQL\Engine
 
     /**
      * Apply Configuration
-     * 
+     *
      * @param int $companyId
      * @param int $appId
      */
@@ -87,10 +86,10 @@ class Configuration extends \Ease\SQL\Engine
 
     /**
      * App Configuration values
-     * 
+     *
      * @param int $companyId
      * @param int $appId
-     * 
+     *
      * @return array
      */
     public function getAppConfig($companyId, $appId)

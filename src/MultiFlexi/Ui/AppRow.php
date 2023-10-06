@@ -1,14 +1,16 @@
 <?php
 
 declare(strict_types=1);
+
 /**
- * Multi Flexi - 
+ * Multi Flexi -
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
  */
+
 /**
- * 
+ *
  *
  * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software
@@ -16,10 +18,10 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use \Ease\Html\ATag,
+use Ease\Html\ATag,
     \Ease\Html\ImgTag,
     \Ease\TWB4\FormGroup;
-use const \__PHPUNIT_ATTR_DRIVER_NAME__;
+use const __PHPUNIT_ATTR_DRIVER_NAME__;
 
 /**
  * Description of AppRow
@@ -28,10 +30,9 @@ use const \__PHPUNIT_ATTR_DRIVER_NAME__;
  */
 class AppRow extends \Ease\TWB4\Row
 {
-
     /**
      * Application in Company context
-     * 
+     *
      * @param array $appData
      * @param array $properties
      */
@@ -47,14 +48,14 @@ class AppRow extends \Ease\TWB4\Row
         $appFields = \MultiFlexi\Conffield::getAppConfigs($appId);
 
         /* if any of fields is upload type then add file input button */
-        $uploadFields = array_filter($appFields, function($field) {
+        $uploadFields = array_filter($appFields, function ($field) {
             return $field['type'] == 'file';
         });
-    
-        if(empty($uploadFields)){
+
+        if (empty($uploadFields)) {
             $intervalChooser = new \MultiFlexi\Ui\IntervalChooser($appId . '_interval', array_key_exists('interv', $appData) ? $appData['interv'] : 'n', ['id' => $appId . '_interval', 'data-company' => $appData['company_id'], 'checked' => 'true', 'data-app' => $appId]);
         } else {
-            $intervalChooser = new \Ease\TWB4\Badge('info',_('Upload field does not allow application scheduling')); 
+            $intervalChooser = new \Ease\TWB4\Badge('info', _('Upload field does not allow application scheduling'));
         }
 
 
@@ -74,7 +75,7 @@ class AppRow extends \Ease\TWB4\Row
 
         $logoColumn->addItem($launchButton);
 
-//        $logoColumn->addItem(new \Ease\TWB4\LinkButton('?id=' . $appId, _('Clone'), 'info btn-sm  btn-block')); 
+//        $logoColumn->addItem(new \Ease\TWB4\LinkButton('?id=' . $appId, _('Clone'), 'info btn-sm  btn-block'));
 
         $appConfColumn = $appRow->addColumn(4, new FormGroup(new \Ease\Html\H3Tag(_('Job Config')), $intervalChooser));
         if (array_key_exists('runtemplateid', $appData)) {
@@ -86,7 +87,7 @@ class AppRow extends \Ease\TWB4\Row
         $jobList->addRowHeaderColumns([_('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher')]);
         foreach ($jobs as $job) {
             $job['id'] = new ATag('job.php?id=' . $job['id'], $job['id']);
-            if(empty($job['begin'])){
+            if (empty($job['begin'])) {
                 $job['begin'] = _('Not launched yet');
             } else {
                 $job['begin'] = [$job['begin'], ' ', new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];

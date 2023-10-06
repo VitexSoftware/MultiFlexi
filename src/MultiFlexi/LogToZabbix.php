@@ -1,17 +1,18 @@
 <?php
 
-declare(strict_types=1);
 /**
- * Multi Flexi - 
+ * Multi Flexi -
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software
  */
 
+declare(strict_types=1);
+
 namespace MultiFlexi;
 
-use \MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
-use \MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
+use MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
+use MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
 
 /**
  * Send All Log messages to zabbix
@@ -20,7 +21,6 @@ use \MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
  */
 class LogToZabbix implements \Ease\Logger\Loggingable
 {
-
     /**
      * Saves obejct instace (singleton...).
      */
@@ -38,7 +38,7 @@ class LogToZabbix implements \Ease\Logger\Loggingable
 
     /**
      * Send message to Zabbix
-     * 
+     *
      * @param mixed $caller
      * @param string $message
      * @param string $type

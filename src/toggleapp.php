@@ -33,6 +33,3 @@ if (!is_null($app_id) && !is_null($company_id)) {
 } else {
     http_response_code(404);
 }
-
-
-

@@ -26,7 +26,7 @@ $class = \Ease\WebPage::getRequestValue('class');
 /**
  * @var Engine Data Source
  */
-$engine = new $class;
+$engine = new $class();
 // DataTables PHP library
 //include( './lib/DataTables.php' );
 //if ($oPage->getRequestValue('columns')) {

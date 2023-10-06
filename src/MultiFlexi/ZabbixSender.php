@@ -1,8 +1,9 @@
 <?php
 
 declare(strict_types=1);
+
 /**
- * Multi Flexi - 
+ * Multi Flexi -
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
@@ -10,10 +11,10 @@ declare(strict_types=1);
 
 namespace MultiFlexi;
 
-use \MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
-use \MultiFlexi\Zabbix\Response as ZabbixResponse;
-use \MultiFlexi\Zabbix\Exception\ZabbixNetworkException;
-use \MultiFlexi\Zabbix\Exception\ZabbixResponseException;
+use MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
+use MultiFlexi\Zabbix\Response as ZabbixResponse;
+use MultiFlexi\Zabbix\Exception\ZabbixNetworkException;
+use MultiFlexi\Zabbix\Exception\ZabbixResponseException;
 
 /**
  * Description of ZabbixSender
@@ -22,11 +23,10 @@ use \MultiFlexi\Zabbix\Exception\ZabbixResponseException;
  */
 class ZabbixSender extends \MultiFlexi\Zabbix\ZabbixSender
 {
-
     /**
-     * Instance instances array 
+     * Instance instances array
      *
-     * @var array 
+     * @var array
      */
     protected static $instances = array();
 
@@ -73,10 +73,9 @@ class ZabbixSender extends \MultiFlexi\Zabbix\ZabbixSender
     private $disable = false;
 
     public function __construct(
-            string $serverAddress,
-            int $serverPort = 10051
-    )
-    {
+        string $serverAddress,
+        int $serverPort = 10051
+    ) {
         $this->serverAddress = $serverAddress;
         $this->serverPort = $serverPort;
     }
@@ -94,11 +93,11 @@ class ZabbixSender extends \MultiFlexi\Zabbix\ZabbixSender
     }
 
     /**
-     * Zabbix Packet Header 
-     *  
+     * Zabbix Packet Header
+     *
      * @param int $plain_data_size
      * @param int $compressed_data_size
-     * 
+     *
      * @return string
      */
     public static function zbxCreateHeader($plain_data_size, $compressed_data_size = null)
@@ -140,43 +139,43 @@ class ZabbixSender extends \MultiFlexi\Zabbix\ZabbixSender
         }
 
         $socketConnected = socket_connect(
-                $socket,
-                $this->serverAddress,
-                $this->serverPort
+            $socket,
+            $this->serverAddress,
+            $this->serverPort
         );
         if (!$socketConnected) {
             throw new ZabbixNetworkException(
-                            sprintf(
-                                    "can't connect to %s:%d",
-                                    $this->serverAddress,
-                                    $this->serverPort
-                            )
+                sprintf(
+                    "can't connect to %s:%d",
+                    $this->serverAddress,
+                    $this->serverPort
+                )
             );
         }
 
         $bytesCount = socket_send(
-                $socket,
-                $payload,
-                $payloadLength,
-                0
+            $socket,
+            $payload,
+            $payloadLength,
+            0
         );
         switch (true) {
-            case!$bytesCount:
+            case !$bytesCount:
                 throw new ZabbixNetworkException(
-                                sprintf(
-                                        "can't send %d bytes to zabbix server %s:%d",
-                                        $payloadLength,
-                                        $this->serverAddress,
-                                        $this->serverPort
-                                )
+                    sprintf(
+                        "can't send %d bytes to zabbix server %s:%d",
+                        $payloadLength,
+                        $this->serverAddress,
+                        $this->serverPort
+                    )
                 );
             case $bytesCount != $payloadLength:
                 throw new ZabbixNetworkException(
-                                sprintf(
-                                        "incorrect count of bytes %s sended, expected: %d",
-                                        $bytesCount,
-                                        $payloadLength
-                                )
+                    sprintf(
+                        "incorrect count of bytes %s sended, expected: %d",
+                        $bytesCount,
+                        $payloadLength
+                    )
                 );
             default:
                 break;
@@ -200,34 +199,34 @@ class ZabbixSender extends \MultiFlexi\Zabbix\ZabbixSender
         $responseBuffer = "";
         $responseBufferLength = 2048;
         $bytesCount = socket_recv(
-                $socket,
-                $responseBuffer,
-                $responseBufferLength,
-                0
+            $socket,
+            $responseBuffer,
+            $responseBufferLength,
+            0
         );
         if (!$bytesCount) {
             throw new ZabbixNetworkException(
-                            "can't receive response from socket"
+                "can't receive response from socket"
             );
         }
 
         $responseWithoutHeader = substr(
-                $responseBuffer,
-                self::RESPONSE_HEADER_LENGTH
+            $responseBuffer,
+            self::RESPONSE_HEADER_LENGTH
         );
         $response = json_decode(
-                $responseWithoutHeader,
-                true
+            $responseWithoutHeader,
+            true
         );
         switch (true) {
             case $response === null:
             case $response === false:
                 throw new ZabbixResponseException(
-                                sprintf(
-                                        "can't decode zabbix server response %s, reason: %s",
-                                        $responseWithoutHeader,
-                                        json_last_error_msg()
-                                )
+                    sprintf(
+                        "can't decode zabbix server response %s, reason: %s",
+                        $responseWithoutHeader,
+                        json_last_error_msg()
+                    )
                 );
             default:
                 break;
@@ -236,7 +235,7 @@ class ZabbixSender extends \MultiFlexi\Zabbix\ZabbixSender
         $zabbixResponse = new ZabbixResponse($response);
         if (!$zabbixResponse->isSuccess()) {
             throw new ZabbixResponseException(
-                            'zabbix server returned non-successfull response'
+                'zabbix server returned non-successfull response'
             );
         }
     }

@@ -14,21 +14,26 @@ namespace MultiFlexi\Ui;
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class CustomerSelect extends \Ease\Html\SelectTag {
-
+class CustomerSelect extends \Ease\Html\SelectTag
+{
     use \Ease\SQL\Orm;
 
-    public function __construct($name, $defaultValue = null, $itemsIDs = false,
-            $properties = array()) {
+    public function __construct(
+        $name,
+        $defaultValue = null,
+        $itemsIDs = false,
+        $properties = array()
+    ) {
         parent::__construct($name, $this->loadItems(), $defaultValue, $properties);
     }
 
     /**
      * obtain Availble AbraFlexi servers
-     * 
+     *
      * @return array
      */
-    public function loadItems() {
+    public function loadItems()
+    {
         $customers = ['' => _('Choose customer')];
         $this->setMyTable('customer');
         $customersRaw = $this->getColumnsFromSQL(['id', 'firstname', 'lastname'], null, 'lastname');
@@ -39,5 +44,4 @@ class CustomerSelect extends \Ease\Html\SelectTag {
         }
         return $customers;
     }
-
 }

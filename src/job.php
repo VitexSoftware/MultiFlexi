@@ -33,12 +33,14 @@ $instanceRow->addColumn(8, new \Ease\Html\H1Tag($instanceName));
 $instanceRow->addColumn(4, 'xxx');
 
 $oPage->container->addItem(
-        new Panel([_('App Run'), $instanceRow,
-            new EnvironmentView($jobber->getDataValue('env') ? unserialize($jobber->getDataValue('env')) : [] )], 'info',
-                new \Ease\Html\DivTag(nl2br((new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stdout')))), ['style' => 'font-family: monospace; background-color: black;'])
-                ,
-                new \Ease\Html\DivTag(nl2br((new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stderr')))))
-        ));
+    new Panel(
+        [_('App Run'), $instanceRow,
+            new EnvironmentView($jobber->getDataValue('env') ? unserialize($jobber->getDataValue('env')) : [])],
+        'info',
+        new \Ease\Html\DivTag(nl2br((new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stdout')))), ['style' => 'font-family: monospace; background-color: black;']),
+        new \Ease\Html\DivTag(nl2br((new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stderr')))))
+    )
+);
 $oPage->addItem(new PageBottom());
 WebPage::singleton()->addCss('
 .iframe-container {

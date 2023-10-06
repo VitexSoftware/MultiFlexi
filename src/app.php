@@ -69,9 +69,11 @@ $panel[] = [new \Ease\Html\H3Tag(_('Last 10 Jobs')), $jobList];
 $panel[] = new LinkButton('logs.php?apps_id=' . $apps->getMyKey(), _('Application Log'), 'info');
 $panel[] = new LinkButton('joblist.php?app_id=' . $apps->getMyKey(), _('All Application Jobs history'), 'info');
 $instanceRow->addColumn(4, $panel);
-$oPage->container->addItem(new Panel($instanceName, 'inverse',
-                $instanceRow,
-                is_null($apps->getMyKey()) ?
+$oPage->container->addItem(new Panel(
+    $instanceName,
+    'inverse',
+    $instanceRow,
+    is_null($apps->getMyKey()) ?
                         new LinkButton('', _('Config fields'), 'inverse disabled') :
                         [new LinkButton('conffield.php?app_id=' . $apps->getMyKey(), _('Config fields'), 'warning'),
                     new ConfigFieldsBadges(\MultiFlexi\Conffield::getAppConfigs($apps->getMyKey()))

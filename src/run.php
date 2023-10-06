@@ -16,7 +16,7 @@ require_once './init.php';
 $oPage->onlyForLogged();
 
 $jobber = new Job();
-$jobber->prepareJob($oPage->getRequestValue('id', 'int'));  
+$jobber->prepareJob($oPage->getRequestValue('id', 'int'));
 echo new \Ease\Html\H2Tag(str_replace(' ', '&nbsp;', $jobber->getCmdline()), ['style' => 'color: green']);
 
 $jobber->performJob();

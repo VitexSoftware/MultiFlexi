@@ -10,7 +10,6 @@ namespace MultiFlexi;
  */
 class Company extends \AbraFlexi\Company
 {
-
     use \Ease\SQL\Orm;
 
     public $keyword = 'company';
@@ -25,14 +24,14 @@ class Company extends \AbraFlexi\Company
     public $myTable = 'company';
 
     /**
-     * 
+     *
      * @var int
      */
     public $abraflexiId;
 
     /**
      * MultiFlexi Company
-     * 
+     *
      * @param mixed $init
      * @param array $options
      */
@@ -58,9 +57,9 @@ class Company extends \AbraFlexi\Company
 
     /**
      * Prepare company
-     * 
+     *
      * @param string $company
-     * 
+     *
      * @return array
      */
     public function prepareCompany($company)
@@ -75,9 +74,9 @@ class Company extends \AbraFlexi\Company
 
     /**
      * WebHook url for Given ID of AbraFlexi instance
-     * 
+     *
      * @param int $instanceId
-     * 
+     *
      * @return string URL for WebHook
      */
     public static function webHookUrl($instanceId)
@@ -85,16 +84,19 @@ class Company extends \AbraFlexi\Company
         $baseUrl = \Ease\Document::phpSelf();
         $urlInfo = parse_url($baseUrl);
         $curFile = basename($urlInfo['path']);
-        $webHookUrl = str_replace($curFile,
-                'webhook.php?instanceid=' . $instanceId, $baseUrl);
+        $webHookUrl = str_replace(
+            $curFile,
+            'webhook.php?instanceid=' . $instanceId,
+            $baseUrl
+        );
         return $webHookUrl;
     }
 
     /**
      * Add requied AbraFlexi label to company
-     * 
+     *
      * @param string $label
-     * 
+     *
      * @return boolean
      */
     public function addAbraFlexiLabel($label)
@@ -123,8 +125,10 @@ class Company extends \AbraFlexi\Company
         if (!isset($stitekID[0]['id'])) {
             $stitek->insertToAbraFlexi($stitekData);
             if ($stitek->lastResponseCode == 201) {
-                $stitek->addStatusMessage(sprintf(_('label %s created'), $label),
-                        'success');
+                $stitek->addStatusMessage(
+                    sprintf(_('label %s created'), $label),
+                    'success'
+                );
             } else {
                 $result = false;
             }
@@ -134,7 +138,7 @@ class Company extends \AbraFlexi\Company
     }
 
     /**
-     * 
+     *
      * @param string $hookurl
      */
     public function registerWebHook($hookurl)
@@ -144,21 +148,25 @@ class Company extends \AbraFlexi\Company
         $hooker->setDataValue('skipUrlTest', 'true');
         $hookResult = $hooker->register($hookurl, $format);
         if ($hookResult) {
-            $hooker->addStatusMessage(sprintf(_('Hook %s was registered'),
-                            $hookurl), 'success');
+            $hooker->addStatusMessage(sprintf(
+                _('Hook %s was registered'),
+                $hookurl
+            ), 'success');
             $hookurl = '';
         } else {
-            $hooker->addStatusMessage(sprintf(_('Hook %s not registered'),
-                            $hookurl), 'warning');
+            $hooker->addStatusMessage(sprintf(
+                _('Hook %s not registered'),
+                $hookurl
+            ), 'warning');
         }
         return (($hooker->lastResponseCode == 201) && ($hooker->lastResponseCode == 200));
     }
 
     /**
      * Eanble Or disble ChangesAPI
-     * 
+     *
      * @param boolean $enable requested state
-     * 
+     *
      * @return boolean
      */
     public function changesApi($enable)
@@ -168,17 +176,21 @@ class Company extends \AbraFlexi\Company
 //        $globalVersion = $changer->getGlobalVersion();
 
         if ($enable === true) {
-            if ($chapistatus === FALSE) {
+            if ($chapistatus === false) {
                 $changer->enable();
-                $changer->addStatusMessage(_('ChangesAPI was enabled'),
-                        'success');
+                $changer->addStatusMessage(
+                    _('ChangesAPI was enabled'),
+                    'success'
+                );
                 $chapistatus = true;
             }
         } else {
-            if ($chapistatus === TRUE) {
+            if ($chapistatus === true) {
                 $changer->disable();
-                $changer->addStatusMessage(_('ChangesAPI was disabled'),
-                        'warning');
+                $changer->addStatusMessage(
+                    _('ChangesAPI was disabled'),
+                    'warning'
+                );
                 $chapistatus = false;
             }
         }
@@ -187,9 +199,9 @@ class Company extends \AbraFlexi\Company
 
     /**
      * Prepare data for save
-     * 
+     *
      * @param array $data
-     * 
+     *
      * @return int
      */
     public function takeData($data)
@@ -257,7 +269,7 @@ class Company extends \AbraFlexi\Company
 
     /**
      * Use Given AbraFlexi for connections
-     * 
+     *
      * @param int $abraflexiID
      * @param string $company Description
      */
@@ -272,9 +284,9 @@ class Company extends \AbraFlexi\Company
 
     /**
      * Convert data from AbraFlexi column names to SQL column names
-     * 
+     *
      * @param array $listing
-     * 
+     *
      * @return array
      */
     public static function convertListingData($listing)
@@ -289,7 +301,7 @@ class Company extends \AbraFlexi\Company
 
     /**
      * Get Current record name
-     * 
+     *
      * @return string
      */
     public function getRecordName()
@@ -298,7 +310,7 @@ class Company extends \AbraFlexi\Company
     }
 
     /**
-     * 
+     *
      */
     public function prepareRemoteCompany($data)
     {
@@ -320,9 +332,9 @@ class Company extends \AbraFlexi\Company
 
     /**
      * Check for given company presence in AbraFlexi
-     * 
+     *
      * @param array $companyData
-     * 
+     *
      * @return string company dbNazev code
      */
     public function companyPresentInAbraFlexi($companyData = null)
@@ -348,8 +360,10 @@ class Company extends \AbraFlexi\Company
                                 break;
                             }
                         } else {
-                            $this->addStatusMessage(sprintf(_('Company with no ID'),
-                                            $candidat['nazev']), 'warning');
+                            $this->addStatusMessage(sprintf(
+                                _('Company with no ID'),
+                                $candidat['nazev']
+                            ), 'warning');
                         }
                         if (array_key_exists('nazFirmy', $nast) || empty($nast['nazFirmy'])) {
                             if ($nast['nazFirmy'] == $companyData['nazev']) {
@@ -366,9 +380,9 @@ class Company extends \AbraFlexi\Company
 
     /**
      * Create new \AbraFlexi company
-     * 
+     *
      * @param string $companyData
-     * 
+     *
      * @return array  new company info
      */
     public function createCompanyInAbraFlexi($companyData = null)
@@ -384,11 +398,15 @@ class Company extends \AbraFlexi\Company
             ksort($companies);
             $companyInfo = end($companies);
             $this->setCompany($companyInfo['dbNazev']);
-            $this->addStatusMessage(sprintf(_('Company created'),
-                            $this->getApiURL()), 'success');
+            $this->addStatusMessage(sprintf(
+                _('Company created'),
+                $this->getApiURL()
+            ), 'success');
             if (!empty($companyData['ic'])) {
-                $setter = new \AbraFlexi\Nastaveni(null,
-                        $this->getConnectionOptions());
+                $setter = new \AbraFlexi\Nastaveni(
+                    null,
+                    $this->getConnectionOptions()
+                );
                 $settings = $setter->getAllFromAbraFlexi();
                 foreach ($settings as $setting) {
                     $this->insertToAbraFlexi(['id' => $setting['id'], 'ic' => $companyData['ic']]);
@@ -399,7 +417,7 @@ class Company extends \AbraFlexi\Company
     }
 
     /**
-     * 
+     *
      */
     public function setEnvironment()
     {
@@ -416,7 +434,7 @@ class Company extends \AbraFlexi\Company
 
     /**
      * Link to record's page
-     * 
+     *
      * @return string
      */
     public function getLink()
@@ -425,7 +443,7 @@ class Company extends \AbraFlexi\Company
     }
 
     /**
-     * 
+     *
      */
     public function __destruct()
     {
@@ -433,7 +451,7 @@ class Company extends \AbraFlexi\Company
     }
 
     /**
-     * 
+     *
      * @return array
      */
     public function __sleep()

@@ -14,8 +14,8 @@ use MultiFlexi\Ui\WebPage;
 /**
  * Page TOP.
  */
-class PageTop extends \Ease\Html\DivTag {
-
+class PageTop extends \Ease\Html\DivTag
+{
     /**
      * Titulek stránky.
      *
@@ -28,7 +28,8 @@ class PageTop extends \Ease\Html\DivTag {
      *
      * @param string $pageTitle
      */
-    public function __construct($pageTitle = null) {
+    public function __construct($pageTitle = null)
+    {
         parent::__construct();
         if (!is_null($pageTitle)) {
             WebPage::singleton()->setPageTitle($pageTitle);
@@ -36,8 +37,8 @@ class PageTop extends \Ease\Html\DivTag {
         WebPage::singleton()->body->addAsFirst(new MainMenu());
     }
 
-    public function finalize() {
+    public function finalize()
+    {
         return parent::finalize();
     }
-
 }

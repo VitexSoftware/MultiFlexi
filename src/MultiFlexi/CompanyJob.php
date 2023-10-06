@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi Flexi - 
+ * Multi Flexi -
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software
@@ -14,14 +14,13 @@ use MultiFlexi\DatabaseEngine;
 
 class CompanyJob extends DBEngine implements DatabaseEngine
 {
-
     public $myTable = 'job';
     public $companyId = null;
     public $appId = null;
 
     /**
      * columns to be selected from database
-     * 
+     *
      * @return array
      */
     public function getColumns()
@@ -29,13 +28,13 @@ class CompanyJob extends DBEngine implements DatabaseEngine
         return ['id', 'company_id', 'app_id', 'env', 'exitcode', 'launched_by', 'launched', 'finished', 'finished_by', 'status', 'status_message'];
     }
     /**
-     * Columns 
+     * Columns
      */
 
     /**
-     * 
+     *
      * @param array $columns
-     * 
+     *
      * @return array
      */
     public function columns($columns = [])

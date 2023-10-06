@@ -1,14 +1,16 @@
 <?php
 
 declare(strict_types=1);
+
 /**
- * Multi Flexi - 
+ * Multi Flexi -
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
  */
+
 /**
- * 
+ *
  *
  * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software
@@ -16,7 +18,7 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use \MultiFlexi\Application,
+use MultiFlexi\Application,
     \MultiFlexi\Company,
     \Ease\TWB4\Form;
 
@@ -27,13 +29,12 @@ use \MultiFlexi\Application,
  */
 class JobScheduleForm extends Form
 {
-
     private $company;
     private $app;
 
     /**
      * Job Sechedule Form
-     * 
+     *
      * @param Application $app
      * @param Company     $company
      */
@@ -45,7 +46,7 @@ class JobScheduleForm extends Form
     }
 
     /**
-     * 
+     *
      * @return booelan
      */
     public function finalize()
@@ -57,7 +58,7 @@ class JobScheduleForm extends Form
     }
 
     /**
-     * 
+     *
      */
     public function timeSelect()
     {
@@ -65,7 +66,7 @@ class JobScheduleForm extends Form
     }
 
     /**
-     * 
+     *
      */
     public function uploadFields()
     {

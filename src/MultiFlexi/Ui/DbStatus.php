@@ -14,12 +14,13 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class DbStatus extends \Ease\TWB4\Row {
-
+class DbStatus extends \Ease\TWB4\Row
+{
     /**
      * Show status of database
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $abraflexis = (string) (new \MultiFlexi\AbraFlexis())->listingQuery()->count();
         $customers = (string) (new \MultiFlexi\Customer())->listingQuery()->count();
@@ -33,5 +34,4 @@ class DbStatus extends \Ease\TWB4\Row {
         $this->addColumn(2, new \Ease\Html\ButtonTag([_('Companies') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $companys)], ['class' => 'btn btn-default', 'type' => 'button']));
         $this->addColumn(2, new \Ease\Html\ButtonTag([_('Assigned') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $assigned)], ['class' => 'btn btn-default', 'type' => 'button']));
     }
-
 }

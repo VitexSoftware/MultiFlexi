@@ -14,11 +14,12 @@ namespace MultiFlexi;
  *
  * @author vitex
  */
-class Conffield extends \Ease\SQL\Engine {
-
+class Conffield extends \Ease\SQL\Engine
+{
     public $myTable = 'conffield';
 
-    public function takeData($data) {
+    public function takeData($data)
+    {
         $checked = false;
         unset($data['add']);
         if (array_key_exists('app_id', $data)) {
@@ -32,17 +33,18 @@ class Conffield extends \Ease\SQL\Engine {
     }
 
     /**
-     * 
+     *
      * @param int $appId
-     * 
+     *
      * @return array
      */
-    public function appConfigs($appId) {
+    public function appConfigs($appId)
+    {
         return $this->getColumnsFromSQL(['*'], ['app_id' => $appId], 'keyname', 'keyname');
     }
 
-    public static function getAppConfigs($appId) {
-        return (new self)->appConfigs($appId);
+    public static function getAppConfigs($appId)
+    {
+        return (new self())->appConfigs($appId);
     }
-
 }

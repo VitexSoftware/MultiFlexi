@@ -16,9 +16,8 @@ namespace MultiFlexi\Ui;
  */
 class EnvironmentView extends \Ease\Html\TableTag
 {
-
     /**
-     * 
+     *
      * @param array $environment
      * @param array $properties
      */

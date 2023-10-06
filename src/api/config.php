@@ -1,12 +1,11 @@
 <?php
 
 /**
- * Multi Flexi - 
+ * Multi Flexi -
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
  */
-
 
 /**
  * App configuration defaults for production.

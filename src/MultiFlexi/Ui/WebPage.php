@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi Flexi  - WebPage class
  *
@@ -28,7 +29,7 @@ class WebPage extends \Ease\TWB4\WebPage
     public $customer = null;
 
     /**
-     * 
+     *
      * @param string $pageTitle
      */
     public function __construct($pageTitle = null)

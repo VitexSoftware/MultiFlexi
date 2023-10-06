@@ -14,9 +14,10 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class CustomAppConfigForm extends EngineForm {
-
-    public function __construct($engine) {
+class CustomAppConfigForm extends EngineForm
+{
+    public function __construct($engine)
+    {
         parent::__construct($engine, null, ['method' => 'post', 'action' => 'custserviceconfig.php']);
 
         $values = $engine->getColumnsFromSQL(['name', 'value'], ['app_id' => $engine->getDataValue('app_id'), 'company_id' => $engine->getDataValue('company_id')], 'name', 'name');
@@ -34,5 +35,4 @@ class CustomAppConfigForm extends EngineForm {
         $this->addItem(new \Ease\Html\InputHiddenTag('company_id', $engine->getDataValue('company_id')));
         $this->addItem(new \Ease\TWB4\SubmitButton(_('Save'), 'success btn-lg btn-block'));
     }
-
 }

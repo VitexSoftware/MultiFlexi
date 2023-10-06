@@ -15,6 +15,7 @@ use MultiFlexi\Ui\WebPage;
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
  */
+
 require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('App custom config Fields')));
@@ -28,8 +29,10 @@ if ($oPage->isPosted()) {
     if ($configurator->takeData($_POST) && !is_null($configurator->saveToSQL())) {
         $configurator->addStatusMessage(_('Config fields Saved'), 'success');
     } else {
-        $configurator->addStatusMessage(_('Error saving Config fields'),
-                'error');
+        $configurator->addStatusMessage(
+            _('Error saving Config fields'),
+            'error'
+        );
     }
 }
 

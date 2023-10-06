@@ -16,28 +16,35 @@ $success = false;
 $emailTo = $oPage->getPostValue('Email');
 
 if (empty($emailTo)) {
-    $oUser->addStatusMessage(_('Please enter your email.'));
+    \Ease\Shared::user()->addStatusMessage(_('Please enter your email.'));
 } else {
     $userEmail = addSlashes($emailTo);
 
     $controlUser = new \MultiFlexi\User();
-    $controlData = $controlUser->getColumnsFromSql([$controlUser->getkeyColumn()],
-            ['email' => $userEmail]);
+    $controlData = $controlUser->getColumnsFromSql(
+        [$controlUser->getkeyColumn()],
+        ['email' => $userEmail]
+    );
 
     if (empty($controlData)) {
-        \Ease\Shared::user()->addStatusMessage(sprintf(_('unknow email address %s'),
-                        '<strong>' . $_REQUEST['Email'] . '</strong>'), 'warning');
+        \Ease\Shared::user()->addStatusMessage(sprintf(
+            _('unknow email address %s'),
+            '<strong>' . $_REQUEST['Email'] . '</strong>'
+        ), 'warning');
     } else {
-
         $controlUser->loadFromSQL((int) $controlData[0][$controlUser->getkeyColumn()]);
         $userLogin = $controlUser->getUserLogin();
         $newPassword = \Ease\Functions::randomString(8);
 
         $controlUser->passwordChange($newPassword);
 
-        $email = $oPage->addItem(new \Ease\HtmlMailer($userEmail,
-                        \Ease\Shared::appName() . ' -' . sprintf(_('New password for %s'),
-                                $_SERVER['SERVER_NAME'])));
+        $email = $oPage->addItem(new \Ease\HtmlMailer(
+            $userEmail,
+            \Ease\Shared::appName() . ' -' . sprintf(
+                _('New password for %s'),
+                $_SERVER['SERVER_NAME']
+            )
+        ));
 
         $email->setMailHeaders(['From' => \Ease\Functions::cfg('EMAIL_FROM')]);
         $email->addItem(_('Sign On informations was changed') . ":\n");
@@ -47,8 +54,10 @@ if (empty($emailTo)) {
 
         $email->send();
 
-        $oUser->addStatusMessage(sprintf(_('Your new password was sent to %s'),
-                        '<strong>' . $emailTo . '</strong>'));
+        \Ease\Shared::user()->addStatusMessage(sprintf(
+            _('Your new password was sent to %s'),
+            '<strong>' . $emailTo . '</strong>'
+        ));
         $success = true;
     }
 }
@@ -67,18 +76,27 @@ if (!$success) {
     $columnIII->addItem(new \Ease\TWB4\Label('info', _('Tip')));
 
     $columnIII->addItem(new \Ease\TWB4\Well(
-                    _('Forgot your password? Enter your e-mail address you entered during the registration and we will send you a new one.')));
+        _('Forgot your password? Enter your e-mail address you entered during the registration and we will send you a new one.')
+    ));
 
     $titlerow = new \Ease\TWB4\Row();
     $titlerow->addColumn(4, new \Ease\Html\ImgTag('images/password.png'));
     $titlerow->addColumn(8, new \Ease\Html\H3Tag(_('Password Recovery')));
 
-    $loginPanel = new \Ease\TWB4\Panel(new \Ease\TWB4\Container($titlerow),
-            'success', null,
-            new \Ease\TWB4\SubmitButton(_('Sent New Password'), 'success'));
-    $loginPanel->addItem(new \Ease\TWB4\FormGroup(_('Email'),
-                    new \Ease\Html\InputTextTag('Email', $emailTo,
-                            ['type' => 'email'])));
+    $loginPanel = new \Ease\TWB4\Panel(
+        new \Ease\TWB4\Container($titlerow),
+        'success',
+        null,
+        new \Ease\TWB4\SubmitButton(_('Sent New Password'), 'success')
+    );
+    $loginPanel->addItem(new \Ease\TWB4\FormGroup(
+        _('Email'),
+        new \Ease\Html\InputTextTag(
+            'Email',
+            $emailTo,
+            ['type' => 'email']
+        )
+    ));
     $loginPanel->body->setTagProperties(['style' => 'margin: 20px']);
 
     $mailForm = $columnII->addItem(new \Ease\TWB4\Form(['name' => 'PasswordRecovery']));
@@ -88,8 +106,10 @@ if (!$success) {
         $mailForm->fillUp($_POST);
     }
 } else {
-    $columnII->addItem(new \Ease\TWB4\LinkButton('login.php',
-                    _('Continue')));
+    $columnII->addItem(new \Ease\TWB4\LinkButton(
+        'login.php',
+        _('Continue')
+    ));
     $oPage->redirect('login.php');
 }
 

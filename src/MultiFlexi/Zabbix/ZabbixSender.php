@@ -10,9 +10,9 @@ use MultiFlexi\Zabbix\Exception\ZabbixResponseException;
 class ZabbixSender
 {
     /**
-     * Instance instances array 
+     * Instance instances array
      *
-     * @var array 
+     * @var array
      */
     protected static $instances = array();
 
@@ -62,8 +62,8 @@ class ZabbixSender
      * Create singletone object
      *
      * @param string $name Name of object
-     * 
-     * @return ZabbixSender instance 
+     *
+     * @return ZabbixSender instance
      */
     public static function instance($name = 'default')
     {
@@ -76,20 +76,20 @@ class ZabbixSender
 
     public function __construct(
         string $serverAddress,
-        int $serverPort=10051
+        int $serverPort = 10051
     ) {
         $this->serverAddress = $serverAddress;
         $this->serverPort = $serverPort;
     }
 
     /**
-     * Configure connection parameters to Zabbix server 
+     * Configure connection parameters to Zabbix server
      *
-     * @param array $options Configuration options 
+     * @param array $options Configuration options
      *
      * @return ZabbixSender Configurated instance
      */
-    public function configure(array $options = array()) 
+    public function configure(array $options = array())
     {
         if (isset($options['server_address'])) {
             $this->serverAddress = $options['server_address'];
@@ -108,12 +108,13 @@ class ZabbixSender
 
     /**
      * Disable sender functionality. It may be necessary if you want
-     * switch off send metrics but you don't want remove the code 
+     * switch off send metrics but you don't want remove the code
      * from your project.
      *
      * @return void
      */
-    public function disable() {
+    public function disable()
+    {
         $this->disable = true;
     }
 
@@ -122,7 +123,8 @@ class ZabbixSender
      *
      * @return void
      */
-    public function enable() {
+    public function enable()
+    {
         $this->disable = false;
     }
 
@@ -168,7 +170,7 @@ class ZabbixSender
             );
         }
 
-        $bytesCount= socket_send(
+        $bytesCount = socket_send(
             $socket,
             $payload,
             $payloadLength,

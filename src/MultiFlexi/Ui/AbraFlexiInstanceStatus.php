@@ -14,9 +14,10 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class AbraFlexiInstanceStatus extends \Ease\Html\TableTag {
-
-    public function __construct($abraflexis, $properties = array()) {
+class AbraFlexiInstanceStatus extends \Ease\Html\TableTag
+{
+    public function __construct($abraflexis, $properties = array())
+    {
         $properties['class'] = 'table';
         parent::__construct(null, $properties);
 
@@ -51,10 +52,10 @@ class AbraFlexiInstanceStatus extends \Ease\Html\TableTag {
         }
     }
 
-    public function companys($serverAccess) {
+    public function companys($serverAccess)
+    {
         $companer = new \AbraFlexi\Company(null, $serverAccess);
         $companys = $companer->getAllFromAbraFlexi();
         return empty($companys) ? [] : $companys;
     }
-
 }

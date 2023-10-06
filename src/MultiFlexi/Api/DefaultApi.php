@@ -17,12 +17,13 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @author vitex
  */
-class DefaultApi extends AbstractDefaultApi {
-
-    public function rootGet(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface {
+class DefaultApi extends AbstractDefaultApi
+{
+    public function rootGet(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    {
          return $response->withHeader('Location', 'index.html')->withStatus(302);
     }
-    
+
     /**
      * GET loginGet
      * Summary: Return User&#39;s token
@@ -34,8 +35,8 @@ class DefaultApi extends AbstractDefaultApi {
      * @return ResponseInterface
      */
     public function loginGet(
-            ServerRequestInterface $request,
-            ResponseInterface $response
+        ServerRequestInterface $request,
+        ResponseInterface $response
     ): ResponseInterface {
         $queryParams = $request->getQueryParams();
         $payload = [];
@@ -78,12 +79,13 @@ class DefaultApi extends AbstractDefaultApi {
      * @return ResponseInterface
      * @throws HttpNotImplementedException to force implementation class to override this method
      */
-    public function getApiIndex(ServerRequestInterface $request, ResponseInterface $response, string $suffix): ResponseInterface {
+    public function getApiIndex(ServerRequestInterface $request, ResponseInterface $response, string $suffix): ResponseInterface
+    {
         $data[] = ['path' => 'apps'];
         $data[] = ['path' => 'abrafleixs'];
         $data[] = ['path' => 'users'];
 
-        foreach ($data as $id => $row){
+        foreach ($data as $id => $row) {
             switch ($suffix) {
                 case 'html':
                     $data[$id]['path'] = new \Ease\Html\ATag($data[$id]['path'] . '.html', $data[$id]['path']);
@@ -92,7 +94,7 @@ class DefaultApi extends AbstractDefaultApi {
                     break;
             }
         }
-        
+
         return self::prepareResponse($response, $data, $suffix, 'index');
     }
 
@@ -107,21 +109,23 @@ class DefaultApi extends AbstractDefaultApi {
      * @return ResponseInterface
      * @throws HttpNotImplementedException to force implementation class to override this method
      */
-    public function pingsuffixGet(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, string $suffix): \Psr\Http\Message\ResponseInterface {
+    public function pingsuffixGet(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, string $suffix): \Psr\Http\Message\ResponseInterface
+    {
         return self::prepareResponse($response, [['ping' => 'pong']], $suffix, 'ping');
     }
 
     /**
      * Prepared response by suffix
-     * 
+     *
      * @param \Psr\Http\Message\ResponseInterface $response data to return
      * @param array                               $data     to print
      * @param string                              $suffix   reqired format
      * @param string                              $evidence data subject
-     * 
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public static function prepareResponse($response, $data, $suffix, $evidence = 'data') {
+    public static function prepareResponse($response, $data, $suffix, $evidence = 'data')
+    {
         switch ($suffix) {
             case 'json':
                 $response->getBody()->write(json_encode([$evidence => $data], JSON_UNESCAPED_UNICODE));
@@ -143,15 +147,15 @@ class DefaultApi extends AbstractDefaultApi {
                 $response->getBody()->write((new \Ease\Html\H1Tag($evidence))->getRendered());
                 $response->getBody()->write((new \Ease\Html\TableTag())->populate($data)->getRendered());
                 $response->getBody()->write((string)new \Ease\Html\HrTag());
-                
+
                 $urlParts = pathinfo(\Ease\WebPage::getUri());
-                $baseUrl = $urlParts['dirname'].'/'.$urlParts['filename'];
-                
-                $formatLinks[] = new \Ease\Html\ATag($baseUrl.'.json','json');
-                $formatLinks[] = new \Ease\Html\ATag($baseUrl.'.xml','xml');
-                $formatLinks[] = new \Ease\Html\ATag($baseUrl.'.yaml','yaml');
-                
-                $response->getBody()->write('[ '.implode(' | ', $formatLinks).' ]');
+                $baseUrl = $urlParts['dirname'] . '/' . $urlParts['filename'];
+
+                $formatLinks[] = new \Ease\Html\ATag($baseUrl . '.json', 'json');
+                $formatLinks[] = new \Ease\Html\ATag($baseUrl . '.xml', 'xml');
+                $formatLinks[] = new \Ease\Html\ATag($baseUrl . '.yaml', 'yaml');
+
+                $response->getBody()->write('[ ' . implode(' | ', $formatLinks) . ' ]');
                 $responseFinal = $response->withHeader('Content-type', 'text/html');
                 break;
         }
@@ -160,14 +164,15 @@ class DefaultApi extends AbstractDefaultApi {
 
     /**
      * Array to XML convertor
-     * 
+     *
      * @param type $array
      * @param type $rootElement
      * @param type $xml
-     * 
+     *
      * @return type
      */
-    public static function arrayToXml($array, $rootElement = null, $xml = null) {
+    public static function arrayToXml($array, $rootElement = null, $xml = null)
+    {
         $_xml = $xml;
         if ($_xml === null) {
             $_xml = new \SimpleXMLElement($rootElement !== null ? $rootElement : '<root/>');
@@ -181,5 +186,4 @@ class DefaultApi extends AbstractDefaultApi {
         }
         return $_xml->asXML();
     }
-
 }

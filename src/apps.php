@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi Flexi - Index page.
+ * Multi Flexi - Index of Applications.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020-2023 Vitex Software
@@ -23,14 +23,24 @@ $abraflexis = new Application();
 $allAppData = $abraflexis->getAll();
 
 $fbtable = new Table();
-$fbtable->addRowHeaderColumns([_('ID'), _('Enabled'), _('Image'), _('Name'), _('Description'), _('Executable'), _('Modified')]);
+$fbtable->addRowHeaderColumns([_('ID'), _('Enabled'), _('Image'), _('Name'), _('Description'), _('Executable'), _('Created'), _('Modified'), _('Init Command')]);
 
 foreach ($allAppData as $appData) {
     $appData['image'] = new \Ease\Html\ImgTag($appData['image'], _('Icon'), ['height' => 40]);
+    $appData['enabled'] = ($appData['enabled'] == 1 ? '✔' : '❌');
+    $executablePath = Application::findBinaryInPath($appData['executable']);
+    $appData['executable'] = empty($executablePath) ? '<span title="' . _('Command not found') . '">⁉</span> ' . $appData['executable'] : $executablePath;
+
+    if (empty($appData['setup']) === false) {
+        $initPath = Application::findBinaryInPath($appData['setup']);
+        $appData['setup'] = (empty($initPath) ? '<span title="' . _('Command not found') . '">⁉</span> ' . $appData['setup'] : $initPath);
+    }
+
+    $appData['nazev'] = new \Ease\Html\ATag('app.php?id=' . $appData['id'], $appData['nazev']);
     $fbtable->addRowColumns($appData);
 }
 
-$oPage->container->addItem(new Panel(_('AbraFlexi Instances'), 'default', $fbtable, new LinkButton('app.php', _('Register new'))));
+$oPage->container->addItem(new Panel(_('Applications'), 'default', $fbtable, new LinkButton('app.php', _('Register new'))));
 
 $oPage->addItem(new PageBottom());
 

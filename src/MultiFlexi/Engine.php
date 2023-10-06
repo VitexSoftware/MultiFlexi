@@ -14,17 +14,18 @@ namespace MultiFlexi;
  *
  * @author vitex
  */
-class Engine extends \Ease\SQL\Engine {
-
+class Engine extends \Ease\SQL\Engine
+{
     public $filter = [];
 
     /**
      * MultiFlexi Engine
-     * 
+     *
      * @param mixed $identifier
      * @param array $options
      */
-    public function __construct($identifier = null, $options = []) {
+    public function __construct($identifier = null, $options = [])
+    {
         if (array_key_exists('autoload', $options) === false) {
             $options['autoload'] = true;
         }
@@ -34,25 +35,26 @@ class Engine extends \Ease\SQL\Engine {
 
     /**
      * Set my key value and object name accordigly
-     * 
+     *
      * @param mixed $key value of object indentifier to be set
-     * 
+     *
      * @return bool
      */
     public function setMyKey($key)
     {
         return parent::setMyKey($key) && $this->setObjectName();
     }
-  
+
     /**
      * Save data
-     * 
+     *
      * @param array $data
      * @param boolean $searchForID
-     * 
+     *
      * @return int
      */
-    public function saveToSQL($data = null, $searchForID = false) {
+    public function saveToSQL($data = null, $searchForID = false)
+    {
         if (is_null($data)) {
             $data = $this->getData();
         }
@@ -69,14 +71,14 @@ class Engine extends \Ease\SQL\Engine {
 
     /**
      * Export given environment
-     * 
+     *
      * @param array $env
      */
-    public function exportEnv(array $env) {
+    public function exportEnv(array $env)
+    {
         foreach ($env as $envName => $sqlValue) {
             $this->addStatusMessage(sprintf(_('Setting Environment %s to %s'), $envName, $sqlValue), 'debug');
             putenv($envName . '=' . $sqlValue);
         }
     }
-
 }

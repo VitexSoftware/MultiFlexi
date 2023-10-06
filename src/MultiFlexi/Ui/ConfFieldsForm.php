@@ -21,9 +21,8 @@ use Ease\TWB4\SubmitButton;
  */
 class ConfFieldsForm extends Form
 {
-
     /**
-     * 
+     *
      * @param array $conffields
      * @param mixed $formContents
      * @param array $tagProperties

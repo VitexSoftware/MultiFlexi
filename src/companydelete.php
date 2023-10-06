@@ -42,7 +42,7 @@ if ($oPage->isPosted()) {
     $jobber->deleteFromSQL(['company_id' => $companies->getMyKey()]);
     $confer = new \MultiFlexi\Configuration();
     $confer->deleteFromSQL(['company_id' => $companies->getMyKey()]);
-    
+
     if ($companies->deleteFromSQL(['id' => $companies->getMyKey()])) {
         $companies->addStatusMessage(_('Company Deleted'), 'success');
         $oPage->redirect('abraflexi.php?id=' . $companies->getDataValue('abraflexi'));
@@ -53,8 +53,10 @@ if ($oPage->isPosted()) {
 
 $instanceName = $companies->getDataValue('nazev');
 if (strlen($instanceName)) {
-    $instanceLink = new ATag($companies->getApiURL() . $companies->getDataValue('company'),
-            $companies->getApiURL() . $companies->getDataValue('company'));
+    $instanceLink = new ATag(
+        $companies->getApiURL() . $companies->getDataValue('company'),
+        $companies->getApiURL() . $companies->getDataValue('company')
+    );
 } else {
     $instanceName = _('New Company');
     $instanceLink = null;

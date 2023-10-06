@@ -8,6 +8,7 @@
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  */
+
 /**
  * This is an example of using OAuth2 Application Flow in a specification to describe security to your API.
  * The version of the OpenAPI document: 1.0.0
@@ -108,7 +109,7 @@ $errorMiddleware = $container->get(ErrorMiddleware::class);
 //route11 → (unnamed) → /
 
 
-        
+
 $app->add(new \Tuupola\Middleware\HttpBasicAuthentication([
             'relaxed' => ['localhost'],
 //            'path' => ['/EASE/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/apps/', $path . '/apps', $path . '/users'],

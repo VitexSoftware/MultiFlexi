@@ -37,7 +37,6 @@ if ($oPage->isPosted()) {
         $companyEnver->addEnv($_POST['env']['newkey'], $_POST['env']['newvalue']);
     } else {
         if ($companies->takeData($_POST)) {
-
             /* try to save company or cath error */
             try {
                 $companies->saveToSQL();

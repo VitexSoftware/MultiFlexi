@@ -16,7 +16,6 @@ namespace MultiFlexi;
  */
 class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
 {
-
     /**
      * Saves obejct instace (singleton...).
      */
@@ -27,7 +26,7 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
     public $userId = null;
 
     /**
-     * 
+     *
      */
     public function __construct()
     {
@@ -103,7 +102,7 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
 
     /**
      * Prepare venue able to be saved into sql column
-     * 
+     *
      * @param mixed $caller
      */
     public static function venuize($caller)
@@ -125,9 +124,9 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
     }
 
     /**
-     * 
+     *
      * @param string $string
-     * 
+     *
      * @return string
      */
     public static function removeEmoji($string)

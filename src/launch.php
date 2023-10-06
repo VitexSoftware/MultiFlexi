@@ -21,8 +21,8 @@ $oPage->onlyForLogged();
 
 $oPage->addItem(new PageTop(_('Application')));
 
-$companyId = $oPage->getRequestValue('company_id','int');
-$appId = $oPage->getRequestValue('app_id','int');
+$companyId = $oPage->getRequestValue('company_id', 'int');
+$appId = $oPage->getRequestValue('app_id', 'int');
 
 $runTemplate = new \MultiFlexi\RunTemplate($oPage->getRequestValue('id', 'int'));
 if ($companyId && $appId) {

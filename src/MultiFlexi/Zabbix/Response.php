@@ -36,9 +36,9 @@ class Response
      * @var float
      */
     private $secondSpent;
-    
+
     /**
-     * 
+     *
      * @param array $response
      */
     public function __construct(array $response)
@@ -47,7 +47,7 @@ class Response
     }
 
     /**
-     * 
+     *
      * @return bool
      */
     public function isSuccess(): bool
@@ -56,7 +56,7 @@ class Response
     }
 
     /**
-     * 
+     *
      * @return int
      */
     public function getProcessedCount(): int
@@ -65,7 +65,7 @@ class Response
     }
 
     /**
-     * 
+     *
      * @return int
      */
     public function getFailedCount(): int
@@ -74,7 +74,7 @@ class Response
     }
 
     /**
-     * 
+     *
      * @return int
      */
     public function getTotalCount(): int
@@ -83,14 +83,14 @@ class Response
     }
 
     /**
-     * 
+     *
      * @return float
      */
     public function getSecondsSpent(): float
     {
         return $this->secondSpent;
     }
-    
+
     /**
      * Parse array to Response class properties
      *
@@ -168,5 +168,4 @@ class Response
         $this->totalItems = intval($matches[3]);
         $this->secondSpent = floatval($matches[4]);
     }
-    
 }

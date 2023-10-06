@@ -8,25 +8,27 @@ namespace MultiFlexi;
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2018-2022 Vitex Software
  */
-class Customer extends DBEngine {
-
+class Customer extends DBEngine
+{
     public $nameColumn = 'login';
     public $myTable = 'customer';
     public $keyword = 'customer';
     public $createColumn = 'DatCreate';
     public $modifiedColumn = 'DatSave';
 
-    public function getUserName() {
+    public function getUserName()
+    {
         return $this->getRecordName();
     }
 
     /**
-     * 
+     *
      * @param array $columns
-     * 
+     *
      * @return array
      */
-    public function columns($columns = []) {
+    public function columns($columns = [])
+    {
 
 //+-----------+--------------+------+-----+---------+----------------+
 //| Field     | Type         | Null | Key | Default | Extra          |
@@ -58,12 +60,11 @@ class Customer extends DBEngine {
 
     /**
      * Serialize only data storage
-     * 
+     *
      * @return array
      */
     public function __sleep()
     {
         return ['data'];
     }
-
 }

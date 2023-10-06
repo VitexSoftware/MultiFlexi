@@ -1,28 +1,29 @@
 <?php
 
-namespace MultiFlexi\Ui;
-
-use Ease\TWB4\LinkButton;
-use MultiFlexi\Ui\PageBottom;
-use MultiFlexi\Ui\PageTop;
-
 /**
  * Multi Flexi - Index page.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020-2023 Vitex Software
  */
+
+namespace MultiFlexi\Ui;
+
+use Ease\TWB4\LinkButton;
+use MultiFlexi\Ui\PageBottom;
+use MultiFlexi\Ui\PageTop;
+
 require_once './init.php';
 
 $oPage->addItem(new PageTop(_('Multi Flexi')));
 
 try {
-    if (empty($oUser->listingQuery()->count())) {
-        $oUser->addStatusMessage(_('There is no administrators in the database.'), 'warning');
+    if (empty(\Ease\Shared::user()->listingQuery()->count())) {
+        \Ease\Shared::user()->addStatusMessage(_('There is no administrators in the database.'), 'warning');
         $oPage->container->addItem(new LinkButton('createaccount.php', _('Create first Administrator Account'), 'success'));
     }
 } catch (\PDOException $exc) {
-    $oUser->addStatusMessage($exc->getMessage());
+    \Ease\Shared::user()->addStatusMessage($exc->getMessage());
 }
 
 $oPage->addItem(new PageBottom());

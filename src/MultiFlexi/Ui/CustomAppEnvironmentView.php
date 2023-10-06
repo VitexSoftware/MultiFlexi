@@ -1,14 +1,16 @@
 <?php
 
 declare(strict_types=1);
+
 /**
- * Multi Flexi - 
+ * Multi Flexi -
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
  */
+
 /**
- * 
+ *
  *
  * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software
@@ -17,14 +19,13 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 /**
- * 
+ *
  * Show Customized App Environment only
  *
  * @author vitex
  */
 class CustomAppEnvironmentView extends EnvironmentView
 {
-
     public function __construct(int $appCompanyID, $properties = [])
     {
         $appToCompany = new \MultiFlexi\RunTemplate($appCompanyID);
@@ -32,9 +33,9 @@ class CustomAppEnvironmentView extends EnvironmentView
         $appId = $appToCompany->getDataValue('app_id');
         $customConfig = new \MultiFlexi\Configuration();
         $appFields = \MultiFlexi\Conffield::getAppConfigs($appId);
-        
-        $appConfig = array_combine(array_keys($appFields), array_fill(0,count($appFields), new \Ease\TWB4\Badge('warning', 'unset') ) );
-        
+
+        $appConfig = array_combine(array_keys($appFields), array_fill(0, count($appFields), new \Ease\TWB4\Badge('warning', 'unset')));
+
         foreach ($customConfig->getAppConfig($companyId, $appId) as $cfg) {
             $appConfig[$cfg['name']] = $cfg['value'];
         }

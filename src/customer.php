@@ -46,8 +46,12 @@ $instanceRow->addColumn(8, new RegisterCustomerForm($customers));
 $instanceRow->addColumn(2, new \Ease\Html\ImgTag(\Ease\User::getGravatar(strval($customers->getDataValue('email')), 400, 'mm', 'g'), 'Gravatar', ['class' => 'img-fluid']));
 //$instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($customers));
 
-$oPage->container->addItem(new Panel($instanceName, 'info',
-                $instanceRow, $instanceLink));
+$oPage->container->addItem(new Panel(
+    $instanceName,
+    'info',
+    $instanceRow,
+    $instanceLink
+));
 
 $oPage->addItem(new PageBottom());
 

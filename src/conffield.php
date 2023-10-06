@@ -41,14 +41,18 @@ if ($oPage->isPosted()) {
     if ($conffields->takeData($_POST) && !is_null($conffields->saveToSQL())) {
         $conffields->addStatusMessage(_('Config field Saved'), 'success');
     } else {
-        $conffields->addStatusMessage(_('Error saving Config field'),
-                'error');
+        $conffields->addStatusMessage(
+            _('Error saving Config field'),
+            'error'
+        );
     }
 }
 
 if (strlen($instanceName)) {
-    $instanceLink = new ATag($conffields->getLink(),
-            $conffields->getLink());
+    $instanceLink = new ATag(
+        $conffields->getLink(),
+        $conffields->getLink()
+    );
 } else {
     $instanceName = _('App custom configuration fields');
     $instanceLink = null;
