@@ -29,11 +29,11 @@ $shared = Shared::singleton();
 
 $login = $oPage->getRequestValue('login');
 if ($login) {
-//    try {
-//        \Ease\Shared::user() = Shared::user(new User());
-//    } catch (PDOException $e) {
-//        echo 'Caught exception: ', $e->getMessage(), "\n";
-//    }
+    //    try {
+    //        \Ease\Shared::user() = Shared::user(new User());
+    //    } catch (PDOException $e) {
+    //        echo 'Caught exception: ', $e->getMessage(), "\n";
+    //    }
     if (\Ease\Shared::user()->tryToLogin($_POST)) {
         $oPage->redirect('main.php');
         session_write_close();

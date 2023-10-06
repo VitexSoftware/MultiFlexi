@@ -4,7 +4,7 @@
  * Multi Flexi - Customers listing.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2022 Vitex Software
+ * @copyright  2020-2023 Vitex Software
  */
 
 namespace MultiFlexi\Ui;

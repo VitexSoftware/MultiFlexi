@@ -9,10 +9,8 @@
 
 namespace MultiFlexi\Ui;
 
-use MultiFlexi\Application,
-
-    \Ease\TWB4\Row;
-
+use MultiFlexi\Application;
+use Ease\TWB4\Row;
 
 require_once './init.php';
 

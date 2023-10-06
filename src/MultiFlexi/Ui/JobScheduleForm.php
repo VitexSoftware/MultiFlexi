@@ -18,9 +18,9 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use MultiFlexi\Application,
-    \MultiFlexi\Company,
-    \Ease\TWB4\Form;
+use MultiFlexi\Application;
+use MultiFlexi\Company;
+use Ease\TWB4\Form;
 
 /**
  * Description of JobScheduleForm

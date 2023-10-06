@@ -25,7 +25,7 @@ $instanceName = $apps->getDataValue('nazev');
 if ($oPage->isPosted()) {
     if ($apps->takeData($_POST) && !is_null($apps->saveToSQL())) {
         $apps->addStatusMessage(_('Application Saved'), 'success');
-//        $apps->prepareRemoteAbraFlexi();
+        //        $apps->prepareRemoteAbraFlexi();
         $oPage->redirect('?id=' . $apps->getMyKey());
     } else {
         $apps->addStatusMessage(_('Error saving Application'), 'error');

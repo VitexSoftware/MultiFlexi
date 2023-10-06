@@ -18,8 +18,8 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use MultiFlexi\Application,
-    \Ease\Html\ImgTag;
+use MultiFlexi\Application;
+use Ease\Html\ImgTag;
 
 /**
  * Description of AppLogo
@@ -36,7 +36,7 @@ class AppLogo extends ImgTag
      */
     public function __construct(Application $application, array $properties = [])
     {
-        parent::__construct(empty($application->getDataValue('image')) ? 'images/apps.svg' :  $application->getDataValue('image'), $application->getDataValue('nazev'), $properties);
+        parent::__construct(empty($application->getDataValue('image')) ? 'images/apps.svg' : $application->getDataValue('image'), $application->getDataValue('nazev'), $properties);
         $this->addTagClass('img-fluid');
     }
 }

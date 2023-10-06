@@ -22,7 +22,7 @@ use Ease\TWB4\Widgets\Toggle;
  */
 class RegisterAppForm extends EngineForm
 {
-    function afterAdd()
+    public function afterAdd()
     {
         $this->setTagProperty('enctype', 'multipart/form-data');
         $this->addInput(new InputTextTag('nazev'), _('Application name'));

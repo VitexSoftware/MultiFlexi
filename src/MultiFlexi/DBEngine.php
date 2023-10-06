@@ -4,7 +4,7 @@
  * Multi Flexi - Company Management Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2022 Vitex Software
+ * @copyright  2018-2023 Vitex Software
  */
 
 namespace MultiFlexi;
@@ -139,7 +139,7 @@ class DBEngine extends \Ease\SQL\Engine
      */
     public function setDetailPage($detailPage = null)
     {
-        $this->detailPage = empty($detailPage) ? ( empty($this->keyword) ? null : $this->keyword . '.php' ) : $detailPage;
+        $this->detailPage = empty($detailPage) ? (empty($this->keyword) ? null : $this->keyword . '.php') : $detailPage;
     }
 
     /**
@@ -407,7 +407,7 @@ class DBEngine extends \Ease\SQL\Engine
         $this->addSelectizeValues($query);
         foreach ($query as $dataRow) {
             $dataRow['DT_RowId'] = 'row_' . $dataRow['id'];
-//            $dataRow['DT_RowClass'] = $this->getRowColor($this->checkRow($dataRow));
+            //            $dataRow['DT_RowClass'] = $this->getRowColor($this->checkRow($dataRow));
             $data[] = $this->completeDataRow($dataRow);
         }
 
@@ -525,24 +525,24 @@ class DBEngine extends \Ease\SQL\Engine
                     ))));
                     break;
                 case 'currency':
-//                    $field->validator(Validate::numeric(ValidateOptions::inst()->message(sprintf(_('A %s must be a nuber'),
-//                                    $column['label']))));
+                    //                    $field->validator(Validate::numeric(ValidateOptions::inst()->message(sprintf(_('A %s must be a nuber'),
+                    //                                    $column['label']))));
                     break;
-//                case 'upload':
-//                    echo '';
-//                    $field
-//                        ->upload(
-//                            Upload::inst($_SERVER['DOCUMENT_ROOT'].'/../files/__ID__.__EXTN__')
-//                            ->db($this->getMyTable().'_file', $column['name'],
-//                                ['filename' => Upload::DB_FILE_NAME,
-//                                'created_at' => date('Y-m-d'),
-//                                'filesavedas' => md5_file($_FILES['upload']['tmp_name']).'.'.pathinfo($_FILES['upload']['name'],
-//                                    PATHINFO_EXTENSION),
-//                                $this->getMyTable().'_id' => 0
-////                                'fileSize' => Upload::DB_FILE_SIZE
-//                            ])
-//                        )->setFormatter('Format::nullEmpty');
-//                    break;
+                    //                case 'upload':
+                    //                    echo '';
+                    //                    $field
+                    //                        ->upload(
+                    //                            Upload::inst($_SERVER['DOCUMENT_ROOT'].'/../files/__ID__.__EXTN__')
+                    //                            ->db($this->getMyTable().'_file', $column['name'],
+                    //                                ['filename' => Upload::DB_FILE_NAME,
+                    //                                'created_at' => date('Y-m-d'),
+                    //                                'filesavedas' => md5_file($_FILES['upload']['tmp_name']).'.'.pathinfo($_FILES['upload']['name'],
+                    //                                    PATHINFO_EXTENSION),
+                    //                                $this->getMyTable().'_id' => 0
+                    ////                                'fileSize' => Upload::DB_FILE_SIZE
+                    //                            ])
+                    //                        )->setFormatter('Format::nullEmpty');
+                    //                    break;
                 default:
                     break;
             }
@@ -926,8 +926,8 @@ class DBEngine extends \Ease\SQL\Engine
             }
 
             switch ($columnInfo['type']) {
-//                case '':
-//                    break;
+                //                case '':
+                //                    break;
                 default:
                     unset($columnInfo['column']);
                     $dataTableColumns[$columnInfo['name']] = $columnInfo;
@@ -1033,7 +1033,7 @@ class DBEngine extends \Ease\SQL\Engine
     /**
      *
      */
-    static function selectize($rawdata)
+    public static function selectize($rawdata)
     {
         $selectized = [];
         foreach ($rawdata as $key => $value) {

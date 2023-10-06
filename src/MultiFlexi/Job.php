@@ -135,7 +135,13 @@ class Job extends Engine
                 $appCompany->setMyKey($appCompany->runTemplateID($appId, $companyId));
                 $appInfo = $appCompany->getAppInfo();
                 $appEnvironment = $appCompany->getAppEnvironment();
-                $process = new \Symfony\Component\Process\Process(explode(' ', $setupCommand), null, $appEnvironment, null, 32767);
+                $process = new \Symfony\Component\Process\Process(
+                    explode(' ', $setupCommand),
+                    null,
+                    $appEnvironment,
+                    null,
+                    32767
+                );
                 $result = $process->run(function ($type, $buffer) {
                     $logger = new Runner();
                     if (\Symfony\Component\Process\Process::ERR === $type) {
@@ -243,7 +249,8 @@ class Job extends Engine
                 'stdout' => null,
                 'stderr' => null,
                 'launched_by_id' => intval(\Ease\Shared::user()->getMyKey()),
-                'launched_by' => empty(\Ease\Shared::user()->getUserLogin()) ? 'cron' : \Ease\Shared::user()->getUserLogin()
+                'launched_by' => empty(\Ease\Shared::user()->getUserLogin()) ? 'cron' :
+                \Ease\Shared::user()->getUserLogin()
             ];
         }
     }
@@ -269,9 +276,9 @@ class Job extends Engine
     public function reportToZabbix($messageData)
     {
         $packet = new ZabbixPacket();
-        $me = \Ease\Functions::cfg('ZABBIX_HOST');
+        $hostname = \Ease\Functions::cfg('ZABBIX_HOST');
         $this->zabbixMessageData = array_merge($this->zabbixMessageData, $messageData);
-        $packet->addMetric((new ZabbixMetric('multiflexi.job', json_encode($this->zabbixMessageData)))->withHostname($me));
+        $packet->addMetric((new ZabbixMetric('multiflexi.job', json_encode($this->zabbixMessageData)))->withHostname($hostname));
         $this->zabbixSender->send($packet);
     }
 

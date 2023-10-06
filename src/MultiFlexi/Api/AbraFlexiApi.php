@@ -65,7 +65,10 @@ class AbraFlexiApi extends AbstractAbraFlexiApi
     {
         $abraflexisList = [];
         foreach ($this->engine->getAll() as $abraflexi) {
-            $abraflexisList[] = ['id' => $abraflexi['id'], 'name' => $abraflexi['nazev'], 'executable' => $abraflexi['executable']];
+            $abraflexisList[] = [
+                'id' => $abraflexi['id'],
+                'name' => $abraflexi['nazev'],
+                'executable' => $abraflexi['executable']];
         }
         $response->getBody()->write(json_encode($abraflexisList, JSON_UNESCAPED_UNICODE));
         return $response->withHeader('Content-type', 'application/json');

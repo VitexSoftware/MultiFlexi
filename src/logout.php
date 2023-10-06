@@ -4,7 +4,7 @@
  * Multi Flexi - Sign off page.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2022 Vitex Software
+ * @copyright  2020-2023 Vitex Software
  */
 
 namespace MultiFlexi\Ui;
@@ -14,7 +14,7 @@ use MultiFlexi\Ui\PageTop;
 
 require_once './init.php';
 
-if (!is_null(\Ease\Shared::user()->getUserID())) {
+if (is_null(\Ease\Shared::user()->getUserID()) === false) {
     \Ease\Shared::user()->logout();
 }
 
