@@ -55,7 +55,7 @@ $oPage->container->addItem(new Panel(
     $instanceLink
 ));
 
-if (!is_null($abraflexis->getMyKey())) {
+if (is_null($abraflexis->getMyKey()) === false) {
     $oPage->container->addItem(new AbraFlexiInstanceStatus($abraflexis));
 }
 

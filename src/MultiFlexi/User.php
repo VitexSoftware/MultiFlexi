@@ -182,7 +182,7 @@ class User extends \Ease\User
                     $this->addStatusMessage(_('invalid password'), 'error');
                 }
                 $this->dataReset();
-                return false;
+                $result = false;
             }
         } else {
             $this->addStatusMessage(sprintf(
@@ -190,7 +190,7 @@ class User extends \Ease\User
                 $login,
                 'error'
             ));
-            return false;
+            $result = false;
         }
         return $result;
     }

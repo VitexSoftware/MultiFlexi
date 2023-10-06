@@ -4,7 +4,7 @@
  * Multi Flexi  - AppToCompany class
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2020-2022 Vitex Software
+ * @copyright  2020-2023 Vitex Software
  */
 
 namespace MultiFlexi;
@@ -53,12 +53,12 @@ class RunTemplate extends Engine
     public function performInit()
     {
         $app = new Application((int) $this->getDataValue('app_id'));
-//        $this->setEnvironment();
+        //        $this->setEnvironment();
         if (empty($app->getDataValue('setup')) == false) {
             $this->setDataValue('prepared', 0);
             $this->dbsync();
         }
-//        $app->runInit();
+        //        $app->runInit();
     }
 
     /**

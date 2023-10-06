@@ -90,25 +90,25 @@ class DBDataTable extends \Ease\Html\TableTag
         );
         $gridTagID = $this->setTagId($engine->getObjectName());
         $this->columns = $this->prepareColumns($engine->getGetDataTableColumns());
-//        $this->includeJavaScript('assets/datatables.js');
-//        $this->includeCss('assets/datatables.css');
-//        $this->includeJavaScript('js/cache.js');
-//        $this->includeJavaScript('js/datatablerenderutils.js');
+        //        $this->includeJavaScript('assets/datatables.js');
+        //        $this->includeCss('assets/datatables.css');
+        //        $this->includeJavaScript('js/cache.js');
+        //        $this->includeJavaScript('js/datatablerenderutils.js');
 
         $this->includeJavaScript('js/jquery.dataTables.js');
         $this->includeJavaScript('js/dataTables.bootstrap4.js');
         $this->includeCss('css/dataTables.bootstrap4.css');
-//        $this->includeJavaScript('assets/DataTables-1.10.19/js/jquery.dataTables.min.js');
-//        $this->includeJavaScript('assets/DataTables-1.10.19/js/dataTables.bootstrap.min.js');
-//        $this->includeJavaScript('assets/Select-1.3.0/js/dataTables.select.min.js');
-//        $this->includeCss('assets/DataTables-1.10.19/css/dataTables.bootstrap.min.css');
-//        $this->includeCss('assets/Select-1.3.0/css/select.bootstrap.min.css');
-//
-//        $this->includeJavaScript('assets/ColReorder-1.5.0/js/dataTables.colReorder.min.js');
-//        $this->includeCss('assets/ColReorder-1.5.0/css/colReorder.bootstrap.min.css');
-//
-//        $this->includeJavaScript('assets/Responsive-2.2.2/js/dataTables.responsive.min.js');
-//        $this->includeJavaScript('assets/Responsive-2.2.2/js/responsive.bootstrap.min.js');
+        //        $this->includeJavaScript('assets/DataTables-1.10.19/js/jquery.dataTables.min.js');
+        //        $this->includeJavaScript('assets/DataTables-1.10.19/js/dataTables.bootstrap.min.js');
+        //        $this->includeJavaScript('assets/Select-1.3.0/js/dataTables.select.min.js');
+        //        $this->includeCss('assets/DataTables-1.10.19/css/dataTables.bootstrap.min.css');
+        //        $this->includeCss('assets/Select-1.3.0/css/select.bootstrap.min.css');
+        //
+        //        $this->includeJavaScript('assets/ColReorder-1.5.0/js/dataTables.colReorder.min.js');
+        //        $this->includeCss('assets/ColReorder-1.5.0/css/colReorder.bootstrap.min.css');
+        //
+        //        $this->includeJavaScript('assets/Responsive-2.2.2/js/dataTables.responsive.min.js');
+        //        $this->includeJavaScript('assets/Responsive-2.2.2/js/responsive.bootstrap.min.js');
         $this->includeJavaScript('js/selectize.min.js');
         $this->includeCss('css/selectize.css');
         $this->includeCss('css/selectize.bootstrap4.css');
@@ -116,20 +116,20 @@ class DBDataTable extends \Ease\Html\TableTag
         $this->includeJavaScript('assets/Buttons-1.5.6/js/dataTables.buttons.js');
         $this->includeJavaScript('assets/Buttons-1.5.6/js/buttons.bootstrap.min.js');
         $this->includeCss('assets/Buttons-1.5.6/css/buttons.bootstrap.min.css');
-//
-//        $this->includeJavaScript('assets/JSZip-2.5.0/jszip.min.js');
-//        $this->includeJavaScript('assets/pdfmake-0.1.36/pdfmake.min.js');
-//        $this->includeJavaScript('assets/pdfmake-0.1.36/vfs_fonts.js');
+        //
+        //        $this->includeJavaScript('assets/JSZip-2.5.0/jszip.min.js');
+        //        $this->includeJavaScript('assets/pdfmake-0.1.36/pdfmake.min.js');
+        //        $this->includeJavaScript('assets/pdfmake-0.1.36/vfs_fonts.js');
         $this->includeJavaScript('assets/Buttons-1.5.6/js/buttons.html5.min.js');
         $this->includeJavaScript('assets/Buttons-1.5.6/js/buttons.print.min.js');
         $this->includeJavaScript('assets/Buttons-1.5.6/js/buttons.colVis.min.js');
-//        $this->includeCss('assets/RowGroup-1.1.0/css/rowGroup.bootstrap.min.css');
-//        $this->includeJavaScript('assets/RowGroup-1.1.0/js/rowGroup.bootstrap.min.js');
-//        $this->includeJavaScript('assets/RowGroup-1.1.0/js/dataTables.rowGroup.min.js');
-//        $this->includeCss('https://nightly.datatables.net/rowgroup/css/rowGroup.dataTables.css');
-//        $this->includeJavaScript('https://nightly.datatables.net/rowgroup/js/dataTables.rowGroup.js');
-//        $this->includeJavaScript('assets/moment-with-locales.js');
-//        $this->includeJavaScript('//cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js');
+        //        $this->includeCss('assets/RowGroup-1.1.0/css/rowGroup.bootstrap.min.css');
+        //        $this->includeJavaScript('assets/RowGroup-1.1.0/js/rowGroup.bootstrap.min.js');
+        //        $this->includeJavaScript('assets/RowGroup-1.1.0/js/dataTables.rowGroup.min.js');
+        //        $this->includeCss('https://nightly.datatables.net/rowgroup/css/rowGroup.dataTables.css');
+        //        $this->includeJavaScript('https://nightly.datatables.net/rowgroup/js/dataTables.rowGroup.js');
+        //        $this->includeJavaScript('assets/moment-with-locales.js');
+        //        $this->includeJavaScript('//cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js');
 
 
         $this->addJavaScript('$.fn.dataTable.ext.buttons.reload = {
@@ -199,9 +199,9 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
                 case 'int':
                     $column['type'] = 'text';
                     break;
-//                case 'currency':
-//                    $column['type'] = 'mask';
-//                    $column['mask'] = '#,##0';
+                    //                case 'currency':
+                    //                    $column['type'] = 'mask';
+                    //                    $column['mask'] = '#,##0';
                     break;
                 case 'boolean':
                     $column['type'] = 'checkbox';
@@ -233,7 +233,7 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
                     break;
             }
 
-//            unset($column['type']);
+            //            unset($column['type']);
             $dataTablesColumns[] = $column;
         }
         return $dataTablesColumns;
@@ -335,14 +335,14 @@ $.fn.dataTable.ext.buttons.filter' . $gridTagID . ' = {
             ' . self::getColumnsScript($columns) . '
         ],
         select: true
-        ' . ( $this->buttons ? ',        buttons: [ ' . \Ease\Part::partPropertiesToString($this->buttons) . ']' : '') . '
+        ' . ($this->buttons ? ',        buttons: [ ' . \Ease\Part::partPropertiesToString($this->buttons) . ']' : '') . '
     } );
 
     ' . $this->engine->postTableCode($tableID) . '
             $(\'.tablefilter\').change( function() { ' . $tableID . '.draw(); } );
 ';
-//    $("#'.$tableID.'_filter").css(\'border\', \'1px solid red\');
-//setInterval( function () { '.$tableID.'.ajax.reload( null, false ); }, 30000 );
+        //    $("#'.$tableID.'_filter").css(\'border\', \'1px solid red\');
+        //setInterval( function () { '.$tableID.'.ajax.reload( null, false ); }, 30000 );
     }
 
     //    '.self::columnIndexNames($columns,$tableID).'

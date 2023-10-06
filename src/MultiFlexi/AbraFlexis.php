@@ -103,32 +103,32 @@ class AbraFlexis extends DBEngine
         return  new \Ease\Html\ATag('abraflexi.php?id=' . $this->getMyKey());
     }
 
-//    /**
-//     * Get Copany Identification number, establish webhook and save
-//     *
-//     * @param array $data
-//     * @param boolean $searchForID
-//     * @return int result
-//     */
-//    public function saveToSQL($data = null, $searchForID = false)
-//    {
-//        if (is_null($data)) {
-//            $data = $this->getData();
-//        }
-//        if (!isset($data['ic'])) {
-//            $abraflexiData = new \AbraFlexi\Nastaveni(1, $data);
-//            $ic           = $abraflexiData->getDataValue('ic');
-//            if (strlen($ic)) {
-//                $data['ic'] = intval($ic);
-//                $this->addStatusMessage(sprintf(_('Succesfully obtained organisation identification number #%d from AbraFlexi %s'),
-//                        $data['ic'], $data['name']), 'success');
-//            } else {
-//                $this->addStatusMessage(sprintf(_('Cannot obtain organisation identification number for AbraFlexi %s'),
-//                        $data['name']), 'error');
-//            }
-//        }
-//        return parent::saveToSQL($data, $searchForID);
-//    }
+    //    /**
+    //     * Get Copany Identification number, establish webhook and save
+    //     *
+    //     * @param array $data
+    //     * @param boolean $searchForID
+    //     * @return int result
+    //     */
+    //    public function saveToSQL($data = null, $searchForID = false)
+    //    {
+    //        if (is_null($data)) {
+    //            $data = $this->getData();
+    //        }
+    //        if (!isset($data['ic'])) {
+    //            $abraflexiData = new \AbraFlexi\Nastaveni(1, $data);
+    //            $ic           = $abraflexiData->getDataValue('ic');
+    //            if (strlen($ic)) {
+    //                $data['ic'] = intval($ic);
+    //                $this->addStatusMessage(sprintf(_('Succesfully obtained organisation identification number #%d from AbraFlexi %s'),
+    //                        $data['ic'], $data['name']), 'success');
+    //            } else {
+    //                $this->addStatusMessage(sprintf(_('Cannot obtain organisation identification number for AbraFlexi %s'),
+    //                        $data['name']), 'error');
+    //            }
+    //        }
+    //        return parent::saveToSQL($data, $searchForID);
+    //    }
 
     public function prepareRemoteAbraFlexi()
     {
@@ -140,16 +140,16 @@ class AbraFlexis extends DBEngine
         //Setup Reminder
         //Setup Invoicer
         //Setup any other apps
-//        $companyData['ic'] = $companyDetails['ic'];
-//        unset($companyData['ic']);
-//        $companyData['nazev'] = $companyDetails['nazFirmy'];
-//        unset($companyData['name']);
-//        $companer->takeData(array_merge($companyData, $this->getData()));
-//        $prepareResult = $companer->prepareCompany($companer->getDataValue('company'));
-//        $result = $companer->saveToSql(array_merge($companyData,
-//                        $prepareResult));
-//        $companer->addStatusMessage(sprintf(_('Saving Company %s'),
-//                        $companyData['nazev']), $result ? 'success' : 'error');
+        //        $companyData['ic'] = $companyDetails['ic'];
+        //        unset($companyData['ic']);
+        //        $companyData['nazev'] = $companyDetails['nazFirmy'];
+        //        unset($companyData['name']);
+        //        $companer->takeData(array_merge($companyData, $this->getData()));
+        //        $prepareResult = $companer->prepareCompany($companer->getDataValue('company'));
+        //        $result = $companer->saveToSql(array_merge($companyData,
+        //                        $prepareResult));
+        //        $companer->addStatusMessage(sprintf(_('Saving Company %s'),
+        //                        $companyData['nazev']), $result ? 'success' : 'error');
     }
 
     public function setEnvironment()

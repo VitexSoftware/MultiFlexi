@@ -27,7 +27,7 @@ $oPage->addItem(new PageTop(_('Customer')));
 if ($oPage->isPosted()) {
     if ($customers->takeData($_POST) && !is_null($customers->saveToSQL())) {
         $customers->addStatusMessage(_('Customer Saved'), 'success');
-//        $customers->prepareRemoteAbraFlexi();
+        //        $customers->prepareRemoteAbraFlexi();
         $oPage->redirect('?id=' . $customers->getMyKey());
     } else {
         $customers->addStatusMessage(_('Error saving Customer'), 'error');

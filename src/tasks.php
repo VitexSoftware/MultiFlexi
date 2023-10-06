@@ -9,12 +9,11 @@
 
 namespace MultiFlexi\Ui;
 
-use Ease\Document,
-
-    \Ease\Html\ImgTag,
-    \Ease\Html\SpanTag,
-    \Ease\TWB4\Panel,
-    \MultiFlexi\Company;
+use Ease\Document;
+use Ease\Html\ImgTag;
+use Ease\Html\SpanTag;
+use Ease\TWB4\Panel;
+use MultiFlexi\Company;
 
 require_once './init.php';
 $oPage->onlyForLogged();

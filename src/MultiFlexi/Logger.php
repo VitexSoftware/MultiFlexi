@@ -50,16 +50,16 @@ class Logger extends DBEngine
         return $this->getColumnsFromSQL('*', ['resolvedby' => 0], 'created');
     }
 
-//    /**
-//     *
-//     * @return array
-//     */
-//    public function listingQuery() {
-//        return parent::listingQuery()->select('user.*')->select('apps.*')->select('company.*')
-//                        ->leftJoin('user ON user.id = log.user_id')
-//                        ->leftJoin('apps ON apps.id = log.app_id')
-//                        ->leftJoin('company ON company.id = log.company_id');
-//    }
+    //    /**
+    //     *
+    //     * @return array
+    //     */
+    //    public function listingQuery() {
+    //        return parent::listingQuery()->select('user.*')->select('apps.*')->select('company.*')
+    //                        ->leftJoin('user ON user.id = log.user_id')
+    //                        ->leftJoin('apps ON apps.id = log.app_id')
+    //                        ->leftJoin('company ON company.id = log.company_id');
+    //    }
 
     /**
      *
@@ -82,35 +82,35 @@ class Logger extends DBEngine
     public function columns($columns = [])
     {
 
-//  [company_id] => null
-//  [app_id] => null
-//  [user_id] => (string) 0
-//  [severity] => (string) info
-//  [venue] => (string) MultiFlexi\Ui\WebPage
-//  [message] => (string) logged
-//  [created] => (string) 2020-07-04 22:27:45
-//  [enabled] => null
-//  [settings] => null
-//  [email] => null
-//  [firstname] => (string) Demo
-//  [lastname] => (string) Demo
-//  [password] => (string) a26ac720512764602ce1c1ae537efb04:9d
-//  [login] => (string) demo
-//  [DatCreate] => null
-//  [DatSave] => null
-//  [last_modifier_id] => null
-//  [image] => null
-//  [nazev] => null
-//  [popis] => null
-//  [executable] => null
-//  [DatUpdate] => null
-//  [setup] => null
-//  [logo] => null
-//  [abraflexi] => null
-//  [ic] => null
-//  [company] => null
-//  [rw] => null
-//  [webhook] => null
+        //  [company_id] => null
+        //  [app_id] => null
+        //  [user_id] => (string) 0
+        //  [severity] => (string) info
+        //  [venue] => (string) MultiFlexi\Ui\WebPage
+        //  [message] => (string) logged
+        //  [created] => (string) 2020-07-04 22:27:45
+        //  [enabled] => null
+        //  [settings] => null
+        //  [email] => null
+        //  [firstname] => (string) Demo
+        //  [lastname] => (string) Demo
+        //  [password] => (string) a26ac720512764602ce1c1ae537efb04:9d
+        //  [login] => (string) demo
+        //  [DatCreate] => null
+        //  [DatSave] => null
+        //  [last_modifier_id] => null
+        //  [image] => null
+        //  [nazev] => null
+        //  [popis] => null
+        //  [executable] => null
+        //  [DatUpdate] => null
+        //  [setup] => null
+        //  [logo] => null
+        //  [abraflexi] => null
+        //  [ic] => null
+        //  [company] => null
+        //  [rw] => null
+        //  [webhook] => null
 
 
         return parent::columns([
@@ -202,7 +202,7 @@ class Logger extends DBEngine
             '......... ',
             $dataRowRaw['message']
         ));
-//        $dataRowRaw['created'] = (new LiveAge((new DateTime($dataRowRaw['created']))->getTimestamp()))->__toString();
+        //        $dataRowRaw['created'] = (new LiveAge((new DateTime($dataRowRaw['created']))->getTimestamp()))->__toString();
 
         return parent::completeDataRow($dataRowRaw);
     }

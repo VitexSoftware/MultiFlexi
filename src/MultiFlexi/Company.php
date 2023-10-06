@@ -173,7 +173,7 @@ class Company extends \AbraFlexi\Company
     {
         $changer = new \AbraFlexi\Changes(null, $this->getData());
         $chapistatus = $changer->getStatus();
-//        $globalVersion = $changer->getGlobalVersion();
+        //        $globalVersion = $changer->getGlobalVersion();
 
         if ($enable === true) {
             if ($chapistatus === false) {

@@ -18,9 +18,10 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use Ease\Html\ATag,
-    \Ease\Html\ImgTag,
-    \Ease\TWB4\FormGroup;
+use Ease\Html\ATag;
+use Ease\Html\ImgTag;
+use Ease\TWB4\FormGroup;
+
 use const __PHPUNIT_ATTR_DRIVER_NAME__;
 
 /**
@@ -68,14 +69,14 @@ class AppRow extends \Ease\TWB4\Row
         }
 
 
-    // use AppLaunchForm instead of LaunchButton
+        // use AppLaunchForm instead of LaunchButton
         $launchButton = new AppLaunchForm($appData['app_id'], $appData['company_id']);
 
 
 
         $logoColumn->addItem($launchButton);
 
-//        $logoColumn->addItem(new \Ease\TWB4\LinkButton('?id=' . $appId, _('Clone'), 'info btn-sm  btn-block'));
+        //        $logoColumn->addItem(new \Ease\TWB4\LinkButton('?id=' . $appId, _('Clone'), 'info btn-sm  btn-block'));
 
         $appConfColumn = $appRow->addColumn(4, new FormGroup(new \Ease\Html\H3Tag(_('Job Config')), $intervalChooser));
         if (array_key_exists('runtemplateid', $appData)) {

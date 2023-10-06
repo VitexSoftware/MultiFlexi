@@ -251,12 +251,12 @@ class ZabbixSender
             );
         }
 
-        $responseWithoutHeader = substr(
+        $rspnsWithoutHeader = substr(
             $responseBuffer,
             self::RESPONSE_HEADER_LENGTH
         );
         $response = json_decode(
-            $responseWithoutHeader,
+            $rspnsWithoutHeader,
             true
         );
 
@@ -266,7 +266,7 @@ class ZabbixSender
                 throw new ZabbixResponseException(
                     sprintf(
                         "can't decode zabbix server response %s, reason: %s",
-                        $responseWithoutHeader,
+                        $rspnsWithoutHeader,
                         json_last_error_msg()
                     )
                 );

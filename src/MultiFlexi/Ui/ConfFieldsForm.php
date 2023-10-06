@@ -30,7 +30,7 @@ class ConfFieldsForm extends Form
     public function __construct($conffields, $formContents, $tagProperties = array())
     {
         parent::__construct(['method' => 'post', 'action' => 'conffield.php'], $tagProperties, $formContents);
-        $this->addItem(new InputHiddenTag('id', $conffields->getMyKey()));
+        $this->addItem(new InputHiddenTag('id', $conffields['id']));
         $this->addInput(new ConfigFields('type'), _('New config field type'));
         $this->addInput(new InputTextTag('keyname'), _('New config field Keyword'));
         $this->addInput(new InputTextTag('defval'), _('Default value'));
