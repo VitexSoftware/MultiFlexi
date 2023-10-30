@@ -4,7 +4,7 @@
  * MultiFlexi API
  * PHP version 7.4
  *
- * @package AbraFlexi\MultiFlexi
+ * @package MultiFlexi
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  */
@@ -24,13 +24,13 @@ namespace MultiFlexi\Model;
 use MultiFlexi\BaseModel;
 
 /**
- * AbraFlexi
+ * Server
  *
  * @package MultiFlexi\Model
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  */
-class AbraFlexi extends BaseModel
+class Server extends BaseModel
 {
     /**
      * @var string Models namespace.
