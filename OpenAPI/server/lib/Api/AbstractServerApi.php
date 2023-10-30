@@ -4,7 +4,7 @@
  * MultiFlexi API
  * PHP version 7.4
  *
- * @package AbraFlexi\MultiFlexi
+ * @package MultiFlexi
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  */
@@ -29,42 +29,42 @@ use Psr\Http\Message\ResponseInterface;
 use Slim\Exception\HttpNotImplementedException;
 
 /**
- * AbstractAbraflexiApi Class Doc Comment
+ * AbstractServerApi Class Doc Comment
  *
  * @package MultiFlexi\Api
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  */
-abstract class AbstractAbraflexiApi
+abstract class AbstractServerApi
 {
     /**
-     * GET getAbraFlexiById
-     * Summary: Get AbraFlexi by ID
-     * Notes: Returns a single AbraFlexi
+     * GET getServerById
+     * Summary: Get Server by ID
+     * Notes: Returns a single Server
      * Output-Formats: [application/json]
      *
      * @param ServerRequestInterface $request  Request
      * @param ResponseInterface      $response Response
-     * @param int $abraflexiId ID of app to return
+     * @param int $serverId ID of app to return
      * @param string $suffix force format suffix
      *
      * @return ResponseInterface
      * @throws HttpNotImplementedException to force implementation class to override this method
      */
-    public function getAbraFlexiById(
+    public function getServerById(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        int $abraflexiId,
+        int $serverId,
         string $suffix
     ): ResponseInterface {
-        $message = "How about implementing getAbraFlexiById as a GET method in MultiFlexi\Api\AbraflexiApi class?";
+        $message = "How about implementing getServerById as a GET method in MultiFlexi\Api\ServerApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 
     /**
-     * GET listAbraFlexis
-     * Summary: Show All AbraFlexis
-     * Notes: All AbraFlexi servers registered
+     * GET listServers
+     * Summary: Show All Servers
+     * Notes: All Server servers registered
      * Output-Formats: [application/json]
      *
      * @param ServerRequestInterface $request  Request
@@ -73,18 +73,18 @@ abstract class AbstractAbraflexiApi
      * @return ResponseInterface
      * @throws HttpNotImplementedException to force implementation class to override this method
      */
-    public function listAbraFlexis(
+    public function listServers(
         ServerRequestInterface $request,
         ResponseInterface $response
     ): ResponseInterface {
-        $message = "How about implementing listAbraFlexis as a GET method in MultiFlexi\Api\AbraflexiApi class?";
+        $message = "How about implementing listServers as a GET method in MultiFlexi\Api\ServerApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 
     /**
-     * POST setAbraFlexiById
-     * Summary: Create or Update AbraFlexi record
-     * Notes: Create or Upda single AbraFlexi record
+     * POST setServerById
+     * Summary: Create or Update Server record
+     * Notes: Create or Update single Server record
      * Output-Formats: [application/json]
      *
      * @param ServerRequestInterface $request  Request
@@ -93,13 +93,13 @@ abstract class AbstractAbraflexiApi
      * @return ResponseInterface
      * @throws HttpNotImplementedException to force implementation class to override this method
      */
-    public function setAbraFlexiById(
+    public function setServerById(
         ServerRequestInterface $request,
         ResponseInterface $response
     ): ResponseInterface {
         $queryParams = $request->getQueryParams();
-        $abraflexiId = (key_exists('abraflexiId', $queryParams)) ? $queryParams['abraflexiId'] : null;
-        $message = "How about implementing setAbraFlexiById as a POST method in MultiFlexi\Api\AbraflexiApi class?";
+        $serverId = (key_exists('serverId', $queryParams)) ? $queryParams['serverId'] : null;
+        $message = "How about implementing setServerById as a POST method in MultiFlexi\Api\ServerApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
 }

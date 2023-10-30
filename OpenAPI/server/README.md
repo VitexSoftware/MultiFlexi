@@ -99,13 +99,13 @@ Switch your app environment to development in `public/.htaccess` file:
 ```
 
 ## Mock Server
-Since this feature should be used for development only, change environment to `development` and send additional HTTP header `X-AbraFlexi\MultiFlexi-Mock: ping` with any request to get mocked response.
+Since this feature should be used for development only, change environment to `development` and send additional HTTP header `X-MultiFlexi-Mock: ping` with any request to get mocked response.
 CURL example:
 ```console
 curl --request GET \
     --url 'http://localhost:8888/v2/pet/findByStatus?status=available' \
     --header 'accept: application/json' \
-    --header 'X-AbraFlexi\MultiFlexi-Mock: ping'
+    --header 'X-MultiFlexi-Mock: ping'
 [{"id":-8738629417578509312,"category":{"id":-4162503862215270400,"name":"Lorem ipsum dol"},"name":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem i","photoUrls":["Lor"],"tags":[{"id":-3506202845849391104,"name":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectet"}],"status":"pending"}]
 ```
 
@@ -152,9 +152,6 @@ For instance, when abstract class located at `./lib/Api/AbstractPetApi.php` you 
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AbstractAbraflexiApi* | **listAbraFlexis** | **GET** /abraflexis | Show All AbraFlexis
-*AbstractAbraflexiApi* | **setAbraFlexiById** | **POST** /abraflexi/ | Create or Update AbraFlexi record
-*AbstractAbraflexiApi* | **getAbraFlexiById** | **GET** /abraflexi/{abraflexiId}.{suffix} | Get AbraFlexi by ID
 *AbstractAppApi* | **setAppById** | **POST** /app/ | Create or Update Application
 *AbstractAppApi* | **getAppById** | **GET** /app/{appId}.{suffix} | Get App by ID
 *AbstractAppApi* | **listApps** | **GET** /apps.{suffix} | Show All Apps
@@ -163,16 +160,19 @@ Class | Method | HTTP request | Description
 *AbstractDefaultApi* | **loginSuffixGet** | **GET** /login.{suffix} | Return User's token
 *AbstractDefaultApi* | **loginSuffixPost** | **POST** /login.{suffix} | Return User's token
 *AbstractDefaultApi* | **pingSuffixGet** | **GET** /ping.{suffix} | Server heartbeat operation
+*AbstractServerApi* | **listServers** | **GET** /servers | Show All Servers
+*AbstractServerApi* | **setServerById** | **POST** /server/ | Create or Update Server record
+*AbstractServerApi* | **getServerById** | **GET** /server/{serverId}.{suffix} | Get Server by ID
 
 
 ## Models
 
-* MultiFlexi\Model\AbraFlexi
 * MultiFlexi\Model\App
 * MultiFlexi\Model\AppCompany
 * MultiFlexi\Model\ConfField
 * MultiFlexi\Model\Configuration
 * MultiFlexi\Model\Customer
+* MultiFlexi\Model\Server
 * MultiFlexi\Model\Tag
 * MultiFlexi\Model\User
 

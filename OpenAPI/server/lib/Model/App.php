@@ -4,7 +4,7 @@
  * MultiFlexi API
  * PHP version 7.4
  *
- * @package AbraFlexi\MultiFlexi
+ * @package MultiFlexi
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  */
@@ -58,7 +58,7 @@ class App extends BaseModel
     },
     "executable" : {
       "type" : "string",
-      "example" : "abraflexi-matcher"
+      "example" : "server-matcher"
     },
     "tags" : {
       "type" : "array",
