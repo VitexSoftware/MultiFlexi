@@ -15,7 +15,10 @@ server:
 	PHP_POST_PROCESS_FILE="node_modules/.bin/prettier --write" openapi-generator-cli generate -i ${SPECURI} -g php-slim4 -c templates/server.yaml --git-user-id VitexSoftware --git-repo-id MultiFlexi -t templates/server -o server
 
 client:
-	openapi-generator-cli generate -i ${SPECURI} -g php -o client
+	PHP_POST_PROCESS_FILE="node_modules/.bin/prettier --write" openapi-generator-cli generate -i ${SPECURI} -g php -o client
+
+frontend:
+	PHP_POST_PROCESS_FILE="node_modules/.bin/prettier --write" openapi-generator-cli generate -i ${SPECURI} -g typescript-angular -o frontend
 
 help:
 	openapi-generator-cli config-help -g php-slim4
