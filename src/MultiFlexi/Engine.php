@@ -49,11 +49,10 @@ class Engine extends \Ease\SQL\Engine
      * Save data
      *
      * @param array $data
-     * @param boolean $searchForID
      *
      * @return int
      */
-    public function saveToSQL($data = null, $searchForID = false)
+    public function saveToSQL($data = null)
     {
         if (is_null($data)) {
             $data = $this->getData();

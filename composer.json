@@ -1,6 +1,6 @@
 {
     "name": "vitexsoftware/multiflexi",
-    "description": "Tool used to run tools upon AbraFlexi servers",
+    "description": "Tool used to run tools upon AbraFlexi or Pohoda servers",
     "type": "project",
     "require": {
         "php": "^8.0|^8.1|^8.2",
@@ -18,7 +18,6 @@
         "vitexsoftware/multiflexiapiserver": "*",
         "dyorg/slim-token-authentication": "*",
         "tuupola/slim-basic-auth": "*",
-        "mittwald/vault-php": "dev-master",
         "vitexsoftware/ease-core": "dev-main"
     },
     "license": "MIT",
@@ -35,7 +34,9 @@
             "MultiFlexi\\Ui\\": "src/MultiFlexi/Ui",
             "MultiFlexi\\Api\\": "src/MultiFlexi/Api",
             "MultiFlexi\\Auth\\": "src/MultiFlexi/Auth",
-            "MultiFlexi\\Zabbix\\": "src/MultiFlexi/Zabbix"
+            "MultiFlexi\\Zabbix\\": "src/MultiFlexi/Zabbix",
+            "MultiFlexi\\Pohoda\\": "src/MultiFlexi/Pohoda",
+            "MultiFlexi\\AbraFlexi\\": "src/MultiFlexi/AbraFlexi"
         }
     },
     "autoload-dev": {

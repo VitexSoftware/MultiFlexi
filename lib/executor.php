@@ -33,7 +33,7 @@ $interval = $argc == 2 ? $argv[1] : null;
 $jobber->logBanner( \Ease\Shared::appName(). ' Interval: ' . Job::codeToInterval($interval));
 
 $companer = new Company();
-$companys = $companer->listingQuery()->select('abraflexis.*')->select('company.id AS company_id')->leftJoin('abraflexis ON abraflexis.id = company.abraflexi');
+$companys = $companer->listingQuery()->select('servers.*')->select('company.id AS company_id')->leftJoin('servers ON servers.id = company.abraflexi');
 $customConfig = new Configuration();
 if ($interval) {
     $ap2c = new \MultiFlexi\RunTemplate();

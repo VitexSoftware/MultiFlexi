@@ -18,9 +18,9 @@ require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Applications')));
 
-$abraflexis = new Application();
+$servers = new Application();
 
-$allAppData = $abraflexis->getAll();
+$allAppData = $servers->getAll();
 
 $fbtable = new Table();
 $fbtable->addRowHeaderColumns([_('ID'), _('Enabled'), _('Image'), _('Name'), _('Description'), _('Executable'), _('Created'), _('Modified'), _('Init Command')]);
