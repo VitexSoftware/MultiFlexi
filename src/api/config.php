@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Multi Flexi -
+ * Multi Flexi - API Config
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * @copyright  2020-2023 Vitex Software
  */
 
 /**
@@ -25,7 +25,7 @@ return [
 
     // Returns a detailed HTML page with error details and
     // a stack trace. Should be disabled in production.
-    'slim.displayErrorDetails' => false,
+    'slim.displayErrorDetails' => boolval(\Ease\Shared::cfg('API_DEBUG',false)),
 
     // Whether to display errors on the internal PHP log or not.
     'slim.logErrors' => true,
@@ -59,15 +59,15 @@ return [
     ],
 
     // PDO
-    'pdo.dsn' => 'mysql:host=localhost;charset=utf8mb4',
-    'pdo.username' => 'root',
-    'pdo.password' => 'root',
+    'pdo.dsn' => \Ease\Shared::cfg('DB_CONNECTION'). ':host='.\Ease\Shared::cfg('DB_HOST').';charset=utf8mb4',
+    'pdo.username' => \Ease\Shared::cfg('DB_USERNAME'),
+    'pdo.password' => \Ease\Shared::cfg('DB_PASSWORD'),
     'pdo.options' => [
         \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
     ],
 
     // logger
-    'logger.name' => 'App',
+    'logger.name' => \Ease\Shared::appName(),
     'logger.path' => \realpath(__DIR__ . '/../../logs') . '/app.log',
     'logger.level' => 300, // equals WARNING level
     'logger.options' => [],

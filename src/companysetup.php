@@ -17,18 +17,18 @@ use MultiFlexi\Company;
 require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company')));
-$abraFlexiId = WebPage::getRequestValue('abraflexi', 'int');
-if ($abraFlexiId) {
-    $abraFlexiServer = new \MultiFlexi\AbraFlexis($abraFlexiId);
-    $companyConfig = $abraFlexiServer->getConnectionDetails();
+$serverId = WebPage::getRequestValue('server', 'int');
+if ($serverId) {
+    $serverserver = new \MultiFlexi\Servers($serverId);
+    $companyConfig = $serverserver->getConnectionDetails();
     $companyConfig['company'] = WebPage::getGetValue('company');
 } else {
     $companyConfig = [];
 }
 
 $companies = new Company(WebPage::getRequestValue('id', 'int'), $companyConfig);
-if (is_null($abraFlexiId) === false) {
-    $companies->setDataValue('abraflexi', $abraFlexiId);
+if (is_null($serverId) === false) {
+    $companies->setDataValue('server', $serverId);
 }
 $_SESSION['company'] = &$companies;
 $companyEnver = new \MultiFlexi\CompanyEnv($companies->getMyKey());
@@ -58,19 +58,19 @@ if ($oPage->isPosted()) {
         $companies->setDataValue('nazev', WebPage::getGetValue('nazev'));
         $companies->setDataValue('ic', WebPage::getGetValue('ic'));
         $companies->setDataValue('email', WebPage::getGetValue('email'));
-        $companies->abraflexiId = WebPage::getGetValue('abraflexi', 'int');
+        $companies->serverId = WebPage::getGetValue('server', 'int');
         $companies->loadFromAbraFlexi();
     }
 }
 $instanceName = $companies->getDataValue('nazev');
-if (strlen($instanceName)) {
+if (empty($instanceName)) {
+    $instanceName = _('New Company');
+    $instanceLink = null;
+} else {
     $instanceLink = new ATag(
         $companies->getApiURL() . $companies->getDataValue('company'),
         $companies->getApiURL() . $companies->getDataValue('company')
     );
-} else {
-    $instanceName = _('New Company');
-    $instanceLink = null;
 }
 
 $instanceRow = new Row();
@@ -78,7 +78,7 @@ $instanceRow->addColumn(4, new RegisterCompanyForm($companies, null, ['action' =
 //$instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($companies));
 
 
-if (strlen($companies->getDataValue('logo'))) {
+if (empty($companies->getDataValue('logo')) === false) {
     $rightColumn[] = new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']);
 }
 

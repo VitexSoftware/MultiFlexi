@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Multi Flexi -
+ * Multi Flexi - App Api implementation
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * @copyright  2020-2023 Vitex Software
  */
 
 namespace MultiFlexi\Api;

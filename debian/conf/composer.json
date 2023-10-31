@@ -26,7 +26,11 @@
     "psr-4": {
       "MultiFlexi\\": "MultiFlexi",
       "MultiFlexi\\Ui\\": "MultiFlexi/Ui",
-      "MultiFlexi\\Zabbix\\": "MultiFlexi/Zabbix"
+      "MultiFlexi\\Pohoda\\": "MultiFlexi/Pohoda",
+      "MultiFlexi\\Zabbix\\": "MultiFlexi/Zabbix",
+      "MultiFlexi\\AbraFlexi\\": "MultiFlexi/AbraFlexi",
+      "MultiFlexi\\Zabbix\\Request\\": "MultiFlexi/Zabbix/Request",
+      "MultiFlexi\\Zabbix\\Exception\\": "MultiFlexi/Zabbix/Exception"
     }
   },
   "repositories": [

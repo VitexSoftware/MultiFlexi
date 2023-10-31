@@ -22,7 +22,7 @@ class DbStatus extends \Ease\TWB4\Row
     public function __construct()
     {
         parent::__construct();
-        $abraflexis = (string) (new \MultiFlexi\AbraFlexis())->listingQuery()->count();
+        $servers = (string) (new \MultiFlexi\Servers())->listingQuery()->count();
         $customers = (string) (new \MultiFlexi\Customer())->listingQuery()->count();
         $companys = (string) (new \MultiFlexi\Company())->listingQuery()->count();
         $apps = (string) (new \MultiFlexi\Application())->listingQuery()->count();
@@ -33,7 +33,7 @@ class DbStatus extends \Ease\TWB4\Row
             ['class' => 'btn btn-default', 'type' => 'button']
         ));
         $this->addColumn(2, new \Ease\Html\ButtonTag(
-            [_('Servers') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $abraflexis)],
+            [_('Servers') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $servers)],
             ['class' => 'btn btn-default', 'type' => 'button']
         ));
         $this->addColumn(2, new \Ease\Html\ButtonTag(

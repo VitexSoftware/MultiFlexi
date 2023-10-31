@@ -115,11 +115,11 @@ class RunTemplate extends Engine
                         ->select('apps.id as apps_id')
                         ->select('apps.nazev as app_name')
                         ->select('company.*')
-                        ->select('abraflexis.*')
+                        ->select('servers.*')
                         ->where([$this->getMyTable() . '.' . $this->getKeyColumn() => $this->getMyKey()])
                         ->leftJoin('apps ON apps.id = runtemplate.app_id')
                         ->leftJoin('company ON company.id = runtemplate.company_id')
-                        ->leftJoin('abraflexis ON abraflexis.id = company.abraflexi')
+                        ->leftJoin('servers ON servers.id = company.abraflexi')
                         ->fetch();
     }
 

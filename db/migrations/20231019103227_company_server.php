@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class JobEnvironment extends AbstractMigration
+final class CompanyServer extends AbstractMigration
 {
-
     /**
      * Change Method.
      *
@@ -20,9 +19,7 @@ final class JobEnvironment extends AbstractMigration
      */
     public function change(): void
     {
-        $table = $this->table('job');
-        $table
-                ->addColumn('env', 'text', ['comment' => 'Job Environment', 'default' => null, 'null' => true])
-                ->update();
+        $table = $this->table('company');
+        $table->renameColumn('abraflexi', 'server')->save();
     }
 }

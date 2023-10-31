@@ -6,6 +6,7 @@ namespace MultiFlexi\Ui;
  * Multi Flexi - Application Launch Form
  *
  * @package AbraFlexi\MultiFlexi
+ * @copyright  2015-2023 Vitex Software
  * @license    https://opensource.org/licenses/MIT MIT
  */
 

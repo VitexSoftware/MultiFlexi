@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Multi Flexi - Company instance editor.
  *
@@ -16,13 +15,13 @@ use MultiFlexi\Company;
 
 require_once './init.php';
 $oPage->onlyForLogged();
-
 $companies = new Company(WebPage::getRequestValue('id', 'int'));
 $oPage->addItem(new PageTop(_('Company') . ': ' . $companies->getRecordName()));
 
-$_SESSION['company'] = &$companies;
-$_SESSION['server'] = new \MultiFlexi\AbraFlexis($companies->getDataValue('abraflexi'));
-$_SESSION['customer'] = new \MultiFlexi\Customer($companies->getDataValue('customer'));
+$_SESSION['company'] = $companies->getMyKey();
+$_SESSION['server'] = $companies->getDataValue('server');
+$_SESSION['customer'] = $companies->getDataValue('customer');
+
 $companyEnver = new \MultiFlexi\CompanyEnv($companies->getMyKey());
 $jobber = new \MultiFlexi\Job();
 $jobs = $jobber->listingQuery()->select(['apps.nazev AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'runtemplate.id AS runtemplateid'], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->leftJoin('runtemplate ON runtemplate.company_id = job.company_id AND runtemplate.app_id = job.app_id')->where('job.company_id', $companies->getMyKey())->limit(20)->orderBy('job.id DESC')->fetchAll();
@@ -34,7 +33,6 @@ foreach ($jobs as $job) {
     //    $job['launch'] = new AppLaunchForm($job['app_id'], $companies->getMyKey());
 
     $job['schedule'] = new \Ease\TWB4\LinkButton('schedule.php?id=' . $job['runtemplateid'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Schedule') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
-
     $job['appimage'] = new ATag('companyapp.php?id=' . $job['runtemplateid'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], $job['appname'], ['height' => 50, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);
     unset($job['appname']);
     unset($job['runtemplateid']);
@@ -54,7 +52,7 @@ foreach ($jobs as $job) {
 
 $companyPanelContents = [];
 $headRow = new Row();
-$logo = new \Ease\Html\ImgTag(strlen($companies->getDataValue('logo')) ? $companies->getDataValue('logo') : 'src\company.svg', 'logo', ['class' => 'img-fluid', 'min-width' => '100%']);
+$logo = new \Ease\Html\ImgTag(empty($companies->getDataValue('logo')) ? 'src\company.svg' : $companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid', 'min-width' => '100%']);
 $deleteButton = new \Ease\TWB4\LinkButton('companydelete.php?id=' . $companies->getMyKey(), '☠️&nbsp;' . _('Delete company'), 'danger');
 $headRow->addColumn(2, [$logo, '<p></p>', new \Ease\TWB4\LinkButton('companysetup.php?id=' . $companies->getMyKey(), '🛠️&nbsp;' . _('Company setup'), 'primary btn-lg btn-block '), '<p></p>', new \Ease\TWB4\LinkButton('tasks.php?company_id=' . $companies->getMyKey(), '🔧&nbsp;' . _('Setup tasks'), 'primary btn-lg btn-block'), '<p></p>', $deleteButton]);
 $headRow->addColumn(10, new EnvironmentView($companyEnver->getData()));
@@ -63,10 +61,10 @@ $companyPanelContents[] = new \Ease\Html\HrTag();
 $companyPanelContents[] = $jobList;
 $bottomLine = new Row();
 $oPage->container->addItem(new Panel(
-    $companies->getRecordName(),
-    'light',
-    $companyPanelContents,
-    $bottomLine
+                $companies->getRecordName(),
+                'light',
+                $companyPanelContents,
+                $bottomLine
 ));
 $oPage->addItem(new PageBottom());
 $oPage->draw();

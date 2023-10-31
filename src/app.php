@@ -60,7 +60,11 @@ foreach ($jobs as $job) {
     unset($job['nazev']);
     $job['launched_by'] = new \Ease\Html\ATag('user.php?id' . $job['launched_by'], $job['login']);
     unset($job['login']);
-    $job['begin'] = [$job['begin'], '<br>', new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
+    if(empty($job['begin'])){
+        $job['begin'] = '⏳'._('Not yet');
+    } else {
+        $job['begin'] = [$job['begin'], '<br>', new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
+    }
     $job['exitcode'] = new ExitCode($job['exitcode']);
     $jobList->addRowColumns($job);
 }
