@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Multi Flexi  - App class
  *
@@ -17,7 +16,9 @@ namespace MultiFlexi;
 class Application extends Engine
 {
     public $lastModifiedColumn;
+
     public $keyword;
+
     /**
      *
      * @var Company
@@ -43,11 +44,11 @@ class Application extends Engine
 
     /**
      *
-     * @return array
+     * @return Company
      */
     public function getCompany()
     {
-        return $this->company->getConnectionOptions();
+        return $this->company;
     }
 
     /**
@@ -85,7 +86,7 @@ class Application extends Engine
                 unset($data['imageraw']);
             }
         }
-                
+
         return parent::takeData($data);
     }
 
@@ -132,5 +133,29 @@ class Application extends Engine
     public static function isBinaryInPath($binary)
     {
         return !empty(self::findBinaryInPath($binary));
+    }
+
+    /**
+     * For "platform" return applications by config fields
+     * 
+     * @param string $platform AbraFlexi|Pohoda
+     *  
+     * @return array
+     */
+    public function getPlatformApps($platform)
+    {
+        $platformApps = [];
+        $confField = new Conffield();
+        foreach ($this->listingQuery() as $appId => $appInfo) {
+            $appConfFields = $confField->appConfigs($appInfo['id']);
+            $appConfs = array_keys($appConfFields);
+            if($appId == 16){
+                echo '';
+            }
+            if (preg_grep('/^'.strtoupper($platform).'_.*/', $appConfs)) {
+                $platformApps[$appId] = $appInfo;
+            }
+        }
+        return $platformApps;
     }
 }

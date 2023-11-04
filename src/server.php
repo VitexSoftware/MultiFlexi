@@ -22,7 +22,7 @@ $_SESSION['server'] = $servers->getMyKey();
 if ($oPage->isPosted()) {
     if ($servers->takeData($_POST) && !is_null($servers->saveToSQL())) {
         $servers->addStatusMessage(_('Server instance Saved'), 'success');
-        if ($servers->getDataValue('type') == 'ABRAFLEXI') {
+        if ($servers->getDataValue('type') == 'AbraFlexi') {
             $servers->prepareRemoteAbraFlexi();
         }
     } else {

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Multi Flexi  - AppToCompany class
  *
@@ -16,6 +15,8 @@ namespace MultiFlexi;
  */
 class RunTemplate extends Engine
 {
+
+    
     public function __construct($identifier = null, $options = [])
     {
         $this->myTable = 'runtemplate';
@@ -77,6 +78,13 @@ class RunTemplate extends Engine
         return parent::deleteFromSQL($data);
     }
 
+    public function getCompanyEnvironment()
+    {
+        $connectionData = $this->getAppInfo();
+        $platformHelperClass = '\\MultiFlexi\\'.$connectionData['type'].'\\Company';
+        $platformHelper = new $platformHelperClass($connectionData['company_id'],$connectionData);
+        return $platformHelper->getEnvironment();
+    }
     /**
      *
      * @return array
@@ -86,14 +94,7 @@ class RunTemplate extends Engine
         $connectionData = $this->getAppInfo();
         $customConfig = new Configuration();
 
-        $conConfig = [
-            'ABRAFLEXI_URL' => $connectionData['url'],
-            'ABRAFLEXI_LOGIN' => $connectionData['user'],
-            'ABRAFLEXI_PASSWORD' => $connectionData['password'],
-            'ABRAFLEXI_COMPANY' => $connectionData['company'],
-            'EASE_EMAILTO' => $connectionData['email'],
-            'EASE_LOGGER' => 'syslog|console',
-        ];
+        $conConfig = $this->getCompanyEnvironment();
 
         $appConfig = [];
         foreach ($customConfig->getAppConfig($connectionData['company_id'], $connectionData['app_id']) as $cfg) {
@@ -119,7 +120,7 @@ class RunTemplate extends Engine
                         ->where([$this->getMyTable() . '.' . $this->getKeyColumn() => $this->getMyKey()])
                         ->leftJoin('apps ON apps.id = runtemplate.app_id')
                         ->leftJoin('company ON company.id = runtemplate.company_id')
-                        ->leftJoin('servers ON servers.id = company.abraflexi')
+                        ->leftJoin('servers ON servers.id = company.server')
                         ->fetch();
     }
 
@@ -130,16 +131,13 @@ class RunTemplate extends Engine
     {
         $cmp = new Company((int) $this->getDataValue('company_id'));
         $cmp->setEnvironment();
-
         $envNames = [
             'EASE_EMAILTO' => $this->getDataValue('email'),
             'EASE_LOGGER' => $this->getDataValue('email') ? 'console|email' : 'console'
         ];
         $this->exportEnv($envNames);
-
         $customConfig = new Configuration();
         $customConfig->setEnvironment($cmp->getMyKey(), $app->getMyKey());
-
         $exec = $app->getDataValue('setup');
         $cmp->addStatusMessage('setup begin' . $exec . '@' . $cmp->getDataValue('nazev'));
         $cmp->addStatusMessage(shell_exec($exec), 'debug');

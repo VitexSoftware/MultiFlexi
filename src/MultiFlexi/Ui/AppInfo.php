@@ -50,7 +50,7 @@ class AppInfo extends TableTag
         //        $this->addInput(new InputEmailTag('email'), _('Send notification to'));
         //
         //        $this->addInput(new CustomerSelect('customer'), _('Customer'));
-        //        $this->addInput(new \Serverselect('abraflexi'), _('AbraFlexi server'));
+        //        $this->addInput(new \Serverselect('server'), _('AbraFlexi server'));
         //
         //        $this->addInput(new SemaforLight($this->engine->getDataValue('rw')),
         //                _('write permission'));

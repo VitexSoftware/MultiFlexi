@@ -18,7 +18,7 @@ class RegisterServerForm extends EngineForm
 {
     public function afterAdd()
     {
-        $this->addInput(new \Ease\Html\SelectTag('type', ['AbraFlexi'=>'AbraFlexi','Pohoda'=>_('Stormware Pohoda')]) , _('Server Type'));
+        $this->addInput( new ServerTypeSelect('type') , _('Server Type'));
         
         $this->addInput(
             new \Ease\Html\InputTextTag('name'),

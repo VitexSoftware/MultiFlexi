@@ -156,11 +156,11 @@ class User extends \Ease\User
         $password = addSlashes($formData[$this->passwordColumn]);
         if (empty($login)) {
             $this->addStatusMessage(_('missing login'), 'error');
-            return;
+            return null;
         }
         if (empty($password)) {
             $this->addStatusMessage(_('missing password'), 'error');
-            return;
+            return null;
         }
         if ($this->loadFromSQL([$this->loginColumn => $login])) {
             $this->setObjectName();

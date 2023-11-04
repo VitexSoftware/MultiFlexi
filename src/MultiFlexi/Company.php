@@ -133,8 +133,13 @@ class Company extends \MultiFlexi\Engine
         return ['data', 'objectName', 'evidence'];
     }
 
+    /**
+     * Company Environment
+     * 
+     * @return type
+     */
     public function getEnvironment()
     {
-        return $appEnvironment;
+        return (new CompanyEnv($this->getMyKey()))->getData();
     }
 }

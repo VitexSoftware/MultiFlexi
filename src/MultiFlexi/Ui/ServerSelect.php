@@ -49,7 +49,7 @@ class ServerSelect extends \Ease\Html\SelectTag
      */
     public function loadItems()
     {
-        $servers = ['' => _('Choose AbraFlexi server')];
+        $servers = ['' => _('Choose server Type')];
         $this->setMyTable('servers');
         $serversRaw = $this->getColumnsFromSQL(['id', 'name'], null, 'name');
         foreach ($serversRaw as $abraflexi) {

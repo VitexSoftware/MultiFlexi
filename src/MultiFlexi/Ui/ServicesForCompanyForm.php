@@ -35,13 +35,20 @@ class ServicesForCompanyForm extends Form
     public function __construct($company, $tagProperties = array())
     {
         $companyID = $company->getMyKey();
-        $allEnabledApps = (new Application())->listingQuery()->select('id AS app_id')->select('nazev AS app_name')->where('enabled', 1)->fetchAll();
+        
+        $serverCompanyInfo = (new Company())->listingQuery()->where('company.id', $companyID)->select('servers.type')->leftJoin('servers ON servers.id = company.server')->fetch();
+
+        $platformApps  =  (new Application())->getPlatformApps($serverCompanyInfo['type']);
+                //(new Application())->listingQuery()->select('id AS app_id')->select('nazev AS app_name')->where('enabled', 1)->fetchAll();
+        
         $glue = new RunTemplate();
         $assigned = $glue->getAppsForCompany($companyID);
         parent::__construct($tagProperties);
         $jobber = new \MultiFlexi\Job();
-        foreach ($allEnabledApps as $appData) {
+        foreach ($platformApps as $appData) {
             $appData['company_id'] = $companyID;
+            $appData['app_id'] = $appData['id'];
+            $appData['app_name'] = $appData['nazev'];
             if (array_key_exists($appData['id'], $assigned)) {
                 $appData['interv'] = $assigned[$appData['id']]['interv'];
                 $appData['runtemplateid'] = $assigned[$appData['id']]['id'];
@@ -50,6 +57,11 @@ class ServicesForCompanyForm extends Form
         }
     }
 
+    
+    
+    
+    
+    
     /**
      *
      */

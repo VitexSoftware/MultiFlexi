@@ -17,7 +17,7 @@ use MultiFlexi\Company;
 require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company')));
-$serverId = WebPage::getRequestValue('abraflexi', 'int');
+$serverId = WebPage::getRequestValue('server', 'int');
 if ($serverId) {
     $serverserver = new \MultiFlexi\Servers($serverId);
     $companyConfig = $serverserver->getConnectionDetails();
@@ -28,9 +28,10 @@ if ($serverId) {
 
 $companies = new Company(WebPage::getRequestValue('id', 'int'), $companyConfig);
 if (is_null($serverId) === false) {
-    $companies->setDataValue('abraflexi', $serverId);
+    $companies->setDataValue('server', $serverId);
 }
-$_SESSION['company'] = &$companies;
+$_SESSION['company'] = $companies->getMyKey();
+
 $companyEnver = new \MultiFlexi\CompanyEnv($companies->getMyKey());
 if ($oPage->isPosted()) {
     $companyEnver->deleteFromSQL(['company_id' => $companies->getMyKey()]);
@@ -45,7 +46,7 @@ if ($oPage->isPosted()) {
 
     if ($companies->deleteFromSQL(['id' => $companies->getMyKey()])) {
         $companies->addStatusMessage(_('Company Deleted'), 'success');
-        $oPage->redirect('server.php?id=' . $companies->getDataValue('abraflexi'));
+        $oPage->redirect('server.php?id=' . $companies->getDataValue('server'));
     } else {
         $companies->addStatusMessage(_('Error deleting Company') . ' ' . $companies->getDataValue('nazev'), 'error');
     }

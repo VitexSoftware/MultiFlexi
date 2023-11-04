@@ -16,13 +16,18 @@ use MultiFlexi\Conffield;
 
 require_once './init.php';
 $oPage->onlyForLogged();
-$oPage->addItem(new PageTop(_('Config Fields')));
+
 $appId = WebPage::getRequestValue('app_id', 'int');
 $confId = WebPage::getRequestValue('id', 'int');
 
+$appliacation = new \MultiFlexi\Application($appId);
+
+$_SESSION['application'] = $appliacation->getMyKey();
+
 $instanceName = '';
 
-$conffields = new Conffield($confId);
+$conffields = new Conffield($confId,['autoload'=>true]);
+
 $conffields->setDataValue('app_id', $appId);
 
 $delete = WebPage::getRequestValue('delete', 'int');
@@ -38,7 +43,7 @@ if (!is_null($delete)) {
 
 
 if ($oPage->isPosted()) {
-    if ($conffields->takeData($_POST) && !is_null($conffields->saveToSQL())) {
+    if ($conffields->takeData($_POST) && !is_null($conffields->dbsync())) {
         $conffields->addStatusMessage(_('Config field Saved'), 'success');
     } else {
         $conffields->addStatusMessage(
@@ -58,23 +63,29 @@ if (strlen($instanceName)) {
     $instanceLink = null;
 }
 
+$oPage->addItem(new PageTop(_('Config Fields')));
+
 $instanceRow = new Row();
-$instanceRow->addColumn(8, new ConfFieldsForm($conffields, new \Ease\Html\InputHiddenTag('app_id', $appId)));
+$instanceRow->addColumn(8, new ConfFieldsForm($conffields->getData(), new \Ease\Html\InputHiddenTag('app_id', $appId)));
 
 $cfgs = new \Ease\Html\UlTag();
 
 foreach ($conffields->appConfigs($appId) as $configInfo) {
     $cnfRow = new Row();
     $cnfRow->addColumn(2, $configInfo['type']);
-    $cnfRow->addColumn(4, new \Ease\TWB4\Badge('success', $configInfo['keyname']));
+    $cnfRow->addColumn(4, new ATag('conffield.php?app_id='.$appId.'&id='.$configInfo['id'], new \Ease\TWB4\Badge('success', $configInfo['keyname'])));
     $cnfRow->addColumn(4, $configInfo['description']);
     $cnfRow->addColumn(2, new \Ease\TWB4\LinkButton('?app_id=' . $appId . '&delete=' . $configInfo['id'], 'X', 'danger btn-sm'));
     $cfgs->addItemSmart($cnfRow);
 }
 
-$cfgs->addItem(new \Ease\TWB4\LinkButton('app.php?id=' . WebPage::getRequestValue('app_id', 'int'), _('Back to app'), 'warning'));
+$cfgs->addItem(new \Ease\TWB4\LinkButton('app.php?id=' . WebPage::getRequestValue('app_id', 'int'), [_('Back to app'), $appliacation->getRecordName()], 'warning'));
 
-$oPage->container->addItem(new Panel($instanceName, 'info', $instanceRow, $cfgs));
+$editorRow = new \Ease\TWB4\Row();
+$editorRow->addColumn(8, $instanceRow);
+$editorRow->addColumn(2, new AppLogo($appliacation));
+
+$oPage->container->addItem(new Panel($instanceName, 'default', $editorRow, $cfgs));
 
 $oPage->addItem(new PageBottom());
 

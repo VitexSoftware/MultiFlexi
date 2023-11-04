@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Multi Flexi - Company instance editor.
  *
@@ -30,7 +29,7 @@ $companies = new Company(WebPage::getRequestValue('id', 'int'), $companyConfig);
 if (is_null($serverId) === false) {
     $companies->setDataValue('server', $serverId);
 }
-$_SESSION['company'] = &$companies;
+$_SESSION['company'] = $companies->getMyKey();
 $companyEnver = new \MultiFlexi\CompanyEnv($companies->getMyKey());
 if ($oPage->isPosted()) {
     if (array_key_exists('env', $_POST)) {
@@ -44,7 +43,6 @@ if ($oPage->isPosted()) {
             } catch (\Exception $exc) {
                 $companies->addStatusMessage($exc->getMessage(), 'error');
             }
-
 
             //        $companies->prepareRemoteCompany(); TODO: Run applications setup on new company
             $oPage->redirect('?id=' . $companies->getMyKey());
@@ -67,10 +65,7 @@ if (empty($instanceName)) {
     $instanceName = _('New Company');
     $instanceLink = null;
 } else {
-    $instanceLink = new ATag(
-        $companies->getApiURL() . $companies->getDataValue('company'),
-        $companies->getApiURL() . $companies->getDataValue('company')
-    );
+    $instanceLink = new ATag($companies->getLink(), $companies->getRecordName());
 }
 
 $instanceRow = new Row();
