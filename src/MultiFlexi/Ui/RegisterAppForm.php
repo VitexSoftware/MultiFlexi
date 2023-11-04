@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Multi Flexi - Company Management Class
  *
@@ -22,6 +21,7 @@ use Ease\TWB4\Widgets\Toggle;
  */
 class RegisterAppForm extends EngineForm
 {
+
     public function afterAdd()
     {
         $this->setTagProperty('enctype', 'multipart/form-data');
@@ -30,13 +30,9 @@ class RegisterAppForm extends EngineForm
         $this->addInput(new InputTextTag('executable'), _('Path to binary'));
         $this->addInput(new InputTextTag('setup'), _('Setup Command'), '', _('Command used to setup new company for use with command'));
         $this->addInput(new InputTextTag('cmdparams'), _('Command arguments'), '', _('you can use macros like {ABRAFLEXI_URL} or custom defined config fields.'));
-
         $imgInput = $this->addInput(new InputFileTag('imageraw'), _('Application Icon'));
-
         $this->addInput(new Toggle('enabled', $this->engine->getDataValue('enabled') == 1), _('Enabled'));
-
         $this->addInput(new SubmitButton(_('Save'), 'success'));
-
         if (!is_null($this->engine->getDataValue('id'))) {
             $this->addItem(new InputHiddenTag('id'));
         }

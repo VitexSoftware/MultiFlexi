@@ -24,7 +24,7 @@ $oPage->onlyForLogged();
 header('Content-Type: application/json');
 $class = \Ease\WebPage::getRequestValue('class');
 /**
- * @var Engine Data Source
+ * @var \MultiFlexi\Engine Data Source
  */
 $engine = new $class();
 // DataTables PHP library

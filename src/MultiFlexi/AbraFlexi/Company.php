@@ -3,12 +3,12 @@
 namespace MultiFlexi\AbraFlexi;
 
 /**
- * Multi Flexi - Company Management Class
+ * Multi Flexi - AbraFlexiCompany Management Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2018-2023 Vitex Software
  */
-class Company extends \AbraFlexi\Company
+class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
 {
 
     use \Ease\SQL\Orm;
@@ -162,7 +162,7 @@ class Company extends \AbraFlexi\Company
                             $hookurl
                     ), 'warning');
         }
-        return (($hooker->lastResponseCode == 201) && ($hooker->lastResponseCode == 200));
+        return $hookResult;
     }
 
     /**
@@ -238,7 +238,7 @@ class Company extends \AbraFlexi\Company
         }
 
         unset($data['class']);
-        $data['logo'] = $this->obtainLogo(intval($data['server']), $data['company']);
+        // TODO: $data['logo'] = $this->obtainLogo(intval($data['server']), $data['company']);
         return parent::takeData($data);
     }
 
@@ -263,7 +263,7 @@ class Company extends \AbraFlexi\Company
             if (is_array($flexidata) && (count($flexidata) == 1) && is_array(current($flexidata))) {
                 $data = current($flexidata);
             }
-            $data['abraflexi'] = $this->abraflexiId;
+            $data['server'] = $this->abraflexiId;
             $data['company'] = $this->getCompany();
             unset($data['id']);
         }
@@ -278,7 +278,7 @@ class Company extends \AbraFlexi\Company
      */
     public function obtainLogo($abraflexiID, $company)
     {
-        $abraflexir = new Servers($abraflexiID);
+        $abraflexir = new Server($abraflexiID);
         $fbOptions = $abraflexir->getData();
         $fbOptions['company'] = $company;
         $logoEngine = new \AbraFlexi\ui\CompanyLogo(null, $fbOptions);
@@ -462,8 +462,18 @@ class Company extends \AbraFlexi\Company
         return ['data', 'objectName', 'evidence'];
     }
 
+    public function getServerEnvironment()
+    {
+        $server = new Server($this->getDataValue('server'));
+        return $server->getEnvironment();
+    }
+
     public function getEnvironment()
     {
-        return $appEnvironment;
+        $serverEnvironment = $this->getServerEnvironment();
+        $companyEnvHelper = new \MultiFlexi\CompanyEnv($this->getMyKey());
+        $companyEnvironment = $companyEnvHelper->getData();
+        $companyEnvironment['ABRAFLEXI_COMPANY']=$this->getCompany();
+        return array_merge($serverEnvironment, $companyEnvironment);
     }
 }
