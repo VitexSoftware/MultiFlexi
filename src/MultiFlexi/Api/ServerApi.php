@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Multi Flexi - API Base
  *
@@ -17,43 +16,43 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @author vitex
  */
-class AbraFlexiApi extends AbstractAbraFlexiApi
+class ServerApi extends AbstractServerApi
 {
     /**
      * Api Handler Engine
-     * @var \MultiFlexi\AbraFlexis
+     * @var \MultiFlexi\Servers
      */
     public $engine = null;
 
     /**
-     * Prepare AbraFlexis engine
+     * Prepare Servers engine
      */
     public function __construct()
     {
-        $this->engine = new \MultiFlexi\AbraFlexis();
+        $this->engine = new \MultiFlexi\Servers();
     }
 
     /**
-     * AbraFlexi info by ID
+     * Server info by ID
      *
-     * @url http://localhost/EASE/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/abraflexi/1
+     * @url http://localhost/EASE/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/server/1
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
-     * @param int $abraflexiId
+     * @param int $serverId
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getAbraFlexiById(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, int $abraflexiId, string $suffix): \Psr\Http\Message\ResponseInterface
+    public function getServerById(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, int $serverId, string $suffix): \Psr\Http\Message\ResponseInterface
     {
-        $this->engine->loadFromSQL($abraflexiId);
+        $this->engine->loadFromSQL($serverId);
         return DefaultApi::prepareResponse($response, ['id' => $this->engine->getMyKey(), 'name' => $this->engine->getRecordName(), 'executable' => $this->engine->getDataValue('executable')], $suffix);
     }
 
     /**
-     * GET listAbraFlexis
-     * Summary: Show All AbraFlexis
-     * Notes: All AbraFlexi servers registered
+     * GET listServers
+     * Summary: Show All Servers
+     * Notes: All Server servers registered
      * Output-Formats: [application/json]
      *
      * @param ServerRequestInterface $request  Request
@@ -61,20 +60,25 @@ class AbraFlexiApi extends AbstractAbraFlexiApi
      *
      * @return ResponseInterface
      */
-    public function listAbraFlexis(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function listServers(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        $abraflexisList = [];
-        foreach ($this->engine->getAll() as $abraflexi) {
-            $abraflexisList[] = ['id' => $abraflexi['id'], 'name' => $abraflexi['nazev'], 'executable' => $abraflexi['executable']];
+        $serversList = [];
+        foreach ($this->engine->getAll() as $server) {
+            $serversList[] = [
+                'id' => $server['id'],
+                'name' => $server['name'],
+                'type' => $server['type'],
+                'url' => $server['url'],
+            ];
         }
-        $response->getBody()->write(json_encode($abraflexisList, JSON_UNESCAPED_UNICODE));
+        $response->getBody()->write(json_encode($serversList, JSON_UNESCAPED_UNICODE));
         return $response->withHeader('Content-type', 'application/json');
     }
 
     /**
-     * POST setAbraFlexiById
-     * Summary: Create or Update AbraFlexi record
-     * Notes: Create or Upda single AbraFlexi record
+     * POST setServerById
+     * Summary: Create or Update Server record
+     * Notes: Create or Upda single Server record
      * Output-Formats: [application/xml, application/json]
      *
      * @param ServerRequestInterface $request  Request
@@ -82,13 +86,14 @@ class AbraFlexiApi extends AbstractAbraFlexiApi
      *
      * @return ResponseInterface
      */
-    public function setAbraFlexiById(
-        ServerRequestInterface $request,
-        ResponseInterface $response
-    ): ResponseInterface {
+    public function setServerById(
+            ServerRequestInterface $request,
+            ResponseInterface $response
+    ): ResponseInterface
+    {
         $queryParams = $request->getQueryParams();
-        if (key_exists('abraflexiId', $queryParams)) {
-            $this->engine->setMyKey($queryParams['abraflexiId']);
+        if (key_exists('serverId', $queryParams)) {
+            $this->engine->setMyKey($queryParams['serverId']);
             $this->engine->updateToSQL($queryParams);
         } else {
             $this->engine->insertToSQL($queryParams);

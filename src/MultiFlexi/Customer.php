@@ -6,7 +6,7 @@ namespace MultiFlexi;
  * Multi Flexi - Customer Management Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2022 Vitex Software
+ * @copyright  2018-2023 Vitex Software
  */
 class Customer extends DBEngine
 {
@@ -30,20 +30,20 @@ class Customer extends DBEngine
     public function columns($columns = [])
     {
 
-//+-----------+--------------+------+-----+---------+----------------+
-//| Field     | Type         | Null | Key | Default | Extra          |
-//+-----------+--------------+------+-----+---------+----------------+
-//| id        | int(11)      | NO   | PRI | NULL    | auto_increment |
-//| enabled   | tinyint(1)   | NO   |     | 0       |                |
-//| settings  | text         | YES  |     | NULL    |                |
-//| email     | varchar(128) | NO   |     | NULL    |                |
-//| firstname | varchar(32)  | YES  |     | NULL    |                |
-//| lastname  | varchar(32)  | YES  |     | NULL    |                |
-//| password  | varchar(40)  | NO   |     | NULL    |                |
-//| login     | varchar(32)  | NO   | MUL | NULL    |                |
-//| DatCreate | datetime     | NO   |     | NULL    |                |
-//| DatSave   | datetime     | YES  |     | NULL    |                |
-//+-----------+--------------+------+-----+---------+----------------+
+        //+-----------+--------------+------+-----+---------+----------------+
+        //| Field     | Type         | Null | Key | Default | Extra          |
+        //+-----------+--------------+------+-----+---------+----------------+
+        //| id        | int(11)      | NO   | PRI | NULL    | auto_increment |
+        //| enabled   | tinyint(1)   | NO   |     | 0       |                |
+        //| settings  | text         | YES  |     | NULL    |                |
+        //| email     | varchar(128) | NO   |     | NULL    |                |
+        //| firstname | varchar(32)  | YES  |     | NULL    |                |
+        //| lastname  | varchar(32)  | YES  |     | NULL    |                |
+        //| password  | varchar(40)  | NO   |     | NULL    |                |
+        //| login     | varchar(32)  | NO   | MUL | NULL    |                |
+        //| DatCreate | datetime     | NO   |     | NULL    |                |
+        //| DatSave   | datetime     | YES  |     | NULL    |                |
+        //+-----------+--------------+------+-----+---------+----------------+
 
 
         return parent::columns([

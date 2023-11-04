@@ -26,9 +26,9 @@ class PageBottom extends \Ease\Html\FooterTag
     {
         $this->includeCSS('https://use.fontawesome.com/releases/v5.3.1/css/all.css');
         $container = $this->setTagID('footer');
-//        if (\Ease\Shared::user()->getUserID()) {
-//        $this->addItem(new \Ease\ui\BrowsingHistory());
-//        }
+        //        if (\Ease\Shared::user()->getUserID()) {
+        //        $this->addItem(new \Ease\ui\BrowsingHistory());
+        //        }
         $this->addItem('<hr>');
         $footrow = new \Ease\TWB4\Row();
 

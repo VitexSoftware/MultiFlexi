@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Multi Flexi -
+ * Multi Flexi - App Api implementation
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * @copyright  2020-2023 Vitex Software
  */
 
 namespace MultiFlexi\Api;
@@ -46,7 +46,7 @@ class AppApi extends AbstractAppApi
         $appData = $this->engine->getData();
         switch ($suffix) {
             case 'html':
-//                $appData['nazev'] = new \Ease\Html\ATag($appData['id'] . '.html', $appData['nazev']);
+                //                $appData['nazev'] = new \Ease\Html\ATag($appData['id'] . '.html', $appData['nazev']);
                 $appData['image'] = new \Ease\Html\ATag($appData['id'] . '.html', new \Ease\Html\ImgTag($appData['image'], $appData['nazev'], ['width' => '64']));
 
                 break;

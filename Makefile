@@ -61,7 +61,7 @@ dimage: debs2deb
 	docker build -t vitexsoftware/multiflexi .
 
 drun: dimage
-	docker run  -dit --name MultiAbraFlexiSetup -p 8080:80 vitexsoftware/multiflexi
+	docker run  -dit --name MultiServersetup -p 8080:80 vitexsoftware/multiflexi
 	firefox http://localhost:8080?login=demo\&password=demo
 
 vagrant: packages

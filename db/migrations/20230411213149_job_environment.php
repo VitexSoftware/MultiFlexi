@@ -22,7 +22,7 @@ final class JobEnvironment extends AbstractMigration
     {
         $table = $this->table('job');
         $table
-                ->addColumn('env', 'text', ['comment' => 'Job Envitonment', 'default' => null, 'null' => true])
+                ->addColumn('env', 'text', ['comment' => 'Job Environment', 'default' => null, 'null' => true])
                 ->update();
     }
 }

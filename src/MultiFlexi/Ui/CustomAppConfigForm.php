@@ -4,7 +4,7 @@
  * Multi Flexi - Custom Application Config form Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2022 Vitex Software
+ * @copyright  2018-2023 Vitex Software
  */
 
 namespace MultiFlexi\Ui;
@@ -24,7 +24,7 @@ class CustomAppConfigForm extends EngineForm
 
         foreach (\MultiFlexi\Conffield::getAppConfigs($engine->getDataValue('app_id')) as $fieldInfo) {
             if ($fieldInfo['type'] == 'checkbox') {
-                $input = new \Ease\TWB4\Widgets\Toggle($fieldInfo['keyname'], array_key_exists($fieldInfo['keyname'], $values) ? ($values[$fieldInfo['keyname']]['value'] == 'true' ? true : false ) : $fieldInfo['defval'], 'true', []);
+                $input = new \Ease\TWB4\Widgets\Toggle($fieldInfo['keyname'], array_key_exists($fieldInfo['keyname'], $values) ? ($values[$fieldInfo['keyname']]['value'] == 'true' ? true : false) : $fieldInfo['defval'], 'true', []);
             } else {
                 $input = new \Ease\Html\InputTag($fieldInfo['keyname'], array_key_exists($fieldInfo['keyname'], $values) ? $values[$fieldInfo['keyname']]['value'] : $fieldInfo['defval'], ['type' => $fieldInfo['type']]);
             }

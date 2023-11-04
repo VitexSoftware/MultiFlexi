@@ -16,27 +16,27 @@ msgstr ""
 "X-Poedit-SearchPath-0: ../src\n"
 "X-Poedit-SearchPathExcluded-0: ../vendor\n"
 
-#: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:56
+#: ../src/AbraFlexi/MultiFlexi/Servers.php:56
 msgid "Instance name cannot be empty"
 msgstr "Instance name cannot be empty"
 
-#: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:61
+#: ../src/AbraFlexi/MultiFlexi/Servers.php:61
 msgid "AbraFlexi API URL cannot be empty"
 msgstr "AbraFlexi API URL cannot be empty"
 
-#: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:66
+#: ../src/AbraFlexi/MultiFlexi/Servers.php:66
 msgid "User name cannot be empty"
 msgstr "User name cannot be empty"
 
-#: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:70
+#: ../src/AbraFlexi/MultiFlexi/Servers.php:70
 msgid "API User password cannot be empty"
 msgstr "API User password cannot be empty"
 
-#: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:75
+#: ../src/AbraFlexi/MultiFlexi/Servers.php:75
 msgid "Company code cannot be empty"
 msgstr "Company code cannot be empty"
 
-#: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:79
+#: ../src/AbraFlexi/MultiFlexi/Servers.php:79
 msgid "AbraFlexi API URL cannot end with slash"
 msgstr "AbraFlexi API URL cannot end with slash"
 

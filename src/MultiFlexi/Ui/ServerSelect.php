@@ -4,19 +4,23 @@
  * Multi Flexi  - AbraFlexi server select
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2015-2020 Vitex Software
+ * @copyright  2015-2023 Vitex Software
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Description of AbraFlexiSelect
+ * Description of Serverselect
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class AbraFlexiSelect extends \Ease\Html\SelectTag
+class ServerSelect extends \Ease\Html\SelectTag
 {
     use \Ease\SQL\Orm;
+    use \Ease\RecordKey;
+    
+    public $myTable = 'servers';
+
 
     /**
      * AbraFlexi chooser
@@ -45,12 +49,12 @@ class AbraFlexiSelect extends \Ease\Html\SelectTag
      */
     public function loadItems()
     {
-        $abraflexis = ['' => _('Choose AbraFlexi server')];
-        $this->setMyTable('abraflexis');
-        $abraflexisRaw = $this->getColumnsFromSQL(['id', 'name'], null, 'name');
-        foreach ($abraflexisRaw as $abraflexi) {
-            $abraflexis[$abraflexi['id']] = $abraflexi['name'];
+        $servers = ['' => _('Choose server Type')];
+        $this->setMyTable('servers');
+        $serversRaw = $this->getColumnsFromSQL(['id', 'name'], null, 'name');
+        foreach ($serversRaw as $abraflexi) {
+            $servers[$abraflexi['id']] = $abraflexi['name'];
         }
-        return $abraflexis;
+        return $servers;
     }
 }

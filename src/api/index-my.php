@@ -31,7 +31,7 @@ $customErrorHandler = function (
     bool $logErrorDetails,
     ?LoggerInterface $logger = null
 ) use ($app) {
-//    $logger->error($exception->getMessage());
+    //    $logger->error($exception->getMessage());
 
     $payload = ['error' => $exception->getMessage()];
 

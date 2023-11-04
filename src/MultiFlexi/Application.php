@@ -1,10 +1,9 @@
 <?php
-
 /**
  * Multi Flexi  - App class
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2020 Vitex Software
+ * @copyright  2020-2023 Vitex Software
  */
 
 namespace MultiFlexi;
@@ -17,7 +16,9 @@ namespace MultiFlexi;
 class Application extends Engine
 {
     public $lastModifiedColumn;
+
     public $keyword;
+
     /**
      *
      * @var Company
@@ -43,11 +44,11 @@ class Application extends Engine
 
     /**
      *
-     * @return array
+     * @return Company
      */
     public function getCompany()
     {
-        return $this->company->getConnectionOptions();
+        return $this->company;
     }
 
     /**
@@ -55,15 +56,13 @@ class Application extends Engine
      *
      * @param array $data
      *
-     * @return boolean
+     * @return int
      */
     public function takeData($data)
     {
-        $check = true;
-        $data['enabled'] = (($data['enabled'] == 'on') || ($data['enabled'] == 1) );
+        $data['enabled'] = (($data['enabled'] == 'on') || ($data['enabled'] == 1));
         if (array_key_exists('nazev', $data) && empty($data['nazev'])) {
             $this->addStatusMessage(_('Name is empty'), 'warning');
-            $check = false;
         }
 
         if (array_key_exists('executable', $data)) {
@@ -73,7 +72,7 @@ class Application extends Engine
                 $data['enabled'] = false;
             } else {
                 if ($data['executable'] != $executable) {
-//                    $this->addStatusMessage(sprintf(_('Executable %s found as %s'), $data['executable'], $executable), 'success');
+                    //                    $this->addStatusMessage(sprintf(_('Executable %s found as %s'), $data['executable'], $executable), 'success');
                     $data['executable'] = $executable;
                 }
             }
@@ -88,8 +87,7 @@ class Application extends Engine
             }
         }
 
-        parent::takeData($data);
-        return $check;
+        return parent::takeData($data);
     }
 
     /**
@@ -135,5 +133,29 @@ class Application extends Engine
     public static function isBinaryInPath($binary)
     {
         return !empty(self::findBinaryInPath($binary));
+    }
+
+    /**
+     * For "platform" return applications by config fields
+     * 
+     * @param string $platform AbraFlexi|Pohoda
+     *  
+     * @return array
+     */
+    public function getPlatformApps($platform)
+    {
+        $platformApps = [];
+        $confField = new Conffield();
+        foreach ($this->listingQuery() as $appId => $appInfo) {
+            $appConfFields = $confField->appConfigs($appInfo['id']);
+            $appConfs = array_keys($appConfFields);
+            if($appId == 16){
+                echo '';
+            }
+            if (preg_grep('/^'.strtoupper($platform).'_.*/', $appConfs)) {
+                $platformApps[$appId] = $appInfo;
+            }
+        }
+        return $platformApps;
     }
 }

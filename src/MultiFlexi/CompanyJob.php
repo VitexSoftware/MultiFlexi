@@ -126,8 +126,8 @@ class CompanyJob extends DBEngine implements DatabaseEngine
                 break;
         }
 
-//        $dataRowRaw['message'] = (new AnsiToHtmlConverter())->convert(str_replace('.........', '......... ', $dataRowRaw['message']));
-//        $dataRowRaw['created'] = (new LiveAge((new DateTime($dataRowRaw['created']))->getTimestamp()))->__toString();
+        //        $dataRowRaw['message'] = (new AnsiToHtmlConverter())->convert(str_replace('.........', '......... ', $dataRowRaw['message']));
+        //        $dataRowRaw['created'] = (new LiveAge((new DateTime($dataRowRaw['created']))->getTimestamp()))->__toString();
 
         return parent::completeDataRow($dataRowRaw);
     }

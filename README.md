@@ -21,7 +21,7 @@ Screenshoty
 -----------
 
 Přehled stavu aplikace:  
-![MFB](doc/MultiAbraFlexiSetup.png?raw=true)
+![MFB](doc/MultiServersetup.png?raw=true)
 
 Editace Aplikace/Skriptu:
 ![MFB](doc/Application.png?raw=true)  
@@ -116,8 +116,8 @@ using database multiflexi
  == 20160203130652 User: migrating
  == 20160203130652 User: migrated 0.0181s
 
- == 20160825235219 AbraFlexis: migrating
- == 20160825235219 AbraFlexis: migrated 0.0146s
+ == 20160825235219 Servers: migrating
+ == 20160825235219 Servers: migrated 0.0146s
 
  == 20180208121253 Customer: migrating
  == 20180208121253 Customer: migrated 0.0190s

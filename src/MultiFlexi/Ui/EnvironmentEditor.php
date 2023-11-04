@@ -30,9 +30,9 @@ class EnvironmentEditor extends \Ease\Html\TableTag
         $this->addRowHeaderColumns([_('Keyword'), _('Value')]);
         $this->fields = $fields;
         foreach ($fields as $fieldProperties) {
-//            if (stristr($fieldProperties['keyword'], 'pass')) {
-//                $value = preg_replace('(.)', '*', $value);
-//            }
+            //            if (stristr($fieldProperties['keyword'], 'pass')) {
+            //                $value = preg_replace('(.)', '*', $value);
+            //            }
             $tableRow = $this->tBody->addItem(new \Ease\Html\TrTag());
             $keyInput = new \Ease\Html\ATag('#', $fieldProperties['keyword'], ['class' => 'editable', 'id' => 'keyword', 'data-pk' => $fieldProperties['id'], 'data-url' => 'companyenv.php', 'data-title' => _('Update Keyname')]);
             $tableRow->addItem(new \Ease\Html\TdTag($keyInput, ['style' => 'width: 20%']));
@@ -49,7 +49,7 @@ class EnvironmentEditor extends \Ease\Html\TableTag
         $this->includeJavaScript('js/bootstrap-editable.js');
         $this->includeCss('css/bootstrap-editable.css');
         $this->addJavaScript("$.fn.editable.defaults.mode = 'inline';");
-//        $this->addJavaScript("$.fn.editable.options.savenochange = true;");
+        //        $this->addJavaScript("$.fn.editable.options.savenochange = true;");
         $this->addJavaScript("      $.fn.editableform.buttons =
         '<button type=\"submit\" class=\"btn btn-primary btn-sm editable-submit\">' +
         '<i class=\"fa fa-fw fa-check\"></i>' +
@@ -60,10 +60,10 @@ class EnvironmentEditor extends \Ease\Html\TableTag
         ");
         $this->addJavaScript("$('.editable').editable();", null, true);
     }
-//    public function &addRowColumns($columns = null, $properties = [])
-//    {
-//        $key = [new InplaceInput($columns[0]), ' 🖉'];
-//        $value = [new InplaceInput($columns[1]), ' 🖉'];
-//        return parent::addRowColumns([$key, $value], $properties);
-//    }
+    //    public function &addRowColumns($columns = null, $properties = [])
+    //    {
+    //        $key = [new InplaceInput($columns[0]), ' 🖉'];
+    //        $value = [new InplaceInput($columns[1]), ' 🖉'];
+    //        return parent::addRowColumns([$key, $value], $properties);
+    //    }
 }

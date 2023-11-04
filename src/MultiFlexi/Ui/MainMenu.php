@@ -27,8 +27,8 @@ class MainMenu extends \Ease\Html\DivTag
     /**
      * Data source.
      *
-     * @param type   $source
-     * @param string $icon   Icon column
+     * @param \Ease\Engine       $source
+     * @param string $icon       Icon column
      * @param \MultiFlexi\Engine $nest Object place
      *
      * @return string
@@ -49,10 +49,10 @@ class MainMenu extends \Ease\Html\DivTag
                     $uInfo[$namecolumn] .= ' ✓';
                 }
 
-                if ($icon) {
-                    $logo = new \Ease\Html\ImgTag($uInfo[$icon], $uInfo[$namecolumn], ['height' => 20]) . '&nbsp;';
-                } else {
+                if (empty($icon)) {
                     $logo = '';
+                } else {
+                    $logo = new \Ease\Html\ImgTag($uInfo[$icon], $uInfo[$namecolumn], ['height' => 20]) . '&nbsp;';
                 }
                 $itemList[$source->keyword . '.php?' . $keycolumn . '=' . $uInfo[$keycolumn]] = $logo . $uInfo[$namecolumn];
             }
@@ -69,22 +69,22 @@ class MainMenu extends \Ease\Html\DivTag
         $nav = $this->addItem(new BootstrapMenu('main-menu', null, ['class' => 'navbar navbar-expand-lg navbar-light bg-light']));
         if (\Ease\Shared::user()->isLogged()) { //Authenticated user
             $oPage = WebPage::singleton();
-            $abraflexis = $this->getMenuList(new \MultiFlexi\AbraFlexis());
+            $servers = $this->getMenuList(new \MultiFlexi\Servers());
             $customers = $this->getMenuList(new \MultiFlexi\Customer(), null, $oPage->customer);
             $companys = $this->getMenuList(new \MultiFlexi\Company(), 'logo');
             $apps = $this->getMenuList(new \MultiFlexi\Application(), 'image');
-            $this->abraflexisMenuEnabled($nav, $abraflexis);
-            if (empty($abraflexis) && empty($customers) && empty($companys)) { // All empty yet
+            $this->serversMenuEnabled($nav, $servers);
+            if (empty($servers) && empty($customers) && empty($companys)) { // All empty yet
                 \MultiFlexi\User::singleton()->addStatusMessage(_('No server registered yet. Please register one.'), 'warning');
                 $this->customersMenuDisabled($nav);
                 $this->companysMenuDisabled($nav);
             } else {
-                if (count($abraflexis) && empty($customers) && empty($companys)) {
+                if (count($servers) && empty($customers) && empty($companys)) {
                     $this->customersMenuEnabled($nav, $customers);
                     $this->companysMenuDisabled($nav);
                     \MultiFlexi\User::singleton()->addStatusMessage(_('No customer registered yet. Please register one.'), 'warning');
                 } else {
-                    if (count($abraflexis) && count($customers) && empty($companys)) {
+                    if (count($servers) && count($customers) && empty($companys)) {
                         \MultiFlexi\User::singleton()->addStatusMessage(_('No company registered yet. Please register one.'), 'warning');
                         $this->customersMenuEnabled($nav, $customers);
                         $nav->addMenuItem(new \Ease\TWB4\LinkButton('companysetup.php', '<img width=30 src=images/company.svg> ' . _('Companies'), 'warning'), 'right');
@@ -129,39 +129,41 @@ class MainMenu extends \Ease\Html\DivTag
     }
 
     /**
-     *
-     * @param type $nav
-     * @param type $abraflexis
+     * Servers menu
+     * 
+     * @param \Ease\Html\NavTag $nav
+     * @param array $servers
      */
-    public function abraflexisMenuEnabled($nav, $abraflexis)
+    public function serversMenuEnabled($nav, $servers)
     {
-        $abraflexisMenu = ['abraflexi.php' => _('Register AbraFlexi Server')];
-        if (!empty($abraflexis)) {
-            $abraflexisMenu['abraflexis.php'] = _('Instance list');
+        $serversMenu = ['server.php' => _('Register new Server')];
+        if (!empty($servers)) {
+            $serversMenu['servers.php'] = _('Instance list');
         }
 
         $nav->addDropDownMenu(
-            '<img width=30 src=images/abraflexi-server.svg> ' . _('Servers'),
-            array_merge($abraflexisMenu, ['' => ''], $abraflexis)
+            '<img width=30 src=images/server.svg> ' . _('Servers'),
+            array_merge($serversMenu, ['' => ''], $servers)
         );
     }
 
     /**
-     *
-     * @param type $nav
-     * @param type $companys
+     * Company Menu
+     * 
+     * @param \Ease\Html\NavTag $nav
+     * @param array $companys
      */
     public function companysMenuEnabled($nav, $companys)
     {
         $nav->addDropDownMenu(
             '<img width=30 src=images/company.svg> ' . _('Companies'),
-            array_merge(['company.php' => _('New Company')], ['' => ''], $companys)
+            array_merge(['companysetup.php' => _('New Company')], ['' => ''], $companys)
         );
     }
 
     /**
      *
-     * @param type $nav
+     * @param \Ease\Html\NavTag $nav
      */
     public function companysMenuDisabled($nav)
     {

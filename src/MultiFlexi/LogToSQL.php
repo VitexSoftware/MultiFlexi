@@ -4,7 +4,7 @@
  * Database Engine class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2022 Vitex@hippy.cz (G)
+ * @copyright  2018-2023 Vitex@hippy.cz (G)
  */
 
 namespace MultiFlexi;
@@ -30,7 +30,7 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
      */
     public function __construct()
     {
-//        parent::__construct();
+        //        parent::__construct();
         $this->setUser(User::singleton()->getUserID());
     }
 

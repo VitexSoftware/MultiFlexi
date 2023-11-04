@@ -16,27 +16,27 @@ msgstr ""
 "X-Poedit-SearchPath-0: ../src\n"
 "X-Poedit-SearchPathExcluded-0: ../vendor\n"
 
-#: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:56
+#: ../src/AbraFlexi/MultiFlexi/Servers.php:56
 msgid "Instance name cannot be empty"
 msgstr "Jméno instance nemůže být prázdné"
 
-#: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:61
+#: ../src/AbraFlexi/MultiFlexi/Servers.php:61
 msgid "AbraFlexi API URL cannot be empty"
 msgstr "AbraFlexi API URL nemůže být prázdné"
 
-#: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:66
+#: ../src/AbraFlexi/MultiFlexi/Servers.php:66
 msgid "User name cannot be empty"
 msgstr "Jméno uživatele nemůže být prázdné"
 
-#: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:70
+#: ../src/AbraFlexi/MultiFlexi/Servers.php:70
 msgid "API User password cannot be empty"
 msgstr "AbraFlexi API Heslo nemůže být prázdné"
 
-#: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:75
+#: ../src/AbraFlexi/MultiFlexi/Servers.php:75
 msgid "Company code cannot be empty"
 msgstr "Kód firmy nemůže být prázdný"
 
-#: ../src/AbraFlexi/MultiFlexi/AbraFlexis.php:79
+#: ../src/AbraFlexi/MultiFlexi/Servers.php:79
 msgid "AbraFlexi API URL cannot end with slash"
 msgstr "AbraFlexi API URL nemůže končit lomítkem"
 
@@ -192,7 +192,7 @@ msgstr "Ne"
 msgid "Dismis"
 msgstr "Zrušit"
 
-#: ../src/AbraFlexi/MultiFlexi/Logger.php:110 ../src/abraflexis.php:26
+#: ../src/AbraFlexi/MultiFlexi/Logger.php:110 ../src/servers.php:26
 #: ../src/apps.php:26
 msgid "ID"
 msgstr "ID"
@@ -226,7 +226,7 @@ msgid "Code"
 msgstr "Kód"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:23
-#: ../src/abraflexis.php:26 ../src/apps.php:26
+#: ../src/servers.php:26 ../src/apps.php:26
 msgid "Name"
 msgstr "Jméno"
 
@@ -251,7 +251,7 @@ msgstr "Upravit"
 msgid "Register"
 msgstr "Registrovat"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/AbraFlexiSelect.php:43
+#: ../src/AbraFlexi/MultiFlexi/Ui/Serverselect.php:43
 msgid "Choose AbraFlexi server"
 msgstr "Zvolte server AbraFlexi"
 
@@ -628,43 +628,43 @@ msgstr "O Programu"
 msgid "Vitex Software"
 msgstr "Vitex Software"
 
-#: ../src/abraflexi.php:19
+#: ../src/server.php:19
 msgid "AbraFlexi instance"
 msgstr "Instance AbraFlexi"
 
-#: ../src/abraflexi.php:26
+#: ../src/server.php:26
 msgid "AbraFlexi instance Saved"
 msgstr "Instance AbraFlexi uložena"
 
-#: ../src/abraflexi.php:29
+#: ../src/server.php:29
 msgid "Error saving AbraFlexi instance"
 msgstr "Chyba ukládání AbraFlexi instance"
 
-#: ../src/abraflexi.php:38
+#: ../src/server.php:38
 msgid "New AbraFlexi instance"
 msgstr "Nová instance AbraFlexi"
 
-#: ../src/abraflexis.php:19
+#: ../src/servers.php:19
 msgid "Multi AbraFlexi"
 msgstr "Multi AbraFlexi"
 
-#: ../src/abraflexis.php:26
+#: ../src/servers.php:26
 msgid "Url"
 msgstr "Url"
 
-#: ../src/abraflexis.php:26 ../src/login.php:62 ../src/passwordrecovery.php:45
+#: ../src/servers.php:26 ../src/login.php:62 ../src/passwordrecovery.php:45
 msgid "Username"
 msgstr "Uživatelské jméno"
 
-#: ../src/abraflexis.php:26 ../src/abraflexis.php:36
+#: ../src/servers.php:26 ../src/servers.php:36
 msgid "Add company"
 msgstr "Přidat společnost"
 
-#: ../src/abraflexis.php:40 ../src/apps.php:33
+#: ../src/servers.php:40 ../src/apps.php:33
 msgid "AbraFlexi Instances"
 msgstr "Instance AbraFlexi"
 
-#: ../src/abraflexis.php:40 ../src/apps.php:33
+#: ../src/servers.php:40 ../src/apps.php:33
 msgid "Register new"
 msgstr "Registrovant nový"
 

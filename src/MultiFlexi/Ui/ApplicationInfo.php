@@ -1,26 +1,19 @@
 <?php
 
-declare(strict_types=1);
-
 /**
- * Multi Flexi -
+ * Multi Flexi - Application Info Panel
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * @copyright  2020-2023 Vitex Software
  */
 
-/**
- *
- *
- * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
- */
+declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use MultiFlexi\Application,
-    \MultiFlexi\Company,
-    \Ease\TWB4\Panel;
+use MultiFlexi\Application;
+use MultiFlexi\Company;
+use Ease\TWB4\Panel;
 
 /**
  * Description of ApplicationInfo
