@@ -22,16 +22,31 @@ class DbStatus extends \Ease\TWB4\Row
     public function __construct()
     {
         parent::__construct();
-        $abraflexis = (string) (new \MultiFlexi\AbraFlexis())->listingQuery()->count();
+        $servers = (string) (new \MultiFlexi\Servers())->listingQuery()->count();
         $customers = (string) (new \MultiFlexi\Customer())->listingQuery()->count();
         $companys = (string) (new \MultiFlexi\Company())->listingQuery()->count();
         $apps = (string) (new \MultiFlexi\Application())->listingQuery()->count();
         $assigned = (string) (new \MultiFlexi\RunTemplate())->listingQuery()->count();
 
-        $this->addColumn(2, new \Ease\Html\ButtonTag([_('Apps') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $apps)], ['class' => 'btn btn-default', 'type' => 'button']));
-        $this->addColumn(2, new \Ease\Html\ButtonTag([_('Servers') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $abraflexis)], ['class' => 'btn btn-default', 'type' => 'button']));
-        $this->addColumn(2, new \Ease\Html\ButtonTag([_('Customers') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $customers)], ['class' => 'btn btn-default', 'type' => 'button']));
-        $this->addColumn(2, new \Ease\Html\ButtonTag([_('Companies') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $companys)], ['class' => 'btn btn-default', 'type' => 'button']));
-        $this->addColumn(2, new \Ease\Html\ButtonTag([_('Assigned') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $assigned)], ['class' => 'btn btn-default', 'type' => 'button']));
+        $this->addColumn(2, new \Ease\Html\ButtonTag(
+            [_('Apps') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $apps)],
+            ['class' => 'btn btn-default', 'type' => 'button']
+        ));
+        $this->addColumn(2, new \Ease\Html\ButtonTag(
+            [_('Servers') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $servers)],
+            ['class' => 'btn btn-default', 'type' => 'button']
+        ));
+        $this->addColumn(2, new \Ease\Html\ButtonTag(
+            [_('Customers') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $customers)],
+            ['class' => 'btn btn-default', 'type' => 'button']
+        ));
+        $this->addColumn(2, new \Ease\Html\ButtonTag(
+            [_('Companies') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $companys)],
+            ['class' => 'btn btn-default', 'type' => 'button']
+        ));
+        $this->addColumn(2, new \Ease\Html\ButtonTag(
+            [_('Assigned') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $assigned)],
+            ['class' => 'btn btn-default', 'type' => 'button']
+        ));
     }
 }

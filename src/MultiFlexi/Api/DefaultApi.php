@@ -21,7 +21,7 @@ class DefaultApi extends AbstractDefaultApi
 {
     public function rootGet(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-         return $response->withHeader('Location', 'index.html')->withStatus(302);
+        return $response->withHeader('Location', 'index.html')->withStatus(302);
     }
 
     /**

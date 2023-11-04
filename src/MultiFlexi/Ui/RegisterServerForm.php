@@ -4,7 +4,7 @@
  * Multi Flexi  - New AbraFlexi registration form
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2015-2020 Vitex Software
+ * @copyright  2015-2023 Vitex Software
  */
 
 namespace MultiFlexi\Ui;
@@ -14,13 +14,15 @@ namespace MultiFlexi\Ui;
  *
  * @author
  */
-class RegisterAbraFlexiForm extends EngineForm
+class RegisterServerForm extends EngineForm
 {
     public function afterAdd()
     {
+        $this->addInput( new ServerTypeSelect('type') , _('Server Type'));
+        
         $this->addInput(
             new \Ease\Html\InputTextTag('name'),
-            _('AbraFlexi instance Name')
+            _('Server instance Name')
         );
         $this->addInput(
             new \Ease\Html\InputTextTag('url'),

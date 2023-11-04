@@ -4,7 +4,7 @@
  * Multi Flexi  - Edit User Form  class
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2015-2022 Vitex Software
+ * @copyright  2015-2023 Vitex Software
  */
 
 namespace MultiFlexi\Ui;
@@ -52,7 +52,7 @@ class UserForm extends Form
         ), _('Username'));
 
         $this->addItem(new InputHiddenTag('class', get_class($user)));
-//        $this->addItem(new \Ease\Html\InputHiddenTag('enquiry_id', $user->getDataValue('enquiry_id')));
+        //        $this->addItem(new \Ease\Html\InputHiddenTag('enquiry_id', $user->getDataValue('enquiry_id')));
 
         $this->addItem(new \Ease\Html\DivTag(new SubmitButton(
             _('Save'),

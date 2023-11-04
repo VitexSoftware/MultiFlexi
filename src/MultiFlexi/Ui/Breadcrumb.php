@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Multi Flexi -
  *
@@ -16,32 +15,34 @@ namespace MultiFlexi\Ui;
  */
 class Breadcrumb extends \Ease\TWB4\Breadcrumb
 {
+
     public function __construct($content = null, $properties = [])
     {
         parent::__construct($content, $properties);
         /**
          * @var \MultiFlexi\Ui\WebPage Description
          */
-
         if (empty($_SESSION['customer'])) {
             $this->addPage(_('choose Customer'), 'customers.php');
         } else {
-            $this->addPage(_('Customer') . ': ' . $_SESSION['customer']->getUserName(), $_SESSION['customer']->getLink());
+            $customer = new \MultiFlexi\Customer($_SESSION['customer']);
+            $this->addPage(_('Customer') . ': '. $customer->getRecordName(), $customer->getLink());
         }
 
         if (empty($_SESSION['server'])) {
-            $this->addPage(_('choose Server'), 'abraflexis.php');
+            $this->addPage(_('choose Server'), 'servers.php');
         } else {
-            $this->addPage(_('Server') . ': ' . $_SESSION['server']->getRecordName(), $_SESSION['server']->getLink());
+            $server = new \MultiFlexi\Servers($_SESSION['server']);
+            $this->addPage(_('Server') . ': ' . $server->getRecordName(), $server->getLink());
         }
 
         if (empty($_SESSION['company'])) {
             $this->addPage(_('choose Company'), 'companies.php');
         } else {
-            $this->addPage(_('Company') . ': ' . $_SESSION['company']->getRecordName(), $_SESSION['company']->getLink());
+            $company = new \MultiFlexi\Company($_SESSION['company']);
+            $this->addPage(_('Company') . ': ' . $company->getRecordName(), $company->getLink());
         }
 
-
-//        $this->addCurrentPage('Service');
+        //        $this->addCurrentPage('Service');
     }
 }

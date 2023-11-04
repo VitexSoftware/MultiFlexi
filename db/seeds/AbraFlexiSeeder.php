@@ -2,7 +2,7 @@
 
 use Phinx\Seed\AbstractSeed;
 
-class AbraFlexiSeeder extends AbstractSeed {
+class Serverseeder extends AbstractSeed {
 
     /**
      * Run Method.
@@ -25,7 +25,7 @@ class AbraFlexiSeeder extends AbstractSeed {
             ]
         ];
 
-        $posts = $this->table('abraflexis');
+        $posts = $this->table('servers');
         $posts->insert($data)
                 ->save();
     }

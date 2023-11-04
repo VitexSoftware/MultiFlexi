@@ -4,7 +4,7 @@
  * Engine class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2022 Vitex@hippy.cz (G)
+ * @copyright  2018-2023 Vitex@hippy.cz (G)
  */
 
 namespace MultiFlexi;
@@ -49,11 +49,10 @@ class Engine extends \Ease\SQL\Engine
      * Save data
      *
      * @param array $data
-     * @param boolean $searchForID
      *
      * @return int
      */
-    public function saveToSQL($data = null, $searchForID = false)
+    public function saveToSQL($data = null)
     {
         if (is_null($data)) {
             $data = $this->getData();

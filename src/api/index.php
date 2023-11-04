@@ -96,7 +96,7 @@ $errorMiddleware = $container->get(ErrorMiddleware::class);
 
 
 //route0 → (unnamed) → /{routes:.*}
-//route1 → listAbraFlexis → /VitexSoftware/MultiFlexi/1.0.0/abraflexis/
+//route1 → listServers → /VitexSoftware/MultiFlexi/1.0.0/servers/
 //route2 → setAbraFlexiById → /VitexSoftware/MultiFlexi/1.0.0/abraflexi/
 //route3 → getAbraFlexiById → /VitexSoftware/MultiFlexi/1.0.0/abraflexi/{abraflexiId}
 //route4 → listApps → /VitexSoftware/MultiFlexi/1.0.0/apps/

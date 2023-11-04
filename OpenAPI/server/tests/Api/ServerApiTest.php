@@ -4,7 +4,7 @@
  * MultiFlexi API
  * PHP version 7.4
  *
- * @package AbraFlexi\MultiFlexi
+ * @package MultiFlexi
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  */
@@ -23,18 +23,18 @@
 namespace MultiFlexi\Api;
 
 use PHPUnit\Framework\TestCase;
-use MultiFlexi\Api\AbraflexiApi;
+use MultiFlexi\Api\ServerApi;
 
 /**
- * AbraflexiApiTest Class Doc Comment
+ * ServerApiTest Class Doc Comment
  *
  * @package MultiFlexi\Api
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  *
- * @coversDefaultClass \MultiFlexi\Api\AbraflexiApi
+ * @coversDefaultClass \MultiFlexi\Api\ServerApi
  */
-class AbraflexiApiTest extends TestCase
+class ServerApiTest extends TestCase
 {
 
     /**
@@ -66,44 +66,44 @@ class AbraflexiApiTest extends TestCase
     }
 
     /**
-     * Test case for getAbraFlexiById
+     * Test case for getServerById
      *
-     * Get AbraFlexi by ID.
+     * Get Server by ID.
      *
-     * @covers ::getAbraFlexiById
+     * @covers ::getServerById
      */
-    public function testGetAbraFlexiById()
+    public function testGetServerById()
     {
         $this->markTestIncomplete(
-            'Test of "getAbraFlexiById" method has not been implemented yet.'
+            'Test of "getServerById" method has not been implemented yet.'
         );
     }
 
     /**
-     * Test case for listAbraFlexis
+     * Test case for listServers
      *
-     * Show All AbraFlexis.
+     * Show All Servers.
      *
-     * @covers ::listAbraFlexis
+     * @covers ::listServers
      */
-    public function testListAbraFlexis()
+    public function testListServers()
     {
         $this->markTestIncomplete(
-            'Test of "listAbraFlexis" method has not been implemented yet.'
+            'Test of "listServers" method has not been implemented yet.'
         );
     }
 
     /**
-     * Test case for setAbraFlexiById
+     * Test case for setServerById
      *
-     * Create or Update AbraFlexi record.
+     * Create or Update Server record.
      *
-     * @covers ::setAbraFlexiById
+     * @covers ::setServerById
      */
-    public function testSetAbraFlexiById()
+    public function testSetServerById()
     {
         $this->markTestIncomplete(
-            'Test of "setAbraFlexiById" method has not been implemented yet.'
+            'Test of "setServerById" method has not been implemented yet.'
         );
     }
 }

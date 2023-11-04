@@ -4,7 +4,7 @@
  * MultiFlexi API
  * PHP version 7.4
  *
- * @package AbraFlexi\MultiFlexi
+ * @package MultiFlexi
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  */

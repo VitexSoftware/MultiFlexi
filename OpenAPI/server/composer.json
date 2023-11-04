@@ -24,13 +24,13 @@
     "squizlabs/php_codesniffer": "^3.5"
   },
   "autoload": {
-    "psr-4": { "AbraFlexi\\MultiFlexi\\": [
+    "psr-4": { "MultiFlexi\\": [
       "lib/",
       "src/"
     ]}
   },
   "autoload-dev": {
-    "psr-4": { "AbraFlexi\\MultiFlexi\\": "tests/" }
+    "psr-4": { "MultiFlexi\\": "tests/" }
   },
   "scripts": {
     "test": [

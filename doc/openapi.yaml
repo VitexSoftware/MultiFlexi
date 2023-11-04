@@ -207,15 +207,15 @@ paths:
         #     - 'write:apps'
         #     - 'read:apps'  
 
-  '/abraflexi/{abraflexiId}.{suffix}':
+  '/server/{serverId}.{suffix}':
     get:
       tags:
-        - abraflexi
-      summary: Get AbraFlexi by ID
-      description: Returns a single AbraFlexi
-      operationId: getAbraFlexiById
+        - server
+      summary: Get Server by ID
+      description: Returns a single Server
+      operationId: getServerById
       parameters:
-        - name: abraflexiId
+        - name: serverId
           in: path
           description: ID of app to return
           required: true
@@ -239,10 +239,10 @@ paths:
           content:
             # application/xml:
             #   schema:
-            #     $ref: '#/components/schemas/AbraFlexi'
+            #     $ref: '#/components/schemas/Server'
             application/json:
               schema:
-                $ref: '#/components/schemas/AbraFlexi'
+                $ref: '#/components/schemas/Server'
         '400':
           description: Invalid ID supplied
         '401':
@@ -254,17 +254,17 @@ paths:
         # - bearerAuth: []
         # - api_key: []
         # - multiflexi_auth:
-        #     - 'write:abraflexis'
-        #     - 'read:abraflexis'  
-  /abraflexi/:
+        #     - 'write:servers'
+        #     - 'read:servers'  
+  /server/:
     post:
       tags:
-        - abraflexi
-      summary: Create or Update AbraFlexi record
-      description: Create or Upda single AbraFlexi record
-      operationId: setAbraFlexiById
+        - server
+      summary: Create or Update Server record
+      description: Create or Update single Server record
+      operationId: setServerById
       parameters:
-        - name: abraflexiId
+        - name: serverId
           in: query
           description: ID of app to return
           schema:
@@ -276,10 +276,10 @@ paths:
           content:
             # application/xml:
             #   schema:
-            #     $ref: '#/components/schemas/AbraFlexi'
+            #     $ref: '#/components/schemas/Server'
             application/json:
               schema:
-                $ref: '#/components/schemas/AbraFlexi'
+                $ref: '#/components/schemas/Server'
         '400':
           description: Invalid ID supplied
         '401':
@@ -291,8 +291,8 @@ paths:
         # - bearerAuth: []
         # - api_key: []
         # - multiflexi_auth:
-        #     - 'write:abraflexis'
-        #     - 'read:abraflexis'  
+        #     - 'write:servers'
+        #     - 'read:servers'  
 
 
   '/apps.{suffix}':
@@ -336,13 +336,13 @@ paths:
         #     - 'write:apps'
         #     - 'read:apps'  
 
-  /abraflexis:
+  /servers:
     get:
       tags:
-        - abraflexi
-      summary: Show All AbraFlexis
-      description: All AbraFlexi servers registered
-      operationId: listAbraFlexis
+        - server
+      summary: Show All Servers
+      description: All Server servers registered
+      operationId: listServers
       responses:
         '200':
           description: successful operation
@@ -351,7 +351,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/AbraFlexi'
+                  $ref: '#/components/schemas/Server'
         '400':
           description: Invalid status value
         '401':
@@ -361,8 +361,8 @@ paths:
         # - bearerAuth: []
         # - api_key: []
         # - multiflexi_auth:
-        #     - 'write:abraflexis'
-        #     - 'read:abraflexis'  
+        #     - 'write:servers'
+        #     - 'read:servers'  
 
 components:
   schemas:
@@ -381,7 +381,7 @@ components:
           example: matcher
         executable:
           type: string
-          example: abraflexi-matcher
+          example: server-matcher
         tags:
           type: array
           xml:
@@ -432,7 +432,7 @@ components:
           format: int64
           example: 10
     
-    AbraFlexi:
+    Server:
       properties:
         id:
           type: integer
@@ -574,8 +574,8 @@ components:
     #       scopes:
     #         write:apps: modify apps in your account
     #         read:apps: read your apps
-    #         write:abraflexis: modify abraflexi instance in your account
-    #         read:abraflexis: read your abraflexi instances
+    #         write:servers: modify server instance in your account
+    #         read:servers: read your server instances
     # api_key:
     #   type: apiKey
     #   in: header

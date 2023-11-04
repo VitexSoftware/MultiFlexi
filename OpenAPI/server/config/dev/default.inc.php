@@ -69,8 +69,8 @@ return [
     'mocker.getMockStatusCodeCallback' => function () {
         return function (\Psr\Http\Message\ServerRequestInterface $request, array $responses) {
             // check if client clearly asks for mocked response
-            $pingHeader = 'X-AbraFlexi\MultiFlexi-Mock';
-            $pingHeaderCode = 'X-AbraFlexi\MultiFlexi-Mock-Code';
+            $pingHeader = 'X-MultiFlexi-Mock';
+            $pingHeaderCode = 'X-MultiFlexi-Mock-Code';
             if (
                 $request->hasHeader($pingHeader)
                 && $request->getHeader($pingHeader)[0] === 'ping'
@@ -92,7 +92,7 @@ return [
     'mocker.afterCallback' => function () {
         return function (\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response) {
             // mark mocked response to distinguish real and fake responses
-            return $response->withHeader('X-AbraFlexi\MultiFlexi-Mock', 'pong');
+            return $response->withHeader('X-MultiFlexi-Mock', 'pong');
         };
     },
 

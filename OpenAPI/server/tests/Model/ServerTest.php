@@ -4,7 +4,7 @@
  * MultiFlexi API
  * PHP version 7.4
  *
- * @package AbraFlexi\MultiFlexi
+ * @package MultiFlexi
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  */
@@ -23,18 +23,18 @@
 namespace MultiFlexi\Model;
 
 use PHPUnit\Framework\TestCase;
-use MultiFlexi\Model\AbraFlexi;
+use MultiFlexi\Model\Server;
 
 /**
- * AbraFlexiTest Class Doc Comment
+ * ServerTest Class Doc Comment
  *
  * @package MultiFlexi\Model
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  *
- * @coversDefaultClass \MultiFlexi\Model\AbraFlexi
+ * @coversDefaultClass \MultiFlexi\Model\Server
  */
-class AbraFlexiTest extends TestCase
+class ServerTest extends TestCase
 {
 
     /**
@@ -66,19 +66,19 @@ class AbraFlexiTest extends TestCase
     }
 
     /**
-     * Test "AbraFlexi"
+     * Test "Server"
      */
-    public function testAbraFlexi()
+    public function testServer()
     {
-        $testAbraFlexi = new \AbraFlexi();
-        $namespacedClassname = AbraFlexi::getModelsNamespace() . '\\AbraFlexi';
-        $this->assertSame('\\' . AbraFlexi::class, $namespacedClassname);
+        $testServer = new Server();
+        $namespacedClassname = Server::getModelsNamespace() . '\\Server';
+        $this->assertSame('\\' . Server::class, $namespacedClassname);
         $this->assertTrue(
             class_exists($namespacedClassname),
             sprintf('Assertion failed that "%s" class exists', $namespacedClassname)
         );
         $this->markTestIncomplete(
-            'Test of "AbraFlexi" model has not been implemented yet.'
+            'Test of "Server" model has not been implemented yet.'
         );
     }
 
@@ -88,7 +88,7 @@ class AbraFlexiTest extends TestCase
     public function testPropertyId()
     {
         $this->markTestIncomplete(
-            'Test of "id" property in "AbraFlexi" model has not been implemented yet.'
+            'Test of "id" property in "Server" model has not been implemented yet.'
         );
     }
 
@@ -98,7 +98,7 @@ class AbraFlexiTest extends TestCase
     public function testPropertyName()
     {
         $this->markTestIncomplete(
-            'Test of "name" property in "AbraFlexi" model has not been implemented yet.'
+            'Test of "name" property in "Server" model has not been implemented yet.'
         );
     }
 
@@ -108,7 +108,7 @@ class AbraFlexiTest extends TestCase
     public function testPropertyUrl()
     {
         $this->markTestIncomplete(
-            'Test of "url" property in "AbraFlexi" model has not been implemented yet.'
+            'Test of "url" property in "Server" model has not been implemented yet.'
         );
     }
 
@@ -118,7 +118,7 @@ class AbraFlexiTest extends TestCase
     public function testPropertyUser()
     {
         $this->markTestIncomplete(
-            'Test of "user" property in "AbraFlexi" model has not been implemented yet.'
+            'Test of "user" property in "Server" model has not been implemented yet.'
         );
     }
 
@@ -128,7 +128,7 @@ class AbraFlexiTest extends TestCase
     public function testPropertyPassword()
     {
         $this->markTestIncomplete(
-            'Test of "password" property in "AbraFlexi" model has not been implemented yet.'
+            'Test of "password" property in "Server" model has not been implemented yet.'
         );
     }
 
@@ -138,7 +138,7 @@ class AbraFlexiTest extends TestCase
     public function testPropertyDatCreate()
     {
         $this->markTestIncomplete(
-            'Test of "datCreate" property in "AbraFlexi" model has not been implemented yet.'
+            'Test of "datCreate" property in "Server" model has not been implemented yet.'
         );
     }
 
@@ -148,7 +148,7 @@ class AbraFlexiTest extends TestCase
     public function testPropertyDatSave()
     {
         $this->markTestIncomplete(
-            'Test of "datSave" property in "AbraFlexi" model has not been implemented yet.'
+            'Test of "datSave" property in "Server" model has not been implemented yet.'
         );
     }
 
@@ -158,7 +158,7 @@ class AbraFlexiTest extends TestCase
      */
     public function testGetOpenApiSchema()
     {
-        $schemaArr = AbraFlexi::getOpenApiSchema();
+        $schemaArr = Server::getOpenApiSchema();
         $this->assertIsArray($schemaArr);
     }
 }

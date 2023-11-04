@@ -20,14 +20,14 @@ $oPage->onlyForLogged();
 
 $customers = new Customer($oPage->getRequestValue('id', 'int'));
 $instanceName = $customers->getRecordName();
-$_SESSION['customer'] = &$customers;
+$_SESSION['customer'] = $customers->getMyKey();
 
 $oPage->addItem(new PageTop(_('Customer')));
 
 if ($oPage->isPosted()) {
     if ($customers->takeData($_POST) && !is_null($customers->saveToSQL())) {
         $customers->addStatusMessage(_('Customer Saved'), 'success');
-//        $customers->prepareRemoteAbraFlexi();
+        //        $customers->prepareRemoteAbraFlexi();
         $oPage->redirect('?id=' . $customers->getMyKey());
     } else {
         $customers->addStatusMessage(_('Error saving Customer'), 'error');
@@ -38,7 +38,7 @@ if (empty($instanceName)) {
     $instanceName = _('New Customer');
     $instanceLink = null;
 } else {
-    $instanceLink = new ATag($customers->getLink(), $customers->getLink());
+    $instanceLink = new ATag($customers->getLink(), $customers->getUserName());
 }
 
 $instanceRow = new Row();

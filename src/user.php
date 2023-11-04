@@ -49,9 +49,9 @@ switch ($oPage->getRequestValue('action')) {
 
         break;
     default:
-//        $operationsMenu = $user->operationsMenu();
-//        $operationsMenu->setTagCss(['float' => 'right']);
-//        $operationsMenu->dropdown->addTagClass('pull-right');
+        //        $operationsMenu = $user->operationsMenu();
+        //        $operationsMenu->setTagCss(['float' => 'right']);
+        //        $operationsMenu->dropdown->addTagClass('pull-right');
 
         $oPage->container->addItem(new \Ease\TWB4\Panel(['<strong>' . $user->getUserName() . '</strong>', /* $operationsMenu */], 'info', new UserForm($user)));
         break;

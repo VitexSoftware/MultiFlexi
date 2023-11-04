@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Multi Flexi - Scheduled actions executor.
  *
@@ -11,21 +10,19 @@ namespace MultiFlexi;
 
 require_once '../vendor/autoload.php';
 \Ease\Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
-
 $loggers = ['syslog', '\MultiFlexi\LogToSQL'];
 if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
 define('EASE_LOGGER', implode('|', $loggers));
-
-
 \Ease\Shared::user(new \Ease\Anonym());
 $scheduler = new Scheduler();
 $scheduler->logBanner('MultiFlexi Daemon started');
 while (\Ease\Functions::cfg('DAEMONIZE', true)) {
 
     foreach ($scheduler->getCurrentJobs() as $scheduledJob) {
-        $job = new Job( $scheduledJob['job']);
+        $job = new Job($scheduledJob['job']);
+        $job->prepareJob($scheduledJob['job']);
         $job->performJob();
         $scheduler->deleteFromSQL($scheduledJob['id']);
         $job->cleanUp();
@@ -34,4 +31,3 @@ while (\Ease\Functions::cfg('DAEMONIZE', true)) {
     sleep(\Ease\Functions::cfg("CYCLE_PAUSE", 10));
 }
 $scheduler->logBanner('MultiFlexi Daemon ended');
-
