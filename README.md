@@ -1,7 +1,7 @@
 Multi Flexi
 ===========
 
-![MFB](multiflexi-socilal-preview.svg?raw=true)
+![MFB](multiflexi-social-preview.svg?raw=true)
 
 Umožňuje spouštět zvolené nástroje nad určitými účetními jednotkami AbraFlexi v daných intervalech. 
 
@@ -10,10 +10,18 @@ Protokol spouštění je zapisován do systémového logu.
 
 Spouštěným skriptům jsou nastavoavány tyto proměnné prostředí:
 
+
 * **ABRAFLEXI_URL**
 * **ABRAFLEXI_LOGIN**
 * **ABRAFLEXI_PASSWORD**
 * **ABRAFLEXI_COMPANY**
+
+nebo
+
+* **POHODA_ICO**
+* **POHODA_URL**
+* **POHODA_USERNAME**
+* **POHODA_PASSWORD**
 
 ⊕ proměnné prostředí dle individuální konfigurace každého modulu pro každou firmu
 
