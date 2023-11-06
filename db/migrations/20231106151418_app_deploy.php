@@ -25,7 +25,6 @@ final class AppDeploy extends AbstractMigration {
 
         if ($this->adapter->getAdapterType() != 'mysql') {
             $table
-                    ->addColumn('deploy', 'string', ['comment' => 'deploy command'])
                     ->changeColumn('image', 'string', ['null' => false, 'limit' => MysqlAdapter::TEXT_LONG])
                     ->update();
         }
