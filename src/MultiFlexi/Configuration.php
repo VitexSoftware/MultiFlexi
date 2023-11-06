@@ -26,7 +26,7 @@ class Configuration extends \Ease\SQL\Engine
     {
         $app = new Application((int) $this->getDataValue('app_id'));
         $cmp = new Company((int) $this->getDataValue('company_id'));
-        return [new \Ease\TWB4\LinkButton('app.php?id=' . $app->getMyKey(), $app->getDataValue('nazev'), 'info'), ' @ ', new \Ease\TWB4\LinkButton('company.php?id=' . $cmp->getMyKey(), $cmp->getRecordName(), 'info')];
+        return [new \Ease\TWB4\LinkButton('app.php?id=' . $app->getMyKey(), $app->getDataValue('name'), 'info'), ' @ ', new \Ease\TWB4\LinkButton('company.php?id=' . $cmp->getMyKey(), $cmp->getRecordName(), 'info')];
     }
 
     /**

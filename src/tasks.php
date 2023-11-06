@@ -21,7 +21,7 @@ $companies = new Company(Document::getRequestValue('company_id', 'int'));
 if (empty($companies->getDataValue('logo')) === false) {
     $companyTasksHeading[] = new ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']);
 }
-$companyTasksHeading[] = new SpanTag($companies->getDataValue('nazev') . '&nbsp;', ['style' => 'font-size: xxx-large;']);
+$companyTasksHeading[] = new SpanTag($companies->getDataValue('name') . '&nbsp;', ['style' => 'font-size: xxx-large;']);
 $companyTasksHeading[] = _('Assigned applications');
 $oPage->container->addItem(new Panel($companyTasksHeading, 'default', new \MultiFlexi\Ui\ServicesForCompanyForm($companies, ['id' => 'apptoggle'])));
 $oPage->addItem(new PageBottom());

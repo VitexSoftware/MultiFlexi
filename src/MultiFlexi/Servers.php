@@ -141,14 +141,14 @@ class Servers extends DBEngine
         //Setup any other apps
         //        $companyData['ic'] = $companyDetails['ic'];
         //        unset($companyData['ic']);
-        //        $companyData['nazev'] = $companyDetails['nazFirmy'];
+        //        $companyData['name'] = $companyDetails['nazFirmy'];
         //        unset($companyData['name']);
         //        $companer->takeData(array_merge($companyData, $this->getData()));
         //        $prepareResult = $companer->prepareCompany($companer->getDataValue('company'));
         //        $result = $companer->saveToSql(array_merge($companyData,
         //                        $prepareResult));
         //        $companer->addStatusMessage(sprintf(_('Saving Company %s'),
-        //                        $companyData['nazev']), $result ? 'success' : 'error');
+        //                        $companyData['name']), $result ? 'success' : 'error');
     }
 
     public function setEnvironment()

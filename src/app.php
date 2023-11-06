@@ -30,7 +30,7 @@ use MultiFlexi\Company,
 require_once './init.php';
 $oPage->onlyForLogged();
 $apps = new Application($oPage->getRequestValue('id', 'int'));
-$instanceName = $apps->getDataValue('nazev');
+$instanceName = $apps->getDataValue('name');
 if ($oPage->isPosted()) {
     if ($apps->takeData($_POST) && !is_null($apps->saveToSQL())) {
         $apps->addStatusMessage(_('Application Saved'), 'success');
@@ -60,15 +60,15 @@ if (array_key_exists('company', $_SESSION) && is_null($_SESSION['company']) === 
 }
 
 $jobber = new Job();
-$jobs = $jobber->listingQuery()->select(['job.id', 'job.company_id', 'job.begin', 'job.exitcode', 'user.login', 'job.launched_by', 'company.nazev'], true)->leftJoin('company ON company.id = job.company_id')
+$jobs = $jobber->listingQuery()->select(['job.id', 'job.company_id', 'job.begin', 'job.exitcode', 'user.login', 'job.launched_by', 'company.name'], true)->leftJoin('company ON company.id = job.company_id')
                 ->leftJoin('user ON user.id = job.launched_by')
                 ->where('app_id', $apps->getMyKey())->limit(10)->orderBy('job.id DESC')->fetchAll();
 $jobList = new Table();
 $jobList->addRowHeaderColumns([_('Job ID'), _('Company'), _('Launch time'), _('Exit Code'), _('Launched by')]);
 foreach ($jobs as $job) {
     $job['id'] = new ATag('job.php?id=' . $job['id'], $job['id']);
-    $job['company_id'] = new ATag('company.php?id=' . $job['company_id'], $job['nazev']);
-    unset($job['nazev']);
+    $job['company_id'] = new ATag('company.php?id=' . $job['company_id'], $job['name']);
+    unset($job['name']);
     $job['launched_by'] = new ATag('user.php?id' . $job['launched_by'], $job['login']);
     unset($job['login']);
     if (empty($job['begin'])) {

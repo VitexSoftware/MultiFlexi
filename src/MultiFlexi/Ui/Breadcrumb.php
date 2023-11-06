@@ -19,9 +19,6 @@ class Breadcrumb extends \Ease\TWB4\Breadcrumb
     public function __construct($content = null, $properties = [])
     {
         parent::__construct($content, $properties);
-        /**
-         * @var \MultiFlexi\Ui\WebPage Description
-         */
         if (empty($_SESSION['customer'])) {
             $this->addPage(_('choose Customer'), 'customers.php');
         } else {

@@ -14,7 +14,7 @@ class Company extends \MultiFlexi\Engine
     use \Ease\SQL\Orm;
     public $keyword = 'company';
 
-    public $nameColumn = 'nazev';
+    public $nameColumn = 'name';
 
     public $createColumn = 'DatCreate';
 
@@ -103,7 +103,7 @@ class Company extends \MultiFlexi\Engine
      */
     public function getRecordName()
     {
-        return $this->getDataValue('nazev');
+        return $this->getDataValue('name');
     }
 
     /**

@@ -29,7 +29,7 @@ class AbraFlexiInstanceStatus extends \Ease\Html\TableTag
                 $companyDetail = $setter->getData();
                 $registerParams = [
                     'company' => $companyData['dbNazev'],
-                    'nazev' => $companyData['nazev'],
+                    'name' => $companyData['name'],
                     'server' => $servers->getMyKey(),
                     'ic' => array_key_exists('ic', $companyDetail) ? $companyDetail['ic'] : '',
                     'email' => array_key_exists('email', $companyDetail) ? $companyDetail['email'] : '',

@@ -26,7 +26,7 @@ class RegisterCompanyForm extends EngineForm
 
     public function afterAdd()
     {
-        $this->addInput(new InputTextTag('nazev'), _('Company name'));
+        $this->addInput(new InputTextTag('name'), _('Company name'));
         $this->addInput(new InputTextTag('company'),_('Company selector'),_('firma_s_r_o_ or 30000'),_('For AbraFlexi use lowercase and for Pohoda use mServer port number'));
         $this->addInput(new InputTextTag('ic'), _('Organization ID'));
         $this->addInput(new InputEmailTag('email'), _('Send notification to'));

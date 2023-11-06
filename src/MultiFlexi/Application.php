@@ -37,7 +37,7 @@ class Application extends Engine
         $this->createColumn = 'DatCreate';
         $this->lastModifiedColumn = 'DatUpdate';
         $this->keyword = 'app';
-        $this->nameColumn = 'nazev';
+        $this->nameColumn = 'name';
         parent::__construct($identifier, $options);
         $this->company = new Company();
     }
@@ -61,7 +61,7 @@ class Application extends Engine
     public function takeData($data)
     {
         $data['enabled'] = (($data['enabled'] == 'on') || ($data['enabled'] == 1));
-        if (array_key_exists('nazev', $data) && empty($data['nazev'])) {
+        if (array_key_exists('name', $data) && empty($data['name'])) {
             $this->addStatusMessage(_('Name is empty'), 'warning');
         }
 

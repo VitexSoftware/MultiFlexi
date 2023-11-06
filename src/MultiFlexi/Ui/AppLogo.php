@@ -31,7 +31,7 @@ class AppLogo extends ImgTag
     {
         parent::__construct(
                 empty($application->getDataValue('image')) ? 'images/apps.svg' : $application->getDataValue('image'),
-                $application->getDataValue('nazev'), 
+                $application->getDataValue('name'), 
                 $properties
                 );
         $this->addTagClass('img-fluid');

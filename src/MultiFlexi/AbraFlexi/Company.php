@@ -14,7 +14,7 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
     use \Ease\SQL\Orm;
     public $keyword = 'company';
 
-    public $nameColumn = 'nazev';
+    public $nameColumn = 'name';
 
     public $createColumn = 'DatCreate';
 
@@ -297,7 +297,7 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
         return [
             'company' => $listing['dbNazev'],
             'enabled' => $listing['show'],
-            'name' => $listing['nazev'],
+            'name' => $listing['name'],
             'DatCreate' => $listing['createDt']
         ];
     }
@@ -309,7 +309,7 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
      */
     public function getRecordName()
     {
-        return $this->getDataValue('nazev');
+        return $this->getDataValue('name');
     }
 
     /**
@@ -365,11 +365,11 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
                         } else {
                             $this->addStatusMessage(sprintf(
                                             _('Company with no ID'),
-                                            $candidat['nazev']
+                                            $candidat['name']
                                     ), 'warning');
                         }
                         if (array_key_exists('nazFirmy', $nast) || empty($nast['nazFirmy'])) {
-                            if ($nast['nazFirmy'] == $companyData['nazev']) {
+                            if ($nast['nazFirmy'] == $companyData['name']) {
                                 $companyPresentInAbraFlexi = $candidat['dbNazev'];
                                 break;
                             }
@@ -395,7 +395,7 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
             $companyData = $this->getData();
         }
 
-        if ($this->createNew($companyData['nazev'])) {
+        if ($this->createNew($companyData['name'])) {
             $companies = $this->getColumnsFromAbraFlexi(['dbNazev',
                 'createDt'], [], 'createDt');
             ksort($companies);

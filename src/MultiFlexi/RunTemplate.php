@@ -139,9 +139,9 @@ class RunTemplate extends Engine
         $customConfig = new Configuration();
         $customConfig->setEnvironment($cmp->getMyKey(), $app->getMyKey());
         $exec = $app->getDataValue('setup');
-        $cmp->addStatusMessage('setup begin' . $exec . '@' . $cmp->getDataValue('nazev'));
+        $cmp->addStatusMessage('setup begin' . $exec . '@' . $cmp->getDataValue('name'));
         $cmp->addStatusMessage(shell_exec($exec), 'debug');
-        $cmp->addStatusMessage('setu end' . $exec . '@' . $cmp->getDataValue('nazev'));
+        $cmp->addStatusMessage('setu end' . $exec . '@' . $cmp->getDataValue('name'));
     }
 
     public function getAppsForCompany($companyID)

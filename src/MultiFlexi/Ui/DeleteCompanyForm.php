@@ -26,7 +26,7 @@ class DeleteCompanyForm extends EngineForm
 {
     public function afterAdd()
     {
-        $this->addInput(new InputTextTag('nazev', null, ['disabled' => true]), _('Company name'));
+        $this->addInput(new InputTextTag('name', null, ['disabled' => true]), _('Company name'));
 
         $this->addInput(
             new InputTextTag('company', null, ['disabled' => true]),

@@ -33,7 +33,7 @@ class AppsMenu extends MainPageMenu
         parent::__construct();
         $this->apper = new Application();
         foreach ($this->apper->getAll() as $appData) {
-            $this->addApp($appData['id'], $appData['nazev'], $appData['popis'], $appData['executable'], $appData['image'], $appData['enabled']);
+            $this->addApp($appData['id'], $appData['name'], $appData['description'], $appData['executable'], $appData['image'], $appData['enabled']);
         }
     }
 

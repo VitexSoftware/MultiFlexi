@@ -205,11 +205,11 @@ class Job extends Engine
                 'phase' => 'prepared',
                 'job_id' => $this->getMyKey(),
                 'app_id' => $appId,
-                'app_name' => $this->application->getDataValue('nazev'),
+                'app_name' => $this->application->getDataValue('name'),
                 'begin' => null,
                 'end' => null,
                 'company_id' => $companyId,
-                'company_name' => $this->company->getDataValue('nazev'),
+                'company_name' => $this->company->getDataValue('name'),
                 'exitcode' => -1,
                 'stdout' => null,
                 'stderr' => null,
@@ -293,7 +293,7 @@ class Job extends Engine
         LogToSQL::singleton()->setApplication($this->application->getMyKey());
         $exec = $this->application->getDataValue('executable');
         $cmdparams = $this->getCmdParams();
-        $this->addStatusMessage('command begin: ' . $exec . ' ' . $cmdparams . '@' . $this->company->getDataValue('nazev'));
+        $this->addStatusMessage('command begin: ' . $exec . ' ' . $cmdparams . '@' . $this->company->getDataValue('name'));
         $process = new \Symfony\Component\Process\Process(array_merge([$exec], explode(' ', $cmdparams)), null, $this->environment, null, 32767);
         $process->run(function ($type, $buffer) {
             $logger = new \Ease\Sand();
@@ -380,7 +380,7 @@ class Job extends Engine
     {
         $launcher[] = '#!/bin/bash';
         $launcher[] = '';
-        $launcher[] = '# ' . \Ease\Shared::appName() . ' v' . \Ease\Shared::AppVersion() . ' job #' . $this->getMyKey() . ' launcher. Generated ' . (new \DateTime())->format('Y-m-d H:i:s') . ' for company: ' . $this->company->getDataValue('nazev');
+        $launcher[] = '# ' . \Ease\Shared::appName() . ' v' . \Ease\Shared::AppVersion() . ' job #' . $this->getMyKey() . ' launcher. Generated ' . (new \DateTime())->format('Y-m-d H:i:s') . ' for company: ' . $this->company->getDataValue('name');
         $launcher[] = '';
         $environment = $this->getDataValue('env') ? unserialize($this->getDataValue('env')) : [];
         foreach ($environment as $key => $value) {
