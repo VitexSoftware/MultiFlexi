@@ -23,7 +23,7 @@ $companies = new Company($companyApp->getDataValue('company_id'));
 if (strlen($companies->getDataValue('logo'))) {
     $companyTasksHeading[] = new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']);
 }
-$companyTasksHeading[] = new \Ease\Html\SpanTag($companies->getDataValue('nazev') . '&nbsp;', ['style' => 'font-size: xxx-large;']);
+$companyTasksHeading[] = new \Ease\Html\SpanTag($companies->getDataValue('name') . '&nbsp;', ['style' => 'font-size: xxx-large;']);
 $companyTasksHeading[] = _('Assigned applications');
 $oPage->container->addItem(new Panel($companyTasksHeading, 'default', new AppRow($appData)));
 $oPage->addItem(new PageBottom());

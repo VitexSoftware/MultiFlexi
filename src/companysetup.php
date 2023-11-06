@@ -47,20 +47,20 @@ if ($oPage->isPosted()) {
             //        $companies->prepareRemoteCompany(); TODO: Run applications setup on new company
             $oPage->redirect('?id=' . $companies->getMyKey());
         } else {
-            $companies->addStatusMessage(_('Error saving Company') . ' ' . $companies->getDataValue('nazev'), 'error');
+            $companies->addStatusMessage(_('Error saving Company') . ' ' . $companies->getDataValue('name'), 'error');
         }
     }
 } else {
     if (!empty(WebPage::getGetValue('company'))) {
         $companies->setDataValue('company', WebPage::getGetValue('company'));
-        $companies->setDataValue('nazev', WebPage::getGetValue('nazev'));
+        $companies->setDataValue('name', WebPage::getGetValue('name'));
         $companies->setDataValue('ic', WebPage::getGetValue('ic'));
         $companies->setDataValue('email', WebPage::getGetValue('email'));
         $companies->serverId = WebPage::getGetValue('server', 'int');
         $companies->loadFromAbraFlexi();
     }
 }
-$instanceName = $companies->getDataValue('nazev');
+$instanceName = $companies->getDataValue('name');
 if (empty($instanceName)) {
     $instanceName = _('New Company');
     $instanceLink = null;

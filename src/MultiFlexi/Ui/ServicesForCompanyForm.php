@@ -48,7 +48,7 @@ class ServicesForCompanyForm extends Form
         foreach ($platformApps as $appData) {
             $appData['company_id'] = $companyID;
             $appData['app_id'] = $appData['id'];
-            $appData['app_name'] = $appData['nazev'];
+            $appData['app_name'] = $appData['name'];
             if (array_key_exists($appData['id'], $assigned)) {
                 $appData['interv'] = $assigned[$appData['id']]['interv'];
                 $appData['runtemplateid'] = $assigned[$appData['id']]['id'];

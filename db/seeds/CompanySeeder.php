@@ -19,7 +19,7 @@ class CompanySeeder extends AbstractSeed {
             [
                 'enabled' => true,
                 'server' => 0,
-                'nazev' => 'Demo Firma',
+                'name' => 'Demo Firma',
                 'ic' => '12345678',
                 'company' => 'demo',
                 'rw' => 0,
@@ -30,7 +30,7 @@ class CompanySeeder extends AbstractSeed {
             [
                 'enabled' => true,
                 'server' => 0,
-                'nazev' => 'Ja Zivnostnik',
+                'name' => 'Ja Zivnostnik',
                 'ic' => '87654321',
                 'company' => 'demo_de',
                 'rw' => 0,

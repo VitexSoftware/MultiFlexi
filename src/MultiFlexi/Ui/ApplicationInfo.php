@@ -45,8 +45,8 @@ class ApplicationInfo extends Panel
     {
         $headerRow = new \Ease\TWB4\Row();
         $headerRow->addColumn(2, new AppLogo($application));
-        $headerRow->addColumn(4, new \Ease\Html\H3Tag($application->getDataValue('nazev')));
-        $headerRow->addColumn(4, $application->getDataValue('popis'));
+        $headerRow->addColumn(4, new \Ease\Html\H3Tag($application->getDataValue('name')));
+        $headerRow->addColumn(4, $application->getDataValue('description'));
         return $headerRow;
     }
 }

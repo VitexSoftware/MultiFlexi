@@ -36,7 +36,7 @@ foreach ($allAppData as $appData) {
         $appData['setup'] = (empty($initPath) ? '<span title="' . _('Command not found') . '">⁉</span> ' . $appData['setup'] : $initPath);
     }
 
-    $appData['nazev'] = new \Ease\Html\ATag('app.php?id=' . $appData['id'], $appData['nazev']);
+    $appData['name'] = new \Ease\Html\ATag('app.php?id=' . $appData['id'], $appData['name']);
     $fbtable->addRowColumns($appData);
 }
 

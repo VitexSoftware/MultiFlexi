@@ -46,14 +46,14 @@ class AppApi extends AbstractAppApi
         $appData = $this->engine->getData();
         switch ($suffix) {
             case 'html':
-                //                $appData['nazev'] = new \Ease\Html\ATag($appData['id'] . '.html', $appData['nazev']);
-                $appData['image'] = new \Ease\Html\ATag($appData['id'] . '.html', new \Ease\Html\ImgTag($appData['image'], $appData['nazev'], ['width' => '64']));
+                //                $appData['name'] = new \Ease\Html\ATag($appData['id'] . '.html', $appData['name']);
+                $appData['image'] = new \Ease\Html\ATag($appData['id'] . '.html', new \Ease\Html\ImgTag($appData['image'], $appData['name'], ['width' => '64']));
 
                 break;
             default:
                 break;
         }
-        return DefaultApi::prepareResponse($response, [$appData], $suffix, $appData['nazev']);
+        return DefaultApi::prepareResponse($response, [$appData], $suffix, $appData['name']);
     }
 
     /**
@@ -73,8 +73,8 @@ class AppApi extends AbstractAppApi
             $appsList[$app['id']] = $app;
             switch ($suffix) {
                 case 'html':
-                    $appsList[$app['id']]['nazev'] = new \Ease\Html\ATag('app/' . $app['id'] . '.html', $app['nazev']);
-                    $appsList[$app['id']]['image'] = new \Ease\Html\ATag('app/' . $app['id'] . '.html', new \Ease\Html\ImgTag($app['image'], $app['nazev'], ['width' => '64']));
+                    $appsList[$app['id']]['name'] = new \Ease\Html\ATag('app/' . $app['id'] . '.html', $app['name']);
+                    $appsList[$app['id']]['image'] = new \Ease\Html\ATag('app/' . $app['id'] . '.html', new \Ease\Html\ImgTag($app['image'], $app['name'], ['width' => '64']));
                     break;
                 default:
                     break;

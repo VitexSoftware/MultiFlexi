@@ -48,11 +48,11 @@ if ($oPage->isPosted()) {
         $companies->addStatusMessage(_('Company Deleted'), 'success');
         $oPage->redirect('server.php?id=' . $companies->getDataValue('server'));
     } else {
-        $companies->addStatusMessage(_('Error deleting Company') . ' ' . $companies->getDataValue('nazev'), 'error');
+        $companies->addStatusMessage(_('Error deleting Company') . ' ' . $companies->getDataValue('name'), 'error');
     }
 }
 
-$instanceName = $companies->getDataValue('nazev');
+$instanceName = $companies->getDataValue('name');
 if (strlen($instanceName)) {
     $instanceLink = new ATag(
         $companies->getApiURL() . $companies->getDataValue('company'),
