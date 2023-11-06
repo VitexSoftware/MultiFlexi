@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class LongTexts extends AbstractMigration
-{
+final class LongTexts extends AbstractMigration {
 
     /**
      * Change Method.
@@ -18,16 +17,19 @@ final class LongTexts extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-    public function change(): void
-    {
+    public function change(): void {
 
 // TODO: Choose proper adapter
 //        $phinxManager = Container::build()->get(\Phinx\Migration\Manager::class);
 //        $pdo = $phinxManager->getEnvironment('development')->getAdapter()->getConnection();    
 
         $table = $this->table('job');
-        $table
+
+        if ($this->adapter->getAdapterType() != 'sqlite') {
+            $table
                 ->changeColumn('stdout', 'blob', ['comment' => 'Job Stdout store', 'limit' => \Phinx\Db\Adapter\MysqlAdapter::BLOB_LONG])
                 ->update();
+        }
+
     }
 }
