@@ -9,7 +9,8 @@
     "deb/ease-fluentpdo": "*",
     "symfony/process": "*",
     "sensiolabs/ansi-to-html": "*",
-    "zarplata/zabbix-sender": "dev-master"
+    "zarplata/zabbix-sender": "dev-master",
+    "rcubitto/json-pretty": "dev-master"
   },
   "license": "MIT",
   "authors": [
