@@ -25,7 +25,7 @@ final class AppDeploy extends AbstractMigration {
 
         if ($this->adapter->getAdapterType() == 'mysql') {
             $table
-                    ->changeColumn('image', 'string', ['null' => false, 'limit' => Phinx\Db\Adapter\MysqlAdapter::TEXT_LONG])
+                    ->changeColumn('image', 'text', ['null' => false, 'limit' => Phinx\Db\Adapter\MysqlAdapter::TEXT_LONG])
                     ->update();
         }
     }
