@@ -188,7 +188,7 @@ class Application extends Engine
      * @return string
      */
     public function jsonFileName() {
-        return strtolower(trim(preg_replace('#\W+#', '_', $this->getRecordName()), '_')).'.json';
+        return strtolower(trim(preg_replace('#\W+#', '_', $this->getRecordName()), '_')).'.multiflexi.app.json';
     }
     
 }
