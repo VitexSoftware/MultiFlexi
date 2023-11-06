@@ -158,4 +158,37 @@ class Application extends Engine
         }
         return $platformApps;
     }
+
+    /**
+     * Export Application and its Fields definiton as Json
+     * 
+     * @return string Json
+     */
+    public function getAppJson() {
+        $confField = new Conffield();
+        $appData = $this->getData();
+        $appData['environment'] = $confField->appConfigs($appData['id']);
+        $appData['multiflexi'] = \Ease\Shared::appName().' v'.\Ease\Shared::appVersion().' @'.gethostbyaddr('127.0.1.1').' '.gmdate('Y-m-d h:i:s \G\M\T');
+        foreach ($appData['environment'] as $fieldName => $filedProperties) {
+            unset($appData['environment'][$fieldName]['id']);
+            unset($appData['environment'][$fieldName]['keyname']);
+            unset($appData['environment'][$fieldName]['app_id']);
+        }
+        
+        unset($appData['id']);
+        unset($appData['DatCreate']);
+        unset($appData['DatUpdate']);
+        unset($appData['enabled']);
+        return json_encode($appData, JSON_PRETTY_PRINT);
+    }
+
+    /**
+     * valid filename for current App Json
+     * 
+     * @return string
+     */
+    public function jsonFileName() {
+        return strtolower(trim(preg_replace('#\W+#', '_', $this->getRecordName()), '_')).'.json';
+    }
+    
 }

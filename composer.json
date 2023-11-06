@@ -18,7 +18,8 @@
         "vitexsoftware/multiflexiapiserver": "*",
         "dyorg/slim-token-authentication": "*",
         "tuupola/slim-basic-auth": "*",
-        "vitexsoftware/ease-core": "dev-main"
+        "vitexsoftware/ease-core": "dev-main",
+        "rcubitto/json-pretty": "dev-master"
     },
     "license": "MIT",
     "authors": [

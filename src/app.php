@@ -8,7 +8,7 @@
 
 namespace MultiFlexi\Ui;
 
-use \AbraFlexi\Company,
+use MultiFlexi\Company,
     \DateTime,
     \Ease\Html\ATag,
     \Ease\Html\H3Tag,
@@ -59,7 +59,6 @@ if (array_key_exists('company', $_SESSION) && is_null($_SESSION['company']) === 
     $panel[] = new LinkButton('id=' . $apps->getMyKey() . '&company=' . $_SESSION['company'], sprintf(_('Assign to %s'), $company->getRecordName()), 'success');
 }
 
-
 $jobber = new Job();
 $jobs = $jobber->listingQuery()->select(['job.id', 'job.company_id', 'job.begin', 'job.exitcode', 'user.login', 'job.launched_by', 'company.nazev'], true)->leftJoin('company ON company.id = job.company_id')
                 ->leftJoin('user ON user.id = job.launched_by')
@@ -95,5 +94,8 @@ $oPage->container->addItem(new Panel(
                     new \MultiFlexi\Ui\ConfigFieldsBadges(Conffield::getAppConfigs($apps->getMyKey()))
                         ]
 ));
+
+$oPage->addItem( new AppJson($apps) );
+
 $oPage->addItem(new PageBottom());
 $oPage->draw();
