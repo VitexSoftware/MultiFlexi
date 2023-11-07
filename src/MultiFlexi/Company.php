@@ -87,7 +87,7 @@ class Company extends \MultiFlexi\Engine
 
         unset($data['class']);
 
-        if (array_key_exists('imageraw', $_FILES) && !empty($_FILES['imageraw']['name'])) {
+        if (!array_key_exists('logo', $data) && array_key_exists('imageraw', $_FILES) && !empty($_FILES['imageraw']['name'])) {
             $uploadfile = sys_get_temp_dir() . '/' . basename($_FILES['imageraw']['name']);
             if (move_uploaded_file($_FILES['imageraw']['tmp_name'], $uploadfile)) {
                 $data['logo'] = 'data:' . mime_content_type($uploadfile) . ';base64,' . base64_encode(file_get_contents($uploadfile));
