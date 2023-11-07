@@ -27,6 +27,7 @@
     "psr-4": {
       "MultiFlexi\\": "MultiFlexi",
       "MultiFlexi\\Ui\\": "MultiFlexi/Ui",
+      "MultiFlexi\\Env\\": "MultiFlexi/Env",
       "MultiFlexi\\Pohoda\\": "MultiFlexi/Pohoda",
       "MultiFlexi\\Zabbix\\": "MultiFlexi/Zabbix",
       "MultiFlexi\\AbraFlexi\\": "MultiFlexi/AbraFlexi",

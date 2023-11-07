@@ -10,6 +10,7 @@ db/seeds/*				  usr/lib/multiflexi/db/seeds
 debian/conf/composer.json                 usr/lib/multiflexi
 debian/conf/phinx-adapter.php	          usr/lib/multiflexi
 src/MultiFlexi/*.php                      usr/lib/multiflexi/MultiFlexi/
+src/MultiFlexi/Env/*.php                  usr/lib/multiflexi/MultiFlexi/Env/
 src/MultiFlexi/Pohoda/*.php               usr/lib/multiflexi/MultiFlexi/Pohoda/
 src/MultiFlexi/AbraFlexi/*.php            usr/lib/multiflexi/MultiFlexi/AbraFlexi/
 src/MultiFlexi/Ui/*.php                   usr/lib/multiflexi/MultiFlexi/Ui/

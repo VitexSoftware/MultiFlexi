@@ -34,6 +34,7 @@
             "MultiFlexi\\": "src/MultiFlexi/",
             "MultiFlexi\\Ui\\": "src/MultiFlexi/Ui",
             "MultiFlexi\\Api\\": "src/MultiFlexi/Api",
+            "MultiFlexi\\Env\\": "src/MultiFlexi/Env",
             "MultiFlexi\\Auth\\": "src/MultiFlexi/Auth",
             "MultiFlexi\\Zabbix\\": "src/MultiFlexi/Zabbix",
             "MultiFlexi\\Pohoda\\": "src/MultiFlexi/Pohoda",
