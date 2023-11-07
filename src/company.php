@@ -53,7 +53,7 @@ foreach ($jobs as $job) {
 
 $companyPanelContents = [];
 $headRow = new Row();
-$logo = new \Ease\Html\ImgTag(empty($companies->getDataValue('logo')) ? 'src\company.svg' : $companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid', 'min-width' => '100%']);
+$logo = new \Ease\Html\ImgTag(empty($companies->getDataValue('logo')) ? 'images/company.svg' : $companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid', 'min-width' => '100%']);
 $deleteButton = new \Ease\TWB4\LinkButton('companydelete.php?id=' . $companies->getMyKey(), '☠️&nbsp;' . _('Delete company'), 'danger');
 $headRow->addColumn(2, [$logo, '<p></p>', new \Ease\TWB4\LinkButton('companysetup.php?id=' . $companies->getMyKey(), '🛠️&nbsp;' . _('Company setup'), 'primary btn-lg btn-block '), '<p></p>', new \Ease\TWB4\LinkButton('tasks.php?company_id=' . $companies->getMyKey(), '🔧&nbsp;' . _('Setup tasks'), 'primary btn-lg btn-block'), '<p></p>', $deleteButton]);
 $headRow->addColumn(10, new EnvironmentView($companyEnver->getData()));

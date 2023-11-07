@@ -86,14 +86,18 @@ class Company extends \MultiFlexi\Engine
         }
 
         unset($data['class']);
-        $data['logo'] = $this->obtainLogo(intval($data['server']), $data['company']);
+
+        if (array_key_exists('imageraw', $_FILES) && !empty($_FILES['imageraw']['name'])) {
+            $uploadfile = sys_get_temp_dir() . '/' . basename($_FILES['imageraw']['name']);
+            if (move_uploaded_file($_FILES['imageraw']['tmp_name'], $uploadfile)) {
+                $data['logo'] = 'data:' . mime_content_type($uploadfile) . ';base64,' . base64_encode(file_get_contents($uploadfile));
+                unlink($uploadfile);
+                unset($data['imageraw']);
+            }
+        }
+
+
         return parent::takeData($data);
-    }
-
-
-    public function obtainLogo()
-    {
-        return $this->getDataValue('logo');
     }
 
     /**

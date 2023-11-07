@@ -20,7 +20,7 @@ use Ease\TWB4\Widgets\Toggle;
  *
  * @author vitex
  */
-class RegisterAppForm extends EngineForm
+class AppEditorForm extends EngineForm
 {
     public function afterAdd()
     {

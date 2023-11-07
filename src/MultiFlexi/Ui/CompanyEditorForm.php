@@ -22,16 +22,19 @@ use Ease\TWB4\Widgets\Toggle;
  *
  * @author
  */
-class RegisterCompanyForm extends EngineForm
+class CompanyEditorForm extends EngineForm
 {
     public function afterAdd()
     {
+        $this->setTagProperty('enctype', 'multipart/form-data');
         $this->addInput(new InputTextTag('name'), _('Company name'));
         $this->addInput(new InputTextTag('company'), _('Company selector'), _('firma_s_r_o_ or 30000'), _('For AbraFlexi use lowercase and for Pohoda use mServer port number'));
         $this->addInput(new InputTextTag('ic'), _('Organization ID'));
         $this->addInput(new InputEmailTag('email'), _('Send notification to'));
         $this->addInput(new CustomerSelect('customer'), _('Customer'));
         $this->addInput(new ServerSelect('server'), _('Choose server'));
+        $imgInput = $this->addInput(new \Ease\Html\InputFileTag('imageraw'), _('Company Logo'));
+
         $this->addInput(
             new SemaforLight((bool) $this->engine->getDataValue('rw')),
             _('write permission')
