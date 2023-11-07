@@ -27,7 +27,7 @@ use MultiFlexi\Company,
     \MultiFlexi\Job,
     \MultiFlexi\Ui\PageBottom,
     \MultiFlexi\Ui\PageTop,
-    \MultiFlexi\Ui\RegisterAppForm;
+    \MultiFlexi\Ui\AppEditorForm;
 
 require_once './init.php';
 $oPage->onlyForLogged();
@@ -53,7 +53,7 @@ if (empty($instanceName) === false) {
 $_SESSION['application'] = $apps->getMyKey();
 $oPage->addItem(new PageTop($apps->getRecordName() ? trim(_('Application') . ' ' . $apps->getRecordName()) : $instanceName));
 $instanceRow = new Row();
-$instanceRow->addColumn(8, new RegisterAppForm($apps));
+$instanceRow->addColumn(8, new AppEditorForm($apps));
 $panel[] = new ImgTag(empty($apps->getDataValue('image')) ? 'images/apps.svg' : $apps->getDataValue('image'), 'Logo', ['class' => 'img-fluid']);
 $panel[] = new HrTag();
 if (array_key_exists('company', $_SESSION) && is_null($_SESSION['company']) === false) {

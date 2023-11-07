@@ -70,7 +70,7 @@ if (empty($instanceName)) {
 }
 
 $instanceRow = new Row();
-$instanceRow->addColumn(4, new RegisterCompanyForm($companies, null, ['action' => 'companysetup.php']));
+$instanceRow->addColumn(4, new CompanyEditorForm($companies, null, ['action' => 'companysetup.php']));
 //$instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($companies));
 
 
