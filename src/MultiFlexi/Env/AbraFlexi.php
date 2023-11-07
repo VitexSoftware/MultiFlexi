@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 /**
  * Multi Flexi - AbraFlexi environment variables handler
  *
@@ -14,8 +16,13 @@ namespace MultiFlexi\Env;
  *
  * @author vitex
  */
-class AbraFlexi implements Injector
+class AbraFlexi extends \MultiFlexi\Environmentor implements Injector
 {
+    /**
+     * List of all known keys
+     *
+     * @return array
+     */
     public static function allKeysHandled()
     {
         return [
@@ -23,6 +30,23 @@ class AbraFlexi implements Injector
             'ABRAFLEXI_LOGIN',
             'ABRAFLEXI_PASSWORD',
             'ABRAFLEXI_COMPANY'
-            ];
+        ];
+    }
+
+    /**
+     *
+     * @return array
+     */
+    public function getEnvironment(): array
+    {
+        $abraFlexiEnv = [];
+        if ($this->engine->company->getDataValue('server')) {
+            $server = new \MultiFlexi\Servers($this->engine->company->getDataValue('server'));
+            if ($server->getDataValue('type') == 'AbraFlexi') {
+                $platformHelper = new \MultiFlexi\AbraFlexi\Company($this->engine->company->getMyKey(), $server->getData());
+                $abraFlexiEnv = $platformHelper->getEnvironment();
+            }
+        }
+        return $abraFlexiEnv;
     }
 }

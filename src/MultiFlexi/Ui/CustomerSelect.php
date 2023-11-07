@@ -18,10 +18,10 @@ class CustomerSelect extends \Ease\Html\SelectTag
 {
     use \Ease\SQL\Orm;
     use \Ease\RecordKey;
-    
+
     public $myTable = 'customers';
 
-    
+
     public function __construct(
         $name,
         $defaultValue = null,

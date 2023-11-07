@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi Flexi - Company Management Class
  *
@@ -21,7 +22,6 @@ use Ease\TWB4\Widgets\Toggle;
  */
 class RegisterAppForm extends EngineForm
 {
-
     public function afterAdd()
     {
         $this->setTagProperty('enctype', 'multipart/form-data');

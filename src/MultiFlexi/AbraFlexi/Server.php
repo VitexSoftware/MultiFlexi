@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 /**
  * Multi Flexi - AbraFlexi Server
  *
@@ -24,7 +26,7 @@ class Server extends \MultiFlexi\Engine implements \MultiFlexi\platformServer
 
     /**
      * Connection Environment by Server
-     * 
+     *
      * @return array
      */
     public function getEnvironment()

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Multi Flexi - 
+ * Multi Flexi -
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
@@ -14,5 +15,5 @@ namespace MultiFlexi;
  */
 interface platformServer
 {
-        public function getEnvironment();
+    public function getEnvironment();
 }

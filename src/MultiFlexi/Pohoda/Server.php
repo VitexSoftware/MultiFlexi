@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 /**
  * Multi Flexi - Pohoda Server
  *
@@ -23,9 +25,9 @@ class Server extends \MultiFlexi\Engine implements \MultiFlexi\platformServer
     public $myTable = 'servers';
 
     /**
-     * Pohoda Server Environment variables 
-     * 
-     * @return array 
+     * Pohoda Server Environment variables
+     *
+     * @return array
      */
     public function getEnvironment()
     {

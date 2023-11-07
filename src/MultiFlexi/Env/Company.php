@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 /**
  * Multi Flexi - Company Environment Handler
  *
@@ -14,10 +16,25 @@ namespace MultiFlexi\Env;
  *
  * @author vitex
  */
-class Company implements Injector
+class Company extends \MultiFlexi\Environmentor implements Injector
 {
+    /**
+     * List of all known keys
+     *
+     * @return array
+     */
     public static function allKeysHandled()
     {
-        return ['EASE_LOGGER'];
+        return [];
+    }
+
+    /**
+     * Company Environment
+     *
+     * @return array
+     */
+    public function getEnvironment(): array
+    {
+        return $this->engine->company->getEnvironment();
     }
 }

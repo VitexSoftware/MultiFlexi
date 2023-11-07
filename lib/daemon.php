@@ -18,7 +18,7 @@ define('EASE_LOGGER', implode('|', $loggers));
 \Ease\Shared::user(new \Ease\Anonym());
 $scheduler = new Scheduler();
 $scheduler->logBanner('MultiFlexi Daemon started');
-while (\Ease\Functions::cfg('DAEMONIZE', true)) {
+while (\Ease\Functions::cfg('MULTIFLEXI_DAEMONIZE', true)) {
 
     foreach ($scheduler->getCurrentJobs() as $scheduledJob) {
         $job = new Job($scheduledJob['job']);
@@ -28,6 +28,6 @@ while (\Ease\Functions::cfg('DAEMONIZE', true)) {
         $job->cleanUp();
     }
 
-    sleep(\Ease\Functions::cfg("CYCLE_PAUSE", 10));
+    sleep(\Ease\Functions::cfg("MULTIFLEXI_CYCLE_PAUSE", 10));
 }
 $scheduler->logBanner('MultiFlexi Daemon ended');

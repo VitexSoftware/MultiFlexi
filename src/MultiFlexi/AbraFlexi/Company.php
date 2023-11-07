@@ -10,8 +10,8 @@ namespace MultiFlexi\AbraFlexi;
  */
 class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
 {
-
     use \Ease\SQL\Orm;
+
     public $keyword = 'company';
 
     public $nameColumn = 'name';
@@ -88,9 +88,9 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
         $urlInfo = parse_url($baseUrl);
         $curFile = basename($urlInfo['path']);
         $webHookUrl = str_replace(
-                $curFile,
-                'webhook.php?instanceid=' . $instanceId,
-                $baseUrl
+            $curFile,
+            'webhook.php?instanceid=' . $instanceId,
+            $baseUrl
         );
         return $webHookUrl;
     }
@@ -129,8 +129,8 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
             $stitek->insertToAbraFlexi($stitekData);
             if ($stitek->lastResponseCode == 201) {
                 $stitek->addStatusMessage(
-                        sprintf(_('label %s created'), $label),
-                        'success'
+                    sprintf(_('label %s created'), $label),
+                    'success'
                 );
             } else {
                 $result = false;
@@ -152,15 +152,15 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
         $hookResult = $hooker->register($hookurl, $format);
         if ($hookResult) {
             $hooker->addStatusMessage(sprintf(
-                            _('Hook %s was registered'),
-                            $hookurl
-                    ), 'success');
+                _('Hook %s was registered'),
+                $hookurl
+            ), 'success');
             $hookurl = '';
         } else {
             $hooker->addStatusMessage(sprintf(
-                            _('Hook %s not registered'),
-                            $hookurl
-                    ), 'warning');
+                _('Hook %s not registered'),
+                $hookurl
+            ), 'warning');
         }
         return $hookResult;
     }
@@ -182,8 +182,8 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
             if ($chapistatus === false) {
                 $changer->enable();
                 $changer->addStatusMessage(
-                        _('ChangesAPI was enabled'),
-                        'success'
+                    _('ChangesAPI was enabled'),
+                    'success'
                 );
                 $chapistatus = true;
             }
@@ -191,8 +191,8 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
             if ($chapistatus === true) {
                 $changer->disable();
                 $changer->addStatusMessage(
-                        _('ChangesAPI was disabled'),
-                        'warning'
+                    _('ChangesAPI was disabled'),
+                    'warning'
                 );
                 $chapistatus = false;
             }
@@ -364,9 +364,9 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
                             }
                         } else {
                             $this->addStatusMessage(sprintf(
-                                            _('Company with no ID'),
-                                            $candidat['name']
-                                    ), 'warning');
+                                _('Company with no ID'),
+                                $candidat['name']
+                            ), 'warning');
                         }
                         if (array_key_exists('nazFirmy', $nast) || empty($nast['nazFirmy'])) {
                             if ($nast['nazFirmy'] == $companyData['name']) {
@@ -402,13 +402,13 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
             $companyInfo = end($companies);
             $this->setCompany($companyInfo['dbNazev']);
             $this->addStatusMessage(sprintf(
-                            _('Company created'),
-                            $this->getApiURL()
-                    ), 'success');
+                _('Company created'),
+                $this->getApiURL()
+            ), 'success');
             if (!empty($companyData['ic'])) {
                 $setter = new \AbraFlexi\Nastaveni(
-                        null,
-                        $this->getConnectionOptions()
+                    null,
+                    $this->getConnectionOptions()
                 );
                 $settings = $setter->getAllFromAbraFlexi();
                 foreach ($settings as $setting) {
@@ -473,7 +473,7 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
         $serverEnvironment = $this->getServerEnvironment();
         $companyEnvHelper = new \MultiFlexi\CompanyEnv($this->getMyKey());
         $companyEnvironment = $companyEnvHelper->getData();
-        $companyEnvironment['ABRAFLEXI_COMPANY']=$this->getCompany();
+        $companyEnvironment['ABRAFLEXI_COMPANY'] = $this->getCompany();
         return array_merge($serverEnvironment, $companyEnvironment);
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi Flexi  - AppToCompany class
  *
@@ -15,8 +16,6 @@ namespace MultiFlexi;
  */
 class RunTemplate extends Engine
 {
-
-    
     public function __construct($identifier = null, $options = [])
     {
         $this->myTable = 'runtemplate';
@@ -26,7 +25,7 @@ class RunTemplate extends Engine
     /**
      * Get id by App & Company
      *
-     * SELECT runtemplate.id, runtemplate.interv, runtemplate.prepared, apps.nazev AS app, company.nazev AS company   FROM runtemplate LEFT JOIN apps ON runtemplate.app_id=apps.id LEFT JOIN company ON runtemplate.company_id=company.id;
+     * SELECT runtemplate.id, runtemplate.interv, runtemplate.prepared, apps.name AS app, company.name AS company   FROM runtemplate LEFT JOIN apps ON runtemplate.app_id=apps.id LEFT JOIN company ON runtemplate.company_id=company.id;
      *
      * @param int $appId
      * @param int $companyId
@@ -81,8 +80,8 @@ class RunTemplate extends Engine
     public function getCompanyEnvironment()
     {
         $connectionData = $this->getAppInfo();
-        $platformHelperClass = '\\MultiFlexi\\'.$connectionData['type'].'\\Company';
-        $platformHelper = new $platformHelperClass($connectionData['company_id'],$connectionData);
+        $platformHelperClass = '\\MultiFlexi\\' . $connectionData['type'] . '\\Company';
+        $platformHelper = new $platformHelperClass($connectionData['company_id'], $connectionData);
         return $platformHelper->getEnvironment();
     }
     /**
@@ -114,7 +113,7 @@ class RunTemplate extends Engine
         return $this->listingQuery()
                         ->select('apps.*')
                         ->select('apps.id as apps_id')
-                        ->select('apps.nazev as app_name')
+                        ->select('apps.name as app_name')
                         ->select('company.*')
                         ->select('servers.*')
                         ->where([$this->getMyTable() . '.' . $this->getKeyColumn() => $this->getMyKey()])

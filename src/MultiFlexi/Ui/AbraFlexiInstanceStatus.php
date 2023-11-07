@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi Flexi  - AbraFlexi server companys status
  *
@@ -15,7 +16,6 @@ namespace MultiFlexi\Ui;
  */
 class AbraFlexiInstanceStatus extends \Ease\Html\TableTag
 {
-
     public function __construct($servers, $properties = array())
     {
         $properties['class'] = 'table';
@@ -47,9 +47,9 @@ class AbraFlexiInstanceStatus extends \Ease\Html\TableTag
 
     /**
      * List Companys on target server
-     * 
+     *
      * @param array $serverAccess
-     * 
+     *
      * @return array
      */
     public function companys($serverAccess)

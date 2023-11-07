@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi Flexi - API Base
  *
@@ -87,10 +88,9 @@ class ServerApi extends AbstractServerApi
      * @return ResponseInterface
      */
     public function setServerById(
-            ServerRequestInterface $request,
-            ResponseInterface $response
-    ): ResponseInterface
-    {
+        ServerRequestInterface $request,
+        ResponseInterface $response
+    ): ResponseInterface {
         $queryParams = $request->getQueryParams();
         if (key_exists('serverId', $queryParams)) {
             $this->engine->setMyKey($queryParams['serverId']);

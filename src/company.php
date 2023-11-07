@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi Flexi - Company instance editor.
  *
@@ -61,10 +62,10 @@ $companyPanelContents[] = new \Ease\Html\HrTag();
 $companyPanelContents[] = $jobList;
 $bottomLine = new Row();
 $oPage->container->addItem(new Panel(
-                $companies->getRecordName(),
-                'light',
-                $companyPanelContents,
-                $bottomLine
+    $companies->getRecordName(),
+    'light',
+    $companyPanelContents,
+    $bottomLine
 ));
 $oPage->addItem(new PageBottom());
 $oPage->draw();

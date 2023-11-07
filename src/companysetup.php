@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi Flexi - Company instance editor.
  *

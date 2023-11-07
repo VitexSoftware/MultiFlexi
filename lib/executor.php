@@ -43,7 +43,7 @@ if ($interval) {
         if (empty($appsForCompany) && ($interval != 'i')) {
             $companer->addStatusMessage(sprintf(_('No applications to run for %s in interval %s'), $company['name'], $interval), 'debug');
         } else {
-            $jobber = new Job();
+
             foreach ($appsForCompany as $servData) {
                 if (!is_null($interval) && ($interval != $servData['interv'])) {
                     continue;

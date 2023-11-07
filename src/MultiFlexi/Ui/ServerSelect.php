@@ -18,7 +18,7 @@ class ServerSelect extends \Ease\Html\SelectTag
 {
     use \Ease\SQL\Orm;
     use \Ease\RecordKey;
-    
+
     public $myTable = 'servers';
 
 

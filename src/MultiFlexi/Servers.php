@@ -67,15 +67,15 @@ class Servers extends DBEngine
             );
             $result = false;
         }
-        
-        if(($data['type'] == 'Pohoda') && (parse_url($data['url'], PHP_URL_PORT) != null) ){
+
+        if (($data['type'] == 'Pohoda') && (parse_url($data['url'], PHP_URL_PORT) != null)) {
             $this->addStatusMessage(
                 _('Pohoda Server API URL cannot contain port'),
                 'warning'
             );
             $result = false;
         }
-        
+
         if (array_key_exists('user', $data) && !strlen($data['user'])) {
             $this->addStatusMessage(_('User name cannot be empty'), 'warning');
             $result = false;

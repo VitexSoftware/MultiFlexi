@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi Flexi - Index page.
  *
@@ -27,7 +28,7 @@ foreach ($allFbData as $serverId => $fbData) {
     unset($fbData['ic']);
     $serverInfo = [];
     $serverInfo['type'] = new \Ease\Html\ImgTag('images/' . strtolower($fbData['type']) . '.svg', $fbData['type'], ['width' => '60px']);
-    $serverInfo['id'] = new \Ease\TWB4\Badge('success',$fbData['id']);
+    $serverInfo['id'] = new \Ease\TWB4\Badge('success', $fbData['id']);
     $serverInfo['name'] = new \Ease\Html\ATag('server.php?id=' . $fbData['id'], new \Ease\Html\StrongTag($fbData['name']));
     $serverInfo['url'] = new \Ease\Html\ATag($fbData['url'], $fbData['url']);
     $serverInfo['user'] = $fbData['user'];

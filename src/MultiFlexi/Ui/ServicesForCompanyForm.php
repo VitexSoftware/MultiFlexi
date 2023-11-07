@@ -35,12 +35,12 @@ class ServicesForCompanyForm extends Form
     public function __construct($company, $tagProperties = array())
     {
         $companyID = $company->getMyKey();
-        
+
         $serverCompanyInfo = (new Company())->listingQuery()->where('company.id', $companyID)->select('servers.type')->leftJoin('servers ON servers.id = company.server')->fetch();
 
         $platformApps  =  (new Application())->getPlatformApps($serverCompanyInfo['type']);
                 //(new Application())->listingQuery()->select('id AS app_id')->select('nazev AS app_name')->where('enabled', 1)->fetchAll();
-        
+
         $glue = new RunTemplate();
         $assigned = $glue->getAppsForCompany($companyID);
         parent::__construct($tagProperties);
@@ -57,11 +57,11 @@ class ServicesForCompanyForm extends Form
         }
     }
 
-    
-    
-    
-    
-    
+
+
+
+
+
     /**
      *
      */

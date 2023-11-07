@@ -15,7 +15,7 @@ use Ease\Html\ATag;
 use Ease\Html\ImgTag;
 use Ease\TWB4\FormGroup;
 
-use const __PHPUNIT_ATTR_DRIVER_NAME__;
+//? use const __PHPUNIT_ATTR_DRIVER_NAME__;
 
 /**
  * Description of AppRow
@@ -24,7 +24,6 @@ use const __PHPUNIT_ATTR_DRIVER_NAME__;
  */
 class AppRow extends \Ease\TWB4\Row
 {
-
     /**
      * Application in Company context
      *
