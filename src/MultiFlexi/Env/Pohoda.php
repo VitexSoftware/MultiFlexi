@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 /**
  * Multi Flexi - Stormware Pohoda Environment handler
  *
@@ -14,9 +16,13 @@ namespace MultiFlexi\Env;
  *
  * @author vitex
  */
-class Pohoda implements Injector
+class Pohoda extends \MultiFlexi\Environmentor implements Injector
 {
-
+    /**
+     * List of all known keys
+     *
+     * @return array
+     */
     public static function allKeysHandled()
     {
         return [
@@ -25,5 +31,22 @@ class Pohoda implements Injector
             'POHODA_PASSWORD',
             'POHODA_ICO'
         ];
+    }
+
+    /**
+     *
+     * @return array
+     */
+    public function getEnvironment(): array
+    {
+        $abraFlexiEnv = [];
+        if ($this->engine->company->getDataValue('server')) {
+            $server = new \MultiFlexi\Servers($this->engine->company->getDataValue('server'));
+            if ($server->getDataValue('type') == 'Pohoda') {
+                $platformHelper = new \MultiFlexi\Pohoda\Company($this->engine->company->getMyKey(), $server->getData());
+                $abraFlexiEnv = $platformHelper->getEnvironment();
+            }
+        }
+        return $abraFlexiEnv;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi Flexi - Job Eengine
  *
@@ -195,10 +196,11 @@ class Job extends Engine
         $companyApp = new RunTemplate($runTemplateId);
         $appId = $companyApp->getDataValue('app_id');
         $companyId = $companyApp->getDataValue('company_id');
-        
-        $this->environment = array_merge($companyApp->getAppEnvironment(), $envOverride);
+
         $this->application = new Application($appId);
         $this->company = new Company($companyId);
+
+        $this->environment = array_merge($this->getJobEnvironment(), $envOverride);
         $this->loadFromSQL($this->newJob($companyId, $appId, $this->environment));
         if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
             $this->zabbixMessageData = [
@@ -218,22 +220,20 @@ class Job extends Engine
                 \Ease\Shared::user()->getUserLogin()
             ];
         }
-        $app = new Application((int) $appId);
-        $setupCommand = $app->getDataValue('setup');
+
+        $setupCommand = $this->application->getDataValue('setup');
         if ($setupCommand && $this->isProvisioned($appId, $companyId) == 0) {
             $this->addStatusMessage(_('Perform initial setup'), 'warning');
             if (!empty(trim($setupCommand))) {
-                $app->addStatusMessage(_('Setup command') . ': ' . $setupCommand, 'debug');
-                $appCompany = new RunTemplate();
-                $appCompany->setMyKey($appCompany->runTemplateID($appId, $companyId));
-                $appInfo = $appCompany->getAppInfo();
-                $appEnvironment = $appCompany->getAppEnvironment();
+                $this->application->addStatusMessage(_('Setup command') . ': ' . $setupCommand, 'debug');
+                $appInfo = $companyApp->getAppInfo();
+                $appEnvironment = $companyApp->getAppEnvironment();
                 $process = new \Symfony\Component\Process\Process(
-                        explode(' ', $setupCommand),
-                        null,
-                        $appEnvironment,
-                        null,
-                        32767
+                    explode(' ', $setupCommand),
+                    null,
+                    $appEnvironment,
+                    null,
+                    32767
                 );
                 $result = $process->run(function ($type, $buffer) {
                     $logger = new Runner();
@@ -403,5 +403,22 @@ class Job extends Engine
     public static function codeToInterval($code)
     {
         return array_key_exists($code, self::$intervalCode) ? self::$intervalCode[$code] : 'n/a';
+    }
+
+    /**
+     * Environment for current Job
+     *
+     * @return array
+     */
+    public function getJobEnvironment()
+    {
+        \Ease\Functions::loadClassesInNamespace('MultiFlexi\\Env');
+        $injectors = \Ease\Functions::classesInNamespace('MultiFlexi\\Env');
+        $jobEnv = [];
+        foreach ($injectors as $injector) {
+            $injectorClass = '\\MultiFlexi\\Env\\' . $injector;
+            $jobEnv = array_merge($jobEnv, (new $injectorClass($this))->getEnvironment());
+        }
+        return $jobEnv;
     }
 }

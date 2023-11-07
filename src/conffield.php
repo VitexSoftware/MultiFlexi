@@ -26,7 +26,7 @@ $_SESSION['application'] = $appliacation->getMyKey();
 
 $instanceName = '';
 
-$conffields = new Conffield($confId,['autoload'=>true]);
+$conffields = new Conffield($confId, ['autoload' => true]);
 
 $conffields->setDataValue('app_id', $appId);
 
@@ -73,7 +73,7 @@ $cfgs = new \Ease\Html\UlTag();
 foreach ($conffields->appConfigs($appId) as $configInfo) {
     $cnfRow = new Row();
     $cnfRow->addColumn(2, $configInfo['type']);
-    $cnfRow->addColumn(4, new ATag('conffield.php?app_id='.$appId.'&id='.$configInfo['id'], new \Ease\TWB4\Badge('success', $configInfo['keyname'])));
+    $cnfRow->addColumn(4, new ATag('conffield.php?app_id=' . $appId . '&id=' . $configInfo['id'], new \Ease\TWB4\Badge('success', $configInfo['keyname'])));
     $cnfRow->addColumn(4, $configInfo['description']);
     $cnfRow->addColumn(2, new \Ease\TWB4\LinkButton('?app_id=' . $appId . '&delete=' . $configInfo['id'], 'X', 'danger btn-sm'));
     $cfgs->addItemSmart($cnfRow);

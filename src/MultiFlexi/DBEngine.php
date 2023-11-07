@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi Flexi - Company Management Class
  *
@@ -172,8 +173,8 @@ class DBEngine extends \Ease\SQL\Engine
         $this->editTitleText = sprintf(_('Editing %s'), $this->subject);
         $this->removeTitleText = sprintf(_('Removing %s'), $this->subject);
         $this->removeConfirmText = sprintf(
-                _('Are you sure you wish to delete %%d row of %s ?'),
-                $this->subject
+            _('Are you sure you wish to delete %%d row of %s ?'),
+            $this->subject
         );
     }
 
@@ -185,7 +186,7 @@ class DBEngine extends \Ease\SQL\Engine
     {
         return $this->getDataValue($this->nameColumn);
     }
-    
+
     /**
      * Columns Properties
      *
@@ -214,16 +215,16 @@ class DBEngine extends \Ease\SQL\Engine
 
                 if (!array_key_exists('name', $columnInfo)) {
                     $this->addStatusMessage(sprintf(
-                                    _('Missing ColumnInfo name for %s/%s'),
-                                    get_class($this),
-                                    $columnId
+                        _('Missing ColumnInfo name for %s/%s'),
+                        get_class($this),
+                        $columnId
                     ));
                 }
                 if (!array_key_exists('type', $columnInfo)) {
                     $this->addStatusMessage(sprintf(
-                                    _('Missing ColumnInfo type for %s/%s'),
-                                    get_class($this),
-                                    $columnInfo['name']
+                        _('Missing ColumnInfo type for %s/%s'),
+                        get_class($this),
+                        $columnInfo['name']
                     ));
                     $columns[$columnId]['type'] = 'string';
                 }
@@ -239,8 +240,8 @@ class DBEngine extends \Ease\SQL\Engine
 
             if (
                     isset($this->modifiedColumn) && !array_key_exists(
-                            $this->modifiedColumn,
-                            $columns
+                        $this->modifiedColumn,
+                        $columns
                     )
             ) {
                 $columns[$this->modifiedColumn] = ['name' => $this->modifiedColumn,
@@ -250,8 +251,8 @@ class DBEngine extends \Ease\SQL\Engine
 
             if (
                     isset($this->createColumn) && !array_key_exists(
-                            $this->createColumn,
-                            $columns
+                        $this->createColumn,
+                        $columns
                     )
             ) {
                 $columns[$this->createColumn] = ['name' => $this->createColumn, 'type' => 'datetime',
@@ -277,8 +278,8 @@ class DBEngine extends \Ease\SQL\Engine
             $columnName = $values['name'];
             if (
                     !empty($this->defaults) && array_key_exists(
-                            $columnName,
-                            $this->defaults
+                        $columnName,
+                        $this->defaults
                     )
             ) {
                 $values['def'] = $this->defaults[$columnName];
@@ -335,9 +336,9 @@ class DBEngine extends \Ease\SQL\Engine
                 foreach ($tableColumns as $colProps) {
                     $search = "LIKE '%" . strtolower($conditions['search']['value']) . "%'";
                     $query->whereOr(' LOWER(' . (array_key_exists(
-                                    'column',
-                                    $colProps
-                            ) ? $colProps['column'] : $this->getMyTable() . '.' . "`" . $colProps['name'] . "`") . ') ' . $search);
+                        'column',
+                        $colProps
+                    ) ? $colProps['column'] : $this->getMyTable() . '.' . "`" . $colProps['name'] . "`") . ') ' . $search);
                 }
                 unset($conditions['search']);
             }
@@ -351,9 +352,9 @@ class DBEngine extends \Ease\SQL\Engine
                     }
 
                     $query->where(' LOWER(' . (array_key_exists(
-                                    'column',
-                                    $colProps
-                            ) ? $colProps['column'] : $this->getMyTable() . '.' . $colProps['data']) . ') ' . $search);
+                        'column',
+                        $colProps
+                    ) ? $colProps['column'] : $this->getMyTable() . '.' . $colProps['data']) . ') ' . $search);
                 }
             }
 
@@ -373,13 +374,13 @@ class DBEngine extends \Ease\SQL\Engine
                     default:
                         if (array_key_exists($condName, $this->columns())) {
                             $query->where(
-                                    $this->getMyTable() . '.' . $condName,
-                                    $condValue
+                                $this->getMyTable() . '.' . $condName,
+                                $condValue
                             );
                         } else {
                             $query->where(
-                                    str_replace('/', '.', $condName),
-                                    $condValue
+                                str_replace('/', '.', $condName),
+                                $condValue
                             );
                         }
                         break;
@@ -466,9 +467,9 @@ class DBEngine extends \Ease\SQL\Engine
             $id = $this->getMyKey();
         }
         return $this->addSelectizeValues($this->listingQuery()->where(
-                                $this->getMyTable() . '.' . $this->getKeyColumn(),
-                                $id
-                        ))->fetch();
+            $this->getMyTable() . '.' . $this->getKeyColumn(),
+            $id
+        ))->fetch();
     }
 
     /**
@@ -528,8 +529,8 @@ class DBEngine extends \Ease\SQL\Engine
             switch ($column['type']) {
                 case 'email':
                     $field->validator(Validate::email(ValidateOptions::inst()->message(sprintf(
-                                                    _('%s is not valid email'),
-                                                    $column['label']
+                        _('%s is not valid email'),
+                        $column['label']
                     ))));
                     break;
                 case 'currency':
@@ -557,15 +558,15 @@ class DBEngine extends \Ease\SQL\Engine
 
             if (array_key_exists('requied', $column) && ($column['requied'] == 'true')) {
                 $field->validator(Validate::notEmpty(ValidateOptions::inst()->message(sprintf(
-                                                _('A %s is required'),
-                                                $column['label']
+                    _('A %s is required'),
+                    $column['label']
                 ))));
             }
 
             if (array_key_exists('unique', $column) && ($column['unique'] == 'true')) {
                 $field->validator(Validate::unique(ValidateOptions::inst()->message(sprintf(
-                                                _('A %s is not unique'),
-                                                $column['label']
+                    _('A %s is not unique'),
+                    $column['label']
                 ))));
             }
 
@@ -625,15 +626,15 @@ class DBEngine extends \Ease\SQL\Engine
     {
         if (
                 array_key_exists('action', $formPost) && array_key_exists(
-                        'data',
-                        $formPost
+                    'data',
+                    $formPost
                 )
         ) {
             foreach ($formPost['data'] as $recordId => $recordData) {
                 $formPost['data'][$recordId] = $this->prepareToSave(
-                        $recordData,
-                        $formPost['action'],
-                        str_replace('row_', '', $recordId)
+                    $recordData,
+                    $formPost['action'],
+                    str_replace('row_', '', $recordId)
                 );
             }
             unset($_SESSION['feedCache'][get_class($this)]);
@@ -688,9 +689,9 @@ class DBEngine extends \Ease\SQL\Engine
             foreach ($row as $key => $value) {
                 if (
                         $key == str_replace(
-                                $this->getMyTable() . '.',
-                                '',
-                                strtolower($this->myKeyColumn)
+                            $this->getMyTable() . '.',
+                            '',
+                            strtolower($this->myKeyColumn)
                         )
                 ) {
                     continue;
@@ -702,9 +703,9 @@ class DBEngine extends \Ease\SQL\Engine
                     $fieldType = $columns[$key]['type'];
                 } else {
                     $this->addStatusMessage(sprintf(
-                                    _('Field Type is not set for %s '),
-                                    $this->getMyTable(),
-                                    $key
+                        _('Field Type is not set for %s '),
+                        $this->getMyTable(),
+                        $key
                     ));
                     $fieldType = 'string';
                 }
@@ -730,8 +731,8 @@ class DBEngine extends \Ease\SQL\Engine
                         if ($value) {
                             $stamper = new \DateTime($value);
                             $row[$key] = new \Ease\Html\ATag(
-                                    'calendar.php?day=' . $stamper->format('Y-m-d'),
-                                    strftime("%x", $stamper->getTimestamp()) . ' (' . new ui\ShowTime($stamper->getTimestamp()) . ')'
+                                'calendar.php?day=' . $stamper->format('Y-m-d'),
+                                strftime("%x", $stamper->getTimestamp()) . ' (' . new ui\ShowTime($stamper->getTimestamp()) . ')'
                             );
                         }
                         break;
@@ -739,14 +740,14 @@ class DBEngine extends \Ease\SQL\Engine
                         if ($value) {
                             $stamper = new \DateTime($value);
                             $row[$key] = new \Ease\Html\ATag(
-                                    'calendar.php?day=' . $stamper->format('Y-m-d'),
-                                    new \Ease\Html\TimeTag(
-                                            strftime(
-                                                    "%x %r",
-                                                    $stamper->getTimestamp()
-                                            ),
-                                            ['datetime' => $stamper->getTimestamp()]
-                                    )
+                                'calendar.php?day=' . $stamper->format('Y-m-d'),
+                                new \Ease\Html\TimeTag(
+                                    strftime(
+                                        "%x %r",
+                                        $stamper->getTimestamp()
+                                    ),
+                                    ['datetime' => $stamper->getTimestamp()]
+                                )
                             );
                         }
                         break;
@@ -927,9 +928,9 @@ class DBEngine extends \Ease\SQL\Engine
 
             if (!array_key_exists('type', $columnInfo)) {
                 throw new \Exception(sprintf(
-                                        _('Column "%s" of %s without type definition'),
-                                        $columnInfo['name'],
-                                        get_class($this)
+                    _('Column "%s" of %s without type definition'),
+                    $columnInfo['name'],
+                    get_class($this)
                 ));
             }
 
@@ -1076,7 +1077,6 @@ class DBEngine extends \Ease\SQL\Engine
      */
     public function postCreate($datableSaver, $id, $row)
     {
-        
     }
 
     /**
@@ -1085,7 +1085,6 @@ class DBEngine extends \Ease\SQL\Engine
      */
     public function validation($saver)
     {
-        
     }
 
     /**
@@ -1336,9 +1335,9 @@ class DBEngine extends \Ease\SQL\Engine
     public function getAttachments()
     {
         $attachments = $this->getFluentPDO()->from($this->keyword . '_file')->where(
-                        $this->keyword . '_id',
-                        $this->getMyKey()
-                )->fetchAll();
+            $this->keyword . '_id',
+            $this->getMyKey()
+        )->fetchAll();
         return empty($attachments) ? [] : $attachments;
     }
 
@@ -1398,7 +1397,7 @@ class DBEngine extends \Ease\SQL\Engine
      */
     public function getRowColor($checkRowResult)
     {
-        return null;
+        return '';
     }
 
     /**
@@ -1420,8 +1419,8 @@ class DBEngine extends \Ease\SQL\Engine
 
             if (
                     array_key_exists('detailPage', $colProps) && array_key_exists(
-                            'idColumn',
-                            $colProps
+                        'idColumn',
+                        $colProps
                     ) && array_key_exists($colName . '_id', $dataRowRaw)
             ) {
                 $dataRowRaw[$colName] = '<a href="' . $colProps['detailPage'] . '?id=' . $dataRowRaw[$colName . '_id'] . '" class="alert-link text-light">' . $dataRowRaw[$colName] . '</a>';

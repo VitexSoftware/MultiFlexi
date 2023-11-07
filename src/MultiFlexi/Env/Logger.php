@@ -1,7 +1,9 @@
 <?php
+
 declare(strict_types=1);
+
 /**
- * Multi Flexi - Handle Loging Environment variables 
+ * Multi Flexi - Handle Loging Environment variables
  *
  * @author    Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright 2023 Vitex Software
@@ -14,12 +16,24 @@ namespace MultiFlexi\Env;
  *
  * @author vitex
  */
-class Logger implements Injector
+class Logger extends \MultiFlexi\Environmentor implements Injector
 {
-    
+    /**
+     * List of all known keys
+     *
+     * @return array
+     */
+
     public static function allKeysHandled()
     {
         return ['EASE_LOGGER'];
     }
-    
+    /**
+     *
+     * @return array
+     */
+    public function getEnvironment(): array
+    {
+        return ['EASE_LOGGER' => 'syslog|console'];
+    }
 }

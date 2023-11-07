@@ -130,7 +130,7 @@ class MainMenu extends \Ease\Html\DivTag
 
     /**
      * Servers menu
-     * 
+     *
      * @param \Ease\Html\NavTag $nav
      * @param array $servers
      */
@@ -149,7 +149,7 @@ class MainMenu extends \Ease\Html\DivTag
 
     /**
      * Company Menu
-     * 
+     *
      * @param \Ease\Html\NavTag $nav
      * @param array $companys
      */

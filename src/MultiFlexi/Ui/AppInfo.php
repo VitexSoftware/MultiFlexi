@@ -9,7 +9,8 @@
 
 namespace MultiFlexi\Ui;
 
-use \Ease\Html\LabelTag,
+use Ease\Html\LabelTag,
+
     \Ease\Html\TableTag,
     \Ease\TWB4\Label,
     \Ease\TWB4\LinkButton,

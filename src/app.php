@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi Flexi - Customer instance editor.
  *
@@ -9,6 +10,7 @@
 namespace MultiFlexi\Ui;
 
 use MultiFlexi\Company,
+
     \DateTime,
     \Ease\Html\ATag,
     \Ease\Html\H3Tag,
@@ -49,7 +51,7 @@ if (empty($instanceName) === false) {
 }
 
 $_SESSION['application'] = $apps->getMyKey();
-$oPage->addItem(new PageTop($apps->getRecordName() ? trim(_('Application') . ' ' . $apps->getRecordName()) : $instanceName ));
+$oPage->addItem(new PageTop($apps->getRecordName() ? trim(_('Application') . ' ' . $apps->getRecordName()) : $instanceName));
 $instanceRow = new Row();
 $instanceRow->addColumn(8, new RegisterAppForm($apps));
 $panel[] = new ImgTag(empty($apps->getDataValue('image')) ? 'images/apps.svg' : $apps->getDataValue('image'), 'Logo', ['class' => 'img-fluid']);
@@ -85,17 +87,17 @@ $panel[] = new LinkButton('logs.php?apps_id=' . $apps->getMyKey(), _('Applicatio
 $panel[] = new LinkButton('joblist.php?app_id=' . $apps->getMyKey(), _('All Application Jobs history'), 'info');
 $instanceRow->addColumn(4, $panel);
 $oPage->container->addItem(new Panel(
-                $instanceName,
-                'inverse',
-                $instanceRow,
-                is_null($apps->getMyKey()) ?
+    $instanceName,
+    'inverse',
+    $instanceRow,
+    is_null($apps->getMyKey()) ?
                         new LinkButton('', _('Config fields'), 'inverse disabled') :
                         [new LinkButton('conffield.php?app_id=' . $apps->getMyKey(), _('Config fields'), 'warning'),
                     new \MultiFlexi\Ui\ConfigFieldsBadges(Conffield::getAppConfigs($apps->getMyKey()))
                         ]
 ));
 
-$oPage->addItem( new AppJson($apps) );
+$oPage->addItem(new AppJson($apps));
 
 $oPage->addItem(new PageBottom());
 $oPage->draw();

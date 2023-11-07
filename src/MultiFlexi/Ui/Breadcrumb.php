@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi Flexi -
  *
@@ -15,7 +16,6 @@ namespace MultiFlexi\Ui;
  */
 class Breadcrumb extends \Ease\TWB4\Breadcrumb
 {
-
     public function __construct($content = null, $properties = [])
     {
         parent::__construct($content, $properties);
@@ -23,7 +23,7 @@ class Breadcrumb extends \Ease\TWB4\Breadcrumb
             $this->addPage(_('choose Customer'), 'customers.php');
         } else {
             $customer = new \MultiFlexi\Customer($_SESSION['customer']);
-            $this->addPage(_('Customer') . ': '. $customer->getRecordName(), $customer->getLink());
+            $this->addPage(_('Customer') . ': ' . $customer->getRecordName(), $customer->getLink());
         }
 
         if (empty($_SESSION['server'])) {

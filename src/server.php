@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi Flexi - Company instance editor.
  *
@@ -27,8 +28,8 @@ if ($oPage->isPosted()) {
         }
     } else {
         $servers->addStatusMessage(
-                _('Error saving Server instance'),
-                'error'
+            _('Error saving Server instance'),
+            'error'
         );
     }
 }
@@ -45,10 +46,10 @@ $instanceRow = new Row();
 $instanceRow->addColumn(8, new RegisterServerForm($servers));
 $instanceRow->addColumn(4, new \Ease\Html\ImgTag('images/' . strtolower($servers->getDataValue('type')) . '-server.svg', $servers->getDataValue('type'), ['class' => 'img-fluid float-right', 'style' => 'height: 500px;']));
 $oPage->container->addItem(new Panel(
-                $instanceName,
-                'default',
-                $instanceRow,
-                $instanceLink
+    $instanceName,
+    'default',
+    $instanceRow,
+    $instanceLink
 ));
 if (($servers->getDataValue('type') == 'AbraFlexi') && is_null($servers->getMyKey()) === false) {
     $oPage->container->addItem(new AbraFlexiInstanceStatus($servers));

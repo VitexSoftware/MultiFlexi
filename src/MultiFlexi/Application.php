@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi Flexi  - App class
  *
@@ -137,9 +138,9 @@ class Application extends Engine
 
     /**
      * For "platform" return applications by config fields
-     * 
+     *
      * @param string $platform AbraFlexi|Pohoda
-     *  
+     *
      * @return array
      */
     public function getPlatformApps($platform)
@@ -149,10 +150,7 @@ class Application extends Engine
         foreach ($this->listingQuery() as $appId => $appInfo) {
             $appConfFields = $confField->appConfigs($appInfo['id']);
             $appConfs = array_keys($appConfFields);
-            if($appId == 16){
-                echo '';
-            }
-            if (preg_grep('/^'.strtoupper($platform).'_.*/', $appConfs)) {
+            if (preg_grep('/^' . strtoupper($platform) . '_.*/', $appConfs)) {
                 $platformApps[$appId] = $appInfo;
             }
         }
@@ -161,20 +159,23 @@ class Application extends Engine
 
     /**
      * Export Application and its Fields definiton as Json
-     * 
+     *
      * @return string Json
      */
-    public function getAppJson() {
-        $confField = new Conffield();
+    public function getAppJson()
+    {
         $appData = $this->getData();
-        $appData['environment'] = $confField->appConfigs($appData['id']);
-        $appData['multiflexi'] = \Ease\Shared::appName().' v'.\Ease\Shared::appVersion().' @'.gethostbyaddr('127.0.1.1').' '.gmdate('Y-m-d h:i:s \G\M\T');
+        if ($this->getMyKey()) {
+            $confField = new Conffield();
+            $appData['environment'] = $confField->appConfigs($appData['id']);
+        }
+        $appData['multiflexi'] = \Ease\Shared::appName() . ' v' . \Ease\Shared::appVersion() . ' @' . gethostbyaddr('127.0.1.1') . ' ' . gmdate('Y-m-d h:i:s \G\M\T');
         foreach ($appData['environment'] as $fieldName => $filedProperties) {
             unset($appData['environment'][$fieldName]['id']);
             unset($appData['environment'][$fieldName]['keyname']);
             unset($appData['environment'][$fieldName]['app_id']);
         }
-        
+
         unset($appData['id']);
         unset($appData['DatCreate']);
         unset($appData['DatUpdate']);
@@ -184,11 +185,11 @@ class Application extends Engine
 
     /**
      * valid filename for current App Json
-     * 
+     *
      * @return string
      */
-    public function jsonFileName() {
-        return strtolower(trim(preg_replace('#\W+#', '_', $this->getRecordName()), '_')).'.multiflexi.app.json';
+    public function jsonFileName()
+    {
+        return strtolower(trim(preg_replace('#\W+#', '_', $this->getRecordName()), '_')) . '.multiflexi.app.json';
     }
-    
 }

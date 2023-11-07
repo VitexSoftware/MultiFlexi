@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace MultiFlexi\Pohoda;
@@ -31,7 +32,7 @@ class Company extends \MultiFlexi\Company implements \MultiFlexi\platformCompany
 
     /**
      * Company Environment with Pohoda Specific values
-     * 
+     *
      * @return array
      */
     public function getEnvironment()

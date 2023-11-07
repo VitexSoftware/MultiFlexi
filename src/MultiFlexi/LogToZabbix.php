@@ -49,7 +49,7 @@ class LogToZabbix implements \Ease\Logger\Loggingable
         $me = \Ease\Functions::cfg('ZABBIX_HOST');
         $packet->addMetric((new ZabbixMetric('ease.message', json_encode([
             'stamp' => microtime(),
-            'caller' => \Ease\Logger\Message::getCallerName($caller), 
+            'caller' => \Ease\Logger\Message::getCallerName($caller),
             'message' => $message,
             'type' => $type
             ])))->withHostname($me));

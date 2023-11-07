@@ -10,8 +10,8 @@ namespace MultiFlexi;
  */
 class Company extends \MultiFlexi\Engine
 {
-
     use \Ease\SQL\Orm;
+
     public $keyword = 'company';
 
     public $nameColumn = 'name';
@@ -90,12 +90,12 @@ class Company extends \MultiFlexi\Engine
         return parent::takeData($data);
     }
 
-    
+
     public function obtainLogo()
     {
         return $this->getDataValue('logo');
     }
-    
+
     /**
      * Get Current record name
      *
@@ -135,8 +135,8 @@ class Company extends \MultiFlexi\Engine
 
     /**
      * Company Environment
-     * 
-     * @return type
+     *
+     * @return array
      */
     public function getEnvironment()
     {
