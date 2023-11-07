@@ -87,6 +87,9 @@ release:
 baseline:
 	phpstan analyse --level 7   --configuration phpstan.neon   src/ --generate-baseline
 
+phpunit:
+	vendor/bin/phpunit -c tests/configuration.xml tests/
+
 daemon:
 	export $(grep -v '#' .env | xargs) && cd lib && php -f ./daemon.php
 

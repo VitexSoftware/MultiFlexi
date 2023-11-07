@@ -6,7 +6,7 @@
  * @copyright  2023 Vitex Software
  */
 
-require_once './vendor/autoload.php';
+require_once dirname(__DIR__).'/vendor/autoload.php';
 session_start();
 \Ease\Shared::init(
     ['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'],

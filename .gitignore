@@ -37,3 +37,4 @@ composer.lock
 .vscode/settings.json
 db/multiflexi
 /.php-cs-fixer.cache
+/tests/.phpunit.result.cache
