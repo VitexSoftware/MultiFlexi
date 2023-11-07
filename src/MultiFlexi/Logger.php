@@ -124,7 +124,7 @@ class Logger extends DBEngine
                         'listingPage' => 'apps.php',
                         'detailPage' => 'app.php',
                         'idColumn' => 'apps',
-                        'valueColumn' => 'apps.nazev',
+                        'valueColumn' => 'apps.name',
                         'engine' => '\MultiFlexi\Application',
                         'filterby' => 'name',
                     ],

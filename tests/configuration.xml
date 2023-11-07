@@ -1,12 +1,4 @@
 <?xml version="1.0"?>
-/**
- * Multi Flexi - 
- *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
- */
-
-
 <!-- see http://www.phpunit.de/wiki/Documentation -->
 <!--phpunit bootstrap="/path/to/bootstrap.php"
          colors="false"

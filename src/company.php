@@ -25,7 +25,7 @@ $_SESSION['customer'] = $companies->getDataValue('customer');
 
 $companyEnver = new \MultiFlexi\CompanyEnv($companies->getMyKey());
 $jobber = new \MultiFlexi\Job();
-$jobs = $jobber->listingQuery()->select(['apps.nazev AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'runtemplate.id AS runtemplateid'], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->leftJoin('runtemplate ON runtemplate.company_id = job.company_id AND runtemplate.app_id = job.app_id')->where('job.company_id', $companies->getMyKey())->limit(20)->orderBy('job.id DESC')->fetchAll();
+$jobs = $jobber->listingQuery()->select(['apps.name AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'runtemplate.id AS runtemplateid'], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->leftJoin('runtemplate ON runtemplate.company_id = job.company_id AND runtemplate.app_id = job.app_id')->where('job.company_id', $companies->getMyKey())->limit(20)->orderBy('job.id DESC')->fetchAll();
 $jobList = new \Ease\TWB4\Table();
 $jobList->addRowHeaderColumns([_('Application'), _('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'), _('Launch now'), _('Launch in Background')]);
 foreach ($jobs as $job) {
