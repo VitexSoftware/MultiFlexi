@@ -476,4 +476,14 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
         $companyEnvironment['ABRAFLEXI_COMPANY'] = $this->getCompany();
         return array_merge($serverEnvironment, $companyEnvironment);
     }
+
+    public function getLogo()
+    {
+        $configurator = new \AbraFlexi\Nastaveni(null, $options);
+        try {
+            $logoInfo = $configurator->getFlexiData('1/logo');
+        } catch (\AbraFlexi\Exception $ex) {
+            $logoInfo = false;
+        }
+    }
 }

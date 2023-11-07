@@ -3,14 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi -
- *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
- */
-
-/**
- *
+ * Multi Flexi - Show Last X jobs
  *
  * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software
@@ -35,10 +28,20 @@ class JobHistoryTable extends \Ease\TWB4\Table
     {
         parent::__construct($content, $properties);
         $jobber = new \MultiFlexi\Job();
-        $jobs = $jobber->listingQuery()->select(['apps.name AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id',  'job.company_id', 'company.name' ], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->limit(50)->where('begin IS NOT NULL')->orderBy('job.id DESC')->fetchAll();
-        $this->addRowHeaderColumns([_('Application'), _('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'),_('Company')]);
+        $jobs = $jobber->listingQuery()->
+                select(['apps.name AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'job.company_id', 'company.name', 'company.logo'], true)
+                ->leftJoin('apps ON apps.id = job.app_id')
+                ->leftJoin('user ON user.id = job.launched_by')
+                ->limit(50)
+                ->where('begin IS NOT NULL')
+                ->orderBy('job.id DESC')
+                ->fetchAll();
+        $this->addRowHeaderColumns([_('Application'), _('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'), _('Company')]);
+        $company = new \AbraFlexi\Company();
         foreach ($jobs as $job) {
-            $job['appimage'] = new \Ease\Html\ATag('app.php?id=' . $job['app_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], $job['appname'], ['height' => 30, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);
+            $company->setDataValue('logo', $job['logo']);
+            $company->setDataValue('name', $job['name']);
+            $job['appimage'] = new \Ease\Html\ATag('app.php?id=' . $job['app_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], $job['appname'], ['height' => 60, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);
             unset($job['appname']);
             unset($job['app_id']);
             $job['id'] = new \Ease\Html\ATag('job.php?id=' . $job['id'], new \Ease\TWB4\Badge('info', $job['id']));
@@ -46,9 +49,9 @@ class JobHistoryTable extends \Ease\TWB4\Table
             $job['exitcode'] = new ExitCode($job['exitcode']);
             $job['launched_by'] = $job['launched_by'] ? new \Ease\Html\ATag('user.php?id=' . $job['launched_by'], new \Ease\TWB4\Badge('info', $job['login'])) : _('Timer');
             unset($job['login']);
-            $job['company_id'] = new \Ease\Html\ATag('company.php?id=' . $job['company_id'], $job['name']);
+            $job['company_id'] = [new \AbraFlexi\ui\CompanyLogo($company, ['height' => '30px']), '<br>', new \Ease\Html\ATag('company.php?id=' . $job['company_id'], $job['name'])];
             unset($job['name']);
-
+            unset($job['logo']);
             $this->addRowColumns($job);
         }
     }
