@@ -49,7 +49,7 @@ class JobHistoryTable extends \Ease\TWB4\Table
             $job['exitcode'] = new ExitCode($job['exitcode']);
             $job['launched_by'] = $job['launched_by'] ? new \Ease\Html\ATag('user.php?id=' . $job['launched_by'], new \Ease\TWB4\Badge('info', $job['login'])) : _('Timer');
             unset($job['login']);
-            $job['company_id'] = [new \AbraFlexi\ui\CompanyLogo($company, ['height' => '30px']), '<br>', new \Ease\Html\ATag('company.php?id=' . $job['company_id'], $job['name'])];
+            $job['company_id'] = [new CompanyLogo($company, ['height' => '30px']), '<br>', new \Ease\Html\ATag('company.php?id=' . $job['company_id'], $job['name'])];
             unset($job['name']);
             unset($job['logo']);
             $this->addRowColumns($job);
