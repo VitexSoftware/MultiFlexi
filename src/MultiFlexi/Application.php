@@ -194,7 +194,8 @@ class Application extends Engine
 
     /**
      * import json exported
-     * @param type $jsonFile
+     *
+     * @param string $jsonFile
      *
      * @return array
      */

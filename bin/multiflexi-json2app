@@ -1,0 +1,3 @@
+#!/bin/sh
+php -q -f /usr/lib/multiflexi/json2app.php $1 $2
+
