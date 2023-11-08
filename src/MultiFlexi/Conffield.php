@@ -58,7 +58,7 @@ class Conffield extends \Ease\SQL\Engine
         if (!empty($candidat)) {
             $this->setMyKey($candidat->fetchColumn(0));
         } else {
-            $this->setMyKey(null);
+            $this->unsetDataValue($this->getMyKey());
         }
 
         $this->setDataValue('app_id', $appId);
