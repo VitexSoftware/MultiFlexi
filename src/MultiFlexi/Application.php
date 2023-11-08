@@ -227,7 +227,7 @@ class Application extends Engine
                         }
                     }
                 }
-                $this->addStatusMessage('' . implode(',', $fields), 'success');
+                $this->addStatusMessage('Import:' . implode(',', $fields), 'success');
 
                 $executable = Application::findBinaryInPath($this->getDataValue('executable'));
                 if (empty($executable)) {
