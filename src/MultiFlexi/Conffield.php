@@ -56,9 +56,10 @@ class Conffield extends \Ease\SQL\Engine
 
         $candidat = $this->listingQuery()->where('app_id', $appId)->where('keyname', $envName);
         if (!empty($candidat)) {
-            $this->setMyKey($candidat->fetchColumn(0));
-        } else {
-            $this->unsetDataValue($this->getMyKey());
+            $currentData = $candidat->fetch();
+            if ($currentData) {
+                $this->setMyKey($currentData['id']);
+            }
         }
 
         $this->setDataValue('app_id', $appId);
