@@ -7,23 +7,27 @@
  * @copyright  2023 Vitex Software
  */
 
+namespace MultiFlexi;
+
 require_once '../vendor/autoload.php';
-Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
+
+\Ease\Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
 $loggers = ['console', 'syslog', '\MultiFlexi\LogToSQL'];
-if (Functions::cfg('ZABBIX_SERVER')) {
+if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
 define('EASE_LOGGER', implode('|', $loggers));
-Shared::user(new Anonym());
-$apper = new Application($argc == 2 ? intval($argv[1]) : null);
-if(\Ease\Shared::cfg('APP_DEBUG')){
-    $apper->logBanner();
-}
-if ($apper->getMyKey()) {
-    echo $apper->importAppJson(2);
+define('APP_NAME', 'MultiFlexi json2app');
+
+\Ease\Shared::user(new \Ease\Anonym());
+if (array_key_exists('1', $argv) && file_exists($argv[1])) {
+    $apper = new Application($argc == 3 ? intval($argv[3]) : null);
+    if (\Ease\Shared::cfg('APP_DEBUG')) {
+        $apper->logBanner();
+    }
+    if (empty($apper->importAppJson($argv[1]))) {
+        $apper->addStatusMesssage(_('Error importing application json'), 'error');
+    }
 } else {
-    echo "app ID missing\n";
-    exit(1);
+    echo "usage: app.template.json [app id]";
 }
-
-
