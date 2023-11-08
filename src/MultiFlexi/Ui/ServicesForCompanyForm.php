@@ -9,12 +9,8 @@
 
 namespace MultiFlexi\Ui;
 
-use Ease\Html\ATag;
-use Ease\Html\ImgTag;
 use Ease\TWB4\Form;
-use Ease\TWB4\FormGroup;
 use Ease\TWB4\Part;
-use Ease\TWB4\Row;
 use MultiFlexi\Application;
 use MultiFlexi\RunTemplate;
 use MultiFlexi\Company;
@@ -39,7 +35,7 @@ class ServicesForCompanyForm extends Form
         $serverCompanyInfo = (new Company())->listingQuery()->where('company.id', $companyID)->select('servers.type')->leftJoin('servers ON servers.id = company.server')->fetch();
 
         $platformApps  =  (new Application())->getPlatformApps($serverCompanyInfo['type']);
-                //(new Application())->listingQuery()->select('id AS app_id')->select('nazev AS app_name')->where('enabled', 1)->fetchAll();
+                //(new Application())->listingQuery()->select('id AS app_id')->select('name AS app_name')->where('enabled', 1)->fetchAll();
 
         $glue = new RunTemplate();
         $assigned = $glue->getAppsForCompany($companyID);
