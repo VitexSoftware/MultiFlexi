@@ -460,7 +460,7 @@ msgstr "Odhlášení"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:108
 msgid "Register Application"
-msgstr "Registuj Aplikaci"
+msgstr "Registruj Aplikaci"
 
 #: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:111
 msgid "Application list"

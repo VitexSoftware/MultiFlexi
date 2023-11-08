@@ -43,6 +43,33 @@ class Conffield extends \Ease\SQL\Engine
         return $this->getColumnsFromSQL(['*'], ['app_id' => $appId], 'keyname', 'keyname');
     }
 
+    /**
+     * Create new Environment field for an application
+     *
+     * @param int    $appId
+     * @param string $envName
+     * @param array  $envProperties
+     */
+    public function addAppConfig($appId, $envName, $envProperties)
+    {
+        $this->dataReset();
+
+        $candidat = $this->listingQuery()->where('app_id', $appId)->where('keyname', $envName);
+        if (!empty($candidat)) {
+            $this->setMyKey($candidat->fetchColumn(0));
+        } else {
+            $this->setMyKey(null);
+        }
+
+        $this->setDataValue('app_id', $appId);
+        $this->setDataValue('keyname', $envName);
+
+        $this->setDataValue('type', $envProperties['type']);
+        $this->setDataValue('description', $envProperties['description']);
+        $this->setDataValue('defval', $envProperties['defval']);
+        return $this->dbsync();
+    }
+
     public static function getAppConfigs($appId)
     {
         return (new self())->appConfigs($appId);
