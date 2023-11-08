@@ -116,7 +116,7 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
          */
         $stitekData = [
             "kod" => strtoupper($label),
-            "nazev" => $label,
+            "nazev" => $label, // Czech word in API
             $evidenceToVsb['adresar'] => true,
             $evidenceToVsb['cenik'] => true,
             $evidenceToVsb['faktura-vydana'] => true,

@@ -132,7 +132,7 @@ class Logger extends DBEngine
                         'listingPage' => 'companies.php',
                         'detailPage' => 'company.php',
                         'idColumn' => 'company',
-                        'valueColumn' => 'company.nazev',
+                        'valueColumn' => 'company.name',
                         'engine' => '\MultiFlexi\Company',
                         'filterby' => 'name',
                     ],

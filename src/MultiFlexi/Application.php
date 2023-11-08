@@ -212,9 +212,9 @@ class Application extends Engine
             unset($importData['multiflexi']);
             $this->takeData($importData);
 
-            $candidat = $this->listingQuery()->where('executable', $this->getDataValue('executable'));
-            if (!empty($candidat)) {
-                $this->setMyKey($candidat->fetchColumn(0));
+            $candidat = $this->listingQuery()->where('executable', $importData['executable'])->whereOr('name', $importData['name']);
+            if ($candidat->count()) {
+                $this->setMyKey($candidat->fetchColumn());
             }
 
             if ($this->dbsync()) {
