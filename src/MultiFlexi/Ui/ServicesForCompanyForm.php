@@ -34,7 +34,7 @@ class ServicesForCompanyForm extends Form
 
         $serverCompanyInfo = (new Company())->listingQuery()->where('company.id', $companyID)->select('servers.type')->leftJoin('servers ON servers.id = company.server')->fetch();
 
-        $platformApps  =  (new Application())->getPlatformApps($serverCompanyInfo['type']);
+        $platformApps  =  (new Application())->getAvailbleApps($serverCompanyInfo['type']);
                 //(new Application())->listingQuery()->select('id AS app_id')->select('name AS app_name')->where('enabled', 1)->fetchAll();
 
         $glue = new RunTemplate();

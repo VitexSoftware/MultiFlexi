@@ -33,7 +33,7 @@ composer.lock
 /nbproject/private/
 /OpenAPI/node_modules/
 /.php_cs.cache
-.env
+/.env
 .vscode/settings.json
 db/multiflexi
 /.php-cs-fixer.cache

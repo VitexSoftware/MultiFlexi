@@ -156,6 +156,11 @@ class Application extends Engine
         return $platformApps;
     }
 
+    public function getAvailbleApps($platform)
+    {
+        return  $this->listingQuery()->where('enabled', true);
+    }
+
     /**
      * Export Application and its Fields definiton as Json
      *
