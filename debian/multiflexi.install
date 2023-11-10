@@ -26,4 +26,5 @@ debian/com.vitexsoftware.multiflexi.desktop         usr/share/applications/
 multiflexi.svg                 usr/share/icons/hicolor/scalable/apps/
 i18n/cs_CZ/LC_MESSAGES/*.mo               usr/share/locale/cs_CZ/LC_MESSAGES/
 i18n/en_US/LC_MESSAGES/*.mo               usr/share/locale/en_US/LC_MESSAGES/
+tests/multiflexi_probe.multiflexi.app.json usr/share/multiflexi/
 

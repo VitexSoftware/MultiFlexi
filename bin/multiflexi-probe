@@ -1,11 +1,15 @@
 
 #!/bin/bash
+echo Environment:
 env
-echo $0 $1 $2
 
+echo Commandline:
+echo $@
+
+echo Attachment:
 if [ -f "$1" ]; then
     echo "File $1 exists."
     ls -la $1
 else
-    echo "File does not exist."
+    echo "File $1 does not exist."
 fi
