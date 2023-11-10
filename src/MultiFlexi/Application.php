@@ -65,17 +65,9 @@ class Application extends Engine
             $this->addStatusMessage(_('Name is empty'), 'warning');
         }
 
-        if (array_key_exists('executable', $data)) {
-            $executable = self::findBinaryInPath($data['executable']);
-            if (is_null($executable)) {
-                $this->addStatusMessage(sprintf(_('Executable %s does not exist in search PATH'), $data['executable']), 'warning');
-                $data['enabled'] = false;
-            } else {
-                if ($data['executable'] != $executable) {
-                    //                    $this->addStatusMessage(sprintf(_('Executable %s found as %s'), $data['executable'], $executable), 'success');
-                    $data['executable'] = $executable;
-                }
-            }
+        if (array_key_exists('executable', $data) && ($this->checkExcutable($data['executable']) === false)) {
+            $this->addStatusMessage(sprintf(_('Make sure the executable %s exists'), $data['executable']), 'todo');
+            $data['enabled'] = false; // Do not enable Application without existing command
         }
 
         if (array_key_exists('imageraw', $_FILES) && !empty($_FILES['imageraw']['name'])) {
@@ -88,6 +80,29 @@ class Application extends Engine
         }
 
         return parent::takeData($data);
+    }
+
+    /**
+     * Check command's availbility
+     *
+     * @param string $command
+     *
+     * @return boolean check result
+     */
+    public function checkExcutable($command)
+    {
+        $status = true;
+        if ($command[0] == '/') {
+            if (file_exists($command) === false) {
+                $this->addStatusMessage(sprintf(_('Executable %s does not exist'), $command), 'warning');
+                $status = false;
+            }
+        } else {
+            $executable = self::findBinaryInPath($command);
+            $this->addStatusMessage(sprintf(_('Executable %s does not exist in search PATH'), $command), 'warning');
+            $status = false;
+        }
+        return $status;
     }
 
     /**
@@ -158,7 +173,7 @@ class Application extends Engine
 
     public function getAvailbleApps($platform)
     {
-        return  $this->listingQuery()->where('enabled', true);
+        return $this->listingQuery()->where('enabled', true);
     }
 
     /**
