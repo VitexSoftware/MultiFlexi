@@ -5,35 +5,14 @@
     "executable": "multiflexi-probe",
     "setup": "",
     "cmdparams": "",
-    "type": "AbraFlexi",
     "deploy": "sudo apt install multiflexi",
     "homepage": "https://github.com/VitexSoftware/MultiFlexi",
     "environment": {
-        "ABRAFLEXI_COMPANY": {
-            "type": "string",
-            "description": "",
-            "defval": "demo_de"
-        },
-        "ABRAFLEXI_LOGIN": {
-            "type": "string",
-            "description": "AbraFlexi Login",
-            "defval": "winstrom"
-        },
-        "ABRAFLEXI_PASSWORD": {
-            "type": "string",
-            "description": "AbraFlexi password",
-            "defval": "winstrom"
-        },
-        "ABRAFLEXI_URL": {
-            "type": "string",
-            "description": "AbraFlexi Server URI",
-            "defval": "https:\/\/demo.flexibee.eu:5434"
-        },
         "FILE_UPLOAD": {
             "type": "file",
-            "description": "Testin file upload field",
+            "description": "Testing file upload field",
             "defval": "\/etc\/fstab"
         }
     },
-    "multiflexi": "vitexsoftware\/multiflexi vdev-main @exiv.vitexsoftware.brevnov.czf 2023-11-06 09:40:08 GMT"
+    "multiflexi": ""
 }
