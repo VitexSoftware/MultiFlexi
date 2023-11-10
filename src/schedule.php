@@ -51,14 +51,12 @@ if (is_null($app->getMyKey())) {
         $oPage->container->addItem(new \Ease\TWB4\LinkButton('job.php?id=' . $jobber->getMyKey(), _('Job details'), 'info btn-block'));
     } else {
         if ($jobID) {
-
             $scheduler = new \MultiFlexi\Scheduler();
-            $scheduler->deleteFromSQL(['job'=>$jobID]);
+            $scheduler->deleteFromSQL(['job' => $jobID]);
             $canceller = new \MultiFlexi\Job($jobID);
             $canceller->deleteFromSQL();
-            
-            $oPage->container->addItem( new \Ease\TWB4\Label('success', _('Job Canceled')) );
-            
+
+            $oPage->container->addItem(new \Ease\TWB4\Label('success', _('Job Canceled')));
         } else {
             $oPage->container->addItem(new JobScheduleForm($app, $company));
         }
