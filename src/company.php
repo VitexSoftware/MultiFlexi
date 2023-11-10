@@ -33,7 +33,12 @@ foreach ($jobs as $job) {
     // use AppLaunchForm instead of LaunchButton
     //    $job['launch'] = new AppLaunchForm($job['app_id'], $companies->getMyKey());
 
-    $job['schedule'] = new \Ease\TWB4\LinkButton('schedule.php?id=' . $job['runtemplateid'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Schedule') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
+    if($job['begin']){
+        $job['schedule'] = new \Ease\TWB4\LinkButton('schedule.php?id=' . $job['runtemplateid'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Schedule') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
+    } else {
+        $job['schedule'] = new \Ease\TWB4\LinkButton('schedule.php?cancel='.$job['id'].'&templateid=' . $job['runtemplateid'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Cancel') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/cancel.svg', _('Cancel'), ['height' => '30px'])], 'danger btn-lg');
+    }
+    
     $job['appimage'] = new ATag('companyapp.php?id=' . $job['runtemplateid'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], $job['appname'], ['height' => 50, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);
     unset($job['appname']);
     unset($job['runtemplateid']);
@@ -59,6 +64,7 @@ $headRow->addColumn(2, [$logo, '<p></p>', new \Ease\TWB4\LinkButton('companysetu
 $headRow->addColumn(10, new EnvironmentView($companyEnver->getData()));
 $companyPanelContents[] = $headRow;
 $companyPanelContents[] = new \Ease\Html\HrTag();
+$companyPanelContents[] = new \Ease\Html\H3Tag(_('job queue'));
 $companyPanelContents[] = $jobList;
 $bottomLine = new Row();
 $oPage->container->addItem(new Panel(

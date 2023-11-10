@@ -96,7 +96,7 @@ class Job extends Engine
      *
      * @return int new job ID
      */
-    public function newJob($companyId, $appId, $environment)
+    public function newJob(int $companyId, int $appId, array $environment)
     {
         return $this->insertToSQL([
                     'company_id' => $companyId,
@@ -193,9 +193,9 @@ class Job extends Engine
      */
     public function prepareJob(int $runTemplateId, $envOverride = [])
     {
-        $companyApp = new RunTemplate($runTemplateId);
-        $appId = $companyApp->getDataValue('app_id');
-        $companyId = $companyApp->getDataValue('company_id');
+        $runTemplate = new RunTemplate($runTemplateId);
+        $appId = $runTemplate->getDataValue('app_id');
+        $companyId = $runTemplate->getDataValue('company_id');
 
         $this->application = new Application($appId);
         $this->company = new Company($companyId);
@@ -226,8 +226,8 @@ class Job extends Engine
             $this->addStatusMessage(_('Perform initial setup'), 'warning');
             if (!empty(trim($setupCommand))) {
                 $this->application->addStatusMessage(_('Setup command') . ': ' . $setupCommand, 'debug');
-                $appInfo = $companyApp->getAppInfo();
-                $appEnvironment = $companyApp->getAppEnvironment();
+                $appInfo = $runTemplate->getAppInfo();
+                $appEnvironment = $runTemplate->getAppEnvironment();
                 $process = new \Symfony\Component\Process\Process(
                     explode(' ', $setupCommand),
                     null,

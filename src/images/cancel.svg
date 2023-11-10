@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:svg="http://www.w3.org/2000/svg" xmlns:ns1="http://sozi.baierouge.fr" id="svg2254" sodipodi:docname="kuba_information_icons_set_ok_1.svg" inkscape:export-filename="C:\joanna\Gfx\drawings_vector\admin\collections\kuba_information_icons_set.png" viewBox="0 0 52.963 52.963" sodipodi:version="0.32" inkscape:export-xdpi="182.23772" version="1.0" inkscape:output_extension="org.inkscape.output.svg.inkscape" inkscape:export-ydpi="182.23772" inkscape:version="0.45.1+0.46pre1+devel" sodipodi:docbase="/home/kuba">
+  <defs id="defs3">
+    <linearGradient id="linearGradient2464" y2="387.44" gradientUnits="userSpaceOnUse" x2="332.02" y1="369.98" x1="314.57" inkscape:collect="always">
+      <stop id="stop4570" style="stop-color:#e12b1c" offset="0"/>
+      <stop id="stop4572" style="stop-color:#980b00" offset="1"/>
+    </linearGradient>
+    <linearGradient id="linearGradient2466" y2="390.49" gradientUnits="userSpaceOnUse" x2="414.39" gradientTransform="matrix(.99995 0 0 1.0001 -219.82 -158.75)" y1="376.14" x1="401.93" inkscape:collect="always">
+      <stop id="stop4740" style="stop-color:#ffffff;stop-opacity:.72656" offset="0"/>
+      <stop id="stop4742" style="stop-color:#ffffff" offset="1"/>
+    </linearGradient>
+    <linearGradient id="linearGradient2468" y2="390.78" gradientUnits="userSpaceOnUse" x2="311.27" gradientTransform="matrix(1.9519 0 0 1.8418 -426.22 -488.52)" y1="377.95" x1="302.74" inkscape:collect="always">
+      <stop id="stop4556" style="stop-color:#ffffff" offset="0"/>
+      <stop id="stop4558" style="stop-color:#ffffff;stop-opacity:0" offset="1"/>
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview id="base" bordercolor="#666666" inkscape:pageshadow="2" inkscape:window-y="-4" pagecolor="#ffffff" inkscape:window-height="744" inkscape:zoom="3.7754936" inkscape:window-x="-4" showgrid="false" borderopacity="1.0" inkscape:current-layer="layer1" inkscape:cx="156.80069" inkscape:cy="31.588852" inkscape:window-width="1280" inkscape:pageopacity="0.0" inkscape:document-units="px"/>
+  <g id="layer1" inkscape:label="Layer 1" inkscape:groupmode="layer" transform="translate(-164.6 -201.82)">
+    <g id="g2458">
+      <path id="path4531" sodipodi:rx="13.966679" sodipodi:ry="13.966679" style="fill:#b4281c" sodipodi:type="arc" d="m339.54 378.06a13.967 13.967 0 1 1 -27.94 0 13.967 13.967 0 1 1 27.94 0z" transform="matrix(1.8961 0 0 1.8961 -426.22 -488.52)" sodipodi:cy="378.05789" sodipodi:cx="325.57108"/>
+      <path id="path4533" sodipodi:rx="13.966679" sodipodi:ry="13.966679" style="stroke:#ffffff;stroke-width:.32492;fill:url(#linearGradient2464)" sodipodi:type="arc" d="m339.54 378.06a13.967 13.967 0 1 1 -27.94 0 13.967 13.967 0 1 1 27.94 0z" transform="matrix(1.7312 0 0 1.7312 -372.54 -426.19)" sodipodi:cy="378.05789" sodipodi:cx="325.57108"/>
+      <path id="rect4574" style="fill:url(#linearGradient2466)" d="m177.62 219.89c-0.22 0.22-0.18 0.57 0.04 0.79l7.59 7.58-7.63 7.63c-0.22 0.22-0.22 0.62 0 0.84l5.03 5.03c0.22 0.22 0.57 0.18 0.79-0.05l7.63-7.62 7.62 7.62c0.23 0.23 0.58 0.27 0.8 0.05l5.03-5.03c0.22-0.22 0.22-0.62 0-0.84l-7.63-7.63 7.63-7.62c0.22-0.22 0.22-0.53 0-0.75l-5.03-5.03c-0.22-0.23-0.57-0.27-0.8-0.04l-7.62 7.62-7.58-7.58c-0.23-0.23-0.62-0.23-0.84 0l-5.03 5.03z"/>
+      <path id="path4537" style="fill:url(#linearGradient2468)" d="m191.07 204.13c-13.35 0-24.18 10.83-24.18 24.18 0 6.41 2.62 12.14 6.7 16.47 2.12-17.5 16.89-31.11 34.96-31.11 0.49 0 0.94 0.1 1.42 0.12-4.42-5.75-11.09-9.66-18.9-9.66z"/>
+    </g>
+  </g>
+  <metadata>
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://creativecommons.org/licenses/publicdomain/"/>
+        <dc:publisher>
+          <cc:Agent rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title>information icons set 5</dc:title>
+        <dc:date>2006-12-26T00:00:00</dc:date>
+        <dc:description/>
+        <dc:source>https://openclipart.org/detail/15469/-by--15469</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>kuba</dc:title>
+          </cc:Agent>
+        </dc:creator>
+      </cc:Work>
+      <cc:License rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>

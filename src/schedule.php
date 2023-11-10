@@ -13,14 +13,16 @@ require_once './init.php';
 $oPage->onlyForLogged();
 $app = new \MultiFlexi\Application(WebPage::getRequestValue('app_id', 'int'));
 $company = new \MultiFlexi\Company(WebPage::getRequestValue('company_id', 'int'));
+$jobID = WebPage::getRequestValue('cancel', 'int');
 $oPage->addItem(new PageTop(_('About')));
 $oPage->container->addItem(new ApplicationInfo($app, $company));
 if (is_null($app->getMyKey())) {
     $oPage->container->addItem(new \Ease\TWB4\Alert('error', _('app_id not specified')));
     $app->addStatusMessage(_('app_id not specified'), 'error');
 } else {
-    if (WebPage::isPosted() && WebPage::getRequestValue('when')) {
+    if (WebPage::isPosted()) {
         $jobber = new \MultiFlexi\Job();
+        $when = WebPage::getRequestValue('when');
         $uploadEnv = [];
         /**
          * Save all uploaded files into temporary directory and prepare job environment
@@ -43,12 +45,23 @@ if (is_null($app->getMyKey())) {
         }
 
         $jobber->prepareJob($runTemplateId, $uploadEnv);
-        $jobber->scheduleJobRun(new \DateTime(WebPage::getRequestValue('when')));
+        $jobber->scheduleJobRun(new \DateTime($when));
         $envTable = new \MultiFlexi\Ui\EnvironmentView($runTemplate->getAppEnvironment());
         $oPage->container->addItem($envTable);
         $oPage->container->addItem(new \Ease\TWB4\LinkButton('job.php?id=' . $jobber->getMyKey(), _('Job details'), 'info btn-block'));
     } else {
-        $oPage->container->addItem(new JobScheduleForm($app, $company));
+        if ($jobID) {
+
+            $scheduler = new \MultiFlexi\Scheduler();
+            $scheduler->deleteFromSQL(['job'=>$jobID]);
+            $canceller = new \MultiFlexi\Job($jobID);
+            $canceller->deleteFromSQL();
+            
+            $oPage->container->addItem( new \Ease\TWB4\Label('success', _('Job Canceled')) );
+            
+        } else {
+            $oPage->container->addItem(new JobScheduleForm($app, $company));
+        }
     }
 }
 
