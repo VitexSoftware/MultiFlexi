@@ -1,4 +1,4 @@
-multiflexi (1.7.0) UNRELEASED; urgency=medium
+multiflexi (1.7.1) UNRELEASED; urgency=medium
 
   [ CyberVitexus ]
   * Ability choose run interval between hour and year
@@ -35,7 +35,10 @@ multiflexi (1.7.0) UNRELEASED; urgency=medium
   * job relaunch script generator added
   * Pohoda support added
 
- -- vitex <info@vitexsoftware.cz>  Mon, 06 Nov 2023 21:07:39 +0100
+  [  ]
+  * Scheduled jobs fix
+
+ --  <vitezslav.dvorak@spojenet.cz>  Fri, 10 Nov 2023 15:18:48 +0100
 
 multiflexi (0.1) experimental; urgency=medium
 

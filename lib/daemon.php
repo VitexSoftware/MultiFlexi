@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multi Flexi - Scheduled actions executor.
  *
@@ -18,16 +19,15 @@ define('EASE_LOGGER', implode('|', $loggers));
 \Ease\Shared::user(new \Ease\Anonym());
 $scheduler = new Scheduler();
 $scheduler->logBanner('MultiFlexi Daemon started');
-while (\Ease\Functions::cfg('MULTIFLEXI_DAEMONIZE', true)) {
 
+do {
     foreach ($scheduler->getCurrentJobs() as $scheduledJob) {
         $job = new Job($scheduledJob['job']);
-        $job->prepareJob($scheduledJob['job']);
         $job->performJob();
         $scheduler->deleteFromSQL($scheduledJob['id']);
         $job->cleanUp();
     }
-
     sleep(\Ease\Functions::cfg("MULTIFLEXI_CYCLE_PAUSE", 10));
-}
+} while (\Ease\Functions::cfg('MULTIFLEXI_DAEMONIZE', true));
+
 $scheduler->logBanner('MultiFlexi Daemon ended');
