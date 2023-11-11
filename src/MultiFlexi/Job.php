@@ -20,7 +20,6 @@ use MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
 class Job extends Engine
 {
     public $myTable = 'job';
-
     public static $intervalCode = [
         'i' => 'instant',
         'n' => 'disabled',
@@ -42,6 +41,12 @@ class Job extends Engine
      * @var array
      */
     private $environment = [];
+
+    /**
+     * Executed commandline
+     * @var string
+     */
+    private $commandline;
 
     /**
      *
@@ -150,6 +155,7 @@ class Job extends Engine
                     'end' => new \Envms\FluentPDO\Literal('NOW()'),
                     'stdout' => addslashes($stdout),
                     'stderr' => addslashes($stderr),
+                    'command' => $this->commandline,
                     'exitcode' => $statusCode
                         ], ['id' => $this->getMyKey()]);
     }
@@ -293,7 +299,9 @@ class Job extends Engine
         LogToSQL::singleton()->setApplication($this->application->getMyKey());
         $exec = $this->application->getDataValue('executable');
         $cmdparams = $this->getCmdParams();
-        $this->addStatusMessage('command begin: ' . $exec . ' ' . $cmdparams . '@' . $this->company->getDataValue('name'));
+        $this->commandline = $exec . ' ' . $cmdparams;
+        $this->setDataValue('commandline', $this->commandline);
+        $this->addStatusMessage('command begin: ' . $this->commandline . '@' . $this->company->getDataValue('name'));
         $process = new \Symfony\Component\Process\Process(array_merge([$exec], explode(' ', $cmdparams)), null, $this->environment, null, 32767);
         $process->run(function ($type, $buffer) {
             $logger = new \Ease\Sand();
