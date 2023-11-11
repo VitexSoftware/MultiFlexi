@@ -187,6 +187,8 @@ class Application extends Engine
         if ($this->getMyKey()) {
             $confField = new Conffield();
             $appData['environment'] = $confField->appConfigs($appData['id']);
+        } else {
+            $appData['environment'] = [];
         }
         $appData['multiflexi'] = \Ease\Shared::appName() . ' v' . \Ease\Shared::appVersion() . ' @' . gethostbyaddr('127.0.1.1') . ' ' . gmdate('Y-m-d h:i:s \G\M\T');
         foreach ($appData['environment'] as $fieldName => $filedProperties) {
@@ -209,7 +211,7 @@ class Application extends Engine
      */
     public function jsonFileName()
     {
-        return strtolower(trim(preg_replace('#\W+#', '_', $this->getRecordName()), '_')) . '.multiflexi.app.json';
+        return strtolower(trim(preg_replace('#\W+#', '_', strval($this->getRecordName())), '_')) . '.multiflexi.app.json';
     }
 
     /**

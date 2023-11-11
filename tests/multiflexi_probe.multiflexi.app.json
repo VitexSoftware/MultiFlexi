@@ -4,7 +4,7 @@
     "description": "Task launcher testing tool",
     "executable": "multiflexi-probe",
     "setup": "",
-    "cmdparams": "",
+    "cmdparams": "{FILE_UPLOAD}",
     "deploy": "sudo apt install multiflexi",
     "homepage": "https://github.com/VitexSoftware/MultiFlexi",
     "environment": {

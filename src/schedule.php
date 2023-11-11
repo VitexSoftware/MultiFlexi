@@ -46,8 +46,8 @@ if (is_null($app->getMyKey())) {
 
         $jobber->prepareJob($runTemplateId, $uploadEnv);
         $jobber->scheduleJobRun(new \DateTime($when));
-        $envTable = new \MultiFlexi\Ui\EnvironmentView($runTemplate->getAppEnvironment());
-        $oPage->container->addItem($envTable);
+
+        $oPage->container->addItem(new JobInfo($jobber));
         $oPage->container->addItem(new \Ease\TWB4\LinkButton('job.php?id=' . $jobber->getMyKey(), _('Job details'), 'info btn-block'));
     } else {
         if ($jobID) {

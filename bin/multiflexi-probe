@@ -1,11 +1,10 @@
 
 #!/bin/bash
-echo Environment:
-env
-
 echo Commandline:
-echo $@
-
+echo
+echo $0 $@
+echo
+echo ---------------------------------------------------------------------------
 echo Attachment:
 if [ -f "$1" ]; then
     echo "File $1 exists."
@@ -13,3 +12,7 @@ if [ -f "$1" ]; then
 else
     echo "File $1 does not exist."
 fi
+echo
+echo ---------------------------------------------------------------------------
+echo Environment:
+env
