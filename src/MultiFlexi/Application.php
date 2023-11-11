@@ -66,7 +66,7 @@ class Application extends Engine
         }
 
         if (array_key_exists('executable', $data) && ($this->checkExcutable($data['executable']) === false)) {
-            $this->addStatusMessage(sprintf(_('Make sure the executable %s exists'), $data['executable']), 'todo');
+            $this->addStatusMessage(sprintf(_('Make sure the executable %s exists'), $data['executable']), 'info');
             $data['enabled'] = false; // Do not enable Application without existing command
         }
 
@@ -99,8 +99,15 @@ class Application extends Engine
             }
         } else {
             $executable = self::findBinaryInPath($command);
-            $this->addStatusMessage(sprintf(_('Executable %s does not exist in search PATH'), $command), 'warning');
-            $status = false;
+            if (empty($executable)) {
+                $this->addStatusMessage(sprintf(_('Executable %s does not exist in search PATH %s'), $command, getenv('PATH')), 'warning');
+                $status = false;
+            } else {
+                if (is_executable($executable) === false) {
+                    $this->addStatusMessage(sprintf(_('file %s is not executable'), $command), 'warning');
+                    $status = false;
+                }
+            }
         }
         return $status;
     }
