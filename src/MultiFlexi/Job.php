@@ -41,7 +41,7 @@ class Job extends Engine
      * Environment for Current Job
      * @var array
      */
-    private $environment;
+    private $environment = [];
 
     /**
      *
@@ -200,7 +200,7 @@ class Job extends Engine
         $this->application = new Application($appId);
         $this->company = new Company($companyId);
 
-        $this->environment = array_merge($this->getJobEnvironment(), $envOverride);
+        $this->environment = array_merge($this->compileEnv(), $envOverride);
         $this->loadFromSQL($this->newJob($companyId, $appId, $this->environment));
         if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
             $this->zabbixMessageData = [
@@ -406,11 +406,21 @@ class Job extends Engine
     }
 
     /**
-     * Environment for current Job
+     * Current Job Environment
      *
      * @return array
      */
-    public function getJobEnvironment()
+    public function getEnv()
+    {
+        return $this->environment;
+    }
+
+    /**
+     * Generate Environment for current Job
+     *
+     * @return array
+     */
+    public function compileEnv()
     {
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\\Env');
         $injectors = \Ease\Functions::classesInNamespace('MultiFlexi\\Env');
@@ -420,5 +430,15 @@ class Job extends Engine
             $jobEnv = array_merge($jobEnv, (new $injectorClass($this))->getEnvironment());
         }
         return $jobEnv;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function loadFromSQL($itemID)
+    {
+        $result = parent::loadFromSQL($itemID);
+        $this->environment = unserialize($this->getDataValue('env'));
+        return $result;
     }
 }

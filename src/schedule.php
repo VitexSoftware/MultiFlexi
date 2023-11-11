@@ -14,7 +14,7 @@ $oPage->onlyForLogged();
 $app = new \MultiFlexi\Application(WebPage::getRequestValue('app_id', 'int'));
 $company = new \MultiFlexi\Company(WebPage::getRequestValue('company_id', 'int'));
 $jobID = WebPage::getRequestValue('cancel', 'int');
-$oPage->addItem(new PageTop(_('About')));
+$oPage->addItem(new PageTop(_('Schedule Job')));
 $oPage->container->addItem(new ApplicationInfo($app, $company));
 if (is_null($app->getMyKey())) {
     $oPage->container->addItem(new \Ease\TWB4\Alert('error', _('app_id not specified')));

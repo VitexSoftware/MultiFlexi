@@ -34,7 +34,10 @@ class Scheduler extends Engine
      */
     public function addJob(Job $job, \DateTime $when)
     {
-        return $this->insertToSQL(['after' => $when->format('Y-m-d H:i:s'), 'job' => $job->getMyKey()]);
+        return $this->insertToSQL([
+                    'after' => $when->format('Y-m-d H:i:s'),
+                    'job' => $job->getMyKey()
+        ]);
     }
 
     /**

@@ -220,12 +220,12 @@ class JobTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Job::getJobEnvironment
+     * @covers MultiFlexi\Job::compileEnv
      * @todo   Implement testgetJobEnvironment().
      */
-    public function testgetJobEnvironment()
+    public function testcompileEnv()
     {
-        $this->assertEquals('', $this->object->getJobEnvironment());
+        $this->assertEquals('', $this->object->compileEnv());
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete('This test has not been implemented yet.');
     }

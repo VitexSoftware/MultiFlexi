@@ -11,6 +11,7 @@ namespace MultiFlexi;
 
 require_once '../vendor/autoload.php';
 \Ease\Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
+$daemonize = \Ease\Functions::cfg('MULTIFLEXI_DAEMONIZE', true);
 $loggers = ['syslog', '\MultiFlexi\LogToSQL'];
 if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
@@ -27,7 +28,9 @@ do {
         $scheduler->deleteFromSQL($scheduledJob['id']);
         $job->cleanUp();
     }
-    sleep(\Ease\Functions::cfg("MULTIFLEXI_CYCLE_PAUSE", 10));
-} while (\Ease\Functions::cfg('MULTIFLEXI_DAEMONIZE', true));
+    if ($daemonize) {
+        sleep(\Ease\Functions::cfg("MULTIFLEXI_CYCLE_PAUSE", 10));
+    }
+} while ($daemonize);
 
 $scheduler->logBanner('MultiFlexi Daemon ended');
