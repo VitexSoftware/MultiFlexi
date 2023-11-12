@@ -32,7 +32,7 @@ if [ -f /usr/share/dbconfig-common/dpkg/postinst ]; then
             chmod ug+rw /var/lib/multiflexi/multiflexi
         fi
     
-
+    multiflexi-json2app /usr/share/multiflexi/multiflexi_probe.multiflexi.app.json
 fi
 
 
