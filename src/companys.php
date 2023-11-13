@@ -21,9 +21,10 @@ $oPage->addItem(new PageTop(_('Company list')));
 $companyTable = new \Ease\TWB4\Table();
 
 foreach ($companies->listingQuery() as $companyInfo) {
+    $companies->setData($companyInfo);
     $companyId = $companyInfo['id'];
-    $companyColumns['enabled'] = new \Ease\ui\SemaforLight($companyInfo['enabled'] == 1 ? 'green' : 'red', ['height' => 64]);
-    $companyColumns['logo'] = new \Ease\Html\ATag('company.php?id=' . $companyId, new \Ease\Html\ImgTag($companyInfo['logo'], $companyInfo['name'], ['height' => 64]));
+    $companyColumns['enabled'] = new \Ease\ui\SemaforLight($companyInfo['enabled'] == 1 ? 'green' : 'red', ['width' => 20]);
+    $companyColumns['logo'] = new CompanyLinkButton($companies, ['height' => 64]);
     $companyColumns['name'] = new \Ease\Html\ATag('company.php?id=' . $companyId, $companyInfo['name']);
     $companyColumns['ic'] = $companyInfo['ic'];
 

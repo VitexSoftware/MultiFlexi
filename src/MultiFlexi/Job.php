@@ -95,19 +95,21 @@ class Job extends Engine
     /**
      * Create New Job Record in database
      *
-     * @param int $companyId
-     * @param int $appId
-     * @param array $environment
+     * @param int    $companyId   Job is performed for Company with given ID
+     * @param int    $appId       Job is based on this Application
+     * @param array  $environment Environmet prepared for Job execution
+     * @param string $scheduled   Schedule Info
      *
      * @return int new job ID
      */
-    public function newJob(int $companyId, int $appId, array $environment)
+    public function newJob(int $companyId, int $appId, array $environment, string $scheduled = 'adhoc')
     {
         return $this->insertToSQL([
                     'company_id' => $companyId,
                     'app_id' => $appId,
                     'env' => \serialize($environment),
                     'exitcode' => -1,
+                    'schedule' => $scheduled,
                     'launched_by' => \Ease\Shared::user()->getMyKey()
         ]);
     }
@@ -194,10 +196,11 @@ class Job extends Engine
     /**
      * Prepare Job for run
      *
-     * @param int   $runTemplateId
-     * @param array $envOverride use to change default env
+     * @param int    $runTemplateId ID of RunTempate to use
+     * @param array  $envOverride   use to change default env
+     * @param string $name          Description
      */
-    public function prepareJob(int $runTemplateId, $envOverride = [])
+    public function prepareJob(int $runTemplateId, $envOverride = [], $scheduled = 'adhoc')
     {
         $runTemplate = new RunTemplate($runTemplateId);
         $appId = $runTemplate->getDataValue('app_id');
@@ -207,7 +210,7 @@ class Job extends Engine
         $this->company = new Company($companyId);
 
         $this->environment = array_merge($this->compileEnv(), $envOverride);
-        $this->loadFromSQL($this->newJob($companyId, $appId, $this->environment));
+        $this->loadFromSQL($this->newJob($companyId, $appId, $this->environment, $scheduled));
         if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
             $this->zabbixMessageData = [
                 'phase' => 'prepared',

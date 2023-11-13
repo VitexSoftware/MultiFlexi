@@ -48,7 +48,7 @@ if ($interval) {
                 if (!is_null($interval) && ($interval != $servData['interv'])) {
                     continue;
                 }
-                $jobber->prepareJob($servData['id']);
+                $jobber->prepareJob($servData['id'],[], Job::codeToInterval($interval));
                 $jobber->performJob();
             }
         }

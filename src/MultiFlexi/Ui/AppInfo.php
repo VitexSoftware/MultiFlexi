@@ -9,12 +9,9 @@
 
 namespace MultiFlexi\Ui;
 
-use Ease\Html\LabelTag,
+use Ease\TWB4\Label,
 
-    \Ease\Html\TableTag,
-    \Ease\TWB4\Label,
     \Ease\TWB4\LinkButton,
-    \Ease\TWB4\Widgets\SemaforLight,
     \MultiFlexi\Application,
     \MultiFlexi\Conffield;
 
@@ -27,18 +24,26 @@ class AppInfo extends \Ease\Html\DivTag
 {
     /**
      *
-     * @param Application $apps
-     * @param int                     $companyID
+     * @param Application $app
+     * @param int                     $companyId
      * @param array                   $properties
      */
-    public function __construct($apps, $companyID, $properties = [])
+    public function __construct($app, $companyId, $properties = [])
     {
-        parent::__construct(new \Ease\Html\H2Tag($apps->getRecordName()));
+        parent::__construct(new \Ease\Html\H2Tag($app->getRecordName()));
 
         $mainRow = new \Ease\TWB4\Row();
-        $mainRow->addColumn(2, [$apps->getDataValue('description'),new AppLogo($apps), new Label(($apps->getDataValue('enabled') ? 'success' : 'danger'), ($apps->getDataValue('enabled') ? _('Enabled') : _('Disabled')), ['style' => 'text-align: center; ']) ]);
-        $mainRow->addColumn(2, [new LinkButton('conffield.php?app_id=' . $apps->getMyKey() . '&company_id=' . $companyID, _('Config fields'), 'warning'),
-            new \MultiFlexi\Ui\ConfigFieldsBadges(Conffield::getAppConfigs($apps->getMyKey()))
+        $mainRow->addColumn(2, [
+            new \Ease\Html\DivTag($app->getDataValue('description'), ['style' => 'color: white;']),
+            new \Ease\Html\DivTag(new \Ease\Html\ATag($app->getDataValue('homepage'), $app->getDataValue('homepage'))),
+            new \Ease\Html\DivTag(new AppLogo($app), ['style' => 'margin: auto;  width: 90%;  padding: 10px;']),
+            new Label(($app->getDataValue('enabled') ? 'success' : 'danger'), ($app->getDataValue('enabled') ? _('Enabled') : _('Disabled')), ['style' => 'text-align: center; text-shadow: 1px 1px 2px white;']),
+            new \Ease\Html\DivTag($app->getDataValue('enabled') ? $app->getDataValue('executable') : $app->getDataValue('deploy'), ['style' => 'font: 1.3rem Inconsolata, monospace; text-shadow: 0 0 5px #C8C8C8; color: white;'])
+            ], 'md', ['style' => 'background-color: black; background-image: radial-gradient( rgba(250, 250, 250, 0.75), black 120% ); padding: 6px;']);
+        $mainRow->addColumn(4, new AppLaunchForm($app->getMyKey(), $companyId));
+        $mainRow->addColumn(4, new AppJobsTable($app->getMyKey(), $companyId));
+        $mainRow->addColumn(2, [new LinkButton('conffield.php?app_id=' . $app->getMyKey() . '&company_id=' . $companyId, _('Config fields'), 'warning'),
+            new \MultiFlexi\Ui\ConfigFieldsBadges(Conffield::getAppConfigs($app->getMyKey()))
         ]);
 
         $this->addItem($mainRow);
