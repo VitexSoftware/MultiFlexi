@@ -42,7 +42,8 @@ class AppInfo extends \Ease\Html\DivTag
             ], 'md', ['style' => 'background-color: black; background-image: radial-gradient( rgba(250, 250, 250, 0.75), black 120% ); padding: 6px;']);
         $mainRow->addColumn(4, new AppLaunchForm($app->getMyKey(), $companyId));
         $mainRow->addColumn(4, new AppJobsTable($app->getMyKey(), $companyId));
-        $mainRow->addColumn(2, [new LinkButton('conffield.php?app_id=' . $app->getMyKey() . '&company_id=' . $companyId, _('Config fields'), 'warning'),
+
+        $mainRow->addColumn(2, [new LinkButton('conffield.php?app_id=' . $app->getMyKey() . '&company_id=' . $companyId, [new \Ease\Html\ImgTag('images/set.svg', _('Set'), ['height' => '30px']) ,_('Config fields')], 'warning btn-sm  btn-block'),
             new \MultiFlexi\Ui\ConfigFieldsBadges(Conffield::getAppConfigs($app->getMyKey()))
         ]);
 

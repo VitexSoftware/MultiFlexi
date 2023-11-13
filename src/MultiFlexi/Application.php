@@ -197,7 +197,7 @@ class Application extends Engine
         } else {
             $appData['environment'] = [];
         }
-        $appData['multiflexi'] = \Ease\Shared::appName() . ' v' . \Ease\Shared::appVersion() . ' @' . gethostbyaddr('127.0.1.1') . ' ' . gmdate('Y-m-d h:i:s \G\M\T');
+
         foreach ($appData['environment'] as $fieldName => $filedProperties) {
             unset($appData['environment'][$fieldName]['id']);
             unset($appData['environment'][$fieldName]['keyname']);
@@ -208,6 +208,7 @@ class Application extends Engine
         unset($appData['DatCreate']);
         unset($appData['DatUpdate']);
         unset($appData['enabled']);
+        $appData['multiflexi'] = \Ease\Shared::appName() . ' v' . \Ease\Shared::appVersion() . ' @' . gethostbyaddr('127.0.1.1') . ' ' . gmdate('Y-m-d h:i:s \G\M\T');
         return json_encode($appData, JSON_PRETTY_PRINT);
     }
 

@@ -56,10 +56,10 @@ $instanceRow = new Row();
 $instanceRow->addColumn(8, new AppEditorForm($apps));
 $panel[] = new ImgTag(empty($apps->getDataValue('image')) ? 'images/apps.svg' : $apps->getDataValue('image'), 'Logo', ['class' => 'img-fluid']);
 $panel[] = new HrTag();
-if (array_key_exists('company', $_SESSION) && is_null($_SESSION['company']) === false) {
-    $company = new Company($_SESSION['company']);
-    $panel[] = new LinkButton('id=' . $apps->getMyKey() . '&company=' . $_SESSION['company'], sprintf(_('Assign to %s'), $company->getRecordName()), 'success');
-}
+//if (array_key_exists('company', $_SESSION) && is_null($_SESSION['company']) === false) {
+//    $company = new Company($_SESSION['company']);
+//    $panel[] = new LinkButton('id=' . $apps->getMyKey() . '&company=' . $_SESSION['company'], sprintf(_('Assign to %s'), $company->getRecordName()), 'success');
+//}
 
 $jobber = new Job();
 $jobs = $jobber->listingQuery()->select(['job.id', 'job.company_id', 'job.begin', 'job.exitcode', 'user.login', 'job.launched_by', 'company.name'], true)->leftJoin('company ON company.id = job.company_id')

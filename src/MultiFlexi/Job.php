@@ -449,7 +449,7 @@ class Job extends Engine
     public function loadFromSQL($itemID)
     {
         $result = parent::loadFromSQL($itemID);
-        $this->environment = unserialize($this->getDataValue('env'));
+        $this->environment = empty($this->getDataValue('env')) ? [] : unserialize($this->getDataValue('env'));
         return $result;
     }
 }
