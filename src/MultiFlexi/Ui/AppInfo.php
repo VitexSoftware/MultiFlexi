@@ -23,7 +23,7 @@ use Ease\Html\LabelTag,
  *
  * @author
  */
-class AppInfo extends TableTag
+class AppInfo extends \Ease\Html\DivTag
 {
     /**
      *
@@ -34,13 +34,19 @@ class AppInfo extends TableTag
     public function __construct($apps, $companyID, $properties = [])
     {
         parent::__construct(new \Ease\Html\H2Tag($apps->getRecordName()));
-        $this->addItem(new AppLogo($apps));
-        $this->addItem($apps->getDataValue('description'));
 
-        $this->addItem(new Label(($apps->getDataValue('enabled') ? 'success' : 'danger'), ($apps->getDataValue('enabled') ? _('Enabled') : _('Disabled'))));
-        $this->addItem([new LinkButton('conffield.php?app_id=' . $apps->getMyKey() . '&company_id=' . $companyID, _('Config fields'), 'warning'),
+        $mainRow = new \Ease\TWB4\Row();
+        $mainRow->addColumn(2, [$apps->getDataValue('description'),new AppLogo($apps), new Label(($apps->getDataValue('enabled') ? 'success' : 'danger'), ($apps->getDataValue('enabled') ? _('Enabled') : _('Disabled')), ['style' => 'text-align: center; ']) ]);
+        $mainRow->addColumn(2, [new LinkButton('conffield.php?app_id=' . $apps->getMyKey() . '&company_id=' . $companyID, _('Config fields'), 'warning'),
             new \MultiFlexi\Ui\ConfigFieldsBadges(Conffield::getAppConfigs($apps->getMyKey()))
         ]);
+
+        $this->addItem($mainRow);
+//        //$this->addItem();
+//
+//        $this->addItem();
+//        $this->addItem();
+        $this->addItem(new \Ease\Html\HrTag());
     }
 
     public function afterAdd()
