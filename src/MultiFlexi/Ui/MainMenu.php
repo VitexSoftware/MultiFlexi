@@ -157,7 +157,7 @@ class MainMenu extends \Ease\Html\DivTag
     {
         $nav->addDropDownMenu(
             '<img width=30 src=images/company.svg> ' . _('Companies'),
-            array_merge(['companysetup.php' => _('New Company')], ['' => ''], $companys)
+            array_merge(['companysetup.php' => _('New Company')], ['' => ''], ['companys.php' => _('Listing')], $companys)
         );
     }
 
