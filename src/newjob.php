@@ -43,7 +43,7 @@ if (!empty($_FILES)) {
     }
 }
 
-$jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv);
+$jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, 'adhoc ' . (new \DateTime())->format('Y-m-d h:i:s'));
 $jobber->scheduleJobRun(new \DateTime());
 
 $appInfo = $runTemplate->getAppInfo();
