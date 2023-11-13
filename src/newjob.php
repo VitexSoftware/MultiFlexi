@@ -43,6 +43,17 @@ if (!empty($_FILES)) {
     }
 }
 
+$confField = new \MultiFlexi\Conffield();
+$envars = $confField->appConfigs($appId);
+
+foreach ($envars as $envVarName => $envVarInfo) {
+    $override = WebPage::getRequestValue($envVarName);
+    if (is_null($override) === false) {
+        $uploadEnv[$envVarName] = $override;
+    }
+}
+
+
 $jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, 'adhoc ' . (new \DateTime())->format('Y-m-d h:i:s'));
 $jobber->scheduleJobRun(new \DateTime());
 

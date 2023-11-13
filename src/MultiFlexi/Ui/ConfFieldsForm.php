@@ -34,6 +34,7 @@ class ConfFieldsForm extends Form
         $this->addInput(new InputTextTag('keyname', array_key_exists('keyname', $conffields) ? $conffields['keyname'] : ''), _('New config field Keyword'));
         $this->addInput(new InputTextTag('defval', array_key_exists('defval', $conffields) ? $conffields['defval'] : ''), _('Default value'));
         $this->addInput(new InputTextTag('description', array_key_exists('description', $conffields) ? $conffields['description'] : ''), _('New config field description'));
+        $this->addInput(new \Ease\TWB4\Widgets\Toggle('required'), _('Required'));
         if (array_key_exists('id', $conffields)) {
             $this->addItem(new InputHiddenTag('id', $conffields['id']));
             $this->addItem(new SubmitButton(_('Update'), 'success btn-block'));
