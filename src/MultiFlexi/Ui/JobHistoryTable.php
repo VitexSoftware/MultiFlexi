@@ -29,7 +29,7 @@ class JobHistoryTable extends \Ease\TWB4\Table
         parent::__construct($content, $properties);
         $jobber = new \MultiFlexi\Job();
         $jobs = $jobber->listingQuery()->
-                select(['apps.name AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'job.company_id', 'company.name', 'company.logo'], true)
+                select(['apps.name AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'job.company_id', 'company.name', 'company.logo', 'schedule'], true)
                 ->leftJoin('apps ON apps.id = job.app_id')
                 ->leftJoin('user ON user.id = job.launched_by')
                 ->limit(50)
@@ -47,8 +47,12 @@ class JobHistoryTable extends \Ease\TWB4\Table
             $job['id'] = new \Ease\Html\ATag('job.php?id=' . $job['id'], new \Ease\TWB4\Badge('info', $job['id']));
             $job['begin'] = [$job['begin'], '<br>', new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
             $job['exitcode'] = new ExitCode($job['exitcode']);
-            $job['launched_by'] = $job['launched_by'] ? new \Ease\Html\ATag('user.php?id=' . $job['launched_by'], new \Ease\TWB4\Badge('info', $job['login'])) : _('Timer');
+            $job['launched_by'] = [
+                   new \Ease\Html\DivTag($job['launched_by'] ? new \Ease\Html\ATag('user.php?id=' . $job['launched_by'], new \Ease\TWB4\Badge('info', $job['login'])) : _('Timer')),
+                   new \Ease\Html\DivTag($job['schedule'])
+                ];
             unset($job['login']);
+            unset($job['schedule']);
             $job['company_id'] = [new CompanyLogo($company, ['height' => '30px']), '<br>', new \Ease\Html\ATag('company.php?id=' . $job['company_id'], $job['name'])];
             unset($job['name']);
             unset($job['logo']);
