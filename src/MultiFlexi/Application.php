@@ -240,6 +240,7 @@ class Application extends Engine
             unset($importData['environment']);
             $this->addStatusMessage('Importing ' . $importData['name'] . ' from ' . $jsonFile . ' created by ' . $importData['multiflexi'], 'debug');
             unset($importData['multiflexi']);
+            $importData['requirements'] = array_key_exists('requirements', $importData) ? strval($importData['requirements']) : '';
             $this->takeData($importData);
 
             $candidat = $this->listingQuery()->where('executable', $importData['executable'])->whereOr('name', $importData['name']);
