@@ -22,6 +22,7 @@ use Ease\TWB4\SubmitButton;
 class ConfFieldsForm extends Form
 {
     /**
+     * Specify Fields for Application
      *
      * @param array $conffields
      * @param mixed $formContents

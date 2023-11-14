@@ -36,8 +36,16 @@ class JobInfo extends \Ease\Html\DivTag
         $jobInfoTable->addRowColumns([_('Application'), new AppLinkButton(new \MultiFlexi\Application($job->getDataValue('app_id')))]);
         $jobInfoTable->addRowColumns([_('Company'), new CompanyLinkButton(new \MultiFlexi\Company($job->getDataValue('company_id')))]);
         $jobInfoTable->addRowColumns([_('Scheduled'), $job->getDataValue('schedule')]);
-        $jobInfoTable->addRowColumns([_('Begin'), [$job->getDataValue('begin'), '&nbsp;', $job->getDataValue('begin') ? new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job->getDataValue('begin')))->getTimestamp())) : _('Not Yet Started')]]);
-        $jobInfoTable->addRowColumns([_('End'), [$job->getDataValue('end'), '&nbsp;', $job->getDataValue('begin') ? new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job->getDataValue('end')))->getTimestamp())) : _('Not Yet Ended')]]);
+        $jobInfoTable->addRowColumns([_('Begin'), [
+            $job->getDataValue('begin'),
+            '&nbsp;',
+            $job->getDataValue('begin') ? new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job->getDataValue('begin')))->getTimestamp())) : _('Not Yet Started')]
+            ]);
+        $jobInfoTable->addRowColumns([_('End'), [
+            $job->getDataValue('end'),
+            '&nbsp;',
+            $job->getDataValue('end') ? new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job->getDataValue('end')))->getTimestamp())) : _('Not Yet Ended')]
+            ]);
         $jobInfoTable->addRowColumns([_('Commandline'), $job->getDataValue('command')]);
         $jobInfoTable->addRowColumns([_('Exitcode'), new ExitCode($job->getDataValue('exitcode'))]);
 
