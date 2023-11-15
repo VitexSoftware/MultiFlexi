@@ -22,8 +22,8 @@ final class LogLongblob extends AbstractMigration
         $table = $this->table('job');
         if ($this->adapter->getAdapterType() == 'mysql') {
             $table
-                    ->changeColumn('stderr', 'blob', ['null' => false, 'limit' => Phinx\Db\Adapter\MysqlAdapter::BLOB_LONG])
-                    ->changeColumn('stdout', 'blob', ['null' => false, 'limit' => Phinx\Db\Adapter\MysqlAdapter::BLOB_LONG])
+                    ->changeColumn('stderr', 'blob', ['null' => false, 'default'=>'', 'limit' => Phinx\Db\Adapter\MysqlAdapter::BLOB_LONG])
+                    ->changeColumn('stdout', 'blob', ['null' => false, 'default'=>'', 'limit' => Phinx\Db\Adapter\MysqlAdapter::BLOB_LONG])
                     ->update();
         }
 

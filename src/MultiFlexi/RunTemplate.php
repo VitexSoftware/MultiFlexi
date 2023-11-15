@@ -84,6 +84,33 @@ class RunTemplate extends Engine
         $platformHelper = new $platformHelperClass($connectionData['company_id'], $connectionData);
         return $platformHelper->getEnvironment();
     }
+
+    /**
+     *
+     * @param type $companyId
+     *
+     * @return type
+     */
+    public function getCompanyTemplates($companyId)
+    {
+        return $this->listingQuery()->where('company_id', $companyId);
+    }
+
+    public function getCompanyAppsByInterval($companyId)
+    {
+        $companyApps = [
+            'h' => [],
+            'd' => [],
+            'w' => [],
+            'm' => [],
+            'y' => []
+        ];
+        foreach ($this->getCompanyTemplates($companyId)->fetchAll() as $template) {
+            $companyApps[$template['interv']][$template['app_id']] = $template;
+        }
+        return $companyApps;
+    }
+
     /**
      *
      * @return array
@@ -158,5 +185,22 @@ class RunTemplate extends Engine
     public function setProvision($status)
     {
         return $this->dbsync(['prepared' => $status]);
+    }
+
+    public function assignAppsToCompany(int $companyId, array $appIds, string $interval)
+    {
+        $availbleApps = (new \MultiFlexi\CompanyApp(new Company($companyId)))->getAssigned()->fetchAll('app_id');
+        $currentApps = $this->getCompanyTemplates($companyId)->where('interv', $interval)->fetchAll('app_id');
+        foreach ($appIds as $appId) {
+            if (array_key_exists($appId, $currentApps) === false) {
+                $this->insertToSQL(['app_id' => $appId,'company_id' => $companyId,'interv' => $interval]);
+            }
+        }
+
+        foreach ($currentApps as $currentApp) {
+            if (array_search($appId, $appIds) === false) {
+                $this->deleteFromSQL(['app_id' => $appId,'company_id' => $companyId]);
+            }
+        }
     }
 }

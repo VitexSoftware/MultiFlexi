@@ -26,12 +26,16 @@ $appInfo = $runTemplate->getAppInfo();
 $apps = new Application($appInfo['app_id']);
 $instanceName = $appInfo['app_name'];
 
+$errorTerminal = new \Ease\ui\OldTerminal((new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stderr'))));
+$errorTerminal->green = 0;
+$errorTerminal->red = 150;
+
 $oPage->container->addItem(
     new Panel(
         new JobInfo($jobber),
         'default',
-        new \Ease\Html\DivTag(nl2br((new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stdout')))), ['style' => 'font-family: monospace; background-color: black;']),
-        new \Ease\Html\DivTag(nl2br((new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stderr'))))),
+        new \Ease\ui\OldTerminal((new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stdout')))),
+        $errorTerminal,
         new JobInfo($jobber)
     )
 );
