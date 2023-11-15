@@ -109,6 +109,8 @@ class Job extends Engine
                     'app_id' => $appId,
                     'env' => \serialize($environment),
                     'exitcode' => -1,
+                    'stdout' => '',
+                    'stderr' => '',
                     'schedule' => $scheduled,
                     'launched_by' => \Ease\Shared::user()->getMyKey()
         ]);

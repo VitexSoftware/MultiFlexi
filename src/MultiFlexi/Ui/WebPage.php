@@ -40,9 +40,4 @@ class WebPage extends \Ease\TWB4\WebPage
         $this->addCSS('
 ');
     }
-
-    public function __sleep()
-    {
-        return ['customer'];
-    }
 }

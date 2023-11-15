@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi Flexi - Index page.
+ * Multi Flexi - AdHoc Job launcher
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020-2023 Vitex Software
@@ -40,6 +40,7 @@ $addAppForm->addItem(new \Ease\Html\InputHiddenTag('company_id', $companer->getM
 $assignedRaw = $companyApp->getAssigned()->fetchAll('app_id');
 $assigned = empty($assignedRaw) ? [] : array_keys($assignedRaw);
 $chooseApp = new AppsSelector('appsassigned', implode(',', $assigned));
+
 
 
 $addAppForm->addItem(new \Ease\Html\H2Tag(sprintf(_('Choose Applications to use with %s company'), $companer->getRecordName())));
