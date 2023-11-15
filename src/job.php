@@ -26,7 +26,7 @@ $appInfo = $runTemplate->getAppInfo();
 $apps = new Application($appInfo['app_id']);
 $instanceName = $appInfo['app_name'];
 
-$errorTerminal = new \Ease\ui\OldTerminal((new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stderr'))));
+$errorTerminal = new \Ease\ui\OldTerminal(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stderr')))));
 $errorTerminal->green = 0;
 $errorTerminal->red = 150;
 
@@ -35,7 +35,7 @@ $oPage->container->addItem(
         new JobInfo($jobber),
         'default',
         new \Ease\ui\OldTerminal(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stdout'))))),
-        str_replace('background-color: black; ', '', $errorTerminal),
+        $errorTerminal,
         new JobInfo($jobber)
     )
 );
