@@ -35,12 +35,27 @@ class AppLaunchForm extends \Ease\TWB4\Form
 
         /* for each upload field add file input */
         foreach ($appFields as $fieldKey => $fieldProps) {
-            if ($fieldProps['type'] == 'file') {
-                $this->addInput(new \Ease\Html\InputFileTag($fieldKey, $fieldProps['defval'], ['id' => 'input' . $fieldProps['keyname']]), $fieldProps['keyname'], $fieldProps['defval'], $fieldProps['description']);
-            } else {
-                if (array_key_exists($fieldKey, $env) === false) {
-                    $this->addInput(new \Ease\Html\InputTextTag($fieldKey, $fieldProps['defval']), $fieldProps['defval'], $fieldProps['defval'], $fieldProps['description']);
-                }
+            switch ($fieldProps['type']) {
+                case 'file':
+                    $this->addInput(new \Ease\Html\InputFileTag($fieldKey, $fieldProps['defval'], ['id' => 'input' . $fieldProps['keyname']]), $fieldProps['keyname'], $fieldProps['defval'], $fieldProps['description']);
+                    break;
+                case 'email':
+                    if (array_key_exists($fieldKey, $env) === false) {
+                        $this->addInput(new \Ease\Html\InputEmailTag($fieldKey, $fieldProps['defval']), $fieldKey, $fieldProps['defval'], $fieldProps['description']);
+                    }
+                    break;
+                case 'checkbox':
+                    if (array_key_exists($fieldKey, $env) === false) {
+                        $this->addInput(new \Ease\TWB4\Widgets\Toggle($fieldKey, $fieldProps['defval']), $fieldKey . '&nbsp;', $fieldProps['defval'], $fieldProps['description']);
+                    }
+                    break;
+
+                default:
+                    if (array_key_exists($fieldKey, $env) === false) {
+                        $this->addInput(new \Ease\Html\InputTextTag($fieldKey, $fieldProps['defval']), $fieldKey, $fieldProps['defval'], $fieldProps['description']);
+                    }
+
+                    break;
             }
         }
 
