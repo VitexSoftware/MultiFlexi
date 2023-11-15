@@ -22,14 +22,14 @@ class AbraFlexiInstanceStatus extends \Ease\Html\TableTag
         parent::__construct(null, $properties);
         $this->addRowHeaderColumns([_('Code'), _('Name'), _('Show'), _('State'), _('watching Changes'), '']);
         $companer = new \MultiFlexi\Company();
-        $registered = $companer->getColumnsFromSQL(['id', 'company'], ['server' => $servers->getMyKey()], 'id', 'company');
+        $registered = $companer->getColumnsFromSQL(['id', 'company', 'name'], ['server' => $servers->getMyKey()], 'id', 'company');
         foreach ($this->companys($servers->getData()) as $companyData) {
             try {
                 $setter = new \AbraFlexi\Nastaveni(1, array_merge($servers->getData(), ['company' => $companyData['dbNazev']]));
                 $companyDetail = $setter->getData();
                 $registerParams = [
                     'company' => $companyData['dbNazev'],
-                    'name' => $companyData['name'],
+                    'name' => $companyData['nazev'],
                     'server' => $servers->getMyKey(),
                     'ic' => array_key_exists('ic', $companyDetail) ? $companyDetail['ic'] : '',
                     'email' => array_key_exists('email', $companyDetail) ? $companyDetail['email'] : '',
@@ -55,7 +55,11 @@ class AbraFlexiInstanceStatus extends \Ease\Html\TableTag
     public function companys($serverAccess)
     {
         $companer = new \AbraFlexi\Company(null, $serverAccess);
-        $companys = $companer->getAllFromAbraFlexi();
+        try {
+            $companys = $companer->getAllFromAbraFlexi();
+        } catch (\AbraFlexi\Exception $exc) {
+            $companys = [];
+        }
         return empty($companys) ? [] : $companys;
     }
 }
