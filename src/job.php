@@ -34,12 +34,11 @@ $oPage->container->addItem(
     new Panel(
         new JobInfo($jobber),
         'default',
-        new \Ease\ui\OldTerminal((new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stdout')))),
-        $errorTerminal,
+        new \Ease\ui\OldTerminal(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stdout'))))),
+        str_replace('background-color: black; ', '', $errorTerminal),
         new JobInfo($jobber)
     )
 );
-
 
 $oPage->addItem(new PageBottom());
 WebPage::singleton()->addCss('
