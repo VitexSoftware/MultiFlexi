@@ -38,6 +38,7 @@
             "MultiFlexi\\Auth\\": "src/MultiFlexi/Auth",
             "MultiFlexi\\Zabbix\\": "src/MultiFlexi/Zabbix",
             "MultiFlexi\\Pohoda\\": "src/MultiFlexi/Pohoda",
+            "MultiFlexi\\Executor\\": "src/MultiFlexi/Executor",
             "MultiFlexi\\AbraFlexi\\": "src/MultiFlexi/AbraFlexi"
         }
     },

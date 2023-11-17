@@ -35,13 +35,10 @@ Architecture: all
 Description: mariadb support for multiabraflexi setup
  Mandatory dependencies for use Multi FlexiBee setup with MySQL/MariaDB databas
 
-Package: multiflexi-pgsql
+Package: multiflexi-podman
 Multi-Arch: foreign
-Depends: ${misc:Depends},multiflexi, dbconfig-pgsql, php-pgsql, php-robmorgan-phinx|php-cakephp-phinx
-Conflicts: multiflexi-mysql, multiflexi-sqlite
-Suggests: postgresql
-Replaces: multi-flexibee-setup-pqsql
+Depends: ${misc:Depends},multiflexi, podman
 Architecture: all
-Description: postgres support for multiabraflexi setup
- Mandatory dependencies for use Multi FlexiBee setup with PostgreSQL database
+Description: Run MultiFlexi tasks in container
+ Run MultiFlexi tasks in container
 

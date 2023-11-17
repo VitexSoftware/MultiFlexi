@@ -30,6 +30,7 @@
       "MultiFlexi\\Env\\": "MultiFlexi/Env",
       "MultiFlexi\\Pohoda\\": "MultiFlexi/Pohoda",
       "MultiFlexi\\Zabbix\\": "MultiFlexi/Zabbix",
+      "MultiFlexi\\Executor\\": "MultiFlexi/Executor",
       "MultiFlexi\\AbraFlexi\\": "MultiFlexi/AbraFlexi",
       "MultiFlexi\\Zabbix\\Request\\": "MultiFlexi/Zabbix/Request",
       "MultiFlexi\\Zabbix\\Exception\\": "MultiFlexi/Zabbix/Exception"
