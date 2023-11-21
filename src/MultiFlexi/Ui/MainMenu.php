@@ -106,7 +106,10 @@ class MainMenu extends \Ease\Html\DivTag {
             $nav->addMenuItem(new \Ease\Html\ATag('logout.php', '<img height=30 src=images/application-exit.svg> ' . _('Sign Off')), 'right');
 
             if (\MultiFlexi\Runner::isServiceActive('multiflexi') === false) {
-                $oPage->addStatusMessage(_('systemd service is not running. Consider `systemctl start multiflexi`'), 'warning');
+                $oPage->addStatusMessage(_('MultiFlexi systemd service is not running. Consider `systemctl start multiflexi`'), 'warning');
+            }
+            if (\MultiFlexi\Runner::isServiceActive('anacron') === false) {
+                $oPage->addStatusMessage(_('Periodic Task Launcher systemd service is not running. Consider `systemctl start anacron`'), 'warning');
             }
         }
     }

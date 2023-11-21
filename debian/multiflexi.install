@@ -13,7 +13,7 @@ src/MultiFlexi/*.php                      usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Env/*.php                  usr/lib/multiflexi/MultiFlexi/Env/
 src/MultiFlexi/Pohoda/*.php               usr/lib/multiflexi/MultiFlexi/Pohoda/
 src/MultiFlexi/AbraFlexi/*.php            usr/lib/multiflexi/MultiFlexi/AbraFlexi/
-src/MultiFlexi/Executor/Native.php     usr/lib/multiflexi/MultiFlexi/Executor
+src/MultiFlexi/Executor/Native.php        usr/lib/multiflexi/MultiFlexi/Executor
 src/MultiFlexi/Ui/*.php                   usr/lib/multiflexi/MultiFlexi/Ui/
 src/MultiFlexi/Zabbix/*.php               usr/lib/multiflexi/MultiFlexi/Zabbix/
 src/MultiFlexi/Zabbix/Exception/*.php     usr/lib/multiflexi/MultiFlexi/Zabbix/Exception/
