@@ -32,6 +32,10 @@ if (\Ease\Shared::cfg('APP_DEBUG')) {
     $jobber->logBanner(\Ease\Shared::appName() . ' Interval: ' . Job::codeToInterval($interval));
 }
 
+if(\MultiFlexi\Runner::isServiceActive('multiflexi') === false){
+    $jobber->addStatusMessage(_('systemd service is not running. Consider `systemctl start multiflexi`'),'warning');
+}
+
 $companer = new Company();
 $companys = $companer->listingQuery()->select('servers.*')->select('company.id AS company_id')->leftJoin('servers ON servers.id = company.server');
 $customConfig = new Configuration();
