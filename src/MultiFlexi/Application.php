@@ -179,9 +179,9 @@ class Application extends Engine
     }
 
     /**
-     * 
+     *
      * @param string $platform
-     * 
+     *
      * @return \Envms\FluentPDO\Query
      */
     public function getAvailbleApps($platform)

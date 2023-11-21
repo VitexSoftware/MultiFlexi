@@ -14,20 +14,22 @@ namespace MultiFlexi;
  *
  * @author vitex
  */
-class Runner extends \Ease\Sand {
-
-    public function __construct() {
+class Runner extends \Ease\Sand
+{
+    public function __construct()
+    {
         $this->setObjectName();
     }
 
     /**
      * SystemD service name
-     * 
+     *
      * @param string $service
-     * 
+     *
      * @return bool
      */
-    public static function isServiceActive($service) {
+    public static function isServiceActive($service)
+    {
         return (trim(shell_exec("systemctl is-active $service")) == "active");
     }
 }
