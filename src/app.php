@@ -53,9 +53,7 @@ if (empty($instanceName) === false) {
 $_SESSION['application'] = $apps->getMyKey();
 $oPage->addItem(new PageTop($apps->getRecordName() ? trim(_('Application') . ' ' . $apps->getRecordName()) : $instanceName));
 $instanceRow = new Row();
-$instanceRow->addColumn(8, new AppEditorForm($apps));
-$panel[] = new ImgTag(empty($apps->getDataValue('image')) ? 'images/apps.svg' : $apps->getDataValue('image'), 'Logo', ['class' => 'img-fluid']);
-$panel[] = new HrTag();
+$instanceRow->addColumn(4, new AppEditorForm($apps));
 //if (array_key_exists('company', $_SESSION) && is_null($_SESSION['company']) === false) {
 //    $company = new Company($_SESSION['company']);
 //    $panel[] = new LinkButton('id=' . $apps->getMyKey() . '&company=' . $_SESSION['company'], sprintf(_('Assign to %s'), $company->getRecordName()), 'success');
@@ -82,22 +80,30 @@ foreach ($jobs as $job) {
     $jobList->addRowColumns($job);
 }
 
-$panel[] = [new H3Tag(_('Last 10 Jobs')), $jobList];
-$panel[] = new LinkButton('logs.php?apps_id=' . $apps->getMyKey(), _('Application Log'), 'info');
-$panel[] = new LinkButton('joblist.php?app_id=' . $apps->getMyKey(), _('All Application Jobs history'), 'info');
-$instanceRow->addColumn(4, $panel);
+$instanceRow->addColumn(4, is_null($apps->getMyKey()) ?
+                new LinkButton('', _('Config fields'), 'inverse disabled  btn-block') :
+                [
+                    new \MultiFlexi\Ui\ConfigFieldsView(Conffield::getAppConfigs($apps->getMyKey())),
+                    new LinkButton('conffield.php?app_id=' . $apps->getMyKey(), _('Config fields editor'), 'secondary  btn-block')
+                    ]);
+
+$instanceRow->addColumn(4, new AppLogo($apps));
+
+$appTabs = new \Ease\TWB4\Tabs();
+$appTabs->addTab(_('Configuration'), $instanceRow);
+$appTabs->addTab(_('Stats'), [
+    $jobList,
+    new LinkButton('logs.php?apps_id=' . $apps->getMyKey(), _('Application Log'), 'info'),
+    new LinkButton('joblist.php?app_id=' . $apps->getMyKey(), _('All Application Jobs history'), 'info')
+]);
+$appTabs->addTab(_('Export'), new AppJson($apps));
+
 $oPage->container->addItem(new Panel(
     $instanceName,
     'inverse',
-    $instanceRow,
-    is_null($apps->getMyKey()) ?
-                        new LinkButton('', _('Config fields'), 'inverse disabled') :
-                        [new LinkButton('conffield.php?app_id=' . $apps->getMyKey(), _('Config fields'), 'warning'),
-                    new \MultiFlexi\Ui\ConfigFieldsBadges(Conffield::getAppConfigs($apps->getMyKey()))
-                        ]
+    $appTabs,
+    ''
 ));
-
-$oPage->addItem(new AppJson($apps));
 
 $oPage->addItem(new PageBottom());
 $oPage->draw();
