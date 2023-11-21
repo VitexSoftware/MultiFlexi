@@ -179,6 +179,7 @@ class Application extends Engine
     }
 
     /**
+     * Obtain list of applications supporting given platform
      *
      * @param string $platform
      *
@@ -276,5 +277,55 @@ class Application extends Engine
             }
         }
         return $fields;
+    }
+
+    /**
+     * Remove Application by its json definition
+     *
+     * @param string $jsonFile path to definition
+     *
+     * @return bool app removal status
+     */
+    public function JsonAppRemove($jsonFile)
+    {
+        $success = true;
+        $importData = json_decode(file_get_contents($jsonFile), true);
+        if (is_array($importData)) {
+            $candidat = $this->listingQuery()->where('executable', $importData['executable'])->whereOr('name', $importData['name']);
+            if ($candidat->count()) {
+                foreach ($candidat as $candidatData) {
+                    $this->setMyKey($candidatData['id']);
+                    $removed = $this->deleteFromSQL();
+                    if (is_null($removed)) {
+                        $success = false;
+                    }
+                    $this->addStatusMessage(sprintf(_('Application removal %d %s'), $candidatData['id'], $candidatData['name']), is_integer($removed) ? 'success' : 'error');
+                }
+            }
+        }
+        return $success;
+    }
+
+    /**
+     * Smaže záznam z SQL.
+     *
+     * @param array|int $data
+     *
+     * @return bool
+     */
+    public function deleteFromSQL($data = null)
+    {
+        if (is_null($data)) {
+            $data = $this->getData();
+        }
+        $a2c = $this->getFluentPDO()->deleteFrom('companyapp')->where('app_id', $this->getMyKey($data))->execute();
+        $this->addStatusMessage(sprintf(_('Unassigned from %d companys'), $a2c), is_null($a2c) ? 'error' : 'success');
+        $a2rt = $this->getFluentPDO()->deleteFrom('runtemplate')->where('app_id', $this->getMyKey($data))->execute();
+        $this->addStatusMessage(sprintf(_('%s RunTemplate removal'), $a2rt), is_null($a2rt) ? 'error' : 'success');
+        $a2cf = $this->getFluentPDO()->deleteFrom('conffield')->where('app_id', $this->getMyKey($data))->execute();
+        $this->addStatusMessage(sprintf(_('%d Config fields removed'), $a2rt), is_null($a2rt) ? 'error' : 'success');
+        $a2job = $this->getFluentPDO()->deleteFrom('job')->where('app_id', $this->getMyKey($data))->execute();
+        $this->addStatusMessage(sprintf(_('%d Jobs removed'), $a2job), is_null($a2job) ? 'error' : 'success');
+        return parent::deleteFromSQL($data);
     }
 }

@@ -39,3 +39,5 @@ db/multiflexi
 /.php-cs-fixer.cache
 /tests/.phpunit.result.cache
 /log/
+/nbproject/configs/
+/db/multiflexi.sqlite

@@ -231,3 +231,16 @@ multiflexi-phinx seed:run  -s AppSeeder
 Tím se načtou pouze ukázkové aplikace. Jsou li tyto také nainstalovány (nalezeny na disku) jsou rovnou aktivovány aby je bylo možné přiřadit k firmám a intervalům.
 
 ![AppSeeder](doc/appseeder.png?raw=true)
+
+Ovládání z příkazového řádku
+============================
+
+ve složce bin se nacházejí tyto spouštěče různých funkcí:
+
+* `multiflexi-app2json` - exportuje definici aplikace do souboru
+* `multiflexi-executor` - periodický spouštěč aplikací
+* `multiflexi-job2script` - vygeneruje skript s nastavením prostředí a příkazem pro běhu úlohy dle jejího čísla
+* `multiflexi-json-app-remover` - na základě json definice odstraní aplikaci z MultiFlexi
+* `multiflexi-json2app` - načte definice aplikace ze souboru
+* `multiflexi-probe` - pomocný nástroj pro testování funkce aplikace
+
