@@ -23,7 +23,7 @@ $servers = new Application();
 $allAppData = $servers->getAll();
 
 $fbtable = new Table();
-$fbtable->addRowHeaderColumns([_('ID'), _('Enabled'), _('Image'), _('Name'), _('Description'), _('Executable'), _('Created'), _('Modified'), _('Init Command'),_('Commandline params'), _('Deploy Command'),_('HomePage'),_('Requirements')]);
+$fbtable->addRowHeaderColumns([_('ID'), _('Enabled'), _('Image'), _('Name'), _('Description'), _('Executable'), _('Created'), _('Modified'), _('HomePage'),_('Requirements')]);
 
 foreach ($allAppData as $appData) {
     $appData['image'] = new \Ease\Html\ImgTag($appData['image'], _('Icon'), ['height' => 40]);
@@ -36,7 +36,11 @@ foreach ($allAppData as $appData) {
         $appData['setup'] = (empty($initPath) ? '<span title="' . _('Command not found') . '">⁉</span> ' . $appData['setup'] : $initPath);
     }
 
+    $appData['homepage'] = new \Ease\Html\ATag($appData['homepage'], $appData['homepage']);
     $appData['name'] = new \Ease\Html\ATag('app.php?id=' . $appData['id'], $appData['name']);
+    unset($appData['setup']);
+    unset($appData['cmdparams']);
+    unset($appData['deploy']);
     $fbtable->addRowColumns($appData);
 }
 
