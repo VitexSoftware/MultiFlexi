@@ -27,6 +27,7 @@ if (array_key_exists('1', $argv) && file_exists($argv[1])) {
     }
     if (empty($apper->importAppJson($argv[1]))) {
         $apper->addStatusMesssage(_('Error importing application json'), 'error');
+        exit(1);
     }
 } else {
     echo "usage: app.template.json [app id]";

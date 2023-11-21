@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi Flexi  - App class
+ * Multi Flexi - App class
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
  * @copyright  2020-2023 Vitex Software
@@ -178,6 +178,12 @@ class Application extends Engine
         return $platformApps;
     }
 
+    /**
+     * 
+     * @param string $platform
+     * 
+     * @return \Envms\FluentPDO\Query
+     */
     public function getAvailbleApps($platform)
     {
         return $this->listingQuery()->where('enabled', true);
@@ -208,7 +214,7 @@ class Application extends Engine
         unset($appData['DatCreate']);
         unset($appData['DatUpdate']);
         unset($appData['enabled']);
-        $appData['multiflexi'] = \Ease\Shared::appName() . ' v' . \Ease\Shared::appVersion() . ' @' . gethostbyaddr('127.0.1.1') . ' ' . gmdate('Y-m-d h:i:s \G\M\T');
+        $appData['multiflexi'] = \Ease\Shared::appVersion();
         return json_encode($appData, JSON_PRETTY_PRINT);
     }
 
