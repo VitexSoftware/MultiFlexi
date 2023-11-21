@@ -16,7 +16,13 @@ namespace MultiFlexi\Excutor;
  *
  * @author vitex
  */
-class Native implements \MultiFlexi\Executor
+class Native extends \Ease\Sand implements \MultiFlexi\executor
 {
-    //put your code here
+    use \Ease\Logger\Logging;
+
+
+
+    public function launch()
+    {
+    }
 }
