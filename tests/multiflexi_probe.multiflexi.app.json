@@ -3,7 +3,7 @@
     "name": "MultiFlexi Probe",
     "description": "Task launcher testing tool",
     "executable": "multiflexi-probe",
-    "setup": "",
+    "setup": "ls -la {FILE_UPLOAD}",
     "requirements": "",
     "cmdparams": "{FILE_UPLOAD}",
     "deploy": "sudo apt install multiflexi",
@@ -12,7 +12,20 @@
         "FILE_UPLOAD": {
             "type": "file",
             "description": "Testing file upload field",
-            "defval": "\/etc\/fstab"
+            "defval": "\/etc\/fstab",
+            "required": true
+        },
+        "PASSWORD": {
+            "type": "password",
+            "description": "Testing file upload field",
+            "defval": "\/etc\/fstab",
+            "required": false
+        },
+        "APP_DEBUG": {
+            "type": "checkbox",
+            "description": "Show debug messages",
+            "defval": "False",
+            "required": true
         }
     },
     "multiflexi": ""
