@@ -19,6 +19,9 @@ class ExitCode extends \Ease\TWB4\Badge
     public function __construct($exitcode, $properties = [])
     {
         switch (intval($exitcode)) {
+            case -1:
+                $type = 'inverse';
+                break;
             case 0:
                 $type = 'success';
                 break;
@@ -26,7 +29,7 @@ class ExitCode extends \Ease\TWB4\Badge
                 $type = 'warning';
                 break;
             default:
-                $type = 'error';
+                $type = 'danger';
                 break;
         }
         parent::__construct($type, '&nbsp' . $exitcode . '&nbsp', $properties);
