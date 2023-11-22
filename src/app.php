@@ -91,7 +91,7 @@ $instanceRow->addColumn(4, new AppLogo($apps));
 
 $appTabs = new \Ease\TWB4\Tabs();
 $appTabs->addTab(_('Configuration'), $instanceRow);
-$appTabs->addTab(_('Stats'), [
+$appTabs->addTab(_('Jobs'), [
     $jobList,
     new LinkButton('logs.php?apps_id=' . $apps->getMyKey(), _('Application Log'), 'info'),
     new LinkButton('joblist.php?app_id=' . $apps->getMyKey(), _('All Application Jobs history'), 'info')
