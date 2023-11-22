@@ -30,13 +30,16 @@ $errorTerminal = new \Ease\ui\OldTerminal(str_replace('background-color: black; 
 $errorTerminal->green = 0;
 $errorTerminal->red = 150;
 
+$outputTabs = new \Ease\TWB4\Tabs();
+$outputTabs->addTab(_('Output'), new \Ease\ui\OldTerminal(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stdout'))))));
+$outputTabs->addTab(_('Errors'), $errorTerminal, empty($jobber->getDataValue('stdout')));
+
 $oPage->container->addItem(
     new Panel(
         new JobInfo($jobber),
         'default',
-        new \Ease\ui\OldTerminal(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stdout'))))),
-        $errorTerminal,
-        new JobInfo($jobber)
+        $outputTabs,
+        $jobber->getDataValue('command')
     )
 );
 
