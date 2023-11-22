@@ -23,36 +23,38 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class JobInfo extends \Ease\Html\DivTag
+class JobInfo extends \Ease\TWB4\Tabs
 {
     public function __construct(\MultiFlexi\Job $job, $properties = [])
     {
-        parent::__construct(new \Ease\Html\H1Tag(_('Job') . ' ' . $job->getMyKey()), $properties);
+        parent::__construct(null, $properties);
 
-        $scheduler = new \MultiFlexi\Scheduler();
-        $scheduled = $scheduler->listingQuery()->where('job', $job->getMyKey())->fetch();
-
-        $jobInfoTable = new \Ease\Html\TableTag();
-        $jobInfoTable->addRowColumns([_('Application'), new AppLinkButton(new \MultiFlexi\Application($job->getDataValue('app_id')))]);
-        $jobInfoTable->addRowColumns([_('Company'), new CompanyLinkButton(new \MultiFlexi\Company($job->getDataValue('company_id')))]);
-        $jobInfoTable->addRowColumns([_('Scheduled'), $job->getDataValue('schedule')]);
-        $jobInfoTable->addRowColumns([_('Begin'), [
+        $jobInfoRow = new \Ease\TWB4\Row();
+        $jobInfoRow->addColumn(1, [_('Exitcode') . '<br>', new ExitCode($job->getDataValue('exitcode'))]);
+        $jobInfoRow->addColumn(2, [_('Application') . '<br>', new AppLinkButton(new \MultiFlexi\Application($job->getDataValue('app_id')))]);
+        $jobInfoRow->addColumn(2, [_('Company') . '<br>', new CompanyLinkButton(new \MultiFlexi\Company($job->getDataValue('company_id')))]);
+        $jobInfoRow->addColumn(2, [_('Scheduled') . '<br>', $job->getDataValue('schedule')]);
+        $jobInfoRow->addColumn(2, [_('Begin') . '<br>', [
             $job->getDataValue('begin'),
             '&nbsp;',
             $job->getDataValue('begin') ? new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job->getDataValue('begin')))->getTimestamp())) : _('Not Yet Started')]
             ]);
-        $jobInfoTable->addRowColumns([_('End'), [
+        $jobInfoRow->addColumn(2, [_('End') . '<br>', [
             $job->getDataValue('end'),
             '&nbsp;',
             $job->getDataValue('end') ? new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job->getDataValue('end')))->getTimestamp())) : _('Not Yet Ended')]
             ]);
-        $jobInfoTable->addRowColumns([_('Commandline'), $job->getDataValue('command')]);
-        $jobInfoTable->addRowColumns([_('Exitcode'), new ExitCode($job->getDataValue('exitcode'))]);
+
+//        $jobInfoRow->addColumn(1, [_('Commandline').'<br>', $job->getDataValue('command')]);
 
         $launcher = new \MultiFlexi\User($job->getDataValue('launched_by'));
-        $jobInfoTable->addRowColumns([_('Person'), $launcher->getMyKey() ? new \Ease\Html\ATag('user.php?id=' . $launcher->getMyKey(), new \Ease\TWB4\Badge('info', $launcher->getUserLogin())) : _('Timer')]);
-        $jobInfoTable->addRowColumns([_('Environment'), new EnvironmentView($job->getEnv())]);
+        $jobInfoRow->addColumn(1, [_('Launched by') . '<br>', $launcher->getMyKey() ? new \Ease\Html\ATag('user.php?id=' . $launcher->getMyKey(), new \Ease\TWB4\Badge('info', $launcher->getUserLogin())) : _('Timer')]);
 
-        $this->addItem($jobInfoTable);
+        $this->addTab(_('Job') . ' ' . $job->getMyKey(), $jobInfoRow);
+
+//        $scheduler = new \MultiFlexi\Scheduler();
+//        $scheduled = $scheduler->listingQuery()->where('job', $job->getMyKey())->fetch();
+
+        $this->addTab(_('Environment'), new EnvironmentView($job->getEnv()));
     }
 }
