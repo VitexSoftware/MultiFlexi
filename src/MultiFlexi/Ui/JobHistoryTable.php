@@ -36,7 +36,7 @@ class JobHistoryTable extends \Ease\TWB4\Table
                 ->where('begin IS NOT NULL')
                 ->orderBy('job.id DESC')
                 ->fetchAll();
-        $this->addRowHeaderColumns([_('Application'), _('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'), _('Company')]);
+        $this->addRowHeaderColumns([_('Application'), _('Exit Code') . '/' . _('Job ID'), _('Launch time'), _('Launcher'), _('Company')]);
         $company = new \AbraFlexi\Company();
         foreach ($jobs as $job) {
             $company->setDataValue('logo', $job['logo']);
@@ -44,13 +44,13 @@ class JobHistoryTable extends \Ease\TWB4\Table
             $job['appimage'] = new \Ease\Html\ATag('app.php?id=' . $job['app_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], $job['appname'], ['height' => 60, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);
             unset($job['appname']);
             unset($job['app_id']);
-            $job['id'] = new \Ease\Html\ATag('job.php?id=' . $job['id'], new \Ease\TWB4\Badge('info', $job['id']));
+            $job['id'] = new \Ease\Html\ATag('job.php?id=' . $job['id'], [new ExitCode($job['exitcode'], ['style' => 'font-size: 2.0em; font-family: monospace;']), '<br>' , new \Ease\TWB4\Badge('info', $job['id'])], ['title' => _('Job Info')]);
             $job['begin'] = [$job['begin'], '<br>', new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
-            $job['exitcode'] = new ExitCode($job['exitcode']);
+            unset($job['exitcode']);
             $job['launched_by'] = [
-                   new \Ease\Html\DivTag($job['launched_by'] ? new \Ease\Html\ATag('user.php?id=' . $job['launched_by'], new \Ease\TWB4\Badge('info', $job['login'])) : _('Timer')),
-                   new \Ease\Html\DivTag($job['schedule'])
-                ];
+                new \Ease\Html\DivTag($job['launched_by'] ? new \Ease\Html\ATag('user.php?id=' . $job['launched_by'], new \Ease\TWB4\Badge('info', $job['login'])) : _('Timer')),
+                new \Ease\Html\DivTag($job['schedule'])
+            ];
             unset($job['login']);
             unset($job['schedule']);
             $job['company_id'] = [new CompanyLogo($company, ['height' => '30px']), '<br>', new \Ease\Html\ATag('company.php?id=' . $job['company_id'], $job['name'])];
