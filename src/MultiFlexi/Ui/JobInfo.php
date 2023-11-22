@@ -30,7 +30,7 @@ class JobInfo extends \Ease\TWB4\Tabs
         parent::__construct(null, $properties);
 
         $jobInfoRow = new \Ease\TWB4\Row();
-        $jobInfoRow->addColumn(1, [_('Exitcode') . '<br>', new ExitCode($job->getDataValue('exitcode'))]);
+        $jobInfoRow->addColumn(1, [_('Exitcode') . '<br>', new ExitCode($job->getDataValue('exitcode'), ['style' => 'font-size: 2.0em; font-family: monospace;'])]);
         $jobInfoRow->addColumn(2, [_('Application') . '<br>', new AppLinkButton(new \MultiFlexi\Application($job->getDataValue('app_id')))]);
         $jobInfoRow->addColumn(2, [_('Company') . '<br>', new CompanyLinkButton(new \MultiFlexi\Company($job->getDataValue('company_id')))]);
         $jobInfoRow->addColumn(2, [_('Scheduled') . '<br>', $job->getDataValue('schedule')]);
