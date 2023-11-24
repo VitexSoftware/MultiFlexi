@@ -41,3 +41,4 @@ db/multiflexi
 /log/
 /nbproject/configs/
 /db/multiflexi.sqlite
+/src/translations.php
