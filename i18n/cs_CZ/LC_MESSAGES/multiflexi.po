@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Multi Flexi\n"
-"POT-Creation-Date: 2023-11-16 08:48+0100\n"
-"PO-Revision-Date: 2023-11-16 09:21+0100\n"
+"POT-Creation-Date: 2023-11-24 11:57+0100\n"
+"PO-Revision-Date: 2023-11-24 12:29+0100\n"
 "Last-Translator: Vítězslav Dvořák <info@vitexsoftware.cz>\n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -90,15 +90,42 @@ msgstr "Příkaz %s není v prohledávané cestě %s"
 msgid "file %s is not executable"
 msgstr "soubor %s není spustitelný"
 
-#: ../src/MultiFlexi/Application.php:265
+#: ../src/MultiFlexi/Application.php:272
 #, php-format
 msgid "executable %s not found"
 msgstr "spustitelný soubor %s nenalezen"
 
-#: ../src/MultiFlexi/Application.php:267
+#: ../src/MultiFlexi/Application.php:274
 #, php-format
 msgid "consider: %s"
 msgstr "zvažte: %s"
+
+#: ../src/MultiFlexi/Application.php:302
+#, php-format
+#| msgid "Application list"
+msgid "Application removal %d %s"
+msgstr "Odstranění aplikace %d %s"
+
+#: ../src/MultiFlexi/Application.php:322
+#, php-format
+msgid "Unassigned from %d companys"
+msgstr "Odebráno z %d společnosti"
+
+#: ../src/MultiFlexi/Application.php:324
+#, php-format
+msgid "%s RunTemplate removal"
+msgstr "%s Předloh běhu odstraněno"
+
+#: ../src/MultiFlexi/Application.php:326
+#, php-format
+#| msgid "Config fields Saved"
+msgid "%d Config fields removed"
+msgstr "%d konfiguračních polí odstraněno"
+
+#: ../src/MultiFlexi/Application.php:328
+#, php-format
+msgid "%d Jobs removed"
+msgstr "%d úloh odstraněno"
 
 #: ../src/MultiFlexi/CompanyApp.php:67
 #, php-format
@@ -112,21 +139,21 @@ msgstr "Aplkace %s byla odebrána ze společnosti %s"
 
 #: ../src/MultiFlexi/CompanyJob.php:61 ../src/MultiFlexi/Ui/AppJobsTable.php:32
 #: ../src/MultiFlexi/Ui/AppRow.php:72
-#: ../src/MultiFlexi/Ui/JobHistoryTable.php:39 ../src/app.php:69
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:39 ../src/app.php:67
 #: ../src/company.php:30
 msgid "Job ID"
 msgstr "ID úlohy"
 
 #: ../src/MultiFlexi/CompanyJob.php:66 ../src/MultiFlexi/Logger.php:123
 #: ../src/MultiFlexi/Ui/JobHistoryTable.php:39
-#: ../src/MultiFlexi/Ui/JobInfo.php:36 ../src/app.php:54 ../src/company.php:30
+#: ../src/MultiFlexi/Ui/JobInfo.php:34 ../src/app.php:54 ../src/company.php:30
 #: ../src/launch.php:22
 msgid "Application"
 msgstr "Aplikace"
 
 #: ../src/MultiFlexi/CompanyJob.php:74 ../src/MultiFlexi/Ui/AppJobsTable.php:32
 #: ../src/MultiFlexi/Ui/AppRow.php:72
-#: ../src/MultiFlexi/Ui/JobHistoryTable.php:39 ../src/app.php:69
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:39 ../src/app.php:67
 #: ../src/company.php:30
 msgid "Exit Code"
 msgstr "Kód při ukončení"
@@ -150,7 +177,7 @@ msgstr "Čas ukončení úlohy"
 #: ../src/MultiFlexi/CompanyJob.php:79 ../src/MultiFlexi/Logger.php:131
 #: ../src/MultiFlexi/Ui/Breadcrumb.php:46
 #: ../src/MultiFlexi/Ui/JobHistoryTable.php:39
-#: ../src/MultiFlexi/Ui/JobInfo.php:37 ../src/app.php:69 ../src/company.php:20
+#: ../src/MultiFlexi/Ui/JobInfo.php:35 ../src/app.php:67 ../src/company.php:20
 #: ../src/companydelete.php:19 ../src/companysetup.php:19
 msgid "Company"
 msgstr "Společnost"
@@ -421,12 +448,12 @@ msgstr "Zakázáno"
 msgid "Set"
 msgstr "Nastavit"
 
-#: ../src/MultiFlexi/Ui/AppInfo.php:46 ../src/app.php:94 ../src/app.php:95
+#: ../src/MultiFlexi/Ui/AppInfo.php:46 ../src/app.php:84
 msgid "Config fields"
 msgstr "Pole nastavení"
 
 #: ../src/MultiFlexi/Ui/AppJobsTable.php:32 ../src/MultiFlexi/Ui/AppRow.php:72
-#: ../src/MultiFlexi/Ui/JobHistoryTable.php:39 ../src/app.php:69
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:39 ../src/app.php:67
 #: ../src/company.php:30
 msgid "Launch time"
 msgstr "Čas spuštění"
@@ -437,7 +464,7 @@ msgstr "Zatím nespuštěno"
 
 #: ../src/MultiFlexi/Ui/AppJobsTable.php:41 ../src/MultiFlexi/Ui/AppRow.php:81
 #: ../src/MultiFlexi/Ui/JobHistoryTable.php:51
-#: ../src/MultiFlexi/Ui/JobInfo.php:53 ../src/company.php:51
+#: ../src/MultiFlexi/Ui/JobInfo.php:51 ../src/company.php:51
 msgid "Timer"
 msgstr "Časovač"
 
@@ -603,6 +630,7 @@ msgid "New config field Keyword"
 msgstr "Klíčové slovo nového konfiguračního políčka"
 
 #: ../src/MultiFlexi/Ui/ConfFieldsForm.php:36
+#: ../src/MultiFlexi/Ui/ConfigFieldsView.php:37
 msgid "Default value"
 msgstr "Výchozí hodnota"
 
@@ -648,6 +676,11 @@ msgstr "Ano/Ne"
 msgid "File upload"
 msgstr "Nahrání souboru"
 
+#: ../src/MultiFlexi/Ui/ConfigFieldsView.php:38
+#| msgid "Required"
+msgid "Requied"
+msgstr "Requied"
+
 #: ../src/MultiFlexi/Ui/CustomerSelect.php:41
 msgid "Choose customer"
 msgstr "Zvol zákazníka"
@@ -668,17 +701,17 @@ msgstr "Všechny stránky"
 msgid "Apps"
 msgstr "Appky"
 
-#: ../src/MultiFlexi/Ui/DbStatus.php:36 ../src/MultiFlexi/Ui/MainMenu.php:145
+#: ../src/MultiFlexi/Ui/DbStatus.php:36 ../src/MultiFlexi/Ui/MainMenu.php:152
 msgid "Servers"
 msgstr "Servery"
 
-#: ../src/MultiFlexi/Ui/DbStatus.php:40 ../src/MultiFlexi/Ui/MainMenu.php:182
-#: ../src/MultiFlexi/Ui/MainMenu.php:193 ../src/customers.php:21
+#: ../src/MultiFlexi/Ui/DbStatus.php:40 ../src/MultiFlexi/Ui/MainMenu.php:189
+#: ../src/MultiFlexi/Ui/MainMenu.php:200 ../src/customers.php:21
 msgid "Customers"
 msgstr "Zákazníci"
 
 #: ../src/MultiFlexi/Ui/DbStatus.php:44 ../src/MultiFlexi/Ui/MainMenu.php:90
-#: ../src/MultiFlexi/Ui/MainMenu.php:159 ../src/MultiFlexi/Ui/MainMenu.php:170
+#: ../src/MultiFlexi/Ui/MainMenu.php:166 ../src/MultiFlexi/Ui/MainMenu.php:177
 msgid "Companies"
 msgstr "Společnosti"
 
@@ -779,43 +812,43 @@ msgstr "Denně"
 msgid "Hourly"
 msgstr "Hodinově"
 
-#: ../src/MultiFlexi/Ui/JobInfo.php:30
-msgid "Job"
-msgstr "Úloha"
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:47
+msgid "Job Info"
+msgstr "Info úlohy"
 
-#: ../src/MultiFlexi/Ui/JobInfo.php:38 ../src/company.php:47
-msgid "Scheduled"
-msgstr "Naplánováno"
-
-#: ../src/MultiFlexi/Ui/JobInfo.php:39
-msgid "Begin"
-msgstr "Začátek"
-
-#: ../src/MultiFlexi/Ui/JobInfo.php:42
-msgid "Not Yet Started"
-msgstr "Zatím nespuštěno"
-
-#: ../src/MultiFlexi/Ui/JobInfo.php:44
-msgid "End"
-msgstr "Konec"
-
-#: ../src/MultiFlexi/Ui/JobInfo.php:47
-msgid "Not Yet Ended"
-msgstr "Zatím neukončeno"
-
-#: ../src/MultiFlexi/Ui/JobInfo.php:49
-msgid "Commandline"
-msgstr "Příkazová řádka"
-
-#: ../src/MultiFlexi/Ui/JobInfo.php:50
+#: ../src/MultiFlexi/Ui/JobInfo.php:33
 msgid "Exitcode"
 msgstr "Kód při ukončení"
 
-#: ../src/MultiFlexi/Ui/JobInfo.php:53
-msgid "Person"
-msgstr "Osoba"
+#: ../src/MultiFlexi/Ui/JobInfo.php:36 ../src/company.php:47
+msgid "Scheduled"
+msgstr "Naplánováno"
 
-#: ../src/MultiFlexi/Ui/JobInfo.php:54
+#: ../src/MultiFlexi/Ui/JobInfo.php:37
+msgid "Begin"
+msgstr "Začátek"
+
+#: ../src/MultiFlexi/Ui/JobInfo.php:40
+msgid "Not Yet Started"
+msgstr "Zatím nespuštěno"
+
+#: ../src/MultiFlexi/Ui/JobInfo.php:42
+msgid "End"
+msgstr "Konec"
+
+#: ../src/MultiFlexi/Ui/JobInfo.php:45
+msgid "Not Yet Ended"
+msgstr "Zatím neukončeno"
+
+#: ../src/MultiFlexi/Ui/JobInfo.php:51 ../src/app.php:67
+msgid "Launched by"
+msgstr "Kým spuštěno"
+
+#: ../src/MultiFlexi/Ui/JobInfo.php:53
+msgid "Job"
+msgstr "Úloha"
+
+#: ../src/MultiFlexi/Ui/JobInfo.php:58
 msgid "Environment"
 msgstr "Prostředí"
 
@@ -843,8 +876,8 @@ msgstr "Žádná společnost není zatím registrován. Zaregistrujte prosím n�
 msgid "No application registered yet. Please register one."
 msgstr "Žádná aplikace není zatím registrována. Zaregistrujte prosím nějakou."
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:100 ../src/MultiFlexi/Ui/MainMenu.php:126
-#: ../src/apps.php:19 ../src/apps.php:43 ../src/companys.php:33
+#: ../src/MultiFlexi/Ui/MainMenu.php:100 ../src/MultiFlexi/Ui/MainMenu.php:133
+#: ../src/apps.php:19 ../src/apps.php:47 ../src/companys.php:33
 msgid "Applications"
 msgstr "Aplikace"
 
@@ -856,7 +889,7 @@ msgstr "Logy"
 msgid "System"
 msgstr "System"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:108
+#: ../src/MultiFlexi/Ui/MainMenu.php:108 ../src/app.php:94
 msgid "Jobs"
 msgstr "Úlohy"
 
@@ -864,44 +897,56 @@ msgstr "Úlohy"
 msgid "Sign Off"
 msgstr "Odhlášení"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:120
+#: ../src/MultiFlexi/Ui/MainMenu.php:112
+msgid ""
+"MultiFlexi systemd service is not running. Consider `systemctl start "
+"multiflexi`"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:115
+msgid ""
+"Periodic Task Launcher systemd service is not running. Consider `systemctl "
+"enable anacron`"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:127
 msgid "Register Application"
 msgstr "Registruj Aplikaci"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:122
+#: ../src/MultiFlexi/Ui/MainMenu.php:129
 msgid "Application list"
 msgstr "Seznam aplikací"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:139
+#: ../src/MultiFlexi/Ui/MainMenu.php:146
 msgid "Register new Server"
 msgstr "Registrovant nový server"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:141
+#: ../src/MultiFlexi/Ui/MainMenu.php:148
 msgid "Instance list"
 msgstr "Seznam instancí"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:160 ../src/companydelete.php:62
+#: ../src/MultiFlexi/Ui/MainMenu.php:167 ../src/companydelete.php:62
 #: ../src/companysetup.php:66
 msgid "New Company"
 msgstr "Nová společnost"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:160
+#: ../src/MultiFlexi/Ui/MainMenu.php:167
 msgid "Listing"
 msgstr "Přehled"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:180 ../src/customer.php:38
+#: ../src/MultiFlexi/Ui/MainMenu.php:187 ../src/customer.php:38
 msgid "New Customer"
 msgstr "Nový uživatel"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:203
+#: ../src/MultiFlexi/Ui/MainMenu.php:210
 msgid "Admin"
 msgstr "Admin"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:205
+#: ../src/MultiFlexi/Ui/MainMenu.php:212
 msgid "New Admin"
 msgstr "Nový Admin"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:232
+#: ../src/MultiFlexi/Ui/MainMenu.php:239
 msgid "Click to hide messages"
 msgstr "Klikněte pro skrytí zpráv"
 
@@ -1004,25 +1049,29 @@ msgstr "Chyba ukládání Aplikace"
 msgid "New Application"
 msgstr "Nová Aplikace"
 
-#: ../src/app.php:69
-msgid "Launched by"
-msgstr "Kým spuštěno"
-
-#: ../src/app.php:77
+#: ../src/app.php:75
 msgid "Not yet"
 msgstr "Zatím ne"
 
-#: ../src/app.php:85
-msgid "Last 10 Jobs"
-msgstr "Posledních 10 úloh"
+#: ../src/app.php:87
+msgid "Config fields editor"
+msgstr "Editor Konfiguračních položek"
 
-#: ../src/app.php:86
+#: ../src/app.php:93
+msgid "Configuration"
+msgstr "Konfigurace"
+
+#: ../src/app.php:96
 msgid "Application Log"
 msgstr "Logy Aplikace"
 
-#: ../src/app.php:87
+#: ../src/app.php:97
 msgid "All Application Jobs history"
 msgstr "Historie úloh aplikace"
+
+#: ../src/app.php:99
+msgid "Export"
+msgstr "Export"
 
 #: ../src/apps.php:26
 msgid "Image"
@@ -1041,16 +1090,12 @@ msgid "Modified"
 msgstr "Upraveno"
 
 #: ../src/apps.php:26
-msgid "Init Command"
-msgstr "Příkaz pro prvotní nastavení"
-
-#: ../src/apps.php:26
-msgid "Deploy Command"
-msgstr "Příkaz pro instalaci"
-
-#: ../src/apps.php:26
 msgid "HomePage"
 msgstr "Domovská stránka"
+
+#: ../src/apps.php:26
+msgid "Requirements"
+msgstr "Požadavky"
 
 #: ../src/apps.php:29
 msgid "Icon"
@@ -1060,7 +1105,7 @@ msgstr "Ikona"
 msgid "Command not found"
 msgstr "Příkaz nenalezen"
 
-#: ../src/apps.php:43 ../src/servers.php:39
+#: ../src/apps.php:47 ../src/servers.php:39
 msgid "Register new"
 msgstr "Registrovant nový"
 
@@ -1285,6 +1330,14 @@ msgstr "Nejprve vytvořte účet administrátora"
 msgid "Archived Job Run"
 msgstr "Archivované spuštění úlohy"
 
+#: ../src/job.php:34
+msgid "Output"
+msgstr "Výstup"
+
+#: ../src/job.php:35
+msgid "Errors"
+msgstr "Chyby"
+
 #: ../src/joblist.php:14
 msgid "Job history"
 msgstr "Historie úloh"
@@ -1433,6 +1486,201 @@ msgstr "Přidat společnost"
 msgid "Server Instances"
 msgstr "Instance serverů"
 
+#: ../src/translations.php:10
+msgid "Checker"
+msgstr "Zkoušeč"
+
+#: ../src/translations.php:11
+msgid "Check AbraFlexi availbility"
+msgstr "Kontrola dostupnosti AbraFlexi"
+
+#: ../src/translations.php:12
+msgid "Reminder"
+msgstr "Upomínač"
+
+#: ../src/translations.php:13
+msgid "Remind unsettled invoices"
+msgstr "Upomínač neuhrazených faktur"
+
+#: ../src/translations.php:14
+msgid "Debts overview"
+msgstr "Přehled pohledávek"
+
+#: ../src/translations.php:15
+msgid "Gather unsettled invoices"
+msgstr "Získá neuhrazené faktury"
+
+#: ../src/translations.php:16
+msgid "Inventarize"
+msgstr "Inventarizace Závazků"
+
+#: ../src/translations.php:17
+msgid "Send inventarization"
+msgstr "Zasílat inventarizaci"
+
+#: ../src/translations.php:18
+msgid "Issued invoices Matcher"
+msgstr "Párovač vydaných faktur"
+
+#: ../src/translations.php:19
+msgid "Not even Invoice matcher"
+msgstr "Ne pouze párovač faktur"
+
+#: ../src/translations.php:20
+msgid "Recieved invoices Matcher"
+msgstr "Párovač přijatých Faktur"
+
+#: ../src/translations.php:21
+msgid "Match recieved invoices with outcoming payments"
+msgstr "Páruj přijaté faktury s odchozími platbami"
+
+#: ../src/translations.php:22
+msgid "Bank statements puller"
+msgstr "Bank statements puller"
+
+#: ../src/translations.php:23
+msgid "Pull bank statemetnts into AbraFlexi"
+msgstr "Stahni bankovní výpisy do AbraFlexi"
+
+#: ../src/translations.php:24
+msgid "Daily Digest"
+msgstr "Dení přehled"
+
+#: ../src/translations.php:25
+msgid "digest for your Accounting every day"
+msgstr "každodení přehled vašeho účetnictví"
+
+#: ../src/translations.php:26
+msgid "Weekly Digest"
+msgstr "Týdení přehled"
+
+#: ../src/translations.php:27
+msgid "digest for your Accounting every week"
+msgstr "přehled vašeho účetnictví každý týden"
+
+#: ../src/translations.php:28
+msgid "Monthly Digest"
+msgstr "Měsíční přehled"
+
+#: ../src/translations.php:29
+msgid "digest for your Accounting every month"
+msgstr "měsíční přehled vašeho účetnictví"
+
+#: ../src/translations.php:30
+msgid "Contract to Invoices"
+msgstr "Smlouvy na Faktury"
+
+#: ../src/translations.php:31
+msgid "Trigger AbraFlexi contracts to generate invoices"
+msgstr "Spustí generování faktur ze smluv v AbraFlexi"
+
+#: ../src/translations.php:32
+msgid "Email Sender"
+msgstr "Odesílač pošty"
+
+#: ../src/translations.php:33
+msgid "Send unsent documents with attachments"
+msgstr "Odešli neodeslané dokumenty s přílohami"
+
+#: ../src/translations.php:34
+msgid "abraflexi-show-unsent"
+msgstr ""
+
+#: ../src/translations.php:35
+msgid "Zobrazí doklady určené k odeslání (stav_emailu =  odeslat)"
+msgstr ""
+
+#: ../src/translations.php:36
+msgid "abraflexi-raiffeisenbank"
+msgstr ""
+
+#: ../src/translations.php:37
+msgid "Raiffeisen Bank Transaction puller"
+msgstr "Stahovač bankovních výpisů z Raiffeisen banky"
+
+#: ../src/translations.php:38
+msgid "AbraFlexi send"
+msgstr "AbraFlexi odesílač"
+
+#: ../src/translations.php:39
+msgid "Send all documents in Issued Invoices Agenda - selected by status"
+msgstr "Odešle všechny doklady vydaných faktur které ještě nebyly odeslány"
+
+#: ../src/translations.php:40
+msgid "Pohoda Checker"
+msgstr "Zkoušeč Pohody"
+
+#: ../src/translations.php:41
+msgid "Check Stormware mServer availbility"
+msgstr "Zkontroluje dostupnost Stormware mServeru"
+
+#: ../src/translations.php:42
+msgid "Raiffaisen to Pohoda"
+msgstr "Raiffaisen do Pohody"
+
+#: ../src/translations.php:43
+msgid "Raiffaisen Bank statements importer "
+msgstr "Stahovač výpisů Raiffaisen banky "
+
+#: ../src/translations.php:44
+msgid "AllTime Digest"
+msgstr "Vůbec přehled"
+
+#: ../src/translations.php:45
+msgid "digest for your Accounting from begin to now"
+msgstr "přehled vašeho účetnictví od začátku do nynějška"
+
+#: ../src/translations.php:46
+msgid "Yearly Digest"
+msgstr "Roční přehed"
+
+#: ../src/translations.php:47
+msgid "Generate AbraFlexi report every year"
+msgstr "Každoroční AbraFlexi přehled"
+
+#: ../src/translations.php:48
+msgid "Realpad to Mailkit"
+msgstr "Realpad do Mailkitu"
+
+#: ../src/translations.php:49
+msgid "Synchronize Realpad Contacts into Mailkit "
+msgstr "Synchronizuje kontakty z Realpadu do Mailkitu "
+
+#: ../src/translations.php:50
+msgid "Clear Reminder Labels"
+msgstr "Čistič štítků upomínače"
+
+#: ../src/translations.php:51
+msgid "Clear Debtor's labels"
+msgstr "Vymaže štítky dlužníků"
+
+#: ../src/translations.php:52
+msgid "Show Unsent"
+msgstr "Ukaž neodeslané"
+
+#: ../src/translations.php:53
+msgid "Show Unsent documents"
+msgstr "Zobraz neodeslané dokumenty"
+
+#: ../src/translations.php:54
+#| msgid "Multi AbraFlexi"
+msgid "Redmine2AbraFlexi"
+msgstr "Redmine do AbraFlexi"
+
+#: ../src/translations.php:55
+msgid "Redmine WorkHours to AbraFlexi invoice"
+msgstr "Človekohodiny v Redmine do faktury v AbraFlexi"
+
+#: ../src/translations.php:56
+msgid "AbraFlexi Bulk Mailer"
+msgstr "Hromadná pošta z AbraFlexi"
+
+#: ../src/translations.php:57
+msgid ""
+"By Query select recipients from Addressbook and send mail based on template"
+msgstr ""
+"Na základě dotazu zvolí příjmce z adresáře a odesílá mail na základě šablony"
+
 #: ../src/user.php:44
 msgid "Are you sure ?"
 msgstr "Opravdu ?"
@@ -1449,17 +1697,23 @@ msgstr "Yes"
 msgid "Users"
 msgstr "Uživatelé"
 
-#~ msgid "Register AbraFlexi Server"
-#~ msgstr "Zaregistruj nový AbraFlexi server"
+#~ msgid "Commandline"
+#~ msgstr "Příkazová řádka"
+
+#~ msgid "Person"
+#~ msgstr "Osoba"
+
+#~ msgid "Last 10 Jobs"
+#~ msgstr "Posledních 10 úloh"
+
+#~ msgid "Init Command"
+#~ msgstr "Příkaz pro prvotní nastavení"
+
+#~ msgid "Deploy Command"
+#~ msgstr "Příkaz pro instalaci"
 
 #~ msgid "Admin Overview"
 #~ msgstr "Přehled administrátorů"
-
-#~ msgid "AbraFlexi server"
-#~ msgstr "Server AbraFlexi"
-
-#~ msgid "Multi AbraFlexi"
-#~ msgstr "Multi AbraFlexi"
 
 #~ msgid "Modules Availble"
 #~ msgstr "Dostupné moduly"
