@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Multi Flexi\n"
-"POT-Creation-Date: 2023-11-24 11:57+0100\n"
-"PO-Revision-Date: 2023-11-24 12:29+0100\n"
+"POT-Creation-Date: 2023-11-24 14:38+0100\n"
+"PO-Revision-Date: 2023-11-24 15:06+0100\n"
 "Last-Translator: Vítězslav Dvořák <info@vitexsoftware.cz>\n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -102,7 +102,6 @@ msgstr "zvažte: %s"
 
 #: ../src/MultiFlexi/Application.php:302
 #, php-format
-#| msgid "Application list"
 msgid "Application removal %d %s"
 msgstr "Odstranění aplikace %d %s"
 
@@ -118,7 +117,6 @@ msgstr "%s Předloh běhu odstraněno"
 
 #: ../src/MultiFlexi/Application.php:326
 #, php-format
-#| msgid "Config fields Saved"
 msgid "%d Config fields removed"
 msgstr "%d konfiguračních polí odstraněno"
 
@@ -677,7 +675,6 @@ msgid "File upload"
 msgstr "Nahrání souboru"
 
 #: ../src/MultiFlexi/Ui/ConfigFieldsView.php:38
-#| msgid "Required"
 msgid "Requied"
 msgstr "Requied"
 
@@ -877,7 +874,7 @@ msgid "No application registered yet. Please register one."
 msgstr "Žádná aplikace není zatím registrována. Zaregistrujte prosím nějakou."
 
 #: ../src/MultiFlexi/Ui/MainMenu.php:100 ../src/MultiFlexi/Ui/MainMenu.php:133
-#: ../src/apps.php:19 ../src/apps.php:47 ../src/companys.php:33
+#: ../src/apps.php:19 ../src/apps.php:48 ../src/companys.php:33
 msgid "Applications"
 msgstr "Aplikace"
 
@@ -1105,7 +1102,7 @@ msgstr "Ikona"
 msgid "Command not found"
 msgstr "Příkaz nenalezen"
 
-#: ../src/apps.php:47 ../src/servers.php:39
+#: ../src/apps.php:48 ../src/servers.php:39
 msgid "Register new"
 msgstr "Registrovant nový"
 
@@ -1663,7 +1660,6 @@ msgid "Show Unsent documents"
 msgstr "Zobraz neodeslané dokumenty"
 
 #: ../src/translations.php:54
-#| msgid "Multi AbraFlexi"
 msgid "Redmine2AbraFlexi"
 msgstr "Redmine do AbraFlexi"
 
@@ -1680,6 +1676,186 @@ msgid ""
 "By Query select recipients from Addressbook and send mail based on template"
 msgstr ""
 "Na základě dotazu zvolí příjmce z adresáře a odesílá mail na základě šablony"
+
+#: ../src/translations.php:58
+msgid "MultiFlexi Probe"
+msgstr "Multi Flexi Sonda"
+
+#: ../src/translations.php:59
+msgid "Task launcher testing tool"
+msgstr "Testovací nástroj spouštěče úloh"
+
+#: ../src/translations.php:60
+msgid "Certificate file"
+msgstr "Soubor certifikátu"
+
+#: ../src/translations.php:61
+msgid "Certificate password"
+msgstr "Heslo certifickátu"
+
+#: ../src/translations.php:62
+msgid "ClientID"
+msgstr "ID klienta"
+
+#: ../src/translations.php:63
+msgid "Bank Account Number"
+msgstr "Číslo bankovního účtu"
+
+#: ../src/translations.php:64
+msgid "Time scope of transactions downloaded"
+msgstr "Časový rozsah stažených transakcí"
+
+#: ../src/translations.php:65
+msgid "Remind sender mail Address"
+msgstr "mailová adresa odesilatele upomínky"
+
+#: ../src/translations.php:66
+msgid "AbraFlexi Server URI"
+msgstr "URI Serveru AbraFlexi"
+
+#: ../src/translations.php:67
+msgid "AbraFlexi Login"
+msgstr "Login do AbraFlexi"
+
+#: ../src/translations.php:68
+msgid "AbraFlexi password"
+msgstr "AbraFlexi heslo"
+
+#: ../src/translations.php:69
+msgid "AbraFlexi comapny code"
+msgstr "Kód společnosti AbraFlexi"
+
+#: ../src/translations.php:70
+msgid "mServer Api Endpoint"
+msgstr "koncový bod API mServeru"
+
+#: ../src/translations.php:71
+msgid "Report theme"
+msgstr "Téma reportu"
+
+#: ../src/translations.php:72
+msgid "Your Realpad Username"
+msgstr "Vaše uživatelské jméno pro Realpad"
+
+#: ../src/translations.php:73
+msgid "Your Realpad Password"
+msgstr "Vaše heslo do Realpadu"
+
+#: ../src/translations.php:74
+msgid "only tag to export"
+msgstr "exportovat pouze tag"
+
+#: ../src/translations.php:75
+msgid "only project substring to export"
+msgstr "exportovat pouze projekty s podřetězcem v názvu"
+
+#: ../src/translations.php:76
+msgid "grab on integration page"
+msgstr ""
+
+#: ../src/translations.php:77
+msgid "requied, must exists"
+msgstr "vyžadováno, musí existovat"
+
+#: ../src/translations.php:78
+msgid "Send Import Report to"
+msgstr "Odeslat report z importu na"
+
+#: ../src/translations.php:79
+msgid "Report sender From Address"
+msgstr "Adresa odesilatele reportu"
+
+#: ../src/translations.php:80
+msgid "test File uplodad"
+msgstr "zkušební nahrání souboru"
+
+#: ../src/translations.php:81
+msgid "Show debug messages"
+msgstr "Zobraz ladící zprávy"
+
+#: ../src/translations.php:82
+msgid "Do not send messages to customer"
+msgstr "Nezasílat zpravy zákazníkovi"
+
+#: ../src/translations.php:83
+msgid "Default target whe MUTE is ON"
+msgstr "Výchozí cíl, když je MUTE ZAPNUTO"
+
+#: ../src/translations.php:84
+msgid "Include Graphical Logo into messages"
+msgstr "Vložit grafické logo do zpráv"
+
+#: ../src/translations.php:85
+msgid "Include Payment QR Code into messages"
+msgstr "Zahrnout platební QR kód do zpráv"
+
+#: ../src/translations.php:86
+msgid "Carbon Copy for every message sent"
+msgstr "Kopie pro každou odeslanou zprávu"
+
+#: ../src/translations.php:87
+msgid "Default sender address"
+msgstr "Vychozí adresa odesilatele"
+
+#: ../src/translations.php:88
+msgid "Try to temporary unlock document to save sent date in it"
+msgstr "Zkusí dočasně odemknout dokument a uložit do něj datum odeslání"
+
+#: ../src/translations.php:89
+msgid "Do not modify document in AbraFlexi (send state/date)"
+msgstr "Neupravujte dokument v AbraFlexi (stav/datum odeslání)"
+
+#: ../src/translations.php:90
+msgid "Ignore this document types"
+msgstr "Ignorovate dokoumenty tohoto typu"
+
+#: ../src/translations.php:91
+msgid "Add QR Codes into Mails"
+msgstr "Přidat QR kódy do e-mailů"
+
+#: ../src/translations.php:92
+msgid "Add Company logo into Mails"
+msgstr "Přidat logo společnosti do mailů"
+
+#: ../src/translations.php:93
+msgid "Send notifications to customers"
+msgstr "Zasílat upozornění zákazníkům"
+
+#: ../src/translations.php:94
+msgid "Fallback adres when MUTE is ON"
+msgstr "Záložní adresa, když je MUTE ZAPNUTO"
+
+#: ../src/translations.php:95
+msgid "Signature at end of SMS"
+msgstr "Podpis na konci SMS"
+
+#: ../src/translations.php:96
+msgid "Ignore documents/customers with this Label"
+msgstr "Ignorovat dokumenty/zákazníky s tímto štítkem"
+
+#: ../src/translations.php:97
+msgid "Huawei E5180"
+msgstr "Huawei E5180"
+
+#: ../src/translations.php:98
+msgid "Huawei E5180 Password"
+msgstr "Heslo do Huawei E5180"
+
+#: ../src/translations.php:99
+msgid "Ceníková položka práce"
+msgstr ""
+
+#: ../src/translations.php:100
+msgid "Mail Template Filename"
+msgstr "Název souboru šablony pošty"
+
+#: ../src/translations.php:101
+msgid "Filter of recipients"
+msgstr "Filtr příjemců"
+
+#: ../src/translations.php:102
+msgid "Testing file upload field"
+msgstr "Pole pro nahrávání testovacího souboru"
 
 #: ../src/user.php:44
 msgid "Are you sure ?"

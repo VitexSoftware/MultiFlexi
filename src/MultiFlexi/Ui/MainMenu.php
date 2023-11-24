@@ -54,7 +54,7 @@ class MainMenu extends \Ease\Html\DivTag
                 } else {
                     $logo = new \Ease\Html\ImgTag($uInfo[$icon], $uInfo[$namecolumn], ['height' => 20]) . '&nbsp;';
                 }
-                $itemList[$source->keyword . '.php?' . $keycolumn . '=' . $uInfo[$keycolumn]] = $logo . $uInfo[$namecolumn];
+                $itemList[$source->keyword . '.php?' . $keycolumn . '=' . $uInfo[$keycolumn]] = $logo . _($uInfo[$namecolumn]);
             }
         }
 

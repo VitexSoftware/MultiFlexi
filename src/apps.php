@@ -37,7 +37,8 @@ foreach ($allAppData as $appData) {
     }
 
     $appData['homepage'] = new \Ease\Html\ATag($appData['homepage'], $appData['homepage']);
-    $appData['name'] = new \Ease\Html\ATag('app.php?id=' . $appData['id'], $appData['name']);
+    $appData['name'] = new \Ease\Html\ATag('app.php?id=' . $appData['id'], _($appData['name']));
+    $appData['description'] = _($appData['description']);
     unset($appData['setup']);
     unset($appData['cmdparams']);
     unset($appData['deploy']);
