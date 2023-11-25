@@ -32,7 +32,7 @@ use MultiFlexi\Company,
 require_once './init.php';
 $oPage->onlyForLogged();
 $apps = new Application($oPage->getRequestValue('id', 'int'));
-$instanceName = $apps->getDataValue('name');
+$instanceName = _($apps->getDataValue('name'));
 if ($oPage->isPosted()) {
     if ($apps->takeData($_POST) && !is_null($apps->saveToSQL())) {
         $apps->addStatusMessage(_('Application Saved'), 'success');
