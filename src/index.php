@@ -26,6 +26,8 @@ try {
     \Ease\Shared::user()->addStatusMessage($exc->getMessage());
 }
 
+$oPage->container->addItem(new \Ease\Html\DivTag(new OpenClipart('images/openclipart', _('Random OpenClipart'), ['class' => 'mx-auto d-block']), ['style' => 'height: 80%']));
+
 $oPage->addItem(new PageBottom());
 
 $oPage->draw();
