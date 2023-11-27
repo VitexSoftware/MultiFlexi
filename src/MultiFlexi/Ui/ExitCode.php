@@ -18,6 +18,17 @@ class ExitCode extends \Ease\TWB4\Badge
 {
     public function __construct($exitcode, $properties = [])
     {
+        parent::__construct(self::status($exitcode), '&nbsp' . $exitcode . '&nbsp', $properties);
+    }
+
+    /**
+     * Exit Code
+     * 
+     * @param int $exitcode
+     * 
+     * @return string bootstrap color 
+     */
+    public static function status($exitcode) {
         switch (intval($exitcode)) {
             case -1:
                 $type = 'inverse';
@@ -32,6 +43,6 @@ class ExitCode extends \Ease\TWB4\Badge
                 $type = 'danger';
                 break;
         }
-        parent::__construct($type, '&nbsp' . $exitcode . '&nbsp', $properties);
+        return $type;
     }
 }

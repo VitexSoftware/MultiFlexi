@@ -39,12 +39,13 @@ class JobHistoryTable extends \Ease\TWB4\Table
         $this->addRowHeaderColumns([_('Application'), _('Exit Code') . '/' . _('Job ID'), _('Launch time'), _('Launcher'), _('Company')]);
         $company = new \AbraFlexi\Company();
         foreach ($jobs as $job) {
+            $exitCode = $job['exitcode'];
             $company->setDataValue('logo', $job['logo']);
             $company->setDataValue('name', $job['name']);
-            $job['appimage'] = new \Ease\Html\ATag('app.php?id=' . $job['app_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], _($job['appname']), ['height' => 60, 'title' => $job['appname']]), '&nbsp;', _($job['appname'])])]);
+            $job['appimage'] = new \Ease\Html\DivTag(new \Ease\Html\ATag('app.php?id=' . $job['app_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], _($job['appname']), ['height' => 60, 'title' => $job['appname']]), '&nbsp;', _($job['appname'])])]),['class'=>'bg-'.ExitCode::status($exitCode)]);
             unset($job['appname']);
             unset($job['app_id']);
-            $job['id'] = new \Ease\Html\ATag('job.php?id=' . $job['id'], [new ExitCode($job['exitcode'], ['style' => 'font-size: 2.0em; font-family: monospace;']), '<br>' , new \Ease\TWB4\Badge('info', $job['id'])], ['title' => _('Job Info')]);
+            $job['id'] = new \Ease\Html\ATag('job.php?id=' . $job['id'], [new ExitCode($exitCode, ['style' => 'font-size: 1.0em; font-family: monospace;']), '<br>' , new \Ease\TWB4\Badge('info', $job['id'])], ['title' => _('Job Info')]);
             $job['begin'] = [$job['begin'], '<br>', new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
             unset($job['exitcode']);
             $job['launched_by'] = [
