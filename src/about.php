@@ -16,7 +16,7 @@ $oPage->addItem(new PageTop(_('About')));
 $infoBlock = $oPage->container->addItem(
     new \Ease\TWB4\Panel(
         _('About Program'),
-        'info',
+        'default',
         null,
         new \Ease\TWB4\LinkButton(
             'http://vitexsoftware.com/',
@@ -30,13 +30,17 @@ $listing = $infoBlock->addItem(new \Ease\Html\UlTag());
 if (file_exists('../README.md')) {
     $listing->addItem(implode('<br>', file('../README.md')));
 } else {
-    if (file_exists('/usr/share/doc/multiserversetup/README.md')) {
+    if (file_exists('/usr/share/doc/multiflexi/README.md')) {
         $listing->addItem(implode(
             '<br>',
-            file('/usr/share/doc/multiserversetup/README.md')
+            file('/usr/share/doc/multiflexi/README.md')
         ));
     }
 }
+
+$oPage->container->addItem(new \Ease\Html\DivTag(new \Ease\Html\ImgTag('images/openclipart/345630.svg', _('
+AI and Human Relationship'), ['class' => 'mx-auto d-block']), ['style' => 'height: 80%']));
+
 
 $oPage->addItem(new PageBottom());
 
