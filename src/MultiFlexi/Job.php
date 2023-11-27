@@ -454,4 +454,16 @@ class Job extends Engine
         $this->environment = empty($this->getDataValue('env')) ? [] : unserialize($this->getDataValue('env'));
         return $result;
     }
+
+    public function envFile() {
+        $launcher[] = '# ' . \Ease\Shared::appName() . ' v' . \Ease\Shared::AppVersion() . ' job #' . $this->getMyKey() . ' environment. Generated ' . (new \DateTime())->format('Y-m-d H:i:s') . ' for company: ' . $this->company->getDataValue('name');
+        $launcher[] = '';
+        $environment = $this->getDataValue('env') ? unserialize($this->getDataValue('env')) : [];
+        foreach ($environment as $key => $value) {
+            if (is_string($value)) {
+                $launcher[] = $key . "='" . $value . "'";
+            }
+        }
+        return implode("\n", $launcher); 
+    }
 }
