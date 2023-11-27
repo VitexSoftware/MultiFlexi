@@ -42,3 +42,18 @@ Architecture: all
 Description: Run MultiFlexi tasks in container
  Run MultiFlexi tasks in container
 
+Package: multiflexi-api
+Multi-Arch: foreign
+Depends: ${misc:Depends},multiflexi
+Architecture: all
+Description: API Server for MultiFlexi
+ json/xml/yaml/html interface
+
+Package: multiflexi-zabbix
+Multi-Arch: foreign
+Depends: ${misc:Depends},multiflexi
+Recommends: zabbix-agent2
+Architecture: all
+Description: Zabbix support for MultiFlexi
+ LLD for configured content
+
