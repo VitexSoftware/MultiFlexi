@@ -16,7 +16,7 @@ use \Ease\Anonym,
 
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
-$loggers = ['console', 'syslog', '\MultiFlexi\LogToSQL'];
+$loggers = ['syslog', '\MultiFlexi\LogToSQL'];
 if (Functions::cfg('ZABBIX_SERVER')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
@@ -27,16 +27,20 @@ $ap2c = new \MultiFlexi\RunTemplate();
 $companer = new Company();
 $apper = new Application();
 foreach ($companer->listingQuery()->where('enabled', 1) as $companyData) {
-    $companer->setData($companyData);
-    $appsForCompany = $ap2c->getAppsForCompany($companyData['id']);
-    foreach ($appsForCompany as $companyAppData) {
-        $apper->loadFromSQL($companyAppData['app_id']);
-        $appName = $apper->getRecordName();
-        $lldData[] = [
-            '{#APPNAME}' => $appName,
-            '{#INTERVAL}' => Job::codeToInterval($companyAppData['interv']),
-            '{#COMPANY}' => $companyData['name']
-        ];
+    if (array_key_exists(1, $argv) && $argv[1] == '-a') {
+        $companer->setData($companyData);
+        $appsForCompany = $ap2c->getAppsForCompany($companyData['id']);
+        foreach ($appsForCompany as $companyAppData) {
+            $apper->loadFromSQL($companyAppData['app_id']);
+            $appName = $apper->getRecordName();
+            $lldData[] = [
+                '{#APPNAME}' => $appName,
+                '{#INTERVAL}' => Job::codeToInterval($companyAppData['interv']),
+                '{#COMPANY}' => $companyData['name']
+            ];
+        }
+    } else {
+        $lldData[] = ['{#COMPANY}' => $companyData['name']];
     }
 }
 echo json_encode($lldData, JSON_PRETTY_PRINT);
