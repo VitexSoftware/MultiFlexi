@@ -10,7 +10,6 @@
 namespace MultiFlexi\Ui;
 
 use Ease\TWB4\Panel;
-use Ease\TWB4\Row;
 use MultiFlexi\Application;
 use MultiFlexi\Ui\PageBottom;
 use MultiFlexi\Ui\PageTop;

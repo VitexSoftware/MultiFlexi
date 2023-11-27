@@ -42,7 +42,7 @@ class JobHistoryTable extends \Ease\TWB4\Table
             $exitCode = $job['exitcode'];
             $company->setDataValue('logo', $job['logo']);
             $company->setDataValue('name', $job['name']);
-            $job['appimage'] = new \Ease\Html\DivTag(new \Ease\Html\ATag('app.php?id=' . $job['app_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], _($job['appname']), ['height' => 60, 'title' => $job['appname']]), '&nbsp;', _($job['appname'])])]),['class'=>'bg-'.ExitCode::status($exitCode)]);
+            $job['appimage'] = new \Ease\Html\ATag('app.php?id=' . $job['app_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], _($job['appname']), ['height' => 60, 'title' => $job['appname']]), '&nbsp;', _($job['appname'])])]);
             unset($job['appname']);
             unset($job['app_id']);
             $job['id'] = new \Ease\Html\ATag('job.php?id=' . $job['id'], [new ExitCode($exitCode, ['style' => 'font-size: 1.0em; font-family: monospace;']), '<br>' , new \Ease\TWB4\Badge('info', $job['id'])], ['title' => _('Job Info')]);
