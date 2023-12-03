@@ -34,13 +34,14 @@ class ServicesForCompanyForm extends Form
 
         $serverCompanyInfo = (new Company())->listingQuery()->where('company.id', $companyID)->select('servers.type')->leftJoin('servers ON servers.id = company.server')->fetch();
 
-        $platformApps  =  (new Application())->getAvailbleApps($serverCompanyInfo['type']);
+        $platformApps  =  (new Application())->getAvailbleApps($serverCompanyInfo['type'])->orderBy('name');
                 //(new Application())->listingQuery()->select('id AS app_id')->select('name AS app_name')->where('enabled', 1)->fetchAll();
 
         $glue = new RunTemplate();
         $assigned = $glue->getAppsForCompany($companyID);
         parent::__construct($tagProperties);
         $jobber = new \MultiFlexi\Job();
+        $appTabs = new \Ease\TWB4\Tabs();
         foreach ($platformApps as $appData) {
             $appData['company_id'] = $companyID;
             $appData['app_id'] = $appData['id'];
@@ -49,8 +50,9 @@ class ServicesForCompanyForm extends Form
                 $appData['interv'] = $assigned[$appData['id']]['interv'];
                 $appData['runtemplateid'] = $assigned[$appData['id']]['id'];
             }
-            $this->addItem(new AppRow($appData));
+            $appTabs->addTab($appData['name'] ? _($appData['name']) : 'n/a?!', new AppRow($appData));
         }
+        $this->addItem($appTabs);
     }
 
 
