@@ -30,6 +30,25 @@ class Application extends \MultiFlexi\Environmentor implements Injector
     }
 
     /**
+     * Generate Environment for current Job
+     *
+     * @return array
+     */
+    public function compileEnv()
+    {
+        \Ease\Functions::loadClassesInNamespace('MultiFlexi\\Env');
+        $injectors = \Ease\Functions::classesInNamespace('MultiFlexi\\Env');
+        $jobEnv = [];
+        foreach ($injectors as $injector) {
+            $injectorClass = '\\MultiFlexi\\Env\\' . $injector;
+            $jobEnv = array_merge($jobEnv, (new $injectorClass($this))->getEnvironment());
+        }
+        return $jobEnv;
+    }
+
+
+    /**
+     * Obtain Environment to configure application
      *
      * @return array
      */
@@ -40,6 +59,6 @@ class Application extends \MultiFlexi\Environmentor implements Injector
         foreach ($customConfig->getAppConfig($this->engine->company->getMyKey(), $this->engine->application->getMyKey()) as $cfg) {
             $appConfig[$cfg['name']] = $cfg['value'];
         }
-        return $appConfig;
+        return $this->addSelfAsSource($appConfig);
     }
 }

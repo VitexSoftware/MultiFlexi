@@ -442,7 +442,7 @@ class Job extends Engine
             $injectorClass = '\\MultiFlexi\\Env\\' . $injector;
             $jobEnv = array_merge($jobEnv, (new $injectorClass($this))->getEnvironment());
         }
-        return $jobEnv;
+        return Environmentor::flatEnv($jobEnv);
     }
 
     /**
@@ -455,7 +455,8 @@ class Job extends Engine
         return $result;
     }
 
-    public function envFile() {
+    public function envFile()
+    {
         $launcher[] = '# ' . \Ease\Shared::appName() . ' v' . \Ease\Shared::AppVersion() . ' job #' . $this->getMyKey() . ' environment. Generated ' . (new \DateTime())->format('Y-m-d H:i:s') . ' for company: ' . $this->company->getDataValue('name');
         $launcher[] = '';
         $environment = $this->getDataValue('env') ? unserialize($this->getDataValue('env')) : [];
@@ -464,6 +465,6 @@ class Job extends Engine
                 $launcher[] = $key . "='" . $value . "'";
             }
         }
-        return implode("\n", $launcher); 
+        return implode("\n", $launcher);
     }
 }

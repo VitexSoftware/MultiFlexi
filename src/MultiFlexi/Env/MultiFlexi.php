@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi - Handle Loging Environment variables
+ * Multi Flexi - Handle MultiFlexi Environment variables
  *
  * @author    Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright 2023 Vitex Software
@@ -16,24 +16,28 @@ namespace MultiFlexi\Env;
  *
  * @author vitex
  */
-class Logger extends \MultiFlexi\Environmentor implements Injector
+class MultiFlexi extends \MultiFlexi\Environmentor implements Injector
 {
     /**
      * List of all known keys
      *
      * @return array
      */
-
     public static function allKeysHandled()
     {
-        return ['EASE_LOGGER'];
+        return ['MULTIFLEXI', 'MULTIFLEXI_JOB_ID'];
     }
+
     /**
+     * MultiFlexi Related values
      *
      * @return array
      */
     public function getEnvironment(): array
     {
-        return $this->addSelfAsSource(['EASE_LOGGER' => ['value' => 'syslog|console']]);
+        return $this->addSelfAsSource([
+            'MULTIFLEXI' => ['value' => \Ease\Shared::appVersion()],
+            'MULTIFLEXI_JOB_ID' => ['value' => $this->engine->getMyKey()]
+                ]);
     }
 }

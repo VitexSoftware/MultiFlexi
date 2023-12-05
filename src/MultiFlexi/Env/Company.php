@@ -35,6 +35,11 @@ class Company extends \MultiFlexi\Environmentor implements Injector
      */
     public function getEnvironment(): array
     {
-        return $this->engine->company->getEnvironment();
+        $companyEnvironment = [];
+        $companyEnvironmentRaw = $this->engine->company->getEnvironment();
+        foreach ($companyEnvironmentRaw as $key => $value) {
+            $companyEnvironment[$key]['value'] = $value;
+        }
+        return $this->addSelfAsSource($companyEnvironment);
     }
 }

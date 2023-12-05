@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi Flexi -
+ * Multi Flexi - Environment Injector Interface
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software

@@ -118,6 +118,7 @@ class RunTemplate extends Engine
     public function getAppEnvironment()
     {
         $connectionData = $this->getAppInfo();
+
         $customConfig = new Configuration();
 
         $conConfig = $this->getCompanyEnvironment();
@@ -193,14 +194,30 @@ class RunTemplate extends Engine
         $currentApps = $this->getCompanyTemplates($companyId)->where('interv', $interval)->fetchAll('app_id');
         foreach ($appIds as $appId) {
             if (array_key_exists($appId, $currentApps) === false) {
-                $this->insertToSQL(['app_id' => $appId,'company_id' => $companyId,'interv' => $interval]);
+                $this->insertToSQL(['app_id' => $appId, 'company_id' => $companyId, 'interv' => $interval]);
             }
         }
 
         foreach ($currentApps as $currentApp) {
             if (array_search($appId, $appIds) === false) {
-                $this->deleteFromSQL(['app_id' => $appId,'company_id' => $companyId]);
+                $this->deleteFromSQL(['app_id' => $appId, 'company_id' => $companyId]);
             }
         }
+    }
+
+    /**
+     * Return only key=>value pairs
+     *
+     * @param array $envData
+     *
+     * @return array
+     */
+    public static function stripToValues(array $envData)
+    {
+        $env = [];
+        foreach ($envData as $key => $data) {
+            $env[$key] = $data['value'];
+        }
+        return $env;
     }
 }
