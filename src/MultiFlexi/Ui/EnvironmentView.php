@@ -25,11 +25,18 @@ class EnvironmentView extends \Ease\Html\TableTag
     {
         $properties['class'] = 'table';
         parent::__construct(null, $properties);
-        foreach ($environment as $key => $value) {
-            if (stristr($key, 'pass')) {
-                $value = preg_replace('(.)', '*', $value);
+        $this->addRowHeaderColumns([_('Name'), _('Value'), _('Source')]);
+        foreach ($environment as $key => $envData) {
+            if (array_key_exists('type', $envData) && $envData['type'] == 'secret') {
+                $envData['value'] = preg_replace('(.)', '*', $envData['value']);
             }
-            $this->addRowColumns([$key, $value]);
+
+//            if(empty($envData['value'])){
+//TODO                $envData['value'] = new \Ease\TWB4\Badge('danger',_('Required'));
+//            }
+
+            $ns = array_key_exists('source', $envData) ? explode('\\', $envData['source']) : ['n/a'];
+            $this->addRowColumns([$key, $envData['value'], end($ns)]);
         }
     }
 }

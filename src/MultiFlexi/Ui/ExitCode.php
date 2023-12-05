@@ -23,12 +23,13 @@ class ExitCode extends \Ease\TWB4\Badge
 
     /**
      * Exit Code
-     * 
+     *
      * @param int $exitcode
-     * 
-     * @return string bootstrap color 
+     *
+     * @return string bootstrap color
      */
-    public static function status($exitcode) {
+    public static function status($exitcode)
+    {
         switch (intval($exitcode)) {
             case -1:
                 $type = 'inverse';

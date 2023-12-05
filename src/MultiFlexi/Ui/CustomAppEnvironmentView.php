@@ -26,6 +26,11 @@ namespace MultiFlexi\Ui;
  */
 class CustomAppEnvironmentView extends EnvironmentView
 {
+    /**
+     *
+     * @param int $appCompanyID
+     * @param array $properties
+     */
     public function __construct(int $appCompanyID, $properties = [])
     {
         $appToCompany = new \MultiFlexi\RunTemplate($appCompanyID);
@@ -34,10 +39,16 @@ class CustomAppEnvironmentView extends EnvironmentView
         $customConfig = new \MultiFlexi\Configuration();
         $appFields = \MultiFlexi\Conffield::getAppConfigs($appId);
 
-        $appConfig = array_combine(array_keys($appFields), array_fill(0, count($appFields), new \Ease\TWB4\Badge('warning', 'unset')));
+        $envValues = array_merge($appToCompany->getAppEnvironment(), $customConfig->getAppConfig($companyId, $appId));
 
-        foreach ($customConfig->getAppConfig($companyId, $appId) as $cfg) {
-            $appConfig[$cfg['name']] = $cfg['value'];
+//        $appConfig = array_combine(array_keys($appFields), array_fill(0, count($appFields), new \Ease\TWB4\Badge('warning', 'unset')));
+
+        foreach ($appFields as $envName => $envProperties) {
+            if (array_key_exists($envName, $envValues)) {
+                $appConfig[$envName]['value'] = $envValues[$envName];
+            } else {
+                $appConfig[$envName]['value'] = new \Ease\TWB4\Badge('warning', _('unset'));
+            }
         }
         parent::__construct($appConfig, $properties);
     }

@@ -40,7 +40,7 @@ class Conffield extends \Ease\SQL\Engine
      */
     public function appConfigs($appId)
     {
-        return $this->getColumnsFromSQL(['*'], ['app_id' => $appId], 'keyname', 'keyname');
+        return Environmentor::addSource($this->getColumnsFromSQL(['*'], ['app_id' => $appId], 'keyname', 'keyname'), get_class($this));
     }
 
     /**

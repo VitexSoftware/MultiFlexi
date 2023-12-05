@@ -20,7 +20,7 @@ $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company Tasks')));
 $companies = new Company(Document::getRequestValue('company_id', 'int'));
 if (empty($companies->getDataValue('logo')) === false) {
-    $companyTasksHeading[] = new ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']);
+    $companyTasksHeading[] = new ImgTag($companies->getDataValue('logo'), $companies->getDataValue('name'), ['class' => 'img-fluid', 'style' => 'max-height: 100px']);
 }
 $companyTasksHeading[] = new SpanTag($companies->getDataValue('name') . '&nbsp;', ['style' => 'font-size: xxx-large;']);
 $companyTasksHeading[] = _('Assigned applications');

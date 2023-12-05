@@ -44,9 +44,11 @@ class AbraFlexi extends \MultiFlexi\Environmentor implements Injector
             $server = new \MultiFlexi\Servers($this->engine->company->getDataValue('server'));
             if ($server->getDataValue('type') == 'AbraFlexi') {
                 $platformHelper = new \MultiFlexi\AbraFlexi\Company($this->engine->company->getMyKey(), $server->getData());
-                $abraFlexiEnv = $platformHelper->getEnvironment();
+                foreach ($platformHelper->getEnvironment() as $key => $value) {
+                    $abraFlexiEnv[$key] = ['value' => $value];
+                }
             }
         }
-        return $abraFlexiEnv;
+        return $this->addSelfAsSource($abraFlexiEnv);
     }
 }
