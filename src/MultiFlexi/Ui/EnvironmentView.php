@@ -36,7 +36,7 @@ class EnvironmentView extends \Ease\Html\TableTag
 //            }
 
             $ns = array_key_exists('source', $envData) ? explode('\\', $envData['source']) : ['n/a'];
-            $this->addRowColumns([$key, $envData['value'], end($ns)]);
+            $this->addRowColumns([ new \Ease\Html\SpanTag($key, ['title' => array_key_exists('description', $envData) ? $envData['description'] : '']) , $envData['value'], end($ns)]);
         }
     }
 }

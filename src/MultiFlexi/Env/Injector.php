@@ -28,4 +28,13 @@ interface Injector
      * @return array
      */
     public function getEnvironment();
+
+    /**
+     * Add MetaData to Environment Fields
+     *
+     * @param array $environment
+     *
+     * @return array
+     */
+    public function addMetaData(array $environment);
 }

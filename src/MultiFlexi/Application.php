@@ -328,4 +328,14 @@ class Application extends Engine
         $this->addStatusMessage(sprintf(_('%d Jobs removed'), $a2job), is_null($a2job) ? 'error' : 'success');
         return parent::deleteFromSQL($data);
     }
+
+    /**
+     * Configuration Fields with metadata
+     *
+     * @return array
+     */
+    public function getAppEnvironmentFields()
+    {
+        return Conffield::getAppConfigs($this->getMyKey());
+    }
 }

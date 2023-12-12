@@ -16,6 +16,16 @@ namespace MultiFlexi\Ui;
  */
 class CustomAppConfigForm extends EngineForm
 {
+    /**
+     *
+     * @var array
+     */
+    private $modulesEnv;
+
+    /**
+     *
+     * @param type $engine
+     */
     public function __construct($engine)
     {
         parent::__construct($engine, null, ['method' => 'post', 'action' => 'custserviceconfig.php']);
@@ -38,6 +48,7 @@ class CustomAppConfigForm extends EngineForm
 //            }
 //        }
 
+        $job = new \MultiFlexi\Job(['company_id' => $engine->getDataValue('company_id'), 'app_id' => $appId], ['autoload' => false]);
         $values = $engine->getColumnsFromSQL(['name', 'value'], ['app_id' => $appId, 'company_id' => $engine->getDataValue('company_id')], 'name', 'name');
 
         foreach (\MultiFlexi\Conffield::getAppConfigs($engine->getDataValue('app_id')) as $fieldInfo) {
@@ -46,8 +57,7 @@ class CustomAppConfigForm extends EngineForm
             } else {
                 $input = new \Ease\Html\InputTag($fieldInfo['keyname'], array_key_exists($fieldInfo['keyname'], $values) ? $values[$fieldInfo['keyname']]['value'] : $fieldInfo['defval'], ['type' => $fieldInfo['type']]);
             }
-
-            $this->addInput($input, $fieldInfo['keyname'], $fieldInfo['defval'], $fieldInfo['description']);
+            $this->addInput($input, $fieldInfo['keyname'] . '&nbsp;(' . $fieldInfo['source'] . ')', $fieldInfo['defval'], $fieldInfo['description']);
         }
         $this->addItem(new \Ease\Html\InputHiddenTag('app_id', $engine->getDataValue('app_id')));
         $this->addItem(new \Ease\Html\InputHiddenTag('company_id', $engine->getDataValue('company_id')));

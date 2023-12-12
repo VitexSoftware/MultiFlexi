@@ -104,7 +104,7 @@ class Job extends Engine
      */
     public function newJob(int $companyId, int $appId, array $environment, string $scheduled = 'adhoc')
     {
-        return $this->insertToSQL([
+        $jobId = $this->insertToSQL([
                     'company_id' => $companyId,
                     'app_id' => $appId,
                     'env' => \serialize($environment),
@@ -114,6 +114,10 @@ class Job extends Engine
                     'schedule' => $scheduled,
                     'launched_by' => \Ease\Shared::user()->getMyKey()
         ]);
+        $environment['JOB_ID']['value'] = $jobId;
+        $this->environment = $environment;
+        $this->updateToSQL(['env' => serialize($environment)], ['id' => $jobId]);
+        return $jobId;
     }
 
     /**
@@ -199,7 +203,7 @@ class Job extends Engine
      * Prepare Job for run
      *
      * @param int    $runTemplateId ID of RunTempate to use
-     * @param array  $envOverride   use to change default env
+     * @param array  $envOverride   use to change default env [env with info]
      * @param string $name          Description
      */
     public function prepareJob(int $runTemplateId, $envOverride = [], $scheduled = 'adhoc')
@@ -211,7 +215,7 @@ class Job extends Engine
         $this->application = new Application($appId);
         $this->company = new Company($companyId);
 
-        $this->environment = array_merge($this->compileEnv(), $envOverride);
+        $this->environment = array_merge($this->getFullEnvironment(), $envOverride);
         $this->loadFromSQL($this->newJob($companyId, $appId, $this->environment, $scheduled));
         if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
             $this->zabbixMessageData = [
@@ -307,7 +311,7 @@ class Job extends Engine
         $this->commandline = $exec . ' ' . $cmdparams;
         $this->setDataValue('commandline', $this->commandline);
         $this->addStatusMessage('command begin: ' . $this->commandline . '@' . $this->company->getDataValue('name'));
-        $process = new \Symfony\Component\Process\Process(array_merge([$exec], explode(' ', $cmdparams)), null, $this->environment, null, 32767);
+        $process = new \Symfony\Component\Process\Process(array_merge([$exec], explode(' ', $cmdparams)), null, Environmentor::flatEnv($this->environment), null, 32767);
         $process->run(function ($type, $buffer) {
             $logger = new \Ease\Sand();
             $logger->setObjectName('Runner');
@@ -362,8 +366,8 @@ class Job extends Engine
     {
         $cmdparams = $this->application->getDataValue('cmdparams');
         if (is_array($this->environment)) {
-            foreach ($this->environment as $envKey => $envValue) {
-                $cmdparams = str_replace('{' . $envKey . '}', $envValue, strval($cmdparams));
+            foreach ($this->environment as $envKey => $envInfo) {
+                $cmdparams = str_replace('{' . $envKey . '}', $envInfo['value'], strval($cmdparams));
             }
         }
         return $cmdparams;
@@ -429,11 +433,11 @@ class Job extends Engine
     }
 
     /**
-     * Generate Environment for current Job
+     * Gives Full Environment with Full info
      *
-     * @return array
+     * @return array Environment with metadata
      */
-    public function compileEnv()
+    public function getFullEnvironment()
     {
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\\Env');
         $injectors = \Ease\Functions::classesInNamespace('MultiFlexi\\Env');
@@ -442,7 +446,17 @@ class Job extends Engine
             $injectorClass = '\\MultiFlexi\\Env\\' . $injector;
             $jobEnv = array_merge($jobEnv, (new $injectorClass($this))->getEnvironment());
         }
-        return Environmentor::flatEnv($jobEnv);
+        return $jobEnv;
+    }
+
+    /**
+     * Generate Environment for current Job
+     *
+     * @return array
+     */
+    public function compileEnv()
+    {
+        return Environmentor::flatEnv($this->getFullEnvironment());
     }
 
     /**

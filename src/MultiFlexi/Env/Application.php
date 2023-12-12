@@ -59,6 +59,6 @@ class Application extends \MultiFlexi\Environmentor implements Injector
         foreach ($customConfig->getAppConfig($this->engine->company->getMyKey(), $this->engine->application->getMyKey()) as $cfg) {
             $appConfig[$cfg['name']] = $cfg['value'];
         }
-        return $this->addSelfAsSource($appConfig);
+        return $this->addMetaData($this->addSelfAsSource($appConfig));
     }
 }
