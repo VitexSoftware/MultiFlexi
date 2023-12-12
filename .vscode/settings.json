@@ -28,5 +28,22 @@
         "tab.activeBorder": "#ed3d9b",
         "iLoveWorkSpaceColors": true,
         "iLoveWorkSpaceRandom": false
-    }
+    },
+    "sqltools.connections": [
+        {
+            "mssqlOptions": {
+                "appName": "SQLTools",
+                "useUTC": true,
+                "encrypt": true
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 1433,
+            "driver": "MSSQL",
+            "name": "localhost",
+            "group": "devel",
+            "username": "SPOJENET\\vitezslav.dvorak",
+            "database": "StwPh_12345678_2023"
+        }
+    ]
 }

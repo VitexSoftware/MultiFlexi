@@ -22,7 +22,7 @@ class AppLaunchForm extends \Ease\TWB4\Form
         parent::__construct(['name' => 'appLaunchForm', 'action' => 'newjob.php', 'method' => 'post', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']);
 
         $job = new \MultiFlexi\Job(['company_id' => $company, 'app_id' => $app], ['autoload' => false]);
-        $env = $job->compileEnv();
+        $env = $job->getFullEnvironment();
 
         $this->addItem(new \Ease\Html\InputHiddenTag('app_id', $app));
         $this->addItem(new \Ease\Html\InputHiddenTag('company_id', $company));

@@ -473,7 +473,7 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
         $serverEnvironment = $this->getServerEnvironment();
         $companyEnvHelper = new \MultiFlexi\CompanyEnv($this->getMyKey());
         $companyEnvironment = $companyEnvHelper->getData();
-        $companyEnvironment['ABRAFLEXI_COMPANY'] = $this->getCompany();
+        $companyEnvironment['ABRAFLEXI_COMPANY'] = $this->getCompany(); //TODO
         return array_merge($serverEnvironment, $companyEnvironment);
     }
 

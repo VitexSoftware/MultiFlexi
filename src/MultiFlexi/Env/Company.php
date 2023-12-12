@@ -40,6 +40,6 @@ class Company extends \MultiFlexi\Environmentor implements Injector
         foreach ($companyEnvironmentRaw as $key => $value) {
             $companyEnvironment[$key]['value'] = $value;
         }
-        return $this->addSelfAsSource($companyEnvironment);
+        return $this->addMetaData($this->addSelfAsSource($companyEnvironment));
     }
 }

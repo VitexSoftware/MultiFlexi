@@ -49,6 +49,6 @@ class AbraFlexi extends \MultiFlexi\Environmentor implements Injector
                 }
             }
         }
-        return $this->addSelfAsSource($abraFlexiEnv);
+        return $this->addMetaData($this->addSelfAsSource($abraFlexiEnv));
     }
 }

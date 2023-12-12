@@ -47,6 +47,6 @@ class Pohoda extends \MultiFlexi\Environmentor implements Injector
                 $abraFlexiEnv = $platformHelper->getEnvironment();
             }
         }
-        return $this->addSelfAsSource($abraFlexiEnv);
+        return $this->addMetaData($this->addSelfAsSource($abraFlexiEnv));
     }
 }

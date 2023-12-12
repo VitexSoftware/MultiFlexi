@@ -51,6 +51,23 @@ abstract class Environmentor
     }
 
     /**
+     * Add MetaData to Environment Fields
+     *
+     * @param array $environment
+     *
+     * @return array
+     */
+    public function addMetaData(array $environment)
+    {
+        foreach ($this->engine->application->getAppEnvironmentFields() as $key => $envMeta) {
+            if (array_key_exists($key, $environment)) {
+                $environment[$key] = array_merge($envMeta, $environment[$key]);
+            }
+        }
+        return $environment;
+    }
+
+    /**
      * Add source to environment
      *
      * @param array $environmentRaw
@@ -76,10 +93,6 @@ abstract class Environmentor
             $environmentFields[$key]['source'] = $source;
         }
         return $environmentFields;
-    }
-
-    public function functionName($param)
-    {
     }
 
     public static function queryModules(array $modulesToQuery)

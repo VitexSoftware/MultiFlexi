@@ -34,6 +34,6 @@ class Logger extends \MultiFlexi\Environmentor implements Injector
      */
     public function getEnvironment(): array
     {
-        return $this->addSelfAsSource(['EASE_LOGGER' => ['value' => 'syslog|console']]);
+        return $this->addMetaData($this->addSelfAsSource(['EASE_LOGGER' => ['value' => 'syslog|console']]));
     }
 }
