@@ -42,4 +42,20 @@ class Company extends \MultiFlexi\Environmentor implements Injector
         }
         return $this->addMetaData($this->addSelfAsSource($companyEnvironment));
     }
+    
+    /**
+     * 
+     * @return string
+     */
+    public static function name(){
+        return _('Company');
+    }
+    /**
+     * 
+     * @return string
+     */
+    public static function description(){
+        return _('Provide Information about Current company');
+    }
+    
 }
