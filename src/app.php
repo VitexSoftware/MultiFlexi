@@ -9,30 +9,26 @@
 
 namespace MultiFlexi\Ui;
 
-use MultiFlexi\Company,
-
-    \DateTime,
-    \Ease\Html\ATag,
-    \Ease\Html\H3Tag,
-    \Ease\Html\HrTag,
-    \Ease\Html\ImgTag,
-    \Ease\Html\SmallTag,
-    \Ease\TWB4\LinkButton,
-    \Ease\TWB4\Panel,
-    \Ease\TWB4\Row,
-    \Ease\TWB4\Table,
-    \Ease\ui\LiveAge,
-    \MultiFlexi\Application,
-    \MultiFlexi\Conffield,
-    \MultiFlexi\Job,
-    \MultiFlexi\Ui\PageBottom,
-    \MultiFlexi\Ui\PageTop,
-    \MultiFlexi\Ui\AppEditorForm;
+use DateTime;
+use Ease\Html\ATag;
+use Ease\Html\SmallTag;
+use Ease\TWB4\LinkButton;
+use Ease\TWB4\Panel;
+use Ease\TWB4\Row;
+use Ease\TWB4\Table;
+use Ease\TWB4\Tabs;
+use Ease\ui\LiveAge;
+use MultiFlexi\Application;
+use MultiFlexi\Conffield;
+use MultiFlexi\Job;
+use MultiFlexi\Ui\AppEditorForm;
+use MultiFlexi\Ui\PageBottom;
+use MultiFlexi\Ui\PageTop;
 
 require_once './init.php';
 $oPage->onlyForLogged();
 $apps = new Application($oPage->getRequestValue('id', 'int'));
-$instanceName = _($apps->getDataValue('name'));
+$instanceName = _($apps->getDataValue('name') ? $apps->getDataValue('name') : _('n/a'));
 if ($oPage->isPosted()) {
     if ($apps->takeData($_POST) && !is_null($apps->saveToSQL())) {
         $apps->addStatusMessage(_('Application Saved'), 'success');
@@ -76,20 +72,20 @@ foreach ($jobs as $job) {
     } else {
         $job['begin'] = [$job['begin'], '<br>', new SmallTag(new LiveAge((new DateTime($job['begin']))->getTimestamp()))];
     }
-    $job['exitcode'] = new \MultiFlexi\Ui\ExitCode($job['exitcode']);
+    $job['exitcode'] = new ExitCode($job['exitcode']);
     $jobList->addRowColumns($job);
 }
 
 $instanceRow->addColumn(4, is_null($apps->getMyKey()) ?
                 new LinkButton('', _('Config fields'), 'inverse disabled  btn-block') :
                 [
-                    new \MultiFlexi\Ui\ConfigFieldsView(Conffield::getAppConfigs($apps->getMyKey())),
+                    new ConfigFieldsView(Conffield::getAppConfigs($apps->getMyKey())),
                     new LinkButton('conffield.php?app_id=' . $apps->getMyKey(), _('Config fields editor'), 'secondary  btn-block')
                     ]);
 
 $instanceRow->addColumn(4, new AppLogo($apps));
 
-$appTabs = new \Ease\TWB4\Tabs();
+$appTabs = new Tabs();
 $appTabs->addTab(_('Configuration'), $instanceRow);
 $appTabs->addTab(_('Jobs'), [
     $jobList,

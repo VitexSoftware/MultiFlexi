@@ -52,10 +52,14 @@ $addAppForm->addItem(new \Ease\TWB4\SubmitButton(_('(Un)Assign Applications'), '
 $oPage->container->addItem($addAppForm);
 
 $apper = new \MultiFlexi\Application();
+
+$launchTabs = new \Ease\TWB4\Tabs();
 foreach ($assigned as $assignedAppId) {
     $apper->loadFromSQL($assignedAppId);
-    $oPage->container->addItem(new AppInfo($apper, $companer->getMyKey()));
+    $launchTabs->addTab($apper->getRecordName(), new AppInfo($apper, $companer->getMyKey()));
 }
+$oPage->container->addItem($launchTabs);
+
 
 $oPage->addItem(new PageBottom());
 
