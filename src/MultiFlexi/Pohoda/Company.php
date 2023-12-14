@@ -38,8 +38,8 @@ class Company extends \MultiFlexi\Company implements \MultiFlexi\platformCompany
     public function getEnvironment()
     {
         $companyEnvironment = $this->getServerEnvironment();
-        $companyEnvironment['POHODA_ICO'] = $this->getDataValue('ic');
-        $companyEnvironment['POHODA_URL'] = $companyEnvironment['POHODA_URL'] . ':' . $this->getDataValue('company');
+        $companyEnvironment['POHODA_ICO']['value'] = $this->getDataValue('ic');
+        $companyEnvironment['POHODA_URL']['value'] = $companyEnvironment['POHODA_URL']['value'] . ':' . $this->getDataValue('company');
         return array_merge($companyEnvironment, parent::getEnvironment());
     }
 }
