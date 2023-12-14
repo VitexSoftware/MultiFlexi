@@ -9,19 +9,21 @@
 
 namespace MultiFlexi;
 
-use MultiFlexi\Application;
-use Symfony\Component\Process\Process;
+use Ease\Html\DivTag;
+use Ease\Html\H2Tag;
+use Ease\WebPage;
+use SensioLabs\AnsiConverter\AnsiToHtmlConverter;
 
 require_once './init.php';
 $oPage->onlyForLogged();
 
 $jobber = new Job();
 $jobber->prepareJob($oPage->getRequestValue('id', 'int'));
-echo new \Ease\Html\H2Tag(str_replace(' ', '&nbsp;', $jobber->getCmdline()), ['style' => 'color: green']);
+echo new H2Tag(str_replace(' ', '&nbsp;', $jobber->getCmdline()), ['style' => 'color: green']);
 
 $jobber->performJob();
 
-echo new \Ease\Html\DivTag(nl2br((new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert($jobber->getOutputCachePlaintext())));
+echo new DivTag(nl2br((new AnsiToHtmlConverter())->convert($jobber->getOutputCachePlaintext())));
 
-\Ease\WebPage::singleton()->addJavascript("$('body').css('font-family', 'Courier').css('background-color','black');");
+WebPage::singleton()->addJavascript("$('body').css('font-family', 'Courier').css('background-color','black');");
 $oPage->draw();
