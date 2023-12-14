@@ -37,15 +37,15 @@ class Pohoda extends \MultiFlexi\Environmentor implements Injector {
      * @return array
      */
     public function getEnvironment(): array {
-        $abraFlexiEnv = [];
+        $pohodaEnv = [];
         if ($this->engine->company->getDataValue('server')) {
             $server = new \MultiFlexi\Servers($this->engine->company->getDataValue('server'));
             if ($server->getDataValue('type') == 'Pohoda') {
                 $platformHelper = new \MultiFlexi\Pohoda\Company($this->engine->company->getMyKey(), $server->getData());
-                $abraFlexiEnv = $platformHelper->getEnvironment();
+                $pohodaEnv = $platformHelper->getEnvironment();
             }
         }
-        return $this->addMetaData($this->addSelfAsSource($abraFlexiEnv));
+        return $this->addMetaData($this->addSelfAsSource($pohodaEnv));
     }
 
     /**
