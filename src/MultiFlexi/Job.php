@@ -242,7 +242,7 @@ class Job extends Engine
             if (!empty(trim($setupCommand))) {
                 $this->application->addStatusMessage(_('Setup command') . ': ' . $setupCommand, 'debug');
                 $appInfo = $runTemplate->getAppInfo();
-                $appEnvironment = $runTemplate->getAppEnvironment();
+                $appEnvironment = $this->environment;
                 $process = new \Symfony\Component\Process\Process(
                     explode(' ', $setupCommand),
                     null,

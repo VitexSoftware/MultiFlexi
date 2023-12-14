@@ -104,23 +104,17 @@ class RunTemplate extends Engine {
     }
 
     /**
-     *
+     * 
+     * 
+     * 
      * @return array
      */
     public function getAppEnvironment() {
-        $connectionData = $this->getAppInfo();
-
-        $customConfig = new Configuration();
-
-        $conConfig = $this->getCompanyEnvironment();
-
-        $appConfig = [];
-        foreach ($customConfig->getAppConfig($connectionData['company_id'], $connectionData['app_id']) as $cfg) {
-            $appConfig[$cfg['name']] = $cfg['value'];
-        }
-
-        $companyEnv = new CompanyEnv($connectionData['company_id']);
-        return array_merge($conConfig, $companyEnv->getData(), $appConfig);
+        $appInfo = $this->getAppInfo();
+        $jobber = new Job();
+        $jobber->company = new Company(intval($appInfo['company_id']));
+        $jobber->application = new Application(intval($appInfo['app_id']));
+        return $jobber->getFullEnvironment();
     }
 
     /**
