@@ -61,4 +61,21 @@ class Application extends \MultiFlexi\Environmentor implements Injector
         }
         return $this->addMetaData($this->addSelfAsSource($appConfig));
     }
+    
+    /**
+     * 
+     * @return string
+     */
+    public static function name(){
+        return _('Application');
+    }
+    
+    /**
+     * 
+     * @return string
+     */
+    public static function description(){
+        return _('Provide per Application Custom environment');
+    }
+    
 }

@@ -55,6 +55,6 @@ class JobInfo extends \Ease\TWB4\Tabs
 //        $scheduler = new \MultiFlexi\Scheduler();
 //        $scheduled = $scheduler->listingQuery()->where('job', $job->getMyKey())->fetch();
 
-        $this->addTab(_('Environment'), new EnvironmentView($job->getFullEnvironment()));
+        $this->addTab(_('Environment'), new EnvironmentView($job->getEnv()));
     }
 }
