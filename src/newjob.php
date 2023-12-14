@@ -37,7 +37,9 @@ if (!empty($_FILES)) {
         if ($file['error'] == 0) {
             $tmpName = tempnam(sys_get_temp_dir(), 'multiflexi_') . '_' . basename($file['name']);
             if (move_uploaded_file($file['tmp_name'], $tmpName)) {
-                $uploadEnv[$field] = $tmpName;
+                $uploadEnv[$field]['type'] = 'file';
+                $uploadEnv[$field]['source'] = _('Launch Form');
+                $uploadEnv[$field]['value'] = $tmpName;
             }
         }
     }
@@ -49,7 +51,8 @@ $envars = $confField->appConfigs($appId);
 foreach ($envars as $envVarName => $envVarInfo) {
     $override = WebPage::getRequestValue($envVarName);
     if (is_null($override) === false) {
-        $uploadEnv[$envVarName] = $override;
+        $uploadEnv[$envVarName]['source'] = _('Launch Form');
+        $uploadEnv[$envVarName]['value'] = $override;
     }
 }
 
@@ -67,7 +70,7 @@ $instanceRow->addColumn(8, new \Ease\Html\H1Tag($instanceName));
 
 $oPage->container->addItem($instanceRow);
 
-$envTable = new \MultiFlexi\Ui\EnvironmentView($runTemplate->getAppEnvironment());
+$envTable = new \MultiFlexi\Ui\EnvironmentView($jobber->getEnv());
 
 $oPage->container->addItem($envTable);
 
