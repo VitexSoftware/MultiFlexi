@@ -8,5 +8,4 @@ class CompanyNotifyEmail extends AbstractMigration {
         $refTable = $this->table('company');
         $refTable->addColumn('email', 'string', ['null' => 'true', 'length' => 64])->save();
     }
-
 }

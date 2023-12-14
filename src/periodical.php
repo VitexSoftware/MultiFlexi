@@ -22,6 +22,8 @@ if (is_null($companer->getMyKey())) {
     $oPage->redirect('companys.php');
 }
 
+$_SESSION['company'] = $companer->getMyKey();
+
 $houryAppsRaw = \Ease\WebPage::getRequestValue('hourly');
 $dailyAppsRaw = \Ease\WebPage::getRequestValue('daily');
 $weeklyAppsRaw = \Ease\WebPage::getRequestValue('weekly');
@@ -30,8 +32,7 @@ $yearlyAppsRaw = \Ease\WebPage::getRequestValue('yearly');
 
 // 3,4,6,5
 
-function aIDs($apps)
-{
+function aIDs($apps) {
     return empty($apps) ? [] : ((strchr($apps, ',') == false) ? [intval($apps) => intval($apps)] : array_combine(array_map('intval', explode(',', $apps)), array_map('intval', explode(',', $apps))));
 }
 
