@@ -34,12 +34,12 @@ $outputTabs->addTab(_('Output'), new \Ease\ui\OldTerminal(str_replace('backgroun
 $outputTabs->addTab(_('Errors'), $errorTerminal, empty($jobber->getDataValue('stdout')));
 
 $oPage->container->addItem(
-    new Panel(
-        new JobInfo($jobber),
-        'default',
-        $outputTabs,
-        $jobber->getDataValue('command')
-    )
+        new Panel(
+                new JobInfo($jobber),
+                'default',
+                $outputTabs,
+                $jobber->getDataValue('command')
+        )
 );
 
 $oPage->addItem(new PageBottom());
