@@ -20,25 +20,24 @@ use MultiFlexi\Company;
  *
  * @author vitex
  */
-class ServicesForCompanyForm extends Form
-{
+class ServicesForCompanyForm extends Form {
+
     /**
      * Assign Services for company
      *
      * @param Company $company
      * @param array $tagProperties
      */
-    public function __construct($company, $tagProperties = array())
-    {
+    public function __construct($company, $tagProperties = array()) {
         $companyID = $company->getMyKey();
 
         $serverCompanyInfo = (new Company())->listingQuery()->where('company.id', $companyID)->select('servers.type')->leftJoin('servers ON servers.id = company.server')->fetch();
 
-        $platformApps  =  (new Application())->getAvailbleApps($serverCompanyInfo['type'])->orderBy('name');
-                //(new Application())->listingQuery()->select('id AS app_id')->select('name AS app_name')->where('enabled', 1)->fetchAll();
+        $platformApps = (new Application())->getAvailbleApps($serverCompanyInfo['type'])->orderBy('name');
+        //(new Application())->listingQuery()->select('id AS app_id')->select('name AS app_name')->where('enabled', 1)->fetchAll();
 
         $glue = new RunTemplate();
-        $assigned = $glue->getAppsForCompany($companyID);
+        $assigned = $glue->getPeriodAppsForCompany($companyID);
         parent::__construct($tagProperties);
         $jobber = new \MultiFlexi\Job();
         $appTabs = new \Ease\TWB4\Tabs();
@@ -55,16 +54,10 @@ class ServicesForCompanyForm extends Form
         $this->addItem($appTabs);
     }
 
-
-
-
-
-
     /**
      *
      */
-    public function finalize()
-    {
+    public function finalize() {
         Part::twBootstrapize();
         $this->addJavaScript('
 

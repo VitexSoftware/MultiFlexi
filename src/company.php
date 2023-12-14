@@ -60,22 +60,21 @@ foreach ($jobs as $job) {
 
 $companyPanelContents = [];
 $headRow = new Row();
-$headRow->addColumn(2, [new CompanyLogo($companies, ['style' => 'height: 60px']),'&nbsp;',$companies->getRecordName()]);
+$headRow->addColumn(2, [new CompanyLogo($companies, ['style' => 'height: 60px']), '&nbsp;', $companies->getRecordName()]);
 $headRow->addColumn(2, new \Ease\TWB4\LinkButton('companysetup.php?id=' . $companies->getMyKey(), '🛠️&nbsp;' . _('Company setup'), 'primary btn-lg btn-block'));
 $headRow->addColumn(2, new \Ease\TWB4\LinkButton('tasks.php?company_id=' . $companies->getMyKey(), '🔧&nbsp;' . _('Setup tasks'), 'secondary btn-lg btn-block'));
 $headRow->addColumn(2, new \Ease\TWB4\LinkButton('adhoc.php?company_id=' . $companies->getMyKey(), '🚀&nbsp;' . _('Application launcher'), 'secondary btn-lg btn-block'));
 $headRow->addColumn(2, new \Ease\TWB4\LinkButton('periodical.php?company_id=' . $companies->getMyKey(), '🔁&nbsp;' . _('Periodical Tasks'), 'secondary btn-lg btn-block'));
 $headRow->addColumn(2, new \Ease\TWB4\LinkButton('companydelete.php?id=' . $companies->getMyKey(), '☠️&nbsp;' . _('Delete company'), 'danger'));
 
-
 $companyPanelContents[] = new \Ease\Html\H3Tag(_('job queue'));
 $companyPanelContents[] = $jobList;
 $bottomLine = new Row();
 $oPage->container->addItem(new Panel(
-    $headRow,
-    'light',
-    $companyPanelContents,
-    $bottomLine
+                $headRow,
+                'light',
+                $companyPanelContents,
+                $bottomLine
 ));
 $oPage->addItem(new PageBottom());
 $oPage->draw();

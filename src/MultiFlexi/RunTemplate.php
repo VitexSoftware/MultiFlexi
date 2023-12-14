@@ -14,10 +14,9 @@ namespace MultiFlexi;
  *
  * @author vitex
  */
-class RunTemplate extends Engine
-{
-    public function __construct($identifier = null, $options = [])
-    {
+class RunTemplate extends Engine {
+
+    public function __construct($identifier = null, $options = []) {
         $this->myTable = 'runtemplate';
         parent::__construct($identifier, $options);
     }
@@ -32,8 +31,7 @@ class RunTemplate extends Engine
      *
      * @return int
      */
-    public function runTemplateID(int $appId, int $companyId)
-    {
+    public function runTemplateID(int $appId, int $companyId) {
         $runTemplateId = intval($this->listingQuery()->where('company_id=' . $companyId . ' AND app_id=' . $appId)->select('id', true)->fetchColumn());
         return $runTemplateId ? $runTemplateId : $this->dbsync(['app_id' => $appId, 'company_id' => $companyId, 'interv' => 'n']);
     }
@@ -45,13 +43,11 @@ class RunTemplate extends Engine
      *
      * @return bool
      */
-    public function setState(bool $state)
-    {
+    public function setState(bool $state) {
         return $state ? $this->dbsync() : $this->deleteFromSQL();
     }
 
-    public function performInit()
-    {
+    public function performInit() {
         $app = new Application((int) $this->getDataValue('app_id'));
         //        $this->setEnvironment();
         if (empty($app->getDataValue('setup')) == false) {
@@ -68,8 +64,7 @@ class RunTemplate extends Engine
      *
      * @return int
      */
-    public function deleteFromSQL($data = null)
-    {
+    public function deleteFromSQL($data = null) {
         if (is_null($data)) {
             $data = $this->getData();
         }
@@ -77,8 +72,7 @@ class RunTemplate extends Engine
         return parent::deleteFromSQL($data);
     }
 
-    public function getCompanyEnvironment()
-    {
+    public function getCompanyEnvironment() {
         $connectionData = $this->getAppInfo();
         $platformHelperClass = '\\MultiFlexi\\' . $connectionData['type'] . '\\Company';
         $platformHelper = new $platformHelperClass($connectionData['company_id'], $connectionData);
@@ -91,13 +85,11 @@ class RunTemplate extends Engine
      *
      * @return type
      */
-    public function getCompanyTemplates($companyId)
-    {
+    public function getCompanyTemplates($companyId) {
         return $this->listingQuery()->where('company_id', $companyId);
     }
 
-    public function getCompanyAppsByInterval($companyId)
-    {
+    public function getCompanyAppsByInterval($companyId) {
         $companyApps = [
             'h' => [],
             'd' => [],
@@ -115,8 +107,7 @@ class RunTemplate extends Engine
      *
      * @return array
      */
-    public function getAppEnvironment()
-    {
+    public function getAppEnvironment() {
         $connectionData = $this->getAppInfo();
 
         $customConfig = new Configuration();
@@ -136,8 +127,7 @@ class RunTemplate extends Engine
      *
      * @return array
      */
-    public function getAppInfo()
-    {
+    public function getAppInfo() {
         return $this->listingQuery()
                         ->select('apps.*')
                         ->select('apps.id as apps_id')
@@ -154,8 +144,7 @@ class RunTemplate extends Engine
     /**
      *
      */
-    public function setEnvironment()
-    {
+    public function setEnvironment() {
         $cmp = new Company((int) $this->getDataValue('company_id'));
         $cmp->setEnvironment();
         $envNames = [
@@ -171,8 +160,14 @@ class RunTemplate extends Engine
         $cmp->addStatusMessage('setu end' . $exec . '@' . $cmp->getDataValue('name'));
     }
 
-    public function getAppsForCompany($companyID)
-    {
+    /**
+     * All RunTemplates for GivenCompany
+     * 
+     * @param int $companyID
+     * 
+     * @return array
+     */
+    public function getPeriodAppsForCompany($companyID) {
         return $this->getColumnsFromSQL(['app_id', 'interv', 'id'], ['company_id' => $companyID], 'id', 'app_id');
     }
 
@@ -183,13 +178,11 @@ class RunTemplate extends Engine
      *
      * @return boolean save status
      */
-    public function setProvision($status)
-    {
+    public function setProvision($status) {
         return $this->dbsync(['prepared' => $status]);
     }
 
-    public function assignAppsToCompany(int $companyId, array $appIds, string $interval)
-    {
+    public function assignAppsToCompany(int $companyId, array $appIds, string $interval) {
         $availbleApps = (new \MultiFlexi\CompanyApp(new Company($companyId)))->getAssigned()->fetchAll('app_id');
         $currentApps = $this->getCompanyTemplates($companyId)->where('interv', $interval)->fetchAll('app_id');
         foreach ($appIds as $appId) {
@@ -212,8 +205,7 @@ class RunTemplate extends Engine
      *
      * @return array
      */
-    public static function stripToValues(array $envData)
-    {
+    public static function stripToValues(array $envData) {
         $env = [];
         foreach ($envData as $key => $data) {
             $env[$key] = $data['value'];

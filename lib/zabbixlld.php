@@ -29,7 +29,7 @@ $apper = new Application();
 foreach ($companer->listingQuery()->where('enabled', 1) as $companyData) {
     if (array_key_exists(1, $argv) && $argv[1] == '-a') {
         $companer->setData($companyData);
-        $appsForCompany = $ap2c->getAppsForCompany($companyData['id']);
+        $appsForCompany = $ap2c->getPeriodAppsForCompany($companyData['id']);
         foreach ($appsForCompany as $companyAppData) {
             $apper->loadFromSQL($companyAppData['app_id']);
             $appName = $apper->getRecordName();
