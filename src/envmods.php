@@ -9,7 +9,6 @@
 
 namespace MultiFlexi\Ui;
 
-use MultiFlexi\Ui\DbStatus;
 use MultiFlexi\Ui\PageBottom;
 use MultiFlexi\Ui\PageTop;
 
