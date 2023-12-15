@@ -71,10 +71,10 @@ $companyPanelContents[] = new \Ease\Html\H3Tag(_('job queue'));
 $companyPanelContents[] = $jobList;
 $bottomLine = new Row();
 $oPage->container->addItem(new Panel(
-    $headRow,
-    'light',
-    $companyPanelContents,
-    $bottomLine
+                $headRow,
+                'light',
+                $companyPanelContents,
+                $bottomLine
 ));
 $oPage->addItem(new PageBottom());
 $oPage->draw();
