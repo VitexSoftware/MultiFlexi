@@ -19,8 +19,15 @@ final class DefaultCompanyLogo extends AbstractMigration {
      */
     public function change(): void {
         $table = $this->table('company');
-        $table
-                ->changeColumn('logo', 'text', ['null' => true, 'default' => ''])
-                ->update();
+
+        if ($this->adapter->getAdapterType() == 'mysql') {
+            $table
+                    ->changeColumn('logo', 'text', ['null' => true, 'default'=>'', 'limit' => Phinx\Db\Adapter\MysqlAdapter::TEXT_LONG])
+                    ->update();
+        } else {
+            $table
+                    ->changeColumn('logo', 'text', ['null' => true, 'default' => ''])
+                    ->update();
+        }
     }
 }
