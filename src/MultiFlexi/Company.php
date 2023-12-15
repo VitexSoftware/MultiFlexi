@@ -95,9 +95,9 @@ class Company extends \MultiFlexi\Engine
                 unset($data['imageraw']);
             }
         } else {
-            if(empty($this->getDataValue('logo'))){
-                $data['logo'] = 'data:image/svg+xml;base64,' . base64_encode(\AbraFlexi\ui\CompanyLogo::$none);
-            }
+//            if(empty($this->getDataValue('logo'))){
+//                $data['logo'] = 'data:image/svg+xml;base64,' . base64_encode(\AbraFlexi\ui\CompanyLogo::$none);
+//            }
         }
 
 
