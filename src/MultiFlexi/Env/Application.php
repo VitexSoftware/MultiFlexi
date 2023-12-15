@@ -16,14 +16,15 @@ namespace MultiFlexi\Env;
  *
  * @author vitex
  */
-class Application extends \MultiFlexi\Environmentor implements Injector {
-
+class Application extends \MultiFlexi\Environmentor implements Injector
+{
     /**
      * List of all known keys
      *
      * @return array
      */
-    public static function allKeysHandled() {
+    public static function allKeysHandled()
+    {
         return [];
     }
 
@@ -32,7 +33,8 @@ class Application extends \MultiFlexi\Environmentor implements Injector {
      *
      * @return array
      */
-    public function compileEnv() {
+    public function compileEnv()
+    {
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\\Env');
         $injectors = \Ease\Functions::classesInNamespace('MultiFlexi\\Env');
         $jobEnv = [];
@@ -48,7 +50,8 @@ class Application extends \MultiFlexi\Environmentor implements Injector {
      *
      * @return array
      */
-    public function getEnvironment(): array {
+    public function getEnvironment(): array
+    {
         $customConfig = new \MultiFlexi\Configuration();
         $appConfig = [];
         foreach ($customConfig->getAppConfig($this->engine->company->getMyKey(), $this->engine->application->getMyKey()) as $cfg) {
@@ -58,18 +61,20 @@ class Application extends \MultiFlexi\Environmentor implements Injector {
     }
 
     /**
-     * 
+     *
      * @return string
      */
-    public static function name() {
+    public static function name()
+    {
         return _('Application');
     }
 
     /**
-     * 
+     *
      * @return string
      */
-    public static function description() {
+    public static function description()
+    {
         return _('Provide per Application Custom environment');
     }
 }

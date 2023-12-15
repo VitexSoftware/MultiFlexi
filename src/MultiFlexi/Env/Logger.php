@@ -36,21 +36,22 @@ class Logger extends \MultiFlexi\Environmentor implements Injector
     {
         return $this->addMetaData($this->addSelfAsSource(['EASE_LOGGER' => ['value' => 'syslog|console']]));
     }
-    
+
     /**
-     * 
+     *
      * @return string
      */
-    public static function name(){
+    public static function name()
+    {
         return _('Logger');
     }
-    
+
     /**
-     * 
+     *
      * @return string
      */
-    public static function description(){
+    public static function description()
+    {
         return _('Handle Logging for Ease Framework based Applications');
     }
-    
 }

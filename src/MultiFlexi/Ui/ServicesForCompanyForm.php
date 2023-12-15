@@ -20,15 +20,16 @@ use MultiFlexi\Company;
  *
  * @author vitex
  */
-class ServicesForCompanyForm extends Form {
-
+class ServicesForCompanyForm extends Form
+{
     /**
      * Assign Services for company
      *
      * @param Company $company
      * @param array $tagProperties
      */
-    public function __construct($company, $tagProperties = array()) {
+    public function __construct($company, $tagProperties = array())
+    {
         $companyID = $company->getMyKey();
 
         $serverCompanyInfo = (new Company())->listingQuery()->where('company.id', $companyID)->select('servers.type')->leftJoin('servers ON servers.id = company.server')->fetch();
@@ -57,7 +58,8 @@ class ServicesForCompanyForm extends Form {
     /**
      *
      */
-    public function finalize() {
+    public function finalize()
+    {
         Part::twBootstrapize();
         $this->addJavaScript('
 

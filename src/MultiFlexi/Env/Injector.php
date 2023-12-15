@@ -37,7 +37,7 @@ interface Injector
      * @return array
      */
     public function addMetaData(array $environment);
-    
+
     /**
      * @return string name
      */
@@ -47,5 +47,4 @@ interface Injector
      * @return string name
      */
     public static function description();
-    
 }

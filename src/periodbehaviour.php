@@ -21,7 +21,7 @@ $runTemplater->loadFromSQL($runTemplater->runTemplateID(WebPage::getRequestValue
 
 $oPage->addItem(new PageTop(_('Periodical Tasks')));
 
-$oPage->container->addItem(nl2br(print_r($runTemplater->getData(),1)) );
+$oPage->container->addItem(nl2br(print_r($runTemplater->getData(), 1)));
 
 $oPage->addItem(new PageBottom());
 

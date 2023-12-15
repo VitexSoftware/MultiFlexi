@@ -32,7 +32,8 @@ $yearlyAppsRaw = \Ease\WebPage::getRequestValue('yearly');
 
 // 3,4,6,5
 
-function aIDs($apps) {
+function aIDs($apps)
+{
     return empty($apps) ? [] : ((strchr($apps, ',') == false) ? [intval($apps) => intval($apps)] : array_combine(array_map('intval', explode(',', $apps)), array_map('intval', explode(',', $apps))));
 }
 

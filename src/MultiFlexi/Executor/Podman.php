@@ -9,7 +9,7 @@ declare(strict_types=1);
  * @copyright  2023 Vitex Software
  */
 
-namespace MultiFlexi\Excutor;
+namespace MultiFlexi\Executor;
 
 /**
  * Description of Podman
@@ -27,6 +27,24 @@ class Podman extends \Ease\Sand implements \MultiFlexi\executor
     public function __construct($job)
     {
         $this->job = $job;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public static function name(): string
+    {
+        return _('Podman');
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public static function description(): string
+    {
+        return _('Execute jobs in container using podman');
     }
 
     public function launch()
