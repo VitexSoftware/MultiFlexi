@@ -51,21 +51,22 @@ class AbraFlexi extends \MultiFlexi\Environmentor implements Injector
         }
         return $this->addMetaData($this->addSelfAsSource($abraFlexiEnv));
     }
-    
+
     /**
-     * 
+     *
      * @return string
      */
-    public static function name(){
+    public static function name()
+    {
         return 'AbraFlexi';
     }
-    
+
     /**
-     * 
+     *
      * @return string
      */
-    public static function description(){
+    public static function description()
+    {
         return _('Provide Connection credentials for AbraFlexi');
     }
-    
 }

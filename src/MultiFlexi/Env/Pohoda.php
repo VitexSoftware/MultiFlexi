@@ -16,14 +16,15 @@ namespace MultiFlexi\Env;
  *
  * @author vitex
  */
-class Pohoda extends \MultiFlexi\Environmentor implements Injector {
-
+class Pohoda extends \MultiFlexi\Environmentor implements Injector
+{
     /**
      * List of all known keys
      *
      * @return array
      */
-    public static function allKeysHandled() {
+    public static function allKeysHandled()
+    {
         return [
             'POHODA_URL',
             'POHODA_USERNAME',
@@ -36,7 +37,8 @@ class Pohoda extends \MultiFlexi\Environmentor implements Injector {
      *
      * @return array
      */
-    public function getEnvironment(): array {
+    public function getEnvironment(): array
+    {
         $pohodaEnv = [];
         if ($this->engine->company->getDataValue('server')) {
             $server = new \MultiFlexi\Servers($this->engine->company->getDataValue('server'));
@@ -49,20 +51,20 @@ class Pohoda extends \MultiFlexi\Environmentor implements Injector {
     }
 
     /**
-     * 
+     *
      * @return string
      */
-    public static function name() {
+    public static function name()
+    {
         return _('Pohoda mServer');
     }
-    
+
     /**
-     * 
+     *
      * @return string
      */
-    public static function description(){
+    public static function description()
+    {
         return _('Provide Connection information for Stromware Pohoda');
     }
-   
-    
 }

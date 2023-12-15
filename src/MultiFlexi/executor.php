@@ -15,6 +15,19 @@ namespace MultiFlexi;
  */
 interface executor
 {
+    /**
+     *
+     * @return string
+     */
+    public static function name(): string;
+
+    /**
+     *
+     * @return string
+     */
+    public static function description(): string;
+
     public function launch();
+
     public function storeLogs();
 }

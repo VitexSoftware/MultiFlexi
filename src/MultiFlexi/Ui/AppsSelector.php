@@ -16,11 +16,12 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class AppsSelector extends \Ease\Html\InputTextTag {
-
+class AppsSelector extends \Ease\Html\InputTextTag
+{
     use \Ease\ui\Selectizer;
 
-    public function __construct($identifier = null, $enabled = []) {
+    public function __construct($identifier = null, $enabled = [])
+    {
         parent::__construct($identifier, $enabled);
 
         $apper = new \MultiFlexi\Application();

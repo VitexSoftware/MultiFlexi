@@ -32,9 +32,9 @@ class Server extends \MultiFlexi\Engine implements \MultiFlexi\platformServer
     public function getEnvironment()
     {
         return [
-            'POHODA_URL' => ['value'=>$this->getDataValue('url')],
-            'POHODA_USERNAME' => ['value'=>$this->getDataValue('user')],
-            'POHODA_PASSWORD' => ['value'=>$this->getDataValue('password')]
+            'POHODA_URL' => ['value' => $this->getDataValue('url')],
+            'POHODA_USERNAME' => ['value' => $this->getDataValue('user')],
+            'POHODA_PASSWORD' => ['value' => $this->getDataValue('password')]
         ];
     }
 }

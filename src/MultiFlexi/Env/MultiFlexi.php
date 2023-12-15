@@ -40,21 +40,22 @@ class MultiFlexi extends \MultiFlexi\Environmentor implements Injector
             'JOB_ID' => ['value' => $this->engine->getMyKey()]
         ]));
     }
-    
+
     /**
-     * 
+     *
      * @return string
      */
-    public static function name(){
+    public static function name()
+    {
         return _('MultiFlexi');
     }
-    
+
     /**
-     * 
+     *
      * @return string
      */
-    public static function description(){
+    public static function description()
+    {
         return _('Provide Informations about Current running Environment');
     }
-    
 }
