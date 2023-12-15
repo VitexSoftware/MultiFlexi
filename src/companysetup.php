@@ -54,6 +54,7 @@ if ($oPage->isPosted()) {
 } else {
     if (!empty(WebPage::getGetValue('company'))) {
         $companies->setDataValue('company', WebPage::getGetValue('company'));
+        $companies->setDataValue('code', WebPage::getGetValue('code'));
         $companies->setDataValue('name', WebPage::getGetValue('name'));
         $companies->setDataValue('ic', WebPage::getGetValue('ic'));
         $companies->setDataValue('email', WebPage::getGetValue('email'));

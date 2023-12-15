@@ -22,12 +22,12 @@ use Ease\TWB4\Widgets\Toggle;
  *
  * @author
  */
-class CompanyEditorForm extends EngineForm
-{
-    public function afterAdd()
-    {
+class CompanyEditorForm extends EngineForm {
+
+    public function afterAdd() {
         $this->setTagProperty('enctype', 'multipart/form-data');
         $this->addInput(new InputTextTag('name'), _('Company name'));
+        $this->addInput(new InputTextTag('code', null, ['maxlength' => 10, "onkeyup" => "this.value = this.value.toUpperCase();"]), _('Company code'));
         $this->addInput(new InputTextTag('company'), _('Company selector'), _('firma_s_r_o_ or 30000'), _('For AbraFlexi use lowercase and for Pohoda use mServer port number'));
         $this->addInput(new InputTextTag('ic'), _('Organization ID'));
         $this->addInput(new InputEmailTag('email'), _('Send notification to'));
@@ -36,18 +36,18 @@ class CompanyEditorForm extends EngineForm
         $imgInput = $this->addInput(new \Ease\Html\InputFileTag('imageraw'), _('Company Logo'));
 
         $this->addInput(
-            new SemaforLight((bool) $this->engine->getDataValue('rw')),
-            _('write permission')
+                new SemaforLight((bool) $this->engine->getDataValue('rw')),
+                _('write permission')
         );
         $this->addItem(new InputHiddenTag('rw', false));
         $this->addInput(
-            new SemaforLight((bool) $this->engine->getDataValue('setup')),
-            _('Setup performed')
+                new SemaforLight((bool) $this->engine->getDataValue('setup')),
+                _('Setup performed')
         );
         $this->addItem(new InputHiddenTag('setup'), false);
         $this->addInput(
-            new SemaforLight((bool) $this->engine->getDataValue('webhook')),
-            _('WebHook established')
+                new SemaforLight((bool) $this->engine->getDataValue('webhook')),
+                _('WebHook established')
         );
         $this->addItem(new InputHiddenTag('webhook'));
         $this->addInput(new Toggle('enabled'), _('Enabled'));

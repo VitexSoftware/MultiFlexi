@@ -94,6 +94,10 @@ class Company extends \MultiFlexi\Engine
                 unlink($uploadfile);
                 unset($data['imageraw']);
             }
+        } else {
+            if(empty($this->getDataValue('logo'))){
+                $data['logo'] = 'data:image/svg+xml;base64,' . base64_encode(\AbraFlexi\ui\CompanyLogo::$none);
+            }
         }
 
 
@@ -146,4 +150,6 @@ class Company extends \MultiFlexi\Engine
     {
         return (new CompanyEnv($this->getMyKey()))->getData();
     }
+    
+    
 }
