@@ -10,7 +10,7 @@
 namespace MultiFlexi;
 
 /**
- * Description of AppToCompany
+ *
  *
  * @author vitex
  */

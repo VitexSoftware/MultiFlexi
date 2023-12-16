@@ -3,16 +3,9 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi -
+ * Multi Flexi - Application Presest assigned to Coompany
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
- */
-
-/**
- *
- *
- * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software
  */
 
