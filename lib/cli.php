@@ -23,7 +23,7 @@ if (\Ease\Functions::cfg('APP_DEBUG') == 'true') {
     $loggers[] = 'console';
 }
 define('EASE_LOGGER', implode('|', $loggers));
-define('APP_NAME', 'MultiFlexi trigger');
+define('APP_NAME', 'MultiFlexi cli');
 Shared::user(new Anonym());
 
 $command = array_key_exists(1, $argv) ? $argv[1] : 'help';
@@ -56,6 +56,7 @@ switch ($command) {
                 break;
 
             default:
+                echo "list what ?\n";
                 $data = false;
                 break;
         }
