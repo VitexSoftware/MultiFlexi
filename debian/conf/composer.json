@@ -10,7 +10,8 @@
     "symfony/process": "*",
     "sensiolabs/ansi-to-html": "*",
     "zarplata/zabbix-sender": "dev-master",
-    "rcubitto/json-pretty": "dev-master"
+    "rcubitto/json-pretty": "dev-master",
+    "phplucidframe/console-table": "dev-master"
   },
   "license": "MIT",
   "authors": [
