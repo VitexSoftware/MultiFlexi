@@ -42,3 +42,6 @@ db/multiflexi
 /nbproject/configs/
 /db/multiflexi.sqlite
 /src/translations.php
+/debian/multiflexi-zabbix/
+/debian/multiflexi-podman/
+/debian/multiflexi-api/
