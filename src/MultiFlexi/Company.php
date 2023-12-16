@@ -150,6 +150,4 @@ class Company extends \MultiFlexi\Engine
     {
         return (new CompanyEnv($this->getMyKey()))->getData();
     }
-    
-    
 }
