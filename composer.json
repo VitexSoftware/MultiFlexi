@@ -19,7 +19,8 @@
         "dyorg/slim-token-authentication": "*",
         "tuupola/slim-basic-auth": "*",
         "vitexsoftware/ease-core": "dev-main",
-        "rcubitto/json-pretty": "dev-master"
+        "rcubitto/json-pretty": "dev-master",
+        "phplucidframe/console-table": "dev-master"
     },
     "license": "MIT",
     "authors": [
