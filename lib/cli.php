@@ -73,7 +73,7 @@ switch ($command) {
                     'customer',
                     'email',
                     'code'
-                ]);
+                ])->fetchAll();
                 break;
             default:
                 echo "list what ?\n";
