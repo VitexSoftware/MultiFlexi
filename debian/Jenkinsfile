@@ -65,6 +65,7 @@ distributions.each {
                     sh 'cat /etc/multiflexi/multiflexi.env'
                     sh 'sudo ls -la /var/lib/dbconfig-common/sqlite3/multiflexi/'
                     sh 'sudo cat /var/lib/dbconfig-common/sqlite3/multiflexi/multiflexi'
+                    sh 'sudo apt install -y lsof'
                     sh 'sudo lsof /var/lib/dbconfig-common/sqlite3/multiflexi/multiflexi'
                     sh 'multiflexi-cli list apps'
                     stash includes: 'dist/**', name: 'dist-' + distroCodename
