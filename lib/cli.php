@@ -41,7 +41,7 @@ switch ($command) {
                 $data = $engine->listingQuery()->select([
                             'id',
                             'enabled',
-                            'image like "" as image',
+                            'image not like "" as image',
                             "name",
                             'description',
                             'executable',
@@ -54,7 +54,27 @@ switch ($command) {
                             'requirements'
                                 ], true)->fetchAll();
                 break;
-
+            case 'companys':
+                $engine = new Company();
+                $data = $engine->listingQuery()->select([
+                    'id',
+                    'enabled',
+                    'settings',
+                    'logo  not like "" as logo',
+                    'server',
+                    'name',
+                    'ic',
+                    'company',
+                    'rw',
+                    'setup',
+                    'webhook',
+                    'DatCreate',
+                    'DatUpdate',
+                    'customer',
+                    'email',
+                    'code'
+                ]);
+                break;
             default:
                 echo "list what ?\n";
                 $data = false;
