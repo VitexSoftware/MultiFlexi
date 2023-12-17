@@ -61,13 +61,7 @@ distributions.each {
                     sh 'IFS="\n\b"; for package in  `ls $WORKSPACE/dist/debian/ | grep .deb | grep sqlite | awk -F_ \'{print \$1}\'` ; do  echo -e "${GREEN} installing ${package} on `lsb_release -sc` ${ENDCOLOR} " ; sudo  DEBIAN_FRONTEND=noninteractive DEBCONF_DEBUG=' + debconf_debug  + ' apt-get -y install $package ; done;'
                     sh '/etc/cron.daily/multiflexi || true'
                     sh 'multiflexi-cli version'
-                    sh 'sudo cat /etc/dbconfig-common/multiflexi.conf'
-                    sh 'cat /etc/multiflexi/multiflexi.env'
-                    sh 'sudo ls -la /var/lib/dbconfig-common/sqlite3/multiflexi/'
-                    sh 'sudo cat /var/lib/dbconfig-common/sqlite3/multiflexi/multiflexi'
-                    sh 'sudo apt install -y lsof'
-                    sh 'sudo lsof /var/lib/dbconfig-common/sqlite3/multiflexi/multiflexi'
-                    sh 'multiflexi-cli list apps'
+                    sh 'sudo multiflexi-cli list apps'
                     stash includes: 'dist/**', name: 'dist-' + distroCodename
                 }
             }
