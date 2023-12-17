@@ -27,6 +27,10 @@ if (is_null($companer->getMyKey())) {
 }
 
 $companyApp = new \MultiFlexi\CompanyApp($companer);
+if (\Ease\WebPage::isPosted()) {
+    $companyApp->assignApps(strchr($appsAssigned, ',') === false ? [intval($appsAssigned)] : array_map('intval', explode(',', $appsAssigned)));
+}
+
 
 $oPage->addItem(new PageTop(_('Applications used by Company')));
 
@@ -35,19 +39,26 @@ $addAppForm->addItem(new \Ease\Html\InputHiddenTag('company_id', $companer->getM
 
 $assignedRaw = $companyApp->getAssigned()->fetchAll('app_id');
 $assigned = empty($assignedRaw) ? [] : array_keys($assignedRaw);
+$chooseApp = new AppsSelector('appsassigned', implode(',', $assigned));
 
-$addAppForm->addItem(new \Ease\Html\H2Tag(sprintf(_('Launch application upon %s company'), $companer->getRecordName())));
+
+
+$addAppForm->addItem(new \Ease\Html\H2Tag(sprintf(_('Choose Applications to use with %s company'), $companer->getRecordName())));
+
+$addAppForm->addItem($chooseApp);
+
+$addAppForm->addItem(new \Ease\TWB4\SubmitButton(_('(Un)Assign Applications'), 'success btn-lg btn-block'));
 
 $oPage->container->addItem($addAppForm);
 
-$apper = new \MultiFlexi\Application();
-
-$launchTabs = new \Ease\TWB4\Tabs();
-foreach ($assigned as $assignedAppId) {
-    $apper->loadFromSQL($assignedAppId);
-    $launchTabs->addTab($apper->getRecordName(), new AppInfo($apper, $companer->getMyKey()));
-}
-$oPage->container->addItem($launchTabs);
+//$apper = new \MultiFlexi\Application();
+//
+//$launchTabs = new \Ease\TWB4\Tabs();
+//foreach ($assigned as $assignedAppId) {
+//    $apper->loadFromSQL($assignedAppId);
+//    $launchTabs->addTab($apper->getRecordName(), new AppInfo($apper, $companer->getMyKey()));
+//}
+//$oPage->container->addItem($launchTabs);
 
 
 $oPage->addItem(new PageBottom());
