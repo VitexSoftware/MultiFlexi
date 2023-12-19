@@ -20,7 +20,7 @@ final class AppVersionImage extends AbstractMigration {
     public function change(): void {
         $table = $this->table('apps');
         $table
-                ->addColumn('image', 'string', ['comment' => 'Container Image', 'null' => true, 'default' => ''])
+                ->addColumn('ociimage', 'string', ['comment' => 'Container Image', 'null' => true, 'default' => ''])
                 ->addColumn('version', 'string', ['comment' => 'application version', 'null' => true, 'default' => ''])
                 ->update();
     }
