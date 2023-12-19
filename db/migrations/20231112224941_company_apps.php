@@ -20,22 +20,12 @@ final class CompanyApps extends AbstractMigration
     public function change(): void
     {
         
-        if ($this->adapter->getAdapterType() == 'sqlite') {
-            $int = 'integer';
-        } else {
-            $int = 'biginteger'; 
-        }
-     
-        $int = 'integer'; // 
-        $signed = true;   // 
-        
         $table = $this->table('companyapp');
-        $table->addColumn('app_id', $int, ['null' => false,'signed' => $signed])
-        ->addColumn('company_id', $int, ['null' => false,'signed' => $signed])
+        $table->addColumn('app_id', 'integer', ['null' => false, 'signed' => false])
+        ->addColumn('company_id', 'integer', ['null' => false, 'signed' => false])
         ->addIndex(['app_id', 'company_id'], ['unique' => true])
         ->addForeignKey('app_id', 'apps', ['id'], ['constraint' => 'a2c-app_must_exist'])
         ->addForeignKey('company_id', 'company', ['id'], ['constraint' => 'a2c-company_must_exist']);
         $table->save();
-
     }
 }

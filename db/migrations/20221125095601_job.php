@@ -19,10 +19,10 @@ final class Job extends AbstractMigration {
      */
     public function change() {
         $table = $this->table('job');
-        $table->addColumn('app_id', 'biginteger', ['null' => false, 'signed' => false])
+        $table->addColumn('app_id', 'integer', ['null' => false, 'signed' => false])
                 ->addColumn('begin', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
                 ->addColumn('end', 'datetime', ['null' => true])
-                ->addColumn('company_id', 'biginteger', ['null' => false,'signed'=>false])
+                ->addColumn('company_id', 'integer', ['null' => false,'signed'=>false])
                 ->addColumn('exitcode', 'integer', ['null' => true])
                 ->addForeignKey('app_id', 'apps', ['id'],
                         ['constraint' => 'job-app_must_exist'])
@@ -32,7 +32,7 @@ final class Job extends AbstractMigration {
 
         if ($this->adapter->getAdapterType() != 'sqlite') {
             $table
-                ->changeColumn('id', 'biginteger', ['identity' => true, 'signed' => false])
+                ->changeColumn('id', 'integer', ['identity' => true, 'signed' => false])
                 ->save();
         }
 

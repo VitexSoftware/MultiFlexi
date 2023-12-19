@@ -11,7 +11,7 @@ final class Logger extends AbstractMigration {
     public function change(): void {
         // create the table
         $table = $this->table('log');
-        $table->addColumn('company_id', 'biginteger', ['null' => true, 'signed' => false, 'comment' => 'applied to company'])
+        $table->addColumn('company_id', 'integer', ['null' => true, 'signed' => false, 'comment' => 'applied to company'])
                 ->addColumn('apps_id', 'integer', ['null' => true, 'comment' => 'application used'])
                 ->addColumn('user_id', 'integer', ['null' => true, 'comment' => 'signed user'])
                 ->addColumn('severity', 'string', ['comment' => 'message type'])
@@ -24,7 +24,7 @@ final class Logger extends AbstractMigration {
 
                 if ($this->adapter->getAdapterType() != 'sqlite') {
                     $table
-                        ->changeColumn('id', 'biginteger', ['identity' => true, 'signed' => false])
+                        ->changeColumn('id', 'integer', ['identity' => true, 'signed' => false])
                         ->save();
                 }
         
