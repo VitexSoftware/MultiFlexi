@@ -33,6 +33,8 @@ class AppEditorForm extends EngineForm
         $imgInput = $this->addInput(new InputFileTag('imageraw'), _('Application Icon'));
         $this->addInput(new Toggle('enabled', $this->engine->getDataValue('enabled') == 1), _('Enabled'));
         $this->addInput(new InputTextTag('homepage'), _('Application Homepage'));
+        $this->addInput(new InputTextTag('image'), _('Container image'));
+        $this->addInput(new InputTextTag('version'), _('Current Version of Application'));
         $this->addInput(new InputTextTag('deploy'), _('Application deploy command'));
         $this->addInput(new SubmitButton(_('Save'), 'success'));
         if (!is_null($this->engine->getDataValue('id'))) {
