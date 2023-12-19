@@ -24,10 +24,10 @@ class Company extends AbstractMigration {
                 ->addIndex(['abraflexi', 'company'], ['unique' => true])
                 ->create();
 
-        if ($this->adapter->getAdapterType() != 'sqlite') {
-            $table
-                    ->changeColumn('id', 'biginteger', ['identity' => true, 'signed' => false])
-                    ->save();
-        }
+//        if ($this->adapter->getAdapterType() != 'sqlite') {
+//            $table
+//                    ->changeColumn('id', 'integer', ['identity' => true, 'signed' => false])
+//                    ->save();
+//        }
     }
 }
