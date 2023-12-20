@@ -38,6 +38,28 @@ class AppsSelector extends \Ease\Html\InputTextTag
         $properties['render']['option'] = 'function (item, escape) { return "<div><img height=40 align=right src=\"" + escape(item.image) + "\">" + escape(item.name) + "<br><small>" + escape(item.description) + "</small></div>" }';
         $properties['plugins'] = ['remove_button'];
 
-        $this->selectize($properties, $values->fetchAll());
+        $this->selectize($properties, self::translateColumns($values->fetchAll(), ['name','description']));
+    }
+
+    /**
+     * Translate strings in specified column using gettext
+     *
+     * @param array $data
+     * @param array $columns
+     *
+     * @return array
+     */
+    public static function translateColumns(array $data, array $columns)
+    {
+        foreach ($data as $rowId => $record) {
+            foreach ($columns as $transcol) {
+                if (array_key_exists($transcol, $record)) {
+                    if (strlen($record[$transcol])) {
+                        $data[$rowId][$transcol] = _($data[$rowId][$transcol]);
+                    }
+                }
+            }
+        }
+        return $data;
     }
 }

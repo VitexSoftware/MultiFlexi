@@ -63,7 +63,7 @@ $addAppForm->addItem(new \Ease\Html\InputHiddenTag('company_id', $companer->getM
 
 $periodSelectorsRow = new \Ease\TWB4\Row();
 
-$periodSelectorsRow->addColumn(2, new CompanyLogo($companer));
+$periodSelectorsRow->addColumn(2, new CompanyLogo($companer, ['class' => 'img-fluid']));
 $periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Hourly'), 'default', new AppsSelector('hourly', implode(',', array_keys($appsByIntrv['h'])))));
 $periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Daily'), 'default', new AppsSelector('daily', implode(',', array_keys($appsByIntrv['d'])))));
 $periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Weekly'), 'default', new AppsSelector('weekly', implode(',', array_keys($appsByIntrv['w'])))));
