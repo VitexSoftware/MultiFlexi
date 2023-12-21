@@ -99,6 +99,7 @@ class RunTemplate extends Engine
     public function getCompanyAppsByInterval($companyId)
     {
         $companyApps = [
+            'i' => [],
             'h' => [],
             'd' => [],
             'w' => [],

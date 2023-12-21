@@ -1,4 +1,4 @@
-multiflexi (1.9.1) UNRELEASED; urgency=medium
+multiflexi (1.9.2) UNRELEASED; urgency=medium
 
   [ CyberVitexus ]
   * Ability choose run interval between hour and year
@@ -41,8 +41,9 @@ multiflexi (1.9.1) UNRELEASED; urgency=medium
   * Commandline App Remover Added
   * Commandline Trigger added
   * multiflexi-cli added
+  * Minute period support added to launcher
 
- -- vitex <info@vitexsoftware.cz>  Sat, 16 Dec 2023 23:01:30 +0100
+ -- vitex <info@vitexsoftware.cz>  Thu, 21 Dec 2023 10:49:43 +0100
 
 multiflexi (0.1) experimental; urgency=medium
 

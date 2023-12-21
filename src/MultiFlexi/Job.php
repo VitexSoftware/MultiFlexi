@@ -21,7 +21,7 @@ class Job extends Engine
 {
     public $myTable = 'job';
     public static $intervalCode = [
-        'i' => 'instant',
+        'i' => 'minutely',
         'n' => 'disabled',
         'y' => 'yearly',
         'h' => 'hourly',
@@ -401,7 +401,7 @@ class Job extends Engine
         $launcher[] = '';
         $environment = $this->getDataValue('env') ? unserialize($this->getDataValue('env')) : [];
         foreach ($environment as $key => $envInfo) {
-            $launcher[] = "\n";
+            $launcher[] = "";
             $launcher[] = '# Source ' . $envInfo['source'];
             $launcher[] = 'export ' . $key . "='" . $envInfo['value'] . "'";
             if (array_key_exists('description', $envInfo)) {
