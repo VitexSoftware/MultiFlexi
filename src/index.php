@@ -26,7 +26,13 @@ try {
     \Ease\Shared::user()->addStatusMessage($exc->getMessage());
 }
 
-$oPage->container->addItem(new \Ease\Html\DivTag(new \Ease\Html\ImgTag('images/openclipart/345630.svg', _('AI and Human Relationship'), ['class' => 'mx-auto d-block']), ['style' => 'height: 80%']));
+$imageRow = new \Ease\TWB4\Row();
+$imageRow->addTagClass('justify-content-md-center');
+$imageRow->addColumn('4');
+$imageRow->addColumn('4', new \Ease\Html\DivTag(new \Ease\Html\ImgTag('images/openclipart/345630.svg', _('AI and Human Relationship'), ['class' => 'mx-auto d-block img-fluid'])), 'sm');
+$imageRow->addColumn('4');
+
+$oPage->container->addItem($imageRow);
 
 $oPage->addItem(new PageBottom());
 

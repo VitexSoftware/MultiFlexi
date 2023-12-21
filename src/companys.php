@@ -30,7 +30,7 @@ foreach ($companies->listingQuery() as $companyInfo) {
 
     $companyColumns['setup'] = new \Ease\TWB4\LinkButton('companysetup.php?id=' . $companyId, '🛠️&nbsp;' . _('Setup'), 'secondary btn-lg btn-block ');
     $companyColumns['tasks'] = new \Ease\TWB4\LinkButton('tasks.php?company_id=' . $companyId, '🔧&nbsp;' . _('Tasks'), 'secondary btn-lg btn-block');
-    $companyColumns['apps'] = new \Ease\TWB4\LinkButton('companyapps.php?company_id=' . $companyId, '🔁&nbsp;' . _('Applications'), 'secondary btn-lg btn-block');
+    $companyColumns['apps'] = new \Ease\TWB4\LinkButton('companyapps.php?company_id=' . $companyId, '📌&nbsp;' . _('Applications'), 'secondary btn-lg btn-block');
     $companyColumns['delete'] = new \Ease\TWB4\LinkButton('companydelete.php?id=' . $companyId, '☠️&nbsp;' . _('Delete'), 'danger');
 
     $companyTable->addRowColumns($companyColumns);

@@ -36,7 +36,7 @@ switch ($command) {
 
     case 'list':
         switch ($argument) {
-            case 'apps':
+            case 'app':
                 $engine = new Application();
                 $data = $engine->listingQuery()->select([
                             'id',
@@ -54,7 +54,7 @@ switch ($command) {
                             'requirements'
                                 ], true)->fetchAll();
                 break;
-            case 'companys':
+            case 'company':
                 $engine = new Company();
                 $data = $engine->listingQuery()->select([
                     'id',
@@ -73,6 +73,12 @@ switch ($command) {
                     'customer',
                     'email',
                     'code'
+                ])->fetchAll();
+                break;
+            case 'job':
+                $engine = new Job();
+                $data = $engine->listingQuery()->select([
+                    'id',
                 ])->fetchAll();
                 break;
             default:

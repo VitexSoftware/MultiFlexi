@@ -21,7 +21,9 @@ $runTemplater->loadFromSQL($runTemplater->runTemplateID(WebPage::getRequestValue
 
 $oPage->addItem(new PageTop(_('Periodical Tasks')));
 
-$oPage->container->addItem(nl2br(print_r($runTemplater->getData(), 1)));
+$periodcalTaskInfo = $runTemplater->getData();
+
+$oPage->container->addItem(new CompanyPanel(new \MultiFlexi\AbraFlexi\Company($periodcalTaskInfo['company_id']), nl2br(print_r($periodcalTaskInfo, 1))));
 
 $oPage->addItem(new PageBottom());
 

@@ -35,9 +35,6 @@ $addAppForm->addItem(new \Ease\Html\InputHiddenTag('company_id', $companer->getM
 
 $assignedRaw = $companyApp->getAssigned()->fetchAll('app_id');
 $assigned = empty($assignedRaw) ? [] : array_keys($assignedRaw);
-
-$addAppForm->addItem(new \Ease\Html\H2Tag(sprintf(_('Launch application upon %s company'), $companer->getRecordName())));
-
 $oPage->container->addItem($addAppForm);
 
 $apper = new \MultiFlexi\Application();
@@ -47,8 +44,7 @@ foreach ($assigned as $assignedAppId) {
     $apper->loadFromSQL($assignedAppId);
     $launchTabs->addTab($apper->getRecordName(), new AppInfo($apper, $companer->getMyKey()));
 }
-$oPage->container->addItem($launchTabs);
-
+$oPage->container->addItem(new CompanyPanel($companer, [new \Ease\Html\H2Tag(_('Application Launcher')),$launchTabs]));
 
 $oPage->addItem(new PageBottom());
 

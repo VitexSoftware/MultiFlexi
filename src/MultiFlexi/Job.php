@@ -105,14 +105,14 @@ class Job extends Engine
     public function newJob(int $companyId, int $appId, array $environment, string $scheduled = 'adhoc')
     {
         $jobId = $this->insertToSQL([
-                    'company_id' => $companyId,
-                    'app_id' => $appId,
-                    'env' => \serialize($environment),
-                    'exitcode' => -1,
-                    'stdout' => '',
-                    'stderr' => '',
-                    'schedule' => $scheduled,
-                    'launched_by' => \Ease\Shared::user()->getMyKey()
+            'company_id' => $companyId,
+            'app_id' => $appId,
+            'env' => \serialize($environment),
+            'exitcode' => -1,
+            'stdout' => '',
+            'stderr' => '',
+            'schedule' => $scheduled,
+            'launched_by' => \Ease\Shared::user()->getMyKey()
         ]);
         $environment['JOB_ID']['value'] = $jobId;
         $this->environment = $environment;
@@ -400,9 +400,12 @@ class Job extends Engine
         $launcher[] = '# ' . \Ease\Shared::appName() . ' v' . \Ease\Shared::AppVersion() . ' job #' . $this->getMyKey() . ' launcher. Generated ' . (new \DateTime())->format('Y-m-d H:i:s') . ' for company: ' . $this->company->getDataValue('name');
         $launcher[] = '';
         $environment = $this->getDataValue('env') ? unserialize($this->getDataValue('env')) : [];
-        foreach ($environment as $key => $value) {
-            if (is_string($value)) {
-                $launcher[] = 'export ' . $key . "='" . $value . "'";
+        foreach ($environment as $key => $envInfo) {
+            $launcher[] = "\n";
+            $launcher[] = '# Source ' . $envInfo['source'];
+            $launcher[] = 'export ' . $key . "='" . $envInfo['value'] . "'";
+            if (array_key_exists('description', $envInfo)) {
+                $launcher[] = '# ' . $envInfo['description'];
             }
         }
         $launcher[] = '';
@@ -474,10 +477,8 @@ class Job extends Engine
         $launcher[] = '# ' . \Ease\Shared::appName() . ' v' . \Ease\Shared::AppVersion() . ' job #' . $this->getMyKey() . ' environment. Generated ' . (new \DateTime())->format('Y-m-d H:i:s') . ' for company: ' . $this->company->getDataValue('name');
         $launcher[] = '';
         $environment = $this->getDataValue('env') ? unserialize($this->getDataValue('env')) : [];
-        foreach ($environment as $key => $value) {
-            if (is_string($value)) {
-                $launcher[] = $key . "='" . $value . "'";
-            }
+        foreach ($environment as $key => $envInfo) {
+            $launcher[] = $key . "='" . $envInfo['value'] . "'";
         }
         return implode("\n", $launcher);
     }
