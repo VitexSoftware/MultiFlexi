@@ -73,7 +73,6 @@ class RunTemplate extends Engine
         if (is_null($data)) {
             $data = $this->getData();
         }
-        unset($data['interv']);
         return parent::deleteFromSQL($data);
     }
 
@@ -190,20 +189,18 @@ class RunTemplate extends Engine
         return $this->dbsync(['prepared' => $status]);
     }
 
+    /**
+     * Assign Apps in company to given interval
+     *
+     * @param int    $companyId
+     * @param array  $appIds
+     * @param string $interval
+     */
     public function assignAppsToCompany(int $companyId, array $appIds, string $interval)
     {
-        $availbleApps = (new \MultiFlexi\CompanyApp(new Company($companyId)))->getAssigned()->fetchAll('app_id');
-        $currentApps = $this->getCompanyTemplates($companyId)->where('interv', $interval)->fetchAll('app_id');
+        $this->deleteFromSQL(['company_id' => $companyId, 'interv' => $interval]);
         foreach ($appIds as $appId) {
-            if (array_key_exists($appId, $currentApps) === false) {
-                $this->insertToSQL(['app_id' => $appId, 'company_id' => $companyId, 'interv' => $interval]);
-            }
-        }
-
-        foreach ($currentApps as $currentApp) {
-            if (array_search($appId, $appIds) === false) {
-                $this->deleteFromSQL(['app_id' => $appId, 'company_id' => $companyId]);
-            }
+            $this->insertToSQL(['app_id' => $appId, 'company_id' => $companyId, 'interv' => $interval]);
         }
     }
 

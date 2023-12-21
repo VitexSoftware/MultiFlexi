@@ -21,7 +21,7 @@ class Job extends Engine
 {
     public $myTable = 'job';
     public static $intervalCode = [
-        'i' => 'minutely',
+        'i' => 'minutly',
         'n' => 'disabled',
         'y' => 'yearly',
         'h' => 'hourly',
@@ -423,6 +423,18 @@ class Job extends Engine
     public static function codeToInterval($code)
     {
         return array_key_exists($code, self::$intervalCode) ? self::$intervalCode[$code] : 'n/a';
+    }
+
+    /**
+     * Get Interval code by Name
+     *
+     * @param string $interval
+     *
+     * @return string
+     */
+    public static function intervalToCode($interval)
+    {
+        return array_key_exists($interval, array_flip(self::$intervalCode)) ? array_flip(self::$intervalCode)[$interval] : 'n/a';
     }
 
     /**
