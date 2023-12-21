@@ -61,9 +61,12 @@ class CompanyApp extends Engine
                 }
             }
         }
+
+        $runTempate = new RunTemplate();
         foreach ($assigned as $appId => $assId) {
             if (array_search($appId, $appIds) === false) {
                 if ($this->deleteFromSQL(['company_id' => $companyId, 'app_id' => $appId])) {
+                    $runTempate->deleteFromSQL(['app_id' => $appId, 'company_id' => $companyId]);
                     $this->addStatusMessage(sprintf(_('Application %s was unassigned from %s company'), $allApps[$appId]['name'], $this->company->getRecordName()));
                 }
             }

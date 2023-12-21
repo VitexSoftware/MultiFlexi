@@ -24,21 +24,23 @@ class AppsSelector extends \Ease\Html\InputTextTag
     {
         parent::__construct($identifier, $enabled);
 
-        $apper = new \MultiFlexi\Application();
-
         $properties = [
             'valueField' => 'id',
             'labelField' => 'name',
             'searchField' => ['name', 'description', 'homepage']
         ];
 
-        $values = $apper->listingQuery()->select(['id', 'name', 'description', 'homepage', 'image'], true);
-
         $properties['render']['item'] = 'function (item, escape) { return "<div class=container><div class=row> <div class=col-md-2><a href=app.php?id=" + escape(item.id) + "><img height=40 align=left src=\"" + escape(item.image) + "\"></a></div><div class=col-md-7>&nbsp;" + escape(item.name) + "</div><div class=col-md-3><a href=periodbehaviour.php?app=" + escape(item.id) + "&interval=' . $identifier . ' style=\"font-size: 30px; padding: 5px;\" >🛠️️</a></div> </div></div>" }';
         $properties['render']['option'] = 'function (item, escape) { return "<div><img height=40 align=right src=\"" + escape(item.image) + "\">" + escape(item.name) + "<br><small>" + escape(item.description) + "</small></div>" }';
         $properties['plugins'] = ['remove_button'];
 
-        $this->selectize($properties, self::translateColumns($values->fetchAll(), ['name','description']));
+        $this->selectize($properties, self::translateColumns($this->availbleApps(), ['name', 'description']));
+    }
+
+    public function availbleApps()
+    {
+        $apper = new \MultiFlexi\Application();
+        return $apper->listingQuery()->select(['id', 'name', 'description', 'homepage', 'image'], true)->fetchAll();
     }
 
     /**
