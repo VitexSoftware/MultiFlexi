@@ -9,6 +9,7 @@ After=multi-user.target
 [Service]
 EnvironmentFile=/etc/multiflexi/multiflexi.env
 ExecStart=/usr/bin/php /usr/lib/multiflexi/daemon.php
+LimitNOFILE=8192:16384
 Type=simple
 
 [Install]

@@ -24,6 +24,7 @@ if (is_null($companer->getMyKey())) {
 
 $_SESSION['company'] = $companer->getMyKey();
 
+$minutlyAppsRaw = \Ease\WebPage::getRequestValue('minutly');
 $houryAppsRaw = \Ease\WebPage::getRequestValue('hourly');
 $dailyAppsRaw = \Ease\WebPage::getRequestValue('daily');
 $weeklyAppsRaw = \Ease\WebPage::getRequestValue('weekly');
@@ -37,7 +38,8 @@ function aIDs($apps)
     return empty($apps) ? [] : ((strchr($apps, ',') == false) ? [intval($apps) => intval($apps)] : array_combine(array_map('intval', explode(',', $apps)), array_map('intval', explode(',', $apps))));
 }
 
-$houryApps = aIDs($houryAppsRaw);
+$minutlyApps = aIDs($minutlyAppsRaw);
+$hourlyApps = aIDs($houryAppsRaw);
 $dailyApps = aIDs($dailyAppsRaw);
 $weeklyApps = aIDs($weeklyAppsRaw);
 $monthlyApps = aIDs($monthlyAppsRaw);
@@ -45,7 +47,8 @@ $yearlyApps = aIDs($yearlyAppsRaw);
 
 $runTemplater = new \MultiFlexi\RunTemplate();
 if (\Ease\WebPage::isPosted()) {
-    $runTemplater->assignAppsToCompany($companer->getMyKey(), $houryApps, 'h');
+    $runTemplater->assignAppsToCompany($companer->getMyKey(), $hourlyApps, 'i');
+    $runTemplater->assignAppsToCompany($companer->getMyKey(), $hourlyApps, 'h');
     $runTemplater->assignAppsToCompany($companer->getMyKey(), $dailyApps, 'd');
     $runTemplater->assignAppsToCompany($companer->getMyKey(), $weeklyApps, 'w');
     $runTemplater->assignAppsToCompany($companer->getMyKey(), $monthlyApps, 'm');
@@ -62,6 +65,7 @@ $addAppForm->addItem(new \Ease\Html\InputHiddenTag('company_id', $companer->getM
 
 $periodSelectorsRow = new \Ease\TWB4\Row();
 
+$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Minutely'), 'default', new AppsSelector('minutly', implode(',', array_keys($appsByIntrv['i'])))));
 $periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Hourly'), 'default', new AppsSelector('hourly', implode(',', array_keys($appsByIntrv['h'])))));
 $periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Daily'), 'default', new AppsSelector('daily', implode(',', array_keys($appsByIntrv['d'])))));
 $periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Weekly'), 'default', new AppsSelector('weekly', implode(',', array_keys($appsByIntrv['w'])))));
