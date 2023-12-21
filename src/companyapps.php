@@ -49,7 +49,7 @@ $addAppForm->addItem($chooseApp);
 
 $addAppForm->addItem(new \Ease\TWB4\SubmitButton(_('(Un)Assign Applications'), 'success btn-lg btn-block'));
 
-$oPage->container->addItem($addAppForm);
+$oPage->container->addItem(new CompanyPanel($companer, $addAppForm));
 
 //$apper = new \MultiFlexi\Application();
 //

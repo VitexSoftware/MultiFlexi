@@ -75,12 +75,9 @@ $instanceRow->addColumn(4, new CompanyEditorForm($companies, null, ['action' => 
 //$instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($companies));
 
 
-if (empty($companies->getDataValue('logo')) === false) {
-    $rightColumn[] = new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']);
-}
-
 $rightColumn[] = new EnvironmentEditor($companyEnver->getEnvFields());
 $instanceRow->addColumn(8, $rightColumn);
-$oPage->container->addItem(new Panel($instanceName, 'light', $instanceRow));
+$oPage->container->addItem(new CompanyPanel($companies, $instanceRow, new \Ease\TWB4\LinkButton('companydelete.php?id=' . $companies->getMyKey(), '☠️&nbsp;' . _('Delete company'), 'danger')));
+
 $oPage->addItem(new PageBottom());
 $oPage->draw();

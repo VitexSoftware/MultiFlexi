@@ -19,11 +19,6 @@ require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company Tasks')));
 $companies = new Company(Document::getRequestValue('company_id', 'int'));
-if (empty($companies->getDataValue('logo')) === false) {
-    $companyTasksHeading[] = new ImgTag($companies->getDataValue('logo'), $companies->getDataValue('name'), ['class' => 'img-fluid', 'style' => 'max-height: 100px']);
-}
-$companyTasksHeading[] = new SpanTag($companies->getDataValue('name') . '&nbsp;', ['style' => 'font-size: xxx-large;']);
-$companyTasksHeading[] = _('Assigned applications');
-$oPage->container->addItem(new Panel($companyTasksHeading, 'default', new \MultiFlexi\Ui\ServicesForCompanyForm($companies, ['id' => 'apptoggle'])));
+$oPage->container->addItem(new CompanyPanel($companies, 'default', new \MultiFlexi\Ui\ServicesForCompanyForm($companies, ['id' => 'apptoggle'])));
 $oPage->addItem(new PageBottom());
 $oPage->draw();

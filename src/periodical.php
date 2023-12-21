@@ -54,16 +54,14 @@ if (\Ease\WebPage::isPosted()) {
 
 $appsByIntrv = $runTemplater->getCompanyAppsByInterval($companer->getMyKey());
 
-$oPage->addItem(new PageTop(_('Periodical Tasks')));
-
-$oPage->container->addItem(new \Ease\Html\H1Tag(sprintf(_('Periodical tasks for %s company'), $companer->getRecordName())));
+$oPage->addItem(new PageTop(_('Periodical tasks')));
 
 $addAppForm = new \Ease\TWB4\Form();
+$addAppForm->addItem(new \Ease\Html\H1Tag(_('Periodical tasks')));
 $addAppForm->addItem(new \Ease\Html\InputHiddenTag('company_id', $companer->getMyKey()));
 
 $periodSelectorsRow = new \Ease\TWB4\Row();
 
-$periodSelectorsRow->addColumn(2, new CompanyLogo($companer, ['class' => 'img-fluid']));
 $periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Hourly'), 'default', new AppsSelector('hourly', implode(',', array_keys($appsByIntrv['h'])))));
 $periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Daily'), 'default', new AppsSelector('daily', implode(',', array_keys($appsByIntrv['d'])))));
 $periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Weekly'), 'default', new AppsSelector('weekly', implode(',', array_keys($appsByIntrv['w'])))));
@@ -81,7 +79,7 @@ $addAppForm->addItem(new \Ease\Html\PTag());
 
 $addAppForm->addItem(new \Ease\TWB4\SubmitButton(_('(Un)Assign Applications'), 'success btn-lg btn-block'));
 
-$oPage->container->addItem($addAppForm);
+$oPage->container->addItem(new CompanyPanel($companer, $addAppForm));
 
 //$apper = new \MultiFlexi\Application();
 //foreach ($assigned as $assignedAppId) {

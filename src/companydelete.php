@@ -71,6 +71,6 @@ if (strlen($companies->getDataValue('logo'))) {
 
 $rightColumn[] = new EnvironmentView($companyEnver->getEnvFields());
 $instanceRow->addColumn(8, $rightColumn);
-$oPage->container->addItem(new Panel($instanceName, 'light', $instanceRow));
+$oPage->container->addItem(new CompanyPanel($companies, $instanceRow));
 $oPage->addItem(new PageBottom());
 $oPage->draw();
