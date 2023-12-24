@@ -30,4 +30,16 @@ interface executor
     public function launch();
 
     public function storeLogs();
+
+    /**
+     * Can this Executor execute given application ?
+     *
+     * @param Application $app
+     */
+    public static function usableForApp($app): bool;
+
+    /**
+     * Logo for Launcher
+     */
+    public static function logo();
 }

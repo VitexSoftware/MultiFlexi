@@ -91,6 +91,9 @@ class Application extends Engine
      */
     public function checkExcutable($command)
     {
+
+//        new \Symfony\Component\Process\ExecutableFinder(); TODO
+
         $status = true;
         if ($command[0] == '/') {
             if (file_exists($command) === false) {

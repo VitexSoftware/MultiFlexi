@@ -16,8 +16,6 @@ require_once './init.php';
 
 $oPage->onlyForLogged();
 
-$oPage->addItem(new PageTop(_('Schedule Job run')));
-
 $companyId = $oPage->getRequestValue('company_id', 'int');
 $appId = $oPage->getRequestValue('app_id', 'int');
 
@@ -63,6 +61,8 @@ $jobber->scheduleJobRun(new \DateTime());
 $appInfo = $runTemplate->getAppInfo();
 $apps = new Application($appInfo['app_id']);
 $instanceName = $appInfo['app_name'];
+
+$oPage->addItem(new PageTop(_('Schedule Job run')));
 
 $instanceRow = new Row();
 $instanceRow->addColumn(2, new \Ease\Html\ImgTag(empty($appInfo['image']) ? 'images/apps.svg' : $appInfo['image'], 'Logo', ['class' => 'img-fluid', 'style' => 'height: 64px']));

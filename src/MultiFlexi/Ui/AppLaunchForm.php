@@ -59,6 +59,7 @@ class AppLaunchForm extends \Ease\TWB4\Form
             }
         }
 
+        $this->addItem(new AppExecutorSelect(new \MultiFlexi\Application($app)));
         $this->addItem(new \Ease\TWB4\SubmitButton([_('Launch now') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'success btn-lg btn-block '));
     }
 }

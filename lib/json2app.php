@@ -20,15 +20,15 @@ define('EASE_LOGGER', implode('|', $loggers));
 define('APP_NAME', 'MultiFlexi json2app');
 
 \Ease\Shared::user(new \Ease\Anonym());
-if (array_key_exists('1', $argv) && file_exists($argv[1])) {
+if (array_key_exists(1, $argv) && file_exists($argv[1])) {
     $apper = new Application($argc == 3 ? intval($argv[3]) : null);
     if (\Ease\Shared::cfg('APP_DEBUG')) {
         $apper->logBanner();
     }
     if (empty($apper->importAppJson($argv[1]))) {
-        $apper->addStatusMesssage(_('Error importing application json'), 'error');
+        $apper->addStatusMessage(_('Error importing application json'), 'error');
         exit(1);
     }
 } else {
-    echo "usage: app.template.json [app id]";
+            echo "usage: app.template.json [app id]";
 }
