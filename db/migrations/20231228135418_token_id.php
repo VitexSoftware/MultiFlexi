@@ -31,7 +31,6 @@ final class TokenId extends AbstractMigration
     	    $table = $this->table('token');
 	    $table->drop();
 	    $table->save();
-	}
 
         $table = $this->table('token');
         $table
@@ -40,6 +39,9 @@ final class TokenId extends AbstractMigration
                 ->addColumn('until', 'datetime', ['null' => true])
                 ->addColumn('user_id', 'integer', ['null' => false, 'signed'=>false])
                 ->create();
+
+	}
+
 
 	
 
