@@ -29,7 +29,8 @@ final class TokenId extends AbstractMigration
 	$exists = $this->hasTable('token');
         if ($exists) {
     	    $table = $this->table('token');
-	    $table->drop()->save();
+	    $table->drop();
+	    $table->save();
 	}
 
         $table = $this->table('token');
