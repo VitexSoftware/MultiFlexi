@@ -45,3 +45,9 @@ db/multiflexi
 /debian/multiflexi-zabbix/
 /debian/multiflexi-podman/
 /debian/multiflexi-api/
+/debian/multiflexi-zabbix.substvars
+/debian/multiflexi-zabbix.debhelper.log
+/debian/multiflexi-podman.substvars
+/debian/multiflexi-podman.debhelper.log
+/debian/multiflexi-api.debhelper.log
+/debian/multiflexi-api.substvars

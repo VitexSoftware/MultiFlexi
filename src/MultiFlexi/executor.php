@@ -29,6 +29,12 @@ interface executor
 
     public function launch();
 
+    public function getErrorOutput();
+
+    public function getOutput();
+
+    public function getExitCode();
+
     public function storeLogs();
 
     /**

@@ -13,11 +13,8 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
     use \Ease\SQL\Orm;
 
     public $keyword = 'company';
-
     public $nameColumn = 'name';
-
     public $createColumn = 'DatCreate';
-
     public $lastModifiedColumn = 'DatUpdate';
 
     /**
@@ -477,9 +474,12 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
         return array_merge($serverEnvironment, $companyEnvironment);
     }
 
+    /**
+     * Obtain Company Logo from AbraFlexi
+     */
     public function getLogo()
     {
-        $configurator = new \AbraFlexi\Nastaveni(null, $options);
+        $configurator = new \AbraFlexi\Nastaveni(null, []);
         try {
             $logoInfo = $configurator->getFlexiData('1/logo');
         } catch (\AbraFlexi\Exception $ex) {

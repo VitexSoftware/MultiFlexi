@@ -55,7 +55,7 @@ foreach ($envars as $envVarName => $envVarInfo) {
 }
 
 
-$jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, 'adhoc ' . (new \DateTime())->format('Y-m-d h:i:s'));
+$jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, 'adhoc ' . (new \DateTime())->format('Y-m-d h:i:s'), WebPage::getRequestValue('executor'));
 $jobber->scheduleJobRun(new \DateTime());
 
 $appInfo = $runTemplate->getAppInfo();

@@ -81,11 +81,10 @@ apache_install() {
 
     . /usr/share/debconf/confmodule
 
+composer-debian multiflexi
 
 case "$1" in
     configure)
-
-	composer-debian multiflexi
 
 	# Handle webserver reconfiguration/restart ; stolen from zabbix package
 	db_get multiflexi/reconfigure-webserver || true

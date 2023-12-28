@@ -23,7 +23,7 @@ namespace MultiFlexi\Executor;
  *
  * @author vitex
  */
-class Kubernetes extends \Ease\Sand implements \MultiFlexi\executor
+class Kubernetes extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
 {
     //put your code here
     public function launch()
@@ -57,5 +57,17 @@ class Kubernetes extends \Ease\Sand implements \MultiFlexi\executor
     public static function usableForApp($app): bool
     {
         return empty($app->getDataValue('ociimage')) === false; // Container Image must be present
+    }
+
+    public function getErrorOutput()
+    {
+    }
+
+    public function getExitCode()
+    {
+    }
+
+    public function getOutput()
+    {
     }
 }
