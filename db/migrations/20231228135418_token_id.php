@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class TokenId extends AbstractMigration
-{
+final class TokenId extends AbstractMigration {
+
     /**
      * Change Method.
      *
@@ -17,36 +17,19 @@ final class TokenId extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-    public function change(): void
-    {
+    public function change(): void {
         if ($this->adapter->getAdapterType() != 'sqlite') {
-        $table = $this->table('user');
+            $table = $this->table('user');
             $table
-                ->changeColumn('id', 'integer', ['identity' => true, 'signed' => false])
-                ->save();
+                    ->changeColumn('id', 'integer', ['identity' => true, 'signed' => false])
+                    ->save();
+
+            $table2 = $this->table('token');
+            $table2
+                    ->changeColumn('id', 'integer', ['identity' => true, 'signed' => false])
+                    ->save();
         }
 
-	$exists = $this->hasTable('token');
-        if ($exists) {
-    	    $table = $this->table('token');
-	    $table->drop();
-	    $table->save();
-
-        $table = $this->table('token');
-        $table
-                ->addColumn('token', 'string', ['limit' => 64])
-                ->addColumn('start', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
-                ->addColumn('until', 'datetime', ['null' => true])
-                ->addColumn('user_id', 'integer', ['null' => false, 'signed'=>false])
-                ->create();
-
-	}
-
-
-	
-
-    	$table->addForeignKey('user_id', 'user', 'id', ['constraint' => 'tokeuser_must_exist'])->save();
-
-
+        $table->addForeignKey('user_id', 'user', 'id', ['constraint' => 'tokeuser_must_exist'])->save();
     }
 }
