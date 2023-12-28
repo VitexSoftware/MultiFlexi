@@ -14,21 +14,22 @@ class AppLaunchForm extends \Ease\TWB4\Form
     /**
      * Application Launch Form
      *
-     * @param int $app
+     * @param \MultiFlexi\Application $app
      * @param int $company
      */
-    public function __construct(int $app, int $company)
+    public function __construct(\MultiFlexi\Application $app, int $company)
     {
         parent::__construct(['name' => 'appLaunchForm', 'action' => 'newjob.php', 'method' => 'post', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']);
+        $appId = $app->getMyKey();
 
-        $job = new \MultiFlexi\Job(['company_id' => $company, 'app_id' => $app], ['autoload' => false]);
+        $job = new \MultiFlexi\Job(['company_id' => $company, 'app_id' => $appId], ['autoload' => false]);
         $env = $job->getFullEnvironment();
 
-        $this->addItem(new \Ease\Html\InputHiddenTag('app_id', $app));
+        $this->addItem(new \Ease\Html\InputHiddenTag('app_id', $appId));
         $this->addItem(new \Ease\Html\InputHiddenTag('company_id', $company));
 
         /* check if app requires upload fields */
-        $appFields = \MultiFlexi\Conffield::getAppConfigs($app);
+        $appFields = \MultiFlexi\Conffield::getAppConfigs($appId);
 
         $this->addItem(new EnvironmentView($env));
         $this->addItem("<hr>");
@@ -59,7 +60,7 @@ class AppLaunchForm extends \Ease\TWB4\Form
             }
         }
 
-        $this->addItem(new AppExecutorSelect(new \MultiFlexi\Application($app)));
+        $this->addItem(new AppExecutorSelect($app));
         $this->addItem(new \Ease\TWB4\SubmitButton([_('Launch now') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'success btn-lg btn-block '));
     }
 }

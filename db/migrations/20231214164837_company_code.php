@@ -19,7 +19,7 @@ final class CompanyCode extends AbstractMigration {
      */
     public function change(): void {
         $refTable = $this->table('company');
-        $refTable->addColumn('code', 'string', ['null' => 'false', 'length' => 10, 'default' => ''])
+        $refTable->addColumn('code', 'string', ['null' => false, 'length' => 10, 'default' => ''])
                 ->addIndex(['name', 'code'], ['unique' => true])
                 ->save();
     }

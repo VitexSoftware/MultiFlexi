@@ -19,6 +19,11 @@ use MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
  */
 class Job extends Engine
 {
+    /**
+     *
+     * @var executor
+     */
+    public $executor;
     public $myTable = 'job';
     public static $intervalCode = [
         'i' => 'minutly',
@@ -82,12 +87,6 @@ class Job extends Engine
         parent::__construct($identifier, $options);
         if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
             $this->zabbixSender = new ZabbixSender(\Ease\Functions::cfg('ZABBIX_SERVER'));
-        }
-        if (is_null($this->getDataValue('company_id')) === false) {
-            $this->company = new Company(intval($this->getDataValue('company_id')));
-        }
-        if (is_null($this->getDataValue('app_id')) === false) {
-            $this->application = new Application(intval($this->getDataValue('app_id')));
         }
         $this->setObjectName();
     }
@@ -309,25 +308,8 @@ class Job extends Engine
     {
         $this->runBegin();
         LogToSQL::singleton()->setApplication($this->application->getMyKey());
-        $exec = $this->application->getDataValue('executable');
-        $cmdparams = $this->getCmdParams();
-        $this->commandline = $exec . ' ' . $cmdparams;
-        $this->setDataValue('commandline', $this->commandline);
-        $this->addStatusMessage('command begin: ' . $this->commandline . '@' . $this->company->getDataValue('name'));
-        $process = new \Symfony\Component\Process\Process(array_merge([$exec], explode(' ', $cmdparams)), null, Environmentor::flatEnv($this->environment), null, 32767);
-        $process->run(function ($type, $buffer) {
-            $logger = new \Ease\Sand();
-            $logger->setObjectName('Runner');
-            if (\Symfony\Component\Process\Process::ERR === $type) {
-                $logger->addStatusMessage($buffer, 'error');
-                $this->addOutput($buffer, 'error');
-            } else {
-                $logger->addStatusMessage($buffer, 'success');
-                $this->addOutput($buffer, 'success');
-            }
-        });
-        $this->addStatusMessage('end' . $exec . '@' . $this->application->getDataValue('name'));
-        $this->runEnd($process->getExitCode(), $process->getOutput(), $process->getErrorOutput());
+        $this->executor->launch();
+        $this->runEnd($this->executor->getExitCode(), $this->executor->getOutput(), $this->executor->getErrorOutput());
     }
 
     /**
@@ -480,11 +462,24 @@ class Job extends Engine
     /**
      * @inheritDoc
      */
-    public function loadFromSQL($itemID)
+    public function takeData($data)
     {
-        $result = parent::loadFromSQL($itemID);
+        parent::takeData($data);
+
         $this->environment = empty($this->getDataValue('env')) ? [] : unserialize($this->getDataValue('env'));
-        return $result;
+        if (is_null($this->getDataValue('company_id')) === false) {
+            $this->company = new Company(intval($this->getDataValue('company_id')));
+        }
+        if (is_null($this->getDataValue('app_id')) === false) {
+            $this->application = new Application(intval($this->getDataValue('app_id')));
+        }
+
+//        $executor = '\\MultiFlexi\\Executor\\' . $this->getDataValue('executor');
+//        if (class_exists($executor)) {
+//            $this->executor = new $executor($this);
+//        } else {
+            $this->executor = new \MultiFlexi\Executor\Native($this);
+//        }
     }
 
     public function envFile()

@@ -96,6 +96,10 @@ daemon:
 testimage:
 	podman build -f tests/Containerfile . -t docker.io/vitexsoftware/multiflexi-probe
 
+testimagex:
+	docker buildx build -f tests/Containerfile . --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag docker.io/vitexsoftware/multiflexi-probe
+
+
 packages:
 	debuild -us -uc
 

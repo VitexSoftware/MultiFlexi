@@ -58,7 +58,7 @@ class AppRow extends \Ease\TWB4\Row
 
 
         // use AppLaunchForm instead of LaunchButton
-        $launchButton = new AppLaunchForm($appData['app_id'], $appData['company_id']);
+        $launchButton = new AppLaunchForm(new \MultiFlexi\Application($appData['app_id']), $appData['company_id']);
         $logoColumn->addItem($launchButton);
         //        $logoColumn->addItem(new \Ease\TWB4\LinkButton('?id=' . $appId, _('Clone'), 'info btn-sm  btn-block'));
 

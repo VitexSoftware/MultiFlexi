@@ -9,7 +9,7 @@ class CompanysOwnerIsCustomer extends AbstractMigration {
      */
     public function change() {
         $refTable = $this->table('company');
-        $refTable->addColumn('customer', 'integer', ['null' => 'true'])->addIndex(['customer'])->save();
+        $refTable->addColumn('customer', 'integer', ['null' => true])->addIndex(['customer'])->save();
     }
 
 }

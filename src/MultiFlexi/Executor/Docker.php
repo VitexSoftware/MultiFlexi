@@ -11,12 +11,16 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Executor;
 
+use Docker\Docker as DockerClient;
+use Docker\DockerClientFactory;
+use Docker\API\Model\ContainersCreatePostBody;
+
 /**
  * Description of Podman
  *
  * @author vitex
  */
-class Docker extends \Ease\Sand implements \MultiFlexi\executor
+class Docker extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
 {
     use \Ease\Logger\Logging;
 
@@ -47,8 +51,44 @@ class Docker extends \Ease\Sand implements \MultiFlexi\executor
         return _('Execute jobs in container using Docker');
     }
 
+    /**
+     * @see https://docker-php.readthedocs.io/en/latest/cookbook/container-run/
+     */
     public function launch()
     {
+
+        $docker = DockerClient::
+
+        $containerConfig = new ContainersCreatePostBody();
+        $containerConfig->setImage('busybox:latest');
+        $containerConfig->setCmd(['echo', 'I am running a command']);
+// You need to attach stream of the container to docker
+        $containerConfig->setAttachStdin(true);
+        $containerConfig->setAttachStdout(true);
+        $containerConfig->setAttachStderr(true);
+
+        $docker->containerCreate($containerConfig, ['name' => 'my-container-unique-name']);
+
+// You also need to set stream to true to get the logs, and tell which stream you want to attach
+        $attachStream = $docker->containerAttach('my-container-unique-name', [
+            'stream' => true,
+            'stdin' => true,
+            'stdout' => true,
+            'stderr' => true
+        ]);
+        $docker->containerStart('my-container-unique-name');
+
+        $attachStream->onStdout(function ($stdout) {
+            $this->stdout .= $stdout;
+            echo $stdout;
+        });
+        $attachStream->onStderr(function ($stderr) {
+            $this->stderr .= $stderr;
+            echo $stderr;
+        });
+
+        $attachStream->wait();
+
         $this->pullImage();
         $this->launchContainer();
         $this->updateContainer();
@@ -99,13 +139,13 @@ class Docker extends \Ease\Sand implements \MultiFlexi\executor
     public static function logo()
     {
         return 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz'
-           . '0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gVXBsb2FkZWQgdG86IFNWRyBSZXBvL'
-           . 'CB3d3cuc3ZncmVwby5jb20sIEdlbmVyYXRvcjogU1ZHIFJlcG8gTWl4ZXIgVG9vbHMgLS0+'
-           . 'Cgo8c3ZnCiAgIGFyaWEtbGFiZWw9IkRvY2tlciIKICAgcm9sZT0iaW1nIgogICB2aWV3Qm94'
-           . 'PSIwIDAgNTEyIDUxMiIKICAgdmVyc2lvbj0iMS4xIgogICBpZD0ic3ZnNTkiCiAgIHNvZGlwb'
-           . '2RpOmRvY25hbWU9ImRvY2tlci1zdmdyZXBvLWNvbS5zdmciCiAgIGlua3NjYXBlOnZlcnNpb2'
-           . '49IjEuMi4yIChiMGE4NDg2NTQxLCAyMDIyLTEyLTAxKSIKICAgeG1sbnM6aW5rc2NhcGU9Imh0'
-           . 'dHA6Ly93d3cuaW5rc2NhcGUub3JnL25hbWVzcGFjZXMvaW5rc2NhcGUiCiAgIHhtbG5zOnNvZGl'
+                . '0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gVXBsb2FkZWQgdG86IFNWRyBSZXBvL'
+                . 'CB3d3cuc3ZncmVwby5jb20sIEdlbmVyYXRvcjogU1ZHIFJlcG8gTWl4ZXIgVG9vbHMgLS0+'
+                . 'Cgo8c3ZnCiAgIGFyaWEtbGFiZWw9IkRvY2tlciIKICAgcm9sZT0iaW1nIgogICB2aWV3Qm94'
+                . 'PSIwIDAgNTEyIDUxMiIKICAgdmVyc2lvbj0iMS4xIgogICBpZD0ic3ZnNTkiCiAgIHNvZGlwb'
+                . '2RpOmRvY25hbWU9ImRvY2tlci1zdmdyZXBvLWNvbS5zdmciCiAgIGlua3NjYXBlOnZlcnNpb2'
+                . '49IjEuMi4yIChiMGE4NDg2NTQxLCAyMDIyLTEyLTAxKSIKICAgeG1sbnM6aW5rc2NhcGU9Imh0'
+                . 'dHA6Ly93d3cuaW5rc2NhcGUub3JnL25hbWVzcGFjZXMvaW5rc2NhcGUiCiAgIHhtbG5zOnNvZGl'
                 . 'wb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2Rp'
                 . 'cG9kaS0wLmR0ZCIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc'
                 . '3ZnIgogICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj'
@@ -130,5 +170,17 @@ class Docker extends \Ease\Sand implements \MultiFlexi\executor
                 . 'LTQ2LTM1LTQ2cy0yOSAzNS04IDc0Yy02IDMtMTYgNy0zMSA3SDY4Yy01IDE5L'
                 . 'TUgMTQ1IDEzMyAxNDUgOTkgMCAxNzMtNDYgMjA4LTEzMCA1MiA0IDYzLTM5ID'
                 . 'YzLTM5IgogICAgIGlkPSJwYXRoNTciIC8+Cjwvc3ZnPgo=';
+    }
+
+    public function getErrorOutput()
+    {
+    }
+
+    public function getExitCode()
+    {
+    }
+
+    public function getOutput()
+    {
     }
 }
