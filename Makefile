@@ -93,6 +93,9 @@ phpunit:
 daemon:
 	export $(grep -v '#' .env | xargs) && cd lib && php -f ./daemon.php
 
+testimage:
+	podman build -f tests/Containerfile . -t docker.io/vitexsoftware/multiflexi-probe
+
 packages:
 	debuild -us -uc
 
