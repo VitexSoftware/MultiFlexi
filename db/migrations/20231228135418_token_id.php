@@ -29,7 +29,5 @@ final class TokenId extends AbstractMigration {
                     ->changeColumn('id', 'integer', ['identity' => true, 'signed' => false])
                     ->save();
         }
-
-        $table->addForeignKey('user_id', 'user', 'id', ['constraint' => 'tokeuser_must_exist'])->save();
     }
 }
