@@ -14,8 +14,8 @@ namespace MultiFlexi;
  *
  * @author vitex
  */
-class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
-{
+class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable {
+
     /**
      * Saves obejct instace (singleton...).
      */
@@ -28,8 +28,7 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
     /**
      *
      */
-    public function __construct()
-    {
+    public function __construct() {
         //        parent::__construct();
         $this->setUser(User::singleton()->getUserID());
     }
@@ -42,8 +41,7 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
      * @link http://docs.php.net/en/language.oop5.patterns.html Dokumentace a
      * priklad
      */
-    public static function singleton()
-    {
+    public static function singleton() {
         if (!isset(self::$instance)) {
             $class = __CLASS__;
             self::$instance = new $class();
@@ -56,8 +54,7 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
      * ID of current company
      * @param int $id
      */
-    public function setCompany($id)
-    {
+    public function setCompany($id) {
         $this->companyId = $id;
     }
 
@@ -65,8 +62,7 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
      * ID of current application
      * @param int $id
      */
-    public function setApplication($id)
-    {
+    public function setApplication($id) {
         $this->applicationId = $id;
     }
 
@@ -74,8 +70,7 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
      * ID of current user
      * @param int $id
      */
-    public function setUser($id)
-    {
+    public function setUser($id) {
         $this->userId = $id;
     }
 
@@ -88,8 +83,7 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
      *
      * @return int ID of log in databae
      */
-    public function addToLog($caller, $message, $type = 'message')
-    {
+    public function addToLog($caller, $message, $type = 'message') {
         return $this->insertToSQL([
                     'venue' => self::venuize($caller),
                     'severity' => $type,
@@ -105,8 +99,7 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
      *
      * @param mixed $caller
      */
-    public static function venuize($caller)
-    {
+    public static function venuize($caller) {
         switch (gettype($caller)) {
             case 'object':
                 if (method_exists($caller, 'getObjectName')) {
@@ -129,29 +122,32 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
      *
      * @return string
      */
-    public static function removeEmoji($string)
-    {
-        // Match Enclosed Alphanumeric Supplement
-        $regex_alphanumeric = '/[\x{1F100}-\x{1F1FF}]/u';
-        $clear_string = preg_replace($regex_alphanumeric, '', $string);
-        // Match Miscellaneous Symbols and Pictographs
-        $regex_symbols = '/[\x{1F300}-\x{1F5FF}]/u';
-        $clear_string = preg_replace($regex_symbols, '', $clear_string);
-        // Match Emoticons
-        $regex_emoticons = '/[\x{1F600}-\x{1F64F}]/u';
-        $clear_string = preg_replace($regex_emoticons, '', $clear_string);
-        // Match Transport And Map Symbols
-        $regex_transport = '/[\x{1F680}-\x{1F6FF}]/u';
-        $clear_string = preg_replace($regex_transport, '', $clear_string);
-        // Match Supplemental Symbols and Pictographs
-        $regex_supplemental = '/[\x{1F900}-\x{1F9FF}]/u';
-        $clear_string = preg_replace($regex_supplemental, '', $clear_string);
-        // Match Miscellaneous Symbols
-        $regex_misc = '/[\x{2600}-\x{26FF}]/u';
-        $clear_string = preg_replace($regex_misc, '', $clear_string);
-        // Match Dingbats
-        $regex_dingbats = '/[\x{2700}-\x{27BF}]/u';
-        $clear_string = preg_replace($regex_dingbats, '', $clear_string);
+    public static function removeEmoji($string) {
+        if ($string) {
+            // Match Enclosed Alphanumeric Supplement
+            $regex_alphanumeric = '/[\x{1F100}-\x{1F1FF}]/u';
+            $clear_string = preg_replace($regex_alphanumeric, '', $string);
+            // Match Miscellaneous Symbols and Pictographs
+            $regex_symbols = '/[\x{1F300}-\x{1F5FF}]/u';
+            $clear_string = preg_replace($regex_symbols, '', $clear_string);
+            // Match Emoticons
+            $regex_emoticons = '/[\x{1F600}-\x{1F64F}]/u';
+            $clear_string = preg_replace($regex_emoticons, '', $clear_string);
+            // Match Transport And Map Symbols
+            $regex_transport = '/[\x{1F680}-\x{1F6FF}]/u';
+            $clear_string = preg_replace($regex_transport, '', $clear_string);
+            // Match Supplemental Symbols and Pictographs
+            $regex_supplemental = '/[\x{1F900}-\x{1F9FF}]/u';
+            $clear_string = preg_replace($regex_supplemental, '', $clear_string);
+            // Match Miscellaneous Symbols
+            $regex_misc = '/[\x{2600}-\x{26FF}]/u';
+            $clear_string = preg_replace($regex_misc, '', $clear_string);
+            // Match Dingbats
+            $regex_dingbats = '/[\x{2700}-\x{27BF}]/u';
+            $clear_string = preg_replace($regex_dingbats, '', $clear_string);
+        } else {
+            $clear_string = '';
+        }
         return $clear_string;
     }
 }
