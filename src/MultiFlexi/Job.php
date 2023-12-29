@@ -219,7 +219,7 @@ class Job extends Engine {
                 'end' => null,
                 'company_id' => $companyId,
                 'company_name' => $this->company->getDataValue('name'),
-                'comapny_code' => $this->company->getDataValue('code'),
+                'company_code' => $this->company->getDataValue('code'),
                 'exitcode' => -1,
                 'stdout' => null,
                 'stderr' => null,
