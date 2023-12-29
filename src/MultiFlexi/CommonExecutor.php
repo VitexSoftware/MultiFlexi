@@ -44,11 +44,11 @@ abstract class CommonExecutor extends \Ease\Sand {
      */
     public $stderr;
     public $environment = [];
+
     /**
      * @var array
      */
     public $outputCache = [];
-
 
     /**
      *
@@ -59,26 +59,22 @@ abstract class CommonExecutor extends \Ease\Sand {
         $this->setObjectName($job->getMyKey() . '@' . \Ease\Logger\Message::getCallerName($this));
         $this->environment = $job->getFullEnvironment();
     }
-    
+
     /**
      * Add Output line into cache
      */
-    public function addOutput($line, $type)
-    {
+    public function addOutput($line, $type) {
         $this->outputCache[microtime()] = ['line' => $line, 'type' => $type];
     }
 
     /**
      * Get Output cache as plaintext
      */
-    public function getOutputCachePlaintext()
-    {
+    public function getOutputCachePlaintext() {
         $output = '';
         foreach ($this->outputCache as $line) {
             $output .= $line['line'] . "\n";
         }
         return $output;
     }
-
-    
 }
