@@ -264,7 +264,7 @@ class Job extends Engine
                     echo new \Ease\Html\DivTag(nl2br($outline));
                 });
                 if ($result == 0) {
-                    $appCompany->setProvision(1);
+                    $runTemplate->setProvision(1);
                     if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
                         $this->reportToZabbix(['phase' => 'setup']); //TODO: report provision done
                     }
