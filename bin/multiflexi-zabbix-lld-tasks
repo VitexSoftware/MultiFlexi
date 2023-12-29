@@ -1,2 +1,2 @@
 #!/bin/sh
-php -q -f /usr/lib/multiflexi/zabbixlld.php -a $@
+php -q -f /usr/lib/multiflexi/zabbixlld.php -- -a $@

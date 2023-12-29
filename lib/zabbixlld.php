@@ -36,11 +36,15 @@ foreach ($companer->listingQuery()->where('enabled', 1) as $companyData) {
             $lldData[] = [
                 '{#APPNAME}' => $appName,
                 '{#INTERVAL}' => Job::codeToInterval($companyAppData['interv']),
-                '{#COMPANY}' => $companyData['name']
+                '{#COMPANY_NAME}' => $companyData['name'],
+                '{#COMPANY_CODE}' => $companyData['code']
             ];
         }
     } else {
-        $lldData[] = ['{#COMPANY}' => $companyData['name']];
+        $lldData[] = [
+            '{#COMPANY_NAME}' => $companyData['name'],
+            '{#COMPANY_CODE}' => $companyData['code']
+        ];
     }
 }
 echo json_encode($lldData, JSON_PRETTY_PRINT);
