@@ -46,11 +46,11 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
     {
         $exec = $this->job->application->getDataValue('executable');
         $cmdparams = $this->job->getCmdParams();
-        $commandline = $exec . ' ' . $cmdparams;
+        $this->commandline = $exec . ' ' . $cmdparams;
         $this->setDataValue('commandline', $this->commandline);
-        $this->addStatusMessage('command begin: ' . $commandline . '@' . $this->job->company->getDataValue('name'));
-        $this->process = new \Symfony\Component\Process\Process(array_merge([$exec], explode(' ', $cmdparams)), null, Environmentor::flatEnv($this->environment), null, 32767);
-        $process->run(function ($type, $buffer) {
+        $this->addStatusMessage('command begin: ' . $this->commandline . '@' . $this->job->company->getDataValue('name'));
+        $this->process = new \Symfony\Component\Process\Process(array_merge([$exec], explode(' ', $cmdparams)), null, \MultiFlexi\Environmentor::flatEnv($this->environment), null, 32767);
+        $this->process->run(function ($type, $buffer) {
             $logger = new \Ease\Sand();
             $logger->setObjectName('Runner');
             if (\Symfony\Component\Process\Process::ERR === $type) {
@@ -61,7 +61,7 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
                 $this->addOutput($buffer, 'success');
             }
         });
-        $this->addStatusMessage('end' . $exec . '@' . $this->application->getDataValue('name'));
+        $this->addStatusMessage('Launch ended: ' . $exec . '@' . $this->job->application->getDataValue('name').' '.$this->process->getExitCodeText());
     }
 
     public function storeLogs()

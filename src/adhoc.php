@@ -42,7 +42,7 @@ $apper = new \MultiFlexi\Application();
 $launchTabs = new \Ease\TWB4\Tabs();
 foreach ($assigned as $assignedAppId) {
     $apper->loadFromSQL($assignedAppId);
-    $launchTabs->addTab($apper->getRecordName(), new AppInfo($apper, $companer->getMyKey()));
+    $launchTabs->addTab( new AppLogo($apper). _($apper->getRecordName()), new AppInfo($apper, $companer->getMyKey()));
 }
 $oPage->container->addItem(new CompanyPanel($companer, [new \Ease\Html\H2Tag(_('Application Launcher')),$launchTabs]));
 

@@ -39,7 +39,7 @@ class LogToZabbix implements \Ease\Logger\Loggingable
     /**
      * Send message to Zabbix
      *
-     * @param mixed $caller
+     * @param mixed  $caller
      * @param string $message
      * @param string $type
      */
