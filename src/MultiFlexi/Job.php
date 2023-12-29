@@ -72,11 +72,6 @@ class Job extends Engine
     public $company = null;
 
     /**
-     * @var array
-     */
-    public $outputCache = [];
-
-    /**
      * Job Object
      *
      * @param int $identifier
@@ -215,6 +210,8 @@ class Job extends Engine
         $companyId = $runTemplate->getDataValue('company_id');
 
         $this->application = new Application($appId);
+        LogToSQL::singleton()->setApplication($appId);
+        
         $this->company = new Company($companyId);
 
         $this->environment = array_merge($this->getFullEnvironment(), $envOverride);
@@ -307,29 +304,8 @@ class Job extends Engine
     public function performJob()
     {
         $this->runBegin();
-        LogToSQL::singleton()->setApplication($this->application->getMyKey());
         $this->executor->launch();
         $this->runEnd($this->executor->getExitCode(), $this->executor->getOutput(), $this->executor->getErrorOutput());
-    }
-
-    /**
-     * Add Output line into cache
-     */
-    public function addOutput($line, $type)
-    {
-        $this->outputCache[microtime()] = ['line' => $line, 'type' => $type];
-    }
-
-    /**
-     * Get Output cache as plaintext
-     */
-    public function getOutputCachePlaintext()
-    {
-        $output = '';
-        foreach ($this->outputCache as $line) {
-            $output .= $line['line'] . "\n";
-        }
-        return $output;
     }
 
     /**

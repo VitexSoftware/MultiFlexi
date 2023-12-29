@@ -119,8 +119,8 @@ class MainMenu extends \Ease\Html\DivTag
 
     /**
      *
-     * @param type $nav
-     * @param type $apps
+     * @param string $nav
+     * @param array  $apps
      */
     public function appsMenuEnabled($nav, $apps)
     {

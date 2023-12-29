@@ -10,7 +10,6 @@
 namespace MultiFlexi\Ui;
 
 use Ease\Html\ATag;
-use Ease\TWB4\Panel;
 use Ease\TWB4\Row;
 use MultiFlexi\Company;
 
