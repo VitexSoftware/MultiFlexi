@@ -1,4 +1,4 @@
-multiflexi (1.10.0) UNRELEASED; urgency=medium
+multiflexi (1.10.1) UNRELEASED; urgency=medium
 
   [ CyberVitexus ]
   * Ability choose run interval between hour and year
@@ -46,7 +46,10 @@ multiflexi (1.10.0) UNRELEASED; urgency=medium
   [  ]
   * New Native Executor used now
 
- --  <vitezslav.dvorak@spojenet.cz>  Fri, 29 Dec 2023 17:35:53 +0100
+  [  ]
+  * Zabbix LLD company_code
+
+ --  <vitezslav.dvorak@spojenet.cz>  Fri, 29 Dec 2023 19:14:36 +0100
 
 multiflexi (0.1) experimental; urgency=medium
 
