@@ -32,7 +32,9 @@ if (is_null($app->getMyKey())) {
                 if ($file['error'] == 0) {
                     $tmpName = tempnam(sys_get_temp_dir(), 'multiflexi_') . '_' . basename($file['name']);
                     if (move_uploaded_file($file['tmp_name'], $tmpName)) {
-                        $uploadEnv[$field] = $tmpName;
+                        $uploadEnv[$field]['value'] = $tmpName;
+                        $uploadEnv[$field]['type'] = 'file';
+                        $uploadEnv[$field]['source'] = 'Upload';
                     }
                 }
             }
@@ -44,7 +46,7 @@ if (is_null($app->getMyKey())) {
             $runTemplate->setMyKey($runTemplateId);
         }
 
-        $jobber->prepareJob($runTemplateId, $uploadEnv);
+        $jobber->prepareJob($runTemplateId, $uploadEnv, '', \Ease\WebPage::getRequestValue('executor'));
         $jobber->scheduleJobRun(new \DateTime($when));
 
         $oPage->container->addItem(new JobInfo($jobber));

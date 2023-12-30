@@ -14,8 +14,8 @@ namespace MultiFlexi;
  *
  * @author vitex
  */
-class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable {
-
+class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
+{
     /**
      * Saves obejct instace (singleton...).
      */
@@ -28,7 +28,8 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable {
     /**
      *
      */
-    public function __construct() {
+    public function __construct()
+    {
         //        parent::__construct();
         $this->setUser(User::singleton()->getUserID());
     }
@@ -41,7 +42,8 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable {
      * @link http://docs.php.net/en/language.oop5.patterns.html Dokumentace a
      * priklad
      */
-    public static function singleton() {
+    public static function singleton()
+    {
         if (!isset(self::$instance)) {
             $class = __CLASS__;
             self::$instance = new $class();
@@ -54,7 +56,8 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable {
      * ID of current company
      * @param int $id
      */
-    public function setCompany($id) {
+    public function setCompany($id)
+    {
         $this->companyId = $id;
     }
 
@@ -62,7 +65,8 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable {
      * ID of current application
      * @param int $id
      */
-    public function setApplication($id) {
+    public function setApplication($id)
+    {
         $this->applicationId = $id;
     }
 
@@ -70,7 +74,8 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable {
      * ID of current user
      * @param int $id
      */
-    public function setUser($id) {
+    public function setUser($id)
+    {
         $this->userId = $id;
     }
 
@@ -83,7 +88,8 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable {
      *
      * @return int ID of log in databae
      */
-    public function addToLog($caller, $message, $type = 'message') {
+    public function addToLog($caller, $message, $type = 'message')
+    {
         return $this->insertToSQL([
                     'venue' => self::venuize($caller),
                     'severity' => $type,
@@ -99,7 +105,8 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable {
      *
      * @param mixed $caller
      */
-    public static function venuize($caller) {
+    public static function venuize($caller)
+    {
         switch (gettype($caller)) {
             case 'object':
                 if (method_exists($caller, 'getObjectName')) {
@@ -122,7 +129,8 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable {
      *
      * @return string
      */
-    public static function removeEmoji($string) {
+    public static function removeEmoji($string)
+    {
         if ($string) {
             // Match Enclosed Alphanumeric Supplement
             $regex_alphanumeric = '/[\x{1F100}-\x{1F1FF}]/u';

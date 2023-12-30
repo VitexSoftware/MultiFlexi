@@ -79,5 +79,6 @@ class JobScheduleForm extends Form
         foreach ($uploadFields as $uploadField) {
             $this->addInput(new \Ease\Html\InputFileTag($uploadField['keyname']), $uploadField['description']);
         }
+        $this->addInput(new AppExecutorSelect($this->app), _('Executor'), 'Native', _('Choose Executon platfom'));
     }
 }
