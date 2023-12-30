@@ -26,8 +26,8 @@ class ExecutorsListing extends \Ease\Html\DivTag
             $executorClass = '\\MultiFlexi\\Executor\\' . $injector;
             $moduleRow = new \Ease\TWB4\Row();
 
-            $moduleRow->addColumn(2, [new \Ease\Html\StrongTag($executorClass::name()), new \Ease\Html\PTag(new \Ease\Html\SmallTag($executorClass::description())) ]);
-            $moduleRow->addColumn(6, 'x');
+            $moduleRow->addColumn(2, new ExecutorImage($injector, ['height' => '50px']));
+            $moduleRow->addColumn(4, [new \Ease\Html\StrongTag($executorClass::name()), new \Ease\Html\PTag(new \Ease\Html\SmallTag($executorClass::description())) ]);
 
             $this->addItem(new \Ease\Html\PTag($moduleRow));
         }

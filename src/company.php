@@ -25,7 +25,7 @@ $_SESSION['customer'] = $companies->getDataValue('customer');
 
 $companyEnver = new \MultiFlexi\CompanyEnv($companies->getMyKey());
 $jobber = new \MultiFlexi\Job();
-$jobs = $jobber->listingQuery()->select(['apps.name AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'runtemplate.id AS runtemplateid', 'schedule AS scheduled'], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->leftJoin('runtemplate ON runtemplate.company_id = job.company_id AND runtemplate.app_id = job.app_id')->where('job.company_id', $companies->getMyKey())->limit(20)->orderBy('job.id DESC')->fetchAll();
+$jobs = $jobber->listingQuery()->select(['apps.name AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'job.executor', 'login', 'job.app_id AS app_id', 'runtemplate.id AS runtemplateid', 'schedule AS scheduled'], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->leftJoin('runtemplate ON runtemplate.company_id = job.company_id AND runtemplate.app_id = job.app_id')->where('job.company_id', $companies->getMyKey())->limit(20)->orderBy('job.id DESC')->fetchAll();
 $jobList = new \Ease\TWB4\Table();
 $jobList->addRowHeaderColumns([_('Application'), _('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'), _('Launch now'), _('Launch in Background')]);
 foreach ($jobs as $job) {
@@ -49,9 +49,11 @@ foreach ($jobs as $job) {
     }
     $job['exitcode'] = new ExitCode($job['exitcode']);
     $job['launched_by'] = [
+        new ExecutorImage($job['executor'], ['align' => 'right','height' => '50px']),
         new \Ease\Html\DivTag($job['launched_by'] ? new \Ease\Html\ATag('user.php?id=' . $job['launched_by'], new \Ease\TWB4\Badge('info', $job['login'])) : _('Timer')),
         new \Ease\Html\DivTag($job['scheduled'])
     ];
+    unset($job['executor']);
     unset($job['scheduled']);
     unset($job['login']);
     $jobList->addRowColumns($job);

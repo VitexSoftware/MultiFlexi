@@ -42,14 +42,40 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
         return _('Run Job on same machine as MultiFlexi itself');
     }
 
+    /**
+     *
+     * @return string
+     */
+    public function executable()
+    {
+        return $this->job->application->getDataValue('executable');
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function cmdparams()
+    {
+        return $this->job->getCmdParams();
+    }
+
+
+    /**
+     *
+     * @return string
+     */
+    public function commandline()
+    {
+        return $this->executable() . ' ' . $this->cmdparams();
+    }
+
     public function launch()
     {
-        $exec = $this->job->application->getDataValue('executable');
-        $cmdparams = $this->job->getCmdParams();
-        $this->commandline = $exec . ' ' . $cmdparams;
+        $this->commandline = $this->commandline();
         $this->setDataValue('commandline', $this->commandline);
         $this->addStatusMessage('command begin: ' . $this->commandline . '@' . $this->job->company->getDataValue('name'));
-        $this->process = new \Symfony\Component\Process\Process(array_merge([$exec], explode(' ', $cmdparams)), null, \MultiFlexi\Environmentor::flatEnv($this->environment), null, 32767);
+        $this->process = new \Symfony\Component\Process\Process(array_merge([$this->executable()], explode(' ', $this->cmdparams())), null, \MultiFlexi\Environmentor::flatEnv($this->environment), null, 32767);
         $this->process->run(function ($type, $buffer) {
             $logger = new \Ease\Sand();
             $logger->setObjectName('Runner');
@@ -61,7 +87,7 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
                 $this->addOutput($buffer, 'success');
             }
         });
-        $this->addStatusMessage('Launch ended: ' . $exec . '@' . $this->job->application->getDataValue('name').' '.$this->process->getExitCodeText());
+        $this->addStatusMessage('Launch ended: ' . $this->executable() . '@' . $this->job->application->getDataValue('name') . ' ' . $this->process->getExitCodeText());
     }
 
     public function storeLogs()

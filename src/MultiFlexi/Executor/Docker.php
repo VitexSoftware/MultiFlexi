@@ -20,7 +20,7 @@ use Docker\API\Model\ContainersCreatePostBody;
  *
  * @author vitex
  */
-class Docker extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
+class Docker extends Native implements \MultiFlexi\executor
 {
     use \Ease\Logger\Logging;
 
@@ -43,8 +43,7 @@ class Docker extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
     }
 
     /**
-     *
-     * @return string
+     * @inheritDoc
      */
     public static function description(): string
     {
@@ -54,76 +53,23 @@ class Docker extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
     /**
      * @see https://docker-php.readthedocs.io/en/latest/cookbook/container-run/
      */
-    public function launch()
+    public function cmdparams()
     {
-
-        $docker = DockerClient::
-
-        $containerConfig = new ContainersCreatePostBody();
-        $containerConfig->setImage('busybox:latest');
-        $containerConfig->setCmd(['echo', 'I am running a command']);
-// You need to attach stream of the container to docker
-        $containerConfig->setAttachStdin(true);
-        $containerConfig->setAttachStdout(true);
-        $containerConfig->setAttachStderr(true);
-
-        $docker->containerCreate($containerConfig, ['name' => 'my-container-unique-name']);
-
-// You also need to set stream to true to get the logs, and tell which stream you want to attach
-        $attachStream = $docker->containerAttach('my-container-unique-name', [
-            'stream' => true,
-            'stdin' => true,
-            'stdout' => true,
-            'stderr' => true
-        ]);
-        $docker->containerStart('my-container-unique-name');
-
-        $attachStream->onStdout(function ($stdout) {
-            $this->stdout .= $stdout;
-            echo $stdout;
-        });
-        $attachStream->onStderr(function ($stderr) {
-            $this->stderr .= $stderr;
-            echo $stderr;
-        });
-
-        $attachStream->wait();
-
-        $this->pullImage();
-        $this->launchContainer();
-        $this->updateContainer();
-        $this->deployApp();
-        $this->runApp();
-        $this->storeLogs();
-        $this->stopContainer();
+        file_put_contents($this->envFile(), $this->job->envFile());
+        return "run --env-file " . $this->envFile() . ' ' . $this->job->application->getDataValue('ociimage');
     }
 
-    public function pullImage()
+    public function envFile()
     {
+        return sys_get_temp_dir() . '/' . $this->job->getMyKey() . '.env';
     }
 
-    public function launchContainer()
+    /**
+     * @inheritDoc
+     */
+    public function executable()
     {
-    }
-
-    public function updateContainer()
-    {
-    }
-
-    public function deployApp()
-    {
-    }
-
-    public function runApp()
-    {
-    }
-
-    public function storeLogs()
-    {
-    }
-
-    public function stopContainer()
-    {
+        return 'docker';
     }
 
     /**

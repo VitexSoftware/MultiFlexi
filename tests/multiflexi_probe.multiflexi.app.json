@@ -8,7 +8,7 @@
     "cmdparams": "{FILE_UPLOAD}",
     "deploy": "sudo apt install multiflexi",
     "homepage": "https://github.com/VitexSoftware/MultiFlexi",
-    "ociimage": "docker.io/vitexsoftware/multiflexi-probe:latest",
+    "ociimage": "docker.io/vitexsoftware/multiflexi-probe",
     "version": "0.1.0",
     "environment": {
         "FILE_UPLOAD": {

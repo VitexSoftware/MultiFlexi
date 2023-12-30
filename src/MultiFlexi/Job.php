@@ -17,8 +17,8 @@ use MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
  *
  * @author vitex
  */
-class Job extends Engine {
-
+class Job extends Engine
+{
     /**
      *
      * @var executor
@@ -77,7 +77,8 @@ class Job extends Engine {
      * @param int $identifier
      * @param array $options
      */
-    public function __construct($identifier = null, $options = []) {
+    public function __construct($identifier = null, $options = [])
+    {
         parent::__construct($identifier, $options);
         if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
             $this->zabbixSender = new ZabbixSender(\Ease\Functions::cfg('ZABBIX_SERVER'));
@@ -96,7 +97,8 @@ class Job extends Engine {
      *
      * @return int new job ID
      */
-    public function newJob(int $companyId, int $appId, array $environment, string $scheduled = 'adhoc', $executor = 'Native') {
+    public function newJob(int $companyId, int $appId, array $environment, string $scheduled = 'adhoc', $executor = 'Native')
+    {
         $jobId = $this->insertToSQL([
             'company_id' => $companyId,
             'app_id' => $appId,
@@ -119,7 +121,8 @@ class Job extends Engine {
      *
      * @return int Job ID
      */
-    public function runBegin() {
+    public function runBegin()
+    {
         $appId = $this->application->getMyKey();
         $companyId = $this->company->getMyKey();
         $this->setObjectName();
@@ -144,7 +147,8 @@ class Job extends Engine {
      *
      * @return int
      */
-    public function runEnd($statusCode, $stdout, $stderr) {
+    public function runEnd($statusCode, $stdout, $stderr)
+    {
         $sqlLogger = LogToSQL::singleton();
         $sqlLogger->setCompany(0);
         $sqlLogger->setApplication(0);
@@ -168,7 +172,8 @@ class Job extends Engine {
      *
      * @return boolean|null application with setup command provision state or setup command is not set
      */
-    public function isProvisioned($appId, $companyId) {
+    public function isProvisioned($appId, $companyId)
+    {
         $appCompany = new RunTemplate();
         $appCompany->setMyKey($appCompany->runTemplateID($appId, $companyId));
         $appInfo = $appCompany->getAppInfo();
@@ -180,7 +185,8 @@ class Job extends Engine {
      *
      * @return string Column rendering
      */
-    public function columnDefs() {
+    public function columnDefs()
+    {
         return '
 "columnDefs": [
            // { "visible": false,  "targets": [ 0 ] }
@@ -197,7 +203,8 @@ class Job extends Engine {
      * @param string $scheduled     Time to launch
      * @param string $executor      Executor Class Name
      */
-    public function prepareJob(int $runTemplateId, $envOverride = [], $scheduled = 'adhoc', $executor = 'Native') {
+    public function prepareJob(int $runTemplateId, $envOverride = [], $scheduled = 'adhoc', $executor = 'Native')
+    {
         $runTemplate = new RunTemplate($runTemplateId);
         $appId = $runTemplate->getDataValue('app_id');
         $companyId = $runTemplate->getDataValue('company_id');
@@ -237,11 +244,11 @@ class Job extends Engine {
                 $appInfo = $runTemplate->getAppInfo();
                 $appEnvironment = Environmentor::flatEnv($this->environment);
                 $process = new \Symfony\Component\Process\Process(
-                        explode(' ', $setupCommand),
-                        null,
-                        $appEnvironment,
-                        null,
-                        32767
+                    explode(' ', $setupCommand),
+                    null,
+                    $appEnvironment,
+                    null,
+                    32767
                 );
                 $result = $process->run(function ($type, $buffer) {
                     $logger = new Runner();
@@ -274,7 +281,8 @@ class Job extends Engine {
      *
      * @return int schedule ID
      */
-    public function scheduleJobRun($when) {
+    public function scheduleJobRun($when)
+    {
         $scheduler = new Scheduler();
         return $scheduler->addJob($this, $when);
     }
@@ -284,7 +292,8 @@ class Job extends Engine {
      *
      * @param array $messageData override fields
      */
-    public function reportToZabbix($messageData) {
+    public function reportToZabbix($messageData)
+    {
         $packet = new ZabbixPacket();
         $hostname = \Ease\Functions::cfg('ZABBIX_HOST');
         $this->zabbixMessageData = array_merge($this->zabbixMessageData, $messageData);
@@ -295,7 +304,8 @@ class Job extends Engine {
     /**
      * Perform Job
      */
-    public function performJob() {
+    public function performJob()
+    {
         $this->runBegin();
         $this->executor->launch();
         $this->runEnd($this->executor->getExitCode(), $this->executor->getOutput(), $this->executor->getErrorOutput());
@@ -306,7 +316,8 @@ class Job extends Engine {
      *
      * @return string  command line
      */
-    public function getCmdline() {
+    public function getCmdline()
+    {
         return $this->application->getDataValue('executable') . ' ' . $this->getCmdParams();
     }
 
@@ -315,7 +326,8 @@ class Job extends Engine {
      *
      * @return string  command line parameters
      */
-    public function getCmdParams() {
+    public function getCmdParams()
+    {
         $cmdparams = $this->application->getDataValue('cmdparams');
         if (is_array($this->environment)) {
             foreach ($this->environment as $envKey => $envInfo) {
@@ -330,11 +342,13 @@ class Job extends Engine {
      *
      * @return string job output
      */
-    public function getOutput() {
+    public function getOutput()
+    {
         return $this->getDataValue('stdout');
     }
 
-    public function cleanUp() {
+    public function cleanUp()
+    {
         // TODO: Delete Uploaded files if any
     }
 
@@ -343,7 +357,8 @@ class Job extends Engine {
      *
      * @return string
      */
-    public function launcherScript() {
+    public function launcherScript()
+    {
         $launcher[] = '#!/bin/bash';
         $launcher[] = '';
         $launcher[] = '# ' . \Ease\Shared::appName() . ' v' . \Ease\Shared::AppVersion() . ' job #' . $this->getMyKey() . ' launcher. Generated ' . (new \DateTime())->format('Y-m-d H:i:s') . ' for company: ' . $this->company->getDataValue('name');
@@ -369,7 +384,8 @@ class Job extends Engine {
      *
      * @return string
      */
-    public static function codeToInterval($code) {
+    public static function codeToInterval($code)
+    {
         return array_key_exists($code, self::$intervalCode) ? self::$intervalCode[$code] : 'n/a';
     }
 
@@ -380,7 +396,8 @@ class Job extends Engine {
      *
      * @return string
      */
-    public static function intervalToCode($interval) {
+    public static function intervalToCode($interval)
+    {
         return array_key_exists($interval, array_flip(self::$intervalCode)) ? array_flip(self::$intervalCode)[$interval] : 'n/a';
     }
 
@@ -389,7 +406,8 @@ class Job extends Engine {
      *
      * @return array
      */
-    public function getEnv() {
+    public function getEnv()
+    {
         return $this->environment;
     }
 
@@ -398,7 +416,8 @@ class Job extends Engine {
      *
      * @return array Environment with metadata
      */
-    public function getFullEnvironment() {
+    public function getFullEnvironment()
+    {
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\\Env');
         $injectors = \Ease\Functions::classesInNamespace('MultiFlexi\\Env');
         $jobEnv = [];
@@ -414,14 +433,16 @@ class Job extends Engine {
      *
      * @return array
      */
-    public function compileEnv() {
+    public function compileEnv()
+    {
         return Environmentor::flatEnv($this->getFullEnvironment());
     }
 
     /**
      * @inheritDoc
      */
-    public function takeData($data) {
+    public function takeData($data)
+    {
         parent::takeData($data);
 
         $this->environment = empty($this->getDataValue('env')) ? [] : unserialize($this->getDataValue('env'));
@@ -432,15 +453,22 @@ class Job extends Engine {
             $this->application = new Application(intval($this->getDataValue('app_id')));
         }
 
-//        $executor = '\\MultiFlexi\\Executor\\' . $this->getDataValue('executor');
-//        if (class_exists($executor)) {
-//            $this->executor = new $executor($this);
-//        } else {
-        $this->executor = new \MultiFlexi\Executor\Native($this);
-//        }
+        $executor = '\\MultiFlexi\\Executor\\' . $this->getDataValue('executor');
+        if (class_exists($executor)) {
+            $this->executor = new $executor($this);
+        } else {
+            $this->addStatusMessage(sprintf(_('Requested Executor %s not availble'), $executor), 'warning');
+            $this->executor = new \MultiFlexi\Executor\Native($this);
+        }
     }
 
-    public function envFile() {
+    /**
+     * export .env file content
+     *
+     * @return string
+     */
+    public function envFile()
+    {
         $launcher[] = '# ' . \Ease\Shared::appName() . ' v' . \Ease\Shared::AppVersion() . ' job #' . $this->getMyKey() . ' environment. Generated ' . (new \DateTime())->format('Y-m-d H:i:s') . ' for company: ' . $this->company->getDataValue('name');
         $launcher[] = '';
         $environment = $this->getDataValue('env') ? unserialize($this->getDataValue('env')) : [];

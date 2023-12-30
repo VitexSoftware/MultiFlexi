@@ -16,8 +16,8 @@ namespace MultiFlexi;
  *
  * @author vitex
  */
-abstract class CommonExecutor extends \Ease\Sand {
-
+abstract class CommonExecutor extends \Ease\Sand
+{
     use \Ease\Logger\Logging;
 
     /**
@@ -54,7 +54,8 @@ abstract class CommonExecutor extends \Ease\Sand {
      *
      * @param Job $job
      */
-    public function __construct($job) {
+    public function __construct($job)
+    {
         $this->job = $job;
         $this->setObjectName($job->getMyKey() . '@' . \Ease\Logger\Message::getCallerName($this));
         $this->environment = $job->getFullEnvironment();
@@ -63,14 +64,16 @@ abstract class CommonExecutor extends \Ease\Sand {
     /**
      * Add Output line into cache
      */
-    public function addOutput($line, $type) {
+    public function addOutput($line, $type)
+    {
         $this->outputCache[microtime()] = ['line' => $line, 'type' => $type];
     }
 
     /**
      * Get Output cache as plaintext
      */
-    public function getOutputCachePlaintext() {
+    public function getOutputCachePlaintext()
+    {
         $output = '';
         foreach ($this->outputCache as $line) {
             $output .= $line['line'] . "\n";
