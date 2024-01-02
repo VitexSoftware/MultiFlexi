@@ -26,7 +26,7 @@ class ActionsListing extends \Ease\Html\DivTag
             $actionClass = '\\MultiFlexi\\Action\\' . $action;
             $moduleRow = new \Ease\TWB4\Row();
 
-//            $moduleRow->addColumn(2, new ExecutorImage($injector, ['height' => '50px']));
+            $moduleRow->addColumn(2, new ActionImage($action, ['height' => '50px']));
             $moduleRow->addColumn(4, [new \Ease\Html\StrongTag($actionClass::name()), new \Ease\Html\PTag(new \Ease\Html\SmallTag($actionClass::description()))]);
 
             $this->addItem(new \Ease\Html\PTag($moduleRow));

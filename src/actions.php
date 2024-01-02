@@ -18,7 +18,7 @@ $oPage->onlyForLogged();
 
 $oPage->addItem(new PageTop(_('Multi Flexi - Action Modules')));
 
-$oPage->container->addItem(new \Ease\TWB4\Panel(new \Ease\Html\H2Tag(_('Installed Executor Modules')), 'default', new ActionsListing()));
+$oPage->container->addItem(new \Ease\TWB4\Panel(new \Ease\Html\H2Tag(_('Installed Action Modules')), 'default', new ActionsListing()));
 
 $oPage->addItem(new PageBottom());
 

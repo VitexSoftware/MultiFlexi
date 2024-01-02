@@ -85,7 +85,7 @@ $editorRow = new \Ease\TWB4\Row();
 $editorRow->addColumn(8, $instanceRow);
 $editorRow->addColumn(2, new AppLogo($appliacation));
 
-$oPage->container->addItem(new Panel($instanceName, 'default', $editorRow, $cfgs));
+$oPage->container->addItem(new ApplicationPanel($appliacation, $editorRow, $cfgs));
 
 $oPage->addItem(new PageBottom());
 
