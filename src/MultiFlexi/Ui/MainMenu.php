@@ -211,6 +211,7 @@ class MainMenu extends \Ease\Html\DivTag
             array_merge([
             'createaccount.php' => '🤬&nbsp;' . _('New Admin'),
             'envmods.php' => '🌦️&nbsp;' . _('Environment Modules'),
+            'actions.php' => '🤖&nbsp;' . _('Actions'),
             'executors.php' => '🚀&nbsp;' . _('Executors'),
             'users.php' => new \Ease\TWB4\Widgets\FaIcon('list') . '&nbsp;' . _('Admin Overview'),
             '' => '',

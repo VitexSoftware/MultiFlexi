@@ -37,6 +37,7 @@
             "MultiFlexi\\Api\\": "src/MultiFlexi/Api",
             "MultiFlexi\\Env\\": "src/MultiFlexi/Env",
             "MultiFlexi\\Auth\\": "src/MultiFlexi/Auth",
+            "MultiFlexi\\Action\\": "src/MultiFlexi/Action",
             "MultiFlexi\\Zabbix\\": "src/MultiFlexi/Zabbix",
             "MultiFlexi\\Pohoda\\": "src/MultiFlexi/Pohoda",
             "MultiFlexi\\Executor\\": "src/MultiFlexi/Executor",
