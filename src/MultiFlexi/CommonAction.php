@@ -80,4 +80,13 @@ abstract class CommonAction extends \Ease\Sand
         }
         return $output;
     }
+    
+    /**
+     * Form Inputs
+     * @return mixed
+     */
+    public static function inputs($toggles){
+        return _('No Fields required');
+    }
+    
 }

@@ -94,9 +94,8 @@ $appTabs->addTab(_('Jobs'), [
 ]);
 $appTabs->addTab(_('Export'), new AppJson($apps));
 
-$oPage->container->addItem(new Panel(
-    $instanceName,
-    'inverse',
+$oPage->container->addItem(new ApplicationPanel(
+    $apps,
     $appTabs,
     ''
 ));

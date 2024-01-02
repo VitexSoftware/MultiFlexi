@@ -4,11 +4,15 @@
  * Multi Flexi - Periodical Tasks behaviour
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * @copyright  2023-2024 Vitex Software
  */
 
 namespace MultiFlexi\Ui;
 
+use Ease\TWB4\WebPage;
+use MultiFlexi\AbraFlexi\Company;
+use MultiFlexi\Application;
+use MultiFlexi\RunTemplate;
 use MultiFlexi\Ui\PageBottom;
 use MultiFlexi\Ui\PageTop;
 
@@ -16,14 +20,42 @@ require_once './init.php';
 
 $oPage->onlyForLogged();
 
-$runTemplater = new \MultiFlexi\RunTemplate();
+$runTemplater = new RunTemplate();
 $runTemplater->loadFromSQL($runTemplater->runTemplateID(WebPage::getRequestValue('app'), $_SESSION['company']));
+
+if (\Ease\WebPage::isPosted()) {
+    $succesActions = ActionsChooser::toggles('success');
+    $failActions = ActionsChooser::toggles('fail');
+    $runTemplater->setDataValue('fail', serialize($failActions));
+    $runTemplater->setDataValue('success', serialize($succesActions));
+    $runTemplater->saveToSQL();
+} else {
+    $failActions = $runTemplater->getDataValue('fail') ? unserialize($runTemplater->getDataValue('fail')) : [];
+    $succesActions = $runTemplater->getDataValue('success') ? unserialize($runTemplater->getDataValue('success')) : [];
+}
 
 $oPage->addItem(new PageTop(_('Periodical Tasks')));
 
 $periodcalTaskInfo = $runTemplater->getData();
 
-$oPage->container->addItem(new CompanyPanel(new \MultiFlexi\AbraFlexi\Company($periodcalTaskInfo['company_id']), nl2br(print_r($periodcalTaskInfo, 1))));
+$appPanel = new ApplicationPanel(new Application($periodcalTaskInfo['app_id']));
+
+$appPanel->addItem(new \Ease\Html\DivTag(_(\MultiFlexi\Job::codeToInterval($periodcalTaskInfo['interv'])) . ' ' . _('interval')));
+
+$actionsRow = new \Ease\TWB4\Row();
+$actionsRow->addColumn(6, new \Ease\TWB4\Panel(_('Success Actions'), 'success', new ActionsChooser('success', $succesActions), $periodcalTaskInfo['success']));
+$actionsRow->addColumn(6, new \Ease\TWB4\Panel(_('Fail Actions'), 'danger', new ActionsChooser('fail', $failActions), $periodcalTaskInfo['fail']));
+
+$appPanel->addItem($actionsRow);
+
+$jobtempform = new \Ease\TWB4\Form();
+$jobtempform->addItem(new \Ease\Html\InputHiddenTag('app', $periodcalTaskInfo['app_id']));
+$jobtempform->addItem(new \Ease\Html\InputHiddenTag('company_id', $periodcalTaskInfo['company_id']));
+$jobtempform->addItem(new \Ease\Html\InputHiddenTag('interval', $periodcalTaskInfo['interv']));
+$jobtempform->addItem($appPanel);
+$jobtempform->addItem(new \Ease\TWB4\SubmitButton(_('Update'), 'primary btn-lg btn-block'));
+
+$oPage->container->addItem(new CompanyPanel(new Company($periodcalTaskInfo['company_id']), $jobtempform));
 
 $oPage->addItem(new PageBottom());
 
