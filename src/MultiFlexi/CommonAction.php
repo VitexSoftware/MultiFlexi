@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi - Common Action
+ * Multi Flexi -
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software
@@ -16,7 +16,7 @@ namespace MultiFlexi;
  *
  * @author vitex
  */
-abstract class CommonExecutor extends \Ease\Sand
+abstract class CommonAction extends \Ease\Sand
 {
     use \Ease\Logger\Logging;
 
