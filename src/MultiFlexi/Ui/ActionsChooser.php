@@ -14,9 +14,10 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class ActionsChooser extends \Ease\Html\DivTag {
-
-    public function __construct($prefix = '', $toggles = [], $properties = []) {
+class ActionsChooser extends \Ease\Html\DivTag
+{
+    public function __construct($prefix = '', $toggles = [], $properties = [])
+    {
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\\Action');
         $actions = \Ease\Functions::classesInNamespace('MultiFlexi\\Action');
 
@@ -34,13 +35,14 @@ class ActionsChooser extends \Ease\Html\DivTag {
     }
 
     /**
-     * 
-     * 
+     *
+     *
      * @param string $prefix
-     * 
+     *
      * @return array
      */
-    public static function toggles($prefix) {
+    public static function toggles($prefix)
+    {
         $toggles = [];
         $updates = \Ease\WebPage::getRequestValue($prefix . 'actionSwitch') ? \Ease\WebPage::getRequestValue($prefix . 'actionSwitch') : [];
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\\Action');

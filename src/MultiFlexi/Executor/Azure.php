@@ -28,6 +28,16 @@ class Azure extends Native implements \MultiFlexi\executor
         return _('Azure');
     }
 
+    public function createContainer()
+    {
+        return 'az container create --resource-group myResourceGroup --name mycontainer --image myimage --dns-name-label mydnsname --ports 80 --environment-variables key1=value1 key2=value2';
+    }
+
+    public function launchContainer()
+    {
+        return 'az container start --resource-group myResourceGroup --name mycontainer';
+    }
+
     public static function description(): string
     {
         return _('Launch container in Azure');
