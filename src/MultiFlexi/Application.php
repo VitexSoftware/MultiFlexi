@@ -242,42 +242,49 @@ class Application extends Engine
     public function importAppJson($jsonFile)
     {
         $fields = [];
-        $importData = json_decode(file_get_contents($jsonFile), true);
-        if (is_array($importData)) {
-            $importData['enabled'] = 'on';
 
-            $environment = array_key_exists('environment', $importData) ? $importData['environment'] : [];
-            unset($importData['environment']);
-            $this->addStatusMessage('Importing ' . $importData['name'] . ' from ' . $jsonFile . ' created by ' . $importData['multiflexi'], 'debug');
-            unset($importData['multiflexi']);
-            $importData['requirements'] = array_key_exists('requirements', $importData) ? strval($importData['requirements']) : '';
-            $this->takeData($importData);
+        $appSpecRaw = file_get_contents($jsonFile);
 
-            $candidat = $this->listingQuery()->where('executable', $importData['executable'])->whereOr('name', $importData['name']);
-            if ($candidat->count()) {
-                $this->setMyKey($candidat->fetchColumn());
-            }
+        if (json_validate($appSpecRaw)) {
+            $importData = json_decode($appSpecRaw, true);
+            if (is_array($importData)) {
+                $importData['enabled'] = 'on';
 
-            if ($this->dbsync()) {
-                $fields = [$importData['name']];
-                if (empty($environment) === false) {
-                    $confField = new Conffield();
-                    foreach ($environment as $envName => $envProperties) {
-                        if ($confField->addAppConfig($this->getMyKey(), $envName, $envProperties)) {
-                            $fields[] = $envName;
+                $environment = array_key_exists('environment', $importData) ? $importData['environment'] : [];
+                unset($importData['environment']);
+                $this->addStatusMessage('Importing ' . $importData['name'] . ' from ' . $jsonFile . ' created by ' . $importData['multiflexi'], 'debug');
+                unset($importData['multiflexi']);
+                $importData['requirements'] = array_key_exists('requirements', $importData) ? strval($importData['requirements']) : '';
+                $this->takeData($importData);
+
+                $candidat = $this->listingQuery()->where('executable', $importData['executable'])->whereOr('name', $importData['name']);
+                if ($candidat->count()) {
+                    $this->setMyKey($candidat->fetchColumn());
+                }
+
+                if ($this->dbsync()) {
+                    $fields = [$importData['name']];
+                    if (empty($environment) === false) {
+                        $confField = new Conffield();
+                        foreach ($environment as $envName => $envProperties) {
+                            if ($confField->addAppConfig($this->getMyKey(), $envName, $envProperties)) {
+                                $fields[] = $envName;
+                            }
+                        }
+                    }
+                    $this->addStatusMessage('Import:' . implode(',', $fields), 'success');
+
+                    $executable = Application::findBinaryInPath($this->getDataValue('executable'));
+                    if (empty($executable)) {
+                        $this->addStatusMessage(sprintf(_('executable %s not found'), $this->getDataValue('executable')), 'warning');
+                        if (array_key_exists('deploy', $importData) && !empty($envProperties['deploy'])) {
+                            $this->addStatusMessage(sprintf(_('consider: %s'), $importData['deploy']), 'info');
                         }
                     }
                 }
-                $this->addStatusMessage('Import:' . implode(',', $fields), 'success');
-
-                $executable = Application::findBinaryInPath($this->getDataValue('executable'));
-                if (empty($executable)) {
-                    $this->addStatusMessage(sprintf(_('executable %s not found'), $this->getDataValue('executable')), 'warning');
-                    if (array_key_exists('deploy', $importData) && !empty($envProperties['deploy'])) {
-                        $this->addStatusMessage(sprintf(_('consider: %s'), $importData['deploy']), 'info');
-                    }
-                }
             }
+        } else {
+            $this->addStatusMessage(sprintf(_('The %s does not contain valid json'), $jsonFile), 'error');
         }
         return $fields;
     }
