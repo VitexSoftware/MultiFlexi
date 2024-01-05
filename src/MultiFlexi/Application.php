@@ -245,7 +245,7 @@ class Application extends Engine
 
         $appSpecRaw = file_get_contents($jsonFile);
 
-        if (json_validate($appSpecRaw)) {
+        if (is_array($appSpecRaw)) {
             $importData = json_decode($appSpecRaw, true);
             if (is_array($importData)) {
                 $importData['enabled'] = 'on';
@@ -284,7 +284,7 @@ class Application extends Engine
                 }
             }
         } else {
-            $this->addStatusMessage(sprintf(_('The %s does not contain valid json'), $jsonFile), 'error');
+            $this->addStatusMessage(sprintf(_('The %s does not contain valid json') . ' ' . json_last_error_msg(), $jsonFile), 'error');
         }
         return $fields;
     }
