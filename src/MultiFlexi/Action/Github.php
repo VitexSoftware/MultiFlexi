@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi -
+ * Multi Flexi - Github Issue Action
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software
@@ -110,6 +110,6 @@ class Github extends \MultiFlexi\CommonAction
 
     public static function configForm()
     {
-        return new \Ease\TWB4\FormGroup(_('GitHub token'), new \Ease\Html\InputTextTag('Github.token'), 'ghp_iupB8adLxIIBezDWB1BH9HJCAtpcOL2scdmX', new \Ease\Html\ATag('https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens', _('How to obtain Github Token'))) ;
+        return new \Ease\TWB4\FormGroup(_('GitHub token'), new \Ease\Html\InputTextTag('Github[token]'), 'ghp_iupB8adLxIIBezDWB1BH9HJCAtpcOL2scdmX', new \Ease\Html\ATag('https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens', _('How to obtain Github Token'))) ;
     }
 }
