@@ -14,6 +14,15 @@ src/MultiFlexi/Env/*.php                  usr/lib/multiflexi/MultiFlexi/Env/
 src/MultiFlexi/Pohoda/*.php               usr/lib/multiflexi/MultiFlexi/Pohoda/
 src/MultiFlexi/AbraFlexi/*.php            usr/lib/multiflexi/MultiFlexi/AbraFlexi/
 src/MultiFlexi/Executor/Native.php        usr/lib/multiflexi/MultiFlexi/Executor
+
+src/MultiFlexi/Action/CustomCommand.php   usr/lib/multiflexi/MultiFlexi/Action
+#src/MultiFlexi/Action/Github.php          usr/lib/multiflexi/MultiFlexi/Action
+src/MultiFlexi/Action/LaunchJob.php       usr/lib/multiflexi/MultiFlexi/Action
+#src/MultiFlexi/Action/RedmineIssue.php    usr/lib/multiflexi/MultiFlexi/Action
+src/MultiFlexi/Action/Reschedule.php      usr/lib/multiflexi/MultiFlexi/Action
+#src/MultiFlexi/Action/TriggerJenkins.php  usr/lib/multiflexi/MultiFlexi/Action
+
+
 src/MultiFlexi/Ui/*.php                   usr/lib/multiflexi/MultiFlexi/Ui/
 src/MultiFlexi/Zabbix/*.php               usr/lib/multiflexi/MultiFlexi/Zabbix/
 src/MultiFlexi/Zabbix/Exception/*.php     usr/lib/multiflexi/MultiFlexi/Zabbix/Exception/
