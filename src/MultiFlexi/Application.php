@@ -244,8 +244,7 @@ class Application extends Engine
         $fields = [];
 
         $appSpecRaw = file_get_contents($jsonFile);
-
-        if (is_array($appSpecRaw)) {
+        if (empty($appSpecRaw) === false) {
             $importData = json_decode($appSpecRaw, true);
             if (is_array($importData)) {
                 $importData['enabled'] = 'on';
