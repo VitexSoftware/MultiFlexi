@@ -72,6 +72,12 @@ class Job extends Engine
     public $company = null;
 
     /**
+     *
+     * @var RunTemplate
+     */
+    public $runTemplate;
+
+    /**
      * Job Object
      *
      * @param int $identifier
@@ -155,6 +161,9 @@ class Job extends Engine
         if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
             $this->reportToZabbix(['phase' => 'jobDone', 'stdout' => $stdout, 'stderr' => $stderr, 'exitcode' => $statusCode, 'end' => (new \DateTime())->format('Y-m-d H:i:s')]);
         }
+
+        $this->performActions($statusCode == 0 ? 'success' : 'fail');
+
         return $this->updateToSQL([
                     'end' => new \Envms\FluentPDO\Literal('NOW()'),
                     'stdout' => addslashes($stdout),
@@ -205,9 +214,9 @@ class Job extends Engine
      */
     public function prepareJob(int $runTemplateId, $envOverride = [], $scheduled = 'adhoc', $executor = 'Native')
     {
-        $runTemplate = new RunTemplate($runTemplateId);
-        $appId = $runTemplate->getDataValue('app_id');
-        $companyId = $runTemplate->getDataValue('company_id');
+        $this->runTemplate = new RunTemplate($runTemplateId);
+        $appId = $this->runTemplate->getDataValue('app_id');
+        $companyId = $this->runTemplate->getDataValue('company_id');
 
         $this->application = new Application($appId);
         LogToSQL::singleton()->setApplication($appId);
@@ -241,7 +250,7 @@ class Job extends Engine
             $this->addStatusMessage(_('Perform initial setup'), 'warning');
             if (!empty(trim($setupCommand))) {
                 $this->application->addStatusMessage(_('Setup command') . ': ' . $setupCommand, 'debug');
-                $appInfo = $runTemplate->getAppInfo();
+                $appInfo = $this->runTemplate->getAppInfo();
                 $appEnvironment = Environmentor::flatEnv($this->environment);
                 $process = new \Symfony\Component\Process\Process(
                     explode(' ', $setupCommand),
@@ -264,7 +273,7 @@ class Job extends Engine
                     }
                 });
                 if ($result == 0) {
-                    $runTemplate->setProvision(1);
+                    $$this->runTemplate->setProvision(1);
                     if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
                         $this->reportToZabbix(['phase' => 'setup']); //TODO: report provision done
                     }
@@ -476,5 +485,21 @@ class Job extends Engine
             $launcher[] = $key . "='" . $envInfo['value'] . "'";
         }
         return implode("\n", $launcher);
+    }
+
+    /**
+     *
+     * @param string success | fail
+     */
+    public function performActions($mode)
+    {
+        $actions = $this->runTemplate->getDataValue($mode) ? unserialize($this->runTemplate->getDataValue($mode)) : [];
+        foreach ($actions as $action => $enabled) {
+            $actionClass = '\\MultiFlexi\\Action\\' . $action;
+            if ($enabled && class_exists($actionClass)) {
+                $actionHandler = new $actionClass($this);
+                $actionHandler->perform();
+            }
+        }
     }
 }

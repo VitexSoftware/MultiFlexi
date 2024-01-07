@@ -52,11 +52,14 @@ abstract class CommonAction extends \Ease\Sand
 
     /**
      *
-     * @param Job $job
+     * @param Job   $job
+     * @param array $options Action Options
      */
-    public function __construct($job)
+    public function __construct($job, $options = [])
     {
         $this->job = $job;
+        $this->setData($options);
+        $this->setObjectName();
         $this->setObjectName($job->getMyKey() . '@' . \Ease\Logger\Message::getCallerName($this));
         $this->environment = $job->getFullEnvironment();
     }
@@ -83,15 +86,24 @@ abstract class CommonAction extends \Ease\Sand
 
     /**
      * Form Inputs
+     *
      * @return mixed
      */
-    public static function inputs($toggles)
+    public static function inputs(string $action)
     {
-        return _('No Fields required');
+        return new \Ease\TWB4\Badge('info', _('No Fields required') . ' (' . $action . ')');
     }
 
     public static function configForm()
     {
-        return _('No Configuration required');
+        return new \Ease\TWB4\Badge('info', _('No Configuration required'));
+    }
+
+    /**
+     * Perform Action
+     */
+    public function perform()
+    {
+        $this->addStatusMessage(_('No Action performed'), 'debug');
     }
 }
