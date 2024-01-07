@@ -29,6 +29,9 @@ if (\Ease\WebPage::isPosted()) {
     $runTemplater->setDataValue('fail', serialize($failActions));
     $runTemplater->setDataValue('success', serialize($succesActions));
     $runTemplater->saveToSQL();
+
+    ActionsChooser::formModuleCofig('success');
+    ActionsChooser::formModuleCofig('fail');
 } else {
     $failActions = $runTemplater->getDataValue('fail') ? unserialize($runTemplater->getDataValue('fail')) : [];
     $succesActions = $runTemplater->getDataValue('success') ? unserialize($runTemplater->getDataValue('success')) : [];

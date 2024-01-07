@@ -28,7 +28,7 @@ Vagrant.configure("2") do |config|
     phinx seed:run -c /usr/lib/multiflexi/phinx-adapter.php
     a2enconf multiflexi
 
-    echo ServerName MultiAbraFlexi >> /etc/apache2/apache2.conf
+    echo ServerName MultiFlexi >> /etc/apache2/apache2.conf
     #sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
     #sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 

@@ -87,7 +87,7 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
                 $this->addOutput($buffer, 'success');
             }
         });
-        $this->addStatusMessage('Launch ended: ' . $this->executable() . '@' . $this->job->application->getDataValue('name') . ' ' . $this->process->getExitCodeText());
+        $this->addStatusMessage('Launch finished: ' . $this->executable() . '@' . $this->job->application->getDataValue('name') . ' ' . $this->process->getExitCodeText());
     }
 
     public function storeLogs()

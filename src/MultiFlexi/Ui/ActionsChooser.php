@@ -29,7 +29,7 @@ class ActionsChooser extends \Ease\Html\DivTag
             $moduleRow->addColumn(1, new ActionImage($action, ['height' => '50px']));
             $moduleRow->addColumn(1, new \Ease\TWB4\Widgets\Toggle($prefix . 'actionSwitch[' . $action . ']', (array_key_exists($action, $toggles) && $toggles[$action])));
             $moduleRow->addColumn(4, [new \Ease\Html\StrongTag($actionClass::name()), new \Ease\Html\PTag(new \Ease\Html\SmallTag($actionClass::description()))]);
-            $moduleRow->addColumn(4, $actionClass::inputs($toggles));
+            $moduleRow->addColumn(4, $actionClass::inputs($prefix));
             $this->addItem(new \Ease\Html\PTag($moduleRow));
         }
     }
@@ -41,7 +41,7 @@ class ActionsChooser extends \Ease\Html\DivTag
      *
      * @return array
      */
-    public static function toggles($prefix)
+    public static function toggles(string $prefix)
     {
         $toggles = [];
         $updates = \Ease\WebPage::getRequestValue($prefix . 'actionSwitch') ? \Ease\WebPage::getRequestValue($prefix . 'actionSwitch') : [];
@@ -51,5 +51,16 @@ class ActionsChooser extends \Ease\Html\DivTag
             $toggles[$action] = array_key_exists($action, $updates);
         }
         return $toggles;
+    }
+
+    /**
+     *
+     * @param string $prefix
+     *
+     * @return array
+     */
+    public static function formModuleCofig(string $prefix)
+    {
+        return \Ease\WebPage::getRequestValue($prefix) ? \Ease\WebPage::getRequestValue($prefix) : [];
     }
 }

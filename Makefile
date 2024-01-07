@@ -3,7 +3,7 @@ currentversion=$(shell dpkg-parsechangelog --show-field Version)
 nextversion=$(shell echo $(repoversion) | perl -ne 'chomp; print join(".", splice(@{[split/\./,$$_]}, 0, -1), map {++$$_} pop @{[split/\./,$$_]}), "\n";')
 
 clean:
-	rm -rf vendor composer.lock db/multiabraflexi.sqlite src/*/*dataTables*
+	rm -rf vendor composer.lock db/multiflexi.sqlite src/*/*dataTables*
 
 migration:
 	cd src ; ../vendor/bin/phinx migrate -c ../phinx-adapter.php ; cd ..
@@ -28,9 +28,9 @@ newseed:
 	read -p "Enter CamelCase seed name : " migname ; cd src ; ../vendor/bin/phinx seed:create $$migname -c ./phinx-adapter.php ; cd ..
 
 dbreset:
-	sudo rm -f db/multiabraflexi.sqlite
-	echo > db/multiabraflexi.sqlite
-	chmod 666 db/multiabraflexi.sqlite
+	sudo rm -f db/multiflexi.sqlite
+	echo > db/multiflexi.sqlite
+	chmod 666 db/multiflexi.sqlite
 	chmod ugo+rwX db
 	
 
