@@ -16,7 +16,7 @@ namespace MultiFlexi\Ui;
  */
 class ActionsChooser extends \Ease\Html\DivTag
 {
-    public function __construct($prefix = '', $toggles = [], $properties = [])
+    public function __construct($prefix, \MultiFlexi\Application $app, $toggles = [], $properties = [])
     {
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\\Action');
         $actions = \Ease\Functions::classesInNamespace('MultiFlexi\\Action');
@@ -24,13 +24,16 @@ class ActionsChooser extends \Ease\Html\DivTag
         parent::__construct(null, $properties);
         foreach ($actions as $action) {
             $actionClass = '\\MultiFlexi\\Action\\' . $action;
-            $moduleRow = new \Ease\TWB4\Row();
 
-            $moduleRow->addColumn(1, new ActionImage($action, ['height' => '50px']));
-            $moduleRow->addColumn(1, new \Ease\TWB4\Widgets\Toggle($prefix . 'actionSwitch[' . $action . ']', (array_key_exists($action, $toggles) && $toggles[$action])));
-            $moduleRow->addColumn(4, [new \Ease\Html\StrongTag($actionClass::name()), new \Ease\Html\PTag(new \Ease\Html\SmallTag($actionClass::description()))]);
-            $moduleRow->addColumn(4, $actionClass::inputs($prefix));
-            $this->addItem(new \Ease\Html\PTag($moduleRow));
+            if ($actionClass::usableForApp($app)) {
+                $moduleRow = new \Ease\TWB4\Row();
+
+                $moduleRow->addColumn(1, new ActionImage($action, ['height' => '50px']));
+                $moduleRow->addColumn(1, new \Ease\TWB4\Widgets\Toggle($prefix . 'actionSwitch[' . $action . ']', (array_key_exists($action, $toggles) && $toggles[$action])));
+                $moduleRow->addColumn(4, [new \Ease\Html\StrongTag($actionClass::name()), new \Ease\Html\PTag(new \Ease\Html\SmallTag($actionClass::description()))]);
+                $moduleRow->addColumn(4, $actionClass::inputs($prefix));
+                $this->addItem(new \Ease\Html\PTag($moduleRow));
+            }
         }
     }
 

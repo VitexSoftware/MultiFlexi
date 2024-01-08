@@ -20,6 +20,7 @@ src/MultiFlexi/Action/CustomCommand.php   usr/lib/multiflexi/MultiFlexi/Action
 src/MultiFlexi/Action/LaunchJob.php       usr/lib/multiflexi/MultiFlexi/Action
 #src/MultiFlexi/Action/RedmineIssue.php    usr/lib/multiflexi/MultiFlexi/Action
 src/MultiFlexi/Action/Reschedule.php      usr/lib/multiflexi/MultiFlexi/Action
+src/MultiFlexi/Action/Stop.php            usr/lib/multiflexi/MultiFlexi/Action
 #src/MultiFlexi/Action/TriggerJenkins.php  usr/lib/multiflexi/MultiFlexi/Action
 
 

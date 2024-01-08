@@ -47,4 +47,14 @@ class CustomCommand extends \MultiFlexi\CommonAction
     {
         return new \Ease\TWB4\FormGroup(_('Command'), new \Ease\Html\InputTextTag($prefix . '[CustomCommand][command]'), '', _('Bash shell is used'));
     }
+
+    /**
+     * Is this Action Situable for Application
+     *
+     * @param Application $app
+     */
+    public static function usableForApp($app): bool
+    {
+        return is_object($app);
+    }
 }

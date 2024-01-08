@@ -53,4 +53,14 @@ class LaunchJob extends \MultiFlexi\CommonAction
     {
         return new \MultiFlexi\Ui\CompanyAppChooser($prefix . '[LaunchJob][jobid]', new \MultiFlexi\Company($_SESSION['company']));
     }
+
+    /**
+     * Is this Action Situable for Application
+     *
+     * @param Application $app
+     */
+    public static function usableForApp($app): bool
+    {
+        return is_object($app);
+    }
 }
