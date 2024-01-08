@@ -41,13 +41,15 @@ $oPage->addItem(new PageTop(_('Periodical Tasks')));
 
 $periodcalTaskInfo = $runTemplater->getData();
 
-$appPanel = new ApplicationPanel(new Application($periodcalTaskInfo['app_id']));
+$app = new Application($periodcalTaskInfo['app_id']);
+
+$appPanel = new ApplicationPanel($app);
 
 $appPanel->addItem(new \Ease\Html\DivTag(_(\MultiFlexi\Job::codeToInterval($periodcalTaskInfo['interv'])) . ' ' . _('interval')));
 
 $actionsRow = new \Ease\TWB4\Row();
-$actionsRow->addColumn(6, new \Ease\TWB4\Panel(_('Success Actions'), 'success', new ActionsChooser('success', $succesActions), $periodcalTaskInfo['success']));
-$actionsRow->addColumn(6, new \Ease\TWB4\Panel(_('Fail Actions'), 'danger', new ActionsChooser('fail', $failActions), $periodcalTaskInfo['fail']));
+$actionsRow->addColumn(6, new \Ease\TWB4\Panel(_('Success Actions'), 'success', new ActionsChooser('success', $app, $succesActions), $periodcalTaskInfo['success']));
+$actionsRow->addColumn(6, new \Ease\TWB4\Panel(_('Fail Actions'), 'danger', new ActionsChooser('fail', $app, $failActions), $periodcalTaskInfo['fail']));
 
 $appPanel->addItem($actionsRow);
 

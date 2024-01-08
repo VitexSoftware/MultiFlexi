@@ -87,13 +87,17 @@ abstract class CommonAction extends \Ease\Sand
     /**
      * Form Inputs
      *
-     * @return mixed
+     * @return \Ease\Embedable
      */
     public static function inputs(string $action)
     {
         return new \Ease\TWB4\Badge('info', _('No Fields required') . ' (' . $action . ')');
     }
 
+    /**
+     *
+     * @return \Ease\Embedable
+     */
     public static function configForm()
     {
         return new \Ease\TWB4\Badge('info', _('No Configuration required'));
@@ -105,5 +109,15 @@ abstract class CommonAction extends \Ease\Sand
     public function perform()
     {
         $this->addStatusMessage(_('No Action performed'), 'debug');
+    }
+
+    /**
+     * Is this Action Situable for Application
+     *
+     * @param Application $app
+     */
+    public static function usableForApp($app): bool
+    {
+        return false;
     }
 }

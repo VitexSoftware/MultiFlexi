@@ -49,9 +49,19 @@ class Stop extends \MultiFlexi\CommonAction
     public function perform()
     {
         if ($this->job->runTemplate->deleteFromSQL(['id' => $this->job->runTemplate->getMyKey()])) {
-            $this->addStatusMessage(' 🛑 ' . sprintf(_('Periodic executing of «%s» for ❮%s❯ stopped'), $this->job->application->getRecordName(), $this->job->company->getRecordName()), 'success');
+            $this->addStatusMessage(sprintf(_('Periodic executing of «%s» for ❮%s❯ stop 🛑'), $this->job->application->getRecordName(), $this->job->company->getRecordName()), 'success');
         } else {
             $this->addStatusMessage(_('Stopped module failed'), 'error');
         }
+    }
+
+    /**
+     * Is this Action Situable for Application
+     *
+     * @param Application $app
+     */
+    public static function usableForApp($app): bool
+    {
+        return true;
     }
 }

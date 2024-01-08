@@ -112,4 +112,25 @@ class Github extends \MultiFlexi\CommonAction
     {
         return new \Ease\TWB4\FormGroup(_('GitHub token'), new \Ease\Html\InputTextTag('Github[token]'), 'ghp_iupB8adLxIIBezDWB1BH9HJCAtpcOL2scdmX', new \Ease\Html\ATag('https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens', _('How to obtain Github Token'))) ;
     }
+
+    /**
+     * Form Inputs
+     *
+     * @return mixed
+     */
+    public static function inputs(string $action)
+    {
+        return new \Ease\TWB4\Badge('info', _('No Fields required') . ' (' . $action . ')');
+    }
+
+
+    /**
+     * Is this Action Situable for Application
+     *
+     * @param Application $app
+     */
+    public static function usableForApp($app): bool
+    {
+        return is_null(strstr($app->getDataValue('homepage'), 'github.com')) === false;
+    }
 }
