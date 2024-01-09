@@ -24,7 +24,17 @@ class Job extends Engine
      * @var executor
      */
     public $executor;
+
+    /**
+     *
+     * @var string
+     */
     public $myTable = 'job';
+
+    /**
+     *
+     * @var array
+     */
     public static $intervalCode = [
         'i' => 'minutly',
         'n' => 'disabled',
@@ -161,6 +171,13 @@ class Job extends Engine
         if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
             $this->reportToZabbix(['phase' => 'jobDone', 'stdout' => $stdout, 'stderr' => $stderr, 'exitcode' => $statusCode, 'end' => (new \DateTime())->format('Y-m-d H:i:s')]);
         }
+
+        $this->setData([
+            'stdout' => addslashes($stdout),
+            'stderr' => addslashes($stderr),
+            'command' => $this->executor->commandline(),
+            'exitcode' => $statusCode
+        ]);
 
         $this->performActions($statusCode == 0 ? 'success' : 'fail');
 
@@ -494,10 +511,12 @@ class Job extends Engine
     public function performActions($mode)
     {
         $actions = $this->runTemplate->getDataValue($mode) ? unserialize($this->runTemplate->getDataValue($mode)) : [];
+        $modConf = new ModConfig();
         foreach ($actions as $action => $enabled) {
             $actionClass = '\\MultiFlexi\\Action\\' . $action;
             if ($enabled && class_exists($actionClass)) {
                 $actionHandler = new $actionClass($this);
+                $actionHandler->setData($modConf->getModuleConf($action));
                 $actionHandler->perform();
             }
         }

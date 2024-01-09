@@ -70,4 +70,8 @@ class Kubernetes extends \MultiFlexi\CommonExecutor implements \MultiFlexi\execu
     public function getOutput()
     {
     }
+
+    public function commandline()
+    {
+    }
 }

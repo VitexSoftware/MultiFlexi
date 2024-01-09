@@ -37,6 +37,8 @@ interface executor
 
     public function storeLogs();
 
+    public function commandline();
+
     /**
      * Can this Executor execute given application ?
      *
