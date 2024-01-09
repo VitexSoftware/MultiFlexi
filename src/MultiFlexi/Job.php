@@ -290,7 +290,7 @@ class Job extends Engine
                     }
                 });
                 if ($result == 0) {
-                    $$this->runTemplate->setProvision(1);
+                    $this->runTemplate->setProvision(1);
                     if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
                         $this->reportToZabbix(['phase' => 'setup']); //TODO: report provision done
                     }
