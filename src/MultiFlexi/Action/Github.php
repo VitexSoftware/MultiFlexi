@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Multi Flexi - Github Issue Action
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * @copyright  2023-2024 Vitex Software
  */
 
 namespace MultiFlexi\Action;
@@ -28,71 +28,6 @@ class Github extends \MultiFlexi\CommonAction
         return _('Github Issue');
     }
 
-    public function curl()
-    {
-//curl --request POST \
-//  --url https://api.github.com/repos/{owner}/{repo}/issues \
-//  --header 'authorization: Bearer YOUR_TOKEN' \
-//  --header 'content-type: application/json' \
-//  --data '{
-//    "title": "Issue Title",
-//    "body": "Issue Body",
-//    "assignees": [
-//      "octocat"
-//    ],
-//    "labels": [
-//      "bug"
-//    ]
-//  }'
-    }
-
-    public function curl2()
-    {
-// $Token = personal access token for the account that will post the issue
-        $headerValue = " Bearer " . $token;
-
-// Format the curl heaer (-H) with our auth code
-        $header = array("Authorization:" . $headerValue);
-
-// Content for the issue
-        $title = "I have a problem";
-        $body = "I broke it, how can i fix it?";
-
-        /* $label is an array of stirngs containing the labels we want to assign
-         * If there isnt a label with the given name, github will generate it however
-         *  we don't get to control the color of the label
-         */
-        $label = array("Bug", "Feature");
-
-// Format our data into an array with the following keys
-        $data = array("title" => $title, "body" => $body, "labels" => array($label));
-
-// prepare as json data
-        $data_string = json_encode($data);
-
-// $repoOwner is the owern of the repository, usually the username
-// $repo is the name of the repository
-        $url = sprintf("https://api.github.com/repos/%s/%s/issues", $repoOwner, $repo);
-
-// input the name of our application for github tracking
-        $appName = 'My First API intergration';
-
-//Send curl message
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_USERAGENT, $appName);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-
-// By setting the execution as a variable, we can get the returned
-// json data and extract it to outputs for viewing
-        $response = curl_exec($ch);
-
-// close our connection
-        curl_close($ch);
-    }
-
     /**
      * Module Description
      *
@@ -110,7 +45,7 @@ class Github extends \MultiFlexi\CommonAction
 
     public static function configForm()
     {
-        return new \Ease\TWB4\FormGroup(_('GitHub token'), new \Ease\Html\InputTextTag('Github[token]'), 'ghp_iupB8adLxIIBezDWB1BH9HJCAtpcOL2scdmX', new \Ease\Html\ATag('https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens', _('How to obtain Github Token'))) ;
+        return new \Ease\TWB4\FormGroup(_('GitHub token'), new \Ease\Html\InputTextTag('Github[token]'), 'ghp_iupB8adLxIIBezDWB1BH9HJCAtpcOL2scdmX', new \Ease\Html\ATag('https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens', _('How to obtain Github Token')));
     }
 
     /**
@@ -123,7 +58,6 @@ class Github extends \MultiFlexi\CommonAction
         return new \Ease\TWB4\Badge('info', _('No Fields required') . ' (' . $action . ')');
     }
 
-
     /**
      * Is this Action Situable for Application
      *
@@ -132,5 +66,56 @@ class Github extends \MultiFlexi\CommonAction
     public static function usableForApp($app): bool
     {
         return is_null(strstr($app->getDataValue('homepage'), 'github.com')) === false;
+    }
+
+    /**
+     * Perform Action
+     */
+    public function perform()
+    {
+        $token = $this->getDataValue('token');
+        $headerValue = " Bearer " . $token;
+        $header = [
+            "Authorization:" . $headerValue,
+            "Accept: application/vnd.github+json",
+            "X-GitHub-Api-Version: 2022-11-28"
+        ];
+        $title = $this->job->application->getRecordName() . ' problem';
+        $body = "JOB ID: " . $this->job->getMyKey() . "\n\n";
+
+        $body .= "Command: " . $this->job->getDataValue('command') . "\n\n";
+        $body .= "ExitCode: " . $this->job->getDataValue('exitcode') . "\n\n";
+
+        $body .= "\nStdout:\n```\n" . stripslashes($this->job->getDataValue('stdout')) . "\n```";
+        $body .= "\nSterr:\n```\n" . stripslashes($this->job->getDataValue('stderr')) . "\n```\n\n";
+
+        $body .= "MultiFlexi: " . \Ease\Shared::appName() . ' ' . \Ease\Shared::appVersion() . "\n\n";
+
+        $label = ["Bug"];
+        $data = ["title" => $title, "body" => $body, "labels" => [$label]];
+
+        $data_string = json_encode($data);
+
+        $ch = curl_init();
+
+        $userRepo = parse_url($this->job->application->getDataValue('homepage'), PHP_URL_PATH);
+
+        curl_setopt($ch, CURLOPT_URL, 'https://api.github.com/repos' . $userRepo . '/issues');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_USERAGENT, \Ease\Shared::appName() . ' ' . \Ease\Shared::appVersion());
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // return content as a string from curl_exec
+        curl_setopt($ch, CURLOPT_VERBOSE, true); // For debugging
+
+
+
+        $response = curl_exec($ch);
+
+        $curlInfo = curl_getinfo($ch);
+        $curlInfo['when'] = microtime();
+
+        $this->addStatusMessage($response, $curlInfo['http_code'] == 200 ? 'success' : 'error');
+        curl_close($ch);
     }
 }
