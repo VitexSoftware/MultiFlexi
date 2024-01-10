@@ -96,8 +96,8 @@ class Job extends Engine
     public function __construct($identifier = null, $options = [])
     {
         parent::__construct($identifier, $options);
-        if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
-            $this->zabbixSender = new ZabbixSender(\Ease\Functions::cfg('ZABBIX_SERVER'));
+        if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
+            $this->zabbixSender = new ZabbixSender(\Ease\Shared::cfg('ZABBIX_SERVER'));
         }
         $this->setObjectName();
     }
@@ -147,7 +147,7 @@ class Job extends Engine
         $sqlLogger->setApplication($appId);
         $jobId = $this->getMyKey();
         //$this->addStatusMessage('JOB: ' . $jobId . ' ' . json_encode($this->environment), 'debug');
-        if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
+        if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
             $this->reportToZabbix(['phase' => 'jobStart', 'begin' => (new \DateTime())->format('Y-m-d H:i:s')]);
         }
         $this->updateToSQL(['id' => $this->getMyKey(), 'begin' => new \Envms\FluentPDO\Literal('NOW()')]);
@@ -168,7 +168,7 @@ class Job extends Engine
         $sqlLogger = LogToSQL::singleton();
         $sqlLogger->setCompany(0);
         $sqlLogger->setApplication(0);
-        if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
+        if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
             $this->reportToZabbix(['phase' => 'jobDone', 'stdout' => $stdout, 'stderr' => $stderr, 'exitcode' => $statusCode, 'end' => (new \DateTime())->format('Y-m-d H:i:s')]);
         }
 
@@ -242,7 +242,7 @@ class Job extends Engine
 
         $this->environment = array_merge($this->getFullEnvironment(), $envOverride);
         $this->loadFromSQL($this->newJob($companyId, $appId, $this->environment, $scheduled, $executor));
-        if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
+        if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
             $this->zabbixMessageData = [
                 'phase' => 'prepared',
                 'job_id' => $this->getMyKey(),
@@ -291,7 +291,7 @@ class Job extends Engine
                 });
                 if ($result == 0) {
                     $this->runTemplate->setProvision(1);
-                    if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
+                    if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
                         $this->reportToZabbix(['phase' => 'setup']); //TODO: report provision done
                     }
                     $this->addStatusMessage('provision done', 'success');
@@ -321,7 +321,7 @@ class Job extends Engine
     public function reportToZabbix($messageData)
     {
         $packet = new ZabbixPacket();
-        $hostname = \Ease\Functions::cfg('ZABBIX_HOST');
+        $hostname = \Ease\Shared::cfg('ZABBIX_HOST');
         $this->zabbixMessageData = array_merge($this->zabbixMessageData, $messageData);
         $packet->addMetric((new ZabbixMetric('multiflexi.job', json_encode($this->zabbixMessageData)))->withHostname($hostname));
         $this->zabbixSender->send($packet);

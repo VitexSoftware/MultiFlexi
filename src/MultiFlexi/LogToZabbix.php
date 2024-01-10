@@ -33,7 +33,7 @@ class LogToZabbix implements \Ease\Logger\Loggingable
 
     public function __construct()
     {
-        $this->sender = new ZabbixSender(\Ease\Functions::cfg('ZABBIX_SERVER'));
+        $this->sender = new ZabbixSender(\Ease\Shared::cfg('ZABBIX_SERVER'));
     }
 
     /**
@@ -46,7 +46,7 @@ class LogToZabbix implements \Ease\Logger\Loggingable
     public function addToLog($caller, $message, $type = 'message')
     {
         $packet = new ZabbixPacket();
-        $me = \Ease\Functions::cfg('ZABBIX_HOST');
+        $me = \Ease\Shared::cfg('ZABBIX_HOST');
         $packet->addMetric((new ZabbixMetric('ease.message', json_encode([
             'stamp' => microtime(),
             'caller' => \Ease\Logger\Message::getCallerName($caller),
@@ -54,7 +54,7 @@ class LogToZabbix implements \Ease\Logger\Loggingable
             'type' => $type
             ])))->withHostname($me));
         $this->sender->send($packet);
-        //system('zabbix_sender -z ' . \Ease\Functions::cfg('ZABBIX_SERVER') . ' -p 10051 -s "' . \Ease\Functions::cfg('ZABBIX_HOST') . '" -k ' . \Ease\Functions::cfg('ZABBIX_FIELD', 'multi.message') . ' -o "' . $message . '"');
+        //system('zabbix_sender -z ' . \Ease\Shared::cfg('ZABBIX_SERVER') . ' -p 10051 -s "' . \Ease\Shared::cfg('ZABBIX_HOST') . '" -k ' . \Ease\Shared::cfg('ZABBIX_FIELD', 'multi.message') . ' -o "' . $message . '"');
     }
 
     /**

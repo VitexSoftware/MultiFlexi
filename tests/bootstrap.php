@@ -14,7 +14,7 @@ session_start();
 );
 \Ease\Locale::singleton(null, '../i18n', 'multiflexi');
 $loggers = ['syslog', '\MultiFlexi\LogToSQL'];
-if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
+if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
 
