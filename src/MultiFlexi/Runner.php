@@ -30,6 +30,6 @@ class Runner extends \Ease\Sand
      */
     public static function isServiceActive($service)
     {
-        return (trim(shell_exec("systemctl is-active $service")) == "active");
+        return (trim(strval(shell_exec("systemctl is-active $service"))) == "active");
     }
 }

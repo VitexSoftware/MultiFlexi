@@ -31,7 +31,7 @@ $jobber->addStatusMessage(_('Test Debug Message'), 'debug');
 $jobber->addStatusMessage(_('Test Errir Message'), 'error');
 
 if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
-    $jobber->reportToZabbix(['phase' => 'test', 'stdout' => 'stdout test', 'stderr' => 'stderr test', 'exitcode' => 255, 'end' => (new \DateTime())->format('Y-m-d H:i:s')]);
+    $jobber->reportToZabbix(['phase' => 'test', 'stdout' => 'stdout test', 'stderr' => 'stderr test', 'exitcode' => 666, 'end' => (new \DateTime())->format('Y-m-d H:i:s')]);
 } else {
     $jobber->addStatusMessage(_('ZABBIX_SERVER not configured'), 'warning');
 }

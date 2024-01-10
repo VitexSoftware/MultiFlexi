@@ -2,7 +2,7 @@
 
 use Phinx\Seed\AbstractSeed;
 
-class Serverseeder extends AbstractSeed {
+class ServerSeeder extends AbstractSeed {
 
     /**
      * Run Method.

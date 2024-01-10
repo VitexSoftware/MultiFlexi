@@ -4,9 +4,8 @@
  * Multi AbraFlexi Setup - Phinx database adapter.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2021 Vitex Software
+ * @copyright  2021-2024 Vitex Software
  */
-
 
 include_once '/usr/share/php/EaseCore/Atom.php';
 include_once '/usr/share/php/EaseCore/Shared.php';
@@ -32,7 +31,6 @@ include_once '/usr/share/php/EaseCore/Exception.php';
 include_once '/usr/share/php/EaseFluentPDO/Orm.php';
 include_once '/usr/share/php/EaseFluentPDO/Engine.php';
 
-
 if (file_exists('/etc/multiflexi/multiflexi.env')) {
     \Ease\Shared::instanced()->loadConfig('/etc/multiflexi/multiflexi.env', true);
 }
@@ -41,8 +39,8 @@ $prefix = "/usr/lib/multiflexi/db/";
 
 $sqlOptions = [];
 
-if (strstr(\Ease\Functions::cfg('DB_CONNECTION'), 'sqlite')) {
-    $sqlOptions["database"] = "/var/lib/dbconfig-common/sqlite3/multiflexi/" . basename(\Ease\Functions::cfg("DB_DATABASE"));
+if (strstr(\Ease\Shared::cfg('DB_CONNECTION'), 'sqlite')) {
+    $sqlOptions["database"] = "/var/lib/dbconfig-common/sqlite3/multiflexi/" . basename(\Ease\Shared::cfg("DB_DATABASE"));
 }
 $engine = new \Ease\SQL\Engine(null, $sqlOptions);
 $cfg = [
