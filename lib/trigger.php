@@ -16,10 +16,10 @@ use \MultiFlexi\Company,
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
 $loggers = ['syslog', '\MultiFlexi\LogToSQL', 'console'];
-if (\Ease\Functions::cfg('ZABBIX_SERVER') && \Ease\Functions::cfg('ZABBIX_HOST')) {
+if (\Ease\Shared::cfg('ZABBIX_SERVER') && \Ease\Shared::cfg('ZABBIX_HOST')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
-if (\Ease\Functions::cfg('APP_DEBUG') == 'true') {
+if (\Ease\Shared::cfg('APP_DEBUG') == 'true') {
     $loggers[] = 'console';
 }
 define('EASE_LOGGER', implode('|', $loggers));

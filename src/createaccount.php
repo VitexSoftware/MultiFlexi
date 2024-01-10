@@ -98,21 +98,21 @@ if ($oPage->isPosted()) {
                 $newAdmin->getDataValue('email'),
                 _('Sign On info')
             ));
-            $email->setMailHeaders(['From' => \Ease\Functions::cfg('EMAIL_FROM')]);
+            $email->setMailHeaders(['From' => \Ease\Shared::cfg('EMAIL_FROM')]);
             $email->addItem(new \Ease\Html\DivTag(sprintf(_("Your new %s account:") . "\n", \Ease\Shared::appName())));
             $email->addItem(new \Ease\Html\DivTag(' Login: ' . $newAdmin->getUserLogin() . "\n"));
             $email->addItem(new \Ease\Html\DivTag(' Password: ' . $_POST['password'] . "\n"));
             $email->send();
 
             $email = $oPage->addItem(new \Ease\HtmlMailer(
-                \Ease\Functions::cfg('SEND_INFO_TO'),
+                \Ease\Shared::cfg('SEND_INFO_TO'),
                 sprintf(
                     _('New Sign On to %s: %s'),
                     \Ease\Shared::appName(),
                     $newAdmin->getUserLogin()
                 )
             ));
-            $email->setMailHeaders(['From' => \Ease\Functions::cfg('EMAIL_FROM')]);
+            $email->setMailHeaders(['From' => \Ease\Shared::cfg('EMAIL_FROM')]);
             $email->addItem(new \Ease\Html\DivTag(_("New User") . ":\n"));
             $email->addItem(new \Ease\Html\DivTag(' Login: ' . $newAdmin->getUserLogin() . "\n"));
             $email->send();

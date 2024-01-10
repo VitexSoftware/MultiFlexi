@@ -11,9 +11,9 @@ namespace MultiFlexi;
 
 require_once '../vendor/autoload.php';
 \Ease\Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
-$daemonize = \Ease\Functions::cfg('MULTIFLEXI_DAEMONIZE', true);
+$daemonize = \Ease\Shared::cfg('MULTIFLEXI_DAEMONIZE', true);
 $loggers = ['syslog', '\MultiFlexi\LogToSQL'];
-if (\Ease\Functions::cfg('ZABBIX_SERVER')) {
+if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
 define('EASE_LOGGER', implode('|', $loggers));
@@ -29,7 +29,7 @@ do {
         $job->cleanUp();
     }
     if ($daemonize) {
-        sleep(\Ease\Functions::cfg("MULTIFLEXI_CYCLE_PAUSE", 10));
+        sleep(\Ease\Shared::cfg("MULTIFLEXI_CYCLE_PAUSE", 10));
     }
 } while ($daemonize);
 
