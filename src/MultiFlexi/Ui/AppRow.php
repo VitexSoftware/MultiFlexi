@@ -63,7 +63,7 @@ class AppRow extends \Ease\TWB4\Row
         $logoColumn->addItem($launchButton);
         //        $logoColumn->addItem(new \Ease\TWB4\LinkButton('?id=' . $appId, _('Clone'), 'info btn-sm  btn-block'));
 
-        $appConfColumn = $appRow->addColumn(4, new FormGroup(new \Ease\Html\H3Tag(_('Job Config')), $intervalChooser));
+        $appConfColumn = $appRow->addColumn(6, new FormGroup(new \Ease\Html\H3Tag(_('Job Config')), $intervalChooser));
         if (array_key_exists('runtemplateid', $appData)) {
             $appConfColumn->addItem(new \MultiFlexi\Ui\CustomAppEnvironmentView($appData['runtemplateid']));
         } else {
@@ -89,6 +89,6 @@ class AppRow extends \Ease\TWB4\Row
         }
 
         $historyButton = (new \Ease\TWB4\LinkButton('joblist.php?app_id=' . $appId . '&amp;company_id=' . $appData['company_id'], _('Job History') . ' ' . new \Ease\Html\ImgTag('images/log.svg', _('Set'), ['height' => '30px']), 'info btn-sm  btn-block'));
-        $appRow->addColumn(6, [new \Ease\Html\H3Tag(_('Last 10 jobs')), $jobList, $historyButton]);
+        $appRow->addColumn(4, [new \Ease\Html\H3Tag(_('Last 10 jobs')), $jobList, $historyButton]);
     }
 }
