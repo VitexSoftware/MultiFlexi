@@ -57,7 +57,7 @@ debs2deb: debs
 	debs2deb ./dist/ multi-flexi-dist
 	mv multi-flexi-dist_*_all.deb dist
 
-dimage: debs2deb
+dimage:
 	docker build -t vitexsoftware/multiflexi .
 
 drun: dimage

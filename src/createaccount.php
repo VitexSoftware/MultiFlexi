@@ -102,7 +102,10 @@ if ($oPage->isPosted()) {
             $email->addItem(new \Ease\Html\DivTag(sprintf(_("Your new %s account:") . "\n", \Ease\Shared::appName())));
             $email->addItem(new \Ease\Html\DivTag(' Login: ' . $newAdmin->getUserLogin() . "\n"));
             $email->addItem(new \Ease\Html\DivTag(' Password: ' . $_POST['password'] . "\n"));
-            $email->send();
+            try {
+                $email->send();
+            } catch (\Ease\Exception $exc) {
+            }
 
             $email = $oPage->addItem(new \Ease\HtmlMailer(
                 \Ease\Shared::cfg('SEND_INFO_TO'),
@@ -115,7 +118,10 @@ if ($oPage->isPosted()) {
             $email->setMailHeaders(['From' => \Ease\Shared::cfg('EMAIL_FROM')]);
             $email->addItem(new \Ease\Html\DivTag(_("New User") . ":\n"));
             $email->addItem(new \Ease\Html\DivTag(' Login: ' . $newAdmin->getUserLogin() . "\n"));
-            $email->send();
+            try {
+                $email->send();
+            } catch (\Ease\Exception $exc) {
+            }
 
             \Ease\Shared::user($newAdmin)->loginSuccess();
 
