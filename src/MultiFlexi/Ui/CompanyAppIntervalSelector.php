@@ -20,10 +20,10 @@ class CompanyAppIntervalSelector extends CompanyAppSelector
 {
     private $intervalCode;
 
-    public function __construct($company, $identifier = null, $enabled = [])
+    public function __construct($company, $identifier = null, $enabled = [], $optionsPage = 'apps.php')
     {
         $this->intervalCode = \MultiFlexi\Job::intervalToCode($identifier);
-        parent::__construct($company, $identifier, $enabled);
+        parent::__construct($company, $identifier, $enabled, $optionsPage);
     }
 
     public function availbleApps()

@@ -22,10 +22,10 @@ use MultiFlexi\CompanyApp;
 class CompanyAppSelector extends AppsSelector
 {
     protected $companyId;
-    public function __construct($company, $identifier = null, $enabled = [])
+    public function __construct($company, $identifier = null, $enabled = [], $optionsPage = 'apps.php')
     {
         $this->companyId = $company->getMyKey();
-        parent::__construct($identifier, $enabled);
+        parent::__construct($identifier, $enabled, $optionsPage);
     }
 
     public function availbleApps()

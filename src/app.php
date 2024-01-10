@@ -13,7 +13,6 @@ use DateTime;
 use Ease\Html\ATag;
 use Ease\Html\SmallTag;
 use Ease\TWB4\LinkButton;
-use Ease\TWB4\Panel;
 use Ease\TWB4\Row;
 use Ease\TWB4\Table;
 use Ease\TWB4\Tabs;
@@ -27,7 +26,7 @@ use MultiFlexi\Ui\PageTop;
 
 require_once './init.php';
 $oPage->onlyForLogged();
-$apps = new Application($oPage->getRequestValue('id', 'int'));
+$apps = new Application(WebPage::getRequestValue('id', 'int') + WebPage::getRequestValue('app', 'int'));
 $instanceName = _($apps->getDataValue('name') ? $apps->getDataValue('name') : _('n/a'));
 if ($oPage->isPosted()) {
     if ($apps->takeData($_POST) && !is_null($apps->saveToSQL())) {
@@ -79,9 +78,9 @@ foreach ($jobs as $job) {
 $instanceRow->addColumn(4, is_null($apps->getMyKey()) ?
                 new LinkButton('', _('Config fields'), 'inverse disabled  btn-block') :
                 [
-                    new ConfigFieldsView(Conffield::getAppConfigs($apps->getMyKey())),
-                    new LinkButton('conffield.php?app_id=' . $apps->getMyKey(), _('Config fields editor'), 'secondary  btn-block')
-                    ]);
+            new ConfigFieldsView(Conffield::getAppConfigs($apps->getMyKey())),
+            new LinkButton('conffield.php?app_id=' . $apps->getMyKey(), _('Config fields editor'), 'secondary  btn-block')
+        ]);
 
 $instanceRow->addColumn(4, new AppLogo($apps));
 
