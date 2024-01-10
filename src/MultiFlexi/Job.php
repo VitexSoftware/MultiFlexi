@@ -479,12 +479,14 @@ class Job extends Engine
             $this->application = new Application(intval($this->getDataValue('app_id')));
         }
 
-        $executor = '\\MultiFlexi\\Executor\\' . $this->getDataValue('executor');
-        if (class_exists($executor)) {
-            $this->executor = new $executor($this);
-        } else {
-            $this->addStatusMessage(sprintf(_('Requested Executor %s not availble'), $executor), 'warning');
-            $this->executor = new \MultiFlexi\Executor\Native($this);
+        if ($this->getDataValue('executor')) {
+            $executor = '\\MultiFlexi\\Executor\\' . $this->getDataValue('executor');
+            if (class_exists($executor)) {
+                $this->executor = new $executor($this);
+            } else {
+                $this->addStatusMessage(sprintf(_('Requested Executor %s not availble'), $executor), 'warning');
+                $this->executor = new \MultiFlexi\Executor\Native($this);
+            }
         }
     }
 

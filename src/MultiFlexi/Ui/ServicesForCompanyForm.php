@@ -33,8 +33,8 @@ class ServicesForCompanyForm extends Form
         $companyID = $company->getMyKey();
 
         $serverCompanyInfo = (new Company())->listingQuery()->where('company.id', $companyID)->select('servers.type')->leftJoin('servers ON servers.id = company.server')->fetch();
-
-        $platformApps = (new Application())->getAvailbleApps($serverCompanyInfo['type'])->orderBy('name');
+        $apper = new Application();
+        $platformApps = $apper->getAvailbleApps($serverCompanyInfo['type'])->orderBy('name');
         //(new Application())->listingQuery()->select('id AS app_id')->select('name AS app_name')->where('enabled', 1)->fetchAll();
 
         $glue = new RunTemplate();
@@ -43,6 +43,7 @@ class ServicesForCompanyForm extends Form
         $jobber = new \MultiFlexi\Job();
         $appTabs = new \Ease\TWB4\Tabs();
         foreach ($platformApps as $appData) {
+            $apper->setData($appData);
             $appData['company_id'] = $companyID;
             $appData['app_id'] = $appData['id'];
             $appData['app_name'] = $appData['name'];
@@ -50,7 +51,7 @@ class ServicesForCompanyForm extends Form
                 $appData['interv'] = $assigned[$appData['id']]['interv'];
                 $appData['runtemplateid'] = $assigned[$appData['id']]['id'];
             }
-            $appTabs->addTab($appData['name'] ? _($appData['name']) : 'n/a?!', new AppRow($appData));
+            $appTabs->addTab(new AppLogo($apper, ['style' => 'height: 20px']) . '&nbsp;' . _($apper->getRecordName()), new AppRow($appData));
         }
         $this->addItem($appTabs);
     }

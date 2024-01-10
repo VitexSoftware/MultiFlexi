@@ -35,6 +35,10 @@ class EnvironmentView extends \Ease\Html\TableTag
                 $envData['source'] = _('n/a');
             }
 
+            if (!array_key_exists('value', $envData) && array_key_exists('defval', $envData)) {
+                $envData['value'] = new \Ease\TWB4\Badge('inverse', $envData['defval'], ['title' => _('Default Value')]);
+            }
+
             if (array_key_exists('type', $envData) && $envData['type'] == 'secret') {
                 $envData['value'] = preg_replace('(.)', '*', $envData['value']);
             }

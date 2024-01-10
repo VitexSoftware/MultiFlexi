@@ -215,4 +215,8 @@ class Podman extends \Ease\Sand implements \MultiFlexi\executor
     public function getOutput()
     {
     }
+
+    public function commandline()
+    {
+    }
 }

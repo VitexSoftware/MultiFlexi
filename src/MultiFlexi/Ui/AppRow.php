@@ -34,6 +34,7 @@ class AppRow extends \Ease\TWB4\Row
     {
         parent::__construct(null, $properties);
         $appId = $appData['app_id'];
+        $app = new \MultiFlexi\Application($appId);
         $appRow = &$this;
         $appRow->setTagProperty('style', 'border-bottom: 1px solid #bdbdbd; padding: 5px');
         $logoColumn = $appRow->addColumn(2, [new \Ease\Html\H2Tag($appData['app_name']), new \Ease\Html\PTag($appData['description']), new ATag('app.php?id=' . $appId, new ImgTag($appData['image'], $appData['name'], ['class' => 'img-fluid']))]);
@@ -58,15 +59,19 @@ class AppRow extends \Ease\TWB4\Row
 
 
         // use AppLaunchForm instead of LaunchButton
-        $launchButton = new AppLaunchForm(new \MultiFlexi\Application($appData['app_id']), $appData['company_id']);
+        $launchButton = new AppLaunchForm($app, $appData['company_id']);
         $logoColumn->addItem($launchButton);
         //        $logoColumn->addItem(new \Ease\TWB4\LinkButton('?id=' . $appId, _('Clone'), 'info btn-sm  btn-block'));
 
         $appConfColumn = $appRow->addColumn(4, new FormGroup(new \Ease\Html\H3Tag(_('Job Config')), $intervalChooser));
         if (array_key_exists('runtemplateid', $appData)) {
             $appConfColumn->addItem(new \MultiFlexi\Ui\CustomAppEnvironmentView($appData['runtemplateid']));
+        } else {
+            $cfg = new \MultiFlexi\Conffield();
+            $appConfColumn->addItem(new EnvironmentView($cfg->appConfigs($appId)));
         }
         $appConfColumn->addItem(new \Ease\TWB4\LinkButton('custserviceconfig.php?app_id=' . $appId . '&amp;company_id=' . $appData['company_id'], _('Configure App Environment') . ' ' . new \Ease\Html\ImgTag('images/set.svg', _('Set'), ['height' => '30px']), 'success btn-sm  btn-block'));
+
         $jobs = (new \MultiFlexi\Job())->listingQuery()->select(['job.id', 'begin', 'exitcode', 'launched_by', 'login'], true)->leftJoin('user ON user.id = job.launched_by')->where('company_id', $appData['company_id'])->where('app_id', $appId)->limit(10)->orderBy('job.id DESC')->fetchAll();
         $jobList = new \Ease\TWB4\Table();
         $jobList->addRowHeaderColumns([_('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher')]);
