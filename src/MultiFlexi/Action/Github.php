@@ -106,7 +106,7 @@ class Github extends \MultiFlexi\CommonAction
         curl_setopt($ch, CURLOPT_USERAGENT, \Ease\Shared::appName() . ' ' . \Ease\Shared::appVersion());
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // return content as a string from curl_exec
-        curl_setopt($ch, CURLOPT_VERBOSE, boolval(\Ease\Shared::cfg('API_DEBUG'), false)); // For debugging
+        curl_setopt($ch, CURLOPT_VERBOSE, boolval(\Ease\Shared::cfg('API_DEBUG', false))); // For debugging
 
 
         $response = curl_exec($ch);
