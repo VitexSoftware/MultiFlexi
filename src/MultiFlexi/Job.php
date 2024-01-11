@@ -145,6 +145,10 @@ class Job extends Engine
         $sqlLogger = LogToSQL::singleton();
         $sqlLogger->setCompany($companyId);
         $sqlLogger->setApplication($appId);
+        if (is_null($this->runTemplate)) {
+            $this->runTemplate = new RunTemplate();
+        }
+        $this->runTemplate->loadFromSQL($this->runTemplate->runTemplateID($appId, $companyId));
         $jobId = $this->getMyKey();
         //$this->addStatusMessage('JOB: ' . $jobId . ' ' . json_encode($this->environment), 'debug');
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {

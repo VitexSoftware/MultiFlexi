@@ -16,6 +16,11 @@ namespace MultiFlexi;
  */
 class RunTemplate extends Engine
 {
+    /**
+     *
+     * @param mixed $identifier
+     * @param array $options
+     */
     public function __construct($identifier = null, $options = [])
     {
         $this->myTable = 'runtemplate';

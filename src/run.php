@@ -23,7 +23,7 @@ echo new H2Tag(str_replace(' ', '&nbsp;', $jobber->getCmdline()), ['style' => 'c
 
 $jobber->performJob();
 
-echo new DivTag(nl2br((new AnsiToHtmlConverter())->convert($jobber->getOutputCachePlaintext())));
+echo new DivTag(nl2br((new AnsiToHtmlConverter())->convert($jobber->getOutput())));
 
 WebPage::singleton()->addJavascript("$('body').css('font-family', 'Courier').css('background-color','black');");
 $oPage->draw();

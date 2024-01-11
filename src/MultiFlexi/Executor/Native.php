@@ -23,6 +23,7 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
      * @var \Symfony\Component\Process\Process
      */
     private $process;
+    private $commandline;
 
     /**
      *
