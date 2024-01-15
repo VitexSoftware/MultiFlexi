@@ -62,6 +62,11 @@ abstract class CommonAction extends \Ease\Sand
         $this->setObjectName();
         $this->setObjectName($job->getMyKey() . '@' . \Ease\Logger\Message::getCallerName($this));
         $this->environment = $job->getFullEnvironment();
+        $this->loadOptions();
+    }
+
+    public function loadOptions()
+    {
     }
 
     /**

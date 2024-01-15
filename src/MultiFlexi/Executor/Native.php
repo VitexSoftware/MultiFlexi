@@ -76,7 +76,7 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
         $this->commandline = $this->commandline();
         $this->setDataValue('commandline', $this->commandline);
         $this->addStatusMessage('command begin: ' . $this->commandline . '@' . $this->job->company->getDataValue('name'));
-        $this->process = new \Symfony\Component\Process\Process(array_merge([$this->executable()], explode(' ', $this->cmdparams())), null, \MultiFlexi\Environmentor::flatEnv($this->environment), null, 32767);
+        $this->process = new \Symfony\Component\Process\Process(explode(' ', $this->commandline()), null, \MultiFlexi\Environmentor::flatEnv($this->environment), null, 32767);
         $this->process->run(function ($type, $buffer) {
             $logger = new \Ease\Sand();
             $logger->setObjectName('Runner');
