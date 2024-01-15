@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * Multi Flexi - Job Run Output feed.
+ *
+ * @author Vítězslav Dvořák <info@vitexsoftware.cz>
+ * @copyright  2024 Vitex Software
+ */
+
+namespace MultiFlexi\Ui;
+
+require_once './init.php';
+$oPage->onlyForLogged();
+
+$jobID = $oPage->getRequestValue('id', 'int');
+$mode = $oPage->getRequestValue('mode');
+$jobber = new \MultiFlexi\Job($jobID);
+
+$output = $jobber->getDataValue($mode == 'err' ? 'stderr' : 'stdout');
+$quoted = sprintf('"job-%s"', $jobber->getMyKey() . '-' . str_replace(' ', '_', $jobber->application->getRecordName()) . '.' . ($mode == 'err' ? 'stderr' : 'stdout') . '.txt');
+header('Content-Description: File Transfer');
+header('Content-Type: application/octet-stream');
+header('Content-Disposition: attachment; filename=' . $quoted);
+header('Content-Transfer-Encoding: binary');
+header('Connection: Keep-Alive');
+header('Expires: 0');
+header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+header('Pragma: public');
+header('Content-Length: ' . mb_strlen($output));
+echo $output;

@@ -24,16 +24,15 @@ $appInfo = $runTemplate->getAppInfo();
 $apps = new Application($appInfo['app_id']);
 $instanceName = $appInfo['app_name'];
 
-$errorTerminal = new \Ease\ui\OldTerminal(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stderr')))));
-$errorTerminal->green = 0;
-$errorTerminal->red = 150;
+$errorTerminal = new \Ease\Html\DivTag(nl2br(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stderr'))))), ['style' => 'background: #8B0000; font-family: monospace;']);
+$stdTerminal   = new \Ease\Html\DivTag(nl2br(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stdout'))))), ['style' => 'background: #000000; font-family: monospace;']);
 
 $outputTabs = new \Ease\TWB4\Tabs();
-$outputTabs->addTab(_('Output'), new \Ease\ui\OldTerminal(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stdout'))))));
-$outputTabs->addTab(_('Errors'), $errorTerminal, empty($jobber->getDataValue('stdout')));
+$outputTabs->addTab(_('Output'), [$stdTerminal, new \Ease\TWB4\LinkButton('joboutput.php?id=' . $jobID . '&mode=std', _('Download'), 'secondary btn-block') ]);
+$outputTabs->addTab(_('Errors'), [$errorTerminal, new \Ease\TWB4\LinkButton('joboutput.php?id=' . $jobID . '&mode=err', _('Download'), 'secondary btn-block') ], empty($jobber->getDataValue('stdout')));
 
 $oPage->container->addItem(
-    new CompanyPanel(new \MultiFlexi\Company($appInfo['company_id']), $outputTabs, new JobInfo($jobber))
+    new CompanyPanel(new \MultiFlexi\Company($appInfo['company_id']), new ApplicationPanel($apps, $outputTabs, new JobInfo($jobber)))
 );
 
 $oPage->addItem(new PageBottom());
