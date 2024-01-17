@@ -58,6 +58,7 @@ class Zabbix extends \MultiFlexi\CommonAction
      */
     public function perform()
     {
+        $dataForZabbix = null;
         $metricsfile = $this->getDataValue('metricsfile');
         if (empty($metricsfile)) {
             $dataForZabbix = stripslashes($this->job->getDataValue('stdout'));
@@ -68,10 +69,14 @@ class Zabbix extends \MultiFlexi\CommonAction
                 $this->addStatusMessage(_('Required metrics file not found '), 'warning');
             }
         }
-        $packet = new \MultiFlexi\Zabbix\Request\Packet();
-        $packet->addMetric((new \MultiFlexi\Zabbix\Request\Metric($this->getDataValue('key'), $dataForZabbix))->withHostname($this->getDataValue('host')));
-        $zabbixSender = new ZabbixSender($this->getDataValue('server'));
-        $zabbixSender->send($packet);
+        if ($dataForZabbix) {
+            $packet = new \MultiFlexi\Zabbix\Request\Packet();
+            $packet->addMetric((new \MultiFlexi\Zabbix\Request\Metric($this->getDataValue('key'), $dataForZabbix))->withHostname($this->getDataValue('hostname')));
+            $zabbixSender = new \MultiFlexi\ZabbixSender($this->getDataValue('server'));
+            $zabbixSender->send($packet);
+        } else {
+            $this->addStatusMessage(_('No Data For zabix provided'), 'warning');
+        }
     }
 
     /**
@@ -83,7 +88,7 @@ class Zabbix extends \MultiFlexi\CommonAction
     {
         return [
             new \Ease\TWB4\FormGroup(_('Zabbix key'), new \Ease\Html\InputTextTag($prefix . '[Zabbix][key]'), 'custom.key', _('Zabbix Item key')),
-            new \Ease\TWB4\FormGroup(_('Zabbix key'), new \Ease\Html\InputTextTag($prefix . '[Zabbix][metricsfile]'), '/tmp/metrics.json', _('File with metrics. Leave empty to send stdout'))
+            new \Ease\TWB4\FormGroup(_('Metrics file'), new \Ease\Html\InputTextTag($prefix . '[Zabbix][metricsfile]'), '/tmp/metrics.json', _('File with metrics. Leave empty to send stdout'))
         ];
     }
 
@@ -95,7 +100,7 @@ class Zabbix extends \MultiFlexi\CommonAction
     {
         return
                 [
-                    new \Ease\TWB4\FormGroup(_('Zabbix Server'), new \Ease\Html\InputTextTag('Zabbix[serever]'), \Ease\Shared::cfg('ZABBIX_SERVER', 'zabbix.yourcompany.com')),
+                    new \Ease\TWB4\FormGroup(_('Zabbix Server'), new \Ease\Html\InputTextTag('Zabbix[server]'), \Ease\Shared::cfg('ZABBIX_SERVER', 'zabbix.yourcompany.com')),
                     new \Ease\TWB4\FormGroup(_('Hostname'), new \Ease\Html\InputTextTag('Zabbix[hostname]'), \Ease\Shared::cfg('ZABBIX_HOST', 'multiflexi.yourcompany.com'))
         ];
     }

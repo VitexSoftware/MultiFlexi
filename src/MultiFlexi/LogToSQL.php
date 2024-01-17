@@ -137,7 +137,7 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
             $clear_string = preg_replace($regex_alphanumeric, '', $string);
             // Match Miscellaneous Symbols and Pictographs
             $regex_symbols = '/[\x{1F300}-\x{1F5FF}]/u';
-            $clear_string = preg_replace($regex_symbols, '', $clear_string);
+            $clear_string = preg_replace($regex_symbols, '', strval($clear_string));
             // Match Emoticons
             $regex_emoticons = '/[\x{1F600}-\x{1F64F}]/u';
             $clear_string = preg_replace($regex_emoticons, '', $clear_string);

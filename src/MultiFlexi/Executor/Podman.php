@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Multi Flexi - Run Tasks in container
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * @copyright  2023-2024 Vitex Software
  */
 
 namespace MultiFlexi\Executor;
@@ -217,6 +217,10 @@ class Podman extends \Ease\Sand implements \MultiFlexi\executor
     }
 
     public function commandline()
+    {
+    }
+
+    public function launchJob()
     {
     }
 }

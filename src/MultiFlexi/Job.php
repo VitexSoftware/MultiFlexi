@@ -4,7 +4,7 @@
  * Multi Flexi - Job Eengine
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * @copyright  2020-2024 Vitex Software
  */
 
 namespace MultiFlexi;
@@ -337,7 +337,7 @@ class Job extends Engine
     public function performJob()
     {
         $this->runBegin();
-        $this->executor->launch();
+        $this->executor->launchJob();
         $this->runEnd($this->executor->getExitCode(), $this->executor->getOutput(), $this->executor->getErrorOutput());
     }
 
@@ -511,6 +511,7 @@ class Job extends Engine
     }
 
     /**
+     * Perform Actions For any mode
      *
      * @param string success | fail
      */
@@ -518,11 +519,18 @@ class Job extends Engine
     {
         $actions = $this->runTemplate->getDataValue($mode) ? unserialize($this->runTemplate->getDataValue($mode)) : [];
         $modConf = new ModConfig();
+        $actConf = new \MultiFlexi\ActionConfig();
+        $modConfigs = $actConf->getRuntemplateConfig($this->runTemplate->getMyKey())->where('mode', $mode)->fetchAll();
         foreach ($actions as $action => $enabled) {
             $actionClass = '\\MultiFlexi\\Action\\' . $action;
             if ($enabled && class_exists($actionClass)) {
                 $actionHandler = new $actionClass($this);
                 $actionHandler->setData($modConf->getModuleConf($action));
+                foreach ($modConfigs as $modConfig) {
+                    if ($action == $modConfig['module']) {
+                        $actionHandler->setDataValue($modConfig['keyname'], $modConfig['value']);
+                    }
+                }
                 $actionHandler->perform();
             }
         }

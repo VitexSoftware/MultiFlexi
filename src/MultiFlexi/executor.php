@@ -27,7 +27,9 @@ interface executor
      */
     public static function description(): string;
 
-    public function launch();
+    public function launch(string $command);
+
+    public function launchJob();
 
     public function getErrorOutput();
 

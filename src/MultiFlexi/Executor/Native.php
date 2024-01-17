@@ -61,7 +61,6 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
         return $this->job->getCmdParams();
     }
 
-
     /**
      *
      * @return string
@@ -71,15 +70,12 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
         return $this->executable() . ' ' . $this->cmdparams();
     }
 
-    public function launch()
+    public function launch($command)
     {
-        $this->commandline = $this->commandline();
-        $this->setDataValue('commandline', $this->commandline);
-        $this->addStatusMessage('command begin: ' . $this->commandline . '@' . $this->job->company->getDataValue('name'));
-        $this->process = new \Symfony\Component\Process\Process(explode(' ', $this->commandline()), null, \MultiFlexi\Environmentor::flatEnv($this->environment), null, 32767);
+        $this->process = new \Symfony\Component\Process\Process(explode(' ', $command), null, \MultiFlexi\Environmentor::flatEnv($this->environment), null, 32767);
         $this->process->run(function ($type, $buffer) {
             $logger = new \Ease\Sand();
-            $logger->setObjectName('Runner');
+            $logger->setObjectName(\Ease\Logger\Message::getCallerName($this));
             if (\Symfony\Component\Process\Process::ERR === $type) {
                 $logger->addStatusMessage($buffer, 'error');
                 $this->addOutput($buffer, 'error');
@@ -88,7 +84,17 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
                 $this->addOutput($buffer, 'success');
             }
         });
-        $this->addStatusMessage('Launch finished: ' . $this->executable() . '@' . $this->job->application->getDataValue('name') . ' ' . $this->process->getExitCodeText());
+        $this->addStatusMessage($command . ': ' . $this->process->getExitCodeText() == 0 ? 'success' : 'warning');
+        return $this->process->getExitCode();
+    }
+
+    public function launchJob()
+    {
+        $this->commandline = $this->commandline();
+        $this->setDataValue('commandline', $this->commandline);
+        $this->addStatusMessage('Job launched: ' . $this->job->application->getDataValue('name') . '@' . $this->job->company->getDataValue('name'));
+        $this->launch($this->commandline());
+        $this->addStatusMessage('Jobn launch finished: ' . $this->executable() . '@' . $this->job->application->getDataValue('name') . ' ' . $this->process->getExitCodeText());
     }
 
     public function storeLogs()
