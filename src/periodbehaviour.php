@@ -23,6 +23,7 @@ $oPage->onlyForLogged();
 $runTemplater = new RunTemplate();
 $runTemplater->loadFromSQL($runTemplater->runTemplateID(WebPage::getRequestValue('app'), $_SESSION['company']));
 
+$actions = new \MultiFlexi\ActionConfig();
 if (\Ease\WebPage::isPosted()) {
     $succesActions = ActionsChooser::toggles('success');
     $failActions = ActionsChooser::toggles('fail');
@@ -30,8 +31,8 @@ if (\Ease\WebPage::isPosted()) {
     $runTemplater->setDataValue('success', serialize($succesActions));
     $runTemplater->saveToSQL();
 
-    ActionsChooser::formModuleCofig('success');
-    ActionsChooser::formModuleCofig('fail');
+    $actions->saveModeConfigs('success', ActionsChooser::formModuleCofig('success'), $runTemplater->getMyKey());
+    $actions->saveModeConfigs('fail', ActionsChooser::formModuleCofig('fail'), $runTemplater->getMyKey());
 } else {
     $failActions = $runTemplater->getDataValue('fail') ? unserialize($runTemplater->getDataValue('fail')) : [];
     $succesActions = $runTemplater->getDataValue('success') ? unserialize($runTemplater->getDataValue('success')) : [];
@@ -52,7 +53,6 @@ $actionsRow->addColumn(6, new \Ease\TWB4\Panel(_('Success Actions'), 'success', 
 $actionsRow->addColumn(6, new \Ease\TWB4\Panel(_('Fail Actions'), 'danger', new ActionsChooser('fail', $app, $failActions), $periodcalTaskInfo['fail']));
 
 $appPanel->addItem($actionsRow);
-
 $jobtempform = new \Ease\TWB4\Form();
 $jobtempform->addItem(new \Ease\Html\InputHiddenTag('app', $periodcalTaskInfo['app_id']));
 $jobtempform->addItem(new \Ease\Html\InputHiddenTag('company_id', $periodcalTaskInfo['company_id']));
@@ -64,4 +64,6 @@ $oPage->container->addItem(new CompanyPanel(new Company($periodcalTaskInfo['comp
 
 $oPage->addItem(new PageBottom());
 
+$oPage->finalizeRegistred();
+$jobtempform->fillUp(ActionsChooser::sqlToForm($actions->getRuntemplateConfig($runTemplater->getMyKey())));
 $oPage->draw();

@@ -1,4 +1,4 @@
-multiflexi (1.10.3) UNRELEASED; urgency=medium
+multiflexi (1.10.4) UNRELEASED; urgency=medium
 
   [ CyberVitexus ]
   * Ability choose run interval between hour and year
@@ -50,8 +50,9 @@ multiflexi (1.10.3) UNRELEASED; urgency=medium
   * Zabbix LLD company_code
   * Initial docker Executor
   * Output Download added
+  * Custom Actions Works from now
 
- -- vitex <info@vitexsoftware.cz>  Tue, 16 Jan 2024 00:52:12 +0100
+ -- vitex <info@vitexsoftware.cz>  Wed, 17 Jan 2024 20:57:25 +0100
 
 multiflexi (0.1) experimental; urgency=medium
 

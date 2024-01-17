@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Multi Flexi - Launch Custom command
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * @copyright  2023-2024 Vitex Software
  */
 
 namespace MultiFlexi\Action;
@@ -56,5 +56,16 @@ class CustomCommand extends \MultiFlexi\CommonAction
     public static function usableForApp($app): bool
     {
         return is_object($app);
+    }
+
+    /**
+     * Perform Action
+     */
+    public function perform()
+    {
+        $command = $this->getDataValue('command');
+        $this->addStatusMessage(_('Custom Command begin'));
+        $exitCode = $this->job->executor->launch($command);
+        $this->addStatusMessage(_('Custom Command done'));
     }
 }

@@ -66,4 +66,21 @@ class ActionsChooser extends \Ease\Html\DivTag
     {
         return \Ease\WebPage::getRequestValue($prefix) ? \Ease\WebPage::getRequestValue($prefix) : [];
     }
+
+
+    /**
+     * SQL To Form Data
+     *
+     * @param \Envms\FluentPDO\Queries\Select $query
+     *
+     * @return array
+     */
+    public static function sqlToForm($query)
+    {
+        $formData = [];
+        foreach ($query as $field) {
+            $formData[$field['mode'] . '[' . $field['module'] . '][' . $field['keyname'] . ']'] = $field['value'];
+        }
+        return $formData;
+    }
 }

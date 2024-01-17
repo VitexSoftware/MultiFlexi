@@ -203,9 +203,21 @@ class RunTemplate extends Engine
      */
     public function assignAppsToCompany(int $companyId, array $appIds, string $interval)
     {
-        $this->deleteFromSQL(['company_id' => $companyId, 'interv' => $interval]);
+        $actions = new \MultiFlexi\ActionConfig();
+        $companyAppsInInterval = $this->listingQuery()->where(['company_id' => $companyId, 'interv' => $interval])->fetchAll('app_id');
+        foreach ($companyAppsInInterval as $appId => $runtempalte) {
+            if (array_key_exists($appId, $appIds) === false) {
+                $actionConfigsDeleted = $actions->deleteFromSQL(['runtemplate_id' => $runtempalte['id']]);
+                $actions->addStatusMessage(strval($actionConfigsDeleted) . ' ' . _('action configurations deleted'));
+                $runtempaltesDeletd = $this->deleteFromSQL(['company_id' => $companyId, 'app_id' => $runtempalte['app_id']]);
+                $this->addStatusMessage(strval($runtempaltesDeletd) . ' ' . _('runtemplate deleted'));
+            }
+        }
         foreach ($appIds as $appId) {
-            $this->insertToSQL(['app_id' => $appId, 'company_id' => $companyId, 'interv' => $interval]);
+            if (array_key_exists($appId, $companyAppsInInterval) === false) {
+                $appInserted = $this->insertToSQL(['app_id' => $appId, 'company_id' => $companyId, 'interv' => $interval]);
+                $this->addStatusMessage(sprintf(_('Application %s in company %s assigned to interval %s'), $appId, $companyId, $interval));
+            }
         }
     }
 
