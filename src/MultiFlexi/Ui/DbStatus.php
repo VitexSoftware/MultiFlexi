@@ -4,7 +4,7 @@
  * Multi Flexi  - Database use overview
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2015-2020 Vitex Software
+ * @copyright  2015-2024 Vitex Software
  */
 
 namespace MultiFlexi\Ui;
@@ -22,12 +22,17 @@ class DbStatus extends \Ease\TWB4\Row
     public function __construct()
     {
         parent::__construct();
+        $jobs = (string) (new \MultiFlexi\Job())->listingQuery()->count();
         $servers = (string) (new \MultiFlexi\Servers())->listingQuery()->count();
         $customers = (string) (new \MultiFlexi\Customer())->listingQuery()->count();
         $companys = (string) (new \MultiFlexi\Company())->listingQuery()->count();
         $apps = (string) (new \MultiFlexi\Application())->listingQuery()->count();
         $assigned = (string) (new \MultiFlexi\RunTemplate())->listingQuery()->count();
 
+        $this->addColumn(2, new \Ease\Html\ButtonTag(
+            [_('Jobs') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $jobs)],
+            ['class' => 'btn btn-default', 'type' => 'button']
+        ));
         $this->addColumn(2, new \Ease\Html\ButtonTag(
             [_('Apps') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $apps)],
             ['class' => 'btn btn-default', 'type' => 'button']

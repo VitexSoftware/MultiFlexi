@@ -13,7 +13,7 @@ declare(strict_types=1);
  *
  *
  * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * @copyright  2023-2024 Vitex Software
  */
 
 namespace MultiFlexi\Ui;
@@ -35,7 +35,7 @@ class CompanyPanel extends \Ease\TWB4\Panel
     {
         $cid = $company->getMyKey();
         $headRow = new \Ease\TWB4\Row();
-        $headRow->addColumn(2, [new CompanyLogo($company, ['style' => 'height: 60px']), '&nbsp;', $company->getRecordName()]);
+        $headRow->addColumn(2, new \Ease\Html\ATag('company.php?id=' . $cid, [new CompanyLogo($company, ['style' => 'height: 60px']), '&nbsp;', $company->getRecordName()]));
         $headRow->addColumn(2, new \Ease\TWB4\LinkButton('companysetup.php?id=' . $cid, '🛠️&nbsp;' . _('Company'), 'primary btn-lg btn-block'));
         $headRow->addColumn(2, new \Ease\TWB4\LinkButton('companyapps.php?company_id=' . $cid, '📌&nbsp;' . _('Applications'), 'secondary btn-lg btn-block'));
         $headRow->addColumn(2, new \Ease\TWB4\LinkButton('tasks.php?company_id=' . $cid, '🔧&nbsp;' . _('Setup tasks'), 'secondary btn-lg btn-block'));

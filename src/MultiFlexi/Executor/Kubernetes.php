@@ -26,7 +26,7 @@ namespace MultiFlexi\Executor;
 class Kubernetes extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
 {
     //put your code here
-    public function launch()
+    public function launch(string $command)
     {
     }
 
@@ -72,6 +72,10 @@ class Kubernetes extends \MultiFlexi\CommonExecutor implements \MultiFlexi\execu
     }
 
     public function commandline()
+    {
+    }
+
+    public function launchJob()
     {
     }
 }
