@@ -8,6 +8,6 @@ set -e
 if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
 
         if deb-systemd-helper --quiet was-enabled 'zabbix-agent2.service'; then
-            deb-systemd-helper restart 'zabbix-agent2.service' >/dev/null || true
+            deb-systemd-helper reload 'zabbix-agent2.service' >/dev/null || true
         fi
 fi

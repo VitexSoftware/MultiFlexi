@@ -2,7 +2,7 @@ Source: multiflexi
 Section: web
 Priority: optional
 Maintainer: "Vítězslav Dvořák" <info@vitexsoftware.cz>
-Build-Depends: debhelper (>=11~), jq, moreutils, dh-systemd (>=1.5)
+Build-Depends: debhelper (>=11~), jq, moreutils
 Standards-Version: 4.1.4
 Homepage: https://github.com/VitexSoftware/MultiFlexi
 
