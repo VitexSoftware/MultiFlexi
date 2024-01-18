@@ -48,7 +48,7 @@ class Podman extends \Ease\Sand implements \MultiFlexi\executor
     }
 
 
-    public function launch()
+    public function launch(string $command)
     {
         $this->pullImage();
         $this->launchContainer();

@@ -4,7 +4,7 @@
  * Multi Flexi - Login page.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * @copyright  2020-2024 Vitex Software
  */
 
 namespace MultiFlexi\Ui;
@@ -50,18 +50,22 @@ $oPage->container->addItem($loginFace);
 $loginRow = new Row();
 $infoColumn = $loginRow->addItem(new Col(4));
 
-$infoBlock = $infoColumn->addItem(new Card(new ImgTag('images/project-logo.svg')));
+$infoBlock = $infoColumn->addItem(new ImgTag('images/project-logo.svg'));
 $infoBlock->addItem(new DivTag(_('Welcome to Multi Flexi'), ['style' => 'text-align: center;']));
 
 $loginColumn = $loginRow->addItem(new Col(4));
 
-$submit = new SubmitButton(_('Sign in'), 'success btn-lg', ['id' => 'signin']);
+$submit = new SubmitButton('🚪&nbsp;' . _('Sign in'), 'success btn-lg btn-block', ['id' => 'signin']);
+
+$submitRow = new Row();
+$submitRow->addColumn(6, $submit);
+$submitRow->addColumn(6, new LinkButton('passwordrecovery.php', '🔑&nbsp;' . _('Password recovery'), 'warning btn-block'));
 
 $loginPanel = new Panel(
     new ImgTag('images/project-logo.svg', 'logo', ['width' => 20]),
-    'secondary',
+    'inverse',
     null,
-    $submit
+    $submitRow
 );
 $loginPanel->addItem(new FormGroup(
     _('Username'),
@@ -74,13 +78,14 @@ $loginPanel->addItem(new FormGroup(_('Password'), new InputPasswordTag('password
 
 $loginPanel->body->setTagCss(['margin' => '20px']);
 
+$loginColumn->addItem('<p><br></p>');
 $loginColumn->addItem($loginPanel);
 
-$passRecoveryColumn = $loginRow->addItem(new Col(
-    4,
-    new LinkButton('passwordrecovery.php', '<i class="fa fa-key"></i>
-' . _('Lost password recovery'), 'warning')
-));
+//$passRecoveryColumn = $loginRow->addItem(new Col(
+//    4,
+//    new LinkButton('passwordrecovery.php', '<i class="fa fa-key"></i>
+//' . _('Lost password recovery'), 'warning')
+//));
 
 $oPage->container->addItem(new Form([], [], $loginRow));
 

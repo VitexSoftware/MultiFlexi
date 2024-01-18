@@ -4,7 +4,7 @@
  * Multi Flexi - Company instance editor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * @copyright  2020-2024 Vitex Software
  */
 
 namespace MultiFlexi\Ui;
@@ -61,7 +61,8 @@ foreach ($jobs as $job) {
 
 $companyPanelContents[] = new \Ease\Html\H3Tag(_('job queue'));
 $companyPanelContents[] = $jobList;
-$bottomLine = new Row();
+$bottomLine = new CompanyDbStatus($companies);
+
 $oPage->container->addItem(new CompanyPanel($companies, $companyPanelContents, $bottomLine));
 $oPage->addItem(new PageBottom());
 $oPage->draw();
