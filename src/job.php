@@ -31,8 +31,12 @@ $outputTabs = new \Ease\TWB4\Tabs();
 $outputTabs->addTab(_('Output'), [$stdTerminal, new \Ease\TWB4\LinkButton('joboutput.php?id=' . $jobID . '&mode=std', _('Download'), 'secondary btn-block') ]);
 $outputTabs->addTab(_('Errors'), [$errorTerminal, new \Ease\TWB4\LinkButton('joboutput.php?id=' . $jobID . '&mode=err', _('Download'), 'secondary btn-block') ], empty($jobber->getDataValue('stdout')));
 
+$runTemplateButton = new \Ease\TWB4\LinkButton('runtemplate.php?id=' . $runTemplate->getMyKey(), '⚗️&nbsp;' . _('Run Template'), 'dark btn-lg btn-block');
+
+$appPanel = new ApplicationPanel($apps, $outputTabs, new JobInfo($jobber));
+$appPanel->headRow->addColumn(2, $runTemplateButton);
 $oPage->container->addItem(
-    new CompanyPanel(new \MultiFlexi\Company($appInfo['company_id']), new ApplicationPanel($apps, $outputTabs, new JobInfo($jobber)))
+    new CompanyPanel(new \MultiFlexi\Company($appInfo['company_id']), $appPanel)
 );
 
 $oPage->addItem(new PageBottom());
