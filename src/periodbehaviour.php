@@ -44,9 +44,11 @@ $periodcalTaskInfo = $runTemplater->getData();
 
 $app = new Application($periodcalTaskInfo['app_id']);
 
-$appPanel = new ApplicationPanel($app);
+$interval = new \Ease\Html\DivTag(_(\MultiFlexi\Job::codeToInterval($periodcalTaskInfo['interv'])) . ' ' . _('interval'));
+$appPanel = new ApplicationPanel($app, $interval);
 
-$appPanel->addItem(new \Ease\Html\DivTag(_(\MultiFlexi\Job::codeToInterval($periodcalTaskInfo['interv'])) . ' ' . _('interval')));
+$runTemplateButton = new \Ease\TWB4\LinkButton('runtemplate.php?id=' . $runTemplater->getMyKey(), '⚗️&nbsp;' . _('Run Template'), 'dark btn-lg btn-block');
+$appPanel->headRow->addColumn(2, $runTemplateButton);
 
 $actionsRow = new \Ease\TWB4\Row();
 $actionsRow->addColumn(6, new \Ease\TWB4\Panel(_('Success Actions'), 'success', new ActionsChooser('success', $app, $succesActions), $periodcalTaskInfo['success']));
