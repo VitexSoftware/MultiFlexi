@@ -32,6 +32,12 @@ class ApplicationPanel extends Panel
 {
     /**
      *
+     * @var Row
+     */
+    public $headRow;
+
+    /**
+     *
      * @param Application $application
      * @param mixed               $content
      * @param mixed               $footer
@@ -39,13 +45,13 @@ class ApplicationPanel extends Panel
     public function __construct($application, $content = null, $footer = null)
     {
         $cid = $application->getMyKey();
-        $headRow = new Row();
-        $headRow->addColumn(2, [new AppLogo($application, ['style' => 'height: 60px']), '&nbsp;', $application->getRecordName()]);
-        $headRow->addColumn(2, new LinkButton('app.php?id=' . $cid, '🛠️&nbsp;' . _('Application'), 'primary btn-lg btn-block'));
-        $headRow->addColumn(2, new LinkButton('joblist.php?app_id=' . $cid, '🧑‍💻&nbsp;' . _('Jobs history'), 'secondary btn-lg btn-block'));
+        $this->headRow = new Row();
+        $this->headRow->addColumn(2, [new AppLogo($application, ['style' => 'height: 60px']), '&nbsp;', $application->getRecordName()]);
+        $this->headRow->addColumn(2, new LinkButton('app.php?id=' . $cid, '🛠️&nbsp;' . _('Application'), 'primary btn-lg btn-block'));
+        $this->headRow->addColumn(2, new LinkButton('joblist.php?app_id=' . $cid, '🧑‍💻&nbsp;' . _('Jobs history'), 'secondary btn-lg btn-block'));
 //        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('tasks.php?application_id=' . $cid, '🔧&nbsp;' . _('Setup tasks'), 'secondary btn-lg btn-block'));
 //        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('adhoc.php?application_id=' . $cid, '🚀&nbsp;' . _('Application launcher'), 'secondary btn-lg btn-block'));
 //        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('periodical.php?application_id=' . $cid, '🔁&nbsp;' . _('Periodical Tasks'), 'secondary btn-lg btn-block'));
-        parent::__construct($headRow, 'default', $content, $footer);
+        parent::__construct($this->headRow, 'default', $content, $footer);
     }
 }
