@@ -13,7 +13,7 @@ namespace MultiFlexi\Env;
  *
  * @author vitex
  */
-interface Injector
+interface injector
 {
     /**
      * List of all known keys

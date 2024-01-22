@@ -28,8 +28,8 @@ $errorTerminal = new \Ease\Html\DivTag(nl2br(str_replace('background-color: blac
 $stdTerminal   = new \Ease\Html\DivTag(nl2br(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(strval($jobber->getDataValue('stdout'))))), ['style' => 'background: #000000; font-family: monospace;']);
 
 $outputTabs = new \Ease\TWB4\Tabs();
-$outputTabs->addTab(_('Output'), [$stdTerminal, new \Ease\TWB4\LinkButton('joboutput.php?id=' . $jobID . '&mode=std', _('Download'), 'secondary btn-block') ]);
-$outputTabs->addTab(_('Errors'), [$errorTerminal, new \Ease\TWB4\LinkButton('joboutput.php?id=' . $jobID . '&mode=err', _('Download'), 'secondary btn-block') ], empty($jobber->getDataValue('stdout')));
+$outputTabs->addTab(_('Output'), [$stdTerminal, strlen($jobber->getOutput()) ? new \Ease\TWB4\LinkButton('joboutput.php?id=' . $jobID . '&mode=std', _('Download'), 'secondary btn-block') : _('No output') ]);
+$outputTabs->addTab(_('Errors'), [$errorTerminal, strlen($jobber->getErrorOutput()) ? new \Ease\TWB4\LinkButton('joboutput.php?id=' . $jobID . '&mode=err', _('Download'), 'secondary btn-block') : _('No errors') ], empty($jobber->getOutput()));
 
 $runTemplateButton = new \Ease\TWB4\LinkButton('runtemplate.php?id=' . $runTemplate->getMyKey(), '⚗️&nbsp;' . _('Run Template'), 'dark btn-lg btn-block');
 

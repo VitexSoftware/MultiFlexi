@@ -16,7 +16,7 @@ namespace MultiFlexi\Env;
  *
  * @author vitex
  */
-class AbraFlexi extends \MultiFlexi\Environmentor implements Injector
+class AbraFlexi extends \MultiFlexi\Environmentor implements injector
 {
     /**
      * List of all known keys

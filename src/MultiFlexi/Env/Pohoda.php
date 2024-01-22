@@ -16,7 +16,7 @@ namespace MultiFlexi\Env;
  *
  * @author vitex
  */
-class Pohoda extends \MultiFlexi\Environmentor implements Injector
+class Pohoda extends \MultiFlexi\Environmentor implements injector
 {
     /**
      * List of all known keys
