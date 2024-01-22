@@ -29,7 +29,7 @@ Shared::user(new Anonym());
 
 $jobber = new Job();
 if (\Ease\Shared::cfg('APP_DEBUG')) {
-    $jobber->logBanner(\Ease\Shared::appName() . ' Interval: ' . Job::codeToInterval($interval));
+    $jobber->logBanner();
 }
 
 if(\MultiFlexi\Runner::isServiceActive('multiflexi') === false){
