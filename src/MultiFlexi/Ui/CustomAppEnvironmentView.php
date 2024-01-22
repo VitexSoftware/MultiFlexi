@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi -
+ * Multi Flexi - Custom App Environment View
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * @copyright  2024 Vitex Software
  */
 
 /**
@@ -33,6 +33,7 @@ class CustomAppEnvironmentView extends EnvironmentView
      */
     public function __construct(int $appCompanyID, $properties = [])
     {
+        $appConfig = [];
         $appToCompany = new \MultiFlexi\RunTemplate($appCompanyID);
         $companyId = $appToCompany->getDataValue('company_id');
         $appId = $appToCompany->getDataValue('app_id');
