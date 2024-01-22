@@ -377,6 +377,17 @@ class Job extends Engine
         return $this->getDataValue('stdout');
     }
 
+    /**
+     * Obtain Job Error Output
+     *
+     * @return string job stderr
+     */
+    public function getErrorOutput()
+    {
+        return $this->getDataValue('stderr');
+    }
+
+
     public function cleanUp()
     {
         // TODO: Delete Uploaded files if any

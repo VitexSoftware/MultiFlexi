@@ -22,13 +22,6 @@ class Configuration extends \Ease\SQL\Engine
         parent::__construct($identifier, $options);
     }
 
-    public function getName()
-    {
-        $app = new Application((int) $this->getDataValue('app_id'));
-        $cmp = new Company((int) $this->getDataValue('company_id'));
-        return [new \Ease\TWB4\LinkButton('app.php?id=' . $app->getMyKey(), $app->getDataValue('name'), 'info'), ' @ ', new \Ease\TWB4\LinkButton('company.php?id=' . $cmp->getMyKey(), $cmp->getRecordName(), 'info')];
-    }
-
     /**
      * Uloží pole dat do SQL. Pokud je $SearchForID 0 updatuje pokud ze nastaven  keyColumn.
      *

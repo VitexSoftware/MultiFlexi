@@ -36,9 +36,17 @@ if ($oPage->isPosted()) {
     }
 }
 
-$oPage->container->addItem(new H1Tag($configurator->getName()));
+$app = new \MultiFlexi\Application($appId);
+$company = new \MultiFlexi\Company($companyId);
+$runTemplater = new \MultiFlexi\RunTemplate();
+$runTemplater->loadFromSQL($runTemplater->runTemplateID($appId, $companyId));
 
-$oPage->container->addItem(new CustomAppConfigForm($configurator));
+$appPanel = new ApplicationPanel($app, new CustomAppConfigForm($configurator));
+
+$runTemplateButton = new \Ease\TWB4\LinkButton('runtemplate.php?id=' . $runTemplater->getMyKey(), '⚗️&nbsp;' . _('Run Template'), 'dark btn-lg btn-block');
+$appPanel->headRow->addColumn(2, $runTemplateButton);
+
+$oPage->container->addItem(new CompanyPanel($company, $appPanel));
 
 $oPage->addItem(new PageBottom());
 
