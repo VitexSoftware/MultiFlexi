@@ -43,6 +43,12 @@ class CompanyEnv extends \Ease\SQL\Engine
         $this->loadEnv();
     }
 
+    /**
+     * Add Configuration to Company's Environment store
+     *
+     * @param string $key   Name of Value to keep
+     * @param string $value Value of Configuration
+     */
     public function addEnv($key, $value)
     {
         try {

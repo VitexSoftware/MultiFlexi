@@ -26,6 +26,7 @@ class AppEditorForm extends EngineForm
     {
         $this->setTagProperty('enctype', 'multipart/form-data');
         $this->addInput(new InputTextTag('name'), _('Application name'));
+        $this->addInput(new InputTextTag('code'), _('Application code'));
         $this->addInput(new InputTextTag('description'), _('Application Description'));
         $this->addInput(new InputTextTag('executable'), _('Path to binary'));
         $this->addInput(new InputTextTag('setup'), _('Setup Command'), '', _('Command used to setup new company for use with command'));
@@ -36,6 +37,7 @@ class AppEditorForm extends EngineForm
         $this->addInput(new InputTextTag('ociimage'), _('Container image'));
         $this->addInput(new InputTextTag('version'), _('Current Version of Application'));
         $this->addInput(new InputTextTag('deploy'), _('Application deploy command'));
+        $this->addInput(new InputTextTag('uuid'), _('Application Universal Unique Identifier'));
         $this->addInput(new SubmitButton(_('Save'), 'success'));
         if (!is_null($this->engine->getDataValue('id'))) {
             $this->addItem(new InputHiddenTag('id'));

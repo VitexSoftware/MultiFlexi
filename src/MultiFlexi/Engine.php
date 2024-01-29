@@ -67,17 +67,4 @@ class Engine extends \Ease\SQL\Engine
         }
         return parent::saveToSQL($data);
     }
-
-    /**
-     * Export given environment
-     *
-     * @param array $env
-     */
-    public function exportEnv(array $env)
-    {
-        foreach ($env as $envName => $sqlValue) {
-            $this->addStatusMessage(sprintf(_('Setting Environment %s to %s'), $envName, $sqlValue), 'debug');
-            putenv($envName . '=' . $sqlValue);
-        }
-    }
 }

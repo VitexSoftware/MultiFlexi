@@ -16,7 +16,6 @@ namespace MultiFlexi\Ui;
  */
 class JobChart extends \Ease\Html\DivTag
 {
-
     public function __construct(\MultiFlexi\Job $engine, $properties = [])
     {
         $allJobs = $engine->listingQuery()->fetchAll();
@@ -31,7 +30,7 @@ class JobChart extends \Ease\Html\DivTag
                 case 0:
                     $state = 'success';
                     break;
-                case -1 :
+                case -1:
                     $state = 'waiting';
                     break;
                 default:
