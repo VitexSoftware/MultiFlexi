@@ -6,6 +6,7 @@ use Phinx\Migration\AbstractMigration;
 
 final class AppCodeUuid extends AbstractMigration
 {
+
     /**
      * Change Method.
      *
@@ -23,8 +24,18 @@ final class AppCodeUuid extends AbstractMigration
         $table
                 ->addColumn('code', 'string', ['null' => true, 'limit' => 6])
                 ->addColumn('uuid', 'string', ['null' => true, 'limit' => 36])
-                ->addIndex(['code'], ['unique' => true])                
-                ->addIndex(['uuid'], ['unique' => true])                
+                ->addIndex(['code'], ['unique' => true])
+                ->addIndex(['uuid'], ['unique' => true])
                 ->save();
+
+        $rows = $this->fetchAll('SELECT * FROM apps');
+        foreach ($rows as $appRow) {
+            if (empty($appRow['uuid'])) {
+                $this->query("UPDATE apps SET uuid='" . \Ease\Functions::guidv4() . "' WHERE id=" . $appRow['id']);
+            }
+            if (empty($appRow['code'])) {
+                $this->query("UPDATE apps SET code='" . substr(strtoupper($appRow['executable'] ? basename($appRow['executable']) : $appRow['name']), 0, -6) . "' WHERE id=" . $appRow['id']);
+            }
+        }
     }
 }

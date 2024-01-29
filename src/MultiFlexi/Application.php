@@ -80,14 +80,27 @@ class Application extends Engine
             }
         }
         if (array_key_exists('uuid', $data) == false) {
-            $data['uuid'] = \Ease\Functions::guidv4();
+            $data['uuid'] = $this->getUuid();
         }
         if (array_key_exists('code', $data) == false) {
-            $data['code'] = substr(strtoupper($data['executable'] ? basename($data['executable']) : $data['name'], 0, -6));
+            $data['code'] = $this->getUuid();
         }
         return parent::takeData($data);
     }
 
+    public function getCode()
+    {
+        $data = $this->getData();
+        return substr(strtoupper($data['executable'] ? basename($data['executable']) : $data['name']), 0, -6);        
+        
+    }
+    
+    public function getUuid()
+    {
+        return \Ease\Functions::guidv4();
+    }
+    
+    
     /**
      * Check command's availbility
      *
