@@ -4,7 +4,7 @@
  * Multi Flexi - App class
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2020-2023 Vitex Software
+ * @copyright  2020-2024 Vitex Software
  */
 
 namespace MultiFlexi;
@@ -60,7 +60,8 @@ class Application extends Engine
      */
     public function takeData($data)
     {
-        $data['enabled'] = (($data['enabled'] == 'on') || ($data['enabled'] == 1));
+
+        $data['enabled'] = array_key_exists('enabled', $data) ? (($data['enabled'] == 'on') || ($data['enabled'] == 1)) : 0;
         if (array_key_exists('name', $data) && empty($data['name'])) {
             $this->addStatusMessage(_('Name is empty'), 'warning');
         }
@@ -78,7 +79,12 @@ class Application extends Engine
                 unset($data['imageraw']);
             }
         }
-
+        if (array_key_exists('uuid', $data) == false) {
+            $data['uuid'] = \Ease\Functions::guidv4();
+        }
+        if (array_key_exists('code', $data) == false) {
+            $data['code'] = substr(strtoupper($data['executable'] ? basename($data['executable']) : $data['name'], 0, -6));
+        }
         return parent::takeData($data);
     }
 
@@ -132,6 +138,7 @@ class Application extends Engine
                 $candidat = ((substr($pathDir, -1) == '/') ? $pathDir : $pathDir . '/') . $binary;
                 if (file_exists($candidat) && is_executable($candidat)) {
                     $found = $candidat;
+                    break;
                 }
             }
         }

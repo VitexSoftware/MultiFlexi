@@ -9,6 +9,7 @@ use MultiFlexi\Application;
  */
 class ApplicationTest extends \PHPUnit\Framework\TestCase
 {
+
     /**
      * @var Application
      */
@@ -34,89 +35,68 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @covers MultiFlexi\Application::getCompany
-     * @todo   Implement testgetCompany().
      */
     public function testgetCompany()
     {
         $this->assertEquals('', $this->object->getCompany());
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
      * @covers MultiFlexi\Application::takeData
-     * @todo   Implement testtakeData().
      */
     public function testtakeData()
     {
-        $this->assertEquals('', $this->object->takeData());
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertEquals(2, $this->object->takeData(['enabled' => 'on', 'executable' => '/bin/test']));
     }
 
     /**
      * @covers MultiFlexi\Application::findBinaryInPath
-     * @todo   Implement testfindBinaryInPath().
      */
     public function testfindBinaryInPath()
     {
-        $this->assertEquals('', $this->object->findBinaryInPath());
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertEquals('/usr/bin/bash', $this->object->findBinaryInPath('bash'));
     }
 
     /**
      * @covers MultiFlexi\Application::doesBinaryExist
-     * @todo   Implement testdoesBinaryExist().
      */
     public function testdoesBinaryExist()
     {
-        $this->assertEquals('', $this->object->doesBinaryExist());
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue($this->object->doesBinaryExist('/usr/bin/tar'));
     }
 
     /**
      * @covers MultiFlexi\Application::isBinaryInPath
-     * @todo   Implement testisBinaryInPath().
      */
     public function testisBinaryInPath()
     {
-        $this->assertEquals('', $this->object->isBinaryInPath());
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue($this->object->isBinaryInPath('more'));
     }
 
     /**
      * @covers MultiFlexi\Application::getPlatformApps
-     * @todo   Implement testgetPlatformApps().
      */
     public function testgetPlatformApps()
     {
-        $this->assertEquals('', $this->object->getPlatformApps());
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertEquals([], $this->object->getPlatformApps('Unix'));
     }
 
     /**
      * @covers MultiFlexi\Application::getAppJson
-     * @todo   Implement testgetAppJson().
      */
     public function testgetAppJson()
     {
-        $this->assertEquals('', $this->object->getAppJson());
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertEquals('{
+    "environment": [],
+    "multiflexi": "dev-main"
+}', $this->object->getAppJson());
     }
 
     /**
      * @covers MultiFlexi\Application::jsonFileName
-     * @todo   Implement testjsonFileName().
      */
     public function testjsonFileName()
     {
-        $this->assertEquals('', $this->object->jsonFileName());
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertEquals('.multiflexi.app.json', $this->object->jsonFileName());
     }
 }

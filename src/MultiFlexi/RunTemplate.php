@@ -151,26 +151,6 @@ class RunTemplate extends Engine
     }
 
     /**
-     *
-     */
-    public function setEnvironment()
-    {
-        $cmp = new Company((int) $this->getDataValue('company_id'));
-        $cmp->setEnvironment();
-        $envNames = [
-            'EASE_EMAILTO' => $this->getDataValue('email'),
-            'EASE_LOGGER' => $this->getDataValue('email') ? 'console|email' : 'console'
-        ];
-        $this->exportEnv($envNames);
-        $customConfig = new Configuration();
-        $customConfig->setEnvironment($cmp->getMyKey(), $app->getMyKey());
-        $exec = $app->getDataValue('setup');
-        $cmp->addStatusMessage('setup begin' . $exec . '@' . $cmp->getDataValue('name'));
-        $cmp->addStatusMessage(shell_exec($exec), 'debug');
-        $cmp->addStatusMessage('setu end' . $exec . '@' . $cmp->getDataValue('name'));
-    }
-
-    /**
      * All RunTemplates for GivenCompany
      *
      * @param int $companyID
