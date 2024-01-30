@@ -19,6 +19,7 @@ use MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
  */
 class Job extends Engine
 {
+
     /**
      *
      * @var executor
@@ -128,7 +129,7 @@ class Job extends Engine
         ]);
         $environment['JOB_ID']['value'] = $jobId;
         $this->environment = $environment;
-        $this->updateToSQL(['env' => serialize($environment)], ['id' => $jobId]);
+        $this->updateToSQL(['env' => serialize($environment), 'command' => $this->getCmdline()], ['id' => $jobId]);
         return $jobId;
     }
 
@@ -274,11 +275,11 @@ class Job extends Engine
                 $appInfo = $this->runTemplate->getAppInfo();
                 $appEnvironment = Environmentor::flatEnv($this->environment);
                 $process = new \Symfony\Component\Process\Process(
-                    explode(' ', $setupCommand),
-                    null,
-                    $appEnvironment,
-                    null,
-                    32767
+                        explode(' ', $setupCommand),
+                        null,
+                        $appEnvironment,
+                        null,
+                        32767
                 );
                 $result = $process->run(function ($type, $buffer) {
                     $logger = new Runner();
@@ -386,7 +387,6 @@ class Job extends Engine
     {
         return $this->getDataValue('stderr');
     }
-
 
     public function cleanUp()
     {
