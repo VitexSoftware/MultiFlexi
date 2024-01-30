@@ -10,7 +10,6 @@
 namespace MultiFlexi\Ui;
 
 use MultiFlexi\Application;
-use Ease\TWB4\Row;
 
 require_once './init.php';
 
@@ -54,7 +53,6 @@ foreach ($envars as $envVarName => $envVarInfo) {
     }
 }
 
-
 $jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, 'adhoc ' . (new \DateTime())->format('Y-m-d h:i:s'), WebPage::getRequestValue('executor'));
 $jobber->scheduleJobRun(new \DateTime());
 
@@ -64,16 +62,13 @@ $instanceName = $appInfo['app_name'];
 
 $oPage->addItem(new PageTop(_('Schedule Job run')));
 
-$instanceRow = new Row();
-$instanceRow->addColumn(2, new \Ease\Html\ImgTag(empty($appInfo['image']) ? 'images/apps.svg' : $appInfo['image'], 'Logo', ['class' => 'img-fluid', 'style' => 'height: 64px']));
-$instanceRow->addColumn(8, new \Ease\Html\H1Tag($instanceName));
+$runTemplateButton = new \Ease\TWB4\LinkButton('runtemplate.php?id=' . $runTemplate->getMyKey(), '⚗️&nbsp;' . _('Run Template'), 'dark btn-lg btn-block');
+$jobInfoButton = new \Ease\TWB4\LinkButton('job.php?id=' . $jobber->getMyKey(), _('Job details'), 'info btn-block');
 
-$oPage->container->addItem($instanceRow);
-
-$envTable = new \MultiFlexi\Ui\EnvironmentView($jobber->getEnv());
-
-$oPage->container->addItem($envTable);
-
-$oPage->container->addItem(new \Ease\TWB4\LinkButton('job.php?id=' . $jobber->getMyKey(), _('Job details'), 'info btn-block'));
+$appPanel = new ApplicationPanel($apps, _('Job Run Scheduled') , $jobInfoButton  );
+$appPanel->headRow->addColumn(2, $runTemplateButton);
+$oPage->container->addItem(
+    new CompanyPanel(new \MultiFlexi\Company($appInfo['company_id']), $appPanel)
+);
 
 $oPage->draw();
