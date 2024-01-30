@@ -7,7 +7,7 @@
         "ext-yaml": "*",
         "ext-simplexml": "*",
         "vitexsoftware/ease-bootstrap4-widgets-abraflexi": "*",
-        "vitexsoftware/ease-fluentpdo": "*",
+        "vitexsoftware/ease-fluentpdo": "dev-main",
         "vitexsoftware/ease-twbootstrap4-widgets": "*",
         "robmorgan/phinx": "*",
         "datatables/datatables": "*",

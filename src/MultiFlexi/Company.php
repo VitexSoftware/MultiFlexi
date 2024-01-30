@@ -33,22 +33,6 @@ class Company extends \MultiFlexi\Engine
     public $abraflexiId;
 
     /**
-     * MultiFlexi Company
-     *
-     * @param mixed $init
-     * @param array $options
-     */
-    public function __construct($init = null, $options = [])
-    {
-        parent::__construct(null, $options);
-        $this->setMyTable('company');
-        $this->setKeyColumn('id');
-        if (is_integer($init)) {
-            $this->loadFromSQL($init);
-        }
-    }
-
-    /**
      * Prepare data for save
      *
      * @param array $data
