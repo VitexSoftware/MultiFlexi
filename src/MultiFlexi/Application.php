@@ -309,8 +309,10 @@ class Application extends Engine
                         }
                     }
                 } catch (\PDOException $exc) {
+                    echo $exc->getMessage();
                     echo $exc->getTraceAsString();
                     fwrite(STDERR, print_r($appSpecRaw, 1) . PHP_EOL);
+                    fwrite(STDERR, print_r($this->getData(), 1) . PHP_EOL);
                 }
             }
         } else {
