@@ -29,11 +29,12 @@ final class UuidCode extends AbstractMigration
             if (empty($appRow['uuid'])) {
                 $this->query("UPDATE apps SET uuid='" . \Ease\Functions::guidv4() . "' WHERE id=" . $appRow['id']);
             }
+
             if (empty($appRow['code'])) {
-                $code = substr(strtoupper($appRow['executable'] ? basename($appRow['executable']) : $appRow['name']), -7);
+                $code = substr(substr(strtoupper($appRow['executable'] ? basename($appRow['executable']) : $appRow['name']), -7), 0, 6);
                 $try = 1;
-                while (array_key_exists($code, $allCodes) ){
-                    $code = substr(strtoupper($appRow['executable'] ? basename($appRow['executable']) : $appRow['name']), -6). strval($try++);
+                while (array_key_exists($code, $allCodes)) {
+                    $code = substr(substr(strtoupper($appRow['executable'] ? basename($appRow['executable']) : $appRow['name']), -6) . strval($try++), 0, 6);
                 }
                 $this->query("UPDATE apps SET code='" . $code . "' WHERE id=" . $appRow['id']);
                 $allCodes[$code] = $appRow['id'];
