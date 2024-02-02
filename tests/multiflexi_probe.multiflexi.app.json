@@ -9,6 +9,7 @@
     "deploy": "sudo apt install multiflexi",
     "homepage": "https://github.com/VitexSoftware/MultiFlexi",
     "ociimage": "docker.io/vitexsoftware/multiflexi-probe",
+    "uuid": "775ed801-2489-4981-bc14-d8a01cba1938",
     "version": "0.1.0",
     "environment": {
         "FILE_UPLOAD": {

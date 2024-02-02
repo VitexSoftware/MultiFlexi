@@ -275,7 +275,12 @@ class Application extends Engine
                 unset($importData['multiflexi']);
                 $importData['requirements'] = array_key_exists('requirements', $importData) ? strval($importData['requirements']) : '';
 
-                $candidat = $this->listingQuery()->where('executable', $importData['executable'])->whereOr('name', $importData['name']);
+                if (array_key_exists('uuid', $importData) && empty($importData['uuid'])) {
+                    $candidat = $this->listingQuery()->where('uuid', $importData['uuid']);
+                } else {
+                    $candidat = $this->listingQuery()->where('executable', $importData['executable'])->whereOr('name', $importData['name']);
+                }
+
                 if ($candidat->count()) { // Update
                     $this->setMyKey($candidat->fetchColumn());
                 } else { // Insert
@@ -311,10 +316,10 @@ class Application extends Engine
                         }
                     }
                 } catch (\PDOException $exc) {
-                    echo $exc->getMessage();
                     echo $exc->getTraceAsString();
                     fwrite(STDERR, print_r($appSpecRaw, 1) . PHP_EOL);
                     fwrite(STDERR, print_r($this->getData(), 1) . PHP_EOL);
+                    echo $exc->getMessage();
                 }
             }
         } else {
