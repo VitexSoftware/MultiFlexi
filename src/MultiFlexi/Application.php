@@ -91,16 +91,14 @@ class Application extends Engine
     public function getCode()
     {
         $data = $this->getData();
-        return substr(strtoupper($data['executable'] ? basename($data['executable']) : $data['name']), 0, -6);        
-        
+        return substr(strtoupper($data['executable'] ? basename($data['executable']) : $data['name']), 0, -6);
     }
-    
+
     public function getUuid()
     {
         return \Ease\Functions::guidv4();
     }
-    
-    
+
     /**
      * Check command's availbility
      *
@@ -277,29 +275,42 @@ class Application extends Engine
                 $this->takeData($importData);
 
                 $candidat = $this->listingQuery()->where('executable', $importData['executable'])->whereOr('name', $importData['name']);
-                if ($candidat->count()) {
+                if ($candidat->count()) { // Update
                     $this->setMyKey($candidat->fetchColumn());
+                } else { // Insert
+                    if ((array_key_exists('uuid', $importData) === false) || empty($importData['uuid'])) {
+                        $importData['uuid'] = \Ease\Functions::guidv4();
+                    }
+
+                    if ((array_key_exists('code', $importData) === false) || empty($importData['code'])) {
+                        $code = substr(substr(strtoupper($importData['executable'] ? basename($importData['executable']) : $importData['name']), -7), 0, 6);
+                    }
                 }
 
-                if ($this->dbsync()) {
-                    $fields = [$importData['name']];
-                    if (empty($environment) === false) {
-                        $confField = new Conffield();
-                        foreach ($environment as $envName => $envProperties) {
-                            if ($confField->addAppConfig($this->getMyKey(), $envName, $envProperties)) {
-                                $fields[] = $envName;
+                try {
+                    if ($this->dbsync()) {
+                        $fields = [$importData['name']];
+                        if (empty($environment) === false) {
+                            $confField = new Conffield();
+                            foreach ($environment as $envName => $envProperties) {
+                                if ($confField->addAppConfig($this->getMyKey(), $envName, $envProperties)) {
+                                    $fields[] = $envName;
+                                }
+                            }
+                        }
+                        $this->addStatusMessage('Import:' . implode(',', $fields), 'success');
+
+                        $executable = Application::findBinaryInPath($this->getDataValue('executable'));
+                        if (empty($executable)) {
+                            $this->addStatusMessage(sprintf(_('executable %s not found'), $this->getDataValue('executable')), 'warning');
+                            if (array_key_exists('deploy', $importData) && !empty($envProperties['deploy'])) {
+                                $this->addStatusMessage(sprintf(_('consider: %s'), $importData['deploy']), 'info');
                             }
                         }
                     }
-                    $this->addStatusMessage('Import:' . implode(',', $fields), 'success');
-
-                    $executable = Application::findBinaryInPath($this->getDataValue('executable'));
-                    if (empty($executable)) {
-                        $this->addStatusMessage(sprintf(_('executable %s not found'), $this->getDataValue('executable')), 'warning');
-                        if (array_key_exists('deploy', $importData) && !empty($envProperties['deploy'])) {
-                            $this->addStatusMessage(sprintf(_('consider: %s'), $importData['deploy']), 'info');
-                        }
-                    }
+                } catch (\PDOException $exc) {
+                    echo $exc->getTraceAsString();
+                    fwrite(STDERR, print_r($appSpecRaw, 1) . PHP_EOL);
                 }
             }
         } else {

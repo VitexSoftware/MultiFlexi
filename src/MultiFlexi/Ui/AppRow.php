@@ -61,7 +61,6 @@ class AppRow extends \Ease\TWB4\Row
         // use AppLaunchForm instead of LaunchButton
         $launchButton = new AppLaunchForm($app, $appData['company_id']);
         $logoColumn->addItem($launchButton);
-        //        $logoColumn->addItem(new \Ease\TWB4\LinkButton('?id=' . $appId, _('Clone'), 'info btn-sm  btn-block'));
 
         $appConfColumn = $appRow->addColumn(6, new FormGroup(new \Ease\Html\H3Tag(_('Job Config')), $intervalChooser));
         if (array_key_exists('runtemplateid', $appData)) {

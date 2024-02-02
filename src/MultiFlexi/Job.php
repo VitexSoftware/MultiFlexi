@@ -19,7 +19,6 @@ use MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
  */
 class Job extends Engine
 {
-
     /**
      *
      * @var executor
@@ -275,11 +274,11 @@ class Job extends Engine
                 $appInfo = $this->runTemplate->getAppInfo();
                 $appEnvironment = Environmentor::flatEnv($this->environment);
                 $process = new \Symfony\Component\Process\Process(
-                        explode(' ', $setupCommand),
-                        null,
-                        $appEnvironment,
-                        null,
-                        32767
+                    explode(' ', $setupCommand),
+                    null,
+                    $appEnvironment,
+                    null,
+                    32767
                 );
                 $result = $process->run(function ($type, $buffer) {
                     $logger = new Runner();

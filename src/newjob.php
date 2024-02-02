@@ -65,7 +65,7 @@ $oPage->addItem(new PageTop(_('Schedule Job run')));
 $runTemplateButton = new \Ease\TWB4\LinkButton('runtemplate.php?id=' . $runTemplate->getMyKey(), '⚗️&nbsp;' . _('Run Template'), 'dark btn-lg btn-block');
 $jobInfoButton = new \Ease\TWB4\LinkButton('job.php?id=' . $jobber->getMyKey(), _('Job details'), 'info btn-block');
 
-$appPanel = new ApplicationPanel($apps, _('Job Run Scheduled') , $jobInfoButton  );
+$appPanel = new ApplicationPanel($apps, _('Job Run Scheduled'), $jobInfoButton);
 $appPanel->headRow->addColumn(2, $runTemplateButton);
 $oPage->container->addItem(
     new CompanyPanel(new \MultiFlexi\Company($appInfo['company_id']), $appPanel)
