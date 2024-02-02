@@ -25,20 +25,24 @@ final class UuidCode extends AbstractMigration
         foreach ($rows as $appRow) {
             $allCodes[$appRow['code']] = $appRow['id'];
         }
+
+
         foreach ($rows as $appRow) {
             if (empty($appRow['uuid'])) {
-                $this->query("UPDATE apps SET uuid='" . \Ease\Functions::guidv4() . "' WHERE id=" . $appRow['id']);
+                $builder = $this->getQueryBuilder();
+                $builder->update('apps')->set('uuid', \Ease\Functions::guidv4())->where(['id' => $appRow['id']])->execute();
             }
-
             if (empty($appRow['code'])) {
-                $code = substr(substr(strtoupper($appRow['executable'] ? basename($appRow['executable']) : $appRow['name']), -7), 0, 6);
+                $code = substr(substr(strtoupper(basename($appRow['executable'])), -7), 0, 6);
                 $try = 1;
                 while (array_key_exists($code, $allCodes)) {
-                    $code = substr(substr(strtoupper($appRow['executable'] ? basename($appRow['executable']) : $appRow['name']), -6) . strval($try++), 0, 6);
+                    $code = substr(substr(strtoupper($appRow['executable']), -6), 0, 6) . strval($try++);
                 }
-                $this->query("UPDATE apps SET code='" . $code . "' WHERE id=" . $appRow['id']);
+                $builder = $this->getQueryBuilder();
+                $builder->update('apps')->set('code', $code)->where(['id' => $appRow['id']])->execute();
                 $allCodes[$code] = $appRow['id'];
             }
         }
+
     }
 }
