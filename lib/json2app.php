@@ -30,5 +30,5 @@ if (array_key_exists(1, $argv) && file_exists($argv[1])) {
         exit(1);
     }
 } else {
-            echo "usage: app.template.json [app id]";
+    echo "usage: app.template.json [app id]";
 }
