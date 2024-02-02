@@ -79,11 +79,13 @@ class Application extends Engine
                 unset($data['imageraw']);
             }
         }
-        if (array_key_exists('uuid', $data) == false) {
-            $data['uuid'] = $this->getUuid();
+
+        if ((array_key_exists('uuid', $data) === false) || empty($data['uuid'])) {
+            $data['uuid'] = \Ease\Functions::guidv4();
         }
-        if (array_key_exists('code', $data) == false) {
-            $data['code'] = $this->getUuid();
+
+        if ((array_key_exists('code', $data) === false) || empty($importData['code'])) {
+            $data['code'] = substr(substr(strtoupper($data['executable'] ? basename($data['executable']) : $data['name']), -7), 0, 6);
         }
         return parent::takeData($data);
     }
@@ -272,7 +274,6 @@ class Application extends Engine
                 $this->addStatusMessage('Importing ' . $importData['name'] . ' from ' . $jsonFile . ' created by ' . $importData['multiflexi'], 'debug');
                 unset($importData['multiflexi']);
                 $importData['requirements'] = array_key_exists('requirements', $importData) ? strval($importData['requirements']) : '';
-                $this->takeData($importData);
 
                 $candidat = $this->listingQuery()->where('executable', $importData['executable'])->whereOr('name', $importData['name']);
                 if ($candidat->count()) { // Update
@@ -283,9 +284,10 @@ class Application extends Engine
                     }
 
                     if ((array_key_exists('code', $importData) === false) || empty($importData['code'])) {
-                        $code = substr(substr(strtoupper($importData['executable'] ? basename($importData['executable']) : $importData['name']), -7), 0, 6);
+                        $importData['code'] = substr(substr(strtoupper($importData['executable'] ? basename($importData['executable']) : $importData['name']), -7), 0, 6);
                     }
                 }
+                $this->takeData($importData);
 
                 try {
                     if ($this->dbsync()) {
