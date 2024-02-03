@@ -43,6 +43,5 @@ final class UuidCode extends AbstractMigration
                 $allCodes[$code] = $appRow['id'];
             }
         }
-        echo '';
     }
 }
