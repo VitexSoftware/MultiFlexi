@@ -26,11 +26,15 @@ final class UuidCode extends AbstractMigration
             $allCodes[$appRow['code']] = $appRow['id'];
         }
 
-
+        
         foreach ($rows as $appRow) {
             if (empty($appRow['uuid'])) {
                 $builder = $this->getQueryBuilder();
-                $builder->update('apps')->set('uuid', \Ease\Functions::guidv4())->where(['id' => $appRow['id']])->execute();
+                try {
+                    $builder->update('apps')->set('uuid', \Ease\Functions::guidv4())->where(['id' => $appRow['id']])->execute();                
+                } catch (\PDOException $exc) {
+                    echo $exc->getMessage();
+                }
             }
             if (empty($appRow['code'])) {
                 $code = substr(substr(strtoupper(basename($appRow['executable'])), -7), 0, 6);
