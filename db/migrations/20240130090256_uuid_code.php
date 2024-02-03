@@ -36,13 +36,13 @@ final class UuidCode extends AbstractMigration
                 $code = substr(substr(strtoupper(basename($appRow['executable'])), -7), 0, 6);
                 $try = 1;
                 while (array_key_exists($code, $allCodes)) {
-                    $code = substr(substr(strtoupper($appRow['executable']), -6), 0, 6) . strval($try++);
+                    $code = substr(substr(strtoupper($appRow['executable']), -6), 0, 5) . strval($try++);
                 }
                 $builder = $this->getQueryBuilder();
                 $builder->update('apps')->set('code', $code)->where(['id' => $appRow['id']])->execute();
                 $allCodes[$code] = $appRow['id'];
             }
         }
-
+        echo '';
     }
 }
