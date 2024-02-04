@@ -11,7 +11,8 @@
     "sensiolabs/ansi-to-html": "*",
     "zarplata/zabbix-sender": "dev-master",
     "rcubitto/json-pretty": "dev-master",
-    "phplucidframe/console-table": "dev-master"
+    "phplucidframe/console-table": "dev-master",
+    "goat1000/svggraph": "dev-master"
   },
   "license": "MIT",
   "authors": [

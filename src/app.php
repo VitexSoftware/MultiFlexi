@@ -4,7 +4,7 @@
  * Multi Flexi - Customer instance editor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2017-2023 Vitex Software
+ * @copyright  2017-2024 Vitex Software
  */
 
 namespace MultiFlexi\Ui;
