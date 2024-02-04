@@ -32,7 +32,7 @@ $app->setDataValue('app_id', $app->getMyKey());
 $app->setDataValue('app_name', $app->getRecordName());
 
 $appPanel = new ApplicationPanel($app, new AppRow($app->getData()));
-$appPanel->headRow->addColumn(2, new \Ease\TWB4\LinkButton('periodbehaviour.php?app=' . $app->getMyKey() . '&company=' . $companies->getMyKey(), '🛠️&nbsp;' . _('Job behaviour'), 'secondary btn-lg btn-block'));
+$appPanel->headRow->addColumn(2, new \Ease\TWB4\LinkButton('periodbehaviour.php?app=' . $app->getMyKey() . '&company=' . $companies->getMyKey(), '🛠️&nbsp;' . _('Job Actions'), 'secondary btn-lg btn-block'));
 
 
 $oPage->container->addItem(new CompanyPanel($companies, $appPanel));
