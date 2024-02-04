@@ -80,7 +80,7 @@ class Application extends Engine
         }
 
         if ((array_key_exists('code', $data) === false) || empty($importData['code'])) {
-            $data['code'] = substr(substr(strtoupper($data['executable'] ? basename($data['executable']) : $data['name']), -7), 0, 6);
+//            $data['code'] = substr(substr(strtoupper($data['executable'] ? basename($data['executable']) : $data['name']), -7), 0, 6);
         }
         return parent::takeData($data);
     }
