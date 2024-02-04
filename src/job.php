@@ -35,6 +35,10 @@ $runTemplateButton = new \Ease\TWB4\LinkButton('runtemplate.php?id=' . $runTempl
 
 $appPanel = new ApplicationPanel($apps, $outputTabs, new JobInfo($jobber));
 $appPanel->headRow->addColumn(2, $runTemplateButton);
+
+$relaunchButton = new \Ease\TWB4\LinkButton('launch.php?id=' . $runTemplate->getMyKey() . '&app_id=' . $appInfo['app_id'] . '&company_id=' . $appInfo['company_id'], '&lt;' . _('Relaunch') . '💨', 'success');
+
+$appPanel->headRow->addColumn(2, $relaunchButton);
 $oPage->container->addItem(
     new CompanyPanel(new \MultiFlexi\Company($appInfo['company_id']), $appPanel)
 );
