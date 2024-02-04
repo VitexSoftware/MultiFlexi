@@ -27,6 +27,12 @@ class Metric implements \JsonSerializable
      */
     private $timestamp;
 
+
+    /**
+     *
+     * @param string $itemKey
+     * @param string $itemValue
+     */
     public function __construct(
         string $itemKey,
         string $itemValue
