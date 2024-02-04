@@ -17,6 +17,7 @@ src/MultiFlexi/Executor/Native.php        usr/lib/multiflexi/MultiFlexi/Executor
 
 src/MultiFlexi/Action/CustomCommand.php   usr/lib/multiflexi/MultiFlexi/Action
 #src/MultiFlexi/Action/Github.php          usr/lib/multiflexi/MultiFlexi/Action
+src/MultiFlexi/Action/WebHook.php          usr/lib/multiflexi/MultiFlexi/Action
 src/MultiFlexi/Action/LaunchJob.php       usr/lib/multiflexi/MultiFlexi/Action
 #src/MultiFlexi/Action/RedmineIssue.php    usr/lib/multiflexi/MultiFlexi/Action
 src/MultiFlexi/Action/Reschedule.php      usr/lib/multiflexi/MultiFlexi/Action

@@ -16,9 +16,12 @@ namespace MultiFlexi\Ui;
  */
 class JobChart extends \Ease\Html\DivTag
 {
+    private $properties;
+    private \MultiFlexi\Job $engine;
+
     public function __construct(\MultiFlexi\Job $engine, $properties = [])
     {
-        $allJobs = $engine->listingQuery()->fetchAll();
+        $allJobs = $engine->listingQuery()->select(['begin', 'exitcode'], 1)->where('begin BETWEEN (CURDATE() - INTERVAL 30 DAY) AND CURDATE()')->order('begin')->fetchAll();
         $days = [];
         foreach ($allJobs as $job) {
             if (empty($job['begin'])) {
@@ -52,75 +55,35 @@ class JobChart extends \Ease\Html\DivTag
                 'success' => $day['success'],
                 'waiting' => $day['waiting'],
                 'fail' => $day['fail'],
-                'all' => $day['success'] + $day['waiting'] + $day['fail']
+//                'all' => $day['success'] + $day['waiting'] + $day['fail']
             ];
         }
 
+        $settings = [
+            'auto_fit' => true,
+            'graph_title' => _('Last 30 Days jobs'),
+            'structured_data' => true,
+            'legend_autohide' => true,
+            'legend_draggable' => false,
+            'legend_text_side' => 'left',
+            'legend_entry_height' => 10,
+            'legend_title' => 'Legend',
+            'legend_entries' => [_('waiting'), _('fail'), _('success')],
+            'structure' => [
+                'key' => 'date',
+                'value' => ['waiting', 'fail', 'success'],
+                'tooltip' => ['waiting', 'fail', 'success'],
+                'axis_text' => 3
+            ]
+        ];
 
-        parent::__construct(null, $properties);
+        $colours = [['green', 'chartreuse'], ['red', 'orange'], ['#7FFF00', 'green']];
 
-        $this->includeJavaScript('js/d3.v7.js');
+        $graph = new \Goat1000\SVGGraph\SVGGraph(1024, 512, $settings);
+        $graph->values($data);
+        $graph->colours($colours);
 
-        $javaScript = '
-
-const aapl = ' . json_encode($data) . ';
-
-  // Declare the chart dimensions and margins.
-  const width = 928;
-  const height = 500;
-  const marginTop = 20;
-  const marginRight = 30;
-  const marginBottom = 30;
-  const marginLeft = 40;
-
-  // Declare the x (horizontal position) scale.
-  const x = d3.scaleUtc(d3.extent(aapl, d => d.date), [marginLeft, width - marginRight]);
-
-  // Declare the y (vertical position) scale.
-  const y = d3.scaleLinear([0, d3.max(aapl, d => d.all)], [height - marginBottom, marginTop]);
-
-  // Declare the line generator.
-  const line = d3.line()
-      .x(d => x(d.date))
-      .y(d => y(d.all));
-
-  // Create the SVG container.
-  const svg = d3.create("svg")
-      .attr("width", width)
-      .attr("height", height)
-      .attr("viewBox", [0, 0, width, height])
-      .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
-
-  // Add the x-axis.
-  svg.append("g")
-      .attr("transform", `translate(0,${height - marginBottom})`)
-      .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0));
-
-  // Add the y-axis, remove the domain line, add grid lines and a label.
-  svg.append("g")
-      .attr("transform", `translate(${marginLeft},0)`)
-      .call(d3.axisLeft(y).ticks(height / 40))
-      .call(g => g.select(".domain").remove())
-      .call(g => g.selectAll(".tick line").clone()
-          .attr("x2", width - marginLeft - marginRight)
-          .attr("stroke-opacity", 0.1))
-      .call(g => g.append("text")
-          .attr("x", -marginLeft)
-          .attr("y", 10)
-          .attr("fill", "currentColor")
-          .attr("text-anchor", "start")
-          .text("↑ Jobs"));
-
-  // Append a path for the line.
-  svg.append("path")
-      .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
-      .attr("d", line(aapl));
-
-// Append the SVG element.
-container.append(svg.node());
-';
-        $this->webPage()->addItem(new \Ease\Html\JavaScript($javaScript, ['type' => 'module']));
+        parent::__construct($graph->fetch('StackedBarGraph', false), $properties);
+//        $this->addJavaScript($graph->fetchJavascript());
     }
 }

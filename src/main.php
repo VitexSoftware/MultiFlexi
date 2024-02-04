@@ -19,6 +19,8 @@ $oPage->onlyForLogged();
 
 $oPage->addItem(new PageTop(_('Multi Flexi')));
 
+$oPage->container->addItem(new JobChart(new \MultiFlexi\Job(), ['id' => 'container']));
+
 $oPage->container->addItem(new \Ease\TWB4\Panel(_('Last 20 Jobs'), 'default', new JobHistoryTable(), new DbStatus()));
 
 $oPage->addItem(new PageBottom());

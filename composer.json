@@ -20,7 +20,8 @@
         "tuupola/slim-basic-auth": "*",
         "vitexsoftware/ease-core": "dev-main",
         "rcubitto/json-pretty": "dev-master",
-        "phplucidframe/console-table": "dev-master"
+        "phplucidframe/console-table": "dev-master",
+        "goat1000/svggraph": "dev-master"
     },
     "license": "MIT",
     "authors": [
