@@ -30,7 +30,12 @@ $app = new \MultiFlexi\Application($runTemplate->getDataValue('app_id'));
 $app->setDataValue('company_id', $companies->getMyKey());
 $app->setDataValue('app_id', $app->getMyKey());
 $app->setDataValue('app_name', $app->getRecordName());
-$oPage->container->addItem(new CompanyPanel($companies, new ApplicationPanel($app, new AppRow($app->getData()))));
+
+$appPanel = new ApplicationPanel($app, new AppRow($app->getData()));
+$appPanel->headRow->addColumn(2, new \Ease\TWB4\LinkButton('periodbehaviour.php?app=' . $app->getMyKey() . '&company=' . $companies->getMyKey(), '🛠️&nbsp;' . _('Job behaviour'), 'secondary btn-lg btn-block'));
+
+
+$oPage->container->addItem(new CompanyPanel($companies, $appPanel));
 
 new \MultiFlexi\Ui\ServicesForCompanyForm($companies, ['id' => 'apptoggle']);
 
