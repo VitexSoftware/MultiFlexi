@@ -66,11 +66,6 @@ class Application extends Engine
             $this->addStatusMessage(_('Name is empty'), 'warning');
         }
 
-        if (array_key_exists('executable', $data) && ($this->checkExcutable($data['executable']) === false)) {
-            $this->addStatusMessage(sprintf(_('Make sure the executable %s exists'), $data['executable']), 'info');
-            $data['enabled'] = false; // Do not enable Application without existing command
-        }
-
         if (array_key_exists('imageraw', $_FILES) && !empty($_FILES['imageraw']['name'])) {
             $uploadfile = sys_get_temp_dir() . '/' . basename($_FILES['imageraw']['name']);
             if (move_uploaded_file($_FILES['imageraw']['tmp_name'], $uploadfile)) {
