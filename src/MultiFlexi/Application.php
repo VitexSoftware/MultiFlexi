@@ -258,6 +258,8 @@ class Application extends Engine
     {
         $fields = [];
 
+        $codes = $this->listingQuery()->select('code', true)->fetchAll('code');
+
         $appSpecRaw = file_get_contents($jsonFile);
         if (empty($appSpecRaw) === false) {
             $importData = json_decode($appSpecRaw, true);
@@ -270,7 +272,7 @@ class Application extends Engine
                 unset($importData['multiflexi']);
                 $importData['requirements'] = array_key_exists('requirements', $importData) ? strval($importData['requirements']) : '';
 
-                if (array_key_exists('uuid', $importData) && empty($importData['uuid'])) {
+                if (array_key_exists('uuid', $importData) && !empty($importData['uuid'])) {
                     $candidat = $this->listingQuery()->where('uuid', $importData['uuid']);
                 } else {
                     $candidat = $this->listingQuery()->where('executable', $importData['executable'])->whereOr('name', $importData['name']);
@@ -285,6 +287,10 @@ class Application extends Engine
 
                     if ((array_key_exists('code', $importData) === false) || empty($importData['code'])) {
                         $importData['code'] = substr(substr(strtoupper($importData['executable'] ? basename($importData['executable']) : $importData['name']), -7), 0, 6);
+                        $pos = 0;
+                        while (array_key_exists($importData['code'], $codes)) {
+                            $importData['code'] = substr(substr(strtoupper($importData['executable'] ? basename($importData['executable']) : $importData['name']), -7), 0, 5) . $pos++;
+                        }
                     }
                 }
                 $this->takeData($importData);
@@ -335,7 +341,7 @@ class Application extends Engine
         $success = true;
         $importData = json_decode(file_get_contents($jsonFile), true);
         if (is_array($importData)) {
-            $candidat = $this->listingQuery()->where('executable', $importData['executable'])->whereOr('name', $importData['name']);
+            $candidat = $this->listingQuery()->whereOr('uuid', $importData['uuid'])->where('executable', $importData['executable'])->whereOr('name', $importData['name']);
             if ($candidat->count()) {
                 foreach ($candidat as $candidatData) {
                     $this->setMyKey($candidatData['id']);
