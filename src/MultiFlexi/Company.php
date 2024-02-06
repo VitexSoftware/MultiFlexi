@@ -6,7 +6,7 @@ namespace MultiFlexi;
  * Multi Flexi - Company Management Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2023 Vitex Software
+ * @copyright  2018-2024 Vitex Software
  */
 class Company extends \MultiFlexi\Engine
 {

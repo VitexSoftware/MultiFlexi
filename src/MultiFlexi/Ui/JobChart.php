@@ -17,11 +17,12 @@ namespace MultiFlexi\Ui;
 class JobChart extends \Ease\Html\DivTag
 {
     private $properties;
-    private \MultiFlexi\Job $engine;
+    protected \MultiFlexi\Job $engine;
 
     public function __construct(\MultiFlexi\Job $engine, $properties = [])
     {
-        $allJobs = $engine->listingQuery()->select(['begin', 'exitcode'], 1)->where('begin BETWEEN (CURDATE() - INTERVAL 30 DAY) AND CURDATE()')->order('begin')->fetchAll();
+        $this->engine = $engine;
+        $allJobs = $this->getJobs()->fetchAll();
         $days = [];
         foreach ($allJobs as $job) {
             if (empty($job['begin'])) {
@@ -51,7 +52,7 @@ class JobChart extends \Ease\Html\DivTag
         foreach ($days as $date => $day) {
             $data[] = [
                 'day' => $count++,
-                'date' => $date,
+                'date' => substr($date, 2),
                 'success' => $day['success'],
                 'waiting' => $day['waiting'],
                 'fail' => $day['fail'],
@@ -62,6 +63,8 @@ class JobChart extends \Ease\Html\DivTag
         $settings = [
             'auto_fit' => true,
             'graph_title' => _('Last 30 Days jobs'),
+            'back_stroke_width' => 0,
+            'back_stroke_colour' => '#eee',
             'structured_data' => true,
             'legend_autohide' => true,
             'legend_draggable' => false,
@@ -69,6 +72,12 @@ class JobChart extends \Ease\Html\DivTag
             'legend_entry_height' => 10,
             'legend_title' => 'Legend',
             'legend_entries' => [_('waiting'), _('fail'), _('success')],
+            'link_base' => './',
+            'link_target' => '_top',
+            'minimum_grid_spacing' => 20,
+            'show_subdivisions' => true,
+            'show_grid_subdivisions' => true,
+            'grid_subdivision_colour' => '#ccc',
             'structure' => [
                 'key' => 'date',
                 'value' => ['waiting', 'fail', 'success'],
@@ -76,14 +85,21 @@ class JobChart extends \Ease\Html\DivTag
                 'axis_text' => 3
             ]
         ];
+        $links = ['success' => '?showonly=success', 'fail' => '?showonly=fail', 'waiting' => '?showonly=waiting'];
 
-        $colours = [['green', 'chartreuse'], ['red', 'orange'], ['#7FFF00', 'green']];
+        $colours = [['lightblue', 'blue'], ['red', 'orange'], ['green', 'chartreuse']];
 
-        $graph = new \Goat1000\SVGGraph\SVGGraph(1024, 512, $settings);
+        $graph = new \Goat1000\SVGGraph\SVGGraph(1024, 212, $settings);
         $graph->values($data);
         $graph->colours($colours);
+        $graph->links($links);
 
         parent::__construct($graph->fetch('StackedBarGraph', false), $properties);
 //        $this->addJavaScript($graph->fetchJavascript());
+    }
+
+    public function getJobs()
+    {
+        return $this->engine->listingQuery()->select(['begin', 'exitcode'], 1)->order('begin');
     }
 }

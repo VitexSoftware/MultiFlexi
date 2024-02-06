@@ -4,7 +4,7 @@
  * Multi Flexi - Index page.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * @copyright  2020-2024 Vitex Software
  */
 
 namespace MultiFlexi\Ui;
@@ -19,7 +19,7 @@ $oPage->onlyForLogged();
 
 $oPage->addItem(new PageTop(_('Multi Flexi')));
 
-$oPage->container->addItem(new JobChart(new \MultiFlexi\Job(), ['id' => 'container']));
+$oPage->container->addItem(new AllJobsLastMonthChart(new \MultiFlexi\Job(), ['id' => 'container']));
 
 $oPage->container->addItem(new \Ease\TWB4\Panel(_('Last 20 Jobs'), 'default', new JobHistoryTable(), new DbStatus()));
 
