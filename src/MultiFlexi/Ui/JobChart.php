@@ -16,6 +16,7 @@ namespace MultiFlexi\Ui;
  */
 class JobChart extends \Ease\Html\DivTag
 {
+
     private $properties;
     protected \MultiFlexi\Job $engine;
 
@@ -69,15 +70,29 @@ class JobChart extends \Ease\Html\DivTag
             'legend_autohide' => true,
             'legend_draggable' => false,
             'legend_text_side' => 'left',
+            'legend_font_size' => 6,
             'legend_entry_height' => 10,
             'legend_title' => 'Legend',
             'legend_entries' => [_('waiting'), _('fail'), _('success')],
             'link_base' => './',
             'link_target' => '_top',
+            'data_label_font_size' => 5,
+            'axis_text_angle_h' => -90,
+            'subdivision_size' => 5,
             'minimum_grid_spacing' => 20,
             'show_subdivisions' => true,
             'show_grid_subdivisions' => true,
             'grid_subdivision_colour' => '#ccc',
+            'show_data_labels' => true,
+            'data_label_type' => [
+                'box', 'linebox'
+//                'box','plain', 'bubble', 'line', 'circle', 'square', 'linecircle','linebox', 'linesquare', 'line2'
+            ],
+            'data_label_space' => 5,
+            'data_label_back_colour' => [
+                'lightblue','#FF4500', "lightgreen", null, null, null, null, null, null, null
+            ],
+            'marker_size' => 3,
             'structure' => [
                 'key' => 'date',
                 'value' => ['waiting', 'fail', 'success'],
