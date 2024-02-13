@@ -12,7 +12,8 @@
     "zarplata/zabbix-sender": "dev-master",
     "rcubitto/json-pretty": "dev-master",
     "phplucidframe/console-table": "dev-master",
-    "goat1000/svggraph": "dev-master"
+    "goat1000/svggraph": "dev-master",
+    "peppeocchi/php-cron-scheduler": "dev-master"
   },
   "license": "MIT",
   "authors": [
