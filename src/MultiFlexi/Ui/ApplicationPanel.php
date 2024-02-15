@@ -8,7 +8,6 @@ declare(strict_types=1);
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
  */
-
 /**
  *
  *
@@ -30,6 +29,7 @@ use MultiFlexi\Application;
  */
 class ApplicationPanel extends Panel
 {
+
     /**
      *
      * @var Row
@@ -49,6 +49,21 @@ class ApplicationPanel extends Panel
         $this->headRow->addColumn(2, [new AppLogo($application, ['style' => 'height: 60px']), '&nbsp;', $application->getRecordName()]);
         $this->headRow->addColumn(2, new LinkButton('app.php?id=' . $cid, '🛠️&nbsp;' . _('Application'), 'primary btn-lg btn-block'));
         $this->headRow->addColumn(2, new LinkButton('joblist.php?app_id=' . $cid, '🧑‍💻&nbsp;' . _('Jobs history'), 'secondary btn-lg btn-block'));
+
+        $ca = new \MultiFlexi\CompanyApp(null);
+        $usedInCompanys = $ca->listingQuery()->select(['companyapp.company_id', 'company.name', 'company.code','company.logo'], true)->leftJoin('company ON company.id = companyapp.company_id')->where('app_id', $cid)->fetchAll('company_id');
+        if ($usedInCompanys) {
+            $usedByCompany = new \Ease\Html\SpanTag(_('Used by').': ');
+            foreach ($usedInCompanys as $companyInfo) {
+                $companyInfo['id'] = $companyInfo['company_id'];
+                $usedByCompany->addItem(new CompanyLinkButton(new \MultiFlexi\Company($companyInfo,['autoload'=>false]),['style'=>'height: 50px;']));
+            }
+            $this->headRow->addColumn(6, $usedByCompany);
+        } else {
+            $this->headRow->addColumn(6, new LinkButton('?id='.$cid.'&action=delete', '🪦&nbsp;' . _('Remove'), 'danger'));
+        }
+
+
 //        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('tasks.php?application_id=' . $cid, '🔧&nbsp;' . _('Setup tasks'), 'secondary btn-lg btn-block'));
 //        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('adhoc.php?application_id=' . $cid, '🚀&nbsp;' . _('Application launcher'), 'secondary btn-lg btn-block'));
 //        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('periodical.php?application_id=' . $cid, '🔁&nbsp;' . _('Periodical Tasks'), 'secondary btn-lg btn-block'));
