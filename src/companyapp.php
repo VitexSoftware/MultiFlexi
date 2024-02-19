@@ -21,10 +21,10 @@ $companyApp = new \MultiFlexi\RunTemplate(\Ease\Document::getRequestValue('id', 
 $appData = $companyApp->getAppInfo();
 $companies = new Company($companyApp->getDataValue('company_id'));
 if (strlen($companies->getDataValue('logo'))) {
-    $companyTasksHeading[] = new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']);
+    $companyTasksHeading[] = new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid','style'=>'height']);
 }
 $companyTasksHeading[] = new \Ease\Html\SpanTag($companies->getDataValue('name') . '&nbsp;', ['style' => 'font-size: xxx-large;']);
 $companyTasksHeading[] = _('Assigned applications');
-$oPage->container->addItem(new Panel($companyTasksHeading, 'default', new AppRow($appData)));
+$oPage->container->addItem(new CompanyPanel($companies, new AppRow($appData)));
 $oPage->addItem(new PageBottom());
 $oPage->draw();
