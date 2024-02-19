@@ -8,6 +8,7 @@ declare(strict_types=1);
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
  */
+
 /**
  *
  *
@@ -29,7 +30,6 @@ use MultiFlexi\Application;
  */
 class ApplicationPanel extends Panel
 {
-
     /**
      *
      * @var Row
@@ -53,14 +53,14 @@ class ApplicationPanel extends Panel
         $ca = new \MultiFlexi\CompanyApp(null);
         $usedInCompanys = $ca->listingQuery()->select(['companyapp.company_id', 'company.name', 'company.code','company.logo'], true)->leftJoin('company ON company.id = companyapp.company_id')->where('app_id', $cid)->fetchAll('company_id');
         if ($usedInCompanys) {
-            $usedByCompany = new \Ease\Html\SpanTag(_('Used by').': ');
+            $usedByCompany = new \Ease\Html\SpanTag(_('Used by') . ': ');
             foreach ($usedInCompanys as $companyInfo) {
                 $companyInfo['id'] = $companyInfo['company_id'];
-                $usedByCompany->addItem(new CompanyLinkButton(new \MultiFlexi\Company($companyInfo,['autoload'=>false]),['style'=>'height: 50px;']));
+                $usedByCompany->addItem(new CompanyLinkButton(new \MultiFlexi\Company($companyInfo, ['autoload' => false]), ['style' => 'height: 50px;']));
             }
             $this->headRow->addColumn(6, $usedByCompany);
         } else {
-            $this->headRow->addColumn(6, new LinkButton('?id='.$cid.'&action=delete', '🪦&nbsp;' . _('Remove'), 'danger'));
+            $this->headRow->addColumn(6, new LinkButton('?id=' . $cid . '&action=delete', '🪦&nbsp;' . _('Remove'), 'danger'));
         }
 
 
