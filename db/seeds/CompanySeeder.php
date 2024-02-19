@@ -25,6 +25,7 @@ class CompanySeeder extends AbstractSeed {
                 'rw' => 0,
                 'setup' => 0,
                 'webhook' => 0,
+                'code' => 'DEMO',
                 'DatCreate' => date('Y-m-d H:i:s')
             ],
             [
@@ -36,6 +37,7 @@ class CompanySeeder extends AbstractSeed {
                 'rw' => 0,
                 'setup' => 0,
                 'webhook' => 0,
+                'code' => 'DEMODE',
                 'DatCreate' => date('Y-m-d H:i:s')
             ]
         ];

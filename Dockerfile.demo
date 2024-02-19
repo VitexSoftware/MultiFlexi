@@ -17,8 +17,12 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 RUN apt update && apt -y install multiflexi-all php-tools
 
 RUN phinx seed:run -s UserSeeder -c /usr/lib/multiflexi/phinx-adapter.php
+RUN phinx seed:run -s CompanySeeder -c /usr/lib/multiflexi/phinx-adapter.php
+RUN phinx seed:run -s ServerSeeder -c /usr/lib/multiflexi/phinx-adapter.php
 
 RUN php-devconf
+
+RUN multiflexi-executor n ; multiflexi-executor h ; multiflexi-executor d ; multiflexi-executor m
 
 CMD /usr/sbin/cron
 CMD [ "/usr/sbin/apache2ctl", "-D", "FOREGROUND" ]
