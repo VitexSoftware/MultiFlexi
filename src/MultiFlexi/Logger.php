@@ -67,7 +67,7 @@ class Logger extends DBEngine
      */
     public function dismis()
     {
-        return $this->getFluentPDO()->update($this->getMyTable())->set(['resolved' => new Literal('NOW()')])->where(
+        return $this->getFluentPDO()->update($this->getMyTable())->set(['resolved' => new Literal(\Ease\Shared::cfg('DB_CONNECTION') == 'sqlite' ? "date('now')" : 'NOW()')])->where(
             'id',
             $this->getMyKey()
         )->execute();
