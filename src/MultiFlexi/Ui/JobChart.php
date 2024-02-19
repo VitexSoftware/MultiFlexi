@@ -16,7 +16,6 @@ namespace MultiFlexi\Ui;
  */
 class JobChart extends \Ease\Html\DivTag
 {
-
     private $properties;
     protected \MultiFlexi\Job $engine;
 

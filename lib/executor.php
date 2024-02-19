@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Multi Flexi - Cron Scheduled actions executor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * @copyright  2020-2024 Vitex Software
  */
 
 namespace MultiFlexi;
@@ -15,7 +16,7 @@ use \MultiFlexi\Company,
 
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
-$loggers = ['syslog', '\MultiFlexi\LogToSQL', 'console'];
+$loggers = ['syslog', '\MultiFlexi\LogToSQL'];
 if (\Ease\Shared::cfg('ZABBIX_SERVER') && \Ease\Shared::cfg('ZABBIX_HOST')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
@@ -32,8 +33,8 @@ if (\Ease\Shared::cfg('APP_DEBUG')) {
     $jobber->logBanner();
 }
 
-if(\MultiFlexi\Runner::isServiceActive('multiflexi') === false){
-    $jobber->addStatusMessage(_('systemd service is not running. Consider `systemctl start multiflexi`'),'warning');
+if (\MultiFlexi\Runner::isServiceActive('multiflexi') === false) {
+    $jobber->addStatusMessage(_('systemd service is not running. Consider `systemctl start multiflexi`'), 'warning');
 }
 
 $companer = new Company();
@@ -47,14 +48,15 @@ if ($interval) {
         if (empty($appsForCompany) && ($interval != 'i')) {
             $companer->addStatusMessage(sprintf(_('No applications to run for %s in interval %s'), $company['name'], $interval), 'debug');
         } else {
-
+            $jobber->addStatusMessage(sprintf(_('Executor interval %s begin'), $interval), 'debug');
             foreach ($appsForCompany as $servData) {
                 if (!is_null($interval) && ($interval != $servData['interv'])) {
                     continue;
                 }
-                $jobber->prepareJob($servData['id'],[], Job::codeToInterval($interval));
+                $jobber->prepareJob($servData['id'], [], Job::codeToInterval($interval));
                 $jobber->performJob();
             }
+            $jobber->addStatusMessage(sprintf(_('Executor interval %s end'), $interval), 'debug');
         }
     }
 } else {

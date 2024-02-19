@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Multi Flexi - Show Last X jobs
  *
  * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * @copyright  2023-2024 Vitex Software
  */
 
 namespace MultiFlexi\Ui;
