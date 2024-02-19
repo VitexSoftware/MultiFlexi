@@ -36,6 +36,18 @@ switch ($command) {
 
     case 'list':
         switch ($argument) {
+            case 'user':
+                $engine = new Application();
+                $data = $engine->listingQuery()->select([
+                            'id',
+                            'enabled',
+                            'login',
+                            'email',
+                            "firstname",
+                            'lastname',
+                                ], true)->fetchAll();
+                break;
+
             case 'app':
                 $engine = new Application();
                 $data = $engine->listingQuery()->select([
@@ -57,29 +69,29 @@ switch ($command) {
             case 'company':
                 $engine = new Company();
                 $data = $engine->listingQuery()->select([
-                    'id',
-                    'enabled',
-                    'settings',
-                    'logo  not like "" as logo',
-                    'server',
-                    'name',
-                    'ic',
-                    'company',
-                    'rw',
-                    'setup',
-                    'webhook',
-                    'DatCreate',
-                    'DatUpdate',
-                    'customer',
-                    'email',
-                    'code'
-                ])->fetchAll();
+                            'id',
+                            'enabled',
+                            'settings',
+                            'logo  not like "" as logo',
+                            'server',
+                            'name',
+                            'ic',
+                            'company',
+                            'rw',
+                            'setup',
+                            'webhook',
+                            'DatCreate',
+                            'DatUpdate',
+                            'customer',
+                            'email',
+                            'code'
+                        ])->fetchAll();
                 break;
             case 'job':
                 $engine = new Job();
                 $data = $engine->listingQuery()->select([
-                    'id',
-                ])->fetchAll();
+                            'id',
+                        ])->fetchAll();
                 break;
             default:
                 echo "list what ?\n";
