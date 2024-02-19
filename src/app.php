@@ -26,16 +26,33 @@ use MultiFlexi\Ui\PageTop;
 
 require_once './init.php';
 $oPage->onlyForLogged();
+$action = \Ease\WebPage::getRequestValue('action');
 $apps = new Application(WebPage::getRequestValue('id', 'int') + WebPage::getRequestValue('app', 'int'));
 $instanceName = _($apps->getDataValue('name') ? $apps->getDataValue('name') : _('n/a'));
-if ($oPage->isPosted()) {
-    if ($apps->takeData($_POST) && !is_null($apps->saveToSQL())) {
-        $apps->addStatusMessage(_('Application Saved'), 'success');
-        //        $apps->prepareRemoteAbraFlexi();
-        $oPage->redirect('?id=' . $apps->getMyKey());
-    } else {
-        $apps->addStatusMessage(_('Error saving Application'), 'error');
-    }
+
+switch ($action) {
+    case 'delete':
+        
+        $configurator = new \MultiFlexi\Configuration();
+        $configurator->deleteFromSQL(['app_id'=>$apps->getMyKey()]);
+        
+        $apps->deleteFromSQL();
+        $apps->addStatusMessage(sprintf(_('Application %s removal'), $apps->getRecordName()), 'success');
+        $oPage->redirect('apps.php');
+        break;
+    default:
+
+        if ($oPage->isPosted()) {
+            if ($apps->takeData($_POST) && !is_null($apps->saveToSQL())) {
+                $apps->addStatusMessage(_('Application Saved'), 'success');
+                //        $apps->prepareRemoteAbraFlexi();
+                $oPage->redirect('?id=' . $apps->getMyKey());
+            } else {
+                $apps->addStatusMessage(_('Error saving Application'), 'error');
+            }
+        }
+
+        break;
 }
 
 if (empty($instanceName) === false) {
@@ -94,9 +111,9 @@ $appTabs->addTab(_('Jobs'), [
 $appTabs->addTab(_('Export'), new AppJson($apps));
 
 $oPage->container->addItem(new ApplicationPanel(
-    $apps,
-    $appTabs,
-    ''
+                $apps,
+                $appTabs,
+                ''
 ));
 
 $oPage->addItem(new PageBottom());
