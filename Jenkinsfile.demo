@@ -1,0 +1,16 @@
+pipeline {
+    agent { 
+      dockerfile {
+        filename 'Dockerfile.demo'
+        args '-v /tmp:/tmp'
+      }
+    }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'multiflexi-cli '
+                sh ''
+            }
+        }
+    }
+}
