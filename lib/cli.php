@@ -4,7 +4,7 @@
  * Multi Flexi - Cron Scheduled actions executor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * @copyright  2020-2024 Vitex Software
  */
 
 namespace MultiFlexi;
@@ -28,12 +28,26 @@ Shared::user(new Anonym());
 
 $command = array_key_exists(1, $argv) ? $argv[1] : 'help';
 $argument = array_key_exists(2, $argv) ? $argv[2] : null;
+$identifier = array_key_exists(3, $argv) ? $argv[3] : null;
 
 switch ($command) {
     case 'version':
         echo \Ease\Shared::appName() . ' ' . \Ease\Shared::appVersion() . "\n";
         break;
-
+    case 'remove':
+        switch ($argument) {
+            case 'user':
+                $engine = new \MultiFlexi\User(intval($identifier));
+                break;
+            case 'app':
+                $engine = new \MultiFlexi\Application(intval($identifier));
+                break;
+            default :
+                echo $argv[0] . ' remove <sql row id>';
+                break;
+        }
+        $engine->deleteFromSQL();
+        break;
     case 'list':
         switch ($argument) {
             case 'user':
@@ -116,7 +130,7 @@ switch ($command) {
         break;
 
     default:
-        echo "usage: multiflexi-cli <command> [argument]\n";
-        echo "commands: version list";
+        echo "usage: multiflexi-cli <command> [argument] [id]\n";
+        echo "commands: version list remove";
         break;
 }
