@@ -35,12 +35,19 @@ Architecture: all
 Description: mariadb support for multiabraflexi setup
  Mandatory dependencies for use Multi FlexiBee setup with MySQL/MariaDB databas
 
-Package: multiflexi-podman
-Multi-Arch: foreign
-Depends: ${misc:Depends},multiflexi, podman
-Architecture: all
-Description: Run MultiFlexi tasks in container
- Run MultiFlexi tasks in container
+#Package: multiflexi-podman
+#Multi-Arch: foreign
+#Depends: ${misc:Depends},multiflexi, podman
+#Architecture: all
+#Description: Run MultiFlexi tasks in container
+# Run MultiFlexi tasks in container
+
+#Package: multiflexi-kubernetes
+#Multi-Arch: foreign
+#Depends: ${misc:Depends},multiflexi, kubernetes-client
+#Architecture: all
+#Description: Run MultiFlexi tasks on Kubrnetes
+# Run MultiFlexi tasks in big corporation
 
 Package: multiflexi-api
 Multi-Arch: foreign
