@@ -244,3 +244,20 @@ ve složce bin se nacházejí tyto spouštěče různých funkcí:
 * `multiflexi-json2app` - načte definice aplikace ze souboru
 * `multiflexi-probe` - pomocný nástroj pro testování funkce aplikace
 
+multiflexi-cli
+--------------
+
+použítí: multiflexi-cli <příkaz> [argument] [id]
+
+přikazy: version, list, remove
+
+příklad:
+
+```
+$ multiflexi-cli remove app 15
+02/20/2024 23:48:51 🌼 ❲MultiFlexi cli⦒(15)AbraFlexi send@MultiFlexi\Application❳ Unassigned from 3 companys
+02/20/2024 23:48:53 🌼 ❲MultiFlexi cli⦒(15)AbraFlexi send@MultiFlexi\Application❳ 2 RunTemplate removal
+02/20/2024 23:48:56 🌼 ❲MultiFlexi cli⦒(15)AbraFlexi send@MultiFlexi\Application❳ 2 Config fields removed
+02/20/2024 23:48:57 🌼 ❲MultiFlexi cli⦒(15)AbraFlexi send@MultiFlexi\Application❳ 881 Jobs removed
+Done.
+```
