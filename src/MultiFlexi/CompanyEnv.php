@@ -33,7 +33,7 @@ class CompanyEnv extends \Ease\SQL\Engine
 
     /**
      *
-     * @param int $companyID
+     * @param int   $companyID
      * @param array $options
      */
     public function __construct($companyID = null, $options = [])

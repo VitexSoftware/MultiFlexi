@@ -46,7 +46,7 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
      */
     public function testtakeData()
     {
-        $this->assertEquals(2, $this->object->takeData(['enabled' => 'on', 'executable' => '/bin/test']));
+        $this->assertEquals(3, $this->object->takeData(['enabled' => 'on', 'executable' => '/bin/test']));
     }
 
     /**

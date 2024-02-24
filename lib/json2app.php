@@ -4,7 +4,7 @@
  * Multi Flexi - Json to application importer
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * @copyright  2023-2024 Vitex Software
  */
 
 namespace MultiFlexi;

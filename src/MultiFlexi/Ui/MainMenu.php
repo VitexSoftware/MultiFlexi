@@ -179,8 +179,8 @@ class MainMenu extends \Ease\Html\DivTag
 
     /**
      *
-     * @param type $nav
-     * @param type $customers
+     * @param \Ease\Html\NavTag $nav
+     * @param array             $customers
      */
     public function customersMenuEnabled($nav, $customers)
     {
@@ -213,6 +213,7 @@ class MainMenu extends \Ease\Html\DivTag
             'envmods.php' => '🌦️&nbsp;' . _('Environment Modules'),
             'actions.php' => '🤖&nbsp;' . _('Actions'),
             'executors.php' => '🚀&nbsp;' . _('Executors'),
+            'intervals.php' => '♻️&nbsp;' . _('Intervals'),
             'users.php' => new \Ease\TWB4\Widgets\FaIcon('list') . '&nbsp;' . _('Admin Overview'),
             '' => '',
                         ], $this->getMenuList(\Ease\Shared::user(), 'login'))
