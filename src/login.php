@@ -14,7 +14,6 @@ use Ease\Html\ImgTag;
 use Ease\Html\InputPasswordTag;
 use Ease\Html\InputTextTag;
 use Ease\Shared;
-use Ease\TWB4\Card;
 use Ease\TWB4\Col;
 use Ease\TWB4\Form;
 use Ease\TWB4\FormGroup;
@@ -50,7 +49,7 @@ $oPage->container->addItem($loginFace);
 $loginRow = new Row();
 $infoColumn = $loginRow->addItem(new Col(4));
 
-$infoBlock = $infoColumn->addItem(new ImgTag('images/project-logo.svg'));
+$infoBlock = $infoColumn->addItem(new ImgTag('images/project-logo.svg', _('Logo'), ['style' => 'width: 150%']));
 $infoBlock->addItem(new DivTag(_('Welcome to Multi Flexi'), ['style' => 'text-align: center;']));
 
 $loginColumn = $loginRow->addItem(new Col(4));
