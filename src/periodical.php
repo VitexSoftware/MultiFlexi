@@ -4,7 +4,7 @@
  * Multi Flexi - Periodical Tasks
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * @copyright  2020-2024 Vitex Software
  */
 
 namespace MultiFlexi\Ui;
@@ -81,7 +81,7 @@ $periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Yearly'), 'default', n
 $addAppForm->addItem($periodSelectorsRow);
 $addAppForm->addItem(new \Ease\Html\PTag());
 
-$addAppForm->addItem(new \Ease\TWB4\SubmitButton(_('(Un)Assign Applications'), 'success btn-lg btn-block'));
+$addAppForm->addItem(new \Ease\TWB4\SubmitButton(_('Apply'), 'success btn-lg btn-block'));
 
 $oPage->container->addItem(new CompanyPanel($companer, $addAppForm));
 

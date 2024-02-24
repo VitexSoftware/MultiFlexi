@@ -41,7 +41,7 @@ $instanceRow->addColumn(8, new \Ease\Html\H1Tag($instanceName));
 
 $envTable = new EnvironmentView($runTemplate->getAppEnvironment());
 
-$oPage->container->addItem(new Panel(_('App Run'), 'info', [$instanceRow, $envTable], new \Ease\Html\DivTag(new \Ease\Html\IframeTag('run.php?id=' . $runTemplate->getMyKey(), ['id' => 'shell', 'title' => $instanceName]), ['class' => 'iframe-container'])));
+$oPage->container->addItem(new Panel(_('App Run'), 'default', [$instanceRow, $envTable], new \Ease\Html\DivTag(new \Ease\Html\IframeTag('run.php?id=' . $runTemplate->getMyKey(), ['id' => 'shell', 'title' => $instanceName]), ['class' => 'iframe-container'])));
 
 $oPage->addItem(new PageBottom());
 

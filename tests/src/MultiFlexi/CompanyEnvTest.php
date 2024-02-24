@@ -9,6 +9,7 @@ use MultiFlexi\CompanyEnv;
  */
 class CompanyEnvTest extends \PHPUnit\Framework\TestCase
 {
+
     /**
      * @var CompanyEnv
      */
@@ -20,7 +21,7 @@ class CompanyEnvTest extends \PHPUnit\Framework\TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new CompanyEnv();
+        $this->object = new CompanyEnv(1);
     }
 
     /**
@@ -34,56 +35,42 @@ class CompanyEnvTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @covers MultiFlexi\CompanyEnv::addEnv
-     * @todo   Implement testaddEnv().
      */
     public function testaddEnv()
     {
-        $this->assertEquals('', $this->object->addEnv());
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $now = time();
+        $this->assertEquals('', $this->object->addEnv('TIME', $now));
     }
 
     /**
      * @covers MultiFlexi\CompanyEnv::updateEnv
-     * @todo   Implement testupdateEnv().
      */
     public function testupdateEnv()
     {
         $this->assertEquals('', $this->object->updateEnv());
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
      * @covers MultiFlexi\CompanyEnv::removeEnv
-     * @todo   Implement testremoveEnv().
      */
     public function testremoveEnv()
     {
-        $this->assertEquals('', $this->object->removeEnv());
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertEquals('', $this->object->removeEnv('TIME'));
     }
 
     /**
      * @covers MultiFlexi\CompanyEnv::loadEnv
-     * @todo   Implement testloadEnv().
      */
     public function testloadEnv()
     {
         $this->assertEquals('', $this->object->loadEnv());
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
      * @covers MultiFlexi\CompanyEnv::getEnvFields
-     * @todo   Implement testgetEnvFields().
      */
     public function testgetEnvFields()
     {
-        $this->assertEquals('', $this->object->getEnvFields());
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertEquals([], $this->object->getEnvFields());
     }
 }

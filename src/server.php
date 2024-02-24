@@ -44,7 +44,7 @@ if (!empty($instanceName)) {
 
 $instanceRow = new Row();
 $instanceRow->addColumn(8, new RegisterServerForm($servers));
-$instanceRow->addColumn(4, new \Ease\Html\ImgTag('images/' . strtolower($servers->getDataValue('type')) . '-server.svg', $servers->getDataValue('type'), ['class' => 'img-fluid float-right', 'style' => 'height: 500px;']));
+$instanceRow->addColumn(4, new \Ease\Html\ImgTag('images/' . ($servers->getDataValue('type') ? strtolower(strval($servers->getDataValue('type'))) . '-server.svg' : 'server.svg' ), $servers->getDataValue('type'), ['class' => 'img-fluid float-right', 'style' => 'height: 500px;']));
 $oPage->container->addItem(new Panel(
     $instanceName,
     'default',

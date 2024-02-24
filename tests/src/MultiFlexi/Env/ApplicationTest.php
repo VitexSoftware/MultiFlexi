@@ -34,13 +34,10 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @covers MultiFlexi\Env\Application::allKeysHandled
-     * @todo   Implement testallKeysHandled().
      */
     public function testallKeysHandled()
     {
-        $this->assertEquals('', $this->object->allKeysHandled());
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertEquals([], $this->object->allKeysHandled());
     }
 
     /**
