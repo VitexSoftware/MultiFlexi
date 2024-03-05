@@ -327,7 +327,11 @@ class Job extends Engine
         $packet = new ZabbixPacket();
         $hostname = \Ease\Shared::cfg('ZABBIX_HOST');
         $this->zabbixMessageData = array_merge($this->zabbixMessageData, $messageData);
-        $packet->addMetric((new ZabbixMetric('multiflexi.job', json_encode($this->zabbixMessageData)))->withHostname($hostname));
+        $packet->addMetric((new ZabbixMetric('multiflexi.job', json_encode($this->zabbixMessageData)))->withHostname($hostname)); //TODO Remove
+        $this->zabbixSender->send($packet);
+
+        $packet = new ZabbixPacket(); 
+        $packet->addMetric((new ZabbixMetric('job-'.$this->application->getDataValue('code').'-'.$this->runTemplate->getMyKey(), json_encode($this->zabbixMessageData)))->withHostname($hostname));
         $this->zabbixSender->send($packet);
     }
 

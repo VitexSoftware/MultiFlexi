@@ -56,7 +56,7 @@ if ($interval) {
                 $jobber->prepareJob($servData['id'], [], Job::codeToInterval($interval));
                 $jobber->performJob();
             }
-            $jobber->addStatusMessage(sprintf(_('Executor interval %s end'), $interval), 'debug');
+            $jobber->addStatusMessage(sprintf(_('Executor interval %s end'), Job::codeToInterval($interval)), 'debug');
         }
     }
 } else {
