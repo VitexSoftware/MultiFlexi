@@ -26,7 +26,9 @@ Shared::user(new Anonym());
 $venue = array_key_exists(1, $argv) ? $argv[1] : '';
 
 if ($venue) {
-    list($server, $companyCode) = explode('.', $venue);
+    $argParts = explode('.', $venue);
+    $companyCode = $argParts[count($argParts) - 1];
+    $server = str_replace('.' . $companyCode, '', $venue);
 
     $lldData = [];
     $ap2c = new \MultiFlexi\RunTemplate();
