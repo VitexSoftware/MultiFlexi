@@ -36,21 +36,39 @@ $ca = new \MultiFlexi\CompanyApp($companer);
 $apper = new Application();
 
 $companyData = $companer->getData();
-$appsAssigned = $ca->getAssigned()->leftJoin('apps ON apps.id = companyapp.app_id')->select(['apps.name', 'apps.description', 'apps.id', 'apps.image, apps.code, apps.uuid'], true)->fetchAll('id');
-$runtemplates = $ap2c->getPeriodAppsForCompany($companer->getMyKey());
 
-foreach ($runtemplates as $runtemplateData) {
-//        $apper->setData($app);
-//        $app['config'] = $apper->getAppEnvironmentFields();
-    $lldData[] = [
-        '{#APPNAME}' => $appsAssigned[$runtemplateData['app_id']]['name'],
-        '{#APPNAME_CODE}' => $appsAssigned[$runtemplateData['app_id']]['code'],
-        '{#APPNAME_UUID}' => $appsAssigned[$runtemplateData['app_id']]['uuid'],
-        '{#INTERVAL}' => Job::codeToInterval($runtemplateData['interv']),
-        '{#RUNTEMPLATE}' => $runtemplateData['id'],
-        '{#COMPANY_NAME}' => $companyData['name'],
-        '{#COMPANY_CODE}' => $companyData['code'],
-        '{#COMPANY_SERVER}' => \Ease\Shared::cfg('ZABBIX_HOST')
-    ];
+if ($companyCode) {
+    $appsAssigned = $ca->getAssigned()->leftJoin('apps ON apps.id = companyapp.app_id')->select(['apps.name', 'apps.description', 'apps.id', 'apps.image, apps.code, apps.uuid'], true)->fetchAll('id');
+    $runtemplates = $ap2c->getPeriodAppsForCompany($companer->getMyKey());
+    foreach ($runtemplates as $runtemplateData) {
+        $lldData[] = [
+            '{#APPNAME}' => $appsAssigned[$runtemplateData['app_id']]['name'],
+            '{#APPNAME_CODE}' => $appsAssigned[$runtemplateData['app_id']]['code'],
+            '{#APPNAME_UUID}' => $appsAssigned[$runtemplateData['app_id']]['uuid'],
+            '{#INTERVAL}' => Job::codeToInterval($runtemplateData['interv']),
+            '{#RUNTEMPLATE}' => $runtemplateData['id'],
+            '{#COMPANY_NAME}' => $companyData['name'],
+            '{#COMPANY_CODE}' => $companyData['code'],
+            '{#COMPANY_SERVER}' => \Ease\Shared::cfg('ZABBIX_HOST')
+        ];
+    }
+} else {
+    $appsAssigned = $ca->getAll()->leftJoin('company ON company.id = companyapp.company_id')->leftJoin('apps ON apps.id = companyapp.app_id')->select(['apps.name', 'apps.description', 'apps.id', 'apps.image, apps.code, apps.uuid', 'company.code AS company_code', 'company.name AS company_name'], true)->fetchAll('id');
+    $runtemplates = $ap2c->listingQuery();
+
+    foreach ($runtemplates as $runtemplateData) {
+        $lldData[] = [
+            '{#APPNAME}' => $appsAssigned[$runtemplateData['app_id']]['name'],
+            '{#APPNAME_CODE}' => $appsAssigned[$runtemplateData['app_id']]['code'],
+            '{#APPNAME_UUID}' => $appsAssigned[$runtemplateData['app_id']]['uuid'],
+            '{#INTERVAL}' => Job::codeToInterval($runtemplateData['interv']),
+            '{#RUNTEMPLATE}' => $runtemplateData['id'],
+            '{#COMPANY_NAME}' => $appsAssigned[$runtemplateData['app_id']]['company_name'],
+            '{#COMPANY_CODE}' => $appsAssigned[$runtemplateData['app_id']]['company_code'],
+            '{#COMPANY_SERVER}' => \Ease\Shared::cfg('ZABBIX_HOST')
+        ];
+    }
 }
+
+
 echo json_encode($lldData, JSON_PRETTY_PRINT);

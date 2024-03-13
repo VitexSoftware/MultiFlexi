@@ -39,9 +39,16 @@ class CompanyApp extends Engine
 
     public function getAssigned()
     {
-        return $this->listingQuery()->select('app_id', true)->where('company_id', $this->company->getMyKey());
+        return $this->getAll()->where('company_id', $this->company->getMyKey());
     }
 
+    public function getAll()
+    {
+        return $this->listingQuery()->select('app_id', true);
+    }
+
+    
+    
     /**
      * (un)assign App with Company
      *
