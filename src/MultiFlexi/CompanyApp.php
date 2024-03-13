@@ -47,8 +47,8 @@ class CompanyApp extends Engine
         return $this->listingQuery()->select('app_id', true);
     }
 
-    
-    
+
+
     /**
      * (un)assign App with Company
      *
