@@ -25,6 +25,11 @@ Shared::user(new Anonym());
 
 $venue = array_key_exists(1, $argv) ? $argv[1] : '';
 
+if($venue == '-h'){
+    echo _('multiflexi-zabbix-lld [SERVER.COMPANY_CODE]');    
+    exit();
+}
+
 $argParts = explode('.', $venue);
 $companyCode = $argParts[count($argParts) - 1];
 $server = str_replace('.' . $companyCode, '', $venue);
@@ -37,37 +42,23 @@ $apper = new Application();
 
 $companyData = $companer->getData();
 
-if ($companyCode) {
-    $appsAssigned = $ca->getAssigned()->leftJoin('apps ON apps.id = companyapp.app_id')->select(['apps.name', 'apps.description', 'apps.id', 'apps.image, apps.code, apps.uuid'], true)->fetchAll('id');
-    $runtemplates = $ap2c->getPeriodAppsForCompany($companer->getMyKey());
-    foreach ($runtemplates as $runtemplateData) {
-        $lldData[] = [
-            '{#APPNAME}' => $appsAssigned[$runtemplateData['app_id']]['name'],
-            '{#APPNAME_CODE}' => $appsAssigned[$runtemplateData['app_id']]['code'],
-            '{#APPNAME_UUID}' => $appsAssigned[$runtemplateData['app_id']]['uuid'],
-            '{#INTERVAL}' => Job::codeToInterval($runtemplateData['interv']),
-            '{#RUNTEMPLATE}' => $runtemplateData['id'],
-            '{#COMPANY_NAME}' => $companyData['name'],
-            '{#COMPANY_CODE}' => $companyData['code'],
-            '{#COMPANY_SERVER}' => \Ease\Shared::cfg('ZABBIX_HOST')
-        ];
-    }
-} else {
-    $appsAssigned = $ca->getAll()->leftJoin('company ON company.id = companyapp.company_id')->leftJoin('apps ON apps.id = companyapp.app_id')->select(['apps.name', 'apps.description', 'apps.id', 'apps.image, apps.code, apps.uuid', 'company.code AS company_code', 'company.name AS company_name'], true)->fetchAll('id');
-    $runtemplates = $ap2c->listingQuery();
+$appsAssigned = $ca->getAll()->leftJoin('apps ON apps.id = companyapp.app_id')->select(['apps.name', 'apps.description', 'apps.id', 'apps.image, apps.code, apps.uuid'], true)->fetchAll('id');
+$runtemplates = $ap2c->listingQuery()->leftJoin('company ON company.id = runtemplate.company_id')->select(['runtemplate.id', 'interv', 'company.code AS company_code', 'company.name AS company_name']);
 
-    foreach ($runtemplates as $runtemplateData) {
-        $lldData[] = [
-            '{#APPNAME}' => $appsAssigned[$runtemplateData['app_id']]['name'],
-            '{#APPNAME_CODE}' => $appsAssigned[$runtemplateData['app_id']]['code'],
-            '{#APPNAME_UUID}' => $appsAssigned[$runtemplateData['app_id']]['uuid'],
-            '{#INTERVAL}' => Job::codeToInterval($runtemplateData['interv']),
-            '{#RUNTEMPLATE}' => $runtemplateData['id'],
-            '{#COMPANY_NAME}' => $appsAssigned[$runtemplateData['app_id']]['company_name'],
-            '{#COMPANY_CODE}' => $appsAssigned[$runtemplateData['app_id']]['company_code'],
-            '{#COMPANY_SERVER}' => \Ease\Shared::cfg('ZABBIX_HOST')
-        ];
+foreach ($runtemplates as $runtemplateData) {
+    if(strlen($companyCode) && $companyCode != $runtemplateData['company_code']){
+        continue;
     }
+    $lldData[] = [
+        '{#APPNAME}' => $appsAssigned[$runtemplateData['app_id']]['name'],
+        '{#APPNAME_CODE}' => $appsAssigned[$runtemplateData['app_id']]['code'],
+        '{#APPNAME_UUID}' => $appsAssigned[$runtemplateData['app_id']]['uuid'],
+        '{#INTERVAL}' => Job::codeToInterval($runtemplateData['interv']),
+        '{#RUNTEMPLATE}' => $runtemplateData['id'],
+        '{#COMPANY_NAME}' => $runtemplateData['company_name'],
+        '{#COMPANY_CODE}' => $runtemplateData['company_code'],
+        '{#COMPANY_SERVER}' => \Ease\Shared::cfg('ZABBIX_HOST')
+    ];
 }
 
 
