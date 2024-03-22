@@ -16,6 +16,7 @@ namespace MultiFlexi;
  */
 class Application extends Engine
 {
+
     public $lastModifiedColumn;
     public $keyword;
 
@@ -277,10 +278,13 @@ class Application extends Engine
                 } else {
                     $candidat = $this->listingQuery()->where('executable', $importData['executable'])->whereOr('name', $importData['name']);
                 }
-
+                $newVersion = array_key_exists('version', $importData) ? $importData['version'] : 'n/a';
                 if ($candidat->count()) { // Update
                     $this->setMyKey($candidat->fetchColumn());
+                    $currentData = $candidat->fetchAll();
+                    $currentVersion = array_key_exists('version', $currentData) ? $currentData['version'] : 'n/a';
                 } else { // Insert
+                    $currentVersion = 'n/a';
                     if ((array_key_exists('uuid', $importData) === false) || empty($importData['uuid'])) {
                         $importData['uuid'] = \Ease\Functions::guidv4();
                     }
@@ -297,7 +301,7 @@ class Application extends Engine
 
                 try {
                     if ($this->dbsync()) {
-                        $fields = [$importData['name']];
+                        $fields = [];
                         if (empty($environment) === false) {
                             $confField = new Conffield();
                             foreach ($environment as $envName => $envProperties) {
@@ -306,8 +310,7 @@ class Application extends Engine
                                 }
                             }
                         }
-                        $this->addStatusMessage('Import:' . implode(',', $fields), 'success');
-
+                        $this->addStatusMessage('🧩📦 ' . $importData['name'] . '('.$currentVersion.'➟'.$newVersion.'): '  . implode(',', $fields), 'success');
                         $executable = Application::findBinaryInPath($this->getDataValue('executable'));
                         if (empty($executable)) {
                             $this->addStatusMessage(sprintf(_('executable %s not found'), $this->getDataValue('executable')), 'warning');
