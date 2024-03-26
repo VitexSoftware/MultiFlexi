@@ -54,6 +54,7 @@ foreach ($runtemplates as $runtemplateData) {
         '{#APPNAME_CODE}' => $appsAssigned[$runtemplateData['app_id']]['code'],
         '{#APPNAME_UUID}' => $appsAssigned[$runtemplateData['app_id']]['uuid'],
         '{#INTERVAL}' => Job::codeToInterval($runtemplateData['interv']),
+        '{#INTERVAL_SECONDS}' => Job::codeToSeconds($runtemplateData['interv']),
         '{#RUNTEMPLATE}' => $runtemplateData['id'],
         '{#COMPANY_NAME}' => $runtemplateData['company_name'],
         '{#COMPANY_CODE}' => $runtemplateData['company_code'],

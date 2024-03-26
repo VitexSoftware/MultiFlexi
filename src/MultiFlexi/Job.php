@@ -47,6 +47,21 @@ class Job extends Engine
 
     /**
      *
+     * @var array
+     */
+    public static $intervalSecond = [
+        'i' => '60',
+        'n' => '0',
+        'y' => '31556926',
+        'h' => '3600',
+        'm' => '2629743',
+        'w' => '604800',
+        'd' => '86400'
+    ];
+    
+    
+    /**
+     *
      * @var ZabbixSender
      */
     public $zabbixSender = null;
@@ -433,6 +448,19 @@ class Job extends Engine
         return array_key_exists($code, self::$intervalCode) ? self::$intervalCode[$code] : 'n/a';
     }
 
+    /**
+     * Get Job Interval by Code
+     *
+     * @param string $code
+     *
+     * @return int Interval length in seconds 
+     */
+    public static function codeToSeconds($code)
+    {
+        return array_key_exists($code, self::$intervalSeconds) ? intval(self::$intervalCode[$code]) : 0;
+    }
+    
+    
     /**
      * Get Interval code by Name
      *
