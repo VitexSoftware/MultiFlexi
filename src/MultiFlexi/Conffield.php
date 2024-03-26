@@ -4,7 +4,7 @@
  * Multi Flexi - Configuration Flield Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2020 Vitex Software
+ * @copyright  2018-2024 Vitex Software
  */
 
 namespace MultiFlexi;
