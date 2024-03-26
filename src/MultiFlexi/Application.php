@@ -282,7 +282,7 @@ class Application extends Engine
                 if ($candidat->count()) { // Update
                     $this->setMyKey($candidat->fetchColumn());
                     $currentData = $candidat->fetchAll();
-                    $currentVersion = array_key_exists('version', $currentData) ? $currentData['version'] : 'n/a';
+                    $currentVersion = array_key_exists('version', $currentData[0]) ? $currentData[0]['version'] : 'n/a';
                 } else { // Insert
                     $currentVersion = 'n/a';
                     if ((array_key_exists('uuid', $importData) === false) || empty($importData['uuid'])) {
@@ -297,33 +297,41 @@ class Application extends Engine
                         }
                     }
                 }
-                $this->takeData($importData);
 
-                try {
-                    if ($this->dbsync()) {
-                        $fields = [];
-                        if (empty($environment) === false) {
-                            $confField = new Conffield();
-                            foreach ($environment as $envName => $envProperties) {
-                                if ($confField->addAppConfig($this->getMyKey(), $envName, $envProperties)) {
-                                    $fields[] = $envName;
+                if ($currentVersion == $newVersion) {
+                    $this->addStatusMessage('🧩📦 ' . $importData['name'] . '(' . $currentVersion . ') already present', 'info');
+                    $fields = [true];
+                } else {
+                    $this->takeData($importData);
+                    try {
+                        if ($this->dbsync()) {
+                            $fields = [];
+                            if (empty($environment) === false) {
+                                $confField = new Conffield();
+                                foreach ($environment as $envName => $envProperties) {
+                                    if ($confField->addAppConfig($this->getMyKey(), $envName, $envProperties)) {
+                                        $fields[] = $envName;
+                                    }
                                 }
                             }
-                        }
-                        $this->addStatusMessage('🧩📦 ' . $importData['name'] . '('.$currentVersion.'➟'.$newVersion.'): '  . implode(',', $fields), 'success');
-                        $executable = Application::findBinaryInPath($this->getDataValue('executable'));
-                        if (empty($executable)) {
-                            $this->addStatusMessage(sprintf(_('executable %s not found'), $this->getDataValue('executable')), 'warning');
-                            if (array_key_exists('deploy', $importData) && !empty($envProperties['deploy'])) {
-                                $this->addStatusMessage(sprintf(_('consider: %s'), $importData['deploy']), 'info');
+                            $this->addStatusMessage('🧩📦 ' . $importData['name'] . '(' . $currentVersion . '➟' . $newVersion . '): ' . implode(',', $fields), 'success');
+                            $executable = Application::findBinaryInPath($this->getDataValue('executable'));
+                            if (empty($executable)) {
+                                $this->addStatusMessage(sprintf(_('executable %s not found'), $this->getDataValue('executable')), 'warning');
+                                if (array_key_exists('deploy', $importData) && !empty($envProperties['deploy'])) {
+                                    $this->addStatusMessage(sprintf(_('consider: %s'), $importData['deploy']), 'info');
+                                }
+                            }
+                            if (empty($fields)) {
+                                $fields = [true];
                             }
                         }
+                    } catch (\PDOException $exc) {
+                        echo $exc->getTraceAsString();
+                        fwrite(STDERR, print_r($appSpecRaw, 1) . PHP_EOL);
+                        fwrite(STDERR, print_r($this->getData(), 1) . PHP_EOL);
+                        echo $exc->getMessage();
                     }
-                } catch (\PDOException $exc) {
-                    echo $exc->getTraceAsString();
-                    fwrite(STDERR, print_r($appSpecRaw, 1) . PHP_EOL);
-                    fwrite(STDERR, print_r($this->getData(), 1) . PHP_EOL);
-                    echo $exc->getMessage();
                 }
             }
         } else {
