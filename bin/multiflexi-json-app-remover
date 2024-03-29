@@ -1,4 +1,3 @@
 #!/bin/sh
-php -q -f /usr/lib/multiflexi/jsonappremover.php $@
-
+php -q -f /usr/lib/multiflexi/jsonappremover.php -- $@
 

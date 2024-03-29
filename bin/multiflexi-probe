@@ -1,6 +1,7 @@
-
 #!/bin/bash
+
 echoerr() { printf "%s\n" "$*" >&2; }
+
 echo Commandline:
 echo
 echo $0 $@
