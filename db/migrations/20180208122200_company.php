@@ -9,7 +9,7 @@ class Company extends AbstractMigration {
     public function change() {
         $table = $this->table('company');
         $table
-                ->addColumn('enabled', 'boolean', array('default' => false))
+                ->addColumn('enabled', 'boolean', ['default' => false])
                 ->addColumn('settings', 'text', ['null' => true])
                 ->addColumn('logo', 'text', ['null' => true])
                 ->addColumn('abraflexi', 'integer', ['limit' => 128])
