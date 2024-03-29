@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Multi Flexi - Company instance editor.
+ * Multi Flexi - Shared App Init
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * @copyright  2020-2024 Vitex Software
  */
 
 namespace MultiFlexi;
