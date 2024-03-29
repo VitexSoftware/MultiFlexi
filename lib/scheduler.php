@@ -54,7 +54,7 @@ if ($interval) {
                     continue;
                 }
                 $jobber->prepareJob($servData['id'], [], Job::codeToInterval($interval));
-                $jobber->scheduleJobRun(new \DateTime($when));                
+                $jobber->scheduleJobRun(new \DateTime());                
             }
             $jobber->addStatusMessage(sprintf(_('Executor interval %s end'), Job::codeToInterval($interval)), 'debug');
         }
