@@ -1,3 +1,11 @@
+multiflexi (1.11.0) UNRELEASED; urgency=medium
+      
+  [ CyberVitexus ]
+  * Dedicated multiflexi user created during installation
+ 
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Fri, 30 Mar 2024 09:28:32 +0100
+
+
 multiflexi (1.10.5) UNRELEASED; urgency=medium
 
   [ CyberVitexus ]
@@ -17,9 +25,6 @@ multiflexi (1.10.5) UNRELEASED; urgency=medium
   * MySQL Compatibility
   * New Version
 
-  [ Vitex ]
-  * Update
-
   [ vitex ]
   * executor rewrited
   * provisioning added
@@ -35,7 +40,6 @@ multiflexi (1.10.5) UNRELEASED; urgency=medium
   * job relaunch script generator added
   * Pohoda support added
 
-  [  ]
   * Scheduled jobs fix
   * Scheduled Upload Fixed
   * Commandline App Remover Added

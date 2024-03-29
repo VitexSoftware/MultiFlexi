@@ -1,3 +1,2 @@
 #!/bin/sh
-php -q -f /usr/lib/multiflexi/json2app.php $@
-
+php -q -f /usr/lib/multiflexi/json2app.php -- $@

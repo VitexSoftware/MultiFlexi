@@ -1,2 +1,2 @@
 #!/bin/sh
-php -q -f /usr/lib/multiflexi/job2script.php $@
+php -q -f /usr/lib/multiflexi/job2script.php -- $@

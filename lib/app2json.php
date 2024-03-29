@@ -20,7 +20,7 @@ $loggers = ['console', 'syslog', '\MultiFlexi\LogToSQL'];
 if (\Ease\Shared::cfg('ZABBIX_SERVER') && \Ease\Shared::cfg('ZABBIX_HOST')  && class_exists('\MultiFlexi\LogToZabbix')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
-efine('EASE_LOGGER', implode('|', $loggers));
+define('EASE_LOGGER', implode('|', $loggers));
 Shared::user(new Anonym());
 $apper = new Application($argc == 2 ? intval($argv[1]) : null);
 if (\Ease\Shared::cfg('APP_DEBUG')) {
