@@ -1,4 +1,4 @@
-multiflexi (1.10.5) UNRELEASED; urgency=medium
+multiflexi (1.10.5ubuntu1) UNRELEASED; urgency=medium
 
   [ CyberVitexus ]
   * Ability choose run interval between hour and year
@@ -55,7 +55,10 @@ multiflexi (1.10.5) UNRELEASED; urgency=medium
   [  ]
   * Small fixes
 
- --  <vitezslav.dvorak@spojenet.cz>  Tue, 26 Mar 2024 15:12:51 +0100
+  [ Vítězslav Dvořák ]
+  * separate multiuser created
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Fri, 29 Mar 2024 09:28:32 +0100
 
 multiflexi (0.1) experimental; urgency=medium
 
