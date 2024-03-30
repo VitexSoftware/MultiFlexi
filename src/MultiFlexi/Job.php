@@ -144,29 +144,6 @@ class Job extends Engine
         $environment['JOB_ID']['value'] = $jobId;
         $this->environment = $environment;
         $this->updateToSQL(['env' => serialize($environment), 'command' => $this->getCmdline()], ['id' => $jobId]);
-
-// TODO:        
-//        if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
-//            $this->zabbixMessageData = [
-//                'phase' => 'prepared',
-//                'job_id' => $this->getMyKey(),
-//                'app_id' => $appId,
-//                'app_name' => $this->application->getDataValue('name'),
-//                'begin' => null,
-//                'end' => null,
-//                'company_id' => $companyId,
-//                'company_name' => $this->company->getDataValue('name'),
-//                'company_code' => $this->company->getDataValue('code'),
-//                'exitcode' => -1,
-//                'stdout' => null,
-//                'stderr' => null,
-//                'launched_by_id' => intval(\Ease\Shared::user()->getMyKey()),
-//                'launched_by' => empty(\Ease\Shared::user()->getUserLogin()) ? 'cron' :
-//                \Ease\Shared::user()->getUserLogin()
-//            ];
-//        }
-        
-        
         return $jobId;
     }
 
