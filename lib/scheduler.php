@@ -48,7 +48,7 @@ if ($interval) {
         if (empty($appsForCompany) && ($interval != 'i')) {
             $companer->addStatusMessage(sprintf(_('No applications to run for %s in interval %s'), $company['name'], $interval), 'debug');
         } else {
-            $jobber->addStatusMessage(sprintf(_('Executor interval %s begin'), $interval), 'debug');
+            $jobber->addStatusMessage(sprintf(_('Scheduler interval %s begin'), $interval), 'debug');
             foreach ($appsForCompany as $servData) {
                 if (!is_null($interval) && ($interval != $servData['interv'])) {
                     continue;

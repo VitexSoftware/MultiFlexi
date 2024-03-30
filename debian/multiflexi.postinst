@@ -80,6 +80,8 @@ apache_install() {
 
 composer-debian multiflexi
 
+echo multiflexi postinst action $1
+
 case "$1" in
 install | upgrade)
 
