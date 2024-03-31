@@ -4,20 +4,19 @@
  * Multi Flexi - Job ID to launch script generator.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * @copyright  2020-2024 Vitex Software
  */
 
 namespace MultiFlexi;
 
 use \Ease\Anonym,
-    \Ease\Functions,
     \Ease\Shared,
     \MultiFlexi\Job;
 
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
 $loggers = ['console', 'syslog', '\MultiFlexi\LogToSQL'];
-if (Functions::cfg('ZABBIX_SERVER')) {
+if (\Ease\Shared::cfg('ZABBIX_SERVER') && \Ease\Shared::cfg('ZABBIX_HOST')  && class_exists('\MultiFlexi\LogToZabbix')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
 define('EASE_LOGGER', implode('|', $loggers));

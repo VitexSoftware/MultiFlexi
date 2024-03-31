@@ -3,3 +3,10 @@ src/MultiFlexi/Zabbix/*.php             	usr/lib/multiflexi/MultiFlexi/Zabbix/
 src/MultiFlexi/Zabbix/Exception/*.php     	usr/lib/multiflexi/MultiFlexi/Zabbix/Exception/
 src/MultiFlexi/Zabbix/Request/*.php       	usr/lib/multiflexi/MultiFlexi/Zabbix/Request/
 src/MultiFlexi/Action/Zabbix.php		usr/lib/multiflexi/MultiFlexi/Action
+
+bin/multiflexi-zabbix-lld                       usr/bin/
+bin/multiflexi-zabbix-lld-company               usr/bin/
+bin/multiflexi-zabbix-lld-tasks                 usr/bin/
+lib/zabbixcompanylld.php                        usr/lib/multiflexi
+lib/zabbixlld.php                               usr/lib/multiflexi
+src/MultiFlexi/ZabbixSender.php                 usr/lib/multiflexi/MultiFlexi/

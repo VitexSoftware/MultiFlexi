@@ -3,17 +3,10 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi -
+ * Multi Flexi - Scheduler Class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
- */
-
-/**
- *
- *
- * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * @copyright  2023-2024 Vitex Software
  */
 
 namespace MultiFlexi;

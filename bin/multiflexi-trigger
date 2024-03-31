@@ -1,2 +1,2 @@
 #!/bin/sh
-php -q -f /usr/lib/multiflexi/trigger.php $@
+php -q -f /usr/lib/multiflexi/trigger.php -- $@
