@@ -1,2 +1,2 @@
 #!/bin/sh
-sudo -u www-data multiflexi-executor m
+sudo -u www-data multiflexi-scheduler m

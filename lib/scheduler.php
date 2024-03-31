@@ -25,7 +25,7 @@ if (\Ease\Shared::cfg('APP_DEBUG') == 'true') {
 }
 define('EASE_LOGGER', implode('|', $loggers));
 $interval = $argc == 2 ? $argv[1] : null;
-define('APP_NAME', 'MultiFlexi executor ' . Job::codeToInterval($interval));
+define('APP_NAME', 'MultiFlexi scheduler ' . Job::codeToInterval($interval));
 Shared::user(new Anonym());
 
 $jobber = new Job();
@@ -48,15 +48,15 @@ if ($interval) {
         if (empty($appsForCompany) && ($interval != 'i')) {
             $companer->addStatusMessage(sprintf(_('No applications to run for %s in interval %s'), $company['name'], $interval), 'debug');
         } else {
-            $jobber->addStatusMessage(sprintf(_('Executor interval %s begin'), $interval), 'debug');
+            $jobber->addStatusMessage(sprintf(_('Scheduler interval %s begin'), $interval), 'debug');
             foreach ($appsForCompany as $servData) {
                 if (!is_null($interval) && ($interval != $servData['interv'])) {
                     continue;
                 }
                 $jobber->prepareJob($servData['id'], [], Job::codeToInterval($interval));
-                $jobber->scheduleJobRun(new \DateTime($when));                
+                $jobber->scheduleJobRun(new \DateTime());                
             }
-            $jobber->addStatusMessage(sprintf(_('Executor interval %s end'), Job::codeToInterval($interval)), 'debug');
+            $jobber->addStatusMessage(sprintf(_('Scheduler interval %s end'), Job::codeToInterval($interval)), 'debug');
         }
     }
 } else {
