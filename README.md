@@ -35,7 +35,7 @@ K dispozici je [ukázková instance](https://demo.multiflexi.eu/?login=demo\&pas
 Pluginy
 -------
 
-Jako plugin je možné použít jakýkoliv spustitelný skript nebo binárku. Tyto jsou však připraveny k použití:
+Jako plugin je možné použít jakýkoliv spustitelný skript nebo binárku. Uvádíme zde některé, připravené k použití:
 
 |Jméno|Popis|Domovská stránka|
 |-----|-----|----------------|
@@ -73,6 +73,7 @@ Jako plugin je možné použít jakýkoliv spustitelný skript nebo binárku. Ty
 |Upomínač|Upomínač neuhrazených faktur|https://github.com/VitexSoftware/abraflexi-reminder|
 |Realpad do Mailkitu|Synchronizuje kontakty z Realpadu do Mailkitu |https://github.com/Spoje-NET/realpad2mailkit/|
 
+Kompletní seznam naleznete na [stránce projektu](https://www.multiflexi.eu/apps.php).
 
 instalace
 ---------
