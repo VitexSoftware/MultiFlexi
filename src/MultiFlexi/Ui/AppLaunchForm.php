@@ -6,7 +6,7 @@ namespace MultiFlexi\Ui;
  * Multi Flexi - Application Launch Form
  *
  * @package AbraFlexi\MultiFlexi
- * @copyright  2015-2023 Vitex Software
+ * @copyright  2015-2024 Vitex Software
  * @license    https://opensource.org/licenses/MIT MIT
  */
 class AppLaunchForm extends \Ease\TWB4\Form
@@ -15,18 +15,18 @@ class AppLaunchForm extends \Ease\TWB4\Form
      * Application Launch Form
      *
      * @param \MultiFlexi\Application $app
-     * @param int $company
+     * @param int $companyId
      */
-    public function __construct(\MultiFlexi\Application $app, int $company)
+    public function __construct(\MultiFlexi\Application $app, int $companyId)
     {
         parent::__construct(['name' => 'appLaunchForm', 'action' => 'newjob.php', 'method' => 'post', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']);
         $appId = $app->getMyKey();
 
-        $job = new \MultiFlexi\Job(['company_id' => $company, 'app_id' => $appId], ['autoload' => false]);
+        $job = new \MultiFlexi\Job(['company_id' => $companyId, 'app_id' => $appId], ['autoload' => false]);
         $env = $job->getFullEnvironment();
 
         $this->addItem(new \Ease\Html\InputHiddenTag('app_id', $appId));
-        $this->addItem(new \Ease\Html\InputHiddenTag('company_id', $company));
+        $this->addItem(new \Ease\Html\InputHiddenTag('company_id', $companyId));
 
         /* check if app requires upload fields */
         $appFields = \MultiFlexi\Conffield::getAppConfigs($appId);
@@ -62,5 +62,6 @@ class AppLaunchForm extends \Ease\TWB4\Form
 
         $this->addItem(new AppExecutorSelect($app));
         $this->addItem(new \Ease\TWB4\SubmitButton([_('Launch now') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'success btn-lg btn-block '));
+        $this->addItem(new \Ease\TWB4\LinkButton('schedule.php?app_id=' . $appId . '&company_id=' . $companyId, [_('Schedule') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg'));
     }
 }
