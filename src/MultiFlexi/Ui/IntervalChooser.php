@@ -26,6 +26,7 @@ class IntervalChooser extends \Ease\Html\SelectTag
     public function __construct($name, $defaultValue = null, $properties = array())
     {
         parent::__construct($name, [
+            'i' => _('Minutly'),
             'n' => _('Disabled'),
             'y' => _('Yearly'),
             'm' => _('Monthly'),
