@@ -4,8 +4,8 @@
 # Required-Stop:
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: <Enter a short description of the software>
-# Description:       <Enter a long description of the software>
+# Short-Description: Job Launcher
+# Description:       Launch jobs
 #                    <...>
 #                    <...>
 # See https://wiki.debian.org/LSBInitScripts
