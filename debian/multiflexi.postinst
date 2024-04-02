@@ -23,7 +23,7 @@ if [ -f /usr/share/dbconfig-common/dpkg/postinst ]; then
 
     phinx migrate -c /usr/lib/multiflexi/phinx-adapter.php
     echo 'run "multiflexi-phinx seed:run" to load demo data'
-    echo 'run "multiflexi-phinx seed:run  -s AppSeeder" to load only plugins demo setup'
+    echo '🧩🧩Visit https://www.multiflexi.eu/apps.php for availble applications list'
 
 	if [ -f /var/lib/multiflexi/multiflexi ] ; then
             chown root:www-data /var/lib/multiflexi/
