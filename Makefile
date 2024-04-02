@@ -1,7 +1,3 @@
-repoversion=$(shell LANG=C aptitude show multiflexi | grep Version: | awk '{print $$2}')
-currentversion=$(shell dpkg-parsechangelog --show-field Version)
-nextversion=$(shell echo $(repoversion) | perl -ne 'chomp; print join(".", splice(@{[split/\./,$$_]}, 0, -1), map {++$$_} pop @{[split/\./,$$_]}), "\n";')
-
 clean:
 	rm -rf vendor composer.lock db/multiflexi.sqlite src/*/*dataTables*
 
