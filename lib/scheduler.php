@@ -17,7 +17,7 @@ use \MultiFlexi\Company,
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
 $loggers = ['syslog', '\MultiFlexi\LogToSQL'];
-if (\Ease\Shared::cfg('ZABBIX_SERVER') && \Ease\Shared::cfg('ZABBIX_HOST')  && class_exists('\MultiFlexi\LogToZabbix')) {
+if (\Ease\Shared::cfg('ZABBIX_SERVER') && \Ease\Shared::cfg('ZABBIX_HOST') && class_exists('\MultiFlexi\LogToZabbix')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
 if (\Ease\Shared::cfg('APP_DEBUG') == 'true') {
@@ -38,25 +38,26 @@ if (\MultiFlexi\Runner::isServiceActive('multiflexi') === false) {
 }
 
 $companer = new Company();
-$companys = $companer->listingQuery()->select('servers.*')->select('company.id AS company_id')->leftJoin('servers ON servers.id = company.server');
+$companys = $companer->listingQuery();
 $customConfig = new Configuration();
 if ($interval) {
     $ap2c = new \MultiFlexi\RunTemplate();
     foreach ($companys as $company) {
-        LogToSQL::singleton()->setCompany($company['company_id']);
-        $appsForCompany = $ap2c->getColumnsFromSQL(['id', 'interv'], ['company_id' => $company['company_id'], 'interv' => $interval]);
+        LogToSQL::singleton()->setCompany($company['id']);
+        $appsForCompany = $ap2c->getColumnsFromSQL(['id', 'interv'], ['company_id' => $company['id'], 'interv' => $interval]);
         if (empty($appsForCompany) && ($interval != 'i')) {
             $companer->addStatusMessage(sprintf(_('No applications to run for %s in interval %s'), $company['name'], $interval), 'debug');
         } else {
-            $jobber->addStatusMessage(sprintf(_('Scheduler interval %s begin'), $interval), 'debug');
+            $jobber->addStatusMessage(sprintf(_('%s Scheduler interval %s begin'), $company['name'], $interval), 'debug');
             foreach ($appsForCompany as $servData) {
                 if (!is_null($interval) && ($interval != $servData['interv'])) {
                     continue;
                 }
                 $jobber->prepareJob($servData['id'], [], Job::codeToInterval($interval));
-                $jobber->scheduleJobRun(new \DateTime());                
+                $jobber->scheduleJobRun(new \DateTime());
+                $jobber->addStatusMessage('🧩 #' . $jobber->application->getMyKey() . "\t" . $jobber->application->getRecordName() . ' - ' . sprintf(_('Launch now for 🏣 %s'), $company['name']));
             }
-            $jobber->addStatusMessage(sprintf(_('Scheduler interval %s end'), Job::codeToInterval($interval)), 'debug');
+            $jobber->addStatusMessage(sprintf(_('%s Scheduler interval %s end'), $company['name'], Job::codeToInterval($interval)), 'debug');
         }
     }
 } else {
