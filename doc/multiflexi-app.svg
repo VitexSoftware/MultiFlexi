@@ -6,7 +6,7 @@
    viewBox="0 0 799.99974 800.00104"
    version="1.1"
    sodipodi:docname="multiflexi-app.svg"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -36,14 +36,14 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="1920"
-     inkscape:window-height="1171"
+     inkscape:window-height="1145"
      id="namedview39"
      showgrid="false"
-     inkscape:zoom="0.3076141"
-     inkscape:cx="-585.14873"
-     inkscape:cy="133.28388"
+     inkscape:zoom="1.2304564"
+     inkscape:cx="263.72328"
+     inkscape:cy="392.13092"
      inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-y="30"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg3430"
      inkscape:showpageshadow="2"
@@ -558,6 +558,8 @@
      id="g249"
      transform="matrix(1.0447804,0,0,1.0447804,-387.61304,-98.266226)"
      style="fill:#ffd42a;fill-opacity:1;filter:url(#filter776)">
+    <title
+       id="title103">Rotor</title>
     <path
        id="path5740"
        style="color:#000000;text-indent:0;text-transform:none;fill:#ffd42a;fill-opacity:1;fill-rule:evenodd"
@@ -569,4 +571,14 @@
        inkscape:connector-curvature="0"
        d="m 795.61,279.41 67.008,66.993 -41.074,41.074 c 26.961,20.328 44.23,52.647 44.23,89.428 0,48.051 -29.47,88.512 -71.524,104.54 v -115.55 l -141.52,141.52 141.52,141.52 v -74.226 c 91.812,-18.87 161.51,-100.65 161.51,-197.79 0,-96.667 -69.01,-178.1 -160.15,-197.49 z" />
   </g>
+  <animateTransform
+     xlink:href="#g249"
+     attributeType="xml"
+     attributeName="transform"
+     type="rotate"
+     from="0 800 500"
+     to="360 800 500"
+     dur="20s"
+     additive="sum"
+     repeatCount="indefinite" />
 </svg>
