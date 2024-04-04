@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi Flexi - Job Eengine
+ * Multi Flexi - Job Engine class
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020-2024 Vitex Software
@@ -19,6 +19,7 @@ use MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
  */
 class Job extends Engine
 {
+
     /**
      *
      * @var executor
@@ -36,13 +37,13 @@ class Job extends Engine
      * @var array
      */
     public static $intervalCode = [
-        'i' => 'minutly',
-        'n' => 'disabled',
         'y' => 'yearly',
-        'h' => 'hourly',
         'm' => 'monthly',
         'w' => 'weekly',
-        'd' => 'daily'
+        'd' => 'daily',
+        'h' => 'hourly',
+        'i' => 'minutly',
+        'n' => 'disabled'
     ];
 
     /**
@@ -50,16 +51,24 @@ class Job extends Engine
      * @var array
      */
     public static $intervalSecond = [
-        'i' => '60',
         'n' => '0',
-        'y' => '31556926',
+        'i' => '60',
         'h' => '3600',
-        'm' => '2629743',
+        'd' => '86400',
         'w' => '604800',
-        'd' => '86400'
+        'm' => '2629743',
+        'y' => '31556926',
     ];
-    
-    
+    public static $intervalZabbix = [
+        'n' => '0',
+        'i' => 'm0-59',
+        'h' => 'h0-23',
+        'd' => 'm0',
+        'w' => 'wd1',
+        'm' => 'md1',
+        'y' => '31556926',
+    ];
+
     /**
      *
      * @var ZabbixSender
@@ -167,7 +176,7 @@ class Job extends Engine
         $jobId = $this->getMyKey();
         //$this->addStatusMessage('JOB: ' . $jobId . ' ' . json_encode($this->environment), 'debug');
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
-            $this->reportToZabbix(['phase' => 'jobStart', 'begin' => (new \DateTime())->format('Y-m-d H:i:s'),'interval'=>$this->runTemplate->getDataValue('interv'),'interval_seconds'=> self::codeToSeconds($this->runTemplate->getDataValue('interv')) ]);
+            $this->reportToZabbix(['phase' => 'jobStart', 'begin' => (new \DateTime())->format('Y-m-d H:i:s'), 'interval' => $this->runTemplate->getDataValue('interv'), 'interval_seconds' => self::codeToSeconds($this->runTemplate->getDataValue('interv'))]);
         }
         $this->updateToSQL(['id' => $this->getMyKey(), 'command' => $this->executor->commandline(), 'begin' => new \Envms\FluentPDO\Literal(\Ease\Shared::cfg('DB_CONNECTION') == 'sqlite' ? "date('now')" : 'NOW()')]);
         return $jobId;
@@ -289,11 +298,11 @@ class Job extends Engine
                 $appInfo = $this->runTemplate->getAppInfo();
                 $appEnvironment = Environmentor::flatEnv($this->environment);
                 $process = new \Symfony\Component\Process\Process(
-                    explode(' ', $setupCommand),
-                    null,
-                    $appEnvironment,
-                    null,
-                    32767
+                        explode(' ', $setupCommand),
+                        null,
+                        $appEnvironment,
+                        null,
+                        32767
                 );
                 $result = $process->run(function ($type, $buffer) {
                     $logger = new Runner();
@@ -455,8 +464,7 @@ class Job extends Engine
     {
         return array_key_exists($code, self::$intervalSecond) ? intval(self::$intervalSecond[$code]) : 0;
     }
-    
-    
+
     /**
      * Get Interval code by Name
      *
