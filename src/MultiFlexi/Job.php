@@ -457,7 +457,7 @@ class Job extends Engine
      */
     public static function codeToSeconds($code)
     {
-        return array_key_exists($code, self::$intervalSeconds) ? intval(self::$intervalCode[$code]) : 0;
+        return array_key_exists($code, self::$intervalSecond) ? intval(self::$intervalCode[$code]) : 0;
     }
     
     
