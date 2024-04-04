@@ -167,7 +167,7 @@ class Job extends Engine
         $jobId = $this->getMyKey();
         //$this->addStatusMessage('JOB: ' . $jobId . ' ' . json_encode($this->environment), 'debug');
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
-            $this->reportToZabbix(['phase' => 'jobStart', 'begin' => (new \DateTime())->format('Y-m-d H:i:s')]);
+            $this->reportToZabbix(['phase' => 'jobStart', 'begin' => (new \DateTime())->format('Y-m-d H:i:s'),'interval'=>$this->runTemplate->getDataValue('interv'),'interval_seconds'=> self::codeToSeconds($this->runTemplate->getDataValue('interv')) ]);
         }
         $this->updateToSQL(['id' => $this->getMyKey(), 'command' => $this->executor->commandline(), 'begin' => new \Envms\FluentPDO\Literal(\Ease\Shared::cfg('DB_CONNECTION') == 'sqlite' ? "date('now')" : 'NOW()')]);
         return $jobId;
@@ -342,10 +342,6 @@ class Job extends Engine
         $packet = new ZabbixPacket();
         $hostname = \Ease\Shared::cfg('ZABBIX_HOST');
         $this->zabbixMessageData = array_merge($this->zabbixMessageData, $messageData);
-        $packet->addMetric((new ZabbixMetric('multiflexi.job', json_encode($this->zabbixMessageData)))->withHostname($hostname)); //TODO Remove
-        $this->zabbixSender->send($packet);
-
-        $packet = new ZabbixPacket();
         $packet->addMetric((new ZabbixMetric('job-[' . $this->company->getDataValue('code') . '-' . $this->application->getDataValue('code') . '-' . $this->runTemplate->getMyKey() . ']', json_encode($this->zabbixMessageData)))->withHostname($hostname));
         $this->zabbixSender->send($packet);
     }
@@ -457,7 +453,7 @@ class Job extends Engine
      */
     public static function codeToSeconds($code)
     {
-        return array_key_exists($code, self::$intervalSecond) ? intval(self::$intervalCode[$code]) : 0;
+        return array_key_exists($code, self::$intervalSecond) ? intval(self::$intervalSecond[$code]) : 0;
     }
     
     
