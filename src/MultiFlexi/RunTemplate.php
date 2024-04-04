@@ -1,13 +1,16 @@
 <?php
 
 /**
- * Multi Flexi  - AppToCompany class
+ * Multi Flexi  - RunTemplate handler class
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2020-2023 Vitex Software
+ * @copyright  2020-2024 Vitex Software
  */
 
 namespace MultiFlexi;
+
+use MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
+use MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
 
 /**
  *
@@ -16,6 +19,7 @@ namespace MultiFlexi;
  */
 class RunTemplate extends Engine
 {
+
     /**
      *
      * @param mixed $identifier
@@ -52,6 +56,9 @@ class RunTemplate extends Engine
      */
     public function setState(bool $state)
     {
+        if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
+            $this->notifyZabbix($this->getData());
+        }
         return $state ? $this->dbsync() : $this->deleteFromSQL();
     }
 
@@ -91,16 +98,23 @@ class RunTemplate extends Engine
 
     /**
      *
-     * @param type $companyId
+     * @param int $companyId
      *
-     * @return type
+     * @return \Envms\FluentPDO\Query
      */
     public function getCompanyTemplates($companyId)
     {
         return $this->listingQuery()->where('company_id', $companyId);
     }
 
-    public function getCompanyAppsByInterval($companyId)
+    /**
+     * Get apps for given company sorted by 
+     * 
+     * @param int $companyId
+     * 
+     * @return array<array>
+     */
+    public function getCompanyAppsByInterval(int $companyId)
     {
         $companyApps = [
             'i' => [],
@@ -188,6 +202,9 @@ class RunTemplate extends Engine
         foreach ($companyAppsInInterval as $appId => $runtempalte) {
             if (array_key_exists($appId, $appIds) === false) {
                 $actionConfigsDeleted = $actions->deleteFromSQL(['runtemplate_id' => $runtempalte['id']]);
+                if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
+                    $this->notifyZabbix(['app_id' => $appId, 'company_id' => $companyId, 'interv' => 'n']);
+                }
                 $actions->addStatusMessage(strval($actionConfigsDeleted) . ' ' . _('action configurations deleted'));
                 $runtempaltesDeletd = $this->deleteFromSQL(['company_id' => $companyId, 'app_id' => $runtempalte['app_id']]);
                 $this->addStatusMessage(strval($runtempaltesDeletd) . ' ' . _('runtemplate deleted'));
@@ -196,9 +213,32 @@ class RunTemplate extends Engine
         foreach ($appIds as $appId) {
             if (array_key_exists($appId, $companyAppsInInterval) === false) {
                 $appInserted = $this->insertToSQL(['app_id' => $appId, 'company_id' => $companyId, 'interv' => $interval]);
+                if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
+                    $this->notifyZabbix(['id' => $appInserted, 'app_id' => $appId, 'company_id' => $companyId, 'interv' => $interval]);
+                }
                 $this->addStatusMessage(sprintf(_('Application %s in company %s assigned to interval %s'), $appId, $companyId, $interval));
             }
         }
+    }
+
+    /**
+     * 
+     * @param array $jobInterval
+     */
+    public function notifyZabbix(array $jobInterval)
+    {
+        $zabbixSender = new ZabbixSender(\Ease\Shared::cfg('ZABBIX_SERVER'));
+        $hostname = \Ease\Shared::cfg('ZABBIX_HOST');
+        $company = new Company($jobInterval['company_id']);
+        $application = new Application($jobInterval['app_id']);
+
+        $packet = new ZabbixPacket();
+        $packet->addMetric((new ZabbixMetric('job-[' . $company->getDataValue('code') . '-' . $application->getDataValue('code') . '-' . $jobInterval['id'] . '-interval]', $jobInterval['interv']))->withHostname($hostname));
+        $zabbixSender->send($packet);
+
+        $packet = new ZabbixPacket();
+        $packet->addMetric((new ZabbixMetric('job-[' . $company->getDataValue('code') . '-' . $application->getDataValue('code') . '-' . $jobInterval['id'] . '-interval_seconds]', Job::codeToSeconds($jobInterval['interv'])))->withHostname($hostname));
+        return $zabbixSender->send($packet);
     }
 
     /**
