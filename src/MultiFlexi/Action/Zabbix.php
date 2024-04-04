@@ -58,6 +58,7 @@ class Zabbix extends \MultiFlexi\CommonAction
      */
     public function perform()
     {
+        $zabbixKey = (empty($this->getDataValue('key'))||($this->getDataValue('key') == 'job-[{COMPANY_CODE}-{APP_CODE}-{RUNTEMPLATE_ID}-data]')) ? 'job-['.$this->job->company->getDataValue('code').'-'.$this->job->application->getDataValue('code').'-'.$this->job->runTemplate->getMyKey().'-data]' : $this->getDataValue('key');
         $dataForZabbix = null;
         $metricsfile = $this->getDataValue('metricsfile');
         if (empty($metricsfile)) {
@@ -71,7 +72,7 @@ class Zabbix extends \MultiFlexi\CommonAction
         }
         if ($dataForZabbix) {
             $packet = new \MultiFlexi\Zabbix\Request\Packet();
-            $packet->addMetric((new \MultiFlexi\Zabbix\Request\Metric($this->getDataValue('key'), $dataForZabbix))->withHostname($this->getDataValue('hostname')));
+            $packet->addMetric((new \MultiFlexi\Zabbix\Request\Metric($zabbixKey, $dataForZabbix))->withHostname($this->getDataValue('hostname')));
             $zabbixSender = new \MultiFlexi\ZabbixSender($this->getDataValue('server'));
             $zabbixSender->send($packet);
         } else {
@@ -87,7 +88,7 @@ class Zabbix extends \MultiFlexi\CommonAction
     public static function inputs(string $prefix)
     {
         return [
-            new \Ease\TWB4\FormGroup(_('Zabbix key'), new \Ease\Html\InputTextTag($prefix . '[Zabbix][key]'), 'custom.key', _('Zabbix Item key')),
+            new \Ease\TWB4\FormGroup(_('Zabbix key'), new \Ease\Html\InputTextTag($prefix . '[Zabbix][key]'), 'job-[{COMPANY_CODE}-{APP_CODE}-{RUNTEMPLATE_ID}-data]', _('Zabbix Item key')),
             new \Ease\TWB4\FormGroup(_('Metrics file'), new \Ease\Html\InputTextTag($prefix . '[Zabbix][metricsfile]'), '/tmp/metrics.json', _('File with metrics. Leave empty to send stdout'))
         ];
     }
