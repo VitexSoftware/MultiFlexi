@@ -256,4 +256,25 @@ class RunTemplate extends Engine
         }
         return $env;
     }
+    
+    
+    /**
+     * Actions Availble with flag when performed in case of success of failure
+     * 
+     * @return array<array>
+     */
+    public function getPostActions()
+    {
+        $actions = [];
+        $s = $this->getDataValue('success') ? unserialize($this->getDataValue('success')): [];
+        $f = $this->getDataValue('fail') ? unserialize($this->getDataValue('fail')): [];
+        foreach ($s as $action => $enabled){
+            $actions[$action]['success'] = $enabled;
+        }
+        foreach ($s as $action => $enabled){
+            $actions[$action]['fail'] = $enabled;
+        }
+        return $actions;
+    }
+    
 }
