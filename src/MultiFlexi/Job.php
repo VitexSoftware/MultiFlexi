@@ -119,6 +119,7 @@ class Job extends Engine
      */
     public function __construct($identifier = null, $options = [])
     {
+        $this->runTemplate = new RunTemplate();
         parent::__construct($identifier, $options);
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
             $this->zabbixSender = new ZabbixSender(\Ease\Shared::cfg('ZABBIX_SERVER'));
@@ -527,6 +528,10 @@ class Job extends Engine
         }
         if (is_null($this->getDataValue('app_id')) === false) {
             $this->application = new Application(intval($this->getDataValue('app_id')));
+        }
+        
+        if($this->application->getMyKey() && $this->company->getMyKey()){
+            $this->runTemplate->loadFromSQL($this->runTemplate->runTemplateID($this->application->getMyKey(), $this->company->getMyKey()));
         }
 
         if ($this->getDataValue('executor')) {
