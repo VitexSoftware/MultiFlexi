@@ -45,17 +45,17 @@ class CompanyDbStatus extends \Ease\TWB4\Row
             [_('Jobs Total') . '&nbsp;', new \Ease\TWB4\PillBadge('info', $jobs)],
             ['class' => 'btn btn-default', 'type' => 'button']
         ));
-        $this->addColumn(2, new \Ease\Html\ButtonTag(
+        $this->addColumn(2, new \Ease\TWB4\LinkButton('?showOnly=success&id='.$companyId,
             [_('Success Jobs') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $jobsSuccess)],
-            ['class' => 'btn btn-default', 'type' => 'button']
+            'success'
         ));
-        $this->addColumn(2, new \Ease\TWB4\LinkButton('showOnly=failed&id='.$companyId,
+        $this->addColumn(2, new \Ease\TWB4\LinkButton('?showOnly=failed&id='.$companyId,
             [_('Failed Jobs') . '&nbsp;', new \Ease\TWB4\PillBadge('danger', $jobs - $jobsSuccess - $jobsUnfinished)],
             'danger'
         ));
-        $this->addColumn(2, new \Ease\Html\ButtonTag(
+        $this->addColumn(2, new \Ease\TWB4\LinkButton('?showOnly=unfinished&id='.$companyId,
             [_('Unfinished Jobs') . '&nbsp;', new \Ease\TWB4\PillBadge('warning', $jobsUnfinished)],
-            ['class' => 'btn btn-default', 'type' => 'button']
+            'warning'
         ));
 //        $this->addColumn(2, new \Ease\Html\ButtonTag(
 //            [_('Customers') . '&nbsp;', new \Ease\TWB4\PillBadge('info', $customers)],
