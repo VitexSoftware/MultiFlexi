@@ -46,7 +46,7 @@ $periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Yearly'), 'default', n
 $addAppForm->addItem($periodSelectorsRow);
 $addAppForm->addItem(new \Ease\Html\PTag());
 
-$addAppForm->addItem(new \Ease\TWB4\SubmitButton(_('Apply'), 'success btn-lg btn-block'));
+$addAppForm->addItem(new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'success btn-lg btn-block'));
 
 $oPage->container->addItem($addAppForm);
 
