@@ -297,7 +297,11 @@ class Application extends Engine
                         }
                     }
                 }
-
+                
+                if(array_key_exists('topics', $importData) === false){
+                    $this->addStatusMessage(_('Topics field not present. '), 'warning');
+                }
+                
                 if ($currentVersion == $newVersion) {
                     $this->addStatusMessage('🧩📦 ' . $importData['name'] . '(' . $currentVersion . ') already present', 'info');
                     $fields = [true];
