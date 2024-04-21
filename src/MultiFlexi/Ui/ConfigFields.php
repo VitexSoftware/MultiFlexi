@@ -26,7 +26,8 @@ class ConfigFields extends \Ease\Html\SelectTag
                     'email' => _('Email'),
                     'password' => _('Password'),
                     'checkbox' => _('Yes/No'),
-                    'file' => _('File upload')
+                    'file' => _('File upload'),
+                    'directory' => _('Directory path')
                 ],
             $defaultValue,
             $properties
