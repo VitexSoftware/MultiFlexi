@@ -41,7 +41,9 @@ class Logger extends \MultiFlexi\Environmentor implements injector
             if(!($actions['Zabbix']['success'] || $actions['Zabbix']['fail'])){
                 $methods[] = 'console';
             }
-        } 
+        } else {
+            $methods[] = 'console';
+        }
         return $this->addMetaData($this->addSelfAsSource(['EASE_LOGGER' => ['value' => implode('|', $methods)]]));
     }
 
