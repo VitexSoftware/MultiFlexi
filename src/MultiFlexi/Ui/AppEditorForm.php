@@ -38,6 +38,7 @@ class AppEditorForm extends EngineForm
         $this->addInput(new InputTextTag('version'), _('Current Version of Application'));
         $this->addInput(new InputTextTag('deploy'), _('Application deploy command'));
         $this->addInput(new InputTextTag('uuid'), _('Application Universal Unique Identifier'));
+        $this->addInput(new InputTextTag('topics'), _('Topics divided by column'));
         $this->addInput(new SubmitButton(_('Save'), 'success'));
         if (!is_null($this->engine->getDataValue('id'))) {
             $this->addItem(new InputHiddenTag('id'));
