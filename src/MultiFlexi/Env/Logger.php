@@ -28,6 +28,7 @@ class Logger extends \MultiFlexi\Environmentor implements injector
     {
         return ['EASE_LOGGER'];
     }
+    
     /**
      *
      * @return array
