@@ -49,7 +49,7 @@ class ApplicationPanel extends Panel
             $usedByCompany = new \Ease\Html\SpanTag(_('Used by') . ': ');
             foreach ($usedInCompanys as $companyInfo) {
                 $companyInfo['id'] = $companyInfo['company_id'];
-                $usedByCompany->addItem(new CompanyLinkButton(new \MultiFlexi\Company($companyInfo, ['autoload' => false]), ['style' => 'height: 50px;']));
+                $usedByCompany->addItem(new CompanyAppLinkButton(new \MultiFlexi\Company($companyInfo, ['autoload' => false]), $application->getMyKey(), ['style' => 'height: 50px;']));
             }
             $this->headRow->addColumn(6, $usedByCompany);
         } else {
