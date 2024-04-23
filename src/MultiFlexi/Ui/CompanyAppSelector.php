@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi - Select for Apps already assigned to comany
+ * Multi Flexi - Select for Apps already assigned to company
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software

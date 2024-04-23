@@ -36,9 +36,11 @@ class RunTemplate extends Engine
      *
      * SELECT runtemplate.id, runtemplate.interv, runtemplate.prepared, apps.name AS app, company.name AS company   FROM runtemplate LEFT JOIN apps ON runtemplate.app_id=apps.id LEFT JOIN company ON runtemplate.company_id=company.id;
      *
+     * @deprecated since version 1.0
+     * 
      * @param int $appId
      * @param int $companyId
-     *
+     * 
      * @return int
      */
     public function runTemplateID(int $appId, int $companyId)
