@@ -61,7 +61,7 @@ if (empty($instanceName) === false) {
 }
 
 $_SESSION['application'] = $apps->getMyKey();
-$oPage->addItem(new PageTop($apps->getRecordName() ? trim(_('Application') . ' ' . $apps->getRecordName()) : $instanceName));
+$oPage->addItem(new PageTop('🧩 '.$apps->getRecordName() ? trim(_('Application') . ' ' . $apps->getRecordName()) : $instanceName));
 $instanceRow = new Row();
 $instanceRow->addColumn(4, new AppEditorForm($apps));
 //if (array_key_exists('company', $_SESSION) && is_null($_SESSION['company']) === false) {

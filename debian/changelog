@@ -1,4 +1,4 @@
-multiflexi (1.12.0) UNRELEASED; urgency=medium
+multiflexi (1.12.0) jammy; urgency=medium
       
   [ CyberVitexus ]
   * Dedicated multiflexi user created during installation
@@ -6,7 +6,7 @@ multiflexi (1.12.0) UNRELEASED; urgency=medium
   [ Vítězslav Dvořák ]
   * App topics itroduced
 
- -- Vítězslav Dvořák <info@vitexsoftware.cz>  Fri, 12 Apr 2024 11:44:12 +0200
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Tue, 23 Apr 2024 21:03:11 +0200
 
 multiflexi (1.10.5) UNRELEASED; urgency=medium
 

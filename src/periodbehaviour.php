@@ -20,8 +20,7 @@ require_once './init.php';
 
 $oPage->onlyForLogged();
 
-$runTemplater = new RunTemplate();
-$runTemplater->loadFromSQL($runTemplater->runTemplateID(WebPage::getRequestValue('app'), $_SESSION['company']));
+$runTemplater = new RunTemplate(WebPage::getRequestValue('id','int'));
 
 $actions = new \MultiFlexi\ActionConfig();
 if (\Ease\WebPage::isPosted()) {
@@ -38,7 +37,7 @@ if (\Ease\WebPage::isPosted()) {
     $succesActions = $runTemplater->getDataValue('success') ? unserialize($runTemplater->getDataValue('success')) : [];
 }
 
-$oPage->addItem(new PageTop(_('Periodical Tasks')));
+$oPage->addItem(new PageTop('🛠 '.$runTemplater->getRecordName()));
 
 $periodcalTaskInfo = $runTemplater->getData();
 
@@ -60,7 +59,7 @@ $jobtempform->addItem(new \Ease\Html\InputHiddenTag('app', $periodcalTaskInfo['a
 $jobtempform->addItem(new \Ease\Html\InputHiddenTag('company_id', $periodcalTaskInfo['company_id']));
 $jobtempform->addItem(new \Ease\Html\InputHiddenTag('interval', $periodcalTaskInfo['interv']));
 $jobtempform->addItem($appPanel);
-$jobtempform->addItem(new \Ease\TWB4\SubmitButton('🍏'._('Apply'), 'primary btn-lg btn-block'));
+$jobtempform->addItem(new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'primary btn-lg btn-block'));
 
 $oPage->container->addItem(new CompanyPanel(new Company($periodcalTaskInfo['company_id']), $jobtempform));
 

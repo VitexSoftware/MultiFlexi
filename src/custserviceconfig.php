@@ -2,7 +2,6 @@
 
 namespace MultiFlexi\Ui;
 
-use Ease\Html\H1Tag;
 use MultiFlexi\Configuration;
 use MultiFlexi\Ui\CustomAppConfigForm;
 use MultiFlexi\Ui\PageBottom;
@@ -11,9 +10,11 @@ use MultiFlexi\Ui\WebPage;
 
 /**
  * Multi Flexi - Config fields editor.
- *
+ * 
+ * @deprecated since version 1.14
+ * 
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * @copyright  2020-2024 Vitex Software
  */
 
 require_once './init.php';

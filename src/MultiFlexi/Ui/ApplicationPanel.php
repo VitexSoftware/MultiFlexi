@@ -40,7 +40,7 @@ class ApplicationPanel extends Panel
         $cid = $application->getMyKey();
         $this->headRow = new Row();
         $this->headRow->addColumn(2, [new AppLogo($application, ['style' => 'height: 60px']), '&nbsp;', $application->getRecordName()]);
-        $this->headRow->addColumn(4, [new LinkButton('app.php?id=' . $cid, '🛠️&nbsp;' . _('Application'), 'primary btn-lg'),
+        $this->headRow->addColumn(4, [new LinkButton('app.php?id=' . $cid, '🧩&nbsp;' . _('Application'), 'primary btn-lg'),
                                      new LinkButton('joblist.php?app_id=' . $cid, '🧑‍💻&nbsp;' . _('Jobs history'), 'secondary btn-lg')]);
 
         $ca = new \MultiFlexi\CompanyApp(null);
