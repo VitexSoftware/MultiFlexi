@@ -25,7 +25,7 @@ class RuntemplateCloneForm extends \Ease\TWB4\Form
      */
     public function __construct(\MultiFlexi\RunTemplate $runtemplate)
     {
-        $clonename = $runtemplate->getDataValue('name') ? $runtemplate->getDataValue('name') : $runtemplate->getAppInfo()['app_name'] . ' ' . _('Clone');
+        $clonename = _($runtemplate->getDataValue('name') ? $runtemplate->getDataValue('name') : $runtemplate->getAppInfo()['app_name']) . ' ' . _('Clone');
         parent::__construct(['action' => 'runtemplateclone.php?id=' . strval($runtemplate->getMyKey()), 'class' => 'form-inline']);
         $this->addInput(new \Ease\Html\InputTextTag('clonename', $clonename), _('Save as copy') . '&nbsp;', $clonename);
         $this->addItem(new \Ease\TWB4\SubmitButton('💕 ' . _('Clone'), 'success mb-2', ['type' => 'submit']));

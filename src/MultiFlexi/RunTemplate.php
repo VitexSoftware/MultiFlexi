@@ -17,16 +17,20 @@ use MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
  *
  * @author vitex
  */
-class RunTemplate extends Engine
-{
+class RunTemplate extends Engine {
+
+    /**
+     * 
+     * @var string
+     */
+    public $nameColumn = 'name';
 
     /**
      *
      * @param mixed $identifier
      * @param array $options
      */
-    public function __construct($identifier = null, $options = [])
-    {
+    public function __construct($identifier = null, $options = []) {
         $this->myTable = 'runtemplate';
         parent::__construct($identifier, $options);
     }
@@ -43,8 +47,7 @@ class RunTemplate extends Engine
      * 
      * @return int
      */
-    public function runTemplateID(int $appId, int $companyId)
-    {
+    public function runTemplateID(int $appId, int $companyId) {
         $runTemplateId = intval($this->listingQuery()->where('company_id=' . $companyId . ' AND app_id=' . $appId)->select('id', true)->fetchColumn());
         return $runTemplateId ? $runTemplateId : $this->dbsync(['app_id' => $appId, 'company_id' => $companyId, 'interv' => 'n']);
     }
@@ -56,16 +59,14 @@ class RunTemplate extends Engine
      *
      * @return bool
      */
-    public function setState(bool $state)
-    {
+    public function setState(bool $state) {
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
             $this->notifyZabbix($this->getData());
         }
         return $state ? $this->dbsync() : $this->deleteFromSQL();
     }
 
-    public function performInit()
-    {
+    public function performInit() {
         $app = new Application((int) $this->getDataValue('app_id'));
         //        $this->setEnvironment();
         if (empty($app->getDataValue('setup')) == false) {
@@ -82,16 +83,14 @@ class RunTemplate extends Engine
      *
      * @return int
      */
-    public function deleteFromSQL($data = null)
-    {
+    public function deleteFromSQL($data = null) {
         if (is_null($data)) {
             $data = $this->getData();
         }
         return parent::deleteFromSQL($data);
     }
 
-    public function getCompanyEnvironment()
-    {
+    public function getCompanyEnvironment() {
         $connectionData = $this->getAppInfo();
         $platformHelperClass = '\\MultiFlexi\\' . $connectionData['type'] . '\\Company';
         $platformHelper = new $platformHelperClass($connectionData['company_id'], $connectionData);
@@ -104,9 +103,8 @@ class RunTemplate extends Engine
      *
      * @return \Envms\FluentPDO\Query
      */
-    public function getCompanyTemplates($companyId)
-    {
-        return $this->listingQuery()->where('company_id', $companyId);
+    public function getCompanyTemplates($companyId) {
+        return $this->listingQuery()->select(['apps.name AS app_name', 'apps.description', 'apps.homepage', 'apps.image'])->leftJoin('apps ON apps.id = runtemplate.app_id')->where('company_id', $companyId);
     }
 
     /**
@@ -116,9 +114,8 @@ class RunTemplate extends Engine
      * 
      * @return array<array>
      */
-    public function getCompanyAppsByInterval(int $companyId)
-    {
-        $companyApps = [
+    public function getCompanyRunTemplatesByInterval(int $companyId) {
+        $runtemplates = [
             'i' => [],
             'h' => [],
             'd' => [],
@@ -127,9 +124,9 @@ class RunTemplate extends Engine
             'y' => []
         ];
         foreach ($this->getCompanyTemplates($companyId)->fetchAll() as $template) {
-            $companyApps[$template['interv']][$template['app_id']] = $template;
+            $runtemplates[$template['interv']][$template['id']] = $template;
         }
-        return $companyApps;
+        return $runtemplates;
     }
 
     /**
@@ -138,8 +135,7 @@ class RunTemplate extends Engine
      *
      * @return array
      */
-    public function getAppEnvironment()
-    {
+    public function getAppEnvironment() {
         $appInfo = $this->getAppInfo();
         $jobber = new Job();
         $jobber->company = new Company(intval($appInfo['company_id']));
@@ -151,8 +147,7 @@ class RunTemplate extends Engine
      *
      * @return array
      */
-    public function getAppInfo()
-    {
+    public function getAppInfo() {
         return $this->listingQuery()
                         ->select('apps.*')
                         ->select('apps.id as apps_id')
@@ -173,8 +168,7 @@ class RunTemplate extends Engine
      *
      * @return array
      */
-    public function getPeriodAppsForCompany($companyID)
-    {
+    public function getPeriodAppsForCompany($companyID) {
         return $this->getColumnsFromSQL(['app_id', 'interv', 'id'], ['company_id' => $companyID], 'id', 'app_id');
     }
 
@@ -185,41 +179,23 @@ class RunTemplate extends Engine
      *
      * @return boolean save status
      */
-    public function setProvision($status)
-    {
+    public function setProvision($status) {
         return $this->dbsync(['prepared' => $status]);
     }
 
     /**
-     * Assign Apps in company to given interval
-     *
-     * @param int    $companyId
-     * @param array  $appIds
+     * 
+     * @param int $companyId
+     * @param array $runtemplateIds
      * @param string $interval
      */
-    public function assignAppsToCompany(int $companyId, array $appIds, string $interval)
-    {
-        $actions = new \MultiFlexi\ActionConfig();
-        $companyAppsInInterval = $this->listingQuery()->where(['company_id' => $companyId, 'interv' => $interval])->fetchAll('app_id');
-        foreach ($companyAppsInInterval as $appId => $runtempalte) {
-            if (array_key_exists($appId, $appIds) === false) {
-                $actionConfigsDeleted = $actions->deleteFromSQL(['runtemplate_id' => $runtempalte['id']]);
-                if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
-                    $this->notifyZabbix(['app_id' => $appId, 'company_id' => $companyId, 'interv' => 'n']);
-                }
-                $actions->addStatusMessage(strval($actionConfigsDeleted) . ' ' . _('action configurations deleted'));
-                $runtempaltesDeletd = $this->deleteFromSQL(['company_id' => $companyId, 'app_id' => $runtempalte['app_id']]);
-                $this->addStatusMessage(strval($runtempaltesDeletd) . ' ' . _('runtemplate deleted'));
-            }
-        }
-        foreach ($appIds as $appId) {
-            if (array_key_exists($appId, $companyAppsInInterval) === false) {
-                $appInserted = $this->insertToSQL(['app_id' => $appId, 'company_id' => $companyId, 'interv' => $interval]);
-                if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
-                    $this->notifyZabbix(['id' => $appInserted, 'app_id' => $appId, 'company_id' => $companyId, 'interv' => $interval]);
-                }
-                $this->addStatusMessage(sprintf(_('Application %s in company %s assigned to interval %s'), $appId, $companyId, $interval));
-            }
+    public function setPeriods(int $companyId, array $runtemplateIds, string $interval) {
+        foreach ($runtemplateIds as $runtemplateId) {
+            $this->updateToSQL(['interv' => $interval], ['id' => $runtemplateId]);
+//                if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
+//                    $this->notifyZabbix(['id' => $appInserted, 'app_id' => $appId, 'company_id' => $companyId, 'interv' => $interval]);
+//                }
+//                $this->addStatusMessage(sprintf(_('Application %s in company %s assigned to interval %s'), $appId, $companyId, $interval));
         }
     }
 
@@ -227,8 +203,7 @@ class RunTemplate extends Engine
      * 
      * @param array $jobInterval
      */
-    public function notifyZabbix(array $jobInterval)
-    {
+    public function notifyZabbix(array $jobInterval) {
         $zabbixSender = new ZabbixSender(\Ease\Shared::cfg('ZABBIX_SERVER'));
         $hostname = \Ease\Shared::cfg('ZABBIX_HOST');
         $company = new Company($jobInterval['company_id']);
@@ -250,33 +225,29 @@ class RunTemplate extends Engine
      *
      * @return array
      */
-    public static function stripToValues(array $envData)
-    {
+    public static function stripToValues(array $envData) {
         $env = [];
         foreach ($envData as $key => $data) {
             $env[$key] = $data['value'];
         }
         return $env;
     }
-    
-    
+
     /**
      * Actions Availble with flag when performed in case of success of failure
      * 
      * @return array<array>
      */
-    public function getPostActions()
-    {
+    public function getPostActions() {
         $actions = [];
-        $s = $this->getDataValue('success') ? unserialize($this->getDataValue('success')): [];
-        $f = $this->getDataValue('fail') ? unserialize($this->getDataValue('fail')): [];
-        foreach ($s as $action => $enabled){
+        $s = $this->getDataValue('success') ? unserialize($this->getDataValue('success')) : [];
+        $f = $this->getDataValue('fail') ? unserialize($this->getDataValue('fail')) : [];
+        foreach ($s as $action => $enabled) {
             $actions[$action]['success'] = $enabled;
         }
-        foreach ($s as $action => $enabled){
+        foreach ($s as $action => $enabled) {
             $actions[$action]['fail'] = $enabled;
         }
         return $actions;
     }
-    
 }

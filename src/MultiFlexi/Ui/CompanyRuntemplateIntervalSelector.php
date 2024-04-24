@@ -16,7 +16,7 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class CompanyAppIntervalSelector extends CompanyAppSelector
+class CompanyRuntemplateIntervalSelector extends CompanyAppSelector
 {
     private $intervalCode;
 
@@ -28,15 +28,16 @@ class CompanyAppIntervalSelector extends CompanyAppSelector
 
     public function availbleApps()
     {
-        $companyApps = parent::availbleApps();
         $runTemplate = new \MultiFlexi\RunTemplate();
-        $currentAppAssigned = $runTemplate->getCompanyTemplates($this->companyId)->fetchAll('app_id');
-        foreach ($companyApps as $id => $companyApp) {
-            if (array_key_exists($companyApp['id'], $currentAppAssigned)) {
-                $companyApp;
-                $companyApps[$id]['disabled'] = 1;
+        $companyRuntemplates = $runTemplate->getCompanyTemplates($this->companyId)->fetchAll('id');
+        foreach ($companyRuntemplates as $id => $companyRuntemplate) {
+            if (empty($companyRuntemplate['name'])){
+                $companyRuntemplates[$id]['name'] = strval($id).' '.$companyRuntemplate['app_name'];
+            }
+            if ($companyRuntemplate['interv'] != 'n') {
+                $companyRuntemplates[$id]['disabled'] = 1;
             }
         }
-        return $companyApps;
+        return array_values($companyRuntemplates);
     }
 }
