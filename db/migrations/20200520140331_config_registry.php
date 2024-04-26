@@ -6,7 +6,7 @@ class ConfigRegistry extends AbstractMigration {
 
     public function change() {
         $customFields = $this->table('conffield');
-        $customFields->addColumn('app_id', 'integer', ['null' => false])
+        $customFields->addColumn('app_id', 'integer', ['null' => false, 'unsigned'=>false])
                 ->addColumn('keyname', 'string', ['length' => 64])
                 ->addColumn('type', 'string', ['length' => 32])
                 ->addColumn('description', 'string', ['length' => 1024])
@@ -16,8 +16,8 @@ class ConfigRegistry extends AbstractMigration {
         $customFields->create();
 
         $configs = $this->table('configuration');
-        $configs->addColumn('app_id', 'integer', ['null' => false])
-                ->addColumn('company_id', 'integer', ['null' => false])
+        $configs->addColumn('app_id', 'integer', ['null' => false, 'unsigned'=>false])
+                ->addColumn('company_id', 'integer', ['null' => false, 'unsigned'=>false])
                 ->addColumn('key', 'string', ['length' => 64])
                 ->addColumn('value', 'string', ['length' => 1024])
                 ->addIndex(['app_id', 'company_id', 'key'], ['unique' => true])
