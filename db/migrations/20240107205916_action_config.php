@@ -26,7 +26,7 @@ final class ActionConfig extends AbstractMigration
                 ->addColumn('keyname', 'string', ['comment' => 'Configuration Key name'])
                 ->addColumn('value', 'string', ['comment' => 'Configuration Value'])
                 ->addColumn('mode', 'string', ['null' => true, 'length' => 10, 'default' => null, 'comment' => 'success, fail or empty'])
-                ->addColumn('runtemplate_id', 'integer', ['null' => false])
+                ->addColumn('runtemplate_id', 'integer', ['null' => false, 'unsigned'=>false])
                 ->addIndex(['module', 'keyname', 'mode', 'runtemplate_id'], ['unique' => true])
                 ->addForeignKey('runtemplate_id', 'runtemplate', ['id'], ['constraint' => 'runtemplate_must_exist'])
                 ->create();
