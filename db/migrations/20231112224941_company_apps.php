@@ -21,8 +21,8 @@ final class CompanyApps extends AbstractMigration
     {
         
         $table = $this->table('companyapp');
-        $table->addColumn('app_id', 'integer', ['null' => false, 'unsigned'=>false])
-        ->addColumn('company_id', 'integer', ['null' => false, 'unsigned'=>false])
+        $table->addColumn('app_id', 'integer', ['null' => false, 'signed'=>false])
+        ->addColumn('company_id', 'integer', ['null' => false, 'signed'=>false])
         ->addIndex(['app_id', 'company_id'], ['unique' => true])
         ->addForeignKey('app_id', 'apps', ['id'], ['constraint' => 'a2c-app_must_exist'])
         ->addForeignKey('company_id', 'company', ['id'], ['constraint' => 'a2c-company_must_exist']);

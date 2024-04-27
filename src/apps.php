@@ -22,10 +22,49 @@ $servers = new Application();
 
 $allAppData = $servers->getAll();
 
+$jobsDataRaw = (new \MultiFlexi\Job())->listingQuery()->select(['app_id','exitcode'])->fetchAll();
+foreach ($jobsDataRaw as $jobData) {
+    $exitcodeCounts = [];
+    $exitcodeSuccess = [];
+
+    foreach ($jobsData as $jobData) {
+        $app_id = $jobData['app_id'];
+        $exitcode = $jobData['exitcode'];
+
+        if (!isset($exitcodeCounts[$app_id])) {
+            $exitcodeCounts[$app_id] = [];
+            $exitcodeSuccess[$app_id] = [];
+        }
+
+        if (!isset($exitcodeCounts[$app_id][$exitcode])) {
+            $exitcodeCounts[$app_id][$exitcode] = 0;
+            $exitcodeSuccess[$app_id][$exitcode] = 0;
+        }
+
+        $exitcodeCounts[$app_id][$exitcode]++;
+        if ($exitcode == 0) {
+            $exitcodeSuccess[$app_id][$exitcode]++;
+        }
+    }
+
+    $averageSuccess = [];
+
+    foreach ($exitcodeCounts as $app_id => $exitcodes) {
+        $averageSuccess[$app_id] = [];
+
+        foreach ($exitcodes as $exitcode => $count) {
+            $averageSuccess[$app_id][$exitcode] = $exitcodeSuccess[$app_id][$exitcode] / $count;
+        }
+    }
+    $jobsData[$jobData['app_id']] = $jobData['exitcode'];
+}
+
+
 $fbtable = new Table();
-$fbtable->addRowHeaderColumns([_('ID'), _('Enabled'), _('Image'), _('Name'), _('Description'), _('Executable'), _('Created'), _('Modified'), _('HomePage'), _('Requirements'), _('Container Image'), _('Version'), _('Code'), _('uuid')]);
+$fbtable->addRowHeaderColumns([_('Success'),_('ID'), _('Enabled'), _('Image'), _('Name'), _('Description'), _('Executable'), _('Created'), _('Modified'), _('HomePage'), _('Requirements'), _('Container Image'), _('Version'), _('Code'), _('uuid')]);
 
 foreach ($allAppData as $appData) {
+    $appData['success'] = $averageSuccess[$appData['id']][0] ?? 0;
     $appData['image'] = new \Ease\Html\ImgTag($appData['image'], _('Icon'), ['height' => 40]);
     $appData['enabled'] = ($appData['enabled'] == 1 ? '✔' : '❌');
     $executablePath = Application::findBinaryInPath($appData['executable']);
