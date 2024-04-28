@@ -4,6 +4,9 @@ clean:
 migration:
 	cd src ; ../vendor/bin/phinx migrate -c ../phinx-adapter.php ; cd ..
 
+sysmigration:
+	cd src ; /usr/bin/phinx migrate -c /usr/lib/multiflexi/phinx-adapter.php ; cd ..
+
 seed:
 	cd src ; ../vendor/bin/phinx seed:run -c ../phinx-adapter.php ; cd ..
 

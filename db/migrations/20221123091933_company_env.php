@@ -1,11 +1,10 @@
 <?php
-
 declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class CompanyEnv extends AbstractMigration {
-
+final class CompanyEnv extends AbstractMigration
+{
     /**
      * Change Method.
      *
@@ -17,13 +16,15 @@ final class CompanyEnv extends AbstractMigration {
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-    public function change() {
+    public function change()
+    {
         $table = $this->table('companyenv');
         $table->addColumn('keyword', 'string', array('null' => false))
                 ->addColumn('value', 'string', array('null' => false))
-                ->addColumn('company_id', 'integer', ['null' => false, 'signed'=>false])
-                ->addIndex(['keyword', 'company_id'], ['unique' => true])
-                ->addForeignKey('company_id', 'company', ['id'], ['constraint' => 'env-company_must_exist']);
+        ->addColumn('company_id', 'integer', ['null' => false,'signed'=>false])
+        ->addIndex(['keyword', 'company_id'], ['unique' => true])
+        ->addForeignKey('company_id', 'company', ['id'], ['constraint' => 'env-company_must_exist']);
         $table->save();
+
     }
 }
