@@ -42,6 +42,7 @@ $sqlOptions = [];
 if (strstr(\Ease\Shared::cfg('DB_CONNECTION'), 'sqlite')) {
     $sqlOptions["database"] = "/var/lib/dbconfig-common/sqlite3/multiflexi/" . basename(\Ease\Shared::cfg("DB_DATABASE"));
 }
+
 $engine = new \Ease\SQL\Engine(null, $sqlOptions);
 $cfg = [
     'paths' => [

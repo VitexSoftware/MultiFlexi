@@ -19,13 +19,17 @@ final class Job extends AbstractMigration {
      */
     public function change() {
         $table = $this->table('job');
-        $table->addColumn('app_id', 'integer', ['null' => false, 'unsigned' => false])
+        $table->addColumn('app_id', 'integer', ['null' => false,'signed'=>false])
                 ->addColumn('begin', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
                 ->addColumn('end', 'datetime', ['null' => true])
-                ->addColumn('company_id', 'integer', ['null' => false, 'signed'=>false])
+                ->addColumn('company_id', 'integer', ['null' => false,'signed'=>false])
                 ->addColumn('exitcode', 'integer', ['null' => true])
-                ->addForeignKey('app_id', 'apps', ['id'], ['constraint' => 'job-app_must_exist'])
-                ->addForeignKey('company_id', 'company', ['id'], ['constraint' => 'job-company_must_exist']);
+                ->addForeignKey('app_id', 'apps', ['id'],
+                        ['constraint' => 'job-app_must_exist'])
+                ->addForeignKey('company_id', 'company', ['id'],
+                        ['constraint' => 'job-company_must_exist']);
         $table->save();
+
     }
+
 }
