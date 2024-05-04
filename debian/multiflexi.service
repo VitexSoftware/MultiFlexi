@@ -7,6 +7,8 @@ Description=Run MultiFlexi scheduled jobs
 After=multi-user.target
 
 [Service]
+User=multiflexi
+Group=multiflexi
 EnvironmentFile=/etc/multiflexi/multiflexi.env
 ExecStart=/usr/bin/php /usr/lib/multiflexi/daemon.php
 LimitNOFILE=8192:16384
