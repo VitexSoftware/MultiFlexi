@@ -29,6 +29,7 @@ composer.lock
 /debian/multiflexi-sqlite.debhelper.log
 /debian/multiflexi.debhelper.log
 /debian/multiflexi.postrm.debhelper
+/debian/tmp/
 /deb/
 /nbproject/private/
 /OpenAPI/node_modules/
