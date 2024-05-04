@@ -7,6 +7,7 @@ src/assets/Buttons-1.5.6/swf/*            usr/share/multiflexi/assets/Buttons-1.
 src/images/*                              usr/share/multiflexi/images
 db/migrations/*				  usr/lib/multiflexi/db/migrations
 db/seeds/*				  usr/lib/multiflexi/db/seeds
+debian/tmp/composer.json                  usr/lib/multiflexi
 debian/conf/phinx-adapter.php	          usr/lib/multiflexi
 src/MultiFlexi/*.php                      usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Env/*.php                  usr/lib/multiflexi/MultiFlexi/Env/

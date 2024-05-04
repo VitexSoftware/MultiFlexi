@@ -12,9 +12,9 @@
 #       dh_auto_install -- prefix=/usr
 
 override_dh_install:
+	mkdir -p debian/tmp/
+	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/conf/composer.json |sponge debian/tmp/composer.json
 	dh_install
-	mkdir -p debian/usr/lib/multiflexi/
-	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/conf/composer.json |sponge debian/usr/lib/multiflexi/composer.json
 	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multiflexi/g' debian/multiflexi/usr/share/multiflexi/init.php
 	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multiflexi/g' debian/multiflexi*/usr/lib/multiflexi/*.php
 	sed -i -e 's/\.\.\/\.env/\/etc\/multiflexi\/\multiflexi\.env/g' debian/multiflex*/usr/lib/multiflexi/*.php
