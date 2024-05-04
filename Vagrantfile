@@ -19,13 +19,13 @@ Vagrant.configure("2") do |config|
     apt-get install -y apache2 libapache2-mod-php
 
 
-    apt -y install multiflexi-sqlite
+    #apt -y install multiflexi-sqlite
 
-    #apt -y install mariadb-server
-    #systemctl start mysql
-    #apt -y install multiflexi-mysql
+    apt -y install mariadb-server
+    systemctl start mysql
+    apt -y install multiflexi-mysql
 
-    phinx seed:run -c /usr/lib/multiflexi/phinx-adapter.php
+    #phinx seed:run -c /usr/lib/multiflexi/phinx-adapter.php
     a2enconf multiflexi
 
     echo ServerName MultiFlexi >> /etc/apache2/apache2.conf
@@ -49,7 +49,7 @@ Vagrant.configure("2") do |config|
     apache2ctl restart
 
     apt-get  -y install links
-    links -dump http://localhost/multiflexi
+    links -dump http://localhost/multiflexi/
 
   SHELL
 end
