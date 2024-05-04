@@ -1,7 +1,6 @@
 {
   "name": "vitexsoftware/multiflexi",
   "description": "Tool used to setup AbraFlexi multiinstance",
-  "version": "1.11.0",
   "type": "project",
   "require": {
     "deb/ease-bootstrap4-widgets-abraflexi": "*",

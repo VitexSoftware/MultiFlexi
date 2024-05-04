@@ -1,3 +1,9 @@
+multiflexi (1.12.1) jammy; urgency=medium
+
+  * Config file initialization fix
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Sat, 04 May 2024 08:50:26 +0200
+
 multiflexi (1.12.0) jammy; urgency=medium
       
   [ CyberVitexus ]
@@ -6,7 +12,7 @@ multiflexi (1.12.0) jammy; urgency=medium
   [ Vítězslav Dvořák ]
   * App topics itroduced
 
- -- Vítězslav Dvořák <info@vitexsoftware.cz>  Tue, 23 Apr 2024 21:03:11 +0200
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Sat, 04 May 2024 08:46:06 +0200
 
 multiflexi (1.10.5) UNRELEASED; urgency=medium
 
