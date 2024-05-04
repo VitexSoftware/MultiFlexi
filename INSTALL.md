@@ -10,10 +10,30 @@ sudo apt install lsb-release wget
 echo "deb http://repo.vitexsoftware.com $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/vitexsoftware.list
 sudo wget -O /etc/apt/trusted.gpg.d/vitexsoftware.gpg http://repo.vitexsoftware.cz/keyring.gpg
 sudo apt update
+sudo apt install libapache2-mod-php # easy & preconfigured
 sudo apt install multiflexi-DATABASE
 ```
 
 k dispozici jsou tyto databázové adaptéry: **multiflexi-mysql**, **multiflexi-pgsql** a **multiflexi-sqlite**
+
+These packages from VitexSoftware will be installed
+
+``
+php-cakephp-phinx
+composer-debian
+php-vitexsoftware-ease-core
+php-vitexsoftware-ease-html
+php-vitexsoftware-ease-bricks
+php-spojenet-abraflexi
+php-vitexsoftware-abraflexi-bricks
+php-vitexsoftware-ease-bootstrap4
+php-vitexsoftware-ease-bootstrap4-widgets
+php-vitexsoftware-ease-bootstrap4-widgets-abraflexi
+php-vitexsoftware-ease-fluentpdo
+multiflexi-mysql
+multiflexi
+```
+
 
 Výsledná instalace pak bude vypadat takto:
 
