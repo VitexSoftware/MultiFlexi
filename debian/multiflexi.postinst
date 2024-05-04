@@ -84,6 +84,9 @@ echo multiflexi postinst action $1
 
 case "$1" in
 install | upgrade)
+    
+    ;;
+configure)
 
     # If the package has default file it could be sourced, so that
     # the local admin can overwrite the defaults
@@ -137,8 +140,6 @@ install | upgrade)
             adduser $SERVER_USER $ADDGROUP
         fi
     fi
-    ;;
-configure)
 
     # Handle webserver reconfiguration/restart ; stolen from zabbix package
     db_get multiflexi/reconfigure-webserver || true
