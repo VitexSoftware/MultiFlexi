@@ -22,42 +22,42 @@ $servers = new Application();
 
 $allAppData = $servers->getAll();
 
-$jobsDataRaw = (new \MultiFlexi\Job())->listingQuery()->select(['app_id','exitcode'])->fetchAll();
-foreach ($jobsDataRaw as $jobData) {
-    $exitcodeCounts = [];
-    $exitcodeSuccess = [];
-
-    foreach ($jobsData as $jobData) {
-        $app_id = $jobData['app_id'];
-        $exitcode = $jobData['exitcode'];
-
-        if (!isset($exitcodeCounts[$app_id])) {
-            $exitcodeCounts[$app_id] = [];
-            $exitcodeSuccess[$app_id] = [];
-        }
-
-        if (!isset($exitcodeCounts[$app_id][$exitcode])) {
-            $exitcodeCounts[$app_id][$exitcode] = 0;
-            $exitcodeSuccess[$app_id][$exitcode] = 0;
-        }
-
-        $exitcodeCounts[$app_id][$exitcode]++;
-        if ($exitcode == 0) {
-            $exitcodeSuccess[$app_id][$exitcode]++;
-        }
-    }
-
-    $averageSuccess = [];
-
-    foreach ($exitcodeCounts as $app_id => $exitcodes) {
-        $averageSuccess[$app_id] = [];
-
-        foreach ($exitcodes as $exitcode => $count) {
-            $averageSuccess[$app_id][$exitcode] = $exitcodeSuccess[$app_id][$exitcode] / $count;
-        }
-    }
-    $jobsData[$jobData['app_id']] = $jobData['exitcode'];
-}
+//$jobsDataRaw = (new \MultiFlexi\Job())->listingQuery()->select(['app_id','exitcode'])->fetchAll();
+//foreach ($jobsDataRaw as $jobData) {
+//    $exitcodeCounts = [];
+//    $exitcodeSuccess = [];
+//
+//    foreach ($jobsData as $jobData) {
+//        $app_id = $jobData['app_id'];
+//        $exitcode = $jobData['exitcode'];
+//
+//        if (!isset($exitcodeCounts[$app_id])) {
+//            $exitcodeCounts[$app_id] = [];
+//            $exitcodeSuccess[$app_id] = [];
+//        }
+//
+//        if (!isset($exitcodeCounts[$app_id][$exitcode])) {
+//            $exitcodeCounts[$app_id][$exitcode] = 0;
+//            $exitcodeSuccess[$app_id][$exitcode] = 0;
+//        }
+//
+//        $exitcodeCounts[$app_id][$exitcode]++;
+//        if ($exitcode == 0) {
+//            $exitcodeSuccess[$app_id][$exitcode]++;
+//        }
+//    }
+//
+//    $averageSuccess = [];
+//
+//    foreach ($exitcodeCounts as $app_id => $exitcodes) {
+//        $averageSuccess[$app_id] = [];
+//
+//        foreach ($exitcodes as $exitcode => $count) {
+//            $averageSuccess[$app_id][$exitcode] = $exitcodeSuccess[$app_id][$exitcode] / $count;
+//        }
+//    }
+//    $jobsData[$jobData['app_id']] = $jobData['exitcode'];
+//}
 
 
 $fbtable = new Table();

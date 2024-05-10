@@ -164,7 +164,7 @@ class Job extends Engine
      */
     public function runBegin()
     {
-        $appId = $this->application->getMyKey();
+        $appId = $this->application->getMyKey(); 
         $companyId = $this->company->getMyKey();
         $this->setObjectName();
         $sqlLogger = LogToSQL::singleton();
@@ -173,7 +173,10 @@ class Job extends Engine
         if (is_null($this->runTemplate)) {
             $this->runTemplate = new RunTemplate();
         }
-        $this->runTemplate->loadFromSQL($this->runTemplate->runTemplateID($appId, $companyId));
+        if($this->runTemplate->getMyKey() == 0){
+            $this->runTemplate->loadFromSQL($this->runTemplate->runTemplateID($appId, $companyId));
+            $this->addStatusMessage(_('Job launched without runtemplate ID'), 'error');
+        }
         $jobId = $this->getMyKey();
         //$this->addStatusMessage('JOB: ' . $jobId . ' ' . json_encode($this->environment), 'debug');
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
@@ -214,7 +217,7 @@ class Job extends Engine
                     'end' => new \Envms\FluentPDO\Literal(\Ease\Shared::cfg('DB_CONNECTION') == 'sqlite' ? "date('now')" : 'NOW()'),
                     'stdout' => addslashes($stdout),
                     'stderr' => addslashes($stderr),
-                    'command' => $this->commandline,
+                    //'command' => $this->commandline,
                     'exitcode' => $statusCode
                         ], ['id' => $this->getMyKey()]);
     }
@@ -532,6 +535,7 @@ class Job extends Engine
         
         if($this->application->getMyKey() && $this->company->getMyKey()){
             $this->runTemplate->loadFromSQL($this->runTemplate->runTemplateID($this->application->getMyKey(), $this->company->getMyKey()));
+            $this->addStatusMessage(_('No runtemplate ID proveided'), 'warning');
         }
 
         if ($this->getDataValue('executor')) {
