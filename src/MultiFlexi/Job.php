@@ -182,7 +182,7 @@ class Job extends Engine
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
             $this->reportToZabbix(['phase' => 'jobStart', 'begin' => (new \DateTime())->format('Y-m-d H:i:s'), 'interval' => $this->runTemplate->getDataValue('interv'), 'interval_seconds' => self::codeToSeconds($this->runTemplate->getDataValue('interv'))]);
         }
-        $this->updateToSQL(['id' => $this->getMyKey(), 'command' => $this->executor->commandline(), 'begin' => new \Envms\FluentPDO\Literal(\Ease\Shared::cfg('DB_CONNECTION') == 'sqlite' ? "date('now')" : 'NOW()')]);
+        $this->updateToSQL(['id' => $this->getMyKey(), 'command' => $this->executor->commandline(), 'runtemplate_id'=> $this->runTemplate->getMyKey(), 'begin' => new \Envms\FluentPDO\Literal(\Ease\Shared::cfg('DB_CONNECTION') == 'sqlite' ? "date('now')" : 'NOW()')]);
         return $jobId;
     }
 
