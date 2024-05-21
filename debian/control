@@ -8,7 +8,7 @@ Homepage: https://github.com/VitexSoftware/MultiFlexi
 
 Package: multiflexi
 Multi-Arch: foreign
-Depends: ${misc:Depends}, php-vitexsoftware-ease-bricks, php-vitexsoftware-abraflexi-bricks, php-cli, locales-all, php-vitexsoftware-ease-bootstrap4-widgets-abraflexi ,php-vitexsoftware-ease-fluentpdo, multiflexi-sqlite|multiflexi-mysql|multiflexi-pgsql, libjs-jquery-datatables, libjs-jquery-selectize.js, anacron, adduser (>= 3.11)
+Depends: ${misc:Depends}, php-vitexsoftware-ease-bricks, php-vitexsoftware-abraflexi-bricks, php-cli, locales-all,php-vitexsoftware-ease-bootstrap4-widgets, php-vitexsoftware-ease-bootstrap4-widgets-abraflexi ,php-vitexsoftware-ease-fluentpdo, multiflexi-sqlite|multiflexi-mysql|multiflexi-pgsql, libjs-jquery-datatables, libjs-jquery-selectize.js, anacron, adduser (>= 3.11)
 Suggests: multiflexi-abraflexi-contract-invoices, multiflexi-abraflexi-digest, multiflexi-abraflexi-mailer, multiflexi-abraflexi-matcher, multiflexi-abraflexi-raiffeisenbank, multiflexi-abraflexi-reminder, multiflexi-abraflexi-tools, multiflexi-discomp2abraflexi, multiflexi-podman, multiflexi-pohoda-client-config, multiflexi-realpad2mailkit, multiflexi-redmine2abraflexi
 Pre-Depends: php-robmorgan-phinx|php-cakephp-phinx
 Architecture: all
