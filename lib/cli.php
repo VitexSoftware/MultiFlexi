@@ -30,6 +30,7 @@ Shared::user(new Anonym());
 $command = array_key_exists(1, $argv) ? $argv[1] : 'help';
 $argument = array_key_exists(2, $argv) ? $argv[2] : null;
 $identifier = array_key_exists(3, $argv) ? $argv[3] : null;
+$property = array_key_exists(4, $argv) ? $argv[4] : null;
 
 switch ($command) {
     case 'version':
@@ -49,6 +50,30 @@ switch ($command) {
         }
         $engine->deleteFromSQL();
         break;
+    case 'add':
+        switch ($argument) {
+            case 'user':
+                if(empty($identifier)){
+                    echo $argv[0] . " add user <login> <email>";
+                    exit;
+                }
+                $engine = new \MultiFlexi\User(['login' => strval($identifier), 'email'=>$property]);
+                break;
+            case 'app':
+                if(empty($identifier)){
+                    echo $argv[0] . " add app <executable> <name>";
+                    exit;
+                }
+                $engine = new \MultiFlexi\Application(['executable' => strval($identifier), 'name'=>$property]);
+                break;
+            default :
+                echo $argv[0] . ' add <name>';
+                break;
+        }
+        $new = $engine->insertToSQL();
+        echo $new;
+        break;
+    
     case 'list':
         switch ($argument) {
             case 'user':
@@ -132,6 +157,6 @@ switch ($command) {
 
     default:
         echo "usage: multiflexi-cli <command> [argument] [id]\n";
-        echo "commands: version list remove";
+        echo "commands: version list remove\n";
         break;
 }

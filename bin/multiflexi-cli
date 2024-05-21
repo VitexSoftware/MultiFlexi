@@ -1,2 +1,2 @@
 #!/bin/sh
-php -q -f /usr/lib/multiflexi/cli.php $@
+php -q -f /usr/lib/multiflexi/cli.php -- $@
