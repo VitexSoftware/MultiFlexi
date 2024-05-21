@@ -23,7 +23,7 @@ case "$1" in
          fi
      fi
 
-        rm -rf /usr/lib/multiflexi/composer.lock /var/lib/multiflexi
+        rm -rf /usr/lib/multiflexi/composer.lock # /var/lib/multiflexi
     ;;
 
     failed-upgrade)
