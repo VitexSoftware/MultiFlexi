@@ -71,13 +71,13 @@ switch ($command) {
                 break;
         }
         $new = $engine->insertToSQL();
-        echo $new;
+        echo $new."\n";
         break;
     
     case 'list':
         switch ($argument) {
             case 'user':
-                $engine = new Application();
+                $engine = new \MultiFlexi\User();
                 $data = $engine->listingQuery()->select([
                             'id',
                             'enabled',

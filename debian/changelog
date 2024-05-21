@@ -1,8 +1,15 @@
+multiflexi (1.12.2) UNRELEASED; urgency=medium
+
+  * cli now can add user and app record
+
+ --  <vitezslav.dvorak@spojenet.cz>  Tue, 21 May 2024 14:45:27 +0200
+
 multiflexi (1.12.1) jammy; urgency=medium
 
+  [ Vítězslav Dvořák ]
   * Config file initialization fix
 
- -- Vítězslav Dvořák <info@vitexsoftware.cz>  Sat, 04 May 2024 08:50:26 +0200
+ --  <vitezslav.dvorak@spojenet.cz>  Tue, 21 May 2024 14:44:58 +0200
 
 multiflexi (1.12.0) jammy; urgency=medium
       
