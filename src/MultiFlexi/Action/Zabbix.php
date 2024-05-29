@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi -
+ * Multi Flexi - Zabbix Action handler
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software
@@ -58,6 +58,8 @@ class Zabbix extends \MultiFlexi\CommonAction
      */
     public function perform()
     {
+        $me = \Ease\Shared::cfg('ZABBIX_HOST',gethostname());
+        $server = \Ease\Shared::cfg('ZABBIX_SERVER');
         $zabbixKey = (empty($this->getDataValue('key'))||($this->getDataValue('key') == 'job-[{COMPANY_CODE}-{APP_CODE}-{RUNTEMPLATE_ID}-data]')) ? 'job-['.$this->job->company->getDataValue('code').'-'.$this->job->application->getDataValue('code').'-'.$this->job->runTemplate->getMyKey().'-data]' : $this->getDataValue('key');
         $dataForZabbix = null;
         $metricsfile = $this->getDataValue('metricsfile');
@@ -72,9 +74,10 @@ class Zabbix extends \MultiFlexi\CommonAction
         }
         if ($dataForZabbix) {
             $packet = new \MultiFlexi\Zabbix\Request\Packet();
-            $packet->addMetric((new \MultiFlexi\Zabbix\Request\Metric($zabbixKey, $dataForZabbix))->withHostname($this->getDataValue('hostname')));
-            $zabbixSender = new \MultiFlexi\ZabbixSender($this->getDataValue('server'));
+            $packet->addMetric((new \MultiFlexi\Zabbix\Request\Metric($zabbixKey, $dataForZabbix))->withHostname($me));
+            $zabbixSender = new \MultiFlexi\ZabbixSender($server);
             $zabbixSender->send($packet);
+            $this->addStatusMessage(sprintf(_('Job metric %s sent to %s as %s'), $zabbixKey, $server, $me), 'debug');
         } else {
             $this->addStatusMessage(_('No Data For zabix provided'), 'warning');
         }
