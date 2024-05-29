@@ -17,7 +17,7 @@ use \Ease\Anonym,
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
 $loggers = ['syslog', '\MultiFlexi\LogToSQL'];
-if (\Ease\Shared::cfg('ZABBIX_SERVER') && \Ease\Shared::cfg('ZABBIX_HOST')  && class_exists('\MultiFlexi\LogToZabbix')) {
+if (\Ease\Shared::cfg('ZABBIX_SERVER') && \Ease\Shared::cfg('ZABBIX_HOST') && class_exists('\MultiFlexi\LogToZabbix')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
 define('EASE_LOGGER', implode('|', $loggers));
@@ -25,8 +25,8 @@ Shared::user(new Anonym());
 
 $venue = array_key_exists(1, $argv) ? $argv[1] : '';
 
-if($venue == '-h'){
-    echo _('multiflexi-zabbix-lld [SERVER.COMPANY_CODE]');    
+if ($venue == '-h') {
+    echo _('multiflexi-zabbix-lld [SERVER.COMPANY_CODE]');
     exit();
 }
 
@@ -46,20 +46,25 @@ $appsAssigned = $ca->getAll()->leftJoin('apps ON apps.id = companyapp.app_id')->
 $runtemplates = $ap2c->listingQuery()->leftJoin('company ON company.id = runtemplate.company_id')->select(['runtemplate.id', 'interv', 'company.code AS company_code', 'company.name AS company_name']);
 
 foreach ($runtemplates as $runtemplateData) {
-    if(strlen($companyCode) && $companyCode != $runtemplateData['company_code']){
+    if (strlen($companyCode) && $companyCode != $runtemplateData['company_code']) {
         continue;
     }
-    $lldData[] = [
-        '{#APPNAME}' => $appsAssigned[$runtemplateData['app_id']]['name'],
-        '{#APPNAME_CODE}' => $appsAssigned[$runtemplateData['app_id']]['code'],
-        '{#APPNAME_UUID}' => $appsAssigned[$runtemplateData['app_id']]['uuid'],
-        '{#INTERVAL}' => Job::codeToInterval($runtemplateData['interv']),
-        '{#INTERVAL_SECONDS}' => Job::codeToSeconds($runtemplateData['interv']),
-        '{#RUNTEMPLATE}' => $runtemplateData['id'],
-        '{#COMPANY_NAME}' => $runtemplateData['company_name'],
-        '{#COMPANY_CODE}' => $runtemplateData['company_code'],
-        '{#COMPANY_SERVER}' => \Ease\Shared::cfg('ZABBIX_HOST')
-    ];
+
+    if (array_key_exists($runtemplateData['app_id'], $appsAssigned)) {
+        $lldData[] = [
+            '{#APPNAME}' => $appsAssigned[$runtemplateData['app_id']]['name'],
+            '{#APPNAME_CODE}' => $appsAssigned[$runtemplateData['app_id']]['code'],
+            '{#APPNAME_UUID}' => $appsAssigned[$runtemplateData['app_id']]['uuid'],
+            '{#INTERVAL}' => Job::codeToInterval($runtemplateData['interv']),
+            '{#INTERVAL_SECONDS}' => Job::codeToSeconds($runtemplateData['interv']),
+            '{#RUNTEMPLATE}' => $runtemplateData['id'],
+            '{#COMPANY_NAME}' => $runtemplateData['company_name'],
+            '{#COMPANY_CODE}' => $runtemplateData['company_code'],
+            '{#COMPANY_SERVER}' => \Ease\Shared::cfg('ZABBIX_HOST')
+        ];
+    } else {
+        $ap2c->addStatusMessage('Application ' . $runtemplateData['app_id'] . ' is not assigned with company ?');
+    }
 }
 
 
