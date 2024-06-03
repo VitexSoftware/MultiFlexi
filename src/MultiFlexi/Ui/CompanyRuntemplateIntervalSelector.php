@@ -44,6 +44,8 @@ class CompanyRuntemplateIntervalSelector extends CompanyAppSelector
             if ($companyRuntemplate['interv'] != 'n') {
                 $companyRuntemplates[$id]['disabled'] = 1;
             }
+            unset($companyRuntemplates[$id]['success']);
+            unset($companyRuntemplates[$id]['fail']);
         }
         return array_values($companyRuntemplates);
     }
