@@ -14,16 +14,31 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class RunTemplatePanel extends \Ease\TWB4\Panel {
+class RunTemplatePanel extends \Ease\TWB4\Panel
+{
+
+    /**
+     * 
+     * @var \MultiFlexi\RunTemplate
+     */
+    private $runtemplate;
 
     /**
      * Run Template Configuration panel
      * 
      * @param \MultiFlexi\RunTemplate $runtemplate
      */
-    public function __construct(\MultiFlexi\RunTemplate $runtemplate) {
+    public function __construct(\MultiFlexi\RunTemplate $runtemplate)
+    {
+        $this->runtemplate = $runtemplate;
+        $runtemplateId = $runtemplate->getMyKey();
+        $runtemplateOptions = new \Ease\TWB4\Row();
+        $runtemplateOptions->addColumn(6, new RuntemplateConfigForm($runtemplate));
+        $intervalChoosen = $runtemplate->getDataValue('interv');
+        $intervalChooser = new \MultiFlexi\Ui\IntervalChooser($runtemplateId . '_interval', $intervalChoosen, ['id' => $runtemplateId . '_interval', 'checked' => 'true', 'data-runtemplate' => $runtemplateId]);
+        $runtemplateOptions->addColumn(6, $intervalChooser);
         $nameInput = new \Ease\Html\ATag('#', $runtemplate->getRecordName(), ['class' => 'editable', 'id' => 'name', 'data-pk' => $runtemplate->getMyKey(), 'data-url' => 'runtemplatesave.php', 'data-title' => _('Update RunTemplate name')]);
-        parent::__construct([new \Ease\Html\ATag('companyapp.php?app_id=' . $runtemplate->getDataValue('app_id') . '&company_id=' . $runtemplate->getDataValue('company_id'), '⚗️ '), $nameInput], 'inverse', new RuntemplateConfigForm($runtemplate), new RuntemplateCloneForm($runtemplate));
+        parent::__construct([new \Ease\Html\ATag('companyapp.php?app_id=' . $runtemplate->getDataValue('app_id') . '&company_id=' . $runtemplate->getDataValue('company_id'), '⚗️ '), $nameInput], 'inverse', $runtemplateOptions, new RuntemplateCloneForm($runtemplate));
         $this->includeJavaScript('js/bootstrap-editable.js');
         $this->includeCss('css/bootstrap-editable.css');
         $this->addJavaScript("$.fn.editable.defaults.mode = 'inline';");
@@ -37,5 +52,35 @@ class RunTemplatePanel extends \Ease\TWB4\Panel {
         '</button>' 
         ");
         $this->addJavaScript("$('.editable').editable();", null, true);
+    }
+
+    /**
+     *
+     */
+    public function finalize()
+    {
+        \Ease\TWB4\Part::twBootstrapize();
+        $this->addJavaScript('
+
+$(\'#' . $this->runtemplate->getMyKey() . '_interval\').change( function(event, state) {
+
+$.ajax({
+   url: \'rtinterval.php\',
+        data: {
+                runtemplate: $(this).attr("data-runtemplate"),
+                interval: $(this).val()
+        },
+        error: function() {
+            console.log("not saved");
+        },
+
+        success: function(data) {
+            console.log("saved");
+        },
+            type: \'POST\'
+        });
+});
+');
+        parent::finalize();
     }
 }

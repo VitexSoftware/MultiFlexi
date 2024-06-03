@@ -9,7 +9,7 @@ namespace MultiFlexi\Ui;
  * @copyright  2015-2024 Vitex Software
  * @license    https://opensource.org/licenses/MIT MIT
  */
-class AppLaunchForm extends \Ease\TWB4\Form
+class RuntemplateLaunchForm extends \Ease\TWB4\Form
 {
     /**
      * Application Launch Form
