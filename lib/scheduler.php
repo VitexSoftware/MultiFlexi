@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi Flexi - Cron Scheduled actions executor.
+ * Multi Flexi - Use Cron to schedule periodical actions.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020-2024 Vitex Software
@@ -13,6 +13,7 @@ use \MultiFlexi\Company,
     \MultiFlexi\Configuration,
     \Ease\Anonym,
     \Ease\Shared;
+use GO\Scheduler;
 
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
@@ -41,9 +42,17 @@ $companer = new Company();
 $companys = $companer->listingQuery();
 $customConfig = new Configuration();
 if ($interval) {
+
+    if ($interval == 'i') {
+        $scheduler = new Scheduler();
+        #TODO: #2
+        $scheduler->run();
+    }
+
     $ap2c = new \MultiFlexi\RunTemplate();
     foreach ($companys as $company) {
         LogToSQL::singleton()->setCompany($company['id']);
+
         $appsForCompany = $ap2c->getColumnsFromSQL(['id', 'interv'], ['company_id' => $company['id'], 'interv' => $interval]);
         if (empty($appsForCompany) && ($interval != 'i')) {
             $companer->addStatusMessage(sprintf(_('No applications to run for %s in interval %s'), $company['name'], $interval), 'debug');
@@ -61,6 +70,6 @@ if ($interval) {
         }
     }
 } else {
-    echo "interval y/m/w/d/h missing\n";
+    echo "interval i/y/m/w/d/h missing\n";
     exit(1);
 }
