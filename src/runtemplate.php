@@ -40,7 +40,7 @@ if ($oPage->isPosted()) {
     }
 }
 
-$oPage->addItem(new PageTop($runTemplate->getRecordName() . _('Configuration')));
+$oPage->addItem(new PageTop($runTemplate->getRecordName() . ' ' . _('Configuration')));
 
 $appPanel = new ApplicationPanel($app, new RunTemplatePanel($runTemplate));
 $appPanel->headRow->addColumn(2, new LinkButton('periodbehaviour.php?id=' . $runTemplate->getMyKey(), '🛠️&nbsp;' . _('Actions'), 'secondary btn-lg btn-block'));
