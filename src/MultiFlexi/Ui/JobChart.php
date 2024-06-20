@@ -112,6 +112,10 @@ class JobChart extends \Ease\Html\DivTag
 //        $this->addJavaScript($graph->fetchJavascript());
     }
 
+    /**
+     * 
+     * @return \Envms\FluentPDO\Queries\Select
+     */
     public function getJobs()
     {
         return $this->engine->listingQuery()->select(['begin', 'exitcode'], 1)->order('begin');

@@ -45,6 +45,10 @@ $companyData = $companer->getData();
 $appsAssigned = $ca->getAll()->leftJoin('apps ON apps.id = companyapp.app_id')->select(['apps.name', 'apps.description', 'apps.id', 'apps.image, apps.code, apps.uuid'], true)->fetchAll('id');
 $runtemplates = $ap2c->listingQuery()->leftJoin('company ON company.id = runtemplate.company_id')->select(['runtemplate.id', 'interv', 'company.code AS company_code', 'company.name AS company_name']);
 
+$actions = new \MultiFlexi\ActionConfig();
+$succesActions = ActionsChooser::toggles('success');
+$failActions = ActionsChooser::toggles('fail');
+
 foreach ($runtemplates as $runtemplateData) {
     if (strlen($companyCode) && $companyCode != $runtemplateData['company_code']) {
         continue;
@@ -60,7 +64,8 @@ foreach ($runtemplates as $runtemplateData) {
             '{#RUNTEMPLATE}' => $runtemplateData['id'],
             '{#COMPANY_NAME}' => $runtemplateData['company_name'],
             '{#COMPANY_CODE}' => $runtemplateData['company_code'],
-            '{#COMPANY_SERVER}' => \Ease\Shared::cfg('ZABBIX_HOST')
+            '{#COMPANY_SERVER}' => \Ease\Shared::cfg('ZABBIX_HOST'),
+            '{#DATA_ITEM}' => false
         ];
     } else {
         $ap2c->addStatusMessage('Application ' . $runtemplateData['app_id'] . ' is not assigned with company ?');

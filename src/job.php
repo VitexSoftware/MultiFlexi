@@ -4,7 +4,7 @@
  * Multi Flexi - Job Run Overview.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * @copyright  2023-2024 Vitex Software
  */
 
 namespace MultiFlexi\Ui;
@@ -18,8 +18,10 @@ $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Archived Job Run')));
 $jobID = $oPage->getRequestValue('id', 'int');
 $jobber = new \MultiFlexi\Job($jobID);
-$runTemplate = new \MultiFlexi\RunTemplate();
-$runTemplate->setMyKey($runTemplate->runTemplateID($jobber->getDataValue('app_id'), $jobber->getDataValue('company_id')));
+$runTemplate = new \MultiFlexi\RunTemplate($jobber->getDataValue('runtemplate_id'));
+if(is_null($runTemplate->getMyKey())){ // TODO: Remove 
+    $runTemplate->setMyKey($runTemplate->runTemplateID($jobber->getDataValue('app_id'), $jobber->getDataValue('company_id')));
+}
 $appInfo = $runTemplate->getAppInfo();
 $apps = new Application($appInfo['app_id']);
 $instanceName = $appInfo['app_name'];
