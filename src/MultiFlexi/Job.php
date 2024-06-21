@@ -217,7 +217,7 @@ class Job extends Engine
                     'end' => new \Envms\FluentPDO\Literal(\Ease\Shared::cfg('DB_CONNECTION') == 'sqlite' ? "date('now')" : 'NOW()'),
                     'stdout' => addslashes($stdout),
                     'stderr' => addslashes($stderr),
-                    'app_ver' => $this->application->getDataValue('version'),
+                    'app_version' => $this->application->getDataValue('version'),
                     //'command' => $this->commandline,
                     'exitcode' => $statusCode
                         ], ['id' => $this->getMyKey()]);
