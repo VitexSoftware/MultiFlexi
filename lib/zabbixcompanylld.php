@@ -10,9 +10,9 @@
 namespace MultiFlexi;
 
 use \Ease\Anonym,
-    \Ease\Functions,
     \Ease\Shared,
     \MultiFlexi\Application;
+use MultiFlexi\Ui\ActionsChooser;
 
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
@@ -65,7 +65,7 @@ foreach ($runtemplates as $runtemplateData) {
             '{#COMPANY_NAME}' => $runtemplateData['company_name'],
             '{#COMPANY_CODE}' => $runtemplateData['company_code'],
             '{#COMPANY_SERVER}' => \Ease\Shared::cfg('ZABBIX_HOST'),
-            '{#DATA_ITEM}' => false
+            '{#DATA_ITEM}' => false //TODO
         ];
     } else {
         $ap2c->addStatusMessage('Application ' . $runtemplateData['app_id'] . ' is not assigned with company ?');
