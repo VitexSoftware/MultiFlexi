@@ -4,13 +4,12 @@
  * Multi Flexi - Company instance editor.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * @copyright  2020-2024 Vitex Software
  */
 
 namespace MultiFlexi\Ui;
 
 use Ease\Html\ATag;
-use Ease\TWB4\Panel;
 use Ease\TWB4\Row;
 use MultiFlexi\Company;
 
@@ -50,6 +49,7 @@ if ($oPage->isPosted()) {
     } else {
         $companies->addStatusMessage(_('Error deleting Company') . ' ' . $companies->getDataValue('name'), 'error');
     }
+    $companies->unsetDataValue('name');
 }
 
 $instanceName = $companies->getDataValue('name');
