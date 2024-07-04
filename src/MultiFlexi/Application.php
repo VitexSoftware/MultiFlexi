@@ -318,7 +318,7 @@ class Application extends Engine
                                     }
                                 }
                             }
-                            $this->addStatusMessage('🧩📦 ' . $importData['name'] . '(' . $currentVersion . '➟' . $newVersion . '): ' . implode(',', $fields), 'success');
+                            $this->addStatusMessage('🧩📦 ' . $importData['name'] . '(' . $currentVersion . ' ➟ ' . $newVersion . '): ' . implode(',', $fields), 'success');
                             $executable = Application::findBinaryInPath($this->getDataValue('executable'));
                             if (empty($executable)) {
                                 $this->addStatusMessage(sprintf(_('executable %s not found'), $this->getDataValue('executable')), 'warning');
