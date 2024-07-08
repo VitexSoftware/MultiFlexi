@@ -25,11 +25,10 @@ $companyEnver = new \MultiFlexi\CompanyEnv($companies->getMyKey());
 $jobber = new \MultiFlexi\Job();
 $jobber->setDataValue('company_id', $companies->getMyKey());
 
-
 $showOnly = WebPage::getRequestValue('showOnly');
 switch ($showOnly) {
     case 'failed':
-        $condition['exitcode'] = [255,128,1];
+        $condition['exitcode'] = [255, 128, 1];
         break;
     case 'unfinished':
         $condition['exitcode'] = -1;
@@ -42,21 +41,21 @@ switch ($showOnly) {
         break;
 }
 
-$jobs = $jobber->listingQuery()->select(['apps.name AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'job.executor', 'login', 'job.app_id AS app_id', 'runtemplate.id AS runtemplateid', 'schedule AS scheduled'], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->leftJoin('runtemplate ON runtemplate.company_id = job.company_id AND runtemplate.app_id = job.app_id')->where('job.company_id', $companies->getMyKey())->limit(20)->orderBy('job.id DESC')->where($condition)->fetchAll();
+$jobs = $jobber->listingQuery()->select(['apps.name AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'job.executor', 'login', 'job.app_id AS app_id', 'runtemplate.id AS runtemplate_id', 'runtemplate.name AS runtemplate_name', 'schedule AS scheduled'], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->leftJoin('runtemplate ON runtemplate.company_id = job.company_id AND runtemplate.app_id = job.app_id')->where('job.company_id', $companies->getMyKey())->limit(20)->orderBy('job.id DESC')->where($condition)->fetchAll();
 $jobList = new \Ease\TWB4\Table();
-$jobList->addRowHeaderColumns([_('Application'), _('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'), _('Launch now'), _('Launch in Background')]);
+$jobList->addRowHeaderColumns([_('Run template') . ' / ' . _('Application'), _('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'), _('Launch now'), _('Launch in Background')]);
 foreach ($jobs as $job) {
-    $job['appname'] = strlen($job['appname']) ? _($job['appname']) : 'n/a?!';
-    $job['launch'] = new \Ease\TWB4\LinkButton('launch.php?id=' . $job['runtemplateid'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg');
+    $job['appname'] = '<strong>' . (empty($job['runtemplate_name']) ? '#'.$job['runtemplate_id'] : $job['runtemplate_name']) . '</strong>&nbsp;/&nbsp;' . $job['appname'];
+    $job['launch'] = new \Ease\TWB4\LinkButton('launch.php?id=' . $job['runtemplate_id'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Launch') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg');
     if ($job['begin']) {
-        $job['schedule'] = new \Ease\TWB4\LinkButton('schedule.php?id=' . $job['runtemplateid'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Schedule') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
+        $job['schedule'] = new \Ease\TWB4\LinkButton('schedule.php?id=' . $job['runtemplate_id'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Schedule') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
     } else {
-        $job['schedule'] = new \Ease\TWB4\LinkButton('schedule.php?cancel=' . $job['id'] . '&templateid=' . $job['runtemplateid'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Cancel') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/cancel.svg', _('Cancel'), ['height' => '30px'])], 'danger btn-lg');
+        $job['schedule'] = new \Ease\TWB4\LinkButton('schedule.php?cancel=' . $job['id'] . '&templateid=' . $job['runtemplate_id'] . '&app_id=' . $job['app_id'] . '&company_id=' . $companies->getMyKey(), [_('Cancel') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/cancel.svg', _('Cancel'), ['height' => '30px'])], 'danger btn-lg');
     }
 
-    $job['appimage'] = new ATag('runtemplate.php?id=' . $job['runtemplateid'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], $job['appname'], ['height' => 50, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);
+    $job['appimage'] = new ATag('runtemplate.php?id=' . $job['runtemplate_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], $job['appname'], ['height' => 50, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);
     unset($job['appname']);
-    unset($job['runtemplateid']);
+    unset($job['runtemplate_id']);
     unset($job['app_id']);
     $job['id'] = new ATag('job.php?id=' . $job['id'], new \Ease\TWB4\Badge('info', $job['id']));
     if ($job['begin']) {
@@ -66,7 +65,7 @@ foreach ($jobs as $job) {
     }
     $job['exitcode'] = new ExitCode($job['exitcode']);
     $job['launched_by'] = [
-        new ExecutorImage($job['executor'], ['align' => 'right','height' => '50px']),
+        new ExecutorImage($job['executor'], ['align' => 'right', 'height' => '50px']),
         new \Ease\Html\DivTag($job['launched_by'] ? new \Ease\Html\ATag('user.php?id=' . $job['launched_by'], new \Ease\TWB4\Badge('info', $job['login'])) : _('Timer')),
         new \Ease\Html\DivTag($job['scheduled'])
     ];
