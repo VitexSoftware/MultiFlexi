@@ -34,6 +34,8 @@ class Configuration extends \Ease\SQL\Engine {
             $data = $this->getData();
         }
         $result = 0;
+        unset($data['id']);
+        unset($data['class']);
         unset($data['app_id']);
         unset($data['company_id']);
         unset($data['runtemplate_id']);
