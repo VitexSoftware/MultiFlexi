@@ -20,7 +20,9 @@ class ConfigRegistry extends AbstractMigration {
                 ->addColumn('company_id', 'integer', ['null' => false,'signed'=>false])
                 ->addColumn('key', 'string', ['length' => 64])
                 ->addColumn('value', 'string', ['length' => 1024])
-                ->addIndex(['app_id', 'company_id', 'key'], ['unique' => true])
+                ->addColumn('runtemplate_id', 'integer', ['null' => false,'signed'=>false])
+                ->addIndex(['app_id', 'company_id'])
+                ->addIndex(['runtemplate_id', 'key'], ['unique' => true])
                 ->addForeignKey('app_id', 'apps', ['id'], ['constraint' => 'cfg-app_must_exist'])
                 ->addForeignKey('company_id', 'company', ['id'], ['constraint' => 'cfg-company_must_exist'])
         ;
