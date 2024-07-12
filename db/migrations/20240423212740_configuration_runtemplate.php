@@ -21,7 +21,7 @@ final class ConfigurationRuntemplate extends AbstractMigration
     public function change(): void
     {
         $configs = $this->table('configuration');
-        if ($configs->hasColumn('runtemplate_id')) {
+        if ($configs->hasColumn('runtemplate_id') === false) {
             $configs
                     ->addColumn('runtemplate_id', 'integer', ['null' => true])
                     ->addIndex(['runtemplate_id'])
