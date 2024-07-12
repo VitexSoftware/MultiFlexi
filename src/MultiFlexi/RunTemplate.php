@@ -250,4 +250,23 @@ class RunTemplate extends Engine {
         }
         return $actions;
     }
+    
+    /**
+     * 
+     * @return \MultiFlexi\Application
+     */
+    public function getApplication()
+    {
+        return new Application($this->getDataValue('app_id'));
+    }
+
+    /**
+     * 
+     * @return \MultiFlexi\Company
+     */
+    public function getCompany()
+    {
+        return new Company($this->getDataValue('company_id'));
+    }
+    
 }
