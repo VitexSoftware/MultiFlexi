@@ -11,15 +11,18 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 $oPage->onlyForLogged();
-$app = new \MultiFlexi\Application(WebPage::getRequestValue('app_id', 'int'));
-$company = new \MultiFlexi\Company(WebPage::getRequestValue('company_id', 'int'));
+
+$runTemplate = new \MultiFlexi\RunTemplate(WebPage::getRequestValue('id', 'int'));
+
 $jobID = WebPage::getRequestValue('cancel', 'int');
 $oPage->addItem(new PageTop(_('Schedule Job')));
 
-if (is_null($app->getMyKey())) {
-    $oPage->container->addItem(new \Ease\TWB4\Alert('error', _('app_id not specified')));
-    $app->addStatusMessage(_('app_id not specified'), 'error');
+if (is_null($runTemplate->getMyKey())) {
+    $oPage->container->addItem(new \Ease\TWB4\Alert('error', _('RunTemplate id not specified')));
+    $runTemplate->addStatusMessage(_('RunTemplate id not specified'), 'error');
 } else {
+    $app = $runTemplate->getApplication();
+    $company = $runTemplate->getCompany();
     if (WebPage::isPosted()) {
         $jobber = new \MultiFlexi\Job();
         $when = WebPage::getRequestValue('when');
@@ -38,12 +41,6 @@ if (is_null($app->getMyKey())) {
                     }
                 }
             }
-        }
-
-        $runTemplate = new \MultiFlexi\RunTemplate();
-        if ($company->getMyKey() && $app->getMyKey()) {
-            $runTemplateId = $runTemplate->runTemplateID($app->getMyKey(), $company->getMyKey());
-            $runTemplate->setMyKey($runTemplateId);
         }
 
         $jobber->prepareJob($runTemplateId, $uploadEnv, '', \Ease\WebPage::getRequestValue('executor'));

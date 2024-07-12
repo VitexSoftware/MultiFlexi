@@ -36,7 +36,10 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         $runtemplateOptions->addColumn(6, new RuntemplateConfigForm($runtemplate));
         $intervalChoosen = $runtemplate->getDataValue('interv');
         $intervalChooser = new \MultiFlexi\Ui\IntervalChooser($runtemplateId . '_interval', $intervalChoosen, ['id' => $runtemplateId . '_interval', 'checked' => 'true', 'data-runtemplate' => $runtemplateId]);
-        $runtemplateOptions->addColumn(6, $intervalChooser);
+
+        $scheduleButton = new \Ease\TWB4\LinkButton('schedule.php?id=' . $runtemplateId, [_('Schedule') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
+        
+        $runtemplateOptions->addColumn(6, [$intervalChooser, $scheduleButton]);
         $nameInput = new \Ease\Html\ATag('#', $runtemplate->getRecordName(), ['class' => 'editable', 'id' => 'name', 'data-pk' => $runtemplate->getMyKey(), 'data-url' => 'runtemplatesave.php', 'data-title' => _('Update RunTemplate name')]);
         parent::__construct([new \Ease\Html\ATag('companyapp.php?app_id=' . $runtemplate->getDataValue('app_id') . '&company_id=' . $runtemplate->getDataValue('company_id'), '⚗️ '), $nameInput], 'inverse', $runtemplateOptions, new RuntemplateCloneForm($runtemplate));
         $this->includeJavaScript('js/bootstrap-editable.js');
