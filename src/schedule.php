@@ -43,7 +43,7 @@ if (is_null($runTemplate->getMyKey())) {
             }
         }
 
-        $jobber->prepareJob($runTemplateId, $uploadEnv, '', \Ease\WebPage::getRequestValue('executor'));
+        $jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, '', \Ease\WebPage::getRequestValue('executor'));
         $jobber->scheduleJobRun(new \DateTime($when));
 
         $oPage->container->addItem(new JobInfo($jobber));

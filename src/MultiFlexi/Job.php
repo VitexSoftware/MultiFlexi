@@ -261,10 +261,10 @@ class Job extends Engine {
         $appId = $this->runTemplate->getDataValue('app_id');
         $companyId = $this->runTemplate->getDataValue('company_id');
 
-        $this->application = new Application($appId);
+        $this->application = $this->runTemplate->getApplication();
         LogToSQL::singleton()->setApplication($appId);
 
-        $this->company = new Company($companyId);
+        $this->company = $this->runTemplate->getCompany();
 
         $this->environment = array_merge($this->getFullEnvironment(), $envOverride);
         $this->loadFromSQL($this->newJob($runTemplateId, $this->environment, $scheduled, $executor));
