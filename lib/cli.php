@@ -44,6 +44,9 @@ switch ($command) {
             case 'app':
                 $engine = new \MultiFlexi\Application(intval($identifier));
                 break;
+            case 'company':
+                $engine = new \MultiFlexi\Company(intval($identifier));
+                break;
             default :
                 echo $argv[0] . ' remove <sql row id>';
                 break;
@@ -66,6 +69,14 @@ switch ($command) {
                 }
                 $engine = new \MultiFlexi\Application(['executable' => strval($identifier), 'name'=>$property]);
                 break;
+            case 'company':
+                if(empty($identifier)){
+                    echo $argv[0] . " add company <code> <name>";
+                    exit;
+                }
+                $engine = new \MultiFlexi\Company(['code' => strval($identifier), 'name'=>$property]);
+                break;
+                
             default :
                 echo $argv[0] . ' add <name>';
                 break;
