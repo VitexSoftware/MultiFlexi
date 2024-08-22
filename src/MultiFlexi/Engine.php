@@ -30,7 +30,7 @@ class Engine extends \Ease\SQL\Engine
             $options['autoload'] = true;
         }
         parent::__construct($identifier, $options);
-        $this->setObjectName();
+        $this->setObjectName(get_class($this));
     }
 
     /**

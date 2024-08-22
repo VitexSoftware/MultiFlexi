@@ -16,7 +16,7 @@ use Ease\Shared;
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
 $loggers = ['syslog', '\MultiFlexi\LogToSQL', 'console'];
-if (\Ease\Shared::cfg('ZABBIX_SERVER') && \Ease\Shared::cfg('ZABBIX_HOST')  && class_exists('\MultiFlexi\LogToZabbix')) {
+if (\Ease\Shared::cfg('ZABBIX_SERVER') && \Ease\Shared::cfg('ZABBIX_HOST') && class_exists('\MultiFlexi\LogToZabbix')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
 
@@ -56,33 +56,46 @@ switch ($command) {
     case 'add':
         switch ($argument) {
             case 'user':
-                if(empty($identifier)) {
+                if (empty($identifier)) {
                     echo $argv[0] . " add user <login> <email>";
                     exit;
                 }
-                $engine = new \MultiFlexi\User(['login' => strval($identifier), 'email' => $property]);
+                $checkData = ['login' => strval($identifier), 'email' => $property];
+                $engine = new \MultiFlexi\User($checkData, ['autoload' => false]);
                 break;
             case 'app':
-                if(empty($identifier)) {
+                if (empty($identifier)) {
                     echo $argv[0] . " add app <executable> <name>";
                     exit;
                 }
-                $engine = new \MultiFlexi\Application(['executable' => strval($identifier), 'name' => $property]);
+                $checkData = ['executable' => strval($identifier), 'name' => $property];
+                $engine = new \MultiFlexi\Application($checkData, ['autoload' => false]);
                 break;
             case 'company':
-                if(empty($identifier)) {
+                if (empty($identifier)) {
                     echo $argv[0] . " add company <code> <name>";
                     exit;
                 }
-                $engine = new \MultiFlexi\Company(['code' => strval($identifier), 'name' => $property,'autoload' => 'false']);
+                $checkData = ['code' => strval($identifier)];
+                $engine = new \MultiFlexi\Company(['code' => strval($identifier), 'name' => $property], ['autoload' => false]);
                 break;
 
             default:
                 echo $argv[0] . ' add <name>';
                 break;
         }
-        $new = $engine->insertToSQL();
-        echo $new."\n";
+
+        $exists = $engine->getColumnsFromSQL(['id'], $checkData);
+        if (empty($exists)) {
+            try {
+                $engine->dbsync();
+            } catch (\PDOException $exc) {
+                echo $exc->getTraceAsString();
+            }
+        } else {
+            $engine->addStatusMessage('already exists');
+        }
+        echo json_encode($engine->getData()) . "\n";
         break;
 
     case 'list':
