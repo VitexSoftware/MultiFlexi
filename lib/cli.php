@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi Flexi - Cron Scheduled actions executor.
+ * MultiFlexi - Command Line Tool.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020-2024 Vitex Software
@@ -39,19 +39,20 @@ switch ($command) {
     case 'remove':
         switch ($argument) {
             case 'user':
-                $engine = new \MultiFlexi\User(is_numeric($identifier) ? intval($identifier) : $identifier );
+                $engine = new \MultiFlexi\User(is_numeric($identifier) ? intval($identifier) : $identifier);
                 break;
             case 'app':
                 $engine = new \MultiFlexi\Application(intval($identifier));
                 break;
             case 'company':
-                $engine = new \MultiFlexi\Company(is_numeric($identifier) ? intval($identifier) : ['code'=>$identifier], ['autoload'=>'true']);
+                $engine = new \MultiFlexi\Company(is_numeric($identifier) ? intval($identifier) : ['code' => $identifier], ['autoload' => 'true']);
                 break;
             default:
                 echo $argv[0] . ' remove <sql row id or other identifier>';
                 break;
         }
-        $engine->deleteFromSQL();
+        $name = $engine->getRecordName();
+        $engine->addStatusMessage(sprintf(_('%s name removal'), $name), $engine->deleteFromSQL() ? 'success' : 'error');
         break;
     case 'add':
         switch ($argument) {
@@ -77,7 +78,7 @@ switch ($command) {
                     exit;
                 }
                 $checkData = ['code' => strval($identifier)];
-                $engine = new \MultiFlexi\Company(['code' => strval($identifier), 'name' => $property], ['autoload' => false]);
+                $engine = new \MultiFlexi\Company(['code' => strval($identifier), 'name' => $property ? $property : $identifier], ['autoload' => false]);
                 break;
 
             default:
