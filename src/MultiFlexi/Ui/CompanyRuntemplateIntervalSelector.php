@@ -21,7 +21,7 @@ class CompanyRuntemplateIntervalSelector extends CompanyAppSelector
     private $intervalCode;
 
     /**
-     * 
+     *
      * @param type $company
      * @param type $identifier
      * @param type $enabled
@@ -38,7 +38,7 @@ class CompanyRuntemplateIntervalSelector extends CompanyAppSelector
         $runTemplate = new \MultiFlexi\RunTemplate();
         $companyRuntemplates = $runTemplate->getCompanyTemplates($this->companyId)->fetchAll('id');
         foreach ($companyRuntemplates as $id => $companyRuntemplate) {
-            if (empty($companyRuntemplate['name'])){
+            if (empty($companyRuntemplate['name'])) {
                 $companyRuntemplates[$id]['name'] = strval($id).' '.$companyRuntemplate['app_name'];
             }
             if ($companyRuntemplate['interv'] != 'n') {

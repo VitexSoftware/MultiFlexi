@@ -58,9 +58,9 @@ class Zabbix extends \MultiFlexi\CommonAction
      */
     public function perform()
     {
-        $me = \Ease\Shared::cfg('ZABBIX_HOST',gethostname());
+        $me = \Ease\Shared::cfg('ZABBIX_HOST', gethostname());
         $server = \Ease\Shared::cfg('ZABBIX_SERVER');
-        $zabbixKey = (empty($this->getDataValue('key'))||($this->getDataValue('key') == 'job-[{COMPANY_CODE}-{APP_CODE}-{RUNTEMPLATE_ID}-data]')) ? 'job-['.$this->job->company->getDataValue('code').'-'.$this->job->application->getDataValue('code').'-'.$this->job->runTemplate->getMyKey().'-data]' : $this->getDataValue('key');
+        $zabbixKey = (empty($this->getDataValue('key')) || ($this->getDataValue('key') == 'job-[{COMPANY_CODE}-{APP_CODE}-{RUNTEMPLATE_ID}-data]')) ? 'job-['.$this->job->company->getDataValue('code').'-'.$this->job->application->getDataValue('code').'-'.$this->job->runTemplate->getMyKey().'-data]' : $this->getDataValue('key');
         $dataForZabbix = null;
         $metricsfile = $this->getDataValue('metricsfile');
         if (empty($metricsfile)) {

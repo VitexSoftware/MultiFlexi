@@ -9,11 +9,10 @@
 
 namespace MultiFlexi\Ui;
 
-use Ease\TWB4\Label,
-
-    \Ease\TWB4\LinkButton,
-    \MultiFlexi\Application,
-    \MultiFlexi\Conffield;
+use Ease\TWB4\Label;
+use Ease\TWB4\LinkButton;
+use MultiFlexi\Application;
+use MultiFlexi\Conffield;
 
 /**
  * Registered AbraFlexi instance editor Form
@@ -40,7 +39,7 @@ class AppInfo extends \Ease\Html\DivTag
             new Label(($app->getDataValue('enabled') ? 'success' : 'danger'), ($app->getDataValue('enabled') ? _('Enabled') : _('Disabled')), ['style' => 'text-align: center; text-shadow: 1px 1px 2px white;']),
             new \Ease\Html\DivTag($app->getDataValue('enabled') ? $app->getDataValue('executable') : $app->getDataValue('deploy'), ['style' => 'font: 1.3rem Inconsolata, monospace; text-shadow: 0 0 5px #C8C8C8; color: white;'])
             ], 'md', ['style' => 'background-color: black; background-image: radial-gradient( rgba(250, 250, 250, 0.75), black 120% ); padding: 6px;']);
-//        $mainRow->addColumn(4, new AppLaunchForm($app, $companyId));
+        //        $mainRow->addColumn(4, new AppLaunchForm($app, $companyId));
         $mainRow->addColumn(4, new RuntemplateLaunchForm($app, $companyId));
         $mainRow->addColumn(4, new AppJobsTable($app->getMyKey(), $companyId));
 
@@ -49,10 +48,10 @@ class AppInfo extends \Ease\Html\DivTag
         ]);
 
         $this->addItem($mainRow);
-//        //$this->addItem();
-//
-//        $this->addItem();
-//        $this->addItem();
+        //        //$this->addItem();
+        //
+        //        $this->addItem();
+        //        $this->addItem();
         $this->addItem(new \Ease\Html\HrTag());
     }
 

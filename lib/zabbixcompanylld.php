@@ -9,9 +9,9 @@
 
 namespace MultiFlexi;
 
-use \Ease\Anonym,
-    \Ease\Shared,
-    \MultiFlexi\Application;
+use Ease\Anonym;
+use Ease\Shared;
+use MultiFlexi\Application;
 use MultiFlexi\Ui\ActionsChooser;
 
 require_once '../vendor/autoload.php';

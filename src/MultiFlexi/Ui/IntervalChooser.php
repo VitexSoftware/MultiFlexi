@@ -16,7 +16,6 @@ namespace MultiFlexi\Ui;
  */
 class IntervalChooser extends \Ease\Html\SelectTag
 {
-
     /**
      * Script run interval chooser
      *

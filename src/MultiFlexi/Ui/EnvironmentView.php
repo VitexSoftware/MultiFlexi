@@ -43,9 +43,9 @@ class EnvironmentView extends \Ease\Html\TableTag
                 $envData['value'] = preg_replace('(.)', '*', $envData['value']);
             }
 
-//            if(empty($envData['value'])){
-//TODO                $envData['value'] = new \Ease\TWB4\Badge('danger',_('Required'));
-//            }
+            //            if(empty($envData['value'])){
+            //TODO                $envData['value'] = new \Ease\TWB4\Badge('danger',_('Required'));
+            //            }
 
             $ns = array_key_exists('source', $envData) ? explode('\\', $envData['source']) : ['n/a'];
             $this->addRowColumns([new \Ease\Html\SpanTag($key, ['title' => array_key_exists('description', $envData) ? $envData['description'] : '']), $envData['value'], end($ns)]);

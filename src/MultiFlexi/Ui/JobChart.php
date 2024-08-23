@@ -109,11 +109,11 @@ class JobChart extends \Ease\Html\DivTag
         $graph->links($links);
 
         parent::__construct($graph->fetch('StackedBarGraph', false), $properties);
-//        $this->addJavaScript($graph->fetchJavascript());
+        //        $this->addJavaScript($graph->fetchJavascript());
     }
 
     /**
-     * 
+     *
      * @return \Envms\FluentPDO\Queries\Select
      */
     public function getJobs()

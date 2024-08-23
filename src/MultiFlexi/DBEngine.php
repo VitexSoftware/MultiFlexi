@@ -239,10 +239,10 @@ class DBEngine extends \Ease\SQL\Engine
             }
 
             if (
-                    isset($this->modifiedColumn) && !array_key_exists(
-                        $this->modifiedColumn,
-                        $columns
-                    )
+                isset($this->modifiedColumn) && !array_key_exists(
+                    $this->modifiedColumn,
+                    $columns
+                )
             ) {
                 $columns[$this->modifiedColumn] = ['name' => $this->modifiedColumn,
                     'type' => 'datetime',
@@ -250,10 +250,10 @@ class DBEngine extends \Ease\SQL\Engine
             }
 
             if (
-                    isset($this->createColumn) && !array_key_exists(
-                        $this->createColumn,
-                        $columns
-                    )
+                isset($this->createColumn) && !array_key_exists(
+                    $this->createColumn,
+                    $columns
+                )
             ) {
                 $columns[$this->createColumn] = ['name' => $this->createColumn, 'type' => 'datetime',
                     'label' => _('Created'), 'readonly' => true];
@@ -277,10 +277,10 @@ class DBEngine extends \Ease\SQL\Engine
         foreach ($columnsToFilter as $id => $values) {
             $columnName = $values['name'];
             if (
-                    !empty($this->defaults) && array_key_exists(
-                        $columnName,
-                        $this->defaults
-                    )
+                !empty($this->defaults) && array_key_exists(
+                    $columnName,
+                    $this->defaults
+                )
             ) {
                 $values['def'] = $this->defaults[$columnName];
             }
@@ -537,21 +537,21 @@ class DBEngine extends \Ease\SQL\Engine
                     //                    $field->validator(Validate::numeric(ValidateOptions::inst()->message(sprintf(_('A %s must be a nuber'),
                     //                                    $column['label']))));
                     break;
-                //                case 'upload':
-                //                    echo '';
-                //                    $field
-                //                        ->upload(
-                //                            Upload::inst($_SERVER['DOCUMENT_ROOT'].'/../files/__ID__.__EXTN__')
-                //                            ->db($this->getMyTable().'_file', $column['name'],
-                //                                ['filename' => Upload::DB_FILE_NAME,
-                //                                'created_at' => date('Y-m-d'),
-                //                                'filesavedas' => md5_file($_FILES['upload']['tmp_name']).'.'.pathinfo($_FILES['upload']['name'],
-                //                                    PATHINFO_EXTENSION),
-                //                                $this->getMyTable().'_id' => 0
-                ////                                'fileSize' => Upload::DB_FILE_SIZE
-                //                            ])
-                //                        )->setFormatter('Format::nullEmpty');
-                //                    break;
+                    //                case 'upload':
+                    //                    echo '';
+                    //                    $field
+                    //                        ->upload(
+                    //                            Upload::inst($_SERVER['DOCUMENT_ROOT'].'/../files/__ID__.__EXTN__')
+                    //                            ->db($this->getMyTable().'_file', $column['name'],
+                    //                                ['filename' => Upload::DB_FILE_NAME,
+                    //                                'created_at' => date('Y-m-d'),
+                    //                                'filesavedas' => md5_file($_FILES['upload']['tmp_name']).'.'.pathinfo($_FILES['upload']['name'],
+                    //                                    PATHINFO_EXTENSION),
+                    //                                $this->getMyTable().'_id' => 0
+                    ////                                'fileSize' => Upload::DB_FILE_SIZE
+                    //                            ])
+                    //                        )->setFormatter('Format::nullEmpty');
+                    //                    break;
                 default:
                     break;
             }
@@ -625,10 +625,10 @@ class DBEngine extends \Ease\SQL\Engine
     public function preprocessPost($formPost)
     {
         if (
-                array_key_exists('action', $formPost) && array_key_exists(
-                    'data',
-                    $formPost
-                )
+            array_key_exists('action', $formPost) && array_key_exists(
+                'data',
+                $formPost
+            )
         ) {
             foreach ($formPost['data'] as $recordId => $recordData) {
                 $formPost['data'][$recordId] = $this->prepareToSave(
@@ -688,11 +688,11 @@ class DBEngine extends \Ease\SQL\Engine
         if (is_array($row) && count($row)) {
             foreach ($row as $key => $value) {
                 if (
-                        $key == str_replace(
-                            $this->getMyTable() . '.',
-                            '',
-                            strtolower($this->myKeyColumn)
-                        )
+                    $key == str_replace(
+                        $this->getMyTable() . '.',
+                        '',
+                        strtolower($this->myKeyColumn)
+                    )
                 ) {
                     continue;
                 }
@@ -1418,10 +1418,10 @@ class DBEngine extends \Ease\SQL\Engine
             }
 
             if (
-                    array_key_exists('detailPage', $colProps) && array_key_exists(
-                        'idColumn',
-                        $colProps
-                    ) && array_key_exists($colName . '_id', $dataRowRaw)
+                array_key_exists('detailPage', $colProps) && array_key_exists(
+                    'idColumn',
+                    $colProps
+                ) && array_key_exists($colName . '_id', $dataRowRaw)
             ) {
                 $dataRowRaw[$colName] = '<a href="' . $colProps['detailPage'] . '?id=' . $dataRowRaw[$colName . '_id'] . '" class="alert-link text-light">' . $dataRowRaw[$colName] . '</a>';
             }

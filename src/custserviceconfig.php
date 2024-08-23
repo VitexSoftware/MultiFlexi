@@ -10,9 +10,9 @@ use MultiFlexi\Ui\WebPage;
 
 /**
  * Multi Flexi - Config fields editor.
- * 
+ *
  * @deprecated since version 1.14
- * 
+ *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020-2024 Vitex Software
  */

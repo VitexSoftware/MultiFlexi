@@ -199,6 +199,3 @@ function highlightColumn(filterColumn) {
     console.log(filterColumn);
 }
 
-
-
-

@@ -20,7 +20,7 @@ class Podman extends \Ease\Sand implements \MultiFlexi\executor
 {
     use \Ease\Logger\Logging;
 
-    const PULLCOMMAND = 'podman pull docker.io/vitexsoftware/debian:bookworm';
+    public const PULLCOMMAND = 'podman pull docker.io/vitexsoftware/debian:bookworm';
 
     public $job;
 
