@@ -39,16 +39,16 @@ switch ($command) {
     case 'remove':
         switch ($argument) {
             case 'user':
-                $engine = new \MultiFlexi\User(intval($identifier));
+                $engine = new \MultiFlexi\User(is_numeric($identifier) ? intval($identifier) : $identifier );
                 break;
             case 'app':
                 $engine = new \MultiFlexi\Application(intval($identifier));
                 break;
             case 'company':
-                $engine = new \MultiFlexi\Company(intval($identifier));
+                $engine = new \MultiFlexi\Company(is_numeric($identifier) ? intval($identifier) : ['code'=>$identifier], ['autoload'=>'true']);
                 break;
             default:
-                echo $argv[0] . ' remove <sql row id>';
+                echo $argv[0] . ' remove <sql row id or other identifier>';
                 break;
         }
         $engine->deleteFromSQL();
