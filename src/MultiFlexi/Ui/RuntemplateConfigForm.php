@@ -14,8 +14,8 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class RuntemplateConfigForm extends EngineForm {
-
+class RuntemplateConfigForm extends EngineForm
+{
     /**
      *
      * @var array
@@ -23,10 +23,11 @@ class RuntemplateConfigForm extends EngineForm {
     private $modulesEnv;
 
     /**
-     * 
+     *
      * @param \MultiFlexi\RunTemplate $engine
      */
-    public function __construct(\MultiFlexi\RunTemplate $engine) {
+    public function __construct(\MultiFlexi\RunTemplate $engine)
+    {
         parent::__construct($engine, null, ['method' => 'post', 'action' => 'runtemplate.php']);
         $values = $engine->getAppEnvironment();
         foreach (\MultiFlexi\Conffield::getAppConfigs($engine->getDataValue('app_id')) as $fieldInfo) {

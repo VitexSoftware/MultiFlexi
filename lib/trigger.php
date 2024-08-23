@@ -9,9 +9,9 @@
 
 namespace MultiFlexi;
 
-use \MultiFlexi\Company,
-    \Ease\Anonym,
-    \Ease\Shared;
+use MultiFlexi\Company;
+use Ease\Anonym;
+use Ease\Shared;
 
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
@@ -78,7 +78,7 @@ if ($companyId && $appId) {
     if (array_key_exists('f', $options) || array_key_exists('foreground', $options)) {
         $jobber->performJob();
     } else {
-        $jobber->scheduleJobRun(new \DateTime( (array_key_exists('schedule', $options) ? $options['schedule'] : '') . (array_key_exists('s', $options) ? $options['s'] : '') ));
+        $jobber->scheduleJobRun(new \DateTime((array_key_exists('schedule', $options) ? $options['schedule'] : '') . (array_key_exists('s', $options) ? $options['s'] : '')));
     }
 } else {
     echo "Arguments: \n" .

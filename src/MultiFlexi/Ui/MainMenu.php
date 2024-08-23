@@ -225,9 +225,9 @@ class MainMenu extends \Ease\Html\DivTag
      */
     public function finalize()
     {
-//        if (\Ease\Shared::user()->isLogged()) { //Authenticated user
-//            $this->addItem(new Breadcrumb());
-//        }
+        //        if (\Ease\Shared::user()->isLogged()) { //Authenticated user
+        //            $this->addItem(new Breadcrumb());
+        //        }
         if (!empty(\Ease\Shared::logger()->getMessages())) {
             WebPage::singleton()->addCss('
 #smdrag { height: 8px; 

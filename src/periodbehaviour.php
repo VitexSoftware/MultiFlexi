@@ -20,7 +20,7 @@ require_once './init.php';
 
 $oPage->onlyForLogged();
 
-$runTemplater = new RunTemplate(WebPage::getRequestValue('id','int'));
+$runTemplater = new RunTemplate(WebPage::getRequestValue('id', 'int'));
 
 $actions = new \MultiFlexi\ActionConfig();
 if (\Ease\WebPage::isPosted()) {

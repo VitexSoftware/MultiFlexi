@@ -19,7 +19,7 @@ $oPage->addItem(new PageTop(_('Archived Job Run')));
 $jobID = $oPage->getRequestValue('id', 'int');
 $jobber = new \MultiFlexi\Job($jobID);
 $runTemplate = new \MultiFlexi\RunTemplate($jobber->getDataValue('runtemplate_id'));
-if(is_null($runTemplate->getMyKey())){ // TODO: Remove 
+if(is_null($runTemplate->getMyKey())) { // TODO: Remove
     $runTemplate->setMyKey($runTemplate->runTemplateID($jobber->getDataValue('app_id'), $jobber->getDataValue('company_id')));
 }
 $appInfo = $runTemplate->getAppInfo();
@@ -48,7 +48,7 @@ $appPanel->headRow->addColumn(2, $relaunchButton);
 //$appPanel->headRow->addColumn(2, $nextButton);
 
 $oPage->container->addItem(
-        new CompanyPanel(new \MultiFlexi\Company($appInfo['company_id']), $appPanel)
+    new CompanyPanel(new \MultiFlexi\Company($appInfo['company_id']), $appPanel)
 );
 
 $oPage->addItem(new PageBottom());

@@ -9,10 +9,10 @@
 
 namespace MultiFlexi;
 
-use \MultiFlexi\Company,
-    \MultiFlexi\Configuration,
-    \Ease\Anonym,
-    \Ease\Shared;
+use MultiFlexi\Company;
+use MultiFlexi\Configuration;
+use Ease\Anonym;
+use Ease\Shared;
 
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
@@ -54,7 +54,7 @@ if ($interval) {
                     continue;
                 }
                 $jobber->prepareJob($servData['id'], [], Job::codeToInterval($interval));
-                $jobber->scheduleJobRun(new \DateTime($when));                
+                $jobber->scheduleJobRun(new \DateTime($when));
             }
             $jobber->addStatusMessage(sprintf(_('Executor interval %s end'), Job::codeToInterval($interval)), 'debug');
         }

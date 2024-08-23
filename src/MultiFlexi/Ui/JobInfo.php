@@ -44,15 +44,15 @@ class JobInfo extends \Ease\TWB4\Tabs
                 $job->getDataValue('end') ? new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job->getDataValue('end')))->getTimestamp())) : _('Not Yet Ended')]
         ]);
 
-//        $jobInfoRow->addColumn(1, [_('Commandline').'<br>', $job->getDataValue('command')]);
+        //        $jobInfoRow->addColumn(1, [_('Commandline').'<br>', $job->getDataValue('command')]);
 
         $launcher = new \MultiFlexi\User($job->getDataValue('launched_by'));
         $jobInfoRow->addColumn(1, [_('Launched by') . '<br>', $launcher->getMyKey() ? new \Ease\Html\ATag('user.php?id=' . $launcher->getMyKey(), new \Ease\TWB4\Badge('info', $launcher->getUserLogin())) : _('Timer')]);
 
         $this->addTab(_('Job') . ' ' . $job->getMyKey(), $jobInfoRow);
 
-//        $scheduler = new \MultiFlexi\Scheduler();
-//        $scheduled = $scheduler->listingQuery()->where('job', $job->getMyKey())->fetch();
+        //        $scheduler = new \MultiFlexi\Scheduler();
+        //        $scheduled = $scheduler->listingQuery()->where('job', $job->getMyKey())->fetch();
 
         $this->addTab(_('Environment'), new EnvironmentView($job->getEnv()));
     }

@@ -29,8 +29,8 @@ class Conffield extends \Ease\SQL\Engine
             unset($data['id']);
             $checked = true;
         }
-        
-        $data['required'] = array_key_exists('required', $data) && $data['required'] == 'on' ? 1 : 0; 
+
+        $data['required'] = array_key_exists('required', $data) && $data['required'] == 'on' ? 1 : 0;
         return $checked ? parent::takeData($data) : 0;
     }
 

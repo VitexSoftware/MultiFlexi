@@ -29,7 +29,3 @@ try {
     $oPage->addItem(new PageBottom());
     $oPage->draw();
 }
-
-
-
-

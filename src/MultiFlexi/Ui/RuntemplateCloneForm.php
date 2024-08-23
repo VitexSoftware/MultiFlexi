@@ -16,9 +16,8 @@ namespace MultiFlexi\Ui;
  */
 class RuntemplateCloneForm extends \Ease\TWB4\Form
 {
-
     /**
-     * 
+     *
      * @param \MultiFlexi\RunTemplate $runtemplate
      * @param array $formDivProperties
      * @param array $formContents

@@ -22,12 +22,12 @@ class RuntemplateLaunchForm extends \Ease\TWB4\Form
         parent::__construct(['name' => 'appLaunchForm', 'action' => 'newjob.php', 'method' => 'post', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']);
         $appId = $app->getMyKey();
 
-        
+
         $runtemplater = new \MultiFlexi\RunTemplate();
-        $runtemplates = $runtemplater->listingQuery()->where('company_id',$companyId)->where('app_id',$appId);
-        
-        $this->addItem(nl2br(print_r($runtemplates,true))); //TODO Choose Runtemplate
-        
+        $runtemplates = $runtemplater->listingQuery()->where('company_id', $companyId)->where('app_id', $appId);
+
+        $this->addItem(nl2br(print_r($runtemplates, true))); //TODO Choose Runtemplate
+
         $job = new \MultiFlexi\Job(['company_id' => $companyId, 'app_id' => $appId], ['autoload' => false]);
         $env = $job->getFullEnvironment();
 
@@ -37,7 +37,7 @@ class RuntemplateLaunchForm extends \Ease\TWB4\Form
         /* check if app requires upload fields */
         $appFields = \MultiFlexi\Conffield::getAppConfigs($appId);
 
-//        $this->addItem(new EnvironmentView($env));
+        //        $this->addItem(new EnvironmentView($env));
         $this->addItem("<hr>");
 
         /* for each upload field add file input */

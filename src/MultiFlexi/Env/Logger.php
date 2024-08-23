@@ -28,7 +28,7 @@ class Logger extends \MultiFlexi\Environmentor implements injector
     {
         return ['EASE_LOGGER'];
     }
-    
+
     /**
      *
      * @return array
@@ -38,8 +38,8 @@ class Logger extends \MultiFlexi\Environmentor implements injector
         // If Zabbix action is enabled log only to syslog
         $actions = $this->engine->runTemplate->getPostActions();
         $methods[] = 'syslog';
-        if(array_key_exists('Zabbix', $actions)){
-            if(!($actions['Zabbix']['success'] || $actions['Zabbix']['fail'])){
+        if(array_key_exists('Zabbix', $actions)) {
+            if(!($actions['Zabbix']['success'] || $actions['Zabbix']['fail'])) {
                 $methods[] = 'console';
             }
         } else {

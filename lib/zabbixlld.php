@@ -9,10 +9,10 @@
 
 namespace MultiFlexi;
 
-use \Ease\Anonym,
-    \Ease\Functions,
-    \Ease\Shared,
-    \MultiFlexi\Application;
+use Ease\Anonym;
+use Ease\Functions;
+use Ease\Shared;
+use MultiFlexi\Application;
 
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');

@@ -9,9 +9,9 @@
 
 namespace MultiFlexi;
 
-use \Ease\Anonym,
-    \Ease\Shared,
-    \MultiFlexi\Job;
+use Ease\Anonym;
+use Ease\Shared;
+use MultiFlexi\Job;
 
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');

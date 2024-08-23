@@ -298,7 +298,7 @@ class Application extends Engine
                     }
                 }
 
-                if (array_key_exists('topics', $importData) === false) {
+                if(array_key_exists('topics', $importData) === false) {
                     $this->addStatusMessage(_('Topics field not present. '), 'warning');
                 }
 

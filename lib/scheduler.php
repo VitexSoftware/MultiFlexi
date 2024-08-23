@@ -9,10 +9,10 @@
 
 namespace MultiFlexi;
 
-use \MultiFlexi\Company,
-    \MultiFlexi\Configuration,
-    \Ease\Anonym,
-    \Ease\Shared;
+use MultiFlexi\Company;
+use MultiFlexi\Configuration;
+use Ease\Anonym;
+use Ease\Shared;
 use GO\Scheduler;
 
 require_once '../vendor/autoload.php';

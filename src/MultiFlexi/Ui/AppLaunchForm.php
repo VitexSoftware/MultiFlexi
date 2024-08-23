@@ -31,7 +31,7 @@ class AppLaunchForm extends \Ease\TWB4\Form
         /* check if app requires upload fields */
         $appFields = \MultiFlexi\Conffield::getAppConfigs($appId);
 
-//        $this->addItem(new EnvironmentView($env));
+        //        $this->addItem(new EnvironmentView($env));
         $this->addItem("<hr>");
 
         /* for each upload field add file input */

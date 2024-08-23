@@ -27,14 +27,14 @@ class ActionConfig extends Engine
 {
     public $myTable = 'actionconfig';
 
-//        $table->addColumn('name', 'string', ['comment' => 'Module per company configurations'])
-//                ->addColumn('module', 'string', ['comment' => 'Configuration belongs to'])
-//                ->addColumn('key', 'string', ['comment' => 'Configuration Key'])
-//                ->addColumn('value', 'string', ['comment' => 'Configuration Value'])
-//                ->addColumn('mode', 'string', ['null' => true, 'length' => 10, 'default' => null, 'comment' => 'success, fail or empty'])
-//                ->addColumn('runtemplate_id', 'integer', ['null' => false])
-//                ->addColumn('DatSave', 'datetime', ['null' => true])
-//                ->addForeignKey('runtemplate_id', 'runtemplate', ['id'], ['constraint' => 'runtemplate_must_exist'])
+    //        $table->addColumn('name', 'string', ['comment' => 'Module per company configurations'])
+    //                ->addColumn('module', 'string', ['comment' => 'Configuration belongs to'])
+    //                ->addColumn('key', 'string', ['comment' => 'Configuration Key'])
+    //                ->addColumn('value', 'string', ['comment' => 'Configuration Value'])
+    //                ->addColumn('mode', 'string', ['null' => true, 'length' => 10, 'default' => null, 'comment' => 'success, fail or empty'])
+    //                ->addColumn('runtemplate_id', 'integer', ['null' => false])
+    //                ->addColumn('DatSave', 'datetime', ['null' => true])
+    //                ->addForeignKey('runtemplate_id', 'runtemplate', ['id'], ['constraint' => 'runtemplate_must_exist'])
 
     /**
      *

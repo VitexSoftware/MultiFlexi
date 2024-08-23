@@ -16,16 +16,15 @@ namespace MultiFlexi\Ui;
  */
 class RunTemplatePanel extends \Ease\TWB4\Panel
 {
-
     /**
-     * 
+     *
      * @var \MultiFlexi\RunTemplate
      */
     private $runtemplate;
 
     /**
      * Run Template Configuration panel
-     * 
+     *
      * @param \MultiFlexi\RunTemplate $runtemplate
      */
     public function __construct(\MultiFlexi\RunTemplate $runtemplate)
