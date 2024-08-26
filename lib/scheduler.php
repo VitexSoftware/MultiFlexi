@@ -57,7 +57,9 @@ if ($interval) {
         if (empty($appsForCompany) && ($interval != 'i')) {
             $companer->addStatusMessage(sprintf(_('No applications to run for %s in interval %s'), $company['name'], $interval), 'debug');
         } else {
-            $jobber->addStatusMessage(sprintf(_('%s Scheduler interval %s begin'), $company['name'], $interval), 'debug');
+            if (\Ease\Shared::cfg('APP_DEBUG') == 'true') {
+                $jobber->addStatusMessage(sprintf(_('%s Scheduler interval %s begin'), $company['name'], $interval), 'debug');
+            }
             foreach ($appsForCompany as $servData) {
                 if (!is_null($interval) && ($interval != $servData['interv'])) {
                     continue;
@@ -66,7 +68,9 @@ if ($interval) {
                 $jobber->scheduleJobRun(new \DateTime());
                 $jobber->addStatusMessage('🧩 #' . $jobber->application->getMyKey() . "\t" . $jobber->application->getRecordName() . ' - ' . sprintf(_('Launch now for 🏣 %s'), $company['name']));
             }
-            $jobber->addStatusMessage(sprintf(_('%s Scheduler interval %s end'), $company['name'], Job::codeToInterval($interval)), 'debug');
+            if (\Ease\Shared::cfg('APP_DEBUG') == 'true') {
+                $jobber->addStatusMessage(sprintf(_('%s Scheduler interval %s end'), $company['name'], Job::codeToInterval($interval)), 'debug');
+            }
         }
     }
 } else {
