@@ -19,6 +19,7 @@ use MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
  */
 class Job extends Engine
 {
+
     /**
      *
      * @var executor
@@ -123,7 +124,6 @@ class Job extends Engine
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
             $this->zabbixSender = new ZabbixSender(\Ease\Shared::cfg('ZABBIX_SERVER'));
         }
-        $this->setObjectName();
     }
 
     /**
@@ -201,7 +201,12 @@ class Job extends Engine
         $sqlLogger->setCompany(0);
         $sqlLogger->setApplication(0);
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
-            $this->reportToZabbix(['phase' => 'jobDone', 'stdout' => $stdout, 'stderr' => $stderr, 'exitcode' => $statusCode, 'end' => (new \DateTime())->format('Y-m-d H:i:s')]);
+            $result = '';
+            if(array_key_exists('RESULT_FILE', $this->executor->environment) && file_exists($this->executor->environment['RESULT_FILE']['value'])){
+                $result .= file_get_contents($this->executor->environment['RESULT_FILE']['value']);
+                unlink($this->executor->environment['RESULT_FILE']['value']);
+            }
+            $this->reportToZabbix(['phase' => 'jobDone', 'stdout' => $stdout, 'data' => $result, 'stderr' => $stderr, 'exitcode' => $statusCode, 'end' => (new \DateTime())->format('Y-m-d H:i:s')]);
         }
 
         $this->setData([
@@ -303,11 +308,11 @@ class Job extends Engine
                 $appInfo = $this->runTemplate->getAppInfo();
                 $appEnvironment = Environmentor::flatEnv($this->environment);
                 $process = new \Symfony\Component\Process\Process(
-                    explode(' ', $setupCommand),
-                    null,
-                    $appEnvironment,
-                    null,
-                    32767
+                        explode(' ', $setupCommand),
+                        null,
+                        $appEnvironment,
+                        null,
+                        32767
                 );
                 $result = $process->run(function ($type, $buffer) {
                     $logger = new Runner();
