@@ -116,6 +116,7 @@ class Job extends Engine
         $environment['JOB_ID']['value'] = $jobId;
         $this->environment = $environment;
         $this->updateToSQL(['env' => serialize($environment), 'command' => $this->getCmdline()], ['id' => $jobId]);
+
         return $jobId;
     }
 
@@ -332,13 +333,20 @@ EOD;
      *
      * @param array $messageData override fields
      */
-    public function reportToZabbix($messageData): void
+    public function reportToZabbix($messageData): bool
     {
         $packet = new ZabbixPacket();
         $hostname = \Ease\Shared::cfg('ZABBIX_HOST');
         $this->zabbixMessageData = array_merge($this->zabbixMessageData, $messageData);
         $packet->addMetric((new ZabbixMetric('job-['.$this->company->getDataValue('code').'-'.$this->application->getDataValue('code').'-'.$this->runTemplate->getMyKey().']', json_encode($this->zabbixMessageData)))->withHostname($hostname));
-        $this->zabbixSender->send($packet);
+
+        try {
+            $result = $this->zabbixSender->send($packet);
+        } catch (\Exception $exc) {
+            $result = false;
+        }
+
+        return $result;
     }
 
     /**

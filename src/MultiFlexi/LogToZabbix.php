@@ -35,7 +35,7 @@ class LogToZabbix implements \Ease\Logger\Loggingable
     /**
      * @var ZabbixSender Sender Object
      */
-    public ZabbixSender $sender = null;
+    public ZabbixSender $sender;
 
     /**
      * Saves obejct instace (singleton...).
