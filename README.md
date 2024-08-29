@@ -1,4 +1,4 @@
-Multi Flexi
+MultiFlexi
 ===========
 
 ![MFB](multiflexi-social-preview.svg?raw=true)
@@ -74,7 +74,7 @@ Jako plugin je možné použít jakýkoliv spustitelný skript nebo binárku. Uv
 
 |Jméno|Popis|Domovská stránka|
 |-----|-----|----------------|
-|Multi Flexi Sonda|Testovací nástroj spouštěče úloh|https://github.com/VitexSoftware/MultiFlexi|
+|MultiFlexi Sonda|Testovací nástroj spouštěče úloh|https://github.com/VitexSoftware/MultiFlexi|
 |Email Importer|Načítá doklady z mailboxu do FlexiBee|https://github.com/VitexSoftware/AbraFlexi-email-importer|
 |discomp2abraflexi|Import Pricelist from Discomp to AbraFlexi|https://github.com/Spoje-NET/discomp2abraflexi|
 |AbraFlexi Revolut statements import|Import Revolut bank statemetnts into AbraFlexi|https://github.com/VitexSoftware/AbraFlexi-Revolut|

@@ -18,7 +18,7 @@ namespace MultiFlexi;
 use Ease\SQL\Orm;
 
 /**
- * Multi Flexi - Instance Management Class.
+ * MultiFlexi - Instance Management Class.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2015-2023 Vitex Software
@@ -38,7 +38,6 @@ class User extends \Ease\User
         'lastname' => [],
         'email' => [],
     ];
-
     public array $filter = [];
 
     /**
@@ -57,19 +56,9 @@ class User extends \Ease\User
     public string $lastModifiedColumn = 'DatSave';
 
     /**
-     * Budeme používat serializovaná nastavení uložená ve sloupečku.
-     */
-    public string $settingsColumn = 'settings';
-
-    /**
-     * Klíčové slovo.
+     * Engine Keyword.
      */
     public string $keyword = 'user';
-
-    /**
-     * Jmenný sloupec.
-     */
-    public string $nameColumn = 'login';
 
     /**
      * MultiFlexi User.
@@ -78,11 +67,21 @@ class User extends \Ease\User
      */
     public function __construct($userID = null)
     {
+        $this->settingsColumn = 'settings';
+        $this->nameColumn = 'login';
+
         if ($userID) {
             $this->setKeyColumn(is_numeric($userID) ? 'id' : 'login');
             $this->loadFromSQL($userID);
             parent::__construct($this->getDataValue('id'));
         }
+
+        $this->nameColumn = 'login';
+    }
+
+    public function getNameColumn()
+    {
+        return 'login';
     }
 
     /**

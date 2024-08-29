@@ -16,18 +16,22 @@ declare(strict_types=1);
 namespace MultiFlexi;
 
 /**
- * Multi Flexi - Customer Management Class.
+ * MultiFlexi - Customer Management Class.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2023 Vitex Software
+ * @copyright  2018-2024 VitexSoftware
  */
 class Customer extends DBEngine
 {
-    public $nameColumn = 'login';
-    public $myTable = 'customer';
-    public $keyword = 'customer';
-    public $createColumn = 'DatCreate';
-    public $modifiedColumn = 'DatSave';
+    public function __construct($init = null, $filter = [])
+    {
+        $this->nameColumn = 'login';
+        $this->myTable = 'customer';
+        $this->keyword = 'customer';
+        $this->createColumn = 'DatCreate';
+        $this->modifiedColumn = 'DatSave';
+        parent::__construct($init, $filter);
+    }
 
     /**
      * Serialize only data storage.

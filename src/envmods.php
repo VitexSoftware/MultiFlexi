@@ -19,7 +19,7 @@ require_once './init.php';
 
 $oPage->onlyForLogged();
 
-$oPage->addItem(new PageTop(_('Multi Flexi - Environment Modules')));
+$oPage->addItem(new PageTop(_('MultiFlexi - Environment Modules')));
 
 $oPage->container->addItem(new \Ease\TWB4\Panel(new \Ease\Html\H2Tag(_('Installed Environment Modules')), 'default', new EnvModulesListing()));
 

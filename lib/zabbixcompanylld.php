@@ -1,38 +1,46 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Zabbix Low Level Discovery for SERVER.COMPANY
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2024 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi;
 
 use Ease\Anonym;
 use Ease\Shared;
-use MultiFlexi\Application;
 use MultiFlexi\Ui\ActionsChooser;
 
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
 $loggers = ['syslog', '\MultiFlexi\LogToSQL'];
+
 if (\Ease\Shared::cfg('ZABBIX_SERVER') && \Ease\Shared::cfg('ZABBIX_HOST') && class_exists('\MultiFlexi\LogToZabbix')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
-define('EASE_LOGGER', implode('|', $loggers));
+
+\define('EASE_LOGGER', implode('|', $loggers));
 Shared::user(new Anonym());
 
-$venue = array_key_exists(1, $argv) ? $argv[1] : '';
+$venue = \array_key_exists(1, $argv) ? $argv[1] : '';
 
-if ($venue == '-h') {
+if ($venue === '-h') {
     echo _('multiflexi-zabbix-lld [SERVER.COMPANY_CODE]');
-    exit();
+
+    exit;
 }
 
 $argParts = explode('.', $venue);
-$companyCode = $argParts[count($argParts) - 1];
-$server = str_replace('.' . $companyCode, '', $venue);
+$companyCode = $argParts[\count($argParts) - 1];
+$server = str_replace('.'.$companyCode, '', $venue);
 
 $lldData = [];
 $ap2c = new \MultiFlexi\RunTemplate();
@@ -50,11 +58,11 @@ $succesActions = ActionsChooser::toggles('success');
 $failActions = ActionsChooser::toggles('fail');
 
 foreach ($runtemplates as $runtemplateData) {
-    if (strlen($companyCode) && $companyCode != $runtemplateData['company_code']) {
+    if (\strlen($companyCode) && $companyCode !== $runtemplateData['company_code']) {
         continue;
     }
 
-    if (array_key_exists($runtemplateData['app_id'], $appsAssigned)) {
+    if (\array_key_exists($runtemplateData['app_id'], $appsAssigned)) {
         $lldData[] = [
             '{#APPNAME}' => $appsAssigned[$runtemplateData['app_id']]['name'],
             '{#APPNAME_CODE}' => $appsAssigned[$runtemplateData['app_id']]['code'],
@@ -65,12 +73,11 @@ foreach ($runtemplates as $runtemplateData) {
             '{#COMPANY_NAME}' => $runtemplateData['company_name'],
             '{#COMPANY_CODE}' => $runtemplateData['company_code'],
             '{#COMPANY_SERVER}' => \Ease\Shared::cfg('ZABBIX_HOST'),
-            '{#DATA_ITEM}' => false //TODO
+            '{#DATA_ITEM}' => false, // TODO
         ];
     } else {
-        $ap2c->addStatusMessage('Application ' . $runtemplateData['app_id'] . ' is not assigned with company ?');
+        $ap2c->addStatusMessage('Application '.$runtemplateData['app_id'].' is not assigned with company ?');
     }
 }
 
-
-echo json_encode($lldData, JSON_PRETTY_PRINT);
+echo json_encode($lldData, \JSON_PRETTY_PRINT);

@@ -1,25 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Scheduled actions executor.
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2024 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi;
 
 require_once '../vendor/autoload.php';
 \Ease\Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
-$daemonize = boolval(\Ease\Shared::cfg('MULTIFLEXI_DAEMONIZE', true));
+$daemonize = (bool) \Ease\Shared::cfg('MULTIFLEXI_DAEMONIZE', true);
 $loggers = ['syslog', '\MultiFlexi\LogToSQL'];
-if (\Ease\Shared::cfg('ZABBIX_SERVER') && \Ease\Shared::cfg('ZABBIX_HOST')  && class_exists('\MultiFlexi\LogToZabbix')) {
+
+if (\Ease\Shared::cfg('ZABBIX_SERVER') && \Ease\Shared::cfg('ZABBIX_HOST') && class_exists('\MultiFlexi\LogToZabbix')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
-if (\Ease\Shared::cfg('APP_DEBUG') == 'true') {
+
+if (\Ease\Shared::cfg('APP_DEBUG') === 'true') {
     $loggers[] = 'console';
 }
-define('EASE_LOGGER', implode('|', $loggers));
+
+\define('EASE_LOGGER', implode('|', $loggers));
 \Ease\Shared::user(new \Ease\Anonym());
 
 $scheduler = new Scheduler();
@@ -32,8 +41,9 @@ do {
         $scheduler->deleteFromSQL($scheduledJob['id']);
         $job->cleanUp();
     }
+
     if ($daemonize) {
-        sleep(\Ease\Shared::cfg("MULTIFLEXI_CYCLE_PAUSE", 10));
+        sleep(\Ease\Shared::cfg('MULTIFLEXI_CYCLE_PAUSE', 10));
     }
 } while ($daemonize);
 

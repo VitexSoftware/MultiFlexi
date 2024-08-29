@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi Flexi - Send Log message to Zabbix.
+ * MultiFlexi - Send Log message to Zabbix.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023-2024 Vitex Software

@@ -18,17 +18,12 @@ namespace MultiFlexi\Ui;
 class BootstrapMenu extends \Ease\TWB4\Navbar
 {
     /**
-     * Navigace.
+     * Navigation.
      */
-    public \Ease\Html\UlTag $nav = null;
+    public ?\Ease\Html\UlTag $nav = null;
 
     /**
-     * Brand icon link.
-     */
-    public string $mainpage = 'main.php';
-
-    /**
-     * Hlavní menu aplikace.
+     * Application Main Menu.
      *
      * @param string $name
      * @param mixed  $content
@@ -39,6 +34,7 @@ class BootstrapMenu extends \Ease\TWB4\Navbar
         $content = null,
         $properties = []
     ) {
+        $this->mainpage = 'main.php';
         parent::__construct(new \Ease\Html\ImgTag('images/project-logo.svg', $name, ['width' => 30, 'height' => 30, 'class' => 'img-rounded d-inline-block align-top']), 'main-menu', ['class' => 'navbar-fixed-top'.(\array_key_exists('class', $properties) ? $properties['class'] : '')]);
 
         if (\Ease\Shared::user()->isLogged() === false) {

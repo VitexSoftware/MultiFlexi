@@ -19,7 +19,7 @@ require_once './init.php';
 
 $oPage->onlyForLogged();
 
-$oPage->addItem(new PageTop(_('Multi Flexi')));
+$oPage->addItem(new PageTop(_('MultiFlexi')));
 
 $oPage->container->addItem(new ConfigurationWizard(new \MultiFlexi\Company(WebPage::getRequestValue('company', 'int'))));
 

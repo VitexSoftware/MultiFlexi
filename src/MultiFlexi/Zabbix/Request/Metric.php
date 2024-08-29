@@ -21,11 +21,8 @@ namespace MultiFlexi\Zabbix\Request;
 class Metric implements \JsonSerializable
 {
     private string $itemKey;
-
     private string $itemValue;
-
     private string $hostname;
-
     private int $timestamp;
 
     public function __construct(

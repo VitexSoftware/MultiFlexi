@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace MultiFlexi\Pohoda;
 
 /**
- * Multi Flexi - Pohoda Company.
+ * MultiFlexi - Pohoda Company.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software

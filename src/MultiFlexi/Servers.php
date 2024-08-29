@@ -16,34 +16,27 @@ declare(strict_types=1);
 namespace MultiFlexi;
 
 /**
- * Multi Flexi - Instance Management Class.
+ * MultiFlexi - Instance Management Class.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020-2023 Vitex Software
  */
 class Servers extends DBEngine
 {
-    public $keyword = 'server';
-
-    /**
-     * Column with name of record.
-     */
-    public string $nameColumn = 'name';
-
-    /**
-     * We Work With Table.
-     */
-    public string $myTable = 'servers';
-
-    /**
-     * Column with record create time.
-     */
-    public string $createColumn = 'DatCreate';
+    public ?string $keyword = 'server';
 
     /**
      * Column with last record upadate time.
      */
-    public string $modifiedColumn = 'DatSave';
+    public ?string $modifiedColumn = 'DatSave';
+
+    public function __construct($init = null, $filter = [])
+    {
+        $this->myTable = 'servers';
+        $this->createColumn = 'DatCreate';
+        $this->nameColumn = 'name';
+        parent::__construct($init, $filter);
+    }
 
     /**
      * Filter Input data.

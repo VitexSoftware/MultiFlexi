@@ -52,6 +52,11 @@ class Engine extends \Ease\SQL\Engine
         return parent::setMyKey($key) && $this->setObjectName();
     }
 
+    public function getNameColumn()
+    {
+        return $this->nameColumn;
+    }
+
     /**
      * Save data.
      *

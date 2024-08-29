@@ -43,7 +43,7 @@ Vagrant.configure("2") do |config|
     php-devconf
     phpenmod xdebug
     
-    echo '<a href="multiflexi?login=demo&password=demo">Multi Flexi</a><?php phpinfo();' > /var/www/html/index.php
+    echo '<a href="multiflexi?login=demo&password=demo">MultiFlexi</a><?php phpinfo();' > /var/www/html/index.php
     rm -rf /var/www/html/index.html
 
     apache2ctl restart

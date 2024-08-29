@@ -23,16 +23,11 @@ namespace MultiFlexi;
 abstract class CommonAction extends \Ease\Sand
 {
     use \Ease\Logger\Logging;
-
     public Job $job;
-
     public string $stdin;
-
     public string $stdout;
-
     public string $stderr;
     public $environment = [];
-
     public array $outputCache = [];
 
     /**

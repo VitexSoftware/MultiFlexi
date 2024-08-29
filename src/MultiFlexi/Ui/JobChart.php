@@ -133,6 +133,6 @@ class JobChart extends \Ease\Html\DivTag
      */
     public function getJobs()
     {
-        return $this->engine->listingQuery()->select(['begin', 'exitcode'], 1)->order('begin');
+        return $this->engine->listingQuery()->select(['begin', 'exitcode'], true)->order('begin');
     }
 }

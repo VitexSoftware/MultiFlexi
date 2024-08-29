@@ -18,7 +18,7 @@ namespace MultiFlexi\Ui;
 use MultiFlexi\Configuration;
 
 /**
- * Multi Flexi - Config fields editor.
+ * MultiFlexi - Config fields editor.
  *
  * @deprecated since version 1.14
  *
