@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi;
 
 use MultiFlexi\RunTemplate;
@@ -9,10 +22,7 @@ use MultiFlexi\RunTemplate;
  */
 class RunTemplateTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var RunTemplate
-     */
-    protected $object;
+    protected RunTemplate $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class RunTemplateTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\RunTemplate::runTemplateID
+     * @covers \MultiFlexi\RunTemplate::runTemplateID
+     *
      * @todo   Implement testrunTemplateID().
      */
-    public function testrunTemplateID()
+    public function testrunTemplateID(): void
     {
         $this->assertEquals('', $this->object->runTemplateID());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class RunTemplateTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\RunTemplate::setState
+     * @covers \MultiFlexi\RunTemplate::setState
+     *
      * @todo   Implement testsetState().
      */
-    public function testsetState()
+    public function testsetState(): void
     {
         $this->assertEquals('', $this->object->setState());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class RunTemplateTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\RunTemplate::performInit
+     * @covers \MultiFlexi\RunTemplate::performInit
+     *
      * @todo   Implement testperformInit().
      */
-    public function testperformInit()
+    public function testperformInit(): void
     {
         $this->assertEquals('', $this->object->performInit());
         // Remove the following lines when you implement this test.
@@ -66,10 +78,11 @@ class RunTemplateTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\RunTemplate::deleteFromSQL
+     * @covers \MultiFlexi\RunTemplate::deleteFromSQL
+     *
      * @todo   Implement testdeleteFromSQL().
      */
-    public function testdeleteFromSQL()
+    public function testdeleteFromSQL(): void
     {
         $this->assertEquals('', $this->object->deleteFromSQL());
         // Remove the following lines when you implement this test.
@@ -77,10 +90,11 @@ class RunTemplateTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\RunTemplate::getCompanyEnvironment
+     * @covers \MultiFlexi\RunTemplate::getCompanyEnvironment
+     *
      * @todo   Implement testgetCompanyEnvironment().
      */
-    public function testgetCompanyEnvironment()
+    public function testgetCompanyEnvironment(): void
     {
         $this->assertEquals('', $this->object->getCompanyEnvironment());
         // Remove the following lines when you implement this test.
@@ -88,10 +102,11 @@ class RunTemplateTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\RunTemplate::getAppEnvironment
+     * @covers \MultiFlexi\RunTemplate::getAppEnvironment
+     *
      * @todo   Implement testgetAppEnvironment().
      */
-    public function testgetAppEnvironment()
+    public function testgetAppEnvironment(): void
     {
         $this->assertEquals('', $this->object->getAppEnvironment());
         // Remove the following lines when you implement this test.
@@ -99,10 +114,11 @@ class RunTemplateTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\RunTemplate::getAppInfo
+     * @covers \MultiFlexi\RunTemplate::getAppInfo
+     *
      * @todo   Implement testgetAppInfo().
      */
-    public function testgetAppInfo()
+    public function testgetAppInfo(): void
     {
         $this->assertEquals('', $this->object->getAppInfo());
         // Remove the following lines when you implement this test.
@@ -110,10 +126,11 @@ class RunTemplateTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\RunTemplate::setEnvironment
+     * @covers \MultiFlexi\RunTemplate::setEnvironment
+     *
      * @todo   Implement testsetEnvironment().
      */
-    public function testsetEnvironment()
+    public function testsetEnvironment(): void
     {
         $this->assertEquals('', $this->object->setEnvironment());
         // Remove the following lines when you implement this test.
@@ -121,10 +138,11 @@ class RunTemplateTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\RunTemplate::getAppsForCompany
+     * @covers \MultiFlexi\RunTemplate::getAppsForCompany
+     *
      * @todo   Implement testgetAppsForCompany().
      */
-    public function testgetAppsForCompany()
+    public function testgetAppsForCompany(): void
     {
         $this->assertEquals('', $this->object->getPeriodAppsForCompany());
         // Remove the following lines when you implement this test.
@@ -132,10 +150,11 @@ class RunTemplateTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\RunTemplate::setProvision
+     * @covers \MultiFlexi\RunTemplate::setProvision
+     *
      * @todo   Implement testsetProvision().
      */
-    public function testsetProvision()
+    public function testsetProvision(): void
     {
         $this->assertEquals('', $this->object->setProvision());
         // Remove the following lines when you implement this test.

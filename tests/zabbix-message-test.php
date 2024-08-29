@@ -1,27 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Logging (to Zabbix) tester
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2024 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi;
 
-use \Ease\Anonym,
-    \Ease\Functions,
-    \Ease\Shared,
-    \MultiFlexi\Job;
+use Ease\Anonym;
+use Ease\Functions;
+use Ease\Shared;
 
-define('APP_NAME', 'ZabbixTester');
+\define('APP_NAME', 'ZabbixTester');
+
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
 $loggers = ['console', 'syslog', '\MultiFlexi\LogToSQL'];
+
 if (Functions::cfg('ZABBIX_SERVER')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
-} 
-define('EASE_LOGGER', implode('|', $loggers));
+}
+
+\define('EASE_LOGGER', implode('|', $loggers));
 Shared::user(new Anonym());
 $jobber = new Job();
 

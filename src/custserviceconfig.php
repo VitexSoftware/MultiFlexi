@@ -1,12 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace MultiFlexi\Ui;
 
 use MultiFlexi\Configuration;
-use MultiFlexi\Ui\CustomAppConfigForm;
-use MultiFlexi\Ui\PageBottom;
-use MultiFlexi\Ui\PageTop;
-use MultiFlexi\Ui\WebPage;
 
 /**
  * Multi Flexi - Config fields editor.
@@ -27,12 +36,12 @@ $configurator = new Configuration(['app_id' => $appId, 'company_id' => $companyI
 $configurator->setDataValue('app_id', $appId);
 
 if ($oPage->isPosted()) {
-    if ($configurator->takeData($_POST) && !is_null($configurator->saveToSQL())) {
+    if ($configurator->takeData($_POST) && null !== $configurator->saveToSQL()) {
         $configurator->addStatusMessage(_('Config fields Saved'), 'success');
     } else {
         $configurator->addStatusMessage(
             _('Error saving Config fields'),
-            'error'
+            'error',
         );
     }
 }
@@ -44,7 +53,7 @@ $runTemplater->loadFromSQL($runTemplater->runTemplateID($appId, $companyId));
 
 $appPanel = new ApplicationPanel($app, new CustomAppConfigForm($configurator));
 
-$runTemplateButton = new \Ease\TWB4\LinkButton('runtemplate.php?id=' . $runTemplater->getMyKey(), '⚗️&nbsp;' . _('Run Template'), 'dark btn-lg btn-block');
+$runTemplateButton = new \Ease\TWB4\LinkButton('runtemplate.php?id='.$runTemplater->getMyKey(), '⚗️&nbsp;'._('Run Template'), 'dark btn-lg btn-block');
 $appPanel->headRow->addColumn(2, $runTemplateButton);
 
 $oPage->container->addItem(new CompanyPanel($company, $appPanel));

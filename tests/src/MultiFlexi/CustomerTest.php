@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi;
 
 use MultiFlexi\Customer;
@@ -9,10 +22,7 @@ use MultiFlexi\Customer;
  */
 class CustomerTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var Customer
-     */
-    protected $object;
+    protected Customer $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Customer::getUserName
+     * @covers \MultiFlexi\Customer::getUserName
+     *
      * @todo   Implement testgetUserName().
      */
-    public function testgetUserName()
+    public function testgetUserName(): void
     {
         $this->assertEquals('', $this->object->getUserName());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Customer::columns
+     * @covers \MultiFlexi\Customer::columns
+     *
      * @todo   Implement testcolumns().
      */
-    public function testcolumns()
+    public function testcolumns(): void
     {
         $this->assertEquals('', $this->object->columns());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Customer::__sleep
+     * @covers \MultiFlexi\Customer::__sleep
+     *
      * @todo   Implement test__sleep().
      */
-    public function test__sleep()
+    public function testSleep(): void
     {
         $this->assertEquals('', $this->object->__sleep());
         // Remove the following lines when you implement this test.

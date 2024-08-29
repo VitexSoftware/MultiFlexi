@@ -1,38 +1,33 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace MultiFlexi\Zabbix\Request;
 
 /**
- * Metric class - represents a Zabbix item (key and value)
+ * Metric class - represents a Zabbix item (key and value).
  */
 class Metric implements \JsonSerializable
 {
-    /**
-     * @var string
-     */
-    private $itemKey;
+    private string $itemKey;
 
-    /**
-     * @var string
-     */
-    private $itemValue;
+    private string $itemValue;
 
-    /**
-     * @var string
-     */
-    private $hostname;
+    private string $hostname;
 
-    /**
-     * @var int
-     */
-    private $timestamp;
+    private int $timestamp;
 
-
-    /**
-     *
-     * @param string $itemKey
-     * @param string $itemValue
-     */
     public function __construct(
         string $itemKey,
         string $itemValue
@@ -44,29 +39,26 @@ class Metric implements \JsonSerializable
     }
 
     /**
-     * Add custom hostname to metric
-     *
-     * @param string $hostname
+     * Add custom hostname to metric.
      */
     public function withHostname(string $hostname)
     {
         $this->hostname = $hostname;
+
         return $this;
     }
 
     /**
-     * Add custom timestamp to metric
-     *
-     * @param int $timestamp
+     * Add custom timestamp to metric.
      */
     public function withTimestamp(int $timestamp)
     {
         $this->timestamp = $timestamp;
+
         return $this;
     }
 
     /**
-     *
      * @return mixed
      */
     #[\ReturnTypeWillChange]
@@ -76,7 +68,7 @@ class Metric implements \JsonSerializable
             'host' => $this->hostname,
             'key' => $this->itemKey,
             'value' => $this->itemValue,
-            'clock' => $this->timestamp
+            'clock' => $this->timestamp,
         ];
     }
 }

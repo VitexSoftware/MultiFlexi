@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi\Ui;
 
 use MultiFlexi\Ui\DBDataTable;
@@ -9,10 +22,7 @@ use MultiFlexi\Ui\DBDataTable;
  */
 class DBDataTableTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var DBDataTable
-     */
-    protected $object;
+    protected DBDataTable $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class DBDataTableTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Ui\DBDataTable::getDateColumns
+     * @covers \MultiFlexi\Ui\DBDataTable::getDateColumns
+     *
      * @todo   Implement testgetDateColumns().
      */
-    public function testgetDateColumns()
+    public function testgetDateColumns(): void
     {
         $this->assertEquals('', $this->object->getDateColumns());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class DBDataTableTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\DBDataTable::prepareColumns
+     * @covers \MultiFlexi\Ui\DBDataTable::prepareColumns
+     *
      * @todo   Implement testprepareColumns().
      */
-    public function testprepareColumns()
+    public function testprepareColumns(): void
     {
         $this->assertEquals('', $this->object->prepareColumns());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class DBDataTableTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\DBDataTable::finalize
+     * @covers \MultiFlexi\Ui\DBDataTable::finalize
+     *
      * @todo   Implement testfinalize().
      */
-    public function testfinalize()
+    public function testfinalize(): void
     {
         $this->assertEquals('', $this->object->finalize());
         // Remove the following lines when you implement this test.
@@ -66,10 +78,11 @@ class DBDataTableTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\DBDataTable::getUri
+     * @covers \MultiFlexi\Ui\DBDataTable::getUri
+     *
      * @todo   Implement testgetUri().
      */
-    public function testgetUri()
+    public function testgetUri(): void
     {
         $this->assertEquals('', $this->object->getUri());
         // Remove the following lines when you implement this test.
@@ -77,10 +90,11 @@ class DBDataTableTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\DBDataTable::dataSourceURI
+     * @covers \MultiFlexi\Ui\DBDataTable::dataSourceURI
+     *
      * @todo   Implement testdataSourceURI().
      */
-    public function testdataSourceURI()
+    public function testdataSourceURI(): void
     {
         $this->assertEquals('', $this->object->dataSourceURI());
         // Remove the following lines when you implement this test.
@@ -88,10 +102,11 @@ class DBDataTableTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\DBDataTable::addButton
+     * @covers \MultiFlexi\Ui\DBDataTable::addButton
+     *
      * @todo   Implement testaddButton().
      */
-    public function testaddButton()
+    public function testaddButton(): void
     {
         $this->assertEquals('', $this->object->addButton());
         // Remove the following lines when you implement this test.
@@ -99,10 +114,11 @@ class DBDataTableTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\DBDataTable::addCustomButton
+     * @covers \MultiFlexi\Ui\DBDataTable::addCustomButton
+     *
      * @todo   Implement testaddCustomButton().
      */
-    public function testaddCustomButton()
+    public function testaddCustomButton(): void
     {
         $this->assertEquals('', $this->object->addCustomButton());
         // Remove the following lines when you implement this test.
@@ -110,10 +126,11 @@ class DBDataTableTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\DBDataTable::javaScript
+     * @covers \MultiFlexi\Ui\DBDataTable::javaScript
+     *
      * @todo   Implement testjavaScript().
      */
-    public function testjavaScript()
+    public function testjavaScript(): void
     {
         $this->assertEquals('', $this->object->javaScript());
         // Remove the following lines when you implement this test.
@@ -121,10 +138,11 @@ class DBDataTableTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\DBDataTable::columnIndexNames
+     * @covers \MultiFlexi\Ui\DBDataTable::columnIndexNames
+     *
      * @todo   Implement testcolumnIndexNames().
      */
-    public function testcolumnIndexNames()
+    public function testcolumnIndexNames(): void
     {
         $this->assertEquals('', $this->object->columnIndexNames());
         // Remove the following lines when you implement this test.
@@ -132,10 +150,11 @@ class DBDataTableTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\DBDataTable::getColumnsScript
+     * @covers \MultiFlexi\Ui\DBDataTable::getColumnsScript
+     *
      * @todo   Implement testgetColumnsScript().
      */
-    public function testgetColumnsScript()
+    public function testgetColumnsScript(): void
     {
         $this->assertEquals('', $this->object->getColumnsScript());
         // Remove the following lines when you implement this test.
@@ -143,10 +162,11 @@ class DBDataTableTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\DBDataTable::columnsToHeader
+     * @covers \MultiFlexi\Ui\DBDataTable::columnsToHeader
+     *
      * @todo   Implement testcolumnsToHeader().
      */
-    public function testcolumnsToHeader()
+    public function testcolumnsToHeader(): void
     {
         $this->assertEquals('', $this->object->columnsToHeader());
         // Remove the following lines when you implement this test.
@@ -154,10 +174,11 @@ class DBDataTableTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\DBDataTable::footerCallback
+     * @covers \MultiFlexi\Ui\DBDataTable::footerCallback
+     *
      * @todo   Implement testfooterCallback().
      */
-    public function testfooterCallback()
+    public function testfooterCallback(): void
     {
         $this->assertEquals('', $this->object->footerCallback());
         // Remove the following lines when you implement this test.
@@ -165,10 +186,11 @@ class DBDataTableTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\DBDataTable::addFooter
+     * @covers \MultiFlexi\Ui\DBDataTable::addFooter
+     *
      * @todo   Implement testaddFooter().
      */
-    public function testaddFooter()
+    public function testaddFooter(): void
     {
         $this->assertEquals('', $this->object->addFooter());
         // Remove the following lines when you implement this test.

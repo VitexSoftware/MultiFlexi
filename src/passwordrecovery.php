@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Recovery password.
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
@@ -18,18 +24,18 @@ $emailTo = $oPage->getPostValue('Email');
 if (empty($emailTo)) {
     \Ease\Shared::user()->addStatusMessage(_('Please enter your email.'));
 } else {
-    $userEmail = addSlashes($emailTo);
+    $userEmail = addslashes($emailTo);
 
     $controlUser = new \MultiFlexi\User();
     $controlData = $controlUser->getColumnsFromSql(
         [$controlUser->getkeyColumn()],
-        ['email' => $userEmail]
+        ['email' => $userEmail],
     );
 
     if (empty($controlData)) {
         \Ease\Shared::user()->addStatusMessage(sprintf(
             _('unknow email address %s'),
-            '<strong>' . $_REQUEST['Email'] . '</strong>'
+            '<strong>'.$_REQUEST['Email'].'</strong>',
         ), 'warning');
     } else {
         $controlUser->loadFromSQL((int) $controlData[0][$controlUser->getkeyColumn()]);
@@ -40,23 +46,23 @@ if (empty($emailTo)) {
 
         $email = $oPage->addItem(new \Ease\HtmlMailer(
             $userEmail,
-            \Ease\Shared::appName() . ' -' . sprintf(
+            \Ease\Shared::appName().' -'.sprintf(
                 _('New password for %s'),
-                $_SERVER['SERVER_NAME']
-            )
+                $_SERVER['SERVER_NAME'],
+            ),
         ));
 
         $email->setMailHeaders(['From' => \Ease\Shared::cfg('EMAIL_FROM')]);
-        $email->addItem(_('Sign On informations was changed') . ":\n");
+        $email->addItem(_('Sign On informations was changed').":\n");
 
-        $email->addItem(_('Username') . ': ' . $userLogin . "\n");
-        $email->addItem(_('Password') . ': ' . $newPassword . "\n");
+        $email->addItem(_('Username').': '.$userLogin."\n");
+        $email->addItem(_('Password').': '.$newPassword."\n");
 
         $email->send();
 
         \Ease\Shared::user()->addStatusMessage(sprintf(
             _('Your new password was sent to %s'),
-            '<strong>' . $emailTo . '</strong>'
+            '<strong>'.$emailTo.'</strong>',
         ));
         $success = true;
     }
@@ -76,7 +82,7 @@ if (!$success) {
     $columnIII->addItem(new \Ease\TWB4\Label('info', _('Tip')));
 
     $columnIII->addItem(new \Ease\TWB4\Well(
-        _('Forgot your password? Enter your e-mail address you entered during the registration and we will send you a new one.')
+        _('Forgot your password? Enter your e-mail address you entered during the registration and we will send you a new one.'),
     ));
 
     $titlerow = new \Ease\TWB4\Row();
@@ -87,15 +93,15 @@ if (!$success) {
         new \Ease\TWB4\Container($titlerow),
         'success',
         null,
-        new \Ease\TWB4\SubmitButton(_('Sent New Password'), 'success')
+        new \Ease\TWB4\SubmitButton(_('Sent New Password'), 'success'),
     );
     $loginPanel->addItem(new \Ease\TWB4\FormGroup(
         _('Email'),
         new \Ease\Html\InputTextTag(
             'Email',
             $emailTo,
-            ['type' => 'email']
-        )
+            ['type' => 'email'],
+        ),
     ));
     $loginPanel->body->setTagProperties(['style' => 'margin: 20px']);
 
@@ -108,7 +114,7 @@ if (!$success) {
 } else {
     $columnII->addItem(new \Ease\TWB4\LinkButton(
         'login.php',
-        _('Continue')
+        _('Continue'),
     ));
     $oPage->redirect('login.php');
 }

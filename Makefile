@@ -114,3 +114,5 @@ packages:
 codingstandards:
 	phpcbf --colors --standard=PSR12 --extensions=php --ignore=vendor/ src/ 
 
+.PHONY: cs
+	vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --diff --verbose

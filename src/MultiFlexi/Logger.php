@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Logger class
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2023 Vitex@hippy.cz (G)
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi;
@@ -14,7 +20,7 @@ use Envms\FluentPDO\Literal;
 use SensioLabs\AnsiConverter\AnsiToHtmlConverter;
 
 /**
- * Description of Dashboarder
+ * Description of Dashboarder.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
@@ -27,13 +33,11 @@ class Logger extends DBEngine
     public $nameColumn = 'heading';
 
     /**
-     * Search resuts targeting to  here
-     * @var string
+     * Search resuts targeting to  here.
      */
-    public $keyword = 'dbmessage';
+    public string $keyword = 'dbmessage';
 
     /**
-     *
      * @param int $id
      */
     public function __construct($id = null)
@@ -42,7 +46,6 @@ class Logger extends DBEngine
     }
 
     /**
-     *
      * @return array
      */
     public function getActualMessages()
@@ -62,26 +65,23 @@ class Logger extends DBEngine
     //    }
 
     /**
-     *
      * @return bool|int|\PDOStatement
      */
     public function dismis()
     {
-        return $this->getFluentPDO()->update($this->getMyTable())->set(['resolved' => new Literal(\Ease\Shared::cfg('DB_CONNECTION') == 'sqlite' ? "date('now')" : 'NOW()')])->where(
+        return $this->getFluentPDO()->update($this->getMyTable())->set(['resolved' => new Literal(\Ease\Shared::cfg('DB_CONNECTION') === 'sqlite' ? "date('now')" : 'NOW()')])->where(
             'id',
-            $this->getMyKey()
+            $this->getMyKey(),
         )->execute();
     }
 
     /**
-     *
      * @param array $columns
      *
      * @return array
      */
     public function columns($columns = [])
     {
-
         //  [company_id] => null
         //  [app_id] => null
         //  [user_id] => (string) 0
@@ -112,66 +112,69 @@ class Logger extends DBEngine
         //  [rw] => null
         //  [webhook] => null
 
-
         return parent::columns([
-                    ['name' => 'id', 'type' => 'text', 'label' => _('ID')],
-                    ['name' => 'severity', 'type' => 'text', 'label' => _('Status')],
-                    ['name' => 'venue', 'type' => 'text', 'label' => _('Subject')],
-                    ['name' => 'message', 'type' => 'text', 'label' => _('Message')],
-                    ['name' => 'created', 'type' => 'datetime', 'label' => _('Created')],
-//                    ['name' => 'resolved', 'type' => 'datetime', 'label' => _('Resolved')],
-                    ['name' => 'apps_id', 'type' => 'selectize', 'label' => _('Application'),
-                        'listingPage' => 'apps.php',
-                        'detailPage' => 'app.php',
-                        'idColumn' => 'apps',
-                        'valueColumn' => 'apps.name',
-                        'engine' => '\MultiFlexi\Application',
-                        'filterby' => 'name',
-                    ],
-                    ['name' => 'company_id', 'type' => 'selectize', 'label' => _('Company'),
-                        'listingPage' => 'companies.php',
-                        'detailPage' => 'company.php',
-                        'idColumn' => 'company',
-                        'valueColumn' => 'company.name',
-                        'engine' => '\MultiFlexi\Company',
-                        'filterby' => 'name',
-                    ],
-                    ['name' => 'user_id', 'type' => 'selectize', 'label' => _('User'),
-                        'listingPage' => 'users.php',
-                        'detailPage' => 'user.php',
-                        'idColumn' => 'user',
-                        'valueColumn' => 'user.login',
-                        'engine' => '\MultiFlexi\User',
-                        'filterby' => 'name',
-                    ],
+            ['name' => 'id', 'type' => 'text', 'label' => _('ID')],
+            ['name' => 'severity', 'type' => 'text', 'label' => _('Status')],
+            ['name' => 'venue', 'type' => 'text', 'label' => _('Subject')],
+            ['name' => 'message', 'type' => 'text', 'label' => _('Message')],
+            ['name' => 'created', 'type' => 'datetime', 'label' => _('Created')],
+            //                    ['name' => 'resolved', 'type' => 'datetime', 'label' => _('Resolved')],
+            ['name' => 'apps_id', 'type' => 'selectize', 'label' => _('Application'),
+                'listingPage' => 'apps.php',
+                'detailPage' => 'app.php',
+                'idColumn' => 'apps',
+                'valueColumn' => 'apps.name',
+                'engine' => '\MultiFlexi\Application',
+                'filterby' => 'name',
+            ],
+            ['name' => 'company_id', 'type' => 'selectize', 'label' => _('Company'),
+                'listingPage' => 'companies.php',
+                'detailPage' => 'company.php',
+                'idColumn' => 'company',
+                'valueColumn' => 'company.name',
+                'engine' => '\MultiFlexi\Company',
+                'filterby' => 'name',
+            ],
+            ['name' => 'user_id', 'type' => 'selectize', 'label' => _('User'),
+                'listingPage' => 'users.php',
+                'detailPage' => 'user.php',
+                'idColumn' => 'user',
+                'valueColumn' => 'user.login',
+                'engine' => '\MultiFlexi\User',
+                'filterby' => 'name',
+            ],
         ]);
     }
 
     public function tableCode($tableId)
     {
-        return '
+        return <<<'EOD'
+
  "order": [[ 1, "asc" ]],
-';
+
+EOD;
     }
 
     /**
-     * @link https://datatables.net/examples/advanced_init/column_render.html
+     * @see https://datatables.net/examples/advanced_init/column_render.html
      *
      * @return string Column rendering
      */
     public function columnDefs()
     {
-        return '
+        return <<<'EOD'
+
 "columnDefs": [
            // { "visible": false,  "targets": [ 0 ] }
-        ]            
+        ]
 ,
-';
+
+EOD;
     }
 
     public function getRecordName()
     {
-        return trim($this->getDataValue('title') . ' ' . $this->getDataValue('name'));
+        return trim($this->getDataValue('title').' '.$this->getDataValue('name'));
     }
 
     public function completeDataRow(array $dataRowRaw)
@@ -179,28 +182,35 @@ class Logger extends DBEngine
         switch ($dataRowRaw['severity']) {
             case 'success':
                 $dataRowRaw['DT_RowClass'] = 'bg-success  text-white';
+
                 break;
             case 'warning':
                 $dataRowRaw['DT_RowClass'] = 'bg-warning  text-dark';
+
                 break;
             case 'error':
                 $dataRowRaw['DT_RowClass'] = 'bg-danger  text-dark';
+
                 break;
             case 'debug':
                 $dataRowRaw['DT_RowClass'] = 'bg-primary text-white';
+
                 break;
             case 'info':
                 $dataRowRaw['DT_RowClass'] = 'bg-info text-white';
+
                 break;
+
             default:
                 $dataRowRaw['DT_RowClass'] = 'text-dark';
+
                 break;
         }
 
         $dataRowRaw['message'] = (new AnsiToHtmlConverter())->convert(str_replace(
             '.........',
             '......... ',
-            $dataRowRaw['message']
+            $dataRowRaw['message'],
         ));
         //        $dataRowRaw['created'] = (new LiveAge((new DateTime($dataRowRaw['created']))->getTimestamp()))->__toString();
 
@@ -209,9 +219,9 @@ class Logger extends DBEngine
 
     public static function toRFC3339(string $dateTimePlain)
     {
-        return ($dateTimePlain == '0000-00-00 00:00:00') ? null : \DateTime::createFromFormat(
-            'Y-m-d H:i:s',
-            $dateTimePlain
-        )->format(DateTime::ATOM);
+        return ($dateTimePlain === '0000-00-00 00:00:00') ? null : \DateTime::createFromFormat(
+            '!Y-m-d H:i:s',
+            $dateTimePlain,
+        )->format(\DateTime::ATOM);
     }
 }

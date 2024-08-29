@@ -1,15 +1,22 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi;
 
 /**
- * Description of Configuration
+ * Description of Configuration.
  *
  * @author vitex
  */
@@ -17,7 +24,7 @@ class Configuration extends \Ease\SQL\Engine
 {
     public $myTable = 'configuration';
 
-    public function __construct($identifier = null, $options = array())
+    public function __construct($identifier = null, $options = [])
     {
         parent::__construct($identifier, $options);
     }
@@ -28,23 +35,23 @@ class Configuration extends \Ease\SQL\Engine
      * @param array $data        asociativní pole dat
      * @param bool  $searchForID Zjistit zdali updatovat nebo insertovat
      *
-     * @return int|null ID záznamu nebo null v případě neůspěchu
+     * @return null|int ID záznamu nebo null v případě neůspěchu
      */
     public function saveToSQL($data = null, $searchForID = false)
     {
-        if (is_null($data)) {
+        if (null === $data) {
             $data = $this->getData();
         }
+
         $result = 0;
-        unset($data['id']);
-        unset($data['class']);
-        unset($data['app_id']);
-        unset($data['company_id']);
-        unset($data['runtemplate_id']);
+        unset($data['id'], $data['class'], $data['app_id'], $data['company_id'], $data['runtemplate_id']);
+
         $this->deleteFromSQL(['app_id' => $this->getDataValue('app_id'), 'company_id' => $this->getDataValue('company_id'), 'runtemplate_id' => $this->getDataValue('runtemplate_id')]);
+
         foreach ($data as $column => $value) {
             $result += $this->insertToSQL(['app_id' => $this->getDataValue('app_id'), 'company_id' => $this->getDataValue('company_id'), 'runtemplate_id' => $this->getDataValue('runtemplate_id'), 'name' => $column, 'value' => $value]);
         }
+
         return $result;
     }
 
@@ -58,30 +65,32 @@ class Configuration extends \Ease\SQL\Engine
     public function takeData($data)
     {
         $cfgs = new Conffield();
+
         foreach ($cfgs->appConfigs($this->getDataValue('app_id')) as $cfg) {
-            if ($cfg['type'] == 'checkbox') {
-                $data[$cfg['keyname']] = array_key_exists($cfg['keyname'], $data) ? 'true' : 'false';
+            if ($cfg['type'] === 'checkbox') {
+                $data[$cfg['keyname']] = \array_key_exists($cfg['keyname'], $data) ? 'true' : 'false';
             }
         }
+
         return parent::takeData($data);
     }
 
     /**
-     * Apply Configuration
+     * Apply Configuration.
      *
      * @param int $companyId
      * @param int $appId
      */
-    public function setEnvironment($companyId, $appId)
+    public function setEnvironment($companyId, $appId): void
     {
         foreach ($this->getAppConfig($companyId, $appId) as $cfgRaw) {
             $this->addStatusMessage(sprintf(_('Setting Environment %s to %s'), $cfgRaw['name'], $cfgRaw['value']), 'debug');
-            putenv($cfgRaw['name'] . '=' . $cfgRaw['value']);
+            putenv($cfgRaw['name'].'='.$cfgRaw['value']);
         }
     }
 
     /**
-     * App Configuration values
+     * App Configuration values.
      *
      * @param int $companyId
      * @param int $appId

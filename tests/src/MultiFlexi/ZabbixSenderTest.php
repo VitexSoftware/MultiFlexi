@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi;
 
 use MultiFlexi\ZabbixSender;
@@ -9,10 +22,7 @@ use MultiFlexi\ZabbixSender;
  */
 class ZabbixSenderTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var ZabbixSender
-     */
-    protected $object;
+    protected ZabbixSender $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class ZabbixSenderTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\ZabbixSender::preparePayload
+     * @covers \MultiFlexi\ZabbixSender::preparePayload
+     *
      * @todo   Implement testpreparePayload().
      */
-    public function testpreparePayload()
+    public function testpreparePayload(): void
     {
         $this->assertEquals('', $this->object->preparePayload());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class ZabbixSenderTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\ZabbixSender::zbxCreateHeader
+     * @covers \MultiFlexi\ZabbixSender::zbxCreateHeader
+     *
      * @todo   Implement testzbxCreateHeader().
      */
-    public function testzbxCreateHeader()
+    public function testzbxCreateHeader(): void
     {
         $this->assertEquals('', $this->object->zbxCreateHeader());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class ZabbixSenderTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\ZabbixSender::send
+     * @covers \MultiFlexi\ZabbixSender::send
+     *
      * @todo   Implement testsend().
      */
-    public function testsend()
+    public function testsend(): void
     {
         $this->assertEquals('', $this->object->send());
         // Remove the following lines when you implement this test.

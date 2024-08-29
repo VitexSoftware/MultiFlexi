@@ -3,16 +3,20 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi -
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi;
 
 /**
- * Description of ModConfig
+ * Description of ModConfig.
  *
  * @author vitex
  */
@@ -28,32 +32,31 @@ class ModConfig extends Engine
     public function getModuleConf($module)
     {
         $configs = [];
+
         foreach ($this->listingQuery()->where(['module' => $module])->select(['cfg', 'value'], true)->fetchAll('cfg') as $cfg) {
             $configs[$cfg['cfg']] = $cfg['value'];
         }
+
         return $configs;
     }
 
     /**
-     *
-     * @param string $module
-     * @param array $configurations
-     *
      * @return int
      */
     public function setModuleConf(string $module, array $configurations)
     {
         $result = 0;
+
         foreach ($configurations as $key => $value) {
             if ($this->setConf($module, $key, $value)) {
-                $result++;
+                ++$result;
             }
         }
+
         return $result;
     }
 
     /**
-     *
      * @param string $module
      * @param string $key
      * @param string $value
@@ -67,11 +70,11 @@ class ModConfig extends Engine
         } else {
             $result = $this->insertToSQL(['module' => $module, 'cfg' => $key, 'value' => $value]);
         }
+
         return $result;
     }
 
     /**
-     *
      * @return array
      */
     public function formData()
@@ -79,7 +82,7 @@ class ModConfig extends Engine
         return [];
     }
 
-    public function saveConfigForModules($configurations)
+    public function saveConfigForModules($configurations): void
     {
         foreach ($configurations as $module => $config) {
             $this->setModuleConf($module, $config);
@@ -87,7 +90,7 @@ class ModConfig extends Engine
     }
 
     /**
-     * Gather Configuration for multiple modules
+     * Gather Configuration for multiple modules.
      *
      * @param array $modules list of modules
      *
@@ -96,15 +99,17 @@ class ModConfig extends Engine
     public function getConfigForModules($modules)
     {
         $config = [];
+
         foreach ($modules as $class) {
             $baseClass = self::classBasename($class);
             $config[$baseClass] = $this->getModuleConf($baseClass);
         }
+
         return $config;
     }
 
     /**
-     * Base for Class Name in namespace
+     * Base for Class Name in namespace.
      *
      * @param string $class
      *
@@ -115,7 +120,7 @@ class ModConfig extends Engine
         return basename(str_replace('\\', '/', $class));
     }
 
-    public function saveFormData($post)
+    public function saveFormData($post): void
     {
         foreach ($post as $moduleName => $moduleData) {
             $this->setModuleConf($moduleName, $moduleData);

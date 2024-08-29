@@ -3,16 +3,20 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi - Select From Company applications not used in any interval
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Description of CompanyAppIntervalSelection
+ * Description of CompanyAppIntervalSelection.
  *
  * @author vitex
  */
@@ -21,7 +25,6 @@ class CompanyRuntemplateIntervalSelector extends CompanyAppSelector
     private $intervalCode;
 
     /**
-     *
      * @param type $company
      * @param type $identifier
      * @param type $enabled
@@ -37,16 +40,19 @@ class CompanyRuntemplateIntervalSelector extends CompanyAppSelector
     {
         $runTemplate = new \MultiFlexi\RunTemplate();
         $companyRuntemplates = $runTemplate->getCompanyTemplates($this->companyId)->fetchAll('id');
+
         foreach ($companyRuntemplates as $id => $companyRuntemplate) {
             if (empty($companyRuntemplate['name'])) {
-                $companyRuntemplates[$id]['name'] = strval($id).' '.$companyRuntemplate['app_name'];
+                $companyRuntemplates[$id]['name'] = (string) $id.' '.$companyRuntemplate['app_name'];
             }
-            if ($companyRuntemplate['interv'] != 'n') {
+
+            if ($companyRuntemplate['interv'] !== 'n') {
                 $companyRuntemplates[$id]['disabled'] = 1;
             }
-            unset($companyRuntemplates[$id]['success']);
-            unset($companyRuntemplates[$id]['fail']);
+
+            unset($companyRuntemplates[$id]['success'], $companyRuntemplates[$id]['fail']);
         }
+
         return array_values($companyRuntemplates);
     }
 }

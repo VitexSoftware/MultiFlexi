@@ -3,23 +3,27 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi - Launch Custom command
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023-2024 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Action;
 
 /**
- * Description of CustomCommand
+ * Description of CustomCommand.
  *
  * @author vitex
  */
 class CustomCommand extends \MultiFlexi\CommonAction
 {
     /**
-     * Module Caption
+     * Module Caption.
      *
      * @return string
      */
@@ -29,7 +33,7 @@ class CustomCommand extends \MultiFlexi\CommonAction
     }
 
     /**
-     * Module Description
+     * Module Description.
      *
      * @return string
      */
@@ -45,23 +49,23 @@ class CustomCommand extends \MultiFlexi\CommonAction
 
     public static function inputs(string $prefix)
     {
-        return new \Ease\TWB4\FormGroup(_('Command'), new \Ease\Html\InputTextTag($prefix . '[CustomCommand][command]'), '', _('Bash shell is used'));
+        return new \Ease\TWB4\FormGroup(_('Command'), new \Ease\Html\InputTextTag($prefix.'[CustomCommand][command]'), '', _('Bash shell is used'));
     }
 
     /**
-     * Is this Action Situable for Application
+     * Is this Action Situable for Application.
      *
      * @param Application $app
      */
     public static function usableForApp($app): bool
     {
-        return is_object($app);
+        return \is_object($app);
     }
 
     /**
-     * Perform Action
+     * Perform Action.
      */
-    public function perform()
+    public function perform(): void
     {
         $command = $this->getDataValue('command');
         $this->addStatusMessage(_('Custom Command begin'));

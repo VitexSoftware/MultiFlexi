@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Index page.
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
@@ -15,17 +21,21 @@ $oPage->onlyForLogged();
 
 $oPage->addItem(new PageTop(_('Logs')));
 
-//$oPage->addItem(new LogViewer());
+// $oPage->addItem(new LogViewer());
 
-$oPage->addJavaScript('$.fn.dataTable.ext.buttons.dismisAll = {
-    text: \'' . _('Dismis All') . '\',
+$oPage->addJavaScript(<<<'EOD'
+$.fn.dataTable.ext.buttons.dismisAll = {
+    text: '
+EOD._('Dismis All').<<<'EOD'
+',
     action: function ( e, dt, node, config ) {
         $( ".dismis" ).each(function() {
             $( this ).click();
         });
         dt.ajax.reload();
     }
-};');
+};
+EOD);
 
 $oPage->includeJavascript('js/dismisLog.js');
 
@@ -33,10 +43,12 @@ $oPage->container->addItem(new DBDataTable(new \MultiFlexi\Logger(), ['buttons' 
 
 $oPage->addItem(new PageBottom());
 
-$oPage->addJavaScript('
+$oPage->addJavaScript(<<<'EOD'
+
     setInterval(function () {
       Molecule.ajax.reload();
 }, 300000);
-');
+
+EOD);
 
 $oPage->draw();

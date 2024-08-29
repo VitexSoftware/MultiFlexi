@@ -3,15 +3,17 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi -
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 /**
- *
- *
  * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software
  */
@@ -19,7 +21,7 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 /**
- * Description of ExecutorImage
+ * Description of ExecutorImage.
  *
  * @author vitex
  */
@@ -27,7 +29,8 @@ class ExecutorImage extends \Ease\Html\ImgTag
 {
     public function __construct($executorName, $properties = [])
     {
-        $executorClass = '\\MultiFlexi\\Executor\\' . $executorName;
+        $executorClass = '\\MultiFlexi\\Executor\\'.$executorName;
+
         if (class_exists($executorClass)) {
             $image = $executorClass::logo();
             $properties['title'] = $executorClass::description();

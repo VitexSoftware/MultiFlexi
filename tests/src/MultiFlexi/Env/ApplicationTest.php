@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi\Env;
 
 use MultiFlexi\Env\Application;
@@ -9,10 +22,7 @@ use MultiFlexi\Env\Application;
  */
 class ApplicationTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var Application
-     */
-    protected $object;
+    protected Application $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,22 +39,22 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Env\Application::allKeysHandled
+     * @covers \MultiFlexi\Env\Application::allKeysHandled
      */
-    public function testallKeysHandled()
+    public function testallKeysHandled(): void
     {
         $this->assertEquals([], $this->object->allKeysHandled());
     }
 
     /**
-     * @covers MultiFlexi\Env\Application::getEnvironment
+     * @covers \MultiFlexi\Env\Application::getEnvironment
+     *
      * @todo   Implement testgetEnvironment().
      */
-    public function testgetEnvironment()
+    public function testgetEnvironment(): void
     {
         $this->assertEquals('', $this->object->getEnvironment());
         // Remove the following lines when you implement this test.

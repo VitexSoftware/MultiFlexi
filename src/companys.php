@@ -1,15 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Company instance editor.
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
-use Ease\TWB4\Row;
 use MultiFlexi\Company;
 
 require_once './init.php';
@@ -23,15 +28,15 @@ $companyTable = new \Ease\TWB4\Table();
 foreach ($companies->listingQuery() as $companyInfo) {
     $companies->setData($companyInfo);
     $companyId = $companyInfo['id'];
-    $companyColumns['enabled'] = new \Ease\ui\SemaforLight($companyInfo['enabled'] == 1 ? 'green' : 'red', ['width' => 20]);
+    $companyColumns['enabled'] = new \Ease\ui\SemaforLight($companyInfo['enabled'] === 1 ? 'green' : 'red', ['width' => 20]);
     $companyColumns['logo'] = new CompanyLinkButton($companies, ['height' => 64]);
-    $companyColumns['name'] = new \Ease\Html\ATag('company.php?id=' . $companyId, $companyInfo['name']);
+    $companyColumns['name'] = new \Ease\Html\ATag('company.php?id='.$companyId, $companyInfo['name']);
     $companyColumns['ic'] = $companyInfo['ic'];
 
-    $companyColumns['setup'] = new \Ease\TWB4\LinkButton('companysetup.php?id=' . $companyId, '🛠️&nbsp;' . _('Setup'), 'secondary btn-lg btn-block ');
-    $companyColumns['tasks'] = new \Ease\TWB4\LinkButton('tasks.php?company_id=' . $companyId, '🔧&nbsp;' . _('Tasks'), 'secondary btn-lg btn-block');
-    $companyColumns['apps'] = new \Ease\TWB4\LinkButton('companyapps.php?company_id=' . $companyId, '📌&nbsp;' . _('Applications'), 'secondary btn-lg btn-block');
-    $companyColumns['delete'] = new \Ease\TWB4\LinkButton('companydelete.php?id=' . $companyId, '☠️&nbsp;' . _('Delete'), 'danger');
+    $companyColumns['setup'] = new \Ease\TWB4\LinkButton('companysetup.php?id='.$companyId, '🛠️&nbsp;'._('Setup'), 'secondary btn-lg btn-block ');
+    $companyColumns['tasks'] = new \Ease\TWB4\LinkButton('tasks.php?company_id='.$companyId, '🔧&nbsp;'._('Tasks'), 'secondary btn-lg btn-block');
+    $companyColumns['apps'] = new \Ease\TWB4\LinkButton('companyapps.php?company_id='.$companyId, '📌&nbsp;'._('Applications'), 'secondary btn-lg btn-block');
+    $companyColumns['delete'] = new \Ease\TWB4\LinkButton('companydelete.php?id='.$companyId, '☠️&nbsp;'._('Delete'), 'danger');
 
     $companyTable->addRowColumns($companyColumns);
 }

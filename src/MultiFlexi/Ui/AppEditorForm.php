@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Company Management Class
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
@@ -16,13 +22,13 @@ use Ease\TWB4\SubmitButton;
 use Ease\TWB4\Widgets\Toggle;
 
 /**
- * Description of RegisterAppForm
+ * Description of RegisterAppForm.
  *
  * @author vitex
  */
 class AppEditorForm extends EngineForm
 {
-    public function afterAdd()
+    public function afterAdd(): void
     {
         $this->setTagProperty('enctype', 'multipart/form-data');
         $this->addInput(new InputTextTag('name'), _('Application name'));
@@ -32,7 +38,7 @@ class AppEditorForm extends EngineForm
         $this->addInput(new InputTextTag('setup'), _('Setup Command'), '', _('Command used to setup new company for use with command'));
         $this->addInput(new InputTextTag('cmdparams'), _('Command arguments'), '', _('you can use macros like {ABRAFLEXI_URL} or custom defined config fields.'));
         $imgInput = $this->addInput(new InputFileTag('imageraw'), _('Application Icon'));
-        $this->addInput(new Toggle('enabled', $this->engine->getDataValue('enabled') == 1), _('Enabled'));
+        $this->addInput(new Toggle('enabled', $this->engine->getDataValue('enabled') === 1), _('Enabled'));
         $this->addInput(new InputTextTag('homepage'), _('Application Homepage'));
         $this->addInput(new InputTextTag('ociimage'), _('Container image'));
         $this->addInput(new InputTextTag('version'), _('Current Version of Application'));
@@ -40,7 +46,8 @@ class AppEditorForm extends EngineForm
         $this->addInput(new InputTextTag('uuid'), _('Application Universal Unique Identifier'));
         $this->addInput(new InputTextTag('topics'), _('Topics divided by column'));
         $this->addInput(new SubmitButton(_('Save'), 'success'));
-        if (!is_null($this->engine->getDataValue('id'))) {
+
+        if (null !== $this->engine->getDataValue('id')) {
             $this->addItem(new InputHiddenTag('id'));
         }
 

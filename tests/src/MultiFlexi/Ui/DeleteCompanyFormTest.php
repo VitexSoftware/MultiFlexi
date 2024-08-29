@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi\Ui;
 
 use MultiFlexi\Ui\DeleteCompanyForm;
@@ -9,10 +22,7 @@ use MultiFlexi\Ui\DeleteCompanyForm;
  */
 class DeleteCompanyFormTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var DeleteCompanyForm
-     */
-    protected $object;
+    protected DeleteCompanyForm $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class DeleteCompanyFormTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Ui\DeleteCompanyForm::afterAdd
+     * @covers \MultiFlexi\Ui\DeleteCompanyForm::afterAdd
+     *
      * @todo   Implement testafterAdd().
      */
-    public function testafterAdd()
+    public function testafterAdd(): void
     {
         $this->assertEquals('', $this->object->afterAdd());
         // Remove the following lines when you implement this test.

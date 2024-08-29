@@ -3,16 +3,20 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi -
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi;
 
 /**
- * Description of Executor
+ * Description of Executor.
  *
  * @author vitex
  */
@@ -20,38 +24,18 @@ abstract class CommonAction extends \Ease\Sand
 {
     use \Ease\Logger\Logging;
 
-    /**
-     *
-     * @var Job
-     */
-    public $job;
+    public Job $job;
 
-    /**
-     *
-     * @var string
-     */
-    public $stdin;
+    public string $stdin;
 
-    /**
-     *
-     * @var string
-     */
-    public $stdout;
+    public string $stdout;
 
-    /**
-     *
-     * @var string
-     */
-    public $stderr;
+    public string $stderr;
     public $environment = [];
 
-    /**
-     * @var array
-     */
-    public $outputCache = [];
+    public array $outputCache = [];
 
     /**
-     *
      * @param Job   $job
      * @param array $options Action Options
      */
@@ -60,47 +44,51 @@ abstract class CommonAction extends \Ease\Sand
         $this->job = $job;
         $this->setData($options);
         $this->setObjectName();
-        $this->setObjectName($job->getMyKey() . '@' . \Ease\Logger\Message::getCallerName($this));
+        $this->setObjectName($job->getMyKey().'@'.\Ease\Logger\Message::getCallerName($this));
         $this->environment = $job->getFullEnvironment();
         $this->loadOptions();
     }
 
-    public function loadOptions()
+    public function loadOptions(): void
     {
     }
 
     /**
-     * Add Output line into cache
+     * Add Output line into cache.
+     *
+     * @param mixed $line
+     * @param mixed $type
      */
-    public function addOutput($line, $type)
+    public function addOutput($line, $type): void
     {
         $this->outputCache[microtime()] = ['line' => $line, 'type' => $type];
     }
 
     /**
-     * Get Output cache as plaintext
+     * Get Output cache as plaintext.
      */
     public function getOutputCachePlaintext()
     {
         $output = '';
+
         foreach ($this->outputCache as $line) {
-            $output .= $line['line'] . "\n";
+            $output .= $line['line']."\n";
         }
+
         return $output;
     }
 
     /**
-     * Form Inputs
+     * Form Inputs.
      *
      * @return \Ease\Embedable
      */
     public static function inputs(string $action)
     {
-        return new \Ease\TWB4\Badge('info', _('No Fields required') . ' (' . $action . ')');
+        return new \Ease\TWB4\Badge('info', _('No Fields required').' ('.$action.')');
     }
 
     /**
-     *
      * @return \Ease\Embedable
      */
     public static function configForm()
@@ -109,15 +97,15 @@ abstract class CommonAction extends \Ease\Sand
     }
 
     /**
-     * Perform Action
+     * Perform Action.
      */
-    public function perform()
+    public function perform(): void
     {
         $this->addStatusMessage(_('No Action performed'), 'debug');
     }
 
     /**
-     * Is this Action Situable for Application
+     * Is this Action Situable for Application.
      *
      * @param Application $app
      */

@@ -1,16 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi  - AbraFlexi server select
+ * This file is part of the MultiFlexi package
  *
- * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2015-2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Description of Serverselect
+ * Description of Serverselect.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
@@ -18,12 +24,10 @@ class ServerSelect extends \Ease\Html\SelectTag
 {
     use \Ease\SQL\Orm;
     use \Ease\RecordKey;
-
     public $myTable = 'servers';
 
-
     /**
-     * AbraFlexi chooser
+     * AbraFlexi chooser.
      *
      * @param string $name
      * @param string $defaultValue
@@ -34,7 +38,7 @@ class ServerSelect extends \Ease\Html\SelectTag
         $name,
         $defaultValue = null,
         $itemsIDs = false,
-        $properties = array()
+        $properties = []
     ) {
         $items = $this->loadItems();
         $itemsIDs = array_keys($items);
@@ -43,7 +47,7 @@ class ServerSelect extends \Ease\Html\SelectTag
     }
 
     /**
-     * obtain Availble AbraFlexi servers
+     * obtain Availble AbraFlexi servers.
      *
      * @return array
      */
@@ -52,9 +56,11 @@ class ServerSelect extends \Ease\Html\SelectTag
         $servers = ['' => _('No server specified')];
         $this->setMyTable('servers');
         $serversRaw = $this->getColumnsFromSQL(['id', 'name'], null, 'name');
+
         foreach ($serversRaw as $abraflexi) {
             $servers[$abraflexi['id']] = $abraflexi['name'];
         }
+
         return $servers;
     }
 }

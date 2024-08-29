@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi  - WebPage class
+ * This file is part of the MultiFlexi package
  *
- * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2015-2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
@@ -13,22 +19,21 @@ use Ease\Container;
 use Ease\TWB4\Badge;
 
 /**
- * Description of Confiffields
+ * Description of Confiffields.
  *
  * @author vitex
  */
 class ConfigFieldsBadges extends Container
 {
     /**
-     *
      * @param mixed $content
-     * @param array $properties
      */
     public function __construct($content = null)
     {
         parent::__construct();
+
         foreach ($content as $conf) {
-            $this->addItem(new Badge(array_key_exists('state', $conf) ? $conf['state'] : 'secondary', $conf['type'] . ' ' . $conf['keyname']));
+            $this->addItem(new Badge(\array_key_exists('state', $conf) ? $conf['state'] : 'secondary', $conf['type'].' '.$conf['keyname']));
             $this->addItem(' ');
         }
     }

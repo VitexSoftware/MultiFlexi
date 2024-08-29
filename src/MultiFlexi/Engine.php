@@ -1,16 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Engine class
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2023 Vitex@hippy.cz (G)
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi;
 
 /**
- * Description of Engine
+ * Description of Engine.
  *
  * @author vitex
  */
@@ -19,22 +25,23 @@ class Engine extends \Ease\SQL\Engine
     public $filter = [];
 
     /**
-     * MultiFlexi Engine
+     * MultiFlexi Engine.
      *
      * @param mixed $identifier
      * @param array $options
      */
     public function __construct($identifier = null, $options = [])
     {
-        if (array_key_exists('autoload', $options) === false) {
+        if (\array_key_exists('autoload', $options) === false) {
             $options['autoload'] = true;
         }
+
         parent::__construct($identifier, $options);
-        $this->setObjectName(get_class($this));
+        $this->setObjectName(\get_class($this));
     }
 
     /**
-     * Set my key value and object name accordingly
+     * Set my key value and object name accordingly.
      *
      * @param mixed $key value of object indentifier to be set
      *
@@ -46,7 +53,7 @@ class Engine extends \Ease\SQL\Engine
     }
 
     /**
-     * Save data
+     * Save data.
      *
      * @param array $data
      *
@@ -54,17 +61,20 @@ class Engine extends \Ease\SQL\Engine
      */
     public function saveToSQL($data = null)
     {
-        if (is_null($data)) {
+        if (null === $data) {
             $data = $this->getData();
         }
+
         unset($data['class']);
 
-        if (array_key_exists('app_id', $data) && array_key_exists('company_id', $data)) {
+        if (\array_key_exists('app_id', $data) && \array_key_exists('company_id', $data)) {
             $found = $this->getColumnsFromSQL(['id'], ['app_id' => $data['app_id'], 'company_id' => $data['company_id']]);
+
             if ($found) {
-                $data[$this->getKeyColumn()] = (intval($found[0]['id']));
+                $data[$this->getKeyColumn()] = ((int) $found[0]['id']);
             }
         }
+
         return parent::saveToSQL($data);
     }
 }

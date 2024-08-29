@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi;
 
 use MultiFlexi\Token;
@@ -9,10 +22,7 @@ use MultiFlexi\Token;
  */
 class TokenTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var Token
-     */
-    protected $object;
+    protected Token $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class TokenTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Token::getUser
+     * @covers \MultiFlexi\Token::getUser
+     *
      * @todo   Implement testgetUser().
      */
-    public function testgetUser()
+    public function testgetUser(): void
     {
         $this->assertEquals('', $this->object->getUser());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class TokenTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Token::generate
+     * @covers \MultiFlexi\Token::generate
+     *
      * @todo   Implement testgenerate().
      */
-    public function testgenerate()
+    public function testgenerate(): void
     {
         $this->assertEquals('', $this->object->generate());
         // Remove the following lines when you implement this test.

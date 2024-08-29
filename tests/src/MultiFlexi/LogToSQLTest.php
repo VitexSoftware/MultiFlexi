@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi;
 
 use MultiFlexi\LogToSQL;
@@ -9,10 +22,7 @@ use MultiFlexi\LogToSQL;
  */
 class LogToSQLTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var LogToSQL
-     */
-    protected $object;
+    protected LogToSQL $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class LogToSQLTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\LogToSQL::singleton
+     * @covers \MultiFlexi\LogToSQL::singleton
+     *
      * @todo   Implement testsingleton().
      */
-    public function testsingleton()
+    public function testsingleton(): void
     {
         $this->assertEquals('', $this->object->singleton());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class LogToSQLTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\LogToSQL::setCompany
+     * @covers \MultiFlexi\LogToSQL::setCompany
+     *
      * @todo   Implement testsetCompany().
      */
-    public function testsetCompany()
+    public function testsetCompany(): void
     {
         $this->assertEquals('', $this->object->setCompany());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class LogToSQLTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\LogToSQL::setApplication
+     * @covers \MultiFlexi\LogToSQL::setApplication
+     *
      * @todo   Implement testsetApplication().
      */
-    public function testsetApplication()
+    public function testsetApplication(): void
     {
         $this->assertEquals('', $this->object->setApplication());
         // Remove the following lines when you implement this test.
@@ -66,10 +78,11 @@ class LogToSQLTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\LogToSQL::setUser
+     * @covers \MultiFlexi\LogToSQL::setUser
+     *
      * @todo   Implement testsetUser().
      */
-    public function testsetUser()
+    public function testsetUser(): void
     {
         $this->assertEquals('', $this->object->setUser());
         // Remove the following lines when you implement this test.
@@ -77,10 +90,11 @@ class LogToSQLTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\LogToSQL::addToLog
+     * @covers \MultiFlexi\LogToSQL::addToLog
+     *
      * @todo   Implement testaddToLog().
      */
-    public function testaddToLog()
+    public function testaddToLog(): void
     {
         $this->assertEquals('', $this->object->addToLog());
         // Remove the following lines when you implement this test.
@@ -88,10 +102,11 @@ class LogToSQLTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\LogToSQL::venuize
+     * @covers \MultiFlexi\LogToSQL::venuize
+     *
      * @todo   Implement testvenuize().
      */
-    public function testvenuize()
+    public function testvenuize(): void
     {
         $this->assertEquals('', $this->object->venuize());
         // Remove the following lines when you implement this test.
@@ -99,10 +114,11 @@ class LogToSQLTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\LogToSQL::removeEmoji
+     * @covers \MultiFlexi\LogToSQL::removeEmoji
+     *
      * @todo   Implement testremoveEmoji().
      */
-    public function testremoveEmoji()
+    public function testremoveEmoji(): void
     {
         $this->assertEquals('', $this->object->removeEmoji());
         // Remove the following lines when you implement this test.

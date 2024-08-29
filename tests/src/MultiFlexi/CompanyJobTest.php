@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi;
 
 use MultiFlexi\CompanyJob;
@@ -9,10 +22,7 @@ use MultiFlexi\CompanyJob;
  */
 class CompanyJobTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var CompanyJob
-     */
-    protected $object;
+    protected CompanyJob $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class CompanyJobTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\CompanyJob::getColumns
+     * @covers \MultiFlexi\CompanyJob::getColumns
+     *
      * @todo   Implement testgetColumns().
      */
-    public function testgetColumns()
+    public function testgetColumns(): void
     {
         $this->assertEquals('', $this->object->getColumns());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class CompanyJobTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\CompanyJob::columns
+     * @covers \MultiFlexi\CompanyJob::columns
+     *
      * @todo   Implement testcolumns().
      */
-    public function testcolumns()
+    public function testcolumns(): void
     {
         $this->assertEquals('', $this->object->columns());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class CompanyJobTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\CompanyJob::addSelectizeValues
+     * @covers \MultiFlexi\CompanyJob::addSelectizeValues
+     *
      * @todo   Implement testaddSelectizeValues().
      */
-    public function testaddSelectizeValues()
+    public function testaddSelectizeValues(): void
     {
         $this->assertEquals('', $this->object->addSelectizeValues());
         // Remove the following lines when you implement this test.
@@ -66,10 +78,11 @@ class CompanyJobTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\CompanyJob::completeDataRow
+     * @covers \MultiFlexi\CompanyJob::completeDataRow
+     *
      * @todo   Implement testcompleteDataRow().
      */
-    public function testcompleteDataRow()
+    public function testcompleteDataRow(): void
     {
         $this->assertEquals('', $this->object->completeDataRow());
         // Remove the following lines when you implement this test.
@@ -77,10 +90,11 @@ class CompanyJobTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\CompanyJob::tableCode
+     * @covers \MultiFlexi\CompanyJob::tableCode
+     *
      * @todo   Implement testtableCode().
      */
-    public function testtableCode()
+    public function testtableCode(): void
     {
         $this->assertEquals('', $this->object->tableCode());
         // Remove the following lines when you implement this test.
@@ -88,10 +102,11 @@ class CompanyJobTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\CompanyJob::setCompany
+     * @covers \MultiFlexi\CompanyJob::setCompany
+     *
      * @todo   Implement testsetCompany().
      */
-    public function testsetCompany()
+    public function testsetCompany(): void
     {
         $this->assertEquals('', $this->object->setCompany());
         // Remove the following lines when you implement this test.
@@ -99,10 +114,11 @@ class CompanyJobTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\CompanyJob::setApp
+     * @covers \MultiFlexi\CompanyJob::setApp
+     *
      * @todo   Implement testsetApp().
      */
-    public function testsetApp()
+    public function testsetApp(): void
     {
         $this->assertEquals('', $this->object->setApp());
         // Remove the following lines when you implement this test.

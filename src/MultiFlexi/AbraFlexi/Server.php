@@ -3,40 +3,43 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi - AbraFlexi Server
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\AbraFlexi;
 
 /**
- * Description of Server
+ * Description of Server.
  *
  * @author vitex
  */
 class Server extends \MultiFlexi\Engine implements \MultiFlexi\platformServer
 {
     /**
-     * SQL Table we use
-     * @var string
+     * SQL Table we use.
      */
-    public $myTable = 'servers';
+    public string $myTable = 'servers';
 
     /**
-     * Connection Environment by Server
+     * Connection Environment by Server.
      *
      * @return array
      */
     public function getEnvironment()
     {
         $connectionData = $this->getData();
-        $companyEnvironment = [
+
+        return [
             'ABRAFLEXI_URL' => $connectionData['url'],
             'ABRAFLEXI_LOGIN' => $connectionData['user'],
             'ABRAFLEXI_PASSWORD' => $connectionData['password'],
         ];
-        return $companyEnvironment;
     }
 }

@@ -3,48 +3,39 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi - native Executor
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Executor;
 
 /**
- * Description of Native
+ * Description of Native.
  *
  * @author vitex
  */
 class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
 {
-    /**
-     *
-     * @var \Symfony\Component\Process\Process
-     */
-    private $process;
+    private \Symfony\Component\Process\Process $process;
     private $commandline;
 
-    /**
-     *
-     * @return string
-     */
     public static function name(): string
     {
         return _('Native');
     }
 
-    /**
-     *
-     * @return string
-     */
     public static function description(): string
     {
         return _('Run Job on same machine as MultiFlexi itself');
     }
 
     /**
-     *
      * @return string
      */
     public function executable()
@@ -53,7 +44,6 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
     }
 
     /**
-     *
      * @return string
      */
     public function cmdparams()
@@ -62,20 +52,20 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
     }
 
     /**
-     *
      * @return string
      */
     public function commandline()
     {
-        return $this->executable() . ' ' . $this->cmdparams();
+        return $this->executable().' '.$this->cmdparams();
     }
 
     public function launch($command)
     {
         $this->process = new \Symfony\Component\Process\Process(explode(' ', $command), null, \MultiFlexi\Environmentor::flatEnv($this->environment), null, 32767);
-        $this->process->run(function ($type, $buffer) {
+        $this->process->run(function ($type, $buffer): void {
             $logger = new \Ease\Sand();
             $logger->setObjectName(\Ease\Logger\Message::getCallerName($this));
+
             if (\Symfony\Component\Process\Process::ERR === $type) {
                 $logger->addStatusMessage($buffer, 'error');
                 $this->addOutput($buffer, 'error');
@@ -84,22 +74,22 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
                 $this->addOutput($buffer, 'success');
             }
         });
-        $this->addStatusMessage($command . ': ' . $this->process->getExitCodeText() == 0 ? 'success' : 'warning');
+        $this->addStatusMessage($command.': '.$this->process->getExitCodeText() === 0 ? 'success' : 'warning');
+
         return $this->process->getExitCode();
     }
 
-    public function launchJob()
+    public function launchJob(): void
     {
         $this->commandline = $this->commandline();
         $this->setDataValue('commandline', $this->commandline);
-        $this->addStatusMessage('Job launched: ' . $this->job->application->getDataValue('name') . '@' . $this->job->company->getDataValue('name'));
+        $this->addStatusMessage('Job launched: '.$this->job->application->getDataValue('name').'@'.$this->job->company->getDataValue('name'));
         $this->launch($this->commandline());
-        $this->addStatusMessage('Jobn launch finished: ' . $this->executable() . '@' . $this->job->application->getDataValue('name') . ' ' . $this->process->getExitCodeText());
+        $this->addStatusMessage('Jobn launch finished: '.$this->executable().'@'.$this->job->application->getDataValue('name').' '.$this->process->getExitCodeText());
     }
 
-    public function storeLogs()
+    public function storeLogs(): void
     {
-        ;
     }
 
     /**
@@ -109,7 +99,7 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
      */
     public static function usableForApp($app): bool
     {
-        return is_object($app); // Every application can be launched by native executor yet
+        return \is_object($app); // Every application can be launched by native executor yet
     }
 
     public static function logo()

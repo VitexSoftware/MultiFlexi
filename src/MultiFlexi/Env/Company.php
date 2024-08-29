@@ -3,23 +3,27 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi - Company Environment Handler
+ * This file is part of the MultiFlexi package
  *
- * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Env;
 
 /**
- * Description of Company
+ * Description of Company.
  *
  * @author vitex
  */
 class Company extends \MultiFlexi\Environmentor implements injector
 {
     /**
-     * List of all known keys
+     * List of all known keys.
      *
      * @return array
      */
@@ -29,22 +33,21 @@ class Company extends \MultiFlexi\Environmentor implements injector
     }
 
     /**
-     * Company Environment
-     *
-     * @return array
+     * Company Environment.
      */
     public function getEnvironment(): array
     {
         $companyEnvironment = [];
         $companyEnvironmentRaw = $this->engine->company->getEnvironment();
+
         foreach ($companyEnvironmentRaw as $key => $value) {
             $companyEnvironment[$key]['value'] = $value;
         }
+
         return $this->addMetaData($this->addSelfAsSource($companyEnvironment));
     }
 
     /**
-     *
      * @return string
      */
     public static function name()
@@ -52,7 +55,6 @@ class Company extends \MultiFlexi\Environmentor implements injector
         return _('Company');
     }
     /**
-     *
      * @return string
      */
     public static function description()

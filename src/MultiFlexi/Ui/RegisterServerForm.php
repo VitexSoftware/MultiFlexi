@@ -1,45 +1,51 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi  - New AbraFlexi registration form
+ * This file is part of the MultiFlexi package
  *
- * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2015-2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Registered AbraFlexi instance editor Form
+ * Registered AbraFlexi instance editor Form.
  *
  * @author
  */
 class RegisterServerForm extends EngineForm
 {
-    public function afterAdd()
+    public function afterAdd(): void
     {
         $this->addInput(new ServerTypeSelect('type'), _('Server Type'));
 
         $this->addInput(
             new \Ease\Html\InputTextTag('name'),
-            _('Server instance Name')
+            _('Server instance Name'),
         );
         $this->addInput(
             new \Ease\Html\InputTextTag('url'),
-            _('RestAPI endpoint url')
+            _('RestAPI endpoint url'),
         );
         $this->addInput(
             new \Ease\Html\InputTextTag('user'),
-            _('REST API Username')
+            _('REST API Username'),
         );
         $this->addInput(
             new \Ease\Html\InputPasswordTag('password'),
-            _('Rest API Password')
+            _('Rest API Password'),
         );
 
         $this->addInput(new \Ease\TWB4\SubmitButton(_('Save'), 'success'));
 
-        if (!is_null($this->engine->getDataValue('id'))) {
+        if (null !== $this->engine->getDataValue('id')) {
             $this->addItem(new \Ease\Html\InputHiddenTag('id'));
         }
 

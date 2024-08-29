@@ -1,34 +1,37 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Sign off page.
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
-use MultiFlexi\Ui\PageBottom;
-use MultiFlexi\Ui\PageTop;
-
 require_once './init.php';
 
-if (is_null(\Ease\Shared::user()->getUserID()) === false) {
+if ((null === \Ease\Shared::user()->getUserID()) === false) {
     \Ease\Shared::user()->logout();
 }
 
 $oPage->addItem(new PageTop(_('Sign Off')));
 
 $byerow = new \Ease\TWB4\Row();
-$byerow->addColumn(6, new \Ease\Html\ImgTag('images/openclipart/' . \MultiFlexi\Ui\OpenClipart::randomImage('images/openclipart')));
+$byerow->addColumn(6, new \Ease\Html\ImgTag('images/openclipart/'.\MultiFlexi\Ui\OpenClipart::randomImage('images/openclipart')));
 $byeInfo = $byerow->addColumn(6, new \Ease\Html\H1Tag(_('Good bye')));
 
 $byeInfo->addItem('<br/><br/><br/><br/>');
 $byeInfo->addItem(new \Ease\Html\DivTag(new \Ease\Html\ATag(
     'login.php',
     _('Thank you for your patronage and look forward to another visit'),
-    ['class' => 'jumbotron']
+    ['class' => 'jumbotron'],
 )));
 $byeInfo->addItem('<br/><br/><br/><br/>');
 

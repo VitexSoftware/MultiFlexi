@@ -1,9 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace MultiFlexi;
 
 /**
- * Multi Flexi - Instance Management Class
+ * Multi Flexi - Instance Management Class.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020-2023 Vitex Software
@@ -13,88 +26,92 @@ class Servers extends DBEngine
     public $keyword = 'server';
 
     /**
-     * Column with name of record
-     * @var string
+     * Column with name of record.
      */
-    public $nameColumn = 'name';
+    public string $nameColumn = 'name';
 
     /**
-     * We Work With Table
-     * @var string
+     * We Work With Table.
      */
-    public $myTable = 'servers';
+    public string $myTable = 'servers';
 
     /**
-     * Column with record create time
-     * @var string
+     * Column with record create time.
      */
-    public $createColumn = 'DatCreate';
+    public string $createColumn = 'DatCreate';
 
     /**
-     * Column with last record upadate time
-     * @var string
+     * Column with last record upadate time.
      */
-    public $modifiedColumn = 'DatSave';
+    public string $modifiedColumn = 'DatSave';
 
     /**
-     * Filter Input data
+     * Filter Input data.
      *
      * @param array $data
+     *
      * @return int data taken count
      */
     public function takeData($data)
     {
         unset($data['class']);
-        if (array_key_exists('id', $data)) {
-            if (is_null($data['id'])) {
+
+        if (\array_key_exists('id', $data)) {
+            if (null === $data['id']) {
                 unset($data['id']);
             } else {
-                $data['id'] = intval($data['id']);
+                $data['id'] = (int) $data['id'];
             }
         }
+
         $result = parent::takeData($data);
-        if (array_key_exists('name', $data) && !strlen($data['name'])) {
+
+        if (\array_key_exists('name', $data) && !\strlen($data['name'])) {
             $this->addStatusMessage(
                 _('Instance name cannot be empty'),
-                'warning'
+                'warning',
             );
             $result = false;
         }
-        if (array_key_exists('url', $data) && !strlen($data['url'])) {
+
+        if (\array_key_exists('url', $data) && !\strlen($data['url'])) {
             $this->addStatusMessage(
                 _('Server API URL cannot be empty'),
-                'warning'
+                'warning',
             );
             $result = false;
         }
 
-        if (($data['type'] == 'Pohoda') && (parse_url($data['url'], PHP_URL_PORT) != null)) {
+        if (($data['type'] === 'Pohoda') && (parse_url($data['url'], \PHP_URL_PORT) !== null)) {
             $this->addStatusMessage(
                 _('Pohoda Server API URL cannot contain port'),
-                'warning'
+                'warning',
             );
             $result = false;
         }
 
-        if (array_key_exists('user', $data) && !strlen($data['user'])) {
+        if (\array_key_exists('user', $data) && !\strlen($data['user'])) {
             $this->addStatusMessage(_('User name cannot be empty'), 'warning');
             $result = false;
         }
-        if (array_key_exists('password', $data) && !strlen($data['password'])) {
+
+        if (\array_key_exists('password', $data) && !\strlen($data['password'])) {
             $this->addStatusMessage(
                 _('API User password cannot be empty'),
-                'warning'
+                'warning',
             );
             $result = false;
         }
-        if (array_key_exists('company', $data) && !strlen($data['company'])) {
+
+        if (\array_key_exists('company', $data) && !\strlen($data['company'])) {
             $this->addStatusMessage(_('Company code cannot be empty'), 'warning');
             $result = false;
         }
-        if (substr($data['url'], -1) == '/') {
+
+        if (substr($data['url'], -1) === '/') {
             $this->addStatusMessage(
                 _('Server API URL cannot end with slash'),
-                'warning'
+                'warning',
             );
             $result = false;
         }
@@ -129,16 +146,16 @@ class Servers extends DBEngine
     //        return parent::saveToSQL($data, $searchForID);
     //    }
 
-    public function prepareRemoteAbraFlexi()
+    public function prepareRemoteAbraFlexi(): void
     {
         $companer = new Company(null, $this->getData());
         $settinger = new \AbraFlexi\Nastaveni(
             null,
-            array_merge($this->getData(), ['detail' => 'full'])
+            array_merge($this->getData(), ['detail' => 'full']),
         );
-        //Setup Reminder
-        //Setup Invoicer
-        //Setup any other apps
+        // Setup Reminder
+        // Setup Invoicer
+        // Setup any other apps
         //        $companyData['ic'] = $companyDetails['ic'];
         //        unset($companyData['ic']);
         //        $companyData['name'] = $companyDetails['nazFirmy'];
@@ -151,7 +168,7 @@ class Servers extends DBEngine
         //                        $companyData['name']), $result ? 'success' : 'error');
     }
 
-    public function setEnvironment()
+    public function setEnvironment(): void
     {
         $envNames = [
             'ABRAFLEXI_URL' => $this->getDataValue('url'),
@@ -162,16 +179,15 @@ class Servers extends DBEngine
     }
 
     /**
-     * Connection info for \AbraFlexi\RO
+     * Connection info for \AbraFlexi\RO.
      *
      * @return array
      */
     public function getConnectionDetails()
     {
         $connectionInfo = $this->getData();
-        unset($connectionInfo['id']);
-        unset($connectionInfo['DatCreate']);
-        unset($connectionInfo['DatSave']);
+        unset($connectionInfo['id'], $connectionInfo['DatCreate'], $connectionInfo['DatSave']);
+
         return $connectionInfo;
     }
 }

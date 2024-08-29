@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi\Ui;
 
 use MultiFlexi\Ui\ServerSelect;
@@ -9,10 +22,7 @@ use MultiFlexi\Ui\ServerSelect;
  */
 class ServerSelectTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var ServerSelect
-     */
-    protected $object;
+    protected ServerSelect $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::loadItems
+     * @covers \MultiFlexi\Ui\ServerSelect::loadItems
+     *
      * @todo   Implement testloadItems().
      */
-    public function testloadItems()
+    public function testloadItems(): void
     {
         $this->assertEquals('', $this->object->loadItems());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::setUpDb
+     * @covers \MultiFlexi\Ui\ServerSelect::setUpDb
+     *
      * @todo   Implement testsetUpDb().
      */
-    public function testsetUpDb()
+    public function testsetUpDb(): void
     {
         $this->assertEquals('', $this->object->setUpDb());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::setUp
+     * @covers \MultiFlexi\Ui\ServerSelect::setUp
+     *
      * @todo   Implement testsetUp().
      */
-    public function testsetUp()
+    public function testsetUp(): void
     {
         $this->assertEquals('', $this->object->setUp());
         // Remove the following lines when you implement this test.
@@ -66,10 +78,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::pdoConnect
+     * @covers \MultiFlexi\Ui\ServerSelect::pdoConnect
+     *
      * @todo   Implement testpdoConnect().
      */
-    public function testpdoConnect()
+    public function testpdoConnect(): void
     {
         $this->assertEquals('', $this->object->pdoConnect());
         // Remove the following lines when you implement this test.
@@ -77,10 +90,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::getPdo
+     * @covers \MultiFlexi\Ui\ServerSelect::getPdo
+     *
      * @todo   Implement testgetPdo().
      */
-    public function testgetPdo()
+    public function testgetPdo(): void
     {
         $this->assertEquals('', $this->object->getPdo());
         // Remove the following lines when you implement this test.
@@ -88,10 +102,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::getFluentPDO
+     * @covers \MultiFlexi\Ui\ServerSelect::getFluentPDO
+     *
      * @todo   Implement testgetFluentPDO().
      */
-    public function testgetFluentPDO()
+    public function testgetFluentPDO(): void
     {
         $this->assertEquals('', $this->object->getFluentPDO());
         // Remove the following lines when you implement this test.
@@ -99,10 +114,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::listingQuery
+     * @covers \MultiFlexi\Ui\ServerSelect::listingQuery
+     *
      * @todo   Implement testlistingQuery().
      */
-    public function testlistingQuery()
+    public function testlistingQuery(): void
     {
         $this->assertEquals('', $this->object->listingQuery());
         // Remove the following lines when you implement this test.
@@ -110,10 +126,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::getColumnsFromSQL
+     * @covers \MultiFlexi\Ui\ServerSelect::getColumnsFromSQL
+     *
      * @todo   Implement testgetColumnsFromSQL().
      */
-    public function testgetColumnsFromSQL()
+    public function testgetColumnsFromSQL(): void
     {
         $this->assertEquals('', $this->object->getColumnsFromSQL());
         // Remove the following lines when you implement this test.
@@ -121,10 +138,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::getDataFromSQL
+     * @covers \MultiFlexi\Ui\ServerSelect::getDataFromSQL
+     *
      * @todo   Implement testgetDataFromSQL().
      */
-    public function testgetDataFromSQL()
+    public function testgetDataFromSQL(): void
     {
         $this->assertEquals('', $this->object->getDataFromSQL());
         // Remove the following lines when you implement this test.
@@ -132,10 +150,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::loadFromSQL
+     * @covers \MultiFlexi\Ui\ServerSelect::loadFromSQL
+     *
      * @todo   Implement testloadFromSQL().
      */
-    public function testloadFromSQL()
+    public function testloadFromSQL(): void
     {
         $this->assertEquals('', $this->object->loadFromSQL());
         // Remove the following lines when you implement this test.
@@ -143,10 +162,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::dbreload
+     * @covers \MultiFlexi\Ui\ServerSelect::dbreload
+     *
      * @todo   Implement testdbreload().
      */
-    public function testdbreload()
+    public function testdbreload(): void
     {
         $this->assertEquals('', $this->object->dbreload());
         // Remove the following lines when you implement this test.
@@ -154,10 +174,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::dbsync
+     * @covers \MultiFlexi\Ui\ServerSelect::dbsync
+     *
      * @todo   Implement testdbsync().
      */
-    public function testdbsync()
+    public function testdbsync(): void
     {
         $this->assertEquals('', $this->object->dbsync());
         // Remove the following lines when you implement this test.
@@ -165,10 +186,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::updateToSQL
+     * @covers \MultiFlexi\Ui\ServerSelect::updateToSQL
+     *
      * @todo   Implement testupdateToSQL().
      */
-    public function testupdateToSQL()
+    public function testupdateToSQL(): void
     {
         $this->assertEquals('', $this->object->updateToSQL());
         // Remove the following lines when you implement this test.
@@ -176,10 +198,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::saveToSQL
+     * @covers \MultiFlexi\Ui\ServerSelect::saveToSQL
+     *
      * @todo   Implement testsaveToSQL().
      */
-    public function testsaveToSQL()
+    public function testsaveToSQL(): void
     {
         $this->assertEquals('', $this->object->saveToSQL());
         // Remove the following lines when you implement this test.
@@ -187,10 +210,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::insertToSQL
+     * @covers \MultiFlexi\Ui\ServerSelect::insertToSQL
+     *
      * @todo   Implement testinsertToSQL().
      */
-    public function testinsertToSQL()
+    public function testinsertToSQL(): void
     {
         $this->assertEquals('', $this->object->insertToSQL());
         // Remove the following lines when you implement this test.
@@ -198,10 +222,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::deleteFromSQL
+     * @covers \MultiFlexi\Ui\ServerSelect::deleteFromSQL
+     *
      * @todo   Implement testdeleteFromSQL().
      */
-    public function testdeleteFromSQL()
+    public function testdeleteFromSQL(): void
     {
         $this->assertEquals('', $this->object->deleteFromSQL());
         // Remove the following lines when you implement this test.
@@ -209,10 +234,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::takeToData
+     * @covers \MultiFlexi\Ui\ServerSelect::takeToData
+     *
      * @todo   Implement testtakeToData().
      */
-    public function testtakeToData()
+    public function testtakeToData(): void
     {
         $this->assertEquals('', $this->object->takeToData());
         // Remove the following lines when you implement this test.
@@ -220,10 +246,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::getMyTable
+     * @covers \MultiFlexi\Ui\ServerSelect::getMyTable
+     *
      * @todo   Implement testgetMyTable().
      */
-    public function testgetMyTable()
+    public function testgetMyTable(): void
     {
         $this->assertEquals('', $this->object->getMyTable());
         // Remove the following lines when you implement this test.
@@ -231,10 +258,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::setMyTable
+     * @covers \MultiFlexi\Ui\ServerSelect::setMyTable
+     *
      * @todo   Implement testsetMyTable().
      */
-    public function testsetMyTable()
+    public function testsetMyTable(): void
     {
         $this->assertEquals('', $this->object->setMyTable());
         // Remove the following lines when you implement this test.
@@ -242,10 +270,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::getMyKey
+     * @covers \MultiFlexi\Ui\ServerSelect::getMyKey
+     *
      * @todo   Implement testgetMyKey().
      */
-    public function testgetMyKey()
+    public function testgetMyKey(): void
     {
         $this->assertEquals('', $this->object->getMyKey());
         // Remove the following lines when you implement this test.
@@ -253,10 +282,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::setMyKey
+     * @covers \MultiFlexi\Ui\ServerSelect::setMyKey
+     *
      * @todo   Implement testsetMyKey().
      */
-    public function testsetMyKey()
+    public function testsetMyKey(): void
     {
         $this->assertEquals('', $this->object->setMyKey());
         // Remove the following lines when you implement this test.
@@ -264,10 +294,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::getKeyColumn
+     * @covers \MultiFlexi\Ui\ServerSelect::getKeyColumn
+     *
      * @todo   Implement testgetKeyColumn().
      */
-    public function testgetKeyColumn()
+    public function testgetKeyColumn(): void
     {
         $this->assertEquals('', $this->object->getKeyColumn());
         // Remove the following lines when you implement this test.
@@ -275,10 +306,11 @@ class ServerSelectTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ServerSelect::setKeyColumn
+     * @covers \MultiFlexi\Ui\ServerSelect::setKeyColumn
+     *
      * @todo   Implement testsetKeyColumn().
      */
-    public function testsetKeyColumn()
+    public function testsetKeyColumn(): void
     {
         $this->assertEquals('', $this->object->setKeyColumn());
         // Remove the following lines when you implement this test.

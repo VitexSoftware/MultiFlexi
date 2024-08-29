@@ -3,15 +3,17 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi -
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 /**
- *
- *
  * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software
  */
@@ -19,18 +21,18 @@ declare(strict_types=1);
 namespace MultiFlexi\Executor;
 
 /**
- * Description of Kubernetes
+ * Description of Kubernetes.
  *
  * @author vitex
  */
 class Kubernetes extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
 {
-    //put your code here
-    public function launch(string $command)
+    // put your code here
+    public function launch(string $command): void
     {
     }
 
-    public function storeLogs()
+    public function storeLogs(): void
     {
     }
 
@@ -59,23 +61,23 @@ class Kubernetes extends \MultiFlexi\CommonExecutor implements \MultiFlexi\execu
         return empty($app->getDataValue('ociimage')) === false; // Container Image must be present
     }
 
-    public function getErrorOutput()
+    public function getErrorOutput(): void
     {
     }
 
-    public function getExitCode()
+    public function getExitCode(): void
     {
     }
 
-    public function getOutput()
+    public function getOutput(): void
     {
     }
 
-    public function commandline()
+    public function commandline(): void
     {
     }
 
-    public function launchJob()
+    public function launchJob(): void
     {
     }
 }

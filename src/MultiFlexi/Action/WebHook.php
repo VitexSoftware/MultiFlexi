@@ -3,23 +3,27 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi - WebHook
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2024 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Action;
 
 /**
- * Description of Reschedule
+ * Description of Reschedule.
  *
  * @author vitex
  */
 class WebHook extends \MultiFlexi\CommonAction
 {
     /**
-     * Module Caption
+     * Module Caption.
      *
      * @return string
      */
@@ -29,7 +33,7 @@ class WebHook extends \MultiFlexi\CommonAction
     }
 
     /**
-     * Module Description
+     * Module Description.
      *
      * @return string
      */
@@ -44,22 +48,22 @@ class WebHook extends \MultiFlexi\CommonAction
     }
 
     /**
-     * Perform Action
+     * Perform Action.
      */
-    public function perform()
+    public function perform(): void
     {
         $uri = $this->getDataValue('uri');
         $payload = stripslashes($this->job->getDataValue('stdout'));
 
         $this->addStatusMessage(_('Perform begin'));
-        //$exitCode = $this->job->executor->launch($command);
+        // $exitCode = $this->job->executor->launch($command);
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, \CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, \CURLOPT_RETURNTRANSFER, true);
 
         // set URL and other appropriate options
-        curl_setopt($ch, CURLOPT_URL, $uri);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, \CURLOPT_URL, $uri);
+        curl_setopt($ch, \CURLOPT_HEADER, 0);
 
         // grab URL and pass it to the browser
         $this->addStatusMessage(curl_exec($ch), 'debug');
@@ -70,7 +74,7 @@ class WebHook extends \MultiFlexi\CommonAction
     }
 
     /**
-     * Is this Action Situable for Application
+     * Is this Action Situable for Application.
      *
      * @param Application $app
      */
@@ -81,6 +85,6 @@ class WebHook extends \MultiFlexi\CommonAction
 
     public static function inputs(string $prefix)
     {
-        return new \Ease\TWB4\FormGroup(_('Uri'), new \Ease\Html\InputTextTag($prefix . '[WebHook][uri]'), '', _('Report endpoint'));
+        return new \Ease\TWB4\FormGroup(_('Uri'), new \Ease\Html\InputTextTag($prefix.'[WebHook][uri]'), '', _('Report endpoint'));
     }
 }

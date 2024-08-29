@@ -2,36 +2,47 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace MultiFlexi\Pohoda;
 
 /**
- * Multi Flexi - Pohoda Company
+ * Multi Flexi - Pohoda Company.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software
  */
 
 /**
- * Description of Company
+ * Description of Company.
  *
  * @author vitex
  */
 class Company extends \MultiFlexi\Company implements \MultiFlexi\platformCompany
 {
     /**
-     * SQL Table we use
-     * @var string
+     * SQL Table we use.
      */
-    public $myTable = 'company';
+    public string $myTable = 'company';
 
     public function getServerEnvironment()
     {
         $server = new Server($this->getDataValue('server'));
+
         return $server->getEnvironment();
     }
 
     /**
-     * Company Environment with Pohoda Specific values
+     * Company Environment with Pohoda Specific values.
      *
      * @return array
      */
@@ -39,7 +50,8 @@ class Company extends \MultiFlexi\Company implements \MultiFlexi\platformCompany
     {
         $companyEnvironment = $this->getServerEnvironment();
         $companyEnvironment['POHODA_ICO']['value'] = $this->getDataValue('ic');
-        $companyEnvironment['POHODA_URL']['value'] = $companyEnvironment['POHODA_URL']['value'] . ':' . $this->getDataValue('company');
+        $companyEnvironment['POHODA_URL']['value'] = $companyEnvironment['POHODA_URL']['value'].':'.$this->getDataValue('company');
+
         return array_merge($companyEnvironment, parent::getEnvironment());
     }
 }

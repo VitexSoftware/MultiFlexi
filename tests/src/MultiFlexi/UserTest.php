@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi;
 
 use MultiFlexi\User;
@@ -9,10 +22,7 @@ use MultiFlexi\User;
  */
 class UserTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var User
-     */
-    protected $object;
+    protected User $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class UserTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\User::getIcon
+     * @covers \MultiFlexi\User::getIcon
+     *
      * @todo   Implement testgetIcon().
      */
-    public function testgetIcon()
+    public function testgetIcon(): void
     {
         $this->assertEquals('', $this->object->getIcon());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::getId
+     * @covers \MultiFlexi\User::getId
+     *
      * @todo   Implement testgetId().
      */
-    public function testgetId()
+    public function testgetId(): void
     {
         $this->assertEquals('', $this->object->getId());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::getUserName
+     * @covers \MultiFlexi\User::getUserName
+     *
      * @todo   Implement testgetUserName().
      */
-    public function testgetUserName()
+    public function testgetUserName(): void
     {
         $this->assertEquals('', $this->object->getUserName());
         // Remove the following lines when you implement this test.
@@ -66,10 +78,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::getRecordName
+     * @covers \MultiFlexi\User::getRecordName
+     *
      * @todo   Implement testgetRecordName().
      */
-    public function testgetRecordName()
+    public function testgetRecordName(): void
     {
         $this->assertEquals('', $this->object->getRecordName());
         // Remove the following lines when you implement this test.
@@ -77,10 +90,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::getEmail
+     * @covers \MultiFlexi\User::getEmail
+     *
      * @todo   Implement testgetEmail().
      */
-    public function testgetEmail()
+    public function testgetEmail(): void
     {
         $this->assertEquals('', $this->object->getEmail());
         // Remove the following lines when you implement this test.
@@ -88,10 +102,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::tryToLogin
+     * @covers \MultiFlexi\User::tryToLogin
+     *
      * @todo   Implement testtryToLogin().
      */
-    public function testtryToLogin()
+    public function testtryToLogin(): void
     {
         $this->assertEquals('', $this->object->tryToLogin());
         // Remove the following lines when you implement this test.
@@ -99,10 +114,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::passwordValidation
+     * @covers \MultiFlexi\User::passwordValidation
+     *
      * @todo   Implement testpasswordValidation().
      */
-    public function testpasswordValidation()
+    public function testpasswordValidation(): void
     {
         $this->assertEquals('', $this->object->passwordValidation());
         // Remove the following lines when you implement this test.
@@ -110,10 +126,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::loginSuccess
+     * @covers \MultiFlexi\User::loginSuccess
+     *
      * @todo   Implement testloginSuccess().
      */
-    public function testloginSuccess()
+    public function testloginSuccess(): void
     {
         $this->assertEquals('', $this->object->loginSuccess());
         // Remove the following lines when you implement this test.
@@ -121,10 +138,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::logout
+     * @covers \MultiFlexi\User::logout
+     *
      * @todo   Implement testlogout().
      */
-    public function testlogout()
+    public function testlogout(): void
     {
         $this->assertEquals('', $this->object->logout());
         // Remove the following lines when you implement this test.
@@ -132,10 +150,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::encryptPassword
+     * @covers \MultiFlexi\User::encryptPassword
+     *
      * @todo   Implement testencryptPassword().
      */
-    public function testencryptPassword()
+    public function testencryptPassword(): void
     {
         $this->assertEquals('', $this->object->encryptPassword());
         // Remove the following lines when you implement this test.
@@ -143,10 +162,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::passwordChange
+     * @covers \MultiFlexi\User::passwordChange
+     *
      * @todo   Implement testpasswordChange().
      */
-    public function testpasswordChange()
+    public function testpasswordChange(): void
     {
         $this->assertEquals('', $this->object->passwordChange());
         // Remove the following lines when you implement this test.
@@ -154,10 +174,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::columnDefs
+     * @covers \MultiFlexi\User::columnDefs
+     *
      * @todo   Implement testcolumnDefs().
      */
-    public function testcolumnDefs()
+    public function testcolumnDefs(): void
     {
         $this->assertEquals('', $this->object->columnDefs());
         // Remove the following lines when you implement this test.
@@ -165,10 +186,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::singleton
+     * @covers \MultiFlexi\User::singleton
+     *
      * @todo   Implement testsingleton().
      */
-    public function testsingleton()
+    public function testsingleton(): void
     {
         $this->assertEquals('', $this->object->singleton());
         // Remove the following lines when you implement this test.
@@ -176,10 +198,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::setUpDb
+     * @covers \MultiFlexi\User::setUpDb
+     *
      * @todo   Implement testsetUpDb().
      */
-    public function testsetUpDb()
+    public function testsetUpDb(): void
     {
         $this->assertEquals('', $this->object->setUpDb());
         // Remove the following lines when you implement this test.
@@ -187,10 +210,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::setUp
+     * @covers \MultiFlexi\User::setUp
+     *
      * @todo   Implement testsetUp().
      */
-    public function testsetUp()
+    public function testsetUp(): void
     {
         $this->assertEquals('', $this->object->setUp());
         // Remove the following lines when you implement this test.
@@ -198,10 +222,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::pdoConnect
+     * @covers \MultiFlexi\User::pdoConnect
+     *
      * @todo   Implement testpdoConnect().
      */
-    public function testpdoConnect()
+    public function testpdoConnect(): void
     {
         $this->assertEquals('', $this->object->pdoConnect());
         // Remove the following lines when you implement this test.
@@ -209,10 +234,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::getPdo
+     * @covers \MultiFlexi\User::getPdo
+     *
      * @todo   Implement testgetPdo().
      */
-    public function testgetPdo()
+    public function testgetPdo(): void
     {
         $this->assertEquals('', $this->object->getPdo());
         // Remove the following lines when you implement this test.
@@ -220,10 +246,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::getFluentPDO
+     * @covers \MultiFlexi\User::getFluentPDO
+     *
      * @todo   Implement testgetFluentPDO().
      */
-    public function testgetFluentPDO()
+    public function testgetFluentPDO(): void
     {
         $this->assertEquals('', $this->object->getFluentPDO());
         // Remove the following lines when you implement this test.
@@ -231,10 +258,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::listingQuery
+     * @covers \MultiFlexi\User::listingQuery
+     *
      * @todo   Implement testlistingQuery().
      */
-    public function testlistingQuery()
+    public function testlistingQuery(): void
     {
         $this->assertEquals('', $this->object->listingQuery());
         // Remove the following lines when you implement this test.
@@ -242,10 +270,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::getColumnsFromSQL
+     * @covers \MultiFlexi\User::getColumnsFromSQL
+     *
      * @todo   Implement testgetColumnsFromSQL().
      */
-    public function testgetColumnsFromSQL()
+    public function testgetColumnsFromSQL(): void
     {
         $this->assertEquals('', $this->object->getColumnsFromSQL());
         // Remove the following lines when you implement this test.
@@ -253,10 +282,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::getDataFromSQL
+     * @covers \MultiFlexi\User::getDataFromSQL
+     *
      * @todo   Implement testgetDataFromSQL().
      */
-    public function testgetDataFromSQL()
+    public function testgetDataFromSQL(): void
     {
         $this->assertEquals('', $this->object->getDataFromSQL());
         // Remove the following lines when you implement this test.
@@ -264,10 +294,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::loadFromSQL
+     * @covers \MultiFlexi\User::loadFromSQL
+     *
      * @todo   Implement testloadFromSQL().
      */
-    public function testloadFromSQL()
+    public function testloadFromSQL(): void
     {
         $this->assertEquals('', $this->object->loadFromSQL());
         // Remove the following lines when you implement this test.
@@ -275,10 +306,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::dbreload
+     * @covers \MultiFlexi\User::dbreload
+     *
      * @todo   Implement testdbreload().
      */
-    public function testdbreload()
+    public function testdbreload(): void
     {
         $this->assertEquals('', $this->object->dbreload());
         // Remove the following lines when you implement this test.
@@ -286,10 +318,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::dbsync
+     * @covers \MultiFlexi\User::dbsync
+     *
      * @todo   Implement testdbsync().
      */
-    public function testdbsync()
+    public function testdbsync(): void
     {
         $this->assertEquals('', $this->object->dbsync());
         // Remove the following lines when you implement this test.
@@ -297,10 +330,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::updateToSQL
+     * @covers \MultiFlexi\User::updateToSQL
+     *
      * @todo   Implement testupdateToSQL().
      */
-    public function testupdateToSQL()
+    public function testupdateToSQL(): void
     {
         $this->assertEquals('', $this->object->updateToSQL());
         // Remove the following lines when you implement this test.
@@ -308,10 +342,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::saveToSQL
+     * @covers \MultiFlexi\User::saveToSQL
+     *
      * @todo   Implement testsaveToSQL().
      */
-    public function testsaveToSQL()
+    public function testsaveToSQL(): void
     {
         $this->assertEquals('', $this->object->saveToSQL());
         // Remove the following lines when you implement this test.
@@ -319,10 +354,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::insertToSQL
+     * @covers \MultiFlexi\User::insertToSQL
+     *
      * @todo   Implement testinsertToSQL().
      */
-    public function testinsertToSQL()
+    public function testinsertToSQL(): void
     {
         $this->assertEquals('', $this->object->insertToSQL());
         // Remove the following lines when you implement this test.
@@ -330,10 +366,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::deleteFromSQL
+     * @covers \MultiFlexi\User::deleteFromSQL
+     *
      * @todo   Implement testdeleteFromSQL().
      */
-    public function testdeleteFromSQL()
+    public function testdeleteFromSQL(): void
     {
         $this->assertEquals('', $this->object->deleteFromSQL());
         // Remove the following lines when you implement this test.
@@ -341,10 +378,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::takeToData
+     * @covers \MultiFlexi\User::takeToData
+     *
      * @todo   Implement testtakeToData().
      */
-    public function testtakeToData()
+    public function testtakeToData(): void
     {
         $this->assertEquals('', $this->object->takeToData());
         // Remove the following lines when you implement this test.
@@ -352,10 +390,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::getMyTable
+     * @covers \MultiFlexi\User::getMyTable
+     *
      * @todo   Implement testgetMyTable().
      */
-    public function testgetMyTable()
+    public function testgetMyTable(): void
     {
         $this->assertEquals('', $this->object->getMyTable());
         // Remove the following lines when you implement this test.
@@ -363,10 +402,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\User::setMyTable
+     * @covers \MultiFlexi\User::setMyTable
+     *
      * @todo   Implement testsetMyTable().
      */
-    public function testsetMyTable()
+    public function testsetMyTable(): void
     {
         $this->assertEquals('', $this->object->setMyTable());
         // Remove the following lines when you implement this test.

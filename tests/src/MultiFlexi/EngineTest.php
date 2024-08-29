@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi;
 
 use MultiFlexi\Engine;
@@ -9,10 +22,7 @@ use MultiFlexi\Engine;
  */
 class EngineTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var Engine
-     */
-    protected $object;
+    protected Engine $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class EngineTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Engine::setMyKey
+     * @covers \MultiFlexi\Engine::setMyKey
+     *
      * @todo   Implement testsetMyKey().
      */
-    public function testsetMyKey()
+    public function testsetMyKey(): void
     {
         $this->assertEquals('', $this->object->setMyKey());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class EngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Engine::saveToSQL
+     * @covers \MultiFlexi\Engine::saveToSQL
+     *
      * @todo   Implement testsaveToSQL().
      */
-    public function testsaveToSQL()
+    public function testsaveToSQL(): void
     {
         $this->assertEquals('', $this->object->saveToSQL());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class EngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Engine::exportEnv
+     * @covers \MultiFlexi\Engine::exportEnv
+     *
      * @todo   Implement testexportEnv().
      */
-    public function testexportEnv()
+    public function testexportEnv(): void
     {
         $this->assertEquals('', $this->object->exportEnv());
         // Remove the following lines when you implement this test.

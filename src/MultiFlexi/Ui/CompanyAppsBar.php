@@ -3,10 +3,14 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi - Select for Apps already assigned to comany
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
@@ -20,8 +24,9 @@ class CompanyAppsBar extends \Ease\TWB4\Container
     {
         parent::__construct('', []);
         $companyApps = (new CompanyApp($company))->getAssigned()->leftJoin('apps ON apps.id = companyapp.app_id')->select(['apps.name', 'apps.description', 'apps.id', 'apps.image'], true)->fetchAll();
+
         foreach ($companyApps as $companyApp) {
-            $this->addItem(new \Ease\Html\ATag('companyapp.php?company_id=' . $company->getMyKey() . '&app_id=' . $companyApp['id'], new \Ease\Html\ImgTag($companyApp['image'], _($companyApp['name']), ['title' => _($companyApp['description']), 'height' => '50px', 'style' => 'padding: 5px; margin: 5px;', 'class' => 'button' ])));
+            $this->addItem(new \Ease\Html\ATag('companyapp.php?company_id='.$company->getMyKey().'&app_id='.$companyApp['id'], new \Ease\Html\ImgTag($companyApp['image'], _($companyApp['name']), ['title' => _($companyApp['description']), 'height' => '50px', 'style' => 'padding: 5px; margin: 5px;', 'class' => 'button'])));
         }
     }
 }

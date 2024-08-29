@@ -3,38 +3,34 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi -
+ * This file is part of the MultiFlexi package
  *
- * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi;
 
 /**
- * Description of Environmentor
+ * Description of Environmentor.
  *
  * @author vitex
  */
 abstract class Environmentor
 {
-    /**
-     *
-     * @var Job
-     */
-    public $engine;
+    public Job $engine;
 
-    /**
-     *
-     * @param Job $engine
-     */
     public function __construct(Job $engine)
     {
         $this->engine = $engine;
     }
 
     /**
-     * Generate Environment for current Job
+     * Generate Environment for current Job.
      *
      * @return array
      */
@@ -43,44 +39,43 @@ abstract class Environmentor
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\\Env');
         $injectors = \Ease\Functions::classesInNamespace('MultiFlexi\\Env');
         $jobEnv = [];
+
         foreach ($injectors as $injector) {
-            $injectorClass = '\\MultiFlexi\\Env\\' . $injector;
+            $injectorClass = '\\MultiFlexi\\Env\\'.$injector;
             $jobEnv = array_merge($jobEnv, (new $injectorClass($this))->getEnvironment());
         }
+
         return $jobEnv;
     }
 
     /**
-     * Add MetaData to Environment Fields
-     *
-     * @param array $environment
+     * Add MetaData to Environment Fields.
      *
      * @return array
      */
     public function addMetaData(array $environment)
     {
         foreach ($this->engine->application->getAppEnvironmentFields() as $key => $envMeta) {
-            if (array_key_exists($key, $environment)) {
+            if (\array_key_exists($key, $environment)) {
                 $environment[$key] = array_merge($envMeta, $environment[$key]);
             }
         }
+
         return $environment;
     }
 
     /**
-     * Add source to environment
-     *
-     * @param array $environmentRaw
+     * Add source to environment.
      *
      * @return array
      */
     public function addSelfAsSource(array $environmentRaw)
     {
-        return self::addSource($environmentRaw, get_class($this));
+        return self::addSource($environmentRaw, \get_class($this));
     }
 
     /**
-     * Add source to environment
+     * Add source to environment.
      *
      * @param array  $environmentFields EnvFields with info
      * @param string $source            Force its source name to
@@ -92,6 +87,7 @@ abstract class Environmentor
         foreach ($environmentFields as $key => $fieldInfo) {
             $environmentFields[$key]['source'] = $source;
         }
+
         return $environmentFields;
     }
 
@@ -99,63 +95,61 @@ abstract class Environmentor
     {
         $moduleEnv = [];
         $job = new Job();
+
         foreach ($modulesToQuery as $injector) {
-            $injectorClass = '\\MultiFlexi\\Env\\' . $injector;
+            $injectorClass = '\\MultiFlexi\\Env\\'.$injector;
+
             if (class_exists($injectorClass, true)) {
                 $moduleEnv = array_merge($moduleEnv, (new $injectorClass($job))->getEnvironment());
             } else {
                 $job->addStatusMessage(sprintf(_('Query for Nonexistent module %s vars'), $injectorClass), 'warning');
             }
         }
+
         return $moduleEnv;
     }
 
     /**
-     * Return only key=>value pairs
-     *
-     * @param array $envInfo
+     * Return only key=>value pairs.
      *
      * @return array
      */
     public static function flatEnv(array $envInfo)
     {
         $env = [];
+
         foreach ($envInfo as $key => $envData) {
             $env[$key] = $envData['value'];
         }
+
         return $env;
     }
 
-    /**
-     *
-     */
-    public function setEnvironment()
+    public function setEnvironment(): void
     {
         $cmp = new Company((int) $this->getDataValue('company_id'));
         $cmp->setEnvironment();
         $envNames = [
             'EASE_EMAILTO' => $this->getDataValue('email'),
-            'EASE_LOGGER' => $this->getDataValue('email') ? 'console|email' : 'console'
+            'EASE_LOGGER' => $this->getDataValue('email') ? 'console|email' : 'console',
         ];
         $this->exportEnv($envNames);
         $customConfig = new Configuration();
         $customConfig->setEnvironment($cmp->getMyKey(), $app->getMyKey());
         $exec = $app->getDataValue('setup');
-        $cmp->addStatusMessage('setup begin' . $exec . '@' . $cmp->getDataValue('name'));
+        $cmp->addStatusMessage('setup begin'.$exec.'@'.$cmp->getDataValue('name'));
         $cmp->addStatusMessage(shell_exec($exec), 'debug');
-        $cmp->addStatusMessage('setu end' . $exec . '@' . $cmp->getDataValue('name'));
+        $cmp->addStatusMessage('setu end'.$exec.'@'.$cmp->getDataValue('name'));
     }
 
     /**
-     * Export given environment
-     *
-     * @param array $env
+     * Export given environment.
      */
-    public function exportEnv(array $env)
+    public function exportEnv(array $env): void
     {
         foreach ($env as $envName => $sqlValue) {
             $this->addStatusMessage(sprintf(_('Setting Environment %s to %s'), $envName, $sqlValue), 'debug');
-            putenv($envName . '=' . $sqlValue);
+            putenv($envName.'='.$sqlValue);
         }
     }
 }

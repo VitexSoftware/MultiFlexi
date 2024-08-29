@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi\Ui;
 
 use MultiFlexi\Ui\MainMenu;
@@ -9,10 +22,7 @@ use MultiFlexi\Ui\MainMenu;
  */
 class MainMenuTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var MainMenu
-     */
-    protected $object;
+    protected MainMenu $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class MainMenuTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Ui\MainMenu::afterAdd
+     * @covers \MultiFlexi\Ui\MainMenu::afterAdd
+     *
      * @todo   Implement testafterAdd().
      */
-    public function testafterAdd()
+    public function testafterAdd(): void
     {
         $this->assertEquals('', $this->object->afterAdd());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class MainMenuTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\MainMenu::appsMenuEnabled
+     * @covers \MultiFlexi\Ui\MainMenu::appsMenuEnabled
+     *
      * @todo   Implement testappsMenuEnabled().
      */
-    public function testappsMenuEnabled()
+    public function testappsMenuEnabled(): void
     {
         $this->assertEquals('', $this->object->appsMenuEnabled());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class MainMenuTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\MainMenu::serversMenuEnabled
+     * @covers \MultiFlexi\Ui\MainMenu::serversMenuEnabled
+     *
      * @todo   Implement testserversMenuEnabled().
      */
-    public function testserversMenuEnabled()
+    public function testserversMenuEnabled(): void
     {
         $this->assertEquals('', $this->object->serversMenuEnabled());
         // Remove the following lines when you implement this test.
@@ -66,10 +78,11 @@ class MainMenuTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\MainMenu::companysMenuEnabled
+     * @covers \MultiFlexi\Ui\MainMenu::companysMenuEnabled
+     *
      * @todo   Implement testcompanysMenuEnabled().
      */
-    public function testcompanysMenuEnabled()
+    public function testcompanysMenuEnabled(): void
     {
         $this->assertEquals('', $this->object->companysMenuEnabled());
         // Remove the following lines when you implement this test.
@@ -77,10 +90,11 @@ class MainMenuTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\MainMenu::companysMenuDisabled
+     * @covers \MultiFlexi\Ui\MainMenu::companysMenuDisabled
+     *
      * @todo   Implement testcompanysMenuDisabled().
      */
-    public function testcompanysMenuDisabled()
+    public function testcompanysMenuDisabled(): void
     {
         $this->assertEquals('', $this->object->companysMenuDisabled());
         // Remove the following lines when you implement this test.
@@ -88,10 +102,11 @@ class MainMenuTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\MainMenu::customersMenuEnabled
+     * @covers \MultiFlexi\Ui\MainMenu::customersMenuEnabled
+     *
      * @todo   Implement testcustomersMenuEnabled().
      */
-    public function testcustomersMenuEnabled()
+    public function testcustomersMenuEnabled(): void
     {
         $this->assertEquals('', $this->object->customersMenuEnabled());
         // Remove the following lines when you implement this test.
@@ -99,10 +114,11 @@ class MainMenuTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\MainMenu::customersMenuDisabled
+     * @covers \MultiFlexi\Ui\MainMenu::customersMenuDisabled
+     *
      * @todo   Implement testcustomersMenuDisabled().
      */
-    public function testcustomersMenuDisabled()
+    public function testcustomersMenuDisabled(): void
     {
         $this->assertEquals('', $this->object->customersMenuDisabled());
         // Remove the following lines when you implement this test.
@@ -110,10 +126,11 @@ class MainMenuTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\MainMenu::usersMenuEnabled
+     * @covers \MultiFlexi\Ui\MainMenu::usersMenuEnabled
+     *
      * @todo   Implement testusersMenuEnabled().
      */
-    public function testusersMenuEnabled()
+    public function testusersMenuEnabled(): void
     {
         $this->assertEquals('', $this->object->usersMenuEnabled());
         // Remove the following lines when you implement this test.
@@ -121,10 +138,11 @@ class MainMenuTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\MainMenu::finalize
+     * @covers \MultiFlexi\Ui\MainMenu::finalize
+     *
      * @todo   Implement testfinalize().
      */
-    public function testfinalize()
+    public function testfinalize(): void
     {
         $this->assertEquals('', $this->object->finalize());
         // Remove the following lines when you implement this test.

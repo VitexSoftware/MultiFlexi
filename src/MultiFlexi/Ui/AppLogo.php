@@ -3,36 +3,37 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi - Application Logo
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
-use MultiFlexi\Application;
 use Ease\Html\ImgTag;
+use MultiFlexi\Application;
 
 /**
- * Description of AppLogo
+ * Description of AppLogo.
  *
  * @author vitex
  */
 class AppLogo extends ImgTag
 {
     /**
-     * Company Logo
-     *
-     * @param Application $application
-     * @param array $properties
+     * Company Logo.
      */
     public function __construct(Application $application, array $properties = [])
     {
         parent::__construct(
             empty($application->getDataValue('image')) ? 'images/apps.svg' : $application->getDataValue('image'),
             $application->getDataValue('name'),
-            $properties
+            $properties,
         );
         $this->addTagClass('img-fluid');
     }

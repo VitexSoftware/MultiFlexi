@@ -3,16 +3,20 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi - Scheduler Class
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023-2024 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi;
 
 /**
- * Description of Scheduler
+ * Description of Scheduler.
  *
  * @author vitex
  */
@@ -21,24 +25,21 @@ class Scheduler extends Engine
     public $myTable = 'schedule';
 
     /**
-     * Save Job excution time
-     *
-     * @param Job $job
+     * Save Job excution time.
      */
     public function addJob(Job $job, \DateTime $when)
     {
         return $this->insertToSQL([
-                    'after' => $when->format('Y-m-d H:i:s'),
-                    'job' => $job->getMyKey()
+            'after' => $when->format('Y-m-d H:i:s'),
+            'job' => $job->getMyKey(),
         ]);
     }
 
     /**
-     *
      * @return int
      */
     public function getCurrentJobs()
     {
-        return $this->listingQuery()->where('after > ' . (new \DateTime())->getTimestamp());
+        return $this->listingQuery()->where('after > '.(new \DateTime())->getTimestamp());
     }
 }

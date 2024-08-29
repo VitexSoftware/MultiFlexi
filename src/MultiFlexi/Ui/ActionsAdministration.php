@@ -1,16 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Executor Modules Listing
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Description of EnvModulesListing
+ * Description of EnvModulesListing.
  *
  * @author vitex
  */
@@ -26,8 +32,9 @@ class ActionsAdministration extends \Ease\TWB4\Form
         $this->actions = \Ease\Functions::classesInNamespace('MultiFlexi\\Action');
 
         parent::__construct([], $properties);
+
         foreach ($this->actions as $action) {
-            $actionClass = '\\MultiFlexi\\Action\\' . $action;
+            $actionClass = '\\MultiFlexi\\Action\\'.$action;
             $moduleRow = new \Ease\TWB4\Row();
 
             $moduleRow->addColumn(2, new ActionImage($action, ['height' => '50px']));
@@ -36,10 +43,11 @@ class ActionsAdministration extends \Ease\TWB4\Form
 
             $this->addItem(new \Ease\Html\PTag($moduleRow));
         }
+
         $this->addItem(new \Ease\TWB4\SubmitButton(_('Save'), 'primary btn-lg btn-block'));
     }
 
-    public function finalize()
+    public function finalize(): void
     {
         $this->fillUp(self::fixFieldNames($this->modConf->getConfigForModules($this->actions)));
         parent::finalize();
@@ -48,11 +56,13 @@ class ActionsAdministration extends \Ease\TWB4\Form
     public static function fixFieldNames($configurationsRaw)
     {
         $configurations = [];
+
         foreach ($configurationsRaw as $module => $cfgs) {
             foreach ($cfgs as $key => $value) {
-                $configurations[$module . '[' . $key . ']'] = $value;
+                $configurations[$module.'['.$key.']'] = $value;
             }
         }
+
         return $configurations;
     }
 }

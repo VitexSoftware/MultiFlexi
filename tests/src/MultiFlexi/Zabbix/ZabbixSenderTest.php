@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi\Zabbix;
 
 use MultiFlexi\Zabbix\ZabbixSender;
@@ -9,10 +22,7 @@ use MultiFlexi\Zabbix\ZabbixSender;
  */
 class ZabbixSenderTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var ZabbixSender
-     */
-    protected $object;
+    protected ZabbixSender $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class ZabbixSenderTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Zabbix\ZabbixSender::instance
+     * @covers \MultiFlexi\Zabbix\ZabbixSender::instance
+     *
      * @todo   Implement testinstance().
      */
-    public function testinstance()
+    public function testinstance(): void
     {
         $this->assertEquals('', $this->object->instance());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class ZabbixSenderTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Zabbix\ZabbixSender::configure
+     * @covers \MultiFlexi\Zabbix\ZabbixSender::configure
+     *
      * @todo   Implement testconfigure().
      */
-    public function testconfigure()
+    public function testconfigure(): void
     {
         $this->assertEquals('', $this->object->configure());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class ZabbixSenderTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Zabbix\ZabbixSender::disable
+     * @covers \MultiFlexi\Zabbix\ZabbixSender::disable
+     *
      * @todo   Implement testdisable().
      */
-    public function testdisable()
+    public function testdisable(): void
     {
         $this->assertEquals('', $this->object->disable());
         // Remove the following lines when you implement this test.
@@ -66,10 +78,11 @@ class ZabbixSenderTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Zabbix\ZabbixSender::enable
+     * @covers \MultiFlexi\Zabbix\ZabbixSender::enable
+     *
      * @todo   Implement testenable().
      */
-    public function testenable()
+    public function testenable(): void
     {
         $this->assertEquals('', $this->object->enable());
         // Remove the following lines when you implement this test.
@@ -77,10 +90,11 @@ class ZabbixSenderTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Zabbix\ZabbixSender::send
+     * @covers \MultiFlexi\Zabbix\ZabbixSender::send
+     *
      * @todo   Implement testsend().
      */
-    public function testsend()
+    public function testsend(): void
     {
         $this->assertEquals('', $this->object->send());
         // Remove the following lines when you implement this test.

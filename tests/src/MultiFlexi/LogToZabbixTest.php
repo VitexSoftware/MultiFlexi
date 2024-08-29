@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi;
 
 use MultiFlexi\LogToZabbix;
@@ -9,10 +22,7 @@ use MultiFlexi\LogToZabbix;
  */
 class LogToZabbixTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var LogToZabbix
-     */
-    protected $object;
+    protected LogToZabbix $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class LogToZabbixTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\LogToZabbix::addToLog
+     * @covers \MultiFlexi\LogToZabbix::addToLog
+     *
      * @todo   Implement testaddToLog().
      */
-    public function testaddToLog()
+    public function testaddToLog(): void
     {
         $this->assertEquals('', $this->object->addToLog());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class LogToZabbixTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\LogToZabbix::singleton
+     * @covers \MultiFlexi\LogToZabbix::singleton
+     *
      * @todo   Implement testsingleton().
      */
-    public function testsingleton()
+    public function testsingleton(): void
     {
         $this->assertEquals('', $this->object->singleton());
         // Remove the following lines when you implement this test.

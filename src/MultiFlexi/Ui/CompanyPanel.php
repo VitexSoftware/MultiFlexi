@@ -3,15 +3,17 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi -
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 /**
- *
- *
  * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023-2024 Vitex Software
  */
@@ -19,14 +21,13 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 /**
- * Description of CompanyPanel
+ * Description of CompanyPanel.
  *
  * @author vitex
  */
 class CompanyPanel extends \Ease\TWB4\Panel
 {
     /**
-     *
      * @param \MultiFlexi\Company $company
      * @param mixed               $content
      * @param mixed               $footer
@@ -35,12 +36,12 @@ class CompanyPanel extends \Ease\TWB4\Panel
     {
         $cid = $company->getMyKey();
         $headRow = new \Ease\TWB4\Row();
-        $headRow->addColumn(2, new \Ease\Html\ATag('company.php?id=' . $cid, [new CompanyLogo($company, ['style' => 'height: 60px']), '&nbsp;', $company->getDataValue('code')]));
-        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('companysetup.php?id=' . $cid, '🛠️&nbsp;' . _('Company'), 'primary btn-lg btn-block'));
-        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('companyapps.php?company_id=' . $cid, '📌&nbsp;' . _('Applications'), 'secondary btn-lg btn-block'));
-        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('tasks.php?company_id=' . $cid, '🔧&nbsp;' . _('Setup tasks'), 'secondary btn-lg btn-block'));
-        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('adhoc.php?company_id=' . $cid, '🚀&nbsp;' . _('Application launcher'), 'secondary btn-lg btn-block'));
-        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('periodical.php?company_id=' . $cid, '🔁&nbsp;' . _('Periodical Tasks'), 'secondary btn-lg btn-block'));
+        $headRow->addColumn(2, new \Ease\Html\ATag('company.php?id='.$cid, [new CompanyLogo($company, ['style' => 'height: 60px']), '&nbsp;', $company->getDataValue('code')]));
+        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('companysetup.php?id='.$cid, '🛠️&nbsp;'._('Company'), 'primary btn-lg btn-block'));
+        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('companyapps.php?company_id='.$cid, '📌&nbsp;'._('Applications'), 'secondary btn-lg btn-block'));
+        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('tasks.php?company_id='.$cid, '🔧&nbsp;'._('Setup tasks'), 'secondary btn-lg btn-block'));
+        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('adhoc.php?company_id='.$cid, '🚀&nbsp;'._('Application launcher'), 'secondary btn-lg btn-block'));
+        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('periodical.php?company_id='.$cid, '🔁&nbsp;'._('Periodical Tasks'), 'secondary btn-lg btn-block'));
         parent::__construct($headRow, 'default', $content, $footer);
     }
 }

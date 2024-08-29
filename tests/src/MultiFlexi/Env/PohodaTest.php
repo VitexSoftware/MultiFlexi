@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi\Env;
 
 use MultiFlexi\Env\Pohoda;
@@ -9,10 +22,7 @@ use MultiFlexi\Env\Pohoda;
  */
 class PohodaTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var Pohoda
-     */
-    protected $object;
+    protected Pohoda $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class PohodaTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Env\Pohoda::allKeysHandled
+     * @covers \MultiFlexi\Env\Pohoda::allKeysHandled
+     *
      * @todo   Implement testallKeysHandled().
      */
-    public function testallKeysHandled()
+    public function testallKeysHandled(): void
     {
         $this->assertEquals('', $this->object->allKeysHandled());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class PohodaTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Env\Pohoda::getEnvironment
+     * @covers \MultiFlexi\Env\Pohoda::getEnvironment
+     *
      * @todo   Implement testgetEnvironment().
      */
-    public function testgetEnvironment()
+    public function testgetEnvironment(): void
     {
         $this->assertEquals('', $this->object->getEnvironment());
         // Remove the following lines when you implement this test.

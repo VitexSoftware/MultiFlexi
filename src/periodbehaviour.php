@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Periodical Tasks behaviour
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023-2024 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
@@ -13,8 +19,6 @@ use Ease\TWB4\WebPage;
 use MultiFlexi\AbraFlexi\Company;
 use MultiFlexi\Application;
 use MultiFlexi\RunTemplate;
-use MultiFlexi\Ui\PageBottom;
-use MultiFlexi\Ui\PageTop;
 
 require_once './init.php';
 
@@ -23,6 +27,7 @@ $oPage->onlyForLogged();
 $runTemplater = new RunTemplate(WebPage::getRequestValue('id', 'int'));
 
 $actions = new \MultiFlexi\ActionConfig();
+
 if (\Ease\WebPage::isPosted()) {
     $succesActions = ActionsChooser::toggles('success');
     $failActions = ActionsChooser::toggles('fail');
@@ -43,10 +48,10 @@ $periodcalTaskInfo = $runTemplater->getData();
 
 $app = new Application($periodcalTaskInfo['app_id']);
 
-$interval = new \Ease\Html\DivTag(_(\MultiFlexi\Job::codeToInterval($periodcalTaskInfo['interv'])) . ' ' . _('interval'));
+$interval = new \Ease\Html\DivTag(_(\MultiFlexi\Job::codeToInterval($periodcalTaskInfo['interv'])).' '._('interval'));
 $appPanel = new ApplicationPanel($app, $interval);
 
-$runTemplateButton = new \Ease\TWB4\LinkButton('runtemplate.php?id=' . $runTemplater->getMyKey(), '⚗️&nbsp;' . _('Run Template'), 'dark btn-lg btn-block');
+$runTemplateButton = new \Ease\TWB4\LinkButton('runtemplate.php?id='.$runTemplater->getMyKey(), '⚗️&nbsp;'._('Run Template'), 'dark btn-lg btn-block');
 $appPanel->headRow->addColumn(2, $runTemplateButton);
 
 $actionsRow = new \Ease\TWB4\Row();

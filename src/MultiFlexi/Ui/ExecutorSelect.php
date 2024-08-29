@@ -1,29 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Executor Modules Selector
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Description of EnvModulesListing
+ * Description of EnvModulesListing.
  *
  * @author vitex
  */
 class ExecutorSelect extends \Ease\Html\SelectTag
 {
-    /**
-     *
-     * @var array
-     */
-    public $executors = [];
+    public array $executors = [];
 
     /**
-     *  Executor Select
+     *  Executor Select.
      *
      * @param string $name
      * @param array  $items
@@ -36,20 +38,20 @@ class ExecutorSelect extends \Ease\Html\SelectTag
     }
 
     /**
-     * Executors list
-     *
-     * @return array
+     * Executors list.
      */
     public function loadItems(): array
     {
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\\Executor');
         $executors = \Ease\Functions::classesInNamespace('MultiFlexi\\Executor');
         $items = [];
+
         foreach ($executors as $injector) {
-            $executorClass = '\\MultiFlexi\\Executor\\' . $injector;
+            $executorClass = '\\MultiFlexi\\Executor\\'.$injector;
             $items[$injector] = $executorClass::description();
             $this->executors[$injector] = $executorClass;
         }
+
         return $items;
     }
 }

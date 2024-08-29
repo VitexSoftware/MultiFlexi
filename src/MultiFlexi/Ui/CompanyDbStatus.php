@@ -1,23 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi  - Database use overview
+ * This file is part of the MultiFlexi package
  *
- * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2015-2024 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Description of DbStatus
+ * Description of DbStatus.
  *
  * @author vitex
  */
 class CompanyDbStatus extends \Ease\TWB4\Row
 {
     /**
-     * Show status of database
+     * Show status of database.
+     *
+     * @param mixed $company
      */
     public function __construct($company)
     {
@@ -34,31 +42,31 @@ class CompanyDbStatus extends \Ease\TWB4\Row
         //        $assigned = (string) (new \MultiFlexi\RunTemplate())->listingQuery()->count();
 
         $this->addColumn(2, new \Ease\Html\ButtonTag(
-            [_('Apps') . '&nbsp;', new \Ease\TWB4\PillBadge('info', $apps)],
-            ['class' => 'btn btn-default', 'type' => 'button']
+            [_('Apps').'&nbsp;', new \Ease\TWB4\PillBadge('info', $apps)],
+            ['class' => 'btn btn-default', 'type' => 'button'],
         ));
         $this->addColumn(2, new \Ease\Html\ButtonTag(
-            [_('Periodical') . '&nbsp;', new \Ease\TWB4\PillBadge('info', $periodical)],
-            ['class' => 'btn btn-default', 'type' => 'button']
+            [_('Periodical').'&nbsp;', new \Ease\TWB4\PillBadge('info', $periodical)],
+            ['class' => 'btn btn-default', 'type' => 'button'],
         ));
         $this->addColumn(2, new \Ease\Html\ButtonTag(
-            [_('Jobs Total') . '&nbsp;', new \Ease\TWB4\PillBadge('info', $jobs)],
-            ['class' => 'btn btn-default', 'type' => 'button']
+            [_('Jobs Total').'&nbsp;', new \Ease\TWB4\PillBadge('info', $jobs)],
+            ['class' => 'btn btn-default', 'type' => 'button'],
         ));
         $this->addColumn(2, new \Ease\TWB4\LinkButton(
             '?showOnly=success&id='.$companyId,
-            [_('Success Jobs') . '&nbsp;', new \Ease\TWB4\PillBadge('success', $jobsSuccess)],
-            'success'
+            [_('Success Jobs').'&nbsp;', new \Ease\TWB4\PillBadge('success', $jobsSuccess)],
+            'success',
         ));
         $this->addColumn(2, new \Ease\TWB4\LinkButton(
             '?showOnly=failed&id='.$companyId,
-            [_('Failed Jobs') . '&nbsp;', new \Ease\TWB4\PillBadge('danger', $jobs - $jobsSuccess - $jobsUnfinished)],
-            'danger'
+            [_('Failed Jobs').'&nbsp;', new \Ease\TWB4\PillBadge('danger', $jobs - $jobsSuccess - $jobsUnfinished)],
+            'danger',
         ));
         $this->addColumn(2, new \Ease\TWB4\LinkButton(
             '?showOnly=unfinished&id='.$companyId,
-            [_('Unfinished Jobs') . '&nbsp;', new \Ease\TWB4\PillBadge('warning', $jobsUnfinished)],
-            'warning'
+            [_('Unfinished Jobs').'&nbsp;', new \Ease\TWB4\PillBadge('warning', $jobsUnfinished)],
+            'warning',
         ));
         //        $this->addColumn(2, new \Ease\Html\ButtonTag(
         //            [_('Customers') . '&nbsp;', new \Ease\TWB4\PillBadge('info', $customers)],

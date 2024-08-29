@@ -1,16 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi  - Customer Select
+ * This file is part of the MultiFlexi package
  *
- * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2015-2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Description of CompanySelect
+ * Description of CompanySelect.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
@@ -18,21 +24,19 @@ class CustomerSelect extends \Ease\Html\SelectTag
 {
     use \Ease\SQL\Orm;
     use \Ease\RecordKey;
-
     public $myTable = 'customers';
-
 
     public function __construct(
         $name,
         $defaultValue = null,
         $itemsIDs = false,
-        $properties = array()
+        $properties = []
     ) {
         parent::__construct($name, $this->loadItems(), $defaultValue, $properties);
     }
 
     /**
-     * obtain Availble AbraFlexi servers
+     * obtain Availble AbraFlexi servers.
      *
      * @return array
      */
@@ -41,11 +45,13 @@ class CustomerSelect extends \Ease\Html\SelectTag
         $customers = ['' => _('Choose customer')];
         $this->setMyTable('customer');
         $customersRaw = $this->getColumnsFromSQL(['id', 'firstname', 'lastname'], null, 'lastname');
-        if (count($customersRaw)) {
+
+        if (\count($customersRaw)) {
             foreach ($customersRaw as $customer) {
-                $customers[$customer['id']] = $customer['lastname'] . ' ' . $customer['firstname'];
+                $customers[$customer['id']] = $customer['lastname'].' '.$customer['firstname'];
             }
         }
+
         return $customers;
     }
 }

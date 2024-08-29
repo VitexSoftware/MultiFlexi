@@ -4,7 +4,7 @@
  * MultiFlexi - Command Line Tool.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2024 Vitex Software
+ * @copyright  2020-2024 VitexSoftware
  */
 
 namespace MultiFlexi;

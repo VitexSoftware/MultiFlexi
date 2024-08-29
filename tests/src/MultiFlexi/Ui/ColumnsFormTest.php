@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi\Ui;
 
 use MultiFlexi\Ui\ColumnsForm;
@@ -9,10 +22,7 @@ use MultiFlexi\Ui\ColumnsForm;
  */
 class ColumnsFormTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var ColumnsForm
-     */
-    protected $object;
+    protected ColumnsForm $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class ColumnsFormTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Ui\ColumnsForm::newRow
+     * @covers \MultiFlexi\Ui\ColumnsForm::newRow
+     *
      * @todo   Implement testnewRow().
      */
-    public function testnewRow()
+    public function testnewRow(): void
     {
         $this->assertEquals('', $this->object->newRow());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class ColumnsFormTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ColumnsForm::addInput
+     * @covers \MultiFlexi\Ui\ColumnsForm::addInput
+     *
      * @todo   Implement testaddInput().
      */
-    public function testaddInput()
+    public function testaddInput(): void
     {
         $this->assertEquals('', $this->object->addInput());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class ColumnsFormTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ColumnsForm::addSubmitSave
+     * @covers \MultiFlexi\Ui\ColumnsForm::addSubmitSave
+     *
      * @todo   Implement testaddSubmitSave().
      */
-    public function testaddSubmitSave()
+    public function testaddSubmitSave(): void
     {
         $this->assertEquals('', $this->object->addSubmitSave());
         // Remove the following lines when you implement this test.
@@ -66,10 +78,11 @@ class ColumnsFormTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ColumnsForm::addSubmitSaveAndList
+     * @covers \MultiFlexi\Ui\ColumnsForm::addSubmitSaveAndList
+     *
      * @todo   Implement testaddSubmitSaveAndList().
      */
-    public function testaddSubmitSaveAndList()
+    public function testaddSubmitSaveAndList(): void
     {
         $this->assertEquals('', $this->object->addSubmitSaveAndList());
         // Remove the following lines when you implement this test.
@@ -77,10 +90,11 @@ class ColumnsFormTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ColumnsForm::addSubmitSaveAndNext
+     * @covers \MultiFlexi\Ui\ColumnsForm::addSubmitSaveAndNext
+     *
      * @todo   Implement testaddSubmitSaveAndNext().
      */
-    public function testaddSubmitSaveAndNext()
+    public function testaddSubmitSaveAndNext(): void
     {
         $this->assertEquals('', $this->object->addSubmitSaveAndNext());
         // Remove the following lines when you implement this test.
@@ -88,10 +102,11 @@ class ColumnsFormTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\ColumnsForm::finalize
+     * @covers \MultiFlexi\Ui\ColumnsForm::finalize
+     *
      * @todo   Implement testfinalize().
      */
-    public function testfinalize()
+    public function testfinalize(): void
     {
         $this->assertEquals('', $this->object->finalize());
         // Remove the following lines when you implement this test.

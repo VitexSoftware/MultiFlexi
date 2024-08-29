@@ -1,43 +1,46 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi  - New Company registration form
+ * This file is part of the MultiFlexi package
  *
- * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2015-2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
-use Ease\Html\ImgTag;
 use Ease\Html\InputEmailTag;
 use Ease\Html\InputHiddenTag;
 use Ease\Html\InputTextTag;
 use Ease\TWB4\SubmitButton;
-use Ease\TWB4\Widgets\SemaforLight;
-use Ease\TWB4\Widgets\Toggle;
 
 /**
- * Registered AbraFlexi instance editor Form
+ * Registered AbraFlexi instance editor Form.
  *
  * @author
  */
 class DeleteCompanyForm extends EngineForm
 {
-    public function afterAdd()
+    public function afterAdd(): void
     {
         $this->addInput(new InputTextTag('name', null, ['disabled' => true]), _('Company name'));
 
         $this->addInput(
             new InputTextTag('company', null, ['disabled' => true]),
-            _('AbraFlexi company code')
+            _('AbraFlexi company code'),
         );
 
         $this->addInput(new InputTextTag('ic', null, ['disabled' => true]), _('Organization ID'));
 
         $this->addInput(new InputEmailTag('email', null, ['disabled' => true]), _('Send notification to'));
 
-        $this->addInput(new SubmitButton('☠️☠️☠️&nbsp;' . _('Confirm company Delete') . '&nbsp;☠️☠️☠️', 'danger'));
+        $this->addInput(new SubmitButton('☠️☠️☠️&nbsp;'._('Confirm company Delete').'&nbsp;☠️☠️☠️', 'danger'));
 
         $this->addItem(new InputHiddenTag('id'));
     }

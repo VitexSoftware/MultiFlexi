@@ -1,16 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Periodical Tasks
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2024 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
-
-use MultiFlexi\Ui\PageBottom;
-use MultiFlexi\Ui\PageTop;
 
 require_once './init.php';
 
@@ -18,7 +21,7 @@ $oPage->onlyForLogged();
 
 $companer = new \MultiFlexi\Company(\Ease\WebPage::getRequestValue('company_id', 'int'));
 
-if (is_null($companer->getMyKey())) {
+if (null === $companer->getMyKey()) {
     $oPage->redirect('companys.php');
 }
 
@@ -35,7 +38,7 @@ $yearlyAppsRaw = \Ease\WebPage::getRequestValue('yearly');
 
 function aIDs($apps)
 {
-    return empty($apps) ? [] : ((strchr($apps, ',') == false) ? [intval($apps) => intval($apps)] : array_combine(array_map('intval', explode(',', $apps)), array_map('intval', explode(',', $apps))));
+    return empty($apps) ? [] : ((strstr($apps, ',') === false) ? [(int) $apps => (int) $apps] : array_combine(array_map('intval', explode(',', $apps)), array_map('intval', explode(',', $apps))));
 }
 
 $minutlyApps = aIDs($minutlyAppsRaw);
@@ -46,6 +49,7 @@ $monthlyApps = aIDs($monthlyAppsRaw);
 $yearlyApps = aIDs($yearlyAppsRaw);
 
 $runTemplater = new \MultiFlexi\RunTemplate();
+
 if (\Ease\WebPage::isPosted()) {
     $runTemplater->setPeriods($companer->getMyKey(), $minutlyApps, 'i');
     $runTemplater->setPeriods($companer->getMyKey(), $hourlyApps, 'h');
@@ -73,10 +77,10 @@ $periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Monthly'), 'default', 
 $periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Yearly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'yearly', implode(',', array_keys($appsByIntrv['y'])), 'periodbehaviour.php')));
 
 //
-//$assignedRaw = $companyApp->getAssigned()->fetchAll('app_id');
+// $assignedRaw = $companyApp->getAssigned()->fetchAll('app_id');
 //
-//$assigned = empty($assignedRaw) ? [] : array_keys($assignedRaw);
-//$chooseApp = new AppsSelector('appsassigned', implode(',', $assigned));
+// $assigned = empty($assignedRaw) ? [] : array_keys($assignedRaw);
+// $chooseApp = new AppsSelector('appsassigned', implode(',', $assigned));
 
 $addAppForm->addItem($periodSelectorsRow);
 $addAppForm->addItem(new \Ease\Html\PTag());
@@ -85,11 +89,11 @@ $addAppForm->addItem(new \Ease\TWB4\SubmitButton(_('🍏 Apply'), 'success btn-l
 
 $oPage->container->addItem(new CompanyPanel($companer, $addAppForm));
 
-//$apper = new \MultiFlexi\Application();
-//foreach ($assigned as $assignedAppId) {
+// $apper = new \MultiFlexi\Application();
+// foreach ($assigned as $assignedAppId) {
 //    $apper->loadFromSQL($assignedAppId);
 //    $oPage->container->addItem(new AppInfo($apper, $companer->getMyKey()));
-//}
+// }
 
 $oPage->addItem(new PageBottom());
 

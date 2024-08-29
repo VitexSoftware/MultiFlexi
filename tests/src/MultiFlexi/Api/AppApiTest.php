@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi\Api;
 
 use MultiFlexi\Api\AppApi;
@@ -9,10 +22,7 @@ use MultiFlexi\Api\AppApi;
  */
 class AppApiTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var AppApi
-     */
-    protected $object;
+    protected AppApi $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class AppApiTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Api\AppApi::getAppById
+     * @covers \MultiFlexi\Api\AppApi::getAppById
+     *
      * @todo   Implement testgetAppById().
      */
-    public function testgetAppById()
+    public function testgetAppById(): void
     {
         $this->assertEquals('', $this->object->getAppById());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class AppApiTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Api\AppApi::listApps
+     * @covers \MultiFlexi\Api\AppApi::listApps
+     *
      * @todo   Implement testlistApps().
      */
-    public function testlistApps()
+    public function testlistApps(): void
     {
         $this->assertEquals('', $this->object->listApps());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class AppApiTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Api\AppApi::setAppById
+     * @covers \MultiFlexi\Api\AppApi::setAppById
+     *
      * @todo   Implement testsetAppById().
      */
-    public function testsetAppById()
+    public function testsetAppById(): void
     {
         $this->assertEquals('', $this->object->setAppById());
         // Remove the following lines when you implement this test.

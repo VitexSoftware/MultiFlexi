@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi;
 
 use MultiFlexi\Servers;
@@ -9,10 +22,7 @@ use MultiFlexi\Servers;
  */
 class ServersTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var Servers
-     */
-    protected $object;
+    protected Servers $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class ServersTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Servers::takeData
+     * @covers \MultiFlexi\Servers::takeData
+     *
      * @todo   Implement testtakeData().
      */
-    public function testtakeData()
+    public function testtakeData(): void
     {
         $this->assertEquals('', $this->object->takeData());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class ServersTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Servers::prepareRemoteAbraFlexi
+     * @covers \MultiFlexi\Servers::prepareRemoteAbraFlexi
+     *
      * @todo   Implement testprepareRemoteAbraFlexi().
      */
-    public function testprepareRemoteAbraFlexi()
+    public function testprepareRemoteAbraFlexi(): void
     {
         $this->assertEquals('', $this->object->prepareRemoteAbraFlexi());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class ServersTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Servers::setEnvironment
+     * @covers \MultiFlexi\Servers::setEnvironment
+     *
      * @todo   Implement testsetEnvironment().
      */
-    public function testsetEnvironment()
+    public function testsetEnvironment(): void
     {
         $this->assertEquals('', $this->object->setEnvironment());
         // Remove the following lines when you implement this test.
@@ -66,10 +78,11 @@ class ServersTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Servers::getConnectionDetails
+     * @covers \MultiFlexi\Servers::getConnectionDetails
+     *
      * @todo   Implement testgetConnectionDetails().
      */
-    public function testgetConnectionDetails()
+    public function testgetConnectionDetails(): void
     {
         $this->assertEquals('', $this->object->getConnectionDetails());
         // Remove the following lines when you implement this test.

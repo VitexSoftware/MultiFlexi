@@ -1,32 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi  - RunTemplate handler class
+ * This file is part of the MultiFlexi package
  *
- * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2020-2024 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi;
 
-use MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
 use MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
+use MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
 
 /**
- *
- *
  * @author vitex
  */
 class RunTemplate extends Engine
 {
-    /**
-     *
-     * @var string
-     */
-    public $nameColumn = 'name';
+    public string $nameColumn = 'name';
 
     /**
-     *
      * @param mixed $identifier
      * @param array $options
      */
@@ -37,27 +36,23 @@ class RunTemplate extends Engine
     }
 
     /**
-     * Get id by App & Company
+     * Get id by App & Company.
      *
      * SELECT runtemplate.id, runtemplate.interv, runtemplate.prepared, apps.name AS app, company.name AS company   FROM runtemplate LEFT JOIN apps ON runtemplate.app_id=apps.id LEFT JOIN company ON runtemplate.company_id=company.id;
      *
      * @deprecated since version 1.0
      *
-     * @param int $appId
-     * @param int $companyId
-     *
      * @return int
      */
     public function runTemplateID(int $appId, int $companyId)
     {
-        $runTemplateId = intval($this->listingQuery()->where('company_id=' . $companyId . ' AND app_id=' . $appId)->select('id', true)->fetchColumn());
+        $runTemplateId = (int) $this->listingQuery()->where('company_id='.$companyId.' AND app_id='.$appId)->select('id', true)->fetchColumn();
+
         return $runTemplateId ? $runTemplateId : $this->dbsync(['app_id' => $appId, 'company_id' => $companyId, 'interv' => 'n']);
     }
 
     /**
-     * Set APP State
-     *
-     * @param bool $state
+     * Set APP State.
      *
      * @return bool
      */
@@ -66,14 +61,16 @@ class RunTemplate extends Engine
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
             $this->notifyZabbix($this->getData());
         }
+
         return $state ? $this->dbsync() : $this->deleteFromSQL();
     }
 
-    public function performInit()
+    public function performInit(): void
     {
         $app = new Application((int) $this->getDataValue('app_id'));
+
         //        $this->setEnvironment();
-        if (empty($app->getDataValue('setup')) == false) {
+        if (empty($app->getDataValue('setup')) === false) {
             $this->setDataValue('prepared', 0);
             $this->dbsync();
         }
@@ -81,7 +78,7 @@ class RunTemplate extends Engine
     }
 
     /**
-     * Delete record ignoring interval
+     * Delete record ignoring interval.
      *
      * @param array $data
      *
@@ -89,22 +86,23 @@ class RunTemplate extends Engine
      */
     public function deleteFromSQL($data = null)
     {
-        if (is_null($data)) {
+        if (null === $data) {
             $data = $this->getData();
         }
+
         return parent::deleteFromSQL($data);
     }
 
     public function getCompanyEnvironment()
     {
         $connectionData = $this->getAppInfo();
-        $platformHelperClass = '\\MultiFlexi\\' . $connectionData['type'] . '\\Company';
+        $platformHelperClass = '\\MultiFlexi\\'.$connectionData['type'].'\\Company';
         $platformHelper = new $platformHelperClass($connectionData['company_id'], $connectionData);
+
         return $platformHelper->getEnvironment();
     }
 
     /**
-     *
      * @param int $companyId
      *
      * @return \Envms\FluentPDO\Query
@@ -115,9 +113,7 @@ class RunTemplate extends Engine
     }
 
     /**
-     * Get apps for given company sorted by
-     *
-     * @param int $companyId
+     * Get apps for given company sorted by.
      *
      * @return array<array>
      */
@@ -129,50 +125,49 @@ class RunTemplate extends Engine
             'd' => [],
             'w' => [],
             'm' => [],
-            'y' => []
+            'y' => [],
         ];
+
         foreach ($this->getCompanyTemplates($companyId)->fetchAll() as $template) {
             $runtemplates[$template['interv']][$template['id']] = $template;
         }
+
         return $runtemplates;
     }
 
     /**
-     *
-     *
-     *
      * @return array
      */
     public function getAppEnvironment()
     {
         $appInfo = $this->getAppInfo();
         $jobber = new Job();
-        $jobber->company = new Company(intval($appInfo['company_id']));
-        $jobber->application = new Application(intval($appInfo['app_id']));
+        $jobber->company = new Company((int) $appInfo['company_id']);
+        $jobber->application = new Application((int) $appInfo['app_id']);
+
         return $jobber->getFullEnvironment();
     }
 
     /**
-     *
      * @return array
      */
     public function getAppInfo()
     {
         return $this->listingQuery()
-                        ->select('apps.*')
-                        ->select('apps.id as apps_id')
-                        ->select('apps.name as app_name')
-                        ->select('company.*')
-                        ->select('servers.*')
-                        ->where([$this->getMyTable() . '.' . $this->getKeyColumn() => $this->getMyKey()])
-                        ->leftJoin('apps ON apps.id = runtemplate.app_id')
-                        ->leftJoin('company ON company.id = runtemplate.company_id')
-                        ->leftJoin('servers ON servers.id = company.server')
-                        ->fetch();
+            ->select('apps.*')
+            ->select('apps.id as apps_id')
+            ->select('apps.name as app_name')
+            ->select('company.*')
+            ->select('servers.*')
+            ->where([$this->getMyTable().'.'.$this->getKeyColumn() => $this->getMyKey()])
+            ->leftJoin('apps ON apps.id = runtemplate.app_id')
+            ->leftJoin('company ON company.id = runtemplate.company_id')
+            ->leftJoin('servers ON servers.id = company.server')
+            ->fetch();
     }
 
     /**
-     * All RunTemplates for GivenCompany
+     * All RunTemplates for GivenCompany.
      *
      * @param int $companyID
      *
@@ -184,24 +179,18 @@ class RunTemplate extends Engine
     }
 
     /**
-     * Set Provision state
+     * Set Provision state.
      *
-     * @param int|null $status 0: Unprovisioned, 1: provisioned,
+     * @param null|int $status 0: Unprovisioned, 1: provisioned,
      *
-     * @return boolean save status
+     * @return bool save status
      */
     public function setProvision($status)
     {
         return $this->dbsync(['prepared' => $status]);
     }
 
-    /**
-     *
-     * @param int $companyId
-     * @param array $runtemplateIds
-     * @param string $interval
-     */
-    public function setPeriods(int $companyId, array $runtemplateIds, string $interval)
+    public function setPeriods(int $companyId, array $runtemplateIds, string $interval): void
     {
         foreach ($runtemplateIds as $runtemplateId) {
             $this->updateToSQL(['interv' => $interval], ['id' => $runtemplateId]);
@@ -212,10 +201,6 @@ class RunTemplate extends Engine
         }
     }
 
-    /**
-     *
-     * @param array $jobInterval
-     */
     public function notifyZabbix(array $jobInterval)
     {
         $zabbixSender = new ZabbixSender(\Ease\Shared::cfg('ZABBIX_SERVER'));
@@ -224,32 +209,33 @@ class RunTemplate extends Engine
         $application = new Application($jobInterval['app_id']);
 
         $packet = new ZabbixPacket();
-        $packet->addMetric((new ZabbixMetric('job-[' . $company->getDataValue('code') . '-' . $application->getDataValue('code') . '-' . $jobInterval['id'] . '-interval]', $jobInterval['interv']))->withHostname($hostname));
+        $packet->addMetric((new ZabbixMetric('job-['.$company->getDataValue('code').'-'.$application->getDataValue('code').'-'.$jobInterval['id'].'-interval]', $jobInterval['interv']))->withHostname($hostname));
         $zabbixSender->send($packet);
 
         $packet = new ZabbixPacket();
-        $packet->addMetric((new ZabbixMetric('job-[' . $company->getDataValue('code') . '-' . $application->getDataValue('code') . '-' . $jobInterval['id'] . '-interval_seconds]', Job::codeToSeconds($jobInterval['interv'])))->withHostname($hostname));
+        $packet->addMetric((new ZabbixMetric('job-['.$company->getDataValue('code').'-'.$application->getDataValue('code').'-'.$jobInterval['id'].'-interval_seconds]', Job::codeToSeconds($jobInterval['interv'])))->withHostname($hostname));
+
         return $zabbixSender->send($packet);
     }
 
     /**
-     * Return only key=>value pairs
-     *
-     * @param array $envData
+     * Return only key=>value pairs.
      *
      * @return array
      */
     public static function stripToValues(array $envData)
     {
         $env = [];
+
         foreach ($envData as $key => $data) {
             $env[$key] = $data['value'];
         }
+
         return $env;
     }
 
     /**
-     * Actions Availble with flag when performed in case of success of failure
+     * Actions Availble with flag when performed in case of success of failure.
      *
      * @return array<array>
      */
@@ -258,17 +244,19 @@ class RunTemplate extends Engine
         $actions = [];
         $s = $this->getDataValue('success') ? unserialize($this->getDataValue('success')) : [];
         $f = $this->getDataValue('fail') ? unserialize($this->getDataValue('fail')) : [];
+
         foreach ($s as $action => $enabled) {
             $actions[$action]['success'] = $enabled;
         }
+
         foreach ($s as $action => $enabled) {
             $actions[$action]['fail'] = $enabled;
         }
+
         return $actions;
     }
-    
+
     /**
-     * 
      * @return \MultiFlexi\Application
      */
     public function getApplication()
@@ -277,12 +265,10 @@ class RunTemplate extends Engine
     }
 
     /**
-     * 
      * @return \MultiFlexi\Company
      */
     public function getCompany()
     {
         return new Company($this->getDataValue('company_id'));
     }
-    
 }

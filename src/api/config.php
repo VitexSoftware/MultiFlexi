@@ -1,15 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - API Config
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 /**
  * App configuration defaults for production.
- * This file used when 'APP_ENV' variable set to 'prod' or 'production'. Check public/.htaccess file
+ * This file used when 'APP_ENV' variable set to 'prod' or 'production'. Check public/.htaccess file.
  */
 
 /**
@@ -17,7 +23,8 @@
  * This is the first file with production defaults. It contains all data which can be safely committed
  * to VCS(version control system). For sensitive values(passwords, api keys, emails) use config.inc.php
  * and make sure it's excluded from VCS by .gitignore.
- * do not add dependencies here, use MultiFlexi\App\RegisterDependencies class
+ * do not add dependencies here, use MultiFlexi\App\RegisterDependencies class.
+ *
  * @see https://php-di.org/doc/php-definitions.html#values
  */
 return [
@@ -25,7 +32,7 @@ return [
 
     // Returns a detailed HTML page with error details and
     // a stack trace. Should be disabled in production.
-    'slim.displayErrorDetails' => boolval(\Ease\Shared::cfg('API_DEBUG', false)),
+    'slim.displayErrorDetails' => (bool) \Ease\Shared::cfg('API_DEBUG', false),
 
     // Whether to display errors on the internal PHP log or not.
     'slim.logErrors' => true,
@@ -59,7 +66,7 @@ return [
     ],
 
     // PDO
-    'pdo.dsn' => \Ease\Shared::cfg('DB_CONNECTION') . ':host=' . \Ease\Shared::cfg('DB_HOST') . ';charset=utf8mb4',
+    'pdo.dsn' => \Ease\Shared::cfg('DB_CONNECTION').':host='.\Ease\Shared::cfg('DB_HOST').';charset=utf8mb4',
     'pdo.username' => \Ease\Shared::cfg('DB_USERNAME'),
     'pdo.password' => \Ease\Shared::cfg('DB_PASSWORD'),
     'pdo.options' => [
@@ -68,7 +75,7 @@ return [
 
     // logger
     'logger.name' => \Ease\Shared::appName(),
-    'logger.path' => \realpath(__DIR__ . '/../../logs') . '/app.log',
+    'logger.path' => \realpath(__DIR__.'/../../logs').'/app.log',
     'logger.level' => 300, // equals WARNING level
     'logger.options' => [],
 ];
