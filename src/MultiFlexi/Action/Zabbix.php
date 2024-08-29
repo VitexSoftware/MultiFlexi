@@ -82,8 +82,12 @@ class Zabbix extends \MultiFlexi\CommonAction
             $packet = new \MultiFlexi\Zabbix\Request\Packet();
             $packet->addMetric((new \MultiFlexi\Zabbix\Request\Metric($zabbixKey, $dataForZabbix))->withHostname($me));
             $zabbixSender = new \MultiFlexi\ZabbixSender($server);
-            $zabbixSender->send($packet);
-            $this->addStatusMessage(sprintf(_('Job metric %s sent to %s as %s'), $zabbixKey, $server, $me), 'debug');
+
+            try {
+                $zabbixSender->send($packet);
+                $this->addStatusMessage(sprintf(_('Job metric %s sent to %s as %s'), $zabbixKey, $server, $me), 'debug');
+            } catch (\Exception $exc) {
+            }
         } else {
             $this->addStatusMessage(_('No Data For zabix provided'), 'warning');
         }

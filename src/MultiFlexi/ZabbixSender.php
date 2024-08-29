@@ -112,11 +112,13 @@ class ZabbixSender extends \MultiFlexi\Zabbix\ZabbixSender
      *
      * @throws \Exception
      * @throws ZabbixNetworkException
+     *
+     * @return bool Success
      */
-    public function send(ZabbixPacket $packet): void
+    public function send(ZabbixPacket $packet): bool
     {
         if ($this->disable) {
-            return;
+            return false;
         }
 
         $payload = $this->preparePayload($packet);
@@ -173,7 +175,7 @@ class ZabbixSender extends \MultiFlexi\Zabbix\ZabbixSender
                 break;
         }
 
-        $this->checkResponse($socket);
+        return $this->checkResponse($socket);
     }
 
     /**
@@ -183,8 +185,10 @@ class ZabbixSender extends \MultiFlexi\Zabbix\ZabbixSender
      *
      * @throws ZabbixNetworkException
      * @throws ZabbixResponseException
+     *
+     * @return bool Success
      */
-    private function checkResponse($socket): void
+    private function checkResponse($socket): bool
     {
         $responseBuffer = '';
         $responseBufferLength = 2048;
@@ -232,5 +236,7 @@ class ZabbixSender extends \MultiFlexi\Zabbix\ZabbixSender
                 'zabbix server returned non-successfull response',
             );
         }
+
+        return $zabbixResponse->isSuccess();
     }
 }

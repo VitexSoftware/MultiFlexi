@@ -24,8 +24,15 @@ class Server extends \MultiFlexi\Engine implements \MultiFlexi\platformServer
 {
     /**
      * SQL Table we use.
+     *
+     * @param null|mixed $identifier
+     * @param mixed      $options
      */
-    public string $myTable = 'servers';
+    public function __construct($identifier = null, $options = [])
+    {
+        $this->myTable = 'servers';
+        parent::__construct($identifier, $options);
+    }
 
     /**
      * Connection Environment by Server.

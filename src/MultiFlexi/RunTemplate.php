@@ -200,21 +200,30 @@ class RunTemplate extends Engine
         }
     }
 
-    public function notifyZabbix(array $jobInterval)
+    public function notifyZabbix(array $jobInfo)
     {
         $zabbixSender = new ZabbixSender(\Ease\Shared::cfg('ZABBIX_SERVER'));
         $hostname = \Ease\Shared::cfg('ZABBIX_HOST');
-        $company = new Company($jobInterval['company_id']);
-        $application = new Application($jobInterval['app_id']);
+        $company = new Company($jobInfo['company_id']);
+        $application = new Application($jobInfo['app_id']);
 
         $packet = new ZabbixPacket();
-        $packet->addMetric((new ZabbixMetric('job-['.$company->getDataValue('code').'-'.$application->getDataValue('code').'-'.$jobInterval['id'].'-interval]', $jobInterval['interv']))->withHostname($hostname));
-        $zabbixSender->send($packet);
+        $packet->addMetric((new ZabbixMetric('job-['.$company->getDataValue('code').'-'.$application->getDataValue('code').'-'.$jobInfo['id'].'-interval]', $jobInfo['interv']))->withHostname($hostname));
+
+        try {
+            $zabbixSender->send($packet);
+        } catch (\Exception $ex) {
+        }
 
         $packet = new ZabbixPacket();
-        $packet->addMetric((new ZabbixMetric('job-['.$company->getDataValue('code').'-'.$application->getDataValue('code').'-'.$jobInterval['id'].'-interval_seconds]', Job::codeToSeconds($jobInterval['interv'])))->withHostname($hostname));
+        $packet->addMetric((new ZabbixMetric('job-['.$company->getDataValue('code').'-'.$application->getDataValue('code').'-'.$jobInfo['id'].'-interval_seconds]', Job::codeToSeconds($jobInfo['interv'])))->withHostname($hostname));
 
-        return $zabbixSender->send($packet);
+        try {
+            $result = $zabbixSender->send($packet);
+        } catch (\Exception $ex) {
+        }
+
+        return $result;
     }
 
     /**
