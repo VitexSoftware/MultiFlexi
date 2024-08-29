@@ -1,28 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - App Api implementation
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Api;
 
-use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * Description of DefaultApi
+ * Description of DefaultApi.
  *
  * @author vitex
  */
 class AppApi extends AbstractAppApi
 {
-    public $engine = null;
+    public $engine;
 
     /**
-     * App Handler Engine
+     * App Handler Engine.
      */
     public function __construct()
     {
@@ -30,56 +36,55 @@ class AppApi extends AbstractAppApi
     }
 
     /**
-     * App Info by ID
+     * App Info by ID.
      *
      * @url http://localhost/EASE/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/app/1
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request
-     * @param \Psr\Http\Message\ResponseInterface $response
      * @param int $appId
-     *
-     * @return \Psr\Http\Message\ResponseInterface
      */
     public function getAppById(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, string $appId, string $suffix): \Psr\Http\Message\ResponseInterface
     {
-        $this->engine->loadFromSQL(intval($appId));
+        $this->engine->loadFromSQL((int) $appId);
         $appData = $this->engine->getData();
+
         switch ($suffix) {
             case 'html':
                 //                $appData['name'] = new \Ease\Html\ATag($appData['id'] . '.html', $appData['name']);
-                $appData['image'] = new \Ease\Html\ATag($appData['id'] . '.html', new \Ease\Html\ImgTag($appData['image'], $appData['name'], ['width' => '64']));
+                $appData['image'] = new \Ease\Html\ATag($appData['id'].'.html', new \Ease\Html\ImgTag($appData['image'], $appData['name'], ['width' => '64']));
 
                 break;
+
             default:
                 break;
         }
+
         return DefaultApi::prepareResponse($response, [$appData], $suffix, $appData['name']);
     }
 
     /**
-     * All Apps
+     * All Apps.
      *
      * @url http://localhost/EASE/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/apps
-     *
-     * @param \Psr\Http\Message\ServerRequestInterface $request
-     * @param \Psr\Http\Message\ResponseInterface $response
-     *
-     * @return \Psr\Http\Message\ResponseInterface
      */
     public function listApps(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, string $suffix): \Psr\Http\Message\ResponseInterface
     {
         $appsList = [];
+
         foreach ($this->engine->getAll() as $app) {
             $appsList[$app['id']] = $app;
+
             switch ($suffix) {
                 case 'html':
-                    $appsList[$app['id']]['name'] = new \Ease\Html\ATag('app/' . $app['id'] . '.html', $app['name']);
-                    $appsList[$app['id']]['image'] = new \Ease\Html\ATag('app/' . $app['id'] . '.html', new \Ease\Html\ImgTag($app['image'], $app['name'], ['width' => '64']));
+                    $appsList[$app['id']]['name'] = new \Ease\Html\ATag('app/'.$app['id'].'.html', $app['name']);
+                    $appsList[$app['id']]['image'] = new \Ease\Html\ATag('app/'.$app['id'].'.html', new \Ease\Html\ImgTag($app['image'], $app['name'], ['width' => '64']));
+
                     break;
+
                 default:
                     break;
             }
         }
+
         return DefaultApi::prepareResponse($response, $appsList, $suffix, 'apps');
     }
 
@@ -87,18 +92,17 @@ class AppApi extends AbstractAppApi
      * POST setAppById
      * Summary: Create or Update Application
      * Notes: Create or Update App by ID
-     * Output-Formats: [application/xml, application/json]
+     * Output-Formats: [application/xml, application/json].
      *
      * @param ServerRequestInterface $request  Request
      * @param ResponseInterface      $response Response
-     *
-     * @return ResponseInterface
      */
     public function setAppById(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $queryParams = $request->getQueryParams();
-        $appId = (key_exists('appId', $queryParams)) ? $queryParams['appId'] : null;
+        $appId = (\array_key_exists('appId', $queryParams)) ? $queryParams['appId'] : null;
         $appInfo = ['id' => $appId, 'success' => $this->engine->dbsync($queryParams)];
-        return DefaultApi::prepareResponse($response, $appInfo, $suffix, 'app' . $appId);
+
+        return DefaultApi::prepareResponse($response, $appInfo, $suffix, 'app'.$appId);
     }
 }

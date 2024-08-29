@@ -1,14 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi -
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2022 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
-use Psr\Http\Message\ServerRequestInterface as Request;
-use MultiFlexi\App\ResponseEmitter as Response;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 
@@ -18,12 +22,11 @@ $app = \DI\Bridge\Slim\Bridge::create();
 $app->addErrorMiddleware(true, true, true);
 $app->setBasePath('/EASE/MultiFlexi/src/api');
 
-
 // Add Routing Middleware
 $app->addRoutingMiddleware();
 
 // Define Custom Error Handler
-$customErrorHandler = function (
+$customErrorHandler = static function (
     ServerRequestInterface $request,
     Throwable $exception,
     bool $displayErrorDetails,
@@ -37,7 +40,7 @@ $customErrorHandler = function (
 
     $response = $app->getResponseFactory()->createResponse($exception->getCode())->withHeader('Content-type', 'application/json');
     $response->getBody()->write(
-        json_encode($payload, JSON_UNESCAPED_UNICODE)
+        json_encode($payload, \JSON_UNESCAPED_UNICODE),
     );
 
     return $response;

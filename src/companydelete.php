@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Company instance editor.
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2024 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
@@ -17,6 +23,7 @@ require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company')));
 $serverId = WebPage::getRequestValue('server', 'int');
+
 if ($serverId) {
     $serverserver = new \MultiFlexi\Servers($serverId);
     $companyConfig = $serverserver->getConnectionDetails();
@@ -26,12 +33,15 @@ if ($serverId) {
 }
 
 $companies = new Company(WebPage::getRequestValue('id', 'int'), $companyConfig);
-if (is_null($serverId) === false) {
+
+if ((null === $serverId) === false) {
     $companies->setDataValue('server', $serverId);
 }
+
 $_SESSION['company'] = $companies->getMyKey();
 
 $companyEnver = new \MultiFlexi\CompanyEnv($companies->getMyKey());
+
 if ($oPage->isPosted()) {
     $companyEnver->deleteFromSQL(['company_id' => $companies->getMyKey()]);
     $appToCompany = new \MultiFlexi\RunTemplate();
@@ -45,18 +55,20 @@ if ($oPage->isPosted()) {
 
     if ($companies->deleteFromSQL(['id' => $companies->getMyKey()])) {
         $companies->addStatusMessage(_('Company Deleted'), 'success');
-        $oPage->redirect('server.php?id=' . $companies->getDataValue('server'));
+        $oPage->redirect('server.php?id='.$companies->getDataValue('server'));
     } else {
-        $companies->addStatusMessage(_('Error deleting Company') . ' ' . $companies->getDataValue('name'), 'error');
+        $companies->addStatusMessage(_('Error deleting Company').' '.$companies->getDataValue('name'), 'error');
     }
+
     $companies->unsetDataValue('name');
 }
 
 $instanceName = $companies->getDataValue('name');
-if (strlen($instanceName)) {
+
+if (\strlen($instanceName)) {
     $instanceLink = new ATag(
-        $companies->getApiURL() . $companies->getDataValue('company'),
-        $companies->getApiURL() . $companies->getDataValue('company')
+        $companies->getApiURL().$companies->getDataValue('company'),
+        $companies->getApiURL().$companies->getDataValue('company'),
     );
 } else {
     $instanceName = _('New Company');
@@ -65,7 +77,8 @@ if (strlen($instanceName)) {
 
 $instanceRow = new Row();
 $instanceRow->addColumn(4, new DeleteCompanyForm($companies, null, ['action' => 'companydelete.php']));
-if (strlen($companies->getDataValue('logo'))) {
+
+if (\strlen($companies->getDataValue('logo'))) {
     $rightColumn[] = new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']);
 }
 

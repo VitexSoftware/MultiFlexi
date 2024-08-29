@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi\Ui;
 
 use MultiFlexi\Ui\FilterDialog;
@@ -9,10 +22,7 @@ use MultiFlexi\Ui\FilterDialog;
  */
 class FilterDialogTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var FilterDialog
-     */
-    protected $object;
+    protected FilterDialog $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class FilterDialogTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Ui\FilterDialog::getFilterOptions
+     * @covers \MultiFlexi\Ui\FilterDialog::getFilterOptions
+     *
      * @todo   Implement testgetFilterOptions().
      */
-    public function testgetFilterOptions()
+    public function testgetFilterOptions(): void
     {
         $this->assertEquals('', $this->object->getFilterOptions());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class FilterDialogTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\FilterDialog::fixIterator
+     * @covers \MultiFlexi\Ui\FilterDialog::fixIterator
+     *
      * @todo   Implement testfixIterator().
      */
-    public function testfixIterator()
+    public function testfixIterator(): void
     {
         $this->assertEquals('', $this->object->fixIterator());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class FilterDialogTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\FilterDialog::idValueNameLabel
+     * @covers \MultiFlexi\Ui\FilterDialog::idValueNameLabel
+     *
      * @todo   Implement testidValueNameLabel().
      */
-    public function testidValueNameLabel()
+    public function testidValueNameLabel(): void
     {
         $this->assertEquals('', $this->object->idValueNameLabel());
         // Remove the following lines when you implement this test.
@@ -66,10 +78,11 @@ class FilterDialogTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Ui\FilterDialog::idLabelNameLabel
+     * @covers \MultiFlexi\Ui\FilterDialog::idLabelNameLabel
+     *
      * @todo   Implement testidLabelNameLabel().
      */
-    public function testidLabelNameLabel()
+    public function testidLabelNameLabel(): void
     {
         $this->assertEquals('', $this->object->idLabelNameLabel());
         // Remove the following lines when you implement this test.

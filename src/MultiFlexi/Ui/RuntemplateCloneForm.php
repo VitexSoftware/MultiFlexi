@@ -1,39 +1,39 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - RunTemplate clone Form
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2024 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Description of RuntemplateCloneForm
+ * Description of RuntemplateCloneForm.
  *
  * @author vitex
  */
 class RuntemplateCloneForm extends \Ease\TWB4\Form
 {
-    /**
-     *
-     * @param \MultiFlexi\RunTemplate $runtemplate
-     * @param array $formDivProperties
-     * @param array $formContents
-     */
     public function __construct(\MultiFlexi\RunTemplate $runtemplate)
     {
-        $clonename = _($runtemplate->getDataValue('name') ? $runtemplate->getDataValue('name') : $runtemplate->getAppInfo()['app_name']) . ' ' . _('Clone');
-        parent::__construct(['action' => 'runtemplateclone.php?id=' . strval($runtemplate->getMyKey()), 'class' => 'form-inline']);
-        $this->addInput(new \Ease\Html\InputTextTag('clonename', $clonename), _('Save as copy') . '&nbsp;', $clonename);
-        $this->addItem(new \Ease\TWB4\SubmitButton('💕 ' . _('Clone'), 'success mb-2', ['type' => 'submit']));
+        $clonename = _($runtemplate->getDataValue('name') ?: $runtemplate->getAppInfo()['app_name']).' '._('Clone');
+        parent::__construct(['action' => 'runtemplateclone.php?id='.(string) $runtemplate->getMyKey(), 'class' => 'form-inline']);
+        $this->addInput(new \Ease\Html\InputTextTag('clonename', $clonename), _('Save as copy').'&nbsp;', $clonename);
+        $this->addItem(new \Ease\TWB4\SubmitButton('💕 '._('Clone'), 'success mb-2', ['type' => 'submit']));
     }
 
     /**
-     * Move items to elemnt root
+     * Move items to elemnt root.
      */
-    public function finalize()
+    public function finalize(): void
     {
         $contents = $this->formDiv->pageParts;
         $this->emptyContents();

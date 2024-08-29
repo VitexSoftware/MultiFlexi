@@ -1,22 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Intervals setup page.
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2024 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
-use Ease\TWB4\LinkButton;
-use MultiFlexi\Ui\PageBottom;
-use MultiFlexi\Ui\PageTop;
-
 require_once './init.php';
 
 $oPage->onlyForLogged();
-
 
 $oPage->addItem(new PageTop(_('Intervals Setup')));
 
@@ -24,7 +25,6 @@ $addAppForm = new \Ease\TWB4\Form();
 $addAppForm->addItem(new \Ease\Html\H1Tag(_('Periodical tasks')));
 
 $periodSelectorsRow = new \Ease\TWB4\Row();
-
 
 $content = new \Ease\Html\InputTag('x');
 
@@ -38,10 +38,10 @@ $periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Monthly'), 'default', 
 $periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Yearly'), 'default', new \Ease\TWB4\FormGroup(_('Day'), $content, 1, _('Which day of the year to run the yearly tasks?'))));
 
 //
-//$assignedRaw = $companyApp->getAssigned()->fetchAll('app_id');
+// $assignedRaw = $companyApp->getAssigned()->fetchAll('app_id');
 //
-//$assigned = empty($assignedRaw) ? [] : array_keys($assignedRaw);
-//$chooseApp = new AppsSelector('appsassigned', implode(',', $assigned));
+// $assigned = empty($assignedRaw) ? [] : array_keys($assignedRaw);
+// $chooseApp = new AppsSelector('appsassigned', implode(',', $assigned));
 
 $addAppForm->addItem($periodSelectorsRow);
 $addAppForm->addItem(new \Ease\Html\PTag());

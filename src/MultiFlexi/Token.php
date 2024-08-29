@@ -1,37 +1,38 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi -
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2022 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi;
 
 /**
- * Description of Token
+ * Description of Token.
  *
  * @author vitex
  */
 class Token extends Engine
 {
     /**
-     * Token live here
-     * @var string
+     * Token live here.
      */
-    public $nameColumn = 'token';
+    public string $nameColumn = 'token';
 
     /**
-     * We work with table token
-     * @var string
+     * We work with table token.
      */
-    public $myTable = 'token';
-
-
+    public string $myTable = 'token';
     public $createColumn = 'start';
     /**
-     *
      * @return \MultiFlexi\User
      */
     public function getUser()
@@ -40,13 +41,14 @@ class Token extends Engine
     }
 
     /**
-     * Generate New Token
+     * Generate New Token.
      *
      * @return $this
      */
     public function generate()
     {
         $this->setDataValue($this->nameColumn, \Ease\Functions::randomString(20));
+
         return $this;
     }
 }

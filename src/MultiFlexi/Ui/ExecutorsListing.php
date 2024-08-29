@@ -1,16 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Executor Modules Listing
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Description of EnvModulesListing
+ * Description of EnvModulesListing.
  *
  * @author vitex
  */
@@ -22,12 +28,13 @@ class ExecutorsListing extends \Ease\Html\DivTag
         $executors = \Ease\Functions::classesInNamespace('MultiFlexi\\Executor');
 
         parent::__construct(null, $properties);
+
         foreach ($executors as $injector) {
-            $executorClass = '\\MultiFlexi\\Executor\\' . $injector;
+            $executorClass = '\\MultiFlexi\\Executor\\'.$injector;
             $moduleRow = new \Ease\TWB4\Row();
 
             $moduleRow->addColumn(2, new ExecutorImage($injector, ['height' => '50px']));
-            $moduleRow->addColumn(4, [new \Ease\Html\StrongTag($executorClass::name()), new \Ease\Html\PTag(new \Ease\Html\SmallTag($executorClass::description())) ]);
+            $moduleRow->addColumn(4, [new \Ease\Html\StrongTag($executorClass::name()), new \Ease\Html\PTag(new \Ease\Html\SmallTag($executorClass::description()))]);
 
             $this->addItem(new \Ease\Html\PTag($moduleRow));
         }

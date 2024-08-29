@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi\Zabbix\Request;
 
 use MultiFlexi\Zabbix\Request\Metric;
@@ -9,10 +22,7 @@ use MultiFlexi\Zabbix\Request\Metric;
  */
 class MetricTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var Metric
-     */
-    protected $object;
+    protected Metric $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class MetricTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Zabbix\Request\Metric::withHostname
+     * @covers \MultiFlexi\Zabbix\Request\Metric::withHostname
+     *
      * @todo   Implement testwithHostname().
      */
-    public function testwithHostname()
+    public function testwithHostname(): void
     {
         $this->assertEquals('', $this->object->withHostname());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class MetricTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Zabbix\Request\Metric::withTimestamp
+     * @covers \MultiFlexi\Zabbix\Request\Metric::withTimestamp
+     *
      * @todo   Implement testwithTimestamp().
      */
-    public function testwithTimestamp()
+    public function testwithTimestamp(): void
     {
         $this->assertEquals('', $this->object->withTimestamp());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class MetricTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Zabbix\Request\Metric::jsonSerialize
+     * @covers \MultiFlexi\Zabbix\Request\Metric::jsonSerialize
+     *
      * @todo   Implement testjsonSerialize().
      */
-    public function testjsonSerialize()
+    public function testjsonSerialize(): void
     {
         $this->assertEquals('', $this->object->jsonSerialize());
         // Remove the following lines when you implement this test.

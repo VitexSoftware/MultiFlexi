@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi;
 
 use MultiFlexi\Configuration;
@@ -9,10 +22,7 @@ use MultiFlexi\Configuration;
  */
 class ConfigurationTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var Configuration
-     */
-    protected $object;
+    protected Configuration $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Configuration::getName
+     * @covers \MultiFlexi\Configuration::getName
+     *
      * @todo   Implement testgetName().
      */
-    public function testgetName()
+    public function testgetName(): void
     {
         $this->assertEquals('', $this->object->getName());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Configuration::saveToSQL
+     * @covers \MultiFlexi\Configuration::saveToSQL
+     *
      * @todo   Implement testsaveToSQL().
      */
-    public function testsaveToSQL()
+    public function testsaveToSQL(): void
     {
         $this->assertEquals('', $this->object->saveToSQL());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Configuration::takeData
+     * @covers \MultiFlexi\Configuration::takeData
+     *
      * @todo   Implement testtakeData().
      */
-    public function testtakeData()
+    public function testtakeData(): void
     {
         $this->assertEquals('', $this->object->takeData());
         // Remove the following lines when you implement this test.
@@ -66,10 +78,11 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Configuration::setEnvironment
+     * @covers \MultiFlexi\Configuration::setEnvironment
+     *
      * @todo   Implement testsetEnvironment().
      */
-    public function testsetEnvironment()
+    public function testsetEnvironment(): void
     {
         $this->assertEquals('', $this->object->setEnvironment());
         // Remove the following lines when you implement this test.
@@ -77,10 +90,11 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Configuration::getAppConfig
+     * @covers \MultiFlexi\Configuration::getAppConfig
+     *
      * @todo   Implement testgetAppConfig().
      */
-    public function testgetAppConfig()
+    public function testgetAppConfig(): void
     {
         $this->assertEquals('', $this->object->getAppConfig());
         // Remove the following lines when you implement this test.

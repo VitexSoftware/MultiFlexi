@@ -1,16 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi -
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi;
 
 /**
- * Description of CompanyEnv
+ * Description of CompanyEnv.
  *
  * @author vitex
  */
@@ -18,21 +24,11 @@ class CompanyEnv extends \Ease\SQL\Engine
 {
     public $myTable = 'companyenv';
 
-    /**
-     *
-     * @var int
-     */
-    private $companyID;
+    public array $data = [];
+
+    private int $companyID;
 
     /**
-     *
-     * @var array
-     */
-    public $data = [];
-
-
-    /**
-     *
      * @param int   $companyID
      * @param array $options
      */
@@ -44,31 +40,31 @@ class CompanyEnv extends \Ease\SQL\Engine
     }
 
     /**
-     * Add Configuration to Company's Environment store
+     * Add Configuration to Company's Environment store.
      *
      * @param string $key   Name of Value to keep
      * @param string $value Value of Configuration
      */
-    public function addEnv($key, $value)
+    public function addEnv($key, $value): void
     {
         try {
-            if (!is_null($this->insertToSQL(['company_id' => $this->companyID, 'keyword' => $key, 'value' => $value]))) {
+            if (null !== $this->insertToSQL(['company_id' => $this->companyID, 'keyword' => $key, 'value' => $value])) {
                 $this->setDataValue($key, $value);
             }
         } catch (\PDOException $exc) {
-            //echo $exc->getTraceAsString();
+            // echo $exc->getTraceAsString();
         }
     }
 
-    public function updateEnv()
+    public function updateEnv(): void
     {
     }
 
-    public function removeEnv()
+    public function removeEnv(): void
     {
     }
 
-    public function loadEnv()
+    public function loadEnv(): void
     {
         foreach ($this->listingQuery()->where('company_id', $this->companyID)->fetchAll() as $companyEnvRow) {
             $this->setDataValue($companyEnvRow['keyword'], $companyEnvRow['value']);

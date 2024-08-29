@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Customer instance editor.
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2017-2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
@@ -25,10 +31,10 @@ $_SESSION['customer'] = $customers->getMyKey();
 $oPage->addItem(new PageTop(_('Customer')));
 
 if ($oPage->isPosted()) {
-    if ($customers->takeData($_POST) && !is_null($customers->saveToSQL())) {
+    if ($customers->takeData($_POST) && null !== $customers->saveToSQL()) {
         $customers->addStatusMessage(_('Customer Saved'), 'success');
         //        $customers->prepareRemoteAbraFlexi();
-        $oPage->redirect('?id=' . $customers->getMyKey());
+        $oPage->redirect('?id='.$customers->getMyKey());
     } else {
         $customers->addStatusMessage(_('Error saving Customer'), 'error');
     }
@@ -43,14 +49,14 @@ if (empty($instanceName)) {
 
 $instanceRow = new Row();
 $instanceRow->addColumn(8, new RegisterCustomerForm($customers));
-$instanceRow->addColumn(2, new \Ease\Html\ImgTag(\Ease\User::getGravatar(strval($customers->getDataValue('email')), 400, 'mm', 'g'), 'Gravatar', ['class' => 'img-fluid']));
-//$instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($customers));
+$instanceRow->addColumn(2, new \Ease\Html\ImgTag(\Ease\User::getGravatar((string) $customers->getDataValue('email'), 400, 'mm', 'g'), 'Gravatar', ['class' => 'img-fluid']));
+// $instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($customers));
 
 $oPage->container->addItem(new Panel(
     $instanceName,
     'info',
     $instanceRow,
-    $instanceLink
+    $instanceLink,
 ));
 
 $oPage->addItem(new PageBottom());

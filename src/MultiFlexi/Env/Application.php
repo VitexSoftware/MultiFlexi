@@ -3,23 +3,27 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi - Handle Application Environment variables
+ * This file is part of the MultiFlexi package
  *
- * @author    Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright 2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Env;
 
 /**
- * Description of Logger
+ * Description of Logger.
  *
  * @author vitex
  */
 class Application extends \MultiFlexi\Environmentor implements injector
 {
     /**
-     * List of all known keys
+     * List of all known keys.
      *
      * @return array
      */
@@ -29,7 +33,7 @@ class Application extends \MultiFlexi\Environmentor implements injector
     }
 
     /**
-     * Generate Environment for current Job
+     * Generate Environment for current Job.
      *
      * @return array
      */
@@ -38,30 +42,31 @@ class Application extends \MultiFlexi\Environmentor implements injector
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\\Env');
         $injectors = \Ease\Functions::classesInNamespace('MultiFlexi\\Env');
         $jobEnv = [];
+
         foreach ($injectors as $injector) {
-            $injectorClass = '\\MultiFlexi\\Env\\' . $injector;
+            $injectorClass = '\\MultiFlexi\\Env\\'.$injector;
             $jobEnv = array_merge($jobEnv, (new $injectorClass($this))->getEnvironment());
         }
+
         return $jobEnv;
     }
 
     /**
-     * Obtain Environment to configure application
-     *
-     * @return array
+     * Obtain Environment to configure application.
      */
     public function getEnvironment(): array
     {
         $customConfig = new \MultiFlexi\Configuration();
         $appConfig = [];
+
         foreach ($customConfig->getAppConfig($this->engine->company->getMyKey(), $this->engine->application->getMyKey()) as $cfg) {
             $appConfig[$cfg['name']]['value'] = $cfg['value'];
         }
+
         return $this->addMetaData($this->addSelfAsSource($appConfig));
     }
 
     /**
-     *
      * @return string
      */
     public static function name()
@@ -70,7 +75,6 @@ class Application extends \MultiFlexi\Environmentor implements injector
     }
 
     /**
-     *
      * @return string
      */
     public static function description()

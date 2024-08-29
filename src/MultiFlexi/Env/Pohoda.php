@@ -3,23 +3,27 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi - Stormware Pohoda Environment handler
+ * This file is part of the MultiFlexi package
  *
- * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Env;
 
 /**
- * Description of Pohoda
+ * Description of Pohoda.
  *
  * @author vitex
  */
 class Pohoda extends \MultiFlexi\Environmentor implements injector
 {
     /**
-     * List of all known keys
+     * List of all known keys.
      *
      * @return array
      */
@@ -29,29 +33,27 @@ class Pohoda extends \MultiFlexi\Environmentor implements injector
             'POHODA_URL',
             'POHODA_USERNAME',
             'POHODA_PASSWORD',
-            'POHODA_ICO'
+            'POHODA_ICO',
         ];
     }
 
-    /**
-     *
-     * @return array
-     */
     public function getEnvironment(): array
     {
         $pohodaEnv = [];
+
         if ($this->engine->company->getDataValue('server')) {
             $server = new \MultiFlexi\Servers($this->engine->company->getDataValue('server'));
-            if ($server->getDataValue('type') == 'Pohoda') {
+
+            if ($server->getDataValue('type') === 'Pohoda') {
                 $platformHelper = new \MultiFlexi\Pohoda\Company($this->engine->company->getMyKey(), $server->getData());
                 $pohodaEnv = $platformHelper->getEnvironment();
             }
         }
+
         return $this->addMetaData($this->addSelfAsSource($pohodaEnv));
     }
 
     /**
-     *
      * @return string
      */
     public static function name()
@@ -60,7 +62,6 @@ class Pohoda extends \MultiFlexi\Environmentor implements injector
     }
 
     /**
-     *
      * @return string
      */
     public static function description()

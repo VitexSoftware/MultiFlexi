@@ -1,16 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi  - PillBox
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright (c) 2017-2019, Vítězslav Dvořák
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Description of GroupChooser
+ * Description of GroupChooser.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
@@ -20,25 +26,31 @@ class PillBox extends \Ease\Html\InputTextTag
         $name,
         $valuesAvailble,
         $valuesShown,
-        $properties = array()
+        $properties = []
     ) {
         parent::__construct(
             $name,
-            is_array($valuesShown) ? implode(',', $valuesShown) : $valuesShown,
-            $properties
+            \is_array($valuesShown) ? implode(',', $valuesShown) : $valuesShown,
+            $properties,
         );
-        $this->setTagID($name . 'pillBox');
+        $this->setTagID($name.'pillBox');
 
-        $this->addJavaScript("
-$('#" . $this->getTagID() . "').selectize({
+        $this->addJavaScript(<<<'EOD'
+
+$('#
+EOD.$this->getTagID().<<<'EOD'
+').selectize({
         plugins: ['remove_button'],
         valueField: 'id',
         maxOptions: 10000,
-	labelField: 'name',  
+	labelField: 'name',
         searchField: 'name',
         persist: true,
-        options: " . json_encode($valuesAvailble) . " 
+        options:
+EOD.json_encode($valuesAvailble).<<<'EOD'
+
 });
-");
+
+EOD);
     }
 }

@@ -53,3 +53,4 @@ db/multiflexi
 /debian/multiflexi-api.debhelper.log
 /debian/multiflexi-api.substvars
 /.phpunit.cache/
+/.build/

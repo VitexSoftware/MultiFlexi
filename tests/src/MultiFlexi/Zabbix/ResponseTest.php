@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi\Zabbix;
 
 use MultiFlexi\Zabbix\Response;
@@ -9,10 +22,7 @@ use MultiFlexi\Zabbix\Response;
  */
 class ResponseTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var Response
-     */
-    protected $object;
+    protected Response $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class ResponseTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Zabbix\Response::isSuccess
+     * @covers \MultiFlexi\Zabbix\Response::isSuccess
+     *
      * @todo   Implement testisSuccess().
      */
-    public function testisSuccess()
+    public function testisSuccess(): void
     {
         $this->assertEquals('', $this->object->isSuccess());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class ResponseTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Zabbix\Response::getProcessedCount
+     * @covers \MultiFlexi\Zabbix\Response::getProcessedCount
+     *
      * @todo   Implement testgetProcessedCount().
      */
-    public function testgetProcessedCount()
+    public function testgetProcessedCount(): void
     {
         $this->assertEquals('', $this->object->getProcessedCount());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class ResponseTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Zabbix\Response::getFailedCount
+     * @covers \MultiFlexi\Zabbix\Response::getFailedCount
+     *
      * @todo   Implement testgetFailedCount().
      */
-    public function testgetFailedCount()
+    public function testgetFailedCount(): void
     {
         $this->assertEquals('', $this->object->getFailedCount());
         // Remove the following lines when you implement this test.
@@ -66,10 +78,11 @@ class ResponseTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Zabbix\Response::getTotalCount
+     * @covers \MultiFlexi\Zabbix\Response::getTotalCount
+     *
      * @todo   Implement testgetTotalCount().
      */
-    public function testgetTotalCount()
+    public function testgetTotalCount(): void
     {
         $this->assertEquals('', $this->object->getTotalCount());
         // Remove the following lines when you implement this test.
@@ -77,10 +90,11 @@ class ResponseTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Zabbix\Response::getSecondsSpent
+     * @covers \MultiFlexi\Zabbix\Response::getSecondsSpent
+     *
      * @todo   Implement testgetSecondsSpent().
      */
-    public function testgetSecondsSpent()
+    public function testgetSecondsSpent(): void
     {
         $this->assertEquals('', $this->object->getSecondsSpent());
         // Remove the following lines when you implement this test.

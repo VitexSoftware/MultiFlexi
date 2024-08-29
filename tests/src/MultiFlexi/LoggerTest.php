@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi;
 
 use MultiFlexi\Logger;
@@ -9,10 +22,7 @@ use MultiFlexi\Logger;
  */
 class LoggerTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var Logger
-     */
-    protected $object;
+    protected Logger $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Logger::getActualMessages
+     * @covers \MultiFlexi\Logger::getActualMessages
+     *
      * @todo   Implement testgetActualMessages().
      */
-    public function testgetActualMessages()
+    public function testgetActualMessages(): void
     {
         $this->assertEquals('', $this->object->getActualMessages());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Logger::dismis
+     * @covers \MultiFlexi\Logger::dismis
+     *
      * @todo   Implement testdismis().
      */
-    public function testdismis()
+    public function testdismis(): void
     {
         $this->assertEquals('', $this->object->dismis());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Logger::columns
+     * @covers \MultiFlexi\Logger::columns
+     *
      * @todo   Implement testcolumns().
      */
-    public function testcolumns()
+    public function testcolumns(): void
     {
         $this->assertEquals('', $this->object->columns());
         // Remove the following lines when you implement this test.
@@ -66,10 +78,11 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Logger::tableCode
+     * @covers \MultiFlexi\Logger::tableCode
+     *
      * @todo   Implement testtableCode().
      */
-    public function testtableCode()
+    public function testtableCode(): void
     {
         $this->assertEquals('', $this->object->tableCode());
         // Remove the following lines when you implement this test.
@@ -77,10 +90,11 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Logger::columnDefs
+     * @covers \MultiFlexi\Logger::columnDefs
+     *
      * @todo   Implement testcolumnDefs().
      */
-    public function testcolumnDefs()
+    public function testcolumnDefs(): void
     {
         $this->assertEquals('', $this->object->columnDefs());
         // Remove the following lines when you implement this test.
@@ -88,10 +102,11 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Logger::getRecordName
+     * @covers \MultiFlexi\Logger::getRecordName
+     *
      * @todo   Implement testgetRecordName().
      */
-    public function testgetRecordName()
+    public function testgetRecordName(): void
     {
         $this->assertEquals('', $this->object->getRecordName());
         // Remove the following lines when you implement this test.
@@ -99,10 +114,11 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Logger::completeDataRow
+     * @covers \MultiFlexi\Logger::completeDataRow
+     *
      * @todo   Implement testcompleteDataRow().
      */
-    public function testcompleteDataRow()
+    public function testcompleteDataRow(): void
     {
         $this->assertEquals('', $this->object->completeDataRow());
         // Remove the following lines when you implement this test.
@@ -110,10 +126,11 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Logger::toRFC3339
+     * @covers \MultiFlexi\Logger::toRFC3339
+     *
      * @todo   Implement testtoRFC3339().
      */
-    public function testtoRFC3339()
+    public function testtoRFC3339(): void
     {
         $this->assertEquals('', $this->object->toRFC3339());
         // Remove the following lines when you implement this test.

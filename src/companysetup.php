@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Company instance editor.
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
@@ -17,6 +23,7 @@ require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company')));
 $serverId = WebPage::getRequestValue('server', 'int');
+
 if ($serverId) {
     $serverserver = new \MultiFlexi\Servers($serverId);
     $companyConfig = $serverserver->getConnectionDetails();
@@ -26,13 +33,16 @@ if ($serverId) {
 }
 
 $companies = new Company(WebPage::getRequestValue('id', 'int'), $companyConfig);
-if (is_null($serverId) === false) {
+
+if ((null === $serverId) === false) {
     $companies->setDataValue('server', $serverId);
 }
+
 $_SESSION['company'] = $companies->getMyKey();
 $companyEnver = new \MultiFlexi\CompanyEnv($companies->getMyKey());
+
 if ($oPage->isPosted()) {
-    if (array_key_exists('env', $_POST)) {
+    if (\array_key_exists('env', $_POST)) {
         $companyEnver->addEnv($_POST['env']['newkey'], $_POST['env']['newvalue']);
     } else {
         if ($companies->takeData($_POST)) {
@@ -45,9 +55,9 @@ if ($oPage->isPosted()) {
             }
 
             //        $companies->prepareRemoteCompany(); TODO: Run applications setup on new company
-            $oPage->redirect('?id=' . $companies->getMyKey());
+            $oPage->redirect('?id='.$companies->getMyKey());
         } else {
-            $companies->addStatusMessage(_('Error saving Company') . ' ' . $companies->getDataValue('name'), 'error');
+            $companies->addStatusMessage(_('Error saving Company').' '.$companies->getDataValue('name'), 'error');
         }
     }
 } else {
@@ -61,7 +71,9 @@ if ($oPage->isPosted()) {
         $companies->loadFromAbraFlexi();
     }
 }
+
 $instanceName = $companies->getDataValue('name');
+
 if (empty($instanceName)) {
     $instanceName = _('New Company');
     $instanceLink = null;
@@ -71,12 +83,11 @@ if (empty($instanceName)) {
 
 $instanceRow = new Row();
 $instanceRow->addColumn(4, new CompanyEditorForm($companies, null, ['action' => 'companysetup.php']));
-//$instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($companies));
-
+// $instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($companies));
 
 $rightColumn[] = new EnvironmentEditor($companyEnver->getEnvFields());
 $instanceRow->addColumn(8, $rightColumn);
-$oPage->container->addItem(new CompanyPanel($companies, $instanceRow, new \Ease\TWB4\LinkButton('companydelete.php?id=' . $companies->getMyKey(), '☠️&nbsp;' . _('Delete company'), 'danger')));
+$oPage->container->addItem(new CompanyPanel($companies, $instanceRow, new \Ease\TWB4\LinkButton('companydelete.php?id='.$companies->getMyKey(), '☠️&nbsp;'._('Delete company'), 'danger')));
 
 $oPage->addItem(new PageBottom());
 $oPage->draw();

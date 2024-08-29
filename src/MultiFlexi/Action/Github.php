@@ -3,23 +3,27 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi - Github Issue Action
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023-2024 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Action;
 
 /**
- * Description of RedmineIssue
+ * Description of RedmineIssue.
  *
  * @author vitex
  */
 class Github extends \MultiFlexi\CommonAction
 {
     /**
-     * Module Caption
+     * Module Caption.
      *
      * @return string
      */
@@ -29,7 +33,7 @@ class Github extends \MultiFlexi\CommonAction
     }
 
     /**
-     * Module Description
+     * Module Description.
      *
      * @return string
      */
@@ -49,72 +53,71 @@ class Github extends \MultiFlexi\CommonAction
     }
 
     /**
-     * Form Inputs
+     * Form Inputs.
      *
      * @return mixed
      */
     public static function inputs(string $action)
     {
-        return new \Ease\TWB4\Badge('info', _('No Fields required') . ' (' . $action . ')');
+        return new \Ease\TWB4\Badge('info', _('No Fields required').' ('.$action.')');
     }
 
     /**
-     * Is this Action Situable for Application
+     * Is this Action Situable for Application.
      *
      * @param Application $app
      */
     public static function usableForApp($app): bool
     {
-        return is_null(strstr($app->getDataValue('homepage'), 'github.com')) === false;
+        return (null === strstr($app->getDataValue('homepage'), 'github.com')) === false;
     }
 
     /**
-     * Perform Action
+     * Perform Action.
      */
-    public function perform()
+    public function perform(): void
     {
         $token = $this->getDataValue('token');
-        $headerValue = " Bearer " . $token;
+        $headerValue = ' Bearer '.$token;
         $header = [
-            "Authorization:" . $headerValue,
-            "Accept: application/vnd.github+json",
-            "X-GitHub-Api-Version: 2022-11-28"
+            'Authorization:'.$headerValue,
+            'Accept: application/vnd.github+json',
+            'X-GitHub-Api-Version: 2022-11-28',
         ];
-        $title = $this->job->application->getRecordName() . ' problem';
-        $body = "JOB ID: " . $this->job->getMyKey() . "\n\n";
+        $title = $this->job->application->getRecordName().' problem';
+        $body = 'JOB ID: '.$this->job->getMyKey()."\n\n";
 
-        $body .= "Command: " . $this->job->getDataValue('command') . "\n\n";
-        $body .= "ExitCode: " . $this->job->getDataValue('exitcode') . "\n\n";
+        $body .= 'Command: '.$this->job->getDataValue('command')."\n\n";
+        $body .= 'ExitCode: '.$this->job->getDataValue('exitcode')."\n\n";
 
-        $body .= "\nStdout:\n```\n" . stripslashes($this->job->getDataValue('stdout')) . "\n```";
-        $body .= "\nSterr:\n```\n" . stripslashes($this->job->getDataValue('stderr')) . "\n```\n\n";
+        $body .= "\nStdout:\n```\n".stripslashes($this->job->getDataValue('stdout'))."\n```";
+        $body .= "\nSterr:\n```\n".stripslashes($this->job->getDataValue('stderr'))."\n```\n\n";
 
-        $body .= "MultiFlexi: " . \Ease\Shared::appName() . ' ' . \Ease\Shared::appVersion() . "\n\n";
+        $body .= 'MultiFlexi: '.\Ease\Shared::appName().' '.\Ease\Shared::appVersion()."\n\n";
 
-        $label = ["Bug"];
-        $data = ["title" => $title, "body" => $body, "labels" => [$label]];
+        $label = ['Bug'];
+        $data = ['title' => $title, 'body' => $body, 'labels' => [$label]];
 
         $data_string = json_encode($data);
 
         $ch = curl_init();
 
-        $userRepo = parse_url($this->job->application->getDataValue('homepage'), PHP_URL_PATH);
+        $userRepo = parse_url($this->job->application->getDataValue('homepage'), \PHP_URL_PATH);
 
-        curl_setopt($ch, CURLOPT_URL, 'https://api.github.com/repos' . $userRepo . '/issues');
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_USERAGENT, \Ease\Shared::appName() . ' ' . \Ease\Shared::appVersion());
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // return content as a string from curl_exec
-        curl_setopt($ch, CURLOPT_VERBOSE, boolval(\Ease\Shared::cfg('API_DEBUG', false))); // For debugging
-
+        curl_setopt($ch, \CURLOPT_URL, 'https://api.github.com/repos'.$userRepo.'/issues');
+        curl_setopt($ch, \CURLOPT_HTTPHEADER, $header);
+        curl_setopt($ch, \CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($ch, \CURLOPT_USERAGENT, \Ease\Shared::appName().' '.\Ease\Shared::appVersion());
+        curl_setopt($ch, \CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, \CURLOPT_RETURNTRANSFER, true); // return content as a string from curl_exec
+        curl_setopt($ch, \CURLOPT_VERBOSE, (bool) \Ease\Shared::cfg('API_DEBUG', false)); // For debugging
 
         $response = curl_exec($ch);
 
         $curlInfo = curl_getinfo($ch);
         $curlInfo['when'] = microtime();
 
-        $this->addStatusMessage($response, $curlInfo['http_code'] == 200 ? 'success' : 'error');
+        $this->addStatusMessage($response, $curlInfo['http_code'] === 200 ? 'success' : 'error');
         curl_close($ch);
     }
 }

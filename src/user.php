@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - User editor.
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
@@ -15,8 +21,8 @@ $oPage->onlyForLogged();
 
 $user_id = $oPage->getRequestValue('id', 'int');
 
-//$user = Engine::doThings($oPage);
-//if (is_null($user)) {
+// $user = Engine::doThings($oPage);
+// if (is_null($user)) {
 $user = new \MultiFlexi\User($user_id);
 
 if ($oPage->isPosted()) {
@@ -24,11 +30,12 @@ if ($oPage->isPosted()) {
     $user->addStatusMessage(_('Update'), $user->takeData($_REQUEST) && $user->dbsync() ? 'success' : 'error');
 }
 
-//}
+// }
 
-if ($oPage->getGetValue('delete', 'bool') == 'true') {
+if ($oPage->getGetValue('delete', 'bool') === 'true') {
     if ($user->delete()) {
         $oPage->redirect('users.php');
+
         exit;
     }
 }
@@ -42,18 +49,20 @@ switch ($oPage->getRequestValue('action')) {
         $confirmBlock->addItem($user);
 
         $confirmator = $confirmBlock->addItem(new \Ease\TWB4\Panel(_('Are you sure ?'), 'danger'));
-        $confirmator->addItem(new \Ease\TWB4\LinkButton('user.php?id=' . $user->getId(), _('Ne') . ' ' . \Ease\TWB4\Part::glyphIcon('ok'), 'success'));
-        $confirmator->addItem(new \Ease\TWB4\LinkButton('?delete=true&' . $user->keyColumn . '=' . $user->getID(), _('Ano') . ' ' . \Ease\TWB4\Part::glyphIcon('remove'), 'danger'));
+        $confirmator->addItem(new \Ease\TWB4\LinkButton('user.php?id='.$user->getId(), _('Ne').' '.\Ease\TWB4\Part::glyphIcon('ok'), 'success'));
+        $confirmator->addItem(new \Ease\TWB4\LinkButton('?delete=true&'.$user->keyColumn.'='.$user->getID(), _('Ano').' '.\Ease\TWB4\Part::glyphIcon('remove'), 'danger'));
 
-        $oPage->container->addItem(new \Ease\TWB4\Panel('<strong>' . $user->getUserName() . '</strong>', 'info', $confirmBlock));
+        $oPage->container->addItem(new \Ease\TWB4\Panel('<strong>'.$user->getUserName().'</strong>', 'info', $confirmBlock));
 
         break;
+
     default:
         //        $operationsMenu = $user->operationsMenu();
         //        $operationsMenu->setTagCss(['float' => 'right']);
         //        $operationsMenu->dropdown->addTagClass('pull-right');
 
-        $oPage->container->addItem(new \Ease\TWB4\Panel(['<strong>' . $user->getUserName() . '</strong>', /* $operationsMenu */], 'info', new UserForm($user)));
+        $oPage->container->addItem(new \Ease\TWB4\Panel(['<strong>'.$user->getUserName().'</strong>'/* $operationsMenu */], 'info', new UserForm($user)));
+
         break;
 }
 

@@ -1,27 +1,31 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Description of ConfiguredFieldBadges
+ * Description of ConfiguredFieldBadges.
  *
  * @author vitex
  */
 class ConfigFieldsView extends \Ease\Html\DivTag
 {
-    /**
-     *
-     * @param array $fieldsInfo
-     */
     public function __construct(array $fieldsInfo)
     {
         parent::__construct();
+
         foreach ($fieldsInfo as $key => $fieldInfo) {
             $this->addItem(self::confInfo($fieldInfo));
         }
@@ -37,6 +41,7 @@ class ConfigFieldsView extends \Ease\Html\DivTag
         $dl->addDef(_('Default value'), $fieldInfo['defval']);
         $dl->addDef(_('Requied'), $fieldInfo['required'] ? '✅' : '❎');
         $container->addItem($dl);
+
         return new \Ease\TWB4\Card($container);
     }
 }

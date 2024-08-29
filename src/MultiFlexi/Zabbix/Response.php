@@ -1,115 +1,84 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace MultiFlexi\Zabbix;
 
 use MultiFlexi\Zabbix\Exception\ZabbixResponseException;
 
 /**
  * Response class - represents a Zabbix response.
- *
  */
 class Response
 {
     private const SUCCESS_RESPONSE = 'success';
 
-    /*
-     * @var string
-     */
-    private $responceStatus;
+    private string $responceStatus;
 
-    /**
-     * @var int
-     */
-    private $processedItems;
+    private int $processedItems;
 
-    /**
-     * @var int
-     */
-    private $failedItems;
+    private int $failedItems;
 
-    /**
-     * @var int
-     */
-    private $totalItems;
+    private int $totalItems;
 
-    /**
-     * @var float
-     */
-    private $secondSpent;
+    private float $secondSpent;
 
-    /**
-     *
-     * @param array $response
-     */
     public function __construct(array $response)
     {
         $this->parseZabbixResponse($response);
     }
 
-    /**
-     *
-     * @return bool
-     */
     public function isSuccess(): bool
     {
         return $this->responceStatus === self::SUCCESS_RESPONSE;
     }
 
-    /**
-     *
-     * @return int
-     */
     public function getProcessedCount(): int
     {
         return $this->processedItems;
     }
 
-    /**
-     *
-     * @return int
-     */
     public function getFailedCount(): int
     {
         return $this->failedItems;
     }
 
-    /**
-     *
-     * @return int
-     */
     public function getTotalCount(): int
     {
         return $this->totalItems;
     }
 
-    /**
-     *
-     * @return float
-     */
     public function getSecondsSpent(): float
     {
         return $this->secondSpent;
     }
 
     /**
-     * Parse array to Response class properties
+     * Parse array to Response class properties.
      *
      * This method takes array of values through argument
      * check required fields - `response` and `info` and
      * trying to find information about processed items
      * to zabbix server through reqular expression.
      *
-     * @param array $response
-     *
-     * @return void
-     *
      * @throws ZabbixResponseException
      */
-    private function parseZabbixResponse(array $response)
+    private function parseZabbixResponse(array $response): void
     {
         if (!isset($response['response'])) {
             throw new ZabbixResponseException(
-                'invalid zabbix server response, missing `response` field'
+                'invalid zabbix server response, missing `response` field',
             );
         }
 
@@ -117,7 +86,7 @@ class Response
 
         if (!isset($response['info'])) {
             throw new ZabbixResponseException(
-                'invalid zabbix server response, missing `info` field'
+                'invalid zabbix server response, missing `info` field',
             );
         }
 
@@ -127,7 +96,7 @@ class Response
         $matched = preg_match(
             $pattern,
             $response['info'],
-            $matches
+            $matches,
         );
 
         switch (true) {
@@ -135,8 +104,8 @@ class Response
                 throw new ZabbixResponseException(
                     sprintf(
                         "can't decode info into values, preg_match error: %d",
-                        preg_last_error()
-                    )
+                        preg_last_error(),
+                    ),
                 );
 
             case $matched === 0:
@@ -144,8 +113,8 @@ class Response
                     sprintf(
                         "pattern '%s' didn't satisfy to subject '%s'",
                         $pattern,
-                        $response['info']
-                    )
+                        $response['info'],
+                    ),
                 );
 
             default:
@@ -163,9 +132,9 @@ class Response
          * $matches[3] - 2 (total)
          * $matches[4] - 0.000059 (secods spent)
          */
-        $this->processedItems = intval($matches[1]);
-        $this->failedItems = intval($matches[2]);
-        $this->totalItems = intval($matches[3]);
-        $this->secondSpent = floatval($matches[4]);
+        $this->processedItems = (int) $matches[1];
+        $this->failedItems = (int) $matches[2];
+        $this->totalItems = (int) $matches[3];
+        $this->secondSpent = (float) $matches[4];
     }
 }

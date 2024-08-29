@@ -1,9 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace MultiFlexi\AbraFlexi;
 
 /**
- * Multi Flexi - AbraFlexiCompany Management Class
+ * Multi Flexi - AbraFlexiCompany Management Class.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2018-2023 Vitex Software
@@ -11,26 +24,20 @@ namespace MultiFlexi\AbraFlexi;
 class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
 {
     use \Ease\SQL\Orm;
-
     public $keyword = 'company';
     public $nameColumn = 'name';
     public $createColumn = 'DatCreate';
     public $lastModifiedColumn = 'DatUpdate';
 
     /**
-     * SQL Table we use
-     * @var string
+     * SQL Table we use.
      */
-    public $myTable = 'company';
+    public string $myTable = 'company';
+
+    public int $abraflexiId;
 
     /**
-     *
-     * @var int
-     */
-    public $abraflexiId;
-
-    /**
-     * MultiFlexi Company
+     * MultiFlexi Company.
      *
      * @param mixed $init
      * @param array $options
@@ -47,16 +54,31 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
         $this->setupProperty($options, 'authSessionId', 'ABRAFLEXI_AUTHSESSID');
         $this->setupProperty($options, 'timeout', 'ABRAFLEXI_TIMEOUT');
         $this->setupProperty($options, 'nativeTypes', 'ABRAFLEXI_NATIVE_TYPES');
-        if (is_integer($init)) {
+
+        if (\is_int($init)) {
             $this->loadFromSQL($init);
             $this->setCompany($this->getDataValue('company'));
         }
+
         $this->updateApiURL();
         $this->curlInit();
     }
 
+    public function __destruct()
+    {
+        $this->pdo = null;
+    }
+
     /**
-     * Prepare company
+     * @return array
+     */
+    public function __sleep()
+    {
+        return ['data', 'objectName', 'evidence'];
+    }
+
+    /**
+     * Prepare company.
      *
      * @param string $company
      *
@@ -66,14 +88,16 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
     {
         $result = ['webhook' => false];
         $this->setCompany($company);
+
         if ($this->changesApi(true)) {
             $result['webhook'] = $this->registerWebHook(self::webHookUrl($this->getMyKey()));
         }
+
         return $result;
     }
 
     /**
-     * WebHook url for Given ID of AbraFlexi instance
+     * WebHook url for Given ID of AbraFlexi instance.
      *
      * @param int $instanceId
      *
@@ -84,20 +108,20 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
         $baseUrl = \Ease\Document::phpSelf();
         $urlInfo = parse_url($baseUrl);
         $curFile = basename($urlInfo['path']);
-        $webHookUrl = str_replace(
+
+        return str_replace(
             $curFile,
-            'webhook.php?instanceid=' . $instanceId,
-            $baseUrl
+            'webhook.php?instanceid='.$instanceId,
+            $baseUrl,
         );
-        return $webHookUrl;
     }
 
     /**
-     * Add requied AbraFlexi label to company
+     * Add requied AbraFlexi label to company.
      *
      * @param string $label
      *
-     * @return boolean
+     * @return bool
      */
     public function addAbraFlexiLabel($label)
     {
@@ -109,11 +133,12 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
         $stitek = new \AbraFlexi\Stitek(null, $this->getConnectionOptions());
         /**
          * @see https://demo.abraflexi.eu/c/demo/stitek/properties
+         *
          * @var array initial Label contexts
          */
         $stitekData = [
-            "kod" => strtoupper($label),
-            "nazev" => $label, // Czech word in API
+            'kod' => strtoupper($label),
+            'nazev' => $label, // Czech word in API
             $evidenceToVsb['adresar'] => true,
             $evidenceToVsb['cenik'] => true,
             $evidenceToVsb['faktura-vydana'] => true,
@@ -122,12 +147,14 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
             $evidenceToVsb['objednavka-prijata'] => true,
         ];
         $stitekID = $stitek->getColumnsFromAbraFlexi('id', $stitekData);
+
         if (!isset($stitekID[0]['id'])) {
             $stitek->insertToAbraFlexi($stitekData);
-            if ($stitek->lastResponseCode == 201) {
+
+            if ($stitek->lastResponseCode === 201) {
                 $stitek->addStatusMessage(
                     sprintf(_('label %s created'), $label),
-                    'success'
+                    'success',
                 );
             } else {
                 $result = false;
@@ -138,7 +165,6 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
     }
 
     /**
-     *
      * @param string $hookurl
      */
     public function registerWebHook($hookurl)
@@ -147,27 +173,29 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
         $hooker = new \AbraFlexi\Hooks(null, $this->getData());
         $hooker->setDataValue('skipUrlTest', 'true');
         $hookResult = $hooker->register($hookurl, $format);
+
         if ($hookResult) {
             $hooker->addStatusMessage(sprintf(
                 _('Hook %s was registered'),
-                $hookurl
+                $hookurl,
             ), 'success');
             $hookurl = '';
         } else {
             $hooker->addStatusMessage(sprintf(
                 _('Hook %s not registered'),
-                $hookurl
+                $hookurl,
             ), 'warning');
         }
+
         return $hookResult;
     }
 
     /**
-     * Eanble Or disble ChangesAPI
+     * Eanble Or disble ChangesAPI.
      *
-     * @param boolean $enable requested state
+     * @param bool $enable requested state
      *
-     * @return boolean
+     * @return bool
      */
     public function changesApi($enable)
     {
@@ -180,7 +208,7 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
                 $changer->enable();
                 $changer->addStatusMessage(
                     _('ChangesAPI was enabled'),
-                    'success'
+                    'success',
                 );
                 $chapistatus = true;
             }
@@ -189,16 +217,17 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
                 $changer->disable();
                 $changer->addStatusMessage(
                     _('ChangesAPI was disabled'),
-                    'warning'
+                    'warning',
                 );
                 $chapistatus = false;
             }
         }
+
         return $chapistatus;
     }
 
     /**
-     * Prepare data for save
+     * Prepare data for save.
      *
      * @param array $data
      *
@@ -211,67 +240,77 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
         } else {
             $data['rw'] = false;
         }
+
         if (isset($data['webhook'])) {
             $data['webhook'] = true;
         } else {
             $data['webhook'] = false;
         }
+
         if (isset($data['enabled'])) {
             $data['enabled'] = true;
         } else {
             $data['enabled'] = false;
         }
+
         if (isset($data['setup'])) {
             $data['setup'] = true;
         } else {
             $data['setup'] = false;
         }
 
-        if (array_key_exists('company', $data) && empty($data['company'])) {
+        if (\array_key_exists('company', $data) && empty($data['company'])) {
             unset($data['company']);
         }
-        if (array_key_exists('customer', $data) && empty($data['customer'])) {
+
+        if (\array_key_exists('customer', $data) && empty($data['customer'])) {
             unset($data['customer']);
         }
 
         unset($data['class']);
+
         // TODO: $data['logo'] = $this->obtainLogo(intval($data['server']), $data['company']);
         return parent::takeData($data);
     }
 
     /**
      * Načte záznam z AbraFlexi a uloží v sobě jeho data
-     * Read AbraFlexi record and store it inside od object
+     * Read AbraFlexi record and store it inside od object.
      *
-     * @param int|string|array $id ID or conditions
+     * @param array|int|string $id ID or conditions
      *
      * @return int počet načtených položek
      */
     public function loadFromAbraFlexi($id = null)
     {
         $data = [];
-        if (is_null($id)) {
+
+        if (null === $id) {
             $id = $this->getMyKey();
         }
 
-        $flexidata = $this->getFlexiData($this->getEvidenceUrl() . '/' . (is_array($id) ? '' : self::urlizeId($id)), (is_array($id) ? $id : ''));
-        if ($this->lastResponseCode == 200) {
+        $flexidata = $this->getFlexiData($this->getEvidenceUrl().'/'.(\is_array($id) ? '' : self::urlizeId($id)), \is_array($id) ? $id : '');
+
+        if ($this->lastResponseCode === 200) {
             $this->apiURL = $this->curlInfo['url'];
-            if (is_array($flexidata) && (count($flexidata) == 1) && is_array(current($flexidata))) {
+
+            if (\is_array($flexidata) && (\count($flexidata) === 1) && \is_array(current($flexidata))) {
                 $data = current($flexidata);
             }
+
             $data['server'] = $this->abraflexiId;
             $data['company'] = $this->getCompany();
             unset($data['id']);
         }
+
         return $this->takeData($data);
     }
 
     /**
-     * Use Given AbraFlexi for connections
+     * Use Given AbraFlexi for connections.
      *
-     * @param int $abraflexiID
-     * @param string $company Description
+     * @param int    $abraflexiID
+     * @param string $company     Description
      */
     public function obtainLogo($abraflexiID, $company)
     {
@@ -279,11 +318,12 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
         $fbOptions = $abraflexir->getData();
         $fbOptions['company'] = $company;
         $logoEngine = new \AbraFlexi\ui\CompanyLogo(null, $fbOptions);
+
         return $logoEngine->getTagProperty('src');
     }
 
     /**
-     * Convert data from AbraFlexi column names to SQL column names
+     * Convert data from AbraFlexi column names to SQL column names.
      *
      * @param array $listing
      *
@@ -295,12 +335,12 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
             'company' => $listing['dbNazev'],
             'enabled' => $listing['show'],
             'name' => $listing['name'],
-            'DatCreate' => $listing['createDt']
+            'DatCreate' => $listing['createDt'],
         ];
     }
 
     /**
-     * Get Current record name
+     * Get Current record name.
      *
      * @return string
      */
@@ -310,15 +350,17 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
     }
 
     /**
-     *
+     * @param mixed $data
      */
-    public function prepareRemoteCompany($data)
+    public function prepareRemoteCompany($data): void
     {
         $company = $this->companyPresentInAbraFlexi($data);
+
         if (empty($company)) {
             $companyInfo = $this->createCompanyInAbraFlexi($data);
+
             if (!empty($companyInfo)) {
-                $this->setDataValue('company', $companyInfo ['dbNazev']);
+                $this->setDataValue('company', $companyInfo['dbNazev']);
             }
         } else {
             $this->setDataValue('company', $company);
@@ -331,7 +373,7 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
     }
 
     /**
-     * Check for given company presence in AbraFlexi
+     * Check for given company presence in AbraFlexi.
      *
      * @param array $companyData
      *
@@ -339,35 +381,43 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
      */
     public function companyPresentInAbraFlexi($companyData = null)
     {
-        if (is_null($companyData)) {
+        if (null === $companyData) {
             $companyData = $this->getData();
         }
+
         $companyPresentInAbraFlexi = null;
-        if (array_key_exists('company', $companyData)) {
-            $this->getFlexiData('/c/' . $companyData['company']);
-            if ($this->lastResponseCode == 200) {
+
+        if (\array_key_exists('company', $companyData)) {
+            $this->getFlexiData('/c/'.$companyData['company']);
+
+            if ($this->lastResponseCode === 200) {
                 $companyPresentInAbraFlexi = $companyData['company'];
             }
-        } elseif (array_key_exists('ic', $companyData)) {
+        } elseif (\array_key_exists('ic', $companyData)) {
             $candidates = $this->getFlexiData('/c');
-            if (count($candidates)) {
+
+            if (\count($candidates)) {
                 foreach ($candidates as $candidat) {
-                    $nastaveni = $this->getFlexiData('/c/' . $candidat['dbNazev'] . '/nastaveni');
+                    $nastaveni = $this->getFlexiData('/c/'.$candidat['dbNazev'].'/nastaveni');
+
                     foreach ($nastaveni['nastaveni'] as $nast) {
-                        if (array_key_exists('ic', $nast) || empty($nast['ic'])) {
-                            if ($nast['ic'] == $companyData['ic']) {
+                        if (\array_key_exists('ic', $nast) || empty($nast['ic'])) {
+                            if ($nast['ic'] === $companyData['ic']) {
                                 $companyPresentInAbraFlexi = $candidat['dbNazev'];
+
                                 break;
                             }
                         } else {
                             $this->addStatusMessage(sprintf(
                                 _('Company with no ID'),
-                                $candidat['name']
+                                $candidat['name'],
                             ), 'warning');
                         }
-                        if (array_key_exists('nazFirmy', $nast) || empty($nast['nazFirmy'])) {
-                            if ($nast['nazFirmy'] == $companyData['name']) {
+
+                        if (\array_key_exists('nazFirmy', $nast) || empty($nast['nazFirmy'])) {
+                            if ($nast['nazFirmy'] === $companyData['name']) {
                                 $companyPresentInAbraFlexi = $candidat['dbNazev'];
+
                                 break;
                             }
                         }
@@ -375,20 +425,22 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
                 }
             }
         }
+
         return $companyPresentInAbraFlexi;
     }
 
     /**
-     * Create new \AbraFlexi company
+     * Create new \AbraFlexi company.
      *
      * @param string $companyData
      *
-     * @return array  new company info
+     * @return array new company info
      */
     public function createCompanyInAbraFlexi($companyData = null)
     {
         $companyInfo = null;
-        if (is_null($companyData)) {
+
+        if (null === $companyData) {
             $companyData = $this->getData();
         }
 
@@ -400,26 +452,26 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
             $this->setCompany($companyInfo['dbNazev']);
             $this->addStatusMessage(sprintf(
                 _('Company created'),
-                $this->getApiURL()
+                $this->getApiURL(),
             ), 'success');
+
             if (!empty($companyData['ic'])) {
                 $setter = new \AbraFlexi\Nastaveni(
                     null,
-                    $this->getConnectionOptions()
+                    $this->getConnectionOptions(),
                 );
                 $settings = $setter->getAllFromAbraFlexi();
+
                 foreach ($settings as $setting) {
                     $this->insertToAbraFlexi(['id' => $setting['id'], 'ic' => $companyData['ic']]);
                 }
             }
         }
+
         return $companyInfo;
     }
 
-    /**
-     *
-     */
-    public function setEnvironment()
+    public function setEnvironment(): void
     {
         $envNames = [
             'ABRAFLEXI_URL' => $this->getDataValue('url'),
@@ -427,41 +479,25 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
             'ABRAFLEXI_PASSWORD' => $this->getDataValue('password'),
             'ABRAFLEXI_COMPANY' => $this->getDataValue('company'),
             'EASE_EMAILTO' => $this->getDataValue('email'),
-            'EASE_LOGGER' => empty($this->getDataValue('email')) ? 'syslog' : 'syslog|email'
+            'EASE_LOGGER' => empty($this->getDataValue('email')) ? 'syslog' : 'syslog|email',
         ];
         // $this->exportEnv($envNames);
     }
 
     /**
-     * Link to record's page
+     * Link to record's page.
      *
      * @return string
      */
     public function getLink()
     {
-        return $this->keyword . '.php?id=' . $this->getMyKey();
-    }
-
-    /**
-     *
-     */
-    public function __destruct()
-    {
-        unset($this->pdo);
-    }
-
-    /**
-     *
-     * @return array
-     */
-    public function __sleep()
-    {
-        return ['data', 'objectName', 'evidence'];
+        return $this->keyword.'.php?id='.$this->getMyKey();
     }
 
     public function getServerEnvironment()
     {
         $server = new Server($this->getDataValue('server'));
+
         return $server->getEnvironment();
     }
 
@@ -470,16 +506,18 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
         $serverEnvironment = $this->getServerEnvironment();
         $companyEnvHelper = new \MultiFlexi\CompanyEnv($this->getMyKey());
         $companyEnvironment = $companyEnvHelper->getData();
-        $companyEnvironment['ABRAFLEXI_COMPANY'] = $this->getCompany(); //TODO
+        $companyEnvironment['ABRAFLEXI_COMPANY'] = $this->getCompany(); // TODO
+
         return array_merge($serverEnvironment, $companyEnvironment);
     }
 
     /**
-     * Obtain Company Logo from AbraFlexi
+     * Obtain Company Logo from AbraFlexi.
      */
-    public function getLogo()
+    public function getLogo(): void
     {
         $configurator = new \AbraFlexi\Nastaveni(null, []);
+
         try {
             $logoInfo = $configurator->getFlexiData('1/logo');
         } catch (\AbraFlexi\Exception $ex) {

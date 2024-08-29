@@ -3,16 +3,20 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi -
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Description of AppSelector
+ * Description of AppSelector.
  *
  * @author vitex
  */
@@ -27,10 +31,10 @@ class AppsSelector extends \Ease\Html\InputTextTag
         $properties = [
             'valueField' => 'id',
             'labelField' => 'name',
-            'searchField' => ['name', 'description', 'homepage']
+            'searchField' => ['name', 'description', 'homepage'],
         ];
 
-        $properties['render']['item'] = 'function (item, escape) { return "<div class=container><div class=row> <div class=col-md-2><a href=app.php?id=" + escape(item.id) + "><img height=40 align=left src=\"" + escape(item.image) + "\"></a></div><div class=col-md-7>&nbsp;" + escape(item.name) + "</div><div class=col-md-3><a href=' . $optionsPage . '?id=" + escape(item.id) + "&interval=' . $identifier . ' style=\"font-size: 30px; padding: 5px;\" >🛠️️</a></div> </div></div>" }';
+        $properties['render']['item'] = 'function (item, escape) { return "<div class=container><div class=row> <div class=col-md-2><a href=app.php?id=" + escape(item.id) + "><img height=40 align=left src=\"" + escape(item.image) + "\"></a></div><div class=col-md-7>&nbsp;" + escape(item.name) + "</div><div class=col-md-3><a href='.$optionsPage.'?id=" + escape(item.id) + "&interval='.$identifier.' style=\"font-size: 30px; padding: 5px;\" >🛠️️</a></div> </div></div>" }';
         $properties['render']['option'] = 'function (item, escape) { return "<div><img height=40 align=right src=\"" + escape(item.image) + "\">" + escape(item.name) + "<br><small>" + escape(item.description) + "</small></div>" }';
         $properties['plugins'] = ['remove_button'];
 
@@ -40,14 +44,12 @@ class AppsSelector extends \Ease\Html\InputTextTag
     public function availbleApps()
     {
         $apper = new \MultiFlexi\Application();
+
         return $apper->listingQuery()->select(['id', 'name', 'description', 'homepage', 'image'], true)->fetchAll();
     }
 
     /**
-     * Translate strings in specified column using gettext
-     *
-     * @param array $data
-     * @param array $columns
+     * Translate strings in specified column using gettext.
      *
      * @return array
      */
@@ -55,13 +57,14 @@ class AppsSelector extends \Ease\Html\InputTextTag
     {
         foreach ($data as $rowId => $record) {
             foreach ($columns as $transcol) {
-                if (array_key_exists($transcol, $record)) {
-                    if (strlen($record[$transcol])) {
+                if (\array_key_exists($transcol, $record)) {
+                    if (\strlen($record[$transcol])) {
                         $data[$rowId][$transcol] = _($data[$rowId][$transcol]);
                     }
                 }
             }
         }
+
         return $data;
     }
 }

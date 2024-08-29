@@ -3,16 +3,20 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi - Common Action
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi;
 
 /**
- * Description of Executor
+ * Description of Executor.
  *
  * @author vitex
  */
@@ -20,65 +24,50 @@ abstract class CommonExecutor extends \Ease\Sand
 {
     use \Ease\Logger\Logging;
 
-    /**
-     *
-     * @var Job
-     */
-    public $job;
+    public Job $job;
 
-    /**
-     *
-     * @var string
-     */
-    public $stdin;
+    public string $stdin;
 
-    /**
-     *
-     * @var string
-     */
-    public $stdout;
+    public string $stdout;
 
-    /**
-     *
-     * @var string
-     */
-    public $stderr;
+    public string $stderr;
     public $environment = [];
 
-    /**
-     * @var array
-     */
-    public $outputCache = [];
+    public array $outputCache = [];
 
     /**
-     *
      * @param Job $job
      */
     public function __construct($job)
     {
         $this->job = $job;
         $this->setObjectName();
-        $this->setObjectName($job->getMyKey() . '@' . \Ease\Logger\Message::getCallerName($this));
+        $this->setObjectName($job->getMyKey().'@'.\Ease\Logger\Message::getCallerName($this));
         $this->environment = $job->getFullEnvironment();
     }
 
     /**
-     * Add Output line into cache
+     * Add Output line into cache.
+     *
+     * @param mixed $line
+     * @param mixed $type
      */
-    public function addOutput($line, $type)
+    public function addOutput($line, $type): void
     {
         $this->outputCache[microtime()] = ['line' => $line, 'type' => $type];
     }
 
     /**
-     * Get Output cache as plaintext
+     * Get Output cache as plaintext.
      */
     public function getOutputCachePlaintext()
     {
         $output = '';
+
         foreach ($this->outputCache as $line) {
-            $output .= $line['line'] . "\n";
+            $output .= $line['line']."\n";
         }
+
         return $output;
     }
 }

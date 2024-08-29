@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi  - Common menu class
+ * This file is part of the MultiFlexi package
  *
- * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2015-2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
@@ -13,17 +19,13 @@ class BootstrapMenu extends \Ease\TWB4\Navbar
 {
     /**
      * Navigace.
-     *
-     * @var \Ease\Html\UlTag
      */
-    public $nav = null;
+    public \Ease\Html\UlTag $nav = null;
 
     /**
-     * Brand icon link
-     *
-     * @var string
+     * Brand icon link.
      */
-    public $mainpage = 'main.php';
+    public string $mainpage = 'main.php';
 
     /**
      * Hlavní menu aplikace.
@@ -37,8 +39,7 @@ class BootstrapMenu extends \Ease\TWB4\Navbar
         $content = null,
         $properties = []
     ) {
-
-        parent::__construct(new \Ease\Html\ImgTag('images/project-logo.svg', $name, ['width' => 30, 'height' => 30, 'class' => 'img-rounded d-inline-block align-top']), 'main-menu', ['class' => 'navbar-fixed-top' . (array_key_exists('class', $properties) ? $properties['class'] : '')]);
+        parent::__construct(new \Ease\Html\ImgTag('images/project-logo.svg', $name, ['width' => 30, 'height' => 30, 'class' => 'img-rounded d-inline-block align-top']), 'main-menu', ['class' => 'navbar-fixed-top'.(\array_key_exists('class', $properties) ? $properties['class'] : '')]);
 
         if (\Ease\Shared::user()->isLogged() === false) {
             $loginForm = new \Ease\TWB4\Form(['action' => 'login.php', 'class' => 'form-inline my-2 my-lg-0']);

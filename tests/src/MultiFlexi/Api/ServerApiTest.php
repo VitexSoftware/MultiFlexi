@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi\Api;
 
 use MultiFlexi\Api\ServerApi;
@@ -9,10 +22,7 @@ use MultiFlexi\Api\ServerApi;
  */
 class ServerApiTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var ServerApi
-     */
-    protected $object;
+    protected ServerApi $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class ServerApiTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Api\ServerApi::getServerById
+     * @covers \MultiFlexi\Api\ServerApi::getServerById
+     *
      * @todo   Implement testgetServerById().
      */
-    public function testgetServerById()
+    public function testgetServerById(): void
     {
         $this->assertEquals('', $this->object->getServerById());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class ServerApiTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Api\ServerApi::listServers
+     * @covers \MultiFlexi\Api\ServerApi::listServers
+     *
      * @todo   Implement testlistServers().
      */
-    public function testlistServers()
+    public function testlistServers(): void
     {
         $this->assertEquals('', $this->object->listServers());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class ServerApiTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Api\ServerApi::setServerById
+     * @covers \MultiFlexi\Api\ServerApi::setServerById
+     *
      * @todo   Implement testsetServerById().
      */
-    public function testsetServerById()
+    public function testsetServerById(): void
     {
         $this->assertEquals('', $this->object->setServerById());
         // Remove the following lines when you implement this test.

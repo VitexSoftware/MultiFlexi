@@ -3,15 +3,17 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi -
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 /**
- *
- *
  * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2023 Vitex Software
  */
@@ -19,7 +21,7 @@ declare(strict_types=1);
 namespace MultiFlexi;
 
 /**
- * Description of ActionConfig
+ * Description of ActionConfig.
  *
  * @author vitex
  */
@@ -36,27 +38,14 @@ class ActionConfig extends Engine
     //                ->addColumn('DatSave', 'datetime', ['null' => true])
     //                ->addForeignKey('runtemplate_id', 'runtemplate', ['id'], ['constraint' => 'runtemplate_must_exist'])
 
-    /**
-     *
-     * @param string $mode
-     * @param array $values
-     * @param int $runtemplate
-     */
-    public function saveModeConfigs(string $mode, array $values, int $runtemplate)
+    public function saveModeConfigs(string $mode, array $values, int $runtemplate): void
     {
         foreach ($values as $module => $configs) {
             $this->saveActionFields($module, $mode, $runtemplate, $configs);
         }
     }
 
-    /**
-     *
-     * @param string $module
-     * @param string $mode
-     * @param int $runtempate
-     * @param array $configs
-     */
-    public function saveActionFields(string $module, string $mode, int $runtempate, array $configs)
+    public function saveActionFields(string $module, string $mode, int $runtempate, array $configs): void
     {
         foreach ($configs as $key => $value) {
             $this->saveActionConfig($module, $key, $value, $mode, $runtempate);
@@ -64,16 +53,16 @@ class ActionConfig extends Engine
     }
 
     /**
-     *
      * @param string $module
      * @param string $key
      * @param string $value
      * @param string $mode
      * @param int    $runtempalte
      */
-    public function saveActionConfig($module, $key, $value, $mode, $runtempalte)
+    public function saveActionConfig($module, $key, $value, $mode, $runtempalte): void
     {
         $cfgId = $this->listingQuery()->select(['id'], true)->where(['module' => $module, 'keyname' => $key, 'mode' => $mode, 'runtemplate_id' => $runtempalte])->fetch();
+
         if ($cfgId) {
             $this->updateToSQL(['value' => $value], $cfgId);
         } else {
@@ -82,7 +71,6 @@ class ActionConfig extends Engine
     }
 
     /**
-     *
      * @param string $module
      * @param string $key
      * @param string $value
@@ -97,9 +85,6 @@ class ActionConfig extends Engine
     }
 
     /**
-     *
-     * @param int $runtemplateId
-     *
      * @return array
      */
     public function getRuntemplateConfig(int $runtemplateId)

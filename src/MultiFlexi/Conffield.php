@@ -1,16 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Configuration Flield Class
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2024 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi;
 
 /**
- * Description of Conffield
+ * Description of Conffield.
  *
  * @author vitex
  */
@@ -22,31 +28,33 @@ class Conffield extends \Ease\SQL\Engine
     {
         $checked = false;
         unset($data['add']);
-        if (array_key_exists('app_id', $data)) {
+
+        if (\array_key_exists('app_id', $data)) {
             $checked = true;
         }
-        if (array_key_exists('id', $data) && ($data['id'] == '')) {
+
+        if (\array_key_exists('id', $data) && ($data['id'] === '')) {
             unset($data['id']);
             $checked = true;
         }
 
-        $data['required'] = array_key_exists('required', $data) && $data['required'] == 'on' ? 1 : 0;
+        $data['required'] = \array_key_exists('required', $data) && $data['required'] === 'on' ? 1 : 0;
+
         return $checked ? parent::takeData($data) : 0;
     }
 
     /**
-     *
      * @param int $appId
      *
      * @return array
      */
     public function appConfigs($appId)
     {
-        return Environmentor::addSource($this->getColumnsFromSQL(['*'], ['app_id' => $appId], 'keyname', 'keyname'), get_class($this));
+        return Environmentor::addSource($this->getColumnsFromSQL(['*'], ['app_id' => $appId], 'keyname', 'keyname'), \get_class($this));
     }
 
     /**
-     * Create new Environment field for an application
+     * Create new Environment field for an application.
      *
      * @param int    $appId
      * @param string $envName
@@ -57,8 +65,10 @@ class Conffield extends \Ease\SQL\Engine
         $this->dataReset();
 
         $candidat = $this->listingQuery()->where('app_id', $appId)->where('keyname', $envName);
+
         if (!empty($candidat)) {
             $currentData = $candidat->fetch();
+
             if ($currentData) {
                 $this->setMyKey($currentData['id']);
             }
@@ -70,6 +80,7 @@ class Conffield extends \Ease\SQL\Engine
         $this->setDataValue('type', $envProperties['type']);
         $this->setDataValue('description', $envProperties['description']);
         $this->setDataValue('defval', $envProperties['defval']);
+
         return $this->dbsync();
     }
 

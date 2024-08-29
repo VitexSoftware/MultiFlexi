@@ -1,50 +1,56 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi  - New Customer registration form
+ * This file is part of the MultiFlexi package
  *
- * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2015-2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Registered AbraFlexi instance editor Form
+ * Registered AbraFlexi instance editor Form.
  *
  * @author
  */
 class RegisterCustomerForm extends EngineForm
 {
-    public function finalize()
+    public function finalize(): void
     {
         $this->addInput(
             new \Ease\Html\InputTextTag('firstname'),
-            _('First Name')
+            _('First Name'),
         );
         $this->addInput(
             new \Ease\Html\InputTextTag('lastname'),
-            _('Lastname')
+            _('Lastname'),
         );
 
         $this->addInput(
             new \Ease\Html\InputTextTag('login'),
-            _('Login')
+            _('Login'),
         );
 
         $this->addInput(
             new \Ease\Html\InputPasswordTag('password'),
-            _('Password')
+            _('Password'),
         );
 
         $this->addInput(
             new \Ease\Html\InputTextTag('email'),
-            _('Email')
+            _('Email'),
         );
 
         $this->addInput(new \Ease\TWB4\SubmitButton(_('Save'), 'success'));
 
-        if (!is_null($this->engine->getDataValue('id'))) {
+        if (null !== $this->engine->getDataValue('id')) {
             $this->addItem(new \Ease\Html\InputHiddenTag('id'));
         }
 

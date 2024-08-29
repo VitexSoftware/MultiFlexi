@@ -1,16 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Config fields editor.
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 use Ease\Html\ATag;
-use Ease\TWB4\Panel;
 use Ease\TWB4\Row;
 use MultiFlexi\Conffield;
 
@@ -31,7 +36,8 @@ $conffields = new Conffield($confId, ['autoload' => true]);
 $conffields->setDataValue('app_id', $appId);
 
 $delete = WebPage::getRequestValue('delete', 'int');
-if (!is_null($delete)) {
+
+if (null !== $delete) {
     $conffields->loadFromSQL($delete);
     $cnf = new \MultiFlexi\Configuration();
     $conffields->addStatusMessage(sprintf(_('%d used configurations removed'), $cnf->deleteFromSQL(['app_id' => $appId, 'name' => $conffields->getDataValue('keyname')])));
@@ -41,22 +47,21 @@ if (!is_null($delete)) {
     }
 }
 
-
 if ($oPage->isPosted()) {
-    if ($conffields->takeData($_POST) && !is_null($conffields->dbsync())) {
+    if ($conffields->takeData($_POST) && null !== $conffields->dbsync()) {
         $conffields->addStatusMessage(_('Config field Saved'), 'success');
     } else {
         $conffields->addStatusMessage(
             _('Error saving Config field'),
-            'error'
+            'error',
         );
     }
 }
 
-if (strlen($instanceName)) {
+if (\strlen($instanceName)) {
     $instanceLink = new ATag(
         $conffields->getLink(),
-        $conffields->getLink()
+        $conffields->getLink(),
     );
 } else {
     $instanceName = _('App custom configuration fields');
@@ -73,13 +78,13 @@ $cfgs = new \Ease\Html\UlTag();
 foreach ($conffields->appConfigs($appId) as $configInfo) {
     $cnfRow = new Row();
     $cnfRow->addColumn(2, $configInfo['type']);
-    $cnfRow->addColumn(4, new ATag('conffield.php?app_id=' . $appId . '&id=' . $configInfo['id'], new \Ease\TWB4\Badge('success', $configInfo['keyname'])));
+    $cnfRow->addColumn(4, new ATag('conffield.php?app_id='.$appId.'&id='.$configInfo['id'], new \Ease\TWB4\Badge('success', $configInfo['keyname'])));
     $cnfRow->addColumn(4, $configInfo['description']);
-    $cnfRow->addColumn(2, new \Ease\TWB4\LinkButton('?app_id=' . $appId . '&delete=' . $configInfo['id'], 'X', 'danger btn-sm'));
+    $cnfRow->addColumn(2, new \Ease\TWB4\LinkButton('?app_id='.$appId.'&delete='.$configInfo['id'], 'X', 'danger btn-sm'));
     $cfgs->addItemSmart($cnfRow);
 }
 
-$cfgs->addItem(new \Ease\TWB4\LinkButton('app.php?id=' . WebPage::getRequestValue('app_id', 'int'), [_('Back to app'), $appliacation->getRecordName()], 'warning'));
+$cfgs->addItem(new \Ease\TWB4\LinkButton('app.php?id='.WebPage::getRequestValue('app_id', 'int'), [_('Back to app'), $appliacation->getRecordName()], 'warning'));
 
 $editorRow = new \Ease\TWB4\Row();
 $editorRow->addColumn(8, $instanceRow);

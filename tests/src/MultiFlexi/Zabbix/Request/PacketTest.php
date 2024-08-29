@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi\Zabbix\Request;
 
 use MultiFlexi\Zabbix\Request\Packet;
@@ -9,10 +22,7 @@ use MultiFlexi\Zabbix\Request\Packet;
  */
 class PacketTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var Packet
-     */
-    protected $object;
+    protected Packet $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class PacketTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Zabbix\Request\Packet::addMetric
+     * @covers \MultiFlexi\Zabbix\Request\Packet::addMetric
+     *
      * @todo   Implement testaddMetric().
      */
-    public function testaddMetric()
+    public function testaddMetric(): void
     {
         $this->assertEquals('', $this->object->addMetric());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class PacketTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Zabbix\Request\Packet::getPacket
+     * @covers \MultiFlexi\Zabbix\Request\Packet::getPacket
+     *
      * @todo   Implement testgetPacket().
      */
-    public function testgetPacket()
+    public function testgetPacket(): void
     {
         $this->assertEquals('', $this->object->getPacket());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class PacketTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Zabbix\Request\Packet::jsonSerialize
+     * @covers \MultiFlexi\Zabbix\Request\Packet::jsonSerialize
+     *
      * @todo   Implement testjsonSerialize().
      */
-    public function testjsonSerialize()
+    public function testjsonSerialize(): void
     {
         $this->assertEquals('', $this->object->jsonSerialize());
         // Remove the following lines when you implement this test.

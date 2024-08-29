@@ -1,21 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace MultiFlexi\Ui;
 
 /**
- * Multi Flexi - Application Launch Form
+ * Multi Flexi - Application Launch Form.
  *
- * @package AbraFlexi\MultiFlexi
  * @copyright  2015-2024 Vitex Software
  * @license    https://opensource.org/licenses/MIT MIT
  */
 class AppLaunchForm extends \Ease\TWB4\Form
 {
     /**
-     * Application Launch Form
-     *
-     * @param \MultiFlexi\Application $app
-     * @param int $companyId
+     * Application Launch Form.
      */
     public function __construct(\MultiFlexi\Application $app, int $companyId)
     {
@@ -32,27 +41,30 @@ class AppLaunchForm extends \Ease\TWB4\Form
         $appFields = \MultiFlexi\Conffield::getAppConfigs($appId);
 
         //        $this->addItem(new EnvironmentView($env));
-        $this->addItem("<hr>");
+        $this->addItem('<hr>');
 
         /* for each upload field add file input */
         foreach ($appFields as $fieldKey => $fieldProps) {
             switch ($fieldProps['type']) {
                 case 'file':
-                    $this->addInput(new \Ease\Html\InputFileTag($fieldKey, $fieldProps['defval'], ['id' => 'input' . $fieldProps['keyname']]), $fieldProps['keyname'], $fieldProps['defval'], $fieldProps['description']);
+                    $this->addInput(new \Ease\Html\InputFileTag($fieldKey, $fieldProps['defval'], ['id' => 'input'.$fieldProps['keyname']]), $fieldProps['keyname'], $fieldProps['defval'], $fieldProps['description']);
+
                     break;
                 case 'email':
-                    if (array_key_exists($fieldKey, $env) === false) {
+                    if (\array_key_exists($fieldKey, $env) === false) {
                         $this->addInput(new \Ease\Html\InputEmailTag($fieldKey, $fieldProps['defval']), $fieldKey, $fieldProps['defval'], $fieldProps['description']);
                     }
+
                     break;
                 case 'checkbox':
-                    if (array_key_exists($fieldKey, $env) === false) {
-                        $this->addInput(new \Ease\TWB4\Widgets\Toggle($fieldKey, $fieldProps['defval']), $fieldKey . '&nbsp;', $fieldProps['defval'], $fieldProps['description']);
+                    if (\array_key_exists($fieldKey, $env) === false) {
+                        $this->addInput(new \Ease\TWB4\Widgets\Toggle($fieldKey, $fieldProps['defval']), $fieldKey.'&nbsp;', $fieldProps['defval'], $fieldProps['description']);
                     }
+
                     break;
 
                 default:
-                    if (array_key_exists($fieldKey, $env) === false) {
+                    if (\array_key_exists($fieldKey, $env) === false) {
                         $this->addInput(new \Ease\Html\InputTextTag($fieldKey, $fieldProps['defval']), $fieldKey, $fieldProps['defval'], $fieldProps['description']);
                     }
 
@@ -61,7 +73,7 @@ class AppLaunchForm extends \Ease\TWB4\Form
         }
 
         $this->addItem(new AppExecutorSelect($app));
-        $this->addItem(new \Ease\TWB4\SubmitButton([_('Launch now') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'success btn-lg btn-block '));
-        $this->addItem(new \Ease\TWB4\LinkButton('schedule.php?app_id=' . $appId . '&company_id=' . $companyId, [_('Schedule') . '&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg'));
+        $this->addItem(new \Ease\TWB4\SubmitButton([_('Launch now').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'success btn-lg btn-block '));
+        $this->addItem(new \Ease\TWB4\LinkButton('schedule.php?app_id='.$appId.'&company_id='.$companyId, [_('Schedule').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg'));
     }
 }

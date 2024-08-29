@@ -1,22 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Customers listing.
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
-use MultiFlexi\Customer;
 use Ease\TWB4\Container;
+use MultiFlexi\Customer;
 
 require_once './init.php';
 
 $oPage->onlyForLogged();
 
-//\MultiFlexi\Engine::doThings($oPage);
+// \MultiFlexi\Engine::doThings($oPage);
 
 $oPage->addItem(new PageTop(_('Customers')));
 

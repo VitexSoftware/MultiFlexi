@@ -1,16 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Runner Class
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi;
 
 /**
- * Description of Runner
+ * Description of Runner.
  *
  * @author vitex
  */
@@ -22,7 +28,7 @@ class Runner extends \Ease\Sand
     }
 
     /**
-     * SystemD service name
+     * SystemD service name.
      *
      * @param string $service
      *
@@ -30,6 +36,6 @@ class Runner extends \Ease\Sand
      */
     public static function isServiceActive($service)
     {
-        return (trim(strval(shell_exec("systemctl is-active $service"))) == "active");
+        return trim((string) shell_exec("systemctl is-active {$service}")) === 'active';
     }
 }

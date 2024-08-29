@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi\Auth;
 
 use MultiFlexi\Auth\BasicAuthenticator;
@@ -9,10 +22,7 @@ use MultiFlexi\Auth\BasicAuthenticator;
  */
 class BasicAuthenticatorTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var BasicAuthenticator
-     */
-    protected $object;
+    protected BasicAuthenticator $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class BasicAuthenticatorTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Auth\BasicAuthenticator::__invoke
+     * @covers \MultiFlexi\Auth\BasicAuthenticator::__invoke
+     *
      * @todo   Implement test__invoke().
      */
-    public function test__invoke()
+    public function testInvoke(): void
     {
         $this->assertEquals('', $this->object->__invoke());
         // Remove the following lines when you implement this test.

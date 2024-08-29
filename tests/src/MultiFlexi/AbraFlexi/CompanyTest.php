@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi\AbraFlexi;
 
 use MultiFlexi\AbraFlexi\Company;
@@ -9,10 +22,7 @@ use MultiFlexi\AbraFlexi\Company;
  */
 class CompanyTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var Company
-     */
-    protected $object;
+    protected Company $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::prepareCompany
+     * @covers \MultiFlexi\AbraFlexi\Company::prepareCompany
+     *
      * @todo   Implement testprepareCompany().
      */
-    public function testprepareCompany()
+    public function testprepareCompany(): void
     {
         $this->assertEquals('', $this->object->prepareCompany());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::webHookUrl
+     * @covers \MultiFlexi\AbraFlexi\Company::webHookUrl
+     *
      * @todo   Implement testwebHookUrl().
      */
-    public function testwebHookUrl()
+    public function testwebHookUrl(): void
     {
         $this->assertEquals('', $this->object->webHookUrl());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::addAbraFlexiLabel
+     * @covers \MultiFlexi\AbraFlexi\Company::addAbraFlexiLabel
+     *
      * @todo   Implement testaddAbraFlexiLabel().
      */
-    public function testaddAbraFlexiLabel()
+    public function testaddAbraFlexiLabel(): void
     {
         $this->assertEquals('', $this->object->addAbraFlexiLabel());
         // Remove the following lines when you implement this test.
@@ -66,10 +78,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::registerWebHook
+     * @covers \MultiFlexi\AbraFlexi\Company::registerWebHook
+     *
      * @todo   Implement testregisterWebHook().
      */
-    public function testregisterWebHook()
+    public function testregisterWebHook(): void
     {
         $this->assertEquals('', $this->object->registerWebHook());
         // Remove the following lines when you implement this test.
@@ -77,10 +90,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::changesApi
+     * @covers \MultiFlexi\AbraFlexi\Company::changesApi
+     *
      * @todo   Implement testchangesApi().
      */
-    public function testchangesApi()
+    public function testchangesApi(): void
     {
         $this->assertEquals('', $this->object->changesApi());
         // Remove the following lines when you implement this test.
@@ -88,10 +102,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::takeData
+     * @covers \MultiFlexi\AbraFlexi\Company::takeData
+     *
      * @todo   Implement testtakeData().
      */
-    public function testtakeData()
+    public function testtakeData(): void
     {
         $this->assertEquals('', $this->object->takeData());
         // Remove the following lines when you implement this test.
@@ -99,10 +114,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::loadFromAbraFlexi
+     * @covers \MultiFlexi\AbraFlexi\Company::loadFromAbraFlexi
+     *
      * @todo   Implement testloadFromAbraFlexi().
      */
-    public function testloadFromAbraFlexi()
+    public function testloadFromAbraFlexi(): void
     {
         $this->assertEquals('', $this->object->loadFromAbraFlexi());
         // Remove the following lines when you implement this test.
@@ -110,10 +126,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::obtainLogo
+     * @covers \MultiFlexi\AbraFlexi\Company::obtainLogo
+     *
      * @todo   Implement testobtainLogo().
      */
-    public function testobtainLogo()
+    public function testobtainLogo(): void
     {
         $this->assertEquals('', $this->object->obtainLogo());
         // Remove the following lines when you implement this test.
@@ -121,10 +138,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::convertListingData
+     * @covers \MultiFlexi\AbraFlexi\Company::convertListingData
+     *
      * @todo   Implement testconvertListingData().
      */
-    public function testconvertListingData()
+    public function testconvertListingData(): void
     {
         $this->assertEquals('', $this->object->convertListingData());
         // Remove the following lines when you implement this test.
@@ -132,10 +150,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::getRecordName
+     * @covers \MultiFlexi\AbraFlexi\Company::getRecordName
+     *
      * @todo   Implement testgetRecordName().
      */
-    public function testgetRecordName()
+    public function testgetRecordName(): void
     {
         $this->assertEquals('', $this->object->getRecordName());
         // Remove the following lines when you implement this test.
@@ -143,10 +162,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::prepareRemoteCompany
+     * @covers \MultiFlexi\AbraFlexi\Company::prepareRemoteCompany
+     *
      * @todo   Implement testprepareRemoteCompany().
      */
-    public function testprepareRemoteCompany()
+    public function testprepareRemoteCompany(): void
     {
         $this->assertEquals('', $this->object->prepareRemoteCompany());
         // Remove the following lines when you implement this test.
@@ -154,10 +174,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::companyPresentInAbraFlexi
+     * @covers \MultiFlexi\AbraFlexi\Company::companyPresentInAbraFlexi
+     *
      * @todo   Implement testcompanyPresentInAbraFlexi().
      */
-    public function testcompanyPresentInAbraFlexi()
+    public function testcompanyPresentInAbraFlexi(): void
     {
         $this->assertEquals('', $this->object->companyPresentInAbraFlexi());
         // Remove the following lines when you implement this test.
@@ -165,10 +186,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::createCompanyInAbraFlexi
+     * @covers \MultiFlexi\AbraFlexi\Company::createCompanyInAbraFlexi
+     *
      * @todo   Implement testcreateCompanyInAbraFlexi().
      */
-    public function testcreateCompanyInAbraFlexi()
+    public function testcreateCompanyInAbraFlexi(): void
     {
         $this->assertEquals('', $this->object->createCompanyInAbraFlexi());
         // Remove the following lines when you implement this test.
@@ -176,10 +198,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::setEnvironment
+     * @covers \MultiFlexi\AbraFlexi\Company::setEnvironment
+     *
      * @todo   Implement testsetEnvironment().
      */
-    public function testsetEnvironment()
+    public function testsetEnvironment(): void
     {
         $this->assertEquals('', $this->object->setEnvironment());
         // Remove the following lines when you implement this test.
@@ -187,10 +210,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::getLink
+     * @covers \MultiFlexi\AbraFlexi\Company::getLink
+     *
      * @todo   Implement testgetLink().
      */
-    public function testgetLink()
+    public function testgetLink(): void
     {
         $this->assertEquals('', $this->object->getLink());
         // Remove the following lines when you implement this test.
@@ -198,10 +222,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::__destruct
+     * @covers \MultiFlexi\AbraFlexi\Company::__destruct
+     *
      * @todo   Implement test__destruct().
      */
-    public function test__destruct()
+    public function testDestruct(): void
     {
         $this->assertEquals('', $this->object->__destruct());
         // Remove the following lines when you implement this test.
@@ -209,10 +234,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::__sleep
+     * @covers \MultiFlexi\AbraFlexi\Company::__sleep
+     *
      * @todo   Implement test__sleep().
      */
-    public function test__sleep()
+    public function testSleep(): void
     {
         $this->assertEquals('', $this->object->__sleep());
         // Remove the following lines when you implement this test.
@@ -220,10 +246,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::getServerEnvironment
+     * @covers \MultiFlexi\AbraFlexi\Company::getServerEnvironment
+     *
      * @todo   Implement testgetServerEnvironment().
      */
-    public function testgetServerEnvironment()
+    public function testgetServerEnvironment(): void
     {
         $this->assertEquals('', $this->object->getServerEnvironment());
         // Remove the following lines when you implement this test.
@@ -231,10 +258,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::getEnvironment
+     * @covers \MultiFlexi\AbraFlexi\Company::getEnvironment
+     *
      * @todo   Implement testgetEnvironment().
      */
-    public function testgetEnvironment()
+    public function testgetEnvironment(): void
     {
         $this->assertEquals('', $this->object->getEnvironment());
         // Remove the following lines when you implement this test.
@@ -242,10 +270,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::setUp
+     * @covers \MultiFlexi\AbraFlexi\Company::setUp
+     *
      * @todo   Implement testsetUp().
      */
-    public function testsetUp()
+    public function testsetUp(): void
     {
         $this->assertEquals('', $this->object->setUp());
         // Remove the following lines when you implement this test.
@@ -253,10 +282,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::setUpDb
+     * @covers \MultiFlexi\AbraFlexi\Company::setUpDb
+     *
      * @todo   Implement testsetUpDb().
      */
-    public function testsetUpDb()
+    public function testsetUpDb(): void
     {
         $this->assertEquals('', $this->object->setUpDb());
         // Remove the following lines when you implement this test.
@@ -264,10 +294,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::pdoConnect
+     * @covers \MultiFlexi\AbraFlexi\Company::pdoConnect
+     *
      * @todo   Implement testpdoConnect().
      */
-    public function testpdoConnect()
+    public function testpdoConnect(): void
     {
         $this->assertEquals('', $this->object->pdoConnect());
         // Remove the following lines when you implement this test.
@@ -275,10 +306,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::getPdo
+     * @covers \MultiFlexi\AbraFlexi\Company::getPdo
+     *
      * @todo   Implement testgetPdo().
      */
-    public function testgetPdo()
+    public function testgetPdo(): void
     {
         $this->assertEquals('', $this->object->getPdo());
         // Remove the following lines when you implement this test.
@@ -286,10 +318,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::getFluentPDO
+     * @covers \MultiFlexi\AbraFlexi\Company::getFluentPDO
+     *
      * @todo   Implement testgetFluentPDO().
      */
-    public function testgetFluentPDO()
+    public function testgetFluentPDO(): void
     {
         $this->assertEquals('', $this->object->getFluentPDO());
         // Remove the following lines when you implement this test.
@@ -297,10 +330,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::listingQuery
+     * @covers \MultiFlexi\AbraFlexi\Company::listingQuery
+     *
      * @todo   Implement testlistingQuery().
      */
-    public function testlistingQuery()
+    public function testlistingQuery(): void
     {
         $this->assertEquals('', $this->object->listingQuery());
         // Remove the following lines when you implement this test.
@@ -308,10 +342,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::getColumnsFromSQL
+     * @covers \MultiFlexi\AbraFlexi\Company::getColumnsFromSQL
+     *
      * @todo   Implement testgetColumnsFromSQL().
      */
-    public function testgetColumnsFromSQL()
+    public function testgetColumnsFromSQL(): void
     {
         $this->assertEquals('', $this->object->getColumnsFromSQL());
         // Remove the following lines when you implement this test.
@@ -319,10 +354,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::getDataFromSQL
+     * @covers \MultiFlexi\AbraFlexi\Company::getDataFromSQL
+     *
      * @todo   Implement testgetDataFromSQL().
      */
-    public function testgetDataFromSQL()
+    public function testgetDataFromSQL(): void
     {
         $this->assertEquals('', $this->object->getDataFromSQL());
         // Remove the following lines when you implement this test.
@@ -330,10 +366,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::loadFromSQL
+     * @covers \MultiFlexi\AbraFlexi\Company::loadFromSQL
+     *
      * @todo   Implement testloadFromSQL().
      */
-    public function testloadFromSQL()
+    public function testloadFromSQL(): void
     {
         $this->assertEquals('', $this->object->loadFromSQL());
         // Remove the following lines when you implement this test.
@@ -341,10 +378,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::dbreload
+     * @covers \MultiFlexi\AbraFlexi\Company::dbreload
+     *
      * @todo   Implement testdbreload().
      */
-    public function testdbreload()
+    public function testdbreload(): void
     {
         $this->assertEquals('', $this->object->dbreload());
         // Remove the following lines when you implement this test.
@@ -352,10 +390,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::dbsync
+     * @covers \MultiFlexi\AbraFlexi\Company::dbsync
+     *
      * @todo   Implement testdbsync().
      */
-    public function testdbsync()
+    public function testdbsync(): void
     {
         $this->assertEquals('', $this->object->dbsync());
         // Remove the following lines when you implement this test.
@@ -363,10 +402,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::updateToSQL
+     * @covers \MultiFlexi\AbraFlexi\Company::updateToSQL
+     *
      * @todo   Implement testupdateToSQL().
      */
-    public function testupdateToSQL()
+    public function testupdateToSQL(): void
     {
         $this->assertEquals('', $this->object->updateToSQL());
         // Remove the following lines when you implement this test.
@@ -374,10 +414,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::saveToSQL
+     * @covers \MultiFlexi\AbraFlexi\Company::saveToSQL
+     *
      * @todo   Implement testsaveToSQL().
      */
-    public function testsaveToSQL()
+    public function testsaveToSQL(): void
     {
         $this->assertEquals('', $this->object->saveToSQL());
         // Remove the following lines when you implement this test.
@@ -385,10 +426,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::insertToSQL
+     * @covers \MultiFlexi\AbraFlexi\Company::insertToSQL
+     *
      * @todo   Implement testinsertToSQL().
      */
-    public function testinsertToSQL()
+    public function testinsertToSQL(): void
     {
         $this->assertEquals('', $this->object->insertToSQL());
         // Remove the following lines when you implement this test.
@@ -396,10 +438,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::deleteFromSQL
+     * @covers \MultiFlexi\AbraFlexi\Company::deleteFromSQL
+     *
      * @todo   Implement testdeleteFromSQL().
      */
-    public function testdeleteFromSQL()
+    public function testdeleteFromSQL(): void
     {
         $this->assertEquals('', $this->object->deleteFromSQL());
         // Remove the following lines when you implement this test.
@@ -407,10 +450,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::takeToData
+     * @covers \MultiFlexi\AbraFlexi\Company::takeToData
+     *
      * @todo   Implement testtakeToData().
      */
-    public function testtakeToData()
+    public function testtakeToData(): void
     {
         $this->assertEquals('', $this->object->takeToData());
         // Remove the following lines when you implement this test.
@@ -418,10 +462,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::getMyTable
+     * @covers \MultiFlexi\AbraFlexi\Company::getMyTable
+     *
      * @todo   Implement testgetMyTable().
      */
-    public function testgetMyTable()
+    public function testgetMyTable(): void
     {
         $this->assertEquals('', $this->object->getMyTable());
         // Remove the following lines when you implement this test.
@@ -429,10 +474,11 @@ class CompanyTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Company::setMyTable
+     * @covers \MultiFlexi\AbraFlexi\Company::setMyTable
+     *
      * @todo   Implement testsetMyTable().
      */
-    public function testsetMyTable()
+    public function testsetMyTable(): void
     {
         $this->assertEquals('', $this->object->setMyTable());
         // Remove the following lines when you implement this test.

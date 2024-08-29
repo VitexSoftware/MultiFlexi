@@ -3,23 +3,27 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi -
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Action;
 
 /**
- * Description of Reschedule
+ * Description of Reschedule.
  *
  * @author vitex
  */
 class LaunchJob extends \MultiFlexi\CommonAction
 {
     /**
-     * Module Caption
+     * Module Caption.
      *
      * @return string
      */
@@ -29,7 +33,7 @@ class LaunchJob extends \MultiFlexi\CommonAction
     }
 
     /**
-     * Module Description
+     * Module Description.
      *
      * @return string
      */
@@ -44,23 +48,20 @@ class LaunchJob extends \MultiFlexi\CommonAction
     }
 
     /**
-     *
-     * @param string $prefix
-     *
      * @return \MultiFlexi\Ui\CompanyAppChooser
      */
     public static function inputs(string $prefix)
     {
-        return new \MultiFlexi\Ui\CompanyAppChooser($prefix . '[LaunchJob][jobid]', new \MultiFlexi\Company($_SESSION['company']));
+        return new \MultiFlexi\Ui\CompanyAppChooser($prefix.'[LaunchJob][jobid]', new \MultiFlexi\Company($_SESSION['company']));
     }
 
     /**
-     * Is this Action Situable for Application
+     * Is this Action Situable for Application.
      *
      * @param Application $app
      */
     public static function usableForApp($app): bool
     {
-        return is_object($app);
+        return \is_object($app);
     }
 }

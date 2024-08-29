@@ -1,29 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi  - Run interval select
+ * This file is part of the MultiFlexi package
  *
- * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  2015-2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Description of IntervalChooser
+ * Description of IntervalChooser.
  *
  * @author vitex
  */
 class IntervalChooser extends \Ease\Html\SelectTag
 {
     /**
-     * Script run interval chooser
+     * Script run interval chooser.
      *
      * @param string $name
      * @param string $defaultValue
      * @param array  $properties
      */
-    public function __construct($name, $defaultValue = null, $properties = array())
+    public function __construct($name, $defaultValue = null, $properties = [])
     {
         parent::__construct($name, [
             'n' => _('Disabled'),
@@ -33,6 +39,6 @@ class IntervalChooser extends \Ease\Html\SelectTag
             'w' => _('Weekly'),
             'm' => _('Monthly'),
             'y' => _('Yearly'),
-                ], $defaultValue, $properties);
+        ], $defaultValue, $properties);
     }
 }

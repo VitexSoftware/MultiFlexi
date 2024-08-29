@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi\AbraFlexi;
 
 use MultiFlexi\AbraFlexi\Server;
@@ -9,10 +22,7 @@ use MultiFlexi\AbraFlexi\Server;
  */
 class ServerTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var Server
-     */
-    protected $object;
+    protected Server $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class ServerTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\AbraFlexi\Server::getEnvironment
+     * @covers \MultiFlexi\AbraFlexi\Server::getEnvironment
+     *
      * @todo   Implement testgetEnvironment().
      */
-    public function testgetEnvironment()
+    public function testgetEnvironment(): void
     {
         $this->assertEquals('', $this->object->getEnvironment());
         // Remove the following lines when you implement this test.

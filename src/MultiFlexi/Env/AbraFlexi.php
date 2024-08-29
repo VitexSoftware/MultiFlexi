@@ -3,23 +3,27 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi - AbraFlexi environment variables handler
+ * This file is part of the MultiFlexi package
  *
- * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Env;
 
 /**
- * Description of AbraFlexi
+ * Description of AbraFlexi.
  *
  * @author vitex
  */
 class AbraFlexi extends \MultiFlexi\Environmentor implements injector
 {
     /**
-     * List of all known keys
+     * List of all known keys.
      *
      * @return array
      */
@@ -29,31 +33,30 @@ class AbraFlexi extends \MultiFlexi\Environmentor implements injector
             'ABRAFLEXI_URL',
             'ABRAFLEXI_LOGIN',
             'ABRAFLEXI_PASSWORD',
-            'ABRAFLEXI_COMPANY'
+            'ABRAFLEXI_COMPANY',
         ];
     }
 
-    /**
-     *
-     * @return array
-     */
     public function getEnvironment(): array
     {
         $abraFlexiEnv = [];
+
         if ($this->engine->company->getDataValue('server')) {
             $server = new \MultiFlexi\Servers($this->engine->company->getDataValue('server'));
-            if ($server->getDataValue('type') == 'AbraFlexi') {
+
+            if ($server->getDataValue('type') === 'AbraFlexi') {
                 $platformHelper = new \MultiFlexi\AbraFlexi\Company($this->engine->company->getMyKey(), $server->getData());
+
                 foreach ($platformHelper->getEnvironment() as $key => $value) {
                     $abraFlexiEnv[$key] = ['value' => $value];
                 }
             }
         }
+
         return $this->addMetaData($this->addSelfAsSource($abraFlexiEnv));
     }
 
     /**
-     *
      * @return string
      */
     public static function name()
@@ -62,7 +65,6 @@ class AbraFlexi extends \MultiFlexi\Environmentor implements injector
     }
 
     /**
-     *
      * @return string
      */
     public static function description()

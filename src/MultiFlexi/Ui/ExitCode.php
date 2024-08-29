@@ -1,16 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi -
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Description of ExitCode
+ * Description of ExitCode.
  *
  * @author vitex
  */
@@ -18,11 +24,11 @@ class ExitCode extends \Ease\TWB4\Badge
 {
     public function __construct($exitcode, $properties = [])
     {
-        parent::__construct(self::status($exitcode), '&nbsp' . $exitcode . '&nbsp', $properties);
+        parent::__construct(self::status($exitcode), '&nbsp'.$exitcode.'&nbsp', $properties);
     }
 
     /**
-     * Exit Code
+     * Exit Code.
      *
      * @param int $exitcode
      *
@@ -30,20 +36,26 @@ class ExitCode extends \Ease\TWB4\Badge
      */
     public static function status($exitcode)
     {
-        switch (intval($exitcode)) {
+        switch ((int) $exitcode) {
             case -1:
                 $type = 'inverse';
+
                 break;
             case 0:
                 $type = 'success';
+
                 break;
             case 127:
                 $type = 'warning';
+
                 break;
+
             default:
                 $type = 'danger';
+
                 break;
         }
+
         return $type;
     }
 }

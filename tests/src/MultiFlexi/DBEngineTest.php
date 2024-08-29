@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi;
 
 use MultiFlexi\DBEngine;
@@ -9,10 +22,7 @@ use MultiFlexi\DBEngine;
  */
 class DBEngineTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var DBEngine
-     */
-    protected $object;
+    protected DBEngine $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::loadFromSQL
+     * @covers \MultiFlexi\DBEngine::loadFromSQL
+     *
      * @todo   Implement testloadFromSQL().
      */
-    public function testloadFromSQL()
+    public function testloadFromSQL(): void
     {
         $this->assertEquals('', $this->object->loadFromSQL());
         // Remove the following lines when you implement this test.
@@ -44,10 +54,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::takemyTable
+     * @covers \MultiFlexi\DBEngine::takemyTable
+     *
      * @todo   Implement testtakemyTable().
      */
-    public function testtakemyTable()
+    public function testtakemyTable(): void
     {
         $this->assertEquals('', $this->object->takemyTable());
         // Remove the following lines when you implement this test.
@@ -55,10 +66,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::setDetailPage
+     * @covers \MultiFlexi\DBEngine::setDetailPage
+     *
      * @todo   Implement testsetDetailPage().
      */
-    public function testsetDetailPage()
+    public function testsetDetailPage(): void
     {
         $this->assertEquals('', $this->object->setDetailPage());
         // Remove the following lines when you implement this test.
@@ -66,10 +78,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::getNameColumn
+     * @covers \MultiFlexi\DBEngine::getNameColumn
+     *
      * @todo   Implement testgetNameColumn().
      */
-    public function testgetNameColumn()
+    public function testgetNameColumn(): void
     {
         $this->assertEquals('', $this->object->getNameColumn());
         // Remove the following lines when you implement this test.
@@ -77,10 +90,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::translate
+     * @covers \MultiFlexi\DBEngine::translate
+     *
      * @todo   Implement testtranslate().
      */
-    public function testtranslate()
+    public function testtranslate(): void
     {
         $this->assertEquals('', $this->object->translate());
         // Remove the following lines when you implement this test.
@@ -88,10 +102,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::getRecordName
+     * @covers \MultiFlexi\DBEngine::getRecordName
+     *
      * @todo   Implement testgetRecordName().
      */
-    public function testgetRecordName()
+    public function testgetRecordName(): void
     {
         $this->assertEquals('', $this->object->getRecordName());
         // Remove the following lines when you implement this test.
@@ -99,10 +114,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::columns
+     * @covers \MultiFlexi\DBEngine::columns
+     *
      * @todo   Implement testcolumns().
      */
-    public function testcolumns()
+    public function testcolumns(): void
     {
         $this->assertEquals('', $this->object->columns());
         // Remove the following lines when you implement this test.
@@ -110,10 +126,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::editableColumns
+     * @covers \MultiFlexi\DBEngine::editableColumns
+     *
      * @todo   Implement testeditableColumns().
      */
-    public function testeditableColumns()
+    public function testeditableColumns(): void
     {
         $this->assertEquals('', $this->object->editableColumns());
         // Remove the following lines when you implement this test.
@@ -121,10 +138,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::getAll
+     * @covers \MultiFlexi\DBEngine::getAll
+     *
      * @todo   Implement testgetAll().
      */
-    public function testgetAll()
+    public function testgetAll(): void
     {
         $this->assertEquals('', $this->object->getAll());
         // Remove the following lines when you implement this test.
@@ -132,10 +150,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::getColumnType
+     * @covers \MultiFlexi\DBEngine::getColumnType
+     *
      * @todo   Implement testgetColumnType().
      */
-    public function testgetColumnType()
+    public function testgetColumnType(): void
     {
         $this->assertEquals('', $this->object->getColumnType());
         // Remove the following lines when you implement this test.
@@ -143,10 +162,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::getAllForDataTable
+     * @covers \MultiFlexi\DBEngine::getAllForDataTable
+     *
      * @todo   Implement testgetAllForDataTable().
      */
-    public function testgetAllForDataTable()
+    public function testgetAllForDataTable(): void
     {
         $this->assertEquals('', $this->object->getAllForDataTable());
         // Remove the following lines when you implement this test.
@@ -154,10 +174,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::addSelectizeValues
+     * @covers \MultiFlexi\DBEngine::addSelectizeValues
+     *
      * @todo   Implement testaddSelectizeValues().
      */
-    public function testaddSelectizeValues()
+    public function testaddSelectizeValues(): void
     {
         $this->assertEquals('', $this->object->addSelectizeValues());
         // Remove the following lines when you implement this test.
@@ -165,10 +186,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::listingQuery
+     * @covers \MultiFlexi\DBEngine::listingQuery
+     *
      * @todo   Implement testlistingQuery().
      */
-    public function testlistingQuery()
+    public function testlistingQuery(): void
     {
         $this->assertEquals('', $this->object->listingQuery());
         // Remove the following lines when you implement this test.
@@ -176,10 +198,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::getOneRow
+     * @covers \MultiFlexi\DBEngine::getOneRow
+     *
      * @todo   Implement testgetOneRow().
      */
-    public function testgetOneRow()
+    public function testgetOneRow(): void
     {
         $this->assertEquals('', $this->object->getOneRow());
         // Remove the following lines when you implement this test.
@@ -187,10 +210,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::editorForm
+     * @covers \MultiFlexi\DBEngine::editorForm
+     *
      * @todo   Implement testeditorForm().
      */
-    public function testeditorForm()
+    public function testeditorForm(): void
     {
         $this->assertEquals('', $this->object->editorForm());
         // Remove the following lines when you implement this test.
@@ -198,10 +222,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::getSaverFields
+     * @covers \MultiFlexi\DBEngine::getSaverFields
+     *
      * @todo   Implement testgetSaverFields().
      */
-    public function testgetSaverFields()
+    public function testgetSaverFields(): void
     {
         $this->assertEquals('', $this->object->getSaverFields());
         // Remove the following lines when you implement this test.
@@ -209,10 +234,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::preprocessPost
+     * @covers \MultiFlexi\DBEngine::preprocessPost
+     *
      * @todo   Implement testpreprocessPost().
      */
-    public function testpreprocessPost()
+    public function testpreprocessPost(): void
     {
         $this->assertEquals('', $this->object->preprocessPost());
         // Remove the following lines when you implement this test.
@@ -220,10 +246,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::htmlizeData
+     * @covers \MultiFlexi\DBEngine::htmlizeData
+     *
      * @todo   Implement testhtmlizeData().
      */
-    public function testhtmlizeData()
+    public function testhtmlizeData(): void
     {
         $this->assertEquals('', $this->object->htmlizeData());
         // Remove the following lines when you implement this test.
@@ -231,10 +258,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::htmlizeRow
+     * @covers \MultiFlexi\DBEngine::htmlizeRow
+     *
      * @todo   Implement testhtmlizeRow().
      */
-    public function testhtmlizeRow()
+    public function testhtmlizeRow(): void
     {
         $this->assertEquals('', $this->object->htmlizeRow());
         // Remove the following lines when you implement this test.
@@ -242,10 +270,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::foterCallback
+     * @covers \MultiFlexi\DBEngine::foterCallback
+     *
      * @todo   Implement testfoterCallback().
      */
-    public function testfoterCallback()
+    public function testfoterCallback(): void
     {
         $this->assertEquals('', $this->object->foterCallback());
         // Remove the following lines when you implement this test.
@@ -253,10 +282,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::columnDefs
+     * @covers \MultiFlexi\DBEngine::columnDefs
+     *
      * @todo   Implement testcolumnDefs().
      */
-    public function testcolumnDefs()
+    public function testcolumnDefs(): void
     {
         $this->assertEquals('', $this->object->columnDefs());
         // Remove the following lines when you implement this test.
@@ -264,10 +294,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::saveToSQL
+     * @covers \MultiFlexi\DBEngine::saveToSQL
+     *
      * @todo   Implement testsaveToSQL().
      */
-    public function testsaveToSQL()
+    public function testsaveToSQL(): void
     {
         $this->assertEquals('', $this->object->saveToSQL());
         // Remove the following lines when you implement this test.
@@ -275,10 +306,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::prepareToSave
+     * @covers \MultiFlexi\DBEngine::prepareToSave
+     *
      * @todo   Implement testprepareToSave().
      */
-    public function testprepareToSave()
+    public function testprepareToSave(): void
     {
         $this->assertEquals('', $this->object->prepareToSave());
         // Remove the following lines when you implement this test.
@@ -286,10 +318,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::searchString
+     * @covers \MultiFlexi\DBEngine::searchString
+     *
      * @todo   Implement testsearchString().
      */
-    public function testsearchString()
+    public function testsearchString(): void
     {
         $this->assertEquals('', $this->object->searchString());
         // Remove the following lines when you implement this test.
@@ -297,10 +330,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::getSqlColumns
+     * @covers \MultiFlexi\DBEngine::getSqlColumns
+     *
      * @todo   Implement testgetSqlColumns().
      */
-    public function testgetSqlColumns()
+    public function testgetSqlColumns(): void
     {
         $this->assertEquals('', $this->object->getSqlColumns());
         // Remove the following lines when you implement this test.
@@ -308,10 +342,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::getGetDataTableColumns
+     * @covers \MultiFlexi\DBEngine::getGetDataTableColumns
+     *
      * @todo   Implement testgetGetDataTableColumns().
      */
-    public function testgetGetDataTableColumns()
+    public function testgetGetDataTableColumns(): void
     {
         $this->assertEquals('', $this->object->getGetDataTableColumns());
         // Remove the following lines when you implement this test.
@@ -319,10 +354,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::preTableCode
+     * @covers \MultiFlexi\DBEngine::preTableCode
+     *
      * @todo   Implement testpreTableCode().
      */
-    public function testpreTableCode()
+    public function testpreTableCode(): void
     {
         $this->assertEquals('', $this->object->preTableCode());
         // Remove the following lines when you implement this test.
@@ -330,10 +366,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::tableCode
+     * @covers \MultiFlexi\DBEngine::tableCode
+     *
      * @todo   Implement testtableCode().
      */
-    public function testtableCode()
+    public function testtableCode(): void
     {
         $this->assertEquals('', $this->object->tableCode());
         // Remove the following lines when you implement this test.
@@ -341,10 +378,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::postTableCode
+     * @covers \MultiFlexi\DBEngine::postTableCode
+     *
      * @todo   Implement testpostTableCode().
      */
-    public function testpostTableCode()
+    public function testpostTableCode(): void
     {
         $this->assertEquals('', $this->object->postTableCode());
         // Remove the following lines when you implement this test.
@@ -352,10 +390,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::feedSelectize
+     * @covers \MultiFlexi\DBEngine::feedSelectize
+     *
      * @todo   Implement testfeedSelectize().
      */
-    public function testfeedSelectize()
+    public function testfeedSelectize(): void
     {
         $this->assertEquals('', $this->object->feedSelectize());
         // Remove the following lines when you implement this test.
@@ -363,10 +402,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::feedSelectizeCached
+     * @covers \MultiFlexi\DBEngine::feedSelectizeCached
+     *
      * @todo   Implement testfeedSelectizeCached().
      */
-    public function testfeedSelectizeCached()
+    public function testfeedSelectizeCached(): void
     {
         $this->assertEquals('', $this->object->feedSelectizeCached());
         // Remove the following lines when you implement this test.
@@ -374,10 +414,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::getFilterOptions
+     * @covers \MultiFlexi\DBEngine::getFilterOptions
+     *
      * @todo   Implement testgetFilterOptions().
      */
-    public function testgetFilterOptions()
+    public function testgetFilterOptions(): void
     {
         $this->assertEquals('', $this->object->getFilterOptions());
         // Remove the following lines when you implement this test.
@@ -385,10 +426,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::getHiddenTagets
+     * @covers \MultiFlexi\DBEngine::getHiddenTagets
+     *
      * @todo   Implement testgetHiddenTagets().
      */
-    public function testgetHiddenTagets()
+    public function testgetHiddenTagets(): void
     {
         $this->assertEquals('', $this->object->getHiddenTagets());
         // Remove the following lines when you implement this test.
@@ -396,10 +438,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::selectize
+     * @covers \MultiFlexi\DBEngine::selectize
+     *
      * @todo   Implement testselectize().
      */
-    public function testselectize()
+    public function testselectize(): void
     {
         $this->assertEquals('', $this->object->selectize());
         // Remove the following lines when you implement this test.
@@ -407,10 +450,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::getCustomerID
+     * @covers \MultiFlexi\DBEngine::getCustomerID
+     *
      * @todo   Implement testgetCustomerID().
      */
-    public function testgetCustomerID()
+    public function testgetCustomerID(): void
     {
         $this->assertEquals('', $this->object->getCustomerID());
         // Remove the following lines when you implement this test.
@@ -418,10 +462,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::getResume
+     * @covers \MultiFlexi\DBEngine::getResume
+     *
      * @todo   Implement testgetResume().
      */
-    public function testgetResume()
+    public function testgetResume(): void
     {
         $this->assertEquals('', $this->object->getResume());
         // Remove the following lines when you implement this test.
@@ -429,10 +474,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::postCreate
+     * @covers \MultiFlexi\DBEngine::postCreate
+     *
      * @todo   Implement testpostCreate().
      */
-    public function testpostCreate()
+    public function testpostCreate(): void
     {
         $this->assertEquals('', $this->object->postCreate());
         // Remove the following lines when you implement this test.
@@ -440,10 +486,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::validation
+     * @covers \MultiFlexi\DBEngine::validation
+     *
      * @todo   Implement testvalidation().
      */
-    public function testvalidation()
+    public function testvalidation(): void
     {
         $this->assertEquals('', $this->object->validation());
         // Remove the following lines when you implement this test.
@@ -451,10 +498,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::editorOpenJS
+     * @covers \MultiFlexi\DBEngine::editorOpenJS
+     *
      * @todo   Implement testeditorOpenJS().
      */
-    public function testeditorOpenJS()
+    public function testeditorOpenJS(): void
     {
         $this->assertEquals('', $this->object->editorOpenJS());
         // Remove the following lines when you implement this test.
@@ -462,10 +510,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::editorPostCreateJS
+     * @covers \MultiFlexi\DBEngine::editorPostCreateJS
+     *
      * @todo   Implement testeditorPostCreateJS().
      */
-    public function testeditorPostCreateJS()
+    public function testeditorPostCreateJS(): void
     {
         $this->assertEquals('', $this->object->editorPostCreateJS());
         // Remove the following lines when you implement this test.
@@ -473,10 +522,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::editorCreateJS
+     * @covers \MultiFlexi\DBEngine::editorCreateJS
+     *
      * @todo   Implement testeditorCreateJS().
      */
-    public function testeditorCreateJS()
+    public function testeditorCreateJS(): void
     {
         $this->assertEquals('', $this->object->editorCreateJS());
         // Remove the following lines when you implement this test.
@@ -484,10 +534,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::editorSubmitCompleteJS
+     * @covers \MultiFlexi\DBEngine::editorSubmitCompleteJS
+     *
      * @todo   Implement testeditorSubmitCompleteJS().
      */
-    public function testeditorSubmitCompleteJS()
+    public function testeditorSubmitCompleteJS(): void
     {
         $this->assertEquals('', $this->object->editorSubmitCompleteJS());
         // Remove the following lines when you implement this test.
@@ -495,10 +546,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::renderYesNo
+     * @covers \MultiFlexi\DBEngine::renderYesNo
+     *
      * @todo   Implement testrenderYesNo().
      */
-    public function testrenderYesNo()
+    public function testrenderYesNo(): void
     {
         $this->assertEquals('', $this->object->renderYesNo());
         // Remove the following lines when you implement this test.
@@ -506,10 +558,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::renderSelectize
+     * @covers \MultiFlexi\DBEngine::renderSelectize
+     *
      * @todo   Implement testrenderSelectize().
      */
-    public function testrenderSelectize()
+    public function testrenderSelectize(): void
     {
         $this->assertEquals('', $this->object->renderSelectize());
         // Remove the following lines when you implement this test.
@@ -517,10 +570,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::renderSelectized
+     * @covers \MultiFlexi\DBEngine::renderSelectized
+     *
      * @todo   Implement testrenderSelectized().
      */
-    public function testrenderSelectized()
+    public function testrenderSelectized(): void
     {
         $this->assertEquals('', $this->object->renderSelectized());
         // Remove the following lines when you implement this test.
@@ -528,10 +582,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::renderIdLink
+     * @covers \MultiFlexi\DBEngine::renderIdLink
+     *
      * @todo   Implement testrenderIdLink().
      */
-    public function testrenderIdLink()
+    public function testrenderIdLink(): void
     {
         $this->assertEquals('', $this->object->renderIdLink());
         // Remove the following lines when you implement this test.
@@ -539,10 +594,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::renderDate
+     * @covers \MultiFlexi\DBEngine::renderDate
+     *
      * @todo   Implement testrenderDate().
      */
-    public function testrenderDate()
+    public function testrenderDate(): void
     {
         $this->assertEquals('', $this->object->renderDate());
         // Remove the following lines when you implement this test.
@@ -550,10 +606,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::renderDocumentLink
+     * @covers \MultiFlexi\DBEngine::renderDocumentLink
+     *
      * @todo   Implement testrenderDocumentLink().
      */
-    public function testrenderDocumentLink()
+    public function testrenderDocumentLink(): void
     {
         $this->assertEquals('', $this->object->renderDocumentLink());
         // Remove the following lines when you implement this test.
@@ -561,10 +618,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::renderDismisButton
+     * @covers \MultiFlexi\DBEngine::renderDismisButton
+     *
      * @todo   Implement testrenderDismisButton().
      */
-    public function testrenderDismisButton()
+    public function testrenderDismisButton(): void
     {
         $this->assertEquals('', $this->object->renderDismisButton());
         // Remove the following lines when you implement this test.
@@ -572,10 +630,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::getColumnsOfType
+     * @covers \MultiFlexi\DBEngine::getColumnsOfType
+     *
      * @todo   Implement testgetColumnsOfType().
      */
-    public function testgetColumnsOfType()
+    public function testgetColumnsOfType(): void
     {
         $this->assertEquals('', $this->object->getColumnsOfType());
         // Remove the following lines when you implement this test.
@@ -583,10 +642,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::fixIterator
+     * @covers \MultiFlexi\DBEngine::fixIterator
+     *
      * @todo   Implement testfixIterator().
      */
-    public function testfixIterator()
+    public function testfixIterator(): void
     {
         $this->assertEquals('', $this->object->fixIterator());
         // Remove the following lines when you implement this test.
@@ -594,10 +654,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::getUrlForRecord
+     * @covers \MultiFlexi\DBEngine::getUrlForRecord
+     *
      * @todo   Implement testgetUrlForRecord().
      */
-    public function testgetUrlForRecord()
+    public function testgetUrlForRecord(): void
     {
         $this->assertEquals('', $this->object->getUrlForRecord());
         // Remove the following lines when you implement this test.
@@ -605,10 +666,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::getAttachments
+     * @covers \MultiFlexi\DBEngine::getAttachments
+     *
      * @todo   Implement testgetAttachments().
      */
-    public function testgetAttachments()
+    public function testgetAttachments(): void
     {
         $this->assertEquals('', $this->object->getAttachments());
         // Remove the following lines when you implement this test.
@@ -616,10 +678,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::presaveCheck
+     * @covers \MultiFlexi\DBEngine::presaveCheck
+     *
      * @todo   Implement testpresaveCheck().
      */
-    public function testpresaveCheck()
+    public function testpresaveCheck(): void
     {
         $this->assertEquals('', $this->object->presaveCheck());
         // Remove the following lines when you implement this test.
@@ -627,10 +690,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::finishProcess
+     * @covers \MultiFlexi\DBEngine::finishProcess
+     *
      * @todo   Implement testfinishProcess().
      */
-    public function testfinishProcess()
+    public function testfinishProcess(): void
     {
         $this->assertEquals('', $this->object->finishProcess());
         // Remove the following lines when you implement this test.
@@ -638,10 +702,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::checkRow
+     * @covers \MultiFlexi\DBEngine::checkRow
+     *
      * @todo   Implement testcheckRow().
      */
-    public function testcheckRow()
+    public function testcheckRow(): void
     {
         $this->assertEquals('', $this->object->checkRow());
         // Remove the following lines when you implement this test.
@@ -649,10 +714,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::getRowColor
+     * @covers \MultiFlexi\DBEngine::getRowColor
+     *
      * @todo   Implement testgetRowColor().
      */
-    public function testgetRowColor()
+    public function testgetRowColor(): void
     {
         $this->assertEquals('', $this->object->getRowColor());
         // Remove the following lines when you implement this test.
@@ -660,10 +726,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::completeDataRow
+     * @covers \MultiFlexi\DBEngine::completeDataRow
+     *
      * @todo   Implement testcompleteDataRow().
      */
-    public function testcompleteDataRow()
+    public function testcompleteDataRow(): void
     {
         $this->assertEquals('', $this->object->completeDataRow());
         // Remove the following lines when you implement this test.
@@ -671,10 +738,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::getColumnInfo
+     * @covers \MultiFlexi\DBEngine::getColumnInfo
+     *
      * @todo   Implement testgetColumnInfo().
      */
-    public function testgetColumnInfo()
+    public function testgetColumnInfo(): void
     {
         $this->assertEquals('', $this->object->getColumnInfo());
         // Remove the following lines when you implement this test.
@@ -682,10 +750,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::getLink
+     * @covers \MultiFlexi\DBEngine::getLink
+     *
      * @todo   Implement testgetLink().
      */
-    public function testgetLink()
+    public function testgetLink(): void
     {
         $this->assertEquals('', $this->object->getLink());
         // Remove the following lines when you implement this test.
@@ -693,10 +762,11 @@ class DBEngineTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\DBEngine::__sleep
+     * @covers \MultiFlexi\DBEngine::__sleep
+     *
      * @todo   Implement test__sleep().
      */
-    public function test__sleep()
+    public function testSleep(): void
     {
         $this->assertEquals('', $this->object->__sleep());
         // Remove the following lines when you implement this test.

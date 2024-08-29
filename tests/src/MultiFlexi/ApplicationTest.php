@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi;
 
 use MultiFlexi\Application;
@@ -9,11 +22,7 @@ use MultiFlexi\Application;
  */
 class ApplicationTest extends \PHPUnit\Framework\TestCase
 {
-
-    /**
-     * @var Application
-     */
-    protected $object;
+    protected Application $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -30,72 +39,73 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Application::getCompany
+     * @covers \MultiFlexi\Application::getCompany
      */
-    public function testgetCompany()
+    public function testgetCompany(): void
     {
         $this->assertEquals('', $this->object->getCompany());
     }
 
     /**
-     * @covers MultiFlexi\Application::takeData
+     * @covers \MultiFlexi\Application::takeData
      */
-    public function testtakeData()
+    public function testtakeData(): void
     {
         $this->assertEquals(3, $this->object->takeData(['enabled' => 'on', 'executable' => '/bin/test']));
     }
 
     /**
-     * @covers MultiFlexi\Application::findBinaryInPath
+     * @covers \MultiFlexi\Application::findBinaryInPath
      */
-    public function testfindBinaryInPath()
+    public function testfindBinaryInPath(): void
     {
         $this->assertEquals('/usr/bin/bash', $this->object->findBinaryInPath('bash'));
     }
 
     /**
-     * @covers MultiFlexi\Application::doesBinaryExist
+     * @covers \MultiFlexi\Application::doesBinaryExist
      */
-    public function testdoesBinaryExist()
+    public function testdoesBinaryExist(): void
     {
         $this->assertTrue($this->object->doesBinaryExist('/usr/bin/tar'));
     }
 
     /**
-     * @covers MultiFlexi\Application::isBinaryInPath
+     * @covers \MultiFlexi\Application::isBinaryInPath
      */
-    public function testisBinaryInPath()
+    public function testisBinaryInPath(): void
     {
         $this->assertTrue($this->object->isBinaryInPath('more'));
     }
 
     /**
-     * @covers MultiFlexi\Application::getPlatformApps
+     * @covers \MultiFlexi\Application::getPlatformApps
      */
-    public function testgetPlatformApps()
+    public function testgetPlatformApps(): void
     {
         $this->assertEquals([], $this->object->getPlatformApps('Unix'));
     }
 
     /**
-     * @covers MultiFlexi\Application::getAppJson
+     * @covers \MultiFlexi\Application::getAppJson
      */
-    public function testgetAppJson()
+    public function testgetAppJson(): void
     {
-        $this->assertEquals('{
+        $this->assertEquals(<<<'EOD'
+{
     "environment": [],
     "multiflexi": "dev-main"
-}', $this->object->getAppJson());
+}
+EOD, $this->object->getAppJson());
     }
 
     /**
-     * @covers MultiFlexi\Application::jsonFileName
+     * @covers \MultiFlexi\Application::jsonFileName
      */
-    public function testjsonFileName()
+    public function testjsonFileName(): void
     {
         $this->assertEquals('.multiflexi.app.json', $this->object->jsonFileName());
     }

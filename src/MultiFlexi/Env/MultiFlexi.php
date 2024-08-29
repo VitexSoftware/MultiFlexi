@@ -3,23 +3,27 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi - Handle MultiFlexi Environment variables
+ * This file is part of the MultiFlexi package
  *
- * @author    Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright 2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Env;
 
 /**
- * Description of Logger
+ * Description of Logger.
  *
  * @author vitex
  */
 class MultiFlexi extends \MultiFlexi\Environmentor implements injector
 {
     /**
-     * List of all known keys
+     * List of all known keys.
      *
      * @return array
      */
@@ -29,20 +33,17 @@ class MultiFlexi extends \MultiFlexi\Environmentor implements injector
     }
 
     /**
-     * MultiFlexi Related values
-     *
-     * @return array
+     * MultiFlexi Related values.
      */
     public function getEnvironment(): array
     {
         return $this->addMetaData($this->addSelfAsSource([
             'MULTIFLEXI' => ['value' => \Ease\Shared::appVersion()],
-            'JOB_ID' => ['value' => $this->engine->getMyKey()]
+            'JOB_ID' => ['value' => $this->engine->getMyKey()],
         ]));
     }
 
     /**
-     *
      * @return string
      */
     public static function name()
@@ -51,7 +52,6 @@ class MultiFlexi extends \MultiFlexi\Environmentor implements injector
     }
 
     /**
-     *
      * @return string
      */
     public static function description()

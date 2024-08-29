@@ -1,16 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Environment editor
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Description of EnvironmentView
+ * Description of EnvironmentView.
  *
  * @author vitex
  */
@@ -19,7 +25,6 @@ class EnvironmentEditor extends \Ease\Html\TableTag
     public $fields;
 
     /**
-     *
      * @param array $fields
      * @param array $properties
      */
@@ -29,6 +34,7 @@ class EnvironmentEditor extends \Ease\Html\TableTag
         parent::__construct(null, $properties);
         $this->addRowHeaderColumns([_('Keyword'), _('Value')]);
         $this->fields = $fields;
+
         foreach ($fields as $fieldProperties) {
             //            if (stristr($fieldProperties['keyword'], 'pass')) {
             //                $value = preg_replace('(.)', '*', $value);
@@ -45,19 +51,21 @@ class EnvironmentEditor extends \Ease\Html\TableTag
         $newItemForm->addInput(new \Ease\Html\InputTextTag('env[newvalue]'), _('New Config value'), _('Value'), _('Enter New field value here'));
         $newItemForm->addItem(new \Ease\TWB4\SubmitButton(_('Add new field'), 'success'));
 
-        $this->addRowFooterColumns([new \Ease\Html\DivTag($newItemForm, ['class' => 'form-row']), sprintf(_('%s items'), count($this->fields))]);
+        $this->addRowFooterColumns([new \Ease\Html\DivTag($newItemForm, ['class' => 'form-row']), sprintf(_('%s items'), \count($this->fields))]);
         $this->includeJavaScript('js/bootstrap-editable.js');
         $this->includeCss('css/bootstrap-editable.css');
         $this->addJavaScript("$.fn.editable.defaults.mode = 'inline';");
         //        $this->addJavaScript("$.fn.editable.options.savenochange = true;");
-        $this->addJavaScript("      $.fn.editableform.buttons =
-        '<button type=\"submit\" class=\"btn btn-primary btn-sm editable-submit\">' +
-        '<i class=\"fa fa-fw fa-check\"></i>' +
+        $this->addJavaScript(<<<'EOD'
+      $.fn.editableform.buttons =
+        '<button type="submit" class="btn btn-primary btn-sm editable-submit">' +
+        '<i class="fa fa-fw fa-check"></i>' +
         '</button>' +
-        '<button type=\"button\" class=\"btn btn-inverse btn-sm editable-cancel\">' +
-        '<i class=\"fa fa-fw fa-times\"></i>' +
-        '</button>' 
-        ");
+        '<button type="button" class="btn btn-inverse btn-sm editable-cancel">' +
+        '<i class="fa fa-fw fa-times"></i>' +
+        '</button>'
+
+EOD);
         $this->addJavaScript("$('.editable').editable();", null, true);
     }
     //    public function &addRowColumns($columns = null, $properties = [])

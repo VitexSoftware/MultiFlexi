@@ -3,29 +3,32 @@
 declare(strict_types=1);
 
 /**
- * Multi Flexi - Pohoda Server
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Pohoda;
 
 /**
- * Description of Server
+ * Description of Server.
  *
  * @author vitex
  */
 class Server extends \MultiFlexi\Engine implements \MultiFlexi\platformServer
 {
     /**
-     * SQL Table we use
-     * @var string
+     * SQL Table we use.
      */
-    public $myTable = 'servers';
+    public string $myTable = 'servers';
 
     /**
-     * Pohoda Server Environment variables
+     * Pohoda Server Environment variables.
      *
      * @return array
      */
@@ -34,7 +37,7 @@ class Server extends \MultiFlexi\Engine implements \MultiFlexi\platformServer
         return [
             'POHODA_URL' => ['value' => $this->getDataValue('url')],
             'POHODA_USERNAME' => ['value' => $this->getDataValue('user')],
-            'POHODA_PASSWORD' => ['value' => $this->getDataValue('password')]
+            'POHODA_PASSWORD' => ['value' => $this->getDataValue('password')],
         ];
     }
 }

@@ -1,54 +1,70 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Job Chart
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2024 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Description of JobChart
+ * Description of JobChart.
  *
  * @author vitex
  */
 class JobChart extends \Ease\Html\DivTag
 {
-    private $properties;
     protected \MultiFlexi\Job $engine;
+    private $properties;
 
     public function __construct(\MultiFlexi\Job $engine, $properties = [])
     {
         $this->engine = $engine;
         $allJobs = $this->getJobs()->fetchAll();
         $days = [];
+
         foreach ($allJobs as $job) {
             if (empty($job['begin'])) {
                 continue;
             }
+
             $date = current(explode(' ', $job['begin']));
             $exitCode = $job['exitcode'];
+
             switch ($exitCode) {
                 case 0:
                     $state = 'success';
+
                     break;
                 case -1:
                     $state = 'waiting';
+
                     break;
+
                 default:
                     $state = 'fail';
+
                     break;
             }
-            if (array_key_exists($date, $days) === false) {
+
+            if (\array_key_exists($date, $days) === false) {
                 $days[$date] = ['success' => 0, 'waiting' => 0, 'fail' => 0];
             }
-            $days[$date][$state] += 1;
+
+            ++$days[$date][$state];
         }
 
         $data = [];
         $count = 0;
+
         foreach ($days as $date => $day) {
             $data[] = [
                 'day' => $count++,
@@ -56,7 +72,7 @@ class JobChart extends \Ease\Html\DivTag
                 'success' => $day['success'],
                 'waiting' => $day['waiting'],
                 'fail' => $day['fail'],
-//                'all' => $day['success'] + $day['waiting'] + $day['fail']
+                //                'all' => $day['success'] + $day['waiting'] + $day['fail']
             ];
         }
 
@@ -84,20 +100,20 @@ class JobChart extends \Ease\Html\DivTag
             'grid_subdivision_colour' => '#ccc',
             'show_data_labels' => true,
             'data_label_type' => [
-                'box', 'linebox'
-//                'box','plain', 'bubble', 'line', 'circle', 'square', 'linecircle','linebox', 'linesquare', 'line2'
+                'box', 'linebox',
+                //                'box','plain', 'bubble', 'line', 'circle', 'square', 'linecircle','linebox', 'linesquare', 'line2'
             ],
             'data_label_space' => 5,
             'data_label_back_colour' => [
-                'lightblue','#FF4500', "lightgreen", null, null, null, null, null, null, null
+                'lightblue', '#FF4500', 'lightgreen', null, null, null, null, null, null, null,
             ],
             'marker_size' => 3,
             'structure' => [
                 'key' => 'date',
                 'value' => ['waiting', 'fail', 'success'],
                 'tooltip' => ['waiting', 'fail', 'success'],
-                'axis_text' => 3
-            ]
+                'axis_text' => 3,
+            ],
         ];
         $links = ['success' => '?showonly=success', 'fail' => '?showonly=fail', 'waiting' => '?showonly=waiting'];
 
@@ -113,7 +129,6 @@ class JobChart extends \Ease\Html\DivTag
     }
 
     /**
-     *
      * @return \Envms\FluentPDO\Queries\Select
      */
     public function getJobs()

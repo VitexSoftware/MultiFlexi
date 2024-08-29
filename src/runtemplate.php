@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Multi Flexi - Run Template page.
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2024 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
@@ -29,21 +35,21 @@ $app->setDataValue('app_name', $app->getRecordName());
 $configurator = new \MultiFlexi\Configuration([
     'runtemplate_id' => $runTemplate->getMyKey(),
     'app_id' => $app->getMyKey(),
-    'company_id' => $companies->getMyKey()
-        ], ['autoload' => false]);
+    'company_id' => $companies->getMyKey(),
+], ['autoload' => false]);
 
 if ($oPage->isPosted()) {
-    if ($configurator->takeData($_POST) && !is_null($configurator->saveToSQL())) {
+    if ($configurator->takeData($_POST) && null !== $configurator->saveToSQL()) {
         $configurator->addStatusMessage(_('Config fields Saved'), 'success');
     } else {
         $configurator->addStatusMessage(_('Error saving Config fields'), 'error');
     }
 }
 
-$oPage->addItem(new PageTop($runTemplate->getRecordName() . ' ' . _('Configuration')));
+$oPage->addItem(new PageTop($runTemplate->getRecordName().' '._('Configuration')));
 
 $appPanel = new ApplicationPanel($app, new RunTemplatePanel($runTemplate));
-$appPanel->headRow->addColumn(2, new LinkButton('periodbehaviour.php?id=' . $runTemplate->getMyKey(), '🛠️&nbsp;' . _('Actions'), 'secondary btn-lg btn-block'));
+$appPanel->headRow->addColumn(2, new LinkButton('periodbehaviour.php?id='.$runTemplate->getMyKey(), '🛠️&nbsp;'._('Actions'), 'secondary btn-lg btn-block'));
 
 $oPage->container->addItem(new CompanyPanel($companies, $appPanel));
 

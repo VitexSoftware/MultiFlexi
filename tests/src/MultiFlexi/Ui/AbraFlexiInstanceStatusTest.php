@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi\Ui;
 
 use MultiFlexi\Ui\AbraFlexiInstanceStatus;
@@ -9,10 +22,7 @@ use MultiFlexi\Ui\AbraFlexiInstanceStatus;
  */
 class AbraFlexiInstanceStatusTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var AbraFlexiInstanceStatus
-     */
-    protected $object;
+    protected AbraFlexiInstanceStatus $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -29,14 +39,14 @@ class AbraFlexiInstanceStatusTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
-        
     }
 
     /**
-     * @covers MultiFlexi\Ui\AbraFlexiInstanceStatus::companys
+     * @covers \MultiFlexi\Ui\AbraFlexiInstanceStatus::companys
+     *
      * @todo   Implement testcompanys().
      */
-    public function testcompanys()
+    public function testcompanys(): void
     {
         $this->assertEquals('', $this->object->companys());
         // Remove the following lines when you implement this test.
