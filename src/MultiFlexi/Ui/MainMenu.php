@@ -236,14 +236,14 @@ EOD);
     protected function getMenuList($source, $icon = null, $nest = null)
     {
         $keycolumn = $source->getkeyColumn();
-        $namecolumn = $source->nameColumn;
+        $namecolumn = $source->getNameColumn();
         $columns = [$source->getkeyColumn(), $namecolumn];
 
         if ($icon) {
             $columns[] = $icon;
         }
 
-        $lister = $source->getColumnsFromSQL($columns, null, $namecolumn, $keycolumn);
+        $lister = $source->getColumnsFromSQL($columns, '', $namecolumn, $keycolumn);
         $itemList = [];
 
         if ($lister) {
