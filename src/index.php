@@ -19,7 +19,7 @@ use Ease\TWB4\LinkButton;
 
 require_once './init.php';
 
-$oPage->addItem(new PageTop(_('Multi Flexi')));
+$oPage->addItem(new PageTop(_('MultiFlexi')));
 
 try {
     if (empty(\Ease\Shared::user()->listingQuery()->count())) {

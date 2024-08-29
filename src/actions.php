@@ -19,7 +19,7 @@ require_once './init.php';
 
 $oPage->onlyForLogged();
 
-$oPage->addItem(new PageTop(_('Multi Flexi - Action Modules')));
+$oPage->addItem(new PageTop(_('MultiFlexi - Action Modules')));
 
 $modConf = new \MultiFlexi\ModConfig();
 

@@ -41,7 +41,6 @@ class ColumnsForm extends Form
      * Počet položek na řádek.
      */
     public int $itemsPerRow = 3;
-
     public SysEngine $engine = null;
 
     /**

@@ -23,15 +23,10 @@ use MultiFlexi\Zabbix\Exception\ZabbixResponseException;
 class Response
 {
     private const SUCCESS_RESPONSE = 'success';
-
     private string $responceStatus;
-
     private int $processedItems;
-
     private int $failedItems;
-
     private int $totalItems;
-
     private float $secondSpent;
 
     public function __construct(array $response)

@@ -26,9 +26,6 @@ use MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
 class Job extends Engine
 {
     public executor $executor;
-
-    public string $myTable = 'job';
-
     public static array $intervalCode = [
         'y' => 'yearly',
         'm' => 'monthly',
@@ -38,7 +35,6 @@ class Job extends Engine
         'i' => 'minutly',
         'n' => 'disabled',
     ];
-
     public static array $intervalSecond = [
         'n' => '0',
         'i' => '60',
@@ -57,14 +53,10 @@ class Job extends Engine
         'm' => 'md1',
         'y' => '31556926',
     ];
-
-    public ZabbixSender $zabbixSender = null;
-
-    public Application $application = null;
-
-    public Company $company = null;
-
-    public RunTemplate $runTemplate;
+    public ?ZabbixSender $zabbixSender = null;
+    public ?Application $application = null;
+    public ?Company $company = null;
+    public ?RunTemplate $runTemplate;
 
     /**
      * Environment for Current Job.
@@ -72,10 +64,9 @@ class Job extends Engine
     private array $environment = [];
 
     /**
-     * Executed commandline.
+     * Executed command line.
      */
     private string $commandline;
-
     private array $zabbixMessageData = [];
 
     /**
@@ -86,6 +77,7 @@ class Job extends Engine
      */
     public function __construct($identifier = null, $options = [])
     {
+        $this->myTable = 'job';
         $this->runTemplate = new RunTemplate();
         parent::__construct($identifier, $options);
 
@@ -380,7 +372,7 @@ EOD;
 
         if (\is_array($this->environment)) {
             foreach ($this->environment as $envKey => $envInfo) {
-                $cmdparams = str_replace('{'.$envKey.'}', $envInfo['value'], (string) $cmdparams);
+                $cmdparams = str_replace('{'.$envKey.'}', (string) $envInfo['value'], (string) $cmdparams);
             }
         }
 

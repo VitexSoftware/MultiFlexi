@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi Flexi - Export Language strings
+ * MultiFlexi - Export Language strings
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software

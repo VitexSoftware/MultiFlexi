@@ -58,7 +58,7 @@ $loginRow = new Row();
 $infoColumn = $loginRow->addItem(new Col(4));
 
 $infoBlock = $infoColumn->addItem(new ImgTag('images/project-logo.svg', _('Logo'), ['style' => 'width: 150%']));
-$infoBlock->addItem(new DivTag(_('Welcome to Multi Flexi'), ['style' => 'text-align: center;']));
+$infoBlock->addItem(new DivTag(_('Welcome to MultiFlexi'), ['style' => 'text-align: center;']));
 
 $loginColumn = $loginRow->addItem(new Col(4));
 

@@ -42,18 +42,14 @@ class DBDataTable extends \Ease\Html\TableTag
      */
     public array $defaultButtons = ['reload', 'copy', 'excel', 'print', 'pdf', 'pageLength',
         'colvis'];
-
     public array $columns = null;
 
     /**
      * Add footer columns.
      */
     public bool $showFooter = false;
-
     public DatabaseEngine $engine = null;
-
     public handle $rndId;
-
     private array $columnDefs = [];
 
     /**

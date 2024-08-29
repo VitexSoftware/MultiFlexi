@@ -16,25 +16,26 @@ declare(strict_types=1);
 namespace MultiFlexi;
 
 /**
- * Multi Flexi - Company Management Class.
+ * MultiFlexi - Company Management Class.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2024 Vitex Software
+ * @copyright  2018-2024 VitexSoftware
  */
 class Company extends \MultiFlexi\Engine
 {
     use \Ease\SQL\Orm;
-    public $keyword = 'company';
-    public $nameColumn = 'name';
-    public $createColumn = 'DatCreate';
-    public $lastModifiedColumn = 'DatUpdate';
-
-    /**
-     * SQL Table we use.
-     */
-    public string $myTable = 'company';
-
+    public string $keyword = 'company';
+    public string $lastModifiedColumn = 'DatUpdate';
     public int $abraflexiId;
+
+    public function __construct($identifier = null, $options = [])
+    {
+        $this->myTable = 'company';
+        $this->nameColumn = 'name';
+        $this->createColumn = 'DatCreate';
+        $this->lastModifiedColumn = 'DatUpdate';
+        parent::__construct($identifier, $options);
+    }
 
     public function __destruct()
     {

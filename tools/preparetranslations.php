@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi Flexi - Export Language strings
+ * MultiFlexi - Export Language strings
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020 Vitex Software
@@ -22,7 +22,7 @@ $confs = $configer->listingQuery()->select(['description'], true)->fetchAll();
 $translateFileContents = "<?php\n\n";
 
 $translateFileContents .= "/**\n";
-$translateFileContents .= " * Multi Flexi - Generated i18n translations\n";
+$translateFileContents .= " * MultiFlexi - Generated i18n translations\n";
 $translateFileContents .= " *\n";
 $translateFileContents .= " * @author Vítězslav Dvořák <info@vitexsoftware.cz>\n";
 $translateFileContents .= " * @copyright  " . date('Y') . " Vitex Software\n";

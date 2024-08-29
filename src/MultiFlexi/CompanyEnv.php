@@ -23,9 +23,6 @@ namespace MultiFlexi;
 class CompanyEnv extends \Ease\SQL\Engine
 {
     public $myTable = 'companyenv';
-
-    public array $data = [];
-
     private int $companyID;
 
     /**

@@ -19,7 +19,7 @@ require_once './init.php';
 
 $oPage->onlyForLogged();
 
-$oPage->addItem(new PageTop(_('Multi Flexi - Executor Modules')));
+$oPage->addItem(new PageTop(_('MultiFlexi - Executor Modules')));
 
 $oPage->container->addItem(new \Ease\TWB4\Panel(new \Ease\Html\H2Tag(_('Installed Executor Modules')), 'default', new ExecutorsListing()));
 

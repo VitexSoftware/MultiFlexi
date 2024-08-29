@@ -848,7 +848,7 @@ msgid "Add company"
 msgstr ""
 
 #: ../src/index.php:17 ../src/main.php:22
-msgid "Multi Flexi"
+msgid "MultiFlexi"
 msgstr ""
 
 #: ../src/index.php:20
@@ -860,7 +860,7 @@ msgid "Create first Administrator Account"
 msgstr ""
 
 #: ../src/login.php:55
-msgid "Welcome to Multi Flexi"
+msgid "Welcome to MultiFlexi"
 msgstr ""
 
 #: ../src/login.php:59

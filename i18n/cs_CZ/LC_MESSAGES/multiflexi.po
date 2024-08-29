@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Multi Flexi\n"
+"Project-Id-Version: MultiFlexi\n"
 "POT-Creation-Date: 2023-11-24 14:38+0100\n"
 "PO-Revision-Date: 2023-11-24 15:06+0100\n"
 "Last-Translator: Vítězslav Dvořák <info@vitexsoftware.cz>\n"
@@ -1312,8 +1312,8 @@ msgid "Error saving Config fields"
 msgstr "Chyba ukládání konfiguračního políčka"
 
 #: ../src/index.php:18 ../src/main.php:20
-msgid "Multi Flexi"
-msgstr "Multi Flexi"
+msgid "MultiFlexi"
+msgstr "MultiFlexi"
 
 #: ../src/index.php:22
 msgid "There is no administrators in the database."
@@ -1348,7 +1348,7 @@ msgid "App Run"
 msgstr "Spuštění aplikace"
 
 #: ../src/login.php:54
-msgid "Welcome to Multi Flexi"
+msgid "Welcome to MultiFlexi"
 msgstr "Vítejte do MultiFlexi"
 
 #: ../src/login.php:58
@@ -1679,7 +1679,7 @@ msgstr ""
 
 #: ../src/translations.php:58
 msgid "MultiFlexi Probe"
-msgstr "Multi Flexi Sonda"
+msgstr "MultiFlexi Sonda"
 
 #: ../src/translations.php:59
 msgid "Task launcher testing tool"

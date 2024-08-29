@@ -53,11 +53,8 @@ class ZabbixSender extends \MultiFlexi\Zabbix\ZabbixSender
      * Instance instances array.
      */
     protected static array $instances = [];
-
     private string $serverAddress;
-
     private int $serverPort;
-
     private ZabbixPacket $packet;
 
     /**

@@ -24,7 +24,6 @@ class Application extends Engine
 {
     public $lastModifiedColumn;
     public $keyword;
-
     public Company $company;
 
     /**

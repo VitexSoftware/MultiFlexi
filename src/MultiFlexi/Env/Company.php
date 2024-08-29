@@ -40,8 +40,10 @@ class Company extends \MultiFlexi\Environmentor implements injector
         $companyEnvironment = [];
         $companyEnvironmentRaw = $this->engine->company->getEnvironment();
 
-        foreach ($companyEnvironmentRaw as $key => $value) {
-            $companyEnvironment[$key]['value'] = $value;
+        if ($companyEnvironmentRaw) {
+            foreach ($companyEnvironmentRaw as $key => $value) {
+                $companyEnvironment[$key]['value'] = $value;
+            }
         }
 
         return $this->addMetaData($this->addSelfAsSource($companyEnvironment));
@@ -54,6 +56,7 @@ class Company extends \MultiFlexi\Environmentor implements injector
     {
         return _('Company');
     }
+
     /**
      * @return string
      */

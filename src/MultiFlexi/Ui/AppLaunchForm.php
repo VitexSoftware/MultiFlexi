@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 /**
- * Multi Flexi - Application Launch Form.
+ * MultiFlexi - Application Launch Form.
  *
  * @copyright  2015-2024 Vitex Software
  * @license    https://opensource.org/licenses/MIT MIT

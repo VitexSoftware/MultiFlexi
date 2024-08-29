@@ -23,14 +23,13 @@ use MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
  */
 class RunTemplate extends Engine
 {
-    public string $nameColumn = 'name';
-
     /**
      * @param mixed $identifier
      * @param array $options
      */
     public function __construct($identifier = null, $options = [])
     {
+        $this->nameColumn = 'name';
         $this->myTable = 'runtemplate';
         parent::__construct($identifier, $options);
     }

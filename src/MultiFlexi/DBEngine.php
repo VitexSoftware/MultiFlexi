@@ -31,39 +31,26 @@ namespace MultiFlexi;
  */
 class DBEngine extends \Ease\SQL\Engine
 {
-    public \Envms\FluentPDO\Query $fluent = null;
-
     /**
      * Filter results by.
      */
-    public array $filter = null;
+    public ?array $filter = null;
 
     /**
      * Prefill new Record form with values.
      */
-    public array $defaults = null;
-
-    /**
-     * @var string usually id
-     */
-    public string $keyColumn = 'id';
-
-    /**
-     * Column with record name.
-     */
-    public string $nameColumn = null;
-    public $createColumn; // 'created_at';
-    public $modifiedColumn; // 'updated_at';
+    public ?array $defaults = null;
+    public ?string $modifiedColumn; // 'updated_at';
 
     /**
      * Search results targeting to index.php here.
      */
-    public string $keyword = null;
+    public ?string $keyword = null;
 
     /**
      * Object Subject.
      */
-    public string $subject = null;
+    public ?string $subject = null;
     public $newSubmitText;
     public $editSubmitText;
     public $removeSubmitText;
@@ -71,12 +58,9 @@ class DBEngine extends \Ease\SQL\Engine
     public $editTitleText;
     public $removeTitleText;
     public $removeConfirmText;
-
     public array $columnsCache = [];
-
-    public array $initConds = null;
-
-    public string $detailPage = null;
+    public ?array $initConds = null;
+    public ?string $detailPage = null;
 
     /**
      * Data Processing Engine.
@@ -86,6 +70,7 @@ class DBEngine extends \Ease\SQL\Engine
      */
     public function __construct($init = null, $filter = [])
     {
+        $this->keyColumn = 'id';
         parent::__construct();
 
         if (is_numeric($init)) {

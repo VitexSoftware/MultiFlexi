@@ -22,7 +22,7 @@ declare(strict_types=1);
 //    DataTables\Editor\ValidateOptions;
 
 /**
- * Multi Flexi - DataTable feeder.
+ * MultiFlexi - DataTable feeder.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020-2023 Vitex Software

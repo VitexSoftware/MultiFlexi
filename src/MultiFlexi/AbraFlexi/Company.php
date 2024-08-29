@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace MultiFlexi\AbraFlexi;
 
 /**
- * Multi Flexi - AbraFlexiCompany Management Class.
+ * MultiFlexi - AbraFlexiCompany Management Class.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2018-2023 Vitex Software
@@ -33,7 +33,6 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
      * SQL Table we use.
      */
     public string $myTable = 'company';
-
     public int $abraflexiId;
 
     /**

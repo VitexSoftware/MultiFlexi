@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi Flexi - Application Info Panel.
+ * MultiFlexi - Application Info Panel.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020-2023 Vitex Software

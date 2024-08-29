@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Multi Flexi - Phinx database adapter.
+ * MultiFlexi - Phinx database adapter.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2021-2024 Vitex Software

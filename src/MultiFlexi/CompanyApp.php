@@ -23,14 +23,12 @@ namespace MultiFlexi;
 class CompanyApp extends Engine
 {
     public $myTable = 'companyapp';
-
-    public Company $company;
+    public ?Company $company;
 
     /**
-     * @param Company $company
-     * @param array   $options
+     * @param array $options
      */
-    public function __construct($company, $options = [])
+    public function __construct(?Company $company = null, $options = [])
     {
         parent::__construct(null, $options);
         $this->company = $company;

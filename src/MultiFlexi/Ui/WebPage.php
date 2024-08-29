@@ -25,12 +25,12 @@ class WebPage extends \Ease\TWB4\WebPage
     /**
      * Put page contents here.
      */
-    public \Ease\TWB4\Container $container = null;
+    public ?\Ease\TWB4\Container $container = null;
 
     /**
      * Current Customer.
      */
-    public \MultiFlexi\Customer $customer = null;
+    public ?\MultiFlexi\Customer $customer = null;
 
     /**
      * @param string $pageTitle

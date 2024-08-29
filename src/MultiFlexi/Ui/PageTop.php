@@ -23,7 +23,7 @@ class PageTop extends \Ease\Html\DivTag
     /**
      * Titulek stránky.
      */
-    public string $pageTitle = null;
+    public ?string $pageTitle = null;
 
     /**
      * Nastavuje titulek.
