@@ -41,8 +41,9 @@
             "MultiFlexi\\Action\\": "src/MultiFlexi/Action",
             "MultiFlexi\\Zabbix\\": "src/MultiFlexi/Zabbix",
             "MultiFlexi\\Pohoda\\": "src/MultiFlexi/Pohoda",
+            "MultiFlexi\\Ui\\Form": "src/MultiFlexi/Ui/Form",
             "MultiFlexi\\Executor\\": "src/MultiFlexi/Executor",
-            "MultiFlexi\\AbraFlexi\\": "src/MultiFlexi/AbraFlexi"
+            "MultiFlexi\\AbraFlexi\\": "src/MultiFlexi/AbraFlexi",
         }
     },
     "autoload-dev": {

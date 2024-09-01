@@ -28,7 +28,7 @@ class ConfigurationWizard extends Wizard
     public function __construct(\MultiFlexi\Company $company)
     {
         $this->step = (int) \Ease\WebPage::getRequestValue('step');
-        $this->application = new \MultiFlexi\Application(\Ease\WebPage::getRequestValue('app_id'));
+        $this->application = new \MultiFlexi\Application(\Ease\WebPage::getRequestValue('app_id', 'int'));
         $this->company = $company;
         $footer = new \Ease\TWB4\ProgressBar($this->getStepPercent(), $this->getStepPercent().'% '.$this->getStepLabel(), 'progress-bar-striped progress-bar-animated bg-info');
         $body = new \Ease\TWB4\Row();
@@ -67,9 +67,12 @@ class ConfigurationWizard extends Wizard
         return $body;
     }
 
-    public function appConfigurator(): void
+    public function appConfigurator()
     {
         $configFields = $this->application->getAppEnvironmentFields();
+        $reqs = $this->application->getRequirements();
+
+        return new \Ease\Html\DivTag($reqs);
     }
 
     public function appChooser()

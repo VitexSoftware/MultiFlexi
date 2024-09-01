@@ -26,6 +26,7 @@ src/MultiFlexi/Action/Stop.php            usr/lib/multiflexi/MultiFlexi/Action
 
 
 src/MultiFlexi/Ui/*.php                   usr/lib/multiflexi/MultiFlexi/Ui/
+src/MultiFlexi/Ui/Form/configForm.php     usr/lib/multiflexi/MultiFlexi/Ui/Form/
 debian/conf/multiflexi.conf    		  etc/apache2/conf-available
 debian/conf/multiflexi.service 		  etc/avahi/services
 bin/*					  usr/bin
