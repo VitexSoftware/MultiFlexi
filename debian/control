@@ -64,3 +64,16 @@ Architecture: all
 Description: Zabbix support for MultiFlexi
  LLD for configured content
 
+Package: multiflexi-abraflexi
+Multi-Arch: foreign
+Depends: ${misc:Depends},multiflexi
+Architecture: all
+Description: MultiFlexi support for AbraFlexi
+ AbraFlexi Connection dialog
+
+Package: multiflexi-raiffeisenbank
+Multi-Arch: foreign
+Depends: ${misc:Depends},multiflexi
+Architecture: all
+Description: MultiFlexi support for RaiffeisenBank
+ RaiffeisenBank connection dialog

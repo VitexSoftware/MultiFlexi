@@ -429,4 +429,9 @@ class Application extends Engine
     {
         return Conffield::getAppConfigs($this->getMyKey());
     }
+
+    public function getRequirements()
+    {
+        return $this->getDataValue('requirements');
+    }
 }
