@@ -284,6 +284,7 @@ class Application extends Engine
                     $candidat = $this->listingQuery()->where('uuid', $importData['uuid']);
                 } else {
                     $candidat = $this->listingQuery()->where('executable', $importData['executable'])->whereOr('name', $importData['name']);
+                    $this->addStatusMessage(_('UUID field not present. '), 'error');
                 }
 
                 $newVersion = \array_key_exists('version', $importData) ? $importData['version'] : 'n/a';
@@ -409,7 +410,7 @@ class Application extends Engine
         }
 
         $appId = $this->getMyKey($data);
-        
+
         $a2c = $this->getFluentPDO()->deleteFrom('companyapp')->where('app_id', $appId)->execute();
 
         if ($a2c !== 0) {
