@@ -73,14 +73,17 @@ class CompanyApp extends Engine
 
         foreach ($assigned as $appId => $assId) {
             if (array_search($appId, $appIds, true) === false) {
-                $appRuntmps =  $runTempate->listingQuery()->where('company_id',$companyId)->where('app_id',$appId);
+                $appRuntmps = $runTempate->listingQuery()->where('company_id', $companyId)->where('app_id', $appId);
+
                 if ($this->deleteFromSQL(['company_id' => $companyId, 'app_id' => $appId])) {
-                    foreach ($appRuntmps as $runtemplateData){
+                    foreach ($appRuntmps as $runtemplateData) {
                         $rt2ac = $this->getFluentPDO()->deleteFrom('actionconfig')->where('runtemplate_id', $runtemplateData['id'])->execute();
-                        if($rt2ac !== 0){
+
+                        if ($rt2ac !== 0) {
                             $this->addStatusMessage(sprintf(_('%s Action Config removal'), $runtemplateData['name']), null === $rt2ac ? 'error' : 'success');
                         }
                     }
+
                     $runTempate->deleteFromSQL(['app_id' => $appId, 'company_id' => $companyId]);
                     $this->addStatusMessage(sprintf(_('Application %s was unassigned from %s company'), $allApps[$appId]['name'], $this->company->getRecordName()));
                 }

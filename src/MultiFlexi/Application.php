@@ -374,6 +374,7 @@ class Application extends Engine
     {
         $success = true;
         $importData = json_decode(file_get_contents($jsonFile), true);
+
         if (\is_array($importData)) {
             $candidat = $this->listingQuery()->whereOr('uuid', $importData['uuid'])->whereOr('name', $importData['name']);
 
@@ -381,6 +382,7 @@ class Application extends Engine
                 foreach ($candidat as $candidatData) {
                     $this->setMyKey($candidatData['id']);
                     $removed = $this->deleteFromSQL();
+
                     if (null === $removed) {
                         $success = false;
                     }
@@ -407,20 +409,44 @@ class Application extends Engine
         }
 
         $a2c = $this->getFluentPDO()->deleteFrom('companyapp')->where('app_id', $this->getMyKey($data))->execute();
-        $this->addStatusMessage(sprintf(_('Unassigned from %d companys'), $a2c), null === $a2c ? 'error' : 'success');
-        
-        $runtemplates = $this->getFluentPDO()->from('runtemplate')->where('app_id', $this->getMyKey($data))->fetchAll();
-        foreach ($runtemplates as $runtemplate){
-            $rt2ac = $this->getFluentPDO()->deleteFrom('actionconfig')->where('runtemplate_id', $runtemplate['id'])->execute();
-            $this->addStatusMessage(sprintf(_('%s Action Config removal'), $runtemplate['name']), null === $rt2ac ? 'error' : 'success');
+
+        if ($a2c !== 0) {
+            $this->addStatusMessage(sprintf(_('Unassigned from %d companys'), $a2c), null === $a2c ? 'error' : 'success');
         }
-        
+
+        $runtemplates = $this->getFluentPDO()->from('runtemplate')->where('app_id', $this->getMyKey($data))->fetchAll();
+
+        foreach ($runtemplates as $runtemplate) {
+            $rt2ac = $this->getFluentPDO()->deleteFrom('actionconfig')->where('runtemplate_id', $runtemplate['id'])->execute();
+
+            if ($rt2ac !== 0) {
+                $this->addStatusMessage(sprintf(_('%s Action Config removal'), $runtemplate['name']), null === $rt2ac ? 'error' : 'success');
+            }
+        }
+
         $a2rt = $this->getFluentPDO()->deleteFrom('runtemplate')->where('app_id', $this->getMyKey($data))->execute();
-        $this->addStatusMessage(sprintf(_('%s RunTemplate removal'), $a2rt), null === $a2rt ? 'error' : 'success');
+
+        if ($a2rt !== 0) {
+            $this->addStatusMessage(sprintf(_('%s RunTemplate removal'), $a2rt), null === $a2rt ? 'error' : 'success');
+        }
+
         $a2cf = $this->getFluentPDO()->deleteFrom('conffield')->where('app_id', $this->getMyKey($data))->execute();
-        $this->addStatusMessage(sprintf(_('%d Config fields removed'), $a2rt), null === $a2rt ? 'error' : 'success');
+
+        if ($a2cf !== 0) {
+            $this->addStatusMessage(sprintf(_('%d Config fields removed'), $a2rt), null === $a2rt ? 'error' : 'success');
+        }
+
         $a2job = $this->getFluentPDO()->deleteFrom('job')->where('app_id', $this->getMyKey($data))->execute();
-        $this->addStatusMessage(sprintf(_('%d Jobs removed'), $a2job), null === $a2job ? 'error' : 'success');
+
+        if ($a2job !== 0) {
+            $this->addStatusMessage(sprintf(_('%d Jobs removed'), $a2job), null === $a2job ? 'error' : 'success');
+        }
+
+        $a2cfg = $this->getFluentPDO()->deleteFrom('configuration')->where('app_id', $this->getMyKey($data))->execute();
+
+        if ($a2cfg !== 0) {
+            $this->addStatusMessage(sprintf(_('%d Jobs removed'), $a2cfg), null === $a2cfg ? 'error' : 'success');
+        }
 
         return parent::deleteFromSQL($data);
     }
