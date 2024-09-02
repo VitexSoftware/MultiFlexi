@@ -52,6 +52,7 @@ class CompanyApp extends Engine
     public function assignApps($appIds): void
     {
         $companyId = $this->company->getMyKey();
+        $runTempate = new RunTemplate();
 
         $allApps = (new \MultiFlexi\Application())->listingQuery()->select(['id', 'name'], true)->fetchAll('id'); // where('enabled', true)->
         $assigned = $this->getAssigned()->fetchAll('app_id');
@@ -60,15 +61,26 @@ class CompanyApp extends Engine
             if ($appId && \array_key_exists($appId, $assigned) === false) {
                 if ($this->insertToSQL(['company_id' => $companyId, 'app_id' => $appId])) {
                     $this->addStatusMessage(sprintf(_('Application %s was assigned to %s company'), $allApps[$appId]['name'], $this->company->getRecordName()));
+                    $runTempate->dataReset();
+                    $runTempate->setDataValue('app_id', $appId);
+                    $runTempate->setDataValue('company_id', $companyId);
+                    $runTempate->setDataValue('interv', 'n');
+                    $runTempate->setDataValue('name', $allApps[$appId]['name']);
+                    $runTempate->insertToSQL();
                 }
             }
         }
 
-        $runTempate = new RunTemplate();
-
         foreach ($assigned as $appId => $assId) {
             if (array_search($appId, $appIds, true) === false) {
+                $appRuntmps =  $runTempate->listingQuery()->where('company_id',$companyId)->where('app_id',$appId);
                 if ($this->deleteFromSQL(['company_id' => $companyId, 'app_id' => $appId])) {
+                    foreach ($appRuntmps as $runtemplateData){
+                        $rt2ac = $this->getFluentPDO()->deleteFrom('actionconfig')->where('runtemplate_id', $runtemplateData['id'])->execute();
+                        if($rt2ac !== 0){
+                            $this->addStatusMessage(sprintf(_('%s Action Config removal'), $runtemplateData['name']), null === $rt2ac ? 'error' : 'success');
+                        }
+                    }
                     $runTempate->deleteFromSQL(['app_id' => $appId, 'company_id' => $companyId]);
                     $this->addStatusMessage(sprintf(_('Application %s was unassigned from %s company'), $allApps[$appId]['name'], $this->company->getRecordName()));
                 }
