@@ -69,10 +69,25 @@ class ConfigurationWizard extends Wizard
 
     public function appConfigurator()
     {
-        $configFields = $this->application->getAppEnvironmentFields();
-        $reqs = $this->application->getRequirements();
+        $configForm = new \Ease\TWB4\Form();
+        $configForm->addInput(new \Ease\Html\InputHiddenTag('app_id', $this->application->getMyKey()));
+        $configForm->addInput(new \Ease\Html\InputHiddenTag('company_id', $this->company->getMyKey()));
+        $configForm->addInput(new \Ease\Html\InputHiddenTag('step', $this->step));
 
-        return new \Ease\Html\DivTag($reqs);
+        $configFields = $this->application->getAppEnvironmentFields();
+
+        \Ease\Functions::loadClassesInNamespace('MultiFlexi\Ui\Form');
+        $formsAvailble = \Ease\Functions::classesInNamespace('MultiFlexi\Ui\Form');
+        $reqs = explode(',', $this->application->getRequirements());
+
+        $intersection = array_intersect($formsAvailble, $reqs);
+
+        foreach ($intersection as $form) {
+            $formClass = 'MultiFlexi\\Ui\\Form\\'.$form;
+            $configForm->addItem(new $formClass());
+        }
+
+        return $configForm;
     }
 
     public function appChooser()
