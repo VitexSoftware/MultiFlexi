@@ -411,8 +411,8 @@ class Application extends Engine
         
         $runtemplates = $this->getFluentPDO()->from('runtemplate')->where('app_id', $this->getMyKey($data))->fetchAll();
         foreach ($runtemplates as $runtemplate){
-            $rt2ac = $this->getFluentPDO()->deleteFrom('actionconfig')->where('app_id', $this->getMyKey($data))->execute();
-            $this->addStatusMessage(sprintf(_('%s Action Config removal'), $rt2ac), null === $rt2ac ? 'error' : 'success');
+            $rt2ac = $this->getFluentPDO()->deleteFrom('actionconfig')->where('runtemplate_id', $runtemplate['id'])->execute();
+            $this->addStatusMessage(sprintf(_('%s Action Config removal'), $runtemplate['name']), null === $rt2ac ? 'error' : 'success');
         }
         
         $a2rt = $this->getFluentPDO()->deleteFrom('runtemplate')->where('app_id', $this->getMyKey($data))->execute();
