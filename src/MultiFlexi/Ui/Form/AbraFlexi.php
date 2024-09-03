@@ -29,6 +29,14 @@ class AbraFlexi extends \Ease\TWB4\Panel implements configForm
         $header = new \Ease\TWB4\Row();
         $header->addColumn(6, new \Ease\Html\ATag('https://www.abra.eu/flexi/', new \Ease\Html\ImgTag(self::$logo, _('AbraFlexi'),['height'=>50])));
         $header->addColumn(6, new \Ease\Html\H3Tag(_('AbraFlexi')));
-        parent::__construct($header, 'inverse', '', '');
+        
+        $body = new \Ease\Html\DivTag();
+        
+        $body->addItem(new \Ease\TWB4\FormGroup(_('Login'), new \Ease\Html\InputTextTag('ABRAFLEXI_LOGIN'), 'winstrom', _('AbraFlexi user login')));
+        $body->addItem(new \Ease\TWB4\FormGroup(_('Password'), new \Ease\Html\InputTextTag('ABRAFLEXI_PASSWORD'), 'winstrom', _('AbraFlexi user password')));
+        $body->addItem(new \Ease\TWB4\FormGroup(_('Server URL'), new \Ease\Html\InputTextTag('ABRAFLEXI_URL'), 'winstrom', _('AbraFlexi server URI')));
+        $body->addItem(new \Ease\TWB4\FormGroup(_('Company'), new \Ease\Html\InputTextTag('ABRAFLEXI_COMPANY'), 'demo', _('Company to be handled')));
+        
+        parent::__construct($header, 'inverse', $body, '');
     }
 }
