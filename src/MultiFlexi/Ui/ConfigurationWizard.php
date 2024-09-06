@@ -86,8 +86,9 @@ class ConfigurationWizard extends Wizard
             $formClass = 'MultiFlexi\\Ui\\Form\\'.$form;
             $configForm->addItem(new $formClass());
         }
-        
-        $configForm->addItem( new \Ease\TWB4\SubmitButton(_('Next').' ➡️', 'primary') );
+
+        $configForm->addItem(new \Ease\TWB4\SubmitButton(_('Next').' ➡️', 'primary'));
+
         return $configForm;
     }
 
