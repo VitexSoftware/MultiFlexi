@@ -283,8 +283,8 @@ class Application extends Engine
                 if (\array_key_exists('uuid', $importData) && !empty($importData['uuid'])) {
                     $candidat = $this->listingQuery()->where('uuid', $importData['uuid']);
                 } else {
-                    $candidat = $this->listingQuery()->where('executable', $importData['executable'])->whereOr('name', $importData['name']);
                     $this->addStatusMessage(_('UUID field not present. '), 'error');
+                    exit(1);
                 }
 
                 $newVersion = \array_key_exists('version', $importData) ? $importData['version'] : 'n/a';
@@ -296,9 +296,9 @@ class Application extends Engine
                 } else { // Insert
                     $currentVersion = 'n/a';
 
-                    if ((\array_key_exists('uuid', $importData) === false) || empty($importData['uuid'])) {
-                        $importData['uuid'] = \Ease\Functions::guidv4();
-                    }
+
+
+
 
                     if ((\array_key_exists('code', $importData) === false) || empty($importData['code'])) {
                         $importData['code'] = substr(substr(strtoupper($importData['executable'] ? basename($importData['executable']) : $importData['name']), -7), 0, 6);
