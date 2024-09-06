@@ -171,7 +171,15 @@ class Job extends Engine
         $sqlLogger->setApplication(0);
 
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
-            $this->reportToZabbix(['phase' => 'jobDone', 'stdout' => $stdout, 'stderr' => $stderr, 'exitcode' => $statusCode, 'end' => (new \DateTime())->format('Y-m-d H:i:s')]);
+            $this->reportToZabbix([
+                'phase' => 'jobDone', 
+                'job_id' => $this->getMyKey(),
+                'company_id' => $this->runTemplate->getDataValue('company_id'),
+                'app_id' => $this->runTemplate->getDataValue('app_id'),
+                'stdout' => $stdout, 
+                'stderr' => $stderr, 
+                'exitcode' => $statusCode, 
+                'end' => (new \DateTime())->format('Y-m-d H:i:s')]);
         }
 
         $this->setData([
