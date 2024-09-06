@@ -14,6 +14,7 @@ declare(strict_types=1);
  */
 
 namespace MultiFlexi\Ui\Form;
+
 use Ease\Html\ATag;
 
 /**
@@ -28,7 +29,7 @@ class RaiffeisenBank extends \Ease\TWB4\Panel implements configForm
     public function __construct()
     {
         $header = new \Ease\TWB4\Row();
-        $header->addColumn(6, new \Ease\Html\ATag('https://www.rb.cz/firmy/transakcni-bankovnictvi/elektronicke-bankovnictvi/premium-api', new \Ease\Html\ImgTag(self::$logo, _('RB Premium Api'),['height'=>50])));
+        $header->addColumn(6, new \Ease\Html\ATag('https://www.rb.cz/firmy/transakcni-bankovnictvi/elektronicke-bankovnictvi/premium-api', new \Ease\Html\ImgTag(self::$logo, _('RB Premium Api'), ['height' => 50])));
         $header->addColumn(6, new \Ease\Html\H3Tag(_('Raiffeisen Bank Premium API')));
 
         $body = new \Ease\Html\DivTag();
@@ -36,7 +37,7 @@ class RaiffeisenBank extends \Ease\TWB4\Panel implements configForm
         $body->addItem(new \Ease\TWB4\FormGroup(_('Account Number'), new \Ease\Html\InputTextTag('ACCOUNT_NUMBER'), '', _('Raiffeisen Bank Account Number')));
         $body->addItem(new \Ease\TWB4\FormGroup(_('Certificate File'), new \Ease\Html\InputTextTag('CERT_FILE'), '', _('Path to Certificate File')));
         $body->addItem(new \Ease\TWB4\FormGroup(_('Certificate Password'), new \Ease\Html\InputTextTag('CERT_PASS'), '', _('Password for Certificate')));
-        $body->addItem(new \Ease\TWB4\FormGroup(_('X-IBM-Client-Id'), new \Ease\Html\InputTextTag('XIBMCLIENTID'), '', new ATag('https://developers.rb.cz/premium/applications',_('X-IBM-Client-Id'))));
+        $body->addItem(new \Ease\TWB4\FormGroup(_('X-IBM-Client-Id'), new \Ease\Html\InputTextTag('XIBMCLIENTID'), '', new ATag('https://developers.rb.cz/premium/applications', _('X-IBM-Client-Id'))));
 
         parent::__construct($header, 'inverse', $body, '');
     }

@@ -147,7 +147,12 @@ class Job extends Engine
 
         // $this->addStatusMessage('JOB: ' . $jobId . ' ' . json_encode($this->environment), 'debug');
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
-            $this->reportToZabbix(['phase' => 'jobStart', 'begin' => (new \DateTime())->format('Y-m-d H:i:s'), 'interval' => $this->runTemplate->getDataValue('interv'), 'interval_seconds' => self::codeToSeconds($this->runTemplate->getDataValue('interv'))]);
+            $this->reportToZabbix([
+                'phase' => 'jobStart',
+                'begin' => (new \DateTime())->format('Y-m-d H:i:s'),
+                'interval' => $this->runTemplate->getDataValue('interv'),
+                'interval_seconds' => self::codeToSeconds($this->runTemplate->getDataValue('interv')),
+            ]);
         }
 
         $this->updateToSQL(['id' => $this->getMyKey(), 'command' => $this->executor->commandline(), 'runtemplate_id' => $this->runTemplate->getMyKey(), 'begin' => new \Envms\FluentPDO\Literal(\Ease\Shared::cfg('DB_CONNECTION') === 'sqlite' ? "date('now')" : 'NOW()')]);
@@ -172,16 +177,16 @@ class Job extends Engine
 
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
             $this->reportToZabbix([
-                'phase' => 'jobDone', 
+                'phase' => 'jobDone',
                 'job_id' => $this->getMyKey(),
                 'company_id' => $this->runTemplate->getDataValue('company_id'),
                 'company_code' => $this->company->getDataValue('code'),
                 'company_name' => $this->company->getRecordName(),
                 'app_id' => $this->runTemplate->getDataValue('app_id'),
                 'app_name' => $this->application->getRecordName(),
-                'stdout' => $stdout, 
-                'stderr' => $stderr, 
-                'exitcode' => $statusCode, 
+                'stdout' => $stdout,
+                'stderr' => $stderr,
+                'exitcode' => $statusCode,
                 'end' => (new \DateTime())->format('Y-m-d H:i:s')]);
         }
 
