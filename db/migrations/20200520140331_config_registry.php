@@ -11,7 +11,7 @@ class ConfigRegistry extends AbstractMigration {
                 ->addColumn('type', 'string', ['length' => 32])
                 ->addColumn('description', 'string', ['length' => 1024])
                 ->addIndex(['app_id', 'keyname'], ['unique' => true])
-                ->addForeignKey('app_id', 'apps', 'id', ['constraint' => 'cff-app_must_exist'])
+                ->addForeignKey('app_id', 'apps', 'id', ['constraint' => 'cff-app_must_exist', 'delete'=>'CASCADE'])
         ;
         $customFields->create();
 
@@ -23,8 +23,8 @@ class ConfigRegistry extends AbstractMigration {
                 ->addColumn('runtemplate_id', 'integer', ['null' => false,'signed'=>false])
                 ->addIndex(['app_id', 'company_id'])
                 ->addIndex(['runtemplate_id', 'key'], ['unique' => true])
-                ->addForeignKey('app_id', 'apps', ['id'], ['constraint' => 'cfg-app_must_exist'])
-                ->addForeignKey('company_id', 'company', ['id'], ['constraint' => 'cfg-company_must_exist'])
+                ->addForeignKey('app_id', 'apps', ['id'], ['constraint' => 'cfg-app_must_exist', 'delete'=>'CASCADE'])
+                ->addForeignKey('company_id', 'company', ['id'], ['constraint' => 'cfg-company_must_exist', 'delete'=>'CASCADE'])
         ;
         $configs->create();
     }
