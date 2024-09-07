@@ -434,7 +434,7 @@ class Application extends DBEngine {
             $this->addStatusMessage(sprintf(_('%d Jobs removed'), $a2job), null === $a2job ? 'error' : 'success');
         }
 
-        return parent::deleteFromSQL($data);
+        return parent::deleteFromSQL($this->getMyKey($data));
     }
 
     /**
@@ -473,7 +473,13 @@ class Application extends DBEngine {
         $dataRow = current(Ui\AppsSelector::translateColumns([$dataRowRaw], ['name', 'description']));
         $dataRow['name'] = '<a title="'. $dataRowRaw['name'] .'" href="app.php?id=' . $dataRowRaw['id'] . '">'. $dataRowRaw['name'] . '</a>';
         $dataRow['icon'] = '<a title="'. $dataRowRaw['name'] .'" href="app.php?id=' . $dataRowRaw['id'] . '"><img src="appimage.php?uuid=' . $dataRowRaw['uuid'] . '" height="50">';
-       
+        
+        $topics = new \Ease\Html\DivTag();
+        foreach (explode(',', $dataRow['topics']) as $topic){
+            $topics->addItem(new \Ease\TWB4\Badge('secondary', $topic));
+        }
+        $dataRow['topics'] = (string)$topics;
+        
         //        $dataRowRaw['created'] = (new LiveAge((new DateTime($dataRowRaw['created']))->getTimestamp()))->__toString();
 
         return parent::completeDataRow($dataRow);

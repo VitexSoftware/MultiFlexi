@@ -100,7 +100,7 @@ class MainMenu extends \Ease\Html\DivTag
             ];
 
         if (!empty($apps)) {
-            $appsMenu['applist.php'] = _('Application list');
+            $appsMenu['apps.php'] = _('Application list');
         }
 
         $nav->addDropDownMenu(

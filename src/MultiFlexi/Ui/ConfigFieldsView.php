@@ -35,7 +35,7 @@ class ConfigFieldsView extends \Ease\Html\DivTag
     {
         $container = new \Ease\TWB4\Container($fieldInfo['type']);
         $container->addItem(new \Ease\Html\H3Tag($fieldInfo['keyname']));
-        $container->addItem(_($fieldInfo['description']));
+        $container->addItem( empty($fieldInfo['description']) ? '' : _($fieldInfo['description']));
 
         $dl = new \Ease\Html\DlTag();
         $dl->addDef(_('Default value'), $fieldInfo['defval']);

@@ -21,7 +21,7 @@ use MultiFlexi\Engine;
 
 class EngineForm extends Form
 {
-    public ?Engine $engine = null;
+    public $engine = null;
 
     /**
      * Formulář Bootstrapu.
