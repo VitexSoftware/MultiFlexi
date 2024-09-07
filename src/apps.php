@@ -24,12 +24,4 @@ $oPage->addItem(new PageTop(_('Applications')));
 $oPage->container->addItem(new DBDataTable(new \MultiFlexi\Application()));
 $oPage->addItem(new PageBottom());
 
-$oPage->addJavaScript(<<<'EOD'
-
-    setInterval(function () {
-      Molecule.ajax.reload();
-}, 300000);
-
-EOD);
-
 $oPage->draw();
