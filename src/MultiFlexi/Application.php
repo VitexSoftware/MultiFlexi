@@ -348,7 +348,7 @@ class Application extends Engine
                         echo $exc->getTraceAsString();
                         fwrite(\STDERR, print_r($appSpecRaw, true).\PHP_EOL);
                         $problemData = $this->getData();
-                        $problemData['logo'] = substr($problemData['logo'],0,20).' ...';
+                        $problemData['image'] = substr($problemData['image'],0,20).' ...';
                         fwrite(\STDERR, print_r($problemData, true).\PHP_EOL);
                         echo $exc->getMessage();
                     }
