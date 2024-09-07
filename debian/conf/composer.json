@@ -39,7 +39,7 @@
       "MultiFlexi\\Zabbix\\Request\\": "MultiFlexi/Zabbix/Request",
       "MultiFlexi\\Zabbix\\Exception\\": "MultiFlexi/Zabbix/Exception"
     }
-  },
+  }, 
   "repositories": [
     {
       "type": "path",

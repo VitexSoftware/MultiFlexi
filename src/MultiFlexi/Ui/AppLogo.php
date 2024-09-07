@@ -31,7 +31,7 @@ class AppLogo extends ImgTag
     public function __construct(Application $application, array $properties = [])
     {
         parent::__construct(
-            empty($application->getDataValue('image')) ? 'images/apps.svg' : $application->getDataValue('image'),
+            empty($application->getDataValue('uuid')) ? 'images/apps.svg' : 'appimage.php?uuid='.$application->getDataValue('uuid'),
             $application->getDataValue('name'),
             $properties,
         );
