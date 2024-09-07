@@ -55,7 +55,7 @@ switch ($showOnly) {
         break;
 }
 
-$jobs = $jobber->listingQuery()->select(['apps.name AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'job.executor', 'login', 'job.app_id AS app_id', 'runtemplate.id AS runtemplate_id', 'runtemplate.name AS runtemplate_name', 'schedule AS scheduled'], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->leftJoin('runtemplate ON runtemplate.company_id = job.company_id AND runtemplate.app_id = job.app_id')->where('job.company_id', $companies->getMyKey())->limit(20)->orderBy('job.id DESC')->where($condition)->fetchAll();
+$jobs = $jobber->listingQuery()->select(['apps.name AS appname', 'apps.uuid AS uuid', 'job.id', 'begin', 'exitcode', 'launched_by', 'job.executor', 'login', 'job.app_id AS app_id', 'runtemplate.id AS runtemplate_id', 'runtemplate.name AS runtemplate_name', 'schedule AS scheduled'], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->leftJoin('runtemplate ON runtemplate.company_id = job.company_id AND runtemplate.app_id = job.app_id')->where('job.company_id', $companies->getMyKey())->limit(20)->orderBy('job.id DESC')->where($condition)->fetchAll();
 $jobList = new \Ease\TWB4\Table();
 $jobList->addRowHeaderColumns([_('Run template').' / '._('Application'), _('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'), _('Schedule Launch')]);
 
@@ -70,7 +70,7 @@ foreach ($jobs as $job) {
         $job['schedule'] = new \Ease\TWB4\LinkButton('schedule.php?cancel='.$job['id'].'&templateid='.$job['runtemplate_id'].'&app_id='.$job['app_id'].'&company_id='.$companies->getMyKey(), [_('Cancel').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/cancel.svg', _('Cancel'), ['height' => '30px'])], 'danger btn-lg');
     }
 
-    $job['appimage'] = new ATag('runtemplate.php?id='.$job['runtemplate_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], $job['appname'], ['height' => 50, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);
+    $job['uuid'] = new ATag('runtemplate.php?id='.$job['runtemplate_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag('appimage.php?uuid='.$job['uuid'], $job['appname'], ['height' => 50, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);
     unset($job['appname'], $job['runtemplate_id'], $job['app_id']);
 
     $job['id'] = new ATag('job.php?id='.$job['id'], new \Ease\TWB4\Badge('info', $job['id']));

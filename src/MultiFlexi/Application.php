@@ -284,6 +284,7 @@ class Application extends Engine
                     $candidat = $this->listingQuery()->where('uuid', $importData['uuid']);
                 } else {
                     $this->addStatusMessage(_('UUID field not present. '), 'error');
+
                     exit(1);
                 }
 
@@ -295,6 +296,7 @@ class Application extends Engine
                     $currentVersion = \array_key_exists('version', $currentData[0]) ? $currentData[0]['version'] : 'n/a';
                 } else { // Insert
                     $currentVersion = 'n/a';
+
                     if ((\array_key_exists('code', $importData) === false) || empty($importData['code'])) {
                         $importData['code'] = substr(substr(strtoupper($importData['executable'] ? basename($importData['executable']) : $importData['name']), -7), 0, 6);
                         $pos = 0;
@@ -348,7 +350,7 @@ class Application extends Engine
                         echo $exc->getTraceAsString();
                         fwrite(\STDERR, print_r($appSpecRaw, true).\PHP_EOL);
                         $problemData = $this->getData();
-                        $problemData['image'] = substr($problemData['image'],0,20).' ...';
+                        $problemData['image'] = substr($problemData['image'], 0, 20).' ...';
                         fwrite(\STDERR, print_r($problemData, true).\PHP_EOL);
                         echo $exc->getMessage();
                     }
@@ -441,7 +443,7 @@ class Application extends Engine
         if ($a2cfg !== 0) {
             $this->addStatusMessage(sprintf(_('%d Configurations removed'), $a2cfg), null === $a2cfg ? 'error' : 'success');
         }
-        
+
         $a2job = $this->getFluentPDO()->deleteFrom('job')->where('app_id', $appId)->execute();
 
         if ($a2job !== 0) {

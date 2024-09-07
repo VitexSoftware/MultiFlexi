@@ -34,8 +34,8 @@ class AppsSelector extends \Ease\Html\InputTextTag
             'searchField' => ['name', 'description', 'homepage'],
         ];
 
-        $properties['render']['item'] = 'function (item, escape) { return "<div class=container><div class=row> <div class=col-md-2><a href=app.php?id=" + escape(item.id) + "><img height=40 align=left src=\"" + escape(item.image) + "\"></a></div><div class=col-md-7>&nbsp;" + escape(item.name) + "</div><div class=col-md-3><a href='.$optionsPage.'?id=" + escape(item.id) + "&interval='.$identifier.' style=\"font-size: 30px; padding: 5px;\" >🛠️️</a></div> </div></div>" }';
-        $properties['render']['option'] = 'function (item, escape) { return "<div><img height=40 align=right src=\"" + escape(item.image) + "\">" + escape(item.name) + "<br><small>" + escape(item.description) + "</small></div>" }';
+        $properties['render']['item'] = 'function (item, escape) { return "<div class=container><div class=row> <div class=col-md-2><a href=app.php?id=" + escape(item.id) + "><img height=40 align=left src=\"appimage.php?uuid=" + escape(item.uuid) + "\"></a></div><div class=col-md-7>&nbsp;" + escape(item.name) + "</div><div class=col-md-3><a href='.$optionsPage.'?id=" + escape(item.id) + "&interval='.$identifier.' style=\"font-size: 30px; padding: 5px;\" >🛠️️</a></div> </div></div>" }';
+        $properties['render']['option'] = 'function (item, escape) { return "<div><img height=40 align=right src=\"appimage.php?uuid=" + escape(item.uuid) + "\">" + escape(item.name) + "<br><small>" + escape(item.description) + "</small></div>" }';
         $properties['plugins'] = ['remove_button'];
 
         $this->selectize($properties, self::translateColumns($this->availbleApps(), ['name', 'description']));
@@ -45,7 +45,7 @@ class AppsSelector extends \Ease\Html\InputTextTag
     {
         $apper = new \MultiFlexi\Application();
 
-        return $apper->listingQuery()->select(['id', 'name', 'description', 'homepage', 'image'], true)->fetchAll();
+        return $apper->listingQuery()->select(['id', 'name', 'description', 'homepage', 'uuid'], true)->fetchAll();
     }
 
     /**
