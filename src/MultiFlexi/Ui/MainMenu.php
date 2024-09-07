@@ -97,7 +97,7 @@ class MainMenu extends \Ease\Html\DivTag
     {
         $appsMenu = [
             'app.php' => _('Register Application'),
-            ];
+        ];
 
         if (!empty($apps)) {
             $appsMenu['apps.php'] = _('Application list');
