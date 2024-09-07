@@ -439,16 +439,16 @@ class Application extends Engine
             $this->addStatusMessage(sprintf(_('%d Config fields removed'), $a2rt), null === $a2rt ? 'error' : 'success');
         }
 
+        $a2cfg = $this->getFluentPDO()->deleteFrom('configuration')->where('app_id', $appId)->execute();
+
+        if ($a2cfg !== 0) {
+            $this->addStatusMessage(sprintf(_('%d Configurations removed'), $a2cfg), null === $a2cfg ? 'error' : 'success');
+        }
+        
         $a2job = $this->getFluentPDO()->deleteFrom('job')->where('app_id', $appId)->execute();
 
         if ($a2job !== 0) {
             $this->addStatusMessage(sprintf(_('%d Jobs removed'), $a2job), null === $a2job ? 'error' : 'success');
-        }
-
-        $a2cfg = $this->getFluentPDO()->deleteFrom('configuration')->where('app_id', $appId)->execute();
-
-        if ($a2cfg !== 0) {
-            $this->addStatusMessage(sprintf(_('%d Jobs removed'), $a2cfg), null === $a2cfg ? 'error' : 'success');
         }
 
         return parent::deleteFromSQL($data);
