@@ -36,7 +36,7 @@ if (\array_key_exists('1', $argv) && file_exists($argv[1])) {
         $apper->logBanner();
     }
 
-    if (empty($apper->JsonAppRemove($argv[1]))) {
+    if (empty($apper->jsonAppRemove($argv[1]))) {
         $apper->addStatusMesssage(_('Error importing application json'), 'error');
 
         exit(1);
