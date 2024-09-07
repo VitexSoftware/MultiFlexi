@@ -295,11 +295,6 @@ class Application extends Engine
                     $currentVersion = \array_key_exists('version', $currentData[0]) ? $currentData[0]['version'] : 'n/a';
                 } else { // Insert
                     $currentVersion = 'n/a';
-
-
-
-
-
                     if ((\array_key_exists('code', $importData) === false) || empty($importData['code'])) {
                         $importData['code'] = substr(substr(strtoupper($importData['executable'] ? basename($importData['executable']) : $importData['name']), -7), 0, 6);
                         $pos = 0;
@@ -352,7 +347,9 @@ class Application extends Engine
                     } catch (\PDOException $exc) {
                         echo $exc->getTraceAsString();
                         fwrite(\STDERR, print_r($appSpecRaw, true).\PHP_EOL);
-                        fwrite(\STDERR, print_r($this->getData(), true).\PHP_EOL);
+                        $problemData = $this->getData();
+                        $problemData['logo'] = substr($problemData['logo'],0,20).' ...';
+                        fwrite(\STDERR, print_r($problemData, true).\PHP_EOL);
                         echo $exc->getMessage();
                     }
                 }
@@ -371,7 +368,7 @@ class Application extends Engine
      *
      * @return bool app removal status
      */
-    public function JsonAppRemove($jsonFile)
+    public function jsonAppRemove($jsonFile)
     {
         $success = true;
         $importData = json_decode(file_get_contents($jsonFile), true);
