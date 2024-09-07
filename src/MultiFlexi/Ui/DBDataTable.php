@@ -35,22 +35,21 @@ class DBDataTable extends \Ease\Html\TableTag
     /**
      * Buttons to render on top of the datatable.
      */
-    public array $buttons = null;
+    public array $buttons;
 
     /**
      * Buttons to show by default.
      */
-    public array $defaultButtons = ['reload', 'copy', 'excel', 'print', 'pdf', 'pageLength',
-        'colvis'];
-    public array $columns = null;
+    public array $defaultButtons = ['reload', 'copy', 'excel', 'print', 'pdf', 'pageLength', 'colvis'];
+    public array $columns;
 
     /**
      * Add footer columns.
      */
     public bool $showFooter = false;
-    public DatabaseEngine $engine = null;
+    public $engine;
     public handle $rndId;
-    private array $columnDefs = [];
+    private $columnDefs;
 
     /**
      * Common database engine.

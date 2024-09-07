@@ -95,10 +95,12 @@ class MainMenu extends \Ease\Html\DivTag
      */
     public function appsMenuEnabled($nav, $apps): void
     {
-        $appsMenu = ['app.php' => _('Register Application')];
+        $appsMenu = [
+            'app.php' => _('Register Application'),
+            ];
 
         if (!empty($apps)) {
-            $appsMenu['apps.php'] = _('Application list');
+            $appsMenu['applist.php'] = _('Application list');
         }
 
         $nav->addDropDownMenu(
