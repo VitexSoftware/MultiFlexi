@@ -19,6 +19,9 @@ tests: vendor
 vendor: composer.json composer.lock ## Installs composer dependencies
 	composer install
 
+.PHONY: cs
+cs: ## Update Coding Standards
+	vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --diff --verbose
 
 clean:
 	rm -rf vendor composer.lock db/multiflexi.sqlite src/*/*dataTables*
@@ -136,5 +139,3 @@ packages:
 codingstandards:
 	phpcbf --colors --standard=PSR12 --extensions=php --ignore=vendor/ src/ 
 
-cs:
-	vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --diff --verbose
