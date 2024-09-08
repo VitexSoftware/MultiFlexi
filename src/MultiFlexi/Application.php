@@ -22,7 +22,7 @@ namespace MultiFlexi;
  */
 class Application extends DBEngine
 {
-    public $lastModifiedColumn;
+    public ?string $lastModifiedColumn;
     public Company $company;
 
     /**

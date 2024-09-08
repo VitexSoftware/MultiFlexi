@@ -40,7 +40,7 @@ class DBEngine extends \Ease\SQL\Engine
      * Prefill new Record form with values.
      */
     public ?array $defaults = null;
-    public ?string $modifiedColumn; // 'updated_at';
+    public ?string $lastModifiedColumn; // 'updated_at';
 
     /**
      * Search results targeting to index.php here.
@@ -216,12 +216,12 @@ class DBEngine extends \Ease\SQL\Engine
             }
 
             if (
-                isset($this->modifiedColumn) && !\array_key_exists(
-                    $this->modifiedColumn,
+                isset($this->lastModifiedColumn) && !\array_key_exists(
+                    $this->lastModifiedColumn,
                     $columns,
                 )
             ) {
-                $columns[$this->modifiedColumn] = ['name' => $this->modifiedColumn,
+                $columns[$this->lastModifiedColumn] = ['name' => $this->lastModifiedColumn,
                     'type' => 'datetime',
                     'label' => _('Updated'), 'readonly' => true];
             }
@@ -268,7 +268,7 @@ class DBEngine extends \Ease\SQL\Engine
 
             switch ($columnName) {
                 case $keyColum:
-                case $this->modifiedColumn:
+                case $this->lastModifiedColumn:
                 case $this->createColumn:
                     $values['type'] = 'display';
 
@@ -852,8 +852,8 @@ class DBEngine extends \Ease\SQL\Engine
                     $data[$this->createColumn] = date('Y-m-d H:i:s');
                 }
 
-                if ($this->modifiedColumn) {
-                    unset($data[$this->modifiedColumn]);
+                if ($this->lastModifiedColumn) {
+                    unset($data[$this->lastModifiedColumn]);
                 }
 
                 break;
@@ -862,8 +862,8 @@ class DBEngine extends \Ease\SQL\Engine
                     unset($data[$this->createColumn]);
                 }
 
-                if ($this->modifiedColumn) {
-                    $data[$this->modifiedColumn] = date('Y-m-d H:i:s');
+                if ($this->lastModifiedColumn) {
+                    $data[$this->lastModifiedColumn] = date('Y-m-d H:i:s');
                 }
 
                 break;

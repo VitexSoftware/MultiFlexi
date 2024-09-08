@@ -29,7 +29,7 @@ class Customer extends DBEngine
         $this->myTable = 'customer';
         $this->keyword = 'customer';
         $this->createColumn = 'DatCreate';
-        $this->modifiedColumn = 'DatSave';
+        $this->lastModifiedColumn = 'DatSave';
         parent::__construct($init, $filter);
     }
 

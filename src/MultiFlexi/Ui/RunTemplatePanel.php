@@ -75,10 +75,16 @@ $.ajax({
                 interval: $(this).val()
         },
         error: function() {
+            $('#
+EOD.$this->runtemplate->getMyKey().<<<'EOD'
+_interval').after( "⚰️" );
             console.log("not saved");
         },
 
         success: function(data) {
+            $('#
+EOD.$this->runtemplate->getMyKey().<<<'EOD'
+_interval').after( "💾" );
             console.log("saved");
         },
             type: 'POST'

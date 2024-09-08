@@ -61,7 +61,7 @@ class RunTemplate extends Engine
             $this->notifyZabbix($this->getData());
         }
 
-        return $state ? $this->dbsync() : $this->deleteFromSQL();
+        return $this->dbsync();
     }
 
     public function performInit(): void
