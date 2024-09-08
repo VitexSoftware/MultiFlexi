@@ -210,7 +210,7 @@ class Job extends Engine
     }
 
     /**
-     * Check App Provisionning state.
+     * Check App Provisioning state.
      *
      * @param int $appId
      * @param int $companyId
@@ -345,7 +345,7 @@ EOD;
     }
 
     /**
-     * Send Job phase Message to zabbix.
+     * Send Job phase Message to Zabbix.
      *
      * @param array $messageData override fields
      */
@@ -416,7 +416,7 @@ EOD;
     /**
      * Obtain Job Error Output.
      *
-     * @return string job stderr
+     * @return string job StdErr
      */
     public function getErrorOutput()
     {
