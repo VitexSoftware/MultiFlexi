@@ -25,6 +25,21 @@ require_once './init.php';
 $oPage->onlyForLogged();
 
 $runTemplate = new RunTemplate(WebPage::getRequestValue('id', 'int'));
+
+if (WebPage::getRequestValue('new', 'int') === 1) {
+    $app = new Application(WebPage::getRequestValue('app_id', 'int'));
+    $runTemplate->setDataValue('app_id', WebPage::getRequestValue('app_id', 'int'));
+    $runTemplate->setDataValue('company_id', WebPage::getRequestValue('company_id', 'int'));
+    $runTemplate->setDataValue('interv', 'n');
+    $runTemplate->setDataValue('name', _($app->getRecordName()));
+    $runTemplate->dbsync();
+}
+
+if (WebPage::getRequestValue('delete', 'int') === 2) {
+    $runTemplate->deleteFromSQL();
+    $oPage->redirect('companyapp.php?company_id='.$runTemplate->getDataValue('company_id').'&app_id='.$runTemplate->getDataValue('app_id'));
+}
+
 $companies = new Company($runTemplate->getDataValue('company_id'));
 $app = new Application($runTemplate->getDataValue('app_id'));
 

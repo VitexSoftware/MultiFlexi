@@ -89,6 +89,9 @@ class RunTemplate extends Engine
             $data = $this->getData();
         }
 
+        $configurator = new \MultiFlexi\Configuration();
+        $configurator->deleteFromSQL(['runtemplate_id' => $this->getMyKey()]);
+
         return parent::deleteFromSQL($data);
     }
 

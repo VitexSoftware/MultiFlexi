@@ -1,8 +1,15 @@
-multiflexi (1.14.0) UNRELEASED; urgency=medium
+multiflexi (1.15.0) UNRELEASED; urgency=medium
 
+  * Runtemplate remove action added
+
+ --  <vitezslav.dvorak@spojenet.cz>  Tue, 10 Sep 2024 14:40:01 +0200
+
+multiflexi (1.14.0) jammy; urgency=medium
+
+  [ vitex ]
   * Config Form Dialogs support added
 
- -- vitex <info@vitexsoftware.cz>  Sun, 01 Sep 2024 23:27:39 +0200
+ --  <vitezslav.dvorak@spojenet.cz>  Tue, 10 Sep 2024 14:39:59 +0200
 
 multiflexi (1.13.1) jammy; urgency=medium
 
