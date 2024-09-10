@@ -24,10 +24,11 @@ namespace MultiFlexi\AbraFlexi;
 class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
 {
     use \Ease\SQL\Orm;
-    public $keyword = 'company';
-    public $nameColumn = 'name';
-    public $createColumn = 'DatCreate';
-    public $lastModifiedColumn = 'DatUpdate';
+    public ?string $company;
+    public ?string $keyword = 'company';
+    public string $nameColumn = 'name';
+    public ?string $createColumn = 'DatCreate';
+    public ?string $lastModifiedColumn = 'DatUpdate';
 
     /**
      * SQL Table we use.
@@ -43,7 +44,7 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
      */
     public function __construct($init = null, $options = [])
     {
-        parent::__construct(null, $options);
+        $this->company = '';
         $this->setMyTable('company');
         $this->setKeyColumn('id');
         $this->setupProperty($options, 'company', 'ABRAFLEXI_COMPANY');
@@ -58,6 +59,7 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
             $this->loadFromSQL($init);
             $this->setCompany($this->getDataValue('company'));
         }
+        parent::__construct(null, $options);
 
         $this->updateApiURL();
         $this->curlInit();
@@ -503,7 +505,7 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
     public function getEnvironment()
     {
         $serverEnvironment = $this->getServerEnvironment();
-        $companyEnvHelper = new \MultiFlexi\CompanyEnv($this->getMyKey());
+        $companyEnvHelper = new \MultiFlexi\CompanyEnv($this->getDataValue('id'));
         $companyEnvironment = $companyEnvHelper->getData();
         $companyEnvironment['ABRAFLEXI_COMPANY'] = $this->getCompany(); // TODO
 

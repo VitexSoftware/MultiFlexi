@@ -41,7 +41,7 @@ class JobHistoryTable extends \Ease\TWB4\Table
                     ->orderBy('job.id DESC')
                     ->fetchAll();
         $this->addRowHeaderColumns([_('Application'), _('Exit Code').'/'._('Job ID'), _('Launch time'), _('Launcher'), _('Company')]);
-        $company = new \AbraFlexi\Company();
+        $company = new \MultiFlexi\Company();
 
         foreach ($jobs as $job) {
             $exitCode = $job['exitcode'];
