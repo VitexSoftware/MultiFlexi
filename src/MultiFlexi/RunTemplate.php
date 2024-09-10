@@ -57,11 +57,13 @@ class RunTemplate extends Engine
      */
     public function setState(bool $state)
     {
+        $changed = $this->dbsync();
+
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
             $this->notifyZabbix($this->getData());
         }
 
-        return $this->dbsync();
+        return $changed;
     }
 
     public function performInit(): void
@@ -219,7 +221,7 @@ class RunTemplate extends Engine
         }
 
         $packet = new ZabbixPacket();
-        $packet->addMetric((new ZabbixMetric('job-['.$company->getDataValue('code').'-'.$application->getDataValue('code').'-'.$jobInfo['id'].'-interval_seconds]', Job::codeToSeconds($jobInfo['interv'])))->withHostname($hostname));
+        $packet->addMetric((new ZabbixMetric('job-['.$company->getDataValue('code').'-'.$application->getDataValue('code').'-'.$jobInfo['id'].'-interval_seconds]', (string) Job::codeToSeconds($jobInfo['interv'])))->withHostname($hostname));
 
         try {
             $result = $zabbixSender->send($packet);
