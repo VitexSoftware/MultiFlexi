@@ -52,11 +52,15 @@ $runtemplatesRaw = $runTemplater->listingQuery()->where('app_id', $application->
 
 $runtemplatesDiv = new DivTag();
 
-foreach ($runtemplatesRaw as $runtemplateData) {
-    $runtemplateRow = new Row();
-    $runtemplateRow->addColumn(2, '⚗️&nbsp;#'.(string) $runtemplateData['id']);
-    $runtemplateRow->addColumn(6, $runtemplateData['name']);
-    $runtemplatesDiv->addItem(new ATag('runtemplate.php?id='.$runtemplateData['id'], $runtemplateRow));
+if ($runtemplatesRaw->count()) {
+    foreach ($runtemplatesRaw as $runtemplateData) {
+        $runtemplateRow = new Row();
+        $runtemplateRow->addColumn(2, '⚗️&nbsp;#'.(string) $runtemplateData['id']);
+        $runtemplateRow->addColumn(6, $runtemplateData['name']);
+        $runtemplatesDiv->addItem(new ATag('runtemplate.php?id='.$runtemplateData['id'], $runtemplateRow));
+    }
+} else {
+    $runtemplatesDiv->addItem(new LinkButton('runtemplate.php?new=1&app_id='.$application->getMyKey().'&company_id='.$companer->getMyKey(), '⚗️&nbsp;➕'._('new'), 'success'));
 }
 
 $jobs = (new Job())->listingQuery()->select(['job.id', 'begin', 'exitcode', 'launched_by', 'login'], true)->leftJoin('user ON user.id = job.launched_by')->where('company_id', $companer->getMyKey())->where('app_id', $application->getMyKey())->limit(10)->orderBy('job.id DESC')->fetchAll();
