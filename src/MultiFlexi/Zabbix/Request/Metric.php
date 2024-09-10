@@ -36,7 +36,7 @@ class Metric implements \JsonSerializable
     }
 
     /**
-     * Add custom hostname to metric.
+     * Add custom HostName to metric.
      */
     public function withHostname(string $hostname)
     {

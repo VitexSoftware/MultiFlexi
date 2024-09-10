@@ -59,6 +59,7 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
             $this->loadFromSQL($init);
             $this->setCompany($this->getDataValue('company'));
         }
+
         parent::__construct(null, $options);
 
         $this->updateApiURL();

@@ -21,7 +21,8 @@
         "rcubitto/json-pretty": "dev-master",
         "phplucidframe/console-table": "dev-master",
         "goat1000/svggraph": "dev-master",
-        "peppeocchi/php-cron-scheduler": "dev-master"
+        "peppeocchi/php-cron-scheduler": "dev-master",
+        "vitexsoftware/ease-core-bricks": "dev-master"
     },
     "license": "MIT",
     "authors": [
