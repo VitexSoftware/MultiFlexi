@@ -1,0 +1,8 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "multiflexi"
+authors = [{name = "Vítězslav Dvořák", email = "info@vitexsoftware.com"}]
+dynamic = ["version", "description"]

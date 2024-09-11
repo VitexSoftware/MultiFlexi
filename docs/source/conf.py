@@ -2,9 +2,9 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'MultiFlexi'
+copyright = '2024, VitexSoftware'
+author = 'Vitex'
 
 release = '0.1'
 version = '0.1.0'
