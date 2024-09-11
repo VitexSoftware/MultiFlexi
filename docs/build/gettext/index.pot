@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, VitexSoftware
+# This file is distributed under the same license as the MultiFlexi package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: MultiFlexi 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-12 01:05+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/index.rst:2
+msgid "Welcome to MultiFlexi's documentation!"
+msgstr ""
+
+#: ../../source/index.rst:4
+msgid "**MultiFlexi** is an environment that allows you to run various tools on top of AbraFlexi and Stormware Pohoda. It provides a flexible and customizable platform for integrating and extending the functionality of these software systems."
+msgstr ""
+
+#: ../../source/index.rst:7
+msgid "With MultiFlexi, you can leverage the power of AbraFlexi and Stormware Pohoda to build and automate complex business processes. It offers a wide range of features and capabilities, including data synchronization, workflow automation, reporting, and more."
+msgstr ""
+
+#: ../../source/index.rst:10
+msgid "By utilizing MultiFlexi, you can streamline your business operations, improve efficiency, and enhance collaboration between different systems. Whether you need to integrate AbraFlexi and Stormware Pohoda with other applications, create custom workflows, or generate advanced reports, MultiFlexi provides the tools and framework to make it happen."
+msgstr ""
+
+#: ../../source/index.rst:14
+msgid "To get started with MultiFlexi, refer to the :doc:`usage` section for detailed instructions on installation and usage."
+msgstr ""
+
+#: ../../source/index.rst:16
+msgid "Please note that MultiFlexi is currently under active development, so be sure to check for updates and new features regularly."
+msgstr ""
+
+#: ../../source/index.rst:18
+msgid "For more information about the API and how to interact with MultiFlexi programmatically, refer to the :doc:`api` section."
+msgstr ""
+
+#: ../../source/index.rst:21
+msgid "Check out the :doc:`usage` section for further information, including how to :ref:`installation` the project."
+msgstr ""
+
+#: ../../source/index.rst:26
+msgid "This project is under active development."
+msgstr ""
+
+#: ../../source/index.rst:29
+msgid "Contents"
+msgstr ""

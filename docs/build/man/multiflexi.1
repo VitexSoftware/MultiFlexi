@@ -1,0 +1,175 @@
+.\" Man page generated from reStructuredText.
+.
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.TH "MULTIFLEXI" "1" "Sep 12, 2024" "0.1.0" "MultiFlexi"
+.SH NAME
+multiflexi \- MultiFlexi 0.1
+.sp
+\fBMultiFlexi\fP is an environment that allows you to run various tools on top of AbraFlexi and Stormware Pohoda.
+It provides a flexible and customizable platform for integrating and extending the functionality of these software systems.
+.sp
+With MultiFlexi, you can leverage the power of AbraFlexi and Stormware Pohoda to build and automate complex business processes.
+It offers a wide range of features and capabilities, including data synchronization, workflow automation, reporting, and more.
+.sp
+By utilizing MultiFlexi, you can streamline your business operations, improve efficiency, and enhance collaboration between different systems.
+Whether you need to integrate AbraFlexi and Stormware Pohoda with other applications, create custom workflows, or generate advanced reports,
+MultiFlexi provides the tools and framework to make it happen.
+.sp
+To get started with MultiFlexi, refer to the \fI\%Usage\fP section for detailed instructions on installation and usage.
+.sp
+Please note that MultiFlexi is currently under active development, so be sure to check for updates and new features regularly.
+.sp
+For more information about the API and how to interact with MultiFlexi programmatically, refer to the \fI\%API\fP section.
+.sp
+Check out the \fI\%Usage\fP section for further information, including
+how to \fI\%Installation\fP the project.
+.sp
+\fBNOTE:\fP
+.INDENT 0.0
+.INDENT 3.5
+This project is under active development.
+.UNINDENT
+.UNINDENT
+.SH CONTENTS
+To install MultiFlexi using Debian packages, you can follow these steps:
+.INDENT 0.0
+.IP 1. 3
+Prepare your system by running the following commands in a terminal:
+.INDENT 3.0
+.INDENT 3.5
+\fB\(gabash
+sudo apt update
+sudo apt install lsb\-release apt\-transport\-https bzip2 ca\-certificates curl
+\(ga\fP
+.UNINDENT
+.UNINDENT
+.IP 2. 3
+Choose stability by running the following commands:
+.INDENT 3.0
+.INDENT 3.5
+\fB\(gabash
+curl \-sSLo /tmp/multiflexi\-archive\-keyring.deb https://repo.multiflexi.eu/multiflexi\-archive\-keyring.deb
+dpkg \-i /tmp/multiflexi\-archive\-keyring.deb
+sh \-c \(aqecho \(dqdeb [signed\-by=/usr/share/keyrings/repo.multiflexi.eu.gpg] https://repo.multiflexi.eu/ $(lsb_release \-sc) main\(dq > /etc/apt/sources.list.d/multiflexi.list\(aq
+\(ga\fP
+.UNINDENT
+.UNINDENT
+.IP 3. 3
+Update the package sources by running the following command:
+.INDENT 3.0
+.INDENT 3.5
+\fB\(gabash
+sudo apt update
+\(ga\fP
+.UNINDENT
+.UNINDENT
+.IP 4. 3
+Install MultiFlexi for the chosen database by running the following command:
+.INDENT 3.0
+.INDENT 3.5
+\fB\(gabash
+sudo apt install multiflexi\-mysql
+\(ga\fP
+.UNINDENT
+.UNINDENT
+.IP 5. 3
+Check for available applications by running the following command:
+.INDENT 3.0
+.INDENT 3.5
+\fB\(gabash
+apt search multiflexi
+\(ga\fP
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.sp
+That\(aqs it! You have successfully updated the installation instructions for MultiFlexi using Debian packages.
+.SS Usage
+.SS Installation
+.sp
+To use MultiFlexi, first install it using pip:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ sudo apt install multiflexi\-mysql
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS Commandline Interface
+.sp
+To use the MultiFlexi commandline interface, run the following command:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ multiflexi\-cli
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+This will open the MultiFlexi CLI, where you can interact with the system using various commands.
+.SS Web Interface
+.sp
+To access the MultiFlexi web interface, open your web browser and navigate to the following URL:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+http://localhost/multiflexi
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+This will take you to the MultiFlexi login page, where you can enter your credentials to access the system.
+.SS API
+.sp
+To interact with MultiFlexi programmatically, you can use the MultiFlexi API. The API provides a set of endpoints that allow you to perform various operations on the system, such as creating, updating, and deleting records.
+.sp
+For more information about the API and how to use it, refer to the \fI\%API\fP section of the documentation.
+.sp
+That\(aqs it! You have successfully installed MultiFlexi and are ready to start using it.
+.SS API
+.TS
+center;
+||.
+_
+.TE
+.SH AUTHOR
+Vitex
+.SH COPYRIGHT
+2024, VitexSoftware
+.\" Generated by docutils manpage writer.
+.

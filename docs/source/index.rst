@@ -30,6 +30,6 @@ Contents
 
 .. toctree::
 
-   installation
+   install
    usage
    api
