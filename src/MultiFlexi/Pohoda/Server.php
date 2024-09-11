@@ -22,11 +22,11 @@ namespace MultiFlexi\Pohoda;
  */
 class Server extends \MultiFlexi\Engine implements \MultiFlexi\platformServer
 {
-    /**
-     * SQL Table we use.
-     */
-    public string $myTable = 'servers';
-
+    public function __construct($identifier = null, $options = []) {
+        $this->myTable = 'servers';
+        parent::__construct($identifier, $options);
+    }
+    
     /**
      * Pohoda Server Environment variables.
      *
