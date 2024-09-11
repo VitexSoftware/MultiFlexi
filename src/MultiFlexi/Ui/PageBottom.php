@@ -25,7 +25,7 @@ class PageBottom extends \Ease\Html\FooterTag
     public const BUILD = '';
 
     /**
-     * Zobrazí přehled právě přihlášených a spodek stránky.
+     * Displays the bottom of the page.
      */
     public function finalize(): void
     {
@@ -43,7 +43,7 @@ class PageBottom extends \Ease\Html\FooterTag
             $composer = '../composer.lock';
         }
 
-        $author = '<strong><a href="https://multiflexi.eu/">MultiFlexi</a></strong> '.\Ease\Shared::appVersion().(empty(self::BUILD) ? '' : '&nbsp;'._('build').' #'.self::BUILD).'<br>'._('the age of the installation').'&nbsp;&nbsp; &copy; 2020-2024 <a href="https://vitexsoftware.com/">Vitex Software</a>';
+        $author = '<strong><a href="https://multiflexi.eu/">MultiFlexi</a></strong> '.\Ease\Shared::appVersion().(empty(self::BUILD) ? '' : '&nbsp;'._('build').' #'.self::BUILD).'<br>&nbsp;&nbsp; &copy; 2020-2024 <a href="https://vitexsoftware.com/">Vitex Software</a>';
 
         //  '&nbsp;' . new \Ease\ui\LiveAge(filemtime($composer))
 

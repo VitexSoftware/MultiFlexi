@@ -44,14 +44,17 @@ $runTemplateButton = new \Ease\TWB4\LinkButton('runtemplate.php?id='.$runTemplat
 $appPanel = new ApplicationPanel($apps, $outputTabs, new JobInfo($jobber));
 $appPanel->headRow->addColumn(2, $runTemplateButton);
 
-$relaunchButton = new \Ease\TWB4\LinkButton('launch.php?id='.$runTemplate->getMyKey().'&app_id='.$appInfo['app_id'].'&company_id='.$appInfo['company_id'], '&lt;'._('Relaunch').'💨', 'success btn-lg btn-block');
+//$relaunchButton = new \Ease\TWB4\LinkButton('launch.php?id='.$runTemplate->getMyKey().'&app_id='.$appInfo['app_id'].'&company_id='.$appInfo['company_id'], '&lt;'._('Relaunch').'💨', 'success btn-lg btn-block');
 
-// $previousButton = new \Ease\TWB4\LinkButton('job.php?id=', '◀️'. ' ' . _('Previous'), 'info btn-lg btn-block');
-// $nextButton = new \Ease\TWB4\LinkButton('job.php?id=',  _('Next') .' ' . '▶️️', 'info btn-lg btn-block');
+$scheduleButton = new \Ease\TWB4\LinkButton('schedule.php?id='.$runTemplate->getMyKey().'&app_id='.$appInfo['app_id'].'&company_id='.$appInfo['company_id'], [_('Schedule').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
 
-// $appPanel->headRow->addColumn(2, $previousButton);
-$appPanel->headRow->addColumn(2, $relaunchButton);
-// $appPanel->headRow->addColumn(2, $nextButton);
+
+$previousButton = new \Ease\TWB4\LinkButton('job.php?id='.$jobber->getPreviousJobId(true, true, true), '◀️ '._('Previous'), 'info btn-lg btn-block');
+$nextButton = new \Ease\TWB4\LinkButton('job.php?id='.$jobber->getNextJobId(true, true, true), _('Next').' ▶️️', 'info btn-lg btn-block');
+
+$appPanel->headRow->addColumn(2, $previousButton);
+$appPanel->headRow->addColumn(2, $scheduleButton);
+$appPanel->headRow->addColumn(2, $nextButton);
 
 $oPage->container->addItem(
     new CompanyPanel(new \MultiFlexi\Company($appInfo['company_id']), $appPanel),
