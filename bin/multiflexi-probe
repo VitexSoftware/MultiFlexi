@@ -4,7 +4,7 @@ echoerr() { printf "%s\n" "$*" >&2; }
 
 echo Commandline:
 echo
-echo $0 $@
+echo "$0" "$@"
 echo
 echo ---------------------------------------------------------------------------
 echo Attachment:
@@ -18,4 +18,9 @@ echo
 echo ---------------------------------------------------------------------------
 echo Environment:
 env
+
+if [ -n "$RESULT_FILE" ]; then
+    env | jq -R 'split("=") | {(.[0]): .[1]}' | jq -s add > "$RESULT_FILE"
+fi
+
 echoerr "StdErr Output example"

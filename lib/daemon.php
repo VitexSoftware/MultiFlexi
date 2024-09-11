@@ -24,7 +24,7 @@ if (\Ease\Shared::cfg('ZABBIX_SERVER') && \Ease\Shared::cfg('ZABBIX_HOST') && cl
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
 
-if (\Ease\Shared::cfg('APP_DEBUG') === 'true') {
+if (strtolower(\Ease\Shared::cfg('APP_DEBUG', 'false')) === 'true') {
     $loggers[] = 'console';
 }
 

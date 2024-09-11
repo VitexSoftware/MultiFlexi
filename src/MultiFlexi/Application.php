@@ -82,6 +82,8 @@ class Application extends DBEngine
             //            $data['code'] = substr(substr(strtoupper($data['executable'] ? basename($data['executable']) : $data['name']), -7), 0, 6);
         }
 
+        unset($data['class']);
+
         return parent::takeData($data);
     }
 
@@ -478,7 +480,7 @@ class Application extends DBEngine
         return parent::columns([
             ['name' => 'id', 'type' => 'text', 'label' => _('ID'),
                 'detailPage' => 'app.php', 'valueColumn' => 'apps.id', 'idColumn' => 'apps.id', ],
-            ['name' => 'icon', 'type' => 'text', 'label' => _('Icon')],
+            ['name' => 'icon', 'type' => 'text', 'label' => _('Icon'), 'searchable' => false],
             ['name' => 'name', 'type' => 'text', 'label' => _('Name')],
             ['name' => 'description', 'type' => 'text', 'label' => _('Description')],
             ['name' => 'version', 'type' => 'text', 'label' => _('Version')],
