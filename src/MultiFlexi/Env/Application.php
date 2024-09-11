@@ -20,14 +20,15 @@ namespace MultiFlexi\Env;
  *
  * @author vitex
  */
-class Application extends \MultiFlexi\Environmentor implements injector {
-
+class Application extends \MultiFlexi\Environmentor implements injector
+{
     /**
      * List of all known keys.
      *
      * @return array
      */
-    public static function allKeysHandled() {
+    public static function allKeysHandled()
+    {
         return [];
     }
 
@@ -36,13 +37,14 @@ class Application extends \MultiFlexi\Environmentor implements injector {
      *
      * @return array
      */
-    public function compileEnv() {
+    public function compileEnv()
+    {
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\\Env');
         $injectors = \Ease\Functions::classesInNamespace('MultiFlexi\\Env');
         $jobEnv = [];
 
         foreach ($injectors as $injector) {
-            $injectorClass = '\\MultiFlexi\\Env\\' . $injector;
+            $injectorClass = '\\MultiFlexi\\Env\\'.$injector;
             $jobEnv = array_merge($jobEnv, (new $injectorClass($this))->getEnvironment());
         }
 
@@ -52,7 +54,8 @@ class Application extends \MultiFlexi\Environmentor implements injector {
     /**
      * Obtain Environment to configure application.
      */
-    public function getEnvironment(): array {
+    public function getEnvironment(): array
+    {
         $customConfig = new \MultiFlexi\Configuration();
         $appConfig = [];
 
@@ -61,8 +64,9 @@ class Application extends \MultiFlexi\Environmentor implements injector {
         }
 
         $appConfigs = \MultiFlexi\Conffield::getAppConfigs($this->engine->application->getMyKey());
+
         if (\array_key_exists($this->engine->application->getDataValue('resultfile'), $appConfigs)) {
-            $appConfig[$this->engine->application->getDataValue('resultfile')]['value'] = sys_get_temp_dir() . '/' . \Ease\Functions::randomString(10);
+            $appConfig[$this->engine->application->getDataValue('resultfile')]['value'] = sys_get_temp_dir().'/'.\Ease\Functions::randomString(10);
         }
 
         return $this->addMetaData($this->addSelfAsSource($appConfig));
@@ -71,14 +75,16 @@ class Application extends \MultiFlexi\Environmentor implements injector {
     /**
      * @return string
      */
-    public static function name() {
+    public static function name()
+    {
         return _('Application');
     }
 
     /**
      * @return string
      */
-    public static function description() {
+    public static function description()
+    {
         return _('Provide per Application Custom environment');
     }
 }
