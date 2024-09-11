@@ -77,3 +77,9 @@ Depends: ${misc:Depends},multiflexi
 Architecture: all
 Description: MultiFlexi support for RaiffeisenBank
  RaiffeisenBank connection dialog
+
+#Package: multiflexi-dev
+#Depends: multiflexi,jq
+#Architecture: all
+#Description: MultiFlexi debugging tools
+# MultiFlexi prober script

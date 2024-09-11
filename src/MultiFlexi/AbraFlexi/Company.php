@@ -24,9 +24,7 @@ namespace MultiFlexi\AbraFlexi;
 class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
 {
     use \Ease\SQL\Orm;
-    public ?string $company;
     public ?string $keyword = 'company';
-    public string $nameColumn = 'name';
     public ?string $createColumn = 'DatCreate';
     public ?string $lastModifiedColumn = 'DatUpdate';
 
@@ -45,6 +43,7 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
     public function __construct($init = null, $options = [])
     {
         $this->company = '';
+        $this->nameColumn = 'name';
         $this->setMyTable('company');
         $this->setKeyColumn('id');
         $this->setupProperty($options, 'company', 'ABRAFLEXI_COMPANY');

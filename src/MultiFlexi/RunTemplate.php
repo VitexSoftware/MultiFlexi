@@ -57,6 +57,9 @@ class RunTemplate extends Engine
      */
     public function setState(bool $state)
     {
+        if($state === false){
+            $this->setDataValue('interv', 'n');
+        }
         $changed = $this->dbsync();
 
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {

@@ -175,6 +175,9 @@ class Job extends Engine
         $sqlLogger->setCompany(0);
         $sqlLogger->setApplication(0);
 
+        $resultFileField = $this->application->getDataValue('resultfile');
+        $resultfile = \array_key_exists($resultFileField, $this->executor->environment) ? $this->executor->environment[$resultFileField]['value'] : '';
+
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
             $this->reportToZabbix([
                 'phase' => 'jobDone',
@@ -184,6 +187,7 @@ class Job extends Engine
                 'company_name' => $this->company->getRecordName(),
                 'app_id' => $this->runTemplate->getDataValue('app_id'),
                 'app_name' => $this->application->getRecordName(),
+                'data' => file_exists($resultfile) ? file_get_contents($resultfile) : '',
                 'stdout' => $stdout,
                 'stderr' => $stderr,
                 'exitcode' => $statusCode,
@@ -198,6 +202,10 @@ class Job extends Engine
         ]);
 
         $this->performActions($statusCode === 0 ? 'success' : 'fail');
+
+        if (file_exists($resultfile)) {
+            unlink($resultfile);
+        }
 
         return $this->updateToSQL([
             'end' => new \Envms\FluentPDO\Literal(\Ease\Shared::cfg('DB_CONNECTION') === 'sqlite' ? "date('now')" : 'NOW()'),

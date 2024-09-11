@@ -37,7 +37,7 @@ class DBEngine extends \Ease\SQL\Engine
     public ?array $filter = null;
 
     /**
-     * Prefill new Record form with values.
+     * PreFill new Record form with values.
      */
     public ?array $defaults = null;
     public ?string $lastModifiedColumn; // 'updated_at';
@@ -61,6 +61,7 @@ class DBEngine extends \Ease\SQL\Engine
     public array $columnsCache = [];
     public ?array $initConds = null;
     public ?string $detailPage = null;
+    public bool $selectizeData = false;
 
     /**
      * Data Processing Engine.
@@ -309,6 +310,7 @@ class DBEngine extends \Ease\SQL\Engine
     public function getAllForDataTable($conditions = [])
     {
         $data = [];
+        $this->selectizeData = true;
         $tableColumns = $this->columns();
         $dtColumns = \array_key_exists('columns', $conditions) ? $conditions['columns'] : array_keys($tableColumns);
         unset($conditions['columns'], $conditions['_'], $conditions['class']);
@@ -319,11 +321,15 @@ class DBEngine extends \Ease\SQL\Engine
         if ($recordsTotal) {
             if (\array_key_exists('search', $conditions) && $conditions['search']['value']) { // All Columns Search
                 foreach ($tableColumns as $colProps) {
-                    $search = "LIKE '%".strtolower($conditions['search']['value'])."%'";
-                    $query->whereOr(' LOWER('.(\array_key_exists(
-                        'column',
-                        $colProps,
-                    ) ? $colProps['column'] : $this->getMyTable().'.`'.$colProps['name'].'`').') '.$search);
+                    $searchable = \array_key_exists('searchable', $colProps) ? (bool) $colProps['searchable'] : true;
+
+                    if ($searchable) {
+                        $search = "LIKE '%".strtolower($conditions['search']['value'])."%'";
+                        $query->whereOr(' LOWER('.(\array_key_exists(
+                            'column',
+                            $colProps,
+                        ) ? $colProps['column'] : $this->getMyTable().'.`'.$colProps['name'].'`').') '.$search);
+                    }
                 }
 
                 unset($conditions['search']);
@@ -428,9 +434,11 @@ class DBEngine extends \Ease\SQL\Engine
      */
     public function addSelectizeValues($query)
     {
-        foreach ($this->columns() as $colName => $colProps) {
-            if (\array_key_exists('valueColumn', $colProps)) {
-                $query->select($colProps['valueColumn'].' as '.$colName.'_value');
+        if ($this->selectizeData) {
+            foreach ($this->columns() as $colName => $colProps) {
+                if (\array_key_exists('valueColumn', $colProps)) {
+                    $query->select($colProps['valueColumn'].' as '.$colName.'_value');
+                }
             }
         }
 

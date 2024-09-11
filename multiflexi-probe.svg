@@ -35,13 +35,13 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="1920"
-     inkscape:window-height="1130"
+     inkscape:window-height="1120"
      id="namedview39"
      showgrid="false"
      inkscape:zoom="0.6152282"
-     inkscape:cx="1057.3313"
-     inkscape:cy="590.83768"
-     inkscape:window-x="1920"
+     inkscape:cx="1060.5821"
+     inkscape:cy="591.65038"
+     inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg3430"
@@ -354,117 +354,67 @@
          result="composite2"
          id="feComposite1551" />
     </filter>
+    <filter
+       inkscape:label="Black Hole"
+       inkscape:menu="Morphology"
+       inkscape:menu-tooltip="Creates a black light inside and outside"
+       height="1.0441137"
+       width="1.0594339"
+       y="-0.022056837"
+       x="-0.029716946"
+       style="color-interpolation-filters:sRGB"
+       id="filter776">
+      <feGaussianBlur
+         stdDeviation="5"
+         in="SourceAlpha"
+         result="result1"
+         id="feGaussianBlur764" />
+      <feComposite
+         operator="arithmetic"
+         k2="3.2"
+         k1="-1"
+         k4="-2"
+         result="result3"
+         in2="result1"
+         id="feComposite766"
+         k3="0" />
+      <feColorMatrix
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 10 0 "
+         result="result2"
+         id="feColorMatrix768" />
+      <feComposite
+         result="fbSourceGraphic"
+         in="SourceGraphic"
+         operator="out"
+         in2="result2"
+         id="feComposite770" />
+      <feBlend
+         mode="multiply"
+         in="result1"
+         in2="fbSourceGraphic"
+         result="result91"
+         id="feBlend772" />
+      <feBlend
+         mode="screen"
+         in="fbSourceGraphic"
+         in2="result91"
+         id="feBlend774" />
+    </filter>
   </defs>
   <g
-     id="g4190"
-     transform="matrix(1.1697152,0,0,1.1697152,521.92762,609.42549)">
-    <g
-       transform="matrix(1.25,0,0,-1.25,-464.4007,-115.70074)"
-       id="g3795"
-       style="filter:url(#filter4622)">
-      <g
-         id="g3793"
-         transform="matrix(28.377017,0,0,-28.377017,108.79034,8415.5854)">
-        <g
-           id="g3791"
-           transform="matrix(0.015609,0,0,-0.015609,-18.251,294.31)"
-           style="clip-rule:evenodd;image-rendering:optimizeQuality;shape-rendering:geometricPrecision">
-          <path
-             id="path3783"
-             d="M 1708.7,0 1842.5,231.62 1976.2,0 Z"
-             inkscape:connector-curvature="0"
-             style="fill:#f9ae2d" />
-          <path
-             id="path3785"
-             d="m 1708.7,0 -133.75,231.62 h 267.53 z"
-             inkscape:connector-curvature="0"
-             style="fill:#d28b25" />
-          <path
-             id="path3787"
-             d="M 1574.9,231.62 1708.65,463.3 1842.43,231.62 Z"
-             inkscape:connector-curvature="0"
-             style="fill:#936327" />
-          <path
-             id="path3789"
-             d="M 1708.7,463.3 H 1441.2 L 1173.6,0 h 267.56 l 267.47,463.3"
-             inkscape:connector-curvature="0"
-             style="fill:#767a7c" />
-        </g>
-      </g>
-    </g>
-    <g
-       transform="matrix(-0.62121385,-1.0847089,-1.0847089,0.62121385,107.50515,141.82674)"
-       style="filter:url(#filter4622)"
-       id="g3777">
-      <g
-         style="filter:url(#filter4135)"
-         transform="matrix(28.377017,0,0,-28.377017,108.79034,8415.5854)"
-         id="g3775">
-        <g
-           style="clip-rule:evenodd;image-rendering:optimizeQuality;shape-rendering:geometricPrecision"
-           transform="matrix(0.015609,0,0,-0.015609,-18.251,294.31)"
-           id="g3773">
-          <path
-             style="fill:#f9ae2d"
-             inkscape:connector-curvature="0"
-             d="M 1708.7,0 1842.5,231.62 1976.2,0 Z"
-             id="path3765" />
-          <path
-             style="fill:#d28b25"
-             inkscape:connector-curvature="0"
-             d="m 1708.7,0 -133.75,231.62 h 267.53 z"
-             id="path3767" />
-          <path
-             style="fill:#936327"
-             inkscape:connector-curvature="0"
-             d="M 1574.9,231.62 1708.65,463.3 1842.43,231.62 Z"
-             id="path3769" />
-          <path
-             style="fill:#767a7c"
-             inkscape:connector-curvature="0"
-             d="M 1708.7,463.3 H 1441.2 L 1173.6,0 h 267.56 l 267.47,463.3"
-             id="path3771" />
-        </g>
-      </g>
-    </g>
-    <g
-       transform="matrix(-0.61769877,1.0867144,1.0867144,0.61769877,42.359851,-484.23306)"
-       id="g3476"
-       style="filter:url(#filter4017)">
-      <g
-         style="filter:url(#filter4622)"
-         id="g4514">
-        <g
-           transform="matrix(28.377017,0,0,-28.377017,108.79034,8415.5854)"
-           id="g14">
-          <g
-             style="clip-rule:evenodd;image-rendering:optimizeQuality;shape-rendering:geometricPrecision"
-             transform="matrix(0.015609,0,0,-0.015609,-18.251,294.31)"
-             id="g12">
-            <path
-               style="fill:#f9ae2d"
-               inkscape:connector-curvature="0"
-               d="M 1708.7,0 1842.5,231.62 1976.2,0 Z"
-               id="path4" />
-            <path
-               style="fill:#d28b25"
-               inkscape:connector-curvature="0"
-               d="m 1708.7,0 -133.75,231.62 h 267.53 z"
-               id="path6" />
-            <path
-               style="fill:#936327"
-               inkscape:connector-curvature="0"
-               d="M 1574.9,231.62 1708.65,463.3 1842.43,231.62 Z"
-               id="path8" />
-            <path
-               style="fill:#767a7c"
-               inkscape:connector-curvature="0"
-               d="M 1708.7,463.3 H 1441.2 L 1173.6,0 h 267.56 l 267.47,463.3"
-               id="path10" />
-          </g>
-        </g>
-      </g>
-    </g>
+     id="g249"
+     transform="matrix(1.3246338,0,0,1.3246338,-598.58196,-231.73128)"
+     style="fill:#ffd42a;fill-opacity:1;filter:url(#filter776)">
+    <path
+       id="path5740"
+       style="color:#000000;text-indent:0;text-transform:none;fill:#ffd42a;fill-opacity:1;fill-rule:evenodd"
+       inkscape:connector-curvature="0"
+       d="m 713.47,204.89 v 74.226 c -91.83,18.86 -161.52,100.63 -161.52,197.79 0,96.668 69.012,178.12 160.15,197.51 L 645.092,607.408 686.15,566.35 c -26.951,-20.333 -44.214,-52.667 -44.214,-89.444 0,-48.051 29.471,-88.501 71.524,-104.52 v 115.53 L 854.98,346.396 713.47,204.886 Z" />
+    <path
+       id="path2985"
+       style="color:#000000;text-indent:0;text-transform:none;fill:#ffd42a;fill-opacity:1;fill-rule:evenodd"
+       inkscape:connector-curvature="0"
+       d="m 795.61,279.41 67.008,66.993 -41.074,41.074 c 26.961,20.328 44.23,52.647 44.23,89.428 0,48.051 -29.47,88.512 -71.524,104.54 v -115.55 l -141.52,141.52 141.52,141.52 v -74.226 c 91.812,-18.87 161.51,-100.65 161.51,-197.79 0,-96.667 -69.01,-178.1 -160.15,-197.49 z" />
   </g>
   <g
      id="g2026"
