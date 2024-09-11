@@ -48,7 +48,7 @@ class Company extends \MultiFlexi\Company implements \MultiFlexi\platformCompany
      *
      * @return array
      */
-    public function getEnvironment()
+    public function getEnvironment(): array
     {
         $companyEnvironment = $this->getServerEnvironment();
         $companyEnvironment['POHODA_ICO']['value'] = $this->getDataValue('ic');

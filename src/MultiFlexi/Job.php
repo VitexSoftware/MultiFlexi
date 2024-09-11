@@ -80,19 +80,19 @@ class Job extends Engine
         $this->myTable = 'job';
         $this->runTemplate = new RunTemplate();
         parent::__construct($identifier, $options);
+        $this->setObjectName();
 
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
             $this->zabbixSender = new ZabbixSender(\Ease\Shared::cfg('ZABBIX_SERVER'));
         }
 
-        $this->setObjectName();
     }
 
     /**
      * Create New Job Record in database.
      *
      * @param int    $runtemplateId Job is performed in terms of given runtemplate
-     * @param array  $environment   Environmet prepared for Job execution
+     * @param array  $environment   Environment prepared for Job execution
      * @param string $scheduled     Schedule Info
      * @param string $executor      Chosen Executor class name
      *
@@ -190,6 +190,7 @@ class Job extends Engine
                 'data' => file_exists($resultfile) ? file_get_contents($resultfile) : '',
                 'stdout' => $stdout,
                 'stderr' => $stderr,
+                'version' => $this->application->getDataValue('version'),
                 'exitcode' => $statusCode,
                 'end' => (new \DateTime())->format('Y-m-d H:i:s')]);
         }
