@@ -29,13 +29,13 @@ namespace MultiFlexi\Pohoda;
  */
 class Company extends \MultiFlexi\Company implements \MultiFlexi\platformCompany
 {
-
-    public function __construct($identifier = null, $options = []) {
+    public function __construct($identifier = null, $options = [])
+    {
         $this->myTable = 'company';
-        
+
         parent::__construct($identifier, $options);
     }
-    
+
     public function getServerEnvironment()
     {
         $server = new Server($this->getDataValue('server'));

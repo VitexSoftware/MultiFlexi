@@ -132,11 +132,11 @@ class Company extends \MultiFlexi\Engine
 
     /**
      * Company Environment.
-     *
-     * @return array
      */
-    public function getEnvironment()
+    public function getEnvironment(): array
     {
-        return (new CompanyEnv($this->getMyKey()))->getData();
+        $env = (new CompanyEnv($this->getMyKey()))->getData();
+
+        return $env ? $env : [];
     }
 }
