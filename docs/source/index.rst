@@ -1,10 +1,11 @@
 .. title:: MultiFlexi Documentation
 
-
-
-
 Welcome to MultiFlexi's documentation!
 ======================================
+
+.. image:: ../../multiflexi.svg
+   :alt: MultiFlexi Logo
+   :align: center
 
 **MultiFlexi** is an environment that allows you to run various tools on top of AbraFlexi and Stormware Pohoda.
 It provides a flexible and customizable platform for integrating and extending the functionality of these software systems.
