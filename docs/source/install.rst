@@ -1,3 +1,10 @@
+Installation Guide
+==================
+
+.. contents::
+
+This is the installation guide for MultiFlexi.
+
 To install MultiFlexi using Debian packages, you can follow these steps:
 
 1. Prepare your system by running the following commands in a terminal:

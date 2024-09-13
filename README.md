@@ -25,6 +25,8 @@ nebo
 
 ⊕ proměnné prostředí dle individuální konfigurace každého modulu pro každou firmu
 
+See the https://multiflexi.readthedocs.io/ for complete documentation
+
 Demo
 ----
 
