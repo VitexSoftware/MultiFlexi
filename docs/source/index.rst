@@ -1,3 +1,8 @@
+.. title:: MultiFlexi Documentation
+
+
+
+
 Welcome to MultiFlexi's documentation!
 ======================================
 
@@ -29,7 +34,10 @@ Contents
 --------
 
 .. toctree::
+   :maxdepth: 2
+   :caption: Contents:
 
    install
+   generated/multiflexi
    usage
    api

@@ -6,7 +6,7 @@ Usage
 Installation
 ------------
 
-To use MultiFlexi, first install it using pip:
+To use MultiFlexi, first install it using apt:
 
 .. code-block:: console
 
