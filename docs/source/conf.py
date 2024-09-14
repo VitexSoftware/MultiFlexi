@@ -34,4 +34,6 @@ html_theme = "shibuya"
 # -- Options for EPUB output
 epub_show_urls = 'footnote'
 
-html_logo = "../../images/project-logo.svg"
+html_logo = "../../src/images/project-logo.svg"
+
+
