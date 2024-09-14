@@ -22,14 +22,14 @@ namespace MultiFlexi;
  */
 class Token extends Engine
 {
-    
-    public function __construct($identifier = null, $options = []) {
+    public function __construct($identifier = null, $options = [])
+    {
         $this->nameColumn = 'token';
         $this->myTable = 'token';
         $this->createColumn = 'start';
         parent::__construct($identifier, $options);
     }
-    
+
     /**
      * @return \MultiFlexi\User
      */

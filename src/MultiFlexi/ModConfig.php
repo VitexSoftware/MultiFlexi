@@ -22,7 +22,11 @@ namespace MultiFlexi;
  */
 class ModConfig extends Engine
 {
-    public $myTable = 'modconfig';
+    public function __construct($identifier = null, $options = [])
+    {
+        $this->myTable = 'modconfig';
+        parent::__construct($identifier, $options);
+    }
 
     public function getConf($module, $key)
     {
