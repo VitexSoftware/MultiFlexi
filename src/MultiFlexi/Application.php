@@ -314,7 +314,7 @@ class Application extends DBEngine
                 }
 
                 if ($currentVersion === $newVersion) {
-                    $this->addStatusMessage('🧩📦 '.$importData['name'].'('.$currentVersion.') already present', 'info');
+                    $this->addStatusMessage('🧩📦 '.$importData['name'].' ('.$currentVersion.') already present', 'info');
                     $fields = [true];
                 } else {
                     $this->takeData($importData);
