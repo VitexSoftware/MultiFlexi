@@ -66,7 +66,7 @@ class ColumnsForm extends Form
         $tagProperties['name'] = \get_class($engine);
         parent::__construct($tagProperties, [], $formContents);
         $this->newRow();
-        $this->savers = new DivTag(null,['style' => 'text-align: right'],);
+        $this->savers = new DivTag(null, ['style' => 'text-align: right']);
     }
 
     /**
