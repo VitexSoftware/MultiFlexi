@@ -22,13 +22,13 @@ namespace MultiFlexi;
  */
 class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
 {
-    public $myTable = 'log';
+    public string $myTable = 'log';
     public $companyId;
     public $applicationId;
     public $userId;
 
     /**
-     * Saves obejct instace (singleton...).
+     * Saves object instace (singleton...).
      */
     private static $instance;
 
