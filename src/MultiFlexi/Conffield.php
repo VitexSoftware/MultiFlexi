@@ -22,7 +22,7 @@ namespace MultiFlexi;
  */
 class Conffield extends \Ease\SQL\Engine
 {
-    public $myTable = 'conffield';
+    public string $myTable = 'conffield';
 
     public function takeData($data)
     {
