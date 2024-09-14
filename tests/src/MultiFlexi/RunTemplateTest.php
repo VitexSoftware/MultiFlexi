@@ -30,7 +30,9 @@ class RunTemplateTest extends \PHPUnit\Framework\TestCase
      */
     protected function setUp(): void
     {
-        $this->object = new RunTemplate();
+        $rt = new RunTemplate();
+        $rtid = $rt->listingQuery()->limit(1)->fetch('id');
+        $this->object = new RunTemplate($rtid);
     }
 
     /**

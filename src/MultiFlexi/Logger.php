@@ -26,22 +26,18 @@ use SensioLabs\AnsiConverter\AnsiToHtmlConverter;
  */
 class Logger extends DBEngine
 {
-    public $myTable = 'log';
+    public string $myTable = 'log';
     public $myKeyColumn = 'id';
-    public $createColumn = 'created';
-    public $modifiedColumn = 'created';
-    public $nameColumn = 'heading';
-
-    /**
-     * Search resuts targeting to  here.
-     */
-    public string $keyword = 'dbmessage';
+    public ?string $createColumn = 'created';
+    public ?string $modifiedColumn = 'created';
 
     /**
      * @param int $id
      */
     public function __construct($id = null)
     {
+        $this->nameColumn = 'heading';
+        $this->keyword = 'dbmessage';
         parent::__construct($id);
     }
 

@@ -25,7 +25,7 @@ use MultiFlexi\Application;
  */
 class AppsMenu extends MainPageMenu
 {
-    public Application $apper = null;
+    public Application $apper;
 
     /**
      * Application Status Menu.
@@ -41,9 +41,9 @@ class AppsMenu extends MainPageMenu
     }
 
     /**
-     * Add Appliaction card.
+     * Add Application card.
      *
-     * @param int    $id         appliaction ID
+     * @param int    $id         application ID
      * @param string $nazev
      * @param string $popis
      * @param string $executable
