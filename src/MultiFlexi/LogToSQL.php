@@ -22,19 +22,18 @@ namespace MultiFlexi;
  */
 class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
 {
-    public string $myTable = 'log';
     public $companyId;
     public $applicationId;
     public $userId;
 
     /**
-     * Saves object instace (singleton...).
+     * Saves object instance (singleton...).
      */
     private static $instance;
 
     public function __construct()
     {
-        //        parent::__construct();
+        $this->setmyTable('log');
         $this->setUser(User::singleton()->getUserID());
     }
 
