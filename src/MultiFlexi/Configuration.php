@@ -22,7 +22,6 @@ namespace MultiFlexi;
  */
 class Configuration extends \Ease\SQL\Engine
 {
-
     public function __construct($identifier = null, $options = [])
     {
         $this->myTable = 'configuration';
