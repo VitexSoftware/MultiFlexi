@@ -21,7 +21,7 @@ use MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
 /**
  * @author vitex
  */
-class RunTemplate extends Engine
+class RunTemplate extends \MultiFlexi\Engine
 {
     /**
      * @param mixed $identifier
@@ -104,10 +104,15 @@ class RunTemplate extends Engine
     public function getCompanyEnvironment()
     {
         $connectionData = $this->getAppInfo();
-        $platformHelperClass = '\\MultiFlexi\\'.$connectionData['type'].'\\Company';
-        $platformHelper = new $platformHelperClass($connectionData['company_id'], $connectionData);
 
-        return $platformHelper->getEnvironment();
+        if ($connectionData['type']) {
+            $platformHelperClass = '\\MultiFlexi\\'.$connectionData['type'].'\\Company';
+            $platformHelper = new $platformHelperClass($connectionData['company_id'], $connectionData);
+
+            return $platformHelper->getEnvironment();
+        }
+
+        return [];
     }
 
     /**

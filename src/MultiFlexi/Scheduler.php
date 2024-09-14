@@ -22,10 +22,10 @@ namespace MultiFlexi;
  */
 class Scheduler extends Engine
 {
-    public $myTable = 'schedule';
+    public string $myTable = 'schedule';
 
     /**
-     * Save Job excution time.
+     * Save Job execution time.
      */
     public function addJob(Job $job, \DateTime $when)
     {

@@ -35,18 +35,18 @@ class ColumnsForm extends Form
     /**
      * Řádek.
      */
-    public Row $row = null;
+    public Row $row;
 
     /**
      * Počet položek na řádek.
      */
     public int $itemsPerRow = 3;
-    public SysEngine $engine = null;
+    public SysEngine $engine;
 
     /**
      * Odesílací tlačítka.
      */
-    public \Ease\Html\Div $savers = null;
+    public \Ease\Html\Div $savers;
 
     /**
      * Formulář Bootstrapu.
@@ -66,10 +66,7 @@ class ColumnsForm extends Form
         $tagProperties['name'] = \get_class($engine);
         parent::__construct($tagProperties, [], $formContents);
         $this->newRow();
-        $this->savers = new DivTag(
-            null,
-            ['style' => 'text-align: right'],
-        );
+        $this->savers = new DivTag(null,['style' => 'text-align: right'],);
     }
 
     /**

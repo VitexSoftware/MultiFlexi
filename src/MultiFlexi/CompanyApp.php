@@ -22,7 +22,6 @@ namespace MultiFlexi;
  */
 class CompanyApp extends Engine
 {
-    public $myTable = 'companyapp';
     public ?Company $company;
 
     /**
@@ -30,6 +29,7 @@ class CompanyApp extends Engine
      */
     public function __construct(?Company $company = null, $options = [])
     {
+        $this->myTable = 'companyapp';
         parent::__construct(null, $options);
         $this->company = $company;
     }

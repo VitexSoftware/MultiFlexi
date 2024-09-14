@@ -28,7 +28,7 @@ class ServerApi extends AbstractServerApi
     /**
      * Api Handler Engine.
      */
-    public \MultiFlexi\Servers $engine = null;
+    public \MultiFlexi\Servers $engine;
 
     /**
      * Prepare Servers engine.

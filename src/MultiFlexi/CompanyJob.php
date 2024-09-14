@@ -17,7 +17,7 @@ namespace MultiFlexi;
 
 class CompanyJob extends DBEngine implements DatabaseEngine
 {
-    public $myTable = 'job';
+    public string $myTable = 'job';
     public $companyId;
     public $appId;
 
