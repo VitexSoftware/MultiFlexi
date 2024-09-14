@@ -3,7 +3,7 @@
 Welcome to MultiFlexi's documentation!
 ======================================
 
-.. image:: ../../multiflexi.svg
+.. image:: ../../project-logo.svg
    :alt: MultiFlexi Logo
    :align: center
 
