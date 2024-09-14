@@ -22,7 +22,6 @@ namespace MultiFlexi;
  */
 class CompanyEnv extends \Ease\SQL\Engine
 {
-    public $myTable = 'companyenv';
     private int $companyID;
 
     /**
@@ -31,6 +30,7 @@ class CompanyEnv extends \Ease\SQL\Engine
      */
     public function __construct($companyID = null, $options = [])
     {
+        $this->myTable = 'companyenv';
         parent::__construct(null, $options);
         $this->companyID = $companyID;
         $this->loadEnv();
