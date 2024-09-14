@@ -22,20 +22,20 @@ namespace MultiFlexi;
  */
 class Configuration extends \Ease\SQL\Engine
 {
-    public $myTable = 'configuration';
 
     public function __construct($identifier = null, $options = [])
     {
+        $this->myTable = 'configuration';
         parent::__construct($identifier, $options);
     }
 
     /**
-     * Uloží pole dat do SQL. Pokud je $SearchForID 0 updatuje pokud ze nastaven  keyColumn.
+     * Save data array to SQL. If $searchForID is false, update if keyColumn is set.
      *
-     * @param array $data        asociativní pole dat
-     * @param bool  $searchForID Zjistit zdali updatovat nebo insertovat
+     * @param array $data        Associative array of data
+     * @param bool  $searchForID Determine whether to update or insert
      *
-     * @return null|int ID záznamu nebo null v případě neůspěchu
+     * @return null|int Record ID or null on failure
      */
     public function saveToSQL($data = null, $searchForID = false)
     {
