@@ -27,7 +27,7 @@ namespace MultiFlexi;
  */
 class ActionConfig extends Engine
 {
-    public $myTable = 'actionconfig';
+    public string $myTable = 'actionconfig';
 
     //        $table->addColumn('name', 'string', ['comment' => 'Module per company configurations'])
     //                ->addColumn('module', 'string', ['comment' => 'Configuration belongs to'])
