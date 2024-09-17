@@ -296,7 +296,7 @@ class Application extends DBEngine
                     $this->setMyKey($candidat->fetchColumn());
                     $currentData = $candidat->fetchAll();
                     $currentVersion = \array_key_exists('version', $currentData[0]) ? $currentData[0]['version'] : 'n/a';
-                    $this->addStatusMessage(sprintf(_('Current Record: #%s - %s'), $currentData['id'], $currentData['name']), 'debug');
+                    $this->addStatusMessage(sprintf(_('Current Record: #%s - %s'), $currentData[0]['id'], $currentData[0]['name']), 'debug');
                 } else { // Insert
                     $currentVersion = 'n/a';
 
