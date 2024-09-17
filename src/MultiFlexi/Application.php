@@ -296,6 +296,7 @@ class Application extends DBEngine
                     $this->setMyKey($candidat->fetchColumn());
                     $currentData = $candidat->fetchAll();
                     $currentVersion = \array_key_exists('version', $currentData[0]) ? $currentData[0]['version'] : 'n/a';
+                    $this->addStatusMessage(sprintf(_('Current Record: #%s - %s'), $currentData['id'], $currentData['name']), 'debug');
                 } else { // Insert
                     $currentVersion = 'n/a';
 
@@ -350,7 +351,6 @@ class Application extends DBEngine
                         }
                     } catch (\PDOException $exc) {
                         echo $exc->getTraceAsString();
-                        fwrite(\STDERR, print_r($appSpecRaw, true).\PHP_EOL);
                         $problemData = $this->getData();
                         $problemData['image'] = substr($problemData['image'], 0, 20).' ...';
                         fwrite(\STDERR, print_r($problemData, true).\PHP_EOL);
