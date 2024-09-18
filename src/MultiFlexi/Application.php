@@ -291,14 +291,17 @@ class Application extends DBEngine
                 }
 
                 $newVersion = \array_key_exists('version', $importData) ? $importData['version'] : 'n/a';
+                $newName = $importData['name'];
 
                 if ($candidat->count()) { // Update
                     $this->setMyKey($candidat->fetchColumn());
                     $currentData = $candidat->fetchAll();
                     $currentVersion = \array_key_exists('version', $currentData[0]) ? $currentData[0]['version'] : 'n/a';
+                    $currentName = $currentData[0]['name'];
                     $this->addStatusMessage(sprintf(_('Current Record: #%s - %s'), $currentData[0]['id'], $currentData[0]['name']), 'debug');
                 } else { // Insert
                     $currentVersion = 'n/a';
+                    $currentName = '';
 
                     if ((\array_key_exists('code', $importData) === false) || empty($importData['code'])) {
                         $importData['code'] = substr(substr(strtoupper($importData['executable'] ? basename($importData['executable']) : $importData['name']), -7), 0, 6);
@@ -318,6 +321,10 @@ class Application extends DBEngine
                     $this->addStatusMessage('🧩📦 '.$importData['name'].' ('.$currentVersion.') already present', 'info');
                     $fields = [true];
                 } else {
+                    if ($currentName === $newName) {
+                        unset($importData['name']);
+                    }
+
                     $this->takeData($importData);
 
                     try {
