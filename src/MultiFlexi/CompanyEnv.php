@@ -22,7 +22,7 @@ namespace MultiFlexi;
  */
 class CompanyEnv extends \Ease\SQL\Engine
 {
-    private int $companyID;
+    private ?int $companyID;
 
     /**
      * @param int   $companyID
