@@ -321,6 +321,8 @@ class Application extends DBEngine
                     $this->takeData($importData);
 
                     try {
+                        $this->addStatusMessage(sprintf(_('Saving #%s - %s'), $this->getMyKey(), $this->getRecordName().' '.$this->getDataValue('uuid')), 'debug');
+
                         if ($this->dbsync()) {
                             $fields = [];
 
