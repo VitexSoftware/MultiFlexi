@@ -329,7 +329,7 @@ class Application extends DBEngine {
                                 }
                             }
 
-                            $this->addStatusMessage('🧩📦 ' . $importData['name'] . '(' . $currentVersion . ' ➟ ' . $newVersion . '): ' . implode(',', $fields), 'success');
+                            $this->addStatusMessage('🧩📦 ' . $this->getRecordName() . '(' . $currentVersion . ' ➟ ' . $newVersion . '): ' . implode(',', $fields), 'success');
                             $executable = self::findBinaryInPath($this->getDataValue('executable'));
 
                             if (empty($executable)) {
