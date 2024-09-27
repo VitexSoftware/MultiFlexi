@@ -372,7 +372,7 @@ class Application extends DBEngine {
         $importData = json_decode(file_get_contents($jsonFile), true);
 
         if (\is_array($importData)) {
-            $candidat = $this->listingQuery()->whereOr('uuid', $importData['uuid'])->whereOr('name', $importData['name']);
+            $candidat = $this->listingQuery()->where('uuid', $importData['uuid']);
 
             if ($candidat->count()) {
                 foreach ($candidat as $candidatData) {
