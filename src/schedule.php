@@ -52,11 +52,13 @@ if (null === $runTemplate->getMyKey()) {
             }
         }
 
-        $jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, '', \Ease\WebPage::getRequestValue('executor'));
+        $prepared = $jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, '', \Ease\WebPage::getRequestValue('executor'));
         $jobber->scheduleJobRun(new \DateTime($when));
 
-        $oPage->container->addItem(new JobInfo($jobber));
-        $oPage->container->addItem(new \Ease\TWB4\LinkButton('job.php?id='.$jobber->getMyKey(), _('Job details'), 'info btn-block'));
+        $oPage->container->addItem(new CompanyPanel($company, [new ApplicationPanel(
+            $app,
+            [new \Ease\Html\DivTag(nl2br($prepared)), new \Ease\TWB4\LinkButton('job.php?id='.$jobber->getMyKey(), _('Job details'), 'info btn-block')],
+        )]));
     } else {
         if ($jobID) {
             $scheduler = new \MultiFlexi\Scheduler();
@@ -66,7 +68,9 @@ if (null === $runTemplate->getMyKey()) {
 
             $oPage->container->addItem(new \Ease\TWB4\Label('success', _('Job Canceled')));
         } else {
-            $oPage->container->addItem(new CompanyPanel($company, [new ApplicationInfo($app, $company), new JobScheduleForm($app, $company)]));
+            $oPage->container->addItem(
+                new CompanyPanel($company, [new ApplicationPanel($app, new JobScheduleForm($app, $company))]),
+            );
         }
     }
 }

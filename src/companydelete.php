@@ -65,7 +65,7 @@ if ($oPage->isPosted()) {
 
 $instanceName = $companies->getDataValue('name');
 
-if (\strlen($instanceName)) {
+if (empty($instanceName) === false) {
     $instanceLink = new ATag(
         $companies->getApiURL().$companies->getDataValue('company'),
         $companies->getApiURL().$companies->getDataValue('company'),
