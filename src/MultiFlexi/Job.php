@@ -219,19 +219,13 @@ class Job extends Engine
 
     /**
      * Check App Provisioning state.
-     *
-     * @param int $appId
-     * @param int $companyId
-     *
-     * @return null|bool application with setup command provision state or setup command is not set
      */
-    public function isProvisioned($appId, $companyId)
+    public function isProvisioned(int $runtemplateId): bool
     {
-        $appCompany = new RunTemplate();
-        $appCompany->setMyKey($appCompany->runTemplateID($appId, $companyId));
+        $appCompany = new RunTemplate($runtemplateId);
         $appInfo = $appCompany->getAppInfo();
 
-        return $appInfo['prepared'];
+        return (bool) $appInfo['prepared'];
     }
 
     /**
@@ -259,8 +253,9 @@ EOD;
      * @param string $scheduled     Time to launch
      * @param string $executor      Executor Class Name
      */
-    public function prepareJob(int $runTemplateId, $envOverride = [], $scheduled = 'adhoc', $executor = 'Native'): void
+    public function prepareJob(int $runTemplateId, $envOverride = [], $scheduled = 'adhoc', $executor = 'Native'): string
     {
+        $outline = '';
         $this->runTemplate = new RunTemplate($runTemplateId);
         $appId = $this->runTemplate->getDataValue('app_id');
         $companyId = $this->runTemplate->getDataValue('company_id');
@@ -295,7 +290,7 @@ EOD;
 
         $setupCommand = $this->application->getDataValue('setup');
 
-        if ($setupCommand && $this->isProvisioned($appId, $companyId) === 0) {
+        if ($setupCommand && $this->isProvisioned($runTemplateId) === 0) {
             $this->addStatusMessage(_('Perform initial setup'), 'warning');
 
             if (!empty(trim($setupCommand))) {
@@ -320,8 +315,6 @@ EOD;
                             $logger->addStatusMessage($buffer, 'success');
                             $outline = (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert($buffer);
                         }
-
-                        echo new \Ease\Html\DivTag(nl2br($outline));
                     }
                 });
 
@@ -336,6 +329,8 @@ EOD;
                 }
             }
         }
+
+        return $outline;
     }
 
     /**
