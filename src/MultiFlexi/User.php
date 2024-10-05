@@ -241,7 +241,7 @@ class User extends \Ease\User
      *
      * @return bool
      */
-    public function logout()
+    public function logout(): bool
     {
         $this->dataReset();
 
