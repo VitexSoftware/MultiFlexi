@@ -22,7 +22,7 @@ use MultiFlexi\Ui\AppLaunchForm;
  */
 class AppLaunchFormTest extends \PHPUnit\Framework\TestCase
 {
-    protected AppLaunchForm $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

@@ -22,7 +22,7 @@ use MultiFlexi\Ui\CompanyEditorForm;
  */
 class RegisterCompanyFormTest extends \PHPUnit\Framework\TestCase
 {
-    protected CompanyEditorForm $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

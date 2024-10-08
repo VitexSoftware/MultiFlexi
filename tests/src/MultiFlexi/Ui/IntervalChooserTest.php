@@ -22,7 +22,7 @@ use MultiFlexi\Ui\IntervalChooser;
  */
 class IntervalChooserTest extends \PHPUnit\Framework\TestCase
 {
-    protected IntervalChooser $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

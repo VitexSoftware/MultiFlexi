@@ -22,7 +22,7 @@ use MultiFlexi\User;
  */
 class UserTest extends \PHPUnit\Framework\TestCase
 {
-    protected User $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

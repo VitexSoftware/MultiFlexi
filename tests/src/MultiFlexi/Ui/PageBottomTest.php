@@ -22,7 +22,7 @@ use MultiFlexi\Ui\PageBottom;
  */
 class PageBottomTest extends \PHPUnit\Framework\TestCase
 {
-    protected PageBottom $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

@@ -40,9 +40,4 @@ class PageTop extends \Ease\Html\DivTag
 
         WebPage::singleton()->body->addAsFirst(new MainMenu());
     }
-
-    public function finalize()
-    {
-        return parent::finalize();
-    }
 }

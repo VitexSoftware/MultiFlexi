@@ -22,7 +22,7 @@ use MultiFlexi\Ui\ConfFieldsForm;
  */
 class ConfFieldsFormTest extends \PHPUnit\Framework\TestCase
 {
-    protected ConfFieldsForm $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

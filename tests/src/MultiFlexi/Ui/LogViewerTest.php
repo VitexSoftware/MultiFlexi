@@ -22,7 +22,7 @@ use MultiFlexi\Ui\LogViewer;
  */
 class LogViewerTest extends \PHPUnit\Framework\TestCase
 {
-    protected LogViewer $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

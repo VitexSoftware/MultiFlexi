@@ -22,7 +22,7 @@ use MultiFlexi\Ui\AppRow;
  */
 class AppRowTest extends \PHPUnit\Framework\TestCase
 {
-    protected AppRow $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

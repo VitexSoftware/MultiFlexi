@@ -22,7 +22,7 @@ use MultiFlexi\Ui\DbStatus;
  */
 class DbStatusTest extends \PHPUnit\Framework\TestCase
 {
-    protected DbStatus $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

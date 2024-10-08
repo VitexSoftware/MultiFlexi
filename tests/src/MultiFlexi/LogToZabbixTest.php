@@ -22,7 +22,7 @@ use MultiFlexi\LogToZabbix;
  */
 class LogToZabbixTest extends \PHPUnit\Framework\TestCase
 {
-    protected LogToZabbix $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

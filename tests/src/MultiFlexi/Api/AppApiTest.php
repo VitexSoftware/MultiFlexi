@@ -22,7 +22,7 @@ use MultiFlexi\Api\AppApi;
  */
 class AppApiTest extends \PHPUnit\Framework\TestCase
 {
-    protected AppApi $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

@@ -22,7 +22,7 @@ use MultiFlexi\Auth\OAuthAuthenticator;
  */
 class OAuthAuthenticatorTest extends \PHPUnit\Framework\TestCase
 {
-    protected OAuthAuthenticator $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

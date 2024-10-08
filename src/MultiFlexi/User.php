@@ -238,8 +238,6 @@ class User extends \Ease\User
 
     /**
      * Perform User signoff.
-     *
-     * @return bool
      */
     public function logout(): bool
     {

@@ -22,7 +22,7 @@ use MultiFlexi\Ui\FilterDialog;
  */
 class FilterDialogTest extends \PHPUnit\Framework\TestCase
 {
-    protected FilterDialog $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

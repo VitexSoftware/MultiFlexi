@@ -22,7 +22,7 @@ use MultiFlexi\Ui\MainMenu;
  */
 class MainMenuTest extends \PHPUnit\Framework\TestCase
 {
-    protected MainMenu $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

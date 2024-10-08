@@ -22,7 +22,7 @@ use MultiFlexi\Ui\EnvironmentEditor;
  */
 class EnvironmentEditorTest extends \PHPUnit\Framework\TestCase
 {
-    protected EnvironmentEditor $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

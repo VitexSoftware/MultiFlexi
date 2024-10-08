@@ -22,7 +22,7 @@ use MultiFlexi\Ui\Breadcrumb;
  */
 class BreadcrumbTest extends \PHPUnit\Framework\TestCase
 {
-    protected Breadcrumb $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

@@ -22,7 +22,7 @@ use MultiFlexi\Ui\AppInfo;
  */
 class AppInfoTest extends \PHPUnit\Framework\TestCase
 {
-    protected AppInfo $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

@@ -40,7 +40,7 @@ class DeleteCompanyForm extends EngineForm
 
         $this->addInput(new InputEmailTag('email', null, ['disabled' => true]), _('Send notification to'));
 
-        $this->addInput(new SubmitButton('☠️☠️☠️&nbsp;'._('Confirm company Delete').'&nbsp;☠️☠️☠️', 'danger'));
+        $this->addItem(new SubmitButton('☠️☠️☠️&nbsp;'._('Confirm company Delete').'&nbsp;☠️☠️☠️', 'danger'));
 
         $this->addItem(new InputHiddenTag('id'));
     }

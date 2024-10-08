@@ -22,7 +22,7 @@ use MultiFlexi\CompanyJob;
  */
 class CompanyJobTest extends \PHPUnit\Framework\TestCase
 {
-    protected CompanyJob $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

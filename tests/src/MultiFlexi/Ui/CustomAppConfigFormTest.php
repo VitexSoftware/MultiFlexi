@@ -22,7 +22,7 @@ use MultiFlexi\Ui\CustomAppConfigForm;
  */
 class CustomAppConfigFormTest extends \PHPUnit\Framework\TestCase
 {
-    protected CustomAppConfigForm $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

@@ -22,7 +22,7 @@ use MultiFlexi\Zabbix\Response;
  */
 class ResponseTest extends \PHPUnit\Framework\TestCase
 {
-    protected Response $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

@@ -22,7 +22,7 @@ use MultiFlexi\Ui\RegisterCustomerForm;
  */
 class RegisterCustomerFormTest extends \PHPUnit\Framework\TestCase
 {
-    protected RegisterCustomerForm $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

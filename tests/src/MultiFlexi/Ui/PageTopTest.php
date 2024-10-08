@@ -22,7 +22,7 @@ use MultiFlexi\Ui\PageTop;
  */
 class PageTopTest extends \PHPUnit\Framework\TestCase
 {
-    protected PageTop $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

@@ -22,7 +22,7 @@ use MultiFlexi\Pohoda\Server;
  */
 class ServerTest extends \PHPUnit\Framework\TestCase
 {
-    protected Server $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

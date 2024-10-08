@@ -22,7 +22,7 @@ use MultiFlexi\Ui\RegisterServerForm;
  */
 class RegisterServerFormTest extends \PHPUnit\Framework\TestCase
 {
-    protected RegisterServerForm $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

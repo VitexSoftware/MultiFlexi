@@ -22,7 +22,7 @@ use MultiFlexi\Ui\ServerTypeSelect;
  */
 class ServerTypeSelectTest extends \PHPUnit\Framework\TestCase
 {
-    protected ServerTypeSelect $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

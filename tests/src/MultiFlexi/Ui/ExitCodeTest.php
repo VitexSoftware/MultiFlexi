@@ -22,7 +22,7 @@ use MultiFlexi\Ui\ExitCode;
  */
 class ExitCodeTest extends \PHPUnit\Framework\TestCase
 {
-    protected ExitCode $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

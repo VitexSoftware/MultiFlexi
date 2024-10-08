@@ -208,6 +208,7 @@ switch ($command) {
             }
 
             $table->display();
+            // TODO: https://github.com/phplucidframe/console-table/issues/14#issuecomment-2167643219
         } else {
             echo _('No data')."\n";
         }

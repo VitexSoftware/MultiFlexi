@@ -22,7 +22,7 @@ use MultiFlexi\Ui\LaunchButton;
  */
 class LaunchButtonTest extends \PHPUnit\Framework\TestCase
 {
-    protected LaunchButton $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

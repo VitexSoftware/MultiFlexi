@@ -22,7 +22,7 @@ use MultiFlexi\Ui\UserForm;
  */
 class UserFormTest extends \PHPUnit\Framework\TestCase
 {
-    protected UserForm $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
