@@ -22,7 +22,7 @@ use MultiFlexi\LogToSQL;
  */
 class LogToSQLTest extends \PHPUnit\Framework\TestCase
 {
-    protected LogToSQL $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

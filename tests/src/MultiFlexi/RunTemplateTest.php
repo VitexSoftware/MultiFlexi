@@ -22,7 +22,7 @@ use MultiFlexi\RunTemplate;
  */
 class RunTemplateTest extends \PHPUnit\Framework\TestCase
 {
-    protected RunTemplate $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

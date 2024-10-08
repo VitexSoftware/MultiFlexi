@@ -22,7 +22,7 @@ use MultiFlexi\Ui\AppJson;
  */
 class AppJsonTest extends \PHPUnit\Framework\TestCase
 {
-    protected AppJson $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

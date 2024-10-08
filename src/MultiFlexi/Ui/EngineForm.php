@@ -41,10 +41,8 @@ class EngineForm extends Form
 
     /**
      * Add Hidden ID & Class field.
-     *
-     * @return bool
      */
-    public function finalize()
+    public function finalize(): void
     {
         $recordID = $this->engine->getMyKey();
         $this->addItem(new InputHiddenTag('class', \get_class($this->engine)));
@@ -55,6 +53,6 @@ class EngineForm extends Form
 
         $this->fillUp($this->engine->getData());
 
-        return parent::finalize();
+        parent::finalize();
     }
 }

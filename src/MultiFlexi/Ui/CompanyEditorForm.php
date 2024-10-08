@@ -57,7 +57,7 @@ class CompanyEditorForm extends EngineForm
         );
         $this->addItem(new InputHiddenTag('webhook'));
         $this->addInput(new Toggle('enabled'), _('Enabled'));
-        $this->addInput(new SubmitButton(_('Save'), 'success'));
+        $this->addItem(new SubmitButton(_('Save'), 'success'));
 
         if (null !== $this->engine->getDataValue('id')) {
             $this->addItem(new InputHiddenTag('id'));

@@ -22,7 +22,7 @@ use MultiFlexi\CompanyEnv;
  */
 class CompanyEnvTest extends \PHPUnit\Framework\TestCase
 {
-    protected CompanyEnv $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

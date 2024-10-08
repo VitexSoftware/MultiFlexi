@@ -22,7 +22,7 @@ use MultiFlexi\Auth\ApiKeyAuthenticator;
  */
 class ApiKeyAuthenticatorTest extends \PHPUnit\Framework\TestCase
 {
-    protected ApiKeyAuthenticator $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

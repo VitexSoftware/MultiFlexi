@@ -22,7 +22,7 @@ use MultiFlexi\Conffield;
  */
 class ConffieldTest extends \PHPUnit\Framework\TestCase
 {
-    protected Conffield $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

@@ -22,7 +22,7 @@ use MultiFlexi\ModConfig;
  */
 class ModConfigTest extends \PHPUnit\Framework\TestCase
 {
-    protected ModConfig $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

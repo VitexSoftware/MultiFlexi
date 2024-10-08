@@ -22,7 +22,7 @@ use MultiFlexi\DBEngine;
  */
 class DBEngineTest extends \PHPUnit\Framework\TestCase
 {
-    protected DBEngine $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

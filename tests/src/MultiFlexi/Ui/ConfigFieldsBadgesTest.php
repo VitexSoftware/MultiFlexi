@@ -22,7 +22,7 @@ use MultiFlexi\Ui\ConfigFieldsBadges;
  */
 class ConfigFieldsBadgesTest extends \PHPUnit\Framework\TestCase
 {
-    protected ConfigFieldsBadges $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

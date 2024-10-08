@@ -22,7 +22,7 @@ use MultiFlexi\Ui\CompanyAppEnvironmentView;
  */
 class CompanyAppEnvironmentViewTest extends \PHPUnit\Framework\TestCase
 {
-    protected CompanyAppEnvironmentView $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

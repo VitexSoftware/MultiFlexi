@@ -22,7 +22,7 @@ use MultiFlexi\Env\AbraFlexi;
  */
 class AbraFlexiTest extends \PHPUnit\Framework\TestCase
 {
-    protected AbraFlexi $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

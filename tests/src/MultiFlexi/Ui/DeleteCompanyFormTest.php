@@ -22,7 +22,7 @@ use MultiFlexi\Ui\DeleteCompanyForm;
  */
 class DeleteCompanyFormTest extends \PHPUnit\Framework\TestCase
 {
-    protected DeleteCompanyForm $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

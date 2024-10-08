@@ -22,7 +22,7 @@ use MultiFlexi\Zabbix\Request\Metric;
  */
 class MetricTest extends \PHPUnit\Framework\TestCase
 {
-    protected Metric $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

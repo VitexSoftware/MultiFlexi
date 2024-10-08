@@ -22,7 +22,7 @@ use MultiFlexi\Scheduler;
  */
 class SchedulerTest extends \PHPUnit\Framework\TestCase
 {
-    protected Scheduler $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

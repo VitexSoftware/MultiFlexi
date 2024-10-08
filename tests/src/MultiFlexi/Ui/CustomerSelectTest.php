@@ -22,7 +22,7 @@ use MultiFlexi\Ui\CustomerSelect;
  */
 class CustomerSelectTest extends \PHPUnit\Framework\TestCase
 {
-    protected CustomerSelect $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

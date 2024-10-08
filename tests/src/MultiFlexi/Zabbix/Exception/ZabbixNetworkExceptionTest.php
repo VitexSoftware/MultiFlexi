@@ -22,7 +22,7 @@ use MultiFlexi\Zabbix\Exception\ZabbixNetworkException;
  */
 class ZabbixNetworkExceptionTest extends \PHPUnit\Framework\TestCase
 {
-    protected ZabbixNetworkException $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

@@ -22,7 +22,7 @@ use MultiFlexi\Zabbix\Request\Packet;
  */
 class PacketTest extends \PHPUnit\Framework\TestCase
 {
-    protected Packet $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

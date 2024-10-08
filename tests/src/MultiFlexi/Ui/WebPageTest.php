@@ -22,7 +22,7 @@ use MultiFlexi\Ui\WebPage;
  */
 class WebPageTest extends \PHPUnit\Framework\TestCase
 {
-    protected WebPage $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

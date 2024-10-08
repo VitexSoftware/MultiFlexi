@@ -22,7 +22,7 @@ use MultiFlexi\Runner;
  */
 class RunnerTest extends \PHPUnit\Framework\TestCase
 {
-    protected Runner $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

@@ -22,7 +22,7 @@ use MultiFlexi\Ui\JobScheduleForm;
  */
 class JobScheduleFormTest extends \PHPUnit\Framework\TestCase
 {
-    protected JobScheduleForm $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

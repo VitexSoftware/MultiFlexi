@@ -22,7 +22,7 @@ use MultiFlexi\Ui\DBDataTable;
  */
 class DBDataTableTest extends \PHPUnit\Framework\TestCase
 {
-    protected DBDataTable $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

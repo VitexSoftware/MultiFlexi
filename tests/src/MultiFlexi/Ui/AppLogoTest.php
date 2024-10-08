@@ -22,7 +22,7 @@ use MultiFlexi\Ui\AppLogo;
  */
 class AppLogoTest extends \PHPUnit\Framework\TestCase
 {
-    protected AppLogo $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

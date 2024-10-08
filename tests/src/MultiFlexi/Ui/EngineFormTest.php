@@ -22,7 +22,7 @@ use MultiFlexi\Ui\EngineForm;
  */
 class EngineFormTest extends \PHPUnit\Framework\TestCase
 {
-    protected EngineForm $object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
