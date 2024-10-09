@@ -38,4 +38,4 @@ Shared::user(null, '\MultiFlexi\User');
 /**
  * @global WebPage $oPage
  */
-$oPage = new WebPage();
+$oPage = new WebPage('');
