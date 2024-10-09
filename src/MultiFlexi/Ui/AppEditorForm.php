@@ -46,7 +46,7 @@ class AppEditorForm extends EngineForm
         $this->addInput(new InputTextTag('uuid'), _('Application Universal Unique Identifier'));
         $this->addInput(new InputTextTag('topics'), _('Topics divided by column'));
         $this->addInput(new ResultFileSelect($this->engine), _('Result File field'), '', _('When application put its output to file'));
-        $this->addInput(new SubmitButton(_('Save'), 'success'));
+        $this->addItem(new SubmitButton(_('Save'), 'success'));
 
         if (null !== $this->engine->getDataValue('id')) {
             $this->addItem(new InputHiddenTag('id'));
