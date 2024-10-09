@@ -22,21 +22,8 @@ use MultiFlexi\Company;
 require_once './init.php';
 $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Company')));
-$serverId = WebPage::getRequestValue('server', 'int');
 
-if ($serverId) {
-    $serverserver = new \MultiFlexi\Servers($serverId);
-    $companyConfig = $serverserver->getConnectionDetails();
-    $companyConfig['company'] = WebPage::getGetValue('company');
-} else {
-    $companyConfig = [];
-}
-
-$companies = new Company(WebPage::getRequestValue('id', 'int'), $companyConfig);
-
-if ((null === $serverId) === false) {
-    $companies->setDataValue('server', $serverId);
-}
+$companies = new Company(WebPage::getRequestValue('id', 'int'));
 
 $_SESSION['company'] = $companies->getMyKey();
 
@@ -55,7 +42,7 @@ if ($oPage->isPosted()) {
 
     if ($companies->deleteFromSQL(['id' => $companies->getMyKey()])) {
         $companies->addStatusMessage(_('Company Deleted'), 'success');
-        $oPage->redirect('server.php?id='.$companies->getDataValue('server'));
+        $oPage->redirect('companys.php');
     } else {
         $companies->addStatusMessage(_('Error deleting Company').' '.$companies->getDataValue('name'), 'error');
     }
