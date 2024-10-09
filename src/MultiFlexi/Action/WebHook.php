@@ -53,24 +53,27 @@ class WebHook extends \MultiFlexi\CommonAction
     public function perform(): void
     {
         $uri = $this->getDataValue('uri');
-        $payload = stripslashes($this->job->getDataValue('stdout'));
 
-        $this->addStatusMessage(_('Perform begin'));
-        // $exitCode = $this->job->executor->launch($command);
-        $ch = curl_init();
-        curl_setopt($ch, \CURLOPT_POSTFIELDS, $payload);
-        curl_setopt($ch, \CURLOPT_RETURNTRANSFER, true);
+        if ($uri) {
+            $payload = stripslashes($this->job->getDataValue('stdout'));
 
-        // set URL and other appropriate options
-        curl_setopt($ch, \CURLOPT_URL, $uri);
-        curl_setopt($ch, \CURLOPT_HEADER, 0);
+            $this->addStatusMessage(_('Perform begin'));
+            // $exitCode = $this->job->executor->launch($command);
+            $ch = curl_init();
+            curl_setopt($ch, \CURLOPT_POSTFIELDS, $payload);
+            curl_setopt($ch, \CURLOPT_RETURNTRANSFER, true);
 
-        // grab URL and pass it to the browser
-        $this->addStatusMessage(curl_exec($ch), 'debug');
+            // set URL and other appropriate options
+            curl_setopt($ch, \CURLOPT_URL, $uri);
+            curl_setopt($ch, \CURLOPT_HEADER, 0);
 
-        // close cURL resource, and free up system resources
-        curl_close($ch);
-        $this->addStatusMessage(_('Perform done'));
+            // grab URL and pass it to the browser
+            $this->addStatusMessage((string) curl_exec($ch), 'debug');
+
+            // close cURL resource, and free up system resources
+            curl_close($ch);
+            $this->addStatusMessage(_('Perform done'));
+        }
     }
 
     /**
