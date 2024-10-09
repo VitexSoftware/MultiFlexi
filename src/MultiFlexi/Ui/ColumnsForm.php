@@ -153,7 +153,7 @@ class ColumnsForm extends Form
      *
      * @return bool
      */
-    public function finalize()
+    public function finalize(): void
     {
         $recordID = $this->engine->getMyKey();
         $this->addItem(new InputHiddenTag(
@@ -171,6 +171,6 @@ class ColumnsForm extends Form
         $this->newRow();
         $this->addItem($this->savers);
 
-        return parent::finalize();
+        parent::finalize();
     }
 }

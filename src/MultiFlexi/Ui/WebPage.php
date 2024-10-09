@@ -35,7 +35,7 @@ class WebPage extends \Ease\TWB4\WebPage
     /**
      * @param string $pageTitle
      */
-    public function __construct($pageTitle = '')
+    public function __construct(string $pageTitle = '')
     {
         parent::__construct($pageTitle);
         $this->container = $this->addItem(new \Ease\TWB4\Container());

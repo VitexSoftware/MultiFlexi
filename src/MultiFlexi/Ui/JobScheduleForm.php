@@ -47,13 +47,13 @@ class JobScheduleForm extends Form
     /**
      * @return booelan
      */
-    public function finalize()
+    public function finalize(): void
     {
         $this->timeSelect();
         $this->uploadFields();
         $this->addItem(new \Ease\TWB4\SubmitButton(_('Save App Schedule'), 'success btn-lg'));
 
-        return parent::finalize();
+        parent::finalize();
     }
 
     public function timeSelect(): void
