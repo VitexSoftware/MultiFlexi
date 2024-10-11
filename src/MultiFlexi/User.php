@@ -140,7 +140,7 @@ class User extends \Ease\User
      *
      * @return null|bool
      */
-    public function tryToLogin($formData)
+    public function tryToLogin(array $formData): bool
     {
         if (empty($formData) === true) {
             return false;
@@ -273,7 +273,7 @@ class User extends \Ease\User
      *
      * @return string password hash
      */
-    public function passwordChange($newPassword)
+    public function passwordChange($newPassword): bool
     {
         return $this->dbsync([$this->passwordColumn => $this->encryptPassword($newPassword), $this->getKeyColumn() => $this->getUserID()]);
     }
