@@ -55,5 +55,6 @@ class PageBottom extends \Ease\Html\FooterTag
         $footrow->addColumn(6, [$github, '&nbsp;', $linkedIn]);
 
         $this->addItem(new \Ease\TWB4\Container($footrow));
+        parent::finalize();
     }
 }

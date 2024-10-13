@@ -26,7 +26,7 @@ class UserForm extends Form
     /**
      * User holder.
      */
-    public User $user = null;
+    public User $user;
 
     /**
      * @param User $user
