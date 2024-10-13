@@ -30,14 +30,9 @@ class AppExecutorSelect extends ExecutorSelect
     private \MultiFlexi\Application $app;
 
     /**
-     * Choose from launchers availble for given Application.
-     *
-     * @param \MultiFlexi\Application $app
-     * @param array                   $items
-     * @param string                  $defaultValue
-     * @param array                   $properties
+     * Choose from launchers available for given Application.
      */
-    public function __construct($app, $items = null, $defaultValue = 'Native', $properties = [])
+    public function __construct(\MultiFlexi\Application $app, array $items = [], string $defaultValue = 'Native', array $properties = [])
     {
         $this->app = $app;
         parent::__construct('executor', $items, $defaultValue, $properties);
