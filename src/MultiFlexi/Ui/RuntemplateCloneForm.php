@@ -31,7 +31,7 @@ class RuntemplateCloneForm extends \Ease\TWB4\Form
     }
 
     /**
-     * Move items to elemnt root.
+     * Move items to element root.
      */
     public function finalize(): void
     {

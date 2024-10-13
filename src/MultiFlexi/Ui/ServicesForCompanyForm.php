@@ -95,5 +95,6 @@ $.ajax({
 });
 
 EOD);
+        parent::finalize();
     }
 }

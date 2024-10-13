@@ -57,5 +57,6 @@ class RegisterCustomerForm extends EngineForm
         if ($this->engine->getDataCount()) {
             $this->fillUp($this->engine->getData());
         }
+        parent::finalize();
     }
 }
