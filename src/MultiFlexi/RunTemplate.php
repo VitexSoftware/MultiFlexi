@@ -157,7 +157,7 @@ class RunTemplate extends \MultiFlexi\Engine
         $jobber = new Job();
         $jobber->company = new Company((int) $appInfo['company_id']);
         $jobber->application = new Application((int) $appInfo['app_id']);
-
+        $jobber->runTemplate = $this;
         return $jobber->getFullEnvironment();
     }
 
@@ -292,5 +292,15 @@ class RunTemplate extends \MultiFlexi\Engine
     public function getCompany()
     {
         return new Company($this->getDataValue('company_id'));
+    }
+
+    public function getRuntemplateEnvironment()
+    {
+        $configurator = new Configuration();
+        $cfg = $configurator->listingQuery()->where(['runtemplate_id'=> $this->getMyKey()])->fetchAll('name');
+        foreach ($cfg as $conf){
+            $cfg[$conf['name']]['source'] = get_class($this);
+        }
+        return $cfg;
     }
 }

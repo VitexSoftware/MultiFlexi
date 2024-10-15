@@ -22,21 +22,31 @@ namespace MultiFlexi\Ui;
  */
 class RuntemplateConfigForm extends EngineForm
 {
+
     private array $modulesEnv;
 
     public function __construct(\MultiFlexi\RunTemplate $engine)
     {
         parent::__construct($engine, null, ['method' => 'post', 'action' => 'runtemplate.php']);
-        $values = $engine->getAppEnvironment();
+        $defaults = $engine->getAppEnvironment();
+        $customized = $engine->getRuntemplateEnvironment();
 
         foreach (\MultiFlexi\Conffield::getAppConfigs($engine->getDataValue('app_id')) as $fieldInfo) {
-            if ($fieldInfo['type'] === 'checkbox') {
-                $input = new \Ease\Html\DivTag(new \Ease\TWB4\Widgets\Toggle($fieldInfo['keyname'], \array_key_exists($fieldInfo['keyname'], $values) ? ($values[$fieldInfo['keyname']]['value'] === 'true' ? true : false) : (bool)$fieldInfo['defval'], 'true', []));
+            $fieldName = $fieldInfo['keyname'];
+            if (array_key_exists($fieldName, $customized)) {
+                $cfg = array_merge($fieldInfo, $customized[$fieldName]);
             } else {
-                $input = new \Ease\Html\InputTag($fieldInfo['keyname'], \array_key_exists($fieldInfo['keyname'], $values) ? $values[$fieldInfo['keyname']]['value'] : $fieldInfo['defval'], ['type' => $fieldInfo['type']]);
+                $cfg = array_merge($fieldInfo, $defaults[$defaults]);
+            }
+            $value = array_key_exists('value', $cfg) ? $cfg['value'] : $cfg['defval'];
+
+            if ($fieldInfo['type'] === 'checkbox') {
+                $input = new \Ease\Html\DivTag(new \Ease\TWB4\Widgets\Toggle($fieldName, ($value === 'true' ? true : false), 'true', []));
+            } else {
+                $input = new \Ease\Html\InputTag($fieldName, $value, ['type' => $fieldInfo['type']]);
             }
 
-            $this->addInput($input, $fieldInfo['keyname'].'&nbsp;('.$fieldInfo['source'].')', $fieldInfo['defval'], $fieldInfo['description']);
+            $this->addInput($input, $fieldName . '&nbsp;(' . $fieldInfo['source'] . ')', $fieldInfo['defval'], $fieldInfo['description']);
         }
 
         $this->addItem(new \Ease\Html\InputHiddenTag('app_id', $engine->getDataValue('app_id')));
