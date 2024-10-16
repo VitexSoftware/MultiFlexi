@@ -51,19 +51,20 @@ $runTemplater = new RunTemplate();
 $runtemplatesRaw = $runTemplater->listingQuery()->where('app_id', $application->getMyKey())->where('company_id', $companer->getMyKey());
 
 $runtemplatesDiv = new DivTag();
-
+$runtemplates = [];
 if ($runtemplatesRaw->count()) {
     foreach ($runtemplatesRaw as $runtemplateData) {
         $runtemplateRow = new Row();
         $runtemplateRow->addColumn(2, '⚗️&nbsp;#'.(string) $runtemplateData['id']);
         $runtemplateRow->addColumn(6, $runtemplateData['name']);
         $runtemplatesDiv->addItem(new ATag('runtemplate.php?id='.$runtemplateData['id'], $runtemplateRow));
+        $runtemplates[$runtemplateData['id']] = $runtemplateData['name'];
     }
 } else {
     $runtemplatesDiv->addItem(new LinkButton('runtemplate.php?new=1&app_id='.$application->getMyKey().'&company_id='.$companer->getMyKey(), '⚗️&nbsp;➕'._('new'), 'success'));
 }
 
-$jobs = (new Job())->listingQuery()->select(['job.id', 'begin', 'exitcode', 'launched_by', 'login'], true)->leftJoin('user ON user.id = job.launched_by')->where('company_id', $companer->getMyKey())->where('app_id', $application->getMyKey())->limit(10)->orderBy('job.id DESC')->fetchAll();
+$jobs = (new Job())->listingQuery()->select(['job.id', 'begin', 'exitcode', 'launched_by', 'login','runtemplate_id'], true)->leftJoin('user ON user.id = job.launched_by')->where('company_id', $companer->getMyKey())->where('app_id', $application->getMyKey())->limit(10)->orderBy('job.id DESC')->fetchAll();
 $jobList = new Table();
 $jobList->addRowHeaderColumns([_('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'), _('RunTemplate')]);
 
@@ -78,6 +79,7 @@ foreach ($jobs as $job) {
 
     $job['exitcode'] = new ExitCode($job['exitcode']);
     $job['launched_by'] = $job['launched_by'] ? new ATag('user.php?id='.$job['launched_by'], $job['login']) : _('Timer');
+    $job['runtemplate_id'] = new ATag('runtemplate.php?id='.$job['runtemplate_id'], $runtemplates[$job['runtemplate_id']]);
     unset($job['login']);
     $jobList->addRowColumns($job);
 }
