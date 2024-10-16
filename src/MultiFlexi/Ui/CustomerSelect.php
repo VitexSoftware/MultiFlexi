@@ -28,7 +28,7 @@ class CustomerSelect extends \Ease\Html\SelectTag
 
     public function __construct(
         $name,
-        $defaultValue = null,
+        $defaultValue = '',
         $itemsIDs = false,
         $properties = []
     ) {
@@ -36,7 +36,7 @@ class CustomerSelect extends \Ease\Html\SelectTag
     }
 
     /**
-     * obtain Availble AbraFlexi servers.
+     * obtain Available AbraFlexi servers.
      *
      * @return array
      */
