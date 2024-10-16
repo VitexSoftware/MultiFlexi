@@ -54,6 +54,7 @@ $configurator = new \MultiFlexi\Configuration([
 ], ['autoload' => false]);
 
 if ($oPage->isPosted()) {
+    $app->checkRequiredFields($_POST, true);
     if ($configurator->takeData($_POST) && null !== $configurator->saveToSQL()) {
         $configurator->addStatusMessage(_('Config fields Saved'), 'success');
     } else {
