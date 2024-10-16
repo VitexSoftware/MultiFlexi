@@ -36,7 +36,11 @@ class RuntemplateConfigForm extends EngineForm
             if (array_key_exists($fieldName, $customized)) {
                 $cfg = array_merge($fieldInfo, $customized[$fieldName]);
             } else {
-                $cfg = array_merge($fieldInfo, $defaults[$defaults]);
+                if(array_key_exists($fieldName, $defaults)){
+                    $cfg = array_merge($fieldInfo, $defaults[$fieldName]);
+                } else {
+                    $cfg = $fieldInfo;
+                }
             }
             $value = array_key_exists('value', $cfg) ? $cfg['value'] : $cfg['defval'];
 
@@ -46,7 +50,12 @@ class RuntemplateConfigForm extends EngineForm
                 $input = new \Ease\Html\InputTag($fieldName, $value, ['type' => $fieldInfo['type']]);
             }
 
-            $this->addInput($input, $fieldName . '&nbsp;(' . $fieldInfo['source'] . ')', $fieldInfo['defval'], $fieldInfo['description']);
+            
+            $formGroup = $this->addInput($input, $fieldName . '&nbsp;(' . $fieldInfo['source'] . ')', $fieldInfo['defval'], $fieldInfo['description']);
+            if(array_key_exists('required', $fieldInfo) && $fieldInfo['required'] == true){
+                $formGroup->addTagClass('bg-primary');
+            }
+            
         }
 
         $this->addItem(new \Ease\Html\InputHiddenTag('app_id', $engine->getDataValue('app_id')));
