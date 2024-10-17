@@ -85,7 +85,7 @@ class Zabbix extends \MultiFlexi\CommonAction
 
             try {
                 $zabbixSender->send($packet);
-                $this->addStatusMessage(sprintf(_('Job metric %s sent to %s as %s'), $zabbixKey, $server, $me), 'debug');
+                $this->addStatusMessage(sprintf(_('Job metric %s sent to %s as %s: %s'), $zabbixKey, $server, $me, json_encode($packet)), 'debug');
             } catch (\Exception $exc) {
             }
         } else {
