@@ -69,17 +69,7 @@ class Engine extends \Ease\SQL\Engine
         if (null === $data) {
             $data = $this->getData();
         }
-
         unset($data['class']);
-
-        if (\array_key_exists('app_id', $data) && \array_key_exists('company_id', $data)) {
-            $found = $this->getColumnsFromSQL(['id'], ['app_id' => $data['app_id'], 'company_id' => $data['company_id']]);
-
-            if ($found) {
-                $data[$this->getKeyColumn()] = ((int) $found[0]['id']);
-            }
-        }
-
         return parent::saveToSQL($data);
     }
 }
