@@ -30,7 +30,7 @@ class CompanyAppChooser extends \Ease\Html\SelectTag
      * @param string             $defaultValue
      * @param array              $properties
      */
-    public function __construct($name, $company, $defaultValue = null, $properties = [])
+    public function __construct($name, $company, $defaultValue = '', $properties = [])
     {
         $companyApp = new \MultiFlexi\CompanyApp($company);
         $assignedRaw = $companyApp->getAssigned()->leftJoin('apps ON apps.id = companyapp.app_id')->select('apps.name')->fetchAll('app_id');
