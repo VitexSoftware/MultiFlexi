@@ -45,8 +45,11 @@ class MainMenu extends \Ease\Html\DivTag
             $apps = $this->getMenuList(new \MultiFlexi\Application(), 'image');
             $this->serversMenuEnabled($nav, $servers);
 
+            if(empty($companys)){
+                \MultiFlexi\User::singleton()->addStatusMessage(_('No company registered yet. Please register one.'), 'warning');
+            }
+            
             if (empty($servers) && empty($customers) && empty($companys)) { // All empty yet
-                \MultiFlexi\User::singleton()->addStatusMessage(_('No server registered yet. Please register one.'), 'warning');
                 $this->customersMenuDisabled($nav);
                 $this->companysMenuDisabled($nav);
             } else {
@@ -148,7 +151,7 @@ class MainMenu extends \Ease\Html\DivTag
      */
     public function companysMenuDisabled($nav): void
     {
-        $nav->addMenuItem(new \Ease\Html\ATag('#', '<img width=30 src=images/company.svg> '._('Companies'), ['class' => 'nav-link disabled']));
+        $nav->addMenuItem(new \Ease\TWB4\LinkButton('companysetup.php', '<img width=30 src=images/company.svg> '._('Companies'),'warning' ,['class' => 'nav-link']));
     }
 
     /**

@@ -40,4 +40,4 @@ To install MultiFlexi using Debian packages, you can follow these steps:
     apt search multiflexi
     ```
 
-That's it! You have successfully updated the installation instructions for MultiFlexi using Debian packages.
+For more information on how to perform the initial setup, please refer to the :doc:`firstrun` page.

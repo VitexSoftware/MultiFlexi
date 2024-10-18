@@ -41,12 +41,12 @@ class ColumnsForm extends Form
      * Počet položek na řádek.
      */
     public int $itemsPerRow = 3;
-    public SysEngine $engine;
+    public columns $engine;
 
     /**
      * Odesílací tlačítka.
      */
-    public \Ease\Html\Div $savers;
+    public \Ease\Html\DivTag $savers;
 
     /**
      * Formulář Bootstrapu.
