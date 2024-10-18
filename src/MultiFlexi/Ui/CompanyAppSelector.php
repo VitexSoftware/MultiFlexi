@@ -25,7 +25,7 @@ use MultiFlexi\CompanyApp;
  */
 class CompanyAppSelector extends AppsSelector
 {
-    protected $companyId;
+    protected int $companyId;
     public function __construct($company, $identifier = null, $enabled = [], $optionsPage = 'apps.php')
     {
         $this->companyId = $company->getMyKey();

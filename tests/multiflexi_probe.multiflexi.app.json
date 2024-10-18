@@ -11,7 +11,7 @@
     "ociimage": "docker.io/vitexsoftware/multiflexi-probe",
     "uuid": "775ed801-2489-4981-bc14-d8a01cba1938",
     "topics": "MultiFlexi,probe,task launcher,testing,tool",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "environment": {
         "FILE_UPLOAD": {
             "type": "file",
@@ -36,7 +36,13 @@
             "description": "write output json data to",
             "defval": "env_report.json",
             "required": false
-        }
+        }, 
+        "FORCE_EXITCODE": {
+            "type": "number",
+            "description": "Force exit code",
+            "defval": "0",
+            "required": false
+        }   
 
     },
     "multiflexi": ""

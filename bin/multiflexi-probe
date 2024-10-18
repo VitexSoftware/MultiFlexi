@@ -24,3 +24,6 @@ if [ -n "$RESULT_FILE" ]; then
 fi
 
 echoerr "StdErr Output example"
+if [[ -n "$FORCE_EXITCODE" && "$FORCE_EXITCODE" =~ ^[0-9]+$ ]]; then
+    exit "$FORCE_EXITCODE"
+fi

@@ -39,6 +39,7 @@ Contents
    :caption: Contents:
 
    install
+   firstrun
    generated/multiflexi
    usage
    api

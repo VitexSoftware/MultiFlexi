@@ -122,7 +122,7 @@ class RunTemplate extends \MultiFlexi\Engine
      */
     public function getCompanyTemplates($companyId)
     {
-        return $this->listingQuery()->select(['apps.name AS app_name', 'apps.description', 'apps.homepage', 'apps.image'])->leftJoin('apps ON apps.id = runtemplate.app_id')->where('company_id', $companyId);
+        return $this->listingQuery()->select(['apps.name AS app_name', 'apps.description', 'apps.homepage', 'apps.uuid'])->leftJoin('apps ON apps.id = runtemplate.app_id')->where('company_id', $companyId);
     }
 
     /**
