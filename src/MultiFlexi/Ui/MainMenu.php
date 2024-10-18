@@ -50,11 +50,11 @@ class MainMenu extends \Ease\Html\DivTag
             }
             
             if (empty($servers) && empty($customers) && empty($companys)) { // All empty yet
-                $this->customersMenuDisabled($nav);
-                $this->companysMenuDisabled($nav);
+//                $this->customersMenuDisabled($nav);
+//                $this->companysMenuDisabled($nav);
             } else {
-                if (\count($servers) && empty($customers) && empty($companys)) {
-                    $this->customersMenuEnabled($nav, $customers);
+                    if (\count($servers) && empty($customers) && empty($companys)) {
+//                    $this->customersMenuEnabled($nav, $customers);
                     $this->companysMenuDisabled($nav);
                     \MultiFlexi\User::singleton()->addStatusMessage(_('No customer registered yet. Please register one.'), 'warning');
                 } else {
@@ -63,7 +63,7 @@ class MainMenu extends \Ease\Html\DivTag
                         $this->customersMenuEnabled($nav, $customers);
                         $nav->addMenuItem(new \Ease\TWB4\LinkButton('companysetup.php', '<img width=30 src=images/company.svg> '._('Companies'), 'warning'), 'right');
                     } else { // We Got All
-                        $this->customersMenuEnabled($nav, $customers);
+//                        $this->customersMenuEnabled($nav, $customers);
                         $this->companysMenuEnabled($nav, $companys);
                     }
                 }
