@@ -76,7 +76,7 @@ foreach ($jobs as $job) {
     $job['id'] = new ATag('job.php?id='.$job['id'], new \Ease\TWB4\Badge('info', $job['id']));
 
     if ($job['begin']) {
-        $job['begin'] = [$job['begin'], '<br>', new \Ease\Html\SmallTag(new \Ease\ui\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
+        $job['begin'] = [$job['begin'], '<br>', new \Ease\Html\SmallTag(new \Ease\Html\WidgetsLiveAge((new \DateTime($job['begin']))->getTimestamp()))];
     } else {
         $job['begin'] = _('Scheduled');
     }
