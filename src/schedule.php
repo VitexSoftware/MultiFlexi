@@ -55,9 +55,16 @@ if (null === $runTemplate->getMyKey()) {
         $prepared = $jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, '', \Ease\WebPage::getRequestValue('executor'));
         $jobber->scheduleJobRun(new \DateTime($when));
 
+        $glassHourRow = new \Ease\TWB4\Row();
+        $glassHourRow->addTagClass('justify-content-md-center');
+        $glassHourRow->addColumn('4');
+        $glassHourRow->addColumn('4', new \Ease\Html\DivTag(new \Ease\Html\Widgets\SandClock(['class' => 'mx-auto d-block img-fluid'])), 'sm');
+        // $glassHourRow->addColumn('4', new \Ease\Html\DivTag(new \Ease\Html\ImgTag('images/openclipart/345630.svg', _('AI and Human Relationship'), ['class' => 'mx-auto d-block img-fluid'])), 'sm');
+        $glassHourRow->addColumn('4');
+
         $oPage->container->addItem(new CompanyPanel($company, [new ApplicationPanel(
             $app,
-            [new \Ease\Html\DivTag(nl2br($prepared)), new \Ease\TWB4\LinkButton('job.php?id='.$jobber->getMyKey(), _('Job details'), 'info btn-block')],
+            [$glassHourRow, new \Ease\Html\DivTag(nl2br($prepared)), new \Ease\TWB4\LinkButton('job.php?id='.$jobber->getMyKey(), _('Job details'), 'info btn-block')],
         )]));
     } else {
         if ($jobID) {

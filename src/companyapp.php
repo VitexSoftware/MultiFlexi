@@ -24,7 +24,6 @@ use Ease\Html\SpanTag;
 use Ease\TWB4\LinkButton;
 use Ease\TWB4\Row;
 use Ease\TWB4\Table;
-use Ease\ui\LiveAge;
 use MultiFlexi\Application;
 use MultiFlexi\Company;
 use MultiFlexi\Job;
@@ -52,6 +51,7 @@ $runtemplatesRaw = $runTemplater->listingQuery()->where('app_id', $application->
 
 $runtemplatesDiv = new DivTag();
 $runtemplates = [];
+
 if ($runtemplatesRaw->count()) {
     foreach ($runtemplatesRaw as $runtemplateData) {
         $runtemplateRow = new Row();
@@ -64,7 +64,7 @@ if ($runtemplatesRaw->count()) {
     $runtemplatesDiv->addItem(new LinkButton('runtemplate.php?new=1&app_id='.$application->getMyKey().'&company_id='.$companer->getMyKey(), '⚗️&nbsp;➕'._('new'), 'success'));
 }
 
-$jobs = (new Job())->listingQuery()->select(['job.id', 'begin', 'exitcode', 'launched_by', 'login','runtemplate_id'], true)->leftJoin('user ON user.id = job.launched_by')->where('company_id', $companer->getMyKey())->where('app_id', $application->getMyKey())->limit(10)->orderBy('job.id DESC')->fetchAll();
+$jobs = (new Job())->listingQuery()->select(['job.id', 'begin', 'exitcode', 'launched_by', 'login', 'runtemplate_id'], true)->leftJoin('user ON user.id = job.launched_by')->where('company_id', $companer->getMyKey())->where('app_id', $application->getMyKey())->limit(10)->orderBy('job.id DESC')->fetchAll();
 $jobList = new Table();
 $jobList->addRowHeaderColumns([_('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'), _('RunTemplate')]);
 

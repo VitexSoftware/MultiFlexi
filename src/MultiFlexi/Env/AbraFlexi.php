@@ -17,7 +17,9 @@ namespace MultiFlexi\Env;
 
 /**
  * Description of AbraFlexi.
+ *
  * @deprecated since version 1.15.0.486
+ *
  * @author vitex
  */
 class AbraFlexi extends \MultiFlexi\Environmentor implements injector

@@ -224,6 +224,7 @@ EOD);
             );
             WebPage::singleton()->includeJavaScript('js/slideupmessages.js');
         }
+
         parent::finalize();
     }
 
