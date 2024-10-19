@@ -55,3 +55,4 @@ db/multiflexi
 /.phpunit.cache/
 /.build/
 /docs/build/
+/src/zabbix.php
