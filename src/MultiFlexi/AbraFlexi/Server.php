@@ -49,4 +49,23 @@ class Server extends \MultiFlexi\Engine implements \MultiFlexi\platformServer
             'ABRAFLEXI_PASSWORD' => $connectionData['password'],
         ];
     }
+
+    public function todo($param): void
+    {
+        $this->addInput(
+            new SemaforLight((bool) $this->engine->getDataValue('rw')),
+            _('write permission'),
+        );
+        $this->addItem(new InputHiddenTag('rw', false));
+        $this->addInput(
+            new SemaforLight((bool) $this->engine->getDataValue('setup')),
+            _('Setup performed'),
+        );
+        $this->addItem(new InputHiddenTag('setup'), false);
+        $this->addInput(
+            new SemaforLight((bool) $this->engine->getDataValue('webhook')),
+            _('WebHook established'),
+        );
+        $this->addItem(new InputHiddenTag('webhook'));
+    }
 }

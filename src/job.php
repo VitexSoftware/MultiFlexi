@@ -48,8 +48,21 @@ $appPanel->headRow->addColumn(2, $runTemplateButton);
 
 $scheduleButton = new \Ease\TWB4\LinkButton('schedule.php?id='.$runTemplate->getMyKey().'&app_id='.$appInfo['app_id'].'&company_id='.$appInfo['company_id'], [_('Schedule').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
 
-$previousButton = new \Ease\TWB4\LinkButton('job.php?id='.$jobber->getPreviousJobId(true, true, true), '◀️ '._('Previous'), 'info btn-lg btn-block');
-$nextButton = new \Ease\TWB4\LinkButton('job.php?id='.$jobber->getNextJobId(true, true, true), _('Next').' ▶️️', 'info btn-lg btn-block');
+$previousJobId = $jobber->getPreviousJobId(true, true, true);
+
+if ($previousJobId) {
+    $previousButton = new \Ease\TWB4\LinkButton('job.php?id='.$previousJobId, '◀️ '._('Previous'), 'info btn-lg btn-block');
+} else {
+    $previousButton = new \Ease\TWB4\LinkButton('#', '◀️ '._('Previous'), 'info btn-lg btn-block disabled');
+}
+
+$nextJobId = $jobber->getNextJobId(true, true, true);
+
+if ($nextJobId) {
+    $nextButton = new \Ease\TWB4\LinkButton('job.php?id='.$nextJobId, _('Next').' ▶️️', 'info btn-lg btn-block');
+} else {
+    $nextButton = new \Ease\TWB4\LinkButton('#', _('Next').' ▶️️', 'info btn-lg btn-block disabled');
+}
 
 $appPanel->headRow->addColumn(2, $previousButton);
 $appPanel->headRow->addColumn(2, $scheduleButton);

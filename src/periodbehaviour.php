@@ -54,9 +54,9 @@ $appPanel = new ApplicationPanel($app, $interval);
 $runTemplateButton = new \Ease\TWB4\LinkButton('runtemplate.php?id='.$runTemplater->getMyKey(), '⚗️&nbsp;'._('Run Template'), 'dark btn-lg btn-block');
 $appPanel->headRow->addColumn(2, $runTemplateButton);
 
-$actionsRow = new \Ease\TWB4\Row();
-$actionsRow->addColumn(6, new \Ease\TWB4\Panel(_('Success Actions'), 'success', new ActionsChooser('success', $app, $succesActions), $periodcalTaskInfo['success']));
-$actionsRow->addColumn(6, new \Ease\TWB4\Panel(_('Fail Actions'), 'danger', new ActionsChooser('fail', $app, $failActions), $periodcalTaskInfo['fail']));
+$actionsRow = new \Ease\TWB4\Tabs();
+$actionsRow->addTab(_('Success Actions'), new ActionsChooser('success', $app, $succesActions), $periodcalTaskInfo['success']);
+$actionsRow->addTab(_('Fail Actions'), new ActionsChooser('fail', $app, $failActions), $periodcalTaskInfo['fail']);
 
 $appPanel->addItem($actionsRow);
 $jobtempform = new \Ease\TWB4\Form();

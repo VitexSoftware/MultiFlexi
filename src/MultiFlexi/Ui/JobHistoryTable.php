@@ -22,6 +22,10 @@ namespace MultiFlexi\Ui;
  */
 class JobHistoryTable extends \Ease\TWB4\Table
 {
+    public \MultiFlexi\Job $jobber;
+    public int $limit = 50;
+    public bool $showIcon = true;
+
     /**
      * Job History presented as table.
      *
@@ -31,27 +35,43 @@ class JobHistoryTable extends \Ease\TWB4\Table
     public function __construct($content = null, $properties = [])
     {
         parent::__construct($content, $properties);
-        $jobber = new \MultiFlexi\Job();
-        $jobs = $jobber->listingQuery()->
+        $this->jobber = new \MultiFlexi\Job();
+
+        if ($this->showIcon) {
+            $this->addRowHeaderColumns([_('Application'), _('Exit Code').'/'._('Job ID'), _('Launch time'), _('Launcher'), _('Company')]);
+        } else {
+            $this->addRowHeaderColumns([_('Exit Code').'/'._('Job ID'), _('Launch time'), _('Launcher'), _('Company')]);
+        }
+    }
+
+    public function getJobs()
+    {
+        return $this->jobber->listingQuery()->
                 select(['apps.name AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'job.executor', 'job.company_id', 'company.name', 'company.logo', 'schedule'], true)
                     ->leftJoin('apps ON apps.id = job.app_id')
                     ->leftJoin('user ON user.id = job.launched_by')
-                    ->limit(50)
-                    ->where('begin IS NOT NULL')
-                    ->orderBy('job.id DESC')
-                    ->fetchAll();
-        $this->addRowHeaderColumns([_('Application'), _('Exit Code').'/'._('Job ID'), _('Launch time'), _('Launcher'), _('Company')]);
+                    ->limit($this->limit)
+                    ->orderBy('job.id DESC');
+    }
+
+    public function finalize(): void
+    {
         $company = new \MultiFlexi\Company();
 
-        foreach ($jobs as $job) {
+        foreach ($this->getJobs() as $job) {
             $exitCode = $job['exitcode'];
             $company->setDataValue('logo', $job['logo']);
             $company->setDataValue('name', $job['name']);
-            $job['appimage'] = new \Ease\Html\ATag('app.php?id='.$job['app_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], _($job['appname']), ['height' => 60, 'title' => $job['appname']]), '&nbsp;', _($job['appname'])])]);
-            unset($job['appname'], $job['app_id']);
+
+            if ($this->showIcon) {
+                $job['appimage'] = new \Ease\Html\ATag('app.php?id='.$job['app_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], _($job['appname']), ['height' => 60, 'title' => $job['appname']]), '&nbsp;', _($job['appname'])])]);
+            } else {
+                unset($job['appimage']);
+            }
 
             $job['id'] = new \Ease\Html\ATag('job.php?id='.$job['id'], [new ExitCode($exitCode, ['style' => 'font-size: 1.0em; font-family: monospace;']), '<br>', new \Ease\TWB4\Badge('info', $job['id'])], ['title' => _('Job Info')]);
-            $job['begin'] = [$job['begin'], '<br>', new \Ease\Html\SmallTag(new \Ease\Html\Widgets\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
+            unset($job['appname'], $job['app_id']);
+            $job['begin'] = [$job['begin'], '<br>', new \Ease\Html\SmallTag(new \Ease\Html\Widgets\LiveAge(\DateTime::createFromFormat('!Y-m-d H:i:s', $job['begin'])->getTimestamp()))];
             unset($job['exitcode']);
 
             $job['launched_by'] = [
@@ -67,5 +87,7 @@ class JobHistoryTable extends \Ease\TWB4\Table
 
             $this->addRowColumns($job);
         }
+
+        parent::finalize();
     }
 }
