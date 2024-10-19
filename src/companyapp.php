@@ -74,7 +74,7 @@ foreach ($jobs as $job) {
     if (empty($job['begin'])) {
         $job['begin'] = _('Not launched yet');
     } else {
-        $job['begin'] = [$job['begin'], ' ', new SmallTag(new LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
+        $job['begin'] = [$job['begin'], ' ', new SmallTag(new \Ease\Html\Widgets\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
     }
 
     $job['exitcode'] = new ExitCode($job['exitcode']);
