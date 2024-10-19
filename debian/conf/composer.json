@@ -6,6 +6,7 @@
     "deb/ease-bootstrap4-widgets-abraflexi": "*",
     "deb/ease-bootstrap4-widgets": "*",
     "deb/ease-fluentpdo": "*",
+    "deb/ease-html-widgets": "*",
     "symfony/process": "*",
     "sensiolabs/ansi-to-html": "*",
     "zarplata/zabbix-sender": "dev-master",
