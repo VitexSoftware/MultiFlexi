@@ -21,7 +21,6 @@ use Ease\TWB4\LinkButton;
 use Ease\TWB4\Row;
 use Ease\TWB4\Table;
 use Ease\TWB4\Tabs;
-use Ease\ui\LiveAge;
 use MultiFlexi\Application;
 use MultiFlexi\Conffield;
 use MultiFlexi\Job;
@@ -90,7 +89,7 @@ foreach ($jobs as $job) {
     if (empty($job['begin'])) {
         $job['begin'] = '⏳'._('Not yet');
     } else {
-        $job['begin'] = [$job['begin'], '<br>', new SmallTag(new LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
+        $job['begin'] = [$job['begin'], '<br>', new SmallTag(new \Ease\Html\Widgets\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
     }
 
     $job['exitcode'] = new ExitCode($job['exitcode']);
