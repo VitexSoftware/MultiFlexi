@@ -51,7 +51,7 @@ class JobHistoryTable extends \Ease\TWB4\Table
             unset($job['appname'], $job['app_id']);
 
             $job['id'] = new \Ease\Html\ATag('job.php?id='.$job['id'], [new ExitCode($exitCode, ['style' => 'font-size: 1.0em; font-family: monospace;']), '<br>', new \Ease\TWB4\Badge('info', $job['id'])], ['title' => _('Job Info')]);
-            $job['begin'] = [$job['begin'], '<br>', new \Ease\Html\SmallTag(new \Ease\Html\WidgetsLiveAge((new \DateTime($job['begin']))->getTimestamp()))];
+            $job['begin'] = [$job['begin'], '<br>', new \Ease\Html\SmallTag(new \Ease\Html\Widgets\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
             unset($job['exitcode']);
 
             $job['launched_by'] = [
