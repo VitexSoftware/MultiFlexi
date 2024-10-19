@@ -69,7 +69,9 @@ class Engine extends \Ease\SQL\Engine
         if (null === $data) {
             $data = $this->getData();
         }
+
         unset($data['class']);
+
         return parent::saveToSQL($data);
     }
 }
