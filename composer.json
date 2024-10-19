@@ -23,7 +23,8 @@
         "goat1000/svggraph": "dev-master",
         "peppeocchi/php-cron-scheduler": "dev-master",
         "vitexsoftware/ease-core-bricks": "dev-master",
-        "vitexsoftware/ease-twbootstrap4": "dev-main"
+        "vitexsoftware/ease-twbootstrap4": "dev-main",
+        "confirm-it-solutions/php-zabbix-api": "3.x-dev"
     },
     "license": "MIT",
     "authors": [
