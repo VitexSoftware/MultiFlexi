@@ -32,7 +32,7 @@ class PageBottom extends \Ease\Html\FooterTag
         $this->includeCSS('https://use.fontawesome.com/releases/v5.3.1/css/all.css');
         $container = $this->setTagID('footer');
         //        if (\Ease\Shared::user()->getUserID()) {
-        //        $this->addItem(new \Ease\ui\BrowsingHistory());
+        //        $this->addItem(new \Ease\Html\WidgetsBrowsingHistory());
         //        }
         $this->addItem('<hr>');
         $footrow = new \Ease\TWB4\Row();
@@ -45,7 +45,7 @@ class PageBottom extends \Ease\Html\FooterTag
 
         $author = '<strong><a href="https://multiflexi.eu/">MultiFlexi</a></strong> '.\Ease\Shared::appVersion().(empty(self::BUILD) ? '' : '&nbsp;'._('build').' #'.self::BUILD).'<br>&nbsp;&nbsp; &copy; 2020-2024 <a href="https://vitexsoftware.com/">Vitex Software</a>';
 
-        //  '&nbsp;' . new \Ease\ui\LiveAge(filemtime($composer))
+        //  '&nbsp;' . new \Ease\Html\WidgetsLiveAge(filemtime($composer))
 
         $footrow->addColumn(6, [$author]);
 
