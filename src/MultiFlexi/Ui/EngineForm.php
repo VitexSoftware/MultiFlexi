@@ -51,7 +51,7 @@ class EngineForm extends Form
             $this->addItem(new InputHiddenTag($this->engine->getKeyColumn(), $recordID));
         }
 
-        $this->fillUp($this->engine->getData());
+        $this->fillUp((array) $this->engine->getData());
 
         parent::finalize();
     }

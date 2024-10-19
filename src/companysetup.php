@@ -87,7 +87,7 @@ $instanceRow->addColumn(4, new CompanyEditorForm($companies, '', ['action' => 'c
 
 $rightColumn[] = new EnvironmentEditor($companyEnver->getEnvFields());
 $instanceRow->addColumn(8, $rightColumn);
-$oPage->container->addItem(new CompanyPanel($companies, $instanceRow, new \Ease\TWB4\LinkButton('companydelete.php?id='.$companies->getMyKey(), '☠️&nbsp;'._('Delete company'), 'danger')));
+$oPage->container->addItem(new CompanyPanel($companies, $instanceRow, $companies->getMyKey() ? new \Ease\TWB4\LinkButton('companydelete.php?id='.$companies->getMyKey(), '☠️&nbsp;'._('Delete company'), 'danger') : ''));
 
 $oPage->addItem(new PageBottom());
 $oPage->draw();

@@ -44,7 +44,9 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
             $deleteButton = new \Ease\TWB4\LinkButton('runtemplate.php?delete=1&id='.$runtemplateId, _('Delete ?').'&nbsp;&nbsp;❌', 'warning btn-lg');
         }
 
-        $runtemplateOptions->addColumn(6, [$intervalChooser, $scheduleButton, '<p><br></p>', $deleteButton]);
+        $runtemplateJobs = new \MultiFlexi\Ui\RuntemplateJobsListing($runtemplate);
+
+        $runtemplateOptions->addColumn(6, [$intervalChooser, $scheduleButton, $runtemplateJobs, $deleteButton]);
         $nameInput = new \Ease\Html\ATag('#', $runtemplate->getRecordName(), ['class' => 'editable', 'id' => 'name', 'data-pk' => $runtemplate->getMyKey(), 'data-url' => 'runtemplatesave.php', 'data-title' => _('Update RunTemplate name')]);
         parent::__construct([new \Ease\Html\ATag('companyapp.php?app_id='.$runtemplate->getDataValue('app_id').'&company_id='.$runtemplate->getDataValue('company_id'), '⚗️ '), $nameInput], 'inverse', $runtemplateOptions, new RuntemplateCloneForm($runtemplate));
         $this->includeJavaScript('js/bootstrap-editable.js');

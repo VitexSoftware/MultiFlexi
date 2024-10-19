@@ -33,6 +33,8 @@ To access the MultiFlexi web interface, open your web browser and navigate to th
    http://localhost/multiflexi
 
 This will take you to the MultiFlexi login page, where you can enter your credentials to access the system.
+For more information on how to perform the initial setup, please refer to the :doc:`firstrun` page.
+
 
 API
 ---
