@@ -20,8 +20,8 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class JobHistoryTable extends \Ease\TWB4\Table {
-
+class JobHistoryTable extends \Ease\TWB4\Table
+{
     public \MultiFlexi\Job $jobber;
     public int $limit = 50;
     public bool $showIcon = true;
@@ -33,7 +33,8 @@ class JobHistoryTable extends \Ease\TWB4\Table {
      * @param mixed $content
      * @param array $properties
      */
-    public function __construct($content = null, $properties = []) {
+    public function __construct($content = null, $properties = [])
+    {
         parent::__construct($content, $properties);
         $this->jobber = new \MultiFlexi\Job();
 
@@ -43,7 +44,7 @@ class JobHistoryTable extends \Ease\TWB4\Table {
             $headings[] = _('Application');
         }
 
-        $headings[] = _('Exit Code') . '/' . _('Job ID');
+        $headings[] = _('Exit Code').'/'._('Job ID');
         $headings[] = _('Launch time');
         $headings[] = _('Launcher');
 
@@ -51,20 +52,21 @@ class JobHistoryTable extends \Ease\TWB4\Table {
             $headings[] = _('Company');
         }
 
-
         $this->addRowHeaderColumns($headings);
     }
 
-    public function getJobs() {
+    public function getJobs()
+    {
         return $this->jobber->listingQuery()->
                         select(['apps.name AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'job.executor', 'job.company_id', 'company.name', 'company.logo', 'schedule'], true)
-                        ->leftJoin('apps ON apps.id = job.app_id')
-                        ->leftJoin('user ON user.id = job.launched_by')
-                        ->limit($this->limit)
-                        ->orderBy('job.id DESC');
+                            ->leftJoin('apps ON apps.id = job.app_id')
+                            ->leftJoin('user ON user.id = job.launched_by')
+                            ->limit($this->limit)
+                            ->orderBy('job.id DESC');
     }
 
-    public function finalize(): void {
+    public function finalize(): void
+    {
         $company = new \MultiFlexi\Company();
 
         foreach ($this->getJobs() as $job) {
@@ -73,12 +75,12 @@ class JobHistoryTable extends \Ease\TWB4\Table {
             $company->setDataValue('name', $job['name']);
 
             if ($this->showIcon) {
-                $job['appimage'] = new \Ease\Html\ATag('app.php?id=' . $job['app_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], _($job['appname']), ['height' => 60, 'title' => $job['appname']]), '&nbsp;', _($job['appname'])])]);
+                $job['appimage'] = new \Ease\Html\ATag('app.php?id='.$job['app_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], _($job['appname']), ['height' => 60, 'title' => $job['appname']]), '&nbsp;', _($job['appname'])])]);
             } else {
                 unset($job['appimage']);
             }
 
-            $job['id'] = new \Ease\Html\ATag('job.php?id=' . $job['id'], [new ExitCode($exitCode, ['style' => 'font-size: 1.0em; font-family: monospace;']), '<br>', new \Ease\TWB4\Badge('info', $job['id'])], ['title' => _('Job Info')]);
+            $job['id'] = new \Ease\Html\ATag('job.php?id='.$job['id'], [new ExitCode($exitCode, ['style' => 'font-size: 1.0em; font-family: monospace;']), '<br>', new \Ease\TWB4\Badge('info', $job['id'])], ['title' => _('Job Info')]);
             unset($job['appname'], $job['app_id']);
 
             if ($job['begin']) {
@@ -91,17 +93,18 @@ class JobHistoryTable extends \Ease\TWB4\Table {
 
             $job['launched_by'] = [
                 new ExecutorImage($job['executor'], ['align' => 'right', 'height' => '50px']),
-                new \Ease\Html\DivTag($job['launched_by'] ? new \Ease\Html\ATag('user.php?id=' . $job['launched_by'], new \Ease\TWB4\Badge('info', $job['login'])) : _('Timer')),
+                new \Ease\Html\DivTag($job['launched_by'] ? new \Ease\Html\ATag('user.php?id='.$job['launched_by'], new \Ease\TWB4\Badge('info', $job['login'])) : _('Timer')),
                 new \Ease\Html\DivTag($job['schedule']),
                 new \Ease\Html\DivTag($job['executor']),
             ];
             unset($job['executor'], $job['login'], $job['schedule']);
 
-            if($this->showCompany){
-                $job['company_id'] = [new CompanyLogo($company, ['height' => '60px', 'align' => 'right']), new \Ease\Html\ATag('company.php?id=' . $job['company_id'], $job['name'])];
+            if ($this->showCompany) {
+                $job['company_id'] = [new CompanyLogo($company, ['height' => '60px', 'align' => 'right']), new \Ease\Html\ATag('company.php?id='.$job['company_id'], $job['name'])];
             } else {
                 unset($job['company_id']);
             }
+
             unset($job['name'], $job['logo']);
 
             $this->addRowColumns($job);
