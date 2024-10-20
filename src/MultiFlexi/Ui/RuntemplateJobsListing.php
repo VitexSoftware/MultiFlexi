@@ -25,6 +25,7 @@ class RuntemplateJobsListing extends \MultiFlexi\Ui\JobHistoryTable
 {
     public \MultiFlexi\RunTemplate $runtemplate;
     public bool $showIcon = false;
+    public bool $showCompany = false;
     public function __construct(\MultiFlexi\RunTemplate $runtemplate, array $properties = [])
     {
         $this->runtemplate = $runtemplate;

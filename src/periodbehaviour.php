@@ -25,7 +25,7 @@ require_once './init.php';
 $oPage->onlyForLogged();
 
 $runTemplater = new RunTemplate(WebPage::getRequestValue('id', 'int'));
-
+$_SESSION['company'] = $runTemplater->getDataValue('company_id');
 $actions = new \MultiFlexi\ActionConfig();
 
 if (\Ease\WebPage::isPosted()) {
