@@ -83,9 +83,11 @@ class Zabbix extends \MultiFlexi\CommonAction
         }
 
         if ($dataForZabbix) {
-            if (file_exists('/usr/bin/zabbix_sender')) {
+            if (\Ease\Shared::cfg('USE_ZABBIX_SENDER') && file_exists('/usr/bin/zabbix_sender')) {
                 $cmd = sprintf("zabbix_sender -v -z %s -s %s -k %s -o '%s'", $server, $me, $zabbixKey, $dataForZabbix);
-                system($cmd);
+                $this->addStatusMessage($cmd, 'debug');
+                exec($cmd, $output, $return_var);
+                $this->addStatusMessage((string) $return_var.':'.implode("\n", $output), 'debug');
             } else {
                 $packet = new \MultiFlexi\Zabbix\Request\Packet();
                 $packet->addMetric((new \MultiFlexi\Zabbix\Request\Metric($zabbixKey, $dataForZabbix))->withHostname($me));

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MultiFlexi\n"
-"POT-Creation-Date: 2024-10-19 19:51+0200\n"
-"PO-Revision-Date: 2024-10-19 21:24+0200\n"
+"POT-Creation-Date: 2024-10-20 20:22+0200\n"
+"PO-Revision-Date: 2024-10-20 20:23+0200\n"
 "Last-Translator: Vítězslav Dvořák <vitex@vitexsoftware.cz>\n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -85,7 +85,7 @@ msgstr ""
 
 #: ../src/MultiFlexi/Action/CustomCommand.php:73
 msgid "Custom Command done"
-msgstr "uživatelský příkaz dokončen"
+msgstr "Uživatelský příkaz dokončen"
 
 #: ../src/MultiFlexi/Action/Github.php:32
 msgid "Github Issue"
@@ -97,7 +97,7 @@ msgstr ""
 
 #: ../src/MultiFlexi/Action/Github.php:52
 msgid "GitHub token"
-msgstr ""
+msgstr "Token Githubu"
 
 #: ../src/MultiFlexi/Action/Github.php:52
 msgid "How to obtain Github Token"
@@ -382,8 +382,7 @@ msgstr "Aplkace %s byla odebrána ze společnosti %s"
 
 #: ../src/MultiFlexi/CompanyJob.php:64 ../src/MultiFlexi/Ui/AppJobsTable.php:34
 #: ../src/MultiFlexi/Ui/AppRow.php:81
-#: ../src/MultiFlexi/Ui/JobHistoryTable.php:41
-#: ../src/MultiFlexi/Ui/JobHistoryTable.php:43 ../src/app.php:80
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:46 ../src/app.php:80
 #: ../src/company.php:60 ../src/companyapp.php:69
 msgid "Job ID"
 msgstr "ID úlohy"
@@ -391,18 +390,17 @@ msgstr "ID úlohy"
 #: ../src/MultiFlexi/CompanyJob.php:69 ../src/MultiFlexi/Env/Application.php:80
 #: ../src/MultiFlexi/Logger.php:118
 #: ../src/MultiFlexi/Ui/ApplicationPanel.php:42
-#: ../src/MultiFlexi/Ui/JobHistoryTable.php:41 ../src/app.php:67
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:43 ../src/app.php:67
 #: ../src/company.php:60 ../src/launch.php:26
 msgid "Application"
 msgstr "Aplikace"
 
 #: ../src/MultiFlexi/CompanyJob.php:77 ../src/MultiFlexi/Ui/AppJobsTable.php:34
 #: ../src/MultiFlexi/Ui/AppRow.php:81
-#: ../src/MultiFlexi/Ui/JobHistoryTable.php:41
-#: ../src/MultiFlexi/Ui/JobHistoryTable.php:43 ../src/app.php:80
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:46 ../src/app.php:80
 #: ../src/company.php:60 ../src/companyapp.php:69
 msgid "Exit Code"
-msgstr "Kód při ukončení"
+msgstr "Exit Kód"
 
 #: ../src/MultiFlexi/CompanyJob.php:78
 msgid "Standard Output"
@@ -424,16 +422,14 @@ msgstr "Čas ukončení úlohy"
 #: ../src/MultiFlexi/Logger.php:126 ../src/MultiFlexi/Ui/Breadcrumb.php:53
 #: ../src/MultiFlexi/Ui/CompanyPanel.php:40
 #: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:38
-#: ../src/MultiFlexi/Ui/JobHistoryTable.php:41
-#: ../src/MultiFlexi/Ui/JobHistoryTable.php:43 ../src/app.php:80
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:51 ../src/app.php:80
 #: ../src/company.php:24 ../src/companydelete.php:24 ../src/companysetup.php:24
 msgid "Company"
 msgstr "Společnost"
 
 #: ../src/MultiFlexi/CompanyJob.php:90 ../src/MultiFlexi/Ui/AppJobsTable.php:34
 #: ../src/MultiFlexi/Ui/AppRow.php:81
-#: ../src/MultiFlexi/Ui/JobHistoryTable.php:41
-#: ../src/MultiFlexi/Ui/JobHistoryTable.php:43 ../src/company.php:60
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:48 ../src/company.php:60
 #: ../src/companyapp.php:69
 msgid "Launcher"
 msgstr "Spouštěč"
@@ -568,7 +564,6 @@ msgid "Provide Informations about Current running Environment"
 msgstr ""
 
 #: ../src/MultiFlexi/Env/Pohoda.php:61
-#| msgid "Pohoda Checker"
 msgid "Pohoda mServer"
 msgstr "Pohoda mServer"
 
@@ -590,7 +585,6 @@ msgid "Launch container in Azure"
 msgstr "Sputit container v Azure"
 
 #: ../src/MultiFlexi/Executor/Docker.php:35
-#| msgid "Checker"
 msgid "Docker"
 msgstr "Docker"
 
@@ -811,8 +805,7 @@ msgid "Config fields"
 msgstr "Pole nastavení"
 
 #: ../src/MultiFlexi/Ui/AppJobsTable.php:34 ../src/MultiFlexi/Ui/AppRow.php:81
-#: ../src/MultiFlexi/Ui/JobHistoryTable.php:41
-#: ../src/MultiFlexi/Ui/JobHistoryTable.php:43 ../src/app.php:80
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:47 ../src/app.php:80
 #: ../src/company.php:60 ../src/companyapp.php:69
 msgid "Launch time"
 msgstr "Čas spuštění"
@@ -823,7 +816,7 @@ msgid "Not launched yet"
 msgstr "Zatím nespuštěno"
 
 #: ../src/MultiFlexi/Ui/AppJobsTable.php:46 ../src/MultiFlexi/Ui/AppRow.php:93
-#: ../src/MultiFlexi/Ui/JobHistoryTable.php:79
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:94
 #: ../src/MultiFlexi/Ui/JobInfo.php:52 ../src/company.php:87
 #: ../src/companyapp.php:81
 msgid "Timer"
@@ -841,7 +834,7 @@ msgstr "Spustit okamžitě"
 #: ../src/MultiFlexi/Ui/AppLaunchForm.php:76
 #: ../src/MultiFlexi/Ui/AppLaunchForm.php:77 ../src/MultiFlexi/Ui/AppRow.php:61
 #: ../src/MultiFlexi/Ui/LaunchButton.php:31
-#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:39
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:38
 #: ../src/MultiFlexi/Ui/RuntemplateLaunchForm.php:81
 #: ../src/MultiFlexi/Ui/RuntemplateLaunchForm.php:82 ../src/company.php:68
 #: ../src/job.php:49
@@ -849,7 +842,7 @@ msgid "Launch"
 msgstr "Spustit"
 
 #: ../src/MultiFlexi/Ui/AppLaunchForm.php:77
-#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:39
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:38
 #: ../src/MultiFlexi/Ui/RuntemplateLaunchForm.php:82 ../src/company.php:68
 #: ../src/job.php:49
 msgid "Schedule"
@@ -1229,7 +1222,6 @@ msgstr "Vykonávač není dostupný"
 
 #: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:30
 #: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:31
-#| msgid "AbraFlexi send"
 msgid "AbraFlexi"
 msgstr "AbraFlexi"
 
@@ -1298,7 +1290,6 @@ msgid "Password for Certificate"
 msgstr "Heslo pro certifikát"
 
 #: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:40
-#| msgid "ClientID"
 msgid "X-IBM-Client-Id"
 msgstr "X-IBM-Client-Id"
 
@@ -1347,7 +1338,7 @@ msgstr "neúspěch"
 msgid "success"
 msgstr "úspěch"
 
-#: ../src/MultiFlexi/Ui/JobHistoryTable.php:72
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:81
 msgid "Job Info"
 msgstr "Info úlohy"
 
@@ -1549,15 +1540,19 @@ msgstr "Heslo pro RestAPI"
 msgid "None"
 msgstr "Nic"
 
-#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:42
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:43
 msgid "Delete !!!"
 msgstr "Smazat !!!"
 
-#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:44
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:45
 msgid "Delete ?"
 msgstr "Smazat ?"
 
 #: ../src/MultiFlexi/Ui/RunTemplatePanel.php:50
+msgid "automatically schedule in an interval"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:51
 msgid "Update RunTemplate name"
 msgstr "Aktualizovat název předlohy běhu"
 

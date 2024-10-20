@@ -49,11 +49,11 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
 
         $runtemplateOptions->addColumn(4, [_('automatically schedule in an interval').': ', $intervalChooser]);
         $nameInput = new \Ease\Html\ATag('#', $runtemplate->getRecordName(), ['class' => 'editable', 'id' => 'name', 'data-pk' => $runtemplate->getMyKey(), 'data-url' => 'runtemplatesave.php', 'data-title' => _('Update RunTemplate name')]);
-       
+
         $runtemplateBottom = new \Ease\TWB4\Row();
         $runtemplateBottom->addColumn(6, new RuntemplateCloneForm($runtemplate));
         $runtemplateBottom->addColumn(6, $deleteButton);
-        
+
         parent::__construct([new \Ease\Html\ATag('companyapp.php?app_id='.$runtemplate->getDataValue('app_id').'&company_id='.$runtemplate->getDataValue('company_id'), '⚗️ '), $nameInput], 'inverse', $runtemplateOptions, $runtemplateBottom);
         $this->includeJavaScript('js/bootstrap-editable.js');
         $this->includeCss('css/bootstrap-editable.css');
@@ -70,13 +70,12 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
 
 EOD);
         $this->addJavaScript("$('.editable').editable();", null, true);
-        
+
         $runtemplateTabs = new \Ease\TWB4\Tabs();
         $runtemplateTabs->addTab(_('Jobs'), [$runtemplateJobs]);
         $runtemplateTabs->addTab(_('Options'), [new RuntemplateConfigForm($runtemplate)]);
-        
+
         $this->addItem($runtemplateTabs);
-        
     }
 
     public function finalize(): void

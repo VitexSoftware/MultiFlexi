@@ -24,8 +24,6 @@ class LaunchJob extends \MultiFlexi\CommonAction
 {
     /**
      * Module Caption.
-     *
-     * @return string
      */
     public static function name(): string
     {
@@ -34,8 +32,6 @@ class LaunchJob extends \MultiFlexi\CommonAction
 
     /**
      * Module Description.
-     *
-     * @return string
      */
     public static function description(): string
     {

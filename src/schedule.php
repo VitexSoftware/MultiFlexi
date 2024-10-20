@@ -18,9 +18,10 @@ namespace MultiFlexi\Ui;
 require_once './init.php';
 $oPage->onlyForLogged();
 
-$runTemplate = new \MultiFlexi\RunTemplate(WebPage::getRequestValue('id', 'int'));
-
 $jobID = WebPage::getRequestValue('cancel', 'int');
+$jobber = new \MultiFlexi\Job($jobID);
+$runTemplate = $jobID ? $jobber->runTemplate : new \MultiFlexi\RunTemplate(WebPage::getRequestValue('id', 'int'));
+
 $oPage->addItem(new PageTop(_('Schedule Job')));
 
 if (null === $runTemplate->getMyKey()) {
@@ -31,7 +32,6 @@ if (null === $runTemplate->getMyKey()) {
     $company = $runTemplate->getCompany();
 
     if (WebPage::isPosted()) {
-        $jobber = new \MultiFlexi\Job();
         $when = WebPage::getRequestValue('when');
         $uploadEnv = [];
 
