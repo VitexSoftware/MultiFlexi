@@ -58,7 +58,7 @@ class AppLaunchForm extends \Ease\TWB4\Form
                     break;
                 case 'checkbox':
                     if (\array_key_exists($fieldKey, $env) === false) {
-                        $this->addInput(new \Ease\TWB4\Widgets\Toggle($fieldKey, $fieldProps['defval']), $fieldKey.'&nbsp;', $fieldProps['defval'], $fieldProps['description']);
+                        $this->addInput(new \Ease\TWB4\Widgets\Toggle($fieldKey, (bool)$fieldProps['defval']), $fieldKey.'&nbsp;', $fieldProps['defval'], $fieldProps['description']);
                     }
 
                     break;
