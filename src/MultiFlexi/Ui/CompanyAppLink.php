@@ -20,10 +20,11 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class CompanyAppLink extends \Ease\Html\ATag {
-
-    public function __construct(\MultiFlexi\Company $company, \MultiFlexi\Application $app, $properties = []) {
+class CompanyAppLink extends \Ease\Html\ATag
+{
+    public function __construct(\MultiFlexi\Company $company, \MultiFlexi\Application $app, $properties = [])
+    {
         $properties['title'] = $company->getDataValue('code');
-        parent::__construct('companyapp.php?company_id=' . $company->getMyKey() . '&app_id=' . $app->getMyKey(), $company->getRecordName(), $properties);
+        parent::__construct('companyapp.php?company_id='.$company->getMyKey().'&app_id='.$app->getMyKey(), $company->getRecordName(), $properties);
     }
 }
