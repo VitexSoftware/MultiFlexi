@@ -24,7 +24,6 @@ class CompanyAppImageLink extends \Ease\Html\ATag
 {
     public function __construct(\MultiFlexi\Company $company, \MultiFlexi\Application $app, $properties = [])
     {
-        $properties['style'] = 'height: auto';
         $properties['title'] = $company->getRecordName();
         parent::__construct('companyapp.php?company_id='.$company->getMyKey().'&app_id='.$app->getMyKey(), new CompanyLogo($company, $properties));
     }
