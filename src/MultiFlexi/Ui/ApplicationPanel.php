@@ -46,11 +46,15 @@ class ApplicationPanel extends Panel
         $usedInCompanys = $ca->listingQuery()->select(['companyapp.company_id', 'company.name', 'company.code', 'company.logo'], true)->leftJoin('company ON company.id = companyapp.company_id')->where('app_id', $cid)->fetchAll('company_id');
 
         if ($usedInCompanys) {
-            $usedByCompany = new \Ease\Html\SpanTag(_('Used by').': ');
+            $usedByCompany = new \Ease\Html\DivTag(_('Used by').': ', ['class' => 'card-group']);
 
             foreach ($usedInCompanys as $companyInfo) {
                 $companyInfo['id'] = $companyInfo['company_id'];
-                $usedByCompany->addItem(new CompanyAppLinkButton(new \MultiFlexi\Company($companyInfo, ['autoload' => false]), $application->getMyKey(), ['style' => 'height: 50px;']));
+                $kumpan = new \MultiFlexi\Company($companyInfo, ['autoload' => false]);
+                $calb = new CompanyAppImageLink($kumpan, $application, ['class' => 'card-img-top', 'style' => 'height: 50px;']);
+                $crls = new \MultiFlexi\Ui\CompanyRuntemplatesLinks($kumpan, $application, [], ['class' => '']);
+
+                $usedByCompany->addItem(new \Ease\TWB4\Card([$calb, new \Ease\Html\DivTag([new \Ease\Html\H5Tag($kumpan->getDataValue('name'), ['class' => 'card-title']), $crls], ['class' => 'card-body'])], ['style' => 'width: 6rem;']));
             }
 
             $this->headRow->addColumn(6, $usedByCompany);

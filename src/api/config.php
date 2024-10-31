@@ -75,7 +75,7 @@ return [
 
     // logger
     'logger.name' => \Ease\Shared::appName(),
-    'logger.path' => \realpath(__DIR__.'/../../logs').'/app.log',
+    'logger.path' => '/tmp/multiflexi-api.log',
     'logger.level' => 300, // equals WARNING level
     'logger.options' => [],
 ];
