@@ -66,7 +66,7 @@ if ($runtemplatesRaw->count()) {
         } else {
             $runtemplateRow->addColumn(2, new ExitCode(-1));
         }
-        $runtemplateRow->addColumn(4, new ATag('runtemplate.php?id=' . $runtemplateData['id'],$runtemplateData['name']));
+        $runtemplateRow->addColumn(6, new ATag('runtemplate.php?id=' . $runtemplateData['id'],$runtemplateData['name']));
         $runtemplatesDiv->addItem($runtemplateRow);
         $runtemplates[$runtemplateData['id']] = $runtemplateData['name'];
     }
