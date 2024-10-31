@@ -65,7 +65,7 @@ $jobFoot = new \Ease\TWB4\Row();
 $jobFoot->addColumn(2, $previousButton);
 $jobFoot->addColumn(2, $nextButton);
 $jobFoot->addColumn(2, $scheduleButton);
-$jobFoot->addColumn(2, $runTemplateButton);
+$jobFoot->addColumn(4, $runTemplateButton);
 
 $appPanel = new ApplicationPanel($apps, [new JobInfo($jobber), $outputTabs], $jobFoot);
 
