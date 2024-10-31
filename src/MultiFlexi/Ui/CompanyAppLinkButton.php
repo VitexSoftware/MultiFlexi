@@ -22,8 +22,8 @@ namespace MultiFlexi\Ui;
  */
 class CompanyAppLinkButton extends \Ease\TWB4\LinkButton
 {
-    public function __construct(\MultiFlexi\Company $company, $app_id, $properties = [])
+    public function __construct(\MultiFlexi\Company $company, \MultiFlexi\Application $app, $properties = [])
     {
-        parent::__construct('companyapp.php?company_id='.$company->getMyKey().'&app_id='.$app_id, [new CompanyLogo($company, ['style' => 'height: 100%']), '&nbsp;', $company->getDataValue('code') ?: $company->getRecordName()], 'inverse', $properties);
+        parent::__construct('companyapp.php?company_id='.$company->getMyKey().'&app_id='.$app->getMyKey(), [new CompanyLogo($company, ['style' => 'height: 100%']), '&nbsp;', $company->getDataValue('code') ?: $company->getRecordName()], 'inverse', $properties);
     }
 }
