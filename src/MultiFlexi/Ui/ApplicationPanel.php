@@ -51,7 +51,7 @@ class ApplicationPanel extends Panel
             foreach ($usedInCompanys as $companyInfo) {
                 $companyInfo['id'] = $companyInfo['company_id'];
                 $kumpan = new \MultiFlexi\Company($companyInfo, ['autoload' => false]);
-                $calb = new CompanyAppImageLink($kumpan, $application, ['class' => 'card-img-top', 'style' => 'height: 50px;']);
+                $calb = new CompanyAppImageLink($kumpan, $application, ['class' => 'card-img-top']);
                 $crls = new \MultiFlexi\Ui\CompanyRuntemplatesLinks($kumpan, $application, [], ['class' => '']);
 
                 $usedByCompany->addItem(new \Ease\TWB4\Card([$calb, new \Ease\Html\DivTag([new \Ease\Html\H5Tag($kumpan->getDataValue('name'), ['class' => 'card-title']), $crls], ['class' => 'card-body'])], ['style' => 'width: 6rem;']));
