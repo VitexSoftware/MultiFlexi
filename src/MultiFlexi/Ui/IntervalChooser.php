@@ -24,12 +24,8 @@ class IntervalChooser extends \Ease\Html\SelectTag
 {
     /**
      * Script run interval chooser.
-     *
-     * @param string $name
-     * @param string $defaultValue
-     * @param array  $properties
      */
-    public function __construct($name, $defaultValue = null, $properties = [])
+    public function __construct(string $name, string $defaultValue = '', array $properties = [])
     {
         parent::__construct($name, [
             'n' => _('Disabled'),

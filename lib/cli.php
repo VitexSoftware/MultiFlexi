@@ -38,6 +38,7 @@ $command = \array_key_exists(1, $argv) ? $argv[1] : 'help';
 $argument = \array_key_exists(2, $argv) ? $argv[2] : null;
 $identifier = \array_key_exists(3, $argv) ? $argv[3] : null;
 $property = \array_key_exists(4, $argv) ? $argv[4] : null;
+$option = \array_key_exists(5, $argv) ? $argv[5] : null;
 
 switch ($command) {
     case 'version':
@@ -58,6 +59,12 @@ switch ($command) {
                 $engine = new \MultiFlexi\Company(is_numeric($identifier) ? (int) $identifier : ['code' => $identifier], ['autoload' => 'true']);
 
                 break;
+
+            case 'runtemplate':
+                $engine = new \MultiFlexi\RunTemplate((int) $identifier);
+
+                break;
+
 
             default:
                 echo $argv[0].' remove <sql row id or other identifier>';
@@ -102,6 +109,17 @@ switch ($command) {
 
                 $checkData = ['code' => (string) $identifier];
                 $engine = new \MultiFlexi\Company(['code' => (string) $identifier, 'name' => $property ? $property : $identifier], ['autoload' => false]);
+
+                break;
+            case 'runtemplate':
+                if (empty($identifier)) {
+                    echo $argv[0].' add runtemplate <name> <app_id> <company_id>';
+
+                    exit;
+                }
+
+                $checkData = ['name' => (string) $identifier, 'app_id' => $property, 'company_id' => $option, 'interval'=>'n'];
+                $engine = new \MultiFlexi\RunTemplate($checkData, ['autoload' => false]);
 
                 break;
 
@@ -186,6 +204,25 @@ switch ($command) {
                 $data = $engine->listingQuery()->select([
                     'id',
                 ])->fetchAll();
+
+                break;
+
+            case 'runtemplate':
+                $engine = new RunTemplate();
+                $data = $engine->listingQuery()->select([
+                    'id',
+                    'enabled',
+                    'name',
+                    'app_id',
+                    'company_id',
+                    'DatCreate',
+                    'DatUpdate',
+                    'setup',
+                    'cmdparams',
+                    'deploy',
+                    'homepage',
+                    'requirements',
+                ], true)->fetchAll();
 
                 break;
 
