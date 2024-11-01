@@ -74,9 +74,9 @@ class Application extends DBEngine
             }
         }
 
-        if ((\array_key_exists('uuid', $data) === false) || empty($data['uuid'])) {
-            $data['uuid'] = \Ease\Functions::guidv4();
-        }
+//        if ((\array_key_exists('uuid', $data) === false) || empty($data['uuid'])) {
+//            $data['uuid'] = \Ease\Functions::guidv4();
+//        }
 
         if ((\array_key_exists('code', $data) === false) || empty($importData['code'])) {
             //            $data['code'] = substr(substr(strtoupper($data['executable'] ? basename($data['executable']) : $data['name']), -7), 0, 6);
@@ -361,7 +361,7 @@ class Application extends DBEngine
                     } catch (\PDOException $exc) {
                         echo $exc->getTraceAsString();
                         $problemData = $this->getData();
-                        $problemData['image'] = substr($problemData['image'], 0, 20).' ...';
+                        $problemData['image'] = substr((string)$problemData['image'], 0, 20).' ...';
                         fwrite(\STDERR, print_r($problemData, true).\PHP_EOL);
                         echo $exc->getMessage();
                     }
