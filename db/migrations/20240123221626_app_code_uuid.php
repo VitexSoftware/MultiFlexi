@@ -2,11 +2,21 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Phinx\Migration\AbstractMigration;
 
 final class AppCodeUuid extends AbstractMigration
 {
-
     /**
      * Change Method.
      *
@@ -22,10 +32,10 @@ final class AppCodeUuid extends AbstractMigration
     {
         $table = $this->table('apps');
         $table
-                ->addColumn('code', 'string', ['null' => true, 'limit' => 8])
-                ->addColumn('uuid', 'string', ['null' => true, 'limit' => 36])
-                ->addIndex(['code'], ['unique' => true])
-                ->addIndex(['uuid'], ['unique' => true])
-                ->save();
-   }
+            ->addColumn('code', 'string', ['null' => true, 'limit' => 8])
+            ->addColumn('uuid', 'string', ['null' => true, 'limit' => 36])
+            ->addIndex(['code'], ['unique' => true])
+            ->addIndex(['uuid'], ['unique' => true])
+            ->save();
+    }
 }

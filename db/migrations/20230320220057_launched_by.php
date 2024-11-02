@@ -2,6 +2,17 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Phinx\Migration\AbstractMigration;
 
 final class LaunchedBy extends AbstractMigration
@@ -21,8 +32,7 @@ final class LaunchedBy extends AbstractMigration
     {
         $table = $this->table('job');
         $table
-                ->addColumn('launched_by', 'text', ['null' => true, 'default' => null,'comment'=>'launchd by'])
-                ->save();
-
+            ->addColumn('launched_by', 'text', ['null' => true, 'default' => null, 'comment' => 'launchd by'])
+            ->save();
     }
 }

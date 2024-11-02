@@ -2,10 +2,21 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Phinx\Migration\AbstractMigration;
 
-final class Job extends AbstractMigration {
-
+final class Job extends AbstractMigration
+{
     /**
      * Change Method.
      *
@@ -17,19 +28,26 @@ final class Job extends AbstractMigration {
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-    public function change() {
+    public function change(): void
+    {
         $table = $this->table('job');
-        $table->addColumn('app_id', 'integer', ['null' => false,'signed'=>false])
-                ->addColumn('begin', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
-                ->addColumn('end', 'datetime', ['null' => true])
-                ->addColumn('company_id', 'integer', ['null' => false,'signed'=>false])
-                ->addColumn('exitcode', 'integer', ['null' => true])
-                ->addForeignKey('app_id', 'apps', ['id'],
-                        ['constraint' => 'job-app_must_exist'])
-                ->addForeignKey('company_id', 'company', ['id'],
-                        ['constraint' => 'job-company_must_exist']);
+        $table->addColumn('app_id', 'integer', ['null' => false])
+            ->addColumn('begin', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
+            ->addColumn('end', 'datetime', ['null' => true])
+            ->addColumn('company_id', 'integer', ['null' => false])
+            ->addColumn('exitcode', 'integer', ['null' => true])
+            ->addForeignKey(
+                'app_id',
+                'apps',
+                ['id'],
+                ['constraint' => 'job-app_must_exist'],
+            )
+            ->addForeignKey(
+                'company_id',
+                'company',
+                ['id'],
+                ['constraint' => 'job-company_must_exist'],
+            );
         $table->save();
-
     }
-
 }

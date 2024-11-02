@@ -1,11 +1,22 @@
 <?php
+
 declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 use Phinx\Migration\AbstractMigration;
 
 final class AbraFlexiAppsEnvironment extends AbstractMigration
 {
-
     /**
      * Change Method.
      *
@@ -21,6 +32,7 @@ final class AbraFlexiAppsEnvironment extends AbstractMigration
     {
         $apps = $this->fetchAll('SELECT * FROM apps');
         $table = $this->table('conffield');
+
         foreach ($apps as $appInfo) {
             $rows = [
                 [
@@ -28,29 +40,29 @@ final class AbraFlexiAppsEnvironment extends AbstractMigration
                     'keyname' => 'ABRAFLEXI_URL',
                     'description' => 'AbraFlexi Server URI',
                     'defval' => 'https://demo.flexibee.eu:5434',
-                    'type'=>'string'
+                    'type' => 'string',
                 ],
                 [
                     'app_id' => $appInfo['id'],
                     'keyname' => 'ABRAFLEXI_LOGIN',
                     'description' => 'AbraFlexi Login',
                     'defval' => 'winstrom',
-                    'type'=>'string'
+                    'type' => 'string',
                 ],
                 [
                     'app_id' => $appInfo['id'],
                     'keyname' => 'ABRAFLEXI_PASSWORD',
                     'description' => 'AbraFlexi password',
                     'defval' => 'winstrom',
-                    'type'=>'string'
+                    'type' => 'string',
                 ],
                 [
                     'app_id' => $appInfo['id'],
                     'keyname' => 'ABRAFLEXI_COMPANY',
                     'description' => '',
                     'defval' => 'demo_de',
-                    'type'=>'string'
-                ]
+                    'type' => 'string',
+                ],
             ];
             $table->insert($rows)->saveData();
         }

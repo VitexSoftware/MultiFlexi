@@ -2,10 +2,21 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Phinx\Migration\AbstractMigration;
 
-final class CompanyCodeDefault extends AbstractMigration {
-
+final class CompanyCodeDefault extends AbstractMigration
+{
     /**
      * Change Method.
      *
@@ -17,16 +28,18 @@ final class CompanyCodeDefault extends AbstractMigration {
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-    public function change(): void {
+    public function change(): void
+    {
         $stmt = $this->query('SELECT id,name FROM company'); // returns PDOStatement
         $rows = $stmt->fetchAll();
+
         foreach ($rows as $companyInfo) {
             $builder = $this->getQueryBuilder();
             $builder
-                    ->update('company')
-                    ->set('code', mb_substr(strtoupper(str_ireplace (' ', '_', $companyInfo['name'])), 0, 9))
-                    ->where(['id' => $companyInfo['id']])
-                    ->execute();
+                ->update('company')
+                ->set('code', mb_substr(strtoupper(str_ireplace(' ', '_', $companyInfo['name'])), 0, 9))
+                ->where(['id' => $companyInfo['id']])
+                ->execute();
         }
     }
 }

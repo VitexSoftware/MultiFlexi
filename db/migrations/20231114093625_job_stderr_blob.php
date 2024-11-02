@@ -2,6 +2,17 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Phinx\Migration\AbstractMigration;
 
 final class JobStderrBlob extends AbstractMigration
@@ -19,15 +30,14 @@ final class JobStderrBlob extends AbstractMigration
      */
     public function change(): void
     {
-        
         $table = $this->table('job');
-        if ($this->adapter->getAdapterType() == 'mysql') {
+
+        if ($this->adapter->getAdapterType() === 'mysql') {
             $this->query("UPDATE job SET stderr = '', stdout = ''");
             $table
-                    ->changeColumn('stderr', 'blob', ['null' => false, 'limit' => Phinx\Db\Adapter\MysqlAdapter::BLOB_LONG])
-                    ->changeColumn('stdout', 'blob', ['null' => false, 'limit' => Phinx\Db\Adapter\MysqlAdapter::BLOB_LONG])
-                    ->update();
+                ->changeColumn('stderr', 'blob', ['null' => false, 'limit' => Phinx\Db\Adapter\MysqlAdapter::BLOB_LONG])
+                ->changeColumn('stdout', 'blob', ['null' => false, 'limit' => Phinx\Db\Adapter\MysqlAdapter::BLOB_LONG])
+                ->update();
         }
-
     }
 }

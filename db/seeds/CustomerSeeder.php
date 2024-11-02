@@ -1,9 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Phinx\Seed\AbstractSeed;
 
-class CustomerSeeder extends AbstractSeed {
-
+class CustomerSeeder extends AbstractSeed
+{
     /**
      * Run Method.
      *
@@ -23,12 +36,11 @@ class CustomerSeeder extends AbstractSeed {
                 'lastname' => 'Demo',
                 'password' => '',
                 'login' => 'demo',
-                'DatCreate' => date('Y-m-d H:i:s')
-            ]
+                'DatCreate' => date('Y-m-d H:i:s'),
+            ],
         ];
 
         $posts = $this->table('customer');
         $posts->insert($data)->save();
     }
-
 }

@@ -1,18 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Phinx\Migration\AbstractMigration;
 
 class Customer extends AbstractMigration
 {
-
-    /**
-     */
-    public function change()
+    public function change(): void
     {
         // Migration for table users
         $table = $this->table('customer');
         $table
-            ->addColumn('enabled', 'boolean', array('default' => false))
+            ->addColumn('enabled', 'boolean', ['default' => false])
             ->addColumn('settings', 'text', ['null' => true])
             ->addColumn('email', 'string', ['limit' => 128])
             ->addColumn('firstname', 'string', ['null' => true, 'limit' => 32])

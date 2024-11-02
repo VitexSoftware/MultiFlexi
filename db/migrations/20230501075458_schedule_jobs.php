@@ -2,11 +2,21 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Phinx\Migration\AbstractMigration;
 
 final class ScheduleJobs extends AbstractMigration
 {
-
     /**
      * Change Method.
      *
@@ -22,13 +32,14 @@ final class ScheduleJobs extends AbstractMigration
     {
         $table = $this->table('schedule');
         $table
-                ->addColumn('after', 'datetime')
-                ->addColumn('companyapp', 'integer')
-                ->create();
-                if ($this->adapter->getAdapterType() != 'sqlite') {
-                    $table
-                        ->changeColumn('id', 'integer', ['identity' => true, 'signed' => false])
-                        ->save();
-                }
-            }
+            ->addColumn('after', 'datetime')
+            ->addColumn('companyapp', 'integer')
+            ->create();
+
+        if ($this->adapter->getAdapterType() !== 'sqlite') {
+            $table
+                ->changeColumn('id', 'integer', ['identity' => true])
+                ->save();
+        }
+    }
 }
