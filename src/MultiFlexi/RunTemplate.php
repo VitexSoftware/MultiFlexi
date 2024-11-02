@@ -21,14 +21,13 @@ use MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
 /**
  * @author vitex
  */
-class RunTemplate extends \MultiFlexi\Engine
-{
+class RunTemplate extends \MultiFlexi\Engine {
+
     /**
      * @param mixed $identifier
      * @param array $options
      */
-    public function __construct($identifier = null, $options = [])
-    {
+    public function __construct($identifier = null, $options = []) {
         $this->nameColumn = 'name';
         $this->myTable = 'runtemplate';
         parent::__construct($identifier, $options);
@@ -43,9 +42,8 @@ class RunTemplate extends \MultiFlexi\Engine
      *
      * @return int
      */
-    public function runTemplateID(int $appId, int $companyId)
-    {
-        $runTemplateId = (int) $this->listingQuery()->where('company_id='.$companyId.' AND app_id='.$appId)->select('id', true)->fetchColumn();
+    public function runTemplateID(int $appId, int $companyId) {
+        $runTemplateId = (int) $this->listingQuery()->where('company_id=' . $companyId . ' AND app_id=' . $appId)->select('id', true)->fetchColumn();
 
         return $runTemplateId ? $runTemplateId : $this->dbsync(['app_id' => $appId, 'company_id' => $companyId, 'interv' => 'n']);
     }
@@ -55,8 +53,7 @@ class RunTemplate extends \MultiFlexi\Engine
      *
      * @return bool
      */
-    public function setState(bool $state)
-    {
+    public function setState(bool $state) {
         if ($state === false) {
             $this->setDataValue('interv', 'n');
         }
@@ -70,8 +67,7 @@ class RunTemplate extends \MultiFlexi\Engine
         return $changed;
     }
 
-    public function performInit(): void
-    {
+    public function performInit(): void {
         $app = new Application((int) $this->getDataValue('app_id'));
 
         //        $this->setEnvironment();
@@ -89,8 +85,7 @@ class RunTemplate extends \MultiFlexi\Engine
      *
      * @return int
      */
-    public function deleteFromSQL($data = null)
-    {
+    public function deleteFromSQL($data = null) {
         if (null === $data) {
             $data = $this->getData();
         }
@@ -101,12 +96,11 @@ class RunTemplate extends \MultiFlexi\Engine
         return parent::deleteFromSQL($data);
     }
 
-    public function getCompanyEnvironment()
-    {
+    public function getCompanyEnvironment() {
         $connectionData = $this->getAppInfo();
 
         if ($connectionData['type']) {
-            $platformHelperClass = '\\MultiFlexi\\'.$connectionData['type'].'\\Company';
+            $platformHelperClass = '\\MultiFlexi\\' . $connectionData['type'] . '\\Company';
             $platformHelper = new $platformHelperClass($connectionData['company_id'], $connectionData);
 
             return $platformHelper->getEnvironment();
@@ -120,8 +114,7 @@ class RunTemplate extends \MultiFlexi\Engine
      *
      * @return \Envms\FluentPDO\Query
      */
-    public function getCompanyTemplates($companyId)
-    {
+    public function getCompanyTemplates($companyId) {
         return $this->listingQuery()->select(['apps.name AS app_name', 'apps.description', 'apps.homepage', 'apps.uuid'])->leftJoin('apps ON apps.id = runtemplate.app_id')->where('company_id', $companyId);
     }
 
@@ -130,8 +123,7 @@ class RunTemplate extends \MultiFlexi\Engine
      *
      * @return array<array>
      */
-    public function getCompanyRunTemplatesByInterval(int $companyId)
-    {
+    public function getCompanyRunTemplatesByInterval(int $companyId) {
         $runtemplates = [
             'i' => [],
             'h' => [],
@@ -151,8 +143,7 @@ class RunTemplate extends \MultiFlexi\Engine
     /**
      * @return array
      */
-    public function getAppEnvironment()
-    {
+    public function getAppEnvironment() {
         $appInfo = $this->getAppInfo();
         $jobber = new Job();
         $jobber->company = new Company((int) $appInfo['company_id']);
@@ -165,19 +156,19 @@ class RunTemplate extends \MultiFlexi\Engine
     /**
      * @return array
      */
-    public function getAppInfo()
-    {
+    public function getAppInfo() {
         return $this->listingQuery()
-            ->select('apps.*')
-            ->select('apps.id as apps_id')
-            ->select('apps.name as app_name')
-            ->select('company.*')
-            ->select('servers.*')
-            ->where([$this->getMyTable().'.'.$this->getKeyColumn() => $this->getMyKey()])
-            ->leftJoin('apps ON apps.id = runtemplate.app_id')
-            ->leftJoin('company ON company.id = runtemplate.company_id')
-            ->leftJoin('servers ON servers.id = company.server')
-            ->fetch();
+                        ->select('apps.*')
+                        ->select('apps.id as apps_id')
+                        ->select('apps.name as app_name')
+                        ->select('runtemplate.name as runtemplate_name')
+                        ->select('company.*')
+                        ->select('servers.*')
+                        ->where([$this->getMyTable() . '.' . $this->getKeyColumn() => $this->getMyKey()])
+                        ->leftJoin('apps ON apps.id = runtemplate.app_id')
+                        ->leftJoin('company ON company.id = runtemplate.company_id')
+                        ->leftJoin('servers ON servers.id = company.server')
+                        ->fetch();
     }
 
     /**
@@ -187,8 +178,7 @@ class RunTemplate extends \MultiFlexi\Engine
      *
      * @return array
      */
-    public function getPeriodAppsForCompany($companyID)
-    {
+    public function getPeriodAppsForCompany($companyID) {
         return $this->getColumnsFromSQL(['app_id', 'interv', 'id'], ['company_id' => $companyID], 'id', 'app_id');
     }
 
@@ -199,13 +189,11 @@ class RunTemplate extends \MultiFlexi\Engine
      *
      * @return bool save status
      */
-    public function setProvision($status)
-    {
+    public function setProvision($status) {
         return $this->dbsync(['prepared' => $status]);
     }
 
-    public function setPeriods(int $companyId, array $runtemplateIds, string $interval): void
-    {
+    public function setPeriods(int $companyId, array $runtemplateIds, string $interval): void {
         foreach ($runtemplateIds as $runtemplateId) {
             $this->updateToSQL(['interv' => $interval], ['id' => $runtemplateId]);
             //                if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
@@ -215,27 +203,28 @@ class RunTemplate extends \MultiFlexi\Engine
         }
     }
 
-    public function notifyZabbix(array $jobInfo)
-    {
+    public function notifyZabbix(array $jobInfo) {
         $zabbixSender = new ZabbixSender(\Ease\Shared::cfg('ZABBIX_SERVER'));
         $hostname = \Ease\Shared::cfg('ZABBIX_HOST');
         $company = new Company($jobInfo['company_id']);
         $application = new Application($jobInfo['app_id']);
 
         $packet = new ZabbixPacket();
-        $packet->addMetric((new ZabbixMetric('job-['.$company->getDataValue('code').'-'.$application->getDataValue('code').'-'.$jobInfo['id'].'-interval]', $jobInfo['interv']))->withHostname($hostname));
+        $packet->addMetric((new ZabbixMetric('job-[' . $company->getDataValue('code') . '-' . $application->getDataValue('code') . '-' . $jobInfo['id'] . '-interval]', $jobInfo['interv']))->withHostname($hostname));
 
         try {
             $zabbixSender->send($packet);
         } catch (\Exception $ex) {
+            
         }
 
         $packet = new ZabbixPacket();
-        $packet->addMetric((new ZabbixMetric('job-['.$company->getDataValue('code').'-'.$application->getDataValue('code').'-'.$jobInfo['id'].'-interval_seconds]', (string) Job::codeToSeconds($jobInfo['interv'])))->withHostname($hostname));
+        $packet->addMetric((new ZabbixMetric('job-[' . $company->getDataValue('code') . '-' . $application->getDataValue('code') . '-' . $jobInfo['id'] . '-interval_seconds]', (string) Job::codeToSeconds($jobInfo['interv'])))->withHostname($hostname));
 
         try {
             $result = $zabbixSender->send($packet);
         } catch (\Exception $ex) {
+            
         }
 
         return $result;
@@ -246,8 +235,7 @@ class RunTemplate extends \MultiFlexi\Engine
      *
      * @return array
      */
-    public static function stripToValues(array $envData)
-    {
+    public static function stripToValues(array $envData) {
         $env = [];
 
         foreach ($envData as $key => $data) {
@@ -262,8 +250,7 @@ class RunTemplate extends \MultiFlexi\Engine
      *
      * @return array<array>
      */
-    public function getPostActions()
-    {
+    public function getPostActions() {
         $actions = [];
         $s = $this->getDataValue('success') ? unserialize($this->getDataValue('success')) : [];
         $f = $this->getDataValue('fail') ? unserialize($this->getDataValue('fail')) : [];
@@ -282,21 +269,18 @@ class RunTemplate extends \MultiFlexi\Engine
     /**
      * @return \MultiFlexi\Application
      */
-    public function getApplication()
-    {
+    public function getApplication() {
         return new Application($this->getDataValue('app_id'));
     }
 
     /**
      * @return \MultiFlexi\Company
      */
-    public function getCompany()
-    {
+    public function getCompany() {
         return new Company($this->getDataValue('company_id'));
     }
 
-    public function getRuntemplateEnvironment()
-    {
+    public function getRuntemplateEnvironment() {
         $configurator = new Configuration();
         $cfg = $configurator->listingQuery()->where(['runtemplate_id' => $this->getMyKey()])->fetchAll('name');
 
@@ -305,5 +289,29 @@ class RunTemplate extends \MultiFlexi\Engine
         }
 
         return $cfg;
+    }
+
+    public function setEnvironment(array $properties): bool {
+        $companies = new Company($this->getDataValue('company_id'));
+        $app = new Application($this->getDataValue('app_id'));
+
+        $app->setDataValue('company_id', $companies->getMyKey());
+        $app->setDataValue('app_id', $app->getMyKey());
+        $app->setDataValue('app_name', $app->getRecordName());
+
+        $configurator = new \MultiFlexi\Configuration([
+            'runtemplate_id' => $this->getMyKey(),
+            'app_id' => $app->getMyKey(),
+            'company_id' => $companies->getMyKey(),
+                ], ['autoload' => false]);
+
+        if ($app->checkRequiredFields($properties, true) && $configurator->takeData($properties) && null !== $configurator->saveToSQL()) {
+            $configurator->addStatusMessage(_('Config fields Saved'), 'success');
+            $result = true;
+        } else {
+            $configurator->addStatusMessage(_('Error saving Config fields'), 'error');
+            $result = false;
+        }
+        return $result;
     }
 }

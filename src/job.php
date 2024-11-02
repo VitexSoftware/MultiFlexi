@@ -39,7 +39,7 @@ $outputTabs = new \Ease\TWB4\Tabs();
 $outputTabs->addTab(_('Output'), [$stdTerminal, \strlen($jobber->getOutput()) ? new \Ease\TWB4\LinkButton('joboutput.php?id='.$jobID.'&mode=std', _('Download'), 'secondary btn-block') : _('No output')]);
 $outputTabs->addTab(_('Errors'), [$errorTerminal, \strlen($jobber->getErrorOutput()) ? new \Ease\TWB4\LinkButton('joboutput.php?id='.$jobID.'&mode=err', _('Download'), 'secondary btn-block') : _('No errors')], empty($jobber->getOutput()));
 
-$runTemplateButton = new \Ease\TWB4\LinkButton('runtemplate.php?id='.$runTemplate->getMyKey(), '⚗️&nbsp;'.$runTemplate->getRecordName(), 'dark btn-lg btn-block');
+$runTemplateButton = new RuntemplateButton($runTemplate);
 
 // $relaunchButton = new \Ease\TWB4\LinkButton('launch.php?id='.$runTemplate->getMyKey().'&app_id='.$appInfo['app_id'].'&company_id='.$appInfo['company_id'], '&lt;'._('Relaunch').'💨', 'success btn-lg btn-block');
 
@@ -67,7 +67,7 @@ $jobFoot->addColumn(2, $nextButton);
 $jobFoot->addColumn(2, $scheduleButton);
 $jobFoot->addColumn(4, $runTemplateButton);
 
-$appPanel = new ApplicationPanel($apps, [new JobInfo($jobber), $outputTabs], $jobFoot);
+$appPanel = new ArchivedJobPanel($jobber, [new JobInfo($jobber), $outputTabs], $jobFoot);
 
 $oPage->container->addItem(
     new CompanyPanel(new \MultiFlexi\Company($appInfo['company_id']), $appPanel),
