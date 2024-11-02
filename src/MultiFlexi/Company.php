@@ -47,6 +47,8 @@ class Company extends \MultiFlexi\Engine
      */
     public function __sleep()
     {
+        $this->pdo = null;
+
         return ['data', 'objectName', 'evidence'];
     }
 

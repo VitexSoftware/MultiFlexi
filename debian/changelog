@@ -1,8 +1,15 @@
-multiflexi (1.15.0) UNRELEASED; urgency=medium
+multiflexi (1.16.0) UNRELEASED; urgency=medium
 
+  * Work with Environment rewrited
+
+ -- vitex <info@vitexsoftware.cz>  Sun, 03 Nov 2024 00:50:43 +0100
+
+multiflexi (1.15.0) jammy; urgency=medium
+
+  [ vitezslav.dvorak@spojenet.cz ]
   * Runtemplate remove action added
 
- --  <vitezslav.dvorak@spojenet.cz>  Tue, 10 Sep 2024 14:40:01 +0200
+ -- vitex <info@vitexsoftware.cz>  Sun, 03 Nov 2024 00:50:19 +0100
 
 multiflexi (1.14.0) jammy; urgency=medium
 

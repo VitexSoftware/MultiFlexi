@@ -17,7 +17,6 @@ namespace MultiFlexi;
 
 use Ease\Anonym;
 use Ease\Shared;
-use GO\Scheduler;
 
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
@@ -51,18 +50,12 @@ $companys = $companer->listingQuery();
 $customConfig = new Configuration();
 
 if ($interval) {
-    if ($interval === 'i') {
-        $scheduler = new Scheduler();
-        // TODO: #2
-        $scheduler->run();
-    }
-
-    $ap2c = new \MultiFlexi\RunTemplate();
+    $runtemplate = new \MultiFlexi\RunTemplate();
 
     foreach ($companys as $company) {
         LogToSQL::singleton()->setCompany($company['id']);
 
-        $appsForCompany = $ap2c->getColumnsFromSQL(['id', 'interv'], ['company_id' => $company['id'], 'interv' => $interval]);
+        $appsForCompany = $runtemplate->getColumnsFromSQL(['id', 'interv'], ['company_id' => $company['id'], 'interv' => $interval]);
 
         if (empty($appsForCompany) && ($interval !== 'i')) {
             $companer->addStatusMessage(sprintf(_('No applications to run for %s in interval %s'), $company['name'], $interval), 'debug');

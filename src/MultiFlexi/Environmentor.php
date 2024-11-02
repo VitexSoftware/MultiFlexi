@@ -50,14 +50,16 @@ abstract class Environmentor
 
     /**
      * Add MetaData to Environment Fields.
-     *
-     * @return array
      */
-    public function addMetaData(array $environment)
+    public function addMetaData(array $environment): array
     {
         foreach ($this->engine->application->getAppEnvironmentFields() as $key => $envMeta) {
             if (\array_key_exists($key, $environment)) {
-                $environment[$key] = array_merge($envMeta, $environment[$key]);
+                foreach ($envMeta as $mKey => $mValue) {
+                    if (\array_key_exists($mKey, $environment[$key]) === false) {
+                        $environment[$key][$mKey] = $mValue;
+                    }
+                }
             }
         }
 
@@ -111,10 +113,8 @@ abstract class Environmentor
 
     /**
      * Return only key=>value pairs.
-     *
-     * @return array
      */
-    public static function flatEnv(array $envInfo)
+    public static function flatEnv(array $envInfo): array
     {
         $env = [];
 

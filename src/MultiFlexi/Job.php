@@ -511,7 +511,7 @@ EOD;
      *
      * @return array Environment with metadata
      */
-    public function getFullEnvironment()
+    public function getFullEnvironment(): array
     {
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\\Env');
         $injectors = \Ease\Functions::classesInNamespace('MultiFlexi\\Env');
@@ -662,5 +662,10 @@ EOD;
         $prevJobId = $this->listingQuery()->select('id', true)->where($condition)->where('id < '.$this->getMyKey())->orderBy('id DESC')->limit(1)->fetchColumn();
 
         return $prevJobId ? $prevJobId : 0;
+    }
+
+    public function getEnvironment(): array
+    {
+        return $this->environment;
     }
 }
