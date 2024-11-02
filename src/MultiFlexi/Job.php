@@ -112,7 +112,7 @@ class Job extends Engine
             'executor' => $executor,
             'launched_by' => \Ease\Shared::user()->getMyKey(),
         ]);
-        $environment['JOB_ID']['value'] = $jobId;
+        $environment['MULTIFLEXI_JOB_ID']['value'] = $jobId;
         $this->environment = $environment;
         $this->updateToSQL(['env' => serialize($environment), 'command' => $this->getCmdline()], ['id' => $jobId]);
 

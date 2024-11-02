@@ -58,7 +58,7 @@ class JobHistoryTable extends \Ease\TWB4\Table
     public function getJobs()
     {
         return $this->jobber->listingQuery()->
-                        select(['apps.name AS appname', 'apps.image AS appimage', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'job.executor', 'job.company_id', 'company.name', 'company.logo', 'schedule'], true)
+                        select(['apps.name AS appname', 'apps.uuid', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'job.executor', 'job.company_id', 'company.name', 'company.logo', 'schedule'], true)
                             ->leftJoin('apps ON apps.id = job.app_id')
                             ->leftJoin('user ON user.id = job.launched_by')
                             ->limit($this->limit)
@@ -75,9 +75,9 @@ class JobHistoryTable extends \Ease\TWB4\Table
             $company->setDataValue('name', $job['name']);
 
             if ($this->showIcon) {
-                $job['appimage'] = new \Ease\Html\ATag('app.php?id='.$job['app_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag($job['appimage'], _($job['appname']), ['height' => 60, 'title' => $job['appname']]), '&nbsp;', _($job['appname'])])]);
+                $job['uuid'] = new \Ease\Html\ATag('app.php?id='.$job['app_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag(empty($job['appimage']) ? 'appimage.php?uuid='.$job['uuid'] : $job['appimage'], _($job['appname']), ['height' => 60, 'title' => $job['appname']]), '&nbsp;', _($job['appname'])])]);
             } else {
-                unset($job['appimage']);
+                unset($job['uuid']);
             }
 
             $job['id'] = new \Ease\Html\ATag('job.php?id='.$job['id'], [new ExitCode($exitCode, ['style' => 'font-size: 1.0em; font-family: monospace;']), '<br>', new \Ease\TWB4\Badge('info', $job['id'])], ['title' => _('Job Info')]);

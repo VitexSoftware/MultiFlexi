@@ -25,12 +25,10 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class JobInfo extends \Ease\TWB4\Tabs
+class JobInfo extends \Ease\Html\DivTag
 {
     public function __construct(\MultiFlexi\Job $job, $properties = [])
     {
-        parent::__construct(null, $properties);
-
         $jobInfoRow = new \Ease\TWB4\Row();
         $jobInfoRow->addColumn(1, [_('Exitcode').'<br>', new ExitCode($job->getDataValue('exitcode'), ['style' => 'font-size: 2.0em; font-family: monospace;'])]);
         $jobInfoRow->addColumn(4, [_('Commandline').'<br>', $job->getDataValue('command'), '<br>', $job->application->getRecordName().' v.:'.$job->getDataValue('app_version')]);
@@ -51,11 +49,17 @@ class JobInfo extends \Ease\TWB4\Tabs
         $launcher = new \MultiFlexi\User($job->getDataValue('launched_by'));
         $jobInfoRow->addColumn(1, [_('Launched by').'<br>', $launcher->getMyKey() ? new \Ease\Html\ATag('user.php?id='.$launcher->getMyKey(), new \Ease\TWB4\Badge('info', $launcher->getUserLogin())) : _('Timer')]);
 
-        $this->addTab(_('Job').' '.$job->getMyKey(), $jobInfoRow);
+        parent::__construct($jobInfoRow, $properties);
+
+        $jobTabs = new \Ease\TWB4\Tabs();
+
+        $jobTabs->addTab(_('Job').' '.$job->getMyKey(), '');
 
         //        $scheduler = new \MultiFlexi\Scheduler();
         //        $scheduled = $scheduler->listingQuery()->where('job', $job->getMyKey())->fetch();
 
-        $this->addTab(_('Environment'), new EnvironmentView($job->getEnv()));
+        $jobTabs->addTab(_('Environment'), [$jobInfoRow, new EnvironmentView($job->getEnv())]);
+
+        $this->addItem($jobTabs);
     }
 }

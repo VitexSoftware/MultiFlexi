@@ -29,7 +29,7 @@ class MultiFlexi extends \MultiFlexi\Environmentor implements injector
      */
     public static function allKeysHandled()
     {
-        return ['MULTIFLEXI', 'JOB_ID', 'RUNTEMPLATE_ID'];
+        return ['MULTIFLEXI_VERSION', 'MULTIFLEXI_JOB_ID', 'MULTIFLEXI_RUNTEMPLATE_ID'];
     }
 
     /**
@@ -38,9 +38,9 @@ class MultiFlexi extends \MultiFlexi\Environmentor implements injector
     public function getEnvironment(): array
     {
         return $this->addMetaData($this->addSelfAsSource([
-            'MULTIFLEXI' => ['value' => \Ease\Shared::appVersion()],
-            'JOB_ID' => ['value' => $this->engine->getMyKey()],
-            'RUNTEMPLATE_ID' => ['value' => $this->engine->runTemplate->getMyKey()],
+            'MULTIFLEXI_VERSION' => ['value' => \Ease\Shared::appVersion()],
+            'MULTIFLEXI_JOB_ID' => ['value' => $this->engine->getMyKey()],
+            'MULTIFLEXI_RUNTEMPLATE_ID' => ['value' => $this->engine->runTemplate->getMyKey()],
         ]));
     }
 

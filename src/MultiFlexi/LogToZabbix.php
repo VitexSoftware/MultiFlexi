@@ -67,7 +67,12 @@ class LogToZabbix implements \Ease\Logger\Loggingable
 
         if ($jsonText) {
             $packet->addMetric((new ZabbixMetric('ease.message', $jsonText))->withHostname($me));
-            $this->sender->send($packet);
+
+            try {
+                $this->sender->send($packet);
+            } catch (Zabbix\Exception\ZabbixNetworkException $exc) {
+                echo $exc->getTraceAsString();
+            }
         }
 
         // system('zabbix_sender -z ' . \Ease\Shared::cfg('ZABBIX_SERVER') . ' -p 10051 -s "' . \Ease\Shared::cfg('ZABBIX_HOST') . '" -k ' . \Ease\Shared::cfg('ZABBIX_FIELD', 'multi.message') . ' -o "' . $message . '"');
