@@ -51,8 +51,11 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         $nameInput = new \Ease\Html\ATag('#', $runtemplate->getRecordName(), ['class' => 'editable', 'id' => 'name', 'data-pk' => $runtemplate->getMyKey(), 'data-url' => 'runtemplatesave.php', 'data-title' => _('Update RunTemplate name')]);
 
         $runtemplateBottom = new \Ease\TWB4\Row();
-        $runtemplateBottom->addColumn(6, new RuntemplateCloneForm($runtemplate));
-        $runtemplateBottom->addColumn(6, $deleteButton);
+
+        if ($runtemplate->getMyKey()) {
+            $runtemplateBottom->addColumn(6, new RuntemplateCloneForm($runtemplate));
+            $runtemplateBottom->addColumn(6, $deleteButton);
+        }
 
         parent::__construct([new \Ease\Html\ATag('companyapp.php?app_id='.$runtemplate->getDataValue('app_id').'&company_id='.$runtemplate->getDataValue('company_id'), '⚗️ '), $nameInput], 'inverse', $runtemplateOptions, $runtemplateBottom);
         $this->includeJavaScript('js/bootstrap-editable.js');

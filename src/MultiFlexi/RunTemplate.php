@@ -162,6 +162,11 @@ class RunTemplate extends \MultiFlexi\Engine
         return $jobber->getFullEnvironment();
     }
 
+    public function loadEnvironment(): void
+    {
+        $this->setEnvironment($this->getRuntemplateEnvironment());
+    }
+
     /**
      * @return array
      */
@@ -299,13 +304,9 @@ class RunTemplate extends \MultiFlexi\Engine
     public function getRuntemplateEnvironment()
     {
         $configurator = new Configuration();
-        $cfg = $configurator->listingQuery()->where(['runtemplate_id' => $this->getMyKey()])->fetchAll('name');
+        $cfg = $configurator->listingQuery()->select(['name', 'value'], true)->where(['runtemplate_id' => $this->getMyKey()])->fetchAll('name');
 
-        foreach ($cfg as $conf) {
-            $cfg[$conf['name']]['source'] = \get_class($this);
-        }
-
-        return $cfg;
+        return Environmentor::addSource($cfg, \get_class($this));
     }
 
     public function setEnvironment(array $properties): bool

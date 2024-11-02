@@ -29,7 +29,7 @@ class Company extends \MultiFlexi\Environmentor implements injector
      */
     public static function allKeysHandled()
     {
-        return ['MULTIFLEXI_COMPANY_ID', 'MULTIFLEXI_COMPANY_CODE'];
+        return ['MULTIFLEXI_COMPANY_ID', 'MULTIFLEXI_COMPANY_CODE', 'MULTIFLEXI_COMPANY_NAME'];
     }
 
     /**
@@ -41,6 +41,7 @@ class Company extends \MultiFlexi\Environmentor implements injector
         $companyEnvironmentRaw = $this->engine->company->getEnvironment();
         $companyEnvironment['MULTIFLEXI_COMPANY_ID']['value'] = $this->engine->company->getMyKey();
         $companyEnvironment['MULTIFLEXI_COMPANY_CODE']['value'] = $this->engine->company->getDataValue('code');
+        $companyEnvironment['MULTIFLEXI_COMPANY_NAME']['value'] = $this->engine->company->getRecordName();
 
         if ($companyEnvironmentRaw) {
             foreach ($companyEnvironmentRaw as $key => $value) {

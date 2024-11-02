@@ -20,7 +20,7 @@ namespace MultiFlexi\Env;
  *
  * @author vitex
  */
-class MultiFlexi extends \MultiFlexi\Environmentor implements injector
+class RunTemplate extends \MultiFlexi\Environmentor implements injector
 {
     /**
      * List of all known keys.
@@ -29,7 +29,7 @@ class MultiFlexi extends \MultiFlexi\Environmentor implements injector
      */
     public static function allKeysHandled()
     {
-        return ['MULTIFLEXI_VERSION', 'MULTIFLEXI_JOB_ID', 'MULTIFLEXI_EXECUTOR'];
+        return ['MULTIFLEXI_RUNTEMPLATE_ID', 'MULTIFLEXI_RUNTEMPLATE_NAME'];
     }
 
     /**
@@ -37,11 +37,12 @@ class MultiFlexi extends \MultiFlexi\Environmentor implements injector
      */
     public function getEnvironment(): array
     {
-        return $this->addMetaData($this->addSelfAsSource([
-            'MULTIFLEXI_VERSION' => ['value' => \Ease\Shared::appVersion()],
-            'MULTIFLEXI_JOB_ID' => ['value' => $this->engine->getMyKey()],
-            'MULTIFLEXI_EXECUTOR' => ['value' => $this->engine->getDataValue('executor')],
-        ]));
+        $envRuntemplate = [
+            'MULTIFLEXI_RUNTEMPLATE_NAME' => ['value' => $this->engine->runTemplate->getRecordName()],
+            'MULTIFLEXI_RUNTEMPLATE_ID' => ['value' => $this->engine->runTemplate->getMyKey()],
+        ];
+
+        return array_merge($this->addSelfAsSource($envRuntemplate), $this->addMetaData($this->engine->runTemplate->getRuntemplateEnvironment()));
     }
 
     /**
@@ -49,7 +50,7 @@ class MultiFlexi extends \MultiFlexi\Environmentor implements injector
      */
     public static function name()
     {
-        return _('MultiFlexi');
+        return _('RunTemplate');
     }
 
     /**
@@ -57,6 +58,6 @@ class MultiFlexi extends \MultiFlexi\Environmentor implements injector
      */
     public static function description()
     {
-        return _('Provide Informations about Current running Environment');
+        return _('Provide stored RunTemplate Environment');
     }
 }

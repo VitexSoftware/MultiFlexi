@@ -69,14 +69,21 @@ class User extends \Ease\User implements \MultiFlexi\Ui\columns
     {
         $this->settingsColumn = 'settings';
         $this->nameColumn = 'login';
+        parent::__construct($this->getDataValue('id'));
 
         if ($userID) {
             $this->setKeyColumn(is_numeric($userID) ? 'id' : 'login');
             $this->loadFromSQL($userID);
-            parent::__construct($this->getDataValue('id'));
         }
+    }
 
-        $this->nameColumn = 'login';
+    #[\Override]
+    public function __sleep(): array
+    {
+        $this->pdo = null;
+        $this->fluent = null;
+
+        return parent::__sleep();
     }
 
     public function getNameColumn(): string

@@ -51,7 +51,7 @@ class MainMenu extends \Ease\Html\DivTag
 
             if (empty($servers) && empty($customers) && empty($companys)) { // All empty yet
                 //                $this->customersMenuDisabled($nav);
-                //                $this->companysMenuDisabled($nav);
+                $this->companysMenuDisabled($nav);
             } else {
                 if (\count($servers) && empty($customers) && empty($companys)) {
                     //                    $this->customersMenuEnabled($nav, $customers);

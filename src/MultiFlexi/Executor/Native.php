@@ -83,9 +83,9 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
     {
         $this->commandline = $this->commandline();
         $this->setDataValue('commandline', $this->commandline);
-        $this->addStatusMessage('Job launched: '.$this->job->application->getDataValue('name').'@'.$this->job->company->getDataValue('name'));
+        $this->addStatusMessage('Job launched: '.$this->job->application->getDataValue('name').'@'.$this->job->company->getDataValue('name').' : '.$this->job->runTemplate->getRecordName().' Runtemplate: #'.$this->job->runTemplate->getMyKey());
         $this->launch($this->commandline());
-        $this->addStatusMessage('Jobn launch finished: '.$this->executable().'@'.$this->job->application->getDataValue('name').' '.$this->process->getExitCodeText());
+        $this->addStatusMessage('Job launch finished: '.$this->executable().'@'.$this->job->application->getDataValue('name').' '.$this->process->getExitCodeText());
     }
 
     public function storeLogs(): void

@@ -38,7 +38,7 @@ abstract class CommonExecutor extends \Ease\Sand
         $this->job = $job;
         $this->setObjectName();
         $this->setObjectName($job->getMyKey().'@'.\Ease\Logger\Message::getCallerName($this));
-        $this->environment = $job->getFullEnvironment();
+        $this->environment = $job->getEnvironment();
     }
 
     /**

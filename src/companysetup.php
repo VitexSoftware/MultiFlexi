@@ -50,12 +50,11 @@ if ($oPage->isPosted()) {
             try {
                 $companies->saveToSQL();
                 $companies->addStatusMessage(_('Company Saved'), 'success');
+                //        $companies->prepareRemoteCompany(); TODO: Run applications setup on new company
+                $oPage->redirect('?id='.$companies->getMyKey());
             } catch (\Exception $exc) {
                 $companies->addStatusMessage($exc->getMessage(), 'error');
             }
-
-            //        $companies->prepareRemoteCompany(); TODO: Run applications setup on new company
-            $oPage->redirect('?id='.$companies->getMyKey());
         } else {
             $companies->addStatusMessage(_('Error saving Company').' '.$companies->getDataValue('name'), 'error');
         }

@@ -97,6 +97,7 @@ $config->getFinder()
     ->append([
         __DIR__.'/.php-cs-fixer.dist.php',
     ])
+    ->in('db')
     ->in('lib')
     ->in('src')
     ->in('tests');
