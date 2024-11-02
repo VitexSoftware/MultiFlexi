@@ -2,6 +2,17 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Phinx\Migration\AbstractMigration;
 
 final class JobOutput extends AbstractMigration
@@ -21,9 +32,8 @@ final class JobOutput extends AbstractMigration
     {
         $table = $this->table('job');
         $table
-                ->addColumn('stdout', 'text', ['null' => true, 'default' => null])
-                ->addColumn('stderr', 'text', ['null' => true, 'default' => null])
-                ->save();
-
+            ->addColumn('stdout', 'text', ['null' => true, 'default' => null])
+            ->addColumn('stderr', 'text', ['null' => true, 'default' => null])
+            ->save();
     }
 }

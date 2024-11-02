@@ -2,6 +2,17 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Phinx\Migration\AbstractMigration;
 
 final class ServerType extends AbstractMigration
@@ -21,9 +32,7 @@ final class ServerType extends AbstractMigration
     {
         $table = $this->table('servers');
         $table
-                ->addColumn('type', 'text', ['comment' => 'Server type. ABRAFLEXI|POHODA', 'default' => 'ABRAFLEXI', 'null' => true])
-                ->update();
-
+            ->addColumn('type', 'text', ['comment' => 'Server type. ABRAFLEXI|POHODA', 'default' => 'ABRAFLEXI', 'null' => true])
+            ->update();
     }
-    
 }

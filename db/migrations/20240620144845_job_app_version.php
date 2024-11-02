@@ -1,5 +1,17 @@
 <?php
+
 declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 use Phinx\Migration\AbstractMigration;
 
@@ -20,7 +32,7 @@ final class JobAppVersion extends AbstractMigration
     {
         $table = $this->table('job');
         $table
-                ->addColumn('app_version', 'string', ['default' => 'n/a','comment'=>'version of application in time of launch'])
-                ->save();
+            ->addColumn('app_version', 'string', ['default' => 'n/a', 'comment' => 'version of application in time of launch'])
+            ->save();
     }
 }

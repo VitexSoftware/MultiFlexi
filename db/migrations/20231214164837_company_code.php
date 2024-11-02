@@ -2,10 +2,21 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Phinx\Migration\AbstractMigration;
 
-final class CompanyCode extends AbstractMigration {
-
+final class CompanyCode extends AbstractMigration
+{
     /**
      * Change Method.
      *
@@ -17,10 +28,11 @@ final class CompanyCode extends AbstractMigration {
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-    public function change(): void {
+    public function change(): void
+    {
         $refTable = $this->table('company');
         $refTable->addColumn('code', 'string', ['null' => false, 'length' => 10, 'default' => ''])
-                ->addIndex(['name', 'code'], ['unique' => true])
-                ->save();
+            ->addIndex(['name', 'code'], ['unique' => true])
+            ->save();
     }
 }

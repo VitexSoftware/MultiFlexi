@@ -1,9 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Phinx\Seed\AbstractSeed;
 
-class ImapToInvoice extends AbstractSeed {
-
+class ImapToInvoice extends AbstractSeed
+{
     /**
      * Run Method.
      *
@@ -14,7 +27,6 @@ class ImapToInvoice extends AbstractSeed {
      */
     public function run(): void
     {
-
         $data = [
             [
                 'enabled' => true,
@@ -22,19 +34,18 @@ class ImapToInvoice extends AbstractSeed {
                 'name' => _('Email ISDOC importer'),
                 'description' => _('import ISDOC/ISDOCx files into AbraFlexi Address Book/ Pricelist/ Invoices'),
                 'executable' => 'imap2abraflexi',
-                'DatCreate' => date('Y-m-d H:i:s')
-            ]
+                'DatCreate' => date('Y-m-d H:i:s'),
+            ],
         ];
 
         $posts = $this->table('apps');
         $posts->insert($data)
-                ->save();
+            ->save();
 
         $stmt = $this->query('SELECT id FROM apps WHERE executable = \'imap2abraflexi\''); // returns PDOStatement
         $rows = $stmt->fetchAll();
 
         if ($rows) {
-
             $appId = $rows[0]['id'];
 
             $data = [
@@ -42,45 +53,44 @@ class ImapToInvoice extends AbstractSeed {
                     'app_id' => $appId,
                     'keyname' => 'IMAP_LOGIN',
                     'type' => 'text',
-                    'description' => _('Mailbox Username')
+                    'description' => _('Mailbox Username'),
                 ], [
                     'app_id' => $appId,
                     'keyname' => 'IMAP_PASSWORD',
                     'type' => 'password',
-                    'description' => _('Mailbox Password')
+                    'description' => _('Mailbox Password'),
                 ], [
                     'app_id' => $appId,
                     'keyname' => 'IMAP_SERVER',
                     'type' => 'text',
-                    'description' => _('Mailbox Server IP/Hostname')
+                    'description' => _('Mailbox Server IP/Hostname'),
                 ], [
                     'app_id' => $appId,
                     'keyname' => 'IMAP_PORT',
                     'type' => 'number',
-                    'description' => _('Mailbox Server PORT')
+                    'description' => _('Mailbox Server PORT'),
                 ], [
                     'app_id' => $appId,
                     'keyname' => 'IMAP_MAILBOX',
                     'type' => 'text',
-                    'description' => _('Mailbox Name')
+                    'description' => _('Mailbox Name'),
                 ], [
                     'app_id' => $appId,
                     'keyname' => 'IMAP_OPTIONS',
                     'type' => 'text',
                     'defval' => 'notls',
-                    'description' => '<a href="https://www.php.net/manual/en/function.imap-open.php">' . _('Connection Options') . '</a>'
+                    'description' => '<a href="https://www.php.net/manual/en/function.imap-open.php">'._('Connection Options').'</a>',
                 ], [
                     'app_id' => $appId,
                     'keyname' => 'ABRAFLEXI_SKLAD',
                     'type' => 'text',
-                    'description' => _('Initial AbraFlexi storage code e.g. SKLAD')
-                ]
+                    'description' => _('Initial AbraFlexi storage code e.g. SKLAD'),
+                ],
             ];
 
             $posts = $this->table('conffield');
             $posts->insert($data)
-                    ->saveData();
+                ->saveData();
         }
     }
-
 }

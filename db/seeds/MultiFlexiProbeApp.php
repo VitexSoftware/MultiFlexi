@@ -1,10 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Phinx\Seed\AbstractSeed;
 
 class MultiFlexiProbeApp extends AbstractSeed
 {
-
     /**
      * Run Method.
      *
@@ -23,12 +35,12 @@ class MultiFlexiProbeApp extends AbstractSeed
                 'description' => _('Task launcher testing tool'),
                 'executable' => 'multiflexi-probe',
                 'DatCreate' => date('Y-m-d H:i:s'),
-                'enabled' =>1
-            ]
+                'enabled' => 1,
+            ],
         ];
         $posts = $this->table('apps');
         $posts->insert($data)
-                ->save();
+            ->save();
         $appId = $this->getAdapter()->getConnection()->lastInsertId();
         $options = [
             [
@@ -36,11 +48,11 @@ class MultiFlexiProbeApp extends AbstractSeed
                 'keyname' => 'FILE_UPLOAD',
                 'type' => 'file',
                 'description' => 'Testing file upload field',
-                'defval' => '/etc/fstab'
-            ]
+                'defval' => '/etc/fstab',
+            ],
         ];
         $opts = $this->table('conffield');
         $opts->insert($options)
-                ->save();
+            ->save();
     }
 }

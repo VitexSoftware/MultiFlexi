@@ -2,11 +2,21 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Phinx\Migration\AbstractMigration;
 
 final class MySqlEmoji extends AbstractMigration
 {
-
     /**
      * Change Method.
      *
@@ -21,7 +31,8 @@ final class MySqlEmoji extends AbstractMigration
     public function up(): void
     {
         $adapterType = $this->adapter->getAdapterType();
-        if ($adapterType == 'mysql') {
+
+        if ($adapterType === 'mysql') {
             $this->execute('ALTER DATABASE multiflexi CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;');
             $this->execute('ALTER TABLE job CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;');
             $this->execute('ALTER TABLE log CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;');
@@ -31,8 +42,7 @@ final class MySqlEmoji extends AbstractMigration
     /**
      * Migrate Down.
      */
-    public function down()
+    public function down(): void
     {
-        
     }
 }
