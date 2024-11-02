@@ -35,7 +35,7 @@ $oPage->onlyForLogged();
 $companer = new Company(WebPage::getRequestValue('company_id', 'int'));
 $application = new Application(WebPage::getRequestValue('app_id', 'int'));
 
-$oPage->addItem(new PageTop(_($application->getRecordName()) . '@' . $companer->getRecordName()));
+$oPage->addItem(new PageTop(_($application->getRecordName()).'@'.$companer->getRecordName()));
 // $companyApp = new \MultiFlexi\RunTemplate(\Ease\Document::getRequestValue('id', 'int'));
 // $appData = $companyApp->getAppInfo();
 // $companies = new Company($companyApp->getDataValue('company_id'));
@@ -43,7 +43,7 @@ $oPage->addItem(new PageTop(_($application->getRecordName()) . '@' . $companer->
 //    $companyTasksHeading[] = new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid','style' => 'height']);
 // }
 
-$companyTasksHeading[] = new SpanTag($companer->getDataValue('name') . '&nbsp;', ['style' => 'font-size: xxx-large;']);
+$companyTasksHeading[] = new SpanTag($companer->getDataValue('name').'&nbsp;', ['style' => 'font-size: xxx-large;']);
 $companyTasksHeading[] = _('Assigned applications');
 
 $runTemplater = new RunTemplate();
@@ -58,20 +58,21 @@ if ($runtemplatesRaw->count()) {
     foreach ($runtemplatesRaw as $runtemplateData) {
         $runtemplateRow = new Row();
         $lastJobRun = $jobber->listingQuery()->select(['exitcode', 'id'], true)->where(['runtemplate_id' => $runtemplateData['id']])->orderBy('id desc')->limit(1);
-        $runtemplateRow->addColumn(2, new ATag('runtemplate.php?id=' . $runtemplateData['id'], '⚗️&nbsp;#' . (string) $runtemplateData['id']));
+        $runtemplateRow->addColumn(2, new ATag('runtemplate.php?id='.$runtemplateData['id'], '⚗️&nbsp;#'.(string) $runtemplateData['id']));
 
-        if (count($lastJobRun)) {
+        if (\count($lastJobRun)) {
             $lastJobRunData = $lastJobRun->fetch();
-            $runtemplateRow->addColumn(2, new ATag('job.php?id=' . $lastJobRunData['id'], new ExitCode($lastJobRunData['exitcode'])));
+            $runtemplateRow->addColumn(2, new ATag('job.php?id='.$lastJobRunData['id'], new ExitCode($lastJobRunData['exitcode'])));
         } else {
             $runtemplateRow->addColumn(2, new ExitCode(-1));
         }
-        $runtemplateRow->addColumn(6, new ATag('runtemplate.php?id=' . $runtemplateData['id'],$runtemplateData['name']));
+
+        $runtemplateRow->addColumn(6, new ATag('runtemplate.php?id='.$runtemplateData['id'], $runtemplateData['name']));
         $runtemplatesDiv->addItem($runtemplateRow);
         $runtemplates[$runtemplateData['id']] = $runtemplateData['name'];
     }
 } else {
-    $runtemplatesDiv->addItem(new LinkButton('runtemplate.php?new=1&app_id=' . $application->getMyKey() . '&company_id=' . $companer->getMyKey(), '⚗️&nbsp;➕' . _('new'), 'success'));
+    $runtemplatesDiv->addItem(new LinkButton('runtemplate.php?new=1&app_id='.$application->getMyKey().'&company_id='.$companer->getMyKey(), '⚗️&nbsp;➕'._('new'), 'success'));
 }
 
 $jobs = $jobber->listingQuery()->select(['job.id', 'begin', 'exitcode', 'launched_by', 'login', 'runtemplate_id'], true)->leftJoin('user ON user.id = job.launched_by')->where('company_id', $companer->getMyKey())->where('app_id', $application->getMyKey())->limit(10)->orderBy('job.id DESC')->fetchAll();
@@ -79,7 +80,7 @@ $jobList = new Table();
 $jobList->addRowHeaderColumns([_('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'), _('RunTemplate')]);
 
 foreach ($jobs as $job) {
-    $job['id'] = new ATag('job.php?id=' . $job['id'], $job['id']);
+    $job['id'] = new ATag('job.php?id='.$job['id'], $job['id']);
 
     if (empty($job['begin'])) {
         $job['begin'] = _('Not launched yet');
@@ -88,13 +89,17 @@ foreach ($jobs as $job) {
     }
 
     $job['exitcode'] = new ExitCode($job['exitcode']);
-    $job['launched_by'] = $job['launched_by'] ? new ATag('user.php?id=' . $job['launched_by'], $job['login']) : _('Timer');
-    $job['runtemplate_id'] = new ATag('runtemplate.php?id=' . $job['runtemplate_id'], $runtemplates[$job['runtemplate_id']]);
+    $job['launched_by'] = $job['launched_by'] ? new ATag('user.php?id='.$job['launched_by'], $job['login']) : _('Timer');
+
+    if (\array_key_exists($job['runtemplate_id'], $runtemplates)) {
+        $job['runtemplate_id'] = new ATag('runtemplate.php?id='.$job['runtemplate_id'], $runtemplates[$job['runtemplate_id']]);
+    }
+
     unset($job['login']);
     $jobList->addRowColumns($job);
 }
 
-$historyButton = (new LinkButton('joblist.php?app_id=' . $application->getMyKey() . '&amp;company_id=' . $companer->getMyKey(), _('Job History') . ' ' . new ImgTag('images/log.svg', _('Set'), ['height' => '30px']), 'info btn-sm  btn-block'));
+$historyButton = (new LinkButton('joblist.php?app_id='.$application->getMyKey().'&amp;company_id='.$companer->getMyKey(), _('Job History').' '.new ImgTag('images/log.svg', _('Set'), ['height' => '30px']), 'info btn-sm  btn-block'));
 
 $companyAppColumns = new Row();
 $companyAppColumns->addColumn(6, $runtemplatesDiv);

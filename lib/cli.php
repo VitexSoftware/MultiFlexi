@@ -42,18 +42,19 @@ $option = \array_key_exists(5, $argv) ? $argv[5] : null;
 
 // Collect properties starting with --
 $properties = [];
-for ($i = 6; $i < count($argv); $i++) {
+
+for ($i = 6; $i < \count($argv); ++$i) {
     if (strpos($argv[$i], '--') === 0) {
         $key = substr($argv[$i], 2);
         $value = \array_key_exists($i + 1, $argv) ? $argv[$i + 1] : null;
         $properties[$key] = $value;
-        $i++; // Skip the next argument as it is the value
+        ++$i; // Skip the next argument as it is the value
     }
 }
 
 switch ($command) {
     case 'version':
-        echo \Ease\Shared::appName() . ' ' . \Ease\Shared::appVersion() . "\n";
+        echo \Ease\Shared::appName().' '.\Ease\Shared::appVersion()."\n";
 
         break;
     case 'remove':
@@ -70,14 +71,13 @@ switch ($command) {
                 $engine = new \MultiFlexi\Company(is_numeric($identifier) ? (int) $identifier : ['code' => $identifier], ['autoload' => 'true']);
 
                 break;
-
             case 'runtemplate':
                 $engine = new \MultiFlexi\RunTemplate((int) $identifier);
 
                 break;
 
             default:
-                echo $argv[0] . ' remove <sql row id or other identifier>';
+                echo $argv[0].' remove <sql row id or other identifier>';
 
                 break;
         }
@@ -90,7 +90,7 @@ switch ($command) {
         switch ($argument) {
             case 'user':
                 if (empty($identifier)) {
-                    echo $argv[0] . ' add user <login> <email>';
+                    echo $argv[0].' add user <login> <email>';
 
                     exit;
                 }
@@ -101,7 +101,7 @@ switch ($command) {
                 break;
             case 'app':
                 if (empty($identifier)) {
-                    echo $argv[0] . ' add app <executable> <name>';
+                    echo $argv[0].' add app <executable> <name>';
 
                     exit;
                 }
@@ -112,7 +112,7 @@ switch ($command) {
                 break;
             case 'company':
                 if (empty($identifier)) {
-                    echo $argv[0] . ' add company <code> <name>';
+                    echo $argv[0].' add company <code> <name>';
 
                     exit;
                 }
@@ -123,7 +123,7 @@ switch ($command) {
                 break;
             case 'runtemplate':
                 if (empty($identifier)) {
-                    echo $argv[0] . ' add runtemplate <name> <app name/id> <company code/id> [--CONFIG_FIELD=VALUE ..]';
+                    echo $argv[0].' add runtemplate <name> <app name/id> <company code/id> [--CONFIG_FIELD=VALUE ..]';
 
                     exit;
                 }
@@ -148,7 +148,7 @@ switch ($command) {
                 break;
 
             default:
-                echo $argv[0] . ' add <name>';
+                echo $argv[0].' add <name>';
 
                 break;
         }
@@ -162,15 +162,15 @@ switch ($command) {
                 echo $exc->getTraceAsString();
             }
         } else {
-            $engine->addStatusMessage('already exists as '. json_encode($exists));
+            $engine->addStatusMessage('already exists as '.json_encode($exists));
             $engine->loadFromSQL($exists['id']);
         }
 
-        if ((empty($properties) === false) && get_class($engine) == 'MultiFlexi\RunTemplate') {
+        if ((empty($properties) === false) && \get_class($engine) === 'MultiFlexi\RunTemplate') {
             $engine->setEnvironment($properties);
         }
-        
-        echo json_encode($engine->getData()) . "\n";
+
+        echo json_encode($engine->getData())."\n";
 
         break;
     case 'list':
@@ -178,80 +178,79 @@ switch ($command) {
             case 'user':
                 $engine = new \MultiFlexi\User();
                 $data = $engine->listingQuery()->select([
-                            'id',
-                            'enabled',
-                            'login',
-                            'email',
-                            'firstname',
-                            'lastname',
-                                ], true)->fetchAll();
+                    'id',
+                    'enabled',
+                    'login',
+                    'email',
+                    'firstname',
+                    'lastname',
+                ], true)->fetchAll();
 
                 break;
             case 'app':
                 $engine = new Application();
                 $data = $engine->listingQuery()->select([
-                            'id',
-                            'enabled',
-                            'image not like "" as image',
-                            'name',
-                            'description',
-                            'executable',
-                            'DatCreate',
-                            'DatUpdate',
-                            'setup',
-                            'cmdparams',
-                            'deploy',
-                            'homepage',
-                            'requirements',
-                                ], true)->fetchAll();
+                    'id',
+                    'enabled',
+                    'image not like "" as image',
+                    'name',
+                    'description',
+                    'executable',
+                    'DatCreate',
+                    'DatUpdate',
+                    'setup',
+                    'cmdparams',
+                    'deploy',
+                    'homepage',
+                    'requirements',
+                ], true)->fetchAll();
 
                 break;
             case 'company':
                 $engine = new Company();
                 $data = $engine->listingQuery()->select([
-                            'id',
-                            'enabled',
-                            'settings',
-                            'logo  not like "" as logo',
-                            'server',
-                            'name',
-                            'ic',
-                            'company',
-                            'rw',
-                            'setup',
-                            'webhook',
-                            'DatCreate',
-                            'DatUpdate',
-                            'customer',
-                            'email',
-                            'code',
-                        ])->fetchAll();
+                    'id',
+                    'enabled',
+                    'settings',
+                    'logo  not like "" as logo',
+                    'server',
+                    'name',
+                    'ic',
+                    'company',
+                    'rw',
+                    'setup',
+                    'webhook',
+                    'DatCreate',
+                    'DatUpdate',
+                    'customer',
+                    'email',
+                    'code',
+                ])->fetchAll();
 
                 break;
             case 'job':
                 $engine = new Job();
                 $data = $engine->listingQuery()->select([
-                            'id',
-                        ])->fetchAll();
+                    'id',
+                ])->fetchAll();
 
                 break;
-
             case 'runtemplate':
                 $engine = new RunTemplate();
                 $data = $engine->listingQuery()->select([
-                            'id',
-                            'enabled',
-                            'name',
-                            'app_id',
-                            'company_id',
-                            'DatCreate',
-                            'DatUpdate',
-                            'setup',
-                            'cmdparams',
-                            'deploy',
-                            'homepage',
-                            'requirements',
-                                ], true)->fetchAll();
+                    'id',
+                    'enabled',
+                    'name',
+                    'app_id',
+                    'company_id',
+                    'DatCreate',
+                    'DatUpdate',
+                    'setup',
+                    'cmdparams',
+                    'deploy',
+                    'homepage',
+                    'requirements',
+                ], true)->fetchAll();
 
                 break;
 
@@ -276,7 +275,7 @@ switch ($command) {
             $table->display();
             // TODO: https://github.com/phplucidframe/console-table/issues/14#issuecomment-2167643219
         } else {
-            echo _('No data') . "\n";
+            echo _('No data')."\n";
         }
 
         break;

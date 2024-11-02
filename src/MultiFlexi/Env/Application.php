@@ -29,7 +29,7 @@ class Application extends \MultiFlexi\Environmentor implements injector
      */
     public static function allKeysHandled()
     {
-        return [];
+        return ['MULTIFLEXI_APPLICATION_ID', 'MULTIFLEXI_APPLICATION_NAME', 'MULTIFLEXI_APPLICATION_UUID'];
     }
 
     /**
@@ -41,7 +41,11 @@ class Application extends \MultiFlexi\Environmentor implements injector
     {
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\\Env');
         $injectors = \Ease\Functions::classesInNamespace('MultiFlexi\\Env');
-        $jobEnv = [];
+        $jobEnv = [
+            'MULTIFLEXI_APPLICATION_ID' => $this->engine->application->getMyKey(),
+            'MULTIFLEXI_APPLICATION_NAME' => $this->engine->application->getDataValue('name'),
+            'MULTIFLEXI_APPLICATION_UUID' => $this->engine->application->getDataValue('uuid'),
+        ];
 
         foreach ($injectors as $injector) {
             $injectorClass = '\\MultiFlexi\\Env\\'.$injector;
@@ -65,9 +69,9 @@ class Application extends \MultiFlexi\Environmentor implements injector
 
         $appConfigs = \MultiFlexi\Conffield::getAppConfigs($this->engine->application->getMyKey());
 
-        if (\array_key_exists($this->engine->application->getDataValue('resultfile'), $appConfigs)) {
-            $appConfig[$this->engine->application->getDataValue('resultfile')]['value'] = sys_get_temp_dir().'/'.\Ease\Functions::randomString(10);
-        }
+        //        if (\array_key_exists($this->engine->application->getDataValue('resultfile'), $appConfigs)) {
+        //            $appConfig[$this->engine->application->getDataValue('resultfile')]['value'] = sys_get_temp_dir().'/'.\Ease\Functions::randomString(10);
+        //        }
 
         return $this->addMetaData($this->addSelfAsSource($appConfig));
     }
