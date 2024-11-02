@@ -40,7 +40,7 @@ class MultiFlexi extends \MultiFlexi\Environmentor implements injector
         return $this->addMetaData($this->addSelfAsSource([
             'MULTIFLEXI' => ['value' => \Ease\Shared::appVersion()],
             'JOB_ID' => ['value' => $this->engine->getMyKey()],
-            'RUNTEMPLATE_ID' => ['value' => $this->engine->runTemplate ?? $this->engine->runTemplate->getMyKey()],
+            'RUNTEMPLATE_ID' => ['value' => $this->engine->runTemplate->getMyKey()],
         ]));
     }
 

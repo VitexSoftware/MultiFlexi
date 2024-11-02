@@ -32,7 +32,7 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         $this->runtemplate = $runtemplate;
         $runtemplateId = $runtemplate->getMyKey();
         $runtemplateOptions = new \Ease\TWB4\Row();
-        $intervalChoosen = $runtemplate->getDataValue('interv');
+        $intervalChoosen = $runtemplate->getDataValue('interv') ?? 'n';
         $intervalChooser = new \MultiFlexi\Ui\IntervalChooser($runtemplateId.'_interval', $intervalChoosen, ['id' => $runtemplateId.'_interval', 'checked' => 'true', 'data-runtemplate' => $runtemplateId]);
 
         $scheduleButton = new \Ease\TWB4\LinkButton('schedule.php?id='.$runtemplateId, [_('Schedule').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
