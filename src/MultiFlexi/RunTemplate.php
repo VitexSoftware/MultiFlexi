@@ -23,6 +23,27 @@ use MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
  */
 class RunTemplate extends \MultiFlexi\Engine
 {
+    
+    public static array $intervalCode = [
+        'y' => 'yearly',
+        'm' => 'monthly',
+        'w' => 'weekly',
+        'd' => 'daily',
+        'h' => 'hourly',
+        'i' => 'minutly',
+        'n' => 'disabled',
+    ];
+    public static array $intervalSecond = [
+        'n' => '0',
+        'i' => '60',
+        'h' => '3600',
+        'd' => '86400',
+        'w' => '604800',
+        'm' => '2629743',
+        'y' => '31556926',
+    ];
+    
+    
     /**
      * @param mixed $identifier
      * @param array $options
@@ -33,7 +54,39 @@ class RunTemplate extends \MultiFlexi\Engine
         $this->myTable = 'runtemplate';
         parent::__construct($identifier, $options);
     }
+    /**
+     * Get Job Interval by Code.
+     *
+     * @param string $code
+     *
+     * @return string
+     */
+    public static function codeToInterval($code)
+    {
+        return \array_key_exists($code, self::$intervalCode) ? self::$intervalCode[$code] : 'n/a';
+    }
 
+    /**
+     * Get Job Interval by Code.
+     *
+     * @param string $code
+     *
+     * @return int Interval length in seconds
+     */
+    public static function codeToSeconds($code)
+    {
+        return \array_key_exists($code, self::$intervalSecond) ? (int) (self::$intervalSecond[$code]) : 0;
+    }
+
+    /**
+     * Get Interval code by Name.
+     */
+    public static function intervalToCode(string $interval): string
+    {
+        return \array_key_exists($interval, array_flip(self::$intervalCode)) ? array_flip(self::$intervalCode)[$interval] : 'n/a';
+    }
+    
+    
     /**
      * Get id by App & Company.
      *
@@ -146,6 +199,21 @@ class RunTemplate extends \MultiFlexi\Engine
         }
 
         return $runtemplates;
+    }
+
+    public static function getIntervalEmoji(string $interval): string
+    {
+        $emojis = [
+            'n' => '🔴',
+            'i' => '⏳',
+            'h' => '🕰️',
+            'd' => '☀️',
+            'w' => '📅',
+            'm' => '🌛',
+            'y' => '🎆',
+        ];
+
+        return $emojis[$interval];
     }
 
     /**
