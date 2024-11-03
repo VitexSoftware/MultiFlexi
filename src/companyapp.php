@@ -59,7 +59,6 @@ if ($runtemplatesRaw->count()) {
         $runtemplateRow = new Row();
         $lastJobRun = $jobber->listingQuery()->select(['exitcode', 'id'], true)->where(['runtemplate_id' => $runtemplateData['id']])->orderBy('id desc')->limit(1);
         $runtemplateRow->addColumn(2, new ATag('runtemplate.php?id='.$runtemplateData['id'], '⚗️&nbsp;#'.(string) $runtemplateData['id']));
-
         if (\count($lastJobRun)) {
             $lastJobRunData = $lastJobRun->fetch();
             $runtemplateRow->addColumn(2, new ATag('job.php?id='.$lastJobRunData['id'], new ExitCode($lastJobRunData['exitcode'])));
@@ -67,7 +66,7 @@ if ($runtemplatesRaw->count()) {
             $runtemplateRow->addColumn(2, new ExitCode(-1));
         }
 
-        $runtemplateRow->addColumn(6, new ATag('runtemplate.php?id='.$runtemplateData['id'], $runtemplateData['name']));
+        $runtemplateRow->addColumn(6, [ '<span title="'. _(RunTemplate::codeToInterval($runtemplateData['interv'])).'">'.RunTemplate::getIntervalEmoji($runtemplateData['interv']).'</span>'.'&nbsp;',new ATag('runtemplate.php?id='.$runtemplateData['id'], $runtemplateData['name']),  '&nbsp;<a href="schedule.php?id='.$runtemplateData['id'].'" title="'._('Launch now').'">▶</span>']);
         $runtemplatesDiv->addItem($runtemplateRow);
         $runtemplates[$runtemplateData['id']] = $runtemplateData['name'];
     }
