@@ -10,18 +10,19 @@ echo ---------------------------------------------------------------------------
 echo Attachment:
 if [ -f "$1" ]; then
     echo "File $1 exists."
-    ls -la $1
+    ls -la "$1"
 else
     echo "File $1 does not exist."
 fi
 echo
-echo ---------------------------------------------------------------------------
-echo Environment:
-env
+
+envirnonment_variables=$(env | jq -R 'split("=") | {(.[0]): .[1]}' | jq -s add)
 
 if [ -n "$RESULT_FILE" ]; then
-    env | jq -R 'split("=") | {(.[0]): .[1]}' | jq -s add > "$RESULT_FILE"
+    echo "$envirnonment_variables"     > "$RESULT_FILE"
 fi
+
+echo "$envirnonment_variables"
 
 echoerr "StdErr Output example"
 if [[ -n "$FORCE_EXITCODE" && "$FORCE_EXITCODE" =~ ^[0-9]+$ ]]; then
