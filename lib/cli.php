@@ -153,7 +153,13 @@ switch ($command) {
                 $companer->loadFromSQL($company_id);
 
                 $companyApp = new \MultiFlexi\CompanyApp($companer);
-                $companyApp->assignApps([$app_id]);
+                
+                $assigned = [];
+                foreach ($companyApp->getAssigned()->select('app_id',true)->fetchAll() as $app){
+                    $assigned[] = $app['app_id'];
+                }
+                
+                $companyApp->assignApps(array_merge($assigned,[$app_id]) );
 
                 $checkData = ['name' => (string) $identifier, 'app_id' => $app_id, 'company_id' => $company_id, 'interv' => 'n'];
                 $engine = new \MultiFlexi\RunTemplate($checkData, ['autoload' => false]);

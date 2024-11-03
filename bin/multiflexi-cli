@@ -1,2 +1,6 @@
-#!/bin/sh
-php -q -f /usr/lib/multiflexi/cli.php -- $@
+#!/bin/bash
+args=()
+for arg in "$@"; do
+    args+=("$arg")
+done
+php -q -f /usr/lib/multiflexi/cli.php -- "${args[@]}"
