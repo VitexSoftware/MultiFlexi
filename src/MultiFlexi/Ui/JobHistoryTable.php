@@ -100,7 +100,7 @@ class JobHistoryTable extends \Ease\TWB4\Table
             unset($job['executor'], $job['login'], $job['schedule']);
 
             if ($this->showCompany) {
-                $job['company_id'] = [new CompanyLogo($company, ['height' => '60px', 'align' => 'right']), new \Ease\Html\ATag('company.php?id='.$job['company_id'], $job['name'])];
+                $job['company_id'] = [new \Ease\Html\ATag('company.php?id='.$job['company_id'], new CompanyLogo($company, ['height' => '60px', 'align' => 'right'])), new \Ease\Html\ATag('company.php?id='.$job['company_id'], $job['name'])];
             } else {
                 unset($job['company_id']);
             }
