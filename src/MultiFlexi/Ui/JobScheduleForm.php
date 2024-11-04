@@ -51,7 +51,7 @@ class JobScheduleForm extends Form
     {
         $this->timeSelect();
         $this->uploadFields();
-        $this->addItem(new \Ease\TWB4\SubmitButton(_('Save App Schedule'), 'success btn-lg'));
+        $this->addItem(new \Ease\TWB4\SubmitButton('<img src="images/schedule.svg" height="30">&nbsp;'._('Save App Schedule'), 'success btn-lg'));
 
         parent::finalize();
     }

@@ -48,7 +48,7 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         $runtemplateJobs = new \MultiFlexi\Ui\RuntemplateJobsListing($runtemplate);
 
         $runtemplateOptions->addColumn(4, [_('automatically schedule in an interval').': ', $intervalChooser]);
-        $nameInput = new \Ease\Html\ATag('#', $runtemplate->getRecordName(), ['class' => 'editable', 'id' => 'name', 'data-pk' => $runtemplate->getMyKey(), 'data-url' => 'runtemplatesave.php', 'data-title' => _('Update RunTemplate name')]);
+        $nameInput = new \Ease\Html\ATag('#', $runtemplate->getRecordName(), ['class' => 'editable', 'style' => 'font-size: xxx-large;', 'id' => 'name', 'data-pk' => $runtemplate->getMyKey(), 'data-url' => 'runtemplatesave.php', 'data-title' => _('Update RunTemplate name')]);
 
         $runtemplateBottom = new \Ease\TWB4\Row();
 
@@ -57,7 +57,7 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
             $runtemplateBottom->addColumn(6, $deleteButton);
         }
 
-        parent::__construct([new \Ease\Html\ATag('companyapp.php?app_id='.$runtemplate->getDataValue('app_id').'&company_id='.$runtemplate->getDataValue('company_id'), '⚗️ '), $nameInput], 'inverse', $runtemplateOptions, $runtemplateBottom);
+        parent::__construct([new \Ease\Html\ATag('companyapp.php?app_id='.$runtemplate->getDataValue('app_id').'&company_id='.$runtemplate->getDataValue('company_id'), '<span style="font-size: xxx-large;">⚗️ </span>'), $nameInput], 'default', $runtemplateOptions, $runtemplateBottom);
         $this->includeJavaScript('js/bootstrap-editable.js');
         $this->includeCss('css/bootstrap-editable.css');
         $this->addJavaScript("$.fn.editable.defaults.mode = 'inline';");

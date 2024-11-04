@@ -462,7 +462,7 @@ EOD;
 
     /**
      * Get Job Interval by Code.
-     * 
+     *
      * @deprecated since version 1.15.0 Use the RunTemplate::codeToInterval instead
      *
      * @param string $code
@@ -476,7 +476,7 @@ EOD;
 
     /**
      * Get Job Interval by Code.
-     * 
+     *
      * @deprecated since version 1.15.0 Use the RunTemplate::codeToSeconds instead
      *
      * @param string $code
@@ -490,7 +490,7 @@ EOD;
 
     /**
      * Get Interval code by Name.
-     * 
+     *
      * @deprecated since version 1.15.0 Use the RunTemplate::intervalToCode instead
      *
      * @param string $interval

@@ -28,22 +28,22 @@ use MultiFlexi\Application;
 class ApplicationPanel extends Panel
 {
     public Row $headRow;
+    private Application $application;
 
     /**
-     * @param Application $application
-     * @param mixed       $content
-     * @param mixed       $footer
+     * Application Panel.
+     *
+     * @param null|mixed $content
+     * @param null|mixed $footer
      */
-    public function __construct($application, $content = null, $footer = null)
+    public function __construct(Application $application, $content = null, $footer = null)
     {
-        $cid = $application->getMyKey();
+        $this->application = $application;
         $this->headRow = new Row();
-        $this->headRow->addColumn(2, [new AppLogo($application, ['style' => 'height: 60px']), '&nbsp;', $application->getRecordName()]);
-        $this->headRow->addColumn(4, [new LinkButton('app.php?id='.$cid, '🧩&nbsp;'._('Application'), 'primary btn-lg'),
-            new LinkButton('joblist.php?app_id='.$cid, '🧑‍💻&nbsp;'._('Jobs history'), 'secondary btn-lg')]);
+        $this->headRow->addColumn(4, new \Ease\Html\ATag('app.php?id='.$this->application->getMyKey(), [new AppLogo($application, ['style' => 'height: 120px']), '&nbsp;', $application->getRecordName()]));
 
         $ca = new \MultiFlexi\CompanyApp(null);
-        $usedInCompanys = $ca->listingQuery()->select(['companyapp.company_id', 'company.name', 'company.code', 'company.logo'], true)->leftJoin('company ON company.id = companyapp.company_id')->where('app_id', $cid)->fetchAll('company_id');
+        $usedInCompanys = $ca->listingQuery()->select(['companyapp.company_id', 'company.name', 'company.code', 'company.logo'], true)->leftJoin('company ON company.id = companyapp.company_id')->where('app_id', $this->application->getMyKey())->fetchAll('company_id');
 
         if ($usedInCompanys) {
             $usedByCompany = new \Ease\Html\DivTag(_('Used by').': ', ['class' => 'card-group']);
@@ -66,5 +66,12 @@ class ApplicationPanel extends Panel
         //        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('adhoc.php?application_id=' . $cid, '🚀&nbsp;' . _('Application launcher'), 'secondary btn-lg btn-block'));
         //        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('periodical.php?application_id=' . $cid, '🔁&nbsp;' . _('Periodical Tasks'), 'secondary btn-lg btn-block'));
         parent::__construct($this->headRow, 'default', $content, $footer);
+    }
+
+    #[\Override]
+    public function finalize(): void
+    {
+        $this->footer->addItem(new LinkButton('joblist.php?app_id='.$this->application->getMyKey(), '🧑‍💻&nbsp;'._('App Jobs'), 'secondary btn-lg'));
+        parent::finalize();
     }
 }
