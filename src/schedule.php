@@ -62,10 +62,13 @@ if (null === $runTemplate->getMyKey()) {
         // $glassHourRow->addColumn('4', new \Ease\Html\DivTag(new \Ease\Html\ImgTag('images/openclipart/345630.svg', _('AI and Human Relationship'), ['class' => 'mx-auto d-block img-fluid'])), 'sm');
         $glassHourRow->addColumn('4');
 
-        $oPage->container->addItem(new CompanyPanel($company, [new ApplicationPanel(
+        $appPanel = new ApplicationPanel(
             $app,
             [$glassHourRow, new \Ease\Html\DivTag(nl2br($prepared)), new \Ease\TWB4\LinkButton('job.php?id='.$jobber->getMyKey(), _('Job details'), 'info btn-block')],
-        )]));
+        );
+        $appPanel->headRow->addItem(new RuntemplateButton($runTemplate));
+
+        $oPage->container->addItem(new CompanyPanel($company, $appPanel));
     } else {
         if ($jobID) {
             $scheduler = new \MultiFlexi\Scheduler();
@@ -75,8 +78,10 @@ if (null === $runTemplate->getMyKey()) {
 
             $oPage->container->addItem(new \Ease\TWB4\Label('success', _('Job Canceled')));
         } else {
+            $appPanel = new ApplicationPanel($app, new JobScheduleForm($app, $company));
+            $appPanel->headRow->addItem(new RuntemplateButton($runTemplate));
             $oPage->container->addItem(
-                new CompanyPanel($company, [new ApplicationPanel($app, new JobScheduleForm($app, $company))]),
+                new CompanyPanel($company, [$appPanel]),
             );
         }
     }

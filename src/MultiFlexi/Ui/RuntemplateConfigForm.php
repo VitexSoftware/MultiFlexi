@@ -20,30 +20,29 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class RuntemplateConfigForm extends EngineForm
-{
+class RuntemplateConfigForm extends EngineForm {
+
     private array $modulesEnv;
 
-    public function __construct(\MultiFlexi\RunTemplate $engine)
-    {
+    public function __construct(\MultiFlexi\RunTemplate $engine) {
         parent::__construct($engine, null, ['method' => 'post', 'action' => 'runtemplate.php']);
         $defaults = $engine->getAppEnvironment();
         $customized = $engine->getRuntemplateEnvironment();
 
-        foreach (\MultiFlexi\Conffield::getAppConfigs($engine->getDataValue('app_id')) as $fieldInfo) {
-            $fieldName = $fieldInfo['keyname'];
+        $appFields = \MultiFlexi\Conffield::getAppConfigs($engine->getDataValue('app_id'));
 
-            if (\array_key_exists($fieldName, $customized)) {
-                $cfg = array_merge($fieldInfo, $customized[$fieldName]);
+        $columns = array_keys(array_merge($appFields, $customized));
+
+        asort($columns);
+        
+        foreach ($columns as $fieldName) {
+            if (\array_key_exists($fieldName, $appFields)) {
+                $fieldInfo = array_merge($appFields[$fieldName], $customized[$fieldName]);
             } else {
-                if (\array_key_exists($fieldName, $defaults)) {
-                    $cfg = array_merge($fieldInfo, $defaults[$fieldName]);
-                } else {
-                    $cfg = $fieldInfo;
-                }
+                $fieldInfo = $defaults[$fieldName];
             }
 
-            $value = \array_key_exists('value', $cfg) ? $cfg['value'] : $cfg['defval'];
+            $value = \array_key_exists('value', $fieldInfo) ? $fieldInfo['value'] : $fieldInfo['defval'];
 
             if ($fieldInfo['type'] === 'checkbox') {
                 $input = new \Ease\Html\DivTag(new \Ease\TWB4\Widgets\Toggle($fieldName, $value === 'true' ? true : false, 'true', []));
@@ -51,7 +50,7 @@ class RuntemplateConfigForm extends EngineForm
                 $input = new \Ease\Html\InputTag($fieldName, $value, ['type' => $fieldInfo['type']]);
             }
 
-            $formGroup = $this->addInput($input, $fieldName.'&nbsp;('.$fieldInfo['source'].')', $fieldInfo['defval'], $fieldInfo['description']);
+            $formGroup = $this->addInput($input, $fieldName . '&nbsp;(' . $fieldInfo['source'] . ')', array_key_exists('defval', $fieldInfo) ? $fieldInfo['defval'] : '', array_key_exists('description', $fieldInfo) ? $fieldInfo['description'] : '');
 
             if (\array_key_exists('required', $fieldInfo) && $fieldInfo['required'] === true) {
                 $formGroup->addTagClass('bg-primary');
@@ -60,6 +59,10 @@ class RuntemplateConfigForm extends EngineForm
 
         $this->addItem(new \Ease\Html\InputHiddenTag('app_id', $engine->getDataValue('app_id')));
         $this->addItem(new \Ease\Html\InputHiddenTag('company_id', $engine->getDataValue('company_id')));
-        $this->addItem(new \Ease\TWB4\SubmitButton(_('Save'), 'success btn-lg btn-block'));
+
+        $saveRow = new \Ease\TWB4\Row();
+        $saveRow->addColumn(8, new \Ease\TWB4\SubmitButton(_('Save'), 'success btn-lg btn-block'));
+        $saveRow->addColumn(4, new \Ease\TWB4\LinkButton('periodbehaviour.php?id=' . $engine->getMyKey(), '🛠️&nbsp;' . _('Actions'), 'secondary btn-lg btn-block'));
+        $this->addItem($saveRow);
     }
 }

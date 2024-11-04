@@ -1,8 +1,14 @@
-multiflexi (1.16.0) UNRELEASED; urgency=medium
+multiflexi (1.17.0) UNRELEASED; urgency=medium
+
+  * Nicest Runtemplates
+
+ -- vitex <info@vitexsoftware.cz>  Mon, 04 Nov 2024 23:58:59 +0100
+
+multiflexi (1.16.0) jammy; urgency=medium
 
   * Work with Environment rewrited
 
- -- vitex <info@vitexsoftware.cz>  Sun, 03 Nov 2024 00:50:43 +0100
+ -- vitex <info@vitexsoftware.cz>  Mon, 04 Nov 2024 23:58:35 +0100
 
 multiflexi (1.15.0) jammy; urgency=medium
 

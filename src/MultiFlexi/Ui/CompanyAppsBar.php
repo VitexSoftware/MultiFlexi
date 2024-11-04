@@ -26,7 +26,7 @@ class CompanyAppsBar extends \Ease\Html\DivTag
         $companyApps = (new CompanyApp($company))->getAssigned()->leftJoin('apps ON apps.id = companyapp.app_id')->select(['apps.name', 'apps.description', 'apps.id', 'apps.uuid'], true)->fetchAll();
 
         foreach ($companyApps as $companyApp) {
-            $this->addItem(new \Ease\Html\ATag('companyapp.php?company_id='.$company->getMyKey().'&app_id='.$companyApp['id'], new \Ease\Html\ImgTag('appimage.php?uuid='.$companyApp['uuid'], _($companyApp['name']), ['title' => _($companyApp['description']), 'height' => '50px', 'style' => 'padding: 5px; margin: 5px;', 'class' => 'button'])));
+            $this->addItem(new \Ease\Html\ATag('companyapp.php?company_id='.$company->getMyKey().'&app_id='.$companyApp['id'], new \Ease\Html\ImgTag('appimage.php?uuid='.$companyApp['uuid'], _($companyApp['name']), ['title' => _($companyApp['description']), 'height' => '100px', 'style' => 'padding: 5px; margin: 5px;', 'class' => 'button'])));
         }
     }
 }

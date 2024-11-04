@@ -23,7 +23,6 @@ use MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
  */
 class RunTemplate extends \MultiFlexi\Engine
 {
-    
     public static array $intervalCode = [
         'y' => 'yearly',
         'm' => 'monthly',
@@ -42,8 +41,7 @@ class RunTemplate extends \MultiFlexi\Engine
         'm' => '2629743',
         'y' => '31556926',
     ];
-    
-    
+
     /**
      * @param mixed $identifier
      * @param array $options
@@ -85,8 +83,7 @@ class RunTemplate extends \MultiFlexi\Engine
     {
         return \array_key_exists($interval, array_flip(self::$intervalCode)) ? array_flip(self::$intervalCode)[$interval] : 'n/a';
     }
-    
-    
+
     /**
      * Get id by App & Company.
      *
@@ -372,7 +369,7 @@ class RunTemplate extends \MultiFlexi\Engine
     public function getRuntemplateEnvironment()
     {
         $configurator = new Configuration();
-        $cfg = $configurator->listingQuery()->select(['name', 'value'], true)->where(['runtemplate_id' => $this->getMyKey()])->fetchAll('name');
+        $cfg = $configurator->listingQuery()->select(['name', 'value', 'type'], true)->where(['runtemplate_id' => $this->getMyKey()])->fetchAll('name');
 
         return Environmentor::addSource($cfg, \get_class($this));
     }
@@ -393,7 +390,7 @@ class RunTemplate extends \MultiFlexi\Engine
         ], ['autoload' => false]);
 
         if ($app->checkRequiredFields($properties, true) && $configurator->takeData($properties) && null !== $configurator->saveToSQL()) {
-            $configurator->addStatusMessage(_('Config fields Saved'), 'success');
+            $configurator->addStatusMessage(_('Config fields Saved').' '.implode(',', array_keys($properties)), 'success');
             $result = true;
         } else {
             $configurator->addStatusMessage(_('Error saving Config fields'), 'error');

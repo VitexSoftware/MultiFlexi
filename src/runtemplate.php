@@ -15,7 +15,6 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use Ease\TWB4\LinkButton;
 use Ease\WebPage;
 use MultiFlexi\Application;
 use MultiFlexi\Company;
@@ -66,7 +65,6 @@ if ($oPage->isPosted()) {
 $oPage->addItem(new PageTop($runTemplate->getRecordName().' '._('Configuration')));
 
 $appPanel = new ApplicationPanel($app, new RunTemplatePanel($runTemplate));
-$appPanel->headRow->addColumn(2, new LinkButton('periodbehaviour.php?id='.$runTemplate->getMyKey(), '🛠️&nbsp;'._('Actions'), 'secondary btn-lg btn-block'));
 
 $oPage->container->addItem(new CompanyPanel($companies, $appPanel));
 
