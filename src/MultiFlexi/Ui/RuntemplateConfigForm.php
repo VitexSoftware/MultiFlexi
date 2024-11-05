@@ -37,7 +37,7 @@ class RuntemplateConfigForm extends EngineForm {
         
         foreach ($columns as $fieldName) {
             if (\array_key_exists($fieldName, $appFields)) {
-                $fieldInfo = array_merge($appFields[$fieldName], $customized[$fieldName]);
+                $fieldInfo = $appFields[$fieldName];
             } else {
                 $fieldInfo = $defaults[$fieldName];
             }
@@ -62,7 +62,7 @@ class RuntemplateConfigForm extends EngineForm {
 
         $saveRow = new \Ease\TWB4\Row();
         $saveRow->addColumn(8, new \Ease\TWB4\SubmitButton(_('Save'), 'success btn-lg btn-block'));
-        $saveRow->addColumn(4, new \Ease\TWB4\LinkButton('periodbehaviour.php?id=' . $engine->getMyKey(), '🛠️&nbsp;' . _('Actions'), 'secondary btn-lg btn-block'));
+        $saveRow->addColumn(4, new \Ease\TWB4\LinkButton('actions.php?id=' . $engine->getMyKey(), '🛠️&nbsp;' . _('Actions'), 'secondary btn-lg btn-block'));
         $this->addItem($saveRow);
     }
 }

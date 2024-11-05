@@ -69,12 +69,12 @@ $addAppForm->addItem(new \Ease\Html\InputHiddenTag('company_id', $companer->getM
 
 $periodSelectorsRow = new \Ease\TWB4\Row();
 
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Minutely'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'minutly', implode(',', array_keys($appsByIntrv['i'])), 'periodbehaviour.php')));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Hourly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'hourly', implode(',', array_keys($appsByIntrv['h'])), 'periodbehaviour.php')));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Daily'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'daily', implode(',', array_keys($appsByIntrv['d'])), 'periodbehaviour.php')));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Weekly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'weekly', implode(',', array_keys($appsByIntrv['w'])), 'periodbehaviour.php')));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Monthly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'monthly', implode(',', array_keys($appsByIntrv['m'])), 'periodbehaviour.php')));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Yearly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'yearly', implode(',', array_keys($appsByIntrv['y'])), 'periodbehaviour.php')));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Minutely'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'minutly', implode(',', array_keys($appsByIntrv['i'])), 'actions.php')));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Hourly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'hourly', implode(',', array_keys($appsByIntrv['h'])), 'actions.php')));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Daily'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'daily', implode(',', array_keys($appsByIntrv['d'])), 'actions.php')));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Weekly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'weekly', implode(',', array_keys($appsByIntrv['w'])), 'actions.php')));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Monthly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'monthly', implode(',', array_keys($appsByIntrv['m'])), 'actions.php')));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Yearly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'yearly', implode(',', array_keys($appsByIntrv['y'])), 'actions.php')));
 
 //
 // $assignedRaw = $companyApp->getAssigned()->fetchAll('app_id');

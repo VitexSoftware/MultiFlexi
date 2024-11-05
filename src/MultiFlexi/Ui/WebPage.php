@@ -23,6 +23,13 @@ namespace MultiFlexi\Ui;
 class WebPage extends \Ease\TWB4\WebPage
 {
     /**
+     * Where to look for bootstrap stylesheet.
+     *
+     * @var string path or url
+     */
+    public string $bootstrapCSS = 'css/bootstrap.min.css';
+
+    /**
      * Put page contents here.
      */
     public ?\Ease\TWB4\Container $container = null;
@@ -42,4 +49,5 @@ class WebPage extends \Ease\TWB4\WebPage
 
 EOD);
     }
+    
 }

@@ -60,7 +60,7 @@ abstract class CommonAction extends \Ease\Sand
     }
 
     /**
-     * Get Output cache as plaintext.
+     * Get Output cache as plain text.
      */
     public function getOutputCachePlaintext()
     {
@@ -100,7 +100,7 @@ abstract class CommonAction extends \Ease\Sand
     }
 
     /**
-     * Is this Action Situable for Application.
+     * Is this Action available for Application.
      *
      * @param Application $app
      */
@@ -108,4 +108,9 @@ abstract class CommonAction extends \Ease\Sand
     {
         return false;
     }
+    
+    public function initialData($param): array {
+        return [];
+    }
+    
 }

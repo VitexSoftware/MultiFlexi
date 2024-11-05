@@ -35,7 +35,7 @@ class BootstrapMenu extends \Ease\TWB4\Navbar
         $properties = []
     ) {
         $this->mainpage = 'main.php';
-        parent::__construct(new \Ease\Html\ImgTag('images/project-logo.svg', $name, ['width' => 30, 'height' => 30, 'class' => 'img-rounded d-inline-block align-top']), 'main-menu', ['class' => 'navbar-fixed-top'.(\array_key_exists('class', $properties) ? $properties['class'] : '')]);
+        parent::__construct(new \Ease\Html\ImgTag('images/project-logo.svg', $name, ['width' => 50, 'height' => 50, 'class' => 'img-rounded d-inline-block align-top']), 'main-menu', ['class' => 'navbar-fixed-top'.(\array_key_exists('class', $properties) ? $properties['class'] : '')]);
 
         if (\Ease\Shared::user()->isLogged() === false) {
             $loginForm = new \Ease\TWB4\Form(['action' => 'login.php', 'class' => 'form-inline my-2 my-lg-0']);
