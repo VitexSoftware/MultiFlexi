@@ -59,7 +59,7 @@ class ApplicationPanel extends Panel
 
             $this->headRow->addColumn(6, $usedByCompany);
         } else {
-            $this->headRow->addColumn(6, new LinkButton('?id='.$cid.'&action=delete', '🪦&nbsp;'._('Remove'), 'danger'));
+            $this->headRow->addColumn(6, new LinkButton('?id='.$application->getMyKey().'&action=delete', '🪦&nbsp;'._('Remove'), 'danger'));
         }
 
         //        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('tasks.php?application_id=' . $cid, '🔧&nbsp;' . _('Setup tasks'), 'secondary btn-lg btn-block'));
