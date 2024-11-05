@@ -1697,7 +1697,7 @@ msgid "Choose Applications to use with %s company"
 msgstr "Zvolte aplikace k použití se společností %s"
 
 #: ../src/companyapps.php:50 ../src/intervals.php:49
-#: ../src/periodbehaviour.php:67
+#: ../src/actions.php:67
 msgid "Apply"
 msgstr "Uplatnit"
 
@@ -1867,7 +1867,7 @@ msgid "Error saving Config fields"
 msgstr "Chyba ukládání konfiguračního políčka"
 
 #: ../src/custserviceconfig.php:56 ../src/job.php:42 ../src/newjob.php:74
-#: ../src/periodbehaviour.php:54
+#: ../src/actions.php:54
 msgid "Run Template"
 msgstr "Předloha běhu"
 
@@ -2078,15 +2078,15 @@ msgstr "Nastav nové heslo"
 msgid "Continue"
 msgstr "Pokračuj"
 
-#: ../src/periodbehaviour.php:51
+#: ../src/actions.php:51
 msgid "interval"
 msgstr "interval"
 
-#: ../src/periodbehaviour.php:58
+#: ../src/actions.php:58
 msgid "Success Actions"
 msgstr "Akce při úspěchu"
 
-#: ../src/periodbehaviour.php:59
+#: ../src/actions.php:59
 msgid "Fail Actions"
 msgstr "Akce při neúspěchu"
 
