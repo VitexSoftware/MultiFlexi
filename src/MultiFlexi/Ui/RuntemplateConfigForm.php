@@ -37,10 +37,10 @@ class RuntemplateConfigForm extends EngineForm
         asort($columns);
 
         foreach ($columns as $fieldName) {
-            if (\array_key_exists($fieldName, $appFields)) {
+            if (\array_key_exists($fieldName, $appFields) && array_key_exists($fieldName, $defaults) ) {
                 $fieldInfo = array_merge($defaults[$fieldName], $appFields[$fieldName]);
             } else {
-                $fieldInfo = $defaults[$fieldName];
+                $fieldInfo = $appFields[$fieldName];
             }
 
             $value = \array_key_exists('value', $fieldInfo) ? $fieldInfo['value'] : $fieldInfo['defval'];
