@@ -43,8 +43,8 @@ foreach ($enabled as $runTemplateData) {
     $failActions = unserialize($runTemplateData['fail']);
     $lldData[] = [
         '{#RUN_TEMPLATE_ID}' => $runTemplateData['id'],
-        '{#ZABBIX_KEY_SUCCESS}' => $succesActions['Zabbix'] ? $configer->listingQuery()->select('value', true)->where('module','Zabbix')->where('keyname','key')->where('runtemplate_id', $runTemplateData['id'])->where('mode','success')->fetchColumn() : '',
-        '{#ZABBIX_KEY_FAIL}' => $failActions['Zabbix'] ? $configer->listingQuery()->select('value', true)->where('module','Zabbix')->where('keyname','key')->where('runtemplate_id', $runTemplateData['id'])->where('mode','fail')->fetchColumn() : ''
+        '{#ZABBIX_KEY_SUCCESS}' => $succesActions['Zabbix'] ? $configer->listingQuery()->select('value', true)->where('module', 'Zabbix')->where('keyname', 'key')->where('runtemplate_id', $runTemplateData['id'])->where('mode', 'success')->fetchColumn() : '',
+        '{#ZABBIX_KEY_FAIL}' => $failActions['Zabbix'] ? $configer->listingQuery()->select('value', true)->where('module', 'Zabbix')->where('keyname', 'key')->where('runtemplate_id', $runTemplateData['id'])->where('mode', 'fail')->fetchColumn() : '',
     ];
 }
 

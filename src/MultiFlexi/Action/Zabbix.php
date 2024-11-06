@@ -108,7 +108,7 @@ class Zabbix extends \MultiFlexi\CommonAction
     {
         return 'job-['.$this->runtemplate->getCompany()->getDataValue('code').'-'.$this->runtemplate->getApplication()->getDataValue('code').'-'.$this->runtemplate->getMyKey().'-data]';
     }
-    
+
     /**
      * Form Inputs.
      *
