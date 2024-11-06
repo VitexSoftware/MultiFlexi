@@ -49,5 +49,4 @@ class WebPage extends \Ease\TWB4\WebPage
 
 EOD);
     }
-    
 }

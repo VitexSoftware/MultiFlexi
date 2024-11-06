@@ -23,7 +23,7 @@ namespace MultiFlexi;
 abstract class CommonAction extends \Ease\Sand
 {
     use \Ease\Logger\Logging;
-    public Job $job;
+    public RunTemplate $runtemplate;
     public string $stdin;
     public string $stdout;
     public string $stderr;
@@ -31,16 +31,15 @@ abstract class CommonAction extends \Ease\Sand
     public array $outputCache = [];
 
     /**
-     * @param Job   $job
      * @param array $options Action Options
      */
-    public function __construct($job, $options = [])
+    public function __construct(RunTemplate $runtemplate, $options = [])
     {
-        $this->job = $job;
+        $this->runtemplate = $runtemplate;
         $this->setData($options);
         $this->setObjectName();
-        $this->setObjectName($job->getMyKey().'@'.\Ease\Logger\Message::getCallerName($this));
-        $this->environment = $job->getFullEnvironment();
+        $this->setObjectName($runtemplate->getMyKey().'@'.\Ease\Logger\Message::getCallerName($this));
+        $this->environment = $runtemplate->getAppEnvironment();
         $this->loadOptions();
     }
 
@@ -108,9 +107,9 @@ abstract class CommonAction extends \Ease\Sand
     {
         return false;
     }
-    
-    public function initialData($param): array {
+
+    public function initialData(string $mode): array
+    {
         return [];
     }
-    
 }

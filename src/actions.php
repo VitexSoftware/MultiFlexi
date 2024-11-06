@@ -42,13 +42,13 @@ if (\Ease\WebPage::isPosted()) {
     $succesActions = $runTemplater->getDataValue('success') ? unserialize($runTemplater->getDataValue('success')) : [];
 }
 
-$oPage->addItem(new PageTop('🛠 ' . $runTemplater->getRecordName()));
+$oPage->addItem(new PageTop('🛠 '.$runTemplater->getRecordName()));
 
 $periodcalTaskInfo = $runTemplater->getData();
 
 $app = new Application($periodcalTaskInfo['app_id']);
 
-$interval = new \Ease\Html\DivTag(_(\MultiFlexi\Job::codeToInterval($periodcalTaskInfo['interv'])) . ' ' . _('interval'));
+$interval = new \Ease\Html\DivTag(_(\MultiFlexi\Job::codeToInterval($periodcalTaskInfo['interv'])).' '._('interval'));
 $appPanel = new ApplicationPanel($app, $interval);
 
 $appPanel->headRow->addItem(new RuntemplateButton($runTemplater));
@@ -63,7 +63,7 @@ $jobtempform->addItem(new \Ease\Html\InputHiddenTag('app', $periodcalTaskInfo['a
 $jobtempform->addItem(new \Ease\Html\InputHiddenTag('company_id', $periodcalTaskInfo['company_id']));
 $jobtempform->addItem(new \Ease\Html\InputHiddenTag('interval', $periodcalTaskInfo['interv']));
 $jobtempform->addItem($appPanel);
-$jobtempform->addItem(new \Ease\TWB4\SubmitButton('🍏 ' . _('Apply'), 'primary btn-lg btn-block'));
+$jobtempform->addItem(new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'primary btn-lg btn-block'));
 
 $oPage->container->addItem(new CompanyPanel(new Company($periodcalTaskInfo['company_id']), $jobtempform));
 
@@ -73,21 +73,39 @@ $oPage->finalizeRegistred();
 
 $actionsData = ActionsChooser::sqlToForm($actions->getRuntemplateConfig($runTemplater->getMyKey()));
 
-//\Ease\Functions::loadClassesInNamespace('MultiFlexi\\Action');
-//$actionModules = \Ease\Functions::classesInNamespace('MultiFlexi\\Action');
-//
-//$initials = [];
-//foreach ($actionModules as $action) {
-//
-//    $actionClass = '\\MultiFlexi\\Action\\' . $action;
-//
-//    if ($actionClass::usableForApp($app)) {
-//        $fakeJob = new \MultiFlexi\Job();
-//        $fakeJob->runTemplate = $runTemplater;
-//        $initials[$action] = (new $actionClass($fakeJob))->initialData();
-//    }
-//}
+\Ease\Functions::loadClassesInNamespace('MultiFlexi\\Action');
+$actionModules = \Ease\Functions::classesInNamespace('MultiFlexi\\Action');
 
+$initials = [];
+
+foreach ($actionModules as $action) {
+    $actionClass = '\\MultiFlexi\\Action\\'.$action;
+
+    foreach (['success', 'fail'] as $mode) {
+        if ($actionClass::usableForApp($app)) {
+            $initials[$action][$mode] = (new $actionClass($runTemplater))->initialData('success');
+
+            foreach ($initials[$action][$mode] as $key => $value) {
+                if (\array_key_exists($mode.'['.$action.']['.$key.']', $actionsData) === false) {
+                    $actionsData[$mode.'['.$action.']['.$key.']'] = $value;
+                }
+            }
+        }
+    }
+}
+
+// array(10) (
+//  [success[CustomCommand][command]] => (string)
+//  [success[Zabbix][key]] => (string) ZABBIX_KEY
+//  [success[Zabbix][metricsfile]] => (string) metrics.json
+//  [success[LaunchJob][jobid]] => (string) 2
+//  [success[WebHook][uri]] => (string)
+//  [fail[CustomCommand][command]] => (string)
+//  [fail[Zabbix][key]] => (string)
+//  [fail[Zabbix][metricsfile]] => (string)
+//  [fail[LaunchJob][jobid]] => (string) 2
+//  [fail[WebHook][uri]] => (string)
+// )
 
 $jobtempform->fillUp($actionsData);
 $oPage->draw();

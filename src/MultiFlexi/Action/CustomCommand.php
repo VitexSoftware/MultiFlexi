@@ -69,7 +69,7 @@ class CustomCommand extends \MultiFlexi\CommonAction
     {
         $command = $this->getDataValue('command');
         $this->addStatusMessage(_('Custom Command begin'));
-        $exitCode = $this->job->executor->launch($command);
+        $exitCode = $this->runtemplate->executor->launch($command);
         $this->addStatusMessage(_('Custom Command done'));
     }
 }

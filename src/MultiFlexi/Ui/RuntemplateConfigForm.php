@@ -20,11 +20,12 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class RuntemplateConfigForm extends EngineForm {
-
+class RuntemplateConfigForm extends EngineForm
+{
     private array $modulesEnv;
 
-    public function __construct(\MultiFlexi\RunTemplate $engine) {
+    public function __construct(\MultiFlexi\RunTemplate $engine)
+    {
         parent::__construct($engine, null, ['method' => 'post', 'action' => 'runtemplate.php']);
         $defaults = $engine->getAppEnvironment();
         $customized = $engine->getRuntemplateEnvironment();
@@ -34,10 +35,10 @@ class RuntemplateConfigForm extends EngineForm {
         $columns = array_keys(array_merge($appFields, $customized));
 
         asort($columns);
-        
+
         foreach ($columns as $fieldName) {
             if (\array_key_exists($fieldName, $appFields)) {
-                $fieldInfo = $appFields[$fieldName];
+                $fieldInfo = array_merge($defaults[$fieldName], $appFields[$fieldName]);
             } else {
                 $fieldInfo = $defaults[$fieldName];
             }
@@ -50,7 +51,7 @@ class RuntemplateConfigForm extends EngineForm {
                 $input = new \Ease\Html\InputTag($fieldName, $value, ['type' => $fieldInfo['type']]);
             }
 
-            $formGroup = $this->addInput($input, $fieldName . '&nbsp;(' . $fieldInfo['source'] . ')', array_key_exists('defval', $fieldInfo) ? $fieldInfo['defval'] : '', array_key_exists('description', $fieldInfo) ? $fieldInfo['description'] : '');
+            $formGroup = $this->addInput($input, $fieldName.'&nbsp;('.$fieldInfo['source'].')', \array_key_exists('defval', $fieldInfo) ? $fieldInfo['defval'] : '', \array_key_exists('description', $fieldInfo) ? $fieldInfo['description'] : '');
 
             if (\array_key_exists('required', $fieldInfo) && $fieldInfo['required'] === true) {
                 $formGroup->addTagClass('bg-primary');
@@ -62,7 +63,7 @@ class RuntemplateConfigForm extends EngineForm {
 
         $saveRow = new \Ease\TWB4\Row();
         $saveRow->addColumn(8, new \Ease\TWB4\SubmitButton(_('Save'), 'success btn-lg btn-block'));
-        $saveRow->addColumn(4, new \Ease\TWB4\LinkButton('actions.php?id=' . $engine->getMyKey(), '🛠️&nbsp;' . _('Actions'), 'secondary btn-lg btn-block'));
+        $saveRow->addColumn(4, new \Ease\TWB4\LinkButton('actions.php?id='.$engine->getMyKey(), '🛠️&nbsp;'._('Actions'), 'secondary btn-lg btn-block'));
         $this->addItem($saveRow);
     }
 }
