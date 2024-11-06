@@ -68,7 +68,7 @@ class Zabbix extends \MultiFlexi\CommonAction
         $zabbixUser = \Ease\Shared::cfg('ZABBIX_USER', '');
         $zabbixPassword = \Ease\Shared::cfg('ZABBIX_USER', '');
 
-        $zabbixKey = (empty($this->getDataValue('key')) || ($this->getDataValue('key') === 'job-[{COMPANY_CODE}-{APP_CODE}-{RUNTEMPLATE_ID}-data]')) ? 'job-['.$this->runtemplate->company->getDataValue('code').'-'.$this->runtemplate->application->getDataValue('code').'-'.$this->runtemplate->runTemplate->getMyKey().'-data]' : $this->getDataValue('key');
+        $zabbixKey = (empty($this->getDataValue('key')) || ($this->getDataValue('key') === 'job-[{COMPANY_CODE}-{APP_CODE}-{RUNTEMPLATE_ID}-data]')) ? 'job-['.$this->runtemplate->company->getDataValue('code').'-'.$this->runtemplate->application->getDataValue('code').'-'.$this->runtemplate->getMyKey().'-data]' : $this->getDataValue('key');
         $dataForZabbix = null;
         $metricsfile = $this->getDataValue('metricsfile');
 
