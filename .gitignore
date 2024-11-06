@@ -59,3 +59,9 @@ db/multiflexi
 src/css/dataTables.bootstrap4.css
 src/js/dataTables.bootstrap4.js
 src/js/jquery.dataTables.js
+/debian/multiflexi-abraflexi.debhelper.log
+/debian/multiflexi-abraflexi.substvars
+/debian/multiflexi-raiffeisenbank.debhelper.log
+/debian/multiflexi-raiffeisenbank.substvars
+/debian/multiflexi-abraflexi/
+/debian/multiflexi-raiffeisenbank/

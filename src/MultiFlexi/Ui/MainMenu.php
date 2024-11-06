@@ -236,7 +236,7 @@ EOD);
     public function searchFrom()
     {
         $searchForm = new \Ease\TWB4\Form(['class' => 'form-inline my-2 my-lg-0', 'action' => 'search.php']);
-        $searchForm->addItem(new \Ease\Html\InputTextTag('search', \Ease\WebPage::getRequestValue('search') , ['aria-label' => _('Search'), 'class' => 'form-control mr-sm-2', 'type' => 'search', 'placeholder' => _('Search')]));
+        $searchForm->addItem(new \Ease\Html\InputTextTag('search', \Ease\WebPage::getRequestValue('search'), ['aria-label' => _('Search'), 'class' => 'form-control mr-sm-2', 'type' => 'search', 'placeholder' => _('Search')]));
         $searchForm->addItem(new \Ease\Html\ButtonTag(_('Search'), ['class' => 'btn btn-outline-success my-2 my-sm-0']));
 
         return $searchForm;
