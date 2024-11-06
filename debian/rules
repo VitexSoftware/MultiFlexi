@@ -38,5 +38,7 @@ override_dh_install:
 	rm  debian/multiflexi/usr/bin/multiflexi-zabbix-lld
 	rm  debian/multiflexi/usr/bin/multiflexi-zabbix-lld-company
 	rm  debian/multiflexi/usr/bin/multiflexi-zabbix-lld-tasks
-	rm  debian/multiflexi/usr/lib/multiflexi/zabbixcompanylld.php                        
-	rm  debian/multiflexi/usr/lib/multiflexi/zabbixlld.php                               
+	rm  debian/multiflexi/usr/bin/multiflexi-zabbix-lld-actions
+	rm  debian/multiflexi/usr/lib/multiflexi/zabbixcompanylld.php
+	rm  debian/multiflexi/usr/lib/multiflexi/zabbixlld.php
+	rm  debian/multiflexi/usr/lib/multiflexi/zabbixlldactions.php

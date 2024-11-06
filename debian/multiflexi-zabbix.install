@@ -5,6 +5,5 @@ src/MultiFlexi/Zabbix/Request/*.php       	usr/lib/multiflexi/MultiFlexi/Zabbix/
 src/MultiFlexi/Action/Zabbix.php		usr/lib/multiflexi/MultiFlexi/Action
 
 bin/multiflexi-zabbix-*                         usr/bin/
-lib/zabbixcompanylld.php                        usr/lib/multiflexi
-lib/zabbixlld.php                               usr/lib/multiflexi
+lib/zabbix*.php                                 usr/lib/multiflexi
 src/MultiFlexi/ZabbixSender.php                 usr/lib/multiflexi/MultiFlexi/
