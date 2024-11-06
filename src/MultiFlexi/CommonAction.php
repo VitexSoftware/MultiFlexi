@@ -30,6 +30,9 @@ abstract class CommonAction extends \Ease\Sand
     public $environment = [];
     public array $outputCache = [];
 
+    private Job $job;
+
+
     /**
      * @param array $options Action Options
      */
@@ -43,6 +46,10 @@ abstract class CommonAction extends \Ease\Sand
         $this->loadOptions();
     }
 
+    public function useJob(Job $job){
+        $this->job = $job;
+    }
+    
     public function loadOptions(): void
     {
     }
