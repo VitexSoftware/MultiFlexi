@@ -39,11 +39,12 @@ $enabled = $runTemplater->listingQuery()->disableSmartJoin()->where("success LIK
 $configer = new ActionConfig();
 
 foreach ($enabled as $runTemplateData) {
-    
+    $succesActions = unserialize($runTemplateData['success']);
+    $failActions = unserialize($runTemplateData['fail']);
     $lldData[] = [
         '{#RUN_TEMPLATE_ID}' => $runTemplateData['id'],
-        '{#ZABBIX_KEY_SUCCESS}' => $configer->listingQuery()->select('value', true)->where('module','Zabbix')->where('keyname','key')->where('runtemplate_id', $runTemplateData['id'])->where('mode','success')->fetchColumn(),
-        '{#ZABBIX_KEY_FAIL}' => $configer->listingQuery()->select('value', true)->where('module','Zabbix')->where('keyname','key')->where('runtemplate_id', $runTemplateData['id'])->where('mode','success')->fetchColumn()
+        '{#ZABBIX_KEY_SUCCESS}' => $succesActions['Zabbix'] ? $configer->listingQuery()->select('value', true)->where('module','Zabbix')->where('keyname','key')->where('runtemplate_id', $runTemplateData['id'])->where('mode','success')->fetchColumn() : '',
+        '{#ZABBIX_KEY_FAIL}' => $failActions['Zabbix'] ? $configer->listingQuery()->select('value', true)->where('module','Zabbix')->where('keyname','key')->where('runtemplate_id', $runTemplateData['id'])->where('mode','fail')->fetchColumn() : ''
     ];
 }
 
