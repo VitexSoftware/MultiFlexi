@@ -1,8 +1,14 @@
-multiflexi (1.17.0) UNRELEASED; urgency=medium
+multiflexi (1.18.0) UNRELEASED; urgency=medium
+
+  * Search added
+
+ -- vitex <info@vitexsoftware.cz>  Wed, 06 Nov 2024 11:46:49 +0100
+
+multiflexi (1.17.0) jammy; urgency=medium
 
   * Nicest Runtemplates
 
- -- vitex <info@vitexsoftware.cz>  Mon, 04 Nov 2024 23:58:59 +0100
+ -- vitex <info@vitexsoftware.cz>  Wed, 06 Nov 2024 11:46:40 +0100
 
 multiflexi (1.16.0) jammy; urgency=medium
 
