@@ -68,7 +68,7 @@ class Zabbix extends \MultiFlexi\CommonAction
         $zabbixUser = \Ease\Shared::cfg('ZABBIX_USER', '');
         $zabbixPassword = \Ease\Shared::cfg('ZABBIX_USER', '');
 
-        $zabbixKey = (empty($this->getDataValue('key')) || ($this->getDataValue('key') === 'job-[{COMPANY_CODE}-{APP_CODE}-{RUNTEMPLATE_ID}-data]')) ? 'job-['.$this->runtemplate->company->getDataValue('code').'-'.$this->runtemplate->application->getDataValue('code').'-'.$this->runtemplate->getMyKey().'-data]' : $this->getDataValue('key');
+        $zabbixKey = (empty($this->getDataValue('key')) || ($this->getDataValue('key') === 'job-[{COMPANY_CODE}-{APP_CODE}-{RUNTEMPLATE_ID}-data]')) ? $this->defaultKey() : $this->getDataValue('key');
         $dataForZabbix = null;
         $metricsfile = $this->getDataValue('metricsfile');
 
@@ -104,6 +104,11 @@ class Zabbix extends \MultiFlexi\CommonAction
         }
     }
 
+    public function defaultKey(): string
+    {
+        return 'job-['.$this->runtemplate->getCompany()->getDataValue('code').'-'.$this->runtemplate->getApplication()->getDataValue('code').'-'.$this->runtemplate->getMyKey().'-data]';
+    }
+    
     /**
      * Form Inputs.
      *
@@ -135,7 +140,7 @@ class Zabbix extends \MultiFlexi\CommonAction
         $runtemplateConfig = $this->runtemplate->getRuntemplateEnvironment();
 
         return [
-            'key' => 'job-['.$this->runtemplate->getCompany()->getDataValue('code').'-'.$this->runtemplate->getApplication()->getDataValue('code').'-'.$this->runtemplate->getMyKey().'-data]',
+            'key' => $this->defaultKey(),
             'metricsfile' => (\array_key_exists('RESULT_FILE', $runtemplateConfig) ? $runtemplateConfig['RESULT_FILE']['value'] : ''),
         ];
     }
