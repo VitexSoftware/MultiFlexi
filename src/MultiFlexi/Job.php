@@ -614,7 +614,7 @@ EOD;
             $actionClass = '\\MultiFlexi\\Action\\'.$action;
 
             if ($enabled && class_exists($actionClass)) {
-                $actionHandler = new $actionClass($this);
+                $actionHandler = new $actionClass($this->runTemplate);
                 $actionHandler->setData($modConf->getModuleConf($action));
 
                 foreach ($modConfigs as $modConfig) {

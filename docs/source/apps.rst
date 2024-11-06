@@ -1,4 +1,58 @@
-.. _applications:
+Applications
+============
+
+.. toctree::
+   :maxdepth: 2
+
+   abraflexi-checker
+   daily-digest
+   weekly-digest
+   monthly-digest
+   email-sender
+   kimai2abraflexi
+   email-importer
+   show-unsent
+   abraflexi-send
+   redmine2abraflexi
+   yearly-digest
+   multiflexi-probe
+   alltime-digest
+   abraflexi-bulk-mailer
+   subreg-to-abraflexi
+   realpad-to-mailkit
+   abraflexi-revolut-statements-import
+   abraflexi-transaction-report
+   abraflexi-bank-statements-puller
+   abraflexi-issued-invoices-matcher
+   recieved-invoices-matcher
+   contract-to-invoices
+   clear-reminder-labels
+   debts-overview
+   notify-customers
+   sms-input
+   pohoda-checker
+   abraflexi-benchmark
+   abraflexi-copy
+   price-fixer
+   subreg-credit-check
+   subreg-for-abraflexi
+   raiffeisenbank-transactions-importer-for-abraflexi
+   raiffeisenbank-statement-importer-for-abraflexi
+   discomp2abraflexi
+   pohoda-transaction-report
+   reminder
+   rb-balance
+   raiffeisenbank-statements-for-pohodasql
+   rb-statement-downloader
+   raiffeisenbank-statements-for-pohoda
+   raiffeisenbank-statements-for-pohodasql-sharepoint
+   fio-statement-downloader
+   rb-statement-mailer
+   fio-statement-mailer
+   fio-transaction-report
+   rb-transaction-report
+   import-raiffeisen-bank-statements-to-abraflexi-events
+.. contents::
 
 
 MultiFlexi Application Requirements

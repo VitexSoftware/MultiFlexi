@@ -84,14 +84,14 @@ class Github extends \MultiFlexi\CommonAction
             'Accept: application/vnd.github+json',
             'X-GitHub-Api-Version: 2022-11-28',
         ];
-        $title = $this->job->application->getRecordName().' problem';
-        $body = 'JOB ID: '.$this->job->getMyKey()."\n\n";
+        $title = $this->runtemplate->application->getRecordName().' problem';
+        $body = 'JOB ID: '.$this->runtemplate->getMyKey()."\n\n";
 
-        $body .= 'Command: '.$this->job->getDataValue('command')."\n\n";
-        $body .= 'ExitCode: '.$this->job->getDataValue('exitcode')."\n\n";
+        $body .= 'Command: '.$this->runtemplate->getDataValue('command')."\n\n";
+        $body .= 'ExitCode: '.$this->runtemplate->getDataValue('exitcode')."\n\n";
 
-        $body .= "\nStdout:\n```\n".stripslashes($this->job->getDataValue('stdout'))."\n```";
-        $body .= "\nSterr:\n```\n".stripslashes($this->job->getDataValue('stderr'))."\n```\n\n";
+        $body .= "\nStdout:\n```\n".stripslashes($this->runtemplate->getDataValue('stdout'))."\n```";
+        $body .= "\nSterr:\n```\n".stripslashes($this->runtemplate->getDataValue('stderr'))."\n```\n\n";
 
         $body .= 'MultiFlexi: '.\Ease\Shared::appName().' '.\Ease\Shared::appVersion()."\n\n";
 
@@ -102,7 +102,7 @@ class Github extends \MultiFlexi\CommonAction
 
         $ch = curl_init();
 
-        $userRepo = parse_url($this->job->application->getDataValue('homepage'), \PHP_URL_PATH);
+        $userRepo = parse_url($this->runtemplate->application->getDataValue('homepage'), \PHP_URL_PATH);
 
         curl_setopt($ch, \CURLOPT_URL, 'https://api.github.com/repos'.$userRepo.'/issues');
         curl_setopt($ch, \CURLOPT_HTTPHEADER, $header);

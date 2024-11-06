@@ -52,8 +52,8 @@ class Stop extends \MultiFlexi\CommonAction
      */
     public function perform(): void
     {
-        if ($this->job->runTemplate->setState(false)) {
-            $this->addStatusMessage(sprintf(_('Periodic executing of «%s» for ❮%s❯ stop 🛑'), $this->job->application->getRecordName(), $this->job->company->getRecordName()), 'success');
+        if ($this->runtemplate->runTemplate->setState(false)) {
+            $this->addStatusMessage(sprintf(_('Periodic executing of «%s» for ❮%s❯ stop 🛑'), $this->runtemplate->application->getRecordName(), $this->runtemplate->company->getRecordName()), 'success');
         } else {
             $this->addStatusMessage(_('Stopped module failed'), 'error');
         }
