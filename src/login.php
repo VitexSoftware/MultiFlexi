@@ -41,7 +41,13 @@ if ($login) {
     //        echo 'Caught exception: ', $e->getMessage(), "\n";
     //    }
     if (\Ease\Shared::user()->tryToLogin($_POST)) {
-        $oPage->redirect('main.php');
+        
+        if(array_key_exists('wayback', $_SESSION['wayback']) && !empty($_SESSION['wayback'])){
+            $oPage->redirect($_SESSION['wayback']);
+            unset($_SESSION['wayback']);
+        } else {
+            $oPage->redirect('main.php');
+        }
         session_write_close();
 
         exit;

@@ -23,7 +23,7 @@ namespace MultiFlexi\Ui;
 class WebPage extends \Ease\TWB4\WebPage
 {
     /**
-     * Where to look for bootstrap stylesheet.
+     * Where to look for bootstrap style sheet.
      *
      * @var string path or url
      */
@@ -49,4 +49,14 @@ class WebPage extends \Ease\TWB4\WebPage
 
 EOD);
     }
+    
+    public function onlyForLogged() {
+        if(parent::onlyForLogged()){
+            $_SESSION['wayback'] = self::getUri();
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
 }
