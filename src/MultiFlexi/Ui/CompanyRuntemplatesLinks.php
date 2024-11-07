@@ -40,8 +40,9 @@ class CompanyRuntemplatesLinks extends \Ease\Html\DivTag
 
         parent::__construct($runtemplatesDiv, $properties);
     }
-    
-    public function count(): int {
+
+    public function count(): int
+    {
         return $this->pageParts[0]->getItemsCount();
     }
 }

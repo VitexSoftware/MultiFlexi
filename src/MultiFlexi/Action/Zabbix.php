@@ -73,7 +73,7 @@ class Zabbix extends \MultiFlexi\CommonAction
         $metricsfile = $this->getDataValue('metricsfile');
 
         if (empty($metricsfile)) {
-            $dataForZabbix = stripslashes((string)$this->job->getDataValue('stdout'));
+            $dataForZabbix = stripslashes((string) $this->job->getDataValue('stdout'));
         } else {
             if (file_exists($metricsfile)) {
                 $dataForZabbix = file_get_contents($metricsfile); // TODO: Use Executor
