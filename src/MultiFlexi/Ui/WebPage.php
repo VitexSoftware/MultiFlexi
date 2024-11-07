@@ -49,14 +49,15 @@ class WebPage extends \Ease\TWB4\WebPage
 
 EOD);
     }
-    
-    public function onlyForLogged() {
-        if(parent::onlyForLogged()){
+
+    public function onlyForLogged($loginPage = 'login.php', $message = null)
+    {
+        if (parent::onlyForLogged($loginPage, $message)) {
             $_SESSION['wayback'] = self::getUri();
+
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
-    
 }
