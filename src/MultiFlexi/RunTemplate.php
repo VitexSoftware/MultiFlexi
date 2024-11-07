@@ -210,7 +210,7 @@ class RunTemplate extends \MultiFlexi\Engine
             'y' => '🎆',
         ];
 
-        return $emojis[$interval];
+        return \array_key_exists($interval, $emojis) ? $emojis[$interval] : '';
     }
 
     /**
