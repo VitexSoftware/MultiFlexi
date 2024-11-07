@@ -391,14 +391,10 @@ class UserTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @covers \MultiFlexi\User::getMyTable
-     *
-     * @todo   Implement testgetMyTable().
      */
     public function testgetMyTable(): void
     {
-        $this->assertEquals('', $this->object->getMyTable());
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertEquals('user', $this->object->getMyTable());
     }
 
     /**
