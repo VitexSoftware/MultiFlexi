@@ -145,6 +145,9 @@ class RunTemplate extends \MultiFlexi\Engine
             $data = $this->getData();
         }
 
+        $arnold = new \MultiFlexi\ActionConfig();
+        $arnold->deleteFromSQL(['runtemplate_id' => $this->getMyKey()]);
+        
         $configurator = new \MultiFlexi\Configuration();
         $configurator->deleteFromSQL(['runtemplate_id' => $this->getMyKey()]);
 
