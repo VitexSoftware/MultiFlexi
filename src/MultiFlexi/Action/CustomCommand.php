@@ -65,7 +65,7 @@ class CustomCommand extends \MultiFlexi\CommonAction
     /**
      * Perform Action.
      */
-    public function perform(): void
+    public function perform(\MultiFlexi\Job $job): void
     {
         $command = $this->getDataValue('command');
         $this->addStatusMessage(_('Custom Command begin'));

@@ -50,7 +50,7 @@ class WebHook extends \MultiFlexi\CommonAction
     /**
      * Perform Action.
      */
-    public function perform(): void
+    public function perform(\MultiFlexi\Job $job): void
     {
         $uri = $this->getDataValue('uri');
 
@@ -77,7 +77,7 @@ class WebHook extends \MultiFlexi\CommonAction
     }
 
     /**
-     * Is this Action Situable for Application.
+     * Is this Action Suitable for Application.
      *
      * @param Application $app
      */

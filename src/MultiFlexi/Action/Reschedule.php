@@ -48,7 +48,7 @@ class Reschedule extends \MultiFlexi\CommonAction
     }
 
     /**
-     * Is this Action Situable for Application.
+     * Is this Action Suitable for Application.
      *
      * @param Application $app
      */

@@ -50,7 +50,7 @@ class Stop extends \MultiFlexi\CommonAction
     /**
      * Perform Action.
      */
-    public function perform(): void
+    public function perform(\MultiFlexi\Job $job): void
     {
         if ($this->runtemplate->runTemplate->setState(false)) {
             $this->addStatusMessage(sprintf(_('Periodic executing of «%s» for ❮%s❯ stop 🛑'), $this->runtemplate->application->getRecordName(), $this->runtemplate->company->getRecordName()), 'success');
@@ -60,7 +60,7 @@ class Stop extends \MultiFlexi\CommonAction
     }
 
     /**
-     * Is this Action Situable for Application.
+     * Is this Action Suitable for Application.
      *
      * @param Application $app
      */

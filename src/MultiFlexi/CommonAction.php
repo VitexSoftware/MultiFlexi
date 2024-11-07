@@ -99,7 +99,7 @@ abstract class CommonAction extends \Ease\Sand
     /**
      * Perform Action.
      */
-    public function perform(): void
+    public function perform(\MultiFlexi\Job $job): void
     {
         $this->addStatusMessage(_('No Action performed'), 'debug');
     }
