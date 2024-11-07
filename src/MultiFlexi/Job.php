@@ -615,7 +615,6 @@ EOD;
 
             if ($enabled && class_exists($actionClass)) {
                 $actionHandler = new $actionClass($this->runTemplate);
-                $actionHandler->useJob($this);
                 $actionHandler->setData($modConf->getModuleConf($action));
 
                 foreach ($modConfigs as $modConfig) {
@@ -624,7 +623,7 @@ EOD;
                     }
                 }
 
-                $actionHandler->perform();
+                $actionHandler->perform($this);
             }
         }
     }

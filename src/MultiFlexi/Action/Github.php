@@ -75,7 +75,7 @@ class Github extends \MultiFlexi\CommonAction
     /**
      * Perform Action.
      */
-    public function perform(): void
+    public function perform(\MultiFlexi\Job $job): void
     {
         $token = $this->getDataValue('token');
         $headerValue = ' Bearer '.$token;
@@ -85,13 +85,13 @@ class Github extends \MultiFlexi\CommonAction
             'X-GitHub-Api-Version: 2022-11-28',
         ];
         $title = $this->runtemplate->application->getRecordName().' problem';
-        $body = 'JOB ID: '.$this->runtemplate->getMyKey()."\n\n";
+        $body = 'JOB ID: '.$job->getMyKey()."\n\n";
 
-        $body .= 'Command: '.$this->runtemplate->getDataValue('command')."\n\n";
-        $body .= 'ExitCode: '.$this->runtemplate->getDataValue('exitcode')."\n\n";
+        $body .= 'Command: '.$job->getDataValue('command')."\n\n";
+        $body .= 'ExitCode: '.$job->getDataValue('exitcode')."\n\n";
 
-        $body .= "\nStdout:\n```\n".stripslashes($this->runtemplate->getDataValue('stdout'))."\n```";
-        $body .= "\nSterr:\n```\n".stripslashes($this->runtemplate->getDataValue('stderr'))."\n```\n\n";
+        $body .= "\nStdout:\n```\n".stripslashes($job->getDataValue('stdout'))."\n```";
+        $body .= "\nSterr:\n```\n".stripslashes($job->getDataValue('stderr'))."\n```\n\n";
 
         $body .= 'MultiFlexi: '.\Ease\Shared::appName().' '.\Ease\Shared::appVersion()."\n\n";
 

@@ -60,7 +60,7 @@ class Zabbix extends \MultiFlexi\CommonAction
     /**
      * Perform Action.
      */
-    public function perform(): void
+    public function perform(\MultiFlexi\Job $job): void
     {
         $me = \Ease\Shared::cfg('ZABBIX_HOST', gethostname());
         $server = \Ease\Shared::cfg('ZABBIX_SERVER');
@@ -73,7 +73,7 @@ class Zabbix extends \MultiFlexi\CommonAction
         $metricsfile = $this->getDataValue('metricsfile');
 
         if (empty($metricsfile)) {
-            $dataForZabbix = stripslashes((string) $this->job->getDataValue('stdout'));
+            $dataForZabbix = stripslashes((string) $job->getDataValue('stdout'));
         } else {
             if (file_exists($metricsfile)) {
                 $dataForZabbix = file_get_contents($metricsfile); // TODO: Use Executor
