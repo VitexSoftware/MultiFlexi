@@ -29,7 +29,7 @@ abstract class CommonAction extends \Ease\Sand
     public string $stderr;
     public $environment = [];
     public array $outputCache = [];
-    private Job $job;
+    public Job $job;
 
     /**
      * @param array $options Action Options
