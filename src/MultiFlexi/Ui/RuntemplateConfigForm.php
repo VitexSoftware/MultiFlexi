@@ -40,7 +40,7 @@ class RuntemplateConfigForm extends EngineForm
             if (\array_key_exists($fieldName, $appFields) && \array_key_exists($fieldName, $defaults)) {
                 $fieldInfo = array_merge($defaults[$fieldName], $appFields[$fieldName]);
             } else {
-                $fieldInfo = $appFields[$fieldName];
+                $fieldInfo = array_key_exists($fieldName, $appFields) ? $appFields[$fieldName] : ['type'=>'text','source'=>_('Custom')];
             }
 
             $value = \array_key_exists('value', $fieldInfo) ? $fieldInfo['value'] : $fieldInfo['defval'];
