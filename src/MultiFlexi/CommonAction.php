@@ -29,7 +29,6 @@ abstract class CommonAction extends \Ease\Sand
     public string $stderr;
     public $environment = [];
     public array $outputCache = [];
-    public Job $job;
 
     /**
      * @param array $options Action Options
@@ -42,11 +41,6 @@ abstract class CommonAction extends \Ease\Sand
         $this->setObjectName($runtemplate->getMyKey().'@'.\Ease\Logger\Message::getCallerName($this));
         $this->environment = $runtemplate->getAppEnvironment();
         $this->loadOptions();
-    }
-
-    public function useJob(Job $job): void
-    {
-        $this->job = $job;
     }
 
     public function loadOptions(): void

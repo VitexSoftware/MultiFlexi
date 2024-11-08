@@ -82,10 +82,8 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
      * Prepare company.
      *
      * @param string $company
-     *
-     * @return array
      */
-    public function prepareCompany($company)
+    public function prepareCompany($company): array
     {
         $result = ['webhook' => false];
         $this->setCompany($company);
@@ -104,7 +102,7 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
      *
      * @return string URL for WebHook
      */
-    public static function webHookUrl($instanceId)
+    public static function webHookUrl($instanceId): string
     {
         $baseUrl = \Ease\Document::phpSelf();
         $urlInfo = parse_url($baseUrl);

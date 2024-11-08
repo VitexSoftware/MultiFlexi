@@ -65,3 +65,4 @@ src/js/jquery.dataTables.js
 /debian/multiflexi-raiffeisenbank.substvars
 /debian/multiflexi-abraflexi/
 /debian/multiflexi-raiffeisenbank/
+/.phpunit.result.cache
