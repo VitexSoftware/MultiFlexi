@@ -76,7 +76,13 @@ class AppApi extends AbstractAppApi
             switch ($suffix) {
                 case 'html':
                     $appsList[$app['id']]['name'] = new \Ease\Html\ATag('app/'.$app['id'].'.html', $app['name']);
-                    $appsList[$app['id']]['image'] = new \Ease\Html\ATag('app/'.$app['id'].'.html', new \Ease\Html\ImgTag($app['image'], $app['name'], ['width' => '64']));
+                    
+                    if(file_exists('../images/'.$app['uuid'].'.svg')){
+                       $appIcon = \Ease\Html\ImgTag::fileBase64src('../images/'.$app['uuid'].'.svg');
+                    } else {
+                       $appIcon = $app['image'];
+                    }
+                    $appsList[$app['id']]['image'] = new \Ease\Html\ATag('app/'.$app['id'].'.html', new \Ease\Html\ImgTag($appIcon, $app['name'], ['width' => '64']));
 
                     break;
 

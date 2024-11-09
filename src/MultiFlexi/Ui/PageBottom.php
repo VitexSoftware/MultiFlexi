@@ -37,12 +37,6 @@ class PageBottom extends \Ease\Html\FooterTag
         $this->addItem('<hr>');
         $footrow = new \Ease\TWB4\Row();
 
-        if (method_exists('Composer\InstalledVersions', 'getRootPackage')) {
-            $composer = \Composer\InstalledVersions::getRootPackage()['install_path'].'/composer.lock';
-        } else {
-            $composer = '../composer.lock';
-        }
-
         $author = '<strong><a href="https://multiflexi.eu/">MultiFlexi</a></strong> '.\Ease\Shared::appVersion().(empty(self::BUILD) ? '' : '&nbsp;'._('build').' #'.self::BUILD).'<br>&nbsp;&nbsp; &copy; 2020-2024 <a href="https://vitexsoftware.com/">Vitex Software</a>';
 
         //  '&nbsp;' . new \Ease\Html\Widgets\LiveAge(filemtime($composer))
