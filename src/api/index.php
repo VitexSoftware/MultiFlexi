@@ -72,8 +72,8 @@ $container = $builder->build();
 
 // Instantiate the app
 $app = Bridge::create($container);
-$app->setBasePath('/EASE/MultiFlexi/src/api');
-$path = '/EASE/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/';
+$app->setBasePath('/MultiFlexi/src/api');
+$path = '/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/';
 
 // Register middleware
 $middleware = new RegisterMiddlewares();
@@ -123,7 +123,7 @@ $app->add(new \Tuupola\Middleware\HttpBasicAuthentication([
     'authenticator' => static function ($arguments) {
         $prober = new \MultiFlexi\User($arguments['user']);
 
-        return $prober->getUserID() && \strlen($arguments['password']) && $prober->isAccountEnabled() && $prober->passwordValidation($arguments['password'], $prober->getDataValue($prober->passwordColumn));
+        return is_integer($prober->getUserID()) && \strlen($arguments['password']) && $prober->isAccountEnabled() && $prober->passwordValidation($arguments['password'], $prober->getDataValue($prober->passwordColumn));
     },
 ]));
 

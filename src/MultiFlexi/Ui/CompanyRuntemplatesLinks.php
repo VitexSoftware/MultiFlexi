@@ -35,7 +35,7 @@ class CompanyRuntemplatesLinks extends \Ease\Html\DivTag
                 $runtemplatesDiv->addItem(new \Ease\Html\ATag('runtemplate.php?id='.$runtemplateData['id'], '⚗️', $linkProperties));
             }
         } else {
-            $runtemplatesDiv->addItem(new \Ease\Html\ATag('runtemplate.php?new=1&app_id='.$application->getMyKey().'&company_id='.$company->getMyKey(), '➕', 'success'));
+            $runtemplatesDiv->addItem(new \Ease\Html\ATag('runtemplate.php?new=1&app_id='.$application->getMyKey().'&company_id='.$company->getMyKey(), '➕'));
         }
 
         parent::__construct($runtemplatesDiv, $properties);

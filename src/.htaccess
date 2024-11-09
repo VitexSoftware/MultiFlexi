@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteBase /MultiFlexi/src/
+
+# Rewrite rule to handle API calls
+RewriteRule ^api/(.*)$ api/index.php [L,QSA]
