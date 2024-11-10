@@ -57,14 +57,89 @@ if (null === $runTemplate->getMyKey()) {
 
         $glassHourRow = new \Ease\TWB4\Row();
         $glassHourRow->addTagClass('justify-content-md-center');
-        $glassHourRow->addColumn('4');
-        $glassHourRow->addColumn('4', new \Ease\Html\DivTag(new \Ease\Html\Widgets\SandClock(['class' => 'mx-auto d-block img-fluid'])), 'sm');
-        // $glassHourRow->addColumn('4', new \Ease\Html\DivTag(new \Ease\Html\ImgTag('images/openclipart/345630.svg', _('AI and Human Relationship'), ['class' => 'mx-auto d-block img-fluid'])), 'sm');
-        $glassHourRow->addColumn('4');
+        $glassHourRow->addColumn(4);
+        $glassHourRow->addColumn(4, new \Ease\Html\DivTag(new \Ease\Html\Widgets\SandClock(['class' => 'mx-auto d-block img-fluid'])), 'sm');
+        $glassHourRow->addColumn(4);
+
+        $currentTime = new \DateTime();
+        $beginTime = new \DateTime($when);
+        
+        $a = $currentTime->format('Y-m-d H:i:s');
+        $b = $beginTime->format('Y-m-d H:i:s');
+        
+        $waitTime = $beginTime->getTimestamp() - $currentTime->getTimestamp();
+        
+        $waitRow = new \Ease\TWB4\Row();
+        $waitRow->addTagClass('justify-content-md-center');
+        $waitRow->addColumn(4, $when);
+        $waitRow->addColumn(4, new \Ease\Html\Widgets\LiveAge($beginTime->getTimestamp()) , 'sm');
+        $waitRow->addColumn(4, $waitTime);
+        
+        if ($waitTime > 0) {
+            $oPage->addJavaScript(
+            '
+function wait(seconds) {
+    return new Promise(resolve => setTimeout(resolve, seconds * 1000));
+}
+
+async function pollApi(apiEndpoint, pollingInterval, maxPollingDuration) {
+    const startTime = Date.now(); // Record the start time
+
+    const makeRequest = async () => {
+        try {
+            const response = await fetch(apiEndpoint); // Make request
+            const data = await response.json();
+
+            if (data.job.exitcode != -1) {
+                console.log(\'Success response received:\', data);
+                window.location.href = "job.php?id='.$jobber->getMyKey().'";
+                return; // // Stop polling if success response
+            } else {
+                wait(5);
+            }
+
+            const elapsedTime = Date.now() - startTime;
+
+            if (elapsedTime < maxPollingDuration) {
+                setTimeout(makeRequest, pollingInterval); // Schedule next request
+            } else {
+                console.log(\'Maximum polling duration reached. Stopping polling.\');
+            }
+        } catch (error) {
+            console.error(\'Error making API request:\', error);
+            const elapsedTime = Date.now() - startTime;
+
+            if (elapsedTime < maxPollingDuration) {
+                setTimeout(makeRequest, pollingInterval); // Schedule next request
+            } else {
+                console.log(\'Maximum polling duration reached. Stopping polling.\');
+            }
+        }
+    };
+
+    makeRequest(); // Start the first request
+}
+
+async function patience() {
+    console.log(\'Waiting for '.$when.'...\');
+    await wait('.$waitTime.');
+    console.log(\''.$waitTime.' seconds have passed\');
+    pollApi("api/VitexSoftware/MultiFlexi/1.0.0/job/'.$jobber->getMyKey().'.json", 5, 3600000);        
+}
+
+patience();                
+
+');
+            
+        } else {
+            $oPage->addJavaScript(
+            'window.location.href = "job.php?id='.$jobber->getMyKey().'";'
+            );
+        }
 
         $appPanel = new ApplicationPanel(
             $app,
-            [$glassHourRow, new \Ease\Html\DivTag(nl2br($prepared)), new \Ease\TWB4\LinkButton('job.php?id='.$jobber->getMyKey(), _('Job details'), 'info btn-block')],
+            [$glassHourRow, $waitRow, new \Ease\Html\DivTag(nl2br($prepared)), new \Ease\TWB4\LinkButton('job.php?id='.$jobber->getMyKey(), _('Job details'), 'info btn-block')],
         );
         $appPanel->headRow->addItem(new RuntemplateButton($runTemplate));
 
@@ -87,5 +162,5 @@ if (null === $runTemplate->getMyKey()) {
     }
 }
 
-$oPage->addItem(new PageBottom());
+$oPage->addItem(new PageBottom( $jobber->getMyKey() ? 'job/'.$jobber->getMyKey() : ''));
 $oPage->draw();

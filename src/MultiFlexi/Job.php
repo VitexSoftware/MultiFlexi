@@ -340,10 +340,9 @@ EOD;
      *
      * @return int schedule ID
      */
-    public function scheduleJobRun($when)
+    public function scheduleJobRun(\DateTime $when):int
     {
         $scheduler = new Scheduler();
-
         return $scheduler->addJob($this, $when);
     }
 
