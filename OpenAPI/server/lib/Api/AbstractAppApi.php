@@ -45,7 +45,7 @@ abstract class AbstractAppApi
      *
      * @param ServerRequestInterface $request  Request
      * @param ResponseInterface      $response Response
-     * @param string $appId ID of app to return
+     * @param int $appId ID of app to return
      * @param string $suffix force format suffix
      *
      * @return ResponseInterface
@@ -54,9 +54,11 @@ abstract class AbstractAppApi
     public function getAppById(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        string $appId,
+        int $appId,
         string $suffix
     ): ResponseInterface {
+        $queryParams = $request->getQueryParams();
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing getAppById as a GET method in MultiFlexi\Api\AppApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
@@ -79,6 +81,8 @@ abstract class AbstractAppApi
         ResponseInterface $response,
         string $suffix
     ): ResponseInterface {
+        $queryParams = $request->getQueryParams();
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing listApps as a GET method in MultiFlexi\Api\AppApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
@@ -101,6 +105,7 @@ abstract class AbstractAppApi
     ): ResponseInterface {
         $queryParams = $request->getQueryParams();
         $appId = (key_exists('appId', $queryParams)) ? $queryParams['appId'] : null;
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing setAppById as a POST method in MultiFlexi\Api\AppApi class?";
         throw new HttpNotImplementedException($request, $message);
     }

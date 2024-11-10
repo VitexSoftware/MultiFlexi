@@ -1,5 +1,6 @@
 .github/workflows/main.yml
 .gitignore
+.openapi-generator-ignore
 README.md
 composer.json
 config/.htaccess

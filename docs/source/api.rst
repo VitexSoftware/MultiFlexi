@@ -40,12 +40,6 @@ The API documentation is available in OpenAPI format. You can view the documenta
 
 https://github.com/VitexSoftware/MultiFlexi/blob/main/OpenAPI/openapi.yaml
 
-.. automodule:: api
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-
 .. autosummary::
    :toctree: generated
 

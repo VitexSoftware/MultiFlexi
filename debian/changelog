@@ -1,8 +1,14 @@
-multiflexi (1.18.0) UNRELEASED; urgency=medium
+multiflexi (1.19.0) UNRELEASED; urgency=medium
+
+  * API Added for Jobs & RunTemplates
+
+ -- vitex <info@vitexsoftware.cz>  Sun, 10 Nov 2024 20:15:03 +0100
+
+multiflexi (1.18.0) jammy; urgency=medium
 
   * Search added
 
- -- vitex <info@vitexsoftware.cz>  Wed, 06 Nov 2024 11:46:49 +0100
+ -- vitex <info@vitexsoftware.cz>  Sun, 10 Nov 2024 20:14:37 +0100
 
 multiflexi (1.17.0) jammy; urgency=medium
 

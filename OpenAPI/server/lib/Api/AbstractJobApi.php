@@ -57,6 +57,8 @@ abstract class AbstractJobApi
         int $jobId,
         string $suffix
     ): ResponseInterface {
+        $queryParams = $request->getQueryParams();
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing getjobById as a GET method in MultiFlexi\Api\JobApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
@@ -69,14 +71,18 @@ abstract class AbstractJobApi
      *
      * @param ServerRequestInterface $request  Request
      * @param ResponseInterface      $response Response
+     * @param string $suffix force format suffix
      *
      * @return ResponseInterface
      * @throws HttpNotImplementedException to force implementation class to override this method
      */
     public function listjobs(
         ServerRequestInterface $request,
-        ResponseInterface $response
+        ResponseInterface $response,
+        string $suffix
     ): ResponseInterface {
+        $queryParams = $request->getQueryParams();
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing listjobs as a GET method in MultiFlexi\Api\JobApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
@@ -99,6 +105,7 @@ abstract class AbstractJobApi
     ): ResponseInterface {
         $queryParams = $request->getQueryParams();
         $jobId = (key_exists('jobId', $queryParams)) ? $queryParams['jobId'] : null;
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing setjobById as a POST method in MultiFlexi\Api\JobApi class?";
         throw new HttpNotImplementedException($request, $message);
     }

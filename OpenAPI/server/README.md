@@ -163,9 +163,9 @@ Class | Method | HTTP request | Description
 *AbstractDefaultApi* | **loginSuffixGet** | **GET** /login.{suffix} | Return User's token
 *AbstractDefaultApi* | **loginSuffixPost** | **POST** /login.{suffix} | Return User's token
 *AbstractDefaultApi* | **pingSuffixGet** | **GET** /ping.{suffix} | job heartbeat operation
-*AbstractJobApi* | **listjobs** | **GET** /jobs | Show All jobs
 *AbstractJobApi* | **setjobById** | **POST** /job/ | Create or Update job record
 *AbstractJobApi* | **getjobById** | **GET** /job/{jobId}.{suffix} | Get job by ID
+*AbstractJobApi* | **listjobs** | **GET** /jobs.{suffix} | Show All jobs
 *AbstractRuntemplateApi* | **setRunTemplateById** | **POST** /runtemplate | Create or Update RunTemplate
 *AbstractRuntemplateApi* | **getRunTemplateById** | **GET** /runtemplate/{runTemplateId}.{suffix} | Get RunTemplate by ID
 *AbstractRuntemplateApi* | **listRunTemplates** | **GET** /runtemplates.{suffix} | Show All RunTemplates

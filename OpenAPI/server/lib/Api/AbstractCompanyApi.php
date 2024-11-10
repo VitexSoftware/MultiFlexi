@@ -45,7 +45,7 @@ abstract class AbstractCompanyApi
      *
      * @param ServerRequestInterface $request  Request
      * @param ResponseInterface      $response Response
-     * @param string $companyId ID of Company to return
+     * @param int $companyId ID of Company to return
      * @param string $suffix force format suffix
      *
      * @return ResponseInterface
@@ -54,9 +54,11 @@ abstract class AbstractCompanyApi
     public function getCompanyById(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        string $companyId,
+        int $companyId,
         string $suffix
     ): ResponseInterface {
+        $queryParams = $request->getQueryParams();
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing getCompanyById as a GET method in MultiFlexi\Api\CompanyApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
@@ -79,6 +81,8 @@ abstract class AbstractCompanyApi
         ResponseInterface $response,
         string $suffix
     ): ResponseInterface {
+        $queryParams = $request->getQueryParams();
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing listCompanies as a GET method in MultiFlexi\Api\CompanyApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
@@ -101,6 +105,7 @@ abstract class AbstractCompanyApi
     ): ResponseInterface {
         $queryParams = $request->getQueryParams();
         $companyId = (key_exists('companyId', $queryParams)) ? $queryParams['companyId'] : null;
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing setCompanyById as a POST method in MultiFlexi\Api\CompanyApi class?";
         throw new HttpNotImplementedException($request, $message);
     }

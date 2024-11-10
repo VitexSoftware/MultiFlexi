@@ -120,5 +120,5 @@ $oPage->container->addItem(new ApplicationPanel(
     '',
 ));
 
-$oPage->addItem(new PageBottom());
+$oPage->addItem(new PageBottom('app/'.$apps->getMyKey()));
 $oPage->draw();

@@ -68,5 +68,5 @@ $appPanel = new ApplicationPanel($app, new RunTemplatePanel($runTemplate));
 
 $oPage->container->addItem(new CompanyPanel($companies, $appPanel));
 
-$oPage->addItem(new PageBottom());
+$oPage->addItem(new PageBottom('runtemplate/'.$runTemplate->getMyKey()));
 $oPage->draw();
