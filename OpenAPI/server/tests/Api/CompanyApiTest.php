@@ -23,18 +23,18 @@
 namespace MultiFlexi\Api;
 
 use PHPUnit\Framework\TestCase;
-use MultiFlexi\Api\DefaultApi;
+use MultiFlexi\Api\CompanyApi;
 
 /**
- * DefaultApiTest Class Doc Comment
+ * CompanyApiTest Class Doc Comment
  *
  * @package MultiFlexi\Api
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  *
- * @coversDefaultClass \MultiFlexi\Api\DefaultApi
+ * @coversDefaultClass \MultiFlexi\Api\CompanyApi
  */
-class DefaultApiTest extends TestCase
+class CompanyApiTest extends TestCase
 {
 
     /**
@@ -66,72 +66,44 @@ class DefaultApiTest extends TestCase
     }
 
     /**
-     * Test case for getApiIndex
+     * Test case for getCompanyById
      *
-     * Endpoints listing.
+     * Get Company by ID.
      *
-     * @covers ::getApiIndex
+     * @covers ::getCompanyById
      */
-    public function testGetApiIndex()
+    public function testGetCompanyById()
     {
         $this->markTestIncomplete(
-            'Test of "getApiIndex" method has not been implemented yet.'
+            'Test of "getCompanyById" method has not been implemented yet.'
         );
     }
 
     /**
-     * Test case for loginSuffixGet
+     * Test case for listCompanies
      *
-     * Return User's token.
+     * Show All Companies.
      *
-     * @covers ::loginSuffixGet
+     * @covers ::listCompanies
      */
-    public function testLoginSuffixGet()
+    public function testListCompanies()
     {
         $this->markTestIncomplete(
-            'Test of "loginSuffixGet" method has not been implemented yet.'
+            'Test of "listCompanies" method has not been implemented yet.'
         );
     }
 
     /**
-     * Test case for loginSuffixPost
+     * Test case for setCompanyById
      *
-     * Return User's token.
+     * Create or Update Company.
      *
-     * @covers ::loginSuffixPost
+     * @covers ::setCompanyById
      */
-    public function testLoginSuffixPost()
+    public function testSetCompanyById()
     {
         $this->markTestIncomplete(
-            'Test of "loginSuffixPost" method has not been implemented yet.'
-        );
-    }
-
-    /**
-     * Test case for pingSuffixGet
-     *
-     * job heartbeat operation.
-     *
-     * @covers ::pingSuffixGet
-     */
-    public function testPingSuffixGet()
-    {
-        $this->markTestIncomplete(
-            'Test of "pingSuffixGet" method has not been implemented yet.'
-        );
-    }
-
-    /**
-     * Test case for rootGet
-     *
-     * Redirect to index.
-     *
-     * @covers ::rootGet
-     */
-    public function testRootGet()
-    {
-        $this->markTestIncomplete(
-            'Test of "rootGet" method has not been implemented yet.'
+            'Test of "setCompanyById" method has not been implemented yet.'
         );
     }
 }

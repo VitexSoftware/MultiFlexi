@@ -23,18 +23,18 @@
 namespace MultiFlexi\Api;
 
 use PHPUnit\Framework\TestCase;
-use MultiFlexi\Api\ServerApi;
+use MultiFlexi\Api\UserApi;
 
 /**
- * ServerApiTest Class Doc Comment
+ * UserApiTest Class Doc Comment
  *
  * @package MultiFlexi\Api
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  *
- * @coversDefaultClass \MultiFlexi\Api\ServerApi
+ * @coversDefaultClass \MultiFlexi\Api\UserApi
  */
-class ServerApiTest extends TestCase
+class UserApiTest extends TestCase
 {
 
     /**
@@ -66,44 +66,44 @@ class ServerApiTest extends TestCase
     }
 
     /**
-     * Test case for getServerById
+     * Test case for getUserById
      *
-     * Get Server by ID.
+     * Get User by ID.
      *
-     * @covers ::getServerById
+     * @covers ::getUserById
      */
-    public function testGetServerById()
+    public function testGetUserById()
     {
         $this->markTestIncomplete(
-            'Test of "getServerById" method has not been implemented yet.'
+            'Test of "getUserById" method has not been implemented yet.'
         );
     }
 
     /**
-     * Test case for listServers
+     * Test case for listUsers
      *
-     * Show All Servers.
+     * Show All Users.
      *
-     * @covers ::listServers
+     * @covers ::listUsers
      */
-    public function testListServers()
+    public function testListUsers()
     {
         $this->markTestIncomplete(
-            'Test of "listServers" method has not been implemented yet.'
+            'Test of "listUsers" method has not been implemented yet.'
         );
     }
 
     /**
-     * Test case for setServerById
+     * Test case for setUserById
      *
-     * Create or Update Server record.
+     * Create or Update User.
      *
-     * @covers ::setServerById
+     * @covers ::setUserById
      */
-    public function testSetServerById()
+    public function testSetUserById()
     {
         $this->markTestIncomplete(
-            'Test of "setServerById" method has not been implemented yet.'
+            'Test of "setUserById" method has not been implemented yet.'
         );
     }
 }

@@ -1,0 +1,949 @@
+openapi: '3.0.0'
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/VitexSoftware/MultiFlexi/1.0.0
+  - description: Localhost
+    url: http://localhost/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0
+  - description: Demo server
+    url: https://demo.multiflexi.com/api/VitexSoftware/MultiFlexi/1.0.0
+info:
+  version: "1.0.0"
+  title: MultiFlexi API
+  description: >-
+    This is an example of using OAuth2 Application Flow in a specification to
+    describe security to your API.
+paths:
+  '/':
+    get:
+      summary: 'Redirect to index'
+      responses:
+        '301':
+          description: redirect to index.html
+          
+  '/index.{suffix}':
+    get:
+      summary: Endpoints listing
+      description: Show current API
+      operationId: getApiIndex
+      security: []
+      responses:
+        '200':
+          description: OK
+      parameters:
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: json
+          required: true
+  '/login.{suffix}':
+    get:
+      summary: Return User's token
+      description: Send login & password to obtain oAuth token
+      parameters: 
+        - name: username
+          in: query
+          required: true
+          description: existing user name
+          schema:
+            type: string
+        - name: password
+          in: query
+          required: true
+          description: existing user password
+          schema:
+            type: string
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: json
+          required: true
+      responses:
+        '201':
+          description: OK
+    post:
+      summary: Return User's token
+      description: Send login & password to obtain oAuth token
+      parameters: 
+        - name: username
+          in: query
+          required: true
+          description: existing user name
+          schema:
+            type: string
+        - name: password
+          in: query
+          required: true
+          description: existing user password
+          schema:
+            type: string
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: json
+          required: true
+      responses:
+        '201':
+          description: OK
+          
+  '/ping.{suffix}':
+    get:
+      summary: job heartbeat operation
+      description: >-
+        This operation shows how to override the global security defined above,
+        as we want to open it up for all users.
+      security: []
+      responses:
+        '200':
+          description: OK
+      parameters:
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: json
+          required: true
+          
+  '/app/{appId}.{suffix}':
+    get:
+      tags:
+        - app
+      summary: Get App by ID
+      description: Returns a single App
+      operationId: getAppById
+      parameters:
+        - name: appId
+          in: path
+          description: ID of app to return
+          required: true
+          schema:
+            type: string
+            pattern: '^\d+'
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: .json
+          required: true
+            
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        '400':
+          description: Invalid ID supplied
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: App not found
+      security:
+        - basicAuth: []      
+  /app/:
+    post:
+      tags:
+        - app
+      summary: Create or Update Application
+      description: Create or Update App by ID
+      operationId: setAppById
+      parameters:
+        - name: appId
+          in: query
+          required: false
+          description: ID of app to return
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '201':
+          description: application created or updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        '400':
+          description: Invalid ID supplied
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: App not found
+      security:
+        - basicAuth: []      
+
+  '/job/{jobId}.{suffix}':
+    get:
+      tags:
+        - job
+      summary: Get job by ID
+      description: Returns a single job
+      operationId: getjobById
+      parameters:
+        - name: jobId
+          in: path
+          description: ID of app to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: json
+          required: true
+
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '400':
+          description: Invalid ID supplied
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: App not found
+      security:
+        - basicAuth: []
+  /job/:
+    post:
+      tags:
+        - job
+      summary: Create or Update job record
+      description: Create or Update single job record
+      operationId: setjobById
+      parameters:
+        - name: jobId
+          in: query
+          description: ID of app to return
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '201':
+          description: record created or updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '400':
+          description: Invalid ID supplied
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: App not found
+      security:
+        - basicAuth: []
+
+  '/apps.{suffix}':
+    get:
+      tags:
+        - app
+      summary: Show All Apps
+      description: All apps registeres
+      operationId: listApps
+      parameters:
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: json
+          required: true
+
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/App'
+        '400':
+          description: Invalid status value
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+
+      security:
+        - basicAuth: []
+
+  /jobs:
+    get:
+      tags:
+        - job
+      summary: Show All jobs
+      description: All job jobs registered
+      operationId: listjobs
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Job'
+        '400':
+          description: Invalid status value
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - basicAuth: []
+
+  /runtemplate:
+    post:
+      tags:
+        - runtemplate
+      summary: Create or Update RunTemplate
+      description: Create or Update RunTemplate by ID
+      operationId: setRunTemplateById
+      parameters:
+        - name: runTemplateId
+          in: query
+          required: false
+          description: ID of RunTemplate to return
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '201':
+          description: RunTemplate created or updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunTemplate'
+        '400':
+          description: Invalid ID supplied
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: RunTemplate not found
+      security:
+        - basicAuth: []
+
+  /runtemplate/{runTemplateId}.{suffix}:
+    get:
+      tags:
+        - runtemplate
+      summary: Get RunTemplate by ID
+      description: Returns a single RunTemplate
+      operationId: getRunTemplateById
+      parameters:
+        - name: runTemplateId
+          in: path
+          description: ID of RunTemplate to return
+          required: true
+          schema:
+            type: string
+            pattern: '^\d+'
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: .json
+          required: true
+
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunTemplate'
+        '400':
+          description: Invalid ID supplied
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: RunTemplate not found
+      security:
+        - basicAuth: []
+
+  /runtemplates.{suffix}:
+    get:
+      tags:
+        - runtemplate
+      summary: Show All RunTemplates
+      description: All RunTemplates registered
+      operationId: listRunTemplates
+      parameters:
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: json
+          required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RunTemplate'
+        '400':
+          description: Invalid status value
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - basicAuth: []
+
+
+
+  /user/:
+    post:
+      tags:
+        - user
+      summary: Create or Update User
+      description: Create or Update User by ID
+      operationId: setUserById
+      parameters:
+        - name: userId
+          in: query
+          required: false
+          description: ID of User to return
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '201':
+          description: User created or updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid ID supplied
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: User not found
+      security:
+        - basicAuth: []
+
+  /user/{userId}.{suffix}:
+    get:
+      tags:
+        - user
+      summary: Get User by ID
+      description: Returns a single User
+      operationId: getUserById
+      parameters:
+        - name: userId
+          in: path
+          description: ID of User to return
+          required: true
+          schema:
+            type: string
+            pattern: '^\d+'
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: .json
+          required: true
+
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid ID supplied
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: User not found
+      security:
+        - basicAuth: []
+
+  /users.{suffix}:
+    get:
+      tags:
+        - user
+      summary: Show All Users
+      description: All Users registered
+      operationId: listUsers
+      parameters:
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: json
+          required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid status value
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - basicAuth: []
+
+  /company/:
+    post:
+      tags:
+        - company
+      summary: Create or Update Company
+      description: Create or Update Company by ID
+      operationId: setCompanyById
+      parameters:
+        - name: companyId
+          in: query
+          required: false
+          description: ID of Company to return
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '201':
+          description: Company created or updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '400':
+          description: Invalid ID supplied
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Company not found
+      security:
+        - basicAuth: []
+
+  /company/{companyId}.{suffix}:
+    get:
+      tags:
+        - company
+      summary: Get Company by ID
+      description: Returns a single Company
+      operationId: getCompanyById
+      parameters:
+        - name: companyId
+          in: path
+          description: ID of Company to return
+          required: true
+          schema:
+            type: string
+            pattern: '^\d+'
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: .json
+          required: true
+
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '400':
+          description: Invalid ID supplied
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Company not found
+      security:
+        - basicAuth: []
+  /companies.{suffix}:
+    get:
+      tags:
+        - company
+      summary: Show All Companies
+      description: All Companies registered
+      operationId: listCompanies
+      parameters:
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: json
+          required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Company'
+        '400':
+          description: Invalid status value
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - basicAuth: []
+
+components:
+  schemas:
+    App:
+      x-swagger-router-model: com.vitexsoftware.multiflexi.model.App
+      required:
+        - name
+        - executable
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: matcher
+        executable:
+          type: string
+          example: multiflexi-probe
+        tags:
+          type: array
+          xml:
+            wrapped: true
+          items:
+            $ref: '#/components/schemas/Tag'
+        status:
+          type: string
+          description: App status in the store
+          enum:
+            - available
+            - pending
+            - sold
+      xml:
+        name: App
+      type: object
+
+    User:
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        enabled:
+          type: boolean
+          example: true
+        settings:
+          type: string
+        email:
+          type: string
+          format: email
+        firstname:
+          type: string
+        lastname:
+          type: string
+        password:
+          type: string
+        login:
+          type: string
+        DatCreate:
+          type: string
+          format: date-time
+        DatSave:
+          type: string
+          format: date-time
+        last_modifier_id:
+          type: integer
+          format: int64
+          example: 10
+
+    Job:
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        app_id:
+          type: integer
+          format: int64
+          example: 10
+        begin:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+        company_id:
+          type: integer
+          format: int64
+          example: 10
+        exitcode:
+          type: integer
+          format: int32
+        stdout:
+          type: string
+          format: binary
+        stderr:
+          type: string
+          format: binary
+        launched_by:
+          type: string
+        env:
+          type: string
+        command:
+          type: string
+        schedule:
+          type: string
+        executor:
+          type: string
+          default: "Native"
+        runtemplate_id:
+          type: integer
+          format: int64
+        app_version:
+          type: string
+          default: "n/a"
+
+    RunTemplate:
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        app_id:
+          type: integer
+          format: int64
+          example: 10
+        company_id:
+          type: integer
+          format: int64
+          example: 10
+        iterv:
+          type: string
+          description: interval
+          enum:
+            - n
+            - h
+            - d
+            - w
+            - m
+            - y
+        prepared:
+          type: boolean
+          example: true
+        success:
+          type: string
+          maxLength: 250
+        fail:
+          type: string
+          maxLength: 250
+        name:
+          type: string
+          maxLength: 250
+
+    ConfField:
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        app_id:
+          type: integer
+          format: int64
+          example: 10
+        keyname:
+          type: string
+        type:
+          type: string
+          enum:
+            - text
+            - number
+            - date
+            - email
+            - password
+            - checkbox
+        description:
+          type: string
+        defval:
+          type: string
+
+    Configuration:
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        app_id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+        value:
+          type: string
+
+    Customer:
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        enabled:
+          type: boolean
+          example: true
+        settings:
+          type: string
+        email:
+          type: string
+          format: email
+        firstname:
+          type: string
+        lastname:
+          type: string
+        password:
+          type: string
+        login:
+          type: string
+        DatCreate:
+          type: string
+          format: date-time
+        DatSave:
+          type: string
+          format: date-time
+
+    Tag:
+      x-swagger-router-model: com.vitexsoftware.multiflexi.model.Tag
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      xml:
+        name: tag
+      type: object
+
+    Company:
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        enabled:
+          type: boolean
+          example: false
+        settings:
+          type: string
+        logo:
+          type: string
+        server:
+          type: integer
+          format: int64
+          example: 0
+        name:
+          type: string
+          maxLength: 32
+        ic:
+          type: string
+          maxLength: 32
+        company:
+          type: string
+          maxLength: 255
+          description: Company Code
+        rw:
+          type: boolean
+          description: Write permissions
+        setup:
+          type: boolean
+          example: false
+        webhook:
+          type: boolean
+          description: Webhook ready
+        DatCreate:
+          type: string
+          format: date-time
+        DatUpdate:
+          type: string
+          format: date-time
+        customer:
+          type: integer
+          format: int64
+          example: 10
+        email:
+          type: string
+          format: email
+          maxLength: 64
+        code:
+          type: string
+          maxLength: 10
+          example: ''
+
+  responses:
+    UnauthorizedError:
+      description: Authentication information is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string    
+    
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic

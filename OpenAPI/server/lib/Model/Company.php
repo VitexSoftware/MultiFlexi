@@ -24,13 +24,13 @@ namespace MultiFlexi\Model;
 use MultiFlexi\BaseModel;
 
 /**
- * App
+ * Company
  *
  * @package MultiFlexi\Model
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  */
-class App extends BaseModel
+class Company extends BaseModel
 {
     /**
      * @var string Models namespace.
@@ -44,41 +44,76 @@ class App extends BaseModel
      */
     protected const MODEL_SCHEMA = <<<'SCHEMA'
 {
-  "required" : [ "executable", "name" ],
-  "type" : "object",
   "properties" : {
     "id" : {
       "type" : "integer",
       "format" : "int64",
       "example" : 10
     },
+    "enabled" : {
+      "type" : "boolean",
+      "example" : false
+    },
+    "settings" : {
+      "type" : "string"
+    },
+    "logo" : {
+      "type" : "string"
+    },
+    "server" : {
+      "type" : "integer",
+      "format" : "int64",
+      "example" : 0
+    },
     "name" : {
-      "type" : "string",
-      "example" : "matcher"
+      "maxLength" : 32,
+      "type" : "string"
     },
-    "executable" : {
-      "type" : "string",
-      "example" : "multiflexi-probe"
+    "ic" : {
+      "maxLength" : 32,
+      "type" : "string"
     },
-    "tags" : {
-      "type" : "array",
-      "xml" : {
-        "wrapped" : true
-      },
-      "items" : {
-        "$ref" : "#/components/schemas/Tag"
-      }
-    },
-    "status" : {
+    "company" : {
+      "maxLength" : 255,
       "type" : "string",
-      "description" : "App status in the store",
-      "enum" : [ "available", "pending", "sold" ]
+      "description" : "Company Code"
+    },
+    "rw" : {
+      "type" : "boolean",
+      "description" : "Write permissions"
+    },
+    "setup" : {
+      "type" : "boolean",
+      "example" : false
+    },
+    "webhook" : {
+      "type" : "boolean",
+      "description" : "Webhook ready"
+    },
+    "DatCreate" : {
+      "type" : "string",
+      "format" : "date-time"
+    },
+    "DatUpdate" : {
+      "type" : "string",
+      "format" : "date-time"
+    },
+    "customer" : {
+      "type" : "integer",
+      "format" : "int64",
+      "example" : 10
+    },
+    "email" : {
+      "maxLength" : 64,
+      "type" : "string",
+      "format" : "email"
+    },
+    "code" : {
+      "maxLength" : 10,
+      "type" : "string",
+      "example" : ""
     }
-  },
-  "xml" : {
-    "name" : "App"
-  },
-  "x-swagger-router-model" : "com.vitexsoftware.multiflexi.model.App"
+  }
 }
 SCHEMA;
 }

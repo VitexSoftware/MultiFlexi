@@ -23,18 +23,18 @@
 namespace MultiFlexi\Model;
 
 use PHPUnit\Framework\TestCase;
-use MultiFlexi\Model\AppCompany;
+use MultiFlexi\Model\RunTemplate;
 
 /**
- * AppCompanyTest Class Doc Comment
+ * RunTemplateTest Class Doc Comment
  *
  * @package MultiFlexi\Model
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  *
- * @coversDefaultClass \MultiFlexi\Model\AppCompany
+ * @coversDefaultClass \MultiFlexi\Model\RunTemplate
  */
-class AppCompanyTest extends TestCase
+class RunTemplateTest extends TestCase
 {
 
     /**
@@ -66,19 +66,19 @@ class AppCompanyTest extends TestCase
     }
 
     /**
-     * Test "AppCompany"
+     * Test "RunTemplate"
      */
-    public function testAppCompany()
+    public function testRunTemplate()
     {
-        $testAppCompany = new AppCompany();
-        $namespacedClassname = AppCompany::getModelsNamespace() . '\\AppCompany';
-        $this->assertSame('\\' . AppCompany::class, $namespacedClassname);
+        $testRunTemplate = new RunTemplate();
+        $namespacedClassname = RunTemplate::getModelsNamespace() . '\\RunTemplate';
+        $this->assertSame('\\' . RunTemplate::class, $namespacedClassname);
         $this->assertTrue(
             class_exists($namespacedClassname),
             sprintf('Assertion failed that "%s" class exists', $namespacedClassname)
         );
         $this->markTestIncomplete(
-            'Test of "AppCompany" model has not been implemented yet.'
+            'Test of "RunTemplate" model has not been implemented yet.'
         );
     }
 
@@ -88,7 +88,7 @@ class AppCompanyTest extends TestCase
     public function testPropertyId()
     {
         $this->markTestIncomplete(
-            'Test of "id" property in "AppCompany" model has not been implemented yet.'
+            'Test of "id" property in "RunTemplate" model has not been implemented yet.'
         );
     }
 
@@ -98,7 +98,17 @@ class AppCompanyTest extends TestCase
     public function testPropertyAppId()
     {
         $this->markTestIncomplete(
-            'Test of "appId" property in "AppCompany" model has not been implemented yet.'
+            'Test of "appId" property in "RunTemplate" model has not been implemented yet.'
+        );
+    }
+
+    /**
+     * Test attribute "companyId"
+     */
+    public function testPropertyCompanyId()
+    {
+        $this->markTestIncomplete(
+            'Test of "companyId" property in "RunTemplate" model has not been implemented yet.'
         );
     }
 
@@ -108,7 +118,47 @@ class AppCompanyTest extends TestCase
     public function testPropertyIterv()
     {
         $this->markTestIncomplete(
-            'Test of "iterv" property in "AppCompany" model has not been implemented yet.'
+            'Test of "iterv" property in "RunTemplate" model has not been implemented yet.'
+        );
+    }
+
+    /**
+     * Test attribute "prepared"
+     */
+    public function testPropertyPrepared()
+    {
+        $this->markTestIncomplete(
+            'Test of "prepared" property in "RunTemplate" model has not been implemented yet.'
+        );
+    }
+
+    /**
+     * Test attribute "success"
+     */
+    public function testPropertySuccess()
+    {
+        $this->markTestIncomplete(
+            'Test of "success" property in "RunTemplate" model has not been implemented yet.'
+        );
+    }
+
+    /**
+     * Test attribute "fail"
+     */
+    public function testPropertyFail()
+    {
+        $this->markTestIncomplete(
+            'Test of "fail" property in "RunTemplate" model has not been implemented yet.'
+        );
+    }
+
+    /**
+     * Test attribute "name"
+     */
+    public function testPropertyName()
+    {
+        $this->markTestIncomplete(
+            'Test of "name" property in "RunTemplate" model has not been implemented yet.'
         );
     }
 
@@ -118,7 +168,7 @@ class AppCompanyTest extends TestCase
      */
     public function testGetOpenApiSchema()
     {
-        $schemaArr = AppCompany::getOpenApiSchema();
+        $schemaArr = RunTemplate::getOpenApiSchema();
         $this->assertIsArray($schemaArr);
     }
 }

@@ -209,6 +209,175 @@ class RegisterRoutes
             ],
         ],
         [
+            'httpMethod' => 'POST',
+            'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
+            'path' => '/company/',
+            'apiPackage' => 'MultiFlexi\Api',
+            'classname' => 'AbstractCompanyApi',
+            'userClassname' => 'CompanyApi',
+            'operationId' => 'setCompanyById',
+            'responses' => [
+                '201' => [
+                    'jsonSchema' => '{
+  "description" : "Company created or updated",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Company"
+      }
+    }
+  }
+}',
+                ],
+                '400' => [
+                    'jsonSchema' => '{
+  "description" : "Invalid ID supplied"
+}',
+                ],
+                '401' => [
+                    'jsonSchema' => '{
+  "description" : "Authentication information is missing or invalid",
+  "headers" : {
+    "WWW_Authenticate" : {
+      "style" : "simple",
+      "explode" : false,
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}',
+                ],
+                '404' => [
+                    'jsonSchema' => '{
+  "description" : "Company not found"
+}',
+                ],
+            ],
+            'authMethods' => [
+                // http security schema named 'basicAuth'
+                [
+                    'type' => 'http',
+                    'isBasic' => true,
+                    'isBearer' => false,
+                    'isApiKey' => false,
+                    'isOAuth' => false,
+                ],
+            ],
+        ],
+        [
+            'httpMethod' => 'GET',
+            'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
+            'path' => '/company/{companyId}.{suffix}',
+            'apiPackage' => 'MultiFlexi\Api',
+            'classname' => 'AbstractCompanyApi',
+            'userClassname' => 'CompanyApi',
+            'operationId' => 'getCompanyById',
+            'responses' => [
+                '200' => [
+                    'jsonSchema' => '{
+  "description" : "successful operation",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Company"
+      }
+    }
+  }
+}',
+                ],
+                '400' => [
+                    'jsonSchema' => '{
+  "description" : "Invalid ID supplied"
+}',
+                ],
+                '401' => [
+                    'jsonSchema' => '{
+  "description" : "Authentication information is missing or invalid",
+  "headers" : {
+    "WWW_Authenticate" : {
+      "style" : "simple",
+      "explode" : false,
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}',
+                ],
+                '404' => [
+                    'jsonSchema' => '{
+  "description" : "Company not found"
+}',
+                ],
+            ],
+            'authMethods' => [
+                // http security schema named 'basicAuth'
+                [
+                    'type' => 'http',
+                    'isBasic' => true,
+                    'isBearer' => false,
+                    'isApiKey' => false,
+                    'isOAuth' => false,
+                ],
+            ],
+        ],
+        [
+            'httpMethod' => 'GET',
+            'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
+            'path' => '/companies.{suffix}',
+            'apiPackage' => 'MultiFlexi\Api',
+            'classname' => 'AbstractCompanyApi',
+            'userClassname' => 'CompanyApi',
+            'operationId' => 'listCompanies',
+            'responses' => [
+                '200' => [
+                    'jsonSchema' => '{
+  "description" : "successful operation",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/Company"
+        }
+      }
+    }
+  }
+}',
+                ],
+                '400' => [
+                    'jsonSchema' => '{
+  "description" : "Invalid status value"
+}',
+                ],
+                '401' => [
+                    'jsonSchema' => '{
+  "description" : "Authentication information is missing or invalid",
+  "headers" : {
+    "WWW_Authenticate" : {
+      "style" : "simple",
+      "explode" : false,
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}',
+                ],
+            ],
+            'authMethods' => [
+                // http security schema named 'basicAuth'
+                [
+                    'type' => 'http',
+                    'isBasic' => true,
+                    'isBearer' => false,
+                    'isApiKey' => false,
+                    'isOAuth' => false,
+                ],
+            ],
+        ],
+        [
             'httpMethod' => 'GET',
             'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
             'path' => '/',
@@ -301,11 +470,11 @@ class RegisterRoutes
         [
             'httpMethod' => 'GET',
             'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
-            'path' => '/servers',
+            'path' => '/jobs',
             'apiPackage' => 'MultiFlexi\Api',
-            'classname' => 'AbstractServerApi',
-            'userClassname' => 'ServerApi',
-            'operationId' => 'listServers',
+            'classname' => 'AbstractJobApi',
+            'userClassname' => 'JobApi',
+            'operationId' => 'listjobs',
             'responses' => [
                 '200' => [
                     'jsonSchema' => '{
@@ -315,7 +484,7 @@ class RegisterRoutes
       "schema" : {
         "type" : "array",
         "items" : {
-          "$ref" : "#/components/schemas/Server"
+          "$ref" : "#/components/schemas/Job"
         }
       }
     }
@@ -356,11 +525,11 @@ class RegisterRoutes
         [
             'httpMethod' => 'POST',
             'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
-            'path' => '/server/',
+            'path' => '/job/',
             'apiPackage' => 'MultiFlexi\Api',
-            'classname' => 'AbstractServerApi',
-            'userClassname' => 'ServerApi',
-            'operationId' => 'setServerById',
+            'classname' => 'AbstractJobApi',
+            'userClassname' => 'JobApi',
+            'operationId' => 'setjobById',
             'responses' => [
                 '201' => [
                     'jsonSchema' => '{
@@ -368,7 +537,7 @@ class RegisterRoutes
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/Server"
+        "$ref" : "#/components/schemas/Job"
       }
     }
   }
@@ -413,11 +582,11 @@ class RegisterRoutes
         [
             'httpMethod' => 'GET',
             'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
-            'path' => '/server/{serverId}.{suffix}',
+            'path' => '/job/{jobId}.{suffix}',
             'apiPackage' => 'MultiFlexi\Api',
-            'classname' => 'AbstractServerApi',
-            'userClassname' => 'ServerApi',
-            'operationId' => 'getServerById',
+            'classname' => 'AbstractJobApi',
+            'userClassname' => 'JobApi',
+            'operationId' => 'getjobById',
             'responses' => [
                 '200' => [
                     'jsonSchema' => '{
@@ -425,7 +594,7 @@ class RegisterRoutes
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/Server"
+        "$ref" : "#/components/schemas/Job"
       }
     }
   }
@@ -453,6 +622,344 @@ class RegisterRoutes
                 '404' => [
                     'jsonSchema' => '{
   "description" : "App not found"
+}',
+                ],
+            ],
+            'authMethods' => [
+                // http security schema named 'basicAuth'
+                [
+                    'type' => 'http',
+                    'isBasic' => true,
+                    'isBearer' => false,
+                    'isApiKey' => false,
+                    'isOAuth' => false,
+                ],
+            ],
+        ],
+        [
+            'httpMethod' => 'POST',
+            'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
+            'path' => '/runtemplate',
+            'apiPackage' => 'MultiFlexi\Api',
+            'classname' => 'AbstractRuntemplateApi',
+            'userClassname' => 'RuntemplateApi',
+            'operationId' => 'setRunTemplateById',
+            'responses' => [
+                '201' => [
+                    'jsonSchema' => '{
+  "description" : "RunTemplate created or updated",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/RunTemplate"
+      }
+    }
+  }
+}',
+                ],
+                '400' => [
+                    'jsonSchema' => '{
+  "description" : "Invalid ID supplied"
+}',
+                ],
+                '401' => [
+                    'jsonSchema' => '{
+  "description" : "Authentication information is missing or invalid",
+  "headers" : {
+    "WWW_Authenticate" : {
+      "style" : "simple",
+      "explode" : false,
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}',
+                ],
+                '404' => [
+                    'jsonSchema' => '{
+  "description" : "RunTemplate not found"
+}',
+                ],
+            ],
+            'authMethods' => [
+                // http security schema named 'basicAuth'
+                [
+                    'type' => 'http',
+                    'isBasic' => true,
+                    'isBearer' => false,
+                    'isApiKey' => false,
+                    'isOAuth' => false,
+                ],
+            ],
+        ],
+        [
+            'httpMethod' => 'GET',
+            'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
+            'path' => '/runtemplate/{runTemplateId}.{suffix}',
+            'apiPackage' => 'MultiFlexi\Api',
+            'classname' => 'AbstractRuntemplateApi',
+            'userClassname' => 'RuntemplateApi',
+            'operationId' => 'getRunTemplateById',
+            'responses' => [
+                '200' => [
+                    'jsonSchema' => '{
+  "description" : "successful operation",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/RunTemplate"
+      }
+    }
+  }
+}',
+                ],
+                '400' => [
+                    'jsonSchema' => '{
+  "description" : "Invalid ID supplied"
+}',
+                ],
+                '401' => [
+                    'jsonSchema' => '{
+  "description" : "Authentication information is missing or invalid",
+  "headers" : {
+    "WWW_Authenticate" : {
+      "style" : "simple",
+      "explode" : false,
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}',
+                ],
+                '404' => [
+                    'jsonSchema' => '{
+  "description" : "RunTemplate not found"
+}',
+                ],
+            ],
+            'authMethods' => [
+                // http security schema named 'basicAuth'
+                [
+                    'type' => 'http',
+                    'isBasic' => true,
+                    'isBearer' => false,
+                    'isApiKey' => false,
+                    'isOAuth' => false,
+                ],
+            ],
+        ],
+        [
+            'httpMethod' => 'GET',
+            'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
+            'path' => '/runtemplates.{suffix}',
+            'apiPackage' => 'MultiFlexi\Api',
+            'classname' => 'AbstractRuntemplateApi',
+            'userClassname' => 'RuntemplateApi',
+            'operationId' => 'listRunTemplates',
+            'responses' => [
+                '200' => [
+                    'jsonSchema' => '{
+  "description" : "successful operation",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/RunTemplate"
+        }
+      }
+    }
+  }
+}',
+                ],
+                '400' => [
+                    'jsonSchema' => '{
+  "description" : "Invalid status value"
+}',
+                ],
+                '401' => [
+                    'jsonSchema' => '{
+  "description" : "Authentication information is missing or invalid",
+  "headers" : {
+    "WWW_Authenticate" : {
+      "style" : "simple",
+      "explode" : false,
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}',
+                ],
+            ],
+            'authMethods' => [
+                // http security schema named 'basicAuth'
+                [
+                    'type' => 'http',
+                    'isBasic' => true,
+                    'isBearer' => false,
+                    'isApiKey' => false,
+                    'isOAuth' => false,
+                ],
+            ],
+        ],
+        [
+            'httpMethod' => 'POST',
+            'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
+            'path' => '/user/',
+            'apiPackage' => 'MultiFlexi\Api',
+            'classname' => 'AbstractUserApi',
+            'userClassname' => 'UserApi',
+            'operationId' => 'setUserById',
+            'responses' => [
+                '201' => [
+                    'jsonSchema' => '{
+  "description" : "User created or updated",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/User"
+      }
+    }
+  }
+}',
+                ],
+                '400' => [
+                    'jsonSchema' => '{
+  "description" : "Invalid ID supplied"
+}',
+                ],
+                '401' => [
+                    'jsonSchema' => '{
+  "description" : "Authentication information is missing or invalid",
+  "headers" : {
+    "WWW_Authenticate" : {
+      "style" : "simple",
+      "explode" : false,
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}',
+                ],
+                '404' => [
+                    'jsonSchema' => '{
+  "description" : "User not found"
+}',
+                ],
+            ],
+            'authMethods' => [
+                // http security schema named 'basicAuth'
+                [
+                    'type' => 'http',
+                    'isBasic' => true,
+                    'isBearer' => false,
+                    'isApiKey' => false,
+                    'isOAuth' => false,
+                ],
+            ],
+        ],
+        [
+            'httpMethod' => 'GET',
+            'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
+            'path' => '/user/{userId}.{suffix}',
+            'apiPackage' => 'MultiFlexi\Api',
+            'classname' => 'AbstractUserApi',
+            'userClassname' => 'UserApi',
+            'operationId' => 'getUserById',
+            'responses' => [
+                '200' => [
+                    'jsonSchema' => '{
+  "description" : "successful operation",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/User"
+      }
+    }
+  }
+}',
+                ],
+                '400' => [
+                    'jsonSchema' => '{
+  "description" : "Invalid ID supplied"
+}',
+                ],
+                '401' => [
+                    'jsonSchema' => '{
+  "description" : "Authentication information is missing or invalid",
+  "headers" : {
+    "WWW_Authenticate" : {
+      "style" : "simple",
+      "explode" : false,
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}',
+                ],
+                '404' => [
+                    'jsonSchema' => '{
+  "description" : "User not found"
+}',
+                ],
+            ],
+            'authMethods' => [
+                // http security schema named 'basicAuth'
+                [
+                    'type' => 'http',
+                    'isBasic' => true,
+                    'isBearer' => false,
+                    'isApiKey' => false,
+                    'isOAuth' => false,
+                ],
+            ],
+        ],
+        [
+            'httpMethod' => 'GET',
+            'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
+            'path' => '/users.{suffix}',
+            'apiPackage' => 'MultiFlexi\Api',
+            'classname' => 'AbstractUserApi',
+            'userClassname' => 'UserApi',
+            'operationId' => 'listUsers',
+            'responses' => [
+                '200' => [
+                    'jsonSchema' => '{
+  "description" : "successful operation",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/User"
+        }
+      }
+    }
+  }
+}',
+                ],
+                '400' => [
+                    'jsonSchema' => '{
+  "description" : "Invalid status value"
+}',
+                ],
+                '401' => [
+                    'jsonSchema' => '{
+  "description" : "Authentication information is missing or invalid",
+  "headers" : {
+    "WWW_Authenticate" : {
+      "style" : "simple",
+      "explode" : false,
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
 }',
                 ],
             ],
