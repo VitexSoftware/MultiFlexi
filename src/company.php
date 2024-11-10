@@ -97,5 +97,5 @@ $companyPanelContents[] = $jobList;
 $bottomLine = new CompanyDbStatus($companies);
 
 $oPage->container->addItem(new CompanyPanel($companies, $companyPanelContents, $bottomLine));
-$oPage->addItem(new PageBottom());
+$oPage->addItem(new PageBottom('company/'.$companies->getMyKey()));
 $oPage->draw();

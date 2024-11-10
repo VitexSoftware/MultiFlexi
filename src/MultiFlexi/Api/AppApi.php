@@ -39,8 +39,6 @@ class AppApi extends AbstractAppApi
      * App Info by ID.
      *
      * @url http://localhost/EASE/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/app/1
-     *
-     * @param int $appId
      */
     public function getAppById(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, int $appId, string $suffix): \Psr\Http\Message\ResponseInterface
     {
@@ -51,14 +49,15 @@ class AppApi extends AbstractAppApi
             case 'html':
                 //                $appData['name'] = new \Ease\Html\ATag($appData['id'] . '.html', $appData['name']);
                 $appData['image'] = new \Ease\Html\ATag($appData['id'].'.html', new \Ease\Html\ImgTag($appData['image'], $appData['name'], ['width' => '64']));
-                $appData = [array_keys($appData),$appData];
+                $appData = [array_keys($appData), $appData];
+
                 break;
 
             default:
                 break;
         }
 
-        return DefaultApi::prepareResponse($response, $appData , $suffix, 'apps','application');
+        return DefaultApi::prepareResponse($response, $appData, $suffix, 'apps', 'application');
     }
 
     /**
@@ -76,12 +75,13 @@ class AppApi extends AbstractAppApi
             switch ($suffix) {
                 case 'html':
                     $appsList[$app['id']]['name'] = new \Ease\Html\ATag('app/'.$app['id'].'.html', $app['name']);
-                    
-                    if(file_exists('../images/'.$app['uuid'].'.svg')){
-                       $appIcon = \Ease\Html\ImgTag::fileBase64src('../images/'.$app['uuid'].'.svg');
+
+                    if (file_exists('../images/'.$app['uuid'].'.svg')) {
+                        $appIcon = \Ease\Html\ImgTag::fileBase64src('../images/'.$app['uuid'].'.svg');
                     } else {
-                       $appIcon = $app['image'];
+                        $appIcon = $app['image'];
                     }
+
                     $appsList[$app['id']]['image'] = new \Ease\Html\ATag('app/'.$app['id'].'.html', new \Ease\Html\ImgTag($appIcon, $app['name'], ['width' => '64']));
 
                     break;
@@ -91,7 +91,7 @@ class AppApi extends AbstractAppApi
             }
         }
 
-        return DefaultApi::prepareResponse($response, $appsList, $suffix, 'apps','application');
+        return DefaultApi::prepareResponse($response, $appsList, $suffix, 'apps', 'application');
     }
 
     /**

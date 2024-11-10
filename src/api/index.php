@@ -126,12 +126,13 @@ $app->add(new \Tuupola\Middleware\HttpBasicAuthentication([
         return $prober->isAccountEnabled() && $prober->passwordValidation($arguments['password'], $prober->getDataValue($prober->passwordColumn));
     },
 ]));
-    
-$app->get('/MultiFlexi/src/api/', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("MultiFlexi Api Root");
+
+$app->get('/MultiFlexi/src/api/', static function (Request $request, Response $response, $args) {
+    $response->getBody()->write('MultiFlexi Api Root');
+
     return $response;
-});    
-    
+});
+
 // Run App & Emit Response
 $response = $app->handle($request);
 $responseEmitter = (new Response())

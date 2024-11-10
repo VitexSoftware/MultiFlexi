@@ -20,11 +20,12 @@ namespace MultiFlexi\Ui;
  *
  * @author     Vitex <vitex@hippy.cz>
  */
-class PageBottom extends \Ease\Html\FooterTag {
-
+class PageBottom extends \Ease\Html\FooterTag
+{
     public string $apiLink;
 
-    public function __construct($apiLink = '', $properties = []) {
+    public function __construct($apiLink = '', $properties = [])
+    {
         parent::__construct('', $properties);
         $this->apiLink = $apiLink;
     }
@@ -32,7 +33,8 @@ class PageBottom extends \Ease\Html\FooterTag {
     /**
      * Displays the bottom of the page.
      */
-    public function finalize(): void {
+    public function finalize(): void
+    {
         $this->includeCSS('https://use.fontawesome.com/releases/v5.3.1/css/all.css');
         $container = $this->setTagID('footer');
         //        if (\Ease\Shared::user()->getUserID()) {
@@ -41,7 +43,7 @@ class PageBottom extends \Ease\Html\FooterTag {
         $this->addItem('<hr>');
         $footrow = new \Ease\TWB4\Row();
 
-        $author = '<strong><a href="https://multiflexi.eu/">MultiFlexi</a></strong> ' . \Ease\Shared::appVersion() . '<br>&nbsp;&nbsp; &copy; 2020-2024 <a href="https://vitexsoftware.com/">Vitex Software</a>';
+        $author = '<strong><a href="https://multiflexi.eu/">MultiFlexi</a></strong> '.\Ease\Shared::appVersion().'<br>&nbsp;&nbsp; &copy; 2020-2024 <a href="https://vitexsoftware.com/">Vitex Software</a>';
 
         //  '&nbsp;' . new \Ease\Html\Widgets\LiveAge(filemtime($composer))
 
@@ -51,17 +53,21 @@ class PageBottom extends \Ease\Html\FooterTag {
         $linkedIn = new \Ease\Html\ATag('https://www.linkedin.com/in/vitexsoftware/', new \Ease\Html\ImgTag('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBoZWlnaHQ9IjcyIiB2aWV3Qm94PSIwIDAgNzIgNzIiIHdpZHRoPSI3MiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik04LDcyIEw2NCw3MiBDNjguNDE4Mjc4LDcyIDcyLDY4LjQxODI3OCA3Miw2NCBMNzIsOCBDNzIsMy41ODE3MjIgNjguNDE4Mjc4LC04LjExNjI0NTAxZS0xNiA2NCwwIEw4LDAgQzMuNTgxNzIyLDguMTE2MjQ1MDFlLTE2IC01LjQxMDgzMDAxZS0xNiwzLjU4MTcyMiAwLDggTDAsNjQgQzUuNDEwODMwMDFlLTE2LDY4LjQxODI3OCAzLjU4MTcyMiw3MiA4LDcyIFoiIGZpbGw9IiMwMDdFQkIiLz48cGF0aCBkPSJNNjIsNjIgTDUxLjMxNTYyNSw2MiBMNTEuMzE1NjI1LDQzLjgwMjExNDkgQzUxLjMxNTYyNSwzOC44MTI3NTQyIDQ5LjQxOTc5MTcsMzYuMDI0NTMyMyA0NS40NzA3MDMxLDM2LjAyNDUzMjMgQzQxLjE3NDYwOTQsMzYuMDI0NTMyMyAzOC45MzAwNzgxLDM4LjkyNjExMDMgMzguOTMwMDc4MSw0My44MDIxMTQ5IEwzOC45MzAwNzgxLDYyIEwyOC42MzMzMzMzLDYyIEwyOC42MzMzMzMzLDI3LjMzMzMzMzMgTDM4LjkzMDA3ODEsMjcuMzMzMzMzMyBMMzguOTMwMDc4MSwzMi4wMDI5MjgzIEMzOC45MzAwNzgxLDMyLjAwMjkyODMgNDIuMDI2MDQxNywyNi4yNzQyMTUxIDQ5LjM4MjU1MjEsMjYuMjc0MjE1MSBDNTYuNzM1Njc3MSwyNi4yNzQyMTUxIDYyLDMwLjc2NDQ3MDUgNjIsNDAuMDUxMjEyIEw2Miw2MiBaIE0xNi4zNDkzNDksMjIuNzk0MDEzMyBDMTIuODQyMDU3MywyMi43OTQwMTMzIDEwLDE5LjkyOTY1NjcgMTAsMTYuMzk3MDA2NyBDMTAsMTIuODY0MzU2NiAxMi44NDIwNTczLDEwIDE2LjM0OTM0OSwxMCBDMTkuODU2NjQwNiwxMCAyMi42OTcwMDUyLDEyLjg2NDM1NjYgMjIuNjk3MDA1MiwxNi4zOTcwMDY3IEMyMi42OTcwMDUyLDE5LjkyOTY1NjcgMTkuODU2NjQwNiwyMi43OTQwMTMzIDE2LjM0OTM0OSwyMi43OTQwMTMzIFogTTExLjAzMjU1MjEsNjIgTDIxLjc2OTQwMSw2MiBMMjEuNzY5NDAxLDI3LjMzMzMzMzMgTDExLjAzMjU1MjEsMjcuMzMzMzMzMyBMMTEuMDMyNTUyMSw2MiBaIiBmaWxsPSIjRkZGIi8+PC9nPjwvc3ZnPg==', 'LinkedIN', ['height' => '25px', 'style' => 'margin: 20x', 'title' => _('LinkedIN Product page')]));
 
         $footrow->addColumn(2, [$github, '&nbsp;', $linkedIn]);
+
         if ($this->apiLink) {
             $footrow->addColumn(4, $this->apiLinks());
         }
+
         $this->addItem(new \Ease\TWB4\Container($footrow));
         parent::finalize();
     }
 
-    public function apiLinks() {
+    public function apiLinks()
+    {
         foreach (['html', 'json', 'xml', 'yml', 'csv'] as $format) {
-            $links[] = new \Ease\Html\ATag( 'api/VitexSoftware/MultiFlexi/1.0.0/'. $this->apiLink . '.' . $format, $format);
+            $links[] = new \Ease\Html\ATag('api/VitexSoftware/MultiFlexi/1.0.0/'.$this->apiLink.'.'.$format, $format);
         }
-        return 'API [' . implode(',', $links) . ']';
+
+        return 'API ['.implode(',', $links).']';
     }
 }
