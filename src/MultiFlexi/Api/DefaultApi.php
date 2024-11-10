@@ -129,6 +129,7 @@ class DefaultApi extends AbstractDefaultApi
      * @param array                               $data     to print
      * @param string                              $suffix   reqired format
      * @param string                              $evidence data subject
+     * @param mixed                               $subitem
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -136,7 +137,6 @@ class DefaultApi extends AbstractDefaultApi
     {
         switch ($suffix) {
             case 'json':
-
                 $response->getBody()->write(json_encode([$evidence => $data], \JSON_UNESCAPED_UNICODE));
                 $responseFinal = $response->withHeader('Content-type', 'application/json');
 
@@ -148,7 +148,7 @@ class DefaultApi extends AbstractDefaultApi
                 break;
             case 'xml':
                 foreach ($data as $id => $row) {
-                    $xmlData[ '__'.$id.'__'] = $row;
+                    $xmlData['__'.$id.'__'] = $row;
                 }
 
                 $xmlRaw = self::arrayToXml($xmlData, '<'.$evidence.'/>');
@@ -159,12 +159,14 @@ class DefaultApi extends AbstractDefaultApi
                 break;
             case 'html':
             default:
-                $response->getBody()->write('<head><style>
+                $response->getBody()->write(<<<'EOD'
+<head><style>
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
 }
-</style></head>');
+</style></head>
+EOD);
                 $response->getBody()->write((new \Ease\Html\H1Tag($evidence))->getRendered());
                 $response->getBody()->write((new \Ease\Html\TableTag(null))->populate($data)->getRendered());
                 $response->getBody()->write((string) new \Ease\Html\HrTag());
@@ -191,8 +193,8 @@ table, th, td {
      * Array to XML convertor.
      *
      * @param array $array
-     * @param type $rootElement
-     * @param type $xml
+     * @param type  $rootElement
+     * @param type  $xml
      *
      * @return bool|string
      */
@@ -208,7 +210,7 @@ table, th, td {
             if (\is_array($v)) {
                 self::arrayToXml($v, $k, $_xml->addChild($k));
             } else {
-                $_xml->addChild($k, (string)$v);
+                $_xml->addChild($k, (string) $v);
             }
         }
 
