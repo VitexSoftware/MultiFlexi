@@ -155,24 +155,34 @@ Class | Method | HTTP request | Description
 *AbstractAppApi* | **setAppById** | **POST** /app/ | Create or Update Application
 *AbstractAppApi* | **getAppById** | **GET** /app/{appId}.{suffix} | Get App by ID
 *AbstractAppApi* | **listApps** | **GET** /apps.{suffix} | Show All Apps
+*AbstractCompanyApi* | **setCompanyById** | **POST** /company/ | Create or Update Company
+*AbstractCompanyApi* | **getCompanyById** | **GET** /company/{companyId}.{suffix} | Get Company by ID
+*AbstractCompanyApi* | **listCompanies** | **GET** /companies.{suffix} | Show All Companies
 *AbstractDefaultApi* | **rootGet** | **GET** / | Redirect to index
 *AbstractDefaultApi* | **getApiIndex** | **GET** /index.{suffix} | Endpoints listing
 *AbstractDefaultApi* | **loginSuffixGet** | **GET** /login.{suffix} | Return User's token
 *AbstractDefaultApi* | **loginSuffixPost** | **POST** /login.{suffix} | Return User's token
-*AbstractDefaultApi* | **pingSuffixGet** | **GET** /ping.{suffix} | Server heartbeat operation
-*AbstractServerApi* | **listServers** | **GET** /servers | Show All Servers
-*AbstractServerApi* | **setServerById** | **POST** /server/ | Create or Update Server record
-*AbstractServerApi* | **getServerById** | **GET** /server/{serverId}.{suffix} | Get Server by ID
+*AbstractDefaultApi* | **pingSuffixGet** | **GET** /ping.{suffix} | job heartbeat operation
+*AbstractJobApi* | **listjobs** | **GET** /jobs | Show All jobs
+*AbstractJobApi* | **setjobById** | **POST** /job/ | Create or Update job record
+*AbstractJobApi* | **getjobById** | **GET** /job/{jobId}.{suffix} | Get job by ID
+*AbstractRuntemplateApi* | **setRunTemplateById** | **POST** /runtemplate | Create or Update RunTemplate
+*AbstractRuntemplateApi* | **getRunTemplateById** | **GET** /runtemplate/{runTemplateId}.{suffix} | Get RunTemplate by ID
+*AbstractRuntemplateApi* | **listRunTemplates** | **GET** /runtemplates.{suffix} | Show All RunTemplates
+*AbstractUserApi* | **setUserById** | **POST** /user/ | Create or Update User
+*AbstractUserApi* | **getUserById** | **GET** /user/{userId}.{suffix} | Get User by ID
+*AbstractUserApi* | **listUsers** | **GET** /users.{suffix} | Show All Users
 
 
 ## Models
 
 * MultiFlexi\Model\App
-* MultiFlexi\Model\AppCompany
+* MultiFlexi\Model\Company
 * MultiFlexi\Model\ConfField
 * MultiFlexi\Model\Configuration
 * MultiFlexi\Model\Customer
-* MultiFlexi\Model\Server
+* MultiFlexi\Model\Job
+* MultiFlexi\Model\RunTemplate
 * MultiFlexi\Model\Tag
 * MultiFlexi\Model\User
 

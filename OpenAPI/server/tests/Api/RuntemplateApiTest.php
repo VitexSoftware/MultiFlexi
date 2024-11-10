@@ -23,18 +23,18 @@
 namespace MultiFlexi\Api;
 
 use PHPUnit\Framework\TestCase;
-use MultiFlexi\Api\DefaultApi;
+use MultiFlexi\Api\RuntemplateApi;
 
 /**
- * DefaultApiTest Class Doc Comment
+ * RuntemplateApiTest Class Doc Comment
  *
  * @package MultiFlexi\Api
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  *
- * @coversDefaultClass \MultiFlexi\Api\DefaultApi
+ * @coversDefaultClass \MultiFlexi\Api\RuntemplateApi
  */
-class DefaultApiTest extends TestCase
+class RuntemplateApiTest extends TestCase
 {
 
     /**
@@ -66,72 +66,44 @@ class DefaultApiTest extends TestCase
     }
 
     /**
-     * Test case for getApiIndex
+     * Test case for getRunTemplateById
      *
-     * Endpoints listing.
+     * Get RunTemplate by ID.
      *
-     * @covers ::getApiIndex
+     * @covers ::getRunTemplateById
      */
-    public function testGetApiIndex()
+    public function testGetRunTemplateById()
     {
         $this->markTestIncomplete(
-            'Test of "getApiIndex" method has not been implemented yet.'
+            'Test of "getRunTemplateById" method has not been implemented yet.'
         );
     }
 
     /**
-     * Test case for loginSuffixGet
+     * Test case for listRunTemplates
      *
-     * Return User's token.
+     * Show All RunTemplates.
      *
-     * @covers ::loginSuffixGet
+     * @covers ::listRunTemplates
      */
-    public function testLoginSuffixGet()
+    public function testListRunTemplates()
     {
         $this->markTestIncomplete(
-            'Test of "loginSuffixGet" method has not been implemented yet.'
+            'Test of "listRunTemplates" method has not been implemented yet.'
         );
     }
 
     /**
-     * Test case for loginSuffixPost
+     * Test case for setRunTemplateById
      *
-     * Return User's token.
+     * Create or Update RunTemplate.
      *
-     * @covers ::loginSuffixPost
+     * @covers ::setRunTemplateById
      */
-    public function testLoginSuffixPost()
+    public function testSetRunTemplateById()
     {
         $this->markTestIncomplete(
-            'Test of "loginSuffixPost" method has not been implemented yet.'
-        );
-    }
-
-    /**
-     * Test case for pingSuffixGet
-     *
-     * job heartbeat operation.
-     *
-     * @covers ::pingSuffixGet
-     */
-    public function testPingSuffixGet()
-    {
-        $this->markTestIncomplete(
-            'Test of "pingSuffixGet" method has not been implemented yet.'
-        );
-    }
-
-    /**
-     * Test case for rootGet
-     *
-     * Redirect to index.
-     *
-     * @covers ::rootGet
-     */
-    public function testRootGet()
-    {
-        $this->markTestIncomplete(
-            'Test of "rootGet" method has not been implemented yet.'
+            'Test of "setRunTemplateById" method has not been implemented yet.'
         );
     }
 }

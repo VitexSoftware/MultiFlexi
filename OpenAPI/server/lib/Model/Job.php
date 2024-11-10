@@ -24,13 +24,13 @@ namespace MultiFlexi\Model;
 use MultiFlexi\BaseModel;
 
 /**
- * App
+ * Job
  *
  * @package MultiFlexi\Model
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  */
-class App extends BaseModel
+class Job extends BaseModel
 {
     /**
      * @var string Models namespace.
@@ -44,41 +44,67 @@ class App extends BaseModel
      */
     protected const MODEL_SCHEMA = <<<'SCHEMA'
 {
-  "required" : [ "executable", "name" ],
-  "type" : "object",
   "properties" : {
     "id" : {
       "type" : "integer",
       "format" : "int64",
       "example" : 10
     },
-    "name" : {
-      "type" : "string",
-      "example" : "matcher"
+    "app_id" : {
+      "type" : "integer",
+      "format" : "int64",
+      "example" : 10
     },
-    "executable" : {
+    "begin" : {
       "type" : "string",
-      "example" : "multiflexi-probe"
+      "format" : "date-time"
     },
-    "tags" : {
-      "type" : "array",
-      "xml" : {
-        "wrapped" : true
-      },
-      "items" : {
-        "$ref" : "#/components/schemas/Tag"
-      }
-    },
-    "status" : {
+    "end" : {
       "type" : "string",
-      "description" : "App status in the store",
-      "enum" : [ "available", "pending", "sold" ]
+      "format" : "date-time"
+    },
+    "company_id" : {
+      "type" : "integer",
+      "format" : "int64",
+      "example" : 10
+    },
+    "exitcode" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "stdout" : {
+      "type" : "string",
+      "format" : "binary"
+    },
+    "stderr" : {
+      "type" : "string",
+      "format" : "binary"
+    },
+    "launched_by" : {
+      "type" : "string"
+    },
+    "env" : {
+      "type" : "string"
+    },
+    "command" : {
+      "type" : "string"
+    },
+    "schedule" : {
+      "type" : "string"
+    },
+    "executor" : {
+      "type" : "string",
+      "default" : "Native"
+    },
+    "runtemplate_id" : {
+      "type" : "integer",
+      "format" : "int64"
+    },
+    "app_version" : {
+      "type" : "string",
+      "default" : "n/a"
     }
-  },
-  "xml" : {
-    "name" : "App"
-  },
-  "x-swagger-router-model" : "com.vitexsoftware.multiflexi.model.App"
+  }
 }
 SCHEMA;
 }

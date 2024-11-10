@@ -24,13 +24,13 @@ namespace MultiFlexi\Model;
 use MultiFlexi\BaseModel;
 
 /**
- * App
+ * RunTemplate
  *
  * @package MultiFlexi\Model
  * @author  OpenAPI Generator team
  * @link    https://github.com/openapitools/openapi-generator
  */
-class App extends BaseModel
+class RunTemplate extends BaseModel
 {
     /**
      * @var string Models namespace.
@@ -44,41 +44,44 @@ class App extends BaseModel
      */
     protected const MODEL_SCHEMA = <<<'SCHEMA'
 {
-  "required" : [ "executable", "name" ],
-  "type" : "object",
   "properties" : {
     "id" : {
       "type" : "integer",
       "format" : "int64",
       "example" : 10
     },
+    "app_id" : {
+      "type" : "integer",
+      "format" : "int64",
+      "example" : 10
+    },
+    "company_id" : {
+      "type" : "integer",
+      "format" : "int64",
+      "example" : 10
+    },
+    "iterv" : {
+      "type" : "string",
+      "description" : "interval",
+      "enum" : [ "n", "h", "d", "w", "m", "y" ]
+    },
+    "prepared" : {
+      "type" : "boolean",
+      "example" : true
+    },
+    "success" : {
+      "maxLength" : 250,
+      "type" : "string"
+    },
+    "fail" : {
+      "maxLength" : 250,
+      "type" : "string"
+    },
     "name" : {
-      "type" : "string",
-      "example" : "matcher"
-    },
-    "executable" : {
-      "type" : "string",
-      "example" : "multiflexi-probe"
-    },
-    "tags" : {
-      "type" : "array",
-      "xml" : {
-        "wrapped" : true
-      },
-      "items" : {
-        "$ref" : "#/components/schemas/Tag"
-      }
-    },
-    "status" : {
-      "type" : "string",
-      "description" : "App status in the store",
-      "enum" : [ "available", "pending", "sold" ]
+      "maxLength" : 250,
+      "type" : "string"
     }
-  },
-  "xml" : {
-    "name" : "App"
-  },
-  "x-swagger-router-model" : "com.vitexsoftware.multiflexi.model.App"
+  }
 }
 SCHEMA;
 }

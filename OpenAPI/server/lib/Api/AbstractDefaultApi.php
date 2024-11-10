@@ -108,7 +108,7 @@ abstract class AbstractDefaultApi
 
     /**
      * GET pingSuffixGet
-     * Summary: Server heartbeat operation
+     * Summary: job heartbeat operation
      * Notes: This operation shows how to override the global security defined above, as we want to open it up for all users.
      *
      * @param ServerRequestInterface $request  Request
