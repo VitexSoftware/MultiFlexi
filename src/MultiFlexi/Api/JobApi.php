@@ -64,7 +64,7 @@ class JobApi extends AbstractJobApi
                 break;
         }
 
-        return DefaultApi::prepareResponse($response, $jobData, $suffix, 'jobs', 'job');
+        return DefaultApi::prepareResponse($response, $jobData, $suffix, 'job', 'job');
     }
 
     /**
