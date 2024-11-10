@@ -45,7 +45,7 @@ abstract class AbstractUserApi
      *
      * @param ServerRequestInterface $request  Request
      * @param ResponseInterface      $response Response
-     * @param string $userId ID of User to return
+     * @param int $userId ID of User to return
      * @param string $suffix force format suffix
      *
      * @return ResponseInterface
@@ -54,9 +54,11 @@ abstract class AbstractUserApi
     public function getUserById(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        string $userId,
+        int $userId,
         string $suffix
     ): ResponseInterface {
+        $queryParams = $request->getQueryParams();
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing getUserById as a GET method in MultiFlexi\Api\UserApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
@@ -79,6 +81,8 @@ abstract class AbstractUserApi
         ResponseInterface $response,
         string $suffix
     ): ResponseInterface {
+        $queryParams = $request->getQueryParams();
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing listUsers as a GET method in MultiFlexi\Api\UserApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
@@ -101,6 +105,7 @@ abstract class AbstractUserApi
     ): ResponseInterface {
         $queryParams = $request->getQueryParams();
         $userId = (key_exists('userId', $queryParams)) ? $queryParams['userId'] : null;
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing setUserById as a POST method in MultiFlexi\Api\UserApi class?";
         throw new HttpNotImplementedException($request, $message);
     }

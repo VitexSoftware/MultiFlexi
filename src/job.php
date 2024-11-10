@@ -73,7 +73,7 @@ $oPage->container->addItem(
     new CompanyPanel(new \MultiFlexi\Company($appInfo['company_id']), $appPanel),
 );
 
-$oPage->addItem(new PageBottom());
+$oPage->addItem(new PageBottom('job/'.$jobber->getMyKey()));
 WebPage::singleton()->addCss(<<<'EOD'
 
 .iframe-container {

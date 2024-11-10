@@ -42,23 +42,23 @@ class AppApi extends AbstractAppApi
      *
      * @param int $appId
      */
-    public function getAppById(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, string $appId, string $suffix): \Psr\Http\Message\ResponseInterface
+    public function getAppById(\Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, int $appId, string $suffix): \Psr\Http\Message\ResponseInterface
     {
-        $this->engine->loadFromSQL((int) $appId);
+        $this->engine->loadFromSQL($appId);
         $appData = $this->engine->getData();
 
         switch ($suffix) {
             case 'html':
                 //                $appData['name'] = new \Ease\Html\ATag($appData['id'] . '.html', $appData['name']);
                 $appData['image'] = new \Ease\Html\ATag($appData['id'].'.html', new \Ease\Html\ImgTag($appData['image'], $appData['name'], ['width' => '64']));
-
+                $appData = [array_keys($appData),$appData];
                 break;
 
             default:
                 break;
         }
 
-        return DefaultApi::prepareResponse($response, [$appData], $suffix, $appData['name']);
+        return DefaultApi::prepareResponse($response, $appData , $suffix, 'apps','application');
     }
 
     /**
@@ -91,7 +91,7 @@ class AppApi extends AbstractAppApi
             }
         }
 
-        return DefaultApi::prepareResponse($response, $appsList, $suffix, 'apps');
+        return DefaultApi::prepareResponse($response, $appsList, $suffix, 'apps','application');
     }
 
     /**

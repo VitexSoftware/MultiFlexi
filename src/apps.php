@@ -22,7 +22,7 @@ $oPage->onlyForLogged();
 $oPage->addItem(new PageTop(_('Applications')));
 
 $oPage->container->addItem(new DBDataTable(new \MultiFlexi\Application()));
-$oPage->container->addItem(new \Ease\Html\ATag('api/VitexSoftware/MultiFlexi/1.0.0/apps.html', _('API')));
-$oPage->addItem(new PageBottom());
+
+$oPage->addItem(new PageBottom('apps'));
 
 $oPage->draw();

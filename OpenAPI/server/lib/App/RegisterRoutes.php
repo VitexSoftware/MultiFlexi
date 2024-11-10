@@ -468,61 +468,6 @@ class RegisterRoutes
             ],
         ],
         [
-            'httpMethod' => 'GET',
-            'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
-            'path' => '/jobs',
-            'apiPackage' => 'MultiFlexi\Api',
-            'classname' => 'AbstractJobApi',
-            'userClassname' => 'JobApi',
-            'operationId' => 'listjobs',
-            'responses' => [
-                '200' => [
-                    'jsonSchema' => '{
-  "description" : "successful operation",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/Job"
-        }
-      }
-    }
-  }
-}',
-                ],
-                '400' => [
-                    'jsonSchema' => '{
-  "description" : "Invalid status value"
-}',
-                ],
-                '401' => [
-                    'jsonSchema' => '{
-  "description" : "Authentication information is missing or invalid",
-  "headers" : {
-    "WWW_Authenticate" : {
-      "style" : "simple",
-      "explode" : false,
-      "schema" : {
-        "type" : "string"
-      }
-    }
-  }
-}',
-                ],
-            ],
-            'authMethods' => [
-                // http security schema named 'basicAuth'
-                [
-                    'type' => 'http',
-                    'isBasic' => true,
-                    'isBearer' => false,
-                    'isApiKey' => false,
-                    'isOAuth' => false,
-                ],
-            ],
-        ],
-        [
             'httpMethod' => 'POST',
             'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
             'path' => '/job/',
@@ -622,6 +567,61 @@ class RegisterRoutes
                 '404' => [
                     'jsonSchema' => '{
   "description" : "App not found"
+}',
+                ],
+            ],
+            'authMethods' => [
+                // http security schema named 'basicAuth'
+                [
+                    'type' => 'http',
+                    'isBasic' => true,
+                    'isBearer' => false,
+                    'isApiKey' => false,
+                    'isOAuth' => false,
+                ],
+            ],
+        ],
+        [
+            'httpMethod' => 'GET',
+            'basePathWithoutHost' => '/VitexSoftware/MultiFlexi/1.0.0',
+            'path' => '/jobs.{suffix}',
+            'apiPackage' => 'MultiFlexi\Api',
+            'classname' => 'AbstractJobApi',
+            'userClassname' => 'JobApi',
+            'operationId' => 'listjobs',
+            'responses' => [
+                '200' => [
+                    'jsonSchema' => '{
+  "description" : "successful operation",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/Job"
+        }
+      }
+    }
+  }
+}',
+                ],
+                '400' => [
+                    'jsonSchema' => '{
+  "description" : "Invalid status value"
+}',
+                ],
+                '401' => [
+                    'jsonSchema' => '{
+  "description" : "Authentication information is missing or invalid",
+  "headers" : {
+    "WWW_Authenticate" : {
+      "style" : "simple",
+      "explode" : false,
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
 }',
                 ],
             ],

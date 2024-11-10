@@ -45,7 +45,7 @@ abstract class AbstractRuntemplateApi
      *
      * @param ServerRequestInterface $request  Request
      * @param ResponseInterface      $response Response
-     * @param string $runTemplateId ID of RunTemplate to return
+     * @param int $runTemplateId ID of RunTemplate to return
      * @param string $suffix force format suffix
      *
      * @return ResponseInterface
@@ -54,9 +54,11 @@ abstract class AbstractRuntemplateApi
     public function getRunTemplateById(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        string $runTemplateId,
+        int $runTemplateId,
         string $suffix
     ): ResponseInterface {
+        $queryParams = $request->getQueryParams();
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing getRunTemplateById as a GET method in MultiFlexi\Api\RuntemplateApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
@@ -79,6 +81,8 @@ abstract class AbstractRuntemplateApi
         ResponseInterface $response,
         string $suffix
     ): ResponseInterface {
+        $queryParams = $request->getQueryParams();
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing listRunTemplates as a GET method in MultiFlexi\Api\RuntemplateApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
@@ -101,6 +105,7 @@ abstract class AbstractRuntemplateApi
     ): ResponseInterface {
         $queryParams = $request->getQueryParams();
         $runTemplateId = (key_exists('runTemplateId', $queryParams)) ? $queryParams['runTemplateId'] : null;
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing setRunTemplateById as a POST method in MultiFlexi\Api\RuntemplateApi class?";
         throw new HttpNotImplementedException($request, $message);
     }

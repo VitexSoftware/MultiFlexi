@@ -54,6 +54,8 @@ abstract class AbstractDefaultApi
         ResponseInterface $response,
         string $suffix
     ): ResponseInterface {
+        $queryParams = $request->getQueryParams();
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing getApiIndex as a GET method in MultiFlexi\Api\DefaultApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
@@ -78,6 +80,7 @@ abstract class AbstractDefaultApi
         $queryParams = $request->getQueryParams();
         $username = (key_exists('username', $queryParams)) ? $queryParams['username'] : null;
         $password = (key_exists('password', $queryParams)) ? $queryParams['password'] : null;
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing loginSuffixGet as a GET method in MultiFlexi\Api\DefaultApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
@@ -102,6 +105,7 @@ abstract class AbstractDefaultApi
         $queryParams = $request->getQueryParams();
         $username = (key_exists('username', $queryParams)) ? $queryParams['username'] : null;
         $password = (key_exists('password', $queryParams)) ? $queryParams['password'] : null;
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing loginSuffixPost as a POST method in MultiFlexi\Api\DefaultApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
@@ -123,6 +127,8 @@ abstract class AbstractDefaultApi
         ResponseInterface $response,
         string $suffix
     ): ResponseInterface {
+        $queryParams = $request->getQueryParams();
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing pingSuffixGet as a GET method in MultiFlexi\Api\DefaultApi class?";
         throw new HttpNotImplementedException($request, $message);
     }
@@ -141,6 +147,8 @@ abstract class AbstractDefaultApi
         ServerRequestInterface $request,
         ResponseInterface $response
     ): ResponseInterface {
+        $queryParams = $request->getQueryParams();
+        $limit = (key_exists('limit', $queryParams)) ? $queryParams['limit'] : null;
         $message = "How about implementing rootGet as a GET method in MultiFlexi\Api\DefaultApi class?";
         throw new HttpNotImplementedException($request, $message);
     }

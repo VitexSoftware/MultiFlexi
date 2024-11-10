@@ -87,7 +87,9 @@ class DefaultApi extends AbstractDefaultApi
     public function getApiIndex(ServerRequestInterface $request, ResponseInterface $response, string $suffix): ResponseInterface
     {
         $data[] = ['path' => 'apps'];
-        $data[] = ['path' => 'abrafleixs'];
+        $data[] = ['path' => 'companies'];
+        $data[] = ['path' => 'runtemplates'];
+        $data[] = ['path' => 'jobs'];
         $data[] = ['path' => 'users'];
 
         foreach ($data as $id => $row) {
@@ -130,10 +132,11 @@ class DefaultApi extends AbstractDefaultApi
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public static function prepareResponse($response, $data, $suffix, $evidence = 'data')
+    public static function prepareResponse($response, $data, $suffix, $evidence = 'data', $subitem = 'item')
     {
         switch ($suffix) {
             case 'json':
+
                 $response->getBody()->write(json_encode([$evidence => $data], \JSON_UNESCAPED_UNICODE));
                 $responseFinal = $response->withHeader('Content-type', 'application/json');
 
@@ -145,17 +148,25 @@ class DefaultApi extends AbstractDefaultApi
                 break;
             case 'xml':
                 foreach ($data as $id => $row) {
-                    $xmlData['id'.$id] = $row;
+                    $xmlData[ '__'.$id.'__'] = $row;
                 }
 
-                $response->getBody()->write(self::arrayToXml($xmlData, '<'.$evidence.'/>'));
+                $xmlRaw = self::arrayToXml($xmlData, '<'.$evidence.'/>');
+                $response->getBody()->write(preg_replace('/__\d+__/', $subitem, $xmlRaw));
+
                 $responseFinal = $response->withHeader('Content-type', 'application/xml');
 
                 break;
             case 'html':
             default:
+                $response->getBody()->write('<head><style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style></head>');
                 $response->getBody()->write((new \Ease\Html\H1Tag($evidence))->getRendered());
-                $response->getBody()->write((new \Ease\Html\TableTag())->populate($data)->getRendered());
+                $response->getBody()->write((new \Ease\Html\TableTag(null))->populate($data)->getRendered());
                 $response->getBody()->write((string) new \Ease\Html\HrTag());
 
                 $urlParts = pathinfo(\Ease\WebPage::getUri());
@@ -164,7 +175,9 @@ class DefaultApi extends AbstractDefaultApi
                 $formatLinks[] = new \Ease\Html\ATag($baseUrl.'.json', 'json');
                 $formatLinks[] = new \Ease\Html\ATag($baseUrl.'.xml', 'xml');
                 $formatLinks[] = new \Ease\Html\ATag($baseUrl.'.yaml', 'yaml');
+                $formatLinks[] = new \Ease\Html\ATag($baseUrl.'.csv', 'csv');
 
+                $response->getBody()->write('<a href="index.html">🏠</a>&nbsp;');
                 $response->getBody()->write('[ '.implode(' | ', $formatLinks).' ]');
                 $responseFinal = $response->withHeader('Content-type', 'text/html');
 
@@ -177,11 +190,11 @@ class DefaultApi extends AbstractDefaultApi
     /**
      * Array to XML convertor.
      *
-     * @param type $array
+     * @param array $array
      * @param type $rootElement
      * @param type $xml
      *
-     * @return type
+     * @return bool|string
      */
     public static function arrayToXml($array, $rootElement = null, $xml = null)
     {
@@ -195,7 +208,7 @@ class DefaultApi extends AbstractDefaultApi
             if (\is_array($v)) {
                 self::arrayToXml($v, $k, $_xml->addChild($k));
             } else {
-                $_xml->addChild($k, $v);
+                $_xml->addChild($k, (string)$v);
             }
         }
 

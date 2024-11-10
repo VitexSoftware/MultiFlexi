@@ -16,19 +16,18 @@ paths:
   '/':
     get:
       summary: 'Redirect to index'
+      parameters:
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '301':
           description: redirect to index.html
-          
+
   '/index.{suffix}':
     get:
       summary: Endpoints listing
       description: Show current API
       operationId: getApiIndex
       security: []
-      responses:
-        '200':
-          description: OK
       parameters:
         - name: suffix
           in: path
@@ -40,11 +39,16 @@ paths:
           allowEmptyValue: true
           example: json
           required: true
+        - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: OK
+
   '/login.{suffix}':
     get:
       summary: Return User's token
       description: Send login & password to obtain oAuth token
-      parameters: 
+      parameters:
         - name: username
           in: query
           required: true
@@ -67,13 +71,14 @@ paths:
           allowEmptyValue: true
           example: json
           required: true
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '201':
           description: OK
     post:
       summary: Return User's token
       description: Send login & password to obtain oAuth token
-      parameters: 
+      parameters:
         - name: username
           in: query
           required: true
@@ -96,10 +101,11 @@ paths:
           allowEmptyValue: true
           example: json
           required: true
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '201':
           description: OK
-          
+
   '/ping.{suffix}':
     get:
       summary: job heartbeat operation
@@ -107,9 +113,6 @@ paths:
         This operation shows how to override the global security defined above,
         as we want to open it up for all users.
       security: []
-      responses:
-        '200':
-          description: OK
       parameters:
         - name: suffix
           in: path
@@ -121,7 +124,11 @@ paths:
           allowEmptyValue: true
           example: json
           required: true
-          
+        - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: OK
+
   '/app/{appId}.{suffix}':
     get:
       tags:
@@ -135,8 +142,8 @@ paths:
           description: ID of app to return
           required: true
           schema:
-            type: string
-            pattern: '^\d+'
+            type: integer
+            format: int64
         - name: suffix
           in: path
           schema:
@@ -147,7 +154,7 @@ paths:
           allowEmptyValue: true
           example: .json
           required: true
-            
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '200':
           description: successful operation
@@ -162,7 +169,7 @@ paths:
         '404':
           description: App not found
       security:
-        - basicAuth: []      
+        - basicAuth: []
   /app/:
     post:
       tags:
@@ -178,6 +185,7 @@ paths:
           schema:
             type: integer
             format: int64
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '201':
           description: application created or updated
@@ -192,7 +200,7 @@ paths:
         '404':
           description: App not found
       security:
-        - basicAuth: []      
+        - basicAuth: []
 
   '/job/{jobId}.{suffix}':
     get:
@@ -219,7 +227,7 @@ paths:
           allowEmptyValue: true
           example: json
           required: true
-
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '200':
           description: successful operation
@@ -235,7 +243,7 @@ paths:
           description: App not found
       security:
         - basicAuth: []
-  /job/:
+  '/job/':
     post:
       tags:
         - job
@@ -249,6 +257,7 @@ paths:
           schema:
             type: integer
             format: int64
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '201':
           description: record created or updated
@@ -283,7 +292,7 @@ paths:
           allowEmptyValue: true
           example: json
           required: true
-
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '200':
           description: successful operation
@@ -301,13 +310,25 @@ paths:
       security:
         - basicAuth: []
 
-  /jobs:
+  '/jobs.{suffix}':
     get:
       tags:
         - job
       summary: Show All jobs
       description: All job jobs registered
       operationId: listjobs
+      parameters:
+        - name: suffix
+          in: path
+          schema:
+            type: string
+            enum: [json, xml, yaml, html]
+            default: "html"
+          description: force format suffix
+          allowEmptyValue: true
+          example: json
+          required: true
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '200':
           description: successful operation
@@ -324,7 +345,7 @@ paths:
       security:
         - basicAuth: []
 
-  /runtemplate:
+  '/runtemplate':
     post:
       tags:
         - runtemplate
@@ -339,6 +360,7 @@ paths:
           schema:
             type: integer
             format: int64
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '201':
           description: RunTemplate created or updated
@@ -355,7 +377,7 @@ paths:
       security:
         - basicAuth: []
 
-  /runtemplate/{runTemplateId}.{suffix}:
+  '/runtemplate/{runTemplateId}.{suffix}':
     get:
       tags:
         - runtemplate
@@ -368,8 +390,8 @@ paths:
           description: ID of RunTemplate to return
           required: true
           schema:
-            type: string
-            pattern: '^\d+'
+            type: integer
+            format: int64
         - name: suffix
           in: path
           schema:
@@ -380,7 +402,7 @@ paths:
           allowEmptyValue: true
           example: .json
           required: true
-
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '200':
           description: successful operation
@@ -397,7 +419,7 @@ paths:
       security:
         - basicAuth: []
 
-  /runtemplates.{suffix}:
+  '/runtemplates.{suffix}':
     get:
       tags:
         - runtemplate
@@ -415,6 +437,7 @@ paths:
           allowEmptyValue: true
           example: json
           required: true
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '200':
           description: successful operation
@@ -431,9 +454,7 @@ paths:
       security:
         - basicAuth: []
 
-
-
-  /user/:
+  '/user/':
     post:
       tags:
         - user
@@ -448,6 +469,7 @@ paths:
           schema:
             type: integer
             format: int64
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '201':
           description: User created or updated
@@ -464,7 +486,7 @@ paths:
       security:
         - basicAuth: []
 
-  /user/{userId}.{suffix}:
+  '/user/{userId}.{suffix}':
     get:
       tags:
         - user
@@ -477,8 +499,8 @@ paths:
           description: ID of User to return
           required: true
           schema:
-            type: string
-            pattern: '^\d+'
+            type: integer
+            format: int64
         - name: suffix
           in: path
           schema:
@@ -489,7 +511,7 @@ paths:
           allowEmptyValue: true
           example: .json
           required: true
-
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '200':
           description: successful operation
@@ -506,7 +528,7 @@ paths:
       security:
         - basicAuth: []
 
-  /users.{suffix}:
+  '/users.{suffix}':
     get:
       tags:
         - user
@@ -524,6 +546,7 @@ paths:
           allowEmptyValue: true
           example: json
           required: true
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '200':
           description: successful operation
@@ -540,7 +563,7 @@ paths:
       security:
         - basicAuth: []
 
-  /company/:
+  '/company/':
     post:
       tags:
         - company
@@ -555,6 +578,7 @@ paths:
           schema:
             type: integer
             format: int64
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '201':
           description: Company created or updated
@@ -571,7 +595,7 @@ paths:
       security:
         - basicAuth: []
 
-  /company/{companyId}.{suffix}:
+  '/company/{companyId}.{suffix}':
     get:
       tags:
         - company
@@ -584,8 +608,8 @@ paths:
           description: ID of Company to return
           required: true
           schema:
-            type: string
-            pattern: '^\d+'
+            type: integer
+            format: int64
         - name: suffix
           in: path
           schema:
@@ -596,7 +620,7 @@ paths:
           allowEmptyValue: true
           example: .json
           required: true
-
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '200':
           description: successful operation
@@ -612,7 +636,7 @@ paths:
           description: Company not found
       security:
         - basicAuth: []
-  /companies.{suffix}:
+  '/companies.{suffix}':
     get:
       tags:
         - company
@@ -630,6 +654,7 @@ paths:
           allowEmptyValue: true
           example: json
           required: true
+        - $ref: '#/components/parameters/LimitParam'
       responses:
         '200':
           description: successful operation
@@ -941,9 +966,22 @@ components:
       headers:
         WWW_Authenticate:
           schema:
-            type: string    
-    
+            type: string
+
   securitySchemes:
     basicAuth:
       type: http
       scheme: basic
+
+  parameters:
+    LimitParam:
+      name: limit
+      in: query
+      description: maximum number of results to return
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 100
+        default: 20
