@@ -1,0 +1,17 @@
+#!/bin/sh
+# postinst script for multiflexi-api
+set -e
+
+. /usr/share/debconf/confmodule
+
+
+if [ "$1" = "configure" ] ; then
+
+    jq '.require + {"vitexsoftware/multiflexiapiserver": "*"} ' /usr/lib/multiflexi/composer.json >  /usr/lib/multiflexi/composer.json.tmp
+    jq '.autoload."psr-4" += {"MultiFlexi\\Api\\": "MultiFlexi/Api"}' /usr/lib/multiflexi/composer.json.tmp > /usr/lib/multiflexi/composer.json.tmp2
+    jq '.repositories += [{"type":"path","url":"./OpenAPI/server/"}'] /usr/lib/multiflexi/composer.json.tmp2 > /usr/lib/multiflexi/composer.json.tmp3
+    
+    mv /usr/lib/multiflexi/composer.json.tmp3 /usr/lib/multiflexi/composer.json
+    composer-debian multiflexi
+fi
+
