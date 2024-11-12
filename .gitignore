@@ -66,3 +66,6 @@ src/js/jquery.dataTables.js
 /debian/multiflexi-abraflexi/
 /debian/multiflexi-raiffeisenbank/
 /.phpunit.result.cache
+/debian/multiflexi-docker/
+/debian/multiflexi-docker.debhelper.log
+/debian/multiflexi-docker.substvars
