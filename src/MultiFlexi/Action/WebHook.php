@@ -22,6 +22,7 @@ namespace MultiFlexi\Action;
  */
 class WebHook extends \MultiFlexi\CommonAction
 {
+
     /**
      * Module Caption.
      *
@@ -88,6 +89,22 @@ class WebHook extends \MultiFlexi\CommonAction
 
     public static function inputs(string $prefix)
     {
-        return new \Ease\TWB4\FormGroup(_('Uri'), new \Ease\Html\InputTextTag($prefix.'[WebHook][uri]'), '', _('Report endpoint'));
+
+//      <div class="input-group mb-2">
+//        <div class="input-group-prepend">
+//          <div class="input-group-text">@</div>
+//        </div>
+//        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+//      </div>
+
+        $keyPrefix = new \Ease\Html\DivTag('zabbix_action-', ['class' => 'input-group-text']);
+
+        $prepend = new \Ease\Html\DivTag($keyPrefix , ['class' => 'input-group-prepend']);
+
+        $input = new \Ease\Html\DivTag($prepend, ['class' => 'input-group mb-2']);
+
+        $input->addItem(new \Ease\Html\InputTextTag($prefix . '[WebHook][uri]',null,['class'=>'form-control']));
+        
+        return new \Ease\TWB4\FormGroup(_('Uri'), $input , '', _('Report endpoint'));
     }
 }
