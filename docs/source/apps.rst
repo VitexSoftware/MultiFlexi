@@ -93,6 +93,15 @@ The ``environment`` field contains a list of environment variables required by t
 
 The application icon is svg file stored in the same directory as json application definition. The icon must be named using the application's UUID.
 
+Special variables
+-----------------
+
+The Zabbix post job action can be used to send the application's output to Zabbix. The following environment variables are used for this purpose:
+
+- ``RESULT_FILE``: filename where the application stores its output
+- ``ZABBIX_KEY``: Zabbix key name for the application.
+
+
 
 Example JSON Definition
 -----------------------
