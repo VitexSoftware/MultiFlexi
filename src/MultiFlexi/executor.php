@@ -28,15 +28,15 @@ interface executor
 
     public function launchJob();
 
-    public function getErrorOutput();
+    public function getErrorOutput(): string;
 
-    public function getOutput();
+    public function getOutput(): string;
 
-    public function getExitCode();
+    public function getExitCode(): int;
 
     public function storeLogs();
 
-    public function commandline();
+    public function commandline(): string;
 
     /**
      * Can this Executor execute given application ?
@@ -48,5 +48,5 @@ interface executor
     /**
      * Logo for Launcher.
      */
-    public static function logo();
+    public static function logo(): string ;
 }
