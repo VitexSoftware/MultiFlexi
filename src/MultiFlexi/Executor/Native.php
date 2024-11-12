@@ -54,7 +54,7 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
     /**
      * @return string
      */
-    public function commandline()
+    public function commandline(): string
     {
         return $this->executable().' '.$this->cmdparams();
     }
