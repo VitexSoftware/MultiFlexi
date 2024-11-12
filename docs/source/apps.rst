@@ -65,6 +65,112 @@ Applications Overview
 
 MultiFlexi offers a variety of applications to enhance your accounting and business processes. Below is a brief overview of the available applications:
 
+Application definition
+----------------------
+
+Application is defined by a JSON file. The file must contain the following fields:
+
+- ``name``: Name of the application
+- ``description``: Description of the application
+- ``homepage``: URL to the application's homepage
+- ``executable``: Name of the executable file
+- ``setup``: Command launched before first run of the application runtemplate
+- ``deploy``: Command to deploy the application. Mostly apt install or git clone
+- ``cmdparams``: Command line parameters for the application  - you can use {VARIABLE_NAME} to reference other environment variables
+- ``ociimage``: Docker image name. Only for applications running in Docker, Podman or Kubernetes
+- ``requirements``: Requirements for the application - e.g. AbraFlexi or Pohoda or RaiffeisenBank
+- ``uuid``: Unique identifier for the application
+- ``topics``: Keywords related to the application
+- ``multiflexi``: Version of MultiFlexi required by the application
+- ``environment``: Environment variables required by the application
+
+The ``environment`` field contains a list of environment variables required by the application. Each variable must have the following fields:
+
+- ``type``: Type of the variable (text, password, string)
+- ``description``: Description of the variable
+- ``defval``: Default value of the variable - you can use {VARIABLE_NAME} to reference other environment variables
+- ``required``: Whether the variable is required or not
+
+The application icon is svg file stored in the same directory as json application definition. The icon must be named using the application's UUID.
+
+
+Example JSON Definition
+-----------------------
+
+Here is an example of a JSON file defining an application:
+
+.. code-block:: json
+
+  {
+      "image": "",
+      "name": "RB transaction report",
+      "description": "Raiffeisenbank transaction report",
+      "executable": "raiffeisenbank-transaction-report",
+      "setup": "",
+      "cmdparams": "",
+      "deploy": "apt install raiffeisenbank-statement-tools",
+      "homepage": "https://github.com/Spoje-NET/raiffeisenbank-statement-tools",
+      "requirements": "RaiffeisenBank",
+      "ociimage": "docker.io/spojenet/raiffeisenbank-statement-tools",
+      "uuid": "97f30cf9-2d9e-4d91-ad65-9bdd8b4663cd",
+      "topics": "Bank,RaiffeisenBank,Transactions,Check,Json,Report",
+      "environment": {
+          "ACCOUNT_NUMBER": {
+              "type": "text",
+              "description": "Bank Account Number",
+              "defval": "",
+              "required": true
+          },
+          "CERT_PASS": {
+              "type": "password",
+              "description": "Certificate password",
+              "defval": "",
+              "required": true
+          },
+          "CERT_FILE": {
+              "type": "string",
+              "description": "Path to RB Certificate file",
+              "defval": "",
+              "required": true
+          },
+          "REPORT_SCOPE": {
+              "type": "text",
+              "description": "Time scope of transactions downloaded",
+              "defval": "last_month",
+              "required": false
+          },
+          "STATEMENT_LINE": {
+              "type": "text",
+              "description": "Statement line can be MAIN or ADDITIONAL",
+              "defval": "ADDITIONAL",
+              "required": false
+          },
+          "XIBMCLIENTID": {
+              "type": "text",
+              "description": "ClientID",
+              "defval": "",
+              "required": true
+          },
+          "RESULT_FILE": {
+              "type": "string",
+              "description": "write output json data to",
+              "defval": "transaction_report_{ACCOUNT_NUMBER}.json",
+              "required": false
+          },
+          "ZABBIX_KEY": {
+              "type": "string",
+              "description": "Default name for Zabbix Item key name",
+              "defval": "Raiff-Balance-{ACCOUNT_NUMBER}",
+              "required": false
+          }
+      },
+      "multiflexi": "1.10.2.0"
+  }
+
+
+
+
+
 .. list-table:: Available Applications
     :header-rows: 1
 
