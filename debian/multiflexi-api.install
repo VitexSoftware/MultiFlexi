@@ -1,6 +1,7 @@
+OpenAPI/server/lib/Api/*.php usr/lib/multiflexi/OpenApi/server/lib/Api
+OpenAPI/server/composer.json usr/lib/multiflexi/OpenApi/server/
+
 src/api/config.php      usr/share/multiflexi/api
 src/api/index.php       usr/share/multiflexi/api
 src/MultiFlexi/Api/*.php usr/lib/multiflexi/MultiFlexi/Api
-OpenAPI/server/lib/Api/*.php usr/lib/multiflexi/ApiServer/Api
 
-OpenAPI/server/composer.json usr/lib/multiflexi/ApiServer/
