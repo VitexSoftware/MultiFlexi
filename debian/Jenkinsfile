@@ -1,6 +1,6 @@
 #!groovy
 
-#Unsupported by Docker: Trixie Focal
+// Unsupported by Docker: Trixie Focal
 
 String[] distributions = ['debian:bullseye', 'debian:bookworm', 'ubuntu:jammy', 'ubuntu:noble']
 
