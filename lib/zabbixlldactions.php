@@ -18,6 +18,8 @@ namespace MultiFlexi;
 use Ease\Anonym;
 use Ease\Shared;
 
+define('APP_NAME','MultiFlexi LLD Actions');
+
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
 $loggers = ['syslog', '\MultiFlexi\LogToSQL'];
@@ -33,6 +35,7 @@ $mode = \array_key_exists(1, $argv) ? $argv[1] : 'n/a';
 
 $lldData = [];
 $runTemplater = new \MultiFlexi\RunTemplate();
+$runTemplater->logBanner();
 
 $enabled = $runTemplater->listingQuery()->disableSmartJoin()->where("success LIKE '%\"Zabbix\";b:1;%'")->whereOr("fail LIKE '%\"Zabbix\";b:1;%'") 
         ->select(['runtemplate.id AS runtemplate_id','runtemplate.name AS runtemplate_name'])
