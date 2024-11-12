@@ -44,5 +44,5 @@ override_dh_install:
 	rm  debian/multiflexi/usr/lib/multiflexi/zabbixlldactions.php
 	sed -i "/require_once __DIR__/crequire_once '/var/lib/composer/multiflexi/autoload.php';"               debian/multiflexi-api/usr/share/multiflexi/api/index.php
 	sed -i "/loadConfig/c\\\\\Ease\\\\Shared::singleton()->loadConfig('/etc/multiflexi/multiflexi.env', true);"    debian/multiflexi-api/usr/share/multiflexi/api/index.php
-	sed -i "/setBasePath/c\\$app->setBasePath('/api');"                                                      debian/multiflexi-api/usr/share/multiflexi/api/index.php
+	sed -i "/setBasePath/c\$$app->setBasePath('/api');"                                                      debian/multiflexi-api/usr/share/multiflexi/api/index.php
 	sed -i "s/\/MultiFlexi\/src//"                                                                          debian/multiflexi-api/usr/share/multiflexi/api/index.php
