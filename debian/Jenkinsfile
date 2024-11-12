@@ -46,7 +46,7 @@ distributions.each {
             stage('Build ' + distribution) {
                 buildImage.inside {
                     sh 'dch -b -v ' + ver  + ' "' + env.BUILD_TAG  + '"'
-		    sh 'sudo mkdir /etc/apt/keyrings/'
+		    sh 'sudo mkdir -p /etc/apt/keyrings/'
                     sh 'sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc'
                     sh 'sudo chmod a+r /etc/apt/keyrings/docker.asc'
                     sh 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null'
