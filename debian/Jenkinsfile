@@ -1,6 +1,8 @@
 #!groovy
 
-String[] distributions = ['debian:bullseye', 'debian:bookworm', 'ubuntu:focal', 'ubuntu:jammy', 'ubuntu:noble']
+#Unsupported by Docker: Trixie Focal
+
+String[] distributions = ['debian:bullseye', 'debian:bookworm', 'ubuntu:jammy', 'ubuntu:noble']
 
 String vendor = 'vitexsoftware'
 String distribution = ''
