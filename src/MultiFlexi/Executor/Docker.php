@@ -76,7 +76,7 @@ class Docker extends Native implements \MultiFlexi\executor
         return empty($app->getDataValue('ociimage')) === false; // Container Image must be present
     }
 
-    public static function logo()
+    public static function logo(): string
     {
         return 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz'
                 .'0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gVXBsb2FkZWQgdG86IFNWRyBSZXBvL'
