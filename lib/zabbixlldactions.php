@@ -58,8 +58,8 @@ foreach ($enabled as $runTemplateData) {
         '{#COMPANY_NAME}' => $runTemplateData['company_name'],
         '{#APP_ID}' => $runTemplateData['id'],
         '{#APP_NAME}' => $runTemplateData['app_name'],
-        '{#ZABBIX_SUCCESS_ACTIONS}' => $succesActions,
-        '{#ZABBIX_FAIL_ACTIONS}' => $failActions,
+        '{#SUCCESS_ACTIONS}' => $succesActions,
+        '{#FAIL_ACTIONS}' => $failActions,
         '{#ZABBIX_KEY_SUCCESS}' => $succesActions['Zabbix'] ? $configer->listingQuery()->select('value', true)->where('module', 'Zabbix')->where('keyname', 'key')->where('runtemplate_id', $runTemplateData['id'])->where('mode', 'success')->fetchColumn() : '',
         '{#ZABBIX_KEY_FAIL}' => $failActions['Zabbix'] ? $configer->listingQuery()->select('value', true)->where('module', 'Zabbix')->where('keyname', 'key')->where('runtemplate_id', $runTemplateData['id'])->where('mode', 'fail')->fetchColumn() : '',
     ];
