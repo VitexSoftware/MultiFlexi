@@ -37,7 +37,7 @@ Description: mariadb support for multiabraflexi setup
 
 Package: multiflexi-docker
 Multi-Arch: foreign
-Depends: ${misc:Depends},multiflexi, docker.io
+Depends: ${misc:Depends},multiflexi, docker-ce-cli
 Architecture: all
 Description: Run MultiFlexi tasks in container
  Run MultiFlexi tasks in Docker container
