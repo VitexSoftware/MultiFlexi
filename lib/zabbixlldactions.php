@@ -18,7 +18,7 @@ namespace MultiFlexi;
 use Ease\Anonym;
 use Ease\Shared;
 
-define('APP_NAME','MultiFlexi LLD Actions');
+\define('APP_NAME', 'MultiFlexi LLD Actions');
 
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
@@ -37,16 +37,14 @@ $lldData = [];
 $runTemplater = new \MultiFlexi\RunTemplate();
 $runTemplater->logBanner();
 
-$enabled = $runTemplater->listingQuery()->disableSmartJoin()->where("success LIKE '%\"Zabbix\";b:1;%'")->whereOr("fail LIKE '%\"Zabbix\";b:1;%'") 
-        ->select(['runtemplate.id AS runtemplate_id','runtemplate.name AS runtemplate_name'])
-        ->leftJoin('company ON company.id = runtemplate.company_id')
-        ->select(['company.id AS company_id','company.name AS company_name'])
-        ->leftJoin('apps ON apps.id = runtemplate.app_id')
-        ->select(['apps.id AS app_id','apps.name AS app_name'])
-        ;
+$enabled = $runTemplater->listingQuery()->disableSmartJoin()->where("success LIKE '%\"Zabbix\";b:1;%'")->whereOr("fail LIKE '%\"Zabbix\";b:1;%'")
+    ->select(['runtemplate.id AS runtemplate_id', 'runtemplate.name AS runtemplate_name'])
+    ->leftJoin('company ON company.id = runtemplate.company_id')
+    ->select(['company.id AS company_id', 'company.name AS company_name'])
+    ->leftJoin('apps ON apps.id = runtemplate.app_id')
+    ->select(['apps.id AS app_id', 'apps.name AS app_name']);
 
 $configer = new ActionConfig();
-
 
 foreach ($enabled as $runTemplateData) {
     $succesActions = unserialize($runTemplateData['success']);

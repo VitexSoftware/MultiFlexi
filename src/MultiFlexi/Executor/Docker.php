@@ -112,18 +112,18 @@ class Docker extends Native implements \MultiFlexi\executor
                 .'YzLTM5IgogICAgIGlkPSJwYXRoNTciIC8+Cjwvc3ZnPgo=';
     }
 
-//    public function getErrorOutput(): string
-//    {
-//        return parent::getErrorOutput();
-//    }
-//
-//    public function getExitCode(): int
-//    {
-//        return parent::getExitCode();
-//    }
-//
-//    public function getOutput(): string
-//    {
-//        return parent::getOutput();
-//    }
+    //    public function getErrorOutput(): string
+    //    {
+    //        return parent::getErrorOutput();
+    //    }
+    //
+    //    public function getExitCode(): int
+    //    {
+    //        return parent::getExitCode();
+    //    }
+    //
+    //    public function getOutput(): string
+    //    {
+    //        return parent::getOutput();
+    //    }
 }

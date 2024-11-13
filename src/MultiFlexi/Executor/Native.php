@@ -51,9 +51,6 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
         return $this->job->getCmdParams();
     }
 
-    /**
-     * @return string
-     */
     public function commandline(): string
     {
         return $this->executable().' '.$this->cmdparams();
@@ -74,7 +71,7 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
                 $this->addOutput($buffer, 'success');
             }
         });
-        $this->addStatusMessage($command.': '.$this->process->getExitCodeText(), $this->process->getExitCode() == 0 ? 'success' : 'warning');
+        $this->addStatusMessage($command.': '.$this->process->getExitCodeText(), $this->process->getExitCode() === 0 ? 'success' : 'warning');
 
         return $this->process->getExitCode();
     }

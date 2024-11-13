@@ -22,7 +22,6 @@ namespace MultiFlexi\Action;
  */
 class WebHook extends \MultiFlexi\CommonAction
 {
-
     /**
      * Module Caption.
      *
