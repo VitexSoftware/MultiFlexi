@@ -22,6 +22,7 @@ namespace MultiFlexi\Action;
  */
 class Zabbix extends \MultiFlexi\CommonAction
 {
+
     /**
      * Module Caption.
      *
@@ -52,6 +53,7 @@ class Zabbix extends \MultiFlexi\CommonAction
      *
      * @param Application $app
      */
+    #[\Override]
     public static function usableForApp($app): bool
     {
         return \is_object($app);
@@ -60,15 +62,13 @@ class Zabbix extends \MultiFlexi\CommonAction
     /**
      * Perform Action.
      */
+    #[\Override]
     public function perform(\MultiFlexi\Job $job): void
     {
         $me = \Ease\Shared::cfg('ZABBIX_HOST', gethostname());
         $server = \Ease\Shared::cfg('ZABBIX_SERVER');
 
-        $zabbixUser = \Ease\Shared::cfg('ZABBIX_USER', '');
-        $zabbixPassword = \Ease\Shared::cfg('ZABBIX_USER', '');
-
-        $zabbixKey = 'zabbix_action-'.(empty($this->getDataValue('key')) || ($this->getDataValue('key') === 'job-[{COMPANY_CODE}-{APP_CODE}-{RUNTEMPLATE_ID}-data]')) ? $this->defaultKey() : $this->getDataValue('key');
+        $zabbixKey = 'zabbix_action-[' . (empty($this->getDataValue('key') || ($this->getDataValue('key') == '{COMPANY_CODE}-{APP_CODE}-{RUNTEMPLATE_ID}-data')) ? $this->defaultKey() : $this->getDataValue('key')) . ']';
         $dataForZabbix = null;
         $metricsfile = $this->getDataValue('metricsfile');
 
@@ -87,7 +87,7 @@ class Zabbix extends \MultiFlexi\CommonAction
                 $cmd = sprintf("zabbix_sender -v -z %s -s %s -k %s -o '%s'", $server, $me, $zabbixKey, $dataForZabbix);
                 $this->addStatusMessage($cmd, 'debug');
                 exec($cmd, $output, $return_var);
-                $this->addStatusMessage((string) $return_var.':'.implode("\n", $output), 'debug');
+                $this->addStatusMessage((string) $return_var . ':' . implode("\n", $output), 'debug');
             } else {
                 $packet = new \MultiFlexi\Zabbix\Request\Packet();
                 $packet->addMetric((new \MultiFlexi\Zabbix\Request\Metric($zabbixKey, $dataForZabbix))->withHostname($me));
@@ -97,6 +97,7 @@ class Zabbix extends \MultiFlexi\CommonAction
                     $zabbixSender->send($packet);
                     $this->addStatusMessage(sprintf(_('Job metric %s sent to %s as %s: %s'), $zabbixKey, $server, $me, json_encode($packet)), 'debug');
                 } catch (\Exception $exc) {
+                    
                 }
             }
         } else {
@@ -106,7 +107,7 @@ class Zabbix extends \MultiFlexi\CommonAction
 
     public function defaultKey(): string
     {
-        return 'job-['.$this->runtemplate->getCompany()->getDataValue('code').'-'.$this->runtemplate->getApplication()->getDataValue('code').'-'.$this->runtemplate->getMyKey().'-data]';
+        return $this->runtemplate->getCompany()->getDataValue('code') . '-' . $this->runtemplate->getApplication()->getDataValue('code') . '-' . $this->runtemplate->getMyKey() . '-data';
     }
 
     /**
@@ -114,6 +115,7 @@ class Zabbix extends \MultiFlexi\CommonAction
      *
      * @return \Ease\Embedable
      */
+    #[\Override]
     public static function inputs(string $prefix)
     {
         $keyPrefix = new \Ease\Html\DivTag('zabbix_action-', ['class' => 'input-group-text']);
@@ -123,25 +125,26 @@ class Zabbix extends \MultiFlexi\CommonAction
         $input = new \Ease\Html\DivTag($prepend, ['class' => 'input-group mb-2']);
 
         $input->addItem(
-            new \Ease\Html\InputTextTag($prefix.'[Zabbix][key]', null, ['class' => 'form-control']),
+                new \Ease\Html\InputTextTag($prefix . '[Zabbix][key]', null, ['class' => 'form-control']),
         );
 
         return [
-            new \Ease\TWB4\FormGroup(_('Zabbix key'), $input, 'job-[{COMPANY_CODE}-{APP_CODE}-{RUNTEMPLATE_ID}-data]', _('Zabbix Item key')),
-            new \Ease\TWB4\FormGroup(_('Metrics file'), new \Ease\Html\InputTextTag($prefix.'[Zabbix][metricsfile]'), '/tmp/metrics.json', _('File with metrics. Leave empty to send stdout')),
+            new \Ease\TWB4\FormGroup(_('Zabbix key'), $input, '{COMPANY_CODE}-{APP_CODE}-{RUNTEMPLATE_ID}-data', _('Zabbix Item key')),
+            new \Ease\TWB4\FormGroup(_('Metrics file'), new \Ease\Html\InputTextTag($prefix . '[Zabbix][metricsfile]'), '/tmp/metrics.json', _('File with metrics. Leave empty to send stdout')),
         ];
     }
 
     /**
      * @return \Ease\Embedable
      */
+    #[\Override]
     public static function configForm()
     {
         return
                 [
                     new \Ease\TWB4\FormGroup(_('Zabbix Server'), new \Ease\Html\InputTextTag('Zabbix[server]'), \Ease\Shared::cfg('ZABBIX_SERVER', 'zabbix.yourcompany.com')),
                     new \Ease\TWB4\FormGroup(_('Hostname'), new \Ease\Html\InputTextTag('Zabbix[hostname]'), \Ease\Shared::cfg('ZABBIX_HOST', 'multiflexi.yourcompany.com')),
-                ];
+        ];
     }
 
     #[\Override]
