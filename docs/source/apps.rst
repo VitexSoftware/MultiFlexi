@@ -1,57 +1,11 @@
 Applications
 ============
 
+
+
 .. toctree::
    :maxdepth: 2
 
-   abraflexi-checker
-   daily-digest
-   weekly-digest
-   monthly-digest
-   email-sender
-   kimai2abraflexi
-   email-importer
-   show-unsent
-   abraflexi-send
-   redmine2abraflexi
-   yearly-digest
-   multiflexi-probe
-   alltime-digest
-   abraflexi-bulk-mailer
-   subreg-to-abraflexi
-   realpad-to-mailkit
-   abraflexi-revolut-statements-import
-   abraflexi-transaction-report
-   abraflexi-bank-statements-puller
-   abraflexi-issued-invoices-matcher
-   recieved-invoices-matcher
-   contract-to-invoices
-   clear-reminder-labels
-   debts-overview
-   notify-customers
-   sms-input
-   pohoda-checker
-   abraflexi-benchmark
-   abraflexi-copy
-   price-fixer
-   subreg-credit-check
-   subreg-for-abraflexi
-   raiffeisenbank-transactions-importer-for-abraflexi
-   raiffeisenbank-statement-importer-for-abraflexi
-   discomp2abraflexi
-   pohoda-transaction-report
-   reminder
-   rb-balance
-   raiffeisenbank-statements-for-pohodasql
-   rb-statement-downloader
-   raiffeisenbank-statements-for-pohoda
-   raiffeisenbank-statements-for-pohodasql-sharepoint
-   fio-statement-downloader
-   rb-statement-mailer
-   fio-statement-mailer
-   fio-transaction-report
-   rb-transaction-report
-   import-raiffeisen-bank-statements-to-abraflexi-events
 .. contents::
 
 
@@ -59,11 +13,6 @@ MultiFlexi Application Requirements
 ===================================
 
 MultiFlexi can execute applications written in any programming language. The application must read its configuration from environment variables. The output can be directed to stdout/stderr and stored. Additionally, it is possible to generate a JSON file and pass it to Zabbix.
-
-Applications Overview
-=====================
-
-MultiFlexi offers a variety of applications to enhance your accounting and business processes. Below is a brief overview of the available applications:
 
 Application definition
 ----------------------
@@ -179,6 +128,10 @@ Here is an example of a JSON file defining an application:
 
 
 
+Applications Overview
+=====================
+
+MultiFlexi offers a variety of applications to enhance your accounting and business processes. Below is a brief overview of the available applications:
 
 .. list-table:: Available Applications
     :header-rows: 1

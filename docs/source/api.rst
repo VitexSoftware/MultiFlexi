@@ -43,4 +43,3 @@ https://github.com/VitexSoftware/MultiFlexi/blob/main/OpenAPI/openapi.yaml
 .. autosummary::
    :toctree: generated
 
-   multiflexi
