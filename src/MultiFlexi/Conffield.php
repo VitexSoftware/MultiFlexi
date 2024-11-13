@@ -94,7 +94,7 @@ class Conffield extends \Ease\SQL\Engine
     public static function applyMarcros(string $template, array $fields): string
     {
         foreach ($fields as $envKey => $envInfo) {
-            $hydrated = str_replace('{'.$envKey.'}', (string) $data[$fields]['value'], $template);
+            $hydrated = array_key_exists('value', $envInfo) ? str_replace('{'.$envKey.'}', (string) $envInfo['value'], $template) : $template;
         }
 
         return $hydrated;
