@@ -121,13 +121,14 @@ $app->add(new \Tuupola\Middleware\HttpBasicAuthentication([
     'ignore' => [$path.'/', $path.'/ping/'],
     //            "authenticator" => new \MultiFlexi\Auth\BasicAuthenticator()
     'authenticator' => static function ($arguments) {
-
         $prober = \Ease\Shared::user(null, '\MultiFlexi\User');
-        if($prober->isLogged()){
+
+        if ($prober->isLogged()) {
             return true;
         }
-        
-        $prober->loadFromSQL(['login'=>$arguments['user']]);
+
+        $prober->loadFromSQL(['login' => $arguments['user']]);
+
         return $prober->isAccountEnabled() && $prober->passwordValidation($arguments['password'], $prober->getDataValue($prober->passwordColumn));
     },
 ]));

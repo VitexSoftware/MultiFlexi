@@ -30,10 +30,7 @@ abstract class CommonExecutor extends \Ease\Sand
     public $environment = [];
     public array $outputCache = [];
 
-    /**
-     * @param Job $job
-     */
-    public function __construct($job)
+    public function __construct(Job $job)
     {
         $this->job = $job;
         $this->setObjectName();

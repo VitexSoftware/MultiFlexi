@@ -336,13 +336,12 @@ EOD;
     /**
      * Schedule job execution.
      *
-     * @param \DateTime $when
-     *
      * @return int schedule ID
      */
-    public function scheduleJobRun(\DateTime $when):int
+    public function scheduleJobRun(\DateTime $when): int
     {
         $scheduler = new Scheduler();
+
         return $scheduler->addJob($this, $when);
     }
 
@@ -525,6 +524,20 @@ EOD;
         foreach ($injectors as $injector) {
             $injectorClass = '\\MultiFlexi\\Env\\'.$injector;
             $jobEnv = array_merge($jobEnv, (new $injectorClass($this))->getEnvironment());
+        }
+
+        foreach (array_keys($jobEnv) as $fieldName) {
+            if (\array_key_exists('value', $jobEnv[$fieldName]) && preg_match('/({[A-Z_]*})/', (string) $jobEnv[$fieldName]['value'])) {
+                $jobEnv[$fieldName]['value'] = Conffield::applyMarcros($jobEnv[$fieldName]['value'], $jobEnv);
+            }
+
+            if (\array_key_exists('defval', $jobEnv[$fieldName]) && preg_match('/({[A-Z_]*})/', (string) $jobEnv[$fieldName]['defval'])) {
+                $jobEnv[$fieldName]['defval'] = Conffield::applyMarcros($jobEnv[$fieldName]['defval'], $jobEnv);
+            }
+        }
+
+        if (\array_key_exists('RESULT_FILE', $jobEnv)) {
+            $jobEnv['RESULT_FILE']['value'] = sys_get_temp_dir().\DIRECTORY_SEPARATOR.basename($jobEnv['RESULT_FILE']['value']);
         }
 
         return $jobEnv;

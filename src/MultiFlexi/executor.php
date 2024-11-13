@@ -48,5 +48,5 @@ interface executor
     /**
      * Logo for Launcher.
      */
-    public static function logo(): string ;
+    public static function logo(): string;
 }

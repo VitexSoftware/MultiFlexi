@@ -63,21 +63,22 @@ if (null === $runTemplate->getMyKey()) {
 
         $currentTime = new \DateTime();
         $beginTime = new \DateTime($when);
-        
+
         $a = $currentTime->format('Y-m-d H:i:s');
         $b = $beginTime->format('Y-m-d H:i:s');
-        
+
         $waitTime = $beginTime->getTimestamp() - $currentTime->getTimestamp();
-        
+
         $waitRow = new \Ease\TWB4\Row();
         $waitRow->addTagClass('justify-content-md-center');
         $waitRow->addColumn(4, $when);
-        $waitRow->addColumn(4, new \Ease\Html\Widgets\LiveAge($beginTime->getTimestamp()) , 'sm');
+        $waitRow->addColumn(4, new \Ease\Html\Widgets\LiveAge($beginTime->getTimestamp()), 'sm');
         $waitRow->addColumn(4, $waitTime);
-        
+
         if ($waitTime > 0) {
             $oPage->addJavaScript(
-            '
+                <<<'EOD'
+
 function wait(seconds) {
     return new Promise(resolve => setTimeout(resolve, seconds * 1000));
 }
@@ -91,8 +92,10 @@ async function pollApi(apiEndpoint, pollingInterval, maxPollingDuration) {
             const data = await response.json();
 
             if (data.job.exitcode != -1) {
-                console.log(\'Success response received:\', data);
-                window.location.href = "job.php?id='.$jobber->getMyKey().'";
+                console.log('Success response received:', data);
+                window.location.href = "job.php?id=
+EOD.$jobber->getMyKey().<<<'EOD'
+";
                 return; // // Stop polling if success response
             } else {
                 wait(5);
@@ -103,16 +106,16 @@ async function pollApi(apiEndpoint, pollingInterval, maxPollingDuration) {
             if (elapsedTime < maxPollingDuration) {
                 setTimeout(makeRequest, pollingInterval); // Schedule next request
             } else {
-                console.log(\'Maximum polling duration reached. Stopping polling.\');
+                console.log('Maximum polling duration reached. Stopping polling.');
             }
         } catch (error) {
-            console.error(\'Error making API request:\', error);
+            console.error('Error making API request:', error);
             const elapsedTime = Date.now() - startTime;
 
             if (elapsedTime < maxPollingDuration) {
                 setTimeout(makeRequest, pollingInterval); // Schedule next request
             } else {
-                console.log(\'Maximum polling duration reached. Stopping polling.\');
+                console.log('Maximum polling duration reached. Stopping polling.');
             }
         }
     };
@@ -121,19 +124,28 @@ async function pollApi(apiEndpoint, pollingInterval, maxPollingDuration) {
 }
 
 async function patience() {
-    console.log(\'Waiting for '.$when.'...\');
-    await wait('.$waitTime.');
-    console.log(\''.$waitTime.' seconds have passed\');
-    pollApi("api/VitexSoftware/MultiFlexi/1.0.0/job/'.$jobber->getMyKey().'.json", 5, 3600000);        
+    console.log('Waiting for
+EOD.$when.<<<'EOD'
+...');
+    await wait(
+EOD.$waitTime.<<<'EOD'
+);
+    console.log('
+EOD.$waitTime.<<<'EOD'
+ seconds have passed');
+    pollApi("api/VitexSoftware/MultiFlexi/1.0.0/job/
+EOD.$jobber->getMyKey().<<<'EOD'
+.json", 5, 3600000);
 }
 
-patience();                
+patience();
 
-');
-            
+
+EOD
+            );
         } else {
             $oPage->addJavaScript(
-            'window.location.href = "job.php?id='.$jobber->getMyKey().'";'
+                'window.location.href = "job.php?id='.$jobber->getMyKey().'";',
             );
         }
 
@@ -162,5 +174,5 @@ patience();
     }
 }
 
-$oPage->addItem(new PageBottom( $jobber->getMyKey() ? 'job/'.$jobber->getMyKey() : ''));
+$oPage->addItem(new PageBottom($jobber->getMyKey() ? 'job/'.$jobber->getMyKey() : ''));
 $oPage->draw();

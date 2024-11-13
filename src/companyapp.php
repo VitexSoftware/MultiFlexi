@@ -71,9 +71,10 @@ if ($runtemplatesRaw->count()) {
         $runtemplatesDiv->addItem($runtemplateRow);
         $runtemplates[$runtemplateData['id']] = $runtemplateData['name'];
     }
-} else {
-    $runtemplatesDiv->addItem(new LinkButton('runtemplate.php?new=1&app_id='.$application->getMyKey().'&company_id='.$companer->getMyKey(), '⚗️&nbsp;➕'._('new'), 'success'));
 }
+
+$runtemplatesDiv->addItem(new \Ease\Html\PTag(new DivTag(new \Ease\Html\HrTag())));
+$runtemplatesDiv->addItem(new LinkButton('runtemplate.php?new=1&app_id='.$application->getMyKey().'&company_id='.$companer->getMyKey(), '⚗️&nbsp;➕'._('new'), 'success'));
 
 $jobs = $jobber->listingQuery()->select(['job.id', 'begin', 'exitcode', 'launched_by', 'login', 'runtemplate_id'], true)->leftJoin('user ON user.id = job.launched_by')->where('company_id', $companer->getMyKey())->where('app_id', $application->getMyKey())->limit(10)->orderBy('job.id DESC')->fetchAll();
 $jobList = new Table();
