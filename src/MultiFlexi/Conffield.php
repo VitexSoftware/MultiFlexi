@@ -83,21 +83,9 @@ class Conffield extends \Ease\SQL\Engine
 
         $this->setDataValue('type', $envProperties['type']);
         $this->setDataValue('description', $envProperties['description']);
-        $this->setDataValue('defval', self::applyMarcros($envProperties['defval'], $envProperties));
+        $this->setDataValue('defval', $envProperties['defval']);
 
         return $this->dbsync();
-    }
-
-    /**
-     * Populate template by values from environment.
-     */
-    public static function applyMarcros(string $template, array $fields): string
-    {
-        foreach ($fields as $envKey => $envInfo) {
-            $hydrated = array_key_exists('value', $envInfo) ? str_replace('{'.$envKey.'}', (string) $envInfo['value'], $template) : $template;
-        }
-
-        return $hydrated;
     }
 
     public static function getAppConfigs($appId)
