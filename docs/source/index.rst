@@ -40,6 +40,11 @@ Contents
 
    install
    firstrun
-   generated/multiflexi
    usage
    api
+   application
+   company
+   job
+   runtemplate
+   apps
+

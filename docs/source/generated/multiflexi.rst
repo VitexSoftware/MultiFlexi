@@ -1,6 +1,0 @@
-﻿multiflexi
-==========
-
-.. automodule:: multiflexi
-
-   
