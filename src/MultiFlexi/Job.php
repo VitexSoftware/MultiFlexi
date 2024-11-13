@@ -528,11 +528,11 @@ EOD;
 
         foreach (array_keys($jobEnv) as $fieldName) {
             if (\array_key_exists('value', $jobEnv[$fieldName]) && preg_match('/({[A-Z_]*})/', (string) $jobEnv[$fieldName]['value'])) {
-                $jobEnv[$fieldName]['value'] = Conffield::applyMarcros($jobEnv[$fieldName]['value'], $jobEnv);
+                $jobEnv[$fieldName]['value'] = self::applyMarcros($jobEnv[$fieldName]['value'], $jobEnv);
             }
 
             if (\array_key_exists('defval', $jobEnv[$fieldName]) && preg_match('/({[A-Z_]*})/', (string) $jobEnv[$fieldName]['defval'])) {
-                $jobEnv[$fieldName]['defval'] = Conffield::applyMarcros($jobEnv[$fieldName]['defval'], $jobEnv);
+                $jobEnv[$fieldName]['defval'] = self::applyMarcros($jobEnv[$fieldName]['defval'], $jobEnv);
             }
         }
 
@@ -544,11 +544,21 @@ EOD;
     }
 
     /**
-     * Generate Environment for current Job.
-     *
-     * @return array
+     * Populate template by values from environment.
      */
-    public function compileEnv()
+    public static function applyMarcros(string $template, array $fields): string
+    {
+        foreach ($fields as $envKey => $envInfo) {
+            $hydrated = \array_key_exists('value', $envInfo) ? str_replace('{'.$envKey.'}', (string) $envInfo['value'], $template) : $template;
+        }
+
+        return $hydrated;
+    }
+
+    /**
+     * Generate Environment for current Job.
+     */
+    public function compileEnv(): array
     {
         return Environmentor::flatEnv($this->getFullEnvironment());
     }
@@ -593,10 +603,8 @@ EOD;
 
     /**
      * export .env file content.
-     *
-     * @return string
      */
-    public function envFile()
+    public function envFile(): string
     {
         $launcher[] = '# '.\Ease\Shared::appName().' v'.\Ease\Shared::AppVersion().' job #'.$this->getMyKey().' environment. Generated '.(new \DateTime())->format('Y-m-d H:i:s').' for company: '.$this->company->getDataValue('name');
         $launcher[] = '';
