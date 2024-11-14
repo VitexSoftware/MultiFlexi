@@ -346,7 +346,7 @@ class RunTemplate extends \MultiFlexi\Engine
             $actions[$action]['success'] = $enabled;
         }
 
-        foreach ($s as $action => $enabled) {
+        foreach ($f as $action => $enabled) {
             $actions[$action]['fail'] = $enabled;
         }
 
@@ -401,5 +401,21 @@ class RunTemplate extends \MultiFlexi\Engine
         }
 
         return $result;
+    }
+
+    public static function actionIcons(?array $actions, array $properties = []): \Ease\Html\SpanTag
+    {
+        $icons = new \Ease\Html\SpanTag(null, $properties);
+
+        if (\is_array($actions)) {
+            foreach ($actions as $class => $status) {
+                if ($status === true) {
+                    $actionClass = '\\MultiFlexi\\Action\\'.$class;
+                    $icons->addItem(new \Ease\Html\ImgTag($actionClass::logo(), $actionClass::name(), ['title' => $actionClass::name()."\n".$actionClass::description(), 'style' => 'height: 15px;']));
+                }
+            }
+        }
+
+        return $icons;
     }
 }
