@@ -45,7 +45,8 @@ class Servers extends DBEngine
      *
      * @return int data taken count
      */
-    public function takeData($data)
+    #[\Override]
+    public function takeData(array $data): int
     {
         unset($data['class']);
 

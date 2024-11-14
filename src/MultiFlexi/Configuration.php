@@ -22,6 +22,7 @@ namespace MultiFlexi;
  */
 class Configuration extends \Ease\SQL\Engine
 {
+
     public function __construct($identifier = null, $options = [])
     {
         $this->myTable = 'configuration';
@@ -36,6 +37,7 @@ class Configuration extends \Ease\SQL\Engine
      *
      * @return null|int Record ID or null on failure
      */
+    #[\Override]
     public function saveToSQL($data = null, $searchForID = false)
     {
         if (null === $data) {
@@ -61,7 +63,7 @@ class Configuration extends \Ease\SQL\Engine
      *
      * @return int
      */
-    public function takeData($data)
+    public function takeData(array $data): int
     {
         $cfgs = new Conffield();
 

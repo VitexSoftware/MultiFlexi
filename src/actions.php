@@ -65,7 +65,7 @@ $jobtempform->addItem(new \Ease\Html\InputHiddenTag('interval', $periodcalTaskIn
 $jobtempform->addItem($appPanel);
 $jobtempform->addItem(new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'primary btn-lg btn-block'));
 
-$oPage->container->addItem(new CompanyPanel(new Company($periodcalTaskInfo['company_id']), $jobtempform));
+$oPage->container->addItem(new CompanyPanel(new \MultiFlexi\Company($periodcalTaskInfo['company_id']), $jobtempform));
 
 $oPage->addItem(new PageBottom());
 

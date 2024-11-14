@@ -566,7 +566,8 @@ EOD;
     /**
      * {@inheritDoc}
      */
-    public function takeData($data): void
+    #[\Override]
+    public function takeData(array $data): int
     {
         parent::takeData($data);
 
@@ -599,6 +600,7 @@ EOD;
                 $this->executor = new \MultiFlexi\Executor\Native($this);
             }
         }
+        return count($data);
     }
 
     /**
