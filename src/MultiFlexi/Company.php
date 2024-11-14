@@ -59,7 +59,8 @@ class Company extends \MultiFlexi\Engine
      *
      * @return int
      */
-    public function takeData($data)
+    #[\Override]
+    public function takeData(array $data): int
     {
         if (isset($data['rw'])) {
             $data['rw'] = true;

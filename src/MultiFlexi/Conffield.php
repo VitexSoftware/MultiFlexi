@@ -28,7 +28,8 @@ class Conffield extends \Ease\SQL\Engine
         parent::__construct($identifier, $options);
     }
 
-    public function takeData($data)
+    #[\Override]
+    public function takeData(array $data): int
     {
         $checked = false;
         unset($data['add']);

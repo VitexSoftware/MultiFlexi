@@ -56,7 +56,8 @@ class Application extends DBEngine
      *
      * @return int
      */
-    public function takeData($data)
+    #[\Override]
+    public function takeData(array $data): int
     {
         $data['enabled'] = \array_key_exists('enabled', $data) ? (($data['enabled'] === 'on') || ($data['enabled'] === 1)) : 0;
 

@@ -19,7 +19,7 @@ namespace MultiFlexi\AbraFlexi;
  * MultiFlexi - AbraFlexiCompany Management Class.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2023 Vitex Software
+ * @copyright  2018-2024 Vitex Software
  */
 class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
 {
@@ -232,7 +232,7 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
      *
      * @return int
      */
-    public function takeData($data)
+    public function takeData(array $data): int
     {
         if (isset($data['rw'])) {
             $data['rw'] = true;
