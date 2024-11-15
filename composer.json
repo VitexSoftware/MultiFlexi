@@ -5,6 +5,7 @@
     "require": {
         "ext-yaml": "*",
         "ext-simplexml": "*",
+        "vitexsoftware/ease-twbootstrap4": "^1.9",
         "vitexsoftware/ease-bootstrap4-widgets-abraflexi": "^1.1",
         "vitexsoftware/ease-fluentpdo": "^1.1",
         "vitexsoftware/ease-twbootstrap4-widgets": "^1.3",
