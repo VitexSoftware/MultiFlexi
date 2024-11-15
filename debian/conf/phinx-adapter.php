@@ -17,7 +17,7 @@ include_once '/usr/share/php/EaseCore/Logger/Message.php';
 include_once '/usr/share/php/EaseCore/Logger/Loggingable.php';
 include_once '/usr/share/php/EaseCore/Logger/Loggingable.php';
 include_once '/usr/share/php/EaseCore/Logger/ToMemory.php';
-include_once '/usr/share/php/EaseCore/RecordKey.php';
+include_once '/usr/share/php/EaseCore/recordkey.php';
 include_once '/usr/share/php/EaseCore/Brick.php';
 include_once '/usr/share/php/EaseCore/Person.php';
 include_once '/usr/share/php/EaseCore/Anonym.php';
