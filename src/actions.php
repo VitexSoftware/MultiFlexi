@@ -16,7 +16,6 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 use Ease\TWB4\WebPage;
-use MultiFlexi\AbraFlexi\Company;
 use MultiFlexi\Application;
 use MultiFlexi\RunTemplate;
 

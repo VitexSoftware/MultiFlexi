@@ -54,10 +54,6 @@ class Company extends \MultiFlexi\Engine
 
     /**
      * Prepare data for save.
-     *
-     * @param array $data
-     *
-     * @return int
      */
     #[\Override]
     public function takeData(array $data): int

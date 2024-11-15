@@ -22,7 +22,6 @@ namespace MultiFlexi;
  */
 class Configuration extends \Ease\SQL\Engine
 {
-
     public function __construct($identifier = null, $options = [])
     {
         $this->myTable = 'configuration';
@@ -60,8 +59,6 @@ class Configuration extends \Ease\SQL\Engine
      * Převezme data do aktuálního pole dat.
      *
      * @param array $data asociativní pole dat
-     *
-     * @return int
      */
     public function takeData(array $data): int
     {

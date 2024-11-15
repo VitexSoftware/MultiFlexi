@@ -51,10 +51,6 @@ class Application extends DBEngine
 
     /**
      * Check data before accepting.
-     *
-     * @param array $data
-     *
-     * @return int
      */
     #[\Override]
     public function takeData(array $data): int

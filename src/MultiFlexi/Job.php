@@ -600,7 +600,8 @@ EOD;
                 $this->executor = new \MultiFlexi\Executor\Native($this);
             }
         }
-        return count($data);
+
+        return \count($data);
     }
 
     /**
