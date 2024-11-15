@@ -227,10 +227,6 @@ class Company extends \AbraFlexi\Company implements \MultiFlexi\platformCompany
 
     /**
      * Prepare data for save.
-     *
-     * @param array $data
-     *
-     * @return int
      */
     public function takeData(array $data): int
     {

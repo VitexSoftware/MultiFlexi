@@ -41,8 +41,6 @@ class Servers extends DBEngine
     /**
      * Filter Input data.
      *
-     * @param array $data
-     *
      * @return int data taken count
      */
     #[\Override]

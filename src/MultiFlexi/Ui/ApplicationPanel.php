@@ -59,7 +59,7 @@ class ApplicationPanel extends Panel
 
             $this->headRow->addColumn(6, $usedByCompany);
         } else {
-            if($application->getMyKey()){
+            if ($application->getMyKey()) {
                 $this->headRow->addColumn(6, new LinkButton('?id='.$application->getMyKey().'&action=delete', '🪦&nbsp;'._('Remove'), 'danger'));
             }
         }
