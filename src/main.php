@@ -25,6 +25,6 @@ $oPage->container->addItem(new AllJobsLastMonthChart(new \MultiFlexi\Job(), ['id
 
 $oPage->container->addItem(new \Ease\TWB4\Panel(_('Last 20 Jobs'), 'default', new JobHistoryTable(), new DbStatus()));
 
-$oPage->addItem(new PageBottom());
+$oPage->addItem(new PageBottom('jobs/'));
 
 $oPage->draw();
