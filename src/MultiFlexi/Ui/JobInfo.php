@@ -36,12 +36,12 @@ class JobInfo extends \Ease\Html\DivTag
         $jobInfoRow->addColumn(2, [_('Begin').'<br>', [
             $job->getDataValue('begin'),
             '&nbsp;',
-            $job->getDataValue('begin') ? new \Ease\Html\SmallTag(new \Ease\Html\Widgets\LiveAge((new \DateTime($job->getDataValue('begin')))->getTimestamp())) : _('Not Yet Started')],
+            $job->getDataValue('begin') ? new \Ease\Html\SmallTag(new \Ease\Html\Widgets\LiveAge(new \DateTime($job->getDataValue('begin')))) : _('Not Yet Started')],
         ]);
         $jobInfoRow->addColumn(2, [_('End').'<br>', [
             $job->getDataValue('end'),
             '&nbsp;',
-            $job->getDataValue('end') ? new \Ease\Html\SmallTag(new \Ease\Html\Widgets\LiveAge((new \DateTime($job->getDataValue('end')))->getTimestamp())) : _('Not Yet Ended')],
+            $job->getDataValue('end') ? new \Ease\Html\SmallTag(new \Ease\Html\Widgets\LiveAge(new \DateTime($job->getDataValue('end')))) : _('Not Yet Ended')],
         ]);
 
         //        $jobInfoRow->addColumn(1, [_('Commandline').'<br>', $job->getDataValue('command')]);

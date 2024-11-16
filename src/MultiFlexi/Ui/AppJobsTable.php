@@ -39,7 +39,7 @@ class AppJobsTable extends \Ease\TWB4\Table
             if (empty($job['begin'])) {
                 $job['begin'] = _('Not launched yet');
             } else {
-                $job['begin'] = [$job['begin'], ' ', new \Ease\Html\SmallTag(new \Ease\Html\Widgets\LiveAge((new \DateTime($job['begin']))->getTimestamp()))];
+                $job['begin'] = [$job['begin'], ' ', new \Ease\Html\SmallTag(new \Ease\Html\Widgets\LiveAge(new \DateTime($job['begin'])))];
             }
 
             $job['exitcode'] = new \MultiFlexi\Ui\ExitCode($job['exitcode']);

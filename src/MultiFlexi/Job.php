@@ -78,6 +78,7 @@ class Job extends Engine
     public function __construct($identifier = null, $options = [])
     {
         $this->myTable = 'job';
+        $this->nameColumn = '';
         $this->runTemplate = new RunTemplate();
         parent::__construct($identifier, $options);
         $this->setObjectName();
