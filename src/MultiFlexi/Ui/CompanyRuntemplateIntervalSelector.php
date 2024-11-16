@@ -32,7 +32,7 @@ class CompanyRuntemplateIntervalSelector extends CompanyAppSelector
      */
     public function __construct($company, $identifier = null, $enabled = [], $optionsPage = 'apps.php')
     {
-        $this->intervalCode = \MultiFlexi\Job::intervalToCode($identifier);
+        $this->intervalCode = \MultiFlexi\RunTemplate::intervalToCode($identifier);
         parent::__construct($company, $identifier, $enabled, $optionsPage);
     }
 

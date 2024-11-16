@@ -25,6 +25,10 @@ fi
 echo "$envirnonment_variables"
 
 echoerr "StdErr Output example"
+
+echo "Mount Info"
+cat /proc/self/mountinfo 
+
 if [[ -n "$FORCE_EXITCODE" && "$FORCE_EXITCODE" =~ ^[0-9]+$ ]]; then
     exit "$FORCE_EXITCODE"
 fi

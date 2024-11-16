@@ -493,6 +493,7 @@ class Application extends DBEngine
             ['name' => 'topics', 'type' => 'text', 'label' => _('Topics')],
             ['name' => 'executable', 'type' => 'text', 'label' => _('Executable')],
             ['name' => 'uuid', 'type' => 'text', 'label' => _('UUID')],
+            ['name' => 'ociimage', 'type' => 'text', 'label' => _('OCI Image')],
         ]);
     }
 

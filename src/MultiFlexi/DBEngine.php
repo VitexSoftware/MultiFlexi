@@ -1505,7 +1505,11 @@ EOD;
                     $colProps,
                 ) && \array_key_exists($colName.'_id', $dataRowRaw)
             ) {
-                $dataRowRaw[$colName] = '<a href="'.$colProps['detailPage'].'?id='.$dataRowRaw[$colName.'_id'].'" class="alert-link text-light">'.$dataRowRaw[$colName].'</a>';
+                if($colName == 'id'){
+                    $dataRowRaw[$colName] = '<a href="'.$colProps['detailPage'].'?id='.$dataRowRaw[$colName.'_id'].'" class="btn" style="font-size: 20px;">'.$dataRowRaw[$colName].'</a>';
+                } else {
+                    $dataRowRaw[$colName] = '<a href="'.$colProps['detailPage'].'?id='.$dataRowRaw[$colName.'_id'].'" class="alert-link text-light">'.$dataRowRaw[$colName].'</a>';
+                }
             }
         }
 

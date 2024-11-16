@@ -17,10 +17,15 @@ namespace MultiFlexi;
 
 class CompanyJob extends DBEngine implements DatabaseEngine
 {
-    public string $myTable = 'job';
     public $companyId;
     public $appId;
 
+    #[\Override]
+    public function __construct($init = null, $filter = []) {
+        $this->myTable = 'job';
+        parent::__construct($init, $filter);
+    }
+    
     /**
      * columns to be selected from database.
      *
