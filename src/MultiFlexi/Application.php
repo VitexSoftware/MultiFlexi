@@ -512,7 +512,7 @@ class Application extends DBEngine
             $dataRow['topics'] = (string) $topics;
         }
 
-        //        $dataRowRaw['created'] = (new LiveAge((new DateTime($dataRowRaw['created']))->getTimestamp()))->__toString();
+        //        $dataRowRaw['created'] = (new LiveAge((new DateTime($dataRowRaw['created']))))->__toString();
 
         return parent::completeDataRow($dataRow);
     }

@@ -208,7 +208,7 @@ EOD;
             '......... ',
             $dataRowRaw['message'],
         ));
-        //        $dataRowRaw['created'] = (new LiveAge((new DateTime($dataRowRaw['created']))->getTimestamp()))->__toString();
+        //        $dataRowRaw['created'] = (new LiveAge((new DateTime($dataRowRaw['created']))))->__toString();
 
         return parent::completeDataRow($dataRowRaw);
     }

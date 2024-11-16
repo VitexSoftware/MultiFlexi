@@ -72,7 +72,7 @@ if (null === $runTemplate->getMyKey()) {
         $waitRow = new \Ease\TWB4\Row();
         $waitRow->addTagClass('justify-content-md-center');
         $waitRow->addColumn(4, $when);
-        $waitRow->addColumn(4, new \Ease\Html\Widgets\LiveAge($beginTime->getTimestamp()), 'sm');
+        $waitRow->addColumn(4, new \Ease\Html\Widgets\LiveAge($beginTime), 'sm');
         $waitRow->addColumn(4, $waitTime);
 
         if ($waitTime > 0) {
