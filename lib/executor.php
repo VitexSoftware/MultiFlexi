@@ -32,7 +32,7 @@ if (strtolower(\Ease\Shared::cfg('APP_DEBUG', 'false')) === 'true') {
 
 \define('EASE_LOGGER', implode('|', $loggers));
 $interval = $argc === 2 ? $argv[1] : null;
-\define('APP_NAME', 'MultiFlexi executor '.Job::codeToInterval($interval));
+\define('APP_NAME', 'MultiFlexi executor '.RunTemplate::codeToInterval($interval));
 Shared::user(new Anonym());
 
 $jobber = new Job();
@@ -66,11 +66,11 @@ if ($interval) {
                     continue;
                 }
 
-                $jobber->prepareJob($servData['id'], [], Job::codeToInterval($interval));
+                $jobber->prepareJob($servData['id'], [], RunTemplate::codeToInterval($interval));
                 $jobber->scheduleJobRun(new \DateTime($when));
             }
 
-            $jobber->addStatusMessage(sprintf(_('Executor interval %s end'), Job::codeToInterval($interval)), 'debug');
+            $jobber->addStatusMessage(sprintf(_('Executor interval %s end'), RunTemplate::codeToInterval($interval)), 'debug');
         }
     }
 } else {

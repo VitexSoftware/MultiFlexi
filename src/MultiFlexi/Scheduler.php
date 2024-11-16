@@ -22,8 +22,14 @@ namespace MultiFlexi;
  */
 class Scheduler extends Engine
 {
-    public string $myTable = 'schedule';
 
+    #[\Override]
+    public function __construct($identifier = null, $options = []) {
+        $this->myTable = 'schedule';
+        $this->nameColumn = '';
+        parent::__construct($identifier, $options);
+    }
+    
     /**
      * Save Job execution time.
      */

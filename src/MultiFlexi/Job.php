@@ -265,7 +265,7 @@ EOD;
         LogToSQL::singleton()->setApplication($appId);
 
         $this->company = $this->runTemplate->getCompany();
-
+        $this->setDataValue('executor', $executor);
         $this->environment = array_merge($this->getFullEnvironment(), $envOverride);
         $this->loadFromSQL($this->newJob($runTemplateId, $this->environment, $scheduled, $executor));
 
@@ -485,20 +485,6 @@ EOD;
     public static function codeToSeconds($code)
     {
         return \array_key_exists($code, self::$intervalSecond) ? (int) (self::$intervalSecond[$code]) : 0;
-    }
-
-    /**
-     * Get Interval code by Name.
-     *
-     * @deprecated since version 1.15.0 Use the RunTemplate::intervalToCode instead
-     *
-     * @param string $interval
-     *
-     * @return string
-     */
-    public static function intervalToCode($interval)
-    {
-        return \array_key_exists($interval, array_flip(self::$intervalCode)) ? array_flip(self::$intervalCode)[$interval] : 'n/a';
     }
 
     /**

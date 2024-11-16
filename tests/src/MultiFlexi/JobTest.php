@@ -234,18 +234,6 @@ class JobTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers \MultiFlexi\Job::codeToInterval
-     *
-     * @todo   Implement testcodeToInterval().
-     */
-    public function testcodeToInterval(): void
-    {
-        $this->assertEquals('', $this->object->codeToInterval());
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
-    }
-
-    /**
      * @covers \MultiFlexi\Job::compileEnv
      *
      * @todo   Implement testgetJobEnvironment().
