@@ -53,7 +53,7 @@ $cfg = [
     [
         'default_environment' => 'production',
         'production' => [
-            'adapter' => \Ease\Functions::cfg('DB_CONNECTION'),
+            'adapter' => \Ease\Shared::cfg('DB_CONNECTION'),
             'name' => $engine->database,
             'connection' => $engine->getPdo($sqlOptions)
         ],
