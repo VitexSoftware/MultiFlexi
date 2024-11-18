@@ -21,11 +21,12 @@ class CompanyJob extends DBEngine implements DatabaseEngine
     public $appId;
 
     #[\Override]
-    public function __construct($init = null, $filter = []) {
+    public function __construct($init = null, $filter = [])
+    {
         $this->myTable = 'job';
         parent::__construct($init, $filter);
     }
-    
+
     /**
      * columns to be selected from database.
      *

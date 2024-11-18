@@ -1,0 +1,49 @@
+.TH MULTIFLEXI-TRIGGER 1 "October 2023" "1.0.0" "MultiFlexi Manual"
+.SH NAME
+multiflexi-trigger \- Trigger a job in MultiFlexi
+
+.SH SYNOPSIS
+.B multiflexi-trigger
+[\fIoptions\fR]
+
+.SH DESCRIPTION
+.B multiflexi-trigger
+is a command-line tool to trigger a job in the MultiFlexi system.
+
+.SH OPTIONS
+.TP
+.B \-\-runtemplate
+The ID or name of the run template to use.
+.TP
+.B \-\-company
+The company code. This option is required.
+.TP
+.B \-\-environment
+A JSON string representing the environment variables.
+.TP
+.B \-\-schedule
+A date/time string for \fB\DateTime()\fR to schedule the job.
+.TP
+.B \-\-foreground
+Run the job in the foreground instead of scheduling it for background execution.
+.TP
+.B \-\-verbose
+Enable verbose mode for more debug messages.
+
+.SH EXAMPLES
+.TP
+Trigger a job with a specific run template and company code:
+.B multiflexi-trigger --runtemplate template1 --company TEST
+.TP
+Trigger a job with environment variables and a schedule:
+.B multiflexi-trigger --runtemplate template1 --company TEST --environment '{"key":"value"}' --schedule "2023-10-01 12:00:00"
+.TP
+Run a job in the foreground:
+.B multiflexi-trigger --runtemplate template1 --company TEST --foreground
+
+.SH SEE ALSO
+.BR multiflexi (1),
+.BR multiflexi-scheduler (1)
+
+.SH AUTHOR
+MultiFlexi Team <support@multiflexi.com>

@@ -27,13 +27,12 @@ namespace MultiFlexi;
  */
 class ActionConfig extends Engine
 {
-    
     #[\Override]
-    public function __construct($identifier = null, $options = []) {
+    public function __construct($identifier = null, $options = [])
+    {
         $this->myTable = 'actionconfig';
         parent::__construct($identifier, $options);
     }
-    
 
     //        $table->addColumn('name', 'string', ['comment' => 'Module per company configurations'])
     //                ->addColumn('module', 'string', ['comment' => 'Configuration belongs to'])
