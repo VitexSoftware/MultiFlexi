@@ -36,9 +36,12 @@ class ApplicationInfo extends Panel
     /**
      * Application Info panel.
      */
-    public function __construct(Application $application, Company $company)
+    public function __construct(Application $application)
     {
-        parent::__construct($this->headerRow($application), 'info', 'body', 'footer');
+        $body = new \Ease\Html\DivTag();
+        $body->addItem(new AppLogo($application));
+                
+        parent::__construct($this->headerRow($application), 'inverse', $body, 'footer');
     }
 
     /**
@@ -51,9 +54,17 @@ class ApplicationInfo extends Panel
     public function headerRow($application)
     {
         $headerRow = new \Ease\TWB4\Row();
-        $headerRow->addColumn(2, new AppLogo($application));
-        $headerRow->addColumn(4, new \Ease\Html\H3Tag($application->getDataValue('name')));
-        $headerRow->addColumn(4, $application->getDataValue('description'));
+        
+        $appData = new \Ease\Html\DivTag();
+        $appData->addItem(new \Ease\Html\H3Tag($application->getDataValue('name')));
+        $appData->addItem(new \Ease\Html\PTag($application->getDataValue('description')));
+        $appData->addItem(new \Ease\Html\PTag(new \Ease\Html\ATag($application->getDataValue('homepage'),$application->getDataValue('homepage'))));
+        $appData->addItem(new \Ease\Html\PTag($application->getDataValue('uuid')));
+        $appData->addItem(new \Ease\Html\PTag($application->getDataValue('ociimage')));
+        $appData->addItem(new \Ease\Html\PTag($application->getDataValue('version')));
+        $appData->addItem(new \Ease\Html\PTag($application->getDataValue('requirements')));
+        
+        $headerRow->addColumn(12, $appData);
 
         return $headerRow;
     }

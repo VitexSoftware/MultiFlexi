@@ -105,7 +105,10 @@ $instanceRow->addColumn(4, null === $apps->getMyKey() ?
 
 $instanceRow->addColumn(4, new AppLogo($apps));
 
+$appOverview = new ApplicationInfo($apps);
+
 $appTabs = new Tabs();
+$appTabs->addTab(_('Overview'), $appOverview);
 $appTabs->addTab(_('Configuration'), $instanceRow);
 $appTabs->addTab(_('Jobs'), [
     $jobList,
