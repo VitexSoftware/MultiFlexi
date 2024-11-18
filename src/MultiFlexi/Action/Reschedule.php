@@ -24,10 +24,8 @@ class Reschedule extends \MultiFlexi\CommonAction
 {
     /**
      * Module Caption.
-     *
-     * @return string
      */
-    public static function name()
+    public static function name(): string
     {
         return _('Reschedule');
     }

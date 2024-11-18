@@ -22,11 +22,11 @@ require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
 $loggers = ['syslog', '\MultiFlexi\LogToSQL', 'console'];
 
-if (\Ease\Shared::cfg('ZABBIX_SERVER') && \Ease\Shared::cfg('ZABBIX_HOST') && class_exists('\MultiFlexi\LogToZabbix')) {
+if (Shared::cfg('ZABBIX_SERVER') && Shared::cfg('ZABBIX_HOST') && class_exists('\MultiFlexi\LogToZabbix')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
 
-if (\Ease\Shared::cfg('APP_DEBUG') === 'true') {
+if (Shared::cfg('APP_DEBUG') === 'true') {
     $loggers[] = 'console';
 }
 
@@ -60,8 +60,14 @@ if (Shared::cfg('APP_DEBUG', \array_key_exists('v', $options))) {
     $jobber->logBanner();
 }
 
-if (isset($options['runtemplate'], $options['company'])) {
+if (isset($options['runtemplate'])) {
     $runTemplater = new \MultiFlexi\RunTemplate(is_numeric($options['runtemplate']) ? (int) $options['runtemplate'] : $options['runtemplate']);
+
+    if (empty($runTemplater->getMyKey())) {
+        echo 'RunTemplate not found'.\PHP_EOL;
+
+        exit(1);
+    }
 
     $app = $runTemplater->getApplication();
     $company = $runTemplater->getCompany();
@@ -89,14 +95,27 @@ if (isset($options['runtemplate'], $options['company'])) {
 
     $prepared = $jobber->prepareJob($runTemplater->getMyKey(), $uploadEnv, '', $options['executor'] ?? 'Native');
     $jobber->scheduleJobRun(new \DateTime($when));
-} else {
-    echo "Arguments: \n".
-    "--runtemplate - id/name\n".
-    "--company COMPANY_CODE - required\n".
-    "--environment {json}\n".
-    "--schedule - A date/time string for \\DateTime()  \n".
-    "--foreground - do not schdule for background run\n".
-    "--verbose - more debug messages \n";
 
-    exit(1);
+    if (\Ease\Shared::cfg('APP_DEBUG')) {
+        $jobber->addStatusMessage(
+            sprintf(
+                _('🧩 #%d  %s: %s - %s using %s'),
+                $runTemplater->getMyKey(),
+                $runTemplater->getApplication()->getRecordName(),
+                $runTemplater->getRecordName(),
+                $company->getRecordName(),
+                $jobber->getDataValue('executor'),
+            ),
+        );
+    } else {
+        echo "Arguments: \n".
+        "--runtemplate - id/name\n".
+        "--company COMPANY_CODE - required\n".
+        "--environment {json}\n".
+        "--schedule - A date/time string for \\DateTime()  \n".
+        "--foreground - do not schdule for background run\n".
+        "--verbose - more debug messages \n";
+
+        exit(1);
+    }
 }

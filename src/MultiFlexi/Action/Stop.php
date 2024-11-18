@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Action;
 
+use MultiFlexi\Env\Application;
+
 /**
  * Description of Reschedule.
  *
@@ -52,7 +54,7 @@ class Stop extends \MultiFlexi\CommonAction
      */
     public function perform(\MultiFlexi\Job $job): void
     {
-        if ($this->runtemplate->runTemplate->setState(false)) {
+        if ($this->runtemplate->setState(false)) {
             $this->addStatusMessage(sprintf(_('Periodic executing of «%s» for ❮%s❯ stop 🛑'), $this->runtemplate->application->getRecordName(), $this->runtemplate->company->getRecordName()), 'success');
         } else {
             $this->addStatusMessage(_('Stopped module failed'), 'error');
@@ -61,11 +63,9 @@ class Stop extends \MultiFlexi\CommonAction
 
     /**
      * Is this Action Suitable for Application.
-     *
-     * @param Application $app
      */
-    public static function usableForApp($app): bool
+    public static function usableForApp(Application $app): bool
     {
-        return true;
+        return \is_object($app);
     }
 }
