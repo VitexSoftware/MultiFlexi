@@ -25,3 +25,7 @@ Features:
 - Better dependency management
 - Requires Docker to be installed on the host machine
 
+
+.. image::  installedexecutormodules.png
+    :alt: Installed executor modules listing
+
