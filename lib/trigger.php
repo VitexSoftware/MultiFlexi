@@ -35,66 +35,63 @@ if (\Ease\Shared::cfg('APP_DEBUG') === 'true') {
 Shared::user(new Anonym());
 
 $shortopts = '';
-$shortopts .= 'a:';  // Required value Application ID
+$shortopts .= 'r::';  // Runtemplate ID or Name
 $shortopts .= 'c:';  // Required value Company Code
 $shortopts .= 's::'; // Shedule time
-$shortopts .= 'e::'; // Optional value Foreground
+$shortopts .= 'e::'; // Environment
 $shortopts .= 'v'; // Optional value Verbose
 $shortopts .= 'f'; // These options do not accept values
+$shortopts .= 'x'; // Executor
 
 $longopts = [
-    'app:', // Required value
+    'runtemplate:',
     'company:', // Required value
     'environment::', // Optional value
     'schedule::', // Optional value
     'foreground', // Optional value
     'verbose', // No value
+    'executor::',
 ];
 $options = getopt($shortopts, $longopts);
 
 $jobber = new Job();
 
-if (\Ease\Shared::cfg('APP_DEBUG', \array_key_exists('v', $options))) {
+if (Shared::cfg('APP_DEBUG', \array_key_exists('v', $options))) {
     $jobber->logBanner();
 }
 
-$companer = new Company();
-$companer->setKeyColumn('code');
-$companer->loadFromSQL((\array_key_exists('company', $options) ? $options['company'] : '').(\array_key_exists('c', $options) ? $options['c'] : ''));
-$companer->setKeyColumn('id');
+if (isset($options['runtemplate'], $options['company'])) {
+    $runTemplater = new \MultiFlexi\RunTemplate(is_numeric($options['runtemplate']) ? (int) $options['runtemplate'] : $options['runtemplate']);
 
-$apper = new Application((int) ((\array_key_exists('app', $options) ? $options['app'] : '').(\array_key_exists('a', $options) ? $options['a'] : '')));
+    $app = $runTemplater->getApplication();
+    $company = $runTemplater->getCompany();
 
-$companyId = $companer->getMyKey();
-$appId = $apper->getMyKey();
+    $when = $options['schedule'] ?? 'now';
+    $uploadEnv = [];
 
-if ($companyId && $appId) {
-    $runTemplate = new \MultiFlexi\RunTemplate();
+    /**
+     * Save all uploaded files into temporary directory and prepare job environment.
+     */
+    // if (!empty($_FILES)) {
+    //     foreach ($_FILES as $field => $file) {
+    //         if ($file['error'] === 0) {
+    //             $tmpName = tempnam(sys_get_temp_dir(), 'multiflexi_').'_'.basename($file['name']);
 
-    if ($companyId && $appId) {
-        $runTemplateId = $runTemplate->runTemplateID($appId, $companyId);
+    //             if (move_uploaded_file($file['tmp_name'], $tmpName)) {
+    //                 $uploadEnv[$field]['value'] = $tmpName;
+    //                 $uploadEnv[$field]['type'] = 'file';
+    //                 $uploadEnv[$field]['source'] = 'Upload';
+    //             }
+    //         }
+    //     }
+    // }
+    $uploadEnv = $options['environment'] ?? [];
 
-        if ($runTemplateId === 0) {
-            $runTemplate->dbsync(['app_id' => $appId, 'company_id' => $companyId, 'interv' => 'n']);
-        } else {
-            $runTemplate->loadFromSQL($runTemplateId);
-        }
-    }
-
-    LogToSQL::singleton()->setCompany($companyId);
-
-    $forcedEnv = (\array_key_exists('environment', $options) ? $options['environment'] : '').(\array_key_exists('e', $options) ? $options['e'] : '');
-
-    $jobber->prepareJob($runTemplate->getMyKey(), empty($forcedEnv) ? [] : json_decode($forcedEnv), 'trigger');
-
-    if (\array_key_exists('f', $options) || \array_key_exists('foreground', $options)) {
-        $jobber->performJob();
-    } else {
-        $jobber->scheduleJobRun(new \DateTime((\array_key_exists('schedule', $options) ? $options['schedule'] : '').(\array_key_exists('s', $options) ? $options['s'] : '')));
-    }
+    $prepared = $jobber->prepareJob($runTemplater->getMyKey(), $uploadEnv, '', $options['executor'] ?? 'Native');
+    $jobber->scheduleJobRun(new \DateTime($when));
 } else {
     echo "Arguments: \n".
-    "--app APP_ID - required\n".
+    "--runtemplate - id/name\n".
     "--company COMPANY_CODE - required\n".
     "--environment {json}\n".
     "--schedule - A date/time string for \\DateTime()  \n".

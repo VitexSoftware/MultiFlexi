@@ -28,7 +28,7 @@ class Logger extends DBEngine
 {
     public $myKeyColumn = 'id';
     public ?string $modifiedColumn = 'created';
- 
+
     /**
      * @param int $id
      */
