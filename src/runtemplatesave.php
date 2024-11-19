@@ -17,7 +17,7 @@ namespace MultiFlexi\Ui;
 
 // $runTemplate = new RunTemplate(WebPage::getRequestValue('id', 'int'));
 //
-// if ($oPage->isPosted()) {
+// if (WebPage::singleton()->isPosted()) {
 //    if ($runTemplate->takeData($_POST) && !is_null($runTemplate->saveToSQL())) {
 //        $runTemplate->addStatusMessage(_('Config fields Saved'), 'success');
 //    } else {
@@ -26,7 +26,7 @@ namespace MultiFlexi\Ui;
 // }
 
 require_once './init.php';
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 $result = false;
 $name = \Ease\TWB4\WebPage::getRequestValue('name');
 $value = \Ease\TWB4\WebPage::getRequestValue('value');

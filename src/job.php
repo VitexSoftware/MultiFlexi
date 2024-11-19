@@ -18,9 +18,9 @@ namespace MultiFlexi\Ui;
 use MultiFlexi\Application;
 
 require_once './init.php';
-$oPage->onlyForLogged();
-$oPage->addItem(new PageTop(_('Archived Job Run')));
-$jobID = $oPage->getRequestValue('id', 'int');
+WebPage::singleton()->onlyForLogged();
+WebPage::singleton()->addItem(new PageTop(_('Archived Job Run')));
+$jobID = WebPage::singleton()->getRequestValue('id', 'int');
 $jobber = new \MultiFlexi\Job($jobID);
 $runTemplate = new \MultiFlexi\RunTemplate($jobber->getDataValue('runtemplate_id'));
 
@@ -69,11 +69,11 @@ $jobFoot->addColumn(4, $runTemplateButton);
 
 $appPanel = new ArchivedJobPanel($jobber, [new JobInfo($jobber), $outputTabs], $jobFoot);
 
-$oPage->container->addItem(
+WebPage::singleton()->container->addItem(
     new CompanyPanel(new \MultiFlexi\Company($appInfo['company_id']), $appPanel),
 );
 
-$oPage->addItem(new PageBottom('job/'.$jobber->getMyKey()));
+WebPage::singleton()->addItem(new PageBottom('job/'.$jobber->getMyKey()));
 WebPage::singleton()->addCss(<<<'EOD'
 
 .iframe-container {
@@ -98,4 +98,4 @@ WebPage::singleton()->addCss(<<<'EOD'
 
 
 EOD);
-$oPage->draw();
+WebPage::singleton()->draw();

@@ -17,7 +17,7 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
 $runtemplate_id = \Ease\TWB4\WebPage::getRequestValue('runtemplate', 'int');
 $interval = \Ease\TWB4\WebPage::getRequestValue('interval');

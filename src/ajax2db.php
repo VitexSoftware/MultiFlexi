@@ -31,7 +31,7 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 require_once './init.php';
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 header('Content-Type: application/json');
 $class = \Ease\WebPage::getRequestValue('class');
 /**
@@ -40,7 +40,7 @@ $class = \Ease\WebPage::getRequestValue('class');
 $engine = new $class();
 // DataTables PHP library
 // include( './lib/DataTables.php' );
-// if ($oPage->getRequestValue('columns')) {
+// if (WebPage::singleton()->getRequestValue('columns')) {
 echo json_encode($engine->getAllForDataTable($_REQUEST));
 // } else {
 //    $editor = new DataTableSaver($db, $engine);

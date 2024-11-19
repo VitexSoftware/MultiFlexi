@@ -17,9 +17,9 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
-$oPage->addItem(new PageTop(_('Intervals Setup')));
+WebPage::singleton()->addItem(new PageTop(_('Intervals Setup')));
 
 $addAppForm = new \Ease\TWB4\Form();
 $addAppForm->addItem(new \Ease\Html\H1Tag(_('Periodical tasks')));
@@ -48,8 +48,8 @@ $addAppForm->addItem(new \Ease\Html\PTag());
 
 $addAppForm->addItem(new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'success btn-lg btn-block'));
 
-$oPage->container->addItem($addAppForm);
+WebPage::singleton()->container->addItem($addAppForm);
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->draw();
+WebPage::singleton()->draw();

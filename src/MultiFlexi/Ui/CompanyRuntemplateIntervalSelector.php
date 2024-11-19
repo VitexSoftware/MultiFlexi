@@ -25,12 +25,9 @@ class CompanyRuntemplateIntervalSelector extends CompanyAppSelector
     private $intervalCode;
 
     /**
-     * @param type $company
-     * @param type $identifier
-     * @param type $enabled
-     * @param type $optionsPage
+     * Company Application Interval Selection.
      */
-    public function __construct($company, $identifier = null, $enabled = [], $optionsPage = 'apps.php')
+    public function __construct(\MultiFlexi\Company $company, string $identifier, string $enabled = '', string $optionsPage = 'apps.php')
     {
         $this->intervalCode = \MultiFlexi\RunTemplate::intervalToCode($identifier);
         parent::__construct($company, $identifier, $enabled, $optionsPage);

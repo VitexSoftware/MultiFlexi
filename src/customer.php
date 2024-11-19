@@ -22,19 +22,19 @@ use MultiFlexi\Customer;
 
 require_once './init.php';
 
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
-$customers = new Customer($oPage->getRequestValue('id', 'int'));
+$customers = new Customer(WebPage::singleton()->getRequestValue('id', 'int'));
 $instanceName = $customers->getRecordName();
 $_SESSION['customer'] = $customers->getMyKey();
 
-$oPage->addItem(new PageTop(_('Customer')));
+WebPage::singleton()->addItem(new PageTop(_('Customer')));
 
-if ($oPage->isPosted()) {
+if (WebPage::singleton()->isPosted()) {
     if ($customers->takeData($_POST) && null !== $customers->saveToSQL()) {
         $customers->addStatusMessage(_('Customer Saved'), 'success');
         //        $customers->prepareRemoteAbraFlexi();
-        $oPage->redirect('?id='.$customers->getMyKey());
+        WebPage::singleton()->redirect('?id='.$customers->getMyKey());
     } else {
         $customers->addStatusMessage(_('Error saving Customer'), 'error');
     }
@@ -52,13 +52,13 @@ $instanceRow->addColumn(8, new RegisterCustomerForm($customers));
 $instanceRow->addColumn(2, new \Ease\Html\ImgTag(\Ease\User::getGravatar((string) $customers->getDataValue('email'), 400, 'mm', 'g'), 'Gravatar', ['class' => 'img-fluid']));
 // $instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($customers));
 
-$oPage->container->addItem(new Panel(
+WebPage::singleton()->container->addItem(new Panel(
     $instanceName,
     'info',
     $instanceRow,
     $instanceLink,
 ));
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->draw();
+WebPage::singleton()->draw();

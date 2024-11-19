@@ -32,7 +32,7 @@ require_once './init.php';
 
 $shared = Shared::singleton();
 
-$login = $oPage->getRequestValue('login');
+$login = WebPage::singleton()->getRequestValue('login');
 
 if ($login) {
     //    try {
@@ -40,12 +40,12 @@ if ($login) {
     //    } catch (PDOException $e) {
     //        echo 'Caught exception: ', $e->getMessage(), "\n";
     //    }
-    if (\Ease\Shared::user()->tryToLogin($_POST)) {
+    if (Shared::user()->tryToLogin($_POST)) {
         if (\array_key_exists('wayback', $_SESSION) && !empty($_SESSION['wayback'])) {
-            $oPage->redirect($_SESSION['wayback']);
+            WebPage::singleton()->redirect($_SESSION['wayback']);
             unset($_SESSION['wayback']);
         } else {
-            $oPage->redirect('main.php');
+            WebPage::singleton()->redirect('main.php');
         }
 
         session_write_close();
@@ -54,11 +54,11 @@ if ($login) {
     }
 }
 
-$oPage->addItem(new PageTop(_('Sign In')));
+WebPage::singleton()->addItem(new PageTop(_('Sign In')));
 
 $loginFace = new DivTag(null, ['id' => 'LoginFace']);
 
-$oPage->container->addItem($loginFace);
+WebPage::singleton()->container->addItem($loginFace);
 
 $loginRow = new Row();
 $infoColumn = $loginRow->addItem(new Col(4));
@@ -100,8 +100,8 @@ $loginColumn->addItem($loginPanel);
 // ' . _('Lost password recovery'), 'warning')
 // ));
 
-$oPage->container->addItem(new Form([], [], $loginRow));
+WebPage::singleton()->container->addItem(new Form([], [], $loginRow));
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->draw();
+WebPage::singleton()->draw();

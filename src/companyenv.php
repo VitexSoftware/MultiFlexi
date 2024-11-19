@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 require_once './init.php';
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 $result = false;
 $name = \Ease\TWB4\WebPage::getRequestValue('name');
 $value = \Ease\TWB4\WebPage::getRequestValue('value');

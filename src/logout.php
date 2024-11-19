@@ -21,7 +21,7 @@ if ((null === \Ease\Shared::user()->getUserID()) === false) {
     \Ease\Shared::user()->logout();
 }
 
-$oPage->addItem(new PageTop(_('Sign Off')));
+WebPage::singleton()->addItem(new PageTop(_('Sign Off')));
 
 $byerow = new \Ease\TWB4\Row();
 $byerow->addColumn(6, new \Ease\Html\ImgTag('images/openclipart/'.\MultiFlexi\Ui\OpenClipart::randomImage('images/openclipart')));
@@ -35,8 +35,8 @@ $byeInfo->addItem(new \Ease\Html\DivTag(new \Ease\Html\ATag(
 )));
 $byeInfo->addItem('<br/><br/><br/><br/>');
 
-$oPage->container->addItem($byerow);
+WebPage::singleton()->container->addItem($byerow);
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->draw();
+WebPage::singleton()->draw();

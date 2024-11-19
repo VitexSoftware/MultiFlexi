@@ -17,12 +17,12 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
 $companer = new \MultiFlexi\Company(\Ease\WebPage::getRequestValue('company_id', 'int'));
 
 if (null === $companer->getMyKey()) {
-    $oPage->redirect('companys.php');
+    WebPage::singleton()->redirect('companys.php');
 }
 
 $_SESSION['company'] = $companer->getMyKey();
@@ -61,7 +61,7 @@ if (\Ease\WebPage::isPosted()) {
 
 $appsByIntrv = $runTemplater->getCompanyRunTemplatesByInterval($companer->getMyKey());
 
-$oPage->addItem(new PageTop(_('Periodical tasks')));
+WebPage::singleton()->addItem(new PageTop(_('Periodical tasks')));
 
 $addAppForm = new \Ease\TWB4\Form();
 $addAppForm->addItem(new \Ease\Html\H1Tag(_('Periodical tasks')));
@@ -69,12 +69,12 @@ $addAppForm->addItem(new \Ease\Html\InputHiddenTag('company_id', $companer->getM
 
 $periodSelectorsRow = new \Ease\TWB4\Row();
 
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Minutely'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'minutly', implode(',', array_keys($appsByIntrv['i'])), 'actions.php')));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Hourly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'hourly', implode(',', array_keys($appsByIntrv['h'])), 'actions.php')));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Daily'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'daily', implode(',', array_keys($appsByIntrv['d'])), 'actions.php')));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Weekly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'weekly', implode(',', array_keys($appsByIntrv['w'])), 'actions.php')));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Monthly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'monthly', implode(',', array_keys($appsByIntrv['m'])), 'actions.php')));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Yearly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'yearly', implode(',', array_keys($appsByIntrv['y'])), 'actions.php')));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Minutely'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'minutly', \count($appsByIntrv['i']) ? implode(',', array_keys($appsByIntrv['i'])) : '', 'actions.php')));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Hourly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'hourly', \count($appsByIntrv['h']) ? implode(',', array_keys($appsByIntrv['h'])) : '', 'actions.php')));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Daily'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'daily', \count($appsByIntrv['d']) ? implode(',', array_keys($appsByIntrv['d'])) : '', 'actions.php')));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Weekly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'weekly', \count($appsByIntrv['w']) ? implode(',', array_keys($appsByIntrv['w'])) : '', 'actions.php')));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Monthly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'monthly', \count($appsByIntrv['m']) ? implode(',', array_keys($appsByIntrv['m'])) : '', 'actions.php')));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Yearly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'yearly', \count($appsByIntrv['y']) ? implode(',', array_keys($appsByIntrv['y'])) : '', 'actions.php')));
 
 //
 // $assignedRaw = $companyApp->getAssigned()->fetchAll('app_id');
@@ -87,14 +87,14 @@ $addAppForm->addItem(new \Ease\Html\PTag());
 
 $addAppForm->addItem(new \Ease\TWB4\SubmitButton(_('🍏 Apply'), 'success btn-lg btn-block'));
 
-$oPage->container->addItem(new CompanyPanel($companer, $addAppForm));
+WebPage::singleton()->container->addItem(new CompanyPanel($companer, $addAppForm));
 
 // $apper = new \MultiFlexi\Application();
 // foreach ($assigned as $assignedAppId) {
 //    $apper->loadFromSQL($assignedAppId);
-//    $oPage->container->addItem(new AppInfo($apper, $companer->getMyKey()));
+//    WebPage::singleton()->container->addItem(new AppInfo($apper, $companer->getMyKey()));
 // }
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->draw();
+WebPage::singleton()->draw();

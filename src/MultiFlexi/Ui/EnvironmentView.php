@@ -24,7 +24,7 @@ class EnvironmentView extends \Ease\Html\TableTag
 {
     /**
      * @param array $environment
-     * @param array $properties
+     * @param array<string,string> $properties
      */
     public function __construct($environment = null, $properties = [])
     {

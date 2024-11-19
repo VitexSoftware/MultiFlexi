@@ -24,7 +24,6 @@ namespace MultiFlexi\Ui;
 
 use Ease\TWB4\Panel;
 use MultiFlexi\Application;
-use MultiFlexi\Company;
 
 /**
  * Description of ApplicationInfo.
@@ -40,7 +39,7 @@ class ApplicationInfo extends Panel
     {
         $body = new \Ease\Html\DivTag();
         $body->addItem(new AppLogo($application));
-                
+
         parent::__construct($this->headerRow($application), 'inverse', $body, 'footer');
     }
 
@@ -54,16 +53,16 @@ class ApplicationInfo extends Panel
     public function headerRow($application)
     {
         $headerRow = new \Ease\TWB4\Row();
-        
+
         $appData = new \Ease\Html\DivTag();
         $appData->addItem(new \Ease\Html\H3Tag($application->getDataValue('name')));
         $appData->addItem(new \Ease\Html\PTag($application->getDataValue('description')));
-        $appData->addItem(new \Ease\Html\PTag(new \Ease\Html\ATag($application->getDataValue('homepage'),$application->getDataValue('homepage'))));
+        $appData->addItem(new \Ease\Html\PTag(new \Ease\Html\ATag($application->getDataValue('homepage'), $application->getDataValue('homepage'))));
         $appData->addItem(new \Ease\Html\PTag($application->getDataValue('uuid')));
         $appData->addItem(new \Ease\Html\PTag($application->getDataValue('ociimage')));
         $appData->addItem(new \Ease\Html\PTag($application->getDataValue('version')));
         $appData->addItem(new \Ease\Html\PTag($application->getDataValue('requirements')));
-        
+
         $headerRow->addColumn(12, $appData);
 
         return $headerRow;

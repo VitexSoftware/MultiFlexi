@@ -20,8 +20,8 @@ use Ease\TWB4\Row;
 use MultiFlexi\Company;
 
 require_once './init.php';
-$oPage->onlyForLogged();
-$oPage->addItem(new PageTop(_('Company')));
+WebPage::singleton()->onlyForLogged();
+WebPage::singleton()->addItem(new PageTop(_('Company')));
 $serverId = WebPage::getRequestValue('server', 'int');
 
 if ($serverId) {
@@ -41,7 +41,7 @@ if ((null === $serverId) === false) {
 $_SESSION['company'] = $companies->getMyKey();
 $companyEnver = new \MultiFlexi\CompanyEnv($companies->getMyKey());
 
-if ($oPage->isPosted()) {
+if (WebPage::singleton()->isPosted()) {
     if (\array_key_exists('env', $_POST)) {
         $companyEnver->addEnv($_POST['env']['newkey'], $_POST['env']['newvalue']);
     } else {
@@ -51,7 +51,7 @@ if ($oPage->isPosted()) {
                 $companies->saveToSQL();
                 $companies->addStatusMessage(_('Company Saved'), 'success');
                 //        $companies->prepareRemoteCompany(); TODO: Run applications setup on new company
-                $oPage->redirect('?id='.$companies->getMyKey());
+                WebPage::singleton()->redirect('?id='.$companies->getMyKey());
             } catch (\Exception $exc) {
                 $companies->addStatusMessage($exc->getMessage(), 'error');
             }
@@ -86,7 +86,7 @@ $instanceRow->addColumn(4, new CompanyEditorForm($companies, '', ['action' => 'c
 
 $rightColumn[] = new EnvironmentEditor($companyEnver->getEnvFields());
 $instanceRow->addColumn(8, $rightColumn);
-$oPage->container->addItem(new CompanyPanel($companies, $instanceRow, $companies->getMyKey() ? new \Ease\TWB4\LinkButton('companydelete.php?id='.$companies->getMyKey(), '☠️&nbsp;'._('Delete company'), 'danger') : ''));
+WebPage::singleton()->container->addItem(new CompanyPanel($companies, $instanceRow, $companies->getMyKey() ? new \Ease\TWB4\LinkButton('companydelete.php?id='.$companies->getMyKey(), '☠️&nbsp;'._('Delete company'), 'danger') : ''));
 
-$oPage->addItem(new PageBottom());
-$oPage->draw();
+WebPage::singleton()->addItem(new PageBottom());
+WebPage::singleton()->draw();

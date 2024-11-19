@@ -19,9 +19,9 @@ use Ease\Html\ATag;
 use MultiFlexi\Company;
 
 require_once './init.php';
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 $companies = new Company(WebPage::getRequestValue('id', 'int'));
-$oPage->addItem(new PageTop(_('Company').': '.$companies->getRecordName()));
+WebPage::singleton()->addItem(new PageTop(_('Company').': '.$companies->getRecordName()));
 
 $_SESSION['company'] = $companies->getMyKey();
 $_SESSION['server'] = $companies->getDataValue('server');
@@ -96,6 +96,6 @@ $companyPanelContents[] = new \Ease\Html\H3Tag(_('job queue'));
 $companyPanelContents[] = $jobList;
 $bottomLine = new CompanyDbStatus($companies);
 
-$oPage->container->addItem(new CompanyPanel($companies, $companyPanelContents, $bottomLine));
-$oPage->addItem(new PageBottom('company/'.$companies->getMyKey()));
-$oPage->draw();
+WebPage::singleton()->container->addItem(new CompanyPanel($companies, $companyPanelContents, $bottomLine));
+WebPage::singleton()->addItem(new PageBottom('company/'.$companies->getMyKey()));
+WebPage::singleton()->draw();

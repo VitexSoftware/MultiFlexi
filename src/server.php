@@ -21,12 +21,12 @@ use Ease\TWB4\Row;
 use MultiFlexi\Servers;
 
 require_once './init.php';
-$oPage->onlyForLogged();
-$servers = new Servers($oPage->getRequestValue('id', 'int'), ['autoload' => true]);
+WebPage::singleton()->onlyForLogged();
+$servers = new Servers(WebPage::singleton()->getRequestValue('id', 'int'), ['autoload' => true]);
 $instanceName = $servers->getRecordName();
 $_SESSION['server'] = $servers->getMyKey();
 
-if ($oPage->isPosted()) {
+if (WebPage::singleton()->isPosted()) {
     if ($servers->takeData($_POST) && null !== $servers->saveToSQL()) {
         $servers->addStatusMessage(_('Server instance Saved'), 'success');
 
@@ -41,7 +41,7 @@ if ($oPage->isPosted()) {
     }
 }
 
-$oPage->addItem(new PageTop(_('Server instance')));
+WebPage::singleton()->addItem(new PageTop(_('Server instance')));
 
 if (!empty($instanceName)) {
     $instanceLink = new ATag($servers->getLink(), $servers->getLink());
@@ -53,7 +53,7 @@ if (!empty($instanceName)) {
 $instanceRow = new Row();
 $instanceRow->addColumn(8, new RegisterServerForm($servers));
 $instanceRow->addColumn(4, new \Ease\Html\ImgTag('images/'.($servers->getDataValue('type') ? strtolower((string) $servers->getDataValue('type')).'-server.svg' : 'server.svg'), $servers->getDataValue('type'), ['class' => 'img-fluid float-right', 'style' => 'height: 500px;']));
-$oPage->container->addItem(new Panel(
+WebPage::singleton()->container->addItem(new Panel(
     $instanceName,
     'default',
     $instanceRow,
@@ -61,8 +61,8 @@ $oPage->container->addItem(new Panel(
 ));
 
 if (($servers->getDataValue('type') === 'AbraFlexi') && (null === $servers->getMyKey()) === false) {
-    $oPage->container->addItem(new AbraFlexiInstanceStatus($servers));
+    WebPage::singleton()->container->addItem(new AbraFlexiInstanceStatus($servers));
 }
 
-$oPage->addItem(new PageBottom());
-$oPage->draw();
+WebPage::singleton()->addItem(new PageBottom());
+WebPage::singleton()->draw();

@@ -16,14 +16,14 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 require_once './init.php';
-$oPage->onlyForLogged();
-$oPage->addItem(new PageTop(_('Job history')));
-$appId = $oPage->getRequestValue('app_id');
-$companyId = $oPage->getRequestValue('company_id');
+WebPage::singleton()->onlyForLogged();
+WebPage::singleton()->addItem(new PageTop(_('Job history')));
+$appId = WebPage::singleton()->getRequestValue('app_id');
+$companyId = WebPage::singleton()->getRequestValue('company_id');
 $engine = new \MultiFlexi\CompanyJob();
 $engine->setCompany($companyId);
 $engine->setApp($appId);
-$oPage->addJavaScript(<<<'EOD'
+WebPage::singleton()->addJavaScript(<<<'EOD'
 $.fn.dataTable.ext.buttons.dismisAll = {
     text: '
 EOD._('Dismis All').<<<'EOD'
@@ -36,14 +36,14 @@ EOD._('Dismis All').<<<'EOD'
     }
 };
 EOD);
-$oPage->includeJavascript('js/dismisLog.js');
-$oPage->container->addItem(new DBDataTable($engine, ['buttons' => ['dismisAll']]));
-$oPage->addItem(new PageBottom());
-$oPage->addJavaScript(<<<'EOD'
+WebPage::singleton()->includeJavascript('js/dismisLog.js');
+WebPage::singleton()->container->addItem(new DBDataTable($engine, ['buttons' => ['dismisAll']]));
+WebPage::singleton()->addItem(new PageBottom());
+WebPage::singleton()->addJavaScript(<<<'EOD'
 
     setInterval(function () {
       Molecule.ajax.reload();
 }, 300000);
 
 EOD);
-$oPage->draw();
+WebPage::singleton()->draw();

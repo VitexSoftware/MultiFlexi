@@ -17,7 +17,7 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
 $app_id = \Ease\TWB4\WebPage::getRequestValue('app');
 $company_id = \Ease\TWB4\WebPage::getRequestValue('company');

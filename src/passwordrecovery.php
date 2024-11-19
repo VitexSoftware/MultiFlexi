@@ -19,7 +19,7 @@ require_once './init.php';
 
 $success = false;
 
-$emailTo = $oPage->getPostValue('Email');
+$emailTo = WebPage::singleton()->getPostValue('Email');
 
 if (empty($emailTo)) {
     \Ease\Shared::user()->addStatusMessage(_('Please enter your email.'));
@@ -44,7 +44,7 @@ if (empty($emailTo)) {
 
         $controlUser->passwordChange($newPassword);
 
-        $email = $oPage->addItem(new \Ease\HtmlMailer(
+        $email = WebPage::singleton()->addItem(new \Ease\HtmlMailer(
             $userEmail,
             \Ease\Shared::appName().' -'.sprintf(
                 _('New password for %s'),
@@ -68,7 +68,7 @@ if (empty($emailTo)) {
     }
 }
 
-$oPage->addItem(new PageTop(_('Lost password recovery')));
+WebPage::singleton()->addItem(new PageTop(_('Lost password recovery')));
 
 $pageRow = new \Ease\TWB4\Row();
 
@@ -76,7 +76,7 @@ $columnI = $pageRow->addColumn('4');
 $columnII = $pageRow->addColumn('4');
 $columnIII = $pageRow->addColumn('4');
 
-$oPage->addItem($pageRow);
+WebPage::singleton()->addItem($pageRow);
 
 if (!$success) {
     $columnIII->addItem(new \Ease\TWB4\Label('info', _('Tip')));
@@ -108,7 +108,7 @@ if (!$success) {
     $mailForm = $columnII->addItem(new \Ease\TWB4\Form(['name' => 'PasswordRecovery']));
     $mailForm->addItem($loginPanel);
 
-    if ($oPage->isPosted()) {
+    if (WebPage::singleton()->isPosted()) {
         $mailForm->fillUp($_POST);
     }
 } else {
@@ -116,9 +116,9 @@ if (!$success) {
         'login.php',
         _('Continue'),
     ));
-    $oPage->redirect('login.php');
+    WebPage::singleton()->redirect('login.php');
 }
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->draw();
+WebPage::singleton()->draw();

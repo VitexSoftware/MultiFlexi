@@ -20,14 +20,14 @@ use MultiFlexi\Customer;
 
 require_once './init.php';
 
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
 // \MultiFlexi\Engine::doThings($oPage);
 
-$oPage->addItem(new PageTop(_('Customers')));
+WebPage::singleton()->addItem(new PageTop(_('Customers')));
 
-$oPage->addItem(new Container(new DBDataTable(new Customer())));
+WebPage::singleton()->addItem(new Container(new DBDataTable(new Customer())));
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->draw();
+WebPage::singleton()->draw();

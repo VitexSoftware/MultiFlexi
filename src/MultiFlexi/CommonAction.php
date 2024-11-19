@@ -15,14 +15,20 @@ declare(strict_types=1);
 
 namespace MultiFlexi;
 
+use Ease\Embedable;
+use Ease\Logger\Logging;
+use Ease\Logger\Message;
+use Ease\Sand;
+use Ease\TWB4\Badge;
+
 /**
  * Description of Executor.
  *
  * @author vitex
  */
-abstract class CommonAction extends \Ease\Sand
+abstract class CommonAction extends Sand
 {
-    use \Ease\Logger\Logging;
+    use Logging;
     public RunTemplate $runtemplate;
     public string $stdin;
     public string $stdout;
@@ -38,7 +44,7 @@ abstract class CommonAction extends \Ease\Sand
         $this->runtemplate = $runtemplate;
         $this->setData($options);
         $this->setObjectName();
-        $this->setObjectName($runtemplate->getMyKey().'@'.\Ease\Logger\Message::getCallerName($this));
+        $this->setObjectName($runtemplate->getMyKey().'@'.Message::getCallerName($this));
         $this->environment = $runtemplate->getAppEnvironment();
         $this->loadOptions();
     }
@@ -75,35 +81,33 @@ abstract class CommonAction extends \Ease\Sand
     /**
      * Form Inputs.
      *
-     * @return \Ease\Embedable
+     * @return Embedable
      */
     public static function inputs(string $action)
     {
-        return new \Ease\TWB4\Badge('info', _('No Fields required').' ('.$action.')');
+        return new Badge('info', _('No Fields required').' ('.$action.')');
     }
 
     /**
-     * @return \Ease\Embedable
+     * @return Embedable
      */
     public static function configForm()
     {
-        return new \Ease\TWB4\Badge('info', _('No Configuration required'));
+        return new Badge('info', _('No Configuration required'));
     }
 
     /**
      * Perform Action.
      */
-    public function perform(\MultiFlexi\Job $job): void
+    public function perform(Job $job): void
     {
         $this->addStatusMessage(_('No Action performed'), 'debug');
     }
 
     /**
      * Is this Action available for Application.
-     *
-     * @param Application $app
      */
-    public static function usableForApp($app): bool
+    public static function usableForApp(Application $app): bool
     {
         return false;
     }

@@ -18,25 +18,25 @@ namespace MultiFlexi\Ui;
 require_once './init.php';
 
 if (empty(\Ease\Shared::user()->listingQuery()->count())) {
-    $oPage->addStatusMessage(_('No Administrator found'), 'warning');
+    WebPage::singleton()->addStatusMessage(_('No Administrator found'), 'warning');
 } else {
-    $oPage->onlyForLogged();
+    WebPage::singleton()->onlyForLogged();
 }
 
 $process = false;
 
-$firstname = $oPage->getRequestValue('firstname');
-$lastname = $oPage->getRequestValue('lastname');
+$firstname = WebPage::singleton()->getRequestValue('firstname');
+$lastname = WebPage::singleton()->getRequestValue('lastname');
 
-if ($oPage->isPosted()) {
+if (WebPage::singleton()->isPosted()) {
     $process = true;
 
-    $emailAddress = addslashes(strtolower($oPage->getRequestValue('email_address')));
+    $emailAddress = addslashes(strtolower(WebPage::singleton()->getRequestValue('email_address')));
 
-    $login = addslashes($oPage->getRequestValue('login'));
-    $password = addslashes($oPage->getRequestValue('password'));
+    $login = addslashes(WebPage::singleton()->getRequestValue('login'));
+    $password = addslashes(WebPage::singleton()->getRequestValue('password'));
 
-    $confirmation = addslashes($oPage->getRequestValue('confirmation'));
+    $confirmation = addslashes(WebPage::singleton()->getRequestValue('confirmation'));
 
     $error = false;
 
@@ -101,7 +101,7 @@ if ($oPage->isPosted()) {
 
             $newAdmin->loginSuccess();
 
-            $email = $oPage->addItem(new \Ease\HtmlMailer(
+            $email = WebPage::singleton()->addItem(new \Ease\HtmlMailer(
                 $newAdmin->getDataValue('email'),
                 _('Sign On info'),
             ));
@@ -115,7 +115,7 @@ if ($oPage->isPosted()) {
             } catch (\Ease\Exception $exc) {
             }
 
-            $email = $oPage->addItem(new \Ease\HtmlMailer(
+            $email = WebPage::singleton()->addItem(new \Ease\HtmlMailer(
                 \Ease\Shared::cfg('SEND_INFO_TO'),
                 sprintf(
                     _('New Sign On to %s: %s'),
@@ -134,7 +134,7 @@ if ($oPage->isPosted()) {
 
             \Ease\Shared::user($newAdmin)->loginSuccess();
 
-            $oPage->redirect('main.php');
+            WebPage::singleton()->redirect('main.php');
 
             exit;
         }
@@ -143,9 +143,9 @@ if ($oPage->isPosted()) {
     }
 }
 
-$oPage->addItem(new PageTop(_('New Administrator')));
+WebPage::singleton()->addItem(new PageTop(_('New Administrator')));
 
-$regFace = $oPage->container->addItem(new \Ease\TWB4\Panel(_('Singn On')));
+$regFace = WebPage::singleton()->container->addItem(new \Ease\TWB4\Panel(_('Singn On')));
 
 $regForm = $regFace->addItem(new ColumnsForm(new \MultiFlexi\User()));
 
@@ -189,5 +189,5 @@ if (isset($_POST)) {
     $regForm->fillUp($_POST);
 }
 
-$oPage->addItem(new PageBottom());
-$oPage->draw();
+WebPage::singleton()->addItem(new PageBottom());
+WebPage::singleton()->draw();

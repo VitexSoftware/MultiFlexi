@@ -26,7 +26,7 @@ use MultiFlexi\Conffield;
 use MultiFlexi\Job;
 
 require_once './init.php';
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 $action = \Ease\WebPage::getRequestValue('action');
 $apps = new Application(WebPage::getRequestValue('id', 'int') + WebPage::getRequestValue('app', 'int'));
 $instanceName = _($apps->getDataValue('name') ?: _('n/a'));
@@ -38,16 +38,16 @@ switch ($action) {
 
         $apps->deleteFromSQL();
         $apps->addStatusMessage(sprintf(_('Application %s removal'), $apps->getRecordName()), 'success');
-        $oPage->redirect('apps.php');
+        WebPage::singleton()->redirect('apps.php');
 
         break;
 
     default:
-        if ($oPage->isPosted()) {
+        if (WebPage::singleton()->isPosted()) {
             if ($apps->takeData($_POST) && null !== $apps->saveToSQL()) {
                 $apps->addStatusMessage(_('Application Saved'), 'success');
                 //        $apps->prepareRemoteAbraFlexi();
-                $oPage->redirect('?id='.$apps->getMyKey());
+                WebPage::singleton()->redirect('?id='.$apps->getMyKey());
             } else {
                 $apps->addStatusMessage(_('Error saving Application'), 'error');
             }
@@ -64,7 +64,7 @@ if (empty($instanceName) === false) {
 }
 
 $_SESSION['application'] = $apps->getMyKey();
-$oPage->addItem(new PageTop('🧩 '.$apps->getRecordName() ? trim(_('Application').' '.$apps->getRecordName()) : $instanceName));
+WebPage::singleton()->addItem(new PageTop('🧩 '.$apps->getRecordName() ? trim(_('Application').' '.$apps->getRecordName()) : $instanceName));
 $instanceRow = new Row();
 $instanceRow->addColumn(4, new AppEditorForm($apps));
 // if (array_key_exists('company', $_SESSION) && is_null($_SESSION['company']) === false) {
@@ -117,11 +117,11 @@ $appTabs->addTab(_('Jobs'), [
 ]);
 $appTabs->addTab(_('Export'), new AppJson($apps));
 
-$oPage->container->addItem(new ApplicationPanel(
+WebPage::singleton()->container->addItem(new ApplicationPanel(
     $apps,
     $appTabs,
     '',
 ));
 
-$oPage->addItem(new PageBottom('app/'.$apps->getMyKey()));
-$oPage->draw();
+WebPage::singleton()->addItem(new PageBottom('app/'.$apps->getMyKey()));
+WebPage::singleton()->draw();

@@ -19,10 +19,10 @@ use MultiFlexi\Application;
 
 require_once './init.php';
 
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
-$companyId = $oPage->getRequestValue('company_id', 'int');
-$appId = $oPage->getRequestValue('app_id', 'int');
+$companyId = WebPage::singleton()->getRequestValue('company_id', 'int');
+$appId = WebPage::singleton()->getRequestValue('app_id', 'int');
 
 $runTemplate = new \MultiFlexi\RunTemplate();
 
@@ -69,15 +69,15 @@ $appInfo = $runTemplate->getAppInfo();
 $apps = new Application($appInfo['app_id']);
 $instanceName = $appInfo['app_name'];
 
-$oPage->addItem(new PageTop(_('Schedule Job run')));
+WebPage::singleton()->addItem(new PageTop(_('Schedule Job run')));
 
 $runTemplateButton = new \Ease\TWB4\LinkButton('runtemplate.php?id='.$runTemplate->getMyKey(), '⚗️&nbsp;'._('Run Template'), 'dark btn-lg btn-block');
 $jobInfoButton = new \Ease\TWB4\LinkButton('job.php?id='.$jobber->getMyKey(), _('Job details'), 'info btn-block');
 
 $appPanel = new ApplicationPanel($apps, _('Job Run Scheduled'), $jobInfoButton);
 $appPanel->headRow->addColumn(2, $runTemplateButton);
-$oPage->container->addItem(
+WebPage::singleton()->container->addItem(
     new CompanyPanel(new \MultiFlexi\Company($appInfo['company_id']), $appPanel),
 );
 
-$oPage->draw();
+WebPage::singleton()->draw();

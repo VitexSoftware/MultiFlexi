@@ -16,8 +16,8 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 require_once './init.php';
-$oPage->onlyForLogged();
-$apps = new \MultiFlexi\Application($oPage->getRequestValue('id', 'int'));
+WebPage::singleton()->onlyForLogged();
+$apps = new \MultiFlexi\Application(WebPage::singleton()->getRequestValue('id', 'int'));
 
 $appJson = $apps->getAppJson();
 

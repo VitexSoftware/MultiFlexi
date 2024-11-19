@@ -17,7 +17,7 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
 header('Cache-Control: max-age=31536000'); // Cache for 1 year
 header('Expires: '.gmdate('D, d M Y H:i:s', time() + 31536000).' GMT'); // Expires in 1 year

@@ -27,15 +27,15 @@ use MultiFlexi\Configuration;
  */
 
 require_once './init.php';
-$oPage->onlyForLogged();
-$oPage->addItem(new PageTop(_('App custom config Fields')));
+WebPage::singleton()->onlyForLogged();
+WebPage::singleton()->addItem(new PageTop(_('App custom config Fields')));
 $appId = WebPage::getRequestValue('app_id', 'int');
 $companyId = WebPage::getRequestValue('company_id', 'int');
 
 $configurator = new Configuration(['app_id' => $appId, 'company_id' => $companyId], ['autoload' => false]);
 $configurator->setDataValue('app_id', $appId);
 
-if ($oPage->isPosted()) {
+if (WebPage::singleton()->isPosted()) {
     if ($configurator->takeData($_POST) && null !== $configurator->saveToSQL()) {
         $configurator->addStatusMessage(_('Config fields Saved'), 'success');
     } else {
@@ -56,8 +56,8 @@ $appPanel = new ApplicationPanel($app, new CustomAppConfigForm($configurator));
 $runTemplateButton = new \Ease\TWB4\LinkButton('runtemplate.php?id='.$runTemplater->getMyKey(), '⚗️&nbsp;'._('Run Template'), 'dark btn-lg btn-block');
 $appPanel->headRow->addColumn(2, $runTemplateButton);
 
-$oPage->container->addItem(new CompanyPanel($company, $appPanel));
+WebPage::singleton()->container->addItem(new CompanyPanel($company, $appPanel));
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->draw();
+WebPage::singleton()->draw();

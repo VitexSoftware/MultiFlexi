@@ -16,10 +16,10 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 require_once './init.php';
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
-$jobID = $oPage->getRequestValue('id', 'int');
-$mode = $oPage->getRequestValue('mode');
+$jobID = WebPage::singleton()->getRequestValue('id', 'int');
+$mode = WebPage::singleton()->getRequestValue('mode');
 $jobber = new \MultiFlexi\Job($jobID);
 
 $output = $jobber->getDataValue($mode === 'err' ? 'stderr' : 'stdout');

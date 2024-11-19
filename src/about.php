@@ -17,9 +17,9 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 
-$oPage->addItem(new PageTop(_('About')));
+WebPage::singleton()->addItem(new PageTop(_('About')));
 
-$infoBlock = $oPage->container->addItem(
+$infoBlock = WebPage::singleton()->container->addItem(
     new \Ease\TWB4\Panel(
         _('About Program'),
         'default',
@@ -44,11 +44,11 @@ if (file_exists('../README.md')) {
     }
 }
 
-$oPage->container->addItem(new \Ease\Html\DivTag(new \Ease\Html\ImgTag('images/openclipart/345630.svg', _(<<<'EOD'
+WebPage::singleton()->container->addItem(new \Ease\Html\DivTag(new \Ease\Html\ImgTag('images/openclipart/345630.svg', _(<<<'EOD'
 
 AI and Human Relationship
 EOD), ['class' => 'mx-auto d-block']), ['style' => 'height: 80%']));
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->draw();
+WebPage::singleton()->draw();

@@ -55,9 +55,9 @@ class CustomCommand extends \MultiFlexi\CommonAction
     }
 
     /**
-     * Is this Action Situable for Application.
+     * Is this Action suitable for Application.
      */
-    public static function usableForApp(Application $app): bool
+    public static function usableForApp(\MultiFlexi\Application $app): bool
     {
         return \is_object($app);
     }
