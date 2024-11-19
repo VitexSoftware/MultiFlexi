@@ -17,10 +17,10 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 
-$oPage->addItem(new PageTop(_('Dashboard')));
+WebPage::singleton()->addItem(new PageTop(_('Dashboard')));
 
-$oPage->container->addItem(new JobChart(new \MultiFlexi\Job(), ['id' => 'container']));
+WebPage::singleton()->container->addItem(new JobChart(new \MultiFlexi\Job(), ['id' => 'container']));
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->draw();
+WebPage::singleton()->draw();

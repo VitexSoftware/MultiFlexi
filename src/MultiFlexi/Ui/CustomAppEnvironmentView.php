@@ -28,7 +28,7 @@ namespace MultiFlexi\Ui;
 class CustomAppEnvironmentView extends EnvironmentView
 {
     /**
-     * @param array $properties
+     * @param array<string,string> $properties
      */
     public function __construct(int $appCompanyID, $properties = [])
     {

@@ -17,7 +17,7 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
 $appsAssigned = \Ease\WebPage::getRequestValue('appsassigned');
 // 3,4,6,5
@@ -25,7 +25,7 @@ $appsAssigned = \Ease\WebPage::getRequestValue('appsassigned');
 $companer = new \MultiFlexi\Company(\Ease\WebPage::getRequestValue('company_id', 'int'));
 
 if (null === $companer->getMyKey()) {
-    $oPage->redirect('companys.php');
+    WebPage::singleton()->redirect('companys.php');
 }
 
 $companyApp = new \MultiFlexi\CompanyApp($companer);
@@ -34,7 +34,7 @@ if (\Ease\WebPage::isPosted()) {
     $companyApp->assignApps(strstr($appsAssigned, ',') === false ? [(int) $appsAssigned] : array_map('intval', explode(',', $appsAssigned)));
 }
 
-$oPage->addItem(new PageTop(_('Applications used by Company')));
+WebPage::singleton()->addItem(new PageTop(_('Applications used by Company')));
 
 $addAppForm = new \Ease\TWB4\Form();
 $addAppForm->addItem(new \Ease\Html\InputHiddenTag('company_id', $companer->getMyKey()));
@@ -49,7 +49,7 @@ $addAppForm->addItem($chooseApp);
 
 $addAppForm->addItem(new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'success btn-lg btn-block'));
 
-$oPage->container->addItem(new CompanyPanel($companer, $addAppForm));
+WebPage::singleton()->container->addItem(new CompanyPanel($companer, $addAppForm));
 
 // $apper = new \MultiFlexi\Application();
 //
@@ -58,8 +58,8 @@ $oPage->container->addItem(new CompanyPanel($companer, $addAppForm));
 //    $apper->loadFromSQL($assignedAppId);
 //    $launchTabs->addTab($apper->getRecordName(), new AppInfo($apper, $companer->getMyKey()));
 // }
-// $oPage->container->addItem($launchTabs);
+// WebPage::singleton()->container->addItem($launchTabs);
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->draw();
+WebPage::singleton()->draw();

@@ -24,7 +24,7 @@ class LaunchButton extends \Ease\TWB4\LinkButton
 {
     /**
      * @param int   $appCompanyID
-     * @param array $properties
+     * @param array<string,string> $properties
      */
     public function __construct($appCompanyID, $properties = [])
     {

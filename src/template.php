@@ -17,12 +17,12 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
-$oPage->addItem(new PageTop(_('MultiFlexi')));
+WebPage::singleton()->addItem(new PageTop(_('MultiFlexi')));
 
-$oPage->container->addItem('put content here');
+WebPage::singleton()->container->addItem('put content here');
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->draw();
+WebPage::singleton()->draw();

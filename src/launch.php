@@ -21,14 +21,14 @@ use MultiFlexi\Application;
 
 require_once './init.php';
 
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
-$oPage->addItem(new PageTop(_('Application')));
+WebPage::singleton()->addItem(new PageTop(_('Application')));
 
-$companyId = $oPage->getRequestValue('company_id', 'int');
-$appId = $oPage->getRequestValue('app_id', 'int');
+$companyId = WebPage::singleton()->getRequestValue('company_id', 'int');
+$appId = WebPage::singleton()->getRequestValue('app_id', 'int');
 
-$runTemplate = new \MultiFlexi\RunTemplate($oPage->getRequestValue('id', 'int'));
+$runTemplate = new \MultiFlexi\RunTemplate(WebPage::singleton()->getRequestValue('id', 'int'));
 
 if ($companyId && $appId) {
     if ($runTemplate->runTemplateID($appId, $companyId) === 0) {
@@ -46,9 +46,9 @@ $instanceRow->addColumn(8, new \Ease\Html\H1Tag($instanceName));
 
 $envTable = new EnvironmentView($runTemplate->getAppEnvironment());
 
-$oPage->container->addItem(new Panel(_('App Run'), 'default', [$instanceRow, $envTable], new \Ease\Html\DivTag(new \Ease\Html\IframeTag('run.php?id='.$runTemplate->getMyKey(), ['id' => 'shell', 'title' => $instanceName]), ['class' => 'iframe-container'])));
+WebPage::singleton()->container->addItem(new Panel(_('App Run'), 'default', [$instanceRow, $envTable], new \Ease\Html\DivTag(new \Ease\Html\IframeTag('run.php?id='.$runTemplate->getMyKey(), ['id' => 'shell', 'title' => $instanceName]), ['class' => 'iframe-container'])));
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
 WebPage::singleton()->addCss(<<<'EOD'
 
@@ -75,4 +75,4 @@ WebPage::singleton()->addCss(<<<'EOD'
 
 EOD);
 
-$oPage->draw();
+WebPage::singleton()->draw();

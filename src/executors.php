@@ -17,12 +17,12 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
-$oPage->addItem(new PageTop(_('MultiFlexi - Executor Modules')));
+WebPage::singleton()->addItem(new PageTop(_('MultiFlexi - Executor Modules')));
 
-$oPage->container->addItem(new \Ease\TWB4\Panel(new \Ease\Html\H2Tag(_('Installed Executor Modules')), 'default', new ExecutorsListing()));
+WebPage::singleton()->container->addItem(new \Ease\TWB4\Panel(new \Ease\Html\H2Tag(_('Installed Executor Modules')), 'default', new ExecutorsListing()));
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->draw();
+WebPage::singleton()->draw();

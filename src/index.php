@@ -19,12 +19,12 @@ use Ease\TWB4\LinkButton;
 
 require_once './init.php';
 
-$oPage->addItem(new PageTop(_('MultiFlexi')));
+WebPage::singleton()->addItem(new PageTop(_('MultiFlexi')));
 
 try {
     if (empty(\Ease\Shared::user()->listingQuery()->count())) {
         \Ease\Shared::user()->addStatusMessage(_('There is no administrators in the database.'), 'warning');
-        $oPage->container->addItem(new LinkButton('createaccount.php', _('Create first Administrator Account'), 'success'));
+        WebPage::singleton()->container->addItem(new LinkButton('createaccount.php', _('Create first Administrator Account'), 'success'));
     }
 } catch (\PDOException $exc) {
     \Ease\Shared::user()->addStatusMessage($exc->getMessage());
@@ -37,8 +37,8 @@ $imageRow->addColumn('4', new \Ease\Html\DivTag(new \Ease\Html\ATag('https://www
 // $imageRow->addColumn('4', new \Ease\Html\DivTag(new \Ease\Html\ImgTag('images/openclipart/345630.svg', _('AI and Human Relationship'), ['class' => 'mx-auto d-block img-fluid'])), 'sm');
 $imageRow->addColumn('4');
 
-$oPage->container->addItem($imageRow);
+WebPage::singleton()->container->addItem($imageRow);
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->draw();
+WebPage::singleton()->draw();

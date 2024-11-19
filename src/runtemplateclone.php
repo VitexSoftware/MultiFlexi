@@ -19,7 +19,7 @@ use Ease\WebPage;
 use MultiFlexi\RunTemplate;
 
 require_once './init.php';
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
 $runTemplate = new RunTemplate(WebPage::getRequestValue('id', 'int'));
 $cloneName = \Ease\TWB4\WebPage::getRequestValue('clonename');
@@ -29,10 +29,10 @@ $runTemplate->setDataValue('name', $cloneName);
 
 try {
     $cloneId = $runTemplate->insertToSQL();
-    $oPage->redirect('runtemplate.php?id='.$cloneId);
+    WebPage::singleton()->redirect('runtemplate.php?id='.$cloneId);
 } catch (Exception $exc) {
-    $oPage->addItem(new PageTop(_('Runtemplate Clone')));
-    $oPage->addStatusMessage(_('Error creating runtemplate clone'), 'error');
-    $oPage->addItem(new PageBottom());
-    $oPage->draw();
+    WebPage::singleton()->addItem(new PageTop(_('Runtemplate Clone')));
+    WebPage::singleton()->addStatusMessage(_('Error creating runtemplate clone'), 'error');
+    WebPage::singleton()->addItem(new PageBottom());
+    WebPage::singleton()->draw();
 }

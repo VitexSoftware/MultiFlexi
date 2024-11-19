@@ -21,8 +21,8 @@ use Ease\TWB4\Table;
 use MultiFlexi\Servers;
 
 require_once './init.php';
-$oPage->onlyForLogged();
-$oPage->addItem(new PageTop(_('Server list')));
+WebPage::singleton()->onlyForLogged();
+WebPage::singleton()->addItem(new PageTop(_('Server list')));
 $servers = new Servers();
 $allFbData = $servers->getAll();
 $fbtable = new Table();
@@ -41,6 +41,6 @@ foreach ($allFbData as $serverId => $fbData) {
     $fbtable->addRowColumns($serverInfo);
 }
 
-$oPage->container->addItem(new Panel(_('Server Instances'), 'default', $fbtable, new LinkButton('server.php', _('Register new'))));
-$oPage->addItem(new PageBottom());
-$oPage->draw();
+WebPage::singleton()->container->addItem(new Panel(_('Server Instances'), 'default', $fbtable, new LinkButton('server.php', _('Register new'))));
+WebPage::singleton()->addItem(new PageBottom());
+WebPage::singleton()->draw();

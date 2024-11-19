@@ -26,7 +26,7 @@ class EnvironmentEditor extends \Ease\Html\TableTag
 
     /**
      * @param array $fields
-     * @param array $properties
+     * @param array<string,string> $properties
      */
     public function __construct($fields, $properties = [])
     {

@@ -40,7 +40,7 @@ class MainMenu extends \Ease\Html\DivTag
         if (\Ease\Shared::user()->isLogged()) { // Authenticated user
             $oPage = WebPage::singleton();
             $servers = $this->getMenuList(new \MultiFlexi\Servers());
-            $customers = $this->getMenuList(new \MultiFlexi\Customer(), null, $oPage->customer);
+            $customers = $this->getMenuList(new \MultiFlexi\Customer(), null, WebPage::singleton()->customer);
             $companys = $this->getMenuList(new \MultiFlexi\Company(), 'logo');
             $apps = $this->getMenuList(new \MultiFlexi\Application(), 'image');
             $this->serversMenuEnabled($nav, $servers);
@@ -83,11 +83,11 @@ class MainMenu extends \Ease\Html\DivTag
             $nav->addMenuItem(new \Ease\Html\ATag('logout.php', '<img height=30 src=images/application-exit.svg> '._('Sign Off')), 'right');
 
             if (\MultiFlexi\Runner::isServiceActive('multiflexi.service') === false) {
-                $oPage->addStatusMessage(_('MultiFlexi systemd service is not running. Consider `systemctl start multiflexi`'), 'warning');
+                WebPage::singleton()->addStatusMessage(_('MultiFlexi systemd service is not running. Consider `systemctl start multiflexi`'), 'warning');
             }
 
             if (\MultiFlexi\Runner::isServiceActive('anacron.timer') === false) {
-                $oPage->addStatusMessage(_('Periodic Task Launcher systemd service is not running. Consider `systemctl enable anacron`'), 'warning');
+                WebPage::singleton()->addStatusMessage(_('Periodic Task Launcher systemd service is not running. Consider `systemctl enable anacron`'), 'warning');
             }
 
             $nav->addItem($this->searchFrom());

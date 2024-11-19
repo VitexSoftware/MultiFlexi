@@ -17,14 +17,14 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
-$oPage->addItem(new PageTop(_('MultiFlexi')));
+WebPage::singleton()->addItem(new PageTop(_('MultiFlexi')));
 
-$oPage->container->addItem(new AllJobsLastMonthChart(new \MultiFlexi\Job(), ['id' => 'container']));
+WebPage::singleton()->container->addItem(new AllJobsLastMonthChart(new \MultiFlexi\Job(), ['id' => 'container']));
 
-$oPage->container->addItem(new \Ease\TWB4\Panel(_('Last 20 Jobs'), 'default', new JobHistoryTable(), new DbStatus()));
+WebPage::singleton()->container->addItem(new \Ease\TWB4\Panel(_('Last 20 Jobs'), 'default', new JobHistoryTable(), new DbStatus()));
 
-$oPage->addItem(new PageBottom('jobs/'));
+WebPage::singleton()->addItem(new PageBottom('jobs/'));
 
-$oPage->draw();
+WebPage::singleton()->draw();

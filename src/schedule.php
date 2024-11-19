@@ -16,16 +16,16 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 require_once './init.php';
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
 $jobID = WebPage::getRequestValue('cancel', 'int');
 $jobber = new \MultiFlexi\Job($jobID);
 $runTemplate = $jobID ? $jobber->runTemplate : new \MultiFlexi\RunTemplate(WebPage::getRequestValue('id', 'int'));
 
-$oPage->addItem(new PageTop(_('Schedule Job')));
+WebPage::singleton()->addItem(new PageTop(_('Schedule Job')));
 
 if (null === $runTemplate->getMyKey()) {
-    $oPage->container->addItem(new \Ease\TWB4\Alert('error', _('RunTemplate id not specified')));
+    WebPage::singleton()->container->addItem(new \Ease\TWB4\Alert('error', _('RunTemplate id not specified')));
     $runTemplate->addStatusMessage(_('RunTemplate id not specified'), 'error');
 } else {
     $app = $runTemplate->getApplication();
@@ -76,7 +76,7 @@ if (null === $runTemplate->getMyKey()) {
         $waitRow->addColumn(4, $waitTime);
 
         if ($waitTime > 0) {
-            $oPage->addJavaScript(
+            WebPage::singleton()->addJavaScript(
                 <<<'EOD'
 
 function wait(seconds) {
@@ -144,7 +144,7 @@ patience();
 EOD
             );
         } else {
-            $oPage->addJavaScript(
+            WebPage::singleton()->addJavaScript(
                 'window.location.href = "job.php?id='.$jobber->getMyKey().'";',
             );
         }
@@ -155,7 +155,7 @@ EOD
         );
         $appPanel->headRow->addItem(new RuntemplateButton($runTemplate));
 
-        $oPage->container->addItem(new CompanyPanel($company, $appPanel));
+        WebPage::singleton()->container->addItem(new CompanyPanel($company, $appPanel));
     } else {
         if ($jobID) {
             $scheduler = new \MultiFlexi\Scheduler();
@@ -163,16 +163,16 @@ EOD
             $canceller = new \MultiFlexi\Job($jobID);
             $canceller->deleteFromSQL();
 
-            $oPage->container->addItem(new \Ease\TWB4\Label('success', _('Job Canceled')));
+            WebPage::singleton()->container->addItem(new \Ease\TWB4\Label('success', _('Job Canceled')));
         } else {
             $appPanel = new ApplicationPanel($app, new JobScheduleForm($app, $company));
             $appPanel->headRow->addItem(new RuntemplateButton($runTemplate));
-            $oPage->container->addItem(
+            WebPage::singleton()->container->addItem(
                 new CompanyPanel($company, [$appPanel]),
             );
         }
     }
 }
 
-$oPage->addItem(new PageBottom($jobber->getMyKey() ? 'job/'.$jobber->getMyKey() : ''));
-$oPage->draw();
+WebPage::singleton()->addItem(new PageBottom($jobber->getMyKey() ? 'job/'.$jobber->getMyKey() : ''));
+WebPage::singleton()->draw();

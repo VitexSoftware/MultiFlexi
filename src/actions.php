@@ -21,7 +21,7 @@ use MultiFlexi\RunTemplate;
 
 require_once './init.php';
 
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
 $runTemplater = new RunTemplate(WebPage::getRequestValue('id', 'int'));
 $_SESSION['company'] = $runTemplater->getDataValue('company_id');
@@ -41,7 +41,7 @@ if (\Ease\WebPage::isPosted()) {
     $succesActions = $runTemplater->getDataValue('success') ? unserialize($runTemplater->getDataValue('success')) : [];
 }
 
-$oPage->addItem(new PageTop('🛠 '.$runTemplater->getRecordName()));
+WebPage::singleton()->addItem(new PageTop('🛠 '.$runTemplater->getRecordName()));
 
 $periodcalTaskInfo = $runTemplater->getData();
 
@@ -64,11 +64,11 @@ $jobtempform->addItem(new \Ease\Html\InputHiddenTag('interval', $periodcalTaskIn
 $jobtempform->addItem($appPanel);
 $jobtempform->addItem(new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'primary btn-lg btn-block'));
 
-$oPage->container->addItem(new CompanyPanel(new \MultiFlexi\Company($periodcalTaskInfo['company_id']), $jobtempform));
+WebPage::singleton()->container->addItem(new CompanyPanel(new \MultiFlexi\Company($periodcalTaskInfo['company_id']), $jobtempform));
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->finalizeRegistred();
+WebPage::singleton()->finalizeRegistred();
 
 $actionsData = ActionsChooser::sqlToForm($actions->getRuntemplateConfig($runTemplater->getMyKey()));
 
@@ -107,4 +107,4 @@ foreach ($actionModules as $action) {
 // )
 
 $jobtempform->fillUp($actionsData);
-$oPage->draw();
+WebPage::singleton()->draw();

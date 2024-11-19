@@ -17,14 +17,14 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
 // Engine::doThings($oPage);
 
-$oPage->addItem(new PageTop(_('Users')));
+WebPage::singleton()->addItem(new PageTop(_('Users')));
 
-// $oPage->addItem(new \Ease\TWB4\Container(new DBDataTable(new \MultiFlexi\User()))); TODO
+// WebPage::singleton()->addItem(new \Ease\TWB4\Container(new DBDataTable(new \MultiFlexi\User()))); TODO
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->draw();
+WebPage::singleton()->draw();

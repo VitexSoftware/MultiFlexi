@@ -17,32 +17,32 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
-$user_id = $oPage->getRequestValue('id', 'int');
+$user_id = WebPage::singleton()->getRequestValue('id', 'int');
 
 // $user = Engine::doThings($oPage);
 // if (is_null($user)) {
 $user = new \MultiFlexi\User($user_id);
 
-if ($oPage->isPosted()) {
+if (WebPage::singleton()->isPosted()) {
     unset($_REQUEST['class']);
     $user->addStatusMessage(_('Update'), $user->takeData($_REQUEST) && $user->dbsync() ? 'success' : 'error');
 }
 
 // }
 
-if ($oPage->getGetValue('delete', 'bool') === 'true') {
+if (WebPage::singleton()->getGetValue('delete', 'bool') === 'true') {
     if ($user->delete()) {
-        $oPage->redirect('users.php');
+        WebPage::singleton()->redirect('users.php');
 
         exit;
     }
 }
 
-$oPage->addItem(new PageTop(_('User')));
+WebPage::singleton()->addItem(new PageTop(_('User')));
 
-switch ($oPage->getRequestValue('action')) {
+switch (WebPage::singleton()->getRequestValue('action')) {
     case 'delete':
         $confirmBlock = new \Ease\TWB4\Well();
 
@@ -52,7 +52,7 @@ switch ($oPage->getRequestValue('action')) {
         $confirmator->addItem(new \Ease\TWB4\LinkButton('user.php?id='.$user->getId(), _('Ne').' '.\Ease\TWB4\Part::glyphIcon('ok'), 'success'));
         $confirmator->addItem(new \Ease\TWB4\LinkButton('?delete=true&'.$user->keyColumn.'='.$user->getID(), _('Ano').' '.\Ease\TWB4\Part::glyphIcon('remove'), 'danger'));
 
-        $oPage->container->addItem(new \Ease\TWB4\Panel('<strong>'.$user->getUserName().'</strong>', 'info', $confirmBlock));
+        WebPage::singleton()->container->addItem(new \Ease\TWB4\Panel('<strong>'.$user->getUserName().'</strong>', 'info', $confirmBlock));
 
         break;
 
@@ -61,11 +61,11 @@ switch ($oPage->getRequestValue('action')) {
         //        $operationsMenu->setTagCss(['float' => 'right']);
         //        $operationsMenu->dropdown->addTagClass('pull-right');
 
-        $oPage->container->addItem(new \Ease\TWB4\Panel(['<strong>'.$user->getUserName().'</strong>'/* $operationsMenu */], 'info', new UserForm($user)));
+        WebPage::singleton()->container->addItem(new \Ease\TWB4\Panel(['<strong>'.$user->getUserName().'</strong>'/* $operationsMenu */], 'info', new UserForm($user)));
 
         break;
 }
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->draw();
+WebPage::singleton()->draw();

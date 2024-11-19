@@ -30,12 +30,12 @@ use MultiFlexi\Job;
 use MultiFlexi\RunTemplate;
 
 require_once './init.php';
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
 $companer = new Company(WebPage::getRequestValue('company_id', 'int'));
 $application = new Application(WebPage::getRequestValue('app_id', 'int'));
 
-$oPage->addItem(new PageTop(_($application->getRecordName()).'@'.$companer->getRecordName()));
+WebPage::singleton()->addItem(new PageTop(_($application->getRecordName()).'@'.$companer->getRecordName()));
 // $companyApp = new \MultiFlexi\RunTemplate(\Ease\Document::getRequestValue('id', 'int'));
 // $appData = $companyApp->getAppInfo();
 // $companies = new Company($companyApp->getDataValue('company_id'));
@@ -109,6 +109,6 @@ $companyAppColumns = new Row();
 $companyAppColumns->addColumn(6, $runtemplatesDiv);
 $companyAppColumns->addColumn(6, [new H3Tag(_('Last 10 jobs')), $jobList, $historyButton]);
 
-$oPage->container->addItem(new CompanyPanel($companer, new ApplicationPanel($application, $companyAppColumns)));
-$oPage->addItem(new PageBottom());
-$oPage->draw();
+WebPage::singleton()->container->addItem(new CompanyPanel($companer, new ApplicationPanel($application, $companyAppColumns)));
+WebPage::singleton()->addItem(new PageBottom());
+WebPage::singleton()->draw();

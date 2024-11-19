@@ -21,7 +21,7 @@ use MultiFlexi\Company;
 use MultiFlexi\RunTemplate;
 
 require_once './init.php';
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
 $runTemplate = new RunTemplate(WebPage::getRequestValue('id', 'int'));
 
@@ -36,7 +36,7 @@ if (WebPage::getRequestValue('new', 'int') === 1) {
 
 if (WebPage::getRequestValue('delete', 'int') === 2) {
     $runTemplate->deleteFromSQL();
-    $oPage->redirect('companyapp.php?company_id='.$runTemplate->getDataValue('company_id').'&app_id='.$runTemplate->getDataValue('app_id'));
+    WebPage::singleton()->redirect('companyapp.php?company_id='.$runTemplate->getDataValue('company_id').'&app_id='.$runTemplate->getDataValue('app_id'));
 }
 
 $companies = new Company($runTemplate->getDataValue('company_id'));
@@ -52,7 +52,7 @@ $configurator = new \MultiFlexi\Configuration([
     'company_id' => $companies->getMyKey(),
 ], ['autoload' => false]);
 
-if ($oPage->isPosted()) {
+if (WebPage::singleton()->isPosted()) {
     $app->checkRequiredFields($_POST, true);
 
     if ($configurator->takeData($_POST) && null !== $configurator->saveToSQL()) {
@@ -62,11 +62,11 @@ if ($oPage->isPosted()) {
     }
 }
 
-$oPage->addItem(new PageTop($runTemplate->getRecordName().' '._('Configuration')));
+WebPage::singleton()->addItem(new PageTop($runTemplate->getRecordName().' '._('Configuration')));
 
 $appPanel = new ApplicationPanel($app, new RunTemplatePanel($runTemplate));
 
-$oPage->container->addItem(new CompanyPanel($companies, $appPanel));
+WebPage::singleton()->container->addItem(new CompanyPanel($companies, $appPanel));
 
-$oPage->addItem(new PageBottom('runtemplate/'.$runTemplate->getMyKey()));
-$oPage->draw();
+WebPage::singleton()->addItem(new PageBottom('runtemplate/'.$runTemplate->getMyKey()));
+WebPage::singleton()->draw();

@@ -18,10 +18,10 @@ namespace MultiFlexi\Ui;
 use MultiFlexi\Company;
 
 require_once './init.php';
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
 $companies = new Company();
-$oPage->addItem(new PageTop(_('Company list')));
+WebPage::singleton()->addItem(new PageTop(_('Company list')));
 
 $companyTable = new \Ease\TWB4\Table();
 
@@ -41,7 +41,7 @@ foreach ($companies->listingQuery() as $companyInfo) {
     $companyTable->addRowColumns($companyColumns);
 }
 
-$oPage->container->addItem($companyTable);
+WebPage::singleton()->container->addItem($companyTable);
 
-$oPage->addItem(new PageBottom());
-$oPage->draw();
+WebPage::singleton()->addItem(new PageBottom());
+WebPage::singleton()->draw();

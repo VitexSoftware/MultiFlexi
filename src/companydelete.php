@@ -20,8 +20,8 @@ use Ease\TWB4\Row;
 use MultiFlexi\Company;
 
 require_once './init.php';
-$oPage->onlyForLogged();
-$oPage->addItem(new PageTop(_('Company')));
+WebPage::singleton()->onlyForLogged();
+WebPage::singleton()->addItem(new PageTop(_('Company')));
 
 $companies = new Company(WebPage::getRequestValue('id', 'int'));
 
@@ -29,7 +29,7 @@ $_SESSION['company'] = $companies->getMyKey();
 
 $companyEnver = new \MultiFlexi\CompanyEnv($companies->getMyKey());
 
-if ($oPage->isPosted()) {
+if (WebPage::singleton()->isPosted()) {
     $companyEnver->deleteFromSQL(['company_id' => $companies->getMyKey()]);
     $appToCompany = new \MultiFlexi\RunTemplate();
     $appToCompany->deleteFromSQL(['company_id' => $companies->getMyKey()]);
@@ -42,7 +42,7 @@ if ($oPage->isPosted()) {
 
     if ($companies->deleteFromSQL(['id' => $companies->getMyKey()])) {
         $companies->addStatusMessage(_('Company Deleted'), 'success');
-        $oPage->redirect('companys.php');
+        WebPage::singleton()->redirect('companys.php');
     } else {
         $companies->addStatusMessage(_('Error deleting Company').' '.$companies->getDataValue('name'), 'error');
     }
@@ -68,6 +68,6 @@ if (\strlen($companies->getDataValue('logo'))) {
 
 $rightColumn[] = new EnvironmentView($companyEnver->getEnvFields());
 $instanceRow->addColumn(8, $rightColumn);
-$oPage->container->addItem(new CompanyPanel($companies, $instanceRow));
-$oPage->addItem(new PageBottom());
-$oPage->draw();
+WebPage::singleton()->container->addItem(new CompanyPanel($companies, $instanceRow));
+WebPage::singleton()->addItem(new PageBottom());
+WebPage::singleton()->draw();

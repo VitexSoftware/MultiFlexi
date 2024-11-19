@@ -17,7 +17,7 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
 $appsAssigned = \Ease\WebPage::getRequestValue('appsassigned');
 // 3,4,6,5
@@ -25,19 +25,19 @@ $appsAssigned = \Ease\WebPage::getRequestValue('appsassigned');
 $companer = new \MultiFlexi\Company(\Ease\WebPage::getRequestValue('company_id', 'int'));
 
 if (null === $companer->getMyKey()) {
-    $oPage->redirect('companys.php');
+    WebPage::singleton()->redirect('companys.php');
 }
 
 $companyApp = new \MultiFlexi\CompanyApp($companer);
 
-$oPage->addItem(new PageTop(_('Applications used by Company')));
+WebPage::singleton()->addItem(new PageTop(_('Applications used by Company')));
 
 $addAppForm = new \Ease\TWB4\Form();
 $addAppForm->addItem(new \Ease\Html\InputHiddenTag('company_id', $companer->getMyKey()));
 
 $assignedRaw = $companyApp->getAssigned()->fetchAll('app_id');
 $assigned = empty($assignedRaw) ? [] : array_keys($assignedRaw);
-$oPage->container->addItem($addAppForm);
+WebPage::singleton()->container->addItem($addAppForm);
 
 $apper = new \MultiFlexi\Application();
 
@@ -48,8 +48,8 @@ foreach ($assigned as $assignedAppId) {
     $launchTabs->addTab(new AppLogo($apper, ['style' => 'height: 20px']).'&nbsp;'._($apper->getRecordName()), new AppInfo($apper, $companer->getMyKey()));
 }
 
-$oPage->container->addItem(new CompanyPanel($companer, [new \Ease\Html\H2Tag(_('Application Launcher')), $launchTabs]));
+WebPage::singleton()->container->addItem(new CompanyPanel($companer, [new \Ease\Html\H2Tag(_('Application Launcher')), $launchTabs]));
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->draw();
+WebPage::singleton()->draw();

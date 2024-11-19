@@ -17,7 +17,7 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 $results = new \Ease\Html\UlTag();
 
 $searchTerm = \Ease\WebPage::getRequestValue('search');
@@ -58,10 +58,21 @@ if ($jobsFound->count()) {
     }
 }
 
-$oPage->addItem(new PageTop(_('MultiFlexi')));
+$actionConfier = new \MultiFlexi\ActionConfig();
+$actionConfigsFound = $actionConfier->listingQuery()->where('value LIKE "%'.$searchTerm.'%"');
 
-$oPage->container->addItem($results);
+if ($actionConfigsFound->count()) {
+    foreach ($actionConfigsFound as $actionConfig) {
+        $module = '\\MultiFlexi\\Action\\'.$actionConfig['module'];
+        $moduleLogo = new \Ease\Html\ImgTag($module::logo(), $module::name(), ['title' => $module::description(), 'height' => 20]);
+        $results->addItemSmart(new \Ease\Html\ATag('actions.php?id='.$actionConfig['runtemplate_id'], '🔧&nbsp; '._('RunTemplate').' #'.$actionConfig['runtemplate_id'].' '.$moduleLogo.' '.$actionConfig['keyname'].'='.$actionConfig['value']));
+    }
+}
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageTop(_('MultiFlexi')));
 
-$oPage->draw();
+WebPage::singleton()->container->addItem($results);
+
+WebPage::singleton()->addItem(new PageBottom());
+
+WebPage::singleton()->draw();

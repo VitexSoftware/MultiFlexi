@@ -32,7 +32,7 @@ class AppRow extends \Ease\TWB4\Row
      * Application in Company context.
      *
      * @param array $appData
-     * @param array $properties
+     * @param array<string,string> $properties
      */
     public function __construct($appData, $properties = [])
     {

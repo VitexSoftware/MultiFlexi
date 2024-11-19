@@ -20,7 +20,7 @@ use Ease\TWB4\Row;
 use MultiFlexi\Conffield;
 
 require_once './init.php';
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
 $appId = WebPage::getRequestValue('app_id', 'int');
 $confId = WebPage::getRequestValue('id', 'int');
@@ -47,7 +47,7 @@ if (null !== $delete) {
     }
 }
 
-if ($oPage->isPosted()) {
+if (WebPage::singleton()->isPosted()) {
     if ($conffields->takeData($_POST) && null !== $conffields->dbsync()) {
         $conffields->addStatusMessage(_('Config field Saved'), 'success');
     } else {
@@ -68,7 +68,7 @@ if (\strlen($instanceName)) {
     $instanceLink = null;
 }
 
-$oPage->addItem(new PageTop(_('Config Fields')));
+WebPage::singleton()->addItem(new PageTop(_('Config Fields')));
 
 $instanceRow = new Row();
 $instanceRow->addColumn(8, new ConfFieldsForm($conffields->getData(), new \Ease\Html\InputHiddenTag('app_id', $appId)));
@@ -90,8 +90,8 @@ $editorRow = new \Ease\TWB4\Row();
 $editorRow->addColumn(8, $instanceRow);
 $editorRow->addColumn(2, new AppLogo($appliacation));
 
-$oPage->container->addItem(new ApplicationPanel($appliacation, $editorRow, $cfgs));
+WebPage::singleton()->container->addItem(new ApplicationPanel($appliacation, $editorRow, $cfgs));
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->draw();
+WebPage::singleton()->draw();

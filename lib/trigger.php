@@ -96,7 +96,7 @@ if (isset($options['runtemplate'])) {
     $prepared = $jobber->prepareJob($runTemplater->getMyKey(), $uploadEnv, '', $options['executor'] ?? 'Native');
     $jobber->scheduleJobRun(new \DateTime($when));
 
-    if (\Ease\Shared::cfg('APP_DEBUG')) {
+    if (Shared::cfg('APP_DEBUG')) {
         $jobber->addStatusMessage(
             sprintf(
                 _('🧩 #%d  %s: %s - %s using %s'),

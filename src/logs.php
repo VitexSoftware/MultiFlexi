@@ -17,13 +17,13 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 
-$oPage->onlyForLogged();
+WebPage::singleton()->onlyForLogged();
 
-$oPage->addItem(new PageTop(_('Logs')));
+WebPage::singleton()->addItem(new PageTop(_('Logs')));
 
-// $oPage->addItem(new LogViewer());
+// WebPage::singleton()->addItem(new LogViewer());
 
-$oPage->addJavaScript(<<<'EOD'
+WebPage::singleton()->addJavaScript(<<<'EOD'
 $.fn.dataTable.ext.buttons.dismisAll = {
     text: '
 EOD._('Dismis All').<<<'EOD'
@@ -37,13 +37,13 @@ EOD._('Dismis All').<<<'EOD'
 };
 EOD);
 
-$oPage->includeJavascript('js/dismisLog.js');
+WebPage::singleton()->includeJavascript('js/dismisLog.js');
 
-$oPage->container->addItem(new DBDataTable(new \MultiFlexi\Logger(), ['buttons' => ['dismisAll']]));
+WebPage::singleton()->container->addItem(new DBDataTable(new \MultiFlexi\Logger(), ['buttons' => ['dismisAll']]));
 
-$oPage->addItem(new PageBottom());
+WebPage::singleton()->addItem(new PageBottom());
 
-$oPage->addJavaScript(<<<'EOD'
+WebPage::singleton()->addJavaScript(<<<'EOD'
 
     setInterval(function () {
       Molecule.ajax.reload();
@@ -51,4 +51,4 @@ $oPage->addJavaScript(<<<'EOD'
 
 EOD);
 
-$oPage->draw();
+WebPage::singleton()->draw();

@@ -22,6 +22,11 @@ namespace MultiFlexi;
  */
 class Token extends Engine
 {
+    /**
+     * Summary of __construct
+     * @param mixed $identifier
+     * @param mixed $options
+     */
     public function __construct($identifier = null, $options = [])
     {
         $this->nameColumn = 'token';

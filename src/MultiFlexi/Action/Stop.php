@@ -15,8 +15,6 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Action;
 
-use MultiFlexi\Env\Application;
-
 /**
  * Description of Reschedule.
  *
@@ -64,7 +62,7 @@ class Stop extends \MultiFlexi\CommonAction
     /**
      * Is this Action Suitable for Application.
      */
-    public static function usableForApp(Application $app): bool
+    public static function usableForApp(\MultiFlexi\Application $app): bool
     {
         return \is_object($app);
     }
