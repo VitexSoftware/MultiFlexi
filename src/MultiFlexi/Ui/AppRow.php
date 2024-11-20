@@ -31,8 +31,8 @@ class AppRow extends \Ease\TWB4\Row
     /**
      * Application in Company context.
      *
-     * @param array $appData
-     * @param array<string,string> $properties
+     * @param array                 $appData
+     * @param array<string, string> $properties
      */
     public function __construct($appData, $properties = [])
     {

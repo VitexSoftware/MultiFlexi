@@ -25,7 +25,7 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 class RuntemplateApi extends AbstractRuntemplateApi
 {
-    public $engine;
+    public \MultiFlexi\RunTemplate $engine;
 
     /**
      * RunTemplate Handler Engine.

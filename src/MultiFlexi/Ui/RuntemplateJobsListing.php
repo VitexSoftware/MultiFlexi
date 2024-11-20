@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
+use MultiFlexi\Env\RunTemplate;
+
 /**
  * MultiFlexi - Application Launch Form.
  *
@@ -26,6 +28,11 @@ class RuntemplateJobsListing extends \MultiFlexi\Ui\JobHistoryTable
     public \MultiFlexi\RunTemplate $runtemplate;
     public bool $showIcon = false;
     public bool $showCompany = false;
+    /**
+     * Runtemplate Jobs Listing.
+     *
+     * @param array<string, string> $properties Additional properties
+     */
     public function __construct(\MultiFlexi\RunTemplate $runtemplate, array $properties = [])
     {
         $this->runtemplate = $runtemplate;

@@ -16,7 +16,6 @@ declare(strict_types=1);
 namespace MultiFlexi;
 
 use Ease\Anonym;
-use Ease\Functions;
 use Ease\Shared;
 
 \define('APP_NAME', 'ZabbixTester');

@@ -30,8 +30,8 @@ class JobHistoryTable extends \Ease\TWB4\Table
     /**
      * Job History presented as table.
      *
-     * @param mixed $content
-     * @param array<string,string> $properties
+     * @param mixed                 $content
+     * @param array<string, string> $properties
      */
     public function __construct($content = null, $properties = [])
     {

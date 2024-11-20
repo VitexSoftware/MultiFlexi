@@ -22,6 +22,11 @@ namespace MultiFlexi\Ui;
  */
 class CompanyAppLink extends \Ease\Html\ATag
 {
+    /**
+     * Company Application Link.
+     *
+     * @param array<string, string> $properties
+     */
     public function __construct(\MultiFlexi\Company $company, \MultiFlexi\Application $app, $properties = [])
     {
         $properties['title'] = $company->getDataValue('code');

@@ -23,8 +23,8 @@ namespace MultiFlexi\Ui;
 class EnvironmentView extends \Ease\Html\TableTag
 {
     /**
-     * @param array $environment
-     * @param array<string,string> $properties
+     * @param array                 $environment
+     * @param array<string, string> $properties
      */
     public function __construct($environment = null, $properties = [])
     {

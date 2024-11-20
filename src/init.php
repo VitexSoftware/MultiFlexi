@@ -39,3 +39,4 @@ Shared::user(null, '\MultiFlexi\User');
  * @global WebPage $oPage
  */
 $oPage = new WebPage('');
+WebPage::singleton($oPage);

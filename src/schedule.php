@@ -31,8 +31,9 @@ if (null === $runTemplate->getMyKey()) {
     $app = $runTemplate->getApplication();
     $company = $runTemplate->getCompany();
 
-    if (WebPage::isPosted()) {
-        $when = WebPage::getRequestValue('when');
+    $when = WebPage::getRequestValue('when');
+
+    if ($when) {
         $uploadEnv = [];
 
         /**
