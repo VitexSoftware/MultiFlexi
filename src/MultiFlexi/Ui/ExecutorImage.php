@@ -35,7 +35,7 @@ class ExecutorImage extends \Ease\Html\ImgTag
             $image = $executorClass::logo();
             $properties['title'] = $executorClass::description();
         } else {
-            $image = 'img/cancel.svg';
+            $image = 'images/cancel.svg';
             $properties['title'] = _('Executor not availble');
         }
 
