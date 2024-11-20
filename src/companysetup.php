@@ -66,8 +66,6 @@ if (WebPage::singleton()->isPosted()) {
         $companies->setDataValue('name', WebPage::getGetValue('name'));
         $companies->setDataValue('ic', WebPage::getGetValue('ic'));
         $companies->setDataValue('email', WebPage::getGetValue('email'));
-        $companies->serverId = WebPage::getGetValue('server', 'int');
-        $companies->loadFromAbraFlexi();
     }
 }
 
