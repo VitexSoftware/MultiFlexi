@@ -90,3 +90,9 @@ Description: MultiFlexi support for RaiffeisenBank
 #Architecture: all
 #Description: MultiFlexi debugging tools
 # MultiFlexi prober script
+
+#Package: multiflexi-doc
+#Multi-Arch: foreign
+#Depends: ${misc:Depends}
+#Architecture: all
+#Description: MultiFlexi Html Manual
