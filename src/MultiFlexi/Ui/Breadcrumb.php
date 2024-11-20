@@ -25,8 +25,8 @@ class Breadcrumb extends \Ease\TWB4\Breadcrumb
     /**
      * App Breadcrumb.
      *
-     * @param mixed $content
-     * @param array<string,string> $properties
+     * @param mixed                 $content
+     * @param array<string, string> $properties
      */
     public function __construct($content = null, $properties = [])
     {

@@ -44,13 +44,13 @@ if (empty($emailTo)) {
 
         $controlUser->passwordChange($newPassword);
 
-        $email = WebPage::singleton()->addItem(new \Ease\HtmlMailer(
+        $email = new \Ease\HtmlMailer(
             $userEmail,
             \Ease\Shared::appName().' -'.sprintf(
                 _('New password for %s'),
                 $_SERVER['SERVER_NAME'],
             ),
-        ));
+        );
 
         $email->setMailHeaders(['From' => \Ease\Shared::cfg('EMAIL_FROM')]);
         $email->addItem(_('Sign On informations was changed').":\n");

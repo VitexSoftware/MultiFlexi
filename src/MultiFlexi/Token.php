@@ -23,7 +23,8 @@ namespace MultiFlexi;
 class Token extends Engine
 {
     /**
-     * Summary of __construct
+     * Summary of __construct.
+     *
      * @param mixed $identifier
      * @param mixed $options
      */

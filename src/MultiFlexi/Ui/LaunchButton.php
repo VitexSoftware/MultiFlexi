@@ -23,8 +23,8 @@ namespace MultiFlexi\Ui;
 class LaunchButton extends \Ease\TWB4\LinkButton
 {
     /**
-     * @param int   $appCompanyID
-     * @param array<string,string> $properties
+     * @param int                   $appCompanyID
+     * @param array<string, string> $properties
      */
     public function __construct($appCompanyID, $properties = [])
     {
