@@ -35,7 +35,7 @@ class ActionImage extends \Ease\Html\ImgTag
             $image = $actionClass::logo();
             $properties['title'] = $actionClass::description();
         } else {
-            $image = 'img/cancel.svg';
+            $image = 'images/cancel.svg';
             $properties['title'] = _('Action not availble');
         }
 

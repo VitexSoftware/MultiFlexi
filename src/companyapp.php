@@ -70,7 +70,7 @@ if ($runtemplatesRaw->count()) {
         $successIcons = RunTemplate::actionIcons($runtemplateData['success'] ? unserialize($runtemplateData['success']) : null, ['style' => 'border-bottom: 4px solid green;']);
         $failIcons = RunTemplate::actionIcons($runtemplateData['fail'] ? unserialize($runtemplateData['fail']) : null, ['style' => 'border-bottom: 4px solid red;']);
 
-        $runtemplateRow->addColumn(8, ['<span title="'._(RunTemplate::codeToInterval($runtemplateData['interv'])).'">'.RunTemplate::getIntervalEmoji($runtemplateData['interv']).'</span>&nbsp;', new ATag('runtemplate.php?id='.$runtemplateData['id'], $runtemplateData['name']), '&nbsp;<a href="schedule.php?id='.$runtemplateData['id'].'&when=now" title="'._('Launch now').'"><span style="color: green; font-weight: xx-large;">▶</span></a>', '&nbsp;&nbsp;', $successIcons, '&nbsp;', $failIcons]);
+        $runtemplateRow->addColumn(8, ['<span title="'._(RunTemplate::codeToInterval($runtemplateData['interv'])).'">'.RunTemplate::getIntervalEmoji($runtemplateData['interv']).'</span>&nbsp;', new ATag('runtemplate.php?id='.$runtemplateData['id'], $runtemplateData['name']), '&nbsp;<a href="schedule.php?id='.$runtemplateData['id'].'&when=now&executor=Native" title="'._('Launch now').'"><span style="color: green; font-weight: xx-large;">▶</span></a>', '&nbsp;&nbsp;', $successIcons, '&nbsp;', $failIcons]);
         $runtemplatesDiv->addItem($runtemplateRow);
         $runtemplates[$runtemplateData['id']] = $runtemplateData['name'];
     }
