@@ -211,6 +211,7 @@ class RunTemplate extends \MultiFlexi\Engine
             'w' => '📅',
             'm' => '🌛',
             'y' => '🎆',
+            '' => '',
         ];
 
         return \array_key_exists($interval, $emojis) ? $emojis[$interval] : '';

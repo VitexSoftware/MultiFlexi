@@ -52,7 +52,7 @@ if (null === $runTemplate->getMyKey()) {
             }
         }
 
-        $prepared = $jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, $when, \Ease\WebPage::getRequestValue('executor'));
+        $prepared = $jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, new \DateTime($when), \Ease\WebPage::getRequestValue('executor'), 'adhoc');
         $jobber->scheduleJobRun(new \DateTime($when));
 
         $glassHourRow = new \Ease\TWB4\Row();
@@ -71,9 +71,9 @@ if (null === $runTemplate->getMyKey()) {
 
         $waitRow = new \Ease\TWB4\Row();
         $waitRow->addTagClass('justify-content-md-center');
-        $waitRow->addColumn(4, $when);
+        $waitRow->addColumn(4, sprintf(_('Start after %s'), $when));
         $waitRow->addColumn(4, new \Ease\Html\Widgets\LiveAge($beginTime), 'sm');
-        $waitRow->addColumn(4, $waitTime);
+        $waitRow->addColumn(4, sprintf(_('Seconds to wait: %d'), $waitTime));
 
         if ($waitTime > 0) {
             WebPage::singleton()->addJavaScript(

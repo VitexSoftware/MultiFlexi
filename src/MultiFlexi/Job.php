@@ -91,14 +91,15 @@ class Job extends Engine
     /**
      * Create New Job Record in database.
      *
-     * @param int    $runtemplateId Job is performed in terms of given runtemplate
-     * @param array  $environment   Environment prepared for Job execution
-     * @param string $scheduled     Schedule Info
-     * @param string $executor      Chosen Executor class name
+     * @param int                   $runtemplateId Job is performed in terms of given RunTemplate
+     * @param array<string, string> $environment   Environment prepared for Job execution
+     * @param \DateTime             $scheduled     Schedule Timestamp
+     * @param string                $executor      Chosen Executor class name
+     * @param string                $scheduleType  Schedule type Info
      *
      * @return int new job ID
      */
-    public function newJob(int $runtemplateId, array $environment, string $scheduled = 'adhoc', $executor = 'Native')
+    public function newJob(int $runtemplateId, array $environment, \DateTime $scheduled, $executor = 'Native', $scheduleType = 'adhoc')
     {
         $this->runTemplate->loadFromSQL($runtemplateId);
         $jobId = $this->insertToSQL([
@@ -109,7 +110,8 @@ class Job extends Engine
             'exitcode' => -1,
             'stdout' => '',
             'stderr' => '',
-            'schedule' => $scheduled,
+            'schedule' => $scheduled->format('Y-m-d H:i:s'),
+            'schedule_type' => $scheduleType,
             'executor' => $executor,
             'launched_by' => \Ease\Shared::user()->getMyKey(),
         ]);
@@ -249,12 +251,12 @@ EOD;
     /**
      * Prepare Job for run.
      *
-     * @param int    $runTemplateId ID of RunTempate to use
-     * @param array  $envOverride   use to change default env [env with info]
-     * @param string $scheduled     Time to launch
-     * @param string $executor      Executor Class Name
+     * @param int       $runTemplateId ID of RunTempate to use
+     * @param array     $envOverride   use to change default env [env with info]
+     * @param \DateTime $scheduled     Time to launch
+     * @param string    $executor      Executor Class Name
      */
-    public function prepareJob(int $runTemplateId, $envOverride = [], $scheduled = 'adhoc', $executor = 'Native'): string
+    public function prepareJob(int $runTemplateId, array $envOverride, \DateTime $scheduled, string $executor = 'Native', string $scheduleType = 'adhoc'): string
     {
         $outline = '';
         $this->runTemplate = new RunTemplate($runTemplateId);
@@ -267,7 +269,7 @@ EOD;
         $this->company = $this->runTemplate->getCompany();
         $this->setDataValue('executor', $executor);
         $this->environment = array_merge($this->getFullEnvironment(), $envOverride);
-        $this->loadFromSQL($this->newJob($runTemplateId, $this->environment, $scheduled, $executor));
+        $this->loadFromSQL($this->newJob($runTemplateId, $this->environment, $scheduled, $executor, $scheduleType));
 
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
             $this->zabbixMessageData = [
@@ -277,12 +279,16 @@ EOD;
                 'app_name' => $this->application->getDataValue('name'),
                 'begin' => null,
                 'end' => null,
+                'scheduled' => $scheduled,
+                'schedule_type' => $scheduleType,
                 'company_id' => $companyId,
                 'company_name' => $this->company->getDataValue('name'),
                 'company_code' => $this->company->getDataValue('code'),
+                'runtemplate_id' => $runTemplateId,
                 'exitcode' => -1,
                 'stdout' => null,
                 'stderr' => null,
+                'executor' => $executor,
                 'launched_by_id' => (int) \Ease\Shared::user()->getMyKey(),
                 'launched_by' => empty(\Ease\Shared::user()->getUserLogin()) ? 'cron' :
                 \Ease\Shared::user()->getUserLogin(),

@@ -58,7 +58,7 @@ class JobHistoryTable extends \Ease\TWB4\Table
     public function getJobs()
     {
         return $this->jobber->listingQuery()->
-                        select(['apps.name AS appname', 'apps.uuid', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'job.executor', 'job.company_id', 'company.name', 'company.logo', 'schedule'], true)
+                        select(['apps.name AS appname', 'apps.uuid', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'job.executor', 'job.company_id', 'company.name', 'company.logo', 'schedule', 'schedule_type'], true)
                             ->leftJoin('apps ON apps.id = job.app_id')
                             ->leftJoin('user ON user.id = job.launched_by')
                             ->limit($this->limit)
@@ -86,7 +86,7 @@ class JobHistoryTable extends \Ease\TWB4\Table
             if ($job['begin']) {
                 $job['begin'] = [$job['begin'], '<br>', new \Ease\Html\SmallTag(new \Ease\Html\Widgets\LiveAge(\DateTime::createFromFormat('!Y-m-d H:i:s', $job['begin'])))];
             } else {
-                $job['begin'] = '⏳';
+                $job['begin'] = '⏳'.($job['schedule'] ? new \Ease\Html\DivTag(new \Ease\Html\Widgets\LiveAge(new \DateTime($job['schedule']))) : '');
             }
 
             unset($job['exitcode']);
@@ -105,7 +105,7 @@ class JobHistoryTable extends \Ease\TWB4\Table
                 unset($job['company_id']);
             }
 
-            unset($job['name'], $job['logo']);
+            unset($job['name'], $job['logo'], $job['schedule_type']);
 
             $this->addRowColumns($job);
         }
