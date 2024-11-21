@@ -33,9 +33,11 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         $runtemplateId = $runtemplate->getMyKey();
         $runtemplateOptions = new \Ease\TWB4\Row();
         $intervalChoosen = $runtemplate->getDataValue('interv') ?? 'n';
-        $delayChoosen = $runtemplate->getDataValue('delay') ?? '0';
+        $delayChoosen = intval($runtemplate->getDataValue('delay'));
         $intervalChooser = new \MultiFlexi\Ui\IntervalChooser($runtemplateId.'_interval', $intervalChoosen, ['id' => $runtemplateId.'_interval', 'checked' => 'true', 'data-runtemplate' => $runtemplateId]);
+
         $delayChooser = new \MultiFlexi\Ui\DelayChooser($runtemplateId.'_delay', $delayChoosen, ['id' => $runtemplateId.'_delay', 'checked' => 'true', 'data-runtemplate' => $runtemplateId]);
+        $executorChooser = new AppExecutorSelect($runtemplate->getApplication(), [], $runtemplate->getDataValue('executor'), ['id' => $runtemplateId.'_executor', 'data-runtemplate' => $runtemplateId]);
 
         $scheduleButton = new \Ease\TWB4\LinkButton('schedule.php?id='.$runtemplateId, [_('Manual Schedule').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
         $runtemplateOptions->addColumn(4, '');
@@ -49,7 +51,7 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
 
         $runtemplateJobs = new \MultiFlexi\Ui\RuntemplateJobsListing($runtemplate);
 
-        $runtemplateOptions->addColumn(4, [_('automatically schedule in an interval').': ', $intervalChooser, '<br/>', _('Startup delay'), $delayChooser]);
+        $runtemplateOptions->addColumn(4, [_('automatically schedule in an interval').': ', $intervalChooser, '<br/>', _('Startup delay'), $delayChooser,'<br/>', _('Executor'), $executorChooser]);
         $nameInput = new \Ease\Html\ATag('#', $runtemplate->getRecordName(), ['class' => 'editable', 'style' => 'font-size: xxx-large;', 'id' => 'name', 'data-pk' => $runtemplate->getMyKey(), 'data-url' => 'runtemplatesave.php', 'data-title' => _('Update RunTemplate name')]);
 
         $runtemplateBottom = new \Ease\TWB4\Row();
@@ -141,6 +143,37 @@ _delay').after( "⚰️" );
             $('#
 EOD.$this->runtemplate->getMyKey().<<<'EOD'
 _delay').after( "💾" );
+            console.log("saved");
+        },
+            type: 'POST'
+        });
+});
+
+EOD);
+
+        $this->addJavaScript(<<<'EOD'
+
+$('#
+EOD.$this->runtemplate->getMyKey().<<<'EOD'
+_executor').change( function(event, state) {
+
+$.ajax({
+   url: 'rtexecutor.php',
+        data: {
+                runtemplate: $(this).attr("data-runtemplate"),
+                executor: $(this).val()
+        },
+        error: function() {
+            $('#
+EOD.$this->runtemplate->getMyKey().<<<'EOD'
+_executor').after( "⚰️" );
+            console.log("not saved");
+        },
+
+        success: function(data) {
+            $('#
+EOD.$this->runtemplate->getMyKey().<<<'EOD'
+_executor').after( "💾" );
             console.log("saved");
         },
             type: 'POST'

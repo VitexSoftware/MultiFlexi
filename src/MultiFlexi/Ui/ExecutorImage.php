@@ -34,11 +34,13 @@ class ExecutorImage extends \Ease\Html\ImgTag
         if (class_exists($executorClass)) {
             $image = $executorClass::logo();
             $properties['title'] = $executorClass::description();
+            $name = $executorClass::name();
         } else {
             $image = 'images/cancel.svg';
             $properties['title'] = _('Executor not availble');
+            $name = _('Unknown');
         }
 
-        parent::__construct($image, $executorClass::name(), $properties);
+        parent::__construct($image, $name, $properties);
     }
 }

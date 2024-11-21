@@ -30,12 +30,12 @@ class JobInfo extends \Ease\Html\DivTag
     public function __construct(\MultiFlexi\Job $job, $properties = [])
     {
         $executorClass = '\\MultiFlexi\\Executor\\'.$job->getDataValue('executor');
-        $executorImage = new ExecutorImage($job->getDataValue('executor'),['height'=>20]);
+        $executorImage = new ExecutorImage($job->getDataValue('executor'), ['height' => 20]);
 
         $jobInfoRow = new \Ease\TWB4\Row();
         $jobInfoRow->addColumn(1, [_('Exitcode').'<br>', new ExitCode($job->getDataValue('exitcode'), ['style' => 'font-size: 2.0em; font-family: monospace;'])]);
         $jobInfoRow->addColumn(4, [_('Commandline').'<br>', $job->getDataValue('command'), '<br>', $job->application->getRecordName().' v.:'.$job->getDataValue('app_version')]);
-        $jobInfoRow->addColumn(2, [_('Scheduled').'<br>', new \Ease\Html\Widgets\LiveAge(new \DateTime($job->getDataValue('schedule'))),'<br>', $executorImage, _('Executor').' '. $executorClass::name() ]);
+        $jobInfoRow->addColumn(2, [_('Scheduled').'<br>', new \Ease\Html\Widgets\LiveAge(new \DateTime($job->getDataValue('schedule'))), '<br>', $executorImage, _('Executor').' '.$executorClass::name()]);
         $jobInfoRow->addColumn(2, [_('Begin').'<br>', [
             $job->getDataValue('begin'),
             '&nbsp;',
@@ -50,7 +50,7 @@ class JobInfo extends \Ease\Html\DivTag
         //        $jobInfoRow->addColumn(1, [_('Commandline').'<br>', $job->getDataValue('command')]);
 
         $launcher = new \MultiFlexi\User($job->getDataValue('launched_by'));
-        
+
         $jobInfoRow->addColumn(1, [_('Launched by').'<br>', $launcher->getMyKey() ? new \Ease\Html\ATag('user.php?id='.$launcher->getMyKey(), new \Ease\TWB4\Badge('info', $launcher->getUserLogin())) : _('Timer')]);
 
         parent::__construct($jobInfoRow, $properties);

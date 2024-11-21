@@ -30,13 +30,12 @@ class DelayChooser extends \Ease\Html\InputTag
      */
     public function __construct(string $name, int $value, array $properties = [])
     {
-        $time = date('H:i:s', $value);
         $properties['type'] = 'text';
         $properties['maxlength'] = 8;
         $properties['pattern'] = '^((\d+:)?\d+:)?\d*$';
         $properties['title'] = _('The amount of seconds, optionally preceded by minutes: or by hours:minutes: (empty or zero leads for immediate launch).');
         $properties['placeholder'] = _('hh:mm:ss (leave blank or zero for immediate launch)');
         $properties['size'] = 30;
-        parent::__construct($name, $time, $properties);
+        parent::__construct($name, gmdate('H:i:s', $value), $properties);
     }
 }

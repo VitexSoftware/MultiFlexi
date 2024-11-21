@@ -53,7 +53,7 @@ switch ($showOnly) {
         break;
 }
 
-$jobs = $jobber->listingQuery()->select(['apps.name AS appname', 'apps.uuid AS uuid', 'job.id', 'begin', 'exitcode', 'launched_by', 'job.executor', 'login', 'job.app_id AS app_id', 'runtemplate.id AS runtemplate_id', 'runtemplate.name AS runtemplate_name', 'schedule AS scheduled'], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->leftJoin('runtemplate ON runtemplate.id = job.runtemplate_id')->where('job.company_id', $companies->getMyKey())->limit(20)->orderBy('job.id DESC')->where($condition)->fetchAll();
+$jobs = $jobber->listingQuery()->select(['apps.name AS appname', 'apps.uuid AS uuid', 'job.id', 'begin', 'exitcode', 'launched_by', 'job.executor', 'job.schedule_type', 'login', 'job.app_id AS app_id', 'runtemplate.id AS runtemplate_id', 'runtemplate.name AS runtemplate_name', 'schedule AS scheduled'], true)->leftJoin('apps ON apps.id = job.app_id')->leftJoin('user ON user.id = job.launched_by')->leftJoin('runtemplate ON runtemplate.id = job.runtemplate_id')->where('job.company_id', $companies->getMyKey())->limit(20)->orderBy('job.id DESC')->where($condition)->fetchAll();
 $jobList = new \Ease\TWB4\Table();
 $jobList->addRowHeaderColumns([_('Run template').' / '._('Application'), _('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'), _('Schedule Launch')]);
 
@@ -76,16 +76,16 @@ foreach ($jobs as $job) {
     if ($job['begin']) {
         $job['begin'] = [$job['begin'], '<br>', new \Ease\Html\SmallTag(new \Ease\Html\Widgets\LiveAge(new \DateTime($job['begin'])))];
     } else {
-        $job['begin'] = '⏳&nbsp;'._('Scheduled');
+        $job['begin'] = '⏳&nbsp;'._('Scheduled').($job['scheduled'] ? new \Ease\Html\DivTag(new \Ease\Html\Widgets\LiveAge(new \DateTime($job['scheduled']))) : '');
     }
 
     $job['exitcode'] = new ExitCode($job['exitcode']);
     $job['launched_by'] = [
         new ExecutorImage($job['executor'], ['align' => 'right', 'height' => '50px']),
         new \Ease\Html\DivTag($job['launched_by'] ? new \Ease\Html\ATag('user.php?id='.$job['launched_by'], new \Ease\TWB4\Badge('info', $job['login'])) : _('Timer')),
-        new \Ease\Html\DivTag(\MultiFlexi\RunTemplate::getIntervalEmoji(\MultiFlexi\RunTemplate::intervalToCode($job['scheduled'])).'&nbsp;'.$job['scheduled']),
+        new \Ease\Html\DivTag(\MultiFlexi\RunTemplate::getIntervalEmoji(\MultiFlexi\RunTemplate::intervalToCode((string) $job['schedule_type'])).'&nbsp;'.$job['scheduled']),
     ];
-    unset($job['executor'], $job['scheduled'], $job['login']);
+    unset($job['executor'], $job['scheduled'], $job['login'], $job['schedule_type']);
 
     $jobList->addRowColumns($job);
 }
