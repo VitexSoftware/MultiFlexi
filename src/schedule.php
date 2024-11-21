@@ -30,10 +30,9 @@ if (null === $runTemplate->getMyKey()) {
 } else {
     $app = $runTemplate->getApplication();
     $company = $runTemplate->getCompany();
-
     $when = WebPage::getRequestValue('when');
 
-    if ($when) {
+    if (WebPage::isPosted() || $when === 'now') {
         $uploadEnv = [];
 
         /**
@@ -53,7 +52,7 @@ if (null === $runTemplate->getMyKey()) {
             }
         }
 
-        $prepared = $jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, '', \Ease\WebPage::getRequestValue('executor'));
+        $prepared = $jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, $when, \Ease\WebPage::getRequestValue('executor'));
         $jobber->scheduleJobRun(new \DateTime($when));
 
         $glassHourRow = new \Ease\TWB4\Row();
