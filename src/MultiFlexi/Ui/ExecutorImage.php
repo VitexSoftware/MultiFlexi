@@ -39,6 +39,6 @@ class ExecutorImage extends \Ease\Html\ImgTag
             $properties['title'] = _('Executor not availble');
         }
 
-        parent::__construct($image, $executorName, $properties);
+        parent::__construct($image, $executorClass::name(), $properties);
     }
 }
