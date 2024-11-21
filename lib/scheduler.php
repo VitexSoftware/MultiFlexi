@@ -55,7 +55,7 @@ if ($interval) {
     foreach ($companys as $company) {
         LogToSQL::singleton()->setCompany($company['id']);
 
-        $appsForCompany = $runtemplate->getColumnsFromSQL(['id', 'interv'], ['company_id' => $company['id'], 'interv' => $interval]);
+        $appsForCompany = $runtemplate->getColumnsFromSQL(['id', 'interv', 'delay', 'name'], ['company_id' => $company['id'], 'interv' => $interval]);
 
         if (empty($appsForCompany) && ($interval !== 'i')) {
             $companer->addStatusMessage(sprintf(_('No applications to run for %s in interval %s'), $company['name'], $interval), 'debug');
@@ -70,8 +70,15 @@ if ($interval) {
                 }
 
                 $jobber->prepareJob($servData['id'], [], RunTemplate::codeToInterval($interval));
-                $jobber->scheduleJobRun(new \DateTime());
-                $jobber->addStatusMessage('🧩 #'.$jobber->application->getMyKey()."\t".$jobber->application->getRecordName().' - '.sprintf(_('Launch now for 🏣 %s'), $company['name']));
+
+                $startTime = new \DateTime();
+
+                if (!empty($servData['delay'])) {
+                    $startTime->modify('+' . $servData['delay'] . ' seconds');
+                }
+
+                $jobber->scheduleJobRun($startTime);
+                $jobber->addStatusMessage('🧩 #' . $jobber->application->getMyKey() . "\t" . $jobber->application->getRecordName() . ':' . $servData['name']. ' (runtemplate #'.$servData['id'].')' .' - ' . sprintf(_('Launch %s for 🏣 %s'), $startTime->format(\DATE_RSS), $company['name']));
             }
 
             if (\Ease\Shared::cfg('APP_DEBUG') === 'true') {
