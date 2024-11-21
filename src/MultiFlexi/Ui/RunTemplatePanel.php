@@ -33,9 +33,11 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         $runtemplateId = $runtemplate->getMyKey();
         $runtemplateOptions = new \Ease\TWB4\Row();
         $intervalChoosen = $runtemplate->getDataValue('interv') ?? 'n';
+        $delayChoosen = $runtemplate->getDataValue('delay') ?? '0';
         $intervalChooser = new \MultiFlexi\Ui\IntervalChooser($runtemplateId.'_interval', $intervalChoosen, ['id' => $runtemplateId.'_interval', 'checked' => 'true', 'data-runtemplate' => $runtemplateId]);
-
-        $scheduleButton = new \Ease\TWB4\LinkButton('schedule.php?id='.$runtemplateId, [_('Schedule').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
+        $delayChooser = new \MultiFlexi\Ui\DelayChooser($runtemplateId.'_delay', $delayChoosen, ['id' => $runtemplateId.'_delay', 'checked' => 'true', 'data-runtemplate' => $runtemplateId]);
+        
+        $scheduleButton = new \Ease\TWB4\LinkButton('schedule.php?id='.$runtemplateId, [_('Manual Schedule').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
         $runtemplateOptions->addColumn(4, '');
         $runtemplateOptions->addColumn(4, $scheduleButton);
 
@@ -47,7 +49,7 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
 
         $runtemplateJobs = new \MultiFlexi\Ui\RuntemplateJobsListing($runtemplate);
 
-        $runtemplateOptions->addColumn(4, [_('automatically schedule in an interval').': ', $intervalChooser]);
+        $runtemplateOptions->addColumn(4, [_('automatically schedule in an interval').': ', $intervalChooser, '<br/>', _('Startup delay'), $delayChooser]);
         $nameInput = new \Ease\Html\ATag('#', $runtemplate->getRecordName(), ['class' => 'editable', 'style' => 'font-size: xxx-large;', 'id' => 'name', 'data-pk' => $runtemplate->getMyKey(), 'data-url' => 'runtemplatesave.php', 'data-title' => _('Update RunTemplate name')]);
 
         $runtemplateBottom = new \Ease\TWB4\Row();
@@ -115,6 +117,39 @@ _interval').after( "💾" );
 });
 
 EOD);
+
+
+$this->addJavaScript(<<<'EOD'
+
+$('#
+EOD.$this->runtemplate->getMyKey().<<<'EOD'
+_delay').change( function(event, state) {
+
+$.ajax({
+   url: 'rtdelay.php',
+        data: {
+                runtemplate: $(this).attr("data-runtemplate"),
+                delay: $(this).val()
+        },
+        error: function() {
+            $('#
+EOD.$this->runtemplate->getMyKey().<<<'EOD'
+_delay').after( "⚰️" );
+            console.log("not saved");
+        },
+
+        success: function(data) {
+            $('#
+EOD.$this->runtemplate->getMyKey().<<<'EOD'
+_delay').after( "💾" );
+            console.log("saved");
+        },
+            type: 'POST'
+        });
+});
+
+EOD);
+
         parent::finalize();
     }
 }

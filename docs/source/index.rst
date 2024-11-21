@@ -35,7 +35,7 @@ Contents
 --------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
    install
@@ -48,5 +48,4 @@ Contents
    runtemplate
    apps
    executors
-   
-
+   zabbix
