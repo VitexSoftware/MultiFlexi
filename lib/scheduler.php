@@ -22,11 +22,11 @@ require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
 $loggers = ['syslog', '\MultiFlexi\LogToSQL'];
 
-if (\Ease\Shared::cfg('ZABBIX_SERVER') && \Ease\Shared::cfg('ZABBIX_HOST') && class_exists('\MultiFlexi\LogToZabbix')) {
+if (Shared::cfg('ZABBIX_SERVER') && Shared::cfg('ZABBIX_HOST') && class_exists('\MultiFlexi\LogToZabbix')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
 
-if (\Ease\Shared::cfg('APP_DEBUG') === 'true') {
+if (Shared::cfg('APP_DEBUG') === 'true') {
     $loggers[] = 'console';
 }
 
@@ -37,7 +37,7 @@ Shared::user(new Anonym());
 
 $jobber = new Job();
 
-if (\Ease\Shared::cfg('APP_DEBUG')) {
+if (Shared::cfg('APP_DEBUG')) {
     $jobber->logBanner();
 }
 
@@ -60,7 +60,7 @@ if ($interval) {
         if (empty($appsForCompany) && ($interval !== 'i')) {
             $companer->addStatusMessage(sprintf(_('No applications to run for %s in interval %s'), $company['name'], $interval), 'debug');
         } else {
-            if (\Ease\Shared::cfg('APP_DEBUG') === 'true') {
+            if (Shared::cfg('APP_DEBUG') === 'true') {
                 $jobber->addStatusMessage(sprintf(_('%s Scheduler interval %s begin'), $company['name'], $interval), 'debug');
             }
 
@@ -74,14 +74,14 @@ if ($interval) {
                 $startTime = new \DateTime();
 
                 if (!empty($servData['delay'])) {
-                    $startTime->modify('+' . $servData['delay'] . ' seconds');
+                    $startTime->modify('+'.$servData['delay'].' seconds');
                 }
 
                 $jobber->scheduleJobRun($startTime);
-                $jobber->addStatusMessage('🧩 #' . $jobber->application->getMyKey() . "\t" . $jobber->application->getRecordName() . ':' . $servData['name']. ' (runtemplate #'.$servData['id'].')' .' - ' . sprintf(_('Launch %s for 🏣 %s'), $startTime->format(\DATE_RSS), $company['name']));
+                $jobber->addStatusMessage('🧩 #'.$jobber->application->getMyKey()."\t".$jobber->application->getRecordName().':'.$servData['name'].' (runtemplate #'.$servData['id'].') - '.sprintf(_('Launch %s for 🏣 %s'), $startTime->format(\DATE_RSS), $company['name']));
             }
 
-            if (\Ease\Shared::cfg('APP_DEBUG') === 'true') {
+            if (Shared::cfg('APP_DEBUG') === 'true') {
                 $jobber->addStatusMessage(sprintf(_('%s Scheduler interval %s end'), $company['name'], RunTemplate::codeToInterval($interval)), 'debug');
             }
         }

@@ -36,7 +36,7 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         $delayChoosen = $runtemplate->getDataValue('delay') ?? '0';
         $intervalChooser = new \MultiFlexi\Ui\IntervalChooser($runtemplateId.'_interval', $intervalChoosen, ['id' => $runtemplateId.'_interval', 'checked' => 'true', 'data-runtemplate' => $runtemplateId]);
         $delayChooser = new \MultiFlexi\Ui\DelayChooser($runtemplateId.'_delay', $delayChoosen, ['id' => $runtemplateId.'_delay', 'checked' => 'true', 'data-runtemplate' => $runtemplateId]);
-        
+
         $scheduleButton = new \Ease\TWB4\LinkButton('schedule.php?id='.$runtemplateId, [_('Manual Schedule').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
         $runtemplateOptions->addColumn(4, '');
         $runtemplateOptions->addColumn(4, $scheduleButton);
@@ -118,8 +118,7 @@ _interval').after( "💾" );
 
 EOD);
 
-
-$this->addJavaScript(<<<'EOD'
+        $this->addJavaScript(<<<'EOD'
 
 $('#
 EOD.$this->runtemplate->getMyKey().<<<'EOD'
