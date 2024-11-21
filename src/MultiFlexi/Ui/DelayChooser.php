@@ -1,29 +1,35 @@
 <?php
+
 declare(strict_types=1);
 
 /**
- * MultiFlexi - DelayChooser
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2024 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Description of DelayChooser
+ * Description of DelayChooser.
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class DelayChooser extends \Ease\Html\InputTag {
+class DelayChooser extends \Ease\Html\InputTag
+{
     /**
-     * DelayChooser
+     * DelayChooser.
      *
-     * @param string $name
-     * @param int $value seconds
+     * @param int                       $value      seconds
      * @param array<string, int|string> $properties
      */
-    public function __construct(string $name, int $value,array $properties = []) {
+    public function __construct(string $name, int $value, array $properties = [])
+    {
         $time = date('H:i:s', $value);
         $properties['type'] = 'text';
         $properties['maxlength'] = 8;

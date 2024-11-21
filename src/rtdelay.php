@@ -21,23 +21,23 @@ WebPage::singleton()->onlyForLogged();
 
 /**
  * Convert a time string (hh:mm:ss) to the number of seconds.
- *
- * @param string $timeString
- * @return int
  */
-function timeStringToSeconds(string $timeString): int {
+function timeStringToSeconds(string $timeString): int
+{
     $parts = explode(':', $timeString);
     $seconds = 0;
-    if (count($parts) === 3) {
-        $seconds += (int)$parts[0] * 3600; // hours to seconds
-        $seconds += (int)$parts[1] * 60;   // minutes to seconds
-        $seconds += (int)$parts[2];        // seconds
-    } elseif (count($parts) === 2) {
-        $seconds += (int)$parts[0] * 60;   // minutes to seconds
-        $seconds += (int)$parts[1];        // seconds
-    } elseif (count($parts) === 1) {
-        $seconds += (int)$parts[0];        // seconds
+
+    if (\count($parts) === 3) {
+        $seconds += (int) $parts[0] * 3600; // hours to seconds
+        $seconds += (int) $parts[1] * 60;   // minutes to seconds
+        $seconds += (int) $parts[2];        // seconds
+    } elseif (\count($parts) === 2) {
+        $seconds += (int) $parts[0] * 60;   // minutes to seconds
+        $seconds += (int) $parts[1];        // seconds
+    } elseif (\count($parts) === 1) {
+        $seconds += (int) $parts[0];        // seconds
     }
+
     return $seconds;
 }
 
