@@ -67,39 +67,43 @@ class Zabbix extends \MultiFlexi\CommonAction
         $me = \Ease\Shared::cfg('ZABBIX_HOST', gethostname());
         $server = \Ease\Shared::cfg('ZABBIX_SERVER');
 
-        $zabbixKey = 'zabbix_action-['.(empty($this->getDataValue('key') || ($this->getDataValue('key') === '{COMPANY_CODE}-{APP_CODE}-{RUNTEMPLATE_ID}-data')) ? $this->defaultKey() : $this->getDataValue('key')).']';
-        $dataForZabbix = null;
-        $metricsfile = $this->getDataValue('metricsfile');
+        if ($server) {
+            $zabbixKey = 'zabbix_action-['.(empty($this->getDataValue('key') || ($this->getDataValue('key') === '{COMPANY_CODE}-{APP_CODE}-{RUNTEMPLATE_ID}-data')) ? $this->defaultKey() : $this->getDataValue('key')).']';
+            $dataForZabbix = null;
+            $metricsfile = $this->getDataValue('metricsfile');
 
-        if (empty($metricsfile)) {
-            $dataForZabbix = stripslashes((string) $job->getDataValue('stdout'));
-        } else {
-            if (file_exists($metricsfile)) {
-                $dataForZabbix = file_get_contents($metricsfile); // TODO: Use Executor
+            if (empty($metricsfile)) {
+                $dataForZabbix = stripslashes((string) $job->getDataValue('stdout'));
             } else {
-                $this->addStatusMessage(_('Required metrics file not found '), 'warning');
-            }
-        }
-
-        if ($dataForZabbix) {
-            if (\Ease\Shared::cfg('USE_ZABBIX_SENDER') && file_exists('/usr/bin/zabbix_sender')) {
-                $cmd = sprintf("zabbix_sender -v -z %s -s %s -k %s -o '%s'", $server, $me, $zabbixKey, $dataForZabbix);
-                $this->addStatusMessage($cmd, 'debug');
-                exec($cmd, $output, $return_var);
-                $this->addStatusMessage((string) $return_var.':'.implode("\n", $output), 'debug');
-            } else {
-                $packet = new \MultiFlexi\Zabbix\Request\Packet();
-                $packet->addMetric((new \MultiFlexi\Zabbix\Request\Metric($zabbixKey, $dataForZabbix))->withHostname($me));
-                $zabbixSender = new \MultiFlexi\ZabbixSender($server);
-
-                try {
-                    $zabbixSender->send($packet);
-                    $this->addStatusMessage(sprintf(_('Job metric %s sent to %s as %s: %s'), $zabbixKey, $server, $me, json_encode($packet)), 'debug');
-                } catch (\Exception $exc) {
+                if (file_exists($metricsfile)) {
+                    $dataForZabbix = file_get_contents($metricsfile); // TODO: Use Executor
+                } else {
+                    $this->addStatusMessage(_('Required metrics file not found '), 'warning');
                 }
             }
+
+            if ($dataForZabbix) {
+                if (\Ease\Shared::cfg('USE_ZABBIX_SENDER') && file_exists('/usr/bin/zabbix_sender')) {
+                    $cmd = sprintf("zabbix_sender -v -z %s -s %s -k %s -o '%s'", $server, $me, $zabbixKey, $dataForZabbix);
+                    $this->addStatusMessage($cmd, 'debug');
+                    exec($cmd, $output, $return_var);
+                    $this->addStatusMessage((string) $return_var.':'.implode("\n", $output), 'debug');
+                } else {
+                    $packet = new \MultiFlexi\Zabbix\Request\Packet();
+                    $packet->addMetric((new \MultiFlexi\Zabbix\Request\Metric($zabbixKey, $dataForZabbix))->withHostname($me));
+                    $zabbixSender = new \MultiFlexi\ZabbixSender($server);
+
+                    try {
+                        $zabbixSender->send($packet);
+                        $this->addStatusMessage(sprintf(_('Job metric %s sent to %s as %s: %s'), $zabbixKey, $server, $me, json_encode($packet)), 'debug');
+                    } catch (\Exception $exc) {
+                    }
+                }
+            } else {
+                $this->addStatusMessage(_('No Data for Zabbix provided'), 'warning');
+            }
         } else {
-            $this->addStatusMessage(_('No Data For zabix provided'), 'warning');
+            $this->addStatusMessage(_('No Zabbix server defined'), 'warning');
         }
     }
 
