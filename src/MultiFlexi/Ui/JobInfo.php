@@ -40,7 +40,7 @@ class JobInfo extends \Ease\Html\DivTag
         $jobInfoRow->addColumn(2, [_('Begin').'<br>', [
             $job->getDataValue('begin'),
             '&nbsp;',
-            $job->getDataValue('begin') ? new \DateTime($job->getDataValue('begin')).'<br>'. new \Ease\Html\SmallTag(new \Ease\Html\Widgets\LiveAge(new \DateTime($job->getDataValue('begin')))) : _('Not Yet Started')],
+            $job->getDataValue('begin') ? $job->getDataValue('begin').'<br>'. new \Ease\Html\SmallTag(new \Ease\Html\Widgets\LiveAge(new \DateTime($job->getDataValue('begin')))) : _('Not Yet Started')],
         ]);
         $jobInfoRow->addColumn(2, [_('End').'<br>', [
             $job->getDataValue('end'),
