@@ -28,7 +28,7 @@ if (Shared::cfg('ZABBIX_SERVER') && Shared::cfg('ZABBIX_HOST') && class_exists('
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
 
-if (Shared::cfg('APP_DEBUG') === 'true') {
+if (strtolower(Shared::cfg('APP_DEBUG', 'False')) === 'true') {
     $loggers[] = 'console';
 }
 
@@ -66,21 +66,21 @@ if ($interval) {
                 $jobber->addStatusMessage(sprintf(_('%s Scheduler interval %s begin'), $company['name'], $interval), 'debug');
             }
 
-            foreach ($appsForCompany as $servData) {
-                if (null !== $interval && ($interval !== $servData['interv'])) {
+            foreach ($appsForCompany as $runtemplateData) {
+                if (null !== $interval && ($interval !== $runtemplateData['interv'])) {
                     continue;
                 }
 
                 $startTime = new \DateTime();
+                $jobber->addStatusMessage('Now Is '.$startTime->format('Y-m-d H:i:s'), 'debug');
 
-                if (empty($servData['delay']) === false) {
-                    $startTime->modify('+'.$servData['delay'].' seconds');
+                if (empty($runtemplateData['delay']) === false) {
+                    $startTime->modify('+'.$runtemplateData['delay'].' seconds');
                 }
 
-                $jobber->prepareJob($servData['id'], [], $startTime, $servData['executor'], RunTemplate::codeToInterval($interval));
-
+                $jobber->prepareJob($runtemplateData['id'], [], $startTime, $runtemplateData['executor'], RunTemplate::codeToInterval($interval));
                 $jobber->scheduleJobRun($startTime);
-                $jobber->addStatusMessage('🧩 #'.$jobber->application->getMyKey()."\t".$jobber->application->getRecordName().':'.$servData['name'].' (runtemplate #'.$servData['id'].') - '.sprintf(_('Launch %s for 🏣 %s'), $startTime->format(\DATE_RSS), $company['name']));
+                $jobber->addStatusMessage('🧩 #'.$jobber->application->getMyKey()."\t".$jobber->application->getRecordName().':'.$runtemplateData['name'].' (runtemplate #'.$runtemplateData['id'].') - '.sprintf(_('Launch %s for 🏣 %s'), $startTime->format(\DATE_RSS), $company['name']));
             }
 
             if (Shared::cfg('APP_DEBUG') === 'true') {

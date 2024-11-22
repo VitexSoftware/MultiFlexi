@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace MultiFlexi;
 
+date_default_timezone_set('Europe/Prague');
+
 require_once '../vendor/autoload.php';
 \Ease\Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
 $daemonize = (bool) \Ease\Shared::cfg('MULTIFLEXI_DAEMONIZE', true);

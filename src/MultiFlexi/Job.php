@@ -279,7 +279,7 @@ EOD;
                 'app_name' => $this->application->getDataValue('name'),
                 'begin' => null,
                 'end' => null,
-                'scheduled' => $scheduled,
+                'scheduled' => $scheduled->format('Y-m-d H:i:s'),
                 'schedule_type' => $scheduleType,
                 'company_id' => $companyId,
                 'company_name' => $this->company->getDataValue('name'),
