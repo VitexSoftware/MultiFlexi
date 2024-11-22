@@ -18,6 +18,8 @@ namespace MultiFlexi;
 use Ease\Anonym;
 use Ease\Shared;
 
+date_default_timezone_set('Europe/Prague');
+
 require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
 $loggers = ['syslog', '\MultiFlexi\LogToSQL'];
@@ -71,7 +73,7 @@ if ($interval) {
 
                 $startTime = new \DateTime();
 
-                if (!empty($servData['delay'])) {
+                if (empty($servData['delay']) === false) {
                     $startTime->modify('+'.$servData['delay'].' seconds');
                 }
 
