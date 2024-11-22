@@ -37,7 +37,12 @@ $scheduler = new Scheduler();
 $scheduler->logBanner('MultiFlexi Daemon started');
 
 do {
-    foreach ($scheduler->getCurrentJobs() as $scheduledJob) {
+    $jobsToLaunch = $scheduler->getCurrentJobs();
+    foreach ($jobsToLaunch as $scheduledJob) {
+        $scheduler->addStatusMessage ( json_encode($scheduledJob),'debug');
+    }
+
+    foreach ($jobsToLaunch as $scheduledJob) {
         $job = new Job($scheduledJob['job']);
         $job->performJob();
         $scheduler->deleteFromSQL($scheduledJob['id']);
