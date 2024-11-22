@@ -35,7 +35,7 @@ class JobInfo extends \Ease\Html\DivTag
         $jobInfoRow = new \Ease\TWB4\Row();
         $jobInfoRow->addColumn(1, [_('Exitcode').'<br>', new ExitCode($job->getDataValue('exitcode'), ['style' => 'font-size: 2.0em; font-family: monospace;'])]);
         $jobInfoRow->addColumn(4, [_('Commandline').'<br>', $job->getDataValue('command'), '<br>', $job->application->getRecordName().' v.:'.$job->getDataValue('app_version')]);
-        $jobInfoRow->addColumn(2, [_('Scheduled').'<br>', new \Ease\Html\Widgets\LiveAge(new \DateTime($job->getDataValue('schedule'))), '<br>', $executorImage, _('Executor').' '.$executorClass::name()]);
+        $jobInfoRow->addColumn(2, [_('Scheduled').'<br>', $job->getDataValue('schedule') ? new \Ease\Html\Widgets\LiveAge(new \DateTime($job->getDataValue('schedule'))) : '' , '<br>', $executorImage, _('Executor').' '.$executorClass::name()]);
         $jobInfoRow->addColumn(2, [_('Begin').'<br>', [
             $job->getDataValue('begin'),
             '&nbsp;',
