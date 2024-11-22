@@ -347,6 +347,7 @@ EOD;
      */
     public function scheduleJobRun(\DateTime $when): int
     {
+        $this->addStatusMessage(_('Scheduling job').': '.$when->format('Y-m-d H:i:s'));
         $scheduler = new Scheduler();
 
         return $scheduler->addJob($this, $when);
