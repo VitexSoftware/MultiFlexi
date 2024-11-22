@@ -46,6 +46,6 @@ class Scheduler extends Engine
      */
     public function getCurrentJobs()
     {
-        return $this->listingQuery()->where('after > '.(new \DateTime())->getTimestamp());
+        return $this->listingQuery()->orderBy('after')->where('after > '.(new \DateTime())->getTimestamp());
     }
 }
