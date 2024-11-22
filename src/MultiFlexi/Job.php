@@ -145,6 +145,13 @@ class Job extends Engine
             $this->addStatusMessage(_('Job launched without runtemplate ID'), 'error');
         }
 
+        if (isset($this->executor) === false) {
+            $executorClass = '\\MultiFlexi\\Executor\\'.$this->getDataValue('executor');
+            $this->executor = new $executorClass($this);
+        } else {
+            $this->executor->setJob($this);
+        }
+
         $jobId = $this->getMyKey();
 
         // $this->addStatusMessage('JOB: ' . $jobId . ' ' . json_encode($this->environment), 'debug');

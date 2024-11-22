@@ -32,8 +32,13 @@ abstract class CommonExecutor extends \Ease\Sand
 
     public function __construct(Job $job)
     {
-        $this->job = $job;
         $this->setObjectName();
+        $this->setJob($job);
+    }
+
+    public function setJob(Job $job): void
+    {
+        $this->job = $job;
         $this->setObjectName($job->getMyKey().'@'.\Ease\Logger\Message::getCallerName($this));
         $this->environment = $job->getEnvironment();
     }
