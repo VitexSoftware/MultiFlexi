@@ -47,6 +47,6 @@ class Scheduler extends Engine
     public function getCurrentJobs()
     {
         // TODO: NonMySQL ?!??
-        return $this->listingQuery()->orderBy('after')->where('UNIX_TIMESTAMP(after) < '.(new \DateTime())->getTimestamp());
+        return $this->listingQuery()->orderBy('after')->where('UNIX_TIMESTAMP(after) < UNIX_TIMESTAMP(NOW())');
     }
 }
