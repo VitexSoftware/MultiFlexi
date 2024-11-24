@@ -85,6 +85,27 @@ class Job extends Engine
 
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
             $this->zabbixSender = new ZabbixSender(\Ease\Shared::cfg('ZABBIX_SERVER'));
+            $this->zabbixMessageData = [
+                'phase' => 'loaded',
+                'job_id' => $this->getMyKey(),
+                'app_id' => null,
+                'app_name' => null,
+                'begin' => null,
+                'end' => null,
+                'scheduled' => null,
+                'schedule_type' => null,
+                'company_id' => null,
+                'company_name' => null,
+                'company_code' => null,
+                'runtemplate_id' => null,
+                'exitcode' => -1,
+                'stdout' => null,
+                'stderr' => null,
+                'executor' => null,
+                'launched_by_id' => null,
+                'launched_by' => null,
+                'data' => null
+            ];
         }
     }
 
@@ -118,6 +139,20 @@ class Job extends Engine
         $environment['MULTIFLEXI_JOB_ID']['value'] = $jobId;
         $this->environment = $environment;
         $this->updateToSQL(['env' => serialize($environment), 'command' => $this->getCmdline()], ['id' => $jobId]);
+
+        if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
+            $this->zabbixMessageData['phase'] = 'created';
+            $this->zabbixMessageData['job_id'] = $jobId;
+            $this->zabbixMessageData['app_id'] = $this->runTemplate->getDataValue('app_id');
+            $this->zabbixMessageData['app_name'] = $this->runTemplate->getApplication()->getDataValue('name');
+            $this->zabbixMessageData['company_id'] = $this->runTemplate->getDataValue('company_id');
+            $this->zabbixMessageData['company_name'] = $this->runTemplate->getCompany()->getDataValue('name');
+            $this->zabbixMessageData['company_code'] = $this->runTemplate->getCompany()->getDataValue('code');
+            $this->zabbixMessageData['runtemplate_id'] = $runtemplateId;
+            $this->zabbixMessageData['executor'] = $executor;
+
+            $this->reportToZabbix($this->zabbixMessageData);
+        }
 
         return $jobId;
     }
@@ -156,12 +191,11 @@ class Job extends Engine
 
         // $this->addStatusMessage('JOB: ' . $jobId . ' ' . json_encode($this->environment), 'debug');
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
-            $this->reportToZabbix([
-                'phase' => 'jobStart',
-                'begin' => (new \DateTime())->format('Y-m-d H:i:s'),
-                'interval' => $this->runTemplate->getDataValue('interv'),
-                'interval_seconds' => self::codeToSeconds($this->runTemplate->getDataValue('interv')),
-            ]);
+            $this->zabbixMessageData['phase'] = 'jobStart';
+            $this->zabbixMessageData['begin'] = (new \DateTime())->format('Y-m-d H:i:s');
+            $this->zabbixMessageData['interval'] = $this->runTemplate->getDataValue('interv');
+            $this->zabbixMessageData['interval_seconds'] = self::codeToSeconds($this->runTemplate->getDataValue('interv'));
+            $this->reportToZabbix($this->zabbixMessageData);
         }
 
         $this->updateToSQL(['id' => $this->getMyKey(), 'command' => $this->executor->commandline(), 'runtemplate_id' => $this->runTemplate->getMyKey(), 'begin' => new \Envms\FluentPDO\Literal(\Ease\Shared::cfg('DB_CONNECTION') === 'sqlite' ? "date('now')" : 'NOW()')]);
@@ -188,20 +222,14 @@ class Job extends Engine
         $resultfile = \array_key_exists($resultFileField, $this->executor->environment) ? $this->executor->environment[$resultFileField]['value'] : '';
 
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
-            $this->reportToZabbix([
-                'phase' => 'jobDone',
-                'job_id' => $this->getMyKey(),
-                'company_id' => $this->runTemplate->getDataValue('company_id'),
-                'company_code' => $this->company->getDataValue('code'),
-                'company_name' => $this->company->getRecordName(),
-                'app_id' => $this->runTemplate->getDataValue('app_id'),
-                'app_name' => $this->application->getRecordName(),
-                'data' => file_exists($resultfile) ? file_get_contents($resultfile) : '',
-                'stdout' => $stdout,
-                'stderr' => $stderr,
-                'version' => $this->application->getDataValue('version'),
-                'exitcode' => $statusCode,
-                'end' => (new \DateTime())->format('Y-m-d H:i:s')]);
+            $this->zabbixMessageData['phase'] = 'jobDone';
+            $this->zabbixMessageData['data'] = file_exists($resultfile) ? file_get_contents($resultfile) : '';
+            $this->zabbixMessageData['stdout'] = $stdout;
+            $this->zabbixMessageData['stderr'] = $stderr;
+            $this->zabbixMessageData['version'] = $this->application->getDataValue('version');
+            $this->zabbixMessageData['exitcode'] = $statusCode;
+            $this->zabbixMessageData['end'] = (new \DateTime())->format('Y-m-d H:i:s');
+            $this->reportToZabbix($this->zabbixMessageData);
         }
 
         $this->setData([
@@ -300,6 +328,7 @@ EOD;
                 'launched_by' => empty(\Ease\Shared::user()->getUserLogin()) ? 'cron' :
                 \Ease\Shared::user()->getUserLogin(),
             ];
+            $this->reportToZabbix($this->zabbixMessageData);                
         }
 
         $setupCommand = $this->application->getDataValue('setup');
@@ -374,6 +403,7 @@ EOD;
 
         try {
             $result = $this->zabbixSender->send($packet);
+            $this->addStatusMessage('Data Sent To Zabbix: '.json_encode($messageData), 'debug');
         } catch (\Exception $exc) {
             $result = false;
         }

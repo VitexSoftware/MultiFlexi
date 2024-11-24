@@ -38,6 +38,7 @@ $scheduler->logBanner('MultiFlexi Daemon started');
 
 do {
     $jobsToLaunch = $scheduler->getCurrentJobs();
+
     foreach ($jobsToLaunch as $scheduledJob) {
         $job = new Job($scheduledJob['job']);
         $job->performJob();
