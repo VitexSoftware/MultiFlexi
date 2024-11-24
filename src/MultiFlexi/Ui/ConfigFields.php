@@ -22,12 +22,10 @@ namespace MultiFlexi\Ui;
  */
 class ConfigFields extends \Ease\Html\SelectTag
 {
-/**
+    /**
      * ConfigFields.
      *
-     * @param string $name
-     * @param string $defaultValue
-     * @param array<string,string>  $properties
+     * @param array<string, string> $properties
      */
     public function __construct(string $name, string $defaultValue = '', array $properties = [])
     {
