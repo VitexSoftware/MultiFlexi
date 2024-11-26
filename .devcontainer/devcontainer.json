@@ -1,0 +1,37 @@
+{
+    "name": "MultiFlexi",
+    "image": "mcr.microsoft.com/devcontainers/php:1-8.3",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {},
+        "context": ".."
+    },
+    "runArgs": [
+        "-v",
+        "/var/run/docker.sock:/var/run/docker.sock:rw",
+        "--env-file",
+        ".devcontainer/devcontainer.env"
+    ],
+    "extensions": [],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "DavidAnson.vscode-markdownlint",
+                "EditorConfig.EditorConfig"
+            ],
+            "settings": {
+                "files.associations": {
+                },
+                "python.defaultInterpreterPath": "/usr/bin/python3"
+            }
+        }
+    },
+    "portsAttributes": {
+        "8000": {
+            "label": "Hello Remote World",
+            "onAutoForward": "notify"
+        }
+    },
+
+    "remoteUser": "vscode"
+}
