@@ -333,7 +333,7 @@ class RunTemplate extends \MultiFlexi\Engine
     }
 
     /**
-     * Actions Availble with flag when performed in case of success of failure.
+     * Actions available with flag when performed in case of success of failure.
      *
      * @return array<array>
      */

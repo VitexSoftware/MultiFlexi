@@ -27,7 +27,8 @@ WebPage::singleton()->container->addItem(new \Ease\TWB4\Panel(_('Last 20 Jobs'),
 
 WebPage::singleton()->addItem(new PageBottom('jobs/'));
 
-WebPage::singleton()->addJavaScript("
+WebPage::singleton()->addJavaScript(<<<'EOD'
+
     function updateJobHistoryTable() {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'jobhistorytable.php', true);
@@ -42,6 +43,7 @@ WebPage::singleton()->addJavaScript("
     }
 
     setInterval(updateJobHistoryTable, 60000); // Update every 60 seconds
-");
+
+EOD);
 
 WebPage::singleton()->draw();

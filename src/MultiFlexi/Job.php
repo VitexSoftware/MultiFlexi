@@ -104,7 +104,7 @@ class Job extends Engine
                 'executor' => null,
                 'launched_by_id' => null,
                 'launched_by' => null,
-                'data' => null
+                'data' => null,
             ];
         }
     }
@@ -202,9 +202,9 @@ class Job extends Engine
             $this->zabbixMessageData['runtemplate_name'] = $this->runTemplate->getRecordName();
             $this->zabbixMessageData['launched_by_id'] = (int) \Ease\Shared::user()->getMyKey();
             $this->zabbixMessageData['launched_by'] = empty(\Ease\Shared::user()->getUserLogin()) ? 'cron' : \Ease\Shared::user()->getUserLogin();
-            
+
             $this->zabbixMessageData['scheduled'] = $this->getDataValue('schedule');
-            //$this->zabbixMessageData['schedule_type'] => $scheduleType,
+            // $this->zabbixMessageData['schedule_type'] => $scheduleType,
             $this->zabbixMessageData['company_id'] = $this->company->getMyKey();
             $this->zabbixMessageData['company_name'] = $this->company->getDataValue('name');
             $this->zabbixMessageData['company_code'] = $this->company->getDataValue('code');
@@ -343,7 +343,7 @@ EOD;
                 'launched_by' => empty(\Ease\Shared::user()->getUserLogin()) ? 'cron' :
                 \Ease\Shared::user()->getUserLogin(),
             ];
-            $this->reportToZabbix($this->zabbixMessageData);                
+            $this->reportToZabbix($this->zabbixMessageData);
         }
 
         $setupCommand = $this->application->getDataValue('setup');
@@ -419,7 +419,7 @@ EOD;
 
         try {
             $result = $this->zabbixSender->send($packet);
-            $this->addStatusMessage('Data Sent To Zabbix: '. $itemKey.' '.json_encode($messageData), 'debug');
+            $this->addStatusMessage('Data Sent To Zabbix: '.$itemKey.' '.json_encode($messageData), 'debug');
         } catch (\Exception $exc) {
             $result = false;
         }

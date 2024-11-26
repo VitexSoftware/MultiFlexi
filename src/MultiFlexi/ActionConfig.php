@@ -27,7 +27,6 @@ namespace MultiFlexi;
  */
 class ActionConfig extends Engine
 {
-
     public function __construct($identifier = null, $options = [])
     {
         $this->myTable = 'actionconfig';
