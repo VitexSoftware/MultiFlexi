@@ -192,9 +192,20 @@ class Job extends Engine
         // $this->addStatusMessage('JOB: ' . $jobId . ' ' . json_encode($this->environment), 'debug');
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
             $this->zabbixMessageData['phase'] = 'jobStart';
+            $this->zabbixMessageData['executor'] = $this->getDataValue('executor');
             $this->zabbixMessageData['begin'] = (new \DateTime())->format('Y-m-d H:i:s');
             $this->zabbixMessageData['interval'] = $this->runTemplate->getDataValue('interv');
             $this->zabbixMessageData['interval_seconds'] = self::codeToSeconds($this->runTemplate->getDataValue('interv'));
+            $this->zabbixMessageData['app_name'] = $this->runTemplate->getRecordName();
+            $this->zabbixMessageData['runtemplate_name'] = $this->runTemplate->getRecordName();
+            $this->zabbixMessageData['launched_by_id'] = (int) \Ease\Shared::user()->getMyKey();
+            $this->zabbixMessageData['launched_by'] = empty(\Ease\Shared::user()->getUserLogin()) ? 'cron' : \Ease\Shared::user()->getUserLogin();
+            
+            $this->zabbixMessageData['scheduled'] = $this->getDataValue('scheduled');
+            //$this->zabbixMessageData['schedule_type'] => $scheduleType,
+            $this->zabbixMessageData['company_id'] = $this->company->getMyKey();
+            $this->zabbixMessageData['company_name'] = $this->company->getDataValue('name');
+            $this->zabbixMessageData['company_code'] = $this->company->getDataValue('code');
             $this->reportToZabbix($this->zabbixMessageData);
         }
 
