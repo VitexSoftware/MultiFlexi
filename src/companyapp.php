@@ -56,6 +56,8 @@ $jobber = new Job();
 
 if ($runtemplatesRaw->count()) {
     foreach ($runtemplatesRaw as $runtemplateData) {
+        // TODO:    $app->checkRequiredFields($_POST, true);
+
         $runtemplateRow = new Row();
         $lastJobRun = $jobber->listingQuery()->select(['exitcode', 'id'], true)->where(['runtemplate_id' => $runtemplateData['id']])->orderBy('id desc')->limit(1);
         $runtemplateRow->addColumn(2, new ATag('runtemplate.php?id='.$runtemplateData['id'], '⚗️&nbsp;#'.(string) $runtemplateData['id']));
