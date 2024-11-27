@@ -15,11 +15,12 @@ declare(strict_types=1);
 
 namespace MultiFlexi;
 
-class Credential extends Engine {
-
+class Credential extends Engine
+{
     private Credata $credator;
 
-    public function __construct($identifier = null, $options = []) {
+    public function __construct($identifier = null, $options = [])
+    {
         $this->myTable = 'credentials';
         $this->keyColumn = 'id';
         $this->nameColumn = 'name';
@@ -27,14 +28,15 @@ class Credential extends Engine {
         parent::__construct($identifier, $options);
     }
 
-    public function takeData(array $data): int {
+    public function takeData(array $data): int
+    {
         if (\array_key_exists('name', $data) === false || empty($data['name'])) {
             if ($data['company_id']) {
                 $companer = new Company((int) $data['company_id']);
 
-                $data['name'] = $companer->getRecordName() . ' ' . $data['formType'] . ' ' . $data['id'];
+                $data['name'] = $companer->getRecordName().' '.$data['formType'].' '.$data['id'];
             } else {
-                $data['name'] = $data['formType'] . ' ' . $data['id'];
+                $data['name'] = $data['formType'].' '.$data['id'];
             }
         }
 
@@ -45,7 +47,8 @@ class Credential extends Engine {
         return parent::takeData($data);
     }
 
-    public function insertToSQL($data = null): int {
+    public function insertToSQL($data = null): int
+    {
         if (null === $data) {
             $data = $this->getData();
         }
@@ -53,7 +56,7 @@ class Credential extends Engine {
         $fieldData = [];
 
         if (\array_key_exists('formType', $data)) {
-            $class = '\\MultiFlexi\\Ui\\Form\\' . $data['formType'];
+            $class = '\\MultiFlexi\\Ui\\Form\\'.$data['formType'];
 
             if (class_exists($class)) {
                 $formColumns = $class::fields();
@@ -73,12 +76,12 @@ class Credential extends Engine {
         if ($fieldData) {
             foreach ($fieldData as $filedName => $fieldProperties) {
                 $this->credator->insertToSQL(
-                        [
-                            'credential_id' => $recordId,
-                            'name' => $filedName,
-                            'value' => $fieldProperties['value'],
-                            'type' => $fieldProperties['type'],
-                        ],
+                    [
+                        'credential_id' => $recordId,
+                        'name' => $filedName,
+                        'value' => $fieldProperties['value'],
+                        'type' => $fieldProperties['type'],
+                    ],
                 );
             }
         }
@@ -86,7 +89,8 @@ class Credential extends Engine {
         return $recordId;
     }
 
-    public function updateToSQL($data = null, $conditons = []): int {
+    public function updateToSQL($data = null, $conditons = []): int
+    {
         if (null === $data) {
             $data = $this->getData();
         }
@@ -94,32 +98,29 @@ class Credential extends Engine {
         $originalData = $data;
 
         if (\array_key_exists('formType', $data)) {
-            $class = '\\MultiFlexi\\Ui\\Form\\' . $data['formType'];
+            $class = '\\MultiFlexi\\Ui\\Form\\'.$data['formType'];
 
             if (class_exists($class)) {
-
                 $currentData = $this->credator->listingQuery()->where('credential_id', $this->getMyKey())->fetchAll('name');
                 $fields = $class::fields();
 
                 foreach (\array_keys($fields) as $filed) {
                     if (\array_key_exists($filed, $data)) {
-
-                        if (array_key_exists($filed, $currentData)) {
-
+                        if (\array_key_exists($filed, $currentData)) {
                             $this->credator->updateToSQL(
-                                    ['value' => $data[$filed]],
-                                    [
-                                        'credential_id' => $this->getMyKey(),
-                                        'name' => $filed,
-                                    ],
+                                ['value' => $data[$filed]],
+                                [
+                                    'credential_id' => $this->getMyKey(),
+                                    'name' => $filed,
+                                ],
                             );
                         } else {
                             $this->credator->insertToSQL(
-                                    ['value' => $data[$filed],
-                                        'credential_id' => $this->getMyKey(),
-                                        'name' => $filed,
-                                        'type' => $fields[$filed]['type']
-                                    ],
+                                ['value' => $data[$filed],
+                                    'credential_id' => $this->getMyKey(),
+                                    'name' => $filed,
+                                    'type' => $fields[$filed]['type'],
+                                ],
                             );
                         }
 
@@ -134,8 +135,10 @@ class Credential extends Engine {
         return parent::updateToSQL($data, $conditons);
     }
 
-    public function loadFromSQL($itemID) {
+    public function loadFromSQL($itemID)
+    {
         $data = parent::loadFromSQL($itemID);
+
         foreach ($this->credator->listingQuery()->where('credential_id', $this->getMyKey()) as $credential) {
             $this->setDataValue($credential['name'], $credential['value']);
         }
@@ -143,8 +146,10 @@ class Credential extends Engine {
         return $data;
     }
 
-    public function deleteFromSQL($data = null) {
-        $this->credator->deleteFromSQL(['credential_id'=> $this->getMyKey()]);
+    public function deleteFromSQL($data = null)
+    {
+        $this->credator->deleteFromSQL(['credential_id' => $this->getMyKey()]);
+
         return parent::deleteFromSQL($data);
     }
 }

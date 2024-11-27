@@ -20,10 +20,11 @@ namespace MultiFlexi\Ui;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class CredentialForm extends \Ease\TWB4\Form {
-
-    public  \MultiFlexi\Credential $kredenc;
-    public function __construct(\MultiFlexi\Credential $kredenc) {
+class CredentialForm extends \Ease\TWB4\Form
+{
+    public \MultiFlexi\Credential $kredenc;
+    public function __construct(\MultiFlexi\Credential $kredenc)
+    {
         $this->kredenc = $kredenc;
         $formContents = [];
         $formType = $kredenc->getDataValue('formType');
@@ -48,7 +49,7 @@ class CredentialForm extends \Ease\TWB4\Form {
         $formContents[] = new \Ease\Html\SelectTag('company_id', $companys, (string) $kredenc->getDataValue('company_id'));
         $formContents[] = new \Ease\TWB4\FormGroup(_('Credential Name'), new \Ease\Html\InputTextTag('name', $kredenc->getRecordName()));
 
-        $class = '\\MultiFlexi\\Ui\\Form\\' . $formType;
+        $class = '\\MultiFlexi\\Ui\\Form\\'.$formType;
 
         if ($formType && class_exists($class)) {
             $formContents[] = new $class();
@@ -57,25 +58,27 @@ class CredentialForm extends \Ease\TWB4\Form {
         $formContents[] = new \Ease\Html\InputHiddenTag('id', $kredenc->getMyKey());
 
         $submitRow = new \Ease\TWB4\Row();
-        $submitRow->addColumn(10, new \Ease\TWB4\SubmitButton('🍏 ' . _('Apply'), 'primary btn-lg btn-block'));
-        if (is_null($kredenc->getMyKey())) {
-            $submitRow->addColumn(2, new \Ease\TWB4\SubmitButton( '⚰️ ' . _('Remove') . ' !', 'disabled btn-lg btn-block',['disabled'=>'true']));
+        $submitRow->addColumn(10, new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'primary btn-lg btn-block'));
+
+        if (null === $kredenc->getMyKey()) {
+            $submitRow->addColumn(2, new \Ease\TWB4\SubmitButton('⚰️ '._('Remove').' !', 'disabled btn-lg btn-block', ['disabled' => 'true']));
         } else {
-            if (WebPage::getRequestValue('remove') == 'true') {
-                $submitRow->addColumn(2, new \Ease\TWB4\LinkButton('credential.php?delete=' . $kredenc->getMyKey(), '⚰️ ' . _('Remove') . ' !', 'danger btn-lg btn-block'));
+            if (WebPage::getRequestValue('remove') === 'true') {
+                $submitRow->addColumn(2, new \Ease\TWB4\LinkButton('credential.php?delete='.$kredenc->getMyKey(), '⚰️ '._('Remove').' !', 'danger btn-lg btn-block'));
             } else {
-                $submitRow->addColumn(2, new \Ease\TWB4\LinkButton('credential.php?id=' . $kredenc->getMyKey() . '&remove=true', '⚰️ ' . _('Remove') . ' ?', 'warning btn-lg btn-block'));
+                $submitRow->addColumn(2, new \Ease\TWB4\LinkButton('credential.php?id='.$kredenc->getMyKey().'&remove=true', '⚰️ '._('Remove').' ?', 'warning btn-lg btn-block'));
             }
         }
+
         $formContents[] = $submitRow;
 
         parent::__construct(['action' => 'credential.php'], ['method' => 'POST'], $formContents);
     }
-    
+
     #[\Override]
-    public function finalize(): void {
-        $this->fillUp($this->kredenc->getData());
+    public function finalize(): void
+    {
+        $this->fillUp((array)$this->kredenc->getData());
         parent::finalize();
     }
-    
 }

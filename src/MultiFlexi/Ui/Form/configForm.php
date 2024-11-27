@@ -21,6 +21,6 @@ namespace MultiFlexi\Ui\Form;
 interface configForm
 {
     public static function fields(): array;
-    
+
     public static function name(): string;
 }

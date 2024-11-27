@@ -42,10 +42,11 @@ class RaiffeisenBank extends \Ease\TWB4\Panel implements configForm
         parent::__construct($header, 'inverse', $body, '');
     }
 
-    public static function name(): string {
+    public static function name(): string
+    {
         return _('Raiffeisen Bank Premium API');
     }
-    
+
     #[\Override]
     public static function fields(): array
     {

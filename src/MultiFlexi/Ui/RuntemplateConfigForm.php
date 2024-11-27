@@ -30,6 +30,53 @@ class RuntemplateConfigForm extends EngineForm
         $defaults = $engine->getAppEnvironment();
         $customized = $engine->getRuntemplateEnvironment();
 
+        \Ease\Functions::loadClassesInNamespace('MultiFlexi\Ui\Form');
+
+        foreach (\Ease\Functions::classesInNamespace('MultiFlexi\Ui\Form') as $formAvailble) {
+            $formClass = '\\MultiFlexi\\Ui\\Form\\'.$formAvailble;
+
+            $formTypes[$formAvailble] = $formClass::name();
+        }
+
+        $kredenc = new \MultiFlexi\Credential();
+        $companyCredentials = $kredenc->listingQuery()->where('company_id', $engine->getDataValue('company_id'))->fetchAll();
+
+        $companyCredentialsByType = [];
+
+        foreach ($companyCredentials as $credInfo) {
+            if (\array_key_exists($credInfo['formType'], $companyCredentialsByType) === false) {
+                $companyCredentialsByType[$credInfo['formType']][] = ['id' => '', 'name' => _('Do not use')];
+            }
+
+            $companyCredentialsByType[$credInfo['formType']][$credInfo['name']] = $credInfo;
+        }
+
+        $reqs = $engine->getApplication()->getRequirements();
+
+        $reqsRow = new \Ease\TWB4\Row();
+
+        $credentialChosen = '';
+
+        foreach ($reqs as $req) {
+            $formClass = '\\MultiFlexi\\Ui\\Form\\'.$req;
+
+            if (\array_key_exists($req, $companyCredentialsByType)) {
+                foreach ($companyCredentialsByType[$req] as $candidat) {
+                    $candidates[$candidat['id']] = $candidat['name'];
+                }
+
+                $reqsRow->addColumn(2, [new \Ease\Html\ImgTag($formClass::$logo, $req, ['title' => $formClass::name(), 'height' => '30']), new \Ease\Html\SelectTag('credential['.$req.']', $candidates, $credentialChosen)]);
+            } else {
+                if (\array_key_exists($req, $formTypes)) {
+                    $reqsRow->addColumn(2, new \Ease\TWB4\LinkButton('credential.php?company_id='.$engine->getDataValue('company_id').'&formType='.$req, [new \Ease\Html\ImgTag($formClass::$logo, $req, ['title' => $formClass::name(), 'height' => '30']), '️➕ 🔐'._('New Credential')], 'info btn-lg btn-block'));
+                } else {
+                    $reqsRow->addColumn(2, _('Form not avilble for %s'), $req);
+                }
+            }
+        }
+
+        $this->addItem($reqsRow);
+
         $appFields = \MultiFlexi\Conffield::getAppConfigs($engine->getDataValue('app_id'));
 
         $columns = array_keys(array_merge($appFields, $customized));
