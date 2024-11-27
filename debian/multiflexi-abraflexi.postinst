@@ -5,3 +5,20 @@ set -e
 . /usr/share/debconf/confmodule
 
 composer-debian multiflexi
+
+# TODO:
+#
+#    "deb/ease-bootstrap4-widgets-abraflexi": "*",
+#
+#    {
+#      "type": "path",
+#      "url": "/usr/share/php/AbraFlexi/"
+#    },
+#    {
+#      "type": "path",
+#      "url": "/usr/share/php/AbraFlexiBricks/"
+#    },
+#    {
+#      "type": "path",
+#      "url": "/usr/share/php/EaseTWB4WidgetsAbraFlexi/"
+#    }

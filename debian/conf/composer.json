@@ -3,7 +3,6 @@
   "description": "Tool used to setup AbraFlexi multiinstance",
   "type": "project",
   "require": {
-    "deb/ease-bootstrap4-widgets-abraflexi": "*",
     "deb/ease-bootstrap4-widgets": "*",
     "deb/ease-fluentpdo": "*",
     "deb/ease-html-widgets": "*",
@@ -52,10 +51,6 @@
     },
     {
       "type": "path",
-      "url": "/usr/share/php/AbraFlexi/"
-    },
-    {
-      "type": "path",
       "url": "/usr/share/php/EaseHtmlWidgets/"
     },
     {
@@ -68,15 +63,7 @@
     },
     {
       "type": "path",
-      "url": "/usr/share/php/AbraFlexiBricks/"
-    },
-    {
-      "type": "path",
       "url": "/usr/share/php/EaseTWB4Widgets/"
     },
-    {
-      "type": "path",
-      "url": "/usr/share/php/EaseTWB4WidgetsAbraFlexi/"
-    }
   ]
 }
