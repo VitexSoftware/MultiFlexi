@@ -33,6 +33,7 @@ if (null !== $delete) {
     if ($kredenc->deleteFromSQL($delete)) {
         $kredenc->addStatusMessage(_('Credential removed'));
     }
+
     WebPage::singleton()->redirect('companycreds.php?company_id='.$kredenc->getDataValue('company_id'));
 }
 
@@ -43,12 +44,14 @@ if (WebPage::singleton()->isPosted()) {
         $kredenc->addStatusMessage(_('Error saving Credential field'), 'error');
     }
 } else {
-    if(is_null(WebPage::getRequestValue('company_id')) === false){
+    if ((null === WebPage::getRequestValue('company_id')) === false) {
         $kredenc->setDataValue('company_id', WebPage::getRequestValue('company_id'));
     }
-}
 
-$formType = (string) WebPage::getRequestValue('formType', 'string');
+    if ((null === WebPage::getRequestValue('formType')) === false) {
+        $kredenc->setDataValue('formType', WebPage::getRequestValue('formType'));
+    }
+}
 
 WebPage::singleton()->addItem(new PageTop(_('MultiFlexi')));
 

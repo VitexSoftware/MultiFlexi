@@ -473,7 +473,7 @@ class Application extends DBEngine
 
     public function getRequirements()
     {
-        return $this->getDataValue('requirements');
+        return strstr($this->getDataValue('requirements'), ',') ? explode(',', $this->getDataValue('requirements')) : [$this->getDataValue('requirements')];
     }
 
     /**

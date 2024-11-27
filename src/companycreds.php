@@ -46,7 +46,7 @@ foreach ($creds as $job) {
 }
 
 $companyPanelContents[] = $credList;
-$bottomLine = new \Ease\TWB4\LinkButton('credential.php?company_id=' . $companies->getMyKey(), '️➕ 🔐' . _('Create'), 'info btn-lg btn-block');
+$bottomLine = new \Ease\TWB4\LinkButton('credential.php?company_id='.$companies->getMyKey(), '️➕ 🔐'._('Create'), 'info btn-lg btn-block');
 
 WebPage::singleton()->container->addItem(new CompanyPanel($companies, $companyPanelContents, $bottomLine));
 WebPage::singleton()->addItem(new PageBottom('company/'.$companies->getMyKey()));
