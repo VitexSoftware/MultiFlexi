@@ -19,8 +19,6 @@ class CompanyJob extends DBEngine implements DatabaseEngine
 {
     public $companyId;
     public $appId;
-
-    #[\Override]
     public function __construct($init = null, $filter = [])
     {
         $this->myTable = 'job';

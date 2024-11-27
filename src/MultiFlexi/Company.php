@@ -42,10 +42,7 @@ class Company extends \MultiFlexi\Engine
         $this->pdo = null;
     }
 
-    /**
-     * @return array
-     */
-    public function __sleep()
+    public function __sleep(): array
     {
         $this->pdo = null;
 

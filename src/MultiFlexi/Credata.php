@@ -13,14 +13,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace MultiFlexi\Ui\Form;
+namespace MultiFlexi;
 
 /**
- * @author vitex
+ * Description of Credata.
+ *
+ * @author Vitex <info@vitexsoftware.cz>
  */
-interface configForm
+class Credata extends Engine
 {
-    public static function fields(): array;
-    
-    public static function name(): string;
+    public function __construct($identifier = null, $options = [])
+    {
+        $this->myTable = 'credata';
+        parent::__construct($identifier, $options);
+    }
 }

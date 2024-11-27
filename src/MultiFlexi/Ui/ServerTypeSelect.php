@@ -22,7 +22,7 @@ namespace MultiFlexi\Ui;
  */
 class ServerTypeSelect extends \Ease\Html\SelectTag
 {
-    public function __construct($name, $value = null)
+    public function __construct($name, $value = '')
     {
         parent::__construct($name, ['AbraFlexi' => 'AbraFlexi', 'Pohoda' => _('Stormware Pohoda')], $value);
     }

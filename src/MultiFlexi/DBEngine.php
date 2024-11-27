@@ -90,10 +90,8 @@ class DBEngine extends \Ease\SQL\Engine
 
     /**
      * Serialize only Data Field.
-     *
-     * @return array
      */
-    public function __sleep()
+    public function __sleep(): array
     {
         return ['data'];
     }
@@ -443,14 +441,6 @@ class DBEngine extends \Ease\SQL\Engine
         }
 
         return $query;
-    }
-
-    /**
-     * @return \Envms\FluentPDO
-     */
-    public function listingQuery()
-    {
-        return $this->getFluentPDO()->from($this->getMyTable());
     }
 
     /**

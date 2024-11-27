@@ -43,7 +43,7 @@ class MainMenu extends \Ease\Html\DivTag
             $customers = $this->getMenuList(new \MultiFlexi\Customer(), null, WebPage::singleton()->customer);
             $companys = $this->getMenuList(new \MultiFlexi\Company(), 'logo');
             $apps = $this->getMenuList(new \MultiFlexi\Application(), 'image');
-            $this->serversMenuEnabled($nav, $servers);
+            $this->credentialsMenuEnabled($nav, $servers);
 
             if (empty($companys)) {
                 \MultiFlexi\User::singleton()->addStatusMessage(_('No company registered yet. Please register one.'), 'warning');
@@ -115,22 +115,22 @@ class MainMenu extends \Ease\Html\DivTag
     }
 
     /**
-     * Servers menu.
+     * Credential menu.
      *
-     * @param \Ease\Html\NavTag $nav
-     * @param array             $servers
+     * @param \Ease\Html\NavTag     $nav
+     * @param array<string, string> $credentials
      */
-    public function serversMenuEnabled($nav, $servers): void
+    public function credentialsMenuEnabled($nav, $credentials): void
     {
-        $serversMenu = ['server.php' => _('Register new Server')];
+        $credentialsMenu = ['credential.php' => _('Register new Credential')];
 
-        if (!empty($servers)) {
-            $serversMenu['servers.php'] = _('Instance list');
+        if (!empty($credentials)) {
+            $credentialsMenu['credentials.php'] = _('Credentials listing');
         }
 
         $nav->addDropDownMenu(
-            '<img width=30 src=images/server.svg> '._('Servers'),
-            array_merge($serversMenu, ['' => ''], $servers),
+            '<img width=30 src=images/vault.svg> '._('Credentials'),
+            array_merge($credentialsMenu, ['' => ''], $credentials),
         );
     }
 

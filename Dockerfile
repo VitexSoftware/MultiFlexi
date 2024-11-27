@@ -1,7 +1,7 @@
 FROM debian:latest
 
-ENV APACHE_DOCUMENT_ROOT /opt/multiflexi/src
-ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV APACHE_DOCUMENT_ROOT=/opt/multiflexi/src
+ENV COMPOSER_ALLOW_SUPERUSER=1
 env DEBIAN_FRONTEND=noninteractive
 ENV DB_CONNECTION=sqlite
 ENV DB_DATABASE=/opt/multiflexi/db/multiflexi.sqlite
