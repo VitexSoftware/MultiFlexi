@@ -51,10 +51,7 @@ if (WebPage::singleton()->isPosted()) {
     if ($conffields->takeData($_POST) && null !== $conffields->dbsync()) {
         $conffields->addStatusMessage(_('Config field Saved'), 'success');
     } else {
-        $conffields->addStatusMessage(
-            _('Error saving Config field'),
-            'error',
-        );
+        $conffields->addStatusMessage(_('Error saving Config field'), 'error');
     }
 }
 

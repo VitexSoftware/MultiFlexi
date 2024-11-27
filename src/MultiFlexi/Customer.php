@@ -35,10 +35,8 @@ class Customer extends DBEngine
 
     /**
      * Serialize only data storage.
-     *
-     * @return array
      */
-    public function __sleep()
+    public function __sleep(): array
     {
         return ['data'];
     }

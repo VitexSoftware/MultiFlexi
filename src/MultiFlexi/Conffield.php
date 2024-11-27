@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace MultiFlexi;
 
 /**
- * Description of Conffield.
+ * Description of Conf field.
  *
  * @author vitex
  */
