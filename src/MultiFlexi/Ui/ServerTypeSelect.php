@@ -18,6 +18,7 @@ namespace MultiFlexi\Ui;
 /**
  * Description of EngineSelect.
  *
+ * @deprecated since version 1.20
  * @author vitex
  */
 class ServerTypeSelect extends \Ease\Html\SelectTag

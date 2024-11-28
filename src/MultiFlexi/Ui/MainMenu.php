@@ -190,6 +190,7 @@ class MainMenu extends \Ease\Html\DivTag
                 'actionmodules.php' => '🤖&nbsp;'._('Actions'),
                 'executors.php' => '🚀&nbsp;'._('Executors'),
                 'intervals.php' => '♻️&nbsp;'._('Intervals'),
+                'requirements.php' => '🔘&nbsp;'._('Requirements'),
                 'users.php' => new \Ease\TWB4\Widgets\FaIcon('list').'&nbsp;'._('Admin Overview'),
                 '' => '',
             ], $this->getMenuList(\Ease\Shared::user(), 'login')),
