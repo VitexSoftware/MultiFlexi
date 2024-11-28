@@ -24,7 +24,7 @@ class ExitCode extends \Ease\TWB4\Badge
 {
     public function __construct($exitcode, $properties = [])
     {
-        parent::__construct(self::status($exitcode), '&nbsp'.$exitcode.'&nbsp', $properties);
+        parent::__construct(self::status($exitcode), '&nbsp'. ($exitcode == -1 ? '⏳' : $exitcode)  .'&nbsp', $properties);
     }
 
     /**
