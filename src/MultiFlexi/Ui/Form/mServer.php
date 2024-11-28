@@ -26,8 +26,8 @@ class mServer extends \Ease\TWB4\Panel implements configForm {
 
     function __construct($heading = null, $type = null, $body = null, $footer = null) {
         $header = new \Ease\TWB4\Row();
-        $header->addColumn(6, new \Ease\Html\ATag('https://www.stormare.eu/', new \Ease\Html\ImgTag(self::$logo, _('Stormare Pohoda'), ['height' => 50])));
-        $header->addColumn(6, new \Ease\Html\H3Tag(_('Stormare Pohoda')));
+        $header->addColumn(6, new \Ease\Html\ATag('https://www.stormare.eu/', new \Ease\Html\ImgTag(self::$logo, _('Stormware Pohoda'), ['height' => 50])));
+        $header->addColumn(6, new \Ease\Html\H3Tag(_('Stormware Pohoda')));
 
         $body = new \Ease\Html\DivTag();
 
@@ -41,7 +41,7 @@ class mServer extends \Ease\TWB4\Panel implements configForm {
 
     #[\Override]
     public static function name(): string {
-        return _('Stormare Pohoda');
+        return _('Stormware Pohoda');
     }
 
     #[\Override]
