@@ -54,6 +54,7 @@ foreach ($reqs as $reqirement => $apps) {
 
     if (array_key_exists($reqirement, $forms)) {
         $head->addColumn(4, new \Ease\Html\ImgTag($forms[$reqirement]::$logo,$reqirement,['height'=>'40px']));
+        $head->addColumn(4,$reqirement);
         $head->addColumn(4, new \Ease\Html\H2Tag($forms[$reqirement]::name()));
         
         foreach ($forms[$reqirement]::fields() as $name => $fieldsInfo) {
@@ -63,6 +64,7 @@ foreach ($reqs as $reqirement => $apps) {
         
     } else {
         $head->addColumn(4, new \Ease\Html\ImgTag('images/cancel.svg',$reqirement,['height'=>'40px']));
+        $head->addColumn(4,$reqirement);
         $head->addColumn(4, new \Ease\Html\H2Tag($reqirement));
         $reqPanel = new \Ease\TWB4\Panel($head,'warning', $applications, $fields);
     }
