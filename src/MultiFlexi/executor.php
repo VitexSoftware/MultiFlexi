@@ -38,6 +38,8 @@ interface executor
 
     public function commandline(): string;
 
+    public function getPid(): ?int;
+
     /**
      * Can this Executor execute given application ?
      *

@@ -24,17 +24,19 @@ WebPage::singleton()->addItem(new PageTop(_('MultiFlexi')));
 \Ease\Functions::loadClassesInNamespace('MultiFlexi\Ui\Form');
 
 foreach (\Ease\Functions::classesInNamespace('MultiFlexi\Ui\Form') as $formAvailble) {
-    $forms[$formAvailble] = '\\MultiFlexi\\Ui\\Form\\' . $formAvailble;
+    $forms[$formAvailble] = '\\MultiFlexi\\Ui\\Form\\'.$formAvailble;
 }
-
 
 $apper = new \MultiFlexi\Application();
 $reqs = [];
 $apps = [];
+
 foreach ($apper->listingQuery() as $appInfo) {
     $allApps[$appInfo['uuid']] = $appInfo;
+
     if ($appInfo['requirements']) {
-        $appReqs = strchr($appInfo['requirements'], ',') ? explode(',', $appInfo['requirements']) : [$appInfo['requirements']];
+        $appReqs = strstr($appInfo['requirements'], ',') ? explode(',', $appInfo['requirements']) : [$appInfo['requirements']];
+
         foreach ($appReqs as $requrement) {
             $reqs[$requrement][$appInfo['id']] = $appInfo['uuid'];
         }
@@ -42,37 +44,34 @@ foreach ($apper->listingQuery() as $appInfo) {
 }
 
 foreach ($reqs as $reqirement => $apps) {
-
     $head = new \Ease\TWB4\Row();
     $fields = [];
 
     $applications = [];
-    
-    foreach ($apps as $app){
+
+    foreach ($apps as $app) {
         $applications[_($allApps[$app]['name'])] = new \Ease\Html\DivTag(new AppLinkButton(new \MultiFlexi\Application($allApps[$app])));
     }
 
-    if (array_key_exists($reqirement, $forms)) {
-        $head->addColumn(4, new \Ease\Html\ImgTag($forms[$reqirement]::$logo,$reqirement,['height'=>'40px']));
-        $head->addColumn(4,$reqirement);
+    if (\array_key_exists($reqirement, $forms)) {
+        $head->addColumn(4, new \Ease\Html\ImgTag($forms[$reqirement]::$logo, $reqirement, ['height' => '40px']));
+        $head->addColumn(4, $reqirement);
         $head->addColumn(4, new \Ease\Html\H2Tag($forms[$reqirement]::name()));
-        
+
         foreach ($forms[$reqirement]::fields() as $name => $fieldsInfo) {
-            $fields[] = new \Ease\TWB4\Badge('info', $name,['title'=>$fieldsInfo['type'],'style'=>'margin: 4px;']);
+            $fields[] = new \Ease\TWB4\Badge('info', $name, ['title' => $fieldsInfo['type'], 'style' => 'margin: 4px;']);
         }
-        $reqPanel = new \Ease\TWB4\Panel($head,'success', $applications, $fields);
-        
+
+        $reqPanel = new \Ease\TWB4\Panel($head, 'success', $applications, $fields);
     } else {
-        $head->addColumn(4, new \Ease\Html\ImgTag('images/cancel.svg',$reqirement,['height'=>'40px']));
-        $head->addColumn(4,$reqirement);
+        $head->addColumn(4, new \Ease\Html\ImgTag('images/cancel.svg', $reqirement, ['height' => '40px']));
+        $head->addColumn(4, $reqirement);
         $head->addColumn(4, new \Ease\Html\H2Tag($reqirement));
-        $reqPanel = new \Ease\TWB4\Panel($head,'warning', $applications, $fields);
+        $reqPanel = new \Ease\TWB4\Panel($head, 'warning', $applications, $fields);
     }
-            
-    
+
     WebPage::singleton()->container->addItem($reqPanel);
 }
-
 
 WebPage::singleton()->addItem(new PageBottom());
 

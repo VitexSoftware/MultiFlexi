@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Executor;
 
+use Symfony\Component\Process\Process;
+
 /**
  * Description of Native.
  *
@@ -60,6 +62,7 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
     {
         $this->process = new \Symfony\Component\Process\Process(explode(' ', $command), null, \MultiFlexi\Environmentor::flatEnv($this->environment), null, 32767);
         $this->process->run(function ($type, $buffer): void {
+            $this->pid = $this->process->getPid();
             $logger = new \Ease\Sand();
             $logger->setObjectName(\Ease\Logger\Message::getCallerName($this));
 
@@ -83,6 +86,14 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
         $this->addStatusMessage('Job launched: '.$this->job->application->getDataValue('name').'@'.$this->job->company->getDataValue('name').' : '.$this->job->runTemplate->getRecordName().' Runtemplate: #'.$this->job->runTemplate->getMyKey());
         $this->launch($this->commandline());
         $this->addStatusMessage('Job launch finished: '.$this->executable().'@'.$this->job->application->getDataValue('name').' '.$this->process->getExitCodeText());
+    }
+
+    /**
+     * @todo Implement
+     */
+    public function runJob(): void
+    {
+        $this->launchInBackground($this->commandline());
     }
 
     public function storeLogs(): void
@@ -117,5 +128,27 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
     public function getOutput(): string
     {
         return $this->process->getOutput();
+    }
+
+    /**
+     * Launch a command in a non-blocking separate thread using Symfony Process.
+     *
+     * @todo Implement
+     *
+     * @param string $command the command to execute
+     */
+    private function launchInBackground(string $command): void
+    {
+        $process = Process::fromShellCommandline($command);
+        $process->start();
+
+        // Optionally, you can add a callback to handle output or errors
+        $process->wait(static function ($type, $buffer): void {
+            if (Process::ERR === $type) {
+                echo 'ERR > '.$buffer;
+            } else {
+                echo 'OUT > '.$buffer;
+            }
+        });
     }
 }

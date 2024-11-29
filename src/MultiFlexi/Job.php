@@ -105,6 +105,7 @@ class Job extends Engine
                 'launched_by_id' => null,
                 'launched_by' => null,
                 'data' => null,
+                'pid' => null,
             ];
         }
     }
@@ -235,19 +236,21 @@ class Job extends Engine
         $resultfile = \array_key_exists($resultFileField, $this->executor->environment) ? $this->executor->environment[$resultFileField]['value'] : '';
 
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
-            $this->zabbixMessageData['phase'] = 'jobDone';
-            $this->zabbixMessageData['data'] = file_exists($resultfile) ? file_get_contents($resultfile) : '';
-            $this->zabbixMessageData['stdout'] = $stdout;
-            $this->zabbixMessageData['stderr'] = $stderr;
-            $this->zabbixMessageData['version'] = $this->application->getDataValue('version');
-            $this->zabbixMessageData['exitcode'] = $statusCode;
-            $this->zabbixMessageData['scheduled'] = $this->getDataValue('schedule');
-            $this->zabbixMessageData['end'] = (new \DateTime())->format('Y-m-d H:i:s');
-            $this->zabbixMessageData['runtemplate_id'] = $this->runTemplate->getMyKey();
+            $this->setZabbixValue('phase', 'jobDone');
+            $this->setZabbixValue('data', file_exists($resultfile) ? file_get_contents($resultfile) : '');
+            $this->setZabbixValue('stdout', $stdout);
+            $this->setZabbixValue('stderr', $stderr);
+            $this->setZabbixValue('version', $this->application->getDataValue('version'));
+            $this->setZabbixValue('exitcode', $statusCode);
+            $this->setZabbixValue('scheduled', $this->getDataValue('schedule'));
+            $this->setZabbixValue('end', (new \DateTime())->format('Y-m-d H:i:s'));
+            $this->setZabbixValue('runtemplate_id', $this->runTemplate->getMyKey());
+            $this->setZabbixValue('pid', $this->executor->getPid());
             $this->reportToZabbix($this->zabbixMessageData);
         }
 
         $this->setData([
+            'pid' => $this->executor->getPid(),
             'stdout' => addslashes($stdout),
             'stderr' => addslashes($stderr),
             'command' => $this->executor->commandline(),
@@ -745,5 +748,10 @@ EOD;
     public function getEnvironment(): array
     {
         return $this->environment;
+    }
+
+    public function setZabbixValue(string $field, $value): void
+    {
+        $this->zabbixMessageData[$field] = $value;
     }
 }

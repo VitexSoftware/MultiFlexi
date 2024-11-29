@@ -78,7 +78,7 @@ class CredentialForm extends \Ease\TWB4\Form
     #[\Override]
     public function finalize(): void
     {
-        $this->fillUp((array)$this->kredenc->getData());
+        $this->fillUp((array) $this->kredenc->getData());
         parent::finalize();
     }
 }

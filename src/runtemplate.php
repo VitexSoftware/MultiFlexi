@@ -36,7 +36,7 @@ if (WebPage::getRequestValue('new', 'int') === 1) {
 
 if (WebPage::getRequestValue('delete', 'int') === 2) {
     $runTemplate->deleteFromSQL();
-    WebPage::singleton()->redirect('companyapp.php?company_id=' . $runTemplate->getDataValue('company_id') . '&app_id=' . $runTemplate->getDataValue('app_id'));
+    WebPage::singleton()->redirect('companyapp.php?company_id='.$runTemplate->getDataValue('company_id').'&app_id='.$runTemplate->getDataValue('app_id'));
 }
 
 $companies = new Company($runTemplate->getDataValue('company_id'));
@@ -50,24 +50,24 @@ $configurator = new \MultiFlexi\Configuration([
     'runtemplate_id' => $runTemplate->getMyKey(),
     'app_id' => $app->getMyKey(),
     'company_id' => $companies->getMyKey(),
-        ], ['autoload' => false]);
+], ['autoload' => false]);
 
 if (WebPage::singleton()->isPosted()) {
-
     $dataToSave = $_POST;
 
-    if (array_key_exists('credential', $dataToSave)) {
+    if (\array_key_exists('credential', $dataToSave)) {
         if ($dataToSave['credential']) {
             $kredenc = new \MultiFlexi\Credata();
+
             foreach ($dataToSave['credential'] as $reqType => $reqId) {
                 foreach ($kredenc->getColumnsFromSQL(['name', 'value'], ['credential_id' => $reqId]) as $credental) {
                     $dataToSave[$credental['name']] = $credental['value'];
                 }
             }
         }
+
         unset($dataToSave['credential']);
     }
-
 
     $app->checkRequiredFields($dataToSave, true);
 
@@ -78,11 +78,11 @@ if (WebPage::singleton()->isPosted()) {
     }
 }
 
-WebPage::singleton()->addItem(new PageTop($runTemplate->getRecordName() . ' ' . _('Configuration')));
+WebPage::singleton()->addItem(new PageTop($runTemplate->getRecordName().' '._('Configuration')));
 
 $appPanel = new ApplicationPanel($app, new RunTemplatePanel($runTemplate));
 
 WebPage::singleton()->container->addItem(new CompanyPanel($companies, $appPanel));
 
-WebPage::singleton()->addItem(new PageBottom('runtemplate/' . $runTemplate->getMyKey()));
+WebPage::singleton()->addItem(new PageBottom('runtemplate/'.$runTemplate->getMyKey()));
 WebPage::singleton()->draw();
