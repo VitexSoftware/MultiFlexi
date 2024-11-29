@@ -29,6 +29,7 @@ abstract class CommonExecutor extends \Ease\Sand
     public string $stderr;
     public $environment = [];
     public array $outputCache = [];
+    private ?int $pid;
 
     public function __construct(Job $job)
     {
@@ -66,5 +67,10 @@ abstract class CommonExecutor extends \Ease\Sand
         }
 
         return $output;
+    }
+    #[\Override]
+    public function getPid(): ?int
+    {
+        return $this->pid;
     }
 }
