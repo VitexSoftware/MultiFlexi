@@ -40,6 +40,13 @@ if (\array_key_exists(1, $argv) && file_exists($argv[1])) {
         $apper->addStatusMessage(_('Error importing application json'), 'error');
 
         exit(1);
+    } else {
+        $apper->setKeyColumn('uuid');
+        if($apper->loadImage($apper->getDataValue('uuid'),'../src/images/')){
+            $apper->updateToSQL();
+        } elseif($apper->loadImage($apper->getDataValue('uuid'), dirname($argv[1]))){
+            $apper->updateToSQL();
+        }
     }
 } else {
     echo 'usage: app.template.json [app id]';
