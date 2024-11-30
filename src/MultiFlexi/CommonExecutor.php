@@ -29,17 +29,17 @@ abstract class CommonExecutor extends \Ease\Sand
     public string $stderr;
     public $environment = [];
     public array $outputCache = [];
-    private ?int $pid;
+    public ?int $pid;
 
-    public function __construct(Job $job)
+    public function __construct(Job &$job)
     {
         $this->setObjectName();
         $this->setJob($job);
     }
 
-    public function setJob(Job $job): void
+    public function setJob(Job &$job): void
     {
-        $this->job = $job;
+        $this->job = &$job;
         $this->setObjectName($job->getMyKey().'@'.\Ease\Logger\Message::getCallerName($this));
         $this->environment = $job->getEnvironment();
     }
@@ -68,7 +68,7 @@ abstract class CommonExecutor extends \Ease\Sand
 
         return $output;
     }
-    #[\Override]
+    
     public function getPid(): ?int
     {
         return $this->pid;

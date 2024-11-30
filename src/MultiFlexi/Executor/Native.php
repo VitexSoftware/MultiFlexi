@@ -63,9 +63,10 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
         $this->process = new \Symfony\Component\Process\Process(explode(' ', $command), null, \MultiFlexi\Environmentor::flatEnv($this->environment), null, 32767);
         $this->process->run(function ($type, $buffer): void {
             $this->pid = $this->process->getPid();
+            $this->job->setPid($this->pid);
             $logger = new \Ease\Sand();
             $logger->setObjectName(\Ease\Logger\Message::getCallerName($this));
-
+            $logger->addStatusMessage('JOB: '.$this->job->getMyKey().' PID: '. $this->pid, $type,'debug');
             if (\Symfony\Component\Process\Process::ERR === $type) {
                 $logger->addStatusMessage($buffer, 'error');
                 $this->addOutput($buffer, 'error');
@@ -74,7 +75,7 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
                 $this->addOutput($buffer, 'success');
             }
         });
-        $this->addStatusMessage($command.': '.$this->process->getExitCodeText(), $this->process->getExitCode() === 0 ? 'success' : 'warning');
+        $this->addStatusMessage('pid:'. ($this->pid ? strval($this->pid) : 'n/a').' '.$command.': '.$this->process->getExitCodeText(), $this->process->getExitCode() === 0 ? 'success' : 'warning');
 
         return $this->process->getExitCode();
     }

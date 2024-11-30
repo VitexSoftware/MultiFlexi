@@ -264,6 +264,7 @@ class Job extends Engine
         }
 
         return $this->updateToSQL([
+            'pid' => $this->executor->getPid(),
             'end' => new \Envms\FluentPDO\Literal(\Ease\Shared::cfg('DB_CONNECTION') === 'sqlite' ? "date('now')" : 'NOW()'),
             'stdout' => addslashes($stdout),
             'stderr' => addslashes($stderr),
@@ -753,5 +754,10 @@ EOD;
     public function setZabbixValue(string $field, $value): void
     {
         $this->zabbixMessageData[$field] = $value;
+    }
+    
+    public function setPid(int $pid) {
+        $this->setDataValue('pid', $pid);
+        $this->setZabbixValue('pid', $pid);
     }
 }
