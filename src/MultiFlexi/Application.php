@@ -300,7 +300,7 @@ class Application extends DBEngine
                 } else { // Insert
                     $currentVersion = 'n/a';
                     $currentName = '';
-                    $currentData = [];
+                    $currentData[0] = [];
                     if ((\array_key_exists('code', $importData) === false) || empty($importData['code'])) {
                         $importData['code'] = substr(substr(strtoupper($importData['executable'] ? basename($importData['executable']) : $importData['name']), -7), 0, 6);
                         $pos = 0;
