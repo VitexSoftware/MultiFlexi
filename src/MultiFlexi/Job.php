@@ -755,8 +755,9 @@ EOD;
     {
         $this->zabbixMessageData[$field] = $value;
     }
-    
-    public function setPid(int $pid) {
+
+    public function setPid(int $pid): void
+    {
         $this->setDataValue('pid', $pid);
         $this->setZabbixValue('pid', $pid);
     }
