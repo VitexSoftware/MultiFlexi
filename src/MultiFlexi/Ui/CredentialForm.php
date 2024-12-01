@@ -20,11 +20,12 @@ namespace MultiFlexi\Ui;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class CredentialForm extends \Ease\TWB4\Form {
-
+class CredentialForm extends \Ease\TWB4\Form
+{
     public \MultiFlexi\Credential $kredenc;
 
-    public function __construct(\MultiFlexi\Credential $kredenc) {
+    public function __construct(\MultiFlexi\Credential $kredenc)
+    {
         $this->kredenc = $kredenc;
         $formContents = [];
         $formType = $kredenc->getDataValue('formType');
@@ -54,8 +55,7 @@ class CredentialForm extends \Ease\TWB4\Form {
             $runtlUsing = $rtplcr->getRuntemplatesForCredential($kredenc->getMyKey())->select(['runtemplate.name', 'company_id', 'app_id'])->leftJoin('runtemplate ON runtemplate.id = runtplcreds.runtemplate_id')->fetchAll();
 
             if ($runtlUsing) {
-
-                $formContents[] = new \Ease\Html\DivTag(_('Used By') . '(' . count($runtlUsing) . ')');
+                $formContents[] = new \Ease\Html\DivTag(_('Used By').'('.\count($runtlUsing).')');
 
                 $jobber = new \MultiFlexi\Job();
 
@@ -66,38 +66,36 @@ class CredentialForm extends \Ease\TWB4\Form {
                     $lastJobInfo = $jobber->listingQuery()->select(['id', 'exitcode'], true)->where(['company_id' => $runtemplateData['company_id'], 'app_id' => $runtemplateData['app_id']])->order('id DESC')->limit(1)->fetchAll();
 
                     if ($lastJobInfo) {
-                        $companyAppStatus = new \Ease\Html\ATag('job.php?id=' . $lastJobInfo[0]['id'], new ExitCode($lastJobInfo[0]['exitcode'], ['style' => 'font-size: 1.0em; font-family: monospace;']), ['class' => 'btn btn-inverse btn-sm']);
+                        $companyAppStatus = new \Ease\Html\ATag('job.php?id='.$lastJobInfo[0]['id'], new ExitCode($lastJobInfo[0]['exitcode'], ['style' => 'font-size: 1.0em; font-family: monospace;']), ['class' => 'btn btn-inverse btn-sm']);
                     } else {
                         $companyAppStatus = new \Ease\TWB4\Badge('disabled', '🪤', ['style' => 'font-size: 1.0em; font-family: monospace;']);
                     }
 
-                    $runtemplatesDiv->addItem(new \Ease\Html\SpanTag([new \Ease\Html\ATag('runtemplate.php?id=' . $runtemplateData['id'], '⚗️#' . $runtemplateData['id'], ['class' => 'btn btn-inverse btn-sm', 'title' => $runtemplateData['name']]), $companyAppStatus], ['class' => 'btn-group', 'role' => 'group']));
+                    $runtemplatesDiv->addItem(new \Ease\Html\SpanTag([new \Ease\Html\ATag('runtemplate.php?id='.$runtemplateData['id'], '⚗️#'.$runtemplateData['id'], ['class' => 'btn btn-inverse btn-sm', 'title' => $runtemplateData['name']]), $companyAppStatus], ['class' => 'btn-group', 'role' => 'group']));
                 }
 
                 $formContents[] = $runtemplatesDiv;
             }
         }
 
-
-        $class = '\\MultiFlexi\\Ui\\Form\\' . $formType;
+        $class = '\\MultiFlexi\\Ui\\Form\\'.$formType;
 
         if ($formType && class_exists($class)) {
             $formContents[] = new $class();
         }
 
-
         $formContents[] = new \Ease\Html\InputHiddenTag('id', $kredenc->getMyKey());
 
         $submitRow = new \Ease\TWB4\Row();
-        $submitRow->addColumn(10, new \Ease\TWB4\SubmitButton('🍏 ' . _('Apply'), 'primary btn-lg btn-block'));
+        $submitRow->addColumn(10, new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'primary btn-lg btn-block'));
 
         if (null === $kredenc->getMyKey()) {
-            $submitRow->addColumn(2, new \Ease\TWB4\SubmitButton('⚰️ ' . _('Remove') . ' !', 'disabled btn-lg btn-block', ['disabled' => 'true']));
+            $submitRow->addColumn(2, new \Ease\TWB4\SubmitButton('⚰️ '._('Remove').' !', 'disabled btn-lg btn-block', ['disabled' => 'true']));
         } else {
             if (WebPage::getRequestValue('remove') === 'true') {
-                $submitRow->addColumn(2, new \Ease\TWB4\LinkButton('credential.php?delete=' . $kredenc->getMyKey(), '⚰️ ' . _('Remove') . ' !', 'danger btn-lg btn-block'));
+                $submitRow->addColumn(2, new \Ease\TWB4\LinkButton('credential.php?delete='.$kredenc->getMyKey(), '⚰️ '._('Remove').' !', 'danger btn-lg btn-block'));
             } else {
-                $submitRow->addColumn(2, new \Ease\TWB4\LinkButton('credential.php?id=' . $kredenc->getMyKey() . '&remove=true', '⚰️ ' . _('Remove') . ' ?', 'warning btn-lg btn-block'));
+                $submitRow->addColumn(2, new \Ease\TWB4\LinkButton('credential.php?id='.$kredenc->getMyKey().'&remove=true', '⚰️ '._('Remove').' ?', 'warning btn-lg btn-block'));
             }
         }
 
@@ -107,7 +105,8 @@ class CredentialForm extends \Ease\TWB4\Form {
     }
 
     #[\Override]
-    public function finalize(): void {
+    public function finalize(): void
+    {
         $this->fillUp((array) $this->kredenc->getData());
         parent::finalize();
     }

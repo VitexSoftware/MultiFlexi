@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
+use MultiFlexi\Company;
+
 /**
  * Description of CompanyAppChooser.
  *
@@ -25,12 +27,10 @@ class CompanyAppChooser extends \Ease\Html\SelectTag
     /**
      * Choose from applications Assigned to given company.
      *
-     * @param string             $name         form input name
-     * @param \AbraFlexi\Company $company
-     * @param string             $defaultValue
-     * @param array              $properties
+     * @param string                $name       form input name
+     * @param array<string, string> $properties
      */
-    public function __construct($name, $company, $defaultValue = '', $properties = [])
+    public function __construct(string $name, Company $company, string $defaultValue = '', array $properties = [])
     {
         $companyApp = new \MultiFlexi\CompanyApp($company);
         $assignedRaw = $companyApp->getAssigned()->leftJoin('apps ON apps.id = companyapp.app_id')->select('apps.name')->fetchAll('app_id');
