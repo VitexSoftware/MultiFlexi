@@ -57,11 +57,13 @@ if (WebPage::singleton()->isPosted()) {
 
     if (\array_key_exists('credential', $dataToSave)) {
         if ($dataToSave['credential']) {
-            $kredenc = new \MultiFlexi\Credata();
-
+            $rtplcrd = new \MultiFlexi\RunTplCreds();
             foreach ($dataToSave['credential'] as $reqType => $reqId) {
-                foreach ($kredenc->getColumnsFromSQL(['name', 'value'], ['credential_id' => $reqId]) as $credental) {
-                    $dataToSave[$credental['name']] = $credental['value'];
+                if($reqId){
+                    $rtplcrd->bind($runTemplate->getMyKey(), intval($reqId));
+                } else {
+
+                    $rtplcrd->unbindAll($runTemplate->getMyKey(), $reqType);
                 }
             }
         }
