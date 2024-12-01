@@ -27,6 +27,8 @@ class AppLogo extends ImgTag
 {
     /**
      * Company Logo.
+     *
+     * @param array<string, string> $properties
      */
     public function __construct(Application $application, array $properties = [])
     {

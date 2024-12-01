@@ -182,7 +182,7 @@ class Job extends Engine
         }
 
         $this->environment = array_merge($this->environment, $this->runTemplate->credentialsEnvironment());
-        
+
         if (isset($this->executor) === false) {
             $executorClass = '\\MultiFlexi\\Executor\\'.$this->getDataValue('executor');
             $this->executor = new $executorClass($this);
@@ -425,7 +425,8 @@ EOD;
 
         try {
             $result = $this->zabbixSender->send($packet);
-            if($this->debug){
+
+            if ($this->debug) {
                 $this->addStatusMessage('Data Sent To Zabbix: '.$itemKey.' '.json_encode($messageData), 'debug');
             }
         } catch (\Exception $exc) {
@@ -595,6 +596,7 @@ EOD;
         if (\array_key_exists('RESULT_FILE', $jobEnv)) {
             $jobEnv['RESULT_FILE']['value'] = sys_get_temp_dir().\DIRECTORY_SEPARATOR.basename($jobEnv['RESULT_FILE']['value']);
         }
+
         return $jobEnv;
     }
 

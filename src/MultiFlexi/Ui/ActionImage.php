@@ -27,7 +27,12 @@ namespace MultiFlexi\Ui;
  */
 class ActionImage extends \Ease\Html\ImgTag
 {
-    public function __construct($actionName, $properties = [])
+    /**
+     * Action Image.
+     *
+     * @param array<string, string> $properties
+     */
+    public function __construct(string $actionName, array $properties = [])
     {
         $actionClass = '\\MultiFlexi\\Action\\'.$actionName;
 

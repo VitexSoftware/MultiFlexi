@@ -58,11 +58,11 @@ if (WebPage::singleton()->isPosted()) {
     if (\array_key_exists('credential', $dataToSave)) {
         if ($dataToSave['credential']) {
             $rtplcrd = new \MultiFlexi\RunTplCreds();
-            foreach ($dataToSave['credential'] as $reqType => $reqId) {
-                if($reqId){
-                    $rtplcrd->bind($runTemplate->getMyKey(), intval($reqId));
-                } else {
 
+            foreach ($dataToSave['credential'] as $reqType => $reqId) {
+                if ($reqId) {
+                    $rtplcrd->bind($runTemplate->getMyKey(), (int) $reqId);
+                } else {
                     $rtplcrd->unbindAll($runTemplate->getMyKey(), $reqType);
                 }
             }

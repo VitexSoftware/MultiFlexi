@@ -25,9 +25,7 @@ class AppJson extends \Ease\Html\DivTag
     /**
      * APP JSON Viewer.
      *
-     * @param \MultiFlexi\Application $app
-     *
-     * @param array<string,string> $properties
+     * @param array<string, string> $properties
      */
     public function __construct(\MultiFlexi\Application $app, array $properties = [])
     {

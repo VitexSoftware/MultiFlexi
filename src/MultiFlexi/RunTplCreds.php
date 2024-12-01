@@ -1,51 +1,66 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * MultiFlexi - 
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi;
 
 /**
- * Description of RunTplCreds
+ * Description of RunTplCreds.
  *
- * @author Vitex <info@vitexsoftware.cz> 
+ * @author Vitex <info@vitexsoftware.cz>
  */
-class RunTplCreds extends Engine {
-
-    public function __construct($identifier = null, $options = []) {
+class RunTplCreds extends Engine
+{
+    public function __construct($identifier = null, $options = [])
+    {
         $this->myTable = 'runtplcreds';
         parent::__construct($identifier, $options);
     }
 
-    public function getRuntemplatesForCredential($credentials_id) {
-        return $this->listingQuery()->where(['credentials_id'=>$credentials_id]);
+    public function getRuntemplatesForCredential($credentials_id)
+    {
+        return $this->listingQuery()->where(['credentials_id' => $credentials_id]);
     }
 
-    public function getCredentialsForRuntemplate($runtemplates_id) {
-        return $this->listingQuery()->where(['runtemplate_id'=>$runtemplates_id]);
+    public function getCredentialsForRuntemplate($runtemplates_id)
+    {
+        return $this->listingQuery()->where(['runtemplate_id' => $runtemplates_id]);
     }
-    
-    public function bind(int $runtemplate_id, int $credentials_id) {
+
+    public function bind(int $runtemplate_id, int $credentials_id)
+    {
         $check = $this->listingQuery()->where(['runtemplate_id' => $runtemplate_id, 'credentials_id' => $credentials_id]);
-        if($check->count() == 0){
+
+        if ($check->count() === 0) {
             $this->insertToSQL(['runtemplate_id' => $runtemplate_id, 'credentials_id' => $credentials_id]);
         }
+
         return true;
     }
 
-    public function unbind(int $runtemplate_id, int $credentials_id) {
+    public function unbind(int $runtemplate_id, int $credentials_id)
+    {
         return $this->deleteFromSQL(['runtemplate_id' => $runtemplate_id, 'credentials_id' => $credentials_id]);
     }
 
-    public function unbindAll(int $runtemplate_id, string $reqType) {
+    public function unbindAll(int $runtemplate_id, string $reqType): void
+    {
         $runtemplater = new RunTemplate($runtemplate_id);
         $kredenc = new Credential();
-        $candidates = $kredenc->listingQuery()->where(['company_id'=>$runtemplater->getDataValue('company_id'),'formType'=>$reqType]);
-        foreach ($candidates as $candidat){
+        $candidates = $kredenc->listingQuery()->where(['company_id' => $runtemplater->getDataValue('company_id'), 'formType' => $reqType]);
+
+        foreach ($candidates as $candidat) {
             $this->unbind($runtemplate_id, $candidat['id']);
         }
     }

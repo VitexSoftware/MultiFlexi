@@ -22,7 +22,12 @@ namespace MultiFlexi\Ui;
  */
 class CompanyAppImageLink extends \Ease\Html\ATag
 {
-    public function __construct(\MultiFlexi\Company $company, \MultiFlexi\Application $app, $properties = [])
+    /**
+     * Company Link Button.
+     *
+     * @param array<string, string> $properties
+     */
+    public function __construct(\MultiFlexi\Company $company, \MultiFlexi\Application $app, array $properties = [])
     {
         $properties['title'] = $company->getRecordName();
         parent::__construct('companyapp.php?company_id='.$company->getMyKey().'&app_id='.$app->getMyKey(), new CompanyLogo($company, $properties));

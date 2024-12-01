@@ -1,5 +1,17 @@
 <?php
+
 declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 use Phinx\Migration\AbstractMigration;
 
@@ -20,11 +32,11 @@ final class RuntemplateCredentials extends AbstractMigration
     {
         $runtemplates = $this->table('runtplcreds');
         $runtemplates
-        ->addColumn('runtemplate_id', 'integer',['null' => false])
-        ->addColumn('credentials_id', 'integer',['null' => false])
-        ->addForeignKey('runtemplate_id', 'runtemplate', ['id'], ['constraint' => 'r2c_runtemplate_must_exist'])
-        ->addForeignKey('credentials_id', 'credentials', ['id'], ['constraint' => 'r2c_credential_must_exist'])
-        ->addIndex(['runtemplate_id', 'credentials_id'], ['unique' => true])
-        ->create();
+            ->addColumn('runtemplate_id', 'integer', ['null' => false])
+            ->addColumn('credentials_id', 'integer', ['null' => false])
+            ->addForeignKey('runtemplate_id', 'runtemplate', ['id'], ['constraint' => 'r2c_runtemplate_must_exist'])
+            ->addForeignKey('credentials_id', 'credentials', ['id'], ['constraint' => 'r2c_credential_must_exist'])
+            ->addIndex(['runtemplate_id', 'credentials_id'], ['unique' => true])
+            ->create();
     }
 }

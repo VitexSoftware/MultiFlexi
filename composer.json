@@ -25,7 +25,7 @@
         "vitexsoftware/ease-core-bricks": "^1.1",
         "confirm-it-solutions/php-zabbix-api": "^3.0",
         "vitexsoftware/ease-html-widgets": "^1.1",
-        "vitexsoftware/ease-html": "1.40.2"
+        "vitexsoftware/ease-html": "^1.40"
     },
     "license": "MIT",
     "authors": [

@@ -63,9 +63,11 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
         $this->process = new \Symfony\Component\Process\Process(explode(' ', $command), null, \MultiFlexi\Environmentor::flatEnv($this->environment), null, 32767);
         $this->process->run(function ($type, $buffer): void {
             $this->pid = $this->process->getPid();
-            if($this->pid){
+
+            if ($this->pid) {
                 $this->job->setPid($this->pid);
             }
+
             $logger = new \Ease\Sand();
             $logger->setObjectName(\Ease\Logger\Message::getCallerName($this));
             $logger->addStatusMessage('JOB: '.$this->job->getMyKey().' PID: '.$this->pid, $type, 'debug');
