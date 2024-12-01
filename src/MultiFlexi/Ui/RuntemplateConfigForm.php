@@ -31,7 +31,8 @@ class RuntemplateConfigForm extends EngineForm {
 
         $fieldsOf = [];
         $fieldSource = [];
-
+        $credSource = [];
+        
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\Ui\Form');
 
         foreach (\Ease\Functions::classesInNamespace('MultiFlexi\Ui\Form') as $formAvailble) {

@@ -419,4 +419,21 @@ class RunTemplate extends \MultiFlexi\Engine
 
         return $icons;
     }
+    
+    public function credentialsEnvironment() {
+        $credentials = [];
+        $rtplCrds = new RunTplCreds();
+        $kredenc = new Credential();
+        foreach ($rtplCrds->getCredentialsForRuntemplate($this->getMyKey())->select(['name','formType'])->leftJoin('credentials ON credentials.id = runtplcreds.credentials_id') as $crds){
+            $kredenc->loadFromSQL($crds['id']);
+            $creds = $kredenc->getData();
+            unset($creds['id'],$creds['name'], $creds['company_id'], $creds['formType']);
+            foreach ($creds as $key => $value){
+                $credentials[$key]['value']  = $value;
+                $credentials[$key]['source'] = $crds['formType'].': '.$crds['name'];
+            }
+        }
+        return $credentials;
+    }
+    
 }

@@ -181,6 +181,8 @@ class Job extends Engine
             $this->addStatusMessage(_('Job launched without runtemplate ID'), 'error');
         }
 
+        $this->environment = array_merge($this->environment, $this->runTemplate->credentialsEnvironment());
+        
         if (isset($this->executor) === false) {
             $executorClass = '\\MultiFlexi\\Executor\\'.$this->getDataValue('executor');
             $this->executor = new $executorClass($this);
@@ -593,7 +595,6 @@ EOD;
         if (\array_key_exists('RESULT_FILE', $jobEnv)) {
             $jobEnv['RESULT_FILE']['value'] = sys_get_temp_dir().\DIRECTORY_SEPARATOR.basename($jobEnv['RESULT_FILE']['value']);
         }
-
         return $jobEnv;
     }
 
