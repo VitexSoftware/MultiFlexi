@@ -37,7 +37,7 @@ class CompanyEditorForm extends EngineForm
         $this->addInput(new CustomerSelect('customer'), _('Customer'));
         $imgInput = $this->addInput(new \Ease\Html\InputFileTag('imageraw'), _('Company Logo'));
 
-        $this->addItem(new InputHiddenTag('enabled', true));
+        $this->addItem(new InputHiddenTag('enabled', '1'));
         $this->addItem(new SubmitButton(_('Save'), 'success btn-lg btn-block'));
 
         if (null !== $this->engine->getDataValue('id')) {

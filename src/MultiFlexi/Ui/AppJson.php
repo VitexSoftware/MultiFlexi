@@ -22,7 +22,14 @@ namespace MultiFlexi\Ui;
  */
 class AppJson extends \Ease\Html\DivTag
 {
-    public function __construct(\MultiFlexi\Application $app, $properties = [])
+    /**
+     * APP JSON Viewer.
+     *
+     * @param \MultiFlexi\Application $app
+     *
+     * @param array<string,string> $properties
+     */
+    public function __construct(\MultiFlexi\Application $app, array $properties = [])
     {
         parent::__construct(new \Ease\Html\PreTag(\Rcubitto\JsonPretty\JsonPretty::print(json_decode($app->getAppJson()))), $properties);
         $this->addTagClass('ui-monospace');
