@@ -423,7 +423,9 @@ EOD;
 
         try {
             $result = $this->zabbixSender->send($packet);
-            $this->addStatusMessage('Data Sent To Zabbix: '.$itemKey.' '.json_encode($messageData), 'debug');
+            if($this->debug){
+                $this->addStatusMessage('Data Sent To Zabbix: '.$itemKey.' '.json_encode($messageData), 'debug');
+            }
         } catch (\Exception $exc) {
             $result = false;
         }
