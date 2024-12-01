@@ -53,10 +53,10 @@ EOD;
     /**
      * Emebed Company logo into page.
      *
-     * @param Company $company       Object
-     * @param array   $tagProperties Additional tag properties
+     * @param \MultiFlexi\Company   $company       Object
+     * @param array<string, string> $tagProperties Additional tag properties
      */
-    public function __construct($company, $tagProperties = [])
+    public function __construct(\MultiFlexi\Company $company, array $tagProperties = [])
     {
         if ($company->getDataValue('logo')) {
             parent::__construct($company->getDataValue('logo'), $company->getDataValue('name'), $tagProperties);

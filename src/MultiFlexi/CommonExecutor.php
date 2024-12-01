@@ -68,7 +68,7 @@ abstract class CommonExecutor extends \Ease\Sand
 
         return $output;
     }
-    
+
     public function getPid(): ?int
     {
         return $this->pid;
