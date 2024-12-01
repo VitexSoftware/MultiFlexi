@@ -84,7 +84,7 @@ class Conffield extends \Ease\SQL\Engine
 
         $this->setDataValue('type', $envProperties['type']);
         $this->setDataValue('description', $envProperties['description']);
-        $this->setDataValue('defval', $envProperties['defval']);
+        $this->setDataValue('defval', array_key_exists('defval', $envProperties) ? $envProperties['defval'] : '');
 
         return $this->dbsync();
     }
