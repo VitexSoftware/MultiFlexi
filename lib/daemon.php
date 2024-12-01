@@ -44,8 +44,6 @@ do {
         $job->performJob();
         $scheduler->deleteFromSQL($scheduledJob['id']);
         $job->cleanUp();
-
-        exit;
     }
 
     if ($daemonize) {
