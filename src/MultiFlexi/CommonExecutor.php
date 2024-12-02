@@ -29,7 +29,7 @@ abstract class CommonExecutor extends \Ease\Sand
     public string $stderr;
     public $environment = [];
     public array $outputCache = [];
-    public ?int $pid;
+    public ?int $pid = null;
 
     public function __construct(Job &$job)
     {
