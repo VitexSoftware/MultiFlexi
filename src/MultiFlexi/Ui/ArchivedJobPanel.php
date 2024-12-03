@@ -46,7 +46,7 @@ class ArchivedJobPanel extends Panel
                 $companyInfo['id'] = $companyInfo['company_id'];
                 $kumpan = new \MultiFlexi\Company($companyInfo, ['autoload' => false]);
                 $calb = new CompanyAppLink($kumpan, $job->application, ['class' => 'card-img-top']);
-                $crls = new \MultiFlexi\Ui\CompanyRuntemplatesLinks($kumpan, $job->application, [], ['class' => '']);
+                $crls = new \MultiFlexi\Ui\CompanyRuntemplatesLinks($kumpan, $job->application, [], ['class' => 'btn btn-outline-secondary btn-sm']);
 
                 $usedByCompany->addItem(new \Ease\TWB4\Card([new \Ease\Html\DivTag([new \Ease\Html\H5Tag($calb, ['class' => 'card-title']), $crls], ['class' => 'card-body'])], ['style' => 'width: 6rem;']));
             }

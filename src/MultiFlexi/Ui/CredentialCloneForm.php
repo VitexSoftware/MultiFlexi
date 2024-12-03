@@ -1,0 +1,43 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace MultiFlexi\Ui;
+
+/**
+ * Form for credential cloning
+ *
+ * @author vitex
+ */
+class CredentialCloneForm extends \Ease\TWB4\Form
+{
+    public function __construct(\MultiFlexi\Credential $runtemplate)
+    {
+        $clonename = _($runtemplate->getDataValue('name') ?: $runtemplate->getAppInfo()['app_name']).' '._('Clone');
+        parent::__construct(['action' => 'credentialclone.php?id='.(string) $runtemplate->getMyKey(), 'class' => 'form-inline']);
+        $this->addInput(new \Ease\Html\InputTextTag('clonename', $clonename), _('Save as copy').'&nbsp;', $clonename);
+        $this->addItem(new \Ease\TWB4\SubmitButton('💕 '._('Clone'), 'success mb-2', ['type' => 'submit']));
+    }
+
+    /**
+     * Move items to element root.
+     */
+    public function finalize(): void
+    {
+        $contents = $this->formDiv->pageParts;
+        $this->emptyContents();
+        $this->pageParts = $contents;
+        parent::finalize();
+    }
+}

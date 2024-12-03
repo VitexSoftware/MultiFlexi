@@ -52,7 +52,7 @@ class ApplicationPanel extends Panel
                 $companyInfo['id'] = $companyInfo['company_id'];
                 $kumpan = new \MultiFlexi\Company($companyInfo, ['autoload' => false]);
                 $calb = new CompanyAppLink($kumpan, $application, ['class' => 'card-img-top']);
-                $crls = new \MultiFlexi\Ui\CompanyRuntemplatesLinks($kumpan, $application, [], ['class' => 'btn btn-secondary btn-sm']);
+                $crls = new \MultiFlexi\Ui\CompanyRuntemplatesLinks($kumpan, $application, [], ['class' => 'btn btn-outline-secondary btn-sm']);
 
                 $usedByCompany->addItem(new \Ease\TWB4\Card([new \Ease\Html\DivTag([new \Ease\Html\H5Tag([$calb, ' <small>('.$crls->count().')</small>'], ['class' => 'card-title']), $crls], ['class' => 'card-body'])], ['style' => 'width: 6rem;']));
             }
