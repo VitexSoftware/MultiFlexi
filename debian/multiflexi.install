@@ -29,6 +29,7 @@ src/MultiFlexi/Action/Stop.php            usr/lib/multiflexi/MultiFlexi/Action
 
 src/MultiFlexi/Ui/*.php                   usr/lib/multiflexi/MultiFlexi/Ui/
 src/MultiFlexi/Ui/Form/configForm.php     usr/lib/multiflexi/MultiFlexi/Ui/Form/
+
 debian/conf/multiflexi.conf    		  etc/apache2/conf-available
 debian/conf/multiflexi.service 		  etc/avahi/services
 bin/*					  usr/bin
@@ -41,3 +42,6 @@ i18n/en_US/LC_MESSAGES/*.mo               usr/share/locale/en_US/LC_MESSAGES/
 tests/multiflexi_probe.multiflexi.app.json usr/share/multiflexi/
 
 src/MultiFlexi/Ui/Form/mServer.php     usr/lib/multiflexi/MultiFlexi/Ui/Form/
+src/MultiFlexi/Ui/Form/Office365.php   usr/lib/multiflexi/MultiFlexi/Ui/Form/
+src/MultiFlexi/Ui/Form/SQLServer.php   usr/lib/multiflexi/MultiFlexi/Ui/Form/
+
