@@ -72,12 +72,9 @@ class RuntemplateConfigForm extends EngineForm
         foreach ($reqs as $req) {
             $credentialChosen = '';
             $formClass = '\\MultiFlexi\\Ui\\Form\\'.$req;
-            $candidates = [];
 
             if (\array_key_exists($req, $companyCredentialsByType)) {
                 foreach ($companyCredentialsByType[$req] as $candidat) {
-                    $candidates[$candidat['id']] = $candidat['name'];
-
                     if (\array_key_exists($candidat['id'], $usedCreds)) {
                         $credentialChosen = (string) $candidat['id'];
                         $kredenc->loadFromSQL($candidat['id']);
@@ -90,7 +87,7 @@ class RuntemplateConfigForm extends EngineForm
                 }
 
                 $reqsRow->addColumn(2, [
-                    new \Ease\Html\ImgTag($formClass::$logo, $req, ['title' => $formClass::name(), 'height' => '30']), new \Ease\Html\SelectTag('credential['.$req.']', $candidates, $credentialChosen),
+                    new \Ease\Html\ImgTag($formClass::$logo, $req, ['title' => $formClass::name(), 'height' => '30']), new CredentialSelect('credential['.$req.']', $engine->getDataValue('company_id'),$req, $credentialChosen),
                     new \Ease\TWB4\LinkButton('credential.php?company_id='.$engine->getDataValue('company_id').'&formType='.$req, '️➕ 🔐', 'success btn-sm', ['title' => _('New Credential')]),
                 ]);
             } else {
@@ -151,6 +148,8 @@ class RuntemplateConfigForm extends EngineForm
             }
         }
 
+        //$this->addItem( new RuntemplateTopicsChooser('topics', $engine)); //TODO
+        
         $this->addItem(new \Ease\Html\InputHiddenTag('app_id', $engine->getDataValue('app_id')));
         $this->addItem(new \Ease\Html\InputHiddenTag('company_id', $engine->getDataValue('company_id')));
 
