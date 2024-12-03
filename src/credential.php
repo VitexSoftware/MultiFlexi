@@ -55,8 +55,14 @@ if (WebPage::singleton()->isPosted()) {
 
 WebPage::singleton()->addItem(new PageTop(_('MultiFlexi')));
 
+
+
 WebPage::singleton()->container->addItem(new CredentialForm($kredenc));
 
+
+if($kredenc->getMyKey() != null){
+    WebPage::singleton()->container->addItem(new CredentialCloneForm($kredenc));
+}
 WebPage::singleton()->addItem(new PageBottom());
 
 WebPage::singleton()->draw();

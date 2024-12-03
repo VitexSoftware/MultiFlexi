@@ -253,7 +253,7 @@ class Application extends DBEngine
     }
 
     /**
-     * import Json exported.
+     * import Json App Definition file.
      *
      * @param string $jsonFile
      *
