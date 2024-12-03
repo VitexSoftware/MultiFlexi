@@ -55,7 +55,7 @@ class CredentialForm extends \Ease\TWB4\Form
             $runtlUsing = $rtplcr->getRuntemplatesForCredential($kredenc->getMyKey())->select(['runtemplate.name', 'company_id', 'app_id'])->leftJoin('runtemplate ON runtemplate.id = runtplcreds.runtemplate_id')->fetchAll();
 
             if ($runtlUsing) {
-                $formContents[] = new \Ease\Html\DivTag(_('Used By').'('.\count($runtlUsing).')');
+                $formContents[] = new \Ease\Html\DivTag(_('Used by').'('.\count($runtlUsing).')');
 
                 $jobber = new \MultiFlexi\Job();
 
