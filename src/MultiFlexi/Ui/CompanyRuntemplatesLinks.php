@@ -41,7 +41,7 @@ class CompanyRuntemplatesLinks extends \Ease\Html\DivTag
                     $companyAppStatus = new \Ease\TWB4\Badge('disabled', '🪤', ['style' => 'font-size: 0.5em; font-family: monospace;']);
                 }
 
-                $runtemplatesDiv->addItem(new \Ease\Html\SpanTag([new \Ease\Html\ATag('runtemplate.php?id='.$runtemplateData['id'], '⚗️#'.$runtemplateData['id'], ['class' => 'btn btn-outline-secondary btn-sm']), $companyAppStatus], ['class' => 'btn-group', 'style'=>'margin: 2px', 'role' => 'group']));
+                $runtemplatesDiv->addItem(new \Ease\Html\SpanTag([new \Ease\Html\ATag('runtemplate.php?id='.$runtemplateData['id'], '⚗️#'.$runtemplateData['id'], ['class' => 'btn btn-outline-secondary btn-sm']), $companyAppStatus], ['class' => 'btn-group', 'style' => 'margin: 2px', 'role' => 'group']));
             }
         } else {
             $runtemplatesDiv->addItem(new \Ease\Html\ATag('runtemplate.php?new=1&app_id='.$application->getMyKey().'&company_id='.$company->getMyKey(), '➕'));

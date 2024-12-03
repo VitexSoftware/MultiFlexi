@@ -31,8 +31,7 @@ $credential->setDataValue('name', $cloneName);
 try {
     $cloneId = $credential->insertToSQL();
 
-
-    if ($cloneId != null) {
+    if ($cloneId !== null) {
         $credential->addStatusMessage(_('Credential Cloned'), 'success');
     } else {
         $credential->addStatusMessage(_('Error saving Credential clone'), 'error');

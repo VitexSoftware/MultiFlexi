@@ -30,9 +30,9 @@ $credList = new \Ease\TWB4\Table();
 $credList->addRowHeaderColumns(['', _('Name'), _('Type'), _('Company')]);
 
 foreach ($creds as $crd) {
-    $crd['name'] = new ATag('credential.php?id=' . $crd['id'], $crd['name']);
+    $crd['name'] = new ATag('credential.php?id='.$crd['id'], $crd['name']);
 
-    $class = '\\MultiFlexi\\Ui\\Form\\' . $crd['formType'];
+    $class = '\\MultiFlexi\\Ui\\Form\\'.$crd['formType'];
 
     if ($crd['formType'] && class_exists($class)) {
         $crd['id'] = new \Ease\Html\ImgTag($class::$logo, $crd['formType'], ['height' => '30px']);
@@ -40,7 +40,7 @@ foreach ($creds as $crd) {
         $crd['id'] = '⁉️';
     }
 
-    $crd['company'] = new ATag('company.php?id=' . $crd['company_id'], new CompanyLogo(new Company($crd['company_id']),['height'=>'20px']));
+    $crd['company'] = new ATag('company.php?id='.$crd['company_id'], new CompanyLogo(new Company($crd['company_id']), ['height' => '20px']));
     unset($crd['company_id']);
 
     $credList->addRowColumns($crd);
