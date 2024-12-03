@@ -33,7 +33,7 @@ class CompanyRuntemplatesLinks extends \Ease\Html\DivTag
         if ($runtemplatesRaw->count()) {
             foreach ($runtemplatesRaw as $runtemplateData) {
                 $linkProperties['title'] = $runtemplateData['name'];
-                $lastJobInfo = $jobber->listingQuery()->select(['id', 'exitcode'], true)->where(['company_id' => $company->getMyKey(), 'app_id' => $runtemplateData['app_id']])->order('id DESC')->limit(1)->fetchAll();
+                $lastJobInfo = $jobber->listingQuery()->select(['id', 'exitcode'], true)->where(['runtemplate_id' => $runtemplateData['id']])->order('id DESC')->limit(1)->fetchAll();
 
                 if ($lastJobInfo) {
                     $companyAppStatus = new \Ease\Html\ATag('job.php?id='.$lastJobInfo[0]['id'], new ExitCode($lastJobInfo[0]['exitcode'], ['style' => 'font-size: 1.0em; font-family: monospace;']), ['class' => 'btn btn-outline-secondary btn-sm']);
