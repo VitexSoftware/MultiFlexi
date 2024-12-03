@@ -357,6 +357,12 @@ class Application extends DBEngine
                             if (empty($fields)) {
                                 $fields = [true];
                             }
+                            
+                            $topics = $this->getDataValue('topics');
+                            if($topics){
+                                $toptopic = new Topic();
+                                $toptopic->add( strstr($topics,',') ? explode(',', $topics) : [$topics]);
+                            }
                         }
                     } catch (\PDOException $exc) {
                         echo $exc->getTraceAsString();
