@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 /**
- * Form for credential cloning
+ * Form for credential cloning.
  *
  * @author vitex
  */

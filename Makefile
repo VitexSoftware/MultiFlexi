@@ -23,23 +23,28 @@ vendor: composer.json composer.lock ## Installs composer dependencies
 cs: ## Update Coding Standards
 	vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --diff --verbose
 
+.PHONY: clean
 clean:
 	rm -rf vendor composer.lock db/multiflexi.sqlite src/*/*dataTables*
 
-migration:
+.PHONY: migration
+migration: ## Run database migrations
 	cd src ; ../vendor/bin/phinx migrate -c ../phinx-adapter.php ; cd ..
 
-sysmigration:
+.PHONY: sysmigration
+sysmigration: ## Run database migrations using system phinx
 	cd src ; /usr/bin/phinx migrate -c /usr/lib/multiflexi/phinx-adapter.php ; cd ..
 
-seed:
+.PHONY: seed
+seed: ## Run database seeds
 	cd src ; ../vendor/bin/phinx seed:run -c ../phinx-adapter.php ; cd ..
 
-probeapp:
+.PHONY: probeapp
+probeapp: ## Run database seeds
 	cd src ; ../vendor/bin/phinx seed:run -c ../phinx-adapter.php -s MultiFlexiProbeApp ; cd ..
 
-
-autoload:
+.PHONY: autoload
+autoload: ## Run composer autoload
 	composer update
 
 demodata:
@@ -137,5 +142,5 @@ packages:
 
 # Use phpcs to reformat code to PSR12
 codingstandards:
-	phpcbf --colors --standard=PSR12 --extensions=php --ignore=vendor/ src/ 
+	phpcbf --colors --standard=PSR12 --extensions=php --ignore=vendor/ src/
 

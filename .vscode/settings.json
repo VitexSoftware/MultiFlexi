@@ -3,8 +3,10 @@
         "Abra",
         "cmdline",
         "cmdparams",
+        "defval",
         "exitcode",
         "Flexi",
+        "kredenc",
         "multiflexiapiserver",
         "nazev"
     ],

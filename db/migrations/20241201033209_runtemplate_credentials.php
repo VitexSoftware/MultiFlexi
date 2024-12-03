@@ -33,7 +33,7 @@ final class RuntemplateCredentials extends AbstractMigration
         $runtemplates = $this->table('runtplcreds');
         $runtemplates
             ->addColumn('runtemplate_id', 'integer', ['null' => false])
-            ->addColumn('credentials_id', 'integer', ['null' => false, 'signed'=>false])
+            ->addColumn('credentials_id', 'integer', ['null' => false])
             ->addForeignKey('runtemplate_id', 'runtemplate', ['id'], ['constraint' => 'r2c_runtemplate_must_exist'])
             ->addForeignKey('credentials_id', 'credentials', ['id'], ['constraint' => 'r2c_credential_must_exist'])
             ->addIndex(['runtemplate_id', 'credentials_id'], ['unique' => true])
