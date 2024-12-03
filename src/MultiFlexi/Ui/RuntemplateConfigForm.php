@@ -158,4 +158,19 @@ class RuntemplateConfigForm extends EngineForm
         $saveRow->addColumn(4, new \Ease\TWB4\LinkButton('actions.php?id='.$engine->getMyKey(), '🛠️&nbsp;'._('Actions'), 'secondary btn-lg btn-block'));
         $this->addItem($saveRow);
     }
+    
+    public static function allForms(): array
+    {
+        $formTypes = [];
+        \Ease\Functions::loadClassesInNamespace('MultiFlexi\Ui\Form');
+
+        foreach (\Ease\Functions::classesInNamespace('MultiFlexi\Ui\Form') as $formAvailble) {
+            $formClass = '\\MultiFlexi\\Ui\\Form\\'.$formAvailble;
+
+            $formTypes[$formAvailble] = $formClass::name();
+        }
+        
+        return $formTypes;
+    }
+    
 }
