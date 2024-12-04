@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   sodipodi:docname="mserver.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 100 100"
+   height="100mm"
+   width="100mm"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs2">
+    <inkscape:path-effect
+       effect="perspective-envelope"
+       up_left_point="-22.859595,140.15918"
+       up_right_point="-20.133806,140.17628"
+       down_left_point="-28.513404,155.95033"
+       down_right_point="-14.536702,155.95033"
+       id="path-effect794"
+       is_visible="true"
+       lpeversion="1"
+       deform_type="perspective"
+       horizontal_mirror="false"
+       vertical_mirror="true"
+       overflow_perspective="true" />
+    <clipPath
+       id="clipPath3444">
+      <path
+         id="path3446"
+         d="M 11.52,162 C 11.52,81.677 135.307,16.56 288,16.56 440.693,16.56 564.48,81.678 564.48,162 564.48,242.322 440.693,307.44 288,307.44 135.307,307.44 11.52,242.32 11.52,162" />
+    </clipPath>
+    <radialGradient
+       id="radialGradient3452"
+       cx="0"
+       cy="0"
+       r="1"
+       fx="0"
+       fy="0"
+       gradientTransform="matrix(363.06,0,0,-363.06,177.52,256.31)"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="pad">
+      <stop
+         id="stop3454"
+         offset="0"
+         stop-color="#aeb2d5" />
+      <stop
+         id="stop3456"
+         offset="0.3"
+         stop-color="#aeb2d5" />
+      <stop
+         id="stop3458"
+         offset="0.75"
+         stop-color="#484c89" />
+      <stop
+         id="stop3460"
+         offset="1"
+         stop-color="#484c89" />
+    </radialGradient>
+    <clipPath
+       id="clipPath3468">
+      <path
+         id="path3470"
+         d="M 0,324 H 576 V 0 H 0 Z" />
+    </clipPath>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Drop Shadow"
+       id="filter4622"
+       x="-0.1215186"
+       y="-0.21051334"
+       width="1.29367"
+       height="1.5087406">
+      <feFlood
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood4612" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite4614" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="6"
+         result="blur"
+         id="feGaussianBlur4616" />
+      <feOffset
+         dx="6"
+         dy="6"
+         result="offset"
+         id="feOffset4618" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="fbSourceGraphic"
+         id="feComposite4620" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix4624" />
+      <feFlood
+         id="feFlood4626"
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         in="fbSourceGraphic" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite4628"
+         in="flood"
+         operator="in"
+         result="composite1" />
+      <feGaussianBlur
+         id="feGaussianBlur4630"
+         in="composite1"
+         stdDeviation="6"
+         result="blur" />
+      <feOffset
+         id="feOffset4632"
+         dx="6"
+         dy="6"
+         result="offset" />
+      <feComposite
+         in2="offset"
+         id="feComposite4634"
+         in="fbSourceGraphic"
+         operator="over"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix4636" />
+      <feFlood
+         id="feFlood4638"
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         in="fbSourceGraphic" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite4640"
+         in="flood"
+         operator="in"
+         result="composite1" />
+      <feGaussianBlur
+         id="feGaussianBlur4642"
+         in="composite1"
+         stdDeviation="6"
+         result="blur" />
+      <feOffset
+         id="feOffset4644"
+         dx="6"
+         dy="6"
+         result="offset" />
+      <feComposite
+         in2="offset"
+         id="feComposite4646"
+         in="fbSourceGraphic"
+         operator="over"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Blur"
+       id="filter2058">
+      <feGaussianBlur
+         stdDeviation="10.5635 0.01"
+         result="fbSourceGraphic"
+         id="feGaussianBlur2056" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix2060" />
+      <feGaussianBlur
+         id="feGaussianBlur2062"
+         stdDeviation="10.5635 0.01"
+         result="blur"
+         in="fbSourceGraphic" />
+    </filter>
+    <linearGradient
+       id="XMLID_1_"
+       gradientUnits="userSpaceOnUse"
+       x1="168.0361"
+       y1="168.21001"
+       x2="83.149902"
+       y2="83.324303">
+      <stop
+         offset="0"
+         style="stop-color:#6D7BB0"
+         id="stop164" />
+      <stop
+         offset="1"
+         style="stop-color:#99ACD2"
+         id="stop165" />
+    </linearGradient>
+    <linearGradient
+       id="XMLID_2_"
+       gradientUnits="userSpaceOnUse"
+       x1="168.7178"
+       y1="174.6357"
+       x2="83.831703"
+       y2="89.750298">
+      <stop
+         offset="0"
+         style="stop-color:#6D7BB0"
+         id="stop171" />
+      <stop
+         offset="1"
+         style="stop-color:#99ACD2"
+         id="stop172" />
+    </linearGradient>
+    <linearGradient
+       id="XMLID_3_"
+       gradientUnits="userSpaceOnUse"
+       x1="126.9795"
+       y1="130.9922"
+       x2="233.56219"
+       y2="237.576"
+       gradientTransform="matrix(0.9929,-0.1191,-0.056,1.0138,7.7556,8.876)">
+      <stop
+         offset="0"
+         style="stop-color:#D8E1ED"
+         id="stop178" />
+      <stop
+         offset="1"
+         style="stop-color:#5E76AA"
+         id="stop179" />
+    </linearGradient>
+    <linearGradient
+       id="XMLID_4_"
+       gradientUnits="userSpaceOnUse"
+       x1="126.0381"
+       y1="144.81841"
+       x2="126.0381"
+       y2="77.567299">
+      <stop
+         offset="0"
+         style="stop-color:#808DC2"
+         id="stop185" />
+      <stop
+         offset="1"
+         style="stop-color:#5E76AA"
+         id="stop186" />
+    </linearGradient>
+    <linearGradient
+       id="XMLID_5_"
+       gradientUnits="userSpaceOnUse"
+       x1="121.2769"
+       y1="91.971703"
+       x2="121.2769"
+       y2="13.3879"
+       gradientTransform="matrix(0.9929,-0.1191,-0.056,1.0138,7.7556,8.876)">
+      <stop
+         offset="0"
+         style="stop-color:#DBE8F2"
+         id="stop192" />
+      <stop
+         offset="0.2847"
+         style="stop-color:#D9E6F1"
+         id="stop193" />
+      <stop
+         offset="0.4359"
+         style="stop-color:#D1DFED"
+         id="stop194" />
+      <stop
+         offset="0.5557"
+         style="stop-color:#C3D3E7"
+         id="stop195" />
+      <stop
+         offset="0.659"
+         style="stop-color:#B0C3DF"
+         id="stop196" />
+      <stop
+         offset="0.7518"
+         style="stop-color:#97ADD3"
+         id="stop197" />
+      <stop
+         offset="0.837"
+         style="stop-color:#7893C5"
+         id="stop198" />
+      <stop
+         offset="0.9163"
+         style="stop-color:#5473B5"
+         id="stop199" />
+      <stop
+         offset="0.9891"
+         style="stop-color:#2B50A2"
+         id="stop200" />
+      <stop
+         offset="1"
+         style="stop-color:#244A9F"
+         id="stop201" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     inkscape:window-maximized="1"
+     inkscape:window-y="0"
+     inkscape:window-x="0"
+     inkscape:window-height="1120"
+     inkscape:window-width="1920"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="g2598"
+     inkscape:document-units="mm"
+     inkscape:cy="194.7069"
+     inkscape:cx="34.345186"
+     inkscape:zoom="1.979899"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Vrstva 1" />
+  <g
+     inkscape:label="Vrstva 3"
+     id="layer3"
+     inkscape:groupmode="layer">
+    <g
+       transform="matrix(1.4033481,0,0,1.4033481,120.67578,7.0231252)"
+       id="g2598">
+      <g
+         id="g3038"
+         transform="matrix(1.4016108,0,0,1.4015908,-113.43475,-926.59399)">
+        <path
+           fill="#b2b2b2"
+           d="m 48.138,704.971 v -3.212 c 0,-4.757 3.885,-8.827 8.521,-9.23 H 21.237 c -0.683,0 -1.237,0.388 -1.237,1.071 v 12.304 c 0,0.685 0.554,1.097 1.237,1.097 h 27.497 c -0.28,-0.401 -0.596,-1.264 -0.596,-2.03 z"
+           id="path2988" />
+        <path
+           fill="#595959"
+           d="m 70,672.444 c 0,0.686 -0.555,1.237 -1.238,1.237 H 21.237 c -0.683,0 -1.237,-0.552 -1.237,-1.237 v -12.303 c 0,-0.686 0.554,-1.239 1.237,-1.239 h 47.525 c 0.683,0 1.238,0.554 1.238,1.239 z"
+           id="path2990" />
+        <circle
+           fill="#f79903"
+           cx="62.91"
+           cy="666.29303"
+           r="2.404"
+           id="circle2992" />
+        <g
+           id="g3004">
+          <polygon
+             fill-rule="evenodd"
+             clip-rule="evenodd"
+             fill="#ffffff"
+             points="35.06,669.182 37.943,663.401 40.235,663.401 37.351,669.182 "
+             id="polygon2994" />
+          <g
+             id="g3002">
+            <polygon
+               fill-rule="evenodd"
+               clip-rule="evenodd"
+               fill="#ffffff"
+               points="26.644,669.182 29.527,663.401 31.82,663.401 28.938,669.182 "
+               id="polygon2996" />
+            <polygon
+               fill-rule="evenodd"
+               clip-rule="evenodd"
+               fill="#ffffff"
+               points="30.852,669.182 33.736,663.401 36.029,663.401 33.144,669.182 "
+               id="polygon2998" />
+            <polygon
+               fill-rule="evenodd"
+               clip-rule="evenodd"
+               fill="#ffffff"
+               points="39.285,669.182 42.171,663.401 44.464,663.401 41.579,669.182 "
+               id="polygon3000" />
+          </g>
+        </g>
+        <path
+           fill="#b2b2b2"
+           d="m 70,689.291 c 0,0.685 -0.555,1.237 -1.238,1.237 H 21.237 c -0.683,0 -1.237,-0.553 -1.237,-1.237 v -12.304 c 0,-0.684 0.554,-1.237 1.237,-1.237 h 47.525 c 0.683,0 1.238,0.554 1.238,1.237 z"
+           id="path3006" />
+        <path
+           fill="#f79903"
+           d="m 65.313,683.141 c 0,1.326 -1.077,2.403 -2.404,2.403 -1.329,0 -2.404,-1.077 -2.404,-2.403 0,-1.331 1.075,-2.406 2.404,-2.406 1.327,-10e-4 2.404,1.075 2.404,2.406 z"
+           id="path3008" />
+        <g
+           id="g3020">
+          <polygon
+             fill-rule="evenodd"
+             clip-rule="evenodd"
+             fill="#595959"
+             points="35.06,686.029 37.943,680.249 40.235,680.249 37.351,686.029 "
+             id="polygon3010" />
+          <g
+             id="g3018">
+            <polygon
+               fill-rule="evenodd"
+               clip-rule="evenodd"
+               fill="#595959"
+               points="26.644,686.029 29.527,680.249 31.82,680.249 28.938,686.029 "
+               id="polygon3012" />
+            <polygon
+               fill-rule="evenodd"
+               clip-rule="evenodd"
+               fill="#595959"
+               points="30.852,686.029 33.736,680.249 36.029,680.249 33.144,686.029 "
+               id="polygon3014" />
+            <polygon
+               fill-rule="evenodd"
+               clip-rule="evenodd"
+               fill="#595959"
+               points="39.285,686.029 42.171,680.249 44.464,680.249 41.579,686.029 "
+               id="polygon3016" />
+          </g>
+        </g>
+        <g
+           id="g3032">
+          <polygon
+             fill-rule="evenodd"
+             clip-rule="evenodd"
+             fill="#595959"
+             points="35.06,702.64 37.943,696.86 40.235,696.86 37.351,702.64 "
+             id="polygon3022" />
+          <g
+             id="g3030">
+            <polygon
+               fill-rule="evenodd"
+               clip-rule="evenodd"
+               fill="#595959"
+               points="26.644,702.64 29.527,696.86 31.82,696.86 28.938,702.64 "
+               id="polygon3024" />
+            <polygon
+               fill-rule="evenodd"
+               clip-rule="evenodd"
+               fill="#595959"
+               points="30.852,702.64 33.736,696.86 36.029,696.86 33.144,702.64 "
+               id="polygon3026" />
+            <polygon
+               fill-rule="evenodd"
+               clip-rule="evenodd"
+               fill="#595959"
+               points="39.285,702.64 42.171,696.86 44.464,696.86 41.579,702.64 "
+               id="polygon3028" />
+          </g>
+        </g>
+        <g
+           id="g3036">
+          <path
+             fill="#f79903"
+             d="m 68.036,706.811 c -1.012,0 -1.839,-0.825 -1.839,-1.84 v -3.212 c 0,-0.855 -0.695,-1.544 -1.552,-1.544 -0.848,0 -1.532,0.688 -1.532,1.544 v 3.212 c 0,1.015 -0.835,1.84 -1.853,1.84 -1.044,0 -1.871,-0.825 -1.871,-1.84 v -3.212 c 0,-0.855 -0.7,-1.544 -1.548,-1.544 -0.849,0 -1.543,0.688 -1.543,1.544 v 3.212 c 0,1.015 -0.832,1.84 -1.847,1.84 -1.015,0 -1.841,-0.825 -1.841,-1.84 v -3.212 c 0,-2.886 2.343,-5.24 5.232,-5.24 1.181,0 2.306,0.398 3.242,1.131 l 0.168,0.139 0.167,-0.139 c 0.931,-0.732 2.049,-1.131 3.227,-1.131 2.898,0 5.246,2.354 5.246,5.24 v 3.212 c -0.002,1.014 -0.835,1.84 -1.856,1.84 z"
+             id="path3034" />
+        </g>
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:label="Vrstva 2"
+     id="layer2"
+     inkscape:groupmode="layer" />
+</svg>
