@@ -151,6 +151,13 @@ class RunTemplate extends \MultiFlexi\Engine
         $configurator = new \MultiFlexi\Configuration();
         $configurator->deleteFromSQL(['runtemplate_id' => $this->getMyKey()]);
 
+        $rtpl = new \MultiFlexi\RunTplCreds();
+        $rtpl->deleteFromSQL(['runtemplate_id' => $this->getMyKey()]);
+        $rtpl->setmyTable('runtemplate_topics');
+        $rtpl->deleteFromSQL(['runtemplate_id' => $this->getMyKey()]);
+
+       
+        
         return parent::deleteFromSQL($data);
     }
 
