@@ -87,7 +87,7 @@ class RuntemplateConfigForm extends EngineForm
                 }
 
                 $reqsRow->addColumn(2, [
-                    new \Ease\Html\ImgTag($formClass::$logo, $req, ['title' => $formClass::name(), 'height' => '30']), new CredentialSelect('credential['.$req.']', $engine->getDataValue('company_id'),$req, $credentialChosen),
+                    new \Ease\Html\ImgTag($formClass::$logo, $req, ['title' => $formClass::name(), 'height' => '30']), new CredentialSelect('credential['.$req.']', $engine->getDataValue('company_id'), $req, $credentialChosen),
                     new \Ease\TWB4\LinkButton('credential.php?company_id='.$engine->getDataValue('company_id').'&formType='.$req, '️➕ 🔐', 'success btn-sm', ['title' => _('New Credential')]),
                 ]);
             } else {
@@ -148,8 +148,8 @@ class RuntemplateConfigForm extends EngineForm
             }
         }
 
-        //$this->addItem( new RuntemplateTopicsChooser('topics', $engine)); //TODO
-        
+        // $this->addItem( new RuntemplateTopicsChooser('topics', $engine)); //TODO
+
         $this->addItem(new \Ease\Html\InputHiddenTag('app_id', $engine->getDataValue('app_id')));
         $this->addItem(new \Ease\Html\InputHiddenTag('company_id', $engine->getDataValue('company_id')));
 
@@ -158,7 +158,7 @@ class RuntemplateConfigForm extends EngineForm
         $saveRow->addColumn(4, new \Ease\TWB4\LinkButton('actions.php?id='.$engine->getMyKey(), '🛠️&nbsp;'._('Actions'), 'secondary btn-lg btn-block'));
         $this->addItem($saveRow);
     }
-    
+
     public static function allForms(): array
     {
         $formTypes = [];
@@ -169,8 +169,7 @@ class RuntemplateConfigForm extends EngineForm
 
             $formTypes[$formAvailble] = $formClass::name();
         }
-        
+
         return $formTypes;
     }
-    
 }

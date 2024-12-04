@@ -22,11 +22,10 @@ namespace MultiFlexi\Ui;
  */
 class CredentialSelect extends \Ease\Html\SelectTag
 {
+    use \Ease\Html\Widgets\Selectizer;
     private int $company_id;
     private string $requirement;
 
-    use \Ease\Html\Widgets\Selectizer;    
-    
     public function __construct(string $name, int $company_id, string $requirement, string $selected = '', array $properties = [])
     {
         $this->company_id = $company_id;
@@ -53,12 +52,11 @@ class CredentialSelect extends \Ease\Html\SelectTag
 
         return $credentials;
     }
-    
+
     #[\Override]
     public function finalize(): void
     {
         $this->selectize();
         parent::finalize();
     }
-    
 }
