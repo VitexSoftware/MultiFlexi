@@ -28,70 +28,68 @@ class RuntemplateConfigForm extends EngineForm
     {
         parent::__construct($engine, null, ['method' => 'post', 'action' => 'runtemplate.php']);
         $defaults = $engine->getAppEnvironment();
+        $appRequirements = $engine->getApplication()->getRequirements();
         $customized = $engine->getRuntemplateEnvironment();
 
         $fieldsOf = [];
         $fieldSource = [];
         $credSource = [];
+        $formAvailable = [];
 
-        \Ease\Functions::loadClassesInNamespace('MultiFlexi\Ui\Form');
+        foreach ($appRequirements as $formRequired) {
+            $formClass = '\\MultiFlexi\\Ui\\Form\\'.$formRequired;
 
-        foreach (\Ease\Functions::classesInNamespace('MultiFlexi\Ui\Form') as $formAvailble) {
-            $formClass = '\\MultiFlexi\\Ui\\Form\\'.$formAvailble;
+            if (class_exists($formClass)) {
+                $formAvailable[$formRequired] = $formClass::name();
+                $fieldsOf[$formRequired] = $formClass::fields();
 
-            $formTypes[$formAvailble] = $formClass::name();
-            $fieldsOf[$formAvailble] = $formClass::fields();
-
-            foreach ($fieldsOf[$formAvailble] as $fieldName => $fieldDetails) {
-                $fieldSource[$fieldName] = $formAvailble;
+                foreach ($fieldsOf[$formRequired] as $fieldName => $fieldInfo) {
+                    $fieldSource[$fieldName] = $formRequired;
+                }
             }
         }
 
         $kredenc = new \MultiFlexi\Credential();
-        $companyCredentials = $kredenc->listingQuery()->where('company_id', $engine->getDataValue('company_id'))->fetchAll('id');
+        $companyCredentials = $kredenc->getCompanyCredentials($engine->getDataValue('company_id'), $appRequirements);
 
         $companyCredentialsByType = [];
 
         $crdHlpr = new \MultiFlexi\RunTplCreds();
-        $usedCreds = $crdHlpr->getCredentialsForRuntemplate($engine->getMyKey())->fetchAll('credentials_id');
+        $usedCreds = $crdHlpr->getCredentialsForRuntemplate($engine->getMyKey())->fetchAll('formType');
 
         foreach ($companyCredentials as $credInfo) {
-            if (\array_key_exists($credInfo['formType'], $companyCredentialsByType) === false) {
-                $companyCredentialsByType[$credInfo['formType']][] = ['id' => '', 'name' => _('Do not use')];
-            }
-
             $companyCredentialsByType[$credInfo['formType']][$credInfo['name']] = $credInfo;
         }
-
-        $reqs = $engine->getApplication()->getRequirements();
 
         $reqsRow = new \Ease\TWB4\Row();
 
         $credData = [];
 
-        foreach ($reqs as $req) {
-            $credentialChosen = '';
+        foreach ($appRequirements as $req) {
             $formClass = '\\MultiFlexi\\Ui\\Form\\'.$req;
+            $credentialChosen = '';
 
-            if (\array_key_exists($req, $companyCredentialsByType)) {
-                foreach ($companyCredentialsByType[$req] as $candidat) {
-                    if (\array_key_exists($candidat['id'], $usedCreds)) {
-                        $credentialChosen = (string) $candidat['id'];
-                        $kredenc->loadFromSQL($candidat['id']);
+            if (\array_key_exists($req, $formAvailable)) {
+                if (\array_key_exists($req, $companyCredentialsByType)) {
+                    foreach ($usedCreds as $credentialUsed) {
+                        $credentialChosen = (string) $credentialUsed['credentials_id'];
+                        $kredenc->loadFromSQL($credentialUsed['credentials_id']);
 
                         foreach ($kredenc->getData() as $overrideKey => $overrideValue) {
-                            $credData[$overrideKey] = $overrideValue;
-                            $credSource[$overrideKey] = $candidat['id'];
+                            if ($overrideKey !== 'id' && $overrideKey !== 'name' && $overrideKey !== 'company_id') {
+                                $credData[$overrideKey] = $overrideValue;
+                                $credSource[$overrideKey] = $credentialChosen;
+                            }
                         }
                     }
                 }
 
                 $reqsRow->addColumn(2, [
-                    new \Ease\Html\ImgTag($formClass::$logo, $req, ['title' => $formClass::name(), 'height' => '30']), new CredentialSelect('credential['.$req.']', $engine->getDataValue('company_id'), $req, $credentialChosen),
+                    new \Ease\Html\ImgTag($formClass::$logo, $req, ['title' => $formClass::name(), 'height' => '30']), new CredentialSelect('credential['.$req.']', $engine->getDataValue('company_id'), $req, \array_key_exists($req, $usedCreds) ? (string) $usedCreds[$req]['credentials_id'] : ''),
                     new \Ease\TWB4\LinkButton('credential.php?company_id='.$engine->getDataValue('company_id').'&formType='.$req, '️➕ 🔐', 'success btn-sm', ['title' => _('New Credential')]),
                 ]);
             } else {
-                if (\array_key_exists($req, $formTypes) === false) {
+                if (\array_key_exists($req, $formAvailable) === false) {
                     $reqsRow->addColumn(2, new \Ease\TWB4\Badge('warning', sprintf(_('Form %s not avilble'), new \Ease\Html\StrongTag($req))));
                 }
             }
@@ -130,12 +128,12 @@ class RuntemplateConfigForm extends EngineForm
 
                 $formIcon = new \Ease\Html\ImgTag($formClass::$logo, $formClass::name(), ['height' => 20, 'title' => $formClass::name()]);
 
-                $reqInfo = $companyCredentialsByType[$fieldSource[$fieldName]];
+                $reqInfo = $fieldsOf[$fieldSource[$fieldName]];
 
                 if (\array_key_exists($fieldName, $credSource)) {
                     $fieldLink = new \Ease\Html\ATag('credential.php?id='.$credSource[$fieldName], $formIcon.'&nbsp;'.$fieldName);
                 } else {
-                    $fieldLink = $formIcon;
+                    $fieldLink = $formIcon.'&nbsp;'.$fieldName;
                 }
 
                 $formGroup = $this->addInput($input, $fieldLink, \array_key_exists('defval', $fieldInfo) ? $fieldInfo['defval'] : '', \array_key_exists('description', $fieldInfo) ? $fieldInfo['description'] : '');

@@ -330,7 +330,7 @@ class Application extends DBEngine
                         // $this->addStatusMessage(sprintf(_('Saving #%s - %s'), $this->getMyKey(), $this->getRecordName() . ' ' . $this->getDataValue('uuid')), 'debug');
 
                         if ($this->dbsync()) {
-                            unset($currentData[0]['id'],$currentData[0]['name'],$currentData[0]['DatCreate'],$currentData[0]['DatUpdate'],$currentData[0]['code']);
+                            unset($currentData[0]['id'], $currentData[0]['name'], $currentData[0]['DatCreate'], $currentData[0]['DatUpdate'], $currentData[0]['code']);
                             $fields = array_diff(array_keys($currentData[0]), array_keys($importData));
 
                             if (empty($environment) === false) {
@@ -444,10 +444,10 @@ class Application extends DBEngine
             }
         }
 
-        $a2rt = $this->getFluentPDO()->deleteFrom('runtemplate')->where('app_id', $appId)->execute();
+        $runtemplater = new RunTemplate();
 
-        if ($a2rt !== 0) {
-            $this->addStatusMessage(sprintf(_('%s RunTemplate removal'), $a2rt), null === $a2rt ? 'error' : 'success');
+        foreach ($runtemplater->listingQuery()->where('app_id', $appId) as $runtemplateData) {
+            $this->addStatusMessage(sprintf(_('#%d %s RunTemplate removal'), $runtemplateData['id'], $runtemplateData['name']), $runtemplater->deleteFromSQL($runtemplateData['id']) ? 'error' : 'success');
         }
 
         $a2cf = $this->getFluentPDO()->deleteFrom('conffield')->where('app_id', $appId)->execute();
@@ -481,9 +481,16 @@ class Application extends DBEngine
         return Conffield::getAppConfigs($this->getMyKey());
     }
 
-    public function getRequirements()
+    /**
+     * Application Requirements as Array.
+     *
+     * @return array<string>
+     */
+    public function getRequirements(): array
     {
-        return strstr($this->getDataValue('requirements'), ',') ? explode(',', $this->getDataValue('requirements')) : [$this->getDataValue('requirements')];
+        $reqs = $this->getDataValue('requirements');
+
+        return strstr($reqs, ',') ? explode(',', $reqs) : [$reqs];
     }
 
     /**

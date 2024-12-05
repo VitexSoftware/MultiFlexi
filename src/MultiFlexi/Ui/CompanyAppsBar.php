@@ -17,7 +17,7 @@ namespace MultiFlexi\Ui;
 
 use MultiFlexi\Company;
 use MultiFlexi\CompanyApp;
-    
+
 class CompanyAppsBar extends \Ease\Html\DivTag
 {
     public function __construct(Company $company, $properties = [])

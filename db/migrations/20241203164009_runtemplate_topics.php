@@ -34,7 +34,7 @@ final class RuntemplateTopics extends AbstractMigration
         $table->addColumn('runtemplate_id', 'integer')
             ->addColumn('topic_id', 'integer')
             ->addForeignKey('runtemplate_id', 'runtemplate', ['id'], ['constraint' => 'r2c_runtemplate_must_exist'])
-            ->addForeignKey('topic_id', 'topic', ['id'], ['constraint' => 'r2t_topic_must_exist'] )
+            ->addForeignKey('topic_id', 'topic', ['id'], ['constraint' => 'r2t_topic_must_exist'])
             ->addIndex(['runtemplate_id', 'topic_id'], ['unique' => true])
             ->create();
     }

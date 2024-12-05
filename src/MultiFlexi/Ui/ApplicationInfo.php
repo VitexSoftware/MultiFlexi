@@ -61,7 +61,7 @@ class ApplicationInfo extends Panel
         $appData->addItem(new \Ease\Html\PTag($application->getDataValue('uuid')));
         $appData->addItem(new \Ease\Html\PTag($application->getDataValue('ociimage')));
         $appData->addItem(new \Ease\Html\PTag($application->getDataValue('version')));
-        $appData->addItem(new \Ease\Html\PTag($application->getDataValue('requirements')));
+        $appData->addItem(new \Ease\Html\PTag(new RequirementsOverview($application->getRequirements())));
 
         $headerRow->addColumn(12, $appData);
 
