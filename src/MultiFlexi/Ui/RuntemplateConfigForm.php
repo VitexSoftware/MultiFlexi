@@ -34,7 +34,7 @@ class RuntemplateConfigForm extends EngineForm
         $fieldsOf = [];
         $fieldSource = [];
         $credSource = [];
-        $formAvailable = [];
+        $formAvailable = \MultiFlexi\Requirement::formsAvailable();
 
         foreach ($appRequirements as $formRequired) {
             $formClass = '\\MultiFlexi\\Ui\\Form\\'.$formRequired;
@@ -90,7 +90,7 @@ class RuntemplateConfigForm extends EngineForm
                 ]);
             } else {
                 if (\array_key_exists($req, $formAvailable) === false) {
-                    $reqsRow->addColumn(2, new \Ease\TWB4\Badge('warning', sprintf(_('Form %s not avilble'), new \Ease\Html\StrongTag($req))));
+                    $reqsRow->addColumn(2, new \Ease\TWB4\Badge('warning', sprintf(_('Form %s not avilble'), '"'.$req.'"')));
                 }
             }
         }
