@@ -23,7 +23,6 @@ namespace MultiFlexi\Ui\Form;
 class Office365 extends \Ease\TWB4\Panel implements configForm
 {
     public static $logo = 'images/Office365.svg';
-            
 
     public function __construct()
     {

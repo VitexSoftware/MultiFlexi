@@ -18,6 +18,8 @@ namespace MultiFlexi\Ui;
 /**
  * Registered AbraFlexi instance editor Form.
  *
+ * @deprecated since version 1.20
+ *
  * @author
  */
 class RegisterServerForm extends EngineForm

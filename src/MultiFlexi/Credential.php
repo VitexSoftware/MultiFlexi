@@ -152,4 +152,15 @@ class Credential extends Engine
 
         return parent::deleteFromSQL($data);
     }
+
+    public function getCompanyCredentials(int $companyId, $appRequirements = []): array
+    {
+        $companyCredentials = $this->listingQuery()->where('company_id', $companyId);
+
+        foreach ($appRequirements as $req) {
+            $companyCredentials->whereOr('formType', $req);
+        }
+
+        return $companyCredentials->fetchAll('id');
+    }
 }

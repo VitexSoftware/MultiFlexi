@@ -35,7 +35,7 @@ class RunTplCreds extends Engine
 
     public function getCredentialsForRuntemplate($runtemplates_id)
     {
-        return $this->listingQuery()->where(['runtemplate_id' => $runtemplates_id]);
+        return $this->listingQuery()->select(['credentials.name', 'credentials.formType'])->where(['runtemplate_id' => $runtemplates_id])->leftJoin('credentials ON credentials.id=runtplcreds.credentials_id');
     }
 
     public function bind(int $runtemplate_id, int $credentials_id)

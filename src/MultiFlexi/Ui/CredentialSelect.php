@@ -34,7 +34,7 @@ class CredentialSelect extends \Ease\Html\SelectTag
     }
 
     /**
-     * obtain Availble AbraFlexi servers.
+     * obtain credentials.
      *
      * @return array
      */

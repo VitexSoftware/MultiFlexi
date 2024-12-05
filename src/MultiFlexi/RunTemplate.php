@@ -41,6 +41,7 @@ class RunTemplate extends \MultiFlexi\Engine
         'm' => '2629743',
         'y' => '31556926',
     ];
+    public Application $application;
 
     /**
      * @param mixed $identifier
@@ -156,8 +157,6 @@ class RunTemplate extends \MultiFlexi\Engine
         $rtpl->setmyTable('runtemplate_topics');
         $rtpl->deleteFromSQL(['runtemplate_id' => $this->getMyKey()]);
 
-       
-        
         return parent::deleteFromSQL($data);
     }
 
@@ -361,12 +360,19 @@ class RunTemplate extends \MultiFlexi\Engine
         return $actions;
     }
 
-    /**
-     * @return \MultiFlexi\Application
-     */
-    public function getApplication()
+    public function getApplication(): Application
     {
-        return new Application($this->getDataValue('app_id'));
+        $appId = $this->getDataValue('app_id');
+
+        if (isset($this->application) === false) {
+            $this->application = new Application($appId);
+        }
+
+        if ($this->application->getMyKey() !== $appId) {
+            $this->application->loadFromSQL($appId);
+        }
+
+        return $this->application;
     }
 
     /**
