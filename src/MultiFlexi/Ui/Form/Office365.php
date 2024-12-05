@@ -32,14 +32,14 @@ class Office365 extends \Ease\TWB4\Panel implements configForm
 
         $body = new \Ease\Html\DivTag();
 
-        $body->addItem(new \Ease\TWB4\FormGroup(_('Office 365 Username'), new \Ease\Html\InputTextTag('OFFICE365_USERNAME', ''), '', _('Office 365 Username')));
-        $body->addItem(new \Ease\TWB4\FormGroup(_('Office 365 Password'), new \Ease\Html\InputPasswordTag('OFFICE365_PASSWORD', ''), '', _('Office 365 Password')));
-        $body->addItem(new \Ease\TWB4\FormGroup(_('Office 365 Client ID'), new \Ease\Html\InputTextTag('OFFICE365_CLIENTID', ''), '', _('Office 365 Client ID')));
-        $body->addItem(new \Ease\TWB4\FormGroup(_('Office 365 Secret'), new \Ease\Html\InputTextTag('OFFICE365_SECRET', ''), '', _('Office 365 Secret')));
-        $body->addItem(new \Ease\TWB4\FormGroup(_('Office 365 Client Secret'), new \Ease\Html\InputTextTag('OFFICE365_CLSECRET', ''), '', _('Office 365 Client Secret')));
-        $body->addItem(new \Ease\TWB4\FormGroup(_('Office 365 Tenant'), new \Ease\Html\InputTextTag('OFFICE365_TENANT', ''), '', _('Office 365 Tenant')));
-        $body->addItem(new \Ease\TWB4\FormGroup(_('Office 365 Site'), new \Ease\Html\InputTextTag('OFFICE365_SITE', ''), '', _('Office 365 Site')));
-        $body->addItem(new \Ease\TWB4\FormGroup(_('Office 365 Path'), new \Ease\Html\InputTextTag('OFFICE365_PATH', ''), '', _('Office 365 Path')));
+        $body->addItem(new \Ease\TWB4\FormGroup('OFFICE365_USERNAME', new \Ease\Html\InputTextTag('OFFICE365_USERNAME', ''), '', _('Office 365 Username')));
+        $body->addItem(new \Ease\TWB4\FormGroup('OFFICE365_PASSWORD', new \Ease\Html\InputPasswordTag('OFFICE365_PASSWORD', ''), '', _('Office 365 Password')));
+        $body->addItem(new \Ease\TWB4\FormGroup('OFFICE365_CLIENTID', new \Ease\Html\InputTextTag('OFFICE365_CLIENTID', ''), '', _('Office 365 Client ID')));
+        $body->addItem(new \Ease\TWB4\FormGroup('OFFICE365_SECRET', new \Ease\Html\InputTextTag('OFFICE365_SECRET', ''), '', _('Office 365 Secret')));
+        $body->addItem(new \Ease\TWB4\FormGroup('OFFICE365_CLSECRET', new \Ease\Html\InputTextTag('OFFICE365_CLSECRET', ''), '', _('Office 365 Client Secret')));
+        $body->addItem(new \Ease\TWB4\FormGroup('OFFICE365_TENANT', new \Ease\Html\InputTextTag('OFFICE365_TENANT', ''), '', _('Office 365 Tenant')));
+        $body->addItem(new \Ease\TWB4\FormGroup('OFFICE365_SITE', new \Ease\Html\InputTextTag('OFFICE365_SITE', ''), '', _('Office 365 Site')));
+        $body->addItem(new \Ease\TWB4\FormGroup('OFFICE365_PATH', new \Ease\Html\InputTextTag('OFFICE365_PATH', ''), '', _('Office 365 Path')));
 
         parent::__construct($header, 'inverse', $body, '');
     }
