@@ -27,8 +27,8 @@ class Office365 extends \Ease\TWB4\Panel implements configForm
     public function __construct()
     {
         $header = new \Ease\TWB4\Row();
-        $header->addColumn(6, new \Ease\Html\ATag('https://www.stormare.eu/', new \Ease\Html\ImgTag(self::$logo, _('Stormware Pohoda'), ['height' => 50])));
-        $header->addColumn(6, new \Ease\Html\H3Tag(_('Stormware Pohoda')));
+        $header->addColumn(6, new \Ease\Html\ATag('https://www.office.com', new \Ease\Html\ImgTag(self::$logo, self::name(), ['height' => 50])));
+        $header->addColumn(6, new \Ease\Html\H3Tag(self::name()));
 
         $body = new \Ease\Html\DivTag();
 
@@ -38,8 +38,6 @@ class Office365 extends \Ease\TWB4\Panel implements configForm
         $body->addItem(new \Ease\TWB4\FormGroup('OFFICE365_SECRET', new \Ease\Html\InputTextTag('OFFICE365_SECRET', ''), '', _('Office 365 Secret')));
         $body->addItem(new \Ease\TWB4\FormGroup('OFFICE365_CLSECRET', new \Ease\Html\InputTextTag('OFFICE365_CLSECRET', ''), '', _('Office 365 Client Secret')));
         $body->addItem(new \Ease\TWB4\FormGroup('OFFICE365_TENANT', new \Ease\Html\InputTextTag('OFFICE365_TENANT', ''), '', _('Office 365 Tenant')));
-        $body->addItem(new \Ease\TWB4\FormGroup('OFFICE365_SITE', new \Ease\Html\InputTextTag('OFFICE365_SITE', ''), '', _('Office 365 Site')));
-        $body->addItem(new \Ease\TWB4\FormGroup('OFFICE365_PATH', new \Ease\Html\InputTextTag('OFFICE365_PATH', ''), '', _('Office 365 Path')));
 
         parent::__construct($header, 'inverse', $body, '');
     }
@@ -83,19 +81,7 @@ class Office365 extends \Ease\TWB4\Panel implements configForm
                 'description' => _('Office 365 Tenant'),
                 'defval' => '',
                 'required' => true,
-            ],
-            'OFFICE365_SITE' => [
-                'type' => 'text',
-                'description' => _('Office 365 Site'),
-                'defval' => '',
-                'required' => true,
-            ],
-            'OFFICE365_PATH' => [
-                'type' => 'text',
-                'description' => _('Office 365 Path'),
-                'defval' => '',
-                'required' => true,
-            ],
+            ]
         ];
     }
 
