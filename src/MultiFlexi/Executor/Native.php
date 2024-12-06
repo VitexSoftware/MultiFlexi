@@ -24,6 +24,7 @@ use Symfony\Component\Process\Process;
  */
 class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
 {
+    public $timeout = 32767;
     private \Symfony\Component\Process\Process $process;
     private $commandline;
 
@@ -60,26 +61,32 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
 
     public function launch($command)
     {
-        $this->process = new \Symfony\Component\Process\Process(explode(' ', $command), null, \MultiFlexi\Environmentor::flatEnv($this->environment), null, 32767);
-        $this->process->run(function ($type, $buffer): void {
-            $this->pid = $this->process->getPid();
+        $this->process = new \Symfony\Component\Process\Process(explode(' ', $command), null, \MultiFlexi\Environmentor::flatEnv($this->environment), null, $this->timeout);
 
-            if ($this->pid) {
-                $this->job->setPid($this->pid);
-            }
+        try {
+            $this->process->run(function ($type, $buffer): void {
+                $this->pid = $this->process->getPid();
 
-            $logger = new \Ease\Sand();
-            $logger->setObjectName(\Ease\Logger\Message::getCallerName($this));
-            $logger->addStatusMessage('JOB: '.$this->job->getMyKey().' PID: '.$this->pid, $type, 'debug');
+                if ($this->pid) {
+                    $this->job->setPid($this->pid);
+                }
 
-            if (\Symfony\Component\Process\Process::ERR === $type) {
-                $logger->addStatusMessage($buffer, 'error');
-                $this->addOutput($buffer, 'error');
-            } else {
-                $logger->addStatusMessage($buffer, 'success');
-                $this->addOutput($buffer, 'success');
-            }
-        });
+                $logger = new \Ease\Sand();
+                $logger->setObjectName(\Ease\Logger\Message::getCallerName($this));
+                $logger->addStatusMessage('JOB: '.$this->job->getMyKey().' PID: '.$this->pid, $type, 'debug');
+
+                if (\Symfony\Component\Process\Process::ERR === $type) {
+                    $logger->addStatusMessage($buffer, 'error');
+                    $this->addOutput($buffer, 'error');
+                } else {
+                    $logger->addStatusMessage($buffer, 'success');
+                    $this->addOutput($buffer, 'success');
+                }
+            });
+        } catch (\Symfony\Component\Process\Exception\ProcessTimedOutException $exc) {
+            $this->addStatusMessage(sprintf(_('Process exceeded maximum execution time limit %d seconds'), $this->timeout),'error');
+        }
+
         $this->addStatusMessage('pid:'.(isset($this->pid) ? (string) ($this->pid) : 'n/a').' '.$command.': '.$this->process->getExitCodeText(), $this->process->getExitCode() === 0 ? 'success' : 'warning');
 
         return $this->process->getExitCode();
