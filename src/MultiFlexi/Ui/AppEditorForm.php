@@ -43,6 +43,7 @@ class AppEditorForm extends EngineForm
         $this->addInput(new InputTextTag('ociimage'), _('Container image'));
         $this->addInput(new InputTextTag('version'), _('Current Version of Application'));
         $this->addInput(new InputTextTag('deploy'), _('Application deploy command'));
+        $this->addInput(new InputTextTag('requirements'), _('Reuqirements'));
         $this->addInput(new InputTextTag('uuid'), _('Application Universal Unique Identifier'));
         $this->addInput(new InputTextTag('topics'), _('Topics divided by column'));
         $this->addInput(new ResultFileSelect($this->engine), _('Result File field'), '', _('When application put its output to file'));
