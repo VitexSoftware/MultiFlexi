@@ -24,10 +24,10 @@ class mServer extends \Ease\TWB4\Panel implements configForm
 {
     public static string $logo = 'images/mServer.svg';
 
-    public function __construct($heading = null, $type = null, $body = null, $footer = null)
+    public function __construct()
     {
         $header = new \Ease\TWB4\Row();
-        $header->addColumn(6, new \Ease\Html\ATag('https://www.stormare.eu/', new \Ease\Html\ImgTag(self::$logo, _('Stormware Pohoda'), ['height' => 50])));
+        $header->addColumn(6, new \Ease\Html\ATag('https://www.stormware.eu/', new \Ease\Html\ImgTag(self::$logo, _('Stormware Pohoda'), ['height' => 50])));
         $header->addColumn(6, new \Ease\Html\H3Tag(_('Stormware Pohoda')));
 
         $body = new \Ease\Html\DivTag();

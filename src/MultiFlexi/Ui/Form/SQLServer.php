@@ -27,8 +27,8 @@ class SQLServer extends \Ease\TWB4\Panel implements configForm
     public function __construct()
     {
         $header = new \Ease\TWB4\Row();
-        $header->addColumn(6, new \Ease\Html\ATag('https://www.stormare.eu/', new \Ease\Html\ImgTag(self::$logo, _('Stormware Pohoda'), ['height' => 50])));
-        $header->addColumn(6, new \Ease\Html\H3Tag(_('Stormware Pohoda')));
+        $header->addColumn(6, new \Ease\Html\ATag('https://www.stormare.eu/', new \Ease\Html\ImgTag(self::$logo, self::name(), ['height' => 50])));
+        $header->addColumn(6, new \Ease\Html\H3Tag(self::name()));
 
         $body = new \Ease\Html\DivTag();
 
