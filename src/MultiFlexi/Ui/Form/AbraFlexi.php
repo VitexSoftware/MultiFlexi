@@ -32,10 +32,10 @@ class AbraFlexi extends \Ease\TWB4\Panel implements configForm
 
         $body = new \Ease\Html\DivTag();
 
-        $body->addItem(new \Ease\TWB4\FormGroup(_('Login'), new \Ease\Html\InputTextTag('ABRAFLEXI_LOGIN'), 'winstrom', _('AbraFlexi user login')));
-        $body->addItem(new \Ease\TWB4\FormGroup(_('Password'), new \Ease\Html\InputTextTag('ABRAFLEXI_PASSWORD'), 'winstrom', _('AbraFlexi user password')));
-        $body->addItem(new \Ease\TWB4\FormGroup(_('Server URL'), new \Ease\Html\InputTextTag('ABRAFLEXI_URL'), 'winstrom', _('AbraFlexi server URI')));
-        $body->addItem(new \Ease\TWB4\FormGroup(_('Company'), new \Ease\Html\InputTextTag('ABRAFLEXI_COMPANY'), 'demo', _('Company to be handled')));
+        $body->addItem(new \Ease\TWB4\FormGroup('ABRAFLEXI_LOGIN', new \Ease\Html\InputTextTag('ABRAFLEXI_LOGIN'), 'winstrom', _('AbraFlexi user login')));
+        $body->addItem(new \Ease\TWB4\FormGroup('ABRAFLEXI_PASSWORD', new \Ease\Html\InputTextTag('ABRAFLEXI_PASSWORD'), 'winstrom', _('AbraFlexi user password')));
+        $body->addItem(new \Ease\TWB4\FormGroup('ABRAFLEXI_URL', new \Ease\Html\InputTextTag('ABRAFLEXI_URL'), 'winstrom', _('AbraFlexi server URI')));
+        $body->addItem(new \Ease\TWB4\FormGroup('ABRAFLEXI_COMPANY', new \Ease\Html\InputTextTag('ABRAFLEXI_COMPANY'), 'demo', _('Company to be handled')));
 
         parent::__construct($header, 'inverse', $body, '');
     }
