@@ -34,10 +34,10 @@ class RaiffeisenBank extends \Ease\TWB4\Panel implements configForm
 
         $body = new \Ease\Html\DivTag();
 
-        $body->addItem(new \Ease\TWB4\FormGroup(_('Account Number'), new \Ease\Html\InputTextTag('ACCOUNT_NUMBER'), '', _('Raiffeisen Bank Account Number')));
-        $body->addItem(new \Ease\TWB4\FormGroup(_('Certificate File'), new \Ease\Html\InputTextTag('CERT_FILE'), '', _('Path to Certificate File')));
-        $body->addItem(new \Ease\TWB4\FormGroup(_('Certificate Password'), new \Ease\Html\InputTextTag('CERT_PASS'), '', _('Password for Certificate')));
-        $body->addItem(new \Ease\TWB4\FormGroup(_('X-IBM-Client-Id'), new \Ease\Html\InputTextTag('XIBMCLIENTID'), '', new ATag('https://developers.rb.cz/premium/applications', _('X-IBM-Client-Id'))));
+        $body->addItem(new \Ease\TWB4\FormGroup('ACCOUNT_NUMBER', new \Ease\Html\InputTextTag('ACCOUNT_NUMBER'), '', _('Raiffeisen Bank Account Number')));
+        $body->addItem(new \Ease\TWB4\FormGroup('CERT_FILE', new \Ease\Html\InputTextTag('CERT_FILE'), '', _('Path to Certificate File')));
+        $body->addItem(new \Ease\TWB4\FormGroup('CERT_PASS', new \Ease\Html\InputTextTag('CERT_PASS'), '', _('Password for Certificate')));
+        $body->addItem(new \Ease\TWB4\FormGroup('XIBMCLIENTID', new \Ease\Html\InputTextTag('XIBMCLIENTID'), '', new ATag('https://developers.rb.cz/premium/applications', _('X-IBM-Client-Id'))));
 
         parent::__construct($header, 'inverse', $body, '');
     }
