@@ -42,7 +42,7 @@ if (WebPage::singleton()->isPosted()) {
 
     if ($companies->deleteFromSQL(['id' => $companies->getMyKey()])) {
         $companies->addStatusMessage(_('Company Deleted'), 'success');
-        WebPage::singleton()->redirect('companys.php');
+        WebPage::singleton()->redirect('companies.php');
     } else {
         $companies->addStatusMessage(_('Error deleting Company').' '.$companies->getDataValue('name'), 'error');
     }

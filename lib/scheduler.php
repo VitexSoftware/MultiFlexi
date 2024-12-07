@@ -48,13 +48,13 @@ if (\MultiFlexi\Runner::isServiceActive('multiflexi') === false) {
 }
 
 $companer = new Company();
-$companys = $companer->listingQuery();
+$companies = $companer->listingQuery();
 $customConfig = new Configuration();
 
 if ($interval) {
     $runtemplate = new \MultiFlexi\RunTemplate();
 
-    foreach ($companys as $company) {
+    foreach ($companies as $company) {
         LogToSQL::singleton()->setCompany($company['id']);
 
         $appsForCompany = $runtemplate->getColumnsFromSQL(['id', 'interv', 'delay', 'name', 'executor'], ['company_id' => $company['id'], 'interv' => $interval]);

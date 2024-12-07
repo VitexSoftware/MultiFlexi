@@ -13,24 +13,17 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace MultiFlexi\Auth;
+namespace MultiFlexi\Api\Auth;
 
 /**
- * Description of Authenticator.
+ * Description of ApiKeyAuthenticator.
  *
  * @author vitex
  */
-class Authenticator extends AbstractAuthenticator
+class OAuthAuthenticator extends Authenticator
 {
     public function __construct($requiredScope = null)
     {
         parent::__construct($requiredScope);
-    }
-
-    protected function getUserByToken(string $token): array
-    {
-        $tokener = new \MultiFlexi\Token($token);
-
-        return $tokener->getUser();
     }
 }

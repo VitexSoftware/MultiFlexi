@@ -37,12 +37,12 @@ class ArchivedJobPanel extends Panel
         //            new LinkButton('joblist.php?app_id='.$cid, '🧑‍💻&nbsp;'._('Jobs history'), 'secondary btn-lg')]);
 
         $ca = new \MultiFlexi\CompanyApp(null);
-        $usedInCompanys = $ca->listingQuery()->select(['companyapp.company_id', 'company.name', 'company.code', 'company.logo'], true)->leftJoin('company ON company.id = companyapp.company_id')->where('app_id', $cid)->fetchAll('company_id');
+        $usedIncompanies = $ca->listingQuery()->select(['companyapp.company_id', 'company.name', 'company.code', 'company.logo'], true)->leftJoin('company ON company.id = companyapp.company_id')->where('app_id', $cid)->fetchAll('company_id');
 
-        if ($usedInCompanys) {
+        if ($usedIncompanies) {
             $usedByCompany = new \Ease\Html\DivTag(_('Used by').': ', ['class' => 'card-group']);
 
-            foreach ($usedInCompanys as $companyInfo) {
+            foreach ($usedIncompanies as $companyInfo) {
                 $companyInfo['id'] = $companyInfo['company_id'];
                 $kumpan = new \MultiFlexi\Company($companyInfo, ['autoload' => false]);
                 $calb = new CompanyAppLink($kumpan, $job->application, ['class' => 'card-img-top']);

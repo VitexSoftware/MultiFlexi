@@ -43,12 +43,12 @@ class ApplicationPanel extends Panel
         $this->headRow->addColumn(4, new \Ease\Html\ATag('app.php?id='.$this->application->getMyKey(), [new AppLogo($application, ['style' => 'height: 120px']), '&nbsp;', $application->getRecordName()]));
 
         $ca = new \MultiFlexi\CompanyApp(null);
-        $usedInCompanys = $ca->listingQuery()->select(['companyapp.company_id', 'company.name', 'company.code', 'company.logo'], true)->leftJoin('company ON company.id = companyapp.company_id')->where('app_id', $this->application->getMyKey())->fetchAll('company_id');
+        $usedIncompanies = $ca->listingQuery()->select(['companyapp.company_id', 'company.name', 'company.code', 'company.logo'], true)->leftJoin('company ON company.id = companyapp.company_id')->where('app_id', $this->application->getMyKey())->fetchAll('company_id');
 
-        if ($usedInCompanys) {
+        if ($usedIncompanies) {
             $usedByCompany = new \Ease\Html\DivTag(_('Used by').': ', ['class' => 'card-group']);
 
-            foreach ($usedInCompanys as $companyInfo) {
+            foreach ($usedIncompanies as $companyInfo) {
                 $companyInfo['id'] = $companyInfo['company_id'];
                 $kumpan = new \MultiFlexi\Company($companyInfo, ['autoload' => false]);
                 $calb = new CompanyAppLink($kumpan, $application, ['class' => 'card-img-top']);

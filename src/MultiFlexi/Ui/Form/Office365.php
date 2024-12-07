@@ -81,7 +81,7 @@ class Office365 extends \Ease\TWB4\Panel implements configForm
                 'description' => _('Office 365 Tenant'),
                 'defval' => '',
                 'required' => true,
-            ]
+            ],
         ];
     }
 

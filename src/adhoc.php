@@ -25,7 +25,7 @@ $appsAssigned = \Ease\WebPage::getRequestValue('appsassigned');
 $companer = new \MultiFlexi\Company(\Ease\WebPage::getRequestValue('company_id', 'int'));
 
 if (null === $companer->getMyKey()) {
-    WebPage::singleton()->redirect('companys.php');
+    WebPage::singleton()->redirect('companies.php');
 }
 
 $companyApp = new \MultiFlexi\CompanyApp($companer);

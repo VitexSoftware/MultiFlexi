@@ -13,14 +13,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace MultiFlexi\Auth;
+namespace MultiFlexi\Api\Auth;
 
 /**
  * Description of ApiKeyAuthenticator.
  *
  * @author vitex
  */
-class OAuthAuthenticator extends Authenticator
+class ApiKeyAuthenticator extends Authenticator
 {
     public function __construct($requiredScope = null)
     {

@@ -41,30 +41,30 @@ class MainMenu extends \Ease\Html\DivTag
             $oPage = WebPage::singleton();
             $servers = $this->getMenuList(new \MultiFlexi\Servers());
             $customers = $this->getMenuList(new \MultiFlexi\Customer(), null, WebPage::singleton()->customer);
-            $companys = $this->getMenuList(new \MultiFlexi\Company(), 'logo');
+            $companies = $this->getMenuList(new \MultiFlexi\Company(), 'logo');
             $apps = $this->getMenuList(new \MultiFlexi\Application(), 'image');
             $this->credentialsMenuEnabled($nav, $servers);
 
-            if (empty($companys)) {
+            if (empty($companies)) {
                 \MultiFlexi\User::singleton()->addStatusMessage(_('No company registered yet. Please register one.'), 'warning');
             }
 
-            if (empty($servers) && empty($customers) && empty($companys)) { // All empty yet
+            if (empty($servers) && empty($customers) && empty($companies)) { // All empty yet
                 //                $this->customersMenuDisabled($nav);
-                $this->companysMenuDisabled($nav);
+                $this->companiesMenuDisabled($nav);
             } else {
-                if (\count($servers) && empty($customers) && empty($companys)) {
+                if (\count($servers) && empty($customers) && empty($companies)) {
                     //                    $this->customersMenuEnabled($nav, $customers);
-                    $this->companysMenuDisabled($nav);
+                    $this->companiesMenuDisabled($nav);
                     \MultiFlexi\User::singleton()->addStatusMessage(_('No customer registered yet. Please register one.'), 'warning');
                 } else {
-                    if (\count($servers) && \count($customers) && empty($companys)) {
+                    if (\count($servers) && \count($customers) && empty($companies)) {
                         \MultiFlexi\User::singleton()->addStatusMessage(_('No company registered yet. Please register one.'), 'warning');
                         $this->customersMenuEnabled($nav, $customers);
-                        $nav->addMenuItem(new \Ease\TWB4\LinkButton('companysetup.php', '<img width=30 src=images/company.svg> '._('Companies'), 'warning'), 'right');
+                        $nav->addMenuItem(new \Ease\TWB4\LinkButton('companiesetup.php', '<img width=30 src=images/company.svg> '._('Companies'), 'warning'), 'right');
                     } else { // We Got All
                         //                        $this->customersMenuEnabled($nav, $customers);
-                        $this->companysMenuEnabled($nav, $companys);
+                        $this->companiesMenuEnabled($nav, $companies);
                     }
                 }
             }
@@ -138,22 +138,22 @@ class MainMenu extends \Ease\Html\DivTag
      * Company Menu.
      *
      * @param \Ease\Html\NavTag $nav
-     * @param array             $companys
+     * @param array             $companies
      */
-    public function companysMenuEnabled($nav, $companys): void
+    public function companiesMenuEnabled($nav, $companies): void
     {
         $nav->addDropDownMenu(
             '<img width=30 src=images/company.svg> '._('Companies'),
-            array_merge(['companysetup.php' => _('New Company')], ['' => ''], ['companys.php' => _('Listing')], $companys),
+            array_merge(['companiesetup.php' => _('New Company')], ['' => ''], ['companies.php' => _('Listing')], $companies),
         );
     }
 
     /**
      * @param \Ease\Html\NavTag $nav
      */
-    public function companysMenuDisabled($nav): void
+    public function companiesMenuDisabled($nav): void
     {
-        $nav->addMenuItem(new \Ease\TWB4\LinkButton('companysetup.php', '<img width=30 src=images/company.svg> '._('Companies'), 'warning', ['class' => 'nav-link']));
+        $nav->addMenuItem(new \Ease\TWB4\LinkButton('companiesetup.php', '<img width=30 src=images/company.svg> '._('Companies'), 'warning', ['class' => 'nav-link']));
     }
 
     /**
