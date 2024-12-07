@@ -1,6 +1,0 @@
----
-additionalProperties:
-    apiPackage: Api
-    invokerPackage: MultiFlexi
-    artifactVersion: '0.1'
-    
