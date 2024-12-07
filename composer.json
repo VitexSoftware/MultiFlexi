@@ -14,7 +14,6 @@
         "sensiolabs/ansi-to-html": "^1.2",
         "php-di/slim-bridge": "^3.4",
         "slim/psr7": "^1.5",
-        "vitexsoftware/multiflexiapiserver": "dev-main",
         "dyorg/slim-token-authentication": "^1.0",
         "tuupola/slim-basic-auth": "^3.0",
         "vitexsoftware/ease-core": "^1.45",
@@ -25,7 +24,8 @@
         "vitexsoftware/ease-core-bricks": "^1.1",
         "confirm-it-solutions/php-zabbix-api": "^3.0",
         "vitexsoftware/ease-html-widgets": "^1.1",
-        "vitexsoftware/ease-html": "^1.40"
+        "vitexsoftware/ease-html": "^1.40",
+        "vitexsoftware/multiflexi-api-server": "dev-main"
     },
     "license": "MIT",
     "authors": [
@@ -56,12 +56,6 @@
             "Test\\AbraFlexi\\MultiFlexi\\": "tests/AbraFlexi/MultiFlexi/"
         }
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "./OpenAPI/server/"
-        }
-    ],
     "require-dev": {
         "phpunit/phpunit": "*",
         "phpstan/phpstan": "*",
