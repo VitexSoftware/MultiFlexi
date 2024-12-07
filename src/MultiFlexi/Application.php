@@ -431,7 +431,7 @@ class Application extends DBEngine
         $a2c = $this->getFluentPDO()->deleteFrom('companyapp')->where('app_id', $appId)->execute();
 
         if ($a2c !== 0) {
-            $this->addStatusMessage(sprintf(_('Unassigned from %d companys'), $a2c), null === $a2c ? 'error' : 'success');
+            $this->addStatusMessage(sprintf(_('Unassigned from %d companies'), $a2c), null === $a2c ? 'error' : 'success');
         }
 
         $runtemplates = $this->getFluentPDO()->from('runtemplate')->where('app_id', $appId)->fetchAll();

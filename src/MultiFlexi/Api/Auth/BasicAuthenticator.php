@@ -13,7 +13,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace MultiFlexi\Auth;
+namespace MultiFlexi\Api\Auth;
 
 /**
  * Description of ApiKeyAuthenticator.
@@ -29,8 +29,9 @@ class BasicAuthenticator extends Authenticator
 
     public function __invoke(\Psr\Http\Message\ServerRequestInterface &$request, \Dyorg\TokenAuthentication\TokenSearch $tokenSearch)
     {
-        $prober = new \MultiFlexi\User($arguments['user']);
-
-        return $prober->getUserID() && \strlen($arguments['password']) && $prober->isAccountEnabled() && $prober->passwordValidation($arguments['password'], $prober->getDataValue($prober->passwordColumn));
+        [$login,$password] = explode(':',$request->getUri()->getUserInfo());
+        $prober = new \MultiFlexi\User();
+        $prober->loadFromSQL([$prober->loginColumn=>$login]);
+        return $prober->getUserID() && \strlen($password) && $prober->isAccountEnabled() && $prober->passwordValidation($password, $prober->getDataValue($prober->passwordColumn));
     }
 }

@@ -15,15 +15,12 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use Ease\Html\ATag;
-use MultiFlexi\Company;
-
 require_once './init.php';
 WebPage::singleton()->onlyForLogged();
 
 WebPage::singleton()->addItem(new PageTop(_('Credentials')));
 
-WebPage::singleton()->container->addItem(new DBDataTable(new \MultiFlexi\Credential));
+WebPage::singleton()->container->addItem(new DBDataTable(new \MultiFlexi\Credential()));
 
 WebPage::singleton()->addItem(new PageBottom('credentials'));
 WebPage::singleton()->draw();

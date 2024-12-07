@@ -1,5 +1,17 @@
 <?php
+
 declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 use Phinx\Migration\AbstractMigration;
 
@@ -20,9 +32,9 @@ final class CredentialType extends AbstractMigration
     {
         $table = $this->table('credential_type');
         $table->addColumn('name', 'string', ['limit' => 255])
-              ->addColumn('url', 'string', ['limit' => 255])
-              ->addColumn('logo', 'string', ['limit' => 255])
-              ->addColumn('fields', 'text')
-              ->create();
+            ->addColumn('url', 'string', ['limit' => 255])
+            ->addColumn('logo', 'string', ['limit' => 255])
+            ->addColumn('fields', 'text')
+            ->create();
     }
 }

@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class CompanyServer extends AbstractMigration
+final class companieserver extends AbstractMigration
 {
     /**
      * Change Method.

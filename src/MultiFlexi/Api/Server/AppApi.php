@@ -13,7 +13,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace MultiFlexi\Api;
+namespace MultiFlexi\Api\Server;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -23,7 +23,7 @@ use Psr\Http\Message\ServerRequestInterface;
  *
  * @author vitex
  */
-class AppApi extends AbstractAppApi
+class AppApi extends \MultiFlexi\Api\Server\AbstractAppApi
 {
     public $engine;
 

@@ -2,6 +2,18 @@
     "name": "vitexsoftware/multiflexi",
     "description": "Tool used to run tools upon AbraFlexi or Pohoda servers",
     "type": "project",
+    "keywords": [
+        "launcher",
+        "php",
+        "api"
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/ybelenko/slim-token-authentication",
+            "no-api": true
+        }
+    ],        
     "require": {
         "ext-yaml": "*",
         "ext-simplexml": "*",
@@ -14,7 +26,7 @@
         "sensiolabs/ansi-to-html": "^1.2",
         "php-di/slim-bridge": "^3.4",
         "slim/psr7": "^1.5",
-        "dyorg/slim-token-authentication": "^1.0",
+        "dyorg/slim-token-authentication": "dev-slim4",
         "tuupola/slim-basic-auth": "^3.0",
         "vitexsoftware/ease-core": "^1.45",
         "rcubitto/json-pretty": "^1.0",
@@ -41,13 +53,14 @@
             "MultiFlexi\\Ui\\": "src/MultiFlexi/Ui",
             "MultiFlexi\\Api\\": "src/MultiFlexi/Api",
             "MultiFlexi\\Env\\": "src/MultiFlexi/Env",
-            "MultiFlexi\\Auth\\": "src/MultiFlexi/Auth",
             "MultiFlexi\\Action\\": "src/MultiFlexi/Action",
             "MultiFlexi\\Zabbix\\": "src/MultiFlexi/Zabbix",
             "MultiFlexi\\Pohoda\\": "src/MultiFlexi/Pohoda",
             "MultiFlexi\\Ui\\Form\\": "src/MultiFlexi/Ui/Form",
             "MultiFlexi\\Executor\\": "src/MultiFlexi/Executor",
-            "MultiFlexi\\AbraFlexi\\": "src/MultiFlexi/AbraFlexi"
+            "MultiFlexi\\Api\\Auth\\": "src/MultiFlexi/Api/Auth",
+            "MultiFlexi\\AbraFlexi\\": "src/MultiFlexi/AbraFlexi",
+            "MultiFlexi\\Api\\Server\\": "src/MultiFlexi/Api/Server"
         }
     },
     "autoload-dev": {

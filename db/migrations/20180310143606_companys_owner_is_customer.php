@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-class CompanysOwnerIsCustomer extends AbstractMigration
+class companiesOwnerIsCustomer extends AbstractMigration
 {
     /**
      * Every company needs owner customer.

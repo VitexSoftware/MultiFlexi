@@ -31,7 +31,7 @@ class DbStatus extends \Ease\TWB4\Row
         $jobs = (string) (new \MultiFlexi\Job())->listingQuery()->count();
         $servers = (string) (new \MultiFlexi\Servers())->listingQuery()->count();
         $customers = (string) (new \MultiFlexi\Customer())->listingQuery()->count();
-        $companys = (string) (new \MultiFlexi\Company())->listingQuery()->count();
+        $companies = (string) (new \MultiFlexi\Company())->listingQuery()->count();
         $apps = (string) (new \MultiFlexi\Application())->listingQuery()->count();
         $assigned = (string) (new \MultiFlexi\RunTemplate())->listingQuery()->count();
 
@@ -52,7 +52,7 @@ class DbStatus extends \Ease\TWB4\Row
             ['class' => 'btn btn-default', 'type' => 'button'],
         ));
         $this->addColumn(2, new \Ease\Html\ButtonTag(
-            [_('Companies').'&nbsp;', new \Ease\TWB4\PillBadge('success', $companys)],
+            [_('Companies').'&nbsp;', new \Ease\TWB4\PillBadge('success', $companies)],
             ['class' => 'btn btn-default', 'type' => 'button'],
         ));
         $this->addColumn(2, new \Ease\Html\ButtonTag(

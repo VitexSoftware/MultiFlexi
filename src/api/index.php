@@ -26,10 +26,10 @@ require_once __DIR__.'/../../vendor/autoload.php';
 
 use DI\Bridge\Slim\Bridge;
 use DI\ContainerBuilder;
-use MultiFlexi\App\RegisterDependencies;
-use MultiFlexi\App\RegisterMiddlewares;
-use MultiFlexi\App\RegisterRoutes;
-use MultiFlexi\App\ResponseEmitter as Response;
+use MultiFlexi\Api\App\RegisterDependencies;
+use MultiFlexi\Api\App\RegisterMiddlewares;
+use MultiFlexi\Api\App\RegisterRoutes;
+use MultiFlexi\Api\App\ResponseEmitter as Response;
 use Neomerx\Cors\Contracts\AnalyzerInterface;
 use Slim\Factory\ServerRequestCreatorFactory;
 use Slim\Middleware\ErrorMiddleware;
@@ -38,20 +38,6 @@ use Slim\Middleware\ErrorMiddleware;
 
 // Instantiate PHP-DI ContainerBuilder
 $builder = new ContainerBuilder();
-
-// consider prod by default
-
-switch (strtolower($_SERVER['APP_ENV'] ?? 'prod')) {
-    case 'development':
-    case 'dev':
-        $env = 'dev';
-
-        break;
-    case 'production':
-    case 'prod':
-    default:
-        $env = 'prod';
-}
 
 // Main configuration
 $builder->addDefinitions(__DIR__.'/config.php');
@@ -92,13 +78,13 @@ $request = $serverRequestCreator->createServerRequestFromGlobals();
 // also anti-pattern, of course we know
 $errorMiddleware = $container->get(ErrorMiddleware::class);
 
-// $app->add(new Slim\Middleware\TokenAuthentication([
-//            'path' => $app->getBasePath() . '/api',
-//            'passthrough' => ['/', '/ping', '/login'], /* or ['/api/auth', '/api/test'] */
-//            "authenticator" => function ($arguments) {
-//                return (bool) rand(0, 1);
-//            }
-//        ]));
+$app->add(new \Dyorg\TokenAuthentication([
+    'path' => $app->getBasePath().'/api',
+    'passthrough' => ['/', '/ping', '/login'], /* or ['/api/auth', '/api/test'] */
+    'authenticator' => static function ($arguments) {
+        return (bool) mt_rand(0, 1);
+    },
+]));
 
 // route0 → (unnamed) → /{routes:.*}
 // route1 → listServers → /VitexSoftware/MultiFlexi/1.0.0/servers/
@@ -138,7 +124,7 @@ $app->get('/MultiFlexi/src/api/', static function (Request $request, Response $r
 
     return $response;
 });
-
+session_start();
 // Run App & Emit Response
 $response = $app->handle($request);
 $responseEmitter = (new Response())

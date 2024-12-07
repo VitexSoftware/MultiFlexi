@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 /**
- * Description of CompanySelect.
+ * Description of companieselect.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */

@@ -46,13 +46,13 @@ if (\MultiFlexi\Runner::isServiceActive('multiflexi') === false) {
 }
 
 $companer = new Company();
-$companys = $companer->listingQuery()->select('servers.*')->select('company.id AS company_id')->leftJoin('servers ON servers.id = company.server');
+$companies = $companer->listingQuery()->select('servers.*')->select('company.id AS company_id')->leftJoin('servers ON servers.id = company.server');
 $customConfig = new Configuration();
 
 if ($interval) {
     $ap2c = new \MultiFlexi\RunTemplate();
 
-    foreach ($companys as $company) {
+    foreach ($companies as $company) {
         LogToSQL::singleton()->setCompany($company['company_id']);
         $appsForCompany = $ap2c->getColumnsFromSQL(['id', 'interv'], ['company_id' => $company['company_id'], 'interv' => $interval]);
 

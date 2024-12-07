@@ -30,7 +30,7 @@ class AbraFlexiInstanceStatus extends \Ease\Html\TableTag
         $companer = new \MultiFlexi\Company();
         $registered = $companer->getColumnsFromSQL(['id', 'company', 'name'], ['server' => $servers->getMyKey()], 'id', 'company');
 
-        foreach ($this->companys($servers->getData()) as $companyData) {
+        foreach ($this->companies($servers->getData()) as $companyData) {
             try {
                 $setter = new \AbraFlexi\Nastaveni(1, array_merge($servers->getData(), ['company' => $companyData['dbNazev']]));
                 $companyDetail = $setter->getData();
@@ -43,7 +43,7 @@ class AbraFlexiInstanceStatus extends \Ease\Html\TableTag
                 ];
                 unset($companyData['id'], $companyData['licenseGroup'], $companyData['createDt']);
 
-                $companyData['action'] = \array_key_exists($companyData['dbNazev'], $registered) ? new \Ease\TWB4\LinkButton('company.php?id='.$registered[$companyData['dbNazev']]['id'], _('Edit'), 'success') : new \Ease\TWB4\LinkButton('companysetup.php?'.http_build_query($registerParams), _('Register'), 'warning');
+                $companyData['action'] = \array_key_exists($companyData['dbNazev'], $registered) ? new \Ease\TWB4\LinkButton('company.php?id='.$registered[$companyData['dbNazev']]['id'], _('Edit'), 'success') : new \Ease\TWB4\LinkButton('companiesetup.php?'.http_build_query($registerParams), _('Register'), 'warning');
                 $this->addRowColumns($companyData);
             } catch (\AbraFlexi\Exception $exc) {
                 $this->addStatusMessage($exc->getMessage());
@@ -52,22 +52,22 @@ class AbraFlexiInstanceStatus extends \Ease\Html\TableTag
     }
 
     /**
-     * List Companys on target server.
+     * List companies on target server.
      *
      * @param array $serverAccess
      *
      * @return array
      */
-    public function companys($serverAccess)
+    public function companies($serverAccess)
     {
         $companer = new \AbraFlexi\Company(null, $serverAccess);
 
         try {
-            $companys = $companer->getAllFromAbraFlexi();
+            $companies = $companer->getAllFromAbraFlexi();
         } catch (\AbraFlexi\Exception $exc) {
-            $companys = [];
+            $companies = [];
         }
 
-        return empty($companys) ? [] : $companys;
+        return empty($companies) ? [] : $companies;
     }
 }

@@ -42,13 +42,13 @@ class AbraFlexiInstanceStatusTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers \MultiFlexi\Ui\AbraFlexiInstanceStatus::companys
+     * @covers \MultiFlexi\Ui\AbraFlexiInstanceStatus::companies
      *
-     * @todo   Implement testcompanys().
+     * @todo   Implement testcompanies().
      */
-    public function testcompanys(): void
+    public function testcompanies(): void
     {
-        $this->assertEquals('', $this->object->companys());
+        $this->assertEquals('', $this->object->companies());
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete('This test has not been implemented yet.');
     }

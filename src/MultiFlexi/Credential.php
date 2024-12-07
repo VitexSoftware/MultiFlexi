@@ -137,10 +137,10 @@ class Credential extends DBEngine
 
     public function loadFromSQL($itemID = null)
     {
-        if(is_null($itemID)){
+        if (null === $itemID) {
             $itemID = $this->getMyKey();
         }
-        
+
         $data = parent::loadFromSQL($itemID);
 
         foreach ($this->credator->listingQuery()->where('credential_id', $this->getMyKey()) as $credential) {
@@ -167,7 +167,7 @@ class Credential extends DBEngine
 
         return $companyCredentials->fetchAll('id');
     }
-    
+
     /**
      * @see https://datatables.net/examples/advanced_init/column_render.html
      *
@@ -193,11 +193,10 @@ EOD;
     public function columns($columns = [])
     {
         return parent::columns([
-            ['name' => 'id', 'type' => 'text', 'label' => _('ID'), 'detailPage' => 'credential.php', 'valueColumn' => 'credentials.id', 'idColumn' => 'credentials.id', ],
+            ['name' => 'id', 'type' => 'text', 'label' => _('ID'), 'detailPage' => 'credential.php', 'valueColumn' => 'credentials.id', 'idColumn' => 'credentials.id'],
             ['name' => 'formType', 'type' => 'text', 'label' => _('Type')],
             ['name' => 'name', 'type' => 'text', 'label' => _('Name')],
-            ['name' => 'company', 'type'=>'text','label'=> _('Company')]
-            
+            ['name' => 'company', 'type' => 'text', 'label' => _('Company')],
         ]);
     }
 
@@ -205,10 +204,9 @@ EOD;
     {
         $dataRow['id'] = $dataRowRaw['id'];
         $dataRow['name'] = '<a title="'.$dataRowRaw['name'].'" href="credential.php?id='.$dataRowRaw['id'].'">'.$dataRowRaw['name'].'</a>';
-        $dataRow['formType'] =  $dataRowRaw['formType']. '<br><a title="'.$dataRowRaw['formType'].'" href="credential.php?id='.$dataRowRaw['id'].'"><img src="images/'.$dataRowRaw['formType'].'.svg" height="50">';
-        $dataRow['company'] = (string) new Ui\CompanyLinkButton( new Company($dataRowRaw['company_id']),['style'=>'height: 50px;'] ) ;
+        $dataRow['formType'] = $dataRowRaw['formType'].'<br><a title="'.$dataRowRaw['formType'].'" href="credential.php?id='.$dataRowRaw['id'].'"><img src="images/'.$dataRowRaw['formType'].'.svg" height="50">';
+        $dataRow['company'] = (string) new Ui\CompanyLinkButton(new Company($dataRowRaw['company_id']), ['style' => 'height: 50px;']);
+
         return parent::completeDataRow($dataRow);
     }
-    
-    
 }

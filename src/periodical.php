@@ -22,7 +22,7 @@ WebPage::singleton()->onlyForLogged();
 $companer = new \MultiFlexi\Company(\Ease\WebPage::getRequestValue('company_id', 'int'));
 
 if (null === $companer->getMyKey()) {
-    WebPage::singleton()->redirect('companys.php');
+    WebPage::singleton()->redirect('companies.php');
 }
 
 $_SESSION['company'] = $companer->getMyKey();

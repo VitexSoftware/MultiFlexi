@@ -84,7 +84,7 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
                 }
             });
         } catch (\Symfony\Component\Process\Exception\ProcessTimedOutException $exc) {
-            $this->addStatusMessage(sprintf(_('Process exceeded maximum execution time limit %d seconds'), $this->timeout),'error');
+            $this->addStatusMessage(sprintf(_('Process exceeded maximum execution time limit %d seconds'), $this->timeout), 'error');
         }
 
         $this->addStatusMessage('pid:'.(isset($this->pid) ? (string) ($this->pid) : 'n/a').' '.$command.': '.$this->process->getExitCodeText(), $this->process->getExitCode() === 0 ? 'success' : 'warning');

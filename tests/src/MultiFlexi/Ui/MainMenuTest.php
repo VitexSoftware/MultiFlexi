@@ -78,25 +78,25 @@ class MainMenuTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers \MultiFlexi\Ui\MainMenu::companysMenuEnabled
+     * @covers \MultiFlexi\Ui\MainMenu::companiesMenuEnabled
      *
-     * @todo   Implement testcompanysMenuEnabled().
+     * @todo   Implement testcompaniesMenuEnabled().
      */
-    public function testcompanysMenuEnabled(): void
+    public function testcompaniesMenuEnabled(): void
     {
-        $this->assertEquals('', $this->object->companysMenuEnabled());
+        $this->assertEquals('', $this->object->companiesMenuEnabled());
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
-     * @covers \MultiFlexi\Ui\MainMenu::companysMenuDisabled
+     * @covers \MultiFlexi\Ui\MainMenu::companiesMenuDisabled
      *
-     * @todo   Implement testcompanysMenuDisabled().
+     * @todo   Implement testcompaniesMenuDisabled().
      */
-    public function testcompanysMenuDisabled(): void
+    public function testcompaniesMenuDisabled(): void
     {
-        $this->assertEquals('', $this->object->companysMenuDisabled());
+        $this->assertEquals('', $this->object->companiesMenuDisabled());
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete('This test has not been implemented yet.');
     }

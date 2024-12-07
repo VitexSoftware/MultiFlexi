@@ -41,13 +41,13 @@ class CredentialForm extends \Ease\TWB4\Form
 
         $companer = new \MultiFlexi\Company();
 
-        $companys['0'] = _('Please Select Company');
+        $companies['0'] = _('Please Select Company');
 
         foreach ($companer->listingQuery() as $company) {
-            $companys[(string) $company['id']] = empty($company['name']) ? (string) ($company['id']) : $company['name'];
+            $companies[(string) $company['id']] = empty($company['name']) ? (string) ($company['id']) : $company['name'];
         }
 
-        $formContents[] = new \Ease\Html\SelectTag('company_id', $companys, (string) $kredenc->getDataValue('company_id'));
+        $formContents[] = new \Ease\Html\SelectTag('company_id', $companies, (string) $kredenc->getDataValue('company_id'));
         $formContents[] = new \Ease\TWB4\FormGroup(_('Credential Name'), new \Ease\Html\InputTextTag('name', $kredenc->getRecordName()));
 
         if (null !== $kredenc->getMyKey()) {
