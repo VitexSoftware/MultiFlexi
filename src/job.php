@@ -39,6 +39,20 @@ $outputTabs = new \Ease\TWB4\Tabs();
 $outputTabs->addTab(_('Output'), [$stdTerminal, \strlen($jobber->getOutput()) ? new \Ease\TWB4\LinkButton('joboutput.php?id='.$jobID.'&mode=std', _('Download'), 'secondary btn-block') : _('No output')]);
 $outputTabs->addTab(_('Errors'), [$errorTerminal, \strlen($jobber->getErrorOutput()) ? new \Ease\TWB4\LinkButton('joboutput.php?id='.$jobID.'&mode=err', _('Download'), 'secondary btn-block') : _('No errors')], empty($jobber->getOutput()));
 
+$artifactor = new \MultiFlexi\Artifact();
+$artifacts = $artifactor->listingQuery()->where('job_id', $jobID);
+
+if ($artifacts->count()) {
+    $artifactsDiv = new \Ease\Html\DivTag();
+
+    foreach ($artifacts->fetchAll() as $artifactData) {
+        $artifactsDiv->addItem(new \Ease\Html\H3Tag($artifactData['filename']));
+        $artifactsDiv->addItem(new \Ease\Html\DivTag(nl2br($artifactData['artifact']), ['style' => 'font-family: monospace; color: black']));
+    }
+
+    $outputTabs->addTab(_('Artifacts'), $artifactsDiv);
+}
+
 $runTemplateButton = new RuntemplateButton($runTemplate);
 
 // $relaunchButton = new \Ease\TWB4\LinkButton('launch.php?id='.$runTemplate->getMyKey().'&app_id='.$appInfo['app_id'].'&company_id='.$appInfo['company_id'], '&lt;'._('Relaunch').'💨', 'success btn-lg btn-block');

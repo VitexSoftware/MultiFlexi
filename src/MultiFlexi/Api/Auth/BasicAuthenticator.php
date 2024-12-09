@@ -29,9 +29,10 @@ class BasicAuthenticator extends Authenticator
 
     public function __invoke(\Psr\Http\Message\ServerRequestInterface &$request, \Dyorg\TokenAuthentication\TokenSearch $tokenSearch)
     {
-        [$login,$password] = explode(':',$request->getUri()->getUserInfo());
+        [$login,$password] = explode(':', $request->getUri()->getUserInfo());
         $prober = new \MultiFlexi\User();
-        $prober->loadFromSQL([$prober->loginColumn=>$login]);
+        $prober->loadFromSQL([$prober->loginColumn => $login]);
+
         return $prober->getUserID() && \strlen($password) && $prober->isAccountEnabled() && $prober->passwordValidation($password, $prober->getDataValue($prober->passwordColumn));
     }
 }
