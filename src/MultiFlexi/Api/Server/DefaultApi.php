@@ -91,6 +91,8 @@ class DefaultApi extends AbstractDefaultApi
         $data[] = ['path' => 'runtemplates'];
         $data[] = ['path' => 'jobs'];
         $data[] = ['path' => 'users'];
+        $data[] = ['path' => 'credentials'];
+        $data[] = ['path' => 'credential_types'];
 
         foreach ($data as $id => $row) {
             switch ($suffix) {

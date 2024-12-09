@@ -18,13 +18,13 @@ namespace MultiFlexi\Ui\Form;
 use Ease\Html\ATag;
 
 /**
- * Description of RaiffeisenBank.
+ * Description of Csas.
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
 class RaiffeisenBank extends \Ease\TWB4\Panel implements configForm
 {
-    public static string $logo = 'images/RaiffeisenBank.svg';
+    public static string $logo = 'images/Csas.svg';
 
     public function __construct()
     {
