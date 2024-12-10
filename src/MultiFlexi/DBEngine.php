@@ -860,7 +860,7 @@ class DBEngine extends \Ease\SQL\Engine
                     unset($data[$this->createColumn]);
                 }
 
-                if ($this->lastModifiedColumn) {
+                if (isset($this->lastModifiedColumn) && !empty($this->lastModifiedColumn)) {
                     $data[$this->lastModifiedColumn] = date('Y-m-d H:i:s');
                 }
 
