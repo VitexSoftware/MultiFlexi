@@ -662,7 +662,7 @@ EOD;
     {
         $launcher[] = '# '.\Ease\Shared::appName().' v'.\Ease\Shared::AppVersion().' job #'.$this->getMyKey().' environment. Generated '.(new \DateTime())->format('Y-m-d H:i:s').' for company: '.$this->company->getDataValue('name');
         $launcher[] = '';
-         
+
         $environment = array_merge($this->getDataValue('env') ? unserialize($this->getDataValue('env')) : [], $this->runTemplate->credentialsEnvironment());
 
         asort($environment);

@@ -490,7 +490,7 @@ class Application extends DBEngine
     {
         $reqs = $this->getDataValue('requirements');
 
-        return strlen($reqs) ?  (strstr($reqs, ',') ? explode(',', $reqs) : [$reqs]) : [];
+        return \strlen($reqs) ? (strstr($reqs, ',') ? explode(',', $reqs) : [$reqs]) : [];
     }
 
     /**
