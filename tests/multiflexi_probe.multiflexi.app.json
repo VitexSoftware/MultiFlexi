@@ -4,7 +4,7 @@
     "description": "Task launcher testing tool",
     "executable": "multiflexi-probe",
     "setup": "ls -la {FILE_UPLOAD}",
-    "requirements": "mServer,SQLServer,RaiffeisenBank,Office365,FioBank,AbraFlexi,FioBank",
+    "requirements": "mServer,SQLServer,RaiffeisenBank,Office365,FioBank,AbraFlexi",
     "cmdparams": "{FILE_UPLOAD}",
     "deploy": "sudo apt install multiflexi",
     "homepage": "https://github.com/VitexSoftware/MultiFlexi",

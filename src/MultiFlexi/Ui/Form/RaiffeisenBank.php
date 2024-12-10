@@ -24,7 +24,7 @@ use Ease\Html\ATag;
  */
 class RaiffeisenBank extends \Ease\TWB4\Panel implements configForm
 {
-    public static string $logo = 'images/Csas.svg';
+    public static string $logo = 'images/RaiffeisenBank.svg';
 
     public function __construct()
     {
