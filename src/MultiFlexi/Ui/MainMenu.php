@@ -61,7 +61,7 @@ class MainMenu extends \Ease\Html\DivTag
                     if (\count($servers) && \count($customers) && empty($companies)) {
                         \MultiFlexi\User::singleton()->addStatusMessage(_('No company registered yet. Please register one.'), 'warning');
                         $this->customersMenuEnabled($nav, $customers);
-                        $nav->addMenuItem(new \Ease\TWB4\LinkButton('companiesetup.php', '<img width=30 src=images/company.svg> '._('Companies'), 'warning'), 'right');
+                        $nav->addMenuItem(new \Ease\TWB4\LinkButton('companysetup.php', '<img width=30 src=images/company.svg> '._('Companies'), 'warning'), 'right');
                     } else { // We Got All
                         //                        $this->customersMenuEnabled($nav, $customers);
                         $this->companiesMenuEnabled($nav, $companies);
@@ -144,7 +144,7 @@ class MainMenu extends \Ease\Html\DivTag
     {
         $nav->addDropDownMenu(
             '<img width=30 src=images/company.svg> '._('Companies'),
-            array_merge(['companiesetup.php' => _('New Company')], ['' => ''], ['companies.php' => _('Listing')], $companies),
+            array_merge(['companysetup.php' => _('New Company')], ['' => ''], ['companies.php' => _('Listing')], $companies),
         );
     }
 
@@ -153,7 +153,7 @@ class MainMenu extends \Ease\Html\DivTag
      */
     public function companiesMenuDisabled($nav): void
     {
-        $nav->addMenuItem(new \Ease\TWB4\LinkButton('companiesetup.php', '<img width=30 src=images/company.svg> '._('Companies'), 'warning', ['class' => 'nav-link']));
+        $nav->addMenuItem(new \Ease\TWB4\LinkButton('companysetup.php', '<img width=30 src=images/company.svg> '._('Companies'), 'warning', ['class' => 'nav-link']));
     }
 
     /**

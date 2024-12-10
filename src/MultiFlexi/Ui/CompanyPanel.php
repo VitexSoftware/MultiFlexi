@@ -37,7 +37,7 @@ class CompanyPanel extends \Ease\TWB4\Panel
         $cid = $company->getMyKey();
         $headRow = new \Ease\TWB4\Row();
         $headRow->addColumn(2, new \Ease\Html\ATag('company.php?id='.$cid, [new CompanyLogo($company, ['style' => 'height: 60px']), '&nbsp;', $company->getDataValue('code')]));
-        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('companiesetup.php?id='.$cid, '🛠️&nbsp;'._('Setup'), 'light btn-lg btn-block'));
+        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('companysetup.php?id='.$cid, '🛠️&nbsp;'._('Setup'), 'light btn-lg btn-block'));
         $headRow->addColumn(2, new \Ease\TWB4\LinkButton('companyapps.php?company_id='.$cid, '📌&nbsp;'._('Applications'), 'light btn-lg btn-block'));
         $headRow->addColumn(2, new \Ease\TWB4\LinkButton('periodical.php?company_id='.$cid, '🔁&nbsp;'._('Periodical Tasks'), 'light btn-lg btn-block'));
         $headRow->addColumn(2, new \Ease\TWB4\LinkButton('wizard.php?company='.$company->getMyKey(), '🧙🏽‍♂️&nbsp'._('Launch wizard'), 'light btn-lg btn-block'));
