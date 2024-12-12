@@ -136,6 +136,7 @@ class Job extends Engine
             'launched_by' => \Ease\Shared::user()->getMyKey(),
         ]);
         $environment['MULTIFLEXI_JOB_ID']['value'] = $jobId;
+        $environment['MULTIFLEXI_JOB_ID']['source'] = 'Job';
         $this->environment = $environment;
         $this->updateToSQL(['env' => serialize($environment), 'command' => $this->getCmdline()], ['id' => $jobId]);
 
@@ -212,7 +213,7 @@ class Job extends Engine
             $this->reportToZabbix($this->zabbixMessageData);
         }
 
-        $this->updateToSQL(['id' => $this->getMyKey(), 'command' => $this->executor->commandline(), 'runtemplate_id' => $this->runTemplate->getMyKey(), 'begin' => new \Envms\FluentPDO\Literal(\Ease\Shared::cfg('DB_CONNECTION') === 'sqlite' ? "date('now')" : 'NOW()')]);
+        $this->updateToSQL(['id' => $this->getMyKey(), 'env' => serialize($this->environment), 'command' => $this->executor->commandline(), 'runtemplate_id' => $this->runTemplate->getMyKey(), 'begin' => new \Envms\FluentPDO\Literal(\Ease\Shared::cfg('DB_CONNECTION') === 'sqlite' ? "date('now')" : 'NOW()')]);
 
         return $jobId;
     }
