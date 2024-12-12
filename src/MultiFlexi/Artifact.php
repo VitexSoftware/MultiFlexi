@@ -39,12 +39,13 @@ class Artifact extends Engine
     /**
      * Create a new artifact record.
      *
+     * @param int $jobId Number of producing job
      * @param mixed $filename
      * @param mixed $contentType
      *
      * @return int Atrifacts Record ID
      */
-    public function createArtifact(int $jobId, string $artifact, $filename = '', $contentType = ''): int
+    public function createArtifact(int $jobId, string $artifact, $filename = '', $contentType = '', $note = ''): int
     {
         return $this->insertToSQL([
             'job_id' => $jobId,
@@ -52,6 +53,7 @@ class Artifact extends Engine
             'content_type' => $contentType,
             'artifact' => $artifact,
             'created_at' => date('Y-m-d H:i:s'),
+            'note' => $note
         ]);
     }
 
