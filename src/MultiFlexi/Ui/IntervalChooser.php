@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
+use MultiFlexi\RunTemplate;
+
 /**
  * Description of IntervalChooser.
  *
@@ -28,13 +30,13 @@ class IntervalChooser extends \Ease\Html\SelectTag
     public function __construct(string $name, string $defaultValue = '', array $properties = [])
     {
         parent::__construct($name, [
-            'n' => _('Disabled'),
-            'i' => _('Minutly'),
-            'h' => _('Hourly'),
-            'd' => _('Daily'),
-            'w' => _('Weekly'),
-            'm' => _('Monthly'),
-            'y' => _('Yearly'),
+            'n' => RunTemplate::getIntervalEmoji('n') .' '. _('Disabled'),
+            'i' => RunTemplate::getIntervalEmoji('i') .' '._('Minutly'),
+            'h' => RunTemplate::getIntervalEmoji('h') .' '._('Hourly'),
+            'd' => RunTemplate::getIntervalEmoji('d') .' '._('Daily'),
+            'w' => RunTemplate::getIntervalEmoji('w') .' '. _('Weekly'),
+            'm' => RunTemplate::getIntervalEmoji('m') .' '. _('Monthly'),
+            'y' => RunTemplate::getIntervalEmoji('y') .' '. _('Yearly'),
         ], $defaultValue, $properties);
     }
 }
