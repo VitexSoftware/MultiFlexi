@@ -22,11 +22,11 @@ require_once '../vendor/autoload.php';
 Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
 $loggers = ['syslog', '\MultiFlexi\LogToSQL', 'console'];
 
-if (\Ease\Shared::cfg('ZABBIX_SERVER') && \Ease\Shared::cfg('ZABBIX_HOST') && class_exists('\MultiFlexi\LogToZabbix')) {
+if (Shared::cfg('ZABBIX_SERVER') && Shared::cfg('ZABBIX_HOST') && class_exists('\MultiFlexi\LogToZabbix')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
 
-if (\Ease\Shared::cfg('APP_DEBUG') === 'true') {
+if (Shared::cfg('APP_DEBUG') === 'true') {
     $loggers[] = 'console';
 }
 
@@ -66,7 +66,7 @@ if ($probBegin) {
 
 switch ($command) {
     case 'version':
-        echo \Ease\Shared::appName().' '.\Ease\Shared::appVersion()."\n";
+        echo Shared::appName().' '.Shared::appVersion().\PHP_EOL;
 
         break;
     case 'remove':
@@ -85,6 +85,10 @@ switch ($command) {
                 break;
             case 'runtemplate':
                 $engine = new \MultiFlexi\RunTemplate((int) $identifier);
+
+                break;
+            case 'job':
+                $engine = new \MultiFlexi\Job((int) $identifier);
 
                 break;
 
@@ -131,6 +135,28 @@ switch ($command) {
 
                 $checkData = ['code' => (string) $identifier];
                 $engine = new \MultiFlexi\Company(['code' => (string) $identifier, 'name' => $property ? $property : $identifier], ['autoload' => false]);
+
+                break;
+            case 'credential_type':
+                if (empty($identifier)) {
+                    echo $argv[0].' add credential_type <name>';
+
+                    exit;
+                }
+
+                $checkData = ['name' => (string) $identifier];
+                $engine = new \MultiFlexi\CredentialType($checkData, ['autoload' => false]);
+
+                break;
+            case 'credential':
+                if (empty($identifier)) {
+                    echo $argv[0].' add credential <name> <type id> <company id> [--CONFIG_FIELD=VALUE ..]';
+
+                    exit;
+                }
+
+                $checkData = ['name' => (string) $identifier, 'type_id' => $property, 'company_id' => $option];
+                $engine = new \MultiFlexi\Credential($checkData, ['autoload' => false]);
 
                 break;
             case 'runtemplate':

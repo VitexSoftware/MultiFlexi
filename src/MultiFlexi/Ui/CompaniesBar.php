@@ -34,18 +34,15 @@ class CompaniesBar extends \Ease\Html\DivTag
             $companyAppCard->addTagClass('text-center');
 
             $companyAppCard->addItem(new \Ease\Html\DivTag(new \Ease\Html\H5Tag($companyData['name'], ['class' => 'card-title']), ['class' => 'card-body']));
-            
-            
-            
-            
+
             $companyAppStatus = new \Ease\Html\DivTag();
 
             $companyApps = (new CompanyApp($companer))->getAssigned()->leftJoin('apps ON apps.id = companyapp.app_id')->select(['apps.name', 'apps.description', 'apps.id', 'apps.uuid'], true)->fetchAll();
-            
-            foreach ($companyApps as $companyApp){
-                $companyAppStatus->addItem(new \Ease\Html\ATag('companyapp.php?company_id='.$companer->getMyKey().'&app_id='.$companyApp['id'], new \Ease\Html\ImgTag('appimage.php?uuid='.$companyApp['uuid'], _($companyApp['name']), ['title' => _($companyApp['description']),  'style' => 'padding: 5px; margin: 5px;max-height: 50px;max-width: 50px;'])));
+
+            foreach ($companyApps as $companyApp) {
+                $companyAppStatus->addItem(new \Ease\Html\ATag('companyapp.php?company_id='.$companer->getMyKey().'&app_id='.$companyApp['id'], new \Ease\Html\ImgTag('appimage.php?uuid='.$companyApp['uuid'], _($companyApp['name']), ['title' => _($companyApp['description']), 'style' => 'padding: 5px; margin: 5px;max-height: 50px;max-width: 50px;'])));
             }
-            
+
             $companyAppCard->addItem(new \Ease\Html\DivTag($companyAppStatus, ['class' => 'card-footer  bg-transparent']));
 
             $cardGroup->addItem($companyAppCard);

@@ -39,9 +39,10 @@ class Artifact extends Engine
     /**
      * Create a new artifact record.
      *
-     * @param int $jobId Number of producing job
+     * @param int   $jobId       Number of producing job
      * @param mixed $filename
      * @param mixed $contentType
+     * @param mixed $note
      *
      * @return int Atrifacts Record ID
      */
@@ -53,7 +54,7 @@ class Artifact extends Engine
             'content_type' => $contentType,
             'artifact' => $artifact,
             'created_at' => date('Y-m-d H:i:s'),
-            'note' => $note
+            'note' => $note,
         ]);
     }
 
