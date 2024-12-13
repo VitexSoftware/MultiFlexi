@@ -21,7 +21,7 @@ use MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
 /**
  * @author vitex
  */
-class RunTemplate extends \MultiFlexi\Engine
+class RunTemplate extends \MultiFlexi\DBEngine
 {
     public static array $intervalCode = [
         'y' => 'yearly',
@@ -451,5 +451,33 @@ class RunTemplate extends \MultiFlexi\Engine
         }
 
         return $credentials;
+    }
+
+    public function columns($columns = [])
+    {
+        return parent::columns([
+            ['name' => 'id', 'type' => 'text', 'label' => _('ID')],
+            ['name' => 'interv', 'type' => 'text', 'label' => _('Interval')],
+            ['name' => 'delay', 'type' => 'text', 'label' => _('Delay')],
+            ['name' => 'executor', 'type' => 'text', 'label' => _('Executor')],
+            // ['name' => 'created', 'type' => 'datetime', 'label' => _('Created')],
+            //                    ['name' => 'resolved', 'type' => 'datetime', 'label' => _('Resolved')],
+            ['name' => 'app_id', 'type' => 'selectize', 'label' => _('Application'),
+                'listingPage' => 'apps.php',
+                'detailPage' => 'app.php',
+                'idColumn' => 'apps',
+                'valueColumn' => 'apps.name',
+                'engine' => '\MultiFlexi\Application',
+                'filterby' => 'name',
+            ],
+            ['name' => 'company_id', 'type' => 'selectize', 'label' => _('Company'),
+                'listingPage' => 'companies.php',
+                'detailPage' => 'company.php',
+                'idColumn' => 'company',
+                'valueColumn' => 'company.name',
+                'engine' => '\MultiFlexi\Company',
+                'filterby' => 'name',
+            ],
+        ]);
     }
 }

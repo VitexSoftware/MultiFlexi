@@ -46,7 +46,7 @@ if ($artifacts->count()) {
     $artifactsDiv = new \Ease\Html\DivTag();
 
     foreach ($artifacts->fetchAll() as $artifactData) {
-        $artifactsDiv->addItem( new \Ease\TWB4\Panel($artifactData['filename'],'inverse', new \Ease\Html\DivTag(nl2br($artifactData['artifact']), ['style' => 'font-family: monospace; color: black']), $artifactData['note'] ) );
+        $artifactsDiv->addItem(new \Ease\TWB4\Panel($artifactData['filename'], 'inverse', new \Ease\Html\DivTag(nl2br($artifactData['artifact']), ['style' => 'font-family: monospace; color: black']), $artifactData['note']));
     }
 
     $outputTabs->addTab(_('Artifacts'), $artifactsDiv);

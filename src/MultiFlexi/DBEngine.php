@@ -67,7 +67,7 @@ class DBEngine extends \Ease\SQL\Engine
      * Data Processing Engine.
      *
      * @param int $init
-     * @param int $filter Initial conditons
+     * @param int $filter Initial conditions
      */
     public function __construct($init = null, $filter = [])
     {
@@ -117,7 +117,7 @@ class DBEngine extends \Ease\SQL\Engine
     }
 
     /**
-     * Set page where to work wiht one row detail.
+     * Set page where to work with one row detail.
      *
      * @param string $detailPage
      */

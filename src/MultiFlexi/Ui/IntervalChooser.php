@@ -30,13 +30,13 @@ class IntervalChooser extends \Ease\Html\SelectTag
     public function __construct(string $name, string $defaultValue = '', array $properties = [])
     {
         parent::__construct($name, [
-            'n' => RunTemplate::getIntervalEmoji('n') .' '. _('Disabled'),
-            'i' => RunTemplate::getIntervalEmoji('i') .' '._('Minutly'),
-            'h' => RunTemplate::getIntervalEmoji('h') .' '._('Hourly'),
-            'd' => RunTemplate::getIntervalEmoji('d') .' '._('Daily'),
-            'w' => RunTemplate::getIntervalEmoji('w') .' '. _('Weekly'),
-            'm' => RunTemplate::getIntervalEmoji('m') .' '. _('Monthly'),
-            'y' => RunTemplate::getIntervalEmoji('y') .' '. _('Yearly'),
+            'n' => RunTemplate::getIntervalEmoji('n').' '._('Disabled'),
+            'i' => RunTemplate::getIntervalEmoji('i').' '._('Minutly'),
+            'h' => RunTemplate::getIntervalEmoji('h').' '._('Hourly'),
+            'd' => RunTemplate::getIntervalEmoji('d').' '._('Daily'),
+            'w' => RunTemplate::getIntervalEmoji('w').' '._('Weekly'),
+            'm' => RunTemplate::getIntervalEmoji('m').' '._('Monthly'),
+            'y' => RunTemplate::getIntervalEmoji('y').' '._('Yearly'),
         ], $defaultValue, $properties);
     }
 }
