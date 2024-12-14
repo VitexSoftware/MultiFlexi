@@ -1,6 +1,7 @@
-#includes:
-#	- phpstan-baseline.neon
-
+# phpstan.neon
 parameters:
-	ignoreErrors:
-		- '#Variable \$oPage might not be defined\.#'
+    type_coverage:
+        return: 50
+        param: 35.5
+        property: 70
+        constant: 85

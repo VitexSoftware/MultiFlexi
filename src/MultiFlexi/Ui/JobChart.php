@@ -22,10 +22,9 @@ namespace MultiFlexi\Ui;
  */
 class JobChart extends \Ease\Html\DivTag
 {
-    protected \MultiFlexi\Job $engine;
-    private $properties;
+    protected \MultiFlexi\Engine $engine;
 
-    public function __construct(\MultiFlexi\Job $engine, $properties = [])
+    public function __construct(\MultiFlexi\Engine $engine, $properties = [])
     {
         $this->engine = $engine;
         $allJobs = $this->getJobs()->fetchAll();

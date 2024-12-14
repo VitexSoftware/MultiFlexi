@@ -105,12 +105,15 @@ foreach ($jobs as $job) {
     $jobList->addRowColumns($job);
 }
 
-$historyButton = (new LinkButton('joblist.php?app_id='.$application->getMyKey().'&amp;company_id='.$companer->getMyKey(), _('Job History').' '.new ImgTag('images/log.svg', _('Set'), ['height' => '30px']), 'info btn-sm  btn-block'));
+$historyButton = (new LinkButton('joblist.php?app_id='.$application->getMyKey().'&company_id='.$companer->getMyKey(), _('Job History').' '.new ImgTag('images/log.svg', _('Set'), ['height' => '30px']), 'info btn-sm  btn-block'));
 
 $companyAppColumns = new Row();
 $companyAppColumns->addColumn(6, $runtemplatesDiv);
 $companyAppColumns->addColumn(6, [new H3Tag(_('Last 10 jobs')), $jobList, $historyButton]);
 
-WebPage::singleton()->container->addItem(new CompanyPanel($companer, new ApplicationPanel($application, $companyAppColumns)));
+$companyAppJobChart = new CompanyAppJobsLastMonthChart((new \MultiFlexi\CompanyApp($companer))->setApp($application));
+
+WebPage::singleton()->container->addItem(new CompanyPanel($companer, new ApplicationPanel($application,$companyAppColumns,$companyAppJobChart)));
+
 WebPage::singleton()->addItem(new PageBottom());
 WebPage::singleton()->draw();
