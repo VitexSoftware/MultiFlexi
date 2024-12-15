@@ -20,9 +20,9 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class CompanyAppJobsLastMonthChart extends JobChart
+class AppLastMonthChart extends JobChart
 {
-    public function __construct(\MultiFlexi\CompanyApp $engine, $properties = [])
+    public function __construct(\MultiFlexi\Application $engine, $properties = [])
     {
         parent::__construct($engine, $properties);
     }
@@ -35,7 +35,7 @@ class CompanyAppJobsLastMonthChart extends JobChart
         $today = date('Y-m-d');
         $lastMonth = date('Y-m-d', strtotime('-30 days', strtotime($today)));
 
-        return parent::getJobs()->where('app_id', $this->engine->app->getMyKey())->where("begin BETWEEN date('".$lastMonth."') AND  date('".$today."')");
+        return parent::getJobs()->where("begin BETWEEN date('".$lastMonth."') AND  date('".$today."')")->where('app_id', $this->engine->getMyKey());
         //        return parent::getJobs()->where('begin BETWEEN (CURDATE() - INTERVAL 30 DAY) AND CURDATE()');
     }
 }
