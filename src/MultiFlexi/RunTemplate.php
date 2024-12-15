@@ -440,13 +440,17 @@ class RunTemplate extends \MultiFlexi\DBEngine
         $kredenc = new Credential();
 
         foreach ($rtplCrds->getCredentialsForRuntemplate($this->getMyKey())->select(['name', 'formType', 'credentials_id'])->leftJoin('credentials ON credentials.id = runtplcreds.credentials_id') as $crds) {
+            $kredenc->dataReset();
             $kredenc->loadFromSQL($crds['credentials_id']);
             $creds = $kredenc->getData();
             unset($creds['id'],$creds['name'], $creds['company_id'], $creds['formType']);
+            $this->addStatusMessage('Credentials: '.$crds['formType'].' "'.$crds['name'].'" '.implode(',', array_keys($creds)), 'debug');
 
             foreach ($creds as $key => $value) {
                 $credentials[$key]['value'] = $value;
-                $credentials[$key]['source'] = $crds['formType'].': '.$crds['name'];
+                $credentials[$key]['source'] = $crds['name'];
+                $credentials[$key]['credential_type'] = $crds['formType'];
+                $credentials[$key]['credential_id'] = $crds['id'];
             }
         }
 
