@@ -79,7 +79,7 @@ EOD);
         $this->addJavaScript("$('.editable').editable();", null, true);
 
         $runtemplateTabs = new \Ease\TWB4\Tabs();
-        $runtemplateTabs->addTab(_('Jobs'), [$runtemplateJobs]);
+        $runtemplateTabs->addTab(_('Jobs'), [$runtemplateJobs, new RunTemplateJobsLastMonthChart($runtemplate)]);
         $runtemplateTabs->addTab(_('Options'), [new RuntemplateConfigForm($runtemplate)]);
 
         $this->addItem($runtemplateTabs);

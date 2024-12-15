@@ -40,7 +40,7 @@ class ApplicationInfo extends Panel
         $body = new \Ease\Html\DivTag();
         $body->addItem(new AppLogo($application));
 
-        parent::__construct($this->headerRow($application), 'inverse', $body, 'footer');
+        parent::__construct($this->headerRow($application), 'inverse', $body, new AppLastMonthChart($application));
     }
 
     /**

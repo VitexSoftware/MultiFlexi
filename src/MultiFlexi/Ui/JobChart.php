@@ -22,9 +22,9 @@ namespace MultiFlexi\Ui;
  */
 class JobChart extends \Ease\Html\DivTag
 {
-    protected \MultiFlexi\Engine $engine;
+    protected \Ease\SQL\Engine $engine;
 
-    public function __construct(\MultiFlexi\Engine $engine, $properties = [])
+    public function __construct(\Ease\SQL\Engine $engine, $properties = [])
     {
         $this->engine = $engine;
         $allJobs = $this->getJobs()->fetchAll();
@@ -132,6 +132,6 @@ class JobChart extends \Ease\Html\DivTag
      */
     public function getJobs()
     {
-        return $this->engine->listingQuery()->select(['begin', 'exitcode'], true)->order('begin');
+        return $this->engine->getFluentPDO(true)->from('job')->select(['begin', 'exitcode'], true)->order('begin');
     }
 }

@@ -63,7 +63,7 @@ class JobInfo extends \Ease\Html\DivTag
         //        $scheduler = new \MultiFlexi\Scheduler();
         //        $scheduled = $scheduler->listingQuery()->where('job', $job->getMyKey())->fetch();
 
-        $jobTabs->addTab(_('Environment'), [$jobInfoRow, new EnvironmentView($job->getEnv())]);
+        $jobTabs->addTab(_('Environment'), [$jobInfoRow, new EnvironmentView($job->getEnv()), new JobDotEnv($job)]);
 
         $this->addItem($jobTabs);
     }
