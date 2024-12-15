@@ -53,8 +53,8 @@ $appPanel = new ApplicationPanel($app, $interval);
 $appPanel->headRow->addItem(new RuntemplateButton($runTemplater));
 
 $actionsRow = new \Ease\TWB4\Tabs();
-$actionsRow->addTab(_('Success Actions'), new ActionsChooser('success', $app, $succesActions), $periodcalTaskInfo['success']);
-$actionsRow->addTab(_('Fail Actions'), new ActionsChooser('fail', $app, $failActions), $periodcalTaskInfo['fail']);
+$actionsRow->addTab(_('Success Actions'), new ActionsChooser('success', $app, $succesActions), (bool)$periodcalTaskInfo['success']);
+$actionsRow->addTab(_('Fail Actions'), new ActionsChooser('fail', $app, $failActions), (bool)$periodcalTaskInfo['fail']);
 
 $appPanel->addItem($actionsRow);
 $jobtempform = new \Ease\TWB4\Form();
