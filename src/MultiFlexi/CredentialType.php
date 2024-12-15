@@ -22,10 +22,15 @@ namespace MultiFlexi;
  */
 class CredentialType extends DBEngine
 {
-    #[\Override]
     public function __construct($init = null, $filter = [])
     {
         $this->myTable = 'credential_types';
-        parent::__construct($init, $filter);
+        parent::__construct(false /* TODO $init */, $filter);
+        $formClass = '\\MultiFlexi\\Ui\\Form\\'.$init;
+
+        if (class_exists($formClass)) {
+            $this->setDataValue('logo', $formClass::$logo);
+            $this->setDataValue('name', $formClass::name());
+        }
     }
 }

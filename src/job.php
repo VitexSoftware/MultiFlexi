@@ -24,10 +24,6 @@ $jobID = WebPage::singleton()->getRequestValue('id', 'int');
 $jobber = new \MultiFlexi\Job($jobID);
 $runTemplate = new \MultiFlexi\RunTemplate($jobber->getDataValue('runtemplate_id'));
 
-if (null === $runTemplate->getMyKey()) { // TODO: Remove
-    $runTemplate->setMyKey($runTemplate->runTemplateID($jobber->getDataValue('app_id'), $jobber->getDataValue('company_id')));
-}
-
 $appInfo = $runTemplate->getAppInfo();
 $apps = new Application($appInfo['app_id']);
 $instanceName = $appInfo['app_name'];

@@ -35,11 +35,13 @@ class CompanyApp extends Engine
         $this->company = $company;
     }
 
-    public function setApp(Application $application): self {
+    public function setApp(Application $application): self
+    {
         $this->app = $application;
+
         return $this;
     }
-    
+
     public function getAssigned()
     {
         return $this->getAll()->where('company_id', $this->company->getMyKey());

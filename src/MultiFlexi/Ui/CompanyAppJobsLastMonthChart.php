@@ -22,11 +22,11 @@ namespace MultiFlexi\Ui;
  */
 class CompanyAppJobsLastMonthChart extends JobChart
 {
-    
-    public function __construct(\MultiFlexi\CompanyApp $engine, $properties = []) {
+    public function __construct(\MultiFlexi\CompanyApp $engine, $properties = [])
+    {
         parent::__construct($engine, $properties);
     }
-    
+
     /**
      * @return type
      */

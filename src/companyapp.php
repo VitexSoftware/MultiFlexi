@@ -113,7 +113,7 @@ $companyAppColumns->addColumn(6, [new H3Tag(_('Last 10 jobs')), $jobList, $histo
 
 $companyAppJobChart = new CompanyAppJobsLastMonthChart((new \MultiFlexi\CompanyApp($companer))->setApp($application));
 
-WebPage::singleton()->container->addItem(new CompanyPanel($companer, new ApplicationPanel($application,$companyAppColumns,$companyAppJobChart)));
+WebPage::singleton()->container->addItem(new CompanyPanel($companer, new ApplicationPanel($application, $companyAppColumns, $companyAppJobChart)));
 
 WebPage::singleton()->addItem(new PageBottom());
 WebPage::singleton()->draw();
