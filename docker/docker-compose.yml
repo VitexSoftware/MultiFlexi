@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    environment:
+      - DB_CONNECTION=sqlite
+      - DB_DATABASE=/opt/multiflexi/db/multiflexi.sqlite
+    volumes:
+      - ./multiflexi:/opt/multiflexi
+    depends_on:
+      - db
+
+  daemon:
+    image: multiflexi-daemon:latest
+    restart: always
+    volumes:
+      - ./multiflexi:/opt/multiflexi
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: multiflexi
+      MYSQL_USER: multiflexiuser
+      MYSQL_PASSWORD: userpassword
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
