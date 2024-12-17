@@ -1,6 +1,14 @@
 First Run Manual
 ================
 
+
+.. toctree::
+   :maxdepth: 2
+
+.. contents::
+
+
+
 This manual will guide you through the first run of the MultiFlexi application.
 
 .. image::  ../../doc/prvnispusteni.png

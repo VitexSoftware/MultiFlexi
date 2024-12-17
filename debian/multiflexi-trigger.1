@@ -1,4 +1,4 @@
-.TH MULTIFLEXI-TRIGGER 1 "October 2023" "1.0.0" "MultiFlexi Manual"
+.TH MULTIFLEXI-TRIGGER 1 "October 2024" "1.0.0" "MultiFlexi Manual"
 .SH NAME
 multiflexi-trigger \- Trigger a job in MultiFlexi
 
@@ -33,17 +33,17 @@ Enable verbose mode for more debug messages.
 .SH EXAMPLES
 .TP
 Trigger a job with a specific run template and company code:
-.B multiflexi-trigger --runtemplate template1 --company TEST
+.B multiflexi-trigger --runtemplate template1
 .TP
 Trigger a job with environment variables and a schedule:
-.B multiflexi-trigger --runtemplate template1 --company TEST --environment '{"key":"value"}' --schedule "2023-10-01 12:00:00"
+.B multiflexi-trigger --runtemplate template1 --environment '{"key":"value"}' --schedule "2023-10-01 12:00:00"
 .TP
 Run a job in the foreground:
-.B multiflexi-trigger --runtemplate template1 --company TEST --foreground
+.B multiflexi-trigger --runtemplate template1 --foreground
 
 .SH SEE ALSO
 .BR multiflexi (1),
 .BR multiflexi-scheduler (1)
 
 .SH AUTHOR
-MultiFlexi Team <support@multiflexi.com>
+MultiFlexi Team <support@multiflexi.eu>
