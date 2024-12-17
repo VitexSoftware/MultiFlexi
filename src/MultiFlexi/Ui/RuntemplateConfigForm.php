@@ -110,7 +110,7 @@ class RuntemplateConfigForm extends EngineForm
                 $fieldInfo = \array_key_exists($fieldName, $appFields) ? $appFields[$fieldName] : ['type' => 'text', 'source' => _('Custom')];
             }
 
-            $value = \array_key_exists('value', $fieldInfo) ? $fieldInfo['value'] : (\array_key_exists('defval', $fieldInfo) ? $fieldInfo['defval'] : '');
+            $value = \array_key_exists('value', $fieldInfo) ? $fieldInfo['value'] : '';
 
             if ($fieldInfo['type'] === 'checkbox') {
                 $input = new \Ease\Html\DivTag(new \Ease\TWB4\Widgets\Toggle($fieldName, $value === 'true' ? true : false, 'true', []));
