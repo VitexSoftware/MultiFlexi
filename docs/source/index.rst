@@ -49,4 +49,5 @@ Contents
    runtemplate
    apps
    executors
+   commandline
    zabbix

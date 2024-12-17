@@ -1,6 +1,9 @@
 Installation Guide
 ==================
 
+.. toctree::
+   :maxdepth: 2
+
 .. contents::
 
 This is the installation guide for MultiFlexi.

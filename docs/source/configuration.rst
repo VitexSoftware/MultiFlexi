@@ -3,6 +3,11 @@
 Configuration
 =============
 
+.. toctree::
+   :maxdepth: 2
+
+.. contents::
+
 Each application in MultiFlexi defines its own configuration fields. This is of a specific type and has additional properties.
 
 Configuration Fields
