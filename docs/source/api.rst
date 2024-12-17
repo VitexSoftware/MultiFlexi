@@ -1,6 +1,14 @@
 API
 ===
 
+
+.. toctree::
+   :maxdepth: 2
+
+.. contents::
+
+
+
 API calls are handled by the `api/index.php` file. This file is responsible for routing the request to the appropriate controller and method. The API is designed to be flexible and easy to use. It is built on top of the `MultiFlexi` class, which provides a simple interface for creating and managing API endpoints.
 
 The endpoints

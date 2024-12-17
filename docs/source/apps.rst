@@ -40,6 +40,11 @@ The ``environment`` field contains a list of environment variables required by t
 - ``defval``: Default value of the variable - you can use {VARIABLE_NAME} to reference other environment variables
 - ``required``: Whether the variable is required or not
 
+.. note::
+
+    See more about configuration fields on :ref:`configuration` page.
+
+
 The application icon is svg file stored in the same directory as json application definition. The icon must be named using the application's UUID.
 
 Special variables
