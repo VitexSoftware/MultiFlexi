@@ -35,6 +35,7 @@ class RaiffeisenBank extends \Ease\TWB4\Panel implements configForm
         $body = new \Ease\Html\DivTag();
 
         $body->addItem(new \Ease\TWB4\FormGroup('ACCOUNT_NUMBER', new \Ease\Html\InputTextTag('ACCOUNT_NUMBER'), '', _('Raiffeisen Bank Account Number')));
+        $body->addItem(new \Ease\TWB4\FormGroup('ACCOUNT_CURRENCY', new \Ease\Html\InputTextTag('ACCOUNT_CURRENCY'), '', _('Raiffeisen Bank Account Currency Code')));
         $body->addItem(new \Ease\TWB4\FormGroup('CERT_FILE', new \Ease\Html\InputTextTag('CERT_FILE'), '', _('Path to Certificate File')));
         $body->addItem(new \Ease\TWB4\FormGroup('CERT_PASS', new \Ease\Html\InputTextTag('CERT_PASS'), '', _('Password for Certificate')));
         $body->addItem(new \Ease\TWB4\FormGroup('XIBMCLIENTID', new \Ease\Html\InputTextTag('XIBMCLIENTID'), '', new ATag('https://developers.rb.cz/premium/applications', _('X-IBM-Client-Id'))));
@@ -56,6 +57,12 @@ class RaiffeisenBank extends \Ease\TWB4\Panel implements configForm
                 'description' => _('Bank Account Number'),
                 'defval' => '',
                 'required' => true,
+            ],
+            'ACCOUNT_CURRENCY' => [
+                'type' => 'text',
+                'description' => _('Bank Account Currency'),
+                'defval' => 'CZK',
+                'required' => false,
             ],
             'CERT_PASS' => [
                 'type' => 'password',
