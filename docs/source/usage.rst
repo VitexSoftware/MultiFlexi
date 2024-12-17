@@ -1,6 +1,12 @@
 Usage
 =====
 
+.. toctree::
+   :maxdepth: 2
+
+.. contents::
+
+
 .. _installation:
 
 Installation
