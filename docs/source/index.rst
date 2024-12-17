@@ -10,7 +10,7 @@ Welcome to MultiFlexi's documentation!
 **MultiFlexi** is an environment that allows you to run various tools on top of AbraFlexi and Stormware Pohoda.
 It provides a flexible and customizable platform for integrating and extending the functionality of these software systems.
 
-With MultiFlexi, you can leverage the power of AbraFlexi and Stormware Pohoda to build and automate complex business processes.
+With MultiFlexi, you can leverage the power of `AbraFlexi <https://www.abra.eu/flexi/>`_ and `Stormware Pohoda <https://www.stormware.cz/>`_ to build and automate complex business processes.
 It offers a wide range of features and capabilities, including data synchronization, workflow automation, reporting, and more.
 
 By utilizing MultiFlexi, you can streamline your business operations, improve efficiency, and enhance collaboration between different systems.
@@ -43,6 +43,7 @@ Contents
    usage
    api
    application
+   configuration
    company
    job
    runtemplate
