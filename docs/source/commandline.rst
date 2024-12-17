@@ -53,5 +53,5 @@ MultiFlexi provides several command line utilities to manage and interact with t
 
 Each utility serves a specific purpose and can be used to automate and manage various aspects of the MultiFlexi system. For detailed usage and options, refer to the respective utility's help command.
 
-.. image:: docs/source/trigger-manpage.png
+.. image:: trigger-manpage.png
     :alt: Trigger Manpage
