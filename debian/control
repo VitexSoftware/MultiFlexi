@@ -58,7 +58,7 @@ Description: Run MultiFlexi tasks in container
 
 Package: multiflexi-api
 Multi-Arch: foreign
-Depends: ${misc:Depends},multiflexi
+Depends: ${misc:Depends},multiflexi,php-vitexsoftware-multiflexi-server, php-yaml
 Architecture: all
 Description: API Server for MultiFlexi
  json/xml/yaml/html interface

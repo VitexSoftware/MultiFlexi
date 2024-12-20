@@ -57,7 +57,7 @@ class FilterDialog extends \Ease\Html\DivTag
                     $this->addJavaScript(<<<'EOD'
 
 $('#
-EOD.$columnName."sw').on('switchChange.bootstrapSwitch', function(event, state) { setFilterLabel('{$columnName}'); $('#".$columnName."sw').attr('data-type','bool').addClass( 'tablefilter' ).val( function(){ if( $( '#".$columnName.<<<EOD
+EOD.$columnName."sw').on('switchChange.bootstrapSwitch', function(event, state) { setFilterLabel('{$columnName}'); $('#".$columnName."sw').attr('data-type','bool').addClass( 'tablefilter' ).val( function(){ if($( '#".$columnName.<<<EOD
 sw' ).prop( 'checked' ) ) { return '1' } else { return '0'; } }  );  $('#{$tableId}').DataTable().draw(); });
 
 EOD);
