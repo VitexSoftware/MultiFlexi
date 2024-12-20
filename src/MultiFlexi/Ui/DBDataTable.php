@@ -132,7 +132,7 @@ EOD._('Filter').<<<'EOD'
 ',
     action: function ( e, dt, node, config ) {
         $("#gridFilter
-EOD.$gridTagID.'").appendTo( $("#'.$gridTagID.<<<'EOD'
+EOD.$gridTagID.'").appendTo($("#'.$gridTagID.<<<'EOD'
 _filter") );
         $("#gridFilter
 EOD.$gridTagID.<<<'EOD'

@@ -71,7 +71,7 @@ class DefaultApi extends AbstractDefaultApi
             $payload['satatus'] = 'error';
         }
 
-        return self::prepareResponse($response, $payload/* $suffix */);
+        return self::prepareResponse($response, $payload, '');
     }
 
     /**
@@ -86,13 +86,17 @@ class DefaultApi extends AbstractDefaultApi
      */
     public function getApiIndex(ServerRequestInterface $request, ResponseInterface $response, string $suffix): ResponseInterface
     {
+        $data[] = ['path' => 'ping'];
+        $data[] = ['path' => 'status'];
         $data[] = ['path' => 'apps'];
         $data[] = ['path' => 'companies'];
         $data[] = ['path' => 'runtemplates'];
         $data[] = ['path' => 'jobs'];
+        $data[] = ['path' => 'topics'];
         $data[] = ['path' => 'users'];
         $data[] = ['path' => 'credentials'];
         $data[] = ['path' => 'credential_types'];
+        $data[] = ['path' => 'login'];
 
         foreach ($data as $id => $row) {
             switch ($suffix) {
@@ -129,7 +133,7 @@ class DefaultApi extends AbstractDefaultApi
      *
      * @param \Psr\Http\Message\ResponseInterface $response data to return
      * @param array                               $data     to print
-     * @param string                              $suffix   reqired format
+     * @param string                              $suffix   required format
      * @param string                              $evidence data subject
      * @param mixed                               $subitem
      *
@@ -144,13 +148,13 @@ class DefaultApi extends AbstractDefaultApi
 
                 break;
             case 'yaml':
-                $response->getBody()->write(yaml_emit([$evidence => $data], \JSON_UNESCAPED_UNICODE));
+                $response->getBody()->write(\yaml_emit([$evidence => $data], \JSON_UNESCAPED_UNICODE));
                 $responseFinal = $response->withHeader('Content-type', 'text/yaml');
 
                 break;
             case 'xml':
                 foreach ($data as $id => $row) {
-                    $xmlData['__'.$id.'__'] = $row;
+                    $xmlData[is_numeric($id) ? '__'.$id.'__' : $id] = $row;
                 }
 
                 $xmlRaw = self::arrayToXml($xmlData, '<'.$evidence.'/>');
@@ -164,8 +168,9 @@ class DefaultApi extends AbstractDefaultApi
                 $response->getBody()->write(<<<'EOD'
 <head><style>
 table, th, td {
-  border: 1px solid black;
+  border: 1px solid lightgray;
   border-collapse: collapse;
+  padding: 4px;
 }
 </style></head>
 EOD);
@@ -194,28 +199,74 @@ EOD);
     /**
      * Array to XML convertor.
      *
-     * @param array $array
-     * @param type  $rootElement
-     * @param type  $xml
+     * @param type $rootElement
+     * @param type $xml
      *
      * @return bool|string
      */
-    public static function arrayToXml($array, $rootElement = null, $xml = null)
+    public static function arrayToXml(array $array, string $rootElement = '', ?\SimpleXMLElement $xml = null)
     {
         $_xml = $xml;
 
         if ($_xml === null) {
-            $_xml = new \SimpleXMLElement($rootElement !== null ? $rootElement : '<root/>');
+            $_xml = new \SimpleXMLElement($rootElement ?: '<root/>');
         }
 
         foreach ($array as $k => $v) {
             if (\is_array($v)) {
                 self::arrayToXml($v, $k, $_xml->addChild($k));
             } else {
-                $_xml->addChild($k, (string) $v);
+                $_xml->addChild((string) $k, (string) $v);
             }
         }
 
         return $_xml->asXML();
+    }
+
+    public function statusSuffixGet(ServerRequestInterface $request, ResponseInterface $response, string $suffix): ResponseInterface
+    {
+        $engine = new \MultiFlexi\Engine();
+        $status = [];
+        $pdo = $engine->getPdo();
+        $database = $pdo->getAttribute(\PDO::ATTR_DRIVER_NAME).' '.
+                    $pdo->getAttribute(\PDO::ATTR_CONNECTION_STATUS).' '.
+                    $pdo->getAttribute(\PDO::ATTR_SERVER_INFO). ' '.
+                    $pdo->getAttribute(\PDO::ATTR_SERVER_VERSION);
+
+        if ($suffix === 'html') {
+            $status = [
+                'status' =>
+                ['status', 'ok?'],
+                ['version', \Ease\Shared::appVersion()],
+                ['php', \PHP_VERSION],
+                ['os', \PHP_OS],
+                ['memory', memory_get_usage()],
+                ['companies', $engine->getFluentPDO()->from('company')->count()],
+                ['apps', $engine->getFluentPDO()->from('apps')->count()],
+                ['runtemplates', $engine->getFluentPDO()->from('runtemplate')->count()],
+                ['topics', $engine->getFluentPDO()->from('topic')->count()],
+                ['credentials', $engine->getFluentPDO()->from('credentials')->count()],
+                ['credential_types', $engine->getFluentPDO()->from('credential_type')->count()],
+                ['database', $database],
+                ['daemon', \MultiFlexi\Runner::isServiceActive('multiflexi.service') ? 'running' : 'stopped'],
+                ['timestamp', date('c')],
+            ];
+        } else {
+            $status['version'] = \Ease\Shared::appVersion();
+            $status['php'] = \PHP_VERSION;
+            $status['os'] = \PHP_OS;
+            $status['memory'] = memory_get_usage();
+            $status['companies'] = $engine->getFluentPDO()->from('company')->count();
+            $status['apps'] = $engine->getFluentPDO()->from('apps')->count();
+            $status['runtemplates'] = $engine->getFluentPDO()->from('runtemplate')->count();
+            $status['topics'] = $engine->getFluentPDO()->from('topic')->count();
+            $status['credentials'] = $engine->getFluentPDO()->from('credentials')->count();
+            $status['credential_types'] = $engine->getFluentPDO()->from('credential_type')->count();
+            $status['database'] = $database;
+            $status['daemon'] = \MultiFlexi\Runner::isServiceActive('multiflexi.service') ? 'running' : 'stopped';
+            $status['timestamp'] = date('c');
+        }
+
+        return self::prepareResponse($response, $status, $suffix, 'status');
     }
 }
