@@ -12,5 +12,18 @@ if [ "$1" = "configure" ] ; then
 #    jq '.repositories += [{"type":"path","url":"./OpenAPI/server/"}'] /usr/lib/multiflexi/composer.json.tmp2 > /usr/lib/multiflexi/composer.json.tmp3
 
 
+    # Add repository to the repositories section
+    jq '.repositories += [{
+        "type": "path",
+        "url": "/usr/share/php/MultiFlexiApi/"
+    }]' /usr/lib/multiflexi/composer.json > /usr/lib/multiflexi/composer.json.tmp
+    mv /usr/lib/multiflexi/composer.json.tmp /usr/lib/multiflexi/composer.json
+
+    # Add require deb/multiflexi-api in any version
+    jq '.require += {
+        "deb/multiflexi-api": "*"
+    }' /usr/lib/multiflexi/composer.json > /usr/lib/multiflexi/composer.json.tmp
+    mv /usr/lib/multiflexi/composer.json.tmp /usr/lib/multiflexi/composer.json
+
     composer-debian multiflexi
 fi
