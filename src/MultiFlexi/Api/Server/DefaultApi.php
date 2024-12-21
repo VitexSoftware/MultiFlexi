@@ -92,6 +92,7 @@ class DefaultApi extends AbstractDefaultApi
         $data[] = ['path' => 'companies'];
         $data[] = ['path' => 'runtemplates'];
         $data[] = ['path' => 'jobs'];
+        $data[] = ['path' => 'jobs/status'];
         $data[] = ['path' => 'topics'];
         $data[] = ['path' => 'users'];
         $data[] = ['path' => 'credentials'];
@@ -268,5 +269,55 @@ EOD);
         }
 
         return self::prepareResponse($response, $status, $suffix, 'status');
+    }
+
+    public function getJobsStatus(ServerRequestInterface $request, ResponseInterface $response, string $suffix): ResponseInterface
+    {
+        $engine = new \MultiFlexi\Engine();
+        $pdo = $engine->getPdo();
+
+        // Query to get job status information
+        $query = "
+            SELECT
+                COUNT(*) AS total_jobs,
+                SUM(CASE WHEN exitcode = 0 THEN 1 ELSE 0 END) AS successful_jobs,
+                SUM(CASE WHEN exitcode != 0 THEN 1 ELSE 0 END) AS failed_jobs,
+                SUM(CASE WHEN exitcode IS NULL THEN 1 ELSE 0 END) AS incomplete_jobs,
+                COUNT(DISTINCT app_id) AS total_applications,
+                SUM(CASE WHEN schedule IS NOT NULL THEN 1 ELSE 0 END) AS repeated_jobs
+            FROM job
+        ";
+
+        $stmt = $pdo->query($query);
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if($suffix == 'html') {
+            $status = [
+                 
+                    ['status' , 'ok?'],
+                    ['timestamp', date('c')],
+                    ['successful_jobs', (int) $result['successful_jobs']],
+                    ['failed_jobs', (int) $result['failed_jobs']],
+                    ['incomplete_jobs', (int) $result['incomplete_jobs']],
+                    ['total_applications', (int) $result['total_applications']],
+                    ['repeated_jobs', (int) $result['repeated_jobs']],
+                    ['total_jobs', (int) $result['total_jobs']]
+                
+            ];
+        } else {
+            $status = [
+                'timestamp' => date('c'),
+                'successful_jobs' => (int) $result['successful_jobs'],
+                'failed_jobs' => (int) $result['failed_jobs'],
+                'incomplete_jobs' => (int) $result['incomplete_jobs'],
+                'total_applications' => (int) $result['total_applications'],
+                'repeated_jobs' => (int) $result['repeated_jobs'],
+                'total_jobs' => (int) $result['total_jobs']
+            ];
+
+        }
+
+
+        return self::prepareResponse($response, $status, $suffix, 'jobsStatus');
     }
 }
