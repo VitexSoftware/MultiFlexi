@@ -26,4 +26,9 @@ if [ "$1" = "configure" ] ; then
     mv /usr/lib/multiflexi/composer.json.tmp /usr/lib/multiflexi/composer.json
 
     composer-debian multiflexi
+
+    # Use sed to add the include statement before $builder = new ContainerBuilder();
+    sed -i "/\$builder = new ContainerBuilder();/i require_once '\/usr\/share\/php\/Symfony\/Component\/DependencyInjection\/autoload.php';" /usr/share/multiflexi/api/index.php
+
+
 fi
