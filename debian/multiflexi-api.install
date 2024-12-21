@@ -2,3 +2,4 @@ src/MultiFlexi/Api/Auth/*.php     usr/lib/multiflexi/MultiFlexi/Api/Auth
 src/MultiFlexi/Api/Server/*.php     usr/lib/multiflexi/MultiFlexi/Api/Server
 src/api/config.php           usr/share/multiflexi/api
 src/api/index.php            usr/share/multiflexi/api
+src/api/.htaccess            usr/share/multiflexi/api

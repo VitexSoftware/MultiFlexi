@@ -1,8 +1,14 @@
-multiflexi (1.22.0) UNRELEASED; urgency=medium
+multiflexi (1.22.1) UNRELEASED; urgency=medium
+
+  * diagnostic endpoints /status & /jobs/status added to API
+
+ -- vitex <info@vitexsoftware.cz>  Sat, 21 Dec 2024 12:11:21 +0100
+
+multiflexi (1.22.0) jammy; urgency=medium
 
   * Artifacts Keeping
 
- -- vitex <info@vitexsoftware.cz>  Mon, 09 Dec 2024 23:08:36 +0100
+ -- vitex <info@vitexsoftware.cz>  Sat, 21 Dec 2024 12:10:45 +0100
 
 multiflexi (1.21.1) jammy; urgency=medium
 
