@@ -293,7 +293,7 @@ EOD);
 
         if($suffix == 'html') {
             $status = [
-                 
+
                     ['status' , 'ok?'],
                     ['timestamp', date('c')],
                     ['successful_jobs', (int) $result['successful_jobs']],
