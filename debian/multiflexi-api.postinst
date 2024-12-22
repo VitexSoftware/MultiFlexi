@@ -21,14 +21,13 @@ if [ "$1" = "configure" ] ; then
 
     # Add require deb/multiflexi-api in any version
     jq '.require += {
-        "deb/multiflexi-api": "*"
+        "deb/multiflexi-api": "*",
+        "php-di/slim-bridge": "^3.4",
+        "slim/psr7": "^1.5",
+        "dyorg/slim-token-authentication": "dev-slim4",
+        "tuupola/slim-basic-auth": "^3.0"
     }' /usr/lib/multiflexi/composer.json > /usr/lib/multiflexi/composer.json.tmp
     mv /usr/lib/multiflexi/composer.json.tmp /usr/lib/multiflexi/composer.json
 
     composer-debian multiflexi
-
-    # Use sed to add the include statement before $builder = new ContainerBuilder();
-    sed -i "/\$builder = new ContainerBuilder();/i require_once '\/usr\/share\/php\/Symfony\/Component\/DependencyInjection\/autoload.php';" /usr/share/multiflexi/api/index.php
-
-
 fi
