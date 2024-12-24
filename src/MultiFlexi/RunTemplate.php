@@ -484,4 +484,24 @@ class RunTemplate extends \MultiFlexi\DBEngine
             ],
         ]);
     }
+
+    /**
+     * export .env file content.
+     */
+    public function envFile(): string
+    {
+        $launcher[] = '# runtemplate #'.$this->getMyKey().' environment '. $this->getRecordName();
+        $launcher[] = '# '.\Ease\Shared::appName().' v'.\Ease\Shared::AppVersion().' Generated '.(new \DateTime())->format('Y-m-d H:i:s').' for company: '.$this->getCompany()->getDataValue('name');
+        $launcher[] = '';
+
+        $environment = array_merge($this->getDataValue('env') ? unserialize($this->getDataValue('env')) : [], $this->credentialsEnvironment());
+
+        asort($environment);
+
+        foreach ($environment as $key => $envInfo) {
+            $launcher[] = $key."='".$envInfo['value']."'";
+        }
+
+        return implode("\n", $launcher);
+    }
 }
