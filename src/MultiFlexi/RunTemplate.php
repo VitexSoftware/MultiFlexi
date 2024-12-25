@@ -490,7 +490,7 @@ class RunTemplate extends \MultiFlexi\DBEngine
      */
     public function envFile(): string
     {
-        $launcher[] = '# runtemplate #'.$this->getMyKey().' environment '. $this->getRecordName();
+        $launcher[] = '# runtemplate #'.$this->getMyKey().' environment '.$this->getRecordName();
         $launcher[] = '# '.\Ease\Shared::appName().' v'.\Ease\Shared::AppVersion().' Generated '.(new \DateTime())->format('Y-m-d H:i:s').' for company: '.$this->getCompany()->getDataValue('name');
         $launcher[] = '';
 

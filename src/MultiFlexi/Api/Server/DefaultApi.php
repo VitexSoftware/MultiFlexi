@@ -231,13 +231,12 @@ EOD);
         $pdo = $engine->getPdo();
         $database = $pdo->getAttribute(\PDO::ATTR_DRIVER_NAME).' '.
                     $pdo->getAttribute(\PDO::ATTR_CONNECTION_STATUS).' '.
-                    $pdo->getAttribute(\PDO::ATTR_SERVER_INFO). ' '.
+                    $pdo->getAttribute(\PDO::ATTR_SERVER_INFO).' '.
                     $pdo->getAttribute(\PDO::ATTR_SERVER_VERSION);
 
         if ($suffix === 'html') {
             $status = [
-                'status' =>
-                ['status', 'ok?'],
+                'status' => ['status', 'ok?'],
                 ['version', \Ease\Shared::appVersion()],
                 ['php', \PHP_VERSION],
                 ['os', \PHP_OS],
@@ -277,7 +276,8 @@ EOD);
         $pdo = $engine->getPdo();
 
         // Query to get job status information
-        $query = "
+        $query = <<<'EOD'
+
             SELECT
                 COUNT(*) AS total_jobs,
                 SUM(CASE WHEN exitcode = 0 THEN 1 ELSE 0 END) AS successful_jobs,
@@ -286,23 +286,22 @@ EOD);
                 COUNT(DISTINCT app_id) AS total_applications,
                 SUM(CASE WHEN schedule IS NOT NULL THEN 1 ELSE 0 END) AS repeated_jobs
             FROM job
-        ";
+
+EOD;
 
         $stmt = $pdo->query($query);
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-        if($suffix == 'html') {
+        if ($suffix === 'html') {
             $status = [
-
-                    ['status' , 'ok?'],
-                    ['timestamp', date('c')],
-                    ['successful_jobs', (int) $result['successful_jobs']],
-                    ['failed_jobs', (int) $result['failed_jobs']],
-                    ['incomplete_jobs', (int) $result['incomplete_jobs']],
-                    ['total_applications', (int) $result['total_applications']],
-                    ['repeated_jobs', (int) $result['repeated_jobs']],
-                    ['total_jobs', (int) $result['total_jobs']]
-                
+                ['status', 'ok?'],
+                ['timestamp', date('c')],
+                ['successful_jobs', (int) $result['successful_jobs']],
+                ['failed_jobs', (int) $result['failed_jobs']],
+                ['incomplete_jobs', (int) $result['incomplete_jobs']],
+                ['total_applications', (int) $result['total_applications']],
+                ['repeated_jobs', (int) $result['repeated_jobs']],
+                ['total_jobs', (int) $result['total_jobs']],
             ];
         } else {
             $status = [
@@ -312,11 +311,9 @@ EOD);
                 'incomplete_jobs' => (int) $result['incomplete_jobs'],
                 'total_applications' => (int) $result['total_applications'],
                 'repeated_jobs' => (int) $result['repeated_jobs'],
-                'total_jobs' => (int) $result['total_jobs']
+                'total_jobs' => (int) $result['total_jobs'],
             ];
-
         }
-
 
         return self::prepareResponse($response, $status, $suffix, 'jobsStatus');
     }

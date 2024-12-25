@@ -1,8 +1,14 @@
-multiflexi (1.22.1) UNRELEASED; urgency=medium
+multiflexi (1.23.0) UNRELEASED; urgency=medium
+
+  * file_store table added
+
+ -- vitex <info@vitexsoftware.cz>  Tue, 24 Dec 2024 23:36:59 +0100
+
+multiflexi (1.22.1) jammy; urgency=medium
 
   * diagnostic endpoints /status & /jobs/status added to API
 
- -- vitex <info@vitexsoftware.cz>  Sat, 21 Dec 2024 12:11:21 +0100
+ -- vitex <info@vitexsoftware.cz>  Tue, 24 Dec 2024 23:36:55 +0100
 
 multiflexi (1.22.0) jammy; urgency=medium
 

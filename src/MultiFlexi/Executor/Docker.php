@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace MultiFlexi\Executor;
 
 /**
- * Description of Podman.
+ * Description of Docker.
  *
  * @author vitex
  */

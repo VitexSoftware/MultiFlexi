@@ -61,6 +61,10 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
 
     public function launch($command)
     {
+        $jobFiles = (new \MultiFlexi\FileStore())->extractFilesForJob($this->job);
+
+        $this->environment = array_merge($this->environment, $jobFiles);
+
         $this->process = new \Symfony\Component\Process\Process(explode(' ', $command), null, \MultiFlexi\Environmentor::flatEnv($this->environment), null, $this->timeout);
 
         try {
@@ -88,6 +92,10 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
         }
 
         $this->addStatusMessage('pid:'.(isset($this->pid) ? (string) ($this->pid) : 'n/a').' '.$command.': '.$this->process->getExitCodeText(), $this->process->getExitCode() === 0 ? 'success' : 'warning');
+
+        foreach ($jobFiles as $field => $file) {
+            unlink($file['value']);
+        }
 
         return $this->process->getExitCode();
     }

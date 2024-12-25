@@ -39,12 +39,13 @@ if (null === $runTemplate->getMyKey()) {
          * Save all uploaded files into temporary directory and prepare job environment.
          */
         if (!empty($_FILES)) {
+            $fileStore = new \MultiFlexi\FileStore();
+
             foreach ($_FILES as $field => $file) {
                 if ($file['error'] === 0) {
-                    $tmpName = tempnam(sys_get_temp_dir(), 'multiflexi_').'_'.basename($file['name']);
-
-                    if (move_uploaded_file($file['tmp_name'], $tmpName)) {
-                        $uploadEnv[$field]['value'] = $tmpName;
+                    if (is_uploaded_file($file['tmp_name'])) {
+                        $uploadEnv[$field]['value'] = $file['name'];
+                        $uploadEnv[$field]['upload'] = $file['tmp_name'];
                         $uploadEnv[$field]['type'] = 'file';
                         $uploadEnv[$field]['source'] = 'Upload';
                     }
@@ -53,6 +54,13 @@ if (null === $runTemplate->getMyKey()) {
         }
 
         $prepared = $jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, new \DateTime($when), \Ease\WebPage::getRequestValue('executor'), 'adhoc');
+
+        if ($uploadEnv) {
+            foreach ($uploadEnv as $field => $file) {
+                $fileStore->storeFileForJob($field, $file['upload'], $file['value'], $jobber->getMyKey());
+            }
+        }
+
         $jobber->scheduleJobRun(new \DateTime($when));
 
         $glassHourRow = new \Ease\TWB4\Row();
