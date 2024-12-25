@@ -30,11 +30,15 @@ final class RuntemplateTopics extends AbstractMigration
      */
     public function change(): void
     {
+        // Check if the database is MySQL
+        $databaseType = $this->getAdapter()->getOption('adapter');
+        $unsigned = ($databaseType === 'mysql') ? ['signed' => false] : [];
+
         $table = $this->table('runtemplate_topics');
-        $table->addColumn('runtemplate_id', 'integer')
-            ->addColumn('topic_id', 'integer')
-            ->addForeignKey('runtemplate_id', 'runtemplate', ['id'], ['constraint' => 'r2c_runtemplate_must_exist'])
-            ->addForeignKey('topic_id', 'topic', ['id'], ['constraint' => 'r2t_topic_must_exist'])
+        $table->addColumn('runtemplate_id', 'integer', array_merge(['null' => false], $unsigned))
+            ->addColumn('topic_id', 'integer', array_merge(['null' => false], $unsigned))
+            ->addForeignKey('runtemplate_id', 'runtemplate', ['id'], ['constraint' => 'r2c_runtemplate_must_exist', 'delete' => 'CASCADE', 'update' => 'NO_ACTION'])
+            ->addForeignKey('topic_id', 'topic', ['id'], ['constraint' => 'r2t_topic_must_exist', 'delete' => 'CASCADE', 'update' => 'NO_ACTION'])
             ->addIndex(['runtemplate_id', 'topic_id'], ['unique' => true])
             ->create();
     }
