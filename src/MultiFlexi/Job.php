@@ -763,4 +763,8 @@ EOD;
         $this->setDataValue('pid', $pid);
         $this->setZabbixValue('pid', $pid);
     }
+
+    public function setEnvironment(array $environment) {
+        $this->environment = $environment;
+    }
 }
