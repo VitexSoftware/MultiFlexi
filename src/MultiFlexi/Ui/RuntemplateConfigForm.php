@@ -26,7 +26,8 @@ class RuntemplateConfigForm extends EngineForm
 
     public function __construct(\MultiFlexi\RunTemplate $engine)
     {
-        parent::__construct($engine, null, ['method' => 'post', 'action' => 'runtemplate.php']);
+        parent::__construct($engine, null, ['method' => 'post', 'action' => 'runtemplate.php', 'enctype' => 'multipart/form-data']);
+
         $defaults = $engine->getAppEnvironment();
         $appRequirements = $engine->getApplication()->getRequirements();
         $customized = $engine->getRuntemplateEnvironment();
