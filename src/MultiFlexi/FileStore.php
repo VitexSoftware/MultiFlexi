@@ -72,9 +72,9 @@ class FileStore extends Engine
     /**
      * Store a file related to a runtemplate.
      */
-    public function storeFileForRuntemplate(string $field, string $filePath, string $fileName, int $runtemplateId): bool
+    public function storeFileForRuntemplate(string $field, string $filePath, string $fileName, RunTemplate $runtemplate): bool
     {
-        return $this->loadAndStoreFile($field, $filePath, $fileName, $runtemplateId, null);
+        return $this->loadAndStoreFile($field, $filePath, $fileName, $runtemplate->getMyKey(), null);
     }
 
     /**

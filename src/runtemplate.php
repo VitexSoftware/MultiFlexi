@@ -73,6 +73,30 @@ if (WebPage::singleton()->isPosted()) {
 
     $app->checkRequiredFields($dataToSave, true);
 
+    /**
+     * Save all uploaded files into temporary directory and prepare job environment.
+     */
+    if (!empty($_FILES)) {
+        $fileStore = new \MultiFlexi\FileStore();
+
+        foreach ($_FILES as $field => $file) {
+            if ($file['error'] === 0) {
+                if (is_uploaded_file($file['tmp_name'])) {
+                    $uploadEnv[$field]['value'] = $file['name'];
+                    $uploadEnv[$field]['upload'] = $file['tmp_name'];
+                    $uploadEnv[$field]['type'] = 'file';
+                    $uploadEnv[$field]['source'] = 'Upload';
+                }
+            }
+        }
+
+        if ($uploadEnv) {
+            foreach ($uploadEnv as $field => $file) {
+                $fileStore->storeFileForRuntemplate($field, $file['upload'], $file['value'], $runTemplate);
+            }
+        }
+    }
+
     if ($configurator->takeData($dataToSave) && null !== $configurator->saveToSQL()) {
         $configurator->addStatusMessage(_('Config fields Saved'), 'success');
     } else {
