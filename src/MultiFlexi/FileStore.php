@@ -58,7 +58,7 @@ class FileStore extends Engine
         // Check if a record with the same filename and job_id exists
         $existingRecord = $this->getColumnsFromSQL(['id'], ['field' => $field, 'job_id' => $jobId]);
 
-        if ($existingRecord) {
+        if ($existingRecord && \array_key_exists('id', $existingRecord)) {
             // Update the existing record
             $result = $this->updateToSQL($data, ['id' => $existingRecord['id']]);
         } else {
