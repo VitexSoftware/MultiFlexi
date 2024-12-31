@@ -19,8 +19,11 @@ class ConfigRegistry extends AbstractMigration
 {
     public function change(): void
     {
+        $databaseType = $this->getAdapter()->getOption('adapter');
+        $unsigned = ($databaseType === 'mysql') ? ['signed' => false] : [];
+
         $customFields = $this->table('conffield');
-        $customFields->addColumn('app_id', 'integer', ['null' => false])
+        $customFields->addColumn('app_id', 'integer', array_merge(['null' => false], $unsigned))
             ->addColumn('keyname', 'string', ['length' => 64])
             ->addColumn('type', 'string', ['length' => 32])
             ->addColumn('description', 'string', ['length' => 1024])
@@ -29,11 +32,11 @@ class ConfigRegistry extends AbstractMigration
         $customFields->create();
 
         $configs = $this->table('configuration');
-        $configs->addColumn('app_id', 'integer', ['null' => false])
-            ->addColumn('company_id', 'integer', ['null' => false])
+        $configs->addColumn('app_id', 'integer', array_merge(['null' => false], $unsigned))
+            ->addColumn('company_id', 'integer', array_merge(['null' => false], $unsigned))
             ->addColumn('key', 'string', ['length' => 64])
             ->addColumn('value', 'string', ['length' => 1024])
-            ->addColumn('runtemplate_id', 'integer', ['null' => false])
+            ->addColumn('runtemplate_id', 'integer', array_merge(['null' => false], $unsigned))
             ->addIndex(['app_id', 'company_id'])
             ->addIndex(['runtemplate_id', 'key'], ['unique' => true])
             ->addForeignKey('app_id', 'apps', ['id'], ['constraint' => 'cfg-app_must_exist', 'delete' => 'CASCADE'])

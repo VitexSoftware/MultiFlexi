@@ -30,12 +30,17 @@ final class CompanyEnv extends AbstractMigration
      */
     public function change(): void
     {
+        // Check if the database is MySQL
+        $databaseType = $this->getAdapter()->getOption('adapter');
+        $unsigned = ($databaseType === 'mysql') ? ['signed' => false] : [];
+
+        // Create the companyenv table
         $table = $this->table('companyenv');
         $table->addColumn('keyword', 'string', ['null' => false])
             ->addColumn('value', 'string', ['null' => false])
-            ->addColumn('company_id', 'integer', ['null' => false])
+            ->addColumn('company_id', 'integer', array_merge(['null' => false], $unsigned))
             ->addIndex(['keyword', 'company_id'], ['unique' => true])
             ->addForeignKey('company_id', 'company', ['id'], ['constraint' => 'env-company_must_exist']);
-        $table->save();
+        $table->create();
     }
 }
