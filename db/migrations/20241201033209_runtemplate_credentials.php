@@ -13,6 +13,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use Phinx\Db\Adapter\MysqlAdapter;
 use Phinx\Migration\AbstractMigration;
 
 final class RuntemplateCredentials extends AbstractMigration
@@ -30,10 +31,15 @@ final class RuntemplateCredentials extends AbstractMigration
      */
     public function change(): void
     {
+        // Check if the database is MySQL
+        $databaseType = $this->getAdapter()->getOption('adapter');
+        $unsigned = ($databaseType === 'mysql') ? ['signed' => false] : [];
+
+        // Create the runtplcreds table
         $runtemplates = $this->table('runtplcreds');
         $runtemplates
-            ->addColumn('runtemplate_id', 'integer', ['null' => false])
-            ->addColumn('credentials_id', 'integer', ['null' => false])
+            ->addColumn('runtemplate_id', 'integer', array_merge(['null' => false], $unsigned))
+            ->addColumn('credentials_id', 'integer', array_merge(['null' => false], $unsigned))
             ->addForeignKey('runtemplate_id', 'runtemplate', ['id'], ['constraint' => 'r2c_runtemplate_must_exist'])
             ->addForeignKey('credentials_id', 'credentials', ['id'], ['constraint' => 'r2c_credential_must_exist'])
             ->addIndex(['runtemplate_id', 'credentials_id'], ['unique' => true])

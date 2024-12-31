@@ -19,9 +19,12 @@ class AppToCompany extends AbstractMigration
 {
     public function change(): void
     {
+        $databaseType = $this->getAdapter()->getOption('adapter');
+        $unsigned = ($databaseType === 'mysql') ? ['signed' => false] : [];
+
         $table = $this->table('appcompany');
-        $table->addColumn('app_id', 'integer', ['null' => false])
-            ->addColumn('company_id', 'integer', ['null' => false])
+        $table->addColumn('app_id', 'integer', array_merge(['null' => false], $unsigned))
+            ->addColumn('company_id', 'integer', array_merge(['null' => false], $unsigned))
             ->addColumn('interval', 'string', ['length' => 1])
             ->addIndex(['app_id', 'company_id'])
             ->addForeignKey('app_id', 'apps', ['id'], ['constraint' => 'a2p_app_must_exist'])

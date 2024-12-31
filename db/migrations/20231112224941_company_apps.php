@@ -30,12 +30,17 @@ final class CompanyApps extends AbstractMigration
      */
     public function change(): void
     {
-        $table = $this->table('companyapp');
-        $table->addColumn('app_id', 'integer', ['null' => false])
-            ->addColumn('company_id', 'integer', ['null' => false])
-            ->addIndex(['app_id', 'company_id'], ['unique' => true])
-            ->addForeignKey('app_id', 'apps', ['id'], ['constraint' => 'a2c-app_must_exist'])
-            ->addForeignKey('company_id', 'company', ['id'], ['constraint' => 'a2c-company_must_exist']);
-        $table->save();
+        // Check if the database is MySQL
+        $databaseType = $this->getAdapter()->getOption('adapter');
+        $unsigned = ($databaseType === 'mysql') ? ['signed' => false] : [];
+
+        // Create the company_apps table
+        $table = $this->table('company_apps');
+        $table->addColumn('company_id', 'integer', array_merge(['null' => false], $unsigned))
+            ->addColumn('app_id', 'integer', array_merge(['null' => false], $unsigned))
+            ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
+            ->addForeignKey('company_id', 'company', ['id'], ['constraint' => 'company_apps_company_must_exist'])
+            ->addForeignKey('app_id', 'apps', ['id'], ['constraint' => 'company_apps_app_must_exist']);
+        $table->create();
     }
 }

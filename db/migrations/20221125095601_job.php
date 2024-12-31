@@ -30,24 +30,19 @@ final class Job extends AbstractMigration
      */
     public function change(): void
     {
+        // Check if the database is MySQL
+        $databaseType = $this->getAdapter()->getOption('adapter');
+        $unsigned = ($databaseType === 'mysql') ? ['signed' => false] : [];
+
+        // Create the job table
         $table = $this->table('job');
-        $table->addColumn('app_id', 'integer', ['null' => false])
+        $table->addColumn('app_id', 'integer', array_merge(['null' => false], $unsigned))
             ->addColumn('begin', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('end', 'datetime', ['null' => true])
-            ->addColumn('company_id', 'integer', ['null' => false])
-            ->addColumn('exitcode', 'integer', ['null' => true])
-            ->addForeignKey(
-                'app_id',
-                'apps',
-                ['id'],
-                ['constraint' => 'job-app_must_exist'],
-            )
-            ->addForeignKey(
-                'company_id',
-                'company',
-                ['id'],
-                ['constraint' => 'job-company_must_exist'],
-            );
-        $table->save();
+            ->addColumn('company_id', 'integer', array_merge(['null' => false], $unsigned))
+            ->addColumn('exitcode', 'integer', array_merge(['null' => true], $unsigned))
+            ->addForeignKey('app_id', 'apps', ['id'], ['constraint' => 'job_app_must_exist'])
+            ->addForeignKey('company_id', 'company', ['id'], ['constraint' => 'job_company_must_exist']);
+        $table->create();
     }
 }
