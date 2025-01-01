@@ -1,3 +1,5 @@
+.. header:: MultiFlexi documentation
+
 Installation Guide
 ==================
 
@@ -31,7 +33,7 @@ To install MultiFlexi using Debian packages, you can follow these steps:
 
     On fresh Ubuntu 22.04 (with database already installed), the installation command will look like this::
 
-::
+.. parsed-literal::
     nymph@jammy:~$ sudo apt install multiflexi-mysql
     Reading package lists... Done
     Building dependency tree... Done
@@ -82,7 +84,7 @@ To install MultiFlexi using Debian packages, you can follow these steps:
     :align: center
 
 .. tip::
-    Finally the configuration file is located at /etc/multiflexi/multiflexi.env
+    Finally the configuration file is saved as /etc/multiflexi/multiflexi.env
 
 5. Check for available applications::
 
@@ -91,3 +93,5 @@ To install MultiFlexi using Debian packages, you can follow these steps:
 6. To install all available applications, use the `multiflexi-all` meta package. For more details, visit the `multiflexi-all GitHub repository <https://github.com/VitexSoftware/multiflexi-all/>`_.
 
 For more information on how to perform the initial setup, please refer to the :doc:`firstrun` page.
+
+.. footer:: © 2022-2025 VitexSoftware
