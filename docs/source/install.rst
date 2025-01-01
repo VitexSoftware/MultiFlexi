@@ -82,9 +82,9 @@ Do you want to continue? [Y/n]
     :alt: Ubuntu 22.04 DB Config
     :align: center
 
-    .. image:: ubuntu22dbpassword.png
-        :alt: Ubuntu 22.04 DB Password
-        :align: center
+.. image:: ubuntu22dbpassword.png
+    :alt: Ubuntu 22.04 DB Password
+    :align: center
 
 5. Check for available applications by running the following command:
 
