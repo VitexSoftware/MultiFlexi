@@ -1,12 +1,10 @@
 Installation Guide
 ==================
 
-.. toctree::
-   :maxdepth: 2
+MultiFlexi is Only empty shell without of applications that can be installed on a server. The applications are available as Debian packages and can be installed on Debian-based systems like Ubuntu.
 
-.. contents::
-
-This is the installation guide for MultiFlexi.
+.. note::
+    The MultiFlexi packages are available for Debian 11 (Bullseye), Debian 12 (Bookworm), Debian 13 (Trixie) and 22.04 (Jammy Jellyfish), Ubuntu 24.04 (Noble Numbat)
 
 To install MultiFlexi using Debian packages, you can follow these steps:
 
@@ -89,11 +87,17 @@ To install MultiFlexi using Debian packages, you can follow these steps:
     Finally the configuration file is saved as /etc/multiflexi/multiflexi.env
 
 5. Check for available applications::
-
+    The available applications can be checked by running the following command in a terminal::
     apt search multiflexi
+
+.. image:: apps-availble.png
+    :alt: MultiFlexi Apt Search
+    :align: center
+
+For more details about available applications, visit the `MultiFlexi apps page <https://www.multiflexi.eu/apps.php>`_.
+
 
 .. tip::
     To install all available applications, use the `multiflexi-all` meta package. For more details, visit the `multiflexi-all <https://github.com/VitexSoftware/multiflexi-all/>`_ GitHub repository.
 
 For more information on how to perform the initial setup, please refer to the :doc:`firstrun` page.
-
