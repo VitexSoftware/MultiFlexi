@@ -19,5 +19,13 @@ if [ "$1" = "configure" ] ; then
     }' /usr/lib/multiflexi/composer.json > /usr/lib/multiflexi/composer.json.tmp
     mv /usr/lib/multiflexi/composer.json.tmp /usr/lib/multiflexi/composer.json
 
+    # Provide ybelenko/slim-token-authentication with slim4 branch
+    jq '.repositories += {
+      "type": "vcs",
+      "url": "https://github.com/ybelenko/slim-token-authentication",
+      "no-api": true
+    }' /usr/lib/multiflexi/composer.json > /usr/lib/multiflexi/composer.json.tmp
+    mv /usr/lib/multiflexi/composer.json.tmp /usr/lib/multiflexi/composer.json
+
     composer-debian multiflexi
 fi
