@@ -1,5 +1,3 @@
-.. header:: MultiFlexi documentation
-
 Installation Guide
 ==================
 
@@ -31,40 +29,42 @@ To install MultiFlexi using Debian packages, you can follow these steps:
 ::
     sudo apt install multiflexi-mysql
 
+
+.. compound::
+
     On fresh Ubuntu 22.04 (with database already installed), the installation command will look like this::
 
-.. parsed-literal::
-    nymph@jammy:~$ sudo apt install multiflexi-mysql
-    Reading package lists... Done
-    Building dependency tree... Done
-    Reading state information... Done
-    The following additional packages will be installed:
-      anacron composer composer-debian dbconfig-common dbconfig-mysql javascript-common jq jsonlint libio-pty-perl libipc-run-perl libjq1 libjs-jquery
-      libjs-jquery-datatables libjs-jquery-selectize.js libjs-microplugin.js libjs-sifter.js libonig5 libtime-duration-perl locales-all mailcap
-      mime-support moreutils multiflexi php-auth-sasl php-cakephp-phinx php-cli php-common php-composer-ca-bundle php-composer-metadata-minifier
-      php-composer-pcre php-composer-semver php-composer-spdx-licenses php-composer-xdebug-handler php-intl php-json-schema php-mail php-mail-mime
-      php-mbstring php-mysql php-net-smtp php-net-socket php-pear php-psr-container php-psr-log php-react-promise php-symfony-console
-      php-symfony-deprecation-contracts php-symfony-filesystem php-symfony-finder php-symfony-polyfill-php80 php-symfony-process
-      php-symfony-service-contracts php-symfony-string php-vitexsoftware-ease-bootstrap4 php-vitexsoftware-ease-bootstrap4-widgets
-      php-vitexsoftware-ease-core php-vitexsoftware-ease-fluentpdo php-vitexsoftware-ease-html php-vitexsoftware-ease-html-widgets php-xml php-yaml
-      php8.1-cli php8.1-common php8.1-intl php8.1-mbstring php8.1-mysql php8.1-opcache php8.1-readline php8.1-xml php8.1-yaml unzip
-    Suggested packages:
-      default-mta \| mail-transport-agent fossil mercurial subversion php-zip apache2 \| lighttpd \| httpd multiflexi-all php-symfony-event-dispatcher
-      php-symfony-lock php-symfony-service-implementation php-vitexsoftware-ease-bootstrap zip
-    The following NEW packages will be installed:
-      anacron composer composer-debian dbconfig-common dbconfig-mysql javascript-common jq jsonlint libio-pty-perl libipc-run-perl libjq1 libjs-jquery
-      libjs-jquery-datatables libjs-jquery-selectize.js libjs-microplugin.js libjs-sifter.js libonig5 libtime-duration-perl locales-all mailcap
-      mime-support moreutils multiflexi multiflexi-mysql php-auth-sasl php-cakephp-phinx php-cli php-common php-composer-ca-bundle
-      php-composer-metadata-minifier php-composer-pcre php-composer-semver php-composer-spdx-licenses php-composer-xdebug-handler php-intl
-      php-json-schema php-mail php-mail-mime php-mbstring php-mysql php-net-smtp php-net-socket php-pear php-psr-container php-psr-log
-      php-react-promise php-symfony-console php-symfony-deprecation-contracts php-symfony-filesystem php-symfony-finder php-symfony-polyfill-php80
-      php-symfony-process php-symfony-service-contracts php-symfony-string php-vitexsoftware-ease-bootstrap4 php-vitexsoftware-ease-bootstrap4-widgets
-      php-vitexsoftware-ease-core php-vitexsoftware-ease-fluentpdo php-vitexsoftware-ease-html php-vitexsoftware-ease-html-widgets php-xml php-yaml
-      php8.1-cli php8.1-common php8.1-intl php8.1-mbstring php8.1-mysql php8.1-opcache php8.1-readline php8.1-xml php8.1-yaml unzip
-    0 upgraded, 72 newly installed, 0 to remove and 0 not upgraded.
-    Need to get 70.0 MB of archives.
-    After this operation, 455 MB of additional disk space will be used.
-    Do you want to continue? [Y/n]
+        nymph@jammy:~$ sudo apt install multiflexi-mysql
+        Reading package lists... Done
+        Building dependency tree... Done
+        Reading state information... Done
+        The following additional packages will be installed:
+        anacron composer composer-debian dbconfig-common dbconfig-mysql javascript-common jq jsonlint libio-pty-perl libipc-run-perl libjq1 libjs-jquery
+        libjs-jquery-datatables libjs-jquery-selectize.js libjs-microplugin.js libjs-sifter.js libonig5 libtime-duration-perl locales-all mailcap
+        mime-support moreutils multiflexi php-auth-sasl php-cakephp-phinx php-cli php-common php-composer-ca-bundle php-composer-metadata-minifier
+        php-composer-pcre php-composer-semver php-composer-spdx-licenses php-composer-xdebug-handler php-intl php-json-schema php-mail php-mail-mime
+        php-mbstring php-mysql php-net-smtp php-net-socket php-pear php-psr-container php-psr-log php-react-promise php-symfony-console
+        php-symfony-deprecation-contracts php-symfony-filesystem php-symfony-finder php-symfony-polyfill-php80 php-symfony-process
+        php-symfony-service-contracts php-symfony-string php-vitexsoftware-ease-bootstrap4 php-vitexsoftware-ease-bootstrap4-widgets
+        php-vitexsoftware-ease-core php-vitexsoftware-ease-fluentpdo php-vitexsoftware-ease-html php-vitexsoftware-ease-html-widgets php-xml php-yaml
+        php8.1-cli php8.1-common php8.1-intl php8.1-mbstring php8.1-mysql php8.1-opcache php8.1-readline php8.1-xml php8.1-yaml unzip
+        Suggested packages:
+        default-mta \| mail-transport-agent fossil mercurial subversion php-zip apache2 \| lighttpd \| httpd multiflexi-all php-symfony-event-dispatcher
+        php-symfony-lock php-symfony-service-implementation php-vitexsoftware-ease-bootstrap zip
+        The following NEW packages will be installed:
+        anacron composer composer-debian dbconfig-common dbconfig-mysql javascript-common jq jsonlint libio-pty-perl libipc-run-perl libjq1 libjs-jquery
+        libjs-jquery-datatables libjs-jquery-selectize.js libjs-microplugin.js libjs-sifter.js libonig5 libtime-duration-perl locales-all mailcap
+        mime-support moreutils multiflexi multiflexi-mysql php-auth-sasl php-cakephp-phinx php-cli php-common php-composer-ca-bundle
+        php-composer-metadata-minifier php-composer-pcre php-composer-semver php-composer-spdx-licenses php-composer-xdebug-handler php-intl
+        php-json-schema php-mail php-mail-mime php-mbstring php-mysql php-net-smtp php-net-socket php-pear php-psr-container php-psr-log
+        php-react-promise php-symfony-console php-symfony-deprecation-contracts php-symfony-filesystem php-symfony-finder php-symfony-polyfill-php80
+        php-symfony-process php-symfony-service-contracts php-symfony-string php-vitexsoftware-ease-bootstrap4 php-vitexsoftware-ease-bootstrap4-widgets
+        php-vitexsoftware-ease-core php-vitexsoftware-ease-fluentpdo php-vitexsoftware-ease-html php-vitexsoftware-ease-html-widgets php-xml php-yaml
+        php8.1-cli php8.1-common php8.1-intl php8.1-mbstring php8.1-mysql php8.1-opcache php8.1-readline php8.1-xml php8.1-yaml unzip
+        0 upgraded, 72 newly installed, 0 to remove and 0 not upgraded.
+        Need to get 70.0 MB of archives.
+        After this operation, 455 MB of additional disk space will be used.
+        Do you want to continue? [Y/n]
 
     The package name may vary depending on the chosen database. 
     The `multiflexi-sqlite` package is used for testing purposes in automated environments.
@@ -94,4 +94,3 @@ To install MultiFlexi using Debian packages, you can follow these steps:
 
 For more information on how to perform the initial setup, please refer to the :doc:`firstrun` page.
 
-.. footer:: © 2022-2025 VitexSoftware
