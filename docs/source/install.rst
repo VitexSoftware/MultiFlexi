@@ -1,10 +1,15 @@
 Installation Guide
 ==================
 
-MultiFlexi is Only empty shell without of applications that can be installed on a server. The applications are available as Debian packages and can be installed on Debian-based systems like Ubuntu.
+Installation of MultiFlexi is simple on Debian based systems. The installation process is done using Debian packages. The packages are available for MySQL, PostgreSQL, and SQLite databases.
 
 .. note::
-    The MultiFlexi packages are available for Debian 11 (Bullseye), Debian 12 (Bookworm), Debian 13 (Trixie) and 22.04 (Jammy Jellyfish), Ubuntu 24.04 (Noble Numbat)
+    The MultiFlexi packages are available for 
+    - Debian 11 (Bullseye)
+    - Debian 12 (Bookworm)
+    - Debian 13 (Trixie) 
+    - Ubuntu 22.04 (Jammy Jellyfish)
+    - Ubuntu 24.04 (Noble Numbat)
 
 To install MultiFlexi using Debian packages, you can follow these steps:
 
@@ -95,7 +100,10 @@ Then installation will continue and finish.
     Finally the configuration file is saved as /etc/multiflexi/multiflexi.env
 
 5. Check for available applications::
-    The available applications can be checked by running the following command in a terminal::
+    MultiFlexi is Only empty shell without of applications that can be installed on a server. The applications are available as Debian packages and can be installed on Debian-based systems like Ubuntu.
+    The available applications can be checked by running the following command in a terminal
+    
+::
     apt search multiflexi
 
 .. image:: apps-availble.png
