@@ -83,6 +83,14 @@ To install MultiFlexi using Debian packages, you can follow these steps:
     :alt: Ubuntu 22.04 DB Password
     :align: center
 
+    The Database name can be empty to autogenerate it.
+
+Then installation will continue and finish.
+
+.. image:: successfullinstallationdone.png
+    :alt: Ubuntu 22.04 Installation Done
+    :align: center
+
 .. tip::
     Finally the configuration file is saved as /etc/multiflexi/multiflexi.env
 
@@ -95,7 +103,6 @@ To install MultiFlexi using Debian packages, you can follow these steps:
     :align: center
 
 For more details about available applications, visit the `MultiFlexi apps page <https://www.multiflexi.eu/apps.php>`_.
-
 
 .. tip::
     To install all available applications, use the `multiflexi-all` meta package. For more details, visit the `multiflexi-all <https://github.com/VitexSoftware/multiflexi-all/>`_ GitHub repository.
