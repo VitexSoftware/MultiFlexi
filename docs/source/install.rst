@@ -92,7 +92,8 @@ To install MultiFlexi using Debian packages, you can follow these steps:
 
     apt search multiflexi
 
-6. To install all available applications, use the `multiflexi-all` meta package. For more details, visit the `multiflexi-all GitHub repository <https://github.com/VitexSoftware/multiflexi-all/>`_.
+.. tip::
+    To install all available applications, use the `multiflexi-all` meta package. For more details, visit the `multiflexi-all <https://github.com/VitexSoftware/multiflexi-all/>`_ GitHub repository.
 
 For more information on how to perform the initial setup, please refer to the :doc:`firstrun` page.
 
