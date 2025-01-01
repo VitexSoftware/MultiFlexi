@@ -10,36 +10,28 @@ This is the installation guide for MultiFlexi.
 
 To install MultiFlexi using Debian packages, you can follow these steps:
 
-1. Prepare your system by running the following commands in a terminal:
-
-    ```bash
+1. Prepare your system by running the following commands in a terminal::
+::
     sudo apt update
     sudo apt install lsb-release apt-transport-https bzip2 ca-certificates curl
-    ```
 
-2. Choose stability by running the following commands:
-
-    ```bash
+2. Add the MultiFlexi repository and key::
+::
     curl -sSLo /tmp/multiflexi-archive-keyring.deb https://repo.multiflexi.eu/multiflexi-archive-keyring.deb
-    dpkg -i /tmp/multiflexi-archive-keyring.deb
-    sh -c 'echo "deb [signed-by=/usr/share/keyrings/repo.multiflexi.eu.gpg] https://repo.multiflexi.eu/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/multiflexi.list'
-    ```
+    sudo dpkg -i /tmp/multiflexi-archive-keyring.deb
+    echo "deb [signed-by=/usr/share/keyrings/repo.multiflexi.eu.gpg] https://repo.multiflexi.eu/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/multiflexi.list
 
-3. Update the package sources by running the following command:
-
-    ```bash
+3. Update the package sources::
+::
     sudo apt update
-    ```
 
-4. Install MultiFlexi for the chosen database by running the following command:
-
-    ```bash
+4. Install MultiFlexi for the chosen database::
+::
     sudo apt install multiflexi-mysql
-    ```
 
-    On fresh Ubuntu 22.04 (with database already installed), the installation command will look like this:
+    On fresh Ubuntu 22.04 (with database already installed), the installation command will look like this::
 
-    ```plaintext
+::
     nymph@jammy:~$ sudo apt install multiflexi-mysql
     Reading package lists... Done
     Building dependency tree... Done
@@ -71,27 +63,31 @@ To install MultiFlexi using Debian packages, you can follow these steps:
     Need to get 70.0 MB of archives.
     After this operation, 455 MB of additional disk space will be used.
     Do you want to continue? [Y/n]
-    ```
 
     The package name may vary depending on the chosen database. 
     The `multiflexi-sqlite` package is used for testing purposes in automated environments.
     Only the `multiflexi-mysql` package is recommended for production use. 
     The `multiflexi-postgresql` package is not yet usable. Please fill GitHub issue if you want to help with development or testing.  
 
+    During the installation, you will be asked to configure the database.
+
 .. image:: ubuntu22dbconfig.png
     :alt: Ubuntu 22.04 DB Config
     :align: center
+
+    The Password can be empty to autogenerate it.
 
 .. image:: ubuntu22dbpassword.png
     :alt: Ubuntu 22.04 DB Password
     :align: center
 
-5. Check for available applications by running the following command:
+.. tip::
+    Finally the configuration file is located at /etc/multiflexi/multiflexi.env
 
-    ```bash
+5. Check for available applications::
+
     apt search multiflexi
-    ```
 
-6. To install all available applications, you can use the `multiflexi-all` meta package. For more details, visit the `multiflexi-all GitHub repository <https://github.com/VitexSoftware/multiflexi-all/>`_.
+6. To install all available applications, use the `multiflexi-all` meta package. For more details, visit the `multiflexi-all GitHub repository <https://github.com/VitexSoftware/multiflexi-all/>`_.
 
 For more information on how to perform the initial setup, please refer to the :doc:`firstrun` page.
