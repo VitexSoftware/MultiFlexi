@@ -96,14 +96,14 @@ Then installation will continue and finish.
     :alt: Ubuntu 22.04 Installation Done
     :align: center
 
-.. tip::
+.. note::
     Finally the configuration file is saved as /etc/multiflexi/multiflexi.env
 
 5. Check for available applications::
     MultiFlexi is Only empty shell without of applications that can be installed on a server. The applications are available as Debian packages and can be installed on Debian-based systems like Ubuntu.
     The available applications can be checked by running the following command in a terminal
-    
-::
+
+.. code-block:: bash
     apt search multiflexi
 
 .. image:: apps-availble.png
