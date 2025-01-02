@@ -1,10 +1,10 @@
-Introduction to MultiFlexi Development
-======================================
+MultiFlexi Development
+======================
 
 Welcome to the MultiFlexi development documentation. This guide will help you get started with developing and contributing to the MultiFlexi project.
 
 .. image:: https://wakatime.com/badge/user/5abba9ca-813e-43ac-9b5f-b1cfdf3dc1c7/project/28a38241-3585-4ce7-b365-d7341c69e635.svg
-    :target: https://wakatime.com/badge/user/5abba9ca-813e-43ac-9b5f-b1cfdf3dc1c7/project/28a38241-3585-4ce7-b365-d7341c69e635
+    :target: https://wakatime.com
 
 
 
