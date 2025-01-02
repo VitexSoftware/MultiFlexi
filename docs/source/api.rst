@@ -1,9 +1,6 @@
 API
 ===
 
-.. toctree::
-   :maxdepth: 2
-
 .. contents::
 
 API calls are handled by the `api/index.php` file. This file is responsible for routing the request to the appropriate controller and method. The API is designed to be flexible and easy to use. It is built on top of the `MultiFlexi` class, which provides a simple interface for creating and managing API endpoints.
@@ -112,14 +109,13 @@ This endpoint is used to list all available endpoints.
 API Documentation
 =================
 
-The API documentation is available in OpenAPI format. You can view the documentation by visiting the following link:
-
-https://github.com/VitexSoftware/multiflexi-api/blob/main/openapi-schema.yaml
-
 There is a dedicated project for the MultiFlexi API available at:
 
 https://github.com/VitexSoftware/multiflexi-api/
 
+The API documentation is available in OpenAPI format. You can view the documentation by visiting the following link:
+
+https://github.com/VitexSoftware/multiflexi-api/blob/main/openapi-schema.yaml
+
 .. autosummary::
    :toctree: generated
-
