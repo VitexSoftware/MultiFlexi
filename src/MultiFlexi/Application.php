@@ -488,7 +488,7 @@ class Application extends DBEngine
      */
     public function getRequirements(): array
     {
-        $reqs = $this->getDataValue('requirements');
+        $reqs = (string)$this->getDataValue('requirements');
 
         return \strlen($reqs) ? (strstr($reqs, ',') ? explode(',', $reqs) : [$reqs]) : [];
     }

@@ -40,7 +40,7 @@ final class Job extends AbstractMigration
             ->addColumn('begin', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('end', 'datetime', ['null' => true])
             ->addColumn('company_id', 'integer', array_merge(['null' => false], $unsigned))
-            ->addColumn('exitcode', 'integer', array_merge(['null' => true], $unsigned))
+            ->addColumn('exitcode', 'integer', array_merge(['null' => true]))
             ->addForeignKey('app_id', 'apps', ['id'], ['constraint' => 'job_app_must_exist'])
             ->addForeignKey('company_id', 'company', ['id'], ['constraint' => 'job_company_must_exist']);
         $table->create();

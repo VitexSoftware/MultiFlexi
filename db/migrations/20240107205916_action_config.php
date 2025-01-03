@@ -30,11 +30,9 @@ final class ActionConfig extends AbstractMigration
      */
     public function change(): void
     {
-
         // Check if the database is MySQL
         $databaseType = $this->getAdapter()->getOption('adapter');
         $unsigned = ($databaseType === 'mysql') ? ['signed' => false] : [];
-
 
         $table = $this->table('actionconfig', ['comment' => 'Module per company configurations']);
         $table
