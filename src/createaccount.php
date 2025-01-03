@@ -145,7 +145,8 @@ if (WebPage::singleton()->isPosted()) {
 
 WebPage::singleton()->addItem(new PageTop(_('New Administrator')));
 
-$regFace = WebPage::singleton()->container->addItem(new \Ease\TWB4\Panel(_('Singn On')));
+
+$regFace = new \Ease\TWB4\Panel(_('Singn On'));
 
 $regForm = $regFace->addItem(new ColumnsForm(new \MultiFlexi\User()));
 
@@ -188,6 +189,8 @@ $regForm->addItem(new \Ease\Html\DivTag(new \Ease\Html\InputSubmitTag(
 if (isset($_POST)) {
     $regForm->fillUp($_POST);
 }
+
+WebPage::singleton()->container->addItem($regFace);
 
 WebPage::singleton()->addItem(new PageBottom());
 WebPage::singleton()->draw();

@@ -1,2 +1,10 @@
 #!/bin/bash
-phinx $1 -c /usr/lib/multiflexi/phinx-adapter.php -- $@
+# filepath: /home/vitex/Projects/MultiFlexi/bin/multiflexi-phinx
+
+if [ -z "$1" ]; then
+  phinx_command="migrate"
+else
+  phinx_command="$1"
+fi
+
+phinx $phinx_command -c /usr/lib/multiflexi/phinx-adapter.php -- "$@"
