@@ -42,8 +42,13 @@
             "description": "Force exit code",
             "defval": "0",
             "required": false
-        }   
-
+        },
+        "ZABBIX_KEY": {
+            "type": "string",
+            "description": "Default name for Zabbix Item key name",
+            "defval": "multiflexi-probe-{PASSWORD}",
+            "required": false
+        }
     },
     "multiflexi": ""
 }
