@@ -115,21 +115,23 @@ if (WebPage::singleton()->isPosted()) {
             } catch (\Ease\Exception $exc) {
             }
 
-            $email = WebPage::singleton()->addItem(new \Ease\HtmlMailer(
-                \Ease\Shared::cfg('SEND_INFO_TO'),
-                sprintf(
-                    _('New Sign On to %s: %s'),
-                    \Ease\Shared::appName(),
-                    $newAdmin->getUserLogin(),
-                ),
-            ));
-            $email->setMailHeaders(['From' => \Ease\Shared::cfg('EMAIL_FROM')]);
-            $email->addItem(new \Ease\Html\DivTag(_('New User').":\n"));
-            $email->addItem(new \Ease\Html\DivTag(' Login: '.$newAdmin->getUserLogin()."\n"));
+            if (\Ease\Shared::cfg('SEND_INFO_TO', false)) {
+                $email = new \Ease\HtmlMailer(
+                    \Ease\Shared::cfg('SEND_INFO_TO'),
+                    sprintf(
+                        _('New Sign On to %s: %s'),
+                        \Ease\Shared::appName(),
+                        $newAdmin->getUserLogin(),
+                    ),
+                );
+                $email->setMailHeaders(['From' => \Ease\Shared::cfg('EMAIL_FROM')]);
+                $email->addItem(new \Ease\Html\DivTag(_('New User').":\n"));
+                $email->addItem(new \Ease\Html\DivTag(' Login: '.$newAdmin->getUserLogin()."\n"));
 
-            try {
-                $email->send();
-            } catch (\Ease\Exception $exc) {
+                try {
+                    $email->send();
+                } catch (\Ease\Exception $exc) {
+                }
             }
 
             \Ease\Shared::user($newAdmin)->loginSuccess();
@@ -144,7 +146,6 @@ if (WebPage::singleton()->isPosted()) {
 }
 
 WebPage::singleton()->addItem(new PageTop(_('New Administrator')));
-
 
 $regFace = new \Ease\TWB4\Panel(_('Singn On'));
 

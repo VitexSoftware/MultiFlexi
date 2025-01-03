@@ -13,7 +13,6 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Phinx\Db\Adapter\MysqlAdapter;
 use Phinx\Migration\AbstractMigration;
 
 final class RuntemplateCredentials extends AbstractMigration
