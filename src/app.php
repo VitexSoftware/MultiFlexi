@@ -80,7 +80,7 @@ $jobList = new Table();
 $jobList->addRowHeaderColumns([_('Job ID'), _('Company'), _('Launch time'), _('Exit Code'), _('Launched by')]);
 
 foreach ($jobs as $job) {
-    $job['id'] = new ATag('job.php?id='.$job['id'], $job['id']);
+    $job['id'] = new ATag('job.php?id='.$job['id'], '🏁 '.$job['id']);
     $job['company_id'] = new ATag('company.php?id='.$job['company_id'], $job['name']);
     unset($job['name']);
     $job['launched_by'] = new ATag('user.php?id'.$job['launched_by'], $job['login']);

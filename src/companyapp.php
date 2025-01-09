@@ -86,7 +86,7 @@ $jobList = new Table();
 $jobList->addRowHeaderColumns([_('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'), _('RunTemplate')]);
 
 foreach ($jobs as $job) {
-    $job['id'] = new ATag('job.php?id='.$job['id'], $job['id']);
+    $job['id'] = new ATag('job.php?id='.$job['id'], '🏁 '.$job['id']);
 
     if (empty($job['begin'])) {
         $job['begin'] = _('Not launched yet');
