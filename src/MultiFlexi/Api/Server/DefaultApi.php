@@ -317,4 +317,11 @@ EOD;
 
         return self::prepareResponse($response, $status, $suffix, 'jobsStatus');
     }
+    
+    public function getAllUserCredentials(ServerRequestInterface $request, ResponseInterface $response, string $suffix): ResponseInterface
+    {
+        
+    }
+    
+    
 }

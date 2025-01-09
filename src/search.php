@@ -54,7 +54,7 @@ $jobsFound = $jobber->listingQuery()->where('stdout LIKE "%'.$searchTerm.'%"')->
 
 if ($jobsFound->count()) {
     foreach ($jobsFound as $job) {
-        $results->addItemSmart(new \Ease\Html\ATag('job.php?id='.$job['id'], 'Job #'.$job['id']));
+        $results->addItemSmart(new \Ease\Html\ATag('job.php?id='.$job['id'], '🏁 Job #'.$job['id']));
     }
 }
 
@@ -68,6 +68,15 @@ if ($actionConfigsFound->count()) {
         $results->addItemSmart(new \Ease\Html\ATag('actions.php?id='.$actionConfig['runtemplate_id'], '🔧&nbsp; '._('RunTemplate').' #'.$actionConfig['runtemplate_id'].' '.$moduleLogo.' '.$actionConfig['keyname'].'='.$actionConfig['value']));
     }
 }
+
+$credentor = new \MultiFlexi\Credential();
+$credentialsFound = $credentor->listingQuery()->where('name LIKE "%'.$searchTerm.'%"');
+if ($credentialsFound->count()) {
+    foreach ($credentialsFound as $credential) {
+        $results->addItemSmart(new \Ease\Html\ATag('credential.php?id='.$credential['id'], '🔐 Credential #'.$credential['id'].' '.$credential['name']));
+    }
+}
+
 
 WebPage::singleton()->addItem(new PageTop(_('MultiFlexi')));
 
