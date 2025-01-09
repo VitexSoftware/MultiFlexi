@@ -34,14 +34,7 @@ $imageRow = new \Ease\TWB4\Row();
 $imageRow->addTagClass('justify-content-md-center');
 $imageRow->addColumn(4);
 
-$currentDate = new \DateTime();
-$endOfYear2024 = new \DateTime('2024-12-31 23:59:59');
-
-if ($currentDate <= $endOfYear2024) {
-    $imageRow->addColumn(4, new \Ease\Html\DivTag(new \Ease\Html\ATag('https://spoje.net/', new \Ease\Html\ImgTag('images/reklama.jpg', _('Powered by '), ['class' => 'mx-auto d-block img-fluid']))), 'sm');
-} else {
-    $imageRow->addColumn(4, new \Ease\Html\DivTag(new \Ease\Html\ImgTag('images/openclipart/345630.svg', _('AI and Human Relationship'), ['class' => 'mx-auto d-block img-fluid'])), 'sm');
-}
+$imageRow->addColumn(4, new \Ease\Html\DivTag(new \Ease\Html\ImgTag('images/openclipart/345630.svg', _('AI and Human Relationship'), ['class' => 'mx-auto d-block img-fluid'])), 'sm');
 
 $imageRow->addColumn(4);
 

@@ -57,17 +57,17 @@ $scheduleButton = new \Ease\TWB4\LinkButton('schedule.php?id='.$runTemplate->get
 $previousJobId = $jobber->getPreviousJobId(true, true, true);
 
 if ($previousJobId) {
-    $previousButton = new \Ease\TWB4\LinkButton('job.php?id='.$previousJobId, '◀️ '._('Previous'), 'info btn-lg btn-block');
+    $previousButton = new \Ease\TWB4\LinkButton('job.php?id='.$previousJobId, '◀️ '._('Previous').' 🏁', 'info btn-lg btn-block');
 } else {
-    $previousButton = new \Ease\TWB4\LinkButton('#', '◀️ '._('Previous'), 'info btn-lg btn-block disabled');
+    $previousButton = new \Ease\TWB4\LinkButton('#', '◀️ '._('Previous').' 🏁', 'info btn-lg btn-block disabled');
 }
 
 $nextJobId = $jobber->getNextJobId(true, true, true);
 
 if ($nextJobId) {
-    $nextButton = new \Ease\TWB4\LinkButton('job.php?id='.$nextJobId, _('Next').' ▶️️', 'info btn-lg btn-block');
+    $nextButton = new \Ease\TWB4\LinkButton('job.php?id='.$nextJobId, '🏁 '._('Next').' ▶️️', 'info btn-lg btn-block');
 } else {
-    $nextButton = new \Ease\TWB4\LinkButton('#', _('Next').' ▶️️', 'info btn-lg btn-block disabled');
+    $nextButton = new \Ease\TWB4\LinkButton('#', '🏁 '._('Next').' ▶️️', 'info btn-lg btn-block disabled');
 }
 
 $jobFoot = new \Ease\TWB4\Row();

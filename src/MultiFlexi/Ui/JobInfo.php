@@ -58,7 +58,7 @@ class JobInfo extends \Ease\Html\DivTag
 
         $jobTabs = new \Ease\TWB4\Tabs();
 
-        $jobTabs->addTab(_('Job').' '.$job->getMyKey(), '');
+        $jobTabs->addTab('🏁 '._('Job').' '.$job->getMyKey(), '');
 
         //        $scheduler = new \MultiFlexi\Scheduler();
         //        $scheduled = $scheduler->listingQuery()->where('job', $job->getMyKey())->fetch();
