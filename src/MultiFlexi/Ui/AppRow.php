@@ -81,7 +81,7 @@ class AppRow extends \Ease\TWB4\Row
         $jobList->addRowHeaderColumns([_('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher')]);
 
         foreach ($jobs as $job) {
-            $job['id'] = new ATag('job.php?id='.$job['id'], $job['id']);
+            $job['id'] = new ATag('job.php?id='.$job['id'], '🏁 '.$job['id']);
 
             if (empty($job['begin'])) {
                 $job['begin'] = _('Not launched yet');

@@ -1,3 +1,4 @@
 FROM docker.io/library/bash
-COPY bin/multiflexi-probe /usr/local/bin/multiflexi-probe
+COPY bin/multiflexi-probe /usr/local/bin
 CMD /usr/local/bin/multiflexi-probe
+
