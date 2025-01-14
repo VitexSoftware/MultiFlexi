@@ -316,7 +316,7 @@ class Application extends DBEngine
                     $this->addStatusMessage(_('Topics field not present. '), 'warning');
                 }
 
-                if ($currentVersion === $newVersion) {
+                if (($currentVersion != 'n/a') && $currentVersion === $newVersion) {
                     $this->addStatusMessage('🧩📦 '.$importData['name'].' ('.$currentVersion.') already present', 'info');
                     $fields = [true];
                 } else {
