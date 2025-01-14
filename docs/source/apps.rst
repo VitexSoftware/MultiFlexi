@@ -1,13 +1,10 @@
 Applications
 ============
 
-
-
 .. toctree::
    :maxdepth: 2
 
 .. contents::
-
 
 MultiFlexi Application Requirements
 ===================================
@@ -44,7 +41,6 @@ The ``environment`` field contains a list of environment variables required by t
 
     See more about configuration fields on :ref:`configuration` page.
 
-
 The application icon is svg file stored in the same directory as json application definition. The icon must be named using the application's UUID.
 
 Special variables
@@ -54,8 +50,6 @@ The Zabbix post job action can be used to send the application's output to Zabbi
 
 - ``RESULT_FILE``: filename where the application stores its output
 - ``ZABBIX_KEY``: Zabbix key name for the application.
-
-
 
 Example JSON Definition
 -----------------------
@@ -86,52 +80,20 @@ Here is an example of a JSON file defining an application:
           },
           "CERT_PASS": {
               "type": "password",
-              "description": "Certificate password",
+              "description": "Certificate Password",
               "defval": "",
               "required": true
-          },
-          "CERT_FILE": {
-              "type": "string",
-              "description": "Path to RB Certificate file",
-              "defval": "",
-              "required": true
-          },
-          "REPORT_SCOPE": {
-              "type": "text",
-              "description": "Time scope of transactions downloaded",
-              "defval": "last_month",
-              "required": false
-          },
-          "STATEMENT_LINE": {
-              "type": "text",
-              "description": "Statement line can be MAIN or ADDITIONAL",
-              "defval": "ADDITIONAL",
-              "required": false
-          },
-          "XIBMCLIENTID": {
-              "type": "text",
-              "description": "ClientID",
-              "defval": "",
-              "required": true
-          },
-          "RESULT_FILE": {
-              "type": "string",
-              "description": "write output json data to",
-              "defval": "transaction_report_{ACCOUNT_NUMBER}.json",
-              "required": false
-          },
-          "ZABBIX_KEY": {
-              "type": "string",
-              "description": "Default name for Zabbix Item key name",
-              "defval": "Raiff-Balance-{ACCOUNT_NUMBER}",
-              "required": false
           }
-      },
-      "multiflexi": "1.10.2.0"
+      }
   }
 
+.. note::
 
+    Examples for App developers can be found at:
+    - `MultiFlexi-Python-App-example <https://github.com/VitexSoftware/MultiFlexi-Python-App-example>`_
+    - `MultiFlexi-Java-App-Example <https://github.com/VitexSoftware/MultiFlexi-Java-App-Example>`_
 
+    Examples for other languages coming soon.
 
 Applications Overview
 =====================
@@ -288,3 +250,5 @@ MultiFlexi offers a variety of applications to enhance your accounting and busin
     * - Import Raiffeisen bank Statements to AbraFlexi Events
       - Download Raiffeisenbank PDF Statements and import them to AbraFlexi events
       - https://github.com/VitexSoftware/abraflexi-raiffeisenbank
+
+
