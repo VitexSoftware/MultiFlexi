@@ -272,7 +272,7 @@ class Application extends DBEngine
 
             if (\is_array($importData)) {
                 $importData['enabled'] = 'on';
-
+                $importData['image'] = '';
                 $environment = \array_key_exists('environment', $importData) ? $importData['environment'] : [];
                 unset($importData['environment']);
                 $this->addStatusMessage('Importing '.$importData['name'].' from '.$jsonFile.' created by '.$importData['multiflexi'], 'debug');
@@ -368,7 +368,9 @@ class Application extends DBEngine
                     } catch (\PDOException $exc) {
                         echo $exc->getTraceAsString();
                         $problemData = $this->getData();
-                        $problemData['image'] = substr((string) $problemData['image'], 0, 20).' ...';
+                        if(array_key_exists('image', $currentData)){
+                            $problemData['image'] = substr((string) $problemData['image'], 0, 20).' ...';
+                        }
                         fwrite(\STDERR, print_r($problemData, true).\PHP_EOL);
                         echo $exc->getMessage();
                     }
