@@ -58,8 +58,11 @@ $container = $builder->build();
 
 // Instantiate the app
 $app = Bridge::create($container);
-$app->setBasePath('/MultiFlexi/src/api');
-$path = '/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/';
+
+$basePath = '/MultiFlexi/src/api';
+
+$app->setBasePath($basePath);
+$path = $basePath . '/VitexSoftware/MultiFlexi/1.0.0/';
 
 // Register middleware
 $middleware = new RegisterMiddlewares();
