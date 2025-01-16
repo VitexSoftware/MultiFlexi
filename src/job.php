@@ -28,8 +28,8 @@ $appInfo = $runTemplate->getAppInfo();
 $apps = new Application($appInfo['app_id']);
 $instanceName = $appInfo['app_name'];
 
-$errorTerminal = new \Ease\Html\DivTag(nl2br(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert((string) $jobber->getDataValue('stderr')))), ['style' => 'background: #ffb3b3; font-family: monospace;']);
-$stdTerminal = new \Ease\Html\DivTag(nl2br(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert((string) $jobber->getDataValue('stdout')))), ['style' => 'background:  #808080; font-family: monospace;']);
+$errorTerminal = new \Ease\Html\DivTag(nl2br(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert((string) $jobber->getDataValue('stderr')))), ['style' => 'background: black; font-family: monospace; border: 4px red;']);
+$stdTerminal = new \Ease\Html\DivTag(nl2br(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert((string) $jobber->getDataValue('stdout')))), ['style' => 'background:  black; font-family: monospace; border: 1px green;']);
 
 $outputTabs = new \Ease\TWB4\Tabs();
 $outputTabs->addTab(_('Output'), [$stdTerminal, \strlen($jobber->getOutput()) ? new \Ease\TWB4\LinkButton('joboutput.php?id='.$jobID.'&mode=std', _('Download'), 'secondary btn-block') : _('No output')]);
