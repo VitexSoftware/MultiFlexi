@@ -78,12 +78,10 @@ class RuntemplateConfigForm extends EngineForm
 
                         foreach ($kredenc->getData() as $overrideKey => $overrideValue) {
                             if ($overrideKey !== 'id' && $overrideKey !== 'name' && $overrideKey !== 'company_id' && $overrideKey !== 'formType') {
-                                
-                                if(array_key_exists($overrideKey, $credData) === false){
+                                if (\array_key_exists($overrideKey, $credData) === false) {
                                     $credData[$overrideKey] = $overrideValue;
                                     $credSource[$overrideKey] = $credentialChosen;
                                 }
-                                
                             }
                         }
                     }
