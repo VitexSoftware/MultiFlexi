@@ -457,7 +457,7 @@ class Application extends DBEngine
         $a2cf = $this->getFluentPDO()->deleteFrom('conffield')->where('app_id', $appId)->execute();
 
         if ($a2cf !== 0) {
-            $this->addStatusMessage(sprintf(_('%d Config fields removed'), $a2rt), null === $a2rt ? 'error' : 'success');
+            $this->addStatusMessage(sprintf(_('%d Config fields removed'), $a2cf), null === $a2cf ? 'error' : 'success');
         }
 
         $a2cfg = $this->getFluentPDO()->deleteFrom('configuration')->where('app_id', $appId)->execute();
