@@ -59,7 +59,8 @@ $container = $builder->build();
 // Instantiate the app
 $app = Bridge::create($container);
 
-$basePath = '/MultiFlexi/src/api';
+$uriParts = explode('/api/', \Ease\WebPage::getUri());
+$basePath = $uriParts[0].'/api';
 
 $app->setBasePath($basePath);
 $path = $basePath.'/VitexSoftware/MultiFlexi/1.0.0/';
