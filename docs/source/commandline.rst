@@ -7,7 +7,7 @@ MultiFlexi provides several command line utilities to manage and interact with t
     - Converts application configuration to JSON format.
 
 2. **multiflexi-cli**
-    - Command line interface for interacting with MultiFlexi.
+    - Command line interface for interacting with MultiFlexi. For more details, see :doc:`multiflexi-cli`.
 
 3. **multiflexi-executor**
     - Executes scheduled jobs and tasks.

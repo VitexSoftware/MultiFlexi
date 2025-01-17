@@ -67,302 +67,92 @@ if ($probBegin) {
 switch ($command) {
     case 'version':
         echo Shared::appName().' '.Shared::appVersion().\PHP_EOL;
-
         break;
+
     case 'remove':
         switch ($argument) {
             case 'user':
                 $engine = new \MultiFlexi\User(is_numeric($identifier) ? (int) $identifier : $identifier);
-
                 break;
             case 'app':
                 $engine = new \MultiFlexi\Application((int) $identifier);
-
                 break;
             case 'company':
                 $engine = new \MultiFlexi\Company(is_numeric($identifier) ? (int) $identifier : ['code' => $identifier], ['autoload' => 'true']);
-
                 break;
             case 'runtemplate':
                 $engine = new \MultiFlexi\RunTemplate((int) $identifier);
-
                 break;
             case 'job':
                 $engine = new \MultiFlexi\Job((int) $identifier);
-
-                break;
-
-            default:
-                echo $argv[0].' remove <sql row id or other identifier>';
-
                 break;
         }
-
-        $name = $engine->getRecordName();
-        $engine->addStatusMessage(sprintf(_('%s name removal'), $name), $engine->deleteFromSQL() ? 'success' : 'error');
-
         break;
-    case 'add':
-        switch ($argument) {
-            case 'user':
-                if (empty($identifier)) {
-                    echo $argv[0].' add user <login> <email>';
 
-                    exit;
-                }
+    case 'status':
+        $format = $argument ?? 'plaintext';
+        $engine = new \MultiFlexi\Engine();
+        $pdo = $engine->getPdo();
+        $database = $pdo->getAttribute(\PDO::ATTR_DRIVER_NAME).' '.
+                    $pdo->getAttribute(\PDO::ATTR_CONNECTION_STATUS).' '.
+                    $pdo->getAttribute(\PDO::ATTR_SERVER_INFO).' '.
+                    $pdo->getAttribute(\PDO::ATTR_SERVER_VERSION);
 
-                $checkData = ['login' => (string) $identifier, 'email' => $property];
-                $engine = new \MultiFlexi\User($checkData, ['autoload' => false]);
+        $status = [
+            'version' => Shared::appVersion(),
+            'php' => \PHP_VERSION,
+            'os' => \PHP_OS,
+            'memory' => memory_get_usage(),
+            'companies' => $engine->getFluentPDO()->from('company')->count(),
+            'apps' => $engine->getFluentPDO()->from('apps')->count(),
+            'runtemplates' => $engine->getFluentPDO()->from('runtemplate')->count(),
+            'topics' => $engine->getFluentPDO()->from('topic')->count(),
+            'credentials' => $engine->getFluentPDO()->from('credentials')->count(),
+            'credential_types' => $engine->getFluentPDO()->from('credential_type')->count(),
+            'database' => $database,
+            'daemon' => \MultiFlexi\Runner::isServiceActive('multiflexi.service') ? 'running' : 'stopped',
+            'timestamp' => date('c')
+        ];
 
-                break;
-            case 'app':
-                if (empty($identifier)) {
-                    echo $argv[0].' add app <executable> <name>';
+        if ($argument === 'jobs') {
+            $queeLength = (new \MultiFlexi\Scheduler())->listingQuery()->count();
 
-                    exit;
-                }
+            // Query to get job status information
+            $query = <<<'EOD'
+                SELECT
+                    COUNT(*) AS total_jobs,
+                    SUM(CASE WHEN exitcode = 0 THEN 1 ELSE 0 END) AS successful_jobs,
+                    SUM(CASE WHEN exitcode != 0 THEN 1 ELSE 0 END) AS failed_jobs,
+                    SUM(CASE WHEN exitcode IS NULL THEN 1 ELSE 0 END) AS incomplete_jobs,
+                    COUNT(DISTINCT app_id) AS total_applications,
+                    SUM(CASE WHEN schedule IS NOT NULL THEN 1 ELSE 0 END) AS repeated_jobs
+                FROM job
+EOD;
 
-                $checkData = ['executable' => (string) $identifier, 'name' => $property];
-                $engine = new \MultiFlexi\Application($checkData, ['autoload' => false]);
+            $stmt = $pdo->query($query);
+            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-                break;
-            case 'company':
-                if (empty($identifier)) {
-                    echo $argv[0].' add company <code> <name>';
-
-                    exit;
-                }
-
-                $checkData = ['code' => (string) $identifier];
-                $engine = new \MultiFlexi\Company(['code' => (string) $identifier, 'name' => $property ? $property : $identifier], ['autoload' => false]);
-
-                break;
-            case 'credential_type':
-                if (empty($identifier)) {
-                    echo $argv[0].' add credential_type <name>';
-
-                    exit;
-                }
-
-                $checkData = ['name' => (string) $identifier];
-                $engine = new \MultiFlexi\CredentialType($checkData, ['autoload' => false]);
-
-                break;
-            case 'credential':
-                if (empty($identifier)) {
-                    echo $argv[0].' add credential <name> <type id> <company id> [--CONFIG_FIELD=VALUE ..]';
-
-                    exit;
-                }
-
-                $checkData = ['name' => (string) $identifier, 'type_id' => $property, 'company_id' => $option];
-                $engine = new \MultiFlexi\Credential($checkData, ['autoload' => false]);
-
-                break;
-            case 'runtemplate':
-                if (empty($identifier)) {
-                    echo $argv[0].' add runtemplate <name> <app name/id> <company code/id> [--CONFIG_FIELD=VALUE ..]';
-
-                    exit;
-                }
-
-                $apper = new Application();
-                $companer = new Company();
-
-                if (is_numeric($option)) {
-                    $company_id = $option;
-                } else {
-                    $company_id = $companer->listingQuery()->select('id', true)->where('code', $option)->fetchColumn();
-
-                    if (\is_bool($company_id)) {
-                        fwrite(\STDERR, sprintf(_('Company "%s" not found.').\PHP_EOL, $option));
-
-                        exit(1);
-                    }
-                }
-
-                if (is_numeric($property)) {
-                    $app_id = $property;
-                } else {
-                    $app_id = $apper->listingQuery()->select('id', true)->where('name', $property)->fetchColumn();
-
-                    if (\is_bool($app_id)) {
-                        fwrite(\STDERR, sprintf(_('Application "%s" not found.').\PHP_EOL, $property));
-
-                        exit(1);
-                    }
-                }
-
-                $apper->loadFromSQL($app_id);
-                $companer->loadFromSQL($company_id);
-
-                $companyApp = new \MultiFlexi\CompanyApp($companer);
-
-                $assigned = [];
-
-                foreach ($companyApp->getAssigned()->select('app_id', true)->fetchAll() as $app) {
-                    $assigned[] = $app['app_id'];
-                }
-
-                $companyApp->assignApps(array_merge($assigned, [$app_id]));
-
-                $checkData = ['name' => (string) $identifier, 'app_id' => $app_id, 'company_id' => $company_id, 'interv' => 'n'];
-                $engine = new \MultiFlexi\RunTemplate($checkData, ['autoload' => false]);
-
-                break;
-
-            default:
-                echo $argv[0].' add <name>';
-
-                break;
+            $status = array_merge($status, [
+                'successful_jobs' => (int) $result['successful_jobs'],
+                'failed_jobs' => (int) $result['failed_jobs'],
+                'incomplete_jobs' => (int) $result['incomplete_jobs'],
+                'total_applications' => (int) $result['total_applications'],
+                'repeated_jobs' => (int) $result['repeated_jobs'],
+                'total_jobs' => (int) $result['total_jobs'],
+                'quee_length' => (int) $queeLength,
+            ]);
         }
 
-        $exists = $engine->getColumnsFromSQL(['id'], $checkData);
-
-        if (empty($exists)) {
-            try {
-                $engine->dbsync();
-            } catch (\PDOException $exc) {
-                echo $exc->getTraceAsString();
-            }
+        if ($format === 'json') {
+            echo json_encode($status, JSON_PRETTY_PRINT) . \PHP_EOL;
         } else {
-            $engine->addStatusMessage('already exists as '.json_encode($exists));
-            $engine->loadFromSQL($exists[0]['id']);
-        }
-
-        if (empty($properties) === false) {
-            switch (\get_class($engine)) {
-                case 'MultiFlexi\RunTemplate':
-                    $engine->setEnvironment($properties);
-
-                    break;
-                case 'MultiFlexi\Company':
-                    $enver = new CompanyEnv($engine->getMyKey());
-
-                    foreach ($properties as $propertyKey => $propertyValue) {
-                        $enver->addEnv($propertyKey, $propertyValue);
-                    }
-
-                    break;
-
-                default:
-                    break;
+            foreach ($status as $key => $value) {
+                echo ucfirst(str_replace('_', ' ', $key)) . ': ' . $value . \PHP_EOL;
             }
         }
-
-        echo json_encode($engine->getData())."\n";
-
-        break;
-    case 'list':
-        switch ($argument) {
-            case 'user':
-                $engine = new \MultiFlexi\User();
-                $data = $engine->listingQuery()->select([
-                    'id',
-                    'enabled',
-                    'login',
-                    'email',
-                    'firstname',
-                    'lastname',
-                ], true)->fetchAll();
-
-                break;
-            case 'app':
-                $engine = new Application();
-                $data = $engine->listingQuery()->select([
-                    'id',
-                    'enabled',
-                    'image not like "" as image',
-                    'name',
-                    'description',
-                    'executable',
-                    'DatCreate',
-                    'DatUpdate',
-                    'setup',
-                    'cmdparams',
-                    'deploy',
-                    'homepage',
-                    'requirements',
-                ], true)->fetchAll();
-
-                break;
-            case 'company':
-                $engine = new Company();
-                $data = $engine->listingQuery()->select([
-                    'id',
-                    'enabled',
-                    'settings',
-                    'logo  not like "" as logo',
-                    'server',
-                    'name',
-                    'ic',
-                    'company',
-                    'rw',
-                    'setup',
-                    'webhook',
-                    'DatCreate',
-                    'DatUpdate',
-                    'customer',
-                    'email',
-                    'code',
-                ])->fetchAll();
-
-                break;
-            case 'job':
-                $engine = new Job();
-                $data = $engine->listingQuery()->select([
-                    'id',
-                ])->fetchAll();
-
-                break;
-            case 'runtemplate':
-                $engine = new RunTemplate();
-                $data = $engine->listingQuery()->select([
-                    'id',
-                    'enabled',
-                    'name',
-                    'app_id',
-                    'company_id',
-                    'DatCreate',
-                    'DatUpdate',
-                    'setup',
-                    'cmdparams',
-                    'deploy',
-                    'homepage',
-                    'requirements',
-                ], true)->fetchAll();
-
-                break;
-
-            default:
-                echo "list what ?\n";
-                $data = false;
-
-                break;
-        }
-
-        if ($data) {
-            $table = new \LucidFrame\Console\ConsoleTable();
-
-            foreach (array_keys(current($data))as $column) {
-                $table->addHeader($column);
-            }
-
-            foreach ($data as $row) {
-                $table->addRow($row);
-            }
-
-            $table->display();
-            // TODO: https://github.com/phplucidframe/console-table/issues/14#issuecomment-2167643219
-        } else {
-            echo _('No data')."\n";
-        }
-
         break;
 
     default:
-        echo "usage: multiflexi-cli <command> [argument] [id]\n";
-        echo "commands: version list remove\n";
-
+        echo "Unknown command: $command" . \PHP_EOL;
         break;
 }
