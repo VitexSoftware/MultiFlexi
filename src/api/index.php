@@ -122,7 +122,7 @@ $app->add(new \Tuupola\Middleware\HttpBasicAuthentication([
     },
 ]));
 
-$app->get('/MultiFlexi/src/api/', static function (Request $request, Response $response, $args) {
+$app->get($basePath, static function (Request $request, Response $response, $args) {
     $response->getBody()->write('MultiFlexi Api Root');
 
     return $response;
