@@ -82,7 +82,7 @@ $request = $serverRequestCreator->createServerRequestFromGlobals();
 $errorMiddleware = $container->get(ErrorMiddleware::class);
 
 $app->add(new \Dyorg\TokenAuthentication([
-    'path' => $app->getBasePath().'/api',
+    'path' => $app->getBasePath(),
     'passthrough' => ['/', '/ping', '/login'], /* or ['/api/auth', '/api/test'] */
     'authenticator' => static function ($arguments) {
         return (bool) mt_rand(0, 1);
