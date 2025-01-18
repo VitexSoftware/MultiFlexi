@@ -34,31 +34,31 @@ if (Shared::cfg('APP_DEBUG') === 'true') {
 \define('APP_NAME', 'MultiFlexi cli');
 Shared::user(new Anonym());
 
-$command = \array_key_exists(1, $argv) ? $argv[1] : 'help';
-$argument = \array_key_exists(2, $argv) ? $argv[2] : null;
-$identifier = \array_key_exists(3, $argv) ? $argv[3] : null;
-$property = \array_key_exists(4, $argv) ? $argv[4] : null;
-$option = \array_key_exists(5, $argv) ? $argv[5] : null;
+// Parse command line arguments
+$command = $argv[1] ?? null;
+$argument = $argv[2] ?? null;
+$identifier = $argv[3] ?? null;
+$property = $argv[4] ?? null;
+$format = 'plain'; // Default format
 
-// Collect properties starting with --
-$properties = [];
-
-$probBegin = 0;
-
+// Parse options
 for ($i = 1; $i < \count($argv); ++$i) {
     if (strpos($argv[$i], '--') === 0) {
         $probBegin = $i;
-
         break;
     }
 }
 
-if ($probBegin) {
+if (isset($probBegin)) {
     for ($i = $probBegin; $i < \count($argv); ++$i) {
         if (strpos($argv[$i], '--') === 0) {
             $key = substr($argv[$i], 2);
             $value = \array_key_exists($i + 1, $argv) ? $argv[$i + 1] : null;
-            $properties[$key] = $value;
+            if ($key === 'format') {
+                $format = $value ?? 'plain';
+            } else {
+                $properties[$key] = $value;
+            }
             ++$i; // Skip the next argument as it is the value
         }
     }
@@ -90,7 +90,6 @@ switch ($command) {
         break;
 
     case 'status':
-        $format = $argument ?? 'plaintext';
         $engine = new \MultiFlexi\Engine();
         $pdo = $engine->getPdo();
         $database = $pdo->getAttribute(\PDO::ATTR_DRIVER_NAME).' '.
