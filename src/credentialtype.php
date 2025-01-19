@@ -53,9 +53,7 @@ if (WebPage::singleton()->isPosted()) {
     }
 }
 
-
 WebPage::singleton()->addItem(new PageTop(_('Crednetial Type')));
-
 
 WebPage::singleton()->container->addItem(new CredentialTypeForm($crtype));
 
