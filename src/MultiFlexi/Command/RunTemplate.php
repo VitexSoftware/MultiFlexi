@@ -1,35 +1,42 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * MultiFlexi - 
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Command;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Description of RunTemplate
+ * Description of RunTemplate.
  *
- * @author Vitex <info@vitexsoftware.cz> 
+ * @author Vitex <info@vitexsoftware.cz>
  */
-class RunTemplate extends Command {
-
-    protected function configure(): void {
+class RunTemplate extends Command
+{
+    protected function configure(): void
+    {
         $this
-                ->setName('runtemplate')
-                ->setDescription('Runtemplate operations')
-                ->addOption('--format', '-f', InputOption::VALUE_OPTIONAL, 'The output format: text or json. Defaults to text.', 'text')
-                ->addArgument('operation', InputArgument::REQUIRED, 'what to do with RunTemplate')
-                ->addArgument('id', InputArgument::OPTIONAL, 'which RunTemplate ?')
-                ->setHelp(<<<EOT
+            ->setName('runtemplate')
+            ->setDescription('Runtemplate operations')
+            ->addOption('--format', '-f', InputOption::VALUE_OPTIONAL, 'The output format: text or json. Defaults to text.', 'text')
+            ->addArgument('operation', InputArgument::REQUIRED, 'what to do with RunTemplate')
+            ->addArgument('id', InputArgument::OPTIONAL, 'which RunTemplate ?')
+            ->setHelp(<<<'EOT'
 The <info>runtemplate</info> command mangafe runtemplate
 
 <info>multilflexi-cli runtemplate trigger 220</info>
@@ -38,8 +45,8 @@ The <info>runtemplate</info> command mangafe runtemplate
 EOT);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int {
-
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
         $runTemplate = new \MultiFlexi\RunTemplate(is_numeric($input->getArgument('id')) ? (int) $input->getArgument('id') : $input->getArgument('id'));
 
         switch ($input->getArgument('operation')) {
@@ -56,7 +63,6 @@ EOT);
             default:
                 break;
         }
-
 
         return Command::SUCCESS;
     }

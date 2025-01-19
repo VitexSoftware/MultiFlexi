@@ -1,24 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * MultiFlexi - 
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Command;
+
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Description of Company
+ * Description of Company.
  *
- * @author Vitex <info@vitexsoftware.cz> 
+ * @author Vitex <info@vitexsoftware.cz>
  */
-class Company  extends Command{
+class Company extends Command
+{
     protected function configure(): void
     {
         $this
