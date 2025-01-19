@@ -49,6 +49,9 @@ Include job-related status information.
 .TP
 .B \-\-help
 Display this help message.
+.TP
+.B \-\-format
+Specify the output format. Can be 'plain' (default) or 'json'.
 
 .SH EXAMPLES
 .TP
@@ -63,6 +66,12 @@ Display the status of the application.
 .TP
 .B multiflexi-cli status jobs
 Display the status of the application including job-related information.
+.TP
+.B multiflexi-cli status --format json
+Display the status of the application in JSON format.
+.TP
+.B multiflexi-cli status jobs --format json
+Display the status of the application including job-related information in JSON format.
 
 .SH AUTHOR
 MultiFlexi was written by Vítězslav Dvořák <info@vitexsoftware.cz>.
