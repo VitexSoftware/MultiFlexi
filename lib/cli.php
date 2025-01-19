@@ -40,4 +40,10 @@ Shared::user(new Anonym());
 $app = new Application(\Ease\Shared::appName(), \Ease\Shared::appVersion());
 $app->add(new Command\AppStatus());
 $app->add(new Command\JobStatus());
+$app->add(new Command\Application());
+$app->add(new Command\Company());
+$app->add(new Command\CredentialType());
+$app->add(new Command\Job());
+$app->add(new Command\RunTemplate());
+
 $app->run();
