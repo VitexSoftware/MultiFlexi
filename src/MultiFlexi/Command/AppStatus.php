@@ -31,7 +31,7 @@ class AppStatus extends Command
     protected function configure(): void
     {
         $this
-            ->setName('appstatus')
+            ->setName('status')
             ->setDescription('Prints App Status')
             ->addOption('--format', '-f', InputOption::VALUE_OPTIONAL, 'The output format: text or json. Defaults to text.', 'text')
             ->setHelp('This command prints overall MultiFlexi status');

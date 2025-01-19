@@ -418,6 +418,8 @@ EOD;
         $itemKey = 'job-['.$this->company->getDataValue('code').'-'.$this->application->getDataValue('code').'-'.$this->runTemplate->getMyKey().']';
         $packet->addMetric((new ZabbixMetric($itemKey, json_encode($this->zabbixMessageData)))->withHostname($hostname));
 
+        file_put_contents('/tmp/zabbix-' . $this->getMyKey().'-'. time().'.json' , json_encode($this->zabbixMessageData));
+        
         try {
             $result = $this->zabbixSender->send($packet);
 

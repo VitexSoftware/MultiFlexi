@@ -8,9 +8,11 @@
  */
 
 namespace MultiFlexi\Command;
+
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -18,14 +20,44 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Vitex <info@vitexsoftware.cz> 
  */
-class RunTemplate  extends Command {
-        protected function configure(): void
-    {
+class RunTemplate extends Command {
+
+    protected function configure(): void {
         $this
-            ->setName('runtemplate')
-            ->setDescription('Runtemplate operations')
-            ->addOption('--format', '-f', InputOption::VALUE_OPTIONAL, 'The output format: text or json. Defaults to text.', 'text')
-            ->setHelp('This command manage Runtemplates');
+                ->setName('runtemplate')
+                ->setDescription('Runtemplate operations')
+                ->addOption('--format', '-f', InputOption::VALUE_OPTIONAL, 'The output format: text or json. Defaults to text.', 'text')
+                ->addArgument('operation', InputArgument::REQUIRED, 'what to do with RunTemplate')
+                ->addArgument('id', InputArgument::OPTIONAL, 'which RunTemplate ?')
+                ->setHelp(<<<EOT
+The <info>runtemplate</info> command mangafe runtemplate
+
+<info>multilflexi-cli runtemplate trigger 220</info>
+<info>multilflexi-cli runtemplate list -f json</info>
+
+EOT);
     }
 
+    protected function execute(InputInterface $input, OutputInterface $output): int {
+
+        $runTemplate = new \MultiFlexi\RunTemplate(is_numeric($input->getArgument('id')) ? (int) $input->getArgument('id') : $input->getArgument('id'));
+
+        switch ($input->getArgument('operation')) {
+            case 'trigger':
+                $jobber = new \MultiFlexi\Job();
+                $when = new \DateTime();
+                $executor = 'Native';
+                $customEnv = [];
+                $prepared = $jobber->prepareJob($runTemplate->getMyKey(), $customEnv, $when, $executor, 'adhoc');
+                $jobber->scheduleJobRun($when);
+
+                break;
+
+            default:
+                break;
+        }
+
+
+        return Command::SUCCESS;
+    }
 }
