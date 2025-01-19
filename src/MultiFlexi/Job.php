@@ -339,7 +339,7 @@ EOD;
             $this->setZabbixValue('company_name', $this->company->getDataValue('name'));
             $this->setZabbixValue('company_code', $this->company->getDataValue('code'));
             $this->setZabbixValue('runtemplate_id', $runTemplateId);
-            $this->setZabbixValue('exitcode', -1);
+            $this->setZabbixValue('exitcode', null);
             $this->setZabbixValue('stdout', null);
             $this->setZabbixValue('stderr', null);
             $this->setZabbixValue('executor', $executor);
@@ -418,8 +418,8 @@ EOD;
         $itemKey = 'job-['.$this->company->getDataValue('code').'-'.$this->application->getDataValue('code').'-'.$this->runTemplate->getMyKey().']';
         $packet->addMetric((new ZabbixMetric($itemKey, json_encode($this->zabbixMessageData)))->withHostname($hostname));
 
-        file_put_contents('/tmp/zabbix-' . $this->getMyKey().'-'. time().'.json' , json_encode($this->zabbixMessageData));
-        
+        // file_put_contents('/tmp/zabbix-' . $this->zabbixMessageData['phase'] .'-'. $this->getMyKey().'-'. time().'.json' , json_encode($this->zabbixMessageData));
+
         try {
             $result = $this->zabbixSender->send($packet);
 

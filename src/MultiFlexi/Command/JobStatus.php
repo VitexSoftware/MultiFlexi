@@ -19,30 +19,31 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Ease\Shared;
 
 /**
  * Description of Status.
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class JobStatus extends Command {
-
-    protected function configure(): void {
+class JobStatus extends Command
+{
+    protected function configure(): void
+    {
         $this
-                ->setName('jobstatus')
-                ->setDescription('Prints Jobs Status')
-                ->addOption('--format', '-f', InputOption::VALUE_OPTIONAL, 'The output format: text or json. Defaults to text.', 'text')
-                ->setHelp('This command prints status of jobs and its schedule');
+            ->setName('jobstatus')
+            ->setDescription('Prints Jobs Status')
+            ->addOption('--format', '-f', InputOption::VALUE_OPTIONAL, 'The output format: text or json. Defaults to text.', 'text')
+            ->setHelp('This command prints status of jobs and its schedule');
     }
 
     // 09 implementing the execute method
-    protected function execute(InputInterface $input, OutputInterface $output): int {
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
         $engine = new \MultiFlexi\Engine();
         $pdo = $engine->getPdo();
-        $database = $pdo->getAttribute(\PDO::ATTR_DRIVER_NAME) . ' ' .
-                $pdo->getAttribute(\PDO::ATTR_CONNECTION_STATUS) . ' ' .
-                $pdo->getAttribute(\PDO::ATTR_SERVER_INFO) . ' ' .
+        $database = $pdo->getAttribute(\PDO::ATTR_DRIVER_NAME).' '.
+                $pdo->getAttribute(\PDO::ATTR_CONNECTION_STATUS).' '.
+                $pdo->getAttribute(\PDO::ATTR_SERVER_INFO).' '.
                 $pdo->getAttribute(\PDO::ATTR_SERVER_VERSION);
 
         $queeLength = (new \MultiFlexi\Scheduler())->listingQuery()->count();
@@ -78,7 +79,7 @@ EOD;
             $output->writeln(json_encode($status, \JSON_PRETTY_PRINT));
         } else {
             foreach ($status as $key => $value) {
-                $output->writeln(str_replace('_', ' ', $key) . ': ' . $value);
+                $output->writeln(str_replace('_', ' ', $key).': '.$value);
             }
         }
 
