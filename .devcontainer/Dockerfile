@@ -1,8 +1,14 @@
 FROM debian:latest
 
+ARG BASE_IMAGE=mcr.microsoft.com/devcontainers/php:1-8.3
+RUN groupadd -g 1000 vscode && useradd -u 1000 -g vscode -d /home/vscode -s /bin/bash vscode
+
+RUN eval $(sed -n "s/vscode:[^:]*:\([^:]*\):\([^:]*\):[^:]*:\([^:]*\):[^:]*:\([^:]*\)/groupadd -g \2 vscode \&\& useradd -u \1 -g \2 -d \4 -s \5 vscode/p" /etc/passwd)
+
+
 ENV APACHE_DOCUMENT_ROOT /opt/multiflexi/src
 ENV COMPOSER_ALLOW_SUPERUSER 1
-env DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 ENV DB_CONNECTION=sqlite
 ENV DB_DATABASE=/opt/multiflexi/db/multiflexi.sqlite
 
@@ -15,12 +21,11 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 COPY . /opt/multiflexi
+COPY .env /opt/multiflexi
 COPY bin/multiflexi-probe /usr/bin
 
-
-
-RUN php-devconf ; rm -f /opt/multiflexi/.env ; touch /opt/multiflexi/db/multiflexi.sqlite ; chown www-data:www-data /opt/multiflexi/db/multiflexi.sqlite ; cd /opt/multiflexi ; composer update ; cd src ; ../vendor/bin/phinx migrate -c ../phinx-adapter.php ;  ../vendor/bin/phinx seed:run -c ../phinx-adapter.php; cd ../lib; php -f json2app.php ../tests/multiflexi_probe.multiflexi.app.json
+#RUN /usr/bin/php-devconf ; rm -f /opt/multiflexi/.env ; touch /opt/multiflexi/db/multiflexi.sqlite ; chown www-data:www-data /opt/multiflexi/db/multiflexi.sqlite ; cd /opt/multiflexi ; composer update ; cd src ; ../vendor/bin/phinx migrate -c ../phinx-adapter.php ;  ../vendor/bin/phinx seed:run -c ../phinx-adapter.php; cd ../lib; php -f json2app.php ../tests/multiflexi_probe.multiflexi.app.json
 #RUN a2ensite multiflexi
 
-CMD /usr/sbin/cron
+#CMD /usr/sbin/cron
 CMD [ "/usr/sbin/apache2ctl", "-D", "FOREGROUND" ]

@@ -78,7 +78,7 @@ distributions.each {
                         }
                     }
                     sh '/etc/cron.daily/multiflexi || true'
-                    sh 'multiflexi-cli'
+                    sh 'multiflexi'
                 }
             }
             stage('Copy artifacts ' + distribution ) {
