@@ -60,7 +60,7 @@ class AppStatus extends Command
             'credentials' => $engine->getFluentPDO()->from('credentials')->count(),
             'credential_types' => $engine->getFluentPDO()->from('credential_type')->count(),
             'database' => $database,
-            'daemon' => \MultiFlexi\Runner::isServiceActive('multiflexi.service') ? 'running' : 'stopped',
+            'status' => \MultiFlexi\Runner::isServiceActive('multiflexi.service') ? 'running' : 'stopped',
             'timestamp' => date('c'),
         ];
 

@@ -70,7 +70,7 @@ EOD;
             'total_applications' => (int) $result['total_applications'],
             'repeated_jobs' => (int) $result['repeated_jobs'],
             'total_jobs' => (int) $result['total_jobs'],
-            'quee_length' => (int) $queeLength,
+            'queue_length' => (int) $queeLength,
         ];
 
         $format = $input->getOption('format');
