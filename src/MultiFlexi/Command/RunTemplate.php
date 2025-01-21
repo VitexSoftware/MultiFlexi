@@ -15,7 +15,6 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Command;
 
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -28,6 +27,25 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class RunTemplate extends Command
 {
+    public function listing(): array
+    {
+        $engine = new self();
+
+        return $engine->listingQuery()->select([
+            'id',
+            'enabled',
+            'name',
+            'app_id',
+            'company_id',
+            'DatCreate',
+            'DatUpdate',
+            'setup',
+            'cmdparams',
+            'deploy',
+            'homepage',
+            'requirements',
+        ], true)->fetchAll();
+    }
     protected function configure(): void
     {
         $this

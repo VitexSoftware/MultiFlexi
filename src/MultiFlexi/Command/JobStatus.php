@@ -15,7 +15,6 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Command;
 
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -36,7 +35,6 @@ class JobStatus extends Command
             ->setHelp('This command prints status of jobs and its schedule');
     }
 
-    // 09 implementing the execute method
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $engine = new \MultiFlexi\Engine();

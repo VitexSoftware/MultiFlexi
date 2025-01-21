@@ -44,6 +44,7 @@ $app->add(new Command\Application());
 $app->add(new Command\Company());
 $app->add(new Command\CredentialType());
 $app->add(new Command\Job());
+$app->add(new Command\User());
 $app->add(new Command\RunTemplate());
 
 $app->run();
