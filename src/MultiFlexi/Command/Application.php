@@ -15,8 +15,10 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Command;
 
-use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Description of Application.
@@ -25,12 +27,47 @@ use Symfony\Component\Console\Input\InputOption;
  */
 class Application extends Command
 {
+    #[\Override]
+    public function listing(): array
+    {
+        $engine = new \MultiFlexi\Application();
+
+        return $engine->listingQuery()->select([
+            'id',
+            'enabled',
+            'image not like "" as image',
+            'name',
+            'description',
+            'executable',
+            'DatCreate',
+            'DatUpdate',
+            'setup',
+            'cmdparams',
+            'deploy',
+            'homepage',
+            'requirements',
+        ], true)->fetchAll();
+    }
     protected function configure(): void
     {
         $this
             ->setName('app')
             ->setDescription('Apps operations')
+            ->addArgument('operation', InputArgument::REQUIRED, _('What to do with app'))
+            ->addArgument('id', InputArgument::OPTIONAL, 'which RunTemplate ?')
             ->addOption('--format', '-f', InputOption::VALUE_OPTIONAL, 'The output format: text or json. Defaults to text.', 'text')
             ->setHelp('This command manage Apps inf');
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
+        switch ($input->getArgument('operation')) {
+            case 'list':
+                $this->outputTable($this->listing());
+
+                break;
+        }
+
+        return Command::SUCCESS;
     }
 }

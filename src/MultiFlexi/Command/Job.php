@@ -15,7 +15,6 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Command;
 
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
@@ -25,6 +24,15 @@ use Symfony\Component\Console\Input\InputOption;
  */
 class Job extends Command
 {
+    #[\Override]
+    public function listing(): array
+    {
+        $engine = new self();
+
+        return $engine->listingQuery()->select([
+            'id',
+        ])->fetchAll();
+    }
     protected function configure(): void
     {
         $this

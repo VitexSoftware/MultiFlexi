@@ -18,42 +18,32 @@ namespace MultiFlexi\Command;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Description of Company.
+ * Description of User.
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class Company extends Command
+class User extends Command
 {
     #[\Override]
     public function listing(): array
     {
-        $engine = new self();
+        $engine = new \MultiFlexi\User();
 
         return $engine->listingQuery()->select([
             'id',
             'enabled',
-            'settings',
-            'logo  not like "" as logo',
-            'server',
-            'name',
-            'ic',
-            'company',
-            'rw',
-            'setup',
-            'webhook',
-            'DatCreate',
-            'DatUpdate',
-            'customer',
+            'login',
             'email',
-            'code',
-        ])->fetchAll();
+            'firstname',
+            'lastname',
+        ], true)->fetchAll();
     }
     protected function configure(): void
     {
         $this
-            ->setName('company')
-            ->setDescription('Company operations')
+            ->setName('user')
+            ->setDescription('User operations')
             ->addOption('--format', '-f', InputOption::VALUE_OPTIONAL, 'The output format: text or json. Defaults to text.', 'text')
-            ->setHelp('This command manage Company');
+            ->setHelp('This command manage Jobs');
     }
 }
