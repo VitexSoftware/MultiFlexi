@@ -416,18 +416,25 @@ EOD;
         $packet = new ZabbixPacket();
         $hostname = \Ease\Shared::cfg('ZABBIX_HOST');
         $itemKey = 'job-['.$this->company->getDataValue('code').'-'.$this->application->getDataValue('code').'-'.$this->runTemplate->getMyKey().']';
-        $packet->addMetric((new ZabbixMetric($itemKey, (string) json_encode($this->zabbixMessageData)))->withHostname($hostname));
 
-        // file_put_contents('/tmp/zabbix-' . $this->zabbixMessageData['phase'] .'-'. $this->getMyKey().'-'. time().'.json' , json_encode($this->zabbixMessageData));
+        $zabbixMetric = json_encode($this->zabbixMessageData);
 
-        try {
-            $result = $this->zabbixSender->send($packet);
+        if ($zabbixMetric) {
+            $packet->addMetric((new ZabbixMetric($itemKey, $zabbixMetric))->withHostname($hostname));
 
-            if ($this->debug) {
-                $this->addStatusMessage('Data Sent To Zabbix: '.$itemKey.' '.json_encode($messageData), 'debug');
+            // file_put_contents('/tmp/zabbix-' . $this->zabbixMessageData['phase'] .'-'. $this->getMyKey().'-'. time().'.json' , json_encode($this->zabbixMessageData));
+
+            try {
+                $result = $this->zabbixSender->send($packet);
+
+                if ($this->debug) {
+                    $this->addStatusMessage('Data Sent To Zabbix: '.$itemKey.' '.json_encode($messageData), 'debug');
+                }
+            } catch (\Exception $exc) {
+                $result = false;
             }
-        } catch (\Exception $exc) {
-            $result = false;
+        } else {
+            $this->addStatusMessage('Problem Jsonizing of '.serialize($this->zabbixMessageData), 'debug');
         }
 
         return $result;
