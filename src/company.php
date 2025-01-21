@@ -71,16 +71,14 @@ foreach ($jobs as $job) {
     $job['uuid'] = new ATag('runtemplate.php?id='.$job['runtemplate_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag('appimage.php?uuid='.$job['uuid'], $job['appname'], ['height' => 50, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);
     unset($job['appname'], $job['runtemplate_id'], $job['app_id']);
 
-    $job['id'] = new \Ease\Html\ATag('job.php?id='.$job['id'], [new ExitCode($job['exitcode'], ['style' => 'font-size: 1.0em; font-family: monospace;']), '<br>', new \Ease\TWB4\Badge('info', '🏁 '. $job['id'])], ['title' => _('Job Info')]);
+    $job['id'] = new \Ease\Html\ATag('job.php?id='.$job['id'], [new ExitCode($job['exitcode'], ['style' => 'font-size: 1.0em; font-family: monospace;']), '<br>', new \Ease\TWB4\Badge('info', '🏁 '.$job['id'])], ['title' => _('Job Info')]);
 
-    
     if ($job['begin']) {
         $job['begin'] = [$job['begin'], '<br>', new \Ease\Html\SmallTag(new \Ease\Html\Widgets\LiveAge(new \DateTime($job['begin'])))];
     } else {
         $job['begin'] = '⏳&nbsp;'._('Scheduled').($job['scheduled'] ? new \Ease\Html\DivTag(new \Ease\Html\Widgets\LiveAge(new \DateTime($job['scheduled']))) : '');
     }
 
-    
     $job['launched_by'] = [
         new ExecutorImage($job['executor'], ['align' => 'right', 'height' => '50px']),
         new \Ease\Html\DivTag($job['launched_by'] ? new \Ease\Html\ATag('user.php?id='.$job['launched_by'], new \Ease\TWB4\Badge('info', $job['login'])) : _('Timer')),

@@ -316,7 +316,7 @@ class Application extends DBEngine
                     $this->addStatusMessage(_('Topics field not present. '), 'warning');
                 }
 
-                if (($currentVersion != 'n/a') && $currentVersion === $newVersion) {
+                if (($currentVersion !== 'n/a') && $currentVersion === $newVersion) {
                     $this->addStatusMessage('🧩📦 '.$importData['name'].' ('.$currentVersion.') already present', 'info');
                     $fields = [true];
                 } else {
@@ -368,9 +368,11 @@ class Application extends DBEngine
                     } catch (\PDOException $exc) {
                         echo $exc->getTraceAsString();
                         $problemData = $this->getData();
-                        if(array_key_exists('image', $currentData)){
+
+                        if (\array_key_exists('image', $currentData)) {
                             $problemData['image'] = substr((string) $problemData['image'], 0, 20).' ...';
                         }
+
                         fwrite(\STDERR, print_r($problemData, true).\PHP_EOL);
                         echo $exc->getMessage();
                     }
@@ -455,7 +457,7 @@ class Application extends DBEngine
         $a2cf = $this->getFluentPDO()->deleteFrom('conffield')->where('app_id', $appId)->execute();
 
         if ($a2cf !== 0) {
-            $this->addStatusMessage(sprintf(_('%d Config fields removed'), $a2rt), null === $a2rt ? 'error' : 'success');
+            $this->addStatusMessage(sprintf(_('%d Config fields removed'), $a2cf), null === $a2cf ? 'error' : 'success');
         }
 
         $a2cfg = $this->getFluentPDO()->deleteFrom('configuration')->where('app_id', $appId)->execute();
@@ -490,7 +492,7 @@ class Application extends DBEngine
      */
     public function getRequirements(): array
     {
-        $reqs = (string)$this->getDataValue('requirements');
+        $reqs = (string) $this->getDataValue('requirements');
 
         return \strlen($reqs) ? (strstr($reqs, ',') ? explode(',', $reqs) : [$reqs]) : [];
     }

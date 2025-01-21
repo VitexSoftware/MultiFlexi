@@ -78,8 +78,7 @@ distributions.each {
                         }
                     }
                     sh '/etc/cron.daily/multiflexi || true'
-                    sh 'multiflexi-cli version'
-                    sh 'sudo multiflexi-cli list app'
+                    sh 'multiflexi'
                 }
             }
             stage('Copy artifacts ' + distribution ) {

@@ -33,6 +33,7 @@
       "MultiFlexi\\Pohoda\\": "MultiFlexi/Pohoda",
       "MultiFlexi\\Zabbix\\": "MultiFlexi/Zabbix",
       "MultiFlexi\\Action\\": "MultiFlexi/Action",
+      "MultiFlexi\\Command\\": "MultiFlexi/Command",
       "MultiFlexi\\Ui\\Form\\": "MultiFlexi/Ui/Form",
       "MultiFlexi\\Executor\\": "MultiFlexi/Executor",
       "MultiFlexi\\AbraFlexi\\": "MultiFlexi/AbraFlexi",
