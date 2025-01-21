@@ -71,12 +71,12 @@ if ($actionConfigsFound->count()) {
 
 $credentor = new \MultiFlexi\Credential();
 $credentialsFound = $credentor->listingQuery()->where('name LIKE "%'.$searchTerm.'%"');
+
 if ($credentialsFound->count()) {
     foreach ($credentialsFound as $credential) {
         $results->addItemSmart(new \Ease\Html\ATag('credential.php?id='.$credential['id'], '🔐 Credential #'.$credential['id'].' '.$credential['name']));
     }
 }
-
 
 WebPage::singleton()->addItem(new PageTop(_('MultiFlexi')));
 

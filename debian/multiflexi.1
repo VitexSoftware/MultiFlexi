@@ -1,0 +1,80 @@
+.TH MULTIFLEXI-CLI 1 "December 2023" "MultiFlexi CLI" "User Commands"
+.SH NAME
+multiflexi-cli \- Command line interface for MultiFlexi
+.SH SYNOPSIS
+.B multiflexi-cli
+.I command
+.RI [ argument ]
+.RI [ identifier ]
+.RI [ property ]
+.RI [ option ]
+.SH DESCRIPTION
+.B multiflexi-cli
+is a command line interface for managing MultiFlexi.
+
+.SH COMMANDS
+.TP
+.B version
+Display the application name and version.
+.TP
+.B remove
+Remove a user, app, company, runtemplate, or job.
+.RS
+.TP
+.B user
+Remove a user by identifier.
+.TP
+.B app
+Remove an app by identifier.
+.TP
+.B company
+Remove a company by identifier.
+.TP
+.B runtemplate
+Remove a runtemplate by identifier.
+.TP
+.B job
+Remove a job by identifier.
+.RE
+.TP
+.B status
+Display the status of the application.
+.RS
+.TP
+.B jobs
+Include job-related status information.
+.RE
+
+.SH OPTIONS
+.TP
+.B \-\-help
+Display this help message.
+.TP
+.B \-\-format
+Specify the output format. Can be 'plain' (default) or 'json'.
+
+.SH EXAMPLES
+.TP
+.B multiflexi-cli version
+Display the application name and version.
+.TP
+.B multiflexi-cli remove user 123
+Remove the user with identifier 123.
+.TP
+.B multiflexi-cli status
+Display the status of the application.
+.TP
+.B multiflexi-cli status jobs
+Display the status of the application including job-related information.
+.TP
+.B multiflexi-cli status --format json
+Display the status of the application in JSON format.
+.TP
+.B multiflexi-cli status jobs --format json
+Display the status of the application including job-related information in JSON format.
+
+.SH AUTHOR
+MultiFlexi was written by Vítězslav Dvořák <info@vitexsoftware.cz>.
+
+.SH COPYRIGHT
+This is free software; see the source for copying conditions. There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.

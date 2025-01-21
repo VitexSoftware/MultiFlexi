@@ -18,6 +18,8 @@ namespace MultiFlexi;
 /**
  * MultiFlexi - Instance Management Class.
  *
+ * @deprecated since version 1.25
+ *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2020-2023 Vitex Software
  */

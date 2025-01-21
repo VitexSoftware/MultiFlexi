@@ -33,7 +33,8 @@
         "confirm-it-solutions/php-zabbix-api": "^3.0",
         "vitexsoftware/ease-html-widgets": "^1.1",
         "vitexsoftware/ease-html": "^1.40",
-        "vitexsoftware/multiflexi-api-server": "dev-main"
+        "vitexsoftware/multiflexi-api-server": "dev-main",
+        "symfony/console": "6.4.x-dev"
     },
     "license": "MIT",
     "authors": [
@@ -52,6 +53,7 @@
             "MultiFlexi\\Action\\": "src/MultiFlexi/Action",
             "MultiFlexi\\Zabbix\\": "src/MultiFlexi/Zabbix",
             "MultiFlexi\\Pohoda\\": "src/MultiFlexi/Pohoda",
+            "MultiFlexi\\Command\\": "src/MultiFlexi/Command",
             "MultiFlexi\\Ui\\Form\\": "src/MultiFlexi/Ui/Form",
             "MultiFlexi\\Executor\\": "src/MultiFlexi/Executor",
             "MultiFlexi\\Api\\Auth\\": "src/MultiFlexi/Api/Auth",

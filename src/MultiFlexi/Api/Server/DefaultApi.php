@@ -230,9 +230,9 @@ EOD);
         $status = [];
         $pdo = $engine->getPdo();
         $database = $pdo->getAttribute(\PDO::ATTR_DRIVER_NAME).' '.
-                    $pdo->getAttribute(\PDO::ATTR_CONNECTION_STATUS).' '.
-                    $pdo->getAttribute(\PDO::ATTR_SERVER_INFO).' '.
-                    $pdo->getAttribute(\PDO::ATTR_SERVER_VERSION);
+                $pdo->getAttribute(\PDO::ATTR_CONNECTION_STATUS).' '.
+                $pdo->getAttribute(\PDO::ATTR_SERVER_INFO).' '.
+                $pdo->getAttribute(\PDO::ATTR_SERVER_VERSION);
 
         if ($suffix === 'html') {
             $status = [
@@ -273,6 +273,9 @@ EOD);
     public function getJobsStatus(ServerRequestInterface $request, ResponseInterface $response, string $suffix): ResponseInterface
     {
         $engine = new \MultiFlexi\Engine();
+
+        $queeLength = (new \MultiFlexi\Scheduler())->listingQuery()->count();
+
         $pdo = $engine->getPdo();
 
         // Query to get job status information
@@ -302,6 +305,7 @@ EOD;
                 ['total_applications', (int) $result['total_applications']],
                 ['repeated_jobs', (int) $result['repeated_jobs']],
                 ['total_jobs', (int) $result['total_jobs']],
+                ['quee_length', (int) $queeLength],
             ];
         } else {
             $status = [
@@ -312,16 +316,14 @@ EOD;
                 'total_applications' => (int) $result['total_applications'],
                 'repeated_jobs' => (int) $result['repeated_jobs'],
                 'total_jobs' => (int) $result['total_jobs'],
+                'quee_length' => (int) $queeLength,
             ];
         }
 
         return self::prepareResponse($response, $status, $suffix, 'jobsStatus');
     }
-    
+
     public function getAllUserCredentials(ServerRequestInterface $request, ResponseInterface $response, string $suffix): ResponseInterface
     {
-        
     }
-    
-    
 }

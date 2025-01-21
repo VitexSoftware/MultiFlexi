@@ -80,7 +80,7 @@ class JobHistoryTable extends \Ease\TWB4\Table
                 unset($job['uuid']);
             }
 
-            $job['id'] = new \Ease\Html\ATag('job.php?id='.$job['id'], [new ExitCode($exitCode, ['style' => 'font-size: 1.0em; font-family: monospace;']), '<br>', new \Ease\TWB4\Badge('info', '🏁 '. $job['id'])], ['title' => _('Job Info')]);
+            $job['id'] = new \Ease\Html\ATag('job.php?id='.$job['id'], [new ExitCode($exitCode, ['style' => 'font-size: 1.0em; font-family: monospace;']), '<br>', new \Ease\TWB4\Badge('info', '🏁 '.$job['id'])], ['title' => _('Job Info')]);
             unset($job['appname'], $job['app_id']);
 
             if ($job['begin']) {

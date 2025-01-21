@@ -58,8 +58,12 @@ $container = $builder->build();
 
 // Instantiate the app
 $app = Bridge::create($container);
-$app->setBasePath('/MultiFlexi/src/api');
-$path = '/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/';
+
+$uriParts = explode('/api/', \Ease\WebPage::getUri());
+$basePath = $uriParts[0].'/api';
+
+$app->setBasePath($basePath);
+$path = $basePath.'/VitexSoftware/MultiFlexi/1.0.0/';
 
 // Register middleware
 $middleware = new RegisterMiddlewares();
@@ -79,7 +83,7 @@ $request = $serverRequestCreator->createServerRequestFromGlobals();
 $errorMiddleware = $container->get(ErrorMiddleware::class);
 
 $app->add(new \Dyorg\TokenAuthentication([
-    'path' => $app->getBasePath().'/api',
+    'path' => $app->getBasePath(),
     'passthrough' => ['/', '/ping', '/login'], /* or ['/api/auth', '/api/test'] */
     'authenticator' => static function ($arguments) {
         return (bool) mt_rand(0, 1);
@@ -119,7 +123,7 @@ $app->add(new \Tuupola\Middleware\HttpBasicAuthentication([
     },
 ]));
 
-$app->get('/MultiFlexi/src/api/', static function (Request $request, Response $response, $args) {
+$app->get($basePath, static function (Request $request, Response $response, $args) {
     $response->getBody()->write('MultiFlexi Api Root');
 
     return $response;

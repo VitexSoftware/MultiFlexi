@@ -1,8 +1,20 @@
-multiflexi (1.23.0) UNRELEASED; urgency=medium
+multiflexi (1.25.0) UNRELEASED; urgency=medium
+
+  * new cli tool
+
+ -- vitex <info@vitexsoftware.cz>  Sun, 19 Jan 2025 20:03:39 +0100
+
+multiflexi (1.24.0) jammy; urgency=medium
+
+  * api@debian works now
+
+ -- vitex <info@vitexsoftware.cz>  Sun, 19 Jan 2025 20:03:19 +0100
+
+multiflexi (1.23.0) jammy; urgency=medium
 
   * file_store table added
 
- -- vitex <info@vitexsoftware.cz>  Tue, 24 Dec 2024 23:36:59 +0100
+ -- vitex <info@vitexsoftware.cz>  Fri, 17 Jan 2025 04:11:19 +0100
 
 multiflexi (1.22.1) jammy; urgency=medium
 
