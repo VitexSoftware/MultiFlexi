@@ -416,7 +416,7 @@ EOD;
         $packet = new ZabbixPacket();
         $hostname = \Ease\Shared::cfg('ZABBIX_HOST');
         $itemKey = 'job-['.$this->company->getDataValue('code').'-'.$this->application->getDataValue('code').'-'.$this->runTemplate->getMyKey().']';
-        $packet->addMetric((new ZabbixMetric($itemKey, json_encode($this->zabbixMessageData)))->withHostname($hostname));
+        $packet->addMetric((new ZabbixMetric($itemKey, (string) json_encode($this->zabbixMessageData)))->withHostname($hostname));
 
         // file_put_contents('/tmp/zabbix-' . $this->zabbixMessageData['phase'] .'-'. $this->getMyKey().'-'. time().'.json' , json_encode($this->zabbixMessageData));
 
