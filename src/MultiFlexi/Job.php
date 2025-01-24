@@ -127,7 +127,7 @@ class Job extends Engine
             'company_id' => $this->runTemplate->getDataValue('company_id'),
             'app_id' => $this->runTemplate->getDataValue('app_id'),
             'env' => \serialize($environment),
-            'exitcode' => -1,
+            'exitcode' => null,
             'stdout' => '',
             'stderr' => '',
             'schedule' => $scheduled->format('Y-m-d H:i:s'),
