@@ -50,7 +50,8 @@ autoload: ## Run composer autoload
 demodata:
 	cd src ; ../vendor/bin/phinx seed:run -c ../phinx-adapter.php ; cd ..
 
-newmigration:
+.PHONY: newmigration
+newmigration: ## Prepare new Database Migration
 	read -p "Enter CamelCase migration name : " migname ; cd src ; ../vendor/bin/phinx create $$migname -c ../phinx-adapter.php ; cd ..
 
 newseed:
