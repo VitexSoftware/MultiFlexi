@@ -39,7 +39,7 @@ switch ($showOnly) {
 
         break;
     case 'unfinished':
-        $condition['exitcode'] = -1;
+        $condition['exitcode'] = null;
 
         break;
     case 'success':

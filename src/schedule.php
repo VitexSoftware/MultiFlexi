@@ -99,7 +99,7 @@ async function pollApi(apiEndpoint, pollingInterval, maxPollingDuration) {
             const response = await fetch(apiEndpoint); // Make request
             const data = await response.json();
 
-            if (data.job.exitcode != -1) {
+            if (data.job.exitcode != null) {
                 console.log('Success response received:', data);
                 window.location.href = "job.php?id=
 EOD.$jobber->getMyKey().<<<'EOD'

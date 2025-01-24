@@ -43,6 +43,7 @@ class JobChart extends \Ease\Html\DivTag
                     $state = 'success';
 
                     break;
+                case null:
                 case -1:
                     $state = 'waiting';
 
