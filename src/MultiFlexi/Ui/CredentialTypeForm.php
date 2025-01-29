@@ -22,7 +22,7 @@ namespace MultiFlexi\Ui;
  */
 class CredentialTypeForm extends \Ease\TWB4\Form
 {
-    #[\Override]
+
     public function __construct(\MultiFlexi\CredentialType $credtype, $formProperties = [])
     {
         $formContents[] = new \Ease\Html\InputHiddenTag('id', $credtype->getMyKey());

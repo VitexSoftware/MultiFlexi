@@ -23,7 +23,7 @@ $results = new \Ease\Html\UlTag();
 $searchTerm = \Ease\WebPage::getRequestValue('search');
 
 $runTemplater = new \MultiFlexi\RunTemplate();
-$runtemplatesFound = $runTemplater->listingQuery()->where('name LIKE "%'.$searchTerm.'%"');
+$runtemplatesFound = $runTemplater->listingQuery()->where('name LIKE "%'.$searchTerm.'%"')->whereOr(['id'=>$searchTerm]);
 
 if ($runtemplatesFound->count()) {
     foreach ($runtemplatesFound as $runTemplate) {
@@ -32,7 +32,7 @@ if ($runtemplatesFound->count()) {
 }
 
 $apper = new \MultiFlexi\Application();
-$appsFound = $apper->listingQuery()->where('name LIKE "%'.$searchTerm.'%"')->whereOr('executable LIKE "%'.$searchTerm.'%"')->whereOr('uuid', $searchTerm);
+$appsFound = $apper->listingQuery()->where('name LIKE "%'.$searchTerm.'%"')->whereOr('executable LIKE "%'.$searchTerm.'%"')->whereOr('uuid', $searchTerm)->whereOr(['id'=>$searchTerm]);
 
 if ($appsFound->count()) {
     foreach ($appsFound as $app) {
@@ -50,7 +50,7 @@ if ($companyFound->count()) {
 }
 
 $jobber = new \MultiFlexi\Job();
-$jobsFound = $jobber->listingQuery()->where('stdout LIKE "%'.$searchTerm.'%"')->whereOr('stderr LIKE "%'.$searchTerm.'%"');
+$jobsFound = $jobber->listingQuery()->where('stdout LIKE "%'.$searchTerm.'%"')->whereOr('stderr LIKE "%'.$searchTerm.'%"')->whereOr(['id'=>$searchTerm]);
 
 if ($jobsFound->count()) {
     foreach ($jobsFound as $job) {
