@@ -37,7 +37,7 @@ class ExitCode extends \Ease\TWB4\Badge
     public static function status($exitcode)
     {
         switch ($exitcode) {
-            case null:
+
             case -1:
                 $type = 'inverse';
 
