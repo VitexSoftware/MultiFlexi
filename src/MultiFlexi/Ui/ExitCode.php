@@ -24,7 +24,7 @@ class ExitCode extends \Ease\TWB4\Badge
 {
     public function __construct($exitcode, $properties = [])
     {
-        parent::__construct(self::status($exitcode), '&nbsp'.($exitcode === -1 ? '⏳' : $exitcode).'&nbsp', $properties);
+        parent::__construct(self::status($exitcode), '&nbsp'.(is_null($exitcode) ? '⏳' : $exitcode).'&nbsp', $properties);
     }
 
     /**
@@ -39,11 +39,15 @@ class ExitCode extends \Ease\TWB4\Badge
         switch ($exitcode) {
 
             case -1:
-                $type = 'inverse';
+                $type = 'secondary';
 
                 break;
             case 0:
-                $type = 'success';
+                if(is_null($exitcode)){
+                    $type = 'info';
+                } else {
+                    $type = 'success';
+                }
 
                 break;
             case 127:
@@ -52,11 +56,7 @@ class ExitCode extends \Ease\TWB4\Badge
                 break;
 
             default:
-                if(is_null($exitcode)){
-                    $type = 'secondary';
-                } else {
-                    $type = 'danger';
-                }
+                $type = 'danger';
                 break;
         }
 
