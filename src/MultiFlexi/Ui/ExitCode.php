@@ -52,8 +52,11 @@ class ExitCode extends \Ease\TWB4\Badge
                 break;
 
             default:
-                $type = 'danger';
-
+                if(is_null($exitcode)){
+                    $type = 'secondary';
+                } else {
+                    $type = 'danger';
+                }
                 break;
         }
 
