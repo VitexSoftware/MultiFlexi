@@ -32,8 +32,8 @@ $errorTerminal = new \Ease\Html\DivTag(nl2br(str_replace('background-color: blac
 $stdTerminal = new \Ease\Html\DivTag(nl2br(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert((string) $jobber->getDataValue('stdout')))), ['style' => 'background:  black; font-family: monospace;']);
 
 $outputTabs = new \Ease\TWB4\Tabs();
-$outputTabs->addTab(_('Output'), [$stdTerminal, \strlen($jobber->getOutput()) ? new \Ease\TWB4\LinkButton('joboutput.php?id='.$jobID.'&mode=std', _('Download'), 'secondary btn-block') : _('No output')]);
-$outputTabs->addTab(_('Errors'), [$errorTerminal, \strlen($jobber->getErrorOutput()) ? new \Ease\TWB4\LinkButton('joboutput.php?id='.$jobID.'&mode=err', _('Download'), 'secondary btn-block') : _('No errors')], empty($jobber->getOutput()));
+$outputTabs->addTab( _('Output'). ' '. (\strlen($jobber->getOutput()) ? ' <span class="badge badge-success">'. substr_count( $jobber->getOutput(), "\n" ).'</span>'  :  '<span class="badge badge-invers">💭</span>'  ), [$stdTerminal, \strlen($jobber->getOutput()) ? new \Ease\TWB4\LinkButton('joboutput.php?id='.$jobID.'&mode=std', _('Download'), 'secondary btn-block') : _('No output')]);
+$outputTabs->addTab( _('Errors').' '.(empty($jobber->getErrorOutput()) ? ' <span class="badge badge-success">0</span>' : '<span class="badge badge-warning">'.substr_count( $jobber->getErrorOutput(), "\n" ).'</span>'), [$errorTerminal, \strlen($jobber->getErrorOutput()) ? new \Ease\TWB4\LinkButton('joboutput.php?id='.$jobID.'&mode=err', _('Download'), 'secondary btn-block') : _('No errors')], empty($jobber->getOutput()));
 
 $artifactor = new \MultiFlexi\Artifact();
 $artifacts = $artifactor->listingQuery()->where('job_id', $jobID);
@@ -60,7 +60,7 @@ if ($artifacts->count()) {
         $artifactsDiv->addItem(new \Ease\TWB4\Panel([new \Ease\Html\ATag('getartifact.php?id='.$artifactData['id'], '💾', ['class' => 'btn btn-info btn-sm']), '&nbsp;'.$artifactData['filename']], 'inverse', new \Ease\Html\DivTag(new \Ease\Html\PreTag('<code>'.$code.'</code>'), ['style' => 'font-family: monospace; color: black']), $artifactData['note']));
     }
 
-    $outputTabs->addTab(_('Artifacts'), $artifactsDiv);
+    $outputTabs->addTab(_('Artifacts').' <span class="badge badge-success">'.$artifacts->count().'</span>', $artifactsDiv);
 }
 
 $runTemplateButton = new RuntemplateButton($runTemplate);
