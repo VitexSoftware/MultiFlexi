@@ -49,7 +49,9 @@ class CredentialSelect extends \Ease\Html\SelectTag
         foreach ($companyCredentials as $credential) {
             $credentials[$credential['id']] = $credential['name'];
         }
+
         asort($credentials);
+
         return $credentials;
     }
 

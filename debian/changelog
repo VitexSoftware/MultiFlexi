@@ -1,8 +1,14 @@
-multiflexi (1.25.0) UNRELEASED; urgency=medium
+multiflexi (1.25.1) UNRELEASED; urgency=medium
+
+  * artifacts download & highlight added
+
+ -- vitex <info@vitexsoftware.cz>  Fri, 31 Jan 2025 12:29:55 +0100
+
+multiflexi (1.25.0) jammy; urgency=medium
 
   * new cli tool
 
- -- vitex <info@vitexsoftware.cz>  Sun, 19 Jan 2025 20:03:39 +0100
+ -- vitex <info@vitexsoftware.cz>  Fri, 31 Jan 2025 12:29:22 +0100
 
 multiflexi (1.24.0) jammy; urgency=medium
 

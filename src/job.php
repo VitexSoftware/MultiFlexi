@@ -39,10 +39,25 @@ $artifactor = new \MultiFlexi\Artifact();
 $artifacts = $artifactor->listingQuery()->where('job_id', $jobID);
 
 if ($artifacts->count()) {
+    WebPage::singleton()->includeJavaScript('js/highlight.min.js');
+    WebPage::singleton()->includeCss('css/highlight-default.min.css');
+    WebPage::singleton()->addJavaScript('hljs.highlightAll();');
     $artifactsDiv = new \Ease\Html\DivTag();
 
     foreach ($artifacts->fetchAll() as $artifactData) {
-        $artifactsDiv->addItem(new \Ease\TWB4\Panel($artifactData['filename'], 'inverse', new \Ease\Html\DivTag(nl2br($artifactData['artifact']), ['style' => 'font-family: monospace; color: black']), $artifactData['note']));
+        switch ($artifactData['content_type']) {
+            case 'application/json':
+                $code = json_encode(json_decode($artifactData['artifact']), \JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_LINE_TERMINATORS);
+
+                break;
+
+            default:
+                $code = $artifactData['artifact'];
+
+                break;
+        }
+
+        $artifactsDiv->addItem(new \Ease\TWB4\Panel([new \Ease\Html\ATag('getartifact.php?id='.$artifactData['id'], '💾', ['class' => 'btn btn-info btn-sm']), '&nbsp;'.$artifactData['filename']], 'inverse', new \Ease\Html\DivTag(new \Ease\Html\PreTag('<code>'.$code.'</code>'), ['style' => 'font-family: monospace; color: black']), $artifactData['note']));
     }
 
     $outputTabs->addTab(_('Artifacts'), $artifactsDiv);

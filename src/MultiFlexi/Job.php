@@ -437,7 +437,7 @@ EOD;
             $this->addStatusMessage('Problem Jsonizing of '.serialize($this->zabbixMessageData), 'debug');
         }
 
-        return (bool)$result;
+        return (bool) $result;
     }
 
     /**
