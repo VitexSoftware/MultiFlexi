@@ -1,0 +1,41 @@
+.TH MULTIFLEXI-EXECUTOR 1 "December 2023" "MultiFlexi" "MultiFlexi Manual"
+.SH NAME
+multiflexi-executor \- Execute MultiFlexi run templates
+
+.SH SYNOPSIS
+.B multiflexi-executor
+.RI [ options ]
+
+.SH DESCRIPTION
+.B multiflexi-executor
+is a command line utility for executing MultiFlexi run templates.
+
+.SH OPTIONS
+.TP
+.B \-r, \-\-runtemplate
+Specify the runtemplate ID to run.
+.TP
+.B \-o, \-\-output
+Specify the output destination. Default is php://stdout.
+.TP
+.B \-e, \-\-environment
+Specify the environment file to use. Default is ../.env.
+
+.SH EXAMPLES
+.TP
+Execute a runtemplate with ID 1 and output to stdout:
+.B multiflexi-executor -r 1
+.TP
+Execute a runtemplate with ID 1 and output to a file:
+.B multiflexi-executor -r 1 -o /path/to/output/file
+.TP
+Execute a runtemplate with ID 1 using a specific environment file:
+.B multiflexi-executor -r 1 -e /path/to/env/file
+
+.SH AUTHOR
+(c) Vítězslav Dvořák <http://vitexsoftware.com>
+
+.SH SEE ALSO
+.BR multiflexi-cli (1),
+.BR multiflexi-scheduler (1),
+.BR multiflexi-trigger (1)
