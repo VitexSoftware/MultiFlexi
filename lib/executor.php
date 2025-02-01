@@ -19,62 +19,44 @@ use Ease\Anonym;
 use Ease\Shared;
 
 require_once '../vendor/autoload.php';
-Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
+
+$options = getopt('r:o::e::', ['output::environment::']);
+Shared::init(
+        ['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'],
+        \array_key_exists('environment', $options) ? $options['environment'] : (\array_key_exists('e', $options) ? $options['e'] : '../.env'),
+);
+$destination = \array_key_exists('o', $options) ? $options['o'] : (\array_key_exists('output', $options) ? $options['output'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout'));
+
+$runtempateId = intval(\array_key_exists('r', $options) ? $options['r'] : (\array_key_exists('runtemplate', $options) ? $options['runtemplate'] : \Ease\Shared::cfg('RUNTEMPLATE_ID', 0)));
+
 $loggers = ['syslog', '\MultiFlexi\LogToSQL'];
 
 if (\Ease\Shared::cfg('ZABBIX_SERVER') && \Ease\Shared::cfg('ZABBIX_HOST') && class_exists('\MultiFlexi\LogToZabbix')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
 
-if (strtolower(\Ease\Shared::cfg('APP_DEBUG', 'false')) === 'true') {
+if (strtolower(\Ease\Shared::cfg('APP_DEBUG', 'true')) === 'true') {
     $loggers[] = 'console';
 }
 
 \define('EASE_LOGGER', implode('|', $loggers));
 $interval = $argc === 2 ? $argv[1] : null;
-\define('APP_NAME', 'MultiFlexi executor '.RunTemplate::codeToInterval($interval));
+\define('APP_NAME', 'MultiFlexi executor ' . RunTemplate::codeToInterval($interval));
 Shared::user(new Anonym());
 
-$jobber = new Job();
+$runTemplater = new \MultiFlexi\RunTemplate($runtempateId);
 
 if (\Ease\Shared::cfg('APP_DEBUG')) {
-    $jobber->logBanner();
+    $runTemplater->logBanner();
 }
 
-if (\MultiFlexi\Runner::isServiceActive('multiflexi') === false) {
-    $jobber->addStatusMessage(_('systemd service is not running. Consider `systemctl start multiflexi`'), 'warning');
-}
-
-$companer = new Company();
-$companies = $companer->listingQuery()->select('servers.*')->select('company.id AS company_id')->leftJoin('servers ON servers.id = company.server');
-$customConfig = new Configuration();
-
-if ($interval) {
-    $ap2c = new \MultiFlexi\RunTemplate();
-
-    foreach ($companies as $company) {
-        LogToSQL::singleton()->setCompany($company['company_id']);
-        $appsForCompany = $ap2c->getColumnsFromSQL(['id', 'interv'], ['company_id' => $company['company_id'], 'interv' => $interval]);
-
-        if (empty($appsForCompany) && ($interval !== 'i')) {
-            $companer->addStatusMessage(sprintf(_('No applications to run for %s in interval %s'), $company['name'], $interval), 'debug');
-        } else {
-            $jobber->addStatusMessage(sprintf(_('Executor interval %s begin'), $interval), 'debug');
-
-            foreach ($appsForCompany as $servData) {
-                if (null !== $interval && ($interval !== $servData['interv'])) {
-                    continue;
-                }
-
-                $jobber->prepareJob($servData['id'], [], RunTemplate::codeToInterval($interval));
-                $jobber->scheduleJobRun(new \DateTime($when));
-            }
-
-            $jobber->addStatusMessage(sprintf(_('Executor interval %s end'), RunTemplate::codeToInterval($interval)), 'debug');
-        }
-    }
+if ($runTemplater->getMyKey()) {
+    $jobber = new Job();
+    $jobber->prepareJob($runTemplater->getMyKey(),[], new \DateTime());
+    $jobber->performJob();
+    
+    exit($jobber->executor->getExitCode());
+            
 } else {
-    echo "interval y/m/w/d/h missing\n";
-
-    exit(1);
+    fwrite(fopen('php://stderr', 'wb'), 'Specify runtemplate ID to run (-r)' . \PHP_EOL);
 }
