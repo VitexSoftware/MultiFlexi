@@ -55,6 +55,10 @@ if ($runTemplater->getMyKey()) {
     $jobber->prepareJob($runTemplater->getMyKey(),[], new \DateTime());
     $jobber->performJob();
     
+    echo $jobber->executor->getOutput();
+    if($jobber->executor->getErrorOutput()){
+        fwrite(fopen('php://stderr', 'wb'), $jobber->executor->getErrorOutput() . \PHP_EOL);
+    }   
     exit($jobber->executor->getExitCode());
             
 } else {
