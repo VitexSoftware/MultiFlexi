@@ -22,6 +22,7 @@ namespace MultiFlexi\Ui;
  */
 class RuntemplateConfigForm extends EngineForm
 {
+
     private array $modulesEnv;
 
     public function __construct(\MultiFlexi\RunTemplate $engine)
@@ -38,7 +39,7 @@ class RuntemplateConfigForm extends EngineForm
         $formAvailable = \MultiFlexi\Requirement::formsAvailable();
 
         foreach ($appRequirements as $formRequired) {
-            $formClass = '\\MultiFlexi\\Ui\\Form\\'.$formRequired;
+            $formClass = '\\MultiFlexi\\Ui\\Form\\' . $formRequired;
 
             if (class_exists($formClass)) {
                 $formAvailable[$formRequired] = $formClass::name();
@@ -67,7 +68,7 @@ class RuntemplateConfigForm extends EngineForm
         $credData = [];
 
         foreach ($appRequirements as $req) {
-            $formClass = '\\MultiFlexi\\Ui\\Form\\'.$req;
+            $formClass = '\\MultiFlexi\\Ui\\Form\\' . $req;
             $credentialChosen = '';
 
             if (\array_key_exists($req, $formAvailable)) {
@@ -88,12 +89,12 @@ class RuntemplateConfigForm extends EngineForm
                 }
 
                 $reqsRow->addColumn(2, [
-                    new \Ease\Html\ImgTag($formClass::$logo, $req, ['title' => $formClass::name(), 'height' => '30']), new CredentialSelect('credential['.$req.']', $engine->getDataValue('company_id'), $req, \array_key_exists($req, $usedCreds) ? (string) $usedCreds[$req]['credentials_id'] : ''),
-                    new \Ease\TWB4\LinkButton('credential.php?company_id='.$engine->getDataValue('company_id').'&formType='.$req, '️➕ 🔐', 'success btn-sm', ['title' => _('New Credential')]),
+                    new \Ease\Html\ImgTag($formClass::$logo, $req, ['title' => $formClass::name(), 'height' => '30']), new CredentialSelect('credential[' . $req . ']', $engine->getDataValue('company_id'), $req, \array_key_exists($req, $usedCreds) ? (string) $usedCreds[$req]['credentials_id'] : ''),
+                    new \Ease\TWB4\LinkButton('credential.php?company_id=' . $engine->getDataValue('company_id') . '&formType=' . $req, '️➕ 🔐', 'success btn-sm', ['title' => _('New Credential')]),
                 ]);
             } else {
                 if (\array_key_exists($req, $formAvailable) === false) {
-                    $reqsRow->addColumn(2, new \Ease\TWB4\Badge('warning', sprintf(_('Form %s not avilble'), '"'.$req.'"')));
+                    $reqsRow->addColumn(2, new \Ease\TWB4\Badge('warning', sprintf(_('Form %s not avilble'), '"' . $req . '"')));
                 }
             }
         }
@@ -110,7 +111,12 @@ class RuntemplateConfigForm extends EngineForm
             if (\array_key_exists($fieldName, $appFields) && \array_key_exists($fieldName, $defaults)) {
                 $fieldInfo = array_merge($defaults[$fieldName], $appFields[$fieldName]);
             } else {
-                $fieldInfo = \array_key_exists($fieldName, $appFields) ? $appFields[$fieldName] : ['type' => 'text', 'source' => _('Custom')];
+                if (array_key_exists($fieldName, $customized)) {
+                    $fieldInfo = $customized[$fieldName];
+                    $fieldInfo['description'] = _('ℹ️ Custom Field');
+                } else {
+                    $fieldInfo = \array_key_exists($fieldName, $appFields) ? $appFields[$fieldName] : ['type' => 'text', 'source' => _('Custom')];
+                }
             }
 
             $value = \array_key_exists('value', $fieldInfo) ? $fieldInfo['value'] : '';
@@ -122,7 +128,7 @@ class RuntemplateConfigForm extends EngineForm
             }
 
             if (\array_key_exists($fieldName, $fieldSource)) {
-                $formClass = '\\MultiFlexi\\Ui\\Form\\'.$fieldSource[$fieldName];
+                $formClass = '\\MultiFlexi\\Ui\\Form\\' . $fieldSource[$fieldName];
 
                 if (\array_key_exists($fieldName, $credData)) {
                     $input->setTagProperty('disabled', '1');
@@ -134,19 +140,24 @@ class RuntemplateConfigForm extends EngineForm
                 $reqInfo = $fieldsOf[$fieldSource[$fieldName]];
 
                 if (\array_key_exists($fieldName, $credSource)) {
-                    $fieldLink = new \Ease\Html\ATag('credential.php?id='.$credSource[$fieldName], $formIcon.'&nbsp;'.$fieldName);
+                    $fieldLink = new \Ease\Html\ATag('credential.php?id=' . $credSource[$fieldName], $formIcon . '&nbsp;' . $fieldName);
                 } else {
-                    $fieldLink = $formIcon.'&nbsp;'.$fieldName;
+                    $fieldLink = $formIcon . '&nbsp;' . $fieldName;
                 }
 
                 $formGroup = $this->addInput($input, $fieldLink, \array_key_exists('defval', $fieldInfo) ? $fieldInfo['defval'] : '', \array_key_exists('description', $fieldInfo) ? $fieldInfo['description'] : '');
             } else {
-                $formGroup = $this->addInput($input, $fieldName.'&nbsp;('.$fieldInfo['source'].')', \array_key_exists('defval', $fieldInfo) ? $fieldInfo['defval'] : '', \array_key_exists('description', $fieldInfo) ? $fieldInfo['description'] : '');
+                $formGroup = $this->addInput($input, $fieldName . '&nbsp;(' . $fieldInfo['source'] . ')', \array_key_exists('defval', $fieldInfo) ? $fieldInfo['defval'] : '', \array_key_exists('description', $fieldInfo) ? $fieldInfo['description'] : '');
             }
 
             if (\array_key_exists('required', $fieldInfo) && $fieldInfo['required']) {
                 $formGroup->addTagClass('bg-danger');
             }
+            
+            if (\array_key_exists($fieldName, $customized)) {
+                $formGroup->addTagClass('bg-info');
+            }
+            
         }
 
         // $this->addItem( new RuntemplateTopicsChooser('topics', $engine)); //TODO
@@ -156,7 +167,7 @@ class RuntemplateConfigForm extends EngineForm
 
         $saveRow = new \Ease\TWB4\Row();
         $saveRow->addColumn(8, new \Ease\TWB4\SubmitButton(_('Save'), 'success btn-lg btn-block'));
-        $saveRow->addColumn(4, new \Ease\TWB4\LinkButton('actions.php?id='.$engine->getMyKey(), '🛠️&nbsp;'._('Actions'), 'secondary btn-lg btn-block'));
+        $saveRow->addColumn(4, new \Ease\TWB4\LinkButton('actions.php?id=' . $engine->getMyKey(), '🛠️&nbsp;' . _('Actions'), 'secondary btn-lg btn-block'));
         $this->addItem($saveRow);
     }
 
@@ -166,7 +177,7 @@ class RuntemplateConfigForm extends EngineForm
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\Ui\Form');
 
         foreach (\Ease\Functions::classesInNamespace('MultiFlexi\Ui\Form') as $formAvailble) {
-            $formClass = '\\MultiFlexi\\Ui\\Form\\'.$formAvailble;
+            $formClass = '\\MultiFlexi\\Ui\\Form\\' . $formAvailble;
 
             $formTypes[$formAvailble] = $formClass::name();
         }

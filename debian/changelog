@@ -1,8 +1,9 @@
-multiflexi (1.25.1) UNRELEASED; urgency=medium
+multiflexi (1.25.1) jammy; urgency=medium
 
+  [ vitex ]
   * artifacts download & highlight added
 
- -- vitex <info@vitexsoftware.cz>  Fri, 31 Jan 2025 12:29:55 +0100
+ -- Vitex <vitezslav.dvorak@spojenet.cz>  Mon, 03 Feb 2025 16:10:39 +0100
 
 multiflexi (1.25.0) jammy; urgency=medium
 

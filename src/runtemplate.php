@@ -77,6 +77,7 @@ if (WebPage::singleton()->isPosted()) {
      * Save all uploaded files into temporary directory and prepare job environment.
      */
     if (!empty($_FILES)) {
+        $uploadEnv = [];
         $fileStore = new \MultiFlexi\FileStore();
 
         foreach ($_FILES as $field => $file) {
