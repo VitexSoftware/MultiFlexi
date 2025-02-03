@@ -29,12 +29,12 @@ require_once './init.php';
 WebPage::singleton()->onlyForLogged();
 $result = false;
 $id = \Ease\TWB4\WebPage::getRequestValue('id', 'int');
-$replace = \Ease\TWB4\WebPage::getRequestValue('replace', 'string') == 'on';
+$replace = \Ease\TWB4\WebPage::getRequestValue('replace', 'string') === 'on';
 
 if (null !== $id) {
     $runtemplater = new \MultiFlexi\RunTemplate($id);
-    if (isset($_ENV) && is_array($_ENV) && array_key_exists('env', $_FILES)) {
 
+    if (isset($_ENV) && \is_array($_ENV) && \array_key_exists('env', $_FILES)) {
         $env = [];
 
         foreach (file($_FILES['env']['tmp_name']) as $cfgRow) {
@@ -46,22 +46,23 @@ if (null !== $id) {
 
         if ($env) {
             $configurator = new \MultiFlexi\Configuration(
-                    [
-                'runtemplate_id' => $runtemplater->getMyKey(),
-                'app_id' => $runtemplater->getApplication()->getMyKey(),
-                'company_id' => $runtemplater->getCompany()->getMyKey()
-                    ], ['autoload' => false]);
+                [
+                    'runtemplate_id' => $runtemplater->getMyKey(),
+                    'app_id' => $runtemplater->getApplication()->getMyKey(),
+                    'company_id' => $runtemplater->getCompany()->getMyKey(),
+                ],
+                ['autoload' => false],
+            );
 
             if ($replace === false) {
                 $oldEnv = $runtemplater->getRuntemplateEnvironment();
+
                 foreach ($oldEnv as $field => $value) {
-                    if (array_key_exists($field, $env) && array_key_exists($field, $oldEnv) && !empty($oldEnv[$field])) {
+                    if (\array_key_exists($field, $env) && \array_key_exists($field, $oldEnv) && !empty($oldEnv[$field])) {
                         unset($env[$field]);
                     }
                 }
             }
-
-
 
             if ($configurator->takeData($env) && null !== $configurator->saveToSQL()) {
                 $configurator->addStatusMessage(_('Config fields Saved'), 'success');
@@ -72,4 +73,4 @@ if (null !== $id) {
     }
 }
 
-WebPage::singleton()->redirect('runtemplate.php?id=' . $runtemplater->getMyKey());
+WebPage::singleton()->redirect('runtemplate.php?id='.$runtemplater->getMyKey());

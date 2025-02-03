@@ -105,7 +105,7 @@ class Job extends Engine
             $this->setZabbixValue('launched_by', null);
             $this->setZabbixValue('data', null);
             $this->setZabbixValue('pid', null);
-            $this->setZabbixValue('interval_seconds',null);
+            $this->setZabbixValue('interval_seconds', null);
         }
     }
 

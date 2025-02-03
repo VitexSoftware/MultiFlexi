@@ -22,12 +22,12 @@ require_once '../vendor/autoload.php';
 
 $options = getopt('r:o::e::', ['output::environment::']);
 Shared::init(
-        ['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'],
-        \array_key_exists('environment', $options) ? $options['environment'] : (\array_key_exists('e', $options) ? $options['e'] : '../.env'),
+    ['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'],
+    \array_key_exists('environment', $options) ? $options['environment'] : (\array_key_exists('e', $options) ? $options['e'] : '../.env'),
 );
 $destination = \array_key_exists('o', $options) ? $options['o'] : (\array_key_exists('output', $options) ? $options['output'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout'));
 
-$runtempateId = intval(\array_key_exists('r', $options) ? $options['r'] : (\array_key_exists('runtemplate', $options) ? $options['runtemplate'] : \Ease\Shared::cfg('RUNTEMPLATE_ID', 0)));
+$runtempateId = (int) (\array_key_exists('r', $options) ? $options['r'] : (\array_key_exists('runtemplate', $options) ? $options['runtemplate'] : \Ease\Shared::cfg('RUNTEMPLATE_ID', 0)));
 
 $loggers = ['syslog', '\MultiFlexi\LogToSQL'];
 
@@ -41,7 +41,7 @@ if (strtolower(\Ease\Shared::cfg('APP_DEBUG', 'true')) === 'true') {
 
 \define('EASE_LOGGER', implode('|', $loggers));
 $interval = $argc === 2 ? $argv[1] : null;
-\define('APP_NAME', 'MultiFlexi executor ' . RunTemplate::codeToInterval($interval));
+\define('APP_NAME', 'MultiFlexi executor '.RunTemplate::codeToInterval($interval));
 Shared::user(new Anonym());
 
 $runTemplater = new \MultiFlexi\RunTemplate($runtempateId);
@@ -52,15 +52,16 @@ if (\Ease\Shared::cfg('APP_DEBUG')) {
 
 if ($runTemplater->getMyKey()) {
     $jobber = new Job();
-    $jobber->prepareJob($runTemplater->getMyKey(),[], new \DateTime());
+    $jobber->prepareJob($runTemplater->getMyKey(), [], new \DateTime());
     $jobber->performJob();
-    
+
     echo $jobber->executor->getOutput();
-    if($jobber->executor->getErrorOutput()){
-        fwrite(fopen('php://stderr', 'wb'), $jobber->executor->getErrorOutput() . \PHP_EOL);
-    }   
+
+    if ($jobber->executor->getErrorOutput()) {
+        fwrite(fopen('php://stderr', 'wb'), $jobber->executor->getErrorOutput().\PHP_EOL);
+    }
+
     exit($jobber->executor->getExitCode());
-            
-} else {
-    fwrite(fopen('php://stderr', 'wb'), 'Specify runtemplate ID to run (-r)' . \PHP_EOL);
 }
+
+fwrite(fopen('php://stderr', 'wb'), 'Specify runtemplate ID to run (-r)'.\PHP_EOL);
