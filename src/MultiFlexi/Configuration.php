@@ -22,6 +22,7 @@ namespace MultiFlexi;
  */
 class Configuration extends \Ease\SQL\Engine
 {
+
     public function __construct($identifier = null, $options = [])
     {
         $this->myTable = 'configuration';
@@ -46,7 +47,20 @@ class Configuration extends \Ease\SQL\Engine
         $result = 0;
         unset($data['id'], $data['class'], $data['app_id'], $data['company_id'], $data['runtemplate_id']);
 
-        $this->deleteFromSQL(['app_id' => $this->getDataValue('app_id'), 'company_id' => $this->getDataValue('company_id'), 'runtemplate_id' => $this->getDataValue('runtemplate_id')]);
+        $condition = [];
+        if ($this->getDataValue('app_id')) {
+            $condition['app_id'] = $this->getDataValue('app_id');
+        }
+
+        if ($this->getDataValue('company_id')) {
+            $condition['company_id'] = $this->getDataValue('company_id');
+        }
+
+        if ($this->getDataValue('runtemplate_id')) {
+            $condition['runtemplate_id'] = $this->getDataValue('runtemplate_id');
+        }
+
+        $this->deleteFromSQL($condition);
 
         foreach ($data as $column => $value) {
             $result += $this->insertToSQL(['app_id' => $this->getDataValue('app_id'), 'company_id' => $this->getDataValue('company_id'), 'runtemplate_id' => $this->getDataValue('runtemplate_id'), 'name' => $column, 'value' => $value]);
@@ -83,7 +97,7 @@ class Configuration extends \Ease\SQL\Engine
     {
         foreach ($this->getAppConfig($companyId, $appId) as $cfgRaw) {
             $this->addStatusMessage(sprintf(_('Setting Environment %s to %s'), $cfgRaw['name'], $cfgRaw['value']), 'debug');
-            putenv($cfgRaw['name'].'='.$cfgRaw['value']);
+            putenv($cfgRaw['name'] . '=' . $cfgRaw['value']);
         }
     }
 

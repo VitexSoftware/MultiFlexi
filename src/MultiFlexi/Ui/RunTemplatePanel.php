@@ -57,8 +57,9 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         $runtemplateBottom = new \Ease\TWB4\Row();
 
         if ($runtemplate->getMyKey()) {
-            $runtemplateBottom->addColumn(6, new RuntemplateCloneForm($runtemplate));
-            $runtemplateBottom->addColumn(6, $deleteButton);
+            $runtemplateBottom->addColumn(4, new RuntemplateCloneForm($runtemplate));
+            $runtemplateBottom->addColumn(4, $deleteButton);
+            $runtemplateBottom->addColumn(4, new RuntemplatePopulateForm($runtemplate));
         }
 
         parent::__construct([new \Ease\Html\ATag('companyapp.php?app_id='.$runtemplate->getDataValue('app_id').'&company_id='.$runtemplate->getDataValue('company_id'), '<span style="font-size: xxx-large;">⚗️ </span>'), $nameInput], 'default', $runtemplateOptions, $runtemplateBottom);
