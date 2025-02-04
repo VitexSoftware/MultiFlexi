@@ -104,7 +104,7 @@ class RuntemplateConfigForm extends EngineForm
 
         $columns = array_keys(array_merge($appFields, $customized));
 
-        asort($columns);
+        ksort($columns);
 
         foreach ($columns as $fieldName) {
             if (\array_key_exists($fieldName, $appFields) && \array_key_exists($fieldName, $defaults)) {

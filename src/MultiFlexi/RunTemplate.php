@@ -496,7 +496,7 @@ class RunTemplate extends \MultiFlexi\DBEngine
 
         $environment = array_merge($this->getDataValue('env') ? unserialize($this->getDataValue('env')) : [], $this->credentialsEnvironment());
 
-        asort($environment);
+        ksort($environment);
 
         foreach ($environment as $key => $envInfo) {
             $launcher[] = $key."='".$envInfo['value']."'";
