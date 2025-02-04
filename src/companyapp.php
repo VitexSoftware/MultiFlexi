@@ -47,7 +47,7 @@ $companyTasksHeading[] = new SpanTag($companer->getDataValue('name').'&nbsp;', [
 $companyTasksHeading[] = _('Assigned applications');
 
 $runTemplater = new RunTemplate();
-$runtemplatesRaw = $runTemplater->listingQuery()->where('app_id', $application->getMyKey())->where('company_id', $companer->getMyKey());
+$runtemplatesRaw = $runTemplater->listingQuery()->where('app_id', $application->getMyKey())->order('name')->where('company_id', $companer->getMyKey());
 
 $runtemplatesDiv = new DivTag();
 $runtemplates = [];
