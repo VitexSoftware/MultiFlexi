@@ -98,4 +98,14 @@ class CompanyApp extends Engine
             }
         }
     }
+
+    public function getApplication(): Application
+    {
+        return $this->app;
+    }
+
+    public function getCompany(): Company
+    {
+        return $this->company;
+    }
 }
