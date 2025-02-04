@@ -122,9 +122,11 @@ $companyAppColumns = new Row();
 $companyAppColumns->addColumn(6, $runtemplatesDiv);
 $companyAppColumns->addColumn(6, [new H3Tag(_('Last 10 jobs')), $jobList, $historyButton]);
 
-$companyAppJobChart = new CompanyAppJobsLastMonthChart((new \MultiFlexi\CompanyApp($companer))->setApp($application));
+$companyApp = (new \MultiFlexi\CompanyApp($companer))->setApp($application);
 
-WebPage::singleton()->container->addItem(new CompanyPanel($companer, new ApplicationPanel($application, $companyAppColumns, $companyAppJobChart)));
+$companyAppJobChart = new CompanyAppJobsLastMonthChart($companyApp);
+
+WebPage::singleton()->container->addItem(new CompanyPanel($companer, new CompanyApplicationPanel($companyApp, $companyAppColumns, $companyAppJobChart)));
 
 WebPage::singleton()->addItem(new PageBottom());
 WebPage::singleton()->draw();
