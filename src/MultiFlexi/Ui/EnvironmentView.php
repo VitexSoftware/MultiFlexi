@@ -31,7 +31,7 @@ class EnvironmentView extends \Ease\Html\TableTag
         $properties['class'] = 'table';
         parent::__construct(null, $properties);
         $this->addRowHeaderColumns([_('Name'), _('Value'), _('Source')]);
-        asort($environment);
+        ksort($environment);
 
         foreach ($environment as $key => $envData) {
             if (\is_string($envData)) { // Fallback for Flat data

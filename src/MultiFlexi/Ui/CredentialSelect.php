@@ -50,7 +50,7 @@ class CredentialSelect extends \Ease\Html\SelectTag
             $credentials[$credential['id']] = $credential['name'];
         }
 
-        asort($credentials);
+        ksort($credentials);
 
         return $credentials;
     }
