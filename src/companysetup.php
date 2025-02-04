@@ -22,15 +22,8 @@ use MultiFlexi\Company;
 require_once './init.php';
 WebPage::singleton()->onlyForLogged();
 WebPage::singleton()->addItem(new PageTop(_('Company')));
-$serverId = WebPage::getRequestValue('server', 'int');
 
-if ($serverId) {
-    $serverserver = new \MultiFlexi\Servers($serverId);
-    $companyConfig = $serverserver->getConnectionDetails();
-    $companyConfig['company'] = WebPage::getGetValue('company');
-} else {
-    $companyConfig = [];
-}
+$companyConfig = [];
 
 $companies = new Company(WebPage::getRequestValue('id', 'int'), $companyConfig);
 
