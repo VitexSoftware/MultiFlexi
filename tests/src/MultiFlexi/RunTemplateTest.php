@@ -146,7 +146,7 @@ class RunTemplateTest extends \PHPUnit\Framework\TestCase
      */
     public function testgetAppsForCompany(): void
     {
-        $this->assertEquals('', $this->object->getPeriodAppsForCompany());
+        $this->assertEquals('', $this->object->getActiveRunTemplatesForCompany());
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete('This test has not been implemented yet.');
     }

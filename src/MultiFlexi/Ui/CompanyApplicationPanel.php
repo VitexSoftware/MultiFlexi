@@ -48,7 +48,7 @@ class CompanyApplicationPanel extends Panel
 
         $crls = new \MultiFlexi\Ui\CompanyRuntemplatesLinks($company, $this->application, [], ['class' => 'btn btn-outline-secondary btn-sm']);
 
-        $usedByCompany->addItem(new \Ease\TWB4\Card([new \Ease\Html\DivTag([new \Ease\Html\H5Tag([_('Runtemplates') . ': ' , ' <small>' . $crls->count() . '</small>'], ['class' => 'card-title']), $crls], ['class' => 'card-body'])], ['style' => 'width: 6rem;']));
+        $usedByCompany->addItem(new \Ease\TWB4\Card([new \Ease\Html\DivTag([new \Ease\Html\H5Tag([_('Active RunTemplates') . ': ' , ' <small>' . $crls->count() . '</small>'], ['class' => 'card-title']), $crls], ['class' => 'card-body'])], ['style' => 'width: 6rem;']));
 
         $this->headRow->addColumn(6, $usedByCompany);
 

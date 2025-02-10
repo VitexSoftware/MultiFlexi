@@ -25,7 +25,7 @@ class CompanyRuntemplatesLinks extends \Ease\Html\DivTag
     public function __construct(\MultiFlexi\Company $company, \MultiFlexi\Application $application, array $properties = [], array $linkProperties = [])
     {
         $runTemplater = new \MultiFlexi\RunTemplate();
-        $runtemplatesRaw = $runTemplater->listingQuery()->where('app_id', $application->getMyKey())->where('company_id', $company->getMyKey());
+        $runtemplatesRaw = $runTemplater->listingQuery()->where('active',true)->where('app_id', $application->getMyKey())->where('company_id', $company->getMyKey());
         $jobber = new \MultiFlexi\Job();
 
         $runtemplatesDiv = new \Ease\Html\DivTag();

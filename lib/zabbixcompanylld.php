@@ -43,7 +43,7 @@ $companyCode = $argParts[\count($argParts) - 1];
 $server = str_replace('.'.$companyCode, '', $venue);
 
 $lldData = [];
-$ap2c = new \MultiFlexi\RunTemplate();
+$rumtemplate = new \MultiFlexi\RunTemplate();
 $companer = new Company(['code' => $companyCode], ['autoload' => true]);
 $ca = new \MultiFlexi\CompanyApp($companer);
 $apper = new Application();
@@ -51,7 +51,7 @@ $apper = new Application();
 $companyData = $companer->getData();
 
 $appsAssigned = $ca->getAll()->leftJoin('apps ON apps.id = companyapp.app_id')->select(['apps.name', 'apps.description', 'apps.id', 'apps.image, apps.code, apps.uuid'], true)->fetchAll('id');
-$runtemplates = $ap2c->listingQuery()->leftJoin('company ON company.id = runtemplate.company_id')->select(['runtemplate.id', 'interv', 'company.code AS company_code', 'company.name AS company_name']);
+$runtemplates = $rumtemplate->listingQuery()->where('runtemplate.active',true)->leftJoin('company ON company.id = runtemplate.company_id')->select(['runtemplate.id', 'interv', 'company.code AS company_code', 'company.name AS company_name']);
 
 $actions = new \MultiFlexi\ActionConfig();
 $succesActions = ActionsChooser::toggles('success');
@@ -70,13 +70,14 @@ foreach ($runtemplates as $runtemplateData) {
             '{#INTERVAL}' => RunTemplate::codeToInterval($runtemplateData['interv']),
             '{#INTERVAL_SECONDS}' => Job::codeToSeconds($runtemplateData['interv']),
             '{#RUNTEMPLATE}' => $runtemplateData['id'],
+            '{#RUNTEMPLATE_NAME}' => $runtemplateData['name'],
             '{#COMPANY_NAME}' => $runtemplateData['company_name'],
             '{#COMPANY_CODE}' => $runtemplateData['company_code'],
             '{#COMPANY_SERVER}' => \Ease\Shared::cfg('ZABBIX_HOST'),
             '{#DATA_ITEM}' => false, // TODO
         ];
     } else {
-        $ap2c->addStatusMessage('Application '.$runtemplateData['app_id'].' is not assigned with company ?');
+        $rumtemplate->addStatusMessage('Application '.$runtemplateData['app_id'].' is not assigned with company ?');
     }
 }
 
