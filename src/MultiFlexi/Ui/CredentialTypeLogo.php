@@ -56,8 +56,8 @@ EOD;
     /**
      * Emebed Company logo into page.
      *
-     * @param \MultiFlexi\CredentialType   $credType       Object
-     * @param array<string, string> $tagProperties Additional tag properties
+     * @param \MultiFlexi\CredentialType $credType      Object
+     * @param array<string, string>      $tagProperties Additional tag properties
      */
     public function __construct(\MultiFlexi\CredentialType $credType, array $tagProperties = [])
     {

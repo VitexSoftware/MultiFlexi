@@ -40,7 +40,7 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         $executorChooser = new AppExecutorSelect($runtemplate->getApplication(), [], (string) $runtemplate->getDataValue('executor'), ['id' => $runtemplateId.'_executor', 'data-runtemplate' => $runtemplateId]);
 
         $scheduleButton = new \Ease\TWB4\LinkButton('schedule.php?id='.$runtemplateId, [_('Manual Schedule').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
-        $runtemplateOptions->addColumn(4, [ _('Status'), new \Ease\TWB4\Widgets\Toggle('active', $runtemplate->getDataValue('active') ? true : false, $runtemplate->getDataValue('active') ? 'false' : 'true',  ['title' => $runtemplate->getDataValue('active') ? _('Enabled') : _('Disabled'), 'data-runtemplate'=> $runtemplateId, 'id'=>'enabler', 'data-on'=>_('Enabled'), 'data-off'=>_('Disabled')]), new \Ease\Html\SpanTag('', ['id'=>'deactivated']) ]);
+        $runtemplateOptions->addColumn(4, [_('Status'), new \Ease\TWB4\Widgets\Toggle('active', $runtemplate->getDataValue('active') ? true : false, $runtemplate->getDataValue('active') ? 'false' : 'true', ['title' => $runtemplate->getDataValue('active') ? _('Enabled') : _('Disabled'), 'data-runtemplate' => $runtemplateId, 'id' => 'enabler', 'data-on' => _('Enabled'), 'data-off' => _('Disabled')]), new \Ease\Html\SpanTag('', ['id' => 'deactivated'])]);
         $runtemplateOptions->addColumn(4, $scheduleButton);
 
         if (WebPage::getRequestValue('delete', 'int') === 1) {
@@ -184,8 +184,6 @@ _executor').after( "💾" );
 
 EOD);
 
-        
-        
         $this->addJavaScript(<<<'EOD'
 
 $('#enabler').change( function(event, state) {
@@ -210,7 +208,7 @@ $.ajax({
 });
 
 EOD);
-        
+
         parent::finalize();
     }
 }

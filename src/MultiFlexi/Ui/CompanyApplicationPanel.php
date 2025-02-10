@@ -27,7 +27,6 @@ use MultiFlexi\Application;
  */
 class CompanyApplicationPanel extends Panel
 {
-
     public Row $headRow;
     private Application $application;
 
@@ -42,13 +41,13 @@ class CompanyApplicationPanel extends Panel
         $company = $companyApp->getCompany();
         $this->application = $companyApp->getApplication();
         $this->headRow = new Row();
-        $this->headRow->addColumn(4, new \Ease\Html\ATag('app.php?id=' . $this->application->getMyKey(), [new AppLogo($this->application, ['style' => 'height: 120px']), '&nbsp;', $this->application->getRecordName()]));
+        $this->headRow->addColumn(4, new \Ease\Html\ATag('app.php?id='.$this->application->getMyKey(), [new AppLogo($this->application, ['style' => 'height: 120px']), '&nbsp;', $this->application->getRecordName()]));
 
         $usedByCompany = new \Ease\Html\DivTag('', ['class' => 'card-group']);
 
         $crls = new \MultiFlexi\Ui\CompanyRuntemplatesLinks($company, $this->application, [], ['class' => 'btn btn-outline-secondary btn-sm']);
 
-        $usedByCompany->addItem(new \Ease\TWB4\Card([new \Ease\Html\DivTag([new \Ease\Html\H5Tag([_('Active RunTemplates') . ': ' , ' <small>' . $crls->count() . '</small>'], ['class' => 'card-title']), $crls], ['class' => 'card-body'])], ['style' => 'width: 6rem;']));
+        $usedByCompany->addItem(new \Ease\TWB4\Card([new \Ease\Html\DivTag([new \Ease\Html\H5Tag([_('Active RunTemplates').': ', ' <small>'.$crls->count().'</small>'], ['class' => 'card-title']), $crls], ['class' => 'card-body'])], ['style' => 'width: 6rem;']));
 
         $this->headRow->addColumn(6, $usedByCompany);
 
@@ -61,7 +60,7 @@ class CompanyApplicationPanel extends Panel
     #[\Override]
     public function finalize(): void
     {
-        $this->footer->addItem(new LinkButton('joblist.php?app_id=' . $this->application->getMyKey(), '🧑‍💻&nbsp;' . _('App Jobs'), 'secondary btn-lg'));
+        $this->footer->addItem(new LinkButton('joblist.php?app_id='.$this->application->getMyKey(), '🧑‍💻&nbsp;'._('App Jobs'), 'secondary btn-lg'));
         parent::finalize();
     }
 }

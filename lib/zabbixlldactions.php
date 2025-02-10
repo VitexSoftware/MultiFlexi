@@ -37,7 +37,7 @@ $lldData = [];
 $runTemplater = new \MultiFlexi\RunTemplate();
 $runTemplater->logBanner();
 
-$enabled = $runTemplater->listingQuery()->disableSmartJoin()->where('runtemplate.active',true)->where("success LIKE '%\"Zabbix\";b:1;%'")->whereOr("fail LIKE '%\"Zabbix\";b:1;%'")
+$enabled = $runTemplater->listingQuery()->disableSmartJoin()->where('runtemplate.active', true)->where("success LIKE '%\"Zabbix\";b:1;%'")->whereOr("fail LIKE '%\"Zabbix\";b:1;%'")
     ->select(['runtemplate.id AS runtemplate_id', 'runtemplate.name AS runtemplate_name'])
     ->leftJoin('company ON company.id = runtemplate.company_id')
     ->select(['company.id AS company_id', 'company.name AS company_name'])
