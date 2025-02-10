@@ -25,7 +25,7 @@ class CompanyRuntemplatesLinks extends \Ease\Html\DivTag
     public function __construct(\MultiFlexi\Company $company, \MultiFlexi\Application $application, array $properties = [], array $linkProperties = [])
     {
         $runTemplater = new \MultiFlexi\RunTemplate();
-        $runtemplatesRaw = $runTemplater->listingQuery()->where('active',true)->where('app_id', $application->getMyKey())->where('company_id', $company->getMyKey());
+        $runtemplatesRaw = $runTemplater->listingQuery()->where('active', true)->where('app_id', $application->getMyKey())->where('company_id', $company->getMyKey());
         $jobber = new \MultiFlexi\Job();
 
         $runtemplatesDiv = new \Ease\Html\DivTag();
@@ -36,12 +36,12 @@ class CompanyRuntemplatesLinks extends \Ease\Html\DivTag
                 $lastJobInfo = $jobber->listingQuery()->select(['id', 'exitcode'], true)->where(['runtemplate_id' => $runtemplateData['id']])->order('id DESC')->limit(1)->fetchAll();
 
                 if ($lastJobInfo) {
-                    $companyAppStatus = new \Ease\Html\ATag('job.php?id='.$lastJobInfo[0]['id'], new ExitCode($lastJobInfo[0]['exitcode'], ['style' => 'font-size: 1.0em; font-family: monospace;']), ['class' => 'btn btn-outline-secondary btn-sm', 'title'=>$runtemplateData['name']]);
+                    $companyAppStatus = new \Ease\Html\ATag('job.php?id='.$lastJobInfo[0]['id'], new ExitCode($lastJobInfo[0]['exitcode'], ['style' => 'font-size: 1.0em; font-family: monospace;']), ['class' => 'btn btn-outline-secondary btn-sm', 'title' => $runtemplateData['name']]);
                 } else {
                     $companyAppStatus = new \Ease\TWB4\Badge('disabled', '🪤', ['style' => 'font-size: 0.5em; font-family: monospace;']);
                 }
 
-                $runtemplatesDiv->addItem(new \Ease\Html\SpanTag([new \Ease\Html\ATag('runtemplate.php?id='.$runtemplateData['id'], '⚗️#'.$runtemplateData['id'], ['class' => 'btn btn-outline-secondary btn-sm','title'=>$runtemplateData['name']]), $companyAppStatus], ['class' => 'btn-group', 'style' => 'margin: 2px', 'role' => 'group']));
+                $runtemplatesDiv->addItem(new \Ease\Html\SpanTag([new \Ease\Html\ATag('runtemplate.php?id='.$runtemplateData['id'], '⚗️#'.$runtemplateData['id'], ['class' => 'btn btn-outline-secondary btn-sm', 'title' => $runtemplateData['name']]), $companyAppStatus], ['class' => 'btn-group', 'style' => 'margin: 2px', 'role' => 'group']));
             }
         } else {
             $runtemplatesDiv->addItem(new \Ease\Html\ATag('runtemplate.php?new=1&app_id='.$application->getMyKey().'&company_id='.$company->getMyKey(), '➕'));

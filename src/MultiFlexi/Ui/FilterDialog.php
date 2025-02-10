@@ -40,9 +40,9 @@ class FilterDialog extends \Ease\Html\DivTag
                     $controls->addItem(
                         new \Ease\TWB4\FormGroup(
                             $columnProperies['label'],
-                            new Ease\TWB4\Widgets\Toggle(
+                            new \Ease\TWB4\Widgets\Toggle(
                                 $columnName,
-                                null,
+                                true,
                                 null,
                                 ['indeterminate' => true, 'id' => $columnName.'sw'],
                             ),

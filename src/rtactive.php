@@ -20,7 +20,7 @@ require_once './init.php';
 WebPage::singleton()->onlyForLogged();
 
 $runtemplate_id = \Ease\TWB4\WebPage::getRequestValue('runtemplate', 'int');
-$active = \Ease\TWB4\WebPage::getRequestValue('active','bool');
+$active = \Ease\TWB4\WebPage::getRequestValue('active', 'bool');
 
 if (null !== $runtemplate_id) {
     $switcher = new \MultiFlexi\RunTemplate();

@@ -51,7 +51,7 @@ $apper = new Application();
 $companyData = $companer->getData();
 
 $appsAssigned = $ca->getAll()->leftJoin('apps ON apps.id = companyapp.app_id')->select(['apps.name', 'apps.description', 'apps.id', 'apps.image, apps.code, apps.uuid'], true)->fetchAll('id');
-$runtemplates = $rumtemplate->listingQuery()->where('runtemplate.active',true)->leftJoin('company ON company.id = runtemplate.company_id')->select(['runtemplate.id', 'interv', 'company.code AS company_code', 'company.name AS company_name']);
+$runtemplates = $rumtemplate->listingQuery()->where('runtemplate.active', true)->leftJoin('company ON company.id = runtemplate.company_id')->select(['runtemplate.id', 'interv', 'company.code AS company_code', 'company.name AS company_name']);
 
 $actions = new \MultiFlexi\ActionConfig();
 $succesActions = ActionsChooser::toggles('success');
