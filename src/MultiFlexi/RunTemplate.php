@@ -268,11 +268,23 @@ class RunTemplate extends \MultiFlexi\DBEngine
      *
      * @return array
      */
-    public function getPeriodAppsForCompany($companyID)
+    public function getRunTemplatesForCompany($companyID)
     {
         return $this->getColumnsFromSQL(['app_id', 'interv', 'id'], ['company_id' => $companyID], 'id', 'app_id');
     }
-
+    
+    /**
+     * All RunTemplates for GivenCompany.
+     *
+     * @param int $companyID
+     *
+     * @return array
+     */
+    public function getActiveRunTemplatesForCompany($companyID)
+    {
+        return $this->getRunTemplatesForCompany($companyID)->where('runtemplate.active',true);
+    }
+    
     /**
      * Set Provision state.
      *

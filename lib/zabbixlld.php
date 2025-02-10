@@ -34,14 +34,14 @@ Shared::user(new Anonym());
 $mode = \array_key_exists(1, $argv) ? $argv[1] : 'n/a';
 
 $lldData = [];
-$ap2c = new \MultiFlexi\RunTemplate();
+$rumtemplate = new \MultiFlexi\RunTemplate();
 $companer = new Company();
 $apper = new Application();
 
 foreach ($companer->listingQuery()->where('enabled', 1) as $companyData) {
     if ($mode === '-a') {
         $companer->setData($companyData);
-        $appsForCompany = $ap2c->getPeriodAppsForCompany($companyData['id']);
+        $appsForCompany = $rumtemplate->getActiveRunTemplatesForCompany($companyData['id']);
 
         foreach ($appsForCompany as $companyAppData) {
             $apper->loadFromSQL($companyAppData['app_id']);
