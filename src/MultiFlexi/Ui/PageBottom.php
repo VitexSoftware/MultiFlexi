@@ -56,6 +56,8 @@ class PageBottom extends \Ease\Html\FooterTag
             $footrow->addColumn(4, $this->apiLinks());
         }
 
+        $footrow->addColumn(2,new \Ease\Html\ATag('https://multiflexi.readthedocs.io', _('Docs')));
+        
         $this->addItem(new \Ease\TWB4\Container($footrow));
         parent::finalize();
     }
