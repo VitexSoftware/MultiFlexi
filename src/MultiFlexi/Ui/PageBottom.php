@@ -52,12 +52,12 @@ class PageBottom extends \Ease\Html\FooterTag
 
         $footrow->addColumn(2, [$github, '&nbsp;', $linkedIn]);
 
+        $lnks = $footrow->addColumn(4, new \Ease\Html\ATag('https://multiflexi.readthedocs.io', _('Docs')));
+
         if ($this->apiLink) {
-            $footrow->addColumn(4, $this->apiLinks());
+            $lnks->addItem($this->apiLinks());
         }
 
-        $footrow->addColumn(2,new \Ease\Html\ATag('https://multiflexi.readthedocs.io', _('Docs')));
-        
         $this->addItem(new \Ease\TWB4\Container($footrow));
         parent::finalize();
     }
@@ -68,6 +68,6 @@ class PageBottom extends \Ease\Html\FooterTag
             $links[] = new \Ease\Html\ATag('api/VitexSoftware/MultiFlexi/1.0.0/'.$this->apiLink.'.'.$format, $format);
         }
 
-        return 'API ['.implode(',', $links).']';
+        return '&nbsp;API ['.implode(',', $links).']';
     }
 }

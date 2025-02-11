@@ -22,9 +22,15 @@ namespace MultiFlexi;
  */
 class CredentialType extends DBEngine
 {
+    /**
+     * @var string Name Column
+     */
+    public string $nameColumn = 'name';
+
     public function __construct($init = null, $filter = [])
     {
         $this->myTable = 'credential_type';
+
         parent::__construct(false /* TODO $init */, $filter);
     }
 
@@ -36,20 +42,30 @@ class CredentialType extends DBEngine
     {
         unset($data['class']);
 
-        if (!\array_key_exists('logo', $data) && \array_key_exists('imageraw', $_FILES) && !empty($_FILES['imageraw']['name'])) {
-            $uploadfile = sys_get_temp_dir().'/'.basename($_FILES['imageraw']['name']);
-
-            if (move_uploaded_file($_FILES['imageraw']['tmp_name'], $uploadfile)) {
-                $data['logo'] = 'data:'.mime_content_type($uploadfile).';base64,'.base64_encode(file_get_contents($uploadfile));
-                unlink($uploadfile);
-                unset($data['imageraw']);
-            }
+        if (\array_key_exists('id', $data) && !is_numeric($data['id'])) {
+            unset($data['id']);
         }
 
-        //        if (empty($this->getDataValue('logo'))) {
-        //            $data['logo'] = 'data:image/svg+xml;base64,' . base64_encode(Ui\CredentialTypeLogo::$none);
-        //        }
+        if (\array_key_exists('uuid', $data) === false) {
+            $data['uuid'] = \Ease\Functions::guidv4();
+        }
 
         return parent::takeData($data);
+    }
+
+    /**
+     * @param array $columns
+     *
+     * @return array
+     */
+    public function columns($columns = [])
+    {
+        return parent::columns([
+            ['name' => 'id', 'type' => 'text', 'label' => _('ID'),
+                'detailPage' => 'credentialtype.php', 'valueColumn' => 'credential_type.id', 'idColumn' => 'credential_type.id', ],
+            ['name' => 'logo', 'type' => 'text', 'label' => _('Logo'), 'searchable' => false],
+            ['name' => 'name', 'type' => 'text', 'label' => _('Name')],
+            ['name' => 'uuid', 'type' => 'text', 'label' => _('UUID')],
+        ]);
     }
 }
