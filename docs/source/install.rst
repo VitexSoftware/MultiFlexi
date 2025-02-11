@@ -25,6 +25,7 @@ To install MultiFlexi using Debian packages, you can follow these steps:
 2. Add the MultiFlexi repository and key::
 
 ::
+
     curl -sSLo /tmp/multiflexi-archive-keyring.deb https://repo.multiflexi.eu/multiflexi-archive-keyring.deb
     sudo dpkg -i /tmp/multiflexi-archive-keyring.deb
     echo "deb [signed-by=/usr/share/keyrings/repo.multiflexi.eu.gpg] https://repo.multiflexi.eu/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/multiflexi.list
@@ -110,11 +111,13 @@ Then installation will continue and finish.
 
     Finally the configuration file is saved as /etc/multiflexi/multiflexi.env
 
-5. Check for available applications::
+6. Check for available applications::
+
     MultiFlexi is Only empty shell without of applications that can be installed on a server. The applications are available as Debian packages and can be installed on Debian-based systems like Ubuntu.
     The available applications can be checked by running the following command in a terminal
 
 .. code-block:: bash
+
     apt search multiflexi
 
 .. image:: apps-availble.png
