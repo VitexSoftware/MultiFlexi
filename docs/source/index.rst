@@ -52,3 +52,7 @@ Contents
    commandline
    zabbix
    development
+
+.. autosummary::
+
+   :toctree: generated

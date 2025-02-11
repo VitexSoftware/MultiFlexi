@@ -118,4 +118,5 @@ The API documentation is available in OpenAPI format. You can view the documenta
 https://github.com/VitexSoftware/multiflexi-api/blob/main/openapi-schema.yaml
 
 .. autosummary::
+
    :toctree: generated
