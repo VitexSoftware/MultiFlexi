@@ -1,9 +1,15 @@
+multiflexi (1.25.2) UNRELEASED; urgency=medium
+
+  * runtemplate active flag added
+
+ -- Vitex <vitezslav.dvorak@spojenet.cz>  Mon, 10 Feb 2025 18:13:46 +0100
+
 multiflexi (1.25.1) jammy; urgency=medium
 
   [ vitex ]
   * artifacts download & highlight added
 
- -- Vitex <vitezslav.dvorak@spojenet.cz>  Mon, 03 Feb 2025 16:10:39 +0100
+ -- Vitex <vitezslav.dvorak@spojenet.cz>  Mon, 10 Feb 2025 17:58:47 +0100
 
 multiflexi (1.25.0) jammy; urgency=medium
 
