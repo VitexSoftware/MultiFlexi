@@ -33,7 +33,6 @@ class CredentialTypeForm extends \Ease\TWB4\Form
         parent::__construct(['action' => 'credentialtype.php'], ['method' => 'POST'], $formContents);
         $this->setTagProperty('enctype', 'multipart/form-data');
 
-        $this->addInput(new \Ease\Html\InputFileTag('imageraw'), _('Credential Logo'));
         $this->addItem(new CredentialTypeLogo($credtype, ['style' => 'height: 200px']));
 
         $this->addItem(new SubmitButton(_('Save'), 'success btn-lg btn-block'));

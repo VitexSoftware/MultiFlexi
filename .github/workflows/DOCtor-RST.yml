@@ -1,5 +1,5 @@
 # .github/workflows/lint.yaml
-name: Lint
+name: DOCtor-RST
 
 on:
     push:
