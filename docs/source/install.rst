@@ -4,6 +4,7 @@ Installation Guide
 Installation of MultiFlexi is simple on Debian based systems. The installation process is done using Debian packages. The packages are available for MySQL, PostgreSQL, and SQLite databases.
 
 .. attention::
+
    The MultiFlexi packages are available for
 
     - Debian 11 (Bullseye)
@@ -15,22 +16,29 @@ Installation of MultiFlexi is simple on Debian based systems. The installation p
 To install MultiFlexi using Debian packages, you can follow these steps:
 
 1. Prepare your system by running the following commands in a terminal::
+
 ::
+
     sudo apt update
     sudo apt install lsb-release apt-transport-https bzip2 ca-certificates curl
 
 2. Add the MultiFlexi repository and key::
+
 ::
     curl -sSLo /tmp/multiflexi-archive-keyring.deb https://repo.multiflexi.eu/multiflexi-archive-keyring.deb
     sudo dpkg -i /tmp/multiflexi-archive-keyring.deb
     echo "deb [signed-by=/usr/share/keyrings/repo.multiflexi.eu.gpg] https://repo.multiflexi.eu/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/multiflexi.list
 
 3. Update the package sources::
+
 ::
+
     sudo apt update
 
 4. Install MultiFlexi for the chosen database::
+
 ::
+
     sudo apt install multiflexi-mysql
 
 
@@ -73,6 +81,7 @@ To install MultiFlexi using Debian packages, you can follow these steps:
    The package name may vary depending on the chosen database.
 
 .. note:: 
+
    - The `multiflexi-sqlite` package is used for testing purposes in automated environments.
    - Only the `multiflexi-mysql` package is recommended for production use. 
    - The `multiflexi-postgresql` package is not yet usable. Please fill GitHub issue if you want to help with development or testing.  
@@ -98,6 +107,7 @@ Then installation will continue and finish.
     :align: center
 
 .. note::
+
     Finally the configuration file is saved as /etc/multiflexi/multiflexi.env
 
 5. Check for available applications::
@@ -114,6 +124,11 @@ Then installation will continue and finish.
 For more details about available applications, visit the `MultiFlexi apps page <https://www.multiflexi.eu/apps.php>`_.
 
 .. tip::
+
     To install all available applications, use the `multiflexi-all` meta package. For more details, visit the `multiflexi-all <https://github.com/VitexSoftware/multiflexi-all/>`_ GitHub repository.
 
 For more information on how to perform the initial setup, please refer to the :doc:`firstrun` page.
+
+.. autosummary::
+
+   :toctree: generated
