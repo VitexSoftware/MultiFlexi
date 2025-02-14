@@ -46,7 +46,7 @@ class MainMenu extends \Ease\Html\DivTag
             $this->credentialsMenuEnabled($nav, $servers);
 
             if (empty($companies)) {
-                \MultiFlexi\User::singleton()->addStatusMessage(_('No company registered yet. Please register one.'), 'warning');
+                \MultiFlexi\User::singleton()->addStatusMessage('🏭 '._('No company registered yet. Please register one.'), 'warning');
             }
 
             if (empty($servers) && empty($customers) && empty($companies)) { // All empty yet
@@ -61,7 +61,7 @@ class MainMenu extends \Ease\Html\DivTag
                     if (\count($servers) && \count($customers) && empty($companies)) {
                         \MultiFlexi\User::singleton()->addStatusMessage(_('No company registered yet. Please register one.'), 'warning');
                         $this->customersMenuEnabled($nav, $customers);
-                        $nav->addMenuItem(new \Ease\TWB4\LinkButton('companysetup.php', '<img width=30 src=images/company.svg> '._('Companies'), 'warning'), 'right');
+                        $nav->addMenuItem(new \Ease\TWB4\LinkButton('companysetup.php', '🏭 '._('Companies'), 'warning'), 'right');
                     } else { // We Got All
                         //                        $this->customersMenuEnabled($nav, $customers);
                         $this->companiesMenuEnabled($nav, $companies);
@@ -76,7 +76,7 @@ class MainMenu extends \Ease\Html\DivTag
                 $this->appsMenuEnabled($nav, $apps);
             }
 
-            $this->usersMenuEnabled($nav);
+            $this->adminMenuEnabled($nav);
             // $nav->addMenuItem(new \Ease\Html\ATag('logs.php', '<img height=30 src=images/log.svg> ' . _('Logs')), 'right');
 
             $nav->addDropDownMenu('<img height=30 src=images/log.svg> '._('Logs'), ['logs.php' => _('System'), 'joblist.php' => _('Jobs')]);
@@ -184,7 +184,7 @@ class MainMenu extends \Ease\Html\DivTag
     /**
      * @param \Ease\Html\NavTag $nav
      */
-    public function usersMenuEnabled($nav): void
+    public function adminMenuEnabled($nav): void
     {
         $nav->addDropDownMenu(
             '<img width=30 src=images/system-users.svg> '._('Admin'),
@@ -195,9 +195,10 @@ class MainMenu extends \Ease\Html\DivTag
                 'executors.php' => '🚀&nbsp;'._('Executors'),
                 'intervals.php' => '♻️&nbsp;'._('Intervals'),
                 'requirements.php' => '🔘&nbsp;'._('Requirements'),
-                'users.php' => new \Ease\TWB4\Widgets\FaIcon('list').'&nbsp;'._('Admin Overview'),
+                'queue.php' => '⏳&nbsp;'._('Job queue'),
                 '' => '',
-            ], $this->getMenuList(\Ease\Shared::user(), 'login')),
+                'users.php' => new \Ease\TWB4\Widgets\FaIcon('list').'&nbsp;'._('Users'),
+            ], $this->getMenuList(\Ease\Shared::user())),
         );
     }
 

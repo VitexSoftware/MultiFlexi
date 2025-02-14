@@ -132,7 +132,7 @@ class MainMenuTest extends \PHPUnit\Framework\TestCase
      */
     public function testusersMenuEnabled(): void
     {
-        $this->assertEquals('', $this->object->usersMenuEnabled());
+        $this->assertEquals('', $this->object->adminMenuEnabled());
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete('This test has not been implemented yet.');
     }

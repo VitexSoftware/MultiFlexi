@@ -32,7 +32,7 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 WebPage::singleton()->onlyForLogged();
-// header('Content-Type: application/json');
+header('Content-Type: application/json');
 $class = \Ease\WebPage::getRequestValue('class');
 /**
  * @var \MultiFlexi\Engine Data Source

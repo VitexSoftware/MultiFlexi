@@ -57,7 +57,7 @@ if ($interval) {
     foreach ($companies as $company) {
         LogToSQL::singleton()->setCompany($company['id']);
 
-        $appsForCompany = $runtemplate->getColumnsFromSQL(['id', 'interv', 'delay', 'name', 'executor'], ['company_id' => $company['id'], 'interv' => $interval, 'active'=>true]);
+        $appsForCompany = $runtemplate->getColumnsFromSQL(['id', 'interv', 'delay', 'name', 'executor'], ['company_id' => $company['id'], 'interv' => $interval, 'active' => true]);
 
         if (empty($appsForCompany) && ($interval !== 'i')) {
             $companer->addStatusMessage(sprintf(_('No applications to run for %s in interval %s'), $company['name'], $interval), 'debug');
@@ -76,7 +76,7 @@ if ($interval) {
 
                 if (empty($runtemplateData['delay']) === false) {
                     $startTime->modify('+'.$runtemplateData['delay'].' seconds');
-                    $jobber->addStatusMessage('Adding Startup delay  +'.$runtemplateData['delay']. ' seconds to '.$startTime->format('Y-m-d H:i:s'), 'debug');
+                    $jobber->addStatusMessage('Adding Startup delay  +'.$runtemplateData['delay'].' seconds to '.$startTime->format('Y-m-d H:i:s'), 'debug');
                 }
 
                 $jobber->prepareJob($runtemplateData['id'], [], $startTime, $runtemplateData['executor'], RunTemplate::codeToInterval($interval));
