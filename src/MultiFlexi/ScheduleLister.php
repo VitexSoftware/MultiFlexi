@@ -61,10 +61,10 @@ EOD;
     {
         $dataRow['id'] = $dataRowRaw['id'];
         $dataRow['after'] = $dataRowRaw['after'];
-        $dataRow['job'] = '🏁&nbsp;'.(string) new \Ease\Html\ATag('job.php?id='.$dataRowRaw['job'], $dataRowRaw['job']);
-        $dataRow['app_name'] = '🧩&nbsp;'.new \Ease\Html\ATag('app.php?id='.$dataRowRaw['app_id'], $dataRowRaw['app_name']);
-        $dataRow['runtemplate_name'] = '⚗️&nbsp;'.new \Ease\Html\ATag('runtemplate.php?id='.$dataRowRaw['runtemplate_id'], $dataRowRaw['runtemplate_name']);
-        $dataRow['company_name'] = '🏭&nbsp;'.new \Ease\Html\ATag('company.php?id='.$dataRowRaw['company_id'], $dataRowRaw['company_name']);
+        $dataRow['job'] = (string) new \Ease\Html\ATag('job.php?id='.$dataRowRaw['job'], '🏁&nbsp;'.$dataRowRaw['job']);
+        $dataRow['app_name'] = (string) new \Ease\Html\ATag('app.php?id='.$dataRowRaw['app_id'], '🧩&nbsp;'.$dataRowRaw['app_name']);
+        $dataRow['runtemplate_name'] = (string) new \Ease\Html\ATag('runtemplate.php?id='.$dataRowRaw['runtemplate_id'], '⚗️&nbsp;'.$dataRowRaw['runtemplate_name']);
+        $dataRow['company_name'] = (string) new \Ease\Html\ATag('company.php?id='.$dataRowRaw['company_id'], '🏭&nbsp;'.$dataRowRaw['company_name']);
 
         return $dataRow;
     }
