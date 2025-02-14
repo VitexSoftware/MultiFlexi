@@ -172,6 +172,8 @@ EOD
             $canceller->deleteFromSQL();
 
             WebPage::singleton()->container->addItem(new \Ease\TWB4\Label('success', _('Job Canceled')));
+
+            WebPage::singleton()->container->addItem(new \Ease\TWB4\LinkButton('queue.php', sprintf(_('remaining %d 🏁 jobs scheduled'), $scheduler->listingQuery()->count()), 'info btn-large'));
         } else {
             $appPanel = new ApplicationPanel($app, new JobScheduleForm($app, $company));
             $appPanel->headRow->addItem(new RuntemplateButton($runTemplate));
