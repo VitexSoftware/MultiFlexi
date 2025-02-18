@@ -68,6 +68,9 @@ The most complex file appears to be ``src/MultiFlexi/Job.php``. Here's why:
 
     - Uses ``Ease\SQL\Engine`` for database operations.
 
+
+
+
 - **Plugin System**: It is designed to work with different executors.
 
     - Uses an executor interface to allow flexibility in how jobs are executed.
@@ -121,4 +124,41 @@ We welcome contributions from the community. To contribute, follow these steps:
 5. **Create a Pull Request**: Open a pull request on the original repository.
 
 Thank you for contributing to MultiFlexi!
+
+
+Handling Multiple Database Types
+--------------------------------
+
+MultiFlexi supports multiple database types including MySQL, SQLite, PostgreSQL, MSSQL, and almost every PDO-capable database engine. When writing queries, you need to ensure compatibility with these databases.
+
+Here is an example method `todaysCond` that generates a condition to fetch records for the current day, compatible with different database types:
+
+```php
+public function todaysCond(string $column = 'begin'): string {
+    $databaseType = $this->getPdo()->getAttribute(\PDO::ATTR_DRIVER_NAME);
+
+    switch ($databaseType) {
+        case 'mysql':
+            $cond = ('DATE(' . $column . ') = CURDATE()');
+            break;
+        case 'sqlite':
+            $cond = ('DATE(' . $column . ') = DATE(\'now\')');
+            break;
+        case 'pgsql':
+            $cond = ('DATE(' . $column . ') = CURRENT_DATE');
+            break;
+        case 'sqlsrv':
+            $cond = ('CAST(' . $column . ' AS DATE) = CAST(GETDATE() AS DATE)');
+            break;
+        default:
+            throw new \Exception('Unsupported database type ' . $databaseType);
+    }
+
+    return $cond;
+}
+```
+
+This method checks the database type and returns the appropriate condition for fetching records for the current day based on the specified column.
+
+By following this approach, you can ensure that your queries are compatible with multiple database types, making your application more flexible and robust.
 

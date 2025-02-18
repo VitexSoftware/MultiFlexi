@@ -28,12 +28,17 @@ class CompaniesBar extends \Ease\Html\DivTag
 
         $cardGroup = new \Ease\Html\DivTag(null, ['class' => 'card-group']);
 
+        $jobber = new \MultiFlexi\Job();
+
         foreach ($companies as $companyData) {
+            $todaysJobs = $jobber->listingQuery()->select(['exitcode'], true)->where($jobber->todaysCond())->where('company_id', $companyData['id']);
+
             $companer->setData($companyData);
+
             $companyAppCard = new \Ease\TWB4\Card(new \Ease\Html\ATag('company.php?id='.$companyData['id'], new \Ease\Html\ImgTag($companyData['logo'], $companyData['name'], ['title' => $companyData['code'], 'class' => 'card-img-top', 'style' => 'padding: 5px; margin: 5px;max-height: 150px;max-width: 150px;'])), ['style' => 'width: 10rem;']);
             $companyAppCard->addTagClass('text-center');
 
-            $companyAppCard->addItem(new \Ease\Html\DivTag(new \Ease\Html\H5Tag($companyData['name'], ['class' => 'card-title']), ['class' => 'card-body']));
+            $companyAppCard->addItem(new \Ease\Html\DivTag([new JobSuccessGraph($todaysJobs, ['style' => 'max-width: fit-content; margin-left: auto; margin-right: auto;']), new \Ease\Html\H5Tag($companyData['name'], ['class' => 'card-title']), ['class' => 'card-body']]));
 
             $companyAppStatus = new \Ease\Html\DivTag();
 
