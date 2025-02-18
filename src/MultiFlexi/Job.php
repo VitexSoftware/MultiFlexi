@@ -778,4 +778,33 @@ EOD;
     {
         $this->environment = $environment;
     }
+
+    public function todaysCond(string $column = 'begin'): string
+    {
+        $databaseType = $this->getPdo()->getAttribute(\PDO::ATTR_DRIVER_NAME);
+
+        switch ($databaseType) {
+            case 'mysql':
+                $cond = ('DATE('.$column.') = CURDATE()');
+
+                break;
+            case 'sqlite':
+                $cond = ('DATE('.$column.') = DATE(\'now\')');
+
+                break;
+            case 'pgsql':
+                $cond = ('DATE('.$column.') = CURRENT_DATE');
+
+                break;
+            case 'sqlsrv':
+                $cond = ('CAST('.$column.' AS DATE) = CAST(GETDATE() AS DATE)');
+
+                break;
+
+            default:
+                throw new \Exception('Unsupported database type '.$databaseType);
+        }
+
+        return $cond;
+    }
 }
