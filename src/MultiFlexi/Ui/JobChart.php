@@ -18,7 +18,7 @@ namespace MultiFlexi\Ui;
 /**
  * Description of JobChart.
  *
- * @author vitex
+ * author vitex
  */
 class JobChart extends \Ease\Html\DivTag
 {
@@ -43,6 +43,10 @@ class JobChart extends \Ease\Html\DivTag
                     $state = 'success';
 
                     break;
+                case 255:
+                    $state = 'exception';
+
+                    break;
                 case null:
                 case -1:
                     $state = 'waiting';
@@ -56,7 +60,7 @@ class JobChart extends \Ease\Html\DivTag
             }
 
             if (\array_key_exists($date, $days) === false) {
-                $days[$date] = ['success' => 0, 'waiting' => 0, 'fail' => 0];
+                $days[$date] = ['success' => 0, 'waiting' => 0, 'fail' => 0, 'exception' => 0];
             }
 
             ++$days[$date][$state];
@@ -72,7 +76,7 @@ class JobChart extends \Ease\Html\DivTag
                 'success' => $day['success'],
                 'waiting' => $day['waiting'],
                 'fail' => $day['fail'],
-                //                'all' => $day['success'] + $day['waiting'] + $day['fail']
+                'exception' => $day['exception'],
             ];
         }
 
@@ -88,7 +92,7 @@ class JobChart extends \Ease\Html\DivTag
             'legend_font_size' => 6,
             'legend_entry_height' => 10,
             'legend_title' => 'Legend',
-            'legend_entries' => [_('waiting'), _('fail'), _('success')],
+            'legend_entries' => [_('waiting'), _('fail'), _('success'), _('exception')],
             'link_base' => './',
             'link_target' => '_top',
             'data_label_font_size' => 5,
@@ -101,23 +105,22 @@ class JobChart extends \Ease\Html\DivTag
             'show_data_labels' => true,
             'data_label_type' => [
                 'box', 'linebox',
-                //                'box','plain', 'bubble', 'line', 'circle', 'square', 'linecircle','linebox', 'linesquare', 'line2'
             ],
-            'data_label_space' => 5,
+            'data_label_space' => 10, // Increase space between data labels
             'data_label_back_colour' => [
-                'lightblue', '#FF4500', 'lightgreen', null, null, null, null, null, null, null,
+                'lightblue', '#FF4500', 'lightgreen', 'black', 'white', 'white', 'white', 'white', 'white', 'white',
             ],
             'marker_size' => 3,
             'structure' => [
                 'key' => 'date',
-                'value' => ['waiting', 'fail', 'success'],
-                'tooltip' => ['waiting', 'fail', 'success'],
+                'value' => ['waiting', 'fail', 'success', 'exception'],
+                'tooltip' => ['waiting', 'fail', 'success', 'exception'],
                 'axis_text' => 3,
             ],
         ];
-        $links = ['success' => '?showonly=success', 'fail' => '?showonly=fail', 'waiting' => '?showonly=waiting'];
+        $links = ['success' => '?showonly=success', 'fail' => '?showonly=fail', 'waiting' => '?showonly=waiting', 'exception' => '?showonly=exception'];
 
-        $colours = [['lightblue', 'blue'], ['red', 'orange'], ['green', 'chartreuse']];
+        $colours = [['lightblue', 'blue'], ['red', 'orange'], ['green', 'chartreuse'], ['black', 'gray']];
 
         $graph = new \Goat1000\SVGGraph\SVGGraph(1024, 212, $settings);
         $graph->values($data);
@@ -125,7 +128,6 @@ class JobChart extends \Ease\Html\DivTag
         $graph->links($links);
 
         parent::__construct($graph->fetch('StackedBarGraph', false), $properties);
-        //        $this->addJavaScript($graph->fetchJavascript());
     }
 
     /**

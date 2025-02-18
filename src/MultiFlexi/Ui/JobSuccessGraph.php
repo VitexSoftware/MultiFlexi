@@ -20,7 +20,7 @@ use Goat1000\SVGGraph\SVGGraph;
 /**
  * Description of TodaysJobSuccesGraph.
  *
- * @author Vitex <info@vitexsoftware.cz>
+ * author Vitex <info@vitexsoftware.cz>
  */
 class JobSuccessGraph extends \Ease\Html\DivTag
 {
@@ -28,10 +28,19 @@ class JobSuccessGraph extends \Ease\Html\DivTag
     {
         $successCount = 0;
         $failedCount = 0;
+        $waitingCount = 0;
+        $exceptionCount = 0;
+        $noExecutableCount = 0;
 
         foreach ($todaysJobs as $job) {
             if ($job['exitcode'] === 0) {
                 ++$successCount;
+            } elseif ($job['exitcode'] === 255) {
+                ++$exceptionCount;
+            } elseif ($job['exitcode'] === 127) {
+                ++$noExecutableCount;
+            } elseif (null === $job['exitcode'] || $job['exitcode'] === -1) {
+                ++$waitingCount;
             } else {
                 ++$failedCount;
             }
@@ -40,6 +49,9 @@ class JobSuccessGraph extends \Ease\Html\DivTag
         $values = [
             _('Success') => $successCount,
             _('Failed') => $failedCount,
+            _('Waiting') => $waitingCount,
+            _('Exception') => $exceptionCount,
+            _('No Executable') => $noExecutableCount,
         ];
 
         $settings = [
@@ -57,14 +69,14 @@ class JobSuccessGraph extends \Ease\Html\DivTag
             'show_labels' => true,
             'show_label_amount' => true,
             'label_font' => 'Arial',
-            'label_font_size' => '11',
+            'label_font_size' => '8', // Smaller font size for captions
             'units_before_label' => '',
         ];
 
         $width = 300;
         $height = 200;
         $type = 'SemiDonutGraph';
-        $colours = ['#286d14', '#a11b1b', '#181691'];
+        $colours = ['#286d14', '#a11b1b', '#181691', '#000000', '#FFFF00'];
 
         $graph = new SVGGraph($width, $height, $settings);
         $graph->colours($colours);
