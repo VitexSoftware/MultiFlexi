@@ -27,10 +27,6 @@ $companyConfig = [];
 
 $companies = new Company(WebPage::getRequestValue('id', 'int'), $companyConfig);
 
-if ((null === $serverId) === false) {
-    $companies->setDataValue('server', $serverId);
-}
-
 $_SESSION['company'] = $companies->getMyKey();
 $companyEnver = new \MultiFlexi\CompanyEnv($companies->getMyKey());
 
