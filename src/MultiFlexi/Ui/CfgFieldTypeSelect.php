@@ -20,7 +20,7 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class ConfigFields extends \Ease\Html\SelectTag
+class CfgFieldTypeSelect extends \Ease\Html\SelectTag
 {
     /**
      * ConfigFields.
@@ -32,12 +32,13 @@ class ConfigFields extends \Ease\Html\SelectTag
         parent::__construct(
             $name,
             [
+                'string' => _('String'),
                 'text' => _('Text'),
                 'number' => _('Number'),
                 'date' => _('Date'),
                 'email' => _('Email'),
                 'password' => _('Password'),
-                'checkbox' => _('Yes/No'),
+                'bool' => _('Yes/No'),
                 'file' => _('File upload'),
                 'directory' => _('Directory path'),
             ],

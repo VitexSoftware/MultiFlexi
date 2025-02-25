@@ -21,7 +21,7 @@ WebPage::singleton()->onlyForLogged();
 
 $credTypeId = WebPage::getRequestValue('id', 'int');
 
-$crtype = new \MultiFlexi\CredentialType($credTypeId);
+$crtype = new \MultiFlexi\CredentialType($credTypeId, ['autoload' => true]);
 
 $delete = WebPage::getRequestValue('delete', 'int');
 
@@ -38,10 +38,38 @@ if (null !== $delete) {
 }
 
 if (WebPage::singleton()->isPosted()) {
-    if ($crtype->takeData($_POST) && null !== $crtype->dbsync()) {
-        $crtype->addStatusMessage(_('Credential field Saved'), 'success');
-    } else {
-        $crtype->addStatusMessage(_('Error saving Credential field'), 'error');
+    $new = WebPage::getRequestValue('new');
+
+    if (empty(implode('', $new))) {
+        unset($new);
+    }
+
+    unset($_POST['new']);
+    $uuid = WebPage::getRequestValue('uuid');
+
+    if (empty($uuid)) {
+        unset($_POST['uuid']);
+    }
+
+    try {
+        if ($crtype->takeData($_POST) && null !== $crtype->dbsync()) {
+            $crtype->addStatusMessage(_('Credential field Saved'), 'success');
+
+            if (isset($new)) {
+                $saver = new \MultiFlexi\CrTypeField();
+                $saver->takeData($new);
+                $saver->setDataValue('credential_type_id', $crtype->getMyKey());
+                $saver->insertToSQL();
+            }
+        } else {
+            $crtype->addStatusMessage(_('Error saving Credential field'), 'error');
+        }
+    } catch (\PDOException $e) {
+        if ($e->getCode() === 23000) { // Integrity constraint violation
+            $crtype->addStatusMessage(_('Duplicate entry detected'), 'warning');
+        } else {
+            throw $e; // Re-throw the exception if it's not a duplicate entry error
+        }
     }
 } else {
     if ((null === WebPage::getRequestValue('company_id')) === false) {
