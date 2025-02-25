@@ -27,11 +27,11 @@ class CredentialType extends DBEngine
      */
     public string $nameColumn = 'name';
 
-    public function __construct($init = null, $filter = [])
+    public function __construct($init = null, array $filter = [])
     {
         $this->myTable = 'credential_type';
-
-        parent::__construct(false /* TODO $init */, $filter);
+        $this->setDataValue('uuid', \Ease\Functions::guidv4());
+        parent::__construct($init, $filter);
     }
 
     /**
@@ -42,12 +42,16 @@ class CredentialType extends DBEngine
     {
         unset($data['class']);
 
-        if (\array_key_exists('id', $data) && !is_numeric($data['id'])) {
-            unset($data['id']);
+        if (\array_key_exists('id', $data) && is_numeric($data['id'])) {
+            unset($data['uuid']);
+        } else {
+            if (\array_key_exists('uuid', $data) === false) {
+                $data['uuid'] = \Ease\Functions::guidv4();
+            }
         }
 
-        if (\array_key_exists('uuid', $data) === false) {
-            $data['uuid'] = \Ease\Functions::guidv4();
+        if (\array_key_exists('id', $data) && !is_numeric($data['id'])) {
+            unset($data['id']);
         }
 
         return parent::takeData($data);
