@@ -57,7 +57,10 @@ class EnvironmentView extends \Ease\Html\TableTag
             if (\array_key_exists('credential_id', $envData)) {
                 $source = new \Ease\Html\DivTag(new \Ease\Html\ATag('credential.php?id='.$envData['credential_id'], $envData['source']));
                 $credTyper = new \MultiFlexi\CredentialType($envData['credential_type']);
-                $source->addItem(new \Ease\Html\ImgTag($credTyper->getDataValue('logo'), $envData['credential_type'], ['title' => $credTyper->getRecordName(), 'height' => '30', 'align' => 'right']));
+                if($credTyper->getDataValue('logo')){
+                   $credTyper->addStatusMessage(sprintf(_('There is no Logo defined for %s Credential Types'), $envData['credential_type']), 'warning'); 
+                }
+                $source->addItem(new \Ease\Html\ImgTag((string)$credTyper->getDataValue('logo'), $envData['credential_type'], ['title' => $credTyper->getRecordName(), 'height' => '30', 'align' => 'right']));
             } else {
                 $ns = \array_key_exists('source', $envData) ? explode('\\', $envData['source']) : ['n/a'];
                 $source = end($ns);
