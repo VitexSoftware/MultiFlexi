@@ -34,7 +34,8 @@
         "vitexsoftware/ease-html-widgets": "^1.1",
         "vitexsoftware/ease-html": "^1.40",
         "vitexsoftware/multiflexi-api-server": "dev-main",
-        "symfony/console": "^6.4"
+        "symfony/console": "^6.4",
+        "cboden/ratchet": "dev-master"
     },
     "license": "MIT",
     "authors": [

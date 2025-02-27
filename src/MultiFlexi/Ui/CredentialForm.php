@@ -85,6 +85,7 @@ class CredentialForm extends \Ease\TWB4\Form
         }
 
         $formContents[] = new \Ease\Html\InputHiddenTag('id', $kredenc->getMyKey());
+        $formContents[] = new \Ease\Html\InputHiddenTag('credential_type_id', 0); // TODO Add Credential Type Chooser
 
         $submitRow = new \Ease\TWB4\Row();
         $submitRow->addColumn(10, new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'primary btn-lg btn-block'));

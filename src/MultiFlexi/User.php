@@ -238,7 +238,12 @@ class User extends \Ease\User implements \MultiFlexi\Ui\columns
      */
     public function loginSuccess()
     {
-        LogToSQL::singleton()->setUser($this->getUserID());
+        $userId = $this->getUserID();
+
+        LogToSQL::singleton()->setUser($userId);
+
+        $_SESSION['user_id'] = $userId;
+        $_SESSION['ws_token'] = bin2hex(random_bytes(16));
 
         return parent::loginSuccess();
     }

@@ -1,8 +1,15 @@
-multiflexi (1.25.3) UNRELEASED; urgency=medium
+multiflexi (1.26.0) UNRELEASED; urgency=medium
 
+  * live job ouput attempt
+
+ -- Vitex <vitezslav.dvorak@spojenet.cz>  Thu, 27 Feb 2025 18:02:18 +0100
+
+multiflexi (1.25.3) jammy; urgency=medium
+
+  [ vitex ]
   * Jobs Chart added
 
- -- vitex <info@vitexsoftware.cz>  Tue, 18 Feb 2025 16:38:03 +0100
+ -- Vitex <vitezslav.dvorak@spojenet.cz>  Thu, 27 Feb 2025 18:02:02 +0100
 
 multiflexi (1.25.2) jammy; urgency=medium
 
