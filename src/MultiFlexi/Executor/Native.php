@@ -74,6 +74,8 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
     {
         $this->process = new \Symfony\Component\Process\Process(explode(' ', $command), null, \MultiFlexi\Environmentor::flatEnv($this->environment), null, $this->timeout);
 
+        $wsClient = new \WebSocket\Client('ws://localhost:8080');
+
         try {
             $this->process->run(function ($type, $buffer): void {
                 $this->pid = $this->process->getPid();
@@ -89,9 +91,11 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
                 if (\Symfony\Component\Process\Process::ERR === $type) {
                     $logger->addStatusMessage($buffer, 'error');
                     $this->addOutput($buffer, 'error');
+                    $wsClient->send(json_encode(['type' => 'error', 'message' => $buffer]));
                 } else {
                     $logger->addStatusMessage($buffer, 'success');
                     $this->addOutput($buffer, 'success');
+                    $wsClient->send(json_encode(['type' => 'success', 'message' => $buffer]));
                 }
             });
         } catch (\Symfony\Component\Process\Exception\ProcessTimedOutException $exc) {

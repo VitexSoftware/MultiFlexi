@@ -31,8 +31,27 @@ $instanceName = $appInfo['app_name'];
 $errorTerminal = new \Ease\Html\DivTag(nl2br(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(stripslashes((string) $jobber->getDataValue('stderr'))))), ['style' => 'background: #330000; font-family: monospace;']);
 $stdTerminal = new \Ease\Html\DivTag(nl2br(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(stripslashes((string) $jobber->getDataValue('stdout'))))), ['style' => 'background:  black; font-family: monospace;']);
 
+$liveOutputSocket = \Ease\Shared::cfg('LIVE_OUTPUT_SOCKET', '0.0.0.0:8080');
+
+if ($liveOutputSocket && isset($_SESSION['ws_token'])) {
+    $wsToken = $_SESSION['ws_token'];
+
+    WebPage::singleton()->addJavaScript(
+        <<<EOD
+
+var ws = new WebSocket('{$liveOutputSocket}?token={$wsToken}');
+ws.onmessage = function(event) {
+    var data = JSON.parse(event.data);
+    var output = document.getElementById('live-output');
+    output.textContent += data.message + '\\n';
+};
+
+EOD
+    );
+}
+
 $outputTabs = new \Ease\TWB4\Tabs();
-$outputTabs->addTab(_('Output').' '.(\strlen($jobber->getOutput()) ? ' <span class="badge badge-secondary">'.substr_count($jobber->getOutput(), "\n").'</span>' : '<span class="badge badge-invers">💭</span>'), [$stdTerminal, \strlen($jobber->getOutput()) ? new \Ease\TWB4\LinkButton('joboutput.php?id='.$jobID.'&mode=std', _('Download'), 'secondary btn-block') : _('No output')]);
+$outputTabs->addTab(_('Output').' '.(\strlen($jobber->getOutput()) ? ' <span class="badge badge-secondary">'.substr_count($jobber->getOutput(), "\n").'</span>' : '<span class="badge badge-invers">💭</span>'), [$stdTerminal, \strlen($jobber->getOutput()) ? new \Ease\TWB4\LinkButton('joboutput.php?id='.$jobID.'&mode=std', _('Download'), 'secondary btn-block') : _('No output'), new \Ease\Html\PreTag('', ['id' => 'live-output'])]);
 $outputTabs->addTab(_('Errors').' '.(empty($jobber->getErrorOutput()) ? ' <span class="badge badge-success">0</span>' : '<span class="badge badge-warning">'.substr_count($jobber->getErrorOutput(), "\n").'</span>'), [$errorTerminal, \strlen($jobber->getErrorOutput()) ? new \Ease\TWB4\LinkButton('joboutput.php?id='.$jobID.'&mode=err', _('Download'), 'secondary btn-block') : _('No errors')], empty($jobber->getOutput()));
 
 $artifactor = new \MultiFlexi\Artifact();
