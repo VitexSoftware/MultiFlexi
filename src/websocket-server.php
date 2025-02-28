@@ -21,7 +21,7 @@ use Ratchet\WebSocket\WsServer;
 use React\EventLoop\Loop;
 use React\Socket\SocketServer;
 
-require \dirname(__DIR__).'/vendor/autoload.php';
+require_once './init.php';
 
 class JobOutputStreamer implements MessageComponentInterface
 {
@@ -77,7 +77,11 @@ class JobOutputStreamer implements MessageComponentInterface
 }
 
 $loop = Loop::get();
-$socketAddress = \Ease\Shared::cfg('LIVE_OUTPUT_SOCKET', '0.0.0.0:8080');
+$socketUri = \Ease\Shared::cfg('LIVE_OUTPUT_SOCKET'); // Example:  ws://localhost:8080
+
+$socketUriParts = parse_url($socketUri);
+$socketAddress = $socketUriParts['host'].':'.$socketUriParts['port'];
+
 $webSock = new SocketServer($socketAddress, [], $loop);
 
 $server = new IoServer(

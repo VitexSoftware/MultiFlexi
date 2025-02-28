@@ -31,7 +31,7 @@ $instanceName = $appInfo['app_name'];
 $errorTerminal = new \Ease\Html\DivTag(nl2br(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(stripslashes((string) $jobber->getDataValue('stderr'))))), ['style' => 'background: #330000; font-family: monospace;']);
 $stdTerminal = new \Ease\Html\DivTag(nl2br(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(stripslashes((string) $jobber->getDataValue('stdout'))))), ['style' => 'background:  black; font-family: monospace;']);
 
-$liveOutputSocket = \Ease\Shared::cfg('LIVE_OUTPUT_SOCKET', '0.0.0.0:8080');
+$liveOutputSocket = \Ease\Shared::cfg('LIVE_OUTPUT_SOCKET');
 
 if ($liveOutputSocket && isset($_SESSION['ws_token'])) {
     $wsToken = $_SESSION['ws_token'];
