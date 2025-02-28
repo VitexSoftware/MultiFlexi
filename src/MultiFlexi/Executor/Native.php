@@ -74,8 +74,6 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
     {
         $this->process = new \Symfony\Component\Process\Process(explode(' ', $command), null, \MultiFlexi\Environmentor::flatEnv($this->environment), null, $this->timeout);
 
-        $wsClient = new \WebSocket\Client('ws://localhost:8080');
-
         try {
             $this->process->run(function ($type, $buffer): void {
                 $this->pid = $this->process->getPid();
@@ -88,14 +86,36 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
                 $logger->setObjectName(\Ease\Logger\Message::getCallerName($this));
                 $logger->addStatusMessage('JOB: '.$this->job->getMyKey().' PID: '.$this->pid, $type, 'debug');
 
+                $liveOutputSocket = \Ease\Shared::cfg('LIVE_OUTPUT_SOCKET');
+
+                if ($liveOutputSocket) {
+                    $wsClient = new \WebSocket\Client($liveOutputSocket);
+                }
+
                 if (\Symfony\Component\Process\Process::ERR === $type) {
                     $logger->addStatusMessage($buffer, 'error');
                     $this->addOutput($buffer, 'error');
-                    $wsClient->send(json_encode(['type' => 'error', 'message' => $buffer]));
+
+                    if ($liveOutputSocket) {
+                        try {
+                            $wsClient->send(json_encode(['type' => 'error', 'message' => $buffer]), 'binary');
+                        } catch (\Exception $exc) {
+                            echo $exc->getTraceAsString();
+                        }
+
+                    }
                 } else {
                     $logger->addStatusMessage($buffer, 'success');
                     $this->addOutput($buffer, 'success');
-                    $wsClient->send(json_encode(['type' => 'success', 'message' => $buffer]));
+
+                    if ($liveOutputSocket) {
+                        try {
+                            $wsClient->send(json_encode(['type' => 'success', 'message' => $buffer]), 'binary');
+                        } catch (Exception $exc) {
+                            echo $exc->getTraceAsString();
+                        }
+
+                    }
                 }
             });
         } catch (\Symfony\Component\Process\Exception\ProcessTimedOutException $exc) {

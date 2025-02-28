@@ -7,12 +7,14 @@
     "deb/ease-fluentpdo": "*",
     "deb/ease-html-widgets": "*",
     "symfony/process": "*",
+    "cboden/ratchet": "dev-master",
     "sensiolabs/ansi-to-html": "*",
     "zarplata/zabbix-sender": "dev-master",
     "rcubitto/json-pretty": "dev-master",
     "phplucidframe/console-table": "dev-master",
     "goat1000/svggraph": "dev-master",
-    "peppeocchi/php-cron-scheduler": "dev-master"
+    "peppeocchi/php-cron-scheduler": "dev-master",
+    "textalk/websocket": "dev-master"
   },
   "license": "MIT",
   "authors": [
