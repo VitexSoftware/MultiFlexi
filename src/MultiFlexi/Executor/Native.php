@@ -102,7 +102,6 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
                         } catch (\Exception $exc) {
                             echo $exc->getTraceAsString();
                         }
-
                     }
                 } else {
                     $logger->addStatusMessage($buffer, 'success');
@@ -114,7 +113,6 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
                         } catch (Exception $exc) {
                             echo $exc->getTraceAsString();
                         }
-
                     }
                 }
             });
