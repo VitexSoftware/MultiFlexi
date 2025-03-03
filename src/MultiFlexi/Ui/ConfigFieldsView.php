@@ -26,7 +26,7 @@ class ConfigFieldsView extends \Ease\Html\DivTag
     {
         parent::__construct();
 
-        foreach ($fieldsInfo as $key => $fieldInfo) {
+        foreach ($fieldsInfo as $fieldInfo) {
             $this->addItem(self::confInfo($fieldInfo));
         }
     }

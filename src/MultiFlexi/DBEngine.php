@@ -253,7 +253,7 @@ class DBEngine extends \Ease\SQL\Engine
         $columnsToEdit = [];
         $keyColum = $this->getKeyColumn();
 
-        foreach ($columnsToFilter as $id => $values) {
+        foreach ($columnsToFilter as $values) {
             $columnName = $values['name'];
 
             if (
@@ -333,7 +333,7 @@ class DBEngine extends \Ease\SQL\Engine
                 unset($conditions['search']);
             }
 
-            foreach ($dtColumns as $column => $colProps) { // One Column search
+            foreach ($dtColumns as $colProps) { // One Column search
                 if (!empty($colProps['search']['value'])) {
                     if ($this->columnsCache[$colProps['data']]['type'] === 'selectize') {
                         $search = 'IN ('.$colProps['search']['value'].')';
