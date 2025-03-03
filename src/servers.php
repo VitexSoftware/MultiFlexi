@@ -28,7 +28,7 @@ $allFbData = $servers->getAll();
 $fbtable = new Table();
 $fbtable->addRowHeaderColumns([_('Type'), _('ID'), _('Name'), _('Url'), _('Username'), _('Add company')]);
 
-foreach ($allFbData as $serverId => $fbData) {
+foreach ($allFbData as $fbData) {
     unset($fbData['password'], $fbData['DatCreate'], $fbData['DatSave'], $fbData['ic']);
 
     $serverInfo = [];
