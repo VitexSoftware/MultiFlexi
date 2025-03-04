@@ -45,21 +45,31 @@ if (WebPage::singleton()->isPosted()) {
     }
 
     unset($_POST['new']);
-    $uuid = WebPage::getRequestValue('uuid');
 
-    if (empty($uuid)) {
-        unset($_POST['uuid']);
-    }
+    $numericFields = array_filter($_POST, static function ($key) {
+        return is_numeric($key);
+    }, \ARRAY_FILTER_USE_KEY);
+
+    $_POST = array_diff_key($_POST, $numericFields);
 
     try {
         if ($crtype->takeData($_POST) && null !== $crtype->dbsync()) {
             $crtype->addStatusMessage(_('Credential field Saved'), 'success');
 
-            if (isset($new)) {
-                $saver = new \MultiFlexi\CrTypeField();
+            $saver = new \MultiFlexi\CrTypeField();
+
+            if (isset($new) && \array_key_exists('keyname', $new) && \strlen($new['keyname'])) {
                 $saver->takeData($new);
                 $saver->setDataValue('credential_type_id', $crtype->getMyKey());
                 $saver->insertToSQL();
+            }
+
+            if (isset($numericFields)) {
+                foreach ($numericFields as $columnId => $fields) {
+                    $saver = new \MultiFlexi\CrTypeField();
+                    $saver->takeData(array_merge($fields, ['id' => $columnId]));
+                    $saver->updateToSQL();
+                }
             }
         } else {
             $crtype->addStatusMessage(_('Error saving Credential field'), 'error');
