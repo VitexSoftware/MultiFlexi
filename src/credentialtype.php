@@ -63,10 +63,10 @@ if (WebPage::singleton()->isPosted()) {
         return is_numeric($key);
     }, \ARRAY_FILTER_USE_KEY);
 
-    $_POST = array_diff_key($_POST, $numericFields);
+    $credentialTypeData = array_diff_key($_POST, $numericFields);
 
     try {
-        if ($crtype->takeData($_POST) && null !== $crtype->dbsync()) {
+        if ($crtype->takeData($credentialTypeData) && null !== $crtype->dbsync()) {
             $crtype->addStatusMessage(_('Credential field Saved'), 'success');
 
             if (isset($new) && \array_key_exists('keyname', $new) && \strlen($new['keyname'])) {

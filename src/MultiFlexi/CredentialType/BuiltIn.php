@@ -15,6 +15,9 @@ declare(strict_types=1);
 
 namespace MultiFlexi\CredentialType;
 
-class BuiltIn
+class BuiltIn implements \MultiFlexi\CredentialTypeHelper
 {
+    public static function description(): string {
+        return _('MultiFlexi BuiltIn');
+    }
 }

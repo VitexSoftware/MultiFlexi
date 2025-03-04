@@ -43,13 +43,13 @@ class CredentialTypeClassSelect extends \Ease\Html\SelectTag
     public function loadItems(): array
     {
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\\CredentialType');
-        $executors = \Ease\Functions::classesInNamespace('MultiFlexi\\CredentialType');
+        $credTypeHelpers = \Ease\Functions::classesInNamespace('MultiFlexi\\CredentialType');
         $items = [];
 
-        foreach ($executors as $injector) {
-            $executorClass = '\\MultiFlexi\\CredentialType\\'.$injector;
-            $items[$injector] = $executorClass::description();
-            $this->executors[$injector] = $executorClass;
+        foreach ($credTypeHelpers as $credTypeHelper) {
+            $credTypeHelperClass = '\\MultiFlexi\\CredentialType\\'.$credTypeHelper;
+            $items[$credTypeHelper] = $credTypeHelperClass::description();
+            $this->credentialTypeClasses[$credTypeHelper] = $credTypeHelperClass;
         }
 
         return $items;
