@@ -24,14 +24,18 @@ use Ease\TWB4\SubmitButton;
  */
 class CredentialTypeForm extends \Ease\TWB4\Form
 {
+    public \MultiFlexi\CredentialType $credType;
+
     public function __construct(\MultiFlexi\CredentialType $credtype, $formProperties = [])
     {
+        $this->credType = $credtype;
         $credTypeRow1 = new \Ease\TWB4\Row();
         $credTypeRow1->addColumn(2, new CredentialTypeLogo($credtype, ['style' => 'height: 200px']));
         $credTypeRow1->addColumn(8, [
             new \Ease\TWB4\FormGroup(_('Credential Name'), new \Ease\Html\InputTextTag('name', $credtype->getRecordName())),
             new \Ease\TWB4\FormGroup(_('Credential UUID'), new \Ease\Html\InputTextTag('uuid', $credtype->getDataValue('uuid'), ['disabled'])),
         ]);
+        $credTypeRow1->addColumn(2, new \Ease\TWB4\FormGroup(_('Credential type Helper Class'), new CredentialTypeClassSelect('class', [], (string) $credtype->getDataValue('class'))));
 
         $formContents[] = $credTypeRow1;
 
@@ -70,13 +74,17 @@ class CredentialTypeForm extends \Ease\TWB4\Form
     {
     }
 
-    private function credTypeField(string $credTypeUuid = 'new', array $fieldData = ['keyname' => '', 'type' => '', 'hint' => '', 'defval' => '']): \Ease\TWB4\Row
+    private function credTypeField(string $credTypeId = 'new', array $fieldData = ['keyname' => '', 'type' => '', 'hint' => '', 'defval' => '']): \Ease\TWB4\Row
     {
         $credTypeFieldRow = new \Ease\TWB4\Row();
-        $credTypeFieldRow->addColumn(3, new \Ease\TWB4\FormGroup(_('Field Name'), new \Ease\Html\InputTextTag($credTypeUuid.'[keyname]', $fieldData['keyname'])));
-        $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Field Type'), new CfgFieldTypeSelect($credTypeUuid.'[type]', $fieldData['type'])));
-        $credTypeFieldRow->addColumn(3, new \Ease\TWB4\FormGroup(_('Field Hint'), new \Ease\Html\InputTextTag($credTypeUuid.'[hint]', $fieldData['hint'])));
-        $credTypeFieldRow->addColumn(3, new \Ease\TWB4\FormGroup(_('Field Default Value'), new \Ease\Html\InputTextTag($credTypeUuid.'[defval]', $fieldData['defval'])));
+        $credTypeFieldRow->addColumn(3, new \Ease\TWB4\FormGroup(_('Field Name'), new \Ease\Html\InputTextTag($credTypeId.'[keyname]', $fieldData['keyname'])));
+        $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Field Type'), new CfgFieldTypeSelect($credTypeId.'[type]', $fieldData['type'])));
+        $credTypeFieldRow->addColumn(3, new \Ease\TWB4\FormGroup(_('Field Hint'), new \Ease\Html\InputTextTag($credTypeId.'[hint]', $fieldData['hint'])));
+        $credTypeFieldRow->addColumn(3, new \Ease\TWB4\FormGroup(_('Field Default Value'), new \Ease\Html\InputTextTag($credTypeId.'[defval]', $fieldData['defval'])));
+
+        if (is_numeric($credTypeId)) {
+            $credTypeFieldRow->addColumn(1, new \Ease\TWB4\FormGroup(_('Remove'), new \Ease\Html\ATag('?removefield='.$credTypeId.'&id='.$this->credType->getMyKey(), '❌️')));
+        }
 
         return $credTypeFieldRow;
     }

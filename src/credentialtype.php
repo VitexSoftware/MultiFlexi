@@ -24,6 +24,7 @@ $credTypeId = WebPage::getRequestValue('id', 'int');
 $crtype = new \MultiFlexi\CredentialType($credTypeId, ['autoload' => true]);
 
 $delete = WebPage::getRequestValue('delete', 'int');
+$removeField = WebPage::getRequestValue('removefield', 'int');
 
 if (null !== $delete) {
     $crtype->loadFromSQL($delete);
@@ -35,6 +36,18 @@ if (null !== $delete) {
     }
 
     WebPage::singleton()->redirect('credentialtypes.php');
+}
+
+$fielder = new \MultiFlexi\CrTypeField();
+
+if (null !== $removeField) {
+    if ($fielder->deleteFromSQL($removeField)) {
+        $crtype->addStatusMessage(_('Field removed'), 'success');
+    } else {
+        $crtype->addStatusMessage(_('Error removing field'), 'error');
+    }
+
+    WebPage::singleton()->redirect('credentialtype.php?id='.$credTypeId);
 }
 
 if (WebPage::singleton()->isPosted()) {
@@ -56,19 +69,17 @@ if (WebPage::singleton()->isPosted()) {
         if ($crtype->takeData($_POST) && null !== $crtype->dbsync()) {
             $crtype->addStatusMessage(_('Credential field Saved'), 'success');
 
-            $saver = new \MultiFlexi\CrTypeField();
-
             if (isset($new) && \array_key_exists('keyname', $new) && \strlen($new['keyname'])) {
-                $saver->takeData($new);
-                $saver->setDataValue('credential_type_id', $crtype->getMyKey());
-                $saver->insertToSQL();
+                $fielder->takeData($new);
+                $fielder->setDataValue('credential_type_id', $crtype->getMyKey());
+                $fielder->insertToSQL();
             }
 
             if (isset($numericFields)) {
                 foreach ($numericFields as $columnId => $fields) {
-                    $saver = new \MultiFlexi\CrTypeField();
-                    $saver->takeData(array_merge($fields, ['id' => $columnId]));
-                    $saver->updateToSQL();
+                    $fielder = new \MultiFlexi\CrTypeField();
+                    $fielder->takeData(array_merge($fields, ['id' => $columnId]));
+                    $fielder->updateToSQL();
                 }
             }
         } else {
@@ -91,7 +102,7 @@ if (WebPage::singleton()->isPosted()) {
     }
 }
 
-WebPage::singleton()->addItem(new PageTop(_('Crednetial Type')));
+WebPage::singleton()->addItem(new PageTop(_('Credential Type')));
 
 WebPage::singleton()->container->addItem(new CredentialTypeForm($crtype));
 
