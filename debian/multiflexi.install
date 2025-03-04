@@ -17,6 +17,7 @@ src/MultiFlexi/Command/*.php              usr/lib/multiflexi/MultiFlexi/Command/
 src/MultiFlexi/Pohoda/*.php               usr/lib/multiflexi/MultiFlexi/Pohoda/
 src/MultiFlexi/AbraFlexi/*.php            usr/lib/multiflexi/MultiFlexi/AbraFlexi/
 src/MultiFlexi/Executor/Native.php        usr/lib/multiflexi/MultiFlexi/Executor
+src/MultiFlexi/CredentialType/*.php       usr/lib/multiflexi/MultiFlexi/CredentialType/
 
 src/MultiFlexi/Action/CustomCommand.php   usr/lib/multiflexi/MultiFlexi/Action
 #src/MultiFlexi/Action/Github.php          usr/lib/multiflexi/MultiFlexi/Action
