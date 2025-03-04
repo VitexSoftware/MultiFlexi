@@ -13,7 +13,7 @@
             "url": "https://github.com/ybelenko/slim-token-authentication",
             "no-api": true
         }
-    ],        
+    ],
     "require": {
         "ext-yaml": "*",
         "ext-simplexml": "*",
@@ -60,7 +60,8 @@
             "MultiFlexi\\Executor\\": "src/MultiFlexi/Executor",
             "MultiFlexi\\Api\\Auth\\": "src/MultiFlexi/Api/Auth",
             "MultiFlexi\\AbraFlexi\\": "src/MultiFlexi/AbraFlexi",
-            "MultiFlexi\\Api\\Server\\": "src/MultiFlexi/Api/Server"
+            "MultiFlexi\\Api\\Server\\": "src/MultiFlexi/Api/Server",
+            "MultiFlexi\\CredentialType\\": "src/MultiFlexi/CredentialType"
         }
     },
     "autoload-dev": {
