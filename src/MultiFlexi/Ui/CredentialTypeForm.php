@@ -15,7 +15,6 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use Ease\Html\InputHiddenTag;
 use Ease\TWB4\SubmitButton;
 
 /**
@@ -27,14 +26,11 @@ class CredentialTypeForm extends \Ease\TWB4\Form
 {
     public function __construct(\MultiFlexi\CredentialType $credtype, $formProperties = [])
     {
-        $formContents[] = new \Ease\Html\H2Tag('#'.$credtype->getMyKey());
-        $formContents[] = new \Ease\Html\InputHiddenTag('id', $credtype->getMyKey());
-
         $credTypeRow1 = new \Ease\TWB4\Row();
         $credTypeRow1->addColumn(2, new CredentialTypeLogo($credtype, ['style' => 'height: 200px']));
         $credTypeRow1->addColumn(8, [
             new \Ease\TWB4\FormGroup(_('Credential Name'), new \Ease\Html\InputTextTag('name', $credtype->getRecordName())),
-            new \Ease\TWB4\FormGroup(_('Credential UUID'), new \Ease\Html\InputTextTag('uuid', $credtype->getDataValue('uuid'))),
+            new \Ease\TWB4\FormGroup(_('Credential UUID'), new \Ease\Html\InputTextTag('uuid', $credtype->getDataValue('uuid'), ['disabled'])),
         ]);
 
         $formContents[] = $credTypeRow1;
@@ -46,7 +42,7 @@ class CredentialTypeForm extends \Ease\TWB4\Form
         $fields = $fielder->listingQuery()->where(['credential_type_id' => $credtype->getMyKey()]);
 
         foreach ($fields as $crTypeField) {
-            $formContents[] = $this->credTypeField($credtype->getDataValue('uuid'), $crTypeField);
+            $formContents[] = $this->credTypeField((string) $crTypeField['id'], $crTypeField);
         }
 
         parent::__construct(['action' => 'credentialtype.php'], ['method' => 'POST'], $formContents);
@@ -60,7 +56,7 @@ class CredentialTypeForm extends \Ease\TWB4\Form
         if (null === $credtype->getMyKey()) {
             $submitRow->addColumn(2, new \Ease\TWB4\SubmitButton('⚰️ '._('Remove').' !', 'disabled btn-lg btn-block', ['disabled' => 'true']));
         } else {
-            $this->addItem(new InputHiddenTag('id'));
+            $this->addItem(new \Ease\Html\InputHiddenTag('id', $credtype->getMyKey()));
 
             if (WebPage::getRequestValue('remove') === 'true') {
                 $submitRow->addColumn(2, new \Ease\TWB4\LinkButton('credentialtype.php?delete='.$credtype->getMyKey(), '⚰️ '._('Remove').' !', 'danger btn-lg btn-block'));
