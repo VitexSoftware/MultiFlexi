@@ -15,10 +15,15 @@ declare(strict_types=1);
 
 namespace MultiFlexi\CredentialType;
 
-class BuiltIn implements \MultiFlexi\CredentialTypeHelper
+/**
+ * Description of Csas.
+ *
+ * @author vitex
+ */
+class Csas implements \MultiFlexi\CredentialTypeHelper
 {
     public static function description(): string
     {
-        return _('MultiFlexi BuiltIn');
+        return _('Česká Spořitelna a.s.');
     }
 }

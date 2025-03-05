@@ -15,10 +15,15 @@ declare(strict_types=1);
 
 namespace MultiFlexi\CredentialType;
 
-class BuiltIn implements \MultiFlexi\CredentialTypeHelper
+/**
+ * Description of VaultWarden.
+ *
+ * @author vitex
+ */
+class VaultWarden implements \MultiFlexi\CredentialTypeHelper
 {
     public static function description(): string
     {
-        return _('MultiFlexi BuiltIn');
+        return _('VaultWarden');
     }
 }
