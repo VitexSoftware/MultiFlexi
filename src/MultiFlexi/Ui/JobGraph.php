@@ -32,15 +32,35 @@ class JobGraph
         $this->width = $width;
         $this->height = $height;
         $this->todaysJobs = $todaysJobs;
+    }
+
+    public function calcultateStats(): void
+    {
+        foreach ($this->todaysJobs as $job) {
+            if ($job['exitcode'] === 0) {
+                ++$this->successCount;
+            } elseif ($job['exitcode'] === 127) {
+                ++$this->noExecutableCount;
+            } elseif ($job['exitcode'] === 255) {
+                ++$this->exceptionCount;
+            } elseif (null === $job['exitcode']) {
+                ++$this->waitingCount;
+            } else {
+                ++$this->failureCount;
+            }
+        }
+    }
+
+
+    public function generateImage(): void
+    {
         $this->image = imagecreatetruecolor($this->width, $this->height);
 
         // Allocate colors
         $white = imagecolorallocate($this->image, 255, 255, 255);
         imagefill($this->image, 0, 0, $white);
-    }
-
-    public function generateImage(): void
-    {
+        
+        
         $centerX = $this->width / 2;
         $centerY = $this->height / 2;
         $x = $centerX;
@@ -106,17 +126,20 @@ class JobGraph
 
     public function getBase64Image(): string
     {
+        // Encode the image data as base64
+        return base64_encode($this->getImage());
+    }
+
+    public function getImage(): string {
         // Capture the image output
         ob_start();
         imagepng($this->image);
         $imageData = ob_get_contents();
         ob_end_clean();
         imagedestroy($this->image);
-
-        // Encode the image data as base64
-        return base64_encode($imageData);
+        return $imageData;
     }
-
+    
     public function getSuccessCount(): int
     {
         return $this->successCount;
@@ -145,5 +168,12 @@ class JobGraph
     public function getTotalJobs(): int
     {
         return \count($this->todaysJobs);
+    }
+
+    public function getImageTag($companyId) {
+        return new \Ease\Html\ImgTag(
+                'jobgraph.php?width=' . $this->width . '&height=' . $this->height . '&company_id=' . $companyId, 
+                _('Job Success/Failure Graph'), 
+                ['width' => $this->width, 'height' => $this->height]);
     }
 }
