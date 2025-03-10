@@ -32,12 +32,15 @@ function addResultItem($results, $url, $label, $column, $content): void
     $results->addItemSmart(new \Ease\Html\ATag($url, $label.' - '.$column.': '.$content));
 }
 
+$foundItems = [];
+
 if ($what === 'all' || $what === 'RunTemplate') {
     $runTemplater = new \MultiFlexi\RunTemplate();
     $runtemplatesFound = $runTemplater->listingQuery()->where('name LIKE "%'.$searchTerm.'%"')->whereOr(['id' => $searchTerm]);
 
     if ($runtemplatesFound->count()) {
         foreach ($runtemplatesFound as $runTemplate) {
+            $foundItems[] = 'runtemplate.php?id='.$runTemplate['id'];
             addResultItem($results, 'runtemplate.php?id='.$runTemplate['id'], '⚗️ '.$runTemplate['name'], 'name', $runTemplate['name']);
         }
     }
@@ -50,12 +53,16 @@ if ($what === 'all' || $what === 'Application') {
     if ($appsFound->count()) {
         foreach ($appsFound as $app) {
             if (stripos($app['name'], $searchTerm) !== false) {
+                $foundItems[] = 'app.php?id='.$app['id'];
                 addResultItem($results, 'app.php?id='.$app['id'], '🖥️ '.$app['name'], 'name', $app['name']);
             } elseif (stripos($app['executable'], $searchTerm) !== false) {
+                $foundItems[] = 'app.php?id='.$app['id'];
                 addResultItem($results, 'app.php?id='.$app['id'], '🖥️ '.$app['name'], 'executable', $app['executable']);
             } elseif (stripos($app['uuid'], $searchTerm) !== false) {
+                $foundItems[] = 'app.php?id='.$app['id'];
                 addResultItem($results, 'app.php?id='.$app['id'], '🖥️ '.$app['name'], 'uuid', $app['uuid']);
             } elseif ($app['id'] === $searchTerm) {
+                $foundItems[] = 'app.php?id='.$app['id'];
                 addResultItem($results, 'app.php?id='.$app['id'], '🖥️ '.$app['name'], 'id', $app['id']);
             }
         }
@@ -68,6 +75,7 @@ if ($what === 'all' || $what === 'Company') {
 
     if ($companyFound->count()) {
         foreach ($companyFound as $company) {
+            $foundItems[] = 'company.php?id='.$company['id'];
             addResultItem($results, 'company.php?id='.$company['id'], '🏢 '.$company['name'], 'name', $company['name']);
         }
     }
@@ -80,10 +88,13 @@ if ($what === 'all' || $what === 'Job') {
     if ($jobsFound->count()) {
         foreach ($jobsFound as $job) {
             if (stripos($job['stdout'], $searchTerm) !== false) {
+                $foundItems[] = 'job.php?id='.$job['id'];
                 addResultItem($results, 'job.php?id='.$job['id'], '🏁 Job #'.$job['id'], 'stdout', $job['stdout']);
             } elseif (stripos($job['stderr'], $searchTerm) !== false) {
+                $foundItems[] = 'job.php?id='.$job['id'];
                 addResultItem($results, 'job.php?id='.$job['id'], '🏁 Job #'.$job['id'], 'stderr', $job['stderr']);
             } elseif ($job['id'] === $searchTerm) {
+                $foundItems[] = 'job.php?id='.$job['id'];
                 addResultItem($results, 'job.php?id='.$job['id'], '🏁 Job #'.$job['id'], 'id', $job['id']);
             }
         }
@@ -96,9 +107,16 @@ if ($what === 'all' || $what === 'Credential') {
 
     if ($credentialsFound->count()) {
         foreach ($credentialsFound as $credential) {
+            $foundItems[] = 'credential.php?id='.$credential['id'];
             addResultItem($results, 'credential.php?id='.$credential['id'], '🔐 Credential #'.$credential['id'].' '.$credential['name'], 'name', $credential['name']);
         }
     }
+}
+
+// Redirect if only one result is found
+if (count($foundItems) === 1) {
+    header('Location: '.$foundItems[0]);
+    exit;
 }
 
 WebPage::singleton()->addItem(new PageTop(_('MultiFlexi')));
