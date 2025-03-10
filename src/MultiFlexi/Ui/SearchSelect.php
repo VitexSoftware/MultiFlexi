@@ -25,13 +25,13 @@ class SearchSelect extends \Ease\Html\SelectTag
     public function loadItems(): array
     {
         return [
-            'all' => _('All').' ('._('slow').')',
             'RunTemplate' => _('RunTemplate'),
             'Job' => _('Job'),
             'Application' => _('Application'),
             'Company' => _('Company'),
             'Credential' => _('Credential'),
             'CredentialType' => _('Credential Type'),
+            'all' => _('All').' ('._('slow').')',
         ];
     }
 }
