@@ -31,4 +31,3 @@ $base64Image = $jobGraph->generateImage();
 header('Content-Type: image/png');
 
 echo $jobGraph->getImage();
-

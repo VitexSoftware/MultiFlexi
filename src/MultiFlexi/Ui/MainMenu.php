@@ -241,9 +241,16 @@ EOD);
 
     public function searchFrom()
     {
+        $search = \Ease\WebPage::getRequestValue('search');
+        $what = \Ease\WebPage::getRequestValue('what');
+
+        if (empty($search) && (empty($what) || $what === 'RunTemplate' || $what === 'Job')) {
+            $search = '#';
+        }
+
         $searchForm = new \Ease\TWB4\Form(['class' => 'form-inline my-2 my-lg-0', 'action' => 'search.php']);
-        $searchForm->addItem(new \Ease\Html\InputTextTag('search', \Ease\WebPage::getRequestValue('search'), ['aria-label' => _('Search'), 'class' => 'form-control mr-sm-2', 'type' => 'search', 'placeholder' => _('Search'), 'title' => _('#number to jump on record')]));
-        $searchForm->addItem(new SearchSelect('what'));
+        $searchForm->addItem(new \Ease\Html\InputTextTag('search', $search, ['aria-label' => _('Search'), 'class' => 'form-control mr-sm-2', 'type' => 'search', 'placeholder' => _('Search'), 'title' => _('#number to jump on record')]));
+        $searchForm->addItem(new SearchSelect('what', [], $search));
         $searchForm->addItem(new \Ease\Html\ButtonTag(_('Search'), ['class' => 'btn btn-outline-success my-2 my-sm-0']));
 
         return $searchForm;

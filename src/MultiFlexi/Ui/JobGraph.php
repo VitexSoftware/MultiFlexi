@@ -51,7 +51,6 @@ class JobGraph
         }
     }
 
-
     public function generateImage(): void
     {
         $this->image = imagecreatetruecolor($this->width, $this->height);
@@ -59,8 +58,7 @@ class JobGraph
         // Allocate colors
         $white = imagecolorallocate($this->image, 255, 255, 255);
         imagefill($this->image, 0, 0, $white);
-        
-        
+
         $centerX = $this->width / 2;
         $centerY = $this->height / 2;
         $x = $centerX;
@@ -130,16 +128,18 @@ class JobGraph
         return base64_encode($this->getImage());
     }
 
-    public function getImage(): string {
+    public function getImage(): string
+    {
         // Capture the image output
         ob_start();
         imagepng($this->image);
         $imageData = ob_get_contents();
         ob_end_clean();
         imagedestroy($this->image);
+
         return $imageData;
     }
-    
+
     public function getSuccessCount(): int
     {
         return $this->successCount;
@@ -170,10 +170,12 @@ class JobGraph
         return \count($this->todaysJobs);
     }
 
-    public function getImageTag($companyId) {
+    public function getImageTag($companyId)
+    {
         return new \Ease\Html\ImgTag(
-                'jobgraph.php?width=' . $this->width . '&height=' . $this->height . '&company_id=' . $companyId, 
-                _('Job Success/Failure Graph'), 
-                ['width' => $this->width, 'height' => $this->height]);
+            'jobgraph.php?width='.$this->width.'&height='.$this->height.'&company_id='.$companyId,
+            _('Job Success/Failure Graph'),
+            ['width' => $this->width, 'height' => $this->height],
+        );
     }
 }
