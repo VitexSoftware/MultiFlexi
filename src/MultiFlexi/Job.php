@@ -599,7 +599,12 @@ EOD;
         }
 
         if (\array_key_exists('RESULT_FILE', $jobEnv)) {
-            $jobEnv['RESULT_FILE']['value'] = sys_get_temp_dir().\DIRECTORY_SEPARATOR.basename($jobEnv['RESULT_FILE']['value']);
+            if($jobEnv['RESULT_FILE']['value'] == sys_get_temp_dir()){
+                unset($jobEnv['RESULT_FILE']);
+                $this->addStatusMessage(_('Result file name incorrect'));
+            } else {
+                $jobEnv['RESULT_FILE']['value'] = sys_get_temp_dir().\DIRECTORY_SEPARATOR.basename($jobEnv['RESULT_FILE']['value']);
+            }
         }
 
         return $jobEnv;

@@ -71,7 +71,7 @@ class CredentialForm extends \Ease\TWB4\Form
                         $companyAppStatus = new \Ease\TWB4\Badge('disabled', '🪤', ['style' => 'font-size: 1.0em; font-family: monospace;']);
                     }
 
-                    $runtemplatesDiv->addItem(new \Ease\Html\SpanTag([new \Ease\Html\ATag('runtemplate.php?id='.$runtemplateData['id'], '⚗️#'.$runtemplateData['id'], ['class' => 'btn btn-inverse btn-sm', 'title' => $runtemplateData['name']]), $companyAppStatus], ['class' => 'btn-group', 'role' => 'group']));
+                    $runtemplatesDiv->addItem(new \Ease\Html\SpanTag([new \Ease\Html\ATag('runtemplate.php?id='.$runtemplateData['runtemplate_id'], '⚗️#'.$runtemplateData['runtemplate_id'], ['class' => 'btn btn-inverse btn-sm', 'title' => $runtemplateData['name']]), $companyAppStatus], ['class' => 'btn-group', 'role' => 'group']));
                 }
 
                 $formContents[] = $runtemplatesDiv;
