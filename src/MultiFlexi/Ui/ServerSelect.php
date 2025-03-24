@@ -40,7 +40,7 @@ class ServerSelect extends \Ease\Html\SelectTag
         $name,
         $defaultValue = null,
         $itemsIDs = false,
-        $properties = []
+        $properties = [],
     ) {
         $items = $this->loadItems();
         $itemsIDs = array_keys($items);

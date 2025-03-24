@@ -64,7 +64,7 @@ class ZabbixSender extends \MultiFlexi\Zabbix\ZabbixSender
 
     public function __construct(
         string $serverAddress,
-        int $serverPort = 10051
+        int $serverPort = 10051,
     ) {
         $this->serverAddress = $serverAddress;
         $this->serverPort = $serverPort;

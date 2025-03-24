@@ -40,7 +40,7 @@ class DefaultApi extends AbstractDefaultApi
      */
     public function loginGet(
         ServerRequestInterface $request,
-        ResponseInterface $response
+        ResponseInterface $response,
     ): ResponseInterface {
         $queryParams = $request->getQueryParams();
         $payload = [];

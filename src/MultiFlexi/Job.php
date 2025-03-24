@@ -599,7 +599,7 @@ EOD;
         }
 
         if (\array_key_exists('RESULT_FILE', $jobEnv)) {
-            if($jobEnv['RESULT_FILE']['value'] == sys_get_temp_dir()){
+            if ($jobEnv['RESULT_FILE']['value'] === sys_get_temp_dir()) {
                 unset($jobEnv['RESULT_FILE']);
                 $this->addStatusMessage(_('Result file name incorrect'));
             } else {

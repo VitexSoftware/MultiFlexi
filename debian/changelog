@@ -1,8 +1,15 @@
-multiflexi (1.26.0) UNRELEASED; urgency=medium
+multiflexi (1.27.1) UNRELEASED; urgency=medium
 
+  * credential type now can keep its configuragion
+
+ -- vitex <info@vitexsoftware.cz>  Mon, 24 Mar 2025 20:42:20 +0100
+
+multiflexi (1.26.0) jammy; urgency=medium
+
+  [ Vitex ]
   * live job ouput attempt
 
- -- Vitex <vitezslav.dvorak@spojenet.cz>  Thu, 27 Feb 2025 18:02:18 +0100
+ -- vitex <info@vitexsoftware.cz>  Mon, 24 Mar 2025 20:42:05 +0100
 
 multiflexi (1.25.3) jammy; urgency=medium
 

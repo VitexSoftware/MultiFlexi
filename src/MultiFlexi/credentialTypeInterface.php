@@ -18,7 +18,17 @@ namespace MultiFlexi;
 /**
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-interface CredentialTypeHelper
+interface credentialTypeInterface
 {
+    public static function name(): string;
+
     public static function description(): string;
+
+    public function configForm();
+
+    public function fieldsProvided(): ConfigFields;
+
+    public function fieldsInternal(): ConfigFields;
+
+    public function save(): bool;
 }

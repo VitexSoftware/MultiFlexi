@@ -52,6 +52,7 @@ if (null !== $removeField) {
 
 if (WebPage::singleton()->isPosted()) {
     $new = WebPage::getRequestValue('new');
+    $class = WebPage::getRequestValue('class');
 
     if (empty(implode('', $new))) {
         unset($new);
@@ -62,6 +63,31 @@ if (WebPage::singleton()->isPosted()) {
     $numericFields = array_filter($_POST, static function ($key) {
         return is_numeric($key);
     }, \ARRAY_FILTER_USE_KEY);
+
+    if ($class) {
+        $credTypeClass = '\\MultiFlexi\\CredentialType\\'.$class;
+        /**
+         * @var credentialTypeInterface Credential Type Helper class
+         */
+        $clasHelper = new $credTypeClass();
+        $helperClassFieldsInternal = $clasHelper->fieldsInternal();
+        $helperClassFieldsProvided = $clasHelper->fieldsProvided();
+        $credTypeSettings = WebPage::getRequestValue($class);
+        unset($_POST[$class]);
+
+        foreach ($helperClassFieldsInternal as $helperInternalFieldName => $helperInternalField) {
+
+            if ($credTypeSettings) {
+                $credTypeSettings['credential_type_id'] = $credTypeId;
+                $clasHelper->takeData($credTypeSettings);
+                
+                $clasHelper->addStatusMessage(sprintf(_('Saving Credential type %s options'), $credTypeClass::name()), $clasHelper->save() ? 'success' : 'error');
+            }
+        }
+
+        foreach ($helperClassFieldsProvided as $helperFieldName => $helperProvidedField) {
+        }
+    }
 
     $credentialTypeData = array_diff_key($_POST, $numericFields);
 

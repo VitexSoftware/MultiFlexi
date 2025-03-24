@@ -54,7 +54,7 @@ class UserForm extends Form
             $user->getDataValue('login'),
         ), _('Username'));
 
-        $this->addItem(new InputHiddenTag('class', \get_class($user)));
+        $this->addItem(new InputHiddenTag('class', $user::class));
         //        $this->addItem(new \Ease\Html\InputHiddenTag('enquiry_id', $user->getDataValue('enquiry_id')));
 
         $this->addItem(new \Ease\Html\DivTag(new SubmitButton(

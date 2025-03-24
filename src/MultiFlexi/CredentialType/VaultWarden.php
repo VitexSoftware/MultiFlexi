@@ -20,10 +20,32 @@ namespace MultiFlexi\CredentialType;
  *
  * @author vitex
  */
-class VaultWarden implements \MultiFlexi\CredentialTypeHelper
+class VaultWarden extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
 {
-    public static function description(): string
+    public static function name(): string
     {
         return _('VaultWarden');
+    }
+
+    public static function description(): string
+    {
+        return _('Use VaultWarden secrets');
+    }
+
+    #[\Override]
+    public function configForm(): void
+    {
+    }
+
+    #[\Override]
+    public function fieldsInternal(): \MultiFlexi\ConfigFields
+    {
+        return $this->configFieldsInternal;
+    }
+
+    #[\Override]
+    public function fieldsProvided(): \MultiFlexi\ConfigFields
+    {
+        return $this->configFieldsProvided;
     }
 }
