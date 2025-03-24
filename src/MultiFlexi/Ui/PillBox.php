@@ -26,7 +26,7 @@ class PillBox extends \Ease\Html\InputTextTag
         $name,
         $valuesAvailble,
         $valuesShown,
-        $properties = []
+        $properties = [],
     ) {
         parent::__construct(
             $name,

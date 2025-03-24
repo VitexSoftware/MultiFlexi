@@ -23,7 +23,7 @@ $results = new \Ease\Html\UlTag();
 $searchTerm = \Ease\WebPage::getRequestValue('search');
 $what = \Ease\WebPage::getRequestValue('what');
 
-if (strpos($searchTerm, '#') === 0) {
+if (str_starts_with($searchTerm, '#')) {
     $searchTerm = substr($searchTerm, 1);
 }
 
@@ -52,13 +52,13 @@ if ($what === 'all' || $what === 'Application') {
 
     if ($appsFound->count()) {
         foreach ($appsFound as $app) {
-            if (stripos($app['name'], $searchTerm) !== false) {
+            if (str_contains(strtolower($app['name']), strtolower($searchTerm))) {
                 $foundItems[] = 'app.php?id='.$app['id'];
                 addResultItem($results, 'app.php?id='.$app['id'], '🖥️ '.$app['name'], 'name', $app['name']);
-            } elseif (stripos($app['executable'], $searchTerm) !== false) {
+            } elseif (str_contains(strtolower($app['executable']), strtolower($searchTerm))) {
                 $foundItems[] = 'app.php?id='.$app['id'];
                 addResultItem($results, 'app.php?id='.$app['id'], '🖥️ '.$app['name'], 'executable', $app['executable']);
-            } elseif (stripos($app['uuid'], $searchTerm) !== false) {
+            } elseif (str_contains(strtolower($app['uuid']), strtolower($searchTerm))) {
                 $foundItems[] = 'app.php?id='.$app['id'];
                 addResultItem($results, 'app.php?id='.$app['id'], '🖥️ '.$app['name'], 'uuid', $app['uuid']);
             } elseif ($app['id'] === $searchTerm) {
@@ -87,10 +87,10 @@ if ($what === 'all' || $what === 'Job') {
 
     if ($jobsFound->count()) {
         foreach ($jobsFound as $job) {
-            if (stripos($job['stdout'], $searchTerm) !== false) {
+            if (str_contains(strtolower($job['stdout']), strtolower($searchTerm))) {
                 $foundItems[] = 'job.php?id='.$job['id'];
                 addResultItem($results, 'job.php?id='.$job['id'], '🏁 Job #'.$job['id'], 'stdout', $job['stdout']);
-            } elseif (stripos($job['stderr'], $searchTerm) !== false) {
+            } elseif (str_contains(strtolower($job['stderr']), strtolower($searchTerm))) {
                 $foundItems[] = 'job.php?id='.$job['id'];
                 addResultItem($results, 'job.php?id='.$job['id'], '🏁 Job #'.$job['id'], 'stderr', $job['stderr']);
             } elseif ($job['id'] === $searchTerm) {
@@ -114,8 +114,9 @@ if ($what === 'all' || $what === 'Credential') {
 }
 
 // Redirect if only one result is found
-if (count($foundItems) === 1) {
+if (\count($foundItems) === 1) {
     header('Location: '.$foundItems[0]);
+
     exit;
 }
 

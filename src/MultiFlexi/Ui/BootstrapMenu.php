@@ -32,7 +32,7 @@ class BootstrapMenu extends \Ease\TWB4\Navbar
     public function __construct(
         $name = null,
         $content = null,
-        $properties = []
+        $properties = [],
     ) {
         $this->mainpage = 'main.php';
         parent::__construct(new \Ease\Html\ImgTag('images/project-logo.svg', $name, ['width' => 50, 'height' => 50, 'class' => 'img-rounded d-inline-block align-top']), 'main-menu', ['class' => 'navbar-fixed-top'.(\array_key_exists('class', $properties) ? $properties['class'] : '')]);

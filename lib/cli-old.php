@@ -43,7 +43,7 @@ $format = 'plain'; // Default format
 
 // Parse options
 for ($i = 1; $i < \count($argv); ++$i) {
-    if (strpos($argv[$i], '--') === 0) {
+    if (str_starts_with($argv[$i], '--')) {
         $probBegin = $i;
 
         break;
@@ -52,7 +52,7 @@ for ($i = 1; $i < \count($argv); ++$i) {
 
 if (isset($probBegin)) {
     for ($i = $probBegin; $i < \count($argv); ++$i) {
-        if (strpos($argv[$i], '--') === 0) {
+        if (str_starts_with($argv[$i], '--')) {
             $key = substr($argv[$i], 2);
             $value = \array_key_exists($i + 1, $argv) ? $argv[$i + 1] : null;
 

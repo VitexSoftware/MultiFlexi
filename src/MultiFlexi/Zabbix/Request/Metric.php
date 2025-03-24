@@ -27,7 +27,7 @@ class Metric implements \JsonSerializable
 
     public function __construct(
         string $itemKey,
-        string $itemValue
+        string $itemValue,
     ) {
         $this->itemKey = $itemKey;
         $this->itemValue = $itemValue;

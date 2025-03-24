@@ -20,10 +20,33 @@ namespace MultiFlexi\CredentialType;
  *
  * @author vitex
  */
-class Csas implements \MultiFlexi\CredentialTypeHelper
+class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
 {
-    public static function description(): string
+    #[\Override]
+    public static function name(): string
     {
         return _('Česká Spořitelna a.s.');
+    }
+
+    public static function description(): string
+    {
+        return _('Interact with Erste APIs');
+    }
+
+    #[\Override]
+    public function configForm(): void
+    {
+    }
+
+    #[\Override]
+    public function fieldsInternal(): \MultiFlexi\ConfigFields
+    {
+        return $this->configFieldsInternal;
+    }
+
+    #[\Override]
+    public function fieldsProvided(): \MultiFlexi\ConfigFields
+    {
+        return $this->configFieldsProvided;
     }
 }

@@ -35,7 +35,7 @@ class EngineForm extends Form
     {
         $this->engine = $engine;
         $tagProperties['method'] = 'post';
-        $tagProperties['name'] = \get_class($engine);
+        $tagProperties['name'] = $engine::class;
         parent::__construct($tagProperties, [], $formContents);
     }
 

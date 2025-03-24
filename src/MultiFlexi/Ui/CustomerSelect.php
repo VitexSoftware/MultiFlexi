@@ -30,7 +30,7 @@ class CustomerSelect extends \Ease\Html\SelectTag
         $name,
         $defaultValue = '',
         $itemsIDs = false,
-        $properties = []
+        $properties = [],
     ) {
         parent::__construct($name, $this->loadItems(), $defaultValue, $properties);
     }
