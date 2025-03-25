@@ -26,6 +26,7 @@ class CredentialType extends DBEngine
      * @var string Name Column
      */
     public string $nameColumn = 'name';
+    private ?\MultiFlexi\credentialTypeInterface $helper = null;
 
     public function __construct($init = null, array $filter = [])
     {
@@ -55,6 +56,17 @@ class CredentialType extends DBEngine
         return parent::takeData($data);
     }
 
+    public function getHelper(): ?\MultiFlexi\credentialTypeInterface
+    {
+        if (!\is_object($this->helper) && $this->getDataValue('class')) {
+            $credTypeClass = '\\MultiFlexi\\CredentialType\\'.$this->getDataValue('class');
+            $this->helper = new $credTypeClass();
+            $this->helper->load($this->getMyKey());
+        }
+
+        return $this->helper;
+    }
+
     /**
      * @param array $columns
      *
@@ -69,5 +81,24 @@ class CredentialType extends DBEngine
             ['name' => 'name', 'type' => 'text', 'label' => _('Name')],
             ['name' => 'uuid', 'type' => 'text', 'label' => _('UUID')],
         ]);
+    }
+
+    public function getFields(): ConfigFields
+    {
+        $fields = new ConfigFields();
+        $fielder = new \MultiFlexi\CrTypeField();
+
+        foreach ($fielder->listingQuery()->where(['credential_type_id' => $this->getMyKey()]) as $fieldData) {
+            $field = new ConfigFieldWithHelper($fieldData['keyname'], $fieldData['type'], $fieldData['keyname'], $fieldData['description']);
+            $field->setHint($fieldData['hint'])->setDefaultValue($fieldData['defval'])->setRequired($fieldData['required'] === 1)->setHelper($fieldData['helper']);
+            $field->setMyKey($fieldData['id']);
+            $fields->addField($field);
+        }
+
+        return $fields;
+    }
+
+    public function getCredTypeFields(self $credentialType): ConfigFields
+    {
     }
 }

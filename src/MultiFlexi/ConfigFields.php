@@ -41,17 +41,19 @@ class ConfigFields implements \Iterator
     }
 
     /**
-     * Summary of getField
-     * @param string $class
-     * @return ConfigField[]|null
+     * Summary of getField.
+     *
+     * @return null|ConfigField[]
      */
     public function getField(string $class): ?ConfigField
     {
         return \array_key_exists($class, $this->fields) ? $this->fields : null;
     }
 
-    public function &getFieldByCode(string $code): ?ConfigField {
-        $field = array_key_exists($code, $this->fields) ? $this->fields[$code] : null;
+    public function &getFieldByCode(string $code): ?ConfigField
+    {
+        $field = \array_key_exists($code, $this->fields) ? $this->fields[$code] : null;
+
         return $field;
     }
 

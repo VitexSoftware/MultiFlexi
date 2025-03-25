@@ -50,6 +50,8 @@ if (null !== $removeField) {
     WebPage::singleton()->redirect('credentialtype.php?id='.$credTypeId);
 }
 
+$addField = WebPage::getRequestValue('addField');
+
 if (WebPage::singleton()->isPosted()) {
     $new = WebPage::getRequestValue('new');
     $class = WebPage::getRequestValue('class');
@@ -76,11 +78,10 @@ if (WebPage::singleton()->isPosted()) {
         unset($_POST[$class]);
 
         foreach ($helperClassFieldsInternal as $helperInternalFieldName => $helperInternalField) {
-
             if ($credTypeSettings) {
-                $credTypeSettings['credential_type_id'] = $credTypeId;
+                $credTypeSettings['credential_type_id'] = $crtype->getMyKey();
                 $clasHelper->takeData($credTypeSettings);
-                
+
                 $clasHelper->addStatusMessage(sprintf(_('Saving Credential type %s options'), $credTypeClass::name()), $clasHelper->save() ? 'success' : 'error');
             }
         }
@@ -125,6 +126,28 @@ if (WebPage::singleton()->isPosted()) {
 
     if ((null === WebPage::getRequestValue('formType')) === false) {
         $crtype->setDataValue('formType', WebPage::getRequestValue('formType'));
+    }
+}
+
+if ($addField) {
+    $columnProvided = $crtype->getHelper()->fieldsProvided()->getFieldByCode($addField);
+
+    if (\is_object($columnProvided)) {
+        $fielder->dataReset();
+        $toInsert = [
+            'credential_type_id' => $crtype->getMyKey(),
+            'keyname' => $columnProvided->getCode(),
+            'type' => $columnProvided->getType(),
+            'description' => $columnProvided->getDescription(),
+            'hint' => $columnProvided->getHint(),
+            'defval' => $columnProvided->getDefaultValue(),
+            'required' => $columnProvided->isRequired(),
+            'helper' => $addField,
+        ];
+
+        $fielder->takeData($toInsert);
+
+        $fielder->insertToSQL();
     }
 }
 

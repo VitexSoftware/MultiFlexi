@@ -38,23 +38,43 @@ class CredentialTypeForm extends \Ease\TWB4\Form
         $helperCol = $credTypeRow1->addColumn(4, new \Ease\TWB4\FormGroup(_('Credential type Helper Class'), new CredentialTypeClassSelect('class', [], (string) $credtype->getDataValue('class'))));
 
         if ($credtype->getDataValue('class')) {
-            $credTypeClass = '\\MultiFlexi\\CredentialType\\'.$credtype->getDataValue('class');
-            $helper = new $credTypeClass();
-            $loader = new \MultiFlexi\CrTypeOption();
-            $helper->takeData($loader->listingQuery()->where('credential_type_id', $credtype->getMyKey())->fetchAll('name'));
-            $helperCol->addItem(new FieldsForm($helper->fieldsInternal(), $credtype->getDataValue('class')));
+            $helperCol->addItem(new FieldsForm($credtype->getHelper()->fieldsInternal(), $credtype->getDataValue('class')));
+
+            $provided = new \Ease\TWB4\Panel(new \Ease\Html\H4Tag(_('Fields provided')));
+
+            $assigned = $credtype->getFields();
+
+            foreach ($credtype->getHelper()->fieldsProvided() as $fieldProvided) {
+                $fieldRow = new \Ease\TWB4\Row();
+
+                $fieldRow->addColumn(4, $fieldProvided->getName().'<br>'.$fieldProvided->getType());
+                $fieldRow->addColumn(6, $fieldProvided->getDescription());
+
+                $flags = new \Ease\Html\SpanTag();
+
+                if (\is_object($assigned->getFieldByCode($fieldProvided->getCode()))) {
+                    $flags->addItem(new \Ease\TWB4\LinkButton('?id='.$credtype->getMyKey().'&addField='.$fieldProvided->getCode(), '➕', 'disabled', ['title' => _('Already assigned')]));
+                } else {
+                    $flags->addItem(new \Ease\TWB4\LinkButton('?id='.$credtype->getMyKey().'&addField='.$fieldProvided->getCode(), '➕', 'success', ['title' => _('Add Field to ')]));
+                }
+
+                $fieldRow->addColumn(2, $flags);
+
+                $provided->addItem($fieldRow);
+            }
+
+            $helperCol->addItem($provided);
         }
 
         $formContents[] = $credTypeRow1;
 
         $formContents[] = new \Ease\Html\DivTag($this->credTypeField('new'), ['class' => 'border border-primary rounded']);
 
-        $fielder = new \MultiFlexi\CrTypeField();
-
-        $fields = $fielder->listingQuery()->where(['credential_type_id' => $credtype->getMyKey()]);
+        $fields = $credtype->getFields();
 
         foreach ($fields as $crTypeField) {
-            $formContents[] = $this->credTypeField((string) $crTypeField['id'], $crTypeField);
+            $fieldData = $crTypeField->getData();
+            $formContents[] = $this->credTypeField((string) $crTypeField->getMykey(), $fieldData);
         }
 
         parent::__construct(['action' => 'credentialtype.php'], ['method' => 'POST'], $formContents);
@@ -82,13 +102,15 @@ class CredentialTypeForm extends \Ease\TWB4\Form
     {
     }
 
-    private function credTypeField(string $credTypeId = 'new', array $fieldData = ['keyname' => '', 'type' => '', 'hint' => '', 'defval' => '']): \Ease\TWB4\Row
+    private function credTypeField(string $credTypeId = 'new', array $fieldData = ['keyname' => '', 'type' => '', 'hint' => '', 'defval' => '', 'helper' => '']): \Ease\TWB4\Row
     {
         $credTypeFieldRow = new \Ease\TWB4\Row();
         $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Field Name'), new \Ease\Html\InputTextTag($credTypeId.'[keyname]', $fieldData['keyname'])));
         $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Field Type'), new CfgFieldTypeSelect($credTypeId.'[type]', $fieldData['type'])));
         $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Field Hint'), new \Ease\Html\InputTextTag($credTypeId.'[hint]', $fieldData['hint'])));
         $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Field Default Value'), new \Ease\Html\InputTextTag($credTypeId.'[defval]', $fieldData['defval'])));
+
+        $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Helper Class field'), $this->credType->getHelper()->providedFieldsSelect($credTypeId.'[helper]', $fieldData['helper'])));
 
         if (is_numeric($credTypeId)) {
             $credTypeFieldRow->addColumn(1, new \Ease\TWB4\FormGroup(_('Remove'), new \Ease\Html\ATag('?removefield='.$credTypeId.'&id='.$this->credType->getMyKey(), '❌️')));

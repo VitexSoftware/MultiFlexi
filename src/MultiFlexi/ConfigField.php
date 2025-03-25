@@ -28,7 +28,7 @@ class ConfigField
     private string $hint;
     private ?string $value;
     private string $type;
-    private string $defaultValue;
+    private ?string $defaultValue = null;
     private bool $required = false;
 
     /**
@@ -54,9 +54,11 @@ class ConfigField
     /**
      * Set name of the field.
      */
-    public function setName(string $name): void
+    public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -72,10 +74,18 @@ class ConfigField
 
         return $this;
     }
+
+    /**
+     * Get Field description.
+     */
     public function getDescription(): string
     {
         return $this->description;
     }
+
+    /**
+     * Set Hint for Field.
+     */
     public function setHint(string $hint): self
     {
         $this->hint = $hint;
@@ -92,14 +102,22 @@ class ConfigField
 
         return $this;
     }
+
     public function getValue(): ?string
     {
         return $this->value;
     }
-    public function setCode(string $code): void
+
+    public function setCode(string $code): self
     {
         $this->code = $code;
+
+        return $this;
     }
+
+    /**
+     * Column Key.
+     */
     public function getCode(): string
     {
         return $this->code;
@@ -121,13 +139,17 @@ class ConfigField
         return $this->type;
     }
 
-    public function setDefaultValue(string $defaultValue): self
+    public function setDefaultValue(?string $defaultValue): self
     {
         $this->defaultValue = $defaultValue;
 
         return $this;
     }
-    public function getDefaultValue(): string
+
+    /**
+     * Optional default value.
+     */
+    public function getDefaultValue(): ?string
     {
         return $this->defaultValue;
     }
@@ -152,13 +174,13 @@ class ConfigField
     public function getArray(): array
     {
         return [
-            'code' => $this->getCode(),
+            'keyname' => $this->getCode(),
             'name' => $this->getName(),
             'description' => $this->getDescription(),
             'hint' => $this->getHint(),
             'value' => $this->getValue(),
             'type' => $this->getType(),
-            'defaultValue' => $this->getDefaultValue(),
+            'defval' => $this->getDefaultValue(),
             'required' => $this->isRequired(),
         ];
     }
