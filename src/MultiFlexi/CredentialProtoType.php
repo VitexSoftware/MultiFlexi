@@ -32,45 +32,78 @@ abstract class CredentialProtoType extends \Ease\Sand
         $this->configFieldsInternal = new \MultiFlexi\ConfigFields();
     }
 
+    public function load(int $credTypeId)
+    {
+        $loader = new \MultiFlexi\CrTypeOption();
+
+        return $this->takeData($loader->listingQuery()->where('credential_type_id', $credTypeId)->fetchAll('name'));
+    }
+
     public function save(): bool
     {
         $credentialTypeId = $this->getDataValue('credential_type_id');
-        $this->unsetDataValue('credential_type_id');
+
         $fielder = new \MultiFlexi\CrTypeOption();
-        foreach ($this->getData() as $keyName => $value) {
-            $fielder->takeData(['credential_type_id' => $credentialTypeId, 'name' => $keyName, 'value' => $value]);
+
+        foreach ($this->fieldsInternal() as $keyName => $field) {
+            $fielder->dataReset();
+            $subject = ['name' => $keyName, 'credential_type_id' => $credentialTypeId];
+            $fielder->loadFromSQL($subject);
+            $rowId = $fielder->getMyKey();
+            $fielder->dataReset();
+
+            if ($rowId) {
+                $fielder->setMyKey($rowId);
+            }
+
+            $fielder->takeData(array_merge($subject, ['type' => $field->getType(), 'value' => $field->getValue()]));
             $fielder->saveToSQL();
         }
 
         return true;
     }
 
-    public function providedFieldsSelect(): \Ease\Html\SelectTag
+    /**
+     * Choose one of provided fields.
+     *
+     * @param array<string, string> $properties
+     */
+    public function providedFieldsSelect(string $name, string $defaultValue = '', array $properties = []): \Ease\Html\SelectTag
     {
+        $items = ['' => _('Choose Provided field')];
+
+        foreach ($this->configFieldsProvided as $configField) {
+            $items[$configField->getCode()] = $configField->getName();
+        }
+
         return new \Ease\Html\SelectTag($name, $items, $defaultValue, $properties);
     }
-    
-    public function takeData($data): int {
+
+    public function takeData($data): int
+    {
         $imported = 0;
-        
-        foreach ($data as $key => $fieldData){
+
+        foreach ($data as $key => $fieldData) {
             $field = $this->configFieldsInternal->getFieldByCode($key);
-            if($field){
-                $field->setValue($fieldData['value']);
-                $imported++;
+
+            if ($field) {
+                $field->setValue(\is_string($fieldData) ? $fieldData : $fieldData['value']);
+                ++$imported;
+            } else {
+                $this->setDataValue($key, $fieldData);
             }
         }
-        
+
         return $imported;
     }
-    
+
     public function fieldsProvided(): \MultiFlexi\ConfigFields
     {
         return $this->configFieldsProvided;
     }
 
-    public function fieldsInternal(): \MultiFlexi\ConfigFields {
+    public function fieldsInternal(): \MultiFlexi\ConfigFields
+    {
         return $this->configFieldsInternal;
     }
-    
 }
