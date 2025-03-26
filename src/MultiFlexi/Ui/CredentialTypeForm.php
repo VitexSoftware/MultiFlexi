@@ -110,7 +110,7 @@ class CredentialTypeForm extends \Ease\TWB4\Form
         $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Field Hint'), new \Ease\Html\InputTextTag($credTypeId.'[hint]', $fieldData['hint'])));
         $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Field Default Value'), new \Ease\Html\InputTextTag($credTypeId.'[defval]', $fieldData['defval'])));
 
-        if($this->credType->getHelper()){
+        if ($this->credType->getHelper()) {
             $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Helper Class field'), $this->credType->getHelper()->providedFieldsSelect($credTypeId.'[helper]', $fieldData['helper'])));
         } else {
             $credTypeFieldRow->addColumn(2, _('No Helper Class chosen yet'));

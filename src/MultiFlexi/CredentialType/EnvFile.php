@@ -41,26 +41,30 @@ class EnvFile extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\cre
 
         $configuration = [];
 
-        if (file_exists($configFile)) {
-            if (is_readable($configFile)) {
-                foreach (file($configFile) as $cfgRow) {
-                    if (strstr($cfgRow, '=')) {
-                        [$key, $value] = preg_split('/=/', $cfgRow, 2);
-                        $configuration[$key] = trim($value, " \t\n\r\0\x0B'\"");
+        if ($configFile) {
+            if (file_exists($configFile)) {
+                if (is_readable($configFile)) {
+                    foreach (file($configFile) as $cfgRow) {
+                        if (strstr($cfgRow, '=')) {
+                            [$key, $value] = preg_split('/=/', $cfgRow, 2);
+                            $configuration[$key] = trim($value, " \t\n\r\0\x0B'\"");
+                        }
                     }
-                }
 
-                foreach ($configuration as $key => $value) {
-                    $envFile = new \MultiFlexi\ConfigField($key, 'string', $key, sprintf(_('Value from .env file %s'), $configFile));
-                    $envFile->setHint($value)->setValue($value);
+                    foreach ($configuration as $key => $value) {
+                        $envFile = new \MultiFlexi\ConfigField($key, 'string', $key, sprintf(_('Value from .env file %s'), $configFile));
+                        $envFile->setHint($value)->setValue($value);
 
-                    $this->configFieldsProvided->addField($envFile);
+                        $this->configFieldsProvided->addField($envFile);
+                    }
+                } else {
+                    $this->addStatusMessage(sprintf(_('File %s is not readable'), $configFile), 'warning');
                 }
             } else {
-                $this->addStatusMessage(sprintf(_('File %s is not readable'), $configFile), 'warning');
+                $this->addStatusMessage(sprintf(_('File %s does not exists'), $configFile), 'warning');
             }
         } else {
-            $this->addStatusMessage(sprintf(_('File %s does not exists'), $configFile), 'warning');
+            $this->addStatusMessage(_('.env file must be filled'));
         }
 
         return $loaded;
@@ -82,7 +86,8 @@ class EnvFile extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\cre
     }
 
     #[\Override]
-    public static function logo(): string {
+    public static function logo(): string
+    {
         return 'images/env-file.svg';
     }
 }
