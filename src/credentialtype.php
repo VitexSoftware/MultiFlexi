@@ -76,6 +76,7 @@ if (WebPage::singleton()->isPosted()) {
         $helperClassFieldsProvided = $clasHelper->fieldsProvided();
         $credTypeSettings = WebPage::getRequestValue($class);
         unset($_POST[$class]);
+        $_POST['logo'] = $clasHelper::logo();
 
         foreach ($helperClassFieldsInternal as $helperInternalFieldName => $helperInternalField) {
             if ($credTypeSettings) {

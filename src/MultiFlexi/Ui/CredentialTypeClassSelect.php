@@ -44,7 +44,7 @@ class CredentialTypeClassSelect extends \Ease\Html\SelectTag
     {
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\\CredentialType');
         $credTypeHelpers = \Ease\Functions::classesInNamespace('MultiFlexi\\CredentialType');
-        $items = ['' => _('n/a')];
+        $items = ['' => _('No CredentialType helper used')];
 
         foreach ($credTypeHelpers as $credTypeHelper) {
             $credTypeHelperClass = '\\MultiFlexi\\CredentialType\\'.$credTypeHelper;

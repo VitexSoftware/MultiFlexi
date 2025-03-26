@@ -83,14 +83,26 @@ class CredentialType extends DBEngine
         ]);
     }
 
+    #[\Override]
+    public function completeDataRow(array $dataRowRaw): array
+    {
+        $data = parent::completeDataRow($dataRowRaw);
+
+        if ($data['logo']) {
+            $data['logo'] = (string) new \Ease\Html\ImgTag($data['logo'], $data['name'], ['style' => 'height: 50px;']);
+        }
+
+        return $data;
+    }
+
     public function getFields(): ConfigFields
     {
         $fields = new ConfigFields();
         $fielder = new \MultiFlexi\CrTypeField();
 
         foreach ($fielder->listingQuery()->where(['credential_type_id' => $this->getMyKey()]) as $fieldData) {
-            $field = new ConfigFieldWithHelper($fieldData['keyname'], $fieldData['type'], $fieldData['keyname'], $fieldData['description']);
-            $field->setHint($fieldData['hint'])->setDefaultValue($fieldData['defval'])->setRequired($fieldData['required'] === 1)->setHelper($fieldData['helper']);
+            $field = new ConfigFieldWithHelper((string) $fieldData['keyname'], $fieldData['type'], $fieldData['keyname'], (string) $fieldData['description']);
+            $field->setHint($fieldData['hint'])->setDefaultValue($fieldData['defval'])->setRequired($fieldData['required'] === 1)->setHelper((string) $fieldData['helper']);
             $field->setMyKey($fieldData['id']);
             $fields->addField($field);
         }

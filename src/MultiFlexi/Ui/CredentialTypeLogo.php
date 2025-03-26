@@ -64,7 +64,17 @@ EOD;
         if ($credType->getDataValue('logo')) {
             parent::__construct($credType->getDataValue('logo'), $credType->getDataValue('name'), $tagProperties);
         } else {
-            parent::__construct('data:image/svg+xml;base64,'.base64_encode(self::$none), _('none'), $tagProperties);
+            $helper = $credType->getHelper();
+
+            if ($helper && method_exists($helper, 'logo')) {
+                $logo = $helper::logo();
+                $title = $helper::name();
+            } else {
+                $logo = 'data:image/svg+xml;base64,'.base64_encode(self::$none);
+                $title = _('none');
+            }
+
+            parent::__construct($logo, $title, $tagProperties);
         }
     }
 }

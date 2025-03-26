@@ -50,7 +50,8 @@ class VaultWarden extends \MultiFlexi\CredentialProtoType implements \MultiFlexi
     }
 
     #[\Override]
-    public static function logo(): string {
+    public static function logo(): string
+    {
         return 'images/vaultwarden.svg';
     }
 }
