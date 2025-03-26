@@ -67,6 +67,7 @@ class RuntemplateConfigForm extends EngineForm
         $credData = [];
 
         foreach ($appRequirements as $req) {
+            
             $formClass = '\\MultiFlexi\\Ui\\Form\\'.$req;
             $credentialChosen = '';
 
@@ -91,9 +92,17 @@ class RuntemplateConfigForm extends EngineForm
                     new \Ease\Html\ImgTag($formClass::$logo, $req, ['title' => $formClass::name(), 'height' => '30']), new CredentialSelect('credential['.$req.']', $engine->getDataValue('company_id'), $req, \array_key_exists($req, $usedCreds) ? (string) $usedCreds[$req]['credentials_id'] : ''),
                     new \Ease\TWB4\LinkButton('credential.php?company_id='.$engine->getDataValue('company_id').'&formType='.$req, '️➕ 🔐', 'success btn-sm', ['title' => _('New Credential')]),
                 ]);
+                
+                
+                
             } else {
                 if (\array_key_exists($req, $formAvailable) === false) {
-                    $reqsRow->addColumn(2, new \Ease\TWB4\Badge('warning', sprintf(_('Form %s not avilble'), '"'.$req.'"')));
+                    $noCredType = [
+                        new \Ease\TWB4\Badge('warning', sprintf(_('Form %s not available'), '"'.$req.'"')),
+                        new \Ease\TWB4\LinkButton('credentialtype.php?company_id='.$engine->getDataValue('company_id').'&class='.$req, '️➕ 🔐', 'success btn-sm', ['title' => _('New Credential Type')]),
+                    ];
+                    
+                    $reqsRow->addColumn(2, $noCredType);
                 }
             }
         }

@@ -53,7 +53,7 @@ class CredentialTypeForm extends \Ease\TWB4\Form
                 $flags = new \Ease\Html\SpanTag();
 
                 if (\is_object($assigned->getFieldByCode($fieldProvided->getCode()))) {
-                    $flags->addItem(new \Ease\TWB4\LinkButton('?id='.$credtype->getMyKey().'&addField='.$fieldProvided->getCode(), '➕', 'disabled', ['title' => _('Already assigned')]));
+                    $flags->addItem(new \Ease\TWB4\LinkButton('#', '➕', 'disabled', ['title' => _('Already assigned')]));
                 } else {
                     $flags->addItem(new \Ease\TWB4\LinkButton('?id='.$credtype->getMyKey().'&addField='.$fieldProvided->getCode(), '➕', 'success', ['title' => _('Add Field to ')]));
                 }
@@ -110,7 +110,11 @@ class CredentialTypeForm extends \Ease\TWB4\Form
         $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Field Hint'), new \Ease\Html\InputTextTag($credTypeId.'[hint]', $fieldData['hint'])));
         $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Field Default Value'), new \Ease\Html\InputTextTag($credTypeId.'[defval]', $fieldData['defval'])));
 
-        $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Helper Class field'), $this->credType->getHelper()->providedFieldsSelect($credTypeId.'[helper]', $fieldData['helper'])));
+        if($this->credType->getHelper()){
+            $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Helper Class field'), $this->credType->getHelper()->providedFieldsSelect($credTypeId.'[helper]', $fieldData['helper'])));
+        } else {
+            $credTypeFieldRow->addColumn(2, _('No Helper Class chosen yet'));
+        }
 
         if (is_numeric($credTypeId)) {
             $credTypeFieldRow->addColumn(1, new \Ease\TWB4\FormGroup(_('Remove'), new \Ease\Html\ATag('?removefield='.$credTypeId.'&id='.$this->credType->getMyKey(), '❌️')));
