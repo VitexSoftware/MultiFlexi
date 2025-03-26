@@ -4,14 +4,14 @@
     "description": "Task launcher testing tool",
     "executable": "multiflexi-probe",
     "setup": "ls -la {FILE_UPLOAD}",
-    "requirements": "mServer,SQLServer,RaiffeisenBank,Office365,FioBank,AbraFlexi",
+    "requirements": "mServer,SQLServer,RaiffeisenBank,Office365,FioBank,AbraFlexi,EnvFile,VaultWarden",
     "cmdparams": "{FILE_UPLOAD}",
     "deploy": "sudo apt install multiflexi",
     "homepage": "https://github.com/VitexSoftware/MultiFlexi",
     "ociimage": "docker.io/vitexsoftware/multiflexi-probe",
     "uuid": "775ed801-2489-4981-bc14-d8a01cba1938",
     "topics": "MultiFlexi,probe,task launcher,testing,tool",
-    "version": "0.3.3",
+    "version": "0.3.4",
     "environment": {
         "FILE_UPLOAD": {
             "type": "file",

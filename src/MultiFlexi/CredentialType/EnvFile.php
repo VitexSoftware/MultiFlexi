@@ -80,4 +80,9 @@ class EnvFile extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\cre
     {
         return _('Load configuration values from .env file');
     }
+
+    #[\Override]
+    public static function logo(): string {
+        return 'images/env-file.svg';
+    }
 }

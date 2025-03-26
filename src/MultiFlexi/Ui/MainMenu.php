@@ -193,6 +193,7 @@ class MainMenu extends \Ease\Html\DivTag
                 'envmods.php' => '🌦️&nbsp;'._('Environment Modules'),
                 'actionmodules.php' => '🤖&nbsp;'._('Actions'),
                 'executors.php' => '🚀&nbsp;'._('Executors'),
+                'credtypes.php' => '🔐&nbsp;'._('Credential Type helpers'),
                 'intervals.php' => '♻️&nbsp;'._('Intervals'),
                 'requirements.php' => '🔘&nbsp;'._('Requirements'),
                 'queue.php' => '⏳&nbsp;'._('Job queue'),

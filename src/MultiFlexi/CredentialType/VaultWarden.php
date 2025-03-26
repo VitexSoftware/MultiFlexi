@@ -48,4 +48,9 @@ class VaultWarden extends \MultiFlexi\CredentialProtoType implements \MultiFlexi
     {
         return $this->configFieldsProvided;
     }
+
+    #[\Override]
+    public static function logo(): string {
+        return 'images/vaultwarden.svg';
+    }
 }
