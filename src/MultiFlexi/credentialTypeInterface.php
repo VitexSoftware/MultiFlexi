@@ -33,4 +33,6 @@ interface credentialTypeInterface
     public function fieldsInternal(): ConfigFields;
 
     public function save(): bool;
+
+    public function query(): ConfigFields;
 }

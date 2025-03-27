@@ -1,961 +1,3063 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TaxTorro\n"
-"POT-Creation-Date: 2021-03-16 17:24+0100\n"
-"PO-Revision-Date: 2021-03-16 17:25+0100\n"
-"Last-Translator: Vítězslav Dvořák <info@vitexsoftware.cz>\n"
+"POT-Creation-Date: 2025-03-26 17:00+0100\n"
+"PO-Revision-Date: 2025-03-26 17:00+0100\n"
+"Last-Translator: Vítězslav Dvořák <vitex@vitexsoftware.cz>\n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: ../..\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ../src\n"
 "X-Poedit-SearchPathExcluded-0: ../vendor\n"
 
-#: ../src/AbraFlexi/MultiFlexi/Servers.php:56
-msgid "Instance name cannot be empty"
-msgstr "Instance name cannot be empty"
-
-#: ../src/AbraFlexi/MultiFlexi/Servers.php:61
-msgid "AbraFlexi API URL cannot be empty"
-msgstr "AbraFlexi API URL cannot be empty"
-
-#: ../src/AbraFlexi/MultiFlexi/Servers.php:66
-msgid "User name cannot be empty"
-msgstr "User name cannot be empty"
-
-#: ../src/AbraFlexi/MultiFlexi/Servers.php:70
-msgid "API User password cannot be empty"
-msgstr "API User password cannot be empty"
-
-#: ../src/AbraFlexi/MultiFlexi/Servers.php:75
-msgid "Company code cannot be empty"
-msgstr "Company code cannot be empty"
-
-#: ../src/AbraFlexi/MultiFlexi/Servers.php:79
-msgid "AbraFlexi API URL cannot end with slash"
-msgstr "AbraFlexi API URL cannot end with slash"
-
-#: ../src/AbraFlexi/MultiFlexi/Application.php:39
-msgid "Name is empty"
-msgstr "Name is empty"
-
-#: ../src/AbraFlexi/MultiFlexi/Application.php:46
-#, php-format
-msgid "Executable %s does not exist in search PATH"
-msgstr "Executable %s does not exist in search PATH"
-
-#: ../src/AbraFlexi/MultiFlexi/Application.php:50
-#, php-format
-msgid "Executable %s found as %s"
-msgstr "Executable %s found as %s"
-
-#: ../src/AbraFlexi/MultiFlexi/Company.php:90
+#: ../src/MultiFlexi/AbraFlexi/Company.php:155
 #, php-format
 msgid "label %s created"
 msgstr "label %s created"
 
-#: ../src/AbraFlexi/MultiFlexi/Company.php:110
+#: ../src/MultiFlexi/AbraFlexi/Company.php:178
 #, php-format
 msgid "Hook %s was registered"
 msgstr "Hook %s was registered"
 
-#: ../src/AbraFlexi/MultiFlexi/Company.php:114
+#: ../src/MultiFlexi/AbraFlexi/Company.php:184
 #, php-format
 msgid "Hook %s not registered"
 msgstr "Hook %s not registered"
 
-#: ../src/AbraFlexi/MultiFlexi/Company.php:135
+#: ../src/MultiFlexi/AbraFlexi/Company.php:209
 msgid "ChangesAPI was enabled"
 msgstr "ChangesAPI was enabled"
 
-#: ../src/AbraFlexi/MultiFlexi/Company.php:142
+#: ../src/MultiFlexi/AbraFlexi/Company.php:218
 msgid "ChangesAPI was disabled"
 msgstr "ChangesAPI was disabled"
 
-#: ../src/AbraFlexi/MultiFlexi/Company.php:279
+#: ../src/MultiFlexi/AbraFlexi/Company.php:407
 #, php-format
 msgid "Company with no ID"
 msgstr "Company with no ID"
 
-#: ../src/AbraFlexi/MultiFlexi/Company.php:317
+#: ../src/MultiFlexi/AbraFlexi/Company.php:449
 #, php-format
 msgid "Company created"
 msgstr "Company created"
 
-#: ../src/AbraFlexi/MultiFlexi/Configuration.php:78
-#: ../src/AbraFlexi/MultiFlexi/Engine.php:40
+#: ../src/MultiFlexi/AbraFlexi/Server.php:57
+msgid "write permission"
+msgstr "write permission"
+
+#: ../src/MultiFlexi/AbraFlexi/Server.php:62
+msgid "Setup performed"
+msgstr "Setup performed"
+
+#: ../src/MultiFlexi/AbraFlexi/Server.php:67
+msgid "WebHook established"
+msgstr "WebHook established"
+
+#: ../src/MultiFlexi/Action/CustomCommand.php:34
+msgid "Custom Command"
+msgstr "Custom Command"
+
+#: ../src/MultiFlexi/Action/CustomCommand.php:44
+msgid "Run custom command"
+msgstr "Run custom command"
+
+#: ../src/MultiFlexi/Action/CustomCommand.php:54
+msgid "Command"
+msgstr "Command"
+
+#: ../src/MultiFlexi/Action/CustomCommand.php:54
+msgid "Bash shell is used"
+msgstr "Bash shell is used"
+
+#: ../src/MultiFlexi/Action/CustomCommand.php:71
+msgid "Custom Command begin"
+msgstr "Custom Command begin"
+
+#: ../src/MultiFlexi/Action/CustomCommand.php:73
+msgid "Custom Command done"
+msgstr "Custom Command done"
+
+#: ../src/MultiFlexi/Action/Github.php:32
+msgid "Github Issue"
+msgstr "Github Issue"
+
+#: ../src/MultiFlexi/Action/Github.php:42
+msgid "Make Github issue using Job output"
+msgstr "Make Github issue using Job output"
+
+#: ../src/MultiFlexi/Action/Github.php:52
+msgid "GitHub token"
+msgstr "GitHub token"
+
+#: ../src/MultiFlexi/Action/Github.php:52
+msgid "How to obtain Github Token"
+msgstr "How to obtain Github Token"
+
+#: ../src/MultiFlexi/Action/Github.php:62 ../src/MultiFlexi/CommonAction.php:88
+msgid "No Fields required"
+msgstr "No Fields required"
+
+#: ../src/MultiFlexi/Action/LaunchJob.php:30
+msgid "Launch Job"
+msgstr "Launch Job"
+
+#: ../src/MultiFlexi/Action/LaunchJob.php:38
+msgid "Launch another job"
+msgstr "Launch another job"
+
+#: ../src/MultiFlexi/Action/RedmineIssue.php:32
+msgid "Redmine Issue"
+msgstr "Redmine Issue"
+
+#: ../src/MultiFlexi/Action/RedmineIssue.php:42
+msgid "Make Redine issue using Job output"
+msgstr "Make Redine issue using Job output"
+
+#: ../src/MultiFlexi/Action/Reschedule.php:30
+msgid "Reschedule"
+msgstr "Reschedule"
+
+#: ../src/MultiFlexi/Action/Reschedule.php:40
+msgid "Reschedule job to be executed later again"
+msgstr "Reschedule job to be executed later again"
+
+#: ../src/MultiFlexi/Action/Sleep.php:30
+msgid "Sleep"
+msgstr "Sleep"
+
+#: ../src/MultiFlexi/Action/Sleep.php:38
+msgid "delay for a specified amount of time"
+msgstr "delay for a specified amount of time"
+
+#: ../src/MultiFlexi/Action/Sleep.php:51
+#, php-format
+msgid "Sleepeng for %s seconds"
+msgstr "Sleepeng for %s seconds"
+
+#: ../src/MultiFlexi/Action/Sleep.php:64
+msgid "Number of seconds"
+msgstr "Number of seconds"
+
+#: ../src/MultiFlexi/Action/Sleep.php:64
+msgid "Number of Seconds to wait"
+msgstr "Number of Seconds to wait"
+
+#: ../src/MultiFlexi/Action/Stop.php:32
+msgid "Stop"
+msgstr "Stop"
+
+#: ../src/MultiFlexi/Action/Stop.php:42
+msgid "Stop periodical Task"
+msgstr "Stop periodical Task"
+
+#: ../src/MultiFlexi/Action/Stop.php:56
+#, php-format
+msgid "Periodic executing of «%s» for ❮%s❯ stop 🛑"
+msgstr "Periodic executing of «%s» for ❮%s❯ stop 🛑"
+
+#: ../src/MultiFlexi/Action/Stop.php:58
+msgid "Stopped module failed"
+msgstr "Stopped module failed"
+
+#: ../src/MultiFlexi/Action/TriggerJenkins.php:32
+msgid "Jenkins"
+msgstr "Jenkins"
+
+#: ../src/MultiFlexi/Action/TriggerJenkins.php:42
+msgid "Trigger Jenkins job"
+msgstr "Trigger Jenkins job"
+
+#: ../src/MultiFlexi/Action/WebHook.php:32
+msgid "WebHook"
+msgstr "WebHook"
+
+#: ../src/MultiFlexi/Action/WebHook.php:42
+msgid "Post Job output to URI"
+msgstr "Post Job output to URI"
+
+#: ../src/MultiFlexi/Action/WebHook.php:60
+msgid "Perform begin"
+msgstr "Perform begin"
+
+#: ../src/MultiFlexi/Action/WebHook.php:75
+msgid "Perform done"
+msgstr "Perform done"
+
+#: ../src/MultiFlexi/Action/WebHook.php:91
+msgid "Uri"
+msgstr "Uri"
+
+#: ../src/MultiFlexi/Action/WebHook.php:91
+msgid "Report endpoint"
+msgstr "Report endpoint"
+
+#: ../src/MultiFlexi/Action/Zabbix.php:32
+msgid "Zabbix"
+msgstr "Zabbix"
+
+#: ../src/MultiFlexi/Action/Zabbix.php:42
+msgid "Send Job Output to Zabbix"
+msgstr "Send Job Output to Zabbix"
+
+#: ../src/MultiFlexi/Action/Zabbix.php:81
+msgid "Required metrics file not found "
+msgstr "Required metrics file not found "
+
+#: ../src/MultiFlexi/Action/Zabbix.php:87
+#, php-format
+msgid "Reported to Zabbix: from %s sent to %s as %s "
+msgstr "Reported to Zabbix: from %s sent to %s as %s "
+
+#: ../src/MultiFlexi/Action/Zabbix.php:101
+#, php-format
+msgid "Job metric %s sent to %s as %s: %s"
+msgstr "Job metric %s sent to %s as %s: %s"
+
+#: ../src/MultiFlexi/Action/Zabbix.php:106
+msgid "No Data for Zabbix provided"
+msgstr "No Data for Zabbix provided"
+
+#: ../src/MultiFlexi/Action/Zabbix.php:109
+msgid "No Zabbix server defined"
+msgstr "No Zabbix server defined"
+
+#: ../src/MultiFlexi/Action/Zabbix.php:137
+msgid "Zabbix key"
+msgstr "Zabbix key"
+
+#: ../src/MultiFlexi/Action/Zabbix.php:137
+msgid "Zabbix Item key"
+msgstr "Zabbix Item key"
+
+#: ../src/MultiFlexi/Action/Zabbix.php:138
+msgid "Metrics file"
+msgstr "Metrics file"
+
+#: ../src/MultiFlexi/Action/Zabbix.php:138
+msgid "File with metrics. Leave empty to send stdout"
+msgstr "File with metrics. Leave empty to send stdout"
+
+#: ../src/MultiFlexi/Action/Zabbix.php:150
+msgid "Zabbix Server"
+msgstr "Zabbix Server"
+
+#: ../src/MultiFlexi/Action/Zabbix.php:151
+msgid "Hostname"
+msgstr "Hostname"
+
+#: ../src/MultiFlexi/Api/Server/DefaultApi.php:57
+msgid "Token generated"
+msgstr "Token generated"
+
+#: ../src/MultiFlexi/Api/Server/DefaultApi.php:60
+msgid "Account is disabled"
+msgstr "Account is disabled"
+
+#: ../src/MultiFlexi/Api/Server/DefaultApi.php:65
+#: ../src/MultiFlexi/User.php:192
+msgid "invalid password"
+msgstr "invalid password"
+
+#: ../src/MultiFlexi/Api/Server/DefaultApi.php:70
+#: ../src/MultiFlexi/User.php:199
+#, php-format
+msgid "user %s does not exist"
+msgstr "user %s does not exist"
+
+#: ../src/MultiFlexi/Application.php:61
+msgid "Name is empty"
+msgstr "Name is empty"
+
+#: ../src/MultiFlexi/Application.php:114
+#, php-format
+#| msgid "Executable %s does not exist in search PATH"
+msgid "Executable %s does not exist"
+msgstr "Executable %s does not exist"
+
+#: ../src/MultiFlexi/Application.php:121
+#, php-format
+#| msgid "Executable %s does not exist in search PATH"
+msgid "Executable %s does not exist in search PATH %s"
+msgstr "Executable %s does not exist in search PATH %s"
+
+#: ../src/MultiFlexi/Application.php:125
+#, php-format
+msgid "file %s is not executable"
+msgstr "file %s is not executable"
+
+#: ../src/MultiFlexi/Application.php:286
+msgid "UUID field not present. "
+msgstr "UUID field not present. "
+
+#: ../src/MultiFlexi/Application.php:316
+msgid "Topics field not present. "
+msgstr "Topics field not present. "
+
+#: ../src/MultiFlexi/Application.php:350
+#, php-format
+#| msgid "Executable %s found as %s"
+msgid "executable %s not found"
+msgstr "executable %s not found"
+
+#: ../src/MultiFlexi/Application.php:353
+#, php-format
+msgid "consider: %s"
+msgstr "consider: %s"
+
+#: ../src/MultiFlexi/Application.php:382
+#, php-format
+msgid "The %s does not contain valid json"
+msgstr "The %s does not contain valid json"
+
+#: ../src/MultiFlexi/Application.php:412
+#, php-format
+msgid "Application removal %d %s"
+msgstr "Application removal %d %s"
+
+#: ../src/MultiFlexi/Application.php:438
+#, php-format
+msgid "Unassigned from %d companies"
+msgstr "Unassigned from %d companies"
+
+#: ../src/MultiFlexi/Application.php:447 ../src/MultiFlexi/CompanyApp.php:91
+#, php-format
+msgid "%s Action Config removal"
+msgstr "%s Action Config removal"
+
+#: ../src/MultiFlexi/Application.php:454
+#, php-format
+msgid "#%d %s RunTemplate removal"
+msgstr "#%d %s RunTemplate removal"
+
+#: ../src/MultiFlexi/Application.php:460
+#, php-format
+msgid "%d Config fields removed"
+msgstr "%d Config fields removed"
+
+#: ../src/MultiFlexi/Application.php:466
+#, php-format
+msgid "%d Configurations removed"
+msgstr "%d Configurations removed"
+
+#: ../src/MultiFlexi/Application.php:472
+#, php-format
+msgid "%d Jobs removed"
+msgstr "%d Jobs removed"
+
+#: ../src/MultiFlexi/Application.php:508 ../src/MultiFlexi/Credential.php:196
+#: ../src/MultiFlexi/CredentialType.php:78 ../src/MultiFlexi/Customer.php:72
+#: ../src/MultiFlexi/Logger.php:113 ../src/MultiFlexi/RunTemplate.php:475
+#: ../src/MultiFlexi/ScheduleLister.php:52 ../src/servers.php:29
+msgid "ID"
+msgstr "ID"
+
+#: ../src/MultiFlexi/Application.php:510
+#: ../src/MultiFlexi/Ui/ConfigurationWizard.php:105
+msgid "Icon"
+msgstr "Icon"
+
+#: ../src/MultiFlexi/Application.php:511 ../src/MultiFlexi/Credential.php:198
+#: ../src/MultiFlexi/CredentialType.php:81
+#: ../src/MultiFlexi/RunTemplate.php:478
+#: ../src/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:29
+#: ../src/MultiFlexi/Ui/ConfigurationWizard.php:102
+#: ../src/MultiFlexi/Ui/EnvironmentView.php:33 ../src/companycreds.php:31
+#: ../src/servers.php:29
+msgid "Name"
+msgstr "Name"
+
+#: ../src/MultiFlexi/Application.php:512
+#: ../src/MultiFlexi/Ui/ConfigurationWizard.php:102
+msgid "Description"
+msgstr "Description"
+
+#: ../src/MultiFlexi/Application.php:513
+msgid "Version"
+msgstr "Version"
+
+#: ../src/MultiFlexi/Application.php:514
+msgid "Topics"
+msgstr "Topics"
+
+#: ../src/MultiFlexi/Application.php:515
+msgid "Executable"
+msgstr "Executable"
+
+#: ../src/MultiFlexi/Application.php:516
+#: ../src/MultiFlexi/CredentialType.php:82
+msgid "UUID"
+msgstr "UUID"
+
+#: ../src/MultiFlexi/Application.php:517
+msgid "OCI Image"
+msgstr "OCI Image"
+
+#: ../src/MultiFlexi/Application.php:549
+#, php-format
+msgid "the required configuration key `%s` was not filled"
+msgstr "the required configuration key `%s` was not filled"
+
+#: ../src/MultiFlexi/Command/Application.php:56
+msgid "What to do with app"
+msgstr "What to do with app"
+
+#: ../src/MultiFlexi/Command/Command.php:46
+msgid "No data"
+msgstr "No data"
+
+#: ../src/MultiFlexi/CommonAction.php:96
+msgid "No Configuration required"
+msgstr "No Configuration required"
+
+#: ../src/MultiFlexi/CommonAction.php:104
+msgid "No Action performed"
+msgstr "No Action performed"
+
+#: ../src/MultiFlexi/CompanyApp.php:71
+#, php-format
+msgid "Application %s was assigned to %s company"
+msgstr "Application %s was assigned to %s company"
+
+#: ../src/MultiFlexi/CompanyApp.php:96
+#, php-format
+msgid "Application %s was unassigned from %s company"
+msgstr "Application %s was unassigned from %s company"
+
+#: ../src/MultiFlexi/CompanyJob.php:68 ../src/MultiFlexi/Ui/AppJobsTable.php:34
+#: ../src/MultiFlexi/Ui/AppRow.php:81
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:47 ../src/app.php:80
+#: ../src/company.php:58 ../src/companyapp.php:97
+msgid "Job ID"
+msgstr "Job ID"
+
+#: ../src/MultiFlexi/CompanyJob.php:73 ../src/MultiFlexi/Env/Application.php:62
+#: ../src/MultiFlexi/Logger.php:119 ../src/MultiFlexi/RunTemplate.php:480
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:44
+#: ../src/MultiFlexi/Ui/SearchSelect.php:30 ../src/app.php:67
+#: ../src/company.php:58 ../src/launch.php:26
+msgid "Application"
+msgstr "Application"
+
+#: ../src/MultiFlexi/CompanyJob.php:81 ../src/MultiFlexi/Ui/AppJobsTable.php:34
+#: ../src/MultiFlexi/Ui/AppRow.php:81
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:47 ../src/app.php:80
+#: ../src/companyapp.php:97
+msgid "Exit Code"
+msgstr "Exit Code"
+
+#: ../src/MultiFlexi/CompanyJob.php:82
+msgid "Standard Output"
+msgstr "Standard Output"
+
+#: ../src/MultiFlexi/CompanyJob.php:83
+msgid "Standard Error"
+msgstr "Standard Error"
+
+#: ../src/MultiFlexi/CompanyJob.php:84
+msgid "Job start time"
+msgstr "Job start time"
+
+#: ../src/MultiFlexi/CompanyJob.php:85
+msgid "Job Finish time"
+msgstr "Job Finish time"
+
+#: ../src/MultiFlexi/CompanyJob.php:86 ../src/MultiFlexi/Credential.php:199
+#: ../src/MultiFlexi/Env/Company.php:60 ../src/MultiFlexi/Logger.php:127
+#: ../src/MultiFlexi/RunTemplate.php:488
+#: ../src/MultiFlexi/ScheduleLister.php:57
+#: ../src/MultiFlexi/Ui/Breadcrumb.php:53
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:52
+#: ../src/MultiFlexi/Ui/SearchSelect.php:31 ../src/app.php:80
+#: ../src/company.php:24 ../src/companycreds.php:24 ../src/companydelete.php:24
+#: ../src/companysetup.php:24
+msgid "Company"
+msgstr "Company"
+
+#: ../src/MultiFlexi/CompanyJob.php:94 ../src/MultiFlexi/Ui/AppJobsTable.php:34
+#: ../src/MultiFlexi/Ui/AppRow.php:81
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:49 ../src/company.php:58
+#: ../src/companyapp.php:97
+msgid "Launcher"
+msgstr "Launcher"
+
+#: ../src/MultiFlexi/Configuration.php:99
+#: ../src/MultiFlexi/Environmentor.php:151
 #, php-format
 msgid "Setting Environment %s to %s"
 msgstr "Setting Environment %s to %s"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:153
+#: ../src/MultiFlexi/Credential.php:197 ../src/companycreds.php:31
+#: ../src/servers.php:29
+msgid "Type"
+msgstr "Type"
+
+#: ../src/MultiFlexi/CredentialProtoType.php:73
+msgid "Choose Provided field"
+msgstr "Choose Provided field"
+
+#: ../src/MultiFlexi/CredentialType.php:80 ../src/login.php:66
+msgid "Logo"
+msgstr "Logo"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:32
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:60
+msgid "AbraFlexi Login"
+msgstr "AbraFlexi Login"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:32
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:35
+msgid "AbraFlexi user login"
+msgstr "AbraFlexi user login"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:35
+msgid "AbraFlexi Password"
+msgstr "AbraFlexi Password"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:35
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:36
+msgid "AbraFlexi user password"
+msgstr "AbraFlexi user password"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:38
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:72
+msgid "AbraFlexi Server URI"
+msgstr "AbraFlexi Server URI"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:38
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:37
+msgid "AbraFlexi server URI"
+msgstr "AbraFlexi server URI"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:41
+msgid "AbraFlexi Company"
+msgstr "AbraFlexi Company"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:41
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:38
+#| msgid "Company created"
+msgid "Company to be handled"
+msgstr "Company to be handled"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:70
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:30
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:31
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:45
+msgid "AbraFlexi"
+msgstr "AbraFlexi"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:75
+msgid "AbraFlexi credential type for integration with AbraFlexi API"
+msgstr "AbraFlexi credential type for integration with AbraFlexi API"
+
+#: ../src/MultiFlexi/CredentialType/Csas.php:28
+msgid "Česká Spořitelna a.s."
+msgstr "Česká Spořitelna a.s."
+
+#: ../src/MultiFlexi/CredentialType/Csas.php:33
+msgid "Interact with Erste APIs"
+msgstr "Interact with Erste APIs"
+
+#: ../src/MultiFlexi/CredentialType/EnvFile.php:28
+msgid ".env"
+msgstr ".env"
+
+#: ../src/MultiFlexi/CredentialType/EnvFile.php:28
+msgid "Path to .env file"
+msgstr "Path to .env file"
+
+#: ../src/MultiFlexi/CredentialType/EnvFile.php:55
+#, php-format
+msgid "Value from .env file %s"
+msgstr "Value from .env file %s"
+
+#: ../src/MultiFlexi/CredentialType/EnvFile.php:61
+#, php-format
+msgid "File %s is not readable"
+msgstr "File %s is not readable"
+
+#: ../src/MultiFlexi/CredentialType/EnvFile.php:64
+#, php-format
+#| msgid "Executable %s does not exist in search PATH"
+msgid "File %s does not exists"
+msgstr "File %s does not exists"
+
+#: ../src/MultiFlexi/CredentialType/EnvFile.php:67
+msgid ".env file must be filled"
+msgstr ".env file must be filled"
+
+#: ../src/MultiFlexi/CredentialType/EnvFile.php:80
+msgid ".env file"
+msgstr ".env file"
+
+#: ../src/MultiFlexi/CredentialType/EnvFile.php:85
+msgid "Load configuration values from .env file"
+msgstr "Load configuration values from .env file"
+
+#: ../src/MultiFlexi/CredentialType/FioBank.php:32
+#: ../src/MultiFlexi/Ui/Form/FioBank.php:35
+msgid "Fio Bank Account Number"
+msgstr "Fio Bank Account Number"
+
+#: ../src/MultiFlexi/CredentialType/FioBank.php:32
+msgid "Number of the Fio Bank account"
+msgstr "Number of the Fio Bank account"
+
+#: ../src/MultiFlexi/CredentialType/FioBank.php:35
+msgid "Fio Bank Token"
+msgstr "Fio Bank Token"
+
+#: ../src/MultiFlexi/CredentialType/FioBank.php:35
+msgid "Token for accessing the Fio Bank API"
+msgstr "Token for accessing the Fio Bank API"
+
+#: ../src/MultiFlexi/CredentialType/FioBank.php:38
+msgid "Fio Token Name"
+msgstr "Fio Token Name"
+
+#: ../src/MultiFlexi/CredentialType/FioBank.php:38
+msgid "Name of the token used for identification"
+msgstr "Name of the token used for identification"
+
+#: ../src/MultiFlexi/CredentialType/FioBank.php:66
+#: ../src/MultiFlexi/Ui/Form/FioBank.php:70
+msgid "Fio Bank"
+msgstr "Fio Bank"
+
+#: ../src/MultiFlexi/CredentialType/FioBank.php:71
+msgid "Fio Bank credential type for integration with Fio Bank API"
+msgstr "Fio Bank credential type for integration with Fio Bank API"
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:32
+#: ../src/MultiFlexi/Ui/Form/Office365.php:35
+#: ../src/MultiFlexi/Ui/Form/Office365.php:51
+msgid "Office 365 Username"
+msgstr "Office 365 Username"
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:32
+msgid "Username for Office 365"
+msgstr "Username for Office 365"
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:35
+#: ../src/MultiFlexi/Ui/Form/Office365.php:36
+#: ../src/MultiFlexi/Ui/Form/Office365.php:57
+msgid "Office 365 Password"
+msgstr "Office 365 Password"
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:35
+msgid "Password for Office 365"
+msgstr "Password for Office 365"
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:38
+#: ../src/MultiFlexi/Ui/Form/Office365.php:37
+#: ../src/MultiFlexi/Ui/Form/Office365.php:63
+msgid "Office 365 Client ID"
+msgstr "Office 365 Client ID"
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:38
+msgid "Client ID for Office 365 API"
+msgstr "Client ID for Office 365 API"
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:41
+#: ../src/MultiFlexi/Ui/Form/Office365.php:38
+#: ../src/MultiFlexi/Ui/Form/Office365.php:69
+msgid "Office 365 Secret"
+msgstr "Office 365 Secret"
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:41
+msgid "Secret for Office 365 API"
+msgstr "Secret for Office 365 API"
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:44
+#: ../src/MultiFlexi/Ui/Form/Office365.php:40
+#: ../src/MultiFlexi/Ui/Form/Office365.php:81
+msgid "Office 365 Tenant"
+msgstr "Office 365 Tenant"
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:44
+msgid "Tenant ID for Office 365"
+msgstr "Tenant ID for Office 365"
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:74
+#: ../src/MultiFlexi/Ui/Form/Office365.php:91
+msgid "Office 365"
+msgstr "Office 365"
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:79
+msgid "Credential type for integration with Office 365 API"
+msgstr "Credential type for integration with Office 365 API"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:32
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:37
+msgid "Raiffeisen Bank Account Number"
+msgstr "Raiffeisen Bank Account Number"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:32
+msgid "Number of the Raiffeisen Bank account"
+msgstr "Number of the Raiffeisen Bank account"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:35
+msgid "Account Currency"
+msgstr "Account Currency"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:35
+msgid "Currency of the account (e.g., CZK, EUR, USD)"
+msgstr "Currency of the account (e.g., CZK, EUR, USD)"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:38
+msgid "Certificate File Path"
+msgstr "Certificate File Path"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:38
+msgid "Path to the certificate file"
+msgstr "Path to the certificate file"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:41
+msgid "Certificate Password"
+msgstr "Certificate Password"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:41
+msgid "Password for the certificate file"
+msgstr "Password for the certificate file"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:44
+msgid "Client ID"
+msgstr "Client ID"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:44
+msgid "X-IBM-Client-Id for API access"
+msgstr "X-IBM-Client-Id for API access"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:74
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:33
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:48
+msgid "Raiffeisen Bank Premium API"
+msgstr "Raiffeisen Bank Premium API"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:79
+msgid "Credential type for integration with Raiffeisen Bank Premium API"
+msgstr "Credential type for integration with Raiffeisen Bank Premium API"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:32
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:35
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:58
+msgid "Database Connection"
+msgstr "Database Connection"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:32
+msgid "Database connection type (e.g., sqlsrv)"
+msgstr "Database connection type (e.g., sqlsrv)"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:35
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:36
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:64
+msgid "Database Host"
+msgstr "Database Host"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:35
+msgid "Host of the SQL Server"
+msgstr "Host of the SQL Server"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:38
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:37
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:70
+msgid "Database Port"
+msgstr "Database Port"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:38
+msgid "Port of the SQL Server"
+msgstr "Port of the SQL Server"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:41
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:38
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:76
+msgid "Database Name"
+msgstr "Database Name"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:41
+msgid "Name of the database"
+msgstr "Name of the database"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:44
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:39
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:82
+msgid "Database Username"
+msgstr "Database Username"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:44
+msgid "Username for the database"
+msgstr "Username for the database"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:47
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:40
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:88
+msgid "Database Password"
+msgstr "Database Password"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:47
+msgid "Password for the database"
+msgstr "Password for the database"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:50
+msgid "Database Settings"
+msgstr "Database Settings"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:50
+msgid "Additional database settings (e.g., encrypt=false)"
+msgstr "Additional database settings (e.g., encrypt=false)"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:82
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:49
+msgid "SQL Server"
+msgstr "SQL Server"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:87
+msgid "Credential type for connecting to Microsoft SQL Server"
+msgstr "Credential type for connecting to Microsoft SQL Server"
+
+#: ../src/MultiFlexi/CredentialType/VaultWarden.php:27
+msgid "VaultWarden"
+msgstr "VaultWarden"
+
+#: ../src/MultiFlexi/CredentialType/VaultWarden.php:32
+msgid "Use VaultWarden secrets"
+msgstr "Use VaultWarden secrets"
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:32
+#: ../src/MultiFlexi/Ui/Form/mServer.php:35
+#: ../src/MultiFlexi/Ui/Form/mServer.php:55
+msgid "Organization Number"
+msgstr "Organization Number"
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:32
+msgid "Organization Number for Pohoda"
+msgstr "Organization Number for Pohoda"
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:35
+msgid "mServer API Endpoint"
+msgstr "mServer API Endpoint"
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:35
+msgid "URL of the mServer API"
+msgstr "URL of the mServer API"
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:38
+msgid "mServer API Username"
+msgstr "mServer API Username"
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:38
+msgid "Username for the mServer API"
+msgstr "Username for the mServer API"
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:41
+msgid "mServer API Password"
+msgstr "mServer API Password"
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:41
+msgid "Password for the mServer API"
+msgstr "Password for the mServer API"
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:70
+#: ../src/MultiFlexi/Ui/Form/mServer.php:30
+#: ../src/MultiFlexi/Ui/Form/mServer.php:31
+#: ../src/MultiFlexi/Ui/Form/mServer.php:46
+#: ../src/MultiFlexi/Ui/ServerTypeSelect.php:29
+msgid "Stormware Pohoda"
+msgstr "Stormware Pohoda"
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:75
+msgid "Credential type for connecting to Stormware Pohoda mServer API"
+msgstr "Credential type for connecting to Stormware Pohoda mServer API"
+
+#: ../src/MultiFlexi/Customer.php:73 ../src/MultiFlexi/Logger.php:115
+msgid "Subject"
+msgstr "Subject"
+
+#: ../src/MultiFlexi/Customer.php:79 ../src/MultiFlexi/Logger.php:114
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:43
+msgid "Status"
+msgstr "Status"
+
+#: ../src/MultiFlexi/DBEngine.php:141
 #, php-format
 msgid "New %s"
 msgstr "New %s"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:154
+#: ../src/MultiFlexi/DBEngine.php:142
 #, php-format
 msgid "Edit %s"
 msgstr "Edit %s"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:155
+#: ../src/MultiFlexi/DBEngine.php:143
 #, php-format
 msgid "Remove %s"
 msgstr "Remove %s"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:156
+#: ../src/MultiFlexi/DBEngine.php:144
 #, php-format
 msgid "Create new %s"
 msgstr "Create new %s"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:157
+#: ../src/MultiFlexi/DBEngine.php:145
 #, php-format
 msgid "Editing %s"
 msgstr "Editing %s"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:158
+#: ../src/MultiFlexi/DBEngine.php:146
 #, php-format
 msgid "Removing %s"
 msgstr "Removing %s"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:159
+#: ../src/MultiFlexi/DBEngine.php:148
 #, php-format
 msgid "Are you sure you wish to delete %%d row of %s ?"
 msgstr "Are you sure you wish to delete %%d row of %s ?"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:198
+#: ../src/MultiFlexi/DBEngine.php:192
 #, php-format
 msgid "Missing ColumnInfo name for %s/%s"
-msgstr ""
+msgstr "Missing ColumnInfo name for %s/%s"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:202
+#: ../src/MultiFlexi/DBEngine.php:200
 #, php-format
 msgid "Missing ColumnInfo type for %s/%s"
-msgstr ""
+msgstr "Missing ColumnInfo type for %s/%s"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:213
+#: ../src/MultiFlexi/DBEngine.php:214
 msgid "Id"
-msgstr ""
+msgstr "Id"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:220
+#: ../src/MultiFlexi/DBEngine.php:225
 msgid "Updated"
-msgstr ""
+msgstr "Updated"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:226
-#: ../src/AbraFlexi/MultiFlexi/Logger.php:114
+#: ../src/MultiFlexi/DBEngine.php:235 ../src/MultiFlexi/Logger.php:117
 msgid "Created"
-msgstr ""
+msgstr "Created"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:484
+#: ../src/MultiFlexi/DBEngine.php:533
 #, php-format
 msgid "%s is not valid email"
-msgstr ""
+msgstr "%s is not valid email"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:512
+#: ../src/MultiFlexi/DBEngine.php:564
 #, php-format
 msgid "A %s is required"
-msgstr ""
+msgstr "A %s is required"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:517
+#: ../src/MultiFlexi/DBEngine.php:571
 #, php-format
 msgid "A %s is not unique"
-msgstr ""
+msgstr "A %s is not unique"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:640
+#: ../src/MultiFlexi/DBEngine.php:713
 #, php-format
 msgid "Field Type is not set for %s "
-msgstr ""
+msgstr "Field Type is not set for %s "
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:846
+#: ../src/MultiFlexi/DBEngine.php:827
+msgid "Error saving record"
+msgstr "Error saving record"
+
+#: ../src/MultiFlexi/DBEngine.php:960
 #, php-format
 msgid "Column \"%s\" of %s without type definition"
-msgstr ""
+msgstr "Column \"%s\" of %s without type definition"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:995
+#: ../src/MultiFlexi/DBEngine.php:1164
 msgid "Yes"
-msgstr ""
+msgstr "Yes"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:995
+#: ../src/MultiFlexi/DBEngine.php:1164
 msgid "No"
-msgstr ""
+msgstr "No"
 
-#: ../src/AbraFlexi/MultiFlexi/DBEngine.php:1115
+#: ../src/MultiFlexi/DBEngine.php:1334
 msgid "Dismis"
-msgstr ""
+msgstr "Dismis"
 
-#: ../src/AbraFlexi/MultiFlexi/Logger.php:110 ../src/apps.php:26
-#: ../src/flexibees.php:26
-msgid "ID"
-msgstr ""
+#: ../src/MultiFlexi/Env/Application.php:70
+msgid "Provide per Application Custom environment"
+msgstr "Provide per Application Custom environment"
 
-#: ../src/AbraFlexi/MultiFlexi/Logger.php:111
-msgid "Status"
-msgstr ""
+#: ../src/MultiFlexi/Env/Company.php:68
+msgid "Provide Information about Current company"
+msgstr "Provide Information about Current company"
 
-#: ../src/AbraFlexi/MultiFlexi/Logger.php:112
-msgid "Subject"
-msgstr ""
+#: ../src/MultiFlexi/Env/Logger.php:58
+msgid "Logger"
+msgstr "Logger"
 
-#: ../src/AbraFlexi/MultiFlexi/Logger.php:113
-msgid "Message"
-msgstr ""
+#: ../src/MultiFlexi/Env/Logger.php:66
+msgid "Handle Logging for Ease Framework based Applications"
+msgstr "Handle Logging for Ease Framework based Applications"
 
-#: ../src/AbraFlexi/MultiFlexi/Logger.php:116 ../src/app.php:25
-msgid "Application"
-msgstr ""
+#: ../src/MultiFlexi/Env/MultiFlexi.php:52 ../src/credential.php:56
+#: ../src/index.php:22 ../src/main.php:22 ../src/requirements.php:22
+#: ../src/search.php:123 ../src/status.php:22 ../src/template.php:22
+#: ../src/wizard.php:22
+msgid "MultiFlexi"
+msgstr "MultiFlexi"
 
-#: ../src/AbraFlexi/MultiFlexi/Logger.php:124 ../src/company.php:19
-msgid "Company"
-msgstr ""
+#: ../src/MultiFlexi/Env/MultiFlexi.php:60
+msgid "Provide Informations about Current running Environment"
+msgstr "Provide Informations about Current running Environment"
 
-#: ../src/AbraFlexi/MultiFlexi/Logger.php:132
-msgid "User"
-msgstr ""
+#: ../src/MultiFlexi/Env/RunTemplate.php:53
+#: ../src/MultiFlexi/Ui/SearchSelect.php:28 ../src/companyapp.php:97
+msgid "RunTemplate"
+msgstr "RunTemplate"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/AppsMenu.php:58
+#: ../src/MultiFlexi/Env/RunTemplate.php:61
+msgid "Provide stored RunTemplate Environment"
+msgstr "Provide stored RunTemplate Environment"
+
+#: ../src/MultiFlexi/Environmentor.php:107
 #, php-format
-msgid "Updating availbility status of application %s to %s"
-msgstr ""
+msgid "Query for Nonexistent module %s vars"
+msgstr "Query for Nonexistent module %s vars"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/AppsMenu.php:58
-msgid "enabled"
-msgstr ""
+#: ../src/MultiFlexi/Executor/Azure.php:32
+msgid "Azure"
+msgstr "Azure"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/AppsMenu.php:58
-msgid "disabled"
-msgstr ""
+#: ../src/MultiFlexi/Executor/Azure.php:47
+msgid "Launch container in Azure"
+msgstr "Launch container in Azure"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/AppsMenu.php:60
-#: ../src/AbraFlexi/MultiFlexi/Ui/ConfiguredFieldBadges.php:33
-msgid "Configure"
-msgstr ""
+#: ../src/MultiFlexi/Executor/Docker.php:35
+msgid "Docker"
+msgstr "Docker"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/BootstrapMenu.php:42
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCustomerForm.php:26
-msgid "Login"
-msgstr ""
+#: ../src/MultiFlexi/Executor/Docker.php:43
+msgid "Execute jobs in container using Docker"
+msgstr "Execute jobs in container using Docker"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/BootstrapMenu.php:43
-#: ../src/AbraFlexi/MultiFlexi/Ui/ConfigFields.php:25
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCustomerForm.php:29
-#: ../src/createaccount.php:135 ../src/login.php:67
-#: ../src/passwordrecovery.php:46
-msgid "Password"
-msgstr ""
+#: ../src/MultiFlexi/Executor/Kubernetes.php:36
+msgid "Execute jobs in container using Kubernetes"
+msgstr "Execute jobs in container using Kubernetes"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/BootstrapMenu.php:44 ../src/login.php:45
-msgid "Sign In"
-msgstr ""
+#: ../src/MultiFlexi/Executor/Kubernetes.php:46
+msgid "Kubernetes"
+msgstr "Kubernetes"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/BootstrapMenu.php:46
-msgid "Password recovery"
-msgstr ""
+#: ../src/MultiFlexi/Executor/Native.php:34
+msgid "Native"
+msgstr "Native"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/ColumnsForm.php:110
-msgid "Uložit"
-msgstr ""
+#: ../src/MultiFlexi/Executor/Native.php:39
+msgid "Run Job on same machine as MultiFlexi itself"
+msgstr "Run Job on same machine as MultiFlexi itself"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/ColumnsForm.php:119
-msgid "Save and back"
-msgstr ""
+#: ../src/MultiFlexi/Executor/Native.php:120
+#, php-format
+msgid "Process exceeded maximum execution time limit %d seconds"
+msgstr "Process exceeded maximum execution time limit %d seconds"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/ColumnsForm.php:127
-msgid "Save and next"
-msgstr ""
+#: ../src/MultiFlexi/Executor/Podman.php:30
+msgid "Podman"
+msgstr "Podman"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/ConfFieldsForm.php:26
-msgid "New config field type"
-msgstr ""
+#: ../src/MultiFlexi/Executor/Podman.php:35
+msgid "Execute jobs in container using Podman"
+msgstr "Execute jobs in container using Podman"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/ConfFieldsForm.php:27
-msgid "New config field Keyword"
-msgstr ""
+#: ../src/MultiFlexi/FileStore.php:102
+msgid "uploaded file"
+msgstr "uploaded file"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/ConfFieldsForm.php:28
-msgid "Default value"
-msgstr ""
+#: ../src/MultiFlexi/Job.php:181
+msgid "Job launched without runtemplate ID"
+msgstr "Job launched without runtemplate ID"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/ConfFieldsForm.php:29
-msgid "New config field description"
-msgstr ""
+#: ../src/MultiFlexi/Job.php:355
+msgid "Perform initial setup"
+msgstr "Perform initial setup"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/ConfFieldsForm.php:30
-msgid "Add"
-msgstr ""
+#: ../src/MultiFlexi/Job.php:358
+msgid "Setup command"
+msgstr "Setup command"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/ConfigFields.php:21
-msgid "Text"
-msgstr ""
+#: ../src/MultiFlexi/Job.php:404
+msgid "Scheduling job"
+msgstr "Scheduling job"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/ConfigFields.php:22
-msgid "Number"
-msgstr ""
+#: ../src/MultiFlexi/Job.php:604
+msgid "Result file name incorrect"
+msgstr "Result file name incorrect"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/ConfigFields.php:23
-msgid "Date"
-msgstr ""
+#: ../src/MultiFlexi/Job.php:656
+msgid "No runtemplate ID proveided"
+msgstr "No runtemplate ID proveided"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/ConfigFields.php:24
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCustomerForm.php:32
-#: ../src/passwordrecovery.php:79
-msgid "Email"
-msgstr ""
+#: ../src/MultiFlexi/Job.php:666
+#, php-format
+msgid "Requested Executor %s not availble"
+msgstr "Requested Executor %s not availble"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/ConfigFields.php:26
-msgid "Yes/No"
-msgstr ""
+#: ../src/MultiFlexi/Logger.php:116
+msgid "Message"
+msgstr "Message"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/CustomAppConfigForm.php:35
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:37
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:56
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCustomerForm.php:34
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterFlexiBeeForm.php:30
-msgid "Save"
-msgstr ""
+#: ../src/MultiFlexi/Logger.php:135 ../src/user.php:43
+msgid "User"
+msgstr "User"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/CustomerSelect.php:33
-msgid "Choose customer"
-msgstr ""
+#: ../src/MultiFlexi/RunTemplate.php:422 ../src/custserviceconfig.php:40
+#: ../src/runtemplate.php:102 ../src/runtemplateclone.php:41
+#: ../src/runtemplatepopulate.php:68
+msgid "Config fields Saved"
+msgstr "Config fields Saved"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/DBDataTable.php:135
-msgid "Reload"
-msgstr ""
+#: ../src/MultiFlexi/RunTemplate.php:425 ../src/custserviceconfig.php:43
+#: ../src/runtemplate.php:104 ../src/runtemplateclone.php:43
+#: ../src/runtemplatepopulate.php:70
+msgid "Error saving Config fields"
+msgstr "Error saving Config fields"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/DBDataTable.php:145
-msgid "Filter"
-msgstr ""
+#: ../src/MultiFlexi/RunTemplate.php:476
+msgid "Active"
+msgstr "Active"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/DBDataTable.php:322
-msgid "All pages"
-msgstr ""
+#: ../src/MultiFlexi/RunTemplate.php:477
+msgid "Interval"
+msgstr "Interval"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/DbStatus.php:30
-msgid "Apps"
-msgstr ""
+#: ../src/MultiFlexi/RunTemplate.php:496
+msgid "Delay"
+msgstr "Delay"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/DbStatus.php:31
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:125
-msgid "Servers"
-msgstr ""
+#: ../src/MultiFlexi/RunTemplate.php:497 ../src/MultiFlexi/Ui/JobInfo.php:39
+#: ../src/MultiFlexi/Ui/JobScheduleForm.php:77
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:54
+msgid "Executor"
+msgstr "Executor"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/DbStatus.php:32
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:142
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:148
-msgid "Customers"
-msgstr ""
+#: ../src/MultiFlexi/RunTemplate.php:525
+#: ../src/MultiFlexi/Ui/AppLaunchForm.php:76
+#: ../src/MultiFlexi/Ui/RuntemplateLaunchForm.php:81 ../src/companyapp.php:86
+msgid "Launch now"
+msgstr "Launch now"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/DbStatus.php:33
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:84
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:131
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:137
-msgid "Companies"
-msgstr ""
-
-#: ../src/AbraFlexi/MultiFlexi/Ui/DbStatus.php:34
-msgid "Assigned"
-msgstr ""
-
-#: ../src/AbraFlexi/MultiFlexi/Ui/FilterDialog.php:46
-#: ../src/AbraFlexi/MultiFlexi/Ui/FilterDialog.php:71
-msgid "From"
-msgstr ""
-
-#: ../src/AbraFlexi/MultiFlexi/Ui/FilterDialog.php:57
-#: ../src/AbraFlexi/MultiFlexi/Ui/FilterDialog.php:79
-msgid "To"
-msgstr ""
-
-#: ../src/AbraFlexi/MultiFlexi/Ui/FlexiBeeInstanceStatus.php:23
-msgid "Code"
-msgstr ""
-
-#: ../src/AbraFlexi/MultiFlexi/Ui/FlexiBeeInstanceStatus.php:23
-#: ../src/apps.php:26 ../src/flexibees.php:26
-msgid "Name"
-msgstr ""
-
-#: ../src/AbraFlexi/MultiFlexi/Ui/FlexiBeeInstanceStatus.php:23
-msgid "Show"
-msgstr ""
-
-#: ../src/AbraFlexi/MultiFlexi/Ui/FlexiBeeInstanceStatus.php:23
-msgid "State"
-msgstr ""
-
-#: ../src/AbraFlexi/MultiFlexi/Ui/FlexiBeeInstanceStatus.php:23
-msgid "watching Changes"
-msgstr ""
-
-#: ../src/AbraFlexi/MultiFlexi/Ui/FlexiBeeInstanceStatus.php:44
-msgid "Edit"
-msgstr ""
-
-#: ../src/AbraFlexi/MultiFlexi/Ui/FlexiBeeInstanceStatus.php:44
-#: ../src/createaccount.php:142
-msgid "Register"
-msgstr ""
-
-#: ../src/AbraFlexi/MultiFlexi/Ui/FlexiBeeSelect.php:47
-msgid "Choose AbraFlexi server"
-msgstr ""
-
-#: ../src/AbraFlexi/MultiFlexi/Ui/IntervalChooser.php:28
+#: ../src/MultiFlexi/RunTemplate.php:525 ../src/MultiFlexi/Ui/AppInfo.php:44
+#: ../src/MultiFlexi/Ui/IntervalChooser.php:33
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:43 ../src/companyapp.php:86
 msgid "Disabled"
-msgstr ""
+msgstr "Disabled"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/IntervalChooser.php:29
-msgid "Yearly"
-msgstr ""
+#: ../src/MultiFlexi/ScheduleLister.php:53
+msgid "After"
+msgstr "After"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/IntervalChooser.php:30
-msgid "Monthly"
-msgstr ""
+#: ../src/MultiFlexi/ScheduleLister.php:54 ../src/MultiFlexi/Ui/JobInfo.php:61
+#: ../src/MultiFlexi/Ui/SearchSelect.php:29
+msgid "Job"
+msgstr "Job"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/IntervalChooser.php:31
-msgid "Weekly"
-msgstr ""
+#: ../src/MultiFlexi/ScheduleLister.php:55
+msgid "App"
+msgstr "App"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/IntervalChooser.php:32
-msgid "Daily"
-msgstr ""
+#: ../src/MultiFlexi/ScheduleLister.php:56
+msgid "Runtemplate"
+msgstr "Runtemplate"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/IntervalChooser.php:33
-msgid "Hourly"
-msgstr ""
+#: ../src/MultiFlexi/Servers.php:65
+msgid "Instance name cannot be empty"
+msgstr "Instance name cannot be empty"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:72
-msgid "No server registered yet. Please register one."
-msgstr ""
+#: ../src/MultiFlexi/Servers.php:73
+#| msgid "AbraFlexi API URL cannot be empty"
+msgid "Server API URL cannot be empty"
+msgstr "Server API URL cannot be empty"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:79
-msgid "No customer registered yet. Please register one."
-msgstr ""
+#: ../src/MultiFlexi/Servers.php:81
+msgid "Pohoda Server API URL cannot contain port"
+msgstr "Pohoda Server API URL cannot contain port"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:82
-msgid "No company registered yet. Please register one."
-msgstr ""
+#: ../src/MultiFlexi/Servers.php:88
+msgid "User name cannot be empty"
+msgstr "User name cannot be empty"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:95
-msgid "No application registered yet. Please register one."
-msgstr ""
+#: ../src/MultiFlexi/Servers.php:94
+msgid "API User password cannot be empty"
+msgstr "API User password cannot be empty"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:96
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:113 ../src/apps.php:19
-msgid "Applications"
-msgstr ""
+#: ../src/MultiFlexi/Servers.php:101
+msgid "Company code cannot be empty"
+msgstr "Company code cannot be empty"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:101 ../src/logs.php:16
-msgid "Logs"
-msgstr ""
+#: ../src/MultiFlexi/Servers.php:107
+#| msgid "AbraFlexi API URL cannot end with slash"
+msgid "Server API URL cannot end with slash"
+msgstr "Server API URL cannot end with slash"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:102 ../src/logout.php:28
-msgid "Sign Off"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:29
+msgid "Code"
+msgstr "Code"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:107
-msgid "Register Application"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:29
+msgid "Show"
+msgstr "Show"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:110
-msgid "Application list"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:29
+msgid "State"
+msgstr "State"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:119
-msgid "Register AbraFlexi Server"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:29
+msgid "watching Changes"
+msgstr "watching Changes"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:122
-msgid "Instance list"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:46
+msgid "Edit"
+msgstr "Edit"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:132 ../src/company.php:46
-msgid "New Company"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:46
+#: ../src/createaccount.php:186
+msgid "Register"
+msgstr "Register"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:141 ../src/customer.php:41
-msgid "New Customer"
-msgstr ""
+#: ../src/MultiFlexi/Ui/ActionImage.php:44
+msgid "Action not availble"
+msgstr "Action not availble"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:152
-msgid "Admin"
-msgstr ""
+#: ../src/MultiFlexi/Ui/ActionsAdministration.php:47
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:50
+#: ../src/MultiFlexi/Ui/ColumnsForm.php:122
+#: ../src/MultiFlexi/Ui/CompanyEditorForm.php:41
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:83
+#: ../src/MultiFlexi/Ui/CustomAppConfigForm.php:50
+#: ../src/MultiFlexi/Ui/RegisterCustomerForm.php:51
+#: ../src/MultiFlexi/Ui/RegisterServerForm.php:48
+#: ../src/MultiFlexi/Ui/RuntemplateConfigForm.php:172
+#: ../src/MultiFlexi/Ui/UserForm.php:61
+msgid "Save"
+msgstr "Save"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:154
-msgid "New Admin"
-msgstr ""
-
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:155
-msgid "Admin Overview"
-msgstr ""
-
-#: ../src/AbraFlexi/MultiFlexi/Ui/MainMenu.php:180
-msgid "Click to hide messages"
-msgstr ""
-
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:26
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:34
 msgid "Application name"
-msgstr ""
+msgstr "Application name"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:27
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:35
+msgid "Application code"
+msgstr "Application code"
+
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:36
 msgid "Application Description"
-msgstr ""
+msgstr "Application Description"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:28
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:37
 msgid "Path to binary"
-msgstr ""
+msgstr "Path to binary"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:29
-msgid "Command"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:38
+msgid "Setup Command"
+msgstr "Setup Command"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:29
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:38
 msgid "Command used to setup new company for use with command"
-msgstr ""
+msgstr "Command used to setup new company for use with command"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:30
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:39
 msgid "Command arguments"
-msgstr ""
+msgstr "Command arguments"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:30
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:39
 msgid ""
 "you can use macros like {ABRAFLEXI_URL} or custom defined config fields."
 msgstr ""
+"you can use macros like {ABRAFLEXI_URL} or custom defined config fields."
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:32
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:40
 msgid "Application Icon"
-msgstr ""
+msgstr "Application Icon"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterAppForm.php:34
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:54 ../src/apps.php:26
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:41
+#: ../src/MultiFlexi/Ui/AppInfo.php:44
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:43
 msgid "Enabled"
-msgstr ""
+msgstr "Enabled"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:28
-msgid "Company name"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:42
+msgid "Application Homepage"
+msgstr "Application Homepage"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:31
-msgid "AbraFlexi company code"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:43
+msgid "Container image"
+msgstr "Container image"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:34
-msgid "Organization ID"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:44
+msgid "Current Version of Application"
+msgstr "Current Version of Application"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:36
-msgid "Send notification to"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:45
+msgid "Application deploy command"
+msgstr "Application deploy command"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:38
-#: ../src/customer.php:22
-msgid "Customer"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:46
+msgid "Reuqirements"
+msgstr "Reuqirements"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:39
-msgid "AbraFlexi server"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:47
+msgid "Application Universal Unique Identifier"
+msgstr "Application Universal Unique Identifier"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:42
-msgid "write permission"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:48
+msgid "Topics divided by column"
+msgstr "Topics divided by column"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:46
-msgid "Setup performed"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:49
+msgid "Result File field"
+msgstr "Result File field"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCompanyForm.php:50
-msgid "WebHook established"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:49
+msgid "When application put its output to file"
+msgstr "When application put its output to file"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCustomerForm.php:21
-msgid "First Name"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AppInfo.php:51 ../src/MultiFlexi/Ui/AppRow.php:77
+#: ../src/MultiFlexi/Ui/AppRow.php:98
+#: ../src/MultiFlexi/Ui/ConfiguredFieldBadges.php:41 ../src/companyapp.php:119
+msgid "Set"
+msgstr "Set"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterCustomerForm.php:23
-#: ../src/createaccount.php:131
-msgid "Lastname"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AppInfo.php:51 ../src/app.php:100
+msgid "Config fields"
+msgstr "Config fields"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterFlexiBeeForm.php:22
-msgid "AbraFlexi instance Name"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AppJobsTable.php:34 ../src/MultiFlexi/Ui/AppRow.php:81
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:48 ../src/app.php:80
+#: ../src/company.php:58 ../src/companyapp.php:97
+msgid "Launch time"
+msgstr "Launch time"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterFlexiBeeForm.php:24
-msgid "RestAPI endpoint url"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AppJobsTable.php:40 ../src/MultiFlexi/Ui/AppRow.php:87
+#: ../src/companyapp.php:103
+msgid "Not launched yet"
+msgstr "Not launched yet"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterFlexiBeeForm.php:26
-msgid "REST API Username"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AppJobsTable.php:46 ../src/MultiFlexi/Ui/AppRow.php:93
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:96
+#: ../src/MultiFlexi/Ui/JobInfo.php:55 ../src/company.php:84
+#: ../src/companyapp.php:109
+msgid "Timer"
+msgstr "Timer"
 
-#: ../src/AbraFlexi/MultiFlexi/Ui/RegisterFlexiBeeForm.php:28
-msgid "Rest API Password"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AppJson.php:34 ../src/MultiFlexi/Ui/JobDotEnv.php:34
+#: ../src/MultiFlexi/Ui/RunTemplateDotEnv.php:34 ../src/job.php:54
+#: ../src/job.php:55
+msgid "Download"
+msgstr "Download"
 
-#: ../src/AbraFlexi/MultiFlexi/User.php:132
-msgid "missing login"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AppLaunchForm.php:76
+#: ../src/MultiFlexi/Ui/AppLaunchForm.php:77 ../src/MultiFlexi/Ui/AppRow.php:61
+#: ../src/MultiFlexi/Ui/LaunchButton.php:31
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:42
+#: ../src/MultiFlexi/Ui/RuntemplateLaunchForm.php:81
+#: ../src/MultiFlexi/Ui/RuntemplateLaunchForm.php:82 ../src/company.php:66
+#: ../src/job.php:90
+msgid "Launch"
+msgstr "Launch"
 
-#: ../src/AbraFlexi/MultiFlexi/User.php:137
-msgid "missing password"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AppLaunchForm.php:77
+#: ../src/MultiFlexi/Ui/RuntemplateLaunchForm.php:82 ../src/company.php:66
+#: ../src/job.php:90
+msgid "Schedule"
+msgstr "Schedule"
 
-#: ../src/AbraFlexi/MultiFlexi/User.php:155
-msgid "invalid password"
-msgstr ""
+#: ../src/MultiFlexi/Ui/AppRow.php:55
+msgid "Upload field does not allow application scheduling"
+msgstr "Upload field does not allow application scheduling"
 
-#: ../src/AbraFlexi/MultiFlexi/User.php:162
+#: ../src/MultiFlexi/Ui/AppRow.php:68
+msgid "Job Config"
+msgstr "Job Config"
+
+#: ../src/MultiFlexi/Ui/AppRow.php:77
+msgid "Configure App Environment"
+msgstr "Configure App Environment"
+
+#: ../src/MultiFlexi/Ui/AppRow.php:98 ../src/companyapp.php:119
+msgid "Job History"
+msgstr "Job History"
+
+#: ../src/MultiFlexi/Ui/AppRow.php:99 ../src/companyapp.php:123
+msgid "Last 10 jobs"
+msgstr "Last 10 jobs"
+
+#: ../src/MultiFlexi/Ui/ApplicationPanel.php:49
+#: ../src/MultiFlexi/Ui/ArchivedJobPanel.php:43
+#: ../src/MultiFlexi/Ui/CredentialForm.php:58 ../src/companycreds.php:31
+#: ../src/companycreds.php:64
+msgid "Used by"
+msgstr "Used by"
+
+#: ../src/MultiFlexi/Ui/ApplicationPanel.php:63
+#: ../src/MultiFlexi/Ui/ArchivedJobPanel.php:56
+#: ../src/MultiFlexi/Ui/CredentialForm.php:94
+#: ../src/MultiFlexi/Ui/CredentialForm.php:97
+#: ../src/MultiFlexi/Ui/CredentialForm.php:99
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:89
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:94
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:96
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:120
+#| msgid "Remove %s"
+msgid "Remove"
+msgstr "Remove"
+
+#: ../src/MultiFlexi/Ui/ApplicationPanel.php:76
+#: ../src/MultiFlexi/Ui/CompanyApplicationPanel.php:63
+msgid "App Jobs"
+msgstr "App Jobs"
+
+#: ../src/MultiFlexi/Ui/AppsMenu.php:65
 #, php-format
-msgid "user %s does not exist"
-msgstr ""
+msgid "Updating availbility status of application %s to %s"
+msgstr "Updating availbility status of application %s to %s"
 
-#: ../src/about.php:16
-msgid "About"
+#: ../src/MultiFlexi/Ui/AppsMenu.php:65
+msgid "enabled"
+msgstr "enabled"
+
+#: ../src/MultiFlexi/Ui/AppsMenu.php:65
+msgid "disabled"
+msgstr "disabled"
+
+#: ../src/MultiFlexi/Ui/AppsMenu.php:68
+#: ../src/MultiFlexi/Ui/ConfiguredFieldBadges.php:41
+msgid "Configure"
+msgstr "Configure"
+
+#: ../src/MultiFlexi/Ui/BootstrapMenu.php:42
+#: ../src/MultiFlexi/Ui/RegisterCustomerForm.php:38
+msgid "Login"
+msgstr "Login"
+
+#: ../src/MultiFlexi/Ui/BootstrapMenu.php:43
+#: ../src/MultiFlexi/Ui/CfgFieldTypeSelect.php:40
+#: ../src/MultiFlexi/Ui/RegisterCustomerForm.php:43
+#: ../src/createaccount.php:173 ../src/login.php:90
+#: ../src/passwordrecovery.php:59
+msgid "Password"
+msgstr "Password"
+
+#: ../src/MultiFlexi/Ui/BootstrapMenu.php:44 ../src/login.php:57
+msgid "Sign In"
+msgstr "Sign In"
+
+#: ../src/MultiFlexi/Ui/BootstrapMenu.php:46 ../src/login.php:75
+msgid "Password recovery"
+msgstr "Password recovery"
+
+#: ../src/MultiFlexi/Ui/Breadcrumb.php:36
+msgid "choose Customer"
+msgstr "choose Customer"
+
+#: ../src/MultiFlexi/Ui/Breadcrumb.php:39
+#: ../src/MultiFlexi/Ui/CompanyEditorForm.php:37 ../src/customer.php:31
+msgid "Customer"
+msgstr "Customer"
+
+#: ../src/MultiFlexi/Ui/Breadcrumb.php:43
+msgid "choose Server"
+msgstr "choose Server"
+
+#: ../src/MultiFlexi/Ui/Breadcrumb.php:46
+msgid "Server"
+msgstr "Server"
+
+#: ../src/MultiFlexi/Ui/Breadcrumb.php:50
+msgid "choose Company"
+msgstr "choose Company"
+
+#: ../src/MultiFlexi/Ui/CfgFieldTypeSelect.php:35
+msgid "String"
+msgstr "String"
+
+#: ../src/MultiFlexi/Ui/CfgFieldTypeSelect.php:36
+msgid "Text"
+msgstr "Text"
+
+#: ../src/MultiFlexi/Ui/CfgFieldTypeSelect.php:37
+msgid "Number"
+msgstr "Number"
+
+#: ../src/MultiFlexi/Ui/CfgFieldTypeSelect.php:38
+msgid "Date"
+msgstr "Date"
+
+#: ../src/MultiFlexi/Ui/CfgFieldTypeSelect.php:39
+#: ../src/MultiFlexi/Ui/RegisterCustomerForm.php:48
+#: ../src/MultiFlexi/Ui/UserForm.php:51 ../src/passwordrecovery.php:99
+msgid "Email"
+msgstr "Email"
+
+#: ../src/MultiFlexi/Ui/CfgFieldTypeSelect.php:41
+msgid "Yes/No"
+msgstr "Yes/No"
+
+#: ../src/MultiFlexi/Ui/CfgFieldTypeSelect.php:42
+msgid "File upload"
+msgstr "File upload"
+
+#: ../src/MultiFlexi/Ui/CfgFieldTypeSelect.php:43
+msgid "Directory path"
+msgstr "Directory path"
+
+#: ../src/MultiFlexi/Ui/ColumnsForm.php:134
+msgid "Save and back"
+msgstr "Save and back"
+
+#: ../src/MultiFlexi/Ui/ColumnsForm.php:146
+msgid "Save and next"
+msgstr "Save and next"
+
+#: ../src/MultiFlexi/Ui/CompanyApplicationPanel.php:50
+msgid "Active RunTemplates"
+msgstr "Active RunTemplates"
+
+#: ../src/MultiFlexi/Ui/CompanyDbStatus.php:45
+#: ../src/MultiFlexi/Ui/DbStatus.php:43
+msgid "Apps"
+msgstr "Apps"
+
+#: ../src/MultiFlexi/Ui/CompanyDbStatus.php:49
+msgid "Periodical"
+msgstr "Periodical"
+
+#: ../src/MultiFlexi/Ui/CompanyDbStatus.php:53
+msgid "Jobs Total"
+msgstr "Jobs Total"
+
+#: ../src/MultiFlexi/Ui/CompanyDbStatus.php:58
+msgid "Success Jobs"
+msgstr "Success Jobs"
+
+#: ../src/MultiFlexi/Ui/CompanyDbStatus.php:63
+msgid "Failed Jobs"
+msgstr "Failed Jobs"
+
+#: ../src/MultiFlexi/Ui/CompanyDbStatus.php:68
+msgid "Unfinished Jobs"
+msgstr "Unfinished Jobs"
+
+#: ../src/MultiFlexi/Ui/CompanyEditorForm.php:33
+#: ../src/MultiFlexi/Ui/DeleteCompanyForm.php:32
+msgid "Company name"
+msgstr "Company name"
+
+#: ../src/MultiFlexi/Ui/CompanyEditorForm.php:34
+#| msgid "Company created"
+msgid "Company code"
+msgstr "Company code"
+
+#: ../src/MultiFlexi/Ui/CompanyEditorForm.php:35
+#: ../src/MultiFlexi/Ui/DeleteCompanyForm.php:39
+msgid "Organization ID"
+msgstr "Organization ID"
+
+#: ../src/MultiFlexi/Ui/CompanyEditorForm.php:36
+#: ../src/MultiFlexi/Ui/DeleteCompanyForm.php:41
+msgid "Send notification to"
+msgstr "Send notification to"
+
+#: ../src/MultiFlexi/Ui/CompanyEditorForm.php:38
+#| msgid "Company with no ID"
+msgid "Company Logo"
+msgstr "Company Logo"
+
+#: ../src/MultiFlexi/Ui/CompanyLogo.php:64
+#: ../src/MultiFlexi/Ui/CredentialTypeLogo.php:74
+msgid "none"
+msgstr "none"
+
+#: ../src/MultiFlexi/Ui/CompanyPanel.php:40 ../src/companies.php:36
+msgid "Setup"
+msgstr "Setup"
+
+#: ../src/MultiFlexi/Ui/CompanyPanel.php:41
+#: ../src/MultiFlexi/Ui/MainMenu.php:74 ../src/MultiFlexi/Ui/MainMenu.php:114
+#: ../src/apps.php:22 ../src/companies.php:38
+msgid "Applications"
+msgstr "Applications"
+
+#: ../src/MultiFlexi/Ui/CompanyPanel.php:42
+msgid "Periodical Tasks"
+msgstr "Periodical Tasks"
+
+#: ../src/MultiFlexi/Ui/CompanyPanel.php:43
+msgid "Launch wizard"
+msgstr "Launch wizard"
+
+#: ../src/MultiFlexi/Ui/CompanyPanel.php:44
+#: ../src/MultiFlexi/Ui/MainMenu.php:136 ../src/credentials.php:21
+msgid "Credentials"
+msgstr "Credentials"
+
+#: ../src/MultiFlexi/Ui/ConfFieldsForm.php:40
+msgid "New config field type"
+msgstr "New config field type"
+
+#: ../src/MultiFlexi/Ui/ConfFieldsForm.php:41
+msgid "New config field Keyword"
+msgstr "New config field Keyword"
+
+#: ../src/MultiFlexi/Ui/ConfFieldsForm.php:42
+#: ../src/MultiFlexi/Ui/ConfigFieldsView.php:41
+msgid "Default value"
+msgstr "Default value"
+
+#: ../src/MultiFlexi/Ui/ConfFieldsForm.php:43
+msgid "New config field description"
+msgstr "New config field description"
+
+#: ../src/MultiFlexi/Ui/ConfFieldsForm.php:44
+msgid "Required"
+msgstr "Required"
+
+#: ../src/MultiFlexi/Ui/ConfFieldsForm.php:48 ../src/user.php:30
+msgid "Update"
+msgstr "Update"
+
+#: ../src/MultiFlexi/Ui/ConfFieldsForm.php:50
+msgid "Add"
+msgstr "Add"
+
+#: ../src/MultiFlexi/Ui/ConfigFieldsView.php:42
+msgid "Requied"
+msgstr "Requied"
+
+#: ../src/MultiFlexi/Ui/ConfigurationWizard.php:37
+msgid "Configuration Wizard"
+msgstr "Configuration Wizard"
+
+#: ../src/MultiFlexi/Ui/ConfigurationWizard.php:43
+msgid "Choose Application"
+msgstr "Choose Application"
+
+#: ../src/MultiFlexi/Ui/ConfigurationWizard.php:44
+msgid "Configure Application"
+msgstr "Configure Application"
+
+#: ../src/MultiFlexi/Ui/ConfigurationWizard.php:45
+msgid "Launch Application"
+msgstr "Launch Application"
+
+#: ../src/MultiFlexi/Ui/ConfigurationWizard.php:90 ../src/job.php:106
+#: ../src/job.php:108
+msgid "Next"
+msgstr "Next"
+
+#: ../src/MultiFlexi/Ui/ConfigurationWizard.php:102
+msgid "Image"
+msgstr "Image"
+
+#: ../src/MultiFlexi/Ui/CredentialCloneForm.php:27
+#: ../src/MultiFlexi/Ui/CredentialCloneForm.php:30
+#: ../src/MultiFlexi/Ui/RuntemplateCloneForm.php:27
+#: ../src/MultiFlexi/Ui/RuntemplateCloneForm.php:30
+msgid "Clone"
+msgstr "Clone"
+
+#: ../src/MultiFlexi/Ui/CredentialCloneForm.php:29
+#: ../src/MultiFlexi/Ui/RuntemplateCloneForm.php:29
+msgid "Save as copy"
+msgstr "Save as copy"
+
+#: ../src/MultiFlexi/Ui/CredentialForm.php:33
+msgid "Please Select Credential type form"
+msgstr "Please Select Credential type form"
+
+#: ../src/MultiFlexi/Ui/CredentialForm.php:44
+msgid "Please Select Company"
+msgstr "Please Select Company"
+
+#: ../src/MultiFlexi/Ui/CredentialForm.php:51
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:35
+msgid "Credential Name"
+msgstr "Credential Name"
+
+#: ../src/MultiFlexi/Ui/CredentialForm.php:91
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:86 ../src/actions.php:65
+#: ../src/companyapps.php:50 ../src/intervals.php:49
+msgid "Apply"
+msgstr "Apply"
+
+#: ../src/MultiFlexi/Ui/CredentialSelect.php:45
+msgid "Do not use"
+msgstr "Do not use"
+
+#: ../src/MultiFlexi/Ui/CredentialTypeClassSelect.php:47
+msgid "No CredentialType helper used"
+msgstr "No CredentialType helper used"
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:36
+msgid "Credential UUID"
+msgstr "Credential UUID"
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:38
+msgid "Credential type Helper Class"
+msgstr "Credential type Helper Class"
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:43
+msgid "Fields provided"
+msgstr "Fields provided"
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:56
+msgid "Already assigned"
+msgstr "Already assigned"
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:58
+msgid "Add Field to "
+msgstr "Add Field to "
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:108
+msgid "Field Name"
+msgstr "Field Name"
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:109
+msgid "Field Type"
+msgstr "Field Type"
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:110
+msgid "Field Hint"
+msgstr "Field Hint"
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:111
+msgid "Field Default Value"
+msgstr "Field Default Value"
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:114
+msgid "Helper Class field"
+msgstr "Helper Class field"
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:116
+msgid "No Helper Class chosen yet"
+msgstr "No Helper Class chosen yet"
+
+#: ../src/MultiFlexi/Ui/CustomAppEnvironmentView.php:50
+msgid "unset"
+msgstr "unset"
+
+#: ../src/MultiFlexi/Ui/CustomerSelect.php:45
+msgid "Choose customer"
+msgstr "Choose customer"
+
+#: ../src/MultiFlexi/Ui/DBDataTable.php:115
+msgid "Reload"
+msgstr "Reload"
+
+#: ../src/MultiFlexi/Ui/DBDataTable.php:131
+msgid "Filter"
+msgstr "Filter"
+
+#: ../src/MultiFlexi/Ui/DBDataTable.php:348
+msgid "All pages"
+msgstr "All pages"
+
+#: ../src/MultiFlexi/Ui/DbStatus.php:39 ../src/MultiFlexi/Ui/MainMenu.php:82
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:83 ../src/app.php:113
+msgid "Jobs"
+msgstr "Jobs"
+
+#: ../src/MultiFlexi/Ui/DbStatus.php:47
+msgid "Servers"
+msgstr "Servers"
+
+#: ../src/MultiFlexi/Ui/DbStatus.php:51 ../src/MultiFlexi/Ui/MainMenu.php:171
+#: ../src/MultiFlexi/Ui/MainMenu.php:181 ../src/customers.php:27
+msgid "Customers"
+msgstr "Customers"
+
+#: ../src/MultiFlexi/Ui/DbStatus.php:55 ../src/MultiFlexi/Ui/MainMenu.php:64
+#: ../src/MultiFlexi/Ui/MainMenu.php:150 ../src/MultiFlexi/Ui/MainMenu.php:160
+msgid "Companies"
+msgstr "Companies"
+
+#: ../src/MultiFlexi/Ui/DbStatus.php:59
+msgid "Assigned"
+msgstr "Assigned"
+
+#: ../src/MultiFlexi/Ui/DelayChooser.php:36
+msgid ""
+"The amount of seconds, optionally preceded by minutes: or by hours:minutes: "
+"(empty or zero leads for immediate launch)."
 msgstr ""
+"The amount of seconds, optionally preceded by minutes: or by hours:minutes: "
+"(empty or zero leads for immediate launch)."
+
+#: ../src/MultiFlexi/Ui/DelayChooser.php:37
+msgid "hh:mm:ss (leave blank or zero for immediate launch)"
+msgstr "hh:mm:ss (leave blank or zero for immediate launch)"
+
+#: ../src/MultiFlexi/Ui/DeleteCompanyForm.php:36
+msgid "AbraFlexi company code"
+msgstr "AbraFlexi company code"
+
+#: ../src/MultiFlexi/Ui/DeleteCompanyForm.php:43
+msgid "Confirm company Delete"
+msgstr "Confirm company Delete"
+
+#: ../src/MultiFlexi/Ui/EnvironmentEditor.php:35
+#: ../src/MultiFlexi/Ui/EnvironmentEditor.php:50
+msgid "Keyword"
+msgstr "Keyword"
+
+#: ../src/MultiFlexi/Ui/EnvironmentEditor.php:35
+#: ../src/MultiFlexi/Ui/EnvironmentEditor.php:51
+#: ../src/MultiFlexi/Ui/EnvironmentView.php:33
+msgid "Value"
+msgstr "Value"
+
+#: ../src/MultiFlexi/Ui/EnvironmentEditor.php:43
+msgid "Update Keyname"
+msgstr "Update Keyname"
+
+#: ../src/MultiFlexi/Ui/EnvironmentEditor.php:45
+msgid "Update value"
+msgstr "Update value"
+
+#: ../src/MultiFlexi/Ui/EnvironmentEditor.php:50
+msgid "New Config field"
+msgstr "New Config field"
+
+#: ../src/MultiFlexi/Ui/EnvironmentEditor.php:50
+msgid "Create New field here"
+msgstr "Create New field here"
+
+#: ../src/MultiFlexi/Ui/EnvironmentEditor.php:51
+msgid "New Config value"
+msgstr "New Config value"
+
+#: ../src/MultiFlexi/Ui/EnvironmentEditor.php:51
+msgid "Enter New field value here"
+msgstr "Enter New field value here"
+
+#: ../src/MultiFlexi/Ui/EnvironmentEditor.php:52
+msgid "Add new field"
+msgstr "Add new field"
+
+#: ../src/MultiFlexi/Ui/EnvironmentEditor.php:54
+#, php-format
+msgid "%s items"
+msgstr "%s items"
+
+#: ../src/MultiFlexi/Ui/EnvironmentView.php:33
+msgid "Source"
+msgstr "Source"
+
+#: ../src/MultiFlexi/Ui/EnvironmentView.php:42
+#: ../src/MultiFlexi/Ui/Wizard.php:46 ../src/app.php:32
+msgid "n/a"
+msgstr "n/a"
+
+#: ../src/MultiFlexi/Ui/EnvironmentView.php:46
+msgid "Default Value"
+msgstr "Default Value"
+
+#: ../src/MultiFlexi/Ui/EnvironmentView.php:62
+#, php-format
+msgid "There is no Logo defined for %s Credential Types"
+msgstr "There is no Logo defined for %s Credential Types"
+
+#: ../src/MultiFlexi/Ui/EnvsForm.php:34
+msgid "New Configuration Key"
+msgstr "New Configuration Key"
+
+#: ../src/MultiFlexi/Ui/EnvsForm.php:35
+msgid "New Configuration value"
+msgstr "New Configuration value"
+
+#: ../src/MultiFlexi/Ui/EnvsForm.php:36
+msgid "Save / Add"
+msgstr "Save / Add"
+
+#: ../src/MultiFlexi/Ui/ExecutorImage.php:40
+msgid "Executor not availble"
+msgstr "Executor not availble"
+
+#: ../src/MultiFlexi/Ui/ExecutorImage.php:41
+msgid "Unknown"
+msgstr "Unknown"
+
+#: ../src/MultiFlexi/Ui/FilterDialog.php:67
+#: ../src/MultiFlexi/Ui/FilterDialog.php:96
+msgid "From"
+msgstr "From"
+
+#: ../src/MultiFlexi/Ui/FilterDialog.php:80
+#: ../src/MultiFlexi/Ui/FilterDialog.php:106
+msgid "To"
+msgstr "To"
+
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:66
+msgid "AbraFlexi password"
+msgstr "AbraFlexi password"
+
+#: ../src/MultiFlexi/Ui/Form/FioBank.php:30
+msgid "Fio Api"
+msgstr "Fio Api"
+
+#: ../src/MultiFlexi/Ui/Form/FioBank.php:31
+msgid "Fio Bank API"
+msgstr "Fio Bank API"
+
+#: ../src/MultiFlexi/Ui/Form/FioBank.php:36
+#: ../src/MultiFlexi/Ui/Form/FioBank.php:54
+msgid "Token for account"
+msgstr "Token for account"
+
+#: ../src/MultiFlexi/Ui/Form/FioBank.php:37
+#: ../src/MultiFlexi/Ui/Form/FioBank.php:60
+msgid "Name of Token used"
+msgstr "Name of Token used"
+
+#: ../src/MultiFlexi/Ui/Form/FioBank.php:48
+msgid "Number of Account"
+msgstr "Number of Account"
+
+#: ../src/MultiFlexi/Ui/Form/Office365.php:39
+#: ../src/MultiFlexi/Ui/Form/Office365.php:75
+msgid "Office 365 Client Secret"
+msgstr "Office 365 Client Secret"
+
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:32
+msgid "RB Premium Api"
+msgstr "RB Premium Api"
+
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:38
+msgid "Raiffeisen Bank Account Currency Code: CZK,EUR,USD,..."
+msgstr "Raiffeisen Bank Account Currency Code: CZK,EUR,USD,..."
+
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:39
+msgid "Path to Certificate File"
+msgstr "Path to Certificate File"
+
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:40
+msgid "Password for Certificate"
+msgstr "Password for Certificate"
+
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:41
+msgid "X-IBM-Client-Id"
+msgstr "X-IBM-Client-Id"
+
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:57
+msgid "Bank Account Number"
+msgstr "Bank Account Number"
+
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:63
+msgid "Bank Account Currency"
+msgstr "Bank Account Currency"
+
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:69
+msgid "Certificate password"
+msgstr "Certificate password"
+
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:75
+msgid "Path to RB Certificate file"
+msgstr "Path to RB Certificate file"
+
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:81
+msgid "ClientID"
+msgstr "ClientID"
+
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:41
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:94
+msgid "Database Settings like encrypt=false"
+msgstr "Database Settings like encrypt=false"
+
+#: ../src/MultiFlexi/Ui/Form/mServer.php:36
+#: ../src/MultiFlexi/Ui/Form/mServer.php:67
+msgid "mServer Api Endpoint"
+msgstr "mServer Api Endpoint"
+
+#: ../src/MultiFlexi/Ui/Form/mServer.php:37
+msgid "mServer Api Username"
+msgstr "mServer Api Username"
+
+#: ../src/MultiFlexi/Ui/Form/mServer.php:38
+#: ../src/MultiFlexi/Ui/Form/mServer.php:61
+msgid "mServer Api Pasword"
+msgstr "mServer Api Pasword"
+
+#: ../src/MultiFlexi/Ui/IntervalChooser.php:34
+msgid "Minutly"
+msgstr "Minutly"
+
+#: ../src/MultiFlexi/Ui/IntervalChooser.php:35 ../src/intervals.php:34
+#: ../src/periodical.php:73
+msgid "Hourly"
+msgstr "Hourly"
+
+#: ../src/MultiFlexi/Ui/IntervalChooser.php:36 ../src/intervals.php:35
+#: ../src/periodical.php:74
+msgid "Daily"
+msgstr "Daily"
+
+#: ../src/MultiFlexi/Ui/IntervalChooser.php:37 ../src/intervals.php:36
+#: ../src/periodical.php:75
+msgid "Weekly"
+msgstr "Weekly"
+
+#: ../src/MultiFlexi/Ui/IntervalChooser.php:38 ../src/intervals.php:37
+#: ../src/periodical.php:76
+msgid "Monthly"
+msgstr "Monthly"
+
+#: ../src/MultiFlexi/Ui/IntervalChooser.php:39 ../src/intervals.php:38
+#: ../src/periodical.php:77
+msgid "Yearly"
+msgstr "Yearly"
+
+#: ../src/MultiFlexi/Ui/JobChart.php:85
+msgid "Last 30 Days jobs"
+msgstr "Last 30 Days jobs"
+
+#: ../src/MultiFlexi/Ui/JobChart.php:93
+msgid "Legend"
+msgstr "Legend"
+
+#: ../src/MultiFlexi/Ui/JobChart.php:94
+msgid "waiting"
+msgstr "waiting"
+
+#: ../src/MultiFlexi/Ui/JobChart.php:94
+msgid "fail"
+msgstr "fail"
+
+#: ../src/MultiFlexi/Ui/JobChart.php:94
+msgid "success"
+msgstr "success"
+
+#: ../src/MultiFlexi/Ui/JobChart.php:94
+msgid "exception"
+msgstr "exception"
+
+#: ../src/MultiFlexi/Ui/JobGraph.php:177
+msgid "Job Success/Failure Graph"
+msgstr "Job Success/Failure Graph"
+
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:83 ../src/company.php:74
+msgid "Job Info"
+msgstr "Job Info"
+
+#: ../src/MultiFlexi/Ui/JobInfo.php:36
+msgid "Exitcode"
+msgstr "Exitcode"
+
+#: ../src/MultiFlexi/Ui/JobInfo.php:37
+msgid "Commandline"
+msgstr "Commandline"
+
+#: ../src/MultiFlexi/Ui/JobInfo.php:38 ../src/company.php:79
+msgid "Scheduled"
+msgstr "Scheduled"
+
+#: ../src/MultiFlexi/Ui/JobInfo.php:40
+msgid "Begin"
+msgstr "Begin"
+
+#: ../src/MultiFlexi/Ui/JobInfo.php:43
+msgid "Not Yet Started"
+msgstr "Not Yet Started"
+
+#: ../src/MultiFlexi/Ui/JobInfo.php:45
+msgid "End"
+msgstr "End"
+
+#: ../src/MultiFlexi/Ui/JobInfo.php:48
+msgid "Not Yet Ended"
+msgstr "Not Yet Ended"
+
+#: ../src/MultiFlexi/Ui/JobInfo.php:55 ../src/app.php:80
+msgid "Launched by"
+msgstr "Launched by"
+
+#: ../src/MultiFlexi/Ui/JobInfo.php:67 ../src/app.php:111
+msgid "Overview"
+msgstr "Overview"
+
+#: ../src/MultiFlexi/Ui/JobInfo.php:68
+msgid "export .env"
+msgstr "export .env"
+
+#: ../src/MultiFlexi/Ui/JobInfo.php:70
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:85
+msgid "Environment"
+msgstr "Environment"
+
+#: ../src/MultiFlexi/Ui/JobScheduleForm.php:54
+msgid "Save App Schedule"
+msgstr "Save App Schedule"
+
+#: ../src/MultiFlexi/Ui/JobScheduleForm.php:61
+msgid "Launch after"
+msgstr "Launch after"
+
+#: ../src/MultiFlexi/Ui/JobScheduleForm.php:77
+msgid "Choose Executon platfom"
+msgstr "Choose Executon platfom"
+
+#: ../src/MultiFlexi/Ui/JobSuccessGraph.php:50
+msgid "Success"
+msgstr "Success"
+
+#: ../src/MultiFlexi/Ui/JobSuccessGraph.php:51
+msgid "Failed"
+msgstr "Failed"
+
+#: ../src/MultiFlexi/Ui/JobSuccessGraph.php:52
+msgid "Waiting"
+msgstr "Waiting"
+
+#: ../src/MultiFlexi/Ui/JobSuccessGraph.php:53
+msgid "Exception"
+msgstr "Exception"
+
+#: ../src/MultiFlexi/Ui/JobSuccessGraph.php:54
+msgid "No Executable"
+msgstr "No Executable"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:49 ../src/MultiFlexi/Ui/MainMenu.php:62
+msgid "No company registered yet. Please register one."
+msgstr "No company registered yet. Please register one."
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:59
+msgid "No customer registered yet. Please register one."
+msgstr "No customer registered yet. Please register one."
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:73
+msgid "No application registered yet. Please register one."
+msgstr "No application registered yet. Please register one."
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:82 ../src/logs.php:22
+msgid "Logs"
+msgstr "Logs"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:82
+msgid "System"
+msgstr "System"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:83 ../src/logout.php:24
+msgid "Sign Off"
+msgstr "Sign Off"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:86
+msgid ""
+"MultiFlexi systemd service is not running. Consider `systemctl start "
+"multiflexi`"
+msgstr ""
+"MultiFlexi systemd service is not running. Consider `systemctl start "
+"multiflexi`"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:90
+msgid ""
+"Periodic Task Launcher systemd service is not running. Consider `systemctl "
+"enable anacron`"
+msgstr ""
+"Periodic Task Launcher systemd service is not running. Consider `systemctl "
+"enable anacron`"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:104
+msgid "Register Application"
+msgstr "Register Application"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:108
+msgid "Application list"
+msgstr "Application list"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:111
+msgid "RunTemplates"
+msgstr "RunTemplates"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:127
+msgid "Register new Credential"
+msgstr "Register new Credential"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:128
+msgid "Register new Credential Type"
+msgstr "Register new Credential Type"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:129
+msgid "Credential types listing"
+msgstr "Credential types listing"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:132
+msgid "Credentials listing"
+msgstr "Credentials listing"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:151 ../src/companydelete.php:58
+#: ../src/companysetup.php:64
+msgid "New Company"
+msgstr "New Company"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:151
+msgid "Listing"
+msgstr "Listing"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:169 ../src/customer.php:44
+msgid "New Customer"
+msgstr "New Customer"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:190
+msgid "Admin"
+msgstr "Admin"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:192
+msgid "New Admin"
+msgstr "New Admin"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:193
+msgid "Environment Modules"
+msgstr "Environment Modules"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:194
+#: ../src/MultiFlexi/Ui/RuntemplateConfigForm.php:173
+msgid "Actions"
+msgstr "Actions"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:195
+msgid "Executors"
+msgstr "Executors"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:196
+msgid "Credential Type helpers"
+msgstr "Credential Type helpers"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:197
+msgid "Intervals"
+msgstr "Intervals"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:198
+#: ../src/MultiFlexi/Ui/RequirementsOverview.php:27
+msgid "Requirements"
+msgstr "Requirements"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:199
+msgid "Job queue"
+msgstr "Job queue"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:201 ../src/users.php:24
+msgid "Users"
+msgstr "Users"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:228
+msgid "Click to hide messages"
+msgstr "Click to hide messages"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:253 ../src/MultiFlexi/Ui/MainMenu.php:255
+msgid "Search"
+msgstr "Search"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:253
+msgid "#number to jump on record"
+msgstr "#number to jump on record"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:294
+msgid " "
+msgstr " "
+
+#: ../src/MultiFlexi/Ui/OpenClipart.php:30
+msgid "Visit OpenClipart.org - the source of most of our images"
+msgstr "Visit OpenClipart.org - the source of most of our images"
+
+#: ../src/MultiFlexi/Ui/PageBottom.php:50
+msgid "Github Project"
+msgstr "Github Project"
+
+#: ../src/MultiFlexi/Ui/PageBottom.php:51
+msgid "LinkedIN Product page"
+msgstr "LinkedIN Product page"
+
+#: ../src/MultiFlexi/Ui/PageBottom.php:55
+msgid "Docs"
+msgstr "Docs"
+
+#: ../src/MultiFlexi/Ui/RegisterCustomerForm.php:29
+msgid "First Name"
+msgstr "First Name"
+
+#: ../src/MultiFlexi/Ui/RegisterCustomerForm.php:33
+#: ../src/MultiFlexi/Ui/UserForm.php:47 ../src/createaccount.php:167
+msgid "Lastname"
+msgstr "Lastname"
+
+#: ../src/MultiFlexi/Ui/RegisterServerForm.php:29
+msgid "Server Type"
+msgstr "Server Type"
+
+#: ../src/MultiFlexi/Ui/RegisterServerForm.php:33
+msgid "Server instance Name"
+msgstr "Server instance Name"
+
+#: ../src/MultiFlexi/Ui/RegisterServerForm.php:37
+msgid "RestAPI endpoint url"
+msgstr "RestAPI endpoint url"
+
+#: ../src/MultiFlexi/Ui/RegisterServerForm.php:41
+msgid "REST API Username"
+msgstr "REST API Username"
+
+#: ../src/MultiFlexi/Ui/RegisterServerForm.php:45
+msgid "Rest API Password"
+msgstr "Rest API Password"
+
+#: ../src/MultiFlexi/Ui/ResultFileSelect.php:28
+msgid "None"
+msgstr "None"
+
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:42
+msgid "Manual Schedule"
+msgstr "Manual Schedule"
+
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:47
+msgid "Delete !!!"
+msgstr "Delete !!!"
+
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:49
+msgid "Delete ?"
+msgstr "Delete ?"
+
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:54
+msgid "automatically schedule in an interval"
+msgstr "automatically schedule in an interval"
+
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:54
+msgid "Startup delay"
+msgstr "Startup delay"
+
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:55
+msgid "Update RunTemplate name"
+msgstr "Update RunTemplate name"
+
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:84
+msgid "Options"
+msgstr "Options"
+
+#: ../src/MultiFlexi/Ui/RuntemplateConfigForm.php:92
+msgid "New Credential"
+msgstr "New Credential"
+
+#: ../src/MultiFlexi/Ui/RuntemplateConfigForm.php:97
+#, php-format
+msgid "Form %s not available"
+msgstr "Form %s not available"
+
+#: ../src/MultiFlexi/Ui/RuntemplateConfigForm.php:98
+msgid "New Credential Type"
+msgstr "New Credential Type"
+
+#: ../src/MultiFlexi/Ui/RuntemplateConfigForm.php:120
+msgid "ℹ️ Custom Field"
+msgstr "ℹ️ Custom Field"
+
+#: ../src/MultiFlexi/Ui/RuntemplateConfigForm.php:122
+msgid "Custom"
+msgstr "Custom"
+
+#: ../src/MultiFlexi/Ui/RuntemplatePopulateForm.php:28
+msgid "Load .env"
+msgstr "Load .env"
+
+#: ../src/MultiFlexi/Ui/RuntemplatePopulateForm.php:29
+msgid "Populate"
+msgstr "Populate"
+
+#: ../src/MultiFlexi/Ui/RuntemplatePopulateForm.php:30
+msgid "Replace Existing"
+msgstr "Replace Existing"
+
+#: ../src/MultiFlexi/Ui/SearchSelect.php:32
+msgid "Credential"
+msgstr "Credential"
+
+#: ../src/MultiFlexi/Ui/SearchSelect.php:33 ../src/credentialtype.php:155
+msgid "Credential Type"
+msgstr "Credential Type"
+
+#: ../src/MultiFlexi/Ui/SearchSelect.php:34
+msgid "All"
+msgstr "All"
+
+#: ../src/MultiFlexi/Ui/SearchSelect.php:34
+msgid "slow"
+msgstr "slow"
+
+#: ../src/MultiFlexi/Ui/ServerSelect.php:58
+msgid "No server specified"
+msgstr "No server specified"
+
+#: ../src/MultiFlexi/Ui/UserForm.php:43 ../src/createaccount.php:163
+msgid "Firstname"
+msgstr "Firstname"
+
+#: ../src/MultiFlexi/Ui/UserForm.php:55 ../src/login.php:84
+#: ../src/passwordrecovery.php:58 ../src/servers.php:29
+msgid "Username"
+msgstr "Username"
+
+#: ../src/MultiFlexi/User.php:160
+msgid "missing login"
+msgstr "missing login"
+
+#: ../src/MultiFlexi/User.php:166
+msgid "missing password"
+msgstr "missing password"
 
 #: ../src/about.php:20
-msgid "O Programu"
-msgstr ""
+msgid "About"
+msgstr "About"
 
-#: ../src/about.php:22
+#: ../src/about.php:24
+msgid "About Program"
+msgstr "About Program"
+
+#: ../src/about.php:29
 msgid "Vitex Software"
-msgstr ""
+msgstr "Vitex Software"
 
-#: ../src/app.php:32
+#: ../src/about.php:47
+msgid ""
+"\n"
+"AI and Human Relationship"
+msgstr ""
+"\n"
+"AI and Human Relationship"
+
+#: ../src/actionmodules.php:22
+msgid "MultiFlexi - Action Modules"
+msgstr "MultiFlexi - Action Modules"
+
+#: ../src/actionmodules.php:30
+msgid "Installed Action Modules"
+msgstr "Installed Action Modules"
+
+#: ../src/actions.php:50
+msgid "interval"
+msgstr "interval"
+
+#: ../src/actions.php:56
+msgid "Success Actions"
+msgstr "Success Actions"
+
+#: ../src/actions.php:57
+msgid "Fail Actions"
+msgstr "Fail Actions"
+
+#: ../src/adhoc.php:33 ../src/companyapps.php:37
+msgid "Applications used by Company"
+msgstr "Applications used by Company"
+
+#: ../src/adhoc.php:51
+msgid "Application Launcher"
+msgstr "Application Launcher"
+
+#: ../src/app.php:40
+#, php-format
+msgid "Application %s removal"
+msgstr "Application %s removal"
+
+#: ../src/app.php:48
 msgid "Application Saved"
-msgstr ""
+msgstr "Application Saved"
 
-#: ../src/app.php:36
+#: ../src/app.php:52
 msgid "Error saving Application"
-msgstr ""
+msgstr "Error saving Application"
 
-#: ../src/app.php:43
+#: ../src/app.php:62
 msgid "New Application"
-msgstr ""
+msgstr "New Application"
 
-#: ../src/app.php:56 ../src/app.php:57
-msgid "Config fields"
-msgstr ""
+#: ../src/app.php:90
+msgid "Not yet"
+msgstr "Not yet"
 
-#: ../src/apps.php:26
-msgid "Image"
-msgstr ""
+#: ../src/app.php:103
+msgid "Config fields editor"
+msgstr "Config fields editor"
 
-#: ../src/apps.php:26
-msgid "Description"
-msgstr ""
+#: ../src/app.php:112 ../src/runtemplate.php:108
+msgid "Configuration"
+msgstr "Configuration"
 
-#: ../src/apps.php:26
-msgid "Executable"
-msgstr ""
+#: ../src/app.php:115
+msgid "Application Log"
+msgstr "Application Log"
 
-#: ../src/apps.php:26
-msgid "Modified"
-msgstr ""
+#: ../src/app.php:116
+msgid "All Application Jobs history"
+msgstr "All Application Jobs history"
 
-#: ../src/apps.php:29
-msgid "Icon"
-msgstr ""
+#: ../src/app.php:118
+msgid "Export"
+msgstr "Export"
 
-#: ../src/apps.php:33 ../src/flexibees.php:40
-msgid "AbraFlexi Instances"
-msgstr ""
+#: ../src/companies.php:24
+#| msgid "Company with no ID"
+msgid "Company list"
+msgstr "Company list"
 
-#: ../src/apps.php:33 ../src/flexibees.php:40
-msgid "Register new"
-msgstr ""
+#: ../src/companies.php:37
+msgid "Tasks"
+msgstr "Tasks"
 
-#: ../src/company.php:26
-msgid "Company Saved"
-msgstr ""
+#: ../src/companies.php:39
+msgid "Delete"
+msgstr "Delete"
 
-#: ../src/company.php:30
-msgid "Error saving Company"
-msgstr ""
+#: ../src/company.php:58
+msgid "Run template"
+msgstr "Run template"
 
-#: ../src/company.php:71
+#: ../src/company.php:58
+msgid "Schedule Launch"
+msgstr "Schedule Launch"
+
+#: ../src/company.php:68 ../src/job.php:92
+msgid "Cancel"
+msgstr "Cancel"
+
+#: ../src/company.php:139
+msgid "job queue"
+msgstr "job queue"
+
+#: ../src/companyapp.php:47
 msgid "Assigned applications"
-msgstr ""
+msgstr "Assigned applications"
 
-#: ../src/conffield.php:19
-msgid "Config Fields"
-msgstr ""
+#: ../src/companyapp.php:93
+msgid "new"
+msgstr "new"
 
-#: ../src/conffield.php:32
+#: ../src/companyapps.php:46
+#, php-format
+msgid "Choose Applications to use with %s company"
+msgstr "Choose Applications to use with %s company"
+
+#: ../src/companycreds.php:73
+#| msgid "Create new %s"
+msgid "Create"
+msgstr "Create"
+
+#: ../src/companydelete.php:44
+#| msgid "Company created"
+msgid "Company Deleted"
+msgstr "Company Deleted"
+
+#: ../src/companydelete.php:47
+msgid "Error deleting Company"
+msgstr "Error deleting Company"
+
+#: ../src/companysetup.php:41
+msgid "Company Saved"
+msgstr "Company Saved"
+
+#: ../src/companysetup.php:48
+msgid "Error saving Company"
+msgstr "Error saving Company"
+
+#: ../src/companysetup.php:76
+msgid "Delete company"
+msgstr "Delete company"
+
+#: ../src/conffield.php:43 ../src/credential.php:31
+#: ../src/credentialtype.php:32
 #, php-format
 msgid "%d used configurations removed"
-msgstr ""
+msgstr "%d used configurations removed"
 
-#: ../src/conffield.php:35
+#: ../src/conffield.php:46
 msgid "Configuration removed"
-msgstr ""
+msgstr "Configuration removed"
 
-#: ../src/conffield.php:42
+#: ../src/conffield.php:52
 msgid "Config field Saved"
-msgstr ""
+msgstr "Config field Saved"
 
-#: ../src/conffield.php:44
+#: ../src/conffield.php:54
 msgid "Error saving Config field"
-msgstr ""
+msgstr "Error saving Config field"
 
-#: ../src/conffield.php:53
+#: ../src/conffield.php:64
 msgid "App custom configuration fields"
-msgstr ""
+msgstr "App custom configuration fields"
 
-#: ../src/conffield.php:71
+#: ../src/conffield.php:68
+msgid "Config Fields"
+msgstr "Config Fields"
+
+#: ../src/conffield.php:84
 msgid "Back to app"
-msgstr ""
+msgstr "Back to app"
 
-#: ../src/createaccount.php:15
-msgid "Creating first administrator"
-msgstr ""
+#: ../src/createaccount.php:21
+msgid "No Administrator found"
+msgstr "No Administrator found"
 
-#: ../src/createaccount.php:39
+#: ../src/createaccount.php:44
 msgid "invalid mail address"
-msgstr ""
+msgstr "invalid mail address"
 
-#: ../src/createaccount.php:46
+#: ../src/createaccount.php:53
 #, php-format
 msgid "Mail address %s is already registered"
-msgstr ""
+msgstr "Mail address %s is already registered"
 
-#: ../src/createaccount.php:54
+#: ../src/createaccount.php:63
 msgid "password is too short"
-msgstr ""
-
-#: ../src/createaccount.php:57
-msgid "Password control does not match"
-msgstr ""
+msgstr "password is too short"
 
 #: ../src/createaccount.php:66
+msgid "Password control does not match"
+msgstr "Password control does not match"
+
+#: ../src/createaccount.php:76
 #, php-format
 msgid "Username %s is used. Please choose another one"
-msgstr ""
-
-#: ../src/createaccount.php:83
-msgid "Admin account created"
-msgstr ""
-
-#: ../src/createaccount.php:87
-msgid "User account created"
-msgstr ""
-
-#: ../src/createaccount.php:93
-msgid "Sign On info"
-msgstr ""
+msgstr "Username %s is used. Please choose another one"
 
 #: ../src/createaccount.php:95
+msgid "Admin account created"
+msgstr "Admin account created"
+
+#: ../src/createaccount.php:99
+msgid "User account created"
+msgstr "User account created"
+
+#: ../src/createaccount.php:106
+msgid "Sign On info"
+msgstr "Sign On info"
+
+#: ../src/createaccount.php:109
 #, php-format
 msgid "Your new %s account:"
-msgstr ""
+msgstr "Your new %s account:"
 
-#: ../src/createaccount.php:101
+#: ../src/createaccount.php:122
 #, php-format
 msgid "New Sign On to %s: %s"
-msgstr ""
+msgstr "New Sign On to %s: %s"
 
-#: ../src/createaccount.php:104
-msgid "New User:\n"
-msgstr ""
+#: ../src/createaccount.php:128
+#| msgid "New %s"
+msgid "New User"
+msgstr "New User"
 
-#: ../src/createaccount.php:113
+#: ../src/createaccount.php:144
 msgid "Administrator create failed"
-msgstr ""
+msgstr "Administrator create failed"
 
-#: ../src/createaccount.php:118
+#: ../src/createaccount.php:148
 msgid "New Administrator"
-msgstr ""
+msgstr "New Administrator"
 
-#: ../src/createaccount.php:120
+#: ../src/createaccount.php:150
 msgid "Singn On"
-msgstr ""
+msgstr "Singn On"
 
-#: ../src/createaccount.php:129
-msgid "Firstname"
-msgstr ""
-
-#: ../src/createaccount.php:133
+#: ../src/createaccount.php:170
 msgid "User name"
-msgstr ""
+msgstr "User name"
 
-#: ../src/createaccount.php:137
+#: ../src/createaccount.php:177
 msgid "Password confirmation"
-msgstr ""
+msgstr "Password confirmation"
 
-#: ../src/createaccount.php:139
+#: ../src/createaccount.php:181
 msgid "eMail address"
-msgstr ""
+msgstr "eMail address"
 
-#: ../src/createaccount.php:143
+#: ../src/createaccount.php:187
 msgid "finish registration"
-msgstr ""
+msgstr "finish registration"
 
-#: ../src/customer.php:29
+#: ../src/credential.php:34 ../src/credentialtype.php:35
+msgid "Credential removed"
+msgstr "Credential removed"
+
+#: ../src/credential.php:42 ../src/credentialtype.php:98
+msgid "Credential field Saved"
+msgstr "Credential field Saved"
+
+#: ../src/credential.php:44 ../src/credentialtype.php:114
+msgid "Error saving Credential field"
+msgstr "Error saving Credential field"
+
+#: ../src/credentialclone.php:35
+msgid "Credential Cloned"
+msgstr "Credential Cloned"
+
+#: ../src/credentialclone.php:37
+msgid "Error saving Credential clone"
+msgstr "Error saving Credential clone"
+
+#: ../src/credentialclone.php:42
+msgid "Credential Clone"
+msgstr "Credential Clone"
+
+#: ../src/credentialclone.php:43
+msgid "Error creating credential clone"
+msgstr "Error creating credential clone"
+
+#: ../src/credentialtype.php:45
+msgid "Field removed"
+msgstr "Field removed"
+
+#: ../src/credentialtype.php:47
+msgid "Error removing field"
+msgstr "Error removing field"
+
+#: ../src/credentialtype.php:86
+#, php-format
+msgid "Saving Credential type %s options"
+msgstr "Saving Credential type %s options"
+
+#: ../src/credentialtype.php:118
+msgid "Duplicate entry detected"
+msgstr "Duplicate entry detected"
+
+#: ../src/credentialtypes.php:22
+msgid "Crednetial Types listing"
+msgstr "Crednetial Types listing"
+
+#: ../src/credtypes.php:22
+msgid "MultiFlexi - Credential Type helpers"
+msgstr "MultiFlexi - Credential Type helpers"
+
+#: ../src/credtypes.php:24
+msgid "Installed CredentialType helper Modules"
+msgstr "Installed CredentialType helper Modules"
+
+#: ../src/customer.php:35
 msgid "Customer Saved"
-msgstr ""
+msgstr "Customer Saved"
 
-#: ../src/customer.php:33
+#: ../src/customer.php:39
 msgid "Error saving Customer"
-msgstr ""
+msgstr "Error saving Customer"
 
-#: ../src/custserviceconfig.php:20
+#: ../src/custserviceconfig.php:31
 msgid "App custom config Fields"
-msgstr ""
+msgstr "App custom config Fields"
 
-#: ../src/custserviceconfig.php:30
-msgid "Config fields Saved"
-msgstr ""
+#: ../src/custserviceconfig.php:56 ../src/newjob.php:74
+msgid "Run Template"
+msgstr "Run Template"
 
-#: ../src/custserviceconfig.php:32
-msgid "Error saving Config fields"
-msgstr ""
+#: ../src/dashboard.php:20
+msgid "Dashboard"
+msgstr "Dashboard"
 
-#: ../src/flexibee.php:19
-msgid "AbraFlexi instance"
-msgstr ""
+#: ../src/envmods.php:22
+msgid "MultiFlexi - Environment Modules"
+msgstr "MultiFlexi - Environment Modules"
 
-#: ../src/flexibee.php:26
-msgid "AbraFlexi instance Saved"
-msgstr ""
+#: ../src/envmods.php:24
+msgid "Installed Environment Modules"
+msgstr "Installed Environment Modules"
 
-#: ../src/flexibee.php:29
-msgid "Error saving AbraFlexi instance"
-msgstr ""
+#: ../src/executors.php:22
+msgid "MultiFlexi - Executor Modules"
+msgstr "MultiFlexi - Executor Modules"
 
-#: ../src/flexibee.php:38
-msgid "New AbraFlexi instance"
-msgstr ""
+#: ../src/executors.php:24
+msgid "Installed Executor Modules"
+msgstr "Installed Executor Modules"
 
-#: ../src/flexibees.php:19
-msgid "Multi AbraFlexi"
-msgstr ""
-
-#: ../src/flexibees.php:26
-msgid "Url"
-msgstr ""
-
-#: ../src/flexibees.php:26 ../src/login.php:63 ../src/passwordrecovery.php:45
-msgid "Username"
-msgstr ""
-
-#: ../src/flexibees.php:26 ../src/flexibees.php:36
-msgid "Add company"
-msgstr ""
-
-#: ../src/index.php:17 ../src/main.php:22
-msgid "MultiFlexi"
-msgstr ""
-
-#: ../src/index.php:20
+#: ../src/index.php:26
 msgid "There is no administrators in the database."
-msgstr ""
+msgstr "There is no administrators in the database."
 
-#: ../src/index.php:21
+#: ../src/index.php:27
 msgid "Create first Administrator Account"
-msgstr ""
+msgstr "Create first Administrator Account"
 
-#: ../src/login.php:55
-msgid "Welcome to MultiFlexi"
-msgstr ""
+#: ../src/index.php:37
+msgid "AI and Human Relationship"
+msgstr "AI and Human Relationship"
 
-#: ../src/login.php:59
-msgid "Sign in"
-msgstr ""
+#: ../src/intervals.php:22
+msgid "Intervals Setup"
+msgstr "Intervals Setup"
 
-#: ../src/login.php:65
-msgid "the username you chose"
-msgstr ""
+#: ../src/intervals.php:25 ../src/periodical.php:64 ../src/periodical.php:67
+msgid "Periodical tasks"
+msgstr "Periodical tasks"
 
-#: ../src/login.php:75 ../src/passwordrecovery.php:56
-msgid "Lost password recovery"
-msgstr ""
+#: ../src/intervals.php:33
+msgid "StopWatch"
+msgstr "StopWatch"
 
-#: ../src/logout.php:32
-msgid "Good bye"
-msgstr ""
+#: ../src/intervals.php:34
+msgid "Minute"
+msgstr "Minute"
 
-#: ../src/logout.php:37
-msgid "Thank you for your patronage and look forward to another visit"
-msgstr ""
+#: ../src/intervals.php:34
+msgid "At which minute to run hourly jobs?"
+msgstr "At which minute to run hourly jobs?"
 
-#: ../src/logs.php:21
+#: ../src/intervals.php:35
+msgid "Hour"
+msgstr "Hour"
+
+#: ../src/intervals.php:35
+msgid "At which hour to run daily jobs?"
+msgstr "At which hour to run daily jobs?"
+
+#: ../src/intervals.php:36 ../src/intervals.php:37 ../src/intervals.php:38
+msgid "Day"
+msgstr "Day"
+
+#: ../src/intervals.php:36
+msgid "Which day of the week to run the weekly tasks?"
+msgstr "Which day of the week to run the weekly tasks?"
+
+#: ../src/intervals.php:37
+msgid "Which day of the month to run the monthly tasks?"
+msgstr "Which day of the month to run the monthly tasks?"
+
+#: ../src/intervals.php:38
+msgid "Which day of the year to run the yearly tasks?"
+msgstr "Which day of the year to run the yearly tasks?"
+
+#: ../src/job.php:22
+msgid "Archived Job Run"
+msgstr "Archived Job Run"
+
+#: ../src/job.php:54
+msgid "Output"
+msgstr "Output"
+
+#: ../src/job.php:54
+msgid "No output"
+msgstr "No output"
+
+#: ../src/job.php:55
+msgid "Errors"
+msgstr "Errors"
+
+#: ../src/job.php:55
+msgid "No errors"
+msgstr "No errors"
+
+#: ../src/job.php:82
+msgid "Artifacts"
+msgstr "Artifacts"
+
+#: ../src/job.php:98 ../src/job.php:100
+msgid "Previous"
+msgstr "Previous"
+
+#: ../src/joblist.php:20
+msgid "Job history"
+msgstr "Job history"
+
+#: ../src/joblist.php:29 ../src/logs.php:29
 msgid "Dismis All"
-msgstr ""
+msgstr "Dismis All"
 
-#: ../src/main.php:26
-msgid "Modules Availble"
-msgstr ""
+#: ../src/launch.php:49
+msgid "App Run"
+msgstr "App Run"
 
-#: ../src/passwordrecovery.php:19
+#: ../src/login.php:67
+msgid "Welcome to MultiFlexi"
+msgstr "Welcome to MultiFlexi"
+
+#: ../src/login.php:71
+msgid "Sign in"
+msgstr "Sign in"
+
+#: ../src/login.php:87
+msgid "the username you chose"
+msgstr "the username you chose"
+
+#: ../src/logout.php:28
+msgid "Good bye"
+msgstr "Good bye"
+
+#: ../src/logout.php:33
+msgid "Thank you for your patronage and look forward to another visit"
+msgstr "Thank you for your patronage and look forward to another visit"
+
+#: ../src/main.php:28
+msgid "Last 20 Jobs"
+msgstr "Last 20 Jobs"
+
+#: ../src/newjob.php:46 ../src/newjob.php:60
+msgid "Launch Form"
+msgstr "Launch Form"
+
+#: ../src/newjob.php:72
+msgid "Schedule Job run"
+msgstr "Schedule Job run"
+
+#: ../src/newjob.php:75 ../src/schedule.php:162
+msgid "Job details"
+msgstr "Job details"
+
+#: ../src/newjob.php:77
+msgid "Job Run Scheduled"
+msgstr "Job Run Scheduled"
+
+#: ../src/passwordrecovery.php:25
 msgid "Please enter your email."
-msgstr ""
+msgstr "Please enter your email."
 
-#: ../src/passwordrecovery.php:28
+#: ../src/passwordrecovery.php:37
 #, php-format
 msgid "unknow email address %s"
-msgstr ""
-
-#: ../src/passwordrecovery.php:39
-#, php-format
-msgid "New password for %s"
-msgstr ""
-
-#: ../src/passwordrecovery.php:43
-msgid "Sign On informations was changed"
-msgstr ""
+msgstr "unknow email address %s"
 
 #: ../src/passwordrecovery.php:50
 #, php-format
+msgid "New password for %s"
+msgstr "New password for %s"
+
+#: ../src/passwordrecovery.php:56
+msgid "Sign On informations was changed"
+msgstr "Sign On informations was changed"
+
+#: ../src/passwordrecovery.php:64
+#, php-format
 msgid "Your new password was sent to %s"
-msgstr ""
+msgstr "Your new password was sent to %s"
 
-#: ../src/passwordrecovery.php:67
+#: ../src/passwordrecovery.php:71
+msgid "Lost password recovery"
+msgstr "Lost password recovery"
+
+#: ../src/passwordrecovery.php:82
 msgid "Tip"
-msgstr ""
+msgstr "Tip"
 
-#: ../src/passwordrecovery.php:70
+#: ../src/passwordrecovery.php:85
 msgid ""
 "Forgot your password? Enter your e-mail address you entered during the "
 "registration and we will send you a new one."
 msgstr ""
+"Forgot your password? Enter your e-mail address you entered during the "
+"registration and we will send you a new one."
 
-#: ../src/passwordrecovery.php:74
+#: ../src/passwordrecovery.php:90
 msgid "Password Recovery"
-msgstr ""
+msgstr "Password Recovery"
 
-#: ../src/passwordrecovery.php:78
+#: ../src/passwordrecovery.php:96
 msgid "Sent New Password"
-msgstr ""
+msgstr "Sent New Password"
 
-#: ../src/passwordrecovery.php:92
+#: ../src/passwordrecovery.php:117
 msgid "Continue"
-msgstr ""
+msgstr "Continue"
 
-#: ../src/user.php:28
-msgid "Uživatel"
-msgstr ""
+#: ../src/periodical.php:72
+msgid "Minutely"
+msgstr "Minutely"
 
-#: ../src/user.php:37
-msgid "Opravdu smazat ?"
-msgstr ""
+#: ../src/periodical.php:88
+msgid "🍏 Apply"
+msgstr "🍏 Apply"
 
-#: ../src/user.php:38
+#: ../src/queue.php:22
+msgid "MultiFlexi Job Queue"
+msgstr "MultiFlexi Job Queue"
+
+#: ../src/runtemplateclone.php:48
+msgid "Runtemplate Clone"
+msgstr "Runtemplate Clone"
+
+#: ../src/runtemplateclone.php:49
+msgid "Error creating runtemplate clone"
+msgstr "Error creating runtemplate clone"
+
+#: ../src/runtemplates.php:22
+msgid "Runtemplates"
+msgstr "Runtemplates"
+
+#: ../src/schedule.php:25
+msgid "Schedule Job"
+msgstr "Schedule Job"
+
+#: ../src/schedule.php:28 ../src/schedule.php:29
+msgid "RunTemplate id not specified"
+msgstr "RunTemplate id not specified"
+
+#: ../src/schedule.php:82
+#, php-format
+msgid "Start after %s"
+msgstr "Start after %s"
+
+#: ../src/schedule.php:84
+#, php-format
+msgid "Seconds to wait: %d"
+msgstr "Seconds to wait: %d"
+
+#: ../src/schedule.php:174
+msgid "Job Canceled"
+msgstr "Job Canceled"
+
+#: ../src/schedule.php:176
+#, php-format
+msgid "remaining %d 🏁 jobs scheduled"
+msgstr "remaining %d 🏁 jobs scheduled"
+
+#: ../src/server.php:31
+msgid "Server instance Saved"
+msgstr "Server instance Saved"
+
+#: ../src/server.php:38
+msgid "Error saving Server instance"
+msgstr "Error saving Server instance"
+
+#: ../src/server.php:44
+msgid "Server instance"
+msgstr "Server instance"
+
+#: ../src/server.php:49
+msgid "New Server instance"
+msgstr "New Server instance"
+
+#: ../src/servers.php:25
+msgid "Server list"
+msgstr "Server list"
+
+#: ../src/servers.php:29
+msgid "Url"
+msgstr "Url"
+
+#: ../src/servers.php:29 ../src/servers.php:40
+msgid "Add company"
+msgstr "Add company"
+
+#: ../src/servers.php:44
+msgid "Server Instances"
+msgstr "Server Instances"
+
+#: ../src/servers.php:44
+msgid "Register new"
+msgstr "Register new"
+
+#: ../src/tasks.php:23
+#| msgid "Company created"
+msgid "Company Tasks"
+msgstr "Company Tasks"
+
+#: ../src/user.php:51
+msgid "Are you sure ?"
+msgstr "Are you sure ?"
+
+#: ../src/user.php:52
 msgid "Ne"
-msgstr ""
+msgstr "Ne"
 
-#: ../src/user.php:39
+#: ../src/user.php:53
 msgid "Ano"
-msgstr ""
-
-#: ../src/users.php:17
-msgid "Přehled uživatelů"
-msgstr ""
-
-#: ../src/users.php:19
-msgid "Uživatelé"
-msgstr ""
+msgstr "Ano"

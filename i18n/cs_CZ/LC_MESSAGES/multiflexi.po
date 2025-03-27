@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MultiFlexi\n"
-"POT-Creation-Date: 2024-11-21 07:13+0100\n"
-"PO-Revision-Date: 2024-11-21 07:24+0100\n"
+"POT-Creation-Date: 2025-03-26 16:54+0100\n"
+"PO-Revision-Date: 2025-03-26 16:59+0100\n"
 "Last-Translator: Vítězslav Dvořák <vitex@vitexsoftware.cz>\n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: ../..\n"
 "X-Poedit-SearchPath-0: ../src\n"
@@ -119,7 +119,7 @@ msgstr "Úkol v RedMine"
 
 #: ../src/MultiFlexi/Action/RedmineIssue.php:42
 msgid "Make Redine issue using Job output"
-msgstr ""
+msgstr "Vytvoř úkol v Redmine z výstupu úlohy"
 
 #: ../src/MultiFlexi/Action/Reschedule.php:30
 msgid "Reschedule"
@@ -207,56 +207,72 @@ msgstr "Zabbix"
 msgid "Send Job Output to Zabbix"
 msgstr ""
 
-#: ../src/MultiFlexi/Action/Zabbix.php:80
+#: ../src/MultiFlexi/Action/Zabbix.php:81
 msgid "Required metrics file not found "
 msgstr "Požadovaný soubor s metrikou nebyl nalezen "
 
-#: ../src/MultiFlexi/Action/Zabbix.php:97
+#: ../src/MultiFlexi/Action/Zabbix.php:87
+#, fuzzy, php-format
+#| msgid "Job metric %s sent to %s as %s: %s"
+msgid "Reported to Zabbix: from %s sent to %s as %s "
+msgstr "Metriky úlohy %s byly zaslány na %s jako %s: %s"
+
+#: ../src/MultiFlexi/Action/Zabbix.php:101
 #, php-format
 msgid "Job metric %s sent to %s as %s: %s"
 msgstr "Metriky úlohy %s byly zaslány na %s jako %s: %s"
 
-#: ../src/MultiFlexi/Action/Zabbix.php:102
-msgid "No Data For zabix provided"
+#: ../src/MultiFlexi/Action/Zabbix.php:106
+#, fuzzy
+#| msgid "No Data For zabix provided"
+msgid "No Data for Zabbix provided"
 msgstr "Nebyla poskytnuta žádná data pro Zabbix"
 
-#: ../src/MultiFlexi/Action/Zabbix.php:130
+#: ../src/MultiFlexi/Action/Zabbix.php:109
+#, fuzzy
+#| msgid "No server specified"
+msgid "No Zabbix server defined"
+msgstr "Sever nebyl určen"
+
+#: ../src/MultiFlexi/Action/Zabbix.php:137
 msgid "Zabbix key"
 msgstr "Klíč Zabbixu"
 
-#: ../src/MultiFlexi/Action/Zabbix.php:130
+#: ../src/MultiFlexi/Action/Zabbix.php:137
 msgid "Zabbix Item key"
 msgstr ""
 
-#: ../src/MultiFlexi/Action/Zabbix.php:131
+#: ../src/MultiFlexi/Action/Zabbix.php:138
 msgid "Metrics file"
 msgstr "Soubor metriky"
 
-#: ../src/MultiFlexi/Action/Zabbix.php:131
+#: ../src/MultiFlexi/Action/Zabbix.php:138
 msgid "File with metrics. Leave empty to send stdout"
 msgstr "Soubor s metrikami. Nechte prázdné pro odeslání standardního výstupu"
 
-#: ../src/MultiFlexi/Action/Zabbix.php:143
+#: ../src/MultiFlexi/Action/Zabbix.php:150
 msgid "Zabbix Server"
 msgstr "Server Zabbixu"
 
-#: ../src/MultiFlexi/Action/Zabbix.php:144
+#: ../src/MultiFlexi/Action/Zabbix.php:151
 msgid "Hostname"
 msgstr "Název Hosta"
 
-#: ../src/MultiFlexi/Api/DefaultApi.php:57
+#: ../src/MultiFlexi/Api/Server/DefaultApi.php:57
 msgid "Token generated"
 msgstr "Token byl vygenerován"
 
-#: ../src/MultiFlexi/Api/DefaultApi.php:60
+#: ../src/MultiFlexi/Api/Server/DefaultApi.php:60
 msgid "Account is disabled"
 msgstr "Účet je zakázán"
 
-#: ../src/MultiFlexi/Api/DefaultApi.php:65 ../src/MultiFlexi/User.php:192
+#: ../src/MultiFlexi/Api/Server/DefaultApi.php:65
+#: ../src/MultiFlexi/User.php:192
 msgid "invalid password"
 msgstr "chybné heslo"
 
-#: ../src/MultiFlexi/Api/DefaultApi.php:70 ../src/MultiFlexi/User.php:199
+#: ../src/MultiFlexi/Api/Server/DefaultApi.php:70
+#: ../src/MultiFlexi/User.php:199
 #, php-format
 msgid "user %s does not exist"
 msgstr "uživatel %s neexistuje"
@@ -280,110 +296,126 @@ msgstr "Příkaz %s není v prohledávané cestě %s"
 msgid "file %s is not executable"
 msgstr "soubor %s není spustitelný"
 
-#: ../src/MultiFlexi/Application.php:285
+#: ../src/MultiFlexi/Application.php:286
 msgid "UUID field not present. "
 msgstr "Chybí políčko UUID . "
 
-#: ../src/MultiFlexi/Application.php:314
+#: ../src/MultiFlexi/Application.php:316
 msgid "Topics field not present. "
 msgstr "Chybí políčko s tématy "
 
-#: ../src/MultiFlexi/Application.php:347
+#: ../src/MultiFlexi/Application.php:350
 #, php-format
 msgid "executable %s not found"
 msgstr "spustitelný soubor %s nenalezen"
 
-#: ../src/MultiFlexi/Application.php:350
+#: ../src/MultiFlexi/Application.php:353
 #, php-format
 msgid "consider: %s"
 msgstr "zvažte: %s"
 
-#: ../src/MultiFlexi/Application.php:368
+#: ../src/MultiFlexi/Application.php:382
 #, php-format
 msgid "The %s does not contain valid json"
 msgstr ""
 
-#: ../src/MultiFlexi/Application.php:398
+#: ../src/MultiFlexi/Application.php:412
 #, php-format
 msgid "Application removal %d %s"
 msgstr "Odstranění aplikace %d %s"
 
-#: ../src/MultiFlexi/Application.php:424
-#, php-format
-msgid "Unassigned from %d companys"
+#: ../src/MultiFlexi/Application.php:438
+#, fuzzy, php-format
+#| msgid "Unassigned from %d companys"
+msgid "Unassigned from %d companies"
 msgstr "Odebráno z %d společnosti"
 
-#: ../src/MultiFlexi/Application.php:433 ../src/MultiFlexi/CompanyApp.php:83
+#: ../src/MultiFlexi/Application.php:447 ../src/MultiFlexi/CompanyApp.php:91
 #, php-format
 msgid "%s Action Config removal"
 msgstr "%s Konfigurací Akcí odstraněno"
 
-#: ../src/MultiFlexi/Application.php:440
-#, php-format
-msgid "%s RunTemplate removal"
+#: ../src/MultiFlexi/Application.php:454
+#, fuzzy, php-format
+#| msgid "%s RunTemplate removal"
+msgid "#%d %s RunTemplate removal"
 msgstr "%s Předloh běhu odstraněno"
 
-#: ../src/MultiFlexi/Application.php:446
+#: ../src/MultiFlexi/Application.php:460
 #, php-format
 msgid "%d Config fields removed"
 msgstr "%d konfiguračních polí odstraněno"
 
-#: ../src/MultiFlexi/Application.php:452
+#: ../src/MultiFlexi/Application.php:466
 #, php-format
 msgid "%d Configurations removed"
 msgstr "%d Konfigurací odstraněno"
 
-#: ../src/MultiFlexi/Application.php:458
+#: ../src/MultiFlexi/Application.php:472
 #, php-format
 msgid "%d Jobs removed"
 msgstr "%d úloh odstraněno"
 
-#: ../src/MultiFlexi/Application.php:487 ../src/MultiFlexi/Customer.php:74
-#: ../src/MultiFlexi/Logger.php:113 ../src/servers.php:29
+#: ../src/MultiFlexi/Application.php:508 ../src/MultiFlexi/Credential.php:196
+#: ../src/MultiFlexi/CredentialType.php:78 ../src/MultiFlexi/Customer.php:72
+#: ../src/MultiFlexi/Logger.php:113 ../src/MultiFlexi/RunTemplate.php:475
+#: ../src/MultiFlexi/ScheduleLister.php:52 ../src/servers.php:29
 msgid "ID"
 msgstr "ID"
 
-#: ../src/MultiFlexi/Application.php:489
+#: ../src/MultiFlexi/Application.php:510
 #: ../src/MultiFlexi/Ui/ConfigurationWizard.php:105
 msgid "Icon"
 msgstr "Ikona"
 
-#: ../src/MultiFlexi/Application.php:490
+#: ../src/MultiFlexi/Application.php:511 ../src/MultiFlexi/Credential.php:198
+#: ../src/MultiFlexi/CredentialType.php:81
+#: ../src/MultiFlexi/RunTemplate.php:478
 #: ../src/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:29
 #: ../src/MultiFlexi/Ui/ConfigurationWizard.php:102
-#: ../src/MultiFlexi/Ui/EnvironmentView.php:33 ../src/servers.php:29
+#: ../src/MultiFlexi/Ui/EnvironmentView.php:33 ../src/companycreds.php:31
+#: ../src/servers.php:29
 msgid "Name"
 msgstr "Jméno"
 
-#: ../src/MultiFlexi/Application.php:491
+#: ../src/MultiFlexi/Application.php:512
 #: ../src/MultiFlexi/Ui/ConfigurationWizard.php:102
 msgid "Description"
 msgstr "Popis"
 
-#: ../src/MultiFlexi/Application.php:492
+#: ../src/MultiFlexi/Application.php:513
 msgid "Version"
 msgstr "Verze"
 
-#: ../src/MultiFlexi/Application.php:493
+#: ../src/MultiFlexi/Application.php:514
 msgid "Topics"
 msgstr "Témata"
 
-#: ../src/MultiFlexi/Application.php:494
+#: ../src/MultiFlexi/Application.php:515
 msgid "Executable"
 msgstr "Binárka"
 
-#: ../src/MultiFlexi/Application.php:495
+#: ../src/MultiFlexi/Application.php:516
+#: ../src/MultiFlexi/CredentialType.php:82
 msgid "UUID"
 msgstr "UUID"
 
-#: ../src/MultiFlexi/Application.php:496
+#: ../src/MultiFlexi/Application.php:517
 msgid "OCI Image"
 msgstr "OCI Obraz"
 
-#: ../src/MultiFlexi/Application.php:528
+#: ../src/MultiFlexi/Application.php:549
 #, php-format
 msgid "the required configuration key `%s` was not filled"
 msgstr "požadovaný konfigurační klíč `%s` nebyl vyplněn"
+
+#: ../src/MultiFlexi/Command/Application.php:56
+msgid "What to do with app"
+msgstr ""
+
+#: ../src/MultiFlexi/Command/Command.php:46
+msgid "No data"
+msgstr "Žádná data"
 
 #: ../src/MultiFlexi/CommonAction.php:96
 msgid "No Configuration required"
@@ -393,170 +425,618 @@ msgstr "Konfigurace nevyžadována"
 msgid "No Action performed"
 msgstr "Žádná akce se neprovedla"
 
-#: ../src/MultiFlexi/CompanyApp.php:63
+#: ../src/MultiFlexi/CompanyApp.php:71
 #, php-format
 msgid "Application %s was assigned to %s company"
 msgstr "Aplikace %s byla přiřazeno ke společnosti %s"
 
-#: ../src/MultiFlexi/CompanyApp.php:88
+#: ../src/MultiFlexi/CompanyApp.php:96
 #, php-format
 msgid "Application %s was unassigned from %s company"
 msgstr "Aplkace %s byla odebrána ze společnosti %s"
 
-#: ../src/MultiFlexi/CompanyJob.php:70 ../src/MultiFlexi/Ui/AppJobsTable.php:34
+#: ../src/MultiFlexi/CompanyJob.php:68 ../src/MultiFlexi/Ui/AppJobsTable.php:34
 #: ../src/MultiFlexi/Ui/AppRow.php:81
 #: ../src/MultiFlexi/Ui/JobHistoryTable.php:47 ../src/app.php:80
-#: ../src/company.php:58 ../src/companyapp.php:84
+#: ../src/company.php:58 ../src/companyapp.php:97
 msgid "Job ID"
 msgstr "ID úlohy"
 
-#: ../src/MultiFlexi/CompanyJob.php:75 ../src/MultiFlexi/Env/Application.php:62
-#: ../src/MultiFlexi/Logger.php:119 ../src/MultiFlexi/Ui/JobHistoryTable.php:44
-#: ../src/app.php:67 ../src/company.php:58 ../src/launch.php:26
+#: ../src/MultiFlexi/CompanyJob.php:73 ../src/MultiFlexi/Env/Application.php:62
+#: ../src/MultiFlexi/Logger.php:119 ../src/MultiFlexi/RunTemplate.php:480
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:44
+#: ../src/MultiFlexi/Ui/SearchSelect.php:30 ../src/app.php:67
+#: ../src/company.php:58 ../src/launch.php:26
 msgid "Application"
 msgstr "Aplikace"
 
-#: ../src/MultiFlexi/CompanyJob.php:83 ../src/MultiFlexi/Ui/AppJobsTable.php:34
+#: ../src/MultiFlexi/CompanyJob.php:81 ../src/MultiFlexi/Ui/AppJobsTable.php:34
 #: ../src/MultiFlexi/Ui/AppRow.php:81
 #: ../src/MultiFlexi/Ui/JobHistoryTable.php:47 ../src/app.php:80
-#: ../src/company.php:58 ../src/companyapp.php:84
+#: ../src/companyapp.php:97
 msgid "Exit Code"
 msgstr "Exit Kód"
 
-#: ../src/MultiFlexi/CompanyJob.php:84
+#: ../src/MultiFlexi/CompanyJob.php:82
 msgid "Standard Output"
 msgstr "Standartní výstup"
 
-#: ../src/MultiFlexi/CompanyJob.php:85
+#: ../src/MultiFlexi/CompanyJob.php:83
 msgid "Standard Error"
 msgstr "Standartní chybový výstup"
 
-#: ../src/MultiFlexi/CompanyJob.php:86
+#: ../src/MultiFlexi/CompanyJob.php:84
 msgid "Job start time"
 msgstr "Čas spuštění úlohy"
 
-#: ../src/MultiFlexi/CompanyJob.php:87
+#: ../src/MultiFlexi/CompanyJob.php:85
 msgid "Job Finish time"
 msgstr "Čas ukončení úlohy"
 
-#: ../src/MultiFlexi/CompanyJob.php:88 ../src/MultiFlexi/Env/Company.php:60
-#: ../src/MultiFlexi/Logger.php:127 ../src/MultiFlexi/Ui/Breadcrumb.php:53
-#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:38
-#: ../src/MultiFlexi/Ui/JobHistoryTable.php:52 ../src/app.php:80
-#: ../src/company.php:24 ../src/companydelete.php:24 ../src/companysetup.php:24
+#: ../src/MultiFlexi/CompanyJob.php:86 ../src/MultiFlexi/Credential.php:199
+#: ../src/MultiFlexi/Env/Company.php:60 ../src/MultiFlexi/Logger.php:127
+#: ../src/MultiFlexi/RunTemplate.php:488
+#: ../src/MultiFlexi/ScheduleLister.php:57
+#: ../src/MultiFlexi/Ui/Breadcrumb.php:53
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:52
+#: ../src/MultiFlexi/Ui/SearchSelect.php:31 ../src/app.php:80
+#: ../src/company.php:24 ../src/companycreds.php:24 ../src/companydelete.php:24
+#: ../src/companysetup.php:24
 msgid "Company"
 msgstr "Společnost"
 
-#: ../src/MultiFlexi/CompanyJob.php:96 ../src/MultiFlexi/Ui/AppJobsTable.php:34
+#: ../src/MultiFlexi/CompanyJob.php:94 ../src/MultiFlexi/Ui/AppJobsTable.php:34
 #: ../src/MultiFlexi/Ui/AppRow.php:81
 #: ../src/MultiFlexi/Ui/JobHistoryTable.php:49 ../src/company.php:58
-#: ../src/companyapp.php:84
+#: ../src/companyapp.php:97
 msgid "Launcher"
 msgstr "Spouštěč"
 
-#: ../src/MultiFlexi/Configuration.php:85
+#: ../src/MultiFlexi/Configuration.php:99
 #: ../src/MultiFlexi/Environmentor.php:151
 #, php-format
 msgid "Setting Environment %s to %s"
 msgstr "Nastavuji prostředí %s na %s"
 
-#: ../src/MultiFlexi/Customer.php:75 ../src/MultiFlexi/Logger.php:115
+#: ../src/MultiFlexi/Credential.php:197 ../src/companycreds.php:31
+#: ../src/servers.php:29
+msgid "Type"
+msgstr "Typ"
+
+#: ../src/MultiFlexi/CredentialProtoType.php:73
+msgid "Choose Provided field"
+msgstr "Volba poskytovaného políčka"
+
+#: ../src/MultiFlexi/CredentialType.php:80 ../src/login.php:66
+msgid "Logo"
+msgstr "Logo"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:32
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:60
+#, fuzzy
+#| msgid "AbraFlexi user login"
+msgid "AbraFlexi Login"
+msgstr "Login do AbraFlexi"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:32
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:35
+msgid "AbraFlexi user login"
+msgstr "Login do AbraFlexi"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:35
+#, fuzzy
+#| msgid "AbraFlexi user password"
+msgid "AbraFlexi Password"
+msgstr "Heslo uživatele AbraFlexi"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:35
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:36
+msgid "AbraFlexi user password"
+msgstr "Heslo uživatele AbraFlexi"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:38
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:72
+#, fuzzy
+#| msgid "AbraFlexi Server URI"
+msgid "AbraFlexi Server URI"
+msgstr "URI Serveru AbraFlexi"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:38
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:37
+#, fuzzy
+#| msgid "AbraFlexi Server URI"
+msgid "AbraFlexi server URI"
+msgstr "URI Serveru AbraFlexi"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:41
+#, fuzzy
+#| msgid "AbraFlexi company code"
+msgid "AbraFlexi Company"
+msgstr "Kód společnosti  AbraFlexi"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:41
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:38
+#, fuzzy
+#| msgid "Company created"
+msgid "Company to be handled"
+msgstr "Společnos byla vytvořena"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:70
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:30
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:31
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:45
+msgid "AbraFlexi"
+msgstr "AbraFlexi"
+
+#: ../src/MultiFlexi/CredentialType/AbraFlexi.php:75
+msgid "AbraFlexi credential type for integration with AbraFlexi API"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/Csas.php:28
+msgid "Česká Spořitelna a.s."
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/Csas.php:33
+msgid "Interact with Erste APIs"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/EnvFile.php:28
+msgid ".env"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/EnvFile.php:28
+#, fuzzy
+#| msgid "Path to Certificate File"
+msgid "Path to .env file"
+msgstr "Cesta k souboru certifikátu"
+
+#: ../src/MultiFlexi/CredentialType/EnvFile.php:55
+#, php-format
+msgid "Value from .env file %s"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/EnvFile.php:61
+#, php-format
+msgid "File %s is not readable"
+msgstr "Soubor %s není čitelný"
+
+#: ../src/MultiFlexi/CredentialType/EnvFile.php:64
+#, fuzzy, php-format
+#| msgid "user %s does not exist"
+msgid "File %s does not exists"
+msgstr "uživatel %s neexistuje"
+
+#: ../src/MultiFlexi/CredentialType/EnvFile.php:67
+msgid ".env file must be filled"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/EnvFile.php:80
+msgid ".env file"
+msgstr ".env soubor"
+
+#: ../src/MultiFlexi/CredentialType/EnvFile.php:85
+#, fuzzy
+#| msgid "%d Configurations removed"
+msgid "Load configuration values from .env file"
+msgstr "%d Konfigurací odstraněno"
+
+#: ../src/MultiFlexi/CredentialType/FioBank.php:32
+#: ../src/MultiFlexi/Ui/Form/FioBank.php:35
+#, fuzzy
+#| msgid "Raiffeisen Bank Account Number"
+msgid "Fio Bank Account Number"
+msgstr "Číslo účtu Raiffeisen banky"
+
+#: ../src/MultiFlexi/CredentialType/FioBank.php:32
+msgid "Number of the Fio Bank account"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/FioBank.php:35
+msgid "Fio Bank Token"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/FioBank.php:35
+msgid "Token for accessing the Fio Bank API"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/FioBank.php:38
+msgid "Fio Token Name"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/FioBank.php:38
+msgid "Name of the token used for identification"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/FioBank.php:66
+#: ../src/MultiFlexi/Ui/Form/FioBank.php:70
+msgid "Fio Bank"
+msgstr "Fio Banka"
+
+#: ../src/MultiFlexi/CredentialType/FioBank.php:71
+msgid "Fio Bank credential type for integration with Fio Bank API"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:32
+#: ../src/MultiFlexi/Ui/Form/Office365.php:35
+#: ../src/MultiFlexi/Ui/Form/Office365.php:51
+msgid "Office 365 Username"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:32
+msgid "Username for Office 365"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:35
+#: ../src/MultiFlexi/Ui/Form/Office365.php:36
+#: ../src/MultiFlexi/Ui/Form/Office365.php:57
+#, fuzzy
+#| msgid "Certificate Password"
+msgid "Office 365 Password"
+msgstr "Heslo certifikátu"
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:35
+#, fuzzy
+#| msgid "Password for Certificate"
+msgid "Password for Office 365"
+msgstr "Heslo pro certifikát"
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:38
+#: ../src/MultiFlexi/Ui/Form/Office365.php:37
+#: ../src/MultiFlexi/Ui/Form/Office365.php:63
+msgid "Office 365 Client ID"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:38
+msgid "Client ID for Office 365 API"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:41
+#: ../src/MultiFlexi/Ui/Form/Office365.php:38
+#: ../src/MultiFlexi/Ui/Form/Office365.php:69
+msgid "Office 365 Secret"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:41
+msgid "Secret for Office 365 API"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:44
+#: ../src/MultiFlexi/Ui/Form/Office365.php:40
+#: ../src/MultiFlexi/Ui/Form/Office365.php:81
+msgid "Office 365 Tenant"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:44
+msgid "Tenant ID for Office 365"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:74
+#: ../src/MultiFlexi/Ui/Form/Office365.php:91
+msgid "Office 365"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/Office365.php:79
+msgid "Credential type for integration with Office 365 API"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:32
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:37
+msgid "Raiffeisen Bank Account Number"
+msgstr "Číslo účtu Raiffeisen banky"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:32
+#, fuzzy
+#| msgid "Raiffeisen Bank Account Number"
+msgid "Number of the Raiffeisen Bank account"
+msgstr "Číslo účtu Raiffeisen banky"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:35
+#, fuzzy
+#| msgid "Account Number"
+msgid "Account Currency"
+msgstr "Číslo bankovního účtu"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:35
+msgid "Currency of the account (e.g., CZK, EUR, USD)"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:38
+#, fuzzy
+#| msgid "Certificate file"
+msgid "Certificate File Path"
+msgstr "Soubor certifikátu"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:38
+#, fuzzy
+#| msgid "Path to Certificate File"
+msgid "Path to the certificate file"
+msgstr "Cesta k souboru certifikátu"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:41
+msgid "Certificate Password"
+msgstr "Heslo certifikátu"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:41
+#, fuzzy
+#| msgid "Password for Certificate"
+msgid "Password for the certificate file"
+msgstr "Heslo pro certifikát"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:44
+msgid "Client ID"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:44
+#, fuzzy
+#| msgid "X-IBM-Client-Id"
+msgid "X-IBM-Client-Id for API access"
+msgstr "X-IBM-Client-Id"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:74
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:33
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:48
+msgid "Raiffeisen Bank Premium API"
+msgstr "Premium API Raiffky"
+
+#: ../src/MultiFlexi/CredentialType/RaiffeisenBank.php:79
+msgid "Credential type for integration with Raiffeisen Bank Premium API"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:32
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:35
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:58
+msgid "Database Connection"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:32
+msgid "Database connection type (e.g., sqlsrv)"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:35
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:36
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:64
+msgid "Database Host"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:35
+msgid "Host of the SQL Server"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:38
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:37
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:70
+msgid "Database Port"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:38
+msgid "Port of the SQL Server"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:41
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:38
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:76
+msgid "Database Name"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:41
+msgid "Name of the database"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:44
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:39
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:82
+#, fuzzy
+#| msgid "Username"
+msgid "Database Username"
+msgstr "Uživatelské jméno"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:44
+msgid "Username for the database"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:47
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:40
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:88
+#, fuzzy
+#| msgid "Certificate Password"
+msgid "Database Password"
+msgstr "Heslo certifikátu"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:47
+#, fuzzy
+#| msgid "Password for Certificate"
+msgid "Password for the database"
+msgstr "Heslo pro certifikát"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:50
+#, fuzzy
+msgid "Database Settings"
+msgstr "Nastavení"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:50
+msgid "Additional database settings (e.g., encrypt=false)"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:82
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:49
+#, fuzzy
+#| msgid "Server"
+msgid "SQL Server"
+msgstr "Server"
+
+#: ../src/MultiFlexi/CredentialType/SQLServer.php:87
+msgid "Credential type for connecting to Microsoft SQL Server"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/VaultWarden.php:27
+msgid "VaultWarden"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/VaultWarden.php:32
+msgid "Use VaultWarden secrets"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:32
+#: ../src/MultiFlexi/Ui/Form/mServer.php:35
+#: ../src/MultiFlexi/Ui/Form/mServer.php:55
+#, fuzzy
+#| msgid "Organization ID"
+msgid "Organization Number"
+msgstr "ID Organizace"
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:32
+msgid "Organization Number for Pohoda"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:35
+#, fuzzy
+#| msgid "mServer Api Endpoint"
+msgid "mServer API Endpoint"
+msgstr "koncový bod API mServeru"
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:35
+msgid "URL of the mServer API"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:38
+#, fuzzy
+#| msgid "REST API Username"
+msgid "mServer API Username"
+msgstr "Uživatelské jméno pro RestAPI"
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:38
+msgid "Username for the mServer API"
+msgstr ""
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:41
+#| msgid "Rest API Password"
+msgid "mServer API Password"
+msgstr "heslo mServer API "
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:41
+#, fuzzy
+#| msgid "Password recovery"
+msgid "Password for the mServer API"
+msgstr "Obnova hesla"
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:70
+#: ../src/MultiFlexi/Ui/Form/mServer.php:30
+#: ../src/MultiFlexi/Ui/Form/mServer.php:31
+#: ../src/MultiFlexi/Ui/Form/mServer.php:46
+#: ../src/MultiFlexi/Ui/ServerTypeSelect.php:29
+msgid "Stormware Pohoda"
+msgstr "Stormware Pohoda"
+
+#: ../src/MultiFlexi/CredentialType/mServer.php:75
+msgid "Credential type for connecting to Stormware Pohoda mServer API"
+msgstr ""
+
+#: ../src/MultiFlexi/Customer.php:73 ../src/MultiFlexi/Logger.php:115
 msgid "Subject"
 msgstr "Předmět"
 
-#: ../src/MultiFlexi/Customer.php:81 ../src/MultiFlexi/Logger.php:114
+#: ../src/MultiFlexi/Customer.php:79 ../src/MultiFlexi/Logger.php:114
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:43
 msgid "Status"
 msgstr "Stav"
 
-#: ../src/MultiFlexi/DBEngine.php:143
+#: ../src/MultiFlexi/DBEngine.php:141
 #, php-format
 msgid "New %s"
 msgstr "Nový %s"
 
-#: ../src/MultiFlexi/DBEngine.php:144
+#: ../src/MultiFlexi/DBEngine.php:142
 #, php-format
 msgid "Edit %s"
 msgstr "Uprav %s"
 
-#: ../src/MultiFlexi/DBEngine.php:145
+#: ../src/MultiFlexi/DBEngine.php:143
 #, php-format
 msgid "Remove %s"
 msgstr "Odstranit %s"
 
-#: ../src/MultiFlexi/DBEngine.php:146
+#: ../src/MultiFlexi/DBEngine.php:144
 #, php-format
 msgid "Create new %s"
 msgstr "Vytvořit nový %s"
 
-#: ../src/MultiFlexi/DBEngine.php:147
+#: ../src/MultiFlexi/DBEngine.php:145
 #, php-format
 msgid "Editing %s"
 msgstr "Upravuji %s"
 
-#: ../src/MultiFlexi/DBEngine.php:148
+#: ../src/MultiFlexi/DBEngine.php:146
 #, php-format
 msgid "Removing %s"
 msgstr "Odstraňuji %s"
 
-#: ../src/MultiFlexi/DBEngine.php:150
+#: ../src/MultiFlexi/DBEngine.php:148
 #, php-format
 msgid "Are you sure you wish to delete %%d row of %s ?"
 msgstr "Opravdu chceš smazat %%d řádků z %s ?"
 
-#: ../src/MultiFlexi/DBEngine.php:194
+#: ../src/MultiFlexi/DBEngine.php:192
 #, php-format
 msgid "Missing ColumnInfo name for %s/%s"
 msgstr "Chybí informace o jménu pro %s/%s"
 
-#: ../src/MultiFlexi/DBEngine.php:202
+#: ../src/MultiFlexi/DBEngine.php:200
 #, php-format
 msgid "Missing ColumnInfo type for %s/%s"
 msgstr "Chybí informace o typu pro %s/%s"
 
-#: ../src/MultiFlexi/DBEngine.php:216
+#: ../src/MultiFlexi/DBEngine.php:214
 msgid "Id"
 msgstr "Id"
 
-#: ../src/MultiFlexi/DBEngine.php:227
+#: ../src/MultiFlexi/DBEngine.php:225
 msgid "Updated"
 msgstr "Aktualizováno"
 
-#: ../src/MultiFlexi/DBEngine.php:237 ../src/MultiFlexi/Logger.php:117
+#: ../src/MultiFlexi/DBEngine.php:235 ../src/MultiFlexi/Logger.php:117
 msgid "Created"
 msgstr "Vytvořeno"
 
-#: ../src/MultiFlexi/DBEngine.php:543
+#: ../src/MultiFlexi/DBEngine.php:533
 #, php-format
 msgid "%s is not valid email"
 msgstr "%s není platným emailem"
 
-#: ../src/MultiFlexi/DBEngine.php:574
+#: ../src/MultiFlexi/DBEngine.php:564
 #, php-format
 msgid "A %s is required"
 msgstr "%s je vyžadován"
 
-#: ../src/MultiFlexi/DBEngine.php:581
+#: ../src/MultiFlexi/DBEngine.php:571
 #, php-format
 msgid "A %s is not unique"
 msgstr "%s není jedinečný"
 
-#: ../src/MultiFlexi/DBEngine.php:723
+#: ../src/MultiFlexi/DBEngine.php:713
 #, php-format
 msgid "Field Type is not set for %s "
 msgstr "Typ políčka není nastaven pr  %s "
 
-#: ../src/MultiFlexi/DBEngine.php:837
+#: ../src/MultiFlexi/DBEngine.php:827
 msgid "Error saving record"
 msgstr "Chyba ukládání záznamu"
 
-#: ../src/MultiFlexi/DBEngine.php:970
+#: ../src/MultiFlexi/DBEngine.php:960
 #, php-format
 msgid "Column \"%s\" of %s without type definition"
 msgstr "Políčko \"%s\" z %s bez definice typu"
 
-#: ../src/MultiFlexi/Env/AbraFlexi.php:74
-msgid "Provide Connection credentials for AbraFlexi"
-msgstr ""
+#: ../src/MultiFlexi/DBEngine.php:1164
+msgid "Yes"
+msgstr "Ano"
+
+#: ../src/MultiFlexi/DBEngine.php:1164
+msgid "No"
+msgstr "Ne"
+
+#: ../src/MultiFlexi/DBEngine.php:1334
+msgid "Dismis"
+msgstr "Zrušit"
 
 #: ../src/MultiFlexi/Env/Application.php:70
 msgid "Provide per Application Custom environment"
@@ -566,16 +1046,17 @@ msgstr ""
 msgid "Provide Information about Current company"
 msgstr ""
 
-#: ../src/MultiFlexi/Env/Logger.php:57
+#: ../src/MultiFlexi/Env/Logger.php:58
 msgid "Logger"
 msgstr "Logovač"
 
-#: ../src/MultiFlexi/Env/Logger.php:65
+#: ../src/MultiFlexi/Env/Logger.php:66
 msgid "Handle Logging for Ease Framework based Applications"
 msgstr ""
 
-#: ../src/MultiFlexi/Env/MultiFlexi.php:52 ../src/index.php:22
-#: ../src/main.php:22 ../src/search.php:72 ../src/template.php:22
+#: ../src/MultiFlexi/Env/MultiFlexi.php:52 ../src/credential.php:56
+#: ../src/index.php:22 ../src/main.php:22 ../src/requirements.php:22
+#: ../src/search.php:123 ../src/status.php:22 ../src/template.php:22
 #: ../src/wizard.php:22
 msgid "MultiFlexi"
 msgstr "MultiFlexi"
@@ -584,8 +1065,8 @@ msgstr "MultiFlexi"
 msgid "Provide Informations about Current running Environment"
 msgstr ""
 
-#: ../src/MultiFlexi/Env/RunTemplate.php:53 ../src/companyapp.php:84
-#: ../src/search.php:68
+#: ../src/MultiFlexi/Env/RunTemplate.php:53
+#: ../src/MultiFlexi/Ui/SearchSelect.php:28 ../src/companyapp.php:97
 msgid "RunTemplate"
 msgstr "PředlohaBěhu"
 
@@ -622,13 +1103,18 @@ msgstr ""
 msgid "Kubernetes"
 msgstr "Kubernet"
 
-#: ../src/MultiFlexi/Executor/Native.php:30
+#: ../src/MultiFlexi/Executor/Native.php:34
 msgid "Native"
 msgstr "Nativní"
 
-#: ../src/MultiFlexi/Executor/Native.php:35
+#: ../src/MultiFlexi/Executor/Native.php:39
 msgid "Run Job on same machine as MultiFlexi itself"
 msgstr "Spusť úlohu na stejném stroji kde běží samo MultiFlexi"
+
+#: ../src/MultiFlexi/Executor/Native.php:120
+#, php-format
+msgid "Process exceeded maximum execution time limit %d seconds"
+msgstr ""
 
 #: ../src/MultiFlexi/Executor/Podman.php:30
 msgid "Podman"
@@ -638,23 +1124,39 @@ msgstr "Podman"
 msgid "Execute jobs in container using Podman"
 msgstr ""
 
-#: ../src/MultiFlexi/Job.php:143
+#: ../src/MultiFlexi/FileStore.php:102
+msgid "uploaded file"
+msgstr ""
+
+#: ../src/MultiFlexi/Job.php:181
 msgid "Job launched without runtemplate ID"
 msgstr ""
 
-#: ../src/MultiFlexi/Job.php:295
+#: ../src/MultiFlexi/Job.php:355
 msgid "Perform initial setup"
 msgstr "Vykonávám počáteční nastavení"
 
-#: ../src/MultiFlexi/Job.php:298
+#: ../src/MultiFlexi/Job.php:358
 msgid "Setup command"
 msgstr "Příkaz pro nastavení"
 
-#: ../src/MultiFlexi/Job.php:577
+#: ../src/MultiFlexi/Job.php:404
+#, fuzzy
+#| msgid "Schedule Job"
+msgid "Scheduling job"
+msgstr "Naplánovat úlohu"
+
+#: ../src/MultiFlexi/Job.php:604
+#, fuzzy
+#| msgid "Result File field"
+msgid "Result file name incorrect"
+msgstr "Pole výsledného souboru"
+
+#: ../src/MultiFlexi/Job.php:656
 msgid "No runtemplate ID proveided"
 msgstr ""
 
-#: ../src/MultiFlexi/Job.php:587
+#: ../src/MultiFlexi/Job.php:666
 #, php-format
 msgid "Requested Executor %s not availble"
 msgstr "Požadovaný vykonávač %s není k dispozici"
@@ -667,41 +1169,98 @@ msgstr "Zpráva"
 msgid "User"
 msgstr "Uživatel"
 
-#: ../src/MultiFlexi/RunTemplate.php:396 ../src/custserviceconfig.php:40
-#: ../src/runtemplate.php:59
+#: ../src/MultiFlexi/RunTemplate.php:422 ../src/custserviceconfig.php:40
+#: ../src/runtemplate.php:102 ../src/runtemplateclone.php:41
+#: ../src/runtemplatepopulate.php:68
 msgid "Config fields Saved"
 msgstr "Konfigurační položka uložena"
 
-#: ../src/MultiFlexi/RunTemplate.php:399 ../src/custserviceconfig.php:43
-#: ../src/runtemplate.php:61
+#: ../src/MultiFlexi/RunTemplate.php:425 ../src/custserviceconfig.php:43
+#: ../src/runtemplate.php:104 ../src/runtemplateclone.php:43
+#: ../src/runtemplatepopulate.php:70
 msgid "Error saving Config fields"
 msgstr "Chyba ukládání konfiguračního políčka"
 
-#: ../src/MultiFlexi/Servers.php:63
+#: ../src/MultiFlexi/RunTemplate.php:476
+#, fuzzy
+#| msgid "Native"
+msgid "Active"
+msgstr "Nativní"
+
+#: ../src/MultiFlexi/RunTemplate.php:477
+#, fuzzy
+#| msgid "Intervals"
+msgid "Interval"
+msgstr "Intervaly"
+
+#: ../src/MultiFlexi/RunTemplate.php:496
+msgid "Delay"
+msgstr ""
+
+#: ../src/MultiFlexi/RunTemplate.php:497 ../src/MultiFlexi/Ui/JobInfo.php:39
+#: ../src/MultiFlexi/Ui/JobScheduleForm.php:77
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:54
+msgid "Executor"
+msgstr "Vykonávač"
+
+#: ../src/MultiFlexi/RunTemplate.php:525
+#: ../src/MultiFlexi/Ui/AppLaunchForm.php:76
+#: ../src/MultiFlexi/Ui/RuntemplateLaunchForm.php:81 ../src/companyapp.php:86
+msgid "Launch now"
+msgstr "Spustit okamžitě"
+
+#: ../src/MultiFlexi/RunTemplate.php:525 ../src/MultiFlexi/Ui/AppInfo.php:44
+#: ../src/MultiFlexi/Ui/IntervalChooser.php:33
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:43 ../src/companyapp.php:86
+msgid "Disabled"
+msgstr "Zakázáno"
+
+#: ../src/MultiFlexi/ScheduleLister.php:53
+msgid "After"
+msgstr ""
+
+#: ../src/MultiFlexi/ScheduleLister.php:54 ../src/MultiFlexi/Ui/JobInfo.php:61
+#: ../src/MultiFlexi/Ui/SearchSelect.php:29
+msgid "Job"
+msgstr "Úloha"
+
+#: ../src/MultiFlexi/ScheduleLister.php:55
+#, fuzzy
+#| msgid "Apps"
+msgid "App"
+msgstr "Appky"
+
+#: ../src/MultiFlexi/ScheduleLister.php:56
+#, fuzzy
+#| msgid "Run template"
+msgid "Runtemplate"
+msgstr "Předloha Běhu"
+
+#: ../src/MultiFlexi/Servers.php:65
 msgid "Instance name cannot be empty"
 msgstr "Jméno instance nemůže být prázdné"
 
-#: ../src/MultiFlexi/Servers.php:71
+#: ../src/MultiFlexi/Servers.php:73
 msgid "Server API URL cannot be empty"
 msgstr "Adresa URL API serveru nemůže být prázdné"
 
-#: ../src/MultiFlexi/Servers.php:79
+#: ../src/MultiFlexi/Servers.php:81
 msgid "Pohoda Server API URL cannot contain port"
 msgstr "API URL Serveru Pohody nemůže obsahovat port"
 
-#: ../src/MultiFlexi/Servers.php:86
+#: ../src/MultiFlexi/Servers.php:88
 msgid "User name cannot be empty"
 msgstr "Jméno uživatele nemůže být prázdné"
 
-#: ../src/MultiFlexi/Servers.php:92
+#: ../src/MultiFlexi/Servers.php:94
 msgid "API User password cannot be empty"
 msgstr "AbraFlexi API Heslo nemůže být prázdné"
 
-#: ../src/MultiFlexi/Servers.php:99
+#: ../src/MultiFlexi/Servers.php:101
 msgid "Company code cannot be empty"
 msgstr "Kód firmy nemůže být prázdný"
 
-#: ../src/MultiFlexi/Servers.php:105
+#: ../src/MultiFlexi/Servers.php:107
 msgid "Server API URL cannot end with slash"
 msgstr "Adresa API URL nemůže končit lomítkem"
 
@@ -726,22 +1285,23 @@ msgid "Edit"
 msgstr "Upravit"
 
 #: ../src/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:46
-#: ../src/createaccount.php:184
+#: ../src/createaccount.php:186
 msgid "Register"
 msgstr "Registrovat"
 
-#: ../src/MultiFlexi/Ui/ActionImage.php:39
+#: ../src/MultiFlexi/Ui/ActionImage.php:44
 msgid "Action not availble"
 msgstr "Akce není dostupná"
 
 #: ../src/MultiFlexi/Ui/ActionsAdministration.php:47
-#: ../src/MultiFlexi/Ui/AppEditorForm.php:49
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:50
 #: ../src/MultiFlexi/Ui/ColumnsForm.php:122
 #: ../src/MultiFlexi/Ui/CompanyEditorForm.php:41
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:83
 #: ../src/MultiFlexi/Ui/CustomAppConfigForm.php:50
 #: ../src/MultiFlexi/Ui/RegisterCustomerForm.php:51
-#: ../src/MultiFlexi/Ui/RegisterServerForm.php:46
-#: ../src/MultiFlexi/Ui/RuntemplateConfigForm.php:65
+#: ../src/MultiFlexi/Ui/RegisterServerForm.php:48
+#: ../src/MultiFlexi/Ui/RuntemplateConfigForm.php:172
 #: ../src/MultiFlexi/Ui/UserForm.php:61
 msgid "Save"
 msgstr "Ulož"
@@ -786,6 +1346,7 @@ msgstr "Ikona Aplikace"
 
 #: ../src/MultiFlexi/Ui/AppEditorForm.php:41
 #: ../src/MultiFlexi/Ui/AppInfo.php:44
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:43
 msgid "Enabled"
 msgstr "Povoleno"
 
@@ -806,29 +1367,30 @@ msgid "Application deploy command"
 msgstr "Příkaz pro instalaci aplikace"
 
 #: ../src/MultiFlexi/Ui/AppEditorForm.php:46
+#, fuzzy
+#| msgid "Requirements"
+msgid "Reuqirements"
+msgstr "Požadavky"
+
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:47
 msgid "Application Universal Unique Identifier"
 msgstr "U"
 
-#: ../src/MultiFlexi/Ui/AppEditorForm.php:47
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:48
 msgid "Topics divided by column"
 msgstr "Témata oddělená čárkou"
 
-#: ../src/MultiFlexi/Ui/AppEditorForm.php:48
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:49
 msgid "Result File field"
 msgstr "Pole výsledného souboru"
 
-#: ../src/MultiFlexi/Ui/AppEditorForm.php:48
+#: ../src/MultiFlexi/Ui/AppEditorForm.php:49
 msgid "When application put its output to file"
 msgstr ""
 
-#: ../src/MultiFlexi/Ui/AppInfo.php:44
-#: ../src/MultiFlexi/Ui/IntervalChooser.php:31
-msgid "Disabled"
-msgstr "Zakázáno"
-
 #: ../src/MultiFlexi/Ui/AppInfo.php:51 ../src/MultiFlexi/Ui/AppRow.php:77
 #: ../src/MultiFlexi/Ui/AppRow.php:98
-#: ../src/MultiFlexi/Ui/ConfiguredFieldBadges.php:41 ../src/companyapp.php:106
+#: ../src/MultiFlexi/Ui/ConfiguredFieldBadges.php:41 ../src/companyapp.php:119
 msgid "Set"
 msgstr "Nastavit"
 
@@ -838,44 +1400,41 @@ msgstr "Pole nastavení"
 
 #: ../src/MultiFlexi/Ui/AppJobsTable.php:34 ../src/MultiFlexi/Ui/AppRow.php:81
 #: ../src/MultiFlexi/Ui/JobHistoryTable.php:48 ../src/app.php:80
-#: ../src/company.php:58 ../src/companyapp.php:84
+#: ../src/company.php:58 ../src/companyapp.php:97
 msgid "Launch time"
 msgstr "Čas spuštění"
 
 #: ../src/MultiFlexi/Ui/AppJobsTable.php:40 ../src/MultiFlexi/Ui/AppRow.php:87
-#: ../src/companyapp.php:90
+#: ../src/companyapp.php:103
 msgid "Not launched yet"
 msgstr "Zatím nespuštěno"
 
 #: ../src/MultiFlexi/Ui/AppJobsTable.php:46 ../src/MultiFlexi/Ui/AppRow.php:93
 #: ../src/MultiFlexi/Ui/JobHistoryTable.php:96
-#: ../src/MultiFlexi/Ui/JobInfo.php:50 ../src/company.php:85
-#: ../src/companyapp.php:96
+#: ../src/MultiFlexi/Ui/JobInfo.php:55 ../src/company.php:84
+#: ../src/companyapp.php:109
 msgid "Timer"
 msgstr "Časovač"
 
-#: ../src/MultiFlexi/Ui/AppJson.php:29 ../src/job.php:39 ../src/job.php:40
+#: ../src/MultiFlexi/Ui/AppJson.php:34 ../src/MultiFlexi/Ui/JobDotEnv.php:34
+#: ../src/MultiFlexi/Ui/RunTemplateDotEnv.php:34 ../src/job.php:54
+#: ../src/job.php:55
 msgid "Download"
 msgstr "Stahnout"
 
 #: ../src/MultiFlexi/Ui/AppLaunchForm.php:76
-#: ../src/MultiFlexi/Ui/RuntemplateLaunchForm.php:81 ../src/companyapp.php:73
-msgid "Launch now"
-msgstr "Spustit okamžitě"
-
-#: ../src/MultiFlexi/Ui/AppLaunchForm.php:76
 #: ../src/MultiFlexi/Ui/AppLaunchForm.php:77 ../src/MultiFlexi/Ui/AppRow.php:61
 #: ../src/MultiFlexi/Ui/LaunchButton.php:31
-#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:40
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:42
 #: ../src/MultiFlexi/Ui/RuntemplateLaunchForm.php:81
 #: ../src/MultiFlexi/Ui/RuntemplateLaunchForm.php:82 ../src/company.php:66
-#: ../src/job.php:46
+#: ../src/job.php:90
 msgid "Launch"
 msgstr "Spustit"
 
 #: ../src/MultiFlexi/Ui/AppLaunchForm.php:77
 #: ../src/MultiFlexi/Ui/RuntemplateLaunchForm.php:82 ../src/company.php:66
-#: ../src/job.php:46
+#: ../src/job.php:90
 msgid "Schedule"
 msgstr "Naplánovat"
 
@@ -891,25 +1450,35 @@ msgstr "Konfigurace úlohy"
 msgid "Configure App Environment"
 msgstr "Nastavení prostředí aplikace"
 
-#: ../src/MultiFlexi/Ui/AppRow.php:98 ../src/companyapp.php:106
+#: ../src/MultiFlexi/Ui/AppRow.php:98 ../src/companyapp.php:119
 msgid "Job History"
 msgstr "Historie úloh"
 
-#: ../src/MultiFlexi/Ui/AppRow.php:99 ../src/companyapp.php:110
+#: ../src/MultiFlexi/Ui/AppRow.php:99 ../src/companyapp.php:123
 msgid "Last 10 jobs"
 msgstr "Posledních 10 úloh"
 
 #: ../src/MultiFlexi/Ui/ApplicationPanel.php:49
 #: ../src/MultiFlexi/Ui/ArchivedJobPanel.php:43
+#: ../src/MultiFlexi/Ui/CredentialForm.php:58 ../src/companycreds.php:31
+#: ../src/companycreds.php:64
 msgid "Used by"
 msgstr "Použito"
 
 #: ../src/MultiFlexi/Ui/ApplicationPanel.php:63
 #: ../src/MultiFlexi/Ui/ArchivedJobPanel.php:56
+#: ../src/MultiFlexi/Ui/CredentialForm.php:94
+#: ../src/MultiFlexi/Ui/CredentialForm.php:97
+#: ../src/MultiFlexi/Ui/CredentialForm.php:99
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:89
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:94
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:96
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:120
 msgid "Remove"
 msgstr "Odstranit"
 
 #: ../src/MultiFlexi/Ui/ApplicationPanel.php:76
+#: ../src/MultiFlexi/Ui/CompanyApplicationPanel.php:63
 msgid "App Jobs"
 msgstr "Úlohy Aplikace"
 
@@ -932,16 +1501,14 @@ msgid "Configure"
 msgstr "Konfigurace"
 
 #: ../src/MultiFlexi/Ui/BootstrapMenu.php:42
-#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:35
 #: ../src/MultiFlexi/Ui/RegisterCustomerForm.php:38
 msgid "Login"
 msgstr "Login"
 
 #: ../src/MultiFlexi/Ui/BootstrapMenu.php:43
-#: ../src/MultiFlexi/Ui/ConfigFields.php:34
-#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:36
+#: ../src/MultiFlexi/Ui/CfgFieldTypeSelect.php:40
 #: ../src/MultiFlexi/Ui/RegisterCustomerForm.php:43
-#: ../src/createaccount.php:171 ../src/login.php:90
+#: ../src/createaccount.php:173 ../src/login.php:90
 #: ../src/passwordrecovery.php:59
 msgid "Password"
 msgstr "Heslo"
@@ -975,6 +1542,40 @@ msgstr "Server"
 msgid "choose Company"
 msgstr "zvolte společnost"
 
+#: ../src/MultiFlexi/Ui/CfgFieldTypeSelect.php:35
+msgid "String"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/CfgFieldTypeSelect.php:36
+msgid "Text"
+msgstr "Text"
+
+#: ../src/MultiFlexi/Ui/CfgFieldTypeSelect.php:37
+msgid "Number"
+msgstr "Číslo"
+
+#: ../src/MultiFlexi/Ui/CfgFieldTypeSelect.php:38
+msgid "Date"
+msgstr "Datum"
+
+#: ../src/MultiFlexi/Ui/CfgFieldTypeSelect.php:39
+#: ../src/MultiFlexi/Ui/RegisterCustomerForm.php:48
+#: ../src/MultiFlexi/Ui/UserForm.php:51 ../src/passwordrecovery.php:99
+msgid "Email"
+msgstr "Email"
+
+#: ../src/MultiFlexi/Ui/CfgFieldTypeSelect.php:41
+msgid "Yes/No"
+msgstr "Ano/Ne"
+
+#: ../src/MultiFlexi/Ui/CfgFieldTypeSelect.php:42
+msgid "File upload"
+msgstr "Nahrání souboru"
+
+#: ../src/MultiFlexi/Ui/CfgFieldTypeSelect.php:43
+msgid "Directory path"
+msgstr ""
+
 #: ../src/MultiFlexi/Ui/ColumnsForm.php:134
 msgid "Save and back"
 msgstr "Ulož a vrať se"
@@ -982,6 +1583,12 @@ msgstr "Ulož a vrať se"
 #: ../src/MultiFlexi/Ui/ColumnsForm.php:146
 msgid "Save and next"
 msgstr "Ulož a pokračuj"
+
+#: ../src/MultiFlexi/Ui/CompanyApplicationPanel.php:50
+#, fuzzy
+#| msgid "RunTemplate"
+msgid "Active RunTemplates"
+msgstr "PředlohaBěhu"
 
 #: ../src/MultiFlexi/Ui/CompanyDbStatus.php:45
 #: ../src/MultiFlexi/Ui/DbStatus.php:43
@@ -1032,16 +1639,17 @@ msgid "Company Logo"
 msgstr "Logo společnosti"
 
 #: ../src/MultiFlexi/Ui/CompanyLogo.php:64
+#: ../src/MultiFlexi/Ui/CredentialTypeLogo.php:74
 msgid "none"
 msgstr "nic"
 
-#: ../src/MultiFlexi/Ui/CompanyPanel.php:40 ../src/companys.php:36
+#: ../src/MultiFlexi/Ui/CompanyPanel.php:40 ../src/companies.php:36
 msgid "Setup"
 msgstr "Nastavení"
 
 #: ../src/MultiFlexi/Ui/CompanyPanel.php:41
-#: ../src/MultiFlexi/Ui/MainMenu.php:74 ../src/MultiFlexi/Ui/MainMenu.php:112
-#: ../src/apps.php:22 ../src/companys.php:38
+#: ../src/MultiFlexi/Ui/MainMenu.php:74 ../src/MultiFlexi/Ui/MainMenu.php:114
+#: ../src/apps.php:22 ../src/companies.php:38
 msgid "Applications"
 msgstr "Aplikace"
 
@@ -1054,6 +1662,11 @@ msgstr "Opakované úlohy"
 #| msgid "Launch after"
 msgid "Launch wizard"
 msgstr "Spustit po"
+
+#: ../src/MultiFlexi/Ui/CompanyPanel.php:44
+#: ../src/MultiFlexi/Ui/MainMenu.php:136 ../src/credentials.php:21
+msgid "Credentials"
+msgstr ""
 
 #: ../src/MultiFlexi/Ui/ConfFieldsForm.php:40
 msgid "New config field type"
@@ -1084,36 +1697,6 @@ msgstr "Aktualizovat"
 msgid "Add"
 msgstr "Přidat"
 
-#: ../src/MultiFlexi/Ui/ConfigFields.php:30
-msgid "Text"
-msgstr "Text"
-
-#: ../src/MultiFlexi/Ui/ConfigFields.php:31
-msgid "Number"
-msgstr "Číslo"
-
-#: ../src/MultiFlexi/Ui/ConfigFields.php:32
-msgid "Date"
-msgstr "Datum"
-
-#: ../src/MultiFlexi/Ui/ConfigFields.php:33
-#: ../src/MultiFlexi/Ui/RegisterCustomerForm.php:48
-#: ../src/MultiFlexi/Ui/UserForm.php:51 ../src/passwordrecovery.php:99
-msgid "Email"
-msgstr "Email"
-
-#: ../src/MultiFlexi/Ui/ConfigFields.php:35
-msgid "Yes/No"
-msgstr "Ano/Ne"
-
-#: ../src/MultiFlexi/Ui/ConfigFields.php:36
-msgid "File upload"
-msgstr "Nahrání souboru"
-
-#: ../src/MultiFlexi/Ui/ConfigFields.php:37
-msgid "Directory path"
-msgstr ""
-
 #: ../src/MultiFlexi/Ui/ConfigFieldsView.php:42
 msgid "Requied"
 msgstr "Requied"
@@ -1134,14 +1717,109 @@ msgstr "Konfigurace Aplikace"
 msgid "Launch Application"
 msgstr "Spustit Aplikaci"
 
-#: ../src/MultiFlexi/Ui/ConfigurationWizard.php:90 ../src/job.php:59
-#: ../src/job.php:61
+#: ../src/MultiFlexi/Ui/ConfigurationWizard.php:90 ../src/job.php:106
+#: ../src/job.php:108
 msgid "Next"
 msgstr "Následující"
 
 #: ../src/MultiFlexi/Ui/ConfigurationWizard.php:102
 msgid "Image"
 msgstr "Obrázek"
+
+#: ../src/MultiFlexi/Ui/CredentialCloneForm.php:27
+#: ../src/MultiFlexi/Ui/CredentialCloneForm.php:30
+#: ../src/MultiFlexi/Ui/RuntemplateCloneForm.php:27
+#: ../src/MultiFlexi/Ui/RuntemplateCloneForm.php:30
+msgid "Clone"
+msgstr "Klon"
+
+#: ../src/MultiFlexi/Ui/CredentialCloneForm.php:29
+#: ../src/MultiFlexi/Ui/RuntemplateCloneForm.php:29
+msgid "Save as copy"
+msgstr "Ulož jako kopii"
+
+#: ../src/MultiFlexi/Ui/CredentialForm.php:33
+msgid "Please Select Credential type form"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/CredentialForm.php:44
+#, fuzzy
+#| msgid "Delete company"
+msgid "Please Select Company"
+msgstr "Smazat společnost"
+
+#: ../src/MultiFlexi/Ui/CredentialForm.php:51
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:35
+msgid "Credential Name"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/CredentialForm.php:91
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:86 ../src/actions.php:65
+#: ../src/companyapps.php:50 ../src/intervals.php:49
+msgid "Apply"
+msgstr "Uplatnit"
+
+#: ../src/MultiFlexi/Ui/CredentialSelect.php:45
+msgid "Do not use"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/CredentialTypeClassSelect.php:47
+msgid "No CredentialType helper used"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:36
+msgid "Credential UUID"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:38
+msgid "Credential type Helper Class"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:43
+#, fuzzy
+#| msgid "No Fields required"
+msgid "Fields provided"
+msgstr "Žádná políčka nejsou vyžadována"
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:56
+#, fuzzy
+#| msgid "Assigned"
+msgid "Already assigned"
+msgstr "Přiřazeno"
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:58
+#, fuzzy
+#| msgid "Add new field"
+msgid "Add Field to "
+msgstr "Přidat nové pole"
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:108
+#, fuzzy
+#| msgid "First Name"
+msgid "Field Name"
+msgstr "Jméno"
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:109
+msgid "Field Type"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:110
+msgid "Field Hint"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:111
+#, fuzzy
+#| msgid "Default Value"
+msgid "Field Default Value"
+msgstr "Výchozí hodnota"
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:114
+msgid "Helper Class field"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/CredentialTypeForm.php:116
+msgid "No Helper Class chosen yet"
+msgstr ""
 
 #: ../src/MultiFlexi/Ui/CustomAppEnvironmentView.php:50
 msgid "unset"
@@ -1151,22 +1829,34 @@ msgstr "odnastavit"
 msgid "Choose customer"
 msgstr "Zvol zákazníka"
 
+#: ../src/MultiFlexi/Ui/DBDataTable.php:115
+msgid "Reload"
+msgstr "Obnovit"
+
+#: ../src/MultiFlexi/Ui/DBDataTable.php:131
+msgid "Filter"
+msgstr "Filtrovat"
+
+#: ../src/MultiFlexi/Ui/DBDataTable.php:348
+msgid "All pages"
+msgstr "Všechny stránky"
+
 #: ../src/MultiFlexi/Ui/DbStatus.php:39 ../src/MultiFlexi/Ui/MainMenu.php:82
-#: ../src/app.php:113
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:83 ../src/app.php:113
 msgid "Jobs"
 msgstr "Úlohy"
 
-#: ../src/MultiFlexi/Ui/DbStatus.php:47 ../src/MultiFlexi/Ui/MainMenu.php:132
+#: ../src/MultiFlexi/Ui/DbStatus.php:47
 msgid "Servers"
 msgstr "Servery"
 
-#: ../src/MultiFlexi/Ui/DbStatus.php:51 ../src/MultiFlexi/Ui/MainMenu.php:167
-#: ../src/MultiFlexi/Ui/MainMenu.php:177 ../src/customers.php:27
+#: ../src/MultiFlexi/Ui/DbStatus.php:51 ../src/MultiFlexi/Ui/MainMenu.php:171
+#: ../src/MultiFlexi/Ui/MainMenu.php:181 ../src/customers.php:27
 msgid "Customers"
 msgstr "Zákazníci"
 
 #: ../src/MultiFlexi/Ui/DbStatus.php:55 ../src/MultiFlexi/Ui/MainMenu.php:64
-#: ../src/MultiFlexi/Ui/MainMenu.php:146 ../src/MultiFlexi/Ui/MainMenu.php:156
+#: ../src/MultiFlexi/Ui/MainMenu.php:150 ../src/MultiFlexi/Ui/MainMenu.php:160
 msgid "Companies"
 msgstr "Společnosti"
 
@@ -1174,13 +1864,13 @@ msgstr "Společnosti"
 msgid "Assigned"
 msgstr "Přiřazeno"
 
-#: ../src/MultiFlexi/Ui/DelayChooser.php:31
+#: ../src/MultiFlexi/Ui/DelayChooser.php:36
 msgid ""
 "The amount of seconds, optionally preceded by minutes: or by hours:minutes: "
 "(empty or zero leads for immediate launch)."
 msgstr ""
 
-#: ../src/MultiFlexi/Ui/DelayChooser.php:32
+#: ../src/MultiFlexi/Ui/DelayChooser.php:37
 msgid "hh:mm:ss (leave blank or zero for immediate launch)"
 msgstr ""
 
@@ -1249,6 +1939,11 @@ msgstr "n/a"
 msgid "Default Value"
 msgstr "Výchozí hodnota"
 
+#: ../src/MultiFlexi/Ui/EnvironmentView.php:62
+#, php-format
+msgid "There is no Logo defined for %s Credential Types"
+msgstr ""
+
 #: ../src/MultiFlexi/Ui/EnvsForm.php:34
 msgid "New Configuration Key"
 msgstr "Nový konfigurační klíč"
@@ -1261,163 +1956,241 @@ msgstr "Nová konfigurační hodnota"
 msgid "Save / Add"
 msgstr "Uložit / Přidat"
 
-#: ../src/MultiFlexi/Ui/ExecutorImage.php:39
+#: ../src/MultiFlexi/Ui/ExecutorImage.php:40
 msgid "Executor not availble"
 msgstr "Vykonávač není dostupný"
 
-#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:30
-#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:31
-msgid "AbraFlexi"
-msgstr "AbraFlexi"
+#: ../src/MultiFlexi/Ui/ExecutorImage.php:41
+msgid "Unknown"
+msgstr ""
 
-#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:35
-msgid "AbraFlexi user login"
-msgstr "Login do AbraFlexi"
+#: ../src/MultiFlexi/Ui/FilterDialog.php:67
+#: ../src/MultiFlexi/Ui/FilterDialog.php:96
+msgid "From"
+msgstr "Od"
 
-#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:36
-msgid "AbraFlexi user password"
+#: ../src/MultiFlexi/Ui/FilterDialog.php:80
+#: ../src/MultiFlexi/Ui/FilterDialog.php:106
+msgid "To"
+msgstr "Do"
+
+#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:66
+#, fuzzy
+#| msgid "AbraFlexi user password"
+msgid "AbraFlexi password"
 msgstr "Heslo uživatele AbraFlexi"
 
-#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:37
-msgid "Server URL"
-msgstr "URL Serveru"
+#: ../src/MultiFlexi/Ui/Form/FioBank.php:30
+msgid "Fio Api"
+msgstr ""
 
-#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:37
-#, fuzzy
-#| msgid "AbraFlexi Server URI"
-msgid "AbraFlexi server URI"
-msgstr "URI Serveru AbraFlexi"
+#: ../src/MultiFlexi/Ui/Form/FioBank.php:31
+msgid "Fio Bank API"
+msgstr ""
 
-#: ../src/MultiFlexi/Ui/Form/AbraFlexi.php:38
+#: ../src/MultiFlexi/Ui/Form/FioBank.php:36
+#: ../src/MultiFlexi/Ui/Form/FioBank.php:54
+msgid "Token for account"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/Form/FioBank.php:37
+#: ../src/MultiFlexi/Ui/Form/FioBank.php:60
+msgid "Name of Token used"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/Form/FioBank.php:48
 #, fuzzy
-#| msgid "Company created"
-msgid "Company to be handled"
-msgstr "Společnos byla vytvořena"
+#| msgid "Number of seconds"
+msgid "Number of Account"
+msgstr "Počet sekund"
+
+#: ../src/MultiFlexi/Ui/Form/Office365.php:39
+#: ../src/MultiFlexi/Ui/Form/Office365.php:75
+msgid "Office 365 Client Secret"
+msgstr ""
 
 #: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:32
 msgid "RB Premium Api"
 msgstr "RB Premium Api"
 
-#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:33
-msgid "Raiffeisen Bank Premium API"
-msgstr "Premium API Raiffky"
-
-#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:37
-msgid "Account Number"
-msgstr "Číslo bankovního účtu"
-
-#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:37
-msgid "Raiffeisen Bank Account Number"
-msgstr "Číslo účtu Raiffeisen banky"
-
 #: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:38
 #, fuzzy
-#| msgid "Certificate file"
-msgid "Certificate File"
-msgstr "Soubor certifikátu"
+#| msgid "Raiffeisen Bank Account Number"
+msgid "Raiffeisen Bank Account Currency Code: CZK,EUR,USD,..."
+msgstr "Číslo účtu Raiffeisen banky"
 
-#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:38
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:39
 msgid "Path to Certificate File"
 msgstr "Cesta k souboru certifikátu"
 
-#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:39
-msgid "Certificate Password"
-msgstr "Heslo certifikátu"
-
-#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:39
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:40
 msgid "Password for Certificate"
 msgstr "Heslo pro certifikát"
 
-#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:40
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:41
 msgid "X-IBM-Client-Id"
 msgstr "X-IBM-Client-Id"
 
-#: ../src/MultiFlexi/Ui/IntervalChooser.php:32
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:57
+#, fuzzy
+#| msgid "Account Number"
+msgid "Bank Account Number"
+msgstr "Číslo bankovního účtu"
+
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:63
+msgid "Bank Account Currency"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:69
+#, fuzzy
+#| msgid "Certificate Password"
+msgid "Certificate password"
+msgstr "Heslo certifikátu"
+
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:75
+#, fuzzy
+#| msgid "Path to Certificate File"
+msgid "Path to RB Certificate file"
+msgstr "Cesta k souboru certifikátu"
+
+#: ../src/MultiFlexi/Ui/Form/RaiffeisenBank.php:81
+#, fuzzy
+#| msgid "X-IBM-Client-Id"
+msgid "ClientID"
+msgstr "X-IBM-Client-Id"
+
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:41
+#: ../src/MultiFlexi/Ui/Form/SQLServer.php:94
+msgid "Database Settings like encrypt=false"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/Form/mServer.php:36
+#: ../src/MultiFlexi/Ui/Form/mServer.php:67
+msgid "mServer Api Endpoint"
+msgstr "koncový bod API mServeru"
+
+#: ../src/MultiFlexi/Ui/Form/mServer.php:37
+#, fuzzy
+#| msgid "mServer Api Endpoint"
+msgid "mServer Api Username"
+msgstr "koncový bod API mServeru"
+
+#: ../src/MultiFlexi/Ui/Form/mServer.php:38
+#: ../src/MultiFlexi/Ui/Form/mServer.php:61
+#, fuzzy
+#| msgid "mServer Api Endpoint"
+msgid "mServer Api Pasword"
+msgstr "koncový bod API mServeru"
+
+#: ../src/MultiFlexi/Ui/IntervalChooser.php:34
 msgid "Minutly"
 msgstr "Minutově"
 
-#: ../src/MultiFlexi/Ui/IntervalChooser.php:33 ../src/intervals.php:34
+#: ../src/MultiFlexi/Ui/IntervalChooser.php:35 ../src/intervals.php:34
 #: ../src/periodical.php:73
 msgid "Hourly"
 msgstr "Hodinově"
 
-#: ../src/MultiFlexi/Ui/IntervalChooser.php:34 ../src/intervals.php:35
+#: ../src/MultiFlexi/Ui/IntervalChooser.php:36 ../src/intervals.php:35
 #: ../src/periodical.php:74
 msgid "Daily"
 msgstr "Denně"
 
-#: ../src/MultiFlexi/Ui/IntervalChooser.php:35 ../src/intervals.php:36
+#: ../src/MultiFlexi/Ui/IntervalChooser.php:37 ../src/intervals.php:36
 #: ../src/periodical.php:75
 msgid "Weekly"
 msgstr "Týdně"
 
-#: ../src/MultiFlexi/Ui/IntervalChooser.php:36 ../src/intervals.php:37
+#: ../src/MultiFlexi/Ui/IntervalChooser.php:38 ../src/intervals.php:37
 #: ../src/periodical.php:76
 msgid "Monthly"
 msgstr "Měsíčně"
 
-#: ../src/MultiFlexi/Ui/IntervalChooser.php:37 ../src/intervals.php:38
+#: ../src/MultiFlexi/Ui/IntervalChooser.php:39 ../src/intervals.php:38
 #: ../src/periodical.php:77
 msgid "Yearly"
 msgstr "Ročně"
 
-#: ../src/MultiFlexi/Ui/JobChart.php:81
+#: ../src/MultiFlexi/Ui/JobChart.php:85
 msgid "Last 30 Days jobs"
 msgstr "Úlohy za posledních 30 dní"
 
-#: ../src/MultiFlexi/Ui/JobChart.php:91
+#: ../src/MultiFlexi/Ui/JobChart.php:93
+msgid "Legend"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/JobChart.php:94
 msgid "waiting"
 msgstr "čekající"
 
-#: ../src/MultiFlexi/Ui/JobChart.php:91
+#: ../src/MultiFlexi/Ui/JobChart.php:94
 msgid "fail"
 msgstr "neúspěch"
 
-#: ../src/MultiFlexi/Ui/JobChart.php:91
+#: ../src/MultiFlexi/Ui/JobChart.php:94
 msgid "success"
 msgstr "úspěch"
 
-#: ../src/MultiFlexi/Ui/JobHistoryTable.php:83
+#: ../src/MultiFlexi/Ui/JobChart.php:94
+#, fuzzy
+#| msgid "Description"
+msgid "exception"
+msgstr "Popis"
+
+#: ../src/MultiFlexi/Ui/JobGraph.php:177
+msgid "Job Success/Failure Graph"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/JobHistoryTable.php:83 ../src/company.php:74
 msgid "Job Info"
 msgstr "Info úlohy"
 
-#: ../src/MultiFlexi/Ui/JobInfo.php:33
+#: ../src/MultiFlexi/Ui/JobInfo.php:36
 msgid "Exitcode"
 msgstr "Kód při ukončení"
 
-#: ../src/MultiFlexi/Ui/JobInfo.php:34
+#: ../src/MultiFlexi/Ui/JobInfo.php:37
 msgid "Commandline"
 msgstr "Příkazová řádka"
 
-#: ../src/MultiFlexi/Ui/JobInfo.php:35 ../src/company.php:79
+#: ../src/MultiFlexi/Ui/JobInfo.php:38 ../src/company.php:79
 msgid "Scheduled"
 msgstr "Naplánováno"
 
-#: ../src/MultiFlexi/Ui/JobInfo.php:36
+#: ../src/MultiFlexi/Ui/JobInfo.php:40
 msgid "Begin"
 msgstr "Začátek"
 
-#: ../src/MultiFlexi/Ui/JobInfo.php:39
+#: ../src/MultiFlexi/Ui/JobInfo.php:43
 msgid "Not Yet Started"
 msgstr "Zatím nespuštěno"
 
-#: ../src/MultiFlexi/Ui/JobInfo.php:41
+#: ../src/MultiFlexi/Ui/JobInfo.php:45
 msgid "End"
 msgstr "Konec"
 
-#: ../src/MultiFlexi/Ui/JobInfo.php:44
+#: ../src/MultiFlexi/Ui/JobInfo.php:48
 msgid "Not Yet Ended"
 msgstr "Zatím neukončeno"
 
-#: ../src/MultiFlexi/Ui/JobInfo.php:50 ../src/app.php:80
+#: ../src/MultiFlexi/Ui/JobInfo.php:55 ../src/app.php:80
 msgid "Launched by"
 msgstr "Kým spuštěno"
 
-#: ../src/MultiFlexi/Ui/JobInfo.php:56
-msgid "Job"
-msgstr "Úloha"
+#: ../src/MultiFlexi/Ui/JobInfo.php:67 ../src/app.php:111
+#, fuzzy
+#| msgid "Admin Overview"
+msgid "Overview"
+msgstr "Přehled administrátorů"
 
-#: ../src/MultiFlexi/Ui/JobInfo.php:61
+#: ../src/MultiFlexi/Ui/JobInfo.php:68
+#, fuzzy
+#| msgid "Report endpoint"
+msgid "export .env"
+msgstr "Koncový bod Reportu"
+
+#: ../src/MultiFlexi/Ui/JobInfo.php:70
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:85
 msgid "Environment"
 msgstr "Prostředí"
 
@@ -1430,12 +2203,38 @@ msgid "Launch after"
 msgstr "Spustit po"
 
 #: ../src/MultiFlexi/Ui/JobScheduleForm.php:77
-msgid "Executor"
-msgstr "Vykonávač"
-
-#: ../src/MultiFlexi/Ui/JobScheduleForm.php:77
 msgid "Choose Executon platfom"
 msgstr "Zvolte spouštěcí platformu"
+
+#: ../src/MultiFlexi/Ui/JobSuccessGraph.php:50
+#, fuzzy
+#| msgid "success"
+msgid "Success"
+msgstr "úspěch"
+
+#: ../src/MultiFlexi/Ui/JobSuccessGraph.php:51
+#, fuzzy
+#| msgid "Failed Jobs"
+msgid "Failed"
+msgstr "Nepovedené úlohy"
+
+#: ../src/MultiFlexi/Ui/JobSuccessGraph.php:52
+#, fuzzy
+#| msgid "waiting"
+msgid "Waiting"
+msgstr "čekající"
+
+#: ../src/MultiFlexi/Ui/JobSuccessGraph.php:53
+#, fuzzy
+#| msgid "Actions"
+msgid "Exception"
+msgstr "Akce"
+
+#: ../src/MultiFlexi/Ui/JobSuccessGraph.php:54
+#, fuzzy
+#| msgid "Executable"
+msgid "No Executable"
+msgstr "Binárka"
 
 #: ../src/MultiFlexi/Ui/MainMenu.php:49 ../src/MultiFlexi/Ui/MainMenu.php:62
 msgid "No company registered yet. Please register one."
@@ -1481,55 +2280,104 @@ msgstr "Registruj Aplikaci"
 msgid "Application list"
 msgstr "Seznam aplikací"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:125
-msgid "Register new Server"
+#: ../src/MultiFlexi/Ui/MainMenu.php:111
+#, fuzzy
+#| msgid "RunTemplate"
+msgid "RunTemplates"
+msgstr "PředlohaBěhu"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:127
+#, fuzzy
+#| msgid "Register new Server"
+msgid "Register new Credential"
 msgstr "Registrovant nový server"
 
 #: ../src/MultiFlexi/Ui/MainMenu.php:128
-msgid "Instance list"
-msgstr "Seznam instancí"
+#, fuzzy
+#| msgid "Register new Server"
+msgid "Register new Credential Type"
+msgstr "Registrovant nový server"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:147 ../src/companydelete.php:58
-#: ../src/companysetup.php:75
+#: ../src/MultiFlexi/Ui/MainMenu.php:129
+msgid "Credential types listing"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:132
+msgid "Credentials listing"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:151 ../src/companydelete.php:58
+#: ../src/companysetup.php:64
 msgid "New Company"
 msgstr "Nová společnost"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:147
+#: ../src/MultiFlexi/Ui/MainMenu.php:151
 msgid "Listing"
 msgstr "Přehled"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:165 ../src/customer.php:44
+#: ../src/MultiFlexi/Ui/MainMenu.php:169 ../src/customer.php:44
 msgid "New Customer"
 msgstr "Nový uživatel"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:186
+#: ../src/MultiFlexi/Ui/MainMenu.php:190
 msgid "Admin"
 msgstr "Admin"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:188
+#: ../src/MultiFlexi/Ui/MainMenu.php:192
 msgid "New Admin"
 msgstr "Nový Admin"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:189
+#: ../src/MultiFlexi/Ui/MainMenu.php:193
 msgid "Environment Modules"
 msgstr "Moduly Prostředí"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:190
-#: ../src/MultiFlexi/Ui/RuntemplateConfigForm.php:66
+#: ../src/MultiFlexi/Ui/MainMenu.php:194
+#: ../src/MultiFlexi/Ui/RuntemplateConfigForm.php:173
 msgid "Actions"
 msgstr "Akce"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:191
+#: ../src/MultiFlexi/Ui/MainMenu.php:195
 msgid "Executors"
 msgstr "Vykonávače"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:192
+#: ../src/MultiFlexi/Ui/MainMenu.php:196
+msgid "Credential Type helpers"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:197
 msgid "Intervals"
 msgstr "Intervaly"
 
-#: ../src/MultiFlexi/Ui/MainMenu.php:193
-msgid "Admin Overview"
-msgstr "Přehled administrátorů"
+#: ../src/MultiFlexi/Ui/MainMenu.php:198
+#: ../src/MultiFlexi/Ui/RequirementsOverview.php:27
+msgid "Requirements"
+msgstr "Požadavky"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:199
+#, fuzzy
+#| msgid "job queue"
+msgid "Job queue"
+msgstr "fronta úloh"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:201 ../src/users.php:24
+msgid "Users"
+msgstr "Uživatelé"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:228
+msgid "Click to hide messages"
+msgstr "Klikněte pro skrytí zpráv"
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:253 ../src/MultiFlexi/Ui/MainMenu.php:255
+msgid "Search"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:253
+msgid "#number to jump on record"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/MainMenu.php:294
+msgid " "
+msgstr ""
 
 #: ../src/MultiFlexi/Ui/OpenClipart.php:30
 msgid "Visit OpenClipart.org - the source of most of our images"
@@ -1543,32 +2391,36 @@ msgstr "Projekt na Githubu"
 msgid "LinkedIN Product page"
 msgstr "Stránka produktu na LinkedIn"
 
+#: ../src/MultiFlexi/Ui/PageBottom.php:55
+msgid "Docs"
+msgstr ""
+
 #: ../src/MultiFlexi/Ui/RegisterCustomerForm.php:29
 msgid "First Name"
 msgstr "Jméno"
 
 #: ../src/MultiFlexi/Ui/RegisterCustomerForm.php:33
-#: ../src/MultiFlexi/Ui/UserForm.php:47 ../src/createaccount.php:165
+#: ../src/MultiFlexi/Ui/UserForm.php:47 ../src/createaccount.php:167
 msgid "Lastname"
 msgstr "Příjmení"
 
-#: ../src/MultiFlexi/Ui/RegisterServerForm.php:27
+#: ../src/MultiFlexi/Ui/RegisterServerForm.php:29
 msgid "Server Type"
 msgstr "Typ Serveru"
 
-#: ../src/MultiFlexi/Ui/RegisterServerForm.php:31
+#: ../src/MultiFlexi/Ui/RegisterServerForm.php:33
 msgid "Server instance Name"
 msgstr "Jméno instance Serveru"
 
-#: ../src/MultiFlexi/Ui/RegisterServerForm.php:35
+#: ../src/MultiFlexi/Ui/RegisterServerForm.php:37
 msgid "RestAPI endpoint url"
 msgstr "Koncový bod RestAPI"
 
-#: ../src/MultiFlexi/Ui/RegisterServerForm.php:39
+#: ../src/MultiFlexi/Ui/RegisterServerForm.php:41
 msgid "REST API Username"
 msgstr "Uživatelské jméno pro RestAPI"
 
-#: ../src/MultiFlexi/Ui/RegisterServerForm.php:43
+#: ../src/MultiFlexi/Ui/RegisterServerForm.php:45
 msgid "Rest API Password"
 msgstr "Heslo pro RestAPI"
 
@@ -1576,56 +2428,97 @@ msgstr "Heslo pro RestAPI"
 msgid "None"
 msgstr "Nic"
 
-#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:40
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:42
 #, fuzzy
 #| msgid "Schedule"
 msgid "Manual Schedule"
 msgstr "Naplánovat"
 
-#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:45
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:47
 msgid "Delete !!!"
 msgstr "Smazat !!!"
 
-#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:47
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:49
 msgid "Delete ?"
 msgstr "Smazat ?"
 
-#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:52
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:54
 msgid "automatically schedule in an interval"
 msgstr ""
 
-#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:52
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:54
 msgid "Startup delay"
 msgstr ""
 
-#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:53
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:55
 msgid "Update RunTemplate name"
 msgstr "Aktualizovat název předlohy běhu"
 
-#: ../src/MultiFlexi/Ui/RuntemplateCloneForm.php:27
-#: ../src/MultiFlexi/Ui/RuntemplateCloneForm.php:30
-msgid "Clone"
-msgstr "Klon"
+#: ../src/MultiFlexi/Ui/RunTemplatePanel.php:84
+#, fuzzy
+#| msgid "Actions"
+msgid "Options"
+msgstr "Akce"
 
-#: ../src/MultiFlexi/Ui/RuntemplateCloneForm.php:29
-msgid "Save as copy"
-msgstr "Ulož jako kopii"
+#: ../src/MultiFlexi/Ui/RuntemplateConfigForm.php:92
+#, fuzzy
+#| msgid "New Config value"
+msgid "New Credential"
+msgstr "Nové konfigurační políčka"
 
-#: ../src/MultiFlexi/Ui/RuntemplateConfigForm.php:43
+#: ../src/MultiFlexi/Ui/RuntemplateConfigForm.php:97
+#, fuzzy, php-format
+#| msgid "Executor not availble"
+msgid "Form %s not available"
+msgstr "Vykonávač není dostupný"
+
+#: ../src/MultiFlexi/Ui/RuntemplateConfigForm.php:98
+msgid "New Credential Type"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/RuntemplateConfigForm.php:120
+msgid "ℹ️ Custom Field"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/RuntemplateConfigForm.php:122
 #, fuzzy
 #| msgid "Customer"
 msgid "Custom"
 msgstr "Zákazník"
 
-#: ../src/MultiFlexi/Ui/ServerSelect.php:56
+#: ../src/MultiFlexi/Ui/RuntemplatePopulateForm.php:28
+msgid "Load .env"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/RuntemplatePopulateForm.php:29
+msgid "Populate"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/RuntemplatePopulateForm.php:30
+msgid "Replace Existing"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/SearchSelect.php:32
+msgid "Credential"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/SearchSelect.php:33 ../src/credentialtype.php:155
+msgid "Credential Type"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/SearchSelect.php:34
+msgid "All"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/SearchSelect.php:34
+msgid "slow"
+msgstr ""
+
+#: ../src/MultiFlexi/Ui/ServerSelect.php:58
 msgid "No server specified"
 msgstr "Sever nebyl určen"
 
-#: ../src/MultiFlexi/Ui/ServerTypeSelect.php:27
-msgid "Stormware Pohoda"
-msgstr "Stormware Pohoda"
-
-#: ../src/MultiFlexi/Ui/UserForm.php:43 ../src/createaccount.php:161
+#: ../src/MultiFlexi/Ui/UserForm.php:43 ../src/createaccount.php:163
 msgid "Firstname"
 msgstr "Jméno"
 
@@ -1654,6 +2547,12 @@ msgstr "O Programu"
 msgid "Vitex Software"
 msgstr "Vitex Software"
 
+#: ../src/about.php:47
+msgid ""
+"\n"
+"AI and Human Relationship"
+msgstr ""
+
 #: ../src/actionmodules.php:22
 msgid "MultiFlexi - Action Modules"
 msgstr "MultiFlexi - Moduly akcí"
@@ -1673,10 +2572,6 @@ msgstr "Akce při úspěchu"
 #: ../src/actions.php:57
 msgid "Fail Actions"
 msgstr "Akce při neúspěchu"
-
-#: ../src/actions.php:65 ../src/companyapps.php:50 ../src/intervals.php:49
-msgid "Apply"
-msgstr "Uplatnit"
 
 #: ../src/adhoc.php:33 ../src/companyapps.php:37
 msgid "Applications used by Company"
@@ -1711,13 +2606,7 @@ msgstr "Zatím ne"
 msgid "Config fields editor"
 msgstr "Editor Konfiguračních položek"
 
-#: ../src/app.php:111
-#, fuzzy
-#| msgid "Admin Overview"
-msgid "Overview"
-msgstr "Přehled administrátorů"
-
-#: ../src/app.php:112 ../src/runtemplate.php:65
+#: ../src/app.php:112 ../src/runtemplate.php:108
 msgid "Configuration"
 msgstr "Konfigurace"
 
@@ -1733,6 +2622,18 @@ msgstr "Historie úloh aplikace"
 msgid "Export"
 msgstr "Export"
 
+#: ../src/companies.php:24
+msgid "Company list"
+msgstr "Přehled společností"
+
+#: ../src/companies.php:37
+msgid "Tasks"
+msgstr "Úlohy"
+
+#: ../src/companies.php:39
+msgid "Delete"
+msgstr "Smazat"
+
 #: ../src/company.php:58
 msgid "Run template"
 msgstr "Předloha Běhu"
@@ -1741,11 +2642,11 @@ msgstr "Předloha Běhu"
 msgid "Schedule Launch"
 msgstr "Naplánovat spuštění úlohy"
 
-#: ../src/company.php:68
+#: ../src/company.php:68 ../src/job.php:92
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: ../src/company.php:95
+#: ../src/company.php:139
 msgid "job queue"
 msgstr "fronta úloh"
 
@@ -1753,7 +2654,7 @@ msgstr "fronta úloh"
 msgid "Assigned applications"
 msgstr "Přiřazené aplikace"
 
-#: ../src/companyapp.php:80
+#: ../src/companyapp.php:93
 msgid "new"
 msgstr "nový"
 
@@ -1761,6 +2662,12 @@ msgstr "nový"
 #, php-format
 msgid "Choose Applications to use with %s company"
 msgstr "Zvolte aplikace k použití se společností %s"
+
+#: ../src/companycreds.php:73
+#, fuzzy
+#| msgid "Created"
+msgid "Create"
+msgstr "Vytvořeno"
 
 #: ../src/companydelete.php:44
 msgid "Company Deleted"
@@ -1770,31 +2677,20 @@ msgstr "Společnost byla smazána"
 msgid "Error deleting Company"
 msgstr "Chyba mazání společnosti"
 
-#: ../src/companys.php:24
-msgid "Company list"
-msgstr "Přehled společností"
-
-#: ../src/companys.php:37
-msgid "Tasks"
-msgstr "Úlohy"
-
-#: ../src/companys.php:39
-msgid "Delete"
-msgstr "Smazat"
-
-#: ../src/companysetup.php:52
+#: ../src/companysetup.php:41
 msgid "Company Saved"
 msgstr "Společnost uložen"
 
-#: ../src/companysetup.php:59
+#: ../src/companysetup.php:48
 msgid "Error saving Company"
 msgstr "Chyba ukládání společnosti"
 
-#: ../src/companysetup.php:87
+#: ../src/companysetup.php:76
 msgid "Delete company"
 msgstr "Smazat společnost"
 
-#: ../src/conffield.php:43
+#: ../src/conffield.php:43 ../src/credential.php:31
+#: ../src/credentialtype.php:32
 #, php-format
 msgid "%d used configurations removed"
 msgstr "%d použitých konfigurací bylo odstraněno"
@@ -1807,19 +2703,19 @@ msgstr "Konfigurace odstraněna"
 msgid "Config field Saved"
 msgstr "Konfigurační položka uložena"
 
-#: ../src/conffield.php:55
+#: ../src/conffield.php:54
 msgid "Error saving Config field"
 msgstr "Chyba ukládání požky nastavení"
 
-#: ../src/conffield.php:67
+#: ../src/conffield.php:64
 msgid "App custom configuration fields"
 msgstr "Políčka uživatelské konfigurace aplikace"
 
-#: ../src/conffield.php:71
+#: ../src/conffield.php:68
 msgid "Config Fields"
 msgstr "Konfigurační pole"
 
-#: ../src/conffield.php:87
+#: ../src/conffield.php:84
 msgid "Back to app"
 msgstr "Zpět do apky"
 
@@ -1866,42 +2762,117 @@ msgstr "Přihlašovací údaje"
 msgid "Your new %s account:"
 msgstr "Tvůj nový účet %s:"
 
-#: ../src/createaccount.php:121
+#: ../src/createaccount.php:122
 #, php-format
 msgid "New Sign On to %s: %s"
 msgstr "Nové přihlášení k %s: %s"
 
-#: ../src/createaccount.php:127
+#: ../src/createaccount.php:128
 msgid "New User"
 msgstr "Nový uživatel"
 
-#: ../src/createaccount.php:142
+#: ../src/createaccount.php:144
 msgid "Administrator create failed"
 msgstr "Nepodařilo se vytvořit adminstrátora"
 
-#: ../src/createaccount.php:146
+#: ../src/createaccount.php:148
 msgid "New Administrator"
 msgstr "Nový Administrátor"
 
-#: ../src/createaccount.php:148
+#: ../src/createaccount.php:150
 msgid "Singn On"
 msgstr "Registrace"
 
-#: ../src/createaccount.php:168
+#: ../src/createaccount.php:170
 msgid "User name"
 msgstr "Uživatelské Jméno"
 
-#: ../src/createaccount.php:175
+#: ../src/createaccount.php:177
 msgid "Password confirmation"
 msgstr "Potvrzení hesla"
 
-#: ../src/createaccount.php:179
+#: ../src/createaccount.php:181
 msgid "eMail address"
 msgstr "emailová adresa"
 
-#: ../src/createaccount.php:185
+#: ../src/createaccount.php:187
 msgid "finish registration"
 msgstr "ukončit registraci"
+
+#: ../src/credential.php:34 ../src/credentialtype.php:35
+#, fuzzy
+#| msgid "Configuration removed"
+msgid "Credential removed"
+msgstr "Konfigurace odstraněna"
+
+#: ../src/credential.php:42 ../src/credentialtype.php:98
+#, fuzzy
+#| msgid "Config field Saved"
+msgid "Credential field Saved"
+msgstr "Konfigurační položka uložena"
+
+#: ../src/credential.php:44 ../src/credentialtype.php:114
+#, fuzzy
+#| msgid "Error saving Config field"
+msgid "Error saving Credential field"
+msgstr "Chyba ukládání požky nastavení"
+
+#: ../src/credentialclone.php:35
+msgid "Credential Cloned"
+msgstr ""
+
+#: ../src/credentialclone.php:37
+#, fuzzy
+#| msgid "Error saving record"
+msgid "Error saving Credential clone"
+msgstr "Chyba ukládání záznamu"
+
+#: ../src/credentialclone.php:42
+msgid "Credential Clone"
+msgstr ""
+
+#: ../src/credentialclone.php:43
+#, fuzzy
+#| msgid "Error creating runtemplate clone"
+msgid "Error creating credential clone"
+msgstr "Chyba vytváření klonu předlohy běhu"
+
+#: ../src/credentialtype.php:45
+#, fuzzy
+#| msgid "%d Config fields removed"
+msgid "Field removed"
+msgstr "%d konfiguračních polí odstraněno"
+
+#: ../src/credentialtype.php:47
+#, fuzzy
+#| msgid "Error saving Config field"
+msgid "Error removing field"
+msgstr "Chyba ukládání požky nastavení"
+
+#: ../src/credentialtype.php:86
+#, php-format
+msgid "Saving Credential type %s options"
+msgstr ""
+
+#: ../src/credentialtype.php:118
+msgid "Duplicate entry detected"
+msgstr ""
+
+#: ../src/credentialtypes.php:22
+msgid "Crednetial Types listing"
+msgstr ""
+
+#: ../src/credtypes.php:22
+#, fuzzy
+#| msgid "MultiFlexi - Environment Modules"
+msgid "MultiFlexi - Credential Type helpers"
+msgstr "Moduly prostředí"
+
+#: ../src/credtypes.php:24
+#, fuzzy
+#| msgid "Installed Environment Modules"
+msgid "Installed CredentialType helper Modules"
+msgstr "Instalované moduly prostředí"
 
 #: ../src/customer.php:35
 msgid "Customer Saved"
@@ -1949,9 +2920,9 @@ msgstr "V databázi není zatím žádný administrátor."
 msgid "Create first Administrator Account"
 msgstr "Nejprve vytvořte účet administrátora"
 
-#: ../src/index.php:36
-msgid "Powered by "
-msgstr "Poháněno pomocí "
+#: ../src/index.php:37
+msgid "AI and Human Relationship"
+msgstr ""
 
 #: ../src/intervals.php:22
 msgid "Intervals Setup"
@@ -2003,23 +2974,27 @@ msgstr ""
 msgid "Archived Job Run"
 msgstr "Archivované spuštění úlohy"
 
-#: ../src/job.php:39
+#: ../src/job.php:54
 msgid "Output"
 msgstr "Výstup"
 
-#: ../src/job.php:39
+#: ../src/job.php:54
 msgid "No output"
 msgstr "Žádný výstup"
 
-#: ../src/job.php:40
+#: ../src/job.php:55
 msgid "Errors"
 msgstr "Chyby"
 
-#: ../src/job.php:40
+#: ../src/job.php:55
 msgid "No errors"
 msgstr "Bez chyb"
 
-#: ../src/job.php:51 ../src/job.php:53
+#: ../src/job.php:82
+msgid "Artifacts"
+msgstr ""
+
+#: ../src/job.php:98 ../src/job.php:100
 msgid "Previous"
 msgstr "Předchozí"
 
@@ -2027,13 +3002,13 @@ msgstr "Předchozí"
 msgid "Job history"
 msgstr "Historie úloh"
 
+#: ../src/joblist.php:29 ../src/logs.php:29
+msgid "Dismis All"
+msgstr "Zrušit vśe"
+
 #: ../src/launch.php:49
 msgid "App Run"
 msgstr "Spuštění aplikace"
-
-#: ../src/login.php:66
-msgid "Logo"
-msgstr "Logo"
 
 #: ../src/login.php:67
 msgid "Welcome to MultiFlexi"
@@ -2055,7 +3030,7 @@ msgstr "Nashledanou"
 msgid "Thank you for your patronage and look forward to another visit"
 msgstr "Díky za váš zájem a těším se na další návštěvu"
 
-#: ../src/main.php:26
+#: ../src/main.php:28
 msgid "Last 20 Jobs"
 msgstr "Posledních 20 úloh"
 
@@ -2067,7 +3042,7 @@ msgstr "Spouštěcí Formulář"
 msgid "Schedule Job run"
 msgstr "Naplánování spuštění úlohy"
 
-#: ../src/newjob.php:75 ../src/schedule.php:155
+#: ../src/newjob.php:75 ../src/schedule.php:162
 msgid "Job details"
 msgstr "Podrobnosti úlohy"
 
@@ -2134,13 +3109,21 @@ msgstr "Minutově"
 msgid "🍏 Apply"
 msgstr "🍏 Uplatnit"
 
-#: ../src/runtemplateclone.php:34
+#: ../src/queue.php:22
+msgid "MultiFlexi Job Queue"
+msgstr "MultiFlexi fronta úloh"
+
+#: ../src/runtemplateclone.php:48
 msgid "Runtemplate Clone"
 msgstr "Klon předlohy běhu"
 
-#: ../src/runtemplateclone.php:35
+#: ../src/runtemplateclone.php:49
 msgid "Error creating runtemplate clone"
 msgstr "Chyba vytváření klonu předlohy běhu"
+
+#: ../src/runtemplates.php:22
+msgid "Runtemplates"
+msgstr "Předlohy Běhu"
 
 #: ../src/schedule.php:25
 msgid "Schedule Job"
@@ -2150,9 +3133,25 @@ msgstr "Naplánovat úlohu"
 msgid "RunTemplate id not specified"
 msgstr "Id Předlohy běhu nebylo specifikováno"
 
-#: ../src/schedule.php:167
+#: ../src/schedule.php:82
+#, php-format
+msgid "Start after %s"
+msgstr "Začít po %s"
+
+#: ../src/schedule.php:84
+#, php-format
+#| msgid "Number of Seconds to wait"
+msgid "Seconds to wait: %d"
+msgstr "Čekat: %d vteřin"
+
+#: ../src/schedule.php:174
 msgid "Job Canceled"
 msgstr "Úloha zrušena"
+
+#: ../src/schedule.php:176
+#, php-format
+msgid "remaining %d 🏁 jobs scheduled"
+msgstr "Zbývá %d 🏁 naplánovaných úloh"
 
 #: ../src/server.php:31
 msgid "Server instance Saved"
@@ -2173,10 +3172,6 @@ msgstr "Nová instance serveru"
 #: ../src/servers.php:25
 msgid "Server list"
 msgstr "Přehled serverů"
-
-#: ../src/servers.php:29
-msgid "Type"
-msgstr "Typ"
 
 #: ../src/servers.php:29
 msgid "Url"
@@ -2210,9 +3205,17 @@ msgstr "No"
 msgid "Ano"
 msgstr "Yes"
 
-#: ../src/users.php:24
-msgid "Users"
-msgstr "Uživatelé"
+#~ msgid "Server URL"
+#~ msgstr "URL Serveru"
+
+#~ msgid "Instance list"
+#~ msgstr "Seznam instancí"
+
+#~ msgid "Admin Overview"
+#~ msgstr "Přehled administrátorů"
+
+#~ msgid "Powered by "
+#~ msgstr "Poháněno pomocí "
 
 #~ msgid "build"
 #~ msgstr "sestavení"
@@ -2236,15 +3239,6 @@ msgstr "Uživatelé"
 #~ msgid "Make sure the executable %s exists"
 #~ msgstr "Ujistěte se, že příkaz %s existuje"
 
-#~ msgid "Yes"
-#~ msgstr "Ano"
-
-#~ msgid "No"
-#~ msgstr "Ne"
-
-#~ msgid "Dismis"
-#~ msgstr "Zrušit"
-
 #~ msgid "Company selector"
 #~ msgstr "Volba společnosti"
 
@@ -2258,26 +3252,8 @@ msgstr "Uživatelé"
 #~ msgid "Choose server"
 #~ msgstr "Zvolte server"
 
-#~ msgid "Reload"
-#~ msgstr "Obnovit"
-
-#~ msgid "Filter"
-#~ msgstr "Filtrovat"
-
-#~ msgid "All pages"
-#~ msgstr "Všechny stránky"
-
-#~ msgid "From"
-#~ msgstr "Od"
-
-#~ msgid "To"
-#~ msgstr "Do"
-
 #~ msgid "No server registered yet. Please register one."
 #~ msgstr "Žádný server není zatím registrován. Zaregistrujte prosím nějaký."
-
-#~ msgid "Click to hide messages"
-#~ msgstr "Klikněte pro skrytí zpráv"
 
 #~ msgid "age"
 #~ msgstr "věk"
@@ -2291,9 +3267,6 @@ msgstr "Uživatelé"
 #~ msgid "HomePage"
 #~ msgstr "Domovská stránka"
 
-#~ msgid "Requirements"
-#~ msgstr "Požadavky"
-
 #~ msgid "Command not found"
 #~ msgstr "Příkaz nenalezen"
 
@@ -2302,9 +3275,6 @@ msgstr "Uživatelé"
 
 #~ msgid "Company setup"
 #~ msgstr "Nastavení společnosti"
-
-#~ msgid "Dismis All"
-#~ msgstr "Zrušit vśe"
 
 #, php-format
 #~ msgid "Periodical tasks for %s company"
@@ -2449,9 +3419,6 @@ msgstr "Uživatelé"
 #~ msgid "AbraFlexi comapny code"
 #~ msgstr "Kód společnosti AbraFlexi"
 
-#~ msgid "mServer Api Endpoint"
-#~ msgstr "koncový bod API mServeru"
-
 #~ msgid "Report theme"
 #~ msgstr "Téma reportu"
 
@@ -2566,10 +3533,6 @@ msgstr "Uživatelé"
 
 #~ msgid "Cannot obtain organisation identification number for AbraFlexi %s"
 #~ msgstr "Nemohu získat Ičo pro AbraFlexi %s"
-
-#, fuzzy
-#~ msgid "Settings"
-#~ msgstr "Nastavení"
 
 #, fuzzy
 #~ msgid "Password change"

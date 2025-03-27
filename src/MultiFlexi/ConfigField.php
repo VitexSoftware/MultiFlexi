@@ -26,10 +26,13 @@ class ConfigField
     private string $name;
     private string $description;
     private string $hint;
+    private string $source = '';
+    private string $note = '';
     private ?string $value;
     private string $type;
     private ?string $defaultValue = null;
     private bool $required = false;
+    private bool $isSecret = false; // New property to mark sensitive content
 
     /**
      * ConfigField constructor.
@@ -122,6 +125,35 @@ class ConfigField
     {
         return $this->code;
     }
+
+    public function setSource(string $source): self
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+    public function getSource(): string
+    {
+        return $this->source;
+    }
+    public function setNote(string $note): self
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+    public function getNote(): string
+    {
+        return $this->note;
+    }
+
+    /**
+     * Recognized config fields types.
+     *
+     * @param string $type one of 'string', 'file-path', 'email', 'url', 'integer', 'float', 'bool'
+     *
+     * @throws \InvalidArgumentException
+     */
     public function setType(string $type): self
     {
         $allowedTypes = ['string', 'file-path', 'email', 'url', 'integer', 'float', 'bool'];
@@ -167,9 +199,27 @@ class ConfigField
     }
 
     /**
+     * Set whether the field contains sensitive content.
+     */
+    public function setSecret(bool $isSecret): self
+    {
+        $this->isSecret = $isSecret;
+
+        return $this;
+    }
+
+    /**
+     * Check if the field contains sensitive content.
+     */
+    public function isSecret(): bool
+    {
+        return $this->isSecret;
+    }
+
+    /**
      * Get the configuration field as an array.
      *
-     * @return array<string, string>
+     * @return array<string, bool|string>
      */
     public function getArray(): array
     {
@@ -182,6 +232,9 @@ class ConfigField
             'type' => $this->getType(),
             'defval' => $this->getDefaultValue(),
             'required' => $this->isRequired(),
+            'source' => $this->getSource(),
+            'note' => $this->getNote(),
+            'secret' => $this->isSecret(), // Include the isSecret flag
         ];
     }
 }

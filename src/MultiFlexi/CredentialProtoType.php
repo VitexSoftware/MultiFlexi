@@ -106,4 +106,9 @@ abstract class CredentialProtoType extends \Ease\Sand
     {
         return $this->configFieldsInternal;
     }
+
+    public function query(): ConfigFields
+    {
+        return $this->fieldsProvided();
+    }
 }
