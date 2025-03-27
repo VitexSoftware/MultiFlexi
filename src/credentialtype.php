@@ -158,8 +158,8 @@ if ($addField) {
 
 WebPage::singleton()->addItem(new PageTop(_('Credential Type')));
 
-if(WebPage::getRequestValue('test')){
-    WebPage::singleton()->container->addItem( new CredentialTypeCheck($crtype) );
+if (WebPage::getRequestValue('test')) {
+    WebPage::singleton()->container->addItem(new CredentialTypeCheck($crtype));
 }
 
 WebPage::singleton()->container->addItem(new CredentialTypeForm($crtype));

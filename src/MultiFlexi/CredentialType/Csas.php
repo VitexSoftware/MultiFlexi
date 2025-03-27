@@ -25,7 +25,7 @@ class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\creden
     public function __construct()
     {
         parent::__construct();
-        $envFile = new \MultiFlexi\ConfigField('TOKEN_ID', 'string', _('Token unique identifier'), _('Token UUID'));
+        $envFile = new \MultiFlexi\ConfigField('CSAS_TOKEN_ID', 'string', _('Token unique identifier'), _('Token UUID'));
         $envFile->setHint('71004963-e3d4-471f-96fc-1aef79d17ec1');
 
         $this->configFieldsInternal->addField($envFile);
@@ -77,5 +77,29 @@ class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\creden
     public static function logo(): string
     {
         return 'images/csas-authorize.svg';
+    }
+
+    #[\Override]
+    public function query(): \MultiFlexi\ConfigFields
+    {
+        $tokenUuid = $this->configFieldsInternal->getFieldByCode('CSAS_TOKEN_ID')->getValue();
+        $tmpfile = sys_get_temp_dir().'/'.time().'.env';
+
+        system('csas-access-token -t'.$tokenUuid.' -o'.$tmpfile);
+
+        $envData = EnvFile::readEnvFile($tmpfile);
+
+        foreach (array_keys($this->configFieldsProvided->getFields()) as $configField) {
+            if (\array_key_exists($configField, $envData)) {
+                $this->configFieldsProvided->getFieldByCode($configField)->setValue($envData[$configField]);
+                $this->configFieldsProvided->getFieldByCode($configField)->setSource($tokenUuid);
+                $this->configFieldsProvided->getFieldByCode($configField)->setNote('Spoje-NET/csas-authorize');
+                $this->configFieldsProvided->getFieldByCode($configField)->setValue($envData[$configField]);
+            }
+        }
+
+        unlink($tmpfile);
+        
+        return parent::query();
     }
 }

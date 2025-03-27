@@ -128,20 +128,23 @@ class CredentialType extends DBEngine
     public function getCredTypeFields(self $credentialType): ConfigFields
     {
     }
-    
-    public function query(): ConfigFields  {
-        if($this->getDataValue('class')){
+
+    public function query(): ConfigFields
+    {
+        if ($this->getDataValue('class')) {
             $helperData = $this->getHelper()->query();
             $crtypeFields = $this->getFields();
-            foreach ($crtypeFields as $fieldKey => $field){
+
+            foreach ($crtypeFields as $fieldKey => $field) {
                 $helper = $field->getHelper();
                 $source = $helperData->getFieldByCode($helper);
-                if($source){
+
+                if ($source) {
                     $field->setValue($source->getValue())->setSource($source->getSource())->setNote($source->getNote());
                 }
             }
         }
+
         return $crtypeFields;
     }
-    
 }
