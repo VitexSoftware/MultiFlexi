@@ -35,9 +35,13 @@ class ConfigFields implements \Iterator
         return $this->fields;
     }
 
-    public function addField(ConfigField $filed): void
+    /**
+     * Add Field into stack.
+     */
+    public function addField(ConfigField $field): void
     {
-        $this->fields[$filed->getCode()] = $filed;
+        $code = $field->getCode();
+        $this->fields[$code] = $field;
     }
 
     /**

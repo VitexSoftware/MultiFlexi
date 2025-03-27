@@ -94,24 +94,28 @@ if (WebPage::singleton()->isPosted()) {
     $credentialTypeData = array_diff_key($_POST, $numericFields);
 
     try {
-        if ($crtype->takeData($credentialTypeData) && null !== $crtype->dbsync()) {
-            $crtype->addStatusMessage(_('Credential field Saved'), 'success');
+        if ($credentialTypeData['company_id']) {
+            if ($crtype->takeData($credentialTypeData) && null !== $crtype->dbsync()) {
+                $crtype->addStatusMessage(_('Credential field Saved'), 'success');
 
-            if (isset($new) && \array_key_exists('keyname', $new) && \strlen($new['keyname'])) {
-                $fielder->takeData($new);
-                $fielder->setDataValue('credential_type_id', $crtype->getMyKey());
-                $fielder->insertToSQL();
-            }
-
-            if (isset($numericFields)) {
-                foreach ($numericFields as $columnId => $fields) {
-                    $fielder = new \MultiFlexi\CrTypeField();
-                    $fielder->takeData(array_merge($fields, ['id' => $columnId]));
-                    $fielder->updateToSQL();
+                if (isset($new) && \array_key_exists('keyname', $new) && \strlen($new['keyname'])) {
+                    $fielder->takeData($new);
+                    $fielder->setDataValue('credential_type_id', $crtype->getMyKey());
+                    $fielder->insertToSQL();
                 }
+
+                if (isset($numericFields)) {
+                    foreach ($numericFields as $columnId => $fields) {
+                        $fielder = new \MultiFlexi\CrTypeField();
+                        $fielder->takeData(array_merge($fields, ['id' => $columnId]));
+                        $fielder->updateToSQL();
+                    }
+                }
+            } else {
+                $crtype->addStatusMessage(_('Error saving Credential field'), 'error');
             }
         } else {
-            $crtype->addStatusMessage(_('Error saving Credential field'), 'error');
+            $crtype->addStatusMessage(_('Company must be chosen'), 'info');
         }
     } catch (\PDOException $e) {
         if ($e->getCode() === 23000) { // Integrity constraint violation
@@ -153,6 +157,10 @@ if ($addField) {
 }
 
 WebPage::singleton()->addItem(new PageTop(_('Credential Type')));
+
+if(WebPage::getRequestValue('test')){
+    WebPage::singleton()->container->addItem( new CredentialTypeCheck($crtype) );
+}
 
 WebPage::singleton()->container->addItem(new CredentialTypeForm($crtype));
 

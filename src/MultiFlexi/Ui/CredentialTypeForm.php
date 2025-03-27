@@ -15,8 +15,6 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use Ease\TWB4\SubmitButton;
-
 /**
  * Class CredentialTypeForm.
  *
@@ -30,9 +28,18 @@ class CredentialTypeForm extends \Ease\TWB4\Form
     {
         $this->credType = $credtype;
         $credTypeRow1 = new \Ease\TWB4\Row();
-        $credTypeRow1->addColumn(2, new CredentialTypeLogo($credtype, ['style' => 'height: 200px']));
+        $companyId = $credtype->getDataValue('company_id');
+
+        $logos['helper'] = new CredentialTypeLogo($credtype, ['style' => 'height: 200px'], ['class' => 'img-fluid']);
+
+        if ($companyId) {
+            $logos['company'] = new CompanyLogo(new \MultiFlexi\Company($companyId), ['class' => 'img-fluid']);
+        }
+
+        $credTypeRow1->addColumn(2, $logos);
         $credTypeRow1->addColumn(6, [
             new \Ease\TWB4\FormGroup(_('Credential Name'), new \Ease\Html\InputTextTag('name', $credtype->getRecordName())),
+            new \Ease\TWB4\FormGroup(_('Company'), new CompanySelect('company_id', $companyId)),
             new \Ease\TWB4\FormGroup(_('Credential UUID'), new \Ease\Html\InputTextTag('uuid', $credtype->getDataValue('uuid'), ['disabled'])),
         ]);
         $helperCol = $credTypeRow1->addColumn(4, new \Ease\TWB4\FormGroup(_('Credential type Helper Class'), new CredentialTypeClassSelect('class', [], (string) $credtype->getDataValue('class'))));
@@ -80,10 +87,15 @@ class CredentialTypeForm extends \Ease\TWB4\Form
         parent::__construct(['action' => 'credentialtype.php'], ['method' => 'POST'], $formContents);
         // $this->setTagProperty('enctype', 'multipart/form-data');
 
-        $this->addItem(new SubmitButton(_('Save'), 'success btn-lg btn-block'));
-
         $submitRow = new \Ease\TWB4\Row();
-        $submitRow->addColumn(10, new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'primary btn-lg btn-block'));
+
+        if (null === $credtype->getMyKey()) {
+            $submitRow->addColumn(2, new \Ease\TWB4\LinkButton('#', '🚀 '._('Test'), 'disabled btn-lg btn-block'));
+        } else {
+            $submitRow->addColumn(2, new \Ease\TWB4\LinkButton('credentialtype.php?id='.$credtype->getMyKey().'&test=true', '🚀 '._('Test'), 'success btn-lg btn-block'));
+        }
+
+        $submitRow->addColumn(8, new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'primary btn-lg btn-block'));
 
         if (null === $credtype->getMyKey()) {
             $submitRow->addColumn(2, new \Ease\TWB4\SubmitButton('⚰️ '._('Remove').' !', 'disabled btn-lg btn-block', ['disabled' => 'true']));
@@ -96,6 +108,8 @@ class CredentialTypeForm extends \Ease\TWB4\Form
                 $submitRow->addColumn(2, new \Ease\TWB4\LinkButton('credentialtype.php?id='.$credtype->getMyKey().'&remove=true', '⚰️ '._('Remove').' ?', 'warning btn-lg btn-block'));
             }
         }
+
+        $this->addItem($submitRow);
     }
 
     public function afterAdd(): void

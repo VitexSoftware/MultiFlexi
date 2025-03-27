@@ -53,6 +53,21 @@ class CredentialType extends DBEngine
             unset($data['id']);
         }
 
+        if (\array_key_exists('name', $data) && empty($data['name'])) {
+            $nameparts = [];
+
+            if (\array_key_exists('class', $data) && $data['class']) {
+                $credTypeClass = '\\MultiFlexi\\CredentialType\\'.$data['class'];
+                $nameparts['class'] = $credTypeClass::name();
+            }
+
+            if (\array_key_exists('company_id', $data) && (int) $data['company_id']) {
+                $nameparts['company'] = (new Company((int) $data['company_id']))->getRecordName();
+            }
+
+            $data['name'] = implode(' / ', $nameparts);
+        }
+
         return parent::takeData($data);
     }
 
@@ -113,4 +128,20 @@ class CredentialType extends DBEngine
     public function getCredTypeFields(self $credentialType): ConfigFields
     {
     }
+    
+    public function query(): ConfigFields  {
+        if($this->getDataValue('class')){
+            $helperData = $this->getHelper()->query();
+            $crtypeFields = $this->getFields();
+            foreach ($crtypeFields as $fieldKey => $field){
+                $helper = $field->getHelper();
+                $source = $helperData->getFieldByCode($helper);
+                if($source){
+                    $field->setValue($source->getValue())->setSource($source->getSource())->setNote($source->getNote());
+                }
+            }
+        }
+        return $crtypeFields;
+    }
+    
 }
