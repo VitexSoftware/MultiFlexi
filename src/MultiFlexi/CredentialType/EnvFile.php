@@ -63,7 +63,7 @@ class EnvFile extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\cre
         return $loaded;
     }
 
-    public function readEnvFile(string $filePath): array
+    public static function readEnvFile(string $filePath): array
     {
         if (!file_exists($filePath)) {
             throw new \RuntimeException(sprintf('File %s does not exist', $filePath));
