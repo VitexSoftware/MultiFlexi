@@ -111,14 +111,14 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
      *
      * @param mixed $caller
      */
-    public static function venuize($caller)
+    public static function venuize($caller): string
     {
         switch (\gettype($caller)) {
             case 'object':
                 if (method_exists($caller, 'getObjectName')) {
                     $venue = $caller->getObjectName();
                 } else {
-                    $venue = $caller::class;
+                    $venue = get_class($caller); // Use get_class() instead of ::class
                 }
 
                 break;
