@@ -76,7 +76,10 @@ class CredentialType extends DBEngine
         if (!\is_object($this->helper) && $this->getDataValue('class')) {
             $credTypeClass = '\\MultiFlexi\\CredentialType\\'.$this->getDataValue('class');
             $this->helper = new $credTypeClass();
-            $this->helper->load($this->getMyKey());
+
+            if ($this->getMyKey()) {
+                $this->helper->load($this->getMyKey());
+            }
         }
 
         return $this->helper;
@@ -95,6 +98,7 @@ class CredentialType extends DBEngine
             ['name' => 'logo', 'type' => 'text', 'label' => _('Logo'), 'searchable' => false],
             ['name' => 'name', 'type' => 'text', 'label' => _('Name')],
             ['name' => 'uuid', 'type' => 'text', 'label' => _('UUID')],
+            ['name' => 'company_id', 'type' => 'text', 'label' => _('Company')],
         ]);
     }
 
@@ -106,6 +110,8 @@ class CredentialType extends DBEngine
         if ($data['logo']) {
             $data['logo'] = (string) new \Ease\Html\ImgTag($data['logo'], $data['name'], ['style' => 'height: 50px;']);
         }
+
+        $data['company_id'] = (string) new Ui\CompanyLinkButton(new Company($dataRowRaw['company_id']), ['style' => 'height: 50px;']);
 
         return $data;
     }
@@ -119,6 +125,14 @@ class CredentialType extends DBEngine
             $field = new ConfigFieldWithHelper((string) $fieldData['keyname'], $fieldData['type'], $fieldData['keyname'], (string) $fieldData['description']);
             $field->setHint($fieldData['hint'])->setDefaultValue($fieldData['defval'])->setRequired($fieldData['required'] === 1)->setHelper((string) $fieldData['helper']);
             $field->setMyKey($fieldData['id']);
+
+            if (empty($fieldData['helper']) === false) {
+                $fieldHelper = $this->getHelper()->fieldsProvided()->getFieldByCode($fieldData['helper']);
+                $field->setManual($fieldHelper->isManual());
+                $field->setRequired($fieldHelper->isRequired());
+                $field->setSecret($fieldHelper->isSecret());
+            }
+
             $fields->addField($field);
         }
 

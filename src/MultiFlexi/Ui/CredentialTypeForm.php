@@ -54,7 +54,7 @@ class CredentialTypeForm extends \Ease\TWB4\Form
             foreach ($credtype->getHelper()->fieldsProvided() as $fieldProvided) {
                 $fieldRow = new \Ease\TWB4\Row();
 
-                $fieldRow->addColumn(4, $fieldProvided->getName().'<br>'.$fieldProvided->getType());
+                $fieldRow->addColumn(4, $fieldProvided->getName().'<br>'.($fieldProvided->isRequired() ? _('Required') : _('Optional')).' '.$fieldProvided->getType());
                 $fieldRow->addColumn(6, $fieldProvided->getDescription());
 
                 $flags = new \Ease\Html\SpanTag();
@@ -62,6 +62,10 @@ class CredentialTypeForm extends \Ease\TWB4\Form
                 if (\is_object($assigned->getFieldByCode($fieldProvided->getCode()))) {
                     $flags->addItem(new \Ease\TWB4\LinkButton('#', '➕', 'disabled', ['title' => _('Already assigned')]));
                 } else {
+                    if ($fieldProvided->isRequired()) {
+                        $credtype->addStatusMessage(sprintf(_('The %s field is required for %s'), $fieldProvided->getCode(), $credtype->getHelper()->name()), 'warning');
+                    }
+
                     $flags->addItem(new \Ease\TWB4\LinkButton('?id='.$credtype->getMyKey().'&addField='.$fieldProvided->getCode(), '➕', 'success', ['title' => _('Add Field to ')]));
                 }
 
@@ -75,13 +79,12 @@ class CredentialTypeForm extends \Ease\TWB4\Form
 
         $formContents[] = $credTypeRow1;
 
-        $formContents[] = new \Ease\Html\DivTag($this->credTypeField('new'), ['class' => 'border border-primary rounded']);
+        $formContents[] = new \Ease\Html\DivTag($this->credTypeField('new', new \MultiFlexi\ConfigFieldWithHelper('', 'string', '', '')), ['class' => 'border border-primary rounded']);
 
         $fields = $credtype->getFields();
 
         foreach ($fields as $crTypeField) {
-            $fieldData = $crTypeField->getData();
-            $formContents[] = $this->credTypeField((string) $crTypeField->getMykey(), $fieldData);
+            $formContents[] = $this->credTypeField((string) $crTypeField->getMykey(), $crTypeField);
         }
 
         parent::__construct(['action' => 'credentialtype.php'], ['method' => 'POST'], $formContents);
@@ -116,16 +119,22 @@ class CredentialTypeForm extends \Ease\TWB4\Form
     {
     }
 
-    private function credTypeField(string $credTypeId = 'new', array $fieldData = ['keyname' => '', 'type' => '', 'hint' => '', 'defval' => '', 'helper' => '']): \Ease\TWB4\Row
+    private function credTypeField(string $credTypeId, \MultiFlexi\ConfigFieldWithHelper $field): \Ease\TWB4\Row
     {
         $credTypeFieldRow = new \Ease\TWB4\Row();
-        $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Field Name'), new \Ease\Html\InputTextTag($credTypeId.'[keyname]', $fieldData['keyname'])));
-        $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Field Type'), new CfgFieldTypeSelect($credTypeId.'[type]', $fieldData['type'])));
-        $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Field Hint'), new \Ease\Html\InputTextTag($credTypeId.'[hint]', $fieldData['hint'])));
-        $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Field Default Value'), new \Ease\Html\InputTextTag($credTypeId.'[defval]', $fieldData['defval'])));
 
-        if ($this->credType->getHelper()) {
-            $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Helper Class field'), $this->credType->getHelper()->providedFieldsSelect($credTypeId.'[helper]', $fieldData['helper'])));
+        $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Field Name'), new \Ease\Html\InputTextTag($credTypeId.'[keyname]', $field->getCode())));
+
+        if ($field->isManual()) {
+            $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Field Type'), new CfgFieldTypeSelect($credTypeId.'[type]', $field->getType())));
+            $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Field Hint'), new \Ease\Html\InputTextTag($credTypeId.'[hint]', $field->getHint())));
+            $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Field Default Value'), new \Ease\Html\InputTextTag($credTypeId.'[defval]', $field->getDefaultValue())));
+        }
+
+        $helper = $this->credType->getHelper();
+
+        if ($helper) {
+            $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Helper Class field'), $helper->providedFieldsSelect($credTypeId.'[helper]', $field->getHelper())));
         } else {
             $credTypeFieldRow->addColumn(2, _('No Helper Class chosen yet'));
         }

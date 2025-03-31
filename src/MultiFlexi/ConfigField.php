@@ -33,6 +33,7 @@ class ConfigField
     private ?string $defaultValue = null;
     private bool $required = false;
     private bool $isSecret = false; // New property to mark sensitive content
+    private bool $isManual = true;
 
     /**
      * ConfigField constructor.
@@ -156,7 +157,7 @@ class ConfigField
      */
     public function setType(string $type): self
     {
-        $allowedTypes = ['string', 'file-path', 'email', 'url', 'integer', 'float', 'bool'];
+        $allowedTypes = ['string', 'file-path', 'email', 'url', 'integer', 'float', 'bool', 'password'];
 
         if (!\in_array($type, $allowedTypes, true)) {
             throw new \InvalidArgumentException("Invalid type: {$type}. Allowed types are: ".implode(', ', $allowedTypes));
@@ -217,6 +218,24 @@ class ConfigField
     }
 
     /**
+     * Set whether the field value is populated manually.
+     */
+    public function setManual(bool $isManual): self
+    {
+        $this->isManual = $isManual;
+
+        return $this;
+    }
+
+    /**
+     * Is the field populated manually ?
+     */
+    public function isManual(): bool
+    {
+        return $this->isManual;
+    }
+
+    /**
      * Get the configuration field as an array.
      *
      * @return array<string, bool|string>
@@ -234,7 +253,8 @@ class ConfigField
             'required' => $this->isRequired(),
             'source' => $this->getSource(),
             'note' => $this->getNote(),
-            'secret' => $this->isSecret(), // Include the isSecret flag
+            'secret' => $this->isSecret(),
+            'manual' => $this->isManual(),
         ];
     }
 }
