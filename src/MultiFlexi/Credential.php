@@ -34,9 +34,9 @@ class Credential extends DBEngine
             if ($data['company_id']) {
                 $companer = new Company((int) $data['company_id']);
 
-                $data['name'] = $companer->getRecordName().' '.$data['formType'].' '.$data['id'];
+                $data['name'] = $companer->getRecordName();
             } else {
-                $data['name'] = $data['formType'].' '.$data['id'];
+                $data['name'] = $data['id'];
             }
         }
 

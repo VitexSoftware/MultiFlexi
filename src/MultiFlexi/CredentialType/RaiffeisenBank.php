@@ -71,12 +71,12 @@ class RaiffeisenBank extends \MultiFlexi\CredentialProtoType implements \MultiFl
 
     public static function name(): string
     {
-        return _('Raiffeisen Bank Premium API');
+        return _('Raiffeisen Bank');
     }
 
     public static function description(): string
     {
-        return _('Credential type for integration with Raiffeisen Bank Premium API');
+        return _('Raiffeisen Bank Premium API');
     }
 
     #[\Override]

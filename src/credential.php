@@ -38,9 +38,11 @@ if (null !== $delete) {
 }
 
 if (WebPage::singleton()->isPosted()) {
-    if ($kredenc->takeData($_POST) && null !== $kredenc->dbsync()) {
-        $kredenc->addStatusMessage(_('Credential field Saved'), 'success');
-    } else {
+    try {
+        if ($kredenc->takeData($_POST) && null !== $kredenc->dbsync()) {
+            $kredenc->addStatusMessage(_('Credential field Saved'), 'success');
+        }
+    } catch (\PDOException $exc) {
         $kredenc->addStatusMessage(_('Error saving Credential field'), 'error');
     }
 } else {

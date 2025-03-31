@@ -67,29 +67,12 @@ class RuntemplateConfigForm extends EngineForm
         $credData = [];
 
         foreach ($appRequirements as $req) {
-            $formClass = '\\MultiFlexi\\Ui\\Form\\'.$req;
             $credentialChosen = '';
 
             if (\array_key_exists($req, $formAvailable)) {
-                if (\array_key_exists($req, $companyCredentialsByType)) {
-                    foreach ($usedCreds as $credentialUsed) {
-                        $credentialChosen = (string) $credentialUsed['credentials_id'];
-                        $kredenc->loadFromSQL($credentialUsed['credentials_id']);
-
-                        foreach ($kredenc->getData() as $overrideKey => $overrideValue) {
-                            if ($overrideKey !== 'id' && $overrideKey !== 'name' && $overrideKey !== 'company_id' && $overrideKey !== 'formType') {
-                                if (\array_key_exists($overrideKey, $credData) === false) {
-                                    $credData[$overrideKey] = $overrideValue;
-                                    $credSource[$overrideKey] = $credentialChosen;
-                                }
-                            }
-                        }
-                    }
-                }
-
                 $reqsRow->addColumn(2, [
-                    new \Ease\Html\ImgTag($formClass::$logo, $req, ['title' => $formClass::name(), 'height' => '30']), new CredentialSelect('credential['.$req.']', $engine->getDataValue('company_id'), $req, \array_key_exists($req, $usedCreds) ? (string) $usedCreds[$req]['credentials_id'] : ''),
-                    new \Ease\TWB4\LinkButton('credential.php?company_id='.$engine->getDataValue('company_id').'&formType='.$req, '️➕ 🔐', 'success btn-sm', ['title' => _('New Credential')]),
+                    new \Ease\Html\ImgTag('images/cancel.svg', $req, ['title' => '?????', 'height' => '30']), new CredentialTypeSelect('credtype['.$req.']', $engine->getDataValue('company_id'), $req, '0'),
+                    new \Ease\TWB4\LinkButton('credentialtype.php?company_id='.$engine->getDataValue('company_id').'&formType='.$req, '️➕ 🔐', 'success btn-sm', ['title' => _('New Credential typw')]),
                 ]);
             } else {
                 if (\array_key_exists($req, $formAvailable) === false) {

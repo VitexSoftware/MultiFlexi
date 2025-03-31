@@ -56,6 +56,8 @@ if (WebPage::singleton()->isPosted()) {
     $new = WebPage::getRequestValue('new');
     $class = WebPage::getRequestValue('class');
 
+    unset($_POST[$class]);
+
     if (empty(implode('', $new))) {
         unset($new);
     }
@@ -66,32 +68,14 @@ if (WebPage::singleton()->isPosted()) {
         return is_numeric($key);
     }, \ARRAY_FILTER_USE_KEY);
 
+    $credentialTypeData = array_diff_key($_POST, $numericFields);
+
     if ($class) {
         $credTypeClass = '\\MultiFlexi\\CredentialType\\'.$class;
-        /**
-         * @var credentialTypeInterface Credential Type Helper class
-         */
-        $clasHelper = new $credTypeClass();
-        $helperClassFieldsInternal = $clasHelper->fieldsInternal();
-        $helperClassFieldsProvided = $clasHelper->fieldsProvided();
-        $credTypeSettings = WebPage::getRequestValue($class);
-        unset($_POST[$class]);
-        $_POST['logo'] = $clasHelper::logo();
-
-        foreach ($helperClassFieldsInternal as $helperInternalFieldName => $helperInternalField) {
-            if ($credTypeSettings) {
-                $credTypeSettings['credential_type_id'] = $crtype->getMyKey();
-                $clasHelper->takeData($credTypeSettings);
-
-                $clasHelper->addStatusMessage(sprintf(_('Saving Credential type %s options'), $credTypeClass::name()), $clasHelper->save() ? 'success' : 'error');
-            }
-        }
-
-        foreach ($helperClassFieldsProvided as $helperFieldName => $helperProvidedField) {
-        }
+        $credentialTypeData['logo'] = $credTypeClass::logo();
+    } else {
+        $credentialTypeData['logo'] = '';
     }
-
-    $credentialTypeData = array_diff_key($_POST, $numericFields);
 
     try {
         if ($credentialTypeData['company_id']) {
@@ -124,13 +108,61 @@ if (WebPage::singleton()->isPosted()) {
             throw $e; // Re-throw the exception if it's not a duplicate entry error
         }
     }
+
+    if ($class) {
+        $credTypeClass = '\\MultiFlexi\\CredentialType\\'.$class;
+        /**
+         * @var credentialTypeInterface Credential Type Helper class
+         */
+        $clasHelper = new $credTypeClass();
+        $helperClassFieldsInternal = $clasHelper->fieldsInternal();
+        $helperClassFieldsProvided = $clasHelper->fieldsProvided();
+        $credTypeSettings = WebPage::getRequestValue($class);
+
+        foreach ($helperClassFieldsInternal as $helperInternalFieldName => $helperInternalField) {
+            if ($credTypeSettings) {
+                $credTypeSettings['credential_type_id'] = $crtype->getMyKey();
+                $clasHelper->takeData($credTypeSettings);
+
+                $clasHelper->addStatusMessage(sprintf(_('Saving Credential type %s options'), $credTypeClass::name()), $clasHelper->save() ? 'success' : 'error');
+            }
+        }
+
+        foreach ($helperClassFieldsProvided as $helperFieldName => $columnProvided) {
+            if ($columnProvided->isRequired()) {
+                $fielder->dataReset();
+                $toInsert = [
+                    'credential_type_id' => $crtype->getMyKey(),
+                    'keyname' => $columnProvided->getCode(),
+                    'type' => $columnProvided->getType(),
+                    'description' => $columnProvided->getDescription(),
+                    'hint' => $columnProvided->getHint(),
+                    'defval' => $columnProvided->getDefaultValue(),
+                    'required' => $columnProvided->isRequired(),
+                    'helper' => $columnProvided->getCode(),
+                ];
+
+                $fielder->takeData($toInsert);
+
+                try {
+                    $fielder->insertToSQL();
+                } catch (\PDOException $exc) {
+                    $fielder->addStatusMessage(sprintf(_('Column %s not added to %s'), $columnProvided->getCode(), $crtype->getRecordName()), 'error');
+                }
+            }
+
+            $crtype->getFields();
+        }
+    } else {
+        $fielder->getFluentPDO()->delete($fielder->getMyTable())->where('credential_type_id', $crtype->getMyKey())->where('helper IS NOT ?', [null, '']);
+    }
 } else {
     if ((null === WebPage::getRequestValue('company_id')) === false) {
-        $crtype->setDataValue('company_id', WebPage::getRequestValue('company_id'));
+        $crtype->setDataValue('company_id', WebPage::getRequestValue('company_id', 'int'));
     }
 
-    if ((null === WebPage::getRequestValue('formType')) === false) {
-        $crtype->setDataValue('formType', WebPage::getRequestValue('formType'));
+    if ((null === WebPage::getRequestValue('class')) === false) {
+        $crtype->setDataValue('class', WebPage::getRequestValue('class'));
     }
 }
 
@@ -152,7 +184,11 @@ if ($addField) {
 
         $fielder->takeData($toInsert);
 
-        $fielder->insertToSQL();
+        try {
+            $fielder->insertToSQL();
+        } catch (\PDOException $exc) {
+            $fielder->addStatusMessage(sprintf(_('Column %s not added to %s'), $columnProvided->getCode(), $crtype->getRecordName()), 'error');
+        }
     }
 }
 
@@ -162,7 +198,7 @@ if (WebPage::getRequestValue('test')) {
     WebPage::singleton()->container->addItem(new CredentialTypeCheck($crtype));
 }
 
-WebPage::singleton()->container->addItem(new CredentialTypeForm($crtype));
+WebPage::singleton()->container->addItem(new CredentialTypeForm($crtype), new \MultiFlexi\ConfigField('', 'string', '', ''));
 
 WebPage::singleton()->addItem(new PageBottom());
 
