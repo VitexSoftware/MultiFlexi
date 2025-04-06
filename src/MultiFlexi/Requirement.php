@@ -22,15 +22,54 @@ namespace MultiFlexi;
  */
 class Requirement
 {
-    public static function formsAvailable(): array
+    /**
+     * List of classes in \MultiFlexi\CredentialType\ name space.
+     *
+     * @return array<string, string>
+     */
+    public static function getCredentialProviders(): array
     {
         $forms = [];
-        \Ease\Functions::loadClassesInNamespace('MultiFlexi\Ui\Form');
+        \Ease\Functions::loadClassesInNamespace('MultiFlexi\CredentialType');
 
-        foreach (\Ease\Functions::classesInNamespace('MultiFlexi\Ui\Form') as $form) {
-            $forms[$form] = '\MultiFlexi\Ui\Form\\'.$form;
+        foreach (\Ease\Functions::classesInNamespace('MultiFlexi\CredentialType') as $form) {
+            $forms[$form] = '\MultiFlexi\CredentialType\\'.$form;
         }
 
         return $forms;
+    }
+
+    /**
+     * List of credential types.
+     */
+    public static function getCredentialTypes(Company $company): array
+    {
+        $credentialTypes = [];
+        $credentialType = new CredentialType();
+
+        foreach ($credentialType->listingQuery()->where('credential_type.company_id', $company->getMyKey()) as $credType) {
+            $credentialTypes[$credType['class']][$credType['id']] = $credType;
+        }
+
+        return $credentialTypes;
+    }
+
+    /**
+     * List of company credentials.
+     *
+     * @return type
+     */
+    public static function getCredentials(Company $company): array
+    {
+        $credentialsByType = [];
+        $credentialType = new Credential();
+
+        foreach ($credentialType->listingQuery()->select(['credential_type.*', 'credentials.id AS credential_id'])->leftJoin('credential_type ON credentials.credential_type_id = credential_type.id')->where('credential_type.company_id', $company->getMyKey()) as $credential) {
+            if ($credential['credential_type_id']) {
+                $credentialsByType[$credential['class']][$credential['credential_id']] = $credential;
+            }
+        }
+
+        return $credentialsByType;
     }
 }
