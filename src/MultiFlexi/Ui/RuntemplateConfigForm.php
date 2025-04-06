@@ -35,47 +35,28 @@ class RuntemplateConfigForm extends EngineForm
         $fieldsOf = [];
         $fieldSource = [];
         $credSource = [];
-        $formAvailable = \MultiFlexi\Requirement::formsAvailable();
 
-        foreach ($appRequirements as $formRequired) {
-            $formClass = '\\MultiFlexi\\Ui\\Form\\'.$formRequired;
-
-            if (class_exists($formClass)) {
-                $formAvailable[$formRequired] = $formClass::name();
-                $fieldsOf[$formRequired] = $formClass::fields();
-
-                foreach ($fieldsOf[$formRequired] as $fieldName => $fieldInfo) {
-                    $fieldSource[$fieldName] = $formRequired;
-                }
-            }
-        }
-
-        $kredenc = new \MultiFlexi\Credential();
-        $companyCredentials = $kredenc->getCompanyCredentials($engine->getDataValue('company_id'), $appRequirements);
-
-        $companyCredentialsByType = [];
-
-        $crdHlpr = new \MultiFlexi\RunTplCreds();
-        $usedCreds = $crdHlpr->getCredentialsForRuntemplate($engine->getMyKey())->fetchAll('formType');
-
-        foreach ($companyCredentials as $credInfo) {
-            $companyCredentialsByType[$credInfo['formType']][$credInfo['name']] = $credInfo;
-        }
+        $credentialProvidersAvailable = \MultiFlexi\Requirement::getCredentialProviders();
+        $credentialTypesAvailable = \MultiFlexi\Requirement::getCredentialTypes($engine->getCompany());
+        $credentialsAvailable = \MultiFlexi\Requirement::getCredentials($engine->getCompany());
+        $credentialsAssigned = $engine->getAssignedCredentials();
 
         $reqsRow = new \Ease\TWB4\Row();
 
         $credData = [];
 
+        $this->addItem(new RuntemplateRequirementsChoser($engine));
+
         foreach ($appRequirements as $req) {
             $credentialChosen = '';
 
-            if (\array_key_exists($req, $formAvailable)) {
+            if (\array_key_exists($req, $credentialsAvailable)) {
                 $reqsRow->addColumn(2, [
-                    new \Ease\Html\ImgTag('images/cancel.svg', $req, ['title' => '?????', 'height' => '30']), new CredentialTypeSelect('credtype['.$req.']', $engine->getDataValue('company_id'), $req, '0'),
+                    new \Ease\Html\ImgTag('images/cancel.svg', $req, ['title' => '?????', 'height' => '30']), new CredentialSelect('credtype['.$req.']', $engine->getDataValue('company_id'), $req, '0'),
                     new \Ease\TWB4\LinkButton('credentialtype.php?company_id='.$engine->getDataValue('company_id').'&formType='.$req, '️➕ 🔐', 'success btn-sm', ['title' => _('New Credential typw')]),
                 ]);
             } else {
-                if (\array_key_exists($req, $formAvailable) === false) {
+                if (\array_key_exists($req, $credentialProvidersAvailable) === false) {
                     $noCredType = [
                         new \Ease\TWB4\Badge('warning', sprintf(_('Form %s not available'), '"'.$req.'"')),
                         new \Ease\TWB4\LinkButton('credentialtype.php?company_id='.$engine->getDataValue('company_id').'&class='.$req, '️➕ 🔐', 'success btn-sm', ['title' => _('New Credential Type')]),
