@@ -22,7 +22,7 @@ namespace MultiFlexi\Ui;
  */
 class CredentialSelect extends \Ease\Html\SelectTag
 {
-    use \Ease\Html\Widgets\Selectizer;
+    use \Ease\TWB4\Widgets\Selectizer;
     private int $company_id;
     private string $requirement;
 

@@ -16,13 +16,13 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 /**
- * Description of CredentialSelect.
+ * Description of CredentialSelect.F
  *
  * @author vitex
  */
 class CredentialTypeSelect extends \Ease\Html\SelectTag
 {
-    use \Ease\Html\Widgets\Selectizer;
+    use \Ease\TWB4\Widgets\Selectizer;
     private int $company_id;
 
     public function __construct(string $name, int $company_id, ?int $selected = null, array $properties = [])
@@ -45,7 +45,7 @@ class CredentialTypeSelect extends \Ease\Html\SelectTag
         $companyCredentials = $kredenc->listingQuery()->where('company_id', $this->company_id)->fetchAll('id');
 
         foreach ($companyCredentials as $credential) {
-            $credentials[$credential['id']] = $credential['name'];
+            $credentials[$credential['id']] = $credential['name'].' ⦉'.$credential['class'].'⦊';
         }
 
         ksort($credentials);

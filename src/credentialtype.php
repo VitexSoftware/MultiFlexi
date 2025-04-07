@@ -96,7 +96,7 @@ if (WebPage::singleton()->isPosted()) {
                     }
                 }
             } else {
-                $crtype->addStatusMessage(_('Error saving Credential field'), 'error');
+                $crtype->addStatusMessage(_('Error saving Credential type field'), 'error');
             }
         } else {
             $crtype->addStatusMessage(_('Company must be chosen'), 'info');
