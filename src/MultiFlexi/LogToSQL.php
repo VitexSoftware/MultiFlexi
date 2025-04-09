@@ -118,7 +118,7 @@ class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
                 if (method_exists($caller, 'getObjectName')) {
                     $venue = $caller->getObjectName();
                 } else {
-                    $venue = get_class($caller); // Použijeme get_class() místo ::class
+                    $venue = $caller::class; // Použijeme get_class() místo ::class
                 }
 
                 break;
