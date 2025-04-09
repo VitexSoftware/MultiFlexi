@@ -99,7 +99,7 @@ class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\creden
         }
 
         unlink($tmpfile);
-        
+
         return parent::query();
     }
 }
