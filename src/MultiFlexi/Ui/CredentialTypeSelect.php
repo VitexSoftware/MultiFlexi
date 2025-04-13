@@ -49,6 +49,7 @@ class CredentialTypeSelect extends \Ease\Html\SelectTag
         }
 
         ksort($credentials);
+        $this->setData($credentials);
 
         return $credentials;
     }

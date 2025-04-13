@@ -20,6 +20,8 @@ use Ease\Html\ATag;
 /**
  * Description of Csas.
  *
+ * @deprecated since version 1.27
+ *
  * @author Vitex <info@vitexsoftware.cz>
  */
 class RaiffeisenBank extends \Ease\TWB4\Panel implements configForm

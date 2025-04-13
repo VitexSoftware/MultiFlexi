@@ -18,6 +18,8 @@ namespace MultiFlexi\Ui\Form;
 /**
  * Description of Office365.
  *
+ * @deprecated since version 1.27
+ *
  * @author vitex
  */
 class Office365 extends \Ease\TWB4\Panel implements configForm

@@ -16,6 +16,8 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui\Form;
 
 /**
+ * @deprecated since version 1.27
+ *
  * @author vitex
  */
 interface configForm

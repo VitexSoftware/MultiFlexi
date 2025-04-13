@@ -581,6 +581,7 @@ class RunTemplate extends \MultiFlexi\DBEngine
         $rtplCrds = new RunTplCreds();
 
         foreach ($rtplCrds->getCredentialsForRuntemplate($this->getMyKey())->select(['name', 'formType', 'credentials_id'])->leftJoin('credentials ON credentials.id = runtplcreds.credentials_id') as $crds) {
+            // Query
         }
 
         return $runTemplateCredTypeFields;

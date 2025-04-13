@@ -42,9 +42,9 @@ class CredentialSelect extends \Ease\Html\SelectTag
     {
         $kredenc = new \MultiFlexi\Credential();
 
-        $credentials = ['' => _('Do not use')];
+        $credentials = ['-' => _('Do not use')];
 
-        $companyCredentials = $kredenc->listingQuery()->where('company_id', $this->company_id)->where('formType', $this->requirement)->fetchAll('id');
+        $companyCredentials = $kredenc->listingQuery()->leftJoin('credentials ON credentials.credential_type_id = credential_type.id')->where('credentials.company_id', $this->company_id)->where('credential_type.class', $this->requirement)->fetchAll('id');
 
         foreach ($companyCredentials as $credential) {
             $credentials[$credential['id']] = $credential['name'];
