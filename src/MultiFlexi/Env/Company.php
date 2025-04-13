@@ -33,37 +33,26 @@ class Company extends \MultiFlexi\Environmentor implements injector
     }
 
     /**
-     * Company Environment.
+     * MultiFlexi Related values.
      */
-    public function getEnvironment(): array
+    public function getEnvironment(): \MultiFlexi\ConfigFields
     {
-        $companyEnvironment = [];
-        $companyEnvironmentRaw = $this->engine->company->getEnvironment();
-        $companyEnvironment['MULTIFLEXI_COMPANY_ID']['value'] = $this->engine->company->getMyKey();
-        $companyEnvironment['MULTIFLEXI_COMPANY_CODE']['value'] = $this->engine->company->getDataValue('code');
-        $companyEnvironment['MULTIFLEXI_COMPANY_NAME']['value'] = $this->engine->company->getRecordName();
+        $envCompany = new \MultiFlexi\ConfigFields(self::name());
+        $envCompany->addFields($this->engine->company->getEnvironment());
 
-        if ($companyEnvironmentRaw) {
-            foreach ($companyEnvironmentRaw as $key => $value) {
-                $companyEnvironment[$key]['value'] = $value;
-            }
-        }
+        $envCompany->addField((new \MultiFlexi\ConfigField('MULTIFLEXI_COMPANY_ID', 'integer'))->setValue((string) $this->engine->company->getMyKey()));
+        $envCompany->addField((new \MultiFlexi\ConfigField('MULTIFLEXI_COMPANY_CODE', 'string'))->setValue($this->engine->company->getDataValue('code')));
+        $envCompany->addField((new \MultiFlexi\ConfigField('MULTIFLEXI_COMPANY_NAME', 'string'))->setValue($this->engine->company->getRecordName()));
 
-        return $this->addMetaData($this->addSelfAsSource($companyEnvironment));
+        return $envCompany;
     }
 
-    /**
-     * @return string
-     */
-    public static function name()
+    public static function name(): string
     {
         return _('Company');
     }
 
-    /**
-     * @return string
-     */
-    public static function description()
+    public static function description(): string
     {
         return _('Provide Information about Current company');
     }

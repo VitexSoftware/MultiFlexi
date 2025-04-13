@@ -50,12 +50,10 @@ class Conffield extends \Ease\SQL\Engine
 
     /**
      * @param int $appId
-     *
-     * @return array
      */
-    public function appConfigs($appId)
+    public function appConfigs($appId): array
     {
-        return Environmentor::addSource($this->getColumnsFromSQL(['*'], ['app_id' => $appId], 'keyname', 'keyname'), \get_class($this));
+        return $this->getColumnsFromSQL(['*'], ['app_id' => $appId], 'keyname', 'keyname');
     }
 
     /**
@@ -89,8 +87,16 @@ class Conffield extends \Ease\SQL\Engine
         return $this->dbsync();
     }
 
-    public static function getAppConfigs($appId)
+    public static function getAppConfigs($appId): ConfigFields
     {
-        return (new self())->appConfigs($appId);
+        $appConfiguration = new ConfigFields(_('Application Config Fields'));
+
+        foreach ((new self())->appConfigs($appId) as $appConfig) {
+            $field = new ConfigField($appConfig['keyname'], $appConfig['type'], $appConfig['keyname'], $appConfig['description']);
+            $field->setRequired($appConfig['required'] === 1)->setDefaultValue($appConfig['defval']);
+            $appConfiguration->addField($field);
+        }
+
+        return $appConfiguration;
     }
 }

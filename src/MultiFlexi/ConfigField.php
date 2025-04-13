@@ -45,11 +45,11 @@ class ConfigField
      * @param string $hint        Field hint
      * @param string $value       Field value
      */
-    public function __construct(string $code, string $type, string $name, string $description, string $hint = '', ?string $value = null)
+    public function __construct(string $code, string $type, string $name = '', string $description = '', string $hint = '', ?string $value = null)
     {
         $this->setCode($code);
         $this->setType($type);
-        $this->setName($name);
+        $this->setName(empty($name) ? $code : $name);
         $this->setDescription($description);
         $this->setHint($hint);
         $this->setValue($value);

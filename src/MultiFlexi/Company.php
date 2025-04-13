@@ -129,10 +129,20 @@ class Company extends \MultiFlexi\Engine
     /**
      * Company Environment.
      */
-    public function getEnvironment(): array
+    public function getEnvironment(): ConfigFields
     {
-        $env = (new CompanyEnv($this->getMyKey()))->getData();
+        $companyEnv = new ConfigFields();
 
-        return $env ? $env : [];
+        $helper = new CompanyEnv($this->getMyKey());
+
+        if ($helper->getData()) {
+            foreach ($helper->getData() as $key => $value) {
+                $field = new ConfigField($key, $string, $key, '');
+                $field->setValue($value)->setSource(_('Company Environment'));
+                $companyEnv->addField($field);
+            }
+        }
+
+        return $companyEnv;
     }
 }

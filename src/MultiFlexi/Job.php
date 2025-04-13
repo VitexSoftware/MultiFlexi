@@ -173,15 +173,14 @@ class Job extends Engine
         $sqlLogger->setApplication($appId);
 
         if (null === $this->runTemplate) {
-            $this->runTemplate = new RunTemplate();
+            throw new \Ease\Exception(_('No RunTemplate prepared'));
         }
 
         if ($this->runTemplate->getMyKey() === 0) {
-            $this->runTemplate->loadFromSQL($this->runTemplate->runTemplateID($appId, $companyId));
-            $this->addStatusMessage(_('Job launched without runtemplate ID'), 'error');
+            throw new \Ease\Exception(_('No RunTemplate prepared'));
         }
 
-        $this->environment = array_merge($this->environment, $this->runTemplate->credentialsEnvironment());
+        $this->environment = $this->getJobEnvironment();
 
         if (isset($this->executor) === false) {
             $executorClass = '\\MultiFlexi\\Executor\\'.$this->getDataValue('executor');
@@ -577,37 +576,45 @@ EOD;
      *
      * @return array Environment with metadata
      */
-    public function getFullEnvironment(): array
+    public function getFullEnvironment(): ConfigFields
     {
+        $jobEnvironment = new ConfigFields(sprintf(_('Job #%d'), $this->getMyKey()));
+
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\\Env');
         $injectors = \Ease\Functions::classesInNamespace('MultiFlexi\\Env');
-        $jobEnv = [];
 
         foreach ($injectors as $injector) {
             $injectorClass = '\\MultiFlexi\\Env\\'.$injector;
-            $jobEnv = array_merge($jobEnv, (new $injectorClass($this))->getEnvironment());
+            $jobEnvironment->addFields((new $injectorClass($this))->getEnvironment());
         }
 
-        foreach (array_keys($jobEnv) as $fieldName) {
-            if (\array_key_exists('value', $jobEnv[$fieldName]) && preg_match('/({[A-Z_]*})/', (string) $jobEnv[$fieldName]['value'])) {
-                $jobEnv[$fieldName]['value'] = self::applyMarcros($jobEnv[$fieldName]['value'], $jobEnv);
+        foreach ($jobEnvironment->getFields() as $fieldName => $field) {
+            $fieldValue = $field->getValue();
+
+            if (null === $fieldValue) {
+                $fieldValue = $field->getDefaultValue();
             }
 
-            if (\array_key_exists('defval', $jobEnv[$fieldName]) && preg_match('/({[A-Z_]*})/', (string) $jobEnv[$fieldName]['defval'])) {
-                $jobEnv[$fieldName]['defval'] = self::applyMarcros($jobEnv[$fieldName]['defval'], $jobEnv);
+            if ($fieldValue) {
+                if ($fieldValue && preg_match('/({[A-Z_]*})/', $fieldValue)) {
+                    $field->setValue(self::applyMarcros($fieldValue, $jobEnvironment));
+                }
             }
         }
 
-        if (\array_key_exists('RESULT_FILE', $jobEnv)) {
-            if ($jobEnv['RESULT_FILE']['value'] === sys_get_temp_dir()) {
-                unset($jobEnv['RESULT_FILE']);
-                $this->addStatusMessage(_('Result file name incorrect'));
+        $resultFileField = $jobEnvironment->getFieldByCode('RESULT_FILE');
+
+        if ($resultFileField) {
+            $resultFile = $resultFileField->getValue();
+
+            if ($resultFile === sys_get_temp_dir()) {
+                $resultFileField->setValue($resultFile.\DIRECTORY_SEPARATOR.\Ease\Functions::randomString());
             } else {
-                $jobEnv['RESULT_FILE']['value'] = sys_get_temp_dir().\DIRECTORY_SEPARATOR.basename($jobEnv['RESULT_FILE']['value']);
+                $resultFileField->setValue(sys_get_temp_dir().\DIRECTORY_SEPARATOR.basename($resultFile));
             }
         }
 
-        return $jobEnv;
+        return $jobEnvironment;
     }
 
     /**
@@ -811,5 +818,19 @@ EOD;
         }
 
         return $cond;
+    }
+
+    public function getJobEnvironment(): array
+    {
+        // Assembly Enviromnent from
+        // 0 Current - default
+        // 1 Company
+        // 2 Runtemplate
+
+        $jobEnvironment = new ConfigFields(sprintf(_('Job #%d'), $this->getMyKey()));
+        $jobEnvironment->addFields($this->company->getEnvironment());
+        $jobEnvironment->addFields($this->runTemplate->getEnvironment());
+
+        return array_merge($this->environment, $jobEnvironment->getEnvArray());
     }
 }

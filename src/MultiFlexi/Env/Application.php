@@ -33,39 +33,24 @@ class Application extends \MultiFlexi\Environmentor implements injector
     }
 
     /**
-     * Generate Environment for current Job.
-     *
-     * @return array
+     * Application specific Environment.
      */
-    public function compileEnv()
+    public function getEnvironment(): \MultiFlexi\ConfigFields
     {
-        return [
-            'MULTIFLEXI_APPLICATION_ID' => ['value' => $this->engine->application->getMyKey()],
-            'MULTIFLEXI_APPLICATION_NAME' => ['value' => $this->engine->application->getDataValue('name')],
-            'MULTIFLEXI_APPLICATION_UUID' => ['value' => $this->engine->application->getDataValue('uuid')],
-        ];
+        $envApplication = new \MultiFlexi\ConfigFields(self::name());
+        $envApplication->addField((new \MultiFlexi\ConfigField('MULTIFLEXI_APPLICATION_ID', 'integer'))->setValue((string) $this->engine->application->getMyKey()));
+        $envApplication->addField((new \MultiFlexi\ConfigField('MULTIFLEXI_APPLICATION_NAME', 'string'))->setValue($this->engine->application->getDataValue('name')));
+        $envApplication->addField((new \MultiFlexi\ConfigField('MULTIFLEXI_APPLICATION_UUID', 'string'))->setValue($this->engine->application->getDataValue('uuid')));
+
+        return $envApplication;
     }
 
-    /**
-     * Obtain Environment to configure application.
-     */
-    public function getEnvironment(): array
-    {
-        return $this->addMetaData($this->addSelfAsSource($this->compileEnv()));
-    }
-
-    /**
-     * @return string
-     */
-    public static function name()
+    public static function name(): string
     {
         return _('Application');
     }
 
-    /**
-     * @return string
-     */
-    public static function description()
+    public static function description(): string
     {
         return _('Provide per Application Custom environment');
     }

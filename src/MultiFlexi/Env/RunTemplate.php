@@ -24,10 +24,8 @@ class RunTemplate extends \MultiFlexi\Environmentor implements injector
 {
     /**
      * List of all known keys.
-     *
-     * @return array
      */
-    public static function allKeysHandled()
+    public static function allKeysHandled(): array
     {
         return ['MULTIFLEXI_RUNTEMPLATE_ID', 'MULTIFLEXI_RUNTEMPLATE_NAME'];
     }
@@ -35,28 +33,24 @@ class RunTemplate extends \MultiFlexi\Environmentor implements injector
     /**
      * MultiFlexi Related values.
      */
-    public function getEnvironment(): array
+    public function getEnvironment(): \MultiFlexi\ConfigFields
     {
-        $envRuntemplate = [
-            'MULTIFLEXI_RUNTEMPLATE_NAME' => ['value' => $this->engine->runTemplate->getRecordName()],
-            'MULTIFLEXI_RUNTEMPLATE_ID' => ['value' => $this->engine->runTemplate->getMyKey()],
-        ];
+        $envRuntemplate = new \MultiFlexi\ConfigFields(self::name());
 
-        return array_merge($this->addSelfAsSource($envRuntemplate), $this->addMetaData($this->engine->runTemplate->getRuntemplateEnvironment()));
+        $envRuntemplate->addField((new \MultiFlexi\ConfigField('MULTIFLEXI_RUNTEMPLATE_NAME', 'string'))->setValue($this->engine->runTemplate->getRecordName()));
+        $envRuntemplate->addField((new \MultiFlexi\ConfigField('MULTIFLEXI_RUNTEMPLATE_ID', 'integer'))->setValue((string) $this->engine->runTemplate->getMyKey()));
+
+        $envRuntemplate->addFields($this->engine->runTemplate->getRuntemplateEnvironment());
+
+        return $envRuntemplate;
     }
 
-    /**
-     * @return string
-     */
-    public static function name()
+    public static function name(): string
     {
         return _('RunTemplate');
     }
 
-    /**
-     * @return string
-     */
-    public static function description()
+    public static function description(): string
     {
         return _('Provide stored RunTemplate Environment');
     }

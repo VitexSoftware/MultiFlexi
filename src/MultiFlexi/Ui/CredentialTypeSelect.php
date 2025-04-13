@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 /**
- * Description of CredentialSelect.F
+ * Description of CredentialSelect.F.
  *
  * @author vitex
  */
