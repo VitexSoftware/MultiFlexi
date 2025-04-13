@@ -41,17 +41,25 @@ class RuntemplateRequirementsChoser extends \Ease\Html\DivTag
         }
     }
 
-    public function requirementPanel(string $requirement, \MultiFlexi\RunTemplate  $runtemplate)
+    public function requirementPanel(string $requirement, \MultiFlexi\RunTemplate $runtemplate)
     {
         $state = 'default';
         $companyId = $runtemplate->getDataValue('company_id');
         $adders = new \Ease\Html\DivTag();
         $widget = new \Ease\Html\DivTag();
+
         if (\array_key_exists($requirement, $this->providers)) {
             if (\array_key_exists($requirement, $this->credTypes)) {
                 $state = 'success';
-                $widget->addItem(new CredentialSelect('credential['.$requirement.']', $companyId, $requirement) );
-                $adders->addItem(new \Ease\TWB4\LinkButton('credential.php?company_id='.$companyId, '️➕ 🔐'._('Create credential'), 'info btn-sm btn-block'));
+                $widget->addItem(new CredentialSelect('credential['.$requirement.']', $companyId, $requirement));
+
+                $helper = new \MultiFlexi\CredentialType();
+                $credTypes = $helper->listingQuery()->where('company_id', $companyId)->where('class', $requirement);
+
+                foreach ($credTypes as $myCredType) {
+                    $adders->addItem(new \Ease\TWB4\LinkButton('credential.php?company_id='.$companyId.'&credential_type_id='.$myCredType['id'], '️➕ 🔐'.sprintf(_('Create credential based on %s type'), $myCredType['name']), 'info btn-sm btn-block'));
+                }
+
                 $runtemplate->addStatusMessage(sprintf(_('Choose credential handling %s'), $requirement));
             } else {
                 $state = 'warning';
@@ -60,10 +68,10 @@ class RuntemplateRequirementsChoser extends \Ease\Html\DivTag
             }
         } else {
             $state = 'danger';
-            $runtemplate->addStatusMessage(sprintf( _('Install "%s" extension'), '<strong>'.$requirement.'</strong>' ));
+            $runtemplate->addStatusMessage(sprintf(_('Install "%s" extension'), '<strong>'.$requirement.'</strong>'));
             $adders->addItem(_('Provider not found'));
         }
 
-        return new \Ease\TWB4\Panel( new \Ease\Html\StrongTag($requirement), $state, $widget, $adders);
+        return new \Ease\TWB4\Panel(new \Ease\Html\StrongTag($requirement), $state, $widget, $adders);
     }
 }

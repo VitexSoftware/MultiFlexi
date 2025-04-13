@@ -71,28 +71,13 @@ class RuntemplateConfigForm extends EngineForm
 
         $appFields = \MultiFlexi\Conffield::getAppConfigs($engine->getDataValue('app_id'));
 
-        $columns = array_keys(array_merge($appFields, $customized));
+        $appFields->addFields($customized);
 
-        ksort($columns);
-
-        foreach ($columns as $fieldName) {
-            if (\array_key_exists($fieldName, $appFields) && \array_key_exists($fieldName, $defaults)) {
-                $fieldInfo = array_merge($defaults[$fieldName], $appFields[$fieldName]);
+        foreach ($appFields as $fieldName => $field) {
+            if ($field->getType() === 'bool') {
+                $input = new \Ease\Html\DivTag(new \Ease\TWB4\Widgets\Toggle($fieldName, $field->getValue() === 'true' ? true : false, 'true', []));
             } else {
-                if (\array_key_exists($fieldName, $customized)) {
-                    $fieldInfo = $customized[$fieldName];
-                    $fieldInfo['description'] = _('ℹ️ Custom Field');
-                } else {
-                    $fieldInfo = \array_key_exists($fieldName, $appFields) ? $appFields[$fieldName] : ['type' => 'text', 'source' => _('Custom')];
-                }
-            }
-
-            $value = \array_key_exists('value', $fieldInfo) ? $fieldInfo['value'] : '';
-
-            if ($fieldInfo['type'] === 'checkbox') {
-                $input = new \Ease\Html\DivTag(new \Ease\TWB4\Widgets\Toggle($fieldName, $value === 'true' ? true : false, 'true', []));
-            } else {
-                $input = new \Ease\Html\InputTag($fieldName, $value, ['type' => $fieldInfo['type']]);
+                $input = new \Ease\Html\InputTag($fieldName, $field->getValue(), ['type' => $field->getType()]);
             }
 
             if (\array_key_exists($fieldName, $fieldSource)) {
@@ -113,16 +98,16 @@ class RuntemplateConfigForm extends EngineForm
                     $fieldLink = $formIcon.'&nbsp;'.$fieldName;
                 }
 
-                $formGroup = $this->addInput($input, $fieldLink, \array_key_exists('defval', $fieldInfo) ? $fieldInfo['defval'] : '', \array_key_exists('description', $fieldInfo) ? $fieldInfo['description'] : '');
+                $formGroup = $this->addInput($input, $fieldLink, $field->getDefaultValue(), $field->getDescription());
             } else {
-                $formGroup = $this->addInput($input, $fieldName.'&nbsp;('.$fieldInfo['source'].')', \array_key_exists('defval', $fieldInfo) ? $fieldInfo['defval'] : '', \array_key_exists('description', $fieldInfo) ? $fieldInfo['description'] : '');
+                $formGroup = $this->addInput($input, $fieldName.'&nbsp;('.$field->getSource().')', $field->getDefaultValue(), $field->getDescription());
             }
 
-            if (\array_key_exists('required', $fieldInfo) && $fieldInfo['required']) {
+            if ($field->isRequired()) {
                 $formGroup->addTagClass('bg-danger');
             }
 
-            if (\array_key_exists($fieldName, $customized)) {
+            if ($field->getSource()) {
                 $formGroup->addTagClass('bg-info');
             }
         }

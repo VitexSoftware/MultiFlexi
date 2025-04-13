@@ -23,25 +23,15 @@ namespace MultiFlexi\Ui;
 class EnvironmentView extends \Ease\Html\TableTag
 {
     /**
-     * @param array<string, string> $environment
      * @param array<string, string> $properties
      */
-    public function __construct($environment = [], array $properties = [])
+    public function __construct(\MultiFlexi\ConfigFields $environment, array $properties = [])
     {
         $properties['class'] = 'table';
         parent::__construct(null, $properties);
         $this->addRowHeaderColumns([_('Name'), _('Value'), _('Source')]);
-        ksort($environment);
 
-        foreach ($environment as $key => $envData) {
-            if (\is_string($envData)) { // Fallback for Flat data
-                $value = $envData;
-                $envData = [];
-                $envData['value'] = $value;
-                $envData['type'] = '';
-                $envData['source'] = _('n/a');
-            }
-
+        foreach ($environment as $key => $field) {
             if (!\array_key_exists('value', $envData) && \array_key_exists('defval', $envData)) {
                 $envData['value'] = new \Ease\TWB4\Badge('inverse', $envData['defval'], ['title' => _('Default Value')]);
             }
