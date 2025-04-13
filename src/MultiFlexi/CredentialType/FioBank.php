@@ -33,7 +33,7 @@ class FioBank extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\cre
         $accountNumberField->setHint('123456789/2010')->setValue('');
 
         $tokenField = new \MultiFlexi\ConfigField('FIO_TOKEN', 'string', _('Fio Bank Token'), _('Token for accessing the Fio Bank API'));
-        $tokenField->setHint('your-token-here')->setValue('');
+        $tokenField->setHint(_('AXWxJN18IqwbY....xccP2eyxvWDFLe2'))->setRequired(true)->setValue('');
 
         $tokenNameField = new \MultiFlexi\ConfigField('FIO_TOKEN_NAME', 'string', _('Fio Token Name'), _('Name of the token used for identification'));
         $tokenNameField->setHint('default-token')->setValue('');

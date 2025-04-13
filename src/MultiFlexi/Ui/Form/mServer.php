@@ -18,6 +18,8 @@ namespace MultiFlexi\Ui\Form;
 /**
  * Stormware Pohoda Connect Configuration form.
  *
+ * @deprecated since version 1.27
+ *
  * @author Vitex <info@vitexsoftware.cz>
  */
 class mServer extends \Ease\TWB4\Panel implements configForm
