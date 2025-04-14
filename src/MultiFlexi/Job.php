@@ -61,7 +61,7 @@ class Job extends Engine
     /**
      * Environment for Current Job.
      */
-    private array $environment = [];
+    private ConfigFields $environment;
 
     /**
      * Executed command line.
@@ -80,6 +80,8 @@ class Job extends Engine
         $this->myTable = 'job';
         $this->nameColumn = '';
         $this->runTemplate = new RunTemplate();
+        $this->environment = new ConfigFields(_('Job Env'));
+
         parent::__construct($identifier, $options);
         $this->setObjectName();
 
@@ -120,7 +122,7 @@ class Job extends Engine
      *
      * @return int new job ID
      */
-    public function newJob(int $runtemplateId, array $environment, \DateTime $scheduled, $executor = 'Native', $scheduleType = 'adhoc')
+    public function newJob(int $runtemplateId, ConfigFields $environment, \DateTime $scheduled, $executor = 'Native', $scheduleType = 'adhoc')
     {
         $this->runTemplate->loadFromSQL($runtemplateId);
         $jobId = $this->insertToSQL([
@@ -234,7 +236,10 @@ class Job extends Engine
         $sqlLogger->setApplication(0);
 
         $resultFileField = $this->application->getDataValue('resultfile');
-        $resultfile = \array_key_exists($resultFileField, $this->executor->environment) ? $this->executor->environment[$resultFileField]['value'] : '';
+
+        if ($this->environment->getFieldByCode($resultFileField)) {
+            $resultfile = $this->environment->getFieldByCode($resultFileField)->getValue();
+        }
 
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
             $this->setZabbixValue('phase', 'jobDone');
@@ -469,10 +474,8 @@ EOD;
     {
         $cmdparams = $this->application->getDataValue('cmdparams');
 
-        if (\is_array($this->environment)) {
-            foreach ($this->environment as $envKey => $envInfo) {
-                $cmdparams = str_replace('{'.$envKey.'}', (string) $envInfo['value'], (string) $cmdparams);
-            }
+        foreach ($this->environment as $envKey => $field) {
+            $cmdparams = str_replace('{'.$envKey.'}', (string) $field->getValue(), (string) $cmdparams);
         }
 
         return $cmdparams;
@@ -645,7 +648,21 @@ EOD;
     {
         parent::takeData($data);
 
-        $this->environment = empty($this->getDataValue('env')) ? [] : unserialize($this->getDataValue('env'));
+        if ($this->getDataValue('env')) {
+            if (\Ease\Functions::isSerialized($this->getDataValue('env'))) {
+                $envUnserialized = unserialize($this->getDataValue('env'));
+
+                if (\is_array($envUnserialized)) { // Old Serialization method fallback
+                    foreach ($envUnserialized as $key => $envInfo) {
+                        $field = new ConfigField($key, 'string', $key, '', '', (string) $envInfo['value']);
+                        $field->setSource($envInfo['source']);
+                        $this->environment->addField($field);
+                    }
+                } else {
+                    $this->environment->addFields($envUnserialized);
+                }
+            }
+        }
 
         if ((null === $this->getDataValue('company_id')) === false) {
             $this->company = new Company((int) $this->getDataValue('company_id'));
@@ -770,14 +787,16 @@ EOD;
         return $prevJobId ? $prevJobId : 0;
     }
 
-    public function getEnvironment(): array
+    public function getEnvironment(): ConfigFields
     {
         return $this->environment;
     }
 
-    public function setZabbixValue(string $field, $value): void
+    public function setZabbixValue(string $field, $value): self
     {
         $this->zabbixMessageData[$field] = $value;
+
+        return $this;
     }
 
     public function setPid(int $pid): void
@@ -786,9 +805,11 @@ EOD;
         $this->setZabbixValue('pid', $pid);
     }
 
-    public function setEnvironment(array $environment): void
+    public function setEnvironment(ConfigFields $environment): self
     {
         $this->environment = $environment;
+
+        return $this;
     }
 
     public function todaysCond(string $column = 'begin'): string
@@ -820,7 +841,7 @@ EOD;
         return $cond;
     }
 
-    public function getJobEnvironment(): array
+    public function getJobEnvironment(): ConfigFields
     {
         // Assembly Enviromnent from
         // 0 Current - default
@@ -831,6 +852,6 @@ EOD;
         $jobEnvironment->addFields($this->company->getEnvironment());
         $jobEnvironment->addFields($this->runTemplate->getEnvironment());
 
-        return array_merge($this->environment, $jobEnvironment->getEnvArray());
+        return $jobEnvironment;
     }
 }

@@ -54,7 +54,7 @@ class RuntemplateRequirementsChoser extends \Ease\Html\DivTag
         if (\array_key_exists($requirement, $this->providers)) {
             if (\array_key_exists($requirement, $this->credTypes)) {
                 $state = 'success';
-                $widget->addItem(new CredentialSelect('credential['.$requirement.']', $companyId, $requirement, (string) $this->assignedCredentials[$requirement]['credentials_id']));
+                $widget->addItem(new CredentialSelect('credential['.$requirement.']', $companyId, $requirement, \array_key_exists($requirement, $this->assignedCredentials) ? (string) $this->assignedCredentials[$requirement]['credentials_id'] : ''));
 
                 $helper = new \MultiFlexi\CredentialType();
                 $credTypes = $helper->listingQuery()->where('company_id', $companyId)->where('class', $requirement);
@@ -63,7 +63,9 @@ class RuntemplateRequirementsChoser extends \Ease\Html\DivTag
                     $adders->addItem(new \Ease\TWB4\LinkButton('credential.php?company_id='.$companyId.'&credential_type_id='.$myCredType['id'], '️➕ 🔐'.sprintf(_('Create credential based on %s type'), $myCredType['name']), 'info btn-sm btn-block'));
                 }
 
-                $runtemplate->addStatusMessage(sprintf(_('Choose credential handling %s'), $requirement));
+                if (\array_key_exists($requirement, $this->assignedCredentials) === false) {
+                    $runtemplate->addStatusMessage(sprintf(_('Choose credential handling %s'), $requirement));
+                }
             } else {
                 $state = 'warning';
                 $adders->addItem(new \Ease\TWB4\LinkButton('credentialtype.php?company_id='.$companyId.'&class='.$requirement, '️➕ 🔐'._('Create Credential type'), 'success btn-sm', ['title' => _('New Credential Type')]));

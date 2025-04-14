@@ -578,10 +578,10 @@ class RunTemplate extends \MultiFlexi\DBEngine
         $credentialsEnv = new ConfigFields(_('RunTemplate CredentialType Values'));
 
         $credentials = [];
-        $rtplCrds = new RunTplCreds();
 
-        foreach ($rtplCrds->getCredentialsForRuntemplate($this->getMyKey())->select(['name', 'formType', 'credentials_id'])->leftJoin('credentials ON credentials.id = runtplcreds.credentials_id') as $crds) {
-            // Query
+        foreach ($this->getCredentialsAssigned() as $requirement => $credentialData) {
+            $credentor = new Credential($credentialData['credentials_id']);
+            $runTemplateCredTypeFields->addFields($credentor->query());
         }
 
         return $runTemplateCredTypeFields;
