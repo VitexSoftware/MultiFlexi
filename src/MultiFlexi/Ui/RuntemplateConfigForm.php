@@ -41,33 +41,9 @@ class RuntemplateConfigForm extends EngineForm
         $credentialsAvailable = \MultiFlexi\Requirement::getCredentials($engine->getCompany());
         $credentialsAssigned = $engine->getAssignedCredentials();
 
-        $reqsRow = new \Ease\TWB4\Row();
-
         $credData = [];
 
         $this->addItem(new RuntemplateRequirementsChoser($engine));
-
-        foreach ($appRequirements as $req) {
-            $credentialChosen = '';
-
-            if (\array_key_exists($req, $credentialsAvailable)) {
-                $reqsRow->addColumn(2, [
-                    new \Ease\Html\ImgTag('images/cancel.svg', $req, ['title' => '?????', 'height' => '30']), new CredentialSelect('credtype['.$req.']', $engine->getDataValue('company_id'), $req, '0'),
-                    new \Ease\TWB4\LinkButton('credentialtype.php?company_id='.$engine->getDataValue('company_id').'&formType='.$req, '️➕ 🔐', 'success btn-sm', ['title' => _('New Credential typw')]),
-                ]);
-            } else {
-                if (\array_key_exists($req, $credentialProvidersAvailable) === false) {
-                    $noCredType = [
-                        new \Ease\TWB4\Badge('warning', sprintf(_('Form %s not available'), '"'.$req.'"')),
-                        new \Ease\TWB4\LinkButton('credentialtype.php?company_id='.$engine->getDataValue('company_id').'&class='.$req, '️➕ 🔐', 'success btn-sm', ['title' => _('New Credential Type')]),
-                    ];
-
-                    $reqsRow->addColumn(2, $noCredType);
-                }
-            }
-        }
-
-        $this->addItem($reqsRow);
 
         $appFields = \MultiFlexi\Conffield::getAppConfigs($engine->getDataValue('app_id'));
 

@@ -543,12 +543,10 @@ class Application extends DBEngine
     {
         $ok = true;
 
-        foreach ($this->getAppEnvironmentFields() as $fieldInfo) {
-            if (\array_key_exists('required', $fieldInfo) && $fieldInfo['required']) {
-                if (\array_key_exists($fieldInfo['keyname'], $keysValues) === false || empty($keysValues[$fieldInfo['keyname']])) {
-                    $this->addStatusMessage(sprintf(_('the required configuration key `%s` was not filled'), $fieldInfo['keyname']), 'warning');
-                    $ok = false;
-                }
+        foreach ($this->getAppEnvironmentFields() as $fieldName => $field) {
+            if ($field->isRequired() && empty($field->getValue())) {
+                $this->addStatusMessage(sprintf(_('the required configuration key `%s` was not filled'), $fieldName), 'warning');
+                $ok = false;
             }
         }
 

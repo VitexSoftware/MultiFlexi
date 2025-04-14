@@ -475,7 +475,7 @@ class RunTemplate extends \MultiFlexi\DBEngine
                 $credentials[$key]['credential_type'] = $crds['formType'];
                 $credentials[$key]['credential_id'] = $crds['id'];
                 $field = new ConfigField($key, 'string', $crds['name'], '');
-                $field->setSource($crds['formType'])->setValue($value);
+                $field->setSource((string) $crds['formType'])->setValue((string) $value);
                 $credentialsEnv->addField($field);
             }
         }
@@ -585,5 +585,12 @@ class RunTemplate extends \MultiFlexi\DBEngine
         }
 
         return $runTemplateCredTypeFields;
+    }
+
+    public function getCredentialsAssigned(): array
+    {
+        $credentor = new RunTplCreds();
+
+        return $credentor->listingQuery()->select(['credentials.name AS credential_name', 'credential_type.name AS credential_type_name', 'credential_type.class AS credential_type_class', 'credential_type.uuid AS credential_type_uuid', 'credential_type.logo AS credential_type_logo'])->where('runtemplate_id', $this->getMyKey())->leftJoin('credentials ON credentials.id = runtplcreds.credentials_id')->leftJoin('credential_type ON credential_type.id = credentials.credential_type_id')->fetchAll('credential_type_class');
     }
 }
