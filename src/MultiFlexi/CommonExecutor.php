@@ -27,7 +27,7 @@ abstract class CommonExecutor extends \Ease\Sand
     public string $stdin;
     public string $stdout;
     public string $stderr;
-    public $environment = [];
+    public ConfigFields $environment;
     public array $outputCache = [];
     public ?int $pid = null;
 

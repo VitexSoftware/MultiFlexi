@@ -209,4 +209,26 @@ EOD;
 
         return parent::completeDataRow($dataRow);
     }
+
+    /**
+     * Return Credential and its CredentialType environment.
+     */
+    public function query(): ConfigFields
+    {
+        $credentialEnv = new ConfigFields();
+
+        foreach ($this->credator->listingQuery()->where('credential_id', $this->getMyKey()) as $credential) {
+            $field = new ConfigField($credential['name'], $credential['type'], $credential['name'], '', '', $credential['value']);
+            $field->setSource(sprintf(_('Credential #%d'), $credential['credential_id']));
+            $credentialEnv->addField($field);
+            $this->setDataValue($credential['name'], $credential['value']);
+        }
+
+        if ($this->getDataValue('credential_type_id')) {
+            $credType = new CredentialType($this->getDataValue('credential_type_id'));
+            $credentialEnv->addFields($credType->query());
+        }
+
+        return $credentialEnv;
+    }
 }

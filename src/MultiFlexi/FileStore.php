@@ -88,18 +88,18 @@ class FileStore extends Engine
     /**
      * Extract files for a given job and return its list in format field => path/filename.
      */
-    public function extractFilesForJob(\MultiFlexi\Job $job): array
+    public function extractFilesForJob(\MultiFlexi\Job $job): ConfigFields
     {
-        $files = [];
+        $files = new ConfigFields();
         $jobId = $job->getMyKey();
 
         $records = $this->getColumnsFromSQL(['id', 'field', 'file_path', 'file_name', 'file_data'], ['job_id' => $jobId]);
 
         foreach ($records as $record) {
             if (file_put_contents($record['file_path'].'_'.$record['file_name'], $record['file_data'])) {
-                $files[$record['field']]['value'] = $record['file_path'].'_'.$record['file_name'];
-                $files[$record['field']]['source'] = \Ease\Logger\Message::getCallerName($this).':'.$record['id'];
-                $files[$record['field']]['description'] = _('uploaded file');
+                $file = new ConfigField($record['field'], 'file-path', $record['field'], _('uploaded file'), '', $record['file_path'].'_'.$record['file_name']);
+                $file->setSource(\Ease\Logger\Message::getCallerName($this).':'.$record['id']);
+                $files->addField($file);
             }
         }
 
