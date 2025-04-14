@@ -25,6 +25,7 @@ class RuntemplateRequirementsChoser extends \Ease\Html\DivTag
     private array $providers;
     private array $credTypes;
     private array $assigned;
+    private array $assignedCredentials = [];
 
     public function __construct(\MultiFlexi\RunTemplate $runtemplater, $properties = [])
     {
@@ -35,6 +36,8 @@ class RuntemplateRequirementsChoser extends \Ease\Html\DivTag
         $this->providers = \MultiFlexi\Requirement::getCredentialProviders();
         $this->credTypes = \MultiFlexi\Requirement::getCredentialTypes($runtemplater->getCompany());
         $this->assigned = \MultiFlexi\Requirement::getCredentials($runtemplater->getCompany());
+
+        $this->assignedCredentials = $runtemplater->getCredentialsAssigned();
 
         foreach ($runtemplater->getRequirements() as $requirement) {
             $this->addItem($this->requirementPanel($requirement, $runtemplater));
@@ -51,7 +54,7 @@ class RuntemplateRequirementsChoser extends \Ease\Html\DivTag
         if (\array_key_exists($requirement, $this->providers)) {
             if (\array_key_exists($requirement, $this->credTypes)) {
                 $state = 'success';
-                $widget->addItem(new CredentialSelect('credential['.$requirement.']', $companyId, $requirement));
+                $widget->addItem(new CredentialSelect('credential['.$requirement.']', $companyId, $requirement, (string) $this->assignedCredentials[$requirement]['credentials_id']));
 
                 $helper = new \MultiFlexi\CredentialType();
                 $credTypes = $helper->listingQuery()->where('company_id', $companyId)->where('class', $requirement);

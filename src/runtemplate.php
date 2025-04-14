@@ -60,8 +60,8 @@ if (WebPage::singleton()->isPosted()) {
             $rtplcrd = new \MultiFlexi\RunTplCreds();
 
             foreach ($dataToSave['credential'] as $reqType => $reqId) {
-                if ($reqId) {
-                    $rtplcrd->bind($runTemplate->getMyKey(), (int) $reqId);
+                if ($reqId && is_numeric($reqId)) {
+                    $rtplcrd->bind($runTemplate->getMyKey(), (int) $reqId, $reqType);
                 } else {
                     $rtplcrd->unbindAll($runTemplate->getMyKey(), $reqType);
                 }
