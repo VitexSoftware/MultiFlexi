@@ -129,7 +129,7 @@ class ConfigFields implements \Iterator
     }
 
     /**
-     * Add multiplete ConfigFields.
+     * Add multiple ConfigFields.
      */
     public function addFields(self $configs): self
     {
