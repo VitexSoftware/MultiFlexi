@@ -107,7 +107,7 @@ class RunTemplate extends \MultiFlexi\DBEngine
      *
      * @return bool
      */
-    public function setState(bool $state)
+    public function setState(bool $state): bool
     {
         if ($state === false) {
             $this->setDataValue('interv', 'n');

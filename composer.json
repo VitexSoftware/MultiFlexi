@@ -54,12 +54,10 @@
             "MultiFlexi\\Env\\": "src/MultiFlexi/Env",
             "MultiFlexi\\Action\\": "src/MultiFlexi/Action",
             "MultiFlexi\\Zabbix\\": "src/MultiFlexi/Zabbix",
-            "MultiFlexi\\Pohoda\\": "src/MultiFlexi/Pohoda",
             "MultiFlexi\\Command\\": "src/MultiFlexi/Command",
             "MultiFlexi\\Ui\\Form\\": "src/MultiFlexi/Ui/Form",
             "MultiFlexi\\Executor\\": "src/MultiFlexi/Executor",
             "MultiFlexi\\Api\\Auth\\": "src/MultiFlexi/Api/Auth",
-            "MultiFlexi\\AbraFlexi\\": "src/MultiFlexi/AbraFlexi",
             "MultiFlexi\\Api\\Server\\": "src/MultiFlexi/Api/Server",
             "MultiFlexi\\CredentialType\\": "src/MultiFlexi/CredentialType"
         }
