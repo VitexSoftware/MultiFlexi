@@ -34,7 +34,7 @@ function updateFiltering(input, columnName, gridId) {
 
     dataTable.draw();
 
-    if ($(input).val().length == 0) {
+    if ($(input).val().length === 0) {
         unsetFilterLabel(columnName);
         $(input).removeClass('tablefilter');
         $(dataTable.column(colIndex).nodes()).removeClass('filtered');
