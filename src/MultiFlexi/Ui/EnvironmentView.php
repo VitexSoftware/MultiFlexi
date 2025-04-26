@@ -32,12 +32,15 @@ class EnvironmentView extends \Ease\Html\TableTag
         $this->addRowHeaderColumns([_('Name'), _('Value'), _('Source')]);
 
         foreach ($environment as $key => $field) {
-            if (!\array_key_exists('value', $envData) && \array_key_exists('defval', $envData)) {
-                $envData['value'] = new \Ease\TWB4\Badge('inverse', $envData['defval'], ['title' => _('Default Value')]);
-            }
-
-            if (\array_key_exists('type', $envData) && $envData['type'] === 'secret') {
+            $this->addRowColumns([new \Ease\Html\SpanTag($key, ['title' => $field->getDescription()]), $field->getValue(), $field->getSource()]);
+        }
+    }
+    
+    public function functionName($param) {
+            if ($field->isSecret()) {
                 $envData['value'] = preg_replace('(.)', '*', $envData['value']);
+            } else {
+                $envData['value'] = new \Ease\TWB4\Badge('inverse', $field->getDefaultValue(), ['title' => _('Default Value')]);
             }
 
             //            if(empty($envData['value'])){
@@ -58,7 +61,8 @@ class EnvironmentView extends \Ease\Html\TableTag
                 $source = end($ns);
             }
 
-            $this->addRowColumns([new \Ease\Html\SpanTag($key, ['title' => \array_key_exists('description', $envData) ? $envData['description'] : '']), $envData['value'], $source]);
-        }
+        
     }
+    
+    
 }

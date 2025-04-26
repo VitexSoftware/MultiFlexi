@@ -1,19 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi;
 
-use MultiFlexi\ConfigFields;
 use MultiFlexi\ConfigField;
+use MultiFlexi\ConfigFields;
 
 /**
  * Tests for MultiFlexi\ConfigFields.
  */
 class ConfigFieldsTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var ConfigFields
-     */
-    protected $object;
+    protected ConfigFields $object;
 
     /**
      * Sets up the fixture.
@@ -24,9 +34,9 @@ class ConfigFieldsTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\ConfigFields::getFields
+     * @covers \MultiFlexi\ConfigFields::getFields
      */
-    public function testGetFields()
+    public function testGetFields(): void
     {
         $field1 = new ConfigField('FIELD1', 'string', 'Field 1', 'Description 1');
         $field2 = new ConfigField('FIELD2', 'string', 'Field 2', 'Description 2');
@@ -42,9 +52,9 @@ class ConfigFieldsTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\ConfigFields::addField
+     * @covers \MultiFlexi\ConfigFields::addField
      */
-    public function testAddField()
+    public function testAddField(): void
     {
         $field = new ConfigField('FIELD1', 'string', 'Field 1', 'Description 1');
         $this->object->addField($field);
@@ -55,9 +65,9 @@ class ConfigFieldsTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\ConfigFields::getField
+     * @covers \MultiFlexi\ConfigFields::getField
      */
-    public function testGetField()
+    public function testGetField(): void
     {
         $field = new ConfigField('FIELD1', 'string', 'Field 1', 'Description 1');
         $this->object->addField($field);
@@ -67,9 +77,9 @@ class ConfigFieldsTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\ConfigFields::getFieldByCode
+     * @covers \MultiFlexi\ConfigFields::getFieldByCode
      */
-    public function testGetFieldByCode()
+    public function testGetFieldByCode(): void
     {
         $field = new ConfigField('FIELD1', 'string', 'Field 1', 'Description 1');
         $this->object->addField($field);
@@ -79,9 +89,9 @@ class ConfigFieldsTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\ConfigFields::getEnvArray
+     * @covers \MultiFlexi\ConfigFields::getEnvArray
      */
-    public function testGetEnvArray()
+    public function testGetEnvArray(): void
     {
         $field1 = new ConfigField('FIELD1', 'string', 'Field 1', 'Description 1');
         $field1->setValue('Value1');
@@ -100,9 +110,9 @@ class ConfigFieldsTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\ConfigFields::current
+     * @covers \MultiFlexi\ConfigFields::current
      */
-    public function testCurrent()
+    public function testCurrent(): void
     {
         $field = new ConfigField('FIELD1', 'string', 'Field 1', 'Description 1');
         $this->object->addField($field);
@@ -111,9 +121,9 @@ class ConfigFieldsTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\ConfigFields::key
+     * @covers \MultiFlexi\ConfigFields::key
      */
-    public function testKey()
+    public function testKey(): void
     {
         $field = new ConfigField('FIELD1', 'string', 'Field 1', 'Description 1');
         $this->object->addField($field);
@@ -122,9 +132,9 @@ class ConfigFieldsTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\ConfigFields::next
+     * @covers \MultiFlexi\ConfigFields::next
      */
-    public function testNext()
+    public function testNext(): void
     {
         $field1 = new ConfigField('FIELD1', 'string', 'Field 1', 'Description 1');
         $field2 = new ConfigField('FIELD2', 'string', 'Field 2', 'Description 2');
@@ -137,9 +147,9 @@ class ConfigFieldsTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\ConfigFields::rewind
+     * @covers \MultiFlexi\ConfigFields::rewind
      */
-    public function testRewind()
+    public function testRewind(): void
     {
         $field1 = new ConfigField('FIELD1', 'string', 'Field 1', 'Description 1');
         $field2 = new ConfigField('FIELD2', 'string', 'Field 2', 'Description 2');
@@ -153,9 +163,9 @@ class ConfigFieldsTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\ConfigFields::valid
+     * @covers \MultiFlexi\ConfigFields::valid
      */
-    public function testValid()
+    public function testValid(): void
     {
         $field = new ConfigField('FIELD1', 'string', 'Field 1', 'Description 1');
         $this->object->addField($field);

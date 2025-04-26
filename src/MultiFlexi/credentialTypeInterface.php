@@ -35,4 +35,6 @@ interface credentialTypeInterface
     public function save(): bool;
 
     public function query(): ConfigFields;
+
+    // TODO: public function validate(): bool;
 }

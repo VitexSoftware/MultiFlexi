@@ -104,8 +104,6 @@ class RunTemplate extends \MultiFlexi\DBEngine
 
     /**
      * Set APP State.
-     *
-     * @return bool
      */
     public function setState(bool $state): bool
     {

@@ -39,7 +39,7 @@ class RunTemplateTest extends \PHPUnit\Framework\TestCase
      */
     public function testrunTemplateID(): void
     {
-        $this->assertIsInt($this->object->runTemplateID(1,1));
+        $this->assertIsInt($this->object->runTemplateID(1, 1));
     }
 
     /**

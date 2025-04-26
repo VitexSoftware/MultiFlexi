@@ -1,5 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Test\MultiFlexi;
 
 use MultiFlexi\Artifact;
@@ -9,10 +22,7 @@ use MultiFlexi\Artifact;
  */
 class ArtifactTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var Artifact
-     */
-    protected $object;
+    protected Artifact $object;
 
     /**
      * Sets up the fixture.
@@ -23,7 +33,7 @@ class ArtifactTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Artifact::createArtifact
+     * @covers \MultiFlexi\Artifact::createArtifact
      */
     public function testcreateArtifact(): void
     {
@@ -35,7 +45,7 @@ class ArtifactTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Artifact::getArtifactById
+     * @covers \MultiFlexi\Artifact::getArtifactById
      */
     public function testgetArtifactById(): void
     {
@@ -51,7 +61,7 @@ class ArtifactTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Artifact::updateArtifact
+     * @covers \MultiFlexi\Artifact::updateArtifact
      */
     public function testupdateArtifact(): void
     {
@@ -69,7 +79,7 @@ class ArtifactTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers MultiFlexi\Artifact::deleteArtifact
+     * @covers \MultiFlexi\Artifact::deleteArtifact
      */
     public function testdeleteArtifact(): void
     {
