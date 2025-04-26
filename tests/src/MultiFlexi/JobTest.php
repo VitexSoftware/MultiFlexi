@@ -32,7 +32,6 @@ class JobTest extends \PHPUnit\Framework\TestCase
     {
         $this->object = new Job();
         $this->env = new \MultiFlexi\ConfigFields();
-        
     }
 
     /**
