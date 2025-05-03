@@ -20,7 +20,7 @@ case "$1" in
     composer-debian multiflexi
 
      if [ "$1" = "purge" ]; then
-
+        echo "purging multiflexi zabbix"
      fi
 
     ;;
