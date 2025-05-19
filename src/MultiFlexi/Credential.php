@@ -55,32 +55,25 @@ class Credential extends DBEngine
 
         $fieldData = [];
 
-        if (\array_key_exists('formType', $data)) {
-            $class = '\\MultiFlexi\\Ui\\Form\\'.$data['formType'];
+        $credType = new \MultiFlexi\CredentialType((int) $data['credential_type_id']);
+        $fields = $credType->getFields();
 
-            if (class_exists($class)) {
-                $formColumns = $class::fields();
-
-                foreach ($formColumns as $filed => $properties) {
-                    if (\array_key_exists($filed, $data)) {
-                        $fieldData[$filed] = $properties;
-                        $fieldData[$filed]['value'] = $data[$filed];
-                        unset($data[$filed]);
-                    }
-                }
+        foreach ($data as $columName => $value) {
+            if ($fields->getFieldByCode($columName)) {
+                \Ease\Functions::divDataArray($data, $fieldData, $columName);
             }
         }
 
         $recordId = parent::insertToSQL($data);
 
         if ($fieldData) {
-            foreach ($fieldData as $filedName => $fieldProperties) {
+            foreach ($fieldData as $filedName => $fieldValue) {
                 $this->credator->insertToSQL(
                     [
                         'credential_id' => $recordId,
                         'name' => $filedName,
-                        'value' => $fieldProperties['value'],
-                        'type' => $fieldProperties['type'],
+                        'value' => $fieldValue,
+                        'type' => $fields->getFieldByCode($filedName)->getType(),
                     ],
                 );
             }
@@ -97,37 +90,39 @@ class Credential extends DBEngine
 
         $originalData = $data;
 
-        if (\array_key_exists('formType', $data)) {
-            $class = '\\MultiFlexi\\Ui\\Form\\'.$data['formType'];
+        $fieldData = [];
 
-            if (class_exists($class)) {
-                $currentData = $this->credator->listingQuery()->where('credential_id', $this->getMyKey())->fetchAll('name');
-                $fields = $class::fields();
+        $credType = new \MultiFlexi\CredentialType((int) $data['credential_type_id']);
+        $fields = $credType->getFields();
 
-                foreach (\array_keys($fields) as $filed) {
-                    if (\array_key_exists($filed, $data)) {
-                        if (\array_key_exists($filed, $currentData)) {
-                            $this->credator->updateToSQL(
-                                ['value' => $data[$filed]],
-                                [
-                                    'credential_id' => $this->getMyKey(),
-                                    'name' => $filed,
-                                ],
-                            );
-                        } else {
-                            $this->credator->insertToSQL(
-                                ['value' => $data[$filed],
-                                    'credential_id' => $this->getMyKey(),
-                                    'name' => $filed,
-                                    'type' => $fields[$filed]['type'],
-                                ],
-                            );
-                        }
-
-                        unset($data[$filed]);
-                    }
-                }
+        foreach ($data as $columName => $value) {
+            if ($fields->getFieldByCode($columName)) {
+                \Ease\Functions::divDataArray($data, $fieldData, $columName);
             }
+        }
+
+        $currentData = $this->credator->listingQuery()->where('credential_id', $this->getMyKey())->fetchAll('name');
+
+        foreach (\array_keys($fieldData) as $field) {
+            if (\array_key_exists($field, $currentData)) {
+                $this->credator->updateToSQL(
+                    ['value' => $fieldData[$field]],
+                    [
+                        'credential_id' => $this->getMyKey(),
+                        'name' => $field,
+                    ],
+                );
+            } else {
+                $this->credator->insertToSQL(
+                    ['value' => $fieldData[$field],
+                        'credential_id' => $this->getMyKey(),
+                        'name' => $field,
+                        'type' => $fields->getFieldByCode($filed)->getType(),
+                    ],
+                );
+            }
+
+            unset($fieldData[$field]); // Processed field data
         }
 
         $this->takeData($originalData);

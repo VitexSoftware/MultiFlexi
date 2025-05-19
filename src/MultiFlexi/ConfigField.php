@@ -34,6 +34,7 @@ class ConfigField
     private bool $required = false;
     private bool $isSecret = false; // New property to mark sensitive content
     private bool $isManual = true;
+    private bool $multiLine = false;
 
     /**
      * ConfigField constructor.
@@ -157,7 +158,7 @@ class ConfigField
      */
     public function setType(string $type): self
     {
-        $allowedTypes = ['string', 'file-path', 'email', 'url', 'integer', 'float', 'bool', 'password'];
+        $allowedTypes = ['string', 'file-path', 'email', 'url', 'integer', 'float', 'bool', 'password', 'set'];
 
         if (!\in_array($type, $allowedTypes, true)) {
             throw new \InvalidArgumentException("Invalid type: {$type}. Allowed types are: ".implode(', ', $allowedTypes));
@@ -236,6 +237,24 @@ class ConfigField
     }
 
     /**
+     * Set whether the field should use a textarea (multi-line input).
+     */
+    public function setMultiLine(bool $multiLine): self
+    {
+        $this->multiLine = $multiLine;
+
+        return $this;
+    }
+
+    /**
+     * Check if the field should use a textarea (multi-line input).
+     */
+    public function isMultiLine(): bool
+    {
+        return $this->multiLine;
+    }
+
+    /**
      * Get the configuration field as an array.
      *
      * @return array<string, bool|string>
@@ -255,6 +274,7 @@ class ConfigField
             'note' => $this->getNote(),
             'secret' => $this->isSecret(),
             'manual' => $this->isManual(),
+            'multiline' => $this->isMultiLine(), // Added multiLine to array
         ];
     }
 }
