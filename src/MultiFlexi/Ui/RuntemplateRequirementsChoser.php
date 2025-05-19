@@ -69,7 +69,7 @@ class RuntemplateRequirementsChoser extends \Ease\Html\DivTag
             } else {
                 $state = 'warning';
                 $adders->addItem(new \Ease\TWB4\LinkButton('credentialtype.php?company_id='.$companyId.'&class='.$requirement, '️➕ 🔐'._('Create Credential type'), 'success btn-sm', ['title' => _('New Credential Type')]));
-                $runtemplate->addStatusMessage(sprintf(_('Define credential type using %s'), $requirement));
+                $runtemplate->addStatusMessage(sprintf(_('Please, define The Credential type using %s'), $requirement));
             }
         } else {
             $state = 'danger';

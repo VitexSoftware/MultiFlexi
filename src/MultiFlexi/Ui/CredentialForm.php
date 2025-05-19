@@ -68,7 +68,7 @@ class CredentialForm extends Form
 
         $credentialNameHint = $companySelect->getDataValue($kredenc->getDataValue('company_id')).' / '.$credentialTypeSelect->getDataValue($credentialTypeSelect->defaultValue);
 
-        $formContents[] = new FormGroup(_('Credential Name'), new InputTextTag('name', $kredenc->getRecordName()), $credentialNameHint);
+        $formContents[] = new FormGroup(_('Credential Name'), new InputTextTag('name', $kredenc->getRecordName() ?? $credentialNameHint), $credentialNameHint);
 
         if (null !== $kredenc->getMyKey()) {
             $rtplcr = new RunTplCreds();

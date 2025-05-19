@@ -24,8 +24,20 @@ final class CheckboxToBool extends AbstractMigration
      */
     public function change(): void
     {
-        $this->execute("UPDATE conffield SET type = 'bool' WHERE type = 'checkbox'");
         $this->execute("UPDATE conffield SET type = 'file-path' WHERE type = 'file'");
+        // Update 'checkbox' to 'bool'
+        $this->execute("UPDATE conffield SET type = 'bool' WHERE type = 'checkbox'");
+
+        // Update 'boolean' to 'bool'
+        $this->execute("UPDATE conffield SET type = 'bool' WHERE type = 'boolean'");
+
+        // Update 'text' to 'string'
+        $this->execute("UPDATE conffield SET type = 'string' WHERE type = 'text'");
+
+        // Update 'number' to 'integer'
         $this->execute("UPDATE conffield SET type = 'integer' WHERE type = 'number'");
+
+        // Update 'select' to 'set'
+        $this->execute("UPDATE conffield SET type = 'set' WHERE type = 'select'");
     }
 }
