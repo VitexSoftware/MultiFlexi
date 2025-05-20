@@ -31,7 +31,7 @@ class Credential extends DBEngine
     public function takeData(array $data): int
     {
         if (\array_key_exists('name', $data) === false || empty($data['name'])) {
-            if ($data['company_id']) {
+            if (\array_key_exists('company_id', $data) && $data['company_id']) {
                 $companer = new Company((int) $data['company_id']);
 
                 $data['name'] = $companer->getRecordName();

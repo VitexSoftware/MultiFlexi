@@ -626,10 +626,12 @@ EOD;
     public static function applyMarcros(string $template, ConfigFields $fields): string
     {
         $hydrated = $template;
+
         foreach ($fields->getFields() as $envKey => $envField) {
             $value = method_exists($envField, 'getValue') ? $envField->getValue() : '';
             $hydrated = str_replace('{'.$envKey.'}', (string) $value, $hydrated);
         }
+
         return $hydrated;
     }
 

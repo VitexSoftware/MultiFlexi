@@ -158,7 +158,7 @@ class ConfigField
      */
     public function setType(string $type): self
     {
-        $allowedTypes = ['string', 'file-path', 'email', 'url', 'integer', 'float', 'bool', 'password', 'set'];
+        $allowedTypes = ['string', 'file-path', 'email', 'url', 'integer', 'float', 'bool', 'password', 'set', 'text'];
 
         if (!\in_array($type, $allowedTypes, true)) {
             throw new \InvalidArgumentException("Invalid type: {$type}. Allowed types are: ".implode(', ', $allowedTypes));
@@ -166,7 +166,7 @@ class ConfigField
 
         $this->type = $type;
 
-        return $this;
+        return $this->setMultiLine($type === 'text');
     }
     public function getType(): string
     {

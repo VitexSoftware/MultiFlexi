@@ -17,10 +17,10 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 
+use Ease\Html\DivTag;
+use Ease\TWB4\Panel;
 use MultiFlexi\Credential;
 use MultiFlexi\CredentialType;
-use Ease\TWB4\Panel;
-use Ease\Html\DivTag;
 
 /**
  * Convert the "Old style credential" to new Dynamic style:
@@ -38,7 +38,6 @@ use Ease\Html\DivTag;
  * 2. Create new \MultiFlexi\CredentialType() with `formType` value from \MultiFlexi\Credential() as its `class` field
  * 3. Update the `credential_type_id` in the `credentials` table to the new \MultiFlexi\CredentialType() ID
  * 4. Update the `formType` in the `credentials` table to null
- *
  */
 WebPage::singleton()->onlyForLogged();
 
@@ -46,39 +45,75 @@ WebPage::singleton()->addItem(new PageTop(_('MultiFlexi')));
 
 // Conversion logic
 $messages = [];
-$oldCreds = (new Credential())->listingQuery()->where(['formType !=' => null])->fetchAll();
+$oldCreds = (new Credential())->listingQuery()->fetchAll();
 
 if (empty($oldCreds)) {
     $messages[] = new DivTag('<div class="alert alert-success">No old style credentials found.</div>');
 } else {
-    $messages[] = new DivTag('<div class="alert alert-warning">Found '.count($oldCreds).' old style credentials. Starting conversion...</div>');
+    $messages[] = new DivTag('<div class="alert alert-warning">Found '.\count($oldCreds).' old style credentials. Starting conversion...</div>');
     $converted = 0;
+
     foreach ($oldCreds as $cred) {
-        $formType = $cred['formType'];
-        if (!$formType) continue;
-        // Try to find or create CredentialType for this formType
-        $credType = (new CredentialType())->listingQuery()->where(['class' => $formType])->fetch();
-        if (!$credType) {
-            $credTypeObj = new CredentialType();
-            $credTypeObj->takeData([
-                'name' => $formType,
-                'class' => $formType,
-                'company_id' => $cred['company_id'] ?? null
-            ]);
-            $credTypeId = $credTypeObj->insertToSQL();
-            $credType = $credTypeObj->getData();
-        } else {
-            $credTypeId = $credType['id'];
+        if ($cred['credential_type_id'] === 0) {
+            $formType = $cred['formType'];
+
+            if (!$formType) {
+                continue;
+            }
+
+            // Try to find or create CredentialType for this formType
+            $credType = (new CredentialType())->listingQuery()->where(['class' => $formType, 'company_id' => $cred['company_id']])->fetch();
+
+            if (!$credType) {
+                $credTypeObj = new CredentialType();
+                $credTypeObj->takeData([
+                    'name' => $formType.' '.(new \MultiFlexi\Company($cred['company_id']))->getRecordName(),
+                    'class' => $formType,
+                    'company_id' => $cred['company_id'] ?? null,
+                ]);
+                $credTypeId = $credTypeObj->insertToSQL();
+                $credType = $credTypeObj->getData();
+
+                foreach ($credType->getProvided() as $addField) {
+                    $columnProvided = $crtype->getHelper()->fieldsProvided()->getFieldByCode($addField);
+
+                    if (\is_object($columnProvided)) {
+                        $fielder->dataReset();
+                        $toInsert = [
+                            'credential_type_id' => $crtype->getMyKey(),
+                            'keyname' => $columnProvided->getCode(),
+                            'type' => $columnProvided->getType(),
+                            'description' => $columnProvided->getDescription(),
+                            'hint' => $columnProvided->getHint(),
+                            'defval' => $columnProvided->getDefaultValue(),
+                            'required' => $columnProvided->isRequired(),
+                            'helper' => $addField,
+                        ];
+
+                        $fielder->takeData($toInsert);
+
+                        try {
+                            $fielder->insertToSQL();
+                        } catch (\PDOException $exc) {
+                            $fielder->addStatusMessage(sprintf(_('Column %s not added to %s'), $columnProvided->getCode(), $crtype->getRecordName()), 'error');
+                        }
+                    }
+                }
+            } else {
+                $credTypeId = $credType['id'];
+            }
+
+            // Update credential
+            $credObj = new Credential($cred['id']);
+            $credObj->takeData(['credential_type_id' => $credTypeId, 'formType' => null, 'class' => $formType]);
+            $credObj->updateToSQL();
+            ++$converted;
         }
-        // Update credential
-        $credObj = new Credential($cred['id']);
-        $credObj->setDataValue('credential_type_id', $credTypeId);
-        $credObj->setDataValue('formType', null);
-        $credObj->updateToSQL();
-        $converted++;
+
+        $messages[] = new DivTag('<div class="alert alert-success">Converted '.$converted.' credentials to new style.</div>');
     }
-    $messages[] = new DivTag('<div class="alert alert-success">Converted '.$converted.' credentials to new style.</div>');
 }
+
 // Always add to WebPage directly to avoid container property error
 WebPage::singleton()->addItem(new Panel(_('Credential Conversion'), 'info', $messages));
 
