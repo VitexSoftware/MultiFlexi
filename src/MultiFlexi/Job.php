@@ -623,12 +623,13 @@ EOD;
     /**
      * Populate template by values from environment.
      */
-    public static function applyMarcros(string $template, array $fields): string
+    public static function applyMarcros(string $template, ConfigFields $fields): string
     {
-        foreach ($fields as $envKey => $envInfo) {
-            $hydrated = \array_key_exists('value', $envInfo) ? str_replace('{'.$envKey.'}', (string) $envInfo['value'], $template) : $template;
+        $hydrated = $template;
+        foreach ($fields->getFields() as $envKey => $envField) {
+            $value = method_exists($envField, 'getValue') ? $envField->getValue() : '';
+            $hydrated = str_replace('{'.$envKey.'}', (string) $value, $hydrated);
         }
-
         return $hydrated;
     }
 
