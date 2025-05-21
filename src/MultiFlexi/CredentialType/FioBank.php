@@ -22,7 +22,7 @@ namespace MultiFlexi\CredentialType;
  */
 class FioBank extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
 {
-    public static string $logo = 'images/Fio.svg';
+    public static string $logo = 'Fio.svg';
 
     public function __construct()
     {

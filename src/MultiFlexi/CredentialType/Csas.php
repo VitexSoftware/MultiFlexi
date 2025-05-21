@@ -74,7 +74,7 @@ class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\creden
     #[\Override]
     public static function logo(): string
     {
-        return 'images/csas-authorize.svg';
+        return 'csas-authorize.svg';
     }
 
     #[\Override]
