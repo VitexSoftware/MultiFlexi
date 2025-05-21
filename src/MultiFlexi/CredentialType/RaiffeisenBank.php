@@ -22,7 +22,7 @@ namespace MultiFlexi\CredentialType;
  */
 class RaiffeisenBank extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
 {
-    public static string $logo = 'images/RaiffeisenBank.svg';
+    public static string $logo = 'RaiffeisenBank.svg';
 
     public function __construct()
     {

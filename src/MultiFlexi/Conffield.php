@@ -87,7 +87,7 @@ class Conffield extends \Ease\SQL\Engine
         return $this->dbsync();
     }
 
-    public static function getAppConfigs($appId): ConfigFields
+    public static function getAppConfigs(int $appId): ConfigFields
     {
         $appConfiguration = new ConfigFields(_('Application Config Fields'));
 

@@ -52,6 +52,7 @@ if (empty($oldCreds)) {
 } else {
     $messages[] = new DivTag('<div class="alert alert-warning">Found '.\count($oldCreds).' old style credentials. Starting conversion...</div>');
     $converted = 0;
+    $credObj = new Credential();
 
     foreach ($oldCreds as $cred) {
         if ($cred['credential_type_id'] === 0) {
@@ -74,29 +75,28 @@ if (empty($oldCreds)) {
                 $credTypeId = $credTypeObj->insertToSQL();
                 $credType = $credTypeObj->getData();
 
-                foreach ($credType->getProvided() as $addField) {
-                    $columnProvided = $crtype->getHelper()->fieldsProvided()->getFieldByCode($addField);
+                $fields = $credTypeObj->getHelper()->fieldsProvided();
+                $fielder = new \MultiFlexi\CrTypeField();
 
-                    if (\is_object($columnProvided)) {
-                        $fielder->dataReset();
-                        $toInsert = [
-                            'credential_type_id' => $crtype->getMyKey(),
-                            'keyname' => $columnProvided->getCode(),
-                            'type' => $columnProvided->getType(),
-                            'description' => $columnProvided->getDescription(),
-                            'hint' => $columnProvided->getHint(),
-                            'defval' => $columnProvided->getDefaultValue(),
-                            'required' => $columnProvided->isRequired(),
-                            'helper' => $addField,
-                        ];
+                foreach ($fields as $addField) {
+                    $fielder->dataReset();
+                    $toInsert = [
+                        'credential_type_id' => $credTypeId,
+                        'keyname' => $addField->getCode(),
+                        'type' => $addField->getType(),
+                        'description' => $addField->getDescription(),
+                        'hint' => $addField->getHint(),
+                        'defval' => $addField->getDefaultValue(),
+                        'required' => $addField->isRequired(),
+                        'helper' => $addField->getName(),
+                    ];
 
-                        $fielder->takeData($toInsert);
+                    $fielder->takeData($toInsert);
 
-                        try {
-                            $fielder->insertToSQL();
-                        } catch (\PDOException $exc) {
-                            $fielder->addStatusMessage(sprintf(_('Column %s not added to %s'), $columnProvided->getCode(), $crtype->getRecordName()), 'error');
-                        }
+                    try {
+                        $fielder->insertToSQL();
+                    } catch (\PDOException $exc) {
+                        $fielder->addStatusMessage(sprintf(_('Column %s not added to %s'), $addField->getCode(), $credTypeObj->getRecordName()), 'error');
                     }
                 }
             } else {
@@ -104,9 +104,8 @@ if (empty($oldCreds)) {
             }
 
             // Update credential
-            $credObj = new Credential($cred['id']);
-            $credObj->takeData(['credential_type_id' => $credTypeId, 'formType' => null, 'class' => $formType]);
-            $credObj->updateToSQL();
+            $credObj->updateToSQL(['credential_type_id' => $credTypeId, 'formType' => null], ['id' => $cred['id']]);
+
             ++$converted;
         }
 

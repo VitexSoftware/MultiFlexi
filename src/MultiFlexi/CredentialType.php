@@ -59,6 +59,7 @@ class CredentialType extends DBEngine
             if (\array_key_exists('class', $data) && $data['class']) {
                 $credTypeClass = '\\MultiFlexi\\CredentialType\\'.$data['class'];
                 $nameparts['class'] = $credTypeClass::name();
+                $this->getHelper();
             }
 
             if (\array_key_exists('company_id', $data) && (int) $data['company_id']) {
@@ -71,14 +72,35 @@ class CredentialType extends DBEngine
         return parent::takeData($data);
     }
 
+    public function loadFromSQL($id = null)
+    {
+        $loaded = parent::loadFromSQL($id);
+        $class = $this->getDataValue('class');
+
+        if ($class) {
+            $this->getHelper();
+
+            if (empty($this->getDataValue('logo'))) {
+                $this->setDataValue('logo', $this->helper->logo());
+            }
+        }
+
+        return $loaded;
+    }
+
     public function getHelper(): ?\MultiFlexi\credentialTypeInterface
     {
-        if (!\is_object($this->helper) && $this->getDataValue('class')) {
-            $credTypeClass = '\\MultiFlexi\\CredentialType\\'.$this->getDataValue('class');
-            $this->helper = new $credTypeClass();
+        $class = $this->getDataValue('class');
 
-            if ($this->getMyKey()) {
-                $this->helper->load($this->getMyKey());
+        if ($class) {
+            $credTypeClass = '\\MultiFlexi\\CredentialType\\'.$class;
+
+            if ((\is_object($this->helper) === false) || (\Ease\Functions::baseClassName($this->helper) !== $class)) {
+                $this->helper = new $credTypeClass();
+
+                if ($this->getMyKey()) {
+                    $this->helper->load($this->getMyKey());
+                }
             }
         }
 
@@ -105,11 +127,20 @@ class CredentialType extends DBEngine
     #[\Override]
     public function completeDataRow(array $dataRowRaw): array
     {
+        $this->setData($dataRowRaw);
         $data = parent::completeDataRow($dataRowRaw);
 
-        if ($data['logo']) {
-            $data['logo'] = (string) new \Ease\Html\ImgTag($data['logo'], $data['name'], ['style' => 'height: 50px;']);
+        $helperClass = \get_class($this->getHelper() ?? new CredentialType\Common());
+
+        if (empty($data['logo'])) {
+            $data['logo'] = 'images/'.$helperClass::logo();
         }
+
+        if (empty($data['name'])) {
+            $data['name'] = $helperClass::name();
+        }
+
+        $data['logo'] = (string) new \Ease\Html\ATag('credentialtype.php?id='.$this->getMyKey(), new \Ease\Html\ImgTag($data['logo'], $data['name'], ['title' => $data['name'], 'style' => 'height: 50px;']));
 
         $data['company_id'] = (string) new Ui\CompanyLinkButton(new Company($dataRowRaw['company_id']), ['style' => 'height: 50px;']);
 
@@ -128,9 +159,14 @@ class CredentialType extends DBEngine
 
             if (empty($fieldData['helper']) === false) {
                 $fieldHelper = $this->getHelper()->fieldsProvided()->getFieldByCode($fieldData['helper']);
-                $field->setManual($fieldHelper->isManual());
-                $field->setRequired($fieldHelper->isRequired());
-                $field->setSecret($fieldHelper->isSecret());
+
+                if ($fieldHelper) {
+                    $field->setManual($fieldHelper->isManual());
+                    $field->setRequired($fieldHelper->isRequired());
+                    $field->setSecret($fieldHelper->isSecret());
+                } else {
+                    $this->addStatusMessage(sprintf(_('Unexistent field helper %s'), $fieldData['helper']), 'warning');
+                }
             }
 
             $fields->addField($field);
@@ -145,11 +181,12 @@ class CredentialType extends DBEngine
 
     public function query(): ConfigFields
     {
+        $crtypeFields = $this->getFields();
+
         if ($this->getDataValue('class')) {
             $helperData = $this->getHelper()->query();
-            $crtypeFields = $this->getFields();
 
-            foreach ($crtypeFields as $fieldKey => $field) {
+            foreach ($crtypeFields as $field) {
                 $helper = $field->getHelper();
                 $source = $helperData->getFieldByCode($helper);
 

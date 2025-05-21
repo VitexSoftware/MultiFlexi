@@ -67,7 +67,7 @@ class JobInfo extends \Ease\Html\DivTag
         $envTabs->addTab(_('Overview'), new EnvironmentView($job->getEnv()));
         $envTabs->addTab(_('export .env'), new JobDotEnv($job));
 
-        $jobTabs->addTab(_('Environment').' <span class="badge badge-info">'.\count($job->getEnv()).'</span>', [$jobInfoRow, $envTabs]);
+        $jobTabs->addTab(_('Environment').' <span class="badge badge-info">'.\count($job->getEnv()->getEnvArray()).'</span>', [$jobInfoRow, $envTabs]);
 
         $this->addItem($jobTabs);
     }

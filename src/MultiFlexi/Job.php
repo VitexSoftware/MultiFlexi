@@ -703,16 +703,29 @@ EOD;
      */
     public function envFile(): string
     {
+        $creds = $this->runTemplate->credentialsEnvironment();
+
         $launcher[] = '# '.\Ease\Shared::appName().' v'.\Ease\Shared::AppVersion().' Job 🏁 #'.$this->getMyKey().' environment. Generated '.(new \DateTime())->format('Y-m-d H:i:s').' for company: '.$this->company->getDataValue('name');
         $launcher[] = '';
 
-        $environment = array_merge($this->getDataValue('env') ? unserialize($this->getDataValue('env')) : [], $this->runTemplate->credentialsEnvironment());
+        if ($this->getDataValue('env')) {
+            foreach (unserialize($this->getDataValue('env')) as $configFieldName => $configFieldInfo) {
+                $field = $creds->getFieldByCode($configFieldName);
 
-        ksort($environment);
-
-        foreach ($environment as $key => $envInfo) {
-            $launcher[] = $key."='".$envInfo['value']."'";
+                if (null === $field) {
+                    $creds->addField(new ConfigField($configFieldName, 'string', $configFieldName, '', '', (string)$configFieldInfo['value']));
+                } else {
+                    $field->setValue($configFieldInfo['value']);
+                    $field->setSource($configFieldInfo['source']);
+                }
+            }
         }
+
+        foreach ($creds->getEnvArray() as $key => $value) {
+            $launcher[$key] = $key."='".$value."'";
+        }
+
+        ksort($launcher);
 
         return implode("\n", $launcher);
     }
