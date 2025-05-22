@@ -35,8 +35,12 @@ final class CredntialTypeCompany extends AbstractMigration
         $unsigned = ($databaseType === 'mysql') ? ['signed' => false] : [];
 
         $table = $this->table('credential_type');
-        $table->addColumn('company_id', 'integer', array_merge(['null' => false], $unsigned))
-            ->addForeignKey('company_id', 'company', ['id'], ['constraint' => 'ct-company_must_exist', 'delete' => 'CASCADE'])
-            ->update();
+
+        // Add the column only if it does not already exist
+        if (!$table->hasColumn('company_id')) {
+            $table->addColumn('company_id', 'integer', array_merge(['null' => false], $unsigned))
+                ->addForeignKey('company_id', 'company', ['id'], ['constraint' => 'ct-company_must_exist', 'delete' => 'CASCADE'])
+                ->update();
+        }
     }
 }
