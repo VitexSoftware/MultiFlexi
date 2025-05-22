@@ -27,6 +27,7 @@ case "$1" in
     ;;
 
     failed-upgrade)
+
         # Handle failed-upgrade case if needed
     ;;
 
@@ -35,5 +36,7 @@ case "$1" in
         exit 1
     ;;
 esac
+
+#DEBHELPER#
 
 exit 0
