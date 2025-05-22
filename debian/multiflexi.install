@@ -14,8 +14,6 @@ debian/conf/phinx-adapter.php	          usr/lib/multiflexi
 src/MultiFlexi/*.php                      usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Env/*.php                  usr/lib/multiflexi/MultiFlexi/Env/
 src/MultiFlexi/Command/*.php              usr/lib/multiflexi/MultiFlexi/Command/
-src/MultiFlexi/Pohoda/*.php               usr/lib/multiflexi/MultiFlexi/Pohoda/
-src/MultiFlexi/AbraFlexi/*.php            usr/lib/multiflexi/MultiFlexi/AbraFlexi/
 src/MultiFlexi/Executor/Native.php        usr/lib/multiflexi/MultiFlexi/Executor
 src/MultiFlexi/CredentialType/*.php       usr/lib/multiflexi/MultiFlexi/CredentialType/
 
