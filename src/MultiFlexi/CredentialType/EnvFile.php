@@ -102,7 +102,7 @@ class EnvFile extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\cre
     #[\Override]
     public static function logo(): string
     {
-        return 'images/env-file.svg';
+        return 'env-file.svg';
     }
 
     #[\Override]

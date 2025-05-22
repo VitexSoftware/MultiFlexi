@@ -48,51 +48,6 @@ abstract class Environmentor
         return $jobEnv;
     }
 
-    /**
-     * Add MetaData to Environment Fields.
-     */
-    public function addMetaData(array $environment): array
-    {
-        foreach ($this->engine->application->getAppEnvironmentFields() as $key => $envMeta) {
-            if (\array_key_exists($key, $environment)) {
-                foreach ($envMeta as $mKey => $mValue) {
-                    if (\array_key_exists($mKey, $environment[$key]) === false) {
-                        $environment[$key][$mKey] = $mValue;
-                    }
-                }
-            }
-        }
-
-        return $environment;
-    }
-
-    /**
-     * Add source to environment.
-     *
-     * @return array
-     */
-    public function addSelfAsSource(array $environmentRaw)
-    {
-        return self::addSource($environmentRaw, \get_class($this));
-    }
-
-    /**
-     * Add source to environment.
-     *
-     * @param array  $environmentFields EnvFields with info
-     * @param string $source            Force its source name to
-     *
-     * @return array
-     */
-    public static function addSource(array $environmentFields, string $source)
-    {
-        foreach ($environmentFields as $key => $fieldInfo) {
-            $environmentFields[$key]['source'] = $source;
-        }
-
-        return $environmentFields;
-    }
-
     public static function queryModules(array $modulesToQuery)
     {
         $moduleEnv = [];
@@ -109,20 +64,6 @@ abstract class Environmentor
         }
 
         return $moduleEnv;
-    }
-
-    /**
-     * Return only key=>value pairs.
-     */
-    public static function flatEnv(array $envInfo): array
-    {
-        $env = [];
-
-        foreach ($envInfo as $key => $envData) {
-            $env[$key] = $envData['value'];
-        }
-
-        return $env;
     }
 
     public function setEnvironment(): void

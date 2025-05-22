@@ -32,22 +32,15 @@ interface injector
      *
      * @return array
      */
-    public function getEnvironment();
-
-    /**
-     * Add MetaData to Environment Fields.
-     *
-     * @return array
-     */
-    public function addMetaData(array $environment);
+    public function getEnvironment(): \MultiFlexi\ConfigFields;
 
     /**
      * @return string name
      */
-    public static function name();
+    public static function name(): string;
 
     /**
      * @return string name
      */
-    public static function description();
+    public static function description(): string;
 }

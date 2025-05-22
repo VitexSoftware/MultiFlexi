@@ -20,21 +20,23 @@ namespace MultiFlexi\Env;
  *
  * @author vitex
  */
-class Logger extends \MultiFlexi\Environmentor implements injector
+class EaseLogger extends \MultiFlexi\Environmentor implements injector
 {
     /**
      * List of all known keys.
-     *
-     * @return array
      */
-    public static function allKeysHandled()
+    public static function allKeysHandled(): array
     {
         return ['EASE_LOGGER'];
     }
 
-    public function getEnvironment(): array
+    /**
+     * EaseLogger Related values.
+     */
+    public function getEnvironment(): \MultiFlexi\ConfigFields
     {
-        // If Zabbix action is enabled log only to syslog
+        $envEaseLogger = new \MultiFlexi\ConfigFields(self::name());
+
         $actions = $this->engine->runTemplate->getPostActions();
         $methods[] = 'syslog';
         $methods[] = 'console';
@@ -47,21 +49,17 @@ class Logger extends \MultiFlexi\Environmentor implements injector
             $methods[] = 'console';
         }
 
-        return $this->addMetaData($this->addSelfAsSource(['EASE_LOGGER' => ['value' => implode('|', $methods)]]));
+        $envEaseLogger->addField((new \MultiFlexi\ConfigField('EASE_LOGGER', 'string'))->setValue(implode('|', $methods)));
+
+        return $envEaseLogger;
     }
 
-    /**
-     * @return string
-     */
-    public static function name()
+    public static function name(): string
     {
         return _('Logger');
     }
 
-    /**
-     * @return string
-     */
-    public static function description()
+    public static function description(): string
     {
         return _('Handle Logging for Ease Framework based Applications');
     }

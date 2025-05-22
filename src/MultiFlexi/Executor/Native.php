@@ -27,7 +27,7 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
     public $timeout = 32767;
     private \Symfony\Component\Process\Process $process;
     private string $commandline;
-    private array $jobFiles = [];
+    private \MultiFlexi\ConfigFields $jobFiles;
 
     public static function name(): string
     {
@@ -43,8 +43,7 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
     {
         parent::setJob($job);
         $this->jobFiles = (new \MultiFlexi\FileStore())->extractFilesForJob($this->job);
-
-        $this->environment = array_merge($this->environment, $this->jobFiles);
+        $this->environment->addFields($this->jobFiles);
     }
 
     /**
@@ -72,7 +71,7 @@ class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
 
     public function launch($command)
     {
-        $this->process = new \Symfony\Component\Process\Process(explode(' ', $command), null, \MultiFlexi\Environmentor::flatEnv($this->environment), null, $this->timeout);
+        $this->process = new \Symfony\Component\Process\Process(explode(' ', $command), null, $this->environment->getEnvArray(), null, $this->timeout);
 
         try {
             $this->process->run(function ($type, $buffer): void {

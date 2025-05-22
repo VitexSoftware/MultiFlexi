@@ -33,5 +33,6 @@ class CompanySelect extends \Ease\Html\SelectTag
         }
 
         parent::__construct($name, $companies, (string) $defaultValue, $properties);
+        $this->setData($companies);
     }
 }

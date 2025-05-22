@@ -22,7 +22,7 @@ namespace MultiFlexi\CredentialType;
  */
 class mServer extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
 {
-    public static string $logo = 'images/mServer.svg';
+    public static string $logo = 'mServer.svg';
 
     public function __construct()
     {

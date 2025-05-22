@@ -53,6 +53,7 @@ class RunTemplate extends \MultiFlexi\DBEngine
         $this->myTable = 'runtemplate';
         parent::__construct($identifier, $options);
     }
+
     /**
      * Get Job Interval by Code.
      *
@@ -103,10 +104,8 @@ class RunTemplate extends \MultiFlexi\DBEngine
 
     /**
      * Set APP State.
-     *
-     * @return bool
      */
-    public function setState(bool $state)
+    public function setState(bool $state): bool
     {
         if ($state === false) {
             $this->setDataValue('interv', 'n');
@@ -395,12 +394,19 @@ class RunTemplate extends \MultiFlexi\DBEngine
         return new Company($this->getDataValue('company_id'));
     }
 
-    public function getRuntemplateEnvironment()
+    public function getRuntemplateEnvironment(): ConfigFields
     {
+        $runtemplateEnv = new ConfigFields(sprintf(_('RunTemplate %s'), $this->getRecordName()));
         $configurator = new Configuration();
         $cfg = $configurator->listingQuery()->select(['name', 'value', 'type'], true)->where(['runtemplate_id' => $this->getMyKey()])->fetchAll('name');
 
-        return Environmentor::addSource($cfg, \get_class($this));
+        foreach ($cfg as $conf) {
+            $field = new ConfigField($conf['name'], $conf['type'], $conf['name']);
+            $field->setValue($conf['value']);
+            $runtemplateEnv->addField($field);
+        }
+
+        return $runtemplateEnv;
     }
 
     public function setEnvironment(array $properties): bool
@@ -445,8 +451,13 @@ class RunTemplate extends \MultiFlexi\DBEngine
         return $icons;
     }
 
-    public function credentialsEnvironment()
+    /**
+     * @deprecated since version 1.27
+     */
+    public function legacyCredentialsEnvironment(): ConfigFields
     {
+        $credentialsEnv = new ConfigFields(_('RunTemplate Credentials'));
+
         $credentials = [];
         $rtplCrds = new RunTplCreds();
         $kredenc = new Credential();
@@ -455,18 +466,19 @@ class RunTemplate extends \MultiFlexi\DBEngine
             $kredenc->dataReset();
             $kredenc->loadFromSQL($crds['credentials_id']);
             $creds = $kredenc->getData();
-            unset($creds['id'],$creds['name'], $creds['company_id'], $creds['formType']);
+            unset($creds['id'], $creds['name'], $creds['company_id'], $creds['formType']);
             $this->addStatusMessage('Credentials: '.$crds['formType'].' "'.$crds['name'].'" '.implode(',', array_keys($creds)), 'debug');
 
             foreach ($creds as $key => $value) {
-                $credentials[$key]['value'] = $value;
-                $credentials[$key]['source'] = $crds['name'];
                 $credentials[$key]['credential_type'] = $crds['formType'];
                 $credentials[$key]['credential_id'] = $crds['id'];
+                $field = new ConfigField($key, 'string', $crds['name'], '');
+                $field->setSource((string) $crds['formType'])->setValue((string) $value);
+                $credentialsEnv->addField($field);
             }
         }
 
-        return $credentials;
+        return $credentialsEnv;
     }
 
     public function columns($columns = [])
@@ -508,12 +520,8 @@ class RunTemplate extends \MultiFlexi\DBEngine
         $launcher[] = '# '.\Ease\Shared::appName().' v'.\Ease\Shared::AppVersion().' Generated '.(new \DateTime())->format('Y-m-d H:i:s').' for company: '.$this->getCompany()->getDataValue('name');
         $launcher[] = '';
 
-        $environment = array_merge($this->getDataValue('env') ? unserialize($this->getDataValue('env')) : [], $this->credentialsEnvironment());
-
-        ksort($environment);
-
-        foreach ($environment as $key => $envInfo) {
-            $launcher[] = $key."='".$envInfo['value']."'";
+        foreach ($this->getEnvironment()->getEnvArray() as $key => $value) {
+            $launcher[] = $key."='".$value."'";
         }
 
         return implode("\n", $launcher);
@@ -531,5 +539,56 @@ class RunTemplate extends \MultiFlexi\DBEngine
         $dataRowRaw['company_id'] = (string) new Ui\CompanyLinkButton(new Company((int) $dataRowRaw['company_id']), ['style' => 'height: 40px;']);
 
         return $dataRowRaw;
+    }
+
+    public function getAssignedCredentials()
+    {
+        $crdHlpr = new \MultiFlexi\RunTplCreds();
+
+        return $crdHlpr->getCredentialsForRuntemplate($this->getMyKey())->fetchAll('formType');
+    }
+
+    /**
+     * @return array<string>
+     */
+    public function getRequirements(): array
+    {
+        return $this->getApplication()->getRequirements();
+    }
+
+    public function getEnvironment(): ConfigFields
+    {
+        $runTemplateFields = new ConfigFields();
+
+        $runTemplateFields->addFields($this->getRuntemplateEnvironment());
+
+        $runTemplateFields->addFields($this->legacyCredentialsEnvironment());
+
+        $runTemplateFields->addFields($this->credentialsEnvironment());
+
+        return $runTemplateFields;
+    }
+
+    public function credentialsEnvironment(): ConfigFields
+    {
+        $runTemplateCredTypeFields = new ConfigFields();
+
+        $credentialsEnv = new ConfigFields(_('RunTemplate CredentialType Values'));
+
+        $credentials = [];
+
+        foreach ($this->getCredentialsAssigned() as $requirement => $credentialData) {
+            $credentor = new Credential($credentialData['credentials_id']);
+            $runTemplateCredTypeFields->addFields($credentor->query());
+        }
+
+        return $runTemplateCredTypeFields;
+    }
+
+    public function getCredentialsAssigned(): array
+    {
+        $credentor = new RunTplCreds();
+
+        return $credentor->listingQuery()->select(['credentials.name AS credential_name', 'credential_type.name AS credential_type_name', 'credential_type.class AS credential_type_class', 'credential_type.uuid AS credential_type_uuid', 'credential_type.logo AS credential_type_logo'])->where('runtemplate_id', $this->getMyKey())->leftJoin('credentials ON credentials.id = runtplcreds.credentials_id')->leftJoin('credential_type ON credential_type.id = credentials.credential_type_id')->fetchAll('credential_type_class');
     }
 }

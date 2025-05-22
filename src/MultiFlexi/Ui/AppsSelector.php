@@ -22,7 +22,7 @@ namespace MultiFlexi\Ui;
  */
 class AppsSelector extends \Ease\Html\InputTextTag
 {
-    use \Ease\Html\Widgets\Selectizer;
+    use \Ease\TWB4\Widgets\Selectizer;
 
     public function __construct($identifier = null, $enabled = [], $optionsPage = 'app.php')
     {

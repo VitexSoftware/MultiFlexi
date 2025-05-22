@@ -22,7 +22,7 @@ namespace MultiFlexi\CredentialType;
  */
 class Office365 extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
 {
-    public static string $logo = 'images/Office365.svg';
+    public static string $logo = 'Office365.svg';
 
     public function __construct()
     {

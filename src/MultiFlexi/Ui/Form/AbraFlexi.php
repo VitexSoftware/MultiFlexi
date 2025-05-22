@@ -18,6 +18,8 @@ namespace MultiFlexi\Ui\Form;
 /**
  * Description of AbraFlexi.
  *
+ * @deprecated since version 1.27
+ *
  * @author Vitex <info@vitexsoftware.cz>
  */
 class AbraFlexi extends \Ease\TWB4\Panel implements configForm

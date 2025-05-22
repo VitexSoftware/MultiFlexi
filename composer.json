@@ -19,7 +19,7 @@
         "ext-simplexml": "*",
         "vitexsoftware/ease-twbootstrap4": "^1.9",
         "vitexsoftware/ease-fluentpdo": "dev-main",
-        "vitexsoftware/ease-twbootstrap4-widgets": "^1.6",
+        "vitexsoftware/ease-twbootstrap4-widgets": "^1.7",
         "robmorgan/phinx": "^0.14",
         "datatables/datatables": "^1.10",
         "symfony/process": "^5.4",
@@ -35,7 +35,7 @@
         "vitexsoftware/ease-html": "^1.40",
         "vitexsoftware/multiflexi-api-server": "dev-main",
         "symfony/console": "^6.4",
-        "cboden/ratchet": "dev-master",
+        "cboden/ratchet": "^0.5",
         "textalk/websocket": "dev-master"
     },
     "license": "MIT",
@@ -54,12 +54,10 @@
             "MultiFlexi\\Env\\": "src/MultiFlexi/Env",
             "MultiFlexi\\Action\\": "src/MultiFlexi/Action",
             "MultiFlexi\\Zabbix\\": "src/MultiFlexi/Zabbix",
-            "MultiFlexi\\Pohoda\\": "src/MultiFlexi/Pohoda",
             "MultiFlexi\\Command\\": "src/MultiFlexi/Command",
             "MultiFlexi\\Ui\\Form\\": "src/MultiFlexi/Ui/Form",
             "MultiFlexi\\Executor\\": "src/MultiFlexi/Executor",
             "MultiFlexi\\Api\\Auth\\": "src/MultiFlexi/Api/Auth",
-            "MultiFlexi\\AbraFlexi\\": "src/MultiFlexi/AbraFlexi",
             "MultiFlexi\\Api\\Server\\": "src/MultiFlexi/Api/Server",
             "MultiFlexi\\CredentialType\\": "src/MultiFlexi/CredentialType"
         }

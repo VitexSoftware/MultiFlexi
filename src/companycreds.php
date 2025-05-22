@@ -18,6 +18,10 @@ namespace MultiFlexi\Ui;
 use Ease\Html\ATag;
 use MultiFlexi\Company;
 
+/**
+ * @deprecated This credential handling method is deprecated. Please use the new credential management system.
+ */
+
 require_once './init.php';
 WebPage::singleton()->onlyForLogged();
 $companies = new Company(WebPage::getRequestValue('company_id', 'int'));
@@ -28,12 +32,20 @@ $kredenc->setDataValue('company_id', $companies->getMyKey());
 
 $creds = $kredenc->listingQuery()->where(['company_id' => $companies->getMyKey()])->fetchAll();
 $credList = new \Ease\TWB4\Table();
-$credList->addRowHeaderColumns(['', _('Name'), _('Type'), _('Used by')]);
+$credList->addRowHeaderColumns(['', _('Name'), _('Type'), _('Used by'), _('Convert')]); // Added new column header
 $rtplcr = new \MultiFlexi\RunTplCreds();
 
 foreach ($creds as $crd) {
     unset($crd['company_id']);
     $crd['name'] = new ATag('credential.php?id='.$crd['id'], $crd['name']);
+    // Add Convert button column
+    $convertUrl = 'credup.php?id='.$crd['id'];
+
+    if ($crd['credential_type_id'] === 0) {
+        $crd['convert'] = new \Ease\TWB4\LinkButton($convertUrl, _('Convert to dynamic Credential type'), 'warning btn-sm');
+    } else {
+        $crd['convert'] = new \Ease\TWB4\LinkButton('credentialtype.php?id='.$crd['credential_type_id'], _('🔑'), 'success btn-sm');
+    }
 
     $class = '\\MultiFlexi\\Ui\\Form\\'.$crd['formType'];
 
@@ -70,7 +82,7 @@ foreach ($creds as $crd) {
 }
 
 $companyPanelContents[] = $credList;
-$bottomLine = new \Ease\TWB4\LinkButton('credential.php?company_id='.$companies->getMyKey(), '️➕ 🔐'._('Create'), 'info btn-lg btn-block');
+$bottomLine = new \Ease\TWB4\LinkButton('credential.php?company_id='.$companies->getMyKey(), '️➕ 🔐'._('Create'), 'info btn-lg btn-block disabled');
 
 WebPage::singleton()->container->addItem(new CompanyPanel($companies, $companyPanelContents, $bottomLine));
 WebPage::singleton()->addItem(new PageBottom('company/'.$companies->getMyKey()));

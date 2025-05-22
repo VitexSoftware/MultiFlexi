@@ -33,6 +33,8 @@ class ConfigField
     private ?string $defaultValue = null;
     private bool $required = false;
     private bool $isSecret = false; // New property to mark sensitive content
+    private bool $isManual = true;
+    private bool $multiLine = false;
 
     /**
      * ConfigField constructor.
@@ -44,11 +46,11 @@ class ConfigField
      * @param string $hint        Field hint
      * @param string $value       Field value
      */
-    public function __construct(string $code, string $type, string $name, string $description, string $hint = '', ?string $value = null)
+    public function __construct(string $code, string $type, string $name = '', string $description = '', string $hint = '', ?string $value = null)
     {
         $this->setCode($code);
         $this->setType($type);
-        $this->setName($name);
+        $this->setName(empty($name) ? $code : $name);
         $this->setDescription($description);
         $this->setHint($hint);
         $this->setValue($value);
@@ -156,7 +158,7 @@ class ConfigField
      */
     public function setType(string $type): self
     {
-        $allowedTypes = ['string', 'file-path', 'email', 'url', 'integer', 'float', 'bool'];
+        $allowedTypes = ['string', 'file-path', 'email', 'url', 'integer', 'float', 'bool', 'password', 'set', 'text'];
 
         if (!\in_array($type, $allowedTypes, true)) {
             throw new \InvalidArgumentException("Invalid type: {$type}. Allowed types are: ".implode(', ', $allowedTypes));
@@ -164,7 +166,7 @@ class ConfigField
 
         $this->type = $type;
 
-        return $this;
+        return $this->setMultiLine($type === 'text');
     }
     public function getType(): string
     {
@@ -217,6 +219,42 @@ class ConfigField
     }
 
     /**
+     * Set whether the field value is populated manually.
+     */
+    public function setManual(bool $isManual): self
+    {
+        $this->isManual = $isManual;
+
+        return $this;
+    }
+
+    /**
+     * Is the field populated manually ?
+     */
+    public function isManual(): bool
+    {
+        return $this->isManual;
+    }
+
+    /**
+     * Set whether the field should use a textarea (multi-line input).
+     */
+    public function setMultiLine(bool $multiLine): self
+    {
+        $this->multiLine = $multiLine;
+
+        return $this;
+    }
+
+    /**
+     * Check if the field should use a textarea (multi-line input).
+     */
+    public function isMultiLine(): bool
+    {
+        return $this->multiLine;
+    }
+
+    /**
      * Get the configuration field as an array.
      *
      * @return array<string, bool|string>
@@ -234,7 +272,9 @@ class ConfigField
             'required' => $this->isRequired(),
             'source' => $this->getSource(),
             'note' => $this->getNote(),
-            'secret' => $this->isSecret(), // Include the isSecret flag
+            'secret' => $this->isSecret(),
+            'manual' => $this->isManual(),
+            'multiline' => $this->isMultiLine(), // Added multiLine to array
         ];
     }
 }

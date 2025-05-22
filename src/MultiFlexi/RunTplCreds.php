@@ -38,13 +38,10 @@ class RunTplCreds extends Engine
         return $this->listingQuery()->select(['credentials.name', 'credentials.formType'])->where(['runtemplate_id' => $runtemplates_id])->leftJoin('credentials ON credentials.id=runtplcreds.credentials_id');
     }
 
-    public function bind(int $runtemplate_id, int $credentials_id)
+    public function bind(int $runtemplate_id, int $credentials_id, string $reqType)
     {
-        $check = $this->listingQuery()->where(['runtemplate_id' => $runtemplate_id, 'credentials_id' => $credentials_id]);
-
-        if ($check->count() === 0) {
-            $this->insertToSQL(['runtemplate_id' => $runtemplate_id, 'credentials_id' => $credentials_id]);
-        }
+        $this->unbindAll($runtemplate_id, $reqType);
+        $this->insertToSQL(['runtemplate_id' => $runtemplate_id, 'credentials_id' => $credentials_id]);
 
         return true;
     }
@@ -58,7 +55,7 @@ class RunTplCreds extends Engine
     {
         $runtemplater = new RunTemplate($runtemplate_id);
         $kredenc = new Credential();
-        $candidates = $kredenc->listingQuery()->where(['company_id' => $runtemplater->getDataValue('company_id'), 'formType' => $reqType]);
+        $candidates = $kredenc->listingQuery()->leftJoin('credential_type ON credential_type.id = credentials.credential_type_id')->where(['credentials.company_id' => $runtemplater->getDataValue('company_id'), 'credential_type.class' => $reqType]);
 
         foreach ($candidates as $candidat) {
             $this->unbind($runtemplate_id, $candidat['id']);

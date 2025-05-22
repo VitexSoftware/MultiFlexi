@@ -13,16 +13,21 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace MultiFlexi\Ui\Form;
+namespace MultiFlexi\Ui;
 
 /**
- * @deprecated since version 1.27
+ * Description of CompanySelect.
  *
- * @author vitex
+ * @author Vitex <info@vitexsoftware.cz>
  */
-interface configForm
+class CompanySelectize extends CompanySelect
 {
-    public static function fields(): array;
+    use \Ease\TWB4\Widgets\Selectizer;
 
-    public static function name(): string;
+    #[\Override]
+    public function finalize(): void
+    {
+        $this->selectize();
+        parent::finalize();
+    }
 }

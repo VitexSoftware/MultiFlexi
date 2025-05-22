@@ -22,7 +22,7 @@ namespace MultiFlexi\CredentialType;
  */
 class AbraFlexi extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
 {
-    public static string $logo = 'images/AbraFlexi.svg';
+    public static string $logo = 'AbraFlexi.svg';
 
     public function __construct()
     {

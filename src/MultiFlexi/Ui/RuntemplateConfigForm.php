@@ -35,100 +35,25 @@ class RuntemplateConfigForm extends EngineForm
         $fieldsOf = [];
         $fieldSource = [];
         $credSource = [];
-        $formAvailable = \MultiFlexi\Requirement::formsAvailable();
 
-        foreach ($appRequirements as $formRequired) {
-            $formClass = '\\MultiFlexi\\Ui\\Form\\'.$formRequired;
-
-            if (class_exists($formClass)) {
-                $formAvailable[$formRequired] = $formClass::name();
-                $fieldsOf[$formRequired] = $formClass::fields();
-
-                foreach ($fieldsOf[$formRequired] as $fieldName => $fieldInfo) {
-                    $fieldSource[$fieldName] = $formRequired;
-                }
-            }
-        }
-
-        $kredenc = new \MultiFlexi\Credential();
-        $companyCredentials = $kredenc->getCompanyCredentials($engine->getDataValue('company_id'), $appRequirements);
-
-        $companyCredentialsByType = [];
-
-        $crdHlpr = new \MultiFlexi\RunTplCreds();
-        $usedCreds = $crdHlpr->getCredentialsForRuntemplate($engine->getMyKey())->fetchAll('formType');
-
-        foreach ($companyCredentials as $credInfo) {
-            $companyCredentialsByType[$credInfo['formType']][$credInfo['name']] = $credInfo;
-        }
-
-        $reqsRow = new \Ease\TWB4\Row();
+        $credentialProvidersAvailable = \MultiFlexi\Requirement::getCredentialProviders();
+        $credentialTypesAvailable = \MultiFlexi\Requirement::getCredentialTypes($engine->getCompany());
+        $credentialsAvailable = \MultiFlexi\Requirement::getCredentials($engine->getCompany());
+        $credentialsAssigned = $engine->getAssignedCredentials();
 
         $credData = [];
 
-        foreach ($appRequirements as $req) {
-            $formClass = '\\MultiFlexi\\Ui\\Form\\'.$req;
-            $credentialChosen = '';
-
-            if (\array_key_exists($req, $formAvailable)) {
-                if (\array_key_exists($req, $companyCredentialsByType)) {
-                    foreach ($usedCreds as $credentialUsed) {
-                        $credentialChosen = (string) $credentialUsed['credentials_id'];
-                        $kredenc->loadFromSQL($credentialUsed['credentials_id']);
-
-                        foreach ($kredenc->getData() as $overrideKey => $overrideValue) {
-                            if ($overrideKey !== 'id' && $overrideKey !== 'name' && $overrideKey !== 'company_id' && $overrideKey !== 'formType') {
-                                if (\array_key_exists($overrideKey, $credData) === false) {
-                                    $credData[$overrideKey] = $overrideValue;
-                                    $credSource[$overrideKey] = $credentialChosen;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                $reqsRow->addColumn(2, [
-                    new \Ease\Html\ImgTag($formClass::$logo, $req, ['title' => $formClass::name(), 'height' => '30']), new CredentialSelect('credential['.$req.']', $engine->getDataValue('company_id'), $req, \array_key_exists($req, $usedCreds) ? (string) $usedCreds[$req]['credentials_id'] : ''),
-                    new \Ease\TWB4\LinkButton('credential.php?company_id='.$engine->getDataValue('company_id').'&formType='.$req, '️➕ 🔐', 'success btn-sm', ['title' => _('New Credential')]),
-                ]);
-            } else {
-                if (\array_key_exists($req, $formAvailable) === false) {
-                    $noCredType = [
-                        new \Ease\TWB4\Badge('warning', sprintf(_('Form %s not available'), '"'.$req.'"')),
-                        new \Ease\TWB4\LinkButton('credentialtype.php?company_id='.$engine->getDataValue('company_id').'&class='.$req, '️➕ 🔐', 'success btn-sm', ['title' => _('New Credential Type')]),
-                    ];
-
-                    $reqsRow->addColumn(2, $noCredType);
-                }
-            }
-        }
-
-        $this->addItem($reqsRow);
+        $this->addItem(new RuntemplateRequirementsChoser($engine));
 
         $appFields = \MultiFlexi\Conffield::getAppConfigs($engine->getDataValue('app_id'));
 
-        $columns = array_keys(array_merge($appFields, $customized));
+        $appFields->addFields($customized);
 
-        ksort($columns);
-
-        foreach ($columns as $fieldName) {
-            if (\array_key_exists($fieldName, $appFields) && \array_key_exists($fieldName, $defaults)) {
-                $fieldInfo = array_merge($defaults[$fieldName], $appFields[$fieldName]);
+        foreach ($appFields as $fieldName => $field) {
+            if ($field->getType() === 'bool') {
+                $input = new \Ease\Html\DivTag(new \Ease\TWB4\Widgets\Toggle($fieldName, $field->getValue() === 'true' ? true : false, 'true', []));
             } else {
-                if (\array_key_exists($fieldName, $customized)) {
-                    $fieldInfo = $customized[$fieldName];
-                    $fieldInfo['description'] = _('ℹ️ Custom Field');
-                } else {
-                    $fieldInfo = \array_key_exists($fieldName, $appFields) ? $appFields[$fieldName] : ['type' => 'text', 'source' => _('Custom')];
-                }
-            }
-
-            $value = \array_key_exists('value', $fieldInfo) ? $fieldInfo['value'] : '';
-
-            if ($fieldInfo['type'] === 'checkbox') {
-                $input = new \Ease\Html\DivTag(new \Ease\TWB4\Widgets\Toggle($fieldName, $value === 'true' ? true : false, 'true', []));
-            } else {
-                $input = new \Ease\Html\InputTag($fieldName, $value, ['type' => $fieldInfo['type']]);
+                $input = new \Ease\Html\InputTag($fieldName, $field->getValue(), ['type' => $field->getType()]);
             }
 
             if (\array_key_exists($fieldName, $fieldSource)) {
@@ -149,16 +74,16 @@ class RuntemplateConfigForm extends EngineForm
                     $fieldLink = $formIcon.'&nbsp;'.$fieldName;
                 }
 
-                $formGroup = $this->addInput($input, $fieldLink, \array_key_exists('defval', $fieldInfo) ? $fieldInfo['defval'] : '', \array_key_exists('description', $fieldInfo) ? $fieldInfo['description'] : '');
+                $formGroup = $this->addInput($input, $fieldLink, $field->getDefaultValue(), $field->getDescription());
             } else {
-                $formGroup = $this->addInput($input, $fieldName.'&nbsp;('.$fieldInfo['source'].')', \array_key_exists('defval', $fieldInfo) ? $fieldInfo['defval'] : '', \array_key_exists('description', $fieldInfo) ? $fieldInfo['description'] : '');
+                $formGroup = $this->addInput($input, $fieldName.'&nbsp;('.$field->getSource().')', $field->getDefaultValue(), $field->getDescription());
             }
 
-            if (\array_key_exists('required', $fieldInfo) && $fieldInfo['required']) {
+            if ($field->isRequired()) {
                 $formGroup->addTagClass('bg-danger');
             }
 
-            if (\array_key_exists($fieldName, $customized)) {
+            if ($field->getSource()) {
                 $formGroup->addTagClass('bg-info');
             }
         }

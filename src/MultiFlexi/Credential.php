@@ -31,12 +31,10 @@ class Credential extends DBEngine
     public function takeData(array $data): int
     {
         if (\array_key_exists('name', $data) === false || empty($data['name'])) {
-            if ($data['company_id']) {
+            if (\array_key_exists('company_id', $data) && $data['company_id']) {
                 $companer = new Company((int) $data['company_id']);
 
-                $data['name'] = $companer->getRecordName().' '.$data['formType'].' '.$data['id'];
-            } else {
-                $data['name'] = $data['formType'].' '.$data['id'];
+                $data['name'] = $companer->getRecordName();
             }
         }
 
@@ -55,32 +53,25 @@ class Credential extends DBEngine
 
         $fieldData = [];
 
-        if (\array_key_exists('formType', $data)) {
-            $class = '\\MultiFlexi\\Ui\\Form\\'.$data['formType'];
+        $credType = new \MultiFlexi\CredentialType((int) $data['credential_type_id']);
+        $fields = $credType->getFields();
 
-            if (class_exists($class)) {
-                $formColumns = $class::fields();
-
-                foreach ($formColumns as $filed => $properties) {
-                    if (\array_key_exists($filed, $data)) {
-                        $fieldData[$filed] = $properties;
-                        $fieldData[$filed]['value'] = $data[$filed];
-                        unset($data[$filed]);
-                    }
-                }
+        foreach ($data as $columName => $value) {
+            if ($fields->getFieldByCode($columName)) {
+                \Ease\Functions::divDataArray($data, $fieldData, $columName);
             }
         }
 
         $recordId = parent::insertToSQL($data);
 
         if ($fieldData) {
-            foreach ($fieldData as $filedName => $fieldProperties) {
+            foreach ($fieldData as $filedName => $fieldValue) {
                 $this->credator->insertToSQL(
                     [
                         'credential_id' => $recordId,
                         'name' => $filedName,
-                        'value' => $fieldProperties['value'],
-                        'type' => $fieldProperties['type'],
+                        'value' => $fieldValue,
+                        'type' => $fields->getFieldByCode($filedName)->getType(),
                     ],
                 );
             }
@@ -97,37 +88,39 @@ class Credential extends DBEngine
 
         $originalData = $data;
 
-        if (\array_key_exists('formType', $data)) {
-            $class = '\\MultiFlexi\\Ui\\Form\\'.$data['formType'];
+        $fieldData = [];
 
-            if (class_exists($class)) {
-                $currentData = $this->credator->listingQuery()->where('credential_id', $this->getMyKey())->fetchAll('name');
-                $fields = $class::fields();
+        $credType = new \MultiFlexi\CredentialType((int) $data['credential_type_id']);
+        $fields = $credType->getFields();
 
-                foreach (\array_keys($fields) as $filed) {
-                    if (\array_key_exists($filed, $data)) {
-                        if (\array_key_exists($filed, $currentData)) {
-                            $this->credator->updateToSQL(
-                                ['value' => $data[$filed]],
-                                [
-                                    'credential_id' => $this->getMyKey(),
-                                    'name' => $filed,
-                                ],
-                            );
-                        } else {
-                            $this->credator->insertToSQL(
-                                ['value' => $data[$filed],
-                                    'credential_id' => $this->getMyKey(),
-                                    'name' => $filed,
-                                    'type' => $fields[$filed]['type'],
-                                ],
-                            );
-                        }
-
-                        unset($data[$filed]);
-                    }
-                }
+        foreach ($data as $columName => $value) {
+            if ($fields->getFieldByCode($columName)) {
+                \Ease\Functions::divDataArray($data, $fieldData, $columName);
             }
+        }
+
+        $currentData = $this->credator->listingQuery()->where('credential_id', $this->getMyKey())->fetchAll('name');
+
+        foreach (\array_keys($fieldData) as $field) {
+            if (\array_key_exists($field, $currentData)) {
+                $this->credator->updateToSQL(
+                    ['value' => $fieldData[$field]],
+                    [
+                        'credential_id' => $this->getMyKey(),
+                        'name' => $field,
+                    ],
+                );
+            } else {
+                $this->credator->insertToSQL(
+                    ['value' => $fieldData[$field],
+                        'credential_id' => $this->getMyKey(),
+                        'name' => $field,
+                        'type' => $fields->getFieldByCode($filed)->getType(),
+                    ],
+                );
+            }
+
+            unset($fieldData[$field]); // Processed field data
         }
 
         $this->takeData($originalData);
@@ -202,11 +195,34 @@ EOD;
 
     public function completeDataRow(array $dataRowRaw)
     {
+        $helper = new CredentialType($dataRowRaw['credential_type_id']);
         $dataRow['id'] = $dataRowRaw['id'];
         $dataRow['name'] = '<a title="'.$dataRowRaw['name'].'" href="credential.php?id='.$dataRowRaw['id'].'">'.$dataRowRaw['name'].'</a>';
-        $dataRow['formType'] = $dataRowRaw['formType'].'<br><a title="'.$dataRowRaw['formType'].'" href="credential.php?id='.$dataRowRaw['id'].'"><img src="images/'.$dataRowRaw['formType'].'.svg" height="50">';
+        $dataRow['formType'] = $dataRowRaw['formType'].'<br><a title="'.$dataRowRaw['formType'].'" href="credential.php?id='.$dataRowRaw['id'].'"><img src="images/'.$helper->getDataValue('logo').'" height="50">';
         $dataRow['company'] = (string) new Ui\CompanyLinkButton(new Company($dataRowRaw['company_id']), ['style' => 'height: 50px;']);
 
         return parent::completeDataRow($dataRow);
+    }
+
+    /**
+     * Return Credential and its CredentialType environment.
+     */
+    public function query(): ConfigFields
+    {
+        $credentialEnv = new ConfigFields();
+
+        foreach ($this->credator->listingQuery()->where('credential_id', $this->getMyKey()) as $credential) {
+            $field = new ConfigField($credential['name'], $credential['type'], $credential['name'], '', '', $credential['value']);
+            $field->setSource(sprintf(_('Credential #%d'), $credential['credential_id']));
+            $credentialEnv->addField($field);
+            $this->setDataValue($credential['name'], $credential['value']);
+        }
+
+        if ($this->getDataValue('credential_type_id')) {
+            $credType = new CredentialType($this->getDataValue('credential_type_id'));
+            $credentialEnv->addFields($credType->query());
+        }
+
+        return $credentialEnv;
     }
 }

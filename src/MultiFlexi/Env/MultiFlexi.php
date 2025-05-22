@@ -33,29 +33,24 @@ class MultiFlexi extends \MultiFlexi\Environmentor implements injector
     }
 
     /**
-     * MultiFlexi Related values.
+     * Application specific Environment.
      */
-    public function getEnvironment(): array
+    public function getEnvironment(): \MultiFlexi\ConfigFields
     {
-        return $this->addMetaData($this->addSelfAsSource([
-            'MULTIFLEXI_VERSION' => ['value' => \Ease\Shared::appVersion()],
-            'MULTIFLEXI_JOB_ID' => ['value' => $this->engine->getMyKey()],
-            'MULTIFLEXI_EXECUTOR' => ['value' => $this->engine->getDataValue('executor')],
-        ]));
+        $envApplication = new \MultiFlexi\ConfigFields(self::name());
+        $envApplication->addField((new \MultiFlexi\ConfigField('MULTIFLEXI_JOB_ID', 'integer'))->setValue($this->engine->getMyKey()));
+        $envApplication->addField((new \MultiFlexi\ConfigField('MULTIFLEXI_EXECUTOR', 'string'))->setValue($this->engine->getDataValue('executor')));
+        $envApplication->addField((new \MultiFlexi\ConfigField('MULTIFLEXI_VERSION', 'string'))->setValue(\Ease\Shared::appVersion()));
+
+        return $envApplication;
     }
 
-    /**
-     * @return string
-     */
-    public static function name()
+    public static function name(): string
     {
         return _('MultiFlexi');
     }
 
-    /**
-     * @return string
-     */
-    public static function description()
+    public static function description(): string
     {
         return _('Provide Informations about Current running Environment');
     }
