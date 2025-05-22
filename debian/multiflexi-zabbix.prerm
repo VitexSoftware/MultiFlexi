@@ -15,17 +15,20 @@ fi
 case "$1" in
     remove|upgrade|deconfigure|purge)
 
-    jq 'del(.require["zarplata/zabbix-sender"]) | del(.autoload."psr-4"."MultiFlexi\\Zabbix\\") | del(.autoload."psr-4"."MultiFlexi\\Zabbix\\Request\\") | del(.autoload."psr-4"."MultiFlexi\\Zabbix\\Exception\\")' /usr/lib/multiflexi/composer.json > /usr/lib/multiflexi/composer.json.tmp && mv /usr/lib/multiflexi/composer.json.tmp /usr/lib/multiflexi/composer.json
+        jq 'del(.require["zarplata/zabbix-sender"]) | del(.autoload."psr-4"."MultiFlexi\\Zabbix\\") | del(.autoload."psr-4"."MultiFlexi\\Zabbix\\Request\\") | del(.autoload."psr-4"."MultiFlexi\\Zabbix\\Exception\\")' /usr/lib/multiflexi/composer.json > /usr/lib/multiflexi/composer.json.tmp && mv /usr/lib/multiflexi/composer.json.tmp /usr/lib/multiflexi/composer.json
 
-    composer-debian multiflexi
+        composer-debian multiflexi
 
-     if [ "$1" = "purge" ]; then
-        echo "purging multiflexi zabbix"
-     fi
+        if [ "$1" = "purge" ]; then
+            # Add any specific commands for the "purge" case here if needed
+            echo "Purging multiflexi-zabbix..."
+        fi
 
     ;;
 
     failed-upgrade)
+
+        # Handle failed-upgrade case if needed
     ;;
 
     *)

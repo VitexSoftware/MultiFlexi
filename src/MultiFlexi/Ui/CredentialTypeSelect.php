@@ -16,21 +16,19 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 /**
- * Description of CredentialSelect.
+ * Description of CredentialSelect.F.
  *
  * @author vitex
  */
-class CredentialSelect extends \Ease\Html\SelectTag
+class CredentialTypeSelect extends \Ease\Html\SelectTag
 {
     use \Ease\TWB4\Widgets\Selectizer;
     private int $company_id;
-    private string $requirement;
 
-    public function __construct(string $name, int $company_id, string $requirement, string $selected = '', array $properties = [])
+    public function __construct(string $name, int $company_id, ?int $selected = null, array $properties = [])
     {
         $this->company_id = $company_id;
-        $this->requirement = $requirement;
-        parent::__construct($name, [], $selected, $properties);
+        parent::__construct($name, [], (string) $selected, $properties);
     }
 
     /**
@@ -40,17 +38,18 @@ class CredentialSelect extends \Ease\Html\SelectTag
      */
     public function loadItems()
     {
-        $kredenc = new \MultiFlexi\Credential();
+        $kredenc = new \MultiFlexi\CredentialType();
 
-        $credentials = ['-' => _('Do not use')];
-
-        $companyCredentials = $kredenc->listingQuery()->leftJoin('credentials ON credentials.credential_type_id = credential_type.id')->where('credentials.company_id', $this->company_id)->where('credential_type.class', $this->requirement)->fetchAll('id');
+        $credentials = ['' => _('Do not use')];
+        // ->where('class', $this->class)
+        $companyCredentials = $kredenc->listingQuery()->where('company_id', $this->company_id)->fetchAll('id');
 
         foreach ($companyCredentials as $credential) {
-            $credentials[$credential['id']] = $credential['name'];
+            $credentials[$credential['id']] = $credential['name'].' ⦉'.$credential['class'].'⦊';
         }
 
         ksort($credentials);
+        $this->setData($credentials);
 
         return $credentials;
     }

@@ -22,7 +22,7 @@ namespace MultiFlexi\CredentialType;
  */
 class SQLServer extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
 {
-    public static string $logo = 'images/SQLServer.svg';
+    public static string $logo = 'SQLServer.svg';
 
     public function __construct()
     {
@@ -36,7 +36,7 @@ class SQLServer extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\c
         $hostField->setHint('127.0.0.1')->setValue('127.0.0.1');
 
         $portField = new \MultiFlexi\ConfigField('DB_PORT', 'integer', _('Database Port'), _('Port of the SQL Server'));
-        $portField->setHint('1433')->setValue(1433);
+        $portField->setHint('1433')->setValue('1433');
 
         $databaseField = new \MultiFlexi\ConfigField('DB_DATABASE', 'string', _('Database Name'), _('Name of the database'));
         $databaseField->setHint('StwPh_12345678_2023')->setValue('');

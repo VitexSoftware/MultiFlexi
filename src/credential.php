@@ -38,12 +38,16 @@ if (null !== $delete) {
 }
 
 if (WebPage::singleton()->isPosted()) {
-    if ($kredenc->takeData($_POST) && null !== $kredenc->dbsync()) {
-        $kredenc->addStatusMessage(_('Credential field Saved'), 'success');
-    } else {
+    try {
+        if ($kredenc->takeData($_POST) && null !== $kredenc->dbsync()) {
+            $kredenc->addStatusMessage(_('Credential field Saved'), 'success');
+        }
+    } catch (\PDOException $exc) {
         $kredenc->addStatusMessage(_('Error saving Credential field'), 'error');
     }
 } else {
+    $kredenc->setDataValue('credential_type_id', WebPage::getRequestValue('credential_type_id'));
+
     if ((null === WebPage::getRequestValue('company_id')) === false) {
         $kredenc->setDataValue('company_id', WebPage::getRequestValue('company_id'));
     }

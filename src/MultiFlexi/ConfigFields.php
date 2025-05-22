@@ -26,6 +26,12 @@ class ConfigFields implements \Iterator
      * @var array<string, ConfigField>
      */
     private array $fields = [];
+    private string $name = '';
+
+    public function __construct(string $name = '')
+    {
+        $this->setName($name);
+    }
 
     /**
      * @return array<string, ConfigField> all Configuration fields
@@ -42,6 +48,7 @@ class ConfigFields implements \Iterator
     {
         $code = $field->getCode();
         $this->fields[$code] = $field;
+        ksort($this->fields);
     }
 
     /**
@@ -49,27 +56,31 @@ class ConfigFields implements \Iterator
      *
      * @return null|ConfigField[]
      */
-    public function getField(string $class): ?ConfigField
+    public function getField(string $name): ?ConfigField
     {
-        return \array_key_exists($class, $this->fields) ? $this->fields : null;
+        return \array_key_exists($name, $this->fields) ? $this->fields[$name] : null;
     }
 
     public function &getFieldByCode(string $code): ?ConfigField
     {
         $field = \array_key_exists($code, $this->fields) ? $this->fields[$code] : null;
 
+        if ($field && empty($field->getSource()) && $this->getName()) {
+            $field->setSource($this->getName());
+        }
+
         return $field;
     }
 
     /**
-     * @return array<string, ConfigField>
+     * @return array<string, string>
      */
-    public function getArray(): array
+    public function getEnvArray(): array
     {
         $fields = [];
 
         foreach ($this->fields as $field) {
-            $fields[$field->getCode()] = $field;
+            $fields[$field->getCode()] = $field->getValue();
         }
 
         return $fields;
@@ -103,5 +114,39 @@ class ConfigFields implements \Iterator
     public function valid(): bool
     {
         return key($this->fields) !== null;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * Add multiple ConfigFields.
+     */
+    public function addFields(self $configs): self
+    {
+        foreach ($configs as $config) {
+            $this->addField($config);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Field names list.
+     *
+     * @return array<string>
+     */
+    public function getFieldNames(): array
+    {
+        return array_keys($this->fields);
     }
 }

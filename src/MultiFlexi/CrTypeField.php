@@ -41,7 +41,7 @@ class CrTypeField extends Engine
         foreach ($this->listingQuery()->where(['credential_type_id' => $credentialType->getMyKey()]) as $fieldData) {
             $field = new ConfigFieldWithHelper($fieldData['keyname'], $fieldData['type'], $fieldData['keyname'], $fieldData['description']);
             $field->setHint($fieldData['hint'])->setDefaultValue($fieldData['defval'])->setRequired($fieldData['required'])->setHelper($fieldData['helper']);
-            $fields->addField($filed);
+            $fields->addField($field);
         }
 
         return $fields;
