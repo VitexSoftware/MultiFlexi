@@ -47,6 +47,7 @@ class CredentialForm extends Form
         $formContents = [];
         $formType = $kredenc->getDataValue('formType');
 
+        $credentialTypeSelect = null; // Ensure variable is always defined
         if ($kredenc->getDataValue('company_id')) {
             $credentialTypeSelect = new CredentialTypeSelect('credential_type_id', (int) $kredenc->getDataValue('company_id'), (int) $kredenc->getDataValue('credential_type_id'));
             $credentialTypeSelect->finalize();
@@ -54,19 +55,24 @@ class CredentialForm extends Form
             if ($credentialTypeSelect->getItemsCount()) {
                 $formContents[] = new FormGroup(_('Credential Type'), $credentialTypeSelect);
             } else {
-                $formContents[] = new FormGroup(_('Credential Type'), new SpanTag(_('No credential types for company defined yet')));
+                // Use a disabled input to show the message instead of SpanTag
+                $formContents[] = new FormGroup(_('Credential Type'), new InputTextTag('credential_type_id', _('No credential types for company defined yet'), ['readonly' => 'readonly', 'disabled' => 'disabled']));
             }
 
             $formContents[] = new LinkButton('credentialtype.php?company_id='.$kredenc->getDataValue('company_id').'&class='.$formType, '️➕ 🔐', 'success btn-sm', ['title' => _('New Credential Type')]);
         } else {
-            $formContents[] = new FormGroup(_('Choose company first'), new InputHiddenTag('credential_type_id', 0));
+            $formContents[] = new FormGroup(_('Choose company first'), new InputHiddenTag('credential_type_id', '0'));
         }
 
         $companySelect = new CompanySelect('company_id', (int) $kredenc->getDataValue('company_id'));
-
         $formContents[] = new FormGroup(_('Company'), $companySelect);
 
-        $credentialNameHint = $companySelect->getDataValue($kredenc->getDataValue('company_id')).' / '.$credentialTypeSelect->getDataValue($credentialTypeSelect->defaultValue);
+        // Only use $credentialTypeSelect if it is an object
+        if ($credentialTypeSelect instanceof CredentialTypeSelect) {
+            $credentialNameHint = $companySelect->getDataValue($kredenc->getDataValue('company_id')).' / '.$credentialTypeSelect->getDataValue($credentialTypeSelect->defaultValue);
+        } else {
+            $credentialNameHint = $companySelect->getDataValue($kredenc->getDataValue('company_id'));
+        }
 
         $formContents[] = new FormGroup(_('Credential Name'), new InputTextTag('name', $kredenc->getRecordName() ?? $credentialNameHint), $credentialNameHint);
 
@@ -106,7 +112,7 @@ class CredentialForm extends Form
             }
         }
 
-        $formContents[] = new InputHiddenTag('id', $kredenc->getMyKey());
+        $formContents[] = new InputHiddenTag('id', (string)($kredenc->getMyKey() ?? ''));
 
         $submitRow = new Row();
         $submitRow->addColumn(10, new SubmitButton('🍏 '._('Apply'), 'primary btn-lg btn-block'));
