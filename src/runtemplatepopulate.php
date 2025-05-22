@@ -28,8 +28,8 @@ namespace MultiFlexi\Ui;
 require_once './init.php';
 WebPage::singleton()->onlyForLogged();
 $result = false;
-$id = \Ease\TWB4\WebPage::getRequestValue('id', 'int');
-$replace = \Ease\TWB4\WebPage::getRequestValue('replace', 'string') === 'on';
+$id = \Ease\TWB5\WebPage::getRequestValue('id', 'int');
+$replace = \Ease\TWB5\WebPage::getRequestValue('replace', 'string') === 'on';
 
 if (null !== $id) {
     $runtemplater = new \MultiFlexi\RunTemplate($id);

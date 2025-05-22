@@ -19,8 +19,8 @@ require_once './init.php';
 
 WebPage::singleton()->onlyForLogged();
 
-$runtemplate_id = \Ease\TWB4\WebPage::getRequestValue('runtemplate', 'int');
-$interval = \Ease\TWB4\WebPage::getRequestValue('interval');
+$runtemplate_id = \Ease\TWB5\WebPage::getRequestValue('runtemplate', 'int');
+$interval = \Ease\TWB5\WebPage::getRequestValue('interval');
 $state = $interval !== 'n';
 
 $result = false;

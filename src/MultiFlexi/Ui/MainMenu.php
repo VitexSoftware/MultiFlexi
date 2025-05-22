@@ -61,7 +61,7 @@ class MainMenu extends \Ease\Html\DivTag
                     if (\count($servers) && \count($customers) && empty($companies)) {
                         \MultiFlexi\User::singleton()->addStatusMessage(_('No company registered yet. Please register one.'), 'warning');
                         $this->customersMenuEnabled($nav, $customers);
-                        $nav->addMenuItem(new \Ease\TWB4\LinkButton('companysetup.php', '🏭 '._('Companies'), 'warning'), 'right');
+                        $nav->addMenuItem(new \Ease\TWB5\LinkButton('companysetup.php', '🏭 '._('Companies'), 'warning'), 'right');
                     } else { // We Got All
                         //                        $this->customersMenuEnabled($nav, $customers);
                         $this->companiesMenuEnabled($nav, $companies);
@@ -71,7 +71,7 @@ class MainMenu extends \Ease\Html\DivTag
 
             if (empty($apps)) {
                 \MultiFlexi\User::singleton()->addStatusMessage(_('No application registered yet. Please register one.'), 'warning');
-                $nav->addMenuItem(new \Ease\TWB4\LinkButton('app.php', '<img width=30 src=images/apps.svg> '._('Applications'), 'warning'), 'right');
+                $nav->addMenuItem(new \Ease\TWB5\LinkButton('app.php', '<img width=30 src=images/apps.svg> '._('Applications'), 'warning'), 'right');
             } else {
                 $this->appsMenuEnabled($nav, $apps);
             }
@@ -157,7 +157,7 @@ class MainMenu extends \Ease\Html\DivTag
      */
     public function companiesMenuDisabled($nav): void
     {
-        $nav->addMenuItem(new \Ease\TWB4\LinkButton('companysetup.php', '<img width=30 src=images/company.svg> '._('Companies'), 'warning', ['class' => 'nav-link']));
+        $nav->addMenuItem(new \Ease\TWB5\LinkButton('companysetup.php', '<img width=30 src=images/company.svg> '._('Companies'), 'warning', ['class' => 'nav-link']));
     }
 
     /**
@@ -198,7 +198,7 @@ class MainMenu extends \Ease\Html\DivTag
                 'requirements.php' => '🔘&nbsp;'._('Requirements'),
                 'queue.php' => '⏳&nbsp;'._('Job queue'),
                 '' => '',
-                'users.php' => new \Ease\TWB4\Widgets\FaIcon('list').'&nbsp;'._('Users'),
+                'users.php' => '\u{1F465}&nbsp;'._('Users'), // Unicode icon for users
             ], $this->getMenuList(\Ease\Shared::user())),
         );
     }
@@ -249,7 +249,7 @@ EOD);
             $search = '#';
         }
 
-        $searchForm = new \Ease\TWB4\Form(['class' => 'form-inline my-2 my-lg-0', 'action' => 'search.php']);
+        $searchForm = new \Ease\TWB5\Form(['class' => 'form-inline my-2 my-lg-0', 'action' => 'search.php']);
         $searchForm->addItem(new \Ease\Html\InputTextTag('search', $search, ['aria-label' => _('Search'), 'class' => 'form-control mr-sm-2', 'type' => 'search', 'placeholder' => _('Search'), 'title' => _('#number to jump on record')]));
         $searchForm->addItem(new SearchSelect('what', [], $search));
         $searchForm->addItem(new \Ease\Html\ButtonTag(_('Search'), ['class' => 'btn btn-outline-success my-2 my-sm-0']));

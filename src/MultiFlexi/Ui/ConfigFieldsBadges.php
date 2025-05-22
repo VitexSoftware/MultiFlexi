@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 use Ease\Container;
-use Ease\TWB4\Badge;
+use Ease\TWB5\Badge;
 
 /**
  * Description of Confiffields.

@@ -17,9 +17,9 @@
     "require": {
         "ext-yaml": "*",
         "ext-simplexml": "*",
-        "vitexsoftware/ease-twbootstrap4": "^1.9",
+        "vitexsoftware/ease-twbootstrap5": "^1",
         "vitexsoftware/ease-fluentpdo": "dev-main",
-        "vitexsoftware/ease-twbootstrap4-widgets": "^1.7",
+        "vitexsoftware/ease-bootstrap5-widgets": "^1.4",
         "robmorgan/phinx": "^0.14",
         "datatables/datatables": "^1.10",
         "symfony/process": "^5.4",
@@ -79,10 +79,10 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "php -r \"copy('vendor/datatables/datatables/media/js/dataTables.bootstrap4.js', 'src/js/dataTables.bootstrap4.js');copy('vendor/datatables/datatables/media/js/jquery.dataTables.js', 'src/js/jquery.dataTables.js');copy('vendor/datatables/datatables/media/css/dataTables.bootstrap4.css','src/css/dataTables.bootstrap4.css');\""
+            "php -r \"copy('vendor/datatables/datatables/media/js/dataTables.bootstrap5.js', 'src/js/dataTables.bootstrap5.js');copy('vendor/datatables/datatables/media/js/jquery.dataTables.js', 'src/js/jquery.dataTables.js');copy('vendor/datatables/datatables/media/css/dataTables.bootstrap5.css','src/css/dataTables.bootstrap5.css');\""
         ],
         "post-update-cmd": [
-            "php -r \"copy('vendor/datatables/datatables/media/js/dataTables.bootstrap4.js', 'src/js/dataTables.bootstrap4.js');copy('vendor/datatables/datatables/media/js/jquery.dataTables.js', 'src/js/jquery.dataTables.js');copy('vendor/datatables/datatables/media/css/dataTables.bootstrap4.css','src/css/dataTables.bootstrap4.css');\""
+            "php -r \"copy('vendor/datatables/datatables/media/js/dataTables.bootstrap5.js', 'src/js/dataTables.bootstrap5.js');copy('vendor/datatables/datatables/media/js/jquery.dataTables.js', 'src/js/jquery.dataTables.js');copy('vendor/datatables/datatables/media/css/dataTables.bootstrap5.css','src/css/dataTables.bootstrap5.css');\""
         ]
     },
     "config": {

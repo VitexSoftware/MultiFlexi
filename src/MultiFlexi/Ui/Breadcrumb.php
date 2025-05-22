@@ -20,7 +20,7 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class Breadcrumb extends \Ease\TWB4\Breadcrumb
+class Breadcrumb extends \Ease\TWB5\Breadcrumb
 {
     /**
      * App Breadcrumb.

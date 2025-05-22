@@ -44,7 +44,7 @@ foreach ($apper->listingQuery() as $appInfo) {
 }
 
 foreach ($reqs as $reqirement => $apps) {
-    $head = new \Ease\TWB4\Row();
+    $head = new \Ease\TWB5\Row();
     $fields = [];
 
     $applications = [];
@@ -59,15 +59,15 @@ foreach ($reqs as $reqirement => $apps) {
         $head->addColumn(4, new \Ease\Html\H2Tag($forms[$reqirement]::name()));
 
         foreach ($forms[$reqirement]::fields() as $name => $fieldsInfo) {
-            $fields[] = new \Ease\TWB4\Badge('info', $name, ['title' => $fieldsInfo['type'], 'style' => 'margin: 4px;']);
+            $fields[] = new \Ease\TWB5\Badge('info', $name, ['title' => $fieldsInfo['type'], 'style' => 'margin: 4px;']);
         }
 
-        $reqPanel = new \Ease\TWB4\Panel($head, 'success', $applications, $fields);
+        $reqPanel = new \Ease\TWB5\Panel($head, 'success', $applications, $fields);
     } else {
         $head->addColumn(4, new \Ease\Html\ImgTag('images/cancel.svg', $reqirement, ['height' => '40px']));
         $head->addColumn(4, $reqirement);
         $head->addColumn(4, new \Ease\Html\H2Tag($reqirement));
-        $reqPanel = new \Ease\TWB4\Panel($head, 'warning', $applications, $fields);
+        $reqPanel = new \Ease\TWB5\Panel($head, 'warning', $applications, $fields);
     }
 
     WebPage::singleton()->container->addItem($reqPanel);

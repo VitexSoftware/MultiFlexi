@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use Ease\TWB4\Widgets\MainPageMenu;
+use Ease\TWB5\Widgets\MainPageMenu;
 use MultiFlexi\Application;
 
 /**

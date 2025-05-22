@@ -23,7 +23,7 @@ if ((null === \Ease\Shared::user()->getUserID()) === false) {
 
 WebPage::singleton()->addItem(new PageTop(_('Sign Off')));
 
-$byerow = new \Ease\TWB4\Row();
+$byerow = new \Ease\TWB5\Row();
 $byerow->addColumn(6, new \Ease\Html\ImgTag('images/openclipart/'.\MultiFlexi\Ui\OpenClipart::randomImage('images/openclipart')));
 $byeInfo = $byerow->addColumn(6, new \Ease\Html\H1Tag(_('Good bye')));
 

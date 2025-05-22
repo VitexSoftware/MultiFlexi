@@ -30,8 +30,8 @@ class ConfigurationWizard extends Wizard
         $this->step = (int) \Ease\WebPage::getRequestValue('step');
         $this->application = new \MultiFlexi\Application(\Ease\WebPage::getRequestValue('app_id', 'int'));
         $this->company = $company;
-        $footer = new \Ease\TWB4\ProgressBar($this->getStepPercent(), $this->getStepPercent().'% '.$this->getStepLabel(), 'progress-bar-striped progress-bar-animated bg-info');
-        $body = new \Ease\TWB4\Row();
+        $footer = new \Ease\TWB5\ProgressBar($this->getStepPercent(), $this->getStepPercent().'% '.$this->getStepLabel(), 'progress-bar-striped progress-bar-animated bg-info');
+        $body = new \Ease\TWB5\Row();
         $body->addColumn(2, new \Ease\Html\DivTag('🧙🏻‍♂️', ['style' => 'font-size: 220px; background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(12,121,9,1) 35%, rgba(0,212,255,1) 100%); height: 100%']));
         $body->addColumn(10, $this->getStepBody());
         parent::__construct(_('Configuration Wizard').': '.$this->getStepLabel(), 'inverse', $body, $footer);
@@ -69,7 +69,7 @@ class ConfigurationWizard extends Wizard
 
     public function appConfigurator()
     {
-        $configForm = new \Ease\TWB4\Form();
+        $configForm = new \Ease\TWB5\Form();
         $configForm->addInput(new \Ease\Html\InputHiddenTag('app_id', $this->application->getMyKey()));
         $configForm->addInput(new \Ease\Html\InputHiddenTag('company_id', $this->company->getMyKey()));
         $configForm->addInput(new \Ease\Html\InputHiddenTag('step', $this->step));
@@ -87,7 +87,7 @@ class ConfigurationWizard extends Wizard
             $configForm->addItem(new $formClass());
         }
 
-        $configForm->addItem(new \Ease\TWB4\SubmitButton(_('Next').' ➡️', 'primary'));
+        $configForm->addItem(new \Ease\TWB5\SubmitButton(_('Next').' ➡️', 'primary'));
 
         return $configForm;
     }
@@ -98,7 +98,7 @@ class ConfigurationWizard extends Wizard
 
         $allAppData = $apps->listingQuery()->select(['id', 'image', 'name', 'description', 'topics'], true);
 
-        $fbtable = new \Ease\TWB4\Table();
+        $fbtable = new \Ease\TWB5\Table();
         $fbtable->addRowHeaderColumns([_('Image'), _('Name'), _('Description')]);
 
         foreach ($allAppData as $appData) {

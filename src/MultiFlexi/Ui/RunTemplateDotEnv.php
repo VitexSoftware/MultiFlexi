@@ -31,6 +31,6 @@ class RunTemplateDotEnv extends \Ease\Html\DivTag
     {
         parent::__construct(new \Ease\Html\PreTag($runtemplate->envFile()), $properties);
         $this->addTagClass('ui-monospace custom-control');
-        $this->addItem(new \Ease\TWB4\LinkButton('runtemplateenv.php?id='.$runtemplate->getMyKey(), _('Download').' multiflexi_runtemplate_'.$runtemplate->getMyKey().'.env', 'info '));
+        $this->addItem(new \Ease\TWB5\LinkButton('runtemplateenv.php?id='.$runtemplate->getMyKey(), _('Download').' multiflexi_runtemplate_'.$runtemplate->getMyKey().'.env', 'info '));
     }
 }

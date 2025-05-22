@@ -19,9 +19,9 @@ require_once './init.php';
 
 WebPage::singleton()->onlyForLogged();
 
-$app_id = \Ease\TWB4\WebPage::getRequestValue('app');
-$company_id = \Ease\TWB4\WebPage::getRequestValue('company');
-$interval = \Ease\TWB4\WebPage::getRequestValue('interval');
+$app_id = \Ease\TWB5\WebPage::getRequestValue('app');
+$company_id = \Ease\TWB5\WebPage::getRequestValue('company');
+$interval = \Ease\TWB5\WebPage::getRequestValue('interval');
 $state = $interval !== 'n';
 
 $result = false;

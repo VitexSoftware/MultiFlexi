@@ -41,7 +41,7 @@ class PageBottom extends \Ease\Html\FooterTag
         //        $this->addItem(new \Ease\Html\WidgetsBrowsingHistory());
         //        }
         $this->addItem('<hr>');
-        $footrow = new \Ease\TWB4\Row();
+        $footrow = new \Ease\TWB5\Row();
 
         $author = '<strong><a href="https://multiflexi.eu/">MultiFlexi</a></strong> '.\Ease\Shared::appVersion().'<br>&nbsp;&nbsp; &copy; 2020-2025 <a href="https://vitexsoftware.com/">Vitex Software</a>';
 
@@ -58,7 +58,7 @@ class PageBottom extends \Ease\Html\FooterTag
             $lnks->addItem($this->apiLinks());
         }
 
-        $this->addItem(new \Ease\TWB4\Container($footrow));
+        $this->addItem(new \Ease\TWB5\Container($footrow));
         parent::finalize();
     }
 

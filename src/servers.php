@@ -15,9 +15,9 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use Ease\TWB4\LinkButton;
-use Ease\TWB4\Panel;
-use Ease\TWB4\Table;
+use Ease\TWB5\LinkButton;
+use Ease\TWB5\Panel;
+use Ease\TWB5\Table;
 use MultiFlexi\Servers;
 
 require_once './init.php';
@@ -33,7 +33,7 @@ foreach ($allFbData as $fbData) {
 
     $serverInfo = [];
     $serverInfo['type'] = new \Ease\Html\ImgTag('images/'.strtolower($fbData['type']).'.svg', $fbData['type'], ['width' => '60px']);
-    $serverInfo['id'] = new \Ease\TWB4\Badge('success', $fbData['id']);
+    $serverInfo['id'] = new \Ease\TWB5\Badge('success', $fbData['id']);
     $serverInfo['name'] = new \Ease\Html\ATag('server.php?id='.$fbData['id'], new \Ease\Html\StrongTag($fbData['name']));
     $serverInfo['url'] = new \Ease\Html\ATag($fbData['url'], $fbData['url']);
     $serverInfo['user'] = $fbData['user'];

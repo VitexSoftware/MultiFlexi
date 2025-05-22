@@ -88,6 +88,6 @@ class WebHook extends \MultiFlexi\CommonAction
 
     public static function inputs(string $prefix)
     {
-        return new \Ease\TWB4\FormGroup(_('Uri'), new \Ease\Html\InputTextTag($prefix.'[WebHook][uri]'), '', _('Report endpoint'));
+        return new \Ease\TWB5\FormGroup(_('Uri'), new \Ease\Html\InputTextTag($prefix.'[WebHook][uri]'), '', _('Report endpoint'));
     }
 }

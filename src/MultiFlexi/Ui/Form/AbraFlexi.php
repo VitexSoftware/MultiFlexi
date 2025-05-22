@@ -22,22 +22,22 @@ namespace MultiFlexi\Ui\Form;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class AbraFlexi extends \Ease\TWB4\Panel implements configForm
+class AbraFlexi extends \Ease\TWB5\Panel implements configForm
 {
     public static string $logo = 'images/AbraFlexi.svg';
 
     public function __construct()
     {
-        $header = new \Ease\TWB4\Row();
+        $header = new \Ease\TWB5\Row();
         $header->addColumn(6, new \Ease\Html\ATag('https://www.abra.eu/flexi/', new \Ease\Html\ImgTag(self::$logo, _('AbraFlexi'), ['height' => 50])));
         $header->addColumn(6, new \Ease\Html\H3Tag(_('AbraFlexi')));
 
         $body = new \Ease\Html\DivTag();
 
-        $body->addItem(new \Ease\TWB4\FormGroup('ABRAFLEXI_LOGIN', new \Ease\Html\InputTextTag('ABRAFLEXI_LOGIN'), 'winstrom', _('AbraFlexi user login')));
-        $body->addItem(new \Ease\TWB4\FormGroup('ABRAFLEXI_PASSWORD', new \Ease\Html\InputTextTag('ABRAFLEXI_PASSWORD'), 'winstrom', _('AbraFlexi user password')));
-        $body->addItem(new \Ease\TWB4\FormGroup('ABRAFLEXI_URL', new \Ease\Html\InputTextTag('ABRAFLEXI_URL'), 'winstrom', _('AbraFlexi server URI')));
-        $body->addItem(new \Ease\TWB4\FormGroup('ABRAFLEXI_COMPANY', new \Ease\Html\InputTextTag('ABRAFLEXI_COMPANY'), 'demo', _('Company to be handled')));
+        $body->addItem(new \Ease\TWB5\FormGroup('ABRAFLEXI_LOGIN', new \Ease\Html\InputTextTag('ABRAFLEXI_LOGIN'), 'winstrom', _('AbraFlexi user login')));
+        $body->addItem(new \Ease\TWB5\FormGroup('ABRAFLEXI_PASSWORD', new \Ease\Html\InputTextTag('ABRAFLEXI_PASSWORD'), 'winstrom', _('AbraFlexi user password')));
+        $body->addItem(new \Ease\TWB5\FormGroup('ABRAFLEXI_URL', new \Ease\Html\InputTextTag('ABRAFLEXI_URL'), 'winstrom', _('AbraFlexi server URI')));
+        $body->addItem(new \Ease\TWB5\FormGroup('ABRAFLEXI_COMPANY', new \Ease\Html\InputTextTag('ABRAFLEXI_COMPANY'), 'demo', _('Company to be handled')));
 
         parent::__construct($header, 'inverse', $body, '');
     }

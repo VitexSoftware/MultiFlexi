@@ -31,7 +31,7 @@ $kredenc = new \MultiFlexi\Credential();
 $kredenc->setDataValue('company_id', $companies->getMyKey());
 
 $creds = $kredenc->listingQuery()->where(['company_id' => $companies->getMyKey()])->fetchAll();
-$credList = new \Ease\TWB4\Table();
+$credList = new \Ease\TWB5\Table();
 $credList->addRowHeaderColumns(['', _('Name'), _('Type'), _('Used by'), _('Convert')]); // Added new column header
 $rtplcr = new \MultiFlexi\RunTplCreds();
 
@@ -42,9 +42,9 @@ foreach ($creds as $crd) {
     $convertUrl = 'credup.php?id='.$crd['id'];
 
     if ($crd['credential_type_id'] === 0) {
-        $crd['convert'] = new \Ease\TWB4\LinkButton($convertUrl, _('Convert to dynamic Credential type'), 'warning btn-sm');
+        $crd['convert'] = new \Ease\TWB5\LinkButton($convertUrl, _('Convert to dynamic Credential type'), 'warning btn-sm');
     } else {
-        $crd['convert'] = new \Ease\TWB4\LinkButton('credentialtype.php?id='.$crd['credential_type_id'], _('🔑'), 'success btn-sm');
+        $crd['convert'] = new \Ease\TWB5\LinkButton('credentialtype.php?id='.$crd['credential_type_id'], _('🔑'), 'success btn-sm');
     }
 
     $class = '\\MultiFlexi\\Ui\\Form\\'.$crd['formType'];
@@ -67,7 +67,7 @@ foreach ($creds as $crd) {
             if ($lastJobInfo) {
                 $companyAppStatus = new \Ease\Html\ATag('job.php?id='.$lastJobInfo[0]['id'], new ExitCode($lastJobInfo[0]['exitcode'], ['style' => 'font-size: 1.0em; font-family: monospace;']), ['class' => 'btn btn-inverse btn-sm']);
             } else {
-                $companyAppStatus = new \Ease\TWB4\Badge('disabled', '🪤', ['style' => 'font-size: 1.0em; font-family: monospace;']);
+                $companyAppStatus = new \Ease\TWB5\Badge('disabled', '🪤', ['style' => 'font-size: 1.0em; font-family: monospace;']);
             }
 
             $runtemplatesDiv->addItem(new \Ease\Html\SpanTag([new \Ease\Html\ATag('runtemplate.php?id='.$runtemplateData['id'], '⚗️#'.$runtemplateData['id'], ['class' => 'btn btn-inverse btn-sm', 'title' => $runtemplateData['name']]), $companyAppStatus], ['class' => 'btn-group', 'role' => 'group']));
@@ -82,7 +82,7 @@ foreach ($creds as $crd) {
 }
 
 $companyPanelContents[] = $credList;
-$bottomLine = new \Ease\TWB4\LinkButton('credential.php?company_id='.$companies->getMyKey(), '️➕ 🔐'._('Create'), 'info btn-lg btn-block disabled');
+$bottomLine = new \Ease\TWB5\LinkButton('credential.php?company_id='.$companies->getMyKey(), '️➕ 🔐'._('Create'), 'info btn-lg btn-block disabled');
 
 WebPage::singleton()->container->addItem(new CompanyPanel($companies, $companyPanelContents, $bottomLine));
 WebPage::singleton()->addItem(new PageBottom('company/'.$companies->getMyKey()));

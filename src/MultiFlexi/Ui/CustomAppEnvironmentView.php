@@ -41,13 +41,13 @@ class CustomAppEnvironmentView extends EnvironmentView
 
         $envValues = array_merge($appToCompany->getAppEnvironment(), $customConfig->getAppConfig($companyId, $appId));
 
-        //        $appConfig = array_combine(array_keys($appFields), array_fill(0, count($appFields), new \Ease\TWB4\Badge('warning', 'unset')));
+        //        $appConfig = array_combine(array_keys($appFields), array_fill(0, count($appFields), new \Ease\TWB5\Badge('warning', 'unset')));
 
         foreach ($appFields as $envName => $envProperties) {
             if (\array_key_exists($envName, $envValues)) {
                 $appConfig[$envName]['value'] = $envValues[$envName];
             } else {
-                $appConfig[$envName]['value'] = new \Ease\TWB4\Badge('warning', _('unset'));
+                $appConfig[$envName]['value'] = new \Ease\TWB5\Badge('warning', _('unset'));
             }
         }
 

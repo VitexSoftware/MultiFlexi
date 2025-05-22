@@ -27,7 +27,7 @@ if (\Ease\WebPage::isFormPosted()) {
     $modConf->saveFormData($_POST);
 }
 
-WebPage::singleton()->container->addItem(new \Ease\TWB4\Panel(new \Ease\Html\H2Tag(_('Installed Action Modules')), 'default', new ActionsAdministration($modConf)));
+WebPage::singleton()->container->addItem(new \Ease\TWB5\Panel(new \Ease\Html\H2Tag(_('Installed Action Modules')), 'default', new ActionsAdministration($modConf)));
 
 WebPage::singleton()->addItem(new PageBottom());
 

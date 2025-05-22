@@ -42,7 +42,7 @@ class FieldsForm extends \Ease\Container
             case 'string':
             default:
                 $this->addItem(
-                    new \Ease\TWB4\FormGroup(
+                    new \Ease\TWB5\FormGroup(
                         $field->getName(),
                         new \Ease\Html\InputTextTag($prefix ? $prefix.'['.$field->getCode().']' : $field->getCode(), $field->getValue()),
                         $field->getHint(),

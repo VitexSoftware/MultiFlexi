@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use Ease\TWB4\Container;
+use Ease\TWB5\Container;
 use MultiFlexi\Customer;
 
 require_once './init.php';

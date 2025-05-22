@@ -20,7 +20,7 @@ namespace MultiFlexi\Ui;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class RuntemplateButton extends \Ease\TWB4\LinkButton
+class RuntemplateButton extends \Ease\TWB5\LinkButton
 {
     // #[\Override]
     public function __construct(\MultiFlexi\RunTemplate $runTemplate, array $properties = [])

@@ -38,7 +38,7 @@ class CompanyRuntemplatesLinks extends \Ease\Html\DivTag
                 if ($lastJobInfo) {
                     $companyAppStatus = new \Ease\Html\ATag('job.php?id='.$lastJobInfo[0]['id'], new ExitCode($lastJobInfo[0]['exitcode'], ['style' => 'font-size: 1.0em; font-family: monospace;']), ['class' => 'btn btn-outline-secondary btn-sm', 'title' => $runtemplateData['name']]);
                 } else {
-                    $companyAppStatus = new \Ease\TWB4\Badge('disabled', '🪤', ['style' => 'font-size: 0.5em; font-family: monospace;']);
+                    $companyAppStatus = new \Ease\TWB5\Badge('disabled', '🪤', ['style' => 'font-size: 0.5em; font-family: monospace;']);
                 }
 
                 $runtemplatesDiv->addItem(new \Ease\Html\SpanTag([new \Ease\Html\ATag('runtemplate.php?id='.$runtemplateData['id'], '⚗️#'.$runtemplateData['id'], ['class' => 'btn btn-outline-secondary btn-sm', 'title' => $runtemplateData['name']]), $companyAppStatus], ['class' => 'btn-group', 'style' => 'margin: 2px', 'role' => 'group']));

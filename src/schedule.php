@@ -25,7 +25,7 @@ $runTemplate = $jobID ? $jobber->runTemplate : new \MultiFlexi\RunTemplate(WebPa
 WebPage::singleton()->addItem(new PageTop(_('Schedule Job')));
 
 if (null === $runTemplate->getMyKey()) {
-    WebPage::singleton()->container->addItem(new \Ease\TWB4\Alert('error', _('RunTemplate id not specified')));
+    WebPage::singleton()->container->addItem(new \Ease\TWB5\Alert('error', _('RunTemplate id not specified')));
     $runTemplate->addStatusMessage(_('RunTemplate id not specified'), 'error');
 } else {
     $app = $runTemplate->getApplication();
@@ -63,7 +63,7 @@ if (null === $runTemplate->getMyKey()) {
 
         $jobber->scheduleJobRun(new \DateTime($when));
 
-        $glassHourRow = new \Ease\TWB4\Row();
+        $glassHourRow = new \Ease\TWB5\Row();
         $glassHourRow->addTagClass('justify-content-md-center');
         $glassHourRow->addColumn(4);
         $glassHourRow->addColumn(4, new \Ease\Html\DivTag(new \Ease\Html\Widgets\SandClock(['class' => 'mx-auto d-block img-fluid'])), 'sm');
@@ -77,7 +77,7 @@ if (null === $runTemplate->getMyKey()) {
 
         $waitTime = $beginTime->getTimestamp() - $currentTime->getTimestamp();
 
-        $waitRow = new \Ease\TWB4\Row();
+        $waitRow = new \Ease\TWB5\Row();
         $waitRow->addTagClass('justify-content-md-center');
         $waitRow->addColumn(4, sprintf(_('Start after %s'), $when));
         $waitRow->addColumn(4, new \Ease\Html\Widgets\LiveAge($beginTime), 'sm');
@@ -159,7 +159,7 @@ EOD
 
         $appPanel = new ApplicationPanel(
             $app,
-            [$glassHourRow, $waitRow, new \Ease\Html\DivTag(nl2br($prepared)), new \Ease\TWB4\LinkButton('job.php?id='.$jobber->getMyKey(), _('Job details'), 'info btn-block')],
+            [$glassHourRow, $waitRow, new \Ease\Html\DivTag(nl2br($prepared)), new \Ease\TWB5\LinkButton('job.php?id='.$jobber->getMyKey(), _('Job details'), 'info btn-block')],
         );
         $appPanel->headRow->addItem(new RuntemplateButton($runTemplate));
 
@@ -171,9 +171,9 @@ EOD
             $canceller = new \MultiFlexi\Job($jobID);
             $canceller->deleteFromSQL();
 
-            WebPage::singleton()->container->addItem(new \Ease\TWB4\Label('success', _('Job Canceled')));
+            WebPage::singleton()->container->addItem(new \Ease\TWB5\Label('success', _('Job Canceled')));
 
-            WebPage::singleton()->container->addItem(new \Ease\TWB4\LinkButton('queue.php', sprintf(_('remaining %d 🏁 jobs scheduled'), $scheduler->listingQuery()->count()), 'info btn-large'));
+            WebPage::singleton()->container->addItem(new \Ease\TWB5\LinkButton('queue.php', sprintf(_('remaining %d 🏁 jobs scheduled'), $scheduler->listingQuery()->count()), 'info btn-large'));
         } else {
             $appPanel = new ApplicationPanel($app, new JobScheduleForm($app, $company));
             $appPanel->headRow->addItem(new RuntemplateButton($runTemplate));

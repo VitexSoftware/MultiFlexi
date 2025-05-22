@@ -16,8 +16,8 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 use Ease\Html\ATag;
-use Ease\TWB4\Panel;
-use Ease\TWB4\Row;
+use Ease\TWB5\Panel;
+use Ease\TWB5\Row;
 use MultiFlexi\Servers;
 
 require_once './init.php';

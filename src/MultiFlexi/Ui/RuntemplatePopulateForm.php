@@ -20,14 +20,14 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class RuntemplatePopulateForm extends \Ease\TWB4\Form
+class RuntemplatePopulateForm extends \Ease\TWB5\Form
 {
     public function __construct(\MultiFlexi\RunTemplate $runtemplate)
     {
         parent::__construct(['action' => 'runtemplatepopulate.php?id='.(string) $runtemplate->getMyKey(), 'class' => 'form-inline']);
         $this->addInput(new \Ease\Html\InputFileTag('env', '.env'), _('Load .env').'&nbsp;', '');
-        $this->addItem(new \Ease\TWB4\SubmitButton('🚚 '._('Populate'), 'success mb-2', ['type' => 'submit']));
-        $this->addItem([_('Replace Existing'), new \Ease\TWB4\Widgets\Toggle('replace')]);
+        $this->addItem(new \Ease\TWB5\SubmitButton('🚚 '._('Populate'), 'success mb-2', ['type' => 'submit']));
+        $this->addItem([_('Replace Existing'), new \Ease\TWB5\Widgets\Toggle('replace')]);
         $this->setTagProperty('enctype', 'multipart/form-data');
     }
 

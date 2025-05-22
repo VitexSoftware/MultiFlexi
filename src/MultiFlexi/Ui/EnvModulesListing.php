@@ -31,7 +31,7 @@ class EnvModulesListing extends \Ease\Html\DivTag
 
         foreach ($injectors as $injector) {
             $injectorClass = '\\MultiFlexi\\Env\\'.$injector;
-            $moduleRow = new \Ease\TWB4\Row();
+            $moduleRow = new \Ease\TWB5\Row();
 
             $moduleRow->addColumn(2, [new \Ease\Html\StrongTag($injectorClass::name()), new \Ease\Html\PTag(new \Ease\Html\SmallTag($injectorClass::description()))]);
             $moduleRow->addColumn(6, implode('<br>', $injectorClass::allKeysHandled()));

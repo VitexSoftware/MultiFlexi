@@ -15,9 +15,9 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use Ease\TWB4\LinkButton;
-use Ease\TWB4\Panel;
-use Ease\TWB4\Row;
+use Ease\TWB5\LinkButton;
+use Ease\TWB5\Panel;
+use Ease\TWB5\Row;
 use MultiFlexi\Application;
 
 /**
@@ -54,7 +54,7 @@ class ApplicationPanel extends Panel
                 $calb = new CompanyAppLink($kumpan, $application, ['class' => 'card-img-top']);
                 $crls = new \MultiFlexi\Ui\CompanyRuntemplatesLinks($kumpan, $application, [], ['class' => 'btn btn-outline-secondary btn-sm']);
 
-                $usedByCompany->addItem(new \Ease\TWB4\Card([new \Ease\Html\DivTag([new \Ease\Html\H5Tag([$calb, ' <small>('.$crls->count().')</small>'], ['class' => 'card-title']), $crls], ['class' => 'card-body'])], ['style' => 'width: 6rem;']));
+                $usedByCompany->addItem(new \Ease\TWB5\Card([new \Ease\Html\DivTag([new \Ease\Html\H5Tag([$calb, ' <small>('.$crls->count().')</small>'], ['class' => 'card-title']), $crls], ['class' => 'card-body'])], ['style' => 'width: 6rem;']));
             }
 
             $this->headRow->addColumn(6, $usedByCompany);
@@ -64,9 +64,9 @@ class ApplicationPanel extends Panel
             }
         }
 
-        //        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('tasks.php?application_id=' . $cid, '🔧&nbsp;' . _('Setup tasks'), 'secondary btn-lg btn-block'));
-        //        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('adhoc.php?application_id=' . $cid, '🚀&nbsp;' . _('Application launcher'), 'secondary btn-lg btn-block'));
-        //        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('periodical.php?application_id=' . $cid, '🔁&nbsp;' . _('Periodical Tasks'), 'secondary btn-lg btn-block'));
+        //        $headRow->addColumn(2, new \Ease\TWB5\LinkButton('tasks.php?application_id=' . $cid, '🔧&nbsp;' . _('Setup tasks'), 'secondary btn-lg btn-block'));
+        //        $headRow->addColumn(2, new \Ease\TWB5\LinkButton('adhoc.php?application_id=' . $cid, '🚀&nbsp;' . _('Application launcher'), 'secondary btn-lg btn-block'));
+        //        $headRow->addColumn(2, new \Ease\TWB5\LinkButton('periodical.php?application_id=' . $cid, '🔁&nbsp;' . _('Periodical Tasks'), 'secondary btn-lg btn-block'));
         parent::__construct($this->headRow, 'default', $content, $footer);
     }
 

@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 use Ease\Html\ATag;
-use Ease\TWB4\Row;
+use Ease\TWB5\Row;
 use MultiFlexi\Company;
 
 require_once './init.php';
@@ -73,7 +73,7 @@ $instanceRow->addColumn(4, new CompanyEditorForm($companies, '', ['action' => 'c
 
 $rightColumn[] = new EnvironmentEditor($companyEnver->getEnvFields());
 $instanceRow->addColumn(8, $rightColumn);
-WebPage::singleton()->container->addItem(new CompanyPanel($companies, $instanceRow, $companies->getMyKey() ? new \Ease\TWB4\LinkButton('companydelete.php?id='.$companies->getMyKey(), '☠️&nbsp;'._('Delete company'), 'danger') : ''));
+WebPage::singleton()->container->addItem(new CompanyPanel($companies, $instanceRow, $companies->getMyKey() ? new \Ease\TWB5\LinkButton('companydelete.php?id='.$companies->getMyKey(), '☠️&nbsp;'._('Delete company'), 'danger') : ''));
 
 WebPage::singleton()->addItem(new PageBottom());
 WebPage::singleton()->draw();

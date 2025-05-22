@@ -21,21 +21,21 @@ WebPage::singleton()->onlyForLogged();
 
 WebPage::singleton()->addItem(new PageTop(_('Intervals Setup')));
 
-$addAppForm = new \Ease\TWB4\Form();
+$addAppForm = new \Ease\TWB5\Form();
 $addAppForm->addItem(new \Ease\Html\H1Tag(_('Periodical tasks')));
 
-$periodSelectorsRow = new \Ease\TWB4\Row();
+$periodSelectorsRow = new \Ease\TWB5\Row();
 
 $content = new \Ease\Html\InputTag('x');
 
 $helptext = 'h';
 
 $periodSelectorsRow->addColumn(2, new \Ease\Html\ImgTag('images/stopwatch.svg', _('StopWatch'), ['class' => 'img-fluid']));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Hourly'), 'default', new \Ease\TWB4\FormGroup(_('Minute'), $content, 1, _('At which minute to run hourly jobs?'))));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Daily'), 'default', new \Ease\TWB4\FormGroup(_('Hour'), $content, 1, _('At which hour to run daily jobs?'))));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Weekly'), 'default', new \Ease\TWB4\FormGroup(_('Day'), $content, 1, _('Which day of the week to run the weekly tasks?'))));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Monthly'), 'default', new \Ease\TWB4\FormGroup(_('Day'), $content, 1, _('Which day of the month to run the monthly tasks?'))));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Yearly'), 'default', new \Ease\TWB4\FormGroup(_('Day'), $content, 1, _('Which day of the year to run the yearly tasks?'))));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB5\Panel(_('Hourly'), 'default', new \Ease\TWB5\FormGroup(_('Minute'), $content, 1, _('At which minute to run hourly jobs?'))));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB5\Panel(_('Daily'), 'default', new \Ease\TWB5\FormGroup(_('Hour'), $content, 1, _('At which hour to run daily jobs?'))));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB5\Panel(_('Weekly'), 'default', new \Ease\TWB5\FormGroup(_('Day'), $content, 1, _('Which day of the week to run the weekly tasks?'))));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB5\Panel(_('Monthly'), 'default', new \Ease\TWB5\FormGroup(_('Day'), $content, 1, _('Which day of the month to run the monthly tasks?'))));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB5\Panel(_('Yearly'), 'default', new \Ease\TWB5\FormGroup(_('Day'), $content, 1, _('Which day of the year to run the yearly tasks?'))));
 
 //
 // $assignedRaw = $companyApp->getAssigned()->fetchAll('app_id');
@@ -46,7 +46,7 @@ $periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Yearly'), 'default', n
 $addAppForm->addItem($periodSelectorsRow);
 $addAppForm->addItem(new \Ease\Html\PTag());
 
-$addAppForm->addItem(new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'success btn-lg btn-block'));
+$addAppForm->addItem(new \Ease\TWB5\SubmitButton('🍏 '._('Apply'), 'success btn-lg btn-block'));
 
 WebPage::singleton()->container->addItem($addAppForm);
 

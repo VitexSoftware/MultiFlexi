@@ -15,8 +15,8 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use Ease\TWB4\Label;
-use Ease\TWB4\LinkButton;
+use Ease\TWB5\Label;
+use Ease\TWB5\LinkButton;
 use MultiFlexi\Application;
 use MultiFlexi\Conffield;
 
@@ -36,7 +36,7 @@ class AppInfo extends \Ease\Html\DivTag
     {
         parent::__construct(new \Ease\Html\H2Tag($app->getRecordName()));
 
-        $mainRow = new \Ease\TWB4\Row();
+        $mainRow = new \Ease\TWB5\Row();
         $mainRow->addColumn(2, [
             new \Ease\Html\DivTag($app->getDataValue('description'), ['style' => 'color: white;']),
             new \Ease\Html\DivTag(new \Ease\Html\ATag($app->getDataValue('homepage'), $app->getDataValue('homepage'))),

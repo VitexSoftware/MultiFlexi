@@ -22,25 +22,25 @@ namespace MultiFlexi\Ui\Form;
  *
  * @author vitex
  */
-class SQLServer extends \Ease\TWB4\Panel implements configForm
+class SQLServer extends \Ease\TWB5\Panel implements configForm
 {
     public static string $logo = 'images/SQLServer.svg';
 
     public function __construct()
     {
-        $header = new \Ease\TWB4\Row();
+        $header = new \Ease\TWB5\Row();
         $header->addColumn(6, new \Ease\Html\ATag('https://www.stormare.eu/', new \Ease\Html\ImgTag(self::$logo, self::name(), ['height' => 50])));
         $header->addColumn(6, new \Ease\Html\H3Tag(self::name()));
 
         $body = new \Ease\Html\DivTag();
 
-        $body->addItem(new \Ease\TWB4\FormGroup('DB_CONNECTION', new \Ease\Html\InputTextTag('DB_CONNECTION', 'sqlsrv'), 'sqlsrv', _('Database Connection')));
-        $body->addItem(new \Ease\TWB4\FormGroup('DB_HOST', new \Ease\Html\InputTextTag('DB_HOST', '127.0.0.1'), '127.0.0.1', _('Database Host')));
-        $body->addItem(new \Ease\TWB4\FormGroup('DB_PORT', new \Ease\Html\InputNumberTag('DB_PORT', 1433), 1433, _('Database Port')));
-        $body->addItem(new \Ease\TWB4\FormGroup('DB_DATABASE', new \Ease\Html\InputTextTag('DB_DATABASE', 'StwPh_12345678_2023'), 'StwPh_12345678_2023', _('Database Name')));
-        $body->addItem(new \Ease\TWB4\FormGroup('DB_USERNAME', new \Ease\Html\InputTextTag('DB_USERNAME', 'sa'), 'sa', _('Database Username')));
-        $body->addItem(new \Ease\TWB4\FormGroup('DB_PASSWORD', new \Ease\Html\InputPasswordTag('DB_PASSWORD', 'pohodaSQLpassword'), 'pohodaSQLpassword', _('Database Password')));
-        $body->addItem(new \Ease\TWB4\FormGroup('DB_SETTINGS', new \Ease\Html\InputTextTag('DB_SETTINGS', ''), '', _('Database Settings like encrypt=false')));
+        $body->addItem(new \Ease\TWB5\FormGroup('DB_CONNECTION', new \Ease\Html\InputTextTag('DB_CONNECTION', 'sqlsrv'), 'sqlsrv', _('Database Connection')));
+        $body->addItem(new \Ease\TWB5\FormGroup('DB_HOST', new \Ease\Html\InputTextTag('DB_HOST', '127.0.0.1'), '127.0.0.1', _('Database Host')));
+        $body->addItem(new \Ease\TWB5\FormGroup('DB_PORT', new \Ease\Html\InputNumberTag('DB_PORT', 1433), 1433, _('Database Port')));
+        $body->addItem(new \Ease\TWB5\FormGroup('DB_DATABASE', new \Ease\Html\InputTextTag('DB_DATABASE', 'StwPh_12345678_2023'), 'StwPh_12345678_2023', _('Database Name')));
+        $body->addItem(new \Ease\TWB5\FormGroup('DB_USERNAME', new \Ease\Html\InputTextTag('DB_USERNAME', 'sa'), 'sa', _('Database Username')));
+        $body->addItem(new \Ease\TWB5\FormGroup('DB_PASSWORD', new \Ease\Html\InputPasswordTag('DB_PASSWORD', 'pohodaSQLpassword'), 'pohodaSQLpassword', _('Database Password')));
+        $body->addItem(new \Ease\TWB5\FormGroup('DB_SETTINGS', new \Ease\Html\InputTextTag('DB_SETTINGS', ''), '', _('Database Settings like encrypt=false')));
 
         parent::__construct($header, 'inverse', $body, '');
     }

@@ -17,7 +17,7 @@ namespace MultiFlexi\Ui;
 
 use Ease\Html\ATag;
 use Ease\Html\ImgTag;
-use Ease\TWB4\FormGroup;
+use Ease\TWB5\FormGroup;
 
 // ? use const __PHPUNIT_ATTR_DRIVER_NAME__;
 
@@ -26,7 +26,7 @@ use Ease\TWB4\FormGroup;
  *
  * @author vitex
  */
-class AppRow extends \Ease\TWB4\Row
+class AppRow extends \Ease\TWB5\Row
 {
     /**
      * Application in Company context.
@@ -52,13 +52,13 @@ class AppRow extends \Ease\TWB4\Row
         if (empty($uploadFields)) {
             $intervalChooser = new \MultiFlexi\Ui\IntervalChooser($appId.'_interval', \array_key_exists('interv', $appData) ? $appData['interv'] : 'n', ['id' => $appId.'_interval', 'data-company' => $appData['company_id'], 'checked' => 'true', 'data-app' => $appId]);
         } else {
-            $intervalChooser = new \Ease\TWB4\Badge('info', _('Upload field does not allow application scheduling'));
+            $intervalChooser = new \Ease\TWB5\Badge('info', _('Upload field does not allow application scheduling'));
         }
 
         if (\array_key_exists('runtemplateid', $appData)) {
             $launchButton = new \Ease\Html\DivTag(new \MultiFlexi\Ui\LaunchButton($appData['runtemplateid']));
         } else {
-            $launchButton = new \Ease\TWB4\LinkButton('launch.php?app_id='.$appId.'&company_id='.$appData['company_id'], [_('Launch').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg btn-block ');
+            $launchButton = new \Ease\TWB5\LinkButton('launch.php?app_id='.$appId.'&company_id='.$appData['company_id'], [_('Launch').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'warning btn-lg btn-block ');
         }
 
         // use AppLaunchForm instead of LaunchButton
@@ -74,10 +74,10 @@ class AppRow extends \Ease\TWB4\Row
             $appConfColumn->addItem(new EnvironmentView($cfg->appConfigs($appId)));
         }
 
-        $appConfColumn->addItem(new \Ease\TWB4\LinkButton('custserviceconfig.php?app_id='.$appId.'&amp;company_id='.$appData['company_id'], _('Configure App Environment').' '.new \Ease\Html\ImgTag('images/set.svg', _('Set'), ['height' => '30px']), 'success btn-sm  btn-block'));
+        $appConfColumn->addItem(new \Ease\TWB5\LinkButton('custserviceconfig.php?app_id='.$appId.'&amp;company_id='.$appData['company_id'], _('Configure App Environment').' '.new \Ease\Html\ImgTag('images/set.svg', _('Set'), ['height' => '30px']), 'success btn-sm  btn-block'));
 
         $jobs = (new \MultiFlexi\Job())->listingQuery()->select(['job.id', 'begin', 'exitcode', 'launched_by', 'login'], true)->leftJoin('user ON user.id = job.launched_by')->where('company_id', $appData['company_id'])->where('app_id', $appId)->limit(10)->orderBy('job.id DESC')->fetchAll();
-        $jobList = new \Ease\TWB4\Table();
+        $jobList = new \Ease\TWB5\Table();
         $jobList->addRowHeaderColumns([_('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher')]);
 
         foreach ($jobs as $job) {
@@ -95,7 +95,7 @@ class AppRow extends \Ease\TWB4\Row
             $jobList->addRowColumns($job);
         }
 
-        $historyButton = (new \Ease\TWB4\LinkButton('joblist.php?app_id='.$appId.'&amp;company_id='.$appData['company_id'], _('Job History').' '.new \Ease\Html\ImgTag('images/log.svg', _('Set'), ['height' => '30px']), 'info btn-sm  btn-block'));
+        $historyButton = (new \Ease\TWB5\LinkButton('joblist.php?app_id='.$appId.'&amp;company_id='.$appData['company_id'], _('Job History').' '.new \Ease\Html\ImgTag('images/log.svg', _('Set'), ['height' => '30px']), 'info btn-sm  btn-block'));
         $appRow->addColumn(4, [new \Ease\Html\H3Tag(_('Last 10 jobs')), $jobList, $historyButton]);
     }
 }

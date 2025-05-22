@@ -23,7 +23,7 @@ WebPage::singleton()->onlyForLogged();
 
 WebPage::singleton()->addItem(new PageTop(_('Users')));
 
-// WebPage::singleton()->addItem(new \Ease\TWB4\Container(new DBDataTable(new \MultiFlexi\User()))); TODO
+// WebPage::singleton()->addItem(new \Ease\TWB5\Container(new DBDataTable(new \MultiFlexi\User()))); TODO
 
 WebPage::singleton()->addItem(new PageBottom());
 

@@ -19,7 +19,7 @@ use Ease\Embedable;
 use Ease\Logger\Logging;
 use Ease\Logger\Message;
 use Ease\Sand;
-use Ease\TWB4\Badge;
+use Ease\TWB5\Badge;
 
 /**
  * Description of Executor.

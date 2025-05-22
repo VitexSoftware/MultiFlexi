@@ -44,15 +44,15 @@ WebPage::singleton()->addItem(new PageTop(_('User')));
 
 switch (WebPage::singleton()->getRequestValue('action')) {
     case 'delete':
-        $confirmBlock = new \Ease\TWB4\Well();
+        $confirmBlock = new \Ease\TWB5\Well();
 
         $confirmBlock->addItem($user);
 
-        $confirmator = $confirmBlock->addItem(new \Ease\TWB4\Panel(_('Are you sure ?'), 'danger'));
-        $confirmator->addItem(new \Ease\TWB4\LinkButton('user.php?id='.$user->getId(), _('Ne').' '.\Ease\TWB4\Part::glyphIcon('ok'), 'success'));
-        $confirmator->addItem(new \Ease\TWB4\LinkButton('?delete=true&'.$user->keyColumn.'='.$user->getID(), _('Ano').' '.\Ease\TWB4\Part::glyphIcon('remove'), 'danger'));
+        $confirmator = $confirmBlock->addItem(new \Ease\TWB5\Panel(_('Are you sure ?'), 'danger'));
+        $confirmator->addItem(new \Ease\TWB5\LinkButton('user.php?id='.$user->getId(), _('Ne').' '.\Ease\TWB5\Part::glyphIcon('ok'), 'success'));
+        $confirmator->addItem(new \Ease\TWB5\LinkButton('?delete=true&'.$user->keyColumn.'='.$user->getID(), _('Ano').' '.\Ease\TWB5\Part::glyphIcon('remove'), 'danger'));
 
-        WebPage::singleton()->container->addItem(new \Ease\TWB4\Panel('<strong>'.$user->getUserName().'</strong>', 'info', $confirmBlock));
+        WebPage::singleton()->container->addItem(new \Ease\TWB5\Panel('<strong>'.$user->getUserName().'</strong>', 'info', $confirmBlock));
 
         break;
 
@@ -61,7 +61,7 @@ switch (WebPage::singleton()->getRequestValue('action')) {
         //        $operationsMenu->setTagCss(['float' => 'right']);
         //        $operationsMenu->dropdown->addTagClass('pull-right');
 
-        WebPage::singleton()->container->addItem(new \Ease\TWB4\Panel(['<strong>'.$user->getUserName().'</strong>'/* $operationsMenu */], 'info', new UserForm($user)));
+        WebPage::singleton()->container->addItem(new \Ease\TWB5\Panel(['<strong>'.$user->getUserName().'</strong>'/* $operationsMenu */], 'info', new UserForm($user)));
 
         break;
 }

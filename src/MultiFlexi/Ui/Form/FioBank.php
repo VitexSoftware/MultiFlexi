@@ -22,21 +22,21 @@ namespace MultiFlexi\Ui\Form;
  *
  * @author vitex
  */
-class FioBank extends \Ease\TWB4\Panel implements configForm
+class FioBank extends \Ease\TWB5\Panel implements configForm
 {
     public static string $logo = 'images/FioBank.svg';
 
     public function __construct()
     {
-        $header = new \Ease\TWB4\Row();
+        $header = new \Ease\TWB5\Row();
         $header->addColumn(6, new \Ease\Html\ATag('', new \Ease\Html\ImgTag(self::$logo, _('Fio Api'), ['height' => 50])));
         $header->addColumn(6, new \Ease\Html\H3Tag(_('Fio Bank API')));
 
         $body = new \Ease\Html\DivTag();
 
-        $body->addItem(new \Ease\TWB4\FormGroup('ACCOUNT_NUMBER', new \Ease\Html\InputTextTag('ACCOUNT_NUMBER'), '', _('Fio Bank Account Number')));
-        $body->addItem(new \Ease\TWB4\FormGroup('FIO_TOKEN', new \Ease\Html\InputTextTag('FIO_TOKEN'), '', _('Token for account')));
-        $body->addItem(new \Ease\TWB4\FormGroup('FIO_TOKEN_NAME', new \Ease\Html\InputTextTag('FIO_TOKEN_NAME'), '', _('Name of Token used')));
+        $body->addItem(new \Ease\TWB5\FormGroup('ACCOUNT_NUMBER', new \Ease\Html\InputTextTag('ACCOUNT_NUMBER'), '', _('Fio Bank Account Number')));
+        $body->addItem(new \Ease\TWB5\FormGroup('FIO_TOKEN', new \Ease\Html\InputTextTag('FIO_TOKEN'), '', _('Token for account')));
+        $body->addItem(new \Ease\TWB5\FormGroup('FIO_TOKEN_NAME', new \Ease\Html\InputTextTag('FIO_TOKEN_NAME'), '', _('Name of Token used')));
 
         parent::__construct($header, 'inverse', $body, '');
     }

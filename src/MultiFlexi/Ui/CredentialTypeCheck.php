@@ -20,7 +20,7 @@ namespace MultiFlexi\Ui;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class CredentialTypeCheck extends \Ease\TWB4\Well
+class CredentialTypeCheck extends \Ease\TWB5\Well
 {
     public function __construct(\MultiFlexi\CredentialType $crtype, array $properties = [])
     {

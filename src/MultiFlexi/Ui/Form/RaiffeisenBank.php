@@ -24,23 +24,23 @@ use Ease\Html\ATag;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class RaiffeisenBank extends \Ease\TWB4\Panel implements configForm
+class RaiffeisenBank extends \Ease\TWB5\Panel implements configForm
 {
     public static string $logo = 'images/RaiffeisenBank.svg';
 
     public function __construct()
     {
-        $header = new \Ease\TWB4\Row();
+        $header = new \Ease\TWB5\Row();
         $header->addColumn(6, new \Ease\Html\ATag('https://www.rb.cz/firmy/transakcni-bankovnictvi/elektronicke-bankovnictvi/premium-api', new \Ease\Html\ImgTag(self::$logo, _('RB Premium Api'), ['height' => 50])));
         $header->addColumn(6, new \Ease\Html\H3Tag(_('Raiffeisen Bank Premium API')));
 
         $body = new \Ease\Html\DivTag();
 
-        $body->addItem(new \Ease\TWB4\FormGroup('ACCOUNT_NUMBER', new \Ease\Html\InputTextTag('ACCOUNT_NUMBER'), '', _('Raiffeisen Bank Account Number')));
-        $body->addItem(new \Ease\TWB4\FormGroup('ACCOUNT_CURRENCY', new \Ease\Html\InputTextTag('ACCOUNT_CURRENCY'), 'CZK', _('Raiffeisen Bank Account Currency Code: CZK,EUR,USD,...')));
-        $body->addItem(new \Ease\TWB4\FormGroup('CERT_FILE', new \Ease\Html\InputTextTag('CERT_FILE'), '/path/to/certificate/file.p12', _('Path to Certificate File')));
-        $body->addItem(new \Ease\TWB4\FormGroup('CERT_PASS', new \Ease\Html\InputTextTag('CERT_PASS'), \Ease\Functions::randomString(20), _('Password for Certificate')));
-        $body->addItem(new \Ease\TWB4\FormGroup('XIBMCLIENTID', new \Ease\Html\InputTextTag('XIBMCLIENTID'), '', new ATag('https://developers.rb.cz/premium/applications', _('X-IBM-Client-Id'))));
+        $body->addItem(new \Ease\TWB5\FormGroup('ACCOUNT_NUMBER', new \Ease\Html\InputTextTag('ACCOUNT_NUMBER'), '', _('Raiffeisen Bank Account Number')));
+        $body->addItem(new \Ease\TWB5\FormGroup('ACCOUNT_CURRENCY', new \Ease\Html\InputTextTag('ACCOUNT_CURRENCY'), 'CZK', _('Raiffeisen Bank Account Currency Code: CZK,EUR,USD,...')));
+        $body->addItem(new \Ease\TWB5\FormGroup('CERT_FILE', new \Ease\Html\InputTextTag('CERT_FILE'), '/path/to/certificate/file.p12', _('Path to Certificate File')));
+        $body->addItem(new \Ease\TWB5\FormGroup('CERT_PASS', new \Ease\Html\InputTextTag('CERT_PASS'), \Ease\Functions::randomString(20), _('Password for Certificate')));
+        $body->addItem(new \Ease\TWB5\FormGroup('XIBMCLIENTID', new \Ease\Html\InputTextTag('XIBMCLIENTID'), '', new ATag('https://developers.rb.cz/premium/applications', _('X-IBM-Client-Id'))));
 
         parent::__construct($header, 'inverse', $body, '');
     }

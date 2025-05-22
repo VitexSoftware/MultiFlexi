@@ -25,7 +25,7 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class AppJobsTable extends \Ease\TWB4\Table
+class AppJobsTable extends \Ease\TWB5\Table
 {
     public function __construct(int $appId, int $companyId, $properties = [])
     {

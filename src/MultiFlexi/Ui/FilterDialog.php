@@ -28,7 +28,7 @@ class FilterDialog extends \Ease\Html\DivTag
      */
     public function __construct($tableId, $columns = [])
     {
-        $columnTabs = new \Ease\TWB4\Tabs(null, ['id' => 'filterTabs']);
+        $columnTabs = new \Ease\TWB5\Tabs(null, ['id' => 'filterTabs']);
 
         foreach ($columns as $columnProperies) {
             $columnName = $columnProperies['name'];
@@ -38,9 +38,9 @@ class FilterDialog extends \Ease\Html\DivTag
             switch ($columnProperies['type']) {
                 case 'checkbox':
                     $controls->addItem(
-                        new \Ease\TWB4\FormGroup(
+                        new \Ease\TWB5\FormGroup(
                             $columnProperies['label'],
-                            new \Ease\TWB4\Widgets\Toggle(
+                            new \Ease\TWB5\Widgets\Toggle(
                                 $columnName,
                                 true,
                                 null,
@@ -168,7 +168,7 @@ EOD);
                         }
                     }
 
-                    $controls = new \Ease\TWB4\FormGroup(
+                    $controls = new \Ease\TWB5\FormGroup(
                         $columnProperies['label'],
                         $input,
                     );
@@ -180,7 +180,7 @@ EOD);
         }
 
         parent::__construct(
-            new \Ease\TWB4\Form(['name' => 'filter'.$tableId], [], $columnTabs),
+            new \Ease\TWB5\Form(['name' => 'filter'.$tableId], [], $columnTabs),
             ['id' => 'gridFilter'.$tableId, 'class' => 'filterOptions'],
         );
     }

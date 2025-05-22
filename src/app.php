@@ -17,10 +17,10 @@ namespace MultiFlexi\Ui;
 
 use Ease\Html\ATag;
 use Ease\Html\SmallTag;
-use Ease\TWB4\LinkButton;
-use Ease\TWB4\Row;
-use Ease\TWB4\Table;
-use Ease\TWB4\Tabs;
+use Ease\TWB5\LinkButton;
+use Ease\TWB5\Row;
+use Ease\TWB5\Table;
+use Ease\TWB5\Tabs;
 use MultiFlexi\Application;
 use MultiFlexi\Conffield;
 use MultiFlexi\Job;

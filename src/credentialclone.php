@@ -23,7 +23,7 @@ WebPage::singleton()->onlyForLogged();
 
 $credential = new Credential(WebPage::getRequestValue('id', 'int'));
 $originalEnv = $credential->getData();
-$cloneName = \Ease\TWB4\WebPage::getRequestValue('clonename');
+$cloneName = \Ease\TWB5\WebPage::getRequestValue('clonename');
 
 $credential->unsetDataValue($credential->getKeyColumn());
 $credential->setDataValue('name', $cloneName);

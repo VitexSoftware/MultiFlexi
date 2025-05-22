@@ -20,7 +20,7 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class DbStatus extends \Ease\TWB4\Row
+class DbStatus extends \Ease\TWB5\Row
 {
     /**
      * Show status of database.
@@ -36,27 +36,27 @@ class DbStatus extends \Ease\TWB4\Row
         $assigned = (string) (new \MultiFlexi\RunTemplate())->listingQuery()->count();
 
         $this->addColumn(2, new \Ease\Html\ButtonTag(
-            [_('Jobs').'&nbsp;', new \Ease\TWB4\PillBadge('success', $jobs)],
+            [_('Jobs').'&nbsp;', new \Ease\TWB5\PillBadge('success', $jobs)],
             ['class' => 'btn btn-default', 'type' => 'button'],
         ));
         $this->addColumn(2, new \Ease\Html\ButtonTag(
-            [_('Apps').'&nbsp;', new \Ease\TWB4\PillBadge('success', $apps)],
+            [_('Apps').'&nbsp;', new \Ease\TWB5\PillBadge('success', $apps)],
             ['class' => 'btn btn-default', 'type' => 'button'],
         ));
         $this->addColumn(2, new \Ease\Html\ButtonTag(
-            [_('Servers').'&nbsp;', new \Ease\TWB4\PillBadge('success', $servers)],
+            [_('Servers').'&nbsp;', new \Ease\TWB5\PillBadge('success', $servers)],
             ['class' => 'btn btn-default', 'type' => 'button'],
         ));
         $this->addColumn(2, new \Ease\Html\ButtonTag(
-            [_('Customers').'&nbsp;', new \Ease\TWB4\PillBadge('success', $customers)],
+            [_('Customers').'&nbsp;', new \Ease\TWB5\PillBadge('success', $customers)],
             ['class' => 'btn btn-default', 'type' => 'button'],
         ));
         $this->addColumn(2, new \Ease\Html\ButtonTag(
-            [_('Companies').'&nbsp;', new \Ease\TWB4\PillBadge('success', $companies)],
+            [_('Companies').'&nbsp;', new \Ease\TWB5\PillBadge('success', $companies)],
             ['class' => 'btn btn-default', 'type' => 'button'],
         ));
         $this->addColumn(2, new \Ease\Html\ButtonTag(
-            [_('Assigned').'&nbsp;', new \Ease\TWB4\PillBadge('success', $assigned)],
+            [_('Assigned').'&nbsp;', new \Ease\TWB5\PillBadge('success', $assigned)],
             ['class' => 'btn btn-default', 'type' => 'button'],
         ));
     }
