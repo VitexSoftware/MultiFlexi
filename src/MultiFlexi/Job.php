@@ -713,7 +713,7 @@ EOD;
                 $field = $creds->getFieldByCode($configFieldName);
 
                 if (null === $field) {
-                    $creds->addField(new ConfigField($configFieldName, 'string', $configFieldName, '', '', (string)$configFieldInfo['value']));
+                    $creds->addField(new ConfigField($configFieldName, 'string', $configFieldName, '', '', (string) $configFieldInfo['value']));
                 } else {
                     $field->setValue($configFieldInfo['value']);
                     $field->setSource($configFieldInfo['source']);
