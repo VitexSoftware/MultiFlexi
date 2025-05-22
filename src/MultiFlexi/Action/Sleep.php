@@ -61,7 +61,7 @@ class Sleep extends \MultiFlexi\CommonAction
     public static function inputs(string $prefix)
     {
         return [
-            new \Ease\TWB4\FormGroup(_('Number of seconds'), new \Ease\Html\InputTextTag($prefix.'[Sleep][seconds]'), '60', _('Number of Seconds to wait')),
+            new \Ease\TWB5\FormGroup(_('Number of seconds'), new \Ease\Html\InputTextTag($prefix.'[Sleep][seconds]'), '60', _('Number of Seconds to wait')),
         ];
     }
 

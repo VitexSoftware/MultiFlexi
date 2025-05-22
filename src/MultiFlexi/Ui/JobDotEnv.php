@@ -31,6 +31,6 @@ class JobDotEnv extends \Ease\Html\DivTag
     {
         parent::__construct(new \Ease\Html\PreTag($job->envFile()), $properties);
         $this->addTagClass('ui-monospace custom-control');
-        $this->addItem(new \Ease\TWB4\LinkButton('jobenv.php?id='.$job->getMyKey(), _('Download').' multiflexi_job_'.$job->getMyKey().'.env', 'info '));
+        $this->addItem(new \Ease\TWB5\LinkButton('jobenv.php?id='.$job->getMyKey(), _('Download').' multiflexi_job_'.$job->getMyKey().'.env', 'info '));
     }
 }

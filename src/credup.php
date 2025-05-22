@@ -18,7 +18,7 @@ namespace MultiFlexi\Ui;
 require_once './init.php';
 
 use Ease\Html\DivTag;
-use Ease\TWB4\Panel;
+use Ease\TWB5\Panel;
 use MultiFlexi\Credential;
 use MultiFlexi\CredentialType;
 

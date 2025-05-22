@@ -51,7 +51,7 @@ class CustomCommand extends \MultiFlexi\CommonAction
 
     public static function inputs(string $prefix)
     {
-        return new \Ease\TWB4\FormGroup(_('Command'), new \Ease\Html\InputTextTag($prefix.'[CustomCommand][command]'), '', _('Bash shell is used'));
+        return new \Ease\TWB5\FormGroup(_('Command'), new \Ease\Html\InputTextTag($prefix.'[CustomCommand][command]'), '', _('Bash shell is used'));
     }
 
     /**

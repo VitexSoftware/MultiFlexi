@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 use Ease\Html\ATag;
-use Ease\TWB4\Row;
+use Ease\TWB5\Row;
 use MultiFlexi\Company;
 
 require_once './init.php';

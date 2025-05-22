@@ -58,7 +58,7 @@ To install MultiFlexi using Debian packages, you can follow these steps:
            php-composer-pcre php-composer-semver php-composer-spdx-licenses php-composer-xdebug-handler php-intl php-json-schema php-mail php-mail-mime
            php-mbstring php-mysql php-net-smtp php-net-socket php-pear php-psr-container php-psr-log php-react-promise php-symfony-console
            php-symfony-deprecation-contracts php-symfony-filesystem php-symfony-finder php-symfony-polyfill-php80 php-symfony-process
-           php-symfony-service-contracts php-symfony-string php-vitexsoftware-ease-bootstrap4 php-vitexsoftware-ease-bootstrap4-widgets
+           php-symfony-service-contracts php-symfony-string php-vitexsoftware-ease-bootstrap5 php-vitexsoftware-ease-bootstrap5-widgets
            php-vitexsoftware-ease-core php-vitexsoftware-ease-fluentpdo php-vitexsoftware-ease-html php-vitexsoftware-ease-html-widgets php-xml php-yaml
            php8.1-cli php8.1-common php8.1-intl php8.1-mbstring php8.1-mysql php8.1-opcache php8.1-readline php8.1-xml php8.1-yaml unzip
         Suggested packages:
@@ -71,7 +71,7 @@ To install MultiFlexi using Debian packages, you can follow these steps:
            php-composer-metadata-minifier php-composer-pcre php-composer-semver php-composer-spdx-licenses php-composer-xdebug-handler php-intl
            php-json-schema php-mail php-mail-mime php-mbstring php-mysql php-net-smtp php-net-socket php-pear php-psr-container php-psr-log
            php-react-promise php-symfony-console php-symfony-deprecation-contracts php-symfony-filesystem php-symfony-finder php-symfony-polyfill-php80
-           php-symfony-process php-symfony-service-contracts php-symfony-string php-vitexsoftware-ease-bootstrap4 php-vitexsoftware-ease-bootstrap4-widgets
+           php-symfony-process php-symfony-service-contracts php-symfony-string php-vitexsoftware-ease-bootstrap5 php-vitexsoftware-ease-bootstrap5-widgets
            php-vitexsoftware-ease-core php-vitexsoftware-ease-fluentpdo php-vitexsoftware-ease-html php-vitexsoftware-ease-html-widgets php-xml php-yaml
            php8.1-cli php8.1-common php8.1-intl php8.1-mbstring php8.1-mysql php8.1-opcache php8.1-readline php8.1-xml php8.1-yaml unzip
         0 upgraded, 72 newly installed, 0 to remove and 0 not upgraded.

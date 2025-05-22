@@ -20,7 +20,7 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use Ease\TWB4\Form;
+use Ease\TWB5\Form;
 use MultiFlexi\Application;
 use MultiFlexi\Company;
 
@@ -51,7 +51,7 @@ class JobScheduleForm extends Form
     {
         $this->timeSelect();
         $this->uploadFields();
-        $this->addItem(new \Ease\TWB4\SubmitButton('<img src="images/schedule.svg" height="30">&nbsp;'._('Save App Schedule'), 'success btn-lg'));
+        $this->addItem(new \Ease\TWB5\SubmitButton('<img src="images/schedule.svg" height="30">&nbsp;'._('Save App Schedule'), 'success btn-lg'));
 
         parent::finalize();
     }

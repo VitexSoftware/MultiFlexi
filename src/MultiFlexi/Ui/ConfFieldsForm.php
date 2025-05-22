@@ -17,8 +17,8 @@ namespace MultiFlexi\Ui;
 
 use Ease\Html\InputHiddenTag;
 use Ease\Html\InputTextTag;
-use Ease\TWB4\Form;
-use Ease\TWB4\SubmitButton;
+use Ease\TWB5\Form;
+use Ease\TWB5\SubmitButton;
 
 /**
  * Description of ConfFieldsForm.
@@ -41,7 +41,7 @@ class ConfFieldsForm extends Form
         $this->addInput(new InputTextTag('keyname', \array_key_exists('keyname', $conffields) ? $conffields['keyname'] : ''), _('New config field Keyword'));
         $this->addInput(new InputTextTag('defval', \array_key_exists('defval', $conffields) ? $conffields['defval'] : ''), _('Default value'));
         $this->addInput(new InputTextTag('description', \array_key_exists('description', $conffields) ? $conffields['description'] : ''), _('New config field description'));
-        $this->addInput(new \Ease\TWB4\Widgets\Toggle('required'), _('Required'));
+        $this->addInput(new \Ease\TWB5\Widgets\Toggle('required'), _('Required'));
 
         if (\array_key_exists('id', $conffields)) {
             $this->addItem(new InputHiddenTag('id', $conffields['id']));

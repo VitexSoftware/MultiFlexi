@@ -21,7 +21,7 @@ WebPage::singleton()->onlyForLogged();
 
 WebPage::singleton()->addItem(new PageTop(_('MultiFlexi - Environment Modules')));
 
-WebPage::singleton()->container->addItem(new \Ease\TWB4\Panel(new \Ease\Html\H2Tag(_('Installed Environment Modules')), 'default', new EnvModulesListing()));
+WebPage::singleton()->container->addItem(new \Ease\TWB5\Panel(new \Ease\Html\H2Tag(_('Installed Environment Modules')), 'default', new EnvModulesListing()));
 
 WebPage::singleton()->addItem(new PageBottom());
 

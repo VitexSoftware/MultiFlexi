@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 use Ease\Html\ATag;
-use Ease\TWB4\Row;
+use Ease\TWB5\Row;
 use MultiFlexi\Conffield;
 
 require_once './init.php';
@@ -75,15 +75,15 @@ $cfgs = new \Ease\Html\UlTag();
 foreach ($conffields->appConfigs($appId) as $configInfo) {
     $cnfRow = new Row();
     $cnfRow->addColumn(2, $configInfo['type']);
-    $cnfRow->addColumn(4, new ATag('conffield.php?app_id='.$appId.'&id='.$configInfo['id'], new \Ease\TWB4\Badge('success', $configInfo['keyname'])));
+    $cnfRow->addColumn(4, new ATag('conffield.php?app_id='.$appId.'&id='.$configInfo['id'], new \Ease\TWB5\Badge('success', $configInfo['keyname'])));
     $cnfRow->addColumn(4, $configInfo['description']);
-    $cnfRow->addColumn(2, new \Ease\TWB4\LinkButton('?app_id='.$appId.'&delete='.$configInfo['id'], 'X', 'danger btn-sm'));
+    $cnfRow->addColumn(2, new \Ease\TWB5\LinkButton('?app_id='.$appId.'&delete='.$configInfo['id'], 'X', 'danger btn-sm'));
     $cfgs->addItemSmart($cnfRow);
 }
 
-$cfgs->addItem(new \Ease\TWB4\LinkButton('app.php?id='.WebPage::getRequestValue('app_id', 'int'), [_('Back to app'), $appliacation->getRecordName()], 'warning'));
+$cfgs->addItem(new \Ease\TWB5\LinkButton('app.php?id='.WebPage::getRequestValue('app_id', 'int'), [_('Back to app'), $appliacation->getRecordName()], 'warning'));
 
-$editorRow = new \Ease\TWB4\Row();
+$editorRow = new \Ease\TWB5\Row();
 $editorRow->addColumn(8, $instanceRow);
 $editorRow->addColumn(2, new AppLogo($appliacation));
 

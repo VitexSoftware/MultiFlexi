@@ -21,7 +21,7 @@ WebPage::singleton()->onlyForLogged();
 
 WebPage::singleton()->addItem(new PageTop(_('MultiFlexi - Executor Modules')));
 
-WebPage::singleton()->container->addItem(new \Ease\TWB4\Panel(new \Ease\Html\H2Tag(_('Installed Executor Modules')), 'default', new ExecutorsListing()));
+WebPage::singleton()->container->addItem(new \Ease\TWB5\Panel(new \Ease\Html\H2Tag(_('Installed Executor Modules')), 'default', new ExecutorsListing()));
 
 WebPage::singleton()->addItem(new PageBottom());
 

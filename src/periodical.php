@@ -63,18 +63,18 @@ $appsByIntrv = $runTemplater->getCompanyRunTemplatesByInterval($companer->getMyK
 
 WebPage::singleton()->addItem(new PageTop(_('Periodical tasks')));
 
-$addAppForm = new \Ease\TWB4\Form();
+$addAppForm = new \Ease\TWB5\Form();
 $addAppForm->addItem(new \Ease\Html\H1Tag(_('Periodical tasks')));
 $addAppForm->addItem(new \Ease\Html\InputHiddenTag('company_id', $companer->getMyKey()));
 
-$periodSelectorsRow = new \Ease\TWB4\Row();
+$periodSelectorsRow = new \Ease\TWB5\Row();
 
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Minutely'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'minutly', \count($appsByIntrv['i']) ? implode(',', array_keys($appsByIntrv['i'])) : '', 'actions.php')));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Hourly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'hourly', \count($appsByIntrv['h']) ? implode(',', array_keys($appsByIntrv['h'])) : '', 'actions.php')));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Daily'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'daily', \count($appsByIntrv['d']) ? implode(',', array_keys($appsByIntrv['d'])) : '', 'actions.php')));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Weekly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'weekly', \count($appsByIntrv['w']) ? implode(',', array_keys($appsByIntrv['w'])) : '', 'actions.php')));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Monthly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'monthly', \count($appsByIntrv['m']) ? implode(',', array_keys($appsByIntrv['m'])) : '', 'actions.php')));
-$periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Yearly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'yearly', \count($appsByIntrv['y']) ? implode(',', array_keys($appsByIntrv['y'])) : '', 'actions.php')));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB5\Panel(_('Minutely'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'minutly', \count($appsByIntrv['i']) ? implode(',', array_keys($appsByIntrv['i'])) : '', 'actions.php')));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB5\Panel(_('Hourly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'hourly', \count($appsByIntrv['h']) ? implode(',', array_keys($appsByIntrv['h'])) : '', 'actions.php')));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB5\Panel(_('Daily'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'daily', \count($appsByIntrv['d']) ? implode(',', array_keys($appsByIntrv['d'])) : '', 'actions.php')));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB5\Panel(_('Weekly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'weekly', \count($appsByIntrv['w']) ? implode(',', array_keys($appsByIntrv['w'])) : '', 'actions.php')));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB5\Panel(_('Monthly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'monthly', \count($appsByIntrv['m']) ? implode(',', array_keys($appsByIntrv['m'])) : '', 'actions.php')));
+$periodSelectorsRow->addColumn(2, new \Ease\TWB5\Panel(_('Yearly'), 'default', new CompanyRuntemplateIntervalSelector($companer, 'yearly', \count($appsByIntrv['y']) ? implode(',', array_keys($appsByIntrv['y'])) : '', 'actions.php')));
 
 //
 // $assignedRaw = $companyApp->getAssigned()->fetchAll('app_id');
@@ -85,7 +85,7 @@ $periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Yearly'), 'default', n
 $addAppForm->addItem($periodSelectorsRow);
 $addAppForm->addItem(new \Ease\Html\PTag());
 
-$addAppForm->addItem(new \Ease\TWB4\SubmitButton(_('🍏 Apply'), 'success btn-lg btn-block'));
+$addAppForm->addItem(new \Ease\TWB5\SubmitButton(_('🍏 Apply'), 'success btn-lg btn-block'));
 
 WebPage::singleton()->container->addItem(new CompanyPanel($companer, $addAppForm));
 

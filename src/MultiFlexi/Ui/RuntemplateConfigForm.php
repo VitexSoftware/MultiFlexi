@@ -51,7 +51,7 @@ class RuntemplateConfigForm extends EngineForm
 
         foreach ($appFields as $fieldName => $field) {
             if ($field->getType() === 'bool') {
-                $input = new \Ease\Html\DivTag(new \Ease\TWB4\Widgets\Toggle($fieldName, $field->getValue() === 'true' ? true : false, 'true', []));
+                $input = new \Ease\Html\DivTag(new \Ease\TWB5\Widgets\Toggle($fieldName, $field->getValue() === 'true' ? true : false, 'true', []));
             } else {
                 $input = new \Ease\Html\InputTag($fieldName, $field->getValue(), ['type' => $field->getType()]);
             }
@@ -93,9 +93,9 @@ class RuntemplateConfigForm extends EngineForm
         $this->addItem(new \Ease\Html\InputHiddenTag('app_id', $engine->getDataValue('app_id')));
         $this->addItem(new \Ease\Html\InputHiddenTag('company_id', $engine->getDataValue('company_id')));
 
-        $saveRow = new \Ease\TWB4\Row();
-        $saveRow->addColumn(8, new \Ease\TWB4\SubmitButton(_('Save'), 'success btn-lg btn-block'));
-        $saveRow->addColumn(4, new \Ease\TWB4\LinkButton('actions.php?id='.$engine->getMyKey(), '🛠️&nbsp;'._('Actions'), 'secondary btn-lg btn-block'));
+        $saveRow = new \Ease\TWB5\Row();
+        $saveRow->addColumn(8, new \Ease\TWB5\SubmitButton(_('Save'), 'success btn-lg btn-block'));
+        $saveRow->addColumn(4, new \Ease\TWB5\LinkButton('actions.php?id='.$engine->getMyKey(), '🛠️&nbsp;'._('Actions'), 'secondary btn-lg btn-block'));
         $this->addItem($saveRow);
     }
 

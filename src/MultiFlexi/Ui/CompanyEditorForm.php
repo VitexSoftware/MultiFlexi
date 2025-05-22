@@ -18,7 +18,7 @@ namespace MultiFlexi\Ui;
 use Ease\Html\InputEmailTag;
 use Ease\Html\InputHiddenTag;
 use Ease\Html\InputTextTag;
-use Ease\TWB4\SubmitButton;
+use Ease\TWB5\SubmitButton;
 
 /**
  * Registered AbraFlexi instance editor Form.

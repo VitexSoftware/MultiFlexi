@@ -23,7 +23,7 @@ WebPage::singleton()->onlyForLogged();
 
 $runTemplate = new RunTemplate(WebPage::getRequestValue('id', 'int'));
 $originalEnv = $runTemplate->getRuntemplateEnvironment();
-$cloneName = \Ease\TWB4\WebPage::getRequestValue('clonename');
+$cloneName = \Ease\TWB5\WebPage::getRequestValue('clonename');
 
 $runTemplate->unsetDataValue($runTemplate->getKeyColumn());
 $runTemplate->setDataValue('name', $cloneName);

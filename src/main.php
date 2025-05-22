@@ -25,7 +25,7 @@ WebPage::singleton()->container->addItem(new CompaniesBar());
 
 WebPage::singleton()->container->addItem(new AllJobsLastMonthChart(new \MultiFlexi\Job(), ['id' => 'container']));
 
-WebPage::singleton()->container->addItem(new \Ease\TWB4\Panel(_('Last 20 Jobs'), 'default', new JobHistoryTable(), new DbStatus()));
+WebPage::singleton()->container->addItem(new \Ease\TWB5\Panel(_('Last 20 Jobs'), 'default', new JobHistoryTable(), new DbStatus()));
 
 WebPage::singleton()->addItem(new PageBottom('jobs'));
 

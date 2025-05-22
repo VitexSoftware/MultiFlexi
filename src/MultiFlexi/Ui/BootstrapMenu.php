@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-class BootstrapMenu extends \Ease\TWB4\Navbar
+class BootstrapMenu extends \Ease\TWB5\Navbar
 {
     /**
      * Navigation.
@@ -38,12 +38,12 @@ class BootstrapMenu extends \Ease\TWB4\Navbar
         parent::__construct(new \Ease\Html\ImgTag('images/project-logo.svg', $name, ['width' => 50, 'height' => 50, 'class' => 'img-rounded d-inline-block align-top']), 'main-menu', ['class' => 'navbar-fixed-top'.(\array_key_exists('class', $properties) ? $properties['class'] : '')]);
 
         if (\Ease\Shared::user()->isLogged() === false) {
-            $loginForm = new \Ease\TWB4\Form(['action' => 'login.php', 'class' => 'form-inline my-2 my-lg-0']);
+            $loginForm = new \Ease\TWB5\Form(['action' => 'login.php', 'class' => 'form-inline my-2 my-lg-0']);
             $loginForm->addItem(new \Ease\Html\InputTextTag('login', WebPage::getRequestValue('login'), ['class' => 'form-control mr-sm-2', 'placeholder' => _('Login')]));
             $loginForm->addItem(new \Ease\Html\InputPasswordTag('password', WebPage::getRequestValue('password'), ['class' => 'form-control mr-sm-2', 'placeholder' => _('Password')]));
-            $loginForm->addItem(new \Ease\TWB4\SubmitButton(_('Sign In'), 'success my-2 my-sm-0'));
+            $loginForm->addItem(new \Ease\TWB5\SubmitButton(_('Sign In'), 'success my-2 my-sm-0'));
             $loginForm->addItem('&nbsp;&nbsp;&nbsp;');
-            $loginForm->addItem(new \Ease\TWB4\LinkButton('passwordrecovery.php', _('Password recovery'), 'warning my-2 my-sm-0'));
+            $loginForm->addItem(new \Ease\TWB5\LinkButton('passwordrecovery.php', _('Password recovery'), 'warning my-2 my-sm-0'));
             $this->addMenuItem($loginForm);
             $this->addItem($content);
         }

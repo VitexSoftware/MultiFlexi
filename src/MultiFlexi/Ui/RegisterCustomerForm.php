@@ -48,7 +48,7 @@ class RegisterCustomerForm extends EngineForm
             _('Email'),
         );
 
-        $this->addInput(new \Ease\TWB4\SubmitButton(_('Save'), 'success'));
+        $this->addInput(new \Ease\TWB5\SubmitButton(_('Save'), 'success'));
 
         if (null !== $this->engine->getDataValue('id')) {
             $this->addItem(new \Ease\Html\InputHiddenTag('id'));

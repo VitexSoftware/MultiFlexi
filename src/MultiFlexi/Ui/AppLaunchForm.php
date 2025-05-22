@@ -21,7 +21,7 @@ namespace MultiFlexi\Ui;
  * @copyright  2015-2024 Vitex Software
  * @license    https://opensource.org/licenses/MIT MIT
  */
-class AppLaunchForm extends \Ease\TWB4\Form
+class AppLaunchForm extends \Ease\TWB5\Form
 {
     /**
      * Application Launch Form.
@@ -58,7 +58,7 @@ class AppLaunchForm extends \Ease\TWB4\Form
                     break;
                 case 'checkbox':
                     if (\array_key_exists($fieldKey, $env) === false) {
-                        $this->addInput(new \Ease\TWB4\Widgets\Toggle($fieldKey, (bool) $fieldProps['defval']), $fieldKey.'&nbsp;', $fieldProps['defval'], $fieldProps['description']);
+                        $this->addInput(new \Ease\TWB5\Widgets\Toggle($fieldKey, (bool) $fieldProps['defval']), $fieldKey.'&nbsp;', $fieldProps['defval'], $fieldProps['description']);
                     }
 
                     break;
@@ -73,7 +73,7 @@ class AppLaunchForm extends \Ease\TWB4\Form
         }
 
         $this->addItem(new AppExecutorSelect($app));
-        $this->addItem(new \Ease\TWB4\SubmitButton([_('Launch now').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'success btn-lg btn-block '));
-        $this->addItem(new \Ease\TWB4\LinkButton('schedule.php?app_id='.$appId.'&company_id='.$companyId, [_('Schedule').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg'));
+        $this->addItem(new \Ease\TWB5\SubmitButton([_('Launch now').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/rocket.svg', _('Launch'), ['height' => '30px'])], 'success btn-lg btn-block '));
+        $this->addItem(new \Ease\TWB5\LinkButton('schedule.php?app_id='.$appId.'&company_id='.$companyId, [_('Schedule').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg'));
     }
 }

@@ -56,8 +56,8 @@ db/multiflexi
 /.build/
 /docs/build/
 /src/zabbix.php
-src/css/dataTables.bootstrap4.css
-src/js/dataTables.bootstrap4.js
+src/css/dataTables.bootstrap5.css
+src/js/dataTables.bootstrap5.js
 src/js/jquery.dataTables.js
 /debian/multiflexi-abraflexi.debhelper.log
 /debian/multiflexi-abraflexi.substvars

@@ -30,12 +30,12 @@ class RequirementsOverview extends \Ease\Html\DivTag
             $formClass = '\\MultiFlexi\\Ui\\Form\\'.$req;
 
             if (class_exists($formClass)) {
-                $reqCard = new \Ease\TWB4\Card([
+                $reqCard = new \Ease\TWB5\Card([
                     new \Ease\Html\ImgTag($formClass::$logo, $req, ['title' => $req, 'height' => 40, 'class' => 'card-img-top']),
                     new \Ease\Html\DivTag(new \Ease\Html\H5Tag($formClass::name(), ['class' => 'card-body'])),
                 ]);
             } else {
-                $reqCard = new \Ease\TWB4\Card($req);
+                $reqCard = new \Ease\TWB5\Card($req);
             }
 
             $this->addItem($reqCard);

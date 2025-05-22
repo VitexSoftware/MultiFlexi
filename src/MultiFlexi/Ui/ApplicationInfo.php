@@ -22,7 +22,7 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use Ease\TWB4\Panel;
+use Ease\TWB5\Panel;
 use MultiFlexi\Application;
 
 /**
@@ -48,11 +48,11 @@ class ApplicationInfo extends Panel
      *
      * @param Application $application
      *
-     * @return \Ease\TWB4\Row
+     * @return \Ease\TWB5\Row
      */
     public function headerRow($application)
     {
-        $headerRow = new \Ease\TWB4\Row();
+        $headerRow = new \Ease\TWB5\Row();
 
         $appData = new \Ease\Html\DivTag();
         $appData->addItem(new \Ease\Html\H3Tag($application->getDataValue('name')));

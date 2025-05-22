@@ -26,9 +26,9 @@ php-vitexsoftware-ease-html
 php-vitexsoftware-ease-bricks
 php-spojenet-abraflexi
 php-vitexsoftware-abraflexi-bricks
-php-vitexsoftware-ease-bootstrap4
-php-vitexsoftware-ease-bootstrap4-widgets
-php-vitexsoftware-ease-bootstrap4-widgets-abraflexi
+php-vitexsoftware-ease-bootstrap5
+php-vitexsoftware-ease-bootstrap5-widgets
+php-vitexsoftware-ease-bootstrap5-widgets-abraflexi
 php-vitexsoftware-ease-fluentpdo
 multiflexi-mysql
 multiflexi
@@ -146,9 +146,9 @@ Updating dependencies
 Lock file operations: 10 installs, 0 updates, 0 removals
   - Locking deb/abraflexi (2.10)
   - Locking deb/abraflexi-bricks (0.34)
-  - Locking deb/ease-bootstrap4 (1.7)
-  - Locking deb/ease-bootstrap4-widgets (1.3)
-  - Locking deb/ease-bootstrap4-widgets-abraflexi (0.5)
+  - Locking deb/ease-bootstrap5 (1.7)
+  - Locking deb/ease-bootstrap5-widgets (1.3)
+  - Locking deb/ease-bootstrap5-widgets-abraflexi (0.5)
   - Locking deb/ease-bricks (0.9.9)
   - Locking deb/ease-core (1.35)
   - Locking deb/ease-fluentpdo (1.0)
@@ -160,11 +160,11 @@ Package operations: 10 installs, 0 updates, 0 removals
   - Installing deb/ease-core (1.35): Symlinking from /usr/share/php/EaseCore
   - Installing deb/abraflexi (2.10): Symlinking from /usr/share/php/AbraFlexi
   - Installing deb/ease-html (1.36): Symlinking from /usr/share/php/EaseHtml
-  - Installing deb/ease-bootstrap4 (1.7): Symlinking from /usr/share/php/EaseTWB4
-  - Installing deb/ease-bootstrap4-widgets (1.3): Symlinking from /usr/share/php/EaseTWB4Widgets
+  - Installing deb/ease-bootstrap5 (1.7): Symlinking from /usr/share/php/EaseTWB5
+  - Installing deb/ease-bootstrap5-widgets (1.3): Symlinking from /usr/share/php/EaseTWB5Widgets
   - Installing deb/ease-bricks (0.9.9): Symlinking from /usr/share/php/EaseBricks
   - Installing deb/abraflexi-bricks (0.34): Symlinking from /usr/share/php/AbraFlexiBricks
-  - Installing deb/ease-bootstrap4-widgets-abraflexi (0.5): Symlinking from /usr/share/php/EaseTWB4WidgetsAbraFlexi
+  - Installing deb/ease-bootstrap5-widgets-abraflexi (0.5): Symlinking from /usr/share/php/EaseTWB5WidgetsAbraFlexi
   - Installing fpdo/fluentpdo (v2.2.0): Extracting archive
   - Installing deb/ease-fluentpdo (1.0): Symlinking from /usr/share/php/EaseFluentPDO
 Generating autoload files

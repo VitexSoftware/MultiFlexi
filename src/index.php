@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use Ease\TWB4\LinkButton;
+use Ease\TWB5\LinkButton;
 
 require_once './init.php';
 
@@ -30,7 +30,7 @@ try {
     \Ease\Shared::user()->addStatusMessage($exc->getMessage());
 }
 
-$imageRow = new \Ease\TWB4\Row();
+$imageRow = new \Ease\TWB5\Row();
 $imageRow->addTagClass('justify-content-md-center');
 $imageRow->addColumn(4);
 

@@ -20,7 +20,7 @@ namespace MultiFlexi\Ui;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class Wizard extends \Ease\TWB4\Panel
+class Wizard extends \Ease\TWB5\Panel
 {
     public $step = 0;
 

@@ -31,9 +31,9 @@ class ConfigFieldsOverview extends \Ease\Html\DivTag
         }
     }
 
-    public static function confInfo(\MultiFlexi\ConfigField $field): \Ease\TWB4\Row
+    public static function confInfo(\MultiFlexi\ConfigField $field): \Ease\TWB5\Row
     {
-        $confInfoRow = new \Ease\TWB4\Row();
+        $confInfoRow = new \Ease\TWB5\Row();
         $confInfoRow->addColumn(2, [$field->getType(), new \Ease\Html\H3Tag($field->getName())]);
         $confInfoRow->addColumn(2, $field->getDescription());
         $confInfoRow->addColumn(2, _('Note').': '.$field->getNote());

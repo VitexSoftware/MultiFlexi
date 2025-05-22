@@ -71,8 +71,8 @@ $instanceName = $appInfo['app_name'];
 
 WebPage::singleton()->addItem(new PageTop(_('Schedule Job run')));
 
-$runTemplateButton = new \Ease\TWB4\LinkButton('runtemplate.php?id='.$runTemplate->getMyKey(), '⚗️&nbsp;'._('Run Template'), 'dark btn-lg btn-block');
-$jobInfoButton = new \Ease\TWB4\LinkButton('job.php?id='.$jobber->getMyKey(), _('Job details'), 'info btn-block');
+$runTemplateButton = new \Ease\TWB5\LinkButton('runtemplate.php?id='.$runTemplate->getMyKey(), '⚗️&nbsp;'._('Run Template'), 'dark btn-lg btn-block');
+$jobInfoButton = new \Ease\TWB5\LinkButton('job.php?id='.$jobber->getMyKey(), _('Job details'), 'info btn-block');
 
 $appPanel = new ApplicationPanel($apps, _('Job Run Scheduled'), $jobInfoButton);
 $appPanel->headRow->addColumn(2, $runTemplateButton);

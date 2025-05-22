@@ -528,7 +528,7 @@ class Application extends DBEngine
 
         if (empty($dataRow['topics']) === false) {
             foreach (explode(',', $dataRow['topics']) as $topic) {
-                $topics->addItem(new \Ease\TWB4\Badge('secondary', $topic));
+                $topics->addItem(new \Ease\TWB5\Badge('secondary', $topic));
             }
 
             $dataRow['topics'] = (string) $topics;

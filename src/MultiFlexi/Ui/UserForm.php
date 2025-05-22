@@ -17,8 +17,8 @@ namespace MultiFlexi\Ui;
 
 use Ease\Html\InputHiddenTag;
 use Ease\Html\InputTag;
-use Ease\TWB4\Form;
-use Ease\TWB4\SubmitButton;
+use Ease\TWB5\Form;
+use Ease\TWB5\SubmitButton;
 use MultiFlexi\User;
 
 class UserForm extends Form

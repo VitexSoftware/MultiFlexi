@@ -20,14 +20,14 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class CredentialCloneForm extends \Ease\TWB4\Form
+class CredentialCloneForm extends \Ease\TWB5\Form
 {
     public function __construct(\MultiFlexi\Credential $runtemplate)
     {
         $clonename = _($runtemplate->getDataValue('name') ?: $runtemplate->getAppInfo()['app_name']).' '._('Clone');
         parent::__construct(['action' => 'credentialclone.php?id='.(string) $runtemplate->getMyKey(), 'class' => 'form-inline']);
         $this->addInput(new \Ease\Html\InputTextTag('clonename', $clonename), _('Save as copy').'&nbsp;', $clonename);
-        $this->addItem(new \Ease\TWB4\SubmitButton('💕 '._('Clone'), 'success mb-2', ['type' => 'submit']));
+        $this->addItem(new \Ease\TWB5\SubmitButton('💕 '._('Clone'), 'success mb-2', ['type' => 'submit']));
     }
 
     /**

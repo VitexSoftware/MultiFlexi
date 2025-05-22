@@ -147,7 +147,7 @@ if (WebPage::singleton()->isPosted()) {
 
 WebPage::singleton()->addItem(new PageTop(_('New Administrator')));
 
-$regFace = new \Ease\TWB4\Panel(_('Singn On'));
+$regFace = new \Ease\TWB5\Panel(_('Singn On'));
 
 $regForm = $regFace->addItem(new ColumnsForm(new \MultiFlexi\User()));
 

@@ -38,7 +38,7 @@ class ConfiguredFieldBadges extends ConfigFieldsBadges
         parent::__construct($appFields);
 
         if (!empty($appFields)) {
-            $this->addItem(new \Ease\TWB4\LinkButton('custserviceconfig.php?app_id='.$appID.'&amp;company_id='.$companyID, _('Configure').' '.new \Ease\Html\ImgTag('images/set.svg', _('Set'), ['height' => '30px']), 'success btn-sm'));
+            $this->addItem(new \Ease\TWB5\LinkButton('custserviceconfig.php?app_id='.$appID.'&amp;company_id='.$companyID, _('Configure').' '.new \Ease\Html\ImgTag('images/set.svg', _('Set'), ['height' => '30px']), 'success btn-sm'));
         }
     }
 }

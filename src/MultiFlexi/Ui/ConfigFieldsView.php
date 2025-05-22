@@ -33,7 +33,7 @@ class ConfigFieldsView extends \Ease\Html\DivTag
 
     public static function confInfo($fieldInfo)
     {
-        $container = new \Ease\TWB4\Container($fieldInfo['type']);
+        $container = new \Ease\TWB5\Container($fieldInfo['type']);
         $container->addItem(new \Ease\Html\H3Tag($fieldInfo['keyname']));
         $container->addItem(empty($fieldInfo['description']) ? '' : _($fieldInfo['description']));
 
@@ -42,6 +42,6 @@ class ConfigFieldsView extends \Ease\Html\DivTag
         $dl->addDef(_('Requied'), $fieldInfo['required'] ? '✅' : '❎');
         $container->addItem($dl);
 
-        return new \Ease\TWB4\Card($container);
+        return new \Ease\TWB5\Card($container);
     }
 }

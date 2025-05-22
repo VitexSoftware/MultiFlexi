@@ -22,7 +22,7 @@ namespace MultiFlexi\Ui;
  */
 class CompanySelectize extends CompanySelect
 {
-    use \Ease\TWB4\Widgets\Selectizer;
+    use \Ease\TWB5\Widgets\Selectizer;
 
     #[\Override]
     public function finalize(): void

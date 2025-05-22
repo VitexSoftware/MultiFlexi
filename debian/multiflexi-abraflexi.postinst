@@ -8,7 +8,7 @@ composer-debian multiflexi
 
 # TODO:
 #
-#    "deb/ease-bootstrap4-widgets-abraflexi": "*",
+#    "deb/ease-bootstrap5-widgets-abraflexi": "*",
 #
 #    {
 #      "type": "path",
@@ -20,5 +20,5 @@ composer-debian multiflexi
 #    },
 #    {
 #      "type": "path",
-#      "url": "/usr/share/php/EaseTWB4WidgetsAbraFlexi/"
+#      "url": "/usr/share/php/EaseTWB5WidgetsAbraFlexi/"
 #    }

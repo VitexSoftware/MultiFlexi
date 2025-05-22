@@ -20,7 +20,7 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class WebPage extends \Ease\TWB4\WebPage
+class WebPage extends \Ease\TWB5\WebPage
 {
     /**
      * Where to look for bootstrap style sheet.
@@ -32,7 +32,7 @@ class WebPage extends \Ease\TWB4\WebPage
     /**
      * Put page contents here.
      */
-    public \Ease\TWB4\Container $container;
+    public \Ease\TWB5\Container $container;
 
     /**
      * Current Customer.
@@ -47,7 +47,7 @@ class WebPage extends \Ease\TWB4\WebPage
     public function __construct(string $pageTitle = '')
     {
         parent::__construct($pageTitle);
-        $this->container = $this->addItem(new \Ease\TWB4\Container());
+        $this->container = $this->addItem(new \Ease\TWB5\Container());
         $this->container->setTagClass('container-fluid');
         $this->addCSS(<<<'EOD'
 

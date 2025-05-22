@@ -22,22 +22,22 @@ namespace MultiFlexi\Ui\Form;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class mServer extends \Ease\TWB4\Panel implements configForm
+class mServer extends \Ease\TWB5\Panel implements configForm
 {
     public static string $logo = 'images/mServer.svg';
 
     public function __construct()
     {
-        $header = new \Ease\TWB4\Row();
+        $header = new \Ease\TWB5\Row();
         $header->addColumn(6, new \Ease\Html\ATag('https://www.stormware.eu/', new \Ease\Html\ImgTag(self::$logo, _('Stormware Pohoda'), ['height' => 50])));
         $header->addColumn(6, new \Ease\Html\H3Tag(_('Stormware Pohoda')));
 
         $body = new \Ease\Html\DivTag();
 
-        $body->addItem(new \Ease\TWB4\FormGroup(_('Organization Number'), new \Ease\Html\InputTextTag('POHODA_ICO'), '123245678', _('Organization Number')));
-        $body->addItem(new \Ease\TWB4\FormGroup(_('mServer Api Endpoint'), new \Ease\Html\InputTextTag('POHODA_URL'), 'winstrom', _('mServer Api Endpoint')));
-        $body->addItem(new \Ease\TWB4\FormGroup(_('mServer Api Username'), new \Ease\Html\InputTextTag('POHODA_USERNAME'), 'http://pohoda:40000', _('mServer Api Username')));
-        $body->addItem(new \Ease\TWB4\FormGroup(_('mServer Api Pasword'), new \Ease\Html\InputTextTag('POHODA_PASSWORD'), 'pohoda', _('mServer Api Pasword')));
+        $body->addItem(new \Ease\TWB5\FormGroup(_('Organization Number'), new \Ease\Html\InputTextTag('POHODA_ICO'), '123245678', _('Organization Number')));
+        $body->addItem(new \Ease\TWB5\FormGroup(_('mServer Api Endpoint'), new \Ease\Html\InputTextTag('POHODA_URL'), 'winstrom', _('mServer Api Endpoint')));
+        $body->addItem(new \Ease\TWB5\FormGroup(_('mServer Api Username'), new \Ease\Html\InputTextTag('POHODA_USERNAME'), 'http://pohoda:40000', _('mServer Api Username')));
+        $body->addItem(new \Ease\TWB5\FormGroup(_('mServer Api Pasword'), new \Ease\Html\InputTextTag('POHODA_PASSWORD'), 'pohoda', _('mServer Api Pasword')));
 
         parent::__construct($header, 'inverse', $body, '');
     }

@@ -41,11 +41,11 @@ class EnvironmentView extends \Ease\Html\TableTag
         if ($field->isSecret()) {
             $envData['value'] = preg_replace('(.)', '*', $envData['value']);
         } else {
-            $envData['value'] = new \Ease\TWB4\Badge('inverse', $field->getDefaultValue(), ['title' => _('Default Value')]);
+            $envData['value'] = new \Ease\TWB5\Badge('inverse', $field->getDefaultValue(), ['title' => _('Default Value')]);
         }
 
         //            if(empty($envData['value'])){
-        // TODO                $envData['value'] = new \Ease\TWB4\Badge('danger',_('Required'));
+        // TODO                $envData['value'] = new \Ease\TWB5\Badge('danger',_('Required'));
         //            }
 
         if (\array_key_exists('credential_id', $envData)) {

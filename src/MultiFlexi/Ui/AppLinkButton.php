@@ -20,7 +20,7 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class AppLinkButton extends \Ease\TWB4\LinkButton
+class AppLinkButton extends \Ease\TWB5\LinkButton
 {
     public function __construct(\MultiFlexi\Application $app, $properties = [])
     {

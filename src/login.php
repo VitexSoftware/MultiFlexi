@@ -20,13 +20,13 @@ use Ease\Html\ImgTag;
 use Ease\Html\InputPasswordTag;
 use Ease\Html\InputTextTag;
 use Ease\Shared;
-use Ease\TWB4\Col;
-use Ease\TWB4\Form;
-use Ease\TWB4\FormGroup;
-use Ease\TWB4\LinkButton;
-use Ease\TWB4\Panel;
-use Ease\TWB4\Row;
-use Ease\TWB4\SubmitButton;
+use Ease\TWB5\Col;
+use Ease\TWB5\Form;
+use Ease\TWB5\FormGroup;
+use Ease\TWB5\LinkButton;
+use Ease\TWB5\Panel;
+use Ease\TWB5\Row;
+use Ease\TWB5\SubmitButton;
 
 require_once './init.php';
 

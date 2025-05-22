@@ -36,7 +36,7 @@ if (\Ease\WebPage::isPosted()) {
 
 WebPage::singleton()->addItem(new PageTop(_('Applications used by Company')));
 
-$addAppForm = new \Ease\TWB4\Form();
+$addAppForm = new \Ease\TWB5\Form();
 $addAppForm->addItem(new \Ease\Html\InputHiddenTag('company_id', $companer->getMyKey()));
 
 $assignedRaw = $companyApp->getAssigned()->fetchAll('app_id');
@@ -47,13 +47,13 @@ $addAppForm->addItem(new \Ease\Html\H2Tag(sprintf(_('Choose Applications to use 
 
 $addAppForm->addItem($chooseApp);
 
-$addAppForm->addItem(new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'success btn-lg btn-block'));
+$addAppForm->addItem(new \Ease\TWB5\SubmitButton('🍏 '._('Apply'), 'success btn-lg btn-block'));
 
 WebPage::singleton()->container->addItem(new CompanyPanel($companer, $addAppForm));
 
 // $apper = new \MultiFlexi\Application();
 //
-// $launchTabs = new \Ease\TWB4\Tabs();
+// $launchTabs = new \Ease\TWB5\Tabs();
 // foreach ($assigned as $assignedAppId) {
 //    $apper->loadFromSQL($assignedAppId);
 //    $launchTabs->addTab($apper->getRecordName(), new AppInfo($apper, $companer->getMyKey()));

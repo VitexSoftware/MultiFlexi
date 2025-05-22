@@ -767,7 +767,7 @@ class DBEngine extends \Ease\SQL\Engine
                         if (isset($this->keywordsInfo[$key]['refdata']) && \strlen(trim($value))) {
                             $table = $this->keywordsInfo[$key]['refdata']['table'];
                             $searchColumn = $this->keywordsInfo[$key]['refdata']['captioncolumn'];
-                            $row[$key] = '<a title="'.$table.'" href="search.php?search='.$value.'&table='.$table.'&column='.$searchColumn.'">'.$value.'</a> '.\Ease\TWB4\Part::glyphIcon('search');
+                            $row[$key] = '<a title="'.$table.'" href="search.php?search='.$value.'&table='.$table.'&column='.$searchColumn.'">'.$value.'</a> '.\Ease\TWB5\Part::glyphIcon('search');
                         }
 
                         if (strstr($key, 'image') && \strlen(trim($value))) {

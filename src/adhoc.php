@@ -32,7 +32,7 @@ $companyApp = new \MultiFlexi\CompanyApp($companer);
 
 WebPage::singleton()->addItem(new PageTop(_('Applications used by Company')));
 
-$addAppForm = new \Ease\TWB4\Form();
+$addAppForm = new \Ease\TWB5\Form();
 $addAppForm->addItem(new \Ease\Html\InputHiddenTag('company_id', $companer->getMyKey()));
 
 $assignedRaw = $companyApp->getAssigned()->fetchAll('app_id');
@@ -41,7 +41,7 @@ WebPage::singleton()->container->addItem($addAppForm);
 
 $apper = new \MultiFlexi\Application();
 
-$launchTabs = new \Ease\TWB4\Tabs();
+$launchTabs = new \Ease\TWB5\Tabs();
 
 foreach ($assigned as $assignedAppId) {
     $apper->loadFromSQL($assignedAppId);

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f180f510f6e4a58a7ce9af86a32c84de",
+    "content-hash": "ed3ffadc12c2a2717c09c3ed40e862ee",
     "packages": [
         {
             "name": "cakephp/core",
@@ -4705,6 +4705,60 @@
             "time": "2024-10-01T09:13:06+00:00"
         },
         {
+            "name": "vitexsoftware/ease-bootstrap5-widgets",
+            "version": "1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/VitexSoftware/php-ease-twbootstrap5-widgets.git",
+                "reference": "ff040b30c2ac2024dfded9b6e3589f22f969ba80"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-twbootstrap5-widgets/zipball/ff040b30c2ac2024dfded9b6e3589f22f969ba80",
+                "reference": "ff040b30c2ac2024dfded9b6e3589f22f969ba80",
+                "shasum": ""
+            },
+            "require": {
+                "vitexsoftware/ease-twbootstrap5": "*"
+            },
+            "require-dev": {
+                "ergebnis/composer-normalize": "^2.45",
+                "ergebnis/php-cs-fixer-config": "^6.45",
+                "friendsofphp/php-cs-fixer": "^3.71",
+                "phpstan/phpstan": "*",
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ease\\TWB5\\Widgets\\": "src/Ease/TWB5/Widgets"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vítězslav Dvořák",
+                    "email": "info@vitexsoftware.cz",
+                    "homepage": "http://v.s.cz/"
+                }
+            ],
+            "description": "EasePHP framework addons and code snipplets",
+            "homepage": "https://github.com/VitexSoftware/php-ease-twbootstrap4-widgets-abraflexi",
+            "support": {
+                "source": "https://github.com/VitexSoftware/php-ease-twbootstrap5-widgets/tree/1.4.1"
+            },
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/VitexSoftware",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2025-04-08T17:41:39+00:00"
+        },
+        {
             "name": "vitexsoftware/ease-core",
             "version": "1.48",
             "source": {
@@ -4937,33 +4991,33 @@
             "time": "2024-11-16T14:25:43+00:00"
         },
         {
-            "name": "vitexsoftware/ease-twbootstrap4",
-            "version": "1.9.1",
+            "name": "vitexsoftware/ease-twbootstrap5",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/VitexSoftware/php-ease-twbootstrap4.git",
-                "reference": "315b8c122fc8fe2118cf834c097dd31d95749a35"
+                "url": "https://github.com/VitexSoftware/php-ease-twbootstrap5.git",
+                "reference": "9c1e43593eb537cd0635bf176b2694c74aa6c942"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-twbootstrap4/zipball/315b8c122fc8fe2118cf834c097dd31d95749a35",
-                "reference": "315b8c122fc8fe2118cf834c097dd31d95749a35",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-twbootstrap5/zipball/9c1e43593eb537cd0635bf176b2694c74aa6c942",
+                "reference": "9c1e43593eb537cd0635bf176b2694c74aa6c942",
                 "shasum": ""
             },
             "require": {
-                "vitexsoftware/ease-html": "^1.40"
+                "vitexsoftware/ease-html": ">= 1.32"
             },
             "require-dev": {
-                "ergebnis/composer-normalize": "^2.45",
-                "ergebnis/php-cs-fixer-config": "^6.39",
-                "friendsofphp/php-cs-fixer": "^3.65",
-                "phpstan/phpstan": "*",
+                "ergebnis/composer-normalize": "^2.44",
+                "ergebnis/php-cs-fixer-config": "^6.37",
+                "friendsofphp/php-cs-fixer": "^3.64",
+                "phpstan/phpstan": "^2.0",
                 "phpunit/phpunit": "*"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Ease\\TWB4\\": "src/Ease/TWB4/"
+                    "Ease\\TWB5\\": "src/Ease/TWB5/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -4976,73 +5030,12 @@
                     "email": "info@vitexsoftware.cz"
                 }
             ],
-            "description": "Set of Twitter Bootstrap 4 rendering objects",
+            "description": "Set of Twitter Bootstrap 5 rendering objects",
             "support": {
-                "issues": "https://github.com/VitexSoftware/php-ease-twbootstrap4/issues",
-                "source": "https://github.com/VitexSoftware/php-ease-twbootstrap4/tree/1.9.1"
+                "issues": "https://github.com/VitexSoftware/php-ease-twbootstrap5/issues",
+                "source": "https://github.com/VitexSoftware/php-ease-twbootstrap5/tree/1.0.0"
             },
-            "funding": [
-                {
-                    "url": "https://www.patreon.com/VitexSoftware",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2024-12-13T02:05:03+00:00"
-        },
-        {
-            "name": "vitexsoftware/ease-twbootstrap4-widgets",
-            "version": "1.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/VitexSoftware/php-ease-twbootstrap4-widgets.git",
-                "reference": "49a36233d2d4b1265891ace7c49c6d06a9195751"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-twbootstrap4-widgets/zipball/49a36233d2d4b1265891ace7c49c6d06a9195751",
-                "reference": "49a36233d2d4b1265891ace7c49c6d06a9195751",
-                "shasum": ""
-            },
-            "require": {
-                "vitexsoftware/ease-twbootstrap4": "^1.9"
-            },
-            "require-dev": {
-                "ergebnis/composer-normalize": "^2.43",
-                "ergebnis/php-cs-fixer-config": "^6.34",
-                "friendsofphp/php-cs-fixer": "^3.61",
-                "phpstan/phpstan": "*",
-                "phpunit/phpunit": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Ease\\TWB4\\Widgets\\": "src/Ease/TWB4/Widgets"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Vítězslav Dvořák",
-                    "email": "info@vitexsoftware.cz",
-                    "homepage": "http://v.s.cz/"
-                }
-            ],
-            "description": "EasePHP framework addons and code snipplets",
-            "homepage": "http://v.s.cz/ease.php",
-            "support": {
-                "issues": "https://github.com/VitexSoftware/php-ease-twbootstrap4-widgets/issues",
-                "source": "https://github.com/VitexSoftware/php-ease-twbootstrap4-widgets/tree/1.7.0"
-            },
-            "funding": [
-                {
-                    "url": "https://www.patreon.com/VitexSoftware",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2025-04-07T15:24:26+00:00"
+            "time": "2024-11-18T03:11:59+00:00"
         },
         {
             "name": "vitexsoftware/multiflexi-api-server",

@@ -45,7 +45,7 @@ class RegisterServerForm extends EngineForm
             _('Rest API Password'),
         );
 
-        $this->addItem(new \Ease\TWB4\SubmitButton(_('Save'), 'success'));
+        $this->addItem(new \Ease\TWB5\SubmitButton(_('Save'), 'success'));
 
         if (null !== $this->engine->getDataValue('id')) {
             $this->addItem(new \Ease\Html\InputHiddenTag('id'));

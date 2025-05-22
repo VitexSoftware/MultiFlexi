@@ -22,7 +22,7 @@ namespace MultiFlexi\Ui;
  */
 class CredentialTypeSelect extends \Ease\Html\SelectTag
 {
-    use \Ease\TWB4\Widgets\Selectizer;
+    use \Ease\TWB5\Widgets\Selectizer;
     private int $company_id;
 
     public function __construct(string $name, int $company_id, ?int $selected = null, array $properties = [])

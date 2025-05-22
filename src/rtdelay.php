@@ -41,8 +41,8 @@ function timeStringToSeconds(string $timeString): int
     return $seconds;
 }
 
-$runtemplate_id = \Ease\TWB4\WebPage::getRequestValue('runtemplate', 'int');
-$delay = \Ease\TWB4\WebPage::getRequestValue('delay');
+$runtemplate_id = \Ease\TWB5\WebPage::getRequestValue('runtemplate', 'int');
+$delay = \Ease\TWB5\WebPage::getRequestValue('delay');
 $state = $delay !== 'n';
 
 $result = false;

@@ -31,6 +31,6 @@ class AppJson extends \Ease\Html\DivTag
     {
         parent::__construct(new \Ease\Html\PreTag(\Rcubitto\JsonPretty\JsonPretty::print(json_decode($app->getAppJson()))), $properties);
         $this->addTagClass('ui-monospace');
-        $this->addItem(new \Ease\TWB4\LinkButton('appjson.php?id='.$app->getMyKey(), _('Download').' '.$app->jsonFileName(), 'info '));
+        $this->addItem(new \Ease\TWB5\LinkButton('appjson.php?id='.$app->getMyKey(), _('Download').' '.$app->jsonFileName(), 'info '));
     }
 }

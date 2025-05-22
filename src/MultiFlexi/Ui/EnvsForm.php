@@ -20,7 +20,7 @@ namespace MultiFlexi\Ui;
  *
  * @author vitex
  */
-class EnvsForm extends \Ease\TWB4\Form
+class EnvsForm extends \Ease\TWB5\Form
 {
     public function __construct($environment = [], $formProperties = [], $formContents = null)
     {
@@ -33,6 +33,6 @@ class EnvsForm extends \Ease\TWB4\Form
         $this->addItem(new \Ease\Html\HrTag());
         $this->addInput(new \Ease\Html\InputTextTag('env[newkey]', ''), _('New Configuration Key'));
         $this->addInput(new \Ease\Html\InputTextTag('env[newvalue]', ''), _('New Configuration value'));
-        $this->addItem(new \Ease\TWB4\SubmitButton(_('Save / Add'), 'success'));
+        $this->addItem(new \Ease\TWB5\SubmitButton(_('Save / Add'), 'success'));
     }
 }

@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 use Ease\Html\InputHiddenTag;
-use Ease\TWB4\Form;
+use Ease\TWB5\Form;
 use MultiFlexi\Engine;
 
 class EngineForm extends Form

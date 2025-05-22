@@ -18,8 +18,8 @@ namespace MultiFlexi\Ui;
 use Ease\Html\InputFileTag;
 use Ease\Html\InputHiddenTag;
 use Ease\Html\InputTextTag;
-use Ease\TWB4\SubmitButton;
-use Ease\TWB4\Widgets\Toggle;
+use Ease\TWB5\SubmitButton;
+use Ease\TWB5\Widgets\Toggle;
 
 /**
  * Description of RegisterAppForm.

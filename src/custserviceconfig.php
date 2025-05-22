@@ -53,7 +53,7 @@ $runTemplater->loadFromSQL($runTemplater->runTemplateID($appId, $companyId));
 
 $appPanel = new ApplicationPanel($app, new CustomAppConfigForm($configurator));
 
-$runTemplateButton = new \Ease\TWB4\LinkButton('runtemplate.php?id='.$runTemplater->getMyKey(), '⚗️&nbsp;'._('Run Template'), 'dark btn-lg btn-block');
+$runTemplateButton = new \Ease\TWB5\LinkButton('runtemplate.php?id='.$runTemplater->getMyKey(), '⚗️&nbsp;'._('Run Template'), 'dark btn-lg btn-block');
 $appPanel->headRow->addColumn(2, $runTemplateButton);
 
 WebPage::singleton()->container->addItem(new CompanyPanel($company, $appPanel));

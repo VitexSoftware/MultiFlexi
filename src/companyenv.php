@@ -18,9 +18,9 @@ namespace MultiFlexi\Ui;
 require_once './init.php';
 WebPage::singleton()->onlyForLogged();
 $result = false;
-$name = \Ease\TWB4\WebPage::getRequestValue('name');
-$value = \Ease\TWB4\WebPage::getRequestValue('value');
-$pk = \Ease\TWB4\WebPage::getRequestValue('pk', 'int');
+$name = \Ease\TWB5\WebPage::getRequestValue('name');
+$value = \Ease\TWB5\WebPage::getRequestValue('value');
+$pk = \Ease\TWB5\WebPage::getRequestValue('pk', 'int');
 
 if (null !== $pk) {
     $companyEnver = new \MultiFlexi\CompanyEnv();
