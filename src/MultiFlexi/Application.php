@@ -361,7 +361,7 @@ class Application extends DBEngine
                             $topics = $this->getDataValue('topics');
 
                             if ($topics) {
-                                $toptopic = new Topic();
+                                $toptopic = new TopicManger();
                                 $toptopic->add(strstr($topics, ',') ? explode(',', $topics) : [$topics]);
                             }
                         }

@@ -86,31 +86,28 @@ class ConfigFields implements \Iterator
         return $fields;
     }
 
-    #[\Override]
+    // \Iterator interface implementation
+
     public function current(): mixed
     {
         return current($this->fields);
     }
 
-    #[\Override]
     public function key(): mixed
     {
         return key($this->fields);
     }
 
-    #[\Override]
     public function next(): void
     {
         next($this->fields);
     }
 
-    #[\Override]
     public function rewind(): void
     {
         reset($this->fields);
     }
 
-    #[\Override]
     public function valid(): bool
     {
         return key($this->fields) !== null;
