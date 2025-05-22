@@ -41,22 +41,10 @@ class AbraFlexi extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\c
         $companyField = new \MultiFlexi\ConfigField('ABRAFLEXI_COMPANY', 'string', _('AbraFlexi Company'), _('Company to be handled'));
         $companyField->setHint('demo')->setValue('demo');
 
-        $this->configFieldsInternal->addField($loginField);
-        $this->configFieldsInternal->addField($passwordField);
-        $this->configFieldsInternal->addField($urlField);
-        $this->configFieldsInternal->addField($companyField);
-    }
-
-    public function load(int $credTypeId)
-    {
-        $loaded = parent::load($credTypeId);
-
-        // Load provided configuration fields
-        foreach ($this->configFieldsInternal->getFields() as $field) {
-            $this->configFieldsProvided->addField($field);
-        }
-
-        return $loaded;
+        $this->configFieldsProvided->addField($loginField);
+        $this->configFieldsProvided->addField($passwordField);
+        $this->configFieldsProvided->addField($urlField);
+        $this->configFieldsProvided->addField($companyField);
     }
 
     #[\Override]

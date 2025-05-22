@@ -54,4 +54,38 @@ class VaultWarden extends \MultiFlexi\CredentialProtoType implements \MultiFlexi
     {
         return 'vaultwarden.svg';
     }
+
+    public function __construct()
+    {
+        parent::__construct();
+        // Přístupové údaje pro VaultWarden
+        $this->configFieldsInternal = new \MultiFlexi\ConfigFields('VaultWarden Internal');
+        $this->configFieldsInternal->addField(new \MultiFlexi\ConfigField('VAULTWARDEN_URL', _('VaultWarden URL'), 'text', '', _('URL instance VaultWarden')));
+        $this->configFieldsInternal->addField(new \MultiFlexi\ConfigField('VAULTWARDEN_API_KEY', _('VaultWarden API Key'), 'password', '', _('API klíč pro přístup')));
+        $this->configFieldsInternal->addField(new \MultiFlexi\ConfigField('VAULTWARDEN_FOLDER', _('VaultWarden Folder'), 'text', '', _('Název složky s hesly ve VaultWarden')));
+
+        // Položky budou naplněny dynamicky podle obsahu VaultWarden
+        $this->configFieldsProvided = new \MultiFlexi\ConfigFields('VaultWarden Provided');
+    }
+
+    public function load(int $credTypeId)
+    {
+        $loaded = parent::load($credTypeId);
+
+        // Načtení položek z VaultWarden
+        $vaultwardenUrl = $this->configFieldsInternal->getFieldByCode('VAULTWARDEN_URL')->getValue();
+        $vaultwardenApiKey = $this->configFieldsInternal->getFieldByCode('VAULTWARDEN_API_KEY')->getValue();
+        $vaultwardenFolder = $this->configFieldsInternal->getFieldByCode('VAULTWARDEN_FOLDER')->getValue();
+
+        if ($vaultwardenUrl && $vaultwardenApiKey && $vaultwardenFolder) {
+            
+            // Zde byste měli implementovat logiku pro načtení položek z VaultWarden
+            // a přidání do configFieldsProvided
+        } else {
+            $this->addStatusMessage(_('Missing required fields for VaultWarden'), 'warning');
+        }
+
+        return $loaded;
+    }
+
 }
