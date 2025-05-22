@@ -48,6 +48,7 @@ class CredentialForm extends Form
         $formType = $kredenc->getDataValue('formType');
 
         $credentialTypeSelect = null; // Ensure variable is always defined
+
         if ($kredenc->getDataValue('company_id')) {
             $credentialTypeSelect = new CredentialTypeSelect('credential_type_id', (int) $kredenc->getDataValue('company_id'), (int) $kredenc->getDataValue('credential_type_id'));
             $credentialTypeSelect->finalize();
@@ -112,7 +113,7 @@ class CredentialForm extends Form
             }
         }
 
-        $formContents[] = new InputHiddenTag('id', (string)($kredenc->getMyKey() ?? ''));
+        $formContents[] = new InputHiddenTag('id', (string) ($kredenc->getMyKey() ?? ''));
 
         $submitRow = new Row();
         $submitRow->addColumn(10, new SubmitButton('🍏 '._('Apply'), 'primary btn-lg btn-block'));

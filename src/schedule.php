@@ -33,7 +33,7 @@ if (null === $runTemplate->getMyKey()) {
     $when = WebPage::getRequestValue('when');
 
     if (WebPage::isPosted() || $when === 'now') {
-        $uploadEnv = [];
+        $uploadEnv = new \MultiFlexi\ConfigFields(_('Upload'));
 
         /**
          * Save all uploaded files into temporary directory and prepare job environment.

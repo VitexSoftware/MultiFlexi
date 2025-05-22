@@ -22,7 +22,7 @@ namespace MultiFlexi\Ui;
  */
 class ConfigFieldsView extends \Ease\Html\DivTag
 {
-    public function __construct(array $fieldsInfo)
+    public function __construct(\MultiFlexi\ConfigFields $fieldsInfo)
     {
         parent::__construct();
 
@@ -31,15 +31,15 @@ class ConfigFieldsView extends \Ease\Html\DivTag
         }
     }
 
-    public static function confInfo($fieldInfo)
+    public static function confInfo(\MultiFlexi\ConfigField $fieldInfo)
     {
-        $container = new \Ease\TWB4\Container($fieldInfo['type']);
-        $container->addItem(new \Ease\Html\H3Tag($fieldInfo['keyname']));
-        $container->addItem(empty($fieldInfo['description']) ? '' : _($fieldInfo['description']));
+        $container = new \Ease\TWB4\Container($fieldInfo->getType());
+        $container->addItem(new \Ease\Html\H3Tag($fieldInfo->getCode()));
+        $container->addItem($fieldInfo->getDescription());
 
         $dl = new \Ease\Html\DlTag();
-        $dl->addDef(_('Default value'), $fieldInfo['defval']);
-        $dl->addDef(_('Requied'), $fieldInfo['required'] ? '✅' : '❎');
+        $dl->addDef(_('Default value'), $fieldInfo->getDefaultValue());
+        $dl->addDef(_('Requied'), $fieldInfo->isRequired() ? '✅' : '❎');
         $container->addItem($dl);
 
         return new \Ease\TWB4\Card($container);

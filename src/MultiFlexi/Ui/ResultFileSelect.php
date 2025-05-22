@@ -28,7 +28,7 @@ class ResultFileSelect extends \Ease\Html\SelectTag
         $items = ['' => _('None')];
 
         foreach ($appConfigs as $appConfigField) {
-            $items[$appConfigField['keyname']] = $appConfigField['keyname'];
+            $items[$appConfigField->getCode()] = $appConfigField->getCode();
         }
 
         parent::__construct('resultfile', $items, '');

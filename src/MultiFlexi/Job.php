@@ -138,8 +138,9 @@ class Job extends Engine
             'executor' => $executor,
             'launched_by' => \Ease\Shared::user()->getMyKey(),
         ]);
-        $environment['MULTIFLEXI_JOB_ID']['value'] = $jobId;
-        $environment['MULTIFLEXI_JOB_ID']['source'] = 'Job';
+
+        $environment->addField((new ConfigField('MULTIFLEXI_JOB_ID', 'integer', _('Job ID'), _('Number of job'), '', (string) $jobId))->setSource(self::class));
+
         $this->environment = $environment;
         $this->updateToSQL(['env' => serialize($environment), 'command' => $this->getCmdline()], ['id' => $jobId]);
 
@@ -265,9 +266,10 @@ class Job extends Engine
 
         $this->performActions($statusCode === 0 ? 'success' : 'fail');
 
-        if (file_exists($resultfile)) {
-            unlink($resultfile);
-        }
+        // TODO
+        //        if (file_exists($resultfile)) {
+        //            unlink($resultfile);
+        //        }
 
         return $this->updateToSQL([
             'pid' => $this->executor->getPid(),
@@ -316,7 +318,7 @@ EOD;
      * @param \DateTime $scheduled     Time to launch
      * @param string    $executor      Executor Class Name
      */
-    public function prepareJob(int $runTemplateId, array $envOverride, \DateTime $scheduled, string $executor = 'Native', string $scheduleType = 'adhoc'): string
+    public function prepareJob(int $runTemplateId, ConfigFields $envOverride, \DateTime $scheduled, string $executor = 'Native', string $scheduleType = 'adhoc'): string
     {
         $outline = '';
         $this->runTemplate = new RunTemplate($runTemplateId);
@@ -328,7 +330,9 @@ EOD;
 
         $this->company = $this->runTemplate->getCompany();
         $this->setDataValue('executor', $executor);
-        $this->environment = array_merge($this->getFullEnvironment(), $envOverride);
+        $this->environment = $this->getFullEnvironment();
+        $this->environment->addFields($envOverride);
+
         $this->loadFromSQL($this->newJob($runTemplateId, $this->environment, $scheduled, $executor, $scheduleType));
 
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
@@ -713,7 +717,7 @@ EOD;
                 $field = $creds->getFieldByCode($configFieldName);
 
                 if (null === $field) {
-                    $creds->addField(new ConfigField($configFieldName, 'string', $configFieldName, '', '', (string)$configFieldInfo['value']));
+                    $creds->addField(new ConfigField($configFieldName, 'string', $configFieldName, '', '', $configFieldInfo->getValue()));
                 } else {
                     $field->setValue($configFieldInfo['value']);
                     $field->setSource($configFieldInfo['source']);

@@ -165,7 +165,7 @@ class CredentialType extends DBEngine
                     $field->setRequired($fieldHelper->isRequired());
                     $field->setSecret($fieldHelper->isSecret());
                 } else {
-                    $this->addStatusMessage(sprintf(_('Unexistent field helper %s'), $fieldData['helper']), 'warning');
+                    $this->addStatusMessage(sprintf(_('Unexistent field helper %s ?!?'), $fieldData['helper']), 'info');
                 }
             }
 

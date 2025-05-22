@@ -558,7 +558,7 @@ class RunTemplate extends \MultiFlexi\DBEngine
 
     public function getEnvironment(): ConfigFields
     {
-        $runTemplateFields = new ConfigFields();
+        $runTemplateFields = new ConfigFields(sprintf(_('RunTemplate #%s Environment'), $this->getMyKey()));
 
         $runTemplateFields->addFields($this->getRuntemplateEnvironment());
 
@@ -571,11 +571,7 @@ class RunTemplate extends \MultiFlexi\DBEngine
 
     public function credentialsEnvironment(): ConfigFields
     {
-        $runTemplateCredTypeFields = new ConfigFields();
-
-        $credentialsEnv = new ConfigFields(_('RunTemplate CredentialType Values'));
-
-        $credentials = [];
+        $runTemplateCredTypeFields = new ConfigFields(_('RunTemplate CredentialType Values'));
 
         foreach ($this->getCredentialsAssigned() as $requirement => $credentialData) {
             $credentor = new Credential($credentialData['credentials_id']);
