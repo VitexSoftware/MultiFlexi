@@ -6824,12 +6824,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "fa270786ab6953197c9a604ea82d35ff3a0045f2"
+                "reference": "02066c765e28f235450f8488732da45e066d4853"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/fa270786ab6953197c9a604ea82d35ff3a0045f2",
-                "reference": "fa270786ab6953197c9a604ea82d35ff3a0045f2",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/02066c765e28f235450f8488732da45e066d4853",
+                "reference": "02066c765e28f235450f8488732da45e066d4853",
                 "shasum": ""
             },
             "require": {
@@ -6875,7 +6875,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-22T12:26:32+00:00"
+            "time": "2025-05-22T13:01:12+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -7558,12 +7558,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "b4a81b0640c6d46eedc45973041f72e5ac524b22"
+                "reference": "1770f81765a681d82e8b298786c81e6ad63552c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/b4a81b0640c6d46eedc45973041f72e5ac524b22",
-                "reference": "b4a81b0640c6d46eedc45973041f72e5ac524b22",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/1770f81765a681d82e8b298786c81e6ad63552c0",
+                "reference": "1770f81765a681d82e8b298786c81e6ad63552c0",
                 "shasum": ""
             },
             "require": {
@@ -7610,7 +7610,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-22T09:35:04+00:00"
+            "time": "2025-05-23T08:36:49+00:00"
         },
         {
             "name": "sebastian/cli-parser",

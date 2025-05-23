@@ -46,6 +46,7 @@ class RuntemplateConfigForm extends EngineForm
         $this->addItem(new RuntemplateRequirementsChoser($engine));
 
         $appFields = \MultiFlexi\Conffield::getAppConfigs($engine->getDataValue('app_id'));
+        $runTemplateFields = $engine->getEnvironment();
 
         $appFields->addFields($customized);
 
@@ -56,17 +57,15 @@ class RuntemplateConfigForm extends EngineForm
                 $input = new \Ease\Html\InputTag($fieldName, $field->getValue(), ['type' => $field->getType()]);
             }
 
-            if (\array_key_exists($fieldName, $fieldSource)) {
-                $formClass = '\\MultiFlexi\\Ui\\Form\\'.$fieldSource[$fieldName];
+            $runTemplateField = $runTemplateFields->getFieldByCode($fieldName);
 
+            if ($runTemplateField) {
                 if (\array_key_exists($fieldName, $credData)) {
                     $input->setTagProperty('disabled', '1');
                     $input->setValue($credData[$fieldName]);
                 }
 
-                $formIcon = new \Ease\Html\ImgTag($formClass::$logo, $formClass::name(), ['height' => 20, 'title' => $formClass::name()]);
-
-                $reqInfo = $fieldsOf[$fieldSource[$fieldName]];
+                $formIcon = new \Ease\Html\ImgTag($runTemplateField->getLogo(), $runTemplateField->getSource(), ['height' => 20, 'title' => $runTemplateField->getSource()]);
 
                 if (\array_key_exists($fieldName, $credSource)) {
                     $fieldLink = new \Ease\Html\ATag('credential.php?id='.$credSource[$fieldName], $formIcon.'&nbsp;'.$fieldName);

@@ -35,6 +35,7 @@ class ConfigField
     private bool $isSecret = false; // New property to mark sensitive content
     private bool $isManual = true;
     private bool $multiLine = false;
+    private ?string $logo = null; // Add logo property
 
     /**
      * ConfigField constructor.
@@ -252,6 +253,24 @@ class ConfigField
     public function isMultiLine(): bool
     {
         return $this->multiLine;
+    }
+
+    /**
+     * Set logo (unicode emoticon or image file name).
+     */
+    public function setLogo(?string $logo): self
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+    /**
+     * Get logo (unicode emoticon or image file name).
+     */
+    public function getLogo(): ?string
+    {
+        return $this->logo;
     }
 
     /**

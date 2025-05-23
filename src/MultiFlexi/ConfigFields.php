@@ -44,11 +44,13 @@ class ConfigFields implements \Iterator
     /**
      * Add Field into stack.
      */
-    public function addField(ConfigField $field): void
+    public function addField(ConfigField $field): self
     {
         $code = $field->getCode();
         $this->fields[$code] = $field;
         ksort($this->fields);
+
+        return $this;
     }
 
     /**
