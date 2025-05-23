@@ -49,6 +49,11 @@ class WebPage extends \Ease\TWB4\WebPage
         parent::__construct($pageTitle);
         $this->container = $this->addItem(new \Ease\TWB4\Container());
         $this->container->setTagClass('container-fluid');
+
+        $this->head->addItem('<link rel="icon" type="image/svg+xml" href="images/project-logo.svg">');
+        $this->head->addItem('<link rel="icon" type="image/png" href="images/project-logo.png">');
+        $this->head->addItem('<link rel="icon" type="image/x-icon" href="favicon.ico">');
+
         $this->addCSS(<<<'EOD'
 
 
