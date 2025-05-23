@@ -456,18 +456,18 @@ class RunTemplate extends \MultiFlexi\DBEngine
      */
     public function legacyCredentialsEnvironment(): ConfigFields
     {
-        $credentialsEnv = new ConfigFields(_('RunTemplate Credentials'));
+        $credentialsEnv = new ConfigFields(_('RunTemplate Legacy Credentials'));
 
         $credentials = [];
         $rtplCrds = new RunTplCreds();
         $kredenc = new Credential();
 
-        foreach ($rtplCrds->getCredentialsForRuntemplate($this->getMyKey())->select(['name', 'formType', 'credentials_id'])->leftJoin('credentials ON credentials.id = runtplcreds.credentials_id') as $crds) {
+        foreach ($rtplCrds->getCredentialsForRuntemplate($this->getMyKey())->select(['name', 'formType', 'credentials_id'])->leftJoin('credentials ON credentials.id = runtplcreds.credentials_id')->where('credential_type_id', 0) as $crds) {
             $kredenc->dataReset();
             $kredenc->loadFromSQL($crds['credentials_id']);
             $creds = $kredenc->getData();
             unset($creds['id'], $creds['name'], $creds['company_id'], $creds['formType']);
-            $this->addStatusMessage('Credentials: '.$crds['formType'].' "'.$crds['name'].'" '.implode(',', array_keys($creds)), 'debug');
+            $this->addStatusMessage('Legacy Credentials: '.$crds['formType'].' "'.$crds['name'].'" '.implode(',', array_keys($creds)), 'debug');
 
             foreach ($creds as $key => $value) {
                 $credentials[$key]['credential_type'] = $crds['formType'];

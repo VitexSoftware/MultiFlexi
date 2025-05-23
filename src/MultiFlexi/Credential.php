@@ -18,6 +18,7 @@ namespace MultiFlexi;
 class Credential extends DBEngine
 {
     private Credata $credator;
+    private ?CredentialType $credentialType = null;
 
     public function __construct($identifier = null, $options = [])
     {
@@ -25,7 +26,26 @@ class Credential extends DBEngine
         $this->keyColumn = 'id';
         $this->nameColumn = 'name';
         $this->credator = new Credata();
+
         parent::__construct($identifier, $options);
+    }
+
+    /**
+     * Set assigned CredentialType object.
+     */
+    public function setCredentialType(?CredentialType $credentialType): self
+    {
+        $this->credentialType = $credentialType;
+
+        return $this;
+    }
+
+    /**
+     * Get assigned CredentialType object.
+     */
+    public function getCredentialType(): ?CredentialType
+    {
+        return $this->credentialType;
     }
 
     public function takeData(array $data): int
@@ -140,6 +160,10 @@ class Credential extends DBEngine
             $this->setDataValue($credential['name'], $credential['value']);
         }
 
+        if ($this->getDataValue('credential_type_id')) {
+            $this->setCredentialType(new CredentialType($this->getDataValue('credential_type_id')));
+        }
+
         return $data;
     }
 
@@ -207,20 +231,26 @@ EOD;
     /**
      * Return Credential and its CredentialType environment.
      */
-    public function query(): ConfigFields
+    public function query(): CredentialConfigFields
     {
-        $credentialEnv = new ConfigFields();
+        $credentialEnv = new CredentialConfigFields($this);
 
-        foreach ($this->credator->listingQuery()->where('credential_id', $this->getMyKey()) as $credential) {
-            $field = new ConfigField($credential['name'], $credential['type'], $credential['name'], '', '', $credential['value']);
-            $field->setSource(sprintf(_('Credential #%d'), $credential['credential_id']));
-            $credentialEnv->addField($field);
-            $this->setDataValue($credential['name'], $credential['value']);
+        if ($this->getCredentialType()) {
+            $credentialEnv->addFields($this->credentialType->query());
         }
 
-        if ($this->getDataValue('credential_type_id')) {
-            $credType = new CredentialType($this->getDataValue('credential_type_id'));
-            $credentialEnv->addFields($credType->query());
+        foreach ($this->credator->listingQuery()->where('credential_id', $this->getMyKey()) as $credential) {
+            $fieldProvidedByCredType = $credentialEnv->getFieldByCode($credential['name']);
+
+            if (\is_object($fieldProvidedByCredType)) {
+                $fieldProvidedByCredType->setValue((string) $credential['value']);
+            } else {
+                $field = new ConfigField($credential['name'], $credential['type'], $credential['name'], '', '', $credential['value']);
+                $field->setSource(sprintf(_('Credential #%d'), $credential['credential_id']));
+                $credentialEnv->addField($field);
+            }
+
+            $this->setDataValue($credential['name'], $credential['value']);
         }
 
         return $credentialEnv;

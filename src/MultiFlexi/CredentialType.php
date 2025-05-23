@@ -188,7 +188,7 @@ class CredentialType extends DBEngine
 
             foreach ($crtypeFields as $field) {
                 $helper = $field->getHelper();
-                $source = $helperData->getFieldByCode($helper);
+                $source = $helperData->getFieldByCode($helper); // TODO: WTF ?!?
 
                 if ($source) {
                     $field->setValue($source->getValue())->setSource($source->getSource())->setNote($source->getNote());
@@ -198,4 +198,9 @@ class CredentialType extends DBEngine
 
         return $crtypeFields;
     }
+    
+    public function getLogo(): string {
+        return (string)$this->getDataValue('logo');
+    }
+    
 }

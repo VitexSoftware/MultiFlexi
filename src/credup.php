@@ -106,6 +106,10 @@ if (empty($oldCreds)) {
             // Update credential
             $credObj->updateToSQL(['credential_type_id' => $credTypeId, 'formType' => null], ['id' => $cred['id']]);
 
+            // --- Přenesení přiřazení v tabulce runtplcreds ---
+            // Najdi všechna původní přiřazení credentials k runtemplate
+            $runtplcreds = (new \MultiFlexi\RunTplCreds())->listingQuery()->where(['credentials_id' => $cred['id']])->fetchAll();
+
             ++$converted;
         }
 

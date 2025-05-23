@@ -26,7 +26,6 @@ class Topics implements \Iterator
      * @var Topic[]
      */
     private array $topics = [];
-
     private int $position = 0;
 
     public function __construct()
