@@ -19,7 +19,7 @@ namespace MultiFlexi;
  * MultiFlexi - Company Management Class.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2018-2024 VitexSoftware
+ * @copyright  2018-2025 VitexSoftware
  */
 class Company extends \MultiFlexi\Engine
 {
@@ -46,7 +46,7 @@ class Company extends \MultiFlexi\Engine
     {
         $this->pdo = null;
 
-        return ['data', 'objectName', 'evidence'];
+        return ['data', 'objectName', 'myTable', 'nameColumn', 'createColumn', 'lastModifiedColumn'];
     }
 
     /**
@@ -137,8 +137,8 @@ class Company extends \MultiFlexi\Engine
 
         if ($helper->getData()) {
             foreach ($helper->getData() as $key => $value) {
-                $field = new ConfigField($key, $string, $key, '');
-                $field->setValue($value)->setSource(_('Company Environment'));
+                $field = new ConfigField($key, 'string', $key, '');
+                $field->setValue($value)->setSource(serialize($this));
                 $companyEnv->addField($field);
             }
         }
