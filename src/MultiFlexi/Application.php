@@ -482,7 +482,7 @@ class Application extends DBEngine
      */
     public function getAppEnvironmentFields()
     {
-        return Conffield::getAppConfigs($this->getMyKey());
+        return Conffield::getAppConfigs($this);
     }
 
     /**

@@ -17,6 +17,10 @@ namespace MultiFlexi;
 
 class Credential extends DBEngine
 {
+    /**
+     * @var string Name Column
+     */
+    public string $nameColumn = 'name';
     private Credata $credator;
     private ?CredentialType $credentialType = null;
 
@@ -24,10 +28,14 @@ class Credential extends DBEngine
     {
         $this->myTable = 'credentials';
         $this->keyColumn = 'id';
-        $this->nameColumn = 'name';
         $this->credator = new Credata();
 
         parent::__construct($identifier, $options);
+    }
+
+    public function __unserialize(array $data): void
+    {
+        $this->takeData($data['data']);
     }
 
     /**
@@ -60,6 +68,10 @@ class Credential extends DBEngine
 
         if (empty($data['id'])) {
             unset($data['id']);
+        }
+
+        if (\array_key_exists('credential_type_id', $data)) {
+            $this->setCredentialType(new CredentialType($data['credential_type_id']));
         }
 
         return parent::takeData($data);
@@ -154,17 +166,18 @@ class Credential extends DBEngine
             $itemID = $this->getMyKey();
         }
 
-        $data = parent::loadFromSQL($itemID);
+        $dataCount = parent::loadFromSQL($itemID);
 
         foreach ($this->credator->listingQuery()->where('credential_id', $this->getMyKey()) as $credential) {
             $this->setDataValue($credential['name'], $credential['value']);
+            ++$dataCount;
         }
 
         if ($this->getDataValue('credential_type_id')) {
             $this->setCredentialType(new CredentialType($this->getDataValue('credential_type_id')));
         }
 
-        return $data;
+        return $dataCount;
     }
 
     public function deleteFromSQL($data = null)
@@ -244,9 +257,10 @@ EOD;
 
             if (\is_object($fieldProvidedByCredType)) {
                 $fieldProvidedByCredType->setValue((string) $credential['value']);
+                $fieldProvidedByCredType->setSource(serialize($this));
             } else {
                 $field = new ConfigField($credential['name'], $credential['type'], $credential['name'], '', '', $credential['value']);
-                $field->setSource(sprintf(_('Credential #%d'), $credential['credential_id']));
+                $field->setSource(serialize($this));
                 $credentialEnv->addField($field);
             }
 

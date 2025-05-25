@@ -87,13 +87,13 @@ class Conffield extends \Ease\SQL\Engine
         return $this->dbsync();
     }
 
-    public static function getAppConfigs(int $appId): ConfigFields
+    public static function getAppConfigs(Application $app): ConfigFields
     {
         $appConfiguration = new ConfigFields(_('Application Config Fields'));
 
-        foreach ((new self())->appConfigs($appId) as $appConfig) {
+        foreach ((new self())->appConfigs($app->getMyKey()) as $appConfig) {
             $field = new ConfigField($appConfig['keyname'], $appConfig['type'], $appConfig['keyname'], $appConfig['description']);
-            $field->setRequired($appConfig['required'] === 1)->setDefaultValue($appConfig['defval']);
+            $field->setRequired($appConfig['required'] === 1)->setDefaultValue($appConfig['defval'])->setSource(serialize($app));
             $appConfiguration->addField($field);
         }
 

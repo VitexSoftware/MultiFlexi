@@ -22,8 +22,6 @@ namespace MultiFlexi\Ui;
  */
 class RuntemplateConfigForm extends EngineForm
 {
-    private array $modulesEnv;
-
     public function __construct(\MultiFlexi\RunTemplate $engine)
     {
         parent::__construct($engine, null, ['method' => 'post', 'action' => 'runtemplate.php', 'enctype' => 'multipart/form-data']);
@@ -45,7 +43,7 @@ class RuntemplateConfigForm extends EngineForm
 
         $this->addItem(new RuntemplateRequirementsChoser($engine));
 
-        $appFields = \MultiFlexi\Conffield::getAppConfigs($engine->getDataValue('app_id'));
+        $appFields = \MultiFlexi\Conffield::getAppConfigs($engine->getApplication());
         $runTemplateFields = $engine->getEnvironment();
 
         $appFields->addFields($customized);
@@ -59,32 +57,41 @@ class RuntemplateConfigForm extends EngineForm
 
             $runTemplateField = $runTemplateFields->getFieldByCode($fieldName);
 
-            if ($runTemplateField) {
-                if (\array_key_exists($fieldName, $credData)) {
-                    $input->setTagProperty('disabled', '1');
-                    $input->setValue($credData[$fieldName]);
-                }
+            if ($runTemplateField) { // Filed by Credential
+                $input->setTagProperty('disabled', '1');
 
-                $formIcon = new \Ease\Html\ImgTag($runTemplateField->getLogo(), $runTemplateField->getSource(), ['height' => 20, 'title' => $runTemplateField->getSource()]);
+                $runTemplateFieldSource = $runTemplateField->getSource();
 
-                if (\array_key_exists($fieldName, $credSource)) {
-                    $fieldLink = new \Ease\Html\ATag('credential.php?id='.$credSource[$fieldName], $formIcon.'&nbsp;'.$fieldName);
+                if (\Ease\Functions::isSerialized($runTemplateFieldSource)) {
+                    $credential = unserialize($runTemplateFieldSource);
+
+                    if ($credential) {
+                        $credentialType = $credential->getCredentialType();
+
+                        $credentialLink = new \Ease\Html\ATag('credential.php?id='.$credential->getMyKey(), new \Ease\Html\SmallTag($credential->getRecordName()));
+
+                        $formIcon = new \Ease\Html\ImgTag('images/'.$runTemplateField->getLogo(), $credentialType->getRecordName(), ['height' => 20, 'title' => $credentialType->getRecordName()]);
+
+                        $credentialTypeLink = new \Ease\Html\ATag('credentialtype.php?id='.$credentialType->getMyKey(), $formIcon);
+
+                        $inputCaption = new \Ease\Html\SpanTag([$credentialTypeLink, new \Ease\Html\StrongTag($fieldName), '&nbsp;', $credentialLink]);
+                    }
                 } else {
-                    $fieldLink = $formIcon.'&nbsp;'.$fieldName;
+                    $inputCaption = new \Ease\Html\StrongTag($fieldName);
                 }
 
-                $formGroup = $this->addInput($input, $fieldLink, $field->getDefaultValue(), $field->getDescription());
-            } else {
-                $formGroup = $this->addInput($input, $fieldName.'&nbsp;('.$field->getSource().')', $field->getDefaultValue(), $field->getDescription());
+                $formGroup = $this->addInput($input, $inputCaption, $runTemplateField->getValue(), $field->getDescription());
+            } else { // Simple Fields
+                $formGroup = $this->addInput($input, $fieldName, $field->getDefaultValue(), $field->getDescription());
             }
 
-            if ($field->isRequired()) {
-                $formGroup->addTagClass('bg-danger');
-            }
-
-            if ($field->getSource()) {
-                $formGroup->addTagClass('bg-info');
-            }
+            //            if ($field->isRequired()) {
+            //                $formGroup->addTagClass('bg-danger');
+            //            }
+            //
+            //            if ($field->getSource()) {
+            //                $formGroup->addTagClass('bg-info');
+            //            }
         }
 
         // $this->addItem( new RuntemplateTopicsChooser('topics', $engine)); //TODO
