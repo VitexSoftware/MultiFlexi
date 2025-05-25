@@ -41,7 +41,13 @@ do {
 
     foreach ($jobsToLaunch as $scheduledJob) {
         $job = new Job($scheduledJob['job']);
-        $job->performJob();
+
+        if (empty($job->getData()) === false) {
+            $job->performJob();
+        } else {
+            $job->addStatusMessage(sprintf(_('Job #%d Does not exists'), $scheduledJob['job']), 'error');
+        }
+
         $scheduler->deleteFromSQL($scheduledJob['id']);
         $job->cleanUp();
     }
