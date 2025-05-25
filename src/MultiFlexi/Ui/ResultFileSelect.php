@@ -24,7 +24,7 @@ class ResultFileSelect extends \Ease\Html\SelectTag
 {
     public function __construct(\MultiFlexi\Application $engine)
     {
-        $appConfigs = \MultiFlexi\Conffield::getAppConfigs($engine->getMyKey());
+        $appConfigs = \MultiFlexi\Conffield::getAppConfigs($engine);
         $items = ['' => _('None')];
 
         foreach ($appConfigs as $appConfigField) {

@@ -38,7 +38,7 @@ class AppLaunchForm extends \Ease\TWB4\Form
         $this->addItem(new \Ease\Html\InputHiddenTag('company_id', $companyId));
 
         /* check if app requires upload fields */
-        $appFields = \MultiFlexi\Conffield::getAppConfigs($appId);
+        $appFields = \MultiFlexi\Conffield::getAppConfigs($app);
 
         //        $this->addItem(new EnvironmentView($env));
         $this->addItem('<hr>');

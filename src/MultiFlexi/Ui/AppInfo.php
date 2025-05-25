@@ -49,7 +49,7 @@ class AppInfo extends \Ease\Html\DivTag
         $mainRow->addColumn(4, new AppJobsTable($app->getMyKey(), $companyId));
 
         $mainRow->addColumn(2, [new LinkButton('conffield.php?app_id='.$app->getMyKey().'&company_id='.$companyId, [new \Ease\Html\ImgTag('images/set.svg', _('Set'), ['height' => '30px']), _('Config fields')], 'warning btn-sm  btn-block'),
-            new \MultiFlexi\Ui\ConfigFieldsBadges(Conffield::getAppConfigs($app->getMyKey())),
+            new \MultiFlexi\Ui\ConfigFieldsBadges(Conffield::getAppConfigs($app)),
         ]);
 
         $this->addItem($mainRow);

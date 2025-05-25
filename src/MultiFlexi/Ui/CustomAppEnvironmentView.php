@@ -37,7 +37,7 @@ class CustomAppEnvironmentView extends EnvironmentView
         $companyId = $appToCompany->getDataValue('company_id');
         $appId = $appToCompany->getDataValue('app_id');
         $customConfig = new \MultiFlexi\Configuration();
-        $appFields = \MultiFlexi\Conffield::getAppConfigs($appId);
+        $appFields = \MultiFlexi\Conffield::getAppConfigs(new \MultiFlexi\Application($appId));
 
         $envValues = array_merge($appToCompany->getAppEnvironment(), $customConfig->getAppConfig($companyId, $appId));
 
