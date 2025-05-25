@@ -72,7 +72,7 @@ class ConffieldTest extends \PHPUnit\Framework\TestCase
      */
     public function testgetAppConfigs(): void
     {
-        $this->assertEquals('', $this->object->getAppConfigs());
+        $this->assertEquals('', $this->object->getAppConfigs(new \MultiFlexi\Application()));
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete('This test has not been implemented yet.');
     }

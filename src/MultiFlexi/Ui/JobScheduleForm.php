@@ -64,7 +64,7 @@ class JobScheduleForm extends Form
     public function uploadFields(): void
     {
         /* check if app requires upload fields */
-        $appFields = \MultiFlexi\Conffield::getAppConfigs($this->app->getMyKey());
+        $appFields = \MultiFlexi\Conffield::getAppConfigs($this->app);
         /* if any of fields is upload type then add file input button */
         $fieldsArray = \is_array($appFields) ? $appFields : (method_exists($appFields, 'getFields') ? $appFields->getFields() : (array) $appFields);
         $uploadFields = array_filter($fieldsArray, static function ($field) {

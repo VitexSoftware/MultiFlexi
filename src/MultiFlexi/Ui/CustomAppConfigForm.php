@@ -35,7 +35,7 @@ class CustomAppConfigForm extends EngineForm
         $job = new \MultiFlexi\Job(['company_id' => $engine->getDataValue('company_id'), 'app_id' => $appId], ['autoload' => false]);
         $values = $job->getFullEnvironment();
 
-        foreach (\MultiFlexi\Conffield::getAppConfigs($engine->getDataValue('app_id')) as $fieldInfo) {
+        foreach (\MultiFlexi\Conffield::getAppConfigs(new \MultiFlexi\Application($engine->getDataValue('app_id'))) as $fieldInfo) {
             if ($fieldInfo['type'] === 'checkbox') {
                 $input = new \Ease\Html\DivTag(new \Ease\TWB4\Widgets\Toggle($fieldInfo['keyname'], \array_key_exists($fieldInfo['keyname'], $values) ? ($values[$fieldInfo['keyname']]['value'] === 'true' ? true : false) : $fieldInfo['defval'], 'true', []));
             } else {
