@@ -541,11 +541,11 @@ class RunTemplate extends \MultiFlexi\DBEngine
         return $dataRowRaw;
     }
 
-    public function getAssignedCredentials()
+    public function getAssignedCredentials(): array
     {
         $crdHlpr = new \MultiFlexi\RunTplCreds();
 
-        return $crdHlpr->getCredentialsForRuntemplate($this->getMyKey())->fetchAll('formType');
+        return $crdHlpr->getCredentialsForRuntemplate($this->getMyKey())->fetchAll();
     }
 
     /**

@@ -86,6 +86,8 @@ class DBEngine extends \Ease\SQL\Engine
         if (null === $this->detailPage) {
             $this->setDetailPage();
         }
+
+        $this->setObjectName();
     }
 
     /**

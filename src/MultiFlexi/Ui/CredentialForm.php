@@ -50,7 +50,7 @@ class CredentialForm extends Form
         $credentialTypeSelect = null; // Ensure variable is always defined
 
         if ($kredenc->getDataValue('company_id')) {
-            $credentialTypeSelect = new CredentialTypeSelect('credential_type_id', (int) $kredenc->getDataValue('company_id'), (int) $kredenc->getDataValue('credential_type_id'));
+            $credentialTypeSelect = new CredentialTypeSelect('credential_type_id', (int) $kredenc->getDataValue('company_id'), $kredenc->getCredentialType() ? $kredenc->getCredentialType()->getMyKey() : 0);
             $credentialTypeSelect->finalize();
 
             if ($credentialTypeSelect->getItemsCount()) {
