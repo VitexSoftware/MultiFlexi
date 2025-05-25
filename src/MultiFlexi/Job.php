@@ -240,6 +240,8 @@ class Job extends Engine
 
         if ($this->environment->getFieldByCode($resultFileField)) {
             $resultfile = $this->environment->getFieldByCode($resultFileField)->getValue();
+        } else {
+            $resultfile = '';
         }
 
         if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
@@ -873,5 +875,17 @@ EOD;
         $jobEnvironment->addFields($this->runTemplate->getEnvironment());
 
         return $jobEnvironment;
+    }
+
+    public function getRunTemplate(): ?RunTemplate
+    {
+        return $this->runTemplate;
+    }
+
+    public function setRunTemplate(RunTemplate $runtemplate): self
+    {
+        $this->runTemplate = $runtemplate;
+
+        return $this;
     }
 }
