@@ -190,6 +190,7 @@ class MainMenu extends \Ease\Html\DivTag
             '<img width=30 src=images/system-users.svg> '._('Admin'),
             array_merge([
                 'createaccount.php' => '🤬&nbsp;'._('New Admin'),
+                'createuser.php' => '👤&nbsp;'._('New User Account'),
                 'envmods.php' => '🌦️&nbsp;'._('Environment Modules'),
                 'actionmodules.php' => '🤖&nbsp;'._('Actions'),
                 'executors.php' => '🚀&nbsp;'._('Executors'),
