@@ -159,13 +159,13 @@ class User extends \Ease\User implements \MultiFlexi\Ui\columns
         if (empty($login)) {
             $this->addStatusMessage(_('missing login'), 'event');
 
-            return null;
+            return false;
         }
 
         if (empty($password)) {
             $this->addStatusMessage(_('missing password'), 'event');
 
-            return null;
+            return false;
         }
 
         if ($this->loadFromSQL([$this->loginColumn => $login])) {
