@@ -20,14 +20,14 @@ use MultiFlexi\Ui\WebPage;
 
 require_once '../vendor/autoload.php';
 session_start();
-\Ease\Shared::init(
+Shared::init(
     ['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'],
     \dirname(__DIR__).'/.env',
 );
 \Ease\Locale::singleton(null, '../i18n', 'multiflexi');
 $loggers = ['syslog', '\MultiFlexi\LogToSQL'];
 
-if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
+if (Shared::cfg('ZABBIX_SERVER')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
 
@@ -49,3 +49,15 @@ if (strcmp($script_tz, \ini_get('date.timezone'))) {
     //    echo 'Script timezone differs from ini-set timezone.';
 }
 //    echo 'Script timezone and ini-set timezone match.';
+
+// Example for OTLP exporter
+// filepath: /home/vitex/Projects/Multi/MultiFlexi/src/init.php
+use OpenTelemetry\SDK\Trace\TracerProvider;
+use OpenTelemetry\SDK\Trace\SpanProcessor\SimpleSpanProcessor;
+use OpenTelemetry\Contrib\Otlp\Exporter as OtlpExporter;
+
+$exporter = new OtlpExporter();
+$tracerProvider = new TracerProvider(
+    new SimpleSpanProcessor($exporter)
+);
+$tracer = $tracerProvider->getTracer('multiflexi');
