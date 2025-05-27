@@ -22,6 +22,8 @@ namespace MultiFlexi\CredentialType;
  */
 class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
 {
+    private bool $tokenHelper = false;
+
     public function __construct()
     {
         parent::__construct();
@@ -41,6 +43,12 @@ class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\creden
         $csasAccessToken = new \MultiFlexi\ConfigField('CSAS_ACCESS_TOKEN', 'string', _('CSAS Access Token'), _('Access token for CSAS services'));
         $csasAccessToken->setHint('ewogIC.....uNjQzWiIKfQ==')->setManual(false)->setRequired(true);
         $this->configFieldsProvided->addField($csasAccessToken);
+
+        // Check if csas-access-token command exists
+        $whichCmd = (str_starts_with(strtolower(\PHP_OS), strtolower('WIN'))) ? 'where' : 'which';
+        $cmdPath = trim(shell_exec("{$whichCmd} csas-access-token"));
+
+        $this->tokenHelper = (empty($cmdPath) === false);
     }
 
     #[\Override]
@@ -54,9 +62,13 @@ class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\creden
         return _('ČS a.s. / Erste');
     }
 
-    #[\Override]
     public function configForm(): void
     {
+        if ($this->tokenHelper === false) {
+            $this->addStatusMessage(_('csas-access-token command not found in PATH.'), 'warning');
+
+            // Install  https://github.com/Spoje-NET/csas-authorize
+        }
     }
 
     #[\Override]
@@ -82,9 +94,9 @@ class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\creden
     {
         $tokenUuid = $this->configFieldsInternal->getFieldByCode('CSAS_TOKEN_ID')->getValue();
         $tmpfile = sys_get_temp_dir().'/'.time().'.env';
-
-        system('csas-access-token -t'.$tokenUuid.' -o'.$tmpfile);
-
+        $subCommand = 'csas-access-token -t'.$tokenUuid.' -o'.$tmpfile;
+        $this->addStatusMessage(sprintf(_('Obtaining fresh token using: %s'), $subCommand), 'debug');
+        system($subCommand);
         $envData = EnvFile::readEnvFile($tmpfile);
 
         foreach (array_keys($this->configFieldsProvided->getFields()) as $configField) {

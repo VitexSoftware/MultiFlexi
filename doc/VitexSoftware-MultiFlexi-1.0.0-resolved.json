@@ -635,7 +635,7 @@
             "example": 10
           },
           "enabled": {
-            "type": "boolean",
+            "type": "bool",
             "example": true
           },
           "settings": {
@@ -763,7 +763,7 @@
             "example": 10
           },
           "enabled": {
-            "type": "boolean",
+            "type": "bool",
             "example": true
           },
           "settings": {
