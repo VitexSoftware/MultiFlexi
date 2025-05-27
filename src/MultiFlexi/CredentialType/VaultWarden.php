@@ -45,7 +45,7 @@ class VaultWarden extends \MultiFlexi\CredentialProtoType implements \MultiFlexi
     }
 
     #[\Override]
-    public function configForm(): void
+    public function prepareConfigForm(): void
     {
     }
 

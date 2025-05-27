@@ -721,8 +721,12 @@ EOD;
                 if (null === $field) {
                     $creds->addField(new ConfigField($configFieldName, 'string', $configFieldName, '', '', \is_array($configFieldInfo) ? (string) $configFieldInfo['value'] : $configFieldInfo->getValue()));
                 } else {
-                    $field->setValue($configFieldInfo['value']);
-                    $field->setSource($configFieldInfo['source']);
+                    if (\is_object($configFieldInfo)) {
+                        $creds->addField($configFieldInfo);
+                    } else {
+                        $field->setValue($configFieldInfo['value']);
+                        $field->setSource($configFieldInfo['source']);
+                    }
                 }
             }
         }

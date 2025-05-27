@@ -64,7 +64,7 @@ class RaiffeisenBank extends \MultiFlexi\CredentialProtoType implements \MultiFl
     }
 
     #[\Override]
-    public function configForm(): void
+    public function prepareConfigForm(): void
     {
         // Implement the configuration form logic if needed
     }

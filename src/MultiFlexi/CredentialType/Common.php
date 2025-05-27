@@ -24,7 +24,7 @@ class Common extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\cred
 {
     // put your code here
     #[\Override]
-    public function configForm(): void
+    public function prepareConfigForm(): void
     {
     }
 

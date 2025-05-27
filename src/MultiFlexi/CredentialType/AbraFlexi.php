@@ -48,7 +48,7 @@ class AbraFlexi extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\c
     }
 
     #[\Override]
-    public function configForm(): void
+    public function prepareConfigForm(): void
     {
         // Implement the configuration form logic if needed
     }
