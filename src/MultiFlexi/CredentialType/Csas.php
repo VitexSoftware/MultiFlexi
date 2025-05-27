@@ -27,6 +27,7 @@ class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\creden
     public function __construct()
     {
         parent::__construct();
+
         $envFile = new \MultiFlexi\ConfigField('CSAS_TOKEN_ID', 'string', _('Token unique identifier'), _('Token UUID'));
         $envFile->setHint('71004963-e3d4-471f-96fc-1aef79d17ec1')->setRequired(true);
 
@@ -51,6 +52,36 @@ class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\creden
         $this->tokenHelper = (empty($cmdPath) === false);
     }
 
+    public function tokensAvailable(): array
+    {
+        $tokens = [];
+        $subCommand = 'csas-access-token -l -j';
+        $this->addStatusMessage(sprintf(_('Obtaining tokens availble: %s'), $subCommand), 'debug');
+
+        $process = popen($subCommand, 'r');
+        $tokensJson = '';
+
+        if ($process) {
+            while (!feof($process)) {
+                $tokensJson .= fread($process, 4096);
+            }
+
+            pclose($process);
+        }
+
+        if (\Ease\Functions::isJson($tokensJson)) {
+            $tokensAvailble = json_decode($tokensJson, true);
+
+            if (empty($tokensAvailble)) {
+                $this->addStatusMessage(_('No tokens available'), 'warning');
+            } else {
+                $tokens = $tokensAvailble;
+            }
+        }
+
+        return $tokens;
+    }
+
     #[\Override]
     public static function name(): string
     {
@@ -62,13 +93,40 @@ class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\creden
         return _('ČS a.s. / Erste');
     }
 
-    public function configForm(): void
+    public function prepareConfigForm(): void
     {
         if ($this->tokenHelper === false) {
             $this->addStatusMessage(_('csas-access-token command not found in PATH.'), 'warning');
 
             // Install  https://github.com/Spoje-NET/csas-authorize
         }
+
+        $tokenTable = new \Ease\TWB4\Table();
+
+        $tokens = $this->tokensAvailable();
+
+        if ($tokens) {
+            $tokenTable->addRowHeaderColumns([_('Name'), _('UUID'), _('Expire in days')]);
+
+            foreach ($tokens as $tokenInfo) {
+                $tokenExpire = (new \DateTime())->setTimestamp($tokenInfo['expires_at'] ?? 0);
+                $expiresInDays = $tokenExpire->diff(new \DateTime())->days;
+                $tokenTable->addRowColumns([
+                    $tokenInfo['name'],
+                    new \Ease\Html\SpanTag(
+                        $tokenInfo['uuid'],
+                        [
+                            'onclick' => "document.getElementById('Tokenuniqueidentifier').value='{$tokenInfo['uuid']}';",
+                            'style' => 'cursor:pointer;',
+                            'title' => _('Click to use this UUID'),
+                        ],
+                    ),
+                    $expiresInDays !== '' ? $expiresInDays.' '._('days') : '',
+                ]);
+            }
+        }
+
+        $this->configFieldsInternal->getFieldByCode('CSAS_TOKEN_ID')->setDescription(_('Tokens available').(string) $tokenTable);
     }
 
     #[\Override]
@@ -93,22 +151,27 @@ class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\creden
     public function query(): \MultiFlexi\ConfigFields
     {
         $tokenUuid = $this->configFieldsInternal->getFieldByCode('CSAS_TOKEN_ID')->getValue();
-        $tmpfile = sys_get_temp_dir().'/'.time().'.env';
-        $subCommand = 'csas-access-token -t'.$tokenUuid.' -o'.$tmpfile;
-        $this->addStatusMessage(sprintf(_('Obtaining fresh token using: %s'), $subCommand), 'debug');
-        system($subCommand);
-        $envData = EnvFile::readEnvFile($tmpfile);
 
-        foreach (array_keys($this->configFieldsProvided->getFields()) as $configField) {
-            if (\array_key_exists($configField, $envData)) {
-                $this->configFieldsProvided->getFieldByCode($configField)->setValue($envData[$configField]);
-                $this->configFieldsProvided->getFieldByCode($configField)->setSource($tokenUuid);
-                $this->configFieldsProvided->getFieldByCode($configField)->setNote('Spoje-NET/csas-authorize');
-                $this->configFieldsProvided->getFieldByCode($configField)->setValue($envData[$configField]);
+        if ($tokenUuid) {
+            $tmpfile = sys_get_temp_dir().'/'.time().'.env';
+            $subCommand = 'csas-access-token -t'.$tokenUuid.' -o'.$tmpfile;
+            $this->addStatusMessage(sprintf(_('Obtaining fresh token using: %s'), $subCommand), 'debug');
+            system($subCommand);
+            $envData = EnvFile::readEnvFile($tmpfile);
+
+            foreach (array_keys($this->configFieldsProvided->getFields()) as $configField) {
+                if (\array_key_exists($configField, $envData)) {
+                    $this->configFieldsProvided->getFieldByCode($configField)->setValue($envData[$configField]);
+                    $this->configFieldsProvided->getFieldByCode($configField)->setSource($tokenUuid);
+                    $this->configFieldsProvided->getFieldByCode($configField)->setNote('Spoje-NET/csas-authorize');
+                    $this->configFieldsProvided->getFieldByCode($configField)->setValue($envData[$configField]);
+                }
             }
-        }
 
-        unlink($tmpfile);
+            unlink($tmpfile);
+        } else {
+            $this->addStatusMessage(_('Configure the CSAS_TOKEN_ID in Credential setting first'), 'warning');
+        }
 
         return parent::query();
     }

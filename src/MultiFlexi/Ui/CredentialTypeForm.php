@@ -45,6 +45,8 @@ class CredentialTypeForm extends \Ease\TWB4\Form
         $helperCol = $credTypeRow1->addColumn(4, new \Ease\TWB4\FormGroup(_('Credential type Helper Class'), new CredentialTypeClassSelect('class', [], (string) $credtype->getDataValue('class'))));
 
         if ($credtype->getDataValue('class')) {
+            $credtype->getHelper()->prepareConfigForm();
+
             $helperCol->addItem(new FieldsForm($credtype->getHelper()->fieldsInternal(), $credtype->getDataValue('class')));
 
             $provided = new \Ease\TWB4\Panel(new \Ease\Html\H4Tag(_('Fields provided')));

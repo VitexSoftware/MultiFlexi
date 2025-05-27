@@ -56,7 +56,7 @@ class FioBank extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\cre
     }
 
     #[\Override]
-    public function configForm(): void
+    public function prepareConfigForm(): void
     {
         // Implement the configuration form logic if needed
     }

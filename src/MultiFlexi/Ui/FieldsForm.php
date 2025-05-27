@@ -46,6 +46,7 @@ class FieldsForm extends \Ease\Container
                         $field->getName(),
                         new \Ease\Html\InputTextTag($prefix ? $prefix.'['.$field->getCode().']' : $field->getCode(), $field->getValue()),
                         $field->getHint(),
+                        $field->getDescription(),
                     ),
                 );
 
