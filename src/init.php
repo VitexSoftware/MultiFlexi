@@ -20,14 +20,14 @@ use MultiFlexi\Ui\WebPage;
 
 require_once '../vendor/autoload.php';
 session_start();
-\Ease\Shared::init(
+Shared::init(
     ['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'],
     \dirname(__DIR__).'/.env',
 );
 \Ease\Locale::singleton(null, '../i18n', 'multiflexi');
 $loggers = ['syslog', '\MultiFlexi\LogToSQL'];
 
-if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
+if (Shared::cfg('ZABBIX_SERVER')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
 

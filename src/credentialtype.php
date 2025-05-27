@@ -144,10 +144,12 @@ if (WebPage::singleton()->isPosted()) {
 
                 $fielder->takeData($toInsert);
 
-                try {
-                    $fielder->insertToSQL();
-                } catch (\PDOException $exc) {
-                    $fielder->addStatusMessage(sprintf(_('Column %s not added to %s'), $columnProvided->getCode(), $crtype->getRecordName()), 'error');
+                if ($fielder->recordExist(['credential_type_id' => $crtype->getMyKey(), 'keyname' => $columnProvided->getCode()]) === false) {
+                    try {
+                        $fielder->insertToSQL();
+                    } catch (\PDOException $exc) {
+                        $fielder->addStatusMessage(sprintf(_('Column %s not added to %s'), $columnProvided->getCode(), $crtype->getRecordName()), 'error');
+                    }
                 }
             }
 
@@ -184,10 +186,12 @@ if ($addField) {
 
         $fielder->takeData($toInsert);
 
-        try {
-            $fielder->insertToSQL();
-        } catch (\PDOException $exc) {
-            $fielder->addStatusMessage(sprintf(_('Column %s not added to %s'), $columnProvided->getCode(), $crtype->getRecordName()), 'error');
+        if ($fielder->recordExists(['credential_type_id' => $crtype->getMyKey(), 'keyname' => $columnProvided->getCode()]) === 0) {
+            try {
+                $fielder->insertToSQL();
+            } catch (\PDOException $exc) {
+                $fielder->addStatusMessage(sprintf(_('Column %s not added to %s'), $columnProvided->getCode(), $crtype->getRecordName()), 'error');
+            }
         }
     }
 }
