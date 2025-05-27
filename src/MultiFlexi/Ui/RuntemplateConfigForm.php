@@ -58,8 +58,6 @@ class RuntemplateConfigForm extends EngineForm
             $runTemplateField = $runTemplateFields->getFieldByCode($fieldName);
 
             if ($runTemplateField) { // Filed by Credential
-                $input->setTagProperty('disabled', '1');
-
                 $runTemplateFieldSource = $runTemplateField->getSource();
 
                 if (\Ease\Functions::isSerialized($runTemplateFieldSource)) {
@@ -75,6 +73,7 @@ class RuntemplateConfigForm extends EngineForm
                         $credentialTypeLink = new \Ease\Html\ATag('credentialtype.php?id='.$credentialType->getMyKey(), $formIcon);
 
                         $inputCaption = new \Ease\Html\SpanTag([$credentialTypeLink, new \Ease\Html\StrongTag($fieldName), '&nbsp;', $credentialLink]);
+                        $input->setTagProperty('disabled', '1');
                     }
                 } else {
                     $inputCaption = new \Ease\Html\StrongTag($fieldName);
