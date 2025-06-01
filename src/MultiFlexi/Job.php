@@ -315,10 +315,10 @@ EOD;
     /**
      * Prepare Job for run.
      *
-     * @param int       $runTemplateId ID of RunTempate to use
-     * @param array     $envOverride   use to change default env [env with info]
-     * @param \DateTime $scheduled     Time to launch
-     * @param string    $executor      Executor Class Name
+     * @param int          $runTemplateId ID of RunTempate to use
+     * @param ConfigFields $envOverride   use to change default env [env with info]
+     * @param \DateTime    $scheduled     Time to launch
+     * @param string       $executor      Executor Class Name
      */
     public function prepareJob(int $runTemplateId, ConfigFields $envOverride, \DateTime $scheduled, string $executor = 'Native', string $scheduleType = 'adhoc'): string
     {
