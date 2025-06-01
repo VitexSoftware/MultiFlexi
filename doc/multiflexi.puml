@@ -1,0 +1,105 @@
+@startuml
+package "MultiFlexi" {
+    package "src" {
+        class "CredentialType" {
+            +Csas
+        }
+    }
+    package "bin" {
+        class "multiflexi"
+        class "multiflexi-app2json"
+        class "multiflexi-executor"
+        class "multiflexi-job2env"
+        class "multiflexi-job2script"
+        class "multiflexi-json-app-remover"
+        class "multiflexi-json2app"
+        class "multiflexi-json2apps"
+        class "multiflexi-phinx"
+        class "multiflexi-probe"
+        class "multiflexi-run-template"
+        class "multiflexi-scheduler"
+        class "multiflexi-trigger"
+        class "multiflexi-zabbix-lld"
+        class "multiflexi-zabbix-lld-actions"
+        class "multiflexi-zabbix-lld-company"
+        class "multiflexi-zabbix-lld-tasks"
+    }
+    package "db" {
+        package "migrations" {}
+        package "seeds" {}
+        class "Database" {
+            +id
+            +name
+            +type
+        }
+        class "User" {
+            +id
+            +username
+            +password
+            +email
+        }
+        class "Task" {
+            +id
+            +name
+            +status
+            +user_id
+        }
+        class "Log" {
+            +id
+            +message
+            +timestamp
+            +task_id
+        }
+        Database "1" -- "*" User : contains
+        User "1" -- "*" Task : owns
+        Task "1" -- "*" Log : generates
+        class "Company" {
+            +id
+            +name
+            +code
+        }
+        class "Apps" {
+            +id
+            +name
+            +description
+        }
+        class "Job" {
+            +id
+            +app_id
+            +company_id
+        }
+        class "RunTemplate" {
+            +id
+            +app_id
+            +company_id
+        }
+        Company "1" -- "*" Apps : uses
+        Company "1" -- "*" Job : schedules
+        Apps "1" -- "*" Job : executes
+        Job "1" -- "*" RunTemplate : templates
+    }
+    package "debian" {
+        class "changelog"
+        class "control"
+        class "compat"
+        class "dirs"
+        class "files"
+        class "Makefile"
+        class "manpages"
+        class "multiflexi-abraflexi.install"
+        class "multiflexi-api.install"
+        class "multiflexi-docker.install"
+        class "multiflexi-raiffeisenbank.install"
+        class "multiflexi-zabbix.install"
+    }
+    package "doc" {}
+    package "docker" {}
+    package "docs" {}
+    package "i18n" {}
+    package "lib" {}
+    package "tests" {}
+    package "tools" {}
+    package "vendor" {}
+    package "zabbix" {}
+}
+@enduml
