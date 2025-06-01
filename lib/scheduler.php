@@ -79,7 +79,7 @@ if ($interval) {
                     $jobber->addStatusMessage('Adding Startup delay  +'.$runtemplateData['delay'].' seconds to '.$startTime->format('Y-m-d H:i:s'), 'debug');
                 }
 
-                $jobber->prepareJob($runtemplateData['id'], [], $startTime, $runtemplateData['executor'], RunTemplate::codeToInterval($interval));
+                $jobber->prepareJob($runtemplateData['id'], new ConfigFields(''), $startTime, $runtemplateData['executor'], RunTemplate::codeToInterval($interval));
                 $jobber->scheduleJobRun($startTime);
                 $jobber->addStatusMessage('🧩 #'.$jobber->application->getMyKey()."\t".$jobber->application->getRecordName().':'.$runtemplateData['name'].' (runtemplate #'.$runtemplateData['id'].') - '.sprintf(_('Launch %s for 🏣 %s'), $startTime->format(\DATE_RSS), $company['name']));
             }
