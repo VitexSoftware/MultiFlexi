@@ -38,7 +38,7 @@ class MultiFlexi extends \MultiFlexi\Environmentor implements injector
     public function getEnvironment(): \MultiFlexi\ConfigFields
     {
         $envApplication = new \MultiFlexi\ConfigFields(self::name());
-        $envApplication->addField((new \MultiFlexi\ConfigField('MULTIFLEXI_JOB_ID', 'integer'))->setValue($this->engine->getMyKey()));
+        $envApplication->addField((new \MultiFlexi\ConfigField('MULTIFLEXI_JOB_ID', 'integer'))->setValue((string) $this->engine->getMyKey()));
         $envApplication->addField((new \MultiFlexi\ConfigField('MULTIFLEXI_EXECUTOR', 'string'))->setValue($this->engine->getDataValue('executor')));
         $envApplication->addField((new \MultiFlexi\ConfigField('MULTIFLEXI_VERSION', 'string'))->setValue(\Ease\Shared::appVersion()));
 

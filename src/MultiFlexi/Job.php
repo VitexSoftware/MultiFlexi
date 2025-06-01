@@ -332,7 +332,7 @@ EOD;
 
         $this->company = $this->runTemplate->getCompany();
         $this->setDataValue('executor', $executor);
-        $this->environment = $this->getFullEnvironment();
+        $this->environment->addFields($this->getFullEnvironment());
         $this->environment->addFields($envOverride);
 
         $this->loadFromSQL($this->newJob($runTemplateId, $this->environment, $scheduled, $executor, $scheduleType));
