@@ -2,6 +2,17 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Tests\MultiFlexi\Action;
 
 use MultiFlexi\Action\Sleep;
@@ -9,21 +20,19 @@ use MultiFlexi\Job;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Tests for Sleep Action
+ * Tests for Sleep Action.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.com>
  */
 class SleepTest extends TestCase
 {
     /**
-     * Test instance
-     *
-     * @var Sleep
+     * Test instance.
      */
-    private $object;
+    private Sleep $object;
 
     /**
-     * Sets up the fixture
+     * Sets up the fixture.
      */
     protected function setUp(): void
     {
@@ -31,7 +40,7 @@ class SleepTest extends TestCase
     }
 
     /**
-     * Test name method
+     * Test name method.
      */
     public function testName(): void
     {
@@ -40,7 +49,7 @@ class SleepTest extends TestCase
     }
 
     /**
-     * Test description method
+     * Test description method.
      */
     public function testDescription(): void
     {
@@ -49,7 +58,7 @@ class SleepTest extends TestCase
     }
 
     /**
-     * Test logo method
+     * Test logo method.
      */
     public function testLogo(): void
     {
@@ -59,7 +68,7 @@ class SleepTest extends TestCase
 
     /**
      * Test perform method
-     * We'll mock the sleep function to avoid actual delays
+     * We'll mock the sleep function to avoid actual delays.
      */
     public function testPerform(): void
     {
@@ -80,22 +89,22 @@ class SleepTest extends TestCase
         // Use runkit to temporarily override the sleep function
         // This is a workaround since we can't mock PHP built-in functions directly
         // If runkit is not available, this test will be skipped
-        if (function_exists('runkit7_function_redefine') || function_exists('runkit_function_redefine')) {
-            $sleepFunction = function_exists('runkit7_function_redefine') ? 'runkit7_function_redefine' : 'runkit_function_redefine';
-            
+        if (\function_exists('runkit7_function_redefine') || \function_exists('runkit_function_redefine')) {
+            $sleepFunction = \function_exists('runkit7_function_redefine') ? 'runkit7_function_redefine' : 'runkit_function_redefine';
+
             // Save the original sleep function
-            $original = function ($seconds) {
+            $original = static function ($seconds) {
                 return \sleep($seconds);
             };
-            
+
             // Redefine sleep to do nothing
-            $sleepFunction('sleep', function ($seconds) {
+            $sleepFunction('sleep', static function ($seconds) {
                 return 0; // Return 0 as if no processes were awakened
             }, true);
-            
+
             // Execute the perform method
             $sleepAction->perform($job);
-            
+
             // Restore the original sleep function
             $sleepFunction('sleep', $original, true);
         } else {
@@ -104,7 +113,7 @@ class SleepTest extends TestCase
             $startTime = microtime(true);
             $sleepAction->perform($job);
             $endTime = microtime(true);
-            
+
             // The execution should take approximately 5 seconds
             // We'll allow a small margin of error
             $this->assertGreaterThanOrEqual(4.5, $endTime - $startTime, 'Sleep duration is too short');
@@ -113,7 +122,7 @@ class SleepTest extends TestCase
     }
 
     /**
-     * Test error handling in perform method
+     * Test error handling in perform method.
      */
     public function testPerformWithInvalidSeconds(): void
     {
@@ -125,41 +134,45 @@ class SleepTest extends TestCase
 
         // The perform method should handle this gracefully (convert to 0)
         $sleepAction->perform($job);
-        
+
         // No assertion needed - if no exception is thrown, the test passes
     }
 
     /**
-     * Test the inputs method returns expected form elements
+     * Test the inputs method returns expected form elements.
      */
     public function testInputs(): void
     {
         $prefix = 'test';
         $inputs = Sleep::inputs($prefix);
-        
+
         $this->assertIsArray($inputs);
         $this->assertCount(1, $inputs);
-        
+
         // The input should be a FormGroup
         $formGroup = $inputs[0];
         $this->assertInstanceOf(\Ease\TWB4\FormGroup::class, $formGroup);
-        
+
         // Check if it contains an InputTextTag
         $formGroupClass = new \ReflectionClass(\Ease\TWB4\FormGroup::class);
+
         if ($formGroupClass->hasProperty('content')) {
             $contentProperty = $formGroupClass->getProperty('content');
             $contentProperty->setAccessible(true);
             $content = $contentProperty->getValue($formGroup);
-            
+
             // Content may be an array or a single element
-            if (is_array($content)) {
+            if (\is_array($content)) {
                 $found = false;
+
                 foreach ($content as $element) {
                     if ($element instanceof \Ease\Html\InputTextTag) {
                         $found = true;
+
                         break;
                     }
                 }
+
                 $this->assertTrue($found, 'FormGroup does not contain an InputTextTag');
             } else {
                 $this->assertInstanceOf(\Ease\Html\InputTextTag::class, $content);
@@ -168,25 +181,24 @@ class SleepTest extends TestCase
     }
 
     /**
-     * Test the usableForApp method
+     * Test the usableForApp method.
      */
     public function testUsableForApp(): void
     {
         $app = $this->createMock(\MultiFlexi\Application::class);
-        
+
         $this->assertTrue(Sleep::usableForApp($app), 'Sleep action should be usable for any application');
     }
 
     /**
-     * Test the initialData method
+     * Test the initialData method.
      */
     public function testInitialData(): void
     {
         $data = $this->object->initialData('test');
-        
+
         $this->assertIsArray($data);
         $this->assertArrayHasKey('seconds', $data);
         $this->assertEquals('60', $data['seconds']);
     }
 }
-

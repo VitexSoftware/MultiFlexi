@@ -96,6 +96,12 @@ Here is an example of a JSON file defining an application:
 
     Examples for other languages coming soon.
 
+.. note::
+
+    There is a JSON Schema available for validating MultiFlexi application definitions:
+    `multiflexi.app.schema.json <https://github.com/VitexSoftware/MultiFlexi/blob/master/doc/multiflexi.app.schema.json>`_
+    This schema can be used to verify the correctness of the structure of JSON files with application definitions.
+
 Applications Overview
 =====================
 

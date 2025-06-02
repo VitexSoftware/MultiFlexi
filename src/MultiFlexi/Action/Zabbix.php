@@ -159,7 +159,7 @@ class Zabbix extends \MultiFlexi\CommonAction
 
         return [
             'key' => $this->defaultKey(),
-            'metricsfile' => (\array_key_exists('RESULT_FILE', $runtemplateConfig) ? $runtemplateConfig['RESULT_FILE']['value'] : ''),
+            'metricsfile' => $runtemplateConfig->getFieldByCode('RESULT_FILE') ? $runtemplateConfig->getFieldByCode('RESULT_FILE')->getValue() : '',
         ];
     }
 }

@@ -186,7 +186,7 @@ if ($addField) {
 
         $fielder->takeData($toInsert);
 
-        if ($fielder->recordExists(['credential_type_id' => $crtype->getMyKey(), 'keyname' => $columnProvided->getCode()]) === 0) {
+        if ($fielder->recordExists(['credential_type_id' => $crtype->getMyKey(), 'keyname' => $columnProvided->getCode()]) === false) {
             try {
                 $fielder->insertToSQL();
             } catch (\PDOException $exc) {
