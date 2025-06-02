@@ -192,4 +192,16 @@ class JobTest extends \PHPUnit\Framework\TestCase
         $result = $this->object->compileEnv();
         $this->assertIsArray($result);
     }
+
+    public function testInitialization(): void
+    {
+        $job = new Job();
+        $this->assertInstanceOf(Job::class, $job);
+    }
+
+    public function testSomeFunctionality(): void
+    {
+        $job = new Job();
+        // Add assertions for Job functionality
+    }
 }
