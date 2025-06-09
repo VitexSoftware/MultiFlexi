@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Action;
 
+use MultiFlexi\Application;
+
 /**
  * Description of RedmineIssue.
  *
@@ -64,10 +66,8 @@ class Github extends \MultiFlexi\CommonAction
 
     /**
      * Is this Action Situable for Application.
-     *
-     * @param Application $app
      */
-    public static function usableForApp($app): bool
+    public static function usableForApp(Application $app): bool
     {
         return (null === strstr($app->getDataValue('homepage'), 'github.com')) === false;
     }
@@ -95,8 +95,8 @@ class Github extends \MultiFlexi\CommonAction
 
         $body .= 'MultiFlexi: '.\Ease\Shared::appName().' '.\Ease\Shared::appVersion()."\n\n";
 
-        $label = ['Bug'];
-        $data = ['title' => $title, 'body' => $body, 'labels' => [$label]];
+        $labels = ['Bug'];
+        $data = ['title' => $title, 'body' => $body, 'labels' => $labels];
 
         $data_string = json_encode($data);
 

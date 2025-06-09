@@ -147,7 +147,7 @@ class Credential extends DBEngine
                     ['value' => $fieldData[$field],
                         'credential_id' => $this->getMyKey(),
                         'name' => $field,
-                        'type' => $fields->getFieldByCode($filed)->getType(),
+                        'type' => $fields->getFieldByCode($field)->getType(),
                     ],
                 );
             }
