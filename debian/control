@@ -19,7 +19,8 @@ Depends: ${misc:Depends},
  libjs-jquery-datatables,
  libjs-jquery-selectize.js,
  anacron, adduser (>= 3.11),
- php-symfony-console
+ php-symfony-console,
+ php-json-schema
 Suggests: multiflexi-all
 Pre-Depends: php-robmorgan-phinx|php-cakephp-phinx
 Architecture: all

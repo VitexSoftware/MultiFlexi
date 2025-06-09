@@ -66,8 +66,6 @@ class Github extends \MultiFlexi\CommonAction
 
     /**
      * Is this Action Situable for Application.
-     *
-     * @param Application $app
      */
     public static function usableForApp(Application $app): bool
     {

@@ -24,6 +24,7 @@ class Application extends DBEngine
 {
     public ?string $lastModifiedColumn;
     public Company $company;
+    public static string $appSchema = __DIR__.'/../../lib/multiflexi.app.schema.json';
 
     /**
      * @param mixed $identifier
@@ -262,6 +263,29 @@ class Application extends DBEngine
     public function importAppJson($jsonFile)
     {
         $fields = [];
+
+        // Validate JSON against schema before import using justinrainbow/json-schema
+        $schemaFile = self::$appSchema;
+
+        if (file_exists($schemaFile)) {
+            $data = json_decode(file_get_contents($jsonFile));
+            $validator = new \JsonSchema\Validator();
+            $validator->validate($data, (object) ['$ref' => 'file://'.realpath($schemaFile)]);
+
+            if (!$validator->isValid()) {
+                $errorMsg = "JSON does not validate. Violations:\n";
+
+                foreach ($validator->getErrors() as $error) {
+                    $errorMsg .= sprintf("[%s] %s\n", $error['property'], $error['message']);
+                }
+
+                $this->addStatusMessage($errorMsg, 'error');
+
+                return [];
+            }
+        } else {
+            $this->addStatusMessage('JSON schema file not found: '.$schemaFile, 'warning');
+        }
 
         $codes = $this->listingQuery()->select('code', true)->fetchAll('code');
 

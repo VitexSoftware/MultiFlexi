@@ -36,7 +36,8 @@
         "vitexsoftware/multiflexi-api-server": "dev-main",
         "symfony/console": "^6.4",
         "cboden/ratchet": "^0.5",
-        "textalk/websocket": "dev-master"
+        "textalk/websocket": "dev-master",
+        "justinrainbow/json-schema": "^6.0@dev"
     },
     "license": "MIT",
     "authors": [
