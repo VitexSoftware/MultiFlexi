@@ -68,7 +68,22 @@ foreach ($jobs as $job) {
         $job['schedule'] = new \Ease\TWB4\LinkButton('schedule.php?cancel='.$job['id'].'&templateid='.$job['runtemplate_id'].'&app_id='.$job['app_id'].'&company_id='.$companies->getMyKey(), [_('Cancel').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/cancel.svg', _('Cancel'), ['height' => '30px'])], 'warning');
     }
 
-    $job['uuid'] = new ATag('runtemplate.php?id='.$job['runtemplate_id'], [new \Ease\TWB4\Badge('light', [new \Ease\Html\ImgTag('appimage.php?uuid='.$job['uuid'], $job['appname'], ['height' => 50, 'title' => $job['appname']]), '&nbsp;', $job['appname']])]);
+    // Přidejte styl white-space: nowrap k badge s názvem aplikace
+    $job['uuid'] = new ATag(
+        'runtemplate.php?id='.$job['runtemplate_id'],
+        [
+            new \Ease\TWB4\Badge(
+                'light',
+                [
+                    new \Ease\Html\ImgTag('appimage.php?uuid='.$job['uuid'], $job['appname'], ['height' => 50, 'title' => $job['appname']]),
+                    '&nbsp;',
+                    // Přidejte styl pro nezalamování názvu aplikace
+                    new \Ease\Html\SpanTag($job['appname'], ['style' => 'white-space: nowrap;'])
+                ],
+                ['style' => 'white-space: nowrap;']
+            )
+        ]
+    );
     unset($job['appname'], $job['runtemplate_id'], $job['app_id']);
 
     $job['id'] = new \Ease\Html\ATag('job.php?id='.$job['id'], [new ExitCode($job['exitcode'], ['style' => 'font-size: 1.0em; font-family: monospace;']), '<br>', new \Ease\TWB4\Badge('info', '🏁 '.$job['id'])], ['title' => _('Job Info')]);
