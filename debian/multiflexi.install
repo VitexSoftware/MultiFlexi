@@ -45,5 +45,5 @@ tests/multiflexi_probe.multiflexi.app.json usr/share/multiflexi/
 src/MultiFlexi/Ui/Form/mServer.php     usr/lib/multiflexi/MultiFlexi/Ui/Form/
 src/MultiFlexi/Ui/Form/Office365.php   usr/lib/multiflexi/MultiFlexi/Ui/Form/
 src/MultiFlexi/Ui/Form/SQLServer.php   usr/lib/multiflexi/MultiFlexi/Ui/Form/
-src/MultiFlexi/Ui/Form/FioBank.php   usr/lib/multiflexi/MultiFlexi/Ui/Form/
-cli/multiflexi-cli.php /usr/lib/multiflexi/multiflexi-cli.php
+src/MultiFlexi/Ui/Form/FioBank.php     usr/lib/multiflexi/MultiFlexi/Ui/Form/
+cli/multiflexi-cli.php                 usr/lib/multiflexi/
