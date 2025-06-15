@@ -72,12 +72,13 @@ distributions.each {
                     sh 'sudo apt-get update --allow-releaseinfo-change'
                     sh 'echo "INSTALATION"'
                     artifacts.each { deb_file ->
-                        if (deb_file.endsWith('.deb')) {
+                        if (deb_file.endsWith('.deb') && !deb_file.startsWith('multiflexi-mysql')) {
                             sh 'echo -e "${GREEN} installing ' + deb_file + ' on `lsb_release -sc` ${ENDCOLOR} "'
                             sh 'sudo DEBIAN_FRONTEND=noninteractive DEBCONF_DEBUG=' + debconf_debug + ' apt-get -y install $WORKSPACE/dist/debian/' + deb_file
+                        } else if (deb_file.startsWith('multiflexi-mysql')) {
+                            echo "Skipping installation of multiflexi-mysql: MySQL server is not available in build container."
                         }
                     }
-                    sh '/etc/cron.daily/multiflexi || true'
                     sh 'multiflexi-cli appstatus'
                 }
             }
