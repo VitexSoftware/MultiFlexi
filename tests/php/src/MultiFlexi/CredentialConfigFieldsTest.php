@@ -28,7 +28,6 @@ use PHPUnit\Framework\TestCase;
 class CredentialConfigFieldsTest extends TestCase
 {
     private Credential|\PHPUnit\Framework\MockObject\MockObject $credentialMock;
-
     private CredentialType|\PHPUnit\Framework\MockObject\MockObject $credentialTypeMock;
 
     protected function setUp(): void

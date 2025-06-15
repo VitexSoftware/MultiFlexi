@@ -20,11 +20,11 @@ namespace MultiFlexi\Cli\Command;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-use Symfony\Component\Console\Input\InputOption;
+use MultiFlexi\User;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use MultiFlexi\User;
 
 // Přidání UserCommand pro správu uživatelů
 class UserCommand extends Command
@@ -49,7 +49,7 @@ class UserCommand extends Command
             'lastname',
         ], true)->fetchAll();
     }
-    
+
     protected function configure(): void
     {
         $this
@@ -76,8 +76,9 @@ class UserCommand extends Command
             case 'list':
                 $user = new User();
                 $users = $user->listingQuery()->fetchAll();
+
                 if ($format === 'json') {
-                    $output->writeln(json_encode($users, JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode($users, \JSON_PRETTY_PRINT));
                 } else {
                     foreach ($users as $row) {
                         $output->writeln(implode(' | ', $row));
@@ -94,13 +95,14 @@ class UserCommand extends Command
                     return Command::FAILURE;
                 }
 
-                $user = new User((int)$id);
+                $user = new User((int) $id);
                 $data = $user->getData();
+
                 if ($format === 'json') {
-                    $output->writeln(json_encode($data, JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode($data, \JSON_PRETTY_PRINT));
                 } else {
                     foreach ($data as $k => $v) {
-                        $output->writeln("$k: $v");
+                        $output->writeln("{$k}: {$v}");
                     }
                 }
 

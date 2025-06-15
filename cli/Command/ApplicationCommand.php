@@ -63,8 +63,9 @@ class ApplicationCommand extends Command
             case 'list':
                 $app = new Application();
                 $apps = $app->listingQuery()->fetchAll();
+
                 if ($format === 'json') {
-                    $output->writeln(json_encode($apps, JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode($apps, \JSON_PRETTY_PRINT));
                 } else {
                     foreach ($apps as $row) {
                         $output->writeln(implode(' | ', $row));
@@ -81,13 +82,14 @@ class ApplicationCommand extends Command
                     return Command::FAILURE;
                 }
 
-                $app = new Application((int)$id);
+                $app = new Application((int) $id);
                 $data = $app->getData();
+
                 if ($format === 'json') {
-                    $output->writeln(json_encode($data, JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode($data, \JSON_PRETTY_PRINT));
                 } else {
                     foreach ($data as $k => $v) {
-                        $output->writeln("$k: $v");
+                        $output->writeln("{$k}: {$v}");
                     }
                 }
 
