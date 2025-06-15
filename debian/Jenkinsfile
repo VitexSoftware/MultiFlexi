@@ -71,7 +71,17 @@ distributions.each {
                     sh 'echo "deb [trusted=yes] file://///$WORKSPACE/dist/debian/ ./" | sudo tee /etc/apt/sources.list.d/local.list'
                     sh 'sudo apt-get update --allow-releaseinfo-change'
                     sh 'echo "INSTALATION"'
-                    artifacts.each { deb_file ->
+                    // Ensure multiflexi-sqlite is first in the list
+                    def sorted_artifacts = artifacts.sort { a, b ->
+                        if (a.startsWith('multiflexi-sqlite')) {
+                            return -1
+                        } else if (b.startsWith('multiflexi-sqlite')) {
+                            return 1
+                        } else {
+                            return 0
+                        }
+                    }
+                    sorted_artifacts.each { deb_file ->
                         if (deb_file.endsWith('.deb') && !deb_file.startsWith('multiflexi-mysql')) {
                             sh 'echo -e "${GREEN} installing ' + deb_file + ' on `lsb_release -sc` ${ENDCOLOR} "'
                             sh 'sudo DEBIAN_FRONTEND=noninteractive DEBCONF_DEBUG=' + debconf_debug + ' apt-get -y install $WORKSPACE/dist/debian/' + deb_file
