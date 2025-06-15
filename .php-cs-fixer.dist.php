@@ -98,6 +98,7 @@ $config->getFinder()
         __DIR__.'/.php-cs-fixer.dist.php',
     ])
     ->in('db')
+    ->in('cli')
     ->in('lib')
     ->in('src')
     ->in('tests');

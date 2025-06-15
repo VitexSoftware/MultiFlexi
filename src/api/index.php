@@ -96,7 +96,7 @@ $errorMiddleware = $container->get(ErrorMiddleware::class);
 // route11 → (unnamed) → /
 
 $app->add(new \Tuupola\Middleware\HttpBasicAuthentication([
-    'relaxed' => ['localhost','multiflexi.local'],
+    'relaxed' => ['localhost', 'multiflexi.local'],
     //            'path' => ['/EASE/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/apps/', $path . '/apps', $path . '/users'],
     //            "ignore" => [$path . '/', $path . '/ping', $path . '/authorize'],
     //            'path' => '/',
@@ -122,7 +122,6 @@ $app->add(new \Dyorg\TokenAuthentication([
         return (bool) mt_rand(0, 1);
     },
 ]));
-
 
 $app->get($basePath, static function (Request $request, Response $response, $args) {
     $response->getBody()->write('MultiFlexi Api Root');
