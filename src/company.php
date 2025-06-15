@@ -78,11 +78,11 @@ foreach ($jobs as $job) {
                     new \Ease\Html\ImgTag('appimage.php?uuid='.$job['uuid'], $job['appname'], ['height' => 50, 'title' => $job['appname']]),
                     '&nbsp;',
                     // Přidejte styl pro nezalamování názvu aplikace
-                    new \Ease\Html\SpanTag($job['appname'], ['style' => 'white-space: nowrap;'])
+                    new \Ease\Html\SpanTag($job['appname'], ['style' => 'white-space: nowrap;']),
                 ],
-                ['style' => 'white-space: nowrap;']
-            )
-        ]
+                ['style' => 'white-space: nowrap;'],
+            ),
+        ],
     );
     unset($job['appname'], $job['runtemplate_id'], $job['app_id']);
 

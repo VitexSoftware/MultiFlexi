@@ -60,6 +60,7 @@
             "MultiFlexi\\Executor\\": "src/MultiFlexi/Executor",
             "MultiFlexi\\Api\\Auth\\": "src/MultiFlexi/Api/Auth",
             "MultiFlexi\\Api\\Server\\": "src/MultiFlexi/Api/Server",
+            "MultiFlexi\\Cli\\Command\\": "cli/Command",
             "MultiFlexi\\CredentialType\\": "src/MultiFlexi/CredentialType"
         }
     },

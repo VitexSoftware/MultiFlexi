@@ -29,13 +29,12 @@ class BasicAuthenticator extends Authenticator
 
     public function __invoke(\Psr\Http\Message\ServerRequestInterface &$request, \Dyorg\TokenAuthentication\TokenSearch $tokenSearch)
     {
-        
         $prober = \Ease\Shared::user(null, '\MultiFlexi\User');
 
         if ($prober->isLogged()) {
             return true;
         }
-        
+
         $userInfo = $request->getUri()->getUserInfo();
 
         if (strstr($userInfo, ':')) {

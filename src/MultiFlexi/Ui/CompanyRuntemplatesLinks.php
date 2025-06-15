@@ -52,9 +52,10 @@ class CompanyRuntemplatesLinks extends \Ease\Html\DivTag
 
     public function count(): int
     {
-        if (isset($this->pageParts[0]) && is_object($this->pageParts[0]) && method_exists($this->pageParts[0], 'getItemsCount')) {
+        if (isset($this->pageParts[0]) && \is_object($this->pageParts[0]) && method_exists($this->pageParts[0], 'getItemsCount')) {
             return $this->pageParts[0]->getItemsCount();
         }
+
         return 0;
     }
 }
