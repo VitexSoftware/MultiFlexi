@@ -47,6 +47,10 @@ probeapp: ## Run database seeds
 autoload: ## Run composer autoload
 	composer update
 
+.PHONY: appstatus
+appstatus: ## Show application status
+	./cli.sh appstatus
+
 demodata:
 	cd src ; ../vendor/bin/phinx seed:run -c ../phinx-adapter.php ; cd ..
 
