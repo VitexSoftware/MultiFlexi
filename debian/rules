@@ -15,6 +15,7 @@ override_dh_install:
 	mkdir -p debian/tmp/
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/conf/composer.json |sponge debian/tmp/composer.json
 	dh_install
+	sed -i "s|require_once __DIR__.'/../vendor/autoload.php';|require_once '/var/lib/composer/multiflexi/autoload.php';|" debian/multiflexi/usr/lib/multiflexi/multiflexi-cli.php
 	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multiflexi/g' debian/multiflexi/usr/share/multiflexi/init.php
 	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multiflexi/g' debian/multiflexi*/usr/lib/multiflexi/*.php
 	sed -i -e 's/\.\.\/\.env/\/etc\/multiflexi\/\multiflexi\.env/g' debian/multiflex*/usr/lib/multiflexi/*.php
@@ -48,4 +49,3 @@ override_dh_install:
 	sed -i "18i require_once '/usr/share/php/JsonSchema/autoload.php';" debian/multiflexi/usr/lib/multiflexi/MultiFlexi/Application.php
 	sed -i "s|__DIR__\.'/../../lib/multiflexi.app.schema.json'|'/usr/lib/multiflexi/multiflexi.app.schema.json'|g" debian/multiflexi/usr/lib/multiflexi/MultiFlexi/Application.php
 	# Fix autoload include for multiflexi-cli.php only (precise replacement)
-	sed -i "s|require_once __DIR__.'/../vendor/autoload.php';|require_once '/var/lib/composer/multiflexi/autoload.php';|" debian/multiflexi/usr/lib/multiflexi/multiflexi-cli.php
