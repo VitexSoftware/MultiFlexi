@@ -28,6 +28,7 @@ use MultiFlexi\Cli\Command\TokenCommand;
 use MultiFlexi\Cli\Command\UserCommand;
 use MultiFlexi\Cli\Command\CredentialTypeCommand;
 use MultiFlexi\Cli\Command\DescribeCommand;
+use MultiFlexi\Cli\Command\AppStatusCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\CompleteCommand;
 
@@ -63,4 +64,5 @@ $application->add(new ApplicationCommand());
 $application->add(new CredentialTypeCommand());
 $application->add(new DescribeCommand());
 $application->add(new CompleteCommand());
+$application->add(new AppStatusCommand());
 $application->run();

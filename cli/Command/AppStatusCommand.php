@@ -25,7 +25,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class AppStatus extends Command
+class AppStatusCommand extends Command
 {
     protected function configure(): void
     {
