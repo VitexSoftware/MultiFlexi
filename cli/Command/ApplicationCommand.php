@@ -75,24 +75,22 @@ class ApplicationCommand extends Command
                 return Command::SUCCESS;
             case 'get':
                 $id = $input->getOption('id');
-
-                if (empty($id)) {
-                    $output->writeln('<error>Missing --id for application get</error>');
-
+                $uuid = $input->getOption('uuid');
+                if (empty($id) && empty($uuid)) {
+                    $output->writeln('<error>Missing --id or --uuid for application get</error>');
                     return Command::FAILURE;
                 }
-
-                $app = new Application((int) $id);
-                $data = $app->getData();
-
-                if ($format === 'json') {
-                    $output->writeln(json_encode($data, \JSON_PRETTY_PRINT));
-                } else {
-                    foreach ($data as $k => $v) {
-                        $output->writeln("{$k}: {$v}");
+                if (!empty($uuid)) {
+                    $app = new \MultiFlexi\Application();
+                    $found = $app->listingQuery()->where(['uuid' => $uuid])->fetch();
+                    if (!$found) {
+                        $output->writeln('<error>No application found with given UUID</error>');
+                        return Command::FAILURE;
                     }
+                    $id = $found['id'];
                 }
-
+                $app = new \MultiFlexi\Application((int)$id);
+                $output->writeln(json_encode($app->getData(), JSON_PRETTY_PRINT));
                 return Command::SUCCESS;
             case 'create':
                 $data = [];
@@ -119,11 +117,19 @@ class ApplicationCommand extends Command
                 return Command::SUCCESS;
             case 'update':
                 $id = $input->getOption('id');
-
-                if (empty($id)) {
-                    $output->writeln('<error>Missing --id for application update</error>');
-
+                $uuid = $input->getOption('uuid');
+                if (empty($id) && empty($uuid)) {
+                    $output->writeln('<error>Missing --id or --uuid for application update</error>');
                     return Command::FAILURE;
+                }
+                if (!empty($uuid)) {
+                    $app = new \MultiFlexi\Application();
+                    $found = $app->listingQuery()->where(['uuid' => $uuid])->fetch();
+                    if (!$found) {
+                        $output->writeln('<error>No application found with given UUID</error>');
+                        return Command::FAILURE;
+                    }
+                    $id = $found['id'];
                 }
 
                 $data = [];

@@ -26,9 +26,15 @@ use MultiFlexi\Cli\Command\JobCommand;
 use MultiFlexi\Cli\Command\RunTemplateCommand;
 use MultiFlexi\Cli\Command\TokenCommand;
 use MultiFlexi\Cli\Command\UserCommand;
+use MultiFlexi\Cli\Command\CredentialTypeCommand;
 use Symfony\Component\Console\Application;
 
-Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], '../.env');
+$globalOptions = getopt('e::', ['environment::']);
+
+Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], 
+    \array_key_exists('environment', $globalOptions) ? $globalOptions['environment'] : (\array_key_exists('e', $globalOptions) ? $globalOptions['e'] : '../.env'),
+);
+
 $loggers = ['syslog', '\MultiFlexi\LogToSQL', 'console'];
 
 if (Shared::cfg('ZABBIX_SERVER') && Shared::cfg('ZABBIX_HOST') && class_exists('\MultiFlexi\LogToZabbix')) {
@@ -52,4 +58,5 @@ $application->add(new TokenCommand());
 $application->add(new RunTemplateCommand());
 $application->add(new UserCommand());
 $application->add(new ApplicationCommand());
+$application->add(new CredentialTypeCommand());
 $application->run();
