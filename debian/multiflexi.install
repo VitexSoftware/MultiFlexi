@@ -13,7 +13,6 @@ debian/tmp/composer.json                  usr/lib/multiflexi
 debian/conf/phinx-adapter.php	          usr/lib/multiflexi
 src/MultiFlexi/*.php                      usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Env/*.php                  usr/lib/multiflexi/MultiFlexi/Env/
-src/MultiFlexi/Command/*.php              usr/lib/multiflexi/MultiFlexi/Command/
 src/MultiFlexi/Executor/Native.php        usr/lib/multiflexi/MultiFlexi/Executor
 src/MultiFlexi/CredentialType/*.php       usr/lib/multiflexi/MultiFlexi/CredentialType/
 
@@ -47,3 +46,4 @@ src/MultiFlexi/Ui/Form/Office365.php   usr/lib/multiflexi/MultiFlexi/Ui/Form/
 src/MultiFlexi/Ui/Form/SQLServer.php   usr/lib/multiflexi/MultiFlexi/Ui/Form/
 src/MultiFlexi/Ui/Form/FioBank.php     usr/lib/multiflexi/MultiFlexi/Ui/Form/
 cli/multiflexi-cli.php                 usr/lib/multiflexi/
+cli/Command/*.php     		       usr/lib/multiflexi/MultiFlexi/Command/

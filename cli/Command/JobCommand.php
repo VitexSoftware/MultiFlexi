@@ -15,36 +15,38 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Cli\Command;
 
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\InputArgument;
 use MultiFlexi\Job;
-use DateTime;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Description of Job.
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class JobCommand extends Command {
-
+class JobCommand extends Command
+{
     protected static $defaultName = 'job';
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct(self::$defaultName);
     }
 
     #[\Override]
-    public function listing(): array {
+    public function listing(): array
+    {
         $engine = new self();
 
         return $engine->listingQuery()->select([
-                    'id',
-                ])->fetchAll();
+            'id',
+        ])->fetchAll();
     }
 
-    protected function configure(): void {
+    protected function configure(): void
+    {
         $this
             ->setName('job')
             ->setDescription('Job operations')
@@ -61,7 +63,8 @@ class JobCommand extends Command {
         // Add more options as needed
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
         $format = strtolower($input->getOption('format'));
         $action = strtolower($input->getArgument('action'));
 
@@ -69,8 +72,9 @@ class JobCommand extends Command {
             case 'list':
                 $job = new Job();
                 $jobs = $job->listingQuery()->fetchAll();
+
                 if ($format === 'json') {
-                    $output->writeln(json_encode($jobs, JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode($jobs, \JSON_PRETTY_PRINT));
                 } else {
                     foreach ($jobs as $row) {
                         $output->writeln(implode(' | ', $row));
@@ -87,13 +91,14 @@ class JobCommand extends Command {
                     return Command::FAILURE;
                 }
 
-                $job = new Job((int)$id);
+                $job = new Job((int) $id);
                 $data = $job->getData();
+
                 if ($format === 'json') {
-                    $output->writeln(json_encode($data, JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode($data, \JSON_PRETTY_PRINT));
                 } else {
                     foreach ($data as $k => $v) {
-                        $output->writeln("$k: $v");
+                        $output->writeln("{$k}: {$v}");
                     }
                 }
 
@@ -109,7 +114,7 @@ class JobCommand extends Command {
                 }
 
                 $env = new \MultiFlexi\ConfigFields('Job Env');
-                $scheduledDT = new DateTime($scheduled);
+                $scheduledDT = new \DateTime($scheduled);
                 $executor = $input->getOption('executor') ?? 'Native';
                 $scheduleType = $input->getOption('schedule_type') ?? 'adhoc';
                 $job = new Job();

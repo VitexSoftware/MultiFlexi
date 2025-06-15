@@ -15,11 +15,11 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Cli\Command;
 
+use MultiFlexi\Company;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use MultiFlexi\Company;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Description of CompanyCommand.
@@ -58,8 +58,9 @@ class CompanyCommand extends Command
             case 'list':
                 $company = new Company();
                 $companies = $company->listingQuery()->fetchAll();
+
                 if ($format === 'json') {
-                    $output->writeln(json_encode($companies, JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode($companies, \JSON_PRETTY_PRINT));
                 } else {
                     foreach ($companies as $row) {
                         $output->writeln(implode(' | ', $row));
@@ -76,13 +77,14 @@ class CompanyCommand extends Command
                     return Command::FAILURE;
                 }
 
-                $company = new Company((int)$id);
+                $company = new Company((int) $id);
                 $data = $company->getData();
+
                 if ($format === 'json') {
-                    $output->writeln(json_encode($data, JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode($data, \JSON_PRETTY_PRINT));
                 } else {
                     foreach ($data as $k => $v) {
-                        $output->writeln("$k: $v");
+                        $output->writeln("{$k}: {$v}");
                     }
                 }
 

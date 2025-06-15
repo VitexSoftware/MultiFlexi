@@ -26,7 +26,6 @@ use PHPUnit\Framework\TestCase;
 class CredentialTest extends TestCase
 {
     private Credential $credential;
-
     private \Ease\SQL\PDO|PHPUnit\Framework\MockObject\MockObject $dbConnection;
 
     protected function setUp(): void

@@ -15,11 +15,11 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Cli\Command;
 
+use MultiFlexi\RunTemplate;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use MultiFlexi\RunTemplate;
 
 /**
  * Description of RunTemplateCommand.
@@ -59,8 +59,9 @@ class RunTemplateCommand extends Command
             case 'list':
                 $rt = new RunTemplate();
                 $rts = $rt->listingQuery()->fetchAll();
+
                 if ($format === 'json') {
-                    $output->writeln(json_encode($rts, JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode($rts, \JSON_PRETTY_PRINT));
                 } else {
                     foreach ($rts as $row) {
                         $output->writeln(implode(' | ', $row));
@@ -79,11 +80,12 @@ class RunTemplateCommand extends Command
 
                 $rt = new RunTemplate((int) $id);
                 $data = $rt->getData();
+
                 if ($format === 'json') {
-                    $output->writeln(json_encode($data, JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode($data, \JSON_PRETTY_PRINT));
                 } else {
                     foreach ($data as $k => $v) {
-                        $output->writeln("$k: $v");
+                        $output->writeln("{$k}: {$v}");
                     }
                 }
 

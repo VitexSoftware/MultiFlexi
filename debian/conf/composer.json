@@ -35,10 +35,10 @@
       "MultiFlexi\\Pohoda\\": "MultiFlexi/Pohoda",
       "MultiFlexi\\Zabbix\\": "MultiFlexi/Zabbix",
       "MultiFlexi\\Action\\": "MultiFlexi/Action",
-      "MultiFlexi\\Command\\": "MultiFlexi/Command",
       "MultiFlexi\\Ui\\Form\\": "MultiFlexi/Ui/Form",
       "MultiFlexi\\Executor\\": "MultiFlexi/Executor",
       "MultiFlexi\\AbraFlexi\\": "MultiFlexi/AbraFlexi",
+      "MultiFlexi\\Cli\\Command\\": "MultiFlexi/Command",
       "MultiFlexi\\CredentialType\\": "MultiFlexi/CredentialType",
       "MultiFlexi\\Zabbix\\Request\\": "MultiFlexi/Zabbix/Request",
       "MultiFlexi\\Zabbix\\Exception\\": "MultiFlexi/Zabbix/Exception"
