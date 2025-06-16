@@ -103,7 +103,14 @@ distributions.each {
                         'multiflexi-zabbix'
                     ]
                     installOrder.each { pkgPrefix ->
-                        def debFile = sorted_artifacts.find { it.toString().startsWith(pkgPrefix) && it.toString().endsWith('.deb') }
+                        def debFile = null
+                        for (item in sorted_artifacts) {
+                            def itemStr = item.toString()
+                            if (itemStr.startsWith(pkgPrefix) && itemStr.endsWith('.deb')) {
+                                debFile = item
+                                break
+                            }
+                        }
                         if (debFile) {
                             def debFileStr = debFile.toString()
                             sh 'echo -e "${GREEN} installing ' + debFileStr + ' on `lsb_release -sc` ${ENDCOLOR} "'
