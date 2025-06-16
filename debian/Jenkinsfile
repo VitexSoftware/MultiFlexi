@@ -72,7 +72,7 @@ distributions.each {
                     sh 'sudo apt-get update --allow-releaseinfo-change'
                     sh 'echo "INSTALATION"'
                     // Ensure multiflexi-sqlite is first in the list
-                    def sorted_artifacts = artifacts.sort { a, b ->
+                    def sorted_artifacts = artifacts.toList().sort { a, b ->
                         def aStr = a.toString()
                         def bStr = b.toString()
                         if (aStr.startsWith('multiflexi-sqlite')) {
