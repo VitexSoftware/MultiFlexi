@@ -72,27 +72,6 @@ distributions.each {
                     sh 'sudo apt-get update --allow-releaseinfo-change'
                     sh 'echo "INSTALATION"'
                     // Ensure multiflexi-sqlite is first in the list
-                    def sorted_artifacts = artifacts.toList().sort { a, b ->
-                        def aStr = a.toString()
-                        def bStr = b.toString()
-                        if (aStr.startsWith('multiflexi-sqlite')) {
-                            return -1
-                        } else if (bStr.startsWith('multiflexi-sqlite')) {
-                            return 1
-                        } else {
-                            return 0
-                        }
-                    }
-                    sorted_artifacts.each { deb_file ->
-                        def debFileStr = deb_file.toString()
-                        if (debFileStr.endsWith('.deb') && !debFileStr.startsWith('multiflexi-mysql')) {
-                            sh 'echo -e "${GREEN} installing ' + debFileStr + ' on `lsb_release -sc` ${ENDCOLOR} "'
-                            sh 'sudo DEBIAN_FRONTEND=noninteractive DEBCONF_DEBUG=' + debconf_debug + ' apt-get -y install $WORKSPACE/dist/debian/' + debFileStr
-                        } else if (debFileStr.startsWith('multiflexi-mysql')) {
-                            echo "Skipping installation of multiflexi-mysql: MySQL server is not available in build container."
-                        }
-                    }
-                    // Install packages in a specific order, skipping multiflexi-mysql
                     def installOrder = [
                         'multiflexi-sqlite',
                         'multiflexi',
@@ -102,22 +81,25 @@ distributions.each {
                         'multiflexi-raiffeisenbank',
                         'multiflexi-zabbix'
                     ]
+
+                    // Install packages in a specific order, skipping multiflexi-mysql
                     installOrder.each { pkgPrefix ->
                         def debFile = null
                         for (item in sorted_artifacts) {
                             def itemStr = item.toString()
                             if (itemStr.startsWith(pkgPrefix) && itemStr.endsWith('.deb')) {
-                                debFile = item
+                                debFile = itemStr
                                 break
                             }
                         }
                         if (debFile) {
-                            def debFileStr = debFile.toString()
-                            sh 'echo -e "${GREEN} installing ' + debFileStr + ' on `lsb_release -sc` ${ENDCOLOR} "'
-                            sh 'sudo DEBIAN_FRONTEND=noninteractive DEBCONF_DEBUG=' + debconf_debug + ' apt-get -y install $WORKSPACE/dist/debian/' + debFileStr
+                            sh 'echo -e "${GREEN} installing ' + debFile + ' on `lsb_release -sc` ${ENDCOLOR} "'
+                            sh 'sudo DEBIAN_FRONTEND=noninteractive DEBCONF_DEBUG=' + debconf_debug + ' apt-get -y install $WORKSPACE/dist/debian/' + debFile
                         }
                     }
+
                     sh 'multiflexi-cli appstatus'
+
                 }
             }
             stage('Copy artifacts ' + distribution ) {
