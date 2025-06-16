@@ -31,6 +31,7 @@ Actions:
 - update: Update an existing job (requires --id).
 
 Examples:
+
 .. code-block:: bash
 
     multiflexi-cli job list
@@ -54,6 +55,7 @@ Actions:
 - update: Update an existing company (requires --id).
 
 Examples:
+
 .. code-block:: bash
 
     multiflexi-cli company list
