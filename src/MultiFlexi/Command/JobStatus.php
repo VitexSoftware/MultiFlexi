@@ -39,10 +39,6 @@ class JobStatus extends Command
     {
         $engine = new \MultiFlexi\Engine();
         $pdo = $engine->getPdo();
-        $database = $pdo->getAttribute(\PDO::ATTR_DRIVER_NAME).' '.
-                $pdo->getAttribute(\PDO::ATTR_CONNECTION_STATUS).' '.
-                $pdo->getAttribute(\PDO::ATTR_SERVER_INFO).' '.
-                $pdo->getAttribute(\PDO::ATTR_SERVER_VERSION);
 
         $queeLength = (new \MultiFlexi\Scheduler())->listingQuery()->count();
 

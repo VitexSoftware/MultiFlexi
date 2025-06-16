@@ -15,11 +15,11 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Cli\Command;
 
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\InputArgument;
 use MultiFlexi\CredentialType as CredentialTypeModel;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Description of CredentialType.
@@ -46,77 +46,104 @@ class CredentialTypeCommand extends Command
     {
         $format = strtolower($input->getOption('format'));
         $action = strtolower($input->getArgument('action'));
+
         switch ($action) {
             case 'list':
                 $credType = new CredentialTypeModel();
                 $types = $credType->listingQuery()->fetchAll();
+
                 if ($format === 'json') {
-                    $output->writeln(json_encode($types, JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode($types, \JSON_PRETTY_PRINT));
                 } else {
                     foreach ($types as $row) {
                         $output->writeln(implode(' | ', $row));
                     }
                 }
+
                 return Command::SUCCESS;
             case 'get':
                 $id = $input->getOption('id');
                 $uuid = $input->getOption('uuid');
+
                 if (empty($id) && empty($uuid)) {
                     $output->writeln('<error>Missing --id or --uuid for credtype get</error>');
+
                     return Command::FAILURE;
                 }
+
                 if (!empty($uuid)) {
                     $credType = new CredentialTypeModel();
                     $found = $credType->listingQuery()->where(['uuid' => $uuid])->fetch();
+
                     if (!$found) {
                         $output->writeln('<error>No credential type found with given UUID</error>');
+
                         return Command::FAILURE;
                     }
+
                     $id = $found['id'];
                 }
-                $credType = new CredentialTypeModel((int)$id);
+
+                $credType = new CredentialTypeModel((int) $id);
                 $data = $credType->getData();
+
                 if ($format === 'json') {
-                    $output->writeln(json_encode($data, JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode($data, \JSON_PRETTY_PRINT));
                 } else {
                     foreach ($data as $k => $v) {
-                        $output->writeln("$k: $v");
+                        $output->writeln("{$k}: {$v}");
                     }
                 }
+
                 return Command::SUCCESS;
             case 'update':
                 $id = $input->getOption('id');
                 $uuid = $input->getOption('uuid');
+
                 if (empty($id) && empty($uuid)) {
                     $output->writeln('<error>Missing --id or --uuid for credtype update</error>');
+
                     return Command::FAILURE;
                 }
+
                 if (!empty($uuid)) {
                     $credType = new CredentialTypeModel();
                     $found = $credType->listingQuery()->where(['uuid' => $uuid])->fetch();
+
                     if (!$found) {
                         $output->writeln('<error>No credential type found with given UUID</error>');
+
                         return Command::FAILURE;
                     }
+
                     $id = $found['id'];
                 }
+
                 $data = [];
+
                 foreach (['name'] as $field) {
                     $val = $input->getOption($field);
+
                     if ($val !== null) {
                         $data[$field] = $val;
                     }
                 }
+
                 if (empty($data)) {
                     $output->writeln('<error>No fields to update</error>');
+
                     return Command::FAILURE;
                 }
-                $credType = new CredentialTypeModel((int)$id);
+
+                $credType = new CredentialTypeModel((int) $id);
                 $credType->updateToSQL($data, ['id' => $id]);
-                $output->writeln(json_encode(['updated' => true], JSON_PRETTY_PRINT));
+                $output->writeln(json_encode(['updated' => true], \JSON_PRETTY_PRINT));
+
                 return Command::SUCCESS;
+
             default:
-                $output->writeln("<error>Unknown action: $action</error>");
+                $output->writeln("<error>Unknown action: {$action}</error>");
+
                 return Command::FAILURE;
         }
     }
