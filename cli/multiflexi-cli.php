@@ -21,20 +21,21 @@ require_once __DIR__.'/../vendor/autoload.php';
 use Ease\Anonym;
 use Ease\Shared;
 use MultiFlexi\Cli\Command\ApplicationCommand;
+use MultiFlexi\Cli\Command\AppStatusCommand;
 use MultiFlexi\Cli\Command\CompanyCommand;
+use MultiFlexi\Cli\Command\CredentialTypeCommand;
+use MultiFlexi\Cli\Command\DescribeCommand;
 use MultiFlexi\Cli\Command\JobCommand;
 use MultiFlexi\Cli\Command\RunTemplateCommand;
 use MultiFlexi\Cli\Command\TokenCommand;
 use MultiFlexi\Cli\Command\UserCommand;
-use MultiFlexi\Cli\Command\CredentialTypeCommand;
-use MultiFlexi\Cli\Command\DescribeCommand;
-use MultiFlexi\Cli\Command\AppStatusCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\CompleteCommand;
 
 $globalOptions = getopt('e::', ['environment::']);
 
-Shared::init(['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'], 
+Shared::init(
+    ['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'],
     \array_key_exists('environment', $globalOptions) ? $globalOptions['environment'] : (\array_key_exists('e', $globalOptions) ? $globalOptions['e'] : '../.env'),
 );
 

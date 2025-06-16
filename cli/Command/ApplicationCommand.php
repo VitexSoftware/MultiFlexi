@@ -76,21 +76,29 @@ class ApplicationCommand extends Command
             case 'get':
                 $id = $input->getOption('id');
                 $uuid = $input->getOption('uuid');
+
                 if (empty($id) && empty($uuid)) {
                     $output->writeln('<error>Missing --id or --uuid for application get</error>');
+
                     return Command::FAILURE;
                 }
+
                 if (!empty($uuid)) {
                     $app = new \MultiFlexi\Application();
                     $found = $app->listingQuery()->where(['uuid' => $uuid])->fetch();
+
                     if (!$found) {
                         $output->writeln('<error>No application found with given UUID</error>');
+
                         return Command::FAILURE;
                     }
+
                     $id = $found['id'];
                 }
-                $app = new \MultiFlexi\Application((int)$id);
-                $output->writeln(json_encode($app->getData(), JSON_PRETTY_PRINT));
+
+                $app = new \MultiFlexi\Application((int) $id);
+                $output->writeln(json_encode($app->getData(), \JSON_PRETTY_PRINT));
+
                 return Command::SUCCESS;
             case 'create':
                 $data = [];
@@ -118,17 +126,23 @@ class ApplicationCommand extends Command
             case 'update':
                 $id = $input->getOption('id');
                 $uuid = $input->getOption('uuid');
+
                 if (empty($id) && empty($uuid)) {
                     $output->writeln('<error>Missing --id or --uuid for application update</error>');
+
                     return Command::FAILURE;
                 }
+
                 if (!empty($uuid)) {
                     $app = new \MultiFlexi\Application();
                     $found = $app->listingQuery()->where(['uuid' => $uuid])->fetch();
+
                     if (!$found) {
                         $output->writeln('<error>No application found with given UUID</error>');
+
                         return Command::FAILURE;
                     }
+
                     $id = $found['id'];
                 }
 

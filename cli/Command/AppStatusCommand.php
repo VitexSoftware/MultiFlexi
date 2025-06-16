@@ -42,10 +42,17 @@ class AppStatusCommand extends Command
 
         $engine = new \MultiFlexi\Engine();
         $pdo = $engine->getPdo();
-        $database = $pdo->getAttribute(\PDO::ATTR_DRIVER_NAME).' '.
+
+        $driver = $pdo->getAttribute(\PDO::ATTR_DRIVER_NAME);
+
+        if ($driver === 'sqlite') {
+            $database = $driver;
+        } else {
+            $database = $pdo->getAttribute(\PDO::ATTR_DRIVER_NAME).' '.
                     $pdo->getAttribute(\PDO::ATTR_CONNECTION_STATUS).' '.
                     $pdo->getAttribute(\PDO::ATTR_SERVER_INFO).' '.
                     $pdo->getAttribute(\PDO::ATTR_SERVER_VERSION);
+        }
 
         $status = [
             'version' => Shared::appVersion(),
