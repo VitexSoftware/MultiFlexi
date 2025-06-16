@@ -5955,12 +5955,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/json-pointer.git",
-                "reference": "4e051256a53d963cb42d4344a1d9f9d53bdcd791"
+                "reference": "ad6146667eb8121445512773bbf1839356b1989b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/json-pointer/zipball/4e051256a53d963cb42d4344a1d9f9d53bdcd791",
-                "reference": "4e051256a53d963cb42d4344a1d9f9d53bdcd791",
+                "url": "https://api.github.com/repos/ergebnis/json-pointer/zipball/ad6146667eb8121445512773bbf1839356b1989b",
+                "reference": "ad6146667eb8121445512773bbf1839356b1989b",
                 "shasum": ""
             },
             "require": {
@@ -6021,7 +6021,7 @@
                 "security": "https://github.com/ergebnis/json-pointer/blob/main/.github/SECURITY.md",
                 "source": "https://github.com/ergebnis/json-pointer"
             },
-            "time": "2025-05-19T15:40:42+00:00"
+            "time": "2025-06-16T16:23:33+00:00"
         },
         {
             "name": "ergebnis/json-printer",
@@ -7559,12 +7559,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "e0b8cf476e55d36faa6ce10613470fc9a47e0135"
+                "reference": "2f596789214497614300b3260dcc9005c468a758"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/e0b8cf476e55d36faa6ce10613470fc9a47e0135",
-                "reference": "e0b8cf476e55d36faa6ce10613470fc9a47e0135",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/2f596789214497614300b3260dcc9005c468a758",
+                "reference": "2f596789214497614300b3260dcc9005c468a758",
                 "shasum": ""
             },
             "require": {
@@ -7611,7 +7611,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-16T11:15:25+00:00"
+            "time": "2025-06-16T14:37:38+00:00"
         },
         {
             "name": "sebastian/cli-parser",
