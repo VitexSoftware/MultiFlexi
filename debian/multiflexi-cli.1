@@ -1,0 +1,76 @@
+.TH MULTIFLEXI-CLI 1 "June 2025" "MultiFlexi" "User Commands"
+.SH NAME
+multiflexi-cli \- MultiFlexi command-line interface for application and job management
+.SH SYNOPSIS
+.B multiflexi-cli
+[\fICOMMAND\fR] [\fIACTION\fR] [\fIOPTIONS\fR]
+.SH DESCRIPTION
+.B multiflexi-cli
+is a command-line tool for managing MultiFlexi applications, jobs, users, tokens, companies, and more. It provides CRUD operations and status checks for all major MultiFlexi entities.
+
+.SH COMMANDS
+.TP
+.B application
+Manage applications (list, get, create, update, delete, import-json, export-json, remove-json)
+.TP
+.B job
+Manage jobs (list, get, create, update)
+.TP
+.B user
+Manage users (list, get, create, update, delete)
+.TP
+.B token
+Manage tokens (list, get, create, generate, update)
+.TP
+.B company
+Manage companies (list, get, create, update)
+.TP
+.B runtemplate
+Manage runtemplates (list, get, create, update, delete)
+.TP
+.B credtype
+Credential type operations (list, get, update)
+.TP
+.B appstatus
+Prints App Status
+.TP
+.B describe
+Show all available commands and their parameters in JSON or YAML
+.TP
+.B completion
+Dump the shell completion script
+
+.SH OPTIONS
+Most commands support:
+.TP
+.BR -f ", " --format
+Output format: text or json (default: text)
+.TP
+.BR --id
+Specify record by numeric ID
+.TP
+.BR --uuid
+Specify record by UUID (where supported)
+.TP
+.BR --help
+Show help for a command
+
+.SH EXAMPLES
+.TP
+List all applications in JSON:
+.B multiflexi-cli application list -f json
+.TP
+Get user by login:
+.B multiflexi-cli user get --login demo
+.TP
+Create a new token for user ID 3:
+.B multiflexi-cli token create --user 3 --token sometoken
+.TP
+Show available commands and options:
+.B multiflexi-cli describe
+
+.SH AUTHOR
+Vítězslav Dvořák <info@vitexsoftware.cz>
+
+.SH SEE ALSO
+.BR multiflexi (1)
