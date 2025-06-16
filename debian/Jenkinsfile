@@ -82,7 +82,7 @@ distributions.each {
                         'multiflexi-zabbix'
                     ]
 
-                    // Install packages in a specific order, skipping multiflexi-mysql
+                    def sorted_artifacts = artifacts.toList()
                     installOrder.each { pkgPrefix ->
                         def debFile = null
                         for (item in sorted_artifacts) {
