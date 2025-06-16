@@ -46,7 +46,7 @@ class AppStatusCommand extends Command
         $driver = $pdo->getAttribute(\PDO::ATTR_DRIVER_NAME);
 
         if ($driver === 'sqlite') {
-            $database = $driver;
+            $database = $driver.' '. \Ease\Shared::cfg('DB_DATABASE');
         } else {
             $database = $pdo->getAttribute(\PDO::ATTR_DRIVER_NAME).' '.
                     $pdo->getAttribute(\PDO::ATTR_CONNECTION_STATUS).' '.
