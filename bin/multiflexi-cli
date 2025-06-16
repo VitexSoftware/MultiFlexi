@@ -1,2 +1,0 @@
-#!/bin/bash
-exec php -q /usr/lib/multiflexi/multiflexi-cli.php "$0" "$@"

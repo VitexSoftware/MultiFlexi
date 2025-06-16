@@ -32,11 +32,6 @@ use MultiFlexi\Cli\Command\UserCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\CompleteCommand;
 
-if (isset($argv[1]) && basename($argv[1]) !== basename(__FILE__)) {
-    array_shift($argv);
-    $_SERVER['argv'] = $argv;
-}
-
 $globalOptions = getopt('e::', ['environment::']);
 
 Shared::init(
@@ -60,10 +55,6 @@ if (Shared::cfg('APP_DEBUG') === 'true') {
 Shared::user(new Anonym());
 
 $application = new Application(Shared::appName(), Shared::appVersion());
-
-$application->setName('multiflexi-cli');
-$application->setDefaultCommand('list', true);
-$application->setAutoExit(true);
 
 $application->add(new JobCommand());
 $application->add(new CompanyCommand());
