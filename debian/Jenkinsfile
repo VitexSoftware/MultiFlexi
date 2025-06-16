@@ -98,6 +98,11 @@ distributions.each {
                         }
                     }
 
+                    // Fix permissions for SQLite database before running tests
+                    sh 'sudo chown -R $(id -u):$(id -g) /var/lib/dbconfig-common/sqlite3/multiflexi || true'
+                    sh 'sudo chmod 750 /var/lib/dbconfig-common/sqlite3/multiflexi || true'
+                    sh 'sudo chmod 640 /var/lib/dbconfig-common/sqlite3/multiflexi/multiflexi || true'
+
                     sh 'cat /etc/multiflexi/multiflexi.env'
                     sh 'ls -la /var/lib/dbconfig-common/sqlite3/multiflexi/'
                     sh 'multiflexi-cli appstatus'
