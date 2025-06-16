@@ -98,6 +98,7 @@ distributions.each {
                         }
                     }
 
+                    sh 'cat /etc/multiflexi/multiflexi.env'
                     sh 'multiflexi-cli appstatus'
 
                 }
