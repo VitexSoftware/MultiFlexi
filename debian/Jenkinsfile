@@ -99,6 +99,7 @@ distributions.each {
                     }
 
                     sh 'cat /etc/multiflexi/multiflexi.env'
+                    sh 'ls -la /var/lib/dbconfig-common/sqlite3/multiflexi/'
                     sh 'multiflexi-cli appstatus'
 
                 }
