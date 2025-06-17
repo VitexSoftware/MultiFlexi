@@ -55,12 +55,14 @@ class RunTemplateCommand extends Command
     {
         $configs = $input->getOption('config') ?? [];
         $result = [];
+
         foreach ($configs as $item) {
-            if (strpos($item, '=') !== false) {
+            if (str_contains($item, '=')) {
                 [$key, $value] = explode('=', $item, 2);
                 $result[$key] = $value;
             }
         }
+
         return $result;
     }
 
@@ -125,14 +127,29 @@ class RunTemplateCommand extends Command
                 $rt->takeData($data);
                 $rtId = $rt->saveToSQL();
 
-                // Handle config fields
+                // Handle config fields (update/add only specified keys)
                 $configFields = $this->parseConfigOptions($input);
+
                 if (!empty($configFields)) {
                     $configurator = new \MultiFlexi\Configuration();
                     $configurator->setDataValue('runtemplate_id', $rtId);
                     $configurator->setDataValue('app_id', $data['app_id']);
                     $configurator->setDataValue('company_id', $data['company_id']);
-                    $configurator->saveToSQL($configFields);
+
+                    foreach ($configFields as $key => $value) {
+                        // Upsert each config key individually
+                        $configurator->deleteFromSQL([
+                            'runtemplate_id' => $rtId,
+                            'name' => $key,
+                        ]);
+                        $configurator->insertToSQL([
+                            'runtemplate_id' => $rtId,
+                            'app_id' => $data['app_id'],
+                            'company_id' => $data['company_id'],
+                            'name' => $key,
+                            'value' => $value,
+                        ]);
+                    }
                 }
 
                 $output->writeln(json_encode(['runtemplate_id' => $rtId], \JSON_PRETTY_PRINT));
@@ -158,14 +175,15 @@ class RunTemplateCommand extends Command
                 }
 
                 $rt = new \MultiFlexi\RunTemplate((int) $id);
+
                 if (!empty($data)) {
                     $rt->updateToSQL($data, ['id' => $id]);
                 }
 
-                // Handle config fields (overwrite all previous config for this runtemplate)
+                // Handle config fields (update/add only specified keys)
                 $configFields = $this->parseConfigOptions($input);
+
                 if (!empty($configFields)) {
-                    // Get current app_id and company_id if not provided
                     $rtData = $rt->getData();
                     $appId = $data['app_id'] ?? $rtData['app_id'] ?? null;
                     $companyId = $data['company_id'] ?? $rtData['company_id'] ?? null;
@@ -173,7 +191,21 @@ class RunTemplateCommand extends Command
                     $configurator->setDataValue('runtemplate_id', $id);
                     $configurator->setDataValue('app_id', $appId);
                     $configurator->setDataValue('company_id', $companyId);
-                    $configurator->saveToSQL($configFields);
+
+                    foreach ($configFields as $key => $value) {
+                        // Upsert each config key individually
+                        $configurator->deleteFromSQL([
+                            'runtemplate_id' => $id,
+                            'name' => $key,
+                        ]);
+                        $configurator->insertToSQL([
+                            'runtemplate_id' => $id,
+                            'app_id' => $appId,
+                            'company_id' => $companyId,
+                            'name' => $key,
+                            'value' => $value,
+                        ]);
+                    }
                 }
 
                 $output->writeln(json_encode(['updated' => true], \JSON_PRETTY_PRINT));
