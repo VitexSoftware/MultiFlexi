@@ -46,8 +46,22 @@ class RunTemplateCommand extends Command
             ->addOption('app_id', null, InputOption::VALUE_REQUIRED, 'App ID')
             ->addOption('company_id', null, InputOption::VALUE_REQUIRED, 'Company ID')
             ->addOption('interv', null, InputOption::VALUE_REQUIRED, 'Interval code')
-            ->addOption('active', null, InputOption::VALUE_REQUIRED, 'Active');
+            ->addOption('active', null, InputOption::VALUE_REQUIRED, 'Active')
+            ->addOption('config', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Application config key=value (repeatable)');
         // Add more options as needed
+    }
+
+    protected function parseConfigOptions(InputInterface $input): array
+    {
+        $configs = $input->getOption('config') ?? [];
+        $result = [];
+        foreach ($configs as $item) {
+            if (strpos($item, '=') !== false) {
+                [$key, $value] = explode('=', $item, 2);
+                $result[$key] = $value;
+            }
+        }
+        return $result;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -110,6 +124,17 @@ class RunTemplateCommand extends Command
                 $rt = new \MultiFlexi\RunTemplate();
                 $rt->takeData($data);
                 $rtId = $rt->saveToSQL();
+
+                // Handle config fields
+                $configFields = $this->parseConfigOptions($input);
+                if (!empty($configFields)) {
+                    $configurator = new \MultiFlexi\Configuration();
+                    $configurator->setDataValue('runtemplate_id', $rtId);
+                    $configurator->setDataValue('app_id', $data['app_id']);
+                    $configurator->setDataValue('company_id', $data['company_id']);
+                    $configurator->saveToSQL($configFields);
+                }
+
                 $output->writeln(json_encode(['runtemplate_id' => $rtId], \JSON_PRETTY_PRINT));
 
                 return Command::SUCCESS;
@@ -132,14 +157,25 @@ class RunTemplateCommand extends Command
                     }
                 }
 
-                if (empty($data)) {
-                    $output->writeln('<error>No fields to update</error>');
-
-                    return Command::FAILURE;
+                $rt = new \MultiFlexi\RunTemplate((int) $id);
+                if (!empty($data)) {
+                    $rt->updateToSQL($data, ['id' => $id]);
                 }
 
-                $rt = new \MultiFlexi\RunTemplate((int) $id);
-                $rt->updateToSQL($data, ['id' => $id]);
+                // Handle config fields (overwrite all previous config for this runtemplate)
+                $configFields = $this->parseConfigOptions($input);
+                if (!empty($configFields)) {
+                    // Get current app_id and company_id if not provided
+                    $rtData = $rt->getData();
+                    $appId = $data['app_id'] ?? $rtData['app_id'] ?? null;
+                    $companyId = $data['company_id'] ?? $rtData['company_id'] ?? null;
+                    $configurator = new \MultiFlexi\Configuration();
+                    $configurator->setDataValue('runtemplate_id', $id);
+                    $configurator->setDataValue('app_id', $appId);
+                    $configurator->setDataValue('company_id', $companyId);
+                    $configurator->saveToSQL($configFields);
+                }
+
                 $output->writeln(json_encode(['updated' => true], \JSON_PRETTY_PRINT));
 
                 return Command::SUCCESS;
