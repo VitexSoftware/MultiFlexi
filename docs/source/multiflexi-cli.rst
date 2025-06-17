@@ -101,6 +101,7 @@ Manage company applications (list, get, create, update).
 - You can now use `--app_uuid` in addition to `--app_id` for filtering and referencing applications by UUID.
 
 Examples:
+
 .. code-block:: bash
 
     multiflexi-cli companyapp list
