@@ -152,7 +152,7 @@ class RunTemplateCommand extends Command
                     }
                 }
 
-                $output->writeln(json_encode(['runtemplate_id' => $rtId], \JSON_PRETTY_PRINT));
+                $output->writeln(json_encode(['runtemplate_id' => $rtId, 'created' => true], \JSON_PRETTY_PRINT));
 
                 return Command::SUCCESS;
             case 'update':
@@ -208,7 +208,7 @@ class RunTemplateCommand extends Command
                     }
                 }
 
-                $output->writeln(json_encode(['updated' => true], \JSON_PRETTY_PRINT));
+                $output->writeln(json_encode(['runtemplate_id' => $id, 'updated' => true], \JSON_PRETTY_PRINT));
 
                 return Command::SUCCESS;
             case 'delete':
@@ -222,7 +222,7 @@ class RunTemplateCommand extends Command
 
                 $rt = new \MultiFlexi\RunTemplate((int) $id);
                 $rt->deleteFromSQL();
-                $output->writeln(json_encode(['deleted' => true], \JSON_PRETTY_PRINT));
+                $output->writeln(json_encode(['runtemplate_id' => $id, 'deleted' => true], \JSON_PRETTY_PRINT));
 
                 return Command::SUCCESS;
 
