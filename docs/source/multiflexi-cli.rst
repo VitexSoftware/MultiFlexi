@@ -102,6 +102,7 @@ Manage company applications (list, get, create, update).
 
 Examples:
 
+
 .. code-block:: bash
 
     multiflexi-cli companyapp list
