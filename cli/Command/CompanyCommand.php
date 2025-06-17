@@ -45,8 +45,31 @@ class CompanyCommand extends Command
             ->addOption('id', null, InputOption::VALUE_REQUIRED, 'Company ID')
             ->addOption('name', null, InputOption::VALUE_REQUIRED, 'Company name')
             ->addOption('customer', null, InputOption::VALUE_REQUIRED, 'Customer')
-            ->addOption('server', null, InputOption::VALUE_REQUIRED, 'Server');
+            ->addOption('server', null, InputOption::VALUE_REQUIRED, 'Server')
+            ->addOption('enabled', null, InputOption::VALUE_REQUIRED, 'Enabled (true/false)')
+            ->addOption('settings', null, InputOption::VALUE_REQUIRED, 'Settings')
+            ->addOption('logo', null, InputOption::VALUE_REQUIRED, 'Logo')
+            ->addOption('ic', null, InputOption::VALUE_REQUIRED, 'IC')
+            ->addOption('company', null, InputOption::VALUE_REQUIRED, 'Company Code')
+            ->addOption('rw', null, InputOption::VALUE_REQUIRED, 'Write permissions (true/false)')
+            ->addOption('setup', null, InputOption::VALUE_REQUIRED, 'Setup (true/false)')
+            ->addOption('webhook', null, InputOption::VALUE_REQUIRED, 'Webhook ready (true/false)')
+            ->addOption('DatCreate', null, InputOption::VALUE_REQUIRED, 'Created date (date-time)')
+            ->addOption('DatUpdate', null, InputOption::VALUE_REQUIRED, 'Updated date (date-time)')
+            ->addOption('email', null, InputOption::VALUE_REQUIRED, 'Email')
+            ->addOption('code', null, InputOption::VALUE_REQUIRED, 'Code');
         // Add more options as needed
+    }
+
+    /**
+     * Convert string option to boolean if needed
+     */
+    protected function parseBoolOption($val)
+    {
+        if (is_bool($val)) return $val;
+        if (is_null($val)) return null;
+        $val = strtolower((string)$val);
+        return in_array($val, ['1', 'true', 'yes', 'on'], true);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -92,11 +115,16 @@ class CompanyCommand extends Command
             case 'create':
                 $data = [];
 
-                foreach (['name', 'customer', 'server'] as $field) {
+                foreach ([
+                    'name', 'customer', 'server', 'enabled', 'settings', 'logo', 'ic', 'company', 'rw', 'setup', 'webhook', 'DatCreate', 'DatUpdate', 'email', 'code'
+                ] as $field) {
                     $val = $input->getOption($field);
-
                     if ($val !== null) {
-                        $data[$field] = $val;
+                        if (in_array($field, ['enabled', 'rw', 'setup', 'webhook'])) {
+                            $data[$field] = $this->parseBoolOption($val);
+                        } else {
+                            $data[$field] = $val;
+                        }
                     }
                 }
 
@@ -123,11 +151,16 @@ class CompanyCommand extends Command
 
                 $data = [];
 
-                foreach (['name', 'customer', 'server'] as $field) {
+                foreach ([
+                    'name', 'customer', 'server', 'enabled', 'settings', 'logo', 'ic', 'company', 'rw', 'setup', 'webhook', 'DatCreate', 'DatUpdate', 'email', 'code'
+                ] as $field) {
                     $val = $input->getOption($field);
-
                     if ($val !== null) {
-                        $data[$field] = $val;
+                        if (in_array($field, ['enabled', 'rw', 'setup', 'webhook'])) {
+                            $data[$field] = $this->parseBoolOption($val);
+                        } else {
+                            $data[$field] = $val;
+                        }
                     }
                 }
 
