@@ -41,7 +41,7 @@ class CompanyCommand extends Command
         $this
             ->setDescription('Manage companies')
             ->addOption('format', 'f', InputOption::VALUE_OPTIONAL, 'The output format: text or json. Defaults to text.', 'text')
-            ->addArgument('action', InputArgument::REQUIRED, 'Action: list|get|create|update')
+            ->addArgument('action', InputArgument::REQUIRED, 'Action: list|get|create|update|remove')
             ->addOption('id', null, InputOption::VALUE_REQUIRED, 'Company ID')
             ->addOption('name', null, InputOption::VALUE_REQUIRED, 'Company name')
             ->addOption('customer', null, InputOption::VALUE_REQUIRED, 'Customer')
@@ -141,6 +141,16 @@ class CompanyCommand extends Command
                 $company->updateToSQL($data, ['id' => $id]);
                 $output->writeln(json_encode(['updated' => true], \JSON_PRETTY_PRINT));
 
+                return Command::SUCCESS;
+            case 'remove':
+                $id = $input->getOption('id');
+                if (empty($id)) {
+                    $output->writeln('<error>Missing --id for company remove</error>');
+                    return Command::FAILURE;
+                }
+                $company = new Company((int) $id);
+                $company->deleteFromSQL();
+                $output->writeln(json_encode(['company_id' => $id, 'removed' => true], \JSON_PRETTY_PRINT));
                 return Command::SUCCESS;
 
             default:
