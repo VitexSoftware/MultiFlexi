@@ -63,10 +63,42 @@ Examples:
     multiflexi-cli company create --name="Acme Corp" --customer="CustomerX"
     multiflexi-cli company update --id=1 --server="server.example.com"
 
+runtemplate
+----------
+
+Manage runtemplates (list, get, create, update, delete).
+
+.. code-block:: bash
+
+    multiflexi-cli runtemplate <action> [--id=ID] [--name=NAME] [--app_id=ID|UUID] [--company_id=ID] [--interv=CODE] [--active=0|1] [--config=KEY=VALUE ...]
+
+Actions:
+- list:   List all runtemplates.
+- get:    Get runtemplate details by ID.
+- create: Create a new runtemplate (requires --name, --app_id, --company_id).
+- update: Update an existing runtemplate (requires --id).
+- delete: Delete a runtemplate (requires --id).
+
+New Features:
+^^^^^^^^^^^^^
+- **Application by UUID**: You can specify the application by its UUID as well as its numeric ID using `--app_id` or `--app_uuid` where supported.
+- **Configurable Application Settings**: Use repeatable `--config=KEY=VALUE` options to set or update application-specific configuration fields for a runtemplate. These fields will overwrite all previous config for the runtemplate.
+
+Examples:
+
+.. code-block:: bash
+
+    multiflexi-cli runtemplate create --name="Import Yesterday" --app_id=19 --company_id=1 --config=IMPORT_SCOPE=yesterday --config=ANOTHER_KEY=foo
+    multiflexi-cli runtemplate update --id=230 --config=IMPORT_SCOPE=yesterday --config=ANOTHER_KEY=foo
+    multiflexi-cli runtemplate get --id=230 --format=json
+    multiflexi-cli runtemplate create --name="Import" --app_id=6e2b2c2e-7c2a-4b1a-8e2d-123456789abc --company_id=1
+
 companyapp
 ----------
 
 Manage company applications (list, get, create, update).
+
+- You can now use `--app_uuid` in addition to `--app_id` for filtering and referencing applications by UUID.
 
 Examples:
 .. code-block:: bash
