@@ -63,6 +63,20 @@ Examples:
     multiflexi-cli company create --name="Acme Corp" --customer="CustomerX"
     multiflexi-cli company update --id=1 --server="server.example.com"
 
+companyapp
+----------
+
+Manage company applications (list, get, create, update).
+
+Examples:
+.. code-block:: bash
+
+    multiflexi-cli companyapp list
+    multiflexi-cli companyapp get --id=1
+    multiflexi-cli companyapp create --company_id=1 --name="App1" --type="web"
+    multiflexi-cli companyapp update --id=1 --name="Updated App"
+    multiflexi-cli companyapp list  --company_id=1 --app_id=19 --format=json | jq '.[].id'
+
 completion
 ----------
 
