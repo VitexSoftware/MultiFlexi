@@ -25,7 +25,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class AppStatusCommand extends Command
+class AppStatusCommand extends MultiFlexiCommand
 {
     protected function configure(): void
     {
@@ -78,6 +78,6 @@ class AppStatusCommand extends Command
             }
         }
 
-        return Command::SUCCESS;
+        return MultiFlexiCommand::SUCCESS;
     }
 }

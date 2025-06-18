@@ -22,7 +22,7 @@ use Symfony\Component\Console\Input\InputOption;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class Company extends Command
+class Company extends MultiFlexiCommand
 {
     #[\Override]
     public function listing(): array

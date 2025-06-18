@@ -25,7 +25,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class RunTemplate extends Command
+class RunTemplate extends MultiFlexiCommand
 {
     public function listing(): array
     {
@@ -82,6 +82,6 @@ EOT);
                 break;
         }
 
-        return Command::SUCCESS;
+        return MultiFlexiCommand::SUCCESS;
     }
 }

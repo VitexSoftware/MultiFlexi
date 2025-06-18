@@ -27,7 +27,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @author Vitex <info@vitexsoftware.cz>
  */
 // Přidání ApplicationCommand pro správu aplikací
-class ApplicationCommand extends Command
+class ApplicationCommand extends MultiFlexiCommand
 {
     protected static $defaultName = 'application';
     public function __construct()
@@ -72,7 +72,7 @@ class ApplicationCommand extends Command
                     }
                 }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'get':
                 $id = $input->getOption('id');
                 $uuid = $input->getOption('uuid');
@@ -80,7 +80,7 @@ class ApplicationCommand extends Command
                 if (empty($id) && empty($uuid)) {
                     $output->writeln('<error>Missing --id or --uuid for application get</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 if (!empty($uuid)) {
@@ -90,7 +90,7 @@ class ApplicationCommand extends Command
                     if (!$found) {
                         $output->writeln('<error>No application found with given UUID</error>');
 
-                        return Command::FAILURE;
+                        return MultiFlexiCommand::FAILURE;
                     }
 
                     $id = $found['id'];
@@ -99,7 +99,7 @@ class ApplicationCommand extends Command
                 $app = new \MultiFlexi\Application((int) $id);
                 $output->writeln(json_encode($app->getData(), \JSON_PRETTY_PRINT));
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'create':
                 $data = [];
 
@@ -114,15 +114,26 @@ class ApplicationCommand extends Command
                 if (empty($data['name']) || empty($data['uuid'])) {
                     $output->writeln('<error>Missing --name or --uuid for application create</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $app = new \MultiFlexi\Application();
                 $app->takeData($data);
                 $appId = $app->saveToSQL();
-                $output->writeln(json_encode(['application_id' => $appId], \JSON_PRETTY_PRINT));
+                if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
+                    $full = (new \MultiFlexi\Application((int)$appId))->getData();
+                    if ($format === 'json') {
+                        $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
+                    } else {
+                        foreach ($full as $k => $v) {
+                            $output->writeln("{$k}: {$v}");
+                        }
+                    }
+                } else {
+                    $output->writeln(json_encode(['application_id' => $appId], \JSON_PRETTY_PRINT));
+                }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'update':
                 $id = $input->getOption('id');
                 $uuid = $input->getOption('uuid');
@@ -130,7 +141,7 @@ class ApplicationCommand extends Command
                 if (empty($id) && empty($uuid)) {
                     $output->writeln('<error>Missing --id or --uuid for application update</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 if (!empty($uuid)) {
@@ -140,7 +151,7 @@ class ApplicationCommand extends Command
                     if (!$found) {
                         $output->writeln('<error>No application found with given UUID</error>');
 
-                        return Command::FAILURE;
+                        return MultiFlexiCommand::FAILURE;
                     }
 
                     $id = $found['id'];
@@ -159,42 +170,57 @@ class ApplicationCommand extends Command
                 if (empty($data)) {
                     $output->writeln('<error>No fields to update</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $app = new \MultiFlexi\Application((int) $id);
                 $app->updateToSQL($data, ['id' => $id]);
-                $output->writeln(json_encode(['updated' => true], \JSON_PRETTY_PRINT));
+                if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
+                    $full = $app->getData();
+                    if ($format === 'json') {
+                        $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
+                    } else {
+                        foreach ($full as $k => $v) {
+                            $output->writeln("{$k}: {$v}");
+                        }
+                    }
+                } else {
+                    $output->writeln(json_encode(['updated' => true, 'application_id' => $id], \JSON_PRETTY_PRINT));
+                }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'delete':
                 $id = $input->getOption('id');
 
                 if (empty($id)) {
                     $output->writeln('<error>Missing --id for application delete</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $app = new \MultiFlexi\Application((int) $id);
                 $app->deleteFromSQL();
-                $output->writeln(json_encode(['deleted' => true], \JSON_PRETTY_PRINT));
+                if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
+                    $output->writeln("Application deleted: ID=$id");
+                } else {
+                    $output->writeln(json_encode(['deleted' => true, 'application_id' => $id], \JSON_PRETTY_PRINT));
+                }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'import-json':
                 $json = $input->getOption('json');
 
                 if (empty($json) || !file_exists($json)) {
                     $output->writeln('<error>Missing or invalid --json file for import-json</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $app = new \MultiFlexi\Application();
                 $result = $app->importAppJson($json);
                 $output->writeln(json_encode(['imported' => $result], \JSON_PRETTY_PRINT));
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'export-json':
                 $id = $input->getOption('id');
                 $json = $input->getOption('json');
@@ -202,7 +228,7 @@ class ApplicationCommand extends Command
                 if (empty($id) || empty($json)) {
                     $output->writeln('<error>Missing --id or --json for export-json</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $app = new \MultiFlexi\Application((int) $id);
@@ -210,26 +236,26 @@ class ApplicationCommand extends Command
                 file_put_contents($json, $jsonData);
                 $output->writeln(json_encode(['exported' => true, 'file' => $json], \JSON_PRETTY_PRINT));
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'remove-json':
                 $json = $input->getOption('json');
 
                 if (empty($json) || !file_exists($json)) {
                     $output->writeln('<error>Missing or invalid --json file for remove-json</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $app = new \MultiFlexi\Application();
                 $result = $app->jsonAppRemove($json);
                 $output->writeln(json_encode(['removed' => $result], \JSON_PRETTY_PRINT));
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
 
             default:
                 $output->writeln("<error>Unknown action: {$action}</error>");
 
-                return Command::FAILURE;
+                return MultiFlexiCommand::FAILURE;
         }
     }
 }

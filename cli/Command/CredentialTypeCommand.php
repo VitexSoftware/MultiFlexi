@@ -26,7 +26,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class CredentialTypeCommand extends Command
+class CredentialTypeCommand extends MultiFlexiCommand
 {
     protected static $defaultName = 'credtype';
     protected function configure(): void
@@ -60,7 +60,7 @@ class CredentialTypeCommand extends Command
                     }
                 }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'get':
                 $id = $input->getOption('id');
                 $uuid = $input->getOption('uuid');
@@ -68,7 +68,7 @@ class CredentialTypeCommand extends Command
                 if (empty($id) && empty($uuid)) {
                     $output->writeln('<error>Missing --id or --uuid for credtype get</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 if (!empty($uuid)) {
@@ -78,7 +78,7 @@ class CredentialTypeCommand extends Command
                     if (!$found) {
                         $output->writeln('<error>No credential type found with given UUID</error>');
 
-                        return Command::FAILURE;
+                        return MultiFlexiCommand::FAILURE;
                     }
 
                     $id = $found['id'];
@@ -95,7 +95,7 @@ class CredentialTypeCommand extends Command
                     }
                 }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'update':
                 $id = $input->getOption('id');
                 $uuid = $input->getOption('uuid');
@@ -103,7 +103,7 @@ class CredentialTypeCommand extends Command
                 if (empty($id) && empty($uuid)) {
                     $output->writeln('<error>Missing --id or --uuid for credtype update</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 if (!empty($uuid)) {
@@ -113,7 +113,7 @@ class CredentialTypeCommand extends Command
                     if (!$found) {
                         $output->writeln('<error>No credential type found with given UUID</error>');
 
-                        return Command::FAILURE;
+                        return MultiFlexiCommand::FAILURE;
                     }
 
                     $id = $found['id'];
@@ -132,19 +132,19 @@ class CredentialTypeCommand extends Command
                 if (empty($data)) {
                     $output->writeln('<error>No fields to update</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $credType = new CredentialTypeModel((int) $id);
                 $credType->updateToSQL($data, ['id' => $id]);
                 $output->writeln(json_encode(['updated' => true], \JSON_PRETTY_PRINT));
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
 
             default:
                 $output->writeln("<error>Unknown action: {$action}</error>");
 
-                return Command::FAILURE;
+                return MultiFlexiCommand::FAILURE;
         }
     }
 }

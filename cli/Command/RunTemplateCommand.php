@@ -27,7 +27,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @author Vitex <info@vitexsoftware.cz>
  */
 // Přidání RunTemplateCommand pro správu runtemplate
-class RunTemplateCommand extends Command
+class RunTemplateCommand extends MultiFlexiCommand
 {
     protected static $defaultName = 'runtemplate';
     public function __construct()
@@ -84,14 +84,14 @@ class RunTemplateCommand extends Command
                     }
                 }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'get':
                 $id = $input->getOption('id');
 
                 if (empty($id)) {
                     $output->writeln('<error>Missing --id for runtemplate get</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $rt = new RunTemplate((int) $id);
@@ -105,7 +105,7 @@ class RunTemplateCommand extends Command
                     }
                 }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'create':
                 $data = [];
 
@@ -120,48 +120,33 @@ class RunTemplateCommand extends Command
                 if (empty($data['name']) || empty($data['app_id']) || empty($data['company_id'])) {
                     $output->writeln('<error>Missing --name, --app_id or --company_id for runtemplate create</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $rt = new \MultiFlexi\RunTemplate();
                 $rt->takeData($data);
                 $rtId = $rt->saveToSQL();
-
-                // Handle config fields (update/add only specified keys)
-                $configFields = $this->parseConfigOptions($input);
-
-                if (!empty($configFields)) {
-                    $configurator = new \MultiFlexi\Configuration();
-                    $configurator->setDataValue('runtemplate_id', $rtId);
-                    $configurator->setDataValue('app_id', $data['app_id']);
-                    $configurator->setDataValue('company_id', $data['company_id']);
-
-                    foreach ($configFields as $key => $value) {
-                        // Upsert each config key individually
-                        $configurator->deleteFromSQL([
-                            'runtemplate_id' => $rtId,
-                            'name' => $key,
-                        ]);
-                        $configurator->insertToSQL([
-                            'runtemplate_id' => $rtId,
-                            'app_id' => $data['app_id'],
-                            'company_id' => $data['company_id'],
-                            'name' => $key,
-                            'value' => $value,
-                        ]);
+                if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
+                    $full = (new \MultiFlexi\RunTemplate((int)$rtId))->getData();
+                    if ($format === 'json') {
+                        $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
+                    } else {
+                        foreach ($full as $k => $v) {
+                            $output->writeln("{$k}: {$v}");
+                        }
                     }
+                } else {
+                    $output->writeln(json_encode(['runtemplate_id' => $rtId, 'created' => true], \JSON_PRETTY_PRINT));
                 }
 
-                $output->writeln(json_encode(['runtemplate_id' => $rtId, 'created' => true], \JSON_PRETTY_PRINT));
-
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'update':
                 $id = $input->getOption('id');
 
                 if (empty($id)) {
                     $output->writeln('<error>Missing --id for runtemplate update</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $data = [];
@@ -175,61 +160,47 @@ class RunTemplateCommand extends Command
                 }
 
                 $rt = new \MultiFlexi\RunTemplate((int) $id);
-
                 if (!empty($data)) {
                     $rt->updateToSQL($data, ['id' => $id]);
                 }
-
-                // Handle config fields (update/add only specified keys)
-                $configFields = $this->parseConfigOptions($input);
-
-                if (!empty($configFields)) {
-                    $rtData = $rt->getData();
-                    $appId = $data['app_id'] ?? $rtData['app_id'] ?? null;
-                    $companyId = $data['company_id'] ?? $rtData['company_id'] ?? null;
-                    $configurator = new \MultiFlexi\Configuration();
-                    $configurator->setDataValue('runtemplate_id', $id);
-                    $configurator->setDataValue('app_id', $appId);
-                    $configurator->setDataValue('company_id', $companyId);
-
-                    foreach ($configFields as $key => $value) {
-                        // Upsert each config key individually
-                        $configurator->deleteFromSQL([
-                            'runtemplate_id' => $id,
-                            'name' => $key,
-                        ]);
-                        $configurator->insertToSQL([
-                            'runtemplate_id' => $id,
-                            'app_id' => $appId,
-                            'company_id' => $companyId,
-                            'name' => $key,
-                            'value' => $value,
-                        ]);
+                if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
+                    $rt->loadFromSQL(['id' => $id]);
+                    $full = $rt->getData();
+                    if ($format === 'json') {
+                        $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
+                    } else {
+                        foreach ($full as $k => $v) {
+                            $output->writeln("{$k}: {$v}");
+                        }
                     }
+                } else {
+                    $output->writeln(json_encode(['runtemplate_id' => $id, 'updated' => true], \JSON_PRETTY_PRINT));
                 }
 
-                $output->writeln(json_encode(['runtemplate_id' => $id, 'updated' => true], \JSON_PRETTY_PRINT));
-
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'delete':
                 $id = $input->getOption('id');
 
                 if (empty($id)) {
                     $output->writeln('<error>Missing --id for runtemplate delete</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $rt = new \MultiFlexi\RunTemplate((int) $id);
                 $rt->deleteFromSQL();
-                $output->writeln(json_encode(['runtemplate_id' => $id, 'deleted' => true], \JSON_PRETTY_PRINT));
+                if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
+                    $output->writeln("RunTemplate deleted: ID=$id");
+                } else {
+                    $output->writeln(json_encode(['runtemplate_id' => $id, 'deleted' => true], \JSON_PRETTY_PRINT));
+                }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
 
             default:
                 $output->writeln("<error>Unknown action: {$action}</error>");
 
-                return Command::FAILURE;
+                return MultiFlexiCommand::FAILURE;
         }
     }
 }

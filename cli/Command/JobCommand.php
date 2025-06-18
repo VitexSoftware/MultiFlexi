@@ -26,7 +26,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class JobCommand extends Command
+class JobCommand extends MultiFlexiCommand
 {
     protected static $defaultName = 'job';
 
@@ -81,14 +81,14 @@ class JobCommand extends Command
                     }
                 }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'get':
                 $id = $input->getOption('id');
 
                 if (empty($id)) {
                     $output->writeln('<error>Missing --id for job get</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $job = new Job((int) $id);
@@ -102,7 +102,7 @@ class JobCommand extends Command
                     }
                 }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'create':
                 $runtemplateId = $input->getOption('runtemplate_id');
                 $scheduled = $input->getOption('scheduled');
@@ -110,7 +110,7 @@ class JobCommand extends Command
                 if (empty($runtemplateId) || empty($scheduled)) {
                     $output->writeln('<error>Missing --runtemplate_id or --scheduled for job create</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $env = new \MultiFlexi\ConfigFields('Job Env');
@@ -119,16 +119,27 @@ class JobCommand extends Command
                 $scheduleType = $input->getOption('schedule_type') ?? 'adhoc';
                 $job = new Job();
                 $jobId = $job->newJob((int) $runtemplateId, $env, $scheduledDT, $executor, $scheduleType);
-                $output->writeln(json_encode(['job_id' => $jobId], \JSON_PRETTY_PRINT));
+                if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
+                    $full = (new Job((int)$jobId))->getData();
+                    if ($format === 'json') {
+                        $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
+                    } else {
+                        foreach ($full as $k => $v) {
+                            $output->writeln("{$k}: {$v}");
+                        }
+                    }
+                } else {
+                    $output->writeln(json_encode(['job_id' => $jobId], \JSON_PRETTY_PRINT));
+                }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'update':
                 $id = $input->getOption('id');
 
                 if (empty($id)) {
                     $output->writeln('<error>Missing --id for job update</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $job = new Job((int) $id);
@@ -145,18 +156,47 @@ class JobCommand extends Command
                 if (empty($data)) {
                     $output->writeln('<error>No fields to update</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $job->updateToSQL($data, ['id' => $id]);
-                $output->writeln(json_encode(['updated' => true], \JSON_PRETTY_PRINT));
+                if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
+                    $full = $job->getData();
+                    if ($format === 'json') {
+                        $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
+                    } else {
+                        foreach ($full as $k => $v) {
+                            $output->writeln("{$k}: {$v}");
+                        }
+                    }
+                } else {
+                    $output->writeln(json_encode(['updated' => true, 'job_id' => $id], \JSON_PRETTY_PRINT));
+                }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
+            case 'delete':
+                $id = $input->getOption('id');
+
+                if (empty($id)) {
+                    $output->writeln('<error>Missing --id for job delete</error>');
+
+                    return MultiFlexiCommand::FAILURE;
+                }
+
+                $job = new Job((int) $id);
+                $job->deleteFromSQL();
+                if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
+                    $output->writeln("Job deleted: ID=$id");
+                } else {
+                    $output->writeln(json_encode(['deleted' => true, 'job_id' => $id], \JSON_PRETTY_PRINT));
+                }
+
+                return MultiFlexiCommand::SUCCESS;
 
             default:
                 $output->writeln("<error>Unknown action: {$action}</error>");
 
-                return Command::FAILURE;
+                return MultiFlexiCommand::FAILURE;
         }
     }
 }

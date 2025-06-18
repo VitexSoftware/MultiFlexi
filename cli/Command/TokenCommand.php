@@ -27,7 +27,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @author Vitex <info@vitexsoftware.cz>
  */
 // Přidání TokenCommand pro správu tokenů
-class TokenCommand extends Command
+class TokenCommand extends MultiFlexiCommand
 {
     protected static $defaultName = 'token';
     public function __construct()
@@ -65,14 +65,14 @@ class TokenCommand extends Command
                     }
                 }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'get':
                 $id = $input->getOption('id');
 
                 if (empty($id)) {
                     $output->writeln('<error>Missing --id for token get</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $token = new Token((int) $id);
@@ -86,7 +86,7 @@ class TokenCommand extends Command
                     }
                 }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'create':
                 $data = [];
 
@@ -101,22 +101,33 @@ class TokenCommand extends Command
                 if (empty($data['user'])) {
                     $output->writeln('<error>Missing --user for token create</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $token = new \MultiFlexi\Token();
                 $token->takeData($data);
                 $tokenId = $token->saveToSQL();
-                $output->writeln(json_encode(['token_id' => $tokenId], \JSON_PRETTY_PRINT));
+                if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
+                    $full = (new \MultiFlexi\Token((int)$tokenId))->getData();
+                    if ($format === 'json') {
+                        $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
+                    } else {
+                        foreach ($full as $k => $v) {
+                            $output->writeln("{$k}: {$v}");
+                        }
+                    }
+                } else {
+                    $output->writeln(json_encode(['token_id' => $tokenId], \JSON_PRETTY_PRINT));
+                }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'generate':
                 $user = $input->getOption('user');
 
                 if (empty($user)) {
                     $output->writeln('<error>Missing --user for token generate</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $token = new \MultiFlexi\Token();
@@ -125,14 +136,14 @@ class TokenCommand extends Command
                 $tokenId = $token->saveToSQL();
                 $output->writeln(json_encode(['token_id' => $tokenId, 'token' => $token->getDataValue('token')], \JSON_PRETTY_PRINT));
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'update':
                 $id = $input->getOption('id');
 
                 if (empty($id)) {
                     $output->writeln('<error>Missing --id for token update</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $data = [];
@@ -148,19 +159,48 @@ class TokenCommand extends Command
                 if (empty($data)) {
                     $output->writeln('<error>No fields to update</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $token = new \MultiFlexi\Token((int) $id);
                 $token->updateToSQL($data, ['id' => $id]);
-                $output->writeln(json_encode(['updated' => true], \JSON_PRETTY_PRINT));
+                if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
+                    $full = $token->getData();
+                    if ($format === 'json') {
+                        $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
+                    } else {
+                        foreach ($full as $k => $v) {
+                            $output->writeln("{$k}: {$v}");
+                        }
+                    }
+                } else {
+                    $output->writeln(json_encode(['updated' => true, 'token_id' => $id], \JSON_PRETTY_PRINT));
+                }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
+            case 'delete':
+                $id = $input->getOption('id');
+
+                if (empty($id)) {
+                    $output->writeln('<error>Missing --id for token delete</error>');
+
+                    return MultiFlexiCommand::FAILURE;
+                }
+
+                $token = new \MultiFlexi\Token((int) $id);
+                $token->deleteFromSQL();
+                if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
+                    $output->writeln("Token deleted: ID=$id");
+                } else {
+                    $output->writeln(json_encode(['deleted' => true, 'token_id' => $id], \JSON_PRETTY_PRINT));
+                }
+
+                return MultiFlexiCommand::SUCCESS;
 
             default:
                 $output->writeln("<error>Unknown action: {$action}</error>");
 
-                return Command::FAILURE;
+                return MultiFlexiCommand::FAILURE;
         }
     }
 }

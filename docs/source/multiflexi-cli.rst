@@ -46,7 +46,7 @@ Manage companies (list, get, create, update).
 
 .. code-block:: bash
 
-    multiflexi-cli company <action> [--id=ID] [--name=NAME] [--customer=CUSTOMER] [--server=SERVER]
+    multiflexi-cli company <action> [--id=ID] [--name=NAME] [--customer=CUSTOMER]
 
 Actions:
 - list:   List all companies.
