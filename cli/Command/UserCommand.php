@@ -27,7 +27,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 // Přidání UserCommand pro správu uživatelů
-class UserCommand extends Command
+class UserCommand extends MultiFlexiCommand
 {
     protected static $defaultName = 'user';
     public function __construct()
@@ -85,14 +85,14 @@ class UserCommand extends Command
                     }
                 }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'get':
                 $id = $input->getOption('id');
 
                 if (empty($id)) {
                     $output->writeln('<error>Missing --id for user get</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $user = new User((int) $id);
@@ -106,7 +106,7 @@ class UserCommand extends Command
                     }
                 }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'create':
                 $data = [];
 
@@ -121,7 +121,7 @@ class UserCommand extends Command
                 if (empty($data['login']) || empty($data['email'])) {
                     $output->writeln('<error>Missing --login or --email for user create</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 if ($input->getOption('password')) {
@@ -131,16 +131,27 @@ class UserCommand extends Command
                 $user = new \MultiFlexi\User();
                 $user->takeData($data);
                 $userId = $user->saveToSQL();
-                $output->writeln(json_encode(['user_id' => $userId], \JSON_PRETTY_PRINT));
+                if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
+                    $full = (new \MultiFlexi\User((int)$userId))->getData();
+                    if ($format === 'json') {
+                        $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
+                    } else {
+                        foreach ($full as $k => $v) {
+                            $output->writeln("{$k}: {$v}");
+                        }
+                    }
+                } else {
+                    $output->writeln(json_encode(['user_id' => $userId], \JSON_PRETTY_PRINT));
+                }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'update':
                 $id = $input->getOption('id');
 
                 if (empty($id)) {
                     $output->writeln('<error>Missing --id for user update</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $data = [];
@@ -160,33 +171,48 @@ class UserCommand extends Command
                 if (empty($data)) {
                     $output->writeln('<error>No fields to update</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $user = new \MultiFlexi\User((int) $id);
                 $user->updateToSQL($data, ['id' => $id]);
-                $output->writeln(json_encode(['updated' => true], \JSON_PRETTY_PRINT));
+                if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
+                    $full = $user->getData();
+                    if ($format === 'json') {
+                        $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
+                    } else {
+                        foreach ($full as $k => $v) {
+                            $output->writeln("{$k}: {$v}");
+                        }
+                    }
+                } else {
+                    $output->writeln(json_encode(['updated' => true, 'user_id' => $id], \JSON_PRETTY_PRINT));
+                }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
             case 'delete':
                 $id = $input->getOption('id');
 
                 if (empty($id)) {
                     $output->writeln('<error>Missing --id for user delete</error>');
 
-                    return Command::FAILURE;
+                    return MultiFlexiCommand::FAILURE;
                 }
 
                 $user = new \MultiFlexi\User((int) $id);
                 $user->deleteFromSQL();
-                $output->writeln(json_encode(['deleted' => true], \JSON_PRETTY_PRINT));
+                if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
+                    $output->writeln("User deleted: ID=$id");
+                } else {
+                    $output->writeln(json_encode(['deleted' => true, 'user_id' => $id], \JSON_PRETTY_PRINT));
+                }
 
-                return Command::SUCCESS;
+                return MultiFlexiCommand::SUCCESS;
 
             default:
                 $output->writeln("<error>Unknown action: {$action}</error>");
 
-                return Command::FAILURE;
+                return MultiFlexiCommand::FAILURE;
         }
     }
 }

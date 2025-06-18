@@ -25,7 +25,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class Application extends Command
+class Application extends MultiFlexiCommand
 {
     #[\Override]
     public function listing(): array
@@ -68,6 +68,6 @@ class Application extends Command
                 break;
         }
 
-        return Command::SUCCESS;
+        return MultiFlexiCommand::SUCCESS;
     }
 }

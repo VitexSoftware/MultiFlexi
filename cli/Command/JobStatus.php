@@ -24,7 +24,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class JobStatus extends Command
+class JobStatus extends MultiFlexiCommand
 {
     protected function configure(): void
     {
@@ -81,6 +81,6 @@ EOD;
             }
         }
 
-        return Command::SUCCESS;
+        return MultiFlexiCommand::SUCCESS;
     }
 }
