@@ -98,11 +98,21 @@ class CompanyCommand extends MultiFlexiCommand
                 return MultiFlexiCommand::SUCCESS;
             case 'get':
                 $id = $input->getOption('id');
+                $ic = $input->getOption('ic');
 
-                if (empty($id)) {
-                    $output->writeln('<error>Missing --id for company get</error>');
-
+                if (empty($id) && empty($ic)) {
+                    $output->writeln('<error>Missing --id or --ic for company get</error>');
                     return MultiFlexiCommand::FAILURE;
+                }
+
+                if (!empty($ic)) {
+                    $companyObj = new Company();
+                    $found = $companyObj->listingQuery()->where(['ic' => $ic])->fetch();
+                    if (!$found) {
+                        $output->writeln('<error>No company found with given IC</error>');
+                        return MultiFlexiCommand::FAILURE;
+                    }
+                    $id = $found['id'];
                 }
 
                 $company = new Company((int) $id);
