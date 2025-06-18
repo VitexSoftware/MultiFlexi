@@ -197,6 +197,18 @@ class CompanyCommand extends MultiFlexiCommand
                 }
 
                 $company = new Company((int) $id);
+                $current = $company->getData();
+                $changed = false;
+                foreach ($data as $k => $v) {
+                    if (!array_key_exists($k, $current) || $current[$k] != $v) {
+                        $changed = true;
+                        break;
+                    }
+                }
+                if (!$changed) {
+                    $output->writeln(json_encode(['updated' => false, 'company_id' => $id, 'message' => 'No changes detected'], \JSON_PRETTY_PRINT));
+                    return MultiFlexiCommand::SUCCESS;
+                }
                 $company->updateToSQL($data, ['id' => $id]);
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL || $input->getParameterOption(['--verbose', '-v'], false)) {
                     $full = $company->getData();
