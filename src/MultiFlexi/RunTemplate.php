@@ -401,7 +401,7 @@ class RunTemplate extends \MultiFlexi\DBEngine
         $cfg = $configurator->listingQuery()->select(['name', 'value', 'type'], true)->where(['runtemplate_id' => $this->getMyKey()])->fetchAll('name');
 
         foreach ($cfg as $conf) {
-            $field = new ConfigField($conf['name'], $conf['type'], $conf['name']);
+            $field = new ConfigField($conf['name'], \MultiFlexi\Conffield::fixType($conf['type']), $conf['name']);
             $field->setValue($conf['value']);
             $runtemplateEnv->addField($field);
         }
