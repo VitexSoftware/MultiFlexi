@@ -126,8 +126,10 @@ class RunTemplateCommand extends MultiFlexiCommand
                 $rt = new \MultiFlexi\RunTemplate();
                 $rt->takeData($data);
                 $rtId = $rt->saveToSQL();
+
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
-                    $full = (new \MultiFlexi\RunTemplate((int)$rtId))->getData();
+                    $full = (new \MultiFlexi\RunTemplate((int) $rtId))->getData();
+
                     if ($format === 'json') {
                         $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
                     } else {
@@ -160,12 +162,15 @@ class RunTemplateCommand extends MultiFlexiCommand
                 }
 
                 $rt = new \MultiFlexi\RunTemplate((int) $id);
+
                 if (!empty($data)) {
                     $rt->updateToSQL($data, ['id' => $id]);
                 }
+
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
                     $rt->loadFromSQL(['id' => $id]);
                     $full = $rt->getData();
+
                     if ($format === 'json') {
                         $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
                     } else {
@@ -189,8 +194,9 @@ class RunTemplateCommand extends MultiFlexiCommand
 
                 $rt = new \MultiFlexi\RunTemplate((int) $id);
                 $rt->deleteFromSQL();
+
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
-                    $output->writeln("RunTemplate deleted: ID=$id");
+                    $output->writeln("RunTemplate deleted: ID={$id}");
                 } else {
                     $output->writeln(json_encode(['runtemplate_id' => $id, 'deleted' => true], \JSON_PRETTY_PRINT));
                 }

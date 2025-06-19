@@ -50,19 +50,19 @@ abstract class MultiFlexiCommand extends \Symfony\Component\Console\Command\Comm
     }
 
     /**
-     * Unified result output for all commands (create, update, delete)
+     * Unified result output for all commands (create, update, delete).
      *
      * @param OutputInterface $output
-     * @param array $shortResult e.g. ["updated"=>true, "company_id"=>1]
-     * @param array $fullRecord full associative array of the record (optional)
-     * @param string $format 'json' or 'text'
-     * @param bool $verbose true to print full record
+     * @param array           $shortResult e.g. ["updated"=>true, "company_id"=>1]
+     * @param array           $fullRecord  full associative array of the record (optional)
+     * @param string          $format      'json' or 'text'
+     * @param bool            $verbose     true to print full record
      */
     public function outputResult($output, array $shortResult, ?array $fullRecord = null, string $format = 'text', bool $verbose = false): void
     {
         if ($verbose && $fullRecord) {
             if ($format === 'json') {
-                $output->writeln(json_encode($fullRecord, JSON_PRETTY_PRINT));
+                $output->writeln(json_encode($fullRecord, \JSON_PRETTY_PRINT));
             } else {
                 foreach ($fullRecord as $k => $v) {
                     $output->writeln("{$k}: {$v}");
@@ -70,7 +70,7 @@ abstract class MultiFlexiCommand extends \Symfony\Component\Console\Command\Comm
             }
         } else {
             if ($format === 'json') {
-                $output->writeln(json_encode($shortResult, JSON_PRETTY_PRINT));
+                $output->writeln(json_encode($shortResult, \JSON_PRETTY_PRINT));
             } else {
                 foreach ($shortResult as $k => $v) {
                     $output->writeln("{$k}: {$v}");

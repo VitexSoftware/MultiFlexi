@@ -119,8 +119,10 @@ class JobCommand extends MultiFlexiCommand
                 $scheduleType = $input->getOption('schedule_type') ?? 'adhoc';
                 $job = new Job();
                 $jobId = $job->newJob((int) $runtemplateId, $env, $scheduledDT, $executor, $scheduleType);
+
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
-                    $full = (new Job((int)$jobId))->getData();
+                    $full = (new Job((int) $jobId))->getData();
+
                     if ($format === 'json') {
                         $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
                     } else {
@@ -160,8 +162,10 @@ class JobCommand extends MultiFlexiCommand
                 }
 
                 $job->updateToSQL($data, ['id' => $id]);
+
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
                     $full = $job->getData();
+
                     if ($format === 'json') {
                         $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
                     } else {
@@ -185,8 +189,9 @@ class JobCommand extends MultiFlexiCommand
 
                 $job = new Job((int) $id);
                 $job->deleteFromSQL();
+
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
-                    $output->writeln("Job deleted: ID=$id");
+                    $output->writeln("Job deleted: ID={$id}");
                 } else {
                     $output->writeln(json_encode(['deleted' => true, 'job_id' => $id], \JSON_PRETTY_PRINT));
                 }
