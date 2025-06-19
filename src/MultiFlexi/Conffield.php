@@ -92,11 +92,25 @@ class Conffield extends \Ease\SQL\Engine
         $appConfiguration = new ConfigFields(_('Application Config Fields'));
 
         foreach ((new self())->appConfigs($app->getMyKey()) as $appConfig) {
-            $field = new ConfigField($appConfig['keyname'], $appConfig['type'], $appConfig['keyname'], $appConfig['description']);
+            $field = new ConfigField($appConfig['keyname'], self::fixType($appConfig['type']), $appConfig['keyname'], $appConfig['description']);
             $field->setRequired($appConfig['required'] === 1)->setDefaultValue($appConfig['defval'])->setSource(serialize($app));
             $appConfiguration->addField($field);
         }
 
         return $appConfiguration;
+    }
+
+    /**
+     * Fix Old types to new
+     * 
+     * @param string $typeOld
+     * 
+     * @return string
+     */
+    public static function fixType(string $typeOld): string
+    {
+        return str_replace(
+                ['directory', 'file',      'checkbox', 'boolean', 'switch', 'text',   'number',  'select'],
+                ['file-path', 'file-path', 'bool',     'bool',    'bool',   'string', 'integer', 'set'], $typeOld);
     }
 }
