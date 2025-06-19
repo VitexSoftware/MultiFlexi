@@ -68,7 +68,7 @@ class RuntemplateConfigForm extends EngineForm
 
                         $credentialLink = new \Ease\Html\ATag('credential.php?id='.$credential->getMyKey(), new \Ease\Html\SmallTag($credential->getRecordName()));
 
-                        $formIcon = new \Ease\Html\ImgTag('images/'.$runTemplateField->getLogo(), (string)$credentialType->getRecordName(), ['height' => 20, 'title' => $credentialType->getRecordName()]);
+                        $formIcon = new \Ease\Html\ImgTag('images/'.$runTemplateField->getLogo(), (string) $credentialType->getRecordName(), ['height' => 20, 'title' => $credentialType->getRecordName()]);
 
                         $credentialTypeLink = new \Ease\Html\ATag('credentialtype.php?id='.$credentialType->getMyKey(), $formIcon);
 

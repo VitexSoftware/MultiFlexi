@@ -57,14 +57,23 @@ class CompanyCommand extends MultiFlexiCommand
     }
 
     /**
-     * Convert string option to boolean if needed
+     * Convert string option to boolean if needed.
+     *
+     * @param mixed $val
      */
     protected function parseBoolOption($val)
     {
-        if (is_bool($val)) return $val;
-        if (is_null($val)) return null;
-        $val = strtolower((string)$val);
-        return in_array($val, ['1', 'true', 'yes', 'on'], true);
+        if (\is_bool($val)) {
+            return $val;
+        }
+
+        if (null === $val) {
+            return null;
+        }
+
+        $val = strtolower((string) $val);
+
+        return \in_array($val, ['1', 'true', 'yes', 'on'], true);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -73,8 +82,9 @@ class CompanyCommand extends MultiFlexiCommand
         $action = strtolower($input->getArgument('action'));
 
         // Default action logic: if no id, show list; if id, show record
-        if (!in_array($action, ['create', 'update', 'remove', 'get', 'list'])) {
+        if (!\in_array($action, ['create', 'update', 'remove', 'get', 'list'], true)) {
             $id = $input->getOption('id');
+
             if (empty($id)) {
                 $action = 'list';
             } else {
@@ -102,16 +112,20 @@ class CompanyCommand extends MultiFlexiCommand
 
                 if (empty($id) && empty($ic)) {
                     $output->writeln('<error>Missing --id or --ic for company get</error>');
+
                     return MultiFlexiCommand::FAILURE;
                 }
 
                 if (!empty($ic)) {
                     $companyObj = new Company();
                     $found = $companyObj->listingQuery()->where(['ic' => $ic])->fetch();
+
                     if (!$found) {
                         $output->writeln('<error>No company found with given IC</error>');
+
                         return MultiFlexiCommand::FAILURE;
                     }
+
                     $id = $found['id'];
                 }
 
@@ -131,11 +145,12 @@ class CompanyCommand extends MultiFlexiCommand
                 $data = [];
 
                 foreach ([
-                    'name', 'customer', 'enabled', 'settings', 'logo', 'ic', 'company', 'rw', 'setup', 'webhook', 'DatCreate', 'DatUpdate', 'email', 'code'
+                    'name', 'customer', 'enabled', 'settings', 'logo', 'ic', 'company', 'rw', 'setup', 'webhook', 'DatCreate', 'DatUpdate', 'email', 'code',
                 ] as $field) {
                     $val = $input->getOption($field);
+
                     if ($val !== null) {
-                        if (in_array($field, ['enabled', 'rw', 'setup', 'webhook'])) {
+                        if (\in_array($field, ['enabled', 'rw', 'setup', 'webhook'], true)) {
                             $data[$field] = $this->parseBoolOption($val);
                         } else {
                             $data[$field] = $val;
@@ -152,8 +167,10 @@ class CompanyCommand extends MultiFlexiCommand
                 $company = new Company();
                 $company->takeData($data);
                 $companyId = $company->saveToSQL();
+
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
-                    $full = (new Company((int)$companyId))->getData();
+                    $full = (new Company((int) $companyId))->getData();
+
                     if ($format === 'json') {
                         $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
                     } else {
@@ -178,11 +195,12 @@ class CompanyCommand extends MultiFlexiCommand
                 $data = [];
 
                 foreach ([
-                    'name', 'customer', 'enabled', 'settings', 'logo', 'ic', 'DatCreate', 'DatUpdate', 'email', 'code'
+                    'name', 'customer', 'enabled', 'settings', 'logo', 'ic', 'DatCreate', 'DatUpdate', 'email', 'code',
                 ] as $field) {
                     $val = $input->getOption($field);
+
                     if ($val !== null) {
-                        if (in_array($field, ['enabled'])) {
+                        if (\in_array($field, ['enabled'], true)) {
                             $data[$field] = $this->parseBoolOption($val);
                         } else {
                             $data[$field] = $val;
@@ -199,19 +217,26 @@ class CompanyCommand extends MultiFlexiCommand
                 $company = new Company((int) $id);
                 $current = $company->getData();
                 $changed = false;
+
                 foreach ($data as $k => $v) {
-                    if (!array_key_exists($k, $current) || $current[$k] != $v) {
+                    if (!\array_key_exists($k, $current) || $current[$k] !== $v) {
                         $changed = true;
+
                         break;
                     }
                 }
+
                 if (!$changed) {
                     $output->writeln(json_encode(['updated' => false, 'company_id' => $id, 'message' => 'No changes detected'], \JSON_PRETTY_PRINT));
+
                     return MultiFlexiCommand::SUCCESS;
                 }
+
                 $company->updateToSQL($data, ['id' => $id]);
+
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL || $input->getParameterOption(['--verbose', '-v'], false)) {
                     $full = $company->getData();
+
                     if ($format === 'json') {
                         $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
                     } else {
@@ -226,14 +251,18 @@ class CompanyCommand extends MultiFlexiCommand
                 return MultiFlexiCommand::SUCCESS;
             case 'remove':
                 $id = $input->getOption('id');
+
                 if (empty($id)) {
                     $output->writeln('<error>Missing --id for company remove</error>');
+
                     return MultiFlexiCommand::FAILURE;
                 }
+
                 $company = new Company((int) $id);
                 $company->deleteFromSQL();
+
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
-                    $output->writeln("Company removed: ID=$id");
+                    $output->writeln("Company removed: ID={$id}");
                 } else {
                     $output->writeln(json_encode(['company_id' => $id, 'removed' => true], \JSON_PRETTY_PRINT));
                 }

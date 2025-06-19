@@ -120,8 +120,10 @@ class ApplicationCommand extends MultiFlexiCommand
                 $app = new \MultiFlexi\Application();
                 $app->takeData($data);
                 $appId = $app->saveToSQL();
+
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
-                    $full = (new \MultiFlexi\Application((int)$appId))->getData();
+                    $full = (new \MultiFlexi\Application((int) $appId))->getData();
+
                     if ($format === 'json') {
                         $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
                     } else {
@@ -175,8 +177,10 @@ class ApplicationCommand extends MultiFlexiCommand
 
                 $app = new \MultiFlexi\Application((int) $id);
                 $app->updateToSQL($data, ['id' => $id]);
+
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
                     $full = $app->getData();
+
                     if ($format === 'json') {
                         $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
                     } else {
@@ -200,8 +204,9 @@ class ApplicationCommand extends MultiFlexiCommand
 
                 $app = new \MultiFlexi\Application((int) $id);
                 $app->deleteFromSQL();
+
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
-                    $output->writeln("Application deleted: ID=$id");
+                    $output->writeln("Application deleted: ID={$id}");
                 } else {
                     $output->writeln(json_encode(['deleted' => true, 'application_id' => $id], \JSON_PRETTY_PRINT));
                 }

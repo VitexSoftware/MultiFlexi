@@ -107,8 +107,10 @@ class TokenCommand extends MultiFlexiCommand
                 $token = new \MultiFlexi\Token();
                 $token->takeData($data);
                 $tokenId = $token->saveToSQL();
+
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
-                    $full = (new \MultiFlexi\Token((int)$tokenId))->getData();
+                    $full = (new \MultiFlexi\Token((int) $tokenId))->getData();
+
                     if ($format === 'json') {
                         $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
                     } else {
@@ -164,8 +166,10 @@ class TokenCommand extends MultiFlexiCommand
 
                 $token = new \MultiFlexi\Token((int) $id);
                 $token->updateToSQL($data, ['id' => $id]);
+
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
                     $full = $token->getData();
+
                     if ($format === 'json') {
                         $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
                     } else {
@@ -189,8 +193,9 @@ class TokenCommand extends MultiFlexiCommand
 
                 $token = new \MultiFlexi\Token((int) $id);
                 $token->deleteFromSQL();
+
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
-                    $output->writeln("Token deleted: ID=$id");
+                    $output->writeln("Token deleted: ID={$id}");
                 } else {
                     $output->writeln(json_encode(['deleted' => true, 'token_id' => $id], \JSON_PRETTY_PRINT));
                 }

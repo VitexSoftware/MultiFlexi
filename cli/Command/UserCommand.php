@@ -131,8 +131,10 @@ class UserCommand extends MultiFlexiCommand
                 $user = new \MultiFlexi\User();
                 $user->takeData($data);
                 $userId = $user->saveToSQL();
+
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
-                    $full = (new \MultiFlexi\User((int)$userId))->getData();
+                    $full = (new \MultiFlexi\User((int) $userId))->getData();
+
                     if ($format === 'json') {
                         $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
                     } else {
@@ -176,8 +178,10 @@ class UserCommand extends MultiFlexiCommand
 
                 $user = new \MultiFlexi\User((int) $id);
                 $user->updateToSQL($data, ['id' => $id]);
+
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
                     $full = $user->getData();
+
                     if ($format === 'json') {
                         $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
                     } else {
@@ -201,8 +205,9 @@ class UserCommand extends MultiFlexiCommand
 
                 $user = new \MultiFlexi\User((int) $id);
                 $user->deleteFromSQL();
+
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
-                    $output->writeln("User deleted: ID=$id");
+                    $output->writeln("User deleted: ID={$id}");
                 } else {
                     $output->writeln(json_encode(['deleted' => true, 'user_id' => $id], \JSON_PRETTY_PRINT));
                 }
