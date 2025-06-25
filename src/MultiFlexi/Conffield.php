@@ -101,16 +101,14 @@ class Conffield extends \Ease\SQL\Engine
     }
 
     /**
-     * Fix Old types to new
-     * 
-     * @param string $typeOld
-     * 
-     * @return string
+     * Fix Old types to new.
      */
     public static function fixType(string $typeOld): string
     {
         return str_replace(
-                ['directory', 'file',      'checkbox', 'boolean', 'switch', 'text',   'number',  'select'],
-                ['file-path', 'file-path', 'bool',     'bool',    'bool',   'string', 'integer', 'set'], $typeOld);
+            ['directory', 'file', 'checkbox', 'boolean', 'switch', 'text', 'number', 'select'],
+            ['file-path', 'file-path', 'bool', 'bool', 'bool', 'string', 'integer', 'set'],
+            $typeOld,
+        );
     }
 }
