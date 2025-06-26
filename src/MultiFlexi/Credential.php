@@ -35,7 +35,7 @@ class Credential extends DBEngine
 
     public function __unserialize(array $data): void
     {
-        if (\array_key_exists('data', $data)) {
+        if (\array_key_exists('data', $data) && \is_array($data['data'])) {
             $this->takeData($data['data']);
         }
     }
