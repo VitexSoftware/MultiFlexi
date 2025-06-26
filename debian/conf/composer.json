@@ -7,7 +7,7 @@
     "deb/ease-fluentpdo": "*",
     "deb/ease-html-widgets": "*",
     "symfony/process": "*",
-    "cboden/ratchet": "^0.5",
+    "cboden/ratchet": "*",
     "sensiolabs/ansi-to-html": "*",
     "zarplata/zabbix-sender": "dev-master",
     "rcubitto/json-pretty": "dev-master",
