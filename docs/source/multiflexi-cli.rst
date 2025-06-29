@@ -78,11 +78,19 @@ Actions:
 - create: Create a new runtemplate (requires --name, --app_id, --company_id).
 - update: Update an existing runtemplate (requires --id).
 - delete: Delete a runtemplate (requires --id).
+- schedule: Schedule a runtemplate launch as a job (requires --id). Allows specifying launch time, executor, and environment overrides.
 
 New Features:
 ^^^^^^^^^^^^^
 - **Application by UUID**: You can specify the application by its UUID as well as its numeric ID using `--app_id` or `--app_uuid` where supported.
 - **Configurable Application Settings**: Use repeatable `--config=KEY=VALUE` options to set or update application-specific configuration fields for a runtemplate. These fields will overwrite all previous config for the runtemplate.
+
+Schedule Options:
+^^^^^^^^^^^^^^^^^
+- ``--id=ID``: RunTemplate ID to schedule (required)
+- ``--schedule_time=DATETIME``: When to launch (Y-m-d H:i:s or 'now', default: now)
+- ``--executor=EXECUTOR``: Executor to use (default: Native)
+- ``--env=KEY=VALUE``: Environment override (repeatable)
 
 Examples:
 
@@ -92,6 +100,7 @@ Examples:
     multiflexi-cli runtemplate update --id=230 --config=IMPORT_SCOPE=yesterday --config=ANOTHER_KEY=foo
     multiflexi-cli runtemplate get --id=230 --format=json
     multiflexi-cli runtemplate create --name="Import" --app_id=6e2b2c2e-7c2a-4b1a-8e2d-123456789abc --company_id=1
+    multiflexi-cli runtemplate schedule --id=123 --schedule_time="2025-07-01 10:00:00" --executor=Native --env=FOO=bar --env=BAZ=qux
 
 companyapp
 ----------
