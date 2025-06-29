@@ -80,6 +80,9 @@ Actions:
 - delete: Delete a runtemplate (requires --id).
 - schedule: Schedule a runtemplate launch as a job (requires --id). Allows specifying launch time, executor, and environment overrides.
 
+  .. note::
+     Only runtemplates with ``active=1`` can be scheduled. Inactive runtemplates will be rejected.
+
 New Features:
 ^^^^^^^^^^^^^
 - **Application by UUID**: You can specify the application by its UUID as well as its numeric ID using `--app_id` or `--app_uuid` where supported.
