@@ -16,6 +16,7 @@ Commands
 --------
 
 job
+
 ---
 
 Manage jobs (list, get, create, update).
@@ -81,6 +82,7 @@ Actions:
 - schedule: Schedule a runtemplate launch as a job (requires --id). Allows specifying launch time, executor, and environment overrides.
 
   .. note::
+
      Only runtemplates with ``active=1`` can be scheduled. Inactive runtemplates will be rejected.
 
 New Features:
