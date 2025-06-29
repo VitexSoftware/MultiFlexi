@@ -209,33 +209,39 @@ class RunTemplateCommand extends MultiFlexiCommand
                 $id = $input->getOption('id');
                 if (empty($id)) {
                     $output->writeln('<error>Missing --id for runtemplate schedule</error>');
-
                     return MultiFlexiCommand::FAILURE;
                 }
                 $scheduleTime = $input->getOption('schedule_time') ?? 'now';
                 $executor = $input->getOption('executor') ?? 'Native';
                 $envOverrides = $input->getOption('env') ?? [];
                 try {
-                    $rt = new \MultiFlexi\RunTemplate((int)$id);
-                    $environment = $rt->getRuntemplateEnvironment();
+                    $rt = new \MultiFlexi\RunTemplate(is_numeric($id) ? (int)$id : $id);
+                    if (empty($rt->getMyKey())) {
+                        $output->writeln('<error>RunTemplate not found</error>');
+                        return MultiFlexiCommand::FAILURE;
+                    }
+                    $jobber = new \MultiFlexi\Job();
+                    // Prepare environment overrides as ConfigFields
+                    $uploadEnv = new \MultiFlexi\ConfigFields('Overrides');
                     foreach ($envOverrides as $item) {
                         if (str_contains($item, '=')) {
                             [$key, $value] = explode('=', $item, 2);
-                            $field = $environment->getField($key);
-                            if ($field) {
-                                $field->setValue($value);
-                            }
+                            $uploadEnv->addField(new \MultiFlexi\ConfigField($key, 'string', $key, '', '', $value));
                         }
                     }
-                    $dt = ($scheduleTime === 'now') ? new \DateTime() : new \DateTime($scheduleTime);
-                    $job = new \MultiFlexi\Job();
-                    $jobId = $job->newJob((int)$id, $environment->getEnvArray(), $dt, $executor, 'adhoc');
-                    $output->writeln(json_encode(['job_id' => $jobId, 'scheduled' => $dt->format('Y-m-d H:i:s'), 'executor' => $executor], \JSON_PRETTY_PRINT));
-
+                    $when = $scheduleTime;
+                    $prepared = $jobber->prepareJob($rt->getMyKey(), $uploadEnv, new \DateTime($when), $executor);
+                    $scheduleId = $jobber->scheduleJobRun(new \DateTime($when));
+                    $output->writeln(json_encode([
+                        'runtemplate_id' => $id,
+                        'scheduled' => (new \DateTime($when))->format('Y-m-d H:i:s'),
+                        'executor' => $executor,
+                        'schedule_id' => $scheduleId,
+                        'job_id' => $jobber->getMyKey(),
+                    ], \JSON_PRETTY_PRINT));
                     return MultiFlexiCommand::SUCCESS;
                 } catch (\Exception $e) {
                     $output->writeln('<error>Failed to schedule runtemplate: ' . $e->getMessage() . '</error>');
-
                     return MultiFlexiCommand::FAILURE;
                 }
 
