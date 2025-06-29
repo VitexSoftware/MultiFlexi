@@ -6,30 +6,60 @@ multiflexi-cli \- MultiFlexi command-line interface for application and job mana
 [\fICOMMAND\fR] [\fIACTION\fR] [\fIOPTIONS\fR]
 .SH DESCRIPTION
 .B multiflexi-cli
-is a command-line tool for managing MultiFlexi applications, jobs, users, tokens, companies, and more. It provides CRUD operations and status checks for all major MultiFlexi entities.
+is a command-line tool for managing MultiFlexi applications, jobs, users, tokens, companies, runtemplates, and more. It provides CRUD operations, scheduling, and status checks for all major MultiFlexi entities.
 
 .SH COMMANDS
 .TP
 .B application
-Manage applications (list, get, create, update, delete, import-json, export-json, remove-json)
+Manage applications
+.RS
+Actions: list, get, create, update, delete, import-json, export-json, remove-json
+Options: --id, --name, --uuid, --config, --format, --help
+.RE
 .TP
 .B job
-Manage jobs (list, get, create, update)
+Manage jobs
+.RS
+Actions: list, get, create, update
+Options: --id, --runtemplate_id, --scheduled, --executor, --schedule_type, --app_id, --format, --help
+.RE
 .TP
 .B user
-Manage users (list, get, create, update, delete)
+Manage users
+.RS
+Actions: list, get, create, update, delete
+Options: --id, --login, --email, --format, --help
+.RE
 .TP
 .B token
-Manage tokens (list, get, create, generate, update)
+Manage tokens
+.RS
+Actions: list, get, create, generate, update
+Options: --id, --user, --token, --format, --help
+.RE
 .TP
 .B company
-Manage companies (list, get, create, update)
+Manage companies
+.RS
+Actions: list, get, create, update
+Options: --id, --ic, --name, --format, --help
+.RE
 .TP
 .B runtemplate
-Manage runtemplates (list, get, create, update, delete)
+Manage runtemplates
+.RS
+Actions: list, get, create, update, delete, schedule
+Options: --id, --name, --app_id, --company_id, --interv, --active, --config, --schedule_time, --executor, --env, --format, --help
+
+Note: Only runtemplates with active=1 can be scheduled. Inactive runtemplates will be rejected.
+.RE
 .TP
 .B credtype
-Credential type operations (list, get, update)
+Credential type operations
+.RS
+Actions: list, get, update
+Options: --id, --name, --format, --help
+.RE
 .TP
 .B appstatus
 Prints App Status
@@ -65,6 +95,9 @@ Get user by login:
 .TP
 Create a new token for user ID 3:
 .B multiflexi-cli token create --user 3 --token sometoken
+.TP
+Schedule a runtemplate (active=1 required):
+.B multiflexi-cli runtemplate schedule --id=123 --schedule_time="2025-07-01 10:00:00" --executor=Native --env=FOO=bar
 .TP
 Show available commands and options:
 .B multiflexi-cli describe

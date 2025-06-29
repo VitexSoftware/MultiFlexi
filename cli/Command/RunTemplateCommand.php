@@ -220,6 +220,10 @@ class RunTemplateCommand extends MultiFlexiCommand
                         $output->writeln('<error>RunTemplate not found</error>');
                         return MultiFlexiCommand::FAILURE;
                     }
+                    if ((int)$rt->getDataValue('active') !== 1) {
+                        $output->writeln('<error>RunTemplate is not active. Scheduling forbidden.</error>');
+                        return MultiFlexiCommand::FAILURE;
+                    }
                     $jobber = new \MultiFlexi\Job();
                     // Prepare environment overrides as ConfigFields
                     $uploadEnv = new \MultiFlexi\ConfigFields('Overrides');
