@@ -81,6 +81,7 @@ Phinx by CakePHP - https://phinx.org. 0.9.2-3
 
 using config file .usrlibmultiflexiphinx-adapter.php
 using config parser php
+
 using migration paths 
  - /usr/lib/multiflexi/db/migrations
 using seed paths 
