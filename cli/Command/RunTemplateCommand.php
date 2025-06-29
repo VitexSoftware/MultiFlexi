@@ -47,7 +47,10 @@ class RunTemplateCommand extends MultiFlexiCommand
             ->addOption('company_id', null, InputOption::VALUE_REQUIRED, 'Company ID')
             ->addOption('interv', null, InputOption::VALUE_REQUIRED, 'Interval code')
             ->addOption('active', null, InputOption::VALUE_REQUIRED, 'Active')
-            ->addOption('config', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Application config key=value (repeatable)');
+            ->addOption('config', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Application config key=value (repeatable)')
+            ->addOption('schedule_time', null, InputOption::VALUE_OPTIONAL, 'Schedule time for launch (Y-m-d H:i:s or "now")', 'now')
+            ->addOption('executor', null, InputOption::VALUE_OPTIONAL, 'Executor to use for launch', 'Native')
+            ->addOption('env', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Environment override key=value (repeatable)');
         // Add more options as needed
     }
 
@@ -202,6 +205,39 @@ class RunTemplateCommand extends MultiFlexiCommand
                 }
 
                 return MultiFlexiCommand::SUCCESS;
+            case 'schedule':
+                $id = $input->getOption('id');
+                if (empty($id)) {
+                    $output->writeln('<error>Missing --id for runtemplate schedule</error>');
+
+                    return MultiFlexiCommand::FAILURE;
+                }
+                $scheduleTime = $input->getOption('schedule_time') ?? 'now';
+                $executor = $input->getOption('executor') ?? 'Native';
+                $envOverrides = $input->getOption('env') ?? [];
+                try {
+                    $rt = new \MultiFlexi\RunTemplate((int)$id);
+                    $environment = $rt->getRuntemplateEnvironment();
+                    foreach ($envOverrides as $item) {
+                        if (str_contains($item, '=')) {
+                            [$key, $value] = explode('=', $item, 2);
+                            $field = $environment->getField($key);
+                            if ($field) {
+                                $field->setValue($value);
+                            }
+                        }
+                    }
+                    $dt = ($scheduleTime === 'now') ? new \DateTime() : new \DateTime($scheduleTime);
+                    $job = new \MultiFlexi\Job();
+                    $jobId = $job->newJob((int)$id, $environment->getEnvArray(), $dt, $executor, 'adhoc');
+                    $output->writeln(json_encode(['job_id' => $jobId, 'scheduled' => $dt->format('Y-m-d H:i:s'), 'executor' => $executor], \JSON_PRETTY_PRINT));
+
+                    return MultiFlexiCommand::SUCCESS;
+                } catch (\Exception $e) {
+                    $output->writeln('<error>Failed to schedule runtemplate: ' . $e->getMessage() . '</error>');
+
+                    return MultiFlexiCommand::FAILURE;
+                }
 
             default:
                 $output->writeln("<error>Unknown action: {$action}</error>");
