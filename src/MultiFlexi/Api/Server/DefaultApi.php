@@ -75,6 +75,61 @@ class DefaultApi extends AbstractDefaultApi
     }
 
     /**
+     * POST loginSuffixPost
+     * REST autentizace uživatele pro frontend (React, Vite, ...)
+     * Vrací token a základní info o uživateli při úspěchu.
+     */
+    public function loginSuffixPost(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        string $suffix
+    ): ResponseInterface {
+        $params = $request->getParsedBody() ?: $request->getQueryParams();
+        $username = $params['username'] ?? $params['login'] ?? null;
+        $password = $params['password'] ?? null;
+        $payload = [];
+
+        if (!$username || !$password) {
+            $payload['message'] = _('Missing username or password');
+            $payload['status'] = 'error';
+            return self::prepareResponse($response->withStatus(400), $payload, $suffix);
+        }
+
+        $user = new \MultiFlexi\User($username);
+
+        if ($user->getMyKey()) {
+            if ($user->passwordValidation($password, $user->getDataValue($user->passwordColumn))) {
+                if ($user->isAccountEnabled()) {
+                    $token = new \MultiFlexi\Token();
+                    $token->setDataValue('user_id', $user->getDataValue('id'));
+                    $token->generate()->dbSync();
+                    $payload['token'] = $token->getRecordName();
+                    $payload['user'] = [
+                        'id' => $user->getDataValue('id'),
+                        'login' => $user->getDataValue('login'),
+                        'email' => $user->getDataValue('email'),
+                    ];
+                    $payload['message'] = _('Login successful');
+                    $payload['status'] = 'success';
+                    return self::prepareResponse($response, $payload, $suffix);
+                } else {
+                    $payload['message'] = _('Account is disabled');
+                    $payload['status'] = 'error';
+                    return self::prepareResponse($response->withStatus(403), $payload, $suffix);
+                }
+            } else {
+                $payload['message'] = _('Invalid password');
+                $payload['status'] = 'error';
+                return self::prepareResponse($response->withStatus(401), $payload, $suffix);
+            }
+        } else {
+            $payload['message'] = sprintf(_('User %s does not exist'), $username);
+            $payload['status'] = 'error';
+            return self::prepareResponse($response->withStatus(404), $payload, $suffix);
+        }
+    }
+
+    /**
      * GET getApiIndex
      * Summary: Endpoints listing
      * Notes: Show current API.
