@@ -130,6 +130,71 @@ class DefaultApi extends AbstractDefaultApi
     }
 
     /**
+     * POST logoutSuffixPost
+     * Odhlášení uživatele (invalidate token/session)
+     *
+     * @openapi
+     *   /logout:
+     *     post:
+     *       summary: Odhlášení uživatele (invalidate token/session)
+     *       description: Invalidační aktuální uživatelskou session nebo token (OAuth2, JWT, případně session cookie).
+     *       requestBody:
+     *         required: true
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: object
+     *               properties:
+     *                 token:
+     *                   type: string
+     *                   description: Uživatelský token k invalidaci
+     *       responses:
+     *         '200':
+     *           description: Odhlášení proběhlo úspěšně
+     *         '401':
+     *           description: Uživatel není přihlášen nebo token je neplatný
+     */
+    public function logoutSuffixPost(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        string $suffix
+    ): ResponseInterface {
+        // CSRF ochrana: pouze POST
+        if (strtoupper($request->getMethod()) !== 'POST') {
+            $payload = [
+                'message' => _('Method Not Allowed'),
+                'status' => 'error',
+            ];
+            return self::prepareResponse($response->withStatus(405), $payload, $suffix);
+        }
+        $params = $request->getParsedBody() ?: $request->getQueryParams();
+        $tokenValue = $params['token'] ?? null;
+        $payload = [];
+
+        if (!$tokenValue) {
+            $payload['message'] = _('Missing token');
+            $payload['status'] = 'error';
+            return self::prepareResponse($response->withStatus(400), $payload, $suffix);
+        }
+
+        $token = new \MultiFlexi\Token($tokenValue);
+        if ($token->getMyKey()) {
+            $userId = $token->getDataValue('user_id');
+            $token->deleteFromSQL();
+            // Logování odhlášení
+            \Ease\Shared::user(new \MultiFlexi\User($userId));
+            \Ease\Shared::user()->addStatusMessage(_('User logged out'), 'info');
+            $payload['message'] = _('Logout successful');
+            $payload['status'] = 'success';
+            return self::prepareResponse($response, $payload, $suffix);
+        } else {
+            $payload['message'] = _('Invalid or expired token');
+            $payload['status'] = 'error';
+            return self::prepareResponse($response->withStatus(401), $payload, $suffix);
+        }
+    }
+
+    /**
      * GET getApiIndex
      * Summary: Endpoints listing
      * Notes: Show current API.
