@@ -103,7 +103,7 @@ if (WebPage::singleton()->isPosted()) {
         // Spustit setup příkaz, pokud je nastaven
         $setupCommand = $app->getDataValue('setup');
         if (!empty($setupCommand)) {
-            $appEnvironment = $runTemplate->getRuntemplateEnvironment()->getEnvArray();
+            $appEnvironment = $runTemplate->getEnvironment()->getEnvArray();
             $process = new \Symfony\Component\Process\Process(
                 explode(' ', $setupCommand),
                 null,
