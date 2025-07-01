@@ -207,32 +207,43 @@ class RunTemplateCommand extends MultiFlexiCommand
                 return MultiFlexiCommand::SUCCESS;
             case 'schedule':
                 $id = $input->getOption('id');
+
                 if (empty($id)) {
                     $output->writeln('<error>Missing --id for runtemplate schedule</error>');
+
                     return MultiFlexiCommand::FAILURE;
                 }
+
                 $scheduleTime = $input->getOption('schedule_time') ?? 'now';
                 $executor = $input->getOption('executor') ?? 'Native';
                 $envOverrides = $input->getOption('env') ?? [];
+
                 try {
-                    $rt = new \MultiFlexi\RunTemplate(is_numeric($id) ? (int)$id : $id);
+                    $rt = new \MultiFlexi\RunTemplate(is_numeric($id) ? (int) $id : $id);
+
                     if (empty($rt->getMyKey())) {
                         $output->writeln('<error>RunTemplate not found</error>');
+
                         return MultiFlexiCommand::FAILURE;
                     }
-                    if ((int)$rt->getDataValue('active') !== 1) {
+
+                    if ((int) $rt->getDataValue('active') !== 1) {
                         $output->writeln('<error>RunTemplate is not active. Scheduling forbidden.</error>');
+
                         return MultiFlexiCommand::FAILURE;
                     }
+
                     $jobber = new \MultiFlexi\Job();
                     // Prepare environment overrides as ConfigFields
                     $uploadEnv = new \MultiFlexi\ConfigFields('Overrides');
+
                     foreach ($envOverrides as $item) {
                         if (str_contains($item, '=')) {
                             [$key, $value] = explode('=', $item, 2);
                             $uploadEnv->addField(new \MultiFlexi\ConfigField($key, 'string', $key, '', '', $value));
                         }
                     }
+
                     $when = $scheduleTime;
                     $prepared = $jobber->prepareJob($rt->getMyKey(), $uploadEnv, new \DateTime($when), $executor);
                     $scheduleId = $jobber->scheduleJobRun(new \DateTime($when));
@@ -243,9 +254,11 @@ class RunTemplateCommand extends MultiFlexiCommand
                         'schedule_id' => $scheduleId,
                         'job_id' => $jobber->getMyKey(),
                     ], \JSON_PRETTY_PRINT));
+
                     return MultiFlexiCommand::SUCCESS;
                 } catch (\Exception $e) {
-                    $output->writeln('<error>Failed to schedule runtemplate: ' . $e->getMessage() . '</error>');
+                    $output->writeln('<error>Failed to schedule runtemplate: '.$e->getMessage().'</error>');
+
                     return MultiFlexiCommand::FAILURE;
                 }
 

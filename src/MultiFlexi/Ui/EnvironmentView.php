@@ -32,8 +32,23 @@ class EnvironmentView extends \Ease\Html\TableTag
         $this->addRowHeaderColumns([_('Name'), _('Value'), _('Source')]);
 
         foreach ($environment as $key => $field) {
-            $this->addRowColumns([new \Ease\Html\SpanTag($key, ['title' => $field->getDescription()]), $field->getValue(), $field->getSource()]);
+            $this->addRowColumns([new \Ease\Html\SpanTag($key, ['title' => $field->getDescription()]), $field->getValue(), self::sourceView($field->getSource())]);
         }
+    }
+
+    public static function sourceView(string $source): \Ease\Html\DivTag
+    {
+        if (\Ease\Functions::isSerialized($source)) {
+            $origin = unserialize($source);
+
+            if (method_exists($origin, 'getObjectName')) {
+                $source = $origin->getObjectName();
+            } else {
+                $source = \Ease\Functions::baseClassName($origin);
+            }
+        }
+
+        return new \Ease\Html\DivTag($source);
     }
 
     public function functionName($param): void

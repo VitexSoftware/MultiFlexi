@@ -125,6 +125,26 @@ Examples:
     multiflexi-cli companyapp update --id=1 --name="Updated App"
     multiflexi-cli companyapp list  --company_id=1 --app_id=19 --format=json | jq '.[].id'
 
+queue
+=====
+
+.. code-block:: bash
+
+    multiflexi-cli queue list
+    multiflexi-cli queue truncate
+
+List or truncate the job schedule queue using the schedule engine.
+
+- ``list``: Show all scheduled jobs in the queue. Output can be formatted as text (default) or JSON with ``-f json``.
+- ``truncate``: Remove all scheduled jobs from the queue. Output can be formatted as text (default) or JSON with ``-f json``.
+
+Examples:
+
+.. code-block:: bash
+
+    multiflexi-cli queue list -f json
+    multiflexi-cli queue truncate -f json
+
 completion
 ----------
 

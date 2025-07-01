@@ -102,6 +102,7 @@ if (WebPage::singleton()->isPosted()) {
         $configurator->addStatusMessage(_('Config fields Saved'), 'success');
         // Spustit setup příkaz, pokud je nastaven
         $setupCommand = $app->getDataValue('setup');
+
         if (!empty($setupCommand)) {
             $appEnvironment = $runTemplate->getEnvironment()->getEnvArray();
             $process = new \Symfony\Component\Process\Process(
@@ -109,18 +110,21 @@ if (WebPage::singleton()->isPosted()) {
                 null,
                 $appEnvironment,
                 null,
-                32767
+                32767,
             );
             $result = $process->run();
             $output = $process->getOutput();
             $error = $process->getErrorOutput();
+
             if ($result === 0) {
                 $configurator->addStatusMessage(_('Setup command executed successfully:'), 'success');
+
                 if ($output) {
                     $configurator->addStatusMessage($output, 'info');
                 }
             } else {
                 $configurator->addStatusMessage(_('Setup command failed:'), 'error');
+
                 if ($error) {
                     $configurator->addStatusMessage($error, 'error');
                 }
