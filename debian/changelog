@@ -1,8 +1,14 @@
-multiflexi (1.27.1) UNRELEASED; urgency=medium
+multiflexi (1.27.2) UNRELEASED; urgency=medium
+
+  * Run setup command after saving of configuration
+
+ -- vitex <info@vitexsoftware.cz>  Tue, 01 Jul 2025 16:03:57 +0200
+
+multiflexi (1.27.1) jammy; urgency=medium
 
   * credential type now can keep its configuragion
 
- -- vitex <info@vitexsoftware.cz>  Mon, 24 Mar 2025 20:42:20 +0100
+ -- vitex <info@vitexsoftware.cz>  Tue, 01 Jul 2025 16:03:10 +0200
 
 multiflexi (1.26.0) jammy; urgency=medium
 

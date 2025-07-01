@@ -359,48 +359,6 @@ EOD;
             $this->reportToZabbix($this->zabbixMessageData);
         }
 
-        $setupCommand = $this->application->getDataValue('setup');
-
-        if ($setupCommand && $this->isProvisioned($runTemplateId) === 0) {
-            $this->addStatusMessage(_('Perform initial setup'), 'warning');
-
-            if (!empty(trim($setupCommand))) {
-                $this->application->addStatusMessage(_('Setup command').': '.$setupCommand, 'debug');
-                $appInfo = $this->runTemplate->getAppInfo();
-                $appEnvironment = Environmentor::flatEnv($this->environment);
-                $process = new \Symfony\Component\Process\Process(
-                    explode(' ', $setupCommand),
-                    null,
-                    $appEnvironment,
-                    null,
-                    32767,
-                );
-                $result = $process->run(static function ($type, $buffer): void {
-                    $logger = new Runner();
-
-                    if ($buffer) {
-                        if (\Symfony\Component\Process\Process::ERR === $type) {
-                            $outline = (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert($buffer);
-                            $logger->addStatusMessage($buffer, 'error');
-                        } else {
-                            $logger->addStatusMessage($buffer, 'success');
-                            $outline = (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert($buffer);
-                        }
-                    }
-                });
-
-                if ($result === 0) {
-                    $this->runTemplate->setProvision(1);
-
-                    if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
-                        $this->reportToZabbix(['phase' => 'setup']); // TODO: report provision done
-                    }
-
-                    $this->addStatusMessage('provision done', 'success');
-                }
-            }
-        }
-
         return $outline;
     }
 
