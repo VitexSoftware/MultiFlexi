@@ -82,7 +82,7 @@ class DefaultApi extends AbstractDefaultApi
     public function loginSuffixPost(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        string $suffix
+        string $suffix,
     ): ResponseInterface {
         $params = $request->getParsedBody() ?: $request->getQueryParams();
         $username = $params['username'] ?? $params['login'] ?? null;
@@ -92,6 +92,7 @@ class DefaultApi extends AbstractDefaultApi
         if (!$username || !$password) {
             $payload['message'] = _('Missing username or password');
             $payload['status'] = 'error';
+
             return self::prepareResponse($response->withStatus(400), $payload, $suffix);
         }
 
@@ -111,27 +112,31 @@ class DefaultApi extends AbstractDefaultApi
                     ];
                     $payload['message'] = _('Login successful');
                     $payload['status'] = 'success';
+
                     return self::prepareResponse($response, $payload, $suffix);
-                } else {
-                    $payload['message'] = _('Account is disabled');
-                    $payload['status'] = 'error';
-                    return self::prepareResponse($response->withStatus(403), $payload, $suffix);
                 }
-            } else {
-                $payload['message'] = _('Invalid password');
+
+                $payload['message'] = _('Account is disabled');
                 $payload['status'] = 'error';
-                return self::prepareResponse($response->withStatus(401), $payload, $suffix);
+
+                return self::prepareResponse($response->withStatus(403), $payload, $suffix);
             }
-        } else {
-            $payload['message'] = sprintf(_('User %s does not exist'), $username);
+
+            $payload['message'] = _('Invalid password');
             $payload['status'] = 'error';
-            return self::prepareResponse($response->withStatus(404), $payload, $suffix);
+
+            return self::prepareResponse($response->withStatus(401), $payload, $suffix);
         }
+
+        $payload['message'] = sprintf(_('User %s does not exist'), $username);
+        $payload['status'] = 'error';
+
+        return self::prepareResponse($response->withStatus(404), $payload, $suffix);
     }
 
     /**
      * POST logoutSuffixPost
-     * Odhlášení uživatele (invalidate token/session)
+     * Odhlášení uživatele (invalidate token/session).
      *
      * @openapi
      *   /logout:
@@ -157,7 +162,7 @@ class DefaultApi extends AbstractDefaultApi
     public function logoutSuffixPost(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        string $suffix
+        string $suffix,
     ): ResponseInterface {
         // CSRF ochrana: pouze POST
         if (strtoupper($request->getMethod()) !== 'POST') {
@@ -165,8 +170,10 @@ class DefaultApi extends AbstractDefaultApi
                 'message' => _('Method Not Allowed'),
                 'status' => 'error',
             ];
+
             return self::prepareResponse($response->withStatus(405), $payload, $suffix);
         }
+
         $params = $request->getParsedBody() ?: $request->getQueryParams();
         $tokenValue = $params['token'] ?? null;
         $payload = [];
@@ -174,10 +181,12 @@ class DefaultApi extends AbstractDefaultApi
         if (!$tokenValue) {
             $payload['message'] = _('Missing token');
             $payload['status'] = 'error';
+
             return self::prepareResponse($response->withStatus(400), $payload, $suffix);
         }
 
         $token = new \MultiFlexi\Token($tokenValue);
+
         if ($token->getMyKey()) {
             $userId = $token->getDataValue('user_id');
             $token->deleteFromSQL();
@@ -186,12 +195,14 @@ class DefaultApi extends AbstractDefaultApi
             \Ease\Shared::user()->addStatusMessage(_('User logged out'), 'info');
             $payload['message'] = _('Logout successful');
             $payload['status'] = 'success';
+
             return self::prepareResponse($response, $payload, $suffix);
-        } else {
-            $payload['message'] = _('Invalid or expired token');
-            $payload['status'] = 'error';
-            return self::prepareResponse($response->withStatus(401), $payload, $suffix);
         }
+
+        $payload['message'] = _('Invalid or expired token');
+        $payload['status'] = 'error';
+
+        return self::prepareResponse($response->withStatus(401), $payload, $suffix);
     }
 
     /**

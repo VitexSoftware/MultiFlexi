@@ -98,19 +98,17 @@ class RuntemplateConfigForm extends EngineForm
         $this->addItem(new \Ease\Html\InputHiddenTag('app_id', $engine->getDataValue('app_id')));
         $this->addItem(new \Ease\Html\InputHiddenTag('company_id', $engine->getDataValue('company_id')));
 
-
         $saveRow = new \Ease\TWB4\Row();
-        $saveColumn =  $saveRow->addColumn(8, new \Ease\TWB4\SubmitButton(_('Save'), 'success btn-lg btn-block'));
+        $saveColumn = $saveRow->addColumn(8, new \Ease\TWB4\SubmitButton(_('Save'), 'success btn-lg btn-block'));
         $saveRow->addColumn(4, new \Ease\TWB4\LinkButton('actions.php?id='.$engine->getMyKey(), '🛠️&nbsp;'._('Actions'), 'secondary btn-lg btn-block'));
-        
+
         $appSetupCommand = $engine->getApplication()->getDataValue('setup');
+
         if (!empty($appSetupCommand)) {
-            $saveColumn->addItem(new \Ease\TWB4\Alert('info', 'ℹ️&nbsp;' ._('After saving configuration, the following setup command will be executed:').'<br><code>'.$appSetupCommand.'</code>'));
+            $saveColumn->addItem(new \Ease\TWB4\Alert('info', 'ℹ️&nbsp;'._('After saving configuration, the following setup command will be executed:').'<br><code>'.$appSetupCommand.'</code>'));
         }
 
         $this->addItem($saveRow);
-        
-        
     }
 
     public static function allForms(): array
