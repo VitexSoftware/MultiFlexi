@@ -98,7 +98,7 @@ class CredentialType extends DBEngine
             if ((\is_object($this->helper) === false) || (\Ease\Functions::baseClassName($this->helper) !== $class)) {
                 $this->helper = new $credTypeClass();
 
-                if ($this->getMyKey()) {
+                if ($this->getMyKey() && method_exists($this->helper, 'load')) {
                     $this->helper->load($this->getMyKey());
                 }
             }
