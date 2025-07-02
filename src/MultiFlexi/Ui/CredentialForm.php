@@ -55,12 +55,17 @@ class CredentialForm extends Form
 
             if ($credentialTypeSelect->getItemsCount()) {
                 $formContents[] = new FormGroup(_('Credential Type'), $credentialTypeSelect);
+                
+                if($kredenc->getCredentialType()){
+                    $formContents[] = new LinkButton('credentialtype.php?id='.$kredenc->getCredentialType()->getMyKey(), sprintf(_('🔐 edit credential type %s'), $kredenc->getCredentialType()->getDataValue('name') ), 'secondary btn-sm', ['title' => _('Edit Credential Type')]);
+                }
+                
             } else {
                 // Use a disabled input to show the message instead of SpanTag
                 $formContents[] = new FormGroup(_('Credential Type'), new InputTextTag('credential_type_id', _('No credential types for company defined yet'), ['readonly' => 'readonly', 'disabled' => 'disabled']));
             }
 
-            $formContents[] = new LinkButton('credentialtype.php?company_id='.$kredenc->getDataValue('company_id').'&class='.$formType, '️➕ 🔐', 'success btn-sm', ['title' => _('New Credential Type')]);
+            $formContents[] = new LinkButton('credentialtype.php?company_id='.$kredenc->getDataValue('company_id').'&class='.$formType, '️➕ 🔐 new credential type', 'success btn-sm', ['title' => _('New Credential Type')]);
         } else {
             $formContents[] = new FormGroup(_('Choose company first'), new InputHiddenTag('credential_type_id', '0'));
         }

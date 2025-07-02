@@ -46,13 +46,17 @@ class QueueCommand extends MultiFlexiCommand
                 return self::SUCCESS;
             case 'truncate':
                 $scheduler = new Scheduler();
+                $waiting = $scheduler->listingQuery()->count();
                 $pdo = $scheduler->getFluentPDO()->getPdo();
                 $table = $scheduler->getMyTable();
                 $result = $pdo->exec('TRUNCATE TABLE ' . $table);
-                $msg = ($result !== false) ? 'Queue truncated.' : 'Failed to truncate queue.';
+                $msg = ($result !== false)
+                    ? ("Queue truncated. Previously waiting jobs: $waiting.")
+                    : 'Failed to truncate queue.';
                 if ($format === 'json') {
-                    $output->writeln(json_encode(['result' => $msg], \JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode(['result' => $msg, 'waiting' => $waiting], \JSON_PRETTY_PRINT));
                 } else {
+                    $output->writeln("Jobs waiting before truncate: $waiting");
                     $output->writeln($msg);
                 }
                 return ($result !== false) ? self::SUCCESS : self::FAILURE;

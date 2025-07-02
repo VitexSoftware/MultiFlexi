@@ -30,6 +30,11 @@ Actions:
 - get:    Get job details by ID.
 - create: Create a new job (requires --runtemplate_id and --scheduled).
 - update: Update an existing job (requires --id).
+- delete: Delete a job by its ID.
+
+Options:
+  --id           Job ID (required for delete)
+  -f, --format   Output format: text or json (default: text)
 
 Examples:
 
@@ -39,6 +44,7 @@ Examples:
     multiflexi-cli job get --id=123
     multiflexi-cli job create --runtemplate_id=5 --scheduled="2024-07-01 12:00"
     multiflexi-cli job update --id=123 --executor=Native
+    multiflexi-cli job delete --id=123
 
 company
 -------

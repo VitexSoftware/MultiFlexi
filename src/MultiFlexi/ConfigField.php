@@ -36,6 +36,7 @@ class ConfigField
     private bool $isManual = true;
     private bool $multiLine = false;
     private ?string $logo = null; // Add logo property
+    private bool $isExpiring = false; // New property to mark expiring fields
 
     /**
      * ConfigField constructor.
@@ -274,6 +275,24 @@ class ConfigField
     }
 
     /**
+     * Set whether the field is expiring (e.g., token or credential with expiration).
+     */
+    public function setExpiring(bool $isExpiring): self
+    {
+        $this->isExpiring = $isExpiring;
+
+        return $this;
+    }
+
+    /**
+     * Check if the field is expiring.
+     */
+    public function isExpiring(): bool
+    {
+        return $this->isExpiring;
+    }
+
+    /**
      * Get the configuration field as an array.
      *
      * @return array<string, bool|string>
@@ -294,6 +313,7 @@ class ConfigField
             'secret' => $this->isSecret(),
             'manual' => $this->isManual(),
             'multiline' => $this->isMultiLine(), // Added multiLine to array
+            'expiring' => $this->isExpiring(), // Added isExpiring to array
         ];
     }
 }

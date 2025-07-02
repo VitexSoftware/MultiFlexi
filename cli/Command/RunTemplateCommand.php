@@ -40,7 +40,7 @@ class RunTemplateCommand extends MultiFlexiCommand
         $this
             ->setDescription('Manage runtemplates')
             ->addOption('format', 'f', InputOption::VALUE_OPTIONAL, 'The output format: text or json. Defaults to text.', 'text')
-            ->addArgument('action', InputArgument::REQUIRED, 'Action: list|get|create|update|delete')
+            ->addArgument('action', InputArgument::REQUIRED, 'Action: list|get|create|update|delete|schedule')
             ->addOption('id', null, InputOption::VALUE_REQUIRED, 'RunTemplate ID')
             ->addOption('name', null, InputOption::VALUE_REQUIRED, 'Name')
             ->addOption('app_id', null, InputOption::VALUE_REQUIRED, 'App ID')

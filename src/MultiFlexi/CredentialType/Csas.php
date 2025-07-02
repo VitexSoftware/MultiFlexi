@@ -42,7 +42,7 @@ class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\creden
         $this->configFieldsProvided->addField($csasSandboxMode);
 
         $csasAccessToken = new \MultiFlexi\ConfigField('CSAS_ACCESS_TOKEN', 'string', _('CSAS Access Token'), _('Access token for CSAS services'));
-        $csasAccessToken->setHint('ewogIC.....uNjQzWiIKfQ==')->setManual(false)->setRequired(true);
+        $csasAccessToken->setHint('ewogIC.....uNjQzWiIKfQ==')->setManual(false)->setRequired(true)->setExpiring(true);
         $this->configFieldsProvided->addField($csasAccessToken);
 
         // Check if csas-access-token command exists
