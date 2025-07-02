@@ -53,7 +53,7 @@ class JobCommand extends MultiFlexiCommand
             ->addOption('format', 'f', InputOption::VALUE_OPTIONAL, 'The output format: text or json. Defaults to text.', 'text')
             ->setHelp('This command manage Jobs')
             ->setDescription('Manage jobs')
-            ->addArgument('action', InputArgument::REQUIRED, 'Action: list|get|create|update')
+            ->addArgument('action', InputArgument::REQUIRED, 'Action: list|get|create|update|delete')
             ->addOption('id', null, InputOption::VALUE_REQUIRED, 'Job ID')
             ->addOption('runtemplate_id', null, InputOption::VALUE_REQUIRED, 'Runtemplate ID')
             ->addOption('scheduled', null, InputOption::VALUE_REQUIRED, 'Scheduled datetime')

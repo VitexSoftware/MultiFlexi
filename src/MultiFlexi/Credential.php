@@ -175,7 +175,7 @@ class Credential extends DBEngine
             ++$dataCount;
         }
 
-        if ($this->getDataValue('credential_type_id')) {
+        if ($this->getDataValue('credential_type_id')) { // Override by credential type
             $this->setCredentialType(new CredentialType($this->getDataValue('credential_type_id')));
         }
 

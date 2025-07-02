@@ -35,7 +35,7 @@ abstract class CredentialProtoType extends \Ease\Sand
     public function load(int $credTypeId)
     {
         $loader = new \MultiFlexi\CrTypeOption();
-
+        $this->fieldsInternal();
         return $this->takeData($loader->listingQuery()->where('credential_type_id', $credTypeId)->fetchAll('name'));
     }
 

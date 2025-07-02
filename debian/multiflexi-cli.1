@@ -20,7 +20,7 @@ Options: --id, --name, --uuid, --config, --format, --help
 .B job
 Manage jobs
 .RS
-Actions: list, get, create, update
+Actions: list, get, create, update, delete
 Options: --id, --runtemplate_id, --scheduled, --executor, --schedule_type, --app_id, --format, --help
 .RE
 .TP
@@ -107,6 +107,9 @@ Schedule a runtemplate (active=1 required):
 .TP
 Show available commands and options:
 .B multiflexi-cli describe
+.TP
+Delete a job by its ID:
+.B multiflexi-cli job delete --id=123
 
 .SH AUTHOR
 Vítězslav Dvořák <info@vitexsoftware.cz>
