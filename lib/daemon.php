@@ -33,23 +33,53 @@ if (strtolower(\Ease\Shared::cfg('APP_DEBUG', 'false')) === 'true') {
 \define('EASE_LOGGER', implode('|', $loggers));
 \Ease\Shared::user(new \Ease\Anonym());
 
+$scheduler = null;
+
+function waitForDatabase(): void
+{
+    while (true) {
+        try {
+            $testScheduler = new Scheduler();
+            $testScheduler->getCurrentJobs(); // Try a simple query
+            unset($testScheduler);
+            break;
+        } catch (\Throwable $e) {
+            error_log('Database unavailable: ' . $e->getMessage());
+            sleep(30);
+        }
+    }
+}
+
+waitForDatabase();
 $scheduler = new Scheduler();
 $scheduler->logBanner('MultiFlexi Daemon started');
 
 do {
-    $jobsToLaunch = $scheduler->getCurrentJobs();
+    try {
+        $jobsToLaunch = $scheduler->getCurrentJobs();
+        if (!is_iterable($jobsToLaunch)) {
+            $jobsToLaunch = [];
+        }
+    } catch (\Throwable $e) {
+        error_log('Database error: ' . $e->getMessage());
+        waitForDatabase();
+        $scheduler = new Scheduler();
+        continue;
+    }
 
     foreach ($jobsToLaunch as $scheduledJob) {
-        $job = new Job($scheduledJob['job']);
-
-        if (empty($job->getData()) === false) {
-            $job->performJob();
-        } else {
-            $job->addStatusMessage(sprintf(_('Job #%d Does not exists'), $scheduledJob['job']), 'error');
+        try {
+            $job = new Job($scheduledJob['job']);
+            if (empty($job->getData()) === false) {
+                $job->performJob();
+            } else {
+                $job->addStatusMessage(sprintf(_('Job #%d Does not exists'), $scheduledJob['job']), 'error');
+            }
+            $scheduler->deleteFromSQL($scheduledJob['id']);
+            $job->cleanUp();
+        } catch (\Throwable $e) {
+            error_log('Job error: ' . $e->getMessage());
         }
-
-        $scheduler->deleteFromSQL($scheduledJob['id']);
-        $job->cleanUp();
     }
 
     if ($daemonize) {
