@@ -147,8 +147,14 @@ class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\creden
         return 'csas-authorize.svg';
     }
 
+    /**
+     * Query CSAS credential values.
+     *
+     * @param bool $checkOnly If true, only check if token can be obtained (do not populate values)
+     * @return \MultiFlexi\ConfigFields
+     */
     #[\Override]
-    public function query(): \MultiFlexi\ConfigFields
+    public function query(bool $checkOnly = false): \MultiFlexi\ConfigFields
     {
         $tokenUuid = $this->configFieldsInternal->getFieldByCode('CSAS_TOKEN_ID')->getValue();
 
@@ -156,15 +162,25 @@ class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\creden
             $tmpfile = sys_get_temp_dir().'/'.time().'.env';
             $subCommand = 'csas-access-token -t'.$tokenUuid.' -o'.$tmpfile;
             $this->addStatusMessage(sprintf(_('Obtaining fresh token using: %s'), $subCommand), 'debug');
-            system($subCommand);
+            system('XDEBUG_MODE=off '.$subCommand);
             $envData = EnvFile::readEnvFile($tmpfile);
+
+            if ($checkOnly) {
+                // Only check if token was obtained, do not populate values
+                if (isset($envData['CSAS_ACCESS_TOKEN']) && !empty($envData['CSAS_ACCESS_TOKEN'])) {
+                    $this->addStatusMessage(_('Token successfully obtained.'), 'success');
+                } else {
+                    $this->addStatusMessage(_('Token could not be obtained.'), 'error');
+                }
+                unlink($tmpfile);
+                return $this->configFieldsProvided;
+            }
 
             foreach (array_keys($this->configFieldsProvided->getFields()) as $configField) {
                 if (\array_key_exists($configField, $envData)) {
                     $this->configFieldsProvided->getFieldByCode($configField)->setValue($envData[$configField]);
                     $this->configFieldsProvided->getFieldByCode($configField)->setSource($tokenUuid);
                     $this->configFieldsProvided->getFieldByCode($configField)->setNote('Spoje-NET/csas-authorize');
-                    $this->configFieldsProvided->getFieldByCode($configField)->setValue($envData[$configField]);
                 }
             }
 

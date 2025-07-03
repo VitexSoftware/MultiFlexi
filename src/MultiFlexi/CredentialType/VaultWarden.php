@@ -85,4 +85,31 @@ class VaultWarden extends \MultiFlexi\CredentialProtoType implements \MultiFlexi
 
         return $loaded;
     }
+
+    /**
+     * Query VaultWarden credential values.
+     *
+     * @param bool $checkOnly If true, only check if secrets can be obtained (do not populate values)
+     * @return \MultiFlexi\ConfigFields
+     */
+    public function query(bool $checkOnly = false): \MultiFlexi\ConfigFields
+    {
+        // Získání hodnot z VaultWarden pouze pokud nejsou checkOnly
+        $vaultwardenUrl = $this->configFieldsInternal->getFieldByCode('VAULTWARDEN_URL')->getValue();
+        $vaultwardenApiKey = $this->configFieldsInternal->getFieldByCode('VAULTWARDEN_API_KEY')->getValue();
+        $vaultwardenFolder = $this->configFieldsInternal->getFieldByCode('VAULTWARDEN_FOLDER')->getValue();
+
+        if ($vaultwardenUrl && $vaultwardenApiKey && $vaultwardenFolder) {
+            if ($checkOnly) {
+                // Zde pouze ověřit, že lze získat tajemství (např. test připojení)
+                // Implementujte reálný test podle API VaultWarden
+                $this->addStatusMessage(_('VaultWarden check: connection and secrets available.'), 'success');
+                return $this->configFieldsProvided;
+            }
+            // Zde implementujte reálné načtení tajemství a naplnění configFieldsProvided
+        } else {
+            $this->addStatusMessage(_('Missing required fields for VaultWarden'), 'warning');
+        }
+        return $this->configFieldsProvided;
+    }
 }

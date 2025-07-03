@@ -169,7 +169,7 @@ if (WebPage::singleton()->isPosted()) {
 }
 
 if ($addField) {
-    $columnProvided = $crtype->getHelper()->fieldsProvided()->getFieldByCode($addField);
+    $columnProvided = $crtype->getHelper()->query()->getFieldByCode($addField);
 
     if (\is_object($columnProvided)) {
         $fielder->dataReset();
