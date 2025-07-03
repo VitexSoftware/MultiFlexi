@@ -30,25 +30,14 @@ abstract class CredentialProtoType extends \Ease\Sand
     {
         $this->configFieldsProvided = new \MultiFlexi\ConfigFields();
         $this->configFieldsInternal = new \MultiFlexi\ConfigFields();
+        $this->setObjectName();
     }
 
     public function load(int $credTypeId)
     {
         $loader = new \MultiFlexi\CrTypeOption();
-        $this->takeData($loader->listingQuery()->where('credential_type_id', $credTypeId)->fetchAll('name'));
-        $loadedFieldsCount = 0;
 
-        foreach ($this->configFieldsInternal as $configField) {
-            $fieldCode = $configField->getCode();
-            $fieldValue = $this->getDataValue($fieldCode);
-
-            if ($fieldValue !== null) {
-                $configField->setValue($fieldValue);
-                ++$loadedFieldsCount;
-            }
-        }
-
-        return $loadedFieldsCount;
+        return $this->takeData($loader->listingQuery()->where('credential_type_id', $credTypeId)->fetchAll('name'));
     }
 
     public function save(): bool
