@@ -6587,12 +6587,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "1720ddd719e16cf0db4eb1c6eca108031636d46c"
+                "reference": "d25e62e636b0a9b01e3bdebb7823b474876dd829"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/1720ddd719e16cf0db4eb1c6eca108031636d46c",
-                "reference": "1720ddd719e16cf0db4eb1c6eca108031636d46c",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/d25e62e636b0a9b01e3bdebb7823b474876dd829",
+                "reference": "d25e62e636b0a9b01e3bdebb7823b474876dd829",
                 "shasum": ""
             },
             "require": {
@@ -6632,7 +6632,7 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.13.1"
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.13.2"
             },
             "funding": [
                 {
@@ -6640,7 +6640,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-04-29T12:36:36+00:00"
+            "time": "2025-07-04T14:07:32+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -6825,12 +6825,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "c883a90ec7ed3b379b8400ccb1d3f0bce9315a7d"
+                "reference": "72621357fd9dfd5353aa8f53e25be367de7157cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/c883a90ec7ed3b379b8400ccb1d3f0bce9315a7d",
-                "reference": "c883a90ec7ed3b379b8400ccb1d3f0bce9315a7d",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/72621357fd9dfd5353aa8f53e25be367de7157cb",
+                "reference": "72621357fd9dfd5353aa8f53e25be367de7157cb",
                 "shasum": ""
             },
             "require": {
@@ -6876,7 +6876,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-26T12:22:20+00:00"
+            "time": "2025-07-04T09:58:52+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -6938,12 +6938,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "3d300c153b54b07f92788ae025adfe14d4db9d52"
+                "reference": "99d6bd19ae989a76586fdddc1ddce25279d35127"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/3d300c153b54b07f92788ae025adfe14d4db9d52",
-                "reference": "3d300c153b54b07f92788ae025adfe14d4db9d52",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/99d6bd19ae989a76586fdddc1ddce25279d35127",
+                "reference": "99d6bd19ae989a76586fdddc1ddce25279d35127",
                 "shasum": ""
             },
             "require": {
@@ -7020,7 +7020,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-18T10:26:39+00:00"
+            "time": "2025-07-02T06:40:52+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -7325,12 +7325,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6c7855fff66d6e324d613d6a6f605801fb7c694b"
+                "reference": "074f8e30790d9c374f364bfe33d8cfeb4d361d28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6c7855fff66d6e324d613d6a6f605801fb7c694b",
-                "reference": "6c7855fff66d6e324d613d6a6f605801fb7c694b",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/074f8e30790d9c374f364bfe33d8cfeb4d361d28",
+                "reference": "074f8e30790d9c374f364bfe33d8cfeb4d361d28",
                 "shasum": ""
             },
             "require": {
@@ -7423,7 +7423,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-28T14:53:02+00:00"
+            "time": "2025-07-04T06:01:02+00:00"
         },
         {
             "name": "psr/event-dispatcher",
@@ -7559,12 +7559,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "71d822298e3e959804ab086baf8d459f83a6ed98"
+                "reference": "d103eb2307c4527a916d1af8d29276c4371909ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/71d822298e3e959804ab086baf8d459f83a6ed98",
-                "reference": "71d822298e3e959804ab086baf8d459f83a6ed98",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/d103eb2307c4527a916d1af8d29276c4371909ad",
+                "reference": "d103eb2307c4527a916d1af8d29276c4371909ad",
                 "shasum": ""
             },
             "require": {
@@ -7612,7 +7612,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-30T09:54:22+00:00"
+            "time": "2025-07-04T14:14:51+00:00"
         },
         {
             "name": "sebastian/cli-parser",

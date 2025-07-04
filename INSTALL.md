@@ -203,3 +203,52 @@ Tím se načtou pouze ukázkové aplikace. Jsou li tyto také nainstalovány (na
 
 Webserver Apache je nakonfigurován aby aplikace běžela na cestě **/multiflexi/**
 Nginx a jiné webservery nejsou podporovány a je nutno je nastavit ručně.
+
+RedHat/CentOS/Fedora installation
+================================
+
+RPM packages are available for RedHat-based distributions (RHEL, CentOS, Fedora, AlmaLinux, Rocky Linux, etc.).
+
+First, add the VitexSoftware repository and install the required packages:
+
+```shell
+sudo dnf install -y wget
+sudo wget -O /etc/yum.repos.d/vitexsoftware.repo https://repo.vitexsoftware.com/vitexsoftware.repo
+sudo rpm --import https://repo.vitexsoftware.cz/keyring.gpg
+sudo dnf makecache
+sudo dnf install multiflexi-DATABASE
+```
+
+Available database adapters: **multiflexi-mysql**, **multiflexi-pgsql**, **multiflexi-sqlite**
+
+These packages from VitexSoftware will be installed:
+
+``
+php-cakephp-phinx
+composer-debian
+php-vitexsoftware-ease-core
+php-vitexsoftware-ease-html
+php-vitexsoftware-ease-bricks
+php-spojenet-abraflexi
+php-vitexsoftware-abraflexi-bricks
+php-vitexsoftware-ease-bootstrap4
+php-vitexsoftware-ease-bootstrap4-widgets
+php-vitexsoftware-ease-bootstrap4-widgets-abraflexi
+php-vitexsoftware-ease-fluentpdo
+multiflexi-mysql
+multiflexi
+``
+
+After installation, you can load demo data (user **demo** password **demo**) with:
+
+```shell
+multiflexi-phinx seed:run
+```
+
+Or, for only demo applications:
+
+```shell
+multiflexi-phinx seed:run -s AppSeeder
+```
+
+The Apache webserver is preconfigured for **/multiflexi/**. For Nginx or other webservers, manual configuration is required.

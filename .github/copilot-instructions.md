@@ -28,7 +28,7 @@ When writing code, always include type hints for function parameters and return 
 
 Update the multiflexi-cli.rst and multiflexi-cli.1 files each time when the multiflexi-cli command features changes somehow
 
-We are using the i18n library for internationalization, so always use the i18n functions for strings that need to be translated.
+We are using the i18n library for internationalization, so always use the _() functions for strings that need to be translated.
 
 When writing code, always ensure that it is secure and does not expose any sensitive information.
 
