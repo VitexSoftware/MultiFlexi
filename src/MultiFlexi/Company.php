@@ -55,32 +55,14 @@ class Company extends \MultiFlexi\Engine
     #[\Override]
     public function takeData(array $data): int
     {
-        if (isset($data['rw'])) {
-            $data['rw'] = true;
-        } else {
-            $data['rw'] = false;
-        }
-
-        if (isset($data['webhook'])) {
-            $data['webhook'] = true;
-        } else {
-            $data['webhook'] = false;
-        }
-
         if (isset($data['enabled'])) {
             $data['enabled'] = true;
         } else {
             $data['enabled'] = false;
         }
 
-        if (isset($data['setup'])) {
-            $data['setup'] = true;
-        } else {
-            $data['setup'] = false;
-        }
-
-        if (\array_key_exists('company', $data) && empty($data['company'])) {
-            unset($data['company']);
+        if (\array_key_exists('slug', $data) && empty($data['slug'])) {
+            unset($data['slug']);
         }
 
         if (\array_key_exists('customer', $data) && empty($data['customer'])) {
