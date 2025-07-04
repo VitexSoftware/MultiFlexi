@@ -31,7 +31,7 @@ class CompanyEditorForm extends EngineForm
     {
         $this->setTagProperty('enctype', 'multipart/form-data');
         $this->addInput(new InputTextTag('name'), _('Company name'));
-        $this->addInput(new InputTextTag('code', null, ['maxlength' => 10, 'onkeyup' => 'this.value = this.value.toUpperCase();']), _('Company code'));
+        $this->addInput(new InputTextTag('slug', null, ['maxlength' => 10, 'onkeyup' => 'this.value = this.value.toUpperCase();']), _('Company slug'));
         $this->addInput(new InputTextTag('ic'), _('Organization ID'));
         $this->addInput(new InputEmailTag('email'), _('Send notification to'));
         $this->addInput(new CustomerSelect('customer'), _('Customer'));
