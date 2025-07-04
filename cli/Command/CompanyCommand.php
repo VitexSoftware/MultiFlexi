@@ -121,11 +121,16 @@ class CompanyCommand extends MultiFlexiCommand
                     $found = $companyObj->listingQuery()->where(['ic' => $ic])->fetch();
 
                     if (!$found) {
-                        $output->writeln('<error>No company found with given IC</error>');
-
+                        if ($format === 'json') {
+                            $output->writeln(json_encode([
+                                'status' => 'not found',
+                                'message' => 'No company found with given IC',
+                            ], JSON_PRETTY_PRINT));
+                        } else {
+                            $output->writeln('<error>No company found with given IC</error>');
+                        }
                         return MultiFlexiCommand::FAILURE;
                     }
-
                     $id = $found['id'];
                 }
 
