@@ -3,6 +3,17 @@
 
 set -e
 
+# Generate a random IC number for repeatable tests
+IC_NUM=$((RANDOM % 90000000 + 10000000))
+
+# Test: Get non-existent company by IC, expect JSON not found response
+NOTFOUND_JSON=$(multiflexi-cli company get --ic "$IC_NUM" --verbose --format json)
+echo "$NOTFOUND_JSON" | jq -e '.status == "not found" and .message == "No company found with given IC"' > /dev/null || {
+  echo "Test failed: Expected not found JSON response for non-existent company" >&2
+  exit 1
+}
+echo "Not found test passed."
+
 # Create a company with all fields
 multiflexi-cli company create \
   --name="TestCo" \
@@ -10,7 +21,7 @@ multiflexi-cli company create \
   --settings='{"theme":"blue"}' \
   --logo="logo.png" \
   --server=1 \
-  --ic="12345678" \
+  --ic="$IC_NUM" \
   --company="TESTCO" \
   --rw=true \
   --setup=false \
