@@ -52,7 +52,8 @@ class CompanyCommand extends MultiFlexiCommand
             ->addOption('DatCreate', null, InputOption::VALUE_REQUIRED, 'Created date (date-time)')
             ->addOption('DatUpdate', null, InputOption::VALUE_REQUIRED, 'Updated date (date-time)')
             ->addOption('email', null, InputOption::VALUE_REQUIRED, 'Email')
-            ->addOption('code', null, InputOption::VALUE_REQUIRED, 'Company Code');
+            ->addOption('code', null, InputOption::VALUE_REQUIRED, 'Company Code')
+            ->addOption('company', null, InputOption::VALUE_OPTIONAL, 'Company code');
         // Add more options as needed
     }
 
@@ -150,16 +151,25 @@ class CompanyCommand extends MultiFlexiCommand
                 $data = [];
 
                 foreach ([
-                    'name', 'customer', 'enabled', 'settings', 'logo', 'ic', 'company', 'rw', 'setup', 'webhook', 'DatCreate', 'DatUpdate', 'email', 'code',
+                    'name', 'customer', 'enabled', 'settings', 'logo', 'ic', 'company', 'DatCreate', 'DatUpdate', 'email', 'code',
                 ] as $field) {
                     $val = $input->getOption($field);
 
                     if ($val !== null) {
-                        if (\in_array($field, ['enabled', 'rw', 'setup', 'webhook'], true)) {
+                        if (\in_array($field, ['enabled'], true)) {
                             $data[$field] = $this->parseBoolOption($val);
                         } else {
                             $data[$field] = $val;
                         }
+                    }
+                }
+
+                // Ensure 'company' field is set: use --code if given, else slug from name
+                if (empty($data['company'])) {
+                    if (!empty($data['code'])) {
+                        $data['company'] = $data['code'];
+                    } elseif (!empty($data['name'])) {
+                        $data['company'] = strtolower(preg_replace('/[^a-z0-9]+/', '_', $data['name']));
                     }
                 }
 
