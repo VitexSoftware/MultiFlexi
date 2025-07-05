@@ -52,8 +52,7 @@ class CompanyCommand extends MultiFlexiCommand
             ->addOption('DatCreate', null, InputOption::VALUE_REQUIRED, 'Created date (date-time)')
             ->addOption('DatUpdate', null, InputOption::VALUE_REQUIRED, 'Updated date (date-time)')
             ->addOption('email', null, InputOption::VALUE_REQUIRED, 'Email')
-            ->addOption('code', null, InputOption::VALUE_REQUIRED, 'Company Code')
-            ->addOption('company', null, InputOption::VALUE_OPTIONAL, 'Company code');
+            ->addOption('slug', null, InputOption::VALUE_REQUIRED, 'Company Slug');
         // Add more options as needed
     }
 
@@ -151,7 +150,7 @@ class CompanyCommand extends MultiFlexiCommand
                 $data = [];
 
                 foreach ([
-                    'name', 'customer', 'enabled', 'settings', 'logo', 'ic', 'company', 'DatCreate', 'DatUpdate', 'email', 'code',
+                    'name', 'customer', 'enabled', 'settings', 'logo', 'ic', 'slug', 'DatCreate', 'DatUpdate', 'email',
                 ] as $field) {
                     $val = $input->getOption($field);
 
@@ -163,14 +162,9 @@ class CompanyCommand extends MultiFlexiCommand
                         }
                     }
                 }
-
-                // Ensure 'company' field is set: use --code if given, else slug from name
-                if (empty($data['company'])) {
-                    if (!empty($data['code'])) {
-                        $data['company'] = $data['code'];
-                    } elseif (!empty($data['name'])) {
-                        $data['company'] = strtolower(preg_replace('/[^a-z0-9]+/', '_', $data['name']));
-                    }
+                // Ensure 'slug' field is set: use --slug if given, else slug from name
+                if (empty($data['slug']) && !empty($data['name'])) {
+                    $data['slug'] = strtolower(preg_replace('/[^a-z0-9]+/', '_', $data['name']));
                 }
 
                 if (empty($data['name'])) {
@@ -210,7 +204,7 @@ class CompanyCommand extends MultiFlexiCommand
                 $data = [];
 
                 foreach ([
-                    'name', 'customer', 'enabled', 'settings', 'logo', 'ic', 'DatCreate', 'DatUpdate', 'email', 'code',
+                    'name', 'customer', 'enabled', 'settings', 'logo', 'ic', 'DatCreate', 'DatUpdate', 'email',
                 ] as $field) {
                     $val = $input->getOption($field);
 
