@@ -8,6 +8,6 @@ final class CompanyToSlug extends AbstractMigration
 {
     public function change(): void
     {
-        $this->table('company')->renameColumn('code', 'slug')->removeColumn('company')->update();
+        $this->table('company')->renameColumn('code', 'slug')->removeColumn('company')->removeColumn('rw')->removeColumn('webhook')->update();
     }
 }
