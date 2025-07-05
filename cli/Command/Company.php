@@ -34,18 +34,12 @@ class Company extends MultiFlexiCommand
             'enabled',
             'settings',
             'logo  not like "" as logo',
-            'server',
+            'slug',
             'name',
-            'ic',
-            'company',
-            'rw',
-            'setup',
-            'webhook',
             'DatCreate',
             'DatUpdate',
             'customer',
             'email',
-            'code',
         ])->fetchAll();
     }
     protected function configure(): void
