@@ -109,38 +109,51 @@ class CompanyCommand extends MultiFlexiCommand
             case 'get':
                 $id = $input->getOption('id');
                 $ic = $input->getOption('ic');
+                $name = $input->getOption('name');
+                $slug = $input->getOption('slug');
 
-                if (empty($id) && empty($ic)) {
-                    $output->writeln('<error>Missing --id or --ic for company get</error>');
-
+                if (!empty($id)) {
+                    $company = new Company((int) $id);
+                } elseif (!empty($ic)) {
+                    $companyObj = new Company();
+                    $found = $companyObj->listingQuery()->where(['ic' => $ic])->fetch();
+                    $company = $found ? new Company($found['id']) : null;
+                } elseif (!empty($name)) {
+                    $companyObj = new Company();
+                    $found = $companyObj->listingQuery()->where(['name' => $name])->fetch();
+                    $company = $found ? new Company($found['id']) : null;
+                } elseif (!empty($slug)) {
+                    $companyObj = new Company();
+                    $found = $companyObj->listingQuery()->where(['slug' => $slug])->fetch();
+                    $company = $found ? new Company($found['id']) : null;
+                } else {
+                    if ($format === 'json') {
+                        $output->writeln(json_encode([
+                            'status' => 'error',
+                            'message' => 'Missing --id, --ic, --name or --slug for company get'
+                        ], JSON_PRETTY_PRINT));
+                    } else {
+                        $output->writeln('<error>Missing --id, --ic, --name or --slug for company get</error>');
+                    }
                     return MultiFlexiCommand::FAILURE;
                 }
 
-                if (!empty($ic)) {
-                    $companyObj = new Company();
-                    $found = $companyObj->listingQuery()->where(['ic' => $ic])->fetch();
-
-                    if (!$found) {
-                        if ($format === 'json') {
-                            $output->writeln(json_encode([
-                                'status' => 'not found',
-                                'message' => 'No company found with given IC',
-                            ], JSON_PRETTY_PRINT));
-                        } else {
-                            $output->writeln('<error>No company found with given IC</error>');
-                        }
-                        return MultiFlexiCommand::FAILURE;
+                if (empty($company) || empty($company->getData())) {
+                    if ($format === 'json') {
+                        $output->writeln(json_encode([
+                            'status' => 'not found',
+                            'message' => 'No company found with given identifier',
+                        ], JSON_PRETTY_PRINT));
+                    } else {
+                        $output->writeln('<error>No company found with given identifier</error>');
                     }
-                    $id = $found['id'];
+                    return MultiFlexiCommand::FAILURE;
                 }
 
-                $company = new Company((int) $id);
-                $data = $company->getData();
-
                 if ($format === 'json') {
-                    $output->writeln(json_encode($data, \JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode($company->getData(), JSON_PRETTY_PRINT));
                 } else {
-                    foreach ($data as $k => $v) {
+                    foreach ($company->getData() as $k => $v) {
                         $output->writeln("{$k}: {$v}");
                     }
                 }
