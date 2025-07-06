@@ -110,4 +110,27 @@ abstract class MultiFlexiCommand extends \Symfony\Component\Console\Command\Comm
             'message' => $message,
         ], $data), JSON_PRETTY_PRINT));
     }
+
+
+    /**
+     * Convert string option to boolean if needed.
+     *
+     * @param mixed $val
+     * @return bool|null
+     */
+    protected function parseBoolOption($val)
+    {
+        if (\is_bool($val)) {
+            return $val;
+        }
+
+        if (null === $val) {
+            return null;
+        }
+
+        $val = strtolower((string) $val);
+
+        return \in_array($val, ['1', 'true', 'yes', 'on'], true);
+    }
+
 }

@@ -75,29 +75,20 @@ class ApplicationCommand extends MultiFlexiCommand
                 return MultiFlexiCommand::SUCCESS;
             case 'get':
                 $id = $input->getOption('id');
-                $uuid = $input->getOption('uuid');
-
-                if (empty($id) && empty($uuid)) {
-                    $output->writeln('<error>Missing --id or --uuid for application get</error>');
+                if (empty($id)) {
+                    $output->writeln('<error>Missing --id for application get</error>');
 
                     return MultiFlexiCommand::FAILURE;
                 }
-
-                if (!empty($uuid)) {
-                    $app = new \MultiFlexi\Application();
-                    $found = $app->listingQuery()->where(['uuid' => $uuid])->fetch();
-
-                    if (!$found) {
-                        $output->writeln('<error>No application found with given UUID</error>');
-
-                        return MultiFlexiCommand::FAILURE;
+                $application = new Application((int) $id);
+                $data = $application->getData();
+                if ($format === 'json') {
+                    $output->writeln(json_encode($data, \JSON_PRETTY_PRINT));
+                } else {
+                    foreach ($data as $k => $v) {
+                        $output->writeln("{$k}: {$v}");
                     }
-
-                    $id = $found['id'];
                 }
-
-                $app = new \MultiFlexi\Application((int) $id);
-                $output->writeln(json_encode($app->getData(), \JSON_PRETTY_PRINT));
 
                 return MultiFlexiCommand::SUCCESS;
             case 'create':

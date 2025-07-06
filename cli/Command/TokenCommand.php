@@ -68,16 +68,13 @@ class TokenCommand extends MultiFlexiCommand
                 return MultiFlexiCommand::SUCCESS;
             case 'get':
                 $id = $input->getOption('id');
-
                 if (empty($id)) {
                     $output->writeln('<error>Missing --id for token get</error>');
 
                     return MultiFlexiCommand::FAILURE;
                 }
-
                 $token = new Token((int) $id);
                 $data = $token->getData();
-
                 if ($format === 'json') {
                     $output->writeln(json_encode($data, \JSON_PRETTY_PRINT));
                 } else {

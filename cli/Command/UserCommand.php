@@ -63,6 +63,7 @@ class UserCommand extends MultiFlexiCommand
             ->addOption('lastname', null, InputOption::VALUE_REQUIRED, 'Last name')
             ->addOption('email', null, InputOption::VALUE_REQUIRED, 'Email')
             ->addOption('password', null, InputOption::VALUE_REQUIRED, 'Password')
+            ->addOption('enabled', null, InputOption::VALUE_OPTIONAL, 'Enabled (true/false)')
             ->setHelp('This command manage Jobs');
         // Add more options as needed
     }
@@ -86,22 +87,45 @@ class UserCommand extends MultiFlexiCommand
                 }
 
                 return MultiFlexiCommand::SUCCESS;
+            case 'show':
             case 'get':
                 $id = $input->getOption('id');
+                $login = $input->getOption('login');
+                $email = $input->getOption('email');
 
-                if (empty($id)) {
-                    $output->writeln('<error>Missing --id for user get</error>');
+                if (!empty($id)) {
+                    $user = new User((int) $id);
+                } elseif (!empty($login)) {
+                    $userObj = new User();
+                    $found = $userObj->listingQuery()->where(['login' => $login])->fetch();
+                    $user = $found ? new User($found['id']) : null;
+                } elseif (!empty($email)) {
+                    $userObj = new User();
+                    $found = $userObj->listingQuery()->where(['email' => $email])->fetch();
+                    $user = $found ? new User($found['id']) : null;
+                } else {
+                    $output->writeln('<error>Missing --id, --login or --email for user get</error>');
 
                     return MultiFlexiCommand::FAILURE;
                 }
 
-                $user = new User((int) $id);
-                $data = $user->getData();
+                if (empty($user) || empty($user->getData())) {
+                    if ($format === 'json') {
+                        $output->writeln(json_encode([
+                            'status' => 'not found',
+                            'message' => 'No user found with given identifier',
+                        ], JSON_PRETTY_PRINT));
+                    } else {
+                        $output->writeln('<error>No user found with given identifier</error>');
+                    }
+
+                    return MultiFlexiCommand::FAILURE;
+                }
 
                 if ($format === 'json') {
-                    $output->writeln(json_encode($data, \JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode($user->getData(), JSON_PRETTY_PRINT));
                 } else {
-                    foreach ($data as $k => $v) {
+                    foreach ($user->getData() as $k => $v) {
                         $output->writeln("{$k}: {$v}");
                     }
                 }
@@ -110,11 +134,15 @@ class UserCommand extends MultiFlexiCommand
             case 'create':
                 $data = [];
 
-                foreach (['login', 'firstname', 'lastname', 'email'] as $field) {
+                foreach (['login', 'firstname', 'lastname', 'email', 'enabled'] as $field) {
                     $val = $input->getOption($field);
 
                     if ($val !== null) {
-                        $data[$field] = $val;
+                        if ($field === 'enabled') {
+                            $data[$field] = $this->parseBoolOption($val);
+                        } else {
+                            $data[$field] = $val;
+                        }
                     }
                 }
 
@@ -158,11 +186,15 @@ class UserCommand extends MultiFlexiCommand
 
                 $data = [];
 
-                foreach (['login', 'firstname', 'lastname', 'email'] as $field) {
+                foreach (['login', 'firstname', 'lastname', 'email', 'enabled'] as $field) {
                     $val = $input->getOption($field);
 
                     if ($val !== null) {
-                        $data[$field] = $val;
+                        if ($field === 'enabled') {
+                            $data[$field] = $this->parseBoolOption($val);
+                        } else {
+                            $data[$field] = $val;
+                        }
                     }
                 }
 
@@ -220,4 +252,5 @@ class UserCommand extends MultiFlexiCommand
                 return MultiFlexiCommand::FAILURE;
         }
     }
+
 }
