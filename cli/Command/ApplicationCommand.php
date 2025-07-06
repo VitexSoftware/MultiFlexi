@@ -75,17 +75,40 @@ class ApplicationCommand extends MultiFlexiCommand
                 return MultiFlexiCommand::SUCCESS;
             case 'get':
                 $id = $input->getOption('id');
-                if (empty($id)) {
-                    $output->writeln('<error>Missing --id for application get</error>');
+                $uuid = $input->getOption('uuid');
+                $name = $input->getOption('name');
 
+                if (!empty($id)) {
+                    $application = new Application((int) $id);
+                } elseif (!empty($uuid)) {
+                    $appObj = new Application();
+                    $found = $appObj->listingQuery()->where(['uuid' => $uuid])->fetch();
+                    $application = $found ? new Application($found['id']) : null;
+                } elseif (!empty($name)) {
+                    $appObj = new Application();
+                    $found = $appObj->listingQuery()->where(['name' => $name])->fetch();
+                    $application = $found ? new Application($found['id']) : null;
+                } else {
+                    $output->writeln('<error>Missing --id, --uuid or --name for application get</error>');
                     return MultiFlexiCommand::FAILURE;
                 }
-                $application = new Application((int) $id);
-                $data = $application->getData();
+
+                if (empty($application) || empty($application->getData())) {
+                    if ($format === 'json') {
+                        $output->writeln(json_encode([
+                            'status' => 'not found',
+                            'message' => 'No application found with given identifier',
+                        ], JSON_PRETTY_PRINT));
+                    } else {
+                        $output->writeln('<error>No application found with given identifier</error>');
+                    }
+                    return MultiFlexiCommand::FAILURE;
+                }
+
                 if ($format === 'json') {
-                    $output->writeln(json_encode($data, \JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode($application->getData(), JSON_PRETTY_PRINT));
                 } else {
-                    foreach ($data as $k => $v) {
+                    foreach ($application->getData() as $k => $v) {
                         $output->writeln("{$k}: {$v}");
                     }
                 }
