@@ -39,18 +39,19 @@ class ApplicationCommand extends MultiFlexiCommand
     {
         $this
             ->setDescription('Manage applications')
-            ->addOption('format', 'f', InputOption::VALUE_OPTIONAL, 'The output format: text or json. Defaults to text.', 'text')
             ->addArgument('action', InputArgument::REQUIRED, 'Action: list|get|create|update|delete|import-json|export-json|remove-json')
+            ->addOption('format', 'f', InputOption::VALUE_OPTIONAL, 'The output format: text or json. Defaults to text.', 'text')
             ->addOption('id', null, InputOption::VALUE_REQUIRED, 'Application ID')
             ->addOption('name', null, InputOption::VALUE_REQUIRED, 'Name')
-            ->addOption('description', null, InputOption::VALUE_REQUIRED, 'Description')
-            ->addOption('appversion', null, InputOption::VALUE_REQUIRED, 'Application Version')
+            ->addOption('description', null, InputOption::VALUE_OPTIONAL, 'Description')
             ->addOption('topics', null, InputOption::VALUE_REQUIRED, 'Topics')
             ->addOption('executable', null, InputOption::VALUE_REQUIRED, 'Executable')
             ->addOption('uuid', null, InputOption::VALUE_REQUIRED, 'UUID')
-            ->addOption('ociimage', null, InputOption::VALUE_REQUIRED, 'OCI Image')
-            ->addOption('requirements', null, InputOption::VALUE_REQUIRED, 'Requirements')
-            ->addOption('json', null, InputOption::VALUE_REQUIRED, 'Path to JSON file for import/export/remove');
+            ->addOption('ociimage', null, InputOption::VALUE_OPTIONAL, 'OCI Image')
+            ->addOption('requirements', null, InputOption::VALUE_OPTIONAL, 'Requirements')
+            ->addOption('homepage', null, InputOption::VALUE_OPTIONAL, 'Homepage URL')
+            ->addOption('json', null, InputOption::VALUE_REQUIRED, 'Path to JSON file for import/export/remove')
+            ->addOption('appversion', null, InputOption::VALUE_OPTIONAL, 'Application Version');
         // Add more options as needed
     }
 
@@ -117,17 +118,40 @@ class ApplicationCommand extends MultiFlexiCommand
             case 'create':
                 $data = [];
 
-                foreach (['name', 'description', 'appversion', 'topics', 'executable', 'uuid', 'ociimage', 'requirements'] as $field) {
+                foreach ([
+                    'name', 'description', 'appversion', 'topics', 'executable', 'uuid', 'ociimage', 'requirements', 'homepage'
+                ] as $field) {
                     $val = $input->getOption($field);
-
                     if ($val !== null) {
-                        $data[$field] = $val;
+                        // Map appversion CLI option to version DB field
+                        if ($field === 'appversion') {
+                            $data['version'] = $val;
+                        } else {
+                            $data[$field] = $val;
+                        }
                     }
                 }
 
-                if (empty($data['name']) || empty($data['uuid'])) {
-                    $output->writeln('<error>Missing --name or --uuid for application create</error>');
+                // Set default value for 'image' if not provided
+                if (!isset($data['image'])) {
+                    $data['image'] = '';
+                }
 
+                if (empty($data['name']) || empty($data['uuid']) || empty($data['executable'])) {
+                    $output->writeln('<error>Missing --name, --uuid or --executable for application create</error>');
+                    return MultiFlexiCommand::FAILURE;
+                }
+
+                // Check if application already exists (by uuid or name)
+                $appCheck = new \MultiFlexi\Application();
+                $exists = $appCheck->listingQuery()->where(['uuid' => $data['uuid']])->fetch();
+                if ($exists) {
+                    $warningMsg = 'Application with this UUID already exists.';
+                    if ($format === 'json') {
+                        $output->writeln(json_encode(['status' => 'warning', 'message' => $warningMsg], JSON_PRETTY_PRINT));
+                    } else {
+                        $output->writeln('<comment>'.$warningMsg.'</comment>');
+                    }
                     return MultiFlexiCommand::FAILURE;
                 }
 
@@ -135,18 +159,17 @@ class ApplicationCommand extends MultiFlexiCommand
                 $app->takeData($data);
                 $appId = $app->saveToSQL();
 
-                if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
+                // Print info about application created if --format json and --verbose
+                if ($format === 'json' && $output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
                     $full = (new \MultiFlexi\Application((int) $appId))->getData();
-
-                    if ($format === 'json') {
-                        $output->writeln(json_encode($full, \JSON_PRETTY_PRINT));
-                    } else {
-                        foreach ($full as $k => $v) {
-                            $output->writeln("{$k}: {$v}");
-                        }
+                    $output->writeln(json_encode(['status' => 'created', 'application' => $full], JSON_PRETTY_PRINT));
+                } elseif ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
+                    $full = (new \MultiFlexi\Application((int) $appId))->getData();
+                    foreach ($full as $k => $v) {
+                        $output->writeln("{$k}: {$v}");
                     }
                 } else {
-                    $output->writeln(json_encode(['application_id' => $appId], \JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode(['application_id' => $appId], JSON_PRETTY_PRINT));
                 }
 
                 return MultiFlexiCommand::SUCCESS;
@@ -175,11 +198,17 @@ class ApplicationCommand extends MultiFlexiCommand
 
                 $data = [];
 
-                foreach (['name', 'description', 'appversion', 'topics', 'executable', 'uuid', 'ociimage', 'requirements'] as $field) {
+                foreach ([
+                    'name', 'description', 'appversion', 'topics', 'executable', 'uuid', 'ociimage', 'requirements', 'homepage'
+                ] as $field) {
                     $val = $input->getOption($field);
 
                     if ($val !== null) {
-                        $data[$field] = $val;
+                        if ($field === 'appversion') {
+                            $data['version'] = $val;
+                        } else {
+                            $data[$field] = $val;
+                        }
                     }
                 }
 
