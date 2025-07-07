@@ -3,27 +3,161 @@
 MultiFlexi CLI
 ==============
 
-The MultiFlexi CLI is a Symfony Console-based command line interface for managing MultiFlexi jobs and companies.
+The MultiFlexi CLI is a powerful Symfony Console-based command line interface for comprehensive management of MultiFlexi resources. It provides full CRUD operations for all system entities and supports both text and JSON output formats for automation and scripting.
 
-Usage
------
+Installation
+------------
+
+The CLI is included with MultiFlexi and available as:
+
+.. code-block:: bash
+
+    # System-wide installation
+    multiflexi-cli <command> [action] [options]
+    
+    # Local installation
+    ./cli/multiflexi-cli <command> [action] [options]
+
+General Usage
+-------------
 
 .. code-block:: bash
 
     multiflexi-cli <command> [action] [options]
 
-Commands
---------
+**Global Options:**
 
-job
+- ``-f, --format`` - Output format: text or json (default: text)
+- ``-v, --verbose`` - Increase verbosity (use -vv or -vvv for more detail)
+- ``--no-ansi`` - Disable colored output
+- ``-h, --help`` - Display help for the command
+- ``-V, --version`` - Display application version
 
----
+**Environment Configuration:**
 
-Manage jobs (list, get, create, update).
+Use the ``-e`` or ``--environment`` option to specify a custom .env file:
 
 .. code-block:: bash
 
-    multiflexi-cli job <action> [--id=ID] [--runtemplate_id=ID] [--scheduled=DATETIME] [--executor=EXECUTOR] [--schedule_type=TYPE] [--app_id=ID]
+    multiflexi-cli -e /path/to/custom/.env command action
+
+Commands Overview
+-----------------
+
+The MultiFlexi CLI provides the following main commands:
+
+- **application** - Manage applications (import, export, configuration)
+- **company** - Manage companies and their settings
+- **job** - Manage job execution and monitoring
+- **runtemplate** - Manage run templates and scheduling
+- **user** - User account management
+- **token** - API token management
+- **queue** - Job queue operations
+- **appstatus** - System status information
+- **describe** - List all available commands and their parameters
+- **prune** - Prune logs and jobs, keeping only the latest N records (default: 1000)
+- **completion** - Dump the shell completion script
+
+Detailed Command Reference
+-------------------------
+
+.. contents::
+   :local:
+   :depth: 2
+
+application
+-----------
+
+Manage applications (list, get, create, update, delete, import/export/remove JSON, show configuration fields).
+
+.. code-block:: bash
+
+    multiflexi-cli application <action> [options]
+
+Actions:
+- list:   List all applications.
+- get:    Get application details by ID or UUID.
+- create: Create a new application (requires --name, --uuid).
+- update: Update an existing application (requires --id or --uuid).
+- delete: Delete an application (requires --id).
+- import-json: Import application from JSON file (requires --json).
+- export-json: Export application to JSON file (requires --id, --json).
+- remove-json: Remove application from JSON file (requires --json).
+- showconfig: Show defined configuration fields for application (requires --id or --uuid).
+
+Options:
+  --id           Application ID
+  --uuid         Application UUID
+  --name         Name
+  --description  Description
+  --topics       Topics
+  --executable   Executable
+  --ociimage     OCI Image
+  --requirements Requirements
+  --json         Path to JSON file for import/export/remove
+  --appversion   Application Version
+  -f, --format   Output format: text or json (default: text)
+
+Examples:
+
+.. code-block:: bash
+
+    multiflexi-cli application list
+    multiflexi-cli application get --id=1
+    multiflexi-cli application create --name="App1" --uuid="uuid-123"
+    multiflexi-cli application update --id=1 --name="App1 Updated"
+    multiflexi-cli application delete --id=1
+    multiflexi-cli application import-json --json=app.json
+    multiflexi-cli application export-json --id=1 --json=app.json
+    multiflexi-cli application showconfig --id=1
+
+company
+-------
+
+Manage companies (list, get, create, update, remove).
+
+.. code-block:: bash
+
+    multiflexi-cli company <action> [options]
+
+Actions:
+- list:   List all companies.
+- get:    Get company details by ID.
+- create: Create a new company (requires --name).
+- update: Update an existing company (requires --id).
+- remove: Remove a company (requires --id).
+
+Options:
+  --id           Company ID
+  --name         Company name
+  --customer     Customer
+  --enabled      Enabled (true/false)
+  --settings     Settings
+  --logo         Logo
+  --ic           IC
+  --DatCreate    Created date (date-time)
+  --DatUpdate    Updated date (date-time)
+  --email        Email
+  --slug         Company Slug
+  -f, --format   Output format: text or json (default: text)
+
+Examples:
+
+.. code-block:: bash
+
+    multiflexi-cli company list
+    multiflexi-cli company get --id=1
+    multiflexi-cli company create --name="Acme Corp" --customer="CustomerX"
+    multiflexi-cli company remove --id=1
+
+job
+---
+
+Manage jobs (list, get, create, update, delete).
+
+.. code-block:: bash
+
+    multiflexi-cli job <action> [options]
 
 Actions:
 - list:   List all jobs.
@@ -33,7 +167,12 @@ Actions:
 - delete: Delete a job by its ID.
 
 Options:
-  --id           Job ID (required for delete)
+  --id           Job ID
+  --runtemplate_id RunTemplate ID
+  --scheduled    Scheduled datetime
+  --executor     Executor
+  --schedule_type Schedule type
+  --app_id       App ID
   -f, --format   Output format: text or json (default: text)
 
 Examples:
@@ -46,38 +185,14 @@ Examples:
     multiflexi-cli job update --id=123 --executor=Native
     multiflexi-cli job delete --id=123
 
-company
--------
-
-Manage companies (list, get, create, update).
-
-.. code-block:: bash
-
-    multiflexi-cli company <action> [--id=ID] [--name=NAME] [--customer=CUSTOMER]
-
-Actions:
-- list:   List all companies.
-- get:    Get company details by ID.
-- create: Create a new company (requires --name).
-- update: Update an existing company (requires --id).
-
-Examples:
-
-.. code-block:: bash
-
-    multiflexi-cli company list
-    multiflexi-cli company get --id=1
-    multiflexi-cli company create --name="Acme Corp" --customer="CustomerX"
-    multiflexi-cli company update --id=1 --server="server.example.com"
-
 runtemplate
-----------
+-----------
 
-Manage runtemplates (list, get, create, update, delete).
+Manage runtemplates (list, get, create, update, delete, schedule).
 
 .. code-block:: bash
 
-    multiflexi-cli runtemplate <action> [--id=ID] [--name=NAME] [--app_id=ID|UUID] [--company_id=ID] [--interv=CODE] [--active=0|1] [--config=KEY=VALUE ...]
+    multiflexi-cli runtemplate <action> [options]
 
 Actions:
 - list:   List all runtemplates.
@@ -85,23 +200,20 @@ Actions:
 - create: Create a new runtemplate (requires --name, --app_id, --company_id).
 - update: Update an existing runtemplate (requires --id).
 - delete: Delete a runtemplate (requires --id).
-- schedule: Schedule a runtemplate launch as a job (requires --id). Allows specifying launch time, executor, and environment overrides.
+- schedule: Schedule a runtemplate launch as a job (requires --id).
 
-  .. note::
-
-     Only runtemplates with ``active=1`` can be scheduled. Inactive runtemplates will be rejected.
-
-New Features:
-^^^^^^^^^^^^^
-- **Application by UUID**: You can specify the application by its UUID as well as its numeric ID using `--app_id` or `--app_uuid` where supported.
-- **Configurable Application Settings**: Use repeatable `--config=KEY=VALUE` options to set or update application-specific configuration fields for a runtemplate. These fields will overwrite all previous config for the runtemplate.
-
-Schedule Options:
-^^^^^^^^^^^^^^^^^
-- ``--id=ID``: RunTemplate ID to schedule (required)
-- ``--schedule_time=DATETIME``: When to launch (Y-m-d H:i:s or 'now', default: now)
-- ``--executor=EXECUTOR``: Executor to use (default: Native)
-- ``--env=KEY=VALUE``: Environment override (repeatable)
+Options:
+  --id           RunTemplate ID
+  --name         Name
+  --app_id       App ID
+  --company_id   Company ID
+  --interv       Interval code
+  --active       Active
+  --config       Application config key=value (repeatable)
+  --schedule_time Schedule time for launch (Y-m-d H:i:s or "now")
+  --executor     Executor to use for launch
+  --env          Environment override key=value (repeatable)
+  -f, --format   Output format: text or json (default: text)
 
 Examples:
 
@@ -113,36 +225,89 @@ Examples:
     multiflexi-cli runtemplate create --name="Import" --app_id=6e2b2c2e-7c2a-4b1a-8e2d-123456789abc --company_id=1
     multiflexi-cli runtemplate schedule --id=123 --schedule_time="2025-07-01 10:00:00" --executor=Native --env=FOO=bar --env=BAZ=qux
 
-companyapp
-----------
+user
+----
 
-Manage company applications (list, get, create, update).
+Manage users (list, get, create, update, delete).
 
-- You can now use `--app_uuid` in addition to `--app_id` for filtering and referencing applications by UUID.
+.. code-block:: bash
+
+    multiflexi-cli user <action> [options]
+
+Actions:
+- list:   List all users.
+- get:    Get user details by ID.
+- create: Create a new user (requires --login, --firstname, --lastname, --email, --password).
+- update: Update an existing user (requires --id).
+- delete: Delete a user (requires --id).
+
+Options:
+  --id           User ID
+  --login        Login
+  --firstname    First name
+  --lastname     Last name
+  --email        Email
+  --password     Password
+  --enabled      Enabled (true/false)
+  -f, --format   Output format: text or json (default: text)
 
 Examples:
 
+.. code-block:: bash
+
+    multiflexi-cli user list
+    multiflexi-cli user get --id=1
+    multiflexi-cli user create --login="jsmith" --firstname="John" --lastname="Smith" --email="jsmith@example.com" --password="secret"
+    multiflexi-cli user update --id=1 --email="john.smith@example.com"
+    multiflexi-cli user delete --id=1
+
+token
+-----
+
+Manage tokens (list, get, create, generate, update).
 
 .. code-block:: bash
 
-    multiflexi-cli companyapp list
-    multiflexi-cli companyapp get --id=1
-    multiflexi-cli companyapp create --company_id=1 --name="App1" --type="web"
-    multiflexi-cli companyapp update --id=1 --name="Updated App"
-    multiflexi-cli companyapp list  --company_id=1 --app_id=19 --format=json | jq '.[].id'
+    multiflexi-cli token <action> [options]
+
+Actions:
+- list:   List all tokens.
+- get:    Get token details by ID.
+- create: Create a new token (requires --user).
+- generate: Generate a new token value (requires --user).
+- update: Update an existing token (requires --id).
+
+Options:
+  --id           Token ID
+  --user         User ID
+  --token        Token value
+  -f, --format   Output format: text or json (default: text)
+
+Examples:
+
+.. code-block:: bash
+
+    multiflexi-cli token list
+    multiflexi-cli token get --id=1
+    multiflexi-cli token create --user=2
+    multiflexi-cli token generate --user=2
+    multiflexi-cli token update --id=1 --token=NEWVALUE
 
 queue
-=====
+-----
+
+Queue operations (list, truncate).
 
 .. code-block:: bash
 
-    multiflexi-cli queue list
-    multiflexi-cli queue truncate
+    multiflexi-cli queue <action> [options]
 
-List or truncate the job schedule queue using the schedule engine.
+Actions:
+- list:     Show all scheduled jobs in the queue.
+- truncate: Remove all scheduled jobs from the queue.
 
-- ``list``: Show all scheduled jobs in the queue. Output can be formatted as text (default) or JSON with ``-f json``.
-- ``truncate``: Remove all scheduled jobs from the queue. Output can be formatted as text (default) or JSON with ``-f json``.
+Options:
+  -f, --format   Output format: text or json (default: text)
 
 Examples:
 
@@ -150,6 +315,28 @@ Examples:
 
     multiflexi-cli queue list -f json
     multiflexi-cli queue truncate -f json
+
+prune
+-----
+
+Prune logs and jobs, keeping only the latest N records (default: 1000).
+
+.. code-block:: bash
+
+    multiflexi-cli prune [--logs] [--jobs] [--keep=N]
+
+Options:
+  --logs         Prune logs table
+  --jobs         Prune jobs table
+  --keep         Number of records to keep (default: 1000)
+
+Examples:
+
+.. code-block:: bash
+
+    multiflexi-cli prune --logs
+    multiflexi-cli prune --jobs --keep=500
+    multiflexi-cli prune --logs --jobs --keep=2000
 
 completion
 ----------
@@ -160,42 +347,31 @@ Dump the shell completion script for bash, zsh, or fish.
 
     multiflexi-cli completion [shell]
 
-Options
--------
+Options:
+  --debug        Tail the completion debug log
 
--h, --help
-    Display help for a command.
-
--V, --version
-    Display the application version.
-
-Global Options
---------------
-
---ansi|--no-ansi
-    Force (or disable) ANSI output.
-
--n, --no-interaction
-    Do not ask any interactive question.
-
--v|vv|vvv, --verbose
-    Increase the verbosity of messages.
-
-Examples
---------
+Examples:
 
 .. code-block:: bash
 
-    multiflexi-cli job list
-    multiflexi-cli company create --name="NewCo"
     multiflexi-cli completion bash
+    multiflexi-cli completion zsh
+    multiflexi-cli completion fish
 
-Author
-------
+describe
+--------
 
-MultiFlexi was written by Vítězslav Dvořák <info@vitexsoftware.cz>.
+List all available commands and their parameters.
 
-Copyright
+.. code-block:: bash
+
+    multiflexi-cli describe
+
+appstatus
 ---------
 
-This is free software; see the source for copying conditions. There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Prints App Status.
+
+.. code-block:: bash
+
+    multiflexi-cli appstatus

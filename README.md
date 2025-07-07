@@ -9,28 +9,49 @@ MultiFlexi
 [![GitHub license](https://img.shields.io/github/license/VitexSoftware/MultiFlexi)](https://opensource.org/licenses/MIT)
 [![GitHub release](https://img.shields.io/github/v/release/VitexSoftware/MultiFlexi)](https://github.com/VitexSoftware/MultiFlexi/releases)
 
+MultiFlexi is a comprehensive PHP-based task scheduling and automation framework designed for accounting and business system integrations. It enables scheduled execution of applications and tools across multiple companies and platforms, with primary focus on systems like AbraFlexi and Pohoda.
 
-Umožňuje spouštět zvolené nástroje nad určitými účetními jednotkami AbraFlexi v daných intervalech.
+## Key Features
 
-Nastavené úlohy jsou pravidelně spouštěny ze systémovécho plánovače.
-Protokol spouštění je zapisován do systémového logu.
+- **Multi-Platform Integration**: Native support for AbraFlexi, Pohoda, and other business systems
+- **Flexible Job Scheduling**: Automated task execution with customizable intervals and dependencies
+- **Advanced Credential Management**: Secure handling of authentication credentials with extensible credential types
+- **Multiple Execution Environments**: Support for native execution, containerized deployments, and cloud environments
+- **Comprehensive Logging**: Detailed execution logs with system integration and monitoring capabilities
+- **Multi-Interface Support**: 
+  - Responsive Bootstrap 4 web interface with real-time monitoring
+  - Rich command-line interface with extensive management commands
+  - RESTful API with OAuth2 authentication and multiple output formats
+- **Enterprise-Ready**: User authentication, API tokens, data isolation, and Zabbix monitoring integration
 
-Spouštěným skriptům jsou nastavoavány například tyto proměnné prostředí:
+## Architecture
 
+MultiFlexi features a layered architecture with:
 
-* **ABRAFLEXI_URL**
-* **ABRAFLEXI_LOGIN**
-* **ABRAFLEXI_PASSWORD**
-* **ABRAFLEXI_COMPANY**
+- **Database Layer**: ORM with migrations managing applications, companies, run templates, and jobs
+- **Application Management**: External app definitions, metadata validation, and lifecycle management
+- **Job Execution System**: Multi-environment execution with environment variable injection
+- **Credential Framework**: Extensible credential types for various system integrations
+- **Configuration Management**: Environment-based configuration with type-safe field definitions
+- **Security Layer**: Authentication, authorization, and secure credential handling
 
-nebo
+## Environment Variables
 
-* **POHODA_ICO**
-* **POHODA_URL**
-* **POHODA_USERNAME**
-* **POHODA_PASSWORD**
+MultiFlexi automatically configures environment variables for executed applications:
 
-⊕ proměnné prostředí dle individuální konfigurace každého modulu pro každou firmu
+**AbraFlexi Integration:**
+* `ABRAFLEXI_URL`
+* `ABRAFLEXI_LOGIN`
+* `ABRAFLEXI_PASSWORD`
+* `ABRAFLEXI_COMPANY`
+
+**Pohoda Integration:**
+* `POHODA_ICO`
+* `POHODA_URL`
+* `POHODA_USERNAME`
+* `POHODA_PASSWORD`
+
+**Custom Variables:** Individual module configurations per company with extensible variable definitions.
 
 See the https://multiflexi.readthedocs.io/ for complete documentation
 
