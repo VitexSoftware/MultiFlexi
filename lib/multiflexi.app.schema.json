@@ -1,47 +1,729 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "MultiFlexi App Definition",
-  "type": "object",
-  "properties": {
-    "image": { "type": "string" },
-    "name": { "type": "string" },
-    "description": { "type": "string" },
-    "executable": { "type": "string" },
-    "setup": { "type": "string" },
-    "cmdparams": { "type": "string" },
-    "deploy": { "type": "string" },
-    "homepage": { "type": "string" },
-    "ociimage": { "type": "string" },
-    "uuid": { "type": "string" },
-    "topics": { "type": "string" },
-    "requirements": { "type": "string" },
-    "version": { "type": "string" },
-    "multiflexi": { "type": "string" },
-    "environment": {
-      "type": "object",
-      "patternProperties": {
-        "^[A-Z0-9_]+$": {
-          "type": "object",
-          "properties": {
-            "type": { "type": "string" },
-            "description": { "type": "string" },
-            "defval": {},
-            "required": { "type": "boolean" },
-            "hint": { "type": "string" },
-            "options": {
-              "type": ["object", "array"]
+    "help": {
+        "description": "Display help for a command",
+        "arguments": {
+            "command_name": {
+                "name": "command_name",
+                "is_required": false,
+                "description": "The command name",
+                "default": "help"
             }
-          },
-          "additionalProperties": true
+        },
+        "options": {
+            "format": {
+                "name": "format",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "The output format (txt, xml, json, or md)",
+                "default": "txt"
+            },
+            "raw": {
+                "name": "raw",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "To output raw command help",
+                "default": false
+            }
         }
-      }
+    },
+    "list": {
+        "description": "List commands",
+        "arguments": {
+            "namespace": {
+                "name": "namespace",
+                "is_required": false,
+                "description": "The namespace name",
+                "default": null
+            }
+        },
+        "options": {
+            "raw": {
+                "name": "raw",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "To output raw command list",
+                "default": false
+            },
+            "format": {
+                "name": "format",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "The output format (txt, xml, json, or md)",
+                "default": "txt"
+            },
+            "short": {
+                "name": "short",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "To skip describing commands' arguments",
+                "default": false
+            }
+        }
+    },
+    "_complete": {
+        "description": "Internal command to provide shell completion suggestions",
+        "arguments": [],
+        "options": {
+            "shell": {
+                "name": "shell",
+                "shortcut": "s",
+                "is_value_required": true,
+                "description": "The shell type (\"bash\", \"fish\", \"zsh\")",
+                "default": null
+            },
+            "input": {
+                "name": "input",
+                "shortcut": "i",
+                "is_value_required": true,
+                "description": "An array of input tokens (e.g. COMP_WORDS or argv)",
+                "default": []
+            },
+            "current": {
+                "name": "current",
+                "shortcut": "c",
+                "is_value_required": true,
+                "description": "The index of the \"input\" array that the cursor is in (e.g. COMP_CWORD)",
+                "default": null
+            },
+            "api-version": {
+                "name": "api-version",
+                "shortcut": "a",
+                "is_value_required": true,
+                "description": "The API version of the completion script",
+                "default": null
+            },
+            "symfony": {
+                "name": "symfony",
+                "shortcut": "S",
+                "is_value_required": true,
+                "description": "deprecated",
+                "default": null
+            }
+        }
+    },
+    "completion": {
+        "description": "Dump the shell completion script",
+        "arguments": {
+            "shell": {
+                "name": "shell",
+                "is_required": false,
+                "description": "The shell type (e.g. \"bash\"), the value of the \"$SHELL\" env var will be used if this is not given",
+                "default": null
+            }
+        },
+        "options": {
+            "debug": {
+                "name": "debug",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "Tail the completion debug log",
+                "default": false
+            }
+        }
+    },
+    "job": {
+        "description": "Manage jobs",
+        "arguments": {
+            "action": {
+                "name": "action",
+                "is_required": true,
+                "description": "Action: list|get|create|update|delete",
+                "default": null
+            }
+        },
+        "options": {
+            "format": {
+                "name": "format",
+                "shortcut": "f",
+                "is_value_required": false,
+                "description": "The output format: text or json. Defaults to text.",
+                "default": "text"
+            },
+            "id": {
+                "name": "id",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Job ID",
+                "default": null
+            },
+            "runtemplate_id": {
+                "name": "runtemplate_id",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Runtemplate ID",
+                "default": null
+            },
+            "scheduled": {
+                "name": "scheduled",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Scheduled datetime",
+                "default": null
+            },
+            "executor": {
+                "name": "executor",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Executor",
+                "default": null
+            },
+            "schedule_type": {
+                "name": "schedule_type",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Schedule type",
+                "default": null
+            },
+            "app_id": {
+                "name": "app_id",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "App ID",
+                "default": null
+            }
+        }
+    },
+    "company": {
+        "description": "Manage companies",
+        "arguments": {
+            "action": {
+                "name": "action",
+                "is_required": true,
+                "description": "Action: list|get|create|update|remove",
+                "default": null
+            }
+        },
+        "options": {
+            "format": {
+                "name": "format",
+                "shortcut": "f",
+                "is_value_required": false,
+                "description": "The output format: text or json. Defaults to text.",
+                "default": "text"
+            },
+            "id": {
+                "name": "id",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Company ID",
+                "default": null
+            },
+            "name": {
+                "name": "name",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Company name",
+                "default": null
+            },
+            "customer": {
+                "name": "customer",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "Customer",
+                "default": null
+            },
+            "enabled": {
+                "name": "enabled",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "Enabled (true\/false)",
+                "default": null
+            },
+            "settings": {
+                "name": "settings",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "Settings",
+                "default": null
+            },
+            "logo": {
+                "name": "logo",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "Logo",
+                "default": null
+            },
+            "ic": {
+                "name": "ic",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "IC",
+                "default": null
+            },
+            "DatCreate": {
+                "name": "DatCreate",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Created date (date-time)",
+                "default": null
+            },
+            "DatUpdate": {
+                "name": "DatUpdate",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Updated date (date-time)",
+                "default": null
+            },
+            "email": {
+                "name": "email",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Email",
+                "default": null
+            },
+            "slug": {
+                "name": "slug",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Company Slug",
+                "default": null
+            }
+        }
+    },
+    "token": {
+        "description": "Manage tokens",
+        "arguments": {
+            "action": {
+                "name": "action",
+                "is_required": true,
+                "description": "Action: list|get|create|generate|update",
+                "default": null
+            }
+        },
+        "options": {
+            "format": {
+                "name": "format",
+                "shortcut": "f",
+                "is_value_required": false,
+                "description": "The output format: text or json. Defaults to text.",
+                "default": "text"
+            },
+            "id": {
+                "name": "id",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Token ID",
+                "default": null
+            },
+            "user": {
+                "name": "user",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "User ID",
+                "default": null
+            },
+            "token": {
+                "name": "token",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Token value",
+                "default": null
+            }
+        }
+    },
+    "runtemplate": {
+        "description": "Manage runtemplates",
+        "arguments": {
+            "action": {
+                "name": "action",
+                "is_required": true,
+                "description": "Action: list|get|create|update|delete|schedule",
+                "default": null
+            }
+        },
+        "options": {
+            "format": {
+                "name": "format",
+                "shortcut": "f",
+                "is_value_required": false,
+                "description": "The output format: text or json. Defaults to text.",
+                "default": "text"
+            },
+            "id": {
+                "name": "id",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "RunTemplate ID",
+                "default": null
+            },
+            "name": {
+                "name": "name",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Name",
+                "default": null
+            },
+            "app_id": {
+                "name": "app_id",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "App ID",
+                "default": null
+            },
+            "company_id": {
+                "name": "company_id",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Company ID",
+                "default": null
+            },
+            "interv": {
+                "name": "interv",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Interval code",
+                "default": null
+            },
+            "active": {
+                "name": "active",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Active",
+                "default": null
+            },
+            "config": {
+                "name": "config",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Application config key=value (repeatable)",
+                "default": []
+            },
+            "schedule_time": {
+                "name": "schedule_time",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "Schedule time for launch (Y-m-d H:i:s or \"now\")",
+                "default": "now"
+            },
+            "executor": {
+                "name": "executor",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "Executor to use for launch",
+                "default": "Native"
+            },
+            "env": {
+                "name": "env",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Environment override key=value (repeatable)",
+                "default": []
+            }
+        }
+    },
+    "user": {
+        "description": "Manage users",
+        "arguments": {
+            "action": {
+                "name": "action",
+                "is_required": true,
+                "description": "Action: list|get|create|update|delete",
+                "default": null
+            }
+        },
+        "options": {
+            "format": {
+                "name": "format",
+                "shortcut": "f",
+                "is_value_required": false,
+                "description": "The output format: text or json. Defaults to text.",
+                "default": "text"
+            },
+            "id": {
+                "name": "id",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "User ID",
+                "default": null
+            },
+            "login": {
+                "name": "login",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Login",
+                "default": null
+            },
+            "firstname": {
+                "name": "firstname",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "First name",
+                "default": null
+            },
+            "lastname": {
+                "name": "lastname",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Last name",
+                "default": null
+            },
+            "email": {
+                "name": "email",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Email",
+                "default": null
+            },
+            "password": {
+                "name": "password",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Password",
+                "default": null
+            },
+            "enabled": {
+                "name": "enabled",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "Enabled (true\/false)",
+                "default": null
+            }
+        }
+    },
+    "application": {
+        "description": "Manage applications",
+        "arguments": {
+            "action": {
+                "name": "action",
+                "is_required": true,
+                "description": "Action: list|get|create|update|delete|import-json|export-json|remove-json|showconfig",
+                "default": null
+            }
+        },
+        "options": {
+            "format": {
+                "name": "format",
+                "shortcut": "f",
+                "is_value_required": false,
+                "description": "The output format: text or json. Defaults to text.",
+                "default": "text"
+            },
+            "id": {
+                "name": "id",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Application ID",
+                "default": null
+            },
+            "name": {
+                "name": "name",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Name",
+                "default": null
+            },
+            "description": {
+                "name": "description",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "Description",
+                "default": null
+            },
+            "topics": {
+                "name": "topics",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Topics",
+                "default": null
+            },
+            "executable": {
+                "name": "executable",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Executable",
+                "default": null
+            },
+            "uuid": {
+                "name": "uuid",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "UUID",
+                "default": null
+            },
+            "ociimage": {
+                "name": "ociimage",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "OCI Image",
+                "default": null
+            },
+            "requirements": {
+                "name": "requirements",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "Requirements",
+                "default": null
+            },
+            "homepage": {
+                "name": "homepage",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "Homepage URL",
+                "default": null
+            },
+            "json": {
+                "name": "json",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Path to JSON file for import\/export\/remove",
+                "default": null
+            },
+            "appversion": {
+                "name": "appversion",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "Application Version",
+                "default": null
+            }
+        }
+    },
+    "credtype": {
+        "description": "Credential type operations",
+        "arguments": {
+            "action": {
+                "name": "action",
+                "is_required": true,
+                "description": "Action: list|get|update",
+                "default": null
+            }
+        },
+        "options": {
+            "id": {
+                "name": "id",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Credential Type ID",
+                "default": null
+            },
+            "uuid": {
+                "name": "uuid",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Credential Type UUID",
+                "default": null
+            },
+            "name": {
+                "name": "name",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Name",
+                "default": null
+            },
+            "format": {
+                "name": "format",
+                "shortcut": "f",
+                "is_value_required": false,
+                "description": "The output format: text or json. Defaults to text.",
+                "default": "text"
+            }
+        }
+    },
+    "appstatus": {
+        "description": "Prints App Status",
+        "arguments": [],
+        "options": {
+            "format": {
+                "name": "format",
+                "shortcut": "f",
+                "is_value_required": false,
+                "description": "The output format: text or json. Defaults to text.",
+                "default": "text"
+            }
+        }
+    },
+    "companyapp": {
+        "description": "Manage company-application relations",
+        "arguments": {
+            "action": {
+                "name": "action",
+                "is_required": true,
+                "description": "Action: list|get|create|update|delete",
+                "default": null
+            }
+        },
+        "options": {
+            "id": {
+                "name": "id",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Relation ID",
+                "default": null
+            },
+            "company_id": {
+                "name": "company_id",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Company ID",
+                "default": null
+            },
+            "app_id": {
+                "name": "app_id",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Application ID",
+                "default": null
+            },
+            "app_uuid": {
+                "name": "app_uuid",
+                "shortcut": null,
+                "is_value_required": true,
+                "description": "Application UUID",
+                "default": null
+            },
+            "format": {
+                "name": "format",
+                "shortcut": "f",
+                "is_value_required": false,
+                "description": "The output format: text or json. Defaults to text.",
+                "default": "text"
+            }
+        }
+    },
+    "queue": {
+        "description": "Queue operations (list, truncate)",
+        "arguments": {
+            "action": {
+                "name": "action",
+                "is_required": true,
+                "description": "Action: list|truncate",
+                "default": null
+            }
+        },
+        "options": {
+            "format": {
+                "name": "format",
+                "shortcut": "f",
+                "is_value_required": false,
+                "description": "The output format: text or json. Defaults to text.",
+                "default": "text"
+            }
+        }
+    },
+    "prune": {
+        "description": "Prune logs and jobs, keeping only the latest N records (default: 1000)",
+        "arguments": [],
+        "options": {
+            "logs": {
+                "name": "logs",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "Prune logs table",
+                "default": false
+            },
+            "jobs": {
+                "name": "jobs",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "Prune jobs table",
+                "default": false
+            },
+            "keep": {
+                "name": "keep",
+                "shortcut": null,
+                "is_value_required": false,
+                "description": "Number of records to keep",
+                "default": 1000
+            }
+        }
     }
-  },
-  "required": [
-    "name",
-    "description",
-    "executable",
-    "environment"
-  ],
-  "additionalProperties": true
 }
