@@ -25,6 +25,25 @@ WebPage::singleton()->onlyForLogged();
 
 $runTemplate = new RunTemplate(WebPage::getRequestValue('id', 'int'));
 
+
+$actions = new \MultiFlexi\ActionConfig();
+
+if (WebPage::isPosted()) {
+    $succesActions = ActionsChooser::toggles('success');
+    $failActions = ActionsChooser::toggles('fail');
+    $runTemplate->setDataValue('fail', serialize($failActions));
+    $runTemplate->setDataValue('success', serialize($succesActions));
+    $runTemplate->saveToSQL();
+
+    $actions->saveModeConfigs('success', ActionsChooser::formModuleCofig('success'), $runTemplate->getMyKey());
+    $actions->saveModeConfigs('fail', ActionsChooser::formModuleCofig('fail'), $runTemplate->getMyKey());
+} else {
+    $failActions = $runTemplate->getDataValue('fail') ? unserialize($runTemplate->getDataValue('fail')) : [];
+    $succesActions = $runTemplate->getDataValue('success') ? unserialize($runTemplate->getDataValue('success')) : [];
+}
+
+
+
 if (WebPage::getRequestValue('new', 'int') === 1) {
     $app = new Application(WebPage::getRequestValue('app_id', 'int'));
     $runTemplate->setDataValue('app_id', WebPage::getRequestValue('app_id', 'int'));
@@ -72,6 +91,10 @@ if (WebPage::singleton()->isPosted()) {
     }
 
     $app->checkRequiredFields($dataToSave, true);
+
+    $dataToSave['app_id'] = $app->getMyKey();
+    $dataToSave['company_id'] = $companies->getMyKey();
+    $dataToSave['runtemplate_id'] = $runTemplate->getMyKey();
 
     /**
      * Save all uploaded files into temporary directory and prepare job environment.

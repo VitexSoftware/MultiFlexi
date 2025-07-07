@@ -19,6 +19,23 @@ final class CompanyToSlug extends AbstractMigration
 {
     public function change(): void
     {
-        $this->table('company')->renameColumn('code', 'slug')->removeColumn('company')->removeColumn('rw')->removeColumn('webhook')->update();
+        $table = $this->table('company');
+
+        // Check if the 'code' column exists before renaming
+        if ($table->hasColumn('code')) {
+            $table->renameColumn('code', 'slug');
+        }
+
+        // Remove 'rw' column if it exists
+        if ($table->hasColumn('rw')) {
+            $table->removeColumn('rw');
+        }
+
+        // Remove 'webhook' column if it exists
+        if ($table->hasColumn('webhook')) {
+            $table->removeColumn('webhook');
+        }
+
+        $table->update();
     }
 }

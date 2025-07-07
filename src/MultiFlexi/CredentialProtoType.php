@@ -65,6 +65,21 @@ abstract class CredentialProtoType extends \Ease\Sand
     }
 
     /**
+     * Set defVal where value is not set
+     */
+    public function prepareConfigForm(){
+        foreach ($this->configFieldsInternal as $folderField) {
+            if (null === $folderField->getValue()) {
+                $folderField->setValue($folderField->getDefaultValue());
+                $this->addStatusMessage(sprintf(_('%s prefilled from default'), $folderField->getCode()));
+            }
+        }
+    }
+
+
+
+
+    /**
      * Choose one of provided fields.
      *
      * @param array<string, string> $properties
