@@ -90,12 +90,16 @@ class RunTemplateCommand extends MultiFlexiCommand
                 return MultiFlexiCommand::SUCCESS;
             case 'get':
                 $id = $input->getOption('id');
+
                 if (empty($id)) {
                     $output->writeln('<error>Missing --id for runtemplate get</error>');
+
                     return MultiFlexiCommand::FAILURE;
                 }
+
                 $runtemplate = new RunTemplate((int) $id);
                 $data = $runtemplate->getData();
+
                 if ($format === 'json') {
                     $output->writeln(json_encode($data, \JSON_PRETTY_PRINT));
                 } else {
@@ -103,6 +107,7 @@ class RunTemplateCommand extends MultiFlexiCommand
                         $output->writeln("{$k}: {$v}");
                     }
                 }
+
                 return MultiFlexiCommand::SUCCESS;
             case 'create':
                 $data = [];

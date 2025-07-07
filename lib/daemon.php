@@ -42,9 +42,10 @@ function waitForDatabase(): void
             $testScheduler = new Scheduler();
             $testScheduler->getCurrentJobs(); // Try a simple query
             unset($testScheduler);
+
             break;
         } catch (\Throwable $e) {
-            error_log('Database unavailable: ' . $e->getMessage());
+            error_log('Database unavailable: '.$e->getMessage());
             sleep(30);
         }
     }
@@ -57,28 +58,32 @@ $scheduler->logBanner('MultiFlexi Daemon started');
 do {
     try {
         $jobsToLaunch = $scheduler->getCurrentJobs();
+
         if (!is_iterable($jobsToLaunch)) {
             $jobsToLaunch = [];
         }
     } catch (\Throwable $e) {
-        error_log('Database error: ' . $e->getMessage());
+        error_log('Database error: '.$e->getMessage());
         waitForDatabase();
         $scheduler = new Scheduler();
+
         continue;
     }
 
     foreach ($jobsToLaunch as $scheduledJob) {
         try {
             $job = new Job($scheduledJob['job']);
+
             if (empty($job->getData()) === false) {
                 $job->performJob();
             } else {
                 $job->addStatusMessage(sprintf(_('Job #%d Does not exists'), $scheduledJob['job']), 'error');
             }
+
             $scheduler->deleteFromSQL($scheduledJob['id']);
             $job->cleanUp();
         } catch (\Throwable $e) {
-            error_log('Job error: ' . $e->getMessage());
+            error_log('Job error: '.$e->getMessage());
         }
     }
 

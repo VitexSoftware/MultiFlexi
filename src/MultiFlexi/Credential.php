@@ -268,12 +268,13 @@ EOD;
 
         // Pokud existuje credentialType, použij jeho hodnoty a přepiš hodnoty z DB
         if ($this->getCredentialType()) {
-            $helperFields = $this->credentialType->query();
+            $helperFields = $this->getCredentialType()->query();
+
             foreach ($helperFields as $field) {
-                $credentialEnv->addField($field); // Přepíše hodnotu z DB hodnotou z helperu
+                $this->setDataValue($field->getCode(), $field->getValue());
             }
         }
-        
+
         return $credentialEnv;
     }
 }

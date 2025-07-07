@@ -81,42 +81,32 @@ abstract class MultiFlexiCommand extends \Symfony\Component\Console\Command\Comm
 
     /**
      * Output a JSON error response with status and message fields.
-     *
-     * @param OutputInterface $output
-     * @param string $message
-     * @param string $status
-     * @return void
      */
     protected function jsonError(OutputInterface $output, string $message, string $status = 'error'): void
     {
         $output->writeln(json_encode([
             'status' => $status,
             'message' => $message,
-        ], JSON_PRETTY_PRINT));
+        ], \JSON_PRETTY_PRINT));
     }
 
     /**
      * Output a JSON success response with status and message fields, plus extra data.
-     *
-     * @param OutputInterface $output
-     * @param string $message
-     * @param array $data
-     * @return void
      */
     protected function jsonSuccess(OutputInterface $output, string $message = 'OK', array $data = []): void
     {
         $output->writeln(json_encode(array_merge([
             'status' => 'success',
             'message' => $message,
-        ], $data), JSON_PRETTY_PRINT));
+        ], $data), \JSON_PRETTY_PRINT));
     }
-
 
     /**
      * Convert string option to boolean if needed.
      *
      * @param mixed $val
-     * @return bool|null
+     *
+     * @return null|bool
      */
     protected function parseBoolOption($val)
     {
@@ -132,5 +122,4 @@ abstract class MultiFlexiCommand extends \Symfony\Component\Console\Command\Comm
 
         return \in_array($val, ['1', 'true', 'yes', 'on'], true);
     }
-
 }
