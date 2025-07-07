@@ -114,7 +114,7 @@ class UserCommand extends MultiFlexiCommand
                         $output->writeln(json_encode([
                             'status' => 'not found',
                             'message' => 'No user found with given identifier',
-                        ], JSON_PRETTY_PRINT));
+                        ], \JSON_PRETTY_PRINT));
                     } else {
                         $output->writeln('<error>No user found with given identifier</error>');
                     }
@@ -123,7 +123,7 @@ class UserCommand extends MultiFlexiCommand
                 }
 
                 if ($format === 'json') {
-                    $output->writeln(json_encode($user->getData(), JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode($user->getData(), \JSON_PRETTY_PRINT));
                 } else {
                     foreach ($user->getData() as $k => $v) {
                         $output->writeln("{$k}: {$v}");
@@ -252,5 +252,4 @@ class UserCommand extends MultiFlexiCommand
                 return MultiFlexiCommand::FAILURE;
         }
     }
-
 }

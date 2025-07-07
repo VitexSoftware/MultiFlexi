@@ -42,7 +42,7 @@ class DescribeCommand extends Command
                 continue;
             }
 
- // skip self
+            // skip self
             $definition = $command->getDefinition();
             $result[$name] = [
                 'description' => $command->getDescription(),

@@ -46,7 +46,11 @@ if (WebPage::singleton()->isPosted()) {
         $kredenc->addStatusMessage(_('Error saving Credential field'), 'error');
     }
 } else {
-    $kredenc->setDataValue('credential_type_id', WebPage::getRequestValue('credential_type_id'));
+    $forcedCredTypeId = WebPage::getRequestValue('credential_type_id');
+
+    if ($forcedCredTypeId) {
+        $kredenc->setDataValue('credential_type_id', $forcedCredTypeId);
+    }
 
     if ((null === WebPage::getRequestValue('company_id')) === false) {
         $kredenc->setDataValue('company_id', WebPage::getRequestValue('company_id'));

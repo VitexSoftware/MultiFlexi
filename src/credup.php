@@ -76,11 +76,13 @@ if (empty($oldCreds)) {
                 $credType = $credTypeObj->getData();
 
                 $helper = $credTypeObj->getHelper();
+
                 if (method_exists($helper, 'query')) {
                     $fields = $helper->query(true)->getFields();
                 } else {
                     $fields = $helper->fieldsProvided()->getFields();
                 }
+
                 $fielder = new \MultiFlexi\CrTypeField();
 
                 foreach ($fields as $addField) {

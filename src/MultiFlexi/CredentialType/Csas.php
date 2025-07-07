@@ -151,7 +151,6 @@ class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\creden
      * Query CSAS credential values.
      *
      * @param bool $checkOnly If true, only check if token can be obtained (do not populate values)
-     * @return \MultiFlexi\ConfigFields
      */
     #[\Override]
     public function query(bool $checkOnly = false): \MultiFlexi\ConfigFields
@@ -172,7 +171,9 @@ class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\creden
                 } else {
                     $this->addStatusMessage(_('Token could not be obtained.'), 'error');
                 }
+
                 unlink($tmpfile);
+
                 return $this->configFieldsProvided;
             }
 

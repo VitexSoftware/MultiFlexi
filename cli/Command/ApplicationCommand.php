@@ -91,6 +91,7 @@ class ApplicationCommand extends MultiFlexiCommand
                     $application = $found ? new Application($found['id']) : null;
                 } else {
                     $output->writeln('<error>Missing --id, --uuid or --name for application get</error>');
+
                     return MultiFlexiCommand::FAILURE;
                 }
 
@@ -99,15 +100,16 @@ class ApplicationCommand extends MultiFlexiCommand
                         $output->writeln(json_encode([
                             'status' => 'not found',
                             'message' => 'No application found with given identifier',
-                        ], JSON_PRETTY_PRINT));
+                        ], \JSON_PRETTY_PRINT));
                     } else {
                         $output->writeln('<error>No application found with given identifier</error>');
                     }
+
                     return MultiFlexiCommand::FAILURE;
                 }
 
                 if ($format === 'json') {
-                    $output->writeln(json_encode($application->getData(), JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode($application->getData(), \JSON_PRETTY_PRINT));
                 } else {
                     foreach ($application->getData() as $k => $v) {
                         $output->writeln("{$k}: {$v}");
@@ -119,9 +121,10 @@ class ApplicationCommand extends MultiFlexiCommand
                 $data = [];
 
                 foreach ([
-                    'name', 'description', 'appversion', 'topics', 'executable', 'uuid', 'ociimage', 'requirements', 'homepage'
+                    'name', 'description', 'appversion', 'topics', 'executable', 'uuid', 'ociimage', 'requirements', 'homepage',
                 ] as $field) {
                     $val = $input->getOption($field);
+
                     if ($val !== null) {
                         // Map appversion CLI option to version DB field
                         if ($field === 'appversion') {
@@ -139,19 +142,23 @@ class ApplicationCommand extends MultiFlexiCommand
 
                 if (empty($data['name']) || empty($data['uuid']) || empty($data['executable'])) {
                     $output->writeln('<error>Missing --name, --uuid or --executable for application create</error>');
+
                     return MultiFlexiCommand::FAILURE;
                 }
 
                 // Check if application already exists (by uuid or name)
                 $appCheck = new \MultiFlexi\Application();
                 $exists = $appCheck->listingQuery()->where(['uuid' => $data['uuid']])->fetch();
+
                 if ($exists) {
                     $warningMsg = 'Application with this UUID already exists.';
+
                     if ($format === 'json') {
-                        $output->writeln(json_encode(['status' => 'warning', 'message' => $warningMsg], JSON_PRETTY_PRINT));
+                        $output->writeln(json_encode(['status' => 'warning', 'message' => $warningMsg], \JSON_PRETTY_PRINT));
                     } else {
                         $output->writeln('<comment>'.$warningMsg.'</comment>');
                     }
+
                     return MultiFlexiCommand::FAILURE;
                 }
 
@@ -162,14 +169,15 @@ class ApplicationCommand extends MultiFlexiCommand
                 // Print info about application created if --format json and --verbose
                 if ($format === 'json' && $output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
                     $full = (new \MultiFlexi\Application((int) $appId))->getData();
-                    $output->writeln(json_encode(['status' => 'created', 'application' => $full], JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode(['status' => 'created', 'application' => $full], \JSON_PRETTY_PRINT));
                 } elseif ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
                     $full = (new \MultiFlexi\Application((int) $appId))->getData();
+
                     foreach ($full as $k => $v) {
                         $output->writeln("{$k}: {$v}");
                     }
                 } else {
-                    $output->writeln(json_encode(['application_id' => $appId], JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode(['application_id' => $appId], \JSON_PRETTY_PRINT));
                 }
 
                 return MultiFlexiCommand::SUCCESS;
@@ -199,7 +207,7 @@ class ApplicationCommand extends MultiFlexiCommand
                 $data = [];
 
                 foreach ([
-                    'name', 'description', 'appversion', 'topics', 'executable', 'uuid', 'ociimage', 'requirements', 'homepage'
+                    'name', 'description', 'appversion', 'topics', 'executable', 'uuid', 'ociimage', 'requirements', 'homepage',
                 ] as $field) {
                     $val = $input->getOption($field);
 

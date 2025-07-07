@@ -130,11 +130,12 @@ class CompanyCommand extends MultiFlexiCommand
                     if ($format === 'json') {
                         $output->writeln(json_encode([
                             'status' => 'error',
-                            'message' => 'Missing --id, --ic, --name or --slug for company get'
-                        ], JSON_PRETTY_PRINT));
+                            'message' => 'Missing --id, --ic, --name or --slug for company get',
+                        ], \JSON_PRETTY_PRINT));
                     } else {
                         $output->writeln('<error>Missing --id, --ic, --name or --slug for company get</error>');
                     }
+
                     return MultiFlexiCommand::FAILURE;
                 }
 
@@ -143,15 +144,16 @@ class CompanyCommand extends MultiFlexiCommand
                         $output->writeln(json_encode([
                             'status' => 'not found',
                             'message' => 'No company found with given identifier',
-                        ], JSON_PRETTY_PRINT));
+                        ], \JSON_PRETTY_PRINT));
                     } else {
                         $output->writeln('<error>No company found with given identifier</error>');
                     }
+
                     return MultiFlexiCommand::FAILURE;
                 }
 
                 if ($format === 'json') {
-                    $output->writeln(json_encode($company->getData(), JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode($company->getData(), \JSON_PRETTY_PRINT));
                 } else {
                     foreach ($company->getData() as $k => $v) {
                         $output->writeln("{$k}: {$v}");
@@ -175,6 +177,7 @@ class CompanyCommand extends MultiFlexiCommand
                         }
                     }
                 }
+
                 // Ensure 'slug' field is set: use --slug if given, else slug from name
                 if (empty($data['slug']) && !empty($data['name'])) {
                     $data['slug'] = strtolower(preg_replace('/[^a-z0-9]+/', '_', $data['name']));
