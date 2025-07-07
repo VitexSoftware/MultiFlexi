@@ -7,21 +7,85 @@ Welcome to MultiFlexi's documentation!
    :alt: MultiFlexi Logo
    :align: center
 
-**MultiFlexi** is an environment that allows you to run various tools on top of AbraFlexi and Stormware Pohoda.
-It provides a flexible and customizable platform for integrating and extending the functionality of these software systems.
+**MultiFlexi** is a comprehensive PHP-based task scheduling and automation framework designed for accounting and business system integrations. It enables scheduled execution of applications and tools across multiple companies and platforms, with primary focus on systems like `AbraFlexi <https://www.abra.eu/flexi/>`_ and `Stormware Pohoda <https://www.stormware.cz/>`_.
 
-With MultiFlexi, you can leverage the power of `AbraFlexi <https://www.abra.eu/flexi/>`_ and `Stormware Pohoda <https://www.stormware.cz/>`_ to build and automate complex business processes.
-It offers a wide range of features and capabilities, including data synchronization, workflow automation, reporting, and more.
+Key Features
+------------
 
-By utilizing MultiFlexi, you can streamline your business operations, improve efficiency, and enhance collaboration between different systems.
-Whether you need to integrate AbraFlexi and Stormware Pohoda with other applications, create custom workflows, or generate advanced reports,
-MultiFlexi provides the tools and framework to make it happen.
+- **Multi-Platform Integration**: Native support for AbraFlexi, Pohoda, and other business systems with extensible credential types
+- **Flexible Job Scheduling**: Automated task execution with customizable intervals (hourly, daily, weekly, monthly, yearly) and dependencies
+- **Advanced Credential Management**: Secure handling of authentication credentials including VaultWarden integration, banking APIs (FioBank, RaiffeisenBank, CSAS), and Office365
+- **Multiple Execution Environments**: Support for native execution, Docker containers, Kubernetes pods, Azure cloud, and Podman
+- **Comprehensive Logging**: Detailed execution logs with Zabbix monitoring integration and real-time tracking
+- **Multi-Interface Support**:
+  
+  - Responsive Bootstrap 4 web interface with real-time monitoring and charts
+  - Rich command-line interface with extensive management commands
+  - RESTful API with OAuth2 authentication and multiple output formats (JSON, XML, HTML, YAML)
 
-To get started with MultiFlexi, refer to the :doc:`usage` section for detailed instructions on installation and usage.
+- **Enterprise-Ready**: User authentication, API tokens, multi-tenant data isolation, and comprehensive security features
 
-Please note that MultiFlexi is currently under active development, so be sure to check for updates and new features regularly.
+Architecture
+------------
 
-For more information about the API and how to interact with MultiFlexi programmatically, refer to the :doc:`api` section.
+MultiFlexi features a sophisticated layered architecture:
+
+**Database Layer**
+  ORM-based data management with Phinx migrations handling applications, companies, run templates, jobs, and credentials
+
+**Application Management**
+  External application definitions with JSON-based metadata, validation, and lifecycle management
+
+**Job Execution System**
+  Multi-environment execution with automatic environment variable injection and support for various executors
+
+**Credential Framework**
+  Extensible credential types supporting various integrations including secret management systems
+
+**Configuration Management**
+  Environment-based configuration with type-safe field definitions and validation
+
+**Security Layer**
+  Comprehensive authentication, authorization, and secure credential handling with encryption
+
+Environment Variables
+--------------------
+
+MultiFlexi automatically configures environment variables for executed applications:
+
+**AbraFlexi Integration:**
+
+- ``ABRAFLEXI_URL`` - AbraFlexi server endpoint
+- ``ABRAFLEXI_LOGIN`` - Authentication username
+- ``ABRAFLEXI_PASSWORD`` - Authentication password
+- ``ABRAFLEXI_COMPANY`` - Company code/identifier
+
+**Pohoda Integration:**
+
+- ``POHODA_ICO`` - Company identification number
+- ``POHODA_URL`` - Pohoda server endpoint
+- ``POHODA_USERNAME`` - Authentication username
+- ``POHODA_PASSWORD`` - Authentication password
+
+**System Variables:**
+
+- ``MULTIFLEXI_JOB_ID`` - Current job identifier
+- Custom variables based on application and company configuration
+
+Getting Started
+---------------
+
+To get started with MultiFlexi:
+
+1. Follow the :doc:`install` guide for installation instructions
+2. Complete the :doc:`firstrun` configuration
+3. Explore the :doc:`usage` section for operational guidance
+4. Check the :doc:`api` documentation for programmatic integration
+5. Use the :doc:`multiflexi-cli` for command-line management
+
+.. note::
+
+   MultiFlexi is actively developed and regularly updated with new features and improvements.
 
 
 Check out the :doc:`usage` section for further information, including
