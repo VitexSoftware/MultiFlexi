@@ -39,8 +39,8 @@ class ApplicationCommand extends MultiFlexiCommand
     {
         $this
             ->setDescription('Manage applications')
-            ->addArgument('action', InputArgument::REQUIRED, 'Action: list|get|create|update|delete|import-json|export-json|remove-json')
             ->addOption('format', 'f', InputOption::VALUE_OPTIONAL, 'The output format: text or json. Defaults to text.', 'text')
+            ->addArgument('action', InputArgument::REQUIRED, 'Action: list|get|create|update|delete|import-json|export-json|remove-json|showconfig')
             ->addOption('id', null, InputOption::VALUE_REQUIRED, 'Application ID')
             ->addOption('name', null, InputOption::VALUE_REQUIRED, 'Name')
             ->addOption('description', null, InputOption::VALUE_OPTIONAL, 'Description')
@@ -307,7 +307,45 @@ class ApplicationCommand extends MultiFlexiCommand
                 $output->writeln(json_encode(['removed' => $result], \JSON_PRETTY_PRINT));
 
                 return MultiFlexiCommand::SUCCESS;
-
+            case 'showconfig':
+                $id = $input->getOption('id');
+                $uuid = $input->getOption('uuid');
+                if (empty($id) && empty($uuid)) {
+                    $output->writeln('<error>Missing --id or --uuid for application showconfig</error>');
+                    return MultiFlexiCommand::FAILURE;
+                }
+                if (!empty($uuid)) {
+                    $app = new \MultiFlexi\Application();
+                    $found = $app->listingQuery()->where(['uuid' => $uuid])->fetch();
+                    if (!$found) {
+                        $output->writeln('<error>No application found with given UUID</error>');
+                        return MultiFlexiCommand::FAILURE;
+                    }
+                    $id = $found['id'];
+                }
+                $app = new \MultiFlexi\Application((int) $id);
+                $fields = $app->getAppEnvironmentFields();
+                $result = [];
+                foreach ($fields as $field) {
+                    $result[] = [
+                        'code' => $field->getCode(),
+                        'name' => $field->getName(),
+                        'type' => $field->getType(),
+                        'required' => $field->isRequired() ? 'yes' : 'no',
+                        'default' => $field->getDefaultValue(),
+                        'description' => $field->getDescription(),
+                    ];
+                }
+                if ($format === 'json') {
+                    $output->writeln(json_encode($result, JSON_PRETTY_PRINT));
+                } else {
+                    if (empty($result)) {
+                        $output->writeln('<info>No configuration fields defined for this application.</info>');
+                    } else {
+                        $this->outputTable($result);
+                    }
+                }
+                return MultiFlexiCommand::SUCCESS;
             default:
                 $output->writeln("<error>Unknown action: {$action}</error>");
 
