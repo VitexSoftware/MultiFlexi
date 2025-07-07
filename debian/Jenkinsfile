@@ -103,6 +103,9 @@ distributions.each {
                     sh 'sudo chmod 750 /var/lib/dbconfig-common/sqlite3/multiflexi || true'
                     sh 'sudo chmod 640 /var/lib/dbconfig-common/sqlite3/multiflexi/multiflexi || true'
 
+                    sh 'multiflexi-zabbix-lld'
+                    sh 'multiflexi-zabbix-lld-tasks'
+                    sh 'multiflexi-zabbix-lld-company'
                     sh 'multiflexi-cli appstatus'
 
                 }

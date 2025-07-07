@@ -50,14 +50,14 @@ foreach ($companer->listingQuery()->where('enabled', 1) as $companyData) {
                 '{#APPNAME}' => $appName,
                 '{#INTERVAL}' => RunTemplate::codeToInterval($companyAppData['interv']),
                 '{#COMPANY_NAME}' => $companyData['name'],
-                '{#COMPANY_CODE}' => $companyData['code'],
+                '{#COMPANY_CODE}' => $companyData['slug'],
                 '{#COMPANY_SERVER}' => \Ease\Shared::cfg('ZABBIX_HOST'),
             ];
         }
     } else {
         $lldData[] = [
             '{#COMPANY_NAME}' => $companyData['name'],
-            '{#COMPANY_CODE}' => $companyData['code'],
+            '{#COMPANY_CODE}' => $companyData['slug'],
             '{#COMPANY_SERVER}' => \Ease\Shared::cfg('ZABBIX_HOST'),
         ];
     }
