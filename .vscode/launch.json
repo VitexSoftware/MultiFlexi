@@ -74,6 +74,33 @@
             "port": 9003,
             "args": []
 
+        },
+        {
+            "name": "Prune logs (keep 1000)",
+            "type": "php",
+            "request": "launch",
+            "program": "${workspaceFolder}/cli/multiflexi-cli.php",
+            "args": ["prune", "--logs"],
+            "cwd": "${workspaceFolder}/cli",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Prune jobs (keep 1000)",
+            "type": "php",
+            "request": "launch",
+            "program": "${workspaceFolder}/cli/multiflexi-cli.php",
+            "args": ["prune", "--jobs"],
+            "cwd": "${workspaceFolder}/cli",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Prune logs and jobs (keep 500)",
+            "type": "php",
+            "request": "launch",
+            "program": "${workspaceFolder}/cli/multiflexi-cli.php",
+            "args": ["prune", "--logs", "--jobs", "--keep=500"],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
         }
     ]
 }
