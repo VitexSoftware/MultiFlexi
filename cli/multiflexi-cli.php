@@ -42,7 +42,7 @@ Shared::init(
     \array_key_exists('environment', $globalOptions) ? $globalOptions['environment'] : (\array_key_exists('e', $globalOptions) ? $globalOptions['e'] : '../.env'),
 );
 
-$loggers = ['syslog', '\MultiFlexi\LogToSQL', 'console'];
+$loggers = ['syslog', '\MultiFlexi\LogToSQL'];
 
 if (Shared::cfg('ZABBIX_SERVER') && Shared::cfg('ZABBIX_HOST') && class_exists('\MultiFlexi\LogToZabbix')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';

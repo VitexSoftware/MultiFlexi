@@ -107,7 +107,11 @@ distributions.each {
                     sh 'multiflexi-zabbix-lld-tasks'
                     sh 'multiflexi-zabbix-lld-company'
                     sh 'multiflexi-cli appstatus'
+                    
+                    sh 'multiflexi-cli application list'
+                    sh 'multiflexi-cli runtemplate list'
 
+                    // TODO: sh 'multiflexi-run-template -r1'
                 }
             }
             stage('Copy artifacts ' + distribution ) {

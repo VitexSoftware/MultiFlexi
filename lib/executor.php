@@ -25,17 +25,17 @@ Shared::init(
     ['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'],
     \array_key_exists('environment', $options) ? $options['environment'] : (\array_key_exists('e', $options) ? $options['e'] : '../.env'),
 );
-$destination = \array_key_exists('o', $options) ? $options['o'] : (\array_key_exists('output', $options) ? $options['output'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout'));
+$destination = \array_key_exists('o', $options) ? $options['o'] : (\array_key_exists('output', $options) ? $options['output'] : Shared::cfg('RESULT_FILE', 'php://stdout'));
 
-$runtempateId = (int) (\array_key_exists('r', $options) ? $options['r'] : (\array_key_exists('runtemplate', $options) ? $options['runtemplate'] : \Ease\Shared::cfg('RUNTEMPLATE_ID', 0)));
+$runtempateId = (int) (\array_key_exists('r', $options) ? $options['r'] : (\array_key_exists('runtemplate', $options) ? $options['runtemplate'] : Shared::cfg('RUNTEMPLATE_ID', 0)));
 
 $loggers = ['syslog', '\MultiFlexi\LogToSQL'];
 
-if (\Ease\Shared::cfg('ZABBIX_SERVER') && \Ease\Shared::cfg('ZABBIX_HOST') && class_exists('\MultiFlexi\LogToZabbix')) {
+if (Shared::cfg('ZABBIX_SERVER') && Shared::cfg('ZABBIX_HOST') && class_exists('\MultiFlexi\LogToZabbix')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';
 }
 
-if (strtolower(\Ease\Shared::cfg('APP_DEBUG', 'true')) === 'true') {
+if (strtolower(Shared::cfg('APP_DEBUG', 'false')) === 'true') {
     $loggers[] = 'console';
 }
 
@@ -46,13 +46,13 @@ Shared::user(new Anonym());
 
 $runTemplater = new \MultiFlexi\RunTemplate($runtempateId);
 
-if (\Ease\Shared::cfg('APP_DEBUG')) {
+if (Shared::cfg('APP_DEBUG')) {
     $runTemplater->logBanner();
 }
 
 if ($runTemplater->getMyKey()) {
     $jobber = new Job();
-    $jobber->prepareJob($runTemplater->getMyKey(), [], new \DateTime());
+    $jobber->prepareJob($runTemplater->getMyKey(), new ConfigFields('empty') , new \DateTime());
     $jobber->performJob();
 
     echo $jobber->executor->getOutput();
