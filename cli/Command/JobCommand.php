@@ -59,7 +59,8 @@ class JobCommand extends MultiFlexiCommand
             ->addOption('scheduled', null, InputOption::VALUE_REQUIRED, 'Scheduled datetime')
             ->addOption('executor', null, InputOption::VALUE_REQUIRED, 'Executor')
             ->addOption('schedule_type', null, InputOption::VALUE_REQUIRED, 'Schedule type')
-            ->addOption('app_id', null, InputOption::VALUE_REQUIRED, 'App ID');
+            ->addOption('app_id', null, InputOption::VALUE_REQUIRED, 'App ID')
+            ->addOption('fields', null, InputOption::VALUE_REQUIRED, 'Comma-separated list of fields to display');
         // Add more options as needed
     }
 
@@ -92,13 +93,30 @@ class JobCommand extends MultiFlexiCommand
                 }
 
                 $job = new Job((int) $id);
-                $data = $job->getData();
+                $fields = $input->getOption('fields');
 
-                if ($format === 'json') {
-                    $output->writeln(json_encode($data, \JSON_PRETTY_PRINT));
+                if ($fields) {
+                    $fieldsArray = explode(',', $fields);
+                    $filteredData = array_filter(
+                        $job->getData(),
+                        static fn ($key) => \in_array($key, $fieldsArray, true),
+                        \ARRAY_FILTER_USE_KEY,
+                    );
+
+                    if ($format === 'json') {
+                        $output->writeln(json_encode($filteredData, \JSON_PRETTY_PRINT));
+                    } else {
+                        foreach ($filteredData as $k => $v) {
+                            $output->writeln("{$k}: {$v}");
+                        }
+                    }
                 } else {
-                    foreach ($data as $k => $v) {
-                        $output->writeln("{$k}: {$v}");
+                    if ($format === 'json') {
+                        $output->writeln(json_encode($job->getData(), \JSON_PRETTY_PRINT));
+                    } else {
+                        foreach ($job->getData() as $k => $v) {
+                            $output->writeln("{$k}: {$v}");
+                        }
                     }
                 }
 
@@ -182,7 +200,11 @@ class JobCommand extends MultiFlexiCommand
                 $id = $input->getOption('id');
 
                 if (empty($id)) {
-                    $output->writeln('<error>Missing --id for job delete</error>');
+                    if ($format === 'json') {
+                        $output->writeln(json_encode(['error' => 'Missing --id for job delete'], \JSON_PRETTY_PRINT));
+                    } else {
+                        $output->writeln('<error>Missing --id for job delete</error>');
+                    }
 
                     return MultiFlexiCommand::FAILURE;
                 }
@@ -190,10 +212,10 @@ class JobCommand extends MultiFlexiCommand
                 $job = new Job((int) $id);
                 $job->deleteFromSQL();
 
-                if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
-                    $output->writeln("Job deleted: ID={$id}");
-                } else {
+                if ($format === 'json') {
                     $output->writeln(json_encode(['deleted' => true, 'job_id' => $id], \JSON_PRETTY_PRINT));
+                } else {
+                    $output->writeln("Job deleted: ID={$id}");
                 }
 
                 return MultiFlexiCommand::SUCCESS;

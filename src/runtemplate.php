@@ -25,7 +25,6 @@ WebPage::singleton()->onlyForLogged();
 
 $runTemplate = new RunTemplate(WebPage::getRequestValue('id', 'int'));
 
-
 $actions = new \MultiFlexi\ActionConfig();
 
 if (WebPage::isPosted()) {
@@ -41,8 +40,6 @@ if (WebPage::isPosted()) {
     $failActions = $runTemplate->getDataValue('fail') ? unserialize($runTemplate->getDataValue('fail')) : [];
     $succesActions = $runTemplate->getDataValue('success') ? unserialize($runTemplate->getDataValue('success')) : [];
 }
-
-
 
 if (WebPage::getRequestValue('new', 'int') === 1) {
     $app = new Application(WebPage::getRequestValue('app_id', 'int'));

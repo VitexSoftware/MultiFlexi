@@ -27,13 +27,14 @@ use MultiFlexi\Cli\Command\CompanyCommand;
 use MultiFlexi\Cli\Command\CredentialTypeCommand;
 use MultiFlexi\Cli\Command\DescribeCommand;
 use MultiFlexi\Cli\Command\JobCommand;
-use MultiFlexi\Cli\Command\QueueCommand;
 use MultiFlexi\Cli\Command\PruneCommand;
+use MultiFlexi\Cli\Command\QueueCommand;
 use MultiFlexi\Cli\Command\RunTemplateCommand;
 use MultiFlexi\Cli\Command\TokenCommand;
 use MultiFlexi\Cli\Command\UserCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\CompleteCommand;
+use Symfony\Component\Console\Input\InputOption;
 
 $globalOptions = getopt('e::', ['environment::']);
 
@@ -72,4 +73,5 @@ $application->add(new AppStatusCommand());
 $application->add(new CompanyAppCommand());
 $application->add(new QueueCommand());
 $application->add(new PruneCommand());
+$application->getDefinition()->addOption(new InputOption('fields', null, InputOption::VALUE_OPTIONAL, 'Comma-separated list of fields to display'));
 $application->run();

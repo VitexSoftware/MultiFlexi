@@ -2,6 +2,17 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the MultiFlexi package
+ *
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace MultiFlexi\Ui;
 
 use MultiFlexi\Application;
@@ -30,21 +41,26 @@ class ActionsTab extends \Ease\TWB4\Form
 
         $actionsData = [];
         $configRows = $actions->getRuntemplateConfig($runTemplater->getMyKey());
-        if (is_object($configRows) && method_exists($configRows, 'fetchAll')) {
+
+        if (\is_object($configRows) && method_exists($configRows, 'fetchAll')) {
             $actionsData = ActionsChooser::sqlToForm($configRows->fetchAll());
-        } elseif (is_array($configRows)) {
+        } elseif (\is_array($configRows)) {
             foreach ($configRows as $field) {
                 $actionsData[$field['mode'].'['.$field['module'].']['.$field['keyname'].']'] = $field['value'];
             }
         }
+
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\\Action');
         $actionModules = \Ease\Functions::classesInNamespace('MultiFlexi\\Action');
         $initials = [];
+
         foreach ($actionModules as $action) {
             $actionClass = '\\MultiFlexi\\Action\\'.$action;
+
             foreach (['success', 'fail'] as $mode) {
                 if ($actionClass::usableForApp($app)) {
                     $initials[$action][$mode] = (new $actionClass($runTemplater))->initialData('success');
+
                     foreach ($initials[$action][$mode] as $key => $value) {
                         if (\array_key_exists($mode.'['.$action.']['.$key.']', $actionsData) === false) {
                             $actionsData[$mode.'['.$action.']['.$key.']'] = $value;
@@ -53,6 +69,7 @@ class ActionsTab extends \Ease\TWB4\Form
                 }
             }
         }
+
         $this->fillUp($actionsData);
     }
 }

@@ -52,7 +52,8 @@ class CompanyCommand extends MultiFlexiCommand
             ->addOption('DatCreate', null, InputOption::VALUE_REQUIRED, 'Created date (date-time)')
             ->addOption('DatUpdate', null, InputOption::VALUE_REQUIRED, 'Updated date (date-time)')
             ->addOption('email', null, InputOption::VALUE_REQUIRED, 'Email')
-            ->addOption('slug', null, InputOption::VALUE_REQUIRED, 'Company Slug');
+            ->addOption('slug', null, InputOption::VALUE_REQUIRED, 'Company Slug')
+            ->addOption('fields', null, InputOption::VALUE_OPTIONAL, 'Comma-separated list of fields to display');
         // Add more options as needed
     }
 
@@ -152,11 +153,30 @@ class CompanyCommand extends MultiFlexiCommand
                     return MultiFlexiCommand::FAILURE;
                 }
 
-                if ($format === 'json') {
-                    $output->writeln(json_encode($company->getData(), \JSON_PRETTY_PRINT));
+                $fields = $input->getOption('fields');
+
+                if ($fields) {
+                    $fieldsArray = explode(',', $fields);
+                    $filteredData = array_filter(
+                        $company->getData(),
+                        static fn ($key) => \in_array($key, $fieldsArray, true),
+                        \ARRAY_FILTER_USE_KEY,
+                    );
+
+                    if ($format === 'json') {
+                        $output->writeln(json_encode($filteredData, \JSON_PRETTY_PRINT));
+                    } else {
+                        foreach ($filteredData as $k => $v) {
+                            $output->writeln("{$k}: {$v}");
+                        }
+                    }
                 } else {
-                    foreach ($company->getData() as $k => $v) {
-                        $output->writeln("{$k}: {$v}");
+                    if ($format === 'json') {
+                        $output->writeln(json_encode($company->getData(), \JSON_PRETTY_PRINT));
+                    } else {
+                        foreach ($company->getData() as $k => $v) {
+                            $output->writeln("{$k}: {$v}");
+                        }
                     }
                 }
 

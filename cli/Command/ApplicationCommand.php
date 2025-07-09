@@ -310,22 +310,30 @@ class ApplicationCommand extends MultiFlexiCommand
             case 'showconfig':
                 $id = $input->getOption('id');
                 $uuid = $input->getOption('uuid');
+
                 if (empty($id) && empty($uuid)) {
                     $output->writeln('<error>Missing --id or --uuid for application showconfig</error>');
+
                     return MultiFlexiCommand::FAILURE;
                 }
+
                 if (!empty($uuid)) {
                     $app = new \MultiFlexi\Application();
                     $found = $app->listingQuery()->where(['uuid' => $uuid])->fetch();
+
                     if (!$found) {
                         $output->writeln('<error>No application found with given UUID</error>');
+
                         return MultiFlexiCommand::FAILURE;
                     }
+
                     $id = $found['id'];
                 }
+
                 $app = new \MultiFlexi\Application((int) $id);
                 $fields = $app->getAppEnvironmentFields();
                 $result = [];
+
                 foreach ($fields as $field) {
                     $result[] = [
                         'code' => $field->getCode(),
@@ -336,8 +344,9 @@ class ApplicationCommand extends MultiFlexiCommand
                         'description' => $field->getDescription(),
                     ];
                 }
+
                 if ($format === 'json') {
-                    $output->writeln(json_encode($result, JSON_PRETTY_PRINT));
+                    $output->writeln(json_encode($result, \JSON_PRETTY_PRINT));
                 } else {
                     if (empty($result)) {
                         $output->writeln('<info>No configuration fields defined for this application.</info>');
@@ -345,7 +354,9 @@ class ApplicationCommand extends MultiFlexiCommand
                         $this->outputTable($result);
                     }
                 }
+
                 return MultiFlexiCommand::SUCCESS;
+
             default:
                 $output->writeln("<error>Unknown action: {$action}</error>");
 

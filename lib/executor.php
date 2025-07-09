@@ -52,7 +52,7 @@ if (Shared::cfg('APP_DEBUG')) {
 
 if ($runTemplater->getMyKey()) {
     $jobber = new Job();
-    $jobber->prepareJob($runTemplater->getMyKey(), new ConfigFields('empty') , new \DateTime());
+    $jobber->prepareJob($runTemplater->getMyKey(), new ConfigFields('empty'), new \DateTime());
     $jobber->performJob();
 
     echo $jobber->executor->getOutput();
