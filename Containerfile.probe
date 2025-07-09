@@ -1,0 +1,8 @@
+FROM docker.io/library/bash
+COPY bin/multiflexi-probe /usr/local/bin
+RUN chmod +x /usr/local/bin/multiflexi-probe
+CMD ["/usr/local/bin/multiflexi-probe"]
+
+LABEL maintainer="Vítězslav Dvořák <info@vitexsoftware.cz>"
+LABEL description="Container for running the MultiFlexi probe."
+LABEL version="1.1.0"

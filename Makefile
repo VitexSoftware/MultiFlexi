@@ -135,17 +135,8 @@ phpunit:
 daemon:
 	export $(grep -v '#' .env | xargs) && cd lib && php -f ./daemon.php
 
-testimage:
-	podman build -f tests/Containerfile . -t docker.io/vitexsoftware/multiflexi-probe
+probeimage:
+	podman build -f Containerfile.probe . -t docker.io/vitexsoftware/multiflexi-probe
 
-testimagex:
-	docker buildx build -f tests/Containerfile . --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag docker.io/vitexsoftware/multiflexi-probe
-
-
-packages:
-	debuild -us -uc
-
-# Use phpcs to reformat code to PSR12
-codingstandards:
-	phpcbf --colors --standard=PSR12 --extensions=php --ignore=vendor/ src/
-
+probeimagex:
+	docker buildx build -f Containerfile.probe . --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag docker.io/vitexsoftware/multiflexi-probe

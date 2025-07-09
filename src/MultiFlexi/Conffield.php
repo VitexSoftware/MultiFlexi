@@ -106,8 +106,8 @@ class Conffield extends \Ease\SQL\Engine
     public static function fixType(string $typeOld): string
     {
         return str_replace(
-            ['directory', 'file', 'checkbox', 'boolean', 'switch', 'text', 'number', 'select'],
-            ['file-path', 'file-path', 'bool', 'bool', 'bool', 'string', 'integer', 'set'],
+            [ 'directory', 'checkbox', 'boolean', 'switch', 'text', 'number', 'select'],
+            [ 'file-path', 'bool', 'bool', 'bool', 'string', 'integer', 'set'],
             $typeOld,
         );
     }

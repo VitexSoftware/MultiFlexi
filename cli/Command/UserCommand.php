@@ -62,7 +62,8 @@ class UserCommand extends MultiFlexiCommand
             ->addOption('firstname', null, InputOption::VALUE_REQUIRED, 'First name')
             ->addOption('lastname', null, InputOption::VALUE_REQUIRED, 'Last name')
             ->addOption('email', null, InputOption::VALUE_REQUIRED, 'Email')
-            ->addOption('password', null, InputOption::VALUE_REQUIRED, 'Password')
+            ->addOption('password', null, InputOption::VALUE_REQUIRED, 'Password (hashed)')
+            ->addOption('plaintext', null, InputOption::VALUE_REQUIRED, 'Plaintext password')
             ->addOption('enabled', null, InputOption::VALUE_OPTIONAL, 'Enabled (true/false)')
             ->setHelp('This command manage Jobs');
         // Add more options as needed
@@ -177,9 +178,25 @@ class UserCommand extends MultiFlexiCommand
                 return MultiFlexiCommand::SUCCESS;
             case 'update':
                 $id = $input->getOption('id');
+                $login = $input->getOption('login');
 
-                if (empty($id)) {
-                    $output->writeln('<error>Missing --id for user update</error>');
+                if (empty($id) && empty($login)) {
+                    $output->writeln('<error>Missing --id or --login for user update</error>');
+
+                    return MultiFlexiCommand::FAILURE;
+                }
+
+                $user = null;
+
+                if (!empty($id)) {
+                    $user = new User((int) $id);
+                } elseif (!empty($login)) {
+                    $user = new User($login);
+                    $id = $user->getDataValue('id');
+                }
+
+                if (!$user || empty($user->getData())) {
+                    $output->writeln('<error>No user found with the given identifier</error>');
 
                     return MultiFlexiCommand::FAILURE;
                 }
@@ -198,8 +215,12 @@ class UserCommand extends MultiFlexiCommand
                     }
                 }
 
-                if ($input->getOption('password')) {
-                    $data['password'] = \MultiFlexi\User::encryptPassword($input->getOption('password'));
+                $plaintextPassword = $input->getOption('plaintext');
+
+                if (is_string($plaintextPassword)) {
+                    $data['password'] = \MultiFlexi\User::encryptPassword($plaintextPassword) ;
+                } else if ($input->getOption('password')) {
+                    $data['password'] = $input->getOption('password');
                 }
 
                 if (empty($data)) {
@@ -208,7 +229,6 @@ class UserCommand extends MultiFlexiCommand
                     return MultiFlexiCommand::FAILURE;
                 }
 
-                $user = new \MultiFlexi\User((int) $id);
                 $user->updateToSQL($data, ['id' => $id]);
 
                 if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
