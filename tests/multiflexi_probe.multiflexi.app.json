@@ -11,18 +11,18 @@
     "ociimage": "docker.io/vitexsoftware/multiflexi-probe",
     "uuid": "775ed801-2489-4981-bc14-d8a01cba1938",
     "topics": "MultiFlexi,probe,task launcher,testing,tool",
-    "version": "0.3.4",
+    "version": "0.3.5",
     "environment": {
         "FILE_UPLOAD": {
-            "type": "file",
+            "type": "file-path",
             "description": "Testing file upload field",
             "defval": "\/etc\/fstab",
             "required": true
         },
         "PASSWORD": {
             "type": "password",
-            "description": "Testing file upload field",
-            "defval": "\/etc\/fstab",
+            "description": "An example of secret",
+            "defval": "donotcare",
             "required": false
         },
         "APP_DEBUG": {
