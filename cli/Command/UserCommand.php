@@ -153,8 +153,12 @@ class UserCommand extends MultiFlexiCommand
                     return MultiFlexiCommand::FAILURE;
                 }
 
-                if ($input->getOption('password')) {
-                    $data['password'] = \MultiFlexi\User::encryptPassword($input->getOption('password'));
+                $plaintextPassword = $input->getOption('plaintext');
+
+                if (is_string($plaintextPassword)) {
+                    $data['password'] = \MultiFlexi\User::encryptPassword($plaintextPassword) ;
+                } else if ($input->getOption('password')) {
+                    $data['password'] = $input->getOption('password');
                 }
 
                 $user = new \MultiFlexi\User();

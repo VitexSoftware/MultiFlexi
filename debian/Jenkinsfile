@@ -107,9 +107,13 @@ distributions.each {
                     sh 'multiflexi-zabbix-lld-tasks'
                     sh 'multiflexi-zabbix-lld-company'
                     sh 'multiflexi-cli appstatus'
-                    
+
                     sh 'multiflexi-cli application list'
                     sh 'multiflexi-cli runtemplate list'
+
+                    sh 'multiflexi-cli user create --login test --email test@multiflexi.eu --plaintext secret'
+                    sh 'multiflexi-cli user update --login test --email changed@multiflexi.exu --plaintext test'
+                    sh 'multiflexi-cli user list'
 
                     // TODO: sh 'multiflexi-run-template -r1'
                 }
