@@ -114,11 +114,11 @@ class Job extends Engine
     /**
      * Create New Job Record in database.
      *
-     * @param int                   $runtemplateId Job is performed in terms of given RunTemplate
-     * @param array<string, string> $environment   Environment prepared for Job execution
-     * @param \DateTime             $scheduled     Schedule Timestamp
-     * @param string                $executor      Chosen Executor class name
-     * @param string                $scheduleType  Schedule type Info
+     * @param int          $runtemplateId Job is performed in terms of given RunTemplate
+     * @param ConfigFields $environment   Environment prepared for Job execution
+     * @param \DateTime    $scheduled     Schedule Timestamp
+     * @param string       $executor      Chosen Executor class name
+     * @param string       $scheduleType  Schedule type Info
      *
      * @return int new job ID
      */

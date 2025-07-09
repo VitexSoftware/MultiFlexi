@@ -152,14 +152,14 @@ class CredentialType extends DBEngine
         $fields = new ConfigFields();
         $fielder = new \MultiFlexi\CrTypeField();
 
-        foreach ($this->getHelper()->fieldsProvided() as $providedField){
-            if($providedField->isRequired()){
+        foreach ($this->getHelper()->fieldsProvided() as $providedField) {
+            if ($providedField->isRequired()) {
                 $rField = new ConfigFieldWithHelper($providedField->getCode(), $providedField->getType(), $providedField->getName(), $providedField->getDescription());
                 $rField->setHint($providedField->getHint())->setDefaultValue($providedField->getDefaultValue())->setRequired(true)->setHelper(\Ease\Functions::baseClassName($this->getHelper()));
                 $fields->addField($rField);
             }
         }
-        
+
         foreach ($fielder->listingQuery()->where(['credential_type_id' => $this->getMyKey()]) as $fieldData) {
             $field = new ConfigFieldWithHelper((string) $fieldData['keyname'], $fieldData['type'], $fieldData['keyname'], (string) $fieldData['description']);
             $field->setHint($fieldData['hint'])->setDefaultValue($fieldData['defval'])->setRequired($fieldData['required'] === 1)->setHelper((string) $fieldData['helper']);

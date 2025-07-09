@@ -50,7 +50,8 @@ class RunTemplateCommand extends MultiFlexiCommand
             ->addOption('config', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Application config key=value (repeatable)')
             ->addOption('schedule_time', null, InputOption::VALUE_OPTIONAL, 'Schedule time for launch (Y-m-d H:i:s or "now")', 'now')
             ->addOption('executor', null, InputOption::VALUE_OPTIONAL, 'Executor to use for launch', 'Native')
-            ->addOption('env', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Environment override key=value (repeatable)');
+            ->addOption('env', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Environment override key=value (repeatable)')
+            ->addOption('fields', null, InputOption::VALUE_OPTIONAL, 'Comma-separated list of fields to display');
         // Add more options as needed
     }
 
@@ -99,12 +100,30 @@ class RunTemplateCommand extends MultiFlexiCommand
 
                 $runtemplate = new RunTemplate((int) $id);
                 $data = $runtemplate->getData();
+                $fields = $input->getOption('fields');
 
-                if ($format === 'json') {
-                    $output->writeln(json_encode($data, \JSON_PRETTY_PRINT));
+                if ($fields) {
+                    $fieldsArray = explode(',', $fields);
+                    $filteredData = array_filter(
+                        $runtemplate->getData(),
+                        static fn ($key) => \in_array($key, $fieldsArray, true),
+                        \ARRAY_FILTER_USE_KEY,
+                    );
+
+                    if ($format === 'json') {
+                        $output->writeln(json_encode($filteredData, \JSON_PRETTY_PRINT));
+                    } else {
+                        foreach ($filteredData as $k => $v) {
+                            $output->writeln("{$k}: {$v}");
+                        }
+                    }
                 } else {
-                    foreach ($data as $k => $v) {
-                        $output->writeln("{$k}: {$v}");
+                    if ($format === 'json') {
+                        $output->writeln(json_encode($runtemplate->getData(), \JSON_PRETTY_PRINT));
+                    } else {
+                        foreach ($runtemplate->getData() as $k => $v) {
+                            $output->writeln("{$k}: {$v}");
+                        }
                     }
                 }
 

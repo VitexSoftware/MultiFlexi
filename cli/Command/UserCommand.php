@@ -123,11 +123,30 @@ class UserCommand extends MultiFlexiCommand
                     return MultiFlexiCommand::FAILURE;
                 }
 
-                if ($format === 'json') {
-                    $output->writeln(json_encode($user->getData(), \JSON_PRETTY_PRINT));
+                $fields = $input->getOption('fields');
+
+                if ($fields) {
+                    $fieldsArray = explode(',', $fields);
+                    $filteredData = array_filter(
+                        $user->getData(),
+                        static fn ($key) => \in_array($key, $fieldsArray, true),
+                        \ARRAY_FILTER_USE_KEY,
+                    );
+
+                    if ($format === 'json') {
+                        $output->writeln(json_encode($filteredData, \JSON_PRETTY_PRINT));
+                    } else {
+                        foreach ($filteredData as $k => $v) {
+                            $output->writeln("{$k}: {$v}");
+                        }
+                    }
                 } else {
-                    foreach ($user->getData() as $k => $v) {
-                        $output->writeln("{$k}: {$v}");
+                    if ($format === 'json') {
+                        $output->writeln(json_encode($user->getData(), \JSON_PRETTY_PRINT));
+                    } else {
+                        foreach ($user->getData() as $k => $v) {
+                            $output->writeln("{$k}: {$v}");
+                        }
                     }
                 }
 
@@ -155,9 +174,9 @@ class UserCommand extends MultiFlexiCommand
 
                 $plaintextPassword = $input->getOption('plaintext');
 
-                if (is_string($plaintextPassword)) {
-                    $data['password'] = \MultiFlexi\User::encryptPassword($plaintextPassword) ;
-                } else if ($input->getOption('password')) {
+                if (\is_string($plaintextPassword)) {
+                    $data['password'] = \MultiFlexi\User::encryptPassword($plaintextPassword);
+                } elseif ($input->getOption('password')) {
                     $data['password'] = $input->getOption('password');
                 }
 
@@ -221,9 +240,9 @@ class UserCommand extends MultiFlexiCommand
 
                 $plaintextPassword = $input->getOption('plaintext');
 
-                if (is_string($plaintextPassword)) {
-                    $data['password'] = \MultiFlexi\User::encryptPassword($plaintextPassword) ;
-                } else if ($input->getOption('password')) {
+                if (\is_string($plaintextPassword)) {
+                    $data['password'] = \MultiFlexi\User::encryptPassword($plaintextPassword);
+                } elseif ($input->getOption('password')) {
                     $data['password'] = $input->getOption('password');
                 }
 
@@ -266,19 +285,35 @@ class UserCommand extends MultiFlexiCommand
                     $user = new User((int) $id);
                 } elseif (!empty($login)) {
                     $userData = (new User())->listingQuery()->where('login', $login)->fetch();
+
                     if ($userData) {
                         $user = new User((int) $userData['id']);
                     }
                 }
 
                 if (!$user || empty($user->getData())) {
-                    $output->writeln('<error>No user found with the given identifier</error>');
+                    if ($format === 'json') {
+                        $output->writeln(json_encode([
+                            'status' => 'failure',
+                            'message' => 'No user found with the given identifier',
+                        ], \JSON_PRETTY_PRINT));
+                    } else {
+                        $output->writeln('<error>No user found with the given identifier</error>');
+                    }
 
                     return MultiFlexiCommand::FAILURE;
                 }
 
                 $user->deleteFromSQL();
-                $output->writeln('<info>User deleted successfully</info>');
+
+                if ($format === 'json') {
+                    $output->writeln(json_encode([
+                        'status' => 'success',
+                        'message' => 'User deleted successfully',
+                    ], \JSON_PRETTY_PRINT));
+                } else {
+                    $output->writeln('<info>User deleted successfully</info>');
+                }
 
                 return MultiFlexiCommand::SUCCESS;
 

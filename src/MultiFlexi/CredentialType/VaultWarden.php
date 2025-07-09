@@ -52,9 +52,8 @@ class VaultWarden extends \MultiFlexi\CredentialProtoType implements \MultiFlexi
         $apiKeyField = $this->configFieldsInternal->getFieldByCode('VAULTWARDEN_API_KEY');
         $apiKeyField->setDescription(_('Obtain API KEY'));
 
-//        $folderField = $this->configFieldsInternal->getFieldByCode('VAULTWARDEN_FOLDER');
+        //        $folderField = $this->configFieldsInternal->getFieldByCode('VAULTWARDEN_FOLDER');
 
-       
         parent::prepareConfigForm();
     }
 
@@ -115,7 +114,7 @@ class VaultWarden extends \MultiFlexi\CredentialProtoType implements \MultiFlexi
 
                 return $this->configFieldsProvided;
             }
-            
+
             // Use Bitwarden service to get items
             $service = new \Jalismrs\Bitwarden\BitwardenService(new \MultiFlexi\BitwardenServiceDelegate());
             $items = $service->searchItems($this->configFieldsInternal->getFieldByCode('VAULTWARDEN_FOLDER')->getValue());

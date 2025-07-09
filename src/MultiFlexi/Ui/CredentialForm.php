@@ -81,7 +81,6 @@ class CredentialForm extends Form
 
         $formContents[] = new FormGroup(_('Credential Name'), new InputTextTag('name', $kredenc->getRecordName() ?? $credentialNameHint), $credentialNameHint);
 
-        
         if ($kredenc->getDataValue('credential_type_id')) {
             $fieldsSource = new CredentialType($kredenc->getDataValue('credential_type_id'));
 
@@ -89,8 +88,7 @@ class CredentialForm extends Form
                 $formContents[] = $this->confiField($kredenc, $field);
             }
         }
-        
-        
+
         if (null !== $kredenc->getMyKey()) {
             $rtplcr = new RunTplCreds();
             $runtlUsing = $rtplcr->getRuntemplatesForCredential($kredenc->getMyKey())->select(['runtemplate.name', 'company_id', 'app_id'])->leftJoin('runtemplate ON runtemplate.id = runtplcreds.runtemplate_id')->fetchAll();
@@ -118,7 +116,7 @@ class CredentialForm extends Form
                 $formContents[] = $runtemplatesDiv;
             }
         }
-        
+
         $formContents[] = new InputHiddenTag('id', (string) ($kredenc->getMyKey() ?? ''));
 
         $submitRow = new Row();

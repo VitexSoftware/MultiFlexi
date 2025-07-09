@@ -48,7 +48,7 @@ class LaunchJob extends \MultiFlexi\CommonAction
      */
     public static function inputs(string $prefix)
     {
-        return new \MultiFlexi\Ui\CompanyAppChooser($prefix.'[LaunchJob][jobid]', new \MultiFlexi\Company(array_key_exists('cpmpany', $_SESSION) ? $_SESSION['company'] : 0));
+        return new \MultiFlexi\Ui\CompanyAppChooser($prefix.'[LaunchJob][jobid]', new \MultiFlexi\Company(\array_key_exists('cpmpany', $_SESSION) ? $_SESSION['company'] : 0));
     }
 
     /**
