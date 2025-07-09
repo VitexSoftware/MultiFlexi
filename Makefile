@@ -140,3 +140,6 @@ probeimage:
 
 probeimagex:
 	docker buildx build -f Containerfile.probe . --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag docker.io/vitexsoftware/multiflexi-probe
+
+clischema:
+	./cli.sh describe 

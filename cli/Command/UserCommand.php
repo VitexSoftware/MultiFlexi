@@ -252,21 +252,33 @@ class UserCommand extends MultiFlexiCommand
                 return MultiFlexiCommand::SUCCESS;
             case 'delete':
                 $id = $input->getOption('id');
+                $login = $input->getOption('login');
 
-                if (empty($id)) {
-                    $output->writeln('<error>Missing --id for user delete</error>');
+                if (empty($id) && empty($login)) {
+                    $output->writeln('<error>Missing --id or --login for user delete</error>');
 
                     return MultiFlexiCommand::FAILURE;
                 }
 
-                $user = new \MultiFlexi\User((int) $id);
-                $user->deleteFromSQL();
+                $user = null;
 
-                if ($output->getVerbosity() > OutputInterface::VERBOSITY_NORMAL) {
-                    $output->writeln("User deleted: ID={$id}");
-                } else {
-                    $output->writeln(json_encode(['deleted' => true, 'user_id' => $id], \JSON_PRETTY_PRINT));
+                if (!empty($id)) {
+                    $user = new User((int) $id);
+                } elseif (!empty($login)) {
+                    $userData = (new User())->listingQuery()->where('login', $login)->fetch();
+                    if ($userData) {
+                        $user = new User((int) $userData['id']);
+                    }
                 }
+
+                if (!$user || empty($user->getData())) {
+                    $output->writeln('<error>No user found with the given identifier</error>');
+
+                    return MultiFlexiCommand::FAILURE;
+                }
+
+                $user->deleteFromSQL();
+                $output->writeln('<info>User deleted successfully</info>');
 
                 return MultiFlexiCommand::SUCCESS;
 

@@ -116,7 +116,7 @@ class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\creden
                     new \Ease\Html\SpanTag(
                         $tokenInfo['uuid'],
                         [
-                            'onclick' => "document.getElementById('Tokenuniqueidentifier').value='{$tokenInfo['uuid']}';",
+                            'onclick' => "document.getElementsByName('Csas[CSAS_TOKEN_ID]').value='{$tokenInfo['uuid']}';",
                             'style' => 'cursor:pointer;',
                             'title' => _('Click to use this UUID'),
                         ],
