@@ -13,7 +13,7 @@ multiflexi-cli user list
 multiflexi-cli user get --login test
 multiflexi-cli user get --login test --fields login,email,company
 
-multiflexi-cli company create --name "Test Company" --email company@multiflexi.eu --phone "+123456789" --address "123 Test Street, Test City"
+multiflexi-cli company create --name "Test Company" --email company@multiflexi.eu --slug testco
 multiflexi-cli company list
 
 multiflexi-cli runtemplate create --name "Test Template" --description "A template for testing" --command "/usr/bin/true" --uuid 868a8085-03e5-4f9b-899d-2084e1de7d3b --company-slug testco --company-id 1
