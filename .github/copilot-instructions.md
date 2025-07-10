@@ -26,8 +26,6 @@ When writing code, always handle exceptions properly and provide meaningful erro
 
 When writing code, always include type hints for function parameters and return types.
 
-Update the multiflexi-cli.rst and multiflexi-cli.1 files each time when the multiflexi-cli command features changes somehow
-
 We are using the i18n library for internationalization, so always use the _() functions for strings that need to be translated.
 
 When writing code, always ensure that it is secure and does not expose any sensitive information.
@@ -43,3 +41,10 @@ When writing code, always ensure that it is maintainable and follows best practi
 When create new class or update existing class, always create or update its phpunit test files.
 
 list, get, delete and create commands of multiflexi-cli should return a JSON response with the result of the operation when "--format json" is used.
+
+Always ensure that the tests/test-cli.sh file is kept up to date with the features provided by the "multiflexi-cli describe" command output.
+
+In the tests/test-cli.sh keep the delete action tests at very bottom of the file in separate section.
+
+Update the multiflexi-cli.rst and multiflexi-cli.1 files each time when the multiflexi-cli command features changes somehow
+

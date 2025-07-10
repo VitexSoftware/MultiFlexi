@@ -46,6 +46,10 @@ class ConfigFields implements \Iterator
      */
     public function addField(ConfigField $field): self
     {
+        if (empty($field->getSource())) {
+            $field->setSource($this->name);
+        }
+
         $code = $field->getCode();
         $this->fields[$code] = $field;
         ksort($this->fields);
