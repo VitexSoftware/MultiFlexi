@@ -22,6 +22,7 @@ class Credential extends DBEngine
      */
     public string $nameColumn = 'name';
     private Credata $credator;
+    private CredentialConfigFields $vault;
     private ?CredentialType $credentialType = null;
 
     public function __construct($identifier = null, $options = [])
@@ -29,7 +30,7 @@ class Credential extends DBEngine
         $this->myTable = 'credentials';
         $this->keyColumn = 'id';
         $this->credator = new Credata();
-
+        $this->vault = new CredentialConfigFields($this);
         parent::__construct($identifier, $options);
     }
 
@@ -175,7 +176,7 @@ class Credential extends DBEngine
             ++$dataCount;
         }
 
-        if ($this->getDataValue('credential_type_id')) { // Override by credential type
+        if (null === $this->credentialType && $this->getDataValue('credential_type_id')) { // Override by credential type
             $this->setCredentialType(new CredentialType($this->getDataValue('credential_type_id')));
         }
 
@@ -266,14 +267,11 @@ EOD;
             $this->setDataValue($credential['name'], $credential['value']);
         }
 
-        // Pokud existuje credentialType, použij jeho hodnoty a přepiš hodnoty z DB
-        if ($this->getCredentialType()) {
-            $helperFields = $this->getCredentialType()->query();
-
-            foreach ($helperFields as $field) {
-                $this->setDataValue($field->getCode(), $field->getValue());
-            }
+        if ($this->getCredentialType() && $this->credentialType->getHelper()) {
+            $credentialEnv->addFields($this->credentialType->getHelper()->query());
         }
+
+        $this->vault->addFields($credentialEnv);
 
         return $credentialEnv;
     }
