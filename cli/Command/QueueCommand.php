@@ -62,7 +62,18 @@ class QueueCommand extends MultiFlexiCommand
                 $waiting = $scheduler->listingQuery()->count();
                 $pdo = $scheduler->getFluentPDO()->getPdo();
                 $table = $scheduler->getMyTable();
-                $result = $pdo->exec('TRUNCATE TABLE '.$table);
+                // Check the database driver to use the appropriate truncate/delete command
+                $driver = $pdo->getAttribute(\PDO::ATTR_DRIVER_NAME);
+
+                if ($driver === 'sqlite') {
+                    // For SQLite, use DELETE FROM and reset the sequence if needed
+                    $result = $pdo->exec('DELETE FROM '.$table);
+                    // Reset AUTOINCREMENT sequence if table has one
+                    $pdo->exec('DELETE FROM sqlite_sequence WHERE name="'.$table.'"');
+                } else {
+                    // For MySQL and others, use TRUNCATE TABLE
+                    $result = $pdo->exec('TRUNCATE TABLE '.$table);
+                }
                 $msg = ($result !== false)
                     ? ("Queue truncated. Previously waiting jobs: {$waiting}.")
                     : 'Failed to truncate queue.';
