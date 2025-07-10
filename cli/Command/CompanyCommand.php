@@ -53,7 +53,8 @@ class CompanyCommand extends MultiFlexiCommand
             ->addOption('DatUpdate', null, InputOption::VALUE_REQUIRED, 'Updated date (date-time)')
             ->addOption('email', null, InputOption::VALUE_REQUIRED, 'Email')
             ->addOption('slug', null, InputOption::VALUE_REQUIRED, 'Company Slug')
-            ->addOption('fields', null, InputOption::VALUE_OPTIONAL, 'Comma-separated list of fields to display');
+            ->addOption('fields', null, InputOption::VALUE_OPTIONAL, 'Comma-separated list of fields to display')
+            ->addOption('zabbix_host', null, InputOption::VALUE_OPTIONAL, 'Zabbix Host'); // Add the zabbix_host option
         // Add more options as needed
     }
 

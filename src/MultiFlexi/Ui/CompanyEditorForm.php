@@ -37,6 +37,10 @@ class CompanyEditorForm extends EngineForm
         $this->addInput(new CustomerSelect('customer'), _('Customer'));
         $imgInput = $this->addInput(new \Ease\Html\InputFileTag('imageraw'), _('Company Logo'));
 
+        if (\Ease\Shared::cfg('ZABBIX_SERVER')) {
+            $this->addInput(new InputTextTag('zabbix_host'), _('Zabbix Host'), \Ease\Shared::cfg('ZABBIX_HOST'), sprintf(_('Override the default zabbix host %s'), \Ease\Shared::cfg('ZABBIX_HOST')));
+        }
+
         $this->addItem(new InputHiddenTag('enabled', '1'));
         $this->addItem(new SubmitButton(_('Save'), 'success btn-lg btn-block'));
 
