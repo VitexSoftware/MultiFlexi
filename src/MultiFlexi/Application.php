@@ -227,7 +227,7 @@ class Application extends DBEngine
 
         if ($this->getMyKey()) {
             $confField = new Conffield();
-            $appData['environment'] = $confField->appConfigs($appData['id']);
+            $appData['environment'] = $confField->getAppConfigs($this)->getEnvArray();
         } else {
             $appData['environment'] = [];
         }

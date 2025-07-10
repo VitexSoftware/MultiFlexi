@@ -383,8 +383,11 @@ EOD;
     public function reportToZabbix(array $messageData): bool
     {
         $packet = new ZabbixPacket();
-        $hostname = \Ease\Shared::cfg('ZABBIX_HOST');
-        $itemKey = 'job-['.$this->company->getDataValue('code').'-'.$this->application->getDataValue('code').'-'.$this->runTemplate->getMyKey().']';
+
+        $overrideHost = $this->getRunTemplate()->getCompany()->getDataValue('zabbix_host');
+
+        $hostname = empty($overrideHost) ? \Ease\Shared::cfg('ZABBIX_HOST', gethostname()) : $overrideHost;
+        $itemKey = 'job-['.$this->company->getDataValue('slug').'-'.$this->application->getDataValue('code').'-'.$this->runTemplate->getMyKey().']';
 
         $zabbixMetric = json_encode($this->zabbixMessageData);
 

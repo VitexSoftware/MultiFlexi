@@ -64,7 +64,9 @@ class Zabbix extends \MultiFlexi\CommonAction
     #[\Override]
     public function perform(\MultiFlexi\Job $job): void
     {
-        $me = \Ease\Shared::cfg('ZABBIX_HOST', gethostname());
+        $overrideHost = $job->getRunTemplate()->getCompany()->getDataValue('zabbix_host');
+        $me = empty($overrideHost) ? \Ease\Shared::cfg('ZABBIX_HOST', gethostname()) : $overrideHost;
+
         $server = \Ease\Shared::cfg('ZABBIX_SERVER');
 
         if ($server) {

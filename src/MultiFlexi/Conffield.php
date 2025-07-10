@@ -49,11 +49,25 @@ class Conffield extends \Ease\SQL\Engine
     }
 
     /**
+     * @deprecated since version 1.27 Use the addConfigFields() instead
+     *
      * @param int $appId
      */
     public function appConfigs($appId): array
     {
         return $this->getColumnsFromSQL(['*'], ['app_id' => $appId], 'keyname', 'keyname');
+    }
+
+    public function addConfigFields(\MultiFlexi\Application $app): ConfigFields
+    {
+        $confields = new ConfigFields($app->getDataValue('name'));
+
+        foreach ($this->appConfigs($app->getMyKey()) as $configFieldData) {
+            $field = new \MultiFlexi\ConfigField($code, $type, $name, $description, $hint);
+            $confields->addField($field);
+        }
+
+        return $confields;
     }
 
     /**
