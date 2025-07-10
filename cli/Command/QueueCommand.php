@@ -74,6 +74,7 @@ class QueueCommand extends MultiFlexiCommand
                     // For MySQL and others, use TRUNCATE TABLE
                     $result = $pdo->exec('TRUNCATE TABLE '.$table);
                 }
+
                 $msg = ($result !== false)
                     ? ("Queue truncated. Previously waiting jobs: {$waiting}.")
                     : 'Failed to truncate queue.';

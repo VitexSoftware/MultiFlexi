@@ -189,7 +189,13 @@ class CredentialType extends DBEngine
 
     public function query(): ConfigFields
     {
-        return $this->getFields();
+        $fields = $this->getFields();
+
+        if ($this->getHelper()) {
+            $fields->addFields($this->getHelper()->query());
+        }
+
+        return $fields;
     }
 
     public function getLogo(): string

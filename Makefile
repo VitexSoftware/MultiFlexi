@@ -146,3 +146,6 @@ clischema:
 
 clitest:
 	./tests/test-cli.sh
+
+instprobe:
+	multiflexi-json2app tests/multiflexi_probe.multiflexi.app.json
