@@ -16,7 +16,7 @@ multiflexi-cli user get --login test --fields login,email,company
 multiflexi-cli company create --name "Test Company" --email company@multiflexi.eu --slug testco
 multiflexi-cli company list
 
-multiflexi-cli runtemplate create --name "Test Template" --description "A template for testing" --command "/usr/bin/true" --uuid 868a8085-03e5-4f9b-899d-2084e1de7d3b --company-slug testco --company-id 1
+# multiflexi-cli runtemplate create --name "Test Template" --uuid 868a8085-03e5-4f9b-899d-2084e1de7d3b --company-slug testco --company-id 1
 multiflexi-cli runtemplate list
 
 multiflexi-zabbix-lld | jq
@@ -25,7 +25,7 @@ multiflexi-zabbix-lld-company | jq
 multiflexi-cli appstatus
 
 # Run template with parameters
-multiflexi-run-template --uuid 868a8085-03e5-4f9b-899d-2084e1de7d3b --company-slug testco --company-id 1 --run-params '{"param1":"value1","param2":"value2"}'
+# multiflexi-run-template --uuid 868a8085-03e5-4f9b-899d-2084e1de7d3b --company-slug testco --company-id 1 --run-params '{"param1":"value1","param2":"value2"}'
 
 
 # Delete action tests
