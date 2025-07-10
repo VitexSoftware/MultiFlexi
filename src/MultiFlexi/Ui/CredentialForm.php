@@ -147,10 +147,25 @@ class CredentialForm extends Form
     private function confiField(Credential $credential, ConfigField $field): Row
     {
         $credTypeId = $credential->getMyKey();
-
         $credTypeFieldRow = new Row();
         $credTypeFieldRow->addColumn(4, [$field->getType(), new \Ease\Html\H2Tag($field->getCode())]);
-        $credTypeFieldRow->addColumn(4, new FormGroup($field->getName(), new InputTextTag($field->getCode(), $field->getValue()), $field->getHint(), $field->getDefaultValue()));
+
+        $inputProperties = [];
+
+        if ($field->isManual() === false) {
+            $inputProperties[] = 'disabled';
+        }
+
+        $credTypeFieldRow->addColumn(4, new FormGroup(
+            $field->getName(),
+            new InputTextTag($field->getCode(), $field->getValue(), $inputProperties),
+            $field->getHint(),
+            $field->getDefaultValue(),
+        ));
+
+        if ($field->isManual() === false) {
+            $credTypeFieldRow->addColumn(4, [_('Populated by Credential type'), $field->getSource()]);
+        }
 
         return $credTypeFieldRow;
     }

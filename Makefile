@@ -143,3 +143,6 @@ probeimagex:
 
 clischema:
 	./cli.sh describe 
+
+clitest:
+	./tests/test-cli.sh
