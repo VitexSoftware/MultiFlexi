@@ -88,8 +88,8 @@ class Zabbix extends \MultiFlexi\CommonAction
                 $artifactor = new \MultiFlexi\Artifact();
                 $artifactor->createArtifact($job->getMyKey(), $dataForZabbix, $metricsfile, file_exists((string) $metricsfile) ? mime_content_type($metricsfile) : 'application/json', sprintf(_('Reported to Zabbix: from %s sent to %s as %s '), $me, $server, $zabbixKey));
 
-                if (\Ease\Shared::cfg('USE_ZABBIX_SENDER') && file_exists('/usr/bin/zabbix_sender')) {
-                    $cmd = sprintf("zabbix_sender -v -z %s -s %s -k %s -o '%s'", $server, $me, $zabbixKey, $dataForZabbix);
+                if (\Ease\Shared::cfg('USE_ZABBIX_SENDER', false) && file_exists('/usr/bin/zabbix_sender')) {
+                    $cmd = sprintf("zabbix_sender -v -z %s -s %s -k %s -o '%s'", $server, $me, $zabbixKey, addslashes($dataForZabbix));
                     $this->addStatusMessage($cmd, 'debug');
                     exec($cmd, $output, $return_var);
                     $this->addStatusMessage((string) $return_var.':'.implode("\n", $output), 'debug');
