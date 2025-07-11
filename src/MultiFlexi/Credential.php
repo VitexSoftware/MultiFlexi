@@ -251,6 +251,10 @@ EOD;
     {
         $credentialEnv = new CredentialConfigFields($this);
 
+        if ($this->getCredentialType() && $this->credentialType->getHelper()) {
+            $credentialEnv->addFields($this->credentialType->getHelper()->query());
+        }
+
         // Load Credential values stored in database
         foreach ($this->credator->listingQuery()->where('credential_id', $this->getMyKey()) as $credential) {
             $fieldProvidedByCredType = $credentialEnv->getFieldByCode($credential['name']);
@@ -265,10 +269,6 @@ EOD;
             }
 
             $this->setDataValue($credential['name'], $credential['value']);
-        }
-
-        if ($this->getCredentialType() && $this->credentialType->getHelper()) {
-            $credentialEnv->addFields($this->credentialType->getHelper()->query());
         }
 
         $this->vault->addFields($credentialEnv);
