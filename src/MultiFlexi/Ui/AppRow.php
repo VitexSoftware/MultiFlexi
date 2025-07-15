@@ -43,10 +43,11 @@ class AppRow extends \Ease\TWB4\Row
         $appRow->setTagProperty('style', 'border-bottom: 1px solid #bdbdbd; padding: 5px');
         $logoColumn = $appRow->addColumn(2, [new \Ease\Html\H2Tag($appData['app_name']), new \Ease\Html\PTag($appData['description']), new ATag('app.php?id='.$appId, new ImgTag($appData['image'], $appData['name'], ['class' => 'img-fluid']))]);
         /* check if app requires upload fields */
-        $appFields = \MultiFlexi\Conffield::getAppConfigs(new \MultiFlexi\Application($appId));
+        $appFieldsObj = \MultiFlexi\Conffield::getAppConfigs(new \MultiFlexi\Application($appId));
+        $appFields = \is_array($appFieldsObj) ? $appFieldsObj : $appFieldsObj->getFields();
         /* if any of fields is upload type then add file input button */
         $uploadFields = array_filter($appFields, static function ($field) {
-            return $field['type'] === 'file';
+            return $field instanceof \MultiFlexi\ConfigField && $field->getType() === 'file';
         });
 
         if (empty($uploadFields)) {

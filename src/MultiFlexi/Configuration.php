@@ -103,14 +103,16 @@ class Configuration extends \Ease\SQL\Engine
 
     /**
      * App Configuration values.
-     *
-     * @param int $companyId
-     * @param int $appId
-     *
-     * @return array
      */
-    public function getAppConfig($companyId, $appId)
+    public function getAppConfig(int $companyId, int $appId): array
     {
-        return $this->getColumnsFromSQL(['name', 'value'], ['company_id' => $companyId, 'app_id' => $appId]);
+        $appConfig = [];
+        $appConfigRaw = $this->getColumnsFromSQL(['name', 'value'], ['company_id' => $companyId, 'app_id' => $appId]);
+
+        foreach ($appConfigRaw as $cfg) {
+            $appConfig[$cfg['name']] = $cfg['value'];
+        }
+
+        return $appConfig;
     }
 }

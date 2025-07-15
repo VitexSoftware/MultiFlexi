@@ -33,42 +33,45 @@ class AppLaunchForm extends \Ease\TWB4\Form
 
         $job = new \MultiFlexi\Job(['company_id' => $companyId, 'app_id' => $appId], ['autoload' => false]);
         $env = $job->getFullEnvironment();
+        $envArray = \is_array($env) ? $env : (method_exists($env, 'getFields') ? $env->getFields() : []);
 
         $this->addItem(new \Ease\Html\InputHiddenTag('app_id', $appId));
         $this->addItem(new \Ease\Html\InputHiddenTag('company_id', $companyId));
 
         /* check if app requires upload fields */
-        $appFields = \MultiFlexi\Conffield::getAppConfigs($app);
+        $appFieldsObj = \MultiFlexi\Conffield::getAppConfigs($app);
+        $appFields = \is_array($appFieldsObj) ? $appFieldsObj : $appFieldsObj->getFields();
 
-        //        $this->addItem(new EnvironmentView($env));
         $this->addItem('<hr>');
 
         /* for each upload field add file input */
         foreach ($appFields as $fieldKey => $fieldProps) {
-            switch ($fieldProps['type']) {
-                case 'file':
-                    $this->addInput(new \Ease\Html\InputFileTag($fieldKey, $fieldProps['defval'], ['id' => 'input'.$fieldProps['keyname']]), $fieldProps['keyname'], $fieldProps['defval'], $fieldProps['description']);
+            if ($fieldProps instanceof \MultiFlexi\ConfigField) {
+                switch ($fieldProps->getType()) {
+                    case 'file':
+                        $this->addInput(new \Ease\Html\InputFileTag($fieldKey, $fieldProps->getDefaultValue(), ['id' => 'input'.$fieldProps->getName()]), $fieldProps->getName(), $fieldProps->getDefaultValue(), $fieldProps->getDescription());
 
-                    break;
-                case 'email':
-                    if (\array_key_exists($fieldKey, $env) === false) {
-                        $this->addInput(new \Ease\Html\InputEmailTag($fieldKey, $fieldProps['defval']), $fieldKey, $fieldProps['defval'], $fieldProps['description']);
-                    }
+                        break;
+                    case 'email':
+                        if (!\array_key_exists($fieldKey, $envArray)) {
+                            $this->addInput(new \Ease\Html\InputEmailTag($fieldKey, $fieldProps->getDefaultValue()), $fieldKey, $fieldProps->getDefaultValue(), $fieldProps->getDescription());
+                        }
 
-                    break;
-                case 'checkbox':
-                    if (\array_key_exists($fieldKey, $env) === false) {
-                        $this->addInput(new \Ease\TWB4\Widgets\Toggle($fieldKey, (bool) $fieldProps['defval']), $fieldKey.'&nbsp;', $fieldProps['defval'], $fieldProps['description']);
-                    }
+                        break;
+                    case 'checkbox':
+                        if (!\array_key_exists($fieldKey, $envArray)) {
+                            $this->addInput(new \Ease\TWB4\Widgets\Toggle($fieldKey, (bool) $fieldProps->getDefaultValue()), $fieldKey.'&nbsp;', $fieldProps->getDefaultValue(), $fieldProps->getDescription());
+                        }
 
-                    break;
+                        break;
 
-                default:
-                    if (\array_key_exists($fieldKey, $env) === false) {
-                        $this->addInput(new \Ease\Html\InputTextTag($fieldKey, $fieldProps['defval']), $fieldKey, $fieldProps['defval'], $fieldProps['description']);
-                    }
+                    default:
+                        if (!\array_key_exists($fieldKey, $envArray)) {
+                            $this->addInput(new \Ease\Html\InputTextTag($fieldKey, $fieldProps->getDefaultValue()), $fieldKey, $fieldProps->getDefaultValue(), $fieldProps->getDescription());
+                        }
 
-                    break;
+                        break;
+                }
             }
         }
 

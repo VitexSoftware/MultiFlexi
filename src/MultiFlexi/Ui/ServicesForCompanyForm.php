@@ -44,7 +44,7 @@ class ServicesForCompanyForm extends Form
         // (new Application())->listingQuery()->select('id AS app_id')->select('name AS app_name')->where('enabled', 1)->fetchAll();
 
         $glue = new RunTemplate();
-        $assigned = $glue->getActiveRunTemplatesForCompany($companyID);
+        $assigned = $glue->getActiveRunTemplatesForCompany($companyID)->fetchAll('app_id');
         parent::__construct($tagProperties);
         $jobber = new \MultiFlexi\Job();
         $appTabs = new \Ease\TWB4\Tabs();

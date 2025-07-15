@@ -38,19 +38,9 @@ class CustomAppEnvironmentView extends EnvironmentView
         $appId = $appToCompany->getDataValue('app_id');
         $customConfig = new \MultiFlexi\Configuration();
         $appFields = \MultiFlexi\Conffield::getAppConfigs(new \MultiFlexi\Application($appId));
+        $appFields->addFields($appToCompany->getAppEnvironment());
+        $appFields->arrayToValues($customConfig->getAppConfig($companyId, $appId));
 
-        $envValues = array_merge($appToCompany->getAppEnvironment(), $customConfig->getAppConfig($companyId, $appId));
-
-        //        $appConfig = array_combine(array_keys($appFields), array_fill(0, count($appFields), new \Ease\TWB4\Badge('warning', 'unset')));
-
-        foreach ($appFields as $envName => $envProperties) {
-            if (\array_key_exists($envName, $envValues)) {
-                $appConfig[$envName]['value'] = $envValues[$envName];
-            } else {
-                $appConfig[$envName]['value'] = new \Ease\TWB4\Badge('warning', _('unset'));
-            }
-        }
-
-        parent::__construct($appConfig, $properties);
+        parent::__construct($appFields, $properties);
     }
 }

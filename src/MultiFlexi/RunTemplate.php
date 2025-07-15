@@ -269,7 +269,7 @@ class RunTemplate extends \MultiFlexi\DBEngine
      */
     public function getRunTemplatesForCompany($companyID)
     {
-        return $this->getColumnsFromSQL(['app_id', 'interv', 'id'], ['company_id' => $companyID], 'id', 'app_id');
+        return $this->listingQuery()->select(['app_id', 'interv', 'id'])->where(['company_id' => $companyID]);
     }
 
     /**

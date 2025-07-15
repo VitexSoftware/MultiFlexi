@@ -30,16 +30,16 @@ class SQLServer extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\c
 
         // Define internal configuration fields
         $connectionField = new \MultiFlexi\ConfigField('DB_CONNECTION', 'string', _('Database Connection'), _('Database connection type (e.g., sqlsrv)'));
-        $connectionField->setHint('sqlsrv')->setValue('sqlsrv');
+        $connectionField->setHint('sqlsrv')->setRequired(true);
 
         $hostField = new \MultiFlexi\ConfigField('DB_HOST', 'string', _('Database Host'), _('Host of the SQL Server'));
-        $hostField->setHint('127.0.0.1')->setValue('127.0.0.1');
+        $hostField->setHint('127.0.0.1')->setDefaultValue('127.0.0.1');
 
         $portField = new \MultiFlexi\ConfigField('DB_PORT', 'integer', _('Database Port'), _('Port of the SQL Server'));
         $portField->setHint('1433')->setValue('1433');
 
         $databaseField = new \MultiFlexi\ConfigField('DB_DATABASE', 'string', _('Database Name'), _('Name of the database'));
-        $databaseField->setHint('StwPh_12345678_2023')->setValue('');
+        $databaseField->setHint('StwPh_12345678_2023')->setRequired(true);
 
         $usernameField = new \MultiFlexi\ConfigField('DB_USERNAME', 'string', _('Database Username'), _('Username for the database'));
         $usernameField->setHint('sa')->setValue('');
@@ -50,25 +50,13 @@ class SQLServer extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\c
         $settingsField = new \MultiFlexi\ConfigField('DB_SETTINGS', 'string', _('Database Settings'), _('Additional database settings (e.g., encrypt=false)'));
         $settingsField->setHint('encrypt=false')->setValue('');
 
-        $this->configFieldsInternal->addField($connectionField);
-        $this->configFieldsInternal->addField($hostField);
-        $this->configFieldsInternal->addField($portField);
-        $this->configFieldsInternal->addField($databaseField);
-        $this->configFieldsInternal->addField($usernameField);
-        $this->configFieldsInternal->addField($passwordField);
-        $this->configFieldsInternal->addField($settingsField);
-    }
-
-    public function load(int $credTypeId)
-    {
-        $loaded = parent::load($credTypeId);
-
-        // Load provided configuration fields
-        foreach ($this->configFieldsInternal->getFields() as $field) {
-            $this->configFieldsProvided->addField($field);
-        }
-
-        return $loaded;
+        $this->configFieldsProvided->addField($connectionField);
+        $this->configFieldsProvided->addField($hostField);
+        $this->configFieldsProvided->addField($portField);
+        $this->configFieldsProvided->addField($databaseField);
+        $this->configFieldsProvided->addField($usernameField);
+        $this->configFieldsProvided->addField($passwordField);
+        $this->configFieldsProvided->addField($settingsField);
     }
 
     #[\Override]
