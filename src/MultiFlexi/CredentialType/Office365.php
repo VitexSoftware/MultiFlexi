@@ -44,23 +44,11 @@ class Office365 extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\c
         $tenantField = new \MultiFlexi\ConfigField('OFFICE365_TENANT', 'string', _('Office 365 Tenant'), _('Tenant ID for Office 365'));
         $tenantField->setHint('your-tenant-id')->setValue('');
 
-        $this->configFieldsInternal->addField($usernameField);
-        $this->configFieldsInternal->addField($passwordField);
-        $this->configFieldsInternal->addField($clientIdField);
-        $this->configFieldsInternal->addField($clientSecretField);
-        $this->configFieldsInternal->addField($tenantField);
-    }
-
-    public function load(int $credTypeId)
-    {
-        $loaded = parent::load($credTypeId);
-
-        // Load provided configuration fields
-        foreach ($this->configFieldsInternal->getFields() as $field) {
-            $this->configFieldsProvided->addField($field);
-        }
-
-        return $loaded;
+        $this->configFieldsProvided->addField($usernameField);
+        $this->configFieldsProvided->addField($passwordField);
+        $this->configFieldsProvided->addField($clientIdField);
+        $this->configFieldsProvided->addField($clientSecretField);
+        $this->configFieldsProvided->addField($tenantField);
     }
 
     #[\Override]
@@ -83,5 +71,29 @@ class Office365 extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\c
     public static function logo(): string
     {
         return self::$logo;
+    }
+
+    /**
+     * Check if required Office365 credential fields are provided.
+     *
+     * Returns true if either OFFICE365_USERNAME and OFFICE365_PASSWORD and OFFICE365_TENANT
+     * or OFFICE365_CLIENTID and OFFICE365_SECRET and OFFICE365_TENANT are set and non-empty.
+     *
+     * @return bool True if required fields are set, false otherwise.
+     */
+    public function checkProvidedFields(): bool
+    {
+        $username = $this->configFieldsProvided->getFieldByCode('OFFICE365_USERNAME')->getValue();
+        $password = $this->configFieldsProvided->getFieldByCode('OFFICE365_PASSWORD')->getValue();
+        $clientId = $this->configFieldsProvided->getFieldByCode('OFFICE365_CLIENTID')->getValue();
+        $clientSecret = $this->configFieldsProvided->getFieldByCode('OFFICE365_SECRET')->getValue();
+        $tenant = $this->configFieldsProvided->getFieldByCode('OFFICE365_TENANT')->getValue();
+
+        if (( !empty($username) && !empty($password) && !empty($tenant) ) ||
+            ( !empty($clientId) && !empty($clientSecret) && !empty($tenant) )) {
+            return true;
+        }
+
+        return false;
     }
 }

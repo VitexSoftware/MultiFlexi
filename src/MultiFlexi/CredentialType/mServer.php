@@ -30,33 +30,21 @@ class mServer extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\cre
 
         // Define internal configuration fields
         $icoField = new \MultiFlexi\ConfigField('POHODA_ICO', 'string', _('Organization Number'), _('Organization Number for Pohoda'));
-        $icoField->setHint('123245678')->setValue('');
+        $icoField->setHint('123245678')->setRequired(true);
 
         $urlField = new \MultiFlexi\ConfigField('POHODA_URL', 'string', _('mServer API Endpoint'), _('URL of the mServer API'));
-        $urlField->setHint('http://pohoda:40000')->setValue('');
+        $urlField->setHint('http://pohoda:40000')->setRequired(true);
 
         $usernameField = new \MultiFlexi\ConfigField('POHODA_USERNAME', 'string', _('mServer API Username'), _('Username for the mServer API'));
-        $usernameField->setHint('winstrom')->setValue('');
+        $usernameField->setHint('winstrom')->setRequired(true);
 
         $passwordField = new \MultiFlexi\ConfigField('POHODA_PASSWORD', 'password', _('mServer API Password'), _('Password for the mServer API'));
-        $passwordField->setHint('pohoda')->setValue('');
+        $passwordField->setHint('pohoda')->setRequired(true);
 
-        $this->configFieldsInternal->addField($icoField);
-        $this->configFieldsInternal->addField($urlField);
-        $this->configFieldsInternal->addField($usernameField);
-        $this->configFieldsInternal->addField($passwordField);
-    }
-
-    public function load(int $credTypeId)
-    {
-        $loaded = parent::load($credTypeId);
-
-        // Load provided configuration fields
-        foreach ($this->configFieldsInternal->getFields() as $field) {
-            $this->configFieldsProvided->addField($field);
-        }
-
-        return $loaded;
+        $this->configFieldsProvided->addField($icoField);
+        $this->configFieldsProvided->addField($urlField);
+        $this->configFieldsProvided->addField($usernameField);
+        $this->configFieldsProvided->addField($passwordField);
     }
 
     #[\Override]

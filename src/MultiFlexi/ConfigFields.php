@@ -152,4 +152,15 @@ class ConfigFields implements \Iterator
     {
         return array_keys($this->fields);
     }
+
+    public function arrayToValues(array $values): self
+    {
+        foreach ($values as $code => $value) {
+            if ($this->getFieldByCode($code)) {
+                $this->getFieldByCode($code)->setValue($value);
+            }
+        }
+
+        return $this;
+    }
 }
