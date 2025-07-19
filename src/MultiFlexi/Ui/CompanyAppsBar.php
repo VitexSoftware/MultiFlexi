@@ -30,7 +30,7 @@ class CompanyAppsBar extends \Ease\Html\DivTag
         $cardGroup = new \Ease\Html\DivTag(null, ['class' => 'card-group']);
 
         foreach ($companyApps as $companyApp) {
-            $companyAppCard = new \Ease\TWB4\Card(new \Ease\Html\ATag('companyapp.php?company_id='.$company->getMyKey().'&app_id='.$companyApp['id'], new \Ease\Html\ImgTag('appimage.php?uuid='.$companyApp['uuid'], _($companyApp['name']), ['title' => _($companyApp['description']), 'class' => 'card-img-top', 'style' => 'padding: 5px; margin: 5px;max-height: 150px;max-width: 150px;'])), ['style' => 'width: 10rem;']);
+            $companyAppCard = new \Ease\TWB4\Card(new \Ease\Html\ATag('companyapp.php?company_id='.$company->getMyKey().'&app_id='.$companyApp['id'], new \Ease\Html\ImgTag('appimage.php?uuid='.$companyApp['uuid'], _($companyApp['name']), ['title' => _($companyApp['description']), 'class' => 'card-img-top', 'style' => 'padding: 5px; margin: 5px;max-height: 150px;max-width: 150px;'])), ['style' => 'width: 10rem; min-width: 120px;']);
             $companyAppCard->addTagClass('text-center');
             $lastJobInfo = $jobber->listingQuery()->select(['id', 'exitcode'], true)->where(['company_id' => $company->getMyKey(), 'app_id' => $companyApp['id']])->order('id DESC')->limit(1)->fetchAll();
 

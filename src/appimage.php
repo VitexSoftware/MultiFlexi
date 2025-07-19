@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-require_once './init.php';
+require_once __DIR__.'/init.php';
 
 WebPage::singleton()->onlyForLogged();
 
@@ -27,6 +27,8 @@ $contentType = 'image/svg+xml';
 
 if (file_exists('images/'.$uuid.'.svg')) {
     $imageData = file_get_contents('images/'.$uuid.'.svg');
+} elseif (file_exists('/usr/share/multiflexi/images/'.$uuid.'.svg')) {
+    $imageData = file_get_contents('/usr/share/multiflexi/images/'.$uuid.'.svg');
 } else {
     $app = new \MultiFlexi\Application();
     $image = $app->listingQuery()->select('image', true)->where('uuid', $uuid)->limit(1)->fetch('image');
