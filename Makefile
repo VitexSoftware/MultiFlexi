@@ -149,3 +149,8 @@ clitest:
 
 instprobe:
 	multiflexi-json2app tests/multiflexi_probe.multiflexi.app.json
+
+reset:
+	git fetch origin
+	git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)
+
