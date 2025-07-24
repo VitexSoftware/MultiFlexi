@@ -117,6 +117,7 @@ Contents
    zabbix
    development
    apps_overview
+   multiflexi-cli
 
 .. autosummary::
 
