@@ -9,9 +9,8 @@ Homepage: https://github.com/VitexSoftware/MultiFlexi
 Package: multiflexi
 Multi-Arch: foreign
 Depends: ${misc:Depends},
- php-vitexsoftware-ease-core (>=1.45),
- php-vitexsoftware-ease-html-widgets (>=1.1.1),
  php-vitexsoftware-multiflexi-core,
+ php-vitexsoftware-ease-html-widgets (>=1.1.1),
  php-cli,
  locales-all,
  php-vitexsoftware-ease-bootstrap4-widgets (>=1.7),
