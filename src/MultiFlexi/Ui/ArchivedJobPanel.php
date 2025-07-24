@@ -24,6 +24,8 @@ use MultiFlexi\Application;
  * Description of ApplicationPanel.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class ArchivedJobPanel extends Panel
 {

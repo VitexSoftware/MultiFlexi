@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of CompanyApp.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CompanyApp extends Engine
 {

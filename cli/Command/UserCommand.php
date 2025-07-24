@@ -27,6 +27,9 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 // Přidání UserCommand pro správu uživatelů
+/**
+ * @no-named-arguments
+ */
 class UserCommand extends MultiFlexiCommand
 {
     protected static $defaultName = 'user';

@@ -22,6 +22,8 @@ use MultiFlexi\Application;
  * Description of AppsMenu.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class AppsMenu extends MainPageMenu
 {

@@ -19,6 +19,8 @@ namespace MultiFlexi\CredentialType;
  * Description of EnvFile.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class EnvFile extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
 {

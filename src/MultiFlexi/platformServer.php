@@ -17,6 +17,8 @@ namespace MultiFlexi;
 
 /**
  * @author vitex
+ *
+ * @no-named-arguments
  */
 interface platformServer
 {

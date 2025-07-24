@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of AppLinkButton.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class AppLinkButton extends \Ease\TWB4\LinkButton
 {

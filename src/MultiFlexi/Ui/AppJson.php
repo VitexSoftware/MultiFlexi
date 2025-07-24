@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of AppJson.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class AppJson extends \Ease\Html\DivTag
 {

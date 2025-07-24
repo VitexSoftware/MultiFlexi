@@ -18,6 +18,9 @@ namespace MultiFlexi\Tests;
 use MultiFlexi\CrTypeField;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @no-named-arguments
+ */
 class CrTypeFieldTest extends TestCase
 {
     public function testInitialization(): void

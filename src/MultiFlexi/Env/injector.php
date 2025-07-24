@@ -17,6 +17,8 @@ namespace MultiFlexi\Env;
 
 /**
  * @author vitex
+ *
+ * @no-named-arguments
  */
 interface injector
 {

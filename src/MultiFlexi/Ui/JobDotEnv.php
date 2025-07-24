@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of AppJson.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class JobDotEnv extends \Ease\Html\DivTag
 {

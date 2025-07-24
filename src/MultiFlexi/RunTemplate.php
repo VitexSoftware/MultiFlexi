@@ -20,6 +20,8 @@ use MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
 
 /**
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class RunTemplate extends \MultiFlexi\DBEngine
 {

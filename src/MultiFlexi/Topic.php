@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Topic description.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Topic
 {

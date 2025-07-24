@@ -21,6 +21,8 @@ namespace MultiFlexi\Ui;
  * @deprecated since version 1.20
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class ServerTypeSelect extends \Ease\Html\SelectTag
 {

@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of ExitCode.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class ExitCode extends \Ease\TWB4\Badge
 {

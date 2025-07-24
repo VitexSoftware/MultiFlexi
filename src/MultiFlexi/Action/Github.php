@@ -21,6 +21,8 @@ use MultiFlexi\Application;
  * Description of RedmineIssue.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Github extends \MultiFlexi\CommonAction
 {

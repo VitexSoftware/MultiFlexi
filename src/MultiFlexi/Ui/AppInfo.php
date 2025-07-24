@@ -24,6 +24,8 @@ use MultiFlexi\Conffield;
  * Registered AbraFlexi instance editor Form.
  *
  * @author
+ *
+ * @no-named-arguments
  */
 class AppInfo extends \Ease\Html\DivTag
 {

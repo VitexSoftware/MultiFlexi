@@ -19,6 +19,8 @@ use MultiFlexi\Zabbix\Exception\ZabbixResponseException;
 
 /**
  * Response class - represents a Zabbix response.
+ *
+ * @no-named-arguments
  */
 class Response
 {

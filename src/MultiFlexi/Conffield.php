@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of Conf field.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Conffield extends \Ease\SQL\Engine
 {

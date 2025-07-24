@@ -24,6 +24,8 @@ use Ease\TWB4\SubmitButton;
  * Registered AbraFlexi instance editor Form.
  *
  * @author
+ *
+ * @no-named-arguments
  */
 class CompanyEditorForm extends EngineForm
 {

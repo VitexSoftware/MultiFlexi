@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of RuntemplateTopicsChooser.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class RuntemplateTopicsChooser extends TopicsChooser
 {

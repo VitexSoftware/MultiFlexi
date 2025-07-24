@@ -21,6 +21,8 @@ use Ease\SQL\Engine;
  * Class Artifact.
  *
  * Handles operations related to the artifacts table.
+ *
+ * @no-named-arguments
  */
 class Artifact extends Engine
 {

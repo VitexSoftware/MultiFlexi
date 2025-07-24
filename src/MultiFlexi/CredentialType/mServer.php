@@ -19,6 +19,8 @@ namespace MultiFlexi\CredentialType;
  * Stormware Pohoda Connect Configuration form.
  *
  * author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class mServer extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
 {

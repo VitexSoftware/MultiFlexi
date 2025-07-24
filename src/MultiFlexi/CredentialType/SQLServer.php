@@ -19,6 +19,8 @@ namespace MultiFlexi\CredentialType;
  * Description of SQLServer.
  *
  * author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class SQLServer extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
 {

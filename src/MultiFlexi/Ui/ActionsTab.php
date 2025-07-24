@@ -18,6 +18,9 @@ namespace MultiFlexi\Ui;
 use MultiFlexi\Application;
 use MultiFlexi\RunTemplate;
 
+/**
+ * @no-named-arguments
+ */
 class ActionsTab extends \Ease\TWB4\Form
 {
     public function __construct(RunTemplate $runTemplater)

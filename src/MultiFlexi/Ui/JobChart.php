@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of JobChart.
  *
  * author vitex
+ *
+ * @no-named-arguments
  */
 class JobChart extends \Ease\Html\DivTag
 {

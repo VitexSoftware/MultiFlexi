@@ -19,6 +19,8 @@ use MultiFlexi\Zabbix\Request\Metric as ZabbixMetric;
 
 /**
  * Packet class - represents a set of Metrics.
+ *
+ * @no-named-arguments
  */
 class Packet implements \JsonSerializable
 {

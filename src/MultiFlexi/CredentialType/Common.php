@@ -19,6 +19,8 @@ namespace MultiFlexi\CredentialType;
  * Description of Common.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Common extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
 {

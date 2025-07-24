@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of DbStatus.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CompanyDbStatus extends \Ease\TWB4\Row
 {

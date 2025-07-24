@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Listing of CredentialType helper classes.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CtHelpersListing extends \Ease\Html\DivTag
 {

@@ -19,6 +19,8 @@ use MultiFlexi\ConfigField;
 
 /**
  * Tests for MultiFlexi\ConfigField.
+ *
+ * @no-named-arguments
  */
 class ConfigFieldTest extends \PHPUnit\Framework\TestCase
 {

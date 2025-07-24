@@ -19,6 +19,8 @@ namespace MultiFlexi\CredentialType;
  * Description of Office365.
  *
  * author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class Office365 extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
 {
@@ -79,7 +81,7 @@ class Office365 extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\c
      * Returns true if either OFFICE365_USERNAME and OFFICE365_PASSWORD and OFFICE365_TENANT
      * or OFFICE365_CLIENTID and OFFICE365_SECRET and OFFICE365_TENANT are set and non-empty.
      *
-     * @return bool True if required fields are set, false otherwise.
+     * @return bool true if required fields are set, false otherwise
      */
     public function checkProvidedFields(): bool
     {
@@ -89,8 +91,8 @@ class Office365 extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\c
         $clientSecret = $this->configFieldsProvided->getFieldByCode('OFFICE365_SECRET')->getValue();
         $tenant = $this->configFieldsProvided->getFieldByCode('OFFICE365_TENANT')->getValue();
 
-        if (( !empty($username) && !empty($password) && !empty($tenant) ) ||
-            ( !empty($clientId) && !empty($clientSecret) && !empty($tenant) )) {
+        if ((!empty($username) && !empty($password) && !empty($tenant))
+            || (!empty($clientId) && !empty($clientSecret) && !empty($tenant))) {
             return true;
         }
 

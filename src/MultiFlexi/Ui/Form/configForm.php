@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui\Form;
  * @deprecated since version 1.27
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 interface configForm
 {

@@ -21,6 +21,8 @@ use MultiFlexi\Env\Application;
  * Description of CustomCommand.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CustomCommand extends \MultiFlexi\CommonAction
 {

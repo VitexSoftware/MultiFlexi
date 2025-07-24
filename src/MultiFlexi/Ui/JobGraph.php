@@ -15,6 +15,9 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
+/**
+ * @no-named-arguments
+ */
 class JobGraph
 {
     private $width;

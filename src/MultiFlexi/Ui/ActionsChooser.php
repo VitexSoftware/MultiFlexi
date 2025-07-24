@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of EnvModulesListing.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class ActionsChooser extends \Ease\Html\DivTag
 {

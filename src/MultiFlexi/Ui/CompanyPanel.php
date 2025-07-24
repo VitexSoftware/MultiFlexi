@@ -24,6 +24,8 @@ namespace MultiFlexi\Ui;
  * Description of CompanyPanel.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CompanyPanel extends \Ease\TWB4\Panel
 {

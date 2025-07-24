@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of Breadcrumb.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Breadcrumb extends \Ease\TWB4\Breadcrumb
 {

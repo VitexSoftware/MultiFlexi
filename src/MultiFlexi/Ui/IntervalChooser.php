@@ -21,6 +21,8 @@ use MultiFlexi\RunTemplate;
  * Description of IntervalChooser.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class IntervalChooser extends \Ease\Html\SelectTag
 {

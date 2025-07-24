@@ -19,6 +19,8 @@ use MultiFlexi\Job;
 
 /**
  * Tests for MultiFlexi\Job.
+ *
+ * @no-named-arguments
  */
 class JobTest extends \PHPUnit\Framework\TestCase
 {

@@ -19,6 +19,9 @@ use Ease\Html\InputHiddenTag;
 use Ease\TWB4\Form;
 use MultiFlexi\Engine;
 
+/**
+ * @no-named-arguments
+ */
 class EngineForm extends Form
 {
     public $engine;

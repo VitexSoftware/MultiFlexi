@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of CredentialTypeCheck.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class CredentialTypeCheck extends \Ease\TWB4\Well
 {

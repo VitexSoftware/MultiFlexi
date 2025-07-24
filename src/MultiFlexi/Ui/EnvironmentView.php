@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of EnvironmentView.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class EnvironmentView extends \Ease\Html\TableTag
 {

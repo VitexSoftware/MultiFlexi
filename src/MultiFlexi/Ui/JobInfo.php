@@ -24,6 +24,8 @@ namespace MultiFlexi\Ui;
  * Description of JobInfo.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class JobInfo extends \Ease\Html\DivTag
 {

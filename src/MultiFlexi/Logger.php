@@ -23,6 +23,8 @@ use SensioLabs\AnsiConverter\AnsiToHtmlConverter;
  * Description of Dashboarder.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class Logger extends DBEngine
 {

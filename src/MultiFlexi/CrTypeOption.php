@@ -17,6 +17,9 @@ namespace MultiFlexi;
 
 use Ease\SQL\Engine;
 
+/**
+ * @no-named-arguments
+ */
 class CrTypeOption extends Engine
 {
     /**

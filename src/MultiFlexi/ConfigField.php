@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of ConfigField.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class ConfigField
 {

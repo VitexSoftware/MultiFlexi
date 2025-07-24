@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of DelayChooser.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class DelayChooser extends \Ease\Html\InputTag
 {

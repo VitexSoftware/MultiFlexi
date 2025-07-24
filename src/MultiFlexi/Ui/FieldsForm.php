@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of FieldsForm.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class FieldsForm extends \Ease\Container
 {

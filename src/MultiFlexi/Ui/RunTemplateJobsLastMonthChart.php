@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of RunTemplateJobsLastMonthChart.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class RunTemplateJobsLastMonthChart extends JobChart
 {

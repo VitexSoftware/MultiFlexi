@@ -22,6 +22,8 @@ use Ease\SQL\Orm;
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2015-2023 Vitex Software
+ *
+ * @no-named-arguments
  */
 class User extends \Ease\User implements \MultiFlexi\Ui\columns
 {

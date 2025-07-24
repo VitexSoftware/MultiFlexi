@@ -15,6 +15,9 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Zabbix\Exception;
 
+/**
+ * @no-named-arguments
+ */
 class ZabbixResponseException extends \Exception
 {
 }

@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of GroupChooser.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class PillBox extends \Ease\Html\InputTextTag
 {

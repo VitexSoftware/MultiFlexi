@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of Scheduler.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Scheduler extends Engine
 {

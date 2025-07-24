@@ -21,6 +21,8 @@ use Symfony\Component\Process\Process;
  * Description of Native.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Native extends \MultiFlexi\CommonExecutor implements \MultiFlexi\executor
 {

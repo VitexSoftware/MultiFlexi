@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of CompanyLogo.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CompanyLogo extends \Ease\Html\ImgTag
 {

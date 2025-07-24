@@ -19,6 +19,8 @@ namespace MultiFlexi\Action;
  * Description of RedmineIssue.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class RedmineIssue extends \MultiFlexi\CommonAction
 {

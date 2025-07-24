@@ -20,6 +20,8 @@ namespace MultiFlexi;
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  * @copyright  2018-2024 VitexSoftware
+ *
+ * @no-named-arguments
  */
 class Customer extends DBEngine
 {

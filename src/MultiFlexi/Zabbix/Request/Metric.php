@@ -17,6 +17,8 @@ namespace MultiFlexi\Zabbix\Request;
 
 /**
  * Metric class - represents a Zabbix item (key and value).
+ *
+ * @no-named-arguments
  */
 class Metric implements \JsonSerializable
 {

@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of Wizard.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class Wizard extends \Ease\TWB4\Panel
 {

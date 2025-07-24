@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of RunTemplatePanel.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class RunTemplatePanel extends \Ease\TWB4\Panel
 {

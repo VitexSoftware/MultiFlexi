@@ -28,6 +28,8 @@ namespace MultiFlexi;
  * Description of Engine.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class DBEngine extends \Ease\SQL\Engine
 {

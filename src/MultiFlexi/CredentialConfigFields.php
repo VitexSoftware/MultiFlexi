@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of CredentialConfigFields.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CredentialConfigFields extends ConfigFields
 {

@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Class Topics.
  *
  * Used for keeping a set of Topic objects.
+ *
+ * @no-named-arguments
  */
 class Topics implements \Iterator
 {

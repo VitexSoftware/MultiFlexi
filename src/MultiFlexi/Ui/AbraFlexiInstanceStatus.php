@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of AbraFlexiInstanceStatus.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class AbraFlexiInstanceStatus extends \Ease\Html\TableTag
 {

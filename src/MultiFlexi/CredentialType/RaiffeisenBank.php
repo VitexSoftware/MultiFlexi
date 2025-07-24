@@ -19,6 +19,8 @@ namespace MultiFlexi\CredentialType;
  * Description of RaiffeisenBank.
  *
  * author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class RaiffeisenBank extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
 {

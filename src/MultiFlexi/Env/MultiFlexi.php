@@ -19,6 +19,8 @@ namespace MultiFlexi\Env;
  * Description of Logger.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class MultiFlexi extends \MultiFlexi\Environmentor implements injector
 {

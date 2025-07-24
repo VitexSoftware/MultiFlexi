@@ -29,6 +29,8 @@ use MultiFlexi\Application;
  * Description of ApplicationInfo.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class ApplicationInfo extends Panel
 {

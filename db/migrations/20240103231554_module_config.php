@@ -15,6 +15,9 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
+/**
+ * @no-named-arguments
+ */
 final class ModuleConfig extends AbstractMigration
 {
     /**

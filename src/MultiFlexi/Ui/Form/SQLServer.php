@@ -21,6 +21,8 @@ namespace MultiFlexi\Ui\Form;
  * @deprecated since version 1.27
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class SQLServer extends \Ease\TWB4\Panel implements configForm
 {

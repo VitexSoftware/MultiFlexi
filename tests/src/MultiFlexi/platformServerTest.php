@@ -18,6 +18,9 @@ namespace MultiFlexi\Tests;
 use MultiFlexi\platformServer;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @no-named-arguments
+ */
 class platformServerTest extends TestCase
 {
     public function testInitialization(): void

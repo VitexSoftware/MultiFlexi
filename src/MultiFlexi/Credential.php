@@ -15,6 +15,9 @@ declare(strict_types=1);
 
 namespace MultiFlexi;
 
+/**
+ * @no-named-arguments
+ */
 class Credential extends DBEngine
 {
     /**

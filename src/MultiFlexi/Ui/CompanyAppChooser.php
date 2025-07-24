@@ -21,6 +21,8 @@ use MultiFlexi\Company;
  * Description of CompanyAppChooser.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CompanyAppChooser extends \Ease\Html\SelectTag
 {

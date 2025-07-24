@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of ResultFileSelect.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class ResultFileSelect extends \Ease\Html\SelectTag
 {

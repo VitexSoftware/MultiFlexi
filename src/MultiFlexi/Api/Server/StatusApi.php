@@ -19,6 +19,8 @@ namespace MultiFlexi\Api\Server;
  * Description of StatusApi.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class StatusApi extends \MultiFlexi\Api\Server\AbstractStatusApi
 {

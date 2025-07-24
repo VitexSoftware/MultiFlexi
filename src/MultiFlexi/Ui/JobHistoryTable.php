@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of JobHistory.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class JobHistoryTable extends \Ease\TWB4\Table
 {

@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Registered AbraFlexi instance editor Form.
  *
  * @author
+ *
+ * @no-named-arguments
  */
 class RegisterCustomerForm extends EngineForm
 {

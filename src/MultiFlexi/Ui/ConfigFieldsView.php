@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of ConfiguredFieldBadges.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class ConfigFieldsView extends \Ease\Html\DivTag
 {

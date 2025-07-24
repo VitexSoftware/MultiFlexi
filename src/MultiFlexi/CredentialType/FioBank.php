@@ -19,6 +19,8 @@ namespace MultiFlexi\CredentialType;
  * Description of FioBank.
  *
  * author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class FioBank extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
 {

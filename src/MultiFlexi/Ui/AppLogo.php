@@ -22,6 +22,8 @@ use MultiFlexi\Application;
  * Description of AppLogo.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class AppLogo extends ImgTag
 {

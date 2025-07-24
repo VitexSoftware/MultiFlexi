@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of RunTplCreds.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class RunTplCreds extends Engine
 {

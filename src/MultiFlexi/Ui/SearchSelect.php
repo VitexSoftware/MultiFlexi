@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of SearchSelect.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class SearchSelect extends \Ease\Html\SelectTag
 {

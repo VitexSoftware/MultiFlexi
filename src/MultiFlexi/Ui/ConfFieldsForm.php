@@ -24,6 +24,8 @@ use Ease\TWB4\SubmitButton;
  * Description of ConfFieldsForm.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class ConfFieldsForm extends Form
 {

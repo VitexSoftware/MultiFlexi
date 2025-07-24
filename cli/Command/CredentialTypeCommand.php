@@ -25,6 +25,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Description of CredentialType.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class CredentialTypeCommand extends MultiFlexiCommand
 {

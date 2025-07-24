@@ -20,6 +20,9 @@ use MultiFlexi\Zabbix\Exception\ZabbixResponseException;
 use MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
 use MultiFlexi\Zabbix\Response as ZabbixResponse;
 
+/**
+ * @no-named-arguments
+ */
 class ZabbixSender
 {
     /**
@@ -135,7 +138,7 @@ class ZabbixSender
             return false;
         }
 
-        $payload = $this->makePayload($packet);
+        $payload = self::makePayload($packet);
         $payloadLength = \strlen($payload);
 
         $socket = socket_create(\AF_INET, \SOCK_STREAM, \SOL_TCP);
@@ -191,7 +194,7 @@ class ZabbixSender
                 break;
         }
 
-        return $this->checkResponse($socket);
+        return self::checkResponse($socket);
     }
 
     /**
@@ -200,7 +203,7 @@ class ZabbixSender
      *
      * https://www.zabbix.com/documentation/3.4/manual/appendix/protocols/header_datalen
      */
-    private function makePayload(ZabbixPacket $packet): string
+    private static function makePayload(ZabbixPacket $packet): string
     {
         $encodedPacket = json_encode($packet);
 
@@ -221,7 +224,7 @@ class ZabbixSender
      * @throws ZabbixNetworkException
      * @throws ZabbixResponseException
      */
-    private function checkResponse($socket): bool
+    private static function checkResponse($socket): bool
     {
         $responseBuffer = '';
         $responseBufferLength = 2048;

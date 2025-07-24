@@ -25,6 +25,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Description of ApplicationCommand.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 // Přidání ApplicationCommand pro správu aplikací
 class ApplicationCommand extends MultiFlexiCommand

@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of EnvsForm.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class EnvsForm extends \Ease\TWB4\Form
 {

@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of CredentialSelect.F.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CredentialTypeSelect extends \Ease\Html\SelectTag
 {

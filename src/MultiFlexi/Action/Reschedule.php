@@ -19,6 +19,8 @@ namespace MultiFlexi\Action;
  * Description of Reschedule.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Reschedule extends \MultiFlexi\CommonAction
 {

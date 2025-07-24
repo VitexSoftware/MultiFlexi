@@ -24,6 +24,8 @@ namespace MultiFlexi\Ui;
  * Description of AppExecutorSelect.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class AppExecutorSelect extends ExecutorSelect
 {

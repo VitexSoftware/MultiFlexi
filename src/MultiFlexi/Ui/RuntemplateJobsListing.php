@@ -22,6 +22,8 @@ use MultiFlexi\Env\RunTemplate;
  *
  * @copyright  2015-2024 Vitex Software
  * @license    https://opensource.org/licenses/MIT MIT
+ *
+ * @no-named-arguments
  */
 class RuntemplateJobsListing extends \MultiFlexi\Ui\JobHistoryTable
 {

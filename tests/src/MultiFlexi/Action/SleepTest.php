@@ -23,6 +23,8 @@ use PHPUnit\Framework\TestCase;
  * Tests for Sleep Action.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.com>
+ *
+ * @no-named-arguments
  */
 class SleepTest extends TestCase
 {

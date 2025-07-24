@@ -21,6 +21,8 @@ use Goat1000\SVGGraph\SVGGraph;
  * Description of TodaysJobSuccesGraph.
  *
  * author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class JobSuccessGraph extends \Ease\Html\DivTag
 {

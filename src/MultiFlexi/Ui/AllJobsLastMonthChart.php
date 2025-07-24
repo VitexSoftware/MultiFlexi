@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of AllJobsLastMonthChart.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class AllJobsLastMonthChart extends JobChart
 {

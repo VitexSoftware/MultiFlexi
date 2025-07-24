@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of AppSelector.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class AppsSelector extends \Ease\Html\InputTextTag
 {

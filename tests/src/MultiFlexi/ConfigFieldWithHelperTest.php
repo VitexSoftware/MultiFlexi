@@ -23,6 +23,8 @@ use PHPUnit\Framework\TestCase;
  * Tests for ConfigFieldWithHelper class.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.com>
+ *
+ * @no-named-arguments
  */
 class ConfigFieldWithHelperTest extends TestCase
 {

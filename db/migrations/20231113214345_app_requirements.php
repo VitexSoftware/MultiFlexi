@@ -15,6 +15,9 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
+/**
+ * @no-named-arguments
+ */
 final class AppRequirements extends AbstractMigration
 {
     public function change(): void

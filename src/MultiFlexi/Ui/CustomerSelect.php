@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of companieselect.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class CustomerSelect extends \Ease\Html\SelectTag
 {

@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of CompanySelect.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class CompanySelectize extends CompanySelect
 {

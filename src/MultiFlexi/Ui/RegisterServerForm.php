@@ -21,6 +21,8 @@ namespace MultiFlexi\Ui;
  * @deprecated since version 1.20
  *
  * @author
+ *
+ * @no-named-arguments
  */
 class RegisterServerForm extends EngineForm
 {

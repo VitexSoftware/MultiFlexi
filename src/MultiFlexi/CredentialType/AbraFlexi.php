@@ -19,6 +19,8 @@ namespace MultiFlexi\CredentialType;
  * Description of AbraFlexi.
  *
  * author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class AbraFlexi extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
 {
