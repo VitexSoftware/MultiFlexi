@@ -51,6 +51,10 @@
     },
     {
       "type": "path",
+      "url": "/share/php/MultiFlexi/"
+    },
+    {
+      "type": "path",
       "url": "/usr/share/php/EaseHtml/"
     },
     {
