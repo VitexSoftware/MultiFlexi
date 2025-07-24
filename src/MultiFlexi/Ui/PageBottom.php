@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Page Bottom.
  *
  * @author     Vitex <vitex@hippy.cz>
+ *
+ * @no-named-arguments
  */
 class PageBottom extends \Ease\Html\FooterTag
 {

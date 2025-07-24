@@ -25,6 +25,8 @@ use Ease\TWB4\FormGroup;
  * Description of AppRow.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class AppRow extends \Ease\TWB4\Row
 {

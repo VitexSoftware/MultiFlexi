@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of BitwardenServiceDelegate.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class BitwardenServiceDelegate implements \Jalismrs\Bitwarden\BitwardenServiceDelegate
 {

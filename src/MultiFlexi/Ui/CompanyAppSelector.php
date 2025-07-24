@@ -22,6 +22,8 @@ use MultiFlexi\CompanyApp;
  * Description of CompanyAppSelector.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CompanyAppSelector extends AppsSelector
 {

@@ -19,6 +19,8 @@ namespace MultiFlexi\Executor;
  * Description of Docker.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Docker extends Native implements \MultiFlexi\executor
 {

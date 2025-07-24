@@ -25,6 +25,8 @@ use Ease\TWB4\Badge;
  * Description of Executor.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 abstract class CommonAction extends Sand
 {

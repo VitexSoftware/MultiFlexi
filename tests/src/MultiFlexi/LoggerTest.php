@@ -18,6 +18,9 @@ namespace Test\MultiFlexi;
 use MultiFlexi\Logger;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @no-named-arguments
+ */
 class LoggerTest extends TestCase
 {
     protected $object;

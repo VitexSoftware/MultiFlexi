@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of Topic.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class TopicManger extends Engine
 {

@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of LogViewer.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class LogViewer
 {

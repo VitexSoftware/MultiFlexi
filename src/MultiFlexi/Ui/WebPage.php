@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of WebPage.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class WebPage extends \Ease\TWB4\WebPage
 {

@@ -24,6 +24,8 @@ namespace MultiFlexi\Ui;
  * Show Customized App Environment only.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CustomAppEnvironmentView extends EnvironmentView
 {

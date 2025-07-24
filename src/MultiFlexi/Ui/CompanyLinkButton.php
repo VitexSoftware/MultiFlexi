@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of CompanyLinkButton.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CompanyLinkButton extends \Ease\TWB4\LinkButton
 {

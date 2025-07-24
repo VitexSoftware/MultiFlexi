@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of LaunchButton.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class LaunchButton extends \Ease\TWB4\LinkButton
 {

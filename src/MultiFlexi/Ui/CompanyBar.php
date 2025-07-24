@@ -24,6 +24,8 @@ namespace MultiFlexi\Ui;
  * Description of CompanyBar.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CompanyBar
 {

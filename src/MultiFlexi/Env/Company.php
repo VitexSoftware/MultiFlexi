@@ -19,6 +19,8 @@ namespace MultiFlexi\Env;
  * Description of Company.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Company extends \MultiFlexi\Environmentor implements injector
 {

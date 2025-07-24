@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of DataTable.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class DBDataTable extends \Ease\Html\TableTag
 {

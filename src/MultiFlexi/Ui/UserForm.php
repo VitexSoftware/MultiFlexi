@@ -21,6 +21,9 @@ use Ease\TWB4\Form;
 use Ease\TWB4\SubmitButton;
 use MultiFlexi\User;
 
+/**
+ * @no-named-arguments
+ */
 class UserForm extends Form
 {
     /**

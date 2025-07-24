@@ -27,6 +27,8 @@ use PHPUnit\Framework\TestCase;
  * Tests for CredentialType class.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.com>
+ *
+ * @no-named-arguments
  */
 class CredentialTypeTest extends TestCase
 {

@@ -29,19 +29,15 @@ declare(strict_types=1);
  */
 return [
     'mode' => 'production',
-
     // Returns a detailed HTML page with error details and
     // a stack trace. Should be disabled in production.
     'slim.displayErrorDetails' => (bool) \Ease\Shared::cfg('API_DEBUG', false),
-
     // Whether to display errors on the internal PHP log or not.
     'slim.logErrors' => true,
-
     // If true, display full errors with message and stack trace on the PHP log.
     // If false, display only "Slim Application Error" on the PHP log.
     // Doesn't do anything when 'logErrors' is false.
     'slim.logErrorDetails' => true,
-
     // CORS settings
     // https://github.com/neomerx/cors-psr7/blob/master/src/Strategies/Settings.php
     'cors.settings' => [
@@ -64,7 +60,6 @@ return [
         '', // exposedHeadersList
         true, // isCheckHost
     ],
-
     // PDO
     'pdo.dsn' => \Ease\Shared::cfg('DB_CONNECTION').':host='.\Ease\Shared::cfg('DB_HOST').';charset=utf8mb4',
     'pdo.username' => \Ease\Shared::cfg('DB_USERNAME'),
@@ -72,7 +67,6 @@ return [
     'pdo.options' => [
         \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
     ],
-
     // logger
     'logger.name' => \Ease\Shared::appName(),
     'logger.path' => '/tmp/multiflexi-api.log',

@@ -25,6 +25,8 @@ use MultiFlexi\RunTemplate;
  * Description of ServicesForCompanyForm.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class ServicesForCompanyForm extends Form
 {

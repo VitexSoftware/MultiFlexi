@@ -19,6 +19,8 @@ namespace MultiFlexi\Api\Auth;
  * Description of Authenticator.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Authenticator extends AbstractAuthenticator
 {

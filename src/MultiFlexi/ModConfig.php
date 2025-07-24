@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of ModConfig.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class ModConfig extends Engine
 {

@@ -19,6 +19,8 @@ namespace MultiFlexi\Executor;
  * Description of Podman.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Podman extends Native implements \MultiFlexi\executor
 {

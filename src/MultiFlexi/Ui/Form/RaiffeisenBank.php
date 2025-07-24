@@ -23,6 +23,8 @@ use Ease\Html\ATag;
  * @deprecated since version 1.27
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class RaiffeisenBank extends \Ease\TWB4\Panel implements configForm
 {

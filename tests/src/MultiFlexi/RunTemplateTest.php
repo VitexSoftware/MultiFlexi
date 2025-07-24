@@ -19,6 +19,8 @@ use MultiFlexi\RunTemplate;
 
 /**
  * Tests for MultiFlexi\RunTemplate.
+ *
+ * @no-named-arguments
  */
 class RunTemplateTest extends \PHPUnit\Framework\TestCase
 {

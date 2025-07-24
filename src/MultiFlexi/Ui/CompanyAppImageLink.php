@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of CompanyLinkButton.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CompanyAppImageLink extends \Ease\Html\ATag
 {

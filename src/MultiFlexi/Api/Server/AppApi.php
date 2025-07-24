@@ -22,6 +22,8 @@ use Psr\Http\Message\ServerRequestInterface;
  * Description of DefaultApi.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class AppApi extends \MultiFlexi\Api\Server\AbstractAppApi
 {

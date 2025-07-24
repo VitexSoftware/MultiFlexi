@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of CompanyRuntemplatesLinks.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class CompanyRuntemplatesLinks extends \Ease\Html\DivTag
 {

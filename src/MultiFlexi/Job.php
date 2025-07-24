@@ -22,6 +22,8 @@ use MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
  * Description of Job.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Job extends Engine
 {

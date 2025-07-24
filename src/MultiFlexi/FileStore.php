@@ -21,6 +21,8 @@ use Ease\SQL\Engine;
  * Description of FileStore.
  *
  * @autor Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class FileStore extends Engine
 {

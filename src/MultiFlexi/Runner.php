@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of Runner.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Runner extends \Ease\Sand
 {

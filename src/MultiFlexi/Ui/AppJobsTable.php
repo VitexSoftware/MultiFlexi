@@ -24,6 +24,8 @@ namespace MultiFlexi\Ui;
  * Description of AppJobsTable.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class AppJobsTable extends \Ease\TWB4\Table
 {

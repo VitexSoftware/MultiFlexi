@@ -15,6 +15,9 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Api\Server;
 
+/**
+ * @no-named-arguments
+ */
 class UserApi
 {
     public function __construct()

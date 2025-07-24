@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of ConfigFieldWithHelper.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class ConfigFieldWithHelper extends ConfigField
 {

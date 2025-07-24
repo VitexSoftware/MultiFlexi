@@ -24,6 +24,8 @@ namespace MultiFlexi\Ui;
  * Show Full environment for Application.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CompanyAppEnvironmentView extends EnvironmentView
 {

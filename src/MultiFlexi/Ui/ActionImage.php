@@ -24,6 +24,8 @@ namespace MultiFlexi\Ui;
  * Description of ActionImage.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class ActionImage extends \Ease\Html\ImgTag
 {

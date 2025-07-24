@@ -25,6 +25,8 @@ use Ease\TWB4\Widgets\Toggle;
  * Description of RegisterAppForm.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class AppEditorForm extends EngineForm
 {

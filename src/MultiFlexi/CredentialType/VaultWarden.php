@@ -19,6 +19,8 @@ namespace MultiFlexi\CredentialType;
  * Description of VaultWarden.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class VaultWarden extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
 {

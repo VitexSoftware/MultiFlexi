@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of Credata.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class Credata extends Engine
 {

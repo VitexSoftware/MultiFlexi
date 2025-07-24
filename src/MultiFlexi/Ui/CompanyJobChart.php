@@ -24,6 +24,8 @@ namespace MultiFlexi\Ui;
  * Description of CompanyJobChart.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CompanyJobChart extends JobChart
 {

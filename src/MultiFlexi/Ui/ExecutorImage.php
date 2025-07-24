@@ -24,6 +24,8 @@ namespace MultiFlexi\Ui;
  * Description of ExecutorImage.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class ExecutorImage extends \Ease\Html\ImgTag
 {

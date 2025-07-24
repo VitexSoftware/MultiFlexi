@@ -24,6 +24,8 @@ use MultiFlexi\Zabbix\Response as ZabbixResponse;
  * Description of ZabbixSender.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class ZabbixSender extends \MultiFlexi\Zabbix\ZabbixSender
 {
@@ -175,7 +177,7 @@ class ZabbixSender extends \MultiFlexi\Zabbix\ZabbixSender
                 break;
         }
 
-        return $this->checkResponse($socket);
+        return self::checkResponse($socket);
     }
 
     /**
@@ -188,7 +190,7 @@ class ZabbixSender extends \MultiFlexi\Zabbix\ZabbixSender
      *
      * @return bool Success
      */
-    private function checkResponse($socket): bool
+    private static function checkResponse($socket): bool
     {
         $responseBuffer = '';
         $responseBufferLength = 2048;

@@ -17,6 +17,8 @@ namespace MultiFlexi\Ui;
 
 /**
  * @author vitex
+ *
+ * @no-named-arguments
  */
 interface columns
 {

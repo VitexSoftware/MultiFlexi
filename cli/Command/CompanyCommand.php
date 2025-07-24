@@ -25,6 +25,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Description of CompanyCommand.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 
 // Přidání CompanyCommand pro symetrické ovládání jako JobCommand

@@ -24,6 +24,8 @@ namespace MultiFlexi\Executor;
  * Description of Kubernetes.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Kubernetes extends Native implements \MultiFlexi\executor
 {

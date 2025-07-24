@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of Token.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Token extends Engine
 {

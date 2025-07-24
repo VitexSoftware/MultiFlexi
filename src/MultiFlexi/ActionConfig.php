@@ -24,6 +24,8 @@ namespace MultiFlexi;
  * Description of ActionConfig.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class ActionConfig extends Engine
 {

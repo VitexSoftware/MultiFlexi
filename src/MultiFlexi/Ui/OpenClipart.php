@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of OpenClipart.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class OpenClipart extends \Ease\Html\ATag
 {

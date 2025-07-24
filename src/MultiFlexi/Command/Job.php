@@ -21,6 +21,8 @@ use Symfony\Component\Console\Input\InputOption;
  * Description of Job.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class Job extends Command
 {

@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of CompanyEnv.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CompanyEnv extends \Ease\SQL\Engine
 {

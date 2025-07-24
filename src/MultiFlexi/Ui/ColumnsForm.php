@@ -25,6 +25,9 @@ use Ease\TWB4\Row;
 use Ease\TWB4\SubmitButton;
 use MultiFlexi\Engine;
 
+/**
+ * @no-named-arguments
+ */
 class ColumnsForm extends Form
 {
     /**

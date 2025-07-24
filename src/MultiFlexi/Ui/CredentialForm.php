@@ -36,6 +36,8 @@ use MultiFlexi\RunTplCreds;
  * Description of CredentialForm.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class CredentialForm extends Form
 {
@@ -85,7 +87,7 @@ class CredentialForm extends Form
             $fieldsSource = new CredentialType($kredenc->getDataValue('credential_type_id'));
 
             foreach ($fieldsSource->getFields() as $field) {
-                $formContents[] = $this->confiField($kredenc, $field);
+                $formContents[] = self::confiField($kredenc, $field);
             }
         }
 
@@ -144,7 +146,7 @@ class CredentialForm extends Form
         parent::finalize();
     }
 
-    private function confiField(Credential $credential, ConfigField $field): Row
+    private static function confiField(Credential $credential, ConfigField $field): Row
     {
         $credTypeId = $credential->getMyKey();
         $credTypeFieldRow = new Row();

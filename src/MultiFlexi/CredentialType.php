@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of CredentialType.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class CredentialType extends DBEngine
 {

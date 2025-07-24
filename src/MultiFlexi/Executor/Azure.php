@@ -19,6 +19,8 @@ namespace MultiFlexi\Executor;
  * Description of Azure.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Azure extends Native implements \MultiFlexi\executor
 {

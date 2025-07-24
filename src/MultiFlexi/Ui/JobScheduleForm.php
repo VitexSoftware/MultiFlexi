@@ -28,6 +28,8 @@ use MultiFlexi\Company;
  * Description of JobScheduleForm.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class JobScheduleForm extends Form
 {

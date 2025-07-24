@@ -21,6 +21,8 @@ namespace MultiFlexi\Ui;
  * @deprecated since version 1.20
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class ServerSelect extends \Ease\Html\SelectTag
 {

@@ -23,6 +23,9 @@ use React\Socket\SocketServer;
 
 require_once './init.php';
 
+/**
+ * @no-named-arguments
+ */
 class JobOutputStreamer implements MessageComponentInterface
 {
     protected $clients;
@@ -38,7 +41,7 @@ class JobOutputStreamer implements MessageComponentInterface
         parse_str($queryString, $queryParams);
         $token = $queryParams['token'] ?? '';
 
-        if (!$this->isValidToken($token)) {
+        if (!self::isValidToken($token)) {
             $conn->close();
 
             return;
@@ -66,7 +69,7 @@ class JobOutputStreamer implements MessageComponentInterface
         $conn->close();
     }
 
-    private function isValidToken($token)
+    private static function isValidToken($token)
     {
         // Implement your token validation logic here
         // For example, check if the token exists in the session or database

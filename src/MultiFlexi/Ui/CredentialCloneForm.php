@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Form for credential cloning.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CredentialCloneForm extends \Ease\TWB4\Form
 {

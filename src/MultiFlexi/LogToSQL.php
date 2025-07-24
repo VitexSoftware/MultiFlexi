@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of LogToSQL.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class LogToSQL extends \Ease\SQL\Engine implements \Ease\Logger\Loggingable
 {

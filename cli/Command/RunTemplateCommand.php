@@ -25,6 +25,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Description of RunTemplateCommand.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 // Přidání RunTemplateCommand pro správu runtemplate
 class RunTemplateCommand extends MultiFlexiCommand

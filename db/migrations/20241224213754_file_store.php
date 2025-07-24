@@ -16,6 +16,9 @@ declare(strict_types=1);
 use Phinx\Db\Adapter\MysqlAdapter;
 use Phinx\Migration\AbstractMigration;
 
+/**
+ * @no-named-arguments
+ */
 final class FileStore extends AbstractMigration
 {
     /**

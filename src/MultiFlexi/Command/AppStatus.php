@@ -24,6 +24,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Description of Status.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class AppStatus extends Command
 {

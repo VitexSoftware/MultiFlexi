@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of RuntemplateCloneForm.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class RuntemplateCloneForm extends \Ease\TWB4\Form
 {

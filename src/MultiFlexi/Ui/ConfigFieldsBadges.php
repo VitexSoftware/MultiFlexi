@@ -22,6 +22,8 @@ use Ease\TWB4\Badge;
  * Description of Confiffields.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class ConfigFieldsBadges extends Container
 {

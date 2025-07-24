@@ -15,6 +15,9 @@ declare(strict_types=1);
 
 use Phinx\Seed\AbstractSeed;
 
+/**
+ * @no-named-arguments
+ */
 class CompanySeeder extends AbstractSeed
 {
     /**

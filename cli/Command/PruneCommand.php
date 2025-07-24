@@ -20,6 +20,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @no-named-arguments
+ */
 class PruneCommand extends Command
 {
     protected static $defaultName = 'prune';
@@ -41,13 +44,13 @@ class PruneCommand extends Command
         if ($input->getOption('logs')) {
             $pruned = true;
             $output->writeln("Pruning logs, keeping latest {$keep} records...");
-            $this->pruneTable('log', 'id', $keep, $output);
+            self::pruneTable('log', 'id', $keep, $output);
         }
 
         if ($input->getOption('jobs')) {
             $pruned = true;
             $output->writeln("Pruning jobs, keeping latest {$keep} records...");
-            $this->pruneTable('job', 'id', $keep, $output);
+            self::pruneTable('job', 'id', $keep, $output);
         }
 
         if (!$pruned) {
@@ -61,7 +64,7 @@ class PruneCommand extends Command
         return Command::SUCCESS;
     }
 
-    private function pruneTable(string $table, string $idField, int $keep, OutputInterface $output): void
+    private static function pruneTable(string $table, string $idField, int $keep, OutputInterface $output): void
     {
         $db = new \Ease\SQL\Engine();
         $sql = "DELETE FROM {$table} WHERE {$idField} NOT IN (SELECT {$idField} FROM (SELECT {$idField} FROM {$table} ORDER BY {$idField} DESC LIMIT {$keep}) as t)";

@@ -19,6 +19,8 @@ namespace MultiFlexi\CredentialType;
  * Description of Csas.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Csas extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
 {

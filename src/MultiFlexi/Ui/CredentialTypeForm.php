@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Class CredentialTypeForm.
  *
  * Handles the form for editing CredentialType.
+ *
+ * @no-named-arguments
  */
 class CredentialTypeForm extends \Ease\TWB4\Form
 {

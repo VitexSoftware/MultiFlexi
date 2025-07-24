@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of Engine.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Engine extends \Ease\SQL\Engine
 {

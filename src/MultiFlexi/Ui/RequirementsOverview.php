@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of RequirementsOverview.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class RequirementsOverview extends \Ease\Html\DivTag
 {

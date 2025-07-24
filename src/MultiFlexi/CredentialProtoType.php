@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of CredentialProtoType.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 abstract class CredentialProtoType extends \Ease\Sand
 {
@@ -121,14 +123,16 @@ abstract class CredentialProtoType extends \Ease\Sand
         return $this->configFieldsInternal;
     }
 
-    public function checkInternalFields() {
+    public function checkInternalFields()
+    {
         return true;
     }
-    
-    public function checkProvidedFields() {
+
+    public function checkProvidedFields()
+    {
         return true;
     }
-    
+
     public function query(): ConfigFields
     {
         return $this->fieldsProvided();

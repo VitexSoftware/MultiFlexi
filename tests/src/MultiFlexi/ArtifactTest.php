@@ -19,6 +19,8 @@ use MultiFlexi\Artifact;
 
 /**
  * Tests for MultiFlexi\Artifact.
+ *
+ * @no-named-arguments
  */
 class ArtifactTest extends \PHPUnit\Framework\TestCase
 {

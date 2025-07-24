@@ -19,6 +19,8 @@ use MultiFlexi\Action\CustomCommand;
 
 /**
  * Tests for MultiFlexi\Action\CustomCommand.
+ *
+ * @no-named-arguments
  */
 class CustomCommandTest extends \PHPUnit\Framework\TestCase
 {

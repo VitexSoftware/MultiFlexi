@@ -21,6 +21,8 @@ use Symfony\Component\Console\Input\InputOption;
  * Description of CredentialType.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class CredentialType extends Command
 {

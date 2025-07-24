@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of CustomAppConfigForm.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class RuntemplateConfigForm extends EngineForm
 {

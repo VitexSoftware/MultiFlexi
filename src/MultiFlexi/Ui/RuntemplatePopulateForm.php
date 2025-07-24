@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of RuntemplatePopulateForm.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class RuntemplatePopulateForm extends \Ease\TWB4\Form
 {

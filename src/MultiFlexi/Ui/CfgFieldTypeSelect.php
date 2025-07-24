@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of ConfigFields.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CfgFieldTypeSelect extends \Ease\Html\SelectTag
 {

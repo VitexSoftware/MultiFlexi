@@ -17,6 +17,8 @@ namespace MultiFlexi;
 
 /**
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 interface credentialTypeInterface
 {

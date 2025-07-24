@@ -19,6 +19,8 @@ namespace MultiFlexi\Action;
  * Description of TriggerJenkins.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Zabbix extends \MultiFlexi\CommonAction
 {

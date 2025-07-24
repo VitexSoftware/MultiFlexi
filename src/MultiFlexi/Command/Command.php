@@ -19,6 +19,8 @@ namespace MultiFlexi\Command;
  * Description of Command.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 abstract class Command extends \Symfony\Component\Console\Command\Command
 {
@@ -32,7 +34,7 @@ abstract class Command extends \Symfony\Component\Console\Command\Command
         if ($data) {
             $table = new \LucidFrame\Console\ConsoleTable();
 
-            foreach (array_keys(current($data))as $column) {
+            foreach (array_keys(current($data)) as $column) {
                 $table->addHeader($column);
             }
 

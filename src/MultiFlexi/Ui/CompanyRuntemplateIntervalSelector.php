@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of CompanyAppIntervalSelection.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CompanyRuntemplateIntervalSelector extends CompanyAppSelector
 {

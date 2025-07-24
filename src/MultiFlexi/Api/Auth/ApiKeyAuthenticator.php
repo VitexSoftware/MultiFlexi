@@ -19,6 +19,8 @@ namespace MultiFlexi\Api\Auth;
  * Description of ApiKeyAuthenticator.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class ApiKeyAuthenticator extends Authenticator
 {

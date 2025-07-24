@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of filterDialog.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class FilterDialog extends \Ease\Html\DivTag
 {

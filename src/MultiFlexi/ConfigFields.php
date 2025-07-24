@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of ConfigFields.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class ConfigFields implements \Iterator
 {

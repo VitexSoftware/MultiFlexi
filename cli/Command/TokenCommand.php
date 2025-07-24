@@ -25,6 +25,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Description of TokenCommand.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 // Přidání TokenCommand pro správu tokenů
 class TokenCommand extends MultiFlexiCommand

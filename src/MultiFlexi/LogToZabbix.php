@@ -29,6 +29,8 @@ use MultiFlexi\Zabbix\Request\Packet as ZabbixPacket;
  * Send All Log messages to zabbix.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class LogToZabbix implements \Ease\Logger\Loggingable
 {

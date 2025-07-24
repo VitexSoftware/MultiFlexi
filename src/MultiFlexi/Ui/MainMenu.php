@@ -19,6 +19,8 @@ namespace MultiFlexi\Ui;
  * Description of MainMenu.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class MainMenu extends \Ease\Html\DivTag
 {

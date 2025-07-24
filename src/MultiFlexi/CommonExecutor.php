@@ -19,6 +19,8 @@ namespace MultiFlexi;
  * Description of Executor.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 abstract class CommonExecutor extends \Ease\Sand
 {
