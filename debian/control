@@ -20,7 +20,8 @@ Depends: ${misc:Depends},
  libjs-jquery-selectize.js,
  anacron, adduser (>= 3.11),
  php-symfony-console,
- php-json-schema
+ php-json-schema,
+ php-vitexsoftware-multiflexi-core
 Suggests: multiflexi-all
 Pre-Depends: php-robmorgan-phinx|php-cakephp-phinx
 Architecture: all
