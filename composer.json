@@ -37,7 +37,8 @@
         "symfony/console": "^6.4",
         "cboden/ratchet": "^0.5",
         "textalk/websocket": "dev-master",
-        "justinrainbow/json-schema": "^6.0@dev"
+        "justinrainbow/json-schema": "^6.0@dev",
+        "vitexsoftware/multiflexi-core": "dev-main"
     },
     "license": "MIT",
     "authors": [
