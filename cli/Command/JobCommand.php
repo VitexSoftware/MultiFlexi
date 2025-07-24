@@ -25,6 +25,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Description of Job.
  *
  * @author Vitex <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class JobCommand extends MultiFlexiCommand
 {
@@ -53,14 +55,13 @@ class JobCommand extends MultiFlexiCommand
             ->addOption('format', 'f', InputOption::VALUE_OPTIONAL, 'The output format: text or json. Defaults to text.', 'text')
             ->setHelp('This command manage Jobs')
             ->setDescription('Manage jobs')
-            ->addArgument('action', InputArgument::REQUIRED, 'Action: list|get|create|update|delete')
+            ->addArgument('action', InputArgument::REQUIRED, 'Action: status|list|get|create|update|delete')
             ->addOption('id', null, InputOption::VALUE_REQUIRED, 'Job ID')
             ->addOption('runtemplate_id', null, InputOption::VALUE_REQUIRED, 'Runtemplate ID')
             ->addOption('scheduled', null, InputOption::VALUE_REQUIRED, 'Scheduled datetime')
             ->addOption('executor', null, InputOption::VALUE_REQUIRED, 'Executor')
             ->addOption('schedule_type', null, InputOption::VALUE_REQUIRED, 'Schedule type')
-            ->addOption('app_id', null, InputOption::VALUE_REQUIRED, 'App ID')
-            ->addOption('fields', null, InputOption::VALUE_REQUIRED, 'Comma-separated list of fields to display');
+            ->addOption('app_id', null, InputOption::VALUE_REQUIRED, 'App ID');
         // Add more options as needed
     }
 
@@ -70,6 +71,52 @@ class JobCommand extends MultiFlexiCommand
         $action = strtolower($input->getArgument('action'));
 
         switch ($action) {
+            case 'status':
+                $engine = new \MultiFlexi\Engine();
+                $pdo = $engine->getPdo();
+                $database = $pdo->getAttribute(\PDO::ATTR_DRIVER_NAME).' '.
+                        $pdo->getAttribute(\PDO::ATTR_CONNECTION_STATUS).' '.
+                        $pdo->getAttribute(\PDO::ATTR_SERVER_INFO).' '.
+                        $pdo->getAttribute(\PDO::ATTR_SERVER_VERSION);
+
+                $queeLength = (new \MultiFlexi\Scheduler())->listingQuery()->count();
+
+                // Query to get job status information
+                $query = <<<'EOD'
+                SELECT
+                    COUNT(*) AS total_jobs,
+                    SUM(CASE WHEN exitcode = 0 THEN 1 ELSE 0 END) AS successful_jobs,
+                    SUM(CASE WHEN exitcode != 0 THEN 1 ELSE 0 END) AS failed_jobs,
+                    SUM(CASE WHEN exitcode IS NULL THEN 1 ELSE 0 END) AS incomplete_jobs,
+                    COUNT(DISTINCT app_id) AS total_applications,
+                    SUM(CASE WHEN schedule IS NOT NULL THEN 1 ELSE 0 END) AS repeated_jobs
+                FROM job
+EOD;
+
+                $stmt = $pdo->query($query);
+                $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+                $status = [
+                    'successful_jobs' => (int) $result['successful_jobs'],
+                    'failed_jobs' => (int) $result['failed_jobs'],
+                    'incomplete_jobs' => (int) $result['incomplete_jobs'],
+                    'total_applications' => (int) $result['total_applications'],
+                    'repeated_jobs' => (int) $result['repeated_jobs'],
+                    'total_jobs' => (int) $result['total_jobs'],
+                    'queue_length' => (int) $queeLength,
+                ];
+
+                $format = $input->getOption('format');
+
+                if ($format === 'json') {
+                    $output->writeln(json_encode($status, \JSON_PRETTY_PRINT));
+                } else {
+                    foreach ($status as $key => $value) {
+                        $output->writeln(str_replace('_', ' ', $key).': '.$value);
+                    }
+                }
+
+                return MultiFlexiCommand::SUCCESS;
             case 'list':
                 $job = new Job();
                 $jobs = $job->listingQuery()->fetchAll();
