@@ -22,7 +22,8 @@ multiflexi-cli runtemplate list
 multiflexi-zabbix-lld | jq
 multiflexi-zabbix-lld-tasks | jq
 multiflexi-zabbix-lld-company | jq
-multiflexi-cli appstatus
+multiflexi-cli appstatus --format=json
+multiflexi-cli job status --format=json
 
 # Run template with parameters
 # multiflexi-run-template --uuid 868a8085-03e5-4f9b-899d-2084e1de7d3b --company-slug testco --company-id 1 --run-params '{"param1":"value1","param2":"value2"}'
