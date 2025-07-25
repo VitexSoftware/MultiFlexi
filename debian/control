@@ -2,50 +2,29 @@ Source: multiflexi
 Section: web
 Priority: optional
 Maintainer: "Vítězslav Dvořák" <info@vitexsoftware.cz>
-Build-Depends: debhelper (>=11~), jq, moreutils, composer, php-yaml, php-intl, php-simplexml
+Build-Depends: debhelper (>=12~), jq, moreutils, composer, php-yaml, php-intl, php-simplexml
 Standards-Version: 4.1.4
 Homepage: https://github.com/VitexSoftware/MultiFlexi
 
 Package: multiflexi
 Multi-Arch: foreign
 Depends: ${misc:Depends},
+ locales-all,
+ multiflexi-database,
  php-vitexsoftware-multiflexi-core,
  php-vitexsoftware-ease-html-widgets (>=1.1.1),
- php-cli,
- locales-all,
  php-vitexsoftware-ease-bootstrap4-widgets (>=1.7),
- php-vitexsoftware-ease-fluentpdo (>=1.3),
- multiflexi-sqlite|multiflexi-mysql|multiflexi-pgsql,
  libjs-jquery-datatables,
  libjs-jquery-selectize.js,
  anacron, adduser (>= 3.11),
- php-symfony-console,
- php-json-schema
+ php-cli,
+ php-symfony-console
 Suggests: multiflexi-all
 Pre-Depends: php-robmorgan-phinx|php-cakephp-phinx
 Architecture: all
 Description: run several tools on defined abraflexi servers
  Define server, customers and its companies. Then specify
  which services/commands run upon it.
-
-Package: multiflexi-sqlite
-Multi-Arch: foreign
-Depends: ${misc:Depends},multiflexi, dbconfig-sqlite3, php-sqlite3, sqlite3
-Conflicts: multiflexi-mysql, multiflexi-pgsql
-Replaces: multi-flexibee-setup-sqlite
-Architecture: all
-Description: sqlite support for multiabraflexi setup
- Mandatory dependencies for use Multi FlexiBee setup with SQLite database
-
-Package: multiflexi-mysql
-Multi-Arch: foreign
-Depends: ${misc:Depends},multiflexi, dbconfig-mysql, php-mysql, php-robmorgan-phinx|php-cakephp-phinx
-Conflicts: multiflexi-sqlite, multiflexi-pgsql
-Replaces: multi-flexibee-setup-mysql
-Suggests: mariadb-server
-Architecture: all
-Description: mariadb support for multiabraflexi setup
- Mandatory dependencies for use Multi FlexiBee setup with MySQL/MariaDB databas
 
 Package: multiflexi-docker
 Multi-Arch: foreign
@@ -90,12 +69,12 @@ Architecture: all
 Description: MultiFlexi support for AbraFlexi
  AbraFlexi Connection dialog
 
-Package: multiflexi-raiffeisenbank
-Multi-Arch: foreign
-Depends: ${misc:Depends},multiflexi
-Architecture: all
-Description: MultiFlexi support for RaiffeisenBank
- RaiffeisenBank connection dialog
+#Package: multiflexi-raiffeisenbank
+#Multi-Arch: foreign
+#Depends: ${misc:Depends},multiflexi
+#Architecture: all
+#Description: MultiFlexi support for RaiffeisenBank
+# RaiffeisenBank connection dialog
 
 #Package: multiflexi-dev
 #Depends: multiflexi,jq

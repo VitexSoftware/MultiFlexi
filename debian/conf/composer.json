@@ -4,7 +4,6 @@
   "type": "project",
   "require": {
     "deb/ease-bootstrap4-widgets": "*",
-    "deb/ease-fluentpdo": "*",
     "deb/ease-html-widgets": "*",
     "deb/multiflexi-core": "*",
     "symfony/process": "*",
