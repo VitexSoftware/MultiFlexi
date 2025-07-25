@@ -10,7 +10,6 @@ Package: multiflexi
 Multi-Arch: foreign
 Depends: ${misc:Depends},
  locales-all,
- multiflexi-database,
  php-vitexsoftware-multiflexi-core,
  php-vitexsoftware-ease-html-widgets (>=1.1.1),
  php-vitexsoftware-ease-bootstrap4-widgets (>=1.7),
@@ -20,7 +19,7 @@ Depends: ${misc:Depends},
  php-cli,
  php-symfony-console
 Suggests: multiflexi-all
-Pre-Depends: php-robmorgan-phinx|php-cakephp-phinx
+Pre-Depends: multiflexi-database
 Architecture: all
 Description: run several tools on defined abraflexi servers
  Define server, customers and its companies. Then specify
