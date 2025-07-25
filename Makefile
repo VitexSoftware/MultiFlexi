@@ -27,18 +27,6 @@ cs: ## Update Coding Standards
 clean:
 	rm -rf vendor composer.lock db/multiflexi.sqlite src/*/*dataTables*
 
-.PHONY: migration
-migration: ## Run database migrations
-	cd src ; ../vendor/bin/phinx migrate -c ../phinx-adapter.php ; cd ..
-
-.PHONY: sysmigration
-sysmigration: ## Run database migrations using system phinx
-	cd src ; /usr/bin/phinx migrate -c /usr/lib/multiflexi/phinx-adapter.php ; cd ..
-
-.PHONY: seed
-seed: ## Run database seeds
-	cd src ; ../vendor/bin/phinx seed:run -c ../phinx-adapter.php ; cd ..
-
 .PHONY: probeapp
 probeapp: ## Run database seeds
 	cd src ; ../vendor/bin/phinx seed:run -c ../phinx-adapter.php -s MultiFlexiProbeApp ; cd ..
@@ -53,22 +41,6 @@ appstatus: ## Show application status
 
 demodata:
 	cd src ; ../vendor/bin/phinx seed:run -c ../phinx-adapter.php ; cd ..
-
-.PHONY: newmigration
-newmigration: ## Prepare new Database Migration
-	read -p "Enter CamelCase migration name : " migname ; cd src ; ../vendor/bin/phinx create $$migname -c ../phinx-adapter.php ; cd ..
-
-newseed:
-	read -p "Enter CamelCase seed name : " migname ; cd src ; ../vendor/bin/phinx seed:create $$migname -c ./phinx-adapter.php ; cd ..
-
-dbreset:
-	sudo rm -f db/multiflexi.sqlite
-	echo > db/multiflexi.sqlite
-	chmod 666 db/multiflexi.sqlite
-	chmod ugo+rwX db
-	
-
-demo: dbreset migration demodata
 
 hourly:
 	cd lib; php -f executor.php h
@@ -142,7 +114,7 @@ probeimagex:
 	docker buildx build -f Containerfile.probe . --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag docker.io/vitexsoftware/multiflexi-probe
 
 clischema:
-	./cli.sh describe 
+	./cli.sh describe
 
 clitest:
 	./tests/test-cli.sh
@@ -153,4 +125,3 @@ instprobe:
 reset:
 	git fetch origin
 	git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)
-
