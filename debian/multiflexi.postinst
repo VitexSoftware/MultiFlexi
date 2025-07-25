@@ -46,13 +46,11 @@ apache_install() {
 
 composer-debian multiflexi
 
-multiflexi-json2app /usr/share/multiflexi/multiflexi_probe.multiflexi.app.json
-
 chmod uag+x /usr/bin/multiflexi-cli
 
 case "$1" in
 install | upgrade)
-    
+
     ;;
 configure)
 
@@ -153,6 +151,9 @@ abort-upgrade | abort-remove | abort-deconfigure) ;;
     exit 1
     ;;
 esac
+
+
+# TODO: multiflexi-json2app /usr/share/multiflexi/multiflexi_probe.multiflexi.app.json
 
 #DEBHELPER#
 
