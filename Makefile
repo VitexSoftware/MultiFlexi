@@ -35,13 +35,6 @@ probeapp: ## Run database seeds
 autoload: ## Run composer autoload
 	composer update
 
-.PHONY: appstatus
-appstatus: ## Show application status
-	./cli.sh appstatus
-
-demodata:
-	cd src ; ../vendor/bin/phinx seed:run -c ../phinx-adapter.php ; cd ..
-
 hourly:
 	cd lib; php -f executor.php h
 daily:
@@ -112,12 +105,6 @@ probeimage:
 
 probeimagex:
 	docker buildx build -f Containerfile.probe . --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag docker.io/vitexsoftware/multiflexi-probe
-
-clischema:
-	./cli.sh describe
-
-clitest:
-	./tests/test-cli.sh
 
 instprobe:
 	multiflexi-json2app tests/multiflexi_probe.multiflexi.app.json

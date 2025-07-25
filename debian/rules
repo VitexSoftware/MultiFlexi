@@ -21,7 +21,6 @@ override_dh_install:
 	mkdir -p debian/tmp/
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/conf/composer.json |sponge debian/tmp/composer.json
 	dh_install
-	sed -i "s|require_once __DIR__.'/../vendor/autoload.php';|require_once '/var/lib/composer/multiflexi/autoload.php';|" debian/multiflexi/usr/lib/multiflexi/multiflexi-cli.php
 	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multiflexi/g' debian/multiflexi/usr/share/multiflexi/init.php
 	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multiflexi/g' debian/multiflexi*/usr/lib/multiflexi/*.php
 	sed -i -e 's/\.\.\/\.env/\/etc\/multiflexi\/\multiflexi\.env/g' debian/multiflex*/usr/lib/multiflexi/*.php
@@ -43,11 +42,3 @@ override_dh_install:
 	rm  debian/multiflexi/usr/lib/multiflexi/zabbixlldactions.php
 	sed -i "/require_once __DIR__/crequire_once '/var/lib/composer/multiflexi/autoload.php'; "               debian/multiflexi-api/usr/share/multiflexi/api/index.php
 	sed -i "/loadConfig/c\\\\\Ease\\\\Shared::singleton()->loadConfig('/etc/multiflexi/multiflexi.env', true);"    debian/multiflexi-api/usr/share/multiflexi/api/index.php
-	sed -i "20i require_once '/usr/share/php/Symfony/Component/Console/autoload.php';" debian/multiflexi/usr/lib/multiflexi/multiflexi-cli.php
-	sed -i "22i require_once '/usr/share/php/Symfony/Component/Console/autoload.php';" debian/multiflexi/usr/lib/multiflexi/cli.php
-	composer update
-	# Fix autoload include for multiflexi-cli.php only (precise replacement)
-	mkdir -p debian/multiflexi/usr/share/bash-completion/completions
-	cd cli; ./multiflexi-cli completion bash > ../debian/multiflexi/usr/share/bash-completion/completions/multiflexi-cli ; cd ..
-	mkdir -p debian/multiflexi/usr/share/zsh-completion/completions
-	cd cli; ./multiflexi-cli completion zsh > ../debian/multiflexi/usr/share/zsh-completion/completions/multiflexi-cli ; cd ..
