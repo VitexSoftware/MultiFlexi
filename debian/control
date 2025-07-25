@@ -18,8 +18,8 @@ Depends: ${misc:Depends},
  anacron, adduser (>= 3.11),
  php-cli,
  php-symfony-console
-Suggests: multiflexi-all
-Pre-Depends: multiflexi-database
+Suggests: multiflexi-all, multiflexi-cli, 
+Recommends: multiflexi-api
 Architecture: all
 Description: run several tools on defined abraflexi servers
  Define server, customers and its companies. Then specify
@@ -48,7 +48,8 @@ Description: Run MultiFlexi tasks in container
 
 Package: multiflexi-api
 Multi-Arch: foreign
-Depends: ${misc:Depends},multiflexi,php-vitexsoftware-multiflexi-server, php-yaml
+Pre-Depends: multiflexi-database
+Depends: ${misc:Depends}, php-vitexsoftware-multiflexi-server, php-yaml
 Architecture: all
 Description: API Server for MultiFlexi
  json/xml/yaml/html interface
