@@ -5254,12 +5254,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core.git",
-                "reference": "43959bd03d03065b6f96f6fbbd28f3380209519b"
+                "reference": "1d06e881bf6c1ccc18aeec7aa26100c02f26d866"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/43959bd03d03065b6f96f6fbbd28f3380209519b",
-                "reference": "43959bd03d03065b6f96f6fbbd28f3380209519b",
+                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/1d06e881bf6c1ccc18aeec7aa26100c02f26d866",
+                "reference": "1d06e881bf6c1ccc18aeec7aa26100c02f26d866",
                 "shasum": ""
             },
             "require": {
@@ -5296,7 +5296,7 @@
                 "issues": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/issues",
                 "source": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/tree/main"
             },
-            "time": "2025-07-24T21:51:25+00:00"
+            "time": "2025-07-24T23:00:26+00:00"
         },
         {
             "name": "ybelenko/openapi-data-mocker",
@@ -6882,12 +6882,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "80833f9382344d8830c8db60651bd466a57e693b"
+                "reference": "caef96e1292d5d715c0788a089db96775eeed527"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/80833f9382344d8830c8db60651bd466a57e693b",
-                "reference": "80833f9382344d8830c8db60651bd466a57e693b",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/caef96e1292d5d715c0788a089db96775eeed527",
+                "reference": "caef96e1292d5d715c0788a089db96775eeed527",
                 "shasum": ""
             },
             "require": {
@@ -6933,7 +6933,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-23T18:30:15+00:00"
+            "time": "2025-07-25T10:16:41+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -7616,12 +7616,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "493e76bfd6730499d1c5e5244ed8ce1f35d8ca30"
+                "reference": "14683e4914c7fdf69f2171c1037e26b09c4a27f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/493e76bfd6730499d1c5e5244ed8ce1f35d8ca30",
-                "reference": "493e76bfd6730499d1c5e5244ed8ce1f35d8ca30",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/14683e4914c7fdf69f2171c1037e26b09c4a27f5",
+                "reference": "14683e4914c7fdf69f2171c1037e26b09c4a27f5",
                 "shasum": ""
             },
             "require": {
@@ -7669,7 +7669,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-24T12:04:17+00:00"
+            "time": "2025-07-25T15:55:26+00:00"
         },
         {
             "name": "sebastian/cli-parser",
