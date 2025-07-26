@@ -10,6 +10,7 @@ Package: multiflexi
 Multi-Arch: foreign
 Depends: ${misc:Depends},
  locales-all,
+ multiflexi-common,
  php-vitexsoftware-multiflexi-core,
  php-vitexsoftware-ease-html-widgets (>=1.1.1),
  php-vitexsoftware-ease-bootstrap4-widgets (>=1.7),
@@ -17,7 +18,6 @@ Depends: ${misc:Depends},
  libjs-jquery-selectize.js,
  anacron, adduser (>= 3.11),
  php-cli,
- php-symfony-console
 Suggests: multiflexi-all, multiflexi-cli
 Recommends: multiflexi-api
 Pre-Depends: multiflexi-database
@@ -25,6 +25,14 @@ Architecture: all
 Description: run several tools on defined abraflexi servers
  Define server, customers and its companies. Then specify
  which services/commands run upon it.
+
+Package: multiflexi-common
+Multi-Arch: foreign
+Depends: ${misc:Depends}
+Suggests: multiflexi-cli, multiflexi-web
+Architecture: all
+Description: shared multiflexi configuration
+ Create MultiFlexi user and configuration
 
 Package: multiflexi-docker
 Multi-Arch: foreign
