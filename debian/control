@@ -56,7 +56,7 @@ Description: API Server for MultiFlexi
 
 Package: multiflexi-zabbix
 Multi-Arch: foreign
-Depends: ${misc:Depends},multiflexi
+Depends: ${misc:Depends},multiflexi-cli, multiflexi
 Recommends: zabbix-agent2
 Architecture: all
 Description: Zabbix support for MultiFlexi
