@@ -18,8 +18,9 @@ Depends: ${misc:Depends},
  anacron, adduser (>= 3.11),
  php-cli,
  php-symfony-console
-Suggests: multiflexi-all, multiflexi-cli, 
+Suggests: multiflexi-all, multiflexi-cli
 Recommends: multiflexi-api
+Pre-Depends: multiflexi-database
 Architecture: all
 Description: run several tools on defined abraflexi servers
  Define server, customers and its companies. Then specify
