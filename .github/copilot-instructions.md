@@ -39,12 +39,3 @@ When writing code, always ensure that it is well-tested and includes unit tests 
 When writing code, always ensure that it is maintainable and follows best practices.
 
 When create new class or update existing class, always create or update its phpunit test files.
-
-list, get, delete and create commands of multiflexi-cli should return a JSON response with the result of the operation when "--format json" is used.
-
-Always ensure that the tests/test-cli.sh file is kept up to date with the features provided by the "multiflexi-cli describe" command output.
-
-In the tests/test-cli.sh keep the delete action tests at very bottom of the file in separate section.
-
-Update the multiflexi-cli.rst and multiflexi-cli.1 files each time when the multiflexi-cli command features changes somehow
-
