@@ -7,23 +7,18 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-if [ -f /usr/share/dbconfig-common/dpkg/prerm ]; then
-    . /usr/share/dbconfig-common/dpkg/prerm
-    dbc_go multiflexi "$@"
-fi
-
 case "$1" in
     remove|upgrade|deconfigure|purge)
 
      if [ "$1" = "purge" ]; then
-         rm -f /etc/multiflexi/.env
+         rm -f /etc/multiflexi/multiflexi.env
          if which ucf >/dev/null 2>&1; then
-             ucf --purge /etc/multiflexi/.env
-             ucfr --purge /etc/multiflexi/.env
+             ucf --purge /etc/multiflexi/multiflexi.env
+             ucfr --purge /etc/multiflexi/multiflexi.env
          fi
      fi
 
-        rm -rf /usr/lib/multiflexi/composer.lock # /var/lib/multiflexi
+     rm -rf /usr/lib/multiflexi/composer.lock # /var/lib/multiflexi
     ;;
 
     failed-upgrade)

@@ -50,3 +50,5 @@ src/js/jquery.dataTables.js
 /debian/multiflexi-docker.debhelper.log
 /debian/multiflexi-docker.substvars
 !/composer.lock
+debian/multiflexi-common/
+debian/multiflexi-common.substvars
