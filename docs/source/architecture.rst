@@ -53,76 +53,10 @@ Project Relationships
 
 This modular architecture allows for flexible deployment, scaling, and maintenance of the MultiFlexi platform.
 
-.. raw:: html
+.. figure:: multiflexi-components.svg
+   :align: center
+   :width: 800px
+   :alt: MultiFlexi Components Relationship Diagram
 
-   <div style="text-align:center; margin-top:2em;">
-   <svg width="800" height="420" xmlns="http://www.w3.org/2000/svg">
-     <!-- Core -->
-     <rect x="340" y="20" width="120" height="40" rx="8" fill="#f9f9f9" stroke="#333"/>
-     <text x="400" y="45" font-size="14" text-anchor="middle" fill="#222">core</text>
-     <text x="400" y="60" font-size="10" text-anchor="middle" fill="#666">php-vitexsoftware-multiflexi-core</text>
-
-     <!-- Database -->
-     <rect x="340" y="80" width="120" height="40" rx="8" fill="#f9f9f9" stroke="#333"/>
-     <text x="400" y="105" font-size="14" text-anchor="middle" fill="#222">database</text>
-     <text x="400" y="120" font-size="10" text-anchor="middle" fill="#666">multiflexi-database</text>
-
-     <!-- CLI -->
-     <rect x="80" y="160" width="160" height="40" rx="8" fill="#e3f2fd" stroke="#333"/>
-     <text x="160" y="185" font-size="14" text-anchor="middle" fill="#222">CLI</text>
-     <text x="160" y="200" font-size="10" text-anchor="middle" fill="#666">multiflexi-cli</text>
-
-     <!-- Server -->
-     <rect x="340" y="160" width="120" height="40" rx="8" fill="#ffe0b2" stroke="#333"/>
-     <text x="400" y="185" font-size="14" text-anchor="middle" fill="#222">server</text>
-     <text x="400" y="200" font-size="10" text-anchor="middle" fill="#666">multiflexi-server</text>
-
-     <!-- Executor -->
-     <rect x="600" y="160" width="160" height="40" rx="8" fill="#c8e6c9" stroke="#333"/>
-     <text x="680" y="185" font-size="14" text-anchor="middle" fill="#222">executor</text>
-     <text x="680" y="200" font-size="10" text-anchor="middle" fill="#666">multiflexi-executor</text>
-
-     <!-- Ansible Collection -->
-     <rect x="80" y="320" width="220" height="40" rx="8" fill="#f3e5f5" stroke="#333"/>
-     <text x="190" y="345" font-size="14" text-anchor="middle" fill="#222">ansible-collection</text>
-     <text x="190" y="360" font-size="10" text-anchor="middle" fill="#666">multiflexi-ansible-collection</text>
-
-     <!-- All Meta -->
-     <rect x="500" y="320" width="220" height="40" rx="8" fill="#fff9c4" stroke="#333"/>
-     <text x="610" y="345" font-size="14" text-anchor="middle" fill="#222">all (meta-repo)</text>
-     <text x="610" y="360" font-size="10" text-anchor="middle" fill="#666">multiflexi-all</text>
-
-     <!-- Arrows -->
-     <!-- core to cli -->
-     <line x1="400" y1="60" x2="160" y2="160" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
-     <!-- core to server -->
-     <line x1="400" y1="60" x2="400" y2="160" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
-     <!-- core to executor -->
-     <line x1="400" y1="60" x2="680" y2="160" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
-     <!-- database to cli -->
-     <line x1="400" y1="120" x2="160" y2="160" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
-     <!-- database to server -->
-     <line x1="400" y1="120" x2="400" y2="160" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
-     <!-- database to executor -->
-     <line x1="400" y1="120" x2="680" y2="160" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
-     <!-- server to executor -->
-     <line x1="460" y1="180" x2="600" y2="180" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
-     <!-- ansible-collection to all -->
-     <line x1="300" y1="340" x2="500" y2="340" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
-     <!-- all to all components -->
-     <line x1="610" y1="320" x2="400" y2="60" stroke="#aaa" stroke-width="1" marker-end="url(#arrow)"/>
-     <line x1="610" y1="320" x2="400" y2="120" stroke="#aaa" stroke-width="1" marker-end="url(#arrow)"/>
-     <line x1="610" y1="320" x2="160" y2="160" stroke="#aaa" stroke-width="1" marker-end="url(#arrow)"/>
-     <line x1="610" y1="320" x2="400" y2="160" stroke="#aaa" stroke-width="1" marker-end="url(#arrow)"/>
-     <line x1="610" y1="320" x2="680" y2="160" stroke="#aaa" stroke-width="1" marker-end="url(#arrow)"/>
-
-     <defs>
-       <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto" markerUnits="strokeWidth">
-         <path d="M0,0 L10,5 L0,10 L2,5 Z" fill="#333" />
-       </marker>
-     </defs>
-   </svg>
-   <div style="color:#888; font-size:12px; margin-top:0.5em;">MultiFlexi project relationships schema</div>
-   </div>
-
+   MultiFlexi project relationships schema
 
