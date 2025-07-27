@@ -116,6 +116,7 @@ Contents
    commandline
    zabbix
    development
+   architecture
    apps_overview
    multiflexi-cli
 

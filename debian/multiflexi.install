@@ -9,20 +9,6 @@ src/images/*                              usr/share/multiflexi/images
 src/css/*				  usr/share/multiflexi/css
 debian/tmp/composer.json                  usr/lib/multiflexi
 src/MultiFlexi/*.php                      usr/lib/multiflexi/MultiFlexi/
-src/MultiFlexi/Env/*.php                  usr/lib/multiflexi/MultiFlexi/Env/
-src/MultiFlexi/Executor/Native.php        usr/lib/multiflexi/MultiFlexi/Executor
-src/MultiFlexi/CredentialType/*.php       usr/lib/multiflexi/MultiFlexi/CredentialType/
-
-src/MultiFlexi/Action/CustomCommand.php   usr/lib/multiflexi/MultiFlexi/Action
-#src/MultiFlexi/Action/Github.php          usr/lib/multiflexi/MultiFlexi/Action
-src/MultiFlexi/Action/Sleep.php           usr/lib/multiflexi/MultiFlexi/Action
-src/MultiFlexi/Action/WebHook.php          usr/lib/multiflexi/MultiFlexi/Action
-src/MultiFlexi/Action/LaunchJob.php       usr/lib/multiflexi/MultiFlexi/Action
-#src/MultiFlexi/Action/RedmineIssue.php    usr/lib/multiflexi/MultiFlexi/Action
-src/MultiFlexi/Action/Reschedule.php      usr/lib/multiflexi/MultiFlexi/Action
-src/MultiFlexi/Action/Stop.php            usr/lib/multiflexi/MultiFlexi/Action
-#src/MultiFlexi/Action/TriggerJenkins.php  usr/lib/multiflexi/MultiFlexi/Action
-
 
 src/MultiFlexi/Ui/*.php                   usr/lib/multiflexi/MultiFlexi/Ui/
 src/MultiFlexi/Ui/Form/configForm.php     usr/lib/multiflexi/MultiFlexi/Ui/Form/
@@ -37,8 +23,3 @@ multiflexi.svg                 usr/share/icons/hicolor/scalable/apps/
 i18n/cs_CZ/LC_MESSAGES/*.mo               usr/share/locale/cs_CZ/LC_MESSAGES/
 i18n/en_US/LC_MESSAGES/*.mo               usr/share/locale/en_US/LC_MESSAGES/
 tests/multiflexi_probe.multiflexi.app.json usr/share/multiflexi/
-
-src/MultiFlexi/Ui/Form/mServer.php     usr/lib/multiflexi/MultiFlexi/Ui/Form/
-src/MultiFlexi/Ui/Form/Office365.php   usr/lib/multiflexi/MultiFlexi/Ui/Form/
-src/MultiFlexi/Ui/Form/SQLServer.php   usr/lib/multiflexi/MultiFlexi/Ui/Form/
-src/MultiFlexi/Ui/Form/FioBank.php     usr/lib/multiflexi/MultiFlexi/Ui/Form/
