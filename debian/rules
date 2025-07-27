@@ -32,7 +32,6 @@ override_dh_install:
 	sed -i 's/css\/selectize/\/javascript\/selectize.js\/css\/selectize/' debian/multiflexi/usr/lib/multiflexi/MultiFlexi/Ui/DBDataTable.php
 	sed -i -e 's/\.\.\/i18n/\/usr\/share\/locale/g'            	     debian/multiflexi/usr/share/multiflexi/init.php
 	sed -i "s/'';/'$$(echo $${BUILD_NUMBER})';/"  src/MultiFlexi/Ui/PageBottom.php
-	rm  debian/multiflexi/usr/lib/multiflexi/MultiFlexi/ZabbixSender.php
 	rm  debian/multiflexi/usr/bin/multiflexi-zabbix-lld
 	rm  debian/multiflexi/usr/bin/multiflexi-zabbix-lld-company
 	rm  debian/multiflexi/usr/bin/multiflexi-zabbix-lld-tasks
@@ -42,3 +41,5 @@ override_dh_install:
 	rm  debian/multiflexi/usr/lib/multiflexi/zabbixlldactions.php
 	sed -i "/require_once __DIR__/crequire_once '/var/lib/composer/multiflexi/autoload.php'; "               debian/multiflexi-api/usr/share/multiflexi/api/index.php
 	sed -i "/loadConfig/c\\\\\Ease\\\\Shared::singleton()->loadConfig('/etc/multiflexi/multiflexi.env', true);"    debian/multiflexi-api/usr/share/multiflexi/api/index.php
+
+#	rm  debian/multiflexi/usr/lib/multiflexi/MultiFlexi/ZabbixSender.php
