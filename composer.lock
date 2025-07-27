@@ -72,12 +72,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/database.git",
-                "reference": "36599acf67c4416ccf7e009e69aaecc5e10ae75a"
+                "reference": "9e2ada4435d80b8a5284decf924160b854086d08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/database/zipball/36599acf67c4416ccf7e009e69aaecc5e10ae75a",
-                "reference": "36599acf67c4416ccf7e009e69aaecc5e10ae75a",
+                "url": "https://api.github.com/repos/cakephp/database/zipball/9e2ada4435d80b8a5284decf924160b854086d08",
+                "reference": "9e2ada4435d80b8a5284decf924160b854086d08",
                 "shasum": ""
             },
             "require": {
@@ -128,12 +128,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/datasource.git",
-                "reference": "073bb5f3b082b87c20309c1b25b1ac2a238d97b3"
+                "reference": "72a36edbf99a5364211ca0e081f878ba68eb2c99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/datasource/zipball/073bb5f3b082b87c20309c1b25b1ac2a238d97b3",
-                "reference": "073bb5f3b082b87c20309c1b25b1ac2a238d97b3",
+                "url": "https://api.github.com/repos/cakephp/datasource/zipball/72a36edbf99a5364211ca0e081f878ba68eb2c99",
+                "reference": "72a36edbf99a5364211ca0e081f878ba68eb2c99",
                 "shasum": ""
             },
             "require": {
@@ -5192,12 +5192,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core.git",
-                "reference": "1d06e881bf6c1ccc18aeec7aa26100c02f26d866"
+                "reference": "4c48d56197253e036f182a4794d82c52ea3d5a72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/1d06e881bf6c1ccc18aeec7aa26100c02f26d866",
-                "reference": "1d06e881bf6c1ccc18aeec7aa26100c02f26d866",
+                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/4c48d56197253e036f182a4794d82c52ea3d5a72",
+                "reference": "4c48d56197253e036f182a4794d82c52ea3d5a72",
                 "shasum": ""
             },
             "require": {
@@ -5217,7 +5217,11 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "MultiFlexi\\": "src/MultiFlexi/"
+                    "MultiFlexi\\": "src/MultiFlexi/",
+                    "MultiFlexi\\Env\\": "src/MultiFlexi/Env",
+                    "MultiFlexi\\Action\\": "src/MultiFlexi/Action",
+                    "MultiFlexi\\Zabbix\\": "src/MultiFlexi/Zabbix",
+                    "MultiFlexi\\CredentialType\\": "src/MultiFlexi/CredentialType"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -5234,7 +5238,7 @@
                 "issues": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/issues",
                 "source": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/tree/main"
             },
-            "time": "2025-07-24T23:00:26+00:00"
+            "time": "2025-07-27T17:35:57+00:00"
         },
         {
             "name": "ybelenko/openapi-data-mocker",
@@ -6639,16 +6643,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.5.0",
+            "version": "v5.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "ae59794362fe85e051a58ad36b289443f57be7a9"
+                "reference": "221b0d0fdf1369c71047ad1d18bb5880017bbc56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/ae59794362fe85e051a58ad36b289443f57be7a9",
-                "reference": "ae59794362fe85e051a58ad36b289443f57be7a9",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/221b0d0fdf1369c71047ad1d18bb5880017bbc56",
+                "reference": "221b0d0fdf1369c71047ad1d18bb5880017bbc56",
                 "shasum": ""
             },
             "require": {
@@ -6691,9 +6695,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.5.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.6.0"
             },
-            "time": "2025-05-31T08:24:38+00:00"
+            "time": "2025-07-27T20:03:57+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -6820,12 +6824,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "d81cb77c13eaa0fc8d92c0f1ab46ebcad81e83f2"
+                "reference": "8ae740cba5d5fc58580377d7059ab8cff607637f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d81cb77c13eaa0fc8d92c0f1ab46ebcad81e83f2",
-                "reference": "d81cb77c13eaa0fc8d92c0f1ab46ebcad81e83f2",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/8ae740cba5d5fc58580377d7059ab8cff607637f",
+                "reference": "8ae740cba5d5fc58580377d7059ab8cff607637f",
                 "shasum": ""
             },
             "require": {
@@ -6871,7 +6875,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-26T11:10:45+00:00"
+            "time": "2025-07-27T14:59:51+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -7554,12 +7558,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "b33f44b46e780754327865982d0bb7f65fe0f217"
+                "reference": "ee56c24e1df94c0aff83a9ce5a213c0377eeb8e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/b33f44b46e780754327865982d0bb7f65fe0f217",
-                "reference": "b33f44b46e780754327865982d0bb7f65fe0f217",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/ee56c24e1df94c0aff83a9ce5a213c0377eeb8e8",
+                "reference": "ee56c24e1df94c0aff83a9ce5a213c0377eeb8e8",
                 "shasum": ""
             },
             "require": {
@@ -7607,7 +7611,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-26T14:35:35+00:00"
+            "time": "2025-07-27T00:47:05+00:00"
         },
         {
             "name": "sebastian/cli-parser",
