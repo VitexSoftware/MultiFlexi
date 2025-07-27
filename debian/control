@@ -19,7 +19,7 @@ Depends: ${misc:Depends},
  anacron, adduser (>= 3.11),
  php-cli,
 Suggests: multiflexi-all, multiflexi-cli
-Recommends: multiflexi-api
+Recommends: multiflexi-api, multiflexi-executor
 Pre-Depends: multiflexi-database
 Architecture: all
 Description: run several tools on defined abraflexi servers
@@ -34,27 +34,6 @@ Architecture: all
 Description: shared multiflexi configuration
  Create MultiFlexi user and configuration
 
-Package: multiflexi-docker
-Multi-Arch: foreign
-Depends: ${misc:Depends},multiflexi, docker-ce-cli|docker.io
-Architecture: all
-Description: Run MultiFlexi tasks in container
- Run MultiFlexi tasks in Docker container
-
-#Package: multiflexi-podman
-#Multi-Arch: foreign
-#Depends: ${misc:Depends},multiflexi, podman
-#Architecture: all
-#Description: Run MultiFlexi tasks in container
-# Run MultiFlexi tasks in container
-
-#Package: multiflexi-kubernetes
-#Multi-Arch: foreign
-#Depends: ${misc:Depends},multiflexi, kubernetes-client
-#Architecture: all
-#Description: Run MultiFlexi tasks on Kubrnetes
-# Run MultiFlexi tasks in big corporation
-
 Package: multiflexi-api
 Multi-Arch: foreign
 Pre-Depends: multiflexi-database
@@ -65,18 +44,18 @@ Description: API Server for MultiFlexi
 
 Package: multiflexi-zabbix
 Multi-Arch: foreign
-Depends: ${misc:Depends},multiflexi-cli, multiflexi
+Depends: ${misc:Depends},multiflexi-executor
 Recommends: zabbix-agent2
 Architecture: all
 Description: Zabbix support for MultiFlexi
  LLD for configured content
 
-Package: multiflexi-abraflexi
-Multi-Arch: foreign
-Depends: ${misc:Depends},multiflexi, php-vitexsoftware-abraflexi-bricks,php-vitexsoftware-ease-bootstrap4-widgets-abraflexi
-Architecture: all
-Description: MultiFlexi support for AbraFlexi
- AbraFlexi Connection dialog
+#Package: multiflexi-abraflexi
+#Multi-Arch: foreign
+#Depends: ${misc:Depends},multiflexi, php-vitexsoftware-abraflexi-bricks,php-vitexsoftware-ease-bootstrap4-widgets-abraflexi
+#Architecture: all
+#Description: MultiFlexi support for AbraFlexi
+# AbraFlexi Connection dialog
 
 #Package: multiflexi-raiffeisenbank
 #Multi-Arch: foreign
