@@ -1,8 +1,10 @@
 zabbix/multiflexi.conf 				etc/zabbix/zabbix_agent2.d
-src/MultiFlexi/Zabbix/*.php             	usr/lib/multiflexi/MultiFlexi/Zabbix/
-src/MultiFlexi/Zabbix/Exception/*.php     	usr/lib/multiflexi/MultiFlexi/Zabbix/Exception/
-src/MultiFlexi/Zabbix/Request/*.php       	usr/lib/multiflexi/MultiFlexi/Zabbix/Request/
-src/MultiFlexi/Action/Zabbix.php		usr/lib/multiflexi/MultiFlexi/Action
+
+#moved to core:
+#src/MultiFlexi/Zabbix/*.php             	usr/lib/multiflexi/MultiFlexi/Zabbix/
+#src/MultiFlexi/Zabbix/Exception/*.php     	usr/lib/multiflexi/MultiFlexi/Zabbix/Exception/
+#src/MultiFlexi/Zabbix/Request/*.php       	usr/lib/multiflexi/MultiFlexi/Zabbix/Request/
+#src/MultiFlexi/Action/Zabbix.php		usr/lib/multiflexi/MultiFlexi/Action
 
 bin/multiflexi-zabbix-*                         usr/bin/
 lib/zabbix*.php                                 usr/lib/multiflexi
