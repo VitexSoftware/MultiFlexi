@@ -11,7 +11,6 @@ debian/tmp/composer.json                  usr/lib/multiflexi
 src/MultiFlexi/*.php                      usr/lib/multiflexi/MultiFlexi/
 
 src/MultiFlexi/Ui/*.php                   usr/lib/multiflexi/MultiFlexi/Ui/
-src/MultiFlexi/Ui/Form/configForm.php     usr/lib/multiflexi/MultiFlexi/Ui/Form/
 
 debian/conf/multiflexi.conf    		  etc/apache2/conf-available
 debian/conf/multiflexi.service 		  etc/avahi/services
