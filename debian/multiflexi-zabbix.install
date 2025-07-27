@@ -5,7 +5,7 @@ zabbix/multiflexi.conf 				etc/zabbix/zabbix_agent2.d
 #src/MultiFlexi/Zabbix/Exception/*.php     	usr/lib/multiflexi/MultiFlexi/Zabbix/Exception/
 #src/MultiFlexi/Zabbix/Request/*.php       	usr/lib/multiflexi/MultiFlexi/Zabbix/Request/
 #src/MultiFlexi/Action/Zabbix.php		usr/lib/multiflexi/MultiFlexi/Action
+#src/MultiFlexi/ZabbixSender.php                 usr/lib/multiflexi/MultiFlexi/
 
 bin/multiflexi-zabbix-*                         usr/bin/
 lib/zabbix*.php                                 usr/lib/multiflexi
-src/MultiFlexi/ZabbixSender.php                 usr/lib/multiflexi/MultiFlexi/
