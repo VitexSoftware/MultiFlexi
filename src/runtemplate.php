@@ -126,7 +126,7 @@ if (WebPage::singleton()->isPosted()) {
         // Spustit setup příkaz, pokud je nastaven
         $setupCommand = $app->getDataValue('setup');
 
-        if (!empty($setupCommand)) {
+        if (empty($setupCommand) === false) {
             $appEnvironment = $runTemplate->getEnvironment()->getEnvArray();
             $process = new \Symfony\Component\Process\Process(
                 explode(' ', $setupCommand),

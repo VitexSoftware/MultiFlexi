@@ -35,6 +35,16 @@ MultiFlexi features a layered architecture with:
 - **Configuration Management**: Environment-based configuration with type-safe field definitions
 - **Security Layer**: Authentication, authorization, and secure credential handling
 
+
+# Member Projects
+
+https://github.com/VitexSoftware/multiflexi-scheduler
+https://github.com/VitexSoftware/multiflexi-executor
+https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core
+https://github.com/VitexSoftware/multiflexi-cli
+https://github.com/VitexSoftware/multiflexi-database
+https://github.com/VitexSoftware/multiflexi-ansible-collection
+
 ## Environment Variables
 
 MultiFlexi automatically configures environment variables for executed applications:
