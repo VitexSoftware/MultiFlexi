@@ -1,27 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * MultiFlexi - 
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi\Ui;
 
 /**
- * Description of User
+ * Description of User.
  *
- * @author Vitex <info@vitexsoftware.cz> 
+ * @author Vitex <info@vitexsoftware.cz>
  */
-class User extends MultiFlexi\User implements \MultiFlexi\Ui\columns {
-
+class User extends MultiFlexi\User implements \MultiFlexi\Ui\columns
+{
     /**
      * @see https://datatables.net/examples/advanced_init/column_render.html
      *
      * @return string Column rendering
      */
-    public function columnDefs() {
+    public function columnDefs()
+    {
         return <<<'EOD'
 
 "columnDefs": [
