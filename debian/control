@@ -18,6 +18,7 @@ Depends: ${misc:Depends},
  libjs-jquery-selectize.js,
  anacron, adduser (>= 3.11),
  php-cli,
+Recommends: multiflexi-scheduler
 Suggests: multiflexi-all, multiflexi-cli, multiflexi-api, multiflexi-executor
 Pre-Depends: multiflexi-database
 Architecture: all

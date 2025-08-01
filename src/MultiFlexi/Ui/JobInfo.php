@@ -66,10 +66,10 @@ class JobInfo extends \Ease\Html\DivTag
         //        $scheduled = $scheduler->listingQuery()->where('job', $job->getMyKey())->fetch();
 
         $envTabs = new \Ease\TWB4\Tabs();
-        $envTabs->addTab(_('Overview'), new EnvironmentView($job->getEnv()));
+        $envTabs->addTab(_('Overview'), new EnvironmentView($job->getEnvironment()));
         $envTabs->addTab(_('export .env'), new JobDotEnv($job));
 
-        $jobTabs->addTab(_('Environment').' <span class="badge badge-info">'.\count($job->getEnv()->getEnvArray()).'</span>', [$jobInfoRow, $envTabs]);
+        $jobTabs->addTab(_('Environment').' <span class="badge badge-info">'.\count($job->getEnv()).'</span>', [$jobInfoRow, $envTabs]);
 
         $this->addItem($jobTabs);
     }
