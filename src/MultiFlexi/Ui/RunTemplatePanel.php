@@ -34,9 +34,11 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         $this->runtemplate = $runtemplate;
         $runtemplateId = $runtemplate->getMyKey();
         $runtemplateOptions = new \Ease\TWB4\Row();
-        $intervalChoosen = $runtemplate->getDataValue('interv') ?? 'n';
+        $intervalChoosen = $runtemplate->getDataValue('crontab') ?? 'n';
         $delayChoosen = (int) $runtemplate->getDataValue('delay');
         $intervalChooser = new \MultiFlexi\Ui\IntervalChooser($runtemplateId.'_interval', $intervalChoosen, ['id' => $runtemplateId.'_interval', 'checked' => 'true', 'data-runtemplate' => $runtemplateId]);
+        \MultiFlexi\Ui\CrontabInput::includeAssets();
+        $crontabInput = new \MultiFlexi\Ui\CrontabInput($runtemplateId.'_cron', $intervalChoosen, ['data-runtemplate' => $runtemplateId]);
 
         $delayChooser = new \MultiFlexi\Ui\DelayChooser($runtemplateId.'_delay', $delayChoosen, ['id' => $runtemplateId.'_delay', 'checked' => 'true', 'data-runtemplate' => $runtemplateId]);
         $executorChooser = new AppExecutorSelect($runtemplate->getApplication(), [], (string) $runtemplate->getDataValue('executor'), ['id' => $runtemplateId.'_executor', 'data-runtemplate' => $runtemplateId]);
@@ -53,7 +55,7 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
 
         $runtemplateJobs = new \MultiFlexi\Ui\RuntemplateJobsListing($runtemplate);
 
-        $runtemplateOptions->addColumn(4, [_('automatically schedule in an interval').': ', $intervalChooser, '<br/>', _('Startup delay'), $delayChooser, '<br/>', _('Executor'), $executorChooser]);
+        $runtemplateOptions->addColumn(4, [_('automatically schedule in an interval').': ', $crontabInput, $intervalChooser, '<br/>', _('Startup delay'), $delayChooser, '<br/>', _('Executor'), $executorChooser]);
         $nameInput = new \Ease\Html\ATag('#', $runtemplate->getRecordName(), ['class' => 'editable', 'style' => 'font-size: xxx-large;', 'id' => 'name', 'data-pk' => $runtemplate->getMyKey(), 'data-url' => 'runtemplatesave.php', 'data-title' => _('Update RunTemplate name')]);
 
         $runtemplateBottom = new \Ease\TWB4\Row();
@@ -79,7 +81,7 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         '</button>'
 
 EOD);
-        $this->addJavaScript("$('.editable').editable();", null, true);
+        $this->addJavaScript("$('.editable').editable();", '', true);
 
         $runtemplateTabs = new \Ease\TWB4\Tabs();
         $runtemplateTabs->addTab(_('Jobs'), [$runtemplateJobs, new RunTemplateJobsLastMonthChart($runtemplate)]);
@@ -100,23 +102,23 @@ $('#
 EOD.$this->runtemplate->getMyKey().<<<'EOD'
 _interval').change( function(event, state) {
 
-$.ajax({
-   url: 'rtinterval.php',
+    $.ajax({
+        url: 'rtinterval.php',
         data: {
-                runtemplate: $(this).attr("data-runtemplate"),
+            runtemplate: $(this).attr("data-runtemplate"),
                 interval: $(this).val()
         },
         error: function() {
             $('#
 EOD.$this->runtemplate->getMyKey().<<<'EOD'
-_interval').after( "⚰️" );
+_cron').after( "⚰️" );
             console.log("not saved");
         },
 
         success: function(data) {
             $('#
 EOD.$this->runtemplate->getMyKey().<<<'EOD'
-_interval').after( "💾" );
+_cron').after( "💾" );
             console.log("saved");
         },
             type: 'POST'
@@ -124,7 +126,8 @@ _interval').after( "💾" );
 });
 
 EOD);
-
+        
+        
         $this->addJavaScript(<<<'EOD'
 
 $('#

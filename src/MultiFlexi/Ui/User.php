@@ -20,7 +20,7 @@ namespace MultiFlexi\Ui;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class User extends MultiFlexi\User implements \MultiFlexi\Ui\columns
+class User extends \MultiFlexi\User implements \MultiFlexi\Ui\columns
 {
     /**
      * @see https://datatables.net/examples/advanced_init/column_render.html

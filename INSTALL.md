@@ -11,7 +11,7 @@ echo "deb http://repo.vitexsoftware.com $(lsb_release -sc) main" | sudo tee /etc
 sudo wget -O /etc/apt/trusted.gpg.d/vitexsoftware.gpg http://repo.vitexsoftware.cz/keyring.gpg
 sudo apt update
 sudo apt install libapache2-mod-php # easy & preconfigured
-sudo apt install multiflexi-DATABASE
+sudo apt install multiflexi-DATABASE multiflexi
 ```
 
 k dispozici jsou tyto databázové adaptéry: **multiflexi-mysql**, **multiflexi-pgsql** a **multiflexi-sqlite**

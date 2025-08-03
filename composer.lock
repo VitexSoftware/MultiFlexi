@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "215a74889a726506635a94c4b6dfec46",
+    "content-hash": "1c722ec8254c3d1c26472042b58ec388",
     "packages": [
         {
             "name": "cakephp/core",
@@ -408,71 +408,6 @@
                 "source": "https://github.com/DataTables/DataTablesSrc/"
             },
             "time": "2020-05-21T10:08:44+00:00"
-        },
-        {
-            "name": "dragonmantank/cron-expression",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dragonmantank/cron-expression.git",
-                "reference": "f37e405332cd1cca9d287f5044ae2a72c2f53239"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dragonmantank/cron-expression/zipball/f37e405332cd1cca9d287f5044ae2a72c2f53239",
-                "reference": "f37e405332cd1cca9d287f5044ae2a72c2f53239",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2|^8.0"
-            },
-            "replace": {
-                "mtdowling/cron-expression": "^1.0"
-            },
-            "require-dev": {
-                "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^1.0",
-                "phpunit/phpunit": "^7.0|^8.0|^9.0"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Cron\\": "src/Cron/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Chris Tankersley",
-                    "email": "chris@ctankersley.com",
-                    "homepage": "https://github.com/dragonmantank"
-                }
-            ],
-            "description": "CRON for PHP: Calculate the next or previous run date and determine if a CRON expression is due",
-            "keywords": [
-                "cron",
-                "schedule"
-            ],
-            "support": {
-                "issues": "https://github.com/dragonmantank/cron-expression/issues",
-                "source": "https://github.com/dragonmantank/cron-expression/tree/master"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/dragonmantank",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-10-21T12:57:55+00:00"
         },
         {
             "name": "dyorg/slim-token-authentication",
@@ -3967,6 +3902,10 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
@@ -4128,6 +4067,10 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
@@ -4210,6 +4153,10 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
@@ -4288,6 +4235,10 @@
                 },
                 {
                     "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
                     "type": "github"
                 },
                 {
@@ -4876,12 +4827,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-ease-fluentpdo.git",
-                "reference": "bfeaa5a92b7445cd89f655ebf338e342412d96cf"
+                "reference": "db1e8841bd0cedac80f0ce2e1f181fef1782e9dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-fluentpdo/zipball/bfeaa5a92b7445cd89f655ebf338e342412d96cf",
-                "reference": "bfeaa5a92b7445cd89f655ebf338e342412d96cf",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-fluentpdo/zipball/db1e8841bd0cedac80f0ce2e1f181fef1782e9dc",
+                "reference": "db1e8841bd0cedac80f0ce2e1f181fef1782e9dc",
                 "shasum": ""
             },
             "require": {
@@ -4929,7 +4880,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2025-05-27T14:51:51+00:00"
+            "time": "2025-08-02T15:23:39+00:00"
         },
         {
             "name": "vitexsoftware/ease-html",
@@ -5204,12 +5155,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core.git",
-                "reference": "3930644f81eddc7542ffd039bf3685e39b2ed369"
+                "reference": "9f327a2694a2505dc6960de3caa1d9827df92a8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/3930644f81eddc7542ffd039bf3685e39b2ed369",
-                "reference": "3930644f81eddc7542ffd039bf3685e39b2ed369",
+                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/9f327a2694a2505dc6960de3caa1d9827df92a8b",
+                "reference": "9f327a2694a2505dc6960de3caa1d9827df92a8b",
                 "shasum": ""
             },
             "require": {
@@ -5251,7 +5202,7 @@
                 "issues": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/issues",
                 "source": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/tree/main"
             },
-            "time": "2025-08-01T20:42:40+00:00"
+            "time": "2025-08-03T17:13:14+00:00"
         },
         {
             "name": "ybelenko/openapi-data-mocker",
@@ -7337,12 +7288,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a42536d933314117d45857b13c379e0c22ee932b"
+                "reference": "dc5b5bea38726712d89ae286f96962f597a3d2a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a42536d933314117d45857b13c379e0c22ee932b",
-                "reference": "a42536d933314117d45857b13c379e0c22ee932b",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/dc5b5bea38726712d89ae286f96962f597a3d2a8",
+                "reference": "dc5b5bea38726712d89ae286f96962f597a3d2a8",
                 "shasum": ""
             },
             "require": {
@@ -7435,7 +7386,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-01T08:21:22+00:00"
+            "time": "2025-08-03T07:30:43+00:00"
         },
         {
             "name": "psr/event-dispatcher",
@@ -9028,6 +8979,10 @@
                 },
                 {
                     "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
                     "type": "github"
                 },
                 {
