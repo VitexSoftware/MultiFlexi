@@ -41,7 +41,7 @@ class MainMenu extends \Ease\Html\DivTag
 
         if (\Ease\Shared::user()->isLogged()) { // Authenticated user
             $oPage = WebPage::singleton();
-            $servers = $this->getMenuList(new \MultiFlexi\Servers());
+
             $customers = $this->getMenuList(new \MultiFlexi\Customer(), null, WebPage::singleton()->customer);
             $companies = $this->getMenuList(new \MultiFlexi\Company(), 'logo');
             $apps = $this->getMenuList(new \MultiFlexi\Application(), 'image');
