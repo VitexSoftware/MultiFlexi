@@ -41,11 +41,10 @@ class MainMenu extends \Ease\Html\DivTag
 
         if (\Ease\Shared::user()->isLogged()) { // Authenticated user
             $oPage = WebPage::singleton();
-
             $customers = $this->getMenuList(new \MultiFlexi\Customer(), null, WebPage::singleton()->customer);
             $companies = $this->getMenuList(new \MultiFlexi\Company(), 'logo');
             $apps = $this->getMenuList(new \MultiFlexi\Application(), 'image');
-            $this->credentialsMenuEnabled($nav, $servers);
+            $this->credentialsMenuEnabled($nav);
 
             if (empty($companies)) {
                 \MultiFlexi\User::singleton()->addStatusMessage('🏭 '._('No company registered yet. Please register one.'), 'warning');
@@ -55,12 +54,12 @@ class MainMenu extends \Ease\Html\DivTag
                 //                $this->customersMenuDisabled($nav);
                 $this->companiesMenuDisabled($nav);
             } else {
-                if (\count($servers) && empty($customers) && empty($companies)) {
+                if (empty($customers) && empty($companies)) {
                     //                    $this->customersMenuEnabled($nav, $customers);
                     $this->companiesMenuDisabled($nav);
                     \MultiFlexi\User::singleton()->addStatusMessage(_('No customer registered yet. Please register one.'), 'warning');
                 } else {
-                    if (\count($servers) && \count($customers) && empty($companies)) {
+                    if (\count($customers) && empty($companies)) {
                         \MultiFlexi\User::singleton()->addStatusMessage(_('No company registered yet. Please register one.'), 'warning');
                         $this->customersMenuEnabled($nav, $customers);
                         $nav->addMenuItem(new \Ease\TWB4\LinkButton('companysetup.php', '🏭 '._('Companies'), 'warning'), 'right');
@@ -121,23 +120,13 @@ class MainMenu extends \Ease\Html\DivTag
     /**
      * Credential menu.
      *
-     * @param \Ease\Html\NavTag     $nav
-     * @param array<string, string> $credentials
+     * @param \Ease\Html\NavTag $nav
      */
-    public function credentialsMenuEnabled($nav, $credentials): void
+    public function credentialsMenuEnabled($nav): void
     {
         $credentialsMenu = ['credential.php' => '🔏 '._('Register new Credential')];
         $credentialsMenu['credentialtype.php'] = '🔒 '._('Register new Credential Type');
         $credentialsMenu['credentialtypes.php'] = '🔒 '._('Credential types listing');
-
-        if (!empty($credentials)) {
-            $credentialsMenu['credentials.php'] = '🔐 '._('Credentials listing');
-        }
-
-        $nav->addDropDownMenu(
-            '<img width=30 src=images/vault.svg> '._('Credentials'),
-            array_merge($credentialsMenu, ['' => ''], $credentials),
-        );
     }
 
     /**

@@ -126,8 +126,7 @@ _cron').after( "💾" );
 });
 
 EOD);
-        
-        
+
         $this->addJavaScript(<<<'EOD'
 
 $('#
