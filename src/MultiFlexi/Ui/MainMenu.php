@@ -83,12 +83,12 @@ class MainMenu extends \Ease\Html\DivTag
             $nav->addDropDownMenu('<img height=30 src=images/log.svg> '._('Logs'), ['logs.php' => _('System'), 'joblist.php' => _('Jobs')]);
             $nav->addMenuItem(new \Ease\Html\ATag('logout.php', '<img height=30 src=images/application-exit.svg> '._('Sign Off')), 'right');
 
-            if (\MultiFlexi\Runner::isServiceActive('multiflexi.service') === false) {
-                WebPage::singleton()->addStatusMessage(_('MultiFlexi systemd service is not running. Consider `systemctl start multiflexi`'), 'warning');
+            if (\MultiFlexi\Runner::isServiceActive('multiflexi-scheduler.service') === false) {
+                WebPage::singleton()->addStatusMessage(_('My Scheduler systemd service is not running. Consider `systemctl start multiflexi-scheduler`'), 'warning');
             }
 
-            if (\MultiFlexi\Runner::isServiceActive('anacron.timer') === false) {
-                WebPage::singleton()->addStatusMessage(_('Periodic Task Launcher systemd service is not running. Consider `systemctl enable anacron`'), 'warning');
+            if (\MultiFlexi\Runner::isServiceActive('multiflexi-executor.service') === false) {
+                WebPage::singleton()->addStatusMessage(_('My Task Launcher systemd service is not running. Consider `systemctl enable multiflexi-executor`'), 'warning');
             }
 
             $nav->addItem($this->searchFrom());
