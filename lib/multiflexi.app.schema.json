@@ -5,25 +5,77 @@
   "type": "object",
   "properties": {
     "image": { "type": "string" },
-    "name": { "type": "string" },
-    "description": { "type": "string" },
+    "name": { 
+      "type": "string",
+      "description": "The name of the application.",
+      "minLength": 1
+    },
+    "description": { 
+      "type": "string",
+      "description": "A brief description of the application.",
+      "optional": true
+    },
     "executable": { "type": "string" },
-    "setup": { "type": "string" },
+    "setup": {
+      "type": "string",
+      "description": "Optional setup command or script to be executed when the configuration is applied.",
+      "default": "",
+      "optional": true
+    },
     "cmdparams": { "type": "string" },
     "deploy": { "type": "string" },
-    "homepage": { "type": "string" },
-    "ociimage": { "type": "string" },
-    "uuid": { "type": "string" },
-    "topics": { "type": "string" },
-    "requirements": { "type": "string" },
-    "version": { "type": "string" },
-    "multiflexi": { "type": "string" },
+    "package": {
+      "type": "string",
+      "description": "Optional name of the installation package.",
+      "optional": true
+    },
+    "homepage": {
+      "type": "string",
+      "description": "URL of the application's homepage."
+    },
+    "ociimage": { 
+      "type": "string",
+      "description": "OCI image reference for the application.",
+      "default": "",
+      "examples": ["docker.io/library/nginx:latest"],
+      "optional": true
+    },
+    "uuid": {
+      "type": "string",
+      "description": "Universally unique identifier for the application."
+    },
+    "topics": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of topics related to the application."
+    },
+    "requirements": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of requirements needed by the application."
+    },
+    "version": {
+      "type": "string",
+      "description": "The version of the application.",
+      "minLength": 1
+    },
+    "multiflexi": {
+      "type": "string",
+      "description": "Minimal required MultiFlexi version for running this application.",
+      "minLength": 1,
+      "optional": true
+    },
     "artifacts": {
       "type": "object",
       "properties": {
         "pattern": {
           "type": "string",
           "description": "Regular expression to match artifact files produced by the application. MultiFlexi will look for these files after the application run."
+        },
+        "presence": {
+          "type": "string",
+          "enum": ["optional", "granted"],
+          "description": "Specifies whether the artifact presence is optional or granted."
         }
       },
       "required": ["pattern"],
