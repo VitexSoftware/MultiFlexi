@@ -1,5 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "version": "2.0.0",
   "title": "MultiFlexi App Definition",
   "type": "object",
   "properties": {
@@ -17,6 +18,17 @@
     "requirements": { "type": "string" },
     "version": { "type": "string" },
     "multiflexi": { "type": "string" },
+    "artifacts": {
+      "type": "object",
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "description": "Regular expression to match artifact files produced by the application. MultiFlexi will look for these files after the application run."
+        }
+      },
+      "required": ["pattern"],
+      "additionalProperties": false
+    },
     "environment": {
       "type": "object",
       "patternProperties": {
