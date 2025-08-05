@@ -4,7 +4,7 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-APPLICATION=`echo $DPKG_MAINTSCRIPT_PACKAGE | sed 's/multiflexi-//'`
+APPLICATION=multiflexi-probe
 for file in `ls /usr/lib/$APPLICATION/multiflexi/*.json`
 do
 	multiflexi-json2app $file
