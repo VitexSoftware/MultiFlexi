@@ -98,8 +98,6 @@ abort-upgrade | abort-remove | abort-deconfigure) ;;
 esac
 
 
-# TODO: multiflexi-json2app /usr/share/multiflexi/multiflexi_probe.multiflexi.app.json
-
 #DEBHELPER#
 
 exit 0

@@ -53,3 +53,6 @@ src/js/jquery.dataTables.js
 debian/multiflexi-common/
 debian/multiflexi-common.substvars
 debian/multiflexi-common.debhelper.log
+debian/multiflexi-probe/
+debian/multiflexi-probe.substvars
+debian/multiflexi-probe.debhelper.log

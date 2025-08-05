@@ -64,6 +64,13 @@ Description: Zabbix support for MultiFlexi
 #Description: MultiFlexi support for RaiffeisenBank
 # RaiffeisenBank connection dialog
 
+Package: multiflexi-probe
+Multi-Arch: foreign
+Architecture: all
+Depends: multiflexi
+Description: MultiFlexi probe tool
+ Add Special debugging application to your MultiFlexi
+
 #Package: multiflexi-dev
 #Depends: multiflexi,jq
 #Architecture: all
