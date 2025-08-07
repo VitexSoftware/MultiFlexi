@@ -6,16 +6,16 @@ src/assets/Buttons-1.5.6/js/*             usr/share/multiflexi/assets/Buttons-1.
 src/assets/Buttons-1.5.6/css/*            usr/share/multiflexi/assets/Buttons-1.5.6/css/
 src/assets/Buttons-1.5.6/swf/*            usr/share/multiflexi/assets/Buttons-1.5.6/swf/
 src/images/*                              usr/share/multiflexi/images
-src/css/*				  usr/share/multiflexi/css
+src/css/*				                  usr/share/multiflexi/css
 debian/tmp/composer.json                  usr/lib/multiflexi
-#src/MultiFlexi/*.php                      usr/lib/multiflexi/MultiFlexi/
+#src/MultiFlexi/*.php                     usr/lib/multiflexi/MultiFlexi/
 
 src/MultiFlexi/Ui/*.php                   usr/lib/multiflexi/MultiFlexi/Ui/
 
-debian/conf/multiflexi.conf    		  etc/apache2/conf-available
-debian/conf/multiflexi.service 		  etc/avahi/services
-bin/*					  usr/bin
-lib/*					  usr/lib/multiflexi
+debian/conf/multiflexi.conf    		      etc/apache2/conf-available
+debian/conf/multiflexi.service 		      etc/avahi/services
+bin/*					                  usr/bin
+lib/*.php		                       	  usr/lib/multiflexi
 debian/com.vitexsoftware.multiflexi.metainfo.xml    usr/share/metainfo/
 debian/com.vitexsoftware.multiflexi.desktop         usr/share/applications/
 multiflexi.svg                 			usr/share/icons/hicolor/scalable/apps/
