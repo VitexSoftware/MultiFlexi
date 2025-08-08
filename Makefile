@@ -29,7 +29,7 @@ clean:
 
 .PHONY: probeapp
 probeapp: ## Run database seeds
-	cd src ; ../vendor/bin/phinx seed:run -c ../phinx-adapter.php -s MultiFlexiProbeApp ; cd ..
+	multiflexi-cli application import-json --json tests/multiflexi_probe.multiflexi.app.json
 
 .PHONY: autoload
 autoload: ## Run composer autoload
