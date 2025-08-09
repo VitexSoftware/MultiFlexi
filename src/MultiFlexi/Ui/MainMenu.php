@@ -88,7 +88,7 @@ class MainMenu extends \Ease\Html\DivTag
             }
 
             if (\MultiFlexi\Runner::isServiceActive('multiflexi-executor.service') === false) {
-                WebPage::singleton()->addStatusMessage(_('My Task Launcher systemd service is not running. Consider `systemctl enable multiflexi-executor`'), 'warning');
+                WebPage::singleton()->addStatusMessage(_('My Task Launcher systemd service is not running. Consider `systemctl start multiflexi-executor`'), 'warning');
             }
 
             $nav->addItem($this->searchFrom());
