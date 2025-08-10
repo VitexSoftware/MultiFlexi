@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1c722ec8254c3d1c26472042b58ec388",
+    "content-hash": "461f799eac4a8f0e5e35562626bc3696",
     "packages": [
         {
             "name": "cakephp/core",
@@ -3195,29 +3195,25 @@
         },
         {
             "name": "sensiolabs/ansi-to-html",
-            "version": "v1.3.0",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/ansi-to-html.git",
-                "reference": "7a6c16623c02bdbcbe907ab2abcf465ebb31db72"
+                "reference": "44f73c0e8cc24dd4e8555cac356d2331d9400c59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/ansi-to-html/zipball/7a6c16623c02bdbcbe907ab2abcf465ebb31db72",
-                "reference": "7a6c16623c02bdbcbe907ab2abcf465ebb31db72",
+                "url": "https://api.github.com/repos/sensiolabs/ansi-to-html/zipball/44f73c0e8cc24dd4e8555cac356d2331d9400c59",
+                "reference": "44f73c0e8cc24dd4e8555cac356d2331d9400c59",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2.5"
-            },
-            "conflict": {
-                "twig/twig": "< 2.4.0"
+                "php": ">=8.0"
             },
             "require-dev": {
-                "twig/twig": "^2.4 || ^3.0"
-            },
-            "suggest": {
-                "twig/twig": "Provides nice templating features"
+                "phpstan/phpstan": "^2.0",
+                "phpunit/phpunit": "^11.4",
+                "twig/twig": "^3.0"
             },
             "type": "library",
             "autoload": {
@@ -3238,9 +3234,9 @@
             "description": "A library to convert a text with ANSI codes to HTML",
             "support": {
                 "issues": "https://github.com/sensiolabs/ansi-to-html/issues",
-                "source": "https://github.com/sensiolabs/ansi-to-html/tree/v1.3.0"
+                "source": "https://github.com/sensiolabs/ansi-to-html/tree/v2.0.0"
             },
-            "time": "2024-11-25T09:31:54+00:00"
+            "time": "2025-03-15T17:19:40+00:00"
         },
         {
             "name": "slim/psr7",
