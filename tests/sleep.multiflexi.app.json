@@ -6,11 +6,11 @@
     "cmdparams": "{NUMBER}{UNIT}",
     "deploy": "apt install coreutils",
     "homepage": "https://multiflexi.eu/",
-    "requirements": "",
+    "requirements": [],
     "ociimage": "",
     "code": "SLEEP",
     "uuid": "4da1bd98-a90d-4a37-8992-b2da68349d96",
-    "topics": "wait,sleep",
+    "topics": ["wait", "sleep"],
     "environment": {
         "NUMBER": {
             "type": "number",
