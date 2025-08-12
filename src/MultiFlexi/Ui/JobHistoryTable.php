@@ -97,7 +97,7 @@ class JobHistoryTable extends \Ease\TWB4\Table
                 new ExecutorImage($job['executor'], ['align' => 'right', 'height' => '50px']),
                 new \Ease\Html\DivTag($job['launched_by'] ? new \Ease\Html\ATag('user.php?id='.$job['launched_by'], new \Ease\TWB4\Badge('info', $job['login'])) : _('Timer')),
                 new \Ease\Html\DivTag($job['schedule']),
-                new \Ease\Html\DivTag($job['executor']),
+                new \Ease\Html\DivTag($job['executor'].' '.$job['schedule_type']),
             ];
             unset($job['executor'], $job['login'], $job['schedule']);
 
