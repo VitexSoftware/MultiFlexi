@@ -91,12 +91,17 @@ class CredentialForm extends Form
             }
         }
 
+        $formContents[] = new InputHiddenTag('id', (string) ($kredenc->getMyKey() ?? ''));
+
+        $submitRow = new Row();
+        $submitRow->addColumn(6, new SubmitButton('🍏 '._('Apply'), 'primary btn-lg btn-block'));
+
         if (null !== $kredenc->getMyKey()) {
             $rtplcr = new RunTplCreds();
             $runtlUsing = $rtplcr->getRuntemplatesForCredential($kredenc->getMyKey())->select(['runtemplate.name', 'company_id', 'app_id'])->leftJoin('runtemplate ON runtemplate.id = runtplcreds.runtemplate_id')->fetchAll();
 
             if ($runtlUsing) {
-                $formContents[] = new DivTag(_('Used by').'('.\count($runtlUsing).')');
+                $usedByRuntemplates = new DivTag(_('Used by').'('.\count($runtlUsing).')');
 
                 $jobber = new Job();
 
@@ -112,17 +117,18 @@ class CredentialForm extends Form
                         $companyAppStatus = new Badge('disabled', '🪤', ['style' => 'font-size: 1.0em; font-family: monospace;']);
                     }
 
-                    $runtemplatesDiv->addItem(new SpanTag([new ATag('runtemplate.php?id='.$runtemplateData['runtemplate_id'], '⚗️#'.$runtemplateData['runtemplate_id'], ['class' => 'btn btn-inverse btn-sm', 'title' => $runtemplateData['name']]), $companyAppStatus], ['class' => 'btn-group', 'role' => 'group']));
+                    $runtemplatesDiv->addItem(new DivTag([new ATag('runtemplate.php?id='.$runtemplateData['runtemplate_id'], '⚗ ️#'.$runtemplateData['runtemplate_id'].'&nbsp;'.$runtemplateData['name'], ['class' => 'btn-sm', 'title' => $runtemplateData['name']]), $companyAppStatus], ['class' => 'btn-group', 'role' => 'group']));
                 }
 
-                $formContents[] = $runtemplatesDiv;
+                $usedByRuntemplates->addItem($runtemplatesDiv);
+
+                $submitRow->addColumn(4, $usedByRuntemplates);
+            } else {
+                $submitRow->addColumn(4, _('Unused by any runtemplate'));
             }
+        } else {
+            $submitRow->addColumn(4, _('Unsaved yet'));
         }
-
-        $formContents[] = new InputHiddenTag('id', (string) ($kredenc->getMyKey() ?? ''));
-
-        $submitRow = new Row();
-        $submitRow->addColumn(10, new SubmitButton('🍏 '._('Apply'), 'primary btn-lg btn-block'));
 
         if (null === $kredenc->getMyKey()) {
             $submitRow->addColumn(2, new SubmitButton('⚰️ '._('Remove').' !', 'disabled btn-lg btn-block', ['disabled' => 'true']));

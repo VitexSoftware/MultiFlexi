@@ -27,8 +27,9 @@ $delete = WebPage::getRequestValue('delete', 'int');
 
 if (null !== $delete) {
     $kredenc->loadFromSQL($delete);
-    $cnf = new \MultiFlexi\Configuration();
-    $kredenc->addStatusMessage(sprintf(_('%d used configurations removed'), $cnf->deleteFromSQL(['app_id' => $appId, 'name' => $kredenc->getDataValue('keyname')])));
+
+    $deleted = (new \MultiFlexi\RunTplCreds())->deleteFromSQL(['credentials_id' => $delete]);
+    $kredenc->addStatusMessage(_('%s runtemplates affected'), $deleted ? 'warning' : 'info');
 
     if ($kredenc->deleteFromSQL($delete)) {
         $kredenc->addStatusMessage(_('Credential removed'));
