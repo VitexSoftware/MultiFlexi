@@ -19,11 +19,14 @@ use Ease\Shared;
 use MultiFlexi\Ui\WebPage;
 
 require_once '../vendor/autoload.php';
-session_start();
+
 Shared::init(
     ['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'],
     \dirname(__DIR__).'/.env',
 );
+
+session_start();
+
 \Ease\Locale::singleton(null, '../i18n', 'multiflexi');
 $loggers = ['syslog', '\MultiFlexi\LogToSQL'];
 
