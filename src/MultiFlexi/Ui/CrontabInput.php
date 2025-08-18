@@ -40,7 +40,13 @@ class CrontabInput extends \Ease\Html\PairTag
      */
     public function __construct(string $name, string $value = '', array $attributes = [])
     {
-        parent::__construct('cron-expression-input', ['color' => 'd58512', 'value' => $value]);
+        $attributes['name'] = $name;
+        $attributes['id'] = $name;
+        $attributes['value'] = $value;
+//        $attributes['class'] = 'form-control';
+        $attributes['color'] = 'd58512';
+        $attributes['data-cron-expression-input'] = 'true';
+        parent::__construct('cron-expression-input', $attributes);
     }
 
     /**

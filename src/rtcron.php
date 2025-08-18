@@ -20,16 +20,16 @@ require_once './init.php';
 WebPage::singleton()->onlyForLogged();
 
 $runtemplate_id = \Ease\TWB4\WebPage::getRequestValue('runtemplate', 'int');
-$interval = \Ease\TWB4\WebPage::getRequestValue('interval');
-$state = $interval !== 'n';
+$cron = \Ease\TWB4\WebPage::getRequestValue('cron');
+$state = $cron !== '';
 
 $result = false;
 
 if (null !== $runtemplate_id) {
     $switcher = new \MultiFlexi\RunTemplate();
-    $switcher->setData(['id' => $runtemplate_id, 'interv' => $interval]);
+    $switcher->setData(['id' => $runtemplate_id, 'cron' => $cron]);
     if($state){
-        $switcher->setDataValue('cron', '');
+        $switcher->setDataValue('interv', 'n');
     }
     http_response_code($switcher->setState($state) ? 201 : 400);
 } else {
