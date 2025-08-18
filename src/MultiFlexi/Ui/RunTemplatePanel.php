@@ -57,7 +57,7 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
 
         $runtemplateJobs = new \MultiFlexi\Ui\RuntemplateJobsListing($runtemplate);
 
-        $runtemplateOptions->addColumn(4, [_('automatically schedule in an interval').': ', $crontabInput, $intervalChooser, '<br/>', _('Startup delay'), $delayChooser, '<br/>', _('Executor'), $executorChooser]);
+        $runtemplateOptions->addColumn(4, [_('automatically schedule in an interval').': ', $crontabInput,'<br/>', $intervalChooser, '<br/>', _('Startup delay'), $delayChooser, '<br/>', _('Executor'), $executorChooser]);
         $nameInput = new \Ease\Html\ATag('#', $runtemplate->getRecordName(), ['class' => 'editable', 'style' => 'font-size: xxx-large;', 'id' => 'name', 'data-pk' => $runtemplate->getMyKey(), 'data-url' => 'runtemplatesave.php', 'data-title' => _('Update RunTemplate name')]);
 
         $runtemplateBottom = new \Ease\TWB4\Row();
@@ -215,6 +215,40 @@ $.ajax({
 });
 
 EOD);
+
+        $this->addJavaScript(<<<'EOD'
+
+
+$('#
+EOD.$this->runtemplate->getMyKey().<<<'EOD'
+_cron').change( function(event, state) {
+    
+    $.ajax({
+        url: 'rtcron.php',
+        data: {
+            runtemplate: $(this).attr("data-runtemplate"),
+                cron: $(".cronInsideInput").val()
+        },
+        error: function() {
+            $('#
+EOD.$this->runtemplate->getMyKey().<<<'EOD'
+_cron').after( "⚰️" );
+            console.log("not saved");
+        },
+
+        success: function(data) {
+            $('#
+EOD.$this->runtemplate->getMyKey().<<<'EOD'
+_cron').after( "💾" );
+            console.log("saved");
+        },
+            type: 'POST'
+        });
+});
+
+EOD);
+
+
 
         parent::finalize();
     }
