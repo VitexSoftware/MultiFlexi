@@ -34,11 +34,12 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         $this->runtemplate = $runtemplate;
         $runtemplateId = $runtemplate->getMyKey();
         $runtemplateOptions = new \Ease\TWB4\Row();
-        $intervalChoosen = $runtemplate->getDataValue('crontab') ?? 'n';
+        $intervalChoosen = $runtemplate->getDataValue('interv') ?? 'n';
+        $crontab = $runtemplate->getDataValue('cron') ?? '';
         $delayChoosen = (int) $runtemplate->getDataValue('delay');
         $intervalChooser = new \MultiFlexi\Ui\IntervalChooser($runtemplateId.'_interval', $intervalChoosen, ['id' => $runtemplateId.'_interval', 'checked' => 'true', 'data-runtemplate' => $runtemplateId]);
         \MultiFlexi\Ui\CrontabInput::includeAssets();
-        $crontabInput = new \MultiFlexi\Ui\CrontabInput($runtemplateId.'_cron', $intervalChoosen, ['data-runtemplate' => $runtemplateId]);
+        $crontabInput = new \MultiFlexi\Ui\CrontabInput($runtemplateId.'_cron', $crontab, ['data-runtemplate' => $runtemplateId]);
 
         $delayChooser = new \MultiFlexi\Ui\DelayChooser($runtemplateId.'_delay', $delayChoosen, ['id' => $runtemplateId.'_delay', 'checked' => 'true', 'data-runtemplate' => $runtemplateId]);
         $executorChooser = new AppExecutorSelect($runtemplate->getApplication(), [], (string) $runtemplate->getDataValue('executor'), ['id' => $runtemplateId.'_executor', 'data-runtemplate' => $runtemplateId]);
@@ -112,14 +113,14 @@ _interval').change( function(event, state) {
         error: function() {
             $('#
 EOD.$this->runtemplate->getMyKey().<<<'EOD'
-_cron').after( "⚰️" );
+_interval').after( "⚰️" );
             console.log("not saved");
         },
 
         success: function(data) {
             $('#
 EOD.$this->runtemplate->getMyKey().<<<'EOD'
-_cron').after( "💾" );
+_interval').after( "💾" );
             console.log("saved");
         },
             type: 'POST'
