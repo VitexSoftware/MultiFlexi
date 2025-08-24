@@ -1,5 +1,7 @@
 #!groovy
 
+// Current version of this Pipeline https://raw.githubusercontent.com/VitexSoftware/multiflexi-buildimages/refs/heads/main/Test/multiflexi-halloworld/Jenkinsfile
+
 String[] distributions = ['debian:bookworm', 'debian:trixie', 'debian:forky', 'ubuntu:jammy', 'ubuntu:noble']
 
 String vendor = 'vitexsoftware'
@@ -79,19 +81,20 @@ distributions.each { distro ->
                             println "Archiving artifact: " + deb_file
                             archiveArtifacts artifacts: 'dist/debian/' + deb_file
                         }
+
                         // Cleanup: remove any produced files named in debian/files
                         // Try both the dist location and any potential original locations referenced by debian/files
-                        sh """
+                        sh '''
                             set -e
                             if [ -f debian/files ]; then
-                              while read -r f _; do
-                                [ -n "$f" ] || continue
-                                rm -f "dist/debian/$f" || true
-                                rm -f "../$f" || true
-                                rm -f "$WORKSPACE/$f" || true
+                              while read -r file _; do
+                                [ -n "$file" ] || continue
+                                rm -f "dist/debian/$file" || true
+                                rm -f "../$file" || true
+                                rm -f "$WORKSPACE/$file" || true
                               done < debian/files
                             fi
-                        """
+                        '''
                     }
                 }
             }
