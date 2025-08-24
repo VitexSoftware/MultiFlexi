@@ -1,0 +1,68 @@
+[19-Aug-2025 06:25:19 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 08:25:19 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to a member function addItem() on null in /home/vitex/Projects/Multi/MultiFlexi/vendor/vitexsoftware/ease-html/src/Ease/Html/TableTag.php:124
+Stack trace:
+#0 /home/vitex/Projects/Multi/MultiFlexi/src/companyapp.php(97): Ease\Html\TableTag->addRowHeaderColumns()
+#1 {main}
+  thrown in /home/vitex/Projects/Multi/MultiFlexi/vendor/vitexsoftware/ease-html/src/Ease/Html/TableTag.php on line 124
+[19-Aug-2025 06:25:20 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:23 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 08:29:23 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to a member function setDefault() on null in /home/vitex/Projects/Multi/MultiFlexi/vendor/vitexsoftware/ease-html/src/Ease/Html/SelectTag.php:72
+Stack trace:
+#0 /home/vitex/Projects/Multi/MultiFlexi/vendor/vitexsoftware/ease-html/src/Ease/Html/SelectTag.php(55): Ease\Html\SelectTag->addItems()
+#1 /home/vitex/Projects/Multi/MultiFlexi/src/MultiFlexi/Ui/IntervalChooser.php(34): Ease\Html\SelectTag->__construct()
+#2 /home/vitex/Projects/Multi/MultiFlexi/src/MultiFlexi/Ui/RunTemplatePanel.php(40): MultiFlexi\Ui\IntervalChooser->__construct()
+#3 /home/vitex/Projects/Multi/MultiFlexi/src/runtemplate.php(163): MultiFlexi\Ui\RunTemplatePanel->__construct()
+#4 {main}
+  thrown in /home/vitex/Projects/Multi/MultiFlexi/vendor/vitexsoftware/ease-html/src/Ease/Html/SelectTag.php on line 72
+[19-Aug-2025 06:29:23 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:27 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:27 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:27 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:27 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:27 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:27 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:27 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:27 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:27 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:27 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:27 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:28 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:28 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:28 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:28 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:28 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:28 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:28 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:28 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:28 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:28 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:28 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:28 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:28 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:28 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:28 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:29:28 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:30:28 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 06:31:29 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 08:22:58 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[19-Aug-2025 10:22:58 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to a member function addItem() on null in /home/vitex/Projects/Multi/MultiFlexi/vendor/vitexsoftware/ease-html/src/Ease/Html/TableTag.php:124
+Stack trace:
+#0 /home/vitex/Projects/Multi/MultiFlexi/src/MultiFlexi/Ui/JobHistoryTable.php(57): Ease\Html\TableTag->addRowHeaderColumns()
+#1 /home/vitex/Projects/Multi/MultiFlexi/src/main.php(28): MultiFlexi\Ui\JobHistoryTable->__construct()
+#2 {main}
+  thrown in /home/vitex/Projects/Multi/MultiFlexi/vendor/vitexsoftware/ease-html/src/Ease/Html/TableTag.php on line 124
+[19-Aug-2025 08:22:58 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[20-Aug-2025 09:03:38 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[20-Aug-2025 09:12:38 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[20-Aug-2025 09:12:41 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[20-Aug-2025 11:12:41 Europe/Prague] PHP Fatal error:  Uncaught Error: Call to a member function setDefault() on null in /home/vitex/Projects/Multi/MultiFlexi/vendor/vitexsoftware/ease-html/src/Ease/Html/SelectTag.php:72
+Stack trace:
+#0 /home/vitex/Projects/Multi/MultiFlexi/vendor/vitexsoftware/ease-html/src/Ease/Html/SelectTag.php(55): Ease\Html\SelectTag->addItems()
+#1 /home/vitex/Projects/Multi/MultiFlexi/src/MultiFlexi/Ui/IntervalChooser.php(34): Ease\Html\SelectTag->__construct()
+#2 /home/vitex/Projects/Multi/MultiFlexi/src/MultiFlexi/Ui/RunTemplatePanel.php(40): MultiFlexi\Ui\IntervalChooser->__construct()
+#3 /home/vitex/Projects/Multi/MultiFlexi/src/runtemplate.php(163): MultiFlexi\Ui\RunTemplatePanel->__construct()
+#4 {main}
+  thrown in /home/vitex/Projects/Multi/MultiFlexi/vendor/vitexsoftware/ease-html/src/Ease/Html/SelectTag.php on line 72
+[20-Aug-2025 09:12:41 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[20-Aug-2025 09:12:42 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[20-Aug-2025 09:12:49 UTC] Xdebug: [Step Debug] Could not connect to debugging client. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
