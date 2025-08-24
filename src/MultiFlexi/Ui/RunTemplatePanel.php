@@ -57,7 +57,7 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
 
         $runtemplateJobs = new \MultiFlexi\Ui\RuntemplateJobsListing($runtemplate);
 
-        $runtemplateOptions->addColumn(4, [_('automatically schedule in an interval').': ', $crontabInput,'<br/>', $intervalChooser, '<br/>', _('Startup delay'), $delayChooser, '<br/>', _('Executor'), $executorChooser]);
+        $runtemplateOptions->addColumn(4, [_('automatically schedule in an interval').': ', $crontabInput, '<br/>', $intervalChooser, '<br/>', _('Startup delay'), $delayChooser, '<br/>', _('Executor'), $executorChooser]);
         $nameInput = new \Ease\Html\ATag('#', $runtemplate->getRecordName(), ['class' => 'editable', 'style' => 'font-size: xxx-large;', 'id' => 'name', 'data-pk' => $runtemplate->getMyKey(), 'data-url' => 'runtemplatesave.php', 'data-title' => _('Update RunTemplate name')]);
 
         $runtemplateBottom = new \Ease\TWB4\Row();
@@ -222,7 +222,7 @@ EOD);
 $('#
 EOD.$this->runtemplate->getMyKey().<<<'EOD'
 _cron').change( function(event, state) {
-    
+
     $.ajax({
         url: 'rtcron.php',
         data: {
@@ -247,8 +247,6 @@ _cron').after( "💾" );
 });
 
 EOD);
-
-
 
         parent::finalize();
     }

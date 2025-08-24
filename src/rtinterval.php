@@ -28,9 +28,11 @@ $result = false;
 if (null !== $runtemplate_id) {
     $switcher = new \MultiFlexi\RunTemplate();
     $switcher->setData(['id' => $runtemplate_id, 'interv' => $interval]);
-    if($state){
+
+    if ($state) {
         $switcher->setDataValue('cron', '');
     }
+
     http_response_code($switcher->setState($state) ? 201 : 400);
 } else {
     http_response_code(404);

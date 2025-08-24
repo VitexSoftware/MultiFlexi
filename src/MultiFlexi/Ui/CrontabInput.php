@@ -43,7 +43,7 @@ class CrontabInput extends \Ease\Html\PairTag
         $attributes['name'] = $name;
         $attributes['id'] = $name;
         $attributes['value'] = $value;
-//        $attributes['class'] = 'form-control';
+        //        $attributes['class'] = 'form-control';
         $attributes['color'] = 'd58512';
         $attributes['data-cron-expression-input'] = 'true';
         parent::__construct('cron-expression-input', $attributes);
