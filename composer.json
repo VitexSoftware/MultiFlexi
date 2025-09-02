@@ -64,7 +64,7 @@
         "phpunit/phpunit": "*",
         "phpstan/phpstan": "*",
         "friendsofphp/php-cs-fixer": "^3.75",
-        "ergebnis/composer-normalize": "^2.47",
+        "ergebnis/composer-normalize": "^2.48",
         "ergebnis/php-cs-fixer-config": "^6.51",
         "phpstan/phpstan-phpunit": "2.0.x-dev",
         "rector/rector": "dev-main"
