@@ -22,12 +22,27 @@ namespace MultiFlexi\Ui;
  *
  * @no-named-arguments
  */
+/**
+ * Class RunTemplatePanel
+ *
+ * Panel for configuring and displaying RunTemplate options in MultiFlexi.
+ *
+ * @package MultiFlexi\Ui
+ */
 class RunTemplatePanel extends \Ease\TWB4\Panel
 {
+    /**
+     * @var \MultiFlexi\RunTemplate RunTemplate instance for this panel.
+     */
     private \MultiFlexi\RunTemplate $runtemplate;
 
     /**
      * Run Template Configuration panel.
+     */
+    /**
+     * RunTemplatePanel constructor.
+     *
+     * @param \MultiFlexi\RunTemplate $runtemplate RunTemplate instance.
      */
     public function __construct(\MultiFlexi\RunTemplate $runtemplate)
     {
@@ -94,6 +109,11 @@ EOD);
         $this->addItem($runtemplateTabs);
     }
 
+    /**
+     * Finalizes the panel by adding JavaScript and Bootstrap integration.
+     *
+     * @return void
+     */
     public function finalize(): void
     {
         \Ease\TWB4\Part::twBootstrapize();
