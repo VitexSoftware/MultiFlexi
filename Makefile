@@ -35,43 +35,43 @@ probeapp: ## Run database seeds
 autoload: ## Run composer autoload
 	composer update
 
-hourly:
+hourly: ## Run hourly jobs
 	cd lib; php -f executor.php h
-daily:
+daily: ## Run daily jobs
 	cd lib; php -f executor.php d
-monthly:
+monthly: ## Run monthly jobs
 	cd lib; php -f executor.php m
 
-postinst:
+postinst: ## Run post-installation script
 	DEBCONF_DEBUG=developer /usr/share/debconf/frontend /var/lib/dpkg/info/multiflexi.postinst configure $(nextversion)
 
-redeb:
-	 sudo apt -y purge multiflexi; rm ../multiflexi_*_all.deb ; debuild -us -uc ; sudo gdebi  -n ../multiflexi_*_all.deb ; sudo apache2ctl restart
+redeb: ## Rebuild and reinstall deb package
+	sudo apt -y purge multiflexi; rm ../multiflexi_*_all.deb ; debuild -us -uc ; sudo gdebi  -n ../multiflexi_*_all.deb ; sudo apache2ctl restart
 
-debs:
+debs: ## Build debian packages
 	debuild -i -us -uc -b
 
-debs2deb: debs
+debs2deb: debs ## Move built debs to dist and create multi-flexi-dist
 	mkdir -p ./dist/; rm -rf ./dist/* ; for deb in $$(cat debian/files | awk '{print $$1}'); do mv "../$$deb" ./dist/; done
 	debs2deb ./dist/ multi-flexi-dist
 	mv multi-flexi-dist_*_all.deb dist
 
-dimage:
+dimage: ## Build docker image for MultiFlexi
 	docker build -t vitexsoftware/multiflexi .
 
-demoimage:
+demoimage: ## Build demo docker image
 	docker build -f Dockerfile.demo -t vitexsoftware/multiflexi-demo .
 
-demorun:
+demorun: ## Run demo docker image and open in browser
 	docker run  -dit --name MultiFlexiDemo -p 8282:80 vitexsoftware/multiflexi-demo
 	firefox http://localhost:8282?login=demo\&password=demo
 
 
-drun: dimage
+drun: dimage ## Run main docker image and open in browser
 	docker run  -dit --name MultiServersetup -p 8080:80 vitexsoftware/multiflexi
 	firefox http://localhost:8080?login=demo\&password=demo
 
-vagrant: packages
+vagrant: packages ## Build and run vagrant environment
 	vagrant destroy -f
 	mkdir -p deb
 	debuild -us -uc
@@ -81,7 +81,7 @@ vagrant: packages
 	vagrant up
 	sensible-browser http://localhost:8080/multiflexi?login=demo\&password=demo
 
-release:
+release: ## Build and release new version
 	echo Release v$(nextversion)
 	docker build -t vitexsoftware/multiflexi:$(nextversion) .
 	dch -v $(nextversion) `git log -1 --pretty=%B | head -n 1`
@@ -91,24 +91,24 @@ release:
 	docker push vitexsoftware/multiflexi:$(nextversion)
 	docker push vitexsoftware/multiflexi:latest
 
-baseline:
+baseline: ## Generate phpstan baseline
 	phpstan analyse --level 7   --configuration phpstan.neon   src/ --generate-baseline
 
-phpunit:
+phpunit: ## Run phpunit tests with custom configuration
 	vendor/bin/phpunit -c tests/configuration.xml tests/
 
-daemon:
+daemon: ## Run MultiFlexi daemon
 	export $(grep -v '#' .env | xargs) && cd lib && php -f ./daemon.php
 
-probeimage:
+probeimage: ## Build probe image with podman
 	podman build -f Containerfile.probe . -t docker.io/vitexsoftware/multiflexi-probe
 
-probeimagex:
+probeimagex: ## Build and push multi-arch probe image
 	docker buildx build -f Containerfile.probe . --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag docker.io/vitexsoftware/multiflexi-probe
 
-instprobe:
+instprobe: ## Install probe application from JSON
 	multiflexi-json2app tests/multiflexi_probe.multiflexi.app.json
 
-reset:
+reset: ## Reset local branch to origin
 	git fetch origin
 	git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)
