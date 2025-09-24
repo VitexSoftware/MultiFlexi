@@ -51,7 +51,7 @@ MultiFlexi features a sophisticated layered architecture:
 Environment Variables
 ---------------------
 
-MultiFlexi automatically configures environment variables for executed applications:
+MultiFlexi automatically configures environment variables for executed applications. For example:
 
 **AbraFlexi Integration:**
 
