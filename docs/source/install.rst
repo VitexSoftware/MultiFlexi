@@ -13,6 +13,14 @@ Installation of MultiFlexi is simple on Debian based systems. The installation p
     - Ubuntu 22.04 (Jammy Jellyfish)
     - Ubuntu 24.04 (Noble Numbat)
 
+.. important::
+   
+   **System Requirements**
+   
+   - **Memory**: Minimum 2GB RAM required for database migration operations
+   - Database server (MySQL, PostgreSQL, or SQLite)
+   - Web server (Apache2, Nginx, or similar) for web interface access
+
 To install MultiFlexi using Debian packages, you can follow these steps:
 
 1. Prepare your system by running the following commands in a terminal::

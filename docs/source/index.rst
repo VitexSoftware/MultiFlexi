@@ -82,6 +82,7 @@ To get started with MultiFlexi:
 3. Explore the :doc:`usage` section for operational guidance
 4. Check the :doc:`api` documentation for programmatic integration
 5. Use the :doc:`multiflexi-cli` for command-line management
+6. See :doc:`ansible` for Infrastructure as Code automation
 
 .. note::
 
@@ -106,6 +107,7 @@ Contents
    firstrun
    usage
    api
+   ansible
    application
    configuration
    company

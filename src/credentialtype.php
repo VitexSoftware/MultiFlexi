@@ -88,7 +88,7 @@ if (WebPage::singleton()->isPosted()) {
                     $fielder->insertToSQL();
                 }
 
-                if (isset($numericFields)) {
+                if (isset($numericFields) && !empty($numericFields)) {
                     foreach ($numericFields as $columnId => $fields) {
                         $fielder = new \MultiFlexi\CrTypeField();
                         $fielder->takeData(array_merge($fields, ['id' => $columnId]));
@@ -117,7 +117,7 @@ if (WebPage::singleton()->isPosted()) {
         $clasHelper = new $credTypeClass();
         $helperClassFieldsInternal = $clasHelper->fieldsInternal();
         $helperClassFieldsProvided = $clasHelper->fieldsProvided();
-        $credTypeSettings = WebPage::getRequestValue($class);
+        $credTypeSettings = WebPage::getRequestValue($class); // internalFields values
 
         foreach ($helperClassFieldsInternal as $helperInternalFieldName => $helperInternalField) {
             if ($credTypeSettings) {
