@@ -10,6 +10,7 @@ Installation of MultiFlexi is simple on Debian based systems. The installation p
     - Debian 11 (Bullseye)
     - Debian 12 (Bookworm)
     - Debian 13 (Trixie) 
+    - Debian 14 (Forky)
     - Ubuntu 22.04 (Jammy Jellyfish)
     - Ubuntu 24.04 (Noble Numbat)
 
