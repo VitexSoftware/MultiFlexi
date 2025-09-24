@@ -100,13 +100,13 @@ Here is an example of a JSON file defining an application:
 
 
 JSON Schema for Application Definitions
-====================================
+=======================================
 
-    This schema can be used to verify the correctness of the structure of JSON files with application definitions.
+This schema can be used to verify the correctness of the structure of JSON files with application definitions.
 
-   It defines the required fields, their types, and any constraints on their values.
+It defines the required fields, their types, and any constraints on their values.
 
-  .. code-block:: json
+.. code-block:: json
 
     {
       "$schema": "http://json-schema.org/draft-07/schema#",

@@ -23,30 +23,30 @@ Installation of MultiFlexi is simple on Debian based systems. The installation p
 
 To install MultiFlexi using Debian packages, you can follow these steps:
 
-1. Prepare your system by running the following commands in a terminal::
+1. Prepare your system by running the following commands in a terminal:
 
-::
+.. code-block:: bash
 
     sudo apt update
     sudo apt install lsb-release apt-transport-https bzip2 ca-certificates curl
 
-2. Add the MultiFlexi repository and key::
+2. Add the MultiFlexi repository and key:
 
-::
+.. code-block:: bash
 
     curl -sSLo /tmp/multiflexi-archive-keyring.deb https://repo.multiflexi.eu/multiflexi-archive-keyring.deb
     sudo dpkg -i /tmp/multiflexi-archive-keyring.deb
     echo "deb [signed-by=/usr/share/keyrings/repo.multiflexi.eu.gpg] https://repo.multiflexi.eu/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/multiflexi.list
 
-3. Update the package sources::
+3. Update the package sources:
 
-::
+.. code-block:: bash
 
     sudo apt update
 
-4. Install MultiFlexi for the chosen database::
+4. Install MultiFlexi for the chosen database:
 
-::
+.. code-block:: bash
 
     sudo apt install multiflexi-mysql
 
@@ -97,17 +97,17 @@ To install MultiFlexi using Debian packages, you can follow these steps:
 
 5.  During the installation, you will be asked to configure the database.
 
-.. image:: ubuntu22dbconfig.png
+.. figure:: ubuntu22dbconfig.png
     :alt: Ubuntu 22.04 DB Config
     :align: center
 
-    The Password can be empty to autogenerate it.
+    Database configuration dialog. The password field may be left empty to auto-generate a secure password.
 
-.. image:: ubuntu22dbpassword.png
+.. figure:: ubuntu22dbpassword.png
     :alt: Ubuntu 22.04 DB Password
     :align: center
 
-    The Database name can be empty to autogenerate it.
+    Database password dialog. The database name may be left empty to auto-generate a default one.
 
 Then installation will continue and finish.
 
@@ -119,10 +119,9 @@ Then installation will continue and finish.
 
     Finally the configuration file is saved as /etc/multiflexi/multiflexi.env
 
-6. Check for available applications::
+6. Check for available applications:
 
-MultiFlexi is Only empty shell without of applications that can be installed on a server. The applications are available as Debian packages and can be installed on Debian-based systems like Ubuntu.
-The available applications can be checked by running the following command in a terminal
+MultiFlexi is an empty shell without applications until you install them. Applications are available as Debian packages and can be installed on Debian-based systems like Ubuntu. To list available MultiFlexi application packages:
 
 .. code-block:: bash
 

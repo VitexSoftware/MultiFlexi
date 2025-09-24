@@ -49,7 +49,7 @@ MultiFlexi features a sophisticated layered architecture:
   Comprehensive authentication, authorization, and secure credential handling with encryption
 
 Environment Variables
---------------------
+---------------------
 
 MultiFlexi automatically configures environment variables for executed applications:
 
