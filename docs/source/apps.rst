@@ -158,6 +158,61 @@ It defines the required fields, their types, and any constraints on their values
   
 .. note::
 
-    The JSON Schema for validating MultiFlexi application definitions available online:
-    `multiflexi.app.schema.json <https://github.com/VitexSoftware/MultiFlexi/blob/master/lib/multiflexi.app.schema.json>`_
+    The JSON Schema for validating MultiFlexi application definitions is available online:
+    `multiflexi.app.schema.json <https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/blob/main/multiflexi.app.schema.json>`_
+
+Report JSON Schema
+==================
+
+Applications can optionally emit structured execution reports consumed by MultiFlexi (and e.g. exported to monitoring/analysis systems). These reports are validated by a separate JSON Schema.
+
+Purpose:
+
+* Provide a consistent machine-readable structure for application output summaries
+* Allow validation before ingestion (fail fast on malformed data)
+* Enable tooling (dashboards, exporters) to rely on stable field names
+
+Key Concepts (as defined in the report schema):
+
+* Metadata about the producing application (UUID, name, version)
+* Timing information (start/end timestamps, duration)
+* Result classification (status / severity / exit code)
+* Produced artifacts (paths, checksums, sizes) when relevant
+* Metrics (numeric values with units or context)
+* Messages / log excerpts (structured list)
+* Optional links (URLs to external resources or dashboards)
+
+Validation Schema:
+
+`multiflexi.report.schema.json <https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/blob/main/multiflexi.report.schema.json>`_
+
+Basic Report Example:
+
+.. code-block:: json
+
+   {
+     "app_uuid": "97f30cf9-2d9e-4d91-ad65-9bdd8b4663cd",
+     "app_name": "RB transaction report",
+     "generated_at": "2025-09-24T12:34:56Z",
+     "status": "success",
+     "duration_ms": 8421,
+     "metrics": [
+       { "name": "transactions_processed", "value": 128, "unit": "count" },
+       { "name": "total_amount", "value": 51234.77, "unit": "CZK" }
+     ],
+     "artifacts": [
+       { "path": "output/report-2025-09-24.json", "size": 20480 }
+     ],
+     "messages": [
+       { "level": "info", "text": "Processing completed" }
+     ]
+   }
+
+Implementation Notes:
+
+* If your application already writes a domain-specific JSON output, you can wrap or transform it into the report schema just before exit.
+* Keep timestamps in ISO 8601 (UTC) for portability.
+* Use stable metric names—prefer lowercase with underscores.
+* Omit sections (e.g. artifacts, metrics) rather than sending empty arrays if not applicable (schema usually allows absence).
+* Validate locally during development with any JSON Schema validator before integrating.
 

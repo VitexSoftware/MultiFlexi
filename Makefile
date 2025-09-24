@@ -31,6 +31,14 @@ clean:
 probeapp: ## Run database seeds
 	multiflexi-cli application import-json --json tests/multiflexi_probe.multiflexi.app.json
 
+.PHONY: docs
+docs: ## Build Sphinx HTML documentation
+	@if [ -x .venv/bin/python ]; then \
+		.venv/bin/python -m sphinx -b html docs/source docs/_build/html; \
+	else \
+		python -m sphinx -b html docs/source docs/_build/html; \
+	fi
+
 .PHONY: autoload
 autoload: ## Run composer autoload
 	composer update

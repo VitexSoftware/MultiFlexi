@@ -6896,13 +6896,13 @@
             "version": "2.1.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "60dddad0e37928fe27f9940ed3a39e7780dd6ed7"
+                "url": "https://github.com/phpstan/phpstan-phar-composer-source.git",
+                "reference": "main"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/60dddad0e37928fe27f9940ed3a39e7780dd6ed7",
-                "reference": "60dddad0e37928fe27f9940ed3a39e7780dd6ed7",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/64c1547840efed13e6a41c37a9067a483290f49a",
+                "reference": "64c1547840efed13e6a41c37a9067a483290f49a",
                 "shasum": ""
             },
             "require": {
@@ -6948,7 +6948,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-09-24T08:56:24+00:00"
+            "time": "2025-09-24T13:00:47+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -6956,12 +6956,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-phpunit.git",
-                "reference": "9ec3fa951a29922c8f7d456fc04a7ccc9bb2ae81"
+                "reference": "c54a26903d4a34b6d2a13b004f505ba340aabcf4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/9ec3fa951a29922c8f7d456fc04a7ccc9bb2ae81",
-                "reference": "9ec3fa951a29922c8f7d456fc04a7ccc9bb2ae81",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/c54a26903d4a34b6d2a13b004f505ba340aabcf4",
+                "reference": "c54a26903d4a34b6d2a13b004f505ba340aabcf4",
                 "shasum": ""
             },
             "require": {
@@ -7002,7 +7002,7 @@
                 "issues": "https://github.com/phpstan/phpstan-phpunit/issues",
                 "source": "https://github.com/phpstan/phpstan-phpunit/tree/2.0.x"
             },
-            "time": "2025-09-02T16:51:40+00:00"
+            "time": "2025-09-24T11:42:52+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -7010,12 +7010,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "7f8d130544abad528f2df1b5a0ebfa9d9451bd8e"
+                "reference": "67e8aed88f93d0e6e1cb7effe1a2dfc2fee6022c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/7f8d130544abad528f2df1b5a0ebfa9d9451bd8e",
-                "reference": "7f8d130544abad528f2df1b5a0ebfa9d9451bd8e",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/67e8aed88f93d0e6e1cb7effe1a2dfc2fee6022c",
+                "reference": "67e8aed88f93d0e6e1cb7effe1a2dfc2fee6022c",
                 "shasum": ""
             },
             "require": {
@@ -7072,7 +7072,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/main"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/12.4.0"
             },
             "funding": [
                 {
@@ -7092,7 +7092,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-24T08:06:05+00:00"
+            "time": "2025-09-24T13:44:41+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -7397,12 +7397,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "836ca1162b92d970a0624256c39fa703faf2e1a3"
+                "reference": "c27695b6cc15fe0611fefd611ed79d527375e24e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/836ca1162b92d970a0624256c39fa703faf2e1a3",
-                "reference": "836ca1162b92d970a0624256c39fa703faf2e1a3",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c27695b6cc15fe0611fefd611ed79d527375e24e",
+                "reference": "c27695b6cc15fe0611fefd611ed79d527375e24e",
                 "shasum": ""
             },
             "require": {
@@ -7416,7 +7416,7 @@
                 "phar-io/manifest": "^2.0.4",
                 "phar-io/version": "^3.2.1",
                 "php": ">=8.3",
-                "phpunit/php-code-coverage": "^12.3.8",
+                "phpunit/php-code-coverage": "^12.4.0",
                 "phpunit/php-file-iterator": "^6.0.0",
                 "phpunit/php-invoker": "^6.0.0",
                 "phpunit/php-text-template": "^5.0.0",
@@ -7495,7 +7495,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-24T06:36:45+00:00"
+            "time": "2025-09-24T13:45:25+00:00"
         },
         {
             "name": "psr/event-dispatcher",
