@@ -3,7 +3,7 @@
 # -- Project information
 
 project = 'MultiFlexi'
-copyright = '2024, VitexSoftware'
+copyright = '2024-2025, VitexSoftware'
 author = 'Vitex'
 
 release = '0.1'
