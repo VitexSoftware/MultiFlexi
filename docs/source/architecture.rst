@@ -3,6 +3,11 @@ MultiFlexi Architecture
 
 The MultiFlexi ecosystem is composed of several interrelated projects, each fulfilling a specific role in the overall architecture. Below is an overview of the main member projects and their relationships:
 
+.. toctree::
+  :maxdepth: 2
+  :caption: Architecture Topics
+
+
 Core Components
 ---------------
 

@@ -3,6 +3,11 @@ Command Line Utilities
 
 MultiFlexi provides several command line utilities to manage and interact with the system. Below is a list of available utilities and their descriptions:
 
+.. toctree::
+    :maxdepth: 2
+    :caption: CLI Topics
+
+
 1. **multiflexi-app2json**
     - Converts application configuration to JSON format.
 

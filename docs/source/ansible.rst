@@ -3,6 +3,11 @@ Manage MultiFlexi using Ansible
 
 The **vitexus.multiflexi** Ansible Collection provides comprehensive automation capabilities for managing MultiFlexi servers and their components. This collection enables Infrastructure as Code (IaC) practices for MultiFlexi deployments, allowing you to manage users, companies, applications, jobs, and configurations programmatically.
 
+.. toctree::
+  :maxdepth: 2
+  :caption: Ansible Topics
+
+
 Installation
 ------------
 
@@ -33,7 +38,7 @@ Before using the Ansible collection, ensure:
 
 1. **MultiFlexi Server**: A running MultiFlexi installation (see :doc:`install`)
 2. **multiflexi-cli**: The command-line interface must be available in PATH (see :doc:`multiflexi-cli`)
-3. **Dependencies**: Install ``python3-mysql.connector`` on target machines
+3. **Python**: Python 3.6 or higher must be installed on the Ansible control machine
 4. **Permissions**: Appropriate access rights for the Ansible user
 
 multiflexi-cli Installation
