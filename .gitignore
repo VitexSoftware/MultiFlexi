@@ -56,3 +56,5 @@ debian/multiflexi-common.debhelper.log
 debian/multiflexi-probe/
 debian/multiflexi-probe.substvars
 debian/multiflexi-probe.debhelper.log
+docs/_build/
+

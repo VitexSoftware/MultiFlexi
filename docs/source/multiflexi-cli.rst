@@ -59,7 +59,7 @@ The MultiFlexi CLI provides the following main commands:
 - **completion** - Dump the shell completion script
 
 Detailed Command Reference
--------------------------
+--------------------------
 
 .. contents::
    :local:
