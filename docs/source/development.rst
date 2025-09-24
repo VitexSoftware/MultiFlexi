@@ -11,6 +11,14 @@ Welcome to the MultiFlexi development documentation. This guide will help you ge
 Setting Up Your Development Environment
 ---------------------------------------
 
+**System Requirements**
+
+- Minimum 2GB RAM (required for database migration operations)
+- PHP 8.1 or higher
+- Composer
+- Database server (MySQL, PostgreSQL, or SQLite for testing)
+- Web server (Apache2, Nginx, or PHP built-in server for development)
+
 1. **Clone the Repository**: Start by cloning the MultiFlexi repository from GitHub.
 
     ```bash

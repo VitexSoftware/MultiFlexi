@@ -85,10 +85,10 @@ class CredentialTypeForm extends \Ease\TWB4\Form
 
         $formContents[] = new \Ease\Html\DivTag($this->credTypeField('new', new \MultiFlexi\ConfigFieldWithHelper('', 'string', '', '')), ['class' => 'border border-primary rounded']);
 
-        $fields = $credtype->getFields();
+        $fields = $credtype->getFields(); // Helper?!
 
         foreach ($fields as $crTypeField) {
-            $formContents[] = $this->credTypeField((string) $crTypeField->getMykey(), $crTypeField);
+            $formContents[] = $this->credTypeField((string) $crTypeField->getMykey() ?? 'new', $crTypeField);
         }
 
         parent::__construct(['action' => 'credentialtype.php'], ['method' => 'POST'], $formContents);
@@ -138,7 +138,7 @@ class CredentialTypeForm extends \Ease\TWB4\Form
         $helper = $this->credType->getHelper();
 
         if ($helper) {
-            $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Helper Class field'), $helper->providedFieldsSelect($credTypeId.'[helper]', $field->getHelper())));
+            $credTypeFieldRow->addColumn(2, new \Ease\TWB4\FormGroup(_('Helper Class field'), $helper->providedFieldsSelect($credTypeId.'[helper]', $field->getCode())));
         } else {
             $credTypeFieldRow->addColumn(2, _('No Helper Class chosen yet'));
         }
