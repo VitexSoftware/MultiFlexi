@@ -9,4 +9,4 @@ src/assets/Buttons-1.5.6/swf/*           usr/share/multiflexi/assets/Buttons-1.5
 src/images/*                              usr/share/multiflexi/images
 src/css/*                                 usr/share/multiflexi/css
 src/api/*                                 usr/share/multiflexi/api
-src/MultiFlexi/                           usr/share/multiflexi/MultiFlexi/
+src/MultiFlexi/                           usr/lib/multiflexi/
