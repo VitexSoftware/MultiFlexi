@@ -1,0 +1,99 @@
+#!/bin/sh
+# postinst script for multiflexi-web
+set -e
+
+pathfind() {
+    OLDIFS="$IFS"
+    IFS=:
+    for p in $PATH; do
+        if [ -x "$p/$*" ]; then
+            IFS="$OLDIFS"
+            return 0
+        fi
+    done
+    IFS="$OLDIFS"
+    return 1
+}
+
+lighttpd_install() {
+    if [ -d /etc/lighttpd/conf-available ] && [ ! -f /etc/lighttpd/conf-available/50-multiflexi.conf ]; then
+        if pathfind lighty-enable-mod; then
+            ln -s /etc/multiflexi/lighttpd.conf /etc/lighttpd/conf-available/50-multiflexi.conf
+            if ! { lighty-enable-mod multiflexi fastcgi fastcgi-php || [ $? -eq 2 ]; }; then
+                return 1
+            fi
+        fi
+    fi
+}
+
+[ ! -e /usr/share/apache2/apache2-maintscript-helper ] ||
+    . /usr/share/apache2/apache2-maintscript-helper
+
+apache_install() {
+    if [ -e /usr/share/apache2/apache2-maintscript-helper ]; then
+        if [ -d /etc/apache2/conf-available ] && [ ! -e /etc/apache2/conf-available/multiflexi.conf ]; then
+            ln -s /etc/multiflexi/apache.conf /etc/apache2/conf-available/multiflexi.conf
+        fi
+        # Remove old symlink if present
+        if [ -d /etc/apache2/conf.d ] && [ -h /etc/apache2/conf.d/multiflexi ]; then
+            rm /etc/apache2/conf.d/multiflexi
+        fi
+        # Enable the configuration
+        apache2_invoke enconf multiflexi.conf
+    fi
+}
+
+. /usr/share/debconf/confmodule
+
+case "$1" in
+    configure)
+        # Set proper permissions for web files
+        if [ -d /usr/share/multiflexi ]; then
+            chown -R www-data:www-data /usr/share/multiflexi/
+            chmod -R 644 /usr/share/multiflexi/
+            find /usr/share/multiflexi/ -type d -exec chmod 755 {} \;
+        fi
+
+        # Handle webserver reconfiguration/restart
+        db_get multiflexi/reconfigure-webserver || true
+        webservers="$RET"
+        restart=""
+
+        for webserver in $webservers; do
+            webserver=${webserver%,}
+            case "$webserver" in
+            lighttpd)
+                lighttpd_install
+                ;;
+            apache2)
+                apache_install
+                ;;
+            esac
+            pathfind $webserver || continue
+            restart="$restart$webserver "
+        done
+
+        db_stop || true
+
+        # Restart webservers
+        for webserver in $restart; do
+            if [ -x /usr/sbin/invoke-rc.d ]; then
+                invoke-rc.d $webserver restart
+            else
+                /etc/init.d/$webserver restart
+            fi
+        done
+        ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+        ;;
+esac
+
+#DEBHELPER#
+
+exit 0

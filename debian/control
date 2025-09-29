@@ -12,13 +12,9 @@ Depends: ${misc:Depends},
  locales-all,
  multiflexi-common,
  php-vitexsoftware-multiflexi-core,
- php-vitexsoftware-ease-html-widgets (>=1.1.1),
- php-vitexsoftware-ease-bootstrap4-widgets (>=1.7),
- libjs-jquery-datatables,
- libjs-jquery-selectize.js,
  anacron, adduser (>= 3.11),
  php-cli,
-Recommends: multiflexi-scheduler
+Recommends: multiflexi-scheduler, multiflexi-web
 Suggests: multiflexi-all, multiflexi-cli, multiflexi-api, multiflexi-executor
 Pre-Depends: multiflexi-database
 Architecture: all
@@ -70,6 +66,22 @@ Architecture: all
 Depends: multiflexi
 Description: MultiFlexi probe tool
  Add Special debugging application to your MultiFlexi
+
+Package: multiflexi-web
+Multi-Arch: foreign
+Architecture: all
+Depends: ${misc:Depends}, 
+ multiflexi-common,
+ php-vitexsoftware-multiflexi-core,
+ php-vitexsoftware-ease-html-widgets (>=1.1.1),
+ php-vitexsoftware-ease-bootstrap4-widgets (>=1.7),
+ libjs-jquery-datatables,
+ libjs-jquery-selectize.js,
+ php-cli
+Description: MultiFlexi web interface core components
+ Core PHP classes and web interface components for MultiFlexi.
+ Contains the main application logic and web interface files including
+ dashboard, company management, job management, and administrative tools.
 
 #Package: multiflexi-dev
 #Depends: multiflexi,jq

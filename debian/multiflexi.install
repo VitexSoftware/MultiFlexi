@@ -1,12 +1,13 @@
-src/*.php                                 usr/share/multiflexi
-src/favicon.ico                           usr/share/multiflexi
-src/js/*.js                               usr/share/multiflexi/js
-src/js/languages/*.js                     usr/share/multiflexi/js/languages/
-src/assets/Buttons-1.5.6/js/*             usr/share/multiflexi/assets/Buttons-1.5.6/js/
-src/assets/Buttons-1.5.6/css/*            usr/share/multiflexi/assets/Buttons-1.5.6/css/
-src/assets/Buttons-1.5.6/swf/*            usr/share/multiflexi/assets/Buttons-1.5.6/swf/
-src/images/*                              usr/share/multiflexi/images
-src/css/*				                  usr/share/multiflexi/css
+# Web files moved to multiflexi-web package
+# src/*.php                                 usr/share/multiflexi
+# src/favicon.ico                           usr/share/multiflexi
+# src/js/*.js                               usr/share/multiflexi/js
+# src/js/languages/*.js                     usr/share/multiflexi/js/languages/
+# src/assets/Buttons-1.5.6/js/*             usr/share/multiflexi/assets/Buttons-1.5.6/js/
+# src/assets/Buttons-1.5.6/css/*            usr/share/multiflexi/assets/Buttons-1.5.6/css/
+# src/assets/Buttons-1.5.6/swf/*            usr/share/multiflexi/assets/Buttons-1.5.6/swf/
+# src/images/*                              usr/share/multiflexi/images
+# src/css/*				                  usr/share/multiflexi/css
 debian/tmp/composer.json                  usr/lib/multiflexi
 #src/MultiFlexi/*.php                     usr/lib/multiflexi/MultiFlexi/
 
