@@ -9,4 +9,15 @@ src/assets/Buttons-1.5.6/swf/*           usr/share/multiflexi/assets/Buttons-1.5
 src/images/*                              usr/share/multiflexi/images
 src/css/*                                 usr/share/multiflexi/css
 src/api/*                                 usr/share/multiflexi/api
-src/MultiFlexi/                           usr/lib/multiflexi/
+src/MultiFlexi/Ui                         usr/lib/multiflexi/MultiFlexi/
+
+debian/tmp/composer.json                  usr/lib/multiflexi
+
+debian/conf/multiflexi.conf    		      etc/apache2/conf-available
+debian/conf/multiflexi.service 		      etc/avahi/services
+
+debian/com.vitexsoftware.multiflexi.metainfo.xml    usr/share/metainfo/
+debian/com.vitexsoftware.multiflexi.desktop         usr/share/applications/
+multiflexi.svg                 			usr/share/icons/hicolor/scalable/apps/
+i18n/cs_CZ/LC_MESSAGES/*.mo                	usr/share/locale/cs_CZ/LC_MESSAGES/
+i18n/en_US/LC_MESSAGES/*.mo                	usr/share/locale/en_US/LC_MESSAGES/
