@@ -21,16 +21,16 @@ override_dh_install:
 	mkdir -p debian/tmp/
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/conf/composer.json |sponge debian/tmp/composer.json
 	dh_install
-	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multiflexi/g' debian/multiflexi/usr/share/multiflexi/init.php
+	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multiflexi/g' debian/multiflexi-web/usr/share/multiflexi/init.php
 	sed -i -e 's/.\.\/vendor/\/var\/lib\/composer\/multiflexi/g' debian/multiflexi*/usr/lib/multiflexi/*.php
 	sed -i -e 's/\.\.\/\.env/\/etc\/multiflexi\/\multiflexi\.env/g' debian/multiflex*/usr/lib/multiflexi/*.php
-	sed -i -e '/dirname(__DIR__)/c\    "\/etc\/multiflexi\/multiflexi\.env"' debian/multiflexi/usr/share/multiflexi/init.php
-	sed -i -e 's/composer\.json/\/usr\/lib\/multiflexi\/composer\.json/g' debian/multiflexi/usr/lib/multiflexi/MultiFlexi/Ui/PageBottom.php
-	sed -i -e 's/js\/jquery.dataTables.js/\/javascript\/jquery-datatables\/jquery.dataTables.js/g' debian/multiflexi/usr/lib/multiflexi/MultiFlexi/Ui/DBDataTable.php
-	sed -i -e 's/js\/dataTables.bootstrap4.js/\/javascript\/jquery-datatables\/dataTables.bootstrap4.js/g' debian/multiflexi/usr/lib/multiflexi/MultiFlexi/Ui/DBDataTable.php
-	sed -i -e 's/css\/dataTables.bootstrap4.css/\/javascript\/jquery-datatables\/css\/dataTables.bootstrap4.css/g' debian/multiflexi/usr/lib/multiflexi/MultiFlexi/Ui/DBDataTable.php
-	sed -i 's/css\/selectize/\/javascript\/selectize.js\/css\/selectize/' debian/multiflexi/usr/lib/multiflexi/MultiFlexi/Ui/DBDataTable.php
-	sed -i -e 's/\.\.\/i18n/\/usr\/share\/locale/g'            	     debian/multiflexi/usr/share/multiflexi/init.php
+	sed -i -e '/dirname(__DIR__)/c\    "\/etc\/multiflexi\/multiflexi\.env"' debian/multiflexi-web/usr/share/multiflexi/init.php
+	sed -i -e 's/composer\.json/\/usr\/lib\/multiflexi\/composer\.json/g' debian/multiflexi-web/usr/lib/multiflexi/MultiFlexi/Ui/PageBottom.php
+	sed -i -e 's/js\/jquery.dataTables.js/\/javascript\/jquery-datatables\/jquery.dataTables.js/g' debian/multiflexi-web/usr/lib/multiflexi/MultiFlexi/Ui/DBDataTable.php
+	sed -i -e 's/js\/dataTables.bootstrap4.js/\/javascript\/jquery-datatables\/dataTables.bootstrap4.js/g' debian/multiflexi-web/usr/lib/multiflexi/MultiFlexi/Ui/DBDataTable.php
+	sed -i -e 's/css\/dataTables.bootstrap4.css/\/javascript\/jquery-datatables\/css\/dataTables.bootstrap4.css/g' debian/multiflexi-web/usr/lib/multiflexi/MultiFlexi/Ui/DBDataTable.php
+	sed -i 's/css\/selectize/\/javascript\/selectize.js\/css\/selectize/' debian/multiflexi-web/usr/lib/multiflexi/MultiFlexi/Ui/DBDataTable.php
+	sed -i -e 's/\.\.\/i18n/\/usr\/share\/locale/g'            	     debian/multiflexi-web/usr/share/multiflexi/init.php
 	sed -i "s/'';/'$$(echo $${BUILD_NUMBER})';/"  src/MultiFlexi/Ui/PageBottom.php
 	rm  debian/multiflexi/usr/bin/multiflexi-zabbix-lld
 	rm  debian/multiflexi/usr/bin/multiflexi-zabbix-lld-company
