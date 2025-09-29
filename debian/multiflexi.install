@@ -1,25 +1,3 @@
-# Web files moved to multiflexi-web package
-# src/*.php                                 usr/share/multiflexi
-# src/favicon.ico                           usr/share/multiflexi
-# src/js/*.js                               usr/share/multiflexi/js
-# src/js/languages/*.js                     usr/share/multiflexi/js/languages/
-# src/assets/Buttons-1.5.6/js/*             usr/share/multiflexi/assets/Buttons-1.5.6/js/
-# src/assets/Buttons-1.5.6/css/*            usr/share/multiflexi/assets/Buttons-1.5.6/css/
-# src/assets/Buttons-1.5.6/swf/*            usr/share/multiflexi/assets/Buttons-1.5.6/swf/
-# src/images/*                              usr/share/multiflexi/images
-# src/css/*				                  usr/share/multiflexi/css
-debian/tmp/composer.json                  usr/lib/multiflexi
-#src/MultiFlexi/*.php                     usr/lib/multiflexi/MultiFlexi/
-
-src/MultiFlexi/Ui/*.php                   usr/lib/multiflexi/MultiFlexi/Ui/
-
-debian/conf/multiflexi.conf    		      etc/apache2/conf-available
-debian/conf/multiflexi.service 		      etc/avahi/services
 bin/*					                  usr/bin
 lib/*.php		                       	  usr/lib/multiflexi
-debian/com.vitexsoftware.multiflexi.metainfo.xml    usr/share/metainfo/
-debian/com.vitexsoftware.multiflexi.desktop         usr/share/applications/
-multiflexi.svg                 			usr/share/icons/hicolor/scalable/apps/
-i18n/cs_CZ/LC_MESSAGES/*.mo                	usr/share/locale/cs_CZ/LC_MESSAGES/
-i18n/en_US/LC_MESSAGES/*.mo                	usr/share/locale/en_US/LC_MESSAGES/
 tests/multiflexi_probe.multiflexi.app.json 	usr/share/multiflexi/
