@@ -1,0 +1,33 @@
+#!/bin/sh
+# prerm script for multiflexi-web
+
+set -e
+
+[ ! -e /usr/share/apache2/apache2-maintscript-helper ] ||
+    . /usr/share/apache2/apache2-maintscript-helper
+
+case "$1" in
+    remove|upgrade|deconfigure)
+        # Disable apache configuration
+        if [ -e /usr/share/apache2/apache2-maintscript-helper ]; then
+            apache2_invoke disconf multiflexi.conf || true
+        fi
+
+        # Remove lighttpd configuration
+        if [ -f /etc/lighttpd/conf-available/50-multiflexi.conf ]; then
+            rm -f /etc/lighttpd/conf-available/50-multiflexi.conf
+        fi
+        ;;
+
+    failed-upgrade)
+        ;;
+
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+        ;;
+esac
+
+#DEBHELPER#
+
+exit 0

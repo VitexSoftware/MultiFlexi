@@ -1,0 +1,43 @@
+# MultiFlexi Web Package
+
+This package (`multiflexi-web`) contains the web interface components for MultiFlexi.
+
+## Contents
+
+This package includes:
+- All PHP files from `src/*.php` 
+- Web assets (CSS, JavaScript, images)
+- MultiFlexi PHP classes from `src/MultiFlexi/`
+- API endpoints from `src/api/`
+- Web server configuration
+
+## Dependencies
+
+The package depends on:
+- `multiflexi-common` - Base configuration and user setup
+- `php-vitexsoftware-multiflexi-core` - Core MultiFlexi functionality
+- `php-vitexsoftware-ease-html-widgets` - HTML widgets framework
+- `php-vitexsoftware-ease-bootstrap4-widgets` - Bootstrap 4 widgets
+- `libjs-jquery-datatables` - DataTables jQuery plugin
+- `libjs-jquery-selectize.js` - Selectize.js for enhanced select boxes
+- `php-cli` - PHP command line interface
+
+## Installation
+
+The web files are installed to `/usr/share/multiflexi/` and the package automatically configures Apache2 and Lighttpd web servers when they are present.
+
+## Web Server Configuration
+
+The package handles:
+- Apache2 configuration via `/etc/apache2/conf-available/multiflexi.conf`
+- Lighttpd configuration via `/etc/lighttpd/conf-available/50-multiflexi.conf`
+- Proper file permissions for web files (www-data:www-data)
+
+## Relationship to Other Packages
+
+- `multiflexi` - Main package now recommends `multiflexi-web` instead of directly including web components
+- `multiflexi-common` - Provides shared configuration used by web interface
+- `multiflexi-api` - Provides REST API that the web interface can use
+- `multiflexi-cli` - Command-line tools that complement the web interface
+
+This separation allows for more flexible deployment scenarios where the web interface may not be needed on all installations.

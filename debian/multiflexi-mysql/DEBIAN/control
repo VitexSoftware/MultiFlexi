@@ -1,0 +1,16 @@
+Package: multiflexi-mysql
+Source: multiflexi
+Version: 1.23.0
+Architecture: all
+Maintainer: "Vítězslav Dvořák" <info@vitexsoftware.cz>
+Installed-Size: 11
+Depends: multiflexi, dbconfig-mysql, php-mysql, php-robmorgan-phinx | php-cakephp-phinx
+Suggests: mariadb-server
+Conflicts: multiflexi-pgsql, multiflexi-sqlite
+Replaces: multi-flexibee-setup-mysql
+Section: web
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/VitexSoftware/MultiFlexi
+Description: mariadb support for multiabraflexi setup
+ Mandatory dependencies for use Multi FlexiBee setup with MySQL/MariaDB databas

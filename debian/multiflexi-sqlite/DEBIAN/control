@@ -1,0 +1,15 @@
+Package: multiflexi-sqlite
+Source: multiflexi
+Version: 1.23.0
+Architecture: all
+Maintainer: "Vítězslav Dvořák" <info@vitexsoftware.cz>
+Installed-Size: 16
+Depends: multiflexi, dbconfig-sqlite3, php-sqlite3, sqlite3
+Conflicts: multiflexi-mysql, multiflexi-pgsql
+Replaces: multi-flexibee-setup-sqlite
+Section: web
+Priority: optional
+Multi-Arch: foreign
+Homepage: https://github.com/VitexSoftware/MultiFlexi
+Description: sqlite support for multiabraflexi setup
+ Mandatory dependencies for use Multi FlexiBee setup with SQLite database

@@ -1,8 +1,10 @@
 multiflexi (1.28.0) UNRELEASED; urgency=medium
 
   * custom zabbix-host for company
+  * New multiflexi-web package containing web interface components
+  * Separated web files from main multiflexi package for modular deployment
 
- -- vitex <info@vitexsoftware.cz>  Fri, 11 Jul 2025 00:55:20 +0200
+ -- vitex <info@vitexsoftware.cz>  Sun, 29 Sep 2025 00:00:00 +0200
 
 multiflexi (1.27.2) jammy; urgency=medium
 
