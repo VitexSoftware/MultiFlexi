@@ -45,6 +45,8 @@ apache_install() {
 
 . /usr/share/debconf/confmodule
 
+composer-debian multiflexi
+
 case "$1" in
     configure)
         # Set proper permissions for web files

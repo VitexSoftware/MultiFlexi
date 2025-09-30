@@ -1,3 +1,2 @@
-bin/*					                  usr/bin
+bin/*				                  usr/bin
 lib/*.php		                       	  usr/lib/multiflexi
-tests/multiflexi_probe.multiflexi.app.json 	usr/share/multiflexi/
