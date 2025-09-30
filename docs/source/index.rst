@@ -9,6 +9,8 @@ Welcome to MultiFlexi's documentation!
 
 **MultiFlexi** is a comprehensive PHP-based task scheduling and automation framework designed for accounting and business system integrations. It enables scheduled execution of applications and tools across multiple companies and platforms, with primary focus on systems like `AbraFlexi <https://www.abra.eu/flexi/>`_ and `Stormware Pohoda <https://www.stormware.cz/>`_.
 
+**Version 1.29.0** brings enhanced monitoring capabilities with the new MultiFlexi Probe application for system health checks and monitoring.
+
 Key Features
 ------------
 

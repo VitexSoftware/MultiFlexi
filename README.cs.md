@@ -12,6 +12,8 @@ MultiFlexi
 
 Umožňuje spouštět zvolené nástroje nad určitými účetními jednotkami AbraFlexi v daných intervalech.
 
+**Verze 1.29.0** přináší vylepšené možnosti monitorování s novou aplikací MultiFlexi Probe pro kontrolu stavu systému a testování.
+
 Nastavené úlohy jsou pravidelně spouštěny ze systémovécho plánovače.
 Protokol spouštění je zapisován do systémového logu.
 
@@ -56,7 +58,21 @@ ve složce bin se nacházejí tyto spouštěče různých funkcí:
 * `multiflexi-job2script` - vygeneruje skript s nastavením prostředí a příkazem pro běhu úlohy dle jejího čísla
 * `multiflexi-json-app-remover` - na základě json definice odstraní aplikaci z MultiFlexi
 * `multiflexi-json2app` - načte definice aplikace ze souboru
-* `multiflexi-probe` - pomocný nástroj pro testování funkce aplikace
+* `multiflexi-probe` - sonda pro monitorování systému a kontrolu stavu MultiFlexi
+
+multiflexi-cli
+--------------
+
+MultiFlexi CLI poskytuje komplexní možnosti správy s podporou pro aplikace, firmy, úlohy, šablony spuštění a další.
+
+Použití: multiflexi-cli <příkaz> [akce] [možnosti]
+
+Klíčové příkazy: application, company, job, runtemplate, version
+
+**Správa aplikací:**
+- `multiflexi-cli application validate-json --json app.json` - validace JSON aplikace proti schématu
+- `multiflexi-cli application import-json --json app.json` - import aplikace z JSON
+- `multiflexi-cli application list` - seznam všech aplikací
 
 
 Pluginy
@@ -66,7 +82,7 @@ Jako plugin je možné použít jakýkoliv spustitelný skript nebo binárku. Uv
 
 |Jméno|Popis|Domovská stránka|
 |-----|-----|----------------|
-|MultiFlexi Sonda|Testovací nástroj spouštěče úloh|https://github.com/VitexSoftware/MultiFlexi|
+|MultiFlexi Probe|Sonda pro monitorování systému a testování funkcí|https://github.com/VitexSoftware/MultiFlexi|
 |Email Importer|Načítá doklady z mailboxu do FlexiBee|https://github.com/VitexSoftware/AbraFlexi-email-importer|
 |discomp2abraflexi|Import Pricelist from Discomp to AbraFlexi|https://github.com/Spoje-NET/discomp2abraflexi|
 |AbraFlexi Revolut statements import|Import Revolut bank statemetnts into AbraFlexi|https://github.com/VitexSoftware/AbraFlexi-Revolut|

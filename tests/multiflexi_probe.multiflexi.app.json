@@ -54,7 +54,7 @@
             "required": false
         }, 
         "FORCE_EXITCODE": {
-            "type": "number",
+            "type": "integer",
             "description": "Force exit code",
             "defval": "0",
             "required": false

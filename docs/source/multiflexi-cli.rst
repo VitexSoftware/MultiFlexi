@@ -110,6 +110,7 @@ Examples:
     multiflexi-cli application import-json --json=app.json
     multiflexi-cli application export-json --id=1 --json=app.json
     multiflexi-cli application showconfig --id=1
+    multiflexi-cli application validate-json --json=app.json
 
 company
 -------

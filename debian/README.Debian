@@ -1,22 +1,30 @@
-Multi FlexiBee setup
---------------------
+MultiFlexi Setup
+----------------
 
+MultiFlexi version 1.29.0 includes enhanced monitoring capabilities with the MultiFlexi Probe application.
 
 You can install initial demo data using command:
 
 ```
-sudo phinx seed:run -c /usr/lib/multi-flexibee-setup/phinx-adapter.php
+sudo phinx seed:run -c /usr/lib/multiflexi/phinx-adapter.php
 ```
 or 
 
 ```
- phinx seed:run -c /usr/lib/multi-flexibee-setup/phinx-adapter.php -s AppSeeder
+phinx seed:run -c /usr/lib/multiflexi/phinx-adapter.php -s AppSeeder
 ```
 
-to load only plugins definitions.
+to load only application definitions.
 
-If you use sqlite database its data file is /var/lib/multi-flexibee-setup/multiflexibeesetup
+If you use sqlite database its data file is /var/lib/multiflexi/multiflexi.sqlite
 
+You can also use the MultiFlexi CLI for management:
 
-Then you can log in as user "demo" with password "demo" on  http://localhost/multi-flexibee-setup/
+```
+multiflexi-cli application list
+multiflexi-cli application validate-json --json /path/to/app.json
+multiflexi-cli application import-json --json /path/to/app.json
+```
+
+Then you can log in as user "demo" with password "demo" on http://localhost/multiflexi/
 
