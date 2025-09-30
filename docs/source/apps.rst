@@ -32,7 +32,7 @@ Application is defined by a JSON file. The file must contain the following field
 
 The ``environment`` field contains a list of environment variables required by the application. Each variable must have the following fields:
 
-- ``type``: Type of the variable (text, password, string)
+- ``type``: Type of the variable. Allowed values: ``string``, ``file-path``, ``email``, ``url``, ``integer``, ``float``, ``bool``, ``password``, ``set``, ``text``
 - ``description``: Description of the variable
 - ``defval``: Default value of the variable - you can use {VARIABLE_NAME} to reference other environment variables
 - ``required``: Whether the variable is required or not
@@ -73,7 +73,7 @@ Here is an example of a JSON file defining an application:
       "topics": "Bank,RaiffeisenBank,Transactions,Check,Json,Report",
       "environment": {
           "ACCOUNT_NUMBER": {
-              "type": "text",
+              "type": "string",
               "description": "Bank Account Number",
               "defval": "",
               "required": true
@@ -208,6 +208,27 @@ Basic Report Example:
        { "level": "info", "text": "Processing completed" }
      ]
    }
+
+MultiFlexi Probe Application
+----------------------------
+
+MultiFlexi includes a built-in probe application for system monitoring and health checks. The probe application is useful for:
+
+- Testing MultiFlexi functionality
+- System health monitoring
+- Environment validation
+- Debugging application execution
+
+The probe application supports various environment variables:
+
+- ``FILE_UPLOAD``: Testing file upload field (file-path type)
+- ``PASSWORD``: Example secret field (password type) 
+- ``APP_DEBUG``: Show debug messages (bool type)
+- ``RESULT_FILE``: Write output JSON data to specified file (string type)
+- ``FORCE_EXITCODE``: Force specific exit code for testing (integer type)
+- ``ZABBIX_KEY``: Default name for Zabbix item key (string type)
+
+The probe generates an ``env_report.json`` artifact containing environment information and system status.
 
 Implementation Notes:
 

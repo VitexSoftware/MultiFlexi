@@ -185,3 +185,35 @@ This method checks the database type and returns the appropriate condition for f
 
 By following this approach, you can ensure that your queries are compatible with multiple database types, making your application more flexible and robust.
 
+Application JSON Schema Validation
+-----------------------------------
+
+MultiFlexi enforces JSON schema validation for application definitions to ensure consistency and prevent configuration errors.
+
+**Schema URL**: https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json
+
+**Validation Command**:
+
+.. code-block:: bash
+
+    multiflexi-cli application validate-json --json path/to/app.json
+
+**Common Validation Errors**:
+
+* **Invalid type values**: Environment variable types must be one of: ``string``, ``file-path``, ``email``, ``url``, ``integer``, ``float``, ``bool``, ``password``, ``set``, ``text``
+* **Array vs Object**: Fields like ``topics``, ``requirements``, and ``artifacts`` must be arrays, not objects
+* **Missing required fields**: All required fields in the schema must be present
+
+**Example of correct environment variable definition**:
+
+.. code-block:: json
+
+    "environment": {
+        "FORCE_EXITCODE": {
+            "type": "integer",
+            "description": "Force specific exit code",
+            "defval": "0",
+            "required": false
+        }
+    }
+

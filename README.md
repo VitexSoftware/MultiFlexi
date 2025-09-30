@@ -11,6 +11,8 @@ MultiFlexi
 
 MultiFlexi is a comprehensive PHP-based task scheduling and automation framework designed for accounting and business system integrations. It enables scheduled execution of applications and tools across multiple companies and platforms, with primary focus on systems like AbraFlexi and Pohoda.
 
+**Version 1.29.0** introduces enhanced monitoring capabilities with the new MultiFlexi Probe application for system health checks and testing.
+
 ## Key Features
 
 - **Multi-Platform Integration**: Native support for AbraFlexi, Pohoda, and other business systems
@@ -87,14 +89,21 @@ In the `bin` directory, you will find the following launchers for various functi
 - `multiflexi-job2script` - generates a script with environment settings and a command to run a job by its number
 - `multiflexi-json-app-remover` - removes an application from MultiFlexi based on a JSON definition
 - `multiflexi-json2app` - loads application definitions from a file
-- `multiflexi-probe` - helper tool for testing application functionality
+- `multiflexi-probe` - system monitoring and health check probe for MultiFlexi functionality testing
 
 multiflexi-cli
 --------------
 
-Usage: multiflexi-cli <command> [argument] [id]
+The MultiFlexi CLI provides comprehensive management capabilities with support for applications, companies, jobs, run templates, and more.
 
-Commands: version, list, remove
+Usage: multiflexi-cli <command> [action] [options]
+
+Key commands: application, company, job, runtemplate, version
+
+**Application management:**
+- `multiflexi-cli application validate-json --json app.json` - validate application JSON against schema
+- `multiflexi-cli application import-json --json app.json` - import application from JSON
+- `multiflexi-cli application list` - list all applications
 
 Example:
 

@@ -3,6 +3,8 @@ Installation Guide
 
 Installation of MultiFlexi is simple on Debian based systems. The installation process is done using Debian packages. The packages are available for MySQL, PostgreSQL, and SQLite databases.
 
+**Current Version: 1.29.0** - includes enhanced monitoring capabilities with MultiFlexi Probe.
+
 .. attention::
 
    The MultiFlexi packages are available for

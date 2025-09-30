@@ -6,8 +6,8 @@ project = 'MultiFlexi'
 copyright = '2024-2025, VitexSoftware'
 author = 'Vitex'
 
-release = '0.1'
-version = '0.1.0'
+release = '1.29.0'
+version = '1.29.0'
 
 # -- General configuration
 
@@ -29,7 +29,7 @@ templates_path = ['_templates']
 
 # -- Options for HTML output
 
-html_theme = "shibuya"
+html_theme = "alabaster"
 
 # Pygments styling
 # Use a readable style for normal (light) mode and explicit dark style for
