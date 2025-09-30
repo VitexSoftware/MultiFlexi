@@ -33,7 +33,7 @@ Description: shared multiflexi configuration
 Package: multiflexi-api
 Multi-Arch: foreign
 Pre-Depends: multiflexi-database
-Depends: ${misc:Depends}, php-vitexsoftware-multiflexi-server, php-yaml, multiflexi
+Depends: ${misc:Depends}, php-vitexsoftware-multiflexi-server, php-yaml, multiflexi-web
 Architecture: all
 Description: API Server for MultiFlexi
  json/xml/yaml/html interface
