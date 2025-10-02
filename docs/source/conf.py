@@ -29,7 +29,7 @@ templates_path = ['_templates']
 
 # -- Options for HTML output
 
-html_theme = "alabaster"
+html_theme = "shibuya"
 
 # Pygments styling
 # Use a readable style for normal (light) mode and explicit dark style for
@@ -47,6 +47,9 @@ try:  # pragma: no cover - defensive
     html_theme_options = html_theme_options  # type: ignore  # preserve if predefined
 except NameError:  # noqa: F821
     html_theme_options = {}
+
+# Provide a dark style key to satisfy theme expectations if accessed
+html_theme_options.setdefault('pygments_style_dark', 'native')
 
 # -- Options for EPUB output
 epub_show_urls = 'footnote'

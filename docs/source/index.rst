@@ -123,6 +123,9 @@ Contents
    architecture
    apps_overview
    multiflexi-cli
+   projects
+   coding-standards
+   ci-cd
 
 .. autosummary::
 
