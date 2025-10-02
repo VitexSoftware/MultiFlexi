@@ -95,12 +95,24 @@ $errorMiddleware = $container->get(ErrorMiddleware::class);
 // route10 → pingGet → /VitexSoftware/MultiFlexi/1.0.0/ping
 // route11 → (unnamed) → /
 
+// Temporarily disable token authentication to test basic auth
+// $app->add(new \Dyorg\TokenAuthentication([
+//     'path' => $app->getBasePath(),
+//     'passthrough' => [$path, $path.'ping', $path.'login'], /* Full paths to match basic auth ignore */
+//     'authenticator' => static function ($arguments) {
+//         // Check if token exists in database and is valid
+//         $token = new \MultiFlexi\Token();
+//         $token->loadFromSQL(['token' => $arguments['token']]);
+//         return $token->getMyKey() !== null;
+//     },
+// ]));
+
 $app->add(new \Tuupola\Middleware\HttpBasicAuthentication([
     'relaxed' => ['localhost', 'multiflexi.local'],
     //            'path' => ['/EASE/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/apps/', $path . '/apps', $path . '/users'],
     //            "ignore" => [$path . '/', $path . '/ping', $path . '/authorize'],
     //            'path' => '/',
-    'ignore' => [$path.'/', $path.'/ping/'],
+    'ignore' => [$path, $path.'ping', $path.'login'],
     //            "authenticator" => new \MultiFlexi\Auth\BasicAuthenticator()
     'authenticator' => static function ($arguments) {
         $prober = \Ease\Shared::user(null, '\MultiFlexi\User');
@@ -112,14 +124,6 @@ $app->add(new \Tuupola\Middleware\HttpBasicAuthentication([
         $prober->loadFromSQL(['login' => $arguments['user']]);
 
         return $prober->isAccountEnabled() && $prober->passwordValidation($arguments['password'], $prober->getDataValue($prober->passwordColumn));
-    },
-]));
-
-$app->add(new \Dyorg\TokenAuthentication([
-    'path' => $app->getBasePath(),
-    'passthrough' => ['/', '/ping', '/login'], /* or ['/api/auth', '/api/test'] */
-    'authenticator' => static function ($arguments) {
-        return (bool) mt_rand(0, 1);
     },
 ]));
 

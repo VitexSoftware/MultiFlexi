@@ -4,29 +4,14 @@ MultiFlexi Development
 Welcome to the MultiFlexi development documentation. This guide will help you get started with developing and contributing to the MultiFlexi project.
 
 .. toctree::
-    :maxdepth: 2
-    :caption: Development Topics
-
-
-.. image:: https://wakatime.com/badge/user/5abba9ca-813e-43ac-9b5f-b1cfdf3dc1c7/project/28a38241-3585-4ce7-b365-d7341c69e635.svg
-    :target: https://wakatime.com
-
-
-
-Setting Up Your Development Environment
----------------------------------------
-MultiFlexi Development
-======================
-
-Welcome to the MultiFlexi development documentation. This guide will help you get started with developing and contributing to the MultiFlexi project.
-
-.. toctree::
    :maxdepth: 2
    :caption: Development Topics
 
+   project-components
 
 .. image:: https://wakatime.com/badge/user/5abba9ca-813e-43ac-9b5f-b1cfdf3dc1c7/project/28a38241-3585-4ce7-b365-d7341c69e635.svg
    :target: https://wakatime.com
+
 
 
 Setting Up Your Development Environment
@@ -149,6 +134,57 @@ We welcome contributions from the community. To contribute, follow these steps:
 
 Thank you for contributing to MultiFlexi!
 
+Development Workflow
+--------------------
+
+**Git Workflow**
+
+MultiFlexi uses a standard Git workflow with feature branches:
+
+1. **Create Feature Branch**: Always create a new branch for features or fixes
+
+   .. code-block:: bash
+
+      git checkout -b feature/new-executor-type
+      git checkout -b fix/job-timeout-issue
+
+2. **Commit Guidelines**: Use conventional commit messages
+
+   .. code-block:: bash
+
+      git commit -m "feat: add Kubernetes executor support"
+      git commit -m "fix: resolve infinite recursion in Docker executor"
+      git commit -m "docs: update API documentation"
+
+3. **Testing Before Push**: Always run tests before pushing
+
+   .. code-block:: bash
+
+      ./vendor/bin/phpunit
+      ./vendor/bin/phpstan analyse
+
+**CI/CD Pipeline**
+
+The project uses Jenkins for continuous integration:
+
+1. **Source Push**: Code pushed to GitHub triggers Jenkins build
+2. **Package Build**: ``debian/Jenkinsfile`` creates .deb packages (~10 minutes)
+3. **Unstable Repository**: Packages available at:
+   - ``http://repo.vitexsoftware.cz/``
+   - ``http://repo.vitexsoftware.com/``
+4. **Release Process**: Manual Jenkins trigger using ``debian/Jenkinsfile-release``
+5. **Production Repository**: Released packages at ``https://repo.multiflexi.eu/``
+
+**Deployment Environments**
+
+* **Development**: ``http://localhost/MultiFlexi/`` (source code)
+* **Local Package**: ``http://localhost/multiflexi/`` (installed .deb)
+* **Testing**: ``https://vyvojar.spoje.net/multiflexi/`` (CI packages)
+* **Demo**: ``https://demo.multiflexi.eu/`` (Ansible deployed)
+* **Production**:
+  - ``https://multiflexi.vitexsoftware.com/``
+  - ``https://multiflexi.spojenet.cz/``
+
 Handling Multiple Database Types
 --------------------------------
 
@@ -184,6 +220,54 @@ Here is an example method ``todaysCond`` that generates a condition to fetch rec
 This method checks the database type and returns the appropriate condition for fetching records for the current day based on the specified column.
 
 By following this approach, you can ensure that your queries are compatible with multiple database types, making your application more flexible and robust.
+
+Coding Standards and Best Practices
+------------------------------------
+
+**PHP Standards**
+
+MultiFlexi follows PSR-12 coding standards with additional project-specific conventions:
+
+* **Classes**: PascalCase (``RunTemplate``, ``JobExecutor``)
+* **Methods**: camelCase (``executeJob``, ``getCompanyList``)
+* **Variables**: camelCase (``$companyId``, ``$jobResult``)
+* **Constants**: SCREAMING_SNAKE_CASE (``DB_HOST``, ``DEFAULT_TIMEOUT``)
+* **Database**: snake_case (``run_template``, ``company_id``)
+
+**Documentation Requirements**
+
+All public methods must include PHPDoc comments:
+
+.. code-block:: php
+
+   /**
+    * Execute a job with the specified parameters
+    *
+    * @param int $jobId The job identifier
+    * @param array $params Execution parameters
+    * @return bool True on success, false on failure
+    * @throws \Exception When job cannot be found
+    */
+   public function executeJob(int $jobId, array $params = []): bool
+
+**Environment Configuration**
+
+Use environment variables for configuration, with sensible defaults:
+
+.. code-block:: php
+
+   $logLevel = getenv('LOG_LEVEL') ?: 'info';
+   $dbHost = getenv('DB_HOST') ?: 'localhost';
+
+**Logging Best Practices**
+
+Use the Ease logging framework with appropriate log levels:
+
+.. code-block:: php
+
+   $this->addStatusMessage('Job started', 'info');
+   $this->addStatusMessage('Processing company: ' . $companyName, 'debug');
+   $this->addStatusMessage('Job failed: ' . $error, 'error');
 
 Application JSON Schema Validation
 -----------------------------------
