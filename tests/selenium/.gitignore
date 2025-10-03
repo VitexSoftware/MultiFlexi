@@ -1,0 +1,30 @@
+# Selenium test environment configuration
+.env
+.env.local
+.env.test
+
+# Node.js dependencies  
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Test artifacts
+screenshots/
+test-results/
+coverage/
+*.log
+
+# Chrome/Chromedriver
+chromedriver
+chromedriver.exe
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo

@@ -120,6 +120,7 @@ Contents
    commandline
    zabbix
    development
+   selenium-testing
    architecture
    apps_overview
    multiflexi-cli
