@@ -1,0 +1,119 @@
+name: MultiFlexi Selenium Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'src/**'
+      - 'tests/selenium/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'src/**' 
+      - 'tests/selenium/**'
+  workflow_dispatch:
+
+jobs:
+  selenium-tests:
+    runs-on: ubuntu-latest
+    
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root_password
+          MYSQL_DATABASE: multiflexi_test
+          MYSQL_USER: multiflexi_test
+          MYSQL_PASSWORD: test_password
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: tests/selenium/package-lock.json
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, json, yaml
+        tools: composer:v2
+
+    - name: Install PHP dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+
+    - name: Setup MultiFlexi configuration
+      run: |
+        cp .env.example .env
+        # Configure for test environment
+        sed -i 's/DB_HOST=localhost/DB_HOST=127.0.0.1/' .env
+        sed -i 's/DB_DATABASE=multiflexi/DB_DATABASE=multiflexi_test/' .env
+        sed -i 's/DB_USERNAME=multiflexi/DB_USERNAME=multiflexi_test/' .env
+        sed -i 's/DB_PASSWORD=/DB_PASSWORD=test_password/' .env
+
+    - name: Setup web server
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y apache2 php libapache2-mod-php
+        sudo a2enmod rewrite
+        sudo cp -r . /var/www/html/MultiFlexi
+        sudo chown -R www-data:www-data /var/www/html/MultiFlexi
+        sudo systemctl start apache2
+
+    - name: Install Chrome
+      uses: browser-actions/setup-chrome@latest
+
+    - name: Install Selenium test dependencies
+      working-directory: tests/selenium
+      run: |
+        cp .env.example .env
+        npm ci
+
+    - name: Configure Selenium test environment
+      working-directory: tests/selenium
+      run: |
+        # Update test configuration
+        sed -i 's|BASE_URL=.*|BASE_URL=http://localhost/MultiFlexi|' .env
+        sed -i 's|DB_HOST=.*|DB_HOST=127.0.0.1|' .env
+        sed -i 's|DB_NAME=.*|DB_NAME=multiflexi_test|' .env
+        sed -i 's|DB_USER=.*|DB_USER=multiflexi_test|' .env
+        sed -i 's|DB_PASSWORD=.*|DB_PASSWORD=test_password|' .env
+        sed -i 's|HEADLESS=.*|HEADLESS=true|' .env
+
+    - name: Wait for services
+      run: |
+        # Wait for MySQL
+        while ! mysqladmin ping -h127.0.0.1 -P3306 -umultiflexi_test -ptest_password --silent; do
+          sleep 1
+        done
+        # Wait for Apache
+        while ! curl -s http://localhost/MultiFlexi > /dev/null; do
+          sleep 1
+        done
+
+    - name: Run Selenium tests
+      working-directory: tests/selenium
+      run: ./run-tests.sh ci
+
+    - name: Upload screenshots on failure
+      uses: actions/upload-artifact@v3
+      if: failure()
+      with:
+        name: selenium-screenshots
+        path: tests/selenium/screenshots/
+        retention-days: 7
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-results
+        path: tests/selenium/test-results/
+        retention-days: 7

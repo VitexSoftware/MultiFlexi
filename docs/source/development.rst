@@ -8,6 +8,7 @@ Welcome to the MultiFlexi development documentation. This guide will help you ge
    :caption: Development Topics
 
    project-components
+   selenium-testing
 
 .. image:: https://wakatime.com/badge/user/5abba9ca-813e-43ac-9b5f-b1cfdf3dc1c7/project/28a38241-3585-4ce7-b365-d7341c69e635.svg
    :target: https://wakatime.com
@@ -300,4 +301,43 @@ MultiFlexi enforces JSON schema validation for application definitions to ensure
             "required": false
         }
     }
+
+
+Testing Strategy
+----------------
+
+MultiFlexi employs a comprehensive testing strategy to ensure code quality and system reliability:
+
+**Unit Testing**
+  PHPUnit tests for individual components and classes, focusing on business logic validation and error handling.
+
+**Integration Testing**  
+  Database connectivity testing and API endpoint validation across different environments.
+
+**End-to-End Web Testing**
+  Comprehensive Selenium-based web interface testing with support for multiple environments and internationalization. 
+  See :doc:`selenium-testing` for detailed information.
+
+**Key Testing Features:**
+
+- **Multi-Environment Support**: Testing across development, local package, and staging environments
+- **International Standards**: Full English localization for global development teams  
+- **Business Scenario Testing**: Real-world workflow validation including AbraFlexi integration
+- **Automated CI/CD Integration**: Headless testing support for continuous integration pipelines
+
+**Running Tests:**
+
+.. code-block:: bash
+
+    # PHP Unit Tests
+    ./vendor/bin/phpunit
+    
+    # Static Analysis
+    ./vendor/bin/phpstan analyse
+    
+    # Selenium Web Tests
+    cd tests/selenium
+    npm install
+    npm run dev:simple        # Quick smoke test
+    npm run test:scenarios    # Business scenarios
 
