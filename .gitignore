@@ -59,3 +59,4 @@ debian/multiflexi-probe.debhelper.log
 docs/_build/
 debian/multiflexi-web/
 debian/multiflexi-web.substvars
+src/php_errors.log
