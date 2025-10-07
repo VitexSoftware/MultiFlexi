@@ -72,7 +72,13 @@ class WebDriverHelper {
      * Navigate to a specific page
      */
     async navigateTo(path = '') {
-        const url = `${this.baseUrl}${path}`;
+        let url = this.baseUrl;
+        if (path) {
+            // Remove trailing slash from baseUrl and leading slash from path to avoid double slashes
+            const cleanBaseUrl = url.endsWith("/") ? url.slice(0, -1) : url;
+            const cleanPath = path.startsWith("/") ? path : "/" + path;
+            url = cleanBaseUrl + cleanPath;
+        }
         if (process.env.DEBUG === 'true') {
             console.log(`Navigating to: ${url}`);
         }
