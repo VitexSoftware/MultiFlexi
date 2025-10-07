@@ -17,7 +17,7 @@
     "require": {
         "ext-yaml": "*",
         "ext-simplexml": "*",
-        "vitexsoftware/ease-core": "^1.48",
+        "vitexsoftware/multiflexi-core": "dev-main",
         "vitexsoftware/ease-twbootstrap4": "^1.9",
         "vitexsoftware/ease-fluentpdo": "dev-main",
         "vitexsoftware/ease-twbootstrap4-widgets": "^1.7",
@@ -25,16 +25,13 @@
         "datatables/datatables": "^1.10",
         "sensiolabs/ansi-to-html": "^2.0",
         "rcubitto/json-pretty": "^1.0",
-        "phplucidframe/console-table": "^1.4",
         "goat1000/svggraph": "^3.20",
         "vitexsoftware/ease-core-bricks": "^1.1",
-        "confirm-it-solutions/php-zabbix-api": "^3.0",
-        "vitexsoftware/ease-html-widgets": "^1.1",
-        "vitexsoftware/ease-html": "^1.40",
         "vitexsoftware/multiflexi-api-server": "dev-main",
+        "vitexsoftware/ease-html-widgets": "^1.1",
+        "confirm-it-solutions/php-zabbix-api": "^3.0",
         "cboden/ratchet": "^0.5",
-        "textalk/websocket": "dev-master",
-        "vitexsoftware/multiflexi-core": "dev-main"
+        "textalk/websocket": "dev-master"
     },
     "license": "MIT",
     "authors": [
@@ -63,11 +60,10 @@
     "require-dev": {
         "phpunit/phpunit": "*",
         "phpstan/phpstan": "*",
-        "friendsofphp/php-cs-fixer": "^3.87",
+        "friendsofphp/php-cs-fixer": "^3.88",
         "ergebnis/composer-normalize": "^2.48",
-        "ergebnis/php-cs-fixer-config": "^6.54",
-        "phpstan/phpstan-phpunit": "2.0.x-dev",
-        "rector/rector": "dev-main"
+        "ergebnis/php-cs-fixer-config": "^6.55",
+        "phpstan/phpstan-phpunit": "2.0.x-dev"
     },
     "scripts": {
         "post-install-cmd": [
