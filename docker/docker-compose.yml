@@ -1,38 +1,113 @@
-version: '3.8'
-
 services:
   web:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: docker/Dockerfile
     ports:
-      - "80:80"
+      - "${WEB_PORT:-8080}:80"
     environment:
-      - DB_CONNECTION=sqlite
-      - DB_DATABASE=/opt/multiflexi/db/multiflexi.sqlite
+      - DB_CONNECTION=${DB_CONNECTION:-mysql}
+      - DB_HOST=db
+      - DB_DATABASE=${DB_DATABASE:-multiflexi}
+      - DB_USERNAME=${DB_USERNAME:-multiflexiuser}
+      - DB_PASSWORD=${DB_PASSWORD:-userpassword}
+      - APACHE_DOCUMENT_ROOT=/opt/multiflexi/src
     volumes:
-      - ./multiflexi:/opt/multiflexi
+      - web_logs:/var/log/apache2
+      - sqlite_data:/opt/multiflexi/db
+      - config_data:/etc/multiflexi
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    networks:
+      - multiflexi_network
+    restart: unless-stopped
 
-  daemon:
-    image: multiflexi-daemon:latest
-    restart: always
+  executor:
+    build:
+      context: .
+      dockerfile: Dockerfile.executor
+    environment:
+      - DB_CONNECTION=${DB_CONNECTION:-mysql}
+      - DB_HOST=db
+      - DB_DATABASE=${DB_DATABASE:-multiflexi}
+      - DB_USERNAME=${DB_USERNAME:-multiflexiuser}
+      - DB_PASSWORD=${DB_PASSWORD:-userpassword}
     volumes:
-      - ./multiflexi:/opt/multiflexi
+      - executor_logs:/var/log/multiflexi
+      - config_data:/etc/multiflexi
+      - ./multiflexi.env:/etc/multiflexi/multiflexi.env:ro
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    networks:
+      - multiflexi_network
+    restart: unless-stopped
+
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile.scheduler
+    environment:
+      - DB_CONNECTION=${DB_CONNECTION:-mysql}
+      - DB_HOST=db
+      - DB_DATABASE=${DB_DATABASE:-multiflexi}
+      - DB_USERNAME=${DB_USERNAME:-multiflexiuser}
+      - DB_PASSWORD=${DB_PASSWORD:-userpassword}
+    volumes:
+      - scheduler_logs:/var/log/multiflexi
+      - config_data:/etc/multiflexi
+      - ./multiflexi.env:/etc/multiflexi/multiflexi.env:ro
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - multiflexi_network
+    restart: unless-stopped
 
   db:
-    image: mysql:5.7
-    restart: always
+    image: mysql:8.0
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: multiflexi
-      MYSQL_USER: multiflexiuser
-      MYSQL_PASSWORD: userpassword
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-strong_root_password}
+      - MYSQL_DATABASE=${DB_DATABASE:-multiflexi}
+      - MYSQL_USER=${DB_USERNAME:-multiflexiuser}
+      - MYSQL_PASSWORD=${DB_PASSWORD:-userpassword}
     volumes:
       - db_data:/var/lib/mysql
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    networks:
+      - multiflexi_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+      interval: 10s
+      start_period: 30s
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    networks:
+      - multiflexi_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  multiflexi_network:
+    driver: bridge
 
 volumes:
   db_data:
+  redis_data:
+  web_logs:
+  executor_logs:
+  scheduler_logs:
+  sqlite_data:
+  config_data:

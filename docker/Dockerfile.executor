@@ -1,0 +1,33 @@
+FROM debian:bookworm-slim
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Add VitexSoftware repository
+RUN apt-get update && apt-get install -y \
+    wget \
+    lsb-release \
+    apt-transport-https \
+    gpg \
+    && echo "deb http://repo.vitexsoftware.com $(lsb_release -sc) main backports" | tee /etc/apt/sources.list.d/vitexsoftware.list \
+    && wget -O /etc/apt/trusted.gpg.d/vitexsoftware.gpg http://repo.vitexsoftware.cz/keyring.gpg \
+    && apt-get update
+
+# Install MultiFlexi executor package
+RUN apt-get install -y \
+    multiflexi-executor \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create multiflexi user and group (matching systemd service)
+RUN groupadd -r multiflexi && useradd -r -g multiflexi multiflexi
+
+# Create required directories
+RUN mkdir -p /etc/multiflexi && chown multiflexi:multiflexi /etc/multiflexi
+
+# Set working directory
+WORKDIR /opt/multiflexi
+
+# Switch to multiflexi user
+USER multiflexi
+
+# Run the executor daemon (matching systemd ExecStart)
+CMD ["/usr/bin/php", "/usr/lib/multiflexi-executor/daemon.php"]
