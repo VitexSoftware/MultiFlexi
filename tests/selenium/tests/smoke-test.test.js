@@ -36,7 +36,7 @@ describe('Smoke Test - Základní funkčnost MultiFlexi', function() {
         it('should load MultiFlexi homepage', async function() {
             console.log('🌐 Testing homepage loading...');
             
-            await authPage.driver.get(process.env.BASE_URL || 'http://localhost/multiflexi');
+            await authPage.driver.get(process.env.BASE_URL || 'http://localhost/multiflexi/');
             
             const title = await authPage.driver.getTitle();
             expect(title).to.include('MultiFlexi');
@@ -83,16 +83,20 @@ describe('Smoke Test - Základní funkčnost MultiFlexi', function() {
             console.log('🧭 Test základní navigace...');
             
             const sections = [
-                { url: '/companies', name: 'Companies' },
-                { url: '/applications', name: 'Applications' },
-                { url: '/credentials', name: 'Credentials' },
-                { url: '/runtemplates', name: 'RunTemplates' },
-                { url: '/jobs', name: 'Jobs' }
+                { url: '/companies.php', name: 'Companies' },
+                { url: '/apps.php', name: 'Applications' },
+                { url: '/credentials.php', name: 'Credentials' },
+                { url: '/runtemplates.php', name: 'RunTemplates' },
+                { url: '/joblist.php', name: 'Jobs' }
             ];
             
             for (const section of sections) {
                 try {
-                    const fullUrl = (process.env.BASE_URL || 'http://localhost/multiflexi') + section.url;
+                    // Use proper URL construction to avoid double slashes
+                    const baseUrl = process.env.BASE_URL || 'http://localhost/multiflexi/';
+                    const cleanBaseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+                    const cleanPath = section.url.startsWith('/') ? section.url : '/' + section.url;
+                    const fullUrl = cleanBaseUrl + cleanPath;
                     await authPage.driver.get(fullUrl);
                     
                     // Počkat na načtení stránky
