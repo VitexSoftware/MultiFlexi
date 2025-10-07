@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9fe0aeba32dc7ce3585bd7c091ecc98",
+    "content-hash": "1417e3767e0c379f77ccafb34042096c",
     "packages": [
         {
             "name": "cakephp/core",
@@ -1902,51 +1902,6 @@
             "time": "2024-06-19T15:47:45+00:00"
         },
         {
-            "name": "phplucidframe/console-table",
-            "version": "v1.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phplucidframe/console-table.git",
-                "reference": "8a3a571f6523e323f28d3a31d9991394c9db75f8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phplucidframe/console-table/zipball/8a3a571f6523e323f28d3a31d9991394c9db75f8",
-                "reference": "8a3a571f6523e323f28d3a31d9991394c9db75f8",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "php": ">=7.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "LucidFrame\\": "src/LucidFrame/",
-                    "LucidFrameTest\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sithu",
-                    "email": "sithu@phplucidframe.com"
-                }
-            ],
-            "description": "Console Table",
-            "support": {
-                "issues": "https://github.com/phplucidframe/console-table/issues",
-                "source": "https://github.com/phplucidframe/console-table/tree/v1.4.0"
-            },
-            "time": "2025-05-27T14:28:44+00:00"
-        },
-        {
             "name": "phrity/net-uri",
             "version": "1.3.0",
             "source": {
@@ -3554,12 +3509,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "80f8c48cae842985374a60d8eff69f073eab500e"
+                "reference": "13d3176cf8ad8ced24202844e9f95af11e2959fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/80f8c48cae842985374a60d8eff69f073eab500e",
-                "reference": "80f8c48cae842985374a60d8eff69f073eab500e",
+                "url": "https://api.github.com/repos/symfony/console/zipball/13d3176cf8ad8ced24202844e9f95af11e2959fc",
+                "reference": "13d3176cf8ad8ced24202844e9f95af11e2959fc",
                 "shasum": ""
             },
             "require": {
@@ -3644,7 +3599,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-10-02T06:35:43+00:00"
+            "time": "2025-10-06T10:25:16+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -4936,12 +4891,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-ease-fluentpdo.git",
-                "reference": "b7754c03e70278c8b2086a0e9128b0566012ed59"
+                "reference": "7387ed1dd73f7f3fceb94b5b4c57566322d27503"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-fluentpdo/zipball/b7754c03e70278c8b2086a0e9128b0566012ed59",
-                "reference": "b7754c03e70278c8b2086a0e9128b0566012ed59",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-fluentpdo/zipball/7387ed1dd73f7f3fceb94b5b4c57566322d27503",
+                "reference": "7387ed1dd73f7f3fceb94b5b4c57566322d27503",
                 "shasum": ""
             },
             "require": {
@@ -4955,8 +4910,8 @@
             "require-dev": {
                 "cakephp/migrations": "3.x-dev",
                 "ergebnis/composer-normalize": "^2.48",
-                "ergebnis/php-cs-fixer-config": "^6.54",
-                "friendsofphp/php-cs-fixer": "^3.87",
+                "ergebnis/php-cs-fixer-config": "^6.55",
+                "friendsofphp/php-cs-fixer": "^3.88",
                 "phpstan/phpstan": "*",
                 "phpunit/phpunit": "*"
             },
@@ -4989,7 +4944,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2025-09-08T20:06:27+00:00"
+            "time": "2025-10-07T17:00:20+00:00"
         },
         {
             "name": "vitexsoftware/ease-html",
@@ -5265,12 +5220,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core.git",
-                "reference": "f32172d9a8059ce96dcc2017d25117ff490c4037"
+                "reference": "579e4a831b39057905b3c5b8a0d351329e9f5aa3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/f32172d9a8059ce96dcc2017d25117ff490c4037",
-                "reference": "f32172d9a8059ce96dcc2017d25117ff490c4037",
+                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/579e4a831b39057905b3c5b8a0d351329e9f5aa3",
+                "reference": "579e4a831b39057905b3c5b8a0d351329e9f5aa3",
                 "shasum": ""
             },
             "require": {
@@ -5280,7 +5235,7 @@
             },
             "require-dev": {
                 "ergebnis/composer-normalize": "^2.48",
-                "ergebnis/php-cs-fixer-config": "^6.53",
+                "ergebnis/php-cs-fixer-config": "^6.55",
                 "friendsofphp/php-cs-fixer": "^3.84",
                 "phpstan/phpstan": "*",
                 "phpstan/phpstan-phpunit": "2.0.x-dev",
@@ -5313,7 +5268,7 @@
                 "issues": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/issues",
                 "source": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/tree/main"
             },
-            "time": "2025-09-30T16:20:00+00:00"
+            "time": "2025-10-06T17:30:44+00:00"
         },
         {
             "name": "ybelenko/openapi-data-mocker",
@@ -5555,12 +5510,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/pcre.git",
-                "reference": "fadb6382c5d62e4e59ca45a4e77d3a356b40c594"
+                "reference": "efd688146c54599288d52f9f459d81b345a9778f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/pcre/zipball/fadb6382c5d62e4e59ca45a4e77d3a356b40c594",
-                "reference": "fadb6382c5d62e4e59ca45a4e77d3a356b40c594",
+                "url": "https://api.github.com/repos/composer/pcre/zipball/efd688146c54599288d52f9f459d81b345a9778f",
+                "reference": "efd688146c54599288d52f9f459d81b345a9778f",
                 "shasum": ""
             },
             "require": {
@@ -5624,7 +5579,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-28T08:54:55+00:00"
+            "time": "2025-10-06T14:04:28+00:00"
         },
         {
             "name": "composer/semver",
@@ -5776,12 +5731,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/composer-normalize.git",
-                "reference": "411e8b4dc91411fe5238ef2ac72ceb0cc54e731a"
+                "reference": "332e67c5cead2d7767b6eba86dd7a6fe9247f838"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/composer-normalize/zipball/411e8b4dc91411fe5238ef2ac72ceb0cc54e731a",
-                "reference": "411e8b4dc91411fe5238ef2ac72ceb0cc54e731a",
+                "url": "https://api.github.com/repos/ergebnis/composer-normalize/zipball/332e67c5cead2d7767b6eba86dd7a6fe9247f838",
+                "reference": "332e67c5cead2d7767b6eba86dd7a6fe9247f838",
                 "shasum": ""
             },
             "require": {
@@ -5797,7 +5752,7 @@
             "require-dev": {
                 "composer/composer": "^2.8.3",
                 "ergebnis/license": "^2.7.0",
-                "ergebnis/php-cs-fixer-config": "^6.54.0",
+                "ergebnis/php-cs-fixer-config": "^6.55.0",
                 "ergebnis/phpstan-rules": "^2.12.0",
                 "ergebnis/phpunit-slow-test-detector": "^2.20.0",
                 "fakerphp/faker": "^1.24.1",
@@ -5806,9 +5761,9 @@
                 "phpstan/phpstan": "^2.1.29",
                 "phpstan/phpstan-deprecation-rules": "^2.0.3",
                 "phpstan/phpstan-phpunit": "^2.0.7",
-                "phpstan/phpstan-strict-rules": "^2.0.6",
+                "phpstan/phpstan-strict-rules": "^2.0.7",
                 "phpunit/phpunit": "^9.6.20",
-                "rector/rector": "^2.1.7",
+                "rector/rector": "^2.2.1",
                 "symfony/filesystem": "^5.4.41"
             },
             "default-branch": true,
@@ -5853,7 +5808,7 @@
                 "security": "https://github.com/ergebnis/composer-normalize/blob/main/.github/SECURITY.md",
                 "source": "https://github.com/ergebnis/composer-normalize"
             },
-            "time": "2025-09-30T01:16:23+00:00"
+            "time": "2025-10-06T22:08:12+00:00"
         },
         {
             "name": "ergebnis/json",
@@ -6894,8 +6849,8 @@
             "version": "2.1.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a5aa2ceb881ef890e802e71c20f2d8eeb451fd13",
-                "reference": "a5aa2ceb881ef890e802e71c20f2d8eeb451fd13",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/6bdce5da45d93c61b0bec4d9fa138fc688307dbf",
+                "reference": "6bdce5da45d93c61b0bec4d9fa138fc688307dbf",
                 "shasum": ""
             },
             "require": {
@@ -6941,7 +6896,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-03T19:43:46+00:00"
+            "time": "2025-10-07T06:03:08+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -7390,12 +7345,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a361274372236a1d343d383a0e8764de816f02c9"
+                "reference": "afdb826537513d0485c73207a28fbed41c8a8675"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a361274372236a1d343d383a0e8764de816f02c9",
-                "reference": "a361274372236a1d343d383a0e8764de816f02c9",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/afdb826537513d0485c73207a28fbed41c8a8675",
+                "reference": "afdb826537513d0485c73207a28fbed41c8a8675",
                 "shasum": ""
             },
             "require": {
@@ -7488,7 +7443,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-10-03T04:34:35+00:00"
+            "time": "2025-10-07T03:21:46+00:00"
         },
         {
             "name": "psr/event-dispatcher",
@@ -7617,67 +7572,6 @@
                 }
             ],
             "time": "2025-01-01T16:37:48+00:00"
-        },
-        {
-            "name": "rector/rector",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rectorphp/rector.git",
-                "reference": "223b0df2a9bdaf86571188fd5c86cf4cd45f2b3b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/223b0df2a9bdaf86571188fd5c86cf4cd45f2b3b",
-                "reference": "223b0df2a9bdaf86571188fd5c86cf4cd45f2b3b",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4|^8.0",
-                "phpstan/phpstan": "^2.1.26"
-            },
-            "conflict": {
-                "rector/rector-doctrine": "*",
-                "rector/rector-downgrade-php": "*",
-                "rector/rector-phpunit": "*",
-                "rector/rector-symfony": "*"
-            },
-            "suggest": {
-                "ext-dom": "To manipulate phpunit.xml via the custom-rule command"
-            },
-            "default-branch": true,
-            "bin": [
-                "bin/rector"
-            ],
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Instant Upgrade and Automated Refactoring of any PHP code",
-            "homepage": "https://getrector.com/",
-            "keywords": [
-                "automation",
-                "dev",
-                "migration",
-                "refactoring"
-            ],
-            "support": {
-                "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/main"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/tomasvotruba",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-10-04T07:13:02+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -8719,12 +8613,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "c511634ea987e9f96eafe4270a3c5e7cf6f2f747"
+                "reference": "899a660f2d62e493ce6e68844b9089d4e1a639a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/c511634ea987e9f96eafe4270a3c5e7cf6f2f747",
-                "reference": "c511634ea987e9f96eafe4270a3c5e7cf6f2f747",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/899a660f2d62e493ce6e68844b9089d4e1a639a1",
+                "reference": "899a660f2d62e493ce6e68844b9089d4e1a639a1",
                 "shasum": ""
             },
             "require": {
@@ -8795,7 +8689,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-13T13:43:36+00:00"
+            "time": "2025-10-05T07:10:02+00:00"
         },
         {
             "name": "symfony/event-dispatcher-contracts",
@@ -9300,7 +9194,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "phpstan/phpstan-phpunit": 20,
-        "rector/rector": 20,
         "textalk/websocket": 20,
         "vitexsoftware/ease-fluentpdo": 20,
         "vitexsoftware/multiflexi-api-server": 20,
