@@ -176,7 +176,7 @@ describe('Simple Smoke Test - MultiFlexi Development', function() {
             console.log('✅ Responsive design works');
             console.log('✅ HTML structure is valid');
             console.log('\n🎯 Development environment is functional!');
-            console.log('🌐 URL: http://localhost/MultiFlexi/src/');
+            console.log(`🌐 URL: ${process.env.DEVELOPMENT_BASE_URL || process.env.BASE_URL || 'http://localhost/MultiFlexi/src/'}`);
             console.log('⚡ Without database - frontend test only');
             console.log('='.repeat(50) + '\n');
             
