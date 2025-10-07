@@ -106,6 +106,7 @@ Contents
    :caption: Contents:
 
    install
+   docker
    firstrun
    usage
    api
@@ -121,6 +122,7 @@ Contents
    zabbix
    development
    selenium-testing
+   database-testing
    architecture
    apps_overview
    multiflexi-cli
