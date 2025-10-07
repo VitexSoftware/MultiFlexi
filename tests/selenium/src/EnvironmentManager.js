@@ -86,11 +86,11 @@ class EnvironmentManager {
     mapApplicationConfigToTest(appConfig) {
         // Map MultiFlexi application config to test environment variables
         const mapping = {
-            // Database mapping
+            // Database mapping - corrected to match actual .env keys
             'DB_HOST': 'DEVELOPMENT_DB_HOST',
             'DB_DATABASE': 'DEVELOPMENT_DB_NAME', 
-            'DB_USERNAME': 'DEVELOPMENT_DB_USER',
-            'DB_PASSWORD': 'DEVELOPMENT_DB_PASS',
+            'DB_USERNAME': 'DEVELOPMENT_DB_USER',  // Fixed: was DB_USERNAME
+            'DB_PASSWORD': 'DEVELOPMENT_DB_PASS',  // Fixed: was DB_PASSWORD  
             'DB_PORT': 'DEVELOPMENT_DB_PORT'
         };
         
@@ -98,6 +98,7 @@ class EnvironmentManager {
         Object.entries(mapping).forEach(([appKey, testKey]) => {
             if (appConfig[appKey] && !process.env[testKey]) {
                 process.env[testKey] = appConfig[appKey];
+                console.log(`🔗 Mapped ${appKey}=${appConfig[appKey]} to ${testKey}`);
             }
         });
         
@@ -110,6 +111,12 @@ class EnvironmentManager {
         if (process.env.DEVELOPMENT_DB_NAME && !process.env.DEVELOPMENT_DB_NAME.includes('test')) {
             process.env.DEVELOPMENT_DB_NAME = process.env.DEVELOPMENT_DB_NAME + '_test';
         }
+        
+        // Also set fallback values for compatibility
+        if (appConfig['DB_HOST']) process.env.DB_HOST = appConfig['DB_HOST'];
+        if (appConfig['DB_USERNAME']) process.env.DB_USER = appConfig['DB_USERNAME'];
+        if (appConfig['DB_PASSWORD']) process.env.DB_PASSWORD = appConfig['DB_PASSWORD'];
+        if (appConfig['DB_PORT']) process.env.DB_PORT = appConfig['DB_PORT'];
         
         // Don't override TEST_ENVIRONMENT if it's explicitly set
         // This allows local environment to use package URLs while still having dev config available

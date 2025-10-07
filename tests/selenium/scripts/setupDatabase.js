@@ -63,9 +63,6 @@ async function setupDatabase() {
         } else {
             console.log('📋 Staging environment detected - using basic schema setup');
             await setupBasicSchema(connection);
-        }
-        
-        if (stderr) {
             console.warn('Migration warnings:', stderr);
         }
         console.log('✓ Migrations completed');
@@ -90,27 +87,30 @@ async function setupDatabase() {
 }
 
 async function cleanupDatabase() {
-    console.log('Cleaning up MultiFlexi test database...');
+    console.log("Cleaning up MultiFlexi test database...");
+    
+    // Use EnvironmentManager for consistent configuration
+    const envManager = EnvironmentManager.getInstance();
+    const config = envManager.getConfig();
     
     const connection = await mysql.createConnection({
-        host: process.env.DB_HOST || 'localhost',
-        port: process.env.DB_PORT || 3306,
-        user: process.env.DB_USER || 'root',
-        password: process.env.DB_PASSWORD || ''
+        host: config.database.host,
+        port: config.database.port,
+        user: config.database.user,
+        password: config.database.password || ""
     });
 
     try {
-        const dbName = process.env.DB_NAME || 'multiflexi_test';
+        const dbName = config.database.name;
         await connection.execute(`DROP DATABASE IF EXISTS ${dbName}`);
-        console.log('✓ Test database cleaned up');
+        console.log("✓ Test database cleaned up");
     } catch (error) {
-        console.error('Error cleaning up database:', error);
+        console.error("Error cleaning up database:", error);
         throw error;
     } finally {
         await connection.end();
     }
 }
-
 /**
  * Setup basic schema for environments without Phinx
  */
