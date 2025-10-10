@@ -3,22 +3,19 @@ FROM debian:bookworm-slim
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Add VitexSoftware repository
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt install -y \
     wget \
     lsb-release \
     apt-transport-https \
     gpg \
-    && echo "deb http://repo.vitexsoftware.com $(lsb_release -sc) main backports" | tee /etc/apt/sources.list.d/vitexsoftware.list \
-    && wget -O /etc/apt/trusted.gpg.d/vitexsoftware.gpg http://repo.vitexsoftware.cz/keyring.gpg \
+    && wget -O /usr/share/keyrings/repo.vitexsoftware.com.gpg http://repo.vitexsoftware.com/KEY.gpg \
+    && echo "deb [signed-by=/usr/share/keyrings/repo.vitexsoftware.com.gpg] http://repo.vitexsoftware.com $(lsb_release -sc) main backports" | tee /etc/apt/sources.list.d/vitexsoftware.list \
     && apt-get update
 
 # Install MultiFlexi scheduler package
 RUN apt-get install -y \
     multiflexi-scheduler \
     && rm -rf /var/lib/apt/lists/*
-
-# Create multiflexi user and group (matching systemd service)
-RUN groupadd -r multiflexi && useradd -r -g multiflexi multiflexi
 
 # Create required directories
 RUN mkdir -p /etc/multiflexi && chown multiflexi:multiflexi /etc/multiflexi

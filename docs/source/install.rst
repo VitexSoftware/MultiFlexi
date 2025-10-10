@@ -9,9 +9,8 @@ Installation of MultiFlexi is simple on Debian based systems. The installation p
 
    The MultiFlexi packages are available for
 
-    - Debian 11 (Bullseye)
     - Debian 12 (Bookworm)
-    - Debian 13 (Trixie) 
+    - Debian 13 (Trixie)
     - Debian 14 (Forky)
     - Ubuntu 22.04 (Jammy Jellyfish)
     - Ubuntu 24.04 (Noble Numbat)
@@ -37,9 +36,16 @@ To install MultiFlexi using Debian packages, you can follow these steps:
 
 .. code-block:: bash
 
-    curl -sSLo /tmp/multiflexi-archive-keyring.deb https://repo.multiflexi.eu/multiflexi-archive-keyring.deb
-    sudo dpkg -i /tmp/multiflexi-archive-keyring.deb
+
+    # For production (stable) repository:
+    wget -O /usr/share/keyrings/repo.multiflexi.eu.gpg https://repo.multiflexi.eu/KEY.gpg
     echo "deb [signed-by=/usr/share/keyrings/repo.multiflexi.eu.gpg] https://repo.multiflexi.eu/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/multiflexi.list
+
+    # For testing (nightly) repository:
+    wget -O /usr/share/keyrings/repo.vitexsoftware.com.gpg http://repo.vitexsoftware.com/KEY.gpg
+    echo "deb [signed-by=/usr/share/keyrings/repo.vitexsoftware.com.gpg] http://repo.vitexsoftware.com/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/multiflexi-testing.list
+
+    # Use the production keyring for stable, and the testing keyring for nightly builds.
 
 3. Update the package sources:
 

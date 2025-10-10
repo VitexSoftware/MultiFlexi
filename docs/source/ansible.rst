@@ -48,8 +48,11 @@ The ``multiflexi-cli`` tool is the backbone of all Ansible module operations in 
 
 You can install it from either:
 
+
 * **Stable (production) repository**: ``https://repo.multiflexi.eu/`` – recommended for production deployments.
-* **Testing (nightly) repository**: ``https://repo.vitexsoftware.com/`` – provides the latest features and fixes; may be unstable.
+  * Keyring: ``https://repo.multiflexi.eu/KEY.gpg``
+* **Testing (nightly) repository**: ``http://repo.vitexsoftware.com/`` – provides the latest features and fixes; may be unstable.
+  * Keyring: ``http://repo.vitexsoftware.com/KEY.gpg``
 
 Manual Repository Setup (Debian / Ubuntu)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -58,7 +61,9 @@ Add the stable repository:
 
 .. code-block:: bash
 
-  echo 'deb [trusted=yes] https://repo.multiflexi.eu/ stable main' | sudo tee /etc/apt/sources.list.d/multiflexi.list
+
+  wget -O /usr/share/keyrings/repo.multiflexi.eu.gpg https://repo.multiflexi.eu/KEY.gpg
+  echo 'deb [signed-by=/usr/share/keyrings/repo.multiflexi.eu.gpg] https://repo.multiflexi.eu/ stable main' | sudo tee /etc/apt/sources.list.d/multiflexi.list
   sudo apt update
   sudo apt install multiflexi-cli
 
@@ -66,7 +71,9 @@ Add (or switch to) the testing/nightly repository:
 
 .. code-block:: bash
 
-  echo 'deb [trusted=yes] https://repo.vitexsoftware.com/ testing main' | sudo tee /etc/apt/sources.list.d/multiflexi-testing.list
+
+  wget -O /usr/share/keyrings/repo.vitexsoftware.com.gpg http://repo.vitexsoftware.com/KEY.gpg
+  echo 'deb [signed-by=/usr/share/keyrings/repo.vitexsoftware.com.gpg] http://repo.vitexsoftware.com/ testing main' | sudo tee /etc/apt/sources.list.d/multiflexi-testing.list
   sudo apt update
   sudo apt install multiflexi-cli
 

@@ -27,7 +27,13 @@ Shared::init(
 
 session_start();
 
-\Ease\Locale::singleton(null, '../i18n', 'multiflexi');
+// Initialize locale with user preference from request, session, or browser
+$requestedLocale = \Ease\Locale::requestLocale();
+if ($requestedLocale) {
+    \Ease\Locale::singleton($requestedLocale, '../i18n', 'multiflexi');
+} else {
+    \Ease\Locale::singleton(null, '../i18n', 'multiflexi');
+}
 $loggers = ['syslog', '\MultiFlexi\LogToSQL'];
 
 if (Shared::cfg('ZABBIX_SERVER')) {

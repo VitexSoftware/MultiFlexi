@@ -1,0 +1,41 @@
+FROM debian:latest
+
+ENV APACHE_DOCUMENT_ROOT=/opt/multiflexi/src
+ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV DEBIAN_FRONTEND=noninteractive
+ENV DB_CONNECTION=sqlite
+ENV DB_DATABASE=/opt/multiflexi/db/multiflexi.sqlite
+
+RUN apt update ; apt install -y wget lsb-release wget apt-transport-https libapache2-mod-php; \
+    wget -O /usr/share/keyrings/repo.vitexsoftware.com.gpg http://repo.vitexsoftware.com/KEY.gpg ; \
+    echo "deb [signed-by=/usr/share/keyrings/repo.vitexsoftware.com.gpg] http://repo.vitexsoftware.cz  $(lsb_release -sc) main backports" | tee /etc/apt/sources.list.d/vitexsoftware.list
+RUN apt-get update && apt-get install -y locales php-pdo-sqlite apache2 aptitude composer php-cakephp-phinx php-curl php-yaml php-xml cron php-tools locales-all && rm -rf /var/lib/apt/lists/* \
+    && localedef -i cs_CZ -c -f UTF-8 -A /usr/share/locale/locale.alias cs_CZ.UTF-8
+ENV LANG cs_CZ.utf8
+
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+
+COPY . /opt/multiflexi
+
+
+# Copy .env and generate /etc/multiflexi/database.env from it before installing multiflexi-mysql
+COPY docker/.env /tmp/build.env
+RUN mkdir -p /etc/multiflexi \
+        && awk -F= 'BEGIN{OFS="="} \
+            /^DB_CONNECTION=/ {print $0} \
+            /^DB_HOST=/ {print $0} \
+            /^DB_PORT=/ {print $0} \
+            /^DB_DATABASE=/ {print $0} \
+            /^DB_USERNAME=/ {print $0} \
+            /^DB_PASSWORD=/ {print $0} \
+            END{print "APP_DEBUG=" ((ENVIRON["MULTIFLEXI_DEBUG"]=="true")?"true":"false")} ' /tmp/build.env > /etc/multiflexi/database.env
+
+RUN apt-get update && env MULTIFLEXI_NOMIGRATE=1 apt-get install -y multiflexi-mysql multiflexi-web
+
+# Add entrypoint script to run migrations when DB is available, then start services
+COPY docker/entrypoint-web.sh /entrypoint-web.sh
+RUN chmod +x /entrypoint-web.sh
+
+ENTRYPOINT ["/entrypoint-web.sh"]

@@ -172,9 +172,9 @@ The project uses Jenkins for continuous integration:
 2. **Package Build**: ``debian/Jenkinsfile`` creates .deb packages (~10 minutes)
 3. **Unstable Repository**: Packages available at:
    - ``http://repo.vitexsoftware.cz/``
-   - ``http://repo.vitexsoftware.com/``
+   - ``http://repo.vitexsoftware.com/`` (keyring: http://repo.vitexsoftware.com/KEY.gpg)
 4. **Release Process**: Manual Jenkins trigger using ``debian/Jenkinsfile-release``
-5. **Production Repository**: Released packages at ``https://repo.multiflexi.eu/``
+5. **Production Repository**: Released packages at ``https://repo.multiflexi.eu/`` (keyring: https://repo.multiflexi.eu/KEY.gpg)
 
 **Deployment Environments**
 

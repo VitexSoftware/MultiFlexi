@@ -156,16 +156,6 @@ class EnvironmentManager {
                 password: process.env.ADMIN_PASSWORD || 'admin123',
                 email: process.env.ADMIN_EMAIL || 'admin@multiflexi.test'
             },
-            testUser: {
-                username: process.env.TEST_USER_USERNAME || 'testuser',
-                password: process.env.TEST_USER_PASSWORD || 'testpass123',
-                email: process.env.TEST_USER_EMAIL || 'testuser@test.com'
-            },
-            customer: {
-                username: process.env.CUSTOMER_USERNAME || 'testcustomer',
-                password: process.env.CUSTOMER_PASSWORD || 'testpass123',
-                email: process.env.CUSTOMER_EMAIL || 'customer@test.com'
-            },
             browser: {
                 headless: process.env.HEADLESS === 'true',
                 timeout: parseInt(process.env.BROWSER_TIMEOUT) || 30000,

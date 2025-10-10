@@ -205,8 +205,8 @@ Both Dockerfiles add the VitexSoftware repository:
        lsb-release \
        apt-transport-https \
        gpg \
-       && echo "deb http://repo.vitexsoftware.com $(lsb_release -sc) main backports" | tee /etc/apt/sources.list.d/vitexsoftware.list \
-       && wget -O /etc/apt/trusted.gpg.d/vitexsoftware.gpg http://repo.vitexsoftware.cz/keyring.gpg \
+   && wget -O /usr/share/keyrings/repo.vitexsoftware.com.gpg http://repo.vitexsoftware.com/KEY.gpg \
+   && echo "deb [signed-by=/usr/share/keyrings/repo.vitexsoftware.com.gpg] http://repo.vitexsoftware.com $(lsb_release -sc) main backports" | tee /etc/apt/sources.list.d/vitexsoftware.list \
        && apt-get update
 
 Management Commands

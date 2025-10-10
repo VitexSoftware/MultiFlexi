@@ -19,7 +19,7 @@
         "ext-simplexml": "*",
         "vitexsoftware/multiflexi-core": "dev-main",
         "vitexsoftware/ease-twbootstrap4": "^1.9",
-        "vitexsoftware/ease-fluentpdo": "dev-main",
+        "vitexsoftware/ease-doctrine": "dev-main",
         "vitexsoftware/ease-twbootstrap4-widgets": "^1.7",
         "robmorgan/phinx": "^0.14",
         "datatables/datatables": "^1.10",
@@ -58,7 +58,7 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "*",
+        "phpunit/phpunit": "^11.0",
         "phpstan/phpstan": "*",
         "friendsofphp/php-cs-fixer": "^3.88",
         "ergebnis/composer-normalize": "^2.48",
