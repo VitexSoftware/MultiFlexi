@@ -3,11 +3,12 @@ src/favicon.ico                           usr/share/multiflexi
 src/.htaccess                             usr/share/multiflexi
 src/js/*.js                               usr/share/multiflexi/js
 src/js/languages/*.js                     usr/share/multiflexi/js/languages/
-src/assets/Buttons-1.5.6/js/*            usr/share/multiflexi/assets/Buttons-1.5.6/js/
-src/assets/Buttons-1.5.6/css/*           usr/share/multiflexi/assets/Buttons-1.5.6/css/
-src/assets/Buttons-1.5.6/swf/*           usr/share/multiflexi/assets/Buttons-1.5.6/swf/
+src/assets/Buttons-1.5.6/js/*             usr/share/multiflexi/assets/Buttons-1.5.6/js/
+src/assets/Buttons-1.5.6/css/*            usr/share/multiflexi/assets/Buttons-1.5.6/css/
+src/assets/Buttons-1.5.6/swf/*            usr/share/multiflexi/assets/Buttons-1.5.6/swf/
 src/images/*                              usr/share/multiflexi/images
 src/css/*                                 usr/share/multiflexi/css
+src/MultiFlexi/*.php                      usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Ui                         usr/lib/multiflexi/MultiFlexi/
 
 debian/tmp/composer.json                  usr/lib/multiflexi
