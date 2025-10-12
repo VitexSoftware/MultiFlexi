@@ -57,8 +57,20 @@ class ApplicationInfo extends Panel
         $headerRow = new \Ease\TWB4\Row();
 
         $appData = new \Ease\Html\DivTag();
-        $appData->addItem(new \Ease\Html\H3Tag($application->getDataValue('name')));
-        $appData->addItem(new \Ease\Html\PTag($application->getDataValue('description')));
+        // Handle localized content if available
+        $name = $application->getDataValue('name');
+        $description = $application->getDataValue('description');
+        
+        if (method_exists($application, 'getLocalizedName')) {
+            $name = $application->getLocalizedName() ?? $name;
+        }
+        
+        if (method_exists($application, 'getLocalizedDescription')) {
+            $description = $application->getLocalizedDescription() ?? $description;
+        }
+        
+        $appData->addItem(new \Ease\Html\H3Tag($name));
+        $appData->addItem(new \Ease\Html\PTag($description));
         $appData->addItem(new \Ease\Html\PTag(new \Ease\Html\ATag($application->getDataValue('homepage'), $application->getDataValue('homepage'))));
         $appData->addItem(new \Ease\Html\PTag($application->getDataValue('uuid')));
         $appData->addItem(new \Ease\Html\PTag($application->getDataValue('ociimage')));

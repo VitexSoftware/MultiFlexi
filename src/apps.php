@@ -21,7 +21,7 @@ WebPage::singleton()->onlyForLogged();
 
 WebPage::singleton()->addItem(new PageTop(_('Applications')));
 
-WebPage::singleton()->container->addItem(new DBDataTable(new \MultiFlexi\Application()));
+WebPage::singleton()->container->addItem(new DBDataTable(new \MultiFlexi\ApplicationLister()));
 
 WebPage::singleton()->addItem(new PageBottom('apps'));
 
