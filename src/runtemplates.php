@@ -21,7 +21,7 @@ WebPage::singleton()->onlyForLogged();
 
 WebPage::singleton()->addItem(new PageTop(_('Runtemplates')));
 
-WebPage::singleton()->container->addItem(new DBDataTable(new \MultiFlexi\RunTemplate()));
+WebPage::singleton()->container->addItem(new DBDataTable(new \MultiFlexi\RunTemplateLister()));
 
 WebPage::singleton()->addItem(new PageBottom('runtemplates'));
 
