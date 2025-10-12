@@ -181,3 +181,57 @@ class AuthPage extends WebDriverHelper {
 }
 
 module.exports = AuthPage;
+    /**
+     * Login as test user with configured credentials
+     */
+    async loginAsTestUser() {
+        const username = process.env.TEST_USER_USERNAME || 'testuser';
+        const password = process.env.TEST_USER_PASSWORD || 'testpass123';
+        
+        await this.login(username, password);
+    }
+
+    /**
+     * Login as customer with configured credentials
+     */
+    async loginAsCustomer() {
+        const username = process.env.CUSTOMER_USERNAME || 'testcustomer';
+        const password = process.env.CUSTOMER_PASSWORD || 'testpass123';
+        
+        await this.login(username, password);
+    }
+
+    /**
+     * Get admin credentials from environment
+     */
+    getAdminCredentials() {
+        return {
+            username: process.env.ADMIN_USERNAME || 'admin',
+            password: process.env.ADMIN_PASSWORD || 'admin123',
+            email: process.env.ADMIN_EMAIL || 'admin@multiflexi.test'
+        };
+    }
+
+    /**
+     * Get test user credentials from environment
+     */
+    getTestUserCredentials() {
+        return {
+            username: process.env.TEST_USER_USERNAME || 'testuser',
+            password: process.env.TEST_USER_PASSWORD || 'testpass123',
+            email: process.env.TEST_USER_EMAIL || 'testuser@test.com'
+        };
+    }
+
+    /**
+     * Get customer credentials from environment
+     */
+    getCustomerCredentials() {
+        return {
+            username: process.env.CUSTOMER_USERNAME || 'testcustomer',
+            password: process.env.CUSTOMER_PASSWORD || 'testpass123',
+            email: process.env.CUSTOMER_EMAIL || 'customer@test.com'
+        };
+    }
+}
+
