@@ -5220,12 +5220,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core.git",
-                "reference": "7a4652addb2039447190b45712b16b7a462bb5b9"
+                "reference": "3afea422d789e2829f13600787199fa17921ff11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/7a4652addb2039447190b45712b16b7a462bb5b9",
-                "reference": "7a4652addb2039447190b45712b16b7a462bb5b9",
+                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/3afea422d789e2829f13600787199fa17921ff11",
+                "reference": "3afea422d789e2829f13600787199fa17921ff11",
                 "shasum": ""
             },
             "require": {
@@ -5269,7 +5269,7 @@
                 "issues": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/issues",
                 "source": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/tree/main"
             },
-            "time": "2025-10-10T14:40:01+00:00"
+            "time": "2025-10-12T18:46:11+00:00"
         },
         {
             "name": "ybelenko/openapi-data-mocker",
