@@ -56,6 +56,24 @@ check_dependencies() {
         print_warning "Google Chrome or Chromium not found in PATH"
     fi
     
+    # Check Phinx
+    if ! command -v phinx &> /dev/null; then
+        print_error "Phinx is not installed or not in PATH"
+        exit 1
+    fi
+    
+    # Check database configuration
+    if [ ! -f "/etc/multiflexi/database.env" ]; then
+        print_error "Database configuration file /etc/multiflexi/database.env not found"
+        exit 1
+    fi
+    
+    # Check migrations directory
+    if [ ! -d "/usr/lib/multiflexi-database/migrations" ]; then
+        print_error "Migrations directory /usr/lib/multiflexi-database/migrations not found"
+        exit 1
+    fi
+    
     print_success "Dependencies check completed"
 }
 
@@ -84,16 +102,27 @@ setup_environment() {
     print_success "Environment setup completed"
 }
 
-# Function to run database setup
+# Function to run database setup with proper Phinx migrations
 setup_database() {
-    print_status "Setting up test database..."
+    print_status "Setting up test database with Phinx migrations..."
+    print_status "This will:"
+    print_status "  1. Drop all existing database tables"
+    print_status "  2. Run Phinx migrations from /usr/lib/multiflexi-database/migrations/"
+    print_status "  3. Insert basic test data"
+    
     node scripts/setupDatabase.js
-    print_success "Database setup completed"
+    
+    print_status "Verifying database setup..."
+    node scripts/setupDatabase.js verify
+    
+    print_success "Database setup completed successfully"
 }
 
 # Function to cleanup database  
 cleanup_database() {
     print_status "Cleaning up test database..."
+    print_status "This will drop all database tables"
+    
     node scripts/setupDatabase.js cleanup
     print_success "Database cleanup completed"
 }
@@ -124,6 +153,22 @@ run_tests() {
             print_status "Running authentication tests..."
             npm test tests/auth.test.js
             ;;
+        "companies")
+            print_status "Running companies tests..."
+            npm test tests/companies.test.js
+            ;;
+        "applications")
+            print_status "Running applications tests..."
+            npm test tests/applications.test.js
+            ;;
+        "credentials")
+            print_status "Running credentials tests..."
+            npm test tests/credentials.test.js
+            ;;
+        "jobs")
+            print_status "Running jobs tests..."
+            npm test tests/jobs.test.js
+            ;;
         "runtemplate")
             print_status "Running RunTemplate tests..."
             npm test tests/runtemplate.test.js
@@ -131,11 +176,15 @@ run_tests() {
         "smoke")
             print_status "Running smoke tests..."
             export HEADLESS=true
-            npm test tests/multiflexi.e2e.test.js -- --grep "Smoke Tests"
+            npm test tests/smoke-test.test.js
+            ;;
+        "scenarios")
+            print_status "Running scenario tests..."
+            npm test tests/scenario-*.test.js
             ;;
         *)
             print_error "Unknown test type: $test_type"
-            print_status "Available test types: all, e2e, auth, runtemplate, smoke"
+            print_status "Available test types: all, e2e, auth, companies, applications, credentials, jobs, runtemplate, smoke, scenarios"
             exit 1
             ;;
     esac
@@ -151,10 +200,15 @@ case "${1:-help}" in
         setup_environment
         ;;
     "db-setup")
+        check_dependencies
         setup_database
         ;;
     "db-cleanup")
         cleanup_database
+        ;;
+    "db-verify")
+        print_status "Verifying database setup..."
+        node scripts/setupDatabase.js verify
         ;;
     "test")
         test_type=${2:-all}
@@ -179,18 +233,27 @@ case "${1:-help}" in
         run_tests "all" "true"
         cleanup_database
         ;;
+    "fresh")
+        print_status "Running fresh test with complete database rebuild..."
+        check_dependencies
+        setup_environment
+        setup_database
+        run_tests "${2:-all}" "${3:-false}"
+        ;;
     "help"|*)
         echo "MultiFlexi Selenium Test Runner"
         echo ""
         echo "Usage: $0 <command> [options]"
         echo ""
         echo "Commands:"
-        echo "  check                    - Check dependencies"
+        echo "  check                    - Check dependencies (including Phinx and database config)"
         echo "  setup                    - Setup test environment"
-        echo "  db-setup                 - Setup test database only"
-        echo "  db-cleanup               - Cleanup test database only"
+        echo "  db-setup                 - Setup test database (drop tables + run Phinx migrations)"
+        echo "  db-cleanup               - Cleanup test database (drop all tables)"
+        echo "  db-verify                - Verify database setup"
         echo "  test <type> [headless]   - Run specific tests"
         echo "  full                     - Run complete test suite with DB setup/cleanup"
+        echo "  fresh [type] [headless]  - Fresh database setup + run tests (no cleanup)"
         echo "  ci                       - Run tests in CI mode (headless)"
         echo "  help                     - Show this help"
         echo ""
@@ -198,13 +261,26 @@ case "${1:-help}" in
         echo "  all                      - All tests"
         echo "  e2e                      - End-to-end tests"
         echo "  auth                     - Authentication tests"
+        echo "  companies                - Companies management tests"
+        echo "  applications             - Applications tests"
+        echo "  credentials              - Credentials tests"
+        echo "  jobs                     - Jobs tests"
         echo "  runtemplate              - RunTemplate tests"
         echo "  smoke                    - Smoke tests"
+        echo "  scenarios                - Scenario tests"
+        echo ""
+        echo "Database Setup Process:"
+        echo "  1. Drops all existing database tables"
+        echo "  2. Runs Phinx migrations from /usr/lib/multiflexi-database/migrations/"
+        echo "  3. Inserts basic test data"
         echo ""
         echo "Examples:"
+        echo "  $0 check                 - Check if everything is ready"
         echo "  $0 setup                 - Setup environment"
+        echo "  $0 db-setup              - Prepare database for testing"
         echo "  $0 test auth             - Run auth tests with visible browser"
         echo "  $0 test all true         - Run all tests headlessly"
+        echo "  $0 fresh smoke true      - Fresh DB + run smoke tests headlessly"
         echo "  $0 full                  - Complete test run with database"
         echo "  $0 ci                    - CI/CD pipeline run"
         ;;
