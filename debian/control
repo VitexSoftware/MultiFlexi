@@ -12,6 +12,7 @@ Depends: ${misc:Depends},
  locales-all,
  multiflexi-common,
  php-vitexsoftware-multiflexi-core,
+ php-vitexsoftware-ease-doctrineorm,
  anacron, adduser (>= 3.11),
  php-cli,
 Recommends: multiflexi-scheduler, multiflexi-web
@@ -33,7 +34,7 @@ Description: shared multiflexi configuration
 Package: multiflexi-api
 Multi-Arch: foreign
 Pre-Depends: multiflexi-database
-Depends: ${misc:Depends}, php-vitexsoftware-multiflexi-server, php-yaml, multiflexi-web
+Depends: ${misc:Depends}, php-vitexsoftware-multiflexi-server, php-vitexsoftware-ease-doctrineorm, php-yaml, multiflexi-web
 Architecture: all
 Description: API Server for MultiFlexi
  json/xml/yaml/html interface
@@ -73,6 +74,7 @@ Architecture: all
 Depends: ${misc:Depends}, 
  multiflexi-common,
  php-vitexsoftware-multiflexi-core,
+ php-vitexsoftware-ease-doctrineorm,
  php-vitexsoftware-ease-html-widgets (>=1.1.1),
  php-vitexsoftware-ease-bootstrap4-widgets (>=1.7),
  libjs-jquery-datatables,

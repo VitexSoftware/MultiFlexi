@@ -31,7 +31,8 @@
         "vitexsoftware/ease-html-widgets": "^1.1",
         "confirm-it-solutions/php-zabbix-api": "^3.0",
         "cboden/ratchet": "^0.5",
-        "textalk/websocket": "dev-master"
+        "textalk/websocket": "dev-master",
+        "doctrine/orm": "3.6.x-dev"
     },
     "license": "MIT",
     "authors": [

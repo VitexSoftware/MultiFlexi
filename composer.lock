@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f9ac3923b5eb3cb0446822ddf189ba2",
+    "content-hash": "5766d83c08ddd6de9148803e530835ee",
     "packages": [
         {
             "name": "cakephp/core",
@@ -984,12 +984,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "c472a1535d3909760f92c00d7f1d71ca0a76d98f"
+                "reference": "28d9472a388bce574dd860b7de4bf3d352ad7873"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/c472a1535d3909760f92c00d7f1d71ca0a76d98f",
-                "reference": "c472a1535d3909760f92c00d7f1d71ca0a76d98f",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/28d9472a388bce574dd860b7de4bf3d352ad7873",
+                "reference": "28d9472a388bce574dd860b7de4bf3d352ad7873",
                 "shasum": ""
             },
             "require": {
@@ -1065,7 +1065,7 @@
                 "issues": "https://github.com/doctrine/orm/issues",
                 "source": "https://github.com/doctrine/orm/tree/3.6.x"
             },
-            "time": "2025-10-09T13:02:50+00:00"
+            "time": "2025-10-12T06:32:18+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -5987,12 +5987,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/ease-doctrineorm.git",
-                "reference": "35b26dcd481536b5afaff21f932ec5e0cacc520d"
+                "reference": "3a156064b69123d7cf0339107c3462058f6a796a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/ease-doctrineorm/zipball/35b26dcd481536b5afaff21f932ec5e0cacc520d",
-                "reference": "35b26dcd481536b5afaff21f932ec5e0cacc520d",
+                "url": "https://api.github.com/repos/VitexSoftware/ease-doctrineorm/zipball/3a156064b69123d7cf0339107c3462058f6a796a",
+                "reference": "3a156064b69123d7cf0339107c3462058f6a796a",
                 "shasum": ""
             },
             "require": {
@@ -6035,7 +6035,7 @@
                 "issues": "https://github.com/VitexSoftware/ease-doctrineorm/issues",
                 "source": "https://github.com/VitexSoftware/ease-doctrineorm/tree/main"
             },
-            "time": "2025-10-10T16:27:50+00:00"
+            "time": "2025-10-10T20:24:45+00:00"
         },
         {
             "name": "vitexsoftware/ease-fluentpdo",
@@ -8002,8 +8002,8 @@
             "version": "2.1.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ead89849d879fe203ce9292c6ef5e7e76f867b96",
-                "reference": "ead89849d879fe203ce9292c6ef5e7e76f867b96",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/54a5bd6c72f6f4582fa23c2b0d0d2064707a7615",
+                "reference": "54a5bd6c72f6f4582fa23c2b0d0d2064707a7615",
                 "shasum": ""
             },
             "require": {
@@ -8049,7 +8049,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-10T14:14:11+00:00"
+            "time": "2025-10-12T07:50:21+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -8494,12 +8494,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "3d69b3a261d7200272b59a2984cdcf4fc6fb89cd"
+                "reference": "42e47fc47e30e9eec86d20a78cbbeeff25aea235"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3d69b3a261d7200272b59a2984cdcf4fc6fb89cd",
-                "reference": "3d69b3a261d7200272b59a2984cdcf4fc6fb89cd",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/42e47fc47e30e9eec86d20a78cbbeeff25aea235",
+                "reference": "42e47fc47e30e9eec86d20a78cbbeeff25aea235",
                 "shasum": ""
             },
             "require": {
@@ -8595,7 +8595,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-10-08T05:52:26+00:00"
+            "time": "2025-10-12T05:26:21+00:00"
         },
         {
             "name": "psr/event-dispatcher",
@@ -10390,6 +10390,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "doctrine/orm": 20,
         "phpstan/phpstan-phpunit": 20,
         "textalk/websocket": 20,
         "vitexsoftware/ease-doctrine": 20,
