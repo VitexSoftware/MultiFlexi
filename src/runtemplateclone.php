@@ -16,37 +16,85 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 use Ease\WebPage;
+use MultiFlexi\Configuration;
 use MultiFlexi\RunTemplate;
+use MultiFlexi\RunTplCreds;
 
 require_once './init.php';
 WebPage::singleton()->onlyForLogged();
 
-$runTemplate = new RunTemplate(WebPage::getRequestValue('id', 'int'));
-$originalEnv = $runTemplate->getRuntemplateEnvironment();
-$cloneName = \Ease\TWB4\WebPage::getRequestValue('clonename');
+$sourceId = WebPage::getRequestValue('id', 'int');
+$cloneName = WebPage::getRequestValue('clonename');
 
-$runTemplate->unsetDataValue($runTemplate->getKeyColumn());
-$runTemplate->setDataValue('name', $cloneName);
+if (empty($sourceId) || empty($cloneName)) {
+    WebPage::singleton()->addItem(new PageTop(_('Runtemplate Clone')));
+    WebPage::singleton()->addStatusMessage(_('Missing required parameters'), 'error');
+    WebPage::singleton()->addItem(new PageBottom());
+    WebPage::singleton()->draw();
+
+    exit;
+}
 
 try {
-    $cloneId = $runTemplate->insertToSQL();
+    // Load source runtemplate
+    $sourceTemplate = new RunTemplate($sourceId);
 
-    $configurator = new \MultiFlexi\Configuration([
-        'runtemplate_id' => $runTemplate->getMyKey(),
-        'app_id' => $runTemplate->getDataValue('app_id'),
-        'company_id' => $runTemplate->getDataValue('company_id'),
-    ], ['autoload' => false]);
+    // Create new runtemplate
+    $newTemplate = new RunTemplate();
 
-    if ($configurator->takeData(\MultiFlexi\Environmentor::flatEnv($originalEnv)) && null !== $configurator->saveToSQL()) {
-        $configurator->addStatusMessage(_('Config fields Saved'), 'success');
+    // Copy basic data from source template
+    $templateData = $sourceTemplate->getData();
+    unset($templateData[$sourceTemplate->getKeyColumn()]); // Remove ID
+    $templateData['name'] = $cloneName;
+
+    // Insert new template
+    $newId = $newTemplate->insertToSQL($templateData);
+
+    if ($newId) {
+        // Copy configurations
+        $configFields = $sourceTemplate->getRuntemplateEnvironment()->getFields();
+
+        $newConfigurator = new Configuration([], ['autoload' => false]);
+
+        foreach ($configFields as $field) {
+            $newConfigurator->insertToSQL([
+                'runtemplate_id' => $newId,
+                'app_id' => $templateData['app_id'],
+                'company_id' => $templateData['company_id'],
+                'name' => $field->getName(),
+                'value' => $field->getValue(),
+                'config_type' => $field->getType()]);
+        }
+
+        // Copy credential assignments
+        $credHelper = new RunTplCreds();
+        $credentials = $credHelper->getCredentialsForRuntemplate($sourceId)->fetchAll();
+
+        foreach ($credentials as $cred) {
+            $credHelper->insertToSQL([
+                'runtemplate_id' => $newId,
+                'credentials_id' => $cred['credentials_id'],
+            ]);
+        }
+
+        WebPage::singleton()->addStatusMessage(
+            sprintf(
+                _('Runtemplate %s cloned as %s'),
+                $sourceTemplate->getRecordName(),
+                $cloneName,
+            ),
+            'success',
+        );
+        WebPage::singleton()->redirect('runtemplate.php?id='.$newId);
     } else {
-        $configurator->addStatusMessage(_('Error saving Config fields'), 'error');
+        throw new \Exception(_('Failed to create new runtemplate'));
     }
-
-    WebPage::singleton()->redirect('runtemplate.php?id='.$cloneId);
-} catch (Exception $exc) {
+} catch (\Exception $exc) {
     WebPage::singleton()->addItem(new PageTop(_('Runtemplate Clone')));
-    WebPage::singleton()->addStatusMessage(_('Error creating runtemplate clone'), 'error');
+    WebPage::singleton()->addStatusMessage(
+        sprintf(_('Error cloning runtemplate: %s'), $exc->getMessage()),
+        'error',
+    );
     WebPage::singleton()->addItem(new PageBottom());
     WebPage::singleton()->draw();
 }

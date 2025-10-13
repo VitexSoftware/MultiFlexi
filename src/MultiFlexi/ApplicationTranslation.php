@@ -16,18 +16,17 @@ declare(strict_types=1);
 namespace MultiFlexi;
 
 /**
- * Application Translation trait
- * 
+ * Application Translation trait.
+ *
  * Provides translation support for Application class
  */
 trait ApplicationTranslation
 {
     /**
-     * Get localized value for application field
+     * Get localized value for application field.
      *
-     * @param string $field Field name (name, description, etc.)
-     * @param string|null $lang Language code (null for current locale)
-     * @return string|null
+     * @param string      $field Field name (name, description, etc.)
+     * @param null|string $lang  Language code (null for current locale)
      */
     public function getLocalizedValue(string $field, ?string $lang = null): ?string
     {
@@ -72,7 +71,7 @@ trait ApplicationTranslation
     }
 
     /**
-     * Get localized name
+     * Get localized name.
      */
     public function getLocalizedName(?string $lang = null): ?string
     {
@@ -80,7 +79,7 @@ trait ApplicationTranslation
     }
 
     /**
-     * Get localized description
+     * Get localized description.
      */
     public function getLocalizedDescription(?string $lang = null): ?string
     {

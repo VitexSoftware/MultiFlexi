@@ -30,14 +30,14 @@ class RequirementsOverview extends \Ease\Html\DivTag
 
         foreach ($requirementsRaw as $req) {
             $reqCard = null;
-            
+
             // First try to use the CredentialType class approach
             $formClass = '\\MultiFlexi\\CredentialType\\'.$req;
-            
+
             try {
                 if (class_exists($formClass, true)) {
                     $instance = new $formClass();
-                    $reqCard = new \Ease\TWB4\Card(null,['style'=>'width: 18rem;']);
+                    $reqCard = new \Ease\TWB4\Card(null, ['style' => 'width: 18rem;']);
                     $reqCard->addItem(new \Ease\Html\ImgTag('images/'.$formClass::logo(), $req, ['title' => $req, 'height' => 40, 'class' => 'card-img-top']));
                     $reqCard->addItem(new \Ease\Html\DivTag(new \Ease\Html\H5Tag($formClass::name()), ['class' => 'card-title']));
                     $reqCard->addItem(new \Ease\Html\DivTag(new \Ease\Html\PTag($formClass::description()), ['class' => 'card-text']));
@@ -46,7 +46,7 @@ class RequirementsOverview extends \Ease\Html\DivTag
                 // Class-based approach failed, try database approach
                 $reqCard = null;
             }
-            
+
             // If class approach failed, try database approach
             if ($reqCard === null) {
                 $credentialType = new \MultiFlexi\CredentialType();
@@ -57,7 +57,7 @@ class RequirementsOverview extends \Ease\Html\DivTag
                     $logo = $credentialType->getDataValue('logo') ?: 'images/default-credential.svg';
                     $name = $credentialType->getDataValue('name') ?: $req;
                     $description = $credentialType->getDataValue('description') ?: '';
-                    
+
                     $reqCard = new \Ease\TWB4\Card();
                     $reqCard->addItem(new \Ease\Html\ImgTag($logo, $name, ['title' => $description ?: $name, 'height' => 40, 'class' => 'card-img-top']));
                     $reqCard->addItem(new \Ease\Html\DivTag(new \Ease\Html\H5Tag($name), ['class' => 'card-body']));

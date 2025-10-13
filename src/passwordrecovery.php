@@ -116,7 +116,6 @@ if (!$success) {
         'login.php',
         _('Continue'),
     ));
-    WebPage::singleton()->redirect('login.php');
 }
 
 WebPage::singleton()->addItem(new PageBottom());
