@@ -16,18 +16,17 @@ declare(strict_types=1);
 namespace MultiFlexi;
 
 /**
- * Configuration Translation trait
- * 
+ * Configuration Translation trait.
+ *
  * Provides translation support for Conffield class
  */
 trait ConfigurationTranslation
 {
     /**
-     * Get localized value for configuration field
+     * Get localized value for configuration field.
      *
-     * @param string $field Field name (description, hint, name)
-     * @param string|null $lang Language code (null for current locale)
-     * @return string|null
+     * @param string      $field Field name (description, hint, name)
+     * @param null|string $lang  Language code (null for current locale)
      */
     public function getLocalizedValue(string $field, ?string $lang = null): ?string
     {
@@ -72,7 +71,7 @@ trait ConfigurationTranslation
     }
 
     /**
-     * Get localized description
+     * Get localized description.
      */
     public function getLocalizedDescription(?string $lang = null): ?string
     {
@@ -80,7 +79,7 @@ trait ConfigurationTranslation
     }
 
     /**
-     * Get localized hint
+     * Get localized hint.
      */
     public function getLocalizedHint(?string $lang = null): ?string
     {
@@ -88,7 +87,7 @@ trait ConfigurationTranslation
     }
 
     /**
-     * Get localized name
+     * Get localized name.
      */
     public function getLocalizedName(?string $lang = null): ?string
     {
@@ -96,11 +95,10 @@ trait ConfigurationTranslation
     }
 
     /**
-     * Get all application configs with translations
+     * Get all application configs with translations.
      *
-     * @param int $appId Application ID
-     * @param string|null $lang Language code (null for current locale)
-     * @return array
+     * @param int         $appId Application ID
+     * @param null|string $lang  Language code (null for current locale)
      */
     public function appConfigsLocalized(int $appId, ?string $lang = null): array
     {
@@ -109,7 +107,7 @@ trait ConfigurationTranslation
         }
 
         $configs = $this->appConfigs($appId);
-        
+
         // Enhance with translations
         foreach ($configs as &$config) {
             try {
@@ -119,15 +117,17 @@ trait ConfigurationTranslation
                     ->where('configuration_id', $config['id'])
                     ->where('lang', $lang)
                     ->fetch();
-                
+
                 if ($translation) {
                     // Override with translated values
                     if (!empty($translation['description'])) {
                         $config['description'] = $translation['description'];
                     }
+
                     if (!empty($translation['hint'])) {
                         $config['hint'] = $translation['hint'];
                     }
+
                     if (!empty($translation['name'])) {
                         $config['name'] = $translation['name'];
                     }
@@ -138,14 +138,16 @@ trait ConfigurationTranslation
                         ->where('configuration_id', $config['id'])
                         ->where('lang', 'en')
                         ->fetch();
-                    
+
                     if ($englishTrans) {
                         if (!empty($englishTrans['description'])) {
                             $config['description'] = $englishTrans['description'];
                         }
+
                         if (!empty($englishTrans['hint'])) {
                             $config['hint'] = $englishTrans['hint'];
                         }
+
                         if (!empty($englishTrans['name'])) {
                             $config['name'] = $englishTrans['name'];
                         }
@@ -155,7 +157,7 @@ trait ConfigurationTranslation
                 // Translation tables might not exist yet
             }
         }
-        
+
         return $configs;
     }
 }

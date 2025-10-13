@@ -1,21 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * MultiFlexi - 
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi;
 
 /**
- * Description of RunTemplateLister
+ * Description of RunTemplateLister.
  *
- * @author Vitex <info@vitexsoftware.cz> 
+ * @author Vitex <info@vitexsoftware.cz>
  */
-class RunTemplateLister extends MultiFlexi\RunTemplate {
-   public function columns($columns = [])
+class RunTemplateLister extends MultiFlexi\RunTemplate
+{
+    public function columns($columns = [])
     {
         return parent::columns([
             ['name' => 'id', 'type' => 'text', 'label' => _('ID')],
@@ -44,8 +51,7 @@ class RunTemplateLister extends MultiFlexi\RunTemplate {
             //            ['name' => 'created', 'type' => 'datetime', 'label' => _('Created')],
         ]);
     }
-    
-    
+
     public function completeDataRow(array $dataRowRaw): array
     {
         $dataRowRaw['interv'] = '<span title="'._(self::codeToInterval($dataRowRaw['interv'])).'">'.self::getIntervalEmoji($dataRowRaw['interv']).' '._(self::codeToInterval($dataRowRaw['interv'])).'</span>';

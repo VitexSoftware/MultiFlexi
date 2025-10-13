@@ -39,3 +39,12 @@ When writing code, always ensure that it is well-tested and includes unit tests 
 When writing code, always ensure that it is maintainable and follows best practices.
 
 When create new class or update existing class, always create or update its phpunit test files.
+
+When developing or testing this application, always run the main script from the src/ directory:
+```bash
+cd src/
+php index.php
+```
+This ensures the relative paths (../vendor/autoload.php and ../.env) work correctly during development.
+
+The application uses relative paths intentionally - they are resolved during Debian packaging via sed commands in debian/rules file for production deployment.

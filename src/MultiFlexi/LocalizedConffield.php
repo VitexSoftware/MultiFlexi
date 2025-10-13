@@ -16,8 +16,8 @@ declare(strict_types=1);
 namespace MultiFlexi;
 
 /**
- * Configuration field with localization support
- * 
+ * Configuration field with localization support.
+ *
  * This class extends the base Conffield class with translation capabilities
  */
 class LocalizedConffield extends Conffield
