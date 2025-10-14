@@ -42,8 +42,6 @@ if (empty($emailTo)) {
         $userLogin = $controlUser->getUserLogin();
         $newPassword = \Ease\Functions::randomString(8);
 
-        $controlUser->passwordChange($newPassword);
-
         $email = new \Ease\HtmlMailer(
             $userEmail,
             \Ease\Shared::appName().' -'.sprintf(
@@ -52,19 +50,20 @@ if (empty($emailTo)) {
             ),
         );
 
-        $email->setMailHeaders(['From' => \Ease\Shared::cfg('EMAIL_FROM')]);
+        $email->setMailHeaders(['From' => \Ease\Shared::cfg('EMAIL_FROM', 'multiflexi@'.$_SERVER['SERVER_NAME'])]); )]);
         $email->addItem(_('Sign On informations was changed').":\n");
 
         $email->addItem(_('Username').': '.$userLogin."\n");
         $email->addItem(_('Password').': '.$newPassword."\n");
 
-        $email->send();
-
-        \Ease\Shared::user()->addStatusMessage(sprintf(
-            _('Your new password was sent to %s'),
-            '<strong>'.$emailTo.'</strong>',
-        ));
-        $success = true;
+        if ($email->send()) {
+            $controlUser->passwordChange($newPassword);
+            \Ease\Shared::user()->addStatusMessage(sprintf(
+                _('Your new password was sent to %s'),
+                '<strong>'.$emailTo.'</strong>',
+            ));
+            $success = true;
+        }
     }
 }
 
