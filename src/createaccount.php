@@ -105,7 +105,7 @@ if (WebPage::singleton()->isPosted()) {
                 $newAdmin->getDataValue('email'),
                 _('Sign On info'),
             ));
-            $email->setMailHeaders(['From' => \Ease\Shared::cfg('EMAIL_FROM')]);
+            $email->setMailHeaders(['From' => \Ease\Shared::cfg('EMAIL_FROM', 'multiflexi@'.$_SERVER['SERVER_NAME'])]);
             $email->addItem(new \Ease\Html\DivTag(sprintf(_('Your new %s account:')."\n", \Ease\Shared::appName())));
             $email->addItem(new \Ease\Html\DivTag(' Login: '.$newAdmin->getUserLogin()."\n"));
             $email->addItem(new \Ease\Html\DivTag(' Password: '.$_POST['password']."\n"));
@@ -124,7 +124,7 @@ if (WebPage::singleton()->isPosted()) {
                         $newAdmin->getUserLogin(),
                     ),
                 );
-                $email->setMailHeaders(['From' => \Ease\Shared::cfg('EMAIL_FROM')]);
+                $email->setMailHeaders(['From' => \Ease\Shared::cfg('EMAIL_FROM', 'multiflexi@'.$_SERVER['SERVER_NAME'])]);
                 $email->addItem(new \Ease\Html\DivTag(_('New User').":\n"));
                 $email->addItem(new \Ease\Html\DivTag(' Login: '.$newAdmin->getUserLogin()."\n"));
 
