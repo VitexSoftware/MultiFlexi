@@ -128,9 +128,10 @@ class MainMenu extends \Ease\Html\DivTag
     public function credentialsMenuEnabled($nav): void
     {
         $credentialsMenu = ['credential.php' => '🔏 '._('Register new Credential')];
+        $credentialsMenu['credentials.php'] = '🔒 '._('Credentials Listing');
         $credentialsMenu['credentialtype.php'] = '🔒 '._('Register new Credential Type');
-        $credentialsMenu['credentialtypes.php'] = '🔒 '._('Credential types listing');
-        $nav->addDropDownMenu(_('Credentials'), $credentialsMenu);
+        $credentialsMenu['credentialtypes.php'] = '🔏 '._('Credential types listing');
+        $nav->addDropDownMenu('<img width=30 src=images/vault.svg> '._('Credentials'), $credentialsMenu);
     }
 
     /**
