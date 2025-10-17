@@ -20,7 +20,7 @@ WebPage::singleton()->onlyForLogged();
 
 WebPage::singleton()->addItem(new PageTop(_('Credentials')));
 
-WebPage::singleton()->container->addItem(new DBDataTable(new \MultiFlexi\Credential()));
+WebPage::singleton()->container->addItem(new DBDataTable(new \MultiFlexi\CredentialLister()));
 
 WebPage::singleton()->addItem(new PageBottom('credentials'));
 WebPage::singleton()->draw();

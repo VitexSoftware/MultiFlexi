@@ -48,7 +48,7 @@ if (WebPage::getRequestValue('new', 'int') === 1) {
     $runTemplate->setDataValue('interv', 'n');
     $runTemplate->setDataValue('name', _($app->getRecordName()));
 
-    $runTemplate->takeData();
+    $runTemplate->takeData([]);
 
     $runTemplate->dbsync();
 }
