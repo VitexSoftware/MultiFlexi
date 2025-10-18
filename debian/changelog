@@ -1,4 +1,4 @@
-multiflexi (1.29.0) UNRELEASED; urgency=medium
+multiflexi (1.29.0) jammy; urgency=medium
 
   [ vitex ]
   * custom zabbix-host for company
@@ -8,7 +8,7 @@ multiflexi (1.29.0) UNRELEASED; urgency=medium
   [ Vitex ]
   * Release version 1.29.0 with new features and improvements
 
- -- Vitex <vitezslav.dvorak@spojenet.cz>  Mon, 29 Sep 2025 19:53:58 +0200
+ -- vitex <info@vitexsoftware.cz>  Sat, 18 Oct 2025 02:56:15 +0200
 
 multiflexi (1.27.2) jammy; urgency=medium
 

@@ -1108,12 +1108,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/serializable-closure.git",
-                "reference": "86f48b9f68189ba971c17008ebcc3e339e480a59"
+                "reference": "7eee2297ee03430d540575f66d167de7adb7ac41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/86f48b9f68189ba971c17008ebcc3e339e480a59",
-                "reference": "86f48b9f68189ba971c17008ebcc3e339e480a59",
+                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/7eee2297ee03430d540575f66d167de7adb7ac41",
+                "reference": "7eee2297ee03430d540575f66d167de7adb7ac41",
                 "shasum": ""
             },
             "require": {
@@ -1162,7 +1162,7 @@
                 "issues": "https://github.com/laravel/serializable-closure/issues",
                 "source": "https://github.com/laravel/serializable-closure"
             },
-            "time": "2025-09-23T14:22:38+00:00"
+            "time": "2025-10-14T14:11:38+00:00"
         },
         {
             "name": "marc-mabe/php-enum",
@@ -2648,12 +2648,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/cache.git",
-                "reference": "36c51f36d5f3c23cfcc2b5dc5e443bb5ff085605"
+                "reference": "0156560fabadb75faa57ca8a34b335e51305ff9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/cache/zipball/36c51f36d5f3c23cfcc2b5dc5e443bb5ff085605",
-                "reference": "36c51f36d5f3c23cfcc2b5dc5e443bb5ff085605",
+                "url": "https://api.github.com/repos/reactphp/cache/zipball/0156560fabadb75faa57ca8a34b335e51305ff9b",
+                "reference": "0156560fabadb75faa57ca8a34b335e51305ff9b",
                 "shasum": ""
             },
             "require": {
@@ -2712,7 +2712,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-01-04T09:16:03+00:00"
+            "time": "2025-10-15T07:30:12+00:00"
         },
         {
             "name": "react/dns",
@@ -3022,12 +3022,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/stream.git",
-                "reference": "1e5b0acb8fe55143b5b426817155190eb6f5b18d"
+                "reference": "9decb8fa54f361877ba62c2d5e46bb4401779fb1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/stream/zipball/1e5b0acb8fe55143b5b426817155190eb6f5b18d",
-                "reference": "1e5b0acb8fe55143b5b426817155190eb6f5b18d",
+                "url": "https://api.github.com/repos/reactphp/stream/zipball/9decb8fa54f361877ba62c2d5e46bb4401779fb1",
+                "reference": "9decb8fa54f361877ba62c2d5e46bb4401779fb1",
                 "shasum": ""
             },
             "require": {
@@ -3084,7 +3084,7 @@
             ],
             "support": {
                 "issues": "https://github.com/reactphp/stream/issues",
-                "source": "https://github.com/reactphp/stream/tree/v1.4.0"
+                "source": "https://github.com/reactphp/stream/tree/1.x"
             },
             "funding": [
                 {
@@ -3092,7 +3092,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-06-11T12:45:25+00:00"
+            "time": "2025-10-15T07:30:20+00:00"
         },
         {
             "name": "robmorgan/phinx",
@@ -5220,12 +5220,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core.git",
-                "reference": "612b40895cf5e86aa83a7a2c0fd2b249f1c3520f"
+                "reference": "ca6c90f9370dbf119b9ea937c57a5ff579f7cc89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/612b40895cf5e86aa83a7a2c0fd2b249f1c3520f",
-                "reference": "612b40895cf5e86aa83a7a2c0fd2b249f1c3520f",
+                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/ca6c90f9370dbf119b9ea937c57a5ff579f7cc89",
+                "reference": "ca6c90f9370dbf119b9ea937c57a5ff579f7cc89",
                 "shasum": ""
             },
             "require": {
@@ -5269,7 +5269,7 @@
                 "issues": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/issues",
                 "source": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/tree/main"
             },
-            "time": "2025-10-13T23:20:22+00:00"
+            "time": "2025-10-17T18:42:52+00:00"
         },
         {
             "name": "ybelenko/openapi-data-mocker",
@@ -6850,8 +6850,8 @@
             "version": "2.1.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/09789cd1e5f6132ba0f46af8b98132bd935dff34",
-                "reference": "09789cd1e5f6132ba0f46af8b98132bd935dff34",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/6c44887423faf584640fdddc650b817699849e25",
+                "reference": "6c44887423faf584640fdddc650b817699849e25",
                 "shasum": ""
             },
             "require": {
@@ -6897,7 +6897,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-13T11:05:21+00:00"
+            "time": "2025-10-17T15:16:49+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -6905,12 +6905,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-phpunit.git",
-                "reference": "c54a26903d4a34b6d2a13b004f505ba340aabcf4"
+                "reference": "39950c70b6a4faa36567b83b8c4b32f889c68e03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/c54a26903d4a34b6d2a13b004f505ba340aabcf4",
-                "reference": "c54a26903d4a34b6d2a13b004f505ba340aabcf4",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/39950c70b6a4faa36567b83b8c4b32f889c68e03",
+                "reference": "39950c70b6a4faa36567b83b8c4b32f889c68e03",
                 "shasum": ""
             },
             "require": {
@@ -6951,7 +6951,7 @@
                 "issues": "https://github.com/phpstan/phpstan-phpunit/issues",
                 "source": "https://github.com/phpstan/phpstan-phpunit/tree/2.0.x"
             },
-            "time": "2025-09-24T11:42:52+00:00"
+            "time": "2025-10-14T10:27:41+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -7346,12 +7346,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "863470cae25cf9e0d5991559204b675e3aeb2322"
+                "reference": "33d931d538fb5fc3600273e629299c9638b761bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/863470cae25cf9e0d5991559204b675e3aeb2322",
-                "reference": "863470cae25cf9e0d5991559204b675e3aeb2322",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/33d931d538fb5fc3600273e629299c9638b761bd",
+                "reference": "33d931d538fb5fc3600273e629299c9638b761bd",
                 "shasum": ""
             },
             "require": {
@@ -7444,7 +7444,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-10-13T04:23:13+00:00"
+            "time": "2025-10-16T06:58:55+00:00"
         },
         {
             "name": "psr/event-dispatcher",
@@ -8779,12 +8779,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "c1a41e8ecb0f76b9e6d93deaeb5b85718975b12a"
+                "reference": "38665c9607ce1fd17beaab3ea5d68e87ac5ed385"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/c1a41e8ecb0f76b9e6d93deaeb5b85718975b12a",
-                "reference": "c1a41e8ecb0f76b9e6d93deaeb5b85718975b12a",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/38665c9607ce1fd17beaab3ea5d68e87ac5ed385",
+                "reference": "38665c9607ce1fd17beaab3ea5d68e87ac5ed385",
                 "shasum": ""
             },
             "require": {
@@ -8839,7 +8839,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-08T21:17:01+00:00"
+            "time": "2025-10-15T18:49:39+00:00"
         },
         {
             "name": "symfony/options-resolver",
