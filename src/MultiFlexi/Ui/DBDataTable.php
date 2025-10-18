@@ -78,8 +78,8 @@ class DBDataTable extends \Ease\Html\TableTag
         $this->includeJavaScript('js/jquery.dataTables.js');
         $this->includeJavaScript('js/dataTables.bootstrap4.js');
         $this->includeCss('css/dataTables.bootstrap4.css');
-        //$this->includeCss('css/buttons.bootstrap4.css');
-        
+        // $this->includeCss('css/buttons.bootstrap4.css');
+
         //        $this->includeJavaScript('assets/DataTables-1.10.19/js/jquery.dataTables.min.js');
         //        $this->includeJavaScript('assets/DataTables-1.10.19/js/dataTables.bootstrap.min.js');
         //        $this->includeJavaScript('assets/Select-1.3.0/js/dataTables.select.min.js');

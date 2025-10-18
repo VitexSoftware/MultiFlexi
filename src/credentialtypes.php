@@ -21,7 +21,7 @@ WebPage::singleton()->onlyForLogged();
 
 WebPage::singleton()->addItem(new PageTop(_('Crednetial Types listing')));
 
-WebPage::singleton()->container->addItem(new DBDataTable(new \MultiFlexi\CredentialType()));
+WebPage::singleton()->container->addItem(new DBDataTable(new \MultiFlexi\CredentialTypeLister()));
 
 WebPage::singleton()->addItem(new PageBottom());
 
