@@ -101,7 +101,7 @@ EOD);
         $runtemplateTabs = new \Ease\TWB4\Tabs();
         $runtemplateTabs->addTab(_('Jobs'), [$runtemplateJobs, new RunTemplateJobsLastMonthChart($runtemplate)]);
         $runtemplateTabs->addTab(_('Options'), [new RuntemplateConfigForm($runtemplate)]);
-        $runtemplateTabs->addTab(_('Actions'), [new \MultiFlexi\Ui\ActionsTab($runtemplate)]);
+        // TODO:   $runtemplateTabs->addTab(_('Actions'), [new \MultiFlexi\Ui\ActionsTab($runtemplate)]);
         $runtemplateTabs->addTab(_('Environment'), [new EnvironmentView($runtemplate->credentialsEnvironment()), new RunTemplateDotEnv($runtemplate)]);
 
         $this->addItem($runtemplateTabs);

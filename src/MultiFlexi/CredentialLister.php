@@ -1,20 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * MultiFlexi - 
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
+
 namespace MultiFlexi;
+
 /**
- * Description of CredentialLister
+ * Description of CredentialLister.
  *
  * @author vitex
  */
 class CredentialLister extends \MultiFlexi\Credential
 {
-        /**
+    /**
      * @see https://datatables.net/examples/advanced_init/column_render.html
      *
      * @return string Column rendering
@@ -59,10 +67,8 @@ EOD;
         $dataRow['id'] = $dataRowRaw['id'];
         $dataRow['name'] = '<a title="'.$dataRowRaw['name'].'" href="credential.php?id='.$dataRowRaw['id'].'">'.$dataRowRaw['name'].'</a>';
         $dataRow['formType'] = $dataRowRaw['formType'].'<br><a title="'.$dataRowRaw['formType'].'" href="credential.php?id='.$dataRowRaw['id'].'"><img src="images/'.$helper->getDataValue('logo').'" height="50">';
-        $dataRow['company_id'] = (string) new Ui\CompanyLinkButton(new Company($dataRowRaw['company_id']), ['style' => 'height: 50px;']) .' '. $dataRowRaw['company_id_value'];
+        $dataRow['company_id'] = (string) new Ui\CompanyLinkButton(new Company($dataRowRaw['company_id']), ['style' => 'height: 50px;']).' '.$dataRowRaw['company_id_value'];
 
         return parent::completeDataRow($dataRow);
     }
-
-
 }
