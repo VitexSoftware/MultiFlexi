@@ -56,6 +56,16 @@ case "$1" in
             find /usr/share/multiflexi/ -type d -exec chmod 755 {} \;
         fi
 
+        # Run GDPR Article 16 database migration
+        if [ -f /usr/share/multiflexi/gdpr-article16-migration.php ]; then
+            cd /usr/share/multiflexi
+            if php -f gdpr-article16-migration.php 2>/dev/null; then
+                echo "GDPR Article 16 database migration completed successfully"
+            else
+                echo "Warning: GDPR Article 16 database migration failed - tables may already exist"
+            fi
+        fi
+
         # Handle webserver reconfiguration/restart
         db_get multiflexi/reconfigure-webserver || true
         webservers="$RET"

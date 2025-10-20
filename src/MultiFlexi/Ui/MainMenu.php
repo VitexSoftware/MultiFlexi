@@ -82,8 +82,12 @@ class MainMenu extends \Ease\Html\DivTag
 
             $nav->addDropDownMenu('<img height=30 src=images/log.svg> '._('Logs'), ['logs.php' => _('System'), 'joblist.php' => _('Jobs')]);
 
-            // Privacy menu
-            $nav->addMenuItem(new \Ease\Html\ATag('consent-preferences.php', '<i class="fas fa-user-shield"></i> '._('Privacy')), 'right');
+            // Privacy menu with dropdown
+            $privacyMenu = [
+                'consent-preferences.php' => '<i class="fas fa-user-shield"></i> '._('Privacy Preferences'),
+                'data-export-page.php' => '<i class="fas fa-download"></i> '._('Export My Data')
+            ];
+            $nav->addDropDownMenu('<i class="fas fa-user-shield"></i> '._('Privacy'), $privacyMenu);
 
             $nav->addMenuItem(new \Ease\Html\ATag('logout.php', '<img height=30 src=images/application-exit.svg> '._('Sign Off')), 'right');
 

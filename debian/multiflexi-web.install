@@ -11,6 +11,9 @@ src/css/*                                 usr/share/multiflexi/css
 src/MultiFlexi/*.php                      usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Ui                         usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Consent                    usr/lib/multiflexi/MultiFlexi/
+src/MultiFlexi/Audit                      usr/lib/multiflexi/MultiFlexi/
+src/MultiFlexi/GDPR                       usr/lib/multiflexi/MultiFlexi/
+src/MultiFlexi/Notifications              usr/lib/multiflexi/MultiFlexi/
 
 debian/tmp/composer.json                  usr/lib/multiflexi
 
@@ -22,3 +25,5 @@ debian/com.vitexsoftware.multiflexi.desktop         usr/share/applications/
 multiflexi.svg                 			usr/share/icons/hicolor/scalable/apps/
 i18n/cs_CZ/LC_MESSAGES/*.mo                	usr/share/locale/cs_CZ/LC_MESSAGES/
 i18n/en_US/LC_MESSAGES/*.mo                	usr/share/locale/en_US/LC_MESSAGES/
+
+GDPR_ARTICLE_16_IMPLEMENTATION.md           usr/share/doc/multiflexi-web/

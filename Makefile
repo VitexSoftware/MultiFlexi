@@ -110,3 +110,9 @@ instprobe: ## 🔧 Install probe application from JSON
 reset: ## 🔄 Reset local branch to origin
 	git fetch origin
 	git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)
+
+gdpr-migration: ## 📋 Run GDPR Article 16 database migration
+	php src/gdpr-article16-migration.php
+
+gdpr-migration-sample: ## 📋 Run GDPR Article 16 migration with sample data
+	php src/gdpr-article16-migration.php --with-sample-data
