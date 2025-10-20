@@ -48,7 +48,10 @@
             "MultiFlexi\\Api\\": "src/MultiFlexi/Api",
             "MultiFlexi\\Ui\\Form\\": "src/MultiFlexi/Ui/Form",
             "MultiFlexi\\Api\\Auth\\": "src/MultiFlexi/Api/Auth",
-            "MultiFlexi\\Api\\Server\\": "src/MultiFlexi/Api/Server"
+            "MultiFlexi\\Api\\Server\\": "src/MultiFlexi/Api/Server",
+            "MultiFlexi\\Audit\\": "src/MultiFlexi/Audit",
+            "MultiFlexi\\GDPR\\": "src/MultiFlexi/GDPR",
+            "MultiFlexi\\Notifications\\": "src/MultiFlexi/Notifications"
         }
     },
     "autoload-dev": {
