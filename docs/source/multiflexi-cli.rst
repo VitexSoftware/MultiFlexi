@@ -47,11 +47,14 @@ Commands Overview
 The MultiFlexi CLI provides the following main commands:
 
 - **application** - Manage applications (import, export, configuration)
+- **artifact** - Manage job artifacts (list, get, save)
 - **company** - Manage companies and their settings
 - **job** - Manage job execution and monitoring
 - **runtemplate** - Manage run templates and scheduling
 - **user** - User account management
 - **token** - API token management
+- **credtype** - Credential type operations
+- **companyapp** - Manage company-application relations
 - **queue** - Job queue operations
 - **appstatus** - System status information
 - **describe** - List all available commands and their parameters
@@ -80,9 +83,10 @@ Actions:
 - create: Create a new application (requires --name, --uuid).
 - update: Update an existing application (requires --id or --uuid).
 - delete: Delete an application (requires --id).
-- import-json: Import application from JSON file (requires --json).
-- export-json: Export application to JSON file (requires --id, --json).
-- remove-json: Remove application from JSON file (requires --json).
+- import-json: Import application from JSON file (requires --file).
+- export-json: Export application to JSON file (requires --id, --file).
+- remove-json: Remove application from JSON file (requires --file).
+- validate-json: Validate application JSON file (requires --file).
 - showconfig: Show defined configuration fields for application (requires --id or --uuid).
 
 Options:
@@ -94,7 +98,8 @@ Options:
   --executable   Executable
   --ociimage     OCI Image
   --requirements Requirements
-  --json         Path to JSON file for import/export/remove
+  --homepage     Homepage URL
+  --file         Path to JSON file for import/export/remove/validate
   --appversion   Application Version
   -f, --format   Output format: text or json (default: text)
 
@@ -107,10 +112,41 @@ Examples:
     multiflexi-cli application create --name="App1" --uuid="uuid-123"
     multiflexi-cli application update --id=1 --name="App1 Updated"
     multiflexi-cli application delete --id=1
-    multiflexi-cli application import-json --json=app.json
-    multiflexi-cli application export-json --id=1 --json=app.json
+    multiflexi-cli application import-json --file=app.json
+    multiflexi-cli application export-json --id=1 --file=app.json
     multiflexi-cli application showconfig --id=1
-    multiflexi-cli application validate-json --json=app.json
+    multiflexi-cli application validate-json --file=app.json
+
+artifact
+--------
+
+Manage job artifacts (list, get, save).
+
+.. code-block:: bash
+
+    multiflexi-cli artifact <action> [options]
+
+Actions:
+- list: List all artifacts or artifacts for a specific job.
+- get:  Get artifact details by ID.
+- save: Save artifact content to a file.
+
+Options:
+  --id           Artifact ID
+  --job_id       Job ID to filter artifacts
+  --file         File path to save artifact content to
+  --fields       Comma-separated list of fields to display
+  -f, --format   Output format: text or json (default: text)
+
+Examples:
+
+.. code-block:: bash
+
+    multiflexi-cli artifact list
+    multiflexi-cli artifact list --job_id=123
+    multiflexi-cli artifact get --id=456
+    multiflexi-cli artifact save --id=456 --file=output.txt
+    multiflexi-cli artifact list --fields=id,name,size --format=json
 
 company
 -------
@@ -140,6 +176,8 @@ Options:
   --DatUpdate    Updated date (date-time)
   --email        Email
   --slug         Company Slug
+  --fields       Comma-separated list of fields to display
+  --zabbix_host  Zabbix Host
   -f, --format   Output format: text or json (default: text)
 
 Examples:
@@ -161,6 +199,7 @@ Manage jobs (list, get, create, update, delete).
     multiflexi-cli job <action> [options]
 
 Actions:
+- status: Show job status aggregation.
 - list:   List all jobs.
 - get:    Get job details by ID.
 - create: Create a new job (requires --runtemplate_id and --scheduled).
@@ -174,12 +213,14 @@ Options:
   --executor     Executor
   --schedule_type Schedule type
   --app_id       App ID
+  --fields       Comma-separated list of fields to display
   -f, --format   Output format: text or json (default: text)
 
 Examples:
 
 .. code-block:: bash
 
+    multiflexi-cli job status
     multiflexi-cli job list
     multiflexi-cli job get --id=123
     multiflexi-cli job create --runtemplate_id=5 --scheduled="2024-07-01 12:00"
@@ -207,13 +248,17 @@ Options:
   --id           RunTemplate ID
   --name         Name
   --app_id       App ID
+  --app_uuid     App UUID
   --company_id   Company ID
+  --company      Company slug (string) or ID (integer)
   --interv       Interval code
+  --cron         Crontab expression for scheduling
   --active       Active
   --config       Application config key=value (repeatable)
   --schedule_time Schedule time for launch (Y-m-d H:i:s or "now")
   --executor     Executor to use for launch
   --env          Environment override key=value (repeatable)
+  --fields       Comma-separated list of fields to display
   -f, --format   Output format: text or json (default: text)
 
 Examples:
@@ -248,7 +293,8 @@ Options:
   --firstname    First name
   --lastname     Last name
   --email        Email
-  --password     Password
+  --password     Password (hashed)
+  --plaintext    Plaintext password
   --enabled      Enabled (true/false)
   -f, --format   Output format: text or json (default: text)
 
@@ -261,6 +307,42 @@ Examples:
     multiflexi-cli user create --login="jsmith" --firstname="John" --lastname="Smith" --email="jsmith@example.com" --password="secret"
     multiflexi-cli user update --id=1 --email="john.smith@example.com"
     multiflexi-cli user delete --id=1
+
+credtype
+--------
+
+Credential type operations (list, get, update, import, import-json, export-json, remove-json, validate-json).
+
+.. code-block:: bash
+
+    multiflexi-cli credtype <action> [options]
+
+Actions:
+- list: List all credential types.
+- get: Get credential type details by ID or UUID.
+- update: Update an existing credential type (requires --id or --uuid).
+- import: Import credential type from file.
+- import-json: Import credential type from JSON file (requires --file).
+- export-json: Export credential type to JSON file (requires --id or --uuid, --file).
+- remove-json: Remove credential type from JSON file (requires --file).
+- validate-json: Validate credential type JSON file (requires --file).
+
+Options:
+  --id           Credential Type ID
+  --uuid         Credential Type UUID
+  --name         Name
+  --file         Path to JSON file for import/export/remove/validate
+  -f, --format   Output format: text or json (default: text)
+
+Examples:
+
+.. code-block:: bash
+
+    multiflexi-cli credtype list
+    multiflexi-cli credtype get --id=1
+    multiflexi-cli credtype import-json --file=credtype.json
+    multiflexi-cli credtype export-json --id=1 --file=credtype.json
+    multiflexi-cli credtype validate-json --file=credtype.json
 
 token
 -----
@@ -293,6 +375,39 @@ Examples:
     multiflexi-cli token create --user=2
     multiflexi-cli token generate --user=2
     multiflexi-cli token update --id=1 --token=NEWVALUE
+
+companyapp
+----------
+
+Manage company-application relations (list, get, create, update, delete).
+
+.. code-block:: bash
+
+    multiflexi-cli companyapp <action> [options]
+
+Actions:
+- list: List all company-application relations.
+- get: Get company-application relation details by ID.
+- create: Create a new company-application relation (requires --company_id and --app_id or --app_uuid).
+- update: Update an existing company-application relation (requires --id).
+- delete: Delete a company-application relation (requires --id).
+
+Options:
+  --id           Relation ID
+  --company_id   Company ID
+  --app_id       Application ID
+  --app_uuid     Application UUID
+  -f, --format   Output format: text or json (default: text)
+
+Examples:
+
+.. code-block:: bash
+
+    multiflexi-cli companyapp list
+    multiflexi-cli companyapp get --id=1
+    multiflexi-cli companyapp create --company_id=1 --app_id=5
+    multiflexi-cli companyapp create --company_id=1 --app_uuid=6e2b2c2e-7c2a-4b1a-8e2d-123456789abc
+    multiflexi-cli companyapp delete --id=1
 
 queue
 -----
@@ -348,6 +463,9 @@ Dump the shell completion script for bash, zsh, or fish.
 
     multiflexi-cli completion [shell]
 
+Arguments:
+  shell          The shell type (e.g. "bash"), the value of the "$SHELL" env var will be used if this is not given
+
 Options:
   --debug        Tail the completion debug log
 
@@ -358,6 +476,7 @@ Examples:
     multiflexi-cli completion bash
     multiflexi-cli completion zsh
     multiflexi-cli completion fish
+    multiflexi-cli completion --debug
 
 describe
 --------
@@ -376,3 +495,18 @@ Prints App Status.
 .. code-block:: bash
 
     multiflexi-cli appstatus
+
+Credential Type Import
+----------------------
+
+MultiFlexi supports importing credential type definitions via the CLI. This allows administrators to define new credential types in JSON format and load them into the system for use in app and integration configurations.
+
+.. code-block:: bash
+
+    multiflexi-cli credtype import --file example.credential-type.json
+
+- The command reads the credential type from the specified file and imports it into MultiFlexi.
+- The JSON file must conform to the :ref:`credential-type-schema`.
+- Imported credential types are available for assignment to apps and integrations.
+
+See :doc:`credential-type` for schema details and examples.

@@ -81,7 +81,8 @@ Depends: ${misc:Depends},
 Description: MultiFlexi web interface core components
  Core PHP classes and web interface components for MultiFlexi.
  Contains the main application logic and web interface files including
- dashboard, company management, job management, and administrative tools.
+ dashboard, company management, job management, administrative tools,
+ and GDPR-compliant consent management system with cookie policy support.
 
 #Package: multiflexi-dev
 #Depends: multiflexi,jq

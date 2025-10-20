@@ -129,7 +129,4 @@ Contents
    projects
    coding-standards
    ci-cd
-
-.. autosummary::
-
-   :toctree: generated
+   credential-type

@@ -81,6 +81,10 @@ class MainMenu extends \Ease\Html\DivTag
             // $nav->addMenuItem(new \Ease\Html\ATag('logs.php', '<img height=30 src=images/log.svg> ' . _('Logs')), 'right');
 
             $nav->addDropDownMenu('<img height=30 src=images/log.svg> '._('Logs'), ['logs.php' => _('System'), 'joblist.php' => _('Jobs')]);
+
+            // Privacy menu
+            $nav->addMenuItem(new \Ease\Html\ATag('consent-preferences.php', '<i class="fas fa-user-shield"></i> '._('Privacy')), 'right');
+
             $nav->addMenuItem(new \Ease\Html\ATag('logout.php', '<img height=30 src=images/application-exit.svg> '._('Sign Off')), 'right');
 
             if (\MultiFlexi\Runner::isServiceActive('multiflexi-scheduler.service') === false) {
@@ -285,7 +289,7 @@ EOD);
                 if (empty($icon)) {
                     $logo = '';
                 } else {
-                    $logo = new \Ease\Html\ImgTag($uInfo[$icon], $uInfo[$namecolumn], ['height' => 20]).'&nbsp;';
+                    $logo = new \Ease\Html\ImgTag($uInfo[$icon], (string) $uInfo[$namecolumn], ['height' => 20]).'&nbsp;';
                 }
 
                 $itemList[$source->keyword.'.php?'.$keycolumn.'='.$uInfo[$keycolumn]] = $logo._(\array_key_exists($namecolumn, $uInfo) ? (string) ($uInfo[$namecolumn]).' ' : 'n/a');

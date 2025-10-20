@@ -12,7 +12,7 @@ MultiFlexi provides several command line utilities to manage and interact with t
     - Converts application configuration to JSON format.
 
 2. **multiflexi-cli**
-    - Command line interface for interacting with MultiFlexi. For more details, see :doc:`multiflexi-cli`.
+    - Command line interface for interacting with MultiFlexi. For more details, see :doc:`multiflexi-cli` and :doc:`credential-type`.
 
 3. **multiflexi-executor**
     - Executes scheduled jobs and tasks.
@@ -38,22 +38,32 @@ MultiFlexi provides several command line utilities to manage and interact with t
 10. **multiflexi-probe**
     - Probes the system for status and health checks.
 
-11. **multiflexi-scheduler**
+11. **multiflexi-cli credtype import**
+    - Imports a credential type definition from a JSON file into MultiFlexi.
+    - Usage:
+
+      .. code-block:: bash
+
+         multiflexi-cli credtype import --file example.credential-type.json
+
+    - See :doc:`credential-type` for schema details.
+
+12. **multiflexi-scheduler**
     - Schedules jobs and tasks for execution.
 
-12. **multiflexi-trigger**
+13. **multiflexi-trigger**
     - Triggers specific actions or jobs.
 
-13. **multiflexi-zabbix-lld**
+14. **multiflexi-zabbix-lld**
     - Generates Zabbix Low-Level Discovery (LLD) data.
 
-14. **multiflexi-zabbix-lld-actions**
+15. **multiflexi-zabbix-lld-actions**
     - Manages Zabbix LLD actions.
 
-15. **multiflexi-zabbix-lld-company**
+16. **multiflexi-zabbix-lld-company**
     - Manages Zabbix LLD company data.
 
-16. **multiflexi-zabbix-lld-tasks**
+17. **multiflexi-zabbix-lld-tasks**
     - Manages Zabbix LLD tasks.
 
 Each utility serves a specific purpose and can be used to automate and manage various aspects of the MultiFlexi system. For detailed usage and options, refer to the respective utility's help command.
