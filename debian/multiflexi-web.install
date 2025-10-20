@@ -10,6 +10,7 @@ src/images/*                              usr/share/multiflexi/images
 src/css/*                                 usr/share/multiflexi/css
 src/MultiFlexi/*.php                      usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Ui                         usr/lib/multiflexi/MultiFlexi/
+src/MultiFlexi/Consent                    usr/lib/multiflexi/MultiFlexi/
 
 debian/tmp/composer.json                  usr/lib/multiflexi
 

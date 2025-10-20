@@ -25,6 +25,7 @@ MultiFlexi is a comprehensive PHP-based task scheduling and automation framework
   - Rich command-line interface with extensive management commands
   - RESTful API with OAuth2 authentication and multiple output formats
 - **Enterprise-Ready**: User authentication, API tokens, data isolation, and Zabbix monitoring integration
+- **Privacy & GDPR Compliance**: Comprehensive consent management, self-hosted analytics support, and European privacy standards
 
 ## Architecture
 
@@ -61,6 +62,9 @@ MultiFlexi automatically configures environment variables for executed applicati
 - `POHODA_URL`
 - `POHODA_USERNAME`
 - `POHODA_PASSWORD`
+
+**Privacy & Analytics:**
+- `ENABLE_GOOGLE_ANALYTICS` - Enable/disable Google Analytics (default: false for European self-hosting)
 
 **Custom Variables:** Individual module configurations per company with extensible variable definitions.
 

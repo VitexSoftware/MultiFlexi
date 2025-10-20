@@ -54,7 +54,7 @@ $runtemplates = [];
 
 $jobber = new Job();
 
-$oPage->addCss(<<<'EOD'
+WebPage::singleton()->addCss(<<<'EOD'
 
 .runtemplate {
 background-color: #0001;

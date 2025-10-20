@@ -2648,12 +2648,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/cache.git",
-                "reference": "0156560fabadb75faa57ca8a34b335e51305ff9b"
+                "reference": "845e157750daa2f7c67b7fab63b46fb909bb8464"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/cache/zipball/0156560fabadb75faa57ca8a34b335e51305ff9b",
-                "reference": "0156560fabadb75faa57ca8a34b335e51305ff9b",
+                "url": "https://api.github.com/repos/reactphp/cache/zipball/845e157750daa2f7c67b7fab63b46fb909bb8464",
+                "reference": "845e157750daa2f7c67b7fab63b46fb909bb8464",
                 "shasum": ""
             },
             "require": {
@@ -2712,7 +2712,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2025-10-15T07:30:12+00:00"
+            "time": "2025-10-19T18:29:29+00:00"
         },
         {
             "name": "react/dns",
@@ -2720,12 +2720,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/dns.git",
-                "reference": "30c355a16e4a6be09c45ed291d2dfb5cf5295ace"
+                "reference": "57a623adf5a97be31d1749cd069a813bf97bd786"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/dns/zipball/30c355a16e4a6be09c45ed291d2dfb5cf5295ace",
-                "reference": "30c355a16e4a6be09c45ed291d2dfb5cf5295ace",
+                "url": "https://api.github.com/repos/reactphp/dns/zipball/57a623adf5a97be31d1749cd069a813bf97bd786",
+                "reference": "57a623adf5a97be31d1749cd069a813bf97bd786",
                 "shasum": ""
             },
             "require": {
@@ -2788,7 +2788,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2025-10-13T11:10:50+00:00"
+            "time": "2025-10-19T20:50:30+00:00"
         },
         {
             "name": "react/event-loop",
@@ -2942,12 +2942,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/socket.git",
-                "reference": "23e4ff33ea3e160d2d1f59a0e6050e4b0fb0eac1"
+                "reference": "def0730288b2a321db04f22caf86259ab2975cc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/socket/zipball/23e4ff33ea3e160d2d1f59a0e6050e4b0fb0eac1",
-                "reference": "23e4ff33ea3e160d2d1f59a0e6050e4b0fb0eac1",
+                "url": "https://api.github.com/repos/reactphp/socket/zipball/def0730288b2a321db04f22caf86259ab2975cc7",
+                "reference": "def0730288b2a321db04f22caf86259ab2975cc7",
                 "shasum": ""
             },
             "require": {
@@ -3006,7 +3006,7 @@
             ],
             "support": {
                 "issues": "https://github.com/reactphp/socket/issues",
-                "source": "https://github.com/reactphp/socket/tree/v1.16.0"
+                "source": "https://github.com/reactphp/socket/tree/1.x"
             },
             "funding": [
                 {
@@ -3014,7 +3014,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-07-26T10:38:09+00:00"
+            "time": "2025-10-19T20:51:52+00:00"
         },
         {
             "name": "react/stream",
@@ -5167,12 +5167,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/multiflexi-server.git",
-                "reference": "2cbad79422b5d0a13e4fe631ca20d114ddcf371a"
+                "reference": "0830b957403b68cbcfe7caa411e93c076fc46e8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/multiflexi-server/zipball/2cbad79422b5d0a13e4fe631ca20d114ddcf371a",
-                "reference": "2cbad79422b5d0a13e4fe631ca20d114ddcf371a",
+                "url": "https://api.github.com/repos/VitexSoftware/multiflexi-server/zipball/0830b957403b68cbcfe7caa411e93c076fc46e8a",
+                "reference": "0830b957403b68cbcfe7caa411e93c076fc46e8a",
                 "shasum": ""
             },
             "require": {
@@ -5212,7 +5212,7 @@
                 "issues": "https://github.com/VitexSoftware/multiflexi-server/issues",
                 "source": "https://github.com/VitexSoftware/multiflexi-server/tree/main"
             },
-            "time": "2025-09-04T22:18:20+00:00"
+            "time": "2025-10-20T07:40:29+00:00"
         },
         {
             "name": "vitexsoftware/multiflexi-core",
@@ -5220,12 +5220,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core.git",
-                "reference": "ca6c90f9370dbf119b9ea937c57a5ff579f7cc89"
+                "reference": "08081ce28368bfad741a489ee70dd4ee5a32d6ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/ca6c90f9370dbf119b9ea937c57a5ff579f7cc89",
-                "reference": "ca6c90f9370dbf119b9ea937c57a5ff579f7cc89",
+                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/08081ce28368bfad741a489ee70dd4ee5a32d6ba",
+                "reference": "08081ce28368bfad741a489ee70dd4ee5a32d6ba",
                 "shasum": ""
             },
             "require": {
@@ -5269,7 +5269,7 @@
                 "issues": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/issues",
                 "source": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/tree/main"
             },
-            "time": "2025-10-17T18:42:52+00:00"
+            "time": "2025-10-20T07:39:43+00:00"
         },
         {
             "name": "ybelenko/openapi-data-mocker",
@@ -6673,12 +6673,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "0da2d6679a3df45d6d720aa2e0d4568f82a32e46"
+                "reference": "0105ba17b5095f96b67b00010687cd65790b8658"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/0da2d6679a3df45d6d720aa2e0d4568f82a32e46",
-                "reference": "0da2d6679a3df45d6d720aa2e0d4568f82a32e46",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/0105ba17b5095f96b67b00010687cd65790b8658",
+                "reference": "0105ba17b5095f96b67b00010687cd65790b8658",
                 "shasum": ""
             },
             "require": {
@@ -6724,7 +6724,7 @@
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
                 "source": "https://github.com/nikic/PHP-Parser/tree/master"
             },
-            "time": "2025-09-08T07:54:25+00:00"
+            "time": "2025-10-19T13:43:25+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -6850,8 +6850,8 @@
             "version": "2.1.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/6c44887423faf584640fdddc650b817699849e25",
-                "reference": "6c44887423faf584640fdddc650b817699849e25",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/cbae9b7f2a51505290e4e67871e6ec30b69c9678",
+                "reference": "cbae9b7f2a51505290e4e67871e6ec30b69c9678",
                 "shasum": ""
             },
             "require": {
@@ -6897,7 +6897,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-17T15:16:49+00:00"
+            "time": "2025-10-20T11:55:15+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",

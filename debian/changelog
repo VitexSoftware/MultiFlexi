@@ -1,3 +1,20 @@
+multiflexi (1.30.0) jammy; urgency=medium
+
+  [ vitex ]
+  * Added GDPR-compliant consent management system
+  * Cookie consent banner with persistent storage across sessions
+  * Privacy policy and cookie policy pages
+  * ConsentManager class for backend consent operations
+  * ConsentHelper utility functions for template integration
+  * Database migration for consent and consent_log tables
+  * Configurable Google Analytics based on ENABLE_GOOGLE_ANALYTICS setting
+  * Cookie-based consent persistence for anonymous users
+
+  [ Vitex ]
+  * Release version 1.30.0 with GDPR compliance features
+
+ -- vitex <info@vitexsoftware.cz>  Sun, 20 Oct 2025 14:48:00 +0200
+
 multiflexi (1.29.0) jammy; urgency=medium
 
   [ vitex ]

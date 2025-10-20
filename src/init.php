@@ -44,6 +44,16 @@ Shared::user(null, '\MultiFlexi\User');
 $oPage = new WebPage('');
 WebPage::singleton($oPage);
 
+// Add consent banner JavaScript to pages (except API endpoints)
+$currentScript = basename($_SERVER['SCRIPT_NAME']);
+
+if (!\in_array($currentScript, ['consent-api.php', 'ajax.php', 'api.php'], true)) {
+    WebPage::singleton()->includeJavaScript('js/consent-banner.js');
+
+    // Enhance page with consent helpers
+    \MultiFlexi\Consent\ConsentHelper::enhancePageWithConsent($oPage);
+}
+
 date_default_timezone_set('Europe/Prague');
 
 $script_tz = date_default_timezone_get();

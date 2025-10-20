@@ -1,7 +1,8 @@
 MultiFlexi Setup
 ----------------
 
-MultiFlexi version 1.29.0 includes enhanced monitoring capabilities with the MultiFlexi Probe application.
+MultiFlexi version 1.30.0 includes enhanced monitoring capabilities with the MultiFlexi Probe application
+and a comprehensive GDPR-compliant consent management system.
 
 You can install initial demo data using command:
 
@@ -27,4 +28,22 @@ multiflexi-cli application import-json --json /path/to/app.json
 ```
 
 Then you can log in as user "demo" with password "demo" on http://localhost/multiflexi/
+
+GDPR Consent Management
+-----------------------
+
+MultiFlexi now includes a comprehensive GDPR-compliant consent management system:
+
+* Cookie consent banner for user privacy preferences
+* Privacy policy and cookie policy pages
+* Configurable Google Analytics integration (disabled by default)
+* Database-backed consent tracking with audit trail
+* Session-persistent consent storage
+
+The consent system is automatically integrated into all web pages. Users can manage
+their consent preferences at: http://localhost/multiflexi/consent-preferences.php
+
+To configure Google Analytics, set ENABLE_GOOGLE_ANALYTICS=true in your .env file.
+When disabled (default), the system promotes self-hosted analytics solutions like
+Matomo or AWStats in compliance with European privacy regulations.
 

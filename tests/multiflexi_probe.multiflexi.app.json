@@ -6,6 +6,7 @@
     "executable": "multiflexi-probe",
     "setup": "ls -la {FILE_UPLOAD}",
     "requirements": [
+        "Probe",
         "mServer",
         "SQLServer",
         "RaiffeisenBank",

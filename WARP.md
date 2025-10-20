@@ -199,6 +199,17 @@ To validate application definitions against the schema, use:
 multiflexi-cli application validate-json --json tests/multiflexi_probe.multiflexi.app.json
 ```
 
+### Application Import Behavior
+
+MultiFlexi supports repeated application imports without database constraint violations. The import system:
+
+1. **Identifies existing applications by UUID first, then by name as fallback**
+2. **Cleanly replaces environment configurations** by deleting existing configs before inserting new ones
+3. **Updates application metadata** instead of creating duplicates
+4. **Handles translations** using `ON DUPLICATE KEY UPDATE`
+
+This design allows packages to be reinstalled and application definitions to be updated seamlessly.
+
 ## Member Projects
 
 MultiFlexi is part of a larger ecosystem of related projects:

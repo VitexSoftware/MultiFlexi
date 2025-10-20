@@ -1,3 +1,5 @@
 tests/multiflexi_probe.multiflexi.app.json     usr/lib/multiflexi-probe/multiflexi/
-tests/4da1bd98-a90d-4a37-8992-b2da68349d96.svg usr/share/multiflexi/images/
+tests/probe.multiflexi.credential-type.json    usr/lib/multiflexi-probe/multiflexi/
+
+tests/*.svg usr/share/multiflexi/images/
 tests/multiflexi-probe			       usr/bin/
