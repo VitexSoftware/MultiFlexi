@@ -1,3 +1,20 @@
+multiflexi (1.31.0) jammy; urgency=medium
+
+  [ vitex ]
+  * GDPR Article 16 - Right of Rectification implementation
+  * User profile management page with data correction capabilities
+  * Approval workflow for sensitive data changes (email, username)
+  * Comprehensive audit logging system for all personal data modifications
+  * Email notification system for request status updates
+  * Administrative interface for reviewing and approving data corrections
+  * Enhanced UserForm with GDPR compliance features and validation
+  * Database migration for user_data_audit and user_data_correction_requests tables
+
+  [ Vitex ]
+  * Release version 1.31.0 with GDPR Article 16 compliance features
+
+ -- vitex <info@vitexsoftware.cz>  Sun, 20 Oct 2025 16:30:00 +0200
+
 multiflexi (1.30.0) jammy; urgency=medium
 
   [ vitex ]

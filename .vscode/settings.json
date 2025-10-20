@@ -11,23 +11,8 @@
         "nazev"
     ],
     "workbench.colorCustomizations": {
-        "activityBar.background": "#ed3d9b",
-        "activityBar.foreground": "#FFFFFF",
-        "activityBar.inactiveForeground": "#d7d7d7",
         "activityBar.activeBorder": "#ffbc96",
-        "activityBar.activeBackground": "#DB1F48",
         "activityBar.border": "#DB1F48",
-        "titleBar.activeBackground": "#ed3d9b",
-        "titleBar.activeForeground": "#FFFFFF",
-        "titleBar.inactiveBackground": "#ed3d9b",
-        "titleBar.inactiveForeground": "#FFFFFF",
-        "titleBar.border": "#ed3d9b",
-        "statusBar.background": "#ed3d9b",
-        "statusBar.foreground": "#FFFFFF",
-        "statusBar.border": "#DB1F48",
-        "statusBar.debuggingBackground": "#ed3d9b",
-        "statusBar.debuggingForeground": "#FFFFFF",
-        "tab.activeBorder": "#ed3d9b",
         "iLoveWorkSpaceColors": true,
         "iLoveWorkSpaceRandom": false
     },
