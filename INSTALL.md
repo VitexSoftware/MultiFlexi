@@ -14,7 +14,12 @@ sudo apt install libapache2-mod-php # easy & preconfigured
 sudo apt install multiflexi-DATABASE multiflexi
 ```
 
-k dispozici jsou tyto databázové adaptéry: **multiflexi-mysql**, **multiflexi-pgsql** a **multiflexi-sqlite**
+k dispozici jsou tyto databázové adaptéry pro různé databázové systémy:
+- **multiflexi-mysql** (pro MySQL a MariaDB)
+- **multiflexi-pgsql** (pro PostgreSQL)
+- **multiflexi-sqlite** (pro SQLite)
+
+MultiFlexi podporuje všechny hlavní databázové systémy prostřednictvím abstrakční vrstvy.
 
 These packages from VitexSoftware will be installed
 
