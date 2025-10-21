@@ -56,6 +56,9 @@ class WebPage extends \Ease\TWB4\WebPage
         $this->head->addItem('<link rel="icon" type="image/png" href="images/project-logo.png">');
         $this->head->addItem('<link rel="icon" type="image/x-icon" href="favicon.ico">');
 
+        // Add CSRF protection
+        $this->addCsrfProtection();
+
         $this->addCSS(<<<'EOD'
 
 
@@ -81,5 +84,21 @@ EOD);
         }
 
         return self::$instance;
+    }
+
+    /**
+     * Add CSRF protection to the page.
+     */
+    private function addCsrfProtection(): void
+    {
+        if (isset($GLOBALS['csrfProtection'])) {
+            $csrfProtection = $GLOBALS['csrfProtection'];
+
+            // Add meta tag for JavaScript
+            $this->head->addItem($csrfProtection->createTokenMetaTag());
+
+            // Add JavaScript for automatic CSRF token handling
+            $this->addJavaScript($csrfProtection->generateJavaScript(), null, true);
+        }
     }
 }

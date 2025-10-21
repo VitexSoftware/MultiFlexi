@@ -18,8 +18,8 @@ namespace MultiFlexi\DataExport;
 use MultiFlexi\Consent\ConsentManager;
 
 /**
- * User Data Exporter for GDPR Article 15 - Right of Access
- * 
+ * User Data Exporter for GDPR Article 15 - Right of Access.
+ *
  * Collects all personal data associated with a user from various tables
  * and provides it in structured formats (JSON/PDF)
  *
@@ -28,35 +28,57 @@ use MultiFlexi\Consent\ConsentManager;
 class UserDataExporter extends \MultiFlexi\Engine
 {
     /**
-     * Export all user personal data
-     * 
+     * Export all user personal data.
+     *
      * @param int $userId User ID to export data for
+     *
      * @return array Complete user data export
      */
     public function exportUserData(int $userId): array
     {
-        $exportData = [
-            'export_metadata' => $this->getExportMetadata($userId),
-            'user_profile' => $this->getUserProfileData($userId),
-            'company_associations' => $this->getCompanyAssociations($userId),
+        return [
+            'export_metadata' => self::getExportMetadata($userId),
+            'user_profile' => self::getUserProfileData($userId),
+            'company_associations' => self::getCompanyAssociations($userId),
             'credentials' => $this->getCredentialMetadata($userId),
             'activity_logs' => $this->getActivityLogs($userId),
             'job_history' => $this->getJobHistory($userId),
             'consent_records' => $this->getConsentRecords($userId),
-            'session_history' => $this->getSessionHistory($userId),
-            'audit_trails' => $this->getAuditTrails($userId)
+            'session_history' => self::getSessionHistory($userId),
+            'audit_trails' => $this->getAuditTrails($userId),
         ];
-
-        return $exportData;
     }
 
     /**
-     * Get export metadata
-     * 
-     * @param int $userId
-     * @return array
+     * Generate PDF export.
+     *
+     * @param array $data Export data
+     *
+     * @return string PDF content
      */
-    private function getExportMetadata(int $userId): array
+    public function generatePDF(array $data): string
+    {
+        // Simple PDF generation - in production, use proper PDF library
+        $content = "MultiFlexi - Personal Data Export\n";
+        $content .= 'Generated: '.$data['export_metadata']['export_date']."\n\n";
+
+        foreach ($data as $section => $sectionData) {
+            if ($section === 'export_metadata') {
+                continue;
+            }
+
+            $content .= strtoupper(str_replace('_', ' ', $section))."\n";
+            $content .= str_repeat('-', \strlen($section))."\n";
+            $content .= self::formatSectionForPDF($sectionData)."\n\n";
+        }
+
+        return $content;
+    }
+
+    /**
+     * Get export metadata.
+     */
+    private static function getExportMetadata(int $userId): array
     {
         return [
             'export_date' => date('c'),
@@ -65,21 +87,18 @@ class UserDataExporter extends \MultiFlexi\Engine
             'gdpr_article' => 'Article 15 - Right of Access',
             'data_controller' => 'MultiFlexi',
             'retention_info' => 'Data is retained according to our privacy policy',
-            'contact_info' => 'For questions about this export, contact your data protection officer'
+            'contact_info' => 'For questions about this export, contact your data protection officer',
         ];
     }
 
     /**
-     * Get user profile data from user table
-     * 
-     * @param int $userId
-     * @return array
+     * Get user profile data from user table.
      */
-    private function getUserProfileData(int $userId): array
+    private static function getUserProfileData(int $userId): array
     {
         $userEngine = new \Ease\SQL\Engine();
         $userEngine->myTable = 'user';
-        
+
         $userData = $userEngine->listingQuery()
             ->select('id, login, email, firstname, lastname, enabled, DatCreate, DatSave, last_modifier_id')
             ->where(['id' => $userId])
@@ -99,12 +118,13 @@ class UserDataExporter extends \MultiFlexi\Engine
             'account_enabled' => (bool) $userData['enabled'],
             'account_created' => $userData['DatCreate'],
             'last_updated' => $userData['DatSave'],
-            'last_modified_by' => $userData['last_modifier_id'] ? 'User ID: ' . $userData['last_modifier_id'] : null
+            'last_modified_by' => $userData['last_modifier_id'] ? 'User ID: '.$userData['last_modifier_id'] : null,
         ];
 
         // Get user settings (if any)
         $userObj = new \MultiFlexi\User($userId);
         $settings = $userObj->getData()['settings'] ?? null;
+
         if ($settings) {
             $profile['user_settings'] = json_decode($settings, true);
         }
@@ -113,19 +133,16 @@ class UserDataExporter extends \MultiFlexi\Engine
     }
 
     /**
-     * Get company associations
-     * 
-     * @param int $userId
-     * @return array
+     * Get company associations.
      */
-    private function getCompanyAssociations(int $userId): array
+    private static function getCompanyAssociations(int $userId): array
     {
         // This would need to be implemented based on your company-user association logic
         // For now, returning companies where user has activities
-        
+
         $logEngine = new \Ease\SQL\Engine();
         $logEngine->myTable = 'log';
-        
+
         $companyIds = $logEngine->listingQuery()
             ->select('DISTINCT company_id')
             ->where(['user_id' => $userId])
@@ -133,10 +150,11 @@ class UserDataExporter extends \MultiFlexi\Engine
             ->fetchAll();
 
         $companies = [];
+
         foreach ($companyIds as $companyId) {
             $companyEngine = new \Ease\SQL\Engine();
             $companyEngine->myTable = 'company';
-            
+
             $company = $companyEngine->listingQuery()
                 ->select('id, company, nazev, ic, enabled, DatCreate')
                 ->where(['id' => $companyId['company_id']])
@@ -150,7 +168,7 @@ class UserDataExporter extends \MultiFlexi\Engine
                     'company_identifier' => $company['ic'],
                     'enabled' => (bool) $company['enabled'],
                     'associated_since' => $company['DatCreate'],
-                    'relationship_type' => 'user_activity' // Based on activity logs
+                    'relationship_type' => 'user_activity', // Based on activity logs
                 ];
             }
         }
@@ -159,15 +177,12 @@ class UserDataExporter extends \MultiFlexi\Engine
     }
 
     /**
-     * Get credential metadata (NOT actual passwords/secrets)
-     * 
-     * @param int $userId
-     * @return array
+     * Get credential metadata (NOT actual passwords/secrets).
      */
     private function getCredentialMetadata(int $userId): array
     {
         // Get credentials associated with companies the user has access to
-        $companyAssociations = $this->getCompanyAssociations($userId);
+        $companyAssociations = self::getCompanyAssociations($userId);
         $companyIds = array_column($companyAssociations, 'company_id');
 
         if (empty($companyIds)) {
@@ -176,34 +191,31 @@ class UserDataExporter extends \MultiFlexi\Engine
 
         $credEngine = new \Ease\SQL\Engine();
         $credEngine->myTable = 'credentials';
-        
+
         $credentials = $credEngine->listingQuery()
             ->select('id, name, company_id, formType')
             ->where(['company_id' => $companyIds])
             ->fetchAll();
 
-        return array_map(function($cred) {
+        return array_map(static function ($cred) {
             return [
                 'credential_id' => (int) $cred['id'],
                 'credential_name' => $cred['name'],
                 'company_id' => (int) $cred['company_id'],
                 'credential_type' => $cred['formType'],
-                'note' => 'Actual credential values are not included for security reasons'
+                'note' => 'Actual credential values are not included for security reasons',
             ];
         }, $credentials);
     }
 
     /**
-     * Get activity logs for user
-     * 
-     * @param int $userId
-     * @return array
+     * Get activity logs for user.
      */
     private function getActivityLogs(int $userId): array
     {
         $logEngine = new \Ease\SQL\Engine();
         $logEngine->myTable = 'log';
-        
+
         $logs = $logEngine->listingQuery()
             ->select('id, company_id, apps_id, severity, venue, message, created')
             ->where(['user_id' => $userId])
@@ -211,7 +223,7 @@ class UserDataExporter extends \MultiFlexi\Engine
             ->limit(1000) // Limit to prevent huge exports
             ->fetchAll();
 
-        return array_map(function($log) {
+        return array_map(static function ($log) {
             return [
                 'log_id' => (int) $log['id'],
                 'company_id' => $log['company_id'] ? (int) $log['company_id'] : null,
@@ -219,21 +231,18 @@ class UserDataExporter extends \MultiFlexi\Engine
                 'severity' => $log['severity'],
                 'source' => $log['venue'],
                 'message' => $log['message'],
-                'timestamp' => $log['created']
+                'timestamp' => $log['created'],
             ];
         }, $logs);
     }
 
     /**
-     * Get job execution history for user
-     * 
-     * @param int $userId
-     * @return array
+     * Get job execution history for user.
      */
     private function getJobHistory(int $userId): array
     {
         // Get jobs associated with companies the user has access to
-        $companyAssociations = $this->getCompanyAssociations($userId);
+        $companyAssociations = self::getCompanyAssociations($userId);
         $companyIds = array_column($companyAssociations, 'company_id');
 
         if (empty($companyIds)) {
@@ -242,7 +251,7 @@ class UserDataExporter extends \MultiFlexi\Engine
 
         $jobEngine = new \Ease\SQL\Engine();
         $jobEngine->myTable = 'job';
-        
+
         $jobs = $jobEngine->listingQuery()
             ->select('id, app_id, begin, end, company_id, exitcode')
             ->where(['company_id' => $companyIds])
@@ -250,7 +259,7 @@ class UserDataExporter extends \MultiFlexi\Engine
             ->limit(500) // Limit to prevent huge exports
             ->fetchAll();
 
-        return array_map(function($job) {
+        return array_map(static function ($job) {
             return [
                 'job_id' => (int) $job['id'],
                 'application_id' => (int) $job['app_id'],
@@ -258,32 +267,29 @@ class UserDataExporter extends \MultiFlexi\Engine
                 'started_at' => $job['begin'],
                 'completed_at' => $job['end'],
                 'exit_code' => $job['exitcode'],
-                'status' => $job['exitcode'] === null ? 'running' : ($job['exitcode'] === 0 ? 'success' : 'failed')
+                'status' => $job['exitcode'] === null ? 'running' : ($job['exitcode'] === 0 ? 'success' : 'failed'),
             ];
         }, $jobs);
     }
 
     /**
-     * Get consent records for user
-     * 
-     * @param int $userId
-     * @return array
+     * Get consent records for user.
      */
     private function getConsentRecords(int $userId): array
     {
         $consentManager = new ConsentManager();
-        
+
         // Get all consent history, not just current
         $consentEngine = new \Ease\SQL\Engine();
         $consentEngine->myTable = 'consent';
-        
+
         $consents = $consentEngine->listingQuery()
             ->select('id, consent_type, consent_status, consent_details, consent_version, expires_at, withdrawn_at, DatCreate, ip_address')
             ->where(['user_id' => $userId])
             ->orderBy('DatCreate DESC')
             ->fetchAll();
 
-        $consentData = array_map(function($consent) {
+        $consentData = array_map(static function ($consent) {
             return [
                 'consent_id' => (int) $consent['id'],
                 'consent_type' => $consent['consent_type'],
@@ -293,64 +299,58 @@ class UserDataExporter extends \MultiFlexi\Engine
                 'granted_at' => $consent['DatCreate'],
                 'expires_at' => $consent['expires_at'],
                 'withdrawn_at' => $consent['withdrawn_at'],
-                'ip_address' => $consent['ip_address']
+                'ip_address' => $consent['ip_address'],
             ];
         }, $consents);
 
         // Get consent audit log
         $auditEngine = new \Ease\SQL\Engine();
         $auditEngine->myTable = 'consent_log';
-        
+
         $auditLogs = $auditEngine->listingQuery()
             ->select('action, consent_type, old_value, new_value, DatCreate, ip_address')
             ->where(['user_id' => $userId])
             ->orderBy('DatCreate DESC')
             ->fetchAll();
 
-        $auditData = array_map(function($audit) {
+        $auditData = array_map(static function ($audit) {
             return [
                 'action' => $audit['action'],
                 'consent_type' => $audit['consent_type'],
                 'old_value' => $audit['old_value'] ? json_decode($audit['old_value'], true) : null,
                 'new_value' => $audit['new_value'] ? json_decode($audit['new_value'], true) : null,
                 'timestamp' => $audit['DatCreate'],
-                'ip_address' => $audit['ip_address']
+                'ip_address' => $audit['ip_address'],
             ];
         }, $auditLogs);
 
         return [
             'consent_records' => $consentData,
-            'consent_audit_trail' => $auditData
+            'consent_audit_trail' => $auditData,
         ];
     }
 
     /**
-     * Get session history (if available)
-     * 
-     * @param int $userId
-     * @return array
+     * Get session history (if available).
      */
-    private function getSessionHistory(int $userId): array
+    private static function getSessionHistory(int $userId): array
     {
         // Note: PHP sessions are typically not stored in database
         // This would need to be implemented if session data is stored in DB
         // For now, return empty array with explanation
-        
+
         return [
             'note' => 'Session history is not permanently stored in the database',
             'current_session_info' => [
                 'session_id' => session_id(),
                 'started_at' => $_SESSION['login_time'] ?? 'unknown',
-                'ip_address' => $_SERVER['REMOTE_ADDR'] ?? 'unknown'
-            ]
+                'ip_address' => $_SERVER['REMOTE_ADDR'] ?? 'unknown',
+            ],
         ];
     }
 
     /**
-     * Get additional audit trails
-     * 
-     * @param int $userId
-     * @return array
+     * Get additional audit trails.
      */
     private function getAuditTrails(int $userId): array
     {
@@ -360,17 +360,17 @@ class UserDataExporter extends \MultiFlexi\Engine
         // Data export requests
         $logEngine = new \Ease\SQL\Engine();
         $logEngine->myTable = 'log';
-        
+
         $exportLogs = $logEngine->listingQuery()
             ->select('message, created')
             ->where(['user_id' => $userId, 'venue' => 'DataExportApi'])
             ->orderBy('created DESC')
             ->fetchAll();
 
-        $trails['data_export_requests'] = array_map(function($log) {
+        $trails['data_export_requests'] = array_map(static function ($log) {
             return [
                 'message' => $log['message'],
-                'timestamp' => $log['created']
+                'timestamp' => $log['created'],
             ];
         }, $exportLogs);
 
@@ -378,40 +378,16 @@ class UserDataExporter extends \MultiFlexi\Engine
     }
 
     /**
-     * Generate PDF export
-     * 
-     * @param array $data Export data
-     * @return string PDF content
-     */
-    public function generatePDF(array $data): string
-    {
-        // Simple PDF generation - in production, use proper PDF library
-        $content = "MultiFlexi - Personal Data Export\n";
-        $content .= "Generated: " . $data['export_metadata']['export_date'] . "\n\n";
-        
-        foreach ($data as $section => $sectionData) {
-            if ($section === 'export_metadata') continue;
-            
-            $content .= strtoupper(str_replace('_', ' ', $section)) . "\n";
-            $content .= str_repeat('-', strlen($section)) . "\n";
-            $content .= $this->formatSectionForPDF($sectionData) . "\n\n";
-        }
-        
-        return $content;
-    }
-
-    /**
-     * Format section data for PDF
-     * 
+     * Format section data for PDF.
+     *
      * @param mixed $data
-     * @return string
      */
-    private function formatSectionForPDF($data): string
+    private static function formatSectionForPDF($data): string
     {
-        if (is_array($data)) {
-            return json_encode($data, JSON_PRETTY_PRINT);
+        if (\is_array($data)) {
+            return json_encode($data, \JSON_PRETTY_PRINT);
         }
-        
+
         return (string) $data;
     }
 }

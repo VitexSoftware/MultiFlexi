@@ -1,3 +1,21 @@
+multiflexi (1.32.0) jammy; urgency=medium
+
+  [ vitex ]
+  * GDPR Phase 3 - Security Enhancements implementation
+  * SecurityAuditLogger class for comprehensive security event tracking
+  * DataEncryption class with AES-256-GCM encryption for sensitive data at rest
+  * API Rate Limiting system with configurable endpoint protection
+  * IP Whitelisting system for administrative access control
+  * EncryptionHelpers and RateLimitHelpers for easy integration
+  * Automatic database table creation and management for security components
+  * System initialization integration with global component access
+  * Comprehensive security documentation and implementation guide
+
+  [ Vitex ]
+  * Release version 1.32.0 with GDPR Phase 3 security compliance features
+
+ -- vitex <info@vitexsoftware.cz>  Sun, 20 Oct 2024 20:30:00 +0200
+
 multiflexi (1.31.0) jammy; urgency=medium
 
   [ vitex ]

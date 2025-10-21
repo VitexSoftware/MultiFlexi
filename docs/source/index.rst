@@ -50,6 +50,9 @@ MultiFlexi features a sophisticated layered architecture:
 **Security Layer**
   Comprehensive authentication, authorization, and secure credential handling with encryption
 
+**GDPR Compliance**
+  Complete GDPR compliance framework with automated data retention, breach response, and comprehensive documentation
+
 Environment Variables
 ---------------------
 
@@ -130,3 +133,4 @@ Contents
    coding-standards
    ci-cd
    credential-type
+   gdpr-compliance

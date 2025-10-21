@@ -15,29 +15,31 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Notifications;
 
-use MultiFlexi\User;
 use MultiFlexi\GDPR\UserDataCorrectionRequest;
+use MultiFlexi\User;
 
 /**
- * Notification system for GDPR data correction requests
+ * Notification system for GDPR data correction requests.
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
 class DataCorrectionNotifier extends \Ease\Sand
 {
     /**
-     * Send notification when a new correction request is submitted
+     * Send notification when a new correction request is submitted.
      *
-     * @param int $requestId Request ID
-     * @param User $user User who submitted the request
+     * @param int  $requestId Request ID
+     * @param User $user      User who submitted the request
      *
      * @return bool Success of notification sending
      */
     public function notifyNewRequest(int $requestId, User $user): bool
     {
         $request = new UserDataCorrectionRequest();
+
         if (!$request->loadFromSQL($requestId)) {
             $this->addStatusMessage('Request not found', 'error');
+
             return false;
         }
 
@@ -47,16 +49,14 @@ class DataCorrectionNotifier extends \Ease\Sand
         $success = $this->sendUserSubmissionConfirmation($user, $request->getData()) && $success;
 
         // Notify administrators about pending request
-        $success = $this->notifyAdministrators($request->getData()) && $success;
-
-        return $success;
+        return $this->notifyAdministrators($request->getData()) && $success;
     }
 
     /**
-     * Send notification when request is approved
+     * Send notification when request is approved.
      *
-     * @param int $requestId Request ID
-     * @param User $reviewer Admin who approved
+     * @param int    $requestId     Request ID
+     * @param User   $reviewer      Admin who approved
      * @param string $reviewerNotes Admin's notes
      *
      * @return bool Success of notification sending
@@ -64,14 +64,18 @@ class DataCorrectionNotifier extends \Ease\Sand
     public function notifyRequestApproved(int $requestId, User $reviewer, string $reviewerNotes = ''): bool
     {
         $request = new UserDataCorrectionRequest();
+
         if (!$request->loadFromSQL($requestId)) {
             $this->addStatusMessage('Request not found', 'error');
+
             return false;
         }
 
         $user = new User((int) $request->getDataValue('user_id'));
+
         if (!$user->getMyKey()) {
             $this->addStatusMessage('User not found', 'error');
+
             return false;
         }
 
@@ -79,10 +83,10 @@ class DataCorrectionNotifier extends \Ease\Sand
     }
 
     /**
-     * Send notification when request is rejected
+     * Send notification when request is rejected.
      *
-     * @param int $requestId Request ID
-     * @param User $reviewer Admin who rejected
+     * @param int    $requestId       Request ID
+     * @param User   $reviewer        Admin who rejected
      * @param string $rejectionReason Reason for rejection
      *
      * @return bool Success of notification sending
@@ -90,14 +94,18 @@ class DataCorrectionNotifier extends \Ease\Sand
     public function notifyRequestRejected(int $requestId, User $reviewer, string $rejectionReason): bool
     {
         $request = new UserDataCorrectionRequest();
+
         if (!$request->loadFromSQL($requestId)) {
             $this->addStatusMessage('Request not found', 'error');
+
             return false;
         }
 
         $user = new User((int) $request->getDataValue('user_id'));
+
         if (!$user->getMyKey()) {
             $this->addStatusMessage('User not found', 'error');
+
             return false;
         }
 
@@ -105,9 +113,76 @@ class DataCorrectionNotifier extends \Ease\Sand
     }
 
     /**
-     * Send confirmation email to user after successful request submission
+     * Get daily digest of pending requests for administrators.
      *
-     * @param User $user User who submitted the request
+     * @return string Digest content
+     */
+    public function getDailyDigest(): string
+    {
+        $request = new UserDataCorrectionRequest();
+        $pendingRequests = $request->getPendingRequests(50);
+
+        if (empty($pendingRequests)) {
+            return _('No pending data correction requests.');
+        }
+
+        $digest = sprintf(_("Daily GDPR Data Correction Digest - %s\n\n"), date('F j, Y'));
+        $digest .= sprintf(_("There are %d pending data correction requests:\n\n"), \count($pendingRequests));
+
+        foreach ($pendingRequests as $req) {
+            $fieldDisplayName = UserDataCorrectionRequest::getFieldDisplayName($req['field_name']);
+            $digest .= sprintf(
+                _("- Request #%d: %s (%s) wants to change %s\n"),
+                $req['id'],
+                $req['login'],
+                $req['email'],
+                $fieldDisplayName,
+            );
+        }
+
+        $digest .= "\n"._('Please review these requests in the admin panel.');
+
+        return $digest;
+    }
+
+    /**
+     * Send daily digest to administrators.
+     *
+     * @return bool Success of sending digest
+     */
+    public function sendDailyDigest(): bool
+    {
+        $request = new UserDataCorrectionRequest();
+        $pendingCount = \count($request->getPendingRequests(1));
+
+        if ($pendingCount === 0) {
+            return true; // No digest to send
+        }
+
+        $admins = self::getAdministrators();
+
+        if (empty($admins)) {
+            return true; // No admins to notify
+        }
+
+        $subject = sprintf(_('Daily GDPR Digest - %d pending requests'), $pendingCount);
+        $body = $this->getDailyDigest();
+
+        $success = true;
+
+        foreach ($admins as $admin) {
+            if ($admin['email']) {
+                $success = $this->sendEmail($admin['email'], $subject, $body) && $success;
+            }
+        }
+
+        return $success;
+    }
+
+    /**
+     * Send confirmation email to user after successful request submission.
+     *
+     * @param User  $user        User who submitted the request
      * @param array $requestData Request data
      *
      * @return bool Success of email sending
@@ -115,15 +190,17 @@ class DataCorrectionNotifier extends \Ease\Sand
     private function sendUserSubmissionConfirmation(User $user, array $requestData): bool
     {
         $email = $user->getEmail();
+
         if (!$email) {
             return true; // No email to send to, but not an error
         }
 
         $fieldDisplayName = UserDataCorrectionRequest::getFieldDisplayName($requestData['field_name']);
-        
+
         $subject = _('Data Correction Request Submitted');
         $body = sprintf(
-            _('Dear %s,
+            _(<<<'EOD'
+Dear %s,
 
 Your request to change your %s has been successfully submitted for administrator review.
 
@@ -140,7 +217,8 @@ You will receive another notification once your request has been reviewed by an 
 Thank you for keeping your personal data accurate.
 
 Best regards,
-The %s Team'),
+The %s Team
+EOD),
             $user->getUserName(),
             $fieldDisplayName,
             $fieldDisplayName,
@@ -149,14 +227,14 @@ The %s Team'),
             $requestData['justification'] ?: _('(no justification provided)'),
             $requestData['id'],
             date('F j, Y g:i A', strtotime($requestData['created_at'])),
-            \Ease\Shared::appName()
+            \Ease\Shared::appName(),
         );
 
         return $this->sendEmail($email, $subject, $body);
     }
 
     /**
-     * Notify administrators about a new pending request
+     * Notify administrators about a new pending request.
      *
      * @param array $requestData Request data
      *
@@ -164,18 +242,20 @@ The %s Team'),
      */
     private function notifyAdministrators(array $requestData): bool
     {
-        $admins = $this->getAdministrators();
+        $admins = self::getAdministrators();
+
         if (empty($admins)) {
             return true; // No admins to notify
         }
 
         $fieldDisplayName = UserDataCorrectionRequest::getFieldDisplayName($requestData['field_name']);
         $subject = _('New Data Correction Request Pending Review');
-        
-        $reviewUrl = $this->getBaseUrl() . '/admin-data-corrections.php';
-        
+
+        $reviewUrl = self::getBaseUrl().'/admin-data-corrections.php';
+
         $body = sprintf(
-            _('A new data correction request requires your review.
+            _(<<<'EOD'
+A new data correction request requires your review.
 
 Request Details:
 - Request ID: #%d
@@ -189,9 +269,10 @@ Request Details:
 
 Please review this request at: %s
 
-This is an automated message from the GDPR compliance system.'),
+This is an automated message from the GDPR compliance system.
+EOD),
             $requestData['id'],
-            $this->getUserDisplayName((int) $requestData['user_id']),
+            self::getUserDisplayName((int) $requestData['user_id']),
             $requestData['user_id'],
             $fieldDisplayName,
             $requestData['current_value'],
@@ -199,10 +280,11 @@ This is an automated message from the GDPR compliance system.'),
             $requestData['justification'] ?: _('(no justification provided)'),
             date('F j, Y g:i A', strtotime($requestData['created_at'])),
             $requestData['requested_by_ip'],
-            $reviewUrl
+            $reviewUrl,
         );
 
         $success = true;
+
         foreach ($admins as $admin) {
             if ($admin['email']) {
                 $success = $this->sendEmail($admin['email'], $subject, $body) && $success;
@@ -213,11 +295,11 @@ This is an automated message from the GDPR compliance system.'),
     }
 
     /**
-     * Send approval notification to user
+     * Send approval notification to user.
      *
-     * @param User $user User who submitted the request
-     * @param array $requestData Request data
-     * @param User $reviewer Admin who approved
+     * @param User   $user          User who submitted the request
+     * @param array  $requestData   Request data
+     * @param User   $reviewer      Admin who approved
      * @param string $reviewerNotes Admin's notes
      *
      * @return bool Success of email sending
@@ -225,15 +307,17 @@ This is an automated message from the GDPR compliance system.'),
     private function sendApprovalNotification(User $user, array $requestData, User $reviewer, string $reviewerNotes): bool
     {
         $email = $user->getEmail();
+
         if (!$email) {
             return true; // No email to send to
         }
 
         $fieldDisplayName = UserDataCorrectionRequest::getFieldDisplayName($requestData['field_name']);
-        
+
         $subject = _('Data Correction Request Approved');
         $body = sprintf(
-            _('Dear %s,
+            _(<<<'EOD'
+Dear %s,
 
 Great news! Your data correction request has been approved and your personal information has been updated.
 
@@ -252,7 +336,8 @@ Your personal data has been updated in our system. You can view your updated pro
 Thank you for helping us keep your information accurate.
 
 Best regards,
-The %s Team'),
+The %s Team
+EOD),
             $user->getUserName(),
             $fieldDisplayName,
             $requestData['current_value'],
@@ -261,18 +346,18 @@ The %s Team'),
             $reviewer->getUserName(),
             date('F j, Y g:i A'),
             $reviewerNotes ?: _('(no additional notes)'),
-            \Ease\Shared::appName()
+            \Ease\Shared::appName(),
         );
 
         return $this->sendEmail($email, $subject, $body);
     }
 
     /**
-     * Send rejection notification to user
+     * Send rejection notification to user.
      *
-     * @param User $user User who submitted the request
-     * @param array $requestData Request data
-     * @param User $reviewer Admin who rejected
+     * @param User   $user            User who submitted the request
+     * @param array  $requestData     Request data
+     * @param User   $reviewer        Admin who rejected
      * @param string $rejectionReason Reason for rejection
      *
      * @return bool Success of email sending
@@ -280,15 +365,17 @@ The %s Team'),
     private function sendRejectionNotification(User $user, array $requestData, User $reviewer, string $rejectionReason): bool
     {
         $email = $user->getEmail();
+
         if (!$email) {
             return true; // No email to send to
         }
 
         $fieldDisplayName = UserDataCorrectionRequest::getFieldDisplayName($requestData['field_name']);
-        
+
         $subject = _('Data Correction Request - Decision Required');
         $body = sprintf(
-            _('Dear %s,
+            _(<<<'EOD'
+Dear %s,
 
 We have reviewed your data correction request and require additional information before we can proceed.
 
@@ -307,7 +394,8 @@ If you believe this decision is incorrect or if you have additional supporting i
 You can view and manage your data correction requests in your profile.
 
 Best regards,
-The %s Team'),
+The %s Team
+EOD),
             $user->getUserName(),
             $fieldDisplayName,
             $requestData['current_value'],
@@ -316,18 +404,18 @@ The %s Team'),
             $reviewer->getUserName(),
             date('F j, Y g:i A'),
             $rejectionReason,
-            \Ease\Shared::appName()
+            \Ease\Shared::appName(),
         );
 
         return $this->sendEmail($email, $subject, $body);
     }
 
     /**
-     * Send email using available email system
+     * Send email using available email system.
      *
-     * @param string $to Recipient email
+     * @param string $to      Recipient email
      * @param string $subject Email subject
-     * @param string $body Email body
+     * @param string $body    Email body
      *
      * @return bool Success of sending
      */
@@ -337,19 +425,20 @@ The %s Team'),
             // Use MultiFlexi's existing email system if available
             // This is a basic implementation - you may want to integrate with your existing email system
             $headers = [
-                'From' => 'no-reply@' . $_SERVER['HTTP_HOST'] ?? 'multiflexi.local',
-                'Reply-To' => 'no-reply@' . $_SERVER['HTTP_HOST'] ?? 'multiflexi.local',
+                'From' => 'no-reply@'.$_SERVER['HTTP_HOST'] ?? 'multiflexi.local',
+                'Reply-To' => 'no-reply@'.$_SERVER['HTTP_HOST'] ?? 'multiflexi.local',
                 'X-Mailer' => 'MultiFlexi GDPR System',
-                'Content-Type' => 'text/plain; charset=UTF-8'
+                'Content-Type' => 'text/plain; charset=UTF-8',
             ];
 
             $headerString = '';
+
             foreach ($headers as $key => $value) {
-                $headerString .= "$key: $value\r\n";
+                $headerString .= "{$key}: {$value}\r\n";
             }
 
             $result = mail($to, $subject, $body, $headerString);
-            
+
             if ($result) {
                 $this->addStatusMessage(sprintf(_('Email sent to %s'), $to), 'success');
             } else {
@@ -359,19 +448,20 @@ The %s Team'),
             return $result;
         } catch (\Exception $e) {
             $this->addStatusMessage(sprintf(_('Email error: %s'), $e->getMessage()), 'error');
+
             return false;
         }
     }
 
     /**
-     * Get list of administrators who should receive notifications
+     * Get list of administrators who should receive notifications.
      *
      * @return array Array of admin user data
      */
-    private function getAdministrators(): array
+    private static function getAdministrators(): array
     {
         $user = new User();
-        
+
         // This query depends on your role/permission system
         // Adjust according to how you identify administrators
         return $user->listingQuery()
@@ -381,94 +471,30 @@ The %s Team'),
     }
 
     /**
-     * Get user display name by ID
+     * Get user display name by ID.
      *
      * @param int $userId User ID
      *
      * @return string User display name
      */
-    private function getUserDisplayName(int $userId): string
+    private static function getUserDisplayName(int $userId): string
     {
         $user = new User($userId);
-        return $user->getMyKey() ? $user->getUserName() : "User #$userId";
+
+        return $user->getMyKey() ? $user->getUserName() : "User #{$userId}";
     }
 
     /**
-     * Get base URL for links in emails
+     * Get base URL for links in emails.
      *
      * @return string Base URL
      */
-    private function getBaseUrl(): string
+    private static function getBaseUrl(): string
     {
         $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
         $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-        $path = dirname($_SERVER['SCRIPT_NAME'] ?? '');
-        
-        return "$protocol://$host$path";
-    }
+        $path = \dirname($_SERVER['SCRIPT_NAME'] ?? '');
 
-    /**
-     * Get daily digest of pending requests for administrators
-     *
-     * @return string Digest content
-     */
-    public function getDailyDigest(): string
-    {
-        $request = new UserDataCorrectionRequest();
-        $pendingRequests = $request->getPendingRequests(50);
-        
-        if (empty($pendingRequests)) {
-            return _('No pending data correction requests.');
-        }
-
-        $digest = sprintf(_("Daily GDPR Data Correction Digest - %s\n\n"), date('F j, Y'));
-        $digest .= sprintf(_("There are %d pending data correction requests:\n\n"), count($pendingRequests));
-
-        foreach ($pendingRequests as $req) {
-            $fieldDisplayName = UserDataCorrectionRequest::getFieldDisplayName($req['field_name']);
-            $digest .= sprintf(
-                _("- Request #%d: %s (%s) wants to change %s\n"),
-                $req['id'],
-                $req['login'],
-                $req['email'],
-                $fieldDisplayName
-            );
-        }
-
-        $digest .= "\n" . _('Please review these requests in the admin panel.');
-        
-        return $digest;
-    }
-
-    /**
-     * Send daily digest to administrators
-     *
-     * @return bool Success of sending digest
-     */
-    public function sendDailyDigest(): bool
-    {
-        $request = new UserDataCorrectionRequest();
-        $pendingCount = count($request->getPendingRequests(1));
-        
-        if ($pendingCount === 0) {
-            return true; // No digest to send
-        }
-
-        $admins = $this->getAdministrators();
-        if (empty($admins)) {
-            return true; // No admins to notify
-        }
-
-        $subject = sprintf(_('Daily GDPR Digest - %d pending requests'), $pendingCount);
-        $body = $this->getDailyDigest();
-        
-        $success = true;
-        foreach ($admins as $admin) {
-            if ($admin['email']) {
-                $success = $this->sendEmail($admin['email'], $subject, $body) && $success;
-            }
-        }
-
-        return $success;
+        return "{$protocol}://{$host}{$path}";
     }
 }

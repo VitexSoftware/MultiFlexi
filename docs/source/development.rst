@@ -222,6 +222,61 @@ This method checks the database type and returns the appropriate condition for f
 
 By following this approach, you can ensure that your queries are compatible with multiple database types, making your application more flexible and robust.
 
+GDPR Compliance Development
+---------------------------
+
+When developing MultiFlexi features, developers must consider GDPR compliance requirements:
+
+**Data Processing Considerations**
+
+- Implement privacy by design principles
+- Minimize data collection and processing
+- Ensure lawful basis for all processing activities
+- Document data flows and processing purposes
+
+**Security Requirements**
+
+- Use encryption for sensitive data (AES-256)
+- Implement proper access controls and logging
+- Follow secure coding practices
+- Regular security assessments
+
+**Data Retention Implementation**
+
+.. code-block:: php
+
+   // Example: Implementing retention-aware data processing
+   class DataProcessor {
+       public function processWithRetention($data, $retentionPeriod) {
+           // Set retention metadata
+           $data['retention_expires'] = date('Y-m-d', strtotime('+' . $retentionPeriod));
+           
+           // Process data
+           $this->processData($data);
+           
+           // Log for audit trail
+           $this->addStatusMessage('Data processed with retention: ' . $retentionPeriod, 'info');
+       }
+   }
+
+**GDPR-Compliant Logging**
+
+.. code-block:: php
+
+   // Avoid logging personal data
+   $this->addStatusMessage('User login successful for ID: ' . $userId, 'info');
+   // Instead of: 'User ' . $email . ' logged in'
+   
+   // Use structured logging for audit trails
+   $this->addStatusMessage([
+       'event' => 'data_access',
+       'user_id' => $userId,
+       'resource' => $resourceType,
+       'timestamp' => date('c')
+   ], 'audit');
+
+For complete GDPR compliance documentation, see :doc:`gdpr-compliance`.
+
 Coding Standards and Best Practices
 ------------------------------------
 

@@ -58,9 +58,23 @@ if (WebPage::singleton()->isPosted()) {
         unset($testuser);
     }
 
-    if (\strlen($password) < 5) {
+    // Validate password strength
+    $passwordValidator = new \MultiFlexi\Security\PasswordValidator(
+        \Ease\Shared::cfg('PASSWORD_MIN_LENGTH', 8),
+        \Ease\Shared::cfg('PASSWORD_REQUIRE_UPPERCASE', true),
+        \Ease\Shared::cfg('PASSWORD_REQUIRE_LOWERCASE', true),
+        \Ease\Shared::cfg('PASSWORD_REQUIRE_NUMBERS', true),
+        \Ease\Shared::cfg('PASSWORD_REQUIRE_SPECIAL_CHARS', true),
+    );
+
+    $passwordValidation = $passwordValidator->validate($password);
+
+    if (!$passwordValidation['valid']) {
         $error = true;
-        \Ease\Shared::user()->addStatusMessage(_('password is too short'), 'warning');
+
+        foreach ($passwordValidation['errors'] as $passwordError) {
+            \Ease\Shared::user()->addStatusMessage($passwordError, 'warning');
+        }
     } elseif ($password !== $confirmation) {
         $error = true;
         \Ease\Shared::user()->addStatusMessage(_('Password control does not match'), 'warning');
@@ -146,6 +160,9 @@ if (WebPage::singleton()->isPosted()) {
 }
 
 WebPage::singleton()->addItem(new PageTop(_('New Administrator')));
+
+// Include password strength indicator JavaScript
+WebPage::singleton()->includeJavaScript('js/password-strength.js');
 
 $regFace = new \Ease\TWB4\Panel(_('Singn On'));
 

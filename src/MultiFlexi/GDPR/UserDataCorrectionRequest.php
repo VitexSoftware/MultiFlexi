@@ -20,7 +20,7 @@ use MultiFlexi\Audit\UserDataAuditLogger;
 use MultiFlexi\Notifications\DataCorrectionNotifier;
 
 /**
- * User Data Correction Request - manages approval workflow for sensitive data changes
+ * User Data Correction Request - manages approval workflow for sensitive data changes.
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
@@ -29,43 +29,23 @@ class UserDataCorrectionRequest extends \Ease\Sand
     use Orm;
 
     /**
-     * Database table name
-     */
-    public string $myTable = 'user_data_correction_requests';
-
-    /**
-     * Primary key column
-     */
-    public string $keyColumn = 'id';
-
-    /**
-     * Creation timestamp column
-     */
-    public string $createColumn = 'created_at';
-
-    /**
-     * Last modified timestamp column
-     */
-    public string $lastModifiedColumn = 'updated_at';
-
-    /**
-     * Fields that require admin approval
+     * Fields that require admin approval.
      */
     public const SENSITIVE_FIELDS = [
         'login' => 'Username',
-        'email' => 'Email Address'
+        'email' => 'Email Address',
     ];
 
     /**
-     * Fields that can be changed directly
+     * Fields that can be changed directly.
      */
     public const DIRECT_FIELDS = [
         'firstname' => 'First Name',
-        'lastname' => 'Last Name'
+        'lastname' => 'Last Name',
     ];
 
     /**
-     * Request status constants
+     * Request status constants.
      */
     public const STATUS_PENDING = 'pending';
     public const STATUS_APPROVED = 'approved';
@@ -73,13 +53,33 @@ class UserDataCorrectionRequest extends \Ease\Sand
     public const STATUS_CANCELLED = 'cancelled';
 
     /**
-     * Create a new correction request
+     * Database table name.
+     */
+    public string $myTable = 'user_data_correction_requests';
+
+    /**
+     * Primary key column.
+     */
+    public string $keyColumn = 'id';
+
+    /**
+     * Creation timestamp column.
+     */
+    public string $createColumn = 'created_at';
+
+    /**
+     * Last modified timestamp column.
+     */
+    public string $lastModifiedColumn = 'updated_at';
+
+    /**
+     * Create a new correction request.
      *
-     * @param int $userId User ID requesting the change
-     * @param string $fieldName Field to be changed
-     * @param mixed $currentValue Current field value
-     * @param mixed $requestedValue Requested new value
-     * @param string $justification User's justification for the change
+     * @param int    $userId         User ID requesting the change
+     * @param string $fieldName      Field to be changed
+     * @param mixed  $currentValue   Current field value
+     * @param mixed  $requestedValue Requested new value
+     * @param string $justification  User's justification for the change
      *
      * @return bool Success of request creation
      */
@@ -88,49 +88,53 @@ class UserDataCorrectionRequest extends \Ease\Sand
         string $fieldName,
         $currentValue,
         $requestedValue,
-        string $justification = ''
+        string $justification = '',
     ): bool {
         $requestData = [
             'user_id' => $userId,
             'field_name' => $fieldName,
-            'current_value' => is_array($currentValue) || is_object($currentValue) ? 
+            'current_value' => \is_array($currentValue) || \is_object($currentValue) ?
                 json_encode($currentValue) : (string) $currentValue,
-            'requested_value' => is_array($requestedValue) || is_object($requestedValue) ? 
+            'requested_value' => \is_array($requestedValue) || \is_object($requestedValue) ?
                 json_encode($requestedValue) : (string) $requestedValue,
             'justification' => $justification,
             'status' => self::STATUS_PENDING,
             'requested_by_ip' => $_SERVER['REMOTE_ADDR'] ?? null,
             'requested_by_user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? null,
             'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'updated_at' => date('Y-m-d H:i:s'),
         ];
 
         $this->setData($requestData);
+
         if ($this->dbsync()) {
             // Send notifications about the new request
             $notifier = new DataCorrectionNotifier();
             $user = new \MultiFlexi\User($userId);
             $notifier->notifyNewRequest($this->getMyKey(), $user);
+
             return true;
         }
+
         return false;
     }
 
     /**
-     * Approve a correction request and apply the change
+     * Approve a correction request and apply the change.
      *
-     * @param int $requestId Request ID to approve
-     * @param int $reviewerUserId ID of admin who approved
-     * @param string $reviewerNotes Admin's notes for the approval
+     * @param int    $requestId      Request ID to approve
+     * @param int    $reviewerUserId ID of admin who approved
+     * @param string $reviewerNotes  Admin's notes for the approval
      *
      * @return bool Success of approval and data change
      */
     public function approveRequest(int $requestId, int $reviewerUserId, string $reviewerNotes = ''): bool
     {
         $this->loadFromSQL($requestId);
-        
+
         if (!$this->getData() || $this->getDataValue('status') !== self::STATUS_PENDING) {
             $this->addStatusMessage(_('Request not found or already processed'), 'error');
+
             return false;
         }
 
@@ -141,15 +145,19 @@ class UserDataCorrectionRequest extends \Ease\Sand
 
         // Load user and apply the change
         $user = new \MultiFlexi\User($userId);
+
         if (!$user->getMyKey()) {
             $this->addStatusMessage(_('User not found'), 'error');
+
             return false;
         }
 
         // Apply the change to user data
         $user->setDataValue($fieldName, $newValue);
+
         if (!$user->dbsync()) {
             $this->addStatusMessage(_('Failed to update user data'), 'error');
+
             return false;
         }
 
@@ -159,11 +167,12 @@ class UserDataCorrectionRequest extends \Ease\Sand
             'reviewed_by_user_id' => $reviewerUserId,
             'reviewed_at' => date('Y-m-d H:i:s'),
             'reviewer_notes' => $reviewerNotes,
-            'updated_at' => date('Y-m-d H:i:s')
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         if (!$this->dbsync()) {
             $this->addStatusMessage(_('Failed to update request status'), 'error');
+
             return false;
         }
 
@@ -178,7 +187,7 @@ class UserDataCorrectionRequest extends \Ease\Sand
             $reviewerUserId,
             null,
             null,
-            'Approved correction request #' . $requestId . ': ' . $reviewerNotes
+            'Approved correction request #'.$requestId.': '.$reviewerNotes,
         );
 
         // Send notification to user about approval
@@ -190,10 +199,10 @@ class UserDataCorrectionRequest extends \Ease\Sand
     }
 
     /**
-     * Reject a correction request
+     * Reject a correction request.
      *
-     * @param int $requestId Request ID to reject
-     * @param int $reviewerUserId ID of admin who rejected
+     * @param int    $requestId       Request ID to reject
+     * @param int    $reviewerUserId  ID of admin who rejected
      * @param string $rejectionReason Reason for rejection
      *
      * @return bool Success of rejection
@@ -201,9 +210,10 @@ class UserDataCorrectionRequest extends \Ease\Sand
     public function rejectRequest(int $requestId, int $reviewerUserId, string $rejectionReason): bool
     {
         $this->loadFromSQL($requestId);
-        
+
         if (!$this->getData() || $this->getDataValue('status') !== self::STATUS_PENDING) {
             $this->addStatusMessage(_('Request not found or already processed'), 'error');
+
             return false;
         }
 
@@ -212,11 +222,12 @@ class UserDataCorrectionRequest extends \Ease\Sand
             'reviewed_by_user_id' => $reviewerUserId,
             'reviewed_at' => date('Y-m-d H:i:s'),
             'reviewer_notes' => $rejectionReason,
-            'updated_at' => date('Y-m-d H:i:s')
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         if (!$this->dbsync()) {
             $this->addStatusMessage(_('Failed to update request status'), 'error');
+
             return false;
         }
 
@@ -231,7 +242,7 @@ class UserDataCorrectionRequest extends \Ease\Sand
             $reviewerUserId,
             null,
             null,
-            'Rejected correction request #' . $requestId . ': ' . $rejectionReason
+            'Rejected correction request #'.$requestId.': '.$rejectionReason,
         );
 
         // Send notification to user about rejection
@@ -243,36 +254,37 @@ class UserDataCorrectionRequest extends \Ease\Sand
     }
 
     /**
-     * Cancel a pending request (by the user who created it)
+     * Cancel a pending request (by the user who created it).
      *
      * @param int $requestId Request ID to cancel
-     * @param int $userId User ID (must match request creator)
+     * @param int $userId    User ID (must match request creator)
      *
      * @return bool Success of cancellation
      */
     public function cancelRequest(int $requestId, int $userId): bool
     {
         $this->loadFromSQL($requestId);
-        
-        if (!$this->getData() || 
-            (int) $this->getDataValue('user_id') !== $userId ||
-            $this->getDataValue('status') !== self::STATUS_PENDING) {
+
+        if (!$this->getData()
+            || (int) $this->getDataValue('user_id') !== $userId
+            || $this->getDataValue('status') !== self::STATUS_PENDING) {
             $this->addStatusMessage(_('Request not found, not yours, or already processed'), 'error');
+
             return false;
         }
 
         $this->setDataValues([
             'status' => self::STATUS_CANCELLED,
-            'updated_at' => date('Y-m-d H:i:s')
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         return $this->dbsync();
     }
 
     /**
-     * Get pending requests for admin review
+     * Get pending requests for admin review.
      *
-     * @param int $limit Maximum number of requests to return
+     * @param int $limit  Maximum number of requests to return
      * @param int $offset Offset for pagination
      *
      * @return array Array of pending requests with user information
@@ -286,9 +298,9 @@ class UserDataCorrectionRequest extends \Ease\Sand
                 'u.firstname',
                 'u.lastname',
                 'u.email',
-                'reviewer.login as reviewer_login'
+                'reviewer.login as reviewer_login',
             ])
-            ->from($this->myTable . ' r')
+            ->from($this->myTable.' r')
             ->leftJoin('user u ON r.user_id = u.id')
             ->leftJoin('user reviewer ON r.reviewed_by_user_id = reviewer.id')
             ->where('r.status = %s', self::STATUS_PENDING)
@@ -298,10 +310,10 @@ class UserDataCorrectionRequest extends \Ease\Sand
     }
 
     /**
-     * Get user's own requests
+     * Get user's own requests.
      *
      * @param int $userId User ID
-     * @param int $limit Maximum number of requests to return
+     * @param int $limit  Maximum number of requests to return
      *
      * @return array Array of user's requests
      */
@@ -312,9 +324,9 @@ class UserDataCorrectionRequest extends \Ease\Sand
                 'r.*',
                 'reviewer.login as reviewer_login',
                 'reviewer.firstname as reviewer_firstname',
-                'reviewer.lastname as reviewer_lastname'
+                'reviewer.lastname as reviewer_lastname',
             ])
-            ->from($this->myTable . ' r')
+            ->from($this->myTable.' r')
             ->leftJoin('user reviewer ON r.reviewed_by_user_id = reviewer.id')
             ->where('r.user_id = %i', $userId)
             ->orderBy('r.created_at DESC')
@@ -323,7 +335,7 @@ class UserDataCorrectionRequest extends \Ease\Sand
     }
 
     /**
-     * Check if field requires approval
+     * Check if field requires approval.
      *
      * @param string $fieldName Field name to check
      *
@@ -331,11 +343,11 @@ class UserDataCorrectionRequest extends \Ease\Sand
      */
     public static function requiresApproval(string $fieldName): bool
     {
-        return array_key_exists($fieldName, self::SENSITIVE_FIELDS);
+        return \array_key_exists($fieldName, self::SENSITIVE_FIELDS);
     }
 
     /**
-     * Get human-readable field name
+     * Get human-readable field name.
      *
      * @param string $fieldName Technical field name
      *
@@ -347,13 +359,14 @@ class UserDataCorrectionRequest extends \Ease\Sand
     }
 
     /**
-     * Create database table for correction requests
+     * Create database table for correction requests.
      *
      * @return bool Success of table creation
      */
     public function createTable(): bool
     {
-        $createSQL = "
+        $createSQL = <<<EOD
+
             CREATE TABLE IF NOT EXISTS `{$this->myTable}` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
                 `user_id` int(11) NOT NULL,
@@ -376,13 +389,16 @@ class UserDataCorrectionRequest extends \Ease\Sand
                 FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
                 FOREIGN KEY (`reviewed_by_user_id`) REFERENCES `user`(`id`) ON DELETE SET NULL
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-        ";
+
+EOD;
 
         try {
             $this->pdo->exec($createSQL);
+
             return true;
         } catch (\PDOException $e) {
-            $this->addStatusMessage('Failed to create correction requests table: ' . $e->getMessage(), 'error');
+            $this->addStatusMessage('Failed to create correction requests table: '.$e->getMessage(), 'error');
+
             return false;
         }
     }

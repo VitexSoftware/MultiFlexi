@@ -25,7 +25,7 @@ $consentManager = new ConsentManager();
 $currentConsent = $consentManager->getAllConsentStatuses();
 
 WebPage::singleton()->addItem(new PageTop(_('Privacy & Consent')));
-WebPage::singleton()->addItem(new \Ease\Html\H1Tag(_('Privacy & Consent Preferences')));
+WebPage::singleton()->container->addItem(new \Ease\Html\H1Tag(_('Privacy & Consent Preferences')));
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_consent'])) {
@@ -143,6 +143,13 @@ $buttonCol->addItem(new \Ease\TWB4\SubmitButton(_('Save Preferences'), 'success'
 $buttonRow->addItem($buttonCol);
 $formContainer->addItem($buttonRow);
 
+// Add CSRF token to form if CSRF protection is enabled
+
+if (\Ease\Shared::cfg('CSRF_PROTECTION_ENABLED', true) && isset($GLOBALS['csrfProtection'])) {
+    $csrfToken = $GLOBALS['csrfProtection']->generateToken();
+    $formContainer->addItem(new \Ease\Html\InputHiddenTag('csrf_token', $csrfToken));
+}
+
 // Create the actual form
 $form = new \Ease\TWB4\Form(
     ['name' => 'consent-form', 'action' => 'consent-preferences.php', 'method' => 'POST'],
@@ -150,7 +157,7 @@ $form = new \Ease\TWB4\Form(
     $formContainer,
 );
 
-WebPage::singleton()->addItem($form);
+WebPage::singleton()->container->addItem($form);
 
 // Add consent history section
 $historyHeaderContent = new \Ease\Html\H5Tag([
@@ -208,10 +215,10 @@ if (!empty($currentConsent)) {
 
 $historyPanel->addItem($table);
 
-WebPage::singleton()->addItem($historyPanel);
+WebPage::singleton()->container->addItem($historyPanel);
 
 // Add JavaScript for withdraw functionality
-WebPage::singleton()->includeJavaScript(<<<'EOD'
+WebPage::singleton()->container->includeJavaScript(<<<'EOD'
 
 function withdrawConsent(type) {
     if (confirm('
@@ -265,7 +272,7 @@ $infoPanel->addItem(new \Ease\Html\UlTag([
     new \Ease\Html\LiTag([_('For more information, see our '), new \Ease\Html\ATag('privacy-policy.php', _('Privacy Policy'))]),
 ]));
 
-WebPage::singleton()->addItem($infoPanel);
+WebPage::singleton()->container->addItem($infoPanel);
 
-WebPage::singleton()->addItem(new PageBottom());
+WebPage::singleton()->container->addItem(new PageBottom());
 WebPage::singleton()->draw();

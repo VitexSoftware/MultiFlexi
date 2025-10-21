@@ -77,7 +77,9 @@ Depends: ${misc:Depends},
  php-vitexsoftware-ease-bootstrap4-widgets (>=1.7),
  libjs-jquery-datatables,
  libjs-jquery-selectize.js,
- php-cli
+ php-cli,
+ php-openssl,
+ php-mcrypt | php-sodium
 Description: MultiFlexi web interface core components
  Core PHP classes and web interface components for MultiFlexi.
  Contains the main application logic and web interface files including
@@ -85,6 +87,9 @@ Description: MultiFlexi web interface core components
  and GDPR-compliant consent management system with cookie policy support.
  Includes GDPR Article 16 compliance features for data rectification,
  user profile management, approval workflows, and comprehensive audit logging.
+ GDPR Phase 3 Security Enhancements: comprehensive security audit logging,
+ AES-256 data encryption for sensitive information, API rate limiting with
+ configurable endpoint protection, and IP whitelisting for administrative access control.
 
 #Package: multiflexi-dev
 #Depends: multiflexi,jq

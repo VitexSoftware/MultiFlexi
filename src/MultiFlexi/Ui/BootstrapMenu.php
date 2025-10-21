@@ -45,6 +45,14 @@ class BootstrapMenu extends \Ease\TWB4\Navbar
             $loginForm->addItem(new \Ease\Html\InputTextTag('login', WebPage::getRequestValue('login'), ['class' => 'form-control mr-sm-2', 'placeholder' => _('Login')]));
             $loginForm->addItem(new \Ease\Html\InputPasswordTag('password', WebPage::getRequestValue('password'), ['class' => 'form-control mr-sm-2', 'placeholder' => _('Password')]));
             $loginForm->addItem(new \Ease\TWB4\SubmitButton(_('Sign In'), 'success my-2 my-sm-0'));
+
+            // Add CSRF token to form if CSRF protection is enabled
+
+            if (\Ease\Shared::cfg('CSRF_PROTECTION_ENABLED', true) && isset($GLOBALS['csrfProtection'])) {
+                $csrfToken = $GLOBALS['csrfProtection']->generateToken();
+                $loginForm->addItem(new \Ease\Html\InputHiddenTag('csrf_token', $csrfToken));
+            }
+
             $loginForm->addItem('&nbsp;&nbsp;&nbsp;');
             $loginForm->addItem(new \Ease\TWB4\LinkButton('passwordrecovery.php', _('Password recovery'), 'warning my-2 my-sm-0'));
             $this->addMenuItem($loginForm);
