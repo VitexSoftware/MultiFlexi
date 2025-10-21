@@ -49,4 +49,17 @@ To interact with MultiFlexi programmatically, you can use the MultiFlexi API. Th
 
 For more information about the API and how to use it, refer to the :doc:`api` section of the documentation.
 
+GDPR Compliance
+---------------
+
+MultiFlexi includes comprehensive GDPR compliance features including automated data retention, breach response procedures, and complete documentation. For organizations processing personal data, refer to the :doc:`gdpr-compliance` section for implementation guidance.
+
+**Key GDPR Features:**
+
+- Automated data retention and deletion
+- Data subject rights implementation
+- Breach response procedures
+- Compliance audit tools
+- Staff training materials
+
 That's it! You have successfully installed MultiFlexi and are ready to start using it.

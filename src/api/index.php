@@ -36,6 +36,28 @@ use Slim\Middleware\ErrorMiddleware;
 
 \Ease\Shared::singleton()->loadConfig(\dirname(__DIR__).'/../.env', true);
 
+// Initialize API rate limiter
+if (\Ease\Shared::cfg('API_RATE_LIMITING_ENABLED', true)) {
+    try {
+        $pdo = \Ease\Shared::singleton()->pdo();
+        $endpointLimits = [
+            '/api/auth*' => ['limit' => 10, 'window' => 300], // 10 requests per 5 minutes for auth
+            '/api/export*' => ['limit' => 5, 'window' => 3600], // 5 requests per hour for data export
+            '/api/*' => ['limit' => \Ease\Shared::cfg('API_RATE_LIMIT_REQUESTS', 100), 'window' => \Ease\Shared::cfg('API_RATE_LIMIT_WINDOW', 3600)],
+        ];
+
+        $rateLimiter = new \MultiFlexi\Security\ApiRateLimiter($pdo, 100, 3600, $endpointLimits);
+
+        if (!$rateLimiter->middleware()) {
+            // Rate limit exceeded - response already sent by middleware
+            exit;
+        }
+    } catch (\Exception $e) {
+        // Log error but don't break the application
+        error_log('Failed to initialize API rate limiter: '.$e->getMessage());
+    }
+}
+
 // Instantiate PHP-DI ContainerBuilder
 $builder = new ContainerBuilder();
 

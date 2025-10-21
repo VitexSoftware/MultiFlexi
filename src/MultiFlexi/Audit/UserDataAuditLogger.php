@@ -18,8 +18,8 @@ namespace MultiFlexi\Audit;
 use Ease\SQL\Orm;
 
 /**
- * User Data Audit Logger for GDPR compliance
- * 
+ * User Data Audit Logger for GDPR compliance.
+ *
  * Logs all user personal data modifications for Article 16 compliance
  *
  * @author Vitex <info@vitexsoftware.cz>
@@ -29,32 +29,32 @@ class UserDataAuditLogger extends \Ease\Sand
     use Orm;
 
     /**
-     * Database table name
+     * Database table name.
      */
     public string $myTable = 'user_data_audit';
 
     /**
-     * Primary key column
+     * Primary key column.
      */
     public string $keyColumn = 'id';
 
     /**
-     * Creation timestamp column
+     * Creation timestamp column.
      */
     public string $createColumn = 'created_at';
 
     /**
-     * Log user data change
+     * Log user data change.
      *
-     * @param int $userId User ID whose data was changed
-     * @param string $field Field name that was changed
-     * @param mixed $oldValue Old value (will be JSON encoded if array/object)
-     * @param mixed $newValue New value (will be JSON encoded if array/object)
-     * @param string $changeType Type of change: 'direct', 'pending_approval', 'approved', 'rejected'
-     * @param int|null $changedByUserId ID of user who made the change (null for self-changes)
-     * @param string|null $ipAddress IP address from where change was made
-     * @param string|null $userAgent User agent string
-     * @param string|null $reason Reason for the change (for admin changes)
+     * @param int         $userId          User ID whose data was changed
+     * @param string      $field           Field name that was changed
+     * @param mixed       $oldValue        Old value (will be JSON encoded if array/object)
+     * @param mixed       $newValue        New value (will be JSON encoded if array/object)
+     * @param string      $changeType      Type of change: 'direct', 'pending_approval', 'approved', 'rejected'
+     * @param null|int    $changedByUserId ID of user who made the change (null for self-changes)
+     * @param null|string $ipAddress       IP address from where change was made
+     * @param null|string $userAgent       User agent string
+     * @param null|string $reason          Reason for the change (for admin changes)
      *
      * @return bool Success of logging
      */
@@ -67,30 +67,31 @@ class UserDataAuditLogger extends \Ease\Sand
         ?int $changedByUserId = null,
         ?string $ipAddress = null,
         ?string $userAgent = null,
-        ?string $reason = null
+        ?string $reason = null,
     ): bool {
         $logData = [
             'user_id' => $userId,
             'field_name' => $field,
-            'old_value' => is_array($oldValue) || is_object($oldValue) ? json_encode($oldValue) : (string) $oldValue,
-            'new_value' => is_array($newValue) || is_object($newValue) ? json_encode($newValue) : (string) $newValue,
+            'old_value' => \is_array($oldValue) || \is_object($oldValue) ? json_encode($oldValue) : (string) $oldValue,
+            'new_value' => \is_array($newValue) || \is_object($newValue) ? json_encode($newValue) : (string) $newValue,
             'change_type' => $changeType,
             'changed_by_user_id' => $changedByUserId,
             'ip_address' => $ipAddress ?: ($_SERVER['REMOTE_ADDR'] ?? null),
             'user_agent' => $userAgent ?: ($_SERVER['HTTP_USER_AGENT'] ?? null),
             'reason' => $reason,
-            'created_at' => date('Y-m-d H:i:s')
+            'created_at' => date('Y-m-d H:i:s'),
         ];
 
         $this->setData($logData);
+
         return $this->dbsync();
     }
 
     /**
-     * Get audit log for specific user
+     * Get audit log for specific user.
      *
      * @param int $userId User ID
-     * @param int $limit Maximum number of records to return
+     * @param int $limit  Maximum number of records to return
      * @param int $offset Offset for pagination
      *
      * @return array Array of audit log entries
@@ -106,7 +107,7 @@ class UserDataAuditLogger extends \Ease\Sand
     }
 
     /**
-     * Get recent data changes pending approval
+     * Get recent data changes pending approval.
      *
      * @param int $limit Maximum number of records to return
      *
@@ -123,10 +124,10 @@ class UserDataAuditLogger extends \Ease\Sand
     }
 
     /**
-     * Get audit statistics for reporting
+     * Get audit statistics for reporting.
      *
      * @param string $fromDate Start date (Y-m-d format)
-     * @param string $toDate End date (Y-m-d format)
+     * @param string $toDate   End date (Y-m-d format)
      *
      * @return array Statistics array
      */
@@ -136,16 +137,16 @@ class UserDataAuditLogger extends \Ease\Sand
             ->select([
                 'change_type',
                 'COUNT(*) as count',
-                'COUNT(DISTINCT user_id) as unique_users'
+                'COUNT(DISTINCT user_id) as unique_users',
             ])
-            ->where('created_at BETWEEN %s AND %s', $fromDate . ' 00:00:00', $toDate . ' 23:59:59')
+            ->where('created_at BETWEEN %s AND %s', $fromDate.' 00:00:00', $toDate.' 23:59:59')
             ->groupBy('change_type')
             ->fetchAll();
 
         $result = [
             'total_changes' => 0,
             'unique_users_affected' => 0,
-            'by_type' => []
+            'by_type' => [],
         ];
 
         foreach ($stats as $stat) {
@@ -156,7 +157,7 @@ class UserDataAuditLogger extends \Ease\Sand
         // Get unique users count across all change types
         $uniqueUsersResult = $this->listingQuery()
             ->select(['COUNT(DISTINCT user_id) as unique_users'])
-            ->where('created_at BETWEEN %s AND %s', $fromDate . ' 00:00:00', $toDate . ' 23:59:59')
+            ->where('created_at BETWEEN %s AND %s', $fromDate.' 00:00:00', $toDate.' 23:59:59')
             ->fetch();
 
         $result['unique_users_affected'] = $uniqueUsersResult['unique_users'] ?? 0;
@@ -165,13 +166,14 @@ class UserDataAuditLogger extends \Ease\Sand
     }
 
     /**
-     * Create audit log database table
+     * Create audit log database table.
      *
      * @return bool Success of table creation
      */
     public function createTable(): bool
     {
-        $createSQL = "
+        $createSQL = <<<EOD
+
             CREATE TABLE IF NOT EXISTS `{$this->myTable}` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
                 `user_id` int(11) NOT NULL,
@@ -191,13 +193,16 @@ class UserDataAuditLogger extends \Ease\Sand
                 FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
                 FOREIGN KEY (`changed_by_user_id`) REFERENCES `user`(`id`) ON DELETE SET NULL
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-        ";
+
+EOD;
 
         try {
             $this->pdo->exec($createSQL);
+
             return true;
         } catch (\PDOException $e) {
-            $this->addStatusMessage('Failed to create audit table: ' . $e->getMessage(), 'error');
+            $this->addStatusMessage('Failed to create audit table: '.$e->getMessage(), 'error');
+
             return false;
         }
     }

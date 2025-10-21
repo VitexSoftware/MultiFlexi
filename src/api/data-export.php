@@ -27,6 +27,7 @@ header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-W
 // Handle preflight requests
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
+
     exit;
 }
 
@@ -43,22 +44,24 @@ try {
     switch ($action) {
         case 'export':
             $api->exportUserData();
+
             break;
-            
         case 'status':
             $api->getExportStatus();
+
             break;
-            
+
         default:
             http_response_code(400);
             echo json_encode([
                 'error' => 'Invalid action',
-                'available_actions' => ['export', 'status']
+                'available_actions' => ['export', 'status'],
             ]);
+
             break;
     }
 } catch (\Exception $e) {
-    error_log('Data Export API Error: ' . $e->getMessage());
+    error_log('Data Export API Error: '.$e->getMessage());
     http_response_code(500);
     echo json_encode(['error' => 'Internal server error']);
 }

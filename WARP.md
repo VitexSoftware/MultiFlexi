@@ -99,6 +99,31 @@ multiflexi-job2script
 
 # Import multiple applications
 multiflexi-json2apps
+
+### Data Retention Management (GDPR Phase 4)
+
+```bash
+# Calculate retention expiration dates
+multiflexi-cli retention:cleanup calculate
+
+# Run scheduled cleanup (with dry-run option)
+multiflexi-cli retention:cleanup cleanup --dry-run
+
+# Process grace period cleanup (final deletions)
+multiflexi-cli retention:cleanup grace-period
+
+# Clean up expired archives
+multiflexi-cli retention:cleanup archive-cleanup --days=2555
+
+# Generate compliance reports
+multiflexi-cli retention:cleanup report --format=json --output=report.json
+
+# Show retention status
+multiflexi-cli retention:cleanup status
+
+# Validate retention policies
+multiflexi-cli application validate-json --json multiflexi/retention-policy.json
+```
 ```
 
 ### Scheduled Job Execution
@@ -178,6 +203,28 @@ MultiFlexi automatically configures environment variables for executed applicati
 - `POHODA_USERNAME`: Username
 - `POHODA_PASSWORD`: Password
 
+### GDPR Implementation Phases
+
+MultiFlexi implements GDPR compliance in phases:
+
+**Phase 1**: User consent and privacy management
+**Phase 2**: Data export and user rights (Article 15, 20)
+**Phase 3**: Security enhancements and access controls
+**Phase 4**: Data retention and automated deletion policies (Article 5(1)(e), 17)
+
+### Security Configuration (GDPR Phase 3)
+- `SECURITY_AUDIT_ENABLED`: Enable comprehensive security event logging (default: true)
+- `DATA_ENCRYPTION_ENABLED`: Enable AES-256 data encryption (default: true)
+- `RATE_LIMITING_ENABLED`: Enable API rate limiting (default: true)
+- `IP_WHITELIST_ENABLED`: Enable IP whitelisting for admin access (default: false)
+- `ENCRYPTION_MASTER_KEY`: Master encryption key (required for data encryption)
+
+### Data Retention Configuration (GDPR Phase 4)
+- `DATA_RETENTION_ENABLED`: Enable automated data retention and cleanup (default: true)
+- `RETENTION_GRACE_PERIOD_DAYS`: Default grace period before final deletion (default: 30)
+- `RETENTION_ARCHIVE_PATH`: Path for archived data storage (default: /var/lib/multiflexi/archives)
+- `RETENTION_CLEANUP_SCHEDULE`: Cron expression for automated cleanup (default: 0 2 * * *)
+
 ## Code Quality Standards
 
 The project follows PSR-12 coding standards and includes:
@@ -197,6 +244,39 @@ Test applications are located in the `tests/` directory:
 To validate application definitions against the schema, use:
 ```bash
 multiflexi-cli application validate-json --json tests/multiflexi_probe.multiflexi.app.json
+```
+
+### Security Testing
+
+Test security components with these commands:
+
+```bash
+# Test encryption functionality
+php -r "echo MultiFlexi\Security\EncryptionHelpers::testEncryption() ? 'PASS' : 'FAIL'; echo PHP_EOL;"
+
+# Check security audit logging
+php -r "if(isset(\$GLOBALS['securityAuditLogger'])) { echo 'Security audit logger available'; } else { echo 'Not initialized'; }"
+
+# Test rate limiting
+php -r "echo MultiFlexi\Security\RateLimitHelpers::isRateLimitingAvailable() ? 'Available' : 'Disabled'; echo PHP_EOL;"
+
+### Data Retention Testing (GDPR Phase 4)
+
+Test data retention components with these commands:
+
+```bash
+# Test retention service initialization
+php -r "use MultiFlexi\DataRetention\RetentionService; \$rs = new RetentionService(); echo 'Retention service: OK'; echo PHP_EOL;"
+
+# Test policy validation
+php -r "use MultiFlexi\DataRetention\RetentionPolicyManager; \$pm = new RetentionPolicyManager(); echo 'Policy manager: OK'; echo PHP_EOL;"
+
+# Test data archiver functionality
+php -r "use MultiFlexi\DataRetention\DataArchiver; \$da = new DataArchiver(); echo 'Data archiver: OK'; echo PHP_EOL;"
+
+# Run retention system unit tests
+vendor/bin/phpunit tests/DataRetention/RetentionServiceTest.php
+```
 ```
 
 ### Application Import Behavior
@@ -221,3 +301,59 @@ MultiFlexi is part of a larger ecosystem of related projects:
 - multiflexi-ansible-collection
 
 When making changes, consider impacts on these related components and ensure compatibility across the ecosystem.
+
+## GDPR Phase 4: Data Retention Administration
+
+### Web Interface
+
+Access the data retention administration interface at:
+```
+http://your-multiflexi-domain/data-retention-admin.php
+```
+
+**Features:**
+- Policy management dashboard with real-time statistics
+- Create, edit, delete, and toggle retention policies
+- Quick actions for cleanup and retention calculations
+- Visual overview of expired records awaiting cleanup
+- Manual cleanup execution with dry-run capability
+
+### Default Retention Policies
+
+| Data Type | Retention Period | Action | Legal Basis |
+|-----------|------------------|--------|-------------|
+| User accounts (inactive) | 3 years | Anonymize | GDPR Art. 5(1)(e) |
+| Session data | 30 days | Hard delete | Data minimization |
+| Audit logs | 7 years | Archive | Legal requirements |
+| Job execution logs | 1 year | Soft delete | Business operations |
+| Application logs | 1 year | Hard delete | Troubleshooting |
+| Company data | 5 years | Anonymize | Business relationships |
+| Login attempts | 90 days | Hard delete | Security monitoring |
+
+### Automated Scheduling
+
+Add to crontab for automated cleanup:
+```bash
+# Daily cleanup at 2:00 AM
+0 2 * * * /path/to/multiflexi-cli retention:cleanup cleanup
+
+# Weekly grace period cleanup
+0 3 * * 0 /path/to/multiflexi-cli retention:cleanup grace-period
+
+# Monthly compliance reporting
+0 9 1 * * /path/to/multiflexi-cli retention:cleanup report --format=json --output=/var/log/multiflexi/retention-report.json
+```
+
+### Data Archival and Recovery
+
+**Archive Management:**
+- Pre-deletion archives for 7 years (configurable)
+- Legal hold capability for litigation/investigation
+- Integrity verification with SHA-256 hashes
+- Export capabilities (JSON, CSV formats)
+
+**Recovery Process:**
+- Grace periods before final deletion (default 30 days)
+- Archive search and retrieval via CLI and web interface
+- Verification of archived data integrity
+- Legal hold extensions for compliance requirements

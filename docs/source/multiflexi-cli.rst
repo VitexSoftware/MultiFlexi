@@ -59,6 +59,7 @@ The MultiFlexi CLI provides the following main commands:
 - **appstatus** - System status information
 - **describe** - List all available commands and their parameters
 - **prune** - Prune logs and jobs, keeping only the latest N records (default: 1000)
+- **retention** - GDPR data retention management (calculate, cleanup, reporting)
 - **completion** - Dump the shell completion script
 
 Detailed Command Reference
@@ -453,6 +454,70 @@ Examples:
     multiflexi-cli prune --logs
     multiflexi-cli prune --jobs --keep=500
     multiflexi-cli prune --logs --jobs --keep=2000
+
+retention
+---------
+
+GDPR data retention management commands for automated data lifecycle management.
+
+.. code-block:: bash
+
+    multiflexi-cli retention:cleanup <action> [options]
+
+Actions:
+- **calculate**: Calculate retention expiration dates for all data types
+- **cleanup**: Execute scheduled cleanup (with optional --dry-run)
+- **grace-period**: Process grace period cleanup (final deletions)
+- **archive-cleanup**: Clean up expired archives (requires --days)
+- **report**: Generate compliance reports (supports --format and --output)
+- **status**: Show current retention status
+
+Options:
+  --dry-run      Execute cleanup in dry-run mode (show what would be deleted)
+  --days         Number of days for archive cleanup
+  --format       Output format: json, csv, html (default: text)
+  --output       Output file path for reports
+  -f, --format   Output format: text or json (default: text)
+
+Examples:
+
+.. code-block:: bash
+
+    # Calculate retention expiration dates
+    multiflexi-cli retention:cleanup calculate
+    
+    # Run cleanup in dry-run mode to preview actions
+    multiflexi-cli retention:cleanup cleanup --dry-run
+    
+    # Execute actual cleanup
+    multiflexi-cli retention:cleanup cleanup
+    
+    # Process grace period deletions
+    multiflexi-cli retention:cleanup grace-period
+    
+    # Clean archives older than 7 years (2555 days)
+    multiflexi-cli retention:cleanup archive-cleanup --days=2555
+    
+    # Generate compliance report in JSON format
+    multiflexi-cli retention:cleanup report --format=json --output=compliance-report.json
+    
+    # Check retention status
+    multiflexi-cli retention:cleanup status
+    
+    # Validate application JSON against GDPR schema
+    multiflexi-cli application validate-json --file multiflexi/app.json
+
+**GDPR Compliance Integration**
+
+The retention commands integrate with MultiFlexi's comprehensive GDPR compliance framework:
+
+- **Automated Scheduling**: Set up cron jobs for regular cleanup execution
+- **Audit Trails**: All retention actions are logged for compliance evidence
+- **Grace Periods**: Configurable grace periods before final data deletion
+- **Archive Management**: Secure archival with integrity verification
+- **Compliance Reporting**: Generate reports for regulatory requirements
+
+For complete GDPR compliance documentation, see :doc:`gdpr-compliance`.
 
 completion
 ----------

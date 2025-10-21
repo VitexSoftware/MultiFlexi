@@ -16,12 +16,12 @@ declare(strict_types=1);
 namespace MultiFlexi\Api\Server;
 
 use MultiFlexi\DataExport\UserDataExporter;
-use MultiFlexi\Security\DataExportSecurityManager;
 use MultiFlexi\Email\DataExportNotifier;
+use MultiFlexi\Security\DataExportSecurityManager;
 
 /**
- * GDPR Data Export API Controller
- * 
+ * GDPR Data Export API Controller.
+ *
  * Implements Article 15 - Right of Access under GDPR
  * Allows users to export all their personal data in structured formats
  *
@@ -41,19 +41,19 @@ class DataExportApi
     }
 
     /**
-     * Handle data export request
-     * 
-     * @return void
+     * Handle data export request.
      */
     public function exportUserData(): void
     {
         header('Content-Type: application/json');
-        
+
         // Check authentication
         $user = \Ease\Shared::user();
+
         if (!$user || !$user->getUserID()) {
             http_response_code(401);
             echo json_encode(['error' => 'Authentication required']);
+
             return;
         }
 
@@ -63,37 +63,42 @@ class DataExportApi
 
         // Check security permissions
         $securityCheck = $this->securityManager->canRequestExport($userId, $ipAddress);
+
         if (!$securityCheck['allowed']) {
-            $statusCode = match($securityCheck['reason']) {
+            $statusCode = match ($securityCheck['reason']) {
                 'authentication_required' => 401,
                 'rate_limit_exceeded' => 429,
                 'suspicious_activity' => 403,
-                default => 400
+                default => 400,
             };
-            
+
             http_response_code($statusCode);
             echo json_encode(['error' => $securityCheck['message']]);
+
             return;
         }
 
         try {
             // Get format from request
             $format = $_GET['format'] ?? 'json';
-            if (!in_array($format, ['json', 'pdf'], true)) {
+
+            if (!\in_array($format, ['json', 'pdf'], true)) {
                 http_response_code(400);
                 echo json_encode(['error' => 'Invalid format. Supported formats: json, pdf']);
+
                 return;
             }
 
             // Generate export (validate data can be exported)
             $exportData = $this->exporter->exportUserData($userId);
-            
+
             // Create secure download token
             $tokenResult = $this->securityManager->createSecureToken($userId, $format, $ipAddress, $userAgent);
-            
+
             if (!$tokenResult['success']) {
                 http_response_code(500);
                 echo json_encode(['error' => $tokenResult['error'] ?? 'Failed to create secure download link']);
+
                 return;
             }
 
@@ -108,29 +113,28 @@ class DataExportApi
                 'format' => $format,
                 'generated_at' => date('c'),
                 'expires_at' => $tokenResult['expires_at'],
-                'notification_sent' => true
+                'notification_sent' => true,
             ]);
-
         } catch (\Exception $e) {
-            error_log('Data export error: ' . $e->getMessage());
+            error_log('Data export error: '.$e->getMessage());
             http_response_code(500);
             echo json_encode(['error' => 'Failed to generate data export']);
         }
     }
 
     /**
-     * Get export status
-     * 
-     * @return void  
+     * Get export status.
      */
     public function getExportStatus(): void
     {
         header('Content-Type: application/json');
-        
+
         $user = \Ease\Shared::user();
+
         if (!$user || !$user->getUserID()) {
             http_response_code(401);
             echo json_encode(['error' => 'Authentication required']);
+
             return;
         }
 
@@ -138,36 +142,32 @@ class DataExportApi
 
         // Get recent export requests from audit log
         $exports = $this->getRecentExports($userId);
-        
+
         echo json_encode([
             'success' => true,
-            'exports' => $exports
+            'exports' => $exports,
         ]);
     }
 
-
     /**
-     * Get recent export requests for user
-     * 
-     * @param int $userId
-     * @return array
+     * Get recent export requests for user.
      */
     private function getRecentExports(int $userId): array
     {
         $logEngine = new \Ease\SQL\Engine();
         $logEngine->myTable = 'log';
-        
+
         $exports = $logEngine->listingQuery()
             ->select('message, created')
             ->where(['user_id' => $userId, 'venue' => 'DataExportApi'])
             ->orderBy('created DESC')
             ->limit(10)
             ->fetchAll();
-            
-        return array_map(function($export) {
+
+        return array_map(static function ($export) {
             return [
                 'message' => $export['message'],
-                'requested_at' => $export['created']
+                'requested_at' => $export['created'],
             ];
         }, $exports);
     }

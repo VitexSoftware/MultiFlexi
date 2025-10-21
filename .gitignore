@@ -60,3 +60,5 @@ docs/_build/
 debian/multiflexi-web/
 debian/multiflexi-web.substvars
 src/php_errors.log
+debian/multiflexi-web.debhelper.log
+.encryption_master_key

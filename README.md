@@ -11,7 +11,7 @@ MultiFlexi
 
 MultiFlexi is a comprehensive PHP-based task scheduling and automation framework designed for accounting and business system integrations. It enables scheduled execution of applications and tools across multiple companies and platforms, with primary focus on systems like AbraFlexi and Pohoda.
 
-**Version 1.29.0** introduces enhanced monitoring capabilities with the new MultiFlexi Probe application for system health checks and testing.
+**Version 1.32.0** introduces comprehensive security enhancements as part of GDPR Phase 3 compliance, including security audit logging, data encryption, API rate limiting, and IP whitelisting.
 
 ## Key Features
 
@@ -26,6 +26,7 @@ MultiFlexi is a comprehensive PHP-based task scheduling and automation framework
   - RESTful API with OAuth2 authentication and multiple output formats
 - **Enterprise-Ready**: User authentication, API tokens, data isolation, and Zabbix monitoring integration
 - **Privacy & GDPR Compliance**: Comprehensive consent management, self-hosted analytics support, and European privacy standards
+- **Security Features**: AES-256 data encryption, comprehensive audit logging, API rate limiting, IP whitelisting, and advanced security monitoring
 
 ## Architecture
 
@@ -36,7 +37,7 @@ MultiFlexi features a layered architecture with:
 - **Job Execution System**: Multi-environment execution with environment variable injection
 - **Credential Framework**: Extensible credential types for various system integrations
 - **Configuration Management**: Environment-based configuration with type-safe field definitions
-- **Security Layer**: Authentication, authorization, and secure credential handling
+- **Security Layer**: Authentication, authorization, secure credential handling, data encryption, audit logging, rate limiting, and IP access control
 
 # Member Projects
 
@@ -65,6 +66,13 @@ MultiFlexi automatically configures environment variables for executed applicati
 
 **Privacy & Analytics:**
 - `ENABLE_GOOGLE_ANALYTICS` - Enable/disable Google Analytics (default: false for European self-hosting)
+
+**Security Configuration (GDPR Phase 3):**
+- `SECURITY_AUDIT_ENABLED` - Enable comprehensive security event logging (default: true)
+- `DATA_ENCRYPTION_ENABLED` - Enable AES-256 data encryption for sensitive information (default: true)
+- `RATE_LIMITING_ENABLED` - Enable API rate limiting protection (default: true)
+- `IP_WHITELIST_ENABLED` - Enable IP whitelisting for administrative access (default: false)
+- `ENCRYPTION_MASTER_KEY` - Master key for data encryption (must be set securely)
 
 **Custom Variables:** Individual module configurations per company with extensible variable definitions.
 

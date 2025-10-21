@@ -85,7 +85,11 @@ class MainMenu extends \Ease\Html\DivTag
             // Privacy menu with dropdown
             $privacyMenu = [
                 'consent-preferences.php' => '<i class="fas fa-user-shield"></i> '._('Privacy Preferences'),
-                'data-export-page.php' => '<i class="fas fa-download"></i> '._('Export My Data')
+                'data-export-page.php' => '<i class="fas fa-download"></i> '._('Export My Data'),
+                'gdpr-user-deletion-request.php' => '<i class="fas fa-user-times"></i> '._('Request Account Deletion'),
+                '' => '',
+                'privacy-policy.php' => '<i class="fas fa-shield-alt"></i> '._('Privacy Policy'),
+                'cookie-policy.php' => '<i class="fas fa-cookie-bite"></i> '._('Cookie Policy'),
             ];
             $nav->addDropDownMenu('<i class="fas fa-user-shield"></i> '._('Privacy'), $privacyMenu);
 
@@ -202,6 +206,10 @@ class MainMenu extends \Ease\Html\DivTag
                 'intervals.php' => '♻️&nbsp;'._('Intervals'),
                 'requirements.php' => '🔘&nbsp;'._('Requirements'),
                 'queue.php' => '⏳&nbsp;'._('Job queue'),
+                '' => '',
+                'data-retention-admin.php' => '🗂️&nbsp;'._('Data Retention Management'),
+                'admin-deletion-requests.php' => '🗑️&nbsp;'._('Deletion Requests'),
+                'admin-data-corrections.php' => '✏️&nbsp;'._('Data Corrections'),
                 '' => '',
                 'users.php' => new \Ease\TWB4\Widgets\FaIcon('list').'&nbsp;'._('Users'),
             ], $this->getMenuList(\Ease\Shared::user())),

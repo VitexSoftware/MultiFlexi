@@ -17,8 +17,10 @@ namespace MultiFlexi\Ui;
 
 use Ease\Html\DivTag;
 use Ease\Html\ImgTag;
+use Ease\Html\InputHiddenTag;
 use Ease\Html\InputPasswordTag;
 use Ease\Html\InputTextTag;
+use Ease\Html\PTag;
 use Ease\Shared;
 use Ease\TWB4\Col;
 use Ease\TWB4\Form;
@@ -30,27 +32,93 @@ use Ease\TWB4\SubmitButton;
 
 require_once './init.php';
 
+// Check if IP whitelist is enabled and user is not on whitelist
+if (isset($GLOBALS['ipWhitelist']) && !$GLOBALS['ipWhitelist']->isAllowed()) {
+    http_response_code(403);
+    WebPage::singleton()->addItem(new PageTop(_('Access Denied')));
+    WebPage::singleton()->container->addItem(new DivTag(_('Access denied from your IP address'), ['class' => 'alert alert-danger']));
+    WebPage::singleton()->addItem(new PageBottom());
+    WebPage::singleton()->draw();
+
+    exit;
+}
+
 $shared = Shared::singleton();
+
+// Handle session expiration message
+if (isset($_GET['session_expired'])) {
+    Shared::user()->addStatusMessage(_('Your session has expired. Please log in again.'), 'warning');
+}
+
+// Handle logout
+if (isset($_GET['logout'])) {
+    if (isset($GLOBALS['securityAuditLogger'])) {
+        $GLOBALS['securityAuditLogger']->logLogout(Shared::user()->getUserID());
+    }
+
+    Shared::user()->logout();
+    WebPage::singleton()->redirect('login.php');
+
+    exit;
+}
 
 $login = WebPage::singleton()->getRequestValue('login');
 
-if ($login) {
-    //    try {
-    //        \Ease\Shared::user() = Shared::user(new User());
-    //    } catch (PDOException $e) {
-    //        echo 'Caught exception: ', $e->getMessage(), "\n";
-    //    }
-    if (Shared::user()->tryToLogin($_POST)) {
-        if (\array_key_exists('wayback', $_SESSION) && !empty($_SESSION['wayback'])) {
-            WebPage::singleton()->redirect($_SESSION['wayback']);
-            unset($_SESSION['wayback']);
+if ($login && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Validate CSRF token if CSRF protection is enabled
+    if (\Ease\Shared::cfg('CSRF_PROTECTION_ENABLED', true) && isset($GLOBALS['csrfProtection']) && !$GLOBALS['csrfProtection']->validateToken($_POST['csrf_token'] ?? '')) {
+        Shared::user()->addStatusMessage(_('Invalid security token. Please try again.'), 'error');
+    } else {
+        // Rate limiting check
+        if (isset($GLOBALS['rateLimiter'])) {
+            $isAllowed = $GLOBALS['rateLimiter']->checkRateLimit(
+                $_SERVER['REMOTE_ADDR'],
+                'login_attempt',
+                10, // max 10 attempts
+                900, // in 15 minutes
+            );
+
+            if (!$isAllowed) {
+                Shared::user()->addStatusMessage(_('Too many login attempts. Please try again later.'), 'error');
+            } else {
+                if (Shared::user()->tryToLogin($_POST)) {
+                    // Clear rate limiting on successful login
+                    $GLOBALS['rateLimiter']->clearRateLimit($_SERVER['REMOTE_ADDR'], 'login_attempt');
+
+                    // Regenerate session ID for security
+                    if (isset($GLOBALS['sessionManager'])) {
+                        $GLOBALS['sessionManager']->regenerateId();
+                    }
+
+                    if (\array_key_exists('wayback', $_SESSION) && !empty($_SESSION['wayback'])) {
+                        $wayback = $_SESSION['wayback'];
+                        unset($_SESSION['wayback']);
+                        WebPage::singleton()->redirect($wayback);
+                    } else {
+                        WebPage::singleton()->redirect('main.php');
+                    }
+
+                    session_write_close();
+
+                    exit;
+                }
+            }
         } else {
-            WebPage::singleton()->redirect('main.php');
+            // Fallback without rate limiting
+            if (Shared::user()->tryToLogin($_POST)) {
+                if (\array_key_exists('wayback', $_SESSION) && !empty($_SESSION['wayback'])) {
+                    $wayback = $_SESSION['wayback'];
+                    unset($_SESSION['wayback']);
+                    WebPage::singleton()->redirect($wayback);
+                } else {
+                    WebPage::singleton()->redirect('main.php');
+                }
+
+                session_write_close();
+
+                exit;
+            }
         }
-
-        session_write_close();
-
-        exit;
     }
 }
 
@@ -87,20 +155,23 @@ $loginPanel->addItem(new FormGroup(
     _('the username you chose'),
 ));
 
-$loginPanel->addItem(new FormGroup(_('Password'), new InputPasswordTag('password', $login)));
+$loginPanel->addItem(new FormGroup(_('Password'), new InputPasswordTag('password')));
 
 $loginPanel->body->setTagCss(['margin' => '20px']);
 
-$loginColumn->addItem('<p><br></p>');
+$loginColumn->addItem(new PTag());
 $loginColumn->addItem($loginPanel);
 
-// $passRecoveryColumn = $loginRow->addItem(new Col(
-//    4,
-//    new LinkButton('passwordrecovery.php', '<i class="fa fa-key"></i>
-// ' . _('Lost password recovery'), 'warning')
-// ));
+// Add CSRF token to form if CSRF protection is enabled
+$formAttributes = [];
 
-WebPage::singleton()->container->addItem(new Form([], [], $loginRow));
+if (\Ease\Shared::cfg('CSRF_PROTECTION_ENABLED', true) && isset($GLOBALS['csrfProtection'])) {
+    $csrfToken = $GLOBALS['csrfProtection']->generateToken();
+    $loginPanel->addItem(new InputHiddenTag('csrf_token', $csrfToken));
+}
+
+$loginForm = new Form(['method' => 'POST', 'action' => 'login.php'], [], $loginRow);
+WebPage::singleton()->container->addItem($loginForm);
 
 WebPage::singleton()->addItem(new PageBottom());
 
