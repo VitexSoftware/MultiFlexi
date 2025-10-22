@@ -5220,12 +5220,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core.git",
-                "reference": "08081ce28368bfad741a489ee70dd4ee5a32d6ba"
+                "reference": "cac5143dc27c939fdc1fbc77d796621aacea12c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/08081ce28368bfad741a489ee70dd4ee5a32d6ba",
-                "reference": "08081ce28368bfad741a489ee70dd4ee5a32d6ba",
+                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/cac5143dc27c939fdc1fbc77d796621aacea12c1",
+                "reference": "cac5143dc27c939fdc1fbc77d796621aacea12c1",
                 "shasum": ""
             },
             "require": {
@@ -5269,7 +5269,7 @@
                 "issues": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/issues",
                 "source": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/tree/main"
             },
-            "time": "2025-10-20T07:39:43+00:00"
+            "time": "2025-10-20T14:21:14+00:00"
         },
         {
             "name": "ybelenko/openapi-data-mocker",
@@ -6850,8 +6850,8 @@
             "version": "2.1.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/cbae9b7f2a51505290e4e67871e6ec30b69c9678",
-                "reference": "cbae9b7f2a51505290e4e67871e6ec30b69c9678",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/389abe8049de22bf9f5ef95754bb89f84bed6182",
+                "reference": "389abe8049de22bf9f5ef95754bb89f84bed6182",
                 "shasum": ""
             },
             "require": {
@@ -6897,7 +6897,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-20T11:55:15+00:00"
+            "time": "2025-10-21T08:52:45+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
