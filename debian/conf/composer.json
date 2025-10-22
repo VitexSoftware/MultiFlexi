@@ -61,6 +61,10 @@
     },
     {
       "type": "path",
+      "url": "/usr/share/php/FluentPDO/"
+    },
+    {
+      "type": "path",
       "url": "/usr/share/php/EaseFluentPDO/"
     },
     {
