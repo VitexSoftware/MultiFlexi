@@ -63,14 +63,14 @@ Description: Zabbix support for MultiFlexi
 Package: multiflexi-probe
 Multi-Arch: foreign
 Architecture: all
-Pre-Depends: multiflexi
+Pre-Depends: multiflexi-web
 Description: MultiFlexi probe tool
  Add Special debugging application to your MultiFlexi
 
 Package: multiflexi-web
 Multi-Arch: foreign
 Architecture: all
-Depends: ${misc:Depends}, 
+Depends: ${misc:Depends},
  multiflexi-common,
  php-vitexsoftware-multiflexi-core,
  php-vitexsoftware-ease-html-widgets (>=1.1.1),
