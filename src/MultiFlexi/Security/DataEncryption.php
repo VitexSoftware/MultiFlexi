@@ -431,23 +431,40 @@ EOD;
             return hash('sha256', $masterKey, true);
         }
 
-        // Generate and store a master key (development only)
-        $masterKeyFile = \dirname(__DIR__, 3).'/.encryption_master_key';
+        // Check for master key file in standard locations
+        $masterKeyLocations = [
+            '/var/lib/multiflexi/.encryption_master_key',  // Production (deb package)
+            \dirname(__DIR__, 3).'/.encryption_master_key', // Development
+        ];
 
-        if (file_exists($masterKeyFile)) {
-            $masterKey = file_get_contents($masterKeyFile);
+        foreach ($masterKeyLocations as $masterKeyFile) {
+            if (file_exists($masterKeyFile)) {
+                $masterKey = file_get_contents($masterKeyFile);
+                if ($masterKey === false) {
+                    throw new \RuntimeException("Failed to read master key from {$masterKeyFile}");
+                }
 
-            return hash('sha256', $masterKey, true);
+                return hash('sha256', $masterKey, true);
+            }
         }
 
-        // Generate new master key (WARNING: this should be done securely in production)
-        $newMasterKey = base64_encode(random_bytes(32));
-        file_put_contents($masterKeyFile, $newMasterKey);
-        chmod($masterKeyFile, 0o600);
+        // Try to generate new master key for development
+        $devKeyFile = \dirname(__DIR__, 3).'/.encryption_master_key';
+        $devDir = \dirname($devKeyFile);
 
-        error_log('WARNING: Generated new encryption master key. Store MULTIFLEXI_MASTER_KEY environment variable securely.');
+        if (is_writable($devDir)) {
+            $newMasterKey = base64_encode(random_bytes(32));
+            if (file_put_contents($devKeyFile, $newMasterKey) === false) {
+                throw new \RuntimeException("Failed to write master key to {$devKeyFile}");
+            }
+            @chmod($devKeyFile, 0o600);
 
-        return hash('sha256', $newMasterKey, true);
+            error_log('WARNING: Generated new encryption master key. For production, set MULTIFLEXI_MASTER_KEY environment variable.');
+
+            return hash('sha256', $newMasterKey, true);
+        }
+
+        throw new \RuntimeException('No encryption master key found. Set MULTIFLEXI_MASTER_KEY environment variable or ensure /var/lib/multiflexi/.encryption_master_key exists.');
     }
 
     /**
@@ -474,6 +491,10 @@ EOD;
     {
         $masterKey = self::getMasterKey();
         $data = base64_decode($encryptedKey, true);
+
+        if ($data === false || strlen($data) < 16) {
+            throw new \RuntimeException('Invalid encrypted key data');
+        }
 
         $iv = substr($data, 0, 16);
         $encrypted = substr($data, 16);
