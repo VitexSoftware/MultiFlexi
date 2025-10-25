@@ -63,7 +63,7 @@ Description: Zabbix support for MultiFlexi
 Package: multiflexi-probe
 Multi-Arch: foreign
 Architecture: all
-Depends: multiflexi
+Pre-Depends: multiflexi
 Description: MultiFlexi probe tool
  Add Special debugging application to your MultiFlexi
 
