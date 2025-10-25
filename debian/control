@@ -78,7 +78,6 @@ Depends: ${misc:Depends},
  libjs-jquery-datatables,
  libjs-jquery-selectize.js,
  php-cli,
- php-openssl,
  php-mcrypt | php-sodium
 Description: MultiFlexi web interface core components
  Core PHP classes and web interface components for MultiFlexi.
