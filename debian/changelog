@@ -1,3 +1,9 @@
+multiflexi (2.0.0) UNRELEASED; urgency=medium
+
+  * v2.0.0 release
+
+ -- Vítězslav Vitex Dvořák <info@vitexsoftware.cz>  Sat, 25 Oct 2025 17:30:58 +0200
+
 multiflexi (1.32.0) jammy; urgency=medium
 
   [ vitex ]
@@ -14,7 +20,7 @@ multiflexi (1.32.0) jammy; urgency=medium
   [ Vitex ]
   * Release version 1.32.0 with GDPR Phase 3 security compliance features
 
- -- vitex <info@vitexsoftware.cz>  Sun, 20 Oct 2024 20:30:00 +0200
+ -- Vítězslav Vitex Dvořák <info@vitexsoftware.cz>  Sat, 25 Oct 2025 17:30:44 +0200
 
 multiflexi (1.31.0) jammy; urgency=medium
 
