@@ -866,5 +866,12 @@
        style="color:#000000;text-indent:0;text-transform:none;fill:#ffd42a;fill-opacity:1;fill-rule:evenodd"
        inkscape:connector-curvature="0"
        d="m 795.61,279.41 67.008,66.993 -41.074,41.074 c 26.961,20.328 44.23,52.647 44.23,89.428 0,48.051 -29.47,88.512 -71.524,104.54 v -115.55 l -141.52,141.52 141.52,141.52 v -74.226 c 91.812,-18.87 161.51,-100.65 161.51,-197.79 0,-96.667 -69.01,-178.1 -160.15,-197.49 z" />
+    <animateTransform
+       attributeName="transform"
+       type="rotate"
+       dur="30s"
+       values="0 754 456;360 754 456;"
+       repeatCount="indefinite"
+       additive="sum" />
   </g>
 </svg>
