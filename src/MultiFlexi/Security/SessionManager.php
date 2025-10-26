@@ -346,6 +346,14 @@ class SessionManager
     }
 
     /**
+     * Public method to regenerate session ID (alias for regenerateSession).
+     */
+    public function regenerateId(): bool
+    {
+        return self::regenerateSession();
+    }
+
+    /**
      * Regenerate session ID safely.
      */
     private static function regenerateSession(): bool
