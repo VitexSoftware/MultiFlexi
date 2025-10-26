@@ -4,8 +4,6 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-composer-debian multiflexi
-
 if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
 
         if deb-systemd-helper --quiet was-enabled 'zabbix-agent2.service'; then
