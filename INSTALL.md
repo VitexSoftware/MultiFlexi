@@ -252,3 +252,70 @@ multiflexi-phinx seed:run -s AppSeeder
 ```
 
 The Apache webserver is preconfigured for **/multiflexi/**. For Nginx or other webservers, manual configuration is required.
+
+Security Configuration
+======================
+
+## Encryption Master Key
+
+MultiFlexi uses AES-256 encryption to protect sensitive data (passwords, API keys, tokens) in the database. The encryption system requires a master key.
+
+### Automatic Key Generation
+
+During installation of the `multiflexi-common` package, an encryption master key is automatically generated at:
+
+```
+/var/lib/multiflexi/.encryption_master_key
+```
+
+The key is:
+- Generated using `openssl rand -base64 32` (32 bytes = 256 bits)
+- Owned by `www-data:www-data`
+- Protected with permissions `600` (readable only by owner)
+- Created only if it doesn't exist and `MULTIFLEXI_MASTER_KEY` environment variable is not set
+
+### Using Environment Variable (Recommended for Production)
+
+For production environments, it's recommended to use the `MULTIFLEXI_MASTER_KEY` environment variable instead of the file:
+
+```shell
+# Add to /etc/multiflexi/multiflexi.env or your environment configuration
+MULTIFLEXI_MASTER_KEY="your-base64-encoded-32-byte-key"
+```
+
+Generate a secure key:
+
+```shell
+openssl rand -base64 32
+```
+
+### Important Security Notes
+
+- **Backup the key file** or environment variable - without it, encrypted credentials cannot be recovered
+- If the key is lost, all encrypted credentials become permanently inaccessible
+- Never commit the key to version control
+- Use environment variable configuration for containerized deployments
+- Rotate keys periodically following your security policy
+
+### Manual Key Regeneration
+
+If you need to regenerate the key (this will invalidate all existing encrypted data):
+
+```shell
+sudo openssl rand -base64 32 > /var/lib/multiflexi/.encryption_master_key
+sudo chown www-data:www-data /var/lib/multiflexi/.encryption_master_key
+sudo chmod 600 /var/lib/multiflexi/.encryption_master_key
+```
+
+**Warning:** Regenerating the key will make all existing encrypted credentials inaccessible. You must re-enter all sensitive credentials after key regeneration.
+
+### Data Encryption Control
+
+Enable or disable encryption via environment variables in `/etc/multiflexi/multiflexi.env`:
+
+```shell
+# Enable AES-256 encryption (default: true)
+DATA_ENCRYPTION_ENABLED=true
+```
+
+For more security features, see the [README.md](README.md) security section.
