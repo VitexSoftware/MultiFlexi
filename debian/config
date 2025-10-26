@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+# Ask the consent banner question
+db_input medium multiflexi/disable_consent_banner || true
+db_go
+
+#DEBHELPER#
+
+exit 0
