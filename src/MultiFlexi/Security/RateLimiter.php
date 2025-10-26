@@ -231,6 +231,28 @@ EOD;
     }
 
     /**
+     * Clear rate limit attempts for successful actions (e.g., successful login).
+     *
+     * @param string      $ipAddress    IP address
+     * @param string      $endpointType Endpoint type
+     * @param null|string $endpointPath Endpoint path
+     *
+     * @return bool Success status
+     */
+    public function clearRateLimit(string $ipAddress, string $endpointType, ?string $endpointPath = null): bool
+    {
+        try {
+            $this->resetAttempt($ipAddress, $endpointType, $endpointPath);
+
+            return true;
+        } catch (\Exception $e) {
+            error_log('Failed to clear rate limit: '.$e->getMessage());
+
+            return false;
+        }
+    }
+
+    /**
      * Manually unblock a client.
      *
      * @param string      $ipAddress    IP address to unblock
