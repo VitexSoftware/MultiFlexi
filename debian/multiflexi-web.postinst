@@ -56,6 +56,15 @@ case "$1" in
             find /usr/share/multiflexi/ -type d -exec chmod 755 {} \;
         fi
 
+        # Create encryption master key if it doesn't exist
+        if [ ! -f /var/lib/multiflexi/.encryption_master_key ]; then
+            mkdir -p /var/lib/multiflexi
+            openssl rand -base64 32 > /var/lib/multiflexi/.encryption_master_key
+            chmod 640 /var/lib/multiflexi/.encryption_master_key
+            chown root:www-data /var/lib/multiflexi/.encryption_master_key
+            echo "Created encryption master key at /var/lib/multiflexi/.encryption_master_key"
+        fi
+
         # Run GDPR Article 16 database migration
         if [ -f /usr/share/multiflexi/gdpr-article16-migration.php ]; then
             cd /usr/share/multiflexi
