@@ -27,9 +27,6 @@ cs: ## ✨ Update Coding Standards
 clean:
 	rm -rf vendor composer.lock db/multiflexi.sqlite src/*/*dataTables*
 
-.PHONY: probeapp
-probeapp: ## 🌱 Run database seeds
-	multiflexi-cli application import-json --json tests/multiflexi_probe.multiflexi.app.json
 
 .PHONY: docs
 docs: ## 📚 Build Sphinx HTML documentation
@@ -98,14 +95,6 @@ baseline: ## 📊 Generate phpstan baseline
 phpunit: ## 🧪 Run phpunit tests with custom configuration
 	vendor/bin/phpunit -c tests/configuration.xml tests/
 
-probeimage: ## 🔍 Build probe image with podman
-	podman build -f Containerfile.probe . -t docker.io/vitexsoftware/multiflexi-probe
-
-probeimagex: ## 🌐 Build and push multi-arch probe image
-	docker buildx build -f Containerfile.probe . --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag docker.io/vitexsoftware/multiflexi-probe
-
-instprobe: ## 🔧 Install probe application from JSON
-	multiflexi-json2app tests/multiflexi_probe.multiflexi.app.json
 
 reset: ## 🔄 Reset local branch to origin
 	git fetch origin
