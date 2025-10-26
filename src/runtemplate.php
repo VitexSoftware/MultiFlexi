@@ -35,11 +35,11 @@ if (WebPage::isPosted()) {
     $runTemplate->saveToSQL();
 
     $successConfig = ActionsChooser::formModuleCofig('success');
-    if (is_array($successConfig)) {
+    if (is_array($successConfig) && !empty($successConfig)) {
         $actions->saveModeConfigs('success', $successConfig, $runTemplate->getMyKey());
     }
     $failConfig = ActionsChooser::formModuleCofig('fail');
-    if (is_array($failConfig)) {
+    if (is_array($failConfig) && !empty($failConfig)) {
         $actions->saveModeConfigs('fail', $failConfig, $runTemplate->getMyKey());
     }
 } else {
