@@ -214,7 +214,8 @@ EOD;
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([$name, $description, $resource, $action, $isSystem ? 1 : 0]);
 
-            return $this->pdo->lastInsertId() ?: null;
+            $lastId = $this->pdo->lastInsertId();
+            return $lastId ? (int) $lastId : null;
         } catch (\Exception $e) {
             error_log('Failed to create permission: '.$e->getMessage());
 
