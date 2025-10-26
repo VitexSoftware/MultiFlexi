@@ -21,7 +21,6 @@ use Ease\Html\InputHiddenTag;
 use Ease\Html\InputTextTag;
 use Ease\Html\SpanTag;
 use Ease\TWB4\Badge;
-use Ease\TWB4\Form;
 use Ease\TWB4\FormGroup;
 use Ease\TWB4\LinkButton;
 use Ease\TWB4\Row;
@@ -39,7 +38,7 @@ use MultiFlexi\RunTplCreds;
  *
  * @no-named-arguments
  */
-class CredentialForm extends Form
+class CredentialForm extends SecureForm
 {
     public Credential $kredenc;
 

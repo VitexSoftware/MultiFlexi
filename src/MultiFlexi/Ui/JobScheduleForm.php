@@ -20,7 +20,6 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use Ease\TWB4\Form;
 use MultiFlexi\Application;
 use MultiFlexi\Company;
 
@@ -31,7 +30,7 @@ use MultiFlexi\Company;
  *
  * @no-named-arguments
  */
-class JobScheduleForm extends Form
+class JobScheduleForm extends SecureForm
 {
     private $company;
     private $app;
