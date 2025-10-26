@@ -17,7 +17,6 @@ namespace MultiFlexi\Ui;
 
 use Ease\Html\InputHiddenTag;
 use Ease\Html\InputTextTag;
-use Ease\TWB4\Form;
 use Ease\TWB4\SubmitButton;
 
 /**
@@ -27,7 +26,7 @@ use Ease\TWB4\SubmitButton;
  *
  * @no-named-arguments
  */
-class ConfFieldsForm extends Form
+class ConfFieldsForm extends SecureForm
 {
     /**
      * Specify Fields for Application.

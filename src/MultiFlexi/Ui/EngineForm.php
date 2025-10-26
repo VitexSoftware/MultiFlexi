@@ -16,13 +16,12 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 use Ease\Html\InputHiddenTag;
-use Ease\TWB4\Form;
 use MultiFlexi\Engine;
 
 /**
  * @no-named-arguments
  */
-class EngineForm extends Form
+class EngineForm extends SecureForm
 {
     public $engine;
 

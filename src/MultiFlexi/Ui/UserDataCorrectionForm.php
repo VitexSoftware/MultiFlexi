@@ -20,7 +20,6 @@ use Ease\Html\InputTag;
 use Ease\Html\TextareaTag;
 use Ease\TWB4\Alert;
 use Ease\TWB4\Badge;
-use Ease\TWB4\Form;
 use Ease\TWB4\SubmitButton;
 use MultiFlexi\Audit\UserDataAuditLogger;
 use MultiFlexi\GDPR\UserDataCorrectionRequest;
@@ -31,7 +30,7 @@ use MultiFlexi\User;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class UserDataCorrectionForm extends Form
+class UserDataCorrectionForm extends SecureForm
 {
     /**
      * User holder.

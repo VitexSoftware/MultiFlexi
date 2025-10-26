@@ -19,7 +19,6 @@ use Ease\Html\DivTag;
 use Ease\Html\InputHiddenTag;
 use Ease\Html\InputSubmitTag;
 use Ease\TWB4\Col;
-use Ease\TWB4\Form;
 use Ease\TWB4\FormGroup;
 use Ease\TWB4\Row;
 use Ease\TWB4\SubmitButton;
@@ -28,7 +27,7 @@ use MultiFlexi\Engine;
 /**
  * @no-named-arguments
  */
-class ColumnsForm extends Form
+class ColumnsForm extends SecureForm
 {
     /**
      * Šířka sloupce.

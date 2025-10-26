@@ -15,7 +15,6 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use Ease\TWB4\Form;
 use Ease\TWB4\Part;
 use MultiFlexi\Application;
 use MultiFlexi\Company;
@@ -28,7 +27,7 @@ use MultiFlexi\RunTemplate;
  *
  * @no-named-arguments
  */
-class ServicesForCompanyForm extends Form
+class ServicesForCompanyForm extends SecureForm
 {
     /**
      * Assign Services for company.
