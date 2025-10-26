@@ -4,8 +4,6 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-composer-debian multiflexi
-
 #DEBHELPER#
 
 exit 0

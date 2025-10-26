@@ -4,8 +4,6 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-composer-debian multiflexi
-
 # TODO:
 #
 #    "deb/ease-bootstrap4-widgets-abraflexi": "*",
