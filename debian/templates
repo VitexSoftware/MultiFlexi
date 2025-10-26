@@ -1,0 +1,8 @@
+Template: multiflexi/disable_consent_banner
+Type: boolean
+Default: true
+Description: Disable consent banner in MultiFlexi?
+ MultiFlexi displays a consent banner by default. This banner can be
+ disabled by setting the DISABLE_CONSENT_BANNER environment variable.
+ .
+ Would you like to disable the consent banner?

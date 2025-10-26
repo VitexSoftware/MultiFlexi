@@ -34,8 +34,14 @@ if (WebPage::isPosted()) {
     $runTemplate->setDataValue('success', serialize($succesActions));
     $runTemplate->saveToSQL();
 
-    $actions->saveModeConfigs('success', ActionsChooser::formModuleCofig('success'), $runTemplate->getMyKey());
-    $actions->saveModeConfigs('fail', ActionsChooser::formModuleCofig('fail'), $runTemplate->getMyKey());
+    $successConfig = ActionsChooser::formModuleCofig('success');
+    if (is_array($successConfig)) {
+        $actions->saveModeConfigs('success', $successConfig, $runTemplate->getMyKey());
+    }
+    $failConfig = ActionsChooser::formModuleCofig('fail');
+    if (is_array($failConfig)) {
+        $actions->saveModeConfigs('fail', $failConfig, $runTemplate->getMyKey());
+    }
 } else {
     $failActions = $runTemplate->getDataValue('fail') ? unserialize($runTemplate->getDataValue('fail')) : [];
     $succesActions = $runTemplate->getDataValue('success') ? unserialize($runTemplate->getDataValue('success')) : [];
