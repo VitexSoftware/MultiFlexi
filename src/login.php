@@ -71,14 +71,14 @@ if ($login && $_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Rate limiting check
         if (isset($GLOBALS['rateLimiter'])) {
-            $isAllowed = $GLOBALS['rateLimiter']->checkRateLimit(
+            $result = $GLOBALS['rateLimiter']->checkRateLimit(
                 $_SERVER['REMOTE_ADDR'],
                 'login_attempt',
-                10, // max 10 attempts
-                900, // in 15 minutes
+                null,
+                Shared::user()->getUserID(),
             );
 
-            if (!$isAllowed) {
+            if (!$result['allowed']) {
                 Shared::user()->addStatusMessage(_('Too many login attempts. Please try again later.'), 'error');
             } else {
                 if (Shared::user()->tryToLogin($_POST)) {
