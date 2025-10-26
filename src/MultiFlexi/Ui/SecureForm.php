@@ -33,7 +33,7 @@ class SecureForm extends \Ease\TWB4\Form
      */
     public function __construct($properties = [], $formContents = null, $tagProperties = [])
     {
-        parent::__construct($properties, $formContents, $tagProperties);
+        parent::__construct($properties, $tagProperties, $formContents);
 
         // Add CSRF token automatically
         $this->addCSRFToken();
