@@ -57,7 +57,7 @@ $actionsRow->addTab(_('Success Actions'), new ActionsChooser('success', $app, $s
 $actionsRow->addTab(_('Fail Actions'), new ActionsChooser('fail', $app, $failActions), (bool) $periodcalTaskInfo['fail']);
 
 $appPanel->addItem($actionsRow);
-$jobtempform = new \Ease\TWB4\Form();
+$jobtempform = new SecureForm();
 $jobtempform->addItem(new \Ease\Html\InputHiddenTag('app', $periodcalTaskInfo['app_id']));
 $jobtempform->addItem(new \Ease\Html\InputHiddenTag('company_id', $periodcalTaskInfo['company_id']));
 $jobtempform->addItem(new \Ease\Html\InputHiddenTag('interval', $periodcalTaskInfo['interv']));
