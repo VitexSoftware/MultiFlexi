@@ -16,15 +16,15 @@ configure)
     if [ ! -d "/var/lib/multiflexi" ]; then
         mkdir -p /var/lib/multiflexi
     fi
-    chown www-data:www-data /var/lib/multiflexi
-    chmod 750 /var/lib/multiflexi
+    chown multiflexi:www-data /var/lib/multiflexi
+    chmod 755 /var/lib/multiflexi
 
     # Generate encryption master key if not exists and MULTIFLEXI_MASTER_KEY is not set
     if [ ! -f "/var/lib/multiflexi/.encryption_master_key" ] && [ -z "${MULTIFLEXI_MASTER_KEY}" ]; then
         # Generate 32-byte random key and base64 encode it
         openssl rand -base64 32 > /var/lib/multiflexi/.encryption_master_key
-        chown www-data:www-data /var/lib/multiflexi/.encryption_master_key
-        chmod 600 /var/lib/multiflexi/.encryption_master_key
+        chown multiflexi:www-data /var/lib/multiflexi/.encryption_master_key
+        chmod 660 /var/lib/multiflexi/.encryption_master_key
         echo "Generated new encryption master key at /var/lib/multiflexi/.encryption_master_key"
         echo "For production, consider setting MULTIFLEXI_MASTER_KEY environment variable instead"
     fi
