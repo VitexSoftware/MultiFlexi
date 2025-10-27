@@ -38,7 +38,7 @@ class EngineForm extends SecureForm
         $this->engine = $engine;
         $tagProperties['method'] = 'post';
         $tagProperties['name'] = $engine::class;
-        parent::__construct($tagProperties, [], $formContents);
+        parent::__construct($tagProperties, $formContents, []);
     }
 
     /**
