@@ -22,7 +22,7 @@ namespace MultiFlexi\Ui;
  *
  * @no-named-arguments
  */
-class RuntemplateCloneForm extends \Ease\TWB4\Form
+class RuntemplateCloneForm extends SecureForm
 {
     public function __construct(\MultiFlexi\RunTemplate $runtemplate)
     {

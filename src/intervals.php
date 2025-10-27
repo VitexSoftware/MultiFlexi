@@ -21,7 +21,7 @@ WebPage::singleton()->onlyForLogged();
 
 WebPage::singleton()->addItem(new PageTop(_('Intervals Setup')));
 
-$addAppForm = new \Ease\TWB4\Form();
+$addAppForm = new SecureForm();
 $addAppForm->addItem(new \Ease\Html\H1Tag(_('Periodical tasks')));
 
 $periodSelectorsRow = new \Ease\TWB4\Row();
