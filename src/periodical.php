@@ -63,7 +63,7 @@ $appsByIntrv = $runTemplater->getCompanyRunTemplatesByInterval($companer->getMyK
 
 WebPage::singleton()->addItem(new PageTop(_('Periodical tasks')));
 
-$addAppForm = new \Ease\TWB4\Form();
+$addAppForm = new SecureForm();
 $addAppForm->addItem(new \Ease\Html\H1Tag(_('Periodical tasks')));
 $addAppForm->addItem(new \Ease\Html\InputHiddenTag('company_id', $companer->getMyKey()));
 

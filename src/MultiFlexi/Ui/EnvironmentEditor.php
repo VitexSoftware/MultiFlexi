@@ -48,7 +48,7 @@ class EnvironmentEditor extends \Ease\Html\TableTag
             $tableRow->addItem(new \Ease\Html\TdTag($valueInput, ['style' => 'width: 80%']));
         }
 
-        $newItemForm = new \Ease\TWB4\Form();
+        $newItemForm = new SecureForm();
         $newItemForm->addInput(new \Ease\Html\InputTextTag('env[newkey]'), _('New Config field'), _('Keyword'), _('Create New field here'));
         $newItemForm->addInput(new \Ease\Html\InputTextTag('env[newvalue]'), _('New Config value'), _('Value'), _('Enter New field value here'));
         $newItemForm->addItem(new \Ease\TWB4\SubmitButton(_('Add new field'), 'success'));

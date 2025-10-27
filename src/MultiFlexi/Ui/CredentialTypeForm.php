@@ -22,7 +22,7 @@ namespace MultiFlexi\Ui;
  *
  * @no-named-arguments
  */
-class CredentialTypeForm extends \Ease\TWB4\Form
+class CredentialTypeForm extends SecureForm
 {
     public \MultiFlexi\CredentialType $credType;
 

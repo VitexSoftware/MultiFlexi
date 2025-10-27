@@ -104,7 +104,7 @@ if (!$success) {
     ));
     $loginPanel->body->setTagProperties(['style' => 'margin: 20px']);
 
-    $mailForm = $columnII->addItem(new \Ease\TWB4\Form(['name' => 'PasswordRecovery']));
+    $mailForm = $columnII->addItem(new SecureForm(['name' => 'PasswordRecovery']));
     $mailForm->addItem($loginPanel);
 
     if (WebPage::singleton()->isPosted()) {

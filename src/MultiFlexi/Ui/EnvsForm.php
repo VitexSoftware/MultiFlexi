@@ -22,7 +22,7 @@ namespace MultiFlexi\Ui;
  *
  * @no-named-arguments
  */
-class EnvsForm extends \Ease\TWB4\Form
+class EnvsForm extends SecureForm
 {
     public function __construct($environment = [], $formProperties = [], $formContents = null)
     {

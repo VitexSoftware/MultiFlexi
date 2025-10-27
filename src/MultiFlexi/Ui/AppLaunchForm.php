@@ -23,7 +23,7 @@ namespace MultiFlexi\Ui;
  *
  * @no-named-arguments
  */
-class AppLaunchForm extends \Ease\TWB4\Form
+class AppLaunchForm extends SecureForm
 {
     /**
      * Application Launch Form.

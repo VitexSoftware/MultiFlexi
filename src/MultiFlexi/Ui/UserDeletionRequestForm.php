@@ -25,7 +25,7 @@ use MultiFlexi\User;
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class UserDeletionRequestForm extends \Ease\TWB4\Form
+class UserDeletionRequestForm extends SecureForm
 {
     /**
      * @var User Target user for deletion

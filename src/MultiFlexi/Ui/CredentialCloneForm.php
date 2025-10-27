@@ -22,7 +22,7 @@ namespace MultiFlexi\Ui;
  *
  * @no-named-arguments
  */
-class CredentialCloneForm extends \Ease\TWB4\Form
+class CredentialCloneForm extends SecureForm
 {
     public function __construct(\MultiFlexi\Credential $runtemplate)
     {

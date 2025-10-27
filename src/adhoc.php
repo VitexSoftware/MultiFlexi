@@ -32,7 +32,7 @@ $companyApp = new \MultiFlexi\CompanyApp($companer);
 
 WebPage::singleton()->addItem(new PageTop(_('Applications used by Company')));
 
-$addAppForm = new \Ease\TWB4\Form();
+$addAppForm = new SecureForm();
 $addAppForm->addItem(new \Ease\Html\InputHiddenTag('company_id', $companer->getMyKey()));
 
 $assignedRaw = $companyApp->getAssigned()->fetchAll('app_id');

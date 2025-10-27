@@ -151,9 +151,8 @@ if (\Ease\Shared::cfg('CSRF_PROTECTION_ENABLED', true) && isset($GLOBALS['csrfPr
 }
 
 // Create the actual form
-$form = new \Ease\TWB4\Form(
+$form = new SecureForm(
     ['name' => 'consent-form', 'action' => 'consent-preferences.php', 'method' => 'POST'],
-    [],
     $formContainer,
 );
 

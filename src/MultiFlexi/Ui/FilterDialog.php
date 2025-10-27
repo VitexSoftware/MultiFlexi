@@ -182,7 +182,7 @@ EOD);
         }
 
         parent::__construct(
-            new \Ease\TWB4\Form(['name' => 'filter'.$tableId], [], $columnTabs),
+            new SecureForm(['name' => 'filter'.$tableId], $columnTabs),
             ['id' => 'gridFilter'.$tableId, 'class' => 'filterOptions'],
         );
     }

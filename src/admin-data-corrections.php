@@ -115,7 +115,7 @@ if (!empty($pendingRequests)) {
         $requestPanel->addItem($detailsTable);
 
         // Review form
-        $reviewForm = new \Ease\TWB4\Form(['method' => 'POST']);
+        $reviewForm = new \MultiFlexi\Ui\SecureForm(['method' => 'POST']);
         $reviewForm->addItem(new \Ease\Html\InputHiddenTag('request_id', $request['id']));
 
         $reviewForm->addItem(new \Ease\TWB4\FormGroup([
