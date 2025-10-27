@@ -28,6 +28,8 @@ $runTemplate = new RunTemplate(WebPage::getRequestValue('id', 'int'));
 $actions = new \MultiFlexi\ActionConfig();
 
 if (WebPage::isPosted()) {
+    unset($_POST['csrf_token']);
+    unset($_REQUEST['csrf_token']);
     $succesActions = ActionsChooser::toggles('success');
     $failActions = ActionsChooser::toggles('fail');
     $runTemplate->setDataValue('fail', serialize($failActions));
