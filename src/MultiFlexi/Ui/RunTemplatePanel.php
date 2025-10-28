@@ -113,30 +113,26 @@ EOD);
     public function finalize(): void
     {
         \Ease\TWB4\Part::twBootstrapize();
-        $this->addJavaScript(<<<'EOD'
+        $csrfToken = isset($GLOBALS['csrfProtection']) ? $GLOBALS['csrfProtection']->generateToken() : '';
+        $this->addJavaScript(<<<EOD
 
 
-$('#
-EOD.$this->runtemplate->getMyKey().<<<'EOD'
-_interval').change( function(event, state) {
+$('#{$this->runtemplate->getMyKey()}_interval').change( function(event, state) {
 
     $.ajax({
         url: 'rtinterval.php',
         data: {
             runtemplate: $(this).attr("data-runtemplate"),
-                interval: $(this).val()
+            interval: $(this).val(),
+            csrf_token: '{$csrfToken}'
         },
         error: function() {
-            $('#
-EOD.$this->runtemplate->getMyKey().<<<'EOD'
-_interval').after( "⚰️" );
+            $('#{$this->runtemplate->getMyKey()}_interval').after( "⚰️" );
             console.log("not saved");
         },
 
         success: function(data) {
-            $('#
-EOD.$this->runtemplate->getMyKey().<<<'EOD'
-_interval').after( "💾" );
+            $('#{$this->runtemplate->getMyKey()}_interval').after( "💾" );
             console.log("saved");
         },
             type: 'POST'
@@ -145,29 +141,24 @@ _interval').after( "💾" );
 
 EOD);
 
-        $this->addJavaScript(<<<'EOD'
+        $this->addJavaScript(<<<EOD
 
-$('#
-EOD.$this->runtemplate->getMyKey().<<<'EOD'
-_delay').change( function(event, state) {
+$('#{$this->runtemplate->getMyKey()}_delay').change( function(event, state) {
 
 $.ajax({
    url: 'rtdelay.php',
         data: {
                 runtemplate: $(this).attr("data-runtemplate"),
-                delay: $(this).val()
+                delay: $(this).val(),
+                csrf_token: '{$csrfToken}'
         },
         error: function() {
-            $('#
-EOD.$this->runtemplate->getMyKey().<<<'EOD'
-_delay').after( "⚰️" );
+            $('#{$this->runtemplate->getMyKey()}_delay').after( "⚰️" );
             console.log("not saved");
         },
 
         success: function(data) {
-            $('#
-EOD.$this->runtemplate->getMyKey().<<<'EOD'
-_delay').after( "💾" );
+            $('#{$this->runtemplate->getMyKey()}_delay').after( "💾" );
             console.log("saved");
         },
             type: 'POST'
@@ -176,29 +167,24 @@ _delay').after( "💾" );
 
 EOD);
 
-        $this->addJavaScript(<<<'EOD'
+        $this->addJavaScript(<<<EOD
 
-$('#
-EOD.$this->runtemplate->getMyKey().<<<'EOD'
-_executor').change( function(event, state) {
+$('#{$this->runtemplate->getMyKey()}_executor').change( function(event, state) {
 
 $.ajax({
    url: 'rtexecutor.php',
         data: {
                 runtemplate: $(this).attr("data-runtemplate"),
-                executor: $(this).val()
+                executor: $(this).val(),
+                csrf_token: '{$csrfToken}'
         },
         error: function() {
-            $('#
-EOD.$this->runtemplate->getMyKey().<<<'EOD'
-_executor').after( "⚰️" );
+            $('#{$this->runtemplate->getMyKey()}_executor').after( "⚰️" );
             console.log("not saved");
         },
 
         success: function(data) {
-            $('#
-EOD.$this->runtemplate->getMyKey().<<<'EOD'
-_executor').after( "💾" );
+            $('#{$this->runtemplate->getMyKey()}_executor').after( "💾" );
             console.log("saved");
         },
             type: 'POST'
@@ -207,7 +193,7 @@ _executor').after( "💾" );
 
 EOD);
 
-        $this->addJavaScript(<<<'EOD'
+        $this->addJavaScript(<<<EOD
 
 $('#enabler').change( function(event, state) {
 
@@ -215,7 +201,8 @@ $.ajax({
    url: 'rtactive.php',
         data: {
                 runtemplate: $(this).attr("data-runtemplate"),
-                active: $(this).val()
+                active: $(this).val(),
+                csrf_token: '{$csrfToken}'
         },
         error: function() {
             $('#deactivated').before( "⚰️" );
@@ -232,30 +219,25 @@ $.ajax({
 
 EOD);
 
-        $this->addJavaScript(<<<'EOD'
+        $this->addJavaScript(<<<EOD
 
 
-$('#
-EOD.$this->runtemplate->getMyKey().<<<'EOD'
-_cron').change( function(event, state) {
+$('#{$this->runtemplate->getMyKey()}_cron').change( function(event, state) {
 
     $.ajax({
         url: 'rtcron.php',
         data: {
             runtemplate: $(this).attr("data-runtemplate"),
-                cron: $(".cronInsideInput").val()
+            cron: $(".cronInsideInput").val(),
+            csrf_token: '{$csrfToken}'
         },
         error: function() {
-            $('#
-EOD.$this->runtemplate->getMyKey().<<<'EOD'
-_cron').after( "⚰️" );
+            $('#{$this->runtemplate->getMyKey()}_cron').after( "⚰️" );
             console.log("not saved");
         },
 
         success: function(data) {
-            $('#
-EOD.$this->runtemplate->getMyKey().<<<'EOD'
-_cron').after( "💾" );
+            $('#{$this->runtemplate->getMyKey()}_cron').after( "💾" );
             console.log("saved");
         },
             type: 'POST'

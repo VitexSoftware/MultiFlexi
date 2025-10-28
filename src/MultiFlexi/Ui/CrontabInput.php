@@ -25,14 +25,14 @@ namespace MultiFlexi\Ui;
  * CrontabInput renders a cron expression input field with validation and UI enhancements.
  *
  * This class uses the cron-expression-input.min.js and cron-expression-input.min.css assets
- * to provide a user-friendly cron expression editor.
+ * to provide a user-friendly cron expression editor with Bootstrap 4.6 styling.
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
 class CrontabInput extends \Ease\Html\PairTag
 {
     /**
-     * Construct a cron expression input field.
+     * Construct a cron expression input field with Bootstrap 4.6 form styling.
      *
      * @param string $name       the input field name and id
      * @param string $value      the initial cron expression value
@@ -43,7 +43,11 @@ class CrontabInput extends \Ease\Html\PairTag
         $attributes['name'] = $name;
         $attributes['id'] = $name;
         $attributes['value'] = $value;
-        //        $attributes['class'] = 'form-control';
+        
+        // Bootstrap 4.6 form control styling
+        $existingClasses = $attributes['class'] ?? '';
+        $attributes['class'] = trim($existingClasses . ' form-control');
+        
         $attributes['color'] = 'd58512';
         $attributes['data-cron-expression-input'] = 'true';
         parent::__construct('cron-expression-input', $attributes);
@@ -56,6 +60,7 @@ class CrontabInput extends \Ease\Html\PairTag
     {
         // These should be called from the page controller or panel
         \Ease\WebPage::singleton()->includeCss('css/cron-expression-input.min.css');
+        \Ease\WebPage::singleton()->includeCss('css/cron-expression-input-custom.css');
         \Ease\WebPage::singleton()->includeJavaScript('js/cron-expression-input.min.js');
     }
 }

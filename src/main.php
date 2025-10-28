@@ -25,26 +25,16 @@ WebPage::singleton()->container->addItem(new CompaniesBar());
 
 WebPage::singleton()->container->addItem(new AllJobsLastMonthChart(new \MultiFlexi\Job(), ['id' => 'container']));
 
-WebPage::singleton()->container->addItem(new \Ease\TWB4\Panel(_('Last 20 Jobs'), 'default', new JobHistoryTable(), new DbStatus()));
+$engine = new \MultiFlexi\CompanyJobLister();
+WebPage::singleton()->container->addItem(new DBDataTable($engine));
 
 WebPage::singleton()->addItem(new PageBottom('jobs'));
 
 WebPage::singleton()->addJavaScript(<<<'EOD'
 
-    function updateJobHistoryTable() {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'jobhistorytable.php', true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var parser = new DOMParser();
-                var oldContent = document.evaluate('/html/body/div[2]/div[2]/div[2]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-                oldContent.innerHTML = xhr.responseText;
-            }
-        };
-        xhr.send();
-    }
-
-    setInterval(updateJobHistoryTable, 60000); // Update every 60 seconds
+    setInterval(function () {
+      Molecule.ajax.reload();
+    }, 60000);
 
 EOD);
 

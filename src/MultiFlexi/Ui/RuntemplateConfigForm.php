@@ -113,17 +113,4 @@ class RuntemplateConfigForm extends EngineForm
         $this->addItem($saveRow);
     }
 
-    public static function allForms(): array
-    {
-        $formTypes = [];
-        \Ease\Functions::loadClassesInNamespace('MultiFlexi\Ui\Form');
-
-        foreach (\Ease\Functions::classesInNamespace('MultiFlexi\Ui\Form') as $formAvailble) {
-            $formClass = '\\MultiFlexi\\Ui\\Form\\'.$formAvailble;
-
-            $formTypes[$formAvailble] = $formClass::name();
-        }
-
-        return $formTypes;
-    }
 }

@@ -33,7 +33,7 @@ if (\array_key_exists(1, $argv) && file_exists($argv[1])) {
     $apper = new Application($argc === 3 ? (int) ($argv[3]) : null);
 
     if (\Ease\Shared::cfg('APP_DEBUG')) {
-        $apper->logBanner();
+        $apper->logBanner($argv[1]);
     }
 
     if (empty($apper->importAppJson($argv[1]))) {
