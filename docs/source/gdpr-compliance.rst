@@ -39,6 +39,7 @@ MultiFlexi implements GDPR compliance through four structured phases:
   Automated data lifecycle management with retention policies and secure deletion procedures.
 
 .. note::
+
    Phase 4 implementation is complete with comprehensive compliance documentation available in the ``docs/gdpr/`` directory.
 
 Core Documentation

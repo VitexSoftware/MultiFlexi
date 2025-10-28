@@ -63,14 +63,16 @@ class UserDataCorrectionRequest extends \Ease\Sand
     public string $keyColumn = 'id';
 
     /**
-     * Creation timestamp column.
+     * Constructor.
+     *
+     * @param mixed $identifier Record identifier
      */
-    public string $createColumn = 'created_at';
-
-    /**
-     * Last modified timestamp column.
-     */
-    public string $lastModifiedColumn = 'updated_at';
+    public function __construct($identifier = null)
+    {
+        $this->createColumn = 'created_at';
+        $this->lastModifiedColumn = 'updated_at';
+        parent::__construct($identifier);
+    }
 
     /**
      * Create a new correction request.
