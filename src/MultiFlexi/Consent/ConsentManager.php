@@ -44,8 +44,6 @@ class ConsentManager extends \MultiFlexi\Engine
     public const ACTION_DENIED = 'denied';
     public const ACTION_WITHDRAWN = 'withdrawn';
     public const ACTION_UPDATED = 'updated';
-    public ?string $createColumn = 'DatCreate';
-    public ?string $lastModifiedColumn = 'DatSave';
 
     /**
      * Default consent expiration in days.
