@@ -235,6 +235,54 @@ The project follows PSR-12 coding standards and includes:
 - PHPUnit for testing
 - Internationalization support using `_()` functions
 
+### PHP 8.2+ Compatibility Requirements
+
+**Property Declaration (Critical)**
+
+PHP 8.2+ requires all class properties to be explicitly declared before use. Dynamic property creation is deprecated and will cause warnings.
+
+**Common ORM Properties:**
+
+When extending classes that use `\Ease\SQL\Orm` trait, always declare these properties at the class level:
+
+```php
+class MyClass extends \MultiFlexi\Engine
+{
+    use \Ease\SQL\Orm;
+
+    /**
+     * Creation timestamp column name.
+     */
+    public ?string $createColumn = null;
+
+    /**
+     * Last modified timestamp column name.
+     */
+    public ?string $lastModifiedColumn = null;
+
+    public function __construct($identifier = null)
+    {
+        $this->myTable = 'my_table';
+        $this->createColumn = 'created_at';
+        $this->lastModifiedColumn = 'updated_at';
+        parent::__construct($identifier);
+    }
+}
+```
+
+**Why This Matters:**
+- PHP's `__sleep()` method (used for serialization) expects declared properties
+- Session storage and caching trigger object serialization
+- Undeclared properties cause deprecation warnings in PHP 8.2+
+- Will become fatal errors in PHP 9.0
+
+**Best Practices:**
+1. Declare all properties at the class level with appropriate types
+2. Initialize nullable properties to `null`
+3. Set actual values in the constructor
+4. Never rely on dynamic property creation
+5. Run code on PHP 8.2+ during development to catch issues early
+
 ## Testing
 
 Test applications are located in the `tests/` directory:
