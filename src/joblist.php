@@ -20,7 +20,7 @@ WebPage::singleton()->onlyForLogged();
 WebPage::singleton()->addItem(new PageTop(_('Job history')));
 $appId = WebPage::singleton()->getRequestValue('app_id');
 $companyId = WebPage::singleton()->getRequestValue('company_id');
-$engine = new \MultiFlexi\CompanyJob();
+$engine = new \MultiFlexi\CompanyJobLister();
 $engine->setCompany($companyId);
 $engine->setApp($appId);
 WebPage::singleton()->addJavaScript(<<<'EOD'

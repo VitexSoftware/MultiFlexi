@@ -1,0 +1,112 @@
+/* Custom styling for cron expression input to improve visual appearance */
+
+/* Add spacing and cleaner layout for the cron tabs */
+cron-expression-input .nav-tabs {
+    margin-bottom: 1.5rem !important;
+}
+
+cron-expression-input .nav-link {
+    font-weight: 500 !important;
+    padding: 0.75rem 1.5rem !important;
+}
+
+/* Improve checkbox/radio button spacing and layout */
+cron-expression-input .container {
+    display: inline-block !important;
+    margin-right: 0.5rem !important;
+    margin-bottom: 0.75rem !important;
+    padding-left: 25px !important;
+}
+
+cron-expression-input .checkmark {
+    height: 18px !important;
+    width: 18px !important;
+}
+
+cron-expression-input .container .numberValue {
+    margin-left: 0.25rem !important;
+    font-weight: 500 !important;
+}
+
+/* Add more vertical spacing between rows */
+cron-expression-input .tab-pane > div {
+    margin-bottom: 1rem !important;
+}
+
+/* Improve radio button groups spacing */
+cron-expression-input input[type=radio] {
+    margin-right: 0.5rem !important;
+}
+
+/* Add some padding to select dropdowns */
+cron-expression-input select.form-control {
+    margin: 0 0.5rem !important;
+    width: auto !important;
+    display: inline-block !important;
+}
+
+/* Style the step and range sections better */
+cron-expression-input label {
+    font-weight: 600 !important;
+    color: #495057 !important;
+    margin-right: 0.5rem !important;
+}
+
+/* Grid layout for choice checkboxes */
+cron-expression-input .tab-pane {
+    display: block !important;
+    padding: 1rem !important;
+}
+
+/* Make the checkbox grid more compact and organized */
+cron-expression-input .container {
+    min-width: 60px !important;
+}
+
+/* Add better visual separation between sections */
+cron-expression-input .tab-pane > div:not(:last-child) {
+    border-bottom: 1px solid #e9ecef !important;
+    padding-bottom: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+/* Improve the modal appearance */
+cron-expression-input .modal-header {
+    background-color: #f8f9fa !important;
+}
+
+cron-expression-input .modal-title {
+    font-weight: 600 !important;
+    color: #212529 !important;
+}
+
+/* Better button styling */
+cron-expression-input .cronInput button {
+    background-color: #007bff !important;
+    color: white !important;
+    border: 1px solid #007bff !important;
+    padding: 0.375rem 0.75rem !important;
+}
+
+cron-expression-input .cronInput button:hover {
+    background-color: #0056b3 !important;
+    border-color: #0056b3 !important;
+}
+
+/* Responsive grid for number choices */
+cron-expression-input .tab-pane {
+    max-width: 100% !important;
+}
+
+/* Make the checkbox grid responsive and cleaner */
+@media (min-width: 768px) {
+    cron-expression-input .container {
+        min-width: 70px !important;
+    }
+}
+
+/* Add some hover effects */
+cron-expression-input .container:hover {
+    background-color: rgba(0, 123, 255, 0.05) !important;
+    border-radius: 0.25rem !important;
+}

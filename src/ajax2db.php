@@ -41,7 +41,12 @@ $engine = new $class();
 // DataTables PHP library
 // include( './lib/DataTables.php' );
 // if (WebPage::singleton()->getRequestValue('columns')) {
-echo json_encode($engine->getAllForDataTable($_REQUEST));
+
+// Remove CSRF token from request data before passing to database engine
+$requestData = $_REQUEST;
+unset($requestData['csrf_token']);
+
+echo json_encode($engine->getAllForDataTable($requestData));
 // } else {
 //    $editor = new DataTableSaver($db, $engine);
 //    $editor->process($_POST)->json();

@@ -357,9 +357,25 @@ EOD._('All pages').<<<'EOD'
 
 EOD.$this->engine->tableCode($tableID).<<<'EOD'
 
-        ajax: { "url": "
+        ajax: {
+            "url": "
 EOD.$this->ajax2db.<<<'EOD'
-", "type": "POST" },
+",
+            "type": "POST",
+            "data": function(d) {
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                if (csrfToken) {
+                    d.csrf_token = csrfToken;
+                }
+                return d;
+            },
+            "beforeSend": function(xhr) {
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                if (csrfToken) {
+                    xhr.setRequestHeader('X-CSRF-Token', csrfToken);
+                }
+            }
+        },
         //ajax: loadDataTableData(data, callback, settings),
 
 EOD.$this->engine->columnDefs().<<<'EOD'
@@ -414,7 +430,22 @@ EOD;
             $name = $properties['name'];
             $properties['valueColumn'] = \array_key_exists('valueColumn', $properties) ? addslashes($properties['valueColumn']) : $properties['name'];
             $properties['data'] = $name;
-            $parts[] = '{'.\Ease\Part::partPropertiesToString($properties).'}';
+            
+            // Extract render function if present (to avoid quoting it)
+            $renderFunction = null;
+            if (isset($properties['render'])) {
+                $renderFunction = $properties['render'];
+                unset($properties['render']);
+            }
+            
+            $columnDef = \Ease\Part::partPropertiesToString($properties);
+            
+            // Add render function without quotes
+            if ($renderFunction !== null) {
+                $columnDef .= ($columnDef ? ', ' : '') . 'render: ' . $renderFunction;
+            }
+            
+            $parts[] = '{' . $columnDef . '}';
         }
 
         return implode(", \n", $parts);
