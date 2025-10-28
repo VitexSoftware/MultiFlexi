@@ -225,6 +225,31 @@ MultiFlexi implements GDPR compliance in phases:
 - `RETENTION_ARCHIVE_PATH`: Path for archived data storage (default: /var/lib/multiflexi/archives)
 - `RETENTION_CLEANUP_SCHEDULE`: Cron expression for automated cleanup (default: 0 2 * * *)
 
+## User Interface Design
+
+### Responsive Menu Implementation
+
+The main navigation menu (`src/MultiFlexi/Ui/MainMenu.php`) implements a responsive Bootstrap 4 navbar with the following design:
+
+**Desktop Layout:**
+- Full horizontal menu bar with dropdown menus
+- Search form visible inline on the right side
+- Language selector on far right
+
+**Mobile Layout:**
+- Hamburger toggle button for collapsible menu
+- Search form remains visible outside the collapsible section
+- Compact layout with 100px search input width
+- All menu items collapse into hamburger menu
+
+**Search Form Placement:**
+The search form is intentionally placed outside the navbar collapse div using `$nav->addItem()` rather than `$nav->addMenuItem()`. This ensures the search functionality remains accessible on all screen sizes without being hidden in the collapsed mobile menu.
+
+**Styling Considerations:**
+- Form uses `flex-wrap: nowrap` to prevent element wrapping
+- Compact spacing (`mr-1`, `ml-1`) for tight mobile layout
+- Fixed input width (100px) optimized for mobile screens
+
 ## Code Quality Standards
 
 The project follows PSR-12 coding standards and includes:
