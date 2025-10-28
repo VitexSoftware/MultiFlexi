@@ -103,6 +103,7 @@ class MainMenu extends \Ease\Html\DivTag
                 WebPage::singleton()->addStatusMessage(_('My Task Launcher systemd service is not running. Consider `systemctl start multiflexi-executor`'), 'warning');
             }
 
+            // Add search form outside collapsible menu to keep it always visible
             $nav->addItem($this->searchFrom());
         }
 
@@ -262,10 +263,10 @@ EOD);
             $search = '#';
         }
 
-        $searchForm = new SecureForm(['class' => 'form-inline my-2 my-lg-0', 'action' => 'search.php']);
-        $searchForm->addItem(new \Ease\Html\InputTextTag('search', $search, ['aria-label' => _('Search'), 'class' => 'form-control mr-sm-2', 'type' => 'search', 'placeholder' => _('Search'), 'title' => _('#number to jump on record')]));
+        $searchForm = new SecureForm(['class' => 'form-inline my-2 my-lg-0', 'action' => 'search.php', 'style' => 'flex-wrap: nowrap;']);
+        $searchForm->addItem(new \Ease\Html\InputTextTag('search', $search, ['aria-label' => _('Search'), 'class' => 'form-control mr-1', 'type' => 'search', 'placeholder' => _('Search'), 'title' => _('#number to jump on record'), 'style' => 'width: 100px;']));
         $searchForm->addItem(new SearchSelect('what', [], $search));
-        $searchForm->addItem(new \Ease\Html\ButtonTag(_('Search'), ['class' => 'btn btn-outline-success my-2 my-sm-0']));
+        $searchForm->addItem(new \Ease\Html\ButtonTag(_('Search'), ['class' => 'btn btn-outline-success ml-1', 'type' => 'submit']));
 
         return $searchForm;
     }
