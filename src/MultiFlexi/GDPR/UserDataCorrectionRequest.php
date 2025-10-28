@@ -63,6 +63,16 @@ class UserDataCorrectionRequest extends \Ease\Sand
     public string $keyColumn = 'id';
 
     /**
+     * Creation timestamp column name.
+     */
+    public ?string $createColumn = null;
+
+    /**
+     * Last modified timestamp column name.
+     */
+    public ?string $lastModifiedColumn = null;
+
+    /**
      * Constructor.
      *
      * @param mixed $identifier Record identifier

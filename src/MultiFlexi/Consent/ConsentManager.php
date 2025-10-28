@@ -46,6 +46,16 @@ class ConsentManager extends \MultiFlexi\Engine
     public const ACTION_UPDATED = 'updated';
 
     /**
+     * Creation timestamp column name.
+     */
+    public ?string $createColumn = null;
+
+    /**
+     * Last modified timestamp column name.
+     */
+    public ?string $lastModifiedColumn = null;
+
+    /**
      * Default consent expiration in days.
      */
     private int $defaultExpirationDays = 365;
