@@ -227,6 +227,43 @@ MultiFlexi implements GDPR compliance in phases:
 
 ## User Interface Design
 
+### Activation Wizard
+
+The Activation Wizard (`src/activation-wizard.php`) provides a guided 7-step process for activating applications in companies:
+
+**Step 1: Choose Company** - Select the company where the application will be activated
+**Step 2: Choose Application** - Select an enabled application from the catalog
+**Step 3: Create RunTemplate** - Define the RunTemplate name and execution interval
+**Step 4: Assign Credentials** - Bind required credentials (mServer, SQLServer, etc.) to the RunTemplate
+**Step 5: Configure** - Set application-specific configuration parameters
+  - Fields populated from credentials are displayed as disabled with credential type logos
+  - Values are automatically inherited from assigned credentials
+**Step 6: Actions** - Configure success and failure actions (Zabbix, WebHook, Custom Commands, etc.)
+**Step 7: Summary** - Review complete configuration with action buttons:
+  - ⚗️ View RunTemplate - Navigate to the RunTemplate detail page
+  - 📅 Schedule - Launch the scheduling interface for this RunTemplate
+  - 📋 All RunTemplates - View the complete list of RunTemplates
+  - 🌟 New Activation - Start a new activation wizard
+
+**Key Features:**
+- Session-based wizard state management
+- Credential-aware configuration with visual indicators
+- Real-time validation and error handling
+- Support for credential binding and credential type logos
+- Prevents duplicate credential bindings
+- Automatic cleanup of wizard session data on completion
+
+**Navigation:**
+- Access from main menu: "🧙 Activation Wizard"
+- Access from RunTemplates page: "Activation Wizard" button
+- Access from Company panel: "🧙🏽‍♂️ Launch wizard" button
+- Direct URL: `activation-wizard.php?reset=1` (starts fresh)
+
+**Implementation:**
+- Component: `src/MultiFlexi/Ui/ActivationWizard.php`
+- Handler: `src/activation-wizard.php`
+- Related: Credential assignment via `MultiFlexi\RunTplCreds`
+
 ### Responsive Menu Implementation
 
 The main navigation menu (`src/MultiFlexi/Ui/MainMenu.php`) implements a responsive Bootstrap 4 navbar with the following design:

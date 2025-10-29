@@ -20,7 +20,7 @@ namespace MultiFlexi;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class RunTemplateLister extends MultiFlexi\RunTemplate
+class RunTemplateLister extends RunTemplate
 {
     public function columns($columns = [])
     {

@@ -125,6 +125,7 @@ class MainMenu extends \Ease\Html\DivTag
             $appsMenu['apps.php'] = '🧩'._('Application list');
         }
 
+        $appsMenu['activation-wizard.php'] = '🧙'._('Activation Wizard');
         $appsMenu['runtemplates.php'] = '⚗️'._('RunTemplates');
 
         $nav->addDropDownMenu(
