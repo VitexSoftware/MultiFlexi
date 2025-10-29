@@ -17,6 +17,9 @@ namespace MultiFlexi;
 
 use MultiFlexi\Consent\ConsentManager;
 
+// Disable CSRF protection for consent API (must work for anonymous users)
+\define('BYPASS_CSRF_PROTECTION', true);
+
 require_once 'init.php';
 
 header('Content-Type: application/json');
