@@ -39,6 +39,7 @@ class IntervalChooser extends \Ease\Html\SelectTag
             'w' => RunTemplate::getIntervalEmoji('w').' '._('Weekly'),
             'm' => RunTemplate::getIntervalEmoji('m').' '._('Monthly'),
             'y' => RunTemplate::getIntervalEmoji('y').' '._('Yearly'),
+            'c' => RunTemplate::getIntervalEmoji('c').' '._('Custom'),
         ], $defaultValue, $properties);
     }
 }

@@ -247,7 +247,7 @@ class CompanyJobLister extends CompanyJob {
     {
         return <<<'EOD'
 
- "order": [[ 1, "asc" ]],
+ "order": [[ 0, "desc" ]],
 
 EOD;
     }
