@@ -54,8 +54,8 @@ if (class_exists('\MultiFlexi\Security\SessionManager')) {
         $csrfProtection = new \MultiFlexi\Security\CsrfProtection($sessionManager);
         $GLOBALS['csrfProtection'] = $csrfProtection;
 
-        // Validate CSRF for POST requests
-        if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' && \Ease\Shared::cfg('CSRF_PROTECTION_ENABLED', true)) {
+        // Validate CSRF for POST requests (unless explicitly bypassed)
+        if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' && \Ease\Shared::cfg('CSRF_PROTECTION_ENABLED', true) && !\defined('BYPASS_CSRF_PROTECTION')) {
             $csrfProtection->middleware();
         }
     }
