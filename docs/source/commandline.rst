@@ -12,7 +12,7 @@ MultiFlexi provides several command line utilities to manage and interact with t
     - Converts application configuration to JSON format.
 
 2. **multiflexi-cli**
-    - Command line interface for interacting with MultiFlexi. For more details, see :doc:`multiflexi-cli` and :doc:`credential-type`.
+    - Command line interface for interacting with MultiFlexi. Includes system status command (``multiflexi-cli status``), telemetry testing (``multiflexi-cli telemetry:test``), and comprehensive entity management. For more details, see :doc:`multiflexi-cli` and :doc:`credential-type`.
 
 3. **multiflexi-executor**
     - Executes scheduled jobs and tasks.
@@ -38,7 +38,17 @@ MultiFlexi provides several command line utilities to manage and interact with t
 10. **multiflexi-probe**
     - Probes the system for status and health checks.
 
-11. **multiflexi-cli credtype import**
+11. **multiflexi-cli status**
+    - Displays MultiFlexi system status including database configuration, system services, entity counts, Zabbix monitoring, and OpenTelemetry telemetry configuration.
+    - Usage:
+
+      .. code-block:: bash
+
+         multiflexi-cli status
+
+    - See :doc:`multiflexi-cli` for complete details.
+
+12. **multiflexi-cli credtype import**
     - Imports a credential type definition from a JSON file into MultiFlexi.
     - Usage:
 
@@ -48,22 +58,22 @@ MultiFlexi provides several command line utilities to manage and interact with t
 
     - See :doc:`credential-type` for schema details.
 
-12. **multiflexi-scheduler**
+13. **multiflexi-scheduler**
     - Schedules jobs and tasks for execution.
 
-13. **multiflexi-trigger**
+14. **multiflexi-trigger**
     - Triggers specific actions or jobs.
 
-14. **multiflexi-zabbix-lld**
+15. **multiflexi-zabbix-lld**
     - Generates Zabbix Low-Level Discovery (LLD) data.
 
-15. **multiflexi-zabbix-lld-actions**
+16. **multiflexi-zabbix-lld-actions**
     - Manages Zabbix LLD actions.
 
-16. **multiflexi-zabbix-lld-company**
+17. **multiflexi-zabbix-lld-company**
     - Manages Zabbix LLD company data.
 
-17. **multiflexi-zabbix-lld-tasks**
+18. **multiflexi-zabbix-lld-tasks**
     - Manages Zabbix LLD tasks.
 
 Each utility serves a specific purpose and can be used to automate and manage various aspects of the MultiFlexi system. For detailed usage and options, refer to the respective utility's help command.
