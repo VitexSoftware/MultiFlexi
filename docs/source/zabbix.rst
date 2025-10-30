@@ -112,11 +112,39 @@ Import the provided Zabbix template with pre-configured items, triggers, and gra
 
 The template includes:
 
-- Job execution status items
-- Application availability items  
-- Performance metrics
-- Pre-configured triggers for job failures
-- Dashboard graphs
+- **System Status Items**: Database configuration, service status, entity counts
+- **Job Monitoring**: Job execution status and statistics
+- **Company Discovery**: Automatic discovery of companies/tenants
+- **RunTemplate Discovery**: Application and company-specific job monitoring
+- **Action Discovery**: Monitoring of Zabbix actions configured in RunTemplates
+- **Pre-configured Triggers**: Job failures, low success rates, service down alerts
+- **Performance Graphs**: Entity statistics and job execution metrics
+- **HTTP Tests**: Web interface availability monitoring
+
+**Template Features:**
+
+- Compatible with Zabbix 6.0+
+- Low-Level Discovery (LLD) for dynamic monitoring
+- Dependent items using JSONPath for efficient data extraction
+- Value mapping for human-readable status
+- Customizable macros for thresholds
+
+**Zabbix Agent Configuration:**
+
+The Zabbix agent configuration is automatically installed at ``/etc/zabbix/zabbix_agent2.d/multiflexi.conf`` with the following UserParameters:
+
+- ``multiflexi.company.lld`` - Company discovery
+- ``multiflexi.job.lld`` - Job/task discovery
+- ``multiflexi.runtemplate.lld[*]`` - RunTemplate discovery
+- ``multiflexi.action.lld`` - Action discovery
+- ``multiflexi.appstatus`` - System status (JSON format)
+- ``multiflexi.jobstatus`` - Job status summary (JSON format)
+
+Restart Zabbix agent after package installation:
+
+.. code-block:: bash
+
+   systemctl restart zabbix-agent2
 
 Usage
 -----

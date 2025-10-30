@@ -1,4 +1,5 @@
 zabbix/multiflexi.conf 				etc/zabbix/zabbix_agent2.d
+zabbix/multiflexi-template.xml                  usr/share/multiflexi/zabbix-templates
 
 #moved to core:
 #src/MultiFlexi/Zabbix/*.php             	usr/lib/multiflexi/MultiFlexi/Zabbix/
