@@ -80,7 +80,12 @@ class MainMenu extends \Ease\Html\DivTag
             $this->adminMenuEnabled($nav);
             // $nav->addMenuItem(new \Ease\Html\ATag('logs.php', '<img height=30 src=images/log.svg> ' . _('Logs')), 'right');
 
-            $nav->addDropDownMenu('<img height=30 src=images/log.svg> '._('Logs'), ['logs.php' => _('System'), 'joblist.php' => _('Jobs')]);
+            $nav->addDropDownMenu('<img height=30 src=images/log.svg> '._('Logs'), [
+                'logs.php' => '📖&nbsp;'. _('System'), 
+                'joblist.php' => '🏁&nbsp;'. _('Jobs'),
+                'queue.php' => '⏳&nbsp;'._('Job queue'),
+                'dashboard.php' => '📋&nbsp;'._('Dashboard'),
+                ]);
 
             // Privacy menu with dropdown
             $privacyMenu = [
@@ -207,7 +212,6 @@ class MainMenu extends \Ease\Html\DivTag
                 'credtypes.php' => '🔐&nbsp;'._('Credential Type helpers'),
                 'intervals.php' => '♻️&nbsp;'._('Intervals'),
                 'requirements.php' => '🔘&nbsp;'._('Requirements'),
-                'queue.php' => '⏳&nbsp;'._('Job queue'),
                 '' => '',
                 'data-retention-admin.php' => '🗂️&nbsp;'._('Data Retention Management'),
                 'admin-deletion-requests.php' => '🗑️&nbsp;'._('Deletion Requests'),
