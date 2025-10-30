@@ -386,6 +386,7 @@ OpenTelemetry Not Exporting Metrics
 
 .. code-block:: bash
 
+   multiflexi-cli status
    multiflexi-cli telemetry:test
 
 **Check 2: Verify Endpoint Connectivity**

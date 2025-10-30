@@ -56,7 +56,8 @@ The MultiFlexi CLI provides the following main commands:
 - **credtype** - Credential type operations
 - **companyapp** - Manage company-application relations
 - **queue** - Job queue operations
-- **appstatus** - System status information
+- **status** - System status information (includes database, Zabbix, and OpenTelemetry monitoring)
+- **telemetry:test** - Test OpenTelemetry metrics export
 - **describe** - List all available commands and their parameters
 - **prune** - Prune logs and jobs, keeping only the latest N records (default: 1000)
 - **retention** - GDPR data retention management (calculate, cleanup, reporting)
@@ -552,14 +553,92 @@ List all available commands and their parameters.
 
     multiflexi-cli describe
 
-appstatus
----------
+status
+------
 
-Prints App Status.
+Prints MultiFlexi system status including database configuration, migrations, system services, entity counts, Zabbix monitoring, and OpenTelemetry telemetry configuration.
 
 .. code-block:: bash
 
-    multiflexi-cli appstatus
+    multiflexi-cli status [--format=text|json]
+
+Options:
+  -f, --format   Output format: text or json (default: text)
+
+Example Output:
+
+.. code-block:: text
+
+    db_host: localhost
+    db_port: 3306
+    db_database: multiflexi
+    db_driver: mysql
+    migrations_path: /home/vitex/Projects/Multi/multiflexi-database/db/migrations
+    migrations_executed: 42
+    multiflexi_server: running
+    multiflexi_scheduler: running
+    multiflexi_executor: running
+    applications: 15
+    companies: 8
+    runtemplates: 23
+    jobs: 156
+    zabbix: multiflexi-server => zabbix.example.com
+    telemetry: enabled (multiflexi, http://otel-collector:4318, http/json)
+
+Field Descriptions:
+
+- **db_*** - Database connection parameters
+- **migrations_*** - Database migration status
+- **multiflexi_*** - Status of MultiFlexi system services (running, stopped, or not found)
+- **applications/companies/runtemplates/jobs** - Count of entities in the system
+- **zabbix** - Zabbix monitoring status (see below)
+- **telemetry** - OpenTelemetry configuration status (see below)
+
+Zabbix Status Values:
+
+- ``disabled`` - Zabbix monitoring is not configured
+- ``monitored_hostname => zabbix_server`` - Monitoring is active, showing the monitored host and Zabbix server
+
+OpenTelemetry Status Values:
+
+- ``disabled`` - OpenTelemetry is not enabled
+- ``enabled (SDK not installed)`` - Enabled but SDK packages are missing
+- ``enabled (service_name, endpoint, protocol)`` - Fully configured and operational
+
+telemetry:test
+--------------
+
+Test OpenTelemetry metrics export by sending sample metrics to the configured OTLP endpoint. This command helps verify that OpenTelemetry integration is working correctly.
+
+.. code-block:: bash
+
+    multiflexi-cli telemetry:test [--endpoint=URL] [--disable-gauges] [--format=text|json]
+
+Options:
+  --endpoint        Override OTLP endpoint URL (default: from OTEL_EXPORTER_OTLP_ENDPOINT)
+  --disable-gauges  Disable observable gauge metrics (useful for testing without full system state)
+  -f, --format      Output format: text or json (default: text)
+
+Example:
+
+.. code-block:: bash
+
+    # Test with default configuration
+    multiflexi-cli telemetry:test
+    
+    # Test with custom endpoint
+    multiflexi-cli telemetry:test --endpoint=http://localhost:4318
+    
+    # Test without gauge metrics
+    multiflexi-cli telemetry:test --disable-gauges
+
+This command will:
+
+1. Check if OpenTelemetry SDK is installed
+2. Attempt to export sample metrics (counters, histograms, and optionally gauges)
+3. Report success or failure with detailed error information
+
+For complete OpenTelemetry integration documentation, see :doc:`opentelemetry`.
 
 Credential Type Import
 ----------------------
