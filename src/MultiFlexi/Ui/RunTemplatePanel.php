@@ -96,7 +96,19 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         '</button>'
 
 EOD);
-        $this->addJavaScript("$('.editable').editable();", '', true);
+        $this->addJavaScript(<<<'EOD'
+      // Configure editable to send CSRF token
+      $.fn.editable.defaults.ajaxOptions = {
+        beforeSend: function(xhr) {
+          var token = $('meta[name="csrf-token"]').attr('content');
+          if (token) {
+            xhr.setRequestHeader('X-CSRF-Token', token);
+          }
+        }
+      };
+      $('.editable').editable();
+EOD
+        , '', true);
 
         $runtemplateTabs = new \Ease\TWB4\Tabs();
         $runtemplateTabs->addTab(_('Jobs'), [$runtemplateJobs, new RunTemplateJobsLastMonthChart($runtemplate)]);
