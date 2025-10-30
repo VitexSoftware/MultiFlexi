@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MultiFlexi\n"
-"POT-Creation-Date: 2025-10-18 12:25+0200\n"
-"PO-Revision-Date: 2025-10-18 12:26+0200\n"
+"POT-Creation-Date: 2025-10-30 11:50+0100\n"
+"PO-Revision-Date: 2025-10-30 11:52+0100\n"
 "Last-Translator: Vítězslav Dvořák <vitex@vitexsoftware.cz>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -26,12 +26,12 @@ msgid "Account is disabled"
 msgstr "Account is disabled"
 
 #: src/MultiFlexi/Api/Server/DefaultApi.php:67
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:194
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:261
 msgid "invalid password"
 msgstr "invalid password"
 
 #: src/MultiFlexi/Api/Server/DefaultApi.php:72
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:201
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:278
 #, php-format
 msgid "user %s does not exist"
 msgstr "user %s does not exist"
@@ -74,9 +74,11 @@ msgid "Invalid or expired token"
 msgstr "Invalid or expired token"
 
 #: src/MultiFlexi/ApplicationLister.php:33
-#: src/MultiFlexi/CredentialLister.php:42
-#: src/MultiFlexi/RunTemplateLister.php:28 src/servers.php:29
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType.php:118
+#: src/MultiFlexi/CredentialLister.php:50
+#: src/MultiFlexi/CredentialTypeLister.php:33
+#: src/MultiFlexi/RunTemplateLister.php:28
+#: src/MultiFlexi/Ui/ActivationWizard.php:231
+#: src/admin-deletion-requests.php:227 src/dashboard.php:378 src/servers.php:29
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Customer.php:72
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Logger.php:113
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/ScheduleLister.php:52
@@ -89,19 +91,21 @@ msgid "Icon"
 msgstr "Icon"
 
 #: src/MultiFlexi/ApplicationLister.php:36
-#: src/MultiFlexi/CredentialLister.php:44
+#: src/MultiFlexi/CredentialLister.php:52
+#: src/MultiFlexi/CredentialTypeLister.php:36
 #: src/MultiFlexi/RunTemplateLister.php:31
 #: src/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:31
+#: src/MultiFlexi/Ui/ActivationWizard.php:685
 #: src/MultiFlexi/Ui/ConfigurationWizard.php:104
-#: src/MultiFlexi/Ui/EnvironmentView.php:34 src/companycreds.php:35
-#: src/servers.php:29
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType.php:121
+#: src/MultiFlexi/Ui/EnvironmentView.php:34 src/activation-wizard.php:269
+#: src/companycreds.php:35 src/servers.php:29
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:111
 msgid "Name"
 msgstr "Name"
 
 #: src/MultiFlexi/ApplicationLister.php:37
 #: src/MultiFlexi/Ui/ConfigurationWizard.php:104
+#: src/data-retention-admin.php:376
 msgid "Description"
 msgstr "Description"
 
@@ -118,7 +122,7 @@ msgid "Executable"
 msgstr "Executable"
 
 #: src/MultiFlexi/ApplicationLister.php:41
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType.php:122
+#: src/MultiFlexi/CredentialTypeLister.php:37
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:111
 msgid "UUID"
 msgstr "UUID"
@@ -127,50 +131,931 @@ msgstr "UUID"
 msgid "OCI Image"
 msgstr "OCI Image"
 
-#: src/MultiFlexi/CredentialLister.php:43 src/companycreds.php:35
-#: src/servers.php:29
-msgid "Type"
-msgstr "Type"
+#: src/MultiFlexi/CompanyJobLister.php:82
+msgid "ID úlohy"
+msgstr "ID úlohy"
 
-#: src/MultiFlexi/CredentialLister.php:45
-#: src/MultiFlexi/RunTemplateLister.php:41 src/MultiFlexi/Ui/Breadcrumb.php:55
-#: src/MultiFlexi/Ui/CredentialForm.php:75
-#: src/MultiFlexi/Ui/CredentialTypeForm.php:44
+#: src/MultiFlexi/CompanyJobLister.php:86
+#: src/MultiFlexi/RunTemplateLister.php:33
+#: src/MultiFlexi/Ui/ActivationWizard.php:689
+#: src/MultiFlexi/Ui/JobHistoryTable.php:46
+#: src/MultiFlexi/Ui/SearchSelect.php:32 src/activation-wizard.php:273
+#: src/app.php:134 src/company.php:58 src/dashboard.php:378 src/launch.php:26
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Env/Application.php:52
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Logger.php:119
+msgid "Application"
+msgstr "Application"
+
+#: src/MultiFlexi/CompanyJobLister.php:90 src/MultiFlexi/Ui/AppJobsTable.php:36
+#: src/MultiFlexi/Ui/AppRow.php:84 src/MultiFlexi/Ui/JobHistoryTable.php:49
+#: src/app.php:147 src/companyapp.php:97
+msgid "Exit Code"
+msgstr "Exit Code"
+
+#: src/MultiFlexi/CompanyJobLister.php:90 src/MultiFlexi/Ui/AppJobsTable.php:36
+#: src/MultiFlexi/Ui/AppRow.php:84 src/MultiFlexi/Ui/JobHistoryTable.php:49
+#: src/app.php:147 src/company.php:58 src/companyapp.php:97
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Job.php:147
+msgid "Job ID"
+msgstr "Job ID"
+
+#: src/MultiFlexi/CompanyJobLister.php:94
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/ScheduleLister.php:56
+msgid "Runtemplate"
+msgstr "Runtemplate"
+
+#: src/MultiFlexi/CompanyJobLister.php:98 src/MultiFlexi/Ui/AppJobsTable.php:36
+#: src/MultiFlexi/Ui/AppRow.php:84 src/MultiFlexi/Ui/JobHistoryTable.php:50
+#: src/app.php:147 src/company.php:58 src/companyapp.php:97
+msgid "Launch time"
+msgstr "Launch time"
+
+#: src/MultiFlexi/CompanyJobLister.php:101
+#: src/MultiFlexi/Ui/AppJobsTable.php:36 src/MultiFlexi/Ui/AppRow.php:84
+#: src/MultiFlexi/Ui/JobHistoryTable.php:51 src/company.php:58
+#: src/companyapp.php:97
+msgid "Launcher"
+msgstr "Launcher"
+
+#: src/MultiFlexi/CompanyJobLister.php:105
+#: src/MultiFlexi/CredentialLister.php:53
+#: src/MultiFlexi/CredentialTypeLister.php:38
+#: src/MultiFlexi/RunTemplateLister.php:41
+#: src/MultiFlexi/Ui/ActivationWizard.php:696
+#: src/MultiFlexi/Ui/Breadcrumb.php:55 src/MultiFlexi/Ui/CredentialForm.php:74
 #: src/MultiFlexi/Ui/JobHistoryTable.php:54
-#: src/MultiFlexi/Ui/SearchSelect.php:33 src/app.php:80 src/company.php:24
-#: src/companycreds.php:28 src/companydelete.php:24 src/companysetup.php:24
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyJob.php:86
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType.php:123
+#: src/MultiFlexi/Ui/SearchSelect.php:33 src/activation-wizard.php:280
+#: src/app.php:147 src/company.php:24 src/companycreds.php:28
+#: src/companydelete.php:24 src/companysetup.php:24 src/dashboard.php:378
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Env/Company.php:54
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Logger.php:127
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/ScheduleLister.php:57
 msgid "Company"
 msgstr "Company"
 
+#: src/MultiFlexi/CompanyJobLister.php:271
+msgid "year ago"
+msgstr "year ago"
+
+#: src/MultiFlexi/CompanyJobLister.php:271
+msgid "years ago"
+msgstr "years ago"
+
+#: src/MultiFlexi/CompanyJobLister.php:273
+msgid "month ago"
+msgstr "month ago"
+
+#: src/MultiFlexi/CompanyJobLister.php:273
+msgid "months ago"
+msgstr "months ago"
+
+#: src/MultiFlexi/CompanyJobLister.php:275
+msgid "day ago"
+msgstr "day ago"
+
+#: src/MultiFlexi/CompanyJobLister.php:275
+#| msgid "days"
+msgid "days ago"
+msgstr "days ago"
+
+#: src/MultiFlexi/CompanyJobLister.php:277
+msgid "hour ago"
+msgstr "hour ago"
+
+#: src/MultiFlexi/CompanyJobLister.php:277
+msgid "hours ago"
+msgstr "hours ago"
+
+#: src/MultiFlexi/CompanyJobLister.php:279
+#| msgid "Minute"
+msgid "minute ago"
+msgstr "minute ago"
+
+#: src/MultiFlexi/CompanyJobLister.php:279
+msgid "minutes ago"
+msgstr "minutes ago"
+
+#: src/MultiFlexi/CompanyJobLister.php:281
+msgid "just now"
+msgstr "just now"
+
+#: src/MultiFlexi/Consent/ConsentHelper.php:204
+msgid ""
+"This content requires your consent. Please update your privacy preferences."
+msgstr ""
+"This content requires your consent. Please update your privacy preferences."
+
+#: src/MultiFlexi/Consent/ConsentHelper.php:213
+#| msgid "Database Settings"
+msgid "Privacy Settings"
+msgstr "Privacy Settings"
+
+#: src/MultiFlexi/Consent/ConsentHelper.php:239
+#| msgid "Database Settings"
+msgid "Cookie Settings"
+msgstr "Cookie Settings"
+
+#: src/MultiFlexi/CredentialLister.php:51 src/admin-deletion-requests.php:229
+#: src/companycreds.php:35 src/cookie-policy.php:85 src/cookie-policy.php:149
+#: src/profile.php:102 src/servers.php:29
+msgid "Type"
+msgstr "Type"
+
+#: src/MultiFlexi/CredentialTypeLister.php:35 src/login.php:134
+msgid "Logo"
+msgstr "Logo"
+
+#: src/MultiFlexi/DataErasure/DeletionAuditLogger.php:83
+#, php-format
+msgid "Audit log created: %s on %s (ID: %s)"
+msgstr "Audit log created: %s on %s (ID: %s)"
+
+#: src/MultiFlexi/DataErasure/DeletionAuditLogger.php:92
+#, php-format
+msgid "Failed to create audit log for %s on %s"
+msgstr "Failed to create audit log for %s on %s"
+
+#: src/MultiFlexi/DataErasure/DeletionAuditLogger.php:190
+#, php-format
+msgid "Cleaned up %d old audit log entries"
+msgstr "Cleaned up %d old audit log entries"
+
+#: src/MultiFlexi/DataErasure/DeletionAuditLogger.php:219
+#, php-format
+#| msgid "Missing token"
+msgid "Missing %s action entries"
+msgstr "Missing %s action entries"
+
+#: src/MultiFlexi/DataErasure/DeletionAuditLogger.php:230
+msgid "Entries are not in chronological order"
+msgstr "Entries are not in chronological order"
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:139
+#, php-format
+msgid "Deletion request %d created for user %s"
+msgstr "Deletion request %d created for user %s"
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:146
+#| msgid "Failed to create new runtemplate"
+msgid "Failed to create deletion request"
+msgstr "Failed to create deletion request"
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:164
+#: src/admin-deletion-requests.php:52
+#| msgid "executable %s not found"
+msgid "Deletion request not found"
+msgstr "Deletion request not found"
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:168
+msgid "Deletion request requires admin approval"
+msgstr "Deletion request requires admin approval"
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:189
+msgid "Invalid deletion type"
+msgstr "Invalid deletion type"
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:286
+msgid "User already has a pending deletion request"
+msgstr "User already has a pending deletion request"
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:322
+msgid "User marked as deleted"
+msgstr "User marked as deleted"
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:345
+#, php-format
+msgid "Cannot perform hard deletion due to dependencies: %s"
+msgstr "Cannot perform hard deletion due to dependencies: %s"
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:404
+#, php-format
+msgid "Hard deletion completed. Tables affected: %s"
+msgstr "Hard deletion completed. Tables affected: %s"
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:432
+msgid "Data anonymization completed"
+msgstr "Data anonymization completed"
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:465
+#, php-format
+msgid "Company %s has other users"
+msgstr "Company %s has other users"
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:480
+#| msgid "Unused by any runtemplate"
+msgid "User has public run templates"
+msgstr "User has public run templates"
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:80
+#, php-format
+msgid "Invalid archive type: %s"
+msgstr "Invalid archive type: %s"
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:87
+msgid "No user available for archiving operation"
+msgstr "No user available for archiving operation"
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:109
+#, php-format
+msgid "Archived record %s from table %s (Archive ID: %d)"
+msgstr "Archived record %s from table %s (Archive ID: %d)"
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:120
+#, php-format
+msgid "Failed to archive record from table %s"
+msgstr "Failed to archive record from table %s"
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:150
+#, php-format
+msgid "Failed to archive record %s: %s"
+msgstr "Failed to archive record %s: %s"
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:300
+#, php-format
+msgid "Deleted expired archive %d from table %s"
+msgstr "Deleted expired archive %d from table %s"
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:305
+#, php-format
+msgid "Failed to delete archive %d: %s"
+msgstr "Failed to delete archive %d: %s"
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:333
+msgid "No records found matching criteria"
+msgstr "No records found matching criteria"
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:349
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:613
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:395
+#, php-format
+msgid "Unsupported export format: %s"
+msgstr "Unsupported export format: %s"
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:376
+#, php-format
+msgid "Failed to update archive %d"
+msgstr "Failed to update archive %d"
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:380
+#, php-format
+msgid "Error setting legal hold on archive %d: %s"
+msgstr "Error setting legal hold on archive %d: %s"
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:402
+#| msgid "Provider not found"
+msgid "Archive record not found"
+msgstr "Archive record not found"
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:409
+msgid "Invalid JSON in archived data"
+msgstr "Invalid JSON in archived data"
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:417
+#, php-format
+#| msgid "Missing required parameters"
+msgid "Missing required field: %s"
+msgstr "Missing required field: %s"
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:423
+msgid "Original data is empty or invalid"
+msgstr "Original data is empty or invalid"
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:465
+#: src/MultiFlexi/DataRetention/DataArchiver.php:520
+#, php-format
+msgid "Exported %d records to %s"
+msgstr "Exported %d records to %s"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:88
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:462
+#, php-format
+msgid "Required field missing: %s"
+msgstr "Required field missing: %s"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:94
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:168
+#, php-format
+msgid "Policy name \"%s\" already exists"
+msgstr "Policy name \"%s\" already exists"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:99
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:174
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:480
+#, php-format
+msgid "Invalid deletion action: %s"
+msgstr "Invalid deletion action: %s"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:104
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:180
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:488
+msgid "Retention period must be non-negative"
+msgstr "Retention period must be non-negative"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:111
+msgid "No user available for policy creation"
+msgstr "No user available for policy creation"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:134
+#, php-format
+msgid "Created retention policy \"%s\" (ID: %d)"
+msgstr "Created retention policy \"%s\" (ID: %d)"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:141
+#| msgid "Failed to create new runtemplate"
+msgid "Failed to create retention policy"
+msgstr "Failed to create retention policy"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:161
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:225
+#| msgid "Provider not found"
+msgid "Policy not found"
+msgstr "Policy not found"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:199
+#, php-format
+msgid "Updated retention policy ID %d"
+msgstr "Updated retention policy ID %d"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:206
+msgid "Failed to update retention policy"
+msgstr "Failed to update retention policy"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:237
+#, php-format
+msgid "Cannot delete policy \"%s\": %d cleanup jobs are associated with it"
+msgstr "Cannot delete policy \"%s\": %d cleanup jobs are associated with it"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:245
+#, php-format
+msgid "Deleted retention policy \"%s\""
+msgstr "Deleted retention policy \"%s\""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:252
+msgid "Failed to delete retention policy"
+msgstr "Failed to delete retention policy"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:274
+#, php-format
+msgid "Policy ID %d %s"
+msgstr "Policy ID %d %s"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:274
+#: src/MultiFlexi/Ui/AppsMenu.php:67
+msgid "enabled"
+msgstr "enabled"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:274
+#: src/MultiFlexi/Ui/AppsMenu.php:67
+msgid "disabled"
+msgstr "disabled"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:281
+#, php-format
+#| msgid "Failed Jobs"
+msgid "Failed to %s policy"
+msgstr "Failed to %s policy"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:281
+#| msgid "enabled"
+msgid "enable"
+msgstr "enable"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:281
+#| msgid "disabled"
+msgid "disable"
+msgstr "disable"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:430
+#, php-format
+msgid "Policy \"%s\" already exists, skipping"
+msgstr "Policy \"%s\" already exists, skipping"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:436
+#, php-format
+msgid "Failed to create policy \"%s\": %s"
+msgstr "Failed to create policy \"%s\": %s"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:469
+msgid "Policy name too long (max 100 characters)"
+msgstr "Policy name too long (max 100 characters)"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:473
+msgid "Policy name can only contain letters, numbers, underscores, and hyphens"
+msgstr ""
+"Policy name can only contain letters, numbers, underscores, and hyphens"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:492
+msgid "Very long retention period - ensure legal basis is strong"
+msgstr "Very long retention period - ensure legal basis is strong"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:496
+msgid ""
+"Audit data retention period is very short - may not meet regulatory "
+"requirements"
+msgstr ""
+"Audit data retention period is very short - may not meet regulatory "
+"requirements"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:505
+msgid "Grace period must be non-negative"
+msgstr "Grace period must be non-negative"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:509
+msgid "Very long grace period may delay compliance with deletion requests"
+msgstr "Very long grace period may delay compliance with deletion requests"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:518
+msgid ""
+"Hard deletion of personal data should be carefully considered - "
+"anonymization may be more appropriate"
+msgstr ""
+"Hard deletion of personal data should be carefully considered - "
+"anonymization may be more appropriate"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:524
+msgid ""
+"Audit data retention period is shorter than typical regulatory requirements "
+"(7 years)"
+msgstr ""
+"Audit data retention period is shorter than typical regulatory requirements "
+"(7 years)"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:594
+msgid "No policies to export"
+msgstr "No policies to export"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:632
+#| msgid "Required metrics file not found "
+msgid "Import file not found"
+msgstr "Import file not found"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:642
+msgid "Invalid JSON file"
+msgstr "Invalid JSON file"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:648
+#, php-format
+msgid "Unsupported import format: %s"
+msgstr "Unsupported import format: %s"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:669
+#, php-format
+msgid "Failed to import policy \"%s\": %s"
+msgstr "Failed to import policy \"%s\": %s"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:87
+#, php-format
+msgid ""
+"Daily retention cleanup: %d jobs processed, %d records deleted, %d "
+"anonymized, %d archived"
+msgstr ""
+"Daily retention cleanup: %d jobs processed, %d records deleted, %d "
+"anonymized, %d archived"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:127
+#, php-format
+msgid ""
+"Weekly retention summary: %d jobs completed, %d records processed, %d "
+"archives created"
+msgstr ""
+"Weekly retention summary: %d jobs completed, %d records processed, %d "
+"archives created"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:168
+#, php-format
+msgid ""
+"Monthly retention summary: %d jobs completed, %d records processed, "
+"compliance score: %s"
+msgstr ""
+"Monthly retention summary: %d jobs completed, %d records processed, "
+"compliance score: %s"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:220
+#, php-format
+msgid "Policy audit: %d total policies, %d active, overall compliance: %s"
+msgstr "Policy audit: %d total policies, %d active, overall compliance: %s"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:263
+#, php-format
+msgid "Compliance assessment: Overall score %d/100, GDPR compliance: %s"
+msgstr "Compliance assessment: Overall score %d/100, GDPR compliance: %s"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:305
+#, php-format
+msgid ""
+"Data deletion confirmation: %d records deleted, %d anonymized, %d archived "
+"on %s"
+msgstr ""
+"Data deletion confirmation: %d records deleted, %d anonymized, %d archived "
+"on %s"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:375
+#| msgid "Provider not found"
+msgid "Report not found"
+msgstr "Report not found"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:426
+msgid "No user available for report generation"
+msgstr "No user available for report generation"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:444
+#, php-format
+msgid "Generated %s report (ID: %d)"
+msgstr "Generated %s report (ID: %d)"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:451
+#, php-format
+#| msgid "Failed to create new runtemplate"
+msgid "Failed to create %s report"
+msgstr "Failed to create %s report"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:496
+msgid "No active data retention policies defined"
+msgstr "No active data retention policies defined"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:504
+msgid "No cleanup jobs executed in the analyzed period"
+msgstr "No cleanup jobs executed in the analyzed period"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:513
+#, php-format
+msgid "High cleanup job failure rate: %.1f%%"
+msgstr "High cleanup job failure rate: %.1f%%"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:523
+#, php-format
+msgid "%d expired records awaiting cleanup"
+msgstr "%d expired records awaiting cleanup"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:555
+#, php-format
+msgid "%d user accounts inactive for more than 3 years"
+msgstr "%d user accounts inactive for more than 3 years"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:569
+#, php-format
+msgid "%d old log records not scheduled for deletion"
+msgstr "%d old log records not scheduled for deletion"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:592
+msgid "Execute cleanup command to process expired records"
+msgstr "Execute cleanup command to process expired records"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:598
+msgid "Review and fix failed cleanup jobs"
+msgstr "Review and fix failed cleanup jobs"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:602
+msgid "Data minimization practices are well implemented"
+msgstr "Data minimization practices are well implemented"
+
+#: src/MultiFlexi/DataRetention/RetentionService.php:85
+#, php-format
+msgid "Updated %d records for policy %s"
+msgstr "Updated %d records for policy %s"
+
+#: src/MultiFlexi/DataRetention/RetentionService.php:89
+#, php-format
+msgid "Error processing policy %s: %s"
+msgstr "Error processing policy %s: %s"
+
+#: src/MultiFlexi/DataRetention/RetentionService.php:141
+#, php-format
+msgid "Error processing cleanup for table %s: %s"
+msgstr "Error processing cleanup for table %s: %s"
+
+#: src/MultiFlexi/DataRetention/RetentionService.php:244
+#, php-format
+msgid "Error deleting record %d from %s: %s"
+msgstr "Error deleting record %d from %s: %s"
+
+#: src/MultiFlexi/DataRetention/RetentionService.php:353
+#, php-format
+msgid "Processed: %d, Deleted: %d, Anonymized: %d, Archived: %d"
+msgstr "Processed: %d, Deleted: %d, Anonymized: %d, Archived: %d"
+
+#: src/MultiFlexi/DataRetention/RetentionService.php:517
+#, php-format
+msgid "Table %s not configured for retention"
+msgstr "Table %s not configured for retention"
+
+#: src/MultiFlexi/DataRetention/RetentionService.php:620
+#, php-format
+#| msgid "Error saving record"
+msgid "Error processing record %d: %s"
+msgstr "Error processing record %d: %s"
+
+#: src/MultiFlexi/Email/DataExportNotifier.php:62
+msgid "Your Personal Data Export is Ready"
+msgstr "Your Personal Data Export is Ready"
+
+#: src/MultiFlexi/Email/DataExportNotifier.php:88
+msgid "Personal Data Export Downloaded - Confirmation"
+msgstr "Personal Data Export Downloaded - Confirmation"
+
+#: src/MultiFlexi/Email/DataExportNotifier.php:114
+msgid "Security Alert: Unusual Data Export Activity"
+msgstr "Security Alert: Unusual Data Export Activity"
+
+#: src/MultiFlexi/GDPR/UserDataCorrectionRequest.php:148
+#: src/MultiFlexi/GDPR/UserDataCorrectionRequest.php:227
+msgid "Request not found or already processed"
+msgstr "Request not found or already processed"
+
+#: src/MultiFlexi/GDPR/UserDataCorrectionRequest.php:162
+#: src/gdpr-user-deletion-request.php:36
+#| msgid "Provider not found"
+msgid "User not found"
+msgstr "User not found"
+
+#: src/MultiFlexi/GDPR/UserDataCorrectionRequest.php:171
+#| msgid "Failed to create new runtemplate"
+msgid "Failed to update user data"
+msgstr "Failed to update user data"
+
+#: src/MultiFlexi/GDPR/UserDataCorrectionRequest.php:186
+#: src/MultiFlexi/GDPR/UserDataCorrectionRequest.php:241
+#| msgid "Failed to create new runtemplate"
+msgid "Failed to update request status"
+msgstr "Failed to update request status"
+
+#: src/MultiFlexi/GDPR/UserDataCorrectionRequest.php:283
+msgid "Request not found, not yours, or already processed"
+msgstr "Request not found, not yours, or already processed"
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:126
+#: src/admin-data-corrections.php:152
+msgid "No pending data correction requests."
+msgstr "No pending data correction requests."
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:129
+#, php-format
+msgid ""
+"Daily GDPR Data Correction Digest - %s\n"
+"\n"
+msgstr ""
+"Daily GDPR Data Correction Digest - %s\n"
+"\n"
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:130
+#, php-format
+msgid ""
+"There are %d pending data correction requests:\n"
+"\n"
+msgstr ""
+"There are %d pending data correction requests:\n"
+"\n"
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:135
+#, php-format
+msgid "- Request #%d: %s (%s) wants to change %s\n"
+msgstr "- Request #%d: %s (%s) wants to change %s\n"
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:143
+msgid "Please review these requests in the admin panel."
+msgstr "Please review these requests in the admin panel."
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:168
+#, php-format
+msgid "Daily GDPR Digest - %d pending requests"
+msgstr "Daily GDPR Digest - %d pending requests"
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:200
+msgid "Data Correction Request Submitted"
+msgstr "Data Correction Request Submitted"
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:202
+#, php-format
+msgid ""
+"Dear %s,\n"
+"\n"
+"Your request to change your %s has been successfully submitted for "
+"administrator review.\n"
+"\n"
+"Request Details:\n"
+"- Field: %s\n"
+"- Current Value: %s\n"
+"- Requested Value: %s\n"
+"- Justification: %s\n"
+"- Request ID: #%d\n"
+"- Submitted: %s\n"
+"\n"
+"You will receive another notification once your request has been reviewed by "
+"an administrator.\n"
+"\n"
+"Thank you for keeping your personal data accurate.\n"
+"\n"
+"Best regards,\n"
+"The %s Team"
+msgstr ""
+"Dear %s,\n"
+"\n"
+"Your request to change your %s has been successfully submitted for "
+"administrator review.\n"
+"\n"
+"Request Details:\n"
+"- Field: %s\n"
+"- Current Value: %s\n"
+"- Requested Value: %s\n"
+"- Justification: %s\n"
+"- Request ID: #%d\n"
+"- Submitted: %s\n"
+"\n"
+"You will receive another notification once your request has been reviewed by "
+"an administrator.\n"
+"\n"
+"Thank you for keeping your personal data accurate.\n"
+"\n"
+"Best regards,\n"
+"The %s Team"
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:227
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:280
+#: src/admin-data-corrections.php:111
+msgid "(no justification provided)"
+msgstr "(no justification provided)"
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:252
+msgid "New Data Correction Request Pending Review"
+msgstr "New Data Correction Request Pending Review"
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:257
+#, php-format
+msgid ""
+"A new data correction request requires your review.\n"
+"\n"
+"Request Details:\n"
+"- Request ID: #%d\n"
+"- User: %s (ID: %d)\n"
+"- Field: %s\n"
+"- Current Value: %s\n"
+"- Requested Value: %s\n"
+"- Justification: %s\n"
+"- Submitted: %s\n"
+"- IP Address: %s\n"
+"\n"
+"Please review this request at: %s\n"
+"\n"
+"This is an automated message from the GDPR compliance system."
+msgstr ""
+"A new data correction request requires your review.\n"
+"\n"
+"Request Details:\n"
+"- Request ID: #%d\n"
+"- User: %s (ID: %d)\n"
+"- Field: %s\n"
+"- Current Value: %s\n"
+"- Requested Value: %s\n"
+"- Justification: %s\n"
+"- Submitted: %s\n"
+"- IP Address: %s\n"
+"\n"
+"Please review this request at: %s\n"
+"\n"
+"This is an automated message from the GDPR compliance system."
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:317
+msgid "Data Correction Request Approved"
+msgstr "Data Correction Request Approved"
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:319
+#, php-format
+msgid ""
+"Dear %s,\n"
+"\n"
+"Great news! Your data correction request has been approved and your personal "
+"information has been updated.\n"
+"\n"
+"Request Details:\n"
+"- Field: %s\n"
+"- Previous Value: %s\n"
+"- New Value: %s\n"
+"- Request ID: #%d\n"
+"- Approved by: %s\n"
+"- Approved on: %s\n"
+"\n"
+"Administrator Notes: %s\n"
+"\n"
+"Your personal data has been updated in our system. You can view your updated "
+"profile at any time.\n"
+"\n"
+"Thank you for helping us keep your information accurate.\n"
+"\n"
+"Best regards,\n"
+"The %s Team"
+msgstr ""
+"Dear %s,\n"
+"\n"
+"Great news! Your data correction request has been approved and your personal "
+"information has been updated.\n"
+"\n"
+"Request Details:\n"
+"- Field: %s\n"
+"- Previous Value: %s\n"
+"- New Value: %s\n"
+"- Request ID: #%d\n"
+"- Approved by: %s\n"
+"- Approved on: %s\n"
+"\n"
+"Administrator Notes: %s\n"
+"\n"
+"Your personal data has been updated in our system. You can view your updated "
+"profile at any time.\n"
+"\n"
+"Thank you for helping us keep your information accurate.\n"
+"\n"
+"Best regards,\n"
+"The %s Team"
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:348
+msgid "(no additional notes)"
+msgstr "(no additional notes)"
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:375
+msgid "Data Correction Request - Decision Required"
+msgstr "Data Correction Request - Decision Required"
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:377
+#, php-format
+msgid ""
+"Dear %s,\n"
+"\n"
+"We have reviewed your data correction request and require additional "
+"information before we can proceed.\n"
+"\n"
+"Request Details:\n"
+"- Field: %s\n"
+"- Current Value: %s\n"
+"- Requested Value: %s\n"
+"- Request ID: #%d\n"
+"- Reviewed by: %s\n"
+"- Reviewed on: %s\n"
+"\n"
+"Administrator Feedback: %s\n"
+"\n"
+"If you believe this decision is incorrect or if you have additional "
+"supporting information, please contact us directly or submit a new request "
+"with more details.\n"
+"\n"
+"You can view and manage your data correction requests in your profile.\n"
+"\n"
+"Best regards,\n"
+"The %s Team"
+msgstr ""
+"Dear %s,\n"
+"\n"
+"We have reviewed your data correction request and require additional "
+"information before we can proceed.\n"
+"\n"
+"Request Details:\n"
+"- Field: %s\n"
+"- Current Value: %s\n"
+"- Requested Value: %s\n"
+"- Request ID: #%d\n"
+"- Reviewed by: %s\n"
+"- Reviewed on: %s\n"
+"\n"
+"Administrator Feedback: %s\n"
+"\n"
+"If you believe this decision is incorrect or if you have additional "
+"supporting information, please contact us directly or submit a new request "
+"with more details.\n"
+"\n"
+"You can view and manage your data correction requests in your profile.\n"
+"\n"
+"Best regards,\n"
+"The %s Team"
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:443
+#, php-format
+msgid "Email sent to %s"
+msgstr "Email sent to %s"
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:445
+#, php-format
+msgid "Failed to send email to %s"
+msgstr "Failed to send email to %s"
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:450
+#, php-format
+msgid "Email error: %s"
+msgstr "Email error: %s"
+
 #: src/MultiFlexi/RunTemplateLister.php:29
 msgid "Active"
 msgstr "Active"
 
 #: src/MultiFlexi/RunTemplateLister.php:30
+#: src/MultiFlexi/Ui/ActivationWizard.php:703 src/activation-wizard.php:287
 msgid "Interval"
 msgstr "Interval"
-
-#: src/MultiFlexi/RunTemplateLister.php:33
-#: src/MultiFlexi/Ui/JobHistoryTable.php:46
-#: src/MultiFlexi/Ui/SearchSelect.php:32 src/app.php:67 src/company.php:58
-#: src/launch.php:26
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyJob.php:73
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Env/Application.php:52
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Logger.php:119
-msgid "Application"
-msgstr "Application"
 
 #: src/MultiFlexi/RunTemplateLister.php:49
 msgid "Delay"
 msgstr "Delay"
 
 #: src/MultiFlexi/RunTemplateLister.php:50 src/MultiFlexi/Ui/JobInfo.php:41
-#: src/MultiFlexi/Ui/JobScheduleForm.php:80
+#: src/MultiFlexi/Ui/JobScheduleForm.php:79
 #: src/MultiFlexi/Ui/RunTemplatePanel.php:73
 msgid "Executor"
 msgstr "Executor"
@@ -185,8 +1070,98 @@ msgstr "Launch now"
 #: src/MultiFlexi/RunTemplateLister.php:58 src/MultiFlexi/Ui/AppInfo.php:46
 #: src/MultiFlexi/Ui/IntervalChooser.php:35
 #: src/MultiFlexi/Ui/RunTemplatePanel.php:62 src/companyapp.php:86
+#: src/cookie-policy.php:399 src/dashboard.php:315
+#: src/data-retention-admin.php:272
 msgid "Disabled"
 msgstr "Disabled"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:68
+#, php-format
+msgid "Password must be at least %d characters long"
+msgstr "Password must be at least %d characters long"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:73
+msgid "Password must contain at least one uppercase letter"
+msgstr "Password must contain at least one uppercase letter"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:78
+msgid "Password must contain at least one lowercase letter"
+msgstr "Password must contain at least one lowercase letter"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:83
+msgid "Password must contain at least one number"
+msgstr "Password must contain at least one number"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:88
+msgid ""
+"Password must contain at least one special character (!@#$%^&*(),.?\":{}|<>)"
+msgstr ""
+"Password must contain at least one special character (!@#$%^&*(),.?\":{}|<>)"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:93
+msgid "Password is too common and easily guessable"
+msgstr "Password is too common and easily guessable"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:98
+msgid "Password cannot contain more than 3 repeated characters in a row"
+msgstr "Password cannot contain more than 3 repeated characters in a row"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:103
+msgid "Password cannot contain sequential characters (e.g., 123, abc)"
+msgstr "Password cannot contain sequential characters (e.g., 123, abc)"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:119
+msgid "Very Weak"
+msgstr "Very Weak"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:123
+msgid "Weak"
+msgstr "Weak"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:127
+msgid "Medium"
+msgstr "Medium"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:131
+msgid "Strong"
+msgstr "Strong"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:134
+msgid "Very Strong"
+msgstr "Very Strong"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:144
+#, php-format
+msgid "At least %d characters long"
+msgstr "At least %d characters long"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:147
+msgid "At least one uppercase letter (A-Z)"
+msgstr "At least one uppercase letter (A-Z)"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:151
+msgid "At least one lowercase letter (a-z)"
+msgstr "At least one lowercase letter (a-z)"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:155
+msgid "At least one number (0-9)"
+msgstr "At least one number (0-9)"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:159
+msgid "At least one special character (!@#$%^&*(),.?\":{}|<>)"
+msgstr "At least one special character (!@#$%^&*(),.?\":{}|<>)"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:162
+msgid "Cannot be a common or easily guessable password"
+msgstr "Cannot be a common or easily guessable password"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:163
+msgid "Cannot contain sequential characters (e.g., 123, abc)"
+msgstr "Cannot contain sequential characters (e.g., 123, abc)"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:164
+msgid "Cannot contain more than 3 repeated characters in a row"
+msgstr "Cannot contain more than 3 repeated characters in a row"
 
 #: src/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:31
 msgid "Code"
@@ -208,7 +1183,7 @@ msgstr "watching Changes"
 msgid "Edit"
 msgstr "Edit"
 
-#: src/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:48 src/createaccount.php:186
+#: src/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:48 src/createaccount.php:203
 msgid "Register"
 msgstr "Register"
 
@@ -217,29 +1192,298 @@ msgid "Action not availble"
 msgstr "Action not availble"
 
 #: src/MultiFlexi/Ui/ActionsAdministration.php:49
-#: src/MultiFlexi/Ui/AppEditorForm.php:52 src/MultiFlexi/Ui/ColumnsForm.php:125
+#: src/MultiFlexi/Ui/AppEditorForm.php:52 src/MultiFlexi/Ui/ColumnsForm.php:124
 #: src/MultiFlexi/Ui/CompanyEditorForm.php:47
 #: src/MultiFlexi/Ui/CustomAppConfigForm.php:52
 #: src/MultiFlexi/Ui/RegisterCustomerForm.php:53
 #: src/MultiFlexi/Ui/RegisterServerForm.php:50
 #: src/MultiFlexi/Ui/RuntemplateConfigForm.php:104
-#: src/MultiFlexi/Ui/UserForm.php:64
+#: src/MultiFlexi/Ui/UserForm.php:63
 msgid "Save"
 msgstr "Save"
 
-#: src/MultiFlexi/Ui/ActionsTab.php:35 src/actions.php:56
+#: src/MultiFlexi/Ui/ActionsTab.php:35
+#: src/MultiFlexi/Ui/ActivationWizard.php:838 src/actions.php:56
 msgid "Success Actions"
 msgstr "Success Actions"
 
-#: src/MultiFlexi/Ui/ActionsTab.php:36 src/actions.php:57
+#: src/MultiFlexi/Ui/ActionsTab.php:36
+#: src/MultiFlexi/Ui/ActivationWizard.php:839 src/actions.php:57
 msgid "Fail Actions"
 msgstr "Fail Actions"
 
-#: src/MultiFlexi/Ui/ActionsTab.php:43 src/MultiFlexi/Ui/CredentialForm.php:97
+#: src/MultiFlexi/Ui/ActionsTab.php:43 src/MultiFlexi/Ui/CredentialForm.php:96
 #: src/MultiFlexi/Ui/CredentialTypeForm.php:105 src/actions.php:65
 #: src/companyapps.php:50 src/intervals.php:49
 msgid "Apply"
 msgstr "Apply"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:89
+#| msgid "choose Company"
+msgid "Choose Company"
+msgstr "Choose Company"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:90
+#: src/MultiFlexi/Ui/ConfigurationWizard.php:45
+msgid "Choose Application"
+msgstr "Choose Application"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:91
+#: src/MultiFlexi/Ui/ActivationWizard.php:376
+#| msgid "RunTemplate"
+msgid "Create RunTemplate"
+msgstr "Create RunTemplate"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:92
+#: src/MultiFlexi/Ui/ActivationWizard.php:413
+#| msgid "Credentials"
+msgid "Assign Credentials"
+msgstr "Assign Credentials"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:93
+#: src/MultiFlexi/Ui/ActivationWizard.php:504 src/MultiFlexi/Ui/AppsMenu.php:70
+#: src/MultiFlexi/Ui/ConfiguredFieldBadges.php:43
+msgid "Configure"
+msgstr "Configure"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:94
+#: src/MultiFlexi/Ui/ActivationWizard.php:747
+#: src/MultiFlexi/Ui/MainMenu.php:210
+#: src/MultiFlexi/Ui/RuntemplateConfigForm.php:105
+#: src/activation-wizard.php:331 src/admin-deletion-requests.php:233
+#: src/data-retention-admin.php:266
+msgid "Actions"
+msgstr "Actions"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:95
+msgid "Summary"
+msgstr "Summary"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:200
+#| msgid "Please Select Company"
+msgid "Select Company"
+msgstr "Select Company"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:201
+msgid "Choose the company where you want to activate the application."
+msgstr "Choose the company where you want to activate the application."
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:207
+msgid "No companies found. Please create a company first."
+msgstr "No companies found. Please create a company first."
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:208
+#| msgid "New Company"
+msgid "Create Company"
+msgstr "Create Company"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:241
+#| msgid "Delete company"
+msgid "Select this company"
+msgstr "Select this company"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:280
+#| msgid "No company registered yet. Please register one."
+msgid "No company selected. Please go back to step 1."
+msgstr "No company selected. Please go back to step 1."
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:286
+#| msgid "New Application"
+msgid "Select Application for"
+msgstr "Select Application for"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:287
+msgid ""
+"Choose an application to activate. The application will be assigned to the "
+"selected company."
+msgstr ""
+"Choose an application to activate. The application will be assigned to the "
+"selected company."
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:293
+#| msgid "Form %s not available"
+msgid "No applications available."
+msgstr "No applications available."
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:331
+#| msgid "Register Application"
+msgid "Select this application"
+msgstr "Select this application"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:368
+msgid "Missing company or application. Please complete previous steps."
+msgstr "Missing company or application. Please complete previous steps."
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:377
+#, php-format
+#| msgid "Runtemplate %s cloned as %s"
+msgid "Creating RunTemplate for %s in %s"
+msgstr "Creating RunTemplate for %s in %s"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:385
+#| msgid "Update RunTemplate name"
+msgid "RunTemplate name"
+msgstr "RunTemplate name"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:386
+#| msgid "RunTemplate"
+msgid "RunTemplate Name"
+msgstr "RunTemplate Name"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:386
+msgid "Descriptive name for this configuration"
+msgstr "Descriptive name for this configuration"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:389
+#| msgid "Interval"
+msgid "Schedule Interval"
+msgstr "Schedule Interval"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:389
+msgid "How often should this run?"
+msgstr "How often should this run?"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:404
+#: src/MultiFlexi/Ui/ActivationWizard.php:496
+#: src/MultiFlexi/Ui/ActivationWizard.php:664
+#: src/MultiFlexi/Ui/ActivationWizard.php:803
+msgid "RunTemplate not created. Please complete previous steps."
+msgstr "RunTemplate not created. Please complete previous steps."
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:414
+#, php-format
+#| msgid "Edit credential %s"
+msgid "Select credentials for %s"
+msgstr "Select credentials for %s"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:420
+msgid "This application does not require any credentials."
+msgstr "This application does not require any credentials."
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:444
+#, php-format
+#| msgid "Saving Credential type %s options"
+msgid "Credential type %s not found."
+msgstr "Credential type %s not found."
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:445
+#| msgid "Create Credential type"
+msgid "Create Credential Type"
+msgstr "Create Credential Type"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:458
+#, php-format
+#| msgid "Choose credential handling %s"
+msgid "No credentials found for %s."
+msgstr "No credentials found for %s."
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:459
+#| msgid "Create Credential type"
+msgid "Create Credential"
+msgstr "Create Credential"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:468
+#| msgid "New Credential"
+msgid "-- Select Credential --"
+msgstr "-- Select Credential --"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:475
+#, php-format
+#| msgid "Credentials"
+msgid "Credential for %s"
+msgstr "Credential for %s"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:478
+#, php-format
+msgid "Select which %s credential to use"
+msgstr "Select which %s credential to use"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:517
+msgid "This application does not require any configuration."
+msgstr "This application does not require any configuration."
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:606 src/job.php:98 src/job.php:100
+msgid "Previous"
+msgstr "Previous"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:614
+#: src/MultiFlexi/Ui/ConfigurationWizard.php:92 src/job.php:106 src/job.php:108
+msgid "Next"
+msgstr "Next"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:618
+msgid "Finish & View Summary"
+msgstr "Finish & View Summary"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:673 src/activation-wizard.php:256
+#| msgid "Application Homepage"
+msgid "Activation Complete"
+msgstr "Activation Complete"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:674 src/activation-wizard.php:340
+msgid "Your RunTemplate has been successfully created and configured!"
+msgstr "Your RunTemplate has been successfully created and configured!"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:676 src/activation-wizard.php:260
+#| msgid "RunTemplate"
+msgid "RunTemplate Summary"
+msgstr "RunTemplate Summary"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:681 src/activation-wizard.php:265
+#| msgid "RunTemplate"
+msgid "RunTemplate ID"
+msgstr "RunTemplate ID"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:720
+#: src/MultiFlexi/Ui/CompanyPanel.php:46 src/MultiFlexi/Ui/MainMenu.php:153
+#: src/activation-wizard.php:304 src/credentials.php:21
+msgid "Credentials"
+msgstr "Credentials"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:732 src/activation-wizard.php:316
+#| msgid "success"
+msgid "on success"
+msgstr "on success"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:737 src/activation-wizard.php:321
+msgid "on failure"
+msgstr "on failure"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:761 src/activation-wizard.php:348
+#| msgid "RunTemplate"
+msgid "View RunTemplate"
+msgstr "View RunTemplate"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:769
+#: src/MultiFlexi/Ui/AppLaunchForm.php:82
+#: src/MultiFlexi/Ui/RuntemplateLaunchForm.php:84 src/company.php:66
+#: src/job.php:90
+msgid "Schedule"
+msgstr "Schedule"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:777 src/activation-wizard.php:356
+#| msgid "RunTemplates"
+msgid "All RunTemplates"
+msgstr "All RunTemplates"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:785 src/activation-wizard.php:364
+#| msgid "New Application"
+msgid "New Activation"
+msgstr "New Activation"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:817
+#, php-format
+msgid "RunTemplate #%d created for application \"%s\" and company \"%s\""
+msgstr "RunTemplate #%d created for application \"%s\" and company \"%s\""
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:826
+#| msgid "Configure Application"
+msgid "Configure Actions"
+msgstr "Configure Actions"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:827
+msgid "Define what happens when the job succeeds or fails."
+msgstr "Define what happens when the job succeeds or fails."
 
 #: src/MultiFlexi/Ui/AppEditorForm.php:36
 msgid "Application name"
@@ -280,7 +1524,8 @@ msgid "Application Icon"
 msgstr "Application Icon"
 
 #: src/MultiFlexi/Ui/AppEditorForm.php:43 src/MultiFlexi/Ui/AppInfo.php:46
-#: src/MultiFlexi/Ui/RunTemplatePanel.php:62
+#: src/MultiFlexi/Ui/RunTemplatePanel.php:62 src/cookie-policy.php:399
+#: src/data-retention-admin.php:271 src/data-retention-admin.php:383
 msgid "Enabled"
 msgstr "Enabled"
 
@@ -326,37 +1571,9 @@ msgstr "When application put its output to file"
 msgid "Set"
 msgstr "Set"
 
-#: src/MultiFlexi/Ui/AppInfo.php:53 src/app.php:100
+#: src/MultiFlexi/Ui/AppInfo.php:53 src/app.php:167
 msgid "Config fields"
 msgstr "Config fields"
-
-#: src/MultiFlexi/Ui/AppJobsTable.php:36 src/MultiFlexi/Ui/AppRow.php:84
-#: src/MultiFlexi/Ui/JobHistoryTable.php:49 src/app.php:80 src/company.php:58
-#: src/companyapp.php:97
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyJob.php:68
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Job.php:147
-msgid "Job ID"
-msgstr "Job ID"
-
-#: src/MultiFlexi/Ui/AppJobsTable.php:36 src/MultiFlexi/Ui/AppRow.php:84
-#: src/MultiFlexi/Ui/JobHistoryTable.php:50 src/app.php:80 src/company.php:58
-#: src/companyapp.php:97
-msgid "Launch time"
-msgstr "Launch time"
-
-#: src/MultiFlexi/Ui/AppJobsTable.php:36 src/MultiFlexi/Ui/AppRow.php:84
-#: src/MultiFlexi/Ui/JobHistoryTable.php:49 src/app.php:80
-#: src/companyapp.php:97
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyJob.php:81
-msgid "Exit Code"
-msgstr "Exit Code"
-
-#: src/MultiFlexi/Ui/AppJobsTable.php:36 src/MultiFlexi/Ui/AppRow.php:84
-#: src/MultiFlexi/Ui/JobHistoryTable.php:51 src/company.php:58
-#: src/companyapp.php:97
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyJob.php:94
-msgid "Launcher"
-msgstr "Launcher"
 
 #: src/MultiFlexi/Ui/AppJobsTable.php:42 src/MultiFlexi/Ui/AppRow.php:90
 #: src/companyapp.php:103
@@ -374,6 +1591,36 @@ msgstr "Timer"
 msgid "Download"
 msgstr "Download"
 
+#: src/MultiFlexi/Ui/AppJsonImportForm.php:21
+msgid "Import from your local device"
+msgstr "Import from your local device"
+
+#: src/MultiFlexi/Ui/AppJsonImportForm.php:21
+msgid "example.multiflexi.app.json"
+msgstr "example.multiflexi.app.json"
+
+#: src/MultiFlexi/Ui/AppJsonImportForm.php:21
+#| msgid "Choose Application"
+msgid "Choose loca"
+msgstr "Choose loca"
+
+#: src/MultiFlexi/Ui/AppJsonImportForm.php:22
+msgid "Import from website"
+msgstr "Import from website"
+
+#: src/MultiFlexi/Ui/AppJsonImportForm.php:22
+msgid "https:://multiflexi.eu/example.multiflexi.app.json"
+msgstr "https:://multiflexi.eu/example.multiflexi.app.json"
+
+#: src/MultiFlexi/Ui/AppJsonImportForm.php:22
+#| msgid "Download"
+msgid "Down"
+msgstr "Down"
+
+#: src/MultiFlexi/Ui/AppJsonImportForm.php:24
+msgid "Import Json"
+msgstr "Import Json"
+
 #: src/MultiFlexi/Ui/AppLaunchForm.php:81
 #: src/MultiFlexi/Ui/AppLaunchForm.php:82 src/MultiFlexi/Ui/AppRow.php:64
 #: src/MultiFlexi/Ui/LaunchButton.php:33
@@ -384,12 +1631,6 @@ msgstr "Download"
 #: src/job.php:90
 msgid "Launch"
 msgstr "Launch"
-
-#: src/MultiFlexi/Ui/AppLaunchForm.php:82
-#: src/MultiFlexi/Ui/RuntemplateLaunchForm.php:84 src/company.php:66
-#: src/job.php:90
-msgid "Schedule"
-msgstr "Schedule"
 
 #: src/MultiFlexi/Ui/AppRow.php:58
 msgid "Upload field does not allow application scheduling"
@@ -413,16 +1654,16 @@ msgstr "Last 10 jobs"
 
 #: src/MultiFlexi/Ui/ApplicationPanel.php:51
 #: src/MultiFlexi/Ui/ArchivedJobPanel.php:45
-#: src/MultiFlexi/Ui/CredentialForm.php:104 src/companycreds.php:35
+#: src/MultiFlexi/Ui/CredentialForm.php:103 src/companycreds.php:35
 #: src/companycreds.php:76
 msgid "Used by"
 msgstr "Used by"
 
 #: src/MultiFlexi/Ui/ApplicationPanel.php:65
 #: src/MultiFlexi/Ui/ArchivedJobPanel.php:58
-#: src/MultiFlexi/Ui/CredentialForm.php:134
-#: src/MultiFlexi/Ui/CredentialForm.php:137
-#: src/MultiFlexi/Ui/CredentialForm.php:139
+#: src/MultiFlexi/Ui/CredentialForm.php:133
+#: src/MultiFlexi/Ui/CredentialForm.php:136
+#: src/MultiFlexi/Ui/CredentialForm.php:138
 #: src/MultiFlexi/Ui/CredentialTypeForm.php:108
 #: src/MultiFlexi/Ui/CredentialTypeForm.php:113
 #: src/MultiFlexi/Ui/CredentialTypeForm.php:115
@@ -440,36 +1681,23 @@ msgstr "App Jobs"
 msgid "Updating availbility status of application %s to %s"
 msgstr "Updating availbility status of application %s to %s"
 
-#: src/MultiFlexi/Ui/AppsMenu.php:67
-msgid "enabled"
-msgstr "enabled"
-
-#: src/MultiFlexi/Ui/AppsMenu.php:67
-msgid "disabled"
-msgstr "disabled"
-
-#: src/MultiFlexi/Ui/AppsMenu.php:70
-#: src/MultiFlexi/Ui/ConfiguredFieldBadges.php:43
-msgid "Configure"
-msgstr "Configure"
-
 #: src/MultiFlexi/Ui/BootstrapMenu.php:45
-#: src/MultiFlexi/Ui/RegisterCustomerForm.php:40
+#: src/MultiFlexi/Ui/RegisterCustomerForm.php:40 src/profile.php:42
 msgid "Login"
 msgstr "Login"
 
 #: src/MultiFlexi/Ui/BootstrapMenu.php:46
 #: src/MultiFlexi/Ui/CfgFieldTypeSelect.php:42
-#: src/MultiFlexi/Ui/RegisterCustomerForm.php:45 src/createaccount.php:173
-#: src/login.php:90 src/passwordrecovery.php:57
+#: src/MultiFlexi/Ui/RegisterCustomerForm.php:45 src/createaccount.php:190
+#: src/login.php:158 src/passwordrecovery.php:57
 msgid "Password"
 msgstr "Password"
 
-#: src/MultiFlexi/Ui/BootstrapMenu.php:47 src/login.php:57
+#: src/MultiFlexi/Ui/BootstrapMenu.php:47 src/login.php:125
 msgid "Sign In"
 msgstr "Sign In"
 
-#: src/MultiFlexi/Ui/BootstrapMenu.php:49 src/login.php:75
+#: src/MultiFlexi/Ui/BootstrapMenu.php:57 src/login.php:143
 msgid "Password recovery"
 msgstr "Password recovery"
 
@@ -507,12 +1735,15 @@ msgid "Number"
 msgstr "Number"
 
 #: src/MultiFlexi/Ui/CfgFieldTypeSelect.php:40
+#: src/admin-data-corrections.php:184 src/admin-deletion-requests.php:412
+#: src/profile.php:103
 msgid "Date"
 msgstr "Date"
 
 #: src/MultiFlexi/Ui/CfgFieldTypeSelect.php:41
 #: src/MultiFlexi/Ui/RegisterCustomerForm.php:50
-#: src/MultiFlexi/Ui/UserForm.php:54 src/passwordrecovery.php:98
+#: src/MultiFlexi/Ui/UserForm.php:53 src/admin-data-corrections.php:107
+#: src/passwordrecovery.php:98 src/profile.php:46
 msgid "Email"
 msgstr "Email"
 
@@ -528,11 +1759,11 @@ msgstr "File upload"
 msgid "Directory path"
 msgstr "Directory path"
 
-#: src/MultiFlexi/Ui/ColumnsForm.php:137
+#: src/MultiFlexi/Ui/ColumnsForm.php:136
 msgid "Save and back"
 msgstr "Save and back"
 
-#: src/MultiFlexi/Ui/ColumnsForm.php:149
+#: src/MultiFlexi/Ui/ColumnsForm.php:148
 msgid "Save and next"
 msgstr "Save and next"
 
@@ -556,7 +1787,8 @@ msgstr "Jobs Total"
 msgid "Success Jobs"
 msgstr "Success Jobs"
 
-#: src/MultiFlexi/Ui/CompanyDbStatus.php:65
+#: src/MultiFlexi/Ui/CompanyDbStatus.php:65 src/dashboard.php:104
+#: src/joblist.php:33
 msgid "Failed Jobs"
 msgstr "Failed Jobs"
 
@@ -606,7 +1838,7 @@ msgid "Setup"
 msgstr "Setup"
 
 #: src/MultiFlexi/Ui/CompanyPanel.php:43 src/MultiFlexi/Ui/MainMenu.php:75
-#: src/MultiFlexi/Ui/MainMenu.php:118 src/apps.php:22 src/companies.php:38
+#: src/MultiFlexi/Ui/MainMenu.php:137 src/apps.php:22 src/companies.php:38
 msgid "Applications"
 msgstr "Applications"
 
@@ -618,42 +1850,37 @@ msgstr "Periodical Tasks"
 msgid "Launch wizard"
 msgstr "Launch wizard"
 
-#: src/MultiFlexi/Ui/CompanyPanel.php:46 src/MultiFlexi/Ui/MainMenu.php:134
-#: src/credentials.php:21
-msgid "Credentials"
-msgstr "Credentials"
-
 #: src/MultiFlexi/Ui/CompanySelect.php:31
 msgid "Please Select Company"
 msgstr "Please Select Company"
 
-#: src/MultiFlexi/Ui/ConfFieldsForm.php:42
+#: src/MultiFlexi/Ui/ConfFieldsForm.php:41
 msgid "New config field type"
 msgstr "New config field type"
 
-#: src/MultiFlexi/Ui/ConfFieldsForm.php:43
+#: src/MultiFlexi/Ui/ConfFieldsForm.php:42
 msgid "New config field Keyword"
 msgstr "New config field Keyword"
 
-#: src/MultiFlexi/Ui/ConfFieldsForm.php:44
+#: src/MultiFlexi/Ui/ConfFieldsForm.php:43
 #: src/MultiFlexi/Ui/ConfigFieldsView.php:43
 msgid "Default value"
 msgstr "Default value"
 
-#: src/MultiFlexi/Ui/ConfFieldsForm.php:45
+#: src/MultiFlexi/Ui/ConfFieldsForm.php:44
 msgid "New config field description"
 msgstr "New config field description"
 
-#: src/MultiFlexi/Ui/ConfFieldsForm.php:46
-#: src/MultiFlexi/Ui/CredentialTypeForm.php:61
+#: src/MultiFlexi/Ui/ConfFieldsForm.php:45
+#: src/MultiFlexi/Ui/CredentialTypeForm.php:61 src/consent-preferences.php:122
 msgid "Required"
 msgstr "Required"
 
-#: src/MultiFlexi/Ui/ConfFieldsForm.php:50 src/user.php:30
+#: src/MultiFlexi/Ui/ConfFieldsForm.php:49 src/user.php:30
 msgid "Update"
 msgstr "Update"
 
-#: src/MultiFlexi/Ui/ConfFieldsForm.php:52
+#: src/MultiFlexi/Ui/ConfFieldsForm.php:51
 msgid "Add"
 msgstr "Add"
 
@@ -697,10 +1924,6 @@ msgstr "No"
 msgid "Configuration Wizard"
 msgstr "Configuration Wizard"
 
-#: src/MultiFlexi/Ui/ConfigurationWizard.php:45
-msgid "Choose Application"
-msgstr "Choose Application"
-
 #: src/MultiFlexi/Ui/ConfigurationWizard.php:46
 msgid "Configure Application"
 msgstr "Configure Application"
@@ -708,10 +1931,6 @@ msgstr "Configure Application"
 #: src/MultiFlexi/Ui/ConfigurationWizard.php:47
 msgid "Launch Application"
 msgstr "Launch Application"
-
-#: src/MultiFlexi/Ui/ConfigurationWizard.php:92 src/job.php:106 src/job.php:108
-msgid "Next"
-msgstr "Next"
 
 #: src/MultiFlexi/Ui/ConfigurationWizard.php:104
 msgid "Image"
@@ -729,49 +1948,48 @@ msgstr "Clone"
 msgid "Save as copy"
 msgstr "Save as copy"
 
-#: src/MultiFlexi/Ui/CredentialForm.php:59
-#: src/MultiFlexi/Ui/CredentialForm.php:66
+#: src/MultiFlexi/Ui/CredentialForm.php:58
+#: src/MultiFlexi/Ui/CredentialForm.php:65
 #: src/MultiFlexi/Ui/RequirementsOverview.php:68
 #: src/MultiFlexi/Ui/SearchSelect.php:35 src/credentialtype.php:199
 msgid "Credential Type"
 msgstr "Credential Type"
 
-#: src/MultiFlexi/Ui/CredentialForm.php:62
+#: src/MultiFlexi/Ui/CredentialForm.php:61
 #, php-format
 msgid "🔐 edit credential type %s"
 msgstr "🔐 edit credential type %s"
 
-#: src/MultiFlexi/Ui/CredentialForm.php:62
+#: src/MultiFlexi/Ui/CredentialForm.php:61
 msgid "Edit Credential Type"
 msgstr "Edit Credential Type"
 
-#: src/MultiFlexi/Ui/CredentialForm.php:66
+#: src/MultiFlexi/Ui/CredentialForm.php:65
 msgid "No credential types for company defined yet"
 msgstr "No credential types for company defined yet"
 
-#: src/MultiFlexi/Ui/CredentialForm.php:69
+#: src/MultiFlexi/Ui/CredentialForm.php:68
 #: src/MultiFlexi/Ui/RuntemplateRequirementsChoser.php:77
 msgid "New Credential Type"
 msgstr "New Credential Type"
 
-#: src/MultiFlexi/Ui/CredentialForm.php:71
+#: src/MultiFlexi/Ui/CredentialForm.php:70
 msgid "Choose company first"
 msgstr "Choose company first"
 
-#: src/MultiFlexi/Ui/CredentialForm.php:84
-#: src/MultiFlexi/Ui/CredentialTypeForm.php:43
+#: src/MultiFlexi/Ui/CredentialForm.php:83
 msgid "Credential Name"
 msgstr "Credential Name"
 
-#: src/MultiFlexi/Ui/CredentialForm.php:127
+#: src/MultiFlexi/Ui/CredentialForm.php:126
 msgid "Unused by any runtemplate"
 msgstr "Unused by any runtemplate"
 
-#: src/MultiFlexi/Ui/CredentialForm.php:130
+#: src/MultiFlexi/Ui/CredentialForm.php:129
 msgid "Unsaved yet"
 msgstr "Unsaved yet"
 
-#: src/MultiFlexi/Ui/CredentialForm.php:175
+#: src/MultiFlexi/Ui/CredentialForm.php:174
 msgid "Populated by Credential type"
 msgstr "Populated by Credential type"
 
@@ -784,9 +2002,25 @@ msgstr "Do not use"
 msgid "No CredentialType helper used"
 msgstr "No CredentialType helper used"
 
+#: src/MultiFlexi/Ui/CredentialTypeForm.php:43
+#| msgid "Credential Name"
+msgid "Credential type Name"
+msgstr "Credential type Name"
+
+#: src/MultiFlexi/Ui/CredentialTypeForm.php:44
+#| msgid "New Company"
+msgid "Owned by Company"
+msgstr "Owned by Company"
+
 #: src/MultiFlexi/Ui/CredentialTypeForm.php:45
-msgid "Credential UUID"
-msgstr "Credential UUID"
+#| msgid "Credential UUID"
+msgid "Credential type UUID"
+msgstr "Credential type UUID"
+
+#: src/MultiFlexi/Ui/CredentialTypeForm.php:45
+#| msgid "Token generated"
+msgid "Autogenerated"
+msgstr "Autogenerated"
 
 #: src/MultiFlexi/Ui/CredentialTypeForm.php:47
 msgid "Credential type Helper Class"
@@ -850,7 +2084,7 @@ msgstr "Choose customer"
 msgid "Reload"
 msgstr "Reload"
 
-#: src/MultiFlexi/Ui/DBDataTable.php:135
+#: src/MultiFlexi/Ui/DBDataTable.php:135 src/admin-deletion-requests.php:180
 msgid "Filter"
 msgstr "Filter"
 
@@ -858,18 +2092,68 @@ msgstr "Filter"
 msgid "All pages"
 msgstr "All pages"
 
-#: src/MultiFlexi/Ui/DbStatus.php:40 src/MultiFlexi/Ui/MainMenu.php:83
-#: src/MultiFlexi/Ui/RunTemplatePanel.php:102 src/app.php:113
+#: src/MultiFlexi/Ui/DataExportWidget.php:51 src/data-export-page.php:29
+msgid "Personal Data Export"
+msgstr "Personal Data Export"
+
+#: src/MultiFlexi/Ui/DataExportWidget.php:64
+msgid ""
+"Download all your personal data stored in MultiFlexi. This includes your "
+"profile information, activity logs, consent records, and associated data."
+msgstr ""
+"Download all your personal data stored in MultiFlexi. This includes your "
+"profile information, activity logs, consent records, and associated data."
+
+#: src/MultiFlexi/Ui/DataExportWidget.php:73
+msgid ""
+"This feature complies with GDPR Article 15 - Right of Access. Your data will "
+"be provided in a structured, machine-readable format."
+msgstr ""
+"This feature complies with GDPR Article 15 - Right of Access. Your data will "
+"be provided in a structured, machine-readable format."
+
+#: src/MultiFlexi/Ui/DataExportWidget.php:90
+msgid "JSON Format"
+msgstr "JSON Format"
+
+#: src/MultiFlexi/Ui/DataExportWidget.php:94
+msgid "Machine-readable format ideal for technical users and data processing"
+msgstr "Machine-readable format ideal for technical users and data processing"
+
+#: src/MultiFlexi/Ui/DataExportWidget.php:99
+#| msgid "Export"
+msgid "Export as JSON"
+msgstr "Export as JSON"
+
+#: src/MultiFlexi/Ui/DataExportWidget.php:120
+msgid "Text Format"
+msgstr "Text Format"
+
+#: src/MultiFlexi/Ui/DataExportWidget.php:124
+msgid "Human-readable format suitable for review and printing"
+msgstr "Human-readable format suitable for review and printing"
+
+#: src/MultiFlexi/Ui/DataExportWidget.php:129
+#| msgid "Export"
+msgid "Export as Text"
+msgstr "Export as Text"
+
+#: src/MultiFlexi/Ui/DataExportWidget.php:174
+msgid "Recent Export Requests"
+msgstr "Recent Export Requests"
+
+#: src/MultiFlexi/Ui/DbStatus.php:40 src/MultiFlexi/Ui/MainMenu.php:85
+#: src/MultiFlexi/Ui/RunTemplatePanel.php:102 src/app.php:180
 msgid "Jobs"
 msgstr "Jobs"
 
-#: src/MultiFlexi/Ui/DbStatus.php:48 src/MultiFlexi/Ui/MainMenu.php:167
-#: src/MultiFlexi/Ui/MainMenu.php:177 src/customers.php:27
+#: src/MultiFlexi/Ui/DbStatus.php:48 src/MultiFlexi/Ui/MainMenu.php:186
+#: src/MultiFlexi/Ui/MainMenu.php:196 src/customers.php:27
 msgid "Customers"
 msgstr "Customers"
 
 #: src/MultiFlexi/Ui/DbStatus.php:52 src/MultiFlexi/Ui/MainMenu.php:65
-#: src/MultiFlexi/Ui/MainMenu.php:146 src/MultiFlexi/Ui/MainMenu.php:156
+#: src/MultiFlexi/Ui/MainMenu.php:165 src/MultiFlexi/Ui/MainMenu.php:175
 msgid "Companies"
 msgstr "Companies"
 
@@ -960,7 +2244,8 @@ msgstr "Save / Add"
 msgid "Executor not availble"
 msgstr "Executor not availble"
 
-#: src/MultiFlexi/Ui/ExecutorImage.php:43
+#: src/MultiFlexi/Ui/ExecutorImage.php:43 src/dashboard.php:154
+#: src/dashboard.php:203
 msgid "Unknown"
 msgstr "Unknown"
 
@@ -976,30 +2261,34 @@ msgstr "To"
 msgid "Minutly"
 msgstr "Minutly"
 
-#: src/MultiFlexi/Ui/IntervalChooser.php:37 src/intervals.php:34
-#: src/periodical.php:73
+#: src/MultiFlexi/Ui/IntervalChooser.php:37 src/dashboard.php:317
+#: src/intervals.php:34 src/periodical.php:73
 msgid "Hourly"
 msgstr "Hourly"
 
-#: src/MultiFlexi/Ui/IntervalChooser.php:38 src/intervals.php:35
-#: src/periodical.php:74
+#: src/MultiFlexi/Ui/IntervalChooser.php:38 src/dashboard.php:318
+#: src/intervals.php:35 src/periodical.php:74
 msgid "Daily"
 msgstr "Daily"
 
-#: src/MultiFlexi/Ui/IntervalChooser.php:39 src/intervals.php:36
-#: src/periodical.php:75
+#: src/MultiFlexi/Ui/IntervalChooser.php:39 src/dashboard.php:319
+#: src/intervals.php:36 src/periodical.php:75
 msgid "Weekly"
 msgstr "Weekly"
 
-#: src/MultiFlexi/Ui/IntervalChooser.php:40 src/intervals.php:37
-#: src/periodical.php:76
+#: src/MultiFlexi/Ui/IntervalChooser.php:40 src/dashboard.php:320
+#: src/intervals.php:37 src/periodical.php:76
 msgid "Monthly"
 msgstr "Monthly"
 
-#: src/MultiFlexi/Ui/IntervalChooser.php:41 src/intervals.php:38
-#: src/periodical.php:77
+#: src/MultiFlexi/Ui/IntervalChooser.php:41 src/dashboard.php:321
+#: src/intervals.php:38 src/periodical.php:77
 msgid "Yearly"
 msgstr "Yearly"
+
+#: src/MultiFlexi/Ui/IntervalChooser.php:42
+msgid "Custom"
+msgstr "Custom"
 
 #: src/MultiFlexi/Ui/JobChart.php:87
 msgid "Last 30 Days jobs"
@@ -1061,7 +2350,7 @@ msgstr "End"
 msgid "Not Yet Ended"
 msgstr "Not Yet Ended"
 
-#: src/MultiFlexi/Ui/JobInfo.php:57 src/app.php:80
+#: src/MultiFlexi/Ui/JobInfo.php:57 src/app.php:147
 msgid "Launched by"
 msgstr "Launched by"
 
@@ -1070,7 +2359,7 @@ msgstr "Launched by"
 msgid "Job"
 msgstr "Job"
 
-#: src/MultiFlexi/Ui/JobInfo.php:69 src/app.php:111
+#: src/MultiFlexi/Ui/JobInfo.php:69 src/app.php:178
 msgid "Overview"
 msgstr "Overview"
 
@@ -1082,23 +2371,24 @@ msgstr "export .env"
 msgid "Environment"
 msgstr "Environment"
 
-#: src/MultiFlexi/Ui/JobScheduleForm.php:56
+#: src/MultiFlexi/Ui/JobScheduleForm.php:55
 msgid "Save App Schedule"
 msgstr "Save App Schedule"
 
-#: src/MultiFlexi/Ui/JobScheduleForm.php:63
+#: src/MultiFlexi/Ui/JobScheduleForm.php:62
 msgid "Launch after"
 msgstr "Launch after"
 
-#: src/MultiFlexi/Ui/JobScheduleForm.php:80
+#: src/MultiFlexi/Ui/JobScheduleForm.php:79
 msgid "Choose Executon platfom"
 msgstr "Choose Executon platfom"
 
-#: src/MultiFlexi/Ui/JobSuccessGraph.php:52
+#: src/MultiFlexi/Ui/JobSuccessGraph.php:52 src/dashboard.php:389
 msgid "Success"
 msgstr "Success"
 
-#: src/MultiFlexi/Ui/JobSuccessGraph.php:53
+#: src/MultiFlexi/Ui/JobSuccessGraph.php:53 src/dashboard.php:280
+#: src/dashboard.php:391
 msgid "Failed"
 msgstr "Failed"
 
@@ -1130,131 +2420,177 @@ msgstr "No application registered yet. Please register one."
 msgid "Logs"
 msgstr "Logs"
 
-#: src/MultiFlexi/Ui/MainMenu.php:83
+#: src/MultiFlexi/Ui/MainMenu.php:84
 msgid "System"
 msgstr "System"
 
-#: src/MultiFlexi/Ui/MainMenu.php:84 src/logout.php:24
+#: src/MultiFlexi/Ui/MainMenu.php:86
+msgid "Job queue"
+msgstr "Job queue"
+
+#: src/MultiFlexi/Ui/MainMenu.php:87 src/dashboard.php:23
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: src/MultiFlexi/Ui/MainMenu.php:92 src/cookie-policy.php:228
+#: src/privacy-policy.php:171 src/privacy-policy.php:221
+msgid "Privacy Preferences"
+msgstr "Privacy Preferences"
+
+#: src/MultiFlexi/Ui/MainMenu.php:93
+#| msgid "Export"
+msgid "Export My Data"
+msgstr "Export My Data"
+
+#: src/MultiFlexi/Ui/MainMenu.php:94
+msgid "Request Account Deletion"
+msgstr "Request Account Deletion"
+
+#: src/MultiFlexi/Ui/MainMenu.php:96 src/consent-preferences.php:271
+#: src/cookie-policy.php:313 src/privacy-policy.php:24
+#: src/privacy-policy.php:29
+msgid "Privacy Policy"
+msgstr "Privacy Policy"
+
+#: src/MultiFlexi/Ui/MainMenu.php:97 src/cookie-policy.php:24
+#: src/cookie-policy.php:29 src/privacy-policy.php:228
+msgid "Cookie Policy"
+msgstr "Cookie Policy"
+
+#: src/MultiFlexi/Ui/MainMenu.php:99
+msgid "Privacy"
+msgstr "Privacy"
+
+#: src/MultiFlexi/Ui/MainMenu.php:101 src/logout.php:24
 msgid "Sign Off"
 msgstr "Sign Off"
 
-#: src/MultiFlexi/Ui/MainMenu.php:87
+#: src/MultiFlexi/Ui/MainMenu.php:104
 msgid ""
 "My Scheduler systemd service is not running. Consider `systemctl start "
 "multiflexi-scheduler`"
 msgstr ""
 "My Scheduler systemd service is not running. Consider `systemctl start "
 "multiflexi-scheduler`"
-
-#: src/MultiFlexi/Ui/MainMenu.php:91
-msgid ""
-"My Task Launcher systemd service is not running. Consider `systemctl start "
-"multiflexi-executor`"
-msgstr ""
-"My Task Launcher systemd service is not running. Consider `systemctl start "
-"multiflexi-executor`"
 
 #: src/MultiFlexi/Ui/MainMenu.php:108
+msgid ""
+"My Task Launcher systemd service is not running. Consider `systemctl start "
+"multiflexi-executor`"
+msgstr ""
+"My Task Launcher systemd service is not running. Consider `systemctl start "
+"multiflexi-executor`"
+
+#: src/MultiFlexi/Ui/MainMenu.php:126
 msgid "Register Application"
 msgstr "Register Application"
 
-#: src/MultiFlexi/Ui/MainMenu.php:112
+#: src/MultiFlexi/Ui/MainMenu.php:130
 msgid "Application list"
 msgstr "Application list"
 
-#: src/MultiFlexi/Ui/MainMenu.php:115
+#: src/MultiFlexi/Ui/MainMenu.php:133 src/runtemplates.php:26
+#| msgid "Configuration Wizard"
+msgid "Activation Wizard"
+msgstr "Activation Wizard"
+
+#: src/MultiFlexi/Ui/MainMenu.php:134
 msgid "RunTemplates"
 msgstr "RunTemplates"
 
-#: src/MultiFlexi/Ui/MainMenu.php:130
+#: src/MultiFlexi/Ui/MainMenu.php:149
 msgid "Register new Credential"
 msgstr "Register new Credential"
 
-#: src/MultiFlexi/Ui/MainMenu.php:131
+#: src/MultiFlexi/Ui/MainMenu.php:150
 msgid "Credentials Listing"
 msgstr "Credentials Listing"
 
-#: src/MultiFlexi/Ui/MainMenu.php:132
+#: src/MultiFlexi/Ui/MainMenu.php:151
 msgid "Register new Credential Type"
 msgstr "Register new Credential Type"
 
-#: src/MultiFlexi/Ui/MainMenu.php:133
+#: src/MultiFlexi/Ui/MainMenu.php:152
 msgid "Credential types listing"
 msgstr "Credential types listing"
 
-#: src/MultiFlexi/Ui/MainMenu.php:147 src/companydelete.php:58
+#: src/MultiFlexi/Ui/MainMenu.php:166 src/companydelete.php:58
 #: src/companysetup.php:64
 msgid "New Company"
 msgstr "New Company"
 
-#: src/MultiFlexi/Ui/MainMenu.php:147
+#: src/MultiFlexi/Ui/MainMenu.php:166
 msgid "Listing"
 msgstr "Listing"
 
-#: src/MultiFlexi/Ui/MainMenu.php:165 src/customer.php:44
+#: src/MultiFlexi/Ui/MainMenu.php:184 src/customer.php:44
 msgid "New Customer"
 msgstr "New Customer"
 
-#: src/MultiFlexi/Ui/MainMenu.php:186
+#: src/MultiFlexi/Ui/MainMenu.php:205
 msgid "Admin"
 msgstr "Admin"
 
-#: src/MultiFlexi/Ui/MainMenu.php:188
+#: src/MultiFlexi/Ui/MainMenu.php:207
 msgid "New Admin"
 msgstr "New Admin"
 
-#: src/MultiFlexi/Ui/MainMenu.php:189
+#: src/MultiFlexi/Ui/MainMenu.php:208
 msgid "New User Account"
 msgstr "New User Account"
 
-#: src/MultiFlexi/Ui/MainMenu.php:190
+#: src/MultiFlexi/Ui/MainMenu.php:209
 msgid "Environment Modules"
 msgstr "Environment Modules"
 
-#: src/MultiFlexi/Ui/MainMenu.php:191
-#: src/MultiFlexi/Ui/RunTemplatePanel.php:104
-#: src/MultiFlexi/Ui/RuntemplateConfigForm.php:105
-msgid "Actions"
-msgstr "Actions"
-
-#: src/MultiFlexi/Ui/MainMenu.php:192
+#: src/MultiFlexi/Ui/MainMenu.php:211
 msgid "Executors"
 msgstr "Executors"
 
-#: src/MultiFlexi/Ui/MainMenu.php:193
+#: src/MultiFlexi/Ui/MainMenu.php:212
 msgid "Credential Type helpers"
 msgstr "Credential Type helpers"
 
-#: src/MultiFlexi/Ui/MainMenu.php:194
+#: src/MultiFlexi/Ui/MainMenu.php:213
 msgid "Intervals"
 msgstr "Intervals"
 
-#: src/MultiFlexi/Ui/MainMenu.php:195
+#: src/MultiFlexi/Ui/MainMenu.php:214
 #: src/MultiFlexi/Ui/RequirementsOverview.php:29
 msgid "Requirements"
 msgstr "Requirements"
 
-#: src/MultiFlexi/Ui/MainMenu.php:196
-msgid "Job queue"
-msgstr "Job queue"
+#: src/MultiFlexi/Ui/MainMenu.php:216
+msgid "Data Retention Management"
+msgstr "Data Retention Management"
 
-#: src/MultiFlexi/Ui/MainMenu.php:198 src/users.php:24
+#: src/MultiFlexi/Ui/MainMenu.php:217 src/admin-deletion-requests.php:214
+msgid "Deletion Requests"
+msgstr "Deletion Requests"
+
+#: src/MultiFlexi/Ui/MainMenu.php:218
+#| msgid "Database Connection"
+msgid "Data Corrections"
+msgstr "Data Corrections"
+
+#: src/MultiFlexi/Ui/MainMenu.php:220 src/gdpr-user-deletion-request.php:128
+#: src/users.php:24
 msgid "Users"
 msgstr "Users"
 
-#: src/MultiFlexi/Ui/MainMenu.php:225
+#: src/MultiFlexi/Ui/MainMenu.php:247
 msgid "Click to hide messages"
 msgstr "Click to hide messages"
 
-#: src/MultiFlexi/Ui/MainMenu.php:250 src/MultiFlexi/Ui/MainMenu.php:252
+#: src/MultiFlexi/Ui/MainMenu.php:272 src/MultiFlexi/Ui/MainMenu.php:274
 msgid "Search"
 msgstr "Search"
 
-#: src/MultiFlexi/Ui/MainMenu.php:250
+#: src/MultiFlexi/Ui/MainMenu.php:272
 msgid "#number to jump on record"
 msgstr "#number to jump on record"
 
-#: src/MultiFlexi/Ui/MainMenu.php:291
+#: src/MultiFlexi/Ui/MainMenu.php:313
 msgid " "
 msgstr " "
 
@@ -1275,11 +2611,12 @@ msgid "Docs"
 msgstr "Docs"
 
 #: src/MultiFlexi/Ui/RegisterCustomerForm.php:31
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:194
 msgid "First Name"
 msgstr "First Name"
 
 #: src/MultiFlexi/Ui/RegisterCustomerForm.php:35
-#: src/MultiFlexi/Ui/UserForm.php:50 src/createaccount.php:167
+#: src/MultiFlexi/Ui/UserForm.php:49 src/createaccount.php:184
 msgid "Lastname"
 msgstr "Lastname"
 
@@ -1311,7 +2648,9 @@ msgstr "None"
 msgid "Schedule Launch"
 msgstr "Schedule Launch"
 
-#: src/MultiFlexi/Ui/RunTemplatePanel.php:62
+#: src/MultiFlexi/Ui/RunTemplatePanel.php:62 src/admin-data-corrections.php:182
+#: src/admin-deletion-requests.php:230 src/cookie-policy.php:364
+#: src/dashboard.php:378 src/data-retention-admin.php:265
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Customer.php:79
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Logger.php:114
 msgid "Status"
@@ -1401,6 +2740,7 @@ msgid "Provider not found"
 msgstr "Provider not found"
 
 #: src/MultiFlexi/Ui/SearchSelect.php:30 src/companyapp.php:97
+#: src/dashboard.php:378
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Env/RunTemplate.php:52
 msgid "RunTemplate"
 msgstr "RunTemplate"
@@ -1409,7 +2749,7 @@ msgstr "RunTemplate"
 msgid "Credential"
 msgstr "Credential"
 
-#: src/MultiFlexi/Ui/SearchSelect.php:36
+#: src/MultiFlexi/Ui/SearchSelect.php:36 src/admin-deletion-requests.php:172
 msgid "All"
 msgstr "All"
 
@@ -1426,14 +2766,358 @@ msgstr "No server specified"
 msgid "Stormware Pohoda"
 msgstr "Stormware Pohoda"
 
-#: src/MultiFlexi/Ui/UserForm.php:46 src/createaccount.php:163
-msgid "Firstname"
-msgstr "Firstname"
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:152
+#, php-format
+msgid "Your request to change %s has been submitted for administrator review."
+msgstr "Your request to change %s has been submitted for administrator review."
 
-#: src/MultiFlexi/Ui/UserForm.php:58 src/login.php:84
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:166
+#| msgid "Setup command executed successfully:"
+msgid "Profile updated successfully"
+msgstr "Profile updated successfully"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:169
+#| msgid "Failed to create new runtemplate"
+msgid "Failed to update profile"
+msgstr "Failed to update profile"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:182
+msgid "GDPR Article 16 - Right of Rectification"
+msgstr "GDPR Article 16 - Right of Rectification"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:183
+msgid ""
+"You have the right to request correction of inaccurate personal data. Some "
+"changes require administrator approval."
+msgstr ""
+"You have the right to request correction of inaccurate personal data. Some "
+"changes require administrator approval."
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:191
+#| msgid "Password confirmation"
+msgid "Personal Information"
+msgstr "Personal Information"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:197
+#| msgid "Lastname"
+msgid "Last Name"
+msgstr "Last Name"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:200
+#| msgid "eMail address"
+msgid "Email Address"
+msgstr "Email Address"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:203
+#: src/MultiFlexi/Ui/UserForm.php:57 src/login.php:152
 #: src/passwordrecovery.php:56 src/servers.php:29
 msgid "Username"
 msgstr "Username"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:214
+#| msgid "watching Changes"
+msgid "Save Changes"
+msgstr "Save Changes"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:239
+msgid "Requires Approval"
+msgstr "Requires Approval"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:256
+#: src/admin-data-corrections.php:109
+#| msgid "Default Value"
+msgid "Current Value"
+msgstr "Current Value"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:257 src/profile.php:47
+#| msgid "Do not use"
+msgid "(not set)"
+msgstr "(not set)"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:264
+#| msgid "Enter New field value here"
+msgid "Enter new value"
+msgstr "Enter new value"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:267
+msgid "Requested New Value"
+msgstr "Requested New Value"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:274
+msgid "Please explain why this change is needed (optional)"
+msgstr "Please explain why this change is needed (optional)"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:277
+#: src/admin-data-corrections.php:111
+#| msgid "Send notification to"
+msgid "Justification"
+msgstr "Justification"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:297
+#| msgid "invalid mail address"
+msgid "Please enter a valid email address"
+msgstr "Please enter a valid email address"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:303
+msgid ""
+"Only letters, spaces, hyphens, and apostrophes allowed (2-50 characters)"
+msgstr ""
+"Only letters, spaces, hyphens, and apostrophes allowed (2-50 characters)"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:309
+msgid ""
+"Only letters, numbers, underscore, hyphen, and dot allowed (3-30 characters)"
+msgstr ""
+"Only letters, numbers, underscore, hyphen, and dot allowed (3-30 characters)"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:324
+msgid "Your Data Change Requests"
+msgstr "Your Data Change Requests"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:340
+#| msgid "Admin"
+msgid "Admin notes"
+msgstr "Admin notes"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:362
+msgid "Pending Review"
+msgstr "Pending Review"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:364
+#: src/admin-data-corrections.php:86 src/admin-data-corrections.php:190
+#: src/admin-deletion-requests.php:174 src/profile.php:120
+msgid "Approved"
+msgstr "Approved"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:366
+#: src/admin-data-corrections.php:191 src/admin-deletion-requests.php:176
+#: src/profile.php:124
+msgid "Rejected"
+msgstr "Rejected"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:368
+#| msgid "Cancel"
+msgid "Cancelled"
+msgstr "Cancelled"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:403
+#| msgid "invalid mail address"
+msgid "Invalid email address format"
+msgstr "Invalid email address format"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:414
+#, php-format
+msgid ""
+"Invalid %s: only letters, spaces, hyphens, and apostrophes allowed (2-50 "
+"characters)"
+msgstr ""
+"Invalid %s: only letters, spaces, hyphens, and apostrophes allowed (2-50 "
+"characters)"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:415
+#| msgid "Firstname"
+msgid "first name"
+msgstr "first name"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:415
+#| msgid "Lastname"
+msgid "last name"
+msgstr "last name"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:426
+msgid ""
+"Invalid username: only letters, numbers, underscore, hyphen, and dot allowed "
+"(3-30 characters)"
+msgstr ""
+"Invalid username: only letters, numbers, underscore, hyphen, and dot allowed "
+"(3-30 characters)"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:435
+msgid "Username already exists"
+msgstr "Username already exists"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:73
+#| msgid "Method Not Allowed"
+msgid "Deletion Request Not Allowed"
+msgstr "Deletion Request Not Allowed"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:112
+msgid "⚠️ Account Deletion Request"
+msgstr "⚠️ Account Deletion Request"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:113
+msgid "⚠️ User Deletion Request"
+msgstr "⚠️ User Deletion Request"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:116
+msgid ""
+"You are about to request deletion of your own account. This action cannot be "
+"undone and will result in the permanent loss of your data."
+msgstr ""
+"You are about to request deletion of your own account. This action cannot be "
+"undone and will result in the permanent loss of your data."
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:117
+msgid ""
+"You are about to request deletion of another user's account. This action "
+"requires administrator approval and cannot be undone."
+msgstr ""
+"You are about to request deletion of another user's account. This action "
+"requires administrator approval and cannot be undone."
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:127
+#| msgid "Password confirmation"
+msgid "User Information"
+msgstr "User Information"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:130
+msgid "User Login: "
+msgstr "User Login: "
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:134
+#| msgid "Field Name"
+msgid "Full Name: "
+msgstr "Full Name: "
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:138
+#| msgid "Email"
+msgid "Email: "
+msgstr "Email: "
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:142
+#| msgid "Admin account created"
+msgid "Account Created: "
+msgstr "Account Created: "
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:155
+#| msgid "Credential Type"
+msgid "Deletion Type"
+msgstr "Deletion Type"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:161
+msgid "Soft Deletion (Recommended)"
+msgstr "Soft Deletion (Recommended)"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:163
+msgid ""
+"Account will be disabled and marked as deleted, but data will be retained "
+"for legal compliance. This can be processed immediately."
+msgstr ""
+"Account will be disabled and marked as deleted, but data will be retained "
+"for legal compliance. This can be processed immediately."
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:169
+msgid "Hard Deletion"
+msgstr "Hard Deletion"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:171
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:181
+msgid "Requires Admin Approval"
+msgstr "Requires Admin Approval"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:173
+msgid ""
+"Permanently removes all user data except what's required for legal "
+"compliance. Cannot be undone."
+msgstr ""
+"Permanently removes all user data except what's required for legal "
+"compliance. Cannot be undone."
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:179
+msgid "Data Anonymization"
+msgstr "Data Anonymization"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:183
+msgid ""
+"Replaces personal data with anonymous values while preserving data "
+"structure. Account will be disabled."
+msgstr ""
+"Replaces personal data with anonymous values while preserving data "
+"structure. Account will be disabled."
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:197
+msgid "Reason for Deletion"
+msgstr "Reason for Deletion"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:199
+msgid "Please explain why you are requesting this deletion:"
+msgstr "Please explain why you are requesting this deletion:"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:203
+msgid ""
+"e.g., No longer using the service, privacy concerns, account consolidation..."
+msgstr ""
+"e.g., No longer using the service, privacy concerns, account consolidation..."
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:217
+msgid "Legal Information"
+msgstr "Legal Information"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:220
+msgid "This request is made under "
+msgstr "This request is made under "
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:221
+msgid "Article 17 of the EU General Data Protection Regulation (GDPR)"
+msgstr "Article 17 of the EU General Data Protection Regulation (GDPR)"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:222
+msgid ", which grants you the right to erasure (\"right to be forgotten\")."
+msgstr ", which grants you the right to erasure (\"right to be forgotten\")."
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:227
+msgid "Soft deletion requests are typically processed within 24 hours"
+msgstr "Soft deletion requests are typically processed within 24 hours"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:228
+msgid "Hard deletion and anonymization requests require administrator review"
+msgstr "Hard deletion and anonymization requests require administrator review"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:229
+msgid "Some data may be retained for legal compliance purposes"
+msgstr "Some data may be retained for legal compliance purposes"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:230
+msgid "You will receive confirmation when the request is processed"
+msgstr "You will receive confirmation when the request is processed"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:242
+#| msgid "Configuration"
+msgid "Confirmation"
+msgstr "Confirmation"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:248
+msgid ""
+"I understand that this action cannot be easily undone and may result in "
+"permanent data loss"
+msgstr ""
+"I understand that this action cannot be easily undone and may result in "
+"permanent data loss"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:254
+msgid ""
+"I confirm that this request is made under my right to erasure as granted by "
+"GDPR Article 17"
+msgstr ""
+"I confirm that this request is made under my right to erasure as granted by "
+"GDPR Article 17"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:261
+msgid "I confirm that I am requesting deletion of my own account"
+msgstr "I confirm that I am requesting deletion of my own account"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:280
+msgid "Submit Deletion Request"
+msgstr "Submit Deletion Request"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:285 src/company.php:68
+#: src/data-retention-admin.php:386 src/job.php:92
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/MultiFlexi/Ui/UserForm.php:45 src/createaccount.php:180
+msgid "Firstname"
+msgstr "Firstname"
 
 #: src/MultiFlexi/Ui/Wizard.php:48 src/app.php:32
 msgid "n/a"
@@ -1471,6 +3155,49 @@ msgstr "Installed Action Modules"
 msgid "interval"
 msgstr "interval"
 
+#: src/activation-wizard.php:77
+#| msgid "#%d %s RunTemplate removal"
+msgid "RunTemplate created successfully"
+msgstr "RunTemplate created successfully"
+
+#: src/activation-wizard.php:79
+#| msgid "Error cloning runtemplate: %s"
+msgid "Error creating RunTemplate"
+msgstr "Error creating RunTemplate"
+
+#: src/activation-wizard.php:145
+#| msgid "Configuration removed"
+msgid "Configuration saved successfully"
+msgstr "Configuration saved successfully"
+
+#: src/activation-wizard.php:148
+#| msgid "Error saving Application"
+msgid "Error saving configuration"
+msgstr "Error saving configuration"
+
+#: src/activation-wizard.php:183
+#, php-format
+msgid ""
+"RunTemplate #%d \"%s\" successfully created for application \"%s\" and "
+"company \"%s\"."
+msgstr ""
+"RunTemplate #%d \"%s\" successfully created for application \"%s\" and "
+"company \"%s\"."
+
+#: src/activation-wizard.php:199
+#| msgid "Application Description"
+msgid "Application Activation Wizard"
+msgstr "Application Activation Wizard"
+
+#: src/activation-wizard.php:240
+msgid "No activation wizard data found. Please start a new activation."
+msgstr "No activation wizard data found. Please start a new activation."
+
+#: src/activation-wizard.php:241
+#| msgid "New Application"
+msgid "Start New Activation"
+msgstr "Start New Activation"
+
 #: src/adhoc.php:33 src/companyapps.php:37
 msgid "Applications used by Company"
 msgstr "Applications used by Company"
@@ -1479,44 +3206,373 @@ msgstr "Applications used by Company"
 msgid "Application Launcher"
 msgstr "Application Launcher"
 
-#: src/app.php:40
+#: src/admin-data-corrections.php:28
+msgid "Access denied: Administrator privileges required"
+msgstr "Access denied: Administrator privileges required"
+
+#: src/admin-data-corrections.php:45
+msgid "Request approved successfully"
+msgstr "Request approved successfully"
+
+#: src/admin-data-corrections.php:51
+msgid "Request rejected"
+msgstr "Request rejected"
+
+#: src/admin-data-corrections.php:58
+msgid "Data Correction Requests Administration"
+msgstr "Data Correction Requests Administration"
+
+#: src/admin-data-corrections.php:66
+#| msgid "Last 30 Days jobs"
+msgid "Last 30 Days Statistics"
+msgstr "Last 30 Days Statistics"
+
+#: src/admin-data-corrections.php:71
+#| msgid "watching Changes"
+msgid "Total Changes"
+msgstr "Total Changes"
+
+#: src/admin-data-corrections.php:76
+msgid "Users Affected"
+msgstr "Users Affected"
+
+#: src/admin-data-corrections.php:81
+msgid "Pending Approval"
+msgstr "Pending Approval"
+
+#: src/admin-data-corrections.php:96
+msgid "Pending Data Correction Requests"
+msgstr "Pending Data Correction Requests"
+
+#: src/admin-data-corrections.php:100
+#, php-format
+msgid "Request #%d - %s"
+msgstr "Request #%d - %s"
+
+#: src/admin-data-corrections.php:106 src/admin-data-corrections.php:179
+#: src/admin-deletion-requests.php:228 src/user.php:43
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Logger.php:135
+msgid "User"
+msgstr "User"
+
+#: src/admin-data-corrections.php:108
+#| msgid "Add Field to "
+msgid "Field to Change"
+msgstr "Field to Change"
+
+#: src/admin-data-corrections.php:110
+#| msgid "Default Value"
+msgid "Requested Value"
+msgstr "Requested Value"
+
+#: src/admin-data-corrections.php:112
+#| msgid "Requied"
+msgid "Requested On"
+msgstr "Requested On"
+
+#: src/admin-data-corrections.php:113
+#| msgid "eMail address"
+msgid "IP Address"
+msgstr "IP Address"
+
+#: src/admin-data-corrections.php:122
+#| msgid "Admin"
+msgid "Admin Notes"
+msgstr "Admin Notes"
+
+#: src/admin-data-corrections.php:126
+msgid "Enter your notes about this decision..."
+msgstr "Enter your notes about this decision..."
+
+#: src/admin-data-corrections.php:131 src/admin-deletion-requests.php:307
+msgid "Approve"
+msgstr "Approve"
+
+#: src/admin-data-corrections.php:134
+#| msgid "Are you sure you wish to delete %%d row of %s ?"
+msgid "Are you sure you want to approve this request?"
+msgstr "Are you sure you want to approve this request?"
+
+#: src/admin-data-corrections.php:136 src/admin-deletion-requests.php:318
+#| msgid "Subject"
+msgid "Reject"
+msgstr "Reject"
+
+#: src/admin-data-corrections.php:139
+#| msgid "Are you sure you wish to delete %%d row of %s ?"
+msgid "Are you sure you want to reject this request?"
+msgstr "Are you sure you want to reject this request?"
+
+#: src/admin-data-corrections.php:175
+msgid "Recent Activity"
+msgstr "Recent Activity"
+
+#: src/admin-data-corrections.php:180 src/profile.php:99
+#| msgid "Field Name"
+msgid "Field"
+msgstr "Field"
+
+#: src/admin-data-corrections.php:181
+msgid "Change"
+msgstr "Change"
+
+#: src/admin-data-corrections.php:183
+msgid "Reviewed By"
+msgstr "Reviewed By"
+
+#: src/admin-data-corrections.php:185
+#| msgid "Note"
+msgid "Notes"
+msgstr "Notes"
+
+#: src/admin-deletion-requests.php:30
+msgid "Access denied. Administrator privileges required."
+msgstr "Access denied. Administrator privileges required."
+
+#: src/admin-deletion-requests.php:43
+#| msgid "No Fields required"
+msgid "Request ID is required"
+msgstr "Request ID is required"
+
+#: src/admin-deletion-requests.php:62
+#, php-format
+msgid "Deletion request #%d approved successfully"
+msgstr "Deletion request #%d approved successfully"
+
+#: src/admin-deletion-requests.php:66
+msgid "Failed to approve deletion request"
+msgstr "Failed to approve deletion request"
+
+#: src/admin-deletion-requests.php:73
+#, php-format
+#| msgid "Setup command executed successfully:"
+msgid "Deletion request #%d rejected successfully"
+msgstr "Deletion request #%d rejected successfully"
+
+#: src/admin-deletion-requests.php:77
+#| msgid "Failed to create new runtemplate"
+msgid "Failed to reject deletion request"
+msgstr "Failed to reject deletion request"
+
+#: src/admin-deletion-requests.php:84
+#, php-format
+msgid "Deletion request #%d processed successfully"
+msgstr "Deletion request #%d processed successfully"
+
+#: src/admin-deletion-requests.php:88
+msgid "Failed to process deletion request"
+msgstr "Failed to process deletion request"
+
+#: src/admin-deletion-requests.php:94
+#| msgid "Unknown"
+msgid "Unknown action"
+msgstr "Unknown action"
+
+#: src/admin-deletion-requests.php:102
+msgid "GDPR Deletion Request Management"
+msgstr "GDPR Deletion Request Management"
+
+#: src/admin-deletion-requests.php:107
+msgid "User Deletion Request Management"
+msgstr "User Deletion Request Management"
+
+#: src/admin-deletion-requests.php:108
+msgid "Review and manage GDPR Article 17 user deletion requests."
+msgstr "Review and manage GDPR Article 17 user deletion requests."
+
+#: src/admin-deletion-requests.php:138
+msgid "Request Statistics"
+msgstr "Request Statistics"
+
+#: src/admin-deletion-requests.php:169
+msgid "Filter by Status: "
+msgstr "Filter by Status: "
+
+#: src/admin-deletion-requests.php:173 src/dashboard.php:386
+#: src/profile.php:116
+msgid "Pending"
+msgstr "Pending"
+
+#: src/admin-deletion-requests.php:175
+#| msgid "Company Deleted"
+msgid "Completed"
+msgstr "Completed"
+
+#: src/admin-deletion-requests.php:217
+msgid "No requests found"
+msgstr "No requests found"
+
+#: src/admin-deletion-requests.php:231
+#| msgid "Requied"
+msgid "Requested"
+msgstr "Requested"
+
+#: src/admin-deletion-requests.php:232
+#| msgid "Requied"
+msgid "Requested By"
+msgstr "Requested By"
+
+#: src/admin-deletion-requests.php:294
+#| msgid "Job details"
+msgid "View Details"
+msgstr "View Details"
+
+#: src/admin-deletion-requests.php:332
+msgid "Process"
+msgstr "Process"
+
+#: src/admin-deletion-requests.php:359
+msgid "Deletion Request Details"
+msgstr "Deletion Request Details"
+
+#: src/admin-deletion-requests.php:361
+#, php-format
+#| msgid "Requied"
+msgid "Request #%d"
+msgstr "Request #%d"
+
+#: src/admin-deletion-requests.php:365
+#| msgid "New User"
+msgid "Target User:"
+msgstr "Target User:"
+
+#: src/admin-deletion-requests.php:368
+#| msgid "Credential Type"
+msgid "Deletion Type:"
+msgstr "Deletion Type:"
+
+#: src/admin-deletion-requests.php:371
+#| msgid "Status"
+msgid "Status:"
+msgstr "Status:"
+
+#: src/admin-deletion-requests.php:374
+#| msgid "Requied"
+msgid "Requested:"
+msgstr "Requested:"
+
+#: src/admin-deletion-requests.php:377
+#| msgid "Requied"
+msgid "Requested By:"
+msgstr "Requested By:"
+
+#: src/admin-deletion-requests.php:381
+msgid "Reason:"
+msgstr "Reason:"
+
+#: src/admin-deletion-requests.php:386
+msgid "Reviewed By:"
+msgstr "Reviewed By:"
+
+#: src/admin-deletion-requests.php:389
+msgid "Review Date:"
+msgstr "Review Date:"
+
+#: src/admin-deletion-requests.php:393
+msgid "Review Notes:"
+msgstr "Review Notes:"
+
+#: src/admin-deletion-requests.php:407
+msgid "Audit Trail"
+msgstr "Audit Trail"
+
+#: src/admin-deletion-requests.php:413 src/data-retention-admin.php:264
+#| msgid "Actions"
+msgid "Action"
+msgstr "Action"
+
+#: src/admin-deletion-requests.php:414 src/data-retention-admin.php:262
+#: src/data-retention-admin.php:409
+#| msgid "Enabled"
+msgid "Table"
+msgstr "Table"
+
+#: src/admin-deletion-requests.php:415
+msgid "Reason"
+msgstr "Reason"
+
+#: src/app.php:54
+#, php-format
+msgid "Downloaded JSON from %s"
+msgstr "Downloaded JSON from %s"
+
+#: src/app.php:56
+#, php-format
+msgid "Error downloading JSON: %s"
+msgstr "Error downloading JSON: %s"
+
+#: src/app.php:66
+msgid "Invalid file type. Only .json files are allowed."
+msgstr "Invalid file type. Only .json files are allowed."
+
+#: src/app.php:70
+#, php-format
+#| msgid "uploaded file"
+msgid "Uploaded file %s"
+msgstr "Uploaded file %s"
+
+#: src/app.php:72
+#| msgid "No Data for Zabbix provided"
+msgid "No JSON file provided"
+msgstr "No JSON file provided"
+
+#: src/app.php:82
+#, php-format
+msgid "Application %s (%s) imported successfully"
+msgstr "Application %s (%s) imported successfully"
+
+#: src/app.php:89
+msgid "Failed to import application from JSON"
+msgstr "Failed to import application from JSON"
+
+#: src/app.php:92
+#, php-format
+msgid "Error importing JSON: %s"
+msgstr "Error importing JSON: %s"
+
+#: src/app.php:107
 #, php-format
 msgid "Application %s removal"
 msgstr "Application %s removal"
 
-#: src/app.php:48
+#: src/app.php:115
 msgid "Application Saved"
 msgstr "Application Saved"
 
-#: src/app.php:52
+#: src/app.php:119
 msgid "Error saving Application"
 msgstr "Error saving Application"
 
-#: src/app.php:62
+#: src/app.php:129
 msgid "New Application"
 msgstr "New Application"
 
-#: src/app.php:90
+#: src/app.php:157
 msgid "Not yet"
 msgstr "Not yet"
 
-#: src/app.php:103
+#: src/app.php:170
 msgid "Config fields editor"
 msgstr "Config fields editor"
 
-#: src/app.php:112 src/runtemplate.php:161
+#: src/app.php:179 src/runtemplate.php:169
 msgid "Configuration"
 msgstr "Configuration"
 
-#: src/app.php:115
+#: src/app.php:182
 msgid "Application Log"
 msgstr "Application Log"
 
-#: src/app.php:116
+#: src/app.php:183
 msgid "All Application Jobs history"
 msgstr "All Application Jobs history"
 
-#: src/app.php:118
+#: src/app.php:188
+#| msgid "Export"
+msgid "Import"
+msgstr "Import"
+
+#: src/app.php:189
 msgid "Export"
 msgstr "Export"
 
@@ -1528,17 +3584,13 @@ msgstr "Company list"
 msgid "Tasks"
 msgstr "Tasks"
 
-#: src/companies.php:39
+#: src/companies.php:39 src/data-retention-admin.php:290
 msgid "Delete"
 msgstr "Delete"
 
 #: src/company.php:58
 msgid "Run template"
 msgstr "Run template"
-
-#: src/company.php:68 src/job.php:92
-msgid "Cancel"
-msgstr "Cancel"
 
 #: src/company.php:154
 msgid "job queue"
@@ -1622,6 +3674,482 @@ msgstr "Config Fields"
 msgid "Back to app"
 msgstr "Back to app"
 
+#: src/consent-api.php:135
+msgid "Consent preferences saved successfully"
+msgstr "Consent preferences saved successfully"
+
+#: src/consent-api.php:141
+msgid "Failed to save some consent preferences"
+msgstr "Failed to save some consent preferences"
+
+#: src/consent-api.php:173
+#, php-format
+msgid "Consent for %s has been withdrawn"
+msgstr "Consent for %s has been withdrawn"
+
+#: src/consent-api.php:179
+msgid "Failed to withdraw consent"
+msgstr "Failed to withdraw consent"
+
+#: src/consent-preferences.php:27
+msgid "Privacy & Consent"
+msgstr "Privacy & Consent"
+
+#: src/consent-preferences.php:28
+msgid "Privacy & Consent Preferences"
+msgstr "Privacy & Consent Preferences"
+
+#: src/consent-preferences.php:45
+#, php-format
+#| msgid "Field Type is not set for %s "
+msgid "Failed to save consent for %s"
+msgstr "Failed to save consent for %s"
+
+#: src/consent-preferences.php:50
+msgid "Your consent preferences have been updated successfully."
+msgstr "Your consent preferences have been updated successfully."
+
+#: src/consent-preferences.php:54
+msgid "Some consent preferences could not be saved: "
+msgstr "Some consent preferences could not be saved: "
+
+#: src/consent-preferences.php:61
+msgid ""
+"Manage your privacy preferences and control how your data is processed. You "
+"can change these settings at any time."
+msgstr ""
+"Manage your privacy preferences and control how your data is processed. You "
+"can change these settings at any time."
+
+#: src/consent-preferences.php:66
+#| msgid "Credential Clone"
+msgid "Essential Cookies"
+msgstr "Essential Cookies"
+
+#: src/consent-preferences.php:67
+msgid ""
+"These cookies are necessary for the website to function and cannot be "
+"switched off. They are usually only set in response to actions made by you "
+"which amount to a request for services."
+msgstr ""
+"These cookies are necessary for the website to function and cannot be "
+"switched off. They are usually only set in response to actions made by you "
+"which amount to a request for services."
+
+#: src/consent-preferences.php:72
+msgid "Functional Cookies"
+msgstr "Functional Cookies"
+
+#: src/consent-preferences.php:73
+msgid ""
+"These cookies enable the website to provide enhanced functionality and "
+"personalisation. They may be set by us or by third party providers."
+msgstr ""
+"These cookies enable the website to provide enhanced functionality and "
+"personalisation. They may be set by us or by third party providers."
+
+#: src/consent-preferences.php:78
+msgid "Analytics Cookies"
+msgstr "Analytics Cookies"
+
+#: src/consent-preferences.php:80
+msgid ""
+"These cookies allow us to count visits and traffic sources so we can measure "
+"and improve the performance of our site. They help us know which pages are "
+"most and least popular."
+msgstr ""
+"These cookies allow us to count visits and traffic sources so we can measure "
+"and improve the performance of our site. They help us know which pages are "
+"most and least popular."
+
+#: src/consent-preferences.php:81
+msgid ""
+"These cookies allow us to count visits and traffic sources using self-hosted "
+"analytics solutions (like Matomo or AWStats) to measure and improve the "
+"performance of our site. No data is shared with third parties."
+msgstr ""
+"These cookies allow us to count visits and traffic sources using self-hosted "
+"analytics solutions (like Matomo or AWStats) to measure and improve the "
+"performance of our site. No data is shared with third parties."
+
+#: src/consent-preferences.php:86
+msgid "Marketing Cookies"
+msgstr "Marketing Cookies"
+
+#: src/consent-preferences.php:87
+msgid ""
+"These cookies may be set through our site by our advertising partners. They "
+"may be used to build a profile of your interests and show you relevant "
+"adverts."
+msgstr ""
+"These cookies may be set through our site by our advertising partners. They "
+"may be used to build a profile of your interests and show you relevant "
+"adverts."
+
+#: src/consent-preferences.php:92
+msgid "Personalization Cookies"
+msgstr "Personalization Cookies"
+
+#: src/consent-preferences.php:93
+msgid ""
+"These cookies allow us to remember choices you make and provide enhanced, "
+"more personal features based on your preferences."
+msgstr ""
+"These cookies allow us to remember choices you make and provide enhanced, "
+"more personal features based on your preferences."
+
+#: src/consent-preferences.php:131 src/cookie-policy.php:30
+#: src/privacy-policy.php:30
+msgid "Last updated: "
+msgstr "Last updated: "
+
+#: src/consent-preferences.php:142
+msgid "Save Preferences"
+msgstr "Save Preferences"
+
+#: src/consent-preferences.php:164
+#| msgid "Job History"
+msgid "Consent History"
+msgstr "Consent History"
+
+#: src/consent-preferences.php:224
+#| msgid "Are you sure you wish to delete %%d row of %s ?"
+msgid "Are you sure you want to withdraw this consent?"
+msgstr "Are you sure you want to withdraw this consent?"
+
+#: src/consent-preferences.php:244
+msgid "Error withdrawing consent: "
+msgstr "Error withdrawing consent: "
+
+#: src/consent-preferences.php:250
+msgid "Error withdrawing consent"
+msgstr "Error withdrawing consent"
+
+#: src/consent-preferences.php:261
+msgid "Important Information"
+msgstr "Important Information"
+
+#: src/consent-preferences.php:268
+msgid "You can change your consent preferences at any time."
+msgstr "You can change your consent preferences at any time."
+
+#: src/consent-preferences.php:269
+msgid ""
+"Essential cookies cannot be disabled as they are required for the site to "
+"function."
+msgstr ""
+"Essential cookies cannot be disabled as they are required for the site to "
+"function."
+
+#: src/consent-preferences.php:270
+msgid "Withdrawing consent may affect your experience on the site."
+msgstr "Withdrawing consent may affect your experience on the site."
+
+#: src/consent-preferences.php:271
+msgid "For more information, see our "
+msgstr "For more information, see our "
+
+#: src/cookie-policy.php:32
+msgid ""
+"This Cookie Policy explains how MultiFlexi uses cookies and similar tracking "
+"technologies when you visit our application."
+msgstr ""
+"This Cookie Policy explains how MultiFlexi uses cookies and similar tracking "
+"technologies when you visit our application."
+
+#: src/cookie-policy.php:40
+msgid "1. What Are Cookies?"
+msgstr "1. What Are Cookies?"
+
+#: src/cookie-policy.php:45
+msgid ""
+"Cookies are small data files that are placed on your computer or mobile "
+"device when you visit a website or application. Cookies are widely used by "
+"website and application owners to make their services work more efficiently "
+"and to provide reporting information."
+msgstr ""
+"Cookies are small data files that are placed on your computer or mobile "
+"device when you visit a website or application. Cookies are widely used by "
+"website and application owners to make their services work more efficiently "
+"and to provide reporting information."
+
+#: src/cookie-policy.php:48
+msgid ""
+"Cookies set by the website owner (in this case, MultiFlexi) are called "
+"\"first-party cookies.\" Cookies set by parties other than the website owner "
+"are called \"third-party cookies.\""
+msgstr ""
+"Cookies set by the website owner (in this case, MultiFlexi) are called "
+"\"first-party cookies.\" Cookies set by parties other than the website owner "
+"are called \"third-party cookies.\""
+
+#: src/cookie-policy.php:61
+msgid "2. Types of Cookies We Use"
+msgstr "2. Types of Cookies We Use"
+
+#: src/cookie-policy.php:66
+msgid "2.1 Essential Cookies"
+msgstr "2.1 Essential Cookies"
+
+#: src/cookie-policy.php:69
+msgid ""
+"These cookies are strictly necessary to provide you with services available "
+"through our application and to use some of its features. Because these "
+"cookies are essential for the application to function, you cannot refuse "
+"them without impacting how our services work."
+msgstr ""
+"These cookies are strictly necessary to provide you with services available "
+"through our application and to use some of its features. Because these "
+"cookies are essential for the application to function, you cannot refuse "
+"them without impacting how our services work."
+
+#: src/cookie-policy.php:76 src/cookie-policy.php:140
+#| msgid "Fio Token Name"
+msgid "Cookie Name"
+msgstr "Cookie Name"
+
+#: src/cookie-policy.php:79 src/cookie-policy.php:143
+msgid "Purpose"
+msgstr "Purpose"
+
+#: src/cookie-policy.php:82 src/cookie-policy.php:146
+#| msgid "Configuration"
+msgid "Duration"
+msgstr "Duration"
+
+#: src/cookie-policy.php:93
+msgid "Session management and user authentication"
+msgstr "Session management and user authentication"
+
+#: src/cookie-policy.php:96
+#| msgid "Version"
+msgid "Session"
+msgstr "Session"
+
+#: src/cookie-policy.php:99 src/cookie-policy.php:111 src/cookie-policy.php:123
+#| msgid "Firstname"
+msgid "First-party"
+msgstr "First-party"
+
+#: src/cookie-policy.php:105
+msgid "Stores your consent preferences"
+msgstr "Stores your consent preferences"
+
+#: src/cookie-policy.php:108 src/cookie-policy.php:120
+msgid "1 year"
+msgstr "1 year"
+
+#: src/cookie-policy.php:117
+msgid "Language preference"
+msgstr "Language preference"
+
+#: src/cookie-policy.php:130
+msgid "2.2 Analytics Cookies"
+msgstr "2.2 Analytics Cookies"
+
+#: src/cookie-policy.php:133
+msgid ""
+"These cookies help us understand how visitors interact with our application "
+"by collecting and reporting information anonymously. They help us improve "
+"our application and your experience."
+msgstr ""
+"These cookies help us understand how visitors interact with our application "
+"by collecting and reporting information anonymously. They help us improve "
+"our application and your experience."
+
+#: src/cookie-policy.php:160 src/cookie-policy.php:184
+msgid "Google Analytics - distinguishes unique users"
+msgstr "Google Analytics - distinguishes unique users"
+
+#: src/cookie-policy.php:163 src/cookie-policy.php:175
+msgid "2 years"
+msgstr "2 years"
+
+#: src/cookie-policy.php:166 src/cookie-policy.php:178
+#: src/cookie-policy.php:190
+msgid "Third-party"
+msgstr "Third-party"
+
+#: src/cookie-policy.php:172
+msgid "Google Analytics - maintains session state"
+msgstr "Google Analytics - maintains session state"
+
+#: src/cookie-policy.php:187
+msgid "24 hours"
+msgstr "24 hours"
+
+#: src/cookie-policy.php:198
+msgid ""
+"Google Analytics is disabled for this installation. Analytics cookies are "
+"not used."
+msgstr ""
+"Google Analytics is disabled for this installation. Analytics cookies are "
+"not used."
+
+#: src/cookie-policy.php:201
+msgid ""
+"This installation may use alternative analytics solutions like Matomo or "
+"AWStats for statistical analysis."
+msgstr ""
+"This installation may use alternative analytics solutions like Matomo or "
+"AWStats for statistical analysis."
+
+#: src/cookie-policy.php:220
+msgid "3. How to Control Cookies"
+msgstr "3. How to Control Cookies"
+
+#: src/cookie-policy.php:225
+msgid "3.1 MultiFlexi Cookie Preferences"
+msgstr "3.1 MultiFlexi Cookie Preferences"
+
+#: src/cookie-policy.php:228
+msgid "You can control most cookies through our "
+msgstr "You can control most cookies through our "
+
+#: src/cookie-policy.php:228
+msgid ""
+" page. This allows you to accept or reject different categories of cookies."
+msgstr ""
+" page. This allows you to accept or reject different categories of cookies."
+
+#: src/cookie-policy.php:232
+msgid "3.2 Browser Settings"
+msgstr "3.2 Browser Settings"
+
+#: src/cookie-policy.php:235
+msgid ""
+"Most web browsers allow you to control cookies through their settings. You "
+"can:"
+msgstr ""
+"Most web browsers allow you to control cookies through their settings. You "
+"can:"
+
+#: src/cookie-policy.php:239
+msgid "View what cookies are stored on your device"
+msgstr "View what cookies are stored on your device"
+
+#: src/cookie-policy.php:242
+msgid "Delete cookies individually or all at once"
+msgstr "Delete cookies individually or all at once"
+
+#: src/cookie-policy.php:245
+msgid "Block cookies from specific sites"
+msgstr "Block cookies from specific sites"
+
+#: src/cookie-policy.php:248
+msgid "Block all cookies (this may affect website functionality)"
+msgstr "Block all cookies (this may affect website functionality)"
+
+#: src/cookie-policy.php:253
+msgid "3.3 Do Not Track Signals"
+msgstr "3.3 Do Not Track Signals"
+
+#: src/cookie-policy.php:256
+msgid ""
+"Some browsers include a \"Do Not Track\" feature that lets you tell websites "
+"that you do not want to have your online activities tracked. MultiFlexi "
+"respects Do Not Track signals and will not set non-essential cookies when "
+"this signal is detected."
+msgstr ""
+"Some browsers include a \"Do Not Track\" feature that lets you tell websites "
+"that you do not want to have your online activities tracked. MultiFlexi "
+"respects Do Not Track signals and will not set non-essential cookies when "
+"this signal is detected."
+
+#: src/cookie-policy.php:269 src/privacy-policy.php:184
+msgid "4. Contact Us"
+msgstr "4. Contact Us"
+
+#: src/cookie-policy.php:274
+msgid ""
+"If you have any questions about this Cookie Policy or our use of cookies, "
+"please contact us:"
+msgstr ""
+"If you have any questions about this Cookie Policy or our use of cookies, "
+"please contact us:"
+
+#: src/cookie-policy.php:278 src/privacy-policy.php:55
+#: src/privacy-policy.php:193
+msgid "Email: info@vitexsoftware.cz"
+msgstr "Email: info@vitexsoftware.cz"
+
+#: src/cookie-policy.php:281 src/privacy-policy.php:52
+#: src/privacy-policy.php:196
+msgid "Website: "
+msgstr "Website: "
+
+#: src/cookie-policy.php:284 src/privacy-policy.php:199
+#| msgid "Github Project"
+msgid "Project: "
+msgstr "Project: "
+
+#: src/cookie-policy.php:298
+msgid "Manage Your Cookie Preferences"
+msgstr "Manage Your Cookie Preferences"
+
+#: src/cookie-policy.php:306
+msgid "Cookie Preferences"
+msgstr "Cookie Preferences"
+
+#: src/cookie-policy.php:320 src/privacy-policy.php:235
+msgid "Show Consent Banner"
+msgstr "Show Consent Banner"
+
+#: src/cookie-policy.php:336
+msgid "Your Current Cookie Settings"
+msgstr "Your Current Cookie Settings"
+
+#: src/cookie-policy.php:341
+msgid ""
+"The table below shows your current cookie preferences. You can change these "
+"at any time."
+msgstr ""
+"The table below shows your current cookie preferences. You can change these "
+"at any time."
+
+#: src/cookie-policy.php:361
+#| msgid "Field Type"
+msgid "Cookie Type"
+msgstr "Cookie Type"
+
+#: src/cookie-policy.php:367
+#| msgid "Updated"
+msgid "Last Updated"
+msgstr "Last Updated"
+
+#: src/cookie-policy.php:374
+#| msgid "Credential"
+msgid "Essential"
+msgstr "Essential"
+
+#: src/cookie-policy.php:377
+#| msgid "Optional"
+msgid "Functional"
+msgstr "Functional"
+
+#: src/cookie-policy.php:380
+msgid "Analytics"
+msgstr "Analytics"
+
+#: src/cookie-policy.php:383
+#| msgid "waiting"
+msgid "Marketing"
+msgstr "Marketing"
+
+#: src/cookie-policy.php:386
+#| msgid "Organization ID"
+msgid "Personalization"
+msgstr "Personalization"
+
+#: src/cookie-policy.php:409
+#| msgid "Not yet"
+msgid "Not Set"
+msgstr "Not Set"
+
+#: src/cookie-policy.php:418
+msgid "No cookie preferences have been set yet."
+msgstr "No cookie preferences have been set yet."
+
 #: src/createaccount.php:21
 msgid "No Administrator found"
 msgstr "No Administrator found"
@@ -1635,70 +4163,66 @@ msgstr "invalid mail address"
 msgid "Mail address %s is already registered"
 msgstr "Mail address %s is already registered"
 
-#: src/createaccount.php:63
-msgid "password is too short"
-msgstr "password is too short"
-
-#: src/createaccount.php:66
+#: src/createaccount.php:80
 msgid "Password control does not match"
 msgstr "Password control does not match"
 
-#: src/createaccount.php:76
+#: src/createaccount.php:90
 #, php-format
 msgid "Username %s is used. Please choose another one"
 msgstr "Username %s is used. Please choose another one"
 
-#: src/createaccount.php:95
+#: src/createaccount.php:109
 msgid "Admin account created"
 msgstr "Admin account created"
 
-#: src/createaccount.php:99
+#: src/createaccount.php:113
 msgid "User account created"
 msgstr "User account created"
 
-#: src/createaccount.php:106
+#: src/createaccount.php:120
 msgid "Sign On info"
 msgstr "Sign On info"
 
-#: src/createaccount.php:109
+#: src/createaccount.php:123
 #, php-format
 msgid "Your new %s account:"
 msgstr "Your new %s account:"
 
-#: src/createaccount.php:122
+#: src/createaccount.php:136
 #, php-format
 msgid "New Sign On to %s: %s"
 msgstr "New Sign On to %s: %s"
 
-#: src/createaccount.php:128
+#: src/createaccount.php:142
 msgid "New User"
 msgstr "New User"
 
-#: src/createaccount.php:144
+#: src/createaccount.php:158
 msgid "Administrator create failed"
 msgstr "Administrator create failed"
 
-#: src/createaccount.php:148
+#: src/createaccount.php:162
 msgid "New Administrator"
 msgstr "New Administrator"
 
-#: src/createaccount.php:150
+#: src/createaccount.php:167
 msgid "Singn On"
 msgstr "Singn On"
 
-#: src/createaccount.php:170
+#: src/createaccount.php:187
 msgid "User name"
 msgstr "User name"
 
-#: src/createaccount.php:177
+#: src/createaccount.php:194
 msgid "Password confirmation"
 msgstr "Password confirmation"
 
-#: src/createaccount.php:181
+#: src/createaccount.php:198
 msgid "eMail address"
 msgstr "eMail address"
 
-#: src/createaccount.php:187
+#: src/createaccount.php:204
 msgid "finish registration"
 msgstr "finish registration"
 
@@ -1721,7 +4245,7 @@ msgstr "Error saving Credential field"
 
 #: src/credential.php:65 src/credup.php:44 src/index.php:22 src/main.php:22
 #: src/requirements.php:22 src/search.php:123 src/status.php:22
-#: src/template.php:22 src/wizard.php:22
+#: src/template.php:22
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Env/MultiFlexi.php:52
 msgid "MultiFlexi"
 msgstr "MultiFlexi"
@@ -1800,13 +4324,13 @@ msgstr "Error saving Customer"
 msgid "App custom config Fields"
 msgstr "App custom config Fields"
 
-#: src/custserviceconfig.php:40 src/runtemplate.php:125
+#: src/custserviceconfig.php:40 src/runtemplate.php:133
 #: src/runtemplatepopulate.php:68
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/RunTemplate.php:448
 msgid "Config fields Saved"
 msgstr "Config fields Saved"
 
-#: src/custserviceconfig.php:43 src/runtemplate.php:157
+#: src/custserviceconfig.php:43 src/runtemplate.php:165
 #: src/runtemplatepopulate.php:70
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/RunTemplate.php:451
 msgid "Error saving Config fields"
@@ -1816,9 +4340,391 @@ msgstr "Error saving Config fields"
 msgid "Run Template"
 msgstr "Run Template"
 
-#: src/dashboard.php:20
-msgid "Dashboard"
-msgstr "Dashboard"
+#: src/dashboard.php:51
+#| msgid "Failed Jobs"
+msgid "Total Jobs"
+msgstr "Total Jobs"
+
+#: src/dashboard.php:53
+#| msgid "Failed Jobs"
+msgid "View Jobs"
+msgstr "View Jobs"
+
+#: src/dashboard.php:60
+#| msgid "Applications"
+msgid "Active Applications"
+msgstr "Active Applications"
+
+#: src/dashboard.php:62
+#| msgid "Apps"
+msgid "View Apps"
+msgstr "View Apps"
+
+#: src/dashboard.php:69
+#| msgid "Companies"
+msgid "Active Companies"
+msgstr "Active Companies"
+
+#: src/dashboard.php:71
+#| msgid "Companies"
+msgid "View Companies"
+msgstr "View Companies"
+
+#: src/dashboard.php:78
+#| msgid "Run Template"
+msgid "Run Templates"
+msgstr "Run Templates"
+
+#: src/dashboard.php:80
+#| msgid "Active RunTemplates"
+msgid "View Templates"
+msgstr "View Templates"
+
+#: src/dashboard.php:93 src/joblist.php:30
+#| msgid "Success Jobs"
+msgid "Successful Jobs"
+msgstr "Successful Jobs"
+
+#: src/dashboard.php:95
+#, php-format
+msgid "%d%% success rate"
+msgstr "%d%% success rate"
+
+#: src/dashboard.php:96 src/dashboard.php:107 src/dashboard.php:117
+#: src/dashboard.php:127
+msgid "View All"
+msgstr "View All"
+
+#: src/dashboard.php:106
+#, php-format
+msgid "%d%% failure rate"
+msgstr "%d%% failure rate"
+
+#: src/dashboard.php:114 src/joblist.php:36
+msgid "Running Jobs"
+msgstr "Running Jobs"
+
+#: src/dashboard.php:116
+msgid "Currently executing"
+msgstr "Currently executing"
+
+#: src/dashboard.php:124 src/joblist.php:39
+msgid "Today's Jobs"
+msgstr "Today's Jobs"
+
+#: src/dashboard.php:138
+#| msgid "Choose Application"
+msgid "Jobs by Application"
+msgstr "Jobs by Application"
+
+#: src/dashboard.php:179 src/dashboard.php:227
+#| msgid "Form %s not available"
+msgid "No data available"
+msgstr "No data available"
+
+#: src/dashboard.php:182 src/dashboard.php:230
+#| msgid "Error saving record"
+msgid "Error loading chart: "
+msgstr "Error loading chart: "
+
+#: src/dashboard.php:187
+#| msgid "choose Company"
+msgid "Jobs by Company"
+msgstr "Jobs by Company"
+
+#: src/dashboard.php:238
+msgid "Jobs Execution Timeline (Last 7 Days)"
+msgstr "Jobs Execution Timeline (Last 7 Days)"
+
+#: src/dashboard.php:280
+#| msgid "Success"
+msgid "Successful"
+msgstr "Successful"
+
+#: src/dashboard.php:290
+msgid "No execution data for the last 7 days"
+msgstr "No execution data for the last 7 days"
+
+#: src/dashboard.php:293
+#| msgid "Error cloning runtemplate: %s"
+msgid "Error loading timeline: "
+msgstr "Error loading timeline: "
+
+#: src/dashboard.php:301
+#| msgid "Run Template"
+msgid "Run Templates by Interval"
+msgstr "Run Templates by Interval"
+
+#: src/dashboard.php:316 src/periodical.php:72
+msgid "Minutely"
+msgstr "Minutely"
+
+#: src/dashboard.php:352
+#| msgid "Form %s not available"
+msgid "No run templates available"
+msgstr "No run templates available"
+
+#: src/dashboard.php:355
+#| msgid "Error cloning runtemplate: %s"
+msgid "Error loading interval chart: "
+msgstr "Error loading interval chart: "
+
+#: src/dashboard.php:363
+msgid "Recent Jobs (Last 20)"
+msgstr "Recent Jobs (Last 20)"
+
+#: src/dashboard.php:378
+#| msgid "Not Yet Started"
+msgid "Started"
+msgstr "Started"
+
+#: src/dashboard.php:378
+#| msgid "Unfinished Jobs"
+msgid "Finished"
+msgstr "Finished"
+
+#: src/dashboard.php:384
+msgid "Running"
+msgstr "Running"
+
+#: src/dashboard.php:407
+msgid "No recent jobs"
+msgstr "No recent jobs"
+
+#: src/dashboard.php:410
+#| msgid "Error saving record"
+msgid "Error loading recent jobs: "
+msgstr "Error loading recent jobs: "
+
+#: src/data-export-page.php:38 src/profile.php:65
+msgid "Your Rights Under GDPR"
+msgstr "Your Rights Under GDPR"
+
+#: src/data-export-page.php:44 src/profile.php:74
+msgid "Right of Access (Article 15)"
+msgstr "Right of Access (Article 15)"
+
+#: src/data-export-page.php:44
+msgid ""
+"You have the right to obtain confirmation as to whether personal data "
+"concerning you is being processed, and access to such data."
+msgstr ""
+"You have the right to obtain confirmation as to whether personal data "
+"concerning you is being processed, and access to such data."
+
+#: src/data-export-page.php:45
+msgid "Right to Rectification (Article 16)"
+msgstr "Right to Rectification (Article 16)"
+
+#: src/data-export-page.php:45
+msgid ""
+"You have the right to obtain rectification of inaccurate personal data and "
+"to have incomplete personal data completed."
+msgstr ""
+"You have the right to obtain rectification of inaccurate personal data and "
+"to have incomplete personal data completed."
+
+#: src/data-export-page.php:46
+msgid "Right to Erasure (Article 17)"
+msgstr "Right to Erasure (Article 17)"
+
+#: src/data-export-page.php:46
+msgid ""
+"You have the right to obtain erasure of personal data concerning you under "
+"certain circumstances."
+msgstr ""
+"You have the right to obtain erasure of personal data concerning you under "
+"certain circumstances."
+
+#: src/data-export-page.php:47 src/profile.php:82
+msgid "Right to Data Portability (Article 20)"
+msgstr "Right to Data Portability (Article 20)"
+
+#: src/data-export-page.php:47
+msgid ""
+"You have the right to receive your personal data in a structured, commonly "
+"used and machine-readable format."
+msgstr ""
+"You have the right to receive your personal data in a structured, commonly "
+"used and machine-readable format."
+
+#: src/data-export-page.php:75
+msgid ""
+"For questions about your personal data or to exercise other GDPR rights, "
+"please contact our Data Protection Officer."
+msgstr ""
+"For questions about your personal data or to exercise other GDPR rights, "
+"please contact our Data Protection Officer."
+
+#: src/data-retention-admin.php:42
+msgid "Please sign in"
+msgstr "Please sign in"
+
+#: src/data-retention-admin.php:49
+msgid "Insufficient privileges"
+msgstr "Insufficient privileges"
+
+#: src/data-retention-admin.php:81
+#, php-format
+msgid "Policy \"%s\" created successfully"
+msgstr "Policy \"%s\" created successfully"
+
+#: src/data-retention-admin.php:115
+#, php-format
+msgid ""
+"Cleanup completed: %d jobs processed, %d records deleted, %d anonymized, %d "
+"archived"
+msgstr ""
+"Cleanup completed: %d jobs processed, %d records deleted, %d anonymized, %d "
+"archived"
+
+#: src/data-retention-admin.php:138
+#, php-format
+msgid "Updated retention dates for %d records"
+msgstr "Updated retention dates for %d records"
+
+#: src/data-retention-admin.php:150
+#| msgid "New Administrator"
+msgid "Data Retention Administration"
+msgstr "Data Retention Administration"
+
+#: src/data-retention-admin.php:158
+msgid "GDPR Data Retention Administration"
+msgstr "GDPR Data Retention Administration"
+
+#: src/data-retention-admin.php:172
+msgid "Active Policies"
+msgstr "Active Policies"
+
+#: src/data-retention-admin.php:181 src/data-retention-admin.php:399
+msgid "Records Awaiting Cleanup"
+msgstr "Records Awaiting Cleanup"
+
+#: src/data-retention-admin.php:190
+msgid "Cleanup Jobs (7 days)"
+msgstr "Cleanup Jobs (7 days)"
+
+#: src/data-retention-admin.php:199
+msgid "Records Processed (7 days)"
+msgstr "Records Processed (7 days)"
+
+#: src/data-retention-admin.php:210 src/privacy-policy.php:213
+#| msgid "Fail Actions"
+msgid "Quick Actions"
+msgstr "Quick Actions"
+
+#: src/data-retention-admin.php:220
+msgid "Calculate Retention Dates"
+msgstr "Calculate Retention Dates"
+
+#: src/data-retention-admin.php:230
+msgid "Dry Run (simulate only)"
+msgstr "Dry Run (simulate only)"
+
+#: src/data-retention-admin.php:232
+msgid "Run Cleanup"
+msgstr "Run Cleanup"
+
+#: src/data-retention-admin.php:239
+msgid "Generate Report"
+msgstr "Generate Report"
+
+#: src/data-retention-admin.php:247
+msgid "Retention Policies Management"
+msgstr "Retention Policies Management"
+
+#: src/data-retention-admin.php:251
+msgid "Add New Policy"
+msgstr "Add New Policy"
+
+#: src/data-retention-admin.php:260 src/data-retention-admin.php:322
+msgid "Policy Name"
+msgstr "Policy Name"
+
+#: src/data-retention-admin.php:261 src/data-retention-admin.php:334
+#| msgid "Type"
+msgid "Data Type"
+msgstr "Data Type"
+
+#: src/data-retention-admin.php:263
+msgid "Retention Period"
+msgstr "Retention Period"
+
+#: src/data-retention-admin.php:280
+#| msgid "Enabled"
+msgid "Enable"
+msgstr "Enable"
+
+#: src/data-retention-admin.php:282
+#| msgid "Disabled"
+msgid "Disable"
+msgstr "Disable"
+
+#: src/data-retention-admin.php:292
+#| msgid "Are you sure you wish to delete %%d row of %s ?"
+msgid "Are you sure you want to delete this policy?"
+msgstr "Are you sure you want to delete this policy?"
+
+#: src/data-retention-admin.php:302
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:126
+msgid "days"
+msgstr "days"
+
+#: src/data-retention-admin.php:312
+msgid "Add New Retention Policy"
+msgstr "Add New Retention Policy"
+
+#: src/data-retention-admin.php:340
+#| msgid "Database Name"
+msgid "Table Name"
+msgstr "Table Name"
+
+#: src/data-retention-admin.php:346
+msgid "Retention Period (days)"
+msgstr "Retention Period (days)"
+
+#: src/data-retention-admin.php:352
+msgid "Grace Period (days)"
+msgstr "Grace Period (days)"
+
+#: src/data-retention-admin.php:364
+#| msgid "Delete company"
+msgid "Deletion Action"
+msgstr "Deletion Action"
+
+#: src/data-retention-admin.php:370
+msgid "Legal Basis"
+msgstr "Legal Basis"
+
+#: src/data-retention-admin.php:389
+#| msgid "Create"
+msgid "Create Policy"
+msgstr "Create Policy"
+
+#: src/data-retention-admin.php:403
+#, php-format
+msgid "%d records are past their retention period and ready for cleanup."
+msgstr "%d records are past their retention period and ready for cleanup."
+
+#: src/data-retention-admin.php:409
+msgid "Records"
+msgstr "Records"
+
+#: src/data-retention-admin.php:409
+msgid "Policy"
+msgstr "Policy"
+
+#: src/data-retention-admin.php:413
+msgid "No policy"
+msgstr "No policy"
+
+#: src/data-retention-admin.php:460
+msgid ""
+"Are you sure you want to run the cleanup? This will permanently delete or "
+"anonymize data."
+msgstr ""
+"Are you sure you want to run the cleanup? This will permanently delete or "
+"anonymize data."
 
 #: src/envmods.php:22
 msgid "MultiFlexi - Environment Modules"
@@ -1835,6 +4741,83 @@ msgstr "MultiFlexi - Executor Modules"
 #: src/executors.php:24
 msgid "Installed Executor Modules"
 msgstr "Installed Executor Modules"
+
+#: src/gdpr-user-deletion-request.php:47
+msgid "You do not have permission to request deletion for this user"
+msgstr "You do not have permission to request deletion for this user"
+
+#: src/gdpr-user-deletion-request.php:63
+msgid "Invalid deletion type selected"
+msgstr "Invalid deletion type selected"
+
+#: src/gdpr-user-deletion-request.php:67
+msgid "All confirmation checkboxes must be checked"
+msgstr "All confirmation checkboxes must be checked"
+
+#: src/gdpr-user-deletion-request.php:75
+#| msgid "No Configuration required"
+msgid "Self-deletion confirmation is required"
+msgstr "Self-deletion confirmation is required"
+
+#: src/gdpr-user-deletion-request.php:89
+#, php-format
+msgid ""
+"Deletion request %d has been processed successfully. The account has been "
+"disabled."
+msgstr ""
+"Deletion request %d has been processed successfully. The account has been "
+"disabled."
+
+#: src/gdpr-user-deletion-request.php:102
+#, php-format
+msgid ""
+"Deletion request %d was created but processing failed. Please contact an "
+"administrator."
+msgstr ""
+"Deletion request %d was created but processing failed. Please contact an "
+"administrator."
+
+#: src/gdpr-user-deletion-request.php:108
+#, php-format
+msgid ""
+"Deletion request %d has been submitted for administrator review. You will be "
+"notified when it is processed."
+msgstr ""
+"Deletion request %d has been submitted for administrator review. You will be "
+"notified when it is processed."
+
+#: src/gdpr-user-deletion-request.php:122
+msgid "GDPR User Deletion Request"
+msgstr "GDPR User Deletion Request"
+
+#: src/gdpr-user-deletion-request.php:130
+#| msgid "Delete company"
+msgid "Delete Account"
+msgstr "Delete Account"
+
+#: src/gdpr-user-deletion-request.php:135
+#| msgid "Delete company"
+msgid "Delete My Account"
+msgstr "Delete My Account"
+
+#: src/gdpr-user-deletion-request.php:136
+#, php-format
+#| msgid "Delete ?"
+msgid "Delete User: %s"
+msgstr "Delete User: %s"
+
+#: src/gdpr-user-deletion-request.php:155
+msgid "Existing Deletion Request"
+msgstr "Existing Deletion Request"
+
+#: src/gdpr-user-deletion-request.php:158
+#, php-format
+msgid ""
+"There is already a %s deletion request for this user (Request #%d, submitted "
+"%s). Status: %s"
+msgstr ""
+"There is already a %s deletion request for this user (Request #%d, submitted "
+"%s). Status: %s"
 
 #: src/index.php:26
 msgid "There is no administrators in the database."
@@ -1916,15 +4899,11 @@ msgstr "No errors"
 msgid "Artifacts"
 msgstr "Artifacts"
 
-#: src/job.php:98 src/job.php:100
-msgid "Previous"
-msgstr "Previous"
-
-#: src/joblist.php:20
+#: src/joblist.php:27
 msgid "Job history"
 msgstr "Job history"
 
-#: src/joblist.php:29 src/logs.php:29
+#: src/joblist.php:57 src/logs.php:29
 msgid "Dismis All"
 msgstr "Dismis All"
 
@@ -1932,20 +4911,35 @@ msgstr "Dismis All"
 msgid "App Run"
 msgstr "App Run"
 
-#: src/login.php:66
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType.php:120
-msgid "Logo"
-msgstr "Logo"
+#: src/login.php:38
+msgid "Access Denied"
+msgstr "Access Denied"
 
-#: src/login.php:67
+#: src/login.php:39
+msgid "Access denied from your IP address"
+msgstr "Access denied from your IP address"
+
+#: src/login.php:50
+msgid "Your session has expired. Please log in again."
+msgstr "Your session has expired. Please log in again."
+
+#: src/login.php:70
+msgid "Invalid security token. Please try again."
+msgstr "Invalid security token. Please try again."
+
+#: src/login.php:82
+msgid "Too many login attempts. Please try again later."
+msgstr "Too many login attempts. Please try again later."
+
+#: src/login.php:135
 msgid "Welcome to MultiFlexi"
 msgstr "Welcome to MultiFlexi"
 
-#: src/login.php:71
+#: src/login.php:139
 msgid "Sign in"
 msgstr "Sign in"
 
-#: src/login.php:87
+#: src/login.php:155
 msgid "the username you chose"
 msgstr "the username you chose"
 
@@ -1956,10 +4950,6 @@ msgstr "Good bye"
 #: src/logout.php:33
 msgid "Thank you for your patronage and look forward to another visit"
 msgstr "Thank you for your patronage and look forward to another visit"
-
-#: src/main.php:28
-msgid "Last 20 Jobs"
-msgstr "Last 20 Jobs"
 
 #: src/newjob.php:46 src/newjob.php:60
 msgid "Launch Form"
@@ -2028,23 +5018,242 @@ msgstr "Sent New Password"
 msgid "Continue"
 msgstr "Continue"
 
-#: src/periodical.php:72
-msgid "Minutely"
-msgstr "Minutely"
-
 #: src/periodical.php:88
 msgid "🍏 Apply"
 msgstr "🍏 Apply"
+
+#: src/privacy-policy.php:32
+msgid ""
+"This Privacy Policy describes how MultiFlexi (\"we\", \"our\", or \"us\") "
+"collects, uses, and protects your information when you use our service."
+msgstr ""
+"This Privacy Policy describes how MultiFlexi (\"we\", \"our\", or \"us\") "
+"collects, uses, and protects your information when you use our service."
+
+#: src/privacy-policy.php:40
+msgid "1. Data Controller"
+msgstr "1. Data Controller"
+
+#: src/privacy-policy.php:45
+msgid ""
+"MultiFlexi is developed and maintained by Vitex Software. For privacy-"
+"related inquiries, please contact:"
+msgstr ""
+"MultiFlexi is developed and maintained by Vitex Software. For privacy-"
+"related inquiries, please contact:"
+
+#: src/privacy-policy.php:49
+#| msgid "Vitex Software"
+msgid "Company: Vitex Software"
+msgstr "Company: Vitex Software"
+
+#: src/privacy-policy.php:69
+msgid "2. Information We Collect"
+msgstr "2. Information We Collect"
+
+#: src/privacy-policy.php:74
+msgid "2.1 Personal Information"
+msgstr "2.1 Personal Information"
+
+#: src/privacy-policy.php:77
+msgid "We may collect the following personal information:"
+msgstr "We may collect the following personal information:"
+
+#: src/privacy-policy.php:81
+msgid "Account information: username, email address, and encrypted passwords"
+msgstr "Account information: username, email address, and encrypted passwords"
+
+#: src/privacy-policy.php:84
+msgid "Profile information: first name, last name, and user preferences"
+msgstr "Profile information: first name, last name, and user preferences"
+
+#: src/privacy-policy.php:87
+msgid "System logs: IP addresses, browser information, and access timestamps"
+msgstr "System logs: IP addresses, browser information, and access timestamps"
+
+#: src/privacy-policy.php:92
+msgid "2.2 Technical Information"
+msgstr "2.2 Technical Information"
+
+#: src/privacy-policy.php:95
+msgid "We automatically collect certain technical information:"
+msgstr "We automatically collect certain technical information:"
+
+#: src/privacy-policy.php:99
+msgid ""
+"Device information: browser type, operating system, and device identifiers"
+msgstr ""
+"Device information: browser type, operating system, and device identifiers"
+
+#: src/privacy-policy.php:102
+msgid "Usage data: pages visited, features used, and interaction patterns"
+msgstr "Usage data: pages visited, features used, and interaction patterns"
+
+#: src/privacy-policy.php:105
+msgid "Performance data: system performance metrics and error logs"
+msgstr "Performance data: system performance metrics and error logs"
+
+#: src/privacy-policy.php:110
+#| msgid "Application name"
+msgid "2.3 Application Data"
+msgstr "2.3 Application Data"
+
+#: src/privacy-policy.php:113
+msgid "As a task automation platform, we process:"
+msgstr "As a task automation platform, we process:"
+
+#: src/privacy-policy.php:117
+msgid "Company information and configurations"
+msgstr "Company information and configurations"
+
+#: src/privacy-policy.php:120
+msgid "Application settings and credentials (encrypted)"
+msgstr "Application settings and credentials (encrypted)"
+
+#: src/privacy-policy.php:123
+msgid "Job execution logs and results"
+msgstr "Job execution logs and results"
+
+#: src/privacy-policy.php:126
+#| msgid "%d used configurations removed"
+msgid "Scheduled task configurations"
+msgstr "Scheduled task configurations"
+
+#: src/privacy-policy.php:140
+msgid "3. Your Rights"
+msgstr "3. Your Rights"
+
+#: src/privacy-policy.php:145
+msgid ""
+"Under GDPR and applicable data protection laws, you have the following "
+"rights:"
+msgstr ""
+"Under GDPR and applicable data protection laws, you have the following "
+"rights:"
+
+#: src/privacy-policy.php:149
+msgid "Right of access: Request copies of your personal data"
+msgstr "Right of access: Request copies of your personal data"
+
+#: src/privacy-policy.php:152
+msgid "Right to rectification: Correct inaccurate personal data"
+msgstr "Right to rectification: Correct inaccurate personal data"
+
+#: src/privacy-policy.php:155
+msgid "Right to erasure: Request deletion of your personal data"
+msgstr "Right to erasure: Request deletion of your personal data"
+
+#: src/privacy-policy.php:158
+msgid "Right to restrict processing: Limit how we use your data"
+msgstr "Right to restrict processing: Limit how we use your data"
+
+#: src/privacy-policy.php:161
+msgid "Right to data portability: Receive your data in a structured format"
+msgstr "Right to data portability: Receive your data in a structured format"
+
+#: src/privacy-policy.php:164
+msgid "Right to object: Object to processing based on legitimate interest"
+msgstr "Right to object: Object to processing based on legitimate interest"
+
+#: src/privacy-policy.php:167
+msgid "Right to withdraw consent: Withdraw consent for optional processing"
+msgstr "Right to withdraw consent: Withdraw consent for optional processing"
+
+#: src/privacy-policy.php:171
+msgid "To exercise your rights, please use our "
+msgstr "To exercise your rights, please use our "
+
+#: src/privacy-policy.php:171
+msgid " page or contact us directly."
+msgstr " page or contact us directly."
+
+#: src/privacy-policy.php:189
+msgid ""
+"If you have any questions about this Privacy Policy or our data practices, "
+"please contact us:"
+msgstr ""
+"If you have any questions about this Privacy Policy or our data practices, "
+"please contact us:"
+
+#: src/profile.php:32
+msgid "My Profile"
+msgstr "My Profile"
+
+#: src/profile.php:38
+#| msgid "Password confirmation"
+msgid "Profile Information"
+msgstr "Profile Information"
+
+#: src/profile.php:50
+msgid "Member since"
+msgstr "Member since"
+
+#: src/profile.php:58
+msgid "Update Personal Information"
+msgstr "Update Personal Information"
+
+#: src/profile.php:66
+msgid ""
+"Under the General Data Protection Regulation (GDPR), you have several rights "
+"regarding your personal data:"
+msgstr ""
+"Under the General Data Protection Regulation (GDPR), you have several rights "
+"regarding your personal data:"
+
+#: src/profile.php:70
+msgid "Right of Rectification (Article 16)"
+msgstr "Right of Rectification (Article 16)"
+
+#: src/profile.php:71
+msgid ""
+"You can request correction of inaccurate personal data using the form above."
+msgstr ""
+"You can request correction of inaccurate personal data using the form above."
+
+#: src/profile.php:75
+msgid "Export your data"
+msgstr "Export your data"
+
+#: src/profile.php:78
+msgid "Right to be Forgotten (Article 17)"
+msgstr "Right to be Forgotten (Article 17)"
+
+#: src/profile.php:79
+msgid "Contact an administrator to request account deletion."
+msgstr "Contact an administrator to request account deletion."
+
+#: src/profile.php:83
+msgid "You can export your data in a machine-readable format."
+msgstr "You can export your data in a machine-readable format."
+
+#: src/profile.php:95
+msgid "Recent Data Changes"
+msgstr "Recent Data Changes"
+
+#: src/profile.php:100
+#| msgid "Value"
+msgid "Old Value"
+msgstr "Old Value"
+
+#: src/profile.php:101
+#| msgid "Value"
+msgid "New Value"
+msgstr "New Value"
+
+#: src/profile.php:112
+#| msgid "Directory path"
+msgid "Direct"
+msgstr "Direct"
 
 #: src/queue.php:22
 msgid "MultiFlexi Job Queue"
 msgstr "MultiFlexi Job Queue"
 
-#: src/runtemplate.php:143
+#: src/runtemplate.php:151
 msgid "Setup command executed successfully:"
 msgstr "Setup command executed successfully:"
 
-#: src/runtemplate.php:149
+#: src/runtemplate.php:157
 msgid "Setup command failed:"
 msgstr "Setup command failed:"
 
@@ -2073,6 +5282,10 @@ msgstr "Error cloning runtemplate: %s"
 #: src/runtemplates.php:22
 msgid "Runtemplates"
 msgstr "Runtemplates"
+
+#: src/runtemplates.php:28
+msgid "Use the wizard to easily activate an application in a company"
+msgstr "Use the wizard to easily activate an application in a company"
 
 #: src/schedule.php:25
 msgid "Schedule Job"
@@ -2144,11 +5357,6 @@ msgstr "Register new"
 #: src/tasks.php:23
 msgid "Company Tasks"
 msgstr "Company Tasks"
-
-#: src/user.php:43
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Logger.php:135
-msgid "User"
-msgstr "User"
 
 #: src/user.php:51
 msgid "Are you sure ?"
@@ -2224,10 +5432,9 @@ msgid "Make Redine issue using Job output"
 msgstr "Make Redine issue using Job output"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Action/Reschedule.php:32
-#, fuzzy
 #| msgid "Schedule"
 msgid "Reschedule"
-msgstr "Schedule"
+msgstr "Reschedule"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Action/Reschedule.php:42
 msgid "Reschedule job to be executed later again"
@@ -2304,10 +5511,9 @@ msgid "Report endpoint"
 msgstr "Report endpoint"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Action/Zabbix.php:34
-#, fuzzy
 #| msgid "Zabbix key"
 msgid "Zabbix"
-msgstr "Zabbix key"
+msgstr "Zabbix"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Action/Zabbix.php:44
 msgid "Send Job Output to Zabbix"
@@ -2378,25 +5584,61 @@ msgstr "Executable %s does not exist in search PATH %s"
 msgid "file %s is not executable"
 msgstr "file %s is not executable"
 
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:304
-#, fuzzy
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:302
+#, php-format
+msgid "Application removal %d %s"
+msgstr "Application removal %d %s"
+
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:329
+#, php-format
+msgid "Unassigned from %d companies"
+msgstr "Unassigned from %d companies"
+
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:340
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyApp.php:91
+#, php-format
+msgid "%s Action Config removal"
+msgstr "%s Action Config removal"
+
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:348
+#, php-format
+#| msgid "#%d %s RunTemplate removal"
+msgid "#%d %s RunTemplate removal"
+msgstr "#%d %s RunTemplate removal"
+
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:355
+#, php-format
+msgid "%d Config fields removed"
+msgstr "%d Config fields removed"
+
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:362
+#, php-format
+msgid "%d Configurations removed"
+msgstr "%d Configurations removed"
+
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:369
+#, php-format
+msgid "%d Jobs removed"
+msgstr "%d Jobs removed"
+
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:389
 #| msgid "Required metrics file not found "
 msgid "Schema file not found: "
-msgstr "Required metrics file not found "
+msgstr "Schema file not found: "
 
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:310
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:395
 msgid "App definition file is empty: "
-msgstr ""
+msgstr "App definition file is empty: "
 
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:326
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:411
 msgid "Invalid JSON: "
-msgstr ""
+msgstr "Invalid JSON: "
 
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:470
-#, fuzzy, php-format
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:589
+#, php-format
 #| msgid "the required configuration key `%s` was not filled"
 msgid "The required configuration key `%s` was not filled"
-msgstr "the required configuration key `%s` was not filled"
+msgstr "The required configuration key `%s` was not filled"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CommonAction.php:96
 msgid "No Configuration required"
@@ -2411,37 +5653,15 @@ msgstr "No Action performed"
 msgid "Application %s was assigned to %s company"
 msgstr "Application %s was assigned to %s company"
 
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyApp.php:91
-#, php-format
-msgid "%s Action Config removal"
-msgstr "%s Action Config removal"
-
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyApp.php:96
 #, php-format
 msgid "Application %s was unassigned from %s company"
 msgstr "Application %s was unassigned from %s company"
 
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyJob.php:82
-msgid "Standard Output"
-msgstr "Standard Output"
-
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyJob.php:83
-msgid "Standard Error"
-msgstr "Standard Error"
-
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyJob.php:84
-msgid "Job start time"
-msgstr "Job start time"
-
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyJob.php:85
-msgid "Job Finish time"
-msgstr "Job Finish time"
-
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Conffield.php:106
-#, fuzzy
 #| msgid "App custom config Fields"
 msgid "Application Config Fields"
-msgstr "App custom config Fields"
+msgstr "Application Config Fields"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Configuration.php:111
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Environmentor.php:92
@@ -2452,16 +5672,16 @@ msgstr "Setting Environment %s to %s"
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialProtoType.php:75
 #, php-format
 msgid "%s prefilled from default"
-msgstr ""
+msgstr "%s prefilled from default"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialProtoType.php:87
 msgid "Choose Provided field"
 msgstr "Choose Provided field"
 
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType.php:178
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType.php:140
 #, php-format
 msgid "Unexistent field helper %s ?!?"
-msgstr ""
+msgstr "Unexistent field helper %s ?!?"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/AbraFlexi.php:34
 msgid "AbraFlexi Login"
@@ -2492,10 +5712,9 @@ msgid "AbraFlexi Company"
 msgstr "AbraFlexi Company"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/AbraFlexi.php:43
-#, fuzzy
 #| msgid "Company must be chosen"
 msgid "Company to be handled"
-msgstr "Company must be chosen"
+msgstr "Company to be handled"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/AbraFlexi.php:60
 msgid "AbraFlexi"
@@ -2506,57 +5725,55 @@ msgid "AbraFlexi credential type for integration with AbraFlexi API"
 msgstr "AbraFlexi credential type for integration with AbraFlexi API"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Common.php:36
-#, fuzzy
 #| msgid "Create Credential type"
 msgid "Non specialised credential type"
-msgstr "Create Credential type"
+msgstr "Non specialised credential type"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Common.php:48
 msgid "Common type"
-msgstr ""
+msgstr "Common type"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:33
 msgid "Token unique identifier"
-msgstr ""
+msgstr "Token unique identifier"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:33
 msgid "Token UUID"
-msgstr "UUID Tokenu"
+msgstr "Token UUID"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:38
 msgid "CSAS API Key"
-msgstr ""
+msgstr "CSAS API Key"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:38
 msgid "API Key for CSAS services"
-msgstr ""
+msgstr "API Key for CSAS services"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:42
 msgid "CSAS Sandbox Mode"
-msgstr ""
+msgstr "CSAS Sandbox Mode"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:42
 msgid "Enable or disable sandbox mode for CSAS services"
-msgstr ""
+msgstr "Enable or disable sandbox mode for CSAS services"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:46
 msgid "CSAS Access Token"
-msgstr ""
+msgstr "CSAS Access Token"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:46
 msgid "Access token for CSAS services"
-msgstr ""
+msgstr "Access token for CSAS services"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:61
 #, php-format
 msgid "Obtaining tokens availble: %s"
-msgstr ""
+msgstr "Obtaining tokens availble: %s"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:78
-#, fuzzy
 #| msgid "Form %s not available"
 msgid "No tokens available"
-msgstr "Form %s not available"
+msgstr "No tokens available"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:90
 msgid "Česká Spořitelna a.s."
@@ -2568,48 +5785,42 @@ msgstr "ČS a.s. / Erste"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:101
 msgid "csas-access-token command not found in PATH."
-msgstr "příkaz csas-access-token nenalezen v PATH."
+msgstr "csas-access-token command not found in PATH."
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:111
 msgid "Expire in days"
-msgstr ""
+msgstr "Expire in days"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:123
 msgid "Click to use this UUID"
-msgstr ""
-
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:126
-msgid "days"
-msgstr "dnů"
+msgstr "Click to use this UUID"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:131
-#, fuzzy
 #| msgid "Form %s not available"
 msgid "Tokens available"
-msgstr "Form %s not available"
+msgstr "Tokens available"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:165
 #, php-format
 msgid "Obtaining fresh token using: %s"
-msgstr ""
+msgstr "Obtaining fresh token using: %s"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:174
 msgid "Token successfully obtained."
-msgstr ""
+msgstr "Token successfully obtained."
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:176
 msgid "Token could not be obtained."
-msgstr ""
+msgstr "Token could not be obtained."
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:184
-#, fuzzy
 #| msgid "Token generated"
 msgid "Token file was not created."
-msgstr "Token generated"
+msgstr "Token file was not created."
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:199
 msgid "Configure the CSAS_TOKEN_ID in Credential setting first"
-msgstr ""
+msgstr "Configure the CSAS_TOKEN_ID in Credential setting first"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/EnvFile.php:30
 msgid ".env"
@@ -2647,10 +5858,10 @@ msgid "Load configuration values from .env file"
 msgstr "Load configuration values from .env file"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/EnvFile.php:120
-#, fuzzy, php-format
+#, php-format
 #| msgid "Populated by Credential type"
 msgid "Populated by .env file %s "
-msgstr "Populated by Credential type"
+msgstr "Populated by .env file %s "
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/FioBank.php:34
 msgid "Fio Bank Account Number"
@@ -2670,7 +5881,7 @@ msgstr "Token for accessing the Fio Bank API"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/FioBank.php:38
 msgid "AXWxJN18IqwbY....xccP2eyxvWDFLe2"
-msgstr ""
+msgstr "AXWxJN18IqwbY....xccP2eyxvWDFLe2"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/FioBank.php:40
 msgid "Fio Token Name"
@@ -2777,10 +5988,9 @@ msgid "X-IBM-Client-Id for API access"
 msgstr "X-IBM-Client-Id for API access"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/RaiffeisenBank.php:76
-#, fuzzy
 #| msgid "Raiffeisen Bank Premium API"
 msgid "Raiffeisen Bank"
-msgstr "Raiffeisen Bank Premium API"
+msgstr "Raiffeisen Bank"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/RaiffeisenBank.php:81
 msgid "Raiffeisen Bank Premium API"
@@ -2851,50 +6061,43 @@ msgid "Credential type for connecting to Microsoft SQL Server"
 msgstr "Credential type for connecting to Microsoft SQL Server"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/VaultWarden.php:32
-#, fuzzy
 #| msgid "VaultWarden"
 msgid "VaultWarden URL"
-msgstr "VaultWarden"
+msgstr "VaultWarden URL"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/VaultWarden.php:32
-#, fuzzy
 #| msgid "Use VaultWarden secrets"
 msgid "URL instance VaultWarden"
-msgstr "Use VaultWarden secrets"
+msgstr "URL instance VaultWarden"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/VaultWarden.php:33
-#, fuzzy
 #| msgid "Use VaultWarden secrets"
 msgid "VaultWarden User login"
-msgstr "Use VaultWarden secrets"
+msgstr "VaultWarden User login"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/VaultWarden.php:33
-#, fuzzy
 #| msgid "User name"
 msgid "User e-mail"
-msgstr "User name"
+msgstr "User e-mail"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/VaultWarden.php:34
-#, fuzzy
 #| msgid "AbraFlexi user password"
 msgid "VaultWarden User password"
-msgstr "AbraFlexi user password"
+msgstr "VaultWarden User password"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/VaultWarden.php:34
-#, fuzzy
 #| msgid "Password for Certificate"
 msgid "Password for user"
-msgstr "Password for Certificate"
+msgstr "Password for user"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/VaultWarden.php:35
-#, fuzzy
 #| msgid "VaultWarden"
 msgid "VaultWarden Folder"
-msgstr "VaultWarden"
+msgstr "VaultWarden Folder"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/VaultWarden.php:35
 msgid "Název složky s hesly ve VaultWarden"
-msgstr ""
+msgstr "Název složky s hesly ve VaultWarden"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/VaultWarden.php:43
 msgid "VaultWarden"
@@ -2906,14 +6109,13 @@ msgstr "Use VaultWarden secrets"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/VaultWarden.php:89
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/VaultWarden.php:134
-#, fuzzy
 #| msgid "Missing required parameters"
 msgid "Missing required fields for VaultWarden"
-msgstr "Missing required parameters"
+msgstr "Missing required fields for VaultWarden"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/VaultWarden.php:112
 msgid "VaultWarden check: connection and secrets available."
-msgstr ""
+msgstr "VaultWarden check: connection and secrets available."
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/mServer.php:34
 msgid "Organization Number"
@@ -3020,10 +6222,10 @@ msgid "%s is not valid email"
 msgstr "%s is not valid email"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/DBEngine.php:566
-#, fuzzy, php-format
+#, php-format
 #| msgid "No Fields required"
 msgid "A %s is required"
-msgstr "No Fields required"
+msgstr "A %s is required"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/DBEngine.php:573
 #, php-format
@@ -3127,23 +6329,20 @@ msgid "uploaded file"
 msgstr "uploaded file"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Job.php:83
-#, fuzzy
 #| msgid "Job Info"
 msgid "Job Env"
-msgstr "Job Info"
+msgstr "Job Env"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Job.php:147
-#, fuzzy
 #| msgid "Number of seconds"
 msgid "Number of job"
-msgstr "Number of seconds"
+msgstr "Number of job"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Job.php:184
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Job.php:188
-#, fuzzy
 #| msgid "#%d %s RunTemplate removal"
 msgid "No RunTemplate prepared"
-msgstr "#%d %s RunTemplate removal"
+msgstr "No RunTemplate prepared"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Job.php:382
 msgid "Scheduling job"
@@ -3151,16 +6350,15 @@ msgstr "Scheduling job"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Job.php:561
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Job.php:847
-#, fuzzy, php-format
+#, php-format
 #| msgid "Job ID"
 msgid "Job #%d"
-msgstr "Job ID"
+msgstr "Job #%d"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Job.php:660
-#, fuzzy
 #| msgid "%s runtemplates affected"
 msgid "No runtemplate ID proveided"
-msgstr "%s runtemplates affected"
+msgstr "No runtemplate ID proveided"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Job.php:670
 #, php-format
@@ -3172,22 +6370,21 @@ msgid "Message"
 msgstr "Message"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/RunTemplate.php:419
-#, fuzzy, php-format
+#, php-format
 #| msgid "RunTemplates"
 msgid "RunTemplate %s"
-msgstr "RunTemplates"
+msgstr "RunTemplate %s"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/RunTemplate.php:507
-#, fuzzy, php-format
+#, php-format
 #| msgid "Provide stored RunTemplate Environment"
 msgid "RunTemplate #%s Environment"
-msgstr "Provide stored RunTemplate Environment"
+msgstr "RunTemplate #%s Environment"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/RunTemplate.php:520
-#, fuzzy
 #| msgid "MultiFlexi - Credential Type helpers"
 msgid "RunTemplate CredentialType Values"
-msgstr "MultiFlexi - Credential Type helpers"
+msgstr "RunTemplate CredentialType Values"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/ScheduleLister.php:53
 msgid "After"
@@ -3197,33 +6394,62 @@ msgstr "After"
 msgid "App"
 msgstr "App"
 
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/ScheduleLister.php:56
-msgid "Runtemplate"
-msgstr "Runtemplate"
-
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/UnixUser.php:48
-#, fuzzy, php-format
+#, php-format
 #| msgid "label %s created"
 msgid "New unix user %s created"
-msgstr "label %s created"
+msgstr "New unix user %s created"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/UnixUser.php:50
-#, fuzzy
 #| msgid "Failed to create new runtemplate"
 msgid "Failed to create new user for current Unix username."
-msgstr "Failed to create new runtemplate"
+msgstr "Failed to create new user for current Unix username."
 
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:162
-#, fuzzy
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:176
+#, php-format
+msgid ""
+"Too many failed login attempts from your IP address. Please try again in %d "
+"minutes."
+msgstr ""
+"Too many failed login attempts from your IP address. Please try again in %d "
+"minutes."
+
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:184
+#, php-format
+msgid ""
+"Too many failed login attempts for this username. Please try again in %d "
+"minutes."
+msgstr ""
+"Too many failed login attempts for this username. Please try again in %d "
+"minutes."
+
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:199
 #| msgid "Missing token"
 msgid "missing login"
-msgstr "Missing token"
+msgstr "missing login"
 
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:168
-#, fuzzy
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:205
 #| msgid "invalid password"
 msgid "missing password"
-msgstr "invalid password"
+msgstr "missing password"
+
+#~ msgid "password is too short"
+#~ msgstr "password is too short"
+
+#~ msgid "Last 20 Jobs"
+#~ msgstr "Last 20 Jobs"
+
+#~ msgid "Standard Output"
+#~ msgstr "Standard Output"
+
+#~ msgid "Standard Error"
+#~ msgstr "Standard Error"
+
+#~ msgid "Job start time"
+#~ msgstr "Job start time"
+
+#~ msgid "Job Finish time"
+#~ msgstr "Job Finish time"
 
 #, php-format
 #~ msgid "Hook %s was registered"
@@ -3263,37 +6489,12 @@ msgstr "invalid password"
 #~ msgstr "Topics field not present. "
 
 #, php-format
-#~| msgid "Executable %s found as %s"
-#~ msgid "executable %s not found"
-#~ msgstr "executable %s not found"
-
-#, php-format
 #~ msgid "consider: %s"
 #~ msgstr "consider: %s"
 
 #, php-format
 #~ msgid "The %s does not contain valid json"
 #~ msgstr "The %s does not contain valid json"
-
-#, php-format
-#~ msgid "Application removal %d %s"
-#~ msgstr "Application removal %d %s"
-
-#, php-format
-#~ msgid "Unassigned from %d companies"
-#~ msgstr "Unassigned from %d companies"
-
-#, php-format
-#~ msgid "%d Config fields removed"
-#~ msgstr "%d Config fields removed"
-
-#, php-format
-#~ msgid "%d Configurations removed"
-#~ msgstr "%d Configurations removed"
-
-#, php-format
-#~ msgid "%d Jobs removed"
-#~ msgstr "%d Jobs removed"
 
 #~ msgid "What to do with app"
 #~ msgstr "What to do with app"
@@ -3416,11 +6617,5 @@ msgstr "invalid password"
 #~ msgid "Manual Schedule"
 #~ msgstr "Manual Schedule"
 
-#~ msgid "New Credential"
-#~ msgstr "New Credential"
-
 #~ msgid "ℹ️ Custom Field"
 #~ msgstr "ℹ️ Custom Field"
-
-#~ msgid "Custom"
-#~ msgstr "Custom"

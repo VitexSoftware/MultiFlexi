@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MultiFlexi\n"
-"POT-Creation-Date: 2025-10-18 12:22+0200\n"
-"PO-Revision-Date: 2025-10-18 12:22+0200\n"
+"POT-Creation-Date: 2025-10-30 11:51+0100\n"
+"PO-Revision-Date: 2025-10-30 11:51+0100\n"
 "Last-Translator: Vítězslav Dvořák <vitex@vitexsoftware.cz>\n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -26,12 +26,12 @@ msgid "Account is disabled"
 msgstr "Účet je zakázán"
 
 #: src/MultiFlexi/Api/Server/DefaultApi.php:67
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:194
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:261
 msgid "invalid password"
 msgstr "neplatné heslo"
 
 #: src/MultiFlexi/Api/Server/DefaultApi.php:72
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:201
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:278
 #, php-format
 msgid "user %s does not exist"
 msgstr "uživatel %s neexistuje"
@@ -83,9 +83,11 @@ msgid "Invalid or expired token"
 msgstr ""
 
 #: src/MultiFlexi/ApplicationLister.php:33
-#: src/MultiFlexi/CredentialLister.php:42
-#: src/MultiFlexi/RunTemplateLister.php:28 src/servers.php:29
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType.php:118
+#: src/MultiFlexi/CredentialLister.php:50
+#: src/MultiFlexi/CredentialTypeLister.php:33
+#: src/MultiFlexi/RunTemplateLister.php:28
+#: src/MultiFlexi/Ui/ActivationWizard.php:231
+#: src/admin-deletion-requests.php:227 src/dashboard.php:378 src/servers.php:29
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Customer.php:72
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Logger.php:113
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/ScheduleLister.php:52
@@ -98,19 +100,21 @@ msgid "Icon"
 msgstr "Ikona"
 
 #: src/MultiFlexi/ApplicationLister.php:36
-#: src/MultiFlexi/CredentialLister.php:44
+#: src/MultiFlexi/CredentialLister.php:52
+#: src/MultiFlexi/CredentialTypeLister.php:36
 #: src/MultiFlexi/RunTemplateLister.php:31
 #: src/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:31
+#: src/MultiFlexi/Ui/ActivationWizard.php:685
 #: src/MultiFlexi/Ui/ConfigurationWizard.php:104
-#: src/MultiFlexi/Ui/EnvironmentView.php:34 src/companycreds.php:35
-#: src/servers.php:29
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType.php:121
+#: src/MultiFlexi/Ui/EnvironmentView.php:34 src/activation-wizard.php:269
+#: src/companycreds.php:35 src/servers.php:29
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:111
 msgid "Name"
 msgstr "Název"
 
 #: src/MultiFlexi/ApplicationLister.php:37
 #: src/MultiFlexi/Ui/ConfigurationWizard.php:104
+#: src/data-retention-admin.php:376
 msgid "Description"
 msgstr "Popis"
 
@@ -127,7 +131,7 @@ msgid "Executable"
 msgstr "Spustitelný soubor"
 
 #: src/MultiFlexi/ApplicationLister.php:41
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType.php:122
+#: src/MultiFlexi/CredentialTypeLister.php:37
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:111
 msgid "UUID"
 msgstr "UUID"
@@ -136,50 +140,844 @@ msgstr "UUID"
 msgid "OCI Image"
 msgstr "Obrázek OCI"
 
-#: src/MultiFlexi/CredentialLister.php:43 src/companycreds.php:35
-#: src/servers.php:29
-msgid "Type"
-msgstr "Typ"
+#: src/MultiFlexi/CompanyJobLister.php:82
+msgid "ID úlohy"
+msgstr ""
 
-#: src/MultiFlexi/CredentialLister.php:45
-#: src/MultiFlexi/RunTemplateLister.php:41 src/MultiFlexi/Ui/Breadcrumb.php:55
-#: src/MultiFlexi/Ui/CredentialForm.php:75
-#: src/MultiFlexi/Ui/CredentialTypeForm.php:44
+#: src/MultiFlexi/CompanyJobLister.php:86
+#: src/MultiFlexi/RunTemplateLister.php:33
+#: src/MultiFlexi/Ui/ActivationWizard.php:689
+#: src/MultiFlexi/Ui/JobHistoryTable.php:46
+#: src/MultiFlexi/Ui/SearchSelect.php:32 src/activation-wizard.php:273
+#: src/app.php:134 src/company.php:58 src/dashboard.php:378 src/launch.php:26
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Env/Application.php:52
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Logger.php:119
+msgid "Application"
+msgstr "Aplikace"
+
+#: src/MultiFlexi/CompanyJobLister.php:90 src/MultiFlexi/Ui/AppJobsTable.php:36
+#: src/MultiFlexi/Ui/AppRow.php:84 src/MultiFlexi/Ui/JobHistoryTable.php:49
+#: src/app.php:147 src/companyapp.php:97
+msgid "Exit Code"
+msgstr "Kód ukončení"
+
+#: src/MultiFlexi/CompanyJobLister.php:90 src/MultiFlexi/Ui/AppJobsTable.php:36
+#: src/MultiFlexi/Ui/AppRow.php:84 src/MultiFlexi/Ui/JobHistoryTable.php:49
+#: src/app.php:147 src/company.php:58 src/companyapp.php:97
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Job.php:147
+msgid "Job ID"
+msgstr "ID úlohy"
+
+#: src/MultiFlexi/CompanyJobLister.php:94
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/ScheduleLister.php:56
+msgid "Runtemplate"
+msgstr "Runtemplate"
+
+#: src/MultiFlexi/CompanyJobLister.php:98 src/MultiFlexi/Ui/AppJobsTable.php:36
+#: src/MultiFlexi/Ui/AppRow.php:84 src/MultiFlexi/Ui/JobHistoryTable.php:50
+#: src/app.php:147 src/company.php:58 src/companyapp.php:97
+msgid "Launch time"
+msgstr "Čas spuštění"
+
+#: src/MultiFlexi/CompanyJobLister.php:101
+#: src/MultiFlexi/Ui/AppJobsTable.php:36 src/MultiFlexi/Ui/AppRow.php:84
+#: src/MultiFlexi/Ui/JobHistoryTable.php:51 src/company.php:58
+#: src/companyapp.php:97
+msgid "Launcher"
+msgstr "Spouštěč"
+
+#: src/MultiFlexi/CompanyJobLister.php:105
+#: src/MultiFlexi/CredentialLister.php:53
+#: src/MultiFlexi/CredentialTypeLister.php:38
+#: src/MultiFlexi/RunTemplateLister.php:41
+#: src/MultiFlexi/Ui/ActivationWizard.php:696
+#: src/MultiFlexi/Ui/Breadcrumb.php:55 src/MultiFlexi/Ui/CredentialForm.php:74
 #: src/MultiFlexi/Ui/JobHistoryTable.php:54
-#: src/MultiFlexi/Ui/SearchSelect.php:33 src/app.php:80 src/company.php:24
-#: src/companycreds.php:28 src/companydelete.php:24 src/companysetup.php:24
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyJob.php:86
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType.php:123
+#: src/MultiFlexi/Ui/SearchSelect.php:33 src/activation-wizard.php:280
+#: src/app.php:147 src/company.php:24 src/companycreds.php:28
+#: src/companydelete.php:24 src/companysetup.php:24 src/dashboard.php:378
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Env/Company.php:54
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Logger.php:127
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/ScheduleLister.php:57
 msgid "Company"
 msgstr "Společnost"
 
+#: src/MultiFlexi/CompanyJobLister.php:271
+msgid "year ago"
+msgstr ""
+
+#: src/MultiFlexi/CompanyJobLister.php:271
+msgid "years ago"
+msgstr ""
+
+#: src/MultiFlexi/CompanyJobLister.php:273
+msgid "month ago"
+msgstr ""
+
+#: src/MultiFlexi/CompanyJobLister.php:273
+msgid "months ago"
+msgstr ""
+
+#: src/MultiFlexi/CompanyJobLister.php:275
+msgid "day ago"
+msgstr ""
+
+#: src/MultiFlexi/CompanyJobLister.php:275
+msgid "days ago"
+msgstr ""
+
+#: src/MultiFlexi/CompanyJobLister.php:277
+msgid "hour ago"
+msgstr ""
+
+#: src/MultiFlexi/CompanyJobLister.php:277
+msgid "hours ago"
+msgstr ""
+
+#: src/MultiFlexi/CompanyJobLister.php:279
+#, fuzzy
+#| msgid "Minute"
+msgid "minute ago"
+msgstr "Minuta"
+
+#: src/MultiFlexi/CompanyJobLister.php:279
+msgid "minutes ago"
+msgstr ""
+
+#: src/MultiFlexi/CompanyJobLister.php:281
+msgid "just now"
+msgstr ""
+
+#: src/MultiFlexi/Consent/ConsentHelper.php:204
+msgid ""
+"This content requires your consent. Please update your privacy preferences."
+msgstr ""
+
+#: src/MultiFlexi/Consent/ConsentHelper.php:213
+#, fuzzy
+#| msgid "Database Settings"
+msgid "Privacy Settings"
+msgstr "Nastavení databáze"
+
+#: src/MultiFlexi/Consent/ConsentHelper.php:239
+#, fuzzy
+#| msgid "Database Settings"
+msgid "Cookie Settings"
+msgstr "Nastavení databáze"
+
+#: src/MultiFlexi/CredentialLister.php:51 src/admin-deletion-requests.php:229
+#: src/companycreds.php:35 src/cookie-policy.php:85 src/cookie-policy.php:149
+#: src/profile.php:102 src/servers.php:29
+msgid "Type"
+msgstr "Typ"
+
+#: src/MultiFlexi/CredentialTypeLister.php:35 src/login.php:134
+msgid "Logo"
+msgstr "Logo"
+
+#: src/MultiFlexi/DataErasure/DeletionAuditLogger.php:83
+#, php-format
+msgid "Audit log created: %s on %s (ID: %s)"
+msgstr ""
+
+#: src/MultiFlexi/DataErasure/DeletionAuditLogger.php:92
+#, php-format
+msgid "Failed to create audit log for %s on %s"
+msgstr ""
+
+#: src/MultiFlexi/DataErasure/DeletionAuditLogger.php:190
+#, php-format
+msgid "Cleaned up %d old audit log entries"
+msgstr ""
+
+#: src/MultiFlexi/DataErasure/DeletionAuditLogger.php:219
+#, fuzzy, php-format
+#| msgid "missing login"
+msgid "Missing %s action entries"
+msgstr "chybějící přihlášení"
+
+#: src/MultiFlexi/DataErasure/DeletionAuditLogger.php:230
+msgid "Entries are not in chronological order"
+msgstr ""
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:139
+#, php-format
+msgid "Deletion request %d created for user %s"
+msgstr ""
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:146
+#, fuzzy
+#| msgid "Error creating runtemplate clone"
+msgid "Failed to create deletion request"
+msgstr "Chyba při vytváření klonu šablony spuštění"
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:164
+#: src/admin-deletion-requests.php:52
+#, fuzzy
+#| msgid "executable %s not found"
+msgid "Deletion request not found"
+msgstr "spustitelný soubor %s nebyl nalezen"
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:168
+msgid "Deletion request requires admin approval"
+msgstr ""
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:189
+msgid "Invalid deletion type"
+msgstr ""
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:286
+msgid "User already has a pending deletion request"
+msgstr ""
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:322
+msgid "User marked as deleted"
+msgstr ""
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:345
+#, php-format
+msgid "Cannot perform hard deletion due to dependencies: %s"
+msgstr ""
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:404
+#, php-format
+msgid "Hard deletion completed. Tables affected: %s"
+msgstr ""
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:432
+msgid "Data anonymization completed"
+msgstr ""
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:465
+#, php-format
+msgid "Company %s has other users"
+msgstr ""
+
+#: src/MultiFlexi/DataErasure/UserDataEraser.php:480
+msgid "User has public run templates"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:80
+#, php-format
+msgid "Invalid archive type: %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:87
+msgid "No user available for archiving operation"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:109
+#, php-format
+msgid "Archived record %s from table %s (Archive ID: %d)"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:120
+#, php-format
+msgid "Failed to archive record from table %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:150
+#, php-format
+msgid "Failed to archive record %s: %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:300
+#, php-format
+msgid "Deleted expired archive %d from table %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:305
+#, php-format
+msgid "Failed to delete archive %d: %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:333
+msgid "No records found matching criteria"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:349
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:613
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:395
+#, php-format
+msgid "Unsupported export format: %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:376
+#, php-format
+msgid "Failed to update archive %d"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:380
+#, php-format
+msgid "Error setting legal hold on archive %d: %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:402
+#, fuzzy
+#| msgid "Provider not found"
+msgid "Archive record not found"
+msgstr "Poskytovatel nenalezen"
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:409
+msgid "Invalid JSON in archived data"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:417
+#, fuzzy, php-format
+#| msgid "Missing required fields for VaultWarden"
+msgid "Missing required field: %s"
+msgstr "Chybějící povinná pole pro VaultWarden"
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:423
+msgid "Original data is empty or invalid"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/DataArchiver.php:465
+#: src/MultiFlexi/DataRetention/DataArchiver.php:520
+#, php-format
+msgid "Exported %d records to %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:88
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:462
+#, php-format
+msgid "Required field missing: %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:94
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:168
+#, php-format
+msgid "Policy name \"%s\" already exists"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:99
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:174
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:480
+#, php-format
+msgid "Invalid deletion action: %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:104
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:180
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:488
+msgid "Retention period must be non-negative"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:111
+msgid "No user available for policy creation"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:134
+#, php-format
+msgid "Created retention policy \"%s\" (ID: %d)"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:141
+#, fuzzy
+#| msgid "Error creating runtemplate clone"
+msgid "Failed to create retention policy"
+msgstr "Chyba při vytváření klonu šablony spuštění"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:161
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:225
+#, fuzzy
+#| msgid "Provider not found"
+msgid "Policy not found"
+msgstr "Poskytovatel nenalezen"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:199
+#, php-format
+msgid "Updated retention policy ID %d"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:206
+msgid "Failed to update retention policy"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:237
+#, php-format
+msgid "Cannot delete policy \"%s\": %d cleanup jobs are associated with it"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:245
+#, php-format
+msgid "Deleted retention policy \"%s\""
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:252
+msgid "Failed to delete retention policy"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:274
+#, php-format
+msgid "Policy ID %d %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:274
+#: src/MultiFlexi/Ui/AppsMenu.php:67
+msgid "enabled"
+msgstr "povoleno"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:274
+#: src/MultiFlexi/Ui/AppsMenu.php:67
+msgid "disabled"
+msgstr "zakázáno"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:281
+#, fuzzy, php-format
+#| msgid "Failed Jobs"
+msgid "Failed to %s policy"
+msgstr "Neúspěšné úlohy"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:281
+#, fuzzy
+#| msgid "enabled"
+msgid "enable"
+msgstr "povoleno"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:281
+#, fuzzy
+#| msgid "disabled"
+msgid "disable"
+msgstr "zakázáno"
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:430
+#, php-format
+msgid "Policy \"%s\" already exists, skipping"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:436
+#, php-format
+msgid "Failed to create policy \"%s\": %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:469
+msgid "Policy name too long (max 100 characters)"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:473
+msgid "Policy name can only contain letters, numbers, underscores, and hyphens"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:492
+msgid "Very long retention period - ensure legal basis is strong"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:496
+msgid ""
+"Audit data retention period is very short - may not meet regulatory "
+"requirements"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:505
+msgid "Grace period must be non-negative"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:509
+msgid "Very long grace period may delay compliance with deletion requests"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:518
+msgid ""
+"Hard deletion of personal data should be carefully considered - "
+"anonymization may be more appropriate"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:524
+msgid ""
+"Audit data retention period is shorter than typical regulatory requirements "
+"(7 years)"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:594
+msgid "No policies to export"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:632
+#, fuzzy
+#| msgid "Required metrics file not found "
+msgid "Import file not found"
+msgstr "Požadovaný soubor metrik nebyl nalezen "
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:642
+msgid "Invalid JSON file"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:648
+#, php-format
+msgid "Unsupported import format: %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionPolicyManager.php:669
+#, php-format
+msgid "Failed to import policy \"%s\": %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:87
+#, php-format
+msgid ""
+"Daily retention cleanup: %d jobs processed, %d records deleted, %d "
+"anonymized, %d archived"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:127
+#, php-format
+msgid ""
+"Weekly retention summary: %d jobs completed, %d records processed, %d "
+"archives created"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:168
+#, php-format
+msgid ""
+"Monthly retention summary: %d jobs completed, %d records processed, "
+"compliance score: %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:220
+#, php-format
+msgid "Policy audit: %d total policies, %d active, overall compliance: %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:263
+#, php-format
+msgid "Compliance assessment: Overall score %d/100, GDPR compliance: %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:305
+#, php-format
+msgid ""
+"Data deletion confirmation: %d records deleted, %d anonymized, %d archived "
+"on %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:375
+#, fuzzy
+#| msgid "Provider not found"
+msgid "Report not found"
+msgstr "Poskytovatel nenalezen"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:426
+msgid "No user available for report generation"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:444
+#, php-format
+msgid "Generated %s report (ID: %d)"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:451
+#, fuzzy, php-format
+#| msgid "Error creating runtemplate clone"
+msgid "Failed to create %s report"
+msgstr "Chyba při vytváření klonu šablony spuštění"
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:496
+msgid "No active data retention policies defined"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:504
+msgid "No cleanup jobs executed in the analyzed period"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:513
+#, php-format
+msgid "High cleanup job failure rate: %.1f%%"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:523
+#, php-format
+msgid "%d expired records awaiting cleanup"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:555
+#, php-format
+msgid "%d user accounts inactive for more than 3 years"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:569
+#, php-format
+msgid "%d old log records not scheduled for deletion"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:592
+msgid "Execute cleanup command to process expired records"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:598
+msgid "Review and fix failed cleanup jobs"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionReporter.php:602
+msgid "Data minimization practices are well implemented"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionService.php:85
+#, php-format
+msgid "Updated %d records for policy %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionService.php:89
+#, php-format
+msgid "Error processing policy %s: %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionService.php:141
+#, php-format
+msgid "Error processing cleanup for table %s: %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionService.php:244
+#, php-format
+msgid "Error deleting record %d from %s: %s"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionService.php:353
+#, php-format
+msgid "Processed: %d, Deleted: %d, Anonymized: %d, Archived: %d"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionService.php:517
+#, php-format
+msgid "Table %s not configured for retention"
+msgstr ""
+
+#: src/MultiFlexi/DataRetention/RetentionService.php:620
+#, fuzzy, php-format
+#| msgid "Error saving record"
+msgid "Error processing record %d: %s"
+msgstr "Chyba při ukládání záznamu"
+
+#: src/MultiFlexi/Email/DataExportNotifier.php:62
+msgid "Your Personal Data Export is Ready"
+msgstr ""
+
+#: src/MultiFlexi/Email/DataExportNotifier.php:88
+msgid "Personal Data Export Downloaded - Confirmation"
+msgstr ""
+
+#: src/MultiFlexi/Email/DataExportNotifier.php:114
+msgid "Security Alert: Unusual Data Export Activity"
+msgstr ""
+
+#: src/MultiFlexi/GDPR/UserDataCorrectionRequest.php:148
+#: src/MultiFlexi/GDPR/UserDataCorrectionRequest.php:227
+msgid "Request not found or already processed"
+msgstr ""
+
+#: src/MultiFlexi/GDPR/UserDataCorrectionRequest.php:162
+#: src/gdpr-user-deletion-request.php:36
+#, fuzzy
+#| msgid "Provider not found"
+msgid "User not found"
+msgstr "Poskytovatel nenalezen"
+
+#: src/MultiFlexi/GDPR/UserDataCorrectionRequest.php:171
+#, fuzzy
+#| msgid "Error creating runtemplate clone"
+msgid "Failed to update user data"
+msgstr "Chyba při vytváření klonu šablony spuštění"
+
+#: src/MultiFlexi/GDPR/UserDataCorrectionRequest.php:186
+#: src/MultiFlexi/GDPR/UserDataCorrectionRequest.php:241
+#, fuzzy
+#| msgid "Error creating runtemplate clone"
+msgid "Failed to update request status"
+msgstr "Chyba při vytváření klonu šablony spuštění"
+
+#: src/MultiFlexi/GDPR/UserDataCorrectionRequest.php:283
+msgid "Request not found, not yours, or already processed"
+msgstr ""
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:126
+#: src/admin-data-corrections.php:152
+msgid "No pending data correction requests."
+msgstr ""
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:129
+#, php-format
+msgid ""
+"Daily GDPR Data Correction Digest - %s\n"
+"\n"
+msgstr ""
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:130
+#, php-format
+msgid ""
+"There are %d pending data correction requests:\n"
+"\n"
+msgstr ""
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:135
+#, php-format
+msgid "- Request #%d: %s (%s) wants to change %s\n"
+msgstr ""
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:143
+msgid "Please review these requests in the admin panel."
+msgstr ""
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:168
+#, php-format
+msgid "Daily GDPR Digest - %d pending requests"
+msgstr ""
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:200
+msgid "Data Correction Request Submitted"
+msgstr ""
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:202
+#, php-format
+msgid ""
+"Dear %s,\n"
+"\n"
+"Your request to change your %s has been successfully submitted for "
+"administrator review.\n"
+"\n"
+"Request Details:\n"
+"- Field: %s\n"
+"- Current Value: %s\n"
+"- Requested Value: %s\n"
+"- Justification: %s\n"
+"- Request ID: #%d\n"
+"- Submitted: %s\n"
+"\n"
+"You will receive another notification once your request has been reviewed by "
+"an administrator.\n"
+"\n"
+"Thank you for keeping your personal data accurate.\n"
+"\n"
+"Best regards,\n"
+"The %s Team"
+msgstr ""
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:227
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:280
+#: src/admin-data-corrections.php:111
+msgid "(no justification provided)"
+msgstr ""
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:252
+msgid "New Data Correction Request Pending Review"
+msgstr ""
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:257
+#, php-format
+msgid ""
+"A new data correction request requires your review.\n"
+"\n"
+"Request Details:\n"
+"- Request ID: #%d\n"
+"- User: %s (ID: %d)\n"
+"- Field: %s\n"
+"- Current Value: %s\n"
+"- Requested Value: %s\n"
+"- Justification: %s\n"
+"- Submitted: %s\n"
+"- IP Address: %s\n"
+"\n"
+"Please review this request at: %s\n"
+"\n"
+"This is an automated message from the GDPR compliance system."
+msgstr ""
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:317
+msgid "Data Correction Request Approved"
+msgstr ""
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:319
+#, php-format
+msgid ""
+"Dear %s,\n"
+"\n"
+"Great news! Your data correction request has been approved and your personal "
+"information has been updated.\n"
+"\n"
+"Request Details:\n"
+"- Field: %s\n"
+"- Previous Value: %s\n"
+"- New Value: %s\n"
+"- Request ID: #%d\n"
+"- Approved by: %s\n"
+"- Approved on: %s\n"
+"\n"
+"Administrator Notes: %s\n"
+"\n"
+"Your personal data has been updated in our system. You can view your updated "
+"profile at any time.\n"
+"\n"
+"Thank you for helping us keep your information accurate.\n"
+"\n"
+"Best regards,\n"
+"The %s Team"
+msgstr ""
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:348
+msgid "(no additional notes)"
+msgstr ""
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:375
+msgid "Data Correction Request - Decision Required"
+msgstr ""
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:377
+#, php-format
+msgid ""
+"Dear %s,\n"
+"\n"
+"We have reviewed your data correction request and require additional "
+"information before we can proceed.\n"
+"\n"
+"Request Details:\n"
+"- Field: %s\n"
+"- Current Value: %s\n"
+"- Requested Value: %s\n"
+"- Request ID: #%d\n"
+"- Reviewed by: %s\n"
+"- Reviewed on: %s\n"
+"\n"
+"Administrator Feedback: %s\n"
+"\n"
+"If you believe this decision is incorrect or if you have additional "
+"supporting information, please contact us directly or submit a new request "
+"with more details.\n"
+"\n"
+"You can view and manage your data correction requests in your profile.\n"
+"\n"
+"Best regards,\n"
+"The %s Team"
+msgstr ""
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:443
+#, php-format
+msgid "Email sent to %s"
+msgstr ""
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:445
+#, php-format
+msgid "Failed to send email to %s"
+msgstr ""
+
+#: src/MultiFlexi/Notifications/DataCorrectionNotifier.php:450
+#, php-format
+msgid "Email error: %s"
+msgstr ""
+
 #: src/MultiFlexi/RunTemplateLister.php:29
 msgid "Active"
 msgstr "Aktivní"
 
 #: src/MultiFlexi/RunTemplateLister.php:30
+#: src/MultiFlexi/Ui/ActivationWizard.php:703 src/activation-wizard.php:287
 msgid "Interval"
 msgstr "Interval"
-
-#: src/MultiFlexi/RunTemplateLister.php:33
-#: src/MultiFlexi/Ui/JobHistoryTable.php:46
-#: src/MultiFlexi/Ui/SearchSelect.php:32 src/app.php:67 src/company.php:58
-#: src/launch.php:26
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyJob.php:73
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Env/Application.php:52
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Logger.php:119
-msgid "Application"
-msgstr "Aplikace"
 
 #: src/MultiFlexi/RunTemplateLister.php:49
 msgid "Delay"
 msgstr "Zpoždění"
 
 #: src/MultiFlexi/RunTemplateLister.php:50 src/MultiFlexi/Ui/JobInfo.php:41
-#: src/MultiFlexi/Ui/JobScheduleForm.php:80
+#: src/MultiFlexi/Ui/JobScheduleForm.php:79
 #: src/MultiFlexi/Ui/RunTemplatePanel.php:73
 msgid "Executor"
 msgstr "Vykonavatel"
@@ -194,8 +992,97 @@ msgstr "Spustit nyní"
 #: src/MultiFlexi/RunTemplateLister.php:58 src/MultiFlexi/Ui/AppInfo.php:46
 #: src/MultiFlexi/Ui/IntervalChooser.php:35
 #: src/MultiFlexi/Ui/RunTemplatePanel.php:62 src/companyapp.php:86
+#: src/cookie-policy.php:399 src/dashboard.php:315
+#: src/data-retention-admin.php:272
 msgid "Disabled"
 msgstr "Zakázáno"
+
+#: src/MultiFlexi/Security/PasswordValidator.php:68
+#, php-format
+msgid "Password must be at least %d characters long"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:73
+msgid "Password must contain at least one uppercase letter"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:78
+msgid "Password must contain at least one lowercase letter"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:83
+msgid "Password must contain at least one number"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:88
+msgid ""
+"Password must contain at least one special character (!@#$%^&*(),.?\":{}|<>)"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:93
+msgid "Password is too common and easily guessable"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:98
+msgid "Password cannot contain more than 3 repeated characters in a row"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:103
+msgid "Password cannot contain sequential characters (e.g., 123, abc)"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:119
+msgid "Very Weak"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:123
+msgid "Weak"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:127
+msgid "Medium"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:131
+msgid "Strong"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:134
+msgid "Very Strong"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:144
+#, php-format
+msgid "At least %d characters long"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:147
+msgid "At least one uppercase letter (A-Z)"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:151
+msgid "At least one lowercase letter (a-z)"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:155
+msgid "At least one number (0-9)"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:159
+msgid "At least one special character (!@#$%^&*(),.?\":{}|<>)"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:162
+msgid "Cannot be a common or easily guessable password"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:163
+msgid "Cannot contain sequential characters (e.g., 123, abc)"
+msgstr ""
+
+#: src/MultiFlexi/Security/PasswordValidator.php:164
+msgid "Cannot contain more than 3 repeated characters in a row"
+msgstr ""
 
 #: src/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:31
 msgid "Code"
@@ -217,7 +1104,7 @@ msgstr "sledování změn"
 msgid "Edit"
 msgstr "Upravit"
 
-#: src/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:48 src/createaccount.php:186
+#: src/MultiFlexi/Ui/AbraFlexiInstanceStatus.php:48 src/createaccount.php:203
 msgid "Register"
 msgstr "Registrovat"
 
@@ -226,29 +1113,320 @@ msgid "Action not availble"
 msgstr "Akce není k dispozici"
 
 #: src/MultiFlexi/Ui/ActionsAdministration.php:49
-#: src/MultiFlexi/Ui/AppEditorForm.php:52 src/MultiFlexi/Ui/ColumnsForm.php:125
+#: src/MultiFlexi/Ui/AppEditorForm.php:52 src/MultiFlexi/Ui/ColumnsForm.php:124
 #: src/MultiFlexi/Ui/CompanyEditorForm.php:47
 #: src/MultiFlexi/Ui/CustomAppConfigForm.php:52
 #: src/MultiFlexi/Ui/RegisterCustomerForm.php:53
 #: src/MultiFlexi/Ui/RegisterServerForm.php:50
 #: src/MultiFlexi/Ui/RuntemplateConfigForm.php:104
-#: src/MultiFlexi/Ui/UserForm.php:64
+#: src/MultiFlexi/Ui/UserForm.php:63
 msgid "Save"
 msgstr "Uložit"
 
-#: src/MultiFlexi/Ui/ActionsTab.php:35 src/actions.php:56
+#: src/MultiFlexi/Ui/ActionsTab.php:35
+#: src/MultiFlexi/Ui/ActivationWizard.php:838 src/actions.php:56
 msgid "Success Actions"
 msgstr "Úspěšné akce"
 
-#: src/MultiFlexi/Ui/ActionsTab.php:36 src/actions.php:57
+#: src/MultiFlexi/Ui/ActionsTab.php:36
+#: src/MultiFlexi/Ui/ActivationWizard.php:839 src/actions.php:57
 msgid "Fail Actions"
 msgstr "Akce selhání"
 
-#: src/MultiFlexi/Ui/ActionsTab.php:43 src/MultiFlexi/Ui/CredentialForm.php:97
+#: src/MultiFlexi/Ui/ActionsTab.php:43 src/MultiFlexi/Ui/CredentialForm.php:96
 #: src/MultiFlexi/Ui/CredentialTypeForm.php:105 src/actions.php:65
 #: src/companyapps.php:50 src/intervals.php:49
 msgid "Apply"
 msgstr "Použít"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:89
+#, fuzzy
+#| msgid "choose Company"
+msgid "Choose Company"
+msgstr "vyberte Společnost"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:90
+#: src/MultiFlexi/Ui/ConfigurationWizard.php:45
+msgid "Choose Application"
+msgstr "Vyberte aplikaci"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:91
+#: src/MultiFlexi/Ui/ActivationWizard.php:376
+#, fuzzy
+#| msgid "RunTemplate"
+msgid "Create RunTemplate"
+msgstr "RunTemplate"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:92
+#: src/MultiFlexi/Ui/ActivationWizard.php:413
+#, fuzzy
+#| msgid "Credentials"
+msgid "Assign Credentials"
+msgstr "Přihlašovací údaje"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:93
+#: src/MultiFlexi/Ui/ActivationWizard.php:504 src/MultiFlexi/Ui/AppsMenu.php:70
+#: src/MultiFlexi/Ui/ConfiguredFieldBadges.php:43
+msgid "Configure"
+msgstr "Konfigurovat"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:94
+#: src/MultiFlexi/Ui/ActivationWizard.php:747
+#: src/MultiFlexi/Ui/MainMenu.php:210
+#: src/MultiFlexi/Ui/RuntemplateConfigForm.php:105
+#: src/activation-wizard.php:331 src/admin-deletion-requests.php:233
+#: src/data-retention-admin.php:266
+msgid "Actions"
+msgstr "Akce"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:95
+msgid "Summary"
+msgstr ""
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:200
+#, fuzzy
+#| msgid "Please Select Company"
+msgid "Select Company"
+msgstr "Vyberte prosím společnost"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:201
+msgid "Choose the company where you want to activate the application."
+msgstr ""
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:207
+msgid "No companies found. Please create a company first."
+msgstr ""
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:208
+#, fuzzy
+#| msgid "New Company"
+msgid "Create Company"
+msgstr "Nová společnost"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:241
+#, fuzzy
+#| msgid "Delete company"
+msgid "Select this company"
+msgstr "Smazat společnost"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:280
+#, fuzzy
+#| msgid "No company registered yet. Please register one."
+msgid "No company selected. Please go back to step 1."
+msgstr "Zatím není registrována žádná společnost. Prosím, zaregistrujte jednu."
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:286
+#, fuzzy
+#| msgid "New Application"
+msgid "Select Application for"
+msgstr "Nová aplikace"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:287
+msgid ""
+"Choose an application to activate. The application will be assigned to the "
+"selected company."
+msgstr ""
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:293
+#, fuzzy
+#| msgid "Action not availble"
+msgid "No applications available."
+msgstr "Akce není k dispozici"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:331
+#, fuzzy
+#| msgid "Register Application"
+msgid "Select this application"
+msgstr "Registrovat aplikaci"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:368
+msgid "Missing company or application. Please complete previous steps."
+msgstr ""
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:377
+#, fuzzy, php-format
+#| msgid "Runtemplate Clone"
+msgid "Creating RunTemplate for %s in %s"
+msgstr "Klonování šablony spuštění"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:385
+#, fuzzy
+#| msgid "Update RunTemplate name"
+msgid "RunTemplate name"
+msgstr "Aktualizovat název RunTemplate"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:386
+#, fuzzy
+#| msgid "RunTemplate"
+msgid "RunTemplate Name"
+msgstr "RunTemplate"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:386
+msgid "Descriptive name for this configuration"
+msgstr ""
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:389
+#, fuzzy
+#| msgid "Interval"
+msgid "Schedule Interval"
+msgstr "Interval"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:389
+msgid "How often should this run?"
+msgstr ""
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:404
+#: src/MultiFlexi/Ui/ActivationWizard.php:496
+#: src/MultiFlexi/Ui/ActivationWizard.php:664
+#: src/MultiFlexi/Ui/ActivationWizard.php:803
+msgid "RunTemplate not created. Please complete previous steps."
+msgstr ""
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:414
+#, fuzzy, php-format
+#| msgid "Credentials"
+msgid "Select credentials for %s"
+msgstr "Přihlašovací údaje"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:420
+msgid "This application does not require any credentials."
+msgstr ""
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:444
+#, fuzzy, php-format
+#| msgid "Saving Credential type %s options"
+msgid "Credential type %s not found."
+msgstr "Ukládání možností typu přihlašovacích údajů %s"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:445
+#, fuzzy
+#| msgid "Create Credential type"
+msgid "Create Credential Type"
+msgstr "Vytvořit typ přihlašovacích údajů"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:458
+#, fuzzy, php-format
+#| msgid "Choose credential handling %s"
+msgid "No credentials found for %s."
+msgstr "Vyberte zpracování přihlašovacích údajů %s"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:459
+#, fuzzy
+#| msgid "Create Credential type"
+msgid "Create Credential"
+msgstr "Vytvořit typ přihlašovacích údajů"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:468
+#, fuzzy
+#| msgid "Create Credential type"
+msgid "-- Select Credential --"
+msgstr "Vytvořit typ přihlašovacích údajů"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:475
+#, fuzzy, php-format
+#| msgid "Credentials"
+msgid "Credential for %s"
+msgstr "Přihlašovací údaje"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:478
+#, php-format
+msgid "Select which %s credential to use"
+msgstr ""
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:517
+msgid "This application does not require any configuration."
+msgstr ""
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:606 src/job.php:98 src/job.php:100
+msgid "Previous"
+msgstr "Předchozí"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:614
+#: src/MultiFlexi/Ui/ConfigurationWizard.php:92 src/job.php:106 src/job.php:108
+msgid "Next"
+msgstr "Další"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:618
+msgid "Finish & View Summary"
+msgstr ""
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:673 src/activation-wizard.php:256
+#, fuzzy
+#| msgid "Application Homepage"
+msgid "Activation Complete"
+msgstr "Domovská stránka aplikace"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:674 src/activation-wizard.php:340
+msgid "Your RunTemplate has been successfully created and configured!"
+msgstr ""
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:676 src/activation-wizard.php:260
+#, fuzzy
+#| msgid "RunTemplate"
+msgid "RunTemplate Summary"
+msgstr "RunTemplate"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:681 src/activation-wizard.php:265
+#, fuzzy
+#| msgid "RunTemplate"
+msgid "RunTemplate ID"
+msgstr "RunTemplate"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:720
+#: src/MultiFlexi/Ui/CompanyPanel.php:46 src/MultiFlexi/Ui/MainMenu.php:153
+#: src/activation-wizard.php:304 src/credentials.php:21
+msgid "Credentials"
+msgstr "Přihlašovací údaje"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:732 src/activation-wizard.php:316
+#, fuzzy
+#| msgid "success"
+msgid "on success"
+msgstr "úspěch"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:737 src/activation-wizard.php:321
+msgid "on failure"
+msgstr ""
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:761 src/activation-wizard.php:348
+#, fuzzy
+#| msgid "RunTemplate"
+msgid "View RunTemplate"
+msgstr "RunTemplate"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:769
+#: src/MultiFlexi/Ui/AppLaunchForm.php:82
+#: src/MultiFlexi/Ui/RuntemplateLaunchForm.php:84 src/company.php:66
+#: src/job.php:90
+msgid "Schedule"
+msgstr "Plánovat"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:777 src/activation-wizard.php:356
+#, fuzzy
+#| msgid "RunTemplates"
+msgid "All RunTemplates"
+msgstr "RunTemplates"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:785 src/activation-wizard.php:364
+#, fuzzy
+#| msgid "New Application"
+msgid "New Activation"
+msgstr "Nová aplikace"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:817
+#, php-format
+msgid "RunTemplate #%d created for application \"%s\" and company \"%s\""
+msgstr ""
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:826
+#, fuzzy
+#| msgid "Configure Application"
+msgid "Configure Actions"
+msgstr "Konfigurovat aplikaci"
+
+#: src/MultiFlexi/Ui/ActivationWizard.php:827
+msgid "Define what happens when the job succeeds or fails."
+msgstr ""
 
 #: src/MultiFlexi/Ui/AppEditorForm.php:36
 msgid "Application name"
@@ -290,7 +1468,8 @@ msgid "Application Icon"
 msgstr "Ikona aplikace"
 
 #: src/MultiFlexi/Ui/AppEditorForm.php:43 src/MultiFlexi/Ui/AppInfo.php:46
-#: src/MultiFlexi/Ui/RunTemplatePanel.php:62
+#: src/MultiFlexi/Ui/RunTemplatePanel.php:62 src/cookie-policy.php:399
+#: src/data-retention-admin.php:271 src/data-retention-admin.php:383
 msgid "Enabled"
 msgstr "Povoleno"
 
@@ -336,37 +1515,9 @@ msgstr "Když aplikace uloží svůj výstup do souboru"
 msgid "Set"
 msgstr "Nastavit"
 
-#: src/MultiFlexi/Ui/AppInfo.php:53 src/app.php:100
+#: src/MultiFlexi/Ui/AppInfo.php:53 src/app.php:167
 msgid "Config fields"
 msgstr "Konfigurační pole"
-
-#: src/MultiFlexi/Ui/AppJobsTable.php:36 src/MultiFlexi/Ui/AppRow.php:84
-#: src/MultiFlexi/Ui/JobHistoryTable.php:49 src/app.php:80 src/company.php:58
-#: src/companyapp.php:97
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyJob.php:68
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Job.php:147
-msgid "Job ID"
-msgstr "ID úlohy"
-
-#: src/MultiFlexi/Ui/AppJobsTable.php:36 src/MultiFlexi/Ui/AppRow.php:84
-#: src/MultiFlexi/Ui/JobHistoryTable.php:50 src/app.php:80 src/company.php:58
-#: src/companyapp.php:97
-msgid "Launch time"
-msgstr "Čas spuštění"
-
-#: src/MultiFlexi/Ui/AppJobsTable.php:36 src/MultiFlexi/Ui/AppRow.php:84
-#: src/MultiFlexi/Ui/JobHistoryTable.php:49 src/app.php:80
-#: src/companyapp.php:97
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyJob.php:81
-msgid "Exit Code"
-msgstr "Kód ukončení"
-
-#: src/MultiFlexi/Ui/AppJobsTable.php:36 src/MultiFlexi/Ui/AppRow.php:84
-#: src/MultiFlexi/Ui/JobHistoryTable.php:51 src/company.php:58
-#: src/companyapp.php:97
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyJob.php:94
-msgid "Launcher"
-msgstr "Spouštěč"
 
 #: src/MultiFlexi/Ui/AppJobsTable.php:42 src/MultiFlexi/Ui/AppRow.php:90
 #: src/companyapp.php:103
@@ -384,6 +1535,38 @@ msgstr "Časovač"
 msgid "Download"
 msgstr "Stáhnout"
 
+#: src/MultiFlexi/Ui/AppJsonImportForm.php:21
+msgid "Import from your local device"
+msgstr ""
+
+#: src/MultiFlexi/Ui/AppJsonImportForm.php:21
+msgid "example.multiflexi.app.json"
+msgstr ""
+
+#: src/MultiFlexi/Ui/AppJsonImportForm.php:21
+#, fuzzy
+#| msgid "Choose Application"
+msgid "Choose loca"
+msgstr "Vyberte aplikaci"
+
+#: src/MultiFlexi/Ui/AppJsonImportForm.php:22
+msgid "Import from website"
+msgstr ""
+
+#: src/MultiFlexi/Ui/AppJsonImportForm.php:22
+msgid "https:://multiflexi.eu/example.multiflexi.app.json"
+msgstr ""
+
+#: src/MultiFlexi/Ui/AppJsonImportForm.php:22
+#, fuzzy
+#| msgid "Download"
+msgid "Down"
+msgstr "Stáhnout"
+
+#: src/MultiFlexi/Ui/AppJsonImportForm.php:24
+msgid "Import Json"
+msgstr ""
+
 #: src/MultiFlexi/Ui/AppLaunchForm.php:81
 #: src/MultiFlexi/Ui/AppLaunchForm.php:82 src/MultiFlexi/Ui/AppRow.php:64
 #: src/MultiFlexi/Ui/LaunchButton.php:33
@@ -394,12 +1577,6 @@ msgstr "Stáhnout"
 #: src/job.php:90
 msgid "Launch"
 msgstr "Spustit"
-
-#: src/MultiFlexi/Ui/AppLaunchForm.php:82
-#: src/MultiFlexi/Ui/RuntemplateLaunchForm.php:84 src/company.php:66
-#: src/job.php:90
-msgid "Schedule"
-msgstr "Plánovat"
 
 #: src/MultiFlexi/Ui/AppRow.php:58
 msgid "Upload field does not allow application scheduling"
@@ -423,16 +1600,16 @@ msgstr "Posledních 10 úloh"
 
 #: src/MultiFlexi/Ui/ApplicationPanel.php:51
 #: src/MultiFlexi/Ui/ArchivedJobPanel.php:45
-#: src/MultiFlexi/Ui/CredentialForm.php:104 src/companycreds.php:35
+#: src/MultiFlexi/Ui/CredentialForm.php:103 src/companycreds.php:35
 #: src/companycreds.php:76
 msgid "Used by"
 msgstr "Používáno"
 
 #: src/MultiFlexi/Ui/ApplicationPanel.php:65
 #: src/MultiFlexi/Ui/ArchivedJobPanel.php:58
-#: src/MultiFlexi/Ui/CredentialForm.php:134
-#: src/MultiFlexi/Ui/CredentialForm.php:137
-#: src/MultiFlexi/Ui/CredentialForm.php:139
+#: src/MultiFlexi/Ui/CredentialForm.php:133
+#: src/MultiFlexi/Ui/CredentialForm.php:136
+#: src/MultiFlexi/Ui/CredentialForm.php:138
 #: src/MultiFlexi/Ui/CredentialTypeForm.php:108
 #: src/MultiFlexi/Ui/CredentialTypeForm.php:113
 #: src/MultiFlexi/Ui/CredentialTypeForm.php:115
@@ -450,36 +1627,23 @@ msgstr "Úlohy aplikace"
 msgid "Updating availbility status of application %s to %s"
 msgstr "Aktualizace stavu dostupnosti aplikace %s na %s"
 
-#: src/MultiFlexi/Ui/AppsMenu.php:67
-msgid "enabled"
-msgstr "povoleno"
-
-#: src/MultiFlexi/Ui/AppsMenu.php:67
-msgid "disabled"
-msgstr "zakázáno"
-
-#: src/MultiFlexi/Ui/AppsMenu.php:70
-#: src/MultiFlexi/Ui/ConfiguredFieldBadges.php:43
-msgid "Configure"
-msgstr "Konfigurovat"
-
 #: src/MultiFlexi/Ui/BootstrapMenu.php:45
-#: src/MultiFlexi/Ui/RegisterCustomerForm.php:40
+#: src/MultiFlexi/Ui/RegisterCustomerForm.php:40 src/profile.php:42
 msgid "Login"
 msgstr "Přihlásit se"
 
 #: src/MultiFlexi/Ui/BootstrapMenu.php:46
 #: src/MultiFlexi/Ui/CfgFieldTypeSelect.php:42
-#: src/MultiFlexi/Ui/RegisterCustomerForm.php:45 src/createaccount.php:173
-#: src/login.php:90 src/passwordrecovery.php:57
+#: src/MultiFlexi/Ui/RegisterCustomerForm.php:45 src/createaccount.php:190
+#: src/login.php:158 src/passwordrecovery.php:57
 msgid "Password"
 msgstr "Heslo"
 
-#: src/MultiFlexi/Ui/BootstrapMenu.php:47 src/login.php:57
+#: src/MultiFlexi/Ui/BootstrapMenu.php:47 src/login.php:125
 msgid "Sign In"
 msgstr "Přihlásit se"
 
-#: src/MultiFlexi/Ui/BootstrapMenu.php:49 src/login.php:75
+#: src/MultiFlexi/Ui/BootstrapMenu.php:57 src/login.php:143
 msgid "Password recovery"
 msgstr "Obnova hesla"
 
@@ -517,12 +1681,15 @@ msgid "Number"
 msgstr "Číslo"
 
 #: src/MultiFlexi/Ui/CfgFieldTypeSelect.php:40
+#: src/admin-data-corrections.php:184 src/admin-deletion-requests.php:412
+#: src/profile.php:103
 msgid "Date"
 msgstr "Datum"
 
 #: src/MultiFlexi/Ui/CfgFieldTypeSelect.php:41
 #: src/MultiFlexi/Ui/RegisterCustomerForm.php:50
-#: src/MultiFlexi/Ui/UserForm.php:54 src/passwordrecovery.php:98
+#: src/MultiFlexi/Ui/UserForm.php:53 src/admin-data-corrections.php:107
+#: src/passwordrecovery.php:98 src/profile.php:46
 msgid "Email"
 msgstr "E-mail"
 
@@ -538,11 +1705,11 @@ msgstr "Nahrání souboru"
 msgid "Directory path"
 msgstr "Cesta k adresáři"
 
-#: src/MultiFlexi/Ui/ColumnsForm.php:137
+#: src/MultiFlexi/Ui/ColumnsForm.php:136
 msgid "Save and back"
 msgstr "Uložit a zpět"
 
-#: src/MultiFlexi/Ui/ColumnsForm.php:149
+#: src/MultiFlexi/Ui/ColumnsForm.php:148
 msgid "Save and next"
 msgstr "Uložit a další"
 
@@ -566,7 +1733,8 @@ msgstr "Celkem úloh"
 msgid "Success Jobs"
 msgstr "Úspěšné úlohy"
 
-#: src/MultiFlexi/Ui/CompanyDbStatus.php:65
+#: src/MultiFlexi/Ui/CompanyDbStatus.php:65 src/dashboard.php:104
+#: src/joblist.php:33
 msgid "Failed Jobs"
 msgstr "Neúspěšné úlohy"
 
@@ -620,7 +1788,7 @@ msgid "Setup"
 msgstr "Nastavení"
 
 #: src/MultiFlexi/Ui/CompanyPanel.php:43 src/MultiFlexi/Ui/MainMenu.php:75
-#: src/MultiFlexi/Ui/MainMenu.php:118 src/apps.php:22 src/companies.php:38
+#: src/MultiFlexi/Ui/MainMenu.php:137 src/apps.php:22 src/companies.php:38
 msgid "Applications"
 msgstr "Aplikace"
 
@@ -632,42 +1800,37 @@ msgstr "Periodické úlohy"
 msgid "Launch wizard"
 msgstr "Spustit průvodce"
 
-#: src/MultiFlexi/Ui/CompanyPanel.php:46 src/MultiFlexi/Ui/MainMenu.php:134
-#: src/credentials.php:21
-msgid "Credentials"
-msgstr "Přihlašovací údaje"
-
 #: src/MultiFlexi/Ui/CompanySelect.php:31
 msgid "Please Select Company"
 msgstr "Vyberte prosím společnost"
 
-#: src/MultiFlexi/Ui/ConfFieldsForm.php:42
+#: src/MultiFlexi/Ui/ConfFieldsForm.php:41
 msgid "New config field type"
 msgstr "Nový typ konfiguračního pole"
 
-#: src/MultiFlexi/Ui/ConfFieldsForm.php:43
+#: src/MultiFlexi/Ui/ConfFieldsForm.php:42
 msgid "New config field Keyword"
 msgstr "Nový klíč konfiguračního pole"
 
-#: src/MultiFlexi/Ui/ConfFieldsForm.php:44
+#: src/MultiFlexi/Ui/ConfFieldsForm.php:43
 #: src/MultiFlexi/Ui/ConfigFieldsView.php:43
 msgid "Default value"
 msgstr "Výchozí hodnota"
 
-#: src/MultiFlexi/Ui/ConfFieldsForm.php:45
+#: src/MultiFlexi/Ui/ConfFieldsForm.php:44
 msgid "New config field description"
 msgstr "Nový popis konfiguračního pole"
 
-#: src/MultiFlexi/Ui/ConfFieldsForm.php:46
-#: src/MultiFlexi/Ui/CredentialTypeForm.php:61
+#: src/MultiFlexi/Ui/ConfFieldsForm.php:45
+#: src/MultiFlexi/Ui/CredentialTypeForm.php:61 src/consent-preferences.php:122
 msgid "Required"
 msgstr "Povinné"
 
-#: src/MultiFlexi/Ui/ConfFieldsForm.php:50 src/user.php:30
+#: src/MultiFlexi/Ui/ConfFieldsForm.php:49 src/user.php:30
 msgid "Update"
 msgstr "Aktualizovat"
 
-#: src/MultiFlexi/Ui/ConfFieldsForm.php:52
+#: src/MultiFlexi/Ui/ConfFieldsForm.php:51
 msgid "Add"
 msgstr "Přidat"
 
@@ -711,10 +1874,6 @@ msgstr "Ne"
 msgid "Configuration Wizard"
 msgstr "Průvodce konfigurací"
 
-#: src/MultiFlexi/Ui/ConfigurationWizard.php:45
-msgid "Choose Application"
-msgstr "Vyberte aplikaci"
-
 #: src/MultiFlexi/Ui/ConfigurationWizard.php:46
 msgid "Configure Application"
 msgstr "Konfigurovat aplikaci"
@@ -722,10 +1881,6 @@ msgstr "Konfigurovat aplikaci"
 #: src/MultiFlexi/Ui/ConfigurationWizard.php:47
 msgid "Launch Application"
 msgstr "Spustit aplikaci"
-
-#: src/MultiFlexi/Ui/ConfigurationWizard.php:92 src/job.php:106 src/job.php:108
-msgid "Next"
-msgstr "Další"
 
 #: src/MultiFlexi/Ui/ConfigurationWizard.php:104
 msgid "Image"
@@ -743,53 +1898,52 @@ msgstr "Klonovat"
 msgid "Save as copy"
 msgstr "Uložit jako kopii"
 
-#: src/MultiFlexi/Ui/CredentialForm.php:59
-#: src/MultiFlexi/Ui/CredentialForm.php:66
+#: src/MultiFlexi/Ui/CredentialForm.php:58
+#: src/MultiFlexi/Ui/CredentialForm.php:65
 #: src/MultiFlexi/Ui/RequirementsOverview.php:68
 #: src/MultiFlexi/Ui/SearchSelect.php:35 src/credentialtype.php:199
 msgid "Credential Type"
 msgstr "Typ přihlašovacích údajů"
 
-#: src/MultiFlexi/Ui/CredentialForm.php:62
+#: src/MultiFlexi/Ui/CredentialForm.php:61
 #, fuzzy, php-format
 #| msgid "Create Credential type"
 msgid "🔐 edit credential type %s"
 msgstr "Vytvořit typ přihlašovacích údajů"
 
-#: src/MultiFlexi/Ui/CredentialForm.php:62
+#: src/MultiFlexi/Ui/CredentialForm.php:61
 #, fuzzy
 #| msgid "Credential Type"
 msgid "Edit Credential Type"
 msgstr "Typ přihlašovacích údajů"
 
-#: src/MultiFlexi/Ui/CredentialForm.php:66
+#: src/MultiFlexi/Ui/CredentialForm.php:65
 msgid "No credential types for company defined yet"
 msgstr ""
 "Pro tuto společnost zatím nejsou definovány žádné typy přihlašovacích údajů"
 
-#: src/MultiFlexi/Ui/CredentialForm.php:69
+#: src/MultiFlexi/Ui/CredentialForm.php:68
 #: src/MultiFlexi/Ui/RuntemplateRequirementsChoser.php:77
 msgid "New Credential Type"
 msgstr "Nový typ přihlašovacích údajů"
 
-#: src/MultiFlexi/Ui/CredentialForm.php:71
+#: src/MultiFlexi/Ui/CredentialForm.php:70
 msgid "Choose company first"
 msgstr "Nejprve vyberte společnost"
 
-#: src/MultiFlexi/Ui/CredentialForm.php:84
-#: src/MultiFlexi/Ui/CredentialTypeForm.php:43
+#: src/MultiFlexi/Ui/CredentialForm.php:83
 msgid "Credential Name"
 msgstr "Název přihlašovacích údajů"
 
-#: src/MultiFlexi/Ui/CredentialForm.php:127
+#: src/MultiFlexi/Ui/CredentialForm.php:126
 msgid "Unused by any runtemplate"
 msgstr ""
 
-#: src/MultiFlexi/Ui/CredentialForm.php:130
+#: src/MultiFlexi/Ui/CredentialForm.php:129
 msgid "Unsaved yet"
 msgstr ""
 
-#: src/MultiFlexi/Ui/CredentialForm.php:175
+#: src/MultiFlexi/Ui/CredentialForm.php:174
 #, fuzzy
 #| msgid "Create Credential type"
 msgid "Populated by Credential type"
@@ -804,9 +1958,29 @@ msgstr "Nepoužívat"
 msgid "No CredentialType helper used"
 msgstr "Nepoužívá se žádný pomocník CredentialType"
 
+#: src/MultiFlexi/Ui/CredentialTypeForm.php:43
+#, fuzzy
+#| msgid "Credential Name"
+msgid "Credential type Name"
+msgstr "Název přihlašovacích údajů"
+
+#: src/MultiFlexi/Ui/CredentialTypeForm.php:44
+#, fuzzy
+#| msgid "New Company"
+msgid "Owned by Company"
+msgstr "Nová společnost"
+
 #: src/MultiFlexi/Ui/CredentialTypeForm.php:45
-msgid "Credential UUID"
+#, fuzzy
+#| msgid "Credential UUID"
+msgid "Credential type UUID"
 msgstr "UUID přihlašovacích údajů"
+
+#: src/MultiFlexi/Ui/CredentialTypeForm.php:45
+#, fuzzy
+#| msgid "Token generated"
+msgid "Autogenerated"
+msgstr "Token vygenerován"
 
 #: src/MultiFlexi/Ui/CredentialTypeForm.php:47
 msgid "Credential type Helper Class"
@@ -870,7 +2044,7 @@ msgstr "Vyberte zákazníka"
 msgid "Reload"
 msgstr "Načíst znovu"
 
-#: src/MultiFlexi/Ui/DBDataTable.php:135
+#: src/MultiFlexi/Ui/DBDataTable.php:135 src/admin-deletion-requests.php:180
 msgid "Filter"
 msgstr "Filtr"
 
@@ -878,18 +2052,66 @@ msgstr "Filtr"
 msgid "All pages"
 msgstr "Všechny stránky"
 
-#: src/MultiFlexi/Ui/DbStatus.php:40 src/MultiFlexi/Ui/MainMenu.php:83
-#: src/MultiFlexi/Ui/RunTemplatePanel.php:102 src/app.php:113
+#: src/MultiFlexi/Ui/DataExportWidget.php:51 src/data-export-page.php:29
+msgid "Personal Data Export"
+msgstr ""
+
+#: src/MultiFlexi/Ui/DataExportWidget.php:64
+msgid ""
+"Download all your personal data stored in MultiFlexi. This includes your "
+"profile information, activity logs, consent records, and associated data."
+msgstr ""
+
+#: src/MultiFlexi/Ui/DataExportWidget.php:73
+msgid ""
+"This feature complies with GDPR Article 15 - Right of Access. Your data will "
+"be provided in a structured, machine-readable format."
+msgstr ""
+
+#: src/MultiFlexi/Ui/DataExportWidget.php:90
+msgid "JSON Format"
+msgstr ""
+
+#: src/MultiFlexi/Ui/DataExportWidget.php:94
+msgid "Machine-readable format ideal for technical users and data processing"
+msgstr ""
+
+#: src/MultiFlexi/Ui/DataExportWidget.php:99
+#, fuzzy
+#| msgid "Export"
+msgid "Export as JSON"
+msgstr "Export"
+
+#: src/MultiFlexi/Ui/DataExportWidget.php:120
+msgid "Text Format"
+msgstr ""
+
+#: src/MultiFlexi/Ui/DataExportWidget.php:124
+msgid "Human-readable format suitable for review and printing"
+msgstr ""
+
+#: src/MultiFlexi/Ui/DataExportWidget.php:129
+#, fuzzy
+#| msgid "Export"
+msgid "Export as Text"
+msgstr "Export"
+
+#: src/MultiFlexi/Ui/DataExportWidget.php:174
+msgid "Recent Export Requests"
+msgstr ""
+
+#: src/MultiFlexi/Ui/DbStatus.php:40 src/MultiFlexi/Ui/MainMenu.php:85
+#: src/MultiFlexi/Ui/RunTemplatePanel.php:102 src/app.php:180
 msgid "Jobs"
 msgstr "Úlohy"
 
-#: src/MultiFlexi/Ui/DbStatus.php:48 src/MultiFlexi/Ui/MainMenu.php:167
-#: src/MultiFlexi/Ui/MainMenu.php:177 src/customers.php:27
+#: src/MultiFlexi/Ui/DbStatus.php:48 src/MultiFlexi/Ui/MainMenu.php:186
+#: src/MultiFlexi/Ui/MainMenu.php:196 src/customers.php:27
 msgid "Customers"
 msgstr "Zákazníci"
 
 #: src/MultiFlexi/Ui/DbStatus.php:52 src/MultiFlexi/Ui/MainMenu.php:65
-#: src/MultiFlexi/Ui/MainMenu.php:146 src/MultiFlexi/Ui/MainMenu.php:156
+#: src/MultiFlexi/Ui/MainMenu.php:165 src/MultiFlexi/Ui/MainMenu.php:175
 msgid "Companies"
 msgstr "Společnosti"
 
@@ -980,7 +2202,8 @@ msgstr "Uložit / Přidat"
 msgid "Executor not availble"
 msgstr "Vykonavatel není k dispozici"
 
-#: src/MultiFlexi/Ui/ExecutorImage.php:43
+#: src/MultiFlexi/Ui/ExecutorImage.php:43 src/dashboard.php:154
+#: src/dashboard.php:203
 msgid "Unknown"
 msgstr "Neznámý"
 
@@ -996,30 +2219,36 @@ msgstr "Do"
 msgid "Minutly"
 msgstr "Každou minutu"
 
-#: src/MultiFlexi/Ui/IntervalChooser.php:37 src/intervals.php:34
-#: src/periodical.php:73
+#: src/MultiFlexi/Ui/IntervalChooser.php:37 src/dashboard.php:317
+#: src/intervals.php:34 src/periodical.php:73
 msgid "Hourly"
 msgstr "Každou hodinu"
 
-#: src/MultiFlexi/Ui/IntervalChooser.php:38 src/intervals.php:35
-#: src/periodical.php:74
+#: src/MultiFlexi/Ui/IntervalChooser.php:38 src/dashboard.php:318
+#: src/intervals.php:35 src/periodical.php:74
 msgid "Daily"
 msgstr "Denně"
 
-#: src/MultiFlexi/Ui/IntervalChooser.php:39 src/intervals.php:36
-#: src/periodical.php:75
+#: src/MultiFlexi/Ui/IntervalChooser.php:39 src/dashboard.php:319
+#: src/intervals.php:36 src/periodical.php:75
 msgid "Weekly"
 msgstr "Týdně"
 
-#: src/MultiFlexi/Ui/IntervalChooser.php:40 src/intervals.php:37
-#: src/periodical.php:76
+#: src/MultiFlexi/Ui/IntervalChooser.php:40 src/dashboard.php:320
+#: src/intervals.php:37 src/periodical.php:76
 msgid "Monthly"
 msgstr "Měsíčně"
 
-#: src/MultiFlexi/Ui/IntervalChooser.php:41 src/intervals.php:38
-#: src/periodical.php:77
+#: src/MultiFlexi/Ui/IntervalChooser.php:41 src/dashboard.php:321
+#: src/intervals.php:38 src/periodical.php:77
 msgid "Yearly"
 msgstr "Ročně"
+
+#: src/MultiFlexi/Ui/IntervalChooser.php:42
+#, fuzzy
+#| msgid "Customer"
+msgid "Custom"
+msgstr "Zákazník"
 
 #: src/MultiFlexi/Ui/JobChart.php:87
 msgid "Last 30 Days jobs"
@@ -1081,7 +2310,7 @@ msgstr "Konec"
 msgid "Not Yet Ended"
 msgstr "Ještě neskončilo"
 
-#: src/MultiFlexi/Ui/JobInfo.php:57 src/app.php:80
+#: src/MultiFlexi/Ui/JobInfo.php:57 src/app.php:147
 msgid "Launched by"
 msgstr "Spuštěno uživatelem"
 
@@ -1090,7 +2319,7 @@ msgstr "Spuštěno uživatelem"
 msgid "Job"
 msgstr "Úloha"
 
-#: src/MultiFlexi/Ui/JobInfo.php:69 src/app.php:111
+#: src/MultiFlexi/Ui/JobInfo.php:69 src/app.php:178
 msgid "Overview"
 msgstr "Přehled"
 
@@ -1102,23 +2331,24 @@ msgstr "export .env"
 msgid "Environment"
 msgstr "Prostředí"
 
-#: src/MultiFlexi/Ui/JobScheduleForm.php:56
+#: src/MultiFlexi/Ui/JobScheduleForm.php:55
 msgid "Save App Schedule"
 msgstr "Uložit plán aplikace"
 
-#: src/MultiFlexi/Ui/JobScheduleForm.php:63
+#: src/MultiFlexi/Ui/JobScheduleForm.php:62
 msgid "Launch after"
 msgstr "Spustit po"
 
-#: src/MultiFlexi/Ui/JobScheduleForm.php:80
+#: src/MultiFlexi/Ui/JobScheduleForm.php:79
 msgid "Choose Executon platfom"
 msgstr "Vyberte platformu spuštění"
 
-#: src/MultiFlexi/Ui/JobSuccessGraph.php:52
+#: src/MultiFlexi/Ui/JobSuccessGraph.php:52 src/dashboard.php:389
 msgid "Success"
 msgstr "Úspěch"
 
-#: src/MultiFlexi/Ui/JobSuccessGraph.php:53
+#: src/MultiFlexi/Ui/JobSuccessGraph.php:53 src/dashboard.php:280
+#: src/dashboard.php:391
 msgid "Failed"
 msgstr "Selhalo"
 
@@ -1150,15 +2380,53 @@ msgstr "Zatím není registrována žádná aplikace. Prosím, zaregistrujte jed
 msgid "Logs"
 msgstr "Protokoly"
 
-#: src/MultiFlexi/Ui/MainMenu.php:83
+#: src/MultiFlexi/Ui/MainMenu.php:84
 msgid "System"
 msgstr "Systém"
 
-#: src/MultiFlexi/Ui/MainMenu.php:84 src/logout.php:24
+#: src/MultiFlexi/Ui/MainMenu.php:86
+msgid "Job queue"
+msgstr "Fronta úloh"
+
+#: src/MultiFlexi/Ui/MainMenu.php:87 src/dashboard.php:23
+msgid "Dashboard"
+msgstr "Hlavní panel"
+
+#: src/MultiFlexi/Ui/MainMenu.php:92 src/cookie-policy.php:228
+#: src/privacy-policy.php:171 src/privacy-policy.php:221
+msgid "Privacy Preferences"
+msgstr ""
+
+#: src/MultiFlexi/Ui/MainMenu.php:93
+#, fuzzy
+#| msgid "Export"
+msgid "Export My Data"
+msgstr "Export"
+
+#: src/MultiFlexi/Ui/MainMenu.php:94
+msgid "Request Account Deletion"
+msgstr ""
+
+#: src/MultiFlexi/Ui/MainMenu.php:96 src/consent-preferences.php:271
+#: src/cookie-policy.php:313 src/privacy-policy.php:24
+#: src/privacy-policy.php:29
+msgid "Privacy Policy"
+msgstr ""
+
+#: src/MultiFlexi/Ui/MainMenu.php:97 src/cookie-policy.php:24
+#: src/cookie-policy.php:29 src/privacy-policy.php:228
+msgid "Cookie Policy"
+msgstr ""
+
+#: src/MultiFlexi/Ui/MainMenu.php:99
+msgid "Privacy"
+msgstr ""
+
+#: src/MultiFlexi/Ui/MainMenu.php:101 src/logout.php:24
 msgid "Sign Off"
 msgstr "Odhlásit se"
 
-#: src/MultiFlexi/Ui/MainMenu.php:87
+#: src/MultiFlexi/Ui/MainMenu.php:104
 #, fuzzy
 #| msgid ""
 #| "MultiFlexi systemd service is not running. Consider `systemctl start "
@@ -1168,7 +2436,7 @@ msgid ""
 "multiflexi-scheduler`"
 msgstr "Služba MultiFlexi systemd neběží. Zvažte `systemctl start multiflexi`"
 
-#: src/MultiFlexi/Ui/MainMenu.php:91
+#: src/MultiFlexi/Ui/MainMenu.php:108
 #, fuzzy
 #| msgid ""
 #| "MultiFlexi systemd service is not running. Consider `systemctl start "
@@ -1178,109 +2446,120 @@ msgid ""
 "multiflexi-executor`"
 msgstr "Služba MultiFlexi systemd neběží. Zvažte `systemctl start multiflexi`"
 
-#: src/MultiFlexi/Ui/MainMenu.php:108
+#: src/MultiFlexi/Ui/MainMenu.php:126
 msgid "Register Application"
 msgstr "Registrovat aplikaci"
 
-#: src/MultiFlexi/Ui/MainMenu.php:112
+#: src/MultiFlexi/Ui/MainMenu.php:130
 msgid "Application list"
 msgstr "Seznam aplikací"
 
-#: src/MultiFlexi/Ui/MainMenu.php:115
+#: src/MultiFlexi/Ui/MainMenu.php:133 src/runtemplates.php:26
+#, fuzzy
+#| msgid "Configuration Wizard"
+msgid "Activation Wizard"
+msgstr "Průvodce konfigurací"
+
+#: src/MultiFlexi/Ui/MainMenu.php:134
 msgid "RunTemplates"
 msgstr "RunTemplates"
 
-#: src/MultiFlexi/Ui/MainMenu.php:130
+#: src/MultiFlexi/Ui/MainMenu.php:149
 msgid "Register new Credential"
 msgstr "Registrovat nové přihlašovací údaje"
 
-#: src/MultiFlexi/Ui/MainMenu.php:131
+#: src/MultiFlexi/Ui/MainMenu.php:150
 #, fuzzy
 #| msgid "Credentials listing"
 msgid "Credentials Listing"
 msgstr "Seznam přihlašovacích údajů"
 
-#: src/MultiFlexi/Ui/MainMenu.php:132
+#: src/MultiFlexi/Ui/MainMenu.php:151
 msgid "Register new Credential Type"
 msgstr "Registrovat nový typ přihlašovacích údajů"
 
-#: src/MultiFlexi/Ui/MainMenu.php:133
+#: src/MultiFlexi/Ui/MainMenu.php:152
 msgid "Credential types listing"
 msgstr "Seznam typů přihlašovacích údajů"
 
-#: src/MultiFlexi/Ui/MainMenu.php:147 src/companydelete.php:58
+#: src/MultiFlexi/Ui/MainMenu.php:166 src/companydelete.php:58
 #: src/companysetup.php:64
 msgid "New Company"
 msgstr "Nová společnost"
 
-#: src/MultiFlexi/Ui/MainMenu.php:147
+#: src/MultiFlexi/Ui/MainMenu.php:166
 msgid "Listing"
 msgstr "Seznam"
 
-#: src/MultiFlexi/Ui/MainMenu.php:165 src/customer.php:44
+#: src/MultiFlexi/Ui/MainMenu.php:184 src/customer.php:44
 msgid "New Customer"
 msgstr "Nový zákazník"
 
-#: src/MultiFlexi/Ui/MainMenu.php:186
+#: src/MultiFlexi/Ui/MainMenu.php:205
 msgid "Admin"
 msgstr "Admin"
 
-#: src/MultiFlexi/Ui/MainMenu.php:188
+#: src/MultiFlexi/Ui/MainMenu.php:207
 msgid "New Admin"
 msgstr "Nový admin"
 
-#: src/MultiFlexi/Ui/MainMenu.php:189
+#: src/MultiFlexi/Ui/MainMenu.php:208
 msgid "New User Account"
 msgstr "Nový uživatelský účet"
 
-#: src/MultiFlexi/Ui/MainMenu.php:190
+#: src/MultiFlexi/Ui/MainMenu.php:209
 msgid "Environment Modules"
 msgstr "Moduly prostředí"
 
-#: src/MultiFlexi/Ui/MainMenu.php:191
-#: src/MultiFlexi/Ui/RunTemplatePanel.php:104
-#: src/MultiFlexi/Ui/RuntemplateConfigForm.php:105
-msgid "Actions"
-msgstr "Akce"
-
-#: src/MultiFlexi/Ui/MainMenu.php:192
+#: src/MultiFlexi/Ui/MainMenu.php:211
 msgid "Executors"
 msgstr "Vykonavatelé"
 
-#: src/MultiFlexi/Ui/MainMenu.php:193
+#: src/MultiFlexi/Ui/MainMenu.php:212
 msgid "Credential Type helpers"
 msgstr "Pomocníci typu přihlašovacích údajů"
 
-#: src/MultiFlexi/Ui/MainMenu.php:194
+#: src/MultiFlexi/Ui/MainMenu.php:213
 msgid "Intervals"
 msgstr "Intervaly"
 
-#: src/MultiFlexi/Ui/MainMenu.php:195
+#: src/MultiFlexi/Ui/MainMenu.php:214
 #: src/MultiFlexi/Ui/RequirementsOverview.php:29
 msgid "Requirements"
 msgstr "Požadavky"
 
-#: src/MultiFlexi/Ui/MainMenu.php:196
-msgid "Job queue"
-msgstr "Fronta úloh"
+#: src/MultiFlexi/Ui/MainMenu.php:216
+msgid "Data Retention Management"
+msgstr ""
 
-#: src/MultiFlexi/Ui/MainMenu.php:198 src/users.php:24
+#: src/MultiFlexi/Ui/MainMenu.php:217 src/admin-deletion-requests.php:214
+msgid "Deletion Requests"
+msgstr ""
+
+#: src/MultiFlexi/Ui/MainMenu.php:218
+#, fuzzy
+#| msgid "Database Connection"
+msgid "Data Corrections"
+msgstr "Připojení k databázi"
+
+#: src/MultiFlexi/Ui/MainMenu.php:220 src/gdpr-user-deletion-request.php:128
+#: src/users.php:24
 msgid "Users"
 msgstr "Uživatelé"
 
-#: src/MultiFlexi/Ui/MainMenu.php:225
+#: src/MultiFlexi/Ui/MainMenu.php:247
 msgid "Click to hide messages"
 msgstr "Klikněte pro skrytí zpráv"
 
-#: src/MultiFlexi/Ui/MainMenu.php:250 src/MultiFlexi/Ui/MainMenu.php:252
+#: src/MultiFlexi/Ui/MainMenu.php:272 src/MultiFlexi/Ui/MainMenu.php:274
 msgid "Search"
 msgstr "Hledat"
 
-#: src/MultiFlexi/Ui/MainMenu.php:250
+#: src/MultiFlexi/Ui/MainMenu.php:272
 msgid "#number to jump on record"
 msgstr "#číslo pro skok na záznam"
 
-#: src/MultiFlexi/Ui/MainMenu.php:291
+#: src/MultiFlexi/Ui/MainMenu.php:313
 msgid " "
 msgstr " "
 
@@ -1301,11 +2580,12 @@ msgid "Docs"
 msgstr "Dokumentace"
 
 #: src/MultiFlexi/Ui/RegisterCustomerForm.php:31
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:194
 msgid "First Name"
 msgstr "Jméno"
 
 #: src/MultiFlexi/Ui/RegisterCustomerForm.php:35
-#: src/MultiFlexi/Ui/UserForm.php:50 src/createaccount.php:167
+#: src/MultiFlexi/Ui/UserForm.php:49 src/createaccount.php:184
 msgid "Lastname"
 msgstr "Příjmení"
 
@@ -1337,7 +2617,9 @@ msgstr "Žádný"
 msgid "Schedule Launch"
 msgstr "Naplánovat spuštění"
 
-#: src/MultiFlexi/Ui/RunTemplatePanel.php:62
+#: src/MultiFlexi/Ui/RunTemplatePanel.php:62 src/admin-data-corrections.php:182
+#: src/admin-deletion-requests.php:230 src/cookie-policy.php:364
+#: src/dashboard.php:378 src/data-retention-admin.php:265
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Customer.php:79
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Logger.php:114
 msgid "Status"
@@ -1429,6 +2711,7 @@ msgid "Provider not found"
 msgstr "Poskytovatel nenalezen"
 
 #: src/MultiFlexi/Ui/SearchSelect.php:30 src/companyapp.php:97
+#: src/dashboard.php:378
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Env/RunTemplate.php:52
 msgid "RunTemplate"
 msgstr "RunTemplate"
@@ -1437,7 +2720,7 @@ msgstr "RunTemplate"
 msgid "Credential"
 msgstr "Přihlašovací údaje"
 
-#: src/MultiFlexi/Ui/SearchSelect.php:36
+#: src/MultiFlexi/Ui/SearchSelect.php:36 src/admin-deletion-requests.php:172
 msgid "All"
 msgstr "Vše"
 
@@ -1454,14 +2737,354 @@ msgstr "Nebyl specifikován žádný server"
 msgid "Stormware Pohoda"
 msgstr "Stormware Pohoda"
 
-#: src/MultiFlexi/Ui/UserForm.php:46 src/createaccount.php:163
-msgid "Firstname"
-msgstr "Křestní jméno"
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:152
+#, php-format
+msgid "Your request to change %s has been submitted for administrator review."
+msgstr ""
 
-#: src/MultiFlexi/Ui/UserForm.php:58 src/login.php:84
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:166
+msgid "Profile updated successfully"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:169
+#, fuzzy
+#| msgid "Error creating runtemplate clone"
+msgid "Failed to update profile"
+msgstr "Chyba při vytváření klonu šablony spuštění"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:182
+msgid "GDPR Article 16 - Right of Rectification"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:183
+msgid ""
+"You have the right to request correction of inaccurate personal data. Some "
+"changes require administrator approval."
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:191
+#, fuzzy
+#| msgid "Password confirmation"
+msgid "Personal Information"
+msgstr "Potvrzení hesla"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:197
+#, fuzzy
+#| msgid "Lastname"
+msgid "Last Name"
+msgstr "Příjmení"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:200
+#, fuzzy
+#| msgid "eMail address"
+msgid "Email Address"
+msgstr "e-mailová adresa"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:203
+#: src/MultiFlexi/Ui/UserForm.php:57 src/login.php:152
 #: src/passwordrecovery.php:56 src/servers.php:29
 msgid "Username"
 msgstr "Uživatelské jméno"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:214
+#, fuzzy
+#| msgid "watching Changes"
+msgid "Save Changes"
+msgstr "sledování změn"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:239
+msgid "Requires Approval"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:256
+#: src/admin-data-corrections.php:109
+#, fuzzy
+#| msgid "Default Value"
+msgid "Current Value"
+msgstr "Výchozí hodnota"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:257 src/profile.php:47
+#, fuzzy
+#| msgid "Do not use"
+msgid "(not set)"
+msgstr "Nepoužívat"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:264
+#, fuzzy
+#| msgid "Enter New field value here"
+msgid "Enter new value"
+msgstr "Zadejte novou hodnotu pole zde"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:267
+msgid "Requested New Value"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:274
+msgid "Please explain why this change is needed (optional)"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:277
+#: src/admin-data-corrections.php:111
+#, fuzzy
+#| msgid "Send notification to"
+msgid "Justification"
+msgstr "Odeslat oznámení na"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:297
+#, fuzzy
+#| msgid "invalid mail address"
+msgid "Please enter a valid email address"
+msgstr "neplatná e-mailová adresa"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:303
+msgid ""
+"Only letters, spaces, hyphens, and apostrophes allowed (2-50 characters)"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:309
+msgid ""
+"Only letters, numbers, underscore, hyphen, and dot allowed (3-30 characters)"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:324
+msgid "Your Data Change Requests"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:340
+#, fuzzy
+#| msgid "Admin"
+msgid "Admin notes"
+msgstr "Admin"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:362
+msgid "Pending Review"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:364
+#: src/admin-data-corrections.php:86 src/admin-data-corrections.php:190
+#: src/admin-deletion-requests.php:174 src/profile.php:120
+msgid "Approved"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:366
+#: src/admin-data-corrections.php:191 src/admin-deletion-requests.php:176
+#: src/profile.php:124
+msgid "Rejected"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:368
+#, fuzzy
+#| msgid "Cancel"
+msgid "Cancelled"
+msgstr "Zrušit"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:403
+#, fuzzy
+#| msgid "invalid mail address"
+msgid "Invalid email address format"
+msgstr "neplatná e-mailová adresa"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:414
+#, php-format
+msgid ""
+"Invalid %s: only letters, spaces, hyphens, and apostrophes allowed (2-50 "
+"characters)"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:415
+#, fuzzy
+#| msgid "Firstname"
+msgid "first name"
+msgstr "Křestní jméno"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:415
+#, fuzzy
+#| msgid "Lastname"
+msgid "last name"
+msgstr "Příjmení"
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:426
+msgid ""
+"Invalid username: only letters, numbers, underscore, hyphen, and dot allowed "
+"(3-30 characters)"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDataCorrectionForm.php:435
+msgid "Username already exists"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:73
+msgid "Deletion Request Not Allowed"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:112
+msgid "⚠️ Account Deletion Request"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:113
+msgid "⚠️ User Deletion Request"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:116
+msgid ""
+"You are about to request deletion of your own account. This action cannot be "
+"undone and will result in the permanent loss of your data."
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:117
+msgid ""
+"You are about to request deletion of another user's account. This action "
+"requires administrator approval and cannot be undone."
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:127
+#, fuzzy
+#| msgid "Password confirmation"
+msgid "User Information"
+msgstr "Potvrzení hesla"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:130
+msgid "User Login: "
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:134
+#, fuzzy
+#| msgid "Field Name"
+msgid "Full Name: "
+msgstr "Název pole"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:138
+#, fuzzy
+#| msgid "Email"
+msgid "Email: "
+msgstr "E-mail"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:142
+#, fuzzy
+#| msgid "Admin account created"
+msgid "Account Created: "
+msgstr "Administrátorský účet vytvořen"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:155
+#, fuzzy
+#| msgid "Credential Type"
+msgid "Deletion Type"
+msgstr "Typ přihlašovacích údajů"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:161
+msgid "Soft Deletion (Recommended)"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:163
+msgid ""
+"Account will be disabled and marked as deleted, but data will be retained "
+"for legal compliance. This can be processed immediately."
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:169
+msgid "Hard Deletion"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:171
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:181
+msgid "Requires Admin Approval"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:173
+msgid ""
+"Permanently removes all user data except what's required for legal "
+"compliance. Cannot be undone."
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:179
+msgid "Data Anonymization"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:183
+msgid ""
+"Replaces personal data with anonymous values while preserving data "
+"structure. Account will be disabled."
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:197
+msgid "Reason for Deletion"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:199
+msgid "Please explain why you are requesting this deletion:"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:203
+msgid ""
+"e.g., No longer using the service, privacy concerns, account consolidation..."
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:217
+msgid "Legal Information"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:220
+msgid "This request is made under "
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:221
+msgid "Article 17 of the EU General Data Protection Regulation (GDPR)"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:222
+msgid ", which grants you the right to erasure (\"right to be forgotten\")."
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:227
+msgid "Soft deletion requests are typically processed within 24 hours"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:228
+msgid "Hard deletion and anonymization requests require administrator review"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:229
+msgid "Some data may be retained for legal compliance purposes"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:230
+msgid "You will receive confirmation when the request is processed"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:242
+#, fuzzy
+#| msgid "Configuration"
+msgid "Confirmation"
+msgstr "Konfigurace"
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:248
+msgid ""
+"I understand that this action cannot be easily undone and may result in "
+"permanent data loss"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:254
+msgid ""
+"I confirm that this request is made under my right to erasure as granted by "
+"GDPR Article 17"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:261
+msgid "I confirm that I am requesting deletion of my own account"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:280
+msgid "Submit Deletion Request"
+msgstr ""
+
+#: src/MultiFlexi/Ui/UserDeletionRequestForm.php:285 src/company.php:68
+#: src/data-retention-admin.php:386 src/job.php:92
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: src/MultiFlexi/Ui/UserForm.php:45 src/createaccount.php:180
+msgid "Firstname"
+msgstr "Křestní jméno"
 
 #: src/MultiFlexi/Ui/Wizard.php:48 src/app.php:32
 msgid "n/a"
@@ -1499,6 +3122,53 @@ msgstr "Nainstalované akční moduly"
 msgid "interval"
 msgstr "interval"
 
+#: src/activation-wizard.php:77
+#, fuzzy
+#| msgid "No RunTemplate prepared"
+msgid "RunTemplate created successfully"
+msgstr "Žádná šablona spuštění není připravena"
+
+#: src/activation-wizard.php:79
+#, fuzzy
+#| msgid "Error creating runtemplate clone"
+msgid "Error creating RunTemplate"
+msgstr "Chyba při vytváření klonu šablony spuštění"
+
+#: src/activation-wizard.php:145
+#, fuzzy
+#| msgid "Configuration removed"
+msgid "Configuration saved successfully"
+msgstr "Konfigurace odstraněna"
+
+#: src/activation-wizard.php:148
+#, fuzzy
+#| msgid "Error saving Application"
+msgid "Error saving configuration"
+msgstr "Chyba při ukládání aplikace"
+
+#: src/activation-wizard.php:183
+#, php-format
+msgid ""
+"RunTemplate #%d \"%s\" successfully created for application \"%s\" and "
+"company \"%s\"."
+msgstr ""
+
+#: src/activation-wizard.php:199
+#, fuzzy
+#| msgid "Application Description"
+msgid "Application Activation Wizard"
+msgstr "Popis aplikace"
+
+#: src/activation-wizard.php:240
+msgid "No activation wizard data found. Please start a new activation."
+msgstr ""
+
+#: src/activation-wizard.php:241
+#, fuzzy
+#| msgid "New Application"
+msgid "Start New Activation"
+msgstr "Nová aplikace"
+
 #: src/adhoc.php:33 src/companyapps.php:37
 msgid "Applications used by Company"
 msgstr "Aplikace používané společností"
@@ -1507,44 +3177,400 @@ msgstr "Aplikace používané společností"
 msgid "Application Launcher"
 msgstr "Spouštěč aplikací"
 
-#: src/app.php:40
+#: src/admin-data-corrections.php:28
+msgid "Access denied: Administrator privileges required"
+msgstr ""
+
+#: src/admin-data-corrections.php:45
+msgid "Request approved successfully"
+msgstr ""
+
+#: src/admin-data-corrections.php:51
+msgid "Request rejected"
+msgstr ""
+
+#: src/admin-data-corrections.php:58
+msgid "Data Correction Requests Administration"
+msgstr ""
+
+#: src/admin-data-corrections.php:66
+#, fuzzy
+#| msgid "Last 30 Days jobs"
+msgid "Last 30 Days Statistics"
+msgstr "Úlohy za posledních 30 dní"
+
+#: src/admin-data-corrections.php:71
+#, fuzzy
+#| msgid "watching Changes"
+msgid "Total Changes"
+msgstr "sledování změn"
+
+#: src/admin-data-corrections.php:76
+msgid "Users Affected"
+msgstr ""
+
+#: src/admin-data-corrections.php:81
+msgid "Pending Approval"
+msgstr ""
+
+#: src/admin-data-corrections.php:96
+msgid "Pending Data Correction Requests"
+msgstr ""
+
+#: src/admin-data-corrections.php:100
+#, php-format
+msgid "Request #%d - %s"
+msgstr ""
+
+#: src/admin-data-corrections.php:106 src/admin-data-corrections.php:179
+#: src/admin-deletion-requests.php:228 src/user.php:43
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Logger.php:135
+msgid "User"
+msgstr "Uživatel"
+
+#: src/admin-data-corrections.php:108
+#, fuzzy
+#| msgid "Add Field to "
+msgid "Field to Change"
+msgstr "Přidat pole k "
+
+#: src/admin-data-corrections.php:110
+#, fuzzy
+#| msgid "Default Value"
+msgid "Requested Value"
+msgstr "Výchozí hodnota"
+
+#: src/admin-data-corrections.php:112
+#, fuzzy
+#| msgid "Requied"
+msgid "Requested On"
+msgstr "Požadováno"
+
+#: src/admin-data-corrections.php:113
+#, fuzzy
+#| msgid "eMail address"
+msgid "IP Address"
+msgstr "e-mailová adresa"
+
+#: src/admin-data-corrections.php:122
+#, fuzzy
+#| msgid "Admin"
+msgid "Admin Notes"
+msgstr "Admin"
+
+#: src/admin-data-corrections.php:126
+msgid "Enter your notes about this decision..."
+msgstr ""
+
+#: src/admin-data-corrections.php:131 src/admin-deletion-requests.php:307
+msgid "Approve"
+msgstr ""
+
+#: src/admin-data-corrections.php:134
+#, fuzzy
+#| msgid "Are you sure you wish to delete %%d row of %s ?"
+msgid "Are you sure you want to approve this request?"
+msgstr "Opravdu chcete smazat %%d řádek %s ?"
+
+#: src/admin-data-corrections.php:136 src/admin-deletion-requests.php:318
+#, fuzzy
+#| msgid "Subject"
+msgid "Reject"
+msgstr "Předmět"
+
+#: src/admin-data-corrections.php:139
+#, fuzzy
+#| msgid "Are you sure you wish to delete %%d row of %s ?"
+msgid "Are you sure you want to reject this request?"
+msgstr "Opravdu chcete smazat %%d řádek %s ?"
+
+#: src/admin-data-corrections.php:175
+msgid "Recent Activity"
+msgstr ""
+
+#: src/admin-data-corrections.php:180 src/profile.php:99
+#, fuzzy
+#| msgid "Field Name"
+msgid "Field"
+msgstr "Název pole"
+
+#: src/admin-data-corrections.php:181
+msgid "Change"
+msgstr ""
+
+#: src/admin-data-corrections.php:183
+msgid "Reviewed By"
+msgstr ""
+
+#: src/admin-data-corrections.php:185
+#, fuzzy
+#| msgid "Note"
+msgid "Notes"
+msgstr "Poznámka"
+
+#: src/admin-deletion-requests.php:30
+msgid "Access denied. Administrator privileges required."
+msgstr ""
+
+#: src/admin-deletion-requests.php:43
+#, fuzzy
+#| msgid "A %s is required"
+msgid "Request ID is required"
+msgstr "Je vyžadováno %s"
+
+#: src/admin-deletion-requests.php:62
+#, php-format
+msgid "Deletion request #%d approved successfully"
+msgstr ""
+
+#: src/admin-deletion-requests.php:66
+msgid "Failed to approve deletion request"
+msgstr ""
+
+#: src/admin-deletion-requests.php:73
+#, php-format
+msgid "Deletion request #%d rejected successfully"
+msgstr ""
+
+#: src/admin-deletion-requests.php:77
+#, fuzzy
+#| msgid "Error creating runtemplate clone"
+msgid "Failed to reject deletion request"
+msgstr "Chyba při vytváření klonu šablony spuštění"
+
+#: src/admin-deletion-requests.php:84
+#, php-format
+msgid "Deletion request #%d processed successfully"
+msgstr ""
+
+#: src/admin-deletion-requests.php:88
+msgid "Failed to process deletion request"
+msgstr ""
+
+#: src/admin-deletion-requests.php:94
+#, fuzzy
+#| msgid "Unknown"
+msgid "Unknown action"
+msgstr "Neznámý"
+
+#: src/admin-deletion-requests.php:102
+msgid "GDPR Deletion Request Management"
+msgstr ""
+
+#: src/admin-deletion-requests.php:107
+msgid "User Deletion Request Management"
+msgstr ""
+
+#: src/admin-deletion-requests.php:108
+msgid "Review and manage GDPR Article 17 user deletion requests."
+msgstr ""
+
+#: src/admin-deletion-requests.php:138
+msgid "Request Statistics"
+msgstr ""
+
+#: src/admin-deletion-requests.php:169
+msgid "Filter by Status: "
+msgstr ""
+
+#: src/admin-deletion-requests.php:173 src/dashboard.php:386
+#: src/profile.php:116
+msgid "Pending"
+msgstr ""
+
+#: src/admin-deletion-requests.php:175
+#, fuzzy
+#| msgid "Company Deleted"
+msgid "Completed"
+msgstr "Společnost smazána"
+
+#: src/admin-deletion-requests.php:217
+msgid "No requests found"
+msgstr ""
+
+#: src/admin-deletion-requests.php:231
+#, fuzzy
+#| msgid "Requied"
+msgid "Requested"
+msgstr "Požadováno"
+
+#: src/admin-deletion-requests.php:232
+#, fuzzy
+#| msgid "Requied"
+msgid "Requested By"
+msgstr "Požadováno"
+
+#: src/admin-deletion-requests.php:294
+#, fuzzy
+#| msgid "Job details"
+msgid "View Details"
+msgstr "Podrobnosti úlohy"
+
+#: src/admin-deletion-requests.php:332
+msgid "Process"
+msgstr ""
+
+#: src/admin-deletion-requests.php:359
+msgid "Deletion Request Details"
+msgstr ""
+
+#: src/admin-deletion-requests.php:361
+#, fuzzy, php-format
+#| msgid "Requied"
+msgid "Request #%d"
+msgstr "Požadováno"
+
+#: src/admin-deletion-requests.php:365
+#, fuzzy
+#| msgid "New User"
+msgid "Target User:"
+msgstr "Nový uživatel"
+
+#: src/admin-deletion-requests.php:368
+#, fuzzy
+#| msgid "Credential Type"
+msgid "Deletion Type:"
+msgstr "Typ přihlašovacích údajů"
+
+#: src/admin-deletion-requests.php:371
+#, fuzzy
+#| msgid "Status"
+msgid "Status:"
+msgstr "Stav"
+
+#: src/admin-deletion-requests.php:374
+#, fuzzy
+#| msgid "Requied"
+msgid "Requested:"
+msgstr "Požadováno"
+
+#: src/admin-deletion-requests.php:377
+#, fuzzy
+#| msgid "Requied"
+msgid "Requested By:"
+msgstr "Požadováno"
+
+#: src/admin-deletion-requests.php:381
+msgid "Reason:"
+msgstr ""
+
+#: src/admin-deletion-requests.php:386
+msgid "Reviewed By:"
+msgstr ""
+
+#: src/admin-deletion-requests.php:389
+msgid "Review Date:"
+msgstr ""
+
+#: src/admin-deletion-requests.php:393
+msgid "Review Notes:"
+msgstr ""
+
+#: src/admin-deletion-requests.php:407
+msgid "Audit Trail"
+msgstr ""
+
+#: src/admin-deletion-requests.php:413 src/data-retention-admin.php:264
+#, fuzzy
+#| msgid "Actions"
+msgid "Action"
+msgstr "Akce"
+
+#: src/admin-deletion-requests.php:414 src/data-retention-admin.php:262
+#: src/data-retention-admin.php:409
+#, fuzzy
+#| msgid "Enabled"
+msgid "Table"
+msgstr "Povoleno"
+
+#: src/admin-deletion-requests.php:415
+msgid "Reason"
+msgstr ""
+
+#: src/app.php:54
+#, php-format
+msgid "Downloaded JSON from %s"
+msgstr ""
+
+#: src/app.php:56
+#, php-format
+msgid "Error downloading JSON: %s"
+msgstr ""
+
+#: src/app.php:66
+msgid "Invalid file type. Only .json files are allowed."
+msgstr ""
+
+#: src/app.php:70
+#, fuzzy, php-format
+#| msgid "uploaded file"
+msgid "Uploaded file %s"
+msgstr "nahraný soubor"
+
+#: src/app.php:72
+#, fuzzy
+#| msgid "No Data for Zabbix provided"
+msgid "No JSON file provided"
+msgstr "Žádná data pro Zabbix nebyla poskytnuta"
+
+#: src/app.php:82
+#, php-format
+msgid "Application %s (%s) imported successfully"
+msgstr ""
+
+#: src/app.php:89
+msgid "Failed to import application from JSON"
+msgstr ""
+
+#: src/app.php:92
+#, php-format
+msgid "Error importing JSON: %s"
+msgstr ""
+
+#: src/app.php:107
 #, php-format
 msgid "Application %s removal"
 msgstr "Odstranění aplikace %s"
 
-#: src/app.php:48
+#: src/app.php:115
 msgid "Application Saved"
 msgstr "Aplikace uložena"
 
-#: src/app.php:52
+#: src/app.php:119
 msgid "Error saving Application"
 msgstr "Chyba při ukládání aplikace"
 
-#: src/app.php:62
+#: src/app.php:129
 msgid "New Application"
 msgstr "Nová aplikace"
 
-#: src/app.php:90
+#: src/app.php:157
 msgid "Not yet"
 msgstr "Ještě ne"
 
-#: src/app.php:103
+#: src/app.php:170
 msgid "Config fields editor"
 msgstr "Editor konfiguračních polí"
 
-#: src/app.php:112 src/runtemplate.php:161
+#: src/app.php:179 src/runtemplate.php:169
 msgid "Configuration"
 msgstr "Konfigurace"
 
-#: src/app.php:115
+#: src/app.php:182
 msgid "Application Log"
 msgstr "Protokol aplikace"
 
-#: src/app.php:116
+#: src/app.php:183
 msgid "All Application Jobs history"
 msgstr "Historie všech úloh aplikace"
 
-#: src/app.php:118
+#: src/app.php:188
+#, fuzzy
+#| msgid "Export"
+msgid "Import"
+msgstr "Export"
+
+#: src/app.php:189
 msgid "Export"
 msgstr "Export"
 
@@ -1556,17 +3582,13 @@ msgstr "Seznam společností"
 msgid "Tasks"
 msgstr "Úkoly"
 
-#: src/companies.php:39
+#: src/companies.php:39 src/data-retention-admin.php:290
 msgid "Delete"
 msgstr "Smazat"
 
 #: src/company.php:58
 msgid "Run template"
 msgstr "Spustit šablonu"
-
-#: src/company.php:68 src/job.php:92
-msgid "Cancel"
-msgstr "Zrušit"
 
 #: src/company.php:154
 msgid "job queue"
@@ -1650,6 +3672,446 @@ msgstr "Konfigurační pole"
 msgid "Back to app"
 msgstr "Zpět k aplikaci"
 
+#: src/consent-api.php:135
+msgid "Consent preferences saved successfully"
+msgstr ""
+
+#: src/consent-api.php:141
+msgid "Failed to save some consent preferences"
+msgstr ""
+
+#: src/consent-api.php:173
+#, php-format
+msgid "Consent for %s has been withdrawn"
+msgstr ""
+
+#: src/consent-api.php:179
+msgid "Failed to withdraw consent"
+msgstr ""
+
+#: src/consent-preferences.php:27
+msgid "Privacy & Consent"
+msgstr ""
+
+#: src/consent-preferences.php:28
+msgid "Privacy & Consent Preferences"
+msgstr ""
+
+#: src/consent-preferences.php:45
+#, fuzzy, php-format
+#| msgid "Field Type is not set for %s "
+msgid "Failed to save consent for %s"
+msgstr "Typ pole není nastaven pro %s "
+
+#: src/consent-preferences.php:50
+msgid "Your consent preferences have been updated successfully."
+msgstr ""
+
+#: src/consent-preferences.php:54
+msgid "Some consent preferences could not be saved: "
+msgstr ""
+
+#: src/consent-preferences.php:61
+msgid ""
+"Manage your privacy preferences and control how your data is processed. You "
+"can change these settings at any time."
+msgstr ""
+
+#: src/consent-preferences.php:66
+#, fuzzy
+#| msgid "Credential Clone"
+msgid "Essential Cookies"
+msgstr "Klon přihlašovacích údajů"
+
+#: src/consent-preferences.php:67
+msgid ""
+"These cookies are necessary for the website to function and cannot be "
+"switched off. They are usually only set in response to actions made by you "
+"which amount to a request for services."
+msgstr ""
+
+#: src/consent-preferences.php:72
+msgid "Functional Cookies"
+msgstr ""
+
+#: src/consent-preferences.php:73
+msgid ""
+"These cookies enable the website to provide enhanced functionality and "
+"personalisation. They may be set by us or by third party providers."
+msgstr ""
+
+#: src/consent-preferences.php:78
+msgid "Analytics Cookies"
+msgstr ""
+
+#: src/consent-preferences.php:80
+msgid ""
+"These cookies allow us to count visits and traffic sources so we can measure "
+"and improve the performance of our site. They help us know which pages are "
+"most and least popular."
+msgstr ""
+
+#: src/consent-preferences.php:81
+msgid ""
+"These cookies allow us to count visits and traffic sources using self-hosted "
+"analytics solutions (like Matomo or AWStats) to measure and improve the "
+"performance of our site. No data is shared with third parties."
+msgstr ""
+
+#: src/consent-preferences.php:86
+msgid "Marketing Cookies"
+msgstr ""
+
+#: src/consent-preferences.php:87
+msgid ""
+"These cookies may be set through our site by our advertising partners. They "
+"may be used to build a profile of your interests and show you relevant "
+"adverts."
+msgstr ""
+
+#: src/consent-preferences.php:92
+msgid "Personalization Cookies"
+msgstr ""
+
+#: src/consent-preferences.php:93
+msgid ""
+"These cookies allow us to remember choices you make and provide enhanced, "
+"more personal features based on your preferences."
+msgstr ""
+
+#: src/consent-preferences.php:131 src/cookie-policy.php:30
+#: src/privacy-policy.php:30
+msgid "Last updated: "
+msgstr ""
+
+#: src/consent-preferences.php:142
+msgid "Save Preferences"
+msgstr ""
+
+#: src/consent-preferences.php:164
+#, fuzzy
+#| msgid "Job History"
+msgid "Consent History"
+msgstr "Historie úloh"
+
+#: src/consent-preferences.php:224
+#, fuzzy
+#| msgid "Are you sure you wish to delete %%d row of %s ?"
+msgid "Are you sure you want to withdraw this consent?"
+msgstr "Opravdu chcete smazat %%d řádek %s ?"
+
+#: src/consent-preferences.php:244
+msgid "Error withdrawing consent: "
+msgstr ""
+
+#: src/consent-preferences.php:250
+msgid "Error withdrawing consent"
+msgstr ""
+
+#: src/consent-preferences.php:261
+msgid "Important Information"
+msgstr ""
+
+#: src/consent-preferences.php:268
+msgid "You can change your consent preferences at any time."
+msgstr ""
+
+#: src/consent-preferences.php:269
+msgid ""
+"Essential cookies cannot be disabled as they are required for the site to "
+"function."
+msgstr ""
+
+#: src/consent-preferences.php:270
+msgid "Withdrawing consent may affect your experience on the site."
+msgstr ""
+
+#: src/consent-preferences.php:271
+msgid "For more information, see our "
+msgstr ""
+
+#: src/cookie-policy.php:32
+msgid ""
+"This Cookie Policy explains how MultiFlexi uses cookies and similar tracking "
+"technologies when you visit our application."
+msgstr ""
+
+#: src/cookie-policy.php:40
+msgid "1. What Are Cookies?"
+msgstr ""
+
+#: src/cookie-policy.php:45
+msgid ""
+"Cookies are small data files that are placed on your computer or mobile "
+"device when you visit a website or application. Cookies are widely used by "
+"website and application owners to make their services work more efficiently "
+"and to provide reporting information."
+msgstr ""
+
+#: src/cookie-policy.php:48
+msgid ""
+"Cookies set by the website owner (in this case, MultiFlexi) are called "
+"\"first-party cookies.\" Cookies set by parties other than the website owner "
+"are called \"third-party cookies.\""
+msgstr ""
+
+#: src/cookie-policy.php:61
+msgid "2. Types of Cookies We Use"
+msgstr ""
+
+#: src/cookie-policy.php:66
+msgid "2.1 Essential Cookies"
+msgstr ""
+
+#: src/cookie-policy.php:69
+msgid ""
+"These cookies are strictly necessary to provide you with services available "
+"through our application and to use some of its features. Because these "
+"cookies are essential for the application to function, you cannot refuse "
+"them without impacting how our services work."
+msgstr ""
+
+#: src/cookie-policy.php:76 src/cookie-policy.php:140
+#, fuzzy
+#| msgid "Fio Token Name"
+msgid "Cookie Name"
+msgstr "Název tokenu Fio"
+
+#: src/cookie-policy.php:79 src/cookie-policy.php:143
+msgid "Purpose"
+msgstr ""
+
+#: src/cookie-policy.php:82 src/cookie-policy.php:146
+#, fuzzy
+#| msgid "Configuration"
+msgid "Duration"
+msgstr "Konfigurace"
+
+#: src/cookie-policy.php:93
+msgid "Session management and user authentication"
+msgstr ""
+
+#: src/cookie-policy.php:96
+#, fuzzy
+#| msgid "Version"
+msgid "Session"
+msgstr "Verze"
+
+#: src/cookie-policy.php:99 src/cookie-policy.php:111 src/cookie-policy.php:123
+#, fuzzy
+#| msgid "Firstname"
+msgid "First-party"
+msgstr "Křestní jméno"
+
+#: src/cookie-policy.php:105
+msgid "Stores your consent preferences"
+msgstr ""
+
+#: src/cookie-policy.php:108 src/cookie-policy.php:120
+msgid "1 year"
+msgstr ""
+
+#: src/cookie-policy.php:117
+msgid "Language preference"
+msgstr ""
+
+#: src/cookie-policy.php:130
+msgid "2.2 Analytics Cookies"
+msgstr ""
+
+#: src/cookie-policy.php:133
+msgid ""
+"These cookies help us understand how visitors interact with our application "
+"by collecting and reporting information anonymously. They help us improve "
+"our application and your experience."
+msgstr ""
+
+#: src/cookie-policy.php:160 src/cookie-policy.php:184
+msgid "Google Analytics - distinguishes unique users"
+msgstr ""
+
+#: src/cookie-policy.php:163 src/cookie-policy.php:175
+msgid "2 years"
+msgstr ""
+
+#: src/cookie-policy.php:166 src/cookie-policy.php:178
+#: src/cookie-policy.php:190
+msgid "Third-party"
+msgstr ""
+
+#: src/cookie-policy.php:172
+msgid "Google Analytics - maintains session state"
+msgstr ""
+
+#: src/cookie-policy.php:187
+msgid "24 hours"
+msgstr ""
+
+#: src/cookie-policy.php:198
+msgid ""
+"Google Analytics is disabled for this installation. Analytics cookies are "
+"not used."
+msgstr ""
+
+#: src/cookie-policy.php:201
+msgid ""
+"This installation may use alternative analytics solutions like Matomo or "
+"AWStats for statistical analysis."
+msgstr ""
+
+#: src/cookie-policy.php:220
+msgid "3. How to Control Cookies"
+msgstr ""
+
+#: src/cookie-policy.php:225
+msgid "3.1 MultiFlexi Cookie Preferences"
+msgstr ""
+
+#: src/cookie-policy.php:228
+msgid "You can control most cookies through our "
+msgstr ""
+
+#: src/cookie-policy.php:228
+msgid ""
+" page. This allows you to accept or reject different categories of cookies."
+msgstr ""
+
+#: src/cookie-policy.php:232
+msgid "3.2 Browser Settings"
+msgstr ""
+
+#: src/cookie-policy.php:235
+msgid ""
+"Most web browsers allow you to control cookies through their settings. You "
+"can:"
+msgstr ""
+
+#: src/cookie-policy.php:239
+msgid "View what cookies are stored on your device"
+msgstr ""
+
+#: src/cookie-policy.php:242
+msgid "Delete cookies individually or all at once"
+msgstr ""
+
+#: src/cookie-policy.php:245
+msgid "Block cookies from specific sites"
+msgstr ""
+
+#: src/cookie-policy.php:248
+msgid "Block all cookies (this may affect website functionality)"
+msgstr ""
+
+#: src/cookie-policy.php:253
+msgid "3.3 Do Not Track Signals"
+msgstr ""
+
+#: src/cookie-policy.php:256
+msgid ""
+"Some browsers include a \"Do Not Track\" feature that lets you tell websites "
+"that you do not want to have your online activities tracked. MultiFlexi "
+"respects Do Not Track signals and will not set non-essential cookies when "
+"this signal is detected."
+msgstr ""
+
+#: src/cookie-policy.php:269 src/privacy-policy.php:184
+msgid "4. Contact Us"
+msgstr ""
+
+#: src/cookie-policy.php:274
+msgid ""
+"If you have any questions about this Cookie Policy or our use of cookies, "
+"please contact us:"
+msgstr ""
+
+#: src/cookie-policy.php:278 src/privacy-policy.php:55
+#: src/privacy-policy.php:193
+msgid "Email: info@vitexsoftware.cz"
+msgstr ""
+
+#: src/cookie-policy.php:281 src/privacy-policy.php:52
+#: src/privacy-policy.php:196
+msgid "Website: "
+msgstr ""
+
+#: src/cookie-policy.php:284 src/privacy-policy.php:199
+#, fuzzy
+#| msgid "Github Project"
+msgid "Project: "
+msgstr "Projekt na Githubu"
+
+#: src/cookie-policy.php:298
+msgid "Manage Your Cookie Preferences"
+msgstr ""
+
+#: src/cookie-policy.php:306
+msgid "Cookie Preferences"
+msgstr ""
+
+#: src/cookie-policy.php:320 src/privacy-policy.php:235
+msgid "Show Consent Banner"
+msgstr ""
+
+#: src/cookie-policy.php:336
+msgid "Your Current Cookie Settings"
+msgstr ""
+
+#: src/cookie-policy.php:341
+msgid ""
+"The table below shows your current cookie preferences. You can change these "
+"at any time."
+msgstr ""
+
+#: src/cookie-policy.php:361
+#, fuzzy
+#| msgid "Field Type"
+msgid "Cookie Type"
+msgstr "Typ pole"
+
+#: src/cookie-policy.php:367
+#, fuzzy
+#| msgid "Updated"
+msgid "Last Updated"
+msgstr "Aktualizováno"
+
+#: src/cookie-policy.php:374
+#, fuzzy
+#| msgid "Credential"
+msgid "Essential"
+msgstr "Přihlašovací údaje"
+
+#: src/cookie-policy.php:377
+#, fuzzy
+#| msgid "Optional"
+msgid "Functional"
+msgstr "Volitelné"
+
+#: src/cookie-policy.php:380
+msgid "Analytics"
+msgstr ""
+
+#: src/cookie-policy.php:383
+#, fuzzy
+#| msgid "waiting"
+msgid "Marketing"
+msgstr "čekání"
+
+#: src/cookie-policy.php:386
+#, fuzzy
+#| msgid "Organization ID"
+msgid "Personalization"
+msgstr "ID organizace"
+
+#: src/cookie-policy.php:409
+#, fuzzy
+#| msgid "Not yet"
+msgid "Not Set"
+msgstr "Ještě ne"
+
+#: src/cookie-policy.php:418
+msgid "No cookie preferences have been set yet."
+msgstr ""
+
 #: src/createaccount.php:21
 msgid "No Administrator found"
 msgstr "Nalezen žádný administrátor"
@@ -1663,70 +4125,66 @@ msgstr "neplatná e-mailová adresa"
 msgid "Mail address %s is already registered"
 msgstr "E-mailová adresa %s je již registrována"
 
-#: src/createaccount.php:63
-msgid "password is too short"
-msgstr "heslo je příliš krátké"
-
-#: src/createaccount.php:66
+#: src/createaccount.php:80
 msgid "Password control does not match"
 msgstr "Kontrola hesla se neshoduje"
 
-#: src/createaccount.php:76
+#: src/createaccount.php:90
 #, php-format
 msgid "Username %s is used. Please choose another one"
 msgstr "Uživatelské jméno %s je již použito. Prosím, zvolte jiné"
 
-#: src/createaccount.php:95
+#: src/createaccount.php:109
 msgid "Admin account created"
 msgstr "Administrátorský účet vytvořen"
 
-#: src/createaccount.php:99
+#: src/createaccount.php:113
 msgid "User account created"
 msgstr "Uživatelský účet vytvořen"
 
-#: src/createaccount.php:106
+#: src/createaccount.php:120
 msgid "Sign On info"
 msgstr "Informace pro přihlášení"
 
-#: src/createaccount.php:109
+#: src/createaccount.php:123
 #, php-format
 msgid "Your new %s account:"
 msgstr "Váš nový účet %s:"
 
-#: src/createaccount.php:122
+#: src/createaccount.php:136
 #, php-format
 msgid "New Sign On to %s: %s"
 msgstr "Nové přihlášení k %s: %s"
 
-#: src/createaccount.php:128
+#: src/createaccount.php:142
 msgid "New User"
 msgstr "Nový uživatel"
 
-#: src/createaccount.php:144
+#: src/createaccount.php:158
 msgid "Administrator create failed"
 msgstr "Vytvoření administrátora se nezdařilo"
 
-#: src/createaccount.php:148
+#: src/createaccount.php:162
 msgid "New Administrator"
 msgstr "Nový administrátor"
 
-#: src/createaccount.php:150
+#: src/createaccount.php:167
 msgid "Singn On"
 msgstr "Přihlášení"
 
-#: src/createaccount.php:170
+#: src/createaccount.php:187
 msgid "User name"
 msgstr "Uživatelské jméno"
 
-#: src/createaccount.php:177
+#: src/createaccount.php:194
 msgid "Password confirmation"
 msgstr "Potvrzení hesla"
 
-#: src/createaccount.php:181
+#: src/createaccount.php:198
 msgid "eMail address"
 msgstr "e-mailová adresa"
 
-#: src/createaccount.php:187
+#: src/createaccount.php:204
 msgid "finish registration"
 msgstr "dokončit registraci"
 
@@ -1750,7 +4208,7 @@ msgstr "Chyba při ukládání pole přihlašovacích údajů"
 
 #: src/credential.php:65 src/credup.php:44 src/index.php:22 src/main.php:22
 #: src/requirements.php:22 src/search.php:123 src/status.php:22
-#: src/template.php:22 src/wizard.php:22
+#: src/template.php:22
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Env/MultiFlexi.php:52
 msgid "MultiFlexi"
 msgstr "MultiFlexi"
@@ -1829,13 +4287,13 @@ msgstr "Chyba při ukládání zákazníka"
 msgid "App custom config Fields"
 msgstr "Vlastní konfigurační pole aplikace"
 
-#: src/custserviceconfig.php:40 src/runtemplate.php:125
+#: src/custserviceconfig.php:40 src/runtemplate.php:133
 #: src/runtemplatepopulate.php:68
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/RunTemplate.php:448
 msgid "Config fields Saved"
 msgstr "Konfigurační pole uložena"
 
-#: src/custserviceconfig.php:43 src/runtemplate.php:157
+#: src/custserviceconfig.php:43 src/runtemplate.php:165
 #: src/runtemplatepopulate.php:70
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/RunTemplate.php:451
 msgid "Error saving Config fields"
@@ -1845,9 +4303,385 @@ msgstr "Chyba při ukládání konfiguračních polí"
 msgid "Run Template"
 msgstr "Šablona spuštění"
 
-#: src/dashboard.php:20
-msgid "Dashboard"
-msgstr "Hlavní panel"
+#: src/dashboard.php:51
+msgid "Total Jobs"
+msgstr "Celkem úloh"
+
+#: src/dashboard.php:53
+msgid "View Jobs"
+msgstr "Zobrazit úlohy"
+
+#: src/dashboard.php:60
+msgid "Active Applications"
+msgstr "Aktivní aplikace"
+
+#: src/dashboard.php:62
+msgid "View Apps"
+msgstr "Zobrazit aplikace"
+
+#: src/dashboard.php:69
+msgid "Active Companies"
+msgstr "Aktivní společnosti"
+
+#: src/dashboard.php:71
+msgid "View Companies"
+msgstr "Zobrazit společnosti"
+
+#: src/dashboard.php:78
+msgid "Run Templates"
+msgstr "Šablony spuštění"
+
+#: src/dashboard.php:80
+msgid "View Templates"
+msgstr "Zobrazit šablony"
+
+#: src/dashboard.php:93 src/joblist.php:30
+#, fuzzy
+#| msgid "Success Jobs"
+msgid "Successful Jobs"
+msgstr "Úspěšné úlohy"
+
+#: src/dashboard.php:95
+#, php-format
+msgid "%d%% success rate"
+msgstr "%d%% úspěšnost"
+
+#: src/dashboard.php:96 src/dashboard.php:107 src/dashboard.php:117
+#: src/dashboard.php:127
+msgid "View All"
+msgstr "Zobrazit vše"
+
+#: src/dashboard.php:106
+#, php-format
+msgid "%d%% failure rate"
+msgstr "%d%% selhání"
+
+#: src/dashboard.php:114 src/joblist.php:36
+msgid "Running Jobs"
+msgstr "Běžící úlohy"
+
+#: src/dashboard.php:116
+msgid "Currently executing"
+msgstr "Právě se provádí"
+
+#: src/dashboard.php:124 src/joblist.php:39
+msgid "Today's Jobs"
+msgstr "Dnešní úlohy"
+
+#: src/dashboard.php:138
+msgid "Jobs by Application"
+msgstr "Úlohy podle aplikace"
+
+#: src/dashboard.php:179 src/dashboard.php:227
+#, fuzzy
+#| msgid "Action not availble"
+msgid "No data available"
+msgstr "Akce není k dispozici"
+
+#: src/dashboard.php:182 src/dashboard.php:230
+#, fuzzy
+#| msgid "Error saving record"
+msgid "Error loading chart: "
+msgstr "Chyba při ukládání záznamu"
+
+#: src/dashboard.php:187
+msgid "Jobs by Company"
+msgstr "Úlohy podle společnosti"
+
+#: src/dashboard.php:238
+msgid "Jobs Execution Timeline (Last 7 Days)"
+msgstr "Časová osa provádění úloh (posledních 7 dní)"
+
+#: src/dashboard.php:280
+#, fuzzy
+#| msgid "Success"
+msgid "Successful"
+msgstr "Úspěch"
+
+#: src/dashboard.php:290
+msgid "No execution data for the last 7 days"
+msgstr "Žádná data o provádění za posledních 7 dní"
+
+#: src/dashboard.php:293
+#, fuzzy
+#| msgid "Error creating runtemplate clone"
+msgid "Error loading timeline: "
+msgstr "Chyba při vytváření klonu šablony spuštění"
+
+#: src/dashboard.php:301
+msgid "Run Templates by Interval"
+msgstr "Šablony spuštění podle intervalu"
+
+#: src/dashboard.php:316 src/periodical.php:72
+msgid "Minutely"
+msgstr "Každou minutu"
+
+#: src/dashboard.php:352
+#, fuzzy
+#| msgid "Action not availble"
+msgid "No run templates available"
+msgstr "Akce není k dispozici"
+
+#: src/dashboard.php:355
+#, fuzzy
+#| msgid "Error creating runtemplate clone"
+msgid "Error loading interval chart: "
+msgstr "Chyba při vytváření klonu šablony spuštění"
+
+#: src/dashboard.php:363
+msgid "Recent Jobs (Last 20)"
+msgstr "Poslední úlohy (posledních 20)"
+
+#: src/dashboard.php:378
+#, fuzzy
+#| msgid "Not Yet Started"
+msgid "Started"
+msgstr "Ještě nezačalo"
+
+#: src/dashboard.php:378
+#, fuzzy
+#| msgid "Unfinished Jobs"
+msgid "Finished"
+msgstr "Nedokončené úlohy"
+
+#: src/dashboard.php:384
+msgid "Running"
+msgstr "Běží"
+
+#: src/dashboard.php:407
+msgid "No recent jobs"
+msgstr "Žádné poslední úlohy"
+
+#: src/dashboard.php:410
+#, fuzzy
+#| msgid "Error saving record"
+msgid "Error loading recent jobs: "
+msgstr "Chyba při ukládání záznamu"
+
+#: src/data-export-page.php:38 src/profile.php:65
+msgid "Your Rights Under GDPR"
+msgstr ""
+
+#: src/data-export-page.php:44 src/profile.php:74
+msgid "Right of Access (Article 15)"
+msgstr ""
+
+#: src/data-export-page.php:44
+msgid ""
+"You have the right to obtain confirmation as to whether personal data "
+"concerning you is being processed, and access to such data."
+msgstr ""
+
+#: src/data-export-page.php:45
+msgid "Right to Rectification (Article 16)"
+msgstr ""
+
+#: src/data-export-page.php:45
+msgid ""
+"You have the right to obtain rectification of inaccurate personal data and "
+"to have incomplete personal data completed."
+msgstr ""
+
+#: src/data-export-page.php:46
+msgid "Right to Erasure (Article 17)"
+msgstr ""
+
+#: src/data-export-page.php:46
+msgid ""
+"You have the right to obtain erasure of personal data concerning you under "
+"certain circumstances."
+msgstr ""
+
+#: src/data-export-page.php:47 src/profile.php:82
+msgid "Right to Data Portability (Article 20)"
+msgstr ""
+
+#: src/data-export-page.php:47
+msgid ""
+"You have the right to receive your personal data in a structured, commonly "
+"used and machine-readable format."
+msgstr ""
+
+#: src/data-export-page.php:75
+msgid ""
+"For questions about your personal data or to exercise other GDPR rights, "
+"please contact our Data Protection Officer."
+msgstr ""
+
+#: src/data-retention-admin.php:42
+msgid "Please sign in"
+msgstr ""
+
+#: src/data-retention-admin.php:49
+msgid "Insufficient privileges"
+msgstr ""
+
+#: src/data-retention-admin.php:81
+#, php-format
+msgid "Policy \"%s\" created successfully"
+msgstr ""
+
+#: src/data-retention-admin.php:115
+#, php-format
+msgid ""
+"Cleanup completed: %d jobs processed, %d records deleted, %d anonymized, %d "
+"archived"
+msgstr ""
+
+#: src/data-retention-admin.php:138
+#, php-format
+msgid "Updated retention dates for %d records"
+msgstr ""
+
+#: src/data-retention-admin.php:150
+#, fuzzy
+#| msgid "New Administrator"
+msgid "Data Retention Administration"
+msgstr "Nový administrátor"
+
+#: src/data-retention-admin.php:158
+msgid "GDPR Data Retention Administration"
+msgstr ""
+
+#: src/data-retention-admin.php:172
+msgid "Active Policies"
+msgstr ""
+
+#: src/data-retention-admin.php:181 src/data-retention-admin.php:399
+msgid "Records Awaiting Cleanup"
+msgstr ""
+
+#: src/data-retention-admin.php:190
+msgid "Cleanup Jobs (7 days)"
+msgstr ""
+
+#: src/data-retention-admin.php:199
+msgid "Records Processed (7 days)"
+msgstr ""
+
+#: src/data-retention-admin.php:210 src/privacy-policy.php:213
+#, fuzzy
+#| msgid "Fail Actions"
+msgid "Quick Actions"
+msgstr "Akce selhání"
+
+#: src/data-retention-admin.php:220
+msgid "Calculate Retention Dates"
+msgstr ""
+
+#: src/data-retention-admin.php:230
+msgid "Dry Run (simulate only)"
+msgstr ""
+
+#: src/data-retention-admin.php:232
+msgid "Run Cleanup"
+msgstr ""
+
+#: src/data-retention-admin.php:239
+msgid "Generate Report"
+msgstr ""
+
+#: src/data-retention-admin.php:247
+msgid "Retention Policies Management"
+msgstr ""
+
+#: src/data-retention-admin.php:251
+msgid "Add New Policy"
+msgstr ""
+
+#: src/data-retention-admin.php:260 src/data-retention-admin.php:322
+msgid "Policy Name"
+msgstr ""
+
+#: src/data-retention-admin.php:261 src/data-retention-admin.php:334
+#, fuzzy
+#| msgid "Type"
+msgid "Data Type"
+msgstr "Typ"
+
+#: src/data-retention-admin.php:263
+msgid "Retention Period"
+msgstr ""
+
+#: src/data-retention-admin.php:280
+#, fuzzy
+#| msgid "Enabled"
+msgid "Enable"
+msgstr "Povoleno"
+
+#: src/data-retention-admin.php:282
+#, fuzzy
+#| msgid "Disabled"
+msgid "Disable"
+msgstr "Zakázáno"
+
+#: src/data-retention-admin.php:292
+#, fuzzy
+#| msgid "Are you sure you wish to delete %%d row of %s ?"
+msgid "Are you sure you want to delete this policy?"
+msgstr "Opravdu chcete smazat %%d řádek %s ?"
+
+#: src/data-retention-admin.php:302
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:126
+msgid "days"
+msgstr ""
+
+#: src/data-retention-admin.php:312
+msgid "Add New Retention Policy"
+msgstr ""
+
+#: src/data-retention-admin.php:340
+#, fuzzy
+#| msgid "Database Name"
+msgid "Table Name"
+msgstr "Název databáze"
+
+#: src/data-retention-admin.php:346
+msgid "Retention Period (days)"
+msgstr ""
+
+#: src/data-retention-admin.php:352
+msgid "Grace Period (days)"
+msgstr ""
+
+#: src/data-retention-admin.php:364
+#, fuzzy
+#| msgid "Delete company"
+msgid "Deletion Action"
+msgstr "Smazat společnost"
+
+#: src/data-retention-admin.php:370
+msgid "Legal Basis"
+msgstr ""
+
+#: src/data-retention-admin.php:389
+#, fuzzy
+#| msgid "Create"
+msgid "Create Policy"
+msgstr "Vytvořit"
+
+#: src/data-retention-admin.php:403
+#, php-format
+msgid "%d records are past their retention period and ready for cleanup."
+msgstr ""
+
+#: src/data-retention-admin.php:409
+msgid "Records"
+msgstr ""
+
+#: src/data-retention-admin.php:409
+msgid "Policy"
+msgstr ""
+
+#: src/data-retention-admin.php:413
+msgid "No policy"
+msgstr ""
+
+#: src/data-retention-admin.php:460
+msgid ""
+"Are you sure you want to run the cleanup? This will permanently delete or "
+"anonymize data."
+msgstr ""
 
 #: src/envmods.php:22
 msgid "MultiFlexi - Environment Modules"
@@ -1864,6 +4698,78 @@ msgstr "MultiFlexi - Moduly vykonavatele"
 #: src/executors.php:24
 msgid "Installed Executor Modules"
 msgstr "Nainstalované moduly vykonavatele"
+
+#: src/gdpr-user-deletion-request.php:47
+msgid "You do not have permission to request deletion for this user"
+msgstr ""
+
+#: src/gdpr-user-deletion-request.php:63
+msgid "Invalid deletion type selected"
+msgstr ""
+
+#: src/gdpr-user-deletion-request.php:67
+msgid "All confirmation checkboxes must be checked"
+msgstr ""
+
+#: src/gdpr-user-deletion-request.php:75
+#, fuzzy
+#| msgid "No Configuration required"
+msgid "Self-deletion confirmation is required"
+msgstr "Není vyžadována žádná konfigurace"
+
+#: src/gdpr-user-deletion-request.php:89
+#, php-format
+msgid ""
+"Deletion request %d has been processed successfully. The account has been "
+"disabled."
+msgstr ""
+
+#: src/gdpr-user-deletion-request.php:102
+#, php-format
+msgid ""
+"Deletion request %d was created but processing failed. Please contact an "
+"administrator."
+msgstr ""
+
+#: src/gdpr-user-deletion-request.php:108
+#, php-format
+msgid ""
+"Deletion request %d has been submitted for administrator review. You will be "
+"notified when it is processed."
+msgstr ""
+
+#: src/gdpr-user-deletion-request.php:122
+msgid "GDPR User Deletion Request"
+msgstr ""
+
+#: src/gdpr-user-deletion-request.php:130
+#, fuzzy
+#| msgid "Delete company"
+msgid "Delete Account"
+msgstr "Smazat společnost"
+
+#: src/gdpr-user-deletion-request.php:135
+#, fuzzy
+#| msgid "Delete company"
+msgid "Delete My Account"
+msgstr "Smazat společnost"
+
+#: src/gdpr-user-deletion-request.php:136
+#, fuzzy, php-format
+#| msgid "Delete ?"
+msgid "Delete User: %s"
+msgstr "Smazat ?"
+
+#: src/gdpr-user-deletion-request.php:155
+msgid "Existing Deletion Request"
+msgstr ""
+
+#: src/gdpr-user-deletion-request.php:158
+#, php-format
+msgid ""
+"There is already a %s deletion request for this user (Request #%d, submitted "
+"%s). Status: %s"
+msgstr ""
 
 #: src/index.php:26
 msgid "There is no administrators in the database."
@@ -1945,15 +4851,11 @@ msgstr "Žádné chyby"
 msgid "Artifacts"
 msgstr "Artefakty"
 
-#: src/job.php:98 src/job.php:100
-msgid "Previous"
-msgstr "Předchozí"
-
-#: src/joblist.php:20
+#: src/joblist.php:27
 msgid "Job history"
 msgstr "Historie úloh"
 
-#: src/joblist.php:29 src/logs.php:29
+#: src/joblist.php:57 src/logs.php:29
 msgid "Dismis All"
 msgstr "Zavřít vše"
 
@@ -1961,20 +4863,37 @@ msgstr "Zavřít vše"
 msgid "App Run"
 msgstr "Spuštění aplikace"
 
-#: src/login.php:66
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType.php:120
-msgid "Logo"
-msgstr "Logo"
+#: src/login.php:38
+#, fuzzy
+#| msgid "CSAS Access Token"
+msgid "Access Denied"
+msgstr "Přístupový token CSAS"
 
-#: src/login.php:67
+#: src/login.php:39
+msgid "Access denied from your IP address"
+msgstr ""
+
+#: src/login.php:50
+msgid "Your session has expired. Please log in again."
+msgstr ""
+
+#: src/login.php:70
+msgid "Invalid security token. Please try again."
+msgstr ""
+
+#: src/login.php:82
+msgid "Too many login attempts. Please try again later."
+msgstr ""
+
+#: src/login.php:135
 msgid "Welcome to MultiFlexi"
 msgstr "Vítejte v MultiFlexi"
 
-#: src/login.php:71
+#: src/login.php:139
 msgid "Sign in"
 msgstr "Přihlásit se"
 
-#: src/login.php:87
+#: src/login.php:155
 msgid "the username you chose"
 msgstr "uživatelské jméno, které jste zvolili"
 
@@ -1985,10 +4904,6 @@ msgstr "Na shledanou"
 #: src/logout.php:33
 msgid "Thank you for your patronage and look forward to another visit"
 msgstr "Děkujeme za vaši přízeň a těšíme se na další návštěvu"
-
-#: src/main.php:28
-msgid "Last 20 Jobs"
-msgstr "Posledních 20 úloh"
 
 #: src/newjob.php:46 src/newjob.php:60
 msgid "Launch Form"
@@ -2057,23 +4972,237 @@ msgstr "Odesláno nové heslo"
 msgid "Continue"
 msgstr "Pokračovat"
 
-#: src/periodical.php:72
-msgid "Minutely"
-msgstr "Každou minutu"
-
 #: src/periodical.php:88
 msgid "🍏 Apply"
 msgstr "🍏 Použít"
+
+#: src/privacy-policy.php:32
+msgid ""
+"This Privacy Policy describes how MultiFlexi (\"we\", \"our\", or \"us\") "
+"collects, uses, and protects your information when you use our service."
+msgstr ""
+
+#: src/privacy-policy.php:40
+msgid "1. Data Controller"
+msgstr ""
+
+#: src/privacy-policy.php:45
+msgid ""
+"MultiFlexi is developed and maintained by Vitex Software. For privacy-"
+"related inquiries, please contact:"
+msgstr ""
+
+#: src/privacy-policy.php:49
+#, fuzzy
+#| msgid "Vitex Software"
+msgid "Company: Vitex Software"
+msgstr "Vitex Software"
+
+#: src/privacy-policy.php:69
+msgid "2. Information We Collect"
+msgstr ""
+
+#: src/privacy-policy.php:74
+msgid "2.1 Personal Information"
+msgstr ""
+
+#: src/privacy-policy.php:77
+msgid "We may collect the following personal information:"
+msgstr ""
+
+#: src/privacy-policy.php:81
+msgid "Account information: username, email address, and encrypted passwords"
+msgstr ""
+
+#: src/privacy-policy.php:84
+msgid "Profile information: first name, last name, and user preferences"
+msgstr ""
+
+#: src/privacy-policy.php:87
+msgid "System logs: IP addresses, browser information, and access timestamps"
+msgstr ""
+
+#: src/privacy-policy.php:92
+msgid "2.2 Technical Information"
+msgstr ""
+
+#: src/privacy-policy.php:95
+msgid "We automatically collect certain technical information:"
+msgstr ""
+
+#: src/privacy-policy.php:99
+msgid ""
+"Device information: browser type, operating system, and device identifiers"
+msgstr ""
+
+#: src/privacy-policy.php:102
+msgid "Usage data: pages visited, features used, and interaction patterns"
+msgstr ""
+
+#: src/privacy-policy.php:105
+msgid "Performance data: system performance metrics and error logs"
+msgstr ""
+
+#: src/privacy-policy.php:110
+#, fuzzy
+#| msgid "Application name"
+msgid "2.3 Application Data"
+msgstr "Název aplikace"
+
+#: src/privacy-policy.php:113
+msgid "As a task automation platform, we process:"
+msgstr ""
+
+#: src/privacy-policy.php:117
+msgid "Company information and configurations"
+msgstr ""
+
+#: src/privacy-policy.php:120
+msgid "Application settings and credentials (encrypted)"
+msgstr ""
+
+#: src/privacy-policy.php:123
+msgid "Job execution logs and results"
+msgstr ""
+
+#: src/privacy-policy.php:126
+#, fuzzy
+#| msgid "%d used configurations removed"
+msgid "Scheduled task configurations"
+msgstr "%d použitých konfigurací odstraněno"
+
+#: src/privacy-policy.php:140
+msgid "3. Your Rights"
+msgstr ""
+
+#: src/privacy-policy.php:145
+msgid ""
+"Under GDPR and applicable data protection laws, you have the following "
+"rights:"
+msgstr ""
+
+#: src/privacy-policy.php:149
+msgid "Right of access: Request copies of your personal data"
+msgstr ""
+
+#: src/privacy-policy.php:152
+msgid "Right to rectification: Correct inaccurate personal data"
+msgstr ""
+
+#: src/privacy-policy.php:155
+msgid "Right to erasure: Request deletion of your personal data"
+msgstr ""
+
+#: src/privacy-policy.php:158
+msgid "Right to restrict processing: Limit how we use your data"
+msgstr ""
+
+#: src/privacy-policy.php:161
+msgid "Right to data portability: Receive your data in a structured format"
+msgstr ""
+
+#: src/privacy-policy.php:164
+msgid "Right to object: Object to processing based on legitimate interest"
+msgstr ""
+
+#: src/privacy-policy.php:167
+msgid "Right to withdraw consent: Withdraw consent for optional processing"
+msgstr ""
+
+#: src/privacy-policy.php:171
+msgid "To exercise your rights, please use our "
+msgstr ""
+
+#: src/privacy-policy.php:171
+msgid " page or contact us directly."
+msgstr ""
+
+#: src/privacy-policy.php:189
+msgid ""
+"If you have any questions about this Privacy Policy or our data practices, "
+"please contact us:"
+msgstr ""
+
+#: src/profile.php:32
+msgid "My Profile"
+msgstr ""
+
+#: src/profile.php:38
+#, fuzzy
+#| msgid "Password confirmation"
+msgid "Profile Information"
+msgstr "Potvrzení hesla"
+
+#: src/profile.php:50
+msgid "Member since"
+msgstr ""
+
+#: src/profile.php:58
+msgid "Update Personal Information"
+msgstr ""
+
+#: src/profile.php:66
+msgid ""
+"Under the General Data Protection Regulation (GDPR), you have several rights "
+"regarding your personal data:"
+msgstr ""
+
+#: src/profile.php:70
+msgid "Right of Rectification (Article 16)"
+msgstr ""
+
+#: src/profile.php:71
+msgid ""
+"You can request correction of inaccurate personal data using the form above."
+msgstr ""
+
+#: src/profile.php:75
+msgid "Export your data"
+msgstr ""
+
+#: src/profile.php:78
+msgid "Right to be Forgotten (Article 17)"
+msgstr ""
+
+#: src/profile.php:79
+msgid "Contact an administrator to request account deletion."
+msgstr ""
+
+#: src/profile.php:83
+msgid "You can export your data in a machine-readable format."
+msgstr ""
+
+#: src/profile.php:95
+msgid "Recent Data Changes"
+msgstr ""
+
+#: src/profile.php:100
+#, fuzzy
+#| msgid "Value"
+msgid "Old Value"
+msgstr "Hodnota"
+
+#: src/profile.php:101
+#, fuzzy
+#| msgid "Value"
+msgid "New Value"
+msgstr "Hodnota"
+
+#: src/profile.php:112
+#, fuzzy
+#| msgid "Directory path"
+msgid "Direct"
+msgstr "Cesta k adresáři"
 
 #: src/queue.php:22
 msgid "MultiFlexi Job Queue"
 msgstr "Fronta úloh MultiFlexi"
 
-#: src/runtemplate.php:143
+#: src/runtemplate.php:151
 msgid "Setup command executed successfully:"
 msgstr ""
 
-#: src/runtemplate.php:149
+#: src/runtemplate.php:157
 #, fuzzy
 #| msgid "Setup command"
 msgid "Setup command failed:"
@@ -2110,6 +5239,10 @@ msgstr "Chyba při vytváření klonu šablony spuštění"
 #: src/runtemplates.php:22
 msgid "Runtemplates"
 msgstr "Runtemplates"
+
+#: src/runtemplates.php:28
+msgid "Use the wizard to easily activate an application in a company"
+msgstr ""
 
 #: src/schedule.php:25
 msgid "Schedule Job"
@@ -2181,11 +5314,6 @@ msgstr "Registrovat novou"
 #: src/tasks.php:23
 msgid "Company Tasks"
 msgstr "Úkoly společnosti"
-
-#: src/user.php:43
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Logger.php:135
-msgid "User"
-msgstr "Uživatel"
 
 #: src/user.php:51
 msgid "Are you sure ?"
@@ -2411,21 +5539,57 @@ msgstr "Spustitelný soubor %s neexistuje v hledané cestě %s"
 msgid "file %s is not executable"
 msgstr "soubor %s není spustitelný"
 
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:304
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:302
+#, php-format
+msgid "Application removal %d %s"
+msgstr "Odstranění aplikace %d %s"
+
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:329
+#, php-format
+msgid "Unassigned from %d companies"
+msgstr "Odstraněno z %d společností"
+
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:340
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyApp.php:91
+#, php-format
+msgid "%s Action Config removal"
+msgstr "Odstranění konfigurace akce %s"
+
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:348
+#, php-format
+msgid "#%d %s RunTemplate removal"
+msgstr "#%d %s Odstranění šablony spuštění"
+
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:355
+#, php-format
+msgid "%d Config fields removed"
+msgstr "%d konfiguračních polí odstraněno"
+
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:362
+#, php-format
+msgid "%d Configurations removed"
+msgstr "%d konfigurací odstraněno"
+
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:369
+#, php-format
+msgid "%d Jobs removed"
+msgstr "%d úloh odstraněno"
+
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:389
 #, fuzzy
 #| msgid "Required metrics file not found "
 msgid "Schema file not found: "
 msgstr "Požadovaný soubor metrik nebyl nalezen "
 
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:310
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:395
 msgid "App definition file is empty: "
 msgstr ""
 
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:326
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:411
 msgid "Invalid JSON: "
 msgstr ""
 
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:470
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Application.php:589
 #, fuzzy, php-format
 #| msgid "the required configuration key `%s` was not filled"
 msgid "The required configuration key `%s` was not filled"
@@ -2444,31 +5608,10 @@ msgstr "Žádná akce nebyla provedena"
 msgid "Application %s was assigned to %s company"
 msgstr "Aplikace %s byla přiřazena společnosti %s"
 
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyApp.php:91
-#, php-format
-msgid "%s Action Config removal"
-msgstr "Odstranění konfigurace akce %s"
-
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyApp.php:96
 #, php-format
 msgid "Application %s was unassigned from %s company"
 msgstr "Aplikace %s byla odebrána ze společnosti %s"
-
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyJob.php:82
-msgid "Standard Output"
-msgstr "Standardní výstup"
-
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyJob.php:83
-msgid "Standard Error"
-msgstr "Standardní chyba"
-
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyJob.php:84
-msgid "Job start time"
-msgstr "Čas začátku úlohy"
-
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CompanyJob.php:85
-msgid "Job Finish time"
-msgstr "Čas dokončení úlohy"
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/Conffield.php:106
 msgid "Application Config Fields"
@@ -2489,7 +5632,7 @@ msgstr ""
 msgid "Choose Provided field"
 msgstr "Vyberte poskytnuté pole"
 
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType.php:178
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType.php:140
 #, php-format
 msgid "Unexistent field helper %s ?!?"
 msgstr "Neexistující pomocník pole %s ?!?"
@@ -2603,10 +5746,6 @@ msgstr ""
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:123
 msgid "Click to use this UUID"
-msgstr ""
-
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:126
-msgid "days"
 msgstr ""
 
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/CredentialType/Csas.php:131
@@ -3203,10 +6342,6 @@ msgstr "Po"
 msgid "App"
 msgstr "Aplikace"
 
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/ScheduleLister.php:56
-msgid "Runtemplate"
-msgstr "Runtemplate"
-
 #: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/UnixUser.php:48
 #, php-format
 msgid "New unix user %s created"
@@ -3218,17 +6353,49 @@ msgstr ""
 msgid "Failed to create new user for current Unix username."
 msgstr "Chyba při vytváření klonu šablony spuštění"
 
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:162
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:176
+#, php-format
+msgid ""
+"Too many failed login attempts from your IP address. Please try again in %d "
+"minutes."
+msgstr ""
+
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:184
+#, php-format
+msgid ""
+"Too many failed login attempts for this username. Please try again in %d "
+"minutes."
+msgstr ""
+
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:199
 #, fuzzy
 #| msgid "missing login"
 msgid "missing login"
 msgstr "chybějící login"
 
-#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:168
+#: vendor/vitexsoftware/multiflexi-core/src/MultiFlexi/User.php:205
 #, fuzzy
 #| msgid "invalid password"
 msgid "missing password"
 msgstr "chybějící heslo"
+
+#~ msgid "password is too short"
+#~ msgstr "heslo je příliš krátké"
+
+#~ msgid "Last 20 Jobs"
+#~ msgstr "Posledních 20 úloh"
+
+#~ msgid "Standard Output"
+#~ msgstr "Standardní výstup"
+
+#~ msgid "Standard Error"
+#~ msgstr "Standardní chyba"
+
+#~ msgid "Job start time"
+#~ msgstr "Čas začátku úlohy"
+
+#~ msgid "Job Finish time"
+#~ msgstr "Čas dokončení úlohy"
 
 #~ msgid "UUID field not present. "
 #~ msgstr "Pole UUID není přítomno. "
@@ -3237,40 +6404,12 @@ msgstr "chybějící heslo"
 #~ msgstr "Pole témat není přítomno. "
 
 #, php-format
-#~ msgid "executable %s not found"
-#~ msgstr "spustitelný soubor %s nebyl nalezen"
-
-#, php-format
 #~ msgid "consider: %s"
 #~ msgstr "zvažte: %s"
 
 #, php-format
 #~ msgid "The %s does not contain valid json"
 #~ msgstr "Soubor %s neobsahuje platný json"
-
-#, php-format
-#~ msgid "Application removal %d %s"
-#~ msgstr "Odstranění aplikace %d %s"
-
-#, php-format
-#~ msgid "Unassigned from %d companies"
-#~ msgstr "Odstraněno z %d společností"
-
-#, php-format
-#~ msgid "#%d %s RunTemplate removal"
-#~ msgstr "#%d %s Odstranění šablony spuštění"
-
-#, php-format
-#~ msgid "%d Config fields removed"
-#~ msgstr "%d konfiguračních polí odstraněno"
-
-#, php-format
-#~ msgid "%d Configurations removed"
-#~ msgstr "%d konfigurací odstraněno"
-
-#, php-format
-#~ msgid "%d Jobs removed"
-#~ msgstr "%d úloh odstraněno"
 
 #~ msgid "What to do with app"
 #~ msgstr "Co dělat s aplikací"
@@ -3286,9 +6425,6 @@ msgstr "chybějící heslo"
 
 #~ msgid "Perform initial setup"
 #~ msgstr "Provést počáteční nastavení"
-
-#~ msgid "RunTemplate Legacy Credentials"
-#~ msgstr "Hesla staré šablony spuštění"
 
 #~ msgid "Instance name cannot be empty"
 #~ msgstr "Název instance nemůže být prázdný"
