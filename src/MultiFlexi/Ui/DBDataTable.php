@@ -352,7 +352,55 @@ EOD.$this->footerCallback($this->engine->foterCallback($tableID)).<<<'EOD'
 EOD._('All pages').<<<'EOD'
 "]],
         "language": {
-                "url": "assets/i18n/Czech.lang"
+                "sEmptyTable": "
+EOD._('Tabulka neobsahuje žádná data').<<<'EOD'
+",
+                "sInfo": "
+EOD._('Zobrazuji _START_ až _END_ z celkem _TOTAL_ záznamů').<<<'EOD'
+",
+                "sInfoEmpty": "
+EOD._('Zobrazuji 0 až 0 z 0 záznamů').<<<'EOD'
+",
+                "sInfoFiltered": "
+EOD._('(filtrováno z celkem _MAX_ záznamů)').<<<'EOD'
+",
+                "sLengthMenu": "
+EOD._('Zobraz záznamů _MENU_').<<<'EOD'
+",
+                "sLoadingRecords": "
+EOD._('Načítám...').<<<'EOD'
+",
+                "sProcessing": "
+EOD._('Provádím...').<<<'EOD'
+",
+                "sSearch": "
+EOD._('Hledat:').<<<'EOD'
+",
+                "sZeroRecords": "
+EOD._('Žádné záznamy nebyly nalezeny').<<<'EOD'
+",
+                "oPaginate": {
+                        "sFirst": "
+EOD._('První').<<<'EOD'
+",
+                        "sLast": "
+EOD._('Poslední').<<<'EOD'
+",
+                        "sNext": "
+EOD._('Další').<<<'EOD'
+",
+                        "sPrevious": "
+EOD._('Předchozí').<<<'EOD'
+"
+                },
+                "oAria": {
+                        "sSortAscending": "
+EOD._(': aktivujte pro řazení sloupce vzestupně').<<<'EOD'
+",
+                        "sSortDescending": "
+EOD._(': aktivujte pro řazení sloupce sestupně').<<<'EOD'
+"
+                }
         },
 
 EOD.$this->engine->tableCode($tableID).<<<'EOD'
