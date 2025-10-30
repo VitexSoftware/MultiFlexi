@@ -17,12 +17,66 @@ namespace MultiFlexi\Ui;
 
 require_once './init.php';
 WebPage::singleton()->onlyForLogged();
-WebPage::singleton()->addItem(new PageTop(_('Job history')));
+
+// Získání parametrů filtru
 $appId = WebPage::singleton()->getRequestValue('app_id');
 $companyId = WebPage::singleton()->getRequestValue('company_id');
+$filter = WebPage::singleton()->getRequestValue('filter');
+
+// Nastavení titulku podle filtru
+$pageTitle = _('Job history');
+switch ($filter) {
+    case 'success':
+        $pageTitle = _('Successful Jobs');
+        break;
+    case 'failed':
+        $pageTitle = _('Failed Jobs');
+        break;
+    case 'running':
+        $pageTitle = _('Running Jobs');
+        break;
+    case 'today':
+        $pageTitle = _('Today\'s Jobs');
+        break;
+}
+
+WebPage::singleton()->addItem(new PageTop($pageTitle));
+
+// Add filter buttons for easy access
+$filterButtons = new \Ease\TWB4\Container();
+$buttonGroup = $filterButtons->addItem(new \Ease\Html\DivTag(null, ['class' => 'btn-group mb-3', 'role' => 'group']));
+
+// All Jobs button
+$allJobsClass = empty($filter) ? 'btn btn-primary' : 'btn btn-outline-primary';
+$buttonGroup->addItem(new \Ease\Html\ATag('joblist.php', '🏁 '._('All Jobs'), ['class' => $allJobsClass]));
+
+// Success button
+$successClass = ($filter === 'success') ? 'btn btn-success' : 'btn btn-outline-success';
+$buttonGroup->addItem(new \Ease\Html\ATag('joblist.php?filter=success', '✅ '._('Successful'), ['class' => $successClass]));
+
+// Failed button
+$failedClass = ($filter === 'failed') ? 'btn btn-danger' : 'btn btn-outline-danger';
+$buttonGroup->addItem(new \Ease\Html\ATag('joblist.php?filter=failed', '❌ '._('Failed'), ['class' => $failedClass]));
+
+// Running button
+$runningClass = ($filter === 'running') ? 'btn btn-info' : 'btn btn-outline-info';
+$buttonGroup->addItem(new \Ease\Html\ATag('joblist.php?filter=running', '▶️ '._('Running'), ['class' => $runningClass]));
+
+// Today button
+$todayClass = ($filter === 'today') ? 'btn btn-warning' : 'btn btn-outline-warning';
+$buttonGroup->addItem(new \Ease\Html\ATag('joblist.php?filter=today', '📅 '._('Today'), ['class' => $todayClass]));
+
+WebPage::singleton()->container->addItem($filterButtons);
+
+// Vytvoření engine a aplikace filtru
 $engine = new \MultiFlexi\CompanyJobLister();
 $engine->setCompany($companyId);
 $engine->setApp($appId);
+
+// Aplikace filtru pokud je specifikován
+if (!empty($filter)) {
+    $engine->applyFilter($filter);
+}
 WebPage::singleton()->addJavaScript(<<<'EOD'
 $.fn.dataTable.ext.buttons.dismisAll = {
     text: '
