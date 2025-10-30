@@ -42,9 +42,42 @@ switch ($filter) {
 
 WebPage::singleton()->addItem(new PageTop($pageTitle));
 
-// Add filter buttons for easy access
-$filterButtons = new \Ease\TWB4\Container();
-$buttonGroup = $filterButtons->addItem(new \Ease\Html\DivTag(null, ['class' => 'btn-group mb-3', 'role' => 'group']));
+// Add responsive CSS for filter buttons layout
+WebPage::singleton()->addCSS(<<<'CSS'
+#job-filter-buttons {
+    display: inline-block;
+    margin-right: 1rem;
+    vertical-align: middle;
+}
+
+#job-filter-buttons .btn-group {
+    display: inline-flex;
+}
+
+/* Mobile: stack vertically */
+@media (max-width: 767px) {
+    #job-filter-buttons {
+        display: block;
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    #job-filter-buttons .btn-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    #job-filter-buttons .btn-group a {
+        width: 100%;
+        border-radius: 0.25rem !important;
+        margin-bottom: 0.25rem;
+    }
+}
+CSS);
+
+// Add filter buttons container with ID for CSS targeting
+$filterButtonsContainer = new \Ease\Html\DivTag(null, ['id' => 'job-filter-buttons']);
+$buttonGroup = $filterButtonsContainer->addItem(new \Ease\Html\DivTag(null, ['class' => 'btn-group btn-group-sm', 'role' => 'group']));
 
 // All Jobs button
 $allJobsClass = empty($filter) ? 'btn btn-primary' : 'btn btn-outline-primary';
@@ -66,7 +99,7 @@ $buttonGroup->addItem(new \Ease\Html\ATag('joblist.php?filter=running', '▶️ 
 $todayClass = ($filter === 'today') ? 'btn btn-warning' : 'btn btn-outline-warning';
 $buttonGroup->addItem(new \Ease\Html\ATag('joblist.php?filter=today', '📅 '._('Today'), ['class' => $todayClass]));
 
-WebPage::singleton()->container->addItem($filterButtons);
+WebPage::singleton()->container->addItem($filterButtonsContainer);
 
 // Vytvoření engine a aplikace filtru
 $engine = new \MultiFlexi\CompanyJobLister();
@@ -100,4 +133,40 @@ WebPage::singleton()->addJavaScript(<<<'EOD'
 }, 300000);
 
 EOD);
+
+// Move filter buttons next to DataTable controls after table initialization
+WebPage::singleton()->addJavaScript(<<<'EOD'
+$(document).ready(function() {
+    // Wait for DataTable to be fully initialized
+    setTimeout(function() {
+        var filterButtons = $('#job-filter-buttons');
+        var tableWrapper = $('.dataTables_wrapper');
+        
+        if (filterButtons.length && tableWrapper.length) {
+            // On desktop: prepend to the first row (where length and filter are)
+            if ($(window).width() >= 768) {
+                tableWrapper.find('.row:first .col-sm-12:first').prepend(filterButtons);
+            }
+            // On mobile: keep as is (already before table)
+        }
+        
+        // Handle window resize
+        $(window).on('resize', function() {
+            var filterButtons = $('#job-filter-buttons');
+            if ($(window).width() >= 768) {
+                // Move to DataTable controls area
+                if (!tableWrapper.find('#job-filter-buttons').length) {
+                    tableWrapper.find('.row:first .col-sm-12:first').prepend(filterButtons);
+                }
+            } else {
+                // Move back before table
+                if (tableWrapper.find('#job-filter-buttons').length) {
+                    tableWrapper.before(filterButtons);
+                }
+            }
+        });
+    }, 100);
+});
+EOD);
+
 WebPage::singleton()->draw();
