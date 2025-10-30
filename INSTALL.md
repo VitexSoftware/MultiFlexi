@@ -262,49 +262,54 @@ MultiFlexi uses AES-256 encryption to protect sensitive data (passwords, API key
 
 ### Automatic Key Generation
 
-During installation of the `multiflexi-common` package, an encryption master key is automatically generated at:
+During installation of the `multiflexi-common` package, an encryption master key is automatically generated and stored in:
 
 ```
-/var/lib/multiflexi/.encryption_master_key
+/etc/multiflexi/multiflexi.env
 ```
 
 The key is:
 - Generated using `openssl rand -base64 32` (32 bytes = 256 bits)
-- Owned by `www-data:www-data`
-- Protected with permissions `600` (readable only by owner)
-- Created only if it doesn't exist and `MULTIFLEXI_MASTER_KEY` environment variable is not set
+- Stored as `ENCRYPTION_MASTER_KEY=<base64-key>` in the .env file
+- Protected with permissions `640` (root:www-data)
+- Created only if it doesn't already exist in the configuration file
 
-### Using Environment Variable (Recommended for Production)
+### Manual Configuration
 
-For production environments, it's recommended to use the `MULTIFLEXI_MASTER_KEY` environment variable instead of the file:
+To manually set or change the encryption master key, edit `/etc/multiflexi/multiflexi.env`:
 
 ```shell
-# Add to /etc/multiflexi/multiflexi.env or your environment configuration
-MULTIFLEXI_MASTER_KEY="your-base64-encoded-32-byte-key"
+# Generate a secure key
+ENCRYPTION_MASTER_KEY=$(openssl rand -base64 32)
+
+# Add to /etc/multiflexi/multiflexi.env
+echo "ENCRYPTION_MASTER_KEY=$ENCRYPTION_MASTER_KEY" | sudo tee -a /etc/multiflexi/multiflexi.env
 ```
 
-Generate a secure key:
+### Environment Variable Override
+
+You can also set the key via environment variables (useful for containers):
 
 ```shell
-openssl rand -base64 32
+export ENCRYPTION_MASTER_KEY="your-base64-encoded-32-byte-key"
 ```
 
 ### Important Security Notes
 
-- **Backup the key file** or environment variable - without it, encrypted credentials cannot be recovered
+- **Backup `/etc/multiflexi/multiflexi.env`** - without the key, encrypted credentials cannot be recovered
 - If the key is lost, all encrypted credentials become permanently inaccessible
 - Never commit the key to version control
-- Use environment variable configuration for containerized deployments
+- The key is automatically backed up when you backup `/etc/multiflexi/`
 - Rotate keys periodically following your security policy
 
-### Manual Key Regeneration
+### Key Regeneration
 
 If you need to regenerate the key (this will invalidate all existing encrypted data):
 
 ```shell
-sudo openssl rand -base64 32 > /var/lib/multiflexi/.encryption_master_key
-sudo chown www-data:www-data /var/lib/multiflexi/.encryption_master_key
-sudo chmod 600 /var/lib/multiflexi/.encryption_master_key
+# Generate new key and update configuration
+sudo sed -i '/^ENCRYPTION_MASTER_KEY=/d' /etc/multiflexi/multiflexi.env
+echo "ENCRYPTION_MASTER_KEY=$(openssl rand -base64 32)" | sudo tee -a /etc/multiflexi/multiflexi.env
 ```
 
 **Warning:** Regenerating the key will make all existing encrypted credentials inaccessible. You must re-enter all sensitive credentials after key regeneration.

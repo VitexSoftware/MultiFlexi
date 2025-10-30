@@ -21,7 +21,7 @@ use MultiFlexi\Ui\WebPage;
 require_once '../vendor/autoload.php';
 
 Shared::init(
-    ['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'],
+    ['DB_CONNECTION', 'DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD', 'ENCRYPTION_MASTER_KEY'],
     \dirname(__DIR__).'/.env',
 );
 
