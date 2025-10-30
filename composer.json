@@ -31,7 +31,9 @@
         "vitexsoftware/ease-html-widgets": "^1.1",
         "confirm-it-solutions/php-zabbix-api": "^3.0",
         "cboden/ratchet": "^0.5",
-        "textalk/websocket": "dev-master"
+        "textalk/websocket": "dev-master",
+        "open-telemetry/sdk": "^1.0",
+        "open-telemetry/exporter-otlp": "^1.0"
     },
     "license": "MIT",
     "authors": [

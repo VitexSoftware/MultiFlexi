@@ -34,6 +34,66 @@ nebo
 
 ⊕ proměnné prostředí dle individuální konfigurace každého modulu pro každou firmu
 
+**Konfigurace monitorování:**
+
+- `ZABBIX_SERVER` - Adresa Zabbix serveru pro monitorování infrastruktury
+- `ZABBIX_HOST` - Hostname pro Zabbix metriky
+- `OTEL_ENABLED` - Povolit export metrik do OpenTelemetry (výchozí: false)
+- `OTEL_SERVICE_NAME` - Název služby pro OpenTelemetry (výchozí: multiflexi)
+- `OTEL_EXPORTER_OTLP_ENDPOINT` - Endpoint OTLP collectoru (výchozí: http://localhost:4318)
+- `OTEL_EXPORTER_OTLP_PROTOCOL` - Protokol pro OTLP (http/json nebo grpc)
+
+## Monitorování a Observability
+
+MultiFlexi poskytuje komplexní monitorování pomocí dvou komplementárních systémů:
+
+### Zabbix integrace
+
+Monitorování infrastruktury v reálném čase s:
+- Sledování vykonávání úloh a fází běhu
+- Metriky aplikací a firem
+- Automatické generování upozornění
+- LLD (Low-Level Discovery) podpora pro dynamické monitorování
+
+Konfigurace:
+```bash
+ZABBIX_SERVER=zabbix.example.com
+ZABBIX_HOST=multiflexi-server
+```
+
+Více informací v [Zabbix dokumentaci](https://multiflexi.readthedocs.io/en/latest/zabbix.html).
+
+### OpenTelemetry integrace
+
+Moderní observability s vendor-neutrálním exportem metrik do:
+- Prometheus + Grafana
+- OpenTelemetry Collector
+- Cloud-native monitoring stacků
+
+**Dostupné metriky:**
+- `multiflexi.jobs.total` - Celkový počet spuštění úloh
+- `multiflexi.jobs.success` - Úspěšné úlohy
+- `multiflexi.jobs.failed` - Neúspěšné úlohy
+- `multiflexi.job.duration` - Doba trvání úlohy
+- `multiflexi.jobs.running` - Aktuálně běžící úlohy
+- `multiflexi.applications.total` - Počet aplikací
+- `multiflexi.companies.total` - Počet firem
+
+Konfigurace:
+```bash
+OTEL_ENABLED=true
+OTEL_SERVICE_NAME=multiflexi
+OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+OTEL_EXPORTER_OTLP_PROTOCOL=http/json
+```
+
+Testování konfigurace:
+```bash
+multiflexi-cli telemetry:test
+```
+
+Více informací v [OpenTelemetry dokumentaci](https://multiflexi.readthedocs.io/en/latest/opentelemetry.html) včetně příkladů nasazení, Grafana dashboardů a kompletního průvodce integrací.
+
 See the https://multiflexi.readthedocs.io/ for complete documentation
 
 Demo

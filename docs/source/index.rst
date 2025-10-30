@@ -18,7 +18,7 @@ Key Features
 - **Flexible Job Scheduling**: Automated task execution with customizable intervals (hourly, daily, weekly, monthly, yearly) and dependencies
 - **Advanced Credential Management**: Secure handling of authentication credentials including VaultWarden integration, banking APIs (FioBank, RaiffeisenBank, CSAS), and Office365
 - **Multiple Execution Environments**: Support for native execution, Docker containers, Kubernetes pods, Azure cloud, and Podman
-- **Comprehensive Logging**: Detailed execution logs with Zabbix monitoring integration and real-time tracking
+- **Comprehensive Logging**: Detailed execution logs with Zabbix and OpenTelemetry monitoring integration and real-time tracking
 - **Multi-Interface Support**:
   
   - Responsive Bootstrap 4 web interface with real-time monitoring and charts
@@ -123,6 +123,7 @@ Contents
    executors
    commandline
    zabbix
+   opentelemetry
    development
    selenium-testing
    database-testing

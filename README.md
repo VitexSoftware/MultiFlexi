@@ -19,12 +19,12 @@ MultiFlexi is a comprehensive PHP-based task scheduling and automation framework
 - **Flexible Job Scheduling**: Automated task execution with customizable intervals and dependencies
 - **Advanced Credential Management**: Secure handling of authentication credentials with extensible credential types
 - **Multiple Execution Environments**: Support for native execution, containerized deployments, and cloud environments
-- **Comprehensive Logging**: Detailed execution logs with system integration and monitoring capabilities
+- **Comprehensive Logging**: Detailed execution logs with Zabbix and OpenTelemetry monitoring integration
 - **Multi-Interface Support**:
   - Responsive Bootstrap 4 web interface with real-time monitoring
   - Rich command-line interface with extensive management commands
   - RESTful API with OAuth2 authentication and multiple output formats
-- **Enterprise-Ready**: User authentication, API tokens, data isolation, and Zabbix monitoring integration
+- **Enterprise-Ready**: User authentication, API tokens, data isolation, and comprehensive monitoring (Zabbix + OpenTelemetry)
 - **Privacy & GDPR Compliance**: Comprehensive consent management, self-hosted analytics support, and European privacy standards
 - **Security Features**: AES-256 data encryption, comprehensive audit logging, API rate limiting, IP whitelisting, and advanced security monitoring
 
@@ -85,7 +85,67 @@ MultiFlexi uses AES-256-GCM encryption to protect sensitive credentials and pers
 
 See [INSTALL.md](INSTALL.md) for detailed encryption configuration and security notes.
 
+**Monitoring Configuration:**
+
+- `ZABBIX_SERVER` - Zabbix server address for infrastructure monitoring
+- `ZABBIX_HOST` - Hostname for Zabbix metrics
+- `OTEL_ENABLED` - Enable OpenTelemetry metrics export (default: false)
+- `OTEL_SERVICE_NAME` - Service name for OpenTelemetry (default: multiflexi)
+- `OTEL_EXPORTER_OTLP_ENDPOINT` - OTLP collector endpoint (default: http://localhost:4318)
+- `OTEL_EXPORTER_OTLP_PROTOCOL` - Protocol for OTLP (http/json or grpc)
+
 **Custom Variables:** Individual module configurations per company with extensible variable definitions.
+
+## Monitoring & Observability
+
+MultiFlexi provides comprehensive monitoring through two complementary systems:
+
+### Zabbix Integration
+
+Real-time infrastructure monitoring with:
+- Job execution tracking and phase monitoring
+- Application and company metrics
+- Automatic alert generation
+- LLD (Low-Level Discovery) support for dynamic monitoring
+
+Configuration:
+```bash
+ZABBIX_SERVER=zabbix.example.com
+ZABBIX_HOST=multiflexi-server
+```
+
+See [Zabbix documentation](https://multiflexi.readthedocs.io/en/latest/zabbix.html) for detailed setup.
+
+### OpenTelemetry Integration
+
+Modern observability with vendor-neutral metrics export to:
+- Prometheus + Grafana
+- OpenTelemetry Collector
+- Cloud-native monitoring stacks
+
+**Available Metrics:**
+- `multiflexi.jobs.total` - Total job executions
+- `multiflexi.jobs.success` - Successful jobs
+- `multiflexi.jobs.failed` - Failed jobs
+- `multiflexi.job.duration` - Job execution time
+- `multiflexi.jobs.running` - Currently running jobs
+- `multiflexi.applications.total` - Application count
+- `multiflexi.companies.total` - Company count
+
+Configuration:
+```bash
+OTEL_ENABLED=true
+OTEL_SERVICE_NAME=multiflexi
+OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+OTEL_EXPORTER_OTLP_PROTOCOL=http/json
+```
+
+Test your configuration:
+```bash
+multiflexi-cli telemetry:test
+```
+
+See [OpenTelemetry documentation](https://multiflexi.readthedocs.io/en/latest/opentelemetry.html) for deployment examples, Grafana dashboards, and complete integration guide.
 
 See the <https://multiflexi.readthedocs.io/> for complete documentation
 
