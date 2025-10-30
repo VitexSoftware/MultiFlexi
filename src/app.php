@@ -32,6 +32,18 @@ $apps = new Application(WebPage::getRequestValue('id', 'int') + WebPage::getRequ
 $instanceName = _($apps->getDataValue('name') ?: _('n/a'));
 
 switch ($action) {
+    case 'import':
+        $jsonUri = \Ease\WebPage::getRequestValue('app_json_url');
+        if($jsonUri){
+            $jsonFile = sys_get_temp_dir().'/'.\Ease\Functions::randomString(8).'.json';
+            // TODO: Grab file from $jsonUri and save to $jsonFile
+        } else {
+            // TODO: $jsonFile is path to uploaded file by app_json_upload file input 
+        }
+        $updatedAppFields = $apps->importAppJson($jsonFile);
+        $apps->addStatusMessage(sprintf(_('Application %s %s import'), $apps->getRecordName(), $apps->getDataValue('uuid')), 'success');
+            // TODO Remove $jsonFile to save disk space
+        break;
     case 'delete':
         $configurator = new \MultiFlexi\Configuration();
         $configurator->deleteFromSQL(['app_id' => $apps->getMyKey()]);
@@ -115,6 +127,10 @@ $appTabs->addTab(_('Jobs'), [
     new LinkButton('logs.php?apps_id='.$apps->getMyKey(), _('Application Log'), 'info'),
     new LinkButton('joblist.php?app_id='.$apps->getMyKey(), _('All Application Jobs history'), 'info'),
 ]);
+
+$jsonImportForm = new AppJsonImportForm();
+$jsonImportForm->addItem(new \Ease\Html\InputHiddenTag('action', 'import'));
+$appTabs->addTab(_('Import'), $jsonImportForm);
 $appTabs->addTab(_('Export'), new AppJson($apps));
 
 WebPage::singleton()->container->addItem(new ApplicationPanel(
