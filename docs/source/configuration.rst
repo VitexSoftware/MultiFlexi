@@ -93,3 +93,51 @@ When defining GDPR-related configuration fields in application JSON:
 
 For complete GDPR implementation details, see :doc:`gdpr-compliance`.
 
+OpenTelemetry Configuration
+---------------------------
+
+MultiFlexi supports exporting metrics to OpenTelemetry-compatible backends for observability and monitoring.
+
+**Basic Configuration**
+
+.. code-block:: bash
+
+   # Enable OpenTelemetry metrics export
+   OTEL_ENABLED=true
+   OTEL_SERVICE_NAME=multiflexi
+   OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
+   OTEL_EXPORTER_OTLP_PROTOCOL=http/json
+
+**Configuration Options**
+
+- ``OTEL_ENABLED`` - Enable/disable OpenTelemetry export (default: ``false``)
+- ``OTEL_SERVICE_NAME`` - Service identifier in OTLP (default: ``multiflexi``)
+- ``OTEL_EXPORTER_OTLP_ENDPOINT`` - OTLP collector endpoint URL
+- ``OTEL_EXPORTER_OTLP_PROTOCOL`` - Protocol (``http/json`` or ``grpc``)
+
+**Protocol Selection**
+
+HTTP/JSON (recommended for simplicity):
+
+.. code-block:: bash
+
+   OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
+   OTEL_EXPORTER_OTLP_PROTOCOL=http/json
+
+gRPC (recommended for performance):
+
+.. code-block:: bash
+
+   OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317
+   OTEL_EXPORTER_OTLP_PROTOCOL=grpc
+
+**Testing the Configuration**
+
+Use the CLI command to verify your OpenTelemetry setup:
+
+.. code-block:: bash
+
+   multiflexi-cli telemetry:test
+
+For complete OpenTelemetry integration details, deployment examples, and Grafana dashboards, see :doc:`opentelemetry`.
+
