@@ -316,6 +316,52 @@ The search form is intentionally placed outside the navbar collapse div using `$
 - Compact spacing (`mr-1`, `ml-1`) for tight mobile layout
 - Fixed input width (100px) optimized for mobile screens
 
+### Job Listing and Filtering
+
+The job listing page (`src/joblist.php`) provides a comprehensive view of job execution history with advanced filtering capabilities.
+
+**Available Filters:**
+- `success`: Show only successful jobs (exitcode = 0)
+- `failed`: Show only failed jobs (exitcode ≠ 0 and not NULL)
+- `running`: Show jobs currently executing (begin IS NOT NULL and end IS NULL)
+- `today`: Show jobs executed today
+
+**Usage:**
+```
+http://localhost/MultiFlexi/src/joblist.php?filter=failed
+http://localhost/MultiFlexi/src/joblist.php?filter=success
+http://localhost/MultiFlexi/src/joblist.php?filter=running
+http://localhost/MultiFlexi/src/joblist.php?filter=today
+```
+
+**Implementation Details:**
+
+The filtering system uses a specialized approach to persist filter state across AJAX DataTable requests:
+
+1. **Filter Storage**: The `CompanyJobLister` class stores the filter type in:
+   - `$this->filterType` property for internal use
+   - `$this->filter['_jobfilter']` array for URL parameter persistence
+
+2. **AJAX Persistence**: The `DBDataTable::dataSourceURI()` method automatically includes the `$filter` array in AJAX request URLs, ensuring filters persist across pagination and sorting.
+
+3. **SQL Application**: Filters are applied in the `addSelectizeValues()` method using FluentPDO's query builder:
+   ```php
+   case 'failed':
+       $query->where('(job.exitcode <> 0 AND job.exitcode <> "0")');
+       $query->where('job.exitcode IS NOT NULL');
+       break;
+   ```
+
+4. **Parameter Exclusion**: The `getAllForDataTable()` method extracts and removes `_jobfilter` from conditions before parent processing to prevent it from being treated as a database column in WHERE clauses.
+
+**Visual Indicators:**
+Job rows are color-coded by exit status:
+- Green (bg-success): Exit code 0 (success)
+- Yellow (bg-warning): Exit code 1
+- Red (bg-danger): Exit code 255 (failure)
+- Blue (bg-primary): Exit code 127
+- Cyan (bg-info): Exit code -1
+
 ## Code Quality Standards
 
 The project follows PSR-12 coding standards and includes:

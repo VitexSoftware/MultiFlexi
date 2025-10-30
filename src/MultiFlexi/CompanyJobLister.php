@@ -15,6 +15,47 @@ namespace MultiFlexi;
  * @author vitex
  */
 class CompanyJobLister extends CompanyJob {
+    
+    public function __construct($init = null, $filter = [])
+    {
+        parent::__construct($init, $filter);
+        
+        // Restore filter type from URL parameter if present
+        if (isset($filter['_jobfilter'])) {
+            $this->filterType = $filter['_jobfilter'];
+        }
+    }
+    
+    /**
+     * Override to exclude _jobfilter from WHERE conditions.
+     */
+    public function getAllForDataTable($conditions = [])
+    {
+        // Extract and remove _jobfilter before parent processing
+        if (isset($conditions['_jobfilter'])) {
+            $this->filterType = $conditions['_jobfilter'];
+            unset($conditions['_jobfilter']);
+        }
+        
+        return parent::getAllForDataTable($conditions);
+    }
+    
+    /**
+     * Filter type for job listing.
+     */
+    public ?string $filterType = null;
+    
+    /**
+     * Apply custom filter to the listing query.
+     *
+     * @param string $filterType Filter type: 'success', 'failed', 'running', 'today'
+     */
+    public function applyFilter(string $filterType): void
+    {
+        // Store filter type as property and in filter array for URL persistence
+        $this->filterType = $filterType;
+        $this->filter['_jobfilter'] = $filterType;
+    }
     /**
      * columns to be selected from database.
      *
@@ -92,6 +133,27 @@ class CompanyJobLister extends CompanyJob {
             ->leftJoin('company ON company.id = job.company_id')
             ->leftJoin('user ON user.id = job.launched_by')
             ->leftJoin('runtemplate ON runtemplate.id = job.runtemplate_id');
+
+        // Apply special filters based on filterType
+        if (!empty($this->filterType)) {
+            switch ($this->filterType) {
+                case 'success':
+                    $query->where('job.exitcode', 0);
+                    break;
+                case 'failed':
+                    $query->where('(job.exitcode <> 0 AND job.exitcode <> "0")');
+                    $query->where('job.exitcode IS NOT NULL');
+                    break;
+                case 'running':
+                    $query->where('job.begin IS NOT NULL')->where('job.end IS NULL');
+                    break;
+                case 'today':
+                    $jobber = new \MultiFlexi\Job();
+                    $todayCondition = $jobber->todaysCond('job.begin');
+                    $query->where($todayCondition);
+                    break;
+            }
+        }
 
         return parent::addSelectizeValues($query);
     }
