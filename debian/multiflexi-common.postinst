@@ -19,27 +19,29 @@ configure)
     chown multiflexi:www-data /var/lib/multiflexi
     chmod 755 /var/lib/multiflexi
 
-    # Generate encryption master key if not exists and MULTIFLEXI_MASTER_KEY is not set
-    if [ ! -f "/var/lib/multiflexi/.encryption_master_key" ] && [ -z "${MULTIFLEXI_MASTER_KEY}" ]; then
-        # Generate 32-byte random key and base64 encode it
-        openssl rand -base64 32 > /var/lib/multiflexi/.encryption_master_key
-        chown multiflexi:www-data /var/lib/multiflexi/.encryption_master_key
-        chmod 660 /var/lib/multiflexi/.encryption_master_key
-        echo "Generated new encryption master key at /var/lib/multiflexi/.encryption_master_key"
-        echo "For production, consider setting MULTIFLEXI_MASTER_KEY environment variable instead"
-    fi
-
-    # Handle consent banner configuration from debconf
-    db_get multiflexi/disable_consent_banner || true
-    DISABLE_BANNER="$RET"
-    
     # Ensure /etc/multiflexi directory exists
     if [ ! -d "/etc/multiflexi" ]; then
         mkdir -p /etc/multiflexi
     fi
     
-    # Update or create the environment file
+    # Initialize environment file if it doesn't exist
     ENV_FILE="/etc/multiflexi/multiflexi.env"
+    if [ ! -f "$ENV_FILE" ]; then
+        touch "$ENV_FILE"
+        chmod 640 "$ENV_FILE"
+        chown root:www-data "$ENV_FILE"
+    fi
+    
+    # Generate encryption master key if not already configured
+    if ! grep -q "^ENCRYPTION_MASTER_KEY=" "$ENV_FILE" 2>/dev/null; then
+        MASTER_KEY=$(openssl rand -base64 32)
+        echo "ENCRYPTION_MASTER_KEY=$MASTER_KEY" >> "$ENV_FILE"
+        echo "Generated new encryption master key in $ENV_FILE"
+    fi
+
+    # Handle consent banner configuration from debconf
+    db_get multiflexi/disable_consent_banner || true
+    DISABLE_BANNER="$RET"
     if [ "$DISABLE_BANNER" = "true" ]; then
         # Remove existing DISABLE_CONSENT_BANNER line and add new one
         if [ -f "$ENV_FILE" ]; then

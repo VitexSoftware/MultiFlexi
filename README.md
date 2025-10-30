@@ -72,7 +72,18 @@ MultiFlexi automatically configures environment variables for executed applicati
 - `DATA_ENCRYPTION_ENABLED` - Enable AES-256 data encryption for sensitive information (default: true)
 - `RATE_LIMITING_ENABLED` - Enable API rate limiting protection (default: true)
 - `IP_WHITELIST_ENABLED` - Enable IP whitelisting for administrative access (default: false)
-- `ENCRYPTION_MASTER_KEY` - Master key for data encryption (must be set securely)
+- `ENCRYPTION_MASTER_KEY` - Master key for data encryption at rest (automatically generated during installation)
+
+**Encryption Configuration:**
+
+MultiFlexi uses AES-256-GCM encryption to protect sensitive credentials and personal data. The encryption system requires a master key configured via `ENCRYPTION_MASTER_KEY` in `/etc/multiflexi/multiflexi.env`.
+
+- **Automatic Setup**: Master key is automatically generated during package installation
+- **Manual Configuration**: `openssl rand -base64 32` to generate a new key
+- **Status Check**: Use `multiflexi-cli appstatus` or `multiflexi-cli encryption status`
+- **Key Management**: Encryption keys are wrapped with the master key and stored in the database
+
+See [INSTALL.md](INSTALL.md) for detailed encryption configuration and security notes.
 
 **Custom Variables:** Individual module configurations per company with extensible variable definitions.
 

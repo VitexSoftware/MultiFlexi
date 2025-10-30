@@ -418,53 +418,27 @@ EOD;
     private static function getMasterKey(): string
     {
         // Try environment variable first
+        $masterKey = getenv('ENCRYPTION_MASTER_KEY');
+
+        if ($masterKey) {
+            return hash('sha256', $masterKey, true);
+        }
+
+        // Try alternative environment variable name for backward compatibility
         $masterKey = getenv('MULTIFLEXI_MASTER_KEY');
 
         if ($masterKey) {
             return hash('sha256', $masterKey, true);
         }
 
-        // Fallback to config
+        // Load from config (.env file)
         $masterKey = \Ease\Shared::cfg('ENCRYPTION_MASTER_KEY');
 
         if ($masterKey) {
             return hash('sha256', $masterKey, true);
         }
 
-        // Check for master key file in standard locations
-        $masterKeyLocations = [
-            '/var/lib/multiflexi/.encryption_master_key',  // Production (deb package)
-            \dirname(__DIR__, 3).'/.encryption_master_key', // Development
-        ];
-
-        foreach ($masterKeyLocations as $masterKeyFile) {
-            if (file_exists($masterKeyFile)) {
-                $masterKey = file_get_contents($masterKeyFile);
-                if ($masterKey === false) {
-                    throw new \RuntimeException("Failed to read master key from {$masterKeyFile}");
-                }
-
-                return hash('sha256', $masterKey, true);
-            }
-        }
-
-        // Try to generate new master key for development
-        $devKeyFile = \dirname(__DIR__, 3).'/.encryption_master_key';
-        $devDir = \dirname($devKeyFile);
-
-        if (is_writable($devDir)) {
-            $newMasterKey = base64_encode(random_bytes(32));
-            if (file_put_contents($devKeyFile, $newMasterKey) === false) {
-                throw new \RuntimeException("Failed to write master key to {$devKeyFile}");
-            }
-            @chmod($devKeyFile, 0o600);
-
-            error_log('WARNING: Generated new encryption master key. For production, set MULTIFLEXI_MASTER_KEY environment variable.');
-
-            return hash('sha256', $newMasterKey, true);
-        }
-
-        throw new \RuntimeException('No encryption master key found. Set MULTIFLEXI_MASTER_KEY environment variable or ensure /var/lib/multiflexi/.encryption_master_key exists.');
+        throw new \RuntimeException('No encryption master key found. Set ENCRYPTION_MASTER_KEY in .env file or as environment variable.');
     }
 
     /**
