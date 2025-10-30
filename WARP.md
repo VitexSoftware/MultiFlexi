@@ -227,6 +227,35 @@ MultiFlexi implements GDPR compliance in phases:
 
 ## User Interface Design
 
+### Dashboard Widgets
+
+The dashboard (`src/dashboard.php`) is built using modular, reusable widget components located in `src/MultiFlexi/Ui/`:
+
+**Widget Components:**
+- `DashboardMetricsCards` - Main metrics cards (Total Jobs, Active Applications, Active Companies, Run Templates)
+- `DashboardStatusCards` - Job status cards (Successful, Failed, Running, Today's Jobs)
+- `DashboardJobsByAppChart` - Bar chart showing top 10 applications by job count
+- `DashboardJobsByCompanyChart` - Pie chart showing top 10 companies by job count
+- `DashboardTimelineChart` - Multi-line graph of job execution timeline (last 7 days)
+- `DashboardIntervalChart` - Bar chart showing run templates by interval (hourly, daily, etc.)
+- `DashboardRecentJobsTable` - Table of last 20 jobs with clickable links and emoticons
+- `DashboardStyles` - Static CSS styles for dashboard components
+
+**Design Pattern:**
+Each widget is a self-contained class that:
+1. Extends appropriate Ease Framework base class (`\Ease\TWB4\Row`, `\Ease\Html\DivTag`, etc.)
+2. Fetches its own data in the constructor
+3. Handles its own rendering and error states
+4. Can be instantiated with a simple `new WidgetName()` call
+
+**Recent Jobs Table Features:**
+- Clickable links with emoticons:
+  - 📦 Applications → `app.php?id=X`
+  - 🏢 Companies → `company.php?id=X`
+  - ⚙️ RunTemplates → `runtemplate.php?id=X`
+- Status badges with visual indicators (Running, Pending, Success, Failed)
+- Formatted timestamps
+
 ### Activation Wizard
 
 The Activation Wizard (`src/activation-wizard.php`) provides a guided 7-step process for activating applications in companies:
