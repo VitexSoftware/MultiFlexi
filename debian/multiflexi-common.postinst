@@ -19,6 +19,14 @@ configure)
     chown www-data:www-data /var/log/multiflexi
     chmod 755 /var/log/multiflexi
 
+    # Create log file with proper permissions if it does not exist
+    LOG_FILE="/var/log/multiflexi/multiflexi.log"
+    if [ ! -f "$LOG_FILE" ]; then
+        touch "$LOG_FILE"
+    fi
+    chown www-data:www-data "$LOG_FILE"
+    chmod 640 "$LOG_FILE"
+
     # Ensure /var/lib/multiflexi exists with proper permissions
     if [ ! -d "/var/lib/multiflexi" ]; then
         mkdir -p /var/lib/multiflexi
