@@ -112,6 +112,7 @@ Contents
    docker
    firstrun
    usage
+   troubleshooting
    api
    ansible
    application
