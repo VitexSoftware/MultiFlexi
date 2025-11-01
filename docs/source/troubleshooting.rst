@@ -66,4 +66,6 @@ If the problem persists after trying these solutions, check the application logs
 
    tail -f /var/log/multiflexi/multiflexi.log
 
+See the :doc:`configuration` page for more information about logging configuration.
+
 Or check PHP error logs for session-related errors.

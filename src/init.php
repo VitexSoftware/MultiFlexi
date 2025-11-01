@@ -82,98 +82,104 @@ try {
 }
 
 // Initialize brute force protection (disabled temporarily)
- if ($pdo && \Ease\Shared::cfg('BRUTE_FORCE_PROTECTION_ENABLED', true) && class_exists('\MultiFlexi\Security\BruteForceProtection')) {
-     try {
-         $bruteForceProtection = new \MultiFlexi\Security\BruteForceProtection(
-             $pdo,
-             \Ease\Shared::cfg('BRUTE_FORCE_MAX_ATTEMPTS', 5),
-             \Ease\Shared::cfg('BRUTE_FORCE_LOCKOUT_DURATION', 900), // 15 minutes
-             \Ease\Shared::cfg('BRUTE_FORCE_TIME_WINDOW', 300), // 5 minutes
-             \Ease\Shared::cfg('BRUTE_FORCE_IP_LIMITING', true),
-         );
-         $GLOBALS['bruteForceProtection'] = $bruteForceProtection;
-     } catch (\Exception $e) {
-         // Log error but don't break the application
-         error_log('Failed to initialize brute force protection: '.$e->getMessage());
-     }
- }
+if ($pdo && \Ease\Shared::cfg('BRUTE_FORCE_PROTECTION_ENABLED', true) && class_exists('\MultiFlexi\Security\BruteForceProtection')) {
+    try {
+        $bruteForceProtection = new \MultiFlexi\Security\BruteForceProtection(
+            $pdo,
+            \Ease\Shared::cfg('BRUTE_FORCE_MAX_ATTEMPTS', 5),
+            \Ease\Shared::cfg('BRUTE_FORCE_LOCKOUT_DURATION', 900), // 15 minutes
+            \Ease\Shared::cfg('BRUTE_FORCE_TIME_WINDOW', 300), // 5 minutes
+            \Ease\Shared::cfg('BRUTE_FORCE_IP_LIMITING', true),
+        );
+        $GLOBALS['bruteForceProtection'] = $bruteForceProtection;
+    } catch (\Exception $e) {
+        // Log error but don't break the application
+        error_log('Failed to initialize brute force protection: '.$e->getMessage());
+    }
+}
 
 // Initialize security audit logger (disabled temporarily)
- if ($pdo && \Ease\Shared::cfg('SECURITY_LOGGING_ENABLED', true) && class_exists('\MultiFlexi\Security\SecurityAuditLogger')) {
-     try {
-         $securityAuditLogger = new \MultiFlexi\Security\SecurityAuditLogger($pdo);
-         $GLOBALS['securityAuditLogger'] = $securityAuditLogger;
-     } catch (\Exception $e) {
-         // Log error but don't break the application
-         error_log('Failed to initialize security audit logger: '.$e->getMessage());
-     }
- }
+if ($pdo && \Ease\Shared::cfg('SECURITY_LOGGING_ENABLED', true) && class_exists('\MultiFlexi\Security\SecurityAuditLogger')) {
+    try {
+        $securityAuditLogger = new \MultiFlexi\Security\SecurityAuditLogger($pdo);
+        $GLOBALS['securityAuditLogger'] = $securityAuditLogger;
+    } catch (\Exception $e) {
+        // Log error but don't break the application
+        error_log('Failed to initialize security audit logger: '.$e->getMessage());
+    }
+}
 
 // Initialize data encryption (disabled temporarily due to key initialization issues)
- if ($pdo && \Ease\Shared::cfg('DATA_ENCRYPTION_ENABLED', true) && class_exists('\MultiFlexi\Security\DataEncryption')) {
-     try {
-         $dataEncryption = new \MultiFlexi\Security\DataEncryption($pdo);
+if ($pdo && \Ease\Shared::cfg('DATA_ENCRYPTION_ENABLED', true) && class_exists('\MultiFlexi\Security\DataEncryption')) {
+    try {
+        $dataEncryption = new \MultiFlexi\Security\DataEncryption($pdo);
 
-         // Initialize default encryption keys if they don't exist
-         $dataEncryption->initializeDefaultKeys();
+        // Initialize default encryption keys if they don't exist
+        $dataEncryption->initializeDefaultKeys();
 
-         $GLOBALS['dataEncryption'] = $dataEncryption;
-     } catch (\Exception $e) {
-         // Log error but don't break the application
-         error_log('Failed to initialize data encryption: '.$e->getMessage());
-     }
- }
+        $GLOBALS['dataEncryption'] = $dataEncryption;
+    } catch (\Exception $e) {
+        // Log error but don't break the application
+        error_log('Failed to initialize data encryption: '.$e->getMessage());
+    }
+}
 
 // Initialize rate limiter (disabled temporarily)
- if ($pdo && \Ease\Shared::cfg('RATE_LIMITING_ENABLED', true) && class_exists('\MultiFlexi\Security\RateLimiter')) {
-     try {
-         $rateLimiter = new \MultiFlexi\Security\RateLimiter($pdo);
+if ($pdo && \Ease\Shared::cfg('RATE_LIMITING_ENABLED', true) && class_exists('\MultiFlexi\Security\RateLimiter')) {
+    try {
+        $rateLimiter = new \MultiFlexi\Security\RateLimiter($pdo);
 
-         $GLOBALS['rateLimiter'] = $rateLimiter;
-     } catch (\Exception $e) {
-         // Log error but don't break the application
-         error_log('Failed to initialize rate limiter: '.$e->getMessage());
-     }
- }
+        $GLOBALS['rateLimiter'] = $rateLimiter;
+    } catch (\Exception $e) {
+        // Log error but don't break the application
+        error_log('Failed to initialize rate limiter: '.$e->getMessage());
+    }
+}
 
 // Initialize IP whitelist (disabled temporarily)
- if ($pdo && \Ease\Shared::cfg('IP_WHITELIST_ENABLED', false) && class_exists('\MultiFlexi\Security\IpWhitelist')) {
-     try {
-         $ipWhitelist = new \MultiFlexi\Security\IpWhitelist($pdo);
+if ($pdo && \Ease\Shared::cfg('IP_WHITELIST_ENABLED', false) && class_exists('\MultiFlexi\Security\IpWhitelist')) {
+    try {
+        $ipWhitelist = new \MultiFlexi\Security\IpWhitelist($pdo);
 
-         $GLOBALS['ipWhitelist'] = $ipWhitelist;
-     } catch (\Exception $e) {
-         // Log error but don't break the application
-         error_log('Failed to initialize IP whitelist: '.$e->getMessage());
-     }
- }
+        $GLOBALS['ipWhitelist'] = $ipWhitelist;
+    } catch (\Exception $e) {
+        // Log error but don't break the application
+        error_log('Failed to initialize IP whitelist: '.$e->getMessage());
+    }
+}
 
 // Initialize Two-Factor Authentication (disabled temporarily)
- if ($pdo && \Ease\Shared::cfg('TWO_FACTOR_AUTH_ENABLED', true) && class_exists('\MultiFlexi\Security\TwoFactorAuth')) {
-     try {
-         $twoFactorAuth = new \MultiFlexi\Security\TwoFactorAuth($pdo);
+if ($pdo && \Ease\Shared::cfg('TWO_FACTOR_AUTH_ENABLED', true) && class_exists('\MultiFlexi\Security\TwoFactorAuth')) {
+    try {
+        $twoFactorAuth = new \MultiFlexi\Security\TwoFactorAuth($pdo);
 
-         $GLOBALS['twoFactorAuth'] = $twoFactorAuth;
-     } catch (\Exception $e) {
-         // Log error but don't break the application
-         error_log('Failed to initialize Two-Factor Authentication: '.$e->getMessage());
-     }
- }
+        $GLOBALS['twoFactorAuth'] = $twoFactorAuth;
+    } catch (\Exception $e) {
+        // Log error but don't break the application
+        error_log('Failed to initialize Two-Factor Authentication: '.$e->getMessage());
+    }
+}
 
 // Initialize Role-Based Access Control (RBAC) (disabled temporarily)
- if ($pdo && \Ease\Shared::cfg('RBAC_ENABLED', true) && class_exists('\MultiFlexi\Security\RoleBasedAccessControl')) {
-     try {
-         $rbac = new \MultiFlexi\Security\RoleBasedAccessControl($pdo);
+if ($pdo && \Ease\Shared::cfg('RBAC_ENABLED', true) && class_exists('\MultiFlexi\Security\RoleBasedAccessControl')) {
+    try {
+        $rbac = new \MultiFlexi\Security\RoleBasedAccessControl($pdo);
 
-         $GLOBALS['rbac'] = $rbac;
-     } catch (\Exception $e) {
-         // Log error but don't break the application
-         error_log('Failed to initialize RBAC: '.$e->getMessage());
-     }
- }
+        $GLOBALS['rbac'] = $rbac;
+    } catch (\Exception $e) {
+        // Log error but don't break the application
+        error_log('Failed to initialize RBAC: '.$e->getMessage());
+    }
+}
 
 \Ease\Locale::singleton(null, '../i18n', 'multiflexi');
-$loggers = ['syslog', '\MultiFlexi\LogToSQL'];
+
+// Configure file logging
+if (!Shared::cfg('LOG_DIRECTORY')) {
+    Shared::singleton()->setConfigValue('LOG_DIRECTORY', '/var/log/multiflexi');
+}
+
+$loggers = ['syslog', 'file', '\MultiFlexi\LogToSQL'];
 
 if (Shared::cfg('ZABBIX_SERVER')) {
     $loggers[] = '\MultiFlexi\LogToZabbix';

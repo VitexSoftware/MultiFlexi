@@ -12,6 +12,13 @@ configure)
 
     [ -f "/etc/default/multiflexi" ] && . /etc/default/multiflexi
 
+    # Ensure log directory exists with proper permissions
+    if [ ! -d "/var/log/multiflexi" ]; then
+        mkdir -p /var/log/multiflexi
+    fi
+    chown www-data:www-data /var/log/multiflexi
+    chmod 755 /var/log/multiflexi
+
     # Ensure /var/lib/multiflexi exists with proper permissions
     if [ ! -d "/var/lib/multiflexi" ]; then
         mkdir -p /var/lib/multiflexi

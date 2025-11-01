@@ -1,0 +1,20 @@
+/var/log/multiflexi/*.log {
+    daily
+    missingok
+    rotate 14
+    compress
+    delaycompress
+    notifempty
+    create 0640 www-data www-data
+    sharedscripts
+    postrotate
+        # Reload PHP-FPM if running
+        if [ -f /var/run/php-fpm.pid ]; then
+            /usr/bin/systemctl reload php-fpm.service > /dev/null 2>&1 || true
+        fi
+        # Reload Apache if running
+        if [ -f /var/run/apache2/apache2.pid ]; then
+            /usr/bin/systemctl reload apache2.service > /dev/null 2>&1 || true
+        fi
+    endscript
+}

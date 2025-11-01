@@ -141,3 +141,59 @@ Use the CLI command to verify your OpenTelemetry setup:
 
 For complete OpenTelemetry integration details, deployment examples, and Grafana dashboards, see :doc:`opentelemetry`.
 
+
+Logging Configuration
+---------------------
+
+MultiFlexi supports multiple logging backends that can be configured via environment variables.
+
+**Log Directory**
+
+By default, MultiFlexi writes logs to ``/var/log/multiflexi/``. You can configure a custom log directory using:
+
+.. code-block:: bash
+
+   LOG_DIRECTORY=/custom/path/to/logs
+
+**Log Files**
+
+- ``multiflexi.log`` - Main application log file containing all application events
+
+**Log Rotation**
+
+MultiFlexi includes automatic log rotation configuration:
+
+- Logs are rotated daily
+- Rotated logs are compressed
+- 14 days of logs are retained
+- Old logs are automatically cleaned up
+
+The logrotate configuration is automatically installed to ``/etc/logrotate.d/multiflexi``.
+
+**Logging Backends**
+
+MultiFlexi supports multiple logging destinations:
+
+- **file** - Writes logs to ``/var/log/multiflexi/multiflexi.log``
+- **syslog** - Sends logs to system syslog
+- **database** - Stores logs in the MultiFlexi database
+- **zabbix** - Sends logs to Zabbix monitoring (when ``ZABBIX_SERVER`` is configured)
+
+Multiple loggers can be active simultaneously and are configured in ``src/init.php``.
+
+**Viewing Logs**
+
+To view real-time logs:
+
+.. code-block:: bash
+
+   tail -f /var/log/multiflexi/multiflexi.log
+
+To view historical logs:
+
+.. code-block:: bash
+
+   less /var/log/multiflexi/multiflexi.log
+   
+   # Or view compressed older logs
+   zless /var/log/multiflexi/multiflexi.log.1.gz
