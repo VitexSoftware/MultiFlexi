@@ -1,2 +1,3 @@
 debian/conf/multiflexi.env etc/multiflexi
 
+debian/multiflexi.logrotate etc/logrotate.d/multiflexi
