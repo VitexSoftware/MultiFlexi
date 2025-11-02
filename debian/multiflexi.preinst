@@ -2,6 +2,11 @@
 
 set -e
 
+# Remove incorrectly created logrotate directory from previous package version
+if [ -d "/etc/logrotate.d/multiflexi" ]; then
+    rm -rf /etc/logrotate.d/multiflexi
+fi
+
 #DEBHELPER#
 
 exit 0
