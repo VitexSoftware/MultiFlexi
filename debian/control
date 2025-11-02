@@ -9,11 +9,7 @@ Homepage: https://github.com/VitexSoftware/MultiFlexi
 Package: multiflexi
 Multi-Arch: foreign
 Depends: ${misc:Depends},
- locales-all,
  multiflexi-common,
- php-vitexsoftware-multiflexi-core,
- anacron, adduser (>= 3.11),
- php-cli,
 Recommends: multiflexi-scheduler, multiflexi-web
 Suggests: multiflexi-all, multiflexi-cli, multiflexi-api, multiflexi-executor
 Pre-Depends: multiflexi-database
@@ -25,6 +21,10 @@ Description: run several tools on defined abraflexi servers
 Package: multiflexi-common
 Multi-Arch: foreign
 Depends: ${misc:Depends}
+ locales-all,
+ php-vitexsoftware-multiflexi-core,
+ anacron, adduser (>= 3.11),
+ php-cli,
 Replaces: multiflexi (<< 2.0.0)
 Breaks: multiflexi (<< 2.0.0)
 Suggests: multiflexi-cli, multiflexi-web
