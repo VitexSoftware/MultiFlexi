@@ -25,18 +25,23 @@ $filter = WebPage::singleton()->getRequestValue('filter');
 
 // Nastavení titulku podle filtru
 $pageTitle = _('Job history');
+
 switch ($filter) {
     case 'success':
         $pageTitle = _('Successful Jobs');
+
         break;
     case 'failed':
         $pageTitle = _('Failed Jobs');
+
         break;
     case 'running':
         $pageTitle = _('Running Jobs');
+
         break;
     case 'today':
         $pageTitle = _('Today\'s Jobs');
+
         break;
 }
 
@@ -110,6 +115,7 @@ $engine->setApp($appId);
 if (!empty($filter)) {
     $engine->applyFilter($filter);
 }
+
 WebPage::singleton()->addJavaScript(<<<'EOD'
 $.fn.dataTable.ext.buttons.dismisAll = {
     text: '
@@ -141,7 +147,7 @@ $(document).ready(function() {
     setTimeout(function() {
         var filterButtons = $('#job-filter-buttons');
         var tableWrapper = $('.dataTables_wrapper');
-        
+
         if (filterButtons.length && tableWrapper.length) {
             // On desktop: prepend to the first row (where length and filter are)
             if ($(window).width() >= 768) {
@@ -149,7 +155,7 @@ $(document).ready(function() {
             }
             // On mobile: keep as is (already before table)
         }
-        
+
         // Handle window resize
         $(window).on('resize', function() {
             var filterButtons = $('#job-filter-buttons');

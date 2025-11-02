@@ -30,7 +30,8 @@ class DashboardStyles
      */
     public static function getStyles(): string
     {
-        return '
+        return <<<'EOD'
+
 .chart-container {
     margin: 20px 0;
     text-align: center;
@@ -59,6 +60,7 @@ class DashboardStyles
     font-weight: bold;
     margin: 0.5rem 0;
 }
-';
+
+EOD;
     }
 }

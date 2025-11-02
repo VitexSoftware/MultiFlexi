@@ -29,18 +29,18 @@ class DashboardMetricsCards extends \Ease\TWB4\Row
     public function __construct()
     {
         parent::__construct();
-        
+
         $jobber = new \MultiFlexi\Job();
         $apper = new \MultiFlexi\Application();
         $companyer = new \MultiFlexi\Company();
         $runtempler = new \MultiFlexi\RunTemplate();
-        
+
         // Metriky pro karty
         $totalJobs = $jobber->listingQuery()->count();
         $totalApps = $apper->listingQuery()->where('enabled', 1)->count();
         $totalCompanies = $companyer->listingQuery()->where('enabled', 1)->count();
         $totalRunTemplates = $runtempler->listingQuery()->count();
-        
+
         // Celkem jobů
         $card1 = new \Ease\TWB4\Card(null, ['class' => 'bg-primary text-white']);
         $card1Body = new \Ease\Html\DivTag(null, ['class' => 'card-body text-center']);
@@ -49,7 +49,7 @@ class DashboardMetricsCards extends \Ease\TWB4\Row
         $card1Body->addItem(new \Ease\Html\ATag('jobs.php', '🔍 '._('View Jobs'), ['class' => 'btn btn-light btn-sm']));
         $card1->addItem($card1Body);
         $this->addColumn(3, $card1);
-        
+
         // Aktivní aplikace
         $card2 = new \Ease\TWB4\Card(null, ['class' => 'bg-info text-white']);
         $card2Body = new \Ease\Html\DivTag(null, ['class' => 'card-body text-center']);
@@ -58,7 +58,7 @@ class DashboardMetricsCards extends \Ease\TWB4\Row
         $card2Body->addItem(new \Ease\Html\ATag('apps.php', '📦 '._('View Apps'), ['class' => 'btn btn-light btn-sm']));
         $card2->addItem($card2Body);
         $this->addColumn(3, $card2);
-        
+
         // Aktivní firmy
         $card3 = new \Ease\TWB4\Card(null, ['class' => 'bg-success text-white']);
         $card3Body = new \Ease\Html\DivTag(null, ['class' => 'card-body text-center']);
@@ -67,7 +67,7 @@ class DashboardMetricsCards extends \Ease\TWB4\Row
         $card3Body->addItem(new \Ease\Html\ATag('companies.php', '🏢 '._('View Companies'), ['class' => 'btn btn-light btn-sm']));
         $card3->addItem($card3Body);
         $this->addColumn(3, $card3);
-        
+
         // RunTemplates
         $card4 = new \Ease\TWB4\Card(null, ['class' => 'bg-warning text-dark']);
         $card4Body = new \Ease\Html\DivTag(null, ['class' => 'card-body text-center']);

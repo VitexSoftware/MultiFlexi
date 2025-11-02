@@ -1,33 +1,46 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * MultiFlexi - 
+ * This file is part of the MultiFlexi package
  *
- * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020 Vitex Software
+ * https://multiflexi.eu/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace MultiFlexi;
 
 /**
- * Description of CompanyJobLister
+ * Description of CompanyJobLister.
  *
  * @author vitex
  */
-class CompanyJobLister extends CompanyJob {
-    
+class CompanyJobLister extends CompanyJob
+{
+    /**
+     * Filter type for job listing.
+     */
+    public ?string $filterType = null;
+
     public function __construct($init = null, $filter = [])
     {
         parent::__construct($init, $filter);
-        
+
         // Restore filter type from URL parameter if present
         if (isset($filter['_jobfilter'])) {
             $this->filterType = $filter['_jobfilter'];
         }
     }
-    
+
     /**
      * Override to exclude _jobfilter from WHERE conditions.
+     *
+     * @param mixed $conditions
      */
     public function getAllForDataTable($conditions = [])
     {
@@ -36,15 +49,10 @@ class CompanyJobLister extends CompanyJob {
             $this->filterType = $conditions['_jobfilter'];
             unset($conditions['_jobfilter']);
         }
-        
+
         return parent::getAllForDataTable($conditions);
     }
-    
-    /**
-     * Filter type for job listing.
-     */
-    public ?string $filterType = null;
-    
+
     /**
      * Apply custom filter to the listing query.
      *
@@ -139,18 +147,22 @@ class CompanyJobLister extends CompanyJob {
             switch ($this->filterType) {
                 case 'success':
                     $query->where('job.exitcode', 0);
+
                     break;
                 case 'failed':
                     $query->where('(job.exitcode <> 0 AND job.exitcode <> "0")');
                     $query->where('job.exitcode IS NOT NULL');
+
                     break;
                 case 'running':
                     $query->where('job.begin IS NOT NULL')->where('job.end IS NULL');
+
                     break;
                 case 'today':
                     $jobber = new \MultiFlexi\Job();
                     $todayCondition = $jobber->todaysCond('job.begin');
                     $query->where($todayCondition);
+
                     break;
             }
         }
@@ -162,33 +174,40 @@ class CompanyJobLister extends CompanyJob {
     {
         $exitCode = $dataRowRaw['exitcode'] ?? null;
         $jobId = $dataRowRaw['id'];
-        
+
         // Format ID column as link
         $dataRowRaw['id'] = sprintf(
             '<a href="job.php?id=%d" style="font-size: 1.5em; font-weight: bold; color: #000; text-decoration: none;">🏁 %d</a>',
             $jobId,
-            $jobId
+            $jobId,
         );
-        
+
         // Set row background color based on exit code
         switch ($exitCode) {
             case '0':
                 $dataRowRaw['DT_RowClass'] = 'bg-success text-white';
+
                 break;
             case '1':
                 $dataRowRaw['DT_RowClass'] = 'bg-warning text-dark';
+
                 break;
             case '255':
                 $dataRowRaw['DT_RowClass'] = 'bg-danger text-dark';
+
                 break;
             case '127':
                 $dataRowRaw['DT_RowClass'] = 'bg-primary text-white';
+
                 break;
             case '-1':
                 $dataRowRaw['DT_RowClass'] = 'bg-info text-white';
+
                 break;
+
             default:
                 $dataRowRaw['DT_RowClass'] = 'text-dark';
+
                 break;
         }
 
@@ -201,62 +220,63 @@ class CompanyJobLister extends CompanyJob {
                 htmlspecialchars($appImageUrl),
                 htmlspecialchars($dataRowRaw['appname']),
                 htmlspecialchars($dataRowRaw['appname']),
-                htmlspecialchars($dataRowRaw['appname'])
+                htmlspecialchars($dataRowRaw['appname']),
             );
         }
 
         // Format Exit Code / Job ID column
-        $exitCodeWidget = New \Ease\Html\ATag('job.php?id='.$jobId, new \MultiFlexi\Ui\ExitCode($exitCode, ['style' => 'font-size: 1.0em; font-family: monospace;']));
+        $exitCodeWidget = new \Ease\Html\ATag('job.php?id='.$jobId, new \MultiFlexi\Ui\ExitCode($exitCode, ['style' => 'font-size: 1.0em; font-family: monospace;']));
         $dataRowRaw['exitcode'] = $exitCodeWidget->__toString();
-        
 
         // Format Launch time column
         if (!empty($dataRowRaw['begin'])) {
             try {
                 $beginTime = new \DateTime($dataRowRaw['begin']);
-                $dataRowRaw['begin'] = $dataRowRaw['begin'] . '<br><small>' . $this->getRelativeTime($beginTime) . '</small>';
+                $dataRowRaw['begin'] = $dataRowRaw['begin'].'<br><small>'.self::getRelativeTime($beginTime).'</small>';
             } catch (\Exception $e) {
                 // Keep original value if parsing fails
             }
         } else {
             $scheduleDisplay = '';
+
             if (!empty($dataRowRaw['schedule'])) {
                 try {
                     $scheduleTime = new \DateTime($dataRowRaw['schedule']);
-                    $scheduleDisplay = '<div>' . $this->getRelativeTime($scheduleTime) . '</div>';
+                    $scheduleDisplay = '<div>'.self::getRelativeTime($scheduleTime).'</div>';
                 } catch (\Exception $e) {
                     // Ignore parsing error
                 }
             }
-            $dataRowRaw['begin'] = '⏳' . $scheduleDisplay;
+
+            $dataRowRaw['begin'] = '⏳'.$scheduleDisplay;
         }
 
         // Format Launcher column
         $executorImg = !empty($dataRowRaw['executor']) ? sprintf(
             '<img src="images/executor/%s.svg" align="right" height="50px" alt="%s">',
             htmlspecialchars($dataRowRaw['executor']),
-            htmlspecialchars($dataRowRaw['executor'])
+            htmlspecialchars($dataRowRaw['executor']),
         ) : '';
-        
-        $userBadge = !empty($dataRowRaw['launched_by']) && !empty($dataRowRaw['login']) ? 
-            sprintf('<a href="user.php?id=%d"><span class="badge badge-info">%s</span></a>', $dataRowRaw['launched_by'], htmlspecialchars($dataRowRaw['login'])) : 
+
+        $userBadge = !empty($dataRowRaw['launched_by']) && !empty($dataRowRaw['login']) ?
+            sprintf('<a href="user.php?id=%d"><span class="badge badge-info">%s</span></a>', $dataRowRaw['launched_by'], htmlspecialchars($dataRowRaw['login'])) :
             'Timer';
-        
-        $scheduleInfo = !empty($dataRowRaw['schedule']) ? '<div>' . htmlspecialchars($dataRowRaw['schedule']) . '</div>' : '';
-        $executorInfo = !empty($dataRowRaw['executor']) || !empty($dataRowRaw['schedule_type']) ? 
-            '<div>' . htmlspecialchars($dataRowRaw['executor'] ?? '') . ' ' . htmlspecialchars($dataRowRaw['schedule_type'] ?? '') . '</div>' : '';
-        
-        $dataRowRaw['launched_by'] = $executorImg . '<div>' . $userBadge . '</div>' . $scheduleInfo . $executorInfo;
+
+        $scheduleInfo = !empty($dataRowRaw['schedule']) ? '<div>'.htmlspecialchars($dataRowRaw['schedule']).'</div>' : '';
+        $executorInfo = !empty($dataRowRaw['executor']) || !empty($dataRowRaw['schedule_type']) ?
+            '<div>'.htmlspecialchars($dataRowRaw['executor'] ?? '').' '.htmlspecialchars($dataRowRaw['schedule_type'] ?? '').'</div>' : '';
+
+        $dataRowRaw['launched_by'] = $executorImg.'<div>'.$userBadge.'</div>'.$scheduleInfo.$executorInfo;
 
         // Format Runtemplate column
         if (isset($dataRowRaw['runtemplate_id']) && $dataRowRaw['runtemplate_id']) {
             $runtemplateId = $dataRowRaw['runtemplate_id'];
-            $runtemplateName = htmlspecialchars($dataRowRaw['runtemplate_name'] ?? '⚗️ #' . $runtemplateId);
+            $runtemplateName = htmlspecialchars($dataRowRaw['runtemplate_name'] ?? '⚗️ #'.$runtemplateId);
             $dataRowRaw['runtemplate_id'] = sprintf(
                 '<a href="runtemplate.php?id=%d" style="color: black;">⚗️ #%s %s</a>',
                 $runtemplateId,
                 $runtemplateId,
-                $runtemplateName
+                $runtemplateName,
             );
         } else {
             $dataRowRaw['runtemplate_id'] = '';
@@ -264,7 +284,7 @@ class CompanyJobLister extends CompanyJob {
 
         // Format Company column
         if (isset($dataRowRaw['company_id'])) {
-            $companyLogo = !empty($dataRowRaw['logo']) ? 
+            $companyLogo = !empty($dataRowRaw['logo']) ?
                 sprintf('<img src="%s" height="60px" align="right" alt="Company Logo">', htmlspecialchars($dataRowRaw['logo'])) : '';
             $companyName = htmlspecialchars($dataRowRaw['name'] ?? '');
             $dataRowRaw['company_id'] = sprintf(
@@ -272,37 +292,11 @@ class CompanyJobLister extends CompanyJob {
                 $dataRowRaw['company_id'],
                 $companyLogo,
                 $dataRowRaw['company_id'],
-                $companyName
+                $companyName,
             );
         }
 
         return $dataRowRaw;
-    }
-
-    /**
-     * Get relative time string (e.g., "2 hours ago").
-     *
-     * @param \DateTime $dateTime
-     * @return string
-     */
-    private function getRelativeTime(\DateTime $dateTime): string
-    {
-        $now = new \DateTime();
-        $diff = $now->diff($dateTime);
-        
-        if ($diff->y > 0) {
-            return $diff->y . ' ' . ($diff->y === 1 ? _('year ago') : _('years ago'));
-        } elseif ($diff->m > 0) {
-            return $diff->m . ' ' . ($diff->m === 1 ? _('month ago') : _('months ago'));
-        } elseif ($diff->d > 0) {
-            return $diff->d . ' ' . ($diff->d === 1 ? _('day ago') : _('days ago'));
-        } elseif ($diff->h > 0) {
-            return $diff->h . ' ' . ($diff->h === 1 ? _('hour ago') : _('hours ago'));
-        } elseif ($diff->i > 0) {
-            return $diff->i . ' ' . ($diff->i === 1 ? _('minute ago') : _('minutes ago'));
-        } else {
-            return _('just now');
-        }
     }
 
     public function tableCode($tableId)
@@ -312,5 +306,36 @@ class CompanyJobLister extends CompanyJob {
  "order": [[ 0, "desc" ]],
 
 EOD;
+    }
+
+    /**
+     * Get relative time string (e.g., "2 hours ago").
+     */
+    private static function getRelativeTime(\DateTime $dateTime): string
+    {
+        $now = new \DateTime();
+        $diff = $now->diff($dateTime);
+
+        if ($diff->y > 0) {
+            return $diff->y.' '.($diff->y === 1 ? _('year ago') : _('years ago'));
+        }
+
+        if ($diff->m > 0) {
+            return $diff->m.' '.($diff->m === 1 ? _('month ago') : _('months ago'));
+        }
+
+        if ($diff->d > 0) {
+            return $diff->d.' '.($diff->d === 1 ? _('day ago') : _('days ago'));
+        }
+
+        if ($diff->h > 0) {
+            return $diff->h.' '.($diff->h === 1 ? _('hour ago') : _('hours ago'));
+        }
+
+        if ($diff->i > 0) {
+            return $diff->i.' '.($diff->i === 1 ? _('minute ago') : _('minutes ago'));
+        }
+
+        return _('just now');
     }
 }

@@ -40,7 +40,6 @@ class UserDataEraser extends \Ease\Sand
      * @var User The user making the request
      */
     private User $requestingUser;
-
     private DeletionAuditLogger $auditLogger;
 
     /**

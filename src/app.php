@@ -35,52 +35,55 @@ switch ($action) {
     case 'import':
         $jsonFile = null;
         $jsonUri = \Ease\WebPage::getRequestValue('app_json_url');
-        
+
         if ($jsonUri) {
             // Download JSON from URL
             $jsonFile = sys_get_temp_dir().'/'.\Ease\Functions::randomString(8).'.json';
-            
+
             try {
                 $jsonContent = file_get_contents($jsonUri);
-                
+
                 if ($jsonContent === false) {
                     throw new \RuntimeException('Failed to download JSON from URL');
                 }
-                
+
                 if (file_put_contents($jsonFile, $jsonContent) === false) {
                     throw new \RuntimeException('Failed to save downloaded JSON');
                 }
-                
+
                 $apps->addStatusMessage(sprintf(_('Downloaded JSON from %s'), $jsonUri), 'info');
             } catch (\Exception $e) {
                 $apps->addStatusMessage(sprintf(_('Error downloading JSON: %s'), $e->getMessage()), 'error');
+
                 break;
             }
-        } elseif (isset($_FILES['app_json_upload']) && $_FILES['app_json_upload']['error'] === UPLOAD_ERR_OK) {
+        } elseif (isset($_FILES['app_json_upload']) && $_FILES['app_json_upload']['error'] === \UPLOAD_ERR_OK) {
             // Handle file upload
             $jsonFile = $_FILES['app_json_upload']['tmp_name'];
             $uploadedFileName = $_FILES['app_json_upload']['name'];
-            
+
             // Validate file extension
-            if (pathinfo($uploadedFileName, PATHINFO_EXTENSION) !== 'json') {
+            if (pathinfo($uploadedFileName, \PATHINFO_EXTENSION) !== 'json') {
                 $apps->addStatusMessage(_('Invalid file type. Only .json files are allowed.'), 'error');
+
                 break;
             }
-            
+
             $apps->addStatusMessage(sprintf(_('Uploaded file %s'), $uploadedFileName), 'info');
         } else {
             $apps->addStatusMessage(_('No JSON file provided'), 'error');
+
             break;
         }
-        
+
         // Import the JSON file
         if ($jsonFile && file_exists($jsonFile)) {
             try {
                 $updatedAppFields = $apps->importAppJson($jsonFile);
-                
+
                 if ($updatedAppFields) {
                     $apps->addStatusMessage(sprintf(_('Application %s (%s) imported successfully'), $apps->getRecordName(), $apps->getDataValue('uuid')), 'success');
-                    
+
                     // Redirect to the imported application
                     if ($apps->getMyKey()) {
                         WebPage::singleton()->redirect('app.php?id='.$apps->getMyKey());
@@ -97,7 +100,7 @@ switch ($action) {
                 }
             }
         }
-        
+
         break;
     case 'delete':
         $configurator = new \MultiFlexi\Configuration();

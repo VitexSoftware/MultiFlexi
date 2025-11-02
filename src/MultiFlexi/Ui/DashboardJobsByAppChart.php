@@ -29,12 +29,12 @@ class DashboardJobsByAppChart extends \Ease\Html\DivTag
     public function __construct()
     {
         parent::__construct();
-        
+
         $this->addItem(new \Ease\Html\H4Tag(_('Jobs by Application')));
-        
+
         try {
             $jobber = new \MultiFlexi\Job();
-            
+
             // Data pro graf - top 10 aplikací podle počtu jobů
             $appJobsData = $jobber->getFluentPDO()
                 ->from('job')
@@ -44,13 +44,14 @@ class DashboardJobsByAppChart extends \Ease\Html\DivTag
                 ->orderBy('job_count DESC')
                 ->limit(10)
                 ->fetchAll();
-            
+
             if (!empty($appJobsData)) {
                 $chartData = [];
+
                 foreach ($appJobsData as $row) {
                     $chartData[$row['name'] ?? _('Unknown')] = (int) $row['job_count'];
                 }
-                
+
                 $graph = new \Goat1000\SVGGraph\SVGGraph(600, 400, [
                     'back_colour' => '#ffffff',
                     'stroke_colour' => '#000',
@@ -68,7 +69,7 @@ class DashboardJobsByAppChart extends \Ease\Html\DivTag
                     'show_data_labels' => true,
                     'data_label_font_size' => 10,
                 ]);
-                
+
                 $graph->colours(['#3498db', '#2ecc71', '#f39c12', '#e74c3c', '#9b59b6', '#1abc9c', '#34495e', '#16a085', '#27ae60', '#2980b9']);
                 $graph->values($chartData);
                 $this->addItem(new \Ease\Html\DivTag($graph->fetch('BarGraph'), ['class' => 'chart-container']));

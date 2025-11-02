@@ -30,7 +30,7 @@ class DashboardWidgetsTest extends TestCase
     public function testDashboardMetricsCardsInstantiation(): void
     {
         $this->markTestSkipped('Requires database connection and environment setup');
-        
+
         // This would require database setup
         // $widget = new \MultiFlexi\Ui\DashboardMetricsCards();
         // $this->assertInstanceOf(\Ease\TWB4\Row::class, $widget);
@@ -42,7 +42,7 @@ class DashboardWidgetsTest extends TestCase
     public function testDashboardStatusCardsInstantiation(): void
     {
         $this->markTestSkipped('Requires database connection and environment setup');
-        
+
         // This would require database setup
         // $widget = new \MultiFlexi\Ui\DashboardStatusCards();
         // $this->assertInstanceOf(\Ease\TWB4\Row::class, $widget);
@@ -54,7 +54,7 @@ class DashboardWidgetsTest extends TestCase
     public function testDashboardJobsByAppChartInstantiation(): void
     {
         $this->markTestSkipped('Requires database connection and environment setup');
-        
+
         // This would require database setup
         // $widget = new \MultiFlexi\Ui\DashboardJobsByAppChart();
         // $this->assertInstanceOf(\Ease\Html\DivTag::class, $widget);
@@ -66,7 +66,7 @@ class DashboardWidgetsTest extends TestCase
     public function testDashboardJobsByCompanyChartInstantiation(): void
     {
         $this->markTestSkipped('Requires database connection and environment setup');
-        
+
         // This would require database setup
         // $widget = new \MultiFlexi\Ui\DashboardJobsByCompanyChart();
         // $this->assertInstanceOf(\Ease\Html\DivTag::class, $widget);
@@ -78,7 +78,7 @@ class DashboardWidgetsTest extends TestCase
     public function testDashboardTimelineChartInstantiation(): void
     {
         $this->markTestSkipped('Requires database connection and environment setup');
-        
+
         // This would require database setup
         // $widget = new \MultiFlexi\Ui\DashboardTimelineChart();
         // $this->assertInstanceOf(\Ease\Html\DivTag::class, $widget);
@@ -90,7 +90,7 @@ class DashboardWidgetsTest extends TestCase
     public function testDashboardIntervalChartInstantiation(): void
     {
         $this->markTestSkipped('Requires database connection and environment setup');
-        
+
         // This would require database setup
         // $widget = new \MultiFlexi\Ui\DashboardIntervalChart();
         // $this->assertInstanceOf(\Ease\Html\DivTag::class, $widget);
@@ -102,7 +102,7 @@ class DashboardWidgetsTest extends TestCase
     public function testDashboardRecentJobsTableInstantiation(): void
     {
         $this->markTestSkipped('Requires database connection and environment setup');
-        
+
         // This would require database setup
         // $widget = new \MultiFlexi\Ui\DashboardRecentJobsTable();
         // $this->assertInstanceOf(\Ease\Html\DivTag::class, $widget);
@@ -114,7 +114,7 @@ class DashboardWidgetsTest extends TestCase
     public function testDashboardStylesReturnsValidCss(): void
     {
         $styles = \MultiFlexi\Ui\DashboardStyles::getStyles();
-        
+
         $this->assertIsString($styles);
         $this->assertStringContainsString('.chart-container', $styles);
         $this->assertStringContainsString('.card', $styles);
@@ -129,7 +129,7 @@ class DashboardWidgetsTest extends TestCase
     public function testDashboardStylesContainsRequiredProperties(): void
     {
         $styles = \MultiFlexi\Ui\DashboardStyles::getStyles();
-        
+
         $this->assertStringContainsString('margin:', $styles);
         $this->assertStringContainsString('padding:', $styles);
         $this->assertStringContainsString('text-align:', $styles);

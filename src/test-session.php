@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 /**
- * Session Investigation Test Page
- * 
+ * Session Investigation Test Page.
+ *
  * This page displays the contents of the current PHP session
  * to help debug serialization issues.
  */
@@ -12,7 +12,7 @@ declare(strict_types=1);
 require_once __DIR__.'/init.php';
 
 // Start or resume session
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() === \PHP_SESSION_NONE) {
     session_start();
 }
 
@@ -34,26 +34,26 @@ if (session_status() === PHP_SESSION_NONE) {
 <body>
     <div class="container-fluid">
         <h1>Session Investigation Tool</h1>
-        <p class="text-muted">Session ID: <code><?= session_id() ?></code></p>
-        
+        <p class="text-muted">Session ID: <code><?php echo session_id(); ?></code></p>
+
         <div class="debug-section">
             <h2>Session Variables</h2>
             <pre><?php print_r($_SESSION); ?></pre>
         </div>
 
-        <?php if (isset($_SESSION['user']) && is_object($_SESSION['user'])): ?>
+        <?php if (isset($_SESSION['user']) && \is_object($_SESSION['user'])) { ?>
         <div class="debug-section">
             <h2>User Object Analysis</h2>
             <div class="card">
                 <div class="card-header">
-                    <strong>Class:</strong> <?= get_class($_SESSION['user']) ?>
+                    <strong>Class:</strong> <?php echo \get_class($_SESSION['user']); ?>
                 </div>
                 <div class="card-body">
                     <h5>Declared Properties</h5>
                     <?php
                     $userClass = new ReflectionClass($_SESSION['user']);
-                    $properties = $userClass->getProperties();
-                    ?>
+            $properties = $userClass->getProperties();
+            ?>
                     <table class="table table-sm property-table">
                         <thead>
                             <tr>
@@ -65,54 +65,67 @@ if (session_status() === PHP_SESSION_NONE) {
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($properties as $prop): ?>
+                        <?php foreach ($properties as $prop) { ?>
                             <tr>
-                                <td><?= $prop->getName() ?></td>
-                                <td><?= $prop->hasType() ? $prop->getType() : 'mixed' ?></td>
+                                <td><?php echo $prop->getName(); ?></td>
+                                <td><?php echo $prop->hasType() ? $prop->getType() : 'mixed'; ?></td>
                                 <td>
                                     <?php
-                                    if ($prop->isPublic()) echo '<span class="badge badge-success">public</span>';
-                                    if ($prop->isProtected()) echo '<span class="badge badge-warning">protected</span>';
-                                    if ($prop->isPrivate()) echo '<span class="badge badge-danger">private</span>';
-                                    ?>
+                            if ($prop->isPublic()) {
+                                echo '<span class="badge badge-success">public</span>';
+                            }
+
+                            if ($prop->isProtected()) {
+                                echo '<span class="badge badge-warning">protected</span>';
+                            }
+
+                            if ($prop->isPrivate()) {
+                                echo '<span class="badge badge-danger">private</span>';
+                            }
+
+                            ?>
                                 </td>
                                 <td>
                                     <?php
-                                    $prop->setAccessible(true);
-                                    $hasValue = $prop->isInitialized($_SESSION['user']);
-                                    echo $hasValue ? '<span class="badge badge-success">Yes</span>' : '<span class="badge badge-secondary">No</span>';
-                                    ?>
+                            $prop->setAccessible(true);
+                            $hasValue = $prop->isInitialized($_SESSION['user']);
+                            echo $hasValue ? '<span class="badge badge-success">Yes</span>' : '<span class="badge badge-secondary">No</span>';
+                            ?>
                                 </td>
                                 <td>
                                     <?php
-                                    if ($hasValue) {
-                                        $value = $prop->getValue($_SESSION['user']);
-                                        if (is_object($value)) {
-                                            echo '<em>Object: ' . get_class($value) . '</em>';
-                                        } elseif (is_array($value)) {
-                                            echo '<em>Array[' . count($value) . ']</em>';
-                                        } else {
-                                            echo htmlspecialchars(substr(var_export($value, true), 0, 50));
-                                        }
-                                    }
-                                    ?>
+                            if ($hasValue) {
+                                $value = $prop->getValue($_SESSION['user']);
+
+                                if (\is_object($value)) {
+                                    echo '<em>Object: '.$value::class.'</em>';
+                                } elseif (\is_array($value)) {
+                                    echo '<em>Array['.\count($value).']</em>';
+                                } else {
+                                    echo htmlspecialchars(substr(var_export($value, true), 0, 50));
+                                }
+                            }
+
+                            ?>
                                 </td>
                             </tr>
-                        <?php endforeach; ?>
+                        <?php }
+
+ ?>
                         </tbody>
                     </table>
 
-                    <?php if (method_exists($_SESSION['user'], '__sleep')): ?>
+                    <?php if (method_exists($_SESSION['user'], '__sleep')) { ?>
                     <div class="alert alert-info">
                         <h5>__sleep() Method Found</h5>
                         <p>This object has a custom __sleep() method. Properties returned by __sleep():</p>
                         <?php
-                        $reflection = new ReflectionMethod(get_class($_SESSION['user']), '__sleep');
+                        $reflection = new ReflectionMethod(\get_class($_SESSION['user']), '__sleep');
                         $reflection->setAccessible(true);
                         $sleepProps = $reflection->invoke($_SESSION['user']);
                         ?>
                         <pre><?php print_r($sleepProps); ?></pre>
-                        
+
                         <h6 class="mt-3">Validation Check:</h6>
                         <table class="table table-sm">
                             <thead>
@@ -124,7 +137,7 @@ if (session_status() === PHP_SESSION_NONE) {
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ($sleepProps as $propName): ?>
+                            <?php foreach ($sleepProps as $propName) { ?>
                                 <?php
                                 try {
                                     $prop = $userClass->getProperty($propName);
@@ -139,61 +152,73 @@ if (session_status() === PHP_SESSION_NONE) {
                                     $status = 'ERROR: Property not declared!';
                                     $statusClass = 'danger';
                                 }
+
                                 ?>
                                 <tr>
-                                    <td><code><?= $propName ?></code></td>
-                                    <td><?= $declared ? '✓' : '✗' ?></td>
-                                    <td><?= $initialized ? '✓' : '✗' ?></td>
-                                    <td><span class="badge badge-<?= $statusClass ?>"><?= $status ?></span></td>
+                                    <td><code><?php echo $propName; ?></code></td>
+                                    <td><?php echo $declared ? '✓' : '✗'; ?></td>
+                                    <td><?php echo $initialized ? '✓' : '✗'; ?></td>
+                                    <td><span class="badge badge-<?php echo $statusClass; ?>"><?php echo $status; ?></span></td>
                                 </tr>
-                            <?php endforeach; ?>
+                            <?php }
+
+ ?>
                             </tbody>
                         </table>
                     </div>
-                    <?php endif; ?>
+                    <?php }
+
+ ?>
                 </div>
             </div>
         </div>
-        <?php endif; ?>
+        <?php }
+
+ ?>
 
         <?php
         // Check all session objects
         $sessionObjects = [];
-        foreach ($_SESSION as $key => $value) {
-            if (is_object($value)) {
-                $sessionObjects[$key] = $value;
-            }
-        }
-        ?>
 
-        <?php if (!empty($sessionObjects)): ?>
+foreach ($_SESSION as $key => $value) {
+    if (\is_object($value)) {
+        $sessionObjects[$key] = $value;
+    }
+}
+
+?>
+
+        <?php if (!empty($sessionObjects)) { ?>
         <div class="debug-section">
             <h2>All Session Objects</h2>
             <div class="accordion" id="objectAccordion">
-                <?php $index = 0; foreach ($sessionObjects as $key => $object): $index++; ?>
+                <?php $index = 0;
+
+            foreach ($sessionObjects as $key => $object) {
+                ++$index; ?>
                 <div class="card">
-                    <div class="card-header" id="heading<?= $index ?>">
+                    <div class="card-header" id="heading<?php echo $index; ?>">
                         <h5 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?= $index ?>">
-                                <strong><?= htmlspecialchars($key) ?></strong> - <?= get_class($object) ?>
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?php echo $index; ?>">
+                                <strong><?php echo htmlspecialchars($key); ?></strong> - <?php echo $object::class; ?>
                             </button>
                         </h5>
                     </div>
-                    <div id="collapse<?= $index ?>" class="collapse" data-parent="#objectAccordion">
+                    <div id="collapse<?php echo $index; ?>" class="collapse" data-parent="#objectAccordion">
                         <div class="card-body">
-                            <?php if (method_exists($object, '__sleep')): ?>
+                            <?php if (method_exists($object, '__sleep')) { ?>
                                 <?php
                                 $objClass = new ReflectionClass($object);
-                                $reflection = new ReflectionMethod(get_class($object), '__sleep');
+                                $reflection = new ReflectionMethod($object::class, '__sleep');
                                 $reflection->setAccessible(true);
                                 $sleepProps = $reflection->invoke($object);
                                 ?>
                                 <h6>__sleep() returns:</h6>
                                 <pre><?php print_r($sleepProps); ?></pre>
-                                
+
                                 <h6>Property Check:</h6>
                                 <ul class="list-group">
-                                <?php foreach ($sleepProps as $propName): ?>
+                                <?php foreach ($sleepProps as $propName) { ?>
                                     <?php
                                     try {
                                         $prop = $objClass->getProperty($propName);
@@ -206,38 +231,51 @@ if (session_status() === PHP_SESSION_NONE) {
                                         $statusClass = 'danger';
                                         $initialized = false;
                                     }
+
                                     ?>
-                                    <li class="list-group-item list-group-item-<?= $statusClass ?>">
-                                        <?= $statusIcon ?> <code><?= $propName ?></code>
-                                        <?php if (!$initialized): ?>
+                                    <li class="list-group-item list-group-item-<?php echo $statusClass; ?>">
+                                        <?php echo $statusIcon; ?> <code><?php echo $propName; ?></code>
+                                        <?php if (!$initialized) { ?>
                                             - Not declared or not initialized!
-                                        <?php endif; ?>
+                                        <?php }
+
+ ?>
                                     </li>
-                                <?php endforeach; ?>
+                                <?php }
+
+ ?>
                                 </ul>
-                            <?php else: ?>
+                            <?php } else { ?>
                                 <p class="text-muted">No custom __sleep() method</p>
-                            <?php endif; ?>
+                            <?php }
+
+ ?>
                         </div>
                     </div>
                 </div>
-                <?php endforeach; ?>
+                <?php }
+
+ ?>
             </div>
         </div>
-        <?php endif; ?>
+        <?php }
+
+ ?>
 
         <div class="debug-section">
             <h2>Session File Content (Raw)</h2>
             <?php
             $sessionPath = session_save_path() ?: '/var/lib/php/sessions';
-            $sessionFile = $sessionPath . '/sess_' . session_id();
-            if (file_exists($sessionFile) && is_readable($sessionFile)) {
-                $content = file_get_contents($sessionFile);
-                echo '<pre>' . htmlspecialchars($content) . '</pre>';
-            } else {
-                echo '<p class="text-danger">Session file not accessible: ' . htmlspecialchars($sessionFile) . '</p>';
-            }
-            ?>
+$sessionFile = $sessionPath.'/sess_'.session_id();
+
+if (file_exists($sessionFile) && is_readable($sessionFile)) {
+    $content = file_get_contents($sessionFile);
+    echo '<pre>'.htmlspecialchars($content).'</pre>';
+} else {
+    echo '<p class="text-danger">Session file not accessible: '.htmlspecialchars($sessionFile).'</p>';
+}
+
+?>
         </div>
 
         <div class="debug-section">

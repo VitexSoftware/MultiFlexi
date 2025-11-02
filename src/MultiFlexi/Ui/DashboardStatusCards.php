@@ -29,18 +29,18 @@ class DashboardStatusCards extends \Ease\TWB4\Row
     public function __construct()
     {
         parent::__construct();
-        
+
         $jobber = new \MultiFlexi\Job();
-        
+
         $totalJobs = $jobber->listingQuery()->count();
         $successJobs = $jobber->listingQuery()->where('exitcode', 0)->where('exitcode IS NOT NULL')->count();
         $failedJobs = $jobber->listingQuery()->where('exitcode <> 0')->where('exitcode IS NOT NULL')->count();
         $runningJobs = $jobber->listingQuery()->where('begin IS NOT NULL')->where('end IS NULL')->count();
-        
+
         // Dnešní joby
         $todayCondition = $jobber->todaysCond('begin');
         $todayJobs = $jobber->listingQuery()->where($todayCondition)->count();
-        
+
         // Úspěšné joby
         $successRate = $totalJobs > 0 ? round(($successJobs / $totalJobs) * 100) : 0;
         $card5 = new \Ease\TWB4\Card(null, ['class' => 'bg-success text-white']);
@@ -51,7 +51,7 @@ class DashboardStatusCards extends \Ease\TWB4\Row
         $card5Body->addItem(new \Ease\Html\ATag('joblist.php?filter=success', '✓ '._('View All'), ['class' => 'btn btn-light btn-sm mt-2']));
         $card5->addItem($card5Body);
         $this->addColumn(3, $card5);
-        
+
         // Neúspěšné joby
         $failureRate = $totalJobs > 0 ? round(($failedJobs / $totalJobs) * 100) : 0;
         $card6 = new \Ease\TWB4\Card(null, ['class' => 'bg-danger text-white']);
@@ -62,7 +62,7 @@ class DashboardStatusCards extends \Ease\TWB4\Row
         $card6Body->addItem(new \Ease\Html\ATag('joblist.php?filter=failed', '✗ '._('View All'), ['class' => 'btn btn-light btn-sm mt-2']));
         $card6->addItem($card6Body);
         $this->addColumn(3, $card6);
-        
+
         // Běžící joby
         $card7 = new \Ease\TWB4\Card(null, ['class' => 'bg-primary text-white']);
         $card7Body = new \Ease\Html\DivTag(null, ['class' => 'card-body text-center']);
@@ -72,7 +72,7 @@ class DashboardStatusCards extends \Ease\TWB4\Row
         $card7Body->addItem(new \Ease\Html\ATag('joblist.php?filter=running', '▶️ '._('View All'), ['class' => 'btn btn-light btn-sm mt-2']));
         $card7->addItem($card7Body);
         $this->addColumn(3, $card7);
-        
+
         // Dnešní joby
         $card8 = new \Ease\TWB4\Card(null, ['class' => 'bg-info text-white']);
         $card8Body = new \Ease\Html\DivTag(null, ['class' => 'card-body text-center']);

@@ -42,38 +42,28 @@ class OtelMetricsExporter extends \Ease\Sand
 
     /**
      * Meter instance for creating metrics.
-     *
-     * @var mixed
      */
-    private $meter;
+    private mixed $meter;
 
     /**
      * Counter: Total jobs executed.
-     *
-     * @var mixed
      */
-    private $jobsTotal;
+    private mixed $jobsTotal;
 
     /**
      * Counter: Successful jobs.
-     *
-     * @var mixed
      */
-    private $jobsSuccess;
+    private mixed $jobsSuccess;
 
     /**
      * Counter: Failed jobs.
-     *
-     * @var mixed
      */
-    private $jobsFailed;
+    private mixed $jobsFailed;
 
     /**
      * Histogram: Job execution duration.
-     *
-     * @var mixed
      */
-    private $jobDuration;
+    private mixed $jobDuration;
 
     /**
      * Is OpenTelemetry enabled.
@@ -111,115 +101,6 @@ class OtelMetricsExporter extends \Ease\Sand
     }
 
     /**
-     * Initialize MeterProvider with OTLP exporter.
-     */
-    private function initializeMeterProvider(): void
-    {
-        $endpoint = \Ease\Shared::cfg('OTEL_EXPORTER_OTLP_ENDPOINT', 'http://localhost:4318');
-        $protocol = \Ease\Shared::cfg('OTEL_EXPORTER_OTLP_PROTOCOL', 'http/json');
-
-        // Append metrics path for HTTP/JSON protocol
-        if ($protocol === 'http/json' || $protocol === 'http/protobuf') {
-            if (!str_ends_with($endpoint, '/v1/metrics')) {
-                $endpoint = rtrim($endpoint, '/').'}/v1/metrics';
-            }
-        }
-
-        $transport = (new PsrTransportFactory())->create(
-            $endpoint,
-            'application/json'
-        );
-
-        $exporter = new MetricExporter($transport);
-        $reader = new ExportingReader($exporter);
-
-        $this->meterProvider = MeterProvider::builder()
-            ->addReader($reader)
-            ->build();
-
-        $serviceName = \Ease\Shared::cfg('OTEL_SERVICE_NAME', 'multiflexi');
-        $this->meter = $this->meterProvider->getMeter($serviceName);
-    }
-
-    /**
-     * Initialize all metrics (counters, histograms, gauges).
-     */
-    private function initializeMetrics(): void
-    {
-        // Counters
-        $this->jobsTotal = $this->meter->createCounter(
-            'multiflexi.jobs.total',
-            'jobs',
-            'Total number of jobs executed'
-        );
-
-        $this->jobsSuccess = $this->meter->createCounter(
-            'multiflexi.jobs.success',
-            'jobs',
-            'Number of successful jobs (exitcode=0)'
-        );
-
-        $this->jobsFailed = $this->meter->createCounter(
-            'multiflexi.jobs.failed',
-            'jobs',
-            'Number of failed jobs (exitcode≠0)'
-        );
-
-        // Histogram for job duration
-        $this->jobDuration = $this->meter->createHistogram(
-            'multiflexi.job.duration',
-            'seconds',
-            'Job execution duration in seconds'
-        );
-
-        // Observable Gauges for real-time metrics
-        $this->meter->createObservableGauge(
-            'multiflexi.jobs.running',
-            'jobs',
-            'Currently running jobs'
-        )->observe(function (ObserverInterface $observer): void {
-            $count = $this->getRunningJobsCount();
-            $observer->observe($count);
-        });
-
-        $this->meter->createObservableGauge(
-            'multiflexi.applications.total',
-            'applications',
-            'Total number of applications'
-        )->observe(function (ObserverInterface $observer): void {
-            $count = $this->getApplicationsCount();
-            $observer->observe($count);
-        });
-
-        $this->meter->createObservableGauge(
-            'multiflexi.applications.enabled',
-            'applications',
-            'Number of enabled applications'
-        )->observe(function (ObserverInterface $observer): void {
-            $count = $this->getEnabledApplicationsCount();
-            $observer->observe($count);
-        });
-
-        $this->meter->createObservableGauge(
-            'multiflexi.companies.total',
-            'companies',
-            'Total number of companies'
-        )->observe(function (ObserverInterface $observer): void {
-            $count = $this->getCompaniesCount();
-            $observer->observe($count);
-        });
-
-        $this->meter->createObservableGauge(
-            'multiflexi.runtemplates.total',
-            'runtemplates',
-            'Total number of run templates'
-        )->observe(function (ObserverInterface $observer): void {
-            $count = $this->getRuntemplatesCount();
-            $observer->observe($count);
-        });
-    }
-
-    /**
      * Record job start event.
      *
      * @param int    $jobId           Job ID
@@ -237,7 +118,7 @@ class OtelMetricsExporter extends \Ease\Sand
         int $companyId,
         string $companyName,
         int $runtemplateId,
-        string $runtemplateName
+        string $runtemplateName,
     ): void {
         if (!$this->enabled) {
             return;
@@ -285,8 +166,159 @@ class OtelMetricsExporter extends \Ease\Sand
         $this->addStatusMessage(sprintf(
             _('OTel: Recorded job end, exitcode=%d, duration=%.2fs'),
             $exitCode,
-            $duration
+            $duration,
         ), 'debug');
+    }
+
+    /**
+     * Force flush metrics to exporter.
+     */
+    public function flush(): void
+    {
+        if (!$this->enabled || null === $this->meterProvider) {
+            return;
+        }
+
+        try {
+            $this->meterProvider->forceFlush();
+            $this->addStatusMessage(_('OTel: Metrics flushed'), 'debug');
+        } catch (\Exception $e) {
+            $this->addStatusMessage(sprintf(_('Error flushing metrics: %s'), $e->getMessage()), 'error');
+        }
+    }
+
+    /**
+     * Shutdown metrics provider.
+     */
+    public function shutdown(): void
+    {
+        if (!$this->enabled || null === $this->meterProvider) {
+            return;
+        }
+
+        try {
+            $this->meterProvider->shutdown();
+            $this->addStatusMessage(_('OTel: Metrics provider shutdown'), 'debug');
+        } catch (\Exception $e) {
+            $this->addStatusMessage(sprintf(_('Error shutting down metrics: %s'), $e->getMessage()), 'error');
+        }
+    }
+
+    /**
+     * Check if OpenTelemetry is enabled and available.
+     */
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * Initialize MeterProvider with OTLP exporter.
+     */
+    private function initializeMeterProvider(): void
+    {
+        $endpoint = \Ease\Shared::cfg('OTEL_EXPORTER_OTLP_ENDPOINT', 'http://localhost:4318');
+        $protocol = \Ease\Shared::cfg('OTEL_EXPORTER_OTLP_PROTOCOL', 'http/json');
+
+        // Append metrics path for HTTP/JSON protocol
+        if ($protocol === 'http/json' || $protocol === 'http/protobuf') {
+            if (!str_ends_with($endpoint, '/v1/metrics')) {
+                $endpoint = rtrim($endpoint, '/').'}/v1/metrics';
+            }
+        }
+
+        $transport = (new PsrTransportFactory())->create(
+            $endpoint,
+            'application/json',
+        );
+
+        $exporter = new MetricExporter($transport);
+        $reader = new ExportingReader($exporter);
+
+        $this->meterProvider = MeterProvider::builder()
+            ->addReader($reader)
+            ->build();
+
+        $serviceName = \Ease\Shared::cfg('OTEL_SERVICE_NAME', 'multiflexi');
+        $this->meter = $this->meterProvider->getMeter($serviceName);
+    }
+
+    /**
+     * Initialize all metrics (counters, histograms, gauges).
+     */
+    private function initializeMetrics(): void
+    {
+        // Counters
+        $this->jobsTotal = $this->meter->createCounter(
+            'multiflexi.jobs.total',
+            'jobs',
+            'Total number of jobs executed',
+        );
+
+        $this->jobsSuccess = $this->meter->createCounter(
+            'multiflexi.jobs.success',
+            'jobs',
+            'Number of successful jobs (exitcode=0)',
+        );
+
+        $this->jobsFailed = $this->meter->createCounter(
+            'multiflexi.jobs.failed',
+            'jobs',
+            'Number of failed jobs (exitcode≠0)',
+        );
+
+        // Histogram for job duration
+        $this->jobDuration = $this->meter->createHistogram(
+            'multiflexi.job.duration',
+            'seconds',
+            'Job execution duration in seconds',
+        );
+
+        // Observable Gauges for real-time metrics
+        $this->meter->createObservableGauge(
+            'multiflexi.jobs.running',
+            'jobs',
+            'Currently running jobs',
+        )->observe(function (ObserverInterface $observer): void {
+            $count = $this->getRunningJobsCount();
+            $observer->observe($count);
+        });
+
+        $this->meter->createObservableGauge(
+            'multiflexi.applications.total',
+            'applications',
+            'Total number of applications',
+        )->observe(function (ObserverInterface $observer): void {
+            $count = $this->getApplicationsCount();
+            $observer->observe($count);
+        });
+
+        $this->meter->createObservableGauge(
+            'multiflexi.applications.enabled',
+            'applications',
+            'Number of enabled applications',
+        )->observe(function (ObserverInterface $observer): void {
+            $count = $this->getEnabledApplicationsCount();
+            $observer->observe($count);
+        });
+
+        $this->meter->createObservableGauge(
+            'multiflexi.companies.total',
+            'companies',
+            'Total number of companies',
+        )->observe(function (ObserverInterface $observer): void {
+            $count = $this->getCompaniesCount();
+            $observer->observe($count);
+        });
+
+        $this->meter->createObservableGauge(
+            'multiflexi.runtemplates.total',
+            'runtemplates',
+            'Total number of run templates',
+        )->observe(function (ObserverInterface $observer): void {
+            $count = $this->getRuntemplatesCount();
+            $observer->observe($count);
+        });
     }
 
     /**
@@ -370,47 +402,5 @@ class OtelMetricsExporter extends \Ease\Sand
 
             return 0;
         }
-    }
-
-    /**
-     * Force flush metrics to exporter.
-     */
-    public function flush(): void
-    {
-        if (!$this->enabled || null === $this->meterProvider) {
-            return;
-        }
-
-        try {
-            $this->meterProvider->forceFlush();
-            $this->addStatusMessage(_('OTel: Metrics flushed'), 'debug');
-        } catch (\Exception $e) {
-            $this->addStatusMessage(sprintf(_('Error flushing metrics: %s'), $e->getMessage()), 'error');
-        }
-    }
-
-    /**
-     * Shutdown metrics provider.
-     */
-    public function shutdown(): void
-    {
-        if (!$this->enabled || null === $this->meterProvider) {
-            return;
-        }
-
-        try {
-            $this->meterProvider->shutdown();
-            $this->addStatusMessage(_('OTel: Metrics provider shutdown'), 'debug');
-        } catch (\Exception $e) {
-            $this->addStatusMessage(sprintf(_('Error shutting down metrics: %s'), $e->getMessage()), 'error');
-        }
-    }
-
-    /**
-     * Check if OpenTelemetry is enabled and available.
-     */
-    public function isEnabled(): bool
-    {
-        return $this->enabled;
     }
 }

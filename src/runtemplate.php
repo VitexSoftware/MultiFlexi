@@ -28,8 +28,8 @@ $runTemplate = new RunTemplate(WebPage::getRequestValue('id', 'int'));
 $actions = new \MultiFlexi\ActionConfig();
 
 if (WebPage::isPosted()) {
-    unset($_POST['csrf_token']);
-    unset($_REQUEST['csrf_token']);
+    unset($_POST['csrf_token'], $_REQUEST['csrf_token']);
+
     $succesActions = ActionsChooser::toggles('success');
     $failActions = ActionsChooser::toggles('fail');
     $runTemplate->setDataValue('fail', serialize($failActions));
@@ -37,11 +37,14 @@ if (WebPage::isPosted()) {
     $runTemplate->saveToSQL();
 
     $successConfig = ActionsChooser::formModuleCofig('success');
-    if (is_array($successConfig) && !empty($successConfig)) {
+
+    if (\is_array($successConfig) && !empty($successConfig)) {
         $actions->saveModeConfigs('success', $successConfig, $runTemplate->getMyKey());
     }
+
     $failConfig = ActionsChooser::formModuleCofig('fail');
-    if (is_array($failConfig) && !empty($failConfig)) {
+
+    if (\is_array($failConfig) && !empty($failConfig)) {
         $actions->saveModeConfigs('fail', $failConfig, $runTemplate->getMyKey());
     }
 } else {

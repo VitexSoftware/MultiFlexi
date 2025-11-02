@@ -478,22 +478,23 @@ EOD;
             $name = $properties['name'];
             $properties['valueColumn'] = \array_key_exists('valueColumn', $properties) ? addslashes($properties['valueColumn']) : $properties['name'];
             $properties['data'] = $name;
-            
+
             // Extract render function if present (to avoid quoting it)
             $renderFunction = null;
+
             if (isset($properties['render'])) {
                 $renderFunction = $properties['render'];
                 unset($properties['render']);
             }
-            
+
             $columnDef = \Ease\Part::partPropertiesToString($properties);
-            
+
             // Add render function without quotes
             if ($renderFunction !== null) {
-                $columnDef .= ($columnDef ? ', ' : '') . 'render: ' . $renderFunction;
+                $columnDef .= ($columnDef ? ', ' : '').'render: '.$renderFunction;
             }
-            
-            $parts[] = '{' . $columnDef . '}';
+
+            $parts[] = '{'.$columnDef.'}';
         }
 
         return implode(", \n", $parts);

@@ -39,13 +39,13 @@ class TelemetryTestCommand extends Command
                 'e',
                 InputOption::VALUE_OPTIONAL,
                 'Override OTLP endpoint URL',
-                null
+                null,
             )
             ->addOption(
                 'disable-gauges',
                 null,
                 InputOption::VALUE_NONE,
-                'Disable observable gauges (only test counters and histograms)'
+                'Disable observable gauges (only test counters and histograms)',
             );
     }
 
@@ -101,7 +101,7 @@ class TelemetryTestCommand extends Command
                 1, // test company ID
                 'TestCompany',
                 1, // test runtemplate ID
-                'TestRunTemplate'
+                'TestRunTemplate',
             );
             $output->writeln('<info>✓ Job start metric recorded</info>');
             $output->writeln('');

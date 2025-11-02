@@ -159,23 +159,23 @@ class MainMenuTest extends \PHPUnit\Framework\TestCase
     public function testsearchFrom(): void
     {
         $searchForm = $this->object->searchFrom();
-        
+
         // Verify search form is a SecureForm instance
         $this->assertInstanceOf('\\MultiFlexi\\Ui\\SecureForm', $searchForm);
-        
+
         // Verify form has proper CSS classes for responsive layout
         $formHtml = $searchForm->__toString();
         $this->assertStringContainsString('form-inline', $formHtml);
         $this->assertStringContainsString('flex-wrap: nowrap', $formHtml);
-        
+
         // Verify search input field exists with proper styling
         $this->assertStringContainsString('name="search"', $formHtml);
         $this->assertStringContainsString('type="search"', $formHtml);
         $this->assertStringContainsString('width: 100px', $formHtml);
-        
+
         // Verify dropdown selector exists
         $this->assertStringContainsString('name="what"', $formHtml);
-        
+
         // Verify submit button exists
         $this->assertStringContainsString('type="submit"', $formHtml);
     }

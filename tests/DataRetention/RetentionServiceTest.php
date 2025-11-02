@@ -28,7 +28,6 @@ use PHPUnit\Framework\TestCase;
 class RetentionServiceTest extends TestCase
 {
     private RetentionService $retentionService;
-
     private RetentionPolicyManager $policyManager;
 
     /**
