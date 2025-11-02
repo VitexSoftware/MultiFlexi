@@ -25,6 +25,8 @@ Description: run several tools on defined abraflexi servers
 Package: multiflexi-common
 Multi-Arch: foreign
 Depends: ${misc:Depends}
+Replaces: multiflexi (<< 2.0.0)
+Breaks: multiflexi (<< 2.0.0)
 Suggests: multiflexi-cli, multiflexi-web
 Architecture: all
 Description: shared multiflexi configuration
