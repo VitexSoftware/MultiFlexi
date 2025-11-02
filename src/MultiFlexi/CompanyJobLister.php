@@ -30,6 +30,7 @@ class CompanyJobLister extends CompanyJob
     public function __construct($init = null, $filter = [])
     {
         parent::__construct($init, $filter);
+        $this->setObjectName('Molecule');
 
         // Restore filter type from URL parameter if present
         if (isset($filter['_jobfilter'])) {
