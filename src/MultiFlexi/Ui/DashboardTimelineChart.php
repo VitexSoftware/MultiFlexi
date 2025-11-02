@@ -29,15 +29,15 @@ class DashboardTimelineChart extends \Ease\Html\DivTag
     public function __construct()
     {
         parent::__construct();
-        
+
         $this->addItem(new \Ease\Html\H4Tag(_('Jobs Execution Timeline (Last 7 Days)')));
-        
+
         try {
             $jobber = new \MultiFlexi\Job();
-            
+
             // Data pro timeline - joby za posledních 7 dní
             $sevenDaysAgo = (new \DateTime())->modify('-7 days')->format('Y-m-d');
-            
+
             $timelineData = $jobber->getFluentPDO()
                 ->from('job')
                 ->select('DATE(begin) as job_date, COUNT(*) as total_jobs, SUM(CASE WHEN exitcode = 0 THEN 1 ELSE 0 END) as success_jobs, SUM(CASE WHEN exitcode != 0 AND exitcode IS NOT NULL THEN 1 ELSE 0 END) as failed_jobs')
@@ -46,18 +46,18 @@ class DashboardTimelineChart extends \Ease\Html\DivTag
                 ->groupBy('DATE(begin)')
                 ->orderBy('job_date ASC')
                 ->fetchAll();
-            
+
             if (!empty($timelineData)) {
                 $dates = [];
                 $successData = [];
                 $failData = [];
-                
+
                 foreach ($timelineData as $row) {
                     $dates[] = $row['job_date'];
                     $successData[] = (int) $row['success_jobs'];
                     $failData[] = (int) $row['failed_jobs'];
                 }
-                
+
                 $graph = new \Goat1000\SVGGraph\SVGGraph(1200, 400, [
                     'back_colour' => '#ffffff',
                     'stroke_colour' => '#000',
@@ -79,7 +79,7 @@ class DashboardTimelineChart extends \Ease\Html\DivTag
                     'legend_position' => 'top right 10 10',
                     'legend_colour' => '#000',
                 ]);
-                
+
                 $graph->colours(['#2ecc71', '#e74c3c']);
                 $graph->values(['success' => array_combine($dates, $successData), 'fail' => array_combine($dates, $failData)]);
                 $this->addItem(new \Ease\Html\DivTag($graph->fetch('MultiLineGraph'), ['class' => 'chart-container']));

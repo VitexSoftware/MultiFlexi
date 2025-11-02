@@ -108,7 +108,7 @@ EOD);
       };
       $('.editable').editable();
 EOD
-        , '', true);
+            , '', true);
 
         $runtemplateTabs = new \Ease\TWB4\Tabs();
         $runtemplateTabs->addTab(_('Jobs'), [$runtemplateJobs, new RunTemplateJobsLastMonthChart($runtemplate)]);

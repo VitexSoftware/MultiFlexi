@@ -466,7 +466,7 @@ EOD;
         $masterKey = self::getMasterKey();
         $data = base64_decode($encryptedKey, true);
 
-        if ($data === false || strlen($data) < 16) {
+        if ($data === false || \strlen($data) < 16) {
             throw new \RuntimeException('Invalid encrypted key data');
         }
 

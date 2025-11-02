@@ -20,6 +20,7 @@ require_once './init.php';
 WebPage::singleton()->onlyForLogged();
 
 $stepParam = WebPage::getRequestValue('step');
+
 if ($stepParam === 'finish' || $stepParam === 'complete') {
     $step = $stepParam;
 } else {
@@ -29,6 +30,7 @@ if ($stepParam === 'finish' || $stepParam === 'complete') {
 // Reset wizard data when starting fresh (step 1 without POST)
 if ($step === 1 && !WebPage::singleton()->isPosted()) {
     $resetParam = WebPage::getRequestValue('reset');
+
     if ($resetParam === '1' || !isset($_SESSION['activation_wizard'])) {
         ActivationWizard::clearWizardData();
     }
@@ -58,7 +60,7 @@ if (WebPage::singleton()->isPosted()) {
             break;
         case 4:
             // Step 3 -> Step 4: Create RunTemplate
-            if (isset($postData['company_id']) && isset($postData['app_id']) && isset($postData['runtemplate_name'])) {
+            if (isset($postData['company_id'], $postData['app_id'], $postData['runtemplate_name'])) {
                 $runTemplate = new \MultiFlexi\RunTemplate();
                 $runTemplate->setDataValue('app_id', (int) $postData['app_id']);
                 $runTemplate->setDataValue('company_id', (int) $postData['company_id']);
@@ -86,14 +88,15 @@ if (WebPage::singleton()->isPosted()) {
             // Step 4 -> Step 5: Assign credentials
             if (isset($postData['runtemplate_id'])) {
                 $runtemplateId = (int) $postData['runtemplate_id'];
-                
+
                 // Only process credentials if they are provided
-                if (isset($postData['credential']) && is_array($postData['credential'])) {
+                if (isset($postData['credential']) && \is_array($postData['credential'])) {
                     $rtplcrd = new \MultiFlexi\RunTplCreds();
-                    
+
                     // Get currently assigned credentials
                     $existingBindings = [];
                     $existingQuery = $rtplcrd->listingQuery()->where('runtemplate_id', $runtemplateId)->fetchAll();
+
                     foreach ($existingQuery as $binding) {
                         $existingBindings[$binding['credentials_id']] = true;
                     }
@@ -101,6 +104,7 @@ if (WebPage::singleton()->isPosted()) {
                     foreach ($postData['credential'] as $reqType => $credId) {
                         if ($credId && is_numeric($credId)) {
                             $credIdInt = (int) $credId;
+
                             // Only bind if not already bound
                             if (!isset($existingBindings[$credIdInt])) {
                                 $rtplcrd->bind($runtemplateId, $credIdInt, $reqType);
@@ -128,8 +132,9 @@ if (WebPage::singleton()->isPosted()) {
 
                 // Filter only valid configuration fields
                 $cleanedPostData = [];
+
                 foreach ($postData as $key => $value) {
-                    if (in_array($key, $validFields, true)) {
+                    if (\in_array($key, $validFields, true)) {
                         $cleanedPostData[$key] = $value;
                     }
                 }
@@ -162,32 +167,32 @@ if (WebPage::singleton()->isPosted()) {
                 $runTemplate = new \MultiFlexi\RunTemplate($runtemplateId);
                 $app = new \MultiFlexi\Application($runTemplate->getDataValue('app_id'));
                 $company = new \MultiFlexi\Company($runTemplate->getDataValue('company_id'));
-                
+
                 // Save actions
                 $successActions = ActionsChooser::toggles('success');
                 $failActions = ActionsChooser::toggles('fail');
                 $runTemplate->setDataValue('fail', serialize($failActions));
                 $runTemplate->setDataValue('success', serialize($successActions));
-                
+
                 // Only save if we have valid data (app_id exists)
                 if ($runTemplate->getDataValue('app_id') && $runTemplate->getMyKey()) {
                     $runTemplate->saveToSQL();
-                    
+
                     // Save action configurations
                     $actions = new \MultiFlexi\ActionConfig();
                     $actions->saveModeConfigs('success', ActionsChooser::formModuleCofig('success'), $runTemplate->getMyKey());
                     $actions->saveModeConfigs('fail', ActionsChooser::formModuleCofig('fail'), $runTemplate->getMyKey());
-                    
+
                     // Success message
                     $successMessage = sprintf(
                         _('RunTemplate #%d "%s" successfully created for application "%s" and company "%s".'),
                         $runTemplate->getMyKey(),
                         $runTemplate->getRecordName(),
                         $app->getRecordName(),
-                        $company->getRecordName()
+                        $company->getRecordName(),
                     );
                     $runTemplate->addStatusMessage($successMessage, 'success');
-                    
+
                     // Don't clear wizard data yet, we need it for summary page (step 7)
                 }
             }
@@ -199,7 +204,8 @@ if (WebPage::singleton()->isPosted()) {
 WebPage::singleton()->addItem(new PageTop(_('Application Activation Wizard')));
 
 // Add custom CSS for wizard
-WebPage::singleton()->addCss('
+WebPage::singleton()->addCss(<<<'EOD'
+
 .activation-wizard .wizard-steps {
     margin-bottom: 2rem;
 }
@@ -225,7 +231,8 @@ WebPage::singleton()->addCss('
     padding-top: 1rem;
     border-top: 1px solid #dee2e6;
 }
-');
+
+EOD);
 
 // Show completion page or wizard
 // Load runtemplateId from session if not set (when accessing completion/finish page directly)
@@ -237,12 +244,13 @@ if (($step === 'complete' || $step === 'finish') && !isset($runtemplateId)) {
         // No wizard data in session - redirect to start or show message
         $noDataMessage = new \Ease\TWB4\Alert(
             'warning',
-            '⚠️ ' . _('No activation wizard data found. Please start a new activation.') . '<br>' .
-            '<a href="activation-wizard.php?reset=1" class="btn btn-primary mt-2">' . _('Start New Activation') . '</a>'
+            '⚠️ '._('No activation wizard data found. Please start a new activation.').'<br>'.
+            '<a href="activation-wizard.php?reset=1" class="btn btn-primary mt-2">'._('Start New Activation').'</a>',
         );
         WebPage::singleton()->container->addItem($noDataMessage);
         WebPage::singleton()->addItem(new PageBottom());
         WebPage::singleton()->draw();
+
         exit;
     }
 }
@@ -251,127 +259,134 @@ if ($step === 'complete' && isset($runtemplateId)) {
     $runTemplate = new \MultiFlexi\RunTemplate($runtemplateId);
     $app = new \MultiFlexi\Application($runTemplate->getDataValue('app_id'));
     $company = new \MultiFlexi\Company($runTemplate->getDataValue('company_id'));
-    
+
     $completionCard = new \Ease\TWB4\Card(
-        '🎉 ' . _('Activation Complete'),
-        'success'
+        '🎉 '._('Activation Complete'),
+        'success',
     );
-    
+
     $completionCard->addItem(new \Ease\Html\H4Tag(_('RunTemplate Summary')));
-    
+
     // Create summary table
     $summaryTable = new \Ease\Html\TableTag(null, ['class' => 'table table-bordered']);
     $summaryTable->addRowColumns([
         new \Ease\Html\StrongTag(_('RunTemplate ID')),
-        '#' . $runTemplate->getMyKey()
+        '#'.$runTemplate->getMyKey(),
     ]);
     $summaryTable->addRowColumns([
         new \Ease\Html\StrongTag(_('Name')),
-        $runTemplate->getRecordName()
+        $runTemplate->getRecordName(),
     ]);
     $summaryTable->addRowColumns([
         new \Ease\Html\StrongTag(_('Application')),
         new \Ease\Html\SpanTag([
-            $app->getDataValue('uuid') ? new \Ease\Html\ImgTag('appimage.php?uuid=' . $app->getDataValue('uuid'), $app->getRecordName(), ['height' => '20', 'style' => 'margin-right: 5px;']) : '',
-            $app->getRecordName()
-        ])
+            $app->getDataValue('uuid') ? new \Ease\Html\ImgTag('appimage.php?uuid='.$app->getDataValue('uuid'), $app->getRecordName(), ['height' => '20', 'style' => 'margin-right: 5px;']) : '',
+            $app->getRecordName(),
+        ]),
     ]);
     $summaryTable->addRowColumns([
         new \Ease\Html\StrongTag(_('Company')),
         new \Ease\Html\SpanTag([
             $company->getDataValue('logo') ? new \Ease\Html\ImgTag($company->getDataValue('logo'), $company->getRecordName(), ['height' => '20', 'style' => 'margin-right: 5px;']) : '',
-            $company->getRecordName()
-        ])
+            $company->getRecordName(),
+        ]),
     ]);
     $summaryTable->addRowColumns([
         new \Ease\Html\StrongTag(_('Interval')),
-        \MultiFlexi\RunTemplate::codeToInterval($runTemplate->getDataValue('interv'))
+        \MultiFlexi\RunTemplate::codeToInterval($runTemplate->getDataValue('interv')),
     ]);
-    
+
     // Show assigned credentials
     $credentials = $runTemplate->getAssignedCredentials();
+
     if (!empty($credentials)) {
         $credList = new \Ease\Html\UlTag();
+
         foreach ($credentials as $cred) {
             $credObj = new \MultiFlexi\Credential($cred['credential_id']);
             $credType = $credObj->getCredentialType();
             $credList->addItem(new \Ease\Html\LiTag([
-                new \Ease\Html\ImgTag('images/' . $credType->getLogo(), $credType->getRecordName(), ['height' => '16', 'style' => 'margin-right: 5px;']),
-                $credObj->getRecordName() . ' (' . $credType->getRecordName() . ')'
+                new \Ease\Html\ImgTag('images/'.$credType->getLogo(), $credType->getRecordName(), ['height' => '16', 'style' => 'margin-right: 5px;']),
+                $credObj->getRecordName().' ('.$credType->getRecordName().')',
             ]));
         }
+
         $summaryTable->addRowColumns([
             new \Ease\Html\StrongTag(_('Credentials')),
-            $credList
+            $credList,
         ]);
     }
-    
+
     // Show actions
     $successActions = $runTemplate->getDataValue('success') ? unserialize($runTemplate->getDataValue('success')) : [];
     $failActions = $runTemplate->getDataValue('fail') ? unserialize($runTemplate->getDataValue('fail')) : [];
-    
+
     $actionsEnabled = [];
+
     foreach ($successActions as $action => $enabled) {
         if ($enabled) {
-            $actionsEnabled[] = '✅ ' . $action . ' (' . _('on success') . ')';
+            $actionsEnabled[] = '✅ '.$action.' ('._('on success').')';
         }
     }
+
     foreach ($failActions as $action => $enabled) {
         if ($enabled) {
-            $actionsEnabled[] = '❌ ' . $action . ' (' . _('on failure') . ')';
+            $actionsEnabled[] = '❌ '.$action.' ('._('on failure').')';
         }
     }
-    
+
     if (!empty($actionsEnabled)) {
         $actionsList = new \Ease\Html\UlTag();
+
         foreach ($actionsEnabled as $actionText) {
             $actionsList->addItem(new \Ease\Html\LiTag($actionText));
         }
+
         $summaryTable->addRowColumns([
             new \Ease\Html\StrongTag(_('Actions')),
-            $actionsList
+            $actionsList,
         ]);
     }
-    
+
     $completionCard->addItem($summaryTable);
-    
+
     $completionCard->addItem(new \Ease\Html\HrTag());
     $completionCard->addItem(new \Ease\Html\PTag(
-        '🚀 ' . _('Your RunTemplate has been successfully created and configured!')
+        '🚀 '._('Your RunTemplate has been successfully created and configured!'),
     ));
-    
+
     $buttonRow = new \Ease\TWB4\Row();
     $buttonRow->addColumn(
         4,
         new \Ease\TWB4\LinkButton(
-            'runtemplate.php?id=' . $runtemplateId,
-            '⚗️ ' . _('View RunTemplate'),
-            'primary btn-lg btn-block'
-        )
+            'runtemplate.php?id='.$runtemplateId,
+            '⚗️ '._('View RunTemplate'),
+            'primary btn-lg btn-block',
+        ),
     );
     $buttonRow->addColumn(
         4,
         new \Ease\TWB4\LinkButton(
             'runtemplates.php',
-            '📋 ' . _('All RunTemplates'),
-            'secondary btn-lg btn-block'
-        )
+            '📋 '._('All RunTemplates'),
+            'secondary btn-lg btn-block',
+        ),
     );
     $buttonRow->addColumn(
         4,
         new \Ease\TWB4\LinkButton(
             'activation-wizard.php?reset=1',
-            '🌟 ' . _('New Activation'),
-            'success btn-lg btn-block'
-        )
+            '🌟 '._('New Activation'),
+            'success btn-lg btn-block',
+        ),
     );
-    
+
     $completionCard->addItem($buttonRow);
-    
+
     WebPage::singleton()->container->addItem($completionCard);
 } else {
     // Convert step to int for wizard (finish/complete are handled above)
-    $wizardStep = is_int($step) ? $step : 1;
+    $wizardStep = \is_int($step) ? $step : 1;
     $wizard = new ActivationWizard($wizardStep);
     WebPage::singleton()->container->addItem($wizard);
 }

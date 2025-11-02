@@ -217,6 +217,14 @@ class SessionManager
     }
 
     /**
+     * Public method to regenerate session ID (alias for regenerateSession).
+     */
+    public function regenerateId(): bool
+    {
+        return self::regenerateSession();
+    }
+
+    /**
      * Set secure session parameters.
      */
     private function setSecureSessionParams(): void
@@ -343,14 +351,6 @@ class SessionManager
         $timeSinceRegeneration = time() - $_SESSION['security']['last_regeneration'];
 
         return $timeSinceRegeneration > $this->regenerationInterval;
-    }
-
-    /**
-     * Public method to regenerate session ID (alias for regenerateSession).
-     */
-    public function regenerateId(): bool
-    {
-        return self::regenerateSession();
     }
 
     /**

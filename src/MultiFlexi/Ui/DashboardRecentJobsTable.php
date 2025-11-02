@@ -29,12 +29,12 @@ class DashboardRecentJobsTable extends \Ease\Html\DivTag
     public function __construct()
     {
         parent::__construct();
-        
+
         $this->addItem(new \Ease\Html\H4Tag(_('Recent Jobs (Last 20)')));
-        
+
         try {
             $jobber = new \MultiFlexi\Job();
-            
+
             $recentJobs = $jobber->getFluentPDO()
                 ->from('job')
                 ->select('job.id, job.begin, job.end, job.exitcode, job.app_id, job.company_id, job.runtemplate_id, apps.name as app_name, company.name as company_name, runtemplate.name as runtemplate_name')
@@ -44,13 +44,14 @@ class DashboardRecentJobsTable extends \Ease\Html\DivTag
                 ->orderBy('job.begin DESC')
                 ->limit(20)
                 ->fetchAll();
-            
+
             if (!empty($recentJobs)) {
                 $table = new \Ease\TWB4\Table();
                 $table->addRowHeaderColumns([_('ID'), _('Application'), _('Company'), _('RunTemplate'), _('Started'), _('Finished'), _('Status')]);
-                
+
                 foreach ($recentJobs as $job) {
                     $statusBadge = '';
+
                     if ($job['exitcode'] === null) {
                         if ($job['begin'] && !$job['end']) {
                             $statusBadge = new \Ease\TWB4\Badge('primary', '▶️ '._('Running'));
@@ -62,20 +63,20 @@ class DashboardRecentJobsTable extends \Ease\Html\DivTag
                     } else {
                         $statusBadge = new \Ease\TWB4\Badge('danger', '✗ '._('Failed').' ('.$job['exitcode'].')');
                     }
-                    
+
                     // Create links with emoticons
-                    $appLink = $job['app_id'] && $job['app_name'] 
-                        ? new \Ease\Html\ATag('app.php?id='.$job['app_id'], '🧩 '.$job['app_name']) 
+                    $appLink = $job['app_id'] && $job['app_name']
+                        ? new \Ease\Html\ATag('app.php?id='.$job['app_id'], '🧩 '.$job['app_name'])
                         : '-';
-                    $companyLink = $job['company_id'] && $job['company_name'] 
-                        ? new \Ease\Html\ATag('company.php?id='.$job['company_id'], '🏢 '.$job['company_name']) 
+                    $companyLink = $job['company_id'] && $job['company_name']
+                        ? new \Ease\Html\ATag('company.php?id='.$job['company_id'], '🏢 '.$job['company_name'])
                         : '-';
-                    $runtemplateLink = $job['runtemplate_id'] && $job['runtemplate_name'] 
-                        ? new \Ease\Html\ATag('runtemplate.php?id='.$job['runtemplate_id'], '⚗️️ '.$job['runtemplate_name']) 
+                    $runtemplateLink = $job['runtemplate_id'] && $job['runtemplate_name']
+                        ? new \Ease\Html\ATag('runtemplate.php?id='.$job['runtemplate_id'], '⚗️️ '.$job['runtemplate_name'])
                         : '-';
-                    
+
                     $table->addRowColumns([
-                        new \Ease\Html\ATag('job.php?id='.$job['id'], '🏁 '. $job['id']),
+                        new \Ease\Html\ATag('job.php?id='.$job['id'], '🏁 '.$job['id']),
                         $appLink,
                         $companyLink,
                         $runtemplateLink,
@@ -84,7 +85,7 @@ class DashboardRecentJobsTable extends \Ease\Html\DivTag
                         $statusBadge,
                     ]);
                 }
-                
+
                 $this->addItem($table);
             } else {
                 $this->addItem(new \Ease\TWB4\Badge('info', _('No recent jobs')));

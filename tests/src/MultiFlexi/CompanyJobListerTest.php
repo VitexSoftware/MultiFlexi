@@ -34,7 +34,7 @@ class CompanyJobListerTest extends TestCase
     public function testApplyFilterSuccess(): void
     {
         $this->lister->applyFilter('success');
-        
+
         $this->assertEquals('success', $this->lister->filterType);
         $this->assertArrayHasKey('_jobfilter', $this->lister->filter);
         $this->assertEquals('success', $this->lister->filter['_jobfilter']);
@@ -43,7 +43,7 @@ class CompanyJobListerTest extends TestCase
     public function testApplyFilterFailed(): void
     {
         $this->lister->applyFilter('failed');
-        
+
         $this->assertEquals('failed', $this->lister->filterType);
         $this->assertArrayHasKey('_jobfilter', $this->lister->filter);
         $this->assertEquals('failed', $this->lister->filter['_jobfilter']);
@@ -52,7 +52,7 @@ class CompanyJobListerTest extends TestCase
     public function testApplyFilterRunning(): void
     {
         $this->lister->applyFilter('running');
-        
+
         $this->assertEquals('running', $this->lister->filterType);
         $this->assertArrayHasKey('_jobfilter', $this->lister->filter);
         $this->assertEquals('running', $this->lister->filter['_jobfilter']);
@@ -61,7 +61,7 @@ class CompanyJobListerTest extends TestCase
     public function testApplyFilterToday(): void
     {
         $this->lister->applyFilter('today');
-        
+
         $this->assertEquals('today', $this->lister->filterType);
         $this->assertArrayHasKey('_jobfilter', $this->lister->filter);
         $this->assertEquals('today', $this->lister->filter['_jobfilter']);
@@ -71,7 +71,7 @@ class CompanyJobListerTest extends TestCase
     {
         $filter = ['_jobfilter' => 'failed'];
         $lister = new CompanyJobLister(null, $filter);
-        
+
         $this->assertEquals('failed', $lister->filterType);
     }
 
@@ -83,11 +83,11 @@ class CompanyJobListerTest extends TestCase
             'start' => '0',
             'length' => '10',
         ];
-        
+
         // This should not throw an exception about unknown column '_jobfilter'
         // The method should extract and remove _jobfilter before processing
         $this->lister->getAllForDataTable($conditions);
-        
+
         // Verify filter was set from conditions
         $this->assertEquals('failed', $this->lister->filterType);
     }
@@ -97,13 +97,13 @@ class CompanyJobListerTest extends TestCase
         // Simulate first request
         $lister1 = new CompanyJobLister();
         $lister1->applyFilter('success');
-        
+
         // Get filter array that would be passed to AJAX
         $filter = $lister1->filter;
-        
+
         // Simulate AJAX request creating new instance
         $lister2 = new CompanyJobLister(null, $filter);
-        
+
         // Filter should be restored
         $this->assertEquals('success', $lister2->filterType);
     }

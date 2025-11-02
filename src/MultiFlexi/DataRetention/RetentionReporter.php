@@ -32,9 +32,7 @@ class RetentionReporter extends \Ease\Sand
      * @var Orm Database handle for retention reports
      */
     private Orm $reports;
-
     private RetentionService $retentionService;
-
     private DataArchiver $archiver;
 
     /**

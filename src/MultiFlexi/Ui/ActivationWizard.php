@@ -52,6 +52,44 @@ class ActivationWizard extends \Ease\Html\DivTag
     }
 
     /**
+     * Render wizard.
+     */
+    public function afterAdd(): void
+    {
+        $this->addItem($this->renderStepIndicator());
+        $this->addItem($this->renderStepContent());
+        $this->addItem($this->renderNavigation());
+    }
+
+    /**
+     * Get wizard data.
+     */
+    public function getWizardData(): array
+    {
+        return $this->wizardData;
+    }
+
+    /**
+     * Update wizard data.
+     */
+    public static function updateWizardData(array $data): void
+    {
+        if (!isset($_SESSION['activation_wizard'])) {
+            $_SESSION['activation_wizard'] = [];
+        }
+
+        $_SESSION['activation_wizard'] = array_merge($_SESSION['activation_wizard'], $data);
+    }
+
+    /**
+     * Clear wizard data.
+     */
+    public static function clearWizardData(): void
+    {
+        unset($_SESSION['activation_wizard']);
+    }
+
+    /**
      * Initialize wizard data from session.
      */
     private function initWizardData(): void
@@ -67,16 +105,6 @@ class ActivationWizard extends \Ease\Html\DivTag
         }
 
         $this->wizardData = $_SESSION['activation_wizard'];
-    }
-
-    /**
-     * Render wizard.
-     */
-    public function afterAdd(): void
-    {
-        $this->addItem($this->renderStepIndicator());
-        $this->addItem($this->renderStepContent());
-        $this->addItem($this->renderNavigation());
     }
 
     /**
@@ -119,6 +147,7 @@ class ActivationWizard extends \Ease\Html\DivTag
         if (!empty($this->wizardData['runtemplate_id'])) {
             $runTemplate = new \MultiFlexi\RunTemplate($this->wizardData['runtemplate_id']);
             $actualId = $runTemplate->getMyKey();
+
             if ($actualId) {
                 $steps[3] .= ' ⚗️ #'.$actualId;
             }
@@ -250,9 +279,10 @@ class ActivationWizard extends \Ease\Html\DivTag
 
         // Add JavaScript to make company cards clickable
         WebPage::singleton()->addJavaScript(
-            "document.querySelectorAll('#wizardForm .card').forEach(function(card) {
+            <<<'EOD'
+document.querySelectorAll('#wizardForm .card').forEach(function(card) {
                 card.addEventListener('click', function() {
-                    var radio = this.querySelector('input[type=\"radio\"]');
+                    var radio = this.querySelector('input[type="radio"]');
                     if (radio) {
                         radio.checked = true;
                         document.querySelectorAll('#wizardForm .card').forEach(c => {
@@ -261,9 +291,10 @@ class ActivationWizard extends \Ease\Html\DivTag
                         this.classList.add('border-primary', 'bg-light');
                     }
                 });
-            });",
+            });
+EOD,
             null,
-            true
+            true,
         );
 
         return $container;
@@ -338,9 +369,10 @@ class ActivationWizard extends \Ease\Html\DivTag
 
         // Add JavaScript to make app cards clickable
         WebPage::singleton()->addJavaScript(
-            "document.querySelectorAll('.wizard-content .card').forEach(function(card) {
+            <<<'EOD'
+document.querySelectorAll('.wizard-content .card').forEach(function(card) {
                 card.addEventListener('click', function() {
-                    var radio = this.querySelector('input[type=\"radio\"]');
+                    var radio = this.querySelector('input[type="radio"]');
                     if (radio) {
                         radio.checked = true;
                         document.querySelectorAll('.wizard-content .card').forEach(c => {
@@ -349,9 +381,10 @@ class ActivationWizard extends \Ease\Html\DivTag
                         this.classList.add('border-primary', 'bg-light');
                     }
                 });
-            });",
+            });
+EOD,
             null,
-            true
+            true,
         );
 
         return $container;
@@ -475,7 +508,7 @@ class ActivationWizard extends \Ease\Html\DivTag
                 sprintf(_('Credential for %s'), $requirement),
                 $select,
                 '',
-                sprintf(_('Select which %s credential to use'), $requirement)
+                sprintf(_('Select which %s credential to use'), $requirement),
             );
             $form->addItem($formGroup);
         }
@@ -518,21 +551,21 @@ class ActivationWizard extends \Ease\Html\DivTag
         } else {
             foreach ($appConfigs as $fieldName => $field) {
                 $runTemplateField = $runTemplateFields->getFieldByCode($fieldName);
-                
+
                 if ($runTemplateField) {
                     // Field is filled by credential
                     $runTemplateFieldSource = $runTemplateField->getSource();
-                    
+
                     if (\Ease\Functions::isSerialized($runTemplateFieldSource)) {
                         $credential = unserialize($runTemplateFieldSource);
-                        
+
                         if ($credential) {
                             $credentialType = $credential->getCredentialType();
                             $credentialLink = new \Ease\Html\ATag('credential.php?id='.$credential->getMyKey(), new \Ease\Html\SmallTag($credential->getRecordName()));
                             $formIcon = new \Ease\Html\ImgTag('images/'.$runTemplateField->getLogo(), (string) $credentialType->getRecordName(), ['height' => 20, 'title' => $credentialType->getRecordName()]);
                             $credentialTypeLink = new \Ease\Html\ATag('credentialtype.php?id='.$credentialType->getMyKey(), $formIcon);
                             $inputCaption = new \Ease\Html\SpanTag([$credentialTypeLink, new \Ease\Html\StrongTag($fieldName), '&nbsp;', $credentialLink]);
-                            
+
                             $input = $this->createConfigInput($field, $fieldName, $runTemplateField->getValue());
                             $input->setTagProperty('disabled', '1');
                             $form->addItem(new \Ease\TWB4\FormGroup($inputCaption, $input, $field->getDescription(), ''));
@@ -609,6 +642,17 @@ class ActivationWizard extends \Ease\Html\DivTag
             $nav->addItem(new \Ease\Html\DivTag()); // Empty div for spacing
         }
 
+        // Middle section - Create Company button for step 1, Create Application button for step 2
+        if ($this->currentStep === 1) {
+            $createCompanyButton = new \Ease\TWB4\LinkButton('companysetup.php', '➕ '._('Create Company'), 'info');
+            $nav->addItem($createCompanyButton);
+        } elseif ($this->currentStep === 2) {
+            $createApplicationButton = new \Ease\TWB4\LinkButton('app.php', '🧩 '._('Create Application'), 'info');
+            $nav->addItem($createApplicationButton);
+        } else {
+            $nav->addItem(new \Ease\Html\DivTag()); // Empty div for spacing
+        }
+
         // Next/Finish button
         if ($this->currentStep < $this->totalSteps - 1) {
             $nextButton = new \Ease\Html\ButtonTag(_('Next'), ['class' => 'btn btn-primary', 'type' => 'submit', 'form' => 'wizardForm']);
@@ -623,34 +667,6 @@ class ActivationWizard extends \Ease\Html\DivTag
         }
 
         return $nav;
-    }
-
-    /**
-     * Get wizard data.
-     */
-    public function getWizardData(): array
-    {
-        return $this->wizardData;
-    }
-
-    /**
-     * Update wizard data.
-     */
-    public static function updateWizardData(array $data): void
-    {
-        if (!isset($_SESSION['activation_wizard'])) {
-            $_SESSION['activation_wizard'] = [];
-        }
-
-        $_SESSION['activation_wizard'] = array_merge($_SESSION['activation_wizard'], $data);
-    }
-
-    /**
-     * Clear wizard data.
-     */
-    public static function clearWizardData(): void
-    {
-        unset($_SESSION['activation_wizard']);
     }
 
     /**
@@ -670,55 +686,64 @@ class ActivationWizard extends \Ease\Html\DivTag
         $app = new \MultiFlexi\Application($this->wizardData['app_id']);
         $company = new \MultiFlexi\Company($this->wizardData['company_id']);
 
-        $container->addItem(new \Ease\Html\H3Tag('🎉 ' . _('Activation Complete')));
-        $container->addItem(new \Ease\Html\PTag('🚀 ' . _('Your RunTemplate has been successfully created and configured!')));
+        $container->addItem(new \Ease\Html\H3Tag('🎉 '._('Activation Complete')));
+        $container->addItem(new \Ease\Html\PTag('🚀 '._('Your RunTemplate has been successfully created and configured!')));
         $container->addItem(new \Ease\Html\HrTag());
         $container->addItem(new \Ease\Html\H4Tag(_('RunTemplate Summary')));
 
         // Create summary table
         $summaryTable = new \Ease\Html\TableTag(null, ['class' => 'table table-bordered']);
+
+        // Get RunTemplate ID - use actual ID from database object
+        $runtemplateId = $runTemplate->getMyKey() ?: $this->wizardData['runtemplate_id'];
         $summaryTable->addRowColumns([
             new \Ease\Html\StrongTag(_('RunTemplate ID')),
-            '#' . $runTemplate->getMyKey()
+            '#'.$runtemplateId,
         ]);
+
+        // Get RunTemplate name - use the object's name or fallback to wizard data
+        $runtemplateName = $runTemplate->getRecordName() ?: ($this->wizardData['runtemplate_name'] ?? _('Unknown'));
         $summaryTable->addRowColumns([
             new \Ease\Html\StrongTag(_('Name')),
-            $runTemplate->getRecordName()
+            $runtemplateName,
         ]);
         $summaryTable->addRowColumns([
             new \Ease\Html\StrongTag(_('Application')),
             new \Ease\Html\SpanTag([
-                $app->getDataValue('uuid') ? new \Ease\Html\ImgTag('appimage.php?uuid=' . $app->getDataValue('uuid'), $app->getRecordName(), ['height' => '20', 'style' => 'margin-right: 5px;']) : '',
-                $app->getRecordName()
-            ])
+                $app->getDataValue('uuid') ? new \Ease\Html\ImgTag('appimage.php?uuid='.$app->getDataValue('uuid'), $app->getRecordName(), ['height' => '20', 'style' => 'margin-right: 5px;']) : '',
+                $app->getRecordName(),
+            ]),
         ]);
         $summaryTable->addRowColumns([
             new \Ease\Html\StrongTag(_('Company')),
             new \Ease\Html\SpanTag([
                 $company->getDataValue('logo') ? new \Ease\Html\ImgTag($company->getDataValue('logo'), $company->getRecordName(), ['height' => '20', 'style' => 'margin-right: 5px;']) : '',
-                $company->getRecordName()
-            ])
+                $company->getRecordName(),
+            ]),
         ]);
         $summaryTable->addRowColumns([
             new \Ease\Html\StrongTag(_('Interval')),
-            \MultiFlexi\RunTemplate::codeToInterval($runTemplate->getDataValue('interv'))
+            \MultiFlexi\RunTemplate::codeToInterval($runTemplate->getDataValue('interv')),
         ]);
 
         // Show assigned credentials
         $credentials = $runTemplate->getAssignedCredentials();
+
         if (!empty($credentials)) {
             $credList = new \Ease\Html\UlTag();
+
             foreach ($credentials as $cred) {
                 $credObj = new \MultiFlexi\Credential($cred['credential_id']);
                 $credType = $credObj->getCredentialType();
                 $credList->addItem(new \Ease\Html\LiTag([
-                    new \Ease\Html\ImgTag('images/' . $credType->getLogo(), $credType->getRecordName(), ['height' => '16', 'style' => 'margin-right: 5px;']),
-                    $credObj->getRecordName() . ' (' . $credType->getRecordName() . ')'
+                    new \Ease\Html\ImgTag('images/'.$credType->getLogo(), $credType->getRecordName(), ['height' => '16', 'style' => 'margin-right: 5px;']),
+                    $credObj->getRecordName().' ('.$credType->getRecordName().')',
                 ]));
             }
+
             $summaryTable->addRowColumns([
                 new \Ease\Html\StrongTag(_('Credentials')),
-                $credList
+                $credList,
             ]);
         }
 
@@ -727,25 +752,29 @@ class ActivationWizard extends \Ease\Html\DivTag
         $failActions = $runTemplate->getDataValue('fail') ? unserialize($runTemplate->getDataValue('fail')) : [];
 
         $actionsEnabled = [];
+
         foreach ($successActions as $action => $enabled) {
             if ($enabled) {
-                $actionsEnabled[] = '✅ ' . $action . ' (' . _('on success') . ')';
+                $actionsEnabled[] = '✅ '.$action.' ('._('on success').')';
             }
         }
+
         foreach ($failActions as $action => $enabled) {
             if ($enabled) {
-                $actionsEnabled[] = '❌ ' . $action . ' (' . _('on failure') . ')';
+                $actionsEnabled[] = '❌ '.$action.' ('._('on failure').')';
             }
         }
 
         if (!empty($actionsEnabled)) {
             $actionsList = new \Ease\Html\UlTag();
+
             foreach ($actionsEnabled as $actionText) {
                 $actionsList->addItem(new \Ease\Html\LiTag($actionText));
             }
+
             $summaryTable->addRowColumns([
                 new \Ease\Html\StrongTag(_('Actions')),
-                $actionsList
+                $actionsList,
             ]);
         }
 
@@ -757,34 +786,34 @@ class ActivationWizard extends \Ease\Html\DivTag
         $buttonRow->addColumn(
             3,
             new \Ease\TWB4\LinkButton(
-                'runtemplate.php?id=' . $runTemplate->getMyKey(),
-                '⚗️ ' . _('View RunTemplate'),
-                'primary btn-lg btn-block'
-            )
+                'runtemplate.php?id='.$runtemplateId,
+                '⚗️ '._('View RunTemplate'),
+                'primary btn-lg btn-block',
+            ),
         );
         $buttonRow->addColumn(
             3,
             new \Ease\TWB4\LinkButton(
-                'schedule.php?app_id=' . $app->getMyKey() . '&company_id=' . $company->getMyKey() . '&runtemplate_id=' . $runTemplate->getMyKey(),
-                '📅 ' . _('Schedule'),
-                'info btn-lg btn-block'
-            )
+                'schedule.php?app_id='.$app->getMyKey().'&company_id='.$company->getMyKey().'&runtemplate_id='.$runtemplateId,
+                '📅 '._('Schedule'),
+                'info btn-lg btn-block',
+            ),
         );
         $buttonRow->addColumn(
             3,
             new \Ease\TWB4\LinkButton(
                 'runtemplates.php',
-                '📋 ' . _('All RunTemplates'),
-                'secondary btn-lg btn-block'
-            )
+                '📋 '._('All RunTemplates'),
+                'secondary btn-lg btn-block',
+            ),
         );
         $buttonRow->addColumn(
             3,
             new \Ease\TWB4\LinkButton(
                 'activation-wizard.php?reset=1',
-                '🌟 ' . _('New Activation'),
-                'success btn-lg btn-block'
-            )
+                '🌟 '._('New Activation'),
+                'success btn-lg btn-block',
+            ),
         );
 
         $container->addItem($buttonRow);
@@ -811,15 +840,16 @@ class ActivationWizard extends \Ease\Html\DivTag
 
         // Add status message about created RunTemplate with actual ID
         $actualId = $runTemplate->getMyKey();
+
         if ($actualId) {
             $runTemplate->addStatusMessage(
                 sprintf(
                     _('RunTemplate #%d created for application "%s" and company "%s"'),
                     $actualId,
                     $app->getRecordName(),
-                    $company->getRecordName()
+                    $company->getRecordName(),
                 ),
-                'success'
+                'success',
             );
         }
 
