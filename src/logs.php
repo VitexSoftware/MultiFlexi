@@ -39,7 +39,9 @@ EOD);
 
 WebPage::singleton()->includeJavascript('js/dismisLog.js');
 
-WebPage::singleton()->container->addItem(new DBDataTable(new \MultiFlexi\Logger(), ['buttons' => ['dismisAll']]));
+$logEngine = new \MultiFlexi\Logger();
+$logEngine->setObjectName('Molecule');
+WebPage::singleton()->container->addItem(new DBDataTable($logEngine, ['buttons' => ['dismisAll']]));
 
 WebPage::singleton()->addItem(new PageBottom());
 
