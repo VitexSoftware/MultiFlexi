@@ -40,7 +40,7 @@ class ActionsChooser extends \Ease\Html\DivTag
                 $moduleRow->addColumn(1, new ActionImage($action, ['height' => '50px']));
                 $moduleRow->addColumn(1, new \Ease\TWB4\Widgets\Toggle($prefix.'actionSwitch['.$action.']', \array_key_exists($action, $toggles) && $toggles[$action], '', ['data-size' => 'lg']));
                 $moduleRow->addColumn(4, [new \Ease\Html\StrongTag($actionClass::name()), new \Ease\Html\PTag(new \Ease\Html\SmallTag($actionClass::description()))]);
-                $moduleRow->addColumn(4, $actionClass::inputs($prefix));
+                $moduleRow->addColumn(4, self::getActionInputs($action, $prefix));
                 $moduleRow->setTagClass('form-row');
                 $this->addItem(new \Ease\Html\PTag($moduleRow));
             }
@@ -88,5 +88,33 @@ class ActionsChooser extends \Ease\Html\DivTag
         }
 
         return $formData;
+    }
+
+    /**
+     * Get action input fields from UI classes or fallback to core action class.
+     *
+     * @param string $action Action name
+     * @param string $prefix Form field prefix
+     *
+     * @return mixed Form field(s)
+     */
+    private static function getActionInputs(string $action, string $prefix)
+    {
+        // First try to use the UI-specific class
+        $uiActionClass = '\\MultiFlexi\\Ui\\Action\\'.$action;
+
+        if (class_exists($uiActionClass) && method_exists($uiActionClass, 'inputs')) {
+            return $uiActionClass::inputs($prefix);
+        }
+
+        // Fallback to the core action class if it has inputs method
+        $actionClass = '\\MultiFlexi\\Action\\'.$action;
+
+        if (method_exists($actionClass, 'inputs')) {
+            return $actionClass::inputs($prefix);
+        }
+
+        // If no inputs method exists, return empty badge
+        return new \Ease\TWB4\Badge('secondary', _('No configuration required'));
     }
 }
