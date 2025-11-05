@@ -18,7 +18,7 @@ MultiFlexi provides a comprehensive set of actions, each with its distinctive ic
 .. list-table:: Available Actions
    :widths: 20 20 60
    :header-rows: 1
-   
+
    * - Icon
      - Action Name
      - Description
@@ -228,7 +228,7 @@ When configuring a ToDo Action in MultiFlexi, you can customize the following pa
   
   - ``{job_name}`` - Name of the executed job
   - ``{status}`` - Job execution status
-  - ``{company}`` - Company name  
+  - ``{company}`` - Company name
   - ``{timestamp}`` - Execution timestamp
   
   Example: ``Job: {job_name}\nCompany: {company}\nStatus: {status}\nTime: {timestamp}``
@@ -283,7 +283,7 @@ Troubleshooting
    - **Solution**: Copy the secret **Value** from Azure Portal, not the ID
 
 4. **"SharePoint tenant detected"**
-   
+
    - **Cause**: Using SharePoint tenant name instead of full domain
    - **Solution**: Use full domain format (e.g., ``company.onmicrosoft.com``)
 
@@ -300,78 +300,6 @@ MultiFlexi provides detailed debug information when ToDo Action fails:
 - Token permission verification results  
 - Request IDs for Microsoft support
 - Specific error codes and messages
-
-Implementation Details
-~~~~~~~~~~~~~~~~~~~~
-
-**PHP Classes**:
-
-- ``MultiFlexi\Action\ToDo`` - Backend action execution logic
-- ``MultiFlexi\Ui\Action\ToDo`` - UI configuration interface
-
-**Key Methods**:
-
-- ``getToDoLists()`` - Retrieves available ToDo lists from Microsoft Graph
-- ``getAccessToken()`` - Handles OAuth2 token acquisition
-- ``verifyUserAccess()`` - Validates user permissions and access
-
-**API Integration**:
-
-The action integrates with Microsoft Graph API endpoints:
-
-- Token endpoint: ``https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token``
-- User info: ``https://graph.microsoft.com/v1.0/users/{userId}``
-- ToDo lists: ``https://graph.microsoft.com/v1.0/users/{userId}/todo/lists``
-- Create task: ``https://graph.microsoft.com/v1.0/users/{userId}/todo/lists/{listId}/tasks``
-
-**Security Considerations**:
-
-- All credentials are stored securely in MultiFlexi's credential system
-- OAuth2 tokens are acquired on-demand and not stored persistently  
-- Client secrets should be rotated regularly in Azure Portal
-- Application permissions require admin consent for security compliance
-
-Extending Actions
-----------------
-
-Developers can create custom actions by:
-
-1. Creating a new action class inheriting from ``MultiFlexi\CommonAction``
-2. Implementing the ``perform()`` method for execution logic
-3. Creating a corresponding UI class inheriting from the action class
-4. Implementing the ``inputs()`` method for configuration interface
-5. Adding proper credential type support if needed
-
-**Example Action Structure**:
-
-.. code-block:: php
-
-   <?php
-   namespace MultiFlexi\Action;
-
-   class MyCustomAction extends \MultiFlexi\CommonAction
-   {
-       public static function name(): string
-       {
-           return _('My Custom Action');
-       }
-
-       public static function description(): string  
-       {
-           return _('Description of what this action does');
-       }
-
-       public function perform(): bool
-       {
-           // Implementation logic
-           return true;
-       }
-   }
-
-For more details on action development, see the :doc:`development` section.
-
-Other Available Actions
-----------------------
 
 Reschedule Action
 ~~~~~~~~~~~~~~~~
@@ -391,8 +319,9 @@ The Reschedule Action allows you to modify the scheduling of jobs, changing when
 - Integration with MultiFlexi's job scheduler
 
 **Configuration Options**:
+
 - **New Schedule** - Cron expression or time specification for the new schedule
-- **Delay Type** - Type of delay (minutes, hours, days, weeks)
+- **Delay Type** - Type of delay (minutes, hours, days, weeks)  
 - **Delay Amount** - Number of delay units
 - **One-time or Recurring** - Whether to reschedule once or change the recurring schedule
 
@@ -421,6 +350,7 @@ The WebHook Action sends HTTP POST requests to external endpoints, enabling inte
 - SSL certificate validation
 
 **Configuration Options**:
+
 - **URL** - Target webhook endpoint URL
 - **HTTP Method** - Request method (POST, PUT, PATCH)
 - **Headers** - Custom HTTP headers
@@ -460,6 +390,7 @@ The RedmineIssue Action creates and manages issues in Redmine project management
 - API key authentication
 
 **Configuration Options**:
+
 - **Redmine URL** - Base URL of your Redmine instance
 - **API Key** - Redmine API access key
 - **Project** - Target project identifier
@@ -500,6 +431,7 @@ The Github Action integrates with GitHub repositories to create issues, pull req
 - GitHub API v4 (GraphQL) and v3 (REST) support
 
 **Configuration Options**:
+
 - **Repository** - Target GitHub repository (owner/repo format)
 - **Authentication Token** - GitHub Personal Access Token or OAuth token
 - **Action Type** - Issue creation, PR creation, or repository management
@@ -542,6 +474,7 @@ The TriggerJenkins Action starts builds and jobs on Jenkins CI/CD servers, enabl
 - Multiple authentication methods
 
 **Configuration Options**:
+
 - **Jenkins URL** - Base URL of Jenkins instance
 - **Job Name** - Name of the Jenkins job to trigger
 - **Authentication** - Username/password or API token
@@ -580,6 +513,7 @@ The LaunchJob Action starts other MultiFlexi jobs or external processes, enablin
 - Resource usage monitoring
 
 **Configuration Options**:
+
 - **Job Type** - MultiFlexi job or external command
 - **Job Identifier** - Job ID or command to execute
 - **Parameters** - Parameters to pass to the launched job
@@ -620,6 +554,7 @@ The Stop Action terminates running processes, jobs, or services, providing contr
 - Comprehensive operation logging
 
 **Configuration Options**:
+
 - **Target Type** - Process, service, or MultiFlexi job
 - **Target Identifier** - Process ID, service name, or job ID
 - **Stop Method** - Graceful shutdown or forced termination
@@ -657,6 +592,7 @@ The Zabbix Action sends monitoring data, alerts, and metrics to Zabbix monitorin
 - Multiple data type support
 
 **Configuration Options**:
+
 - **Zabbix Server** - Hostname or IP of Zabbix server
 - **Port** - Zabbix server port (default 10051)
 - **Host Name** - Monitored host name in Zabbix
@@ -697,6 +633,7 @@ The CustomCommand Action executes arbitrary shell commands or scripts, providing
 - Security restrictions
 
 **Configuration Options**:
+
 - **Command** - Shell command or script to execute
 - **Arguments** - Command-line arguments
 - **Working Directory** - Directory for command execution
@@ -737,6 +674,7 @@ The Sleep Action pauses workflow execution for a specified duration, useful for 
 - Multiple time unit support
 
 **Configuration Options**:
+
 - **Duration** - Sleep time amount
 - **Time Unit** - Seconds, minutes, hours, or days
 - **Interruptible** - Whether sleep can be interrupted
@@ -782,29 +720,3 @@ When configuring actions, follow these best practices:
 - Version control action definitions
 - Test actions in staging environments
 - Regular configuration reviews
-
-Advanced Action Usage
---------------------
-
-Actions can access the RunTemplate instance through ``$this->runtemplate``, allowing for dynamic parameter configuration based on job context and results. This enables sophisticated automation scenarios where action behavior adapts to runtime conditions.
-
-**Dynamic Configuration Example**:
-
-.. code-block:: php
-
-   public function perform(): bool
-   {
-       // Access job context
-       $jobResult = $this->runtemplate->getJobResult();
-       $company = $this->runtemplate->getCompany();
-       
-       // Adapt action behavior based on context
-       if ($jobResult->hasErrors()) {
-           $this->setPriority('high');
-           $this->setTitle('URGENT: Job Failed - ' . $company->getName());
-       }
-       
-       return $this->execute();
-   }
-
-For complex workflows, actions can be chained together, with each action's output potentially influencing subsequent actions. The MultiFlexi framework provides comprehensive logging and error handling to ensure reliable workflow execution.
