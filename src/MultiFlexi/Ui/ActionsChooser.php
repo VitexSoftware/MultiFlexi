@@ -25,7 +25,7 @@ namespace MultiFlexi\Ui;
 class ActionsChooser extends \Ease\Html\DivTag
 {
     public \MultiFlexi\RunTemplate $runtemplate;
-    
+
     public function __construct($prefix, \MultiFlexi\RunTemplate $runTemplate, $toggles = [], $properties = [])
     {
         $this->runtemplate = $runTemplate;
@@ -109,6 +109,7 @@ class ActionsChooser extends \Ease\Html\DivTag
         if (class_exists($uiActionClass) && method_exists($uiActionClass, 'inputs')) {
             // Create instance with a dummy RunTemplate since we only need inputs
             $instance = new $uiActionClass($this->runtemplate);
+
             return $instance->inputs($prefix);
         }
 

@@ -44,8 +44,6 @@ class CustomCommand extends \MultiFlexi\Action\CustomCommand
 
     /**
      * Configuration form for CustomCommand action.
-     *
-     * @return \Ease\Embedable
      */
     public function configForm(): \Ease\Embedable
     {

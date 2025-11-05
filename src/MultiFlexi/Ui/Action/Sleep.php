@@ -41,8 +41,6 @@ class Sleep extends \MultiFlexi\Action\Reschedule
 
     /**
      * Configuration form for Sleep action.
-     *
-     * @return \Ease\Embedable
      */
     public function configForm(): \Ease\Embedable
     {

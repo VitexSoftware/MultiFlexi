@@ -49,88 +49,101 @@ class ToDo extends \MultiFlexi\Action\ToDo
         $cnf = new \MultiFlexi\ActionConfig();
         $actionConfig = $cnf->getModuleConfig('ToDo', 'credential', $prefix, $this->runtemplate)->fetchAll();
         $userId = $cnf->getModuleConfig('ToDo', 'user_id', $prefix, $this->runtemplate)->fetchAll();
-        
 
-        
         // Office365 Credential Selection
         $container->addItem(new \Ease\TWB4\FormGroup(
             _('Office365 Credential'),
             new CredentialSelect($prefix.'[ToDo][credential]', $companyId, 'Office365'),
-            '' ,
+            '',
             _('Select Office365 credential for ToDo integration'),
         ));
-        
-                // Check if Office365 credentials exist for this company
-        $credentialEngine = new \MultiFlexi\Credential(array_key_exists(0, $actionConfig) && array_key_exists('value', $actionConfig[0]) ? (int)$actionConfig[0]['value'] : null);
+
+        // Check if Office365 credentials exist for this company
+        $credentialEngine = new \MultiFlexi\Credential(\array_key_exists(0, $actionConfig) && \array_key_exists('value', $actionConfig[0]) ? (int) $actionConfig[0]['value'] : null);
         $office365Credentials = $credentialEngine->getCompanyCredentials($companyId, ['Office365']);
-        
+
         if (!empty($office365Credentials) && $credentialEngine->getMyKey()) {
             // ToDo List Selection
-            
+
             $credentialData = $credentialEngine->getData();
-            
+
             // Validate tenant format
-            $tenant = $credentialData['OFFICE365_TENANT'] ? $this->getFullTenantDomain($credentialData['OFFICE365_TENANT']) : '';
-            if (!$this->isValidTenant($tenant)) {
-                $fullDomain = $this->getFullTenantDomain($tenant);
+            $tenant = $credentialData['OFFICE365_TENANT'] ? self::getFullTenantDomain($credentialData['OFFICE365_TENANT']) : '';
+
+            if (!self::isValidTenant($tenant)) {
+                $fullDomain = self::getFullTenantDomain($tenant);
+
                 if ($fullDomain !== $tenant) {
                     // SharePoint tenant name detected - suggest the full domain
-                    $container->addItem(new \Ease\TWB4\Alert('warning', 
-                        sprintf(_('SharePoint tenant "%s" detected. For Office365 authentication, please use the full domain: "%s"'), $tenant, $fullDomain)));
+                    $container->addItem(new \Ease\TWB4\Alert(
+                        'warning',
+                        sprintf(_('SharePoint tenant "%s" detected. For Office365 authentication, please use the full domain: "%s"'), $tenant, $fullDomain),
+                    ));
                 } else {
                     // Invalid format
-                    $container->addItem(new \Ease\TWB4\Alert('danger', 
-                        sprintf(_('Invalid Office365 Tenant identifier: "%s". Please use a valid tenant ID (GUID format like "8bc80782-70b2-4c64-a00c-2ea30b7d67d5") or domain name (like "contoso.onmicrosoft.com").'), $tenant)));
+                    $container->addItem(new \Ease\TWB4\Alert(
+                        'danger',
+                        sprintf(_('Invalid Office365 Tenant identifier: "%s". Please use a valid tenant ID (GUID format like "8bc80782-70b2-4c64-a00c-2ea30b7d67d5") or domain name (like "contoso.onmicrosoft.com").'), $tenant),
+                    ));
                 }
+
                 $container->addItem(new \Ease\TWB4\LinkButton(
-                    'credential.php?company_id='.$companyId.'&class=Office365&id='.$credentialEngine->getMyKey(), 
-                    _('Fix Office365 Credential'), 
-                    'warning'
+                    'credential.php?company_id='.$companyId.'&class=Office365&id='.$credentialEngine->getMyKey(),
+                    _('Fix Office365 Credential'),
+                    'warning',
                 ));
+
                 return $container;
-            } else {
-                $credentialData['OFFICE365_TENANT'] = $tenant;
             }
+
+            $credentialData['OFFICE365_TENANT'] = $tenant;
 
             // Determine authentication method and validate accordingly
             $clientSecret = $credentialData['OFFICE365_CLSECRET'] ?? '';
             $username = $credentialData['OFFICE365_USERNAME'] ?? '';
             $password = $credentialData['OFFICE365_PASSWORD'] ?? '';
             $clientId = $credentialData['OFFICE365_CLIENTID'] ?? '';
-            
-            
+
             $isClientCredentialsAuth = !empty($clientId) && !empty($clientSecret);
             $isUsernamePasswordAuth = !empty($username) && !empty($password);
-            
+
             if (!$isClientCredentialsAuth && !$isUsernamePasswordAuth) {
-                $container->addItem(new \Ease\TWB4\Alert('danger', 
-                    _('Invalid authentication configuration. Please provide either Username/Password OR Client ID/Client Secret.')));
-                $container->addItem(new \Ease\TWB4\LinkButton(
-                    'credential.php?company_id='.$companyId.'&class=Office365&id='.$credentialEngine->getMyKey(), 
-                    _('Fix Office365 Credential'), 
-                    'danger'
+                $container->addItem(new \Ease\TWB4\Alert(
+                    'danger',
+                    _('Invalid authentication configuration. Please provide either Username/Password OR Client ID/Client Secret.'),
                 ));
+                $container->addItem(new \Ease\TWB4\LinkButton(
+                    'credential.php?company_id='.$companyId.'&class=Office365&id='.$credentialEngine->getMyKey(),
+                    _('Fix Office365 Credential'),
+                    'danger',
+                ));
+
                 return $container;
             }
-            
+
             if ($isClientCredentialsAuth) {
                 // Validate client secret format
-                if ($this->isClientSecretId($clientSecret)) {
-                    $container->addItem(new \Ease\TWB4\Alert('danger', 
-                        _('Invalid client secret detected. You are using a Client Secret ID (GUID format) instead of the Client Secret Value. Please go to Azure Portal → App registrations → Your app → Certificates & secrets, and copy the actual secret VALUE (not the ID).')));
-                    $container->addItem(new \Ease\TWB4\LinkButton(
-                        'credential.php?company_id='.$companyId.'&class=Office365&id='.$credentialEngine->getMyKey(), 
-                        _('Fix Client Secret'), 
-                        'danger'
+                if (self::isClientSecretId($clientSecret)) {
+                    $container->addItem(new \Ease\TWB4\Alert(
+                        'danger',
+                        _('Invalid client secret detected. You are using a Client Secret ID (GUID format) instead of the Client Secret Value. Please go to Azure Portal → App registrations → Your app → Certificates & secrets, and copy the actual secret VALUE (not the ID).'),
                     ));
+                    $container->addItem(new \Ease\TWB4\LinkButton(
+                        'credential.php?company_id='.$companyId.'&class=Office365&id='.$credentialEngine->getMyKey(),
+                        _('Fix Client Secret'),
+                        'danger',
+                    ));
+
                     return $container;
                 }
-                
+
                 // For client credentials, we need a specific user ID
                 if (empty($userId)) {
-                    $container->addItem(new \Ease\TWB4\Alert('warning', 
-                        _('For Client ID/Secret authentication, you need to provide OFFICE365_USER_ID. This should be the Azure AD User ID (GUID format) of the user whose ToDo lists you want to access.')));
-                    
+                    $container->addItem(new \Ease\TWB4\Alert(
+                        'warning',
+                        _('For Client ID/Secret authentication, you need to provide OFFICE365_USER_ID. This should be the Azure AD User ID (GUID format) of the user whose ToDo lists you want to access.'),
+                    ));
+
                     // Add field for entering User ID
                     $container->addItem(new \Ease\TWB4\FormGroup(
                         _('Office365 User ID'),
@@ -138,36 +151,42 @@ class ToDo extends \MultiFlexi\Action\ToDo
                             'class' => 'form-control',
                             'placeholder' => _('e.g. 5cded639-0b8d-4abc-8976-d202aa1770fa'),
                             'pattern' => '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}',
-                            'title' => _('Enter Azure AD User ID in GUID format')
+                            'title' => _('Enter Azure AD User ID in GUID format'),
                         ]),
                         '',
                         _('Azure AD User ID (GUID format) for the user whose ToDo lists you want to access. Required for Client ID/Secret authentication.'),
                     ));
-                    
+
                     $container->addItem(new \Ease\TWB4\LinkButton(
-                        'credential.php?company_id='.$companyId.'&class=Office365&id='.$credentialEngine->getMyKey(), 
-                        _('Edit Credential'), 
-                        'warning'
+                        'credential.php?company_id='.$companyId.'&class=Office365&id='.$credentialEngine->getMyKey(),
+                        _('Edit Credential'),
+                        'warning',
                     ));
+
                     return $container;
-                } else {
-                    $credentialData['OFFICE365_USER_ID'] = $userId[0]['value'];
                 }
+
+                $credentialData['OFFICE365_USER_ID'] = $userId[0]['value'];
             }
-            
+
             // Show authentication method info
             if ($isClientCredentialsAuth) {
-                $container->addItem(new \Ease\TWB4\Alert('info', 
-                    _('Using Client ID/Secret authentication (Application permissions). Accessing ToDo lists for user: ') . $userId[0]['value']));
+                $container->addItem(new \Ease\TWB4\Alert(
+                    'info',
+                    _('Using Client ID/Secret authentication (Application permissions). Accessing ToDo lists for user: ').$userId[0]['value'],
+                ));
             } elseif ($isUsernamePasswordAuth) {
-                $container->addItem(new \Ease\TWB4\Alert('info', 
-                    _('Using Username/Password authentication (Delegated permissions). Accessing ToDo lists for: ') . $username));
+                $container->addItem(new \Ease\TWB4\Alert(
+                    'info',
+                    _('Using Username/Password authentication (Delegated permissions). Accessing ToDo lists for: ').$username,
+                ));
             }
-            
+
             $lists = $this->getToDoLists($credentialData);
-            
+
             // Prepare options for ToDo list selection
             $listOptions = ['' => _('Please select a ToDo list')];
+
             if (!empty($lists)) {
                 foreach ($lists as $list) {
                     $listOptions[$list['id']] = $list['displayName'];
@@ -175,63 +194,66 @@ class ToDo extends \MultiFlexi\Action\ToDo
             } else {
                 $listOptions = ['' => _('No ToDo lists found or authentication failed')];
             }
-            
+
             $container->addItem(new \Ease\TWB4\FormGroup(
                 _('ToDo List'),
                 new \Ease\Html\SelectTag($prefix.'[ToDo][list]', $listOptions, '', ['class' => 'form-control', 'id' => 'todo-list-select']),
                 '',
                 _('Select which ToDo list to use for task management'),
             ));
-            
+
             // Task Priority Selection
             $container->addItem(new \Ease\TWB4\FormGroup(
                 _('Default Task Priority'),
                 new \Ease\Html\SelectTag($prefix.'[ToDo][priority]', [
                     'low' => _('Low'),
                     'normal' => _('Normal'),
-                    'high' => _('High')
+                    'high' => _('High'),
                 ], 'normal', ['class' => 'form-control']),
                 '',
                 _('Default priority for created tasks'),
             ));
-            
+
             // Task Subject Template
             $container->addItem(new \Ease\TWB4\FormGroup(
                 _('Task Subject Template'),
-                new \Ease\Html\InputTextTag($prefix.'[ToDo][subject_template]', 
-                    _('Task: {job_name} - {status}'), 
-                    ['class' => 'form-control', 'placeholder' => _('Use {job_name}, {status}, {company} placeholders')]
+                new \Ease\Html\InputTextTag(
+                    $prefix.'[ToDo][subject_template]',
+                    _('Task: {job_name} - {status}'),
+                    ['class' => 'form-control', 'placeholder' => _('Use {job_name}, {status}, {company} placeholders')],
                 ),
                 '',
                 _('Template for task subject. Available placeholders: {job_name}, {status}, {company}'),
             ));
-            
+
             // Task Body Template
             $container->addItem(new \Ease\TWB4\FormGroup(
                 _('Task Body Template'),
-                new \Ease\Html\TextareaTag($prefix.'[ToDo][body_template]', 
+                new \Ease\Html\TextareaTag(
+                    $prefix.'[ToDo][body_template]',
                     _("Job: {job_name}\nCompany: {company}\nStatus: {status}\nTime: {timestamp}"),
-                    ['class' => 'form-control', 'rows' => 4, 
-                     'placeholder' => _('Use {job_name}, {status}, {company}, {timestamp} placeholders')]
+                    ['class' => 'form-control', 'rows' => 4,
+                        'placeholder' => _('Use {job_name}, {status}, {company}, {timestamp} placeholders')],
                 ),
                 '',
                 _('Template for task body. Available placeholders: {job_name}, {status}, {company}, {timestamp}'),
             ));
-            
         } else {
             // No credentials available - show create button
-            $container->addItem(new \Ease\TWB4\Alert('warning', 
-                _('No Office365 credentials found. Please create one first.')));
+            $container->addItem(new \Ease\TWB4\Alert(
+                'warning',
+                _('No Office365 credentials found. Please create one first.'),
+            ));
             $container->addItem(new \Ease\TWB4\LinkButton(
-                'credential.php?company_id='.$companyId.'&class=Office365', 
-                _('Create Office365 Credential'), 
-                'primary'
+                'credential.php?company_id='.$companyId.'&class=Office365',
+                _('Create Office365 Credential'),
+                'primary',
             ));
         }
-         
-        return $container; 
+
+        return $container;
     }
-    
+
     /**
      * Gets a list of To Do lists from Microsoft Graph API.
      *
@@ -247,75 +269,79 @@ class ToDo extends \MultiFlexi\Action\ToDo
         $username = $credentialData['OFFICE365_USERNAME'] ?? '';
         $password = $credentialData['OFFICE365_PASSWORD'] ?? '';
         $userId = $credentialData['OFFICE365_USER_ID'] ?? '';
-        
+
         $isClientCredentialsAuth = !empty($clientId) && !empty($clientSecret);
         $isUsernamePasswordAuth = !empty($username) && !empty($password);
-        
+
         if ($isClientCredentialsAuth) {
             // Use client credentials flow (application authentication)
             $accessToken = $this->getAccessToken($credentialData);
-            
+
             if (!$accessToken) {
                 $this->addStatusMessage('Failed to get Office365 access token using client credentials', 'error');
+
                 return [];
             }
-            
+
             // For client credentials flow, we need a specific user ID
             if (empty($userId)) {
                 $this->addStatusMessage('Office365 User ID is required for client credentials authentication', 'error');
+
                 return [];
             }
-            
+
             // First, verify the user exists and we have permission to access their data
             if (!$this->verifyUserAccess($userId, $accessToken)) {
                 $this->debugTokenPermissions($accessToken);
                 $this->addStatusMessage('Cannot access user data. Please check: 1) User ID is correct, 2) Application has proper Graph API permissions (Tasks.ReadWrite.All, User.Read.All), 3) Admin consent is granted', 'error');
                 $this->addStatusMessage('Required Azure App Registration permissions: API Permissions → Microsoft Graph → Application permissions → Tasks.ReadWrite.All, User.Read.All', 'info');
+
                 return [];
             }
-            
+
             // Use specific user endpoint for application authentication
             $apiUrl = "https://graph.microsoft.com/v1.0/users/{$userId}/todo/lists";
-            
         } elseif ($isUsernamePasswordAuth) {
             // Use username/password flow (delegated authentication)
             $accessToken = $this->getAccessTokenWithUsernamePassword($credentialData);
-            
+
             if (!$accessToken) {
                 $this->addStatusMessage('Failed to get Office365 access token using username/password', 'error');
+
                 return [];
             }
-            
+
             // Use /me endpoint for delegated authentication
             $apiUrl = 'https://graph.microsoft.com/v1.0/me/todo/lists';
-            
         } else {
             $this->addStatusMessage('Invalid authentication configuration. Provide either Client ID/Secret OR Username/Password', 'error');
+
             return [];
         }
-        
+
         // Initialize cURL for getting task lists
         $ch = curl_init();
-        
+
         // Set cURL parameters for getting lists
         curl_setopt_array($ch, [
-            CURLOPT_URL => $apiUrl,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => [
-                'Authorization: Bearer ' . $accessToken,
+            \CURLOPT_URL => $apiUrl,
+            \CURLOPT_RETURNTRANSFER => true,
+            \CURLOPT_HTTPHEADER => [
+                'Authorization: Bearer '.$accessToken,
                 'Content-Type: application/json',
             ],
         ]);
 
         // Execute HTTP request
         $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $httpCode = curl_getinfo($ch, \CURLINFO_HTTP_CODE);
         $curlError = curl_error($ch);
         curl_close($ch);
 
         // Check cURL errors
         if ($curlError) {
-            $this->addStatusMessage('cURL error while getting lists: ' . $curlError, 'error');
+            $this->addStatusMessage('cURL error while getting lists: '.$curlError, 'error');
+
             return [];
         }
 
@@ -323,38 +349,40 @@ class ToDo extends \MultiFlexi\Action\ToDo
         if ($httpCode !== 200) {
             // Try to decode error response for better error messages
             $errorData = json_decode($response, true);
+
             if ($errorData && isset($errorData['error'])) {
                 $errorCode = $errorData['error']['code'] ?? $errorData['error'];
                 $errorMessage = $errorData['error']['message'] ?? '';
                 $requestId = $errorData['error']['innerError']['request-id'] ?? '';
-                
+
                 // Handle specific error cases
                 if ($errorCode === 'UnknownError' && empty($errorMessage)) {
-                    $this->addStatusMessage('Microsoft Graph API returned UnknownError. This often indicates insufficient permissions or invalid user ID. Request ID: ' . $requestId, 'error');
-                    $this->addStatusMessage('API URL used: ' . $apiUrl, 'debug');
-                } elseif ($errorData['error'] === 'invalid_client' || (isset($errorData['error_codes']) && in_array(7000215, $errorData['error_codes']))) {
+                    $this->addStatusMessage('Microsoft Graph API returned UnknownError. This often indicates insufficient permissions or invalid user ID. Request ID: '.$requestId, 'error');
+                    $this->addStatusMessage('API URL used: '.$apiUrl, 'debug');
+                } elseif ($errorData['error'] === 'invalid_client' || (isset($errorData['error_codes']) && \in_array(7000215, $errorData['error_codes'], true))) {
                     $this->addStatusMessage('Authentication failed: Invalid client secret. Please check your Office365 client secret in credentials.', 'error');
                 } else {
                     $errorMsg = $errorData['error_description'] ?? $errorMessage ?? $errorCode;
-                    $this->addStatusMessage('Microsoft Graph API error: ' . $errorMsg . ' (Request ID: ' . $requestId . ')', 'error');
+                    $this->addStatusMessage('Microsoft Graph API error: '.$errorMsg.' (Request ID: '.$requestId.')', 'error');
                 }
             } else {
-                $this->addStatusMessage('HTTP error while getting lists: ' . $httpCode . '. Response: ' . substr($response, 0, 500), 'error');
+                $this->addStatusMessage('HTTP error while getting lists: '.$httpCode.'. Response: '.substr($response, 0, 500), 'error');
             }
+
             return [];
         }
 
         // Decode JSON response
         $data = json_decode($response, true);
-        
+
         if (!$data || !isset($data['value'])) {
             $this->addStatusMessage('Invalid response while getting lists', 'error');
+
             return [];
         }
 
         return $data['value'];
     }
-
 
     /**
      * Validates if the tenant identifier is in a correct format.
@@ -363,34 +391,34 @@ class ToDo extends \MultiFlexi\Action\ToDo
      *
      * @return bool True if tenant format is valid
      */
-    private function isValidTenant(string $tenant): bool
+    private static function isValidTenant(string $tenant): bool
     {
         if (empty($tenant)) {
             return false;
         }
-        
+
         // Check if it's a valid GUID format
         if (preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i', $tenant)) {
             return true;
         }
-        
+
         // Check if it's a valid domain name format (contains at least one dot)
-        if (filter_var($tenant, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME) && strpos($tenant, '.') !== false) {
+        if (filter_var($tenant, \FILTER_VALIDATE_DOMAIN, \FILTER_FLAG_HOSTNAME) && str_contains($tenant, '.')) {
             return true;
         }
-        
+
         // Special case for "common" tenant
         if ($tenant === 'common') {
             return true;
         }
-        
+
         // Check if it's a valid SharePoint/OneDrive tenant name (alphanumeric + hyphens, no dots)
         // These should be converted to full domain format for authentication
         if (preg_match('/^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$/', $tenant) && !strpos($tenant, '.')) {
             // This is likely a SharePoint tenant name that needs .onmicrosoft.com suffix
             return false; // We'll handle this with a helpful error message
         }
-        
+
         return false;
     }
 
@@ -401,11 +429,12 @@ class ToDo extends \MultiFlexi\Action\ToDo
      *
      * @return string Full Office365 domain
      */
-    private function getFullTenantDomain(string $tenant): string
+    private static function getFullTenantDomain(string $tenant): string
     {
-        if (strpos($tenant, '.') === false && preg_match('/^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$/', $tenant)) {
-            return $tenant . '.onmicrosoft.com';
+        if (!str_contains($tenant, '.') && preg_match('/^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$/', $tenant)) {
+            return $tenant.'.onmicrosoft.com';
         }
+
         return $tenant;
     }
 
@@ -416,7 +445,7 @@ class ToDo extends \MultiFlexi\Action\ToDo
      *
      * @return bool True if it appears to be a client secret ID instead of a value
      */
-    private function isClientSecretId(string $secret): bool
+    private static function isClientSecretId(string $secret): bool
     {
         // Client secret IDs are typically GUIDs (same format as tenant IDs)
         return preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i', $secret) === 1;
@@ -427,7 +456,7 @@ class ToDo extends \MultiFlexi\Action\ToDo
      *
      * @param array $credentialData Office365 credential data
      *
-     * @return string|null Access token or null on failure
+     * @return null|string Access token or null on failure
      */
     private function getAccessTokenWithUsernamePassword(array $credentialData): ?string
     {
@@ -435,77 +464,82 @@ class ToDo extends \MultiFlexi\Action\ToDo
         $username = $credentialData['OFFICE365_USERNAME'] ?? '';
         $password = $credentialData['OFFICE365_PASSWORD'] ?? '';
         $clientId = $credentialData['OFFICE365_CLIENTID'] ?? '';
-        
+
         if (empty($tenant) || empty($username) || empty($password)) {
             $this->addStatusMessage('Missing required Office365 credentials for username/password authentication', 'error');
+
             return null;
         }
-        
+
         // Use default client ID if not provided (Microsoft Graph PowerShell client)
         if (empty($clientId)) {
             $clientId = '14d82eec-204b-4c2f-b7e8-296a70dab67e'; // Microsoft Graph PowerShell
         }
-        
+
         // OAuth2 endpoint for getting access token with username/password
         $tokenUrl = "https://login.microsoftonline.com/{$tenant}/oauth2/v2.0/token";
-        
+
         $postData = [
             'grant_type' => 'password',
             'client_id' => $clientId,
             'username' => $username,
             'password' => $password,
-            'scope' => 'https://graph.microsoft.com/Tasks.ReadWrite https://graph.microsoft.com/User.Read'
+            'scope' => 'https://graph.microsoft.com/Tasks.ReadWrite https://graph.microsoft.com/User.Read',
         ];
-        
+
         // Initialize cURL for token request
         $ch = curl_init();
-        
+
         curl_setopt_array($ch, [
-            CURLOPT_URL => $tokenUrl,
-            CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => http_build_query($postData),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => [
+            \CURLOPT_URL => $tokenUrl,
+            \CURLOPT_POST => true,
+            \CURLOPT_POSTFIELDS => http_build_query($postData),
+            \CURLOPT_RETURNTRANSFER => true,
+            \CURLOPT_HTTPHEADER => [
                 'Content-Type: application/x-www-form-urlencoded',
             ],
         ]);
-        
+
         $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $httpCode = curl_getinfo($ch, \CURLINFO_HTTP_CODE);
         $curlError = curl_error($ch);
         curl_close($ch);
-        
+
         if ($curlError) {
-            $this->addStatusMessage('cURL error while getting token with username/password: ' . $curlError, 'error');
+            $this->addStatusMessage('cURL error while getting token with username/password: '.$curlError, 'error');
+
             return null;
         }
-        
+
         if ($httpCode !== 200) {
             // Try to decode error response for better error messages
             $errorData = json_decode($response, true);
+
             if ($errorData && isset($errorData['error'])) {
                 $errorMsg = $errorData['error_description'] ?? $errorData['error'];
-                $this->addStatusMessage('Authentication failed with username/password: ' . $errorMsg, 'error');
+                $this->addStatusMessage('Authentication failed with username/password: '.$errorMsg, 'error');
             } else {
-                $this->addStatusMessage('HTTP error while getting token with username/password: ' . $httpCode, 'error');
+                $this->addStatusMessage('HTTP error while getting token with username/password: '.$httpCode, 'error');
             }
+
             return null;
         }
-        
+
         $tokenData = json_decode($response, true);
-        
+
         if (!$tokenData || !isset($tokenData['access_token'])) {
             $this->addStatusMessage('Invalid token response from username/password authentication', 'error');
+
             return null;
         }
-        
+
         return $tokenData['access_token'];
     }
 
     /**
      * Verify that we can access the specified user's data.
      *
-     * @param string $userId The user ID to check
+     * @param string $userId      The user ID to check
      * @param string $accessToken The access token to use
      *
      * @return bool True if user is accessible, false otherwise
@@ -514,38 +548,42 @@ class ToDo extends \MultiFlexi\Action\ToDo
     {
         // Try to get basic user information first
         $userUrl = "https://graph.microsoft.com/v1.0/users/{$userId}";
-        
+
         $ch = curl_init();
         curl_setopt_array($ch, [
-            CURLOPT_URL => $userUrl,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => [
-                'Authorization: Bearer ' . $accessToken,
+            \CURLOPT_URL => $userUrl,
+            \CURLOPT_RETURNTRANSFER => true,
+            \CURLOPT_HTTPHEADER => [
+                'Authorization: Bearer '.$accessToken,
                 'Content-Type: application/json',
             ],
         ]);
-        
+
         $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $httpCode = curl_getinfo($ch, \CURLINFO_HTTP_CODE);
         curl_close($ch);
-        
+
         if ($httpCode === 200) {
             $userData = json_decode($response, true);
+
             if ($userData && isset($userData['id'])) {
-                $this->addStatusMessage('Successfully verified access to user: ' . ($userData['displayName'] ?? $userData['userPrincipalName'] ?? $userId), 'success');
+                $this->addStatusMessage('Successfully verified access to user: '.($userData['displayName'] ?? $userData['userPrincipalName'] ?? $userId), 'success');
+
                 return true;
             }
         } else {
             $errorData = json_decode($response, true);
             $errorMsg = '';
+
             if ($errorData && isset($errorData['error'])) {
                 $errorCode = $errorData['error']['code'] ?? '';
                 $errorMessage = $errorData['error']['message'] ?? '';
                 $errorMsg = " Error: {$errorCode} - {$errorMessage}";
             }
+
             $this->addStatusMessage("Cannot access user information (HTTP {$httpCode}).{$errorMsg}", 'error');
         }
-        
+
         return false;
     }
 
@@ -553,62 +591,60 @@ class ToDo extends \MultiFlexi\Action\ToDo
      * Check what permissions the current access token has.
      *
      * @param string $accessToken The access token to check
-     *
-     * @return void
      */
     private function debugTokenPermissions(string $accessToken): void
     {
         // Try to get token information to see what permissions we have
         $tokenInfoUrl = 'https://graph.microsoft.com/v1.0/me';
-        
+
         $ch = curl_init();
         curl_setopt_array($ch, [
-            CURLOPT_URL => $tokenInfoUrl,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => [
-                'Authorization: Bearer ' . $accessToken,
+            \CURLOPT_URL => $tokenInfoUrl,
+            \CURLOPT_RETURNTRANSFER => true,
+            \CURLOPT_HTTPHEADER => [
+                'Authorization: Bearer '.$accessToken,
                 'Content-Type: application/json',
             ],
         ]);
-        
+
         $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $httpCode = curl_getinfo($ch, \CURLINFO_HTTP_CODE);
         curl_close($ch);
-        
+
         if ($httpCode === 200) {
             $this->addStatusMessage('Token has access to /me endpoint (delegated permissions)', 'debug');
         } else {
             $this->addStatusMessage('Token does not have access to /me endpoint - likely using application permissions', 'debug');
         }
-        
+
         // Try to get users list to check application permissions
         $usersUrl = 'https://graph.microsoft.com/v1.0/users?$top=1';
-        
+
         $ch = curl_init();
         curl_setopt_array($ch, [
-            CURLOPT_URL => $usersUrl,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => [
-                'Authorization: Bearer ' . $accessToken,
+            \CURLOPT_URL => $usersUrl,
+            \CURLOPT_RETURNTRANSFER => true,
+            \CURLOPT_HTTPHEADER => [
+                'Authorization: Bearer '.$accessToken,
                 'Content-Type: application/json',
             ],
         ]);
-        
+
         $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $httpCode = curl_getinfo($ch, \CURLINFO_HTTP_CODE);
         curl_close($ch);
-        
+
         if ($httpCode === 200) {
             $this->addStatusMessage('Token has access to /users endpoint (application permissions)', 'debug');
         } else {
             $errorData = json_decode($response, true);
             $errorMsg = '';
+
             if ($errorData && isset($errorData['error'])) {
                 $errorMsg = $errorData['error']['code'] ?? 'Unknown error';
             }
-            $this->addStatusMessage('Token does not have access to /users endpoint: ' . $errorMsg, 'debug');
+
+            $this->addStatusMessage('Token does not have access to /users endpoint: '.$errorMsg, 'debug');
         }
     }
-
-    
 }
