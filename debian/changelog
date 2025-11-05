@@ -1,8 +1,17 @@
-multiflexi (2.0.1) UNRELEASED; urgency=medium
+multiflexi (2.1.0) unstable; urgency=medium
 
+  [ Vítězslav Vitex Dvořák ]
   * Actions saving fix
 
- -- Vítězslav Vitex Dvořák <info@vitexsoftware.cz>  Wed, 05 Nov 2025 14:48:20 +0100
+  [ vitex ]
+  * Updated job lifecycle documentation with comprehensive artifact
+    preservation details
+  * Enhanced job.rst with complete artifact storage system documentation
+    and CLI management guide
+  * Added detailed documentation for 5-phase job lifecycle, artifact
+    preservation, and command-line management
+
+ -- vitex <info@vitexsoftware.cz>  Wed, 05 Nov 2025 22:59:49 +0100
 
 multiflexi (2.0.0) noble; urgency=medium
 
@@ -230,7 +239,7 @@ multiflexi (1.12.0) jammy; urgency=medium
 
  -- Vítězslav Dvořák <info@vitexsoftware.cz>  Sat, 04 May 2024 08:46:06 +0200
 
-multiflexi (1.10.5) UNRELEASED; urgency=medium
+multiflexi (1.10.5) unstable; urgency=medium
 
   [ CyberVitexus ]
   * Ability choose run interval between hour and year
