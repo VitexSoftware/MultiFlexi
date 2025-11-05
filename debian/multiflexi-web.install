@@ -9,7 +9,7 @@ src/assets/Buttons-1.5.6/swf/*            usr/share/multiflexi/assets/Buttons-1.
 src/images/*                              usr/share/multiflexi/images
 src/css/*                                 usr/share/multiflexi/css
 src/MultiFlexi/*.php                      usr/lib/multiflexi/MultiFlexi/
-src/MultiFlexi/Action                     usr/lib/multiflexi/MultiFlexi/
+#src/MultiFlexi/Action                     usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Audit                      usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Command                    usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Consent                    usr/lib/multiflexi/MultiFlexi/
