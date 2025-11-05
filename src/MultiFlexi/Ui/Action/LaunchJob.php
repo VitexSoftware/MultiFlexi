@@ -57,8 +57,6 @@ class LaunchJob extends \MultiFlexi\Action\LaunchJob
 
     /**
      * Configuration form for LaunchJob action.
-     *
-     * @return \Ease\Embedable
      */
     public function configForm(): \Ease\Embedable
     {

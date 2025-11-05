@@ -38,14 +38,13 @@ class ActionsAdministration extends \Ease\TWB4\Form
         foreach ($this->actions as $action) {
             // First try to use the UI-specific class, then fallback to core
             $uiActionClass = '\\MultiFlexi\\Ui\\Action\\'.$action;
-            
+
             $actionClass = new $uiActionClass(new \MultiFlexi\RunTemplate());
-            
+
             $moduleRow = new \Ease\TWB4\Row();
 
             $moduleRow->addColumn(2, new ActionImage($action, ['height' => '50px']));
             $moduleRow->addColumn(4, [new \Ease\Html\StrongTag($uiActionClass::name()), new \Ease\Html\PTag(new \Ease\Html\SmallTag($uiActionClass::description()))]);
-           
 
             $this->addItem(new \Ease\Html\PTag($moduleRow));
         }

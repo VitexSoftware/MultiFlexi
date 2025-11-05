@@ -158,7 +158,7 @@ class CredentialForm extends SecureForm
         $credTypeFieldRow->addColumn(4, [$field->getType(), new \Ease\Html\H2Tag($field->getCode())]);
 
         $field->setValue($credential->getDataValue($field->getCode()));
-        
+
         $inputProperties = [];
 
         if ($field->isManual() === false) {

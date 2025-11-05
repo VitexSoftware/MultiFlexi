@@ -151,7 +151,7 @@ class SleepTest extends TestCase
         $inputs = $sleepInstance->inputs($prefix);
 
         $this->assertInstanceOf(\Ease\Embedable::class, $inputs);
-        
+
         // The input should be a FormGroup
         $this->assertInstanceOf(\Ease\TWB4\FormGroup::class, $inputs);
 
