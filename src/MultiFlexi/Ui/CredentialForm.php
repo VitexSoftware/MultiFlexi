@@ -46,7 +46,7 @@ class CredentialForm extends SecureForm
     {
         $this->kredenc = $kredenc;
         $formContents = [];
-        $formType = $kredenc->getDataValue('formType');
+        $formTypeId = $kredenc->getDataValue('credential_type_id');
 
         $credentialTypeSelect = null; // Ensure variable is always defined
 
@@ -65,7 +65,7 @@ class CredentialForm extends SecureForm
                 $formContents[] = new FormGroup(_('Credential Type'), new InputTextTag('credential_type_id', _('No credential types for company defined yet'), ['readonly' => 'readonly', 'disabled' => 'disabled']));
             }
 
-            $formContents[] = new LinkButton('credentialtype.php?company_id='.$kredenc->getDataValue('company_id').'&class='.$formType, '️➕ 🔐 new credential type', 'success btn-sm', ['title' => _('New Credential Type')]);
+            $formContents[] = new LinkButton('credentialtype.php?company_id='.$kredenc->getDataValue('company_id').'&class='.$kredenc->getCredentialType()->getDataValue('class'), '️➕ 🔐 new credential type', 'success btn-sm', ['title' => _('New Credential Type')]);
         } else {
             $formContents[] = new FormGroup(_('Choose company first'), new InputHiddenTag('credential_type_id', '0'));
         }
@@ -157,6 +157,8 @@ class CredentialForm extends SecureForm
         $credTypeFieldRow = new Row();
         $credTypeFieldRow->addColumn(4, [$field->getType(), new \Ease\Html\H2Tag($field->getCode())]);
 
+        $field->setValue($credential->getDataValue($field->getCode()));
+        
         $inputProperties = [];
 
         if ($field->isManual() === false) {

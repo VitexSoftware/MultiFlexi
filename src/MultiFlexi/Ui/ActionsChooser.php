@@ -24,8 +24,11 @@ namespace MultiFlexi\Ui;
  */
 class ActionsChooser extends \Ease\Html\DivTag
 {
-    public function __construct($prefix, \MultiFlexi\Application $app, $toggles = [], $properties = [])
+    public \MultiFlexi\RunTemplate $runtemplate;
+    
+    public function __construct($prefix, \MultiFlexi\RunTemplate $runTemplate, $toggles = [], $properties = [])
     {
+        $this->runtemplate = $runTemplate;
         \Ease\Functions::loadClassesInNamespace('MultiFlexi\\Action');
         $actions = \Ease\Functions::classesInNamespace('MultiFlexi\\Action');
 
@@ -34,7 +37,7 @@ class ActionsChooser extends \Ease\Html\DivTag
         foreach ($actions as $action) {
             $actionClass = '\\MultiFlexi\\Action\\'.$action;
 
-            if ($actionClass::usableForApp($app)) {
+            if ($actionClass::usableForApp($runTemplate->getApplication())) {
                 $moduleRow = new \Ease\TWB4\Row();
 
                 $moduleRow->addColumn(1, new ActionImage($action, ['height' => '50px']));
@@ -98,20 +101,15 @@ class ActionsChooser extends \Ease\Html\DivTag
      *
      * @return mixed Form field(s)
      */
-    private static function getActionInputs(string $action, string $prefix)
+    public function getActionInputs(string $action, string $prefix)
     {
         // First try to use the UI-specific class
         $uiActionClass = '\\MultiFlexi\\Ui\\Action\\'.$action;
 
         if (class_exists($uiActionClass) && method_exists($uiActionClass, 'inputs')) {
-            return $uiActionClass::inputs($prefix);
-        }
-
-        // Fallback to the core action class if it has inputs method
-        $actionClass = '\\MultiFlexi\\Action\\'.$action;
-
-        if (method_exists($actionClass, 'inputs')) {
-            return $actionClass::inputs($prefix);
+            // Create instance with a dummy RunTemplate since we only need inputs
+            $instance = new $uiActionClass($this->runtemplate);
+            return $instance->inputs($prefix);
         }
 
         // If no inputs method exists, return empty badge

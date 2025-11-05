@@ -36,12 +36,16 @@ class ActionsAdministration extends \Ease\TWB4\Form
         parent::__construct([], $properties);
 
         foreach ($this->actions as $action) {
-            $actionClass = '\\MultiFlexi\\Action\\'.$action;
+            // First try to use the UI-specific class, then fallback to core
+            $uiActionClass = '\\MultiFlexi\\Ui\\Action\\'.$action;
+            
+            $actionClass = new $uiActionClass(new \MultiFlexi\RunTemplate());
+            
             $moduleRow = new \Ease\TWB4\Row();
 
             $moduleRow->addColumn(2, new ActionImage($action, ['height' => '50px']));
-            $moduleRow->addColumn(4, [new \Ease\Html\StrongTag($actionClass::name()), new \Ease\Html\PTag(new \Ease\Html\SmallTag($actionClass::description()))]);
-            $moduleRow->addColumn(4, $actionClass::configForm());
+            $moduleRow->addColumn(4, [new \Ease\Html\StrongTag($uiActionClass::name()), new \Ease\Html\PTag(new \Ease\Html\SmallTag($uiActionClass::description()))]);
+           
 
             $this->addItem(new \Ease\Html\PTag($moduleRow));
         }
