@@ -27,31 +27,6 @@ $runTemplate = new RunTemplate(WebPage::getRequestValue('id', 'int'));
 
 $actions = new \MultiFlexi\ActionConfig();
 
-if (WebPage::isPosted()) {
-    unset($_POST['csrf_token'], $_REQUEST['csrf_token']);
-
-    $succesActions = ActionsChooser::toggles('success');
-    $failActions = ActionsChooser::toggles('fail');
-    $runTemplate->setDataValue('fail', serialize($failActions));
-    $runTemplate->setDataValue('success', serialize($succesActions));
-    $runTemplate->saveToSQL();
-
-    $successConfig = ActionsChooser::formModuleCofig('success');
-
-    if (\is_array($successConfig) && !empty($successConfig)) {
-        $actions->saveModeConfigs('success', $successConfig, $runTemplate->getMyKey());
-    }
-
-    $failConfig = ActionsChooser::formModuleCofig('fail');
-
-    if (\is_array($failConfig) && !empty($failConfig)) {
-        $actions->saveModeConfigs('fail', $failConfig, $runTemplate->getMyKey());
-    }
-} else {
-    $failActions = $runTemplate->getDataValue('fail') ? unserialize($runTemplate->getDataValue('fail')) : [];
-    $succesActions = $runTemplate->getDataValue('success') ? unserialize($runTemplate->getDataValue('success')) : [];
-}
-
 if (WebPage::getRequestValue('new', 'int') === 1) {
     $app = new Application(WebPage::getRequestValue('app_id', 'int'));
     $runTemplate->setDataValue('app_id', WebPage::getRequestValue('app_id', 'int'));
@@ -83,6 +58,8 @@ $configurator = new \MultiFlexi\Configuration([
 ], ['autoload' => false]);
 
 if (WebPage::singleton()->isPosted()) {
+    unset($_POST['csrf_token'], $_REQUEST['csrf_token']);
+    
     $dataToSave = $_POST;
 
     if (\array_key_exists('credential', $dataToSave)) {
