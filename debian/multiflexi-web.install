@@ -36,4 +36,4 @@ i18n/en_US/LC_MESSAGES/*.mo                	usr/share/locale/en_US/LC_MESSAGES/
 
 GDPR_ARTICLE_16_IMPLEMENTATION.md           usr/share/doc/multiflexi-web/
 
-debian/multiflexi.logrotate etc/logrotate.d/multiflexi
+debian/multiflexi.logrotate etc/logrotate.d/
