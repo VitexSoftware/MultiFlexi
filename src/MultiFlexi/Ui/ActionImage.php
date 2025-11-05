@@ -36,11 +36,16 @@ class ActionImage extends \Ease\Html\ImgTag
      */
     public function __construct(string $actionName, array $properties = [])
     {
-        $actionClass = '\\MultiFlexi\\Action\\'.$actionName;
+        // First try to use the UI-specific class
+        $uiActionClass = '\\MultiFlexi\\Ui\\Action\\'.$actionName;
+        $coreActionClass = '\\MultiFlexi\\Action\\'.$actionName;
 
-        if (class_exists($actionClass)) {
-            $image = $actionClass::logo();
-            $properties['title'] = $actionClass::description();
+        if (class_exists($uiActionClass) && method_exists($uiActionClass, 'logo')) {
+            $image = $uiActionClass::logo();
+            $properties['title'] = $uiActionClass::description();
+        } elseif (class_exists($coreActionClass) && method_exists($coreActionClass, 'logo')) {
+            $image = $coreActionClass::logo();
+            $properties['title'] = $coreActionClass::description();
         } else {
             $image = 'images/cancel.svg';
             $properties['title'] = _('Action not availble');

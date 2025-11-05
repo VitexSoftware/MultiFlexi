@@ -121,6 +121,7 @@ Contents
    job
    runtemplate
    apps
+   actions
    executors
    commandline
    zabbix

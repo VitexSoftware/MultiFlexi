@@ -189,6 +189,7 @@ if ($addField) {
         if ($fielder->recordExists(['credential_type_id' => $crtype->getMyKey(), 'keyname' => $columnProvided->getCode()]) === false) {
             try {
                 $fielder->insertToSQL();
+                $fielder->addStatusMessage(sprintf(_('Column %s  was added to %s'), $columnProvided->getCode(), $crtype->getRecordName()), 'success');
             } catch (\PDOException $exc) {
                 $fielder->addStatusMessage(sprintf(_('Column %s not added to %s'), $columnProvided->getCode(), $crtype->getRecordName()), 'error');
             }
