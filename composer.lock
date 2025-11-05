@@ -7822,8 +7822,8 @@
             "version": "2.1.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/df5ede516fd7ca837ee0e219a8b72be832322977",
-                "reference": "df5ede516fd7ca837ee0e219a8b72be832322977",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/c2497686ca5a71511ca1506dac9025af8c069570",
+                "reference": "c2497686ca5a71511ca1506dac9025af8c069570",
                 "shasum": ""
             },
             "require": {
@@ -7869,7 +7869,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-05T08:21:17+00:00"
+            "time": "2025-11-05T10:43:48+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -7930,12 +7930,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "98384864722106029944f669cc51668a0de2717a"
+                "reference": "ba70759fec4d74412f9854a5c613a5af3e4032d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/98384864722106029944f669cc51668a0de2717a",
-                "reference": "98384864722106029944f669cc51668a0de2717a",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/ba70759fec4d74412f9854a5c613a5af3e4032d3",
+                "reference": "ba70759fec4d74412f9854a5c613a5af3e4032d3",
                 "shasum": ""
             },
             "require": {
@@ -8012,7 +8012,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-26T13:02:34+00:00"
+            "time": "2025-11-05T12:37:26+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",

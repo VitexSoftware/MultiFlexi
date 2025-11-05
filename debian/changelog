@@ -1,8 +1,14 @@
-multiflexi (2.0.0) UNRELEASED; urgency=medium
+multiflexi (2.0.1) UNRELEASED; urgency=medium
+
+  * Actions saving fix
+
+ -- Vítězslav Vitex Dvořák <info@vitexsoftware.cz>  Wed, 05 Nov 2025 14:48:20 +0100
+
+multiflexi (2.0.0) noble; urgency=medium
 
   * v2.0.0 release
 
- -- Vítězslav Vitex Dvořák <info@vitexsoftware.cz>  Sat, 25 Oct 2025 17:30:58 +0200
+ -- Vítězslav Vitex Dvořák <info@vitexsoftware.cz>  Wed, 05 Nov 2025 14:48:04 +0100
 
 multiflexi (1.32.0) jammy; urgency=medium
 
