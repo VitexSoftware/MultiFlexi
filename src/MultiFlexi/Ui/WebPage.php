@@ -56,6 +56,9 @@ class WebPage extends \Ease\TWB4\WebPage
         $this->head->addItem('<link rel="icon" type="image/png" href="images/project-logo.png">');
         $this->head->addItem('<link rel="icon" type="image/x-icon" href="favicon.ico">');
 
+        // Include Font Awesome globally for all icons
+        $this->includeCss('css/font-awesome.min.css');
+
         // Add CSRF protection
         $this->addCsrfProtection();
 
