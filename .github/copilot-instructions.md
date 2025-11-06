@@ -55,6 +55,15 @@ This ensures the relative paths (../vendor/autoload.php and ../.env) work correc
 
 The application uses relative paths intentionally - they are resolved during Debian packaging via sed commands in debian/rules file for production deployment.
 
+We work with locally stored files in js/ and css/ directories. Local paths are used in source code for development (e.g., 'js/summernote-bs4.min.js', 'css/font-awesome.min.css'). When the application is installed from deb package and when the specific system packages with included files does exist (use "apt-file search <filename>" command), it uses system files with "/javascript/" prefix (e.g., '/javascript/jquery-datatables/jquery.dataTables.js', '/javascript/font-awesome/css/font-awesome.min.css'). The source code is automatically adapted for system js and css files using sed commands in debian/rules during packaging.
+
+**Development vs Production File Paths:**
+- **Development**: Use relative paths to local files (js/file.js, css/file.css) for intranet/offline capability
+- **Production (Debian package)**: Automatically converted to system paths (/javascript/package/file.js) when system packages are available
+- **Conversion**: Handled by sed commands in debian/rules file - NO manual path changes needed in source code
+- **System Package Detection**: Use `apt-file search <filename>` to verify if system package provides the file
+- **Fallback**: If system package unavailable, local files are used as bundled in the package
+
 After every single edit to a PHP file, always run `php -l` on the edited file to lint it and ensure code sanity before proceeding further. This is mandatory for all PHP code changes.
 
 All files *.app.json must conform to the schema available at: https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json
