@@ -299,32 +299,6 @@ Required environment variables:
 Integration and Automation
 ==========================
 
-Cron Integration
-----------------
-
-Jobs can be easily integrated with system cron for scheduled execution:
-
-.. code-block:: bash
-
-   # Add to crontab for hourly execution
-   0 * * * * /usr/bin/multiflexi-cli job:run 123
-
-   # Daily job execution at 2 AM
-   0 2 * * * /usr/bin/multiflexi-cli queue:process
-
-CI/CD Integration
------------------
-
-MultiFlexi CLI commands integrate seamlessly into CI/CD pipelines:
-
-.. code-block:: yaml
-
-   # GitHub Actions example
-   - name: Run MultiFlexi Job
-     run: |
-       multiflexi-cli job:create --template ${{ vars.TEMPLATE_ID }} --company ${{ vars.COMPANY_ID }}
-       multiflexi-cli job:run ${{ steps.create.outputs.job_id }}
-
 Monitoring and Alerting
 -----------------------
 
