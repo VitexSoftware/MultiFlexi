@@ -30,6 +30,7 @@ override_dh_install:
 	sed -i -e 's/js\/dataTables.bootstrap4.js/\/javascript\/jquery-datatables\/dataTables.bootstrap4.js/g' debian/multiflexi-web/usr/lib/multiflexi/MultiFlexi/Ui/DBDataTable.php
 	sed -i -e 's/css\/dataTables.bootstrap4.css/\/javascript\/jquery-datatables\/css\/dataTables.bootstrap4.css/g' debian/multiflexi-web/usr/lib/multiflexi/MultiFlexi/Ui/DBDataTable.php
 	sed -i 's/css\/selectize/\/javascript\/selectize.js\/css\/selectize/' debian/multiflexi-web/usr/lib/multiflexi/MultiFlexi/Ui/DBDataTable.php
+	sed -i -e 's/css\/font-awesome.min.css/\/javascript\/font-awesome\/css\/font-awesome.min.css/g' debian/multiflexi-web/usr/lib/multiflexi/MultiFlexi/Ui/WebPage.php
 	sed -i -e 's/\.\.\/i18n/\/usr\/share\/locale/g'            	     debian/multiflexi-web/usr/share/multiflexi/init.php
 	sed -i "s/'';/'$$(echo $${BUILD_NUMBER})';/"  src/MultiFlexi/Ui/PageBottom.php
 	rm  debian/multiflexi/usr/bin/multiflexi-zabbix-lld
