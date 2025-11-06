@@ -73,6 +73,19 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         $runtemplateOptions->addColumn(4, [_('automatically schedule in an interval').': ', $crontabInput, '<br/>', $intervalChooser, '<br/>', _('Startup delay'), $delayChooser, '<br/>', _('Executor'), $executorChooser]);
         $nameInput = new \Ease\Html\ATag('#', $runtemplate->getRecordName(), ['class' => 'editable', 'style' => 'font-size: xxx-large;', 'id' => 'name', 'data-pk' => $runtemplate->getMyKey(), 'data-url' => 'runtemplatesave.php', 'data-title' => _('Update RunTemplate name')]);
 
+        // Add note field as WYSIWYG editable textarea
+        $noteValue = $runtemplate->getDataValue('note') ?: _('Click to add notes...');
+        $noteInput = new \Ease\Html\ATag('#', $noteValue, [
+            'class' => 'editable',
+            'id' => 'note',
+            'data-pk' => $runtemplate->getMyKey(),
+            'data-url' => 'runtemplatesave.php',
+            'data-type' => 'textarea',
+            'data-title' => _('Update RunTemplate notes'),
+            'data-wysiwyg' => 'summernote',
+            'style' => 'display: block; margin-top: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; min-height: 60px; background: #f9f9f9;',
+        ]);
+
         $runtemplateBottom = new \Ease\TWB4\Row();
 
         if ($runtemplate->getMyKey()) {
@@ -81,9 +94,12 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
             $runtemplateBottom->addColumn(4, new RuntemplatePopulateForm($runtemplate));
         }
 
-        parent::__construct([new \Ease\Html\ATag('companyapp.php?app_id='.$runtemplate->getDataValue('app_id').'&company_id='.$runtemplate->getDataValue('company_id'), '<span style="font-size: xxx-large;">⚗️ </span>'), $nameInput], 'default', $runtemplateOptions, $runtemplateBottom);
+        parent::__construct([new \Ease\Html\ATag('companyapp.php?app_id='.$runtemplate->getDataValue('app_id').'&company_id='.$runtemplate->getDataValue('company_id'), '<span style="font-size: xxx-large;">⚗️ </span>'), $nameInput, $noteInput], 'default', $runtemplateOptions, $runtemplateBottom);
         $this->includeJavaScript('js/bootstrap-editable.js');
         $this->includeCss('css/bootstrap-editable.css');
+        // Include WYSIWYG assets for note field
+        $this->includeJavaScript('js/summernote-bs4.min.js');
+        $this->includeCss('css/summernote-bs4.min.css');
         $this->addJavaScript("$.fn.editable.defaults.mode = 'inline';");
         //        $this->addJavaScript("$.fn.editable.options.savenochange = true;");
         $this->addJavaScript(<<<'EOD'
@@ -96,19 +112,8 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         '</button>'
 
 EOD);
-        $this->addJavaScript(<<<'EOD'
-      // Configure editable to send CSRF token
-      $.fn.editable.defaults.ajaxOptions = {
-        beforeSend: function(xhr) {
-          var token = $('meta[name="csrf-token"]').attr('content');
-          if (token) {
-            xhr.setRequestHeader('X-CSRF-Token', token);
-          }
-        }
-      };
-      $('.editable').editable();
-EOD
-            , '', true);
+        // Note: editable initialization moved to finalize() method where CSRF token is available
+        // Both name and note fields will be initialized there with proper CSRF configuration
 
         $runtemplateTabs = new \Ease\TWB4\Tabs();
         $runtemplateTabs->addTab(_('Jobs'), [$runtemplateJobs, new RunTemplateJobsLastMonthChart($runtemplate)]);
@@ -126,6 +131,76 @@ EOD
     {
         \Ease\TWB4\Part::twBootstrapize();
         $csrfToken = isset($GLOBALS['csrfProtection']) ? $GLOBALS['csrfProtection']->generateToken() : '';
+
+        // Configure editable to send CSRF token
+        $this->addJavaScript(<<<EOD
+// Configure editable to send CSRF token
+$.fn.editable.defaults.ajaxOptions = {
+    beforeSend: function(xhr) {
+        xhr.setRequestHeader('X-CSRF-Token', '{$csrfToken}');
+    }
+};
+
+// Also add CSRF token to POST data for editable
+$.fn.editable.defaults.params = function(params) {
+    params.csrf_token = '{$csrfToken}';
+    return params;
+};
+
+// Initialize all editable fields with CSRF token configuration
+$(document).ready(function() {
+    // Initialize regular editable fields (name field)
+    $('.editable').not('#note').editable();
+
+    // Configure WYSIWYG editor for note field with CSRF token
+    $("#note").editable({
+        type: "textarea",
+        display: function(value, sourceData) {
+            $(this).html(value);
+        },
+        success: function(response, newValue) {
+            // Handle successful save
+        },
+        ajaxOptions: {
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-CSRF-Token', '{$csrfToken}');
+            }
+        },
+        params: function(params) {
+            params.csrf_token = '{$csrfToken}';
+            return params;
+        }
+    });
+
+    // Initialize Summernote when editing starts
+    $("#note").on("shown.editable", function(e, editable) {
+        editable.input.\$input.summernote({
+            height: 150,
+            toolbar: [
+                ["style", ["style"]],
+                ["font", ["bold", "italic", "underline", "clear"]],
+                ["fontname", ["fontname"]],
+                ["color", ["color"]],
+                ["para", ["ul", "ol", "paragraph"]],
+                ["table", ["table"]],
+                ["insert", ["link"]],
+                ["view", ["codeview", "help"]]
+            ]
+        });
+    });
+
+    // Cleanup Summernote when editing ends
+    $("#note").on("hidden.editable", function(e, reason) {
+        if (reason === "save" || reason === "nochange") {
+            var summernoteInstance = $(this).find(".note-editable");
+            if (summernoteInstance.length) {
+                summernoteInstance.summernote("destroy");
+            }
+        }
+    });
+});
+EOD);
+
         $this->addJavaScript(<<<EOD
 
 

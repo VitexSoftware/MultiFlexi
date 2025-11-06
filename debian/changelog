@@ -1,3 +1,9 @@
+multiflexi (2.1.1) UNRELEASED; urgency=medium
+
+  * Runtemplate note editor added
+
+ -- vitex <info@vitexsoftware.cz>  Thu, 06 Nov 2025 18:16:50 +0100
+
 multiflexi (2.1.0) unstable; urgency=medium
 
   [ Vítězslav Vitex Dvořák ]
@@ -11,7 +17,7 @@ multiflexi (2.1.0) unstable; urgency=medium
   * Added detailed documentation for 5-phase job lifecycle, artifact
     preservation, and command-line management
 
- -- vitex <info@vitexsoftware.cz>  Wed, 05 Nov 2025 22:59:49 +0100
+ -- vitex <info@vitexsoftware.cz>  Thu, 06 Nov 2025 18:16:31 +0100
 
 multiflexi (2.0.0) noble; urgency=medium
 
