@@ -59,7 +59,7 @@ $configurator = new \MultiFlexi\Configuration([
 
 if (WebPage::singleton()->isPosted()) {
     unset($_POST['csrf_token'], $_REQUEST['csrf_token']);
-    
+
     $dataToSave = $_POST;
 
     if (\array_key_exists('credential', $dataToSave)) {

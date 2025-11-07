@@ -37,7 +37,7 @@ class PageBottom extends \Ease\Html\FooterTag
      */
     public function finalize(): void
     {
-        $this->includeCSS('https://use.fontawesome.com/releases/v5.3.1/css/all.css');
+        // Font Awesome is now loaded globally via WebPage.php using system package
         $container = $this->setTagID('footer');
         //        if (\Ease\Shared::user()->getUserID()) {
         //        $this->addItem(new \Ease\Html\WidgetsBrowsingHistory());
