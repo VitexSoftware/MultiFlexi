@@ -61,6 +61,6 @@ class CrontabInput extends \Ease\Html\PairTag
         // These should be called from the page controller or panel
         \Ease\WebPage::singleton()->includeCss('css/cron-expression-input.min.css');
         \Ease\WebPage::singleton()->includeCss('css/cron-expression-input-custom.css');
-        \Ease\WebPage::singleton()->includeJavaScript('js/cron-expression-input.min.js');
+        \Ease\WebPage::singleton()->includeJavaScript('js/cron-expression-input.js');
     }
 }
