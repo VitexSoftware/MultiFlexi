@@ -66,8 +66,8 @@ $login = WebPage::singleton()->getRequestValue('login');
 
 if ($login && $_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validate CSRF token if CSRF protection is enabled
-    if (\Ease\Shared::cfg('CSRF_PROTECTION_ENABLED', true) && isset($GLOBALS['csrfProtection']) && !$GLOBALS['csrfProtection']->validateToken($_POST['csrf_token'] ?? '')) {
-        Shared::user()->addStatusMessage(_('Invalid security token. Please try again.'), 'error');
+    if (Shared::cfg('CSRF_PROTECTION_ENABLED', true) && isset($GLOBALS['csrfProtection']) && !$GLOBALS['csrfProtection']->validateToken($_POST['csrf_token'] ?? '')) {
+        Shared::user()->addStatusMessage(_('Invalid security token. Please clear cookies and try again.'), 'error');
     } else {
         // Rate limiting check
         if (isset($GLOBALS['rateLimiter'])) {
