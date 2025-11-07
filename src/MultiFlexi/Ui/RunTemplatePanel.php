@@ -439,33 +439,55 @@ EOD);
         $this->addJavaScript(<<<EOD
 
 
-$('#{$this->runtemplate->getMyKey()}_cron').change( function(event, state) {
+// Function to get cron value from the custom component
+function getCronValue() {
+    var cronElement = $('#{$this->runtemplate->getMyKey()}_cron')[0];
+    if (cronElement) {
+        // Try multiple ways to get the value
+        return cronElement.value || 
+               $(cronElement).attr('value') || 
+               $(cronElement).find('input').val() ||
+               $(cronElement).data('value') || 
+               '';
+    }
+    return '';
+}
 
+// Function to save cron value
+function saveCronValue() {
+    var cronValue = getCronValue();
+    
+    // Debug: Always log the cron value we're trying to save
+    console.log('Attempting to save cron value:', cronValue);
+    
     $.ajax({
         url: 'rtcron.php',
         data: {
-            runtemplate: $(this).attr("data-runtemplate"),
-            cron: $(".cronInsideInput").val(),
+            runtemplate: $('#{$this->runtemplate->getMyKey()}_cron').attr("data-runtemplate"),
+            cron: cronValue,
             csrf_token: currentCsrfToken
         },
         error: function(xhr) {
+            console.log('Cron save error:', xhr.status, xhr.responseText);
             if (xhr.status === 403 || xhr.status === 400) {
                 // CSRF token might be expired, try to refresh and retry
                 refreshCsrfToken().then(function(newToken) {
+                    var retryValue = getCronValue();
+                    console.log('Retrying with new token, cron value:', retryValue);
                     $.ajax({
                         url: 'rtcron.php',
                         data: {
                             runtemplate: $('#{$this->runtemplate->getMyKey()}_cron').attr("data-runtemplate"),
-                            cron: $(".cronInsideInput").val(),
+                            cron: retryValue,
                             csrf_token: newToken
                         },
                         success: function(data) {
                             $('#{$this->runtemplate->getMyKey()}_cron').after( "💾" );
-                            console.log("saved after retry");
+                            console.log("cron saved after retry", retryValue);
                         },
                         error: function() {
                             $('#{$this->runtemplate->getMyKey()}_cron').after( "⚰️" );
-                            console.log("not saved even after retry");
+                            console.log("cron not saved even after retry");
                         },
                         type: 'POST'
                     });
@@ -475,19 +497,57 @@ $('#{$this->runtemplate->getMyKey()}_cron').change( function(event, state) {
                 });
             } else {
                 $('#{$this->runtemplate->getMyKey()}_cron').after( "⚰️" );
-                console.log("not saved");
+                console.log("cron not saved", xhr.status, xhr.responseText);
             }
         },
 
         success: function(data) {
             $('#{$this->runtemplate->getMyKey()}_cron').after( "💾" );
-            console.log("saved");
+            console.log("cron saved successfully", cronValue);
             // Refresh CSRF token for subsequent requests
             refreshCsrfToken();
         },
             type: 'POST'
         });
-});
+}
+
+// Set up multiple event listeners for the cron component
+$('#{$this->runtemplate->getMyKey()}_cron').on('change input', saveCronValue);
+
+// Also listen for custom events that the cron component might emit
+$('#{$this->runtemplate->getMyKey()}_cron').on('cron-changed value-changed update', saveCronValue);
+
+// MutationObserver to watch for value attribute changes
+if (window.MutationObserver) {
+    var cronElement = $('#{$this->runtemplate->getMyKey()}_cron')[0];
+    if (cronElement) {
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && 
+                    (mutation.attributeName === 'value' || mutation.attributeName === 'data-value')) {
+                    console.log('Cron value changed via attribute:', cronElement.value);
+                    saveCronValue();
+                }
+            });
+        });
+        
+        observer.observe(cronElement, {
+            attributes: true,
+            attributeFilter: ['value', 'data-value', 'aria-valuenow']
+        });
+    }
+}
+
+// Fallback: Poll for changes every 2 seconds (as a last resort)
+var lastCronValue = getCronValue();
+setInterval(function() {
+    var currentValue = getCronValue();
+    if (currentValue !== lastCronValue && currentValue !== '') {
+        console.log('Cron value changed via polling:', currentValue);
+        lastCronValue = currentValue;
+        saveCronValue();
+    }
+}, 2000);
 
 EOD);
 
