@@ -128,6 +128,24 @@ EOD
         $csrfToken = isset($GLOBALS['csrfProtection']) ? $GLOBALS['csrfProtection']->generateToken() : '';
         $this->addJavaScript(<<<EOD
 
+// Global variable to store current CSRF token
+var currentCsrfToken = '{$csrfToken}';
+
+// Function to refresh CSRF token
+function refreshCsrfToken() {
+    return new Promise(function(resolve, reject) {
+        \$.get('getcsrf.php', function(data) {
+            if (data && data.csrf_token) {
+                currentCsrfToken = data.csrf_token;
+                resolve(data.csrf_token);
+            } else {
+                reject('Failed to get CSRF token');
+            }
+        }).fail(function() {
+            reject('CSRF token request failed');
+        });
+    });
+}
 
 $('#{$this->runtemplate->getMyKey()}_interval').change( function(event, state) {
 
@@ -136,16 +154,44 @@ $('#{$this->runtemplate->getMyKey()}_interval').change( function(event, state) {
         data: {
             runtemplate: $(this).attr("data-runtemplate"),
             interval: $(this).val(),
-            csrf_token: '{$csrfToken}'
+            csrf_token: currentCsrfToken
         },
-        error: function() {
-            $('#{$this->runtemplate->getMyKey()}_interval').after( "⚰️" );
-            console.log("not saved");
+        error: function(xhr) {
+            if (xhr.status === 403 || xhr.status === 400) {
+                // CSRF token might be expired, try to refresh and retry
+                refreshCsrfToken().then(function(newToken) {
+                    $.ajax({
+                        url: 'rtinterval.php',
+                        data: {
+                            runtemplate: $('#{$this->runtemplate->getMyKey()}_interval').attr("data-runtemplate"),
+                            interval: $('#{$this->runtemplate->getMyKey()}_interval').val(),
+                            csrf_token: newToken
+                        },
+                        success: function(data) {
+                            $('#{$this->runtemplate->getMyKey()}_interval').after( "💾" );
+                            console.log("saved after retry");
+                        },
+                        error: function() {
+                            $('#{$this->runtemplate->getMyKey()}_interval').after( "⚰️" );
+                            console.log("not saved even after retry");
+                        },
+                        type: 'POST'
+                    });
+                }).catch(function() {
+                    $('#{$this->runtemplate->getMyKey()}_interval').after( "⚰️" );
+                    console.log("CSRF token refresh failed");
+                });
+            } else {
+                $('#{$this->runtemplate->getMyKey()}_interval').after( "⚰️" );
+                console.log("not saved");
+            }
         },
 
         success: function(data) {
             $('#{$this->runtemplate->getMyKey()}_interval').after( "💾" );
             console.log("saved");
+            // Refresh CSRF token for subsequent requests
+            refreshCsrfToken();
         },
             type: 'POST'
         });
@@ -162,16 +208,44 @@ $.ajax({
         data: {
                 runtemplate: $(this).attr("data-runtemplate"),
                 delay: $(this).val(),
-                csrf_token: '{$csrfToken}'
+                csrf_token: currentCsrfToken
         },
-        error: function() {
-            $('#{$this->runtemplate->getMyKey()}_delay').after( "⚰️" );
-            console.log("not saved");
+        error: function(xhr) {
+            if (xhr.status === 403 || xhr.status === 400) {
+                // CSRF token might be expired, try to refresh and retry
+                refreshCsrfToken().then(function(newToken) {
+                    $.ajax({
+                        url: 'rtdelay.php',
+                        data: {
+                            runtemplate: $('#{$this->runtemplate->getMyKey()}_delay').attr("data-runtemplate"),
+                            delay: $('#{$this->runtemplate->getMyKey()}_delay').val(),
+                            csrf_token: newToken
+                        },
+                        success: function(data) {
+                            $('#{$this->runtemplate->getMyKey()}_delay').after( "💾" );
+                            console.log("saved after retry");
+                        },
+                        error: function() {
+                            $('#{$this->runtemplate->getMyKey()}_delay').after( "⚰️" );
+                            console.log("not saved even after retry");
+                        },
+                        type: 'POST'
+                    });
+                }).catch(function() {
+                    $('#{$this->runtemplate->getMyKey()}_delay').after( "⚰️" );
+                    console.log("CSRF token refresh failed");
+                });
+            } else {
+                $('#{$this->runtemplate->getMyKey()}_delay').after( "⚰️" );
+                console.log("not saved");
+            }
         },
 
         success: function(data) {
             $('#{$this->runtemplate->getMyKey()}_delay').after( "💾" );
             console.log("saved");
+            // Refresh CSRF token for subsequent requests
+            refreshCsrfToken();
         },
             type: 'POST'
         });
@@ -188,16 +262,44 @@ $.ajax({
         data: {
                 runtemplate: $(this).attr("data-runtemplate"),
                 executor: $(this).val(),
-                csrf_token: '{$csrfToken}'
+                csrf_token: currentCsrfToken
         },
-        error: function() {
-            $('#{$this->runtemplate->getMyKey()}_executor').after( "⚰️" );
-            console.log("not saved");
+        error: function(xhr) {
+            if (xhr.status === 403 || xhr.status === 400) {
+                // CSRF token might be expired, try to refresh and retry
+                refreshCsrfToken().then(function(newToken) {
+                    $.ajax({
+                        url: 'rtexecutor.php',
+                        data: {
+                            runtemplate: $('#{$this->runtemplate->getMyKey()}_executor').attr("data-runtemplate"),
+                            executor: $('#{$this->runtemplate->getMyKey()}_executor').val(),
+                            csrf_token: newToken
+                        },
+                        success: function(data) {
+                            $('#{$this->runtemplate->getMyKey()}_executor').after( "💾" );
+                            console.log("saved after retry");
+                        },
+                        error: function() {
+                            $('#{$this->runtemplate->getMyKey()}_executor').after( "⚰️" );
+                            console.log("not saved even after retry");
+                        },
+                        type: 'POST'
+                    });
+                }).catch(function() {
+                    $('#{$this->runtemplate->getMyKey()}_executor').after( "⚰️" );
+                    console.log("CSRF token refresh failed");
+                });
+            } else {
+                $('#{$this->runtemplate->getMyKey()}_executor').after( "⚰️" );
+                console.log("not saved");
+            }
         },
 
         success: function(data) {
             $('#{$this->runtemplate->getMyKey()}_executor').after( "💾" );
             console.log("saved");
+            // Refresh CSRF token for subsequent requests
+            refreshCsrfToken();
         },
             type: 'POST'
         });
@@ -214,16 +316,44 @@ $.ajax({
         data: {
                 runtemplate: $(this).attr("data-runtemplate"),
                 active: $(this).val(),
-                csrf_token: '{$csrfToken}'
+                csrf_token: currentCsrfToken
         },
-        error: function() {
-            $('#deactivated').before( "⚰️" );
-            console.log("not saved");
+        error: function(xhr) {
+            if (xhr.status === 403 || xhr.status === 400) {
+                // CSRF token might be expired, try to refresh and retry
+                refreshCsrfToken().then(function(newToken) {
+                    $.ajax({
+                        url: 'rtactive.php',
+                        data: {
+                            runtemplate: $('#enabler').attr("data-runtemplate"),
+                            active: $('#enabler').val(),
+                            csrf_token: newToken
+                        },
+                        success: function(data) {
+                            $('#deactivated').before( "💾" );
+                            console.log("saved after retry");
+                        },
+                        error: function() {
+                            $('#deactivated').before( "⚰️" );
+                            console.log("not saved even after retry");
+                        },
+                        type: 'POST'
+                    });
+                }).catch(function() {
+                    $('#deactivated').before( "⚰️" );
+                    console.log("CSRF token refresh failed");
+                });
+            } else {
+                $('#deactivated').before( "⚰️" );
+                console.log("not saved");
+            }
         },
 
         success: function(data) {
             $('#deactivated').before( "💾" );
             console.log("saved");
+            // Refresh CSRF token for subsequent requests
+            refreshCsrfToken();
         },
             type: 'POST'
         });
@@ -241,16 +371,44 @@ $('#{$this->runtemplate->getMyKey()}_cron').change( function(event, state) {
         data: {
             runtemplate: $(this).attr("data-runtemplate"),
             cron: $(".cronInsideInput").val(),
-            csrf_token: '{$csrfToken}'
+            csrf_token: currentCsrfToken
         },
-        error: function() {
-            $('#{$this->runtemplate->getMyKey()}_cron').after( "⚰️" );
-            console.log("not saved");
+        error: function(xhr) {
+            if (xhr.status === 403 || xhr.status === 400) {
+                // CSRF token might be expired, try to refresh and retry
+                refreshCsrfToken().then(function(newToken) {
+                    $.ajax({
+                        url: 'rtcron.php',
+                        data: {
+                            runtemplate: $('#{$this->runtemplate->getMyKey()}_cron').attr("data-runtemplate"),
+                            cron: $(".cronInsideInput").val(),
+                            csrf_token: newToken
+                        },
+                        success: function(data) {
+                            $('#{$this->runtemplate->getMyKey()}_cron').after( "💾" );
+                            console.log("saved after retry");
+                        },
+                        error: function() {
+                            $('#{$this->runtemplate->getMyKey()}_cron').after( "⚰️" );
+                            console.log("not saved even after retry");
+                        },
+                        type: 'POST'
+                    });
+                }).catch(function() {
+                    $('#{$this->runtemplate->getMyKey()}_cron').after( "⚰️" );
+                    console.log("CSRF token refresh failed");
+                });
+            } else {
+                $('#{$this->runtemplate->getMyKey()}_cron').after( "⚰️" );
+                console.log("not saved");
+            }
         },
 
         success: function(data) {
             $('#{$this->runtemplate->getMyKey()}_cron').after( "💾" );
             console.log("saved");
+            // Refresh CSRF token for subsequent requests
+            refreshCsrfToken();
         },
             type: 'POST'
         });
