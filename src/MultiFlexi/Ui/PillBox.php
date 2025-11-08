@@ -39,18 +39,33 @@ class PillBox extends \Ease\Html\InputTextTag
 
         $this->addJavaScript(<<<'EOD'
 
-$('#
+$(document).ready(function() {
+    setTimeout(function() {
+        if (typeof $.fn.selectize !== 'undefined') {
+            $('#
 EOD.$this->getTagID().<<<'EOD'
 ').selectize({
-        plugins: ['remove_button'],
-        valueField: 'id',
-        maxOptions: 10000,
-	labelField: 'name',
-        searchField: 'name',
-        persist: true,
-        options:
+                plugins: ['remove_button'],
+                valueField: 'id',
+                maxOptions: 10000,
+                labelField: 'name',
+                searchField: 'name',
+                persist: true,
+                create: false,
+                delimiter: ',',
+                options:
 EOD.json_encode($valuesAvailble).<<<'EOD'
+,
+                items:
+EOD.json_encode(\is_array($valuesShown) ? $valuesShown : explode(',', (string) $valuesShown)).<<<'EOD'
 
+            });
+        } else {
+            console.error('Selectize not available for
+EOD.$this->getTagID().<<<'EOD'
+');
+        }
+    }, 100);
 });
 
 EOD);
