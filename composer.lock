@@ -1151,16 +1151,16 @@
         },
         {
             "name": "justinrainbow/json-schema",
-            "version": "6.6.0",
+            "version": "6.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jsonrainbow/json-schema.git",
-                "reference": "68ba7677532803cc0c5900dd5a4d730537f2b2f3"
+                "reference": "fd8e5c6b1badb998844ad34ce0abcd71a0aeb396"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/68ba7677532803cc0c5900dd5a4d730537f2b2f3",
-                "reference": "68ba7677532803cc0c5900dd5a4d730537f2b2f3",
+                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/fd8e5c6b1badb998844ad34ce0abcd71a0aeb396",
+                "reference": "fd8e5c6b1badb998844ad34ce0abcd71a0aeb396",
                 "shasum": ""
             },
             "require": {
@@ -1220,9 +1220,9 @@
             ],
             "support": {
                 "issues": "https://github.com/jsonrainbow/json-schema/issues",
-                "source": "https://github.com/jsonrainbow/json-schema/tree/6.6.0"
+                "source": "https://github.com/jsonrainbow/json-schema/tree/6.6.1"
             },
-            "time": "2025-10-10T11:34:09+00:00"
+            "time": "2025-11-07T18:30:29+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -2001,12 +2001,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/opentelemetry-php/sem-conv.git",
-                "reference": "04c8183f6e29e525db8ebbe19d164ed20f09c204"
+                "reference": "817db5ac5f5bfac74d907fdea1d977e7b123435f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opentelemetry-php/sem-conv/zipball/04c8183f6e29e525db8ebbe19d164ed20f09c204",
-                "reference": "04c8183f6e29e525db8ebbe19d164ed20f09c204",
+                "url": "https://api.github.com/repos/opentelemetry-php/sem-conv/zipball/817db5ac5f5bfac74d907fdea1d977e7b123435f",
+                "reference": "817db5ac5f5bfac74d907fdea1d977e7b123435f",
                 "shasum": ""
             },
             "require": {
@@ -2051,7 +2051,7 @@
                 "issues": "https://github.com/open-telemetry/opentelemetry-php/issues",
                 "source": "https://github.com/open-telemetry/opentelemetry-php"
             },
-            "time": "2025-10-19T06:44:33+00:00"
+            "time": "2025-11-06T08:31:43+00:00"
         },
         {
             "name": "pear/console_getopt",
@@ -6270,12 +6270,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core.git",
-                "reference": "a42d96661da7a5e48585d40f8e14e11d78baae46"
+                "reference": "56361c275bbdfc8ac16ce1cfc9df2edb0e6571ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/a42d96661da7a5e48585d40f8e14e11d78baae46",
-                "reference": "a42d96661da7a5e48585d40f8e14e11d78baae46",
+                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/56361c275bbdfc8ac16ce1cfc9df2edb0e6571ec",
+                "reference": "56361c275bbdfc8ac16ce1cfc9df2edb0e6571ec",
                 "shasum": ""
             },
             "require": {
@@ -6319,7 +6319,7 @@
                 "issues": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/issues",
                 "source": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/tree/main"
             },
-            "time": "2025-11-05T01:54:06+00:00"
+            "time": "2025-11-07T10:55:33+00:00"
         },
         {
             "name": "ybelenko/openapi-data-mocker",
@@ -7822,8 +7822,8 @@
             "version": "2.1.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/770b08cdd6e159bfcff28bb81de7b808ff9d06c4",
-                "reference": "770b08cdd6e159bfcff28bb81de7b808ff9d06c4",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/0db5fecc22002a178037e7a43cbb9f5b9f6f9655",
+                "reference": "0db5fecc22002a178037e7a43cbb9f5b9f6f9655",
                 "shasum": ""
             },
             "require": {
@@ -7869,7 +7869,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-05T13:40:36+00:00"
+            "time": "2025-11-07T20:49:48+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -8317,12 +8317,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "79fc96ed5eaf384d77a4deb2b1b2a02518666d18"
+                "reference": "02d9f1223c2748d1179e0c298997edb3e7eeae32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/79fc96ed5eaf384d77a4deb2b1b2a02518666d18",
-                "reference": "79fc96ed5eaf384d77a4deb2b1b2a02518666d18",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/02d9f1223c2748d1179e0c298997edb3e7eeae32",
+                "reference": "02d9f1223c2748d1179e0c298997edb3e7eeae32",
                 "shasum": ""
             },
             "require": {
@@ -8415,7 +8415,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-10-30T08:42:41+00:00"
+            "time": "2025-11-06T14:08:49+00:00"
         },
         {
             "name": "psr/event-dispatcher",

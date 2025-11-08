@@ -30,10 +30,10 @@ if (null !== $runtemplate_id) {
     $switcher->setData(['id' => $runtemplate_id, 'cron' => $cron]);
 
     if ($state) {
-        $switcher->setDataValue('interv', 'n');
+        $switcher->setDataValue('interv', 'c');
     }
 
-    http_response_code($switcher->setState($state) ? 201 : 400);
+    http_response_code($switcher->dbsync() ? 201 : 400);
 } else {
     http_response_code(404);
 }

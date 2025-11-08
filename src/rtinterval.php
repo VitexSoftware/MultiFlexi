@@ -33,7 +33,7 @@ if (null !== $runtemplate_id) {
         $switcher->setDataValue('cron', '');
     }
 
-    http_response_code($switcher->setState($state) ? 201 : 400);
+    http_response_code($switcher->dbsync() ? 201 : 400);
 } else {
     http_response_code(404);
 }
