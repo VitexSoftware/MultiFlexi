@@ -102,6 +102,12 @@ class ActivationWizard extends \Ease\Html\DivTag
             ');
         }
         
+        // Include Summernote WYSIWYG editor assets for step 3 (RunTemplate creation)
+        if ($this->currentStep === 3) {
+            WebPage::singleton()->includeJavaScript('js/summernote-bs4.min.js');
+            WebPage::singleton()->includeCss('css/summernote-bs4.min.css');
+        }
+        
         $this->addItem($this->renderStepIndicator());
         $this->addItem($this->renderStepContent());
         $this->addItem($this->renderNavigation());
@@ -772,10 +778,52 @@ EOD,
         $nameInput = new \Ease\Html\InputTextTag('runtemplate_name', $this->wizardData['runtemplate_name'] ?? $defaultName, ['class' => 'form-control', 'required' => 'required', 'placeholder' => _('RunTemplate name')]);
         $form->addItem(new \Ease\TWB4\FormGroup(_('RunTemplate Name'), $nameInput, '', _('Descriptive name for this configuration')));
 
+        // Add note field with WYSIWYG editor
+        $noteValue = $this->wizardData['runtemplate_note'] ?? '';
+        $noteTextarea = new \Ease\Html\TextAreaTag('runtemplate_note', $noteValue, [
+            'class' => 'form-control summernote-editor',
+            'id' => 'runtemplate_note',
+            'placeholder' => _('Add notes about this RunTemplate...'),
+            'rows' => 6
+        ]);
+        $form->addItem(new \Ease\TWB4\FormGroup(_('Notes'), $noteTextarea, '', _('Optional notes and documentation for this RunTemplate')));
+
         $intervalSelect = new IntervalChooser('interv', 'n', ['class' => 'form-control']);
         $form->addItem(new \Ease\TWB4\FormGroup(_('Schedule Interval'), $intervalSelect, '', _('How often should this run?')));
 
         $container->addItem($form);
+
+        // Add JavaScript to initialize Summernote WYSIWYG editor for the note field
+        WebPage::singleton()->addJavaScript(
+            <<<'EOD'
+$(document).ready(function() {
+    // Initialize Summernote for the note field
+    $('.summernote-editor').summernote({
+        height: 200,
+        placeholder: 'Add notes about this RunTemplate...',
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'hr']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ],
+        callbacks: {
+            onChange: function(contents, $editable) {
+                // Update the textarea value when content changes
+                $(this).val(contents);
+            }
+        }
+    });
+});
+EOD,
+            null,
+            true,
+        );
 
         return $container;
     }
