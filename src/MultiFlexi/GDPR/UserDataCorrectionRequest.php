@@ -369,49 +369,4 @@ class UserDataCorrectionRequest extends \Ease\Sand
     {
         return self::SENSITIVE_FIELDS[$fieldName] ?? self::DIRECT_FIELDS[$fieldName] ?? $fieldName;
     }
-
-    /**
-     * Create database table for correction requests.
-     *
-     * @return bool Success of table creation
-     */
-    public function createTable(): bool
-    {
-        $createSQL = <<<EOD
-
-            CREATE TABLE IF NOT EXISTS `{$this->myTable}` (
-                `id` int(11) NOT NULL AUTO_INCREMENT,
-                `user_id` int(11) NOT NULL,
-                `field_name` varchar(100) NOT NULL,
-                `current_value` text,
-                `requested_value` text,
-                `justification` text,
-                `status` enum('pending','approved','rejected','cancelled') NOT NULL DEFAULT 'pending',
-                `requested_by_ip` varchar(45) NULL,
-                `requested_by_user_agent` text NULL,
-                `reviewed_by_user_id` int(11) NULL,
-                `reviewed_at` timestamp NULL,
-                `reviewer_notes` text NULL,
-                `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                PRIMARY KEY (`id`),
-                KEY `idx_user_id` (`user_id`),
-                KEY `idx_status` (`status`),
-                KEY `idx_created_at` (`created_at`),
-                FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
-                FOREIGN KEY (`reviewed_by_user_id`) REFERENCES `user`(`id`) ON DELETE SET NULL
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-EOD;
-
-        try {
-            $this->pdo->exec($createSQL);
-
-            return true;
-        } catch (\PDOException $e) {
-            $this->addStatusMessage('Failed to create correction requests table: '.$e->getMessage(), 'error');
-
-            return false;
-        }
-    }
 }
