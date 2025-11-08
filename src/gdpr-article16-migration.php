@@ -54,7 +54,7 @@ try {
         echo "Please run migrations first: multiflexi-migrator\n";
         exit(1);
     }
-    
+
     echo "✓ Required database tables found\n";
 
 } catch (Exception $e) {

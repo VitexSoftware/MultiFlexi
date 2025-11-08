@@ -56,11 +56,50 @@ class ActivationWizard extends \Ease\Html\DivTag
      */
     public function afterAdd(): void
     {
-        // Include selectize assets for step 2 (application selection with topic filtering)
+                // Include selectize assets for step 2 (application selection with topic filtering)
         if ($this->currentStep === 2) {
-            WebPage::singleton()->includeJavaScript('js/selectize.js');
-            WebPage::singleton()->includeCss('css/selectize.css');
-            WebPage::singleton()->includeCss('css/selectize.bootstrap4.css');
+            WebPage::singleton()->includeJavaScript('js/selectize.min.js');
+            WebPage::singleton()->includeCss('css/selectize.bootstrap4.min.css');
+            
+            // Add custom CSS for topic highlighting
+            WebPage::singleton()->addCSS('
+.topic-badge {
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    position: relative;
+}
+
+.topic-badge.badge-primary {
+    background-color: #007bff !important;
+    border-color: #0056b3 !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+    box-shadow: 0 2px 6px rgba(0,123,255,0.4) !important;
+    transform: scale(1.1) !important;
+    z-index: 2 !important;
+}
+
+.topic-badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.topic-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+@keyframes highlightPulse {
+    0% { box-shadow: 0 2px 6px rgba(0,123,255,0.4); }
+    50% { box-shadow: 0 4px 12px rgba(0,123,255,0.6); }
+    100% { box-shadow: 0 2px 6px rgba(0,123,255,0.4); }
+}
+
+.topic-badge.badge-primary {
+    animation: highlightPulse 2s ease-in-out infinite;
+}
+            ');
         }
         
         $this->addItem($this->renderStepIndicator());
@@ -156,7 +195,7 @@ class ActivationWizard extends \Ease\Html\DivTag
             $actualId = $runTemplate->getMyKey();
 
             if ($actualId) {
-                $steps[3] .= ' <span class="badge badge-success ml-2">#'.$actualId.'</span>';
+                $steps[3] .= ' <span class="badge badge-success ml-2">⚗️ #'.$actualId.'</span>';
             }
         }
 
@@ -413,11 +452,13 @@ EOD,
 
             // Show topics as badges
             if (!empty($appData['topics'])) {
-                $topicBadges = new \Ease\Html\DivTag(null, ['class' => 'mb-2']);
+                $topicBadges = new \Ease\Html\DivTag(null, ['class' => 'mb-2 topic-badges']);
                 foreach ($topicsList as $topic) {
                     $topic = trim($topic);
                     if (!empty($topic)) {
-                        $topicBadges->addItem(new \Ease\TWB4\Badge('secondary', $topic, ['class' => 'mr-1 mb-1']));
+                        $badge = new \Ease\TWB4\Badge('secondary', $topic, ['class' => 'mr-1 mb-1 topic-badge']);
+                        $badge->setTagProperty('data-topic', $topic);
+                        $topicBadges->addItem($badge);
                     }
                 }
                 $cardBody->addItem($topicBadges);
@@ -550,6 +591,9 @@ $(document).ready(function() {
                 saveTopicSelection(allAvailableTopics);
                 filterApplicationsByTopics(allAvailableTopics);
             });
+        } else {
+            // Fallback: if no selectize, still highlight all topics by default
+            highlightSelectedTopics(allAvailableTopics);
         }
     }, 1000);
     
@@ -615,6 +659,9 @@ $(document).ready(function() {
         
         console.log('Visible applications:', visibleCount, '/', appCards.length);
         
+        // Highlight selected topics on visible application cards
+        highlightSelectedTopics(topicsArray);
+        
         // Show message if no applications are visible
         var existingMessage = document.querySelector('.no-applications-message');
         if (existingMessage) {
@@ -630,6 +677,45 @@ $(document).ready(function() {
                 form.insertBefore(noAppsMessage, form.querySelector('.row'));
             }
         }
+    }
+    
+    // Function to highlight selected topics on application cards
+    function highlightSelectedTopics(selectedTopics) {
+        console.log('Highlighting selected topics:', selectedTopics);
+        
+        var appCards = document.querySelectorAll('.app-card');
+        
+        appCards.forEach(function(card) {
+            // Find all topic badges in this card using the specific class
+            var topicBadges = card.querySelectorAll('.topic-badge');
+            
+            topicBadges.forEach(function(badge) {
+                var topicText = badge.textContent.trim();
+                
+                // Reset badge styling first
+                badge.classList.remove('badge-primary', 'badge-warning', 'badge-success', 'badge-info');
+                badge.classList.add('badge-secondary');
+                badge.style.fontWeight = 'normal';
+                badge.style.boxShadow = 'none';
+                badge.style.transform = 'scale(1)';
+                badge.style.border = 'none';
+                
+                // Highlight if this topic is selected
+                if (selectedTopics.includes(topicText)) {
+                    badge.classList.remove('badge-secondary');
+                    badge.classList.add('badge-primary');
+                    badge.style.fontWeight = 'bold';
+                    badge.style.boxShadow = '0 2px 6px rgba(0,123,255,0.4)';
+                    badge.style.transform = 'scale(1.1)';
+                    badge.style.border = '2px solid #0056b3';
+                    badge.style.backgroundColor = '#007bff';
+                    badge.style.color = '#ffffff';
+                }
+                
+                // Apply smooth transition for all badges
+                badge.style.transition = 'all 0.3s ease-in-out';
+            });
+        });
     }
 });
 EOD,
