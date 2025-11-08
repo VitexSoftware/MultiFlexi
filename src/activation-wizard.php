@@ -262,8 +262,9 @@ if ($step === 'complete' && isset($runtemplateId)) {
 
     $completionCard = new \Ease\TWB4\Card(
         '🎉 '._('Activation Complete'),
-        'success',
     );
+
+    $completionCard->addTagClass('text-white bg-success');
 
     $completionCard->addItem(new \Ease\Html\H4Tag(_('RunTemplate Summary')));
 
