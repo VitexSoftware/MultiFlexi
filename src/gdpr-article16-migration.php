@@ -14,42 +14,58 @@ declare(strict_types=1);
  */
 
 /**
- * Database Migration for GDPR Article 16 - Right of Rectification.
+ * GDPR Article 16 - Data Seeding and Verification Script.
  *
- * This script creates the necessary database tables for the GDPR Article 16 implementation
+ * This script seeds sample data and verifies the GDPR Article 16 implementation.
+ * 
+ * IMPORTANT: Database tables are now created via migrations:
+ * - Run: bin/phinx migrate to create the required tables
+ * - Then run this script for sample data and verification
  *
- * Usage: php gdpr-article16-migration.php
+ * Usage: php gdpr-article16-migration.php [--with-sample-data]
  */
 
 require_once './init.php';
 
-echo "GDPR Article 16 - Database Migration\n";
-echo "====================================\n\n";
+echo "GDPR Article 16 - Data Verification & Seeding\n";
+echo "==============================================\n\n";
+
+// Check if required tables exist (created by migrations)
+try {
+    $pdo = new PDO(
+        \Ease\Shared::cfg('DB_CONNECTION').':host='.\Ease\Shared::cfg('DB_HOST').';dbname='.\Ease\Shared::cfg('DB_DATABASE'),
+        \Ease\Shared::cfg('DB_USERNAME'),
+        \Ease\Shared::cfg('DB_PASSWORD')
+    );
+    
+    // Check for required tables
+    $requiredTables = ['user_data_audit', 'user_data_correction_requests'];
+    $missingTables = [];
+    
+    foreach ($requiredTables as $table) {
+        $result = $pdo->query("SHOW TABLES LIKE '{$table}'")->fetch();
+        if (!$result) {
+            $missingTables[] = $table;
+        }
+    }
+    
+    if (!empty($missingTables)) {
+        echo "✗ Missing required database tables: " . implode(', ', $missingTables) . "\n";
+        echo "Please run migrations first: multiflexi-migrator\n";
+        exit(1);
+    }
+    
+    echo "✓ Required database tables found\n";
+
+} catch (Exception $e) {
+    echo "✗ Database connection failed: " . $e->getMessage() . "\n";
+    exit(1);
+}
 
 try {
-    // Create User Data Audit Logger table
-    echo "Creating user data audit table...\n";
+    // Initialize classes for sample data and verification
     $auditLogger = new \MultiFlexi\Audit\UserDataAuditLogger();
-
-    if ($auditLogger->createTable()) {
-        echo "✓ User data audit table created successfully\n";
-    } else {
-        echo "✗ Failed to create user data audit table\n";
-
-        exit(1);
-    }
-
-    // Create User Data Correction Requests table
-    echo "Creating user data correction requests table...\n";
     $correctionRequest = new \MultiFlexi\GDPR\UserDataCorrectionRequest();
-
-    if ($correctionRequest->createTable()) {
-        echo "✓ User data correction requests table created successfully\n";
-    } else {
-        echo "✗ Failed to create user data correction requests table\n";
-
-        exit(1);
-    }
 
     // Add some sample data for testing (optional)
     if (isset($argv[1]) && $argv[1] === '--with-sample-data') {
@@ -59,7 +75,7 @@ try {
         $testUser = new \MultiFlexi\User();
 
         if (!$testUser->loadFromSQL(['login' => 'testuser'])) {
-            $testUser->setDataValues([
+            $testUser->setData([
                 'login' => 'testuser',
                 'firstname' => 'Test',
                 'lastname' => 'User',
@@ -104,8 +120,6 @@ try {
     // Verify tables were created correctly
     echo "\nVerifying database structure...\n";
 
-    $pdo = $auditLogger->pdo;
-
     // Check audit table structure
     $auditColumns = $pdo->query('DESCRIBE `user_data_audit`')->fetchAll(\PDO::FETCH_COLUMN);
     $expectedAuditColumns = ['id', 'user_id', 'field_name', 'old_value', 'new_value', 'change_type', 'changed_by_user_id', 'ip_address', 'user_agent', 'reason', 'created_at'];
@@ -130,25 +144,25 @@ try {
         }
     }
 
-    echo "\n====================================\n";
-    echo "Migration completed successfully!\n\n";
+    echo "\n==============================================\n";
+    echo "Verification completed successfully!\n\n";
     echo "Next steps:\n";
     echo "1. Access your profile at: profile.php\n";
     echo "2. Administrators can manage requests at: admin-data-corrections.php\n";
     echo "3. Review the implementation documentation\n\n";
 
     echo "GDPR Article 16 compliance features:\n";
-    echo "✓ User data audit logging\n";
-    echo "✓ Data correction request system\n";
+    echo "✓ User data audit logging (via migrations)\n";
+    echo "✓ Data correction request system (via migrations)\n";
     echo "✓ Approval workflow for sensitive changes\n";
     echo "✓ Email notifications\n";
     echo "✓ Admin review interface\n";
     echo "✓ User profile management\n";
 } catch (Exception $e) {
-    echo '✗ Migration failed: '.$e->getMessage()."\n";
+    echo '✗ Verification failed: '.$e->getMessage()."\n";
     echo "Stack trace:\n".$e->getTraceAsString()."\n";
 
     exit(1);
 }
 
-echo "\nMigration completed at: ".date('Y-m-d H:i:s')."\n";
+echo "\nVerification completed at: ".date('Y-m-d H:i:s')."\n";

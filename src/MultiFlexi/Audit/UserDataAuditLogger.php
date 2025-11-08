@@ -188,46 +188,4 @@ class UserDataAuditLogger extends \Ease\Sand
 
         return $result;
     }
-
-    /**
-     * Create audit log database table.
-     *
-     * @return bool Success of table creation
-     */
-    public function createTable(): bool
-    {
-        $createSQL = <<<EOD
-
-            CREATE TABLE IF NOT EXISTS `{$this->myTable}` (
-                `id` int(11) NOT NULL AUTO_INCREMENT,
-                `user_id` int(11) NOT NULL,
-                `field_name` varchar(100) NOT NULL,
-                `old_value` text,
-                `new_value` text,
-                `change_type` enum('direct','pending_approval','approved','rejected') NOT NULL DEFAULT 'direct',
-                `changed_by_user_id` int(11) NULL,
-                `ip_address` varchar(45) NULL,
-                `user_agent` text NULL,
-                `reason` text NULL,
-                `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                PRIMARY KEY (`id`),
-                KEY `idx_user_id` (`user_id`),
-                KEY `idx_change_type` (`change_type`),
-                KEY `idx_created_at` (`created_at`),
-                FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
-                FOREIGN KEY (`changed_by_user_id`) REFERENCES `user`(`id`) ON DELETE SET NULL
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-EOD;
-
-        try {
-            $this->pdo->exec($createSQL);
-
-            return true;
-        } catch (\PDOException $e) {
-            $this->addStatusMessage('Failed to create audit table: '.$e->getMessage(), 'error');
-
-            return false;
-        }
-    }
 }
