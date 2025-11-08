@@ -72,9 +72,10 @@ if (WebPage::singleton()->isPosted()) {
                     $runTemplate->setDataValue('note', $postData['runtemplate_note']);
                 }
 
-                $runtemplateId = $runTemplate->dbsync();
+                $saveResult = $runTemplate->dbsync();
 
-                if ($runtemplateId) {
+                if ($saveResult) {
+                    $runtemplateId = $runTemplate->getMyKey();
                     ActivationWizard::updateWizardData([
                         'company_id' => (int) $postData['company_id'],
                         'app_id' => (int) $postData['app_id'],
