@@ -1,71 +1,115 @@
-<!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
+# MultiFlexi Development Guidelines for GitHub Copilot
 
-All code comments should be written in English.
+<!-- Custom workspace instructions for GitHub Copilot to ensure consistent code quality and project standards -->
 
-All messages, including error messages, should be written in English.
+## 🌍 Language Requirements
 
-All code should be written in PHP 8.4 or later.
+- **Code comments**: Always write in English
+- **Error messages**: Always write in English  
+- **Documentation**: Always write in English
+- **Commit messages**: Use imperative mood and keep concise (e.g., "Fix login bug", "Add user validation")
 
-All code should follow the PSR-12 coding standard.
+## 🐘 PHP Standards & Requirements
 
-When writing code, always include a docblock for functions and classes, describing their purpose, parameters, and return types.
+### Version & Standards
+- **PHP Version**: Use PHP 8.4 or later
+- **Coding Standard**: Follow PSR-12 coding standard strictly
+- **Type Safety**: Always include type hints for function parameters and return types
 
-When writing tests, use PHPUnit and follow the PSR-12 coding standard.
+### Documentation Requirements
+- **Docblocks**: Include for all functions and classes with purpose, parameters, and return types
+- **Code Comments**: Use complete sentences and proper grammar
+- **Variable Names**: Use meaningful, descriptive names that explain their purpose
 
-When writing documentation in docs folder, use reStructuredText (reST) format.
+### Code Quality Rules
+- **Constants**: Define constants instead of magic numbers or strings
+- **Exception Handling**: Always handle exceptions properly with meaningful error messages
+- **Security**: Ensure code doesn't expose sensitive information
+- **Performance**: Consider and optimize performance where necessary
+- **Compatibility**: Ensure compatibility with latest PHP version and project libraries
 
-When writing commit messages, use the imperative mood and keep them concise.
+## 🧪 Testing Requirements
 
-When writing code comments, use complete sentences and proper grammar.
+- **Framework**: Use PHPUnit for all tests
+- **Standard**: Follow PSR-12 in test files
+- **Coverage**: Include unit tests for all applicable code
+- **Class Updates**: When creating or updating classes, always create or update corresponding PHPUnit test files
 
-When writing code, always use meaningful variable names that describe their purpose.
+## 📁 Project Structure & Paths
 
-When writing code, avoid using magic numbers or strings; instead, define constants for them.
+### Development Execution
+Always run main scripts from their designated directories:
 
-When writing code, always handle exceptions properly and provide meaningful error messages.
-
-When writing code, always include type hints for function parameters and return types.
-
-We are using the i18n library for internationalization, so always use the _() functions for strings that need to be translated.
-
-When writing code, always ensure that it is secure and does not expose any sensitive information.
-
-When writing code, always consider performance and optimize where necessary.
-
-When writing code, always ensure that it is compatible with the latest version of PHP and the libraries we are using.
-
-When writing code, always ensure that it is well-tested and includes unit tests where applicable.
-
-When writing code, always ensure that it is maintainable and follows best practices.
-
-When create new class or update existing class, always create or update its phpunit test files.
-
-When developing or testing this application, always run the main script from the src/ or lib/ directory:
 ```bash
+# Web application
 cd src/
 php index.php
-```
 
-```bash
+# JSON to app conversion
 cd lib/
 php json2app.php
 ```
 
-This ensures the relative paths (../vendor/autoload.php and ../.env) work correctly during development.
+**Why**: Ensures relative paths (`../vendor/autoload.php` and `../.env`) work correctly during development.
 
-The application uses relative paths intentionally - they are resolved during Debian packaging via sed commands in debian/rules file for production deployment.
+### Asset Management Philosophy
+The project uses a dual-path system for JavaScript and CSS files:
 
-We work with locally stored files in js/ and css/ directories. Local paths are used in source code for development (e.g., 'js/summernote-bs4.min.js', 'css/font-awesome.min.css'). When the application is installed from deb package and when the specific system packages with included files does exist (use "apt-file search <filename>" command), it uses system files with "/javascript/" prefix (e.g., '/javascript/jquery-datatables/jquery.dataTables.js', '/javascript/font-awesome/css/font-awesome.min.css'). The source code is automatically adapted for system js and css files using sed commands in debian/rules during packaging.
+#### Development Environment
+- **Local files**: Use relative paths (e.g., `js/summernote-bs4.min.js`, `css/font-awesome.min.css`)
+- **Purpose**: Enables intranet/offline capability during development
+- **Location**: Files stored in local `js/` and `css/` directories
 
-**Development vs Production File Paths:**
-- **Development**: Use relative paths to local files (js/file.js, css/file.css) for intranet/offline capability
-- **Production (Debian package)**: Automatically converted to system paths (/javascript/package/file.js) when system packages are available
-- **Conversion**: Handled by sed commands in debian/rules file - NO manual path changes needed in source code
-- **System Package Detection**: Use `apt-file search <filename>` to verify if system package provides the file
-- **Fallback**: If system package unavailable, local files are used as bundled in the package
+#### Production Environment (Debian Package)
+- **System files**: Automatically converted to system paths (e.g., `/javascript/jquery-datatables/jquery.dataTables.js`)
+- **Conversion**: Handled automatically by sed commands in `debian/rules` during packaging
+- **Detection**: Use `apt-file search <filename>` to verify system package availability
+- **Fallback**: Uses bundled local files if system packages unavailable
 
-After every single edit to a PHP file, always run `php -l` on the edited file to lint it and ensure code sanity before proceeding further. This is mandatory for all PHP code changes.
+#### ⚠️ Important Rules
+- **NO manual path changes** needed in source code
+- **Keep relative paths** in development - automation handles production conversion
+- **Don't modify** paths for production manually
 
-All files *.app.json must conform to the schema available at: https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json
+## 🔧 Development Workflow
 
-All files *.credential-type.json must conform to the schema available at: https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.credential-type.schema.json
+### Mandatory PHP Validation
+After **every single edit** to a PHP file:
+```bash
+php -l path/to/edited/file.php
+```
+This syntax check is **mandatory** before proceeding with further changes.
+
+### Internationalization
+- **i18n Library**: Use `_()` functions for all user-facing strings that need translation
+- **Example**: `echo _('Welcome to MultiFlexi');` instead of `echo 'Welcome to MultiFlexi';`
+
+## 📋 Schema Validation
+
+### Application Definition Files
+- **Pattern**: `*.app.json`
+- **Schema**: https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json
+- **Requirement**: All app.json files must conform to this schema
+
+### Credential Type Files  
+- **Pattern**: `*.credential-type.json`
+- **Schema**: https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.credential-type.schema.json
+- **Requirement**: All credential-type.json files must conform to this schema
+
+## 📖 Documentation Standards
+
+### Code Documentation
+- **In-code docs**: Follow reStructuredText (reST) format for docs/ folder
+- **Docblocks**: Use standard PHPDoc format for classes and functions
+- **Comments**: Explain complex logic and business rules
+
+### Best Practices Summary
+1. **Security First**: Always validate input and sanitize output
+2. **Type Safety**: Use strict typing throughout the codebase
+3. **Error Handling**: Implement comprehensive exception handling
+4. **Testing**: Write tests for new features and bug fixes
+5. **Performance**: Consider performance implications of code changes
+6. **Maintainability**: Write clean, readable, well-documented code
+
+---
+*This file ensures GitHub Copilot follows MultiFlexi project standards and conventions.*
