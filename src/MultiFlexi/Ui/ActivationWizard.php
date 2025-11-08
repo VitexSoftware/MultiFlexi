@@ -150,13 +150,13 @@ class ActivationWizard extends \Ease\Html\DivTag
             }
         }
 
-        // Add RunTemplate ID - load actual ID from database
-        if (!empty($this->wizardData['runtemplate_id'])) {
+        // Add RunTemplate ID - show after creation (step 4 onwards)
+        if (!empty($this->wizardData['runtemplate_id']) && $this->currentStep >= 4) {
             $runTemplate = new \MultiFlexi\RunTemplate($this->wizardData['runtemplate_id']);
             $actualId = $runTemplate->getMyKey();
 
             if ($actualId) {
-                $steps[3] .= ' ⚗️ #'.$actualId;
+                $steps[3] .= ' <span class="badge badge-success ml-2">#'.$actualId.'</span>';
             }
         }
 
@@ -693,7 +693,11 @@ EOD,
         $app = new \MultiFlexi\Application($this->wizardData['app_id']);
         $company = new \MultiFlexi\Company($this->wizardData['company_id']);
 
-        $container->addItem(new \Ease\Html\H3Tag(_('Assign Credentials')));
+        $headingText = _('Assign Credentials');
+        if ($runTemplate->getMyKey()) {
+            $headingText .= ' <span class="badge badge-success">#'.$runTemplate->getMyKey().'</span>';
+        }
+        $container->addItem(new \Ease\Html\H3Tag($headingText));
         $container->addItem(new \Ease\Html\PTag(sprintf(_('Select credentials for %s'), $app->getRecordName())));
 
         // Get application requirements
@@ -784,7 +788,12 @@ EOD,
         $runTemplate = new \MultiFlexi\RunTemplate($this->wizardData['runtemplate_id']);
         $app = new \MultiFlexi\Application($this->wizardData['app_id']);
 
-        $container->addItem(new \Ease\Html\H3Tag(_('Configure').' '.$runTemplate->getRecordName()));
+        $actualId = $runTemplate->getMyKey();
+        $configTitle = _('Configure').' '.$runTemplate->getRecordName();
+        if (!empty($actualId)) {
+            $configTitle .= ' <span class="badge badge-success ml-2">#'.$actualId.'</span>';
+        }
+        $container->addItem(new \Ease\Html\H3Tag($configTitle, ['class' => 'd-flex align-items-center']));
 
         $form = new SecureForm(['method' => 'POST', 'action' => 'activation-wizard.php?step=6', 'id' => 'wizardForm']);
         $form->addItem(new \Ease\Html\InputHiddenTag('runtemplate_id', (string) $this->wizardData['runtemplate_id']));
@@ -1103,7 +1112,12 @@ EOD,
             );
         }
 
-        $container->addItem(new \Ease\Html\H3Tag(_('Configure Actions').' '.$runTemplate->getRecordName()));
+        $actualId = $runTemplate->getMyKey();
+        $actionsTitle = _('Configure Actions').' '.$runTemplate->getRecordName();
+        if (!empty($actualId)) {
+            $actionsTitle .= ' <span class="badge badge-success ml-2">#'.$actualId.'</span>';
+        }
+        $container->addItem(new \Ease\Html\H3Tag($actionsTitle, ['class' => 'd-flex align-items-center']));
         $container->addItem(new \Ease\Html\PTag(_('Define what happens when the job succeeds or fails.')));
 
         $form = new SecureForm(['method' => 'POST', 'action' => 'activation-wizard.php?step=7', 'id' => 'wizardForm']);
