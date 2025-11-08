@@ -52,7 +52,14 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         $delayChoosen = (int) $runtemplate->getDataValue('delay');
         $intervalChooser = new \MultiFlexi\Ui\IntervalChooser($runtemplateId.'_interval', $intervalChoosen, ['id' => $runtemplateId.'_interval', 'checked' => 'true', 'data-runtemplate' => $runtemplateId]);
         \MultiFlexi\Ui\CrontabInput::includeAssets();
-        $crontabInput = new \MultiFlexi\Ui\CrontabInput($runtemplateId.'_cron', $crontab, ['data-runtemplate' => $runtemplateId]);
+        
+        // Set cron input as disabled by default unless interval is set to 'c' (Custom)
+        $cronInputAttribs = ['data-runtemplate' => $runtemplateId];
+        if ($intervalChoosen !== 'c') {
+            $cronInputAttribs['disabled'] = 'disabled';
+            $cronInputAttribs['style'] = 'opacity: 0.5; pointer-events: none;';
+        }
+        $crontabInput = new \MultiFlexi\Ui\CrontabInput($runtemplateId.'_cron', $crontab, $cronInputAttribs);
 
         $delayChooser = new \MultiFlexi\Ui\DelayChooser($runtemplateId.'_delay', $delayChoosen, ['id' => $runtemplateId.'_delay', 'checked' => 'true', 'data-runtemplate' => $runtemplateId]);
         $executorChooser = new AppExecutorSelect($runtemplate->getApplication(), [], (string) $runtemplate->getDataValue('executor'), ['id' => $runtemplateId.'_executor', 'data-runtemplate' => $runtemplateId]);
@@ -198,6 +205,28 @@ $(document).ready(function() {
             }
         }
     });
+    
+    // Initialize cron input state based on current interval selection
+    var currentInterval = $('#{$this->runtemplate->getMyKey()}_interval').val();
+    var cronElement = $('#{$this->runtemplate->getMyKey()}_cron');
+    
+    if (currentInterval === 'c') {
+        // Enable cron input for Custom interval
+        cronElement.prop('disabled', false);
+        cronElement.css({
+            'opacity': '1',
+            'pointer-events': 'auto'
+        });
+        console.log('Cron input initialized as enabled for custom interval');
+    } else {
+        // Disable cron input for other intervals
+        cronElement.prop('disabled', true);
+        cronElement.css({
+            'opacity': '0.5',
+            'pointer-events': 'none'
+        });
+        console.log('Cron input initialized as disabled for interval:', currentInterval);
+    }
 });
 EOD);
 
@@ -223,12 +252,34 @@ function refreshCsrfToken() {
 }
 
 $('#{$this->runtemplate->getMyKey()}_interval').change( function(event, state) {
+    
+    var intervalValue = $(this).val();
+    var cronElement = $('#{$this->runtemplate->getMyKey()}_cron');
+    
+    // Enable/disable cron input based on interval selection
+    if (intervalValue === 'c') {
+        // Enable cron input for Custom interval
+        cronElement.prop('disabled', false);
+        cronElement.css({
+            'opacity': '1',
+            'pointer-events': 'auto'
+        });
+        console.log('Cron input enabled for custom interval');
+    } else {
+        // Disable cron input for other intervals
+        cronElement.prop('disabled', true);
+        cronElement.css({
+            'opacity': '0.5',
+            'pointer-events': 'none'
+        });
+        console.log('Cron input disabled for interval:', intervalValue);
+    }
 
     $.ajax({
         url: 'rtinterval.php',
         data: {
             runtemplate: $(this).attr("data-runtemplate"),
-            interval: $(this).val(),
+            interval: intervalValue,
             csrf_token: currentCsrfToken
         },
         error: function(xhr) {
@@ -439,11 +490,22 @@ EOD);
         $this->addJavaScript(<<<EOD
 
 
+// Debouncing variables for cron save
+var cronSaveTimeout;
+var lastSavedCronValue = '';
+var isSaving = false;
+
 // Function to get cron value from the custom component
 function getCronValue() {
     var cronElement = $('#{$this->runtemplate->getMyKey()}_cron')[0];
     if (cronElement) {
-        // Try multiple ways to get the value
+        // For the cron-expression-input web component, get value from the input field inside
+        var inputElement = cronElement.querySelector('.cronInsideInput');
+        if (inputElement) {
+            return inputElement.value || '';
+        }
+        
+        // Fallback: Try multiple ways to get the value
         return cronElement.value || 
                $(cronElement).attr('value') || 
                $(cronElement).find('input').val() ||
@@ -453,12 +515,34 @@ function getCronValue() {
     return '';
 }
 
-// Function to save cron value
+// Function to save cron value with debouncing to prevent multiple requests
 function saveCronValue() {
+    var cronElement = $('#{$this->runtemplate->getMyKey()}_cron');
+    
+    // Don't save if the cron input is disabled
+    if (cronElement.prop('disabled')) {
+        console.log('Skipping save: cron input is disabled');
+        return;
+    }
+    
     var cronValue = getCronValue();
     
-    // Debug: Always log the cron value we're trying to save
     console.log('Attempting to save cron value:', cronValue);
+    
+    // Don't save if value is empty or just asterisks (default empty cron)
+    if (!cronValue || cronValue === '* * * * *' || cronValue.trim() === '') {
+        console.log('Skipping save: empty or default cron value');
+        return;
+    }
+    
+    // Don't save if value hasn't changed or we're already saving
+    if (cronValue === lastSavedCronValue || isSaving) {
+        console.log('Skipping save: unchanged value or save in progress');
+        return;
+    }
+    
+    isSaving = true;
+    lastSavedCronValue = cronValue;
     
     $.ajax({
         url: 'rtcron.php',
@@ -469,6 +553,8 @@ function saveCronValue() {
         },
         error: function(xhr) {
             console.log('Cron save error:', xhr.status, xhr.responseText);
+            isSaving = false;
+            
             if (xhr.status === 403 || xhr.status === 400) {
                 // CSRF token might be expired, try to refresh and retry
                 refreshCsrfToken().then(function(newToken) {
@@ -484,26 +570,34 @@ function saveCronValue() {
                         success: function(data) {
                             $('#{$this->runtemplate->getMyKey()}_cron').after( "💾" );
                             console.log("cron saved after retry", retryValue);
+                            isSaving = false;
                         },
                         error: function() {
                             $('#{$this->runtemplate->getMyKey()}_cron').after( "⚰️" );
                             console.log("cron not saved even after retry");
+                            isSaving = false;
+                            // Reset last saved value so it can be retried
+                            lastSavedCronValue = '';
                         },
                         type: 'POST'
                     });
                 }).catch(function() {
                     $('#{$this->runtemplate->getMyKey()}_cron').after( "⚰️" );
                     console.log("CSRF token refresh failed");
+                    isSaving = false;
+                    lastSavedCronValue = '';
                 });
             } else {
                 $('#{$this->runtemplate->getMyKey()}_cron').after( "⚰️" );
                 console.log("cron not saved", xhr.status, xhr.responseText);
+                lastSavedCronValue = '';
             }
         },
 
         success: function(data) {
             $('#{$this->runtemplate->getMyKey()}_cron').after( "💾" );
             console.log("cron saved successfully", cronValue);
+            isSaving = false;
             // Refresh CSRF token for subsequent requests
             refreshCsrfToken();
         },
@@ -511,43 +605,49 @@ function saveCronValue() {
         });
 }
 
-// Set up multiple event listeners for the cron component
-$('#{$this->runtemplate->getMyKey()}_cron').on('change input', saveCronValue);
-
-// Also listen for custom events that the cron component might emit
-$('#{$this->runtemplate->getMyKey()}_cron').on('cron-changed value-changed update', saveCronValue);
-
-// MutationObserver to watch for value attribute changes
-if (window.MutationObserver) {
-    var cronElement = $('#{$this->runtemplate->getMyKey()}_cron')[0];
-    if (cronElement) {
-        var observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (mutation.type === 'attributes' && 
-                    (mutation.attributeName === 'value' || mutation.attributeName === 'data-value')) {
-                    console.log('Cron value changed via attribute:', cronElement.value);
-                    saveCronValue();
-                }
-            });
-        });
-        
-        observer.observe(cronElement, {
-            attributes: true,
-            attributeFilter: ['value', 'data-value', 'aria-valuenow']
-        });
+// Debounced version of save function - prevents multiple rapid saves
+function debouncedSaveCronValue() {
+    // Clear any pending save
+    if (cronSaveTimeout) {
+        clearTimeout(cronSaveTimeout);
     }
+    
+    // Schedule a new save after a short delay
+    cronSaveTimeout = setTimeout(function() {
+        saveCronValue();
+    }, 500); // Wait 500ms before saving
 }
 
-// Fallback: Poll for changes every 2 seconds (as a last resort)
-var lastCronValue = getCronValue();
-setInterval(function() {
-    var currentValue = getCronValue();
-    if (currentValue !== lastCronValue && currentValue !== '') {
-        console.log('Cron value changed via polling:', currentValue);
-        lastCronValue = currentValue;
-        saveCronValue();
+// Set up single event listener with debouncing
+$('#{$this->runtemplate->getMyKey()}_cron').on('change input', function(e) {
+    console.log('Cron component event detected:', e.type);
+    debouncedSaveCronValue();
+});
+
+// Listen for custom events that the cron component might emit
+$('#{$this->runtemplate->getMyKey()}_cron').on('cron-changed value-changed', function(e) {
+    console.log('Cron component custom event:', e.type);
+    debouncedSaveCronValue();
+});
+
+// Listen to the internal input field of the cron component when it becomes available
+setTimeout(function() {
+    var cronElement = $('#{$this->runtemplate->getMyKey()}_cron')[0];
+    if (cronElement) {
+        // Wait for the web component to be fully initialized
+        var inputElement = cronElement.querySelector('.cronInsideInput');
+        if (inputElement) {
+            console.log('Setting up cron internal input listener');
+            $(inputElement).on('input change blur', function() {
+                console.log('Internal cron input changed:', this.value);
+                debouncedSaveCronValue();
+            });
+        } else {
+            // If not available yet, try again in another second
+            setTimeout(arguments.callee, 1000);
+        }
     }
-}, 2000);
+}, 1000);
 
 EOD);
 

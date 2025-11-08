@@ -44,6 +44,30 @@ class UserDataAuditLogger extends \Ease\Sand
     public string $createColumn = 'created_at';
 
     /**
+     * Database connection.
+     */
+    public ?\PDO $pdo = null;
+
+    /**
+     * Constructor.
+     * 
+     * @param mixed $identifier Record identifier
+     */
+    public function __construct($identifier = null)
+    {
+        // Initialize PDO connection from Ease SQL Engine
+        if (!isset($this->pdo)) {
+            $engine = new \Ease\SQL\Engine();
+            $this->pdo = $engine->getPdo();
+        }
+        
+        // Load record if identifier provided
+        if ($identifier !== null) {
+            $this->loadFromSQL($identifier);
+        }
+    }
+
+    /**
      * Log user data change.
      *
      * @param int         $userId          User ID whose data was changed
