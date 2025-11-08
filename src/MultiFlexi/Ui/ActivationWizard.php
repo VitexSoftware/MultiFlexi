@@ -59,7 +59,7 @@ class ActivationWizard extends \Ease\Html\DivTag
                 // Include selectize assets for step 2 (application selection with topic filtering)
         if ($this->currentStep === 2) {
             WebPage::singleton()->includeJavaScript('js/selectize.min.js');
-            WebPage::singleton()->includeCss('css/selectize.bootstrap4.min.css');
+            WebPage::singleton()->includeCss('css/selectize.bootstrap4.css');
             
             // Add custom CSS for topic highlighting
             WebPage::singleton()->addCSS('
@@ -497,6 +497,12 @@ document.querySelectorAll('.wizard-content .app-card').forEach(function(card) {
 
 // Topic filtering functionality with localStorage support
 $(document).ready(function() {
+    // Check if selectize is available
+    if (typeof $.fn.selectize === 'undefined') {
+        console.error('Selectize library is not loaded!');
+        return;
+    }
+    
     // Constants for localStorage
     const STORAGE_KEY = 'multiflexi_topic_filter';
     const DEFAULT_ALL_SELECTED = 'all_topics_selected';
@@ -549,12 +555,24 @@ $(document).ready(function() {
     
     // Wait for selectize to be initialized
     setTimeout(function() {
-        topicFilterSelectize = $('#topic_filterpillBox')[0].selectize;
+        console.log('Attempting to initialize topic filter selectize...');
+        var element = $('#topic_filterpillBox');
+        console.log('Found element:', element.length > 0 ? 'yes' : 'no');
+        
+        if (element.length > 0 && element[0].selectize) {
+            topicFilterSelectize = element[0].selectize;
+            console.log('Selectize instance found:', !!topicFilterSelectize);
+        } else {
+            console.warn('Selectize not initialized yet, trying again...');
+            setTimeout(arguments.callee, 500);
+            return;
+        }
         
         if (topicFilterSelectize) {
             // Get all available topic options
             var options = topicFilterSelectize.options;
             allAvailableTopics = Object.keys(options);
+            console.log('Available topics:', allAvailableTopics);
             
             // Load saved selection or use all topics for first visit
             var savedSelection = loadTopicSelection();
