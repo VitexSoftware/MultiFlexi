@@ -66,6 +66,11 @@ if (WebPage::singleton()->isPosted()) {
                 $runTemplate->setDataValue('company_id', (int) $postData['company_id']);
                 $runTemplate->setDataValue('name', $postData['runtemplate_name']);
                 $runTemplate->setDataValue('interv', $postData['interv'] ?? 'n');
+                
+                // Save note if provided
+                if (isset($postData['runtemplate_note'])) {
+                    $runTemplate->setDataValue('note', $postData['runtemplate_note']);
+                }
 
                 $runtemplateId = $runTemplate->dbsync();
 
@@ -74,6 +79,7 @@ if (WebPage::singleton()->isPosted()) {
                         'company_id' => (int) $postData['company_id'],
                         'app_id' => (int) $postData['app_id'],
                         'runtemplate_name' => $postData['runtemplate_name'],
+                        'runtemplate_note' => $postData['runtemplate_note'] ?? '',
                         'runtemplate_id' => $runtemplateId,
                     ]);
                     $runTemplate->addStatusMessage(_('RunTemplate created successfully'), 'success');
