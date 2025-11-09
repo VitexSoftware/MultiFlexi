@@ -1,5 +1,0 @@
-#!/bin/sh
-# postinst script for multiflexi-raiffeisenbank
-set -e
-
-. /usr/share/debconf/confmodule
