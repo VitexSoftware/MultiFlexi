@@ -48,15 +48,29 @@ MultiFlexi provides several command line utilities to manage and interact with t
 
     - See :doc:`multiflexi-cli` for complete details.
 
-12. **multiflexi-cli credtype import**
-    - Imports a credential type definition from a JSON file into MultiFlexi.
-    - Usage:
+12. **multiflexi-cli credtype**
+    - Comprehensive credential type management including list, get, update, and JSON operations.
+    - Key commands:
 
       .. code-block:: bash
 
-         multiflexi-cli credtype import --file example.credential-type.json
+         # List all credential types
+         multiflexi-cli credtype list
+         
+         # Get credential type details
+         multiflexi-cli credtype get --id=1
+         
+         # Validate JSON before import
+         multiflexi-cli credtype validate-json --file example.credential-type.json
+         
+         # Import credential type from JSON
+         multiflexi-cli credtype import-json --file example.credential-type.json
+         
+         # Export credential type to JSON
+         multiflexi-cli credtype export-json --id=1 --file exported.json
 
-    - See :doc:`credential-type` for schema details.
+    - Features include schema validation, duplicate detection, localization support, and comprehensive error reporting.
+    - See :doc:`credential-type` for schema details and :doc:`multiflexi-cli` for complete command reference.
 
 13. **multiflexi-scheduler**
     - Schedules jobs and tasks for execution.
