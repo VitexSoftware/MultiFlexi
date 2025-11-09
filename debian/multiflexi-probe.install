@@ -1,5 +1,0 @@
-tests/multiflexi_probe.multiflexi.app.json     usr/lib/multiflexi-probe/multiflexi/
-tests/probe.multiflexi.credential-type.json    usr/lib/multiflexi-probe/multiflexi/
-
-tests/*.svg usr/share/multiflexi/images/
-tests/multiflexi-probe			       usr/bin/

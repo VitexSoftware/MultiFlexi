@@ -14,7 +14,7 @@ Recommends: multiflexi-scheduler, multiflexi-web
 Suggests: multiflexi-all, multiflexi-cli, multiflexi-api, multiflexi-executor
 Pre-Depends: multiflexi-database
 Architecture: all
-Description: run several tools on defined abraflexi servers
+Description: Run various tools on top of not even AbraFlexi and Stormware Pohoda
  Define server, customers and its companies. Then specify
  which services/commands run upon it.
 
