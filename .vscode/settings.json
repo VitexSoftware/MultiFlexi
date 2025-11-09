@@ -14,7 +14,24 @@
         "activityBar.activeBorder": "#ffbc96",
         "activityBar.border": "#DB1F48",
         "iLoveWorkSpaceColors": true,
-        "iLoveWorkSpaceRandom": false
+        "iLoveWorkSpaceRandom": false,
+        "activityBar.activeBackground": "#673be8",
+        "activityBar.background": "#673be8",
+        "activityBar.foreground": "#e7e7e7",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "activityBarBadge.background": "#561d0a",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "commandCenter.border": "#e7e7e799",
+        "sash.hoverBorder": "#673be8",
+        "statusBar.background": "#4a19d7",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#673be8",
+        "statusBarItem.remoteBackground": "#4a19d7",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "titleBar.activeBackground": "#4a19d7",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#4a19d799",
+        "titleBar.inactiveForeground": "#e7e7e799"
     },
     "sqltools.connections": [
         {
@@ -33,5 +50,6 @@
             "database": "StwPh_12345678_2023"
         }
     ],
-    "php.version": "8.4"
+    "php.version": "8.4",
+    "peacock.color": "#4a19d7"
 }

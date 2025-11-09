@@ -1,8 +1,14 @@
-multiflexi (2.1.1) UNRELEASED; urgency=medium
+multiflexi (2.2.0) UNRELEASED; urgency=medium
+
+  * json2credential-type added
+
+ -- vitex <info@vitexsoftware.cz>  Sun, 09 Nov 2025 22:36:50 +0100
+
+multiflexi (2.1.1) unstable; urgency=medium
 
   * Runtemplate note editor added
 
- -- vitex <info@vitexsoftware.cz>  Thu, 06 Nov 2025 18:16:50 +0100
+ -- vitex <info@vitexsoftware.cz>  Sun, 09 Nov 2025 22:36:50 +0100
 
 multiflexi (2.1.0) unstable; urgency=medium
 
