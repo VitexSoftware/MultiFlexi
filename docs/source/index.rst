@@ -27,56 +27,6 @@ Key Features
 
 - **Enterprise-Ready**: User authentication, API tokens, multi-tenant data isolation, and comprehensive security features
 
-Architecture
-------------
-
-MultiFlexi features a sophisticated layered architecture:
-
-**Database Layer**
-  ORM-based data management with Phinx migrations handling applications, companies, run templates, jobs, and credentials
-
-**Application Management**
-  External application definitions with JSON-based metadata, validation, and lifecycle management
-
-**Job Execution System**
-  Multi-environment execution with automatic environment variable injection and support for various executors
-
-**Credential Framework**
-  Extensible credential types supporting various integrations including secret management systems
-
-**Configuration Management**
-  Environment-based configuration with type-safe field definitions and validation
-
-**Security Layer**
-  Comprehensive authentication, authorization, and secure credential handling with encryption
-
-**GDPR Compliance**
-  Complete GDPR compliance framework with automated data retention, breach response, and comprehensive documentation
-
-Environment Variables
----------------------
-
-MultiFlexi automatically configures environment variables for executed applications. For example:
-
-**AbraFlexi Integration:**
-
-- ``ABRAFLEXI_URL`` - AbraFlexi server endpoint
-- ``ABRAFLEXI_LOGIN`` - Authentication username
-- ``ABRAFLEXI_PASSWORD`` - Authentication password
-- ``ABRAFLEXI_COMPANY`` - Company code/identifier
-
-**Pohoda Integration:**
-
-- ``POHODA_ICO`` - Company identification number
-- ``POHODA_URL`` - Pohoda server endpoint
-- ``POHODA_USERNAME`` - Authentication username
-- ``POHODA_PASSWORD`` - Authentication password
-
-**System Variables:**
-
-- ``MULTIFLEXI_JOB_ID`` - Current job identifier
-- Custom variables based on application and company configuration
-
 Getting Started
 ---------------
 
@@ -88,6 +38,8 @@ To get started with MultiFlexi:
 4. Check the :doc:`api` documentation for programmatic integration
 5. Use the :doc:`multiflexi-cli` for command-line management
 6. See :doc:`ansible` for Infrastructure as Code automation
+
+For developers and contributors, see the :doc:`development` section for technical details, architecture information, and development guidelines.
 
 .. note::
 
