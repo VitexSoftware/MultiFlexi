@@ -8,192 +8,114 @@ Configuration
 
 .. contents::
 
-Each application in MultiFlexi defines its own configuration fields. This is of a specific type and has additional properties.
+Each application in MultiFlexi defines its own configuration fields. Configuration fields have specific types and properties that determine how users can provide input.
 
 Configuration Fields
 --------------------
 
-- Configuration ``Field Type`` - one of the following:
-    - **Text**: A single line text input.
-    - **Number**: A numeric input.
-    - **Date**: A date input.
-    - **Email**: An email input.
-    - **Password**: A password input.
-    - **Checkbox**: A yes/no checkbox.
-    - **File**: A file upload input.
-    - **Directory**: A directory path input.
-- ``Keyword`` - The name of configuration field (capital letters)
-- ``Default Value`` - (used unless otherwise specified)
-- Configuration ``Field Description``
-- ``required`` yes/no
+MultiFlexi supports various configuration field types to collect user input:
+
+- **Text**: A single line text input for short text values
+- **Number**: A numeric input for integer or decimal values  
+- **Date**: A date input with date picker interface
+- **Email**: An email input with validation
+- **Password**: A password input with hidden text display
+- **Checkbox**: A yes/no checkbox for boolean values
+- **File**: A file upload input for selecting files
+- **Directory**: A directory path input for folder selection
+
+Each configuration field has these properties:
+
+- ``Keyword`` - The name of configuration field (displayed in capital letters)
+- ``Default Value`` - Pre-filled value used unless user specifies otherwise
+- ``Field Description`` - Help text explaining what the field is for
+- ``Required`` - Whether the field must be filled in (yes/no)
 
 .. image:: appconfigfieldseditor.png
     :alt: Configuration fields of an application in an editor
 
+Basic Configuration
+-------------------
 
-JSON Configuration
-------------------
+When setting up applications, you'll work with configuration fields through the web interface. The system provides:
 
-To configure the MultiFlexi project, you can also create a configuration file (e.g., `config.yaml`) with the necessary fields. Below is an example configuration file:
+- **Form Validation**: Required fields are clearly marked and validated
+- **Help Text**: Descriptive text for each field explaining its purpose
+- **Default Values**: Sensible defaults that work in most situations
+- **Type-Specific Controls**: Date pickers, file browsers, password fields, etc.
 
 GDPR Configuration
 ------------------
 
-MultiFlexi includes comprehensive GDPR compliance configuration options:
+MultiFlexi includes comprehensive GDPR compliance configuration options accessible through the web interface:
 
-**Security Configuration (Phase 3)**
+**Security Settings**
 
-.. code-block:: bash
+- **Security Audit**: Enable comprehensive security event logging
+- **Data Encryption**: Enable AES-256 data encryption for sensitive data
+- **Rate Limiting**: Enable API rate limiting to prevent abuse
+- **IP Whitelisting**: Restrict admin access to specific IP addresses
 
-   # Security settings
-   SECURITY_AUDIT_ENABLED=true           # Enable comprehensive security event logging
-   DATA_ENCRYPTION_ENABLED=true          # Enable AES-256 data encryption
-   RATE_LIMITING_ENABLED=true            # Enable API rate limiting
-   IP_WHITELIST_ENABLED=false            # Enable IP whitelisting for admin access
-   ENCRYPTION_MASTER_KEY=<secret_key>    # Master encryption key (required for data encryption)
+**Data Retention Settings**
 
-**Data Retention Configuration (Phase 4)**
+- **Automated Retention**: Enable automated data retention and cleanup
+- **Grace Period**: Default grace period (in days) before final deletion
+- **Archive Storage**: Path where archived data is stored before deletion
+- **Cleanup Schedule**: When automated cleanup runs (configurable schedule)
 
-.. code-block:: bash
-
-   # Data retention and cleanup settings
-   DATA_RETENTION_ENABLED=true                    # Enable automated data retention and cleanup
-   RETENTION_GRACE_PERIOD_DAYS=30                 # Default grace period before final deletion
-   RETENTION_ARCHIVE_PATH=/var/lib/multiflexi/archives  # Path for archived data storage
-   RETENTION_CLEANUP_SCHEDULE="0 2 * * *"         # Cron expression for automated cleanup
-
-**Environment Variable Configuration Types**
-
-When defining GDPR-related configuration fields in application JSON:
-
-.. code-block:: json
-
-   {
-       "environment": {
-           "GDPR_LAWFUL_BASIS": {
-               "type": "set",
-               "description": "GDPR lawful basis for processing",
-               "options": ["consent", "contract", "legal_obligation", "vital_interests", "public_task", "legitimate_interests"],
-               "defval": "legitimate_interests",
-               "required": true
-           },
-           "DATA_RETENTION_PERIOD": {
-               "type": "integer",
-               "description": "Data retention period in days",
-               "defval": "365",
-               "required": false
-           },
-           "PRIVACY_NOTICE_URL": {
-               "type": "url",
-               "description": "URL to privacy notice",
-               "required": false
-           }
-       }
-   }
-
-For complete GDPR implementation details, see :doc:`gdpr-compliance`.
+For complete GDPR implementation details and developer configuration options, see :doc:`gdpr-compliance` and :doc:`development`.
 
 OpenTelemetry Configuration
 ---------------------------
 
-MultiFlexi supports exporting metrics to OpenTelemetry-compatible backends for observability and monitoring.
+MultiFlexi supports exporting metrics to monitoring systems for observability. Basic configuration options include:
 
-**Basic Configuration**
+- **Enable Monitoring**: Turn on/off metrics export
+- **Service Name**: How your MultiFlexi instance appears in monitoring
+- **Collector Endpoint**: Where to send monitoring data
+- **Protocol**: Communication method (HTTP or gRPC)
 
-.. code-block:: bash
-
-   # Enable OpenTelemetry metrics export
-   OTEL_ENABLED=true
-   OTEL_SERVICE_NAME=multiflexi
-   OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
-   OTEL_EXPORTER_OTLP_PROTOCOL=http/json
-
-**Configuration Options**
-
-- ``OTEL_ENABLED`` - Enable/disable OpenTelemetry export (default: ``false``)
-- ``OTEL_SERVICE_NAME`` - Service identifier in OTLP (default: ``multiflexi``)
-- ``OTEL_EXPORTER_OTLP_ENDPOINT`` - OTLP collector endpoint URL
-- ``OTEL_EXPORTER_OTLP_PROTOCOL`` - Protocol (``http/json`` or ``grpc``)
-
-**Protocol Selection**
-
-HTTP/JSON (recommended for simplicity):
-
-.. code-block:: bash
-
-   OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
-   OTEL_EXPORTER_OTLP_PROTOCOL=http/json
-
-gRPC (recommended for performance):
-
-.. code-block:: bash
-
-   OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317
-   OTEL_EXPORTER_OTLP_PROTOCOL=grpc
-
-**Testing the Configuration**
-
-Use the CLI command to verify your OpenTelemetry setup:
-
-.. code-block:: bash
-
-   multiflexi-cli telemetry:test
-
-For complete OpenTelemetry integration details, deployment examples, and Grafana dashboards, see :doc:`opentelemetry`.
-
+For technical implementation details, see :doc:`development` and :doc:`opentelemetry`.
 
 Logging Configuration
 ---------------------
 
-MultiFlexi supports multiple logging backends that can be configured via environment variables.
+MultiFlexi provides flexible logging options that can be configured through the web interface or configuration files.
 
-**Log Directory**
+**Log Storage**
 
-By default, MultiFlexi writes logs to ``/var/log/multiflexi/``. You can configure a custom log directory using:
+By default, MultiFlexi writes logs to ``/var/log/multiflexi/multiflexi.log``. The system automatically:
 
-.. code-block:: bash
-
-   LOG_DIRECTORY=/custom/path/to/logs
-
-**Log Files**
-
-- ``multiflexi.log`` - Main application log file containing all application events
-
-**Log Rotation**
-
-MultiFlexi includes automatic log rotation configuration:
-
-- Logs are rotated daily
-- Rotated logs are compressed
-- 14 days of logs are retained
-- Old logs are automatically cleaned up
-
-The logrotate configuration is automatically installed to ``/etc/logrotate.d/multiflexi``.
-
-**Logging Backends**
-
-MultiFlexi supports multiple logging destinations:
-
-- **file** - Writes logs to ``/var/log/multiflexi/multiflexi.log``
-- **syslog** - Sends logs to system syslog
-- **database** - Stores logs in the MultiFlexi database
-- **zabbix** - Sends logs to Zabbix monitoring (when ``ZABBIX_SERVER`` is configured)
-
-Multiple loggers can be active simultaneously and are configured in ``src/init.php``.
+- Rotates logs daily to prevent large files
+- Compresses older logs to save space
+- Keeps 14 days of log history
+- Cleans up old logs automatically
 
 **Viewing Logs**
 
-To view real-time logs:
+To view recent activity:
 
 .. code-block:: bash
 
    tail -f /var/log/multiflexi/multiflexi.log
 
-To view historical logs:
+To browse historical logs:
 
 .. code-block:: bash
 
    less /var/log/multiflexi/multiflexi.log
-   
-   # Or view compressed older logs
-   zless /var/log/multiflexi/multiflexi.log.1.gz
+
+**Log Destinations**
+
+MultiFlexi can send logs to multiple destinations simultaneously:
+
+- **Local Files**: Stored on the server for direct access
+- **System Log**: Integrated with your system's logging service  
+- **Database**: Stored in MultiFlexi's database for web interface viewing
+- **Monitoring Systems**: Sent to Zabbix or other monitoring tools when configured
+
+.. tip::
+
+    For troubleshooting issues, the log files are your best resource for understanding what happened and when.
+
+For technical logging implementation details, see :doc:`development`.
