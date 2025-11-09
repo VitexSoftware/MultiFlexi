@@ -74,7 +74,7 @@ Depends: ${misc:Depends},
  libjs-jquery-selectize.js,
  libjs-font-awesome,
  php-cli,
- php-mcrypt | php-sodium
+ php-mcrypt | php-sodium | php8.1-sodium | php8.2-sodium | php8.3-sodium | php8.4-sodium
 Description: MultiFlexi web interface core components
  Core PHP classes and web interface components for MultiFlexi.
  Contains the main application logic and web interface files including
