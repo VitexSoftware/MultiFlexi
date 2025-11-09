@@ -11,9 +11,59 @@ Welcome to the MultiFlexi development documentation. This guide will help you ge
    selenium-testing
 
 .. image:: https://wakatime.com/badge/user/5abba9ca-813e-43ac-9b5f-b1cfdf3dc1c7/project/28a38241-3585-4ce7-b365-d7341c69e635.svg
-   :target: https://wakatime.com
+   :target: https://wakatime.com/
 
 
+
+Architecture
+------------
+
+MultiFlexi features a sophisticated layered architecture:
+
+**Database Layer**
+  ORM-based data management with Phinx migrations handling applications, companies, run templates, jobs, and credentials
+
+**Application Management**
+  External application definitions with JSON-based metadata, validation, and lifecycle management
+
+**Job Execution System**
+  Multi-environment execution with automatic environment variable injection and support for various executors
+
+**Credential Framework**
+  Extensible credential types supporting various integrations including secret management systems
+
+**Configuration Management**
+  Environment-based configuration with type-safe field definitions and validation
+
+**Security Layer**
+  Comprehensive authentication, authorization, and secure credential handling with encryption
+
+**GDPR Compliance**
+  Complete GDPR compliance framework with automated data retention, breach response, and comprehensive documentation
+
+Environment Variables
+---------------------
+
+MultiFlexi automatically configures environment variables for executed applications. For example:
+
+**AbraFlexi Integration:**
+
+- ``ABRAFLEXI_URL`` - AbraFlexi server endpoint
+- ``ABRAFLEXI_LOGIN`` - Authentication username
+- ``ABRAFLEXI_PASSWORD`` - Authentication password
+- ``ABRAFLEXI_COMPANY`` - Company code/identifier
+
+**Pohoda Integration:**
+
+- ``POHODA_ICO`` - Company identification number
+- ``POHODA_URL`` - Pohoda server endpoint
+- ``POHODA_USERNAME`` - Authentication username
+- ``POHODA_PASSWORD`` - Authentication password
+
+**System Variables:**
+
+- ``MULTIFLEXI_JOB_ID`` - Current job identifier
+- Custom variables based on application and company configuration
 
 Setting Up Your Development Environment
 ---------------------------------------
