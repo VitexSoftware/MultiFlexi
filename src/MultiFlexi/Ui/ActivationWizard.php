@@ -780,7 +780,7 @@ EOD,
 
         // Add note field with WYSIWYG editor
         $noteValue = $this->wizardData['runtemplate_note'] ?? '';
-        $noteTextarea = new \Ease\Html\TextAreaTag('runtemplate_note', $noteValue, [
+        $noteTextarea = new \Ease\Html\TextareaTag('runtemplate_note', $noteValue, [
             'class' => 'form-control summernote-editor',
             'id' => 'runtemplate_note',
             'placeholder' => _('Add notes about this RunTemplate...'),
