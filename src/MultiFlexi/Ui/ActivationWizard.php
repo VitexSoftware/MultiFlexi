@@ -1281,8 +1281,8 @@ EOD,
 
         // Create tabs for success and fail actions
         $actionsRow = new \Ease\TWB4\Tabs();
-        $actionsRow->addTab(_('Success Actions'), new ActionsChooser('success', $app, $successActions), !empty($successActions));
-        $actionsRow->addTab(_('Fail Actions'), new ActionsChooser('fail', $app, $failActions), !empty($failActions));
+        $actionsRow->addTab(_('Success Actions'), new ActionsChooser('success', $runTemplate, $successActions), !empty($successActions));
+        $actionsRow->addTab(_('Fail Actions'), new ActionsChooser('fail', $runTemplate, $failActions), !empty($failActions));
 
         $form->addItem($actionsRow);
         $container->addItem($form);
