@@ -49,6 +49,7 @@
             "MultiFlexi\\Ui\\": "src/MultiFlexi/Ui",
             "MultiFlexi\\Api\\": "src/MultiFlexi/Api",
             "MultiFlexi\\Ui\\Action\\": "src/MultiFlexi/Ui/Action",
+            "MultiFlexi\\Ui\\CredentialType\\": "src/MultiFlexi/Ui/CredentialType",
             "MultiFlexi\\Api\\Auth\\": "src/MultiFlexi/Api/Auth",
             "MultiFlexi\\Api\\Server\\": "src/MultiFlexi/Api/Server",
             "MultiFlexi\\Audit\\": "src/MultiFlexi/Audit",

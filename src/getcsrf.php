@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 // Define bypass for CSRF protection since this endpoint provides CSRF tokens
-define('BYPASS_CSRF_PROTECTION', true);
+\define('BYPASS_CSRF_PROTECTION', true);
 
 require_once './init.php';
 
@@ -31,6 +31,7 @@ header('Expires: 0');
 
 // Generate a new CSRF token
 $csrfToken = '';
+
 if (isset($GLOBALS['csrfProtection'])) {
     $csrfToken = $GLOBALS['csrfProtection']->generateToken();
 }
@@ -38,5 +39,5 @@ if (isset($GLOBALS['csrfProtection'])) {
 // Return the token as JSON
 echo json_encode([
     'csrf_token' => $csrfToken,
-    'success' => true
+    'success' => true,
 ]);

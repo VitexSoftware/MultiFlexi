@@ -50,7 +50,7 @@ class UserDataAuditLogger extends \Ease\Sand
 
     /**
      * Constructor.
-     * 
+     *
      * @param mixed $identifier Record identifier
      */
     public function __construct($identifier = null)
@@ -60,7 +60,7 @@ class UserDataAuditLogger extends \Ease\Sand
             $engine = new \Ease\SQL\Engine();
             $this->pdo = $engine->getPdo();
         }
-        
+
         // Load record if identifier provided
         if ($identifier !== null) {
             $this->loadFromSQL($identifier);

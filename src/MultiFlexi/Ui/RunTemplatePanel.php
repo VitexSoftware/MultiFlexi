@@ -52,13 +52,15 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         $delayChoosen = (int) $runtemplate->getDataValue('delay');
         $intervalChooser = new \MultiFlexi\Ui\IntervalChooser($runtemplateId.'_interval', $intervalChoosen, ['id' => $runtemplateId.'_interval', 'checked' => 'true', 'data-runtemplate' => $runtemplateId]);
         \MultiFlexi\Ui\CrontabInput::includeAssets();
-        
+
         // Set cron input as disabled by default unless interval is set to 'c' (Custom)
         $cronInputAttribs = ['data-runtemplate' => $runtemplateId];
+
         if ($intervalChoosen !== 'c') {
             $cronInputAttribs['disabled'] = 'disabled';
             $cronInputAttribs['style'] = 'opacity: 0.5; pointer-events: none;';
         }
+
         $crontabInput = new \MultiFlexi\Ui\CrontabInput($runtemplateId.'_cron', $crontab, $cronInputAttribs);
 
         $delayChooser = new \MultiFlexi\Ui\DelayChooser($runtemplateId.'_delay', $delayChoosen, ['id' => $runtemplateId.'_delay', 'checked' => 'true', 'data-runtemplate' => $runtemplateId]);
@@ -205,11 +207,11 @@ $(document).ready(function() {
             }
         }
     });
-    
+
     // Initialize cron input state based on current interval selection
     var currentInterval = $('#{$this->runtemplate->getMyKey()}_interval').val();
     var cronElement = $('#{$this->runtemplate->getMyKey()}_cron');
-    
+
     if (currentInterval === 'c') {
         // Enable cron input for Custom interval
         cronElement.prop('disabled', false);
@@ -252,10 +254,10 @@ function refreshCsrfToken() {
 }
 
 $('#{$this->runtemplate->getMyKey()}_interval').change( function(event, state) {
-    
+
     var intervalValue = $(this).val();
     var cronElement = $('#{$this->runtemplate->getMyKey()}_cron');
-    
+
     // Enable/disable cron input based on interval selection
     if (intervalValue === 'c') {
         // Enable cron input for Custom interval
@@ -433,7 +435,7 @@ $.ajax({
 
 EOD);
 
-        $this->addJavaScript(<<<EOD
+        $this->addJavaScript(<<<'EOD'
 
 $('#enabler').change( function(event, state) {
 
@@ -504,12 +506,12 @@ function getCronValue() {
         if (inputElement) {
             return inputElement.value || '';
         }
-        
+
         // Fallback: Try multiple ways to get the value
-        return cronElement.value || 
-               $(cronElement).attr('value') || 
+        return cronElement.value ||
+               $(cronElement).attr('value') ||
                $(cronElement).find('input').val() ||
-               $(cronElement).data('value') || 
+               $(cronElement).data('value') ||
                '';
     }
     return '';
@@ -518,32 +520,32 @@ function getCronValue() {
 // Function to save cron value with debouncing to prevent multiple requests
 function saveCronValue() {
     var cronElement = $('#{$this->runtemplate->getMyKey()}_cron');
-    
+
     // Don't save if the cron input is disabled
     if (cronElement.prop('disabled')) {
         console.log('Skipping save: cron input is disabled');
         return;
     }
-    
+
     var cronValue = getCronValue();
-    
+
     console.log('Attempting to save cron value:', cronValue);
-    
+
     // Don't save if value is empty or just asterisks (default empty cron)
     if (!cronValue || cronValue === '* * * * *' || cronValue.trim() === '') {
         console.log('Skipping save: empty or default cron value');
         return;
     }
-    
+
     // Don't save if value hasn't changed or we're already saving
     if (cronValue === lastSavedCronValue || isSaving) {
         console.log('Skipping save: unchanged value or save in progress');
         return;
     }
-    
+
     isSaving = true;
     lastSavedCronValue = cronValue;
-    
+
     $.ajax({
         url: 'rtcron.php',
         data: {
@@ -554,7 +556,7 @@ function saveCronValue() {
         error: function(xhr) {
             console.log('Cron save error:', xhr.status, xhr.responseText);
             isSaving = false;
-            
+
             if (xhr.status === 403 || xhr.status === 400) {
                 // CSRF token might be expired, try to refresh and retry
                 refreshCsrfToken().then(function(newToken) {
@@ -611,7 +613,7 @@ function debouncedSaveCronValue() {
     if (cronSaveTimeout) {
         clearTimeout(cronSaveTimeout);
     }
-    
+
     // Schedule a new save after a short delay
     cronSaveTimeout = setTimeout(function() {
         saveCronValue();

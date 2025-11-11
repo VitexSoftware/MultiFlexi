@@ -31,8 +31,7 @@
     "psr-4": {
       "MultiFlexi\\": "MultiFlexi",
       "MultiFlexi\\Ui\\": "MultiFlexi/Ui",
-      "MultiFlexi\\Pohoda\\": "MultiFlexi/Pohoda",
-      "MultiFlexi\\Ui\\Form\\": "MultiFlexi/Ui/Form",
+      "MultiFlexi\\Ui\\CredentialType\\": "MultiFlexi/Ui/CredentialType",
       "MultiFlexi\\Audit\\": "MultiFlexi/Audit",
       "MultiFlexi\\GDPR\\": "MultiFlexi/GDPR",
       "MultiFlexi\\Notifications\\": "MultiFlexi/Notifications"
