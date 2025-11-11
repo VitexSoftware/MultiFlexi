@@ -12,7 +12,6 @@ src/MultiFlexi/*.php                      usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Audit                      usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Command                    usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Consent                    usr/lib/multiflexi/MultiFlexi/
-src/MultiFlexi/CredentialType             usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/DataErasure                usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/DataExport                 usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/DataRetention              usr/lib/multiflexi/MultiFlexi/
