@@ -51,7 +51,7 @@ case "$1" in
     configure)
         # Set proper permissions for web files
         if [ -d /usr/share/multiflexi ]; then
-            chown -R www-data:www-data /usr/share/multiflexi/
+            chown -R multiflexi:www-data /usr/share/multiflexi/
             chmod -R 644 /usr/share/multiflexi/
             find /usr/share/multiflexi/ -type d -exec chmod 755 {} \;
         fi
