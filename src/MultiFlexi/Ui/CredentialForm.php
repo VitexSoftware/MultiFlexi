@@ -88,6 +88,17 @@ class CredentialForm extends SecureForm
             foreach ($fieldsSource->getFields() as $field) {
                 $formContents[] = self::confiField($kredenc, $field);
             }
+
+            $credtypeHelper = $fieldsSource->getHelper();
+
+            if ($credtypeHelper) {
+                $baseClass = \Ease\Functions::baseClassName($credtypeHelper);
+                $uiHelperClassName = 'MultiFlexi\\Ui\\CredentialType\\'.$baseClass;
+
+                if (class_exists($uiHelperClassName)) {
+                    $formContents[] = (string) (new $uiHelperClassName($kredenc));
+                }
+            }
         }
 
         $formContents[] = new InputHiddenTag('id', (string) ($kredenc->getMyKey() ?? ''));

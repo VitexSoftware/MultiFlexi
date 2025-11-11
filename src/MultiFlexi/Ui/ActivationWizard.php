@@ -56,13 +56,14 @@ class ActivationWizard extends \Ease\Html\DivTag
      */
     public function afterAdd(): void
     {
-                // Include selectize assets for step 2 (application selection with topic filtering)
+        // Include selectize assets for step 2 (application selection with topic filtering)
         if ($this->currentStep === 2) {
             WebPage::singleton()->includeJavaScript('js/selectize.min.js');
             WebPage::singleton()->includeCss('css/selectize.bootstrap4.css');
-            
+
             // Add custom CSS for topic highlighting
-            WebPage::singleton()->addCSS('
+            WebPage::singleton()->addCSS(<<<'EOD'
+
 .topic-badge {
     transition: all 0.3s ease-in-out;
     cursor: pointer;
@@ -99,15 +100,16 @@ class ActivationWizard extends \Ease\Html\DivTag
 .topic-badge.badge-primary {
     animation: highlightPulse 2s ease-in-out infinite;
 }
-            ');
+
+EOD);
         }
-        
+
         // Include Summernote WYSIWYG editor assets for step 3 (RunTemplate creation)
         if ($this->currentStep === 3) {
             WebPage::singleton()->includeJavaScript('js/summernote-bs4.min.js');
             WebPage::singleton()->includeCss('css/summernote-bs4.min.css');
         }
-        
+
         $this->addItem($this->renderStepIndicator());
         $this->addItem($this->renderStepContent());
         $this->addItem($this->renderNavigation());
@@ -380,11 +382,14 @@ EOD,
 
         // Collect all unique topics from applications
         $allTopics = [];
+
         foreach ($applications as $appData) {
             if (!empty($appData['topics'])) {
                 $topics = explode(',', $appData['topics']);
+
                 foreach ($topics as $topic) {
                     $topic = trim($topic);
+
                     if (!empty($topic) && !isset($allTopics[$topic])) {
                         $allTopics[$topic] = ['id' => $topic, 'name' => $topic];
                     }
@@ -400,23 +405,23 @@ EOD,
         if (!empty($allTopics)) {
             $container->addItem(new \Ease\Html\H4Tag(_('Filter by Topics')));
             $container->addItem(new \Ease\Html\PTag(_('Select topics to filter applications. All topics are selected by default to show all applications.')));
-            
+
             $filterRow = new \Ease\TWB4\Row();
-            
+
             // Pre-select all topics by default for first-time visitors
             $allTopicIds = array_column($allTopics, 'id');
             $topicFilter = new PillBox('topic_filter', $allTopics, $allTopicIds, ['class' => 'form-control mb-2', 'placeholder' => _('Select topics to filter applications...')]);
             $filterRow->addColumn(10, $topicFilter);
-            
+
             // Add reset filter button
             $resetButton = new \Ease\Html\ButtonTag(_('Reset Filter'), [
                 'class' => 'btn btn-outline-secondary btn-sm mb-2',
                 'type' => 'button',
                 'id' => 'reset-topic-filter',
-                'title' => _('Select all topics to show all applications')
+                'title' => _('Select all topics to show all applications'),
             ]);
             $filterRow->addColumn(2, $resetButton);
-            
+
             $container->addItem($filterRow);
             $container->addItem(new \Ease\Html\DivTag('', ['class' => 'mb-4'])); // Add spacing
         }
@@ -435,9 +440,9 @@ EOD,
             $topicsDataAttr = implode(',', array_map('trim', $topicsList));
 
             $card = new \Ease\Html\DivTag(null, [
-                'class' => 'card mb-3 h-100 app-card '.$cardClass, 
+                'class' => 'card mb-3 h-100 app-card '.$cardClass,
                 'style' => 'cursor: pointer;',
-                'data-topics' => $topicsDataAttr
+                'data-topics' => $topicsDataAttr,
             ]);
             $cardBody = $card->addItem(new \Ease\Html\DivTag(null, ['class' => 'card-body text-center']));
 
@@ -459,14 +464,17 @@ EOD,
             // Show topics as badges
             if (!empty($appData['topics'])) {
                 $topicBadges = new \Ease\Html\DivTag(null, ['class' => 'mb-2 topic-badges']);
+
                 foreach ($topicsList as $topic) {
                     $topic = trim($topic);
+
                     if (!empty($topic)) {
                         $badge = new \Ease\TWB4\Badge('secondary', $topic, ['class' => 'mr-1 mb-1 topic-badge']);
                         $badge->setTagProperty('data-topic', $topic);
                         $topicBadges->addItem($badge);
                     }
                 }
+
                 $cardBody->addItem($topicBadges);
             }
 
@@ -508,15 +516,15 @@ $(document).ready(function() {
         console.error('Selectize library is not loaded!');
         return;
     }
-    
+
     // Constants for localStorage
     const STORAGE_KEY = 'multiflexi_topic_filter';
     const DEFAULT_ALL_SELECTED = 'all_topics_selected';
-    
+
     // Get reference to the pillbox selectize instance
     var topicFilterSelectize = null;
     var allAvailableTopics = [];
-    
+
     // Function to save topic selection to localStorage
     function saveTopicSelection(selectedTopics) {
         try {
@@ -535,7 +543,7 @@ $(document).ready(function() {
             console.warn('Failed to save topic selection to localStorage:', e);
         }
     }
-    
+
     // Function to load topic selection from localStorage
     function loadTopicSelection() {
         try {
@@ -544,13 +552,13 @@ $(document).ready(function() {
                 // First time or all selected - return all topics
                 return allAvailableTopics.slice();
             }
-            
+
             const parsed = JSON.parse(saved);
             if (Array.isArray(parsed)) {
                 // Filter out topics that no longer exist
                 return parsed.filter(topic => allAvailableTopics.includes(topic));
             }
-            
+
             // Fallback - return all topics
             return allAvailableTopics.slice();
         } catch (e) {
@@ -558,13 +566,13 @@ $(document).ready(function() {
             return allAvailableTopics.slice();
         }
     }
-    
+
     // Wait for selectize to be initialized
     setTimeout(function() {
         console.log('Attempting to initialize topic filter selectize...');
         var element = $('#topic_filterpillBox');
         console.log('Found element:', element.length > 0 ? 'yes' : 'no');
-        
+
         if (element.length > 0 && element[0].selectize) {
             topicFilterSelectize = element[0].selectize;
             console.log('Selectize instance found:', !!topicFilterSelectize);
@@ -573,31 +581,31 @@ $(document).ready(function() {
             setTimeout(arguments.callee, 500);
             return;
         }
-        
+
         if (topicFilterSelectize) {
             // Get all available topic options
             var options = topicFilterSelectize.options;
             allAvailableTopics = Object.keys(options);
             console.log('Available topics:', allAvailableTopics);
-            
+
             // Load saved selection or use all topics for first visit
             var savedSelection = loadTopicSelection();
-            
+
             // Set the saved/default selection
             topicFilterSelectize.setValue(savedSelection, true);
-            
+
             // Apply initial filter based on loaded selection
             filterApplicationsByTopics(savedSelection);
-            
+
             console.log('Initialized topic filter with selection:', savedSelection);
-            
+
             // Listen for changes in topic selection
             topicFilterSelectize.on('change', function(value) {
                 var selectedTopics = Array.isArray(value) ? value : (value ? value.split(',') : []);
                 saveTopicSelection(selectedTopics);
                 filterApplicationsByTopics(selectedTopics);
             });
-            
+
             // Listen for item removal
             topicFilterSelectize.on('item_remove', function(value) {
                 setTimeout(function() {
@@ -607,7 +615,7 @@ $(document).ready(function() {
                     filterApplicationsByTopics(selectedTopics);
                 }, 10);
             });
-            
+
             // Handle reset filter button
             $('#reset-topic-filter').on('click', function() {
                 console.log('Resetting topic filter to show all applications');
@@ -620,22 +628,22 @@ $(document).ready(function() {
             highlightSelectedTopics(allAvailableTopics);
         }
     }, 1000);
-    
+
     // Function to filter applications based on selected topics
     function filterApplicationsByTopics(selectedTopics) {
         console.log('Filtering by topics:', selectedTopics);
-        
+
         var topicsArray = [];
         if (typeof selectedTopics === 'string' && selectedTopics.length > 0) {
             topicsArray = selectedTopics.split(',');
         } else if (Array.isArray(selectedTopics)) {
             topicsArray = selectedTopics;
         }
-        
+
         // Get all application cards
         var appCards = document.querySelectorAll('.app-card');
         var visibleCount = 0;
-        
+
         appCards.forEach(function(card) {
             var cardTopics = card.getAttribute('data-topics') || '';
             var cardTopicsArray = cardTopics.split(',').map(function(topic) {
@@ -643,9 +651,9 @@ $(document).ready(function() {
             }).filter(function(topic) {
                 return topic.length > 0;
             });
-            
+
             var shouldShow = true;
-            
+
             // If no topics are selected, hide all applications
             if (topicsArray.length === 0) {
                 shouldShow = false;
@@ -659,7 +667,7 @@ $(document).ready(function() {
                     }
                 }
             }
-            
+
             // Show/hide the entire column containing the card
             var cardColumn = card.closest('.col-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xl-4');
             if (cardColumn) {
@@ -670,7 +678,7 @@ $(document).ready(function() {
                 } else {
                     cardColumn.style.display = 'none';
                     console.log('Hiding application:', card.querySelector('.card-title').textContent);
-                    
+
                     // Uncheck radio if hidden card was selected
                     var radio = card.querySelector('input[type="radio"]');
                     if (radio && radio.checked) {
@@ -680,18 +688,18 @@ $(document).ready(function() {
                 }
             }
         });
-        
+
         console.log('Visible applications:', visibleCount, '/', appCards.length);
-        
+
         // Highlight selected topics on visible application cards
         highlightSelectedTopics(topicsArray);
-        
+
         // Show message if no applications are visible
         var existingMessage = document.querySelector('.no-applications-message');
         if (existingMessage) {
             existingMessage.remove();
         }
-        
+
         if (visibleCount === 0 && topicsArray.length > 0) {
             var form = document.querySelector('#wizardForm');
             if (form) {
@@ -702,20 +710,20 @@ $(document).ready(function() {
             }
         }
     }
-    
+
     // Function to highlight selected topics on application cards
     function highlightSelectedTopics(selectedTopics) {
         console.log('Highlighting selected topics:', selectedTopics);
-        
+
         var appCards = document.querySelectorAll('.app-card');
-        
+
         appCards.forEach(function(card) {
             // Find all topic badges in this card using the specific class
             var topicBadges = card.querySelectorAll('.topic-badge');
-            
+
             topicBadges.forEach(function(badge) {
                 var topicText = badge.textContent.trim();
-                
+
                 // Reset badge styling first
                 badge.classList.remove('badge-primary', 'badge-warning', 'badge-success', 'badge-info');
                 badge.classList.add('badge-secondary');
@@ -723,7 +731,7 @@ $(document).ready(function() {
                 badge.style.boxShadow = 'none';
                 badge.style.transform = 'scale(1)';
                 badge.style.border = 'none';
-                
+
                 // Highlight if this topic is selected
                 if (selectedTopics.includes(topicText)) {
                     badge.classList.remove('badge-secondary');
@@ -735,7 +743,7 @@ $(document).ready(function() {
                     badge.style.backgroundColor = '#007bff';
                     badge.style.color = '#ffffff';
                 }
-                
+
                 // Apply smooth transition for all badges
                 badge.style.transition = 'all 0.3s ease-in-out';
             });
@@ -784,7 +792,7 @@ EOD,
             'class' => 'form-control summernote-editor',
             'id' => 'runtemplate_note',
             'placeholder' => _('Add notes about this RunTemplate...'),
-            'rows' => 6
+            'rows' => 6,
         ]);
         $form->addItem(new \Ease\TWB4\FormGroup(_('Notes'), $noteTextarea, '', _('Optional notes and documentation for this RunTemplate')));
 
@@ -846,9 +854,11 @@ EOD,
         $company = new \MultiFlexi\Company($this->wizardData['company_id']);
 
         $headingText = _('Assign Credentials');
+
         if ($runTemplate->getMyKey()) {
             $headingText .= ' <span class="badge badge-success">#'.$runTemplate->getMyKey().'</span>';
         }
+
         $container->addItem(new \Ease\Html\H3Tag($headingText));
         $container->addItem(new \Ease\Html\PTag(sprintf(_('Select credentials for %s'), $app->getRecordName())));
 
@@ -942,9 +952,11 @@ EOD,
 
         $actualId = $runTemplate->getMyKey();
         $configTitle = _('Configure').' '.$runTemplate->getRecordName();
+
         if (!empty($actualId)) {
             $configTitle .= ' <span class="badge badge-success ml-2">#'.$actualId.'</span>';
         }
+
         $container->addItem(new \Ease\Html\H3Tag($configTitle, ['class' => 'd-flex align-items-center']));
 
         $form = new SecureForm(['method' => 'POST', 'action' => 'activation-wizard.php?step=6', 'id' => 'wizardForm']);
@@ -1266,9 +1278,11 @@ EOD,
 
         $actualId = $runTemplate->getMyKey();
         $actionsTitle = _('Configure Actions').' '.$runTemplate->getRecordName();
+
         if (!empty($actualId)) {
             $actionsTitle .= ' <span class="badge badge-success ml-2">#'.$actualId.'</span>';
         }
+
         $container->addItem(new \Ease\Html\H3Tag($actionsTitle, ['class' => 'd-flex align-items-center']));
         $container->addItem(new \Ease\Html\PTag(_('Define what happens when the job succeeds or fails.')));
 

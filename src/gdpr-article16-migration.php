@@ -17,7 +17,7 @@ declare(strict_types=1);
  * GDPR Article 16 - Data Seeding and Verification Script.
  *
  * This script seeds sample data and verifies the GDPR Article 16 implementation.
- * 
+ *
  * IMPORTANT: Database tables are now created via migrations:
  * - Run: bin/phinx migrate to create the required tables
  * - Then run this script for sample data and verification
@@ -35,30 +35,32 @@ try {
     $pdo = new PDO(
         \Ease\Shared::cfg('DB_CONNECTION').':host='.\Ease\Shared::cfg('DB_HOST').';dbname='.\Ease\Shared::cfg('DB_DATABASE'),
         \Ease\Shared::cfg('DB_USERNAME'),
-        \Ease\Shared::cfg('DB_PASSWORD')
+        \Ease\Shared::cfg('DB_PASSWORD'),
     );
-    
+
     // Check for required tables
     $requiredTables = ['user_data_audit', 'user_data_correction_requests'];
     $missingTables = [];
-    
+
     foreach ($requiredTables as $table) {
         $result = $pdo->query("SHOW TABLES LIKE '{$table}'")->fetch();
+
         if (!$result) {
             $missingTables[] = $table;
         }
     }
-    
+
     if (!empty($missingTables)) {
-        echo "✗ Missing required database tables: " . implode(', ', $missingTables) . "\n";
+        echo '✗ Missing required database tables: '.implode(', ', $missingTables)."\n";
         echo "Please run migrations first: multiflexi-migrator\n";
+
         exit(1);
     }
 
     echo "✓ Required database tables found\n";
-
 } catch (Exception $e) {
-    echo "✗ Database connection failed: " . $e->getMessage() . "\n";
+    echo '✗ Database connection failed: '.$e->getMessage()."\n";
+
     exit(1);
 }
 

@@ -66,7 +66,7 @@ if (WebPage::singleton()->isPosted()) {
                 $runTemplate->setDataValue('company_id', (int) $postData['company_id']);
                 $runTemplate->setDataValue('name', $postData['runtemplate_name']);
                 $runTemplate->setDataValue('interv', $postData['interv'] ?? 'n');
-                
+
                 // Save note if provided
                 if (isset($postData['runtemplate_note'])) {
                     $runTemplate->setDataValue('note', $postData['runtemplate_note']);
