@@ -66,7 +66,7 @@ EOD;
         $helper = new CredentialType($dataRowRaw['credential_type_id']);
         $dataRow['id'] = $dataRowRaw['id'];
         $dataRow['name'] = '<a title="'.$dataRowRaw['name'].'" href="credential.php?id='.$dataRowRaw['id'].'">'.$dataRowRaw['name'].'</a>';
-        $dataRow['formType'] = $dataRowRaw['formType'].'<br><a title="'.$dataRowRaw['formType'].'" href="credential.php?id='.$dataRowRaw['id'].'"><img src="images/'.$helper->getDataValue('logo').'" height="50">';
+        $dataRow['formType'] = $dataRowRaw['formType'].'<br><a title="'.$dataRowRaw['formType'].'" href="credentialtype.php?id='.$dataRowRaw['credential_type_id'].'"><img src="images/'.$helper->getDataValue('logo').'" height="50">';
         $dataRow['company_id'] = (string) new Ui\CompanyLinkButton(new Company($dataRowRaw['company_id']), ['style' => 'height: 50px;']).' '.$dataRowRaw['company_id_value'];
 
         return parent::completeDataRow($dataRow);
