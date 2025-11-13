@@ -6274,12 +6274,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core.git",
-                "reference": "af897f60ffc9085318fb048cb6ffad0cb46e4785"
+                "reference": "a6684304eaf683e96bf33293335650db76046ddb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/af897f60ffc9085318fb048cb6ffad0cb46e4785",
-                "reference": "af897f60ffc9085318fb048cb6ffad0cb46e4785",
+                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/a6684304eaf683e96bf33293335650db76046ddb",
+                "reference": "a6684304eaf683e96bf33293335650db76046ddb",
                 "shasum": ""
             },
             "require": {
@@ -6323,7 +6323,7 @@
                 "issues": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/issues",
                 "source": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/tree/main"
             },
-            "time": "2025-11-13T08:17:57+00:00"
+            "time": "2025-11-13T13:38:17+00:00"
         },
         {
             "name": "ybelenko/openapi-data-mocker",
@@ -7825,8 +7825,8 @@
             "version": "2.1.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d07c200a88c8133007dd6e7cb6fd710ee09039bc",
-                "reference": "d07c200a88c8133007dd6e7cb6fd710ee09039bc",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7e742a0fb109cb4766f90ba2aa711b0f17946822",
+                "reference": "7e742a0fb109cb4766f90ba2aa711b0f17946822",
                 "shasum": ""
             },
             "require": {
@@ -7872,7 +7872,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-13T06:24:48+00:00"
+            "time": "2025-11-13T14:40:24+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -8316,16 +8316,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "12.5.x-dev",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "48e4bfd6c671ec0410cf92447e73bde6598539ba"
+                "reference": "6a9a4178269dfd0c20939f9350de53d6c2c06039"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/48e4bfd6c671ec0410cf92447e73bde6598539ba",
-                "reference": "48e4bfd6c671ec0410cf92447e73bde6598539ba",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6a9a4178269dfd0c20939f9350de53d6c2c06039",
+                "reference": "6a9a4178269dfd0c20939f9350de53d6c2c06039",
                 "shasum": ""
             },
             "require": {
@@ -8338,7 +8338,7 @@
                 "myclabs/deep-copy": "^1.13.4",
                 "phar-io/manifest": "^2.0.4",
                 "phar-io/version": "^3.2.1",
-                "php": ">=8.3",
+                "php": ">=8.4.1",
                 "phpunit/php-code-coverage": "^12.4.0",
                 "phpunit/php-file-iterator": "^6.0.0",
                 "phpunit/php-invoker": "^6.0.0",
@@ -8355,13 +8355,14 @@
                 "sebastian/version": "^6.0.0",
                 "staabm/side-effects-detector": "^1.0.5"
             },
+            "default-branch": true,
             "bin": [
                 "phpunit"
             ],
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "12.5-dev"
+                    "dev-main": "13.0-dev"
                 }
             },
             "autoload": {
@@ -8393,7 +8394,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.5"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/main"
             },
             "funding": [
                 {
@@ -8417,7 +8418,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-13T07:21:09+00:00"
+            "time": "2025-11-13T11:27:46+00:00"
         },
         {
             "name": "psr/event-dispatcher",
@@ -10168,10 +10169,10 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "vitexsoftware/multiflexi-core": 20,
+        "textalk/websocket": 20,
         "vitexsoftware/ease-fluentpdo": 20,
         "vitexsoftware/multiflexi-api-server": 20,
-        "textalk/websocket": 20
+        "vitexsoftware/multiflexi-core": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
@@ -10179,6 +10180,6 @@
         "ext-yaml": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

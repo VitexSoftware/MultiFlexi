@@ -130,8 +130,8 @@ Použití: multiflexi-cli <příkaz> [akce] [možnosti]
 Klíčové příkazy: application, company, job, runtemplate, version
 
 **Správa aplikací:**
-- `multiflexi-cli application validate-json --json app.json` - validace JSON aplikace proti schématu
-- `multiflexi-cli application import-json --json app.json` - import aplikace z JSON
+- `multiflexi-cli application validate-json --file app.json` - validace JSON aplikace proti schématu
+- `multiflexi-cli application import-json --file app.json` - import aplikace z JSON
 - `multiflexi-cli application list` - seznam všech aplikací
 
 

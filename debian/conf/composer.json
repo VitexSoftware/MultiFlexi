@@ -60,6 +60,10 @@
     },
     {
       "type": "path",
+      "url": "/usr/share/php/EaseFluentPDO/"
+    },
+    {
+      "type": "path",
       "url": "/usr/share/php/EaseTWB4Widgets/"
     }
   ]
