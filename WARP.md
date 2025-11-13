@@ -83,10 +83,10 @@ vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --diff --verbose
 
 ```bash
 # Import application from JSON definition
-multiflexi-cli application import-json --json path/to/app.json
+multiflexi-cli application import-json --file path/to/app.json
 
 # Validate application JSON schema
-multiflexi-cli application validate-json --json multiflexi/app.app.json
+multiflexi-cli application validate-json --file multiflexi/app.app.json
 
 # Export application to JSON
 multiflexi-app2json
@@ -122,7 +122,7 @@ multiflexi-cli retention:cleanup report --format=json --output=report.json
 multiflexi-cli retention:cleanup status
 
 # Validate retention policies
-multiflexi-cli application validate-json --json multiflexi/retention-policy.json
+multiflexi-cli application validate-json --file multiflexi/retention-policy.json
 ```
 ```
 
@@ -428,7 +428,7 @@ Test applications are located in the `tests/` directory:
 
 To validate application definitions against the schema, use:
 ```bash
-multiflexi-cli application validate-json --json tests/multiflexi_probe.multiflexi.app.json
+multiflexi-cli application validate-json --file tests/multiflexi_probe.multiflexi.app.json
 ```
 
 ### Security Testing

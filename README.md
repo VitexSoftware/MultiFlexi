@@ -184,8 +184,8 @@ Usage: multiflexi-cli <command> [action] [options]
 Key commands: application, company, job, runtemplate, version
 
 **Application management:**
-- `multiflexi-cli application validate-json --json app.json` - validate application JSON against schema
-- `multiflexi-cli application import-json --json app.json` - import application from JSON
+- `multiflexi-cli application validate-json --file app.json` - validate application JSON against schema
+- `multiflexi-cli application import-json --file app.json` - import application from JSON
 - `multiflexi-cli application list` - list all applications
 
 Example:
