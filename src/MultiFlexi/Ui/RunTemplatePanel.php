@@ -69,26 +69,26 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         $scheduleButton = new \Ease\TWB4\LinkButton('schedule.php?id='.$runtemplateId, [_('Schedule Launch').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/multiflexi-schedule.svg', _('Launch'), ['height' => '30px'])], 'secondary btn-lg');
         $launchButton = new \Ease\TWB4\LinkButton('schedule.php?id='.$runtemplateId.'&when=now&executor=Native', [_('Launch now').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/multiflexi-execute.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg');
         $runtemplateOptions->addColumn(4, [
-            _('Status').' ', 
+            _('Status').' ',
             new \Ease\TWB4\Widgets\Toggle('active', $runtemplate->getDataValue('active') ? true : false, $runtemplate->getDataValue('active') ? 'false' : 'true', ['title' => $runtemplate->getDataValue('active') ? _('Enabled') : _('Disabled'), 'data-runtemplate' => $runtemplateId, 'id' => 'enabler', 'data-on' => _('Enabled'), 'data-off' => _('Disabled')]), new \Ease\Html\SpanTag('', ['id' => 'deactivated']),
-            '<br>', 
-            _('Crated').' '.$runtemplate->getDataValue($runtemplate->createColumn), 
-            (new \Ease\Html\Widgets\LiveAge(new \DateTime((string)$runtemplate->getDataValue($runtemplate->createColumn)))),
-            '<br>', 
-            _('Updated').' '.$runtemplate->getDataValue($runtemplate->lastModifiedColumn), 
-            (new \Ease\Html\Widgets\LiveAge(new \DateTime((string)$runtemplate->getDataValue($runtemplate->lastModifiedColumn))))
-            ]);
+            '<br>',
+            _('Crated').' '.$runtemplate->getDataValue($runtemplate->createColumn),
+            new \Ease\Html\Widgets\LiveAge(new \DateTime((string) $runtemplate->getDataValue($runtemplate->createColumn))),
+            '<br>',
+            _('Updated').' '.$runtemplate->getDataValue($runtemplate->lastModifiedColumn),
+            new \Ease\Html\Widgets\LiveAge(new \DateTime((string) $runtemplate->getDataValue($runtemplate->lastModifiedColumn))),
+        ]);
         $runtemplateOptions->addColumn(4, [
-            $launchButton, 
-            $scheduleButton, 
-            '<br>', 
+            $launchButton,
+            $scheduleButton,
+            '<br>',
             empty($runtemplate->getDataValue('last_schedule')) ? _('It has never been planned before') : _('Last schedule').' '.$runtemplate->getDataValue('last_schedule').'&nbsp;('.(new \Ease\Html\Widgets\LiveAge(new \DateTime($runtemplate->getDataValue('last_schedule')))).' )',
-            '<br>',             
+            '<br>',
             empty($runtemplate->getDataValue('next_schedule')) ? _('It has never planned now') : _('Current schedule').' '.$runtemplate->getDataValue('last_schedule').'&nbsp;('.(new \Ease\Html\Widgets\LiveAge(new \DateTime($runtemplate->getDataValue('next_schedule')))).' )',
-            '<br>',             
-            new \Ease\TWB4\Badge('success', $runtemplate->getDataValue('successfull_jobs_count'),['title'=>_('Successful jobs count')]), '🏁', 
-            new \Ease\TWB4\Badge('danger', $runtemplate->getDataValue('failed_jobs_count'),['title'=>_('Failed jobs count')])
-            ]);
+            '<br>',
+            new \Ease\TWB4\Badge('success', $runtemplate->getDataValue('successfull_jobs_count'), ['title' => _('Successful jobs count')]), '🏁',
+            new \Ease\TWB4\Badge('danger', $runtemplate->getDataValue('failed_jobs_count'), ['title' => _('Failed jobs count')]),
+        ]);
 
         if (WebPage::getRequestValue('delete', 'int') === 1) {
             $deleteButton = new \Ease\TWB4\LinkButton('runtemplate.php?delete=2&id='.$runtemplateId, _('Delete !!!').'&nbsp;&nbsp;❌', 'danger btn-lg');

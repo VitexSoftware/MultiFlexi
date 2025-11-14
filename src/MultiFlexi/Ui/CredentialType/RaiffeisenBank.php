@@ -66,14 +66,15 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
                     } else {
                         // Get OpenSSL error for better diagnostics
                         $opensslError = '';
+
                         while ($msg = openssl_error_string()) {
-                            $opensslError .= $msg . ' ';
+                            $opensslError .= $msg.' ';
                         }
-                        
+
                         if (str_contains($opensslError, 'mac verify failure')) {
                             $errorMessage = _('Wrong certificate password - MAC verification failed. Please check CERT_PASS credential.');
                         } else {
-                            $errorMessage = _('Failed to read PKCS12 certificate') . ': ' . trim($opensslError);
+                            $errorMessage = _('Failed to read PKCS12 certificate').': '.trim($opensslError);
                         }
                     }
                 }
@@ -85,15 +86,16 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
                     $percent = max(0, min(100, round(($remaining / $total) * 100)));
                     $issueDate = (new \DateTime())->setTimestamp($notBefore);
                     $expiryDate = (new \DateTime())->setTimestamp($notAfter);
-                    
+
                     // Color code based on remaining validity
                     $progressColor = 'bg-success';
+
                     if ($percent < 20) {
                         $progressColor = 'bg-danger';
                     } elseif ($percent < 50) {
                         $progressColor = 'bg-warning';
                     }
-                    
+
                     $this->addItem([
                         new \Ease\Html\DivTag([
                             new \Ease\Html\StrongTag(_('Issued: ')),
@@ -123,6 +125,55 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
             $this->addItem(new \Ease\TWB4\Alert('danger', _('Certificate not set')));
         }
 
+        $ratesFile = sys_get_temp_dir().'/rbczpremiumapi_rates.json';
+        $rates = $this->getJsonRates($ratesFile);
+        $xIbmClientId = $this->credential->getFields()->getFieldByCode('XIBMCLIENTID')->getValue();
+
+        if (\array_key_exists($xIbmClientId, $rates)) {
+            $clientRates = $rates[$xIbmClientId];
+            $this->addItem(new \Ease\Html\DivTag([
+                new \Ease\Html\StrongTag(_('Rate Limits:')),
+                new \Ease\Html\UlTag([
+                    new \Ease\Html\LiTag(sprintf(_('Per Second: %d remaining (resets at %s)'), $clientRates['second']['remaining'], (new \DateTime())->setTimestamp($clientRates['second']['timestamp'])->format('Y-m-d H:i:s'))),
+                    new \Ease\Html\LiTag(sprintf(_('Per Day: %d remaining (resets at %s)'), $clientRates['day']['remaining'], (new \DateTime())->setTimestamp($clientRates['day']['timestamp'])->format('Y-m-d H:i:s'))),
+                ]),
+            ]));
+        } else {
+            $this->addStatusMessage(sprintf(_('No rate limit data for client ID %s'), $xIbmClientId));
+        }
+
         parent::finalize();
+    }
+
+    private function getJsonRates(string $filename): array
+    {
+        $handle = fopen($filename, 'r');
+
+        if ($handle && flock($handle, \LOCK_SH)) {
+            $json = stream_get_contents($handle);
+
+            if ($json === false) {
+                error_log("Failed to read rate limit store from {$filename}");
+                // fall through so the lock can be released and the handle closed
+                $data = [];
+            } else {
+                $decoded = json_decode($json, true);
+
+                if ($decoded === null && json_last_error() !== \JSON_ERROR_NONE) {
+                    $this->addStatusMessage('Failed to decode rate limit JSON: '.json_last_error_msg(), 'warning');
+                    $data = [];
+                } else {
+                    $data = $decoded ?? [];
+                }
+            }
+
+            flock($handle, \LOCK_UN);
+        }
+
+        if ($handle) {
+            fclose($handle);
+        }
+
+        return $data;
     }
 }
