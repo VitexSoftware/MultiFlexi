@@ -84,9 +84,10 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
             '<br>',
             empty($runtemplate->getDataValue('last_schedule')) ? _('It has never been planned before') : _('Last schedule').' '.$runtemplate->getDataValue('last_schedule').'&nbsp;('.(new \Ease\Html\Widgets\LiveAge(new \DateTime($runtemplate->getDataValue('last_schedule')))).' )',
             '<br>',
-            empty($runtemplate->getDataValue('next_schedule')) ? _('It has never planned now') : _('Current schedule').' '.$runtemplate->getDataValue('last_schedule').'&nbsp;('.(new \Ease\Html\Widgets\LiveAge(new \DateTime($runtemplate->getDataValue('next_schedule')))).' )',
+            empty($runtemplate->getDataValue('next_schedule')) ? _('It has never planned now') : _('Current schedule').' '.$runtemplate->getDataValue('next_schedule').'&nbsp;('.(new \Ease\Html\Widgets\LiveAge(new \DateTime($runtemplate->getDataValue('next_schedule')))).' )',
             '<br>',
-            new \Ease\TWB4\Badge('success', $runtemplate->getDataValue('successfull_jobs_count'), ['title' => _('Successful jobs count')]), '🏁',
+            '🏁',
+            new \Ease\TWB4\Badge('success', $runtemplate->getDataValue('successfull_jobs_count'), ['title' => _('Successful jobs count')]),
             new \Ease\TWB4\Badge('danger', $runtemplate->getDataValue('failed_jobs_count'), ['title' => _('Failed jobs count')]),
         ]);
 

@@ -147,7 +147,7 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
 
     private function getJsonRates(string $filename): array
     {
-        $handle = fopen($filename, 'r');
+        $handle = fopen($filename, 'rb');
 
         if ($handle && flock($handle, \LOCK_SH)) {
             $json = stream_get_contents($handle);
@@ -174,6 +174,6 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
             fclose($handle);
         }
 
-        return $data;
+        return \is_array($data) ? $data : [];
     }
 }
