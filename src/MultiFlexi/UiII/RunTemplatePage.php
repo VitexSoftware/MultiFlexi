@@ -80,7 +80,7 @@ class RunTemplatePage extends \Ease\Html\DivTag
                 <input id="amountTo" type="number" class="form-control" placeholder="Částka do">
               </div>
             </form>';
-        $card->addItem(new \Ease\TWB4\CardBody(null, $form));
+        $card->addItem(new \Ease\TWB4\CardBody($form));
 
         return $card;
     }
@@ -130,7 +130,7 @@ class RunTemplatePage extends \Ease\Html\DivTag
         </div>';
 
         $card = new \Ease\TWB4\Card(null, ['class' => 'mb-3']);
-        $card->addItem(new \Ease\TWB4\CardBody(null, $table));
+        $card->addItem(new \Ease\TWB4\CardBody($table));
 
         return $card;
     }
@@ -149,7 +149,7 @@ class RunTemplatePage extends \Ease\Html\DivTag
 
         $chartBody = '<canvas id="runsChart" height="120"></canvas>';
         $card = new \Ease\TWB4\Card(null, ['class' => 'chart-card mb-4']);
-        $card->addItem(new \Ease\TWB4\CardBody(null, $chartHeader.$chartBody));
+        $card->addItem(new \Ease\TWB4\CardBody($chartHeader.$chartBody));
 
         return $card;
     }

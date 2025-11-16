@@ -64,7 +64,7 @@ class WebPage extends \Ease\TWB4\WebPage
     /**
      * Přidá do stránky základní JavaScript.
      */
-    public function finalize()
+    public function finalize(): void
     {
         // Přidání základních JS souborů na konec <body>
         $this->addJavaScript('https://code.jquery.com/jquery-3.5.1.slim.min.js', null, true);
