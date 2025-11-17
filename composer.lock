@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ec8c55ac607a05207a6ffa657c20d90d",
+    "content-hash": "1cfb2c145119d738fdbce3c6ce722782",
     "packages": [
         {
             "name": "brick/math",
@@ -7825,8 +7825,8 @@
             "version": "2.1.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/3dadbba0dea91dcedbc46f3c7826ea588bc4c287",
-                "reference": "3dadbba0dea91dcedbc46f3c7826ea588bc4c287",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/5a24138ea67b18708c9a6596649597245eb9214e",
+                "reference": "5a24138ea67b18708c9a6596649597245eb9214e",
                 "shasum": ""
             },
             "require": {
@@ -7872,25 +7872,25 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-15T18:20:56+00:00"
+            "time": "2025-11-17T21:27:14+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
-            "version": "2.0.7",
+            "version": "2.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-phpunit.git",
-                "reference": "9a9b161baee88a5f5c58d816943cff354ff233dc"
+                "reference": "2fe9fbeceaf76dd1ebaa7bbbb25e2fb5e59db2fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/9a9b161baee88a5f5c58d816943cff354ff233dc",
-                "reference": "9a9b161baee88a5f5c58d816943cff354ff233dc",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/2fe9fbeceaf76dd1ebaa7bbbb25e2fb5e59db2fe",
+                "reference": "2fe9fbeceaf76dd1ebaa7bbbb25e2fb5e59db2fe",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4 || ^8.0",
-                "phpstan/phpstan": "^2.1.18"
+                "phpstan/phpstan": "^2.1.32"
             },
             "conflict": {
                 "phpunit/phpunit": "<7.0"
@@ -7923,9 +7923,9 @@
             "description": "PHPUnit extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-phpunit/issues",
-                "source": "https://github.com/phpstan/phpstan-phpunit/tree/2.0.7"
+                "source": "https://github.com/phpstan/phpstan-phpunit/tree/2.0.8"
             },
-            "time": "2025-07-13T11:31:46+00:00"
+            "time": "2025-11-11T07:55:22+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -10168,10 +10168,10 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "vitexsoftware/multiflexi-core": 20,
+        "textalk/websocket": 20,
         "vitexsoftware/ease-fluentpdo": 20,
         "vitexsoftware/multiflexi-api-server": 20,
-        "textalk/websocket": 20
+        "vitexsoftware/multiflexi-core": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
@@ -10179,6 +10179,6 @@
         "ext-yaml": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
