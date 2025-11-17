@@ -65,6 +65,7 @@ class CompanyJobLister extends CompanyJob
         $this->filterType = $filterType;
         $this->filter['_jobfilter'] = $filterType;
     }
+
     /**
      * columns to be selected from database.
      *
@@ -74,6 +75,7 @@ class CompanyJobLister extends CompanyJob
     {
         return ['id', 'company_id', 'app_id', 'env', 'exitcode', 'launched_by', 'begin', 'end', 'executor', 'schedule', 'schedule_type', 'runtemplate_id'];
     }
+
     /**
      * Columns.
      *
@@ -230,26 +232,26 @@ class CompanyJobLister extends CompanyJob
         $dataRowRaw['exitcode'] = $exitCodeWidget->__toString();
 
         // Format Launch time column
-        if (!empty($dataRowRaw['begin'])) {
+        if (empty($dataRowRaw['begin']) === false) { // Job already started
             try {
                 $beginTime = new \DateTime($dataRowRaw['begin']);
-                $dataRowRaw['begin'] = $dataRowRaw['begin'].'<br><small>'.self::getRelativeTime($beginTime).'</small>';
+                $dataRowRaw['begin'] = $dataRowRaw['begin'].'<br><small>'.new \Ease\Html\Widgets\LiveAge($beginTime).'</small>';
             } catch (\Exception $e) {
                 // Keep original value if parsing fails
             }
         } else {
             $scheduleDisplay = '';
 
-            if (!empty($dataRowRaw['schedule'])) {
+            if (empty($dataRowRaw['schedule']) === false) {
                 try {
                     $scheduleTime = new \DateTime($dataRowRaw['schedule']);
-                    $scheduleDisplay = '<div>'.self::getRelativeTime($scheduleTime).'</div>';
+                    $scheduleDisplay = $dataRowRaw['schedule'].'<div>'.new \Ease\Html\Widgets\LiveAge($scheduleTime).'</div>';
                 } catch (\Exception $e) {
                     // Ignore parsing error
                 }
             }
 
-            $dataRowRaw['begin'] = '⏳'.$scheduleDisplay;
+            $dataRowRaw['begin'] = '💣'.$scheduleDisplay;
         }
 
         // Format Launcher column
@@ -260,12 +262,12 @@ class CompanyJobLister extends CompanyJob
         ) : '';
 
         $userBadge = !empty($dataRowRaw['launched_by']) && !empty($dataRowRaw['login']) ?
-            sprintf('<a href="user.php?id=%d"><span class="badge badge-info">%s</span></a>', $dataRowRaw['launched_by'], htmlspecialchars($dataRowRaw['login'])) :
-            'Timer';
+                sprintf('<a href="user.php?id=%d"><span class="badge badge-info">%s</span></a>', $dataRowRaw['launched_by'], htmlspecialchars($dataRowRaw['login'])) :
+                'Timer';
 
         $scheduleInfo = !empty($dataRowRaw['schedule']) ? '<div>'.htmlspecialchars($dataRowRaw['schedule']).'</div>' : '';
         $executorInfo = !empty($dataRowRaw['executor']) || !empty($dataRowRaw['schedule_type']) ?
-            '<div>'.htmlspecialchars($dataRowRaw['executor'] ?? '').' '.htmlspecialchars($dataRowRaw['schedule_type'] ?? '').'</div>' : '';
+                '<div>'.htmlspecialchars($dataRowRaw['executor'] ?? '').' '.htmlspecialchars($dataRowRaw['schedule_type'] ?? '').'</div>' : '';
 
         $dataRowRaw['launched_by'] = $executorImg.'<div>'.$userBadge.'</div>'.$scheduleInfo.$executorInfo;
 
@@ -286,7 +288,7 @@ class CompanyJobLister extends CompanyJob
         // Format Company column
         if (isset($dataRowRaw['company_id'])) {
             $companyLogo = !empty($dataRowRaw['logo']) ?
-                sprintf('<img src="%s" height="60px" align="right" alt="Company Logo">', htmlspecialchars($dataRowRaw['logo'])) : '';
+                    sprintf('<img src="%s" height="60px" align="right" alt="Company Logo">', htmlspecialchars($dataRowRaw['logo'])) : '';
             $companyName = htmlspecialchars($dataRowRaw['name'] ?? '');
             $dataRowRaw['company_id'] = sprintf(
                 '<a href="company.php?id=%d">%s</a><a href="company.php?id=%d">%s</a>',

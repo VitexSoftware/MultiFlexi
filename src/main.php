@@ -23,9 +23,10 @@ WebPage::singleton()->addItem(new PageTop(_('MultiFlexi')));
 
 WebPage::singleton()->container->addItem(new CompaniesBar());
 
-WebPage::singleton()->container->addItem(new AllJobsLastMonthChart(new \MultiFlexi\Job(), ['id' => 'container']));
-
 $engine = new \MultiFlexi\CompanyJobLister();
+
+WebPage::singleton()->container->addItem(new AllJobsLastMonthChart($engine, ['id' => 'container']));
+
 WebPage::singleton()->container->addItem(new DBDataTable($engine));
 
 WebPage::singleton()->addItem(new PageBottom('jobs'));
