@@ -18,7 +18,7 @@
         "ext-yaml": "*",
         "ext-simplexml": "*",
         "vitexsoftware/multiflexi-core": "dev-main",
-        "vitexsoftware/ease-twbootstrap4": "^1.9",
+        "vitexsoftware/ease-twbootstrap4": "^1.12",
         "vitexsoftware/ease-fluentpdo": "dev-main",
         "vitexsoftware/ease-twbootstrap4-widgets": "^1.7",
         "robmorgan/phinx": "^0.14",

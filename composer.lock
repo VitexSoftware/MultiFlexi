@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1cfb2c145119d738fdbce3c6ce722782",
+    "content-hash": "4048235ca9c248a9176124fb37424733",
     "packages": [
         {
             "name": "brick/math",
@@ -6028,25 +6028,25 @@
         },
         {
             "name": "vitexsoftware/ease-twbootstrap4",
-            "version": "1.9.1",
+            "version": "1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-ease-twbootstrap4.git",
-                "reference": "315b8c122fc8fe2118cf834c097dd31d95749a35"
+                "reference": "c0ee25ef50d08dd50034ae039ad87106fd8c3cbb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-twbootstrap4/zipball/315b8c122fc8fe2118cf834c097dd31d95749a35",
-                "reference": "315b8c122fc8fe2118cf834c097dd31d95749a35",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-twbootstrap4/zipball/c0ee25ef50d08dd50034ae039ad87106fd8c3cbb",
+                "reference": "c0ee25ef50d08dd50034ae039ad87106fd8c3cbb",
                 "shasum": ""
             },
             "require": {
                 "vitexsoftware/ease-html": "^1.40"
             },
             "require-dev": {
-                "ergebnis/composer-normalize": "^2.45",
-                "ergebnis/php-cs-fixer-config": "^6.39",
-                "friendsofphp/php-cs-fixer": "^3.65",
+                "ergebnis/composer-normalize": "^2.48",
+                "ergebnis/php-cs-fixer-config": "^6.56",
+                "friendsofphp/php-cs-fixer": "^3.89",
                 "phpstan/phpstan": "*",
                 "phpunit/phpunit": "*"
             },
@@ -6069,7 +6069,7 @@
             "description": "Set of Twitter Bootstrap 4 rendering objects",
             "support": {
                 "issues": "https://github.com/VitexSoftware/php-ease-twbootstrap4/issues",
-                "source": "https://github.com/VitexSoftware/php-ease-twbootstrap4/tree/1.9.1"
+                "source": "https://github.com/VitexSoftware/php-ease-twbootstrap4/tree/1.12.0"
             },
             "funding": [
                 {
@@ -6077,7 +6077,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2024-12-13T02:05:03+00:00"
+            "time": "2025-11-16T21:51:01+00:00"
         },
         {
             "name": "vitexsoftware/ease-twbootstrap4-widgets",
