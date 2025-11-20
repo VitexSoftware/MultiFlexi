@@ -110,7 +110,7 @@
      text-anchor="middle"
      id="text1"
      transform="scale(0.96723903,1.0338706)"
-     style="stroke-width:150.162">MultiFlexi Scheduling &amp; Execution Process</text>
+     style="stroke-width:150.162">MultiFlexi Scheduling &amp; Execution Process (v2.x+)</text>
   <!-- Phase 1: CronScheduler -->
   <!-- CronScheduler Start -->
   <!-- Get Companies -->
@@ -145,7 +145,7 @@
        class="text title"
        text-anchor="middle"
        fill="#4682b4"
-       id="text2">Phase 1: Scheduling (CronScheduler)</text>
+       id="text2">Phase 1: multiflexi-scheduler.service (Daemon)</text>
     <rect
        x="100"
        y="110"
@@ -159,13 +159,13 @@
        y="145"
        class="text"
        text-anchor="middle"
-       id="text3">CronScheduler</text>
+       id="text3">Scheduler Daemon</text>
     <text
        x="200"
        y="160"
        class="label"
        text-anchor="middle"
-       id="text4">scheduleCronJobs()</text>
+       id="text4">Continuous loop</text>
     <rect
        x="380"
        y="110"
@@ -681,7 +681,7 @@
      class="text title"
      text-anchor="middle"
      fill="#28a745"
-     id="text55">Phase 3: Job Execution (multiflexi-executor)</text>
+     id="text55">Phase 3: multiflexi-executor.service (Daemon)</text>
   <!-- Get Current Jobs -->
   <rect
      x="100"
