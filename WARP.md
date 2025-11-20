@@ -8,10 +8,11 @@ MultiFlexi is a comprehensive PHP-based task scheduling and automation framework
 
 ### Core Components
 
-- **multiflexi-core** (external library): The central library containing core functionality
+- **php-vitexsoftware-multiflexi-core** (external library): The central library containing core functionality
 - **multiflexi-web**: Bootstrap 4 web interface with real-time monitoring
 - **multiflexi-cli**: Command-line interface for management operations
-- **multiflexi-executor**: Periodic application launcher
+- **multiflexi-scheduler**: Systemd service daemon that continuously schedules jobs (v2.x+)
+- **multiflexi-executor**: Systemd service daemon that continuously executes scheduled jobs (v2.x+)
 - **multiflexi-database**: Database schema and migration management
 - **multiflexi-server**: Optional server component for advanced deployments
 - **ansible-collection**: Ansible automation collection for infrastructure deployment
@@ -126,21 +127,37 @@ multiflexi-cli application validate-json --file multiflexi/retention-policy.json
 ```
 ```
 
-### Scheduled Job Execution
+### Systemd Service Architecture (v2.x+)
+
+MultiFlexi 2.x uses dedicated systemd services instead of cron:
 
 ```bash
-# Run hourly jobs
-make hourly
+# Control scheduler service
+sudo systemctl start multiflexi-scheduler
+sudo systemctl stop multiflexi-scheduler
+sudo systemctl status multiflexi-scheduler
+sudo systemctl restart multiflexi-scheduler
 
-# Run daily jobs  
-make daily
+# Control executor service
+sudo systemctl start multiflexi-executor
+sudo systemctl stop multiflexi-executor
+sudo systemctl status multiflexi-executor
+sudo systemctl restart multiflexi-executor
 
-# Run monthly jobs
-make monthly
+# View service logs
+sudo journalctl -u multiflexi-scheduler -f
+sudo journalctl -u multiflexi-executor -f
 
-# Run daemon
-make daemon
+# Development: Run daemons manually
+make daemon  # Run local daemon for testing
 ```
+
+**Service Configuration** (``/etc/multiflexi/multiflexi.env``):
+
+- ``MULTIFLEXI_DAEMONIZE=true``: Run continuously (default for services)
+- ``MULTIFLEXI_CYCLE_PAUSE=10``: Seconds between executor polling cycles
+- ``MULTIFLEXI_MEMORY_LIMIT_MB=1800``: Soft memory limit for executor graceful shutdown
+- ``MULTIFLEXI_MAX_PARALLEL=4``: Maximum concurrent jobs (executor; requires pcntl)
 
 ### Development Environment
 
