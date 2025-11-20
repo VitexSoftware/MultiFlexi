@@ -1,0 +1,1166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 1200 1400"
+   width="1200"
+   height="1400"
+   version="1.1"
+   id="svg101"
+   sodipodi:docname="multiflexi-scheduling-execution-diagram.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview101"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.80812203"
+     inkscape:cx="637.27999"
+     inkscape:cy="478.26935"
+     inkscape:window-width="1920"
+     inkscape:window-height="1164"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg101" />
+  <defs
+     id="defs1">
+    <style
+       id="style1">
+      .box { fill: #e8f4f8; stroke: #0066cc; stroke-width: 2; }
+      .process { fill: #d4edda; stroke: #28a745; stroke-width: 2; }
+      .decision { fill: #fff3cd; stroke: #ffc107; stroke-width: 2; }
+      .database { fill: #e7dff0; stroke: #6f42c1; stroke-width: 2; }
+      .executor { fill: #f8d7da; stroke: #dc3545; stroke-width: 2; }
+      .text { font-family: Arial, sans-serif; font-size: 14px; fill: #000; }
+      .title { font-size: 18px; font-weight: bold; }
+      .arrow { stroke: #333; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .label { font-size: 12px; fill: #555; }
+    </style>
+    <marker
+       id="arrowhead"
+       markerWidth="10"
+       markerHeight="10"
+       refX="9"
+       refY="3"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3, 0 6"
+         fill="#333"
+         id="polygon1" />
+    </marker>
+    <filter
+       inkscape:label="Black Hole"
+       inkscape:menu="Morphology"
+       inkscape:menu-tooltip="Creates a black light inside and outside"
+       height="1.0441137"
+       width="1.0594339"
+       y="-0.022056837"
+       x="-0.029716946"
+       style="color-interpolation-filters:sRGB"
+       id="filter776">
+      <feGaussianBlur
+         stdDeviation="5"
+         in="SourceAlpha"
+         result="result1"
+         id="feGaussianBlur764" />
+      <feComposite
+         operator="arithmetic"
+         k2="3.2"
+         k1="-1"
+         k4="-2"
+         result="result3"
+         in2="result1"
+         id="feComposite766"
+         k3="0" />
+      <feColorMatrix
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 10 0 "
+         result="result2"
+         id="feColorMatrix768" />
+      <feComposite
+         result="fbSourceGraphic"
+         in="SourceGraphic"
+         operator="out"
+         in2="result2"
+         id="feComposite770" />
+      <feBlend
+         mode="multiply"
+         in="result1"
+         in2="fbSourceGraphic"
+         result="result91"
+         id="feBlend772" />
+      <feBlend
+         mode="screen"
+         in="fbSourceGraphic"
+         in2="result91"
+         id="feBlend774" />
+    </filter>
+  </defs>
+  <!-- Title -->
+  <text
+     x="657.90833"
+     y="63.374489"
+     class="text title"
+     text-anchor="middle"
+     id="text1"
+     transform="scale(0.96723903,1.0338706)"
+     style="stroke-width:150.162">MultiFlexi Scheduling &amp; Execution Process</text>
+  <!-- Phase 1: CronScheduler -->
+  <!-- CronScheduler Start -->
+  <!-- Get Companies -->
+  <!-- Get RunTemplates -->
+  <!-- Check Interval Type -->
+  <!-- Custom Cron (c) -->
+  <!-- Standard Interval -->
+  <!-- Parse Cron Expression -->
+  <!-- Prepare Job -->
+  <!-- Phase 2: Job Creation -->
+  <!-- newJob -->
+  <!-- Environment Setup -->
+  <!-- Schedule in DB -->
+  <!-- Zabbix Reporting -->
+  <!-- OpenTelemetry -->
+  <g
+     id="g102"
+     transform="translate(0,58)">
+    <rect
+       x="50"
+       y="60"
+       width="1100"
+       height="420"
+       fill="#f0f8ff"
+       stroke="#4682b4"
+       stroke-width="3"
+       rx="10"
+       id="rect1" />
+    <text
+       x="600"
+       y="85"
+       class="text title"
+       text-anchor="middle"
+       fill="#4682b4"
+       id="text2">Phase 1: Scheduling (CronScheduler)</text>
+    <rect
+       x="100"
+       y="110"
+       width="200"
+       height="60"
+       class="process"
+       rx="5"
+       id="rect2" />
+    <text
+       x="200"
+       y="145"
+       class="text"
+       text-anchor="middle"
+       id="text3">CronScheduler</text>
+    <text
+       x="200"
+       y="160"
+       class="label"
+       text-anchor="middle"
+       id="text4">scheduleCronJobs()</text>
+    <rect
+       x="380"
+       y="110"
+       width="180"
+       height="60"
+       class="database"
+       rx="5"
+       id="rect4" />
+    <text
+       x="470"
+       y="135"
+       class="text"
+       text-anchor="middle"
+       id="text5">Load Companies</text>
+    <text
+       x="470"
+       y="155"
+       class="label"
+       text-anchor="middle"
+       id="text6">Company table</text>
+    <line
+       x1="300"
+       y1="140"
+       x2="380"
+       y2="140"
+       class="arrow"
+       id="line6" />
+    <rect
+       x="380"
+       y="200"
+       width="180"
+       height="80"
+       class="database"
+       rx="5"
+       id="rect6" />
+    <text
+       x="470"
+       y="225"
+       class="text"
+       text-anchor="middle"
+       id="text7">Get RunTemplates</text>
+    <text
+       x="470"
+       y="240"
+       class="label"
+       text-anchor="middle"
+       id="text8">WHERE active=true</text>
+    <text
+       x="470"
+       y="255"
+       class="label"
+       text-anchor="middle"
+       id="text9">AND next_schedule=null</text>
+    <text
+       x="470"
+       y="270"
+       class="label"
+       text-anchor="middle"
+       id="text10">AND interv != 'n'</text>
+    <line
+       x1="470"
+       y1="170"
+       x2="470"
+       y2="200"
+       class="arrow"
+       id="line10" />
+    <path
+       d="m 760,230 80,-30 80,30 -80,30 z"
+       class="decision"
+       id="path10" />
+    <text
+       x="840"
+       y="230"
+       class="text"
+       text-anchor="middle"
+       id="text11">Interval Type?</text>
+    <line
+       x1="560"
+       y1="240"
+       x2="760"
+       y2="230"
+       class="arrow"
+       id="line11" />
+    <rect
+       x="750"
+       y="290"
+       width="180"
+       height="60"
+       class="process"
+       rx="5"
+       id="rect11" />
+    <text
+       x="840"
+       y="315"
+       class="text"
+       text-anchor="middle"
+       id="text12">Custom (c)</text>
+    <text
+       x="840"
+       y="335"
+       class="label"
+       text-anchor="middle"
+       id="text13">Use cron field value</text>
+    <line
+       x1="840"
+       y1="260"
+       x2="840"
+       y2="290"
+       class="arrow"
+       id="line13" />
+    <text
+       x="850"
+       y="280"
+       class="label"
+       id="text14">Yes</text>
+    <rect
+       x="969.96564"
+       y="199.96562"
+       width="167.69438"
+       height="80.068748"
+       class="process"
+       rx="4.6581769"
+       id="rect14" />
+    <text
+       x="1060"
+       y="225"
+       class="text"
+       text-anchor="middle"
+       id="text15">Standard Interval</text>
+    <text
+       x="1060"
+       y="240"
+       class="label"
+       text-anchor="middle"
+       id="text16">i/h/d/w/m/y</text>
+    <text
+       x="1060"
+       y="255"
+       class="label"
+       text-anchor="middle"
+       id="text17">→ Convert to cron</text>
+    <text
+       x="1060"
+       y="270"
+       class="label"
+       text-anchor="middle"
+       id="text18">using $intervCron</text>
+    <line
+       x1="920"
+       y1="230"
+       x2="970"
+       y2="230"
+       class="arrow"
+       id="line18" />
+    <text
+       x="945"
+       y="225"
+       class="label"
+       id="text19">No</text>
+    <rect
+       x="690"
+       y="380"
+       width="400"
+       height="80"
+       class="process"
+       rx="5"
+       id="rect19" />
+    <text
+       x="890"
+       y="405"
+       class="text"
+       text-anchor="middle"
+       id="text20">Parse with CronExpression</text>
+    <text
+       x="890"
+       y="420"
+       class="label"
+       text-anchor="middle"
+       id="text21">Calculate next run: getNextRunDate()</text>
+    <text
+       x="890"
+       y="435"
+       class="label"
+       text-anchor="middle"
+       id="text22">Apply delay if configured</text>
+    <text
+       x="890"
+       y="450"
+       class="label"
+       text-anchor="middle"
+       id="text23">startTime = nextRun + delay</text>
+    <line
+       x1="840"
+       y1="350"
+       x2="840"
+       y2="381.50195"
+       class="arrow"
+       id="line23" />
+    <line
+       x1="1060"
+       y1="280"
+       x2="1060"
+       y2="420"
+       class="arrow"
+       id="line24" />
+    <line
+       x1="1064.0138"
+       y1="434"
+       x2="979.53595"
+       y2="434"
+       class="arrow"
+       id="line25" />
+    <rect
+       x="100"
+       y="380"
+       width="220"
+       height="80"
+       class="process"
+       rx="5"
+       id="rect25" />
+    <text
+       x="210"
+       y="405"
+       class="text"
+       text-anchor="middle"
+       id="text25">Job Preparation</text>
+    <text
+       x="210"
+       y="420"
+       class="label"
+       text-anchor="middle"
+       id="text26">prepareJob(runtemplate_id,</text>
+    <text
+       x="210"
+       y="435"
+       class="label"
+       text-anchor="middle"
+       id="text27">env, startTime, executor)</text>
+    <text
+       x="210"
+       y="450"
+       class="label"
+       text-anchor="middle"
+       id="text28">→ Creates Job record</text>
+    <line
+       x1="679.46613"
+       y1="420"
+       x2="319.67346"
+       y2="420"
+       class="arrow"
+       id="line28" />
+  </g>
+  <line
+     x1="210"
+     y1="518"
+     x2="210"
+     y2="608"
+     class="arrow"
+     id="line34" />
+  <g
+     id="g103"
+     transform="translate(0,58)">
+    <rect
+       x="49.867851"
+       y="499.86786"
+       width="1100.2643"
+       height="315.91757"
+       fill="#fff5e6"
+       stroke="#ff8c00"
+       stroke-width="2.7357"
+       rx="10.002402"
+       id="rect28" />
+    <text
+       x="600"
+       y="525"
+       class="text title"
+       text-anchor="middle"
+       fill="#ff8c00"
+       id="text29">Phase 2: Job Creation</text>
+    <rect
+       x="100"
+       y="550"
+       width="200"
+       height="100"
+       class="database"
+       rx="5"
+       id="rect29" />
+    <text
+       x="200"
+       y="575"
+       class="text"
+       text-anchor="middle"
+       id="text30">Job::newJob()</text>
+    <text
+       x="200"
+       y="590"
+       class="label"
+       text-anchor="middle"
+       id="text31">INSERT into job table:</text>
+    <text
+       x="200"
+       y="605"
+       class="label"
+       text-anchor="middle"
+       id="text32">- runtemplate_id</text>
+    <text
+       x="200"
+       y="620"
+       class="label"
+       text-anchor="middle"
+       id="text33">- company_id, app_id</text>
+    <text
+       x="200"
+       y="635"
+       class="label"
+       text-anchor="middle"
+       id="text34">- schedule, executor</text>
+    <rect
+       x="360"
+       y="550"
+       width="220"
+       height="80"
+       class="process"
+       rx="5"
+       id="rect34" />
+    <text
+       x="470"
+       y="575"
+       class="text"
+       text-anchor="middle"
+       id="text35">Environment Setup</text>
+    <text
+       x="470"
+       y="590"
+       class="label"
+       text-anchor="middle"
+       id="text36">Merge configurations:</text>
+    <text
+       x="470"
+       y="605"
+       class="label"
+       text-anchor="middle"
+       id="text37">App + Company + Custom</text>
+    <text
+       x="470"
+       y="620"
+       class="label"
+       text-anchor="middle"
+       id="text38">Serialize env to job.env</text>
+    <line
+       x1="300"
+       y1="600"
+       x2="360"
+       y2="600"
+       class="arrow"
+       id="line38" />
+    <rect
+       x="100.11512"
+       y="690.11511"
+       width="199.76976"
+       height="112.04362"
+       class="database"
+       rx="4.9942441"
+       id="rect38" />
+    <text
+       x="200"
+       y="715"
+       class="text"
+       text-anchor="middle"
+       id="text39">Scheduler::addJob()</text>
+    <text
+       x="200"
+       y="730"
+       class="label"
+       text-anchor="middle"
+       id="text40">INSERT into schedule:</text>
+    <text
+       x="200"
+       y="745"
+       class="label"
+       text-anchor="middle"
+       id="text41">- job_id</text>
+    <text
+       x="200"
+       y="760"
+       class="label"
+       text-anchor="middle"
+       id="text42">- after (timestamp)</text>
+    <text
+       x="200"
+       y="775"
+       class="label"
+       text-anchor="middle"
+       id="text43">UPDATE runtemplate:</text>
+    <text
+       x="200"
+       y="790"
+       class="label"
+       text-anchor="middle"
+       id="text44">- next_schedule</text>
+    <line
+       x1="200"
+       y1="650"
+       x2="200"
+       y2="690"
+       class="arrow"
+       id="line44" />
+    <rect
+       x="660.07629"
+       y="550.07629"
+       width="199.84737"
+       height="115.93405"
+       class="box"
+       rx="4.9961843"
+       id="rect44" />
+    <text
+       x="760"
+       y="575"
+       class="text"
+       text-anchor="middle"
+       id="text45">Zabbix Reporting</text>
+    <text
+       x="760"
+       y="590"
+       class="label"
+       text-anchor="middle"
+       id="text46">(if configured)</text>
+    <text
+       x="760"
+       y="605"
+       class="label"
+       text-anchor="middle"
+       id="text47">Send metrics:</text>
+    <text
+       x="760"
+       y="620"
+       class="label"
+       text-anchor="middle"
+       id="text48">- phase: 'prepared'</text>
+    <text
+       x="760"
+       y="635"
+       class="label"
+       text-anchor="middle"
+       id="text49">- job_id, app_id</text>
+    <text
+       x="760"
+       y="650"
+       class="label"
+       text-anchor="middle"
+       id="text50">- company info</text>
+    <line
+       x1="580"
+       y1="600"
+       x2="660"
+       y2="600"
+       class="arrow"
+       id="line50" />
+    <rect
+       x="920"
+       y="550"
+       width="200"
+       height="80"
+       class="box"
+       rx="5"
+       id="rect50" />
+    <text
+       x="1020"
+       y="575"
+       class="text"
+       text-anchor="middle"
+       id="text51">OpenTelemetry</text>
+    <text
+       x="1020"
+       y="590"
+       class="label"
+       text-anchor="middle"
+       id="text52">(if configured)</text>
+    <text
+       x="1020"
+       y="605"
+       class="label"
+       text-anchor="middle"
+       id="text53">Create trace span</text>
+    <text
+       x="1020"
+       y="620"
+       class="label"
+       text-anchor="middle"
+       id="text54">for job lifecycle</text>
+    <line
+       x1="860"
+       y1="600"
+       x2="920"
+       y2="600"
+       class="arrow"
+       id="line54" />
+  </g>
+  <!-- Phase 3: Job Execution -->
+  <rect
+     x="50"
+     y="900"
+     width="1100"
+     height="470"
+     fill="#e6f7e6"
+     stroke="#28a745"
+     stroke-width="3"
+     rx="10"
+     id="rect54" />
+  <text
+     x="600"
+     y="925"
+     class="text title"
+     text-anchor="middle"
+     fill="#28a745"
+     id="text55">Phase 3: Job Execution (multiflexi-executor)</text>
+  <!-- Get Current Jobs -->
+  <rect
+     x="100"
+     y="950"
+     width="220"
+     height="80"
+     class="database"
+     rx="5"
+     id="rect55" />
+  <text
+     x="210"
+     y="975"
+     class="text"
+     text-anchor="middle"
+     id="text56">Get Current Jobs</text>
+  <text
+     x="210"
+     y="990"
+     class="label"
+     text-anchor="middle"
+     id="text57">SELECT from schedule</text>
+  <text
+     x="210"
+     y="1005"
+     class="label"
+     text-anchor="middle"
+     id="text58">WHERE after &lt; NOW()</text>
+  <text
+     x="210"
+     y="1020"
+     class="label"
+     text-anchor="middle"
+     id="text59">ORDER BY after</text>
+  <!-- Job Runner -->
+  <rect
+     x="380"
+     y="950"
+     width="200"
+     height="80"
+     class="process"
+     rx="5"
+     id="rect59" />
+  <text
+     x="480"
+     y="975"
+     class="text"
+     text-anchor="middle"
+     id="text60">Job::performJob()</text>
+  <text
+     x="480"
+     y="990"
+     class="label"
+     text-anchor="middle"
+     id="text61">→ runBegin()</text>
+  <text
+     x="480"
+     y="1005"
+     class="label"
+     text-anchor="middle"
+     id="text62">→ launchJob()</text>
+  <text
+     x="480"
+     y="1020"
+     class="label"
+     text-anchor="middle"
+     id="text63">→ runEnd()</text>
+  <line
+     x1="320"
+     y1="990"
+     x2="380"
+     y2="990"
+     class="arrow"
+     id="line63" />
+  <!-- Executor Selection -->
+  <path
+     d="M 690 990 L 770 960 L 850 990 L 770 1020 Z"
+     class="decision"
+     id="path63" />
+  <text
+     x="770"
+     y="990"
+     class="text"
+     text-anchor="middle"
+     id="text64">Executor?</text>
+  <line
+     x1="580"
+     y1="990"
+     x2="690"
+     y2="990"
+     class="arrow"
+     id="line64" />
+  <!-- Native Executor -->
+  <rect
+     x="920"
+     y="950"
+     width="200"
+     height="80"
+     class="executor"
+     rx="5"
+     id="rect64" />
+  <text
+     x="1020"
+     y="975"
+     class="text"
+     text-anchor="middle"
+     id="text65">Native Executor</text>
+  <text
+     x="1020"
+     y="990"
+     class="label"
+     text-anchor="middle"
+     id="text66">Symfony Process</text>
+  <text
+     x="1020"
+     y="1005"
+     class="label"
+     text-anchor="middle"
+     id="text67">Run on same machine</text>
+  <text
+     x="1020"
+     y="1020"
+     class="label"
+     text-anchor="middle"
+     id="text68">Local environment</text>
+  <line
+     x1="850"
+     y1="990"
+     x2="920"
+     y2="990"
+     class="arrow"
+     id="line68" />
+  <text
+     x="885"
+     y="985"
+     class="label"
+     id="text69">Native</text>
+  <!-- Podman Executor -->
+  <rect
+     x="920"
+     y="1050"
+     width="200"
+     height="80"
+     class="executor"
+     rx="5"
+     id="rect69" />
+  <text
+     x="1020"
+     y="1075"
+     class="text"
+     text-anchor="middle"
+     id="text70">Podman Executor</text>
+  <text
+     x="1020"
+     y="1090"
+     class="label"
+     text-anchor="middle"
+     id="text71">Container execution</text>
+  <text
+     x="1020"
+     y="1105"
+     class="label"
+     text-anchor="middle"
+     id="text72">Isolated environment</text>
+  <text
+     x="1020"
+     y="1120"
+     class="label"
+     text-anchor="middle"
+     id="text73">podman run command</text>
+  <line
+     x1="850"
+     y1="1000"
+     x2="900"
+     y2="1090"
+     class="arrow"
+     id="line73" />
+  <text
+     x="875"
+     y="1045"
+     class="label"
+     id="text74">Podman</text>
+  <!-- Docker/Azure -->
+  <rect
+     x="920"
+     y="1150"
+     width="200"
+     height="60"
+     class="executor"
+     rx="5"
+     id="rect74" />
+  <text
+     x="1020"
+     y="1175"
+     class="text"
+     text-anchor="middle"
+     id="text75">Docker/Azure/...</text>
+  <text
+     x="1020"
+     y="1195"
+     class="label"
+     text-anchor="middle"
+     id="text76">Other executors</text>
+  <line
+     x1="850"
+     y1="1010"
+     x2="900"
+     y2="1180"
+     class="arrow"
+     id="line76" />
+  <text
+     x="875"
+     y="1095"
+     class="label"
+     id="text77">Other</text>
+  <!-- Execution Process -->
+  <rect
+     x="380"
+     y="1080"
+     width="200"
+     height="100"
+     class="process"
+     rx="5"
+     id="rect77" />
+  <text
+     x="480"
+     y="1105"
+     class="text"
+     text-anchor="middle"
+     id="text78">Execute Command</text>
+  <text
+     x="480"
+     y="1120"
+     class="label"
+     text-anchor="middle"
+     id="text79">executable + params</text>
+  <text
+     x="480"
+     y="1135"
+     class="label"
+     text-anchor="middle"
+     id="text80">with environment vars</text>
+  <text
+     x="480"
+     y="1150"
+     class="label"
+     text-anchor="middle"
+     id="text81">Capture stdout/stderr</text>
+  <text
+     x="480"
+     y="1165"
+     class="label"
+     text-anchor="middle"
+     id="text82">Track PID</text>
+  <line
+     x1="1020"
+     y1="1030"
+     x2="1020"
+     y2="1130"
+     class="arrow"
+     id="line82" />
+  <line
+     x1="1020"
+     y1="1130"
+     x2="580"
+     y2="1130"
+     class="arrow"
+     id="line83" />
+  <!-- Result Logging -->
+  <rect
+     x="100.03004"
+     y="1080.03"
+     width="219.93993"
+     height="106.12711"
+     class="database"
+     rx="4.9986343"
+     id="rect83" />
+  <text
+     x="210"
+     y="1105"
+     class="text"
+     text-anchor="middle"
+     id="text83">Update Job Record</text>
+  <text
+     x="210"
+     y="1120"
+     class="label"
+     text-anchor="middle"
+     id="text84">- exitcode</text>
+  <text
+     x="210"
+     y="1135"
+     class="label"
+     text-anchor="middle"
+     id="text85">- stdout/stderr</text>
+  <text
+     x="210"
+     y="1150"
+     class="label"
+     text-anchor="middle"
+     id="text86">- begin/end timestamps</text>
+  <text
+     x="210"
+     y="1165"
+     class="label"
+     text-anchor="middle"
+     id="text87">- PID</text>
+  <text
+     x="210"
+     y="1180"
+     class="label"
+     text-anchor="middle"
+     id="text88">UPDATE runtemplate stats</text>
+  <line
+     x1="380"
+     y1="1130"
+     x2="320"
+     y2="1130"
+     class="arrow"
+     id="line88" />
+  <!-- Cleanup -->
+  <rect
+     x="100"
+     y="1220"
+     width="220"
+     height="80"
+     class="database"
+     rx="5"
+     id="rect88" />
+  <text
+     x="210"
+     y="1245"
+     class="text"
+     text-anchor="middle"
+     id="text89">Cleanup &amp; Schedule Next</text>
+  <text
+     x="210"
+     y="1260"
+     class="label"
+     text-anchor="middle"
+     id="text90">DELETE from schedule</text>
+  <text
+     x="210"
+     y="1275"
+     class="label"
+     text-anchor="middle"
+     id="text91">SET next_schedule=NULL</text>
+  <text
+     x="210"
+     y="1290"
+     class="label"
+     text-anchor="middle"
+     id="text92">SET last_schedule</text>
+  <line
+     x1="210"
+     y1="1180"
+     x2="210"
+     y2="1220"
+     class="arrow"
+     id="line92" />
+  <!-- Report Results -->
+  <rect
+     x="380"
+     y="1220"
+     width="200"
+     height="80"
+     class="box"
+     rx="5"
+     id="rect92" />
+  <text
+     x="480"
+     y="1245"
+     class="text"
+     text-anchor="middle"
+     id="text93">Monitoring</text>
+  <text
+     x="480"
+     y="1260"
+     class="label"
+     text-anchor="middle"
+     id="text94">Zabbix metrics</text>
+  <text
+     x="480"
+     y="1275"
+     class="label"
+     text-anchor="middle"
+     id="text95">OTel traces</text>
+  <text
+     x="480"
+     y="1290"
+     class="label"
+     text-anchor="middle"
+     id="text96">Log to SQL</text>
+  <line
+     x1="320"
+     y1="1260"
+     x2="380"
+     y2="1260"
+     class="arrow"
+     id="line96" />
+  <!-- Legend -->
+  <g
+     id="g101"
+     transform="translate(-38,-14)">
+    <text
+       x="650"
+       y="1330"
+       class="text"
+       font-weight="bold"
+       id="text97">Legend:</text>
+    <rect
+       x="650"
+       y="1340"
+       width="80"
+       height="30"
+       class="database"
+       rx="3"
+       id="rect97" />
+    <text
+       x="740"
+       y="1360"
+       class="label"
+       id="text98">Database</text>
+    <rect
+       x="780"
+       y="1340"
+       width="80"
+       height="30"
+       class="process"
+       rx="3"
+       id="rect98" />
+    <text
+       x="870"
+       y="1360"
+       class="label"
+       id="text99">Process</text>
+    <rect
+       x="910"
+       y="1340"
+       width="80"
+       height="30"
+       class="executor"
+       rx="3"
+       id="rect99" />
+    <text
+       x="1000"
+       y="1360"
+       class="label"
+       id="text100">Executor</text>
+    <path
+       d="m 1030,1355 40,-15 40,15 -40,15 z"
+       class="decision"
+       id="path100" />
+    <text
+       x="1130"
+       y="1360"
+       class="label"
+       id="text101">Decision</text>
+  </g>
+  <rect
+     style="fill:#800000;fill-opacity:0.27250609"
+     id="rect101"
+     width="274.711"
+     height="303.17203"
+     x="867.44324"
+     y="931.78998"
+     rx="10" />
+  <g
+     id="g249"
+     transform="matrix(0.25088874,0,0,0.25088874,728.63353,-20.223527)"
+     style="fill:#ffd42a;fill-opacity:1;filter:url(#filter776)">
+    <path
+       id="path5740"
+       style="color:#000000;text-indent:0;text-transform:none;fill:#ffd42a;fill-opacity:1;fill-rule:evenodd"
+       inkscape:connector-curvature="0"
+       d="m 713.47,204.89 v 74.226 c -91.83,18.86 -161.52,100.63 -161.52,197.79 0,96.668 69.012,178.12 160.15,197.51 L 645.092,607.408 686.15,566.35 c -26.951,-20.333 -44.214,-52.667 -44.214,-89.444 0,-48.051 29.471,-88.501 71.524,-104.52 v 115.53 L 854.98,346.396 713.47,204.886 Z" />
+    <path
+       id="path2985"
+       style="color:#000000;text-indent:0;text-transform:none;fill:#ffd42a;fill-opacity:1;fill-rule:evenodd"
+       inkscape:connector-curvature="0"
+       d="m 795.61,279.41 67.008,66.993 -41.074,41.074 c 26.961,20.328 44.23,52.647 44.23,89.428 0,48.051 -29.47,88.512 -71.524,104.54 v -115.55 l -141.52,141.52 141.52,141.52 v -74.226 c 91.812,-18.87 161.51,-100.65 161.51,-197.79 0,-96.667 -69.01,-178.1 -160.15,-197.49 z" />
+  </g>
+</svg>
