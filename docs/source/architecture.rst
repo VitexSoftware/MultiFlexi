@@ -68,11 +68,21 @@ This modular architecture allows for flexible deployment, scaling, and maintenan
 Scheduling and Execution Process
 ---------------------------------
 
-MultiFlexi uses a sophisticated scheduling system that handles job creation, queuing, and execution across multiple environments. The process is divided into three main phases:
+MultiFlexi uses a sophisticated scheduling system that handles job creation, queuing, and execution across multiple environments. Starting with version 2.x, the system uses dedicated systemd services instead of traditional cron jobs.
 
-**Phase 1: Scheduling (CronScheduler)**
+System Services
+~~~~~~~~~~~~~~~
 
-The CronScheduler component runs periodically (typically via cron) and:
+MultiFlexi 2.x+ operates with two dedicated systemd services:
+
+- **multiflexi-scheduler.service**: Continuously runs the scheduling daemon that creates job records
+- **multiflexi-executor.service**: Continuously polls for scheduled jobs and executes them
+
+Both services run as daemon processes under the ``multiflexi`` user and are configured via ``/etc/multiflexi/multiflexi.env``.
+
+**Phase 1: Scheduling (multiflexi-scheduler daemon)**
+
+The scheduling daemon (``/usr/lib/multiflexi-scheduler/daemon.php``) runs continuously in a loop and:
 
 - Loads all active companies from the database
 - Retrieves RunTemplates that are ready to be scheduled (``active=true``, ``next_schedule=null``, ``interv != 'n'``)
@@ -116,11 +126,11 @@ During job creation:
 - Optional monitoring metrics are sent to Zabbix (phase: 'prepared')
 - Optional OpenTelemetry trace spans are created for job lifecycle tracking
 
-**Phase 3: Job Execution**
+**Phase 3: Job Execution (multiflexi-executor daemon)**
 
-The execution phase is handled by the multiflexi-executor daemon:
+The execution daemon (``/usr/lib/multiflexi-executor/daemon.php``) runs continuously and:
 
-- Periodically queries the ``schedule`` table for jobs where ``after < NOW()``
+- Periodically polls the ``schedule`` table for jobs where ``after < NOW()`` (default: every 10 seconds, configurable via ``MULTIFLEXI_CYCLE_PAUSE``)
 - Loads the associated Job record and deserializes the environment
 - Selects the appropriate executor based on the job configuration:
   
@@ -159,13 +169,37 @@ The execution phase is handled by the multiflexi-executor daemon:
 
    Complete flow of job scheduling, creation, and execution in MultiFlexi
 
+Daemon Configuration
+~~~~~~~~~~~~~~~~~~~~
+
+The daemon services can be controlled via environment variables in ``/etc/multiflexi/multiflexi.env``:
+
+**Scheduler Daemon:**
+
+- ``MULTIFLEXI_DAEMONIZE=true``: Run continuously (default) or exit after one cycle
+
+**Executor Daemon:**
+
+- ``MULTIFLEXI_DAEMONIZE=true``: Run continuously (default) or exit after one cycle
+- ``MULTIFLEXI_CYCLE_PAUSE=10``: Seconds between polling cycles (default: 10)
+- ``MULTIFLEXI_MEMORY_LIMIT_MB=1800``: Soft memory limit in MB for graceful shutdown before OOM
+- ``MULTIFLEXI_MAX_PARALLEL=4``: Maximum concurrent jobs (requires pcntl extension; 0 for unlimited)
+
+The executor daemon includes:
+
+- **Memory monitoring**: Proactively exits when approaching the memory limit to prevent OOM kills
+- **Database resilience**: Handles transient database failures with retries; exits on permanent errors (auth, missing database)
+- **Graceful cleanup**: Ensures proper shutdown with logging on exit
+
 Key Design Principles
 ~~~~~~~~~~~~~~~~~~~~~
 
-1. **Separation of Concerns**: Scheduling (CronScheduler), job management (Job class), and execution (Executors) are separated into distinct components
-2. **Database-Driven Scheduling**: The ``schedule`` table acts as a persistent queue, ensuring no jobs are lost even if the executor restarts
-3. **Flexible Execution**: Multiple executor types allow jobs to run in different environments based on requirements
-4. **Environment Isolation**: Each job has its own serialized environment, preventing interference between executions
-5. **Comprehensive Monitoring**: Integration with Zabbix and OpenTelemetry provides visibility into the entire lifecycle
-6. **Incremental Scheduling**: Jobs are scheduled one run at a time (``next_schedule`` is set after execution), preventing duplicate scheduling
+1. **Continuous Operation**: Both scheduler and executor run as systemd services, eliminating dependency on system cron
+2. **Separation of Concerns**: Scheduling (multiflexi-scheduler), job management (Job class), and execution (multiflexi-executor) are separated into distinct services
+3. **Database-Driven Scheduling**: The ``schedule`` table acts as a persistent queue, ensuring no jobs are lost even if services restart
+4. **Flexible Execution**: Multiple executor types allow jobs to run in different environments based on requirements
+5. **Environment Isolation**: Each job has its own serialized environment, preventing interference between executions
+6. **Comprehensive Monitoring**: Integration with Zabbix and OpenTelemetry provides visibility into the entire lifecycle
+7. **Incremental Scheduling**: Jobs are scheduled one run at a time (``next_schedule`` is set after execution), preventing duplicate scheduling
+8. **Resource Management**: Memory limits and parallel execution controls prevent resource exhaustion
 
