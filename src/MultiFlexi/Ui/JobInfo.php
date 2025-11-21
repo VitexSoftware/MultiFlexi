@@ -54,7 +54,19 @@ class JobInfo extends \Ease\Html\DivTag
 
         $launcher = new \MultiFlexi\User($job->getDataValue('launched_by'));
 
-        $jobInfoRow->addColumn(1, [_('Launched by').'<br>', $launcher->getMyKey() ? new \Ease\Html\ATag('user.php?id='.$launcher->getMyKey(), new \Ease\TWB4\Badge('info', $launcher->getUserLogin())) : _('Timer')]);
+        if ($launcher->getMyKey()) {
+            // Determine user type by enabled flag
+            $isWebUser = (bool) $launcher->getDataValue('enabled');
+            $userIcon = $isWebUser ? '👤' : '🖥️'; // Web user vs CLI/OS user
+            $userBadgeClass = $isWebUser ? 'info' : 'secondary';
+            $userLabel = $userIcon.' '.($launcher->getUserName() ?: $launcher->getUserLogin());
+            $launcherBadge = new \Ease\Html\ATag('user.php?id='.$launcher->getMyKey(), new \Ease\TWB4\Badge($userBadgeClass, $userLabel));
+        } else {
+            // Fallback for old records without user
+            $launcherBadge = new \Ease\TWB4\Badge('warning', '⏰ '._('Timer'));
+        }
+
+        $jobInfoRow->addColumn(1, [_('Launched by').'<br>', $launcherBadge]);
 
         parent::__construct($jobInfoRow, $properties);
 
