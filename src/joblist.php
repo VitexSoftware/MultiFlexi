@@ -24,87 +24,38 @@ $companyId = WebPage::singleton()->getRequestValue('company_id');
 $filter = WebPage::singleton()->getRequestValue('filter');
 
 // Nastavení titulku podle filtru
-$pageTitle = _('Job history');
-
-switch ($filter) {
-    case 'success':
-        $pageTitle = _('Successful Jobs');
-
-        break;
-    case 'failed':
-        $pageTitle = _('Failed Jobs');
-
-        break;
-    case 'running':
-        $pageTitle = _('Running Jobs');
-
-        break;
-    case 'today':
-        $pageTitle = _('Today\'s Jobs');
-
-        break;
-}
+$pageTitle = JobFilterToolbar::getPageTitle($filter);
 
 WebPage::singleton()->addItem(new PageTop($pageTitle));
 
-// Add responsive CSS for filter buttons layout
+// Add filter toolbar
+WebPage::singleton()->container->addItem(new JobFilterToolbar($filter, 'joblist.php'));
+
+// Add custom success row styling
 WebPage::singleton()->addCSS(<<<'CSS'
-#job-filter-buttons {
-    display: inline-block;
-    margin-right: 1rem;
-    vertical-align: middle;
-}
-
-#job-filter-buttons .btn-group {
-    display: inline-flex;
-}
-
-/* Mobile: stack vertically */
-@media (max-width: 767px) {
-    #job-filter-buttons {
-        display: block;
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 1rem;
+    /* Custom success row styling - lighter green with better contrast */
+    #Molecule_wrapper table.dataTable tbody tr.job-success {
+        background-color: #d4edda !important;
+        color: #155724 !important;
     }
-    #job-filter-buttons .btn-group {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
+    #Molecule_wrapper table.dataTable tbody tr.job-success:hover {
+        background-color: #c3e6cb !important;
     }
-    #job-filter-buttons .btn-group a {
-        width: 100%;
-        border-radius: 0.25rem !important;
-        margin-bottom: 0.25rem;
+    #Molecule_wrapper table.dataTable tbody tr.job-success a {
+        color: #0c5460 !important;
     }
-}
+    /* Custom scheduled row styling - light blue for waiting jobs */
+    #Molecule_wrapper table.dataTable tbody tr.job-scheduled {
+        background-color: #d1ecf1 !important;
+        color: #0c5460 !important;
+    }
+    #Molecule_wrapper table.dataTable tbody tr.job-scheduled:hover {
+        background-color: #bee5eb !important;
+    }
+    #Molecule_wrapper table.dataTable tbody tr.job-scheduled a {
+        color: #004085 !important;
+    }
 CSS);
-
-// Add filter buttons container with ID for CSS targeting
-$filterButtonsContainer = new \Ease\Html\DivTag(null, ['id' => 'job-filter-buttons']);
-$buttonGroup = $filterButtonsContainer->addItem(new \Ease\Html\DivTag(null, ['class' => 'btn-group btn-group-sm', 'role' => 'group']));
-
-// All Jobs button
-$allJobsClass = empty($filter) ? 'btn btn-primary' : 'btn btn-outline-primary';
-$buttonGroup->addItem(new \Ease\Html\ATag('joblist.php', '🏁 '._('All Jobs'), ['class' => $allJobsClass]));
-
-// Success button
-$successClass = ($filter === 'success') ? 'btn btn-success' : 'btn btn-outline-success';
-$buttonGroup->addItem(new \Ease\Html\ATag('joblist.php?filter=success', '✅ '._('Successful'), ['class' => $successClass]));
-
-// Failed button
-$failedClass = ($filter === 'failed') ? 'btn btn-danger' : 'btn btn-outline-danger';
-$buttonGroup->addItem(new \Ease\Html\ATag('joblist.php?filter=failed', '❌ '._('Failed'), ['class' => $failedClass]));
-
-// Running button
-$runningClass = ($filter === 'running') ? 'btn btn-info' : 'btn btn-outline-info';
-$buttonGroup->addItem(new \Ease\Html\ATag('joblist.php?filter=running', '▶️ '._('Running'), ['class' => $runningClass]));
-
-// Today button
-$todayClass = ($filter === 'today') ? 'btn btn-warning' : 'btn btn-outline-warning';
-$buttonGroup->addItem(new \Ease\Html\ATag('joblist.php?filter=today', '📅 '._('Today'), ['class' => $todayClass]));
-
-WebPage::singleton()->container->addItem($filterButtonsContainer);
 
 // Vytvoření engine a aplikace filtru
 $engine = new \MultiFlexi\CompanyJobLister();
@@ -134,45 +85,52 @@ WebPage::singleton()->container->addItem(new DBDataTable($engine, ['buttons' => 
 WebPage::singleton()->addItem(new PageBottom());
 WebPage::singleton()->addJavaScript(<<<'EOD'
 
+    // Initialize Bootstrap popovers with delay to allow interaction
+    $(function () {
+        $('[data-toggle="popover"]').popover({
+            trigger: 'manual',
+            delay: { show: 100, hide: 300 }
+        }).on('mouseenter', function() {
+            var _this = this;
+            $(this).popover('show');
+            $('.popover').on('mouseleave', function() {
+                $(_this).popover('hide');
+            });
+        }).on('mouseleave', function() {
+            var _this = this;
+            setTimeout(function() {
+                if (!$('.popover:hover').length) {
+                    $(_this).popover('hide');
+                }
+            }, 300);
+        });
+    });
+    
+    // Reinitialize popovers after DataTable reload
+    $('#Molecule').on('draw.dt', function() {
+        $('[data-toggle="popover"]').popover({
+            trigger: 'manual',
+            delay: { show: 100, hide: 300 }
+        }).on('mouseenter', function() {
+            var _this = this;
+            $(this).popover('show');
+            $('.popover').on('mouseleave', function() {
+                $(_this).popover('hide');
+            });
+        }).on('mouseleave', function() {
+            var _this = this;
+            setTimeout(function() {
+                if (!$('.popover:hover').length) {
+                    $(_this).popover('hide');
+                }
+            }, 300);
+        });
+    });
+
     setInterval(function () {
       Molecule.ajax.reload();
 }, 300000);
 
-EOD);
-
-// Move filter buttons next to DataTable controls after table initialization
-WebPage::singleton()->addJavaScript(<<<'EOD'
-$(document).ready(function() {
-    // Wait for DataTable to be fully initialized
-    setTimeout(function() {
-        var filterButtons = $('#job-filter-buttons');
-        var tableWrapper = $('.dataTables_wrapper');
-
-        if (filterButtons.length && tableWrapper.length) {
-            // On desktop: prepend to the first row (where length and filter are)
-            if ($(window).width() >= 768) {
-                tableWrapper.find('.row:first .col-sm-12:first').prepend(filterButtons);
-            }
-            // On mobile: keep as is (already before table)
-        }
-
-        // Handle window resize
-        $(window).on('resize', function() {
-            var filterButtons = $('#job-filter-buttons');
-            if ($(window).width() >= 768) {
-                // Move to DataTable controls area
-                if (!tableWrapper.find('#job-filter-buttons').length) {
-                    tableWrapper.find('.row:first .col-sm-12:first').prepend(filterButtons);
-                }
-            } else {
-                // Move back before table
-                if (tableWrapper.find('#job-filter-buttons').length) {
-                    tableWrapper.before(filterButtons);
-                }
-            }
-        });
-    }, 100);
-});
 EOD);
 
 WebPage::singleton()->draw();

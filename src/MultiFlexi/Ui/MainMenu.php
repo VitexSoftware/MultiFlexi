@@ -41,6 +41,10 @@ class MainMenu extends \Ease\Html\DivTag
 
         if (\Ease\Shared::user()->isLogged()) { // Authenticated user
             $oPage = WebPage::singleton();
+            
+            // Add Home link
+            $nav->addMenuItem(new \Ease\Html\ATag('home.php', new \Ease\TWB4\Widgets\FaIcon('home').' '._('Home')));
+            
             $customers = $this->getMenuList(new \MultiFlexi\Customer(), null, WebPage::singleton()->customer);
             $companies = $this->getMenuList(new \MultiFlexi\Company(), 'logo');
             $apps = $this->getMenuList(new \MultiFlexi\Application(), 'image');
@@ -201,9 +205,11 @@ class MainMenu extends \Ease\Html\DivTag
      */
     public function adminMenuEnabled($nav): void
     {
-        $nav->addDropDownMenu(
+            $nav->addDropDownMenu(
             '<img width=30 src=images/system-users.svg> '._('Admin'),
             array_merge([
+                'profile.php' => new \Ease\TWB4\Widgets\FaIcon('user-circle').'&nbsp;'._('My Profile'),
+                '' => '',
                 'createaccount.php' => '🤬&nbsp;'._('New Admin'),
                 'createuser.php' => '👤&nbsp;'._('New User Account'),
                 'envmods.php' => '🌦️&nbsp;'._('Environment Modules'),

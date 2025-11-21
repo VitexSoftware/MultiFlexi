@@ -56,17 +56,17 @@ class CompanyDbStatus extends \Ease\TWB4\Row
             ['class' => 'btn btn-default', 'type' => 'button'],
         ));
         $this->addColumn(2, new \Ease\TWB4\LinkButton(
-            '?showOnly=success&id='.$companyId,
+            'joblist.php?filter=success&company_id='.$companyId,
             [_('Success Jobs').'&nbsp;', new \Ease\TWB4\PillBadge('success', $jobsSuccess)],
             'success',
         ));
         $this->addColumn(2, new \Ease\TWB4\LinkButton(
-            '?showOnly=failed&id='.$companyId,
+            'joblist.php?filter=failed&company_id='.$companyId,
             [_('Failed Jobs').'&nbsp;', new \Ease\TWB4\PillBadge('danger', $jobs - $jobsSuccess - $jobsUnfinished)],
             'danger',
         ));
         $this->addColumn(2, new \Ease\TWB4\LinkButton(
-            '?showOnly=unfinished&id='.$companyId,
+            'joblist.php?filter=scheduled&company_id='.$companyId,
             [_('Unfinished Jobs').'&nbsp;', new \Ease\TWB4\PillBadge('warning', $jobsUnfinished)],
             'warning',
         ));

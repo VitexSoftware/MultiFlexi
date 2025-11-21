@@ -37,7 +37,7 @@ class DBDataTable extends \Ease\Html\TableTag
     /**
      * Buttons to render on top of the datatable.
      */
-    public array $buttons;
+    public array $buttons = [];
 
     /**
      * Buttons to show by default.

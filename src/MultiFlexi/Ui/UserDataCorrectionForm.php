@@ -205,6 +205,7 @@ class UserDataCorrectionForm extends SecureForm
         // Hidden fields
         $this->addItem(new InputHiddenTag('class', $this->user::class));
 
+        $userID = $this->user->getMyKey();
         if ($userID) {
             $this->addItem(new InputHiddenTag($this->user->keyColumn, $userID));
         }
@@ -230,7 +231,7 @@ class UserDataCorrectionForm extends SecureForm
         $canEditDirectly = $this->canEditDirectly && (!$requiresApproval || self::isAdmin($this->currentUser));
 
         // Create container for the field
-        $fieldContainer = new \Ease\TWB4\FormGroup();
+        $fieldContainer = new \Ease\Html\DivTag(null, ['class' => 'form-group']);
 
         // Label with info badge
         $labelContent = $label;

@@ -101,6 +101,15 @@ class ActivationWizard extends \Ease\Html\DivTag
     animation: highlightPulse 2s ease-in-out infinite;
 }
 
+.app-detail-link {
+    color: inherit;
+}
+
+.app-detail-link:hover {
+    color: #007bff;
+    text-decoration: underline !important;
+}
+
 EOD);
         }
 
@@ -372,7 +381,17 @@ EOD,
         $container->addItem(new \Ease\Html\PTag(_('Choose an application to activate. Use topic filters to narrow down applications. The application will be assigned to the selected company.')));
 
         $app = new \MultiFlexi\Application();
-        $applications = $app->listingQuery()->where('enabled', true)->orderBy('name')->fetchAll();
+        $currentLang = substr(\Ease\Locale::$localeUsed ?? 'en_US', 0, 2);
+        
+        $applications = $app->getFluentPDO()
+            ->from('apps')
+            ->select('apps.*')
+            ->select('COALESCE(app_translations.name, apps.name) AS localized_name')
+            ->select('COALESCE(app_translations.description, apps.description) AS localized_description')
+            ->leftJoin('app_translations ON app_translations.app_id = apps.id AND app_translations.lang = ?', $currentLang)
+            ->where('enabled', true)
+            ->orderBy('COALESCE(app_translations.name, apps.name)')
+            ->fetchAll();
 
         if (empty($applications)) {
             $container->addItem(new \Ease\TWB4\Alert('warning', _('No applications available.')));
@@ -447,18 +466,24 @@ EOD,
             $cardBody = $card->addItem(new \Ease\Html\DivTag(null, ['class' => 'card-body text-center']));
 
             // Show application logo/image using AppLogo component
+            $displayName = $appData['localized_name'] ?? $appData['name'];
+            $displayDescription = $appData['localized_description'] ?? $appData['description'] ?? '';
+            
             if (!empty($appData['uuid'])) {
-                $appLogo = new \Ease\Html\ImgTag('appimage.php?uuid='.$appData['uuid'], $appData['name'], ['class' => 'img-fluid mb-3', 'style' => 'max-height: 80px; max-width: 100%;']);
+                $appLogo = new \Ease\Html\ImgTag('appimage.php?uuid='.$appData['uuid'], $displayName, ['class' => 'img-fluid mb-3', 'style' => 'max-height: 80px; max-width: 100%;']);
                 $cardBody->addItem($appLogo);
             } else {
                 // Fallback icon if no uuid/image
                 $cardBody->addItem(new \Ease\Html\DivTag('🧩', ['style' => 'font-size: 60px; margin-bottom: 1rem;']));
             }
 
-            $cardBody->addItem(new \Ease\Html\H5Tag($appData['name'], ['class' => 'card-title']));
+            // App name with link to detail
+            $nameWithLink = new \Ease\Html\H5Tag(null, ['class' => 'card-title']);
+            $nameWithLink->addItem(new \Ease\Html\ATag('app.php?id='.$appData['id'], $displayName, ['class' => 'text-decoration-none app-detail-link', 'title' => _('View application details'), 'onclick' => 'event.stopPropagation();']));
+            $cardBody->addItem($nameWithLink);
 
-            if (!empty($appData['description'])) {
-                $cardBody->addItem(new \Ease\Html\PTag($appData['description'], ['class' => 'card-text small text-muted']));
+            if (!empty($displayDescription)) {
+                $cardBody->addItem(new \Ease\Html\PTag($displayDescription, ['class' => 'card-text small text-muted']));
             }
 
             // Show topics as badges

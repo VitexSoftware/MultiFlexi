@@ -48,27 +48,33 @@ class ApplicationPanel extends Panel
         $usedIncompanies = $ca->listingQuery()->select(['companyapp.company_id', 'company.name', 'company.slug', 'company.logo'], true)->leftJoin('company ON company.id = companyapp.company_id')->where('app_id', $this->application->getMyKey())->fetchAll('company_id');
 
         if ($usedIncompanies) {
-            $usedByCompany = new \Ease\Html\DivTag(_('Used by').': ', ['class' => 'card-group']);
+            $usedByDiv = new \Ease\Html\DivTag();
+            $usedByDiv->addItem(new \Ease\Html\H5Tag(_('Used by').': '));
+            
+            // Create compact table instead of cards
+            $usedByTable = new \Ease\TWB4\Table(null, ['class' => 'table table-sm table-hover']);
+            $usedByTable->addRowHeaderColumns([_('Company'), _('RunTemplates')]);
 
             foreach ($usedIncompanies as $companyInfo) {
                 $companyInfo['id'] = $companyInfo['company_id'];
                 $kumpan = new \MultiFlexi\Company($companyInfo, ['autoload' => false]);
-                $calb = new CompanyAppLink($kumpan, $application, ['class' => 'card-img-top']);
+                $calb = new CompanyAppLink($kumpan, $application);
                 $crls = new \MultiFlexi\Ui\CompanyRuntemplatesLinks($kumpan, $application, [], ['class' => 'btn btn-outline-secondary btn-sm']);
 
-                $usedByCompany->addItem(new \Ease\TWB4\Card([new \Ease\Html\DivTag([new \Ease\Html\H5Tag([$calb, ' <small>('.$crls->count().')</small>'], ['class' => 'card-title']), $crls], ['class' => 'card-body'])], ['style' => 'width: 6rem;']));
+                $usedByTable->addRowColumns([
+                    [$calb, ' ', new \Ease\Html\SmallTag('('.$crls->count().')', ['class' => 'text-muted'])],
+                    $crls
+                ]);
             }
-
-            $this->headRow->addColumn(6, $usedByCompany);
+            
+            $usedByDiv->addItem($usedByTable);
+            $this->headRow->addColumn(6, $usedByDiv);
         } else {
             if ($application->getMyKey()) {
                 $this->headRow->addColumn(6, new LinkButton('?id='.$application->getMyKey().'&action=delete', '🪦&nbsp;'._('Remove'), 'danger'));
             }
         }
 
-        //        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('tasks.php?application_id=' . $cid, '🔧&nbsp;' . _('Setup tasks'), 'secondary btn-lg btn-block'));
-        //        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('adhoc.php?application_id=' . $cid, '🚀&nbsp;' . _('Application launcher'), 'secondary btn-lg btn-block'));
-        //        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('periodical.php?application_id=' . $cid, '🔁&nbsp;' . _('Periodical Tasks'), 'secondary btn-lg btn-block'));
         parent::__construct($this->headRow, 'default', $content, $footer);
     }
 

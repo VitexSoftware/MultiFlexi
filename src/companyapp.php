@@ -16,11 +16,7 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 use Ease\Html\ATag;
-use Ease\Html\DivTag;
 use Ease\Html\H3Tag;
-use Ease\Html\ImgTag;
-use Ease\Html\SmallTag;
-use Ease\Html\SpanTag;
 use Ease\TWB4\LinkButton;
 use Ease\TWB4\Row;
 use Ease\TWB4\Table;
@@ -36,97 +32,193 @@ $companer = new Company(WebPage::getRequestValue('company_id', 'int'));
 $application = new Application(WebPage::getRequestValue('app_id', 'int'));
 
 WebPage::singleton()->addItem(new PageTop(_($application->getRecordName()).'@'.$companer->getRecordName()));
-// $companyApp = new \MultiFlexi\RunTemplate(\Ease\Document::getRequestValue('id', 'int'));
-// $appData = $companyApp->getAppInfo();
-// $companies = new Company($companyApp->getDataValue('company_id'));
-// if (strlen($companies->getDataValue('logo'))) {
-//    $companyTasksHeading[] = new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid','style' => 'height']);
-// }
 
-$companyTasksHeading[] = new SpanTag($companer->getDataValue('name').'&nbsp;', ['style' => 'font-size: xxx-large;']);
-$companyTasksHeading[] = _('Assigned applications');
+// Create CompanyApp object for chart
+$companyApp = (new \MultiFlexi\CompanyApp($companer))->setApp($application);
 
+// RunTemplates section with header and button
+$runtemplatesDiv = new \Ease\Html\DivTag();
+
+// Add chart above RunTemplates table
+$runtemplatesDiv->addItem(new CompanyAppJobsLastMonthChart($companyApp));
+
+$runtemplatesHeader = new Row(null, ['style' => 'margin-top: 20px;']);
+$runtemplatesHeader->addColumn(9, new H3Tag('⚗️ '._('RunTemplates for this Company')));
+$runtemplatesHeader->addColumn(3, new LinkButton(
+    'runtemplate.php?new=1&app_id='.$application->getMyKey().'&company_id='.$companer->getMyKey(),
+    '⚗️&nbsp;➕ '._('New RunTemplate'),
+    'success btn-block'
+));
+$runtemplatesDiv->addItem($runtemplatesHeader);
+
+// RunTemplates table
 $runTemplater = new RunTemplate();
-$runtemplatesRaw = $runTemplater->listingQuery()->where('app_id', $application->getMyKey())->order('name')->where('company_id', $companer->getMyKey());
-
-$runtemplatesDiv = new DivTag();
-$runtemplates = [];
+$runtemplatesRaw = $runTemplater->listingQuery()
+    ->where('app_id', $application->getMyKey())
+    ->where('company_id', $companer->getMyKey())
+    ->orderBy('name');
 
 $jobber = new Job();
 
-WebPage::singleton()->addCss(<<<'EOD'
-
-.runtemplate {
-background-color: #0001;
-}
-.runtemplate:hover {
-background-color: #0002;
-}
-
-EOD);
-
 if ($runtemplatesRaw->count()) {
+    $rtTable = new Table(null, ['class' => 'table table-striped table-hover']);
+    $rtTable->addRowHeaderColumns([
+        _('ID'),
+        _('Status'),
+        _('Interval'),
+        _('Name'),
+        _('Last Job'),
+        _('Actions'),
+        _('Executor'),
+    ]);
+    
     foreach ($runtemplatesRaw as $runtemplateData) {
-        // TODO:    $app->checkRequiredFields($_POST, true);
-
-        $runtemplateRow = new Row(null, ['class' => 'runtemplate']);
-        $lastJobRun = $jobber->listingQuery()->select(['exitcode', 'id'], true)->where(['runtemplate_id' => $runtemplateData['id']])->orderBy('id desc')->limit(1);
-        $runtemplateRow->addColumn(2, new ATag('runtemplate.php?id='.$runtemplateData['id'], '⚗️&nbsp;#'.(string) $runtemplateData['id']));
-
-        if (\count($lastJobRun)) {
-            $lastJobRunData = $lastJobRun->fetch();
-            $runtemplateRow->addColumn(2, new ATag('job.php?id='.$lastJobRunData['id'], new ExitCode($lastJobRunData['exitcode'])));
+        $rtId = $runtemplateData['id'];
+        
+        // Get last job
+        $lastJob = $jobber->listingQuery()
+            ->select(['exitcode', 'id'], true)
+            ->where(['runtemplate_id' => $rtId])
+            ->orderBy('id DESC')
+            ->limit(1)
+            ->fetch();
+        
+        $row = [];
+        
+        // ID column
+        $row[] = new ATag('runtemplate.php?id='.$rtId, '⚗️ #'.$rtId);
+        
+        // Status column (active/disabled with launch button)
+        $row[] = $runtemplateData['active']
+            ? new ATag('schedule.php?id='.$rtId.'&when=now&executor=Native', '▶️', ['title' => _('Launch now'), 'style' => 'font-size: 1.5em; color: green;'])
+            : '<span style="font-size: 1.5em; color: lightgray;" title="'._('Disabled').'">🚧</span>';
+        
+        // Interval column
+        $intervalEmoji = RunTemplate::getIntervalEmoji($runtemplateData['interv']);
+        $intervalName = RunTemplate::codeToInterval($runtemplateData['interv']);
+        $row[] = '<span title="'._($intervalName).'">'.$intervalEmoji.' '._($intervalName).'</span>';
+        
+        // Name column
+        $row[] = new ATag('runtemplate.php?id='.$rtId, '<strong>'.$runtemplateData['name'].'</strong>');
+        
+        // Last job column
+        if ($lastJob) {
+            $row[] = new ATag('job.php?id='.$lastJob['id'], [
+                '🏁 #'.$lastJob['id'].' ',
+                new ExitCode($lastJob['exitcode'])
+            ]);
         } else {
-            $runtemplateRow->addColumn(2, new ExitCode(-1));
+            $row[] = '<span style="color: #999; font-style: italic;">'._('No jobs yet').'</span>';
         }
-
-        $successIcons = new ATag('actions.php?id='.$runtemplateData['id'].'#SuccessActions', RunTemplate::actionIcons($runtemplateData['success'] ? unserialize($runtemplateData['success']) : null, ['style' => 'border-bottom: 4px solid green;']));
-        $failIcons = new ATag('actions.php?id='.$runtemplateData['id'].'#FailActions', RunTemplate::actionIcons($runtemplateData['fail'] ? unserialize($runtemplateData['fail']) : null, ['style' => 'border-bottom: 4px solid red;']));
-
-        $runtemplateRow->addColumn(8, ['<span title="'._(RunTemplate::codeToInterval($runtemplateData['interv'])).'">'.RunTemplate::getIntervalEmoji($runtemplateData['interv']).'</span>&nbsp;', $runtemplateData['active'] ? '&nbsp;<a href="schedule.php?id='.$runtemplateData['id'].'&when=now&executor=Native" title="'._('Launch now').'"><span style="color: green; font-weight: xx-large;">▶</span></a> ' : '<span style="color: lightgray; font-weight: xx-large;" title="'._('Disabled').'">🚧</span>', '&nbsp;', new ATag('runtemplate.php?id='.$runtemplateData['id'], $runtemplateData['name']), '&nbsp;&nbsp;', $successIcons, '&nbsp;', $failIcons]);
-        $runtemplatesDiv->addItem($runtemplateRow);
-        $runtemplates[$runtemplateData['id']] = $runtemplateData['name'];
+        
+        // Actions column
+        $successIcons = RunTemplate::actionIcons(
+            $runtemplateData['success'] ? unserialize($runtemplateData['success']) : null,
+            ['style' => 'border-bottom: 4px solid green;']
+        );
+        $failIcons = RunTemplate::actionIcons(
+            $runtemplateData['fail'] ? unserialize($runtemplateData['fail']) : null,
+            ['style' => 'border-bottom: 4px solid red;']
+        );
+        $row[] = [
+            new ATag('actions.php?id='.$rtId.'#SuccessActions', $successIcons),
+            ' ',
+            new ATag('actions.php?id='.$rtId.'#FailActions', $failIcons),
+        ];
+        
+        // Executor column
+        $row[] = new \MultiFlexi\Ui\ExecutorImage($runtemplateData['executor'], ['style' => 'height: 30px;']);
+        
+        $rtTable->addRowColumns($row);
     }
+    
+    $runtemplatesDiv->addItem($rtTable);
+} else {
+    $runtemplatesDiv->addItem(new \Ease\TWB4\Alert(
+        'info',
+        _('No RunTemplates configured yet. Click the button above to create one.')
+    ));
 }
 
-$runtemplatesDiv->addItem(new \Ease\Html\PTag(new DivTag(new \Ease\Html\HrTag())));
-$runtemplatesDiv->addItem(new LinkButton('runtemplate.php?new=1&app_id='.$application->getMyKey().'&company_id='.$companer->getMyKey(), '⚗️&nbsp;➕'._('new'), 'success'));
+// Last 10 jobs table
+$runtemplatesDiv->addItem(new \Ease\Html\HrTag());
+$runtemplatesDiv->addItem(new H3Tag('🏁 '._('Last 10 jobs')));
 
-$jobs = $jobber->listingQuery()->select(['job.id', 'begin', 'exitcode', 'launched_by', 'login', 'runtemplate_id'], true)->leftJoin('user ON user.id = job.launched_by')->where('company_id', $companer->getMyKey())->where('app_id', $application->getMyKey())->limit(10)->orderBy('job.id DESC')->fetchAll();
-$jobList = new Table();
+$jobs = $jobber->listingQuery()
+    ->select(['job.id', 'begin', 'schedule', 'exitcode', 'launched_by', 'login', 'runtemplate_id', 'runtemplate.name AS runtemplate_name'], true)
+    ->leftJoin('user ON user.id = job.launched_by')
+    ->leftJoin('runtemplate ON runtemplate.id = job.runtemplate_id')
+    ->where('job.company_id', $companer->getMyKey())
+    ->where('job.app_id', $application->getMyKey())
+    ->limit(10)
+    ->orderBy('job.id DESC')
+    ->fetchAll();
+
+$jobList = new Table(null, ['class' => 'table table-sm table-hover']);
 $jobList->addRowHeaderColumns([_('Job ID'), _('Launch time'), _('Exit Code'), _('Launcher'), _('RunTemplate')]);
 
 foreach ($jobs as $job) {
-    $job['id'] = new ATag('job.php?id='.$job['id'], '🏁 '.$job['id']);
-
+    $jobRow = [];
+    
+    // Job ID
+    $jobRow[] = new ATag('job.php?id='.$job['id'], '🏁 '.$job['id']);
+    
+    // Launch time or scheduled time
     if (empty($job['begin'])) {
-        $job['begin'] = _('Not launched yet');
+        if (!empty($job['schedule'])) {
+            try {
+                $scheduleTime = new \DateTime($job['schedule']);
+                $relativeTime = \MultiFlexi\CompanyJobLister::getRelativeTime($scheduleTime);
+                $jobRow[] = '💣 <span title="'.htmlspecialchars($job['schedule']).'">'.$relativeTime.'</span>';
+            } catch (\Exception $e) {
+                $jobRow[] = _('Scheduled');
+            }
+        } else {
+            $jobRow[] = _('Not launched yet');
+        }
     } else {
-        $job['begin'] = [$job['begin'], ' ', new SmallTag(new \Ease\Html\Widgets\LiveAge(new \DateTime($job['begin'])))];
+        $jobRow[] = [
+            $job['begin'],
+            ' ',
+            new \Ease\Html\SmallTag(new \Ease\Html\Widgets\LiveAge(new \DateTime($job['begin'])))
+        ];
     }
-
-    $job['exitcode'] = new ExitCode($job['exitcode']);
-    $job['launched_by'] = $job['launched_by'] ? new ATag('user.php?id='.$job['launched_by'], $job['login']) : _('Timer');
-
-    if (\array_key_exists($job['runtemplate_id'], $runtemplates)) {
-        $job['runtemplate_id'] = new ATag('runtemplate.php?id='.$job['runtemplate_id'], $runtemplates[$job['runtemplate_id']]);
+    
+    // Exit code
+    $jobRow[] = new ExitCode($job['exitcode']);
+    
+    // Launcher
+    $jobRow[] = $job['launched_by'] 
+        ? new ATag('user.php?id='.$job['launched_by'], $job['login']) 
+        : _('Timer');
+    
+    // RunTemplate
+    if (!empty($job['runtemplate_id'])) {
+        $jobRow[] = new ATag('runtemplate.php?id='.$job['runtemplate_id'], $job['runtemplate_name'] ?? '#'.$job['runtemplate_id']);
+    } else {
+        $jobRow[] = '—';
     }
-
-    unset($job['login']);
-    $jobList->addRowColumns($job);
+    
+    $jobList->addRowColumns($jobRow);
 }
 
-$historyButton = (new LinkButton('joblist.php?app_id='.$application->getMyKey().'&company_id='.$companer->getMyKey(), _('Job History').' '.new ImgTag('images/log.svg', _('Set'), ['height' => '30px']), 'info btn-sm  btn-block'));
+$runtemplatesDiv->addItem($jobList);
 
-$companyAppColumns = new Row();
-$companyAppColumns->addColumn(6, $runtemplatesDiv);
-$companyAppColumns->addColumn(6, [new H3Tag(_('Last 10 jobs')), $jobList, $historyButton]);
+// Job history link
+$runtemplatesDiv->addItem(new LinkButton(
+    'joblist.php?app_id='.$application->getMyKey().'&company_id='.$companer->getMyKey(),
+    '🏁 '._('View Complete Job History'),
+    'info btn-lg btn-block'
+));
 
-$companyApp = (new \MultiFlexi\CompanyApp($companer))->setApp($application);
-
-$companyAppJobChart = new CompanyAppJobsLastMonthChart($companyApp);
-
-WebPage::singleton()->container->addItem(new CompanyPanel($companer, new CompanyApplicationPanel($companyApp, $companyAppColumns, $companyAppJobChart)));
+// Wrap everything in CompanyPanel with CompanyApplicationPanel
+// This will show "Aktivní RunTemplates" panel with all RunTemplates for this app across companies
+WebPage::singleton()->container->addItem(
+    new CompanyPanel(
+        $companer,
+        new CompanyApplicationPanel($companyApp, $runtemplatesDiv)
+    )
+);
 
 WebPage::singleton()->addItem(new PageBottom());
 WebPage::singleton()->draw();

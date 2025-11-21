@@ -78,7 +78,8 @@ class JobSuccessGraph extends \Ease\Html\DivTag
         $width = 300;
         $height = 200;
         $type = 'SemiDonutGraph';
-        $colours = ['#286d14', '#a11b1b', '#181691', '#000000', '#FFFF00'];
+        // Pastel colors: success (light green), failed (light red), waiting (light blue), exception (light gray), no executable (light yellow)
+        $colours = ['#A5D6A7', '#FFCDD2', '#B3E5FC', '#E0E0E0', '#FFF9C4'];
 
         $graph = new SVGGraph($width, $height, $settings);
         $graph->colours($colours);
