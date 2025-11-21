@@ -146,6 +146,35 @@ if ($jobber->getDataValue('begin')) {
     }
 }
 
+// Handle job deletion
+$deleteAction = WebPage::getRequestValue('action');
+if ($deleteAction === 'delete' && WebPage::isPosted()) {
+    $confirmDelete = WebPage::getRequestValue('confirm_delete');
+    
+    if ($confirmDelete === 'yes') {
+        try {
+            // Delete the job
+            if ($jobber->deleteFromSQL()) {
+                WebPage::singleton()->addStatusMessage(
+                    sprintf(_('Job #%d has been deleted'), $jobID),
+                    'success'
+                );
+                WebPage::singleton()->redirect('main.php');
+            } else {
+                WebPage::singleton()->addStatusMessage(
+                    sprintf(_('Failed to delete job #%d'), $jobID),
+                    'error'
+                );
+            }
+        } catch (\Exception $e) {
+            WebPage::singleton()->addStatusMessage(
+                sprintf(_('Error deleting job: %s'), $e->getMessage()),
+                'error'
+            );
+        }
+    }
+}
+
 $previousJobId = $jobber->getPreviousJobId(true, true, true);
 
 if ($previousJobId) {
@@ -162,10 +191,18 @@ if ($nextJobId) {
     $nextButton = new \Ease\TWB4\LinkButton('#', '🏁 '._('Next').' ▶️️', 'info btn-lg btn-block disabled');
 }
 
+// Delete button with confirmation - using SecureForm for CSRF protection
+$deleteForm = new \MultiFlexi\Ui\SecureForm(['method' => 'POST', 'action' => 'job.php?id='.$jobID]);
+$deleteForm->addInput(new \Ease\Html\InputHiddenTag('action', 'delete'));
+$deleteForm->addInput(new \Ease\Html\InputHiddenTag('confirm_delete', 'yes'));
+$deleteButton = new \Ease\TWB4\SubmitButton('🗑️ '._('Delete'), 'danger btn-lg btn-block', ['onclick' => 'return confirm("'.htmlspecialchars(_('Are you sure you want to delete this job? This action cannot be undone.')).'");']);
+$deleteForm->addItem($deleteButton);
+
 $jobFoot = new \Ease\TWB4\Row();
 $jobFoot->addColumn(2, $previousButton);
 $jobFoot->addColumn(2, $nextButton);
 $jobFoot->addColumn(2, $scheduleButton);
+$jobFoot->addColumn(2, $deleteForm);
 $jobFoot->addColumn(4, $runTemplateButton);
 
 $appPanel = new ArchivedJobPanel($jobber, [new JobInfo($jobber), $outputTabs], $jobFoot);
