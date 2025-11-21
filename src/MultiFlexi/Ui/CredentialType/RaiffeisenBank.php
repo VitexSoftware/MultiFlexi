@@ -229,30 +229,33 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
             $this->addItem(new \Ease\TWB4\Alert('danger', _('Certificate not set')));
         }
 
-        // Rate limits are tracked per certificate fingerprint (not per X-IBM-Client-Id)
-        // since v1.5.1 of php-vitexsoftware-rbczpremiumapi
+        // Rate limits are tracked per certificate decimal serial number (not per X-IBM-Client-Id)
+        // since v1.5.2 of php-vitexsoftware-rbczpremiumapi (changed from SHA1 fingerprint in v1.5.1)
         $ratesFile = sys_get_temp_dir().'/rbczpremiumapi_rates.json';
         $rates = $this->getJsonRates($ratesFile);
 
-        // Calculate certificate fingerprint to find rate limit data
-        $certFingerprint = null;
+        // Calculate certificate serial number to find rate limit data
+        $certSerial = null;
 
         if ($certFile && is_readable($certFile) && $certData) {
             $certs = [];
 
             if (openssl_pkcs12_read($certData, $certs, $certPass)) {
                 if (isset($certs['cert'])) {
-                    $certResource = openssl_x509_read($certs['cert']);
+                    $x509Data = openssl_x509_parse($certs['cert']);
 
-                    if ($certResource !== false) {
-                        $certFingerprint = strtolower(openssl_x509_fingerprint($certResource, 'sha1'));
+                    if ($x509Data && isset($x509Data['serialNumber'])) {
+                        $certSerial = (string)$x509Data['serialNumber'];
+                    } elseif ($x509Data && isset($x509Data['serialNumberHex'])) {
+                        // Fallback to converting hex to decimal
+                        $certSerial = (string)hexdec($x509Data['serialNumberHex']);
                     }
                 }
             }
         }
 
-        if ($certFingerprint && \array_key_exists($certFingerprint, $rates)) {
-            $clientRates = $rates[$certFingerprint];
+        if ($certSerial && \array_key_exists($certSerial, $rates)) {
+            $clientRates = $rates[$certSerial];
             $this->addItem(new \Ease\Html\DivTag([
                 new \Ease\Html\StrongTag(_('Rate Limits:')),
                 new \Ease\Html\UlTag([
@@ -260,14 +263,14 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
                     new \Ease\Html\LiTag(sprintf(_('Per Day: %d remaining (resets at %s)'), $clientRates['day']['remaining'], (new \DateTime())->setTimestamp($clientRates['day']['timestamp'])->format('Y-m-d H:i:s'))),
                 ]),
                 new \Ease\Html\SmallTag([
-                    _('Certificate fingerprint: '),
-                    new \Ease\Html\SpanTag($certFingerprint, ['class' => 'font-monospace']),
+                    _('Certificate serial number: '),
+                    new \Ease\Html\SpanTag($certSerial, ['class' => 'font-monospace']),
                 ], ['class' => 'text-muted']),
             ]));
-        } elseif ($certFingerprint) {
-            $this->addStatusMessage(sprintf(_('No rate limit data found for this certificate (fingerprint: %s). Data will be available after first API call.'), substr($certFingerprint, 0, 16).'...'), 'info');
+        } elseif ($certSerial) {
+            $this->addStatusMessage(sprintf(_('No rate limit data found for this certificate (serial: %s). Data will be available after first API call.'), $certSerial), 'info');
         } else {
-            $this->addStatusMessage(_('Cannot calculate certificate fingerprint to check rate limits'), 'warning');
+            $this->addStatusMessage(_('Cannot determine certificate serial number to check rate limits'), 'warning');
         }
 
         parent::finalize();
