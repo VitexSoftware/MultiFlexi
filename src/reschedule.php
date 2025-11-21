@@ -108,7 +108,7 @@ if (WebPage::isPosted() || $when === 'now') {
     $panel->addItem($infoDiv);
     
     $form = new \Ease\TWB4\Form(['action' => 'reschedule.php']);
-    $form->addInput(new \Ease\Html\InputHiddenTag('job_id', $jobID));
+    $form->addItem(new \Ease\Html\InputHiddenTag('job_id', $jobID));
     
     $form->addItem(new \Ease\TWB4\FormGroup(
         _('Schedule Time'),
