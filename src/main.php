@@ -42,51 +42,54 @@ WebPage::singleton()->container->addItem(new DBDataTable($engine));
 
 WebPage::singleton()->addItem(new PageBottom('jobs'));
 
+// Get dynamic object name for JavaScript and CSS
+$objectName = $engine->getObjectName();
+
 // Add compact table styling
-WebPage::singleton()->addCSS(<<<'CSS'
-    #Molecule_wrapper table.dataTable tbody td {
+WebPage::singleton()->addCSS(<<<CSS
+    #{$objectName}_wrapper table.dataTable tbody td {
         padding: 4px 8px !important;
         line-height: 1.3 !important;
         vertical-align: middle !important;
     }
-    #Molecule_wrapper table.dataTable tbody tr {
+    #{$objectName}_wrapper table.dataTable tbody tr {
         height: 32px !important;
     }
-    #Molecule_wrapper table.dataTable thead th {
+    #{$objectName}_wrapper table.dataTable thead th {
         padding: 6px 8px !important;
         font-size: 0.9em !important;
     }
     /* Custom success row styling - lighter green with better contrast */
-    #Molecule_wrapper table.dataTable tbody tr.job-success {
+    #{$objectName}_wrapper table.dataTable tbody tr.job-success {
         background-color: #d4edda !important;
         color: #155724 !important;
     }
-    #Molecule_wrapper table.dataTable tbody tr.job-success:hover {
+    #{$objectName}_wrapper table.dataTable tbody tr.job-success:hover {
         background-color: #c3e6cb !important;
     }
-    #Molecule_wrapper table.dataTable tbody tr.job-success a {
+    #{$objectName}_wrapper table.dataTable tbody tr.job-success a {
         color: #0c5460 !important;
     }
     /* Custom scheduled row styling - light blue for waiting jobs */
-    #Molecule_wrapper table.dataTable tbody tr.job-scheduled {
+    #{$objectName}_wrapper table.dataTable tbody tr.job-scheduled {
         background-color: #d1ecf1 !important;
         color: #0c5460 !important;
     }
-    #Molecule_wrapper table.dataTable tbody tr.job-scheduled:hover {
+    #{$objectName}_wrapper table.dataTable tbody tr.job-scheduled:hover {
         background-color: #bee5eb !important;
     }
-    #Molecule_wrapper table.dataTable tbody tr.job-scheduled a {
+    #{$objectName}_wrapper table.dataTable tbody tr.job-scheduled a {
         color: #004085 !important;
     }
     /* Custom orphaned row styling - yellow warning for jobs without schedule entry */
-    #Molecule_wrapper table.dataTable tbody tr.job-orphaned {
+    #{$objectName}_wrapper table.dataTable tbody tr.job-orphaned {
         background-color: #fff3cd !important;
         color: #856404 !important;
     }
-    #Molecule_wrapper table.dataTable tbody tr.job-orphaned:hover {
+    #{$objectName}_wrapper table.dataTable tbody tr.job-orphaned:hover {
         background-color: #ffe8a1 !important;
     }
-    #Molecule_wrapper table.dataTable tbody tr.job-orphaned a {
+    #{$objectName}_wrapper table.dataTable tbody tr.job-orphaned a {
         color: #533f03 !important;
     }
 CSS);
@@ -115,7 +118,7 @@ WebPage::singleton()->addJavaScript(<<<'EOD'
     });
     
     // Reinitialize popovers after DataTable reload
-    $('#Molecule').on('draw.dt', function() {
+    $('#{$objectName}').on('draw.dt', function() {
         $('[data-toggle="popover"]').popover({
             trigger: 'manual',
             delay: { show: 100, hide: 300 }
@@ -136,7 +139,7 @@ WebPage::singleton()->addJavaScript(<<<'EOD'
     });
 
     setInterval(function () {
-      Molecule.ajax.reload();
+      {$objectName}.ajax.reload();
     }, 60000);
 
 EOD);
