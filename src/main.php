@@ -42,8 +42,8 @@ WebPage::singleton()->container->addItem(new DBDataTable($engine));
 
 WebPage::singleton()->addItem(new PageBottom('jobs'));
 
-// Get dynamic object name for JavaScript and CSS
-$objectName = $engine->getObjectName();
+// Get dynamic object name for JavaScript and CSS (without namespace)
+$objectName = \Ease\Functions::baseClassName($engine);
 
 // Add compact table styling
 WebPage::singleton()->addCSS(<<<CSS
@@ -118,7 +118,9 @@ WebPage::singleton()->addJavaScript(<<<'EOD'
     });
     
     // Reinitialize popovers after DataTable reload
-    $('#{$objectName}').on('draw.dt', function() {
+    $('#
+EOD.$objectName.<<<'EOD'
+').on('draw.dt', function() {
         $('[data-toggle="popover"]').popover({
             trigger: 'manual',
             delay: { show: 100, hide: 300 }
@@ -139,7 +141,9 @@ WebPage::singleton()->addJavaScript(<<<'EOD'
     });
 
     setInterval(function () {
-      {$objectName}.ajax.reload();
+      $('#
+EOD.$objectName.<<<'EOD'
+').DataTable().ajax.reload();
     }, 60000);
 
 EOD);
