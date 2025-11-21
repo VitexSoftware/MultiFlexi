@@ -61,7 +61,7 @@ if (null === $runTemplate->getMyKey()) {
             }
         }
 
-        $jobber->scheduleJobRun(new \DateTime($when));
+        // scheduleJobRun() is now called automatically inside prepareJob()
 
         $glassHourRow = new \Ease\TWB4\Row();
         $glassHourRow->addTagClass('justify-content-md-center');

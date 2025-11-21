@@ -62,8 +62,8 @@ foreach ($envars as $envVarName => $envVarInfo) {
     }
 }
 
-$jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, 'adhoc '.(new \DateTime())->format('Y-m-d h:i:s'), WebPage::getRequestValue('executor'));
-$jobber->scheduleJobRun(new \DateTime());
+$jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, new \DateTime(), WebPage::getRequestValue('executor'), 'adhoc');
+// scheduleJobRun() is now called automatically inside prepareJob()
 
 $appInfo = $runTemplate->getAppInfo();
 $apps = new Application($appInfo['app_id']);
