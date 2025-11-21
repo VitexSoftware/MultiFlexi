@@ -171,6 +171,7 @@ if ($deleteAction === 'delete' && WebPage::isPosted()) {
                     'success'
                 );
                 WebPage::singleton()->redirect('main.php');
+                exit; // Stop execution after redirect
             } else {
                 WebPage::singleton()->addStatusMessage(
                     sprintf(_('Failed to delete job #%d'), $jobID),
