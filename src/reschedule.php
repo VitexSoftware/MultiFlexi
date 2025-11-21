@@ -97,7 +97,7 @@ if (WebPage::isPosted() || $when === 'now') {
     
     $panel->addItem(new \Ease\TWB4\Alert('warning', [
         '⚠️ ',
-        _('This job was created but never added to the execution queue. This can happen when the schedule queue is manually cleared or due to system errors.'),
+        _('This job has not been executed yet and does not have its place in the execution queue. This can happen when the schedule queue is manually cleared or due to system errors.'),
     ]));
     
     $infoDiv = new \Ease\Html\DivTag();
