@@ -96,6 +96,17 @@ EOD
     );
 }
 
+// Check if job is orphaned and show warning
+$orphanedWarning = null;
+if (!$jobber->getDataValue('begin') && !$jobber->isScheduled()) {
+    // Job not started and not in schedule queue - it's orphaned
+    $orphanedWarning = new \Ease\TWB4\Alert('warning', [
+        new \Ease\Html\H4Tag(['⚠️ ', _('Orphaned Job')]),
+        new \Ease\Html\PTag(_('This job has not been executed yet and does not have its place in the execution queue. This can happen when the schedule queue is manually cleared or due to system errors.')),
+        new \Ease\Html\PTag([_('Use the '), new \Ease\Html\StrongTag(_('Re-schedule')), _(' button below to add this job back to the queue.')]),
+    ], ['style' => 'border-left: 5px solid #ff9800;']);
+}
+
 $outputTabs = new \Ease\TWB4\Tabs();
 $outputTabs->addTab(_('Output').' '.(\strlen($jobber->getOutput()) ? ' <span class="badge badge-secondary">'.substr_count($jobber->getOutput(), "\n").'</span>' : '<span class="badge badge-invers">💭</span>'), [$stdTerminal, \strlen($jobber->getOutput()) ? new \Ease\TWB4\LinkButton('joboutput.php?id='.$jobID.'&mode=std', _('Download'), 'secondary btn-block') : _('No output'), new \Ease\Html\PreTag('', ['id' => 'live-output'])]);
 $outputTabs->addTab(_('Errors').' '.(empty($jobber->getErrorOutput()) ? ' <span class="badge badge-success">0</span>' : '<span class="badge badge-warning">'.substr_count($jobber->getErrorOutput(), "\n").'</span>'), [$errorTerminal, \strlen($jobber->getErrorOutput()) ? new \Ease\TWB4\LinkButton('joboutput.php?id='.$jobID.'&mode=err', _('Download'), 'secondary btn-block') : _('No errors')], empty($jobber->getOutput()));
@@ -205,7 +216,15 @@ $jobFoot->addColumn(2, $scheduleButton);
 $jobFoot->addColumn(2, $deleteForm);
 $jobFoot->addColumn(4, $runTemplateButton);
 
-$appPanel = new ArchivedJobPanel($jobber, [new JobInfo($jobber), $outputTabs], $jobFoot);
+// Build panel content - include orphaned warning if present
+$panelContent = [];
+if ($orphanedWarning) {
+    $panelContent[] = $orphanedWarning;
+}
+$panelContent[] = new JobInfo($jobber);
+$panelContent[] = $outputTabs;
+
+$appPanel = new ArchivedJobPanel($jobber, $panelContent, $jobFoot);
 
 WebPage::singleton()->container->addItem(
     new CompanyPanel(new \MultiFlexi\Company($appInfo['company_id']), $appPanel),
