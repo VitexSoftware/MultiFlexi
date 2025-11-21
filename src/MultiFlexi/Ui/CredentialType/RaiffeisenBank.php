@@ -171,21 +171,30 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
 
     private function getJsonRates(string $filename): array
     {
-        $handle = fopen($filename, 'rb');
+        // Return empty array if file doesn't exist yet
+        if (!file_exists($filename)) {
+            return [];
+        }
 
-        if ($handle && flock($handle, \LOCK_SH)) {
+        $handle = @fopen($filename, 'rb');
+
+        if ($handle === false) {
+            // File exists but cannot be opened
+            return [];
+        }
+
+        $data = [];
+
+        if (flock($handle, \LOCK_SH)) {
             $json = stream_get_contents($handle);
 
             if ($json === false) {
                 error_log("Failed to read rate limit store from {$filename}");
-                // fall through so the lock can be released and the handle closed
-                $data = [];
             } else {
                 $decoded = json_decode($json, true);
 
                 if ($decoded === null && json_last_error() !== \JSON_ERROR_NONE) {
                     $this->addStatusMessage('Failed to decode rate limit JSON: '.json_last_error_msg(), 'warning');
-                    $data = [];
                 } else {
                     $data = $decoded ?? [];
                 }
@@ -194,9 +203,7 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
             flock($handle, \LOCK_UN);
         }
 
-        if ($handle) {
-            fclose($handle);
-        }
+        fclose($handle);
 
         return \is_array($data) ? $data : [];
     }
