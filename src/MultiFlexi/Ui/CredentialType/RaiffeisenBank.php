@@ -125,21 +125,45 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
             $this->addItem(new \Ease\TWB4\Alert('danger', _('Certificate not set')));
         }
 
+        // Rate limits are tracked per certificate fingerprint (not per X-IBM-Client-Id)
+        // since v1.5.1 of php-vitexsoftware-rbczpremiumapi
         $ratesFile = sys_get_temp_dir().'/rbczpremiumapi_rates.json';
         $rates = $this->getJsonRates($ratesFile);
-        $xIbmClientId = $this->credential->getFields()->getFieldByCode('XIBMCLIENTID')->getValue();
 
-        if (\array_key_exists($xIbmClientId, $rates)) {
-            $clientRates = $rates[$xIbmClientId];
+        // Calculate certificate fingerprint to find rate limit data
+        $certFingerprint = null;
+
+        if ($certFile && is_readable($certFile) && $certData) {
+            $certs = [];
+
+            if (openssl_pkcs12_read($certData, $certs, $certPass)) {
+                if (isset($certs['cert'])) {
+                    $certResource = openssl_x509_read($certs['cert']);
+
+                    if ($certResource !== false) {
+                        $certFingerprint = strtolower(openssl_x509_fingerprint($certResource, 'sha1'));
+                    }
+                }
+            }
+        }
+
+        if ($certFingerprint && \array_key_exists($certFingerprint, $rates)) {
+            $clientRates = $rates[$certFingerprint];
             $this->addItem(new \Ease\Html\DivTag([
                 new \Ease\Html\StrongTag(_('Rate Limits:')),
                 new \Ease\Html\UlTag([
                     new \Ease\Html\LiTag(sprintf(_('Per Second: %d remaining (resets at %s)'), $clientRates['second']['remaining'], (new \DateTime())->setTimestamp($clientRates['second']['timestamp'])->format('Y-m-d H:i:s'))),
                     new \Ease\Html\LiTag(sprintf(_('Per Day: %d remaining (resets at %s)'), $clientRates['day']['remaining'], (new \DateTime())->setTimestamp($clientRates['day']['timestamp'])->format('Y-m-d H:i:s'))),
                 ]),
+                new \Ease\Html\SmallTag([
+                    _('Certificate fingerprint: '),
+                    new \Ease\Html\CodeTag($certFingerprint),
+                ], ['class' => 'text-muted']),
             ]));
+        } elseif ($certFingerprint) {
+            $this->addStatusMessage(sprintf(_('No rate limit data found for this certificate (fingerprint: %s). Data will be available after first API call.'), substr($certFingerprint, 0, 16).'...'), 'info');
         } else {
-            $this->addStatusMessage(sprintf(_('No rate limit data for client ID %s'), $xIbmClientId));
+            $this->addStatusMessage(_('Cannot calculate certificate fingerprint to check rate limits'), 'warning');
         }
 
         parent::finalize();
