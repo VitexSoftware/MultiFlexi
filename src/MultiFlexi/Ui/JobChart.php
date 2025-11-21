@@ -111,9 +111,11 @@ class JobChart extends \Ease\Html\DivTag
             'data_label_type' => [
                 'box', 'linebox',
             ],
-            'data_label_space' => 10, // Increase space between data labels
+            'data_label_space' => 5,
+            'data_label_min_space' => 15, // Minimum space between labels to prevent overlap
+            'data_label_font_adjust' => 0.8, // Slightly smaller font for better fit
             'data_label_back_colour' => [
-                'lightblue', '#FF4500', 'lightgreen', 'black', 'white', 'white', 'white', 'white', 'white', 'white',
+                '#E8F4F8', '#FFE5E5', '#E8F5E9', '#F5F5F5', 'white', 'white', 'white', 'white', 'white', 'white',
             ],
             'marker_size' => 3,
             'structure' => [
@@ -125,7 +127,13 @@ class JobChart extends \Ease\Html\DivTag
         ];
         $links = ['success' => '?showonly=success', 'fail' => '?showonly=fail', 'waiting' => '?showonly=waiting', 'exception' => '?showonly=exception'];
 
-        $colours = [['lightblue', 'blue'], ['red', 'orange'], ['green', 'chartreuse'], ['black', 'gray']];
+        // Pastel colors: waiting (light blue), fail (light red), success (light green), exception (light gray)
+        $colours = [
+            ['#B3E5FC', '#81D4FA'], // waiting - pastel light blue
+            ['#FFCDD2', '#EF9A9A'], // fail - pastel light red  
+            ['#C8E6C9', '#A5D6A7'], // success - pastel light green
+            ['#E0E0E0', '#BDBDBD']  // exception - pastel gray
+        ];
 
         $graph = new \Goat1000\SVGGraph\SVGGraph(1024, 212, $settings);
         $graph->values($data);

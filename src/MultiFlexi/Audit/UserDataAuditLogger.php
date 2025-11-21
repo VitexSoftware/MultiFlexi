@@ -15,8 +15,6 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Audit;
 
-use Ease\SQL\Orm;
-
 /**
  * User Data Audit Logger for GDPR compliance.
  *
@@ -24,30 +22,8 @@ use Ease\SQL\Orm;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class UserDataAuditLogger extends \Ease\Sand
+class UserDataAuditLogger extends \MultiFlexi\DBEngine
 {
-    use Orm;
-
-    /**
-     * Database table name.
-     */
-    public string $myTable = 'user_data_audit';
-
-    /**
-     * Primary key column.
-     */
-    public string $keyColumn = 'id';
-
-    /**
-     * Creation timestamp column.
-     */
-    public string $createColumn = 'created_at';
-
-    /**
-     * Database connection.
-     */
-    public ?\PDO $pdo = null;
-
     /**
      * Constructor.
      *
@@ -55,16 +31,9 @@ class UserDataAuditLogger extends \Ease\Sand
      */
     public function __construct($identifier = null)
     {
-        // Initialize PDO connection from Ease SQL Engine
-        if (!isset($this->pdo)) {
-            $engine = new \Ease\SQL\Engine();
-            $this->pdo = $engine->getPdo();
-        }
-
-        // Load record if identifier provided
-        if ($identifier !== null) {
-            $this->loadFromSQL($identifier);
-        }
+        $this->myTable = 'user_data_audit';
+        $this->createColumn = 'created_at';
+        parent::__construct($identifier);
     }
 
     /**
@@ -122,12 +91,14 @@ class UserDataAuditLogger extends \Ease\Sand
      */
     public function getUserAuditLog(int $userId, int $limit = 50, int $offset = 0): array
     {
-        return $this->listingQuery()
-            ->select(['*'])
-            ->where('user_id = %i', $userId)
+        $result = $this->getFluentPDO()->from($this->myTable)
+            ->where('user_id', $userId)
             ->orderBy('created_at DESC')
-            ->limit('%i OFFSET %i', $limit, $offset)
+            ->limit($limit)
+            ->offset($offset)
             ->fetchAll();
+        
+        return $result ?: [];
     }
 
     /**
@@ -139,12 +110,13 @@ class UserDataAuditLogger extends \Ease\Sand
      */
     public function getPendingApprovals(int $limit = 20): array
     {
-        return $this->listingQuery()
-            ->select(['*'])
-            ->where('change_type = %s', 'pending_approval')
+        $result = $this->getFluentPDO()->from($this->myTable)
+            ->where('change_type', 'pending_approval')
             ->orderBy('created_at DESC')
-            ->limit('%i', $limit)
+            ->limit($limit)
             ->fetchAll();
+        
+        return $result ?: [];
     }
 
     /**
@@ -157,13 +129,12 @@ class UserDataAuditLogger extends \Ease\Sand
      */
     public function getAuditStatistics(string $fromDate, string $toDate): array
     {
-        $stats = $this->listingQuery()
-            ->select([
-                'change_type',
-                'COUNT(*) as count',
-                'COUNT(DISTINCT user_id) as unique_users',
-            ])
-            ->where('created_at BETWEEN %s AND %s', $fromDate.' 00:00:00', $toDate.' 23:59:59')
+        $stats = $this->getFluentPDO()->from($this->myTable)
+            ->select('change_type')
+            ->select('COUNT(*) as count')
+            ->select('COUNT(DISTINCT user_id) as unique_users')
+            ->where('created_at >= ?', $fromDate.' 00:00:00')
+            ->where('created_at <= ?', $toDate.' 23:59:59')
             ->groupBy('change_type')
             ->fetchAll();
 
@@ -179,9 +150,10 @@ class UserDataAuditLogger extends \Ease\Sand
         }
 
         // Get unique users count across all change types
-        $uniqueUsersResult = $this->listingQuery()
-            ->select(['COUNT(DISTINCT user_id) as unique_users'])
-            ->where('created_at BETWEEN %s AND %s', $fromDate.' 00:00:00', $toDate.' 23:59:59')
+        $uniqueUsersResult = $this->getFluentPDO()->from($this->myTable)
+            ->select('COUNT(DISTINCT user_id) as unique_users')
+            ->where('created_at >= ?', $fromDate.' 00:00:00')
+            ->where('created_at <= ?', $toDate.' 23:59:59')
             ->fetch();
 
         $result['unique_users_affected'] = $uniqueUsersResult['unique_users'] ?? 0;

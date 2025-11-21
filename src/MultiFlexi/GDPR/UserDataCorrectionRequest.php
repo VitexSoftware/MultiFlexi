@@ -15,7 +15,6 @@ declare(strict_types=1);
 
 namespace MultiFlexi\GDPR;
 
-use Ease\SQL\Orm;
 use MultiFlexi\Audit\UserDataAuditLogger;
 use MultiFlexi\Notifications\DataCorrectionNotifier;
 
@@ -24,9 +23,8 @@ use MultiFlexi\Notifications\DataCorrectionNotifier;
  *
  * @author Vitex <info@vitexsoftware.cz>
  */
-class UserDataCorrectionRequest extends \Ease\Sand
+class UserDataCorrectionRequest extends \MultiFlexi\DBEngine
 {
-    use Orm;
 
     /**
      * Fields that require admin approval.
@@ -53,32 +51,13 @@ class UserDataCorrectionRequest extends \Ease\Sand
     public const STATUS_CANCELLED = 'cancelled';
 
     /**
-     * Database table name.
-     */
-    public string $myTable = 'user_data_correction_requests';
-
-    /**
-     * Primary key column.
-     */
-    public string $keyColumn = 'id';
-
-    /**
-     * Creation timestamp column name.
-     */
-    public ?string $createColumn = null;
-
-    /**
-     * Last modified timestamp column name.
-     */
-    public ?string $lastModifiedColumn = null;
-
-    /**
      * Constructor.
      *
      * @param mixed $identifier Record identifier
      */
     public function __construct($identifier = null)
     {
+        $this->myTable = 'user_data_correction_requests';
         $this->createColumn = 'created_at';
         $this->lastModifiedColumn = 'updated_at';
         parent::__construct($identifier);
@@ -303,22 +282,22 @@ class UserDataCorrectionRequest extends \Ease\Sand
      */
     public function getPendingRequests(int $limit = 20, int $offset = 0): array
     {
-        return $this->listingQuery()
-            ->select([
-                'r.*',
-                'u.login',
-                'u.firstname',
-                'u.lastname',
-                'u.email',
-                'reviewer.login as reviewer_login',
-            ])
-            ->from($this->myTable.' r')
+        $query = $this->getFluentPDO()->from($this->myTable.' r')
+            ->select('r.*')
+            ->select('u.login')
+            ->select('u.firstname')
+            ->select('u.lastname')
+            ->select('u.email')
+            ->select('reviewer.login as reviewer_login')
             ->leftJoin('user u ON r.user_id = u.id')
             ->leftJoin('user reviewer ON r.reviewed_by_user_id = reviewer.id')
-            ->where('r.status = %s', self::STATUS_PENDING)
+            ->where('r.status', self::STATUS_PENDING)
             ->orderBy('r.created_at ASC')
-            ->limit('%i OFFSET %i', $limit, $offset)
-            ->fetchAll();
+            ->limit($limit)
+            ->offset($offset);
+        
+        $result = $query->fetchAll();
+        return $result ?: [];
     }
 
     /**
@@ -331,19 +310,18 @@ class UserDataCorrectionRequest extends \Ease\Sand
      */
     public function getUserRequests(int $userId, int $limit = 10): array
     {
-        return $this->listingQuery()
-            ->select([
-                'r.*',
-                'reviewer.login as reviewer_login',
-                'reviewer.firstname as reviewer_firstname',
-                'reviewer.lastname as reviewer_lastname',
-            ])
-            ->from($this->myTable.' r')
+        $query = $this->getFluentPDO()->from($this->myTable.' r')
+            ->select('r.*')
+            ->select('reviewer.login as reviewer_login')
+            ->select('reviewer.firstname as reviewer_firstname')
+            ->select('reviewer.lastname as reviewer_lastname')
             ->leftJoin('user reviewer ON r.reviewed_by_user_id = reviewer.id')
-            ->where('r.user_id = %i', $userId)
+            ->where('r.user_id', $userId)
             ->orderBy('r.created_at DESC')
-            ->limit('%i', $limit)
-            ->fetchAll();
+            ->limit($limit);
+        
+        $result = $query->fetchAll();
+        return $result ?: [];
     }
 
     /**

@@ -38,12 +38,16 @@ class CompanyPanel extends \Ease\TWB4\Panel
     {
         $cid = $company->getMyKey();
         $headRow = new \Ease\TWB4\Row();
-        $headRow->addColumn(2, new \Ease\Html\ATag('company.php?id='.$cid, [new CompanyLogo($company, ['style' => 'height: 60px']), '&nbsp;', $company->getDataValue('code')]));
-        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('companysetup.php?id='.$cid, '🛠️&nbsp;'._('Setup'), 'light btn-lg btn-block'));
-        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('companyapps.php?company_id='.$cid, '📌&nbsp;'._('Applications'), 'light btn-lg btn-block'));
-        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('periodical.php?company_id='.$cid, '🔁&nbsp;'._('Periodical Tasks'), 'light btn-lg btn-block'));
-        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('activation-wizard.php?company='.$company->getMyKey(), '🧙🏽‍♂️&nbsp'._('Launch wizard'), 'light btn-lg btn-block'));
-        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('companycreds.php?company_id='.$company->getMyKey(), '🔐&nbsp'._('Credentials'), 'light btn-lg btn-block'));
+        
+        // Company logo and name - smaller
+        $headRow->addColumn(2, new \Ease\Html\ATag('company.php?id='.$cid, [new CompanyLogo($company, ['style' => 'height: 50px']), '&nbsp;', new \Ease\Html\SmallTag($company->getDataValue('code'))], ['class' => 'd-flex align-items-center']));
+        
+        // Action buttons - more compact, using btn-sm instead of btn-lg
+        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('companysetup.php?id='.$cid, '🛠️&nbsp;'._('Setup'), 'light btn-sm btn-block'));
+        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('companyapps.php?company_id='.$cid, '📌&nbsp;'._('Applications'), 'light btn-sm btn-block'));
+        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('activation-wizard.php?company='.$company->getMyKey(), '🧙&nbsp;'._('Wizard'), 'light btn-sm btn-block'));
+        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('companycreds.php?company_id='.$company->getMyKey(), '🔐&nbsp;'._('Credentials'), 'light btn-sm btn-block'));
+        $headRow->addColumn(2, new \Ease\TWB4\LinkButton('joblist.php?company_id='.$company->getMyKey(), '🏁&nbsp;'._('Jobs'), 'light btn-sm btn-block'));
 
         parent::__construct($headRow, 'default', $content, $footer);
     }

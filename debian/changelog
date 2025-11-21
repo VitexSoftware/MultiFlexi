@@ -1,4 +1,13 @@
-multiflexi (2.2.0) UNRELEASED; urgency=medium
+multiflexi (2.2.1) unstable; urgency=medium
+
+  * Enhanced job listing with filter toolbar
+  * Improved company application display
+  * UI refinements and code quality improvements
+  * PHP 8.2+ compatibility fixes
+
+ -- vitex <info@vitexsoftware.cz>  Thu, 21 Nov 2025 02:09:14 +0000
+
+multiflexi (2.2.0) unstable; urgency=medium
 
   * CredentialType ui addons introduced
 
