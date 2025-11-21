@@ -35,6 +35,18 @@ class DashboardRecentJobsTable extends \Ease\Html\DivTag
         try {
             $jobber = new \MultiFlexi\Job();
 
+            // First get scheduled jobs count to calculate queue positions
+            $scheduledCounts = [];
+            $scheduler = new \MultiFlexi\Scheduler();
+            $queueItems = $scheduler->listingQuery()
+                ->select('job, after')
+                ->orderBy('after ASC')
+                ->fetchAll();
+            
+            foreach ($queueItems as $index => $item) {
+                $scheduledCounts[$item['job']] = $index + 1; // Position in queue (1-based)
+            }
+            
             $recentJobs = $jobber->getFluentPDO()
                 ->from('job')
                 ->select('job.id, job.begin, job.end, job.exitcode, job.app_id, job.company_id, job.runtemplate_id, job.launched_by, job.schedule, apps.name as app_name, company.name as company_name, runtemplate.name as runtemplate_name, user.login as user_login, user.enabled as user_enabled, user.firstname, user.lastname, schedule.id as schedule_id, schedule.after as schedule_after')
@@ -61,7 +73,9 @@ class DashboardRecentJobsTable extends \Ease\Html\DivTag
                             // Job not started yet - check if scheduled
                             if ($job['schedule_id']) {
                                 // Has schedule entry - waiting in queue
-                                $statusBadge = new \Ease\TWB4\Badge('info', '📅 '._('Scheduled'));
+                                $queuePosition = isset($scheduledCounts[$job['id']]) ? $scheduledCounts[$job['id']] : '?';
+                                $totalInQueue = count($scheduledCounts);
+                                $statusBadge = new \Ease\TWB4\Badge('info', sprintf('📅 #%s/%s %s', $queuePosition, $totalInQueue, _('in queue')));
                             } else {
                                 // No schedule entry - orphaned job (queue was cleared)
                                 $statusBadge = new \Ease\TWB4\Badge('warning', '⚠️ '._('Orphaned'));
