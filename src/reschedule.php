@@ -100,19 +100,12 @@ if (WebPage::isPosted() || $when === 'now') {
         _('This job was created but never added to the execution queue. This can happen when the schedule queue is manually cleared or due to system errors.'),
     ]));
     
-    $panel->addItem(new \Ease\Html\DivTag([
-        new \Ease\Html\StrongTag(_('Job ID: ')),
-        $jobID,
-        new \Ease\Html\BRTag(),
-        new \Ease\Html\StrongTag(_('Application: ')),
-        $appInfo['app_name'],
-        new \Ease\Html\BRTag(),
-        new \Ease\Html\StrongTag(_('RunTemplate: ')),
-        $runTemplate->getRecordName(),
-        new \Ease\Html\BRTag(),
-        new \Ease\Html\StrongTag(_('Original Schedule: ')),
-        $jobber->getDataValue('schedule'),
-    ]));
+    $infoDiv = new \Ease\Html\DivTag();
+    $infoDiv->addItem(new \Ease\Html\DivTag([new \Ease\Html\StrongTag(_('Job ID: ')), $jobID]));
+    $infoDiv->addItem(new \Ease\Html\DivTag([new \Ease\Html\StrongTag(_('Application: ')), $appInfo['app_name']]));
+    $infoDiv->addItem(new \Ease\Html\DivTag([new \Ease\Html\StrongTag(_('RunTemplate: ')), $runTemplate->getRecordName()]));
+    $infoDiv->addItem(new \Ease\Html\DivTag([new \Ease\Html\StrongTag(_('Original Schedule: ')), $jobber->getDataValue('schedule')]));
+    $panel->addItem($infoDiv);
     
     $form = new \Ease\TWB4\Form(['action' => 'reschedule.php']);
     $form->addInput(new \Ease\Html\InputHiddenTag('job_id', $jobID));
