@@ -78,6 +78,17 @@ WebPage::singleton()->addCSS(<<<'CSS'
     #Molecule_wrapper table.dataTable tbody tr.job-scheduled a {
         color: #004085 !important;
     }
+    /* Custom orphaned row styling - yellow warning for jobs without schedule entry */
+    #Molecule_wrapper table.dataTable tbody tr.job-orphaned {
+        background-color: #fff3cd !important;
+        color: #856404 !important;
+    }
+    #Molecule_wrapper table.dataTable tbody tr.job-orphaned:hover {
+        background-color: #ffe8a1 !important;
+    }
+    #Molecule_wrapper table.dataTable tbody tr.job-orphaned a {
+        color: #533f03 !important;
+    }
 CSS);
 
 WebPage::singleton()->addJavaScript(<<<'EOD'
