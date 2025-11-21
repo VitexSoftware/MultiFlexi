@@ -22,7 +22,53 @@ WebPage::singleton()->onlyForLogged();
 WebPage::singleton()->addItem(new PageTop(_('Archived Job Run')));
 $jobID = WebPage::singleton()->getRequestValue('id', 'int');
 $jobber = new \MultiFlexi\Job($jobID);
+
+if (!$jobber->getMyKey()) {
+    WebPage::singleton()->addStatusMessage(_('Job not found'), 'error');
+    WebPage::singleton()->redirect('main.php');
+}
+
 $runTemplate = new \MultiFlexi\RunTemplate($jobber->getDataValue('runtemplate_id'));
+
+if (!$runTemplate->getMyKey()) {
+    // RunTemplate was deleted - show limited job info
+    WebPage::singleton()->addStatusMessage(_('Warning: RunTemplate for this job was deleted'), 'warning');
+    
+    WebPage::singleton()->addItem(new PageTop(_('Job').' #'.$jobID));
+    
+    $jobPanel = new \Ease\TWB4\Panel(_('Job Information'), 'warning');
+    $jobPanel->addItem(new \Ease\TWB4\Alert('warning', [
+        '⚠️ ',
+        _('The RunTemplate associated with this job has been deleted. Job information is limited.'),
+    ]));
+    
+    $infoDiv = new \Ease\Html\DivTag();
+    $infoDiv->addItem(new \Ease\Html\StrongTag(_('Job ID: ')));
+    $infoDiv->addItem($jobID);
+    $infoDiv->addItem(new \Ease\Html\BRTag());
+    $infoDiv->addItem(new \Ease\Html\StrongTag(_('RunTemplate ID: ')));
+    $infoDiv->addItem($jobber->getDataValue('runtemplate_id').' '._('(deleted)'));
+    $infoDiv->addItem(new \Ease\Html\BRTag());
+    $infoDiv->addItem(new \Ease\Html\StrongTag(_('Status: ')));
+    $infoDiv->addItem($jobber->getDataValue('exitcode') !== null ? _('Completed') : _('Pending'));
+    
+    $jobPanel->addItem($infoDiv);
+    
+    $outputTabs = new \Ease\TWB4\Tabs();
+    $stdTerminal = new \Ease\Html\DivTag(nl2br(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(stripslashes((string) $jobber->getDataValue('stdout'))))), ['style' => 'background: black; font-family: monospace;']);
+    $errorTerminal = new \Ease\Html\DivTag(nl2br(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(stripslashes((string) $jobber->getDataValue('stderr'))))), ['style' => 'background: #330000; font-family: monospace;']);
+    
+    $outputTabs->addTab(_('Output'), [$stdTerminal]);
+    $outputTabs->addTab(_('Errors'), [$errorTerminal]);
+    
+    $jobPanel->addItem($outputTabs);
+    
+    WebPage::singleton()->container->addItem($jobPanel);
+    WebPage::singleton()->container->addItem(new \Ease\TWB4\LinkButton('main.php', _('Back to Dashboard'), 'primary'));
+    WebPage::singleton()->addItem(new PageBottom());
+    WebPage::singleton()->draw();
+    exit;
+}
 
 $appInfo = $runTemplate->getAppInfo();
 $apps = new Application($appInfo['app_id']);

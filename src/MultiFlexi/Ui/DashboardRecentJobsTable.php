@@ -80,9 +80,14 @@ class DashboardRecentJobsTable extends \Ease\Html\DivTag
                     $companyLink = $job['company_id'] && $job['company_name']
                         ? new \Ease\Html\ATag('company.php?id='.$job['company_id'], '🏢 '.$job['company_name'])
                         : '-';
-                    $runtemplateLink = $job['runtemplate_id'] && $job['runtemplate_name']
-                        ? new \Ease\Html\ATag('runtemplate.php?id='.$job['runtemplate_id'], '⚗️️ '.$job['runtemplate_name'])
-                        : '-';
+                    if ($job['runtemplate_id'] && $job['runtemplate_name']) {
+                        $runtemplateLink = new \Ease\Html\ATag('runtemplate.php?id='.$job['runtemplate_id'], '⚗️️ '.$job['runtemplate_name']);
+                    } elseif ($job['runtemplate_id']) {
+                        // RunTemplate was deleted but job still references it
+                        $runtemplateLink = new \Ease\Html\SpanTag('#'.$job['runtemplate_id'].' '._('(deleted)'), ['class' => 'text-muted']);
+                    } else {
+                        $runtemplateLink = '-';
+                    }
 
                     // User display with type icon
                     if ($job['launched_by'] && $job['user_login']) {
