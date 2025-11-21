@@ -442,13 +442,17 @@ EOD.($this->buttons ? ',        buttons: [ '.\Ease\Part::partPropertiesToString(
 
 EOD.$this->engine->postTableCode($tableID).<<<'EOD'
 
-            $('.tablefilter').change( function() {
+            $('.tablefilter').change( function() { $('#
 EOD.$tableID.<<<'EOD'
-.draw(); } );
+').DataTable().draw(); } );
+
+    setInterval(function () { $('#
+EOD.$tableID.<<<'EOD'
+').DataTable().ajax.reload();
+    }, 60000);
 
 EOD;
         //    $("#'.$tableID.'_filter").css(\'border\', \'1px solid red\');
-        // setInterval( function () { '.$tableID.'.ajax.reload( null, false ); }, 30000 );
     }
 
     //    '.self::columnIndexNames($columns,$tableID).'
