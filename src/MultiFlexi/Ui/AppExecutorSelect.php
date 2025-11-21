@@ -41,18 +41,34 @@ class AppExecutorSelect extends ExecutorSelect
     }
 
     /**
-     * Executors list.
+     * Executors list - filtered by app compatibility.
      */
+    #[\Override]
     public function loadItems(): array
     {
-        $allExectutors = parent::loadItems();
+        $allExecutors = parent::loadItems();
 
+        // Filter executors that are not usable for this app
+        $unusableExecutors = [];
         foreach ($this->executors as $executorName => $executorClass) {
             if ($executorClass::usableForApp($this->app) === false) {
-                unset($allExectutors[$executorName]);
+                unset($allExecutors[$executorName]);
+                $unusableExecutors[] = $executorName;
             }
         }
+        
+        // Also filter executorData for selectize
+        if (!empty($unusableExecutors)) {
+            $this->executorData = array_filter(
+                $this->executorData,
+                function($item) use ($unusableExecutors) {
+                    return !in_array($item['value'], $unusableExecutors, true);
+                }
+            );
+            // Reindex array
+            $this->executorData = array_values($this->executorData);
+        }
 
-        return $allExectutors;
+        return $allExecutors;
     }
 }

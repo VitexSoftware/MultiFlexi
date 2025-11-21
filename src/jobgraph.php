@@ -18,12 +18,22 @@ namespace MultiFlexi\Ui;
 require_once './init.php';
 
 $companyId = WebPage::getRequestValue('company_id', 'int');
+$runtemplateId = WebPage::getRequestValue('runtemplate_id', 'int');
 $width = WebPage::getRequestValue('width', 'int');
 $height = WebPage::getRequestValue('height', 'int');
 
 $jobber = new \MultiFlexi\Job();
 
-$todaysJobs = $jobber->listingQuery()->select('exitcode', true)->limit($width * $height)->orderBy('id')->where('company_id', $companyId)->fetchAll();
+// Build query based on provided parameters
+$query = $jobber->listingQuery()->select('exitcode', true)->limit($width * $height)->orderBy('id DESC');
+
+if ($runtemplateId) {
+    $query->where('runtemplate_id', $runtemplateId);
+} elseif ($companyId) {
+    $query->where('company_id', $companyId);
+}
+
+$todaysJobs = $query->fetchAll();
 
 $jobGraph = new JobGraph($width, $height, $todaysJobs);
 $base64Image = $jobGraph->generateImage();
