@@ -40,6 +40,7 @@ MultiFlexi uses a layered architecture:
 4. **Credential Framework**: Extensible credential types for various system integrations
 5. **Configuration Management**: Environment-based configuration with type-safe field definitions
 6. **Security Layer**: Authentication, authorization, and secure credential handling
+7. **Audit Trail**: Job scheduling tracked by user (web or CLI) via `job.launched_by` foreign key
 
 ### Application Definition Schema
 
@@ -52,6 +53,36 @@ Key elements:
 - `requirements`: System dependencies
 - `ociimage`: Docker container image for containerized execution
 - `artifacts`: Output files produced by the application
+
+### Job Audit Trail
+
+MultiFlexi tracks which user scheduled each job for accountability:
+
+**Database Schema:**
+- `job.launched_by` (integer, NOT NULL, FK to `user.id`): User who scheduled the job
+- Migration: `20251121091900_job_launched_by_integer.php`
+
+**User Types:**
+- **Web Users** (`user.enabled = 1`): Users authenticated through web interface
+- **CLI/OS Users** (`user.enabled = 0`): System users created automatically by `UnixUser` class
+
+**How it Works:**
+1. When jobs are scheduled via web interface, `\Ease\Shared::user()` returns the authenticated web user
+2. When jobs are scheduled via `multiflexi-cli`, the `UnixUser` class:
+   - Detects the OS username via `get_current_user()`
+   - Checks if user exists in database
+   - Creates new user record with `enabled = 0` if not found
+3. All jobs store user ID in `launched_by` column (never NULL)
+
+**UI Display:**
+- 👤 Web users shown with badge and link to user profile
+- 🖥️ CLI users shown with secondary badge and link to auto-created profile
+- User full name displayed if available, otherwise username
+
+**Code Locations:**
+- Core: `php-vitexsoftware-multiflexi-core/src/MultiFlexi/Job.php` (newJob method)
+- CLI: `multiflexi-cli/src/multiflexi-cli.php` (UnixUser instantiation)
+- UI: `src/MultiFlexi/Ui/JobInfo.php`, `JobHistoryTable.php`, `DashboardRecentJobsTable.php`
 
 ## Development Commands
 

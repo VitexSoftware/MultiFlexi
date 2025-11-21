@@ -60,7 +60,7 @@ class JobHistoryTable extends \Ease\TWB4\Table
     public function getJobs()
     {
         return $this->jobber->listingQuery()->
-                        select(['apps.name AS appname', 'apps.uuid', 'job.id', 'begin', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'job.executor', 'job.company_id', 'company.name', 'company.logo', 'schedule', 'schedule_type'], true)
+                        select(['apps.name AS appname', 'apps.uuid', 'job.id', 'begin', 'exitcode', 'launched_by', 'user.login', 'user.enabled AS user_enabled', 'user.firstname', 'user.lastname', 'job.app_id AS app_id', 'job.executor', 'job.company_id', 'company.name', 'company.logo', 'schedule', 'schedule_type'], true)
                             ->leftJoin('apps ON apps.id = job.app_id')
                             ->leftJoin('user ON user.id = job.launched_by')
                             ->limit($this->limit)
@@ -93,13 +93,24 @@ class JobHistoryTable extends \Ease\TWB4\Table
 
             unset($job['exitcode']);
 
+            // User display with type icon
+            if ($job['launched_by'] && $job['login']) {
+                $isWebUser = (bool) $job['user_enabled'];
+                $userIcon = $isWebUser ? '👤' : '🖥️'; // Web user vs CLI/OS user
+                $userName = trim($job['firstname'].' '.$job['lastname']) ?: $job['login'];
+                $userBadgeClass = $isWebUser ? 'info' : 'secondary';
+                $userBadge = new \Ease\Html\ATag('user.php?id='.$job['launched_by'], new \Ease\TWB4\Badge($userBadgeClass, $userIcon.' '.$userName));
+            } else {
+                $userBadge = new \Ease\TWB4\Badge('warning', '⏰ '._('Timer'));
+            }
+
             $job['launched_by'] = [
                 new ExecutorImage($job['executor'], ['align' => 'right', 'height' => '50px']),
-                new \Ease\Html\DivTag($job['launched_by'] ? new \Ease\Html\ATag('user.php?id='.$job['launched_by'], new \Ease\TWB4\Badge('info', $job['login'])) : _('Timer')),
+                new \Ease\Html\DivTag($userBadge),
                 new \Ease\Html\DivTag($job['schedule']),
                 new \Ease\Html\DivTag($job['executor'].' '.$job['schedule_type']),
             ];
-            unset($job['executor'], $job['login'], $job['schedule']);
+            unset($job['executor'], $job['login'], $job['user_enabled'], $job['firstname'], $job['lastname'], $job['schedule']);
 
             if ($this->showCompany) {
                 $job['company_id'] = [new \Ease\Html\ATag('company.php?id='.$job['company_id'], new CompanyLogo($company, ['height' => '60px', 'align' => 'right'])), new \Ease\Html\ATag('company.php?id='.$job['company_id'], $job['name'])];

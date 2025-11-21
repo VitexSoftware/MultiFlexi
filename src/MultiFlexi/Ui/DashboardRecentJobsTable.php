@@ -37,17 +37,18 @@ class DashboardRecentJobsTable extends \Ease\Html\DivTag
 
             $recentJobs = $jobber->getFluentPDO()
                 ->from('job')
-                ->select('job.id, job.begin, job.end, job.exitcode, job.app_id, job.company_id, job.runtemplate_id, apps.name as app_name, company.name as company_name, runtemplate.name as runtemplate_name')
+                ->select('job.id, job.begin, job.end, job.exitcode, job.app_id, job.company_id, job.runtemplate_id, job.launched_by, apps.name as app_name, company.name as company_name, runtemplate.name as runtemplate_name, user.login as user_login, user.enabled as user_enabled, user.firstname, user.lastname')
                 ->leftJoin('apps ON apps.id = job.app_id')
                 ->leftJoin('company ON company.id = job.company_id')
                 ->leftJoin('runtemplate ON runtemplate.id = job.runtemplate_id')
+                ->leftJoin('user ON user.id = job.launched_by')
                 ->orderBy('job.begin DESC')
                 ->limit(20)
                 ->fetchAll();
 
             if (!empty($recentJobs)) {
                 $table = new \Ease\TWB4\Table();
-                $table->addRowHeaderColumns([_('ID'), _('Application'), _('Company'), _('RunTemplate'), _('Started'), _('Finished'), _('Status')]);
+                $table->addRowHeaderColumns([_('ID'), _('Application'), _('Company'), _('RunTemplate'), _('User'), _('Started'), _('Finished'), _('Status')]);
 
                 foreach ($recentJobs as $job) {
                     $statusBadge = '';
@@ -75,11 +76,22 @@ class DashboardRecentJobsTable extends \Ease\Html\DivTag
                         ? new \Ease\Html\ATag('runtemplate.php?id='.$job['runtemplate_id'], '⚗️️ '.$job['runtemplate_name'])
                         : '-';
 
+                    // User display with type icon
+                    if ($job['launched_by'] && $job['user_login']) {
+                        $isWebUser = (bool) $job['user_enabled'];
+                        $userIcon = $isWebUser ? '👤' : '🖥️'; // Web user vs CLI/OS user
+                        $userName = trim($job['firstname'].' '.$job['lastname']) ?: $job['user_login'];
+                        $userLink = new \Ease\Html\ATag('user.php?id='.$job['launched_by'], $userIcon.' '.$userName);
+                    } else {
+                        $userLink = new \Ease\Html\SmallTag('⏰');
+                    }
+
                     $table->addRowColumns([
                         new \Ease\Html\ATag('job.php?id='.$job['id'], '🏁 '.$job['id']),
                         $appLink,
                         $companyLink,
                         $runtemplateLink,
+                        $userLink,
                         $job['begin'] ? (new \DateTime($job['begin']))->format('Y-m-d H:i:s') : '-',
                         $job['end'] ? (new \DateTime($job['end']))->format('Y-m-d H:i:s') : '-',
                         $statusBadge,
