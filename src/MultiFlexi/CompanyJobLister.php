@@ -27,6 +27,11 @@ class CompanyJobLister extends CompanyJob
      */
     public ?string $filterType = null;
 
+    /**
+     * Array mapping job ID to queue position (1-based index).
+     */
+    private array $scheduledCounts = [];
+
     public function __construct($init = null, $filter = [])
     {
         parent::__construct($init, $filter);
@@ -73,7 +78,7 @@ class CompanyJobLister extends CompanyJob
      */
     public function getColumns()
     {
-        return ['id', 'company_id', 'app_id', 'env', 'exitcode', 'launched_by', 'begin', 'end', 'executor', 'schedule', 'schedule_type', 'runtemplate_id'];
+        return ['id', 'company_id', 'app_id', 'env', 'exitcode', 'launched_by', 'begin', 'end', 'executor', 'schedule', 'schedule_type', 'runtemplate_id', 'schedule_id'];
     }
 
     /**
@@ -142,12 +147,22 @@ class CompanyJobLister extends CompanyJob
         // Get current language (first 2 chars from locale, e.g. 'en' from 'en_US')
         $currentLang = substr(\Ease\Locale::$localeUsed ?? 'en_US', 0, 2);
         
-        $query->select(['apps.name AS appname', 'apps.uuid', 'apps.image AS appimage', 'apps.description AS appdescription', 'apps.homepage AS apphomepage', 'app_translations.description AS appdescription_localized', 'job.id', 'begin', 'end', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'job.executor', 'job.company_id', 'company.name', 'company.logo', 'company.ic', 'company.enabled', 'schedule', 'schedule_type', 'job.runtemplate_id', 'runtemplate.name AS runtemplate_name', 'runtemplate.note AS runtemplate_note', 'runtemplate.interv AS runtemplate_interv', 'runtemplate.cron AS runtemplate_cron', 'runtemplate.last_schedule AS runtemplate_last_schedule', 'runtemplate.next_schedule AS runtemplate_next_schedule', 'runtemplate.delay AS runtemplate_delay'], true)
+        // Build queue position map for all scheduled jobs
+        $scheduler = new \MultiFlexi\Job();
+        $scheduledJobs = $scheduler->listingQuery()->select('job, after')->orderBy('after ASC')->fetchAll();
+        $this->scheduledCounts = [];
+        $position = 1;
+        foreach ($scheduledJobs as $scheduledJob) {
+            $this->scheduledCounts[$scheduledJob['job']] = $position++;
+        }
+        
+        $query->select(['apps.name AS appname', 'apps.uuid', 'apps.image AS appimage', 'apps.description AS appdescription', 'apps.homepage AS apphomepage', 'app_translations.description AS appdescription_localized', 'job.id', 'begin', 'end', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'job.executor', 'job.company_id', 'company.name', 'company.logo', 'company.ic', 'company.enabled', 'schedule', 'schedule_type', 'job.runtemplate_id', 'runtemplate.name AS runtemplate_name', 'runtemplate.note AS runtemplate_note', 'runtemplate.interv AS runtemplate_interv', 'runtemplate.cron AS runtemplate_cron', 'runtemplate.last_schedule AS runtemplate_last_schedule', 'runtemplate.next_schedule AS runtemplate_next_schedule', 'runtemplate.delay AS runtemplate_delay', 'schedule.id AS schedule_id'], true)
             ->leftJoin('apps ON apps.id = job.app_id')
             ->leftJoin('app_translations ON app_translations.app_id = apps.id AND app_translations.lang = ?', $currentLang)
             ->leftJoin('company ON company.id = job.company_id')
             ->leftJoin('user ON user.id = job.launched_by')
-            ->leftJoin('runtemplate ON runtemplate.id = job.runtemplate_id');
+            ->leftJoin('runtemplate ON runtemplate.id = job.runtemplate_id')
+            ->leftJoin('schedule ON schedule.job = job.id');
 
         // Apply special filters based on filterType
         if (!empty($this->filterType)) {
@@ -196,8 +211,12 @@ class CompanyJobLister extends CompanyJob
 
         // Set row background color based on job status
         // Check if job is scheduled (not yet started)
-        if (empty($dataRowRaw['begin']) && !empty($dataRowRaw['schedule'])) {
+        $isScheduled = !empty($dataRowRaw['schedule_id']);
+        if (empty($dataRowRaw['begin']) && $isScheduled) {
             $dataRowRaw['DT_RowClass'] = 'job-scheduled';
+        } elseif (empty($dataRowRaw['begin']) && !empty($dataRowRaw['schedule'])) {
+            // Orphaned job - scheduled but no schedule entry
+            $dataRowRaw['DT_RowClass'] = 'job-orphaned bg-warning';
         } else {
             // Set row background color based on exit code for executed jobs
             switch ($exitCode) {
@@ -295,10 +314,23 @@ class CompanyJobLister extends CompanyJob
                 try {
                     $scheduleTime = new \DateTime($dataRowRaw['schedule']);
                     $relativeTime = self::getRelativeTime($scheduleTime);
+                    
+                    // Check if job is in queue (has schedule_id)
+                    $queueInfo = '';
+                    if ($isScheduled && isset($this->scheduledCounts[$jobId])) {
+                        $queuePosition = $this->scheduledCounts[$jobId];
+                        $totalInQueue = count($this->scheduledCounts);
+                        $queueInfo = sprintf(' <span class="badge badge-info" style="font-size: 0.7em;">#%d/%d</span>', $queuePosition, $totalInQueue);
+                    } elseif (!$isScheduled) {
+                        // Orphaned - show warning badge
+                        $queueInfo = ' <span class="badge badge-warning" style="font-size: 0.7em;">⚠️ orphaned</span>';
+                    }
+                    
                     $dataRowRaw['begin'] = sprintf(
-                        '💣 <span title="%s" style="font-size: 0.85em; white-space: nowrap;">%s</span>',
+                        '💣 <span title="%s" style="font-size: 0.85em; white-space: nowrap;">%s</span>%s',
                         htmlspecialchars($dataRowRaw['schedule']),
-                        htmlspecialchars($relativeTime)
+                        htmlspecialchars($relativeTime),
+                        $queueInfo
                     );
                 } catch (\Exception $e) {
                     $dataRowRaw['begin'] = '💣 <span style="font-size: 0.85em;">'.htmlspecialchars($dataRowRaw['schedule']).'</span>';
@@ -309,12 +341,9 @@ class CompanyJobLister extends CompanyJob
         }
 
         // Format Launcher column with interval/cron information
-        $executorImg = !empty($dataRowRaw['executor']) ? sprintf(
-            '<img src="images/executor/%s.svg" height="20" alt="%s" title="%s" style="vertical-align: middle; margin-right: 4px;">',
-            htmlspecialchars($dataRowRaw['executor']),
-            htmlspecialchars($dataRowRaw['executor']),
-            htmlspecialchars($dataRowRaw['executor']),
-        ) : '';
+        $executorImg = !empty($dataRowRaw['executor']) 
+            ? (new \MultiFlexi\Ui\ExecutorImage($dataRowRaw['executor'], ['height' => 20, 'style' => 'vertical-align: middle; margin-right: 4px;']))->__toString()
+            : '';
 
         // Determine launcher info
         if (!empty($dataRowRaw['launched_by']) && !empty($dataRowRaw['login'])) {
