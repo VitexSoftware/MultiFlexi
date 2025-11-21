@@ -156,8 +156,20 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
 
                     // Serial number
                     if (isset($x509['serialNumberHex'])) {
+                        $serialHex = $x509['serialNumberHex'];
+                        $serialDec = isset($x509['serialNumber']) ? $x509['serialNumber'] : hexdec($serialHex);
+                        
                         $technicalList->addItem(new \Ease\Html\DtTag(_('Serial Number'), ['class' => 'col-sm-4']));
-                        $technicalList->addItem(new \Ease\Html\DdTag(new \Ease\Html\SmallTag($x509['serialNumberHex'], ['class' => 'font-monospace']), ['class' => 'col-sm-8']));
+                        $technicalList->addItem(new \Ease\Html\DdTag([
+                            new \Ease\Html\DivTag([
+                                new \Ease\Html\SmallTag('HEX: ', ['class' => 'text-muted']),
+                                new \Ease\Html\SmallTag($serialHex, ['class' => 'font-monospace']),
+                            ]),
+                            new \Ease\Html\DivTag([
+                                new \Ease\Html\SmallTag('DEC: ', ['class' => 'text-muted']),
+                                new \Ease\Html\SmallTag(new \Ease\Html\StrongTag((string)$serialDec), ['class' => 'font-monospace']),
+                            ]),
+                        ], ['class' => 'col-sm-8']));
                     }
 
                     // Signature algorithm
