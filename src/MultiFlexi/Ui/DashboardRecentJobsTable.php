@@ -39,8 +39,8 @@ class DashboardRecentJobsTable extends \Ease\Html\DivTag
             $scheduledCounts = [];
             $scheduler = new \MultiFlexi\Scheduler();
             $queueItems = $scheduler->listingQuery()
-                ->select('job, after')
-                ->orderBy('after ASC')
+                ->select('schedule.job, schedule.after')
+                ->orderBy('schedule.after ASC')
                 ->fetchAll();
             
             foreach ($queueItems as $index => $item) {
