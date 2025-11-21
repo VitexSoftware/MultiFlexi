@@ -205,8 +205,8 @@ if ($nextJobId) {
 
 // Delete button with confirmation - using SecureForm for CSRF protection
 $deleteForm = new \MultiFlexi\Ui\SecureForm(['method' => 'POST', 'action' => 'job.php?id='.$jobID]);
-$deleteForm->addInput(new \Ease\Html\InputHiddenTag('action', 'delete'));
-$deleteForm->addInput(new \Ease\Html\InputHiddenTag('confirm_delete', 'yes'));
+$deleteForm->addItem(new \Ease\Html\InputHiddenTag('action', 'delete'));
+$deleteForm->addItem(new \Ease\Html\InputHiddenTag('confirm_delete', 'yes'));
 $deleteButton = new \Ease\TWB4\SubmitButton('🗑️ '._('Delete'), 'danger btn-lg btn-block', ['onclick' => 'return confirm("'.htmlspecialchars(_('Are you sure you want to delete this job? This action cannot be undone.')).'");']);
 $deleteForm->addItem($deleteButton);
 
