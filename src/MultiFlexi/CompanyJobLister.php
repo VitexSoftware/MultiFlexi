@@ -78,7 +78,7 @@ class CompanyJobLister extends CompanyJob
      */
     public function getColumns()
     {
-        return ['id', 'company_id', 'app_id', 'env', 'exitcode', 'launched_by', 'begin', 'end', 'executor', 'schedule', 'schedule_type', 'runtemplate_id', 'schedule_id'];
+        return ['id', 'company_id', 'app_id', 'env', 'exitcode', 'launched_by', 'begin', 'end', 'executor', 'schedule', 'schedule_type', 'runtemplate_id'];
     }
 
     /**
@@ -148,8 +148,11 @@ class CompanyJobLister extends CompanyJob
         $currentLang = substr(\Ease\Locale::$localeUsed ?? 'en_US', 0, 2);
         
         // Build queue position map for all scheduled jobs
-        $scheduler = new \MultiFlexi\Job();
-        $scheduledJobs = $scheduler->listingQuery()->select('job, after')->orderBy('after ASC')->fetchAll();
+        $scheduler = new \MultiFlexi\Scheduler();
+        $scheduledJobsQuery = $scheduler->listingQuery()->select('schedule.job, schedule.after')->orderBy('schedule.after ASC');
+        // Disable smart join to prevent FluentPDO from trying to auto-join on schedule_id
+        $scheduledJobsQuery->disableSmartJoin();
+        $scheduledJobs = $scheduledJobsQuery->fetchAll();
         $this->scheduledCounts = [];
         $position = 1;
         foreach ($scheduledJobs as $scheduledJob) {
