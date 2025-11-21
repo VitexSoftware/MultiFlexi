@@ -148,6 +148,7 @@ if (WebPage::singleton()->isPosted()) {
 
 WebPage::singleton()->addItem(new PageTop($runTemplate->getRecordName().' '._('Configuration')));
 
+// Add panels
 $appPanel = new ApplicationPanel($app, new RunTemplatePanel($runTemplate));
 
 WebPage::singleton()->container->addItem(new CompanyPanel($companies, $appPanel));
