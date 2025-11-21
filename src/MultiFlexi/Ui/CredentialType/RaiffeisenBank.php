@@ -96,23 +96,115 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
                         $progressColor = 'bg-warning';
                     }
 
-                    $this->addItem([
-                        new \Ease\Html\DivTag([
-                            new \Ease\Html\StrongTag(_('Issued: ')),
-                            $issueDate->format('Y-m-d H:i:s'),
-                            ' (',
-                            new \Ease\Html\Widgets\LiveAge($issueDate),
-                            ')',
-                        ], ['class' => 'mb-2']),
-                        new \Ease\TWB4\ProgressBar($percent, _('Certificate validity remaining: ').$percent.'%', $progressColor, ['class' => 'mb-2']),
-                        new \Ease\Html\DivTag([
-                            new \Ease\Html\StrongTag(_('Expires: ')),
-                            $expiryDate->format('Y-m-d H:i:s'),
-                            ' (',
-                            new \Ease\Html\Widgets\LiveAge($expiryDate),
-                            ')',
-                        ], ['class' => 'mb-2']),
-                    ]);
+                    // Create certificate info panel
+                    $certPanel = new \Ease\TWB4\Panel(_('Certificate Information'), 'default');
+
+                    // Subject (Certificate holder) information
+                    if (isset($x509['subject'])) {
+                        $subjectDiv = new \Ease\Html\DivTag(null, ['class' => 'mb-3']);
+                        $subjectDiv->addItem(new \Ease\Html\H5Tag('📄 '._('Certificate Holder')));
+                        $subjectList = new \Ease\Html\DlTag(null, ['class' => 'row']);
+
+                        if (isset($x509['subject']['CN'])) {
+                            $subjectList->addItem(new \Ease\Html\DtTag(_('Common Name (CN)'), ['class' => 'col-sm-4']));
+                            $subjectList->addItem(new \Ease\Html\DdTag($x509['subject']['CN'], ['class' => 'col-sm-8']));
+                        }
+                        if (isset($x509['subject']['O'])) {
+                            $subjectList->addItem(new \Ease\Html\DtTag(_('Organization (O)'), ['class' => 'col-sm-4']));
+                            $subjectList->addItem(new \Ease\Html\DdTag($x509['subject']['O'], ['class' => 'col-sm-8']));
+                        }
+                        if (isset($x509['subject']['organizationIdentifier'])) {
+                            $subjectList->addItem(new \Ease\Html\DtTag(_('Organization ID'), ['class' => 'col-sm-4']));
+                            $subjectList->addItem(new \Ease\Html\DdTag($x509['subject']['organizationIdentifier'], ['class' => 'col-sm-8']));
+                        }
+
+                        $subjectDiv->addItem($subjectList);
+                        $certPanel->addItem($subjectDiv);
+                    }
+
+                    // Issuer information
+                    if (isset($x509['issuer'])) {
+                        $issuerDiv = new \Ease\Html\DivTag(null, ['class' => 'mb-3']);
+                        $issuerDiv->addItem(new \Ease\Html\H5Tag('🏦 '._('Issuer')));
+                        $issuerList = new \Ease\Html\DlTag(null, ['class' => 'row']);
+
+                        if (isset($x509['issuer']['CN'])) {
+                            $issuerList->addItem(new \Ease\Html\DtTag(_('Common Name (CN)'), ['class' => 'col-sm-4']));
+                            $issuerList->addItem(new \Ease\Html\DdTag($x509['issuer']['CN'], ['class' => 'col-sm-8']));
+                        }
+                        if (isset($x509['issuer']['O'])) {
+                            $issuerList->addItem(new \Ease\Html\DtTag(_('Organization (O)'), ['class' => 'col-sm-4']));
+                            $issuerList->addItem(new \Ease\Html\DdTag($x509['issuer']['O'], ['class' => 'col-sm-8']));
+                        }
+                        if (isset($x509['issuer']['L'])) {
+                            $issuerList->addItem(new \Ease\Html\DtTag(_('Location (L)'), ['class' => 'col-sm-4']));
+                            $issuerList->addItem(new \Ease\Html\DdTag($x509['issuer']['L'], ['class' => 'col-sm-8']));
+                        }
+                        if (isset($x509['issuer']['C'])) {
+                            $issuerList->addItem(new \Ease\Html\DtTag(_('Country (C)'), ['class' => 'col-sm-4']));
+                            $issuerList->addItem(new \Ease\Html\DdTag($x509['issuer']['C'], ['class' => 'col-sm-8']));
+                        }
+
+                        $issuerDiv->addItem($issuerList);
+                        $certPanel->addItem($issuerDiv);
+                    }
+
+                    // Validity and technical information
+                    $technicalDiv = new \Ease\Html\DivTag(null, ['class' => 'mb-3']);
+                    $technicalDiv->addItem(new \Ease\Html\H5Tag('🔐 '._('Technical Details')));
+                    $technicalList = new \Ease\Html\DlTag(null, ['class' => 'row']);
+
+                    // Serial number
+                    if (isset($x509['serialNumberHex'])) {
+                        $technicalList->addItem(new \Ease\Html\DtTag(_('Serial Number'), ['class' => 'col-sm-4']));
+                        $technicalList->addItem(new \Ease\Html\DdTag(new \Ease\Html\SmallTag($x509['serialNumberHex'], ['class' => 'font-monospace']), ['class' => 'col-sm-8']));
+                    }
+
+                    // Signature algorithm
+                    if (isset($x509['signatureTypeLN'])) {
+                        $technicalList->addItem(new \Ease\Html\DtTag(_('Signature Algorithm'), ['class' => 'col-sm-4']));
+                        $technicalList->addItem(new \Ease\Html\DdTag($x509['signatureTypeLN'], ['class' => 'col-sm-8']));
+                    }
+
+                    // Version
+                    if (isset($x509['version'])) {
+                        $technicalList->addItem(new \Ease\Html\DtTag(_('Version'), ['class' => 'col-sm-4']));
+                        $technicalList->addItem(new \Ease\Html\DdTag('v'.($x509['version'] + 1), ['class' => 'col-sm-8']));
+                    }
+
+                    $technicalDiv->addItem($technicalList);
+                    $certPanel->addItem($technicalDiv);
+
+                    // Validity period
+                    $validityDiv = new \Ease\Html\DivTag(null, ['class' => 'mb-2']);
+                    $validityDiv->addItem(new \Ease\Html\H5Tag('📅 '._('Validity Period')));
+
+                    $validityDiv->addItem(new \Ease\Html\DivTag([
+                        new \Ease\Html\StrongTag(_('Issued: ')),
+                        $issueDate->format('Y-m-d H:i:s'),
+                        ' (',
+                        new \Ease\Html\Widgets\LiveAge($issueDate),
+                        ')',
+                    ], ['class' => 'mb-2']));
+
+                    $validityDiv->addItem(new \Ease\TWB4\ProgressBar(
+                        $percent,
+                        _('Certificate validity remaining: ').$percent.'%',
+                        $progressColor,
+                        ['class' => 'mb-2']
+                    ));
+
+                    $validityDiv->addItem(new \Ease\Html\DivTag([
+                        new \Ease\Html\StrongTag(_('Expires: ')),
+                        $expiryDate->format('Y-m-d H:i:s'),
+                        ' (',
+                        new \Ease\Html\Widgets\LiveAge($expiryDate),
+                        ')',
+                    ], ['class' => 'mb-2']));
+
+                    $certPanel->addItem($validityDiv);
+
+                    $this->addItem($certPanel);
                 } elseif ($errorMessage) {
                     $this->addItem(new \Ease\TWB4\Alert('danger', $errorMessage));
                 } else {
@@ -157,7 +249,7 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
                 ]),
                 new \Ease\Html\SmallTag([
                     _('Certificate fingerprint: '),
-                    new \Ease\Html\CodeTag($certFingerprint),
+                    new \Ease\Html\SpanTag($certFingerprint, ['class' => 'font-monospace']),
                 ], ['class' => 'text-muted']),
             ]));
         } elseif ($certFingerprint) {
