@@ -325,8 +325,8 @@ class CompanyJobLister extends CompanyJob
                         $totalInQueue = count($this->scheduledCounts);
                         $queueInfo = sprintf(' <span class="badge badge-info" style="font-size: 0.7em;">#%d/%d</span>', $queuePosition, $totalInQueue);
                     } elseif (!$isScheduled) {
-                        // Orphaned - show warning badge
-                        $queueInfo = ' <span class="badge badge-warning" style="font-size: 0.7em;">⚠️ orphaned</span>';
+                        // Orphaned - show clickable warning badge linking to reschedule page
+                        $queueInfo = sprintf(' <a href="reschedule.php?job_id=%d" class="badge badge-warning" style="font-size: 0.7em; text-decoration: none;" title="%s">⚠️ orphaned</a>', $jobId, htmlspecialchars(_('Click to re-schedule this job')));
                     }
                     
                     $dataRowRaw['begin'] = sprintf(
