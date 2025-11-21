@@ -79,6 +79,24 @@ MultiFlexi tracks which user scheduled each job for accountability:
 - 🖥️ CLI users shown with secondary badge and link to auto-created profile
 - User full name displayed if available, otherwise username
 
+### Queue Position Display
+
+Scheduled jobs display their current position in the execution queue:
+
+**Visual Indicators:**
+- **Scheduled Jobs**: Blue badge showing position (#3/10 means 3rd out of 10 jobs)
+- **Orphaned Jobs**: Warning badge (⚠️ orphaned) for jobs without schedule entry
+
+**How it Works:**
+1. `CompanyJobLister` and `DashboardRecentJobsTable` query all scheduled jobs ordered by `schedule.after ASC`
+2. Build position map: `$scheduledCounts[$jobId] = $position`
+3. Display format: "💣 in 5 minutes #3/10" (scheduled time + queue position)
+
+**Code Locations:**
+- `CompanyJobLister::addSelectizeValues()`: Queue position calculation
+- `CompanyJobLister::completeDataRow()`: Display logic with badges
+- `DashboardRecentJobsTable`: Status badge with queue info
+
 **Code Locations:**
 - Core: `php-vitexsoftware-multiflexi-core/src/MultiFlexi/Job.php` (newJob method)
 - CLI: `multiflexi-cli/src/multiflexi-cli.php` (UnixUser instantiation)
