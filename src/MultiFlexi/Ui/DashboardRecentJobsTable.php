@@ -37,12 +37,13 @@ class DashboardRecentJobsTable extends \Ease\Html\DivTag
 
             $recentJobs = $jobber->getFluentPDO()
                 ->from('job')
-                ->select('job.id, job.begin, job.end, job.exitcode, job.app_id, job.company_id, job.runtemplate_id, job.launched_by, apps.name as app_name, company.name as company_name, runtemplate.name as runtemplate_name, user.login as user_login, user.enabled as user_enabled, user.firstname, user.lastname')
+                ->select('job.id, job.begin, job.end, job.exitcode, job.app_id, job.company_id, job.runtemplate_id, job.launched_by, job.schedule, apps.name as app_name, company.name as company_name, runtemplate.name as runtemplate_name, user.login as user_login, user.enabled as user_enabled, user.firstname, user.lastname, schedule.id as schedule_id, schedule.after as schedule_after')
                 ->leftJoin('apps ON apps.id = job.app_id')
                 ->leftJoin('company ON company.id = job.company_id')
                 ->leftJoin('runtemplate ON runtemplate.id = job.runtemplate_id')
                 ->leftJoin('user ON user.id = job.launched_by')
-                ->orderBy('job.begin DESC')
+                ->leftJoin('schedule ON schedule.job = job.id')
+                ->orderBy('job.id DESC')
                 ->limit(20)
                 ->fetchAll();
 
@@ -57,7 +58,14 @@ class DashboardRecentJobsTable extends \Ease\Html\DivTag
                         if ($job['begin'] && !$job['end']) {
                             $statusBadge = new \Ease\TWB4\Badge('primary', '▶️ '._('Running'));
                         } else {
-                            $statusBadge = new \Ease\TWB4\Badge('secondary', '⏳ '._('Pending'));
+                            // Job not started yet - check if scheduled
+                            if ($job['schedule_id']) {
+                                // Has schedule entry - waiting in queue
+                                $statusBadge = new \Ease\TWB4\Badge('info', '📅 '._('Scheduled'));
+                            } else {
+                                // No schedule entry - orphaned job (queue was cleared)
+                                $statusBadge = new \Ease\TWB4\Badge('warning', '⚠️ '._('Orphaned'));
+                            }
                         }
                     } elseif ((int) $job['exitcode'] === 0) {
                         $statusBadge = new \Ease\TWB4\Badge('success', '✓ '._('Success'));
