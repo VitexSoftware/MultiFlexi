@@ -51,27 +51,6 @@ $runtemplatesHeader->addColumn(6, [
         'success'
     ),
     '&nbsp;',
-    new \Ease\Html\ButtonTag(
-        '☑️ '._('Select All'),
-        [
-            'id' => 'selectAllBtn',
-            'class' => 'btn btn-info',
-            'type' => 'button',
-            'title' => _('Select all visible RunTemplates')
-        ]
-    ),
-    '&nbsp;',
-    new \Ease\Html\ButtonTag(
-        '☐ '._('Clear Selection'),
-        [
-            'id' => 'clearSelectionBtn',
-            'class' => 'btn btn-secondary',
-            'type' => 'button',
-            'style' => 'display: none;',
-            'title' => _('Clear all selected RunTemplates')
-        ]
-    ),
-    '&nbsp;',
     new \Ease\Html\DivTag(
         [
             new \Ease\Html\ButtonTag(
@@ -240,6 +219,37 @@ EOD.$companer->getMyKey().<<<'EOD'
 EOD.$objectName.<<<'EOD'
 ').DataTable();
         
+        // Add custom buttons to DataTables button group
+        new $.fn.dataTable.Buttons(table, {
+            buttons: [
+                {
+                    text: '☑️ Select All',
+                    className: 'btn-info',
+                    action: function(e, dt, node, config) {
+                        selectAllVisibleRows();
+                    }
+                },
+                {
+                    text: '☐ Clear Selection',
+                    className: 'btn-secondary',
+                    attr: {
+                        id: 'clearSelectionBtn'
+                    },
+                    init: function(dt, node, config) {
+                        $(node).hide();
+                    },
+                    action: function(e, dt, node, config) {
+                        clearAllSelection();
+                    }
+                }
+            ]
+        });
+        
+        // Insert buttons at the beginning of the buttons container
+        table.buttons(1, null).container().prependTo($('#
+EOD.$objectName.<<<'EOD'
+_wrapper .dt-buttons'));
+        
         // Initialize popover for bulk actions button
         $('#bulkActionsBtn').popover();
         
@@ -307,18 +317,6 @@ EOD.$objectName.<<<'EOD'
             if (selectedRows.length === 0) return;
             
             showBulkToggleModal();
-        });
-        
-        // Select All button
-        $('#selectAllBtn').on('click', function(e) {
-            e.preventDefault();
-            selectAllVisibleRows();
-        });
-        
-        // Clear Selection button
-        $('#clearSelectionBtn').on('click', function(e) {
-            e.preventDefault();
-            clearAllSelection();
         });
     });
     
