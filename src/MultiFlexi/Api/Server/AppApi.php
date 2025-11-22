@@ -97,7 +97,7 @@ class AppApi extends \MultiFlexi\Api\Server\AbstractAppApi
                 break;
         }
 
-        return DefaultApi::prepareResponse($response, $appData, $suffix, 'apps', 'application');
+        return DefaultApi::prepareResponse($response, $appData, $suffix, null, 'application');
     }
 
     /**
@@ -131,7 +131,7 @@ class AppApi extends \MultiFlexi\Api\Server\AbstractAppApi
             }
         }
 
-        return DefaultApi::prepareResponse($response, $appsList, $suffix, 'apps', 'application');
+        return DefaultApi::prepareResponse($response, $appsList, $suffix, null, 'application');
     }
 
     /**
