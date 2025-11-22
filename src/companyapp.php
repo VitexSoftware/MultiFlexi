@@ -51,6 +51,27 @@ $runtemplatesHeader->addColumn(6, [
         'success'
     ),
     '&nbsp;',
+    new \Ease\Html\ButtonTag(
+        '☑️ '._('Select All'),
+        [
+            'id' => 'selectAllBtn',
+            'class' => 'btn btn-info',
+            'type' => 'button',
+            'title' => _('Select all visible RunTemplates')
+        ]
+    ),
+    '&nbsp;',
+    new \Ease\Html\ButtonTag(
+        '☐ '._('Clear Selection'),
+        [
+            'id' => 'clearSelectionBtn',
+            'class' => 'btn btn-secondary',
+            'type' => 'button',
+            'style' => 'display: none;',
+            'title' => _('Clear all selected RunTemplates')
+        ]
+    ),
+    '&nbsp;',
     new \Ease\Html\DivTag(
         [
             new \Ease\Html\ButtonTag(
@@ -287,20 +308,38 @@ EOD.$objectName.<<<'EOD'
             
             showBulkToggleModal();
         });
+        
+        // Select All button
+        $('#selectAllBtn').on('click', function(e) {
+            e.preventDefault();
+            selectAllVisibleRows();
+        });
+        
+        // Clear Selection button
+        $('#clearSelectionBtn').on('click', function(e) {
+            e.preventDefault();
+            clearAllSelection();
+        });
     });
     
     function updateBulkActionsButton() {
         var $button = $('#bulkActionsBtn');
+        var $clearBtn = $('#clearSelectionBtn');
+        
         if (selectedRows.length > 0) {
             $button.prop('disabled', false);
             $button.html('⚙️ ' + selectedRows.length + ' selected');
             // Hide popover when button is active
             $button.popover('disable');
+            // Show clear selection button
+            $clearBtn.show();
         } else {
             $button.prop('disabled', true);
             $button.html('⚙️ Bulk Actions');
             // Re-enable popover when button is disabled
             $button.popover('enable');
+            // Hide clear selection button
+            $clearBtn.hide();
         }
     }
     
@@ -324,6 +363,41 @@ EOD.$objectName.<<<'EOD'
                 $row.removeClass('selected');
             }
         });
+    }
+    
+    function selectAllVisibleRows() {
+        // Select all currently visible rows in the DataTable
+        table.rows({search: 'applied'}).every(function() {
+            var data = this.data();
+            if (!data) return;
+            
+            // Extract RunTemplate ID from the first column
+            var idMatch = data.id.match(/#(\d+)/);
+            if (!idMatch) return;
+            
+            var rtId = parseInt(idMatch[1]);
+            var $row = $(this.node());
+            
+            // Add to selection if not already selected
+            if (selectedRows.indexOf(rtId) === -1) {
+                selectedRows.push(rtId);
+            }
+            $row.addClass('selected');
+        });
+        
+        updateBulkActionsButton();
+    }
+    
+    function clearAllSelection() {
+        // Clear all selected rows
+        selectedRows = [];
+        
+        // Remove selected class from all rows
+        table.rows().every(function() {
+            $(this.node()).removeClass('selected');
+        });
+        
+        updateBulkActionsButton();
     }
     
     function showBulkReconfigureModal() {
