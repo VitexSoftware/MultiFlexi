@@ -46,6 +46,44 @@ class AppApi extends \MultiFlexi\Api\Server\AbstractAppApi
     {
         $this->engine->loadFromSQL($appId);
         $appData = $this->engine->getData();
+        
+        // Add environment configuration fields
+        $conffield = new \MultiFlexi\Conffield();
+        $envFields = $conffield->appConfigs($appId);
+        $appData['environment'] = [];
+        foreach ($envFields as $keyname => $fieldData) {
+            $appData['environment'][$keyname] = [
+                'type' => $fieldData['type'],
+                'description' => $fieldData['description'],
+                'defval' => $fieldData['defval'],
+                'required' => (bool) $fieldData['required'],
+            ];
+        }
+        
+        // Add exit codes by querying directly
+        $appData['exitCodes'] = [];
+        $exitCodesEngine = new \MultiFlexi\DBEngine();
+        $exitCodesEngine->myTable = 'app_exit_codes';
+        $exitCodesData = $exitCodesEngine->listingQuery()
+            ->where('app_id', $appId)
+            ->orderBy('exit_code')
+            ->orderBy('lang')
+            ->fetchAll();
+        
+        foreach ($exitCodesData as $exitCodeRow) {
+            $code = (string) $exitCodeRow['exit_code'];
+            $lang = $exitCodeRow['lang'];
+            
+            if (!isset($appData['exitCodes'][$code])) {
+                $appData['exitCodes'][$code] = [
+                    'severity' => $exitCodeRow['severity'],
+                    'retry' => (bool) $exitCodeRow['retry'],
+                    'description' => [],
+                ];
+            }
+            
+            $appData['exitCodes'][$code]['description'][$lang] = $exitCodeRow['description'];
+        }
 
         switch ($suffix) {
             case 'html':
