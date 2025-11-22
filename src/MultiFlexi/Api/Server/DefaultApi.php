@@ -273,16 +273,26 @@ class DefaultApi extends AbstractDefaultApi
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public static function prepareResponse($response, $data, $suffix, $evidence = 'data', $subitem = 'item')
+    public static function prepareResponse($response, $data, $suffix, $evidence = null, $subitem = 'item')
     {
         switch ($suffix) {
             case 'json':
-                $response->getBody()->write(json_encode([$evidence => $data], \JSON_UNESCAPED_UNICODE));
+                // If evidence is null or empty, return data directly without wrapper
+                if (empty($evidence)) {
+                    $response->getBody()->write(json_encode($data, \JSON_UNESCAPED_UNICODE));
+                } else {
+                    $response->getBody()->write(json_encode([$evidence => $data], \JSON_UNESCAPED_UNICODE));
+                }
                 $responseFinal = $response->withHeader('Content-type', 'application/json');
 
                 break;
             case 'yaml':
-                $response->getBody()->write(\yaml_emit([$evidence => $data], \JSON_UNESCAPED_UNICODE));
+                // If evidence is null or empty, return data directly without wrapper
+                if (empty($evidence)) {
+                    $response->getBody()->write(\yaml_emit($data, \JSON_UNESCAPED_UNICODE));
+                } else {
+                    $response->getBody()->write(\yaml_emit([$evidence => $data], \JSON_UNESCAPED_UNICODE));
+                }
                 $responseFinal = $response->withHeader('Content-type', 'text/yaml');
 
                 break;
@@ -291,7 +301,7 @@ class DefaultApi extends AbstractDefaultApi
                     $xmlData[is_numeric($id) ? '__'.$id.'__' : $id] = $row;
                 }
 
-                $xmlRaw = self::arrayToXml($xmlData, '<'.$evidence.'/>');
+                $xmlRaw = self::arrayToXml($xmlData, empty($evidence) ? '<root/>' : '<'.$evidence.'/>');
                 $response->getBody()->write(preg_replace('/__\d+__/', $subitem, $xmlRaw));
 
                 $responseFinal = $response->withHeader('Content-type', 'application/xml');

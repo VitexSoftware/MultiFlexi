@@ -203,18 +203,9 @@ class CompanyAppRunTemplateLister extends RunTemplate
 
     public function addSelectizeValues($query)
     {
-        // Build WHERE clause for subqueries with company and app filters
-        $jobWhereConditions = ['job.runtemplate_id = runtemplate.id'];
-        
-        if ($this->companyId !== null) {
-            $jobWhereConditions[] = 'job.company_id = ' . (int) $this->companyId;
-        }
-        
-        if ($this->appId !== null) {
-            $jobWhereConditions[] = 'job.app_id = ' . (int) $this->appId;
-        }
-        
-        $jobWhere = implode(' AND ', $jobWhereConditions);
+        // Subqueries must correlate with each runtemplate row's company_id and app_id
+        // This ensures we get the correct jobs for each specific runtemplate
+        $jobWhere = 'job.runtemplate_id = runtemplate.id AND job.company_id = runtemplate.company_id AND job.app_id = runtemplate.app_id';
         
         // Add subqueries for last executed and last scheduled job
         $query->select([

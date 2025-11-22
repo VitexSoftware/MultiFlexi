@@ -102,6 +102,130 @@ Scheduled jobs display their current position in the execution queue:
 - CLI: `multiflexi-cli/src/multiflexi-cli.php` (UnixUser instantiation)
 - UI: `src/MultiFlexi/Ui/JobInfo.php`, `JobHistoryTable.php`, `DashboardRecentJobsTable.php`
 
+## Database Access
+
+### MySQL Database Connection
+
+**IMPORTANT:** Always use `sudo mysql` for direct database access to avoid repeated authentication attempts that waste AI credits.
+
+```bash
+# Access MultiFlexi database
+sudo mysql
+
+# Direct query execution
+sudo mysql -e "USE multiflexi; DESCRIBE tablename;"
+sudo mysql -e "USE multiflexi; SELECT * FROM user LIMIT 10;"
+
+# Export database structure
+sudo mysql multiflexi -e "SHOW CREATE TABLE runtemplate\G"
+```
+
+**Why sudo mysql:**
+- No password required (uses Unix socket authentication)
+- Faster and more reliable than password-based authentication
+- Avoids wasting resources on repeated connection attempts
+- Standard approach for local MySQL administration on Debian/Ubuntu
+
+## API Access and Authentication
+
+### API Authentication Requirements
+
+The MultiFlexi REST API **requires authentication** for all endpoints (except `/ping` and `/status`).
+
+**Authentication Methods:**
+1. **HTTP Basic Authentication** with username and password
+2. **Token-based authentication** (OAuth-style tokens)
+3. **Session cookie authentication** (for logged-in users)
+
+**Note:** The API accepts session cookies from logged-in users, so JavaScript code on MultiFlexi pages does not require any special authentication mechanism - it automatically uses the user's existing session.
+
+### User Management
+
+**Create API user via multiflexi-cli:**
+
+```bash
+# Create new user interactively
+multiflexi-cli user:create
+
+# Create user with parameters
+multiflexi-cli user:create --login=apiuser --password=secret --email=api@example.com
+
+# List existing users
+multiflexi-cli user:list
+
+# Generate API token for user
+multiflexi-cli user:token --login=apiuser
+```
+
+### Testing API Endpoints
+
+**Using HTTP Basic Authentication:**
+
+```bash
+# Test with basic auth
+curl -u username:password http://localhost/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/apps.json
+
+# Test specific endpoint
+curl -u username:password http://localhost/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/runtemplate/15.json
+
+# With pretty-printed JSON output
+curl -u username:password http://localhost/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/companies.json | python3 -m json.tool
+```
+
+**Using Token Authentication:**
+
+```bash
+# Get token
+TOKEN=$(curl -s -u username:password http://localhost/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/login.json | jq -r .token)
+
+# Use token in subsequent requests
+curl -H "Authorization: Bearer $TOKEN" http://localhost/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/apps.json
+```
+
+**API Pagination Parameters:**
+
+All list endpoints support pagination:
+- `limit` - Maximum number of results (default: 20, max: 100)
+- `offset` - Number of records to skip (default: 0)
+- `order` - Field to sort by, use `-` prefix for descending (e.g., `-id`)
+
+```bash
+# Get first 10 jobs
+curl -u username:password "http://localhost/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/jobs.json?limit=10"
+
+# Get next 10 jobs (pagination)
+curl -u username:password "http://localhost/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/jobs.json?limit=10&offset=10"
+
+# Get jobs ordered by ID descending
+curl -u username:password "http://localhost/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/jobs.json?limit=10&order=-id"
+```
+
+**Using Session Cookies (JavaScript):**
+
+For JavaScript code running on MultiFlexi web pages, no special authentication is needed:
+
+```javascript
+// Simple fetch - automatically uses session cookie
+fetch('/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/apps.json')
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+// jQuery AJAX - also uses session cookie automatically
+$.ajax({
+  url: '/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/runtemplates.json',
+  method: 'GET',
+  dataType: 'json',
+  success: function(data) {
+    console.log(data);
+  }
+});
+
+// With pagination parameters
+fetch('/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/jobs.json?limit=20&offset=0&order=-id')
+  .then(response => response.json())
+  .then(data => console.log(data));
+```
+
 ## Development Commands
 
 ### Build and Test Commands
@@ -427,6 +551,43 @@ Job rows are color-coded by exit status:
 - Red (bg-danger): Exit code 255 (failure)
 - Blue (bg-primary): Exit code 127
 - Cyan (bg-info): Exit code -1
+
+### Bulk Actions for RunTemplates
+
+The Company-Application page (`src/companyapp.php`) provides bulk operations for managing multiple RunTemplates simultaneously.
+
+**Implementation:**
+- Uses `DBDataTable` with `CompanyAppRunTemplateLister` engine for efficient data handling
+- Row selection via click (excluding link clicks)
+- Dropdown menu "⚙️ Bulk Actions" (disabled until rows selected)
+
+**Available Bulk Actions:**
+
+1. **🔧 Bulk Reconfigure**
+   - Opens modal dialog for mass configuration update
+   - Loads configuration fields from API: `GET /api/VitexSoftware/MultiFlexi/1.0.0/app/{appId}.json`
+   - Allows selection of configuration key and new value
+   - Updates `configuration` table for all selected RunTemplates
+   - Endpoint: `bulk-reconfigure.php` (temporary, will migrate to API)
+
+2. **▶️ Bulk Execute**
+   - Schedules adhoc jobs for all selected RunTemplates
+   - Validates RunTemplate active status
+   - Uses `Job::prepareJob()` with executor "Native"
+   - Endpoint: `bulk-execute.php` (temporary, will migrate to API)
+
+**Future API Migration:**
+
+Both bulk endpoints are temporary implementations in `src/` and will be migrated to the REST API when POST/PUT support is added:
+- `POST /api/VitexSoftware/MultiFlexi/1.0.0/runtemplates/bulk-reconfigure`
+- `POST /api/VitexSoftware/MultiFlexi/1.0.0/runtemplates/bulk-execute`
+
+TODO comments in code mark locations requiring update during migration.
+
+**Code Locations:**
+- Frontend: `src/companyapp.php` (JavaScript for row selection and AJAX calls)
+- Backend: `src/bulk-reconfigure.php`, `src/bulk-execute.php`
+- Engine: `src/MultiFlexi/CompanyAppRunTemplateLister.php`
 
 ## Code Quality Standards
 
