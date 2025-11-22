@@ -229,9 +229,9 @@ class CompanyAppRunTemplateLister extends RunTemplate
             "(SELECT job.id FROM job WHERE {$jobWhere} AND job.begin IS NOT NULL ORDER BY job.id DESC LIMIT 1) AS last_executed_job_id",
             "(SELECT job.exitcode FROM job WHERE {$jobWhere} AND job.begin IS NOT NULL ORDER BY job.id DESC LIMIT 1) AS last_executed_job_exitcode",
             "(SELECT job.end FROM job WHERE {$jobWhere} AND job.begin IS NOT NULL ORDER BY job.id DESC LIMIT 1) AS last_executed_job_end",
-            // Last scheduled job (begin is null = not started yet)
-            "(SELECT job.id FROM job WHERE {$jobWhere} AND job.begin IS NULL ORDER BY job.id DESC LIMIT 1) AS last_scheduled_job_id",
-            "(SELECT job.schedule FROM job WHERE {$jobWhere} AND job.begin IS NULL ORDER BY job.id DESC LIMIT 1) AS last_scheduled_job_time",
+            // Last scheduled job (exists in schedule table via schedule.job foreign key)
+            "(SELECT job.id FROM job INNER JOIN schedule ON schedule.job = job.id WHERE {$jobWhere} ORDER BY job.id DESC LIMIT 1) AS last_scheduled_job_id",
+            "(SELECT job.schedule FROM job INNER JOIN schedule ON schedule.job = job.id WHERE {$jobWhere} ORDER BY job.id DESC LIMIT 1) AS last_scheduled_job_time",
         ], true);
 
         // Don't call parent - we've already defined all columns we need
