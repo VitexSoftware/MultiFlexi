@@ -66,7 +66,7 @@ class RuntemplateApi extends AbstractRuntemplateApi
                 break;
         }
 
-        return DefaultApi::prepareResponse($response, $runtemplateData, $suffix, 'runtemplates', 'runtemplate');
+        return DefaultApi::prepareResponse($response, $runtemplateData, $suffix, null, 'runtemplate');
     }
 
     /**
@@ -103,6 +103,65 @@ class RuntemplateApi extends AbstractRuntemplateApi
             $runtemplatesList[$runtemplateId] = $runtemplate;
         }
 
-        return DefaultApi::prepareResponse($response, $runtemplatesList, $suffix, 'runtemplates', 'runtemplate');
+        return DefaultApi::prepareResponse($response, $runtemplatesList, $suffix, null, 'runtemplate');
+    }
+
+    /**
+     * Update RunTemplate by ID.
+     *
+     * POST /runtemplate/{runTemplateId}.{suffix}
+     * Performs partial update - only provided fields are updated.
+     *
+     * @param ServerRequestInterface $request        Request
+     * @param ResponseInterface      $response       Response
+     * @param int                    $runTemplateId  RunTemplate ID from URL
+     * @param string                 $suffix         Response format suffix
+     *
+     * @return ResponseInterface
+     */
+    public function updateRunTemplateById(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        int $runTemplateId,
+        string $suffix
+    ): ResponseInterface {
+        $requestBody = json_decode($request->getBody()->getContents(), true);
+
+        // Validate ID match
+        if (!isset($requestBody['id']) || (int) $requestBody['id'] !== $runTemplateId) {
+            $error = [
+                'error' => 'ID mismatch',
+                'expected' => $runTemplateId,
+                'received' => $requestBody['id'] ?? null,
+            ];
+
+            return DefaultApi::prepareResponse($response->withStatus(400), $error, $suffix);
+        }
+
+        // Load existing RunTemplate
+        $this->engine->loadFromSQL($runTemplateId);
+
+        if (!$this->engine->getMyKey()) {
+            return DefaultApi::prepareResponse($response->withStatus(404), ['error' => 'RunTemplate not found'], $suffix);
+        }
+
+        // Update only provided fields (partial update)
+        unset($requestBody['id']); // Don't update ID itself
+
+        foreach ($requestBody as $key => $value) {
+            $this->engine->setDataValue($key, $value);
+        }
+
+        // Save to database
+        if ($this->engine->dbsync()) {
+            // Return updated data
+            $updatedData = $this->engine->getData();
+            $updatedData['success'] = empty($updatedData['success']) ? '' : unserialize($updatedData['success']);
+            $updatedData['fail'] = empty($updatedData['fail']) ? '' : unserialize($updatedData['fail']);
+
+            return DefaultApi::prepareResponse($response->withStatus(201), $updatedData, $suffix, null, 'runtemplate');
+        }
+
+        return DefaultApi::prepareResponse($response->withStatus(500), ['error' => 'Update failed'], $suffix);
     }
 }
