@@ -468,6 +468,15 @@ EOD.$objectName.<<<'EOD'
         $('body').append(modalHtml);
         $('#bulkReconfigureModal').modal('show');
         
+        // Initialize Selectize with search for configuration key dropdown
+        $('#configKey').selectize({
+            placeholder: '-- Type to search --',
+            allowEmptyOption: true,
+            maxItems: 1,
+            create: false,
+            sortField: 'text'
+        });
+        
         // Bind button click event
         $('#executeBulkReconfigureBtn').on('click', function() {
             executeBulkReconfigure();

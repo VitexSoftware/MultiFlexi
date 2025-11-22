@@ -44,6 +44,9 @@ class CompanyAppRunTemplateLister extends RunTemplate
         } else {
             $this->companyId = (int) $company;
         }
+        
+        // Add to filter array for AJAX requests
+        $this->filter['company_id'] = $this->companyId;
 
         return $this;
     }
@@ -60,6 +63,9 @@ class CompanyAppRunTemplateLister extends RunTemplate
         } else {
             $this->appId = (int) $app;
         }
+        
+        // Add to filter array for AJAX requests
+        $this->filter['app_id'] = $this->appId;
 
         return $this;
     }
@@ -203,9 +209,18 @@ class CompanyAppRunTemplateLister extends RunTemplate
 
     public function addSelectizeValues($query)
     {
-        // Subqueries must correlate with each runtemplate row's company_id and app_id
-        // This ensures we get the correct jobs for each specific runtemplate
-        $jobWhere = 'job.runtemplate_id = runtemplate.id AND job.company_id = runtemplate.company_id AND job.app_id = runtemplate.app_id';
+        // Build WHERE clause for subqueries with company and app filters
+        $jobWhereConditions = ['job.runtemplate_id = runtemplate.id'];
+        
+        if ($this->companyId !== null) {
+            $jobWhereConditions[] = 'job.company_id = ' . (int) $this->companyId;
+        }
+        
+        if ($this->appId !== null) {
+            $jobWhereConditions[] = 'job.app_id = ' . (int) $this->appId;
+        }
+        
+        $jobWhere = implode(' AND ', $jobWhereConditions);
         
         // Add subqueries for last executed and last scheduled job
         $query->select([
