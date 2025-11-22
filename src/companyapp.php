@@ -222,6 +222,11 @@ EOD.$objectName.<<<'EOD'
         // Initialize popover for bulk actions button
         $('#bulkActionsBtn').popover();
         
+        // Restore selection after table redraw
+        table.on('draw', function() {
+            restoreSelection();
+        });
+        
         // Row click handler for selection
         $('#
 EOD.$objectName.<<<'EOD'
@@ -297,6 +302,28 @@ EOD.$objectName.<<<'EOD'
             // Re-enable popover when button is disabled
             $button.popover('enable');
         }
+    }
+    
+    function restoreSelection() {
+        // Restore selected class on rows that are in selectedRows array
+        table.rows().every(function() {
+            var data = this.data();
+            if (!data) return;
+            
+            // Extract RunTemplate ID from the first column
+            var idMatch = data.id.match(/#(\d+)/);
+            if (!idMatch) return;
+            
+            var rtId = parseInt(idMatch[1]);
+            var $row = $(this.node());
+            
+            // Add selected class if this row's ID is in selectedRows
+            if (selectedRows.indexOf(rtId) !== -1) {
+                $row.addClass('selected');
+            } else {
+                $row.removeClass('selected');
+            }
+        });
     }
     
     function showBulkReconfigureModal() {
