@@ -39,7 +39,13 @@ use Slim\Middleware\ErrorMiddleware;
 // Initialize API rate limiter
 if (\Ease\Shared::cfg('API_RATE_LIMITING_ENABLED', true)) {
     try {
-        $pdo = \Ease\Shared::singleton()->pdo();
+        $dsn = \Ease\Shared::cfg('DB_CONNECTION').':host='.\Ease\Shared::cfg('DB_HOST').';port='.\Ease\Shared::cfg('DB_PORT', 3306).';dbname='.\Ease\Shared::cfg('DB_DATABASE').';charset=utf8mb4';
+        $pdo = new \PDO(
+            $dsn,
+            \Ease\Shared::cfg('DB_USERNAME'),
+            \Ease\Shared::cfg('DB_PASSWORD'),
+            [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION],
+        );
         $endpointLimits = [
             '/api/auth*' => ['limit' => 10, 'window' => 300], // 10 requests per 5 minutes for auth
             '/api/export*' => ['limit' => 5, 'window' => 3600], // 5 requests per hour for data export
@@ -103,6 +109,44 @@ $request = $serverRequestCreator->createServerRequestFromGlobals();
 // Get error middleware from container
 // also anti-pattern, of course we know
 $errorMiddleware = $container->get(ErrorMiddleware::class);
+
+// Add custom error handler to convert 405 to 404 for non-existent paths
+$errorMiddleware->setErrorHandler(
+    \Slim\Exception\HttpMethodNotAllowedException::class,
+    function (\Psr\Http\Message\ServerRequestInterface $request, \Throwable $exception, bool $displayErrorDetails) {
+        $response = new \Slim\Psr7\Response();
+        
+        // Detect format suffix from URL
+        $uri = $request->getUri()->getPath();
+        $suffix = 'json'; // default
+        if (preg_match('/\.(json|xml|html)$/', $uri, $matches)) {
+            $suffix = $matches[1];
+        }
+        
+        // Generate response based on suffix
+        switch ($suffix) {
+            case 'html':
+                $content = '<!DOCTYPE html><html><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested resource does not exist.</p><p><a href="javascript:history.back()">Go Back</a></p></body></html>';
+                $contentType = 'text/html';
+                break;
+            case 'xml':
+                $content = '<?xml version="1.0" encoding="UTF-8"?><error><code>404</code><message>The requested resource does not exist</message></error>';
+                $contentType = 'application/xml';
+                break;
+            case 'json':
+            default:
+                $content = json_encode([
+                    'error' => 'Not Found',
+                    'message' => 'The requested resource does not exist',
+                ]);
+                $contentType = 'application/json';
+                break;
+        }
+        
+        $response->getBody()->write($content);
+        return $response->withStatus(404)->withHeader('Content-Type', $contentType);
+    }
+);
 
 // route0 → (unnamed) → /{routes:.*}
 // route1 → listServers → /VitexSoftware/MultiFlexi/1.0.0/servers/
