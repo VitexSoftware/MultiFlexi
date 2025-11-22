@@ -216,7 +216,7 @@ class CompanyAppRunTemplateLister extends RunTemplate
         
         $jobWhere = implode(' AND ', $jobWhereConditions);
         
-        // Add subquery for last job with proper filters
+        // Add subqueries for last executed and last scheduled job
         $query->select([
             'runtemplate.id',
             'runtemplate.active',
@@ -225,8 +225,13 @@ class CompanyAppRunTemplateLister extends RunTemplate
             'runtemplate.success',
             'runtemplate.fail',
             'runtemplate.executor',
-            "(SELECT job.id FROM job WHERE {$jobWhere} ORDER BY job.id DESC LIMIT 1) AS last_job_id",
-            "(SELECT job.exitcode FROM job WHERE {$jobWhere} ORDER BY job.id DESC LIMIT 1) AS last_job_exitcode",
+            // Last executed job (begin is not null)
+            "(SELECT job.id FROM job WHERE {$jobWhere} AND job.begin IS NOT NULL ORDER BY job.id DESC LIMIT 1) AS last_executed_job_id",
+            "(SELECT job.exitcode FROM job WHERE {$jobWhere} AND job.begin IS NOT NULL ORDER BY job.id DESC LIMIT 1) AS last_executed_job_exitcode",
+            "(SELECT job.end FROM job WHERE {$jobWhere} AND job.begin IS NOT NULL ORDER BY job.id DESC LIMIT 1) AS last_executed_job_end",
+            // Last scheduled job (begin is null = not started yet)
+            "(SELECT job.id FROM job WHERE {$jobWhere} AND job.begin IS NULL ORDER BY job.id DESC LIMIT 1) AS last_scheduled_job_id",
+            "(SELECT job.schedule FROM job WHERE {$jobWhere} AND job.begin IS NULL ORDER BY job.id DESC LIMIT 1) AS last_scheduled_job_time",
         ], true);
 
         // Don't call parent - we've already defined all columns we need
@@ -252,15 +257,45 @@ class CompanyAppRunTemplateLister extends RunTemplate
         // Format name as link
         $dataRowRaw['name'] = (string) new \Ease\Html\ATag('runtemplate.php?id='.$numericId, '<strong>'.$dataRowRaw['name'].'</strong>');
 
-        // Format last job exit code
-        if (!empty($dataRowRaw['last_job_id'])) {
-            $exitCodeWidget = new Ui\ExitCode($dataRowRaw['last_job_exitcode']);
-            $dataRowRaw['last_job'] = (string) new \Ease\Html\ATag(
-                'job.php?id='.$dataRowRaw['last_job_id'],
-                '🏁 #'.$dataRowRaw['last_job_id'].' '.$exitCodeWidget
+        // Format last jobs - show executed and/or scheduled
+        $jobParts = [];
+        
+        // Last executed job
+        if (!empty($dataRowRaw['last_executed_job_id'])) {
+            $exitCodeWidget = new Ui\ExitCode($dataRowRaw['last_executed_job_exitcode']);
+            $isRunning = empty($dataRowRaw['last_executed_job_end']);
+            $icon = $isRunning ? '▶️' : '🏁'; // Running or Finished
+            $jobParts[] = (string) new \Ease\Html\ATag(
+                'job.php?id='.$dataRowRaw['last_executed_job_id'],
+                $icon.' #'.$dataRowRaw['last_executed_job_id'].' '.$exitCodeWidget,
+                ['title' => $isRunning ? _('Running') : _('Finished')]
             );
-        } else {
+        }
+        
+        // Last scheduled job (if different from executed)
+        if (!empty($dataRowRaw['last_scheduled_job_id']) && 
+            $dataRowRaw['last_scheduled_job_id'] != ($dataRowRaw['last_executed_job_id'] ?? null)) {
+            try {
+                $scheduleTime = new \DateTime($dataRowRaw['last_scheduled_job_time']);
+                $relativeTime = \MultiFlexi\CompanyJobLister::getRelativeTime($scheduleTime);
+                $jobParts[] = (string) new \Ease\Html\ATag(
+                    'job.php?id='.$dataRowRaw['last_scheduled_job_id'],
+                    '💣 #'.$dataRowRaw['last_scheduled_job_id'],
+                    ['title' => _('Scheduled').': '.$relativeTime]
+                );
+            } catch (\Exception $e) {
+                $jobParts[] = (string) new \Ease\Html\ATag(
+                    'job.php?id='.$dataRowRaw['last_scheduled_job_id'],
+                    '💣 #'.$dataRowRaw['last_scheduled_job_id'],
+                    ['title' => _('Scheduled')]
+                );
+            }
+        }
+        
+        if (empty($jobParts)) {
             $dataRowRaw['last_job'] = '<span style="color: #999; font-style: italic;">'._('No jobs yet').'</span>';
+        } else {
+            $dataRowRaw['last_job'] = implode(' ', $jobParts);
         }
 
         // Format action icons
