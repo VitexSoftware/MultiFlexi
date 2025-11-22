@@ -38,6 +38,20 @@ $class = \Ease\WebPage::getRequestValue('class');
  * @var \MultiFlexi\Engine Data Source
  */
 $engine = new $class();
+
+// Apply filter parameters for CompanyAppRunTemplateLister
+if ($engine instanceof \MultiFlexi\CompanyAppRunTemplateLister) {
+    $companyId = \Ease\WebPage::getRequestValue('company_id', 'int');
+    $appId = \Ease\WebPage::getRequestValue('app_id', 'int');
+    
+    if ($companyId) {
+        $engine->setCompany($companyId);
+    }
+    if ($appId) {
+        $engine->setApp($appId);
+    }
+}
+
 // DataTables PHP library
 // include( './lib/DataTables.php' );
 // if (WebPage::singleton()->getRequestValue('columns')) {
