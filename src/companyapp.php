@@ -424,11 +424,18 @@ EOD.$objectName.<<<'EOD'
             dataType: 'json',
             success: function(response) {
                 if (response.success) {
-                    alert(response.message || 'Successfully updated ' + response.updated + ' RunTemplate(s)');
+                    var message = response.message || 'Successfully updated ' + response.updated + ' RunTemplate(s)';
+                    if (response.failed && response.failed.length > 0) {
+                        message += '\n\nFailed items remain selected for retry.';
+                        // Keep only failed items selected
+                        selectedRows = response.failed;
+                    } else {
+                        // Clear selection if all succeeded
+                        selectedRows = [];
+                    }
+                    alert(message);
                     $('#bulkReconfigureModal').modal('hide');
                     table.ajax.reload();
-                    // Clear selection
-                    selectedRows = [];
                     updateBulkActionsButton();
                 } else {
                     alert('Error: ' + response.error);
@@ -462,13 +469,19 @@ EOD.$objectName.<<<'EOD'
             success: function(response) {
                 if (response.success) {
                     var msg = response.message || 'Successfully scheduled ' + response.scheduled + ' job(s)';
-                    if (response.errors.length > 0) {
+                    if (response.errors && response.errors.length > 0) {
                         msg += '\n\nWarnings:\n' + response.errors.join('\n');
+                    }
+                    if (response.failed && response.failed.length > 0) {
+                        msg += '\n\nFailed items remain selected for retry.';
+                        // Keep only failed items selected
+                        selectedRows = response.failed;
+                    } else {
+                        // Clear selection if all succeeded
+                        selectedRows = [];
                     }
                     alert(msg);
                     table.ajax.reload();
-                    // Clear selection
-                    selectedRows = [];
                     updateBulkActionsButton();
                 } else {
                     alert('Error: ' + response.error + (response.errors ? '\n' + response.errors.join('\n') : ''));
@@ -548,29 +561,36 @@ EOD.$objectName.<<<'EOD'
         $button.prop('disabled', true).text('Processing...');
         
         var completed = 0;
+        var failedIds = [];
         var errors = [];
         var total = selectedRows.length;
+        var currentRows = selectedRows.slice(); // Copy array for iteration
         
         // Process each RunTemplate sequentially
         function processNext(index) {
-            if (index >= selectedRows.length) {
+            if (index >= currentRows.length) {
                 // All done
                 $('#bulkToggleModal').modal('hide');
                 
                 var message = 'Successfully updated ' + completed + ' of ' + total + ' RunTemplate(s)';
                 if (errors.length > 0) {
                     message += '\n\nErrors:\n' + errors.join('\n');
+                    if (failedIds.length > 0) {
+                        message += '\n\nFailed items remain selected for retry.';
+                    }
                 }
                 alert(message);
                 
-                // Reload table and clear selection
+                // Keep only failed items selected
+                selectedRows = failedIds;
+                
+                // Reload table - restoreSelection() will highlight failed items
                 table.ajax.reload();
-                selectedRows = [];
                 updateBulkActionsButton();
                 return;
             }
             
-            var rtId = selectedRows[index];
+            var rtId = currentRows[index];
             
             $.ajax({
                 url: 'api/VitexSoftware/MultiFlexi/1.0.0/runtemplate/' + rtId + '.json',
@@ -593,6 +613,7 @@ EOD.$objectName.<<<'EOD'
                         error += xhr.statusText || 'Unknown error';
                     }
                     errors.push(error);
+                    failedIds.push(rtId); // Keep failed ID for reselection
                     processNext(index + 1);
                 }
             });
