@@ -23,6 +23,9 @@ $appId = WebPage::singleton()->getRequestValue('app_id');
 $companyId = WebPage::singleton()->getRequestValue('company_id');
 $filter = WebPage::singleton()->getRequestValue('filter');
 
+$engine = new \MultiFlexi\CompanyJobLister();
+$objectName = \Ease\Functions::baseClassName($engine);
+
 // Nastavení titulku podle filtru
 $pageTitle = JobFilterToolbar::getPageTitle($filter);
 
@@ -32,44 +35,42 @@ WebPage::singleton()->addItem(new PageTop($pageTitle));
 WebPage::singleton()->container->addItem(new JobFilterToolbar($filter, 'joblist.php'));
 
 // Add custom success row styling
-WebPage::singleton()->addCSS(<<<'CSS'
+WebPage::singleton()->addCSS(<<<CSS
     /* Custom success row styling - lighter green with better contrast */
-    #Molecule_wrapper table.dataTable tbody tr.job-success {
+    #{$objectName}_wrapper table.dataTable tbody tr.job-success {
         background-color: #d4edda !important;
         color: #155724 !important;
     }
-    #Molecule_wrapper table.dataTable tbody tr.job-success:hover {
+    #{$objectName}_wrapper table.dataTable tbody tr.job-success:hover {
         background-color: #c3e6cb !important;
     }
-    #Molecule_wrapper table.dataTable tbody tr.job-success a {
+    #{$objectName}_wrapper table.dataTable tbody tr.job-success a {
         color: #0c5460 !important;
     }
     /* Custom scheduled row styling - light blue for waiting jobs */
-    #Molecule_wrapper table.dataTable tbody tr.job-scheduled {
+    #{$objectName}_wrapper table.dataTable tbody tr.job-scheduled {
         background-color: #d1ecf1 !important;
         color: #0c5460 !important;
     }
-    #Molecule_wrapper table.dataTable tbody tr.job-scheduled:hover {
+    #{$objectName}_wrapper table.dataTable tbody tr.job-scheduled:hover {
         background-color: #bee5eb !important;
     }
-    #Molecule_wrapper table.dataTable tbody tr.job-scheduled a {
+    #{$objectName}_wrapper table.dataTable tbody tr.job-scheduled a {
         color: #004085 !important;
     }
     /* Custom orphaned row styling - yellow warning for jobs without schedule entry */
-    #Molecule_wrapper table.dataTable tbody tr.job-orphaned {
+    #{$objectName}_wrapper table.dataTable tbody tr.job-orphaned {
         background-color: #fff3cd !important;
         color: #856404 !important;
     }
-    #Molecule_wrapper table.dataTable tbody tr.job-orphaned:hover {
+    #{$objectName}_wrapper table.dataTable tbody tr.job-orphaned:hover {
         background-color: #ffe8a1 !important;
     }
-    #Molecule_wrapper table.dataTable tbody tr.job-orphaned a {
+    #{$objectName}_wrapper table.dataTable tbody tr.job-orphaned a {
         color: #533f03 !important;
     }
 CSS);
 
-// Vytvoření engine a aplikace filtru
-$engine = new \MultiFlexi\CompanyJobLister();
 $engine->setCompany($companyId);
 $engine->setApp($appId);
 
