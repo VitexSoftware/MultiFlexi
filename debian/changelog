@@ -1,3 +1,14 @@
+multiflexi (2.2.2) UNRELEASED; urgency=medium
+
+  * Refactor and enhance various components of the MultiFlexi application
+  * Improved formatting and consistency in companyapp.php, companyapps.php, home.php, init.php, job.php, joblist.php, main.php, reschedule.php, schedule.php files.
+  * Added a new ScheduleApi class to handle schedule-related API requests.
+  * Enhanced job polling mechanism in schedule.php for better job completion handling.
+  * Updated JavaScript functions for improved readability and performance.
+  * Fixed minor bugs and improved error handling across multiple files.
+
+ -- vitex <info@vitexsoftware.cz>  Sun, 23 Nov 2025 15:59:05 +0100
+
 multiflexi (2.2.1) unstable; urgency=medium
 
   * Enhanced job listing with filter toolbar
@@ -5,7 +16,7 @@ multiflexi (2.2.1) unstable; urgency=medium
   * UI refinements and code quality improvements
   * PHP 8.2+ compatibility fixes
 
- -- vitex <info@vitexsoftware.cz>  Thu, 21 Nov 2025 02:09:14 +0000
+ -- vitex <info@vitexsoftware.cz>  Sun, 23 Nov 2025 15:58:33 +0100
 
 multiflexi (2.2.0) unstable; urgency=medium
 

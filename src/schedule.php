@@ -87,67 +87,51 @@ if (null === $runTemplate->getMyKey()) {
             WebPage::singleton()->addJavaScript(
                 <<<'EOD'
 
-function wait(seconds) {
-    return new Promise(resolve => setTimeout(resolve, seconds * 1000));
-}
+function pollJobCompletion(jobId, pollingInterval, maxPollingDuration) {
+    const startTime = Date.now();
+    const apiEndpoint = `api/VitexSoftware/MultiFlexi/1.0.0/job/${jobId}.json`;
 
-async function pollApi(apiEndpoint, pollingInterval, maxPollingDuration) {
-    const startTime = Date.now(); // Record the start time
+    const makeRequest = () => {
+        const elapsedTime = Date.now() - startTime;
 
-    const makeRequest = async () => {
-        try {
-            const response = await fetch(apiEndpoint); // Make request
-            const data = await response.json();
-
-            if (data.job.exitcode != null) {
-                console.log('Success response received:', data);
-                window.location.href = "job.php?id=
-EOD.$jobber->getMyKey().<<<'EOD'
-";
-                return; // // Stop polling if success response
-            } else {
-                wait(5);
-            }
-
-            const elapsedTime = Date.now() - startTime;
-
-            if (elapsedTime < maxPollingDuration) {
-                setTimeout(makeRequest, pollingInterval); // Schedule next request
-            } else {
-                console.log('Maximum polling duration reached. Stopping polling.');
-            }
-        } catch (error) {
-            console.error('Error making API request:', error);
-            const elapsedTime = Date.now() - startTime;
-
-            if (elapsedTime < maxPollingDuration) {
-                setTimeout(makeRequest, pollingInterval); // Schedule next request
-            } else {
-                console.log('Maximum polling duration reached. Stopping polling.');
-            }
+        if (elapsedTime >= maxPollingDuration) {
+            console.log('Maximum polling duration reached. Stopping polling.');
+            return;
         }
+
+        fetch(apiEndpoint)
+            .then(response => response.json())
+            .then(data => {
+                if (data.job && data.job.exitcode !== null) {
+                    console.log('Job completed with exitcode:', data.job.exitcode);
+                    window.location.href = `job.php?id=${jobId}`;
+                } else {
+                    console.log('Job still running, polling again in ' + (pollingInterval / 1000) + 's...');
+                    setTimeout(makeRequest, pollingInterval);
+                }
+            })
+            .catch(error => {
+                console.error('Error polling API:', error);
+                setTimeout(makeRequest, pollingInterval);
+            });
     };
 
-    makeRequest(); // Start the first request
+    makeRequest();
 }
 
-async function patience() {
-    console.log('Waiting for
-EOD.$when.<<<'EOD'
-...');
-    await wait(
-EOD.$waitTime.<<<'EOD'
-);
-    console.log('
-EOD.$waitTime.<<<'EOD'
- seconds have passed');
-    pollApi("api/VitexSoftware/MultiFlexi/1.0.0/job/
+function startPollingAfterDelay(jobId, delaySeconds, pollingIntervalMs, maxPollingMs) {
+    console.log(`Waiting ${delaySeconds} seconds before starting job execution...`);
+    setTimeout(() => {
+        console.log('Starting job polling...');
+        pollJobCompletion(jobId, pollingIntervalMs, maxPollingMs);
+    }, delaySeconds * 1000);
+}
+
+startPollingAfterDelay(
 EOD.$jobber->getMyKey().<<<'EOD'
-.json", 5, 3600000);
-}
-
-patience();
-
+,
+EOD.$waitTime.<<<'EOD'
+, 5000, 3600000);
 
 EOD
             );

@@ -50,20 +50,21 @@ class AppExecutorSelect extends ExecutorSelect
 
         // Filter executors that are not usable for this app
         $unusableExecutors = [];
+
         foreach ($this->executors as $executorName => $executorClass) {
             if ($executorClass::usableForApp($this->app) === false) {
                 unset($allExecutors[$executorName]);
                 $unusableExecutors[] = $executorName;
             }
         }
-        
+
         // Also filter executorData for selectize
         if (!empty($unusableExecutors)) {
             $this->executorData = array_filter(
                 $this->executorData,
-                function($item) use ($unusableExecutors) {
-                    return !in_array($item['value'], $unusableExecutors, true);
-                }
+                static function ($item) use ($unusableExecutors) {
+                    return !\in_array($item['value'], $unusableExecutors, true);
+                },
             );
             // Reindex array
             $this->executorData = array_values($this->executorData);

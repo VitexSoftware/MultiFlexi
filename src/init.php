@@ -25,6 +25,8 @@ Shared::init(
     \dirname(__DIR__).'/.env',
 );
 
+new \MultiFlexi\Defaults();
+
 // Initialize enhanced session security (disable for now if classes don't exist)
 if (class_exists('\MultiFlexi\Security\SessionManager')) {
     $sessionManager = new \MultiFlexi\Security\SessionManager(

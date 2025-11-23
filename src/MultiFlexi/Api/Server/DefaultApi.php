@@ -226,6 +226,7 @@ class DefaultApi extends AbstractDefaultApi
         $data[] = ['path' => 'runtemplates'];
         $data[] = ['path' => 'jobs'];
         $data[] = ['path' => 'jobs/status'];
+        $data[] = ['path' => 'schedule'];
         $data[] = ['path' => 'topics'];
         $data[] = ['path' => 'users'];
         $data[] = ['path' => 'credentials'];
@@ -283,6 +284,7 @@ class DefaultApi extends AbstractDefaultApi
                 } else {
                     $response->getBody()->write(json_encode([$evidence => $data], \JSON_UNESCAPED_UNICODE));
                 }
+
                 $responseFinal = $response->withHeader('Content-type', 'application/json');
 
                 break;
@@ -293,6 +295,7 @@ class DefaultApi extends AbstractDefaultApi
                 } else {
                     $response->getBody()->write(\yaml_emit([$evidence => $data], \JSON_UNESCAPED_UNICODE));
                 }
+
                 $responseFinal = $response->withHeader('Content-type', 'text/yaml');
 
                 break;

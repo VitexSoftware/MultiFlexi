@@ -206,6 +206,7 @@ class UserDataCorrectionForm extends SecureForm
         $this->addItem(new InputHiddenTag('class', $this->user::class));
 
         $userID = $this->user->getMyKey();
+
         if ($userID) {
             $this->addItem(new InputHiddenTag($this->user->keyColumn, $userID));
         }

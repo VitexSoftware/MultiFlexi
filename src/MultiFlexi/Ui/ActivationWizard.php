@@ -382,7 +382,7 @@ EOD,
 
         $app = new \MultiFlexi\Application();
         $currentLang = substr(\Ease\Locale::$localeUsed ?? 'en_US', 0, 2);
-        
+
         $applications = $app->getFluentPDO()
             ->from('apps')
             ->select('apps.*')
@@ -468,7 +468,7 @@ EOD,
             // Show application logo/image using AppLogo component
             $displayName = $appData['localized_name'] ?? $appData['name'];
             $displayDescription = $appData['localized_description'] ?? $appData['description'] ?? '';
-            
+
             if (!empty($appData['uuid'])) {
                 $appLogo = new \Ease\Html\ImgTag('appimage.php?uuid='.$appData['uuid'], $displayName, ['class' => 'img-fluid mb-3', 'style' => 'max-height: 80px; max-width: 100%;']);
                 $cardBody->addItem($appLogo);

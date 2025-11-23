@@ -35,7 +35,7 @@ class CompanyAppRunTemplateLister extends RunTemplate
     /**
      * Set company filter.
      *
-     * @param int|Company $company Company ID or Company object
+     * @param Company|int $company Company ID or Company object
      */
     public function setCompany($company): self
     {
@@ -44,7 +44,7 @@ class CompanyAppRunTemplateLister extends RunTemplate
         } else {
             $this->companyId = (int) $company;
         }
-        
+
         // Add to filter array for AJAX requests
         $this->filter['company_id'] = $this->companyId;
 
@@ -54,7 +54,7 @@ class CompanyAppRunTemplateLister extends RunTemplate
     /**
      * Set application filter.
      *
-     * @param int|Application $app Application ID or Application object
+     * @param Application|int $app Application ID or Application object
      */
     public function setApp($app): self
     {
@@ -63,7 +63,7 @@ class CompanyAppRunTemplateLister extends RunTemplate
         } else {
             $this->appId = (int) $app;
         }
-        
+
         // Add to filter array for AJAX requests
         $this->filter['app_id'] = $this->appId;
 
@@ -82,7 +82,7 @@ class CompanyAppRunTemplateLister extends RunTemplate
             'actions' => ['name' => 'actions', 'type' => 'text', 'label' => _('Actions'), 'searchable' => false, 'orderable' => false],
             'executor' => ['name' => 'executor', 'type' => 'text', 'label' => _('Executor'), 'column' => 'runtemplate.executor'],
         ];
-        
+
         return $this->columnsCache;
     }
 
@@ -90,10 +90,10 @@ class CompanyAppRunTemplateLister extends RunTemplate
     {
         // Create query without any automatic JOINs
         $query = $this->getFluentPDO()->from('runtemplate');
-        
+
         // Disable smart joins to prevent automatic relationship detection
         $query->disableSmartJoin();
-        
+
         // Apply filters immediately
         if ($this->companyId !== null) {
             $query->where('runtemplate.company_id', $this->companyId);
@@ -102,7 +102,7 @@ class CompanyAppRunTemplateLister extends RunTemplate
         if ($this->appId !== null) {
             $query->where('runtemplate.app_id', $this->appId);
         }
-        
+
         return $query;
     }
 
@@ -124,24 +124,24 @@ class CompanyAppRunTemplateLister extends RunTemplate
 
         // Get base query from listingQuery() which has our filters
         $query = $this->listingQuery();
-        
+
         // Add selectize values (columns and subqueries)
         $query = $this->addSelectizeValues($query);
-        
+
         // Apply search
         if (!empty($search)) {
             $query->where('runtemplate.name LIKE ?', '%'.$search.'%');
         }
-        
+
         // Apply ordering
         if (!empty($order)) {
             foreach ($order as $orderItem) {
                 $columnIdx = (int) $orderItem['column'];
                 $direction = $orderItem['dir'] === 'asc' ? 'ASC' : 'DESC';
-                
+
                 if (isset($columns[$columnIdx])) {
                     $columnName = $columns[$columnIdx]['data'];
-                    
+
                     // Map to actual database columns
                     $orderColumn = match ($columnName) {
                         'id' => 'runtemplate.id',
@@ -151,7 +151,7 @@ class CompanyAppRunTemplateLister extends RunTemplate
                         'executor' => 'runtemplate.executor',
                         default => null,
                     };
-                    
+
                     if ($orderColumn) {
                         $query->orderBy($orderColumn.' '.$direction);
                     }
@@ -160,45 +160,47 @@ class CompanyAppRunTemplateLister extends RunTemplate
         } else {
             $query->orderBy('runtemplate.name ASC');
         }
-        
+
         // Get total count before pagination using separate simple query to avoid JOIN issues
         $countQuery = $this->getFluentPDO()->from('runtemplate');
-        
+
         if ($this->companyId !== null) {
             $countQuery->where('runtemplate.company_id', $this->companyId);
         }
-        
+
         if ($this->appId !== null) {
             $countQuery->where('runtemplate.app_id', $this->appId);
         }
-        
+
         if (!empty($search)) {
             $countQuery->where('runtemplate.name LIKE ?', '%'.$search.'%');
         }
-        
+
         $recordsTotal = (int) $countQuery->count();
         $recordsFiltered = $recordsTotal;
-        
+
         // Apply pagination
         $query->limit($length)->offset($start);
-        
+
         // Execute query directly to avoid FluentPDO's automatic JOIN attempts
         // Use fetchAll() instead of iteration to prevent automatic relationship detection
         try {
             $results = $query->fetchAll();
         } catch (\PDOException $e) {
             // If there's still a JOIN issue, log the actual SQL for debugging
-            error_log('CompanyAppRunTemplateLister SQL error: ' . $e->getMessage());
-            error_log('Query: ' . $query->getQuery());
+            error_log('CompanyAppRunTemplateLister SQL error: '.$e->getMessage());
+            error_log('Query: '.$query->getQuery());
+
             throw $e;
         }
-        
+
         // Format data
         $data = [];
+
         foreach ($results as $row) {
             $data[] = $this->completeDataRow($row);
         }
-        
+
         return [
             'draw' => $draw,
             'recordsTotal' => $recordsTotal,
@@ -211,17 +213,17 @@ class CompanyAppRunTemplateLister extends RunTemplate
     {
         // Build WHERE clause for subqueries with company and app filters
         $jobWhereConditions = ['job.runtemplate_id = runtemplate.id'];
-        
+
         if ($this->companyId !== null) {
-            $jobWhereConditions[] = 'job.company_id = ' . (int) $this->companyId;
+            $jobWhereConditions[] = 'job.company_id = '.(int) $this->companyId;
         }
-        
+
         if ($this->appId !== null) {
-            $jobWhereConditions[] = 'job.app_id = ' . (int) $this->appId;
+            $jobWhereConditions[] = 'job.app_id = '.(int) $this->appId;
         }
-        
+
         $jobWhere = implode(' AND ', $jobWhereConditions);
-        
+
         // Add subqueries for last executed and last scheduled job
         $query->select([
             'runtemplate.id',
@@ -248,7 +250,7 @@ class CompanyAppRunTemplateLister extends RunTemplate
     {
         // Preserve numeric ID for JavaScript row selection and other uses
         $numericId = $dataRowRaw['id'];
-        
+
         // Format ID
         $dataRowRaw['id'] = (string) new \Ease\Html\ATag('runtemplate.php?id='.$numericId, '⚗️ #'.$numericId);
 
@@ -265,7 +267,7 @@ class CompanyAppRunTemplateLister extends RunTemplate
 
         // Format last jobs - show executed and/or scheduled
         $jobParts = [];
-        
+
         // Last executed job
         if (!empty($dataRowRaw['last_executed_job_id'])) {
             $exitCodeWidget = new Ui\ExitCode($dataRowRaw['last_executed_job_exitcode']);
@@ -274,30 +276,30 @@ class CompanyAppRunTemplateLister extends RunTemplate
             $jobParts[] = (string) new \Ease\Html\ATag(
                 'job.php?id='.$dataRowRaw['last_executed_job_id'],
                 $icon.' #'.$dataRowRaw['last_executed_job_id'].' '.$exitCodeWidget,
-                ['title' => $isRunning ? _('Running') : _('Finished')]
+                ['title' => $isRunning ? _('Running') : _('Finished')],
             );
         }
-        
+
         // Last scheduled job (if different from executed)
-        if (!empty($dataRowRaw['last_scheduled_job_id']) && 
-            $dataRowRaw['last_scheduled_job_id'] != ($dataRowRaw['last_executed_job_id'] ?? null)) {
+        if (!empty($dataRowRaw['last_scheduled_job_id'])
+            && $dataRowRaw['last_scheduled_job_id'] !== ($dataRowRaw['last_executed_job_id'] ?? null)) {
             try {
                 $scheduleTime = new \DateTime($dataRowRaw['last_scheduled_job_time']);
                 $relativeTime = \MultiFlexi\CompanyJobLister::getRelativeTime($scheduleTime);
                 $jobParts[] = (string) new \Ease\Html\ATag(
                     'job.php?id='.$dataRowRaw['last_scheduled_job_id'],
                     '💣 #'.$dataRowRaw['last_scheduled_job_id'],
-                    ['title' => _('Scheduled').': '.$relativeTime]
+                    ['title' => _('Scheduled').': '.$relativeTime],
                 );
             } catch (\Exception $e) {
                 $jobParts[] = (string) new \Ease\Html\ATag(
                     'job.php?id='.$dataRowRaw['last_scheduled_job_id'],
                     '💣 #'.$dataRowRaw['last_scheduled_job_id'],
-                    ['title' => _('Scheduled')]
+                    ['title' => _('Scheduled')],
                 );
             }
         }
-        
+
         if (empty($jobParts)) {
             $dataRowRaw['last_job'] = '<span style="color: #999; font-style: italic;">'._('No jobs yet').'</span>';
         } else {
@@ -310,10 +312,10 @@ class CompanyAppRunTemplateLister extends RunTemplate
 
         $dataRowRaw['actions'] = (string) new \Ease\Html\ATag(
             'actions.php?id='.$numericId.'#SuccessActions',
-            $successIcons
+            $successIcons,
         ).' '.(string) new \Ease\Html\ATag(
             'actions.php?id='.$numericId.'#FailActions',
-            $failIcons
+            $failIcons,
         );
 
         // Format executor

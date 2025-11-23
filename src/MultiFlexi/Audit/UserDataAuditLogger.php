@@ -97,7 +97,7 @@ class UserDataAuditLogger extends \MultiFlexi\DBEngine
             ->limit($limit)
             ->offset($offset)
             ->fetchAll();
-        
+
         return $result ?: [];
     }
 
@@ -115,7 +115,7 @@ class UserDataAuditLogger extends \MultiFlexi\DBEngine
             ->orderBy('created_at DESC')
             ->limit($limit)
             ->fetchAll();
-        
+
         return $result ?: [];
     }
 
