@@ -109,10 +109,12 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
                             $subjectList->addItem(new \Ease\Html\DtTag(_('Common Name (CN)'), ['class' => 'col-sm-4']));
                             $subjectList->addItem(new \Ease\Html\DdTag($x509['subject']['CN'], ['class' => 'col-sm-8']));
                         }
+
                         if (isset($x509['subject']['O'])) {
                             $subjectList->addItem(new \Ease\Html\DtTag(_('Organization (O)'), ['class' => 'col-sm-4']));
                             $subjectList->addItem(new \Ease\Html\DdTag($x509['subject']['O'], ['class' => 'col-sm-8']));
                         }
+
                         if (isset($x509['subject']['organizationIdentifier'])) {
                             $subjectList->addItem(new \Ease\Html\DtTag(_('Organization ID'), ['class' => 'col-sm-4']));
                             $subjectList->addItem(new \Ease\Html\DdTag($x509['subject']['organizationIdentifier'], ['class' => 'col-sm-8']));
@@ -132,14 +134,17 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
                             $issuerList->addItem(new \Ease\Html\DtTag(_('Common Name (CN)'), ['class' => 'col-sm-4']));
                             $issuerList->addItem(new \Ease\Html\DdTag($x509['issuer']['CN'], ['class' => 'col-sm-8']));
                         }
+
                         if (isset($x509['issuer']['O'])) {
                             $issuerList->addItem(new \Ease\Html\DtTag(_('Organization (O)'), ['class' => 'col-sm-4']));
                             $issuerList->addItem(new \Ease\Html\DdTag($x509['issuer']['O'], ['class' => 'col-sm-8']));
                         }
+
                         if (isset($x509['issuer']['L'])) {
                             $issuerList->addItem(new \Ease\Html\DtTag(_('Location (L)'), ['class' => 'col-sm-4']));
                             $issuerList->addItem(new \Ease\Html\DdTag($x509['issuer']['L'], ['class' => 'col-sm-8']));
                         }
+
                         if (isset($x509['issuer']['C'])) {
                             $issuerList->addItem(new \Ease\Html\DtTag(_('Country (C)'), ['class' => 'col-sm-4']));
                             $issuerList->addItem(new \Ease\Html\DdTag($x509['issuer']['C'], ['class' => 'col-sm-8']));
@@ -157,8 +162,8 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
                     // Serial number
                     if (isset($x509['serialNumberHex'])) {
                         $serialHex = $x509['serialNumberHex'];
-                        $serialDec = isset($x509['serialNumber']) ? $x509['serialNumber'] : hexdec($serialHex);
-                        
+                        $serialDec = $x509['serialNumber'] ?? hexdec($serialHex);
+
                         $technicalList->addItem(new \Ease\Html\DtTag(_('Serial Number'), ['class' => 'col-sm-4']));
                         $technicalList->addItem(new \Ease\Html\DdTag([
                             new \Ease\Html\DivTag([
@@ -167,9 +172,37 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
                             ]),
                             new \Ease\Html\DivTag([
                                 new \Ease\Html\SmallTag('DEC: ', ['class' => 'text-muted']),
-                                new \Ease\Html\SmallTag(new \Ease\Html\StrongTag((string)$serialDec), ['class' => 'font-monospace']),
+                                new \Ease\Html\SmallTag(new \Ease\Html\StrongTag((string) $serialDec), ['class' => 'font-monospace']),
                             ]),
                         ], ['class' => 'col-sm-8']));
+
+                        // Rate limits are tracked per certificate decimal serial number (not per X-IBM-Client-Id)
+                        $ratesFile = sys_get_temp_dir().'/rbczpremiumapi_rates.json';
+
+                        if (file_exists($ratesFile)) {
+                            $rates = $this->getJsonRates($ratesFile);
+
+                            if (\array_key_exists($serialDec, $rates)) {
+                                $clientRates = $rates[$serialDec];
+                                $this->addItem(new \Ease\Html\DivTag([
+                                    new \Ease\Html\StrongTag(_('Rate Limits:')),
+                                    new \Ease\Html\UlTag([
+                                        new \Ease\Html\LiTag(sprintf(_('Per Second: %d remaining (resets at %s)'), $clientRates['second']['remaining'], (new \DateTime())->setTimestamp($clientRates['second']['timestamp'])->format('Y-m-d H:i:s'))),
+                                        new \Ease\Html\LiTag(sprintf(_('Per Day: %d remaining (resets at %s)'), $clientRates['day']['remaining'], (new \DateTime())->setTimestamp($clientRates['day']['timestamp'])->format('Y-m-d H:i:s'))),
+                                    ]),
+                                    new \Ease\Html\SmallTag([
+                                        _('Certificate serial number: '),
+                                        new \Ease\Html\SpanTag($serialDec, ['class' => 'font-monospace']),
+                                    ], ['class' => 'text-muted']),
+                                ]));
+                            } elseif ($serialDec) {
+                                $this->addStatusMessage(sprintf(_('No rate limit data found for this certificate (serial: %s). Data will be available after first API call.'), $serialDec), 'info');
+                            } else {
+                                $this->addStatusMessage(_('Cannot determine certificate serial number to check rate limits'), 'warning');
+                            }
+                        } else {
+                            $this->addStatusMessage(sprintf(_('No rate limit data file found: %s'), $ratesFile), 'warning');
+                        }
                     }
 
                     // Signature algorithm
@@ -203,7 +236,7 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
                         $percent,
                         _('Certificate validity remaining: ').$percent.'%',
                         $progressColor,
-                        ['class' => 'mb-2']
+                        ['class' => 'mb-2'],
                     ));
 
                     $validityDiv->addItem(new \Ease\Html\DivTag([
@@ -229,64 +262,19 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
             $this->addItem(new \Ease\TWB4\Alert('danger', _('Certificate not set')));
         }
 
-        // Rate limits are tracked per certificate decimal serial number (not per X-IBM-Client-Id)
-        // since v1.5.2 of php-vitexsoftware-rbczpremiumapi (changed from SHA1 fingerprint in v1.5.1)
-        $ratesFile = sys_get_temp_dir().'/rbczpremiumapi_rates.json';
-        $rates = $this->getJsonRates($ratesFile);
-
-        // Calculate certificate serial number to find rate limit data
-        $certSerial = null;
-
-        if ($certFile && is_readable($certFile) && $certData) {
-            $certs = [];
-
-            if (openssl_pkcs12_read($certData, $certs, $certPass)) {
-                if (isset($certs['cert'])) {
-                    $x509Data = openssl_x509_parse($certs['cert']);
-
-                    if ($x509Data && isset($x509Data['serialNumber'])) {
-                        $certSerial = (string)$x509Data['serialNumber'];
-                    } elseif ($x509Data && isset($x509Data['serialNumberHex'])) {
-                        // Fallback to converting hex to decimal
-                        $certSerial = (string)hexdec($x509Data['serialNumberHex']);
-                    }
-                }
-            }
-        }
-
-        if ($certSerial && \array_key_exists($certSerial, $rates)) {
-            $clientRates = $rates[$certSerial];
-            $this->addItem(new \Ease\Html\DivTag([
-                new \Ease\Html\StrongTag(_('Rate Limits:')),
-                new \Ease\Html\UlTag([
-                    new \Ease\Html\LiTag(sprintf(_('Per Second: %d remaining (resets at %s)'), $clientRates['second']['remaining'], (new \DateTime())->setTimestamp($clientRates['second']['timestamp'])->format('Y-m-d H:i:s'))),
-                    new \Ease\Html\LiTag(sprintf(_('Per Day: %d remaining (resets at %s)'), $clientRates['day']['remaining'], (new \DateTime())->setTimestamp($clientRates['day']['timestamp'])->format('Y-m-d H:i:s'))),
-                ]),
-                new \Ease\Html\SmallTag([
-                    _('Certificate serial number: '),
-                    new \Ease\Html\SpanTag($certSerial, ['class' => 'font-monospace']),
-                ], ['class' => 'text-muted']),
-            ]));
-        } elseif ($certSerial) {
-            $this->addStatusMessage(sprintf(_('No rate limit data found for this certificate (serial: %s). Data will be available after first API call.'), $certSerial), 'info');
-        } else {
-            $this->addStatusMessage(_('Cannot determine certificate serial number to check rate limits'), 'warning');
-        }
-
         parent::finalize();
     }
 
     private function getJsonRates(string $filename): array
     {
-        // Return empty array if file doesn't exist yet
-        if (!file_exists($filename)) {
-            return [];
-        }
-
         $handle = @fopen($filename, 'rb');
 
         if ($handle === false) {
-            // File exists but cannot be opened
+            // File exists but cannot be opened (permissions, locks, etc.)
+            $error = error_get_last();
+            error_log("Failed to open rate limit file {$filename}: ".($error['message'] ?? 'unknown error'));
+            $this->addStatusMessage('Failed to open rate limit file. Check file permissions and logs.', 'warning');
+
             return [];
         }
 
@@ -297,6 +285,7 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
 
             if ($json === false) {
                 error_log("Failed to read rate limit store from {$filename}");
+                $this->addStatusMessage('Failed to read rate limit data from file.', 'warning');
             } else {
                 $decoded = json_decode($json, true);
 
@@ -308,6 +297,10 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
             }
 
             flock($handle, \LOCK_UN);
+        } else {
+            // Failed to acquire lock
+            error_log("Failed to acquire lock on {$filename}");
+            $this->addStatusMessage('Failed to acquire lock on rate limit file.', 'warning');
         }
 
         fclose($handle);

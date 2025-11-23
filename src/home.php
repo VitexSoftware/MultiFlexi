@@ -127,6 +127,7 @@ if (!empty($recentJobs)) {
 
     foreach ($recentJobs as $job) {
         $statusBadge = '';
+
         if ($job['exitcode'] === null && $job['begin'] !== null) {
             $statusBadge = new \Ease\TWB4\Badge('🏃 '._('Running'), 'primary');
         } elseif ($job['exitcode'] === 0 || $job['exitcode'] === '0') {
@@ -181,13 +182,13 @@ $accountInfo->addItem(new \Ease\Html\DdTag($currentUser->getDataValue('email') ?
 $accountInfo->addItem(new \Ease\Html\DtTag(_('Member since'), ['class' => 'col-sm-3']));
 $accountInfo->addItem(new \Ease\Html\DdTag(
     date('F j, Y', strtotime($currentUser->getDataValue($currentUser->createColumn))),
-    ['class' => 'col-sm-9']
+    ['class' => 'col-sm-9'],
 ));
 
 $accountCard->addItem($accountInfo);
 $accountCard->addItem(new \Ease\Html\DivTag(
     new \Ease\TWB4\LinkButton('profile.php', new \Ease\TWB4\Widgets\FaIcon('edit').' '._('Edit Profile'), 'primary'),
-    ['class' => 'text-right mt-3']
+    ['class' => 'text-right mt-3'],
 ));
 
 $container->addItem($accountCard);

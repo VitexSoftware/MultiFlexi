@@ -112,18 +112,16 @@ class RuntemplateApi extends AbstractRuntemplateApi
      * POST /runtemplate/{runTemplateId}.{suffix}
      * Performs partial update - only provided fields are updated.
      *
-     * @param ServerRequestInterface $request        Request
-     * @param ResponseInterface      $response       Response
-     * @param int                    $runTemplateId  RunTemplate ID from URL
-     * @param string                 $suffix         Response format suffix
-     *
-     * @return ResponseInterface
+     * @param ServerRequestInterface $request       Request
+     * @param ResponseInterface      $response      Response
+     * @param int                    $runTemplateId RunTemplate ID from URL
+     * @param string                 $suffix        Response format suffix
      */
     public function updateRunTemplateById(
         ServerRequestInterface $request,
         ResponseInterface $response,
         int $runTemplateId,
-        string $suffix
+        string $suffix,
     ): ResponseInterface {
         $requestBody = json_decode($request->getBody()->getContents(), true);
 

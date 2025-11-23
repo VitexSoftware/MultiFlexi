@@ -145,7 +145,7 @@ class CompanyJobLister extends CompanyJob
     {
         // Get current language (first 2 chars from locale, e.g. 'en' from 'en_US')
         $currentLang = substr(\Ease\Locale::$localeUsed ?? 'en_US', 0, 2);
-        
+
         // Build queue position map for all scheduled jobs
         $scheduler = new \MultiFlexi\Scheduler();
         $scheduledJobsQuery = $scheduler->listingQuery()->select('schedule.job, schedule.after')->orderBy('schedule.after ASC');
@@ -154,10 +154,11 @@ class CompanyJobLister extends CompanyJob
         $scheduledJobs = $scheduledJobsQuery->fetchAll();
         $this->scheduledCounts = [];
         $position = 1;
+
         foreach ($scheduledJobs as $scheduledJob) {
             $this->scheduledCounts[$scheduledJob['job']] = $position++;
         }
-        
+
         $query->select(['apps.name AS appname', 'apps.uuid', 'apps.image AS appimage', 'apps.description AS appdescription', 'apps.homepage AS apphomepage', 'app_translations.description AS appdescription_localized', 'job.id', 'begin', 'end', 'exitcode', 'launched_by', 'login', 'job.app_id AS app_id', 'job.executor', 'job.company_id', 'company.name', 'company.logo', 'company.ic', 'company.enabled', 'schedule', 'schedule_type', 'job.runtemplate_id', 'runtemplate.name AS runtemplate_name', 'runtemplate.note AS runtemplate_note', 'runtemplate.interv AS runtemplate_interv', 'runtemplate.cron AS runtemplate_cron', 'runtemplate.last_schedule AS runtemplate_last_schedule', 'runtemplate.next_schedule AS runtemplate_next_schedule', 'runtemplate.delay AS runtemplate_delay', 'schedule.id AS schedule_id'], true)
             ->leftJoin('apps ON apps.id = job.app_id')
             ->leftJoin('app_translations ON app_translations.app_id = apps.id AND app_translations.lang = ?', $currentLang)
@@ -214,6 +215,7 @@ class CompanyJobLister extends CompanyJob
         // Set row background color based on job status
         // Check if job is scheduled (not yet started)
         $isScheduled = !empty($dataRowRaw['schedule_id']);
+
         if (empty($dataRowRaw['begin']) && $isScheduled) {
             $dataRowRaw['DT_RowClass'] = 'job-scheduled';
         } elseif (empty($dataRowRaw['begin']) && !empty($dataRowRaw['schedule'])) {
@@ -257,38 +259,38 @@ class CompanyJobLister extends CompanyJob
         // Format Application column with icon and rich popover
         if (isset($dataRowRaw['appname'])) {
             $appImageUrl = empty($dataRowRaw['appimage']) ? 'appimage.php?uuid='.$dataRowRaw['uuid'] : $dataRowRaw['appimage'];
-            
+
             // Build rich popover content for application with large logo, description, and homepage
             $appPopoverContent = '<div style="font-size: 0.9em; max-width: 300px;">';
-            
+
             // Large logo centered at top
             $appPopoverContent .= '<div style="text-align: center; margin-bottom: 10px;">';
             $appPopoverContent .= '<img src="'.htmlspecialchars($appImageUrl).'" alt="'.htmlspecialchars($dataRowRaw['appname']).'" style="max-width: 80px; max-height: 80px;">';
             $appPopoverContent .= '</div>';
-            
+
             // Application name
             $appPopoverContent .= '<div style="text-align: center; margin-bottom: 8px;">';
             $appPopoverContent .= '<strong style="font-size: 1.1em;">'.htmlspecialchars($dataRowRaw['appname']).'</strong>';
             $appPopoverContent .= '</div>';
-            
+
             // Description if available - prefer localized version
-            $description = !empty($dataRowRaw['appdescription_localized']) 
-                ? $dataRowRaw['appdescription_localized'] 
+            $description = !empty($dataRowRaw['appdescription_localized'])
+                ? $dataRowRaw['appdescription_localized']
                 : $dataRowRaw['appdescription'] ?? '';
-            
+
             if (!empty($description)) {
                 $appPopoverContent .= '<p style="margin: 8px 0; line-height: 1.4; color: #555;">'.htmlspecialchars($description).'</p>';
             }
-            
+
             // Homepage link if available
             if (!empty($dataRowRaw['apphomepage'])) {
                 $appPopoverContent .= '<div style="text-align: center; margin-top: 10px;">';
                 $appPopoverContent .= '<a href="'.htmlspecialchars($dataRowRaw['apphomepage']).'" target="_blank" class="btn btn-sm btn-outline-primary" style="font-size: 0.85em;">🏠 '.htmlspecialchars(_('Homepage')).'</a>';
                 $appPopoverContent .= '</div>';
             }
-            
+
             $appPopoverContent .= '</div>';
-            
+
             $dataRowRaw['app_id'] = sprintf(
                 '<a href="app.php?id=%d" tabindex="0" data-toggle="popover" data-trigger="hover focus" data-placement="right" data-html="true" data-content="%s" data-container="body"><img src="%s" height="24" alt="%s" style="vertical-align: middle;"></a>',
                 $dataRowRaw['app_id'],
@@ -306,7 +308,7 @@ class CompanyJobLister extends CompanyJob
                 $dataRowRaw['begin'] = sprintf(
                     '<span title="%s" style="font-size: 0.85em; white-space: nowrap;">%s</span>',
                     htmlspecialchars($dataRowRaw['begin']),
-                    htmlspecialchars($relativeTime)
+                    htmlspecialchars($relativeTime),
                 );
             } catch (\Exception $e) {
                 $dataRowRaw['begin'] = '<span style="font-size: 0.85em;">'.htmlspecialchars($dataRowRaw['begin']).'</span>';
@@ -316,23 +318,24 @@ class CompanyJobLister extends CompanyJob
                 try {
                     $scheduleTime = new \DateTime($dataRowRaw['schedule']);
                     $relativeTime = self::getRelativeTime($scheduleTime);
-                    
+
                     // Check if job is in queue (has schedule_id)
                     $queueInfo = '';
+
                     if ($isScheduled && isset($this->scheduledCounts[$jobId])) {
                         $queuePosition = $this->scheduledCounts[$jobId];
-                        $totalInQueue = count($this->scheduledCounts);
+                        $totalInQueue = \count($this->scheduledCounts);
                         $queueInfo = sprintf(' <span class="badge badge-info" style="font-size: 0.7em;">#%d/%d</span>', $queuePosition, $totalInQueue);
                     } elseif (!$isScheduled) {
                         // Orphaned - show clickable warning badge linking to reschedule page
                         $queueInfo = sprintf(' <a href="reschedule.php?job_id=%d" class="badge badge-warning" style="font-size: 0.7em; text-decoration: none;" title="%s">⚠️ orphaned</a>', $jobId, htmlspecialchars(_('Click to re-schedule this job')));
                     }
-                    
+
                     $dataRowRaw['begin'] = sprintf(
                         '💣 <span title="%s" style="font-size: 0.85em; white-space: nowrap;">%s</span>%s',
                         htmlspecialchars($dataRowRaw['schedule']),
                         htmlspecialchars($relativeTime),
-                        $queueInfo
+                        $queueInfo,
                     );
                 } catch (\Exception $e) {
                     $dataRowRaw['begin'] = '💣 <span style="font-size: 0.85em;">'.htmlspecialchars($dataRowRaw['schedule']).'</span>';
@@ -343,7 +346,7 @@ class CompanyJobLister extends CompanyJob
         }
 
         // Format Launcher column with interval/cron information
-        $executorImg = !empty($dataRowRaw['executor']) 
+        $executorImg = !empty($dataRowRaw['executor'])
             ? (new \MultiFlexi\Ui\ExecutorImage($dataRowRaw['executor'], ['height' => 20, 'style' => 'vertical-align: middle; margin-right: 4px;']))->__toString()
             : '';
 
@@ -355,7 +358,7 @@ class CompanyJobLister extends CompanyJob
             // Automatic launch - show interval or cron
             $runtemplateInterv = $dataRowRaw['runtemplate_interv'] ?? '';
             $runtemplateCron = $dataRowRaw['runtemplate_cron'] ?? '';
-            
+
             if ($runtemplateInterv && $runtemplateInterv !== 'n' && $runtemplateInterv !== 'c') {
                 // Named interval
                 $intervalEmoji = \MultiFlexi\RunTemplate::getIntervalEmoji($runtemplateInterv);
@@ -364,14 +367,14 @@ class CompanyJobLister extends CompanyJob
                     '<span style="font-size: 0.85em; color: #666;" title="%s">%s %s</span>',
                     htmlspecialchars($intervalName),
                     $intervalEmoji,
-                    htmlspecialchars($intervalName)
+                    htmlspecialchars($intervalName),
                 );
             } elseif ($runtemplateInterv === 'c' && !empty($runtemplateCron)) {
                 // Cron expression
                 $launcherInfo = sprintf(
                     '<span style="font-size: 0.75em; font-family: monospace; color: #666;" title="Cron: %s">⏰ %s</span>',
                     htmlspecialchars($runtemplateCron),
-                    htmlspecialchars($runtemplateCron)
+                    htmlspecialchars($runtemplateCron),
                 );
             } else {
                 $launcherInfo = '<span style="font-size: 0.85em; color: #666;">Timer</span>';
@@ -391,89 +394,96 @@ class CompanyJobLister extends CompanyJob
             $runtemplateLastSchedule = $dataRowRaw['runtemplate_last_schedule'] ?? '';
             $runtemplateNextSchedule = $dataRowRaw['runtemplate_next_schedule'] ?? '';
             $runtemplateDelay = $dataRowRaw['runtemplate_delay'] ?? 0;
-            
+
             // Build tooltip with details
             $intervalEmoji = \MultiFlexi\RunTemplate::getIntervalEmoji($runtemplateInterv);
             $intervalName = \MultiFlexi\RunTemplate::codeToInterval($runtemplateInterv);
-            
+
             $tooltipParts = [];
-            $tooltipParts[] = 'Name: ' . htmlspecialchars($runtemplateName);
-            
+            $tooltipParts[] = 'Name: '.htmlspecialchars($runtemplateName);
+
             if ($runtemplateInterv) {
-                $tooltipParts[] = 'Interval: ' . $intervalEmoji . ' ' . htmlspecialchars($intervalName);
+                $tooltipParts[] = 'Interval: '.$intervalEmoji.' '.htmlspecialchars($intervalName);
             }
-            
+
             if ($runtemplateLastSchedule) {
                 try {
                     $lastScheduleTime = new \DateTime($runtemplateLastSchedule);
                     $lastScheduleRelative = self::getRelativeTime($lastScheduleTime);
-                    $tooltipParts[] = 'Last scheduled: ' . $lastScheduleRelative;
+                    $tooltipParts[] = 'Last scheduled: '.$lastScheduleRelative;
                 } catch (\Exception $e) {
-                    $tooltipParts[] = 'Last scheduled: ' . htmlspecialchars($runtemplateLastSchedule);
+                    $tooltipParts[] = 'Last scheduled: '.htmlspecialchars($runtemplateLastSchedule);
                 }
             }
-            
+
             if ($runtemplateNextSchedule) {
                 try {
                     $nextScheduleTime = new \DateTime($runtemplateNextSchedule);
                     $nextScheduleRelative = self::getRelativeTime($nextScheduleTime);
-                    $tooltipParts[] = 'Next schedule: ' . $nextScheduleRelative;
+                    $tooltipParts[] = 'Next schedule: '.$nextScheduleRelative;
                 } catch (\Exception $e) {
-                    $tooltipParts[] = 'Next schedule: ' . htmlspecialchars($runtemplateNextSchedule);
+                    $tooltipParts[] = 'Next schedule: '.htmlspecialchars($runtemplateNextSchedule);
                 }
             }
-            
+
             if ($runtemplateDelay > 0) {
                 $delayMinutes = round($runtemplateDelay / 60);
-                $tooltipParts[] = 'Delay: ' . $delayMinutes . ' min';
+                $tooltipParts[] = 'Delay: '.$delayMinutes.' min';
             }
-            
+
             // Build rich popover content for runtemplate
             $rtPopoverContent = '<div style="font-size: 0.9em;">';
             $rtPopoverContent .= '<strong>'.htmlspecialchars($runtemplateName).'</strong><br>';
-            
+
             // Show note if exists
             if (!empty($dataRowRaw['runtemplate_note'])) {
                 // Strip HTML tags from note to display as plain text
                 $noteText = strip_tags($dataRowRaw['runtemplate_note']);
+
                 if (!empty($noteText)) {
                     $rtPopoverContent .= '<p style="margin: 8px 0; font-style: italic; color: #666; line-height: 1.4;">'.htmlspecialchars($noteText).'</p>';
                 }
             }
-            
+
             if ($runtemplateInterv) {
                 $rtPopoverContent .= '<span class="badge badge-info">'.$intervalEmoji.' '.htmlspecialchars($intervalName).'</span><br>';
             }
+
             if ($runtemplateLastSchedule) {
                 try {
                     $lastScheduleTime = new \DateTime($runtemplateLastSchedule);
                     $lastScheduleRelative = self::getRelativeTime($lastScheduleTime);
-                    $rtPopoverContent .= '<small class="text-muted">Last: ' . htmlspecialchars($lastScheduleRelative) . '</small><br>';
-                } catch (\Exception $e) {}
+                    $rtPopoverContent .= '<small class="text-muted">Last: '.htmlspecialchars($lastScheduleRelative).'</small><br>';
+                } catch (\Exception $e) {
+                }
             }
+
             if ($runtemplateNextSchedule) {
                 try {
                     $nextScheduleTime = new \DateTime($runtemplateNextSchedule);
                     $nextScheduleRelative = self::getRelativeTime($nextScheduleTime);
-                    $rtPopoverContent .= '<small class="text-success">Next: ' . htmlspecialchars($nextScheduleRelative) . '</small>';
-                } catch (\Exception $e) {}
+                    $rtPopoverContent .= '<small class="text-success">Next: '.htmlspecialchars($nextScheduleRelative).'</small>';
+                } catch (\Exception $e) {
+                }
             }
+
             if ($runtemplateDelay > 0) {
                 $delayMinutes = round($runtemplateDelay / 60);
-                $rtPopoverContent .= '<br><small class="text-warning">Delay: ' . $delayMinutes . ' min</small>';
+                $rtPopoverContent .= '<br><small class="text-warning">Delay: '.$delayMinutes.' min</small>';
             }
+
             $rtPopoverContent .= '</div>';
-            
+
             // Truncate name if too long
-            $displayName = mb_strlen($runtemplateName) > 40 ? mb_substr($runtemplateName, 0, 37) . '...' : $runtemplateName;
-            
+            $displayName = mb_strlen($runtemplateName) > 40 ? mb_substr($runtemplateName, 0, 37).'...' : $runtemplateName;
+
             // Format ID with fixed width (4 digits, right-aligned with monospace font)
             $dataRowRaw['runtemplate_id'] = sprintf(
                 '<a href="runtemplate.php?id=%d" style="font-size: 0.85em; white-space: nowrap;" tabindex="0" data-toggle="popover" data-trigger="hover focus" data-placement="right" data-html="true" data-content="%s" data-container="body">⚗️<span style="font-family: monospace; display: inline-block; width: 3em; text-align: right;">#%d</span> <span style="color: #666;">%s</span></a>',
                 $runtemplateId,
                 htmlspecialchars($rtPopoverContent),
                 $runtemplateId,
-                htmlspecialchars($displayName)
+                htmlspecialchars($displayName),
             );
         } else {
             $dataRowRaw['runtemplate_id'] = '<span style="font-size: 0.85em; color: #999;">—</span>';
@@ -483,39 +493,40 @@ class CompanyJobLister extends CompanyJob
         if (isset($dataRowRaw['company_id'])) {
             // Build rich popover content for company with large logo and details
             $companyPopoverContent = '<div style="font-size: 0.9em; max-width: 300px;">';
-            
+
             // Large logo centered at top
             if (!empty($dataRowRaw['logo'])) {
                 $companyPopoverContent .= '<div style="text-align: center; margin-bottom: 10px;">';
                 $companyPopoverContent .= '<img src="'.htmlspecialchars($dataRowRaw['logo']).'" alt="'.htmlspecialchars($dataRowRaw['name'] ?? '').'" style="max-width: 80px; max-height: 80px;">';
                 $companyPopoverContent .= '</div>';
             }
-            
+
             // Company name
             $companyPopoverContent .= '<div style="text-align: center; margin-bottom: 8px;">';
             $companyPopoverContent .= '<strong style="font-size: 1.1em;">'.htmlspecialchars($dataRowRaw['name'] ?? '').'</strong>';
             $companyPopoverContent .= '</div>';
-            
+
             // Company details
             if (!empty($dataRowRaw['ic'])) {
                 $companyPopoverContent .= '<p style="margin: 4px 0;"><small class="text-muted">IČ: '.htmlspecialchars($dataRowRaw['ic']).'</small></p>';
             }
-            
+
             // Status badge
             if (isset($dataRowRaw['enabled'])) {
-                $statusBadge = $dataRowRaw['enabled'] 
+                $statusBadge = $dataRowRaw['enabled']
                     ? '<span class="badge badge-success">✓ '.htmlspecialchars(_('Enabled')).'</span>'
                     : '<span class="badge badge-secondary">✗ '.htmlspecialchars(_('Disabled')).'</span>';
                 $companyPopoverContent .= '<div style="text-align: center; margin-top: 8px;">'.$statusBadge.'</div>';
             }
-            
+
             $companyPopoverContent .= '</div>';
-            
+
             // Small logo for table cell
             $companyLogo = !empty($dataRowRaw['logo']) ?
-                    sprintf('<img src="%s" height="24" alt="%s" style="vertical-align: middle; margin-right: 4px;">', 
-                        htmlspecialchars($dataRowRaw['logo']), 
-                        htmlspecialchars($dataRowRaw['name'] ?? '')
+                    sprintf(
+                        '<img src="%s" height="24" alt="%s" style="vertical-align: middle; margin-right: 4px;">',
+                        htmlspecialchars($dataRowRaw['logo']),
+                        htmlspecialchars($dataRowRaw['name'] ?? ''),
                     ) : '';
             $companyName = htmlspecialchars($dataRowRaw['name'] ?? '');
             $dataRowRaw['company_id'] = sprintf(
@@ -542,20 +553,21 @@ EOD;
     /**
      * Get relative time string (e.g., "2 hours ago" or "in 5 hours").
      * Automatically detects if the datetime is in the future or past.
-     * 
+     *
      * @param \DateTime $dateTime The datetime to compare with current time
+     *
      * @return string Localized relative time string
      */
     public static function getRelativeTime(\DateTime $dateTime): string
     {
         $now = new \DateTime();
         $diff = $now->diff($dateTime);
-        
+
         // Determine if the date is actually in the future or past
         $isFuture = ($dateTime > $now);
-        
+
         if ($diff->y > 0) {
-            return $isFuture 
+            return $isFuture
                 ? sprintf(_('in %d %s'), $diff->y, $diff->y === 1 ? _('year') : _('years'))
                 : $diff->y.' '.($diff->y === 1 ? _('year ago') : _('years ago'));
         }

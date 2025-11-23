@@ -15,10 +15,10 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
+use Ease\Html\CheckboxTag;
 use Ease\Html\DivTag;
 use Ease\Html\H2Tag;
 use Ease\Html\InputHiddenTag;
-use Ease\Html\CheckboxTag;
 use Ease\Html\LabelTag;
 use Ease\Html\PTag;
 use Ease\Html\SmallTag;
@@ -66,17 +66,21 @@ $assigned = empty($assignedRaw) ? [] : array_keys($assignedRaw);
 
 // Collect all unique topics from applications
 $allTopics = [];
+
 foreach ($allApps as $app) {
     if (!empty($app['topics'])) {
         $topics = explode(',', $app['topics']);
+
         foreach ($topics as $topic) {
             $topic = trim($topic);
+
             if (!empty($topic) && !isset($allTopics[$topic])) {
                 $allTopics[$topic] = ['id' => $topic, 'name' => $topic];
             }
         }
     }
 }
+
 // Sort topics alphabetically
 ksort($allTopics);
 $allTopics = array_values($allTopics);
@@ -95,14 +99,14 @@ if (!empty($allTopics)) {
 if (!empty($allTopics)) {
     $filterContainer->addItem(new \Ease\Html\H4Tag(_('Filter by Topics')));
     $filterContainer->addItem(new PTag(_('Select topics to filter applications. All topics are selected by default to show all applications.')));
-    
+
     $filterRow = new Row();
-    
+
     // Pre-select all topics by default
     $allTopicIds = array_column($allTopics, 'id');
     $topicFilter = new PillBox('topic_filter', $allTopics, $allTopicIds, ['class' => 'form-control mb-3', 'placeholder' => _('Select topics to filter applications...')]);
     $filterRow->addColumn(10, $topicFilter);
-    
+
     // Add reset filter button
     $resetButton = new \Ease\Html\ButtonTag(_('Reset Filter'), [
         'class' => 'btn btn-outline-secondary mb-3',
@@ -111,7 +115,7 @@ if (!empty($allTopics)) {
         'title' => _('Select all topics to show all applications'),
     ]);
     $filterRow->addColumn(2, $resetButton);
-    
+
     $filterContainer->addItem($filterRow);
 }
 
@@ -121,8 +125,8 @@ $filterContainer->addItem($searchBox);
 
 // Show count of selected apps
 $countDiv = new DivTag(
-    new SmallTag(['<strong id="selected-count">'.count($assigned).'</strong> ', _('applications selected')], ['class' => 'text-muted']),
-    ['class' => 'mb-3']
+    new SmallTag(['<strong id="selected-count">'.\count($assigned).'</strong> ', _('applications selected')], ['class' => 'text-muted']),
+    ['class' => 'mb-3'],
 );
 $filterContainer->addItem($countDiv);
 
@@ -134,61 +138,65 @@ $addAppForm->addItem(new InputHiddenTag('company_id', $companer->getMyKey()));
 $cardsRow = new Row();
 
 foreach ($allApps as $app) {
-    $isAssigned = in_array($app['id'], $assigned);
-    
+    $isAssigned = \in_array($app['id'], $assigned, true);
+
     // Add data-topics attribute for JavaScript filtering
     $topicsList = !empty($app['topics']) ? explode(',', $app['topics']) : [];
     $topicsDataAttr = implode(',', array_map('trim', $topicsList));
-    
+
     $cardDiv = new DivTag(null, ['class' => 'col-md-4 col-lg-3 mb-3 app-card-wrapper', 'data-app-name' => strtolower($app['name']), 'data-app-desc' => strtolower($app['description'] ?? ''), 'data-topics' => $topicsDataAttr]);
-    
+
     $card = new Card(
         null,
-        ['class' => 'h-100 app-card '.($isAssigned ? 'border-primary' : ''), 'style' => $isAssigned ? 'background-color: #e7f3ff;' : '']
+        ['class' => 'h-100 app-card '.($isAssigned ? 'border-primary' : ''), 'style' => $isAssigned ? 'background-color: #e7f3ff;' : ''],
     );
-    
+
     $cardBody = new DivTag(null, ['class' => 'card-body']);
-    
+
     // Checkbox at top
     $checkboxDiv = new DivTag(null, ['class' => 'form-check']);
-    $checkbox = new CheckboxTag('apps[]', $isAssigned, (string)$app['id'], ['class' => 'form-check-input app-checkbox', 'id' => 'app_'.$app['id']]);
+    $checkbox = new CheckboxTag('apps[]', $isAssigned, (string) $app['id'], ['class' => 'form-check-input app-checkbox', 'id' => 'app_'.$app['id']]);
     $checkboxLabel = new LabelTag('app_'.$app['id'], '', ['class' => 'form-check-label']);
     $checkboxDiv->addItem($checkbox);
     $checkboxDiv->addItem($checkboxLabel);
     $cardBody->addItem($checkboxDiv);
-    
+
     // App logo centered
     $logoDiv = new DivTag(null, ['class' => 'text-center my-3']);
     $appImage = empty($app['image']) ? 'appimage.php?uuid='.$app['uuid'] : $app['image'];
     $displayName = $app['localized_name'] ?? $app['name'];
     $logoDiv->addItem(new \Ease\Html\ImgTag($appImage, $displayName, ['style' => 'max-width: 80px; max-height: 80px;']));
     $cardBody->addItem($logoDiv);
-    
+
     // App name (localized) with link to detail
     $nameWithLink = new \Ease\Html\H5Tag(null, ['class' => 'card-title text-center']);
     $nameWithLink->addItem(new \Ease\Html\ATag('app.php?id='.$app['id'], $displayName, ['class' => 'text-decoration-none app-detail-link', 'title' => _('View application details'), 'onclick' => 'event.stopPropagation();']));
     $cardBody->addItem($nameWithLink);
-    
+
     // App description (localized)
     $displayDescription = $app['localized_description'] ?? $app['description'] ?? '';
+
     if (!empty($displayDescription)) {
         $desc = mb_strlen($displayDescription) > 100 ? mb_substr($displayDescription, 0, 97).'...' : $displayDescription;
         $cardBody->addItem(new PTag(new SmallTag($desc, ['class' => 'text-muted']), ['class' => 'card-text text-center']));
     }
-    
+
     // Show topics as badges
     if (!empty($app['topics'])) {
         $topicBadges = new DivTag(null, ['class' => 'mb-2 topic-badges text-center']);
+
         foreach ($topicsList as $topic) {
             $topic = trim($topic);
+
             if (!empty($topic)) {
                 $badge = new \Ease\TWB4\Badge('secondary', $topic, ['class' => 'mr-1 mb-1 topic-badge']);
                 $topicBadges->addItem($badge);
             }
         }
+
         $cardBody->addItem($topicBadges);
     }
-    
+
     $card->addItem($cardBody);
     $cardDiv->addItem($card);
     $cardsRow->addItem($cardDiv);
@@ -248,7 +256,7 @@ $(document).ready(function() {
             checkbox.prop('checked', !checkbox.prop('checked')).trigger('change');
         }
     });
-    
+
     // Update card styling when checkbox changes
     $('.app-checkbox').change(function() {
         var card = $(this).closest('.app-card');
@@ -259,7 +267,7 @@ $(document).ready(function() {
         }
         updateCount();
     });
-    
+
     // Search functionality
     $('#app_search').on('keyup', function() {
         var searchText = $(this).val().toLowerCase();
@@ -274,14 +282,14 @@ $(document).ready(function() {
             }
         });
     });
-    
+
     // Topic filtering functionality with localStorage support
     const STORAGE_KEY = 'multiflexi_companyapps_topic_filter';
     const DEFAULT_ALL_SELECTED = 'all_topics_selected';
-    
+
     var topicFilterSelectize = null;
     var allAvailableTopics = [];
-    
+
     // Function to save topic selection to localStorage
     function saveTopicSelection(selectedTopics) {
         try {
@@ -296,7 +304,7 @@ $(document).ready(function() {
             console.warn('Failed to save topic selection to localStorage:', e);
         }
     }
-    
+
     // Function to load topic selection from localStorage
     function loadTopicSelection() {
         try {
@@ -314,7 +322,7 @@ $(document).ready(function() {
             return allAvailableTopics.slice();
         }
     }
-    
+
     // Function to filter applications based on selected topics
     function filterApplicationsByTopics(selectedTopics) {
         var topicsArray = [];
@@ -323,7 +331,7 @@ $(document).ready(function() {
         } else if (Array.isArray(selectedTopics)) {
             topicsArray = selectedTopics;
         }
-        
+
         var visibleCount = 0;
         $('.app-card-wrapper').each(function() {
             var cardTopics = $(this).attr('data-topics') || '';
@@ -332,9 +340,9 @@ $(document).ready(function() {
             }).filter(function(topic) {
                 return topic.length > 0;
             });
-            
+
             var shouldShow = true;
-            
+
             // If no topics are selected, hide all applications
             if (topicsArray.length === 0) {
                 shouldShow = false;
@@ -348,7 +356,7 @@ $(document).ready(function() {
                     }
                 }
             }
-            
+
             if (shouldShow) {
                 $(this).show();
                 visibleCount++;
@@ -361,17 +369,17 @@ $(document).ready(function() {
                 }
             }
         });
-        
+
         // Highlight selected topics
         highlightSelectedTopics(topicsArray);
         updateCount();
     }
-    
+
     // Function to highlight selected topics on application cards
     function highlightSelectedTopics(selectedTopics) {
         $('.topic-badge').each(function() {
             var topicText = $(this).text().trim();
-            
+
             // Reset badge styling
             $(this).removeClass('badge-primary badge-warning badge-success badge-info').addClass('badge-secondary');
             $(this).css({
@@ -380,7 +388,7 @@ $(document).ready(function() {
                 'transform': 'scale(1)',
                 'border': 'none'
             });
-            
+
             // Highlight if this topic is selected
             if (selectedTopics.includes(topicText)) {
                 $(this).removeClass('badge-secondary').addClass('badge-primary');
@@ -395,7 +403,7 @@ $(document).ready(function() {
             }
         });
     }
-    
+
     // Initialize topic filter selectize
     setTimeout(function() {
         var element = $('#topic_filterpillBox');
@@ -403,19 +411,19 @@ $(document).ready(function() {
             topicFilterSelectize = element[0].selectize;
             var options = topicFilterSelectize.options;
             allAvailableTopics = Object.keys(options);
-            
+
             // Load saved selection or use all topics for first visit
             var savedSelection = loadTopicSelection();
             topicFilterSelectize.setValue(savedSelection, true);
             filterApplicationsByTopics(savedSelection);
-            
+
             // Listen for changes in topic selection
             topicFilterSelectize.on('change', function(value) {
                 var selectedTopics = Array.isArray(value) ? value : (value ? value.split(',') : []);
                 saveTopicSelection(selectedTopics);
                 filterApplicationsByTopics(selectedTopics);
             });
-            
+
             // Handle reset filter button
             $('#reset-topic-filter').on('click', function() {
                 topicFilterSelectize.setValue(allAvailableTopics, true);
@@ -426,7 +434,7 @@ $(document).ready(function() {
             setTimeout(arguments.callee, 500);
         }
     }, 1000);
-    
+
     // Update selected count
     function updateCount() {
         var count = $('.app-checkbox:checked').length;

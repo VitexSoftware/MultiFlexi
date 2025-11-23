@@ -48,7 +48,7 @@ $runtemplatesHeader->addColumn(6, [
     new LinkButton(
         'runtemplate.php?new=1&app_id='.$application->getMyKey().'&company_id='.$companer->getMyKey(),
         '⚗️&nbsp;➕ '._('New RunTemplate'),
-        'success'
+        'success',
     ),
     '&nbsp;',
     new \Ease\Html\DivTag(
@@ -66,8 +66,8 @@ $runtemplatesHeader->addColumn(6, [
                     'data-container' => 'body',
                     'data-trigger' => 'hover',
                     'data-placement' => 'top',
-                    'data-content' => _('Select one or more RunTemplates by clicking on table rows to enable bulk actions')
-                ]
+                    'data-content' => _('Select one or more RunTemplates by clicking on table rows to enable bulk actions'),
+                ],
             ),
             new \Ease\Html\DivTag(
                 [
@@ -75,11 +75,11 @@ $runtemplatesHeader->addColumn(6, [
                     new \Ease\Html\ATag('#', _('▶️ Bulk Execute'), ['class' => 'dropdown-item bulk-execute']),
                     new \Ease\Html\ATag('#', _('🔘 Bulk Enable/Disable'), ['class' => 'dropdown-item bulk-toggle']),
                 ],
-                ['class' => 'dropdown-menu', 'aria-labelledby' => 'bulkActionsBtn']
-            )
+                ['class' => 'dropdown-menu', 'aria-labelledby' => 'bulkActionsBtn'],
+            ),
         ],
-        ['class' => 'btn-group', 'role' => 'group', 'style' => 'display: inline-block;']
-    )
+        ['class' => 'btn-group', 'role' => 'group', 'style' => 'display: inline-block;'],
+    ),
 ]);
 $runtemplatesDiv->addItem($runtemplatesHeader);
 
@@ -111,10 +111,10 @@ $jobList->addRowHeaderColumns([_('Job ID'), _('Launch time'), _('Exit Code'), _(
 
 foreach ($jobs as $job) {
     $jobRow = [];
-    
+
     // Job ID
     $jobRow[] = new ATag('job.php?id='.$job['id'], '🏁 '.$job['id']);
-    
+
     // Launch time or scheduled time
     if (empty($job['begin'])) {
         if (!empty($job['schedule'])) {
@@ -132,25 +132,25 @@ foreach ($jobs as $job) {
         $jobRow[] = [
             $job['begin'],
             ' ',
-            new \Ease\Html\SmallTag(new \Ease\Html\Widgets\LiveAge(new \DateTime($job['begin'])))
+            new \Ease\Html\SmallTag(new \Ease\Html\Widgets\LiveAge(new \DateTime($job['begin']))),
         ];
     }
-    
+
     // Exit code
     $jobRow[] = new ExitCode($job['exitcode']);
-    
+
     // Launcher
-    $jobRow[] = $job['launched_by'] 
-        ? new ATag('user.php?id='.$job['launched_by'], $job['login']) 
+    $jobRow[] = $job['launched_by']
+        ? new ATag('user.php?id='.$job['launched_by'], $job['login'])
         : _('Timer');
-    
+
     // RunTemplate
     if (!empty($job['runtemplate_id'])) {
         $jobRow[] = new ATag('runtemplate.php?id='.$job['runtemplate_id'], $job['runtemplate_name'] ?? '#'.$job['runtemplate_id']);
     } else {
         $jobRow[] = '—';
     }
-    
+
     $jobList->addRowColumns($jobRow);
 }
 
@@ -160,7 +160,7 @@ $runtemplatesDiv->addItem($jobList);
 $runtemplatesDiv->addItem(new LinkButton(
     'joblist.php?app_id='.$application->getMyKey().'&company_id='.$companer->getMyKey(),
     '🏁 '._('View Complete Job History'),
-    'info btn-lg btn-block'
+    'info btn-lg btn-block',
 ));
 
 // Wrap everything in CompanyPanel with CompanyApplicationPanel
@@ -168,8 +168,8 @@ $runtemplatesDiv->addItem(new LinkButton(
 WebPage::singleton()->container->addItem(
     new CompanyPanel(
         $companer,
-        new CompanyApplicationPanel($companyApp, $runtemplatesDiv)
-    )
+        new CompanyApplicationPanel($companyApp, $runtemplatesDiv),
+    ),
 );
 
 // Get dynamic object name for JavaScript and CSS (without namespace)
@@ -207,18 +207,18 @@ WebPage::singleton()->addJavaScript(<<<'EOD'
 
     var selectedRows = [];
     var table = null;
-    var appId = 
+    var appId =
 EOD.$application->getMyKey().<<<'EOD'
 ;
-    var companyId = 
+    var companyId =
 EOD.$companer->getMyKey().<<<'EOD'
 ;
-    
+
     $(document).ready(function() {
         table = $('#
 EOD.$objectName.<<<'EOD'
 ').DataTable();
-        
+
         // Add custom buttons to DataTables button group
         new $.fn.dataTable.Buttons(table, {
             buttons: [
@@ -244,20 +244,20 @@ EOD.$objectName.<<<'EOD'
                 }
             ]
         });
-        
+
         // Insert buttons at the beginning of the buttons container
         table.buttons(1, null).container().prependTo($('#
 EOD.$objectName.<<<'EOD'
 _wrapper .dt-buttons'));
-        
+
         // Initialize popover for bulk actions button
         $('#bulkActionsBtn').popover();
-        
+
         // Restore selection after table redraw
         table.on('draw', function() {
             restoreSelection();
         });
-        
+
         // Row click handler for selection
         $('#
 EOD.$objectName.<<<'EOD'
@@ -266,18 +266,18 @@ EOD.$objectName.<<<'EOD'
             if ($(e.target).closest('a').length > 0) {
                 return;
             }
-            
+
             var $row = $(this);
             var data = table.row(this).data();
-            
+
             if (!data) return;
-            
+
             // Extract RunTemplate ID from the first column (⚗️ #123)
             var idMatch = data.id.match(/#(\d+)/);
             if (!idMatch) return;
-            
+
             var rtId = parseInt(idMatch[1]);
-            
+
             // Toggle selection
             if ($row.hasClass('selected')) {
                 $row.removeClass('selected');
@@ -288,42 +288,42 @@ EOD.$objectName.<<<'EOD'
                     selectedRows.push(rtId);
                 }
             }
-            
+
             // Update bulk actions button state
             updateBulkActionsButton();
         });
-        
+
         // Bulk reconfigure action
         $('.bulk-reconfigure').on('click', function(e) {
             e.preventDefault();
             if (selectedRows.length === 0) return;
-            
+
             showBulkReconfigureModal();
         });
-        
+
         // Bulk execute action
         $('.bulk-execute').on('click', function(e) {
             e.preventDefault();
             if (selectedRows.length === 0) return;
-            
+
             if (confirm('Do you want to execute ' + selectedRows.length + ' selected RunTemplate(s) now?')) {
                 bulkExecute();
             }
         });
-        
+
         // Bulk toggle action
         $('.bulk-toggle').on('click', function(e) {
             e.preventDefault();
             if (selectedRows.length === 0) return;
-            
+
             showBulkToggleModal();
         });
     });
-    
+
     function updateBulkActionsButton() {
         var $button = $('#bulkActionsBtn');
         var $clearBtn = $('#clearSelectionBtn');
-        
+
         if (selectedRows.length > 0) {
             $button.prop('disabled', false);
             $button.html('⚙️ ' + selectedRows.length + ' selected');
@@ -340,20 +340,20 @@ EOD.$objectName.<<<'EOD'
             $clearBtn.hide();
         }
     }
-    
+
     function restoreSelection() {
         // Restore selected class on rows that are in selectedRows array
         table.rows().every(function() {
             var data = this.data();
             if (!data) return;
-            
+
             // Extract RunTemplate ID from the first column
             var idMatch = data.id.match(/#(\d+)/);
             if (!idMatch) return;
-            
+
             var rtId = parseInt(idMatch[1]);
             var $row = $(this.node());
-            
+
             // Add selected class if this row's ID is in selectedRows
             if (selectedRows.indexOf(rtId) !== -1) {
                 $row.addClass('selected');
@@ -362,42 +362,42 @@ EOD.$objectName.<<<'EOD'
             }
         });
     }
-    
+
     function selectAllVisibleRows() {
         // Select all currently visible rows in the DataTable
         table.rows({search: 'applied'}).every(function() {
             var data = this.data();
             if (!data) return;
-            
+
             // Extract RunTemplate ID from the first column
             var idMatch = data.id.match(/#(\d+)/);
             if (!idMatch) return;
-            
+
             var rtId = parseInt(idMatch[1]);
             var $row = $(this.node());
-            
+
             // Add to selection if not already selected
             if (selectedRows.indexOf(rtId) === -1) {
                 selectedRows.push(rtId);
             }
             $row.addClass('selected');
         });
-        
+
         updateBulkActionsButton();
     }
-    
+
     function clearAllSelection() {
         // Clear all selected rows
         selectedRows = [];
-        
+
         // Remove selected class from all rows
         table.rows().every(function() {
             $(this.node()).removeClass('selected');
         });
-        
+
         updateBulkActionsButton();
     }
-    
+
     function showBulkReconfigureModal() {
         // Get configuration fields from API
         $.ajax({
@@ -419,13 +419,13 @@ EOD.$objectName.<<<'EOD'
             }
         });
     }
-    
+
     function displayReconfigureModal(fields) {
         var fieldOptions = '';
         for (var key in fields) {
             fieldOptions += '<option value="' + key + '">' + fields[key].description + ' (' + key + ')</option>';
         }
-        
+
         var modalHtml = `
             <div class="modal fade" id="bulkReconfigureModal" tabindex="-1">
                 <div class="modal-dialog">
@@ -460,14 +460,14 @@ EOD.$objectName.<<<'EOD'
                 </div>
             </div>
         `;
-        
+
         // Remove existing modal if any
         $('#bulkReconfigureModal').remove();
-        
+
         // Add and show modal
         $('body').append(modalHtml);
         $('#bulkReconfigureModal').modal('show');
-        
+
         // Initialize Selectize with search for configuration key dropdown
         $('#configKey').selectize({
             placeholder: '-- Type to search --',
@@ -476,22 +476,22 @@ EOD.$objectName.<<<'EOD'
             create: false,
             sortField: 'text'
         });
-        
+
         // Bind button click event
         $('#executeBulkReconfigureBtn').on('click', function() {
             executeBulkReconfigure();
         });
     }
-    
+
     function executeBulkReconfigure() {
         var configKey = $('#configKey').val();
         var configValue = $('#configValue').val();
-        
+
         if (!configKey) {
             alert('Please select a configuration key');
             return;
         }
-        
+
         // TODO: Migrate to API endpoint when POST support is available:
         // url: 'api/VitexSoftware/MultiFlexi/1.0.0/runtemplates/bulk-reconfigure'
         $.ajax({
@@ -534,7 +534,7 @@ EOD.$objectName.<<<'EOD'
             }
         });
     }
-    
+
     function bulkExecute() {
         // TODO: Migrate to API endpoint when POST support is available:
         // url: 'api/VitexSoftware/MultiFlexi/1.0.0/runtemplates/bulk-execute'
@@ -580,7 +580,7 @@ EOD.$objectName.<<<'EOD'
             }
         });
     }
-    
+
     function showBulkToggleModal() {
         var modalHtml = `
             <div class="modal fade" id="bulkToggleModal" tabindex="-1">
@@ -616,43 +616,43 @@ EOD.$objectName.<<<'EOD'
                 </div>
             </div>
         `;
-        
+
         // Remove existing modal if any
         $('#bulkToggleModal').remove();
-        
+
         // Add and show modal
         $('body').append(modalHtml);
         $('#bulkToggleModal').modal('show');
-        
+
         // Update action text when radio changes
         $('input[name="toggleAction"]').on('change', function() {
             var action = $(this).val() === '1' ? 'enable' : 'disable';
             $('#actionText').text(action);
         });
-        
+
         // Bind button click event
         $('#executeBulkToggleBtn').on('click', function() {
             var activeValue = parseInt($('input[name="toggleAction"]:checked').val());
             executeBulkToggle(activeValue);
         });
     }
-    
+
     function executeBulkToggle(activeValue) {
         var $button = $('#executeBulkToggleBtn');
         $button.prop('disabled', true).text('Processing...');
-        
+
         var completed = 0;
         var failedIds = [];
         var errors = [];
         var total = selectedRows.length;
         var currentRows = selectedRows.slice(); // Copy array for iteration
-        
+
         // Process each RunTemplate sequentially
         function processNext(index) {
             if (index >= currentRows.length) {
                 // All done
                 $('#bulkToggleModal').modal('hide');
-                
+
                 var message = 'Successfully updated ' + completed + ' of ' + total + ' RunTemplate(s)';
                 if (errors.length > 0) {
                     message += '\n\nErrors:\n' + errors.join('\n');
@@ -661,18 +661,18 @@ EOD.$objectName.<<<'EOD'
                     }
                 }
                 alert(message);
-                
+
                 // Keep only failed items selected
                 selectedRows = failedIds;
-                
+
                 // Reload table - restoreSelection() will highlight failed items
                 table.ajax.reload();
                 updateBulkActionsButton();
                 return;
             }
-            
+
             var rtId = currentRows[index];
-            
+
             $.ajax({
                 url: 'api/VitexSoftware/MultiFlexi/1.0.0/runtemplate/' + rtId + '.json',
                 method: 'POST',
@@ -699,7 +699,7 @@ EOD.$objectName.<<<'EOD'
                 }
             });
         }
-        
+
         // Start processing
         processNext(0);
     }

@@ -33,15 +33,15 @@ $runTemplate = new \MultiFlexi\RunTemplate($jobber->getDataValue('runtemplate_id
 if (!$runTemplate->getMyKey()) {
     // RunTemplate was deleted - show limited job info
     WebPage::singleton()->addStatusMessage(_('Warning: RunTemplate for this job was deleted'), 'warning');
-    
+
     WebPage::singleton()->addItem(new PageTop(_('Job').' #'.$jobID));
-    
+
     $jobPanel = new \Ease\TWB4\Panel(_('Job Information'), 'warning');
     $jobPanel->addItem(new \Ease\TWB4\Alert('warning', [
         '⚠️ ',
         _('The RunTemplate associated with this job has been deleted. Job information is limited.'),
     ]));
-    
+
     $infoDiv = new \Ease\Html\DivTag();
     $infoDiv->addItem(new \Ease\Html\StrongTag(_('Job ID: ')));
     $infoDiv->addItem($jobID);
@@ -51,22 +51,23 @@ if (!$runTemplate->getMyKey()) {
     $infoDiv->addItem(new \Ease\Html\BRTag());
     $infoDiv->addItem(new \Ease\Html\StrongTag(_('Status: ')));
     $infoDiv->addItem($jobber->getDataValue('exitcode') !== null ? _('Completed') : _('Pending'));
-    
+
     $jobPanel->addItem($infoDiv);
-    
+
     $outputTabs = new \Ease\TWB4\Tabs();
     $stdTerminal = new \Ease\Html\DivTag(nl2br(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(stripslashes((string) $jobber->getDataValue('stdout'))))), ['style' => 'background: black; font-family: monospace;']);
     $errorTerminal = new \Ease\Html\DivTag(nl2br(str_replace('background-color: black; ', '', (new \SensioLabs\AnsiConverter\AnsiToHtmlConverter())->convert(stripslashes((string) $jobber->getDataValue('stderr'))))), ['style' => 'background: #330000; font-family: monospace;']);
-    
+
     $outputTabs->addTab(_('Output'), [$stdTerminal]);
     $outputTabs->addTab(_('Errors'), [$errorTerminal]);
-    
+
     $jobPanel->addItem($outputTabs);
-    
+
     WebPage::singleton()->container->addItem($jobPanel);
     WebPage::singleton()->container->addItem(new \Ease\TWB4\LinkButton('main.php', _('Back to Dashboard'), 'primary'));
     WebPage::singleton()->addItem(new PageBottom());
     WebPage::singleton()->draw();
+
     exit;
 }
 
@@ -98,6 +99,7 @@ EOD
 
 // Check if job is orphaned and show warning
 $orphanedWarning = null;
+
 if (!$jobber->getDataValue('begin') && !$jobber->isScheduled()) {
     // Job not started and not in schedule queue - it's orphaned
     $orphanedWarning = new \Ease\TWB4\Alert('warning', [
@@ -159,29 +161,31 @@ if ($jobber->getDataValue('begin')) {
 
 // Handle job deletion
 $deleteAction = WebPage::getRequestValue('action');
+
 if ($deleteAction === 'delete' && WebPage::isPosted()) {
     $confirmDelete = WebPage::getRequestValue('confirm_delete');
-    
+
     if ($confirmDelete === 'yes') {
         try {
             // Delete the job
             if ($jobber->deleteFromSQL()) {
                 WebPage::singleton()->addStatusMessage(
                     sprintf(_('Job #%d has been deleted'), $jobID),
-                    'success'
+                    'success',
                 );
                 WebPage::singleton()->redirect('main.php');
+
                 exit; // Stop execution after redirect
-            } else {
-                WebPage::singleton()->addStatusMessage(
-                    sprintf(_('Failed to delete job #%d'), $jobID),
-                    'error'
-                );
             }
+
+            WebPage::singleton()->addStatusMessage(
+                sprintf(_('Failed to delete job #%d'), $jobID),
+                'error',
+            );
         } catch (\Exception $e) {
             WebPage::singleton()->addStatusMessage(
                 sprintf(_('Error deleting job: %s'), $e->getMessage()),
-                'error'
+                'error',
             );
         }
     }
@@ -219,9 +223,11 @@ $jobFoot->addColumn(4, $runTemplateButton);
 
 // Build panel content - include orphaned warning if present
 $panelContent = [];
+
 if ($orphanedWarning) {
     $panelContent[] = $orphanedWarning;
 }
+
 $panelContent[] = new JobInfo($jobber);
 $panelContent[] = $outputTabs;
 

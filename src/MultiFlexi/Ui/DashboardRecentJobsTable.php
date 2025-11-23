@@ -42,11 +42,11 @@ class DashboardRecentJobsTable extends \Ease\Html\DivTag
                 ->select('schedule.job, schedule.after')
                 ->orderBy('schedule.after ASC')
                 ->fetchAll();
-            
+
             foreach ($queueItems as $index => $item) {
                 $scheduledCounts[$item['job']] = $index + 1; // Position in queue (1-based)
             }
-            
+
             $recentJobs = $jobber->getFluentPDO()
                 ->from('job')
                 ->select('job.id, job.begin, job.end, job.exitcode, job.app_id, job.company_id, job.runtemplate_id, job.launched_by, job.schedule, apps.name as app_name, company.name as company_name, runtemplate.name as runtemplate_name, user.login as user_login, user.enabled as user_enabled, user.firstname, user.lastname, schedule.id as schedule_id, schedule.after as schedule_after')
@@ -73,8 +73,8 @@ class DashboardRecentJobsTable extends \Ease\Html\DivTag
                             // Job not started yet - check if scheduled
                             if ($job['schedule_id']) {
                                 // Has schedule entry - waiting in queue
-                                $queuePosition = isset($scheduledCounts[$job['id']]) ? $scheduledCounts[$job['id']] : '?';
-                                $totalInQueue = count($scheduledCounts);
+                                $queuePosition = $scheduledCounts[$job['id']] ?? '?';
+                                $totalInQueue = \count($scheduledCounts);
                                 $statusBadge = new \Ease\TWB4\Badge('info', sprintf('📅 #%s/%s %s', $queuePosition, $totalInQueue, _('in queue')));
                             } else {
                                 // No schedule entry - orphaned job (queue was cleared) - make it clickable
@@ -95,6 +95,7 @@ class DashboardRecentJobsTable extends \Ease\Html\DivTag
                     $companyLink = $job['company_id'] && $job['company_name']
                         ? new \Ease\Html\ATag('company.php?id='.$job['company_id'], '🏢 '.$job['company_name'])
                         : '-';
+
                     if ($job['runtemplate_id'] && $job['runtemplate_name']) {
                         $runtemplateLink = new \Ease\Html\ATag('runtemplate.php?id='.$job['runtemplate_id'], '⚗️️ '.$job['runtemplate_name']);
                     } elseif ($job['runtemplate_id']) {

@@ -25,7 +25,6 @@ use MultiFlexi\Notifications\DataCorrectionNotifier;
  */
 class UserDataCorrectionRequest extends \MultiFlexi\DBEngine
 {
-
     /**
      * Fields that require admin approval.
      */
@@ -295,8 +294,9 @@ class UserDataCorrectionRequest extends \MultiFlexi\DBEngine
             ->orderBy('r.created_at ASC')
             ->limit($limit)
             ->offset($offset);
-        
+
         $result = $query->fetchAll();
+
         return $result ?: [];
     }
 
@@ -319,8 +319,9 @@ class UserDataCorrectionRequest extends \MultiFlexi\DBEngine
             ->where('r.user_id', $userId)
             ->orderBy('r.created_at DESC')
             ->limit($limit);
-        
+
         $result = $query->fetchAll();
+
         return $result ?: [];
     }
 

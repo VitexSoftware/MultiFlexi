@@ -50,7 +50,7 @@ class ApplicationPanel extends Panel
         if ($usedIncompanies) {
             $usedByDiv = new \Ease\Html\DivTag();
             $usedByDiv->addItem(new \Ease\Html\H5Tag(_('Used by').': '));
-            
+
             // Create compact table instead of cards
             $usedByTable = new \Ease\TWB4\Table(null, ['class' => 'table table-sm table-hover']);
             $usedByTable->addRowHeaderColumns([_('Company'), _('RunTemplates')]);
@@ -63,10 +63,10 @@ class ApplicationPanel extends Panel
 
                 $usedByTable->addRowColumns([
                     [$calb, ' ', new \Ease\Html\SmallTag('('.$crls->count().')', ['class' => 'text-muted'])],
-                    $crls
+                    $crls,
                 ]);
             }
-            
+
             $usedByDiv->addItem($usedByTable);
             $this->headRow->addColumn(6, $usedByDiv);
         } else {

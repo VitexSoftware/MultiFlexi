@@ -130,9 +130,9 @@ class JobChart extends \Ease\Html\DivTag
         // Pastel colors: waiting (light blue), fail (light red), success (light green), exception (light gray)
         $colours = [
             ['#B3E5FC', '#81D4FA'], // waiting - pastel light blue
-            ['#FFCDD2', '#EF9A9A'], // fail - pastel light red  
+            ['#FFCDD2', '#EF9A9A'], // fail - pastel light red
             ['#C8E6C9', '#A5D6A7'], // success - pastel light green
-            ['#E0E0E0', '#BDBDBD']  // exception - pastel gray
+            ['#E0E0E0', '#BDBDBD'],  // exception - pastel gray
         ];
 
         $graph = new \Goat1000\SVGGraph\SVGGraph(1024, 212, $settings);

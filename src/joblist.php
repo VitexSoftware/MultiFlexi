@@ -116,7 +116,7 @@ WebPage::singleton()->addJavaScript(<<<'EOD'
             }, 300);
         });
     });
-    
+
     // Reinitialize popovers after DataTable reload
     $('#Molecule').on('draw.dt', function() {
         $('[data-toggle="popover"]').popover({

@@ -68,42 +68,42 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
 
         $scheduleButton = new \Ease\TWB4\LinkButton('schedule.php?id='.$runtemplateId, [_('Schedule Launch').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/multiflexi-schedule.svg', _('Launch'), ['height' => '30px'])], 'secondary btn-lg w-100');
         $launchButton = new \Ease\TWB4\LinkButton('schedule.php?id='.$runtemplateId.'&when=now&executor=Native', [_('Launch now').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/multiflexi-execute.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg w-100');
-        
+
         // Left column: Statistics and visualizations
         $leftColumn = new \Ease\Html\DivTag();
-        
+
         // Add statistics cards
         $statsCards = new \MultiFlexi\Ui\RunTemplateStatsCards($runtemplate);
         $leftColumn->addItem($statsCards);
-        
+
         // Add job visualization row
         $visualizationRow = new \Ease\TWB4\Row();
         $visualizationRow->addTagClass('mt-3');
         $visualizationRow->addColumn(8, new \MultiFlexi\Ui\RunTemplateJobsLastMonthChart($runtemplate));
         $visualizationRow->addColumn(4, new \MultiFlexi\Ui\JobGraphWidget($runtemplate, 10, 10));
         $leftColumn->addItem($visualizationRow);
-        
+
         // Add action buttons below the chart
         $actionsRow = new \Ease\TWB4\Row();
         $actionsRow->addTagClass('mt-3');
         $actionsRow->addColumn(6, $launchButton);
         $actionsRow->addColumn(6, $scheduleButton);
         $leftColumn->addItem($actionsRow);
-        
+
         $runtemplateOptions->addColumn(8, $leftColumn);
-        
+
         // Right column: Status and Configuration
         $rightColumn = new \Ease\Html\DivTag();
-        
+
         // Status section
         $rightColumn->addItem(new \Ease\Html\H5Tag(_('Status')));
         $rightColumn->addItem([
             _('Status').' ',
-            new \Ease\TWB4\Widgets\Toggle('active', $runtemplate->getDataValue('active') ? true : false, $runtemplate->getDataValue('active') ? 'false' : 'true', ['title' => $runtemplate->getDataValue('active') ? _('Enabled') : _('Disabled'), 'data-runtemplate' => $runtemplateId, 'id' => 'enabler', 'data-on' => _('Enabled'), 'data-off' => _('Disabled')]), 
+            new \Ease\TWB4\Widgets\Toggle('active', $runtemplate->getDataValue('active') ? true : false, $runtemplate->getDataValue('active') ? 'false' : 'true', ['title' => $runtemplate->getDataValue('active') ? _('Enabled') : _('Disabled'), 'data-runtemplate' => $runtemplateId, 'id' => 'enabler', 'data-on' => _('Enabled'), 'data-off' => _('Disabled')]),
             new \Ease\Html\SpanTag('', ['id' => 'deactivated']),
             '<hr class="my-2">',
         ]);
-        
+
         // Scheduling Configuration section
         $rightColumn->addItem('<hr>');
         $rightColumn->addItem(new \Ease\Html\H5Tag(_('Scheduling Configuration')));
@@ -124,7 +124,7 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
             '<br/>',
             $executorChooser,
         ]);
-        
+
         $runtemplateOptions->addColumn(4, $rightColumn);
 
         if (WebPage::getRequestValue('delete', 'int') === 1) {

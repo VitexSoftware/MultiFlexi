@@ -14,11 +14,11 @@ declare(strict_types=1);
  */
 
 /**
- * TODO: Move to API when POST/PUT support is implemented
- * 
+ * TODO: Move to API when POST/PUT support is implemented.
+ *
  * This endpoint will be migrated to:
  * POST /api/VitexSoftware/MultiFlexi/1.0.0/runtemplates/bulk-execute
- * 
+ *
  * Request body:
  * {
  *   "runtemplate_ids": [1, 2, 3],
@@ -37,6 +37,7 @@ header('Content-Type: application/json');
 if (!WebPage::singleton()->isLogged()) {
     http_response_code(401);
     echo json_encode(['success' => false, 'error' => 'Not authenticated']);
+
     exit;
 }
 
@@ -44,6 +45,7 @@ if (!WebPage::singleton()->isLogged()) {
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['success' => false, 'error' => 'Method not allowed']);
+
     exit;
 }
 
@@ -56,6 +58,7 @@ $when = $_POST['when'] ?? 'now';
 if (empty($runtemplateIds) || !\is_array($runtemplateIds)) {
     http_response_code(400);
     echo json_encode(['success' => false, 'error' => 'Invalid or missing runtemplate_ids']);
+
     exit;
 }
 
@@ -63,27 +66,29 @@ try {
     $scheduled = 0;
     $errors = [];
     $jobIds = [];
-    
+
     foreach ($runtemplateIds as $rtId) {
         $rtId = (int) $rtId;
-        
+
         // Load RunTemplate
         $runTemplate = new \MultiFlexi\RunTemplate($rtId);
-        
+
         if (!$runTemplate->getMyKey()) {
             $errors[] = "RunTemplate #{$rtId} not found";
+
             continue;
         }
-        
+
         // Check if RunTemplate is active
         if (!$runTemplate->getDataValue('active')) {
             $errors[] = "RunTemplate #{$rtId} is not active";
+
             continue;
         }
-        
+
         // Prepare and schedule job
         $jobber = new \MultiFlexi\Job();
-        
+
         try {
             $whenDateTime = new \DateTime($when);
             $prepared = $jobber->prepareJob(
@@ -91,11 +96,11 @@ try {
                 null, // No upload environment for bulk execute
                 $whenDateTime,
                 $executor,
-                'adhoc'
+                'adhoc',
             );
-            
+
             if ($prepared) {
-                $scheduled++;
+                ++$scheduled;
                 $jobIds[] = $jobber->getMyKey();
             } else {
                 $errors[] = "Failed to schedule RunTemplate #{$rtId}";
@@ -104,7 +109,7 @@ try {
             $errors[] = "RunTemplate #{$rtId}: ".$e->getMessage();
         }
     }
-    
+
     if ($scheduled > 0) {
         echo json_encode([
             'success' => true,

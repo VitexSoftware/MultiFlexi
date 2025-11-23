@@ -16,46 +16,70 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 /**
- * Job Filter Toolbar Widget
- * 
+ * Job Filter Toolbar Widget.
+ *
  * Reusable toolbar with predefined job filters
  */
 class JobFilterToolbar extends \Ease\Html\DivTag
 {
     /**
-     * Current active filter
+     * Current active filter.
      */
     private ?string $activeFilter;
 
     /**
-     * Base URL for filter links
+     * Base URL for filter links.
      */
     private string $baseUrl;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param string|null $activeFilter Currently active filter (success, failed, running, scheduled, today)
-     * @param string $baseUrl Base URL for filter links (default: joblist.php)
-     * @param array $properties Additional div properties
+     * @param null|string $activeFilter Currently active filter (success, failed, running, scheduled, today)
+     * @param string      $baseUrl      Base URL for filter links (default: joblist.php)
+     * @param array       $properties   Additional div properties
      */
     public function __construct(?string $activeFilter = null, string $baseUrl = 'joblist.php', array $properties = [])
     {
         $this->activeFilter = $activeFilter;
         $this->baseUrl = $baseUrl;
 
-        $properties['id'] = $properties['id'] ?? 'job-filter-buttons';
+        $properties['id'] ??= 'job-filter-buttons';
         parent::__construct(null, $properties);
 
-        $this->addToolbarCSS();
+        self::addToolbarCSS();
         $this->buildButtons();
-        $this->addRepositioningScript();
+        self::addRepositioningScript();
     }
 
     /**
-     * Add CSS for responsive layout
+     * Get page title based on active filter.
+     *
+     * @return string Localized page title
      */
-    private function addToolbarCSS(): void
+    public static function getPageTitle(?string $filter): string
+    {
+        switch ($filter) {
+            case 'success':
+                return _('Successful Jobs');
+            case 'failed':
+                return _('Failed Jobs');
+            case 'running':
+                return _('Running Jobs');
+            case 'scheduled':
+                return _('Scheduled Jobs');
+            case 'today':
+                return _('Today\'s Jobs');
+
+            default:
+                return _('Job history');
+        }
+    }
+
+    /**
+     * Add CSS for responsive layout.
+     */
+    private static function addToolbarCSS(): void
     {
         WebPage::singleton()->addCSS(<<<'CSS'
 #job-filter-buttons {
@@ -91,7 +115,7 @@ CSS);
     }
 
     /**
-     * Build filter buttons
+     * Build filter buttons.
      */
     private function buildButtons(): void
     {
@@ -123,9 +147,9 @@ CSS);
     }
 
     /**
-     * Add JavaScript to reposition buttons next to DataTable controls
+     * Add JavaScript to reposition buttons next to DataTable controls.
      */
-    private function addRepositioningScript(): void
+    private static function addRepositioningScript(): void
     {
         WebPage::singleton()->addJavaScript(<<<'EOD'
 $(document).ready(function() {
@@ -160,28 +184,5 @@ $(document).ready(function() {
     }, 100);
 });
 EOD);
-    }
-
-    /**
-     * Get page title based on active filter
-     *
-     * @return string Localized page title
-     */
-    public static function getPageTitle(?string $filter): string
-    {
-        switch ($filter) {
-            case 'success':
-                return _('Successful Jobs');
-            case 'failed':
-                return _('Failed Jobs');
-            case 'running':
-                return _('Running Jobs');
-            case 'scheduled':
-                return _('Scheduled Jobs');
-            case 'today':
-                return _('Today\'s Jobs');
-            default:
-                return _('Job history');
-        }
     }
 }

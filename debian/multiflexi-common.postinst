@@ -29,10 +29,12 @@ configure)
 
     # Ensure /var/lib/multiflexi exists with proper permissions
     if [ ! -d "/var/lib/multiflexi" ]; then
-        mkdir -p /var/lib/multiflexi
+        mkdir -p /var/lib/multiflexi/tmp
     fi
     chown multiflexi:www-data /var/lib/multiflexi
     chmod 755 /var/lib/multiflexi
+    chown multiflexi:www-data /var/lib/multiflexi/tmp
+    chmod 775 /var/lib/multiflexi/tmp
 
     # Ensure /etc/multiflexi directory exists
     if [ ! -d "/etc/multiflexi" ]; then

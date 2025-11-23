@@ -113,25 +113,28 @@ $errorMiddleware = $container->get(ErrorMiddleware::class);
 // Add custom error handler to convert 405 to 404 for non-existent paths
 $errorMiddleware->setErrorHandler(
     \Slim\Exception\HttpMethodNotAllowedException::class,
-    function (\Psr\Http\Message\ServerRequestInterface $request, \Throwable $exception, bool $displayErrorDetails) {
+    static function (\Psr\Http\Message\ServerRequestInterface $request, \Throwable $exception, bool $displayErrorDetails) {
         $response = new \Slim\Psr7\Response();
-        
+
         // Detect format suffix from URL
         $uri = $request->getUri()->getPath();
         $suffix = 'json'; // default
+
         if (preg_match('/\.(json|xml|html)$/', $uri, $matches)) {
             $suffix = $matches[1];
         }
-        
+
         // Generate response based on suffix
         switch ($suffix) {
             case 'html':
                 $content = '<!DOCTYPE html><html><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested resource does not exist.</p><p><a href="javascript:history.back()">Go Back</a></p></body></html>';
                 $contentType = 'text/html';
+
                 break;
             case 'xml':
                 $content = '<?xml version="1.0" encoding="UTF-8"?><error><code>404</code><message>The requested resource does not exist</message></error>';
                 $contentType = 'application/xml';
+
                 break;
             case 'json':
             default:
@@ -140,12 +143,14 @@ $errorMiddleware->setErrorHandler(
                     'message' => 'The requested resource does not exist',
                 ]);
                 $contentType = 'application/json';
+
                 break;
         }
-        
+
         $response->getBody()->write($content);
+
         return $response->withStatus(404)->withHeader('Content-Type', $contentType);
-    }
+    },
 );
 
 // route0 → (unnamed) → /{routes:.*}

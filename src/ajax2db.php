@@ -43,10 +43,11 @@ $engine = new $class();
 if ($engine instanceof \MultiFlexi\CompanyAppRunTemplateLister) {
     $companyId = \Ease\WebPage::getRequestValue('company_id', 'int');
     $appId = \Ease\WebPage::getRequestValue('app_id', 'int');
-    
+
     if ($companyId) {
         $engine->setCompany($companyId);
     }
+
     if ($appId) {
         $engine->setApp($appId);
     }
