@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
+use Ease\Html\ATag;
 use MultiFlexi\Company;
 use MultiFlexi\CompanyApp;
 
@@ -41,7 +42,7 @@ class CompaniesBar extends \Ease\Html\DivTag
             $companyAppCard = new \Ease\TWB4\Card(new JobSuccessGraph($todaysJobs, ['style' => 'max-width: fit-content; margin-left: auto; margin-right: auto;']), ['style' => 'width: 10rem;']);
             $companyAppCard->addTagClass('text-center');
 
-            $companyAppCard->addItem(new \Ease\Html\ATag('company.php?id='.$companyData['id'], new \Ease\Html\ImgTag($companyData['logo'], (string) $companyData['name'], ['title' => $companyData['slug'], 'class' => 'card-img-top', 'style' => 'padding: 5px; margin: 5px;max-height: 150px;max-width: 150px;'])));
+            $companyAppCard->addItem(new ATag('company.php?id='.$companyData['id'], new \Ease\Html\ImgTag($companyData['logo'], (string) $companyData['name'], ['title' => $companyData['slug'], 'class' => 'card-img-top', 'style' => 'padding: 5px; margin: 5px;max-height: 150px;max-width: 150px;'])));
 
             $companyAppCard->addItem(new \Ease\Html\DivTag(new \Ease\Html\H5Tag($companyData['name'], ['class' => 'card-title']), ['class' => 'card-body']));
 
@@ -52,25 +53,25 @@ class CompaniesBar extends \Ease\Html\DivTag
             foreach ($companyApps as $companyApp) {
                 $appId = $companyApp['id'];
                 $companyId = $companer->getMyKey();
-                $counts = $jobber->listingQuery()->select(null)->select("SUM(CASE WHEN exitcode = 0 THEN 1 ELSE 0 END) AS success, SUM(CASE WHEN exitcode <> 0 AND exitcode IS NOT NULL THEN 1 ELSE 0 END) AS failed, SUM(CASE WHEN exitcode IS NULL THEN 1 ELSE 0 END) as waiting")->where($jobber->todaysCond())->where('company_id', $companyId)->where('app_id', $appId)->fetch();
+                $counts = $jobber->listingQuery()->select(null)->select('SUM(CASE WHEN exitcode = 0 THEN 1 ELSE 0 END) AS success, SUM(CASE WHEN exitcode <> 0 AND exitcode IS NOT NULL THEN 1 ELSE 0 END) AS failed, SUM(CASE WHEN exitcode IS NULL THEN 1 ELSE 0 END) as waiting')->where($jobber->todaysCond('schedule'))->where('company_id', $companyId)->where('app_id', $appId)->fetch();
                 $successJobs = (int) $counts['success'];
                 $failedJobs = (int) $counts['failed'];
                 $waitingJobs = (int) $counts['waiting'];
                 $jobCounts = new \Ease\Html\DivTag(null, ['style' => 'display: flex; justify-content: center; gap: 2px;']);
 
                 if ($successJobs > 0) {
-                    $jobCounts->addItem(new \Ease\TWB4\Badge('success', $successJobs));
+                    $jobCounts->addItem(new \Ease\TWB4\Badge('success', new ATag('joblist.php?app_id='.$appId.'&company_id='.$companyId.'&status=success', (string) $successJobs)));
                 }
 
                 if ($failedJobs > 0) {
-                    $jobCounts->addItem(new \Ease\TWB4\Badge('danger', $failedJobs));
+                    $jobCounts->addItem(new \Ease\TWB4\Badge('danger', new ATag('joblist.php?app_id='.$appId.'&company_id='.$companyId.'&status=failed', (string) $failedJobs)));
                 }
 
                 if ($waitingJobs > 0) {
-                    $jobCounts->addItem(new \Ease\TWB4\Badge('warning', $waitingJobs));
+                    $jobCounts->addItem(new \Ease\TWB4\Badge('warning', new ATag('joblist.php?app_id='.$appId.'&company_id='.$companyId.'&status=waiting', (string) $waitingJobs)));
                 }
 
-                $appIcon = new \Ease\Html\ATag('companyapp.php?company_id=' . $companer->getMyKey() . '&app_id=' . $appId, new \Ease\Html\ImgTag('appimage.php?uuid=' . $companyApp['uuid'], _($companyApp['name']), ['title' => _($companyApp['description']), 'style' => 'padding: 5px; margin: 5px;max-height: 50px;max-width: 50px;']));
+                $appIcon = new ATag('companyapp.php?company_id='.$companer->getMyKey().'&app_id='.$appId, new \Ease\Html\ImgTag('appimage.php?uuid='.$companyApp['uuid'], _($companyApp['name']), ['title' => _($companyApp['description']), 'style' => 'padding: 5px; margin: 5px;max-height: 50px;max-width: 50px;']));
                 $appBlock = new \Ease\Html\DivTag($appIcon);
 
                 if ($successJobs > 0 || $failedJobs > 0 || $waitingJobs > 0) {
