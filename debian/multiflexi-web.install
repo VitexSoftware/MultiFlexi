@@ -8,6 +8,7 @@ src/assets/Buttons-1.5.6/css/*            usr/share/multiflexi/assets/Buttons-1.
 src/assets/Buttons-1.5.6/swf/*            usr/share/multiflexi/assets/Buttons-1.5.6/swf/
 src/images/*                              usr/share/multiflexi/images
 src/css/*                                 usr/share/multiflexi/css
+src/css/selectize.bootstrap4.css          usr/share/javascript/selectize.js/css/selectize.bootstrap4.css
 src/MultiFlexi/*.php                      usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Audit                      usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Command                    usr/lib/multiflexi/MultiFlexi/
