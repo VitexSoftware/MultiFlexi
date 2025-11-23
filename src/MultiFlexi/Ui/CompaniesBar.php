@@ -52,7 +52,7 @@ class CompaniesBar extends \Ease\Html\DivTag
             foreach ($companyApps as $companyApp) {
                 $appId = $companyApp['id'];
                 $companyId = $companer->getMyKey();
-                $counts = (new \MultiFlexi\Job())->listingQuery()->select(null)->select("SUM(CASE WHEN exitcode = 0 THEN 1 ELSE 0 END) AS success, SUM(CASE WHEN exitcode <> 0 AND exitcode IS NOT NULL THEN 1 ELSE 0 END) AS failed, SUM(CASE WHEN exitcode IS NULL THEN 1 ELSE 0 END) as waiting")->where('company_id', $companyId)->where('app_id', $appId)->fetch();
+                $counts = $jobber->listingQuery()->select(null)->select("SUM(CASE WHEN exitcode = 0 THEN 1 ELSE 0 END) AS success, SUM(CASE WHEN exitcode <> 0 AND exitcode IS NOT NULL THEN 1 ELSE 0 END) AS failed, SUM(CASE WHEN exitcode IS NULL THEN 1 ELSE 0 END) as waiting")->where($jobber->todaysCond())->where('company_id', $companyId)->where('app_id', $appId)->fetch();
                 $successJobs = (int) $counts['success'];
                 $failedJobs = (int) $counts['failed'];
                 $waitingJobs = (int) $counts['waiting'];
