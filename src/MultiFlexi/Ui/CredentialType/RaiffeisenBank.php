@@ -30,7 +30,7 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
         $certPass = $certPassField ? $certPassField->getValue() : '';
 
         if (empty($certFile) === false) {
-            if (file_exists($certFile) && is_readable($certFile) ) {
+            if (file_exists($certFile) && is_readable($certFile)) {
                 $certData = file_get_contents($certFile);
                 $notBefore = null;
                 $notAfter = null;
@@ -177,7 +177,7 @@ class RaiffeisenBank extends \MultiFlexi\Ui\CredentialFormHelperPrototype
                         ], ['class' => 'col-sm-8']));
 
                         // Rate limits are tracked per certificate decimal serial number (not per X-IBM-Client-Id)
-                        $ratesFile = \MultiFlexi\Defaults::$MULTIFLEXI_TMP .'/rbczpremiumapi_rates.json';
+                        $ratesFile = \MultiFlexi\Defaults::$MULTIFLEXI_TMP.'/rbczpremiumapi_rates.json';
 
                         if (file_exists($ratesFile)) {
                             $rates = $this->getJsonRates($ratesFile);
