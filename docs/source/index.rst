@@ -80,12 +80,8 @@ Contents
    opentelemetry
    development
    selenium-testing
-   database-testing
    architecture
    apps_overview
    multiflexi-cli
-   projects
-   coding-standards
-   ci-cd
    credential-type
    gdpr-compliance
