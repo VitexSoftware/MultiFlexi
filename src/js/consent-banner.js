@@ -169,7 +169,7 @@ class MultiFxiConsentBanner {
                             <div class="card">
                                 <div class="card-header">
                                     <h5 class="mb-0">
-                                        <i class="fas fa-cookie-bite"></i>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="font-awesome-icon" width="1em" height="1em" fill="currentColor"><!--! Font Awesome Pro 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2024 Fonticons, Inc. --><path d="M96 128a128 128 0 1 0 256 0A128 128 0 1 0 96 128zm320 0a128 128 0 1 0 256 0 128 128 0 1 0 -256 0zm-128 320a128 128 0 1 0 256 0 128 128 0 1 0 -256 0zM256 0c-17.7 0-32 14.3-32 32V64c0 17.7 14.3 32 32 32H416c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H256zM0 128C0 57.3 57.3 0 128 0H224c17.7 0 32 14.3 32 32s-14.3 32-32 32H128C92.7 64 64 92.7 64 128V384c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V288c0-17.7 14.3-32 32-32s32 14.3 32 32V384c0 70.7-57.3 128-128 128H128C57.3 512 0 454.7 0 384V128z"/></svg>
                                         ${this.translate('We Value Your Privacy')}
                                     </h5>
                                 </div>
@@ -186,13 +186,13 @@ class MultiFxiConsentBanner {
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <button type="button" class="btn btn-outline-secondary btn-block" id="consent-decline-all">
-                                                    <i class="fas fa-times"></i>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="font-awesome-icon" width="1em" height="1em" fill="currentColor"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
                                                     ${this.translate('Decline All')}
                                                 </button>
                                             </div>
                                             <div class="col-md-6">
                                                 <button type="button" class="btn btn-success btn-block" id="consent-accept-all">
-                                                    <i class="fas fa-check"></i>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="font-awesome-icon" width="1em" height="1em" fill="currentColor"><path d="M173.898 439.404l-166.4-166.4c-10.72-10.72-10.72-28.08 0-38.8l38.8-38.8c10.72-10.72 28.08-10.72 38.8 0l117.6 117.6 204.4-204.4c10.72-10.72 28.08-10.72 38.8 0l38.8 38.8c10.72 10.72 10.72 28.08 0 38.8l-240 240c-10.72 10.72-28.08 10.72-38.8 0z"></path></svg>
                                                     ${this.translate('Accept All')}
                                                 </button>
                                             </div>
@@ -200,7 +200,7 @@ class MultiFxiConsentBanner {
                                         <div class="row mt-2">
                                             <div class="col-md-12">
                                                 <button type="button" class="btn btn-primary btn-block" id="consent-save-preferences">
-                                                    <i class="fas fa-cog"></i>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="font-awesome-icon" width="1em" height="1em" fill="currentColor"><path d="M500.3 373.6c-10.3 21.2-22.8 40.7-37.6 58.1c-2.5 3-5.1 5.9-7.8 8.8c-15.7 17.2-33.2 32.5-52.1 45.1c-10.3 6.9-20.9 13.1-31.8 18.4c-13.5 6.6-27.4 12.1-41.6 16.4c-2.5 .8-5.1 1.6-7.6 2.3c-20.8 5.7-42.2 9.1-64 9.1c-21.8 0-43.2-3.4-64-9.1c-2.5-.7-5.1-1.5-7.6-2.3c-14.2-4.3-28.1-9.8-41.6-16.4c-10.9-5.3-21.5-11.5-31.8-18.4c-18.9-12.6-36.4-27.9-52.1-45.1c-2.7-2.9-5.3-5.8-7.8-8.8c-14.8-17.4-27.3-36.9-37.6-58.1c-6.9-14.2-12.1-29-16.1-44.2c-.7-2.5-1.4-5-2-7.6c-5.7-20.8-9.1-42.2-9.1-64s3.4-43.2 9.1-64c.6-2.6 1.3-5.1 2-7.6c4-15.2 9.2-30 16.1-44.2c10.3-21.2 22.8-40.7 37.6-58.1c2.5-3 5.1-5.9 7.8-8.8c15.7-17.2 33.2-32.5 52.1-45.1c10.3-6.9 20.9-13.1 31.8-18.4c13.5-6.6 27.4-12.1 41.6-16.4c2.5-.8 5.1-1.6 7.6-2.3c20.8-5.7 42.2-9.1 64-9.1s43.2 3.4 64 9.1c2.5 .7 5.1 1.5 7.6 2.3c14.2 4.3 28.1 9.8 41.6 16.4c10.9 5.3 21.5 11.5 31.8 18.4c18.9 12.6 36.4 27.9 52.1 45.1c2.7 2.9 5.3 5.8 7.8 8.8c14.8 17.4 27.3 36.9 37.6 58.1c6.9 14.2 12.1 29 16.1 44.2c.7 2.5 1.4 5 2 7.6c5.7 20.8 9.1 42.2 9.1 64s-3.4 43.2-9.1 64c-.6 2.6-1.3 5.1-2 7.6c-4 15.2-9.2 30-16.1 44.2zM256 320a64 64 0 1 0 0-128 64 64 0 1 0 0 128z"/></svg>
                                                     ${this.translate('Save My Preferences')}
                                                 </button>
                                             </div>
@@ -466,7 +466,7 @@ class MultiFxiConsentBanner {
         buttons.forEach(button => {
             button.disabled = show;
             if (show) {
-                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                button.innerHTML = '<svg class="fa-spinner" width="1em" height="1em" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zM108.922 108.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.51-21.491-48-48-48z" /></svg> Processing...';
             }
         });
     }
