@@ -43,7 +43,7 @@ class ColumnsForm extends SecureForm
      * Počet položek na řádek.
      */
     public int $itemsPerRow = 3;
-    public columns $engine;
+    public $engine;
 
     /**
      * Odesílací tlačítka.
@@ -61,12 +61,12 @@ class ColumnsForm extends SecureForm
     public function __construct(
         $engine,
         $formContents = null,
-        $tagProperties = [],
+        array $tagProperties = [],
     ) {
         $this->engine = $engine;
         $tagProperties['method'] = 'post';
         $tagProperties['name'] = $engine::class;
-        parent::__construct($tagProperties, [], $formContents);
+        parent::__construct($tagProperties, $formContents);
         $this->newRow();
         $this->savers = new DivTag(null, ['style' => 'text-align: right']);
     }
