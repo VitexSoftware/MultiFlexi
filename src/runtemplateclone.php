@@ -48,6 +48,8 @@ try {
     $templateData['name'] = $cloneName;
     unset($templateData['last_schedule']);
     unset($templateData['next_schedule']);
+    unset($templateData['failed_jobs_count']);
+    unset($templateData['successfull_jobs_count']);
 
     // Insert new template
     $newId = $newTemplate->insertToSQL($templateData);
