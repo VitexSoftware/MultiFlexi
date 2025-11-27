@@ -46,6 +46,8 @@ try {
     $templateData = $sourceTemplate->getData();
     unset($templateData[$sourceTemplate->getKeyColumn()]); // Remove ID
     $templateData['name'] = $cloneName;
+    unset($templateData['last_schedule']);
+    unset($templateData['next_schedule']);
 
     // Insert new template
     $newId = $newTemplate->insertToSQL($templateData);
