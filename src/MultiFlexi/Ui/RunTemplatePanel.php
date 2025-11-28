@@ -76,13 +76,6 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         $statsCards = new \MultiFlexi\Ui\RunTemplateStatsCards($runtemplate);
         $leftColumn->addItem($statsCards);
 
-        // Add job visualization row
-        $visualizationRow = new \Ease\TWB4\Row();
-        $visualizationRow->addTagClass('mt-3');
-        $visualizationRow->addColumn(8, new \MultiFlexi\Ui\RunTemplateJobsLastMonthChart($runtemplate));
-        $visualizationRow->addColumn(4, new \MultiFlexi\Ui\JobGraphWidget($runtemplate, 10, 10));
-        $leftColumn->addItem($visualizationRow);
-
         // Add action buttons below the chart
         $actionsRow = new \Ease\TWB4\Row();
         $actionsRow->addTagClass('mt-3');
@@ -133,6 +126,12 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
             $deleteButton = new \Ease\TWB4\LinkButton('runtemplate.php?delete=1&id='.$runtemplateId, _('Delete ?').'&nbsp;&nbsp;❌', 'warning btn-lg');
         }
 
+        // Add job visualization row
+        $visualizationRow = new \Ease\TWB4\Row();
+        $visualizationRow->addTagClass('mt-3');
+        $visualizationRow->addColumn(10, new \MultiFlexi\Ui\RunTemplateJobsLastMonthChart($runtemplate));
+        $visualizationRow->addColumn(2, new \MultiFlexi\Ui\JobGraphWidget($runtemplate, 10, 10));
+        
         $runtemplateJobs = new \MultiFlexi\Ui\RuntemplateJobsListing($runtemplate);
 
         $nameInput = new \Ease\Html\ATag('#', $runtemplate->getRecordName(), ['class' => 'editable', 'style' => 'font-size: xxx-large;', 'id' => 'name', 'data-pk' => $runtemplate->getMyKey(), 'data-url' => 'runtemplatesave.php', 'data-title' => _('Update RunTemplate name')]);
@@ -180,7 +179,7 @@ EOD);
         // Both name and note fields will be initialized there with proper CSRF configuration
 
         $runtemplateTabs = new \Ease\TWB4\Tabs();
-        $runtemplateTabs->addTab(_('Jobs'), $runtemplateJobs);
+        $runtemplateTabs->addTab(_('Jobs'), [$visualizationRow, $runtemplateJobs]);
         $runtemplateTabs->addTab(_('Options'), [new RuntemplateConfigForm($runtemplate)]);
         // TODO:   $runtemplateTabs->addTab(_('Actions'), [new \MultiFlexi\Ui\ActionsTab($runtemplate)]);
         $runtemplateTabs->addTab(_('Environment'), [new EnvironmentView($runtemplate->credentialsEnvironment()), new RunTemplateDotEnv($runtemplate)]);
