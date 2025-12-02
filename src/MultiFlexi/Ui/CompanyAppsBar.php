@@ -35,10 +35,44 @@ class CompanyAppsBar extends \Ease\Html\DivTag
         foreach ($companyApps as $companyApp) {
             $companyAppCard = new \Ease\TWB4\Card(new \Ease\Html\ATag('companyapp.php?company_id='.$company->getMyKey().'&app_id='.$companyApp['id'], new \Ease\Html\ImgTag('appimage.php?uuid='.$companyApp['uuid'], _($companyApp['name']), ['title' => _($companyApp['description']), 'class' => 'card-img-top', 'style' => 'padding: 5px; margin: 5px;max-height: 150px;max-width: 150px;'])), ['style' => 'width: 10rem; min-width: 120px;']);
             $companyAppCard->addTagClass('text-center');
-            $lastJobInfo = $jobber->listingQuery()->select(['id', 'exitcode'], true)->where(['company_id' => $company->getMyKey(), 'app_id' => $companyApp['id']])->order('id DESC')->limit(1)->fetchAll();
+            // Get last executed job (begin is not null)
+            $lastJobInfo = $jobber->listingQuery()
+                ->select(['id', 'exitcode', 'begin', 'end', 'runtemplate_id'], true)
+                ->where([
+                    'company_id' => $company->getMyKey(),
+                    'app_id' => $companyApp['id']
+                ])
+                ->where('begin IS NOT NULL')
+                ->order('begin DESC')
+                ->limit(1)
+                ->fetchAll();
 
+            $statusIcons = '';
             if ($lastJobInfo) {
-                $companyAppStatus = new \Ease\Html\ATag('job.php?id='.$lastJobInfo[0]['id'], new ExitCode($lastJobInfo[0]['exitcode'], ['style' => 'font-size: 2.0em; font-family: monospace;']));
+                $job = $lastJobInfo[0];
+                
+                // Bomb emoji if job is running (begin set, end not set)
+                if ($job['begin'] && empty($job['end'])) {
+                    $statusIcons .= '💣';
+                }
+                
+                // Hourglass emoji if there is a scheduled future job for this runtemplate
+                $scheduler = new \MultiFlexi\Scheduler();
+                $futureJob = $scheduler->listingQuery()
+                    ->select(['schedule.id'], true)
+                    ->leftJoin('job ON job.id = schedule.job')
+                    ->where('job.runtemplate_id = ? AND schedule.after > ?', [$job['runtemplate_id'], date('Y-m-d H:i:s')])
+                    ->order('schedule.after ASC')
+                    ->limit(1)
+                    ->fetchAll();
+                if ($futureJob) {
+                    $statusIcons .= '⏳';
+                }
+                
+                $companyAppStatus = new \Ease\Html\ATag(
+                    'job.php?id=' . $job['id'],
+                    new ExitCode($job['exitcode'], ['style' => 'font-size: 2.0em; font-family: monospace;']) . $statusIcons
+                );
             } else {
                 $companyAppStatus = new \Ease\TWB4\Badge('disabled', '🪤', ['style' => 'font-size: 2.0em; font-family: monospace;']);
             }
