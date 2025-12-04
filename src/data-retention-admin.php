@@ -40,7 +40,7 @@ $user = User::singleton();
 
 if (!$user->getDataValue('id')) {
     $user->addStatusMessage(_('Please sign in'), 'warning');
-    WebPage::singleton()->redirect('login.php');
+    WebPage::singleton()->redirect('login.php?redirect='.urlencode($_SERVER['REQUEST_URI']));
 
     exit;
 }
