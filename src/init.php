@@ -39,7 +39,8 @@ if (class_exists('\MultiFlexi\Security\SessionManager')) {
     if (!$sessionManager->startSecureSession()) {
         // Session security validation failed, redirect to login
         if (basename($_SERVER['SCRIPT_NAME']) !== 'login.php') {
-            header('Location: login.php?session_expired=1');
+            $currentUrl = $_SERVER['REQUEST_URI'];
+            header('Location: login.php?session_expired=1&redirect='.urlencode($currentUrl));
 
             exit;
         }
