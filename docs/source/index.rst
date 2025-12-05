@@ -16,7 +16,7 @@ Key Features
 
 - **Multi-Platform Integration**: Native support for AbraFlexi, Pohoda, and other business systems with extensible credential types
 - **Flexible Job Scheduling**: Automated task execution with customizable intervals (hourly, daily, weekly, monthly, yearly) and dependencies
-- **Advanced Credential Management**: Secure handling of authentication credentials including VaultWarden integration, banking APIs (FioBank, RaiffeisenBank, CSAS), and Office365
+- **Three-Tier Credential Management**: Sophisticated credential system with CredentialPrototype → CredentialType → Credential architecture for secure, reusable authentication across companies and applications. Includes VaultWarden integration, banking APIs (FioBank, RaiffeisenBank, CSAS), and Office365 support
 - **Multiple Execution Environments**: Support for native execution, Docker containers, Kubernetes pods, Azure cloud, and Podman
 - **Comprehensive Logging**: Detailed execution logs with Zabbix and OpenTelemetry monitoring integration and real-time tracking
 - **Multi-Interface Support**:
@@ -34,10 +34,11 @@ To get started with MultiFlexi:
 
 1. Follow the :doc:`install` guide for installation instructions
 2. Complete the :doc:`firstrun` configuration
-3. Explore the :doc:`usage` section for operational guidance
-4. Check the :doc:`api` documentation for programmatic integration
-5. Use the :doc:`multiflexi-cli` for command-line management
-6. See :doc:`ansible` for Infrastructure as Code automation
+3. Set up :doc:`credential-type` for your business systems and applications
+4. Explore the :doc:`usage` section for operational guidance
+5. Check the :doc:`api` documentation for programmatic integration
+6. Use the :doc:`multiflexi-cli` for command-line management
+7. See :doc:`ansible` for Infrastructure as Code automation
 
 For developers and contributors, see the :doc:`development` section for technical details, architecture information, and development guidelines.
 
