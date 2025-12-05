@@ -203,3 +203,102 @@ Key Design Principles
 7. **Incremental Scheduling**: Jobs are scheduled one run at a time (``next_schedule`` is set after execution), preventing duplicate scheduling
 8. **Resource Management**: Memory limits and parallel execution controls prevent resource exhaustion
 
+Credential Management Architecture
+----------------------------------
+
+MultiFlexi implements a sophisticated three-tier credential management system that provides secure, reusable, and flexible authentication handling across the entire platform. This architecture ensures clear separation between credential templates, company-specific implementations, and actual usage.
+
+Three-Tier Credential System
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The credential management follows a hierarchical relationship:
+
+**CredentialPrototype → CredentialType → Credential**
+
+.. code-block:: text
+
+    ┌─────────────────────┐
+    │ CredentialPrototype │ (JSON Templates - Global)
+    │                     │
+    │ • JSON schema       │
+    │ • Field definitions │
+    │ • Validation rules  │
+    │ • Reusable across   │
+    │   companies         │
+    └──────────┬──────────┘
+               │ instantiated as
+               ▼
+    ┌─────────────────────┐
+    │   CredentialType    │ (PHP Classes - Company Scoped)
+    │                     │
+    │ • PHP implementation│
+    │ • Company-specific  │
+    │ • Business logic    │
+    │ • UUID tracking     │
+    └──────────┬──────────┘
+               │ provides schema for
+               ▼
+    ┌─────────────────────┐
+    │     Credential      │ (Values - Application Usage)
+    │                     │
+    │ • Actual values     │
+    │ • Encrypted storage │
+    │ • Used by jobs      │
+    │ • RunTemplate refs  │
+    └─────────────────────┘
+
+**Database Schema Relationships:**
+
+.. code-block:: text
+
+    credential_prototype (1) ←→ (∞) credential_prototype_field
+            ↓ (1:∞)
+    credential_type ←→ (1:1) company
+            ↓ (1:∞)
+    credentials ←→ (∞:1) runtemplate
+               ←→ (∞:1) application
+
+**Tier 1: CredentialPrototype (JSON Templates)**
+  - **Purpose**: Define reusable credential schemas and field structures
+  - **Storage**: ``credential_prototype`` and ``credential_prototype_field`` tables
+  - **Format**: JSON-based templates with field definitions, types, validation
+  - **Scope**: Global templates available to all companies
+  - **Management**: ``multiflexi-cli crprototype`` commands
+
+**Tier 2: CredentialType (Company Instances)**
+  - **Purpose**: Company-specific implementations of credential prototypes
+  - **Storage**: ``credential_type`` table with UUID support
+  - **Implementation**: PHP classes implementing ``CredentialTypeInterface``
+  - **Scope**: Company-isolated instances
+  - **Management**: ``multiflexi-cli credtype`` commands
+
+**Tier 3: Credential (Application Usage)**
+  - **Purpose**: Actual credential values used by applications and jobs
+  - **Storage**: ``credentials`` table with encrypted sensitive data
+  - **Usage**: Referenced by RunTemplates and job executions
+  - **Scope**: Specific credential instances for operational use
+  - **Management**: Web interface and CLI tools
+
+Security and Isolation Features
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Multi-Tenant Security**
+  - Company-scoped credential types prevent cross-tenant access
+  - Database-level isolation enforced through foreign key constraints
+  - Role-based access controls limit credential management permissions
+
+**Encryption and Protection**
+  - Sensitive fields (passwords, API keys) encrypted at rest
+  - Separate encryption key management from credential storage
+  - Secure credential field transmission between components
+
+**Audit and Compliance**
+  - Complete audit trail for all credential operations
+  - GDPR-compliant data handling and deletion capabilities
+  - Secure credential rotation and lifecycle management
+
+**Template Reusability and Standardization**
+  - Standardized field definitions across companies using same systems
+  - Consistent validation rules and data types
+  - Reduced setup complexity for common integration patterns
+

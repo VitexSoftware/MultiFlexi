@@ -41,13 +41,34 @@ class CredentialTypeSelect extends \Ease\Html\SelectTag
     public function loadItems()
     {
         $kredenc = new \MultiFlexi\CredentialType();
-
         $credentials = ['' => _('Do not use')];
-        // ->where('class', $this->class)
+
+        // Get PHP-based credential types (legacy system)
         $companyCredentials = $kredenc->listingQuery()->where('company_id', $this->company_id)->fetchAll('id');
 
         foreach ($companyCredentials as $credential) {
-            $credentials[$credential['id']] = $credential['name'].' ⦉'.$credential['class'].'⦊';
+            $source = !empty($credential['class']) ? 'PHP' : 'JSON';
+            $credentials[$credential['id']] = $credential['name'].' ⦉'.$source.'⦊';
+        }
+
+        // Get JSON-based credential types from credential_prototype table
+        $credProto = new \MultiFlexi\CredentialProtoType();
+        $jsonCredentials = $credProto->listingQuery()
+            ->leftJoin('credential_type ON credential_type.uuid = credential_prototype.uuid')
+            ->where('credential_type.company_id', $this->company_id)
+            ->orWhere('credential_type.company_id IS NULL') // Global credential types
+            ->select([
+                'credential_type.id',
+                'credential_prototype.name',
+                'credential_prototype.code',
+                'credential_prototype.uuid',
+            ])
+            ->fetchAll('id');
+
+        foreach ($jsonCredentials as $jsonCred) {
+            if (!isset($credentials[$jsonCred['id']])) { // Avoid duplicates
+                $credentials[$jsonCred['id']] = $jsonCred['name'].' ⦉JSON⦊';
+            }
         }
 
         ksort($credentials);

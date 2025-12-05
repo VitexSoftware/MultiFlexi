@@ -131,7 +131,7 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         $visualizationRow->addTagClass('mt-3');
         $visualizationRow->addColumn(10, new \MultiFlexi\Ui\RunTemplateJobsLastMonthChart($runtemplate));
         $visualizationRow->addColumn(2, new \MultiFlexi\Ui\JobGraphWidget($runtemplate, 10, 10));
-        
+
         $runtemplateJobs = new \MultiFlexi\Ui\RuntemplateJobsListing($runtemplate);
 
         $nameInput = new \Ease\Html\ATag('#', $runtemplate->getRecordName(), ['class' => 'editable', 'style' => 'font-size: xxx-large;', 'id' => 'name', 'data-pk' => $runtemplate->getMyKey(), 'data-url' => 'runtemplatesave.php', 'data-title' => _('Update RunTemplate name')]);
