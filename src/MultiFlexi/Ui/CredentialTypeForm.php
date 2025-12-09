@@ -91,7 +91,7 @@ class CredentialTypeForm extends SecureForm
             $formContents[] = $this->credTypeField((string) $crTypeField->getMykey() ?? 'new', $crTypeField);
         }
 
-        parent::__construct(['action' => 'credentialtype.php'], ['method' => 'POST'], $formContents);
+        parent::__construct(['action' => 'credentialtype.php', 'method' => 'POST'], $formContents);
         // $this->setTagProperty('enctype', 'multipart/form-data');
 
         $submitRow = new \Ease\TWB4\Row();
