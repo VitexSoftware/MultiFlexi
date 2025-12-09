@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "64b484840e6cab5421a44da441d18493",
+    "content-hash": "c850c4b863d746b3afce2ce0e3562ca6",
     "packages": [
         {
             "name": "brick/math",
@@ -7824,8 +7824,8 @@
             "version": "2.1.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/c9d1bcf56c917e1b753b4acf310b029ba26f0c7f",
-                "reference": "c9d1bcf56c917e1b753b4acf310b029ba26f0c7f",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/c74f5fa89dcc3f354b5b9617786c8f3df9904ea6",
+                "reference": "c74f5fa89dcc3f354b5b9617786c8f3df9904ea6",
                 "shasum": ""
             },
             "require": {
@@ -7871,20 +7871,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-12-02T18:31:04+00:00"
+            "time": "2025-12-09T08:49:12+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
-            "version": "2.0.8",
+            "version": "2.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-phpunit.git",
-                "reference": "2fe9fbeceaf76dd1ebaa7bbbb25e2fb5e59db2fe"
+                "reference": "8d61a5854e7497d95bc85188e13537e99bd7aae7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/2fe9fbeceaf76dd1ebaa7bbbb25e2fb5e59db2fe",
-                "reference": "2fe9fbeceaf76dd1ebaa7bbbb25e2fb5e59db2fe",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/8d61a5854e7497d95bc85188e13537e99bd7aae7",
+                "reference": "8d61a5854e7497d95bc85188e13537e99bd7aae7",
                 "shasum": ""
             },
             "require": {
@@ -7922,9 +7922,9 @@
             "description": "PHPUnit extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-phpunit/issues",
-                "source": "https://github.com/phpstan/phpstan-phpunit/tree/2.0.8"
+                "source": "https://github.com/phpstan/phpstan-phpunit/tree/2.0.10"
             },
-            "time": "2025-11-11T07:55:22+00:00"
+            "time": "2025-12-06T11:15:39+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
