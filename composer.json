@@ -9,13 +9,6 @@
     ],
     "repositories": [
         {
-            "type": "path",
-            "url": "../php-vitexsoftware-multiflexi-core",
-            "options": {
-                "symlink": true
-            }
-        },
-        {
             "type": "vcs",
             "url": "https://github.com/ybelenko/slim-token-authentication",
             "no-api": true
