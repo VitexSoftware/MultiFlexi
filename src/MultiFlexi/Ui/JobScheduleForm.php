@@ -32,13 +32,17 @@ use MultiFlexi\RunTemplate;
 class JobScheduleForm extends SecureForm
 {
     private $runtemplate;
+    private $uploadedFiles;
 
     /**
      * Job Schedule Form.
+     *
+     * @param array $uploadedFiles Array of already uploaded file references (field => file info)
      */
-    public function __construct(RunTemplate $runtemplate)
+    public function __construct(RunTemplate $runtemplate, array $uploadedFiles = [])
     {
         $this->runtemplate = $runtemplate;
+        $this->uploadedFiles = $uploadedFiles;
         parent::__construct(['enctype' => 'multipart/form-data']);
     }
 
@@ -63,14 +67,25 @@ class JobScheduleForm extends SecureForm
     {
         foreach ($this->runtemplate->getEnvironment() as $field) {
             if ($field->isRequired() && empty($field->getValue())) {
+                $code = $field->getCode();
+
                 switch ($field->getType()) {
                     case 'file-path':
-                        $this->addInput(new \Ease\Html\InputFileTag($field->getCode()), $field->getDescription());
+                        if (!empty($this->uploadedFiles[$code])) {
+                            // Show hidden input with file reference and a label/link
+                            $fileInfo = $this->uploadedFiles[$code];
+                            $this->addItem(new \Ease\Html\InputHiddenTag($code.'_uploaded', $fileInfo['ref']));
+                            $this->addItem('<div class="form-group"><label>'.$field->getDescription().'</label><div>'.
+                                (isset($fileInfo['name']) ? htmlspecialchars($fileInfo['name']) : _('File uploaded')).
+                                '</div></div>');
+                        } else {
+                            $this->addInput(new \Ease\Html\InputFileTag($code), $field->getDescription());
+                        }
 
                         break;
 
                     default:
-                        $this->addInput(new \Ease\Html\InputTextTag($field->getCode(), WebPage::getRequestValue($field->getCode())), $field->getDescription());
+                        $this->addInput(new \Ease\Html\InputTextTag($code, WebPage::getRequestValue($code)), $field->getDescription());
 
                         break;
                 }
