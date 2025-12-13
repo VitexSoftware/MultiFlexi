@@ -40,7 +40,7 @@ class CompanyAppsBar extends \Ease\Html\DivTag
                 ->select(['id', 'exitcode', 'begin', 'end', 'runtemplate_id'], true)
                 ->where([
                     'company_id' => $company->getMyKey(),
-                    'app_id' => $companyApp['id']
+                    'app_id' => $companyApp['id'],
                 ])
                 ->where('begin IS NOT NULL')
                 ->order('begin DESC')
@@ -48,14 +48,15 @@ class CompanyAppsBar extends \Ease\Html\DivTag
                 ->fetchAll();
 
             $statusIcons = '';
+
             if ($lastJobInfo) {
                 $job = $lastJobInfo[0];
-                
+
                 // Bomb emoji if job is running (begin set, end not set)
                 if ($job['begin'] && empty($job['end'])) {
                     $statusIcons .= '💣';
                 }
-                
+
                 // Hourglass emoji if there is a scheduled future job for this runtemplate
                 $scheduler = new \MultiFlexi\Scheduler();
                 $futureJob = $scheduler->listingQuery()
@@ -65,13 +66,14 @@ class CompanyAppsBar extends \Ease\Html\DivTag
                     ->order('schedule.after ASC')
                     ->limit(1)
                     ->fetchAll();
+
                 if ($futureJob) {
                     $statusIcons .= '⏳';
                 }
-                
+
                 $companyAppStatus = new \Ease\Html\ATag(
-                    'job.php?id=' . $job['id'],
-                    new ExitCode($job['exitcode'], ['style' => 'font-size: 2.0em; font-family: monospace;']) . $statusIcons
+                    'job.php?id='.$job['id'],
+                    new ExitCode($job['exitcode'], ['style' => 'font-size: 2.0em; font-family: monospace;']).$statusIcons,
                 );
             } else {
                 $companyAppStatus = new \Ease\TWB4\Badge('disabled', '🪤', ['style' => 'font-size: 2.0em; font-family: monospace;']);

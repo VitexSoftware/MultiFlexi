@@ -33,7 +33,7 @@ if (null === $runTemplate->getMyKey()) {
     $when = WebPage::getRequestValue('when');
 
     if (WebPage::isPosted() || $when === 'now') {
-        $uploadEnv = new \MultiFlexi\ConfigFields(_('Upload'));
+        $uploadEnv = [];
 
         /**
          * Save all uploaded files into temporary directory and prepare job environment.
@@ -159,7 +159,7 @@ EOD
 
             WebPage::singleton()->container->addItem(new \Ease\TWB4\LinkButton('queue.php', sprintf(_('remaining %d 🏁 jobs scheduled'), $scheduler->listingQuery()->count()), 'info btn-large'));
         } else {
-            $appPanel = new ApplicationPanel($app, new JobScheduleForm($app, $company));
+            $appPanel = new ApplicationPanel($app, new JobScheduleForm($runTemplate));
             $appPanel->headRow->addItem(new RuntemplateButton($runTemplate));
             WebPage::singleton()->container->addItem(
                 new CompanyPanel($company, [$appPanel]),

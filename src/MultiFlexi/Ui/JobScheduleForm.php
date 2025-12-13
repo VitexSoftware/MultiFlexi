@@ -20,8 +20,7 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use MultiFlexi\Application;
-use MultiFlexi\Company;
+use MultiFlexi\RunTemplate;
 
 /**
  * Description of JobScheduleForm.
@@ -32,50 +31,55 @@ use MultiFlexi\Company;
  */
 class JobScheduleForm extends SecureForm
 {
-    private $company;
-    private $app;
+    private $runtemplate;
 
     /**
-     * Job Sechedule Form.
+     * Job Schedule Form.
      */
-    public function __construct(Application $app, Company $company)
+    public function __construct(RunTemplate $runtemplate)
     {
-        $this->company = $company;
-        $this->app = $app;
+        $this->runtemplate = $runtemplate;
         parent::__construct(['enctype' => 'multipart/form-data']);
     }
 
     /**
-     * @return booelan
+     * @return bool
      */
     public function finalize(): void
     {
+        $this->addInput(new AppExecutorSelect($this->runtemplate->getApplication()), _('Executor'), 'Native', _('Choose Executon platfom'));
+
         $this->timeSelect();
-        $this->uploadFields();
+        $this->reqiredFields();
         $this->addItem(new \Ease\TWB4\SubmitButton('<img src="images/schedule.svg" height="30">&nbsp;'._('Save App Schedule'), 'success btn-lg'));
 
         parent::finalize();
     }
 
+    /**
+     * Add Inputs for required fields.
+     */
+    public function reqiredFields(): void
+    {
+        foreach ($this->runtemplate->getEnvironment() as $field) {
+            if ($field->isRequired() && empty($field->getValue())) {
+                switch ($field->getType()) {
+                    case 'file-path':
+                        $this->addInput(new \Ease\Html\InputFileTag($field->getCode()), $field->getDescription());
+
+                        break;
+
+                    default:
+                        $this->addInput(new \Ease\Html\InputTextTag($field->getCode(), WebPage::getRequestValue($field->getCode())), $field->getDescription());
+
+                        break;
+                }
+            }
+        }
+    }
+
     public function timeSelect(): void
     {
         $this->addInput(new \Ease\Html\InputDateTimeLocalTag('when', WebPage::isPosted() ? WebPage::getRequestValue('when') : new \DateTime()), _('Launch after'));
-    }
-
-    public function uploadFields(): void
-    {
-        /* check if app requires upload fields */
-        $appFields = \MultiFlexi\Conffield::getAppConfigs($this->app);
-        /* if any of fields is upload type then add file input button */
-        $fieldsArray = \is_array($appFields) ? $appFields : (method_exists($appFields, 'getFields') ? $appFields->getFields() : (array) $appFields);
-        $uploadFields = array_filter($fieldsArray, static function ($field) {
-            return $field->getType() === 'file';
-        });
-
-        foreach ($uploadFields as $uploadField) {
-            $this->addInput(new \Ease\Html\InputFileTag($uploadField['keyname']), $uploadField['description']);
-        }
-
-        $this->addInput(new AppExecutorSelect($this->app), _('Executor'), 'Native', _('Choose Executon platfom'));
     }
 }
