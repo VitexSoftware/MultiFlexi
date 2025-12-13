@@ -72,17 +72,18 @@ if (WebPage::singleton()->isPosted()) {
 
                     // Get prototype to copy fields
                     $prototype = new \MultiFlexi\CredentialProtoType($prototypeId);
-                    
+
                     if ($credentialType->dbsync()) {
                         $credentialTypeId = $credentialType->getMyKey();
-                        
+
                         // Copy fields from prototype to new credential type
                         $prototypeFielder = new \MultiFlexi\CredentialProtoTypeField();
                         $prototypeFields = $prototypeFielder->listingQuery()
                             ->where('credential_prototype_id', $prototypeId)
                             ->fetchAll();
-                        
+
                         $typeFielder = new \MultiFlexi\CrTypeField();
+
                         foreach ($prototypeFields as $protoField) {
                             $typeFielder->dataReset();
                             $typeFielder->takeData([
@@ -94,7 +95,7 @@ if (WebPage::singleton()->isPosted()) {
                             ]);
                             $typeFielder->insertToSQL();
                         }
-                        
+
                         CredentialWizard::updateWizardData([
                             'company_id' => $companyId,
                             'credential_prototype_id' => $prototypeId,
@@ -135,17 +136,20 @@ if (WebPage::singleton()->isPosted()) {
 
                     // Save field values
                     $vault = new \MultiFlexi\CredentialConfigFields($credential);
+
                     foreach ($fields->getFields() as $field) {
                         $fieldName = $field->getCode();
+
                         if (isset($postData[$fieldName])) {
                             $vault->setDataValue($fieldName, $postData[$fieldName]);
                         }
                     }
+
                     $vault->saveToSQL();
 
                     CredentialWizard::updateWizardData(['credential_id' => $credentialId]);
                     $credential->addStatusMessage(_('Credential created successfully'), 'success');
-                    
+
                     // Clear wizard data and redirect
                     CredentialWizard::clearWizardData();
                     WebPage::singleton()->redirect('credential.php?id='.$credentialId);

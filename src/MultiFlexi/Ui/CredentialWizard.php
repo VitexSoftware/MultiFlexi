@@ -313,14 +313,13 @@ EOD,
             $card = new \Ease\Html\DivTag(null, ['class' => 'card mb-3 h-100 '.$cardClass, 'style' => 'cursor: pointer;']);
             $cardBody = $card->addItem(new \Ease\Html\DivTag(null, ['class' => 'card-body']));
 
-            
             // Show prototype icon
-            if($prototypeData['logo']){
-                $cardBody->addItem(new \Ease\Html\DivTag ( new \Ease\Html\ImgTag('images/'.$prototypeData['logo'],$prototypeData['name'],['height'=>'40px']), ['style' => 'font-size: 40px; margin-bottom: 1rem;']));
+            if ($prototypeData['logo']) {
+                $cardBody->addItem(new \Ease\Html\DivTag(new \Ease\Html\ImgTag('images/'.$prototypeData['logo'], $prototypeData['name'], ['height' => '40px']), ['style' => 'font-size: 40px; margin-bottom: 1rem;']));
             } else {
                 $cardBody->addItem(new \Ease\Html\DivTag('🔐', ['style' => 'font-size: 40px; margin-bottom: 1rem;']));
             }
-            
+
             $cardBody->addItem(new \Ease\Html\H5Tag($prototypeData['name'], ['class' => 'card-title']));
 
             if (!empty($prototypeData['description'])) {
