@@ -62,6 +62,22 @@ if (isset($_GET['logout'])) {
     exit;
 }
 
+try {
+    $hasAdmin = false;
+
+    if (isset($GLOBALS['rbac'])) {
+        $rbac = $GLOBALS['rbac'];
+        $hasAdmin = $rbac->hasRole('admin');
+    }
+
+    if (!$hasAdmin) {
+        Shared::user()->addStatusMessage(_('There is no administrators in the database.'), 'warning');
+        WebPage::singleton()->container->addItem(new LinkButton('createaccount.php', _('Create first Administrator Account'), 'success'));
+    }
+} catch (\PDOException $exc) {
+    Shared::user()->addStatusMessage($exc->getMessage());
+}
+
 $login = WebPage::singleton()->getRequestValue('login');
 
 if ($login && $_SERVER['REQUEST_METHOD'] === 'POST') {
