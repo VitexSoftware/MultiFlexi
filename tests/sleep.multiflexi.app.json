@@ -1,28 +1,34 @@
 {
-    "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
-    "name": "Sleep",
-    "description": "Pause for given time",
-    "executable": "sleep",
-    "setup": "",
-    "cmdparams": "{NUMBER}{UNIT}",
-    "deploy": "apt install coreutils",
-    "homepage": "https://multiflexi.eu/",
-    "requirements": [],
-    "code": "SLEEP",
-    "uuid": "4da1bd98-a90d-4a37-8992-b2da68349d96",
-    "topics": ["wait", "sleep"],
-    "environment": {
-        "NUMBER": {
-            "type": "integer",
-            "description": "",
-            "defval": "60",
-            "required": true
-        },
-        "UNIT": {
-            "type": "string",
-            "description": "may be 's' for seconds (the default), 'm' for minutes, 'h' for hours or 'd' for days.",
-            "defval": "s",
-            "required": true
-        }
+  "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
+  "name": "Sleep",
+  "description": "Pause for given time",
+  "executable": "sleep",
+  "setup": "",
+  "cmdparams": "{NUMBER}{UNIT}",
+  "deploy": "apt install coreutils",
+  "homepage": "https://multiflexi.eu/",
+  "requirements": [],
+  "code": "SLEEP",
+  "uuid": "4da1bd98-a90d-4a37-8992-b2da68349d96",
+  "topics": [
+    "wait",
+    "sleep"
+  ],
+  "environment": {
+    "NUMBER": {
+      "type": "integer",
+      "description": "",
+      "defval": "60",
+      "required": true,
+      "category": "Other"
+    },
+    "UNIT": {
+      "type": "string",
+      "description": "may be 's' for seconds (the default), 'm' for minutes, 'h' for hours or 'd' for days.",
+      "defval": "s",
+      "required": true,
+      "category": "Other"
     }
+  },
+  "schemaVersion": "3.2.1"
 }

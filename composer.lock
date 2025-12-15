@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1cfb2c145119d738fdbce3c6ce722782",
+<<<<<<< HEAD
+    "content-hash": "7dd358f6f7c67efadd7537245da89fd6",
+=======
+    "content-hash": "64b484840e6cab5421a44da441d18493",
+>>>>>>> 63adc2ffbb1d9062570773523a6a2628b13f7f73
     "packages": [
         {
             "name": "brick/math",
@@ -370,12 +374,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "c9b06fa2f64d9aaf2785cd325742a41f27e290aa"
+                "reference": "38ccbbfd0098b205e4d947f18e3f1f321803b067"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/c9b06fa2f64d9aaf2785cd325742a41f27e290aa",
-                "reference": "c9b06fa2f64d9aaf2785cd325742a41f27e290aa",
+                "url": "https://api.github.com/repos/composer/semver/zipball/38ccbbfd0098b205e4d947f18e3f1f321803b067",
+                "reference": "38ccbbfd0098b205e4d947f18e3f1f321803b067",
                 "shasum": ""
             },
             "require": {
@@ -440,7 +444,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-12T10:20:59+00:00"
+            "time": "2025-12-03T10:22:06+00:00"
         },
         {
             "name": "confirm-it-solutions/php-zabbix-api",
@@ -4343,12 +4347,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
+<<<<<<< HEAD
                 "reference": "18c5fd1168a388a42e79f3ab77334733b2895fb9"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/console/zipball/18c5fd1168a388a42e79f3ab77334733b2895fb9",
                 "reference": "18c5fd1168a388a42e79f3ab77334733b2895fb9",
+=======
+                "reference": "1b2813049506b39eb3d7e64aff033fd5ca26c97e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/console/zipball/1b2813049506b39eb3d7e64aff033fd5ca26c97e",
+                "reference": "1b2813049506b39eb3d7e64aff033fd5ca26c97e",
+>>>>>>> 63adc2ffbb1d9062570773523a6a2628b13f7f73
                 "shasum": ""
             },
             "require": {
@@ -4433,7 +4446,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2025-11-23T21:25:19+00:00"
+=======
+            "time": "2025-12-05T13:47:41+00:00"
+>>>>>>> 63adc2ffbb1d9062570773523a6a2628b13f7f73
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -6270,6 +6287,12 @@
         {
             "name": "vitexsoftware/multiflexi-core",
             "version": "dev-main",
+<<<<<<< HEAD
+            "dist": {
+                "type": "path",
+                "url": "../php-vitexsoftware-multiflexi-core",
+                "reference": "205a17dd9f38d81090b3f9ea1c953324b354bc3b"
+=======
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core.git",
@@ -6280,6 +6303,7 @@
                 "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/69a48aab95080a73d924e9bae28edf6868c2355a",
                 "reference": "69a48aab95080a73d924e9bae28edf6868c2355a",
                 "shasum": ""
+>>>>>>> 63adc2ffbb1d9062570773523a6a2628b13f7f73
             },
             "require": {
                 "jalismrs/bitwarden-php": "^1.1",
@@ -6296,7 +6320,6 @@
                 "phpunit/phpunit": "^12.3@dev",
                 "rector/rector": "dev-main"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -6308,7 +6331,11 @@
                     "MultiFlexi\\CredentialType\\": "src/MultiFlexi/CredentialType"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Test\\MultiFlexi\\": "tests/src/MultiFlexi/"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -6318,11 +6345,18 @@
                     "email": "info@vitexsoftware.cz"
                 }
             ],
+<<<<<<< HEAD
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+=======
             "support": {
                 "issues": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/issues",
                 "source": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/tree/main"
             },
             "time": "2025-12-01T05:31:31+00:00"
+>>>>>>> 63adc2ffbb1d9062570773523a6a2628b13f7f73
         },
         {
             "name": "ybelenko/openapi-data-mocker",
@@ -6564,12 +6598,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/pcre.git",
-                "reference": "efd688146c54599288d52f9f459d81b345a9778f"
+                "reference": "cc69ce9877ca31cb8fb3e87cb89792f2c139f87b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/pcre/zipball/efd688146c54599288d52f9f459d81b345a9778f",
-                "reference": "efd688146c54599288d52f9f459d81b345a9778f",
+                "url": "https://api.github.com/repos/composer/pcre/zipball/cc69ce9877ca31cb8fb3e87cb89792f2c139f87b",
+                "reference": "cc69ce9877ca31cb8fb3e87cb89792f2c139f87b",
                 "shasum": ""
             },
             "require": {
@@ -6633,7 +6667,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-06T14:04:28+00:00"
+            "time": "2025-12-03T10:22:10+00:00"
         },
         {
             "name": "composer/xdebug-handler",
@@ -7372,6 +7406,7 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
+<<<<<<< HEAD
             "version": "v3.91.2",
             "source": {
                 "type": "git",
@@ -7382,6 +7417,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/f171dc216bc8a4192d5a0876a899cce6f9e379d6",
                 "reference": "f171dc216bc8a4192d5a0876a899cce6f9e379d6",
+=======
+            "version": "v3.91.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
+                "reference": "9f10aa6390cea91da175ea608880e942d7c0226e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/9f10aa6390cea91da175ea608880e942d7c0226e",
+                "reference": "9f10aa6390cea91da175ea608880e942d7c0226e",
+>>>>>>> 63adc2ffbb1d9062570773523a6a2628b13f7f73
                 "shasum": ""
             },
             "require": {
@@ -7463,7 +7510,11 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.91.2"
+=======
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.91.3"
+>>>>>>> 63adc2ffbb1d9062570773523a6a2628b13f7f73
             },
             "funding": [
                 {
@@ -7471,7 +7522,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
             "time": "2025-12-01T20:56:13+00:00"
+=======
+            "time": "2025-12-05T19:45:37+00:00"
+>>>>>>> 63adc2ffbb1d9062570773523a6a2628b13f7f73
         },
         {
             "name": "kubawerlos/php-cs-fixer-custom-fixers",
@@ -7824,8 +7879,13 @@
             "version": "2.1.x-dev",
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/03c904d5a3d7aa8c50f4bf46427b10da40243d46",
+                "reference": "03c904d5a3d7aa8c50f4bf46427b10da40243d46",
+=======
                 "url": "https://api.github.com/repos/phpstan/phpstan/zipball/c9d1bcf56c917e1b753b4acf310b029ba26f0c7f",
                 "reference": "c9d1bcf56c917e1b753b4acf310b029ba26f0c7f",
+>>>>>>> 63adc2ffbb1d9062570773523a6a2628b13f7f73
                 "shasum": ""
             },
             "require": {
@@ -7871,7 +7931,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
+            "time": "2025-12-03T14:30:23+00:00"
+=======
             "time": "2025-12-02T18:31:04+00:00"
+>>>>>>> 63adc2ffbb1d9062570773523a6a2628b13f7f73
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -8319,12 +8383,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
+<<<<<<< HEAD
+                "reference": "f2f96e81116d41b7ed23bcfa18693c1b30423d99"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f2f96e81116d41b7ed23bcfa18693c1b30423d99",
+                "reference": "f2f96e81116d41b7ed23bcfa18693c1b30423d99",
+=======
                 "reference": "c8f998e1fe080836560f229bccd814d0c9d6420f"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c8f998e1fe080836560f229bccd814d0c9d6420f",
                 "reference": "c8f998e1fe080836560f229bccd814d0c9d6420f",
+>>>>>>> 63adc2ffbb1d9062570773523a6a2628b13f7f73
                 "shasum": ""
             },
             "require": {
@@ -8417,7 +8490,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
+            "time": "2025-12-03T06:25:13+00:00"
+=======
             "time": "2025-12-02T15:53:14+00:00"
+>>>>>>> 63adc2ffbb1d9062570773523a6a2628b13f7f73
         },
         {
             "name": "psr/event-dispatcher",
