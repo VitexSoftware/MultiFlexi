@@ -50,6 +50,11 @@ if (isset($_GET['session_expired'])) {
     Shared::user()->addStatusMessage(_('Your session has expired. Please log in again.'), 'warning');
 }
 
+// Handle redirect parameter - store in session for post-login redirect
+if (isset($_GET['redirect']) && !empty($_GET['redirect'])) {
+    $_SESSION['wayback'] = $_GET['redirect'];
+}
+
 // Handle logout
 if (isset($_GET['logout'])) {
     if (isset($GLOBALS['securityAuditLogger'])) {

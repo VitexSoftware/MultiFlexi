@@ -30,6 +30,9 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
+// Bypass CSRF protection for DataTables AJAX requests
+\define('BYPASS_CSRF_PROTECTION', true);
+
 require_once './init.php';
 WebPage::singleton()->onlyForLogged();
 header('Content-Type: application/json');

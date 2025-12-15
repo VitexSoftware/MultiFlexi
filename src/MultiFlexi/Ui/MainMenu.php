@@ -154,6 +154,9 @@ class MainMenu extends \Ease\Html\DivTag
         $credentialsMenu['credentials.php'] = '🔒 '._('Credentials Listing');
         $credentialsMenu['credentialtype.php'] = '🔏 '._('Register new Credential Type');
         $credentialsMenu['credentialtypes.php'] = '🔒 '._('Credential types listing');
+        $credentialsMenu['credentialprototype.php'] = '📋 '._('New Credential Prototype');
+        $credentialsMenu['credentialprototypes.php'] = '📋 '._('Credential Prototypes');
+        $credentialsMenu['credential-wizard.php'] = '🧙'._('Credential Wizard');
         $nav->addDropDownMenu('<img width=30 src=images/vault.svg> '._('Credentials'), $credentialsMenu);
     }
 

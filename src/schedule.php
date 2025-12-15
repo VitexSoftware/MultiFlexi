@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
+use MultiFlexi\ConfigField;
+
 require_once './init.php';
 WebPage::singleton()->onlyForLogged();
 
@@ -44,10 +46,10 @@ if (null === $runTemplate->getMyKey()) {
             foreach ($_FILES as $field => $file) {
                 if ($file['error'] === 0) {
                     if (is_uploaded_file($file['tmp_name'])) {
-                        $uploadEnv[$field]['value'] = $file['name'];
-                        $uploadEnv[$field]['upload'] = $file['tmp_name'];
-                        $uploadEnv[$field]['type'] = 'file';
-                        $uploadEnv[$field]['source'] = 'Upload';
+                        $cfg = new ConfigField($field, 'file-path', $file['name']);
+                        $cfg->setValue($file['tmp_name']);
+                        $cfg->setHint($file['full_path']);
+                        $uploadEnv->addField($cfg);
                     }
                 }
             }
@@ -55,10 +57,8 @@ if (null === $runTemplate->getMyKey()) {
 
         $prepared = $jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, new \DateTime($when), \Ease\WebPage::getRequestValue('executor'), 'adhoc');
 
-        if ($uploadEnv) {
-            foreach ($uploadEnv as $field => $file) {
-                $fileStore->storeFileForJob($field, $file['upload'], $file['value'], $jobber->getMyKey());
-            }
+        foreach ($uploadEnv as $field => $file) {
+            $fileStore->storeFileForJob($field, $file->getValue(), $file->getHint(), $jobber);
         }
 
         // scheduleJobRun() is now called automatically inside prepareJob()
@@ -159,7 +159,7 @@ EOD
 
             WebPage::singleton()->container->addItem(new \Ease\TWB4\LinkButton('queue.php', sprintf(_('remaining %d 🏁 jobs scheduled'), $scheduler->listingQuery()->count()), 'info btn-large'));
         } else {
-            $appPanel = new ApplicationPanel($app, new JobScheduleForm($app, $company));
+            $appPanel = new ApplicationPanel($app, new JobScheduleForm($runTemplate));
             $appPanel->headRow->addItem(new RuntemplateButton($runTemplate));
             WebPage::singleton()->container->addItem(
                 new CompanyPanel($company, [$appPanel]),
