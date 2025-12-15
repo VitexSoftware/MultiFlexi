@@ -677,6 +677,19 @@ EOD);
 
         return $userId ? $this->userHasPermission($userId, $permissionName) : false;
     }
+    /**
+     * Check if the current user has a specific role.
+     *
+     * @param string $roleName Role name
+     *
+     * @return bool Whether current user has the role
+     */
+    public function hasRole(string $roleName): bool
+    {
+        $userId = self::getCurrentUserId();
+
+        return $userId ? $this->userHasRole($userId, $roleName) : false;
+    }
 
     /**
      * Initialize RBAC tables.

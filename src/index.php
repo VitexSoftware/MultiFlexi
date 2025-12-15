@@ -15,20 +15,9 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use Ease\TWB4\LinkButton;
-
 require_once './init.php';
 
 WebPage::singleton()->addItem(new PageTop(_('MultiFlexi')));
-
-try {
-    if (empty(\Ease\Shared::user()->listingQuery()->count())) {
-        \Ease\Shared::user()->addStatusMessage(_('There is no administrators in the database.'), 'warning');
-        WebPage::singleton()->container->addItem(new LinkButton('createaccount.php', _('Create first Administrator Account'), 'success'));
-    }
-} catch (\PDOException $exc) {
-    \Ease\Shared::user()->addStatusMessage($exc->getMessage());
-}
 
 $imageRow = new \Ease\TWB4\Row();
 $imageRow->addTagClass('justify-content-md-center');
