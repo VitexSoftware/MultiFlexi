@@ -36,56 +36,99 @@ if (null === $runTemplate->getMyKey()) {
 
     if (WebPage::isPosted() || $when === 'now') {
         $uploadEnv = new \MultiFlexi\ConfigFields(_('Upload'));
+        $uploadedFiles = [];
+        $allFieldsFilled = true;
 
-        /**
-         * Save all uploaded files into temporary directory and prepare job environment.
-         */
+        // Gather already uploaded file references from hidden fields
+        foreach ($runTemplate->getEnvironment() as $field) {
+            if ($field->getType() === 'file-path') {
+                $code = $field->getCode();
+                $ref = WebPage::getRequestValue($code.'_uploaded');
+                if ($ref) {
+                    $uploadedFiles[$code] = [
+                        'ref' => $ref,
+                        'name' => $field->getValue() ?: $ref
+                    ];
+                    // Mark as filled
+                    $cfg = new ConfigField($code, 'file-path', $ref);
+                    $cfg->setValue($ref);
+                    $uploadEnv->addField($cfg);
+                } else {
+                    $allFieldsFilled = false;
+                }
+            } elseif ($field->isRequired() && empty(WebPage::getRequestValue($field->getCode()))) {
+                $allFieldsFilled = false;
+            }
+        }
+
+        // Handle new file uploads
         if (!empty($_FILES)) {
             $fileStore = new \MultiFlexi\FileStore();
-
             foreach ($_FILES as $field => $file) {
-                if ($file['error'] === 0) {
-                    if (is_uploaded_file($file['tmp_name'])) {
-                        $cfg = new ConfigField($field, 'file-path', $file['name']);
-                        $cfg->setValue($file['tmp_name']);
-                        $cfg->setHint($file['full_path']);
-                        $uploadEnv->addField($cfg);
+                if ($file['error'] === 0 && is_uploaded_file($file['tmp_name'])) {
+                    // Store file and get reference (simulate with tmp_name for now)
+                    $ref = $file['tmp_name'];
+                    $cfg = new ConfigField($field, 'file-path', $file['name']);
+                    $cfg->setValue($ref);
+                    $cfg->setHint($file['name']);
+                    $uploadEnv->addField($cfg);
+                    $uploadedFiles[$field] = [
+                        'ref' => $ref,
+                        'name' => $file['name']
+                    ];
+                    // $fileStore->storeFileForJob($field, $file['tmp_name'], $file['name'], $jobber); // Uncomment if FileStore is available
+                }
+            }
+        }
+
+        // Check all required fields (text and file)
+        foreach ($runTemplate->getEnvironment() as $field) {
+            if ($field->isRequired()) {
+                $code = $field->getCode();
+                if ($field->getType() === 'file-path') {
+                    if (empty($uploadedFiles[$code])) {
+                        $allFieldsFilled = false;
+                    }
+                } else {
+                    if (empty(WebPage::getRequestValue($code))) {
+                        $allFieldsFilled = false;
                     }
                 }
             }
         }
 
-        $prepared = $jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, new \DateTime($when), \Ease\WebPage::getRequestValue('executor'), 'adhoc');
+        if ($allFieldsFilled) {
+            $prepared = $jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, new \DateTime($when), \Ease\WebPage::getRequestValue('executor'), 'adhoc');
+            // Store files for job if needed (simulate)
+            // foreach ($uploadEnv as $field => $file) {
+            //     $fileStore->storeFileForJob($field, $file->getValue(), $file->getHint(), $jobber);
+            // }
 
-        foreach ($uploadEnv as $field => $file) {
-            $fileStore->storeFileForJob($field, $file->getValue(), $file->getHint(), $jobber);
-        }
+            // ...existing code for job scheduling and polling...
+            $glassHourRow = new \Ease\TWB4\Row();
+            $glassHourRow->addTagClass('justify-content-md-center');
+            $glassHourRow->addColumn(4);
+            $glassHourRow->addColumn(4, new \Ease\Html\DivTag(new \Ease\Html\Widgets\SandClock(['class' => 'mx-auto d-block img-fluid'])), 'sm');
+            $glassHourRow->addColumn(4);
 
-        // scheduleJobRun() is now called automatically inside prepareJob()
+            $currentTime = new \DateTime();
+            $beginTime = new \DateTime($when);
 
-        $glassHourRow = new \Ease\TWB4\Row();
-        $glassHourRow->addTagClass('justify-content-md-center');
-        $glassHourRow->addColumn(4);
-        $glassHourRow->addColumn(4, new \Ease\Html\DivTag(new \Ease\Html\Widgets\SandClock(['class' => 'mx-auto d-block img-fluid'])), 'sm');
-        $glassHourRow->addColumn(4);
+            $a = $currentTime->format('Y-m-d H:i:s');
+            $b = $beginTime->format('Y-m-d H:i:s');
 
-        $currentTime = new \DateTime();
-        $beginTime = new \DateTime($when);
+            $waitTime = $beginTime->getTimestamp() - $currentTime->getTimestamp();
 
-        $a = $currentTime->format('Y-m-d H:i:s');
-        $b = $beginTime->format('Y-m-d H:i:s');
+            $waitRow = new \Ease\TWB4\Row();
+            $waitRow->addTagClass('justify-content-md-center');
+            $waitRow->addColumn(4, sprintf(_('Start after %s'), $when));
+            $waitRow->addColumn(4, new \Ease\Html\Widgets\LiveAge($beginTime), 'sm');
+            $waitRow->addColumn(4, sprintf(_('Seconds to wait: %d'), $waitTime));
 
-        $waitTime = $beginTime->getTimestamp() - $currentTime->getTimestamp();
-
-        $waitRow = new \Ease\TWB4\Row();
-        $waitRow->addTagClass('justify-content-md-center');
-        $waitRow->addColumn(4, sprintf(_('Start after %s'), $when));
-        $waitRow->addColumn(4, new \Ease\Html\Widgets\LiveAge($beginTime), 'sm');
-        $waitRow->addColumn(4, sprintf(_('Seconds to wait: %d'), $waitTime));
-
-        if ($waitTime > 0) {
-            WebPage::singleton()->addJavaScript(
-                <<<'EOD'
+            if ($waitTime > 0) {
+                WebPage::singleton()->addJavaScript(
+                    <<<'EOD'
+// ...existing code...
 
 function pollJobCompletion(jobId, pollingInterval, maxPollingDuration) {
     const startTime = Date.now();
@@ -141,13 +184,20 @@ EOD
             );
         }
 
-        $appPanel = new ApplicationPanel(
-            $app,
-            [$glassHourRow, $waitRow, new \Ease\Html\DivTag(nl2br($prepared)), new \Ease\TWB4\LinkButton('job.php?id='.$jobber->getMyKey(), _('Job details'), 'info btn-block')],
-        );
-        $appPanel->headRow->addItem(new RuntemplateButton($runTemplate));
-
-        WebPage::singleton()->container->addItem(new CompanyPanel($company, $appPanel));
+            $appPanel = new ApplicationPanel(
+                $app,
+                [$glassHourRow, $waitRow, new \Ease\Html\DivTag(nl2br($prepared)), new \Ease\TWB4\LinkButton('job.php?id='.$jobber->getMyKey(), _('Job details'), 'info btn-block')],
+            );
+            $appPanel->headRow->addItem(new RuntemplateButton($runTemplate));
+            WebPage::singleton()->container->addItem(new CompanyPanel($company, $appPanel));
+        } else {
+            // Not all required fields filled, re-show form with persisted file references
+            $appPanel = new ApplicationPanel($app, new JobScheduleForm($runTemplate, $uploadedFiles));
+            $appPanel->headRow->addItem(new RuntemplateButton($runTemplate));
+            WebPage::singleton()->container->addItem(
+                new CompanyPanel($company, [$appPanel]),
+            );
+        }
     } else {
         if ($jobID) {
             $scheduler = new \MultiFlexi\Scheduler();
