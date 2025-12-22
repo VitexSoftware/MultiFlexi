@@ -52,6 +52,7 @@ class RuntemplateConfigForm extends EngineForm
 
         foreach ($appFields as $fieldName => $field) {
             $inputCaption = new \Ease\Html\StrongTag($fieldName);
+
             if ($field->getType() === 'bool') {
                 $input = new \Ease\Html\DivTag(new \Ease\TWB4\Widgets\Toggle($fieldName, $field->getValue() === 'true' ? true : false, 'true', []));
             } else {
@@ -66,7 +67,7 @@ class RuntemplateConfigForm extends EngineForm
                 if (\Ease\Functions::isSerialized($runTemplateFieldSource)) {
                     $credential = unserialize($runTemplateFieldSource);
 
-                    if ($credential && (\Ease\Functions::baseClassName($credential) == 'Credential')) {
+                    if ($credential && (\Ease\Functions::baseClassName($credential) === 'Credential')) {
                         $credentialType = $credential->getCredentialType();
 
                         $credentialLink = new \Ease\Html\ATag('credential.php?id='.$credential->getMyKey(), new \Ease\Html\SmallTag($credential->getRecordName()));
@@ -79,6 +80,7 @@ class RuntemplateConfigForm extends EngineForm
                         $input->setTagProperty('disabled', '1');
                     }
                 }
+
                 $formGroup = $this->addInput($input, $inputCaption, $runTemplateField->getValue(), $field->getDescription());
             } else { // Simple Fields
                 $formGroup = $this->addInput($input, $fieldName, $field->getDefaultValue(), $field->getDescription());
