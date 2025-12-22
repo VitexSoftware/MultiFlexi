@@ -60,15 +60,15 @@ class CompaniesBar extends \Ease\Html\DivTag
                 $jobCounts = new \Ease\Html\DivTag(null, ['style' => 'display: flex; justify-content: center; gap: 2px;']);
 
                 if ($successJobs > 0) {
-                    $jobCounts->addItem(new \Ease\TWB4\Badge('success', new ATag('joblist.php?app_id='.$appId.'&company_id='.$companyId.'&status=success', (string) $successJobs)));
+                    $jobCounts->addItem(new ATag('joblist.php?app_id='.$appId.'&company_id='.$companyId.'&status=success', (string) $successJobs, ['class' => 'badge badge-pill badge-success']));
                 }
 
                 if ($failedJobs > 0) {
-                    $jobCounts->addItem(new \Ease\TWB4\Badge('danger', new ATag('joblist.php?app_id='.$appId.'&company_id='.$companyId.'&status=failed', (string) $failedJobs)));
+                    $jobCounts->addItem(new ATag('joblist.php?app_id='.$appId.'&company_id='.$companyId.'&status=failed', (string) $failedJobs, ['class' => 'badge badge-pill badge-danger']));
                 }
 
                 if ($waitingJobs > 0) {
-                    $jobCounts->addItem(new \Ease\TWB4\Badge('warning', new ATag('joblist.php?app_id='.$appId.'&company_id='.$companyId.'&status=waiting', (string) $waitingJobs)));
+                    $jobCounts->addItem(new ATag('joblist.php?app_id='.$appId.'&company_id='.$companyId.'&status=waiting', (string) $waitingJobs, ['class' => 'badge badge-pill badge-warning']));
                 }
 
                 $appIcon = new ATag('companyapp.php?company_id='.$companer->getMyKey().'&app_id='.$appId, new \Ease\Html\ImgTag('appimage.php?uuid='.$companyApp['uuid'], _($companyApp['name']), ['title' => _($companyApp['description']), 'style' => 'padding: 5px; margin: 5px;max-height: 50px;max-width: 50px;']));

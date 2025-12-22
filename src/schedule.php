@@ -44,10 +44,11 @@ if (null === $runTemplate->getMyKey()) {
             if ($field->getType() === 'file-path') {
                 $code = $field->getCode();
                 $ref = WebPage::getRequestValue($code.'_uploaded');
+
                 if ($ref) {
                     $uploadedFiles[$code] = [
                         'ref' => $ref,
-                        'name' => $field->getValue() ?: $ref
+                        'name' => $field->getValue() ?: $ref,
                     ];
                     // Mark as filled
                     $cfg = new ConfigField($code, 'file-path', $ref);
@@ -64,6 +65,7 @@ if (null === $runTemplate->getMyKey()) {
         // Handle new file uploads
         if (!empty($_FILES)) {
             $fileStore = new \MultiFlexi\FileStore();
+
             foreach ($_FILES as $field => $file) {
                 if ($file['error'] === 0 && is_uploaded_file($file['tmp_name'])) {
                     // Store file and get reference (simulate with tmp_name for now)
@@ -74,7 +76,7 @@ if (null === $runTemplate->getMyKey()) {
                     $uploadEnv->addField($cfg);
                     $uploadedFiles[$field] = [
                         'ref' => $ref,
-                        'name' => $file['name']
+                        'name' => $file['name'],
                     ];
                     // $fileStore->storeFileForJob($field, $file['tmp_name'], $file['name'], $jobber); // Uncomment if FileStore is available
                 }
@@ -85,6 +87,7 @@ if (null === $runTemplate->getMyKey()) {
         foreach ($runTemplate->getEnvironment() as $field) {
             if ($field->isRequired()) {
                 $code = $field->getCode();
+
                 if ($field->getType() === 'file-path') {
                     if (empty($uploadedFiles[$code])) {
                         $allFieldsFilled = false;
@@ -177,12 +180,12 @@ EOD.$waitTime.<<<'EOD'
 , 5000, 3600000);
 
 EOD
-            );
-        } else {
-            WebPage::singleton()->addJavaScript(
-                'window.location.href = "job.php?id='.$jobber->getMyKey().'";',
-            );
-        }
+                );
+            } else {
+                WebPage::singleton()->addJavaScript(
+                    'window.location.href = "job.php?id='.$jobber->getMyKey().'";',
+                );
+            }
 
             $appPanel = new ApplicationPanel(
                 $app,
