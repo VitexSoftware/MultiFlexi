@@ -13,17 +13,27 @@ if [ -f /usr/share/dbconfig-common/dpkg/prerm ]; then
 fi
 
 case "$1" in
-    remove|upgrade|deconfigure|purge)
+    upgrade|deconfigure)
+        # During upgrade/deconfigure, adjust composer metadata if available.
+        if [ -f /usr/lib/multiflexi/composer.json ]; then
+            if command -v jq >/dev/null 2>&1; then
+                jq 'del(.require["zarplata/zabbix-sender"]) | del(.autoload."psr-4"."MultiFlexi\\Zabbix\\") | del(.autoload."psr-4"."MultiFlexi\\Zabbix\\Request\\") | del(.autoload."psr-4"."MultiFlexi\\Zabbix\\Exception\\")' \
+                    /usr/lib/multiflexi/composer.json > /usr/lib/multiflexi/composer.json.tmp && \
+                    mv /usr/lib/multiflexi/composer.json.tmp /usr/lib/multiflexi/composer.json || true
+            fi
+            # Refresh composer autoloads if helper exists, but never fail removal/upgrade because of it.
+            if command -v composer-debian >/dev/null 2>&1; then
+                composer-debian multiflexi || true
+            fi
+        fi
+    ;;
 
-        jq 'del(.require["zarplata/zabbix-sender"]) | del(.autoload."psr-4"."MultiFlexi\\Zabbix\\") | del(.autoload."psr-4"."MultiFlexi\\Zabbix\\Request\\") | del(.autoload."psr-4"."MultiFlexi\\Zabbix\\Exception\\")' /usr/lib/multiflexi/composer.json > /usr/lib/multiflexi/composer.json.tmp && mv /usr/lib/multiflexi/composer.json.tmp /usr/lib/multiflexi/composer.json
-
-        composer-debian multiflexi
-
+    remove|purge)
+        # Skip composer changes on remove/purge to avoid dependency resolution failures.
+        echo "Skipping composer refresh during $1 of multiflexi-zabbix"
         if [ "$1" = "purge" ]; then
-            # Add any specific commands for the "purge" case here if needed
             echo "Purging multiflexi-zabbix..."
         fi
-
     ;;
 
     failed-upgrade)
