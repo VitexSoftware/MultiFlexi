@@ -57,7 +57,7 @@ if (null === $runTemplate->getMyKey()) {
                 } else {
                     $allFieldsFilled = false;
                 }
-            } elseif ($field->isRequired() && empty(WebPage::getRequestValue($field->getCode()))) {
+            } elseif ($field->isRequired() && empty($field->getValue()) && empty(WebPage::getRequestValue($field->getCode()))) {
                 $allFieldsFilled = false;
             }
         }
@@ -85,7 +85,7 @@ if (null === $runTemplate->getMyKey()) {
 
         // Check all required fields (text and file)
         foreach ($runTemplate->getEnvironment() as $field) {
-            if ($field->isRequired()) {
+            if ($field->isRequired() && empty($field->getValue())) {
                 $code = $field->getCode();
 
                 if ($field->getType() === 'file-path') {
