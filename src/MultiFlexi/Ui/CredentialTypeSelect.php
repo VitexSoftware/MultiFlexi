@@ -56,7 +56,7 @@ class CredentialTypeSelect extends \Ease\Html\SelectTag
         $jsonCredentials = $credProto->listingQuery()
             ->leftJoin('credential_type ON credential_type.uuid = credential_prototype.uuid')
             ->where('credential_type.company_id', $this->company_id)
-            ->orWhere('credential_type.company_id IS NULL') // Global credential types
+            ->whereOr('credential_type.company_id IS NULL') // Global credential types
             ->select([
                 'credential_type.id',
                 'credential_prototype.name',

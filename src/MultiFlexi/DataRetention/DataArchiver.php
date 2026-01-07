@@ -284,7 +284,7 @@ class DataArchiver extends \Ease\Sand
             ->where('archived_at', '<=', $expirationDate)
             ->where(static function ($query): void {
                 $query->whereNull('legal_hold_until')
-                    ->orWhere('legal_hold_until', '<=', new \DateTime());
+                    ->whereOr('legal_hold_until', '<=', new \DateTime());
             })
             ->fetchAll();
 
@@ -550,7 +550,7 @@ class DataArchiver extends \Ease\Sand
         $systemUser->setMyTable('user');
         $adminUser = $systemUser->listingQuery()
             ->where('login', 'admin')
-            ->orWhere('login', 'system')
+            ->whereOr('login', 'system')
             ->orderBy('id')
             ->fetch();
 
