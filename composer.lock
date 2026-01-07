@@ -6273,12 +6273,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core.git",
-                "reference": "0c69649ea8eda54026a143953341d08cafdef2cd"
+                "reference": "922a4a29dc75b111936e8083351a90b54bc869a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/0c69649ea8eda54026a143953341d08cafdef2cd",
-                "reference": "0c69649ea8eda54026a143953341d08cafdef2cd",
+                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/922a4a29dc75b111936e8083351a90b54bc869a5",
+                "reference": "922a4a29dc75b111936e8083351a90b54bc869a5",
                 "shasum": ""
             },
             "require": {
@@ -6322,7 +6322,7 @@
                 "issues": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/issues",
                 "source": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/tree/main"
             },
-            "time": "2025-12-22T03:31:54+00:00"
+            "time": "2026-01-07T10:06:07+00:00"
         },
         {
             "name": "ybelenko/openapi-data-mocker",
@@ -7826,8 +7826,8 @@
             "version": "2.1.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f71b93870b0da3c229049a2ec18e1fdbd18d678e",
-                "reference": "f71b93870b0da3c229049a2ec18e1fdbd18d678e",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a98a1e04ec7f07e3a93b3f3a8f7d6d1d3274a5fa",
+                "reference": "a98a1e04ec7f07e3a93b3f3a8f7d6d1d3274a5fa",
                 "shasum": ""
             },
             "require": {
@@ -7873,7 +7873,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-01-04T11:43:12+00:00"
+            "time": "2026-01-07T06:21:01+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -8316,12 +8316,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "ed6401d5306661d777020601905cbad4fe3e6545"
+                "reference": "af8e93e48b60ecdd12e9e553fb02ddeae37e393b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ed6401d5306661d777020601905cbad4fe3e6545",
-                "reference": "ed6401d5306661d777020601905cbad4fe3e6545",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/af8e93e48b60ecdd12e9e553fb02ddeae37e393b",
+                "reference": "af8e93e48b60ecdd12e9e553fb02ddeae37e393b",
                 "shasum": ""
             },
             "require": {
@@ -8413,7 +8413,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-01-04T06:50:53+00:00"
+            "time": "2026-01-06T13:40:16+00:00"
         },
         {
             "name": "psr/event-dispatcher",
@@ -9570,12 +9570,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "00c165446301f3c64c86a40c0b3573edbc36f8f9"
+                "reference": "d38403678674adc8d6eaab4dbb9d3f605bb5c3ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/00c165446301f3c64c86a40c0b3573edbc36f8f9",
-                "reference": "00c165446301f3c64c86a40c0b3573edbc36f8f9",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/d38403678674adc8d6eaab4dbb9d3f605bb5c3ec",
+                "reference": "d38403678674adc8d6eaab4dbb9d3f605bb5c3ec",
                 "shasum": ""
             },
             "require": {
@@ -9647,7 +9647,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-19T08:33:17+00:00"
+            "time": "2026-01-05T11:50:03+00:00"
         },
         {
             "name": "symfony/event-dispatcher-contracts",
