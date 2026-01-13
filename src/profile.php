@@ -128,8 +128,8 @@ if (!empty($recentChanges)) {
 
         $auditTable->addRowColumns([
             $fieldDisplayName,
-            \Ease\Functions::truncateString($change['old_value'], 30),
-            \Ease\Functions::truncateString($change['new_value'], 30),
+            substr($change['old_value'], 0, 30),
+            substr($change['new_value'], 0, 30),
             $changeTypeBadge,
             date('M j, Y H:i', strtotime($change['created_at'])),
         ]);
