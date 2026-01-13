@@ -18,7 +18,7 @@ namespace MultiFlexi\Ui;
 require_once './init.php';
 
 // TODO: check privileges
-if (empty(\Ease\Shared::user()->listingQuery()->where(['enabled', 1])->count())) {
+if (empty(\Ease\Shared::user()->listingQuery()->where(['enabled' => 1])->count())) {
     WebPage::singleton()->addStatusMessage(_('No Administrator found'), 'warning');
 } else {
     WebPage::singleton()->onlyForLogged();

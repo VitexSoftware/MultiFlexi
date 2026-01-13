@@ -178,16 +178,12 @@ class AuthPage extends WebDriverHelper {
             throw error;
         }
     }
-}
-
-module.exports = AuthPage;
     /**
      * Login as test user with configured credentials
      */
     async loginAsTestUser() {
         const username = process.env.TEST_USER_USERNAME || 'testuser';
         const password = process.env.TEST_USER_PASSWORD || 'testpass123';
-        
         await this.login(username, password);
     }
 
@@ -197,7 +193,6 @@ module.exports = AuthPage;
     async loginAsCustomer() {
         const username = process.env.CUSTOMER_USERNAME || 'testcustomer';
         const password = process.env.CUSTOMER_PASSWORD || 'testpass123';
-        
         await this.login(username, password);
     }
 
@@ -234,4 +229,6 @@ module.exports = AuthPage;
         };
     }
 }
+
+module.exports = AuthPage;
 
