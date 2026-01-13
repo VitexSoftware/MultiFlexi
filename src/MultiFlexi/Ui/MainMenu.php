@@ -219,7 +219,6 @@ class MainMenu extends \Ease\Html\DivTag
                 'executors.php' => '🚀&nbsp;'._('Executors'),
                 'credtypes.php' => '🔐&nbsp;'._('Credential Type helpers'),
                 'intervals.php' => '♻️&nbsp;'._('Intervals'),
-                'requirements.php' => '🔘&nbsp;'._('Requirements'),
                 'data-retention-admin.php' => '🗂️&nbsp;'._('Data Retention Management'),
                 'admin-deletion-requests.php' => '🗑️&nbsp;'._('Deletion Requests'),
                 'admin-data-corrections.php' => '✏️&nbsp;'._('Data Corrections'),
