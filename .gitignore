@@ -62,3 +62,4 @@ debian/multiflexi-web.substvars
 src/php_errors.log
 debian/multiflexi-web.debhelper.log
 .encryption_master_key
+node_modules/npm/bin/npm-cli.js
