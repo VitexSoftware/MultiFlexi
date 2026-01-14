@@ -68,7 +68,7 @@
   "license": "MIT",
   "dependencies": {
     "chai": "^4.3.8",
-    "chromedriver": "^141.0.0",
+    "chromedriver": "^143.0.0",
     "dotenv": "^16.3.1",
     "mocha": "^10.2.0",
     "mysql2": "^3.6.3",
