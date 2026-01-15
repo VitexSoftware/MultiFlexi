@@ -7,115 +7,133 @@ Configuration
    :maxdepth: 2
 
 .. contents::
+   :local:
 
-Each application in MultiFlexi defines its own configuration fields. Configuration fields have specific types and properties that determine how users can provide input.
+MultiFlexi offers flexible configuration options ranging from server-level environment variables to granular per-application settings.
 
-Configuration Fields
+System Configuration
 --------------------
 
-MultiFlexi supports various configuration field types to collect user input:
+The core system behavior is controlled via environment variables, typically loaded from ``/etc/multiflexi/multiflexi.env``.
 
-- **Text**: A single line text input for short text values
-- **Number**: A numeric input for integer or decimal values  
-- **Date**: A date input with date picker interface
-- **Email**: An email input with validation
-- **Password**: A password input with hidden text display
-- **Checkbox**: A yes/no checkbox for boolean values
-- **File**: A file upload input for selecting files
-- **Directory**: A directory path input for folder selection
+Database Settings
+~~~~~~~~~~~~~~~~~
 
-Each configuration field has these properties:
+- **DB_CONNECTION**: Database driver (e.g., ``mysql``, ``pgsql``).
+- **DB_HOST**: Database host address.
+- **DB_PORT**: Database port (default: ``3306``).
+- **DB_DATABASE**: Database name.
+- **DB_USERNAME**: Database user name.
+- **DB_PASSWORD**: Database password.
 
-- ``Keyword`` - The name of configuration field (displayed in capital letters)
-- ``Default Value`` - Pre-filled value used unless user specifies otherwise
-- ``Field Description`` - Help text explaining what the field is for
-- ``Required`` - Whether the field must be filled in (yes/no)
+Security Options
+~~~~~~~~~~~~~~~~
+
+- **ENCRYPTION_MASTER_KEY**: Master key used for data encryption (Critical: Back this up).
+- **CSRF_PROTECTION_ENABLED**: Enable Cross-Site Request Forgery protection (default: ``true``).
+- **BRUTE_FORCE_PROTECTION_ENABLED**: Enable protection against brute force attacks (default: ``true``).
+- **BRUTE_FORCE_MAX_ATTEMPTS**: Maximum number of failed attempts allowed (default: ``5``).
+- **BRUTE_FORCE_LOCKOUT_DURATION**: Duration in seconds to lock out an IP after max attempts (default: ``900``).
+- **BRUTE_FORCE_TIME_WINDOW**: Time window in seconds to count attempts (default: ``300``).
+- **BRUTE_FORCE_IP_LIMITING**: Enable IP-based limiting for brute force protection (default: ``true``).
+- **SECURITY_LOGGING_ENABLED**: Enable security audit logging (default: ``true``).
+- **DATA_ENCRYPTION_ENABLED**: Enable data encryption features (default: ``true``).
+- **RATE_LIMITING_ENABLED**: Enable general rate limiting (default: ``true``).
+- **IP_WHITELIST_ENABLED**: Enable IP whitelisting (default: ``false``).
+- **TWO_FACTOR_AUTH_ENABLED**: Enable Two-Factor Authentication (default: ``true``).
+- **RBAC_ENABLED**: Enable Role-Based Access Control (default: ``true``).
+
+Session Management
+~~~~~~~~~~~~~~~~~~
+
+- **SESSION_TIMEOUT**: Session timeout in seconds (default: ``3600``).
+- **SESSION_REGENERATION_INTERVAL**: Interval in seconds to regenerate session ID (default: ``300``).
+- **SESSION_STRICT_USER_AGENT**: Enforce strict User-Agent checking for sessions (default: ``true``).
+- **SESSION_STRICT_IP_ADDRESS**: Enforce strict IP address checking for sessions (default: ``false``).
+
+API Limits
+~~~~~~~~~~
+
+- **API_DEBUG**: Enable API debug mode (default: ``false``).
+- **API_RATE_LIMITING_ENABLED**: Enable API-specific rate limiting (default: ``true``).
+- **API_RATE_LIMIT_REQUESTS**: Max API requests per window (default: ``100``).
+- **API_RATE_LIMIT_WINDOW**: API rate limit window in seconds (default: ``3600``).
+
+Email & Notifications
+~~~~~~~~~~~~~~~~~~~~~
+
+- **EMAIL_FROM**: Default sender address for emails (default: ``multiflexi@<SERVER_NAME>``).
+- **SEND_INFO_TO**: Email address to send informational notifications to (default: ``false``).
+
+Logging & Telemetry
+~~~~~~~~~~~~~~~~~~~
+
+- **LOG_DIRECTORY**: Directory for log files (default: ``/var/log/multiflexi``).
+- **ZABBIX_SERVER**: Zabbix server address for logging to Zabbix.
+- **ENABLE_GOOGLE_ANALYTICS**: Enable Google Analytics (default: ``false``).
+- **LIVE_OUTPUT_SOCKET**: WebSocket URI for live output (e.g., ``ws://localhost:8080``).
+
+Application Configuration
+-------------------------
+
+Each application installed in MultiFlexi defines its own specific configuration fields. These are managed through the web interface.
+
+Configuration Field Types
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MultiFlexi utilizes a typed configuration system to ensure valid data input:
+
+- **Text**: Standard single-line input.
+- **Number**: Numeric input (integer or decimal).
+- **Date**: Date picker widget.
+- **Email**: Validated email input.
+- **Password**: Masked input for sensitive credentials.
+- **Checkbox**: Boolean switch (Yes/No).
+- **File**: File upload widget.
+- **Directory**: Server-side directory path selector.
 
 .. image:: appconfigfieldseditor.png
-    :alt: Configuration fields of an application in an editor
+    :alt: Application Configuration Editor
+    :align: center
 
-Basic Configuration
--------------------
+GDPR & Compliance
+-----------------
 
-When setting up applications, you'll work with configuration fields through the web interface. The system provides:
+MultiFlexi includes built-in tools to assist with GDPR compliance.
 
-- **Form Validation**: Required fields are clearly marked and validated
-- **Help Text**: Descriptive text for each field explaining its purpose
-- **Default Values**: Sensible defaults that work in most situations
-- **Type-Specific Controls**: Date pickers, file browsers, password fields, etc.
+- **Security Audit**: Logs all access and modification events.
+- **Data Encryption**: Encrypts sensitive fields at rest using AES-256.
+- **Retention Policies**: Configurable automated data cleanup schedules.
+- **Anonymization**: Tools to anonymize personal data after retention periods expire.
 
-GDPR Configuration
-------------------
+Refer to :doc:`gdpr-compliance` for a detailed implementation guide.
 
-MultiFlexi includes comprehensive GDPR compliance configuration options accessible through the web interface:
+OpenTelemetry
+-------------
 
-**Security Settings**
+For enterprise observability, MultiFlexi supports OpenTelemetry.
 
-- **Security Audit**: Enable comprehensive security event logging
-- **Data Encryption**: Enable AES-256 data encryption for sensitive data
-- **Rate Limiting**: Enable API rate limiting to prevent abuse
-- **IP Whitelisting**: Restrict admin access to specific IP addresses
+- **Service Name**: Identifier for the MultiFlexi instance.
+- **Collector Endpoint**: URL of your OTLP collector.
+- **Protocol**: gRPC or HTTP.
 
-**Data Retention Settings**
+See :doc:`opentelemetry` for configuration details.
 
-- **Automated Retention**: Enable automated data retention and cleanup
-- **Grace Period**: Default grace period (in days) before final deletion
-- **Archive Storage**: Path where archived data is stored before deletion
-- **Cleanup Schedule**: When automated cleanup runs (configurable schedule)
+Logging
+-------
 
-For complete GDPR implementation details and developer configuration options, see :doc:`gdpr-compliance` and :doc:`development`.
+Logs are essential for monitoring and troubleshooting.
 
-OpenTelemetry Configuration
----------------------------
+**Locations:**
 
-MultiFlexi supports exporting metrics to monitoring systems for observability. Basic configuration options include:
-
-- **Enable Monitoring**: Turn on/off metrics export
-- **Service Name**: How your MultiFlexi instance appears in monitoring
-- **Collector Endpoint**: Where to send monitoring data
-- **Protocol**: Communication method (HTTP or gRPC)
-
-For technical implementation details, see :doc:`development` and :doc:`opentelemetry`.
-
-Logging Configuration
----------------------
-
-MultiFlexi provides flexible logging options that can be configured through the web interface or configuration files.
-
-**Log Storage**
-
-By default, MultiFlexi writes logs to ``/var/log/multiflexi/multiflexi.log``. The system automatically:
-
-- Rotates logs daily to prevent large files
-- Compresses older logs to save space
-- Keeps 14 days of log history
-- Cleans up old logs automatically
-
-**Viewing Logs**
-
-To view recent activity:
-
-.. code-block:: bash
-
-   tail -f /var/log/multiflexi/multiflexi.log
-
-To browse historical logs:
-
-.. code-block:: bash
-
-   less /var/log/multiflexi/multiflexi.log
-
-**Log Destinations**
-
-MultiFlexi can send logs to multiple destinations simultaneously:
-
-- **Local Files**: Stored on the server for direct access
-- **System Log**: Integrated with your system's logging service  
-- **Database**: Stored in MultiFlexi's database for web interface viewing
-- **Monitoring Systems**: Sent to Zabbix or other monitoring tools when configured
+- **File**: ``/var/log/multiflexi/multiflexi.log`` (Rotated daily).
+- **System**: Syslog / Journald integration.
+- **Database**: Viewable via Web UI (latest events).
+- **Zabbix**: Real-time error trapping (if configured).
 
 .. tip::
-
-    For troubleshooting issues, the log files are your best resource for understanding what happened and when.
-
-For technical logging implementation details, see :doc:`development`.
+    To watch logs in real-time via CLI:
+    
+    .. code-block:: bash
+    
+        tail -f /var/log/multiflexi/multiflexi.log

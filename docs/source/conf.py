@@ -39,8 +39,8 @@ html_theme = "shibuya"
 # to stuff this into html_theme_options which produced a warning:
 #   unsupported theme option 'pygments_style_dark'
 # Defining pygments_dark_style at top level removes that warning.
-pygments_style = "dracula"          # Style for light mode (already dark-friendly)
-pygments_dark_style = "native"      # Explicit dark-mode style (fallback if theme switches)
+pygments_style = "sphinx"          # Style for light mode
+pygments_dark_style = "monokai"      # Explicit dark-mode style
 
 # Keep html_theme_options defined (extendable without dark style misuse)
 try:  # pragma: no cover - defensive
@@ -49,7 +49,7 @@ except NameError:  # noqa: F821
     html_theme_options = {}
 
 # Provide a dark style key to satisfy theme expectations if accessed
-html_theme_options.setdefault('pygments_style_dark', 'native')
+html_theme_options.setdefault('pygments_style_dark', 'monokai')
 
 # -- Options for EPUB output
 epub_show_urls = 'footnote'

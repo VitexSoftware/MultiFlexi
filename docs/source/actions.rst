@@ -144,7 +144,7 @@ This method uses application credentials and can access any user's ToDo lists wi
     OFFICE365_USER_ID=5cded639-0b8d-4abc-8976-d202aa1770fa
 
 Required Azure API Permissions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For the ToDo Action to work properly, your Azure App Registration must have the appropriate Microsoft Graph API permissions configured.
 
@@ -197,7 +197,7 @@ For the ToDo Action to work properly, your Azure App Registration must have the 
    - **User Object ID**: Go to **Azure Active Directory** → **Users** → Select user → Copy **Object ID**
 
 Configuration Parameters
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 When configuring a ToDo Action in MultiFlexi, you can customize the following parameters:
 
@@ -263,7 +263,7 @@ Authentication Methods Comparison
      - Production, enterprise environments
 
 Troubleshooting
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 **Common Issues and Solutions**:
 
@@ -495,7 +495,7 @@ The TriggerJenkins Action starts builds and jobs on Jenkins CI/CD servers, enabl
 - Automated CI/CD integration
 
 LaunchJob Action
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 .. image:: _static/images/actions/LaunchJob.svg
    :width: 64px

@@ -1,65 +1,104 @@
-Usage
-=====
+Usage Guide
+===========
 
 .. toctree::
    :maxdepth: 2
 
 .. contents::
+   :local:
 
+MultiFlexi provides a unified platform for scheduling, executing, and monitoring automated tasks. This guide covers the primary interfaces and common workflows.
 
-.. _installation:
+Accessing MultiFlexi
+--------------------
 
-Installation
-------------
+MultiFlexi offers three distinct interfaces for valid interaction:
 
-To use MultiFlexi, first install it using apt:
-
-.. code-block:: console
-
-   $ sudo apt install multiflexi-mysql
-
-Commandline Interface
----------------------
-
-To use the MultiFlexi commandline interface, run the following command:
-
-.. code-block:: console
-
-   $ multiflexi-cli
-
-This will open the MultiFlexi CLI, where you can interact with the system using various commands.
+1.  **Web Interface**: The primary dashboard for management and monitoring.
+2.  **Command Line Interface (CLI)**: For server-side management and scripting.
+3.  **API**: For programmatic integration.
 
 Web Interface
 -------------
 
-To access the MultiFlexi web interface, open your web browser and navigate to the following URL:
+The web interface is the central hub for MultiFlexi.
 
-.. code-block:: console
+**Login**
 
-   http://localhost/multiflexi
+Navigate to ``http://<your-server>/multiflexi`` and log in with your credentials.
 
-This will take you to the MultiFlexi login page, where you can enter your credentials to access the system.
-For more information on how to perform the initial setup, please refer to the :doc:`firstrun` page.
+**Dashboard Overview**
 
+Upon login, the dashboard presents:
 
-API
----
+- **System Status**: Real-time health metrics.
+- **Recent Jobs**: Status of recently executed tasks.
+- **Upcoming Schedule**: Timeline of planned executions.
 
-To interact with MultiFlexi programmatically, you can use the MultiFlexi API. The API provides a set of endpoints that allow you to perform various operations on the system, such as creating, updating, and deleting records.
+**Common Actions**
 
-For more information about the API and how to use it, refer to the :doc:`api` section of the documentation.
+- **Manage Companies**: Configure tenants (companies) that MultiFlexi will interact with.
+- **Install Applications**: Browse and enable applications for specific companies.
+- **Schedule Jobs**: Define when and how applications should run.
+- **View Logs**: Inspect detailed execution history for debugging.
 
-GDPR Compliance
+Command Line Interface (CLI)
+----------------------------
+
+The ``multiflexi-cli`` tool allows for efficient system management directly from the terminal.
+
+**Basic Usage**
+
+.. code-block:: bash
+
+   multiflexi-cli [command] [options]
+
+**Key Commands**
+
+- ``multiflexi-cli list``: List all registered jobs.
+- ``multiflexi-cli run <job_id>``: Manually trigger a specific job.
+- ``multiflexi-cli status``: Check the health of the scheduler daemon.
+
+For a complete command reference, see :doc:`multiflexi-cli` or :doc:`commandline`.
+
+API Integration
 ---------------
 
-MultiFlexi includes comprehensive GDPR compliance features including automated data retention, breach response procedures, and complete documentation. For organizations processing personal data, refer to the :doc:`gdpr-compliance` section for implementation guidance.
+MultiFlexi exposes a RESTful API for external integrations.
 
-**Key GDPR Features:**
+- **Endpoint**: ``/api/``
+- **Authentication**: OAuth2 or API Tokens.
+- **Format**: JSON, XML.
 
-- Automated data retention and deletion
-- Data subject rights implementation
-- Breach response procedures
-- Compliance audit tools
-- Staff training materials
+Developers should refer to the :doc:`api` documentation for endpoint details and usage examples.
 
-That's it! You have successfully installed MultiFlexi and are ready to start using it.
+Common Workflows
+----------------
+
+Creating a New Schedule
+~~~~~~~~~~~~~~~~~~~~~~~
+
+1.  **Select Company**: Choose the target company from the top menu.
+2.  **Choose Application**: Navigate to "Applications" and select the tool to schedule.
+3.  **Configure Job**:
+    - Set parameters (dates, filters, etc.).
+    - Define the **Interval** (e.g., Every Morning at 8:00 AM).
+4.  **Save**: The job is now active and will run automatically.
+
+Monitoring Execution
+~~~~~~~~~~~~~~~~~~~~
+
+1.  Go to **Job History**.
+2.  Filter by Status (Success, Failed).
+3.  Click **Log** on any entry to see the full output.
+
+GDPR & Data Privacy
+-------------------
+
+MultiFlexi is designed with privacy in mind.
+
+- **Data Retention**: Old transaction data is automatically pruned based on configured retention policies.
+- **Right to Erasure**: Tools are available to anonymize or delete specific user data upon request.
+- **Audit Trails**: All administrative actions are logged for compliance.
+
+For detailed compliance procedures, consult :doc:`gdpr-compliance`.
