@@ -104,7 +104,7 @@ class CredentialForm extends SecureForm
         $formContents[] = new InputHiddenTag('id', (string) ($kredenc->getMyKey() ?? ''));
 
         $submitRow = new Row();
-        $submitRow->addColumn(6, new SubmitButton('🍏 '._('Apply'), 'primary btn-lg btn-block'));
+        $submitRow->addColumn(6, new SubmitButton('🍏 '._('Apply'), 'primary btn-lg btn-block', ['title' => _('Apply changes'),'id' => 'credentialapplybutton']));
 
         if (null !== $kredenc->getMyKey()) {
             $rtplcr = new RunTplCreds();

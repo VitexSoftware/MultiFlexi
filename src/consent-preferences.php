@@ -139,7 +139,7 @@ foreach ($consentTypes as $type => $config) {
 // Add save button
 $buttonRow = new \Ease\TWB4\Row();
 $buttonCol = new \Ease\TWB4\Col(12);
-$buttonCol->addItem(new \Ease\TWB4\SubmitButton(_('Save Preferences'), 'success', ['name' => 'save_consent', 'class' => 'btn-lg']));
+$buttonCol->addItem(new \Ease\TWB4\SubmitButton(_('Save Preferences'), 'success', ['name' => 'save_consent', 'class' => 'btn-lg', 'id' => 'saveconsentpreferencesbutton']));
 $buttonRow->addItem($buttonCol);
 $formContainer->addItem($buttonRow);
 

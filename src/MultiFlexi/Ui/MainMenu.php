@@ -277,7 +277,7 @@ EOD);
         $searchForm = new SecureForm(['class' => 'form-inline my-2 my-lg-0', 'action' => 'search.php', 'style' => 'flex-wrap: nowrap;']);
         $searchForm->addItem(new \Ease\Html\InputTextTag('search', $search, ['aria-label' => _('Search'), 'class' => 'form-control mr-1', 'type' => 'search', 'placeholder' => _('Search'), 'title' => _('#number to jump on record'), 'style' => 'width: 100px;']));
         $searchForm->addItem(new SearchSelect('what', [], $search));
-        $searchForm->addItem(new \Ease\Html\ButtonTag(_('Search'), ['class' => 'btn btn-outline-success ml-1', 'type' => 'submit']));
+        $searchForm->addItem(new \Ease\Html\ButtonTag(_('Search'), ['class' => 'btn btn-outline-success ml-1', 'type' => 'submit', 'title' => _('Search in selected area'), 'id' => 'mainmenusearchbutton']));
 
         return $searchForm;
     }

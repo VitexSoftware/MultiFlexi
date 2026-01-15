@@ -296,7 +296,7 @@ EOD,
 
         if (empty($prototypes)) {
             $container->addItem(new \Ease\TWB4\Alert('warning', _('No credential prototypes found.')));
-            $container->addItem(new \Ease\TWB4\LinkButton('credentialprototype.php', _('Create Credential Prototype'), 'primary'));
+            $container->addItem(new \Ease\TWB4\LinkButton('credentialprototype.php', _('Create Credential Prototype'), 'primary', ['title' => _('Create new credential prototype'),'id' => 'createprototypewizardbutton']));
 
             return $container;
         }
@@ -533,7 +533,7 @@ EOD,
 
         // Previous button
         if ($this->currentStep > 1) {
-            $prevButton = new \Ease\TWB4\LinkButton('credential-wizard.php?step='.($this->currentStep - 1), _('Previous'), 'secondary');
+            $prevButton = new \Ease\TWB4\LinkButton('credential-wizard.php?step='.($this->currentStep - 1), _('Previous'), 'secondary', ['title' => _('Go to previous step'), 'id' => 'prevwizardcredentialbutton']);
             $nav->addItem($prevButton);
         } else {
             $nav->addItem(new \Ease\Html\DivTag()); // Empty div for spacing
@@ -544,7 +544,7 @@ EOD,
             $createCompanyButton = new \Ease\TWB4\LinkButton('companysetup.php', '➕ '._('Create Company'), 'info');
             $nav->addItem($createCompanyButton);
         } elseif ($this->currentStep === 2) {
-            $createPrototypeButton = new \Ease\TWB4\LinkButton('credentialprototype.php', '🔐 '._('Create Prototype'), 'info');
+            $createPrototypeButton = new \Ease\TWB4\LinkButton('credentialprototype.php', '🔐 '._('Create Prototype'), 'info', ['title' => _('Create new credential prototype'),'id' => 'createprototypewizardbutton']);
             $nav->addItem($createPrototypeButton);
         } else {
             $nav->addItem(new \Ease\Html\DivTag()); // Empty div for spacing
@@ -552,10 +552,10 @@ EOD,
 
         // Next/Finish button
         if ($this->currentStep < $this->totalSteps) {
-            $nextButton = new \Ease\Html\ButtonTag(_('Next'), ['class' => 'btn btn-primary', 'type' => 'submit', 'form' => 'wizardForm']);
+            $nextButton = new \Ease\Html\ButtonTag(_('Next'), ['class' => 'btn btn-primary', 'type' => 'submit', 'form' => 'wizardForm', 'title' => _('Go to next step'), 'id' => 'nextwizardcredentialbutton']);
             $nav->addItem($nextButton);
         } else {
-            $finishButton = new \Ease\Html\ButtonTag(_('Create Credential'), ['class' => 'btn btn-success', 'type' => 'submit', 'form' => 'wizardForm']);
+            $finishButton = new \Ease\Html\ButtonTag(_('Create Credential'), ['class' => 'btn btn-success', 'type' => 'submit', 'form' => 'wizardForm', 'title' => _('Finish and create credential'),'id' => 'finishwizardcredentialbutton']);
             $nav->addItem($finishButton);
         }
 

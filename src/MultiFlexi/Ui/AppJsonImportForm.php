@@ -29,6 +29,6 @@ class AppJsonImportForm extends \Ease\TWB4\Form
         $this->addInput(new \Ease\Html\InputFileTag('app_json_upload', '', ['mask' => '*.json']), _('Import from your local device'), _('example.multiflexi.app.json'), _('Choose loca'));
         $this->addInput(new \Ease\Html\InputUrlTag('app_json_url', '', []), _('Import from website'), _('https:://multiflexi.eu/example.multiflexi.app.json'), _('Down'));
 
-        $this->addItem(new \Ease\TWB4\SubmitButton(_('Import Json'), 'primary'));
+        $this->addItem(new \Ease\TWB4\SubmitButton(_('Import Json'), 'primary', ['title' => _('Import Application from JSON file'),'id' => 'importappjsonbutton']));
     }
 }

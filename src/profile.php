@@ -72,7 +72,7 @@ $rightsList = new \Ease\Html\UlTag([
     ]),
     new \Ease\Html\LiTag([
         new \Ease\Html\StrongTag(_('Right of Access (Article 15)').': '),
-        new \Ease\TWB4\LinkButton('data-export.php', _('Export your data'), 'info', ['size' => 'sm']),
+        new \Ease\TWB4\LinkButton('data-export.php', _('Export your data'), 'info', ['size' => 'sm', 'title' => _('Export your personal data'),'id' => 'exportdatabutton']),
     ]),
     new \Ease\Html\LiTag([
         new \Ease\Html\StrongTag(_('Right to be Forgotten (Article 17)').': '),
