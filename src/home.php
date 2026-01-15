@@ -34,16 +34,16 @@ $welcomeCard->addItem(new \Ease\Html\PTag(_('This is your personal dashboard wit
 // Quick actions
 $actionRow = new \Ease\TWB4\Row();
 $actionRow->addColumn(3, [
-    new \Ease\TWB4\LinkButton('profile.php', new \Ease\TWB4\Widgets\FaIcon('user').' '._('Edit Profile'), 'primary btn-block'),
+    new \Ease\TWB4\LinkButton('profile.php', new \Ease\TWB4\Widgets\FaIcon('user').' '._('Edit Profile'), 'primary btn-block', ['title' => _('Edit your profile information'), 'id' => 'editProfileButton']),
 ]);
 $actionRow->addColumn(3, [
-    new \Ease\TWB4\LinkButton('data-export-page.php', new \Ease\TWB4\Widgets\FaIcon('download').' '._('Export My Data'), 'info btn-block'),
+    new \Ease\TWB4\LinkButton('data-export-page.php', new \Ease\TWB4\Widgets\FaIcon('download').' '._('Export My Data'), 'info btn-block', ['title' => _('Export your personal data'), 'id' => 'exportDataButton']),
 ]);
 $actionRow->addColumn(3, [
-    new \Ease\TWB4\LinkButton('consent-preferences.php', new \Ease\TWB4\Widgets\FaIcon('user-shield').' '._('Privacy Settings'), 'secondary btn-block'),
+    new \Ease\TWB4\LinkButton('consent-preferences.php', new \Ease\TWB4\Widgets\FaIcon('user-shield').' '._('Privacy Settings'), 'secondary btn-block', ['title' => _('Manage your privacy settings'), 'id' => 'privacySettingsButton']),
 ]);
 $actionRow->addColumn(3, [
-    new \Ease\TWB4\LinkButton('joblist.php', new \Ease\TWB4\Widgets\FaIcon('list').' '._('All Jobs'), 'success btn-block'),
+    new \Ease\TWB4\LinkButton('joblist.php', new \Ease\TWB4\Widgets\FaIcon('list').' '._('All Jobs'), 'success btn-block', ['title' => _('View all jobs in the system'), 'id' => 'allJobsButton']),
 ]);
 
 $welcomeCard->addItem($actionRow);
