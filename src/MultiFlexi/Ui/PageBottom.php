@@ -45,7 +45,7 @@ class PageBottom extends \Ease\Html\FooterTag
         $this->addItem('<hr>');
         $footrow = new \Ease\TWB4\Row();
 
-        $author = '<strong><a href="https://multiflexi.eu/">MultiFlexi</a></strong> '.\Ease\Shared::appVersion().'<br>&nbsp;&nbsp; &copy; 2020-2025 <a href="https://vitexsoftware.com/">Vitex Software</a>';
+        $author = '<strong><a href="https://multiflexi.eu/">MultiFlexi</a></strong> '.\Ease\Shared::appVersion().'<br>&nbsp;&nbsp; &copy; 2020-2026<a href="https://vitexsoftware.com/">Vitex Software</a>';
 
         $footrow->addColumn(6, [$author]);
 
