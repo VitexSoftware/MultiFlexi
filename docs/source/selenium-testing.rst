@@ -118,7 +118,7 @@ Complete system validation with database operations:
 **Coverage**: Full user workflow, database operations
 
 Business Scenarios
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 Real-world workflow testing:
 
@@ -177,7 +177,7 @@ Development Environment
    npm run dev:scenarios
 
 Local Environment  
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 **URL**: ``http://localhost/multiflexi/``
 **Purpose**: Installed Debian package testing
@@ -246,7 +246,7 @@ Interactive Test Runners
 -----------------------
 
 Development Runner
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
@@ -303,7 +303,7 @@ Base Page Structure
    }
 
 Authentication Page
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 .. code-block:: javascript
 
@@ -468,7 +468,7 @@ Enable detailed logging:
    npm run test:debug
 
 Browser Visibility
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 Run with visible browser for debugging:
 
@@ -487,7 +487,7 @@ Test Execution Speed
 - Use headless mode for CI: ``HEADLESS=true npm test``
 
 Resource Management
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 - Proper WebDriver cleanup in ``after()`` hooks
 - Efficient element waiting strategies

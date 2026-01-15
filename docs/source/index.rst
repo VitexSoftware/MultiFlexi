@@ -47,13 +47,6 @@ For developers and contributors, see the :doc:`development` section for technica
    MultiFlexi is actively developed and regularly updated with new features and improvements.
 
 
-Check out the :doc:`usage` section for further information, including
-how to :ref:`installation` the project.
-
-.. note::
-
-   This project is under active development.
-
 Contents
 --------
 
@@ -62,14 +55,14 @@ Contents
    :caption: Contents:
 
    install
-   docker
    firstrun
+   configuration
+   credential-type
    usage
    troubleshooting
    api
    ansible
    application
-   configuration
    company
    job
    runtemplate
@@ -84,5 +77,9 @@ Contents
    architecture
    apps_overview
    multiflexi-cli
-   credential-type
    gdpr-compliance
+   docker
+
+.. note::
+
+   This project is under active development.
