@@ -7826,8 +7826,8 @@
             "version": "2.1.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a86da0b9993a714502250e70b30e09db36e2585f",
-                "reference": "a86da0b9993a714502250e70b30e09db36e2585f",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/94e85e80df37669af40e0a8ec840e5987e97a5a3",
+                "reference": "94e85e80df37669af40e0a8ec840e5987e97a5a3",
                 "shasum": ""
             },
             "require": {
@@ -7873,7 +7873,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-01-15T10:09:43+00:00"
+            "time": "2026-01-15T13:52:22+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -8316,12 +8316,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6b03b73d3743bc9318e3eb01377740bfc6760a99"
+                "reference": "ba2d126905713bcf802c7f1e0d7507092ce9bf9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6b03b73d3743bc9318e3eb01377740bfc6760a99",
-                "reference": "6b03b73d3743bc9318e3eb01377740bfc6760a99",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ba2d126905713bcf802c7f1e0d7507092ce9bf9a",
+                "reference": "ba2d126905713bcf802c7f1e0d7507092ce9bf9a",
                 "shasum": ""
             },
             "require": {
@@ -8389,7 +8389,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.5"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.5.5"
             },
             "funding": [
                 {
@@ -8413,7 +8413,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-01-15T10:58:13+00:00"
+            "time": "2026-01-15T12:03:46+00:00"
         },
         {
             "name": "psr/event-dispatcher",
