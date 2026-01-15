@@ -77,10 +77,9 @@ try {
 
     if (!$hasAdmin) {
         Shared::user()->addStatusMessage(_('There is no administrators in the database.'), 'warning');
-        WebPage::singleton()->container->addItem(new LinkButton('createaccount.php', _('Create first Administrator Account'), 'success', ['id'=>'createAdmin']));
+        WebPage::singleton()->container->addItem(new LinkButton('createaccount.php', _('Create first Administrator Account'), 'success', ['id' => 'createAdmin']));
     }
 } catch (\PDOException $exc) {
-    
     Shared::user()->addStatusMessage($exc->getMessage());
 }
 
