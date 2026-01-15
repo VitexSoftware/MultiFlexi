@@ -22,7 +22,7 @@ The `RunTemplate` is a key component of the MultiFlexi application that defines 
 - Credential management integration
 
 Core Components
---------------
+---------------
 
 Name and Identification
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -232,7 +232,7 @@ Monitoring and Maintenance
 - Regular backup of RunTemplate configurations
 
 Troubleshooting
---------------
+---------------
 
 Common Issues
 ~~~~~~~~~~~~
@@ -326,7 +326,7 @@ Advanced Configuration
 ---------------------
 
 Conditional Execution
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 RunTemplates can be configured with conditional logic:
 
