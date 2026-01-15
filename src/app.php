@@ -167,7 +167,7 @@ foreach ($jobs as $job) {
 }
 
 $instanceRow->addColumn(4, null === $apps->getMyKey() ?
-                new LinkButton('', _('Config fields'), 'inverse disabled  btn-block') :
+                new LinkButton('', _('Config fields'), 'inverse disabled  btn-block' ) :
                 [
                     new ConfigFieldsView(Conffield::getAppConfigs($apps)),
                     new LinkButton('conffield.php?app_id='.$apps->getMyKey(), _('Config fields editor'), 'secondary  btn-block'),
@@ -182,8 +182,8 @@ $appTabs->addTab(_('Overview'), $appOverview);
 $appTabs->addTab(_('Configuration'), $instanceRow);
 $appTabs->addTab(_('Jobs'), [
     $jobList,
-    new LinkButton('logs.php?apps_id='.$apps->getMyKey(), _('Application Log'), 'info'),
-    new LinkButton('joblist.php?app_id='.$apps->getMyKey(), _('All Application Jobs history'), 'info'),
+    new LinkButton('logs.php?apps_id='.$apps->getMyKey(), _('Application Log'), 'info', ['title' => _('View application log'),'id' => 'applicationlogbutton']),
+    new LinkButton('joblist.php?app_id='.$apps->getMyKey(), _('All Application Jobs history'), 'info', ['title' => _('View all application jobs history'),'id' => 'allapplicationjobshistorybutton']),
 ]);
 
 $jsonImportForm = new AppJsonImportForm();

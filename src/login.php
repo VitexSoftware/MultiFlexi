@@ -157,11 +157,11 @@ $infoBlock->addItem(new DivTag(_('Welcome to MultiFlexi'), ['style' => 'text-ali
 
 $loginColumn = $loginRow->addItem(new Col(4));
 
-$submit = new SubmitButton('🚪&nbsp;'._('Sign in'), 'success btn-lg btn-block', ['id' => 'signin']);
+$submit = new SubmitButton('🚪&nbsp;'._('Sign in'), 'success btn-lg btn-block', ['id' => 'signinbutton']);
 
 $submitRow = new Row();
 $submitRow->addColumn(6, $submit);
-$submitRow->addColumn(6, new LinkButton('passwordrecovery.php', '🔑&nbsp;'._('Password recovery'), 'warning btn-block'));
+$submitRow->addColumn(6, new LinkButton('passwordrecovery.php', '🔑&nbsp;'._('Password recovery'), 'warning btn-block', ['title' => _('Recover your password'),'id' => 'passwordrecoverybutton']));
 
 $loginPanel = new Panel(
     new ImgTag('images/project-logo.svg', 'logo', ['width' => 20]),

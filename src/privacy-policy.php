@@ -223,7 +223,7 @@ EOD._('Privacy Preferences').<<<'EOD'
                 </a>
             </div>
             <div class="col-md-4">
-                <a href="cookie-policy.php" class="btn btn-info btn-block">
+                <a href="cookie-policy.php" class="btn btn-info btn-block" id="viewcookiepolicybutton">
                     <i class="fas fa-cookie-bite"></i>
 EOD._('Cookie Policy').<<<'EOD'
 

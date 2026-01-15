@@ -48,7 +48,7 @@ class DashboardStatusCards extends \Ease\TWB4\Row
         $card5Body->addItem(new \Ease\Html\H5Tag(_('Successful Jobs'), ['class' => 'card-title']));
         $card5Body->addItem(new \Ease\Html\H2Tag($successJobs, ['class' => 'display-4']));
         $card5Body->addItem(new \Ease\Html\SmallTag(sprintf(_('%d%% success rate'), $successRate), ['class' => 'd-block mt-2']));
-        $card5Body->addItem(new \Ease\Html\ATag('joblist.php?filter=success', '✓ '._('View All'), ['class' => 'btn btn-light btn-sm mt-2']));
+        $card5Body->addItem(new \Ease\Html\ATag('joblist.php?filter=success', '✓ '._('View All'), ['class' => 'btn btn-light btn-sm mt-2', 'id' => 'viewsuccessfuljobsbutton']));
         $card5->addItem($card5Body);
         $this->addColumn(3, $card5);
 
@@ -59,7 +59,7 @@ class DashboardStatusCards extends \Ease\TWB4\Row
         $card6Body->addItem(new \Ease\Html\H5Tag(_('Failed Jobs'), ['class' => 'card-title']));
         $card6Body->addItem(new \Ease\Html\H2Tag($failedJobs, ['class' => 'display-4']));
         $card6Body->addItem(new \Ease\Html\SmallTag(sprintf(_('%d%% failure rate'), $failureRate), ['class' => 'd-block mt-2']));
-        $card6Body->addItem(new \Ease\Html\ATag('joblist.php?filter=failed', '✗ '._('View All'), ['class' => 'btn btn-light btn-sm mt-2']));
+        $card6Body->addItem(new \Ease\Html\ATag('joblist.php?filter=failed', '✗ '._('View All'), ['class' => 'btn btn-light btn-sm mt-2', 'id' => 'viewfailedjobsbutton']));
         $card6->addItem($card6Body);
         $this->addColumn(3, $card6);
 
@@ -69,7 +69,7 @@ class DashboardStatusCards extends \Ease\TWB4\Row
         $card7Body->addItem(new \Ease\Html\H5Tag(_('Running Jobs'), ['class' => 'card-title']));
         $card7Body->addItem(new \Ease\Html\H2Tag($runningJobs, ['class' => 'display-4']));
         $card7Body->addItem(new \Ease\Html\SmallTag(_('Currently executing'), ['class' => 'd-block mt-2']));
-        $card7Body->addItem(new \Ease\Html\ATag('joblist.php?filter=running', '▶️ '._('View All'), ['class' => 'btn btn-light btn-sm mt-2']));
+        $card7Body->addItem(new \Ease\Html\ATag('joblist.php?filter=running', '▶️ '._('View All'), ['class' => 'btn btn-light btn-sm mt-2', 'id' => 'viewrunningjobsbutton']));
         $card7->addItem($card7Body);
         $this->addColumn(3, $card7);
 
@@ -79,7 +79,7 @@ class DashboardStatusCards extends \Ease\TWB4\Row
         $card8Body->addItem(new \Ease\Html\H5Tag(_('Today\'s Jobs'), ['class' => 'card-title']));
         $card8Body->addItem(new \Ease\Html\H2Tag($todayJobs, ['class' => 'display-4']));
         $card8Body->addItem(new \Ease\Html\SmallTag((new \DateTime())->format('Y-m-d'), ['class' => 'd-block mt-2']));
-        $card8Body->addItem(new \Ease\Html\ATag('joblist.php?filter=today', '📅 '._('View All'), ['class' => 'btn btn-light btn-sm mt-2']));
+        $card8Body->addItem(new \Ease\Html\ATag('joblist.php?filter=today', '📅 '._('View All'), ['class' => 'btn btn-light btn-sm mt-2', 'id' => 'viewtodayjobsbutton']));
         $card8->addItem($card8Body);
         $this->addColumn(3, $card8);
     }

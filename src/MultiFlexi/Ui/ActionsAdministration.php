@@ -49,7 +49,7 @@ class ActionsAdministration extends \Ease\TWB4\Form
             $this->addItem(new \Ease\Html\PTag($moduleRow));
         }
 
-        $this->addItem(new \Ease\TWB4\SubmitButton(_('Save'), 'primary btn-lg btn-block'));
+        $this->addItem(new \Ease\TWB4\SubmitButton(_('Save'), 'primary btn-lg btn-block', ['title' => _('Save Actions Configuration'),'id' => 'saveactionsconfigbutton']));
     }
 
     public function finalize(): void

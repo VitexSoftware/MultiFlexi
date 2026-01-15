@@ -46,7 +46,7 @@ class DashboardMetricsCards extends \Ease\TWB4\Row
         $card1Body = new \Ease\Html\DivTag(null, ['class' => 'card-body text-center']);
         $card1Body->addItem(new \Ease\Html\H5Tag(_('Total Jobs'), ['class' => 'card-title']));
         $card1Body->addItem(new \Ease\Html\H2Tag($totalJobs, ['class' => 'display-4 mb-3']));
-        $card1Body->addItem(new \Ease\Html\ATag('jobs.php', '🔍 '._('View Jobs'), ['class' => 'btn btn-light btn-sm']));
+        $card1Body->addItem(new \Ease\Html\ATag('jobs.php', '🔍 '._('View Jobs'), ['class' => 'btn btn-light btn-sm', 'title' => _('View all jobs'), 'id' => 'viewjobsbutton']));
         $card1->addItem($card1Body);
         $this->addColumn(3, $card1);
 
@@ -55,7 +55,7 @@ class DashboardMetricsCards extends \Ease\TWB4\Row
         $card2Body = new \Ease\Html\DivTag(null, ['class' => 'card-body text-center']);
         $card2Body->addItem(new \Ease\Html\H5Tag(_('Active Applications'), ['class' => 'card-title']));
         $card2Body->addItem(new \Ease\Html\H2Tag($totalApps, ['class' => 'display-4 mb-3']));
-        $card2Body->addItem(new \Ease\Html\ATag('apps.php', '📦 '._('View Apps'), ['class' => 'btn btn-light btn-sm']));
+        $card2Body->addItem(new \Ease\Html\ATag('apps.php', '📦 '._('View Apps'), ['class' => 'btn btn-light btn-sm', 'title' => _('View all applications'), 'id' => 'viewappsbutton']));
         $card2->addItem($card2Body);
         $this->addColumn(3, $card2);
 
@@ -64,7 +64,7 @@ class DashboardMetricsCards extends \Ease\TWB4\Row
         $card3Body = new \Ease\Html\DivTag(null, ['class' => 'card-body text-center']);
         $card3Body->addItem(new \Ease\Html\H5Tag(_('Active Companies'), ['class' => 'card-title']));
         $card3Body->addItem(new \Ease\Html\H2Tag($totalCompanies, ['class' => 'display-4 mb-3']));
-        $card3Body->addItem(new \Ease\Html\ATag('companies.php', '🏢 '._('View Companies'), ['class' => 'btn btn-light btn-sm']));
+        $card3Body->addItem(new \Ease\Html\ATag('companies.php', '🏢 '._('View Companies'), ['class' => 'btn btn-light btn-sm', 'title' => _('View all companies'), 'id' => 'viewcompaniesbutton']));
         $card3->addItem($card3Body);
         $this->addColumn(3, $card3);
 
@@ -73,7 +73,7 @@ class DashboardMetricsCards extends \Ease\TWB4\Row
         $card4Body = new \Ease\Html\DivTag(null, ['class' => 'card-body text-center']);
         $card4Body->addItem(new \Ease\Html\H5Tag(_('Run Templates'), ['class' => 'card-title']));
         $card4Body->addItem(new \Ease\Html\H2Tag($totalRunTemplates, ['class' => 'display-4 mb-3']));
-        $card4Body->addItem(new \Ease\Html\ATag('runtemplates.php', '⚙️ '._('View Templates'), ['class' => 'btn btn-dark btn-sm']));
+        $card4Body->addItem(new \Ease\Html\ATag('runtemplates.php', '⚙️ '._('View Templates'), ['class' => 'btn btn-dark btn-sm', 'title' => _('View all run templates'), 'id' => 'viewruntemplatesbutton']));
         $card4->addItem($card4Body);
         $this->addColumn(3, $card4);
     }

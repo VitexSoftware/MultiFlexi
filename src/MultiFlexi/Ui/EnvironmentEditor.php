@@ -51,7 +51,7 @@ class EnvironmentEditor extends \Ease\Html\TableTag
         $newItemForm = new SecureForm();
         $newItemForm->addInput(new \Ease\Html\InputTextTag('env[newkey]'), _('New Config field'), _('Keyword'), _('Create New field here'));
         $newItemForm->addInput(new \Ease\Html\InputTextTag('env[newvalue]'), _('New Config value'), _('Value'), _('Enter New field value here'));
-        $newItemForm->addItem(new \Ease\TWB4\SubmitButton(_('Add new field'), 'success'));
+        $newItemForm->addItem(new \Ease\TWB4\SubmitButton(_('Add new field'), 'success', ['title' => _('Add new environment field'),'id' => 'addnewenvfieldbutton']));
 
         $this->addRowFooterColumns([new \Ease\Html\DivTag($newItemForm, ['class' => 'form-row']), sprintf(_('%s items'), \count($this->fields))]);
         $this->includeJavaScript('js/bootstrap-editable.js');
