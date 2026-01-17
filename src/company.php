@@ -135,7 +135,7 @@ $waitingPercentage = ($totalJobs > 0) ? ($waitingCount / $totalJobs) * 100 : 0;
 // Create the legend
 $legend = new \Ease\Html\DivTag(
     [
-        new \Ease\Html\DivTag(new \Ease\Html\SpanTag('■', ['style' => 'color: rgb(0, 255, 0);',]).' Success: '.$successCount.' ('.number_format($successPercentage, 2).'%)'),
+        new \Ease\Html\DivTag(new \Ease\Html\SpanTag('■', ['style' => 'color: rgb(0, 255, 0);']).' Success: '.$successCount.' ('.number_format($successPercentage, 2).'%)'),
         new \Ease\Html\DivTag(new \Ease\Html\SpanTag('■', ['style' => 'color: rgb(255, 0, 0); margin-left: 10px;']).' Failure: '.$failureCount.' ('.number_format($failurePercentage, 2).'%)'),
         new \Ease\Html\DivTag(new \Ease\Html\SpanTag('■', ['style' => 'color: rgb(255, 255, 0); margin-left: 10px;']).' No Executable: '.$noExecutableCount.' ('.number_format($noExecutablePercentage, 2).'%)'),
         new \Ease\Html\DivTag(new \Ease\Html\SpanTag('■', ['style' => 'color: rgb(0, 0, 0); margin-left: 10px;']).' Exception: '.$exceptionCount.' ('.number_format($exceptionPercentage, 2).'%)'),

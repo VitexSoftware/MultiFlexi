@@ -213,7 +213,7 @@ class UserDataCorrectionForm extends SecureForm
 
         // Submit button
         $this->addItem(new \Ease\Html\DivTag(
-            new SubmitButton(_('Save Changes'), 'primary', ['title' => _('Save changes to your profile'),'id' => 'saveuserchangesbutton']),
+            new SubmitButton(_('Save Changes'), 'primary', ['title' => _('Save changes to your profile'), 'id' => 'saveuserchangesbutton']),
             ['style' => 'text-align: right; margin-top: 20px;'],
         ));
     }

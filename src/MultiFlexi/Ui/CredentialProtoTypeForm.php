@@ -481,8 +481,8 @@ JS;
         $submitRow = new \Ease\TWB4\Row();
 
         if (null === $prototype->getMyKey()) {
-            $submitRow->addColumn(6, new \Ease\TWB4\SubmitButton(_('Create Prototype'), 'success btn-lg btn-block', ['name' => 'create', 'title' => _('Create new credential prototype'),'id' => 'createprototypebutton']));
-            $submitRow->addColumn(6, new \Ease\TWB4\LinkButton('credentialprototypes.php', _('Cancel'), 'secondary btn-lg btn-block', ['title' => _('Cancel creating new prototype'),'id' => 'cancelprototypebutton']));
+            $submitRow->addColumn(6, new \Ease\TWB4\SubmitButton(_('Create Prototype'), 'success btn-lg btn-block', ['name' => 'create', 'title' => _('Create new credential prototype'), 'id' => 'createprototypebutton']));
+            $submitRow->addColumn(6, new \Ease\TWB4\LinkButton('credentialprototypes.php', _('Cancel'), 'secondary btn-lg btn-block', ['title' => _('Cancel creating new prototype'), 'id' => 'cancelprototypebutton']));
         } else {
             $submitRow->addColumn(3, new \Ease\TWB4\SubmitButton(_('Save'), 'success btn-lg btn-block', ['name' => 'save']));
             $submitRow->addColumn(3, new \Ease\TWB4\LinkButton('credentialprototype.php', _('New Prototype'), 'info btn-lg btn-block'));

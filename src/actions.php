@@ -62,7 +62,7 @@ $jobtempform->addItem(new \Ease\Html\InputHiddenTag('app', $periodcalTaskInfo['a
 $jobtempform->addItem(new \Ease\Html\InputHiddenTag('company_id', $periodcalTaskInfo['company_id']));
 $jobtempform->addItem(new \Ease\Html\InputHiddenTag('interval', $periodcalTaskInfo['interv']));
 $jobtempform->addItem($appPanel);
-$jobtempform->addItem(new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'primary btn-lg btn-block',['title' => _('Apply changes'),'id' => 'actionsbutton']));
+$jobtempform->addItem(new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'primary btn-lg btn-block', ['title' => _('Apply changes'), 'id' => 'actionsbutton']));
 
 WebPage::singleton()->container->addItem(new CompanyPanel(new \MultiFlexi\Company($periodcalTaskInfo['company_id']), $jobtempform));
 

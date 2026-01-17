@@ -44,7 +44,7 @@ class CompanyEditorForm extends EngineForm
         }
 
         $this->addItem(new InputHiddenTag('enabled', '1'));
-        $this->addItem(new SubmitButton(_('Save'), 'success btn-lg btn-block', ['title' => _('Save company data'),'id' => 'savecompanybutton']));
+        $this->addItem(new SubmitButton(_('Save'), 'success btn-lg btn-block', ['title' => _('Save company data'), 'id' => 'savecompanybutton']));
 
         if (null !== $this->engine->getDataValue('id')) {
             $this->addItem(new InputHiddenTag('id'));

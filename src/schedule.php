@@ -39,28 +39,31 @@ if (null === $runTemplate->getMyKey()) {
         $uploadedFiles = [];
         $allFieldsFilled = true;
 
-        // Gather already uploaded file references from hidden fields
-        foreach ($runTemplate->getEnvironment() as $field) {
-            if ($field->getType() === 'file-path') {
-                $code = $field->getCode();
-                $ref = WebPage::getRequestValue($code.'_uploaded');
-
-                if ($ref) {
-                    $uploadedFiles[$code] = [
-                        'ref' => $ref,
-                        'name' => $field->getValue() ?: $ref,
-                    ];
-                    // Mark as filled
-                    $cfg = new ConfigField($code, 'file-path', $ref);
-                    $cfg->setValue($ref);
-                    $uploadEnv->addField($cfg);
-                } else {
-                    $allFieldsFilled = false;
-                }
-            } elseif ($field->isRequired() && empty($field->getValue()) && empty(WebPage::getRequestValue($field->getCode()))) {
-                $allFieldsFilled = false;
-            }
-        }
+        // TODO: Upload required fiels
+        //        // Gather already uploaded file references from hidden fields
+        //        foreach ($runTemplate->getEnvironment() as $field) {
+        //            if ($field->getType() === 'file-path') {
+        //                $code = $field->getCode();
+        //                $ref = WebPage::getRequestValue($code.'_uploaded');
+        //
+        //                if ($ref) {
+        //                    $uploadedFiles[$code] = [
+        //                        'ref' => $ref,
+        //                        'name' => $field->getValue() ?: $ref,
+        //                    ];
+        //                    // Mark as filled
+        //                    $cfg = new ConfigField($code, 'file-path', $ref);
+        //                } else {
+        //                    $cfg = new ConfigField($code.'_uploaded', 'file-path', $ref);
+        //                    $allFieldsFilled = false;
+        //                }
+        //                $cfg->setValue($ref);
+        //                $uploadEnv->addField($cfg);
+        //
+        //            } elseif ($field->isRequired() && empty($field->getValue()) && empty(WebPage::getRequestValue($field->getCode()))) {
+        //                $allFieldsFilled = false;
+        //            }
+        //        }
 
         // Handle new file uploads
         if (!empty($_FILES)) {

@@ -41,6 +41,11 @@ if (WebPage::singleton()->isPosted()) {
 
     $error = false;
 
+    if (empty($login)) {
+        $error = true;
+        \Ease\Shared::user()->addStatusMessage(_('Username is mandatory'), 'warning');
+    }
+
     if (!filter_var($emailAddress, \FILTER_VALIDATE_EMAIL)) {
         \Ease\Shared::user()->addStatusMessage(_('invalid mail address'), 'warning');
     } else {

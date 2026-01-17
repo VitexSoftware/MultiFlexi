@@ -21,7 +21,7 @@ namespace MultiFlexi\Consent;
  * Provides convenient functions for checking consent status in templates and pages.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2024 Vitex Software
+ * @copyright  2026 Vitex Software
  */
 class ConsentHelper
 {

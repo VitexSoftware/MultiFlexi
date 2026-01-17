@@ -147,7 +147,7 @@ $runTemplateButton = new RuntemplateButton($runTemplate);
 
 if ($jobber->getDataValue('begin')) {
     // Job already started/finished
-    $scheduleButton = new \Ease\TWB4\LinkButton('schedule.php?id='.$runTemplate->getMyKey().'&app_id='.$appInfo['app_id'].'&company_id='.$appInfo['company_id'], [_('Schedule').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-block', ['title' => _('Schedule new run based on this RunTemplate'),'id' => 'schedulebutton']);
+    $scheduleButton = new \Ease\TWB4\LinkButton('schedule.php?id='.$runTemplate->getMyKey().'&app_id='.$appInfo['app_id'].'&company_id='.$appInfo['company_id'], [_('Schedule').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/launchinbackground.svg', _('Launch'), ['height' => '30px'])], 'primary btn-block', ['title' => _('Schedule new run based on this RunTemplate'), 'id' => 'schedulebutton']);
 } else {
     // Job not started yet - check if scheduled
     if ($jobber->isScheduled()) {

@@ -29,14 +29,14 @@ foreach ($companies->listingQuery() as $companyInfo) {
     $companies->setData($companyInfo);
     $companyId = $companyInfo['id'];
     //    $companyColumns['enabled'] = new \Ease\Html\Widgets\SemaforLight($companyInfo['enabled'] === 1 ? 'green' : 'red', ['width' => 20]);
-    $companyColumns['logo'] = new CompanyLinkButton($companies, ['height' => 64]);
+    $companyColumns['logo'] = new CompanyLinkButton($companies, ['height' => '64']);
     $companyColumns['name'] = new \Ease\Html\ATag('company.php?id='.$companyId, $companyInfo['name']);
     $companyColumns['ic'] = $companyInfo['ic'];
 
-    $companyColumns['setup'] = new \Ease\TWB4\LinkButton('companysetup.php?id='.$companyId, '🛠️&nbsp;'._('Setup'), 'secondary btn-lg btn-block ', ['title' => _('Setup company'),'id' => 'setupcompanybutton']);
-    $companyColumns['tasks'] = new \Ease\TWB4\LinkButton('tasks.php?company_id='.$companyId, '🔧&nbsp;'._('Tasks'), 'secondary btn-lg btn-block', ['title' => _('View tasks'),'id' => 'taskcompanybutton']);
-    $companyColumns['apps'] = new \Ease\TWB4\LinkButton('companyapps.php?company_id='.$companyId, '📌&nbsp;'._('Applications'), 'secondary btn-lg btn-block', ['title' => _('View applications'),'id' => 'appscompanybutton']);
-    $companyColumns['delete'] = new \Ease\TWB4\LinkButton('companydelete.php?id='.$companyId, '☠️&nbsp;'._('Delete'), 'danger', ['title' => _('Delete company'),'id' => 'deletecompanybutton']);
+    $companyColumns['setup'] = new \Ease\TWB4\LinkButton('companysetup.php?id='.$companyId, '🛠️&nbsp;'._('Setup'), 'secondary btn-lg btn-block ', ['title' => _('Setup company'), 'id' => 'setupcompanybutton']);
+    $companyColumns['tasks'] = new \Ease\TWB4\LinkButton('tasks.php?company_id='.$companyId, '🔧&nbsp;'._('Tasks'), 'secondary btn-lg btn-block', ['title' => _('View tasks'), 'id' => 'taskcompanybutton']);
+    $companyColumns['apps'] = new \Ease\TWB4\LinkButton('companyapps.php?company_id='.$companyId, '📌&nbsp;'._('Applications'), 'secondary btn-lg btn-block', ['title' => _('View applications'), 'id' => 'appscompanybutton']);
+    $companyColumns['delete'] = new \Ease\TWB4\LinkButton('companydelete.php?id='.$companyId, '☠️&nbsp;'._('Delete'), 'danger', ['title' => _('Delete company'), 'id' => 'deletecompanybutton']);
 
     $companyTable->addRowColumns($companyColumns);
 }

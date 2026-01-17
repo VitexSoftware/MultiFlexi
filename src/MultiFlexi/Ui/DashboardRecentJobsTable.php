@@ -19,7 +19,7 @@ namespace MultiFlexi\Ui;
  * Dashboard recent jobs table widget.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright 2023-2024 Vitex Software
+ * @copyright 2023-2026 Vitex Software
  */
 class DashboardRecentJobsTable extends \Ease\Html\DivTag
 {

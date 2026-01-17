@@ -46,7 +46,7 @@ $periodSelectorsRow->addColumn(2, new \Ease\TWB4\Panel(_('Yearly'), 'default', n
 $addAppForm->addItem($periodSelectorsRow);
 $addAppForm->addItem(new \Ease\Html\PTag());
 
-$addAppForm->addItem(new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'success btn-lg btn-block', ['title' => _('Apply interval settings'),'id' => 'applyintervalsettingsbutton']));
+$addAppForm->addItem(new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'success btn-lg btn-block', ['title' => _('Apply interval settings'), 'id' => 'applyintervalsettingsbutton']));
 
 WebPage::singleton()->container->addItem($addAppForm);
 

@@ -44,7 +44,7 @@ class BootstrapMenu extends \Ease\TWB4\Navbar
             $loginForm = new \Ease\TWB4\Form(['action' => 'login.php', 'class' => 'form-inline my-2 my-lg-0']);
             $loginForm->addItem(new \Ease\Html\InputTextTag('login', WebPage::getRequestValue('login'), ['class' => 'form-control mr-sm-2', 'placeholder' => _('Login')]));
             $loginForm->addItem(new \Ease\Html\InputPasswordTag('password', WebPage::getRequestValue('password'), ['class' => 'form-control mr-sm-2', 'placeholder' => _('Password')]));
-            $loginForm->addItem(new \Ease\TWB4\SubmitButton(_('Sign In'), 'success my-2 my-sm-0', ['title' => _('Sign in to application'),'id' => 'signinbuttonmenu']));
+            $loginForm->addItem(new \Ease\TWB4\SubmitButton(_('Sign In'), 'success my-2 my-sm-0', ['title' => _('Sign in to application'), 'id' => 'signinbuttonmenu']));
 
             // Add CSRF token to form if CSRF protection is enabled
 
@@ -54,7 +54,7 @@ class BootstrapMenu extends \Ease\TWB4\Navbar
             }
 
             $loginForm->addItem('&nbsp;&nbsp;&nbsp;');
-            $loginForm->addItem(new \Ease\TWB4\LinkButton('passwordrecovery.php', _('Password recovery'), 'warning my-2 my-sm-0', ['title' => _('Recover your password'),'id' => 'passwordrecoverybuttonmuenu']));
+            $loginForm->addItem(new \Ease\TWB4\LinkButton('passwordrecovery.php', _('Password recovery'), 'warning my-2 my-sm-0', ['title' => _('Recover your password'), 'id' => 'passwordrecoverybuttonmuenu']));
             $this->addMenuItem($loginForm);
             $this->addItem($content);
         }
