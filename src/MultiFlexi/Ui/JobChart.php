@@ -135,7 +135,7 @@ class JobChart extends \Ease\Html\DivTag
             ['#E0E0E0', '#BDBDBD'],  // exception - pastel gray
         ];
 
-        $graph = new \Goat1000\SVGGraph\SVGGraph(1024, 212, $settings);
+        $graph = new \Goat1000\SVGGraph\SVGGraph('100%', 212, $settings);
         $graph->values($data);
         $graph->colours($colours);
         $graph->links($links);

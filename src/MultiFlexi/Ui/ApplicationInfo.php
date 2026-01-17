@@ -37,12 +37,12 @@ class ApplicationInfo extends Panel
     public function __construct(Application $application)
     {
         $body = new \Ease\Html\DivTag(null, ['class' => 'p-4']);
-        
+
         $row = new \Ease\TWB4\Row();
         $row->addColumn(4, new \Ease\Html\DivTag(new AppLogo($application, ['class' => 'img-fluid rounded shadow-sm border p-2']), ['class' => 'text-center mb-4']));
-        
+
         $infoCol = $row->addColumn(8, $this->metadataTable($application));
-        
+
         $body->addItem($row);
 
         parent::__construct(null, 'default', $body, new AppLastMonthChart($application));
@@ -50,12 +50,13 @@ class ApplicationInfo extends Panel
 
     /**
      * @param Application $application
+     *
      * @return \Ease\Html\DivTag
      */
     public function metadataTable($application)
     {
         $metadata = new \Ease\Html\DivTag(null, ['class' => 'application-metadata']);
-        
+
         $name = $application->getDataValue('name');
         $description = $application->getDataValue('description');
 
@@ -71,16 +72,16 @@ class ApplicationInfo extends Panel
         $metadata->addItem(new \Ease\Html\PTag($description, ['class' => 'lead']));
 
         $details = new \Ease\TWB4\Row();
-        
+
         $col1 = $details->addColumn(6);
-        $col1->addItem($this->infoRow('🏠', _('Homepage'), new \Ease\Html\ATag($application->getDataValue('homepage'), $application->getDataValue('homepage'))));
-        $col1->addItem($this->infoRow('🆔', _('UUID'), $application->getDataValue('uuid')));
-        $col1->addItem($this->infoRow('📦', _('Image'), $application->getDataValue('ociimage')));
+        $col1->addItem(self::infoRow('🏠', _('Homepage'), new \Ease\Html\ATag($application->getDataValue('homepage'), $application->getDataValue('homepage'))));
+        $col1->addItem(self::infoRow('🆔', _('UUID'), $application->getDataValue('uuid')));
+        $col1->addItem(self::infoRow('📦', _('Image'), $application->getDataValue('ociimage')));
 
         $col2 = $details->addColumn(6);
-        $col2->addItem($this->infoRow('📁', _('Binary'), $application->getDataValue('executable')));
-        $col2->addItem($this->infoRow('🏷️', _('Version'), $application->getDataValue('version')));
-        $col2->addItem($this->infoRow('📜', _('Requirements'), new RequirementsOverview($application->getRequirements())));
+        $col2->addItem(self::infoRow('📁', _('Binary'), $application->getDataValue('executable')));
+        $col2->addItem(self::infoRow('🏷️', _('Version'), $application->getDataValue('version')));
+        $col2->addItem(self::infoRow('📜', _('Requirements'), new RequirementsOverview($application->getRequirements())));
 
         $metadata->addItem($details);
 
@@ -88,15 +89,21 @@ class ApplicationInfo extends Panel
     }
 
     /**
-     * Helper for info rows
+     * Helper for info rows.
+     *
+     * @param mixed $icon
+     * @param mixed $label
+     * @param mixed $value
      */
-    private function infoRow($icon, $label, $value)
+    private static function infoRow($icon, $label, $value)
     {
-        if (empty($value)) return null;
+        if (empty($value)) {
+            return null;
+        }
+
         return new \Ease\Html\DivTag([
-            new \Ease\Html\SmallTag($icon . ' ' . $label, ['class' => 'text-muted d-block font-weight-bold text-uppercase small']),
-            new \Ease\Html\DivTag($value, ['class' => 'mb-3 font-weight-normal'])
+            new \Ease\Html\SmallTag($icon.' '.$label, ['class' => 'text-muted d-block font-weight-bold text-uppercase small']),
+            new \Ease\Html\DivTag($value, ['class' => 'mb-3 font-weight-normal']),
         ]);
     }
-
 }

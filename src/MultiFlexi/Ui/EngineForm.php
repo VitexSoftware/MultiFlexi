@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace MultiFlexi\Ui;
 
 use Ease\Html\InputHiddenTag;
-use MultiFlexi\Engine;
+use MultiFlexi\DBEngine;
 
 /**
  * @no-named-arguments
@@ -28,10 +28,10 @@ class EngineForm extends SecureForm
     /**
      * Formulář Bootstrapu.
      *
-     * @param Engine $engine        jméno formuláře
-     * @param mixed  $formContents  prvky uvnitř formuláře
-     * @param array  $tagProperties vlastnosti tagu například:
-     *                              array('enctype' => 'multipart/form-data')
+     * @param DBEngine $engine        jméno formuláře
+     * @param mixed    $formContents  prvky uvnitř formuláře
+     * @param array    $tagProperties vlastnosti tagu například:
+     *                                array('enctype' => 'multipart/form-data')
      */
     public function __construct($engine, $formContents = null, $tagProperties = [])
     {
@@ -50,7 +50,7 @@ class EngineForm extends SecureForm
         $this->addItem(new InputHiddenTag('class', \get_class($this->engine)));
 
         if (null !== $recordID) {
-            $this->addItem(new InputHiddenTag($this->engine->getKeyColumn(), $recordID));
+            $this->addItem(new InputHiddenTag($this->engine->getKeyColumn(), (string) $recordID));
         }
 
         $this->fillUp((array) $this->engine->getData());

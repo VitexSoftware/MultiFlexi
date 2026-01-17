@@ -44,8 +44,6 @@ class JobGraphWidget extends \Ease\Html\DivTag
 
         parent::__construct(null, $properties);
 
-        $this->addItem(new \Ease\Html\H4Tag(_('Recent Jobs Visualization'), ['class' => 'mb-2']));
-
         // Create image tag pointing to jobgraph.php
         $graphUrl = 'jobgraph.php?runtemplate_id='.$runtemplate->getMyKey()
                   .'&width='.$width

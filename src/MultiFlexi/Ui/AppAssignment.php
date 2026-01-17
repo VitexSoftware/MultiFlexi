@@ -63,15 +63,15 @@ class AppAssignment extends DivTag
                 new \Ease\Html\H4Tag(_('Company Assignments'), ['class' => 'card-title mb-0']),
                 new \Ease\Html\SmallTag(_('Enable or disable this application for specific companies'), ['class' => 'text-muted']),
             ], ['class' => 'd-flex justify-content-between align-items-center mb-3']),
-            ['class' => 'shadow-sm border-0 mt-4']
+            ['class' => 'shadow-sm border-0 mt-4'],
         );
-        
+
         $searchBox = new \Ease\Html\InputSearchTag('company_search', '', [
             'placeholder' => _('Search companies...'),
             'class' => 'form-control mb-3',
-            'id' => 'company-search'
+            'id' => 'company-search',
         ]);
-        
+
         $cardBody = new \Ease\Html\DivTag([$searchBox, new \Ease\Html\DivTag($assignmentsTable, ['class' => 'table-responsive'])], ['class' => 'card-body']);
         $card->addItem($cardBody);
 
@@ -90,7 +90,7 @@ JS);
                 var companyId = toggle.data('company-id');
                 var appId = toggle.data('app-id');
                 var state = toggle.prop('checked');
-        
+
                 $.post('togglecompanyapp.php', {
                     company_id: companyId,
                     app_id: appId,

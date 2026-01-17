@@ -66,75 +66,24 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         $delayChooser = new \MultiFlexi\Ui\DelayChooser($runtemplateId.'_delay', $delayChoosen, ['id' => $runtemplateId.'_delay', 'checked' => 'true', 'data-runtemplate' => $runtemplateId]);
         $executorChooser = new AppExecutorSelect($runtemplate->getApplication(), [], (string) $runtemplate->getDataValue('executor'), ['id' => $runtemplateId.'_executor', 'data-runtemplate' => $runtemplateId]);
 
-        $scheduleButton = new \Ease\TWB4\LinkButton('schedule.php?id='.$runtemplateId, [_('Schedule Launch').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/multiflexi-schedule.svg', _('Launch'), ['height' => '30px'])], 'secondary btn-lg w-100');
+        $scheduleButton = new \Ease\TWB4\LinkButton('schedule.php?id='.$runtemplateId, [_('Schedule Launch').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/multiflexi-schedule.svg', _('Launch'), ['height' => '30px'])], 'info btn-lg w-100');
+        $scheduleButton->addTagClass('text-white d-flex align-items-center justify-content-center shadow-sm');
+        $scheduleButton->setTagProperties(['style' => 'background-color: #f49a9a; border-color: #f49a9a; color: white !important;']);
+
         $launchButton = new \Ease\TWB4\LinkButton('schedule.php?id='.$runtemplateId.'&when=now&executor=Native', [_('Launch now').'&nbsp;&nbsp;', new \Ease\Html\ImgTag('images/multiflexi-execute.svg', _('Launch'), ['height' => '30px'])], 'primary btn-lg w-100');
+        $launchButton->addTagClass('text-white d-flex align-items-center justify-content-center shadow-sm mb-1');
+        $launchButton->setTagProperties(['style' => 'background-color: #7bc2af; border-color: #7bc2af; color: white !important;']);
 
-        // Left column: Statistics and visualizations
-        $leftColumn = new \Ease\Html\DivTag();
-
-        // Add statistics cards
         $statsCards = new \MultiFlexi\Ui\RunTemplateStatsCards($runtemplate);
-        $leftColumn->addItem($statsCards);
-
-        // Add action buttons below the chart
-        $actionsRow = new \Ease\TWB4\Row();
-        $actionsRow->addTagClass('mt-3');
-        $actionsRow->addColumn(6, $launchButton);
-        $actionsRow->addColumn(6, $scheduleButton);
-        $leftColumn->addItem($actionsRow);
-
-        $runtemplateOptions->addColumn(8, $leftColumn);
-
-        // Right column: Status and Configuration
-        $rightColumn = new \Ease\Html\DivTag();
-
-        // Status section
-        $rightColumn->addItem(new \Ease\Html\H5Tag(_('Status')));
-        $rightColumn->addItem([
-            _('Status').' ',
-            new \Ease\TWB4\Widgets\Toggle('active', $runtemplate->getDataValue('active') ? true : false, $runtemplate->getDataValue('active') ? 'false' : 'true', ['title' => $runtemplate->getDataValue('active') ? _('Enabled') : _('Disabled'), 'data-runtemplate' => $runtemplateId, 'id' => 'enabler', 'data-on' => _('Enabled'), 'data-off' => _('Disabled')]),
-            new \Ease\Html\SpanTag('', ['id' => 'deactivated']),
-            '<hr class="my-2">',
-        ]);
-
-        // Scheduling Configuration section
-        $rightColumn->addItem('<hr>');
-        $rightColumn->addItem(new \Ease\Html\H5Tag(_('Scheduling Configuration')));
-        $rightColumn->addItem([
-            new \Ease\Html\StrongTag(_('Interval')),
-            '<br/>',
-            $intervalChooser,
-            '<br/>',
-            new \Ease\Html\StrongTag(_('Cron Expression')),
-            '<br/>',
-            $crontabInput,
-            '<br/>',
-            new \Ease\Html\StrongTag(_('Startup Delay')),
-            '<br/>',
-            $delayChooser,
-            '<hr>',
-            new \Ease\Html\StrongTag(_('Executor')),
-            '<br/>',
-            $executorChooser,
-        ]);
-
-        $runtemplateOptions->addColumn(4, $rightColumn);
 
         if (WebPage::getRequestValue('delete', 'int') === 1) {
-            $deleteButton = new \Ease\TWB4\LinkButton('runtemplate.php?delete=2&id='.$runtemplateId, _('Delete !!!').'&nbsp;&nbsp;❌', 'danger btn-lg');
+            $deleteButton = new \Ease\TWB4\LinkButton('runtemplate.php?delete=2&id='.$runtemplateId, _('Delete !!!').'&nbsp;&nbsp;❌', 'danger btn-sm');
         } else {
-            $deleteButton = new \Ease\TWB4\LinkButton('runtemplate.php?delete=1&id='.$runtemplateId, _('Delete ?').'&nbsp;&nbsp;❌', 'warning btn-lg');
+            $deleteButton = new \Ease\TWB4\LinkButton('runtemplate.php?delete=1&id='.$runtemplateId, _('Delete ?').'&nbsp;&nbsp;❌', 'warning btn-sm');
         }
 
-        // Add job visualization row
-        $visualizationRow = new \Ease\TWB4\Row();
-        $visualizationRow->addTagClass('mt-3');
-        $visualizationRow->addColumn(10, new \MultiFlexi\Ui\RunTemplateJobsLastMonthChart($runtemplate));
-        $visualizationRow->addColumn(2, new \MultiFlexi\Ui\JobGraphWidget($runtemplate, 10, 10));
-
         $runtemplateJobs = new \MultiFlexi\Ui\RuntemplateJobsListing($runtemplate);
-
-        $nameInput = new \Ease\Html\ATag('#', $runtemplate->getRecordName(), ['class' => 'editable', 'style' => 'font-size: xxx-large;', 'id' => 'name', 'data-pk' => $runtemplate->getMyKey(), 'data-url' => 'runtemplatesave.php', 'data-title' => _('Update RunTemplate name')]);
+        $nameInput = new \Ease\Html\ATag('#', $runtemplate->getRecordName(), ['class' => 'editable', 'style' => 'font-size: xx-large; font-weight: bold;', 'id' => 'name', 'data-pk' => $runtemplate->getMyKey(), 'data-url' => 'runtemplatesave.php', 'data-title' => _('Update RunTemplate name')]);
 
         // Add note field as WYSIWYG editable textarea
         $noteValue = $runtemplate->getDataValue('note') ?: _('Click to add notes...');
@@ -146,25 +95,94 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
             'data-type' => 'textarea',
             'data-title' => _('Update RunTemplate notes'),
             'data-wysiwyg' => 'summernote',
-            'style' => 'display: block; margin-top: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; min-height: 60px; background: #f9f9f9;',
+            'style' => 'display: block; margin-top: 5px; padding: 5px; border: 1px solid #ddd; border-radius: 4px; min-height: 40px; background: #fff;',
+        ]);
+
+        // Actions Header
+        $headerRow = new \Ease\TWB4\Row();
+
+        $logoCol = $headerRow->addColumn(2, new \Ease\Html\ATag('app.php?id='.$this->runtemplate->getDataValue('app_id'), [new AppLogo($this->runtemplate->getApplication(), ['style' => 'height: 60px', 'class' => 'img-thumbnail shadow-sm'])]));
+        $logoCol->addTagClass('text-center my-auto');
+
+        $titleCol = $headerRow->addColumn(4, [
+            new \Ease\Html\SmallTag($this->runtemplate->getApplication()->getRecordName(), ['class' => 'text-muted d-block font-weight-bold text-uppercase small']),
+            $nameInput,
+            $noteInput,
+        ]);
+        $titleCol->addTagClass('my-auto');
+
+        $statusCol = $headerRow->addColumn(3, [
+            new \Ease\Html\DivTag([
+                new \Ease\Html\SmallTag(_('Status'), ['class' => 'font-weight-bold text-muted text-uppercase d-block mb-1 small']),
+                new \Ease\TWB4\Widgets\Toggle('active', $runtemplate->getDataValue('active') ? true : false, $runtemplate->getDataValue('active') ? 'false' : 'true', [
+                    'title' => $runtemplate->getDataValue('active') ? _('Enabled') : _('Disabled'),
+                    'data-runtemplate' => $runtemplateId,
+                    'id' => 'enabler',
+                    'data-on' => _('Enabled'),
+                    'data-off' => _('Disabled'),
+                    'data-size' => 'small',
+                ]),
+                new \Ease\Html\SpanTag('', ['id' => 'deactivated']),
+            ], ['class' => 'p-2 bg-light rounded border text-center shadow-sm']),
+        ]);
+        $statusCol->addTagClass('my-auto');
+
+        $actionsCol = $headerRow->addColumn(3, [
+            new \Ease\Html\DivTag([
+                $launchButton,
+                $scheduleButton,
+            ], ['class' => 'btn-group-vertical w-100 shadow-sm']),
+        ]);
+        $actionsCol->addTagClass('my-auto');
+
+        // Dashboard Tab Content
+        $dashboardContent = new \Ease\TWB4\Row();
+        $dashboardContent->addColumn(12, $statsCards);
+
+        // Scheduling Tab Content
+        $schedulingContent = new \Ease\TWB4\Row();
+        $schedulingContent->addColumn(6, [
+            new \Ease\Html\H5Tag(_('Interval & Persistence')),
+            new \Ease\Html\DivTag([
+                new \Ease\Html\StrongTag(_('Interval')), $intervalChooser, '<br>',
+                new \Ease\Html\StrongTag(_('Cron Expression')), $crontabInput, '<br>',
+                new \Ease\Html\StrongTag(_('Startup Delay')), $delayChooser,
+            ], ['class' => 'card card-body bg-light']),
+        ]);
+        $schedulingContent->addColumn(6, [
+            new \Ease\Html\H5Tag(_('Execution Environment')),
+            new \Ease\Html\DivTag([
+                new \Ease\Html\StrongTag(_('Executor')), $executorChooser,
+            ], ['class' => 'card card-body bg-light']),
+            new \Ease\Html\DivTag($deleteButton, ['class' => 'mt-4 text-right']),
         ]);
 
         $runtemplateBottom = new \Ease\TWB4\Row();
 
         if ($runtemplate->getMyKey()) {
-            $runtemplateBottom->addColumn(4, new RuntemplateCloneForm($runtemplate));
-            $runtemplateBottom->addColumn(4, $deleteButton);
-            $runtemplateBottom->addColumn(4, new RuntemplatePopulateForm($runtemplate));
+            $runtemplateBottom->addColumn(6, new RuntemplateCloneForm($runtemplate));
+            $runtemplateBottom->addColumn(6, new RuntemplatePopulateForm($runtemplate));
         }
 
-        parent::__construct([new \Ease\Html\ATag('companyapp.php?app_id='.$runtemplate->getDataValue('app_id').'&company_id='.$runtemplate->getDataValue('company_id'), '<span style="font-size: xxx-large;">⚗️ </span>'), $nameInput, $noteInput], 'default', $runtemplateOptions, $runtemplateBottom);
+        $this->addCSS(<<<'CSS'
+            .runtemplate-header { background: #fff; padding: 1rem; border-bottom: 1px solid #dee2e6; margin-bottom: 1rem; }
+            .runtemplate-tabs .nav-tabs { border-bottom: 2px solid #007bff; margin-bottom: 1rem; }
+            .runtemplate-tabs .nav-link { font-weight: 500; color: #495057; border: none; padding: 0.75rem 1.25rem; }
+            .runtemplate-tabs .nav-link.active { color: #007bff; border-bottom: 3px solid #007bff; background: transparent; }
+            .dashboard-card { transition: transform 0.2s, box-shadow 0.2s; border: none; border-radius: 8px; }
+            .dashboard-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+            .btn-group-vertical > .btn { border-radius: 4px !important; margin-bottom: 2px; }
+CSS);
+        $this->addTagClass('runtemplate-tabs');
+
+        parent::__construct($headerRow, 'default', null, $runtemplateBottom);
+
         $this->includeJavaScript('js/bootstrap-editable.js');
         $this->includeCss('css/bootstrap-editable.css');
-        // Include WYSIWYG assets for note field
         $this->includeJavaScript('js/summernote-bs4.min.js');
         $this->includeCss('css/summernote-bs4.min.css');
         $this->addJavaScript("$.fn.editable.defaults.mode = 'inline';");
-        //        $this->addJavaScript("$.fn.editable.options.savenochange = true;");
+
         $this->addJavaScript(<<<'EOD'
       $.fn.editableform.buttons =
         '<button type="submit" class="btn btn-primary btn-sm editable-submit">' +
@@ -173,16 +191,14 @@ class RunTemplatePanel extends \Ease\TWB4\Panel
         '<button type="button" class="btn btn-inverse btn-sm editable-cancel">' +
         '<i class="fa fa-fw fa-times"></i>' +
         '</button>'
-
 EOD);
-        // Note: editable initialization moved to finalize() method where CSRF token is available
-        // Both name and note fields will be initialized there with proper CSRF configuration
 
         $runtemplateTabs = new \Ease\TWB4\Tabs();
-        $runtemplateTabs->addTab(_('Jobs'), [$visualizationRow, $runtemplateJobs]);
-        $runtemplateTabs->addTab(_('Options'), [new RuntemplateConfigForm($runtemplate)]);
-        // TODO:   $runtemplateTabs->addTab(_('Actions'), [new \MultiFlexi\Ui\ActionsTab($runtemplate)]);
-        $runtemplateTabs->addTab(_('Environment'), [new EnvironmentView($runtemplate->credentialsEnvironment()), new RunTemplateDotEnv($runtemplate)]);
+        $runtemplateTabs->addTab('📊 '._('Dashboard'), $dashboardContent);
+        $runtemplateTabs->addTab('📅 '._('Scheduling'), $schedulingContent);
+        $runtemplateTabs->addTab('⚙️ '._('Configuration'), [new RuntemplateConfigForm($runtemplate)]);
+        $runtemplateTabs->addTab('🏁 '._('Jobs'), $runtemplateJobs);
+        $runtemplateTabs->addTab('🔐 '._('Environment'), [new EnvironmentView($runtemplate->credentialsEnvironment()), new RunTemplateDotEnv($runtemplate)]);
 
         $this->addItem($runtemplateTabs);
     }

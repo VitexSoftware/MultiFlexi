@@ -43,6 +43,15 @@ class RuntemplateConfigForm extends EngineForm
 
         $credData = [];
 
+        $this->addCSS(<<<'CSS'
+            .runtemplate-config-form .form-group { margin-bottom: 0.75rem; padding: 0.5rem; border-radius: 4px; transition: background-color 0.2s; }
+            .runtemplate-config-form .form-group:hover { background-color: #f8f9fa; }
+            .runtemplate-config-form label { font-size: 0.9rem; margin-bottom: 0.2rem; display: block; }
+            .runtemplate-config-form .form-control-sm { height: calc(1.5em + 0.5rem + 2px); padding: 0.25rem 0.5rem; font-size: 0.875rem; }
+            .required-field { border-left: 3px solid #dc3545 !important; }
+CSS);
+        $this->addTagClass('runtemplate-config-form');
+
         $this->addItem(new RuntemplateRequirementsChoser($engine));
 
         $appFields = \MultiFlexi\Conffield::getAppConfigs($engine->getApplication());
@@ -54,9 +63,9 @@ class RuntemplateConfigForm extends EngineForm
             $inputCaption = new \Ease\Html\StrongTag($fieldName);
 
             if ($field->getType() === 'bool') {
-                $input = new \Ease\Html\DivTag(new \Ease\TWB4\Widgets\Toggle($fieldName, $field->getValue() === 'true' ? true : false, 'true', []));
+                $input = new \Ease\Html\DivTag(new \Ease\TWB4\Widgets\Toggle($fieldName, $field->getValue() === 'true' ? true : false, 'true', ['data-size' => 'small']));
             } else {
-                $input = new \Ease\Html\InputTag($fieldName, $field->getValue(), ['type' => $field->getType()]);
+                $input = new \Ease\Html\InputTag($fieldName, $field->getValue(), ['type' => $field->getType(), 'class' => 'form-control form-control-sm']);
             }
 
             $runTemplateField = $runTemplateFields->getFieldByCode($fieldName);
@@ -84,6 +93,14 @@ class RuntemplateConfigForm extends EngineForm
                 $formGroup = $this->addInput($input, $inputCaption, $runTemplateField->getValue(), $field->getDescription());
             } else { // Simple Fields
                 $formGroup = $this->addInput($input, $fieldName, $field->getDefaultValue(), $field->getDescription());
+            }
+
+            if ($field->isRequired()) {
+                $formGroup->addTagClass('required-field');
+            }
+
+            if ($field->isRequired()) {
+                $formGroup->addTagClass('required-field');
             }
 
             //            if ($field->isRequired()) {
