@@ -348,7 +348,8 @@ EOD.$this->footerCallback($this->engine->foterCallback($tableID)).<<<'EOD'
         "responsive": true,
         "processing": true,
         "serverSide": true,
-        "lengthMenu": [[10, 25, 50, 100, 200, 500, -1], [10, 25, 50, 100 ,200 ,500 , "
+        "pageLength": 100,
+        "lengthMenu": [[100, 10, 25, 50, 200, 500, -1], [100, 10, 25, 50, 200, 500, "
 EOD._('All pages').<<<'EOD'
 "]],
         "language": {
