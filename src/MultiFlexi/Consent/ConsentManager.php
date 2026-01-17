@@ -22,7 +22,7 @@ namespace MultiFlexi\Consent;
  * Provides comprehensive consent tracking with audit trail for GDPR compliance.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2024 Vitex Software
+ * @copyright  2026 Vitex Software
  */
 class ConsentManager extends \MultiFlexi\Engine
 {

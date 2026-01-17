@@ -42,24 +42,32 @@ class ApplicationPanel extends Panel
     {
         $this->application = $application;
         $this->headRow = new Row();
-        $this->headRow->addColumn(4, new \Ease\Html\ATag('app.php?id='.$this->application->getMyKey(), [new AppLogo($application, ['style' => 'height: 120px']), '&nbsp;', $application->getRecordName()]));
+        
+        $logoCol = $this->headRow->addColumn(2, new \Ease\Html\ATag('app.php?id='.$this->application->getMyKey(), [new AppLogo($application, ['style' => 'height: 80px', 'class' => 'img-thumbnail shadow-sm'])]));
+        $logoCol->addTagClass('text-center my-auto');
+
+        $titleCol = $this->headRow->addColumn(4, [
+            new \Ease\Html\H2Tag($application->getRecordName(), ['class' => 'mb-0']),
+            new \Ease\Html\SmallTag($application->getDataValue('uuid'), ['class' => 'text-muted d-block small']),
+        ]);
+        $titleCol->addTagClass('my-auto');
 
         $ca = new \MultiFlexi\CompanyApp(null);
         $usedIncompanies = $ca->listingQuery()->select(['companyapp.company_id', 'company.name', 'company.slug', 'company.logo'], true)->leftJoin('company ON company.id = companyapp.company_id')->where('app_id', $this->application->getMyKey())->fetchAll('company_id');
 
         if ($usedIncompanies) {
-            $usedByDiv = new \Ease\Html\DivTag();
-            $usedByDiv->addItem(new \Ease\Html\H5Tag(_('Used by').': '));
+            $usedByDiv = new \Ease\Html\DivTag(null, ['class' => 'p-2 bg-light rounded shadow-sm border']);
+            $usedByDiv->addItem(new \Ease\Html\SmallTag(_('Used by').': ', ['class' => 'font-weight-bold mb-1 d-block text-uppercase small text-secondary']));
 
             // Create compact table instead of cards
-            $usedByTable = new \Ease\TWB4\Table(null, ['class' => 'table table-sm table-hover']);
-            $usedByTable->addRowHeaderColumns([_('Company'), _('RunTemplates')]);
+            $usedByTable = new \Ease\TWB4\Table(null, ['class' => 'table table-sm table-hover mb-0', 'style' => 'font-size: 0.85rem;']);
+            // $usedByTable->addRowHeaderColumns([_('Company'), _('RunTemplates')]);
 
             foreach ($usedIncompanies as $companyInfo) {
                 $companyInfo['id'] = $companyInfo['company_id'];
                 $kumpan = new \MultiFlexi\Company($companyInfo, ['autoload' => false]);
                 $calb = new CompanyAppLink($kumpan, $application);
-                $crls = new \MultiFlexi\Ui\CompanyRuntemplatesLinks($kumpan, $application, [], ['class' => 'btn btn-outline-secondary btn-sm']);
+                $crls = new \MultiFlexi\Ui\CompanyRuntemplatesLinks($kumpan, $application, [], ['class' => 'btn btn-outline-secondary btn-sm p-0 px-1', 'style' => 'font-size: 0.7rem;']);
 
                 $usedByTable->addRowColumns([
                     [$calb, ' ', new \Ease\Html\SmallTag('('.$crls->count().')', ['class' => 'text-muted'])],
@@ -68,11 +76,14 @@ class ApplicationPanel extends Panel
             }
 
             $usedByDiv->addItem($usedByTable);
-            $this->headRow->addColumn(6, $usedByDiv);
+            $this->headRow->addColumn(4, $usedByDiv);
         } else {
-            if ($application->getMyKey()) {
-                $this->headRow->addColumn(6, new LinkButton('?id='.$application->getMyKey().'&action=delete', '🪦&nbsp;'._('Remove'), 'danger'));
-            }
+            $this->headRow->addColumn(4, '');
+        }
+
+        if ($application->getMyKey()) {
+            $actionCol = $this->headRow->addColumn(2, new LinkButton('?id='.$application->getMyKey().'&action=delete', '🪦&nbsp;'._('Remove'), 'outline-danger btn-sm shadow-sm'));
+            $actionCol->addTagClass('text-right my-auto');
         }
 
         parent::__construct($this->headRow, 'default', $content, $footer);

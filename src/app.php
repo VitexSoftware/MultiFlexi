@@ -22,6 +22,7 @@ use Ease\TWB4\Row;
 use Ease\TWB4\Table;
 use Ease\TWB4\Tabs;
 use MultiFlexi\Application;
+use MultiFlexi\Company;
 use MultiFlexi\Conffield;
 use MultiFlexi\Job;
 
@@ -167,7 +168,7 @@ foreach ($jobs as $job) {
 }
 
 $instanceRow->addColumn(4, null === $apps->getMyKey() ?
-                new LinkButton('', _('Config fields'), 'inverse disabled  btn-block' ) :
+                new LinkButton('', _('Config fields'), 'inverse disabled  btn-block') :
                 [
                     new ConfigFieldsView(Conffield::getAppConfigs($apps)),
                     new LinkButton('conffield.php?app_id='.$apps->getMyKey(), _('Config fields editor'), 'secondary  btn-block'),
@@ -182,8 +183,8 @@ $appTabs->addTab(_('Overview'), $appOverview);
 $appTabs->addTab(_('Configuration'), $instanceRow);
 $appTabs->addTab(_('Jobs'), [
     $jobList,
-    new LinkButton('logs.php?apps_id='.$apps->getMyKey(), _('Application Log'), 'info', ['title' => _('View application log'),'id' => 'applicationlogbutton']),
-    new LinkButton('joblist.php?app_id='.$apps->getMyKey(), _('All Application Jobs history'), 'info', ['title' => _('View all application jobs history'),'id' => 'allapplicationjobshistorybutton']),
+    new LinkButton('logs.php?apps_id='.$apps->getMyKey(), _('Application Log'), 'info', ['title' => _('View application log'), 'id' => 'applicationlogbutton']),
+    new LinkButton('joblist.php?app_id='.$apps->getMyKey(), _('All Application Jobs history'), 'info', ['title' => _('View all application jobs history'), 'id' => 'allapplicationjobshistorybutton']),
 ]);
 
 $jsonImportForm = new AppJsonImportForm();
@@ -191,10 +192,24 @@ $jsonImportForm->addItem(new \Ease\Html\InputHiddenTag('action', 'import'));
 $appTabs->addTab(_('Import'), $jsonImportForm);
 $appTabs->addTab(_('Export'), new AppJson($apps));
 
+WebPage::singleton()->addCss(<<<'CSS'
+    .card { transition: all 0.3s cubic-bezier(.25,.8,.25,1); border-radius: 8px; }
+    .card:hover { box-shadow: 0 14px 28px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0,0.1) !important; }
+    .img-thumbnail { border-radius: 12px; transition: transform 0.3s ease; }
+    .img-thumbnail:hover { transform: scale(1.05); }
+    .nav-tabs { border-bottom: 2px solid #dee2e6; margin-bottom: 20px; }
+    .nav-link { font-weight: 500; color: #6c757d; border: none !important; padding: 12px 20px; }
+    .nav-link.active { color: #007bff !important; border-bottom: 3px solid #007bff !important; background: transparent !important; }
+    .badge-primary { background-color: #007bff; }
+    .btn-outline-danger:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(220, 53, 69, 0.2); }
+    .application-metadata h3 { color: #343a40; font-weight: 700; }
+    .table thead th { border-top: none; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; color: #8898aa; }
+CSS);
+
 WebPage::singleton()->container->addItem(new ApplicationPanel(
     $apps,
     $appTabs,
-    '',
+    new AppAssignment($apps),
 ));
 
 WebPage::singleton()->addItem(new PageBottom('app/'.$apps->getMyKey()));

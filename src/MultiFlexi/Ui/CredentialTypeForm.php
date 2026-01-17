@@ -102,7 +102,7 @@ class CredentialTypeForm extends SecureForm
             $submitRow->addColumn(2, new \Ease\TWB4\LinkButton('credentialtype.php?id='.$credtype->getMyKey().'&test=true', '🚀 '._('Test'), 'success btn-lg btn-block'));
         }
 
-        $submitRow->addColumn(8, new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'primary btn-lg btn-block',['title' => _('Apply changes'),'id' => 'CredentialTypeFormapplybutton']));
+        $submitRow->addColumn(8, new \Ease\TWB4\SubmitButton('🍏 '._('Apply'), 'primary btn-lg btn-block', ['title' => _('Apply changes'), 'id' => 'CredentialTypeFormapplybutton']));
 
         if (null === $credtype->getMyKey()) {
             $submitRow->addColumn(2, new \Ease\TWB4\SubmitButton('⚰️ '._('Remove').' !', 'disabled btn-lg btn-block', ['disabled' => 'true']));

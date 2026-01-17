@@ -34,30 +34,28 @@ use MultiFlexi\Application;
  */
 class ApplicationInfo extends Panel
 {
-    /**
-     * Application Info panel.
-     */
     public function __construct(Application $application)
     {
-        $body = new \Ease\Html\DivTag();
-        $body->addItem(new AppLogo($application));
+        $body = new \Ease\Html\DivTag(null, ['class' => 'p-4']);
+        
+        $row = new \Ease\TWB4\Row();
+        $row->addColumn(4, new \Ease\Html\DivTag(new AppLogo($application, ['class' => 'img-fluid rounded shadow-sm border p-2']), ['class' => 'text-center mb-4']));
+        
+        $infoCol = $row->addColumn(8, $this->metadataTable($application));
+        
+        $body->addItem($row);
 
-        parent::__construct($this->headerRow($application), 'inverse', $body, new AppLastMonthChart($application));
+        parent::__construct(null, 'default', $body, new AppLastMonthChart($application));
     }
 
     /**
-     * logo, name and caption in one TWB Row div.
-     *
      * @param Application $application
-     *
-     * @return \Ease\TWB4\Row
+     * @return \Ease\Html\DivTag
      */
-    public function headerRow($application)
+    public function metadataTable($application)
     {
-        $headerRow = new \Ease\TWB4\Row();
-
-        $appData = new \Ease\Html\DivTag();
-        // Handle localized content if available
+        $metadata = new \Ease\Html\DivTag(null, ['class' => 'application-metadata']);
+        
         $name = $application->getDataValue('name');
         $description = $application->getDataValue('description');
 
@@ -69,16 +67,36 @@ class ApplicationInfo extends Panel
             $description = $application->getLocalizedDescription() ?? $description;
         }
 
-        $appData->addItem(new \Ease\Html\H3Tag($name));
-        $appData->addItem(new \Ease\Html\PTag($description));
-        $appData->addItem(new \Ease\Html\PTag(new \Ease\Html\ATag($application->getDataValue('homepage'), $application->getDataValue('homepage'))));
-        $appData->addItem(new \Ease\Html\PTag($application->getDataValue('uuid')));
-        $appData->addItem(new \Ease\Html\PTag($application->getDataValue('ociimage')));
-        $appData->addItem(new \Ease\Html\PTag($application->getDataValue('version')));
-        $appData->addItem(new \Ease\Html\PTag(new RequirementsOverview($application->getRequirements())));
+        $metadata->addItem(new \Ease\Html\H3Tag($name, ['class' => 'border-bottom pb-2 mb-3']));
+        $metadata->addItem(new \Ease\Html\PTag($description, ['class' => 'lead']));
 
-        $headerRow->addColumn(12, $appData);
+        $details = new \Ease\TWB4\Row();
+        
+        $col1 = $details->addColumn(6);
+        $col1->addItem($this->infoRow('🏠', _('Homepage'), new \Ease\Html\ATag($application->getDataValue('homepage'), $application->getDataValue('homepage'))));
+        $col1->addItem($this->infoRow('🆔', _('UUID'), $application->getDataValue('uuid')));
+        $col1->addItem($this->infoRow('📦', _('Image'), $application->getDataValue('ociimage')));
 
-        return $headerRow;
+        $col2 = $details->addColumn(6);
+        $col2->addItem($this->infoRow('📁', _('Binary'), $application->getDataValue('executable')));
+        $col2->addItem($this->infoRow('🏷️', _('Version'), $application->getDataValue('version')));
+        $col2->addItem($this->infoRow('📜', _('Requirements'), new RequirementsOverview($application->getRequirements())));
+
+        $metadata->addItem($details);
+
+        return $metadata;
     }
+
+    /**
+     * Helper for info rows
+     */
+    private function infoRow($icon, $label, $value)
+    {
+        if (empty($value)) return null;
+        return new \Ease\Html\DivTag([
+            new \Ease\Html\SmallTag($icon . ' ' . $label, ['class' => 'text-muted d-block font-weight-bold text-uppercase small']),
+            new \Ease\Html\DivTag($value, ['class' => 'mb-3 font-weight-normal'])
+        ]);
+    }
+
 }

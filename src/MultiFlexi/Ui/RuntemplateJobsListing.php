@@ -20,7 +20,7 @@ use MultiFlexi\Env\RunTemplate;
 /**
  * MultiFlexi - Application Launch Form.
  *
- * @copyright  2015-2024 Vitex Software
+ * @copyright  2015-2026 Vitex Software
  * @license    https://opensource.org/licenses/MIT MIT
  *
  * @no-named-arguments

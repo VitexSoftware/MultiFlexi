@@ -191,7 +191,7 @@ class GDPRImplementationValidator
             $method = $reflection->getMethod('generateExportReadyEmailBody');
             $method->setAccessible(true);
             
-            $emailBody = $method->invoke($notifier, 'TestUser', 'json', '/test-url', '2024-12-20 15:00:00');
+            $emailBody = $method->invoke($notifier, 'TestUser', 'json', '/test-url', '2026-12-20 15:00:00');
             
             // Check for GDPR compliance text
             return strpos($emailBody, 'GDPR Article 15') !== false &&

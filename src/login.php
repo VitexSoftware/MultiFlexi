@@ -161,7 +161,7 @@ $submit = new SubmitButton('🚪&nbsp;'._('Sign in'), 'success btn-lg btn-block'
 
 $submitRow = new Row();
 $submitRow->addColumn(6, $submit);
-$submitRow->addColumn(6, new LinkButton('passwordrecovery.php', '🔑&nbsp;'._('Password recovery'), 'warning btn-block', ['title' => _('Recover your password'),'id' => 'passwordrecoverybutton']));
+$submitRow->addColumn(6, new LinkButton('passwordrecovery.php', '🔑&nbsp;'._('Password recovery'), 'warning btn-block', ['title' => _('Recover your password'), 'id' => 'passwordrecoverybutton']));
 
 $loginPanel = new Panel(
     new ImgTag('images/project-logo.svg', 'logo', ['width' => 20]),

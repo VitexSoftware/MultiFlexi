@@ -23,7 +23,7 @@ use MultiFlexi\Configuration;
  * @deprecated since version 1.14
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2024 Vitex Software
+ * @copyright  2020-2026 Vitex Software
  */
 
 require_once './init.php';

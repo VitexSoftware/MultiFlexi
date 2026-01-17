@@ -4,7 +4,7 @@
  * MultiFlexi - Phinx database adapter.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2021-2024 Vitex Software
+ * @copyright  2021-2026 Vitex Software
  */
 if (file_exists('./vendor/autoload.php')) {
     include_once './vendor/autoload.php';
