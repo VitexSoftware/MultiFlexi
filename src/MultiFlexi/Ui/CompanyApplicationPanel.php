@@ -43,15 +43,29 @@ class CompanyApplicationPanel extends Panel
         $company = $companyApp->getCompany();
         $this->application = $companyApp->getApplication();
         $this->headRow = new Row();
-        $this->headRow->addColumn(4, new \Ease\Html\ATag('app.php?id='.$this->application->getMyKey(), [new AppLogo($this->application, ['style' => 'height: 120px']), '&nbsp;', $this->application->getRecordName()]));
 
-        $usedByCompany = new \Ease\Html\DivTag('', ['class' => 'card-group']);
+        $logoCol = $this->headRow->addColumn(2, new \Ease\Html\ATag('app.php?id='.$this->application->getMyKey(), [new AppLogo($this->application, ['style' => 'height: 80px', 'class' => 'img-thumbnail shadow-sm'])]));
+        $logoCol->addTagClass('text-center my-auto');
 
-        $crls = new \MultiFlexi\Ui\CompanyRuntemplatesLinks($company, $this->application, [], ['class' => 'btn btn-outline-secondary btn-sm']);
+        $titleCol = $this->headRow->addColumn(4, [
+            new \Ease\Html\H2Tag($this->application->getRecordName(), ['class' => 'mb-0']),
+            new \Ease\Html\SmallTag($this->application->getDataValue('uuid'), ['class' => 'text-muted d-block small']),
+        ]);
+        $titleCol->addTagClass('my-auto');
 
-        $usedByCompany->addItem(new \Ease\TWB4\Card([new \Ease\Html\DivTag([new \Ease\Html\H5Tag([_('Active RunTemplates').': ', ' <small>'.$crls->count().'</small>'], ['class' => 'card-title']), $crls], ['class' => 'card-body'])], ['style' => 'width: 6rem;']));
-
-        $this->headRow->addColumn(6, $usedByCompany);
+        $crls = new \MultiFlexi\Ui\CompanyRuntemplatesLinks($company, $this->application, [], ['class' => 'btn btn-outline-secondary btn-sm p-0 px-1', 'style' => 'font-size: 0.7rem;']);
+        
+        $usageDiv = new \Ease\Html\DivTag(null, ['class' => 'p-2 bg-light rounded shadow-sm border']);
+        $usageDiv->addItem(new \Ease\Html\SmallTag(_('Active RunTemplates').': ', ['class' => 'font-weight-bold mb-1 d-block text-uppercase small text-secondary']));
+        
+        $usageTable = new \Ease\TWB4\Table(null, ['class' => 'table table-sm table-hover mb-0', 'style' => 'font-size: 0.85rem;']);
+        $usageTable->addRowColumns([
+            [new \Ease\Html\SmallTag(_('Count'), ['class' => 'text-muted']), '&nbsp;', new \Ease\TWB4\Badge('primary', (string)$crls->count())],
+            $crls
+        ]);
+        
+        $usageDiv->addItem($usageTable);
+        $this->headRow->addColumn(6, $usageDiv);
 
         parent::__construct($this->headRow, 'default', $content, $footer);
     }

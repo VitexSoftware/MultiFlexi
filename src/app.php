@@ -192,19 +192,6 @@ $jsonImportForm->addItem(new \Ease\Html\InputHiddenTag('action', 'import'));
 $appTabs->addTab(_('Import'), $jsonImportForm);
 $appTabs->addTab(_('Export'), new AppJson($apps));
 
-WebPage::singleton()->addCss(<<<'CSS'
-    .card { transition: all 0.3s cubic-bezier(.25,.8,.25,1); border-radius: 8px; }
-    .card:hover { box-shadow: 0 14px 28px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0,0.1) !important; }
-    .img-thumbnail { border-radius: 12px; transition: transform 0.3s ease; }
-    .img-thumbnail:hover { transform: scale(1.05); }
-    .nav-tabs { border-bottom: 2px solid #dee2e6; margin-bottom: 20px; }
-    .nav-link { font-weight: 500; color: #6c757d; border: none !important; padding: 12px 20px; }
-    .nav-link.active { color: #007bff !important; border-bottom: 3px solid #007bff !important; background: transparent !important; }
-    .badge-primary { background-color: #007bff; }
-    .btn-outline-danger:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(220, 53, 69, 0.2); }
-    .application-metadata h3 { color: #343a40; font-weight: 700; }
-    .table thead th { border-top: none; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; color: #8898aa; }
-CSS);
 
 WebPage::singleton()->container->addItem(new ApplicationPanel(
     $apps,
