@@ -33,7 +33,7 @@ use Ease\TWB4\SubmitButton;
 require_once './init.php';
 
 // Check if IP whitelist is enabled and user is not on whitelist
-if (isset($GLOBALS['ipWhitelist']) && !$GLOBALS['ipWhitelist']->isAllowed()) {
+if (isset($GLOBALS['ipWhitelist']) && !$GLOBALS['ipWhitelist']->isWhitelisted(\MultiFlexi\Security\RateLimitHelpers::getClientIpAddress())) {
     http_response_code(403);
     WebPage::singleton()->addItem(new PageTop(_('Access Denied')));
     WebPage::singleton()->container->addItem(new DivTag(_('Access denied from your IP address'), ['class' => 'alert alert-danger']));
@@ -72,11 +72,11 @@ try {
 
     if (isset($GLOBALS['rbac'])) {
         $rbac = $GLOBALS['rbac'];
-        $hasAdmin = $rbac->hasRole('admin');
+        $hasAdmin = $rbac->isRoleAssigned('admin') || $rbac->isRoleAssigned('super_admin');
     }
 
     if (!$hasAdmin) {
-        Shared::user()->addStatusMessage(_('There is no administrators in the database.'), 'warning');
+        Shared::user()->addStatusMessage(_('There are no administrators in the database.'), 'warning');
         WebPage::singleton()->container->addItem(new LinkButton('createaccount.php', _('Create first Administrator Account'), 'success', ['id' => 'createAdmin']));
     }
 } catch (\PDOException $exc) {

@@ -692,6 +692,40 @@ EOD);
     }
 
     /**
+     * Check if a specific role is assigned to ANY user in the system.
+     * This is useful for first-run detection or system-wide checks.
+     *
+     * @param string $roleName Role name
+     *
+     * @return bool Whether any user has the role
+     */
+    public function isRoleAssigned(string $roleName): bool
+    {
+        try {
+            $sql = <<<EOD
+
+                SELECT COUNT(*) as count
+                FROM `{$this->tables['user_roles']}` ur
+                JOIN `{$this->tables['roles']}` r ON ur.role_id = r.id
+                WHERE r.name = ?
+                AND r.is_active = 1
+                AND (ur.expires_at IS NULL OR ur.expires_at > NOW())
+
+EOD;
+
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([$roleName]);
+            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+            return $result && (int) $result['count'] > 0;
+        } catch (\Exception $e) {
+            error_log('Failed to check if role is assigned: '.$e->getMessage());
+
+            return false;
+        }
+    }
+
+    /**
      * Initialize RBAC tables.
      */
     private function initializeTables(): void
