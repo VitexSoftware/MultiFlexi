@@ -192,7 +192,6 @@ $jsonImportForm->addItem(new \Ease\Html\InputHiddenTag('action', 'import'));
 $appTabs->addTab(_('Import'), $jsonImportForm);
 $appTabs->addTab(_('Export'), new AppJson($apps));
 
-
 WebPage::singleton()->container->addItem(new ApplicationPanel(
     $apps,
     $appTabs,

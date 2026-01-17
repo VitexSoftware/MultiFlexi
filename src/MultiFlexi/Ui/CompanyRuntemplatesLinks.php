@@ -59,7 +59,7 @@ CSS);
                     ->fetch();
 
                 $group = new \Ease\Html\DivTag(null, ['class' => 'btn-group runtemplate-compact-group shadow-sm mr-2 mb-2', 'role' => 'group']);
-                
+
                 // RunTemplate Link
                 $group->addItem(new \Ease\Html\ATag(
                     'runtemplate.php?id='.$runtemplateData['id'],
@@ -70,8 +70,8 @@ CSS);
                         'data-trigger' => 'manual',
                         'data-html' => 'true',
                         'data-placement' => 'top',
-                        'data-content' => $runtemplateData['name']
-                    ]
+                        'data-content' => $runtemplateData['name'],
+                    ],
                 ));
 
                 // Exit Code / Last Status
@@ -85,8 +85,8 @@ CSS);
                             'data-trigger' => 'manual',
                             'data-html' => 'true',
                             'data-placement' => 'top',
-                            'data-content' => _('Last finished job exit code').': '.$lastFinishedJob['exitcode']
-                        ]
+                            'data-content' => _('Last finished job exit code').': '.$lastFinishedJob['exitcode'],
+                        ],
                     ));
                 } else {
                     $group->addItem(new \Ease\Html\SpanTag('🪤', [
@@ -95,7 +95,7 @@ CSS);
                         'data-trigger' => 'manual',
                         'data-html' => 'true',
                         'data-placement' => 'top',
-                        'data-content' => _('No jobs yet')
+                        'data-content' => _('No jobs yet'),
                     ]));
                 }
 
@@ -114,8 +114,8 @@ CSS);
                             'data-trigger' => 'manual',
                             'data-html' => 'true',
                             'data-placement' => 'top',
-                            'data-content' => sprintf(_('%s: %s (in %s)'), _('Job is scheduled in queue'), $queuedJob['schedule'], self::secondsToHuman((int) (abs($scheduledAt->getTimestamp() - $now->getTimestamp()))))
-                        ]
+                            'data-content' => sprintf(_('%s: %s (in %s)'), _('Job is scheduled in queue'), $queuedJob['schedule'], self::secondsToHuman((int) abs($scheduledAt->getTimestamp() - $now->getTimestamp()))),
+                        ],
                     ));
                 }
 
@@ -148,18 +148,13 @@ JS);
         parent::__construct($runtemplatesDiv, $properties);
     }
 
-
     /**
      * Convert seconds to human readable string.
-     *
-     * @param int $seconds
-     *
-     * @return string
      */
     public static function secondsToHuman(int $seconds): string
     {
         $dtF = new \DateTime('@0');
-        $dtT = new \DateTime("@$seconds");
+        $dtT = new \DateTime("@{$seconds}");
 
         return $dtF->diff($dtT)->format('%ad %hh %im %ss');
     }

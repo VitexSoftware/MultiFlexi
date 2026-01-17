@@ -54,16 +54,16 @@ class CompanyApplicationPanel extends Panel
         $titleCol->addTagClass('my-auto');
 
         $crls = new \MultiFlexi\Ui\CompanyRuntemplatesLinks($company, $this->application, [], ['class' => 'btn btn-outline-secondary btn-sm p-0 px-1', 'style' => 'font-size: 0.7rem;']);
-        
+
         $usageDiv = new \Ease\Html\DivTag(null, ['class' => 'p-2 bg-light rounded shadow-sm border']);
         $usageDiv->addItem(new \Ease\Html\SmallTag(_('Active RunTemplates').': ', ['class' => 'font-weight-bold mb-1 d-block text-uppercase small text-secondary']));
-        
+
         $usageTable = new \Ease\TWB4\Table(null, ['class' => 'table table-sm table-hover mb-0', 'style' => 'font-size: 0.85rem;']);
         $usageTable->addRowColumns([
-            [new \Ease\Html\SmallTag(_('Count'), ['class' => 'text-muted']), '&nbsp;', new \Ease\TWB4\Badge('primary', (string)$crls->count())],
-            $crls
+            [new \Ease\Html\SmallTag(_('Count'), ['class' => 'text-muted']), '&nbsp;', new \Ease\TWB4\Badge('primary', (string) $crls->count())],
+            $crls,
         ]);
-        
+
         $usageDiv->addItem($usageTable);
         $this->headRow->addColumn(6, $usageDiv);
 

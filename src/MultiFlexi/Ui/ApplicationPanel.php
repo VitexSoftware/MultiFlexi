@@ -42,7 +42,7 @@ class ApplicationPanel extends Panel
     {
         $this->application = $application;
         $this->headRow = new Row();
-        
+
         $logoCol = $this->headRow->addColumn(2, new \Ease\Html\ATag('app.php?id='.$this->application->getMyKey(), [new AppLogo($application, ['style' => 'height: 80px', 'class' => 'img-thumbnail shadow-sm'])]));
         $logoCol->addTagClass('text-center my-auto');
 
