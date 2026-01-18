@@ -43,8 +43,6 @@ class BruteForceProtection
         $this->timeWindow = $timeWindow;
         $this->ipBasedLimiting = $ipBasedLimiting;
         $this->tableName = $tableName;
-
-        $this->ensureTableExists();
     }
 
     /**
@@ -321,29 +319,6 @@ EOD;
             $delay = $this->calculateDelay($attempts);
             sleep($delay);
         }
-    }
-
-    /**
-     * Ensure the login_attempts table exists.
-     */
-    private function ensureTableExists(): void
-    {
-        $sql = <<<EOD
-CREATE TABLE IF NOT EXISTS `{$this->tableName}` (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            ip_address VARCHAR(45) NOT NULL,
-            username VARCHAR(255),
-            attempt_time DATETIME NOT NULL,
-            success BOOLEAN NOT NULL DEFAULT FALSE,
-            user_agent TEXT,
-            INDEX idx_ip_time (ip_address, attempt_time),
-            INDEX idx_username_time (username, attempt_time),
-            INDEX idx_success (success),
-            INDEX idx_attempt_time (attempt_time)
-        )
-EOD;
-
-        $this->pdo->exec($sql);
     }
 
     /**
