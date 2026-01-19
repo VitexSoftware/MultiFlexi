@@ -42,7 +42,7 @@ class CompaniesBar extends \Ease\Html\DivTag
             $companyAppCard = new \Ease\TWB4\Card(new JobSuccessGraph($todaysJobs, ['style' => 'max-width: fit-content; margin-left: auto; margin-right: auto;']), ['style' => 'width: 10rem;']);
             $companyAppCard->addTagClass('text-center');
 
-            $companyAppCard->addItem(new ATag('company.php?id='.$companyData['id'], new \Ease\Html\ImgTag($companyData['logo'], (string) $companyData['name'], ['title' => $companyData['slug'], 'class' => 'card-img-top', 'style' => 'padding: 5px; margin: 5px;max-height: 150px;max-width: 150px;'])));
+            $companyAppCard->addItem(new ATag('company.php?id='.$companyData['id'], new \Ease\Html\ImgTag(empty($companyData['logo']) ? 'images/company.svg' : $companyData['logo'] , (string) $companyData['name'], ['title' => $companyData['slug'], 'class' => 'card-img-top', 'style' => 'padding: 5px; margin: 5px;max-height: 150px;max-width: 150px;'])));
 
             $companyAppCard->addItem(new \Ease\Html\DivTag(new \Ease\Html\H5Tag($companyData['name'], ['class' => 'card-title']), ['class' => 'card-body']));
 

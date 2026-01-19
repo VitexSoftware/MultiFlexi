@@ -312,7 +312,7 @@ EOD);
                 if (empty($icon)) {
                     $logo = '';
                 } else {
-                    $logo = new \Ease\Html\ImgTag($uInfo[$icon], (string) $uInfo[$namecolumn], ['height' => 20]).'&nbsp;';
+                    $logo = new \Ease\Html\ImgTag( empty($uInfo[$icon]) ? 'images/company.svg' :  $uInfo[$icon], (string) $uInfo[$namecolumn], ['height' => 20]).'&nbsp;';
                 }
 
                 $itemList[$source->keyword.'.php?'.$keycolumn.'='.$uInfo[$keycolumn]] = $logo._(\array_key_exists($namecolumn, $uInfo) ? (string) ($uInfo[$namecolumn]).' ' : 'n/a');
