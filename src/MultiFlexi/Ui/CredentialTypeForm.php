@@ -46,6 +46,8 @@ class CredentialTypeForm extends SecureForm
         ]);
         $helperCol = $credTypeRow1->addColumn(6, new \Ease\TWB4\FormGroup(_('Credential Prototype'), new CredentialPrototypeSelect('class', [], (string) $credtype->getDataValue('class'))));
 
+        $this->addItem(new \Ease\Html\InputHiddenTag('version', (int)$credtype->getDataValue('version')));
+        
         if ($credtype->getDataValue('class')) {
             $credtype->getHelper()->prepareConfigForm();
 
