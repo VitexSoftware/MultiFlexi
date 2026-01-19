@@ -32,7 +32,7 @@
         "confirm-it-solutions/php-zabbix-api": "^3.0",
         "cboden/ratchet": "^0.5",
         "textalk/websocket": "dev-master",
-        "open-telemetry/sdk": "^1.0",
+        "open-telemetry/sdk": "^1.11",
         "open-telemetry/exporter-otlp": "^1.0"
     },
     "license": "MIT",
