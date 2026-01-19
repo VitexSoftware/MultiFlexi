@@ -29,7 +29,7 @@ foreach ($companies->listingQuery() as $companyInfo) {
     $companies->setData($companyInfo);
     $companyId = $companyInfo['id'];
     //    $companyColumns['enabled'] = new \Ease\Html\Widgets\SemaforLight($companyInfo['enabled'] === 1 ? 'green' : 'red', ['width' => 20]);
-    $companyColumns['logo'] = new CompanyLinkButton($companies, ['height' => '64']);
+    $companyColumns['logo'] = new CompanyLinkButton($companies, ['height' => '64px']);
     $companyColumns['name'] = new \Ease\Html\ATag('company.php?id='.$companyId, $companyInfo['name']);
     $companyColumns['ic'] = $companyInfo['ic'];
 
