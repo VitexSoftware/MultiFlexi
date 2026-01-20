@@ -30,21 +30,21 @@ class EnvironmentEditor extends \Ease\Html\TableTag
      * @param array                 $fields
      * @param array<string, string> $properties
      */
-    public function __construct($fields, $properties = [])
+    public function __construct(\MultiFlexi\ConfigFields $fields, array $properties = [])
     {
         $properties['class'] = 'table';
         parent::__construct(null, $properties);
         $this->addRowHeaderColumns([_('Keyword'), _('Value')]);
         $this->fields = $fields;
 
-        foreach ($fields as $fieldProperties) {
+        foreach ($fields as $field) {
             //            if (stristr($fieldProperties['keyword'], 'pass')) {
             //                $value = preg_replace('(.)', '*', $value);
             //            }
             $tableRow = $this->tBody->addItem(new \Ease\Html\TrTag());
-            $keyInput = new \Ease\Html\ATag('#', $fieldProperties['keyword'], ['class' => 'editable', 'id' => 'keyword', 'data-pk' => $fieldProperties['id'], 'data-url' => 'companyenv.php', 'data-title' => _('Update Keyname')]);
+            $keyInput = new \Ease\Html\ATag('#', $field->getCode(), ['class' => 'editable', 'id' => 'keyword', 'data-pk' => $field->getCode(), 'data-url' => 'companyenv.php', 'data-title' => _('Update Keyname')]);
             $tableRow->addItem(new \Ease\Html\TdTag($keyInput, ['style' => 'width: 20%']));
-            $valueInput = new \Ease\Html\ATag('#', $fieldProperties['value'], ['class' => 'editable', 'id' => 'value', 'data-pk' => $fieldProperties['id'], 'data-url' => 'companyenv.php', 'data-title' => _('Update value')]);
+            $valueInput = new \Ease\Html\ATag('#', $field->getValue(), ['class' => 'editable', 'id' => 'value', 'data-pk' => $field->getCode(), 'data-url' => 'companyenv.php', 'data-title' => _('Update value')]);
             $tableRow->addItem(new \Ease\Html\TdTag($valueInput, ['style' => 'width: 80%']));
         }
 

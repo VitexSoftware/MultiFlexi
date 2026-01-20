@@ -28,7 +28,7 @@ $companyConfig = [];
 $companies = new Company(WebPage::getRequestValue('id', 'int'), $companyConfig);
 
 $_SESSION['company'] = $companies->getMyKey();
-$companyEnver = new \MultiFlexi\CompanyEnv($companies->getMyKey());
+$companyEnver = new \MultiFlexi\CompanyEnv($companies);
 
 if (WebPage::singleton()->isPosted()) {
     if (\array_key_exists('env', $_POST)) {
@@ -71,7 +71,7 @@ $instanceRow = new Row();
 $instanceRow->addColumn(4, new CompanyEditorForm($companies, '', ['action' => 'companysetup.php']));
 // $instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($companies));
 
-$rightColumn[] = new EnvironmentEditor($companyEnver->getEnvFields());
+$rightColumn[] = new EnvironmentEditor($companyEnver);
 $instanceRow->addColumn(8, $rightColumn);
 WebPage::singleton()->container->addItem(new CompanyPanel($companies, $instanceRow, $companies->getMyKey() ? new \Ease\TWB4\LinkButton('companydelete.php?id='.$companies->getMyKey(), '☠️&nbsp;'._('Delete company'), 'danger') : ''));
 

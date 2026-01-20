@@ -27,7 +27,7 @@ $_SESSION['company'] = $companies->getMyKey();
 $_SESSION['server'] = $companies->getDataValue('server');
 $_SESSION['customer'] = $companies->getDataValue('customer');
 
-$companyEnver = new \MultiFlexi\CompanyEnv($companies->getMyKey());
+$companyEnver = new \MultiFlexi\CompanyEnv($companies);
 $jobber = new \MultiFlexi\Job();
 $jobber->setDataValue('company_id', $companies->getMyKey());
 

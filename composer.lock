@@ -1899,16 +1899,16 @@
         },
         {
             "name": "open-telemetry/sdk",
-            "version": "1.10.0",
+            "version": "1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opentelemetry-php/sdk.git",
-                "reference": "3dfc3d1ad729ec7eb25f1b9a4ae39fe779affa99"
+                "reference": "d91f21addcdb42da9a451c002777f8318432461a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opentelemetry-php/sdk/zipball/3dfc3d1ad729ec7eb25f1b9a4ae39fe779affa99",
-                "reference": "3dfc3d1ad729ec7eb25f1b9a4ae39fe779affa99",
+                "url": "https://api.github.com/repos/opentelemetry-php/sdk/zipball/d91f21addcdb42da9a451c002777f8318432461a",
+                "reference": "d91f21addcdb42da9a451c002777f8318432461a",
                 "shasum": ""
             },
             "require": {
@@ -1992,7 +1992,7 @@
                 "issues": "https://github.com/open-telemetry/opentelemetry-php/issues",
                 "source": "https://github.com/open-telemetry/opentelemetry-php"
             },
-            "time": "2025-11-25T10:59:15+00:00"
+            "time": "2026-01-15T11:21:03+00:00"
         },
         {
             "name": "open-telemetry/sem-conv",
@@ -5168,12 +5168,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "e579464d74525bf5eca45cbc984126a461879c3e"
+                "reference": "c593135be689b21e6164b1e8f6f5dbf1506b065c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/e579464d74525bf5eca45cbc984126a461879c3e",
-                "reference": "e579464d74525bf5eca45cbc984126a461879c3e",
+                "url": "https://api.github.com/repos/symfony/process/zipball/c593135be689b21e6164b1e8f6f5dbf1506b065c",
+                "reference": "c593135be689b21e6164b1e8f6f5dbf1506b065c",
                 "shasum": ""
             },
             "require": {
@@ -5225,7 +5225,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-01-08T14:20:42+00:00"
+            "time": "2026-01-15T13:23:20+00:00"
         },
         {
             "name": "symfony/routing",
@@ -5863,12 +5863,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-ease-fluentpdo.git",
-                "reference": "dbbbe3be6ebe0284bb3db6d0679ab2ec4101765d"
+                "reference": "c7bcee941b818e68ec2a2122b05fe90465ccadb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-fluentpdo/zipball/dbbbe3be6ebe0284bb3db6d0679ab2ec4101765d",
-                "reference": "dbbbe3be6ebe0284bb3db6d0679ab2ec4101765d",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-fluentpdo/zipball/c7bcee941b818e68ec2a2122b05fe90465ccadb8",
+                "reference": "c7bcee941b818e68ec2a2122b05fe90465ccadb8",
                 "shasum": ""
             },
             "require": {
@@ -5880,7 +5880,7 @@
                 "vitexsoftware/ease-framework": "*"
             },
             "require-dev": {
-                "cakephp/migrations": "4.9.3",
+                "cakephp/migrations": "4.9.4",
                 "ergebnis/composer-normalize": "^2.48",
                 "ergebnis/php-cs-fixer-config": "^6.58",
                 "friendsofphp/php-cs-fixer": "^3.92",
@@ -5916,7 +5916,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2026-01-12T19:05:32+00:00"
+            "time": "2026-01-19T17:06:52+00:00"
         },
         {
             "name": "vitexsoftware/ease-html",
@@ -6273,12 +6273,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core.git",
-                "reference": "e39ee3a7d3c9aade3ad49366ba943291f4dad1c3"
+                "reference": "4d88c3d5ae79346fa8896bee677729adf2058bfa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/e39ee3a7d3c9aade3ad49366ba943291f4dad1c3",
-                "reference": "e39ee3a7d3c9aade3ad49366ba943291f4dad1c3",
+                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/4d88c3d5ae79346fa8896bee677729adf2058bfa",
+                "reference": "4d88c3d5ae79346fa8896bee677729adf2058bfa",
                 "shasum": ""
             },
             "require": {
@@ -6322,7 +6322,7 @@
                 "issues": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/issues",
                 "source": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/tree/main"
             },
-            "time": "2026-01-16T00:19:58+00:00"
+            "time": "2026-01-18T21:49:47+00:00"
         },
         {
             "name": "ybelenko/openapi-data-mocker",
@@ -6793,12 +6793,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/json.git",
-                "reference": "9f2b3ab8e6175db1352c1c958ce7cc6b6a8dd546"
+                "reference": "2b0335e95ea4a5b0a356b55027c48db03af49a74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/json/zipball/9f2b3ab8e6175db1352c1c958ce7cc6b6a8dd546",
-                "reference": "9f2b3ab8e6175db1352c1c958ce7cc6b6a8dd546",
+                "url": "https://api.github.com/repos/ergebnis/json/zipball/2b0335e95ea4a5b0a356b55027c48db03af49a74",
+                "reference": "2b0335e95ea4a5b0a356b55027c48db03af49a74",
                 "shasum": ""
             },
             "require": {
@@ -6859,7 +6859,7 @@
                 "security": "https://github.com/ergebnis/json/blob/main/.github/SECURITY.md",
                 "source": "https://github.com/ergebnis/json"
             },
-            "time": "2026-01-01T00:29:49+00:00"
+            "time": "2026-01-19T07:12:57+00:00"
         },
         {
             "name": "ergebnis/json-normalizer",
@@ -6867,12 +6867,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/json-normalizer.git",
-                "reference": "1a0b233773cfa69595425276e26266c1d9b8cec7"
+                "reference": "334ba26777035be25cb35d3629c4624a0ee8f692"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/json-normalizer/zipball/1a0b233773cfa69595425276e26266c1d9b8cec7",
-                "reference": "1a0b233773cfa69595425276e26266c1d9b8cec7",
+                "url": "https://api.github.com/repos/ergebnis/json-normalizer/zipball/334ba26777035be25cb35d3629c4624a0ee8f692",
+                "reference": "334ba26777035be25cb35d3629c4624a0ee8f692",
                 "shasum": ""
             },
             "require": {
@@ -6942,7 +6942,7 @@
                 "security": "https://github.com/ergebnis/json-normalizer/blob/main/.github/SECURITY.md",
                 "source": "https://github.com/ergebnis/json-normalizer"
             },
-            "time": "2026-01-01T00:20:41+00:00"
+            "time": "2026-01-19T21:32:01+00:00"
         },
         {
             "name": "ergebnis/json-pointer",
@@ -6950,12 +6950,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/json-pointer.git",
-                "reference": "8adf6093615f2dab1fa37cbbd64502d69b2e5748"
+                "reference": "68435e154787e1e1144f4bcfd07fbbbe50c7c468"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/json-pointer/zipball/8adf6093615f2dab1fa37cbbd64502d69b2e5748",
-                "reference": "8adf6093615f2dab1fa37cbbd64502d69b2e5748",
+                "url": "https://api.github.com/repos/ergebnis/json-pointer/zipball/68435e154787e1e1144f4bcfd07fbbbe50c7c468",
+                "reference": "68435e154787e1e1144f4bcfd07fbbbe50c7c468",
                 "shasum": ""
             },
             "require": {
@@ -7016,7 +7016,7 @@
                 "security": "https://github.com/ergebnis/json-pointer/blob/main/.github/SECURITY.md",
                 "source": "https://github.com/ergebnis/json-pointer"
             },
-            "time": "2026-01-01T00:15:04+00:00"
+            "time": "2026-01-19T17:32:15+00:00"
         },
         {
             "name": "ergebnis/json-printer",
@@ -7024,12 +7024,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/json-printer.git",
-                "reference": "7ed2163db11ced2aefe62dabae192f1a80d17c1e"
+                "reference": "704b1ae638b0c1b0f05036a1a7e542eb120917a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/json-printer/zipball/7ed2163db11ced2aefe62dabae192f1a80d17c1e",
-                "reference": "7ed2163db11ced2aefe62dabae192f1a80d17c1e",
+                "url": "https://api.github.com/repos/ergebnis/json-printer/zipball/704b1ae638b0c1b0f05036a1a7e542eb120917a2",
+                "reference": "704b1ae638b0c1b0f05036a1a7e542eb120917a2",
                 "shasum": ""
             },
             "require": {
@@ -7092,7 +7092,7 @@
                 "security": "https://github.com/ergebnis/json-printer/blob/main/.github/SECURITY.md",
                 "source": "https://github.com/ergebnis/json-printer"
             },
-            "time": "2026-01-01T00:21:12+00:00"
+            "time": "2026-01-19T08:33:13+00:00"
         },
         {
             "name": "ergebnis/json-schema-validator",
@@ -7826,8 +7826,8 @@
             "version": "2.1.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e640e1291b312887a4a80fe373100847b3800315",
-                "reference": "e640e1291b312887a4a80fe373100847b3800315",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/070ba754a949fcade788e16e8dc5a5935b7cf2ee",
+                "reference": "070ba754a949fcade788e16e8dc5a5935b7cf2ee",
                 "shasum": ""
             },
             "require": {
@@ -7873,7 +7873,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-01-16T16:42:19+00:00"
+            "time": "2026-01-19T19:52:16+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -9818,6 +9818,7 @@
                 "php": ">=8.4",
                 "symfony/deprecation-contracts": "^2.5|^3"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {

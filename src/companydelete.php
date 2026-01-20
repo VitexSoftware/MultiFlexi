@@ -27,7 +27,7 @@ $companies = new Company(WebPage::getRequestValue('id', 'int'));
 
 $_SESSION['company'] = $companies->getMyKey();
 
-$companyEnver = new \MultiFlexi\CompanyEnv($companies->getMyKey());
+$companyEnver = new \MultiFlexi\CompanyEnv($companies);
 
 if (WebPage::singleton()->isPosted()) {
     $companyEnver->deleteFromSQL(['company_id' => $companies->getMyKey()]);
@@ -62,11 +62,11 @@ if (empty($instanceName) === false) {
 $instanceRow = new Row();
 $instanceRow->addColumn(4, new DeleteCompanyForm($companies, null, ['action' => 'companydelete.php']));
 
-if (\strlen($companies->getDataValue('logo'))) {
+if (empty($companies->getDataValue('logo')) == false) {
     $rightColumn[] = new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']);
 }
 
-$rightColumn[] = new EnvironmentView($companyEnver->getEnvFields());
+$rightColumn[] = new EnvironmentView($companyEnver);
 $instanceRow->addColumn(8, $rightColumn);
 WebPage::singleton()->container->addItem(new CompanyPanel($companies, $instanceRow));
 WebPage::singleton()->addItem(new PageBottom());
