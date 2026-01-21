@@ -6273,12 +6273,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core.git",
+<<<<<<< Updated upstream
                 "reference": "4d88c3d5ae79346fa8896bee677729adf2058bfa"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/4d88c3d5ae79346fa8896bee677729adf2058bfa",
                 "reference": "4d88c3d5ae79346fa8896bee677729adf2058bfa",
+=======
+                "reference": "e39ee3a7d3c9aade3ad49366ba943291f4dad1c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/e39ee3a7d3c9aade3ad49366ba943291f4dad1c3",
+                "reference": "e39ee3a7d3c9aade3ad49366ba943291f4dad1c3",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -6322,7 +6331,11 @@
                 "issues": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/issues",
                 "source": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/tree/main"
             },
+<<<<<<< Updated upstream
             "time": "2026-01-18T21:49:47+00:00"
+=======
+            "time": "2026-01-16T00:19:58+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "ybelenko/openapi-data-mocker",
@@ -7826,8 +7839,13 @@
             "version": "2.1.x-dev",
             "dist": {
                 "type": "zip",
+<<<<<<< Updated upstream
                 "url": "https://api.github.com/repos/phpstan/phpstan/zipball/070ba754a949fcade788e16e8dc5a5935b7cf2ee",
                 "reference": "070ba754a949fcade788e16e8dc5a5935b7cf2ee",
+=======
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/58c418b26ccbe8c94edde442a63402395b216afe",
+                "reference": "58c418b26ccbe8c94edde442a63402395b216afe",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -7873,7 +7891,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< Updated upstream
             "time": "2026-01-19T19:52:16+00:00"
+=======
+            "time": "2026-01-15T19:38:18+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "phpstan/phpstan-phpunit",

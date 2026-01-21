@@ -1,0 +1,121 @@
+{
+  "id": "ea79ac7f-ca3b-4806-b7ef-6d2c9b8848ed",
+  "version": "2.0",
+  "name": "MultiTest",
+  "url": "https://multiflexi.spojenet.cz",
+  "tests": [{
+    "id": "0e642b61-1943-468c-b97c-09b2279a80c6",
+    "name": "MultiTest",
+    "commands": [{
+      "id": "d0a2a8a8-afad-4d94-9e55-7189a843d3b4",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cb9a1779-29d2-45a5-8f0b-7a39ff80f08c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1050x1246",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d8605d8f-1e1d-49d9-9503-00a78e6afe37",
+      "comment": "",
+      "command": "click",
+      "target": "css=.navbar-toggler-icon",
+      "targets": [
+        ["css=.navbar-toggler-icon", "css:finder"],
+        ["xpath=//div[@id='MainMenu']/nav/button/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a94a5c9a-f0dc-4f46-9359-db1274327d0e",
+      "comment": "",
+      "command": "click",
+      "target": "name=login",
+      "targets": [
+        ["name=login", "name"],
+        ["css=.form-control:nth-child(1)", "css:finder"],
+        ["xpath=//input[@name='login']", "xpath:attributes"],
+        ["xpath=//div[@id='main-menuSupportedContent']/ul/li/form/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9166aa80-2f75-46df-8342-8914f3a9a4a3",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "name=login",
+      "targets": [
+        ["name=login", "name"],
+        ["css=.form-control:nth-child(1)", "css:finder"],
+        ["xpath=//input[@name='login']", "xpath:attributes"],
+        ["xpath=//div[@id='main-menuSupportedContent']/ul/li/form/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d0f7ed35-1250-4449-8efe-04081f657331",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-success",
+      "targets": [
+        ["css=.btn-success", "css:finder"],
+        ["xpath=//div[@id='main-menuSupportedContent']/ul/li/form/div/button", "xpath:idRelative"],
+        ["xpath=//div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Přihlásit se')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b2d37243-86b9-4dc0-ac78-28f7e166a8b9",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card:nth-child(17) .card-img-top",
+      "targets": [
+        ["css=.card:nth-child(17) .card-img-top", "css:finder"],
+        ["xpath=//img[@alt='RB transaction report']", "xpath:img"],
+        ["xpath=//div[17]/a/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6717bedb-8549-4fab-a168-c92f461cedda",
+      "comment": "",
+      "command": "click",
+      "target": "css=.d-flex > img",
+      "targets": [
+        ["css=.d-flex > img", "css:finder"],
+        ["xpath=(//img[@alt='SPOJE.NET s.r.o.'])[2]", "xpath:img"],
+        ["xpath=//div/div/div/a/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bb0716f1-aa71-4a01-ad05-76bfece6f56d",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Odhlásit se",
+      "targets": [
+        ["linkText=Odhlásit se", "linkText"],
+        ["css=.nav-item:nth-child(8) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Odhlásit se')]", "xpath:link"],
+        ["xpath=//div[@id='main-menuSupportedContent']/ul/li[8]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'logout.php')]", "xpath:href"],
+        ["xpath=//li[8]/a", "xpath:position"],
+        ["xpath=//a[contains(.,' Odhlásit se')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "1edc19f2-4333-4697-a1af-b18e5d178f80",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["0e642b61-1943-468c-b97c-09b2279a80c6"]
+  }],
+  "urls": ["https://multiflexi.spojenet.cz/"],
+  "plugins": []
+}

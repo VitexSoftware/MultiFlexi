@@ -160,7 +160,7 @@ WebPage::singleton()->container->addItem($form);
 
 // Add consent history section
 $historyHeaderContent = new \Ease\Html\H5Tag([
-    new \Ease\TWB4\Widgets\FaIcon('fas fa-history', ['class' => 'me-2']),
+    new \Ease\TWB4\Widgets\FaIcon('history', ['class' => 'me-2']),
     _('Consent History'),
 ], ['class' => 'mb-0']);
 
@@ -189,7 +189,7 @@ if (!empty($currentConsent)) {
         $withdrawButton = '';
         if ($consent['status'] && $type !== ConsentManager::CONSENT_ESSENTIAL) {
             $withdrawButton = new \Ease\TWB4\Button(
-                [new \Ease\TWB4\Widgets\FaIcon('fas fa-times'), ' ', _('Withdraw')],
+                [new \Ease\TWB4\Widgets\FaIcon('times'), ' ', _('Withdraw')],
                 'outline-danger',
                 ['size' => 'sm', 'onclick' => "withdrawConsent('{$type}')"]
             );
@@ -257,7 +257,7 @@ EOD);
 
 // Add information section
 $infoHeaderContent = new \Ease\Html\H5Tag([
-    new \Ease\TWB4\Widgets\FaIcon('fas fa-info-circle', ['class' => 'me-2']),
+    new \Ease\TWB4\Widgets\FaIcon('info-circle', ['class' => 'me-2']),
     _('Important Information'),
 ], ['class' => 'mb-0']);
 

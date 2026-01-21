@@ -51,6 +51,8 @@ jobs:
 
     - name: Setup MultiFlexi configuration
       run: |
+	pwd
+	ls -la
         cp .env.example .env
         # Configure for test environment
         sed -i 's/DB_HOST=localhost/DB_HOST=127.0.0.1/' .env
