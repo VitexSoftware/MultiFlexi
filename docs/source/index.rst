@@ -140,6 +140,19 @@ Contents
    troubleshooting
    usage
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Legacy Pages (Being Migrated)
+
+   application
+   company
+   job
+   runtemplate
+   credential-type
+   selenium-testing
+   apps_development
+   confienv
+
 .. note::
 
    **Documentation Restructuring:** This documentation has been reorganized following industry best practices. See ``docs/DOCUMENTATION_RESTRUCTURING.md`` for details.

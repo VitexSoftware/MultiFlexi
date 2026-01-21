@@ -6273,12 +6273,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core.git",
-                "reference": "4d88c3d5ae79346fa8896bee677729adf2058bfa"
+                "reference": "825e535b0b2d5a049e12c240b6a57360150260f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/4d88c3d5ae79346fa8896bee677729adf2058bfa",
-                "reference": "4d88c3d5ae79346fa8896bee677729adf2058bfa",
+                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/825e535b0b2d5a049e12c240b6a57360150260f8",
+                "reference": "825e535b0b2d5a049e12c240b6a57360150260f8",
                 "shasum": ""
             },
             "require": {
@@ -6322,7 +6322,7 @@
                 "issues": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/issues",
                 "source": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/tree/main"
             },
-            "time": "2026-01-18T21:49:47+00:00"
+            "time": "2026-01-20T17:35:02+00:00"
         },
         {
             "name": "ybelenko/openapi-data-mocker",
@@ -7174,22 +7174,22 @@
         },
         {
             "name": "ergebnis/php-cs-fixer-config",
-            "version": "6.58.1",
+            "version": "6.58.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/php-cs-fixer-config.git",
-                "reference": "0289893407f404e36839deb3fa3d06c3cb0ca9d5"
+                "reference": "4f7a4c3301eb03d31b63b11b23aba3a5c6775c50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/php-cs-fixer-config/zipball/0289893407f404e36839deb3fa3d06c3cb0ca9d5",
-                "reference": "0289893407f404e36839deb3fa3d06c3cb0ca9d5",
+                "url": "https://api.github.com/repos/ergebnis/php-cs-fixer-config/zipball/4f7a4c3301eb03d31b63b11b23aba3a5c6775c50",
+                "reference": "4f7a4c3301eb03d31b63b11b23aba3a5c6775c50",
                 "shasum": ""
             },
             "require": {
                 "erickskrauch/php-cs-fixer-custom-fixers": "~1.3.1",
                 "ext-filter": "*",
-                "friendsofphp/php-cs-fixer": "~3.92.3",
+                "friendsofphp/php-cs-fixer": "~3.92.5",
                 "kubawerlos/php-cs-fixer-custom-fixers": "~3.35.1",
                 "php": "~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0"
             },
@@ -7207,7 +7207,7 @@
                 "phpstan/phpstan-phpunit": "^2.0.11",
                 "phpstan/phpstan-strict-rules": "^2.0.7",
                 "phpunit/phpunit": "^9.6.22",
-                "rector/rector": "^2.3.0",
+                "rector/rector": "^2.3.1",
                 "symfony/filesystem": "^5.0.0 || ^6.0.0",
                 "symfony/process": "^5.0.0 || ^6.0.0"
             },
@@ -7241,7 +7241,7 @@
                 "security": "https://github.com/ergebnis/php-cs-fixer-config/blob/main/.github/SECURITY.md",
                 "source": "https://github.com/ergebnis/php-cs-fixer-config"
             },
-            "time": "2025-12-29T15:38:40+00:00"
+            "time": "2026-01-20T15:54:26+00:00"
         },
         {
             "name": "erickskrauch/php-cs-fixer-custom-fixers",
@@ -7826,8 +7826,8 @@
             "version": "2.1.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/070ba754a949fcade788e16e8dc5a5935b7cf2ee",
-                "reference": "070ba754a949fcade788e16e8dc5a5935b7cf2ee",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/0e00d4b2530482e54570733b968b8705888bd79a",
+                "reference": "0e00d4b2530482e54570733b968b8705888bd79a",
                 "shasum": ""
             },
             "require": {
@@ -7873,7 +7873,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-01-19T19:52:16+00:00"
+            "time": "2026-01-20T20:02:20+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
