@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Disable buttons
         exportButtons.forEach(btn => {
             btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-2"></i>Processing...';
         });
 
         // Make API request
@@ -263,9 +263,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 exportButtons.forEach(btn => {
                     btn.disabled = false;
                     if (btn.dataset.format === 'json') {
-                        btn.innerHTML = '<i class="fas fa-download me-2"></i>Export as JSON';
+                        btn.innerHTML = '<i class="fa-solid fa-download me-2"></i>Export as JSON';
                     } else {
-                        btn.innerHTML = '<i class="fas fa-download me-2"></i>Export as Text';
+                        btn.innerHTML = '<i class="fa-solid fa-download me-2"></i>Export as Text';
                     }
                 });
             }, 1000);
@@ -275,8 +275,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function showStatus(type, message, loading = false) {
         statusDiv.className = `mt-3 alert alert-${type}`;
         statusDiv.innerHTML = loading ?
-            `<i class="fas fa-spinner fa-spin me-2"></i>${message}` :
-            `<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'danger' ? 'exclamation-triangle' : 'info-circle'} me-2"></i>${message}`;
+            `<i class="fa-solid fa-spinner fa-spin me-2"></i>${message}` :
+            `<i class="fa-solid fa-${type === 'success' ? 'check-circle' : type === 'danger' ? 'exclamation-triangle' : 'info-circle'} me-2"></i>${message}`;
         statusDiv.classList.remove('d-none');
 
         if (!loading && type !== 'danger') {
