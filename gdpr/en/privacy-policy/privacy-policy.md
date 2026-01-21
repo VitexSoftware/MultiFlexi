@@ -1,8 +1,8 @@
 # MultiFlexi Privacy Policy
 
 **Version**: 1.0  
-**Effective Date**: January 15, 2025  
-**Last Updated**: January 15, 2025  
+**Effective Date**: January 21, 2026  
+**Last Updated**: January 21, 2026
 
 ## 1. Introduction
 
@@ -296,6 +296,6 @@ When using Office 365 integration, your data may be processed by Microsoft under
 **Document Control:**
 - **Version**: 1.0
 - **Approved By**: Data Protection Officer
-- **Next Review**: July 15, 2025
+- **Next Review**: July 21, 2026
 - **Language**: English
 - **Related Documents**: Terms of Service, Data Flow Mapping, GDPR Compliance Guide

@@ -1,6 +1,6 @@
 # GDPR Policy Documents - Version Control System
 
-**Last Updated**: January 15, 2025  
+**Last Updated**: January 21, 2026  
 **Document Controller**: Data Protection Officer  
 **Review Schedule**: Every 6 months or as required by regulatory changes
 
@@ -26,8 +26,8 @@ Each policy document maintains:
 ### 2.1 Privacy Policy
 | Language | Version | Effective Date | Last Updated | Status |
 |----------|---------|---------------|--------------|---------|
-| English | 1.0 | 2025-01-15 | 2025-01-15 | Current |
-| Czech | 1.0 | 2025-01-15 | 2025-01-15 | Current |
+| English | 1.0 | 2026-01-21 | 2026-01-21 | Current |
+| Czech | 1.0 | 2026-01-21 | 2026-01-21 | Current |
 
 **Location**: 
 - English: `gdpr/en/privacy-policy/privacy-policy.md`
@@ -36,8 +36,8 @@ Each policy document maintains:
 ### 2.2 Terms of Service
 | Language | Version | Effective Date | Last Updated | Status |
 |----------|---------|---------------|--------------|---------|
-| English | 1.0 | 2025-01-15 | 2025-01-15 | Current |
-| Czech | 1.0 | 2025-01-15 | 2025-01-15 | Current |
+| English | 1.0 | 2026-01-21 | 2026-01-21 | Current |
+| Czech | 1.0 | 2026-01-21 | 2026-01-21 | Current |
 
 **Location**:
 - English: `gdpr/en/terms-of-service/terms-of-service.md`
@@ -249,7 +249,7 @@ Submit policy change requests to:
 ---
 
 **Document History:**
-- **v1.0** (2025-01-15): Initial version control system creation
-- **Next Review**: 2025-07-15
+- **v1.0** (2026-01-21): Initial version control system creation
+- **Next Review**: 2026-07-21
 - **Approval**: Data Protection Officer
 - **Distribution**: Legal team, Development team, Management

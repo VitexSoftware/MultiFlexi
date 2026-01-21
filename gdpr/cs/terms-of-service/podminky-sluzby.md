@@ -1,8 +1,8 @@
 # Podmínky služby MultiFlexi
 
 **Verze**: 1.0  
-**Účinnost od**: 15. ledna 2025  
-**Poslední aktualizace**: 15. ledna 2025  
+**Účinnost od**: 21. ledna 2026  
+**Poslední aktualizace**: 21. ledna 2026
 
 ## 1. Úvod a přijetí
 
@@ -342,7 +342,7 @@ Pro právní oznámení a formální komunikaci:
 **Řízení dokumentu:**
 - **Verze**: 1.0
 - **Schválil**: Právní tým a tým ochrany údajů
-- **Další přezkum**: 15. července 2025
+- **Další přezkum**: 21. července 2026
 - **Jazyk**: Čeština
 - **Související dokumenty**: Zásady ochrany osobních údajů, Mapování datových toků, Průvodce dodržováním GDPR
 

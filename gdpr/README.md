@@ -2,8 +2,8 @@
 
 **Status**: Phase 2 Complete - Legal Framework  
 **Version**: 1.0  
-**Last Updated**: January 15, 2025  
-**Next Review**: July 15, 2025
+**Last Updated**: January 21, 2026  
+**Next Review**: July 21, 2026
 
 ## 📋 Overview
 
@@ -37,19 +37,19 @@ gdpr/
 #### Privacy Policies
 | Document | Language | File | Status | Effective Date |
 |----------|----------|------|--------|---------------|
-| Privacy Policy | English | `en/privacy-policy/privacy-policy.md` | Current | 2025-01-15 |
-| Zásady ochrany osobních údajů | Czech | `cs/privacy-policy/zasady-ochrany-osobnich-udaju.md` | Current | 2025-01-15 |
+| Privacy Policy | English | `en/privacy-policy/privacy-policy.md` | Current | 2026-01-21 |
+| Zásady ochrany osobních údajů | Czech | `cs/privacy-policy/zasady-ochrany-osobnich-udaju.md` | Current | 2026-01-21 |
 
 #### Terms of Service
 | Document | Language | File | Status | Effective Date |
 |----------|----------|------|--------|---------------|
-| Terms of Service | English | `en/terms-of-service/terms-of-service.md` | Current | 2025-01-15 |
-| Podmínky služby | Czech | `cs/terms-of-service/podminky-sluzby.md` | Current | 2025-01-15 |
+| Terms of Service | English | `en/terms-of-service/terms-of-service.md` | Current | 2026-01-21 |
+| Podmínky služby | Czech | `cs/terms-of-service/podminky-sluzby.md` | Current | 2026-01-21 |
 
 #### Supporting Documents
 | Document | Description | File | Last Updated |
 |----------|-------------|------|--------------|
-| Version Control | Change management and versioning system | `VERSION_CONTROL.md` | 2025-01-15 |
+| Version Control | Change management and versioning system | `VERSION_CONTROL.md` | 2026-01-21 |
 | GDPR Guide | Main compliance roadmap | `../GDPR.md` | 2025-01-07 |
 | Data Flow Mapping | Third-party integration analysis | `../GDPR-DataFlowMapping.md` | 2025-10-20 |
 
@@ -89,8 +89,8 @@ gdpr/
 ## 🔄 Version Management
 
 ### Current Version: 1.0
-- **Release Date**: January 15, 2025
-- **Effective Date**: January 15, 2025
+- **Release Date**: January 21, 2026
+- **Effective Date**: January 21, 2026
 - **Coverage**: Initial comprehensive GDPR compliance framework
 
 ### Change Management
@@ -159,7 +159,7 @@ See `VERSION_CONTROL.md` for detailed change management procedures.
 - **Ad-hoc**: Regulatory change response
 
 ### Next Scheduled Review
-- **Date**: July 15, 2025
+- **Date**: July 21, 2026
 - **Scope**: Full compliance assessment and document updates
 - **Trigger**: 6-month regular review cycle
 
@@ -225,4 +225,4 @@ For technical questions about GDPR features:
 - **Distribution**: All stakeholders
 - **Confidentiality**: Public (compliance documentation)
 
-**Last Modified**: January 15, 2025 by Data Protection Officer
+**Last Modified**: January 21, 2026 by Data Protection Officer

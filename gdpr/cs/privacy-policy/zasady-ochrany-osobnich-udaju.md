@@ -1,8 +1,8 @@
 # Zásady ochrany osobních údajů MultiFlexi
 
 **Verze**: 1.0  
-**Účinnost od**: 15. ledna 2025  
-**Poslední aktualizace**: 15. ledna 2025  
+**Účinnost od**: 21. ledna 2026  
+**Poslední aktualizace**: 21. ledna 2026
 
 ## 1. Úvod
 
@@ -296,6 +296,6 @@ Při používání integrace Office 365 mohou být vaše data zpracována spole�
 **Řízení dokumentu:**
 - **Verze**: 1.0
 - **Schválil**: Pověřenec pro ochranu osobních údajů
-- **Další přezkum**: 15. července 2025
+- **Další přezkum**: 21. července 2026
 - **Jazyk**: Čeština
 - **Související dokumenty**: Podmínky služby, Mapování datových toků, Průvodce dodržováním GDPR

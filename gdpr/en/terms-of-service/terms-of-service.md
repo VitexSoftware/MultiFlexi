@@ -1,8 +1,8 @@
 # MultiFlexi Terms of Service
 
 **Version**: 1.0  
-**Effective Date**: January 15, 2025  
-**Last Updated**: January 15, 2025  
+**Effective Date**: January 21, 2026  
+**Last Updated**: January 21, 2026
 
 ## 1. Introduction and Acceptance
 
