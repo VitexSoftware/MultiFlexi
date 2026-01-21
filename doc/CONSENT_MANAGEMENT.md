@@ -42,6 +42,9 @@ Utility functions for easy integration:
 - Accept all / Decline all / Custom preferences
 - Automatic detection of existing consent
 - Integration with Google Analytics consent API
+- Cookie-based consent persistence with 1-year expiration
+- Automatic consent refresh after 6 months or version changes
+- Consistent data structure handling between cookie and database storage
 
 #### Consent API (`src/consent-api.php`)
 AJAX endpoint for consent operations:
@@ -259,5 +262,48 @@ vendor/bin/phinx migrate
 3. Users will see the consent banner on first visit.
 
 4. Access consent preferences via the Privacy menu or direct URL.
+
+## Troubleshooting
+
+### Users Asked for Consent Repeatedly
+
+**Symptoms:** Users report being asked for cookie consent again and again, even after accepting.
+
+**Root Cause:** Data structure mismatch between cookie storage format and in-memory format.
+
+**Solution (Fixed in v2.x):** The consent banner now properly normalizes data structures:
+- Cookie format: `{consent: {...}, granted_at: "...", version: "1.0"}`
+- Internal format: `{essential: true, analytics: true, ...}`
+- The `getConsentFromCookie()` method extracts the inner `consent` object and checks expiration
+
+**If you encounter this issue:**
+1. Update to the latest version of `consent-banner.js`
+2. Users may need to clear their `multiflexi_consent` cookie once
+3. The issue will resolve automatically on next consent submission
+
+### Consent Not Persisting Across Sessions
+
+**Check:**
+1. Verify the `multiflexi_consent` cookie is being set (browser DevTools → Application → Cookies)
+2. Check cookie expiration date (should be 1 year from creation)
+3. Verify cookie path is set to `/` and SameSite is `Lax`
+4. For logged-in users, check database `consent` table for records
+
+### Cookie Structure Verification
+
+**Expected cookie format:**
+```javascript
+{
+  "consent": {
+    "essential": true,
+    "functional": true,
+    "analytics": true,
+    "marketing": false,
+    "personalization": true
+  },
+  "granted_at": "2026-01-21T12:00:00.000Z",
+  "version": "1.0"
+}
+```
 
 This implementation provides a complete, GDPR-compliant consent management system that integrates seamlessly with the existing MultiFlexi architecture.

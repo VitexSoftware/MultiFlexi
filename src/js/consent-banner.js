@@ -61,7 +61,8 @@ class MultiFxiConsentBanner {
     async getExistingConsent() {
         // First check if consent is stored in cookies (for anonymous users)
         const cookieConsent = this.getConsentFromCookie();
-        if (cookieConsent && !this.needsConsentRefresh(cookieConsent)) {
+        if (cookieConsent) {
+            // getConsentFromCookie now handles the refresh check internally
             return cookieConsent;
         }
         
@@ -104,6 +105,18 @@ class MultiFxiConsentBanner {
             const data = JSON.parse(decodeURIComponent(cookieValue));
             // Ensure the data has the expected format for needsConsentRefresh
             if (data && typeof data === 'object') {
+                // If this is the wrapped format, extract the consent data
+                // The wrapped format has: {consent: {...}, granted_at: ..., version: ...}
+                // We need to check if this needs refresh using the wrapper's metadata
+                if (data.consent && typeof data.consent === 'object') {
+                    // This is the wrapped format - check if it needs refresh
+                    if (this.needsConsentRefresh(data)) {
+                        return null; // Force re-consent
+                    }
+                    // Return just the consent choices to match API format
+                    return data.consent;
+                }
+                // Otherwise it's already in the correct format (legacy or API format)
                 return data;
             }
         } catch (error) {
