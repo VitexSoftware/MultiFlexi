@@ -77,6 +77,7 @@ CSS);
                     $credential = unserialize($runTemplateFieldSource);
 
                     if ($credential && (\Ease\Functions::baseClassName($credential) === 'Credential')) {
+                       
                         $credentialType = $credential->getCredentialType();
 
                         $credentialLink = new \Ease\Html\ATag('credential.php?id='.$credential->getMyKey(), new \Ease\Html\SmallTag($credential->getRecordName()));
@@ -87,6 +88,9 @@ CSS);
 
                         $inputCaption = new \Ease\Html\SpanTag([$credentialTypeLink, new \Ease\Html\StrongTag($fieldName), '&nbsp;', $credentialLink]);
                         $input->setTagProperty('disabled', '1');
+                       
+                        $input->setValue($credential->getDataValue($fieldName));
+                        $field->setDescription($credentialType->getFields()->getField($fieldName)->getDescription());
                     }
                 }
 
