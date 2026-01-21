@@ -49,7 +49,7 @@ class DataExportWidget extends Card
         $header = new DivTag(null, ['class' => 'card-header']);
         $header->addItem(new FaIcon('download', ['class' => 'me-2']));
         $header->addItem(_('Personal Data Export'));
-        $header->addItem(new Badge('GDPR', 'secondary ms-2'));
+        $header->addItem(new Badge('secondary', 'GDPR', ['class' => 'ms-2']));
         $this->addItem($header);
 
         // Card body
