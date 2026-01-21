@@ -1,5 +1,11 @@
 # Configuration file for the Sphinx documentation builder.
 
+# Monkey patch shibuya to use available pygments styles
+import shibuya._pygments
+# Override shibuya's default styles with available ones
+shibuya._pygments.ShibuyaPygmentsBridge.light_style_name = "default"
+shibuya._pygments.ShibuyaPygmentsBridge.dark_style_name = "github-dark"
+
 # -- Project information
 
 project = 'MultiFlexi'
@@ -47,16 +53,21 @@ exclude_patterns = []
 
 # -- Options for HTML output
 
-html_theme = "alabaster"
+html_theme = "shibuya"
 
-# Pygments styling
+# Pygments styling - use valid styles for light and dark modes
 pygments_style = "default"
+pygments_dark_style = "github-dark"  # Use available github-dark instead of github-dark-default
 
 html_theme_options = {
-    'github_user': 'VitexSoftware',
-    'github_repo': 'MultiFlexi',
-    'github_button': True,
-    'github_type': 'star',
+    "github_url": "https://github.com/VitexSoftware/MultiFlexi",
+    "dark_code": True,
+    "nav_links": [
+        {
+            "title": "GitHub",
+            "url": "https://github.com/VitexSoftware/MultiFlexi",
+        },
+    ],
 }
 
 # Show source links
