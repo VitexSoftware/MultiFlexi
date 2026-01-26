@@ -64,3 +64,4 @@ debian/multiflexi-web.debhelper.log
 .encryption_master_key
 node_modules/
 /tests/selenium/.env
+debian/multiflexi-doc.debhelper.log
