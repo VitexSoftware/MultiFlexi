@@ -48,7 +48,7 @@ foreach ($companer->listingQuery()->where('enabled', 1) as $companyData) {
             $appName = $apper->getRecordName();
             $lldData[] = [
                 '{#APPNAME}' => $appName,
-                '{#INTERVAL}' => RunTemplate::codeToInterval($companyAppData['interv']),
+                '{#INTERVAL}' => Scheduler::codeToInterval($companyAppData['interv']),
                 '{#COMPANY_NAME}' => $companyData['name'],
                 '{#COMPANY_CODE}' => $companyData['slug'],
                 '{#COMPANY_SERVER}' => \Ease\Shared::cfg('ZABBIX_HOST'),

@@ -47,7 +47,7 @@ $periodcalTaskInfo = $runTemplater->getData();
 
 $app = new Application($periodcalTaskInfo['app_id']);
 
-$interval = new \Ease\Html\DivTag(_(\MultiFlexi\RunTemplate::codeToInterval($periodcalTaskInfo['interv'])).' '._('interval'));
+$interval = new \Ease\Html\DivTag(_(\MultiFlexi\Scheduler::codeToInterval($periodcalTaskInfo['interv'])).' '._('interval'));
 $appPanel = new ApplicationPanel($app, $interval);
 
 $appPanel->headRow->addItem(new RuntemplateButton($runTemplater));

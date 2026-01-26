@@ -1171,7 +1171,7 @@ EOD,
         ]);
         $summaryTable->addRowColumns([
             new \Ease\Html\StrongTag(_('Interval')),
-            \MultiFlexi\RunTemplate::codeToInterval($runTemplate->getDataValue('interv')),
+            \MultiFlexi\Scheduler::codeToInterval($runTemplate->getDataValue('interv')),
         ]);
 
         // Show assigned credentials

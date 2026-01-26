@@ -255,7 +255,7 @@ class CompanyAppRunTemplateLister extends RunTemplate
         $dataRowRaw['id'] = (string) new \Ease\Html\ATag('runtemplate.php?id='.$numericId, '⚗️ #'.$numericId);
 
         // Format interval with emoji and name
-        $dataRowRaw['interv'] = '<span title=\"'._(self::codeToInterval($dataRowRaw['interv'])).'\">'.self::getIntervalEmoji($dataRowRaw['interv']).' '._(self::codeToInterval($dataRowRaw['interv'])).'</span>';
+        $dataRowRaw['interv'] = '<span title="'._(Scheduler::codeToInterval($dataRowRaw['interv'])).'">'.self::getIntervalEmoji($dataRowRaw['interv']).' '._(Scheduler::codeToInterval($dataRowRaw['interv'])).'</span>';
 
         // Format active status with launch button or disabled icon
         $dataRowRaw['active'] = (string) $dataRowRaw['active']
