@@ -93,7 +93,7 @@ if (isset($options['runtemplate'])) {
     // }
     $uploadEnv = $options['environment'] ?? [];
 
-    $prepared = $jobber->prepareJob($runTemplater->getMyKey(), $uploadEnv, '', $options['executor'] ?? 'Native');
+    $prepared = $jobber->prepareJob($runTemplater, new \MultiFlexi\ConfigFields(), new \DateTime('now'), $options['executor'] ?? 'Native');
     $jobber->scheduleJobRun(new \DateTime($when));
 
     if (Shared::cfg('APP_DEBUG')) {

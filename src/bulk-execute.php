@@ -92,8 +92,8 @@ try {
         try {
             $whenDateTime = new \DateTime($when);
             $prepared = $jobber->prepareJob(
-                $runTemplate->getMyKey(),
-                null, // No upload environment for bulk execute
+                $runTemplate,
+                new \MultiFlexi\ConfigFields(), // No upload environment for bulk execute
                 $whenDateTime,
                 $executor,
                 'adhoc',
