@@ -30,56 +30,129 @@ Key Features
 Getting Started
 ---------------
 
-To get started with MultiFlexi:
+New to MultiFlexi? Start here:
 
-1. Follow the :doc:`install` guide for installation instructions
-2. Complete the :doc:`firstrun` configuration
-3. Set up :doc:`credential-type` for your business systems and applications
-4. Explore the :doc:`usage` section for operational guidance
-5. Check the :doc:`api` documentation for programmatic integration
-6. Use the :doc:`multiflexi-cli` for command-line management
-7. See :doc:`ansible` for Infrastructure as Code automation
+1. **:doc:`quickstart`** - Get up and running in 15 minutes
+2. **:doc:`install`** - Detailed installation instructions
+3. **:doc:`tutorial-first-job`** - Complete end-to-end tutorial
 
-For developers and contributors, see the :doc:`development` section for technical details, architecture information, and development guidelines.
+Once you're comfortable with the basics, explore :doc:`concepts/system-overview` to understand MultiFlexi's architecture.
 
 .. note::
 
    MultiFlexi is actively developed and regularly updated with new features and improvements.
 
 
+Documentation Structure
+-----------------------
+
+This documentation is organized into several sections:
+
+- **Getting Started**: Quickstart and installation guides for new users
+- **Core Concepts**: Understanding MultiFlexi's architecture and design
+- **How-To Guides**: Task-oriented instructions for common operations
+- **Integration Guides**: Connect MultiFlexi with external systems
+- **Reference**: Technical specifications, API docs, and CLI commands
+- **System Administration**: Deployment, maintenance, and operations
+- **Development**: Contributing to MultiFlexi and building applications
+
 Contents
 --------
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Getting Started
 
+   quickstart
    install
    firstrun
-   configuration
-   credential-type
-   usage
+   tutorial-first-job
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Core Concepts
+
+   concepts/system-overview
+   concepts/data-model
+   concepts/job-lifecycle
+   concepts/credential-management
+   concepts/execution-architecture
+
+.. toctree::
+   :maxdepth: 2
+   :caption: How-To Guides
+
+   howto/adding-company
+   howto/installing-applications
+   howto/creating-runtemplates
+   howto/scheduling-jobs
+   howto/assigning-credentials
+   howto/debugging-failed-jobs
+   howto/bulk-operations
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Integration Guides
+
+   integrations/zabbix
+   integrations/opentelemetry
+   integrations/abraflexi
+   integrations/pohoda
+   integrations/ansible
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Reference
+
+   reference/api
+   reference/cli
+   reference/configuration
+   reference/application-schema
+   reference/executors
+   reference/actions
+
+.. toctree::
+   :maxdepth: 2
+   :caption: System Administration
+
+   administration/docker
+   administration/systemd-services
+   administration/database-maintenance
+   administration/backup-recovery
+   administration/upgrading
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Development & Contributing
+
+   development/architecture
+   development/project-structure
+   development/application-development
+   development/testing
+   development/contributing
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Additional Topics
+
+   apps_overview
+   gdpr-compliance
    troubleshooting
-   api
-   ansible
+   usage
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Legacy Pages (Being Migrated)
+
    application
    company
    job
    runtemplate
-   apps
-   actions
-   executors
-   commandline
-   zabbix
-   opentelemetry
-   development
+   credential-type
    selenium-testing
-   architecture
-   apps_overview
-   multiflexi-cli
-   gdpr-compliance
-   docker
+   apps_development
+   confienv
 
 .. note::
 
-   This project is under active development.
+   **Documentation Restructuring:** This documentation has been reorganized following industry best practices. See ``docs/DOCUMENTATION_RESTRUCTURING.md`` for details.
