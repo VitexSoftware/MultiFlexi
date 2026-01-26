@@ -104,7 +104,7 @@ if (null === $runTemplate->getMyKey()) {
         }
 
         if ($allFieldsFilled) {
-            $prepared = $jobber->prepareJob($runTemplate->getMyKey(), $uploadEnv, new \DateTime($when), \Ease\WebPage::getRequestValue('executor'), 'adhoc');
+            $prepared = $jobber->prepareJob($runTemplate, $uploadEnv, new \DateTime($when), \Ease\WebPage::getRequestValue('executor'), 'adhoc');
             // Store files for job if needed (simulate)
             // foreach ($uploadEnv as $field => $file) {
             //     $fileStore->storeFileForJob($field, $file->getValue(), $file->getHint(), $jobber);

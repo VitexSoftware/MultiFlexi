@@ -15,10 +15,10 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
+use Ease\Html\ButtonTag;
 use Ease\Html\DivTag;
 use Ease\Html\PTag;
 use Ease\TWB4\Badge;
-use Ease\TWB4\Button;
 use Ease\TWB4\Card;
 use Ease\TWB4\Col;
 use Ease\TWB4\Row;
@@ -46,11 +46,11 @@ class DataExportWidget extends Card
         $this->setTagID('gdpr-data-export-card');
 
         // Card header
-        $header = new DivTag();
-        $header->addItem(new FaIcon('fas fa-download', ['class' => 'me-2']));
+        $header = new DivTag(null, ['class' => 'card-header']);
+        $header->addItem(new FaIcon('download', ['class' => 'me-2']));
         $header->addItem(_('Personal Data Export'));
-        $header->addItem(new Badge('GDPR', 'secondary ms-2'));
-        $this->setCardHeader($header);
+        $header->addItem(new Badge('secondary', 'GDPR', ['class' => 'ms-2']));
+        $this->addItem($header);
 
         // Card body
         $this->addCardBody();
@@ -58,7 +58,7 @@ class DataExportWidget extends Card
 
     private function addCardBody(): void
     {
-        $body = new DivTag();
+        $body = new DivTag(null, ['class' => 'card-body']);
 
         // Description
         $description = new PTag(_('Download all your personal data stored in MultiFlexi. This includes your profile information, activity logs, consent records, and associated data.'));
@@ -68,7 +68,7 @@ class DataExportWidget extends Card
         // GDPR Info
         $gdprInfo = new DivTag();
         $gdprInfo->addTagClass('alert alert-info');
-        $gdprIcon = new FaIcon('fas fa-info-circle', ['class' => 'me-2']);
+        $gdprIcon = new FaIcon('info-circle', ['class' => 'me-2']);
         $gdprInfo->addItem($gdprIcon);
         $gdprInfo->addItem(_('This feature complies with GDPR Article 15 - Right of Access. Your data will be provided in a structured, machine-readable format.'));
         $body->addItem($gdprInfo);
@@ -84,7 +84,7 @@ class DataExportWidget extends Card
         $jsonBody = new DivTag();
         $jsonBody->addTagClass('card-body d-flex flex-column');
 
-        $jsonIcon = new FaIcon('fas fa-code', ['class' => 'fa-2x text-primary mb-3']);
+        $jsonIcon = new FaIcon('code', ['class' => 'fa-2x text-primary mb-3']);
         $jsonBody->addItem($jsonIcon);
 
         $jsonTitle = new DivTag(_('JSON Format'));
@@ -95,10 +95,9 @@ class DataExportWidget extends Card
         $jsonDesc->addTagClass('card-text flex-grow-1');
         $jsonBody->addItem($jsonDesc);
 
-        $jsonButton = new Button(
-            [new FaIcon('fas fa-download', ['class' => 'me-2']), _('Export as JSON')],
-            'primary',
-            ['id' => 'export-json-btn', 'class' => 'export-btn', 'data-format' => 'json'],
+        $jsonButton = new ButtonTag(
+            [new FaIcon('download', ['class' => 'me-2']), _('Export as JSON')],
+            ['id' => 'export-json-btn', 'class' => 'btn btn-primary export-btn', 'data-format' => 'json', 'type' => 'button'],
         );
         $jsonBody->addItem($jsonButton);
 
@@ -114,7 +113,7 @@ class DataExportWidget extends Card
         $pdfBody = new DivTag();
         $pdfBody->addTagClass('card-body d-flex flex-column');
 
-        $pdfIcon = new FaIcon('fas fa-file-alt', ['class' => 'fa-2x text-success mb-3']);
+        $pdfIcon = new FaIcon('file-alt', ['class' => 'fa-2x text-success mb-3']);
         $pdfBody->addItem($pdfIcon);
 
         $pdfTitle = new DivTag(_('Text Format'));
@@ -125,10 +124,9 @@ class DataExportWidget extends Card
         $pdfDesc->addTagClass('card-text flex-grow-1');
         $pdfBody->addItem($pdfDesc);
 
-        $pdfButton = new Button(
-            [new FaIcon('fas fa-download', ['class' => 'me-2']), _('Export as Text')],
-            'success',
-            ['id' => 'export-pdf-btn', 'class' => 'export-btn', 'data-format' => 'pdf'],
+        $pdfButton = new ButtonTag(
+            [new FaIcon('download', ['class' => 'me-2']), _('Export as Text')],
+            ['id' => 'export-pdf-btn', 'class' => 'btn btn-success export-btn', 'data-format' => 'pdf', 'type' => 'button'],
         );
         $pdfBody->addItem($pdfButton);
 
@@ -148,7 +146,7 @@ class DataExportWidget extends Card
         // Add JavaScript for functionality
         self::addExportJavaScript();
 
-        $this->setCardBody($body);
+        $this->addItem($body);
     }
 
     private function addRecentExports(DivTag $body): void
@@ -221,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Disable buttons
         exportButtons.forEach(btn => {
             btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-2"></i>Processing...';
         });
 
         // Make API request
@@ -265,9 +263,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 exportButtons.forEach(btn => {
                     btn.disabled = false;
                     if (btn.dataset.format === 'json') {
-                        btn.innerHTML = '<i class="fas fa-download me-2"></i>Export as JSON';
+                        btn.innerHTML = '<i class="fa-solid fa-download me-2"></i>Export as JSON';
                     } else {
-                        btn.innerHTML = '<i class="fas fa-download me-2"></i>Export as Text';
+                        btn.innerHTML = '<i class="fa-solid fa-download me-2"></i>Export as Text';
                     }
                 });
             }, 1000);
@@ -277,8 +275,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function showStatus(type, message, loading = false) {
         statusDiv.className = `mt-3 alert alert-${type}`;
         statusDiv.innerHTML = loading ?
-            `<i class="fas fa-spinner fa-spin me-2"></i>${message}` :
-            `<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'danger' ? 'exclamation-triangle' : 'info-circle'} me-2"></i>${message}`;
+            `<i class="fa-solid fa-spinner fa-spin me-2"></i>${message}` :
+            `<i class="fa-solid fa-${type === 'success' ? 'check-circle' : type === 'danger' ? 'exclamation-triangle' : 'info-circle'} me-2"></i>${message}`;
         statusDiv.classList.remove('d-none');
 
         if (!loading && type !== 'danger') {

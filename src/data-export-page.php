@@ -33,12 +33,13 @@ WebPage::singleton()->container->addItem(new DataExportWidget(['class' => 'mb-4'
 
 // Add additional GDPR information
 $gdprInfoCard = new \Ease\TWB4\Card();
-$gdprInfoCard->setCardHeader([
-    new \Ease\TWB4\Widgets\FaIcon('fas fa-shield-alt', ['class' => 'me-2']),
-    _('Your Rights Under GDPR'),
-]);
 
-$gdprBody = new \Ease\Html\DivTag();
+$cardHeader = new \Ease\Html\DivTag(null, ['class' => 'card-header']);
+$cardHeader->addItem(new \Ease\TWB4\Widgets\FaIcon('shield-alt', ['class' => 'me-2']));
+$cardHeader->addItem(_('Your Rights Under GDPR'));
+$gdprInfoCard->addItem($cardHeader);
+
+$gdprBody = new \Ease\Html\DivTag(null, ['class' => 'card-body']);
 
 $rights = [
     _('Right of Access (Article 15)') => _('You have the right to obtain confirmation as to whether personal data concerning you is being processed, and access to such data.'),
@@ -70,13 +71,13 @@ $gdprBody->addItem($rightsList);
 // Contact information
 $contactInfo = new \Ease\Html\DivTag();
 $contactInfo->addTagClass('alert alert-light');
-$contactIcon = new \Ease\TWB4\Widgets\FaIcon('fas fa-envelope', ['class' => 'me-2']);
+$contactIcon = new \Ease\TWB4\Widgets\FaIcon('envelope', ['class' => 'me-2']);
 $contactInfo->addItem($contactIcon);
 $contactInfo->addItem(_('For questions about your personal data or to exercise other GDPR rights, please contact our Data Protection Officer.'));
 
 $gdprBody->addItem($contactInfo);
 
-$gdprInfoCard->setCardBody($gdprBody);
+$gdprInfoCard->addItem($gdprBody);
 WebPage::singleton()->container->addItem($gdprInfoCard);
 
 WebPage::singleton()->addItem(new PageBottom());

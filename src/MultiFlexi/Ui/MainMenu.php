@@ -93,14 +93,14 @@ class MainMenu extends \Ease\Html\DivTag
 
             // Privacy menu with dropdown
             $privacyMenu = [
-                'consent-preferences.php' => '<i class="fas fa-user-shield"></i> '._('Privacy Preferences'),
-                'data-export-page.php' => '<i class="fas fa-download"></i> '._('Export My Data'),
-                'gdpr-user-deletion-request.php' => '<i class="fas fa-user-times"></i> '._('Request Account Deletion'),
+                'consent-preferences.php' => new \Ease\TWB4\Widgets\FaIcon('user-shield').' '._('Privacy Preferences'),
+                'data-export-page.php' => new \Ease\TWB4\Widgets\FaIcon('download').' '._('Export My Data'),
+                'gdpr-user-deletion-request.php' => new \Ease\TWB4\Widgets\FaIcon('user-times').' '._('Request Account Deletion'),
                 '' => '',
-                'privacy-policy.php' => '<i class="fas fa-shield-alt"></i> '._('Privacy Policy'),
-                'cookie-policy.php' => '<i class="fas fa-cookie-bite"></i> '._('Cookie Policy'),
+                'privacy-policy.php' => new \Ease\TWB4\Widgets\FaIcon('shield-alt').' '._('Privacy Policy'),
+                'cookie-policy.php' => new \Ease\TWB4\Widgets\FaIcon('cookie-bite').' '._('Cookie Policy'),
             ];
-            $nav->addDropDownMenu('<i class="fas fa-user-shield"></i> '._('Privacy'), $privacyMenu);
+            $nav->addDropDownMenu(new \Ease\TWB4\Widgets\FaIcon('user-shield').' '._('Privacy'), $privacyMenu);
 
             $nav->addMenuItem(new \Ease\Html\ATag('logout.php', '<img height=30 src=images/application-exit.svg> '._('Sign Off')), 'right');
 
@@ -312,7 +312,7 @@ EOD);
                 if (empty($icon)) {
                     $logo = '';
                 } else {
-                    $logo = new \Ease\Html\ImgTag( empty($uInfo[$icon]) ? 'images/company.svg' :  $uInfo[$icon], (string) $uInfo[$namecolumn], ['height' => 20]).'&nbsp;';
+                    $logo = new \Ease\Html\ImgTag(empty($uInfo[$icon]) ? 'images/company.svg' : $uInfo[$icon], (string) $uInfo[$namecolumn], ['height' => 20]).'&nbsp;';
                 }
 
                 $itemList[$source->keyword.'.php?'.$keycolumn.'='.$uInfo[$keycolumn]] = $logo._(\array_key_exists($namecolumn, $uInfo) ? (string) ($uInfo[$namecolumn]).' ' : 'n/a');

@@ -24,7 +24,8 @@ require_once './init.php';
 WebPage::singleton()->onlyForLogged();
 
 $jobber = new Job();
-$jobber->prepareJob(WebPage::singleton()->getRequestValue('id', 'int'));
+$runTemplate = new RunTemplate(WebPage::singleton()->getRequestValue('id', 'int'));
+$jobber->prepareJob($runTemplate, new ConfigFields(), new \DateTime());
 echo new H2Tag(str_replace(' ', '&nbsp;', $jobber->getCmdline()), ['style' => 'color: green']);
 
 $jobber->performJob();

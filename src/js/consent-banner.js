@@ -50,7 +50,8 @@ class MultiFxiConsentBanner {
         // Check if consent already exists
         const existingConsent = await this.getExistingConsent();
         
-        if (!existingConsent || this.needsConsentRefresh(existingConsent)) {
+        // Don't check needsConsentRefresh here - it was already checked in getConsentFromCookie
+        if (!existingConsent) {
             this.showConsentBanner();
         } else {
             this.currentConsent = existingConsent;
@@ -99,10 +100,13 @@ class MultiFxiConsentBanner {
 
     getConsentFromCookie() {
         const cookieValue = this.getCookie('multiflexi_consent');
-        if (!cookieValue) return null;
+        if (!cookieValue) {
+            return null;
+        }
         
         try {
             const data = JSON.parse(decodeURIComponent(cookieValue));
+            
             // Ensure the data has the expected format for needsConsentRefresh
             if (data && typeof data === 'object') {
                 // If this is the wrapped format, extract the consent data
