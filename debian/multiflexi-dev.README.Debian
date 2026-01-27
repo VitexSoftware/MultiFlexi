@@ -1,0 +1,101 @@
+MultiFlexi Development Package for Debian
+==========================================
+
+This package provides development and testing tools for MultiFlexi.
+
+Contents
+--------
+
+* PHPUnit test suite and configuration files
+* PHPStan static analysis configuration
+* PHP-CS-Fixer coding standards configuration
+* Mocha/Selenium test suite for web interface testing
+* Test application definitions
+* Development Makefile with testing targets
+
+Installation Location
+---------------------
+
+All development files are installed to:
+  /usr/share/multiflexi/
+
+Running PHP Tests
+-----------------
+
+To run PHPUnit tests:
+
+  cd /usr/share/multiflexi
+  composer install  # Install PHP dependencies first
+  vendor/bin/phpunit tests/
+
+Static Code Analysis
+--------------------
+
+To run PHPStan static analysis:
+
+  cd /usr/share/multiflexi
+  vendor/bin/phpstan analyse --configuration=phpstan-default.neon.dist
+
+Code Style Fixing
+-----------------
+
+To fix code style issues:
+
+  cd /usr/share/multiflexi
+  vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php
+
+Selenium Web Tests
+------------------
+
+The Selenium test suite requires additional Node.js dependencies that are
+not packaged in Debian. To set up Selenium tests:
+
+  cd /usr/share/multiflexi/tests/selenium
+  npm install
+
+This will install:
+  - selenium-webdriver
+  - chromedriver
+  - mysql2
+  - dotenv
+
+To run Selenium tests:
+
+  cd /usr/share/multiflexi/tests/selenium
+  npm test                    # Run all tests
+  npm run test:smoke          # Run smoke tests only
+  npm run test:headless       # Run in headless mode
+
+Browser Drivers
+---------------
+
+Selenium tests require a browser driver:
+
+For Chromium:
+  apt install chromium-driver
+
+For Firefox (using geckodriver from external package):
+  # See: https://github.com/VitexSoftware/gecko-driver-deb
+  apt install gecko-driver
+
+Makefile Targets
+----------------
+
+The included Makefile provides convenient shortcuts:
+
+  make tests                  # Run PHPUnit tests
+  make static-code-analysis   # Run PHPStan
+  make cs                     # Fix code style
+  make phpunit                # Run PHPUnit with custom config
+
+Integration with multiflexi-zabbix-selenium
+--------------------------------------------
+
+For automated Selenium test monitoring with Zabbix, consider installing
+the multiflexi-zabbix-selenium package which provides:
+
+  - Systemd service and timer for automated test execution
+  - Zabbix integration for test result monitoring
+  - Pre-configured Zabbix templates
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Mon, 27 Jan 2026 20:00:00 +0100
