@@ -361,7 +361,7 @@ class CompanyJobLister extends CompanyJob
 
             if ($runtemplateInterv && $runtemplateInterv !== 'n' && $runtemplateInterv !== 'c') {
                 // Named interval
-                $intervalEmoji = \MultiFlexi\RunTemplate::getIntervalEmoji($runtemplateInterv);
+                $intervalEmoji = \MultiFlexi\Scheduler::getIntervalEmoji($runtemplateInterv);
                 $intervalName = \MultiFlexi\Scheduler::codeToInterval($runtemplateInterv);
                 $launcherInfo = sprintf(
                     '<span style="font-size: 0.85em; color: #666;" title="%s">%s %s</span>',
@@ -396,7 +396,7 @@ class CompanyJobLister extends CompanyJob
             $runtemplateDelay = $dataRowRaw['runtemplate_delay'] ?? 0;
 
             // Build tooltip with details
-            $intervalEmoji = \MultiFlexi\RunTemplate::getIntervalEmoji($runtemplateInterv);
+            $intervalEmoji = \MultiFlexi\Scheduler::getIntervalEmoji($runtemplateInterv);
             $intervalName = \MultiFlexi\Scheduler::codeToInterval($runtemplateInterv);
 
             $tooltipParts = [];

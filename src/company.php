@@ -97,7 +97,7 @@ foreach ($jobs as $job) {
     $job['launched_by'] = [
         new ExecutorImage($job['executor'], ['align' => 'right', 'height' => '50px']),
         new \Ease\Html\DivTag($job['launched_by'] ? new \Ease\Html\ATag('user.php?id='.$job['launched_by'], new \Ease\TWB4\Badge('info', $job['login'])) : _('Timer')),
-        new \Ease\Html\DivTag(\MultiFlexi\RunTemplate::getIntervalEmoji(\MultiFlexi\RunTemplate::intervalToCode((string) $job['schedule_type'])).'&nbsp;'.$job['scheduled']),
+        new \Ease\Html\DivTag(\MultiFlexi\Scheduler::getIntervalEmoji(\MultiFlexi\Scheduler::intervalToCode((string) $job['schedule_type'])).'&nbsp;'.$job['scheduled']),
     ];
     unset($job['executor'], $job['scheduled'], $job['login'], $job['schedule_type'], $job['exitcode']);
 

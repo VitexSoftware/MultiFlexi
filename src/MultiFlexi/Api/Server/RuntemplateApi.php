@@ -56,7 +56,7 @@ class RuntemplateApi extends AbstractRuntemplateApi
                 $runtemplateData['app_id'] = new \Ease\Html\ATag('app/'.$runtemplateData['app_id'].'.html', $runtemplateData['app_id']);
                 $runtemplateData['company_id'] = new \Ease\Html\ATag('company/'.$runtemplateData['company_id'].'.html', $runtemplateData['company_id']);
 
-                $runtemplateData['interv'] = \MultiFlexi\RunTemplate::getIntervalEmoji($runtemplateData['interv']).' '.\MultiFlexi\Scheduler::codeToInterval($runtemplateData['interv']);
+                $runtemplateData['interv'] = \MultiFlexi\Scheduler::getIntervalEmoji($runtemplateData['interv']).' '.\MultiFlexi\Scheduler::codeToInterval($runtemplateData['interv']);
 
                 $runtemplateData = [array_keys($runtemplateData), $runtemplateData];
 

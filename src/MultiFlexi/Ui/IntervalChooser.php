@@ -32,14 +32,14 @@ class IntervalChooser extends \Ease\Html\SelectTag
     public function __construct(string $name, string $defaultValue = '', array $properties = [])
     {
         parent::__construct($name, [
-            'n' => RunTemplate::getIntervalEmoji('n').' '._('Disabled'),
-            'i' => RunTemplate::getIntervalEmoji('i').' '._('Minutly'),
-            'h' => RunTemplate::getIntervalEmoji('h').' '._('Hourly'),
-            'd' => RunTemplate::getIntervalEmoji('d').' '._('Daily'),
-            'w' => RunTemplate::getIntervalEmoji('w').' '._('Weekly'),
-            'm' => RunTemplate::getIntervalEmoji('m').' '._('Monthly'),
-            'y' => RunTemplate::getIntervalEmoji('y').' '._('Yearly'),
-            'c' => RunTemplate::getIntervalEmoji('c').' '._('Custom'),
+            'n' => \MultiFlexi\Scheduler::getIntervalEmoji('n').' '._('Disabled'),
+            'i' => \MultiFlexi\Scheduler::getIntervalEmoji('i').' '._('Minutly'),
+            'h' => \MultiFlexi\Scheduler::getIntervalEmoji('h').' '._('Hourly'),
+            'd' => \MultiFlexi\Scheduler::getIntervalEmoji('d').' '._('Daily'),
+            'w' => \MultiFlexi\Scheduler::getIntervalEmoji('w').' '._('Weekly'),
+            'm' => \MultiFlexi\Scheduler::getIntervalEmoji('m').' '._('Monthly'),
+            'y' => \MultiFlexi\Scheduler::getIntervalEmoji('y').' '._('Yearly'),
+            'c' => \MultiFlexi\Scheduler::getIntervalEmoji('c').' '._('Custom'),
         ], $defaultValue, $properties);
     }
 }
