@@ -86,21 +86,21 @@ Description: MultiFlexi web interface core components
  AES-256 data encryption for sensitive information, API rate limiting with
  configurable endpoint protection, and IP whitelisting for administrative access control.
 
-Package: multiflexi-dev
-Depends: ${misc:Depends}, multiflexi, jq, php-phpunit-phpunit-mock-objects | phpunit, composer, nodejs, mocha, chai
-Recommends: php-phpstan-phpstan, php-friendsofphp-php-cs-fixer, chromium-driver | gecko-driver, node-mochawesome, multiflexi-zabbix-selenium
-Architecture: all
-Description: MultiFlexi development and testing tools
- Development files for MultiFlexi including:
-  - PHPUnit test suite and configuration
-  - PHPStan static analysis configuration
-  - PHP-CS-Fixer coding standards configuration
-  - Selenium/Mocha test suite (requires npm install for additional dependencies)
-  - Test application definitions
-  - Development utilities and scripts
- .
- Note: Selenium tests require running 'npm install' in tests/selenium/ directory
- to install additional Node.js dependencies (selenium-webdriver, chromedriver, etc.)
+#Package: multiflexi-dev
+#Depends: ${misc:Depends}, multiflexi, jq, php-phpunit-phpunit-mock-objects | phpunit, composer, nodejs, mocha, chai
+#Recommends: php-phpstan-phpstan, php-friendsofphp-php-cs-fixer, chromium-driver | gecko-driver, node-mochawesome, multiflexi-zabbix-selenium
+#Architecture: all
+#Description: MultiFlexi development and testing tools
+# Development files for MultiFlexi including:
+#  - PHPUnit test suite and configuration
+#  - PHPStan static analysis configuration
+#  - PHP-CS-Fixer coding standards configuration
+#  - Selenium/Mocha test suite (requires npm install for additional dependencies)
+#  - Test application definitions
+#  - Development utilities and scripts
+# .
+# Note: Selenium tests require running 'npm install' in tests/selenium/ directory
+# to install additional Node.js dependencies (selenium-webdriver, chromedriver, etc.)
 
 #Package: multiflexi-doc
 #Multi-Arch: foreign
