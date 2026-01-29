@@ -49,6 +49,7 @@ distributions.each { distro ->
                         sh 'dch -b -v ' + buildVer  + ' "' + env.BUILD_TAG  + '"'
                         sh 'sudo apt-get update --allow-releaseinfo-change'
                         sh 'sudo chown jenkins:jenkins ..'
+                        sh 'sudo chown -R $(id -u):$(id -g) debian/.debhelper || true`
                         sh 'debuild-pbuilder -r"sudo -E" -i -us -uc -b'
                         sh 'mkdir -p $WORKSPACE/dist/debian/ ; rm -rf $WORKSPACE/dist/debian/* ; for deb in $(cat debian/files | awk \'{print $1}\'); do mv "../$deb" $WORKSPACE/dist/debian/; done'
                         artifacts = sh (
