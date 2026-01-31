@@ -15,8 +15,6 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
-use MultiFlexi\RunTemplate;
-
 /**
  * Description of IntervalChooser.
  *
