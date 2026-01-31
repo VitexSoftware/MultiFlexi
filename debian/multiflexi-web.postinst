@@ -70,24 +70,19 @@ case "$1" in
             fi
         fi
 
-        # Handle webserver reconfiguration/restart
-        db_get multiflexi/reconfigure-webserver || true
-        webservers="$RET"
+        # Handle webserver configuration: detect installed webservers and configure them
+        # (do not rely on debconf multiflexi/reconfigure-webserver - it may not be set,
+        # e.g. non-interactive install or dependency installed after multiflexi-web)
         restart=""
 
-        for webserver in $webservers; do
-            webserver=${webserver%,}
-            case "$webserver" in
-            lighttpd)
-                lighttpd_install
-                ;;
-            apache2)
-                apache_install
-                ;;
-            esac
-            pathfind $webserver || continue
-            restart="$restart$webserver "
-        done
+        if [ -d /etc/apache2/conf-available ]; then
+            apache_install
+            pathfind apache2 && restart="${restart:+$restart }apache2"
+        fi
+        if [ -d /etc/lighttpd/conf-available ]; then
+            lighttpd_install
+            pathfind lighttpd && restart="${restart:+$restart }lighttpd"
+        fi
 
         db_stop || true
 
