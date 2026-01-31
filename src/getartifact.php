@@ -23,6 +23,7 @@ $artifactor = new \MultiFlexi\Artifact($artifactID, ['autoload' => true]);
 
 if (!$artifactor->getMyKey()) {
     http_response_code(404);
+
     exit;
 }
 
@@ -39,5 +40,5 @@ header('Connection: Keep-Alive');
 header('Expires: 0');
 header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 header('Pragma: public');
-header('Content-Length: '.strlen($artifactData));
+header('Content-Length: '.\strlen($artifactData));
 echo $artifactData;
