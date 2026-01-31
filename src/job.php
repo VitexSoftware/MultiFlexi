@@ -135,7 +135,7 @@ if ($artifacts->count()) {
                 break;
         }
 
-        $artifactsDiv->addItem(new \Ease\TWB4\Panel([new \Ease\Html\ATag('getartifact.php?id='.$artifactData['id'], '💾', ['class' => 'btn btn-info btn-sm']), '&nbsp;'.$artifactData['filename']], 'inverse', new \Ease\Html\DivTag(new \Ease\Html\PreTag('<code>'.$code.'</code>'), ['style' => 'font-family: monospace; color: black']), $artifactData['note']));
+        $artifactsDiv->addItem(new \Ease\TWB4\Panel([new \Ease\Html\ATag('getartifact.php?id='.$artifactData['id'], '💾', ['class' => 'btn btn-info btn-sm']), '&nbsp;'.htmlspecialchars((string) ($artifactData['filename'] ?? ''), \ENT_QUOTES | \ENT_HTML5, 'UTF-8')], 'inverse', new \Ease\Html\DivTag(new \Ease\Html\PreTag('<code>'.htmlspecialchars((string) $code, \ENT_QUOTES | \ENT_HTML5, 'UTF-8').'</code>'), ['style' => 'font-family: monospace; color: black']), htmlspecialchars((string) ($artifactData['note'] ?? ''), \ENT_QUOTES | \ENT_HTML5, 'UTF-8')));
     }
 
     $outputTabs->addTab(_('Artifacts').' <span class="badge badge-success">'.$artifacts->count().'</span>', $artifactsDiv);

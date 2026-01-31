@@ -127,7 +127,7 @@ CSS);
         $appSetupCommand = $engine->getApplication()->getDataValue('setup');
 
         if (!empty($appSetupCommand)) {
-            $saveColumn->addItem(new \Ease\TWB4\Alert('info', 'ℹ️&nbsp;'._('After saving configuration, the following setup command will be executed:').'<br><code>'.$appSetupCommand.'</code>'));
+            $saveColumn->addItem(new \Ease\TWB4\Alert('info', 'ℹ️&nbsp;'._('After saving configuration, the following setup command will be executed:').'<br><code>'.htmlspecialchars((string) $appSetupCommand, \ENT_QUOTES | \ENT_HTML5, 'UTF-8').'</code>'));
         }
 
         $this->addItem($saveRow);

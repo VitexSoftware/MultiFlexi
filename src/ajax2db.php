@@ -36,7 +36,35 @@ namespace MultiFlexi\Ui;
 require_once './init.php';
 WebPage::singleton()->onlyForLogged();
 header('Content-Type: application/json');
+
 $class = \Ease\WebPage::getRequestValue('class');
+if ($class === null || $class === '') {
+    http_response_code(400);
+    echo json_encode(['error' => 'Missing class parameter']);
+    exit;
+}
+// Whitelist: only allow DataTable engine classes that have getAllForDataTable
+$allowedClasses = [
+    \MultiFlexi\CompanyJobLister::class,
+    \MultiFlexi\CompanyAppRunTemplateLister::class,
+    \MultiFlexi\RunTemplateLister::class,
+    \MultiFlexi\CredentialTypeLister::class,
+    \MultiFlexi\CredentialLister::class,
+    \MultiFlexi\ApplicationLister::class,
+    \MultiFlexi\ScheduleLister::class,
+    \MultiFlexi\Logger::class,
+    \MultiFlexi\Customer::class,
+];
+if (!\in_array($class, $allowedClasses, true)) {
+    http_response_code(403);
+    echo json_encode(['error' => 'Class not allowed']);
+    exit;
+}
+if (!method_exists($class, 'getAllForDataTable')) {
+    http_response_code(403);
+    echo json_encode(['error' => 'Invalid data source']);
+    exit;
+}
 /**
  * @var \MultiFlexi\Engine Data Source
  */
