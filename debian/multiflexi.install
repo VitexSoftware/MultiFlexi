@@ -1,2 +1,3 @@
 bin/*				                  usr/bin
 lib/*.php		                       	  usr/lib/multiflexi
+debian/conf/composer.json                         usr/lib/multiflexi
