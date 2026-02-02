@@ -12,7 +12,7 @@ Depends: ${misc:Depends},
  multiflexi-common,
 Recommends: multiflexi-scheduler, multiflexi-web
 Suggests: multiflexi-all, multiflexi-cli, multiflexi-api, multiflexi-executor
-Pre-Depends: multiflexi-sqlite (>= 2.4.1) | multiflexi-database (>= 2.4.1)
+Pre-Depends: multiflexi-sqlite (>= 2.4.1) | multiflexi-mysql (>= 2.4.1) | multiflexi-pgsql (>= 2.4.1)
 Architecture: all
 Description: Run various tools on top of not even AbraFlexi and Stormware Pohoda
  Define server, customers and its companies. Then specify
@@ -34,7 +34,7 @@ Description: shared multiflexi configuration
 
 Package: multiflexi-api
 Multi-Arch: foreign
-Pre-Depends: multiflexi-sqlite (>= 2.4.1) | multiflexi-database (>= 2.4.1)
+Pre-Depends: multiflexi-sqlite (>= 2.4.1) | multiflexi-mysql (>= 2.4.1) | multiflexi-pgsql (>= 2.4.1)
 Depends: ${misc:Depends}, php-vitexsoftware-multiflexi-server, php-yaml, multiflexi-web
 Architecture: all
 Description: API Server for MultiFlexi
