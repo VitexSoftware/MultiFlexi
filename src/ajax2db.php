@@ -34,8 +34,37 @@ namespace MultiFlexi\Ui;
 \define('BYPASS_CSRF_PROTECTION', true);
 
 require_once './init.php';
-WebPage::singleton()->onlyForLogged();
 header('Content-Type: application/json');
+// Return DataTables-shaped JSON when unauthenticated to avoid HTML redirects
+if (!WebPage::singleton()->isLogged()) {
+    // Build a placeholder row where each requested column contains "Unauthenticated"
+    $columns = $_REQUEST['columns'] ?? [];
+    $row = [];
+    if (is_array($columns) && !empty($columns)) {
+        foreach ($columns as $col) {
+            $key = $col['data'] ?? ($col['name'] ?? null);
+            if ($key !== null && $key !== '') {
+                $row[$key] = 'Unauthenticated';
+            } else {
+                $row[] = 'Unauthenticated';
+            }
+        }
+    }
+
+    $response = [
+        'draw' => isset($_REQUEST['draw']) ? (int) $_REQUEST['draw'] : 0,
+        'recordsTotal' => 0,
+        'recordsFiltered' => 0,
+        'data' => !empty($row) ? [$row] : [],
+        'error' => 'Unauthenticated',
+        'session_expired' => true,
+        'redirect' => 'login.php',
+    ];
+    // Use 200 to keep DataTables happy
+    http_response_code(200);
+    echo json_encode($response);
+    exit;
+}
 
 $class = \Ease\WebPage::getRequestValue('class');
 
