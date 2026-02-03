@@ -1,4 +1,4 @@
-multiflexi (2.2.2) UNRELEASED; urgency=medium
+multiflexi (2.2.5) UNRELEASED; urgency=medium
 
   * Refactor and enhance various components of the MultiFlexi application
   * Improved formatting and consistency in companyapp.php, companyapps.php, home.php, init.php, job.php, joblist.php, main.php, reschedule.php, schedule.php files.
@@ -6,8 +6,12 @@ multiflexi (2.2.2) UNRELEASED; urgency=medium
   * Enhanced job polling mechanism in schedule.php for better job completion handling.
   * Updated JavaScript functions for improved readability and performance.
   * Fixed minor bugs and improved error handling across multiple files.
+  * Set SQLite as default database backend with version requirements
+  * Fix missing composer.json in multiflexi package for executor-docker
+  * Use explicit DB engine alternatives: sqlite default, keep installed
+    mysql/pgsql
 
- -- vitex <info@vitexsoftware.cz>  Sun, 23 Nov 2025 15:59:05 +0100
+ -- vitex <info@vitexsoftware.cz>  Mon, 02 Feb 2026 05:02:38 +0100
 
 multiflexi (2.2.1) unstable; urgency=medium
 

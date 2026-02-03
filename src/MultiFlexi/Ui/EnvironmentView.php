@@ -40,8 +40,8 @@ class EnvironmentView extends \Ease\Html\TableTag
 
     public static function sourceView(string $source): \Ease\Html\DivTag
     {
-        if (\Ease\Functions::isSerialized($source)) {
-            $origin = unserialize($source);
+        if (\Ease\Euri::isValid($source)) {
+            $origin = \Ease\Euri::toObject($source);
 
             if (method_exists($origin, 'getObjectName')) {
                 $source = $origin->getObjectName();

@@ -34,9 +34,74 @@ namespace MultiFlexi\Ui;
 \define('BYPASS_CSRF_PROTECTION', true);
 
 require_once './init.php';
-WebPage::singleton()->onlyForLogged();
 header('Content-Type: application/json');
+// Return DataTables-shaped JSON when unauthenticated to avoid HTML redirects
+if (!WebPage::singleton()->isLogged()) {
+    // Build a placeholder row where each requested column contains "Unauthenticated"
+    $columns = $_REQUEST['columns'] ?? [];
+    $row = [];
+    if (is_array($columns) && !empty($columns)) {
+        foreach ($columns as $col) {
+            $key = $col['data'] ?? ($col['name'] ?? null);
+            if ($key !== null && $key !== '') {
+                $row[$key] = 'Unauthenticated';
+            } else {
+                $row[] = 'Unauthenticated';
+            }
+        }
+    }
+
+    $response = [
+        'draw' => isset($_REQUEST['draw']) ? (int) $_REQUEST['draw'] : 0,
+        'recordsTotal' => 0,
+        'recordsFiltered' => 0,
+        'data' => !empty($row) ? [$row] : [],
+        'error' => 'Unauthenticated',
+        'session_expired' => true,
+        'redirect' => 'login.php',
+    ];
+    // Use 200 to keep DataTables happy
+    http_response_code(200);
+    echo json_encode($response);
+    exit;
+}
+
 $class = \Ease\WebPage::getRequestValue('class');
+
+if ($class === null || $class === '') {
+    http_response_code(400);
+    echo json_encode(['error' => 'Missing class parameter']);
+
+    exit;
+}
+
+// Whitelist: only allow DataTable engine classes that have getAllForDataTable
+$allowedClasses = [
+    \MultiFlexi\CompanyJobLister::class,
+    \MultiFlexi\CompanyAppRunTemplateLister::class,
+    \MultiFlexi\RunTemplateLister::class,
+    \MultiFlexi\CredentialTypeLister::class,
+    \MultiFlexi\CredentialLister::class,
+    \MultiFlexi\ApplicationLister::class,
+    \MultiFlexi\ScheduleLister::class,
+    \MultiFlexi\Logger::class,
+    \MultiFlexi\Customer::class,
+];
+
+if (!\in_array($class, $allowedClasses, true)) {
+    http_response_code(403);
+    echo json_encode(['error' => 'Class not allowed']);
+
+    exit;
+}
+
+if (!method_exists($class, 'getAllForDataTable')) {
+    http_response_code(403);
+    echo json_encode(['error' => 'Invalid data source']);
+
+    exit;
+}
+
 /**
  * @var \MultiFlexi\Engine Data Source
  */

@@ -73,11 +73,10 @@ CSS);
             if ($runTemplateField) { // Filed by Credential
                 $runTemplateFieldSource = $runTemplateField->getSource();
 
-                if (\Ease\Functions::isSerialized($runTemplateFieldSource)) {
-                    $credential = unserialize($runTemplateFieldSource);
+                if (\Ease\Euri::isValid($runTemplateFieldSource)) {
+                    $credential = \Ease\Euri::toObject($runTemplateFieldSource);
 
                     if ($credential && (\Ease\Functions::baseClassName($credential) === 'Credential')) {
-                       
                         $credentialType = $credential->getCredentialType();
 
                         $credentialLink = new \Ease\Html\ATag('credential.php?id='.$credential->getMyKey(), new \Ease\Html\SmallTag($credential->getRecordName()));
@@ -88,7 +87,7 @@ CSS);
 
                         $inputCaption = new \Ease\Html\SpanTag([$credentialTypeLink, new \Ease\Html\StrongTag($fieldName), '&nbsp;', $credentialLink]);
                         $input->setTagProperty('disabled', '1');
-                       
+
                         $input->setValue($credential->getDataValue($fieldName));
                         $field->setDescription($credentialType->getFields()->getField($fieldName)->getDescription());
                     }
@@ -128,7 +127,7 @@ CSS);
         $appSetupCommand = $engine->getApplication()->getDataValue('setup');
 
         if (!empty($appSetupCommand)) {
-            $saveColumn->addItem(new \Ease\TWB4\Alert('info', 'ℹ️&nbsp;'._('After saving configuration, the following setup command will be executed:').'<br><code>'.$appSetupCommand.'</code>'));
+            $saveColumn->addItem(new \Ease\TWB4\Alert('info', 'ℹ️&nbsp;'._('After saving configuration, the following setup command will be executed:').'<br><code>'.htmlspecialchars((string) $appSetupCommand, \ENT_QUOTES | \ENT_HTML5, 'UTF-8').'</code>'));
         }
 
         $this->addItem($saveRow);

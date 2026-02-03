@@ -54,7 +54,7 @@ class RunTemplateLister extends RunTemplate
 
     public function completeDataRow(array $dataRowRaw): array
     {
-        $dataRowRaw['interv'] = '<span title="'._(self::codeToInterval($dataRowRaw['interv'])).'">'.self::getIntervalEmoji($dataRowRaw['interv']).' '._(self::codeToInterval($dataRowRaw['interv'])).'</span>';
+        $dataRowRaw['interv'] = '<span title="'._(self::codeToInterval($dataRowRaw['interv'])).'">'.Scheduler::getIntervalEmoji($dataRowRaw['interv']).' '._(self::codeToInterval($dataRowRaw['interv'])).'</span>';
         $dataRowRaw['active'] = (string) $dataRowRaw['active'] ? '&nbsp;<a href="schedule.php?id='.$dataRowRaw['id'].'&when=now&executor=Native" title="'._('Launch now').'"><span style="color: green; font-weight: xx-large;">▶</span></a> ' : '<span style="color: lightgray; font-weight: xx-large;" title="'._('Disabled').'">🚧</span>';
         $dataRowRaw['name'] = (string) new \Ease\Html\ATag('runtemplate.php?id='.$dataRowRaw['id'], '<strong>'.$dataRowRaw['name'].'</strong>');
         $dataRowRaw['id'] = (string) new \Ease\Html\ATag('runtemplate.php?id='.$dataRowRaw['id'], '⚗️ #'.$dataRowRaw['id']);

@@ -30,8 +30,8 @@ new \MultiFlexi\Defaults();
 // Initialize enhanced session security (disable for now if classes don't exist)
 if (class_exists('\MultiFlexi\Security\SessionManager')) {
     $sessionManager = new \MultiFlexi\Security\SessionManager(
-        \Ease\Shared::cfg('SESSION_TIMEOUT', 3600),
-        \Ease\Shared::cfg('SESSION_REGENERATION_INTERVAL', 300),
+        \Ease\Shared::cfg('SESSION_TIMEOUT', 14400),
+        \Ease\Shared::cfg('SESSION_REGENERATION_INTERVAL', 900),
         \Ease\Shared::cfg('SESSION_STRICT_USER_AGENT', true),
         \Ease\Shared::cfg('SESSION_STRICT_IP_ADDRESS', false),
     );

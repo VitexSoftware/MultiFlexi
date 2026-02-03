@@ -34,7 +34,7 @@ $replace = \Ease\TWB4\WebPage::getRequestValue('replace', 'string') === 'on';
 if (null !== $id) {
     $runtemplater = new \MultiFlexi\RunTemplate($id);
 
-    if (isset($_ENV) && \is_array($_ENV) && \array_key_exists('env', $_FILES)  && strlen($_FILES['env']['name'])) {
+    if (isset($_ENV) && \is_array($_ENV) && \array_key_exists('env', $_FILES) && \strlen($_FILES['env']['name'])) {
         $env = [];
 
         foreach (file($_FILES['env']['tmp_name']) as $cfgRow) {

@@ -31,24 +31,22 @@ $companyEnver = new \MultiFlexi\CompanyEnv($companies);
 
 if (WebPage::singleton()->isPosted()) {
     $companyEnver->deleteFromSQL(['company_id' => $companies->getMyKey()]);
-    
+
     $logger = new \MultiFlexi\Logger();
     $logger->deleteFromSQL(['company_id' => $companies->getMyKey()]);
-    
+
     $jobber = new \MultiFlexi\Job();
     $jobber->deleteFromSQL(['company_id' => $companies->getMyKey()]);
-    
+
     $companyRuntemplates = new \MultiFlexi\RunTemplate();
     $companyRuntemplates->deleteFromSQL(['company_id' => $companies->getMyKey()]);
-    
-    
+
     $confer = new \MultiFlexi\Configuration();
     $confer->deleteFromSQL(['company_id' => $companies->getMyKey()]);
 
     $appToCompany = new \MultiFlexi\CompanyApp();
     $appToCompany->deleteFromSQL(['company_id' => $companies->getMyKey()]);
-    
-    
+
     if ($companies->deleteFromSQL(['id' => $companies->getMyKey()])) {
         $companies->addStatusMessage(_('Company Deleted'), 'success');
         WebPage::singleton()->redirect('companies.php');
@@ -71,7 +69,7 @@ if (empty($instanceName) === false) {
 $instanceRow = new Row();
 $instanceRow->addColumn(4, new DeleteCompanyForm($companies, null, ['action' => 'companydelete.php']));
 
-if (empty($companies->getDataValue('logo')) == false) {
+if (empty($companies->getDataValue('logo')) === false) {
     $rightColumn[] = new \Ease\Html\ImgTag($companies->getDataValue('logo'), 'logo', ['class' => 'img-fluid']);
 }
 

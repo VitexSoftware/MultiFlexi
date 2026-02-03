@@ -39,7 +39,6 @@ class RunTemplateStatsCards extends \Ease\TWB4\Row
 
         parent::__construct();
 
-
         // Create a single row to container everything
         $mainRow = new \Ease\TWB4\Row();
 

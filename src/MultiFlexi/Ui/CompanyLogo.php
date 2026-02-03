@@ -32,6 +32,6 @@ class CompanyLogo extends \Ease\Html\ImgTag
      */
     public function __construct(\MultiFlexi\Company $company, array $tagProperties = [])
     {
-        parent::__construct(empty($company->getDataValue('logo')) ? 'images/company.svg' :  $company->getDataValue('logo') , $company->getDataValue('name') ?? _('unamed company').' #'.$company->getMyKey() , $tagProperties);
+        parent::__construct(empty($company->getDataValue('logo')) ? 'images/company.svg' : $company->getDataValue('logo'), $company->getDataValue('name') ?? _('unamed company').' #'.$company->getMyKey(), $tagProperties);
     }
 }
