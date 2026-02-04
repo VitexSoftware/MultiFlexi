@@ -1,4 +1,4 @@
-debian/tmp/composer.json                  usr/lib/multiflexi
+debian/tmp/composer.json                      usr/lib/multiflexi
 src/*.php                                 usr/share/multiflexi
 src/favicon.ico                           usr/share/multiflexi
 src/.htaccess                             usr/share/multiflexi
