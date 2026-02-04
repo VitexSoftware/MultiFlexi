@@ -23,8 +23,6 @@ src/MultiFlexi/Ui                         usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Ui/CredentialType          usr/lib/multiflexi/MultiFlexi/Ui/
 src/MultiFlexi/Ui/Action                  usr/lib/multiflexi/MultiFlexi/Ui/
 
-debian/tmp/composer.json                  usr/lib/multiflexi
-
 debian/conf/multiflexi.conf    		      etc/apache2/conf-available
 debian/conf/multiflexi.service 		      etc/avahi/services
 

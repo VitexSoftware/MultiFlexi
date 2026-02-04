@@ -1,4 +1,10 @@
-multiflexi (2.2.5) UNRELEASED; urgency=medium
+multiflexi (2.2.6) UNRELEASED; urgency=medium
+
+  * Legacy code removal
+
+ -- vitex <info@vitexsoftware.cz>  Wed, 04 Feb 2026 01:38:04 +0100
+
+multiflexi (2.2.5) unstable; urgency=medium
 
   * Refactor and enhance various components of the MultiFlexi application
   * Improved formatting and consistency in companyapp.php, companyapps.php, home.php, init.php, job.php, joblist.php, main.php, reschedule.php, schedule.php files.
@@ -11,7 +17,7 @@ multiflexi (2.2.5) UNRELEASED; urgency=medium
   * Use explicit DB engine alternatives: sqlite default, keep installed
     mysql/pgsql
 
- -- vitex <info@vitexsoftware.cz>  Mon, 02 Feb 2026 05:02:38 +0100
+ -- vitex <info@vitexsoftware.cz>  Wed, 04 Feb 2026 01:37:24 +0100
 
 multiflexi (2.2.1) unstable; urgency=medium
 

@@ -30,13 +30,15 @@ declare(strict_types=1);
 
 namespace MultiFlexi\Ui;
 
+use Ease\Shared;
+
 // Bypass CSRF protection for DataTables AJAX requests
 \define('BYPASS_CSRF_PROTECTION', true);
 
 require_once './init.php';
 header('Content-Type: application/json');
 // Return DataTables-shaped JSON when unauthenticated to avoid HTML redirects
-if (!WebPage::singleton()->isLogged()) {
+if (!Shared::user()->isLogged()) {
     // Build a placeholder row where each requested column contains "Unauthenticated"
     $columns = $_REQUEST['columns'] ?? [];
     $row = [];

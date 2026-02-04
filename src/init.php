@@ -58,7 +58,7 @@ if (class_exists('\MultiFlexi\Security\SessionManager')) {
         $GLOBALS['csrfProtection'] = $csrfProtection;
 
         // Validate CSRF for POST requests (unless explicitly bypassed)
-        if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' && \Ease\Shared::cfg('CSRF_PROTECTION_ENABLED', true) && !\defined('BYPASS_CSRF_PROTECTION')) {
+        if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' && Shared::cfg('CSRF_PROTECTION_ENABLED', true) && !\defined('BYPASS_CSRF_PROTECTION')) {
             $csrfProtection->middleware();
         }
     }
@@ -73,11 +73,11 @@ if (class_exists('\MultiFlexi\Security\SessionManager')) {
 $pdo = null;
 
 try {
-    $dsn = \Ease\Shared::cfg('DB_CONNECTION').':host='.\Ease\Shared::cfg('DB_HOST').';port='.\Ease\Shared::cfg('DB_PORT', 3306).';dbname='.\Ease\Shared::cfg('DB_DATABASE').';charset=utf8mb4';
+    $dsn = Shared::cfg('DB_CONNECTION').':host='.Shared::cfg('DB_HOST').';port='.Shared::cfg('DB_PORT', 3306).';dbname='.\Ease\Shared::cfg('DB_DATABASE').';charset=utf8mb4';
     $pdo = new \PDO(
         $dsn,
-        \Ease\Shared::cfg('DB_USERNAME'),
-        \Ease\Shared::cfg('DB_PASSWORD'),
+        Shared::cfg('DB_USERNAME'),
+        Shared::cfg('DB_PASSWORD'),
         [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION],
     );
 } catch (\Exception $e) {
@@ -85,14 +85,14 @@ try {
 }
 
 // Initialize brute force protection (disabled temporarily)
-if ($pdo && \Ease\Shared::cfg('BRUTE_FORCE_PROTECTION_ENABLED', true) && class_exists('\MultiFlexi\Security\BruteForceProtection')) {
+if ($pdo && Shared::cfg('BRUTE_FORCE_PROTECTION_ENABLED', true) && class_exists('\MultiFlexi\Security\BruteForceProtection')) {
     try {
         $bruteForceProtection = new \MultiFlexi\Security\BruteForceProtection(
             $pdo,
-            \Ease\Shared::cfg('BRUTE_FORCE_MAX_ATTEMPTS', 5),
-            \Ease\Shared::cfg('BRUTE_FORCE_LOCKOUT_DURATION', 900), // 15 minutes
-            \Ease\Shared::cfg('BRUTE_FORCE_TIME_WINDOW', 300), // 5 minutes
-            \Ease\Shared::cfg('BRUTE_FORCE_IP_LIMITING', true),
+            Shared::cfg('BRUTE_FORCE_MAX_ATTEMPTS', 5),
+            Shared::cfg('BRUTE_FORCE_LOCKOUT_DURATION', 900), // 15 minutes
+            Shared::cfg('BRUTE_FORCE_TIME_WINDOW', 300), // 5 minutes
+            Shared::cfg('BRUTE_FORCE_IP_LIMITING', true),
         );
         $GLOBALS['bruteForceProtection'] = $bruteForceProtection;
     } catch (\Exception $e) {
@@ -102,7 +102,7 @@ if ($pdo && \Ease\Shared::cfg('BRUTE_FORCE_PROTECTION_ENABLED', true) && class_e
 }
 
 // Initialize security audit logger (disabled temporarily)
-if ($pdo && \Ease\Shared::cfg('SECURITY_LOGGING_ENABLED', true) && class_exists('\MultiFlexi\Security\SecurityAuditLogger')) {
+if ($pdo && Shared::cfg('SECURITY_LOGGING_ENABLED', true) && class_exists('\MultiFlexi\Security\SecurityAuditLogger')) {
     try {
         $securityAuditLogger = new \MultiFlexi\Security\SecurityAuditLogger($pdo);
         $GLOBALS['securityAuditLogger'] = $securityAuditLogger;
@@ -113,7 +113,7 @@ if ($pdo && \Ease\Shared::cfg('SECURITY_LOGGING_ENABLED', true) && class_exists(
 }
 
 // Initialize data encryption (disabled temporarily due to key initialization issues)
-if ($pdo && \Ease\Shared::cfg('DATA_ENCRYPTION_ENABLED', true) && class_exists('\MultiFlexi\Security\DataEncryption')) {
+if ($pdo && Shared::cfg('DATA_ENCRYPTION_ENABLED', true) && class_exists('\MultiFlexi\Security\DataEncryption')) {
     try {
         $dataEncryption = new \MultiFlexi\Security\DataEncryption($pdo);
 
@@ -128,7 +128,7 @@ if ($pdo && \Ease\Shared::cfg('DATA_ENCRYPTION_ENABLED', true) && class_exists('
 }
 
 // Initialize rate limiter (disabled temporarily)
-if ($pdo && \Ease\Shared::cfg('RATE_LIMITING_ENABLED', true) && class_exists('\MultiFlexi\Security\RateLimiter')) {
+if ($pdo && Shared::cfg('RATE_LIMITING_ENABLED', true) && class_exists('\MultiFlexi\Security\RateLimiter')) {
     try {
         $rateLimiter = new \MultiFlexi\Security\RateLimiter($pdo);
 
@@ -140,7 +140,7 @@ if ($pdo && \Ease\Shared::cfg('RATE_LIMITING_ENABLED', true) && class_exists('\M
 }
 
 // Initialize IP whitelist (disabled temporarily)
-if ($pdo && \Ease\Shared::cfg('IP_WHITELIST_ENABLED', false) && class_exists('\MultiFlexi\Security\IpWhitelist')) {
+if ($pdo && Shared::cfg('IP_WHITELIST_ENABLED', false) && class_exists('\MultiFlexi\Security\IpWhitelist')) {
     try {
         $ipWhitelist = new \MultiFlexi\Security\IpWhitelist($pdo);
 
@@ -152,7 +152,7 @@ if ($pdo && \Ease\Shared::cfg('IP_WHITELIST_ENABLED', false) && class_exists('\M
 }
 
 // Initialize Two-Factor Authentication (disabled temporarily)
-if ($pdo && \Ease\Shared::cfg('TWO_FACTOR_AUTH_ENABLED', true) && class_exists('\MultiFlexi\Security\TwoFactorAuth')) {
+if ($pdo && Shared::cfg('TWO_FACTOR_AUTH_ENABLED', true) && class_exists('\MultiFlexi\Security\TwoFactorAuth')) {
     try {
         $twoFactorAuth = new \MultiFlexi\Security\TwoFactorAuth($pdo);
 
@@ -164,7 +164,7 @@ if ($pdo && \Ease\Shared::cfg('TWO_FACTOR_AUTH_ENABLED', true) && class_exists('
 }
 
 // Initialize Role-Based Access Control (RBAC) (disabled temporarily)
-if ($pdo && \Ease\Shared::cfg('RBAC_ENABLED', true) && class_exists('\MultiFlexi\Security\RoleBasedAccessControl')) {
+if ($pdo && Shared::cfg('RBAC_ENABLED', true) && class_exists('\MultiFlexi\Security\RoleBasedAccessControl')) {
     try {
         $rbac = new \MultiFlexi\Security\RoleBasedAccessControl($pdo);
 
