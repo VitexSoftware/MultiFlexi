@@ -65,3 +65,5 @@ debian/multiflexi-web.debhelper.log
 node_modules/
 /tests/selenium/.env
 debian/multiflexi-doc.debhelper.log
+debian/multiflexi-dev/
+debian/multiflexi-dev.substvars
