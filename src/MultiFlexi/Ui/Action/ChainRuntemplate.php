@@ -52,7 +52,7 @@ class ChainRuntemplate extends \MultiFlexi\Action\ChainRuntemplate
             $companyId = $_SESSION['company'];
         }
 
-        return new \MultiFlexi\Ui\CompanyAppChooser($prefix.'[LaunchJob][jobid]', new \MultiFlexi\Company($companyId));
+        return new \MultiFlexi\Ui\RuntemplateChooser($prefix.'[RunTemplate][rtid]', new \MultiFlexi\Company($companyId));
     }
 
     /**
