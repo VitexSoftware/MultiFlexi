@@ -51,7 +51,7 @@ class AppAssignment extends DivTag
                 ['class' => 'company-assign-toggle', 'data-company-id' => $companyData['id'], 'data-app-id' => $application->getMyKey()],
             );
             $assignmentsTable->addRowColumns([
-                new ATag('company.php?id='.$companyData['id'], $companyData['name']),
+                new ATag('companyapp.php?company_id='.$companyData['id'].'&app_id='.$application->getMyKey(), $companyData['name']),
                 $toggle,
             ]);
         }
