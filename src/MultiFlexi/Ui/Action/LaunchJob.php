@@ -20,7 +20,7 @@ namespace MultiFlexi\Ui\Action;
  *
  * @author vitex
  */
-class ChainRuntemplate extends \MultiFlexi\Action\ChainRuntemplate
+class LaunchJob extends \MultiFlexi\Action\ChainRuntemplate
 {
     /**
      * Action logo.

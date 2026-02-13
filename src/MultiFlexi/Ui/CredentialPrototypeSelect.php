@@ -59,7 +59,7 @@ class CredentialPrototypeSelect extends \Ease\Html\SelectTag
             $sourceLabel = $isPhpClass ? ' ('._('built-in').')' : ' ('._('custom').')';
 
             // For PHP classes, use the class name as key; for JSON, use JSON: prefix
-            $key = $isPhpClass ? $credType['code'] : _('custom').':'.$credType['code'];
+            $key = $credType['code'];
             $items[$key] = $description.$sourceLabel;
 
             // Store the class reference for PHP types

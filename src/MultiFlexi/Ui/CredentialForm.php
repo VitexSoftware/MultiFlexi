@@ -65,7 +65,9 @@ class CredentialForm extends SecureForm
                 $formContents[] = new FormGroup(_('Credential Type'), new InputTextTag('credential_type_id', _('No credential types for company defined yet'), ['readonly' => 'readonly', 'disabled' => 'disabled']));
             }
 
-            $formContents[] = new LinkButton('credentialtype.php?company_id='.$kredenc->getDataValue('company_id').'&class='.$kredenc->getCredentialType()->getDataValue('class'), '️➕ 🔐 new credential type', 'success btn-sm', ['title' => _('New Credential Type')]);
+            if ($kredenc->getCredentialType()) {
+                $formContents[] = new LinkButton('credentialtype.php?company_id='.$kredenc->getDataValue('company_id').'&class='.$kredenc->getCredentialType()->getDataValue('class'), '️➕ 🔐 new credential type', 'success btn-sm', ['title' => _('New Credential Type')]);
+            }
         } else {
             $formContents[] = new FormGroup(_('Choose company first'), new InputHiddenTag('credential_type_id', '0'));
         }

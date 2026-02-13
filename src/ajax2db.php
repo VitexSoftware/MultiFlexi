@@ -37,14 +37,17 @@ use Ease\Shared;
 
 require_once './init.php';
 header('Content-Type: application/json');
+
 // Return DataTables-shaped JSON when unauthenticated to avoid HTML redirects
 if (!Shared::user()->isLogged()) {
     // Build a placeholder row where each requested column contains "Unauthenticated"
     $columns = $_REQUEST['columns'] ?? [];
     $row = [];
-    if (is_array($columns) && !empty($columns)) {
+
+    if (\is_array($columns) && !empty($columns)) {
         foreach ($columns as $col) {
             $key = $col['data'] ?? ($col['name'] ?? null);
+
             if ($key !== null && $key !== '') {
                 $row[$key] = 'Unauthenticated';
             } else {
@@ -65,6 +68,7 @@ if (!Shared::user()->isLogged()) {
     // Use 200 to keep DataTables happy
     http_response_code(200);
     echo json_encode($response);
+
     exit;
 }
 

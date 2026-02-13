@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "brick/math",
-            "version": "0.14.4",
+            "version": "0.14.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/brick/math.git",
-                "reference": "a8b53e6cc4d3a336543f042a4dfa0e3f2f2356a4"
+                "reference": "07ff363b16ef8aca9692bba3be9e73fe63f34e50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brick/math/zipball/a8b53e6cc4d3a336543f042a4dfa0e3f2f2356a4",
-                "reference": "a8b53e6cc4d3a336543f042a4dfa0e3f2f2356a4",
+                "url": "https://api.github.com/repos/brick/math/zipball/07ff363b16ef8aca9692bba3be9e73fe63f34e50",
+                "reference": "07ff363b16ef8aca9692bba3be9e73fe63f34e50",
                 "shasum": ""
             },
             "require": {
@@ -56,7 +56,7 @@
             ],
             "support": {
                 "issues": "https://github.com/brick/math/issues",
-                "source": "https://github.com/brick/math/tree/0.14.4"
+                "source": "https://github.com/brick/math/tree/0.14.7"
             },
             "funding": [
                 {
@@ -64,7 +64,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-02-02T16:57:31+00:00"
+            "time": "2026-02-07T10:57:35+00:00"
         },
         {
             "name": "cakephp/core",
@@ -1230,12 +1230,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/serializable-closure.git",
-                "reference": "8f631589ab07b7b52fead814965f5a800459cb3e"
+                "reference": "573677faa24c6f554a92d52a7806dd929f492de0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/8f631589ab07b7b52fead814965f5a800459cb3e",
-                "reference": "8f631589ab07b7b52fead814965f5a800459cb3e",
+                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/573677faa24c6f554a92d52a7806dd929f492de0",
+                "reference": "573677faa24c6f554a92d52a7806dd929f492de0",
                 "shasum": ""
             },
             "require": {
@@ -1284,7 +1284,7 @@
                 "issues": "https://github.com/laravel/serializable-closure/issues",
                 "source": "https://github.com/laravel/serializable-closure"
             },
-            "time": "2026-02-03T06:55:34+00:00"
+            "time": "2026-02-04T18:43:57+00:00"
         },
         {
             "name": "marc-mabe/php-enum",
@@ -2102,7 +2102,6 @@
                 "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Console_Getopt",
                 "source": "https://github.com/pear/Console_Getopt"
             },
-            "abandoned": true,
             "time": "2019-11-20T18:27:48+00:00"
         },
         {
@@ -4345,12 +4344,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "d1f703b7de7a0a7ccc3880fefd1b2c54eaafe5bd"
+                "reference": "734ce2f530022498ebefa94196084de5cb5a8ac1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/d1f703b7de7a0a7ccc3880fefd1b2c54eaafe5bd",
-                "reference": "d1f703b7de7a0a7ccc3880fefd1b2c54eaafe5bd",
+                "url": "https://api.github.com/repos/symfony/console/zipball/734ce2f530022498ebefa94196084de5cb5a8ac1",
+                "reference": "734ce2f530022498ebefa94196084de5cb5a8ac1",
                 "shasum": ""
             },
             "require": {
@@ -4435,7 +4434,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-01-30T08:18:10+00:00"
+            "time": "2026-02-05T21:40:46+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -5413,12 +5412,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "1c4b10461bf2ec27537b5f36105337262f5f5d6f"
+                "reference": "c0145982dc2a4f8de8738d6880e096e36dd08100"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/1c4b10461bf2ec27537b5f36105337262f5f5d6f",
-                "reference": "1c4b10461bf2ec27537b5f36105337262f5f5d6f",
+                "url": "https://api.github.com/repos/symfony/string/zipball/c0145982dc2a4f8de8738d6880e096e36dd08100",
+                "reference": "c0145982dc2a4f8de8738d6880e096e36dd08100",
                 "shasum": ""
             },
             "require": {
@@ -5496,7 +5495,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-01-12T10:54:30+00:00"
+            "time": "2026-02-06T17:57:29+00:00"
         },
         {
             "name": "tbachert/spi",
@@ -5796,16 +5795,16 @@
         },
         {
             "name": "vitexsoftware/ease-core",
-            "version": "v1.50.0",
+            "version": "v1.50.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-ease-core.git",
-                "reference": "37271007e14cf7ee44dc68485106236f03b6619e"
+                "reference": "77f160db1e838a3b895dedb3af8597d8673efe0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-core/zipball/37271007e14cf7ee44dc68485106236f03b6619e",
-                "reference": "37271007e14cf7ee44dc68485106236f03b6619e",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-core/zipball/77f160db1e838a3b895dedb3af8597d8673efe0c",
+                "reference": "77f160db1e838a3b895dedb3af8597d8673efe0c",
                 "shasum": ""
             },
             "require": {
@@ -5849,7 +5848,7 @@
             "homepage": "http://v.s.cz/ease.php",
             "support": {
                 "issues": "https://github.com/VitexSoftware/php-ease-core/issues",
-                "source": "https://github.com/VitexSoftware/php-ease-core/tree/v1.50.0"
+                "source": "https://github.com/VitexSoftware/php-ease-core/tree/v1.50.1"
             },
             "funding": [
                 {
@@ -5857,7 +5856,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2026-01-31T21:27:31+00:00"
+            "time": "2026-02-04T09:03:54+00:00"
         },
         {
             "name": "vitexsoftware/ease-fluentpdo",
@@ -6275,12 +6274,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core.git",
-                "reference": "9d79558edeaa5784cbe605d3ed0302497bd2871a"
+                "reference": "84f74881960703a4c404b7265eee66bd285038c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/9d79558edeaa5784cbe605d3ed0302497bd2871a",
-                "reference": "9d79558edeaa5784cbe605d3ed0302497bd2871a",
+                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/84f74881960703a4c404b7265eee66bd285038c8",
+                "reference": "84f74881960703a4c404b7265eee66bd285038c8",
                 "shasum": ""
             },
             "require": {
@@ -6325,7 +6324,7 @@
                 "issues": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/issues",
                 "source": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/tree/main"
             },
-            "time": "2026-02-02T02:59:48+00:00"
+            "time": "2026-02-09T00:52:17+00:00"
         },
         {
             "name": "ybelenko/openapi-data-mocker",
@@ -7828,8 +7827,8 @@
             "version": "2.1.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/2e49a9703a8f19deb2ae9cf87e9ef57114f54a84",
-                "reference": "2e49a9703a8f19deb2ae9cf87e9ef57114f54a84",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a49260166405408dd373272d4702a79f8b95f497",
+                "reference": "a49260166405408dd373272d4702a79f8b95f497",
                 "shasum": ""
             },
             "require": {
@@ -7875,7 +7874,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-02-03T08:35:59+00:00"
+            "time": "2026-02-06T08:33:15+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -7936,12 +7935,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "cbc3baf923944dbb6d3debcdca12149c10d7eb40"
+                "reference": "b015312f28dd75b75d3422ca37dff2cd1a565e8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/cbc3baf923944dbb6d3debcdca12149c10d7eb40",
-                "reference": "cbc3baf923944dbb6d3debcdca12149c10d7eb40",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/b015312f28dd75b75d3422ca37dff2cd1a565e8d",
+                "reference": "b015312f28dd75b75d3422ca37dff2cd1a565e8d",
                 "shasum": ""
             },
             "require": {
@@ -7997,7 +7996,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/12.5"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/12.5.3"
             },
             "funding": [
                 {
@@ -8017,7 +8016,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-31T14:20:37+00:00"
+            "time": "2026-02-06T06:01:44+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -8318,12 +8317,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "7ac473dfe571a894480a2a6269998816088496da"
+                "reference": "fdccb2d35addd0dbdb4eb24caa442c100ae1ebee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7ac473dfe571a894480a2a6269998816088496da",
-                "reference": "7ac473dfe571a894480a2a6269998816088496da",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fdccb2d35addd0dbdb4eb24caa442c100ae1ebee",
+                "reference": "fdccb2d35addd0dbdb4eb24caa442c100ae1ebee",
                 "shasum": ""
             },
             "require": {
@@ -8337,7 +8336,7 @@
                 "phar-io/manifest": "^2.0.4",
                 "phar-io/version": "^3.2.1",
                 "php": ">=8.3",
-                "phpunit/php-code-coverage": "^12.5.2",
+                "phpunit/php-code-coverage": "^12.5.3",
                 "phpunit/php-file-iterator": "^6.0.1",
                 "phpunit/php-invoker": "^6.0.0",
                 "phpunit/php-text-template": "^5.0.0",
@@ -8416,7 +8415,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-02-03T05:40:01+00:00"
+            "time": "2026-02-08T08:36:26+00:00"
         },
         {
             "name": "psr/event-dispatcher",
