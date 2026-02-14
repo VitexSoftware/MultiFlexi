@@ -20,8 +20,13 @@ require_once './init.php';
 WebPage::singleton()->onlyForLogged();
 
 $credId = WebPage::getRequestValue('id', 'int');
+$credTypeId = WebPage::getRequestValue('credential_type_id', 'int');
 
 $kredenc = new \MultiFlexi\Credential($credId);
+
+if ($credTypeId && null === $kredenc->getCredentialType()) {
+    $kredenc->setCredentialType(new \MultiFlexi\CredentialType($credTypeId));
+}
 
 $delete = WebPage::getRequestValue('delete', 'int');
 

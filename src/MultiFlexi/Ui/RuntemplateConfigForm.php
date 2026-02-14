@@ -76,7 +76,7 @@ CSS);
                 if (\Ease\Euri::isValid($runTemplateFieldSource)) {
                     $credential = \Ease\Euri::toObject($runTemplateFieldSource);
 
-                    if ($credential && (\Ease\Functions::baseClassName($credential) === 'Credential')) {
+                    if ($credential && (\Ease\Euri::getClass($runTemplateFieldSource) === 'MultiFlexi\\Credential')) {
                         $credentialType = $credential->getCredentialType();
 
                         $credentialLink = new \Ease\Html\ATag('credential.php?id='.$credential->getMyKey(), new \Ease\Html\SmallTag($credential->getRecordName()));

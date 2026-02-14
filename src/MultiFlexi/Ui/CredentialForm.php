@@ -46,7 +46,7 @@ class CredentialForm extends SecureForm
     {
         $this->kredenc = $kredenc;
         $formContents = [];
-        $formTypeId = $kredenc->getDataValue('credential_type_id');
+        $formTypeId = (int) $kredenc->getDataValue('credential_type_id');
 
         $credentialTypeSelect = null; // Ensure variable is always defined
 
