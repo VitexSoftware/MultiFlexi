@@ -35,7 +35,7 @@ if (null === $runTemplate->getMyKey()) {
     $when = WebPage::getRequestValue('when');
 
     if (WebPage::isPosted() || $when === 'now') {
-        $uploadEnv = new \MultiFlexi\ConfigFields(_('Upload'));
+        $uploadEnv = new \MultiFlexi\ConfigFields('');
         $uploadedFiles = [];
         $allFieldsFilled = true;
 
@@ -81,7 +81,6 @@ if (null === $runTemplate->getMyKey()) {
                         'ref' => $ref,
                         'name' => $file['name'],
                     ];
-                    // $fileStore->storeFileForJob($field, $file['tmp_name'], $file['name'], $jobber); // Uncomment if FileStore is available
                 }
             }
         }
@@ -106,9 +105,9 @@ if (null === $runTemplate->getMyKey()) {
         if ($allFieldsFilled) {
             $prepared = $jobber->prepareJob($runTemplate, $uploadEnv, new \DateTime($when), \Ease\WebPage::getRequestValue('executor'), 'adhoc');
             // Store files for job if needed (simulate)
-            // foreach ($uploadEnv as $field => $file) {
-            //     $fileStore->storeFileForJob($field, $file->getValue(), $file->getHint(), $jobber);
-            // }
+             foreach ($uploadEnv as $field => $file) {
+                 $fileStore->storeFileForJob($field, $file->getValue(), $file->getHint(), $jobber);
+             }
 
             // ...existing code for job scheduling and polling...
             $glassHourRow = new \Ease\TWB4\Row();

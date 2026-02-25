@@ -74,10 +74,31 @@ $cfgs = new \Ease\Html\UlTag();
 
 foreach ($conffields->appConfigs($appId) as $configInfo) {
     $cnfRow = new Row();
-    $cnfRow->addColumn(2, $configInfo['type']);
-    $cnfRow->addColumn(4, new ATag('conffield.php?app_id='.$appId.'&id='.$configInfo['id'], new \Ease\TWB4\Badge('success', $configInfo['keyname'])));
-    $cnfRow->addColumn(4, $configInfo['description']);
-    $cnfRow->addColumn(2, new \Ease\TWB4\LinkButton('?app_id='.$appId.'&delete='.$configInfo['id'], 'X', 'danger btn-sm'));
+    $cnfRow->addColumn(1, $configInfo['type']);
+    $cnfRow->addColumn(3, new ATag('conffield.php?app_id='.$appId.'&id='.$configInfo['id'], new \Ease\TWB4\Badge('success', $configInfo['keyname'])));
+    $cnfRow->addColumn(2, !empty($configInfo['name']) ? $configInfo['name'] : '');
+    $cnfRow->addColumn(3, $configInfo['description']);
+
+    $flags = new \Ease\Html\SpanTag();
+
+    if (!empty($configInfo['required'])) {
+        $flags->addItem(new \Ease\TWB4\Badge('warning', _('required')));
+    }
+
+    if (!empty($configInfo['secret'])) {
+        $flags->addItem(new \Ease\TWB4\Badge('dark', _('secret')));
+    }
+
+    if (!empty($configInfo['multiline'])) {
+        $flags->addItem(new \Ease\TWB4\Badge('info', _('multiline')));
+    }
+
+    if (!empty($configInfo['expiring'])) {
+        $flags->addItem(new \Ease\TWB4\Badge('danger', _('expiring')));
+    }
+
+    $cnfRow->addColumn(2, $flags);
+    $cnfRow->addColumn(1, new \Ease\TWB4\LinkButton('?app_id='.$appId.'&delete='.$configInfo['id'], 'X', 'danger btn-sm'));
     $cfgs->addItemSmart($cnfRow);
 }
 

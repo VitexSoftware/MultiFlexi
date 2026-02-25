@@ -49,6 +49,12 @@ class RuntemplateConfigForm extends EngineForm
             .runtemplate-config-form label { font-size: 0.9rem; margin-bottom: 0.2rem; display: block; }
             .runtemplate-config-form .form-control-sm { height: calc(1.5em + 0.5rem + 2px); padding: 0.25rem 0.5rem; font-size: 0.875rem; }
             .required-field { border-left: 3px solid #dc3545 !important; }
+            .secret-field { border-left: 3px solid #343a40 !important; }
+            .expiring-field { border-left: 3px solid #ffc107 !important; }
+            .required-field.secret-field { border-left: 3px solid #dc3545 !important; border-right: 3px solid #343a40 !important; }
+            .required-field.expiring-field { border-left: 3px solid #dc3545 !important; border-right: 3px solid #ffc107 !important; }
+            .field-flags { display: inline; margin-left: 0.4rem; }
+            .field-flags .badge { font-size: 0.7rem; margin-left: 0.15rem; vertical-align: middle; }
 CSS);
         $this->addTagClass('runtemplate-config-form');
 
@@ -57,13 +63,15 @@ CSS);
         $appFields = \MultiFlexi\Conffield::getAppConfigs($engine->getApplication());
         $runTemplateFields = $engine->getEnvironment();
 
-        $appFields->addFields($customized);
+        $appFields->takeValues($customized);
 
         foreach ($appFields as $fieldName => $field) {
             $inputCaption = new \Ease\Html\StrongTag($fieldName);
 
             if ($field->getType() === 'bool') {
                 $input = new \Ease\Html\DivTag(new \Ease\TWB4\Widgets\Toggle($fieldName, $field->getValue() === 'true' ? true : false, 'true', ['data-size' => 'small']));
+            } elseif ($field->isMultiLine()) {
+                $input = new \Ease\Html\TextareaTag($fieldName, $field->getValue(), ['class' => 'form-control form-control-sm', 'rows' => 4]);
             } else {
                 $input = new \Ease\Html\InputTag($fieldName, $field->getValue(), ['type' => $field->getType(), 'class' => 'form-control form-control-sm']);
             }
@@ -98,21 +106,36 @@ CSS);
                 $formGroup = $this->addInput($input, $fieldName, $field->getDefaultValue(), $field->getDescription());
             }
 
-            if ($field->isRequired()) {
-                $formGroup->addTagClass('required-field');
-            }
+            $flags = new \Ease\Html\SpanTag(null, ['class' => 'field-flags']);
 
             if ($field->isRequired()) {
                 $formGroup->addTagClass('required-field');
+                $flags->addItem(new \Ease\TWB4\Badge('danger', _('required')));
             }
 
-            //            if ($field->isRequired()) {
-            //                $formGroup->addTagClass('bg-danger');
-            //            }
-            //
-            //            if ($field->getSource()) {
-            //                $formGroup->addTagClass('bg-info');
-            //            }
+            if ($field->isSecret()) {
+                $formGroup->addTagClass('secret-field');
+                $flags->addItem(new \Ease\TWB4\Badge('dark', '🔒 ' . _('secret')));
+            }
+
+            if ($field->isExpiring()) {
+                $formGroup->addTagClass('expiring-field');
+                $flags->addItem(new \Ease\TWB4\Badge('warning', '⏳ ' . _('expiring')));
+            }
+
+            if ($field->isMultiLine()) {
+                $flags->addItem(new \Ease\TWB4\Badge('info', _('multiline')));
+            }
+
+            if (!empty($flags->pageParts)) {
+                $formGroup->addItem($flags);
+            }
+
+            $hint = $field->getHint();
+
+            if (!empty($hint)) {
+                $formGroup->addItem(new \Ease\Html\SmallTag($hint, ['class' => 'form-text text-muted']));
+            }
         }
 
         // $this->addItem( new RuntemplateTopicsChooser('topics', $engine)); //TODO
