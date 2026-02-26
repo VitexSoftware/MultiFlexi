@@ -50,20 +50,6 @@ MultiFlexi features a layered architecture with:
 
 ## Environment Variables
 
-MultiFlexi automatically configures environment variables for executed applications:
-
-**AbraFlexi Integration:**
-- `ABRAFLEXI_URL`
-- `ABRAFLEXI_LOGIN`
-- `ABRAFLEXI_PASSWORD`
-- `ABRAFLEXI_COMPANY`
-
-**Pohoda Integration:**
-- `POHODA_ICO`
-- `POHODA_URL`
-- `POHODA_USERNAME`
-- `POHODA_PASSWORD`
-
 **Privacy & Analytics:**
 - `ENABLE_GOOGLE_ANALYTICS` - Enable/disable Google Analytics (default: false for European self-hosting)
 

@@ -132,6 +132,7 @@ Logs are essential for monitoring and troubleshooting.
 - **Zabbix**: Real-time error trapping (if configured).
 
 .. tip::
+
     To watch logs in real-time via CLI:
     
     .. code-block:: bash
