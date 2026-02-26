@@ -81,6 +81,7 @@ class MainMenu extends \Ease\Html\DivTag
                 $this->appsMenuEnabled($nav, $apps);
             }
 
+            $this->eventsMenuEnabled($nav);
             $this->adminMenuEnabled($nav);
             // $nav->addMenuItem(new \Ease\Html\ATag('logs.php', '<img height=30 src=images/log.svg> ' . _('Logs')), 'right');
 
@@ -141,6 +142,22 @@ class MainMenu extends \Ease\Html\DivTag
             '<img width=30 src=images/apps.svg> '._('Applications'),
             $appsMenu,
         );
+    }
+
+    /**
+     * Events menu.
+     *
+     * @param \Ease\Html\NavTag $nav
+     */
+    public function eventsMenuEnabled($nav): void
+    {
+        $eventsMenu = [
+            'eventsource.php' => '📡 '._('New Event Source'),
+            'eventsources.php' => '📡 '._('Event Sources'),
+            'eventrule.php' => '📏 '._('New Event Rule'),
+            'eventrules.php' => '📏 '._('Event Rules'),
+        ];
+        $nav->addDropDownMenu('⚡ '._('Events'), $eventsMenu);
     }
 
     /**
