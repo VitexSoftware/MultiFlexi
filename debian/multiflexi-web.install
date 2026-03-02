@@ -21,7 +21,6 @@ src/MultiFlexi/GDPR                       usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Notifications              usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Security                   usr/lib/multiflexi/MultiFlexi/
 src/MultiFlexi/Ui                         usr/lib/multiflexi/MultiFlexi/
-src/MultiFlexi/Ui/CredentialType          usr/lib/multiflexi/MultiFlexi/Ui/
 src/MultiFlexi/Ui/Action                  usr/lib/multiflexi/MultiFlexi/Ui/
 
 debian/conf/multiflexi.conf    		      etc/apache2/conf-available
