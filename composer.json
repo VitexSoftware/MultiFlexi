@@ -33,7 +33,12 @@
         "cboden/ratchet": "^0.5",
         "textalk/websocket": "dev-master",
         "open-telemetry/sdk": "^1.0",
-        "open-telemetry/exporter-otlp": "^1.0"
+        "open-telemetry/exporter-otlp": "^1.0",
+        "vitexsoftware/multiflexi-abraflexi": "dev-main",
+        "vitexsoftware/multiflexi-vaultwarden": "dev-main",
+        "vitexsoftware/multiflexi-database-connection": "dev-main",
+        "vitexsoftware/multiflexi-mail": "dev-main",
+        "vitexsoftware/multiflexi-raiffeisenbank": "dev-main"
     },
     "license": "MIT",
     "authors": [

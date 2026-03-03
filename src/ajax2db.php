@@ -25,7 +25,7 @@ declare(strict_types=1);
  * MultiFlexi - DataTable feeder.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * @copyright  2020-2026 Vitex Software
  */
 
 namespace MultiFlexi\Ui;
@@ -92,6 +92,7 @@ $allowedClasses = [
     \MultiFlexi\ScheduleLister::class,
     \MultiFlexi\Logger::class,
     \MultiFlexi\Customer::class,
+    \MultiFlexi\EventSourceLister::class
 ];
 
 if (!\in_array($class, $allowedClasses, true)) {

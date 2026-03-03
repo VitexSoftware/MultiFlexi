@@ -22,9 +22,6 @@
       "name": "Vítězslav Dvořák",
       "email": "info@vitexsoftware.cz"
     }
-  ],
-  "config": {
-    "vendor-dir": "/var/lib/composer/multiflexi"
   },
   "minimum-stability": "dev",
   "autoload": {
