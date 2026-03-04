@@ -32,7 +32,12 @@ $companyEnver = new \MultiFlexi\CompanyEnv($companies);
 
 if (WebPage::singleton()->isPosted()) {
     if (\array_key_exists('env', $_POST)) {
-        $companyEnver->addEnv($_POST['env']['newkey'], $_POST['env']['newvalue']);
+        if (!empty($_POST['env']['newkey']) && !empty($_POST['env']['newvalue'])) {
+            $companyEnver->addEnv($_POST['env']['newkey'], $_POST['env']['newvalue']);
+            $companies->addStatusMessage(_('Environment variable added'), 'success');
+        }
+        // Redirect to prevent form resubmission and CSRF token reuse
+        WebPage::singleton()->redirect('?id='.$companies->getMyKey());
     } else {
         if ($companies->takeData($_POST)) {
             /* try to save company or cath error */
@@ -71,8 +76,7 @@ $instanceRow = new Row();
 $instanceRow->addColumn(4, new CompanyEditorForm($companies, '', ['action' => 'companysetup.php']));
 // $instanceRow->addColumn(4, new ui\AbraFlexiInstanceStatus($companies));
 
-$rightColumn[] = new EnvironmentEditor($companyEnver);
-$instanceRow->addColumn(8, $rightColumn);
+$instanceRow->addColumn(8, new EnvironmentEditor($companyEnver));
 WebPage::singleton()->container->addItem(new CompanyPanel($companies, $instanceRow, $companies->getMyKey() ? new \Ease\TWB4\LinkButton('companydelete.php?id='.$companies->getMyKey(), '☠️&nbsp;'._('Delete company'), 'danger') : ''));
 
 WebPage::singleton()->addItem(new PageBottom());

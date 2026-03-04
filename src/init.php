@@ -201,6 +201,11 @@ Shared::user(null, '\MultiFlexi\User');
 $oPage = new WebPage('');
 WebPage::singleton($oPage);
 
+// Add CSRF JavaScript protection to all pages
+if (isset($GLOBALS['csrfProtection']) && Shared::cfg('CSRF_PROTECTION_ENABLED', true)) {
+    $oPage->addJavaScript($GLOBALS['csrfProtection']->generateJavaScript(), null, true);
+}
+
 // Add consent banner JavaScript to pages (except API endpoints)
 $currentScript = basename($_SERVER['SCRIPT_NAME']);
 

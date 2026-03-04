@@ -61,7 +61,12 @@ class SecureForm extends \Ease\TWB4\Form
         if (isset($GLOBALS['csrfProtection'])) {
             $csrfProtection = $GLOBALS['csrfProtection'];
             $token = $csrfProtection->generateToken();
-            $this->addItem(new InputHiddenTag('csrf_token', $token));
+
+            if (isset($this->formDiv)) {
+                $this->addItem(new InputHiddenTag('csrf_token', $token));
+            } else {
+                parent::addItem(new InputHiddenTag('csrf_token', $token));
+            }
         }
     }
 }
