@@ -16,20 +16,20 @@ export DB_PASSWORD = dummy
 
 override_dh_auto_build:
 	# Generate custom Debian autoloader for application
-	cat > debian/autoload.php <<'AUTOLOADER'
-<?php
-// Debian autoloader for multiflexi
-// Load dependency autoloaders
-require_once '/usr/share/php/MultiFlexi/autoload.php';
-require_once '/usr/share/php/Ease/autoload.php';
-require_once '/usr/share/php/EaseTWB4/autoload.php';
-require_once '/usr/share/php/EaseFluentPDO/autoload.php';
-require_once '/usr/share/php/EaseTWB4Widgets/autoload.php';
-require_once '/usr/share/php/EaseHtmlWidgets/autoload.php';
-
-// Note: Application classes are in /usr/lib/multiflexi/MultiFlexi/
-// and are already loaded by the MultiFlexi core autoloader
-AUTOLOADER
+	cat > debian/autoload.php <<-'AUTOLOADER'
+	<?php
+	// Debian autoloader for multiflexi
+	// Load dependency autoloaders
+	require_once '/usr/share/php/MultiFlexi/autoload.php';
+	require_once '/usr/share/php/Ease/autoload.php';
+	require_once '/usr/share/php/EaseTWB4/autoload.php';
+	require_once '/usr/share/php/EaseFluentPDO/autoload.php';
+	require_once '/usr/share/php/EaseTWB4Widgets/autoload.php';
+	require_once '/usr/share/php/EaseHtmlWidgets/autoload.php';
+	
+	// Note: Application classes are in /usr/lib/multiflexi/MultiFlexi/
+	// and are already loaded by the MultiFlexi core autoloader
+	AUTOLOADER
 
 #override_dh_auto_build:
 #	dh_auto_build
