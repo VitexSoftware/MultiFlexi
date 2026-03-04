@@ -12,7 +12,7 @@ export DB_USERNAME = dummy
 export DB_PASSWORD = dummy
 
 %:
-	dh $@ --with phpcomposer
+	dh $@
 
 override_dh_auto_build:
 	# Generate custom Debian autoloader for application
