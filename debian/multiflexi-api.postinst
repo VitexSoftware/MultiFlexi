@@ -4,23 +4,9 @@ set -e
 
 . /usr/share/debconf/confmodule
 
+# Autoloading is handled by the static Debian autoloader at
+# /usr/share/php/multiflexi/autoload.php — no composer manipulation needed.
 
-if [ "$1" = "configure" ] ; then
-    # Add repository to the repositories section
-    jq '.repositories += [{
-        "type": "path",
-        "url": "/usr/share/php/MultiFlexiApi/"
-    }]' /usr/lib/multiflexi/composer.json > /usr/lib/multiflexi/composer.json.tmp
-    mv /usr/lib/multiflexi/composer.json.tmp /usr/lib/multiflexi/composer.json
+#DEBHELPER#
 
-    # Add require deb/multiflexi-api in any version
-    jq '.require += {
-        "deb/multiflexi-api": "*",
-    }' /usr/lib/multiflexi/composer.json > /usr/lib/multiflexi/composer.json.tmp
-    mv /usr/lib/multiflexi/composer.json.tmp /usr/lib/multiflexi/composer.json
-
-    # Provide ybelenko/slim-token-authentication with slim4 branch
-    jq '.repositories += [{"type":"vcs","url": "https://github.com/ybelenko/slim-token-authentication","no-api": true}]' /usr/lib/multiflexi/composer.json > /usr/lib/multiflexi/composer.json.tmp
-    mv /usr/lib/multiflexi/composer.json.tmp /usr/lib/multiflexi/composer.json
-
-fi
+exit 0

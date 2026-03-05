@@ -71,6 +71,46 @@ The project uses a dual-path system for JavaScript and CSS files:
 - **Keep relative paths** in development - automation handles production conversion
 - **Don't modify** paths for production manually
 
+## 📦 Debian Packaging Rules
+
+### Makefile / debian/rules
+- **Never use heredocs** (`<<EOF`) in `debian/rules` — `make` executes each recipe line in a separate shell, so multi-line heredocs break silently
+- **Static files** belong in `debian/` as plain files, installed via `dh_install` or `install -D` — never generate them dynamically in the build
+- **Line continuations**: Use backslash (`\`) to join multi-line shell commands in Makefile recipes
+- **Tabs required**: All Makefile recipe lines must start with a tab character, not spaces
+
+### Debian PHP Autoloader System
+This project uses the standard Debian PHP autoloader system — **NOT** Composer at install time.
+
+#### Key Principles
+- **NO** `/var/lib/composer/<package>/autoload.php` — that path is deprecated
+- **NO** `composer install`, `composer update`, or `composer dump-autoload` in postinst scripts
+- **NO** `jq` manipulation of `composer.json` for adding runtime repositories/requires
+- **Use** static `debian/autoload.php` with `spl_autoload_register` and `require_once` for deps
+- **Use** `dh $@ --with phpcomposer` in `debian/rules` for substvar generation
+- **Use** `pkg-php-tools` for autoloader registration
+
+#### Autoloader Architecture
+- **Static autoloader**: `debian/autoload.php` → installed to `/usr/share/php/multiflexi/autoload.php`
+- **Core library**: Loaded via `require_once '/usr/share/php/MultiFlexi/autoload.php'` (from `php-vitexsoftware-multiflexi-core`)
+- **Ease deps**: Loaded via `require_once '/usr/share/php/EaseHtml/autoload.php'` etc.
+- **Web classes**: PSR-4 `spl_autoload_register` mapping `MultiFlexi\\` → `/usr/lib/multiflexi-web/MultiFlexi/`
+- **Registration**: `usr/share/pkg-php-tools/autoloaders/multiflexi-web` file
+
+#### Path Mapping (Development → Production)
+| Development | Production (Debian) |
+|---|---|
+| `../vendor/autoload.php` | `/usr/share/php/multiflexi/autoload.php` |
+| `../.env` | `/etc/multiflexi/multiflexi.env` |
+| `composer.json` | `/usr/lib/multiflexi-web/composer.json` |
+| `src/MultiFlexi/*.php` | `/usr/lib/multiflexi-web/MultiFlexi/*.php` |
+| `src/*.php` | `/usr/share/multiflexi/*.php` |
+
+#### ⚠️ Important Rules
+- Path conversion is handled by `sed` rules in `debian/rules` `override_dh_install` target
+- Never reference `/var/lib/composer/` anywhere in new code or packaging
+- The `debian/conf/composer.json` is only used for version injection, not for autoloading
+
 ## 🔧 Development Workflow
 
 ### Mandatory PHP Validation
