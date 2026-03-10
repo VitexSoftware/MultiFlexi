@@ -446,6 +446,27 @@ Each widget is a self-contained class that:
 - Status badges with visual indicators (Running, Pending, Success, Failed)
 - Formatted timestamps
 
+### JobChart Widget
+
+`JobChart` (`src/MultiFlexi/Ui/JobChart.php`) is the base class for all stacked bar charts showing job execution history.
+It is extended by `CompanyJobChart`, `AllJobsLastMonthChart`, `AppLastMonthChart`, `CompanyAppJobsLastMonthChart`, and `RunTemplateJobsLastMonthChart`.
+
+**Key behaviour:**
+
+- **Always 30 columns** — the chart pre-populates every day in the last 30-day window (today − 29 days through today) with zero counts before querying the database. Days without any jobs produce a zero-height column so gaps in activity are clearly visible on the x-axis.
+- **DB query filtered to 30 days** — `getJobs()` adds `WHERE begin >= 'YYYY-MM-DD'` (midnight of 29 days ago) so the query never loads older data unnecessarily.
+- **HTML legend beside the chart** — the built-in SVGGraph legend is disabled (`legend_type = none`). A Bootstrap flex column containing coloured HTML swatches is rendered to the right of the SVG. This prevents the legend from overlapping the first bar columns.
+
+**Legend colours (pastel):**
+- `#B3E5FC` — waiting (light blue)
+- `#FFCDD2` — fail (light red)
+- `#C8E6C9` — success (light green)
+- `#E0E0E0` — exception (light grey)
+
+**Date calculation:** uses `DateTimeImmutable('today')` for DST-safe arithmetic instead of `strtotime`.
+
+**Code location:** `src/MultiFlexi/Ui/JobChart.php`
+
 ### Activation Wizard
 
 The Activation Wizard (`src/activation-wizard.php`) provides a guided 7-step process for activating applications in companies:

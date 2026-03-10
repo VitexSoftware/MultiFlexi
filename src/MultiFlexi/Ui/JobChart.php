@@ -32,6 +32,14 @@ class JobChart extends \Ease\Html\DivTag
         $allJobs = $this->getJobs()->fetchAll();
         $days = [];
 
+        // Pre-populate all 30 days so days without jobs show as empty columns
+        $today = new \DateTimeImmutable('today');
+
+        for ($i = 29; $i >= 0; --$i) {
+            $date = $today->modify("-{$i} days")->format('Y-m-d');
+            $days[$date] = ['success' => 0, 'waiting' => 0, 'fail' => 0, 'exception' => 0];
+        }
+
         foreach ($allJobs as $job) {
             if (empty($job['begin'])) {
                 continue;
@@ -61,8 +69,9 @@ class JobChart extends \Ease\Html\DivTag
                     break;
             }
 
+            // Skip jobs outside the 30-day window
             if (\array_key_exists($date, $days) === false) {
-                $days[$date] = ['success' => 0, 'waiting' => 0, 'fail' => 0, 'exception' => 0];
+                continue;
             }
 
             ++$days[$date][$state];
@@ -82,20 +91,21 @@ class JobChart extends \Ease\Html\DivTag
             ];
         }
 
+        // Legend colours matching the graph (same order: waiting, fail, success, exception)
+        $legendItems = [
+            ['color' => '#B3E5FC', 'label' => _('waiting')],
+            ['color' => '#FFCDD2', 'label' => _('fail')],
+            ['color' => '#C8E6C9', 'label' => _('success')],
+            ['color' => '#E0E0E0', 'label' => _('exception')],
+        ];
+
         $settings = [
             'auto_fit' => true,
             'graph_title' => _('Last 30 Days jobs'),
             'back_stroke_width' => 0,
             'back_stroke_colour' => '#eee',
             'structured_data' => true,
-            'legend_draggable' => false,
-            'legend_text_side' => 'left',
-            'legend_font_size' => 6,
-            'legend_entry_height' => 10,
-            'legend_title' => _('Legend'),
-            'legend_entries' => [_('waiting'), _('fail'), _('success'), _('exception')],
-            'legend_position' => 'bottom left 3 -3',
-            'legend_autohide' => true,
+            'legend_type' => 'none',
             'data_label_popfront' => true,
             'link_base' => './',
             'link_target' => '_top',
@@ -140,7 +150,26 @@ class JobChart extends \Ease\Html\DivTag
         $graph->colours($colours);
         $graph->links($links);
 
-        parent::__construct($graph->fetch('StackedBarGraph', false), $properties);
+        // Build HTML legend to display beside the chart
+        $legendHtml = '';
+
+        foreach ($legendItems as $item) {
+            $legendHtml .= sprintf(
+                '<div class="d-flex align-items-center mb-1">'.
+                '<span style="display:inline-block;width:14px;height:14px;background:%s;border:1px solid #aaa;border-radius:2px;margin-right:6px;flex-shrink:0"></span>'.
+                '<small class="text-muted">%s</small>'.
+                '</div>',
+                $item['color'],
+                htmlspecialchars($item['label']),
+            );
+        }
+
+        $wrapper = '<div class="d-flex align-items-stretch w-100">'
+            . '<div class="flex-grow-1" style="min-width:0">' . $graph->fetch('StackedBarGraph', false) . '</div>'
+            . '<div class="ps-2 ms-1 d-flex flex-column justify-content-center border-start" style="min-width:85px">' . $legendHtml . '</div>'
+            . '</div>';
+
+        parent::__construct($wrapper, $properties);
     }
 
     /**
@@ -148,6 +177,8 @@ class JobChart extends \Ease\Html\DivTag
      */
     public function getJobs()
     {
-        return $this->engine->getFluentPDO(true)->from('job')->select(['begin', 'exitcode'], true)->order('begin');
+        $since = (new \DateTimeImmutable('today'))->modify('-29 days')->format('Y-m-d');
+
+        return $this->engine->getFluentPDO(true)->from('job')->select(['begin', 'exitcode'], true)->where('begin >= ?', $since)->order('begin');
     }
 }
