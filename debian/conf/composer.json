@@ -22,7 +22,7 @@
       "name": "Vítězslav Dvořák",
       "email": "info@vitexsoftware.cz"
     }
-  },
+  ],
   "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
