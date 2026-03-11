@@ -48,6 +48,7 @@ distributions.each { distro ->
                     buildImage.inside('--ipc=host') {
                         sh 'dch -b -v ' + buildVer  + ' "' + env.BUILD_TAG  + '"'
                         sh 'sudo apt-get update --allow-releaseinfo-change'
+                        sh 'sudo DEBIAN_FRONTEND=noninteractive apt-get -y install pkg-php-tools || true'
                         sh 'sudo chown -R jenkins:jenkins . ..'
                         sh 'sudo rm -rf debian/$(dpkg-parsechangelog --show-field Source)/ debian/.debhelper/ debian/tmp/'
                         sh 'debuild-pbuilder -r"sudo -E" -i -us -uc -b'
@@ -65,6 +66,7 @@ distributions.each { distro ->
                         sh 'cd $WORKSPACE/dist/debian/ ; dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz; cd $WORKSPACE'
                         sh 'echo "deb [trusted=yes] file://///$WORKSPACE/dist/debian/ ./" | sudo tee /etc/apt/sources.list.d/local.list'
                         sh 'sudo apt-get update --allow-releaseinfo-change'
+                        sh 'sudo DEBIAN_FRONTEND=noninteractive apt-get -y install composer-debian multiflexi-sqlite || true'
                         sh 'echo "INSTALATION"'
                         artifacts.each { deb_file ->
                             if (deb_file.endsWith('.deb')) {
