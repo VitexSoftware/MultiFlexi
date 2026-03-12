@@ -17,6 +17,7 @@ require_once '/usr/share/php/EaseHtmlWidgets/autoload.php';
 require_once '/usr/share/php/EaseTWB4/autoload.php';
 require_once '/usr/share/php/EaseTWB4Widgets/autoload.php';
 require_once '/usr/share/php/SvgGraph/autoload.php';
+require_once '/usr/share/php/SensioLabs/AnsiConverter/autoload.php';
 
 
 // PSR-4 autoloader for MultiFlexi web-specific classes
