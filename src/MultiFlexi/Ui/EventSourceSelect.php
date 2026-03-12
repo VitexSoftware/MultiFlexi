@@ -25,9 +25,9 @@ namespace MultiFlexi\Ui;
 class EventSourceSelect extends \Ease\Html\SelectTag
 {
     /**
-     * @param string     $name         HTML form field name
-     * @param int|null   $defaultValue Currently selected event source ID
-     * @param array      $properties   Additional HTML properties
+     * @param string   $name         HTML form field name
+     * @param null|int $defaultValue Currently selected event source ID
+     * @param array    $properties   Additional HTML properties
      */
     public function __construct(string $name, ?int $defaultValue = null, array $properties = [])
     {

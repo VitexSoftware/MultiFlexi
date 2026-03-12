@@ -5791,12 +5791,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "7d571c714fc3950ad85685b9a6be6998769206d3"
+                "reference": "3fd49afe0b7d0faf5ad6cb69c18ff154c15c3222"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/7d571c714fc3950ad85685b9a6be6998769206d3",
-                "reference": "7d571c714fc3950ad85685b9a6be6998769206d3",
+                "url": "https://api.github.com/repos/symfony/process/zipball/3fd49afe0b7d0faf5ad6cb69c18ff154c15c3222",
+                "reference": "3fd49afe0b7d0faf5ad6cb69c18ff154c15c3222",
                 "shasum": ""
             },
             "require": {
@@ -5849,7 +5849,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-01-29T09:42:44+00:00"
+            "time": "2026-03-09T18:17:37+00:00"
         },
         {
             "name": "symfony/routing",
@@ -6487,12 +6487,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-ease-fluentpdo.git",
-                "reference": "9fed9dd34a431d7aa6a0308ec20fc75ea544ed06"
+                "reference": "8dab474c0d55ab43b0534dd84b0b6c197e584e90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-fluentpdo/zipball/9fed9dd34a431d7aa6a0308ec20fc75ea544ed06",
-                "reference": "9fed9dd34a431d7aa6a0308ec20fc75ea544ed06",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-fluentpdo/zipball/8dab474c0d55ab43b0534dd84b0b6c197e584e90",
+                "reference": "8dab474c0d55ab43b0534dd84b0b6c197e584e90",
                 "shasum": ""
             },
             "require": {
@@ -6540,7 +6540,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2026-03-05T13:47:56+00:00"
+            "time": "2026-03-11T17:28:26+00:00"
         },
         {
             "name": "vitexsoftware/ease-html",
@@ -6844,12 +6844,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/multiflexi-abraflexi.git",
-                "reference": "a2652a6a92b8d30bdfa0428f60229289767a7feb"
+                "reference": "1d40364f3a6f6fd77de77027229499ddf8a31b2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/multiflexi-abraflexi/zipball/a2652a6a92b8d30bdfa0428f60229289767a7feb",
-                "reference": "a2652a6a92b8d30bdfa0428f60229289767a7feb",
+                "url": "https://api.github.com/repos/VitexSoftware/multiflexi-abraflexi/zipball/1d40364f3a6f6fd77de77027229499ddf8a31b2c",
+                "reference": "1d40364f3a6f6fd77de77027229499ddf8a31b2c",
                 "shasum": ""
             },
             "require": {
@@ -6885,7 +6885,7 @@
                 "issues": "https://github.com/VitexSoftware/multiflexi-abraflexi/issues",
                 "source": "https://github.com/VitexSoftware/multiflexi-abraflexi/tree/main"
             },
-            "time": "2026-03-02T17:58:34+00:00"
+            "time": "2026-03-11T16:50:29+00:00"
         },
         {
             "name": "vitexsoftware/multiflexi-api-server",
@@ -6893,12 +6893,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/multiflexi-server.git",
-                "reference": "b687e61a21e43bd36dd9fccffb7659d841502a78"
+                "reference": "55429a7e4499e7258c6cb8e54e20525d11ee40f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/multiflexi-server/zipball/b687e61a21e43bd36dd9fccffb7659d841502a78",
-                "reference": "b687e61a21e43bd36dd9fccffb7659d841502a78",
+                "url": "https://api.github.com/repos/VitexSoftware/multiflexi-server/zipball/55429a7e4499e7258c6cb8e54e20525d11ee40f3",
+                "reference": "55429a7e4499e7258c6cb8e54e20525d11ee40f3",
                 "shasum": ""
             },
             "require": {
@@ -6938,7 +6938,7 @@
                 "issues": "https://github.com/VitexSoftware/multiflexi-server/issues",
                 "source": "https://github.com/VitexSoftware/multiflexi-server/tree/main"
             },
-            "time": "2026-03-02T17:54:11+00:00"
+            "time": "2026-03-11T20:20:09+00:00"
         },
         {
             "name": "vitexsoftware/multiflexi-core",
@@ -6946,12 +6946,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core.git",
-                "reference": "a6331356d250e61ef1a7f87f7f8e3462db1eafa4"
+                "reference": "e44d6ea3b3e96bd3cebb1ec48fb02efa32f75623"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/a6331356d250e61ef1a7f87f7f8e3462db1eafa4",
-                "reference": "a6331356d250e61ef1a7f87f7f8e3462db1eafa4",
+                "url": "https://api.github.com/repos/VitexSoftware/php-vitexsoftware-multiflexi-core/zipball/e44d6ea3b3e96bd3cebb1ec48fb02efa32f75623",
+                "reference": "e44d6ea3b3e96bd3cebb1ec48fb02efa32f75623",
                 "shasum": ""
             },
             "require": {
@@ -6996,7 +6996,7 @@
                 "issues": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/issues",
                 "source": "https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core/tree/main"
             },
-            "time": "2026-03-08T11:09:13+00:00"
+            "time": "2026-03-11T17:27:48+00:00"
         },
         {
             "name": "vitexsoftware/multiflexi-database-connection",
@@ -7004,12 +7004,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/multiflexi-database-connection.git",
-                "reference": "7c9d0bf4ce3ee78c4f0937d9aae533cecd13c9e7"
+                "reference": "2a2d721250ece44b78ce9e3ddf996cdfc92de748"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/multiflexi-database-connection/zipball/7c9d0bf4ce3ee78c4f0937d9aae533cecd13c9e7",
-                "reference": "7c9d0bf4ce3ee78c4f0937d9aae533cecd13c9e7",
+                "url": "https://api.github.com/repos/VitexSoftware/multiflexi-database-connection/zipball/2a2d721250ece44b78ce9e3ddf996cdfc92de748",
+                "reference": "2a2d721250ece44b78ce9e3ddf996cdfc92de748",
                 "shasum": ""
             },
             "require": {
@@ -7045,7 +7045,7 @@
                 "issues": "https://github.com/VitexSoftware/multiflexi-database-connection/issues",
                 "source": "https://github.com/VitexSoftware/multiflexi-database-connection/tree/main"
             },
-            "time": "2026-03-02T17:58:40+00:00"
+            "time": "2026-03-11T16:50:27+00:00"
         },
         {
             "name": "vitexsoftware/multiflexi-mail",
@@ -7053,12 +7053,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/multiflexi-mail.git",
-                "reference": "8e429703219ff692fbc45c5ef37d902f691e80b9"
+                "reference": "6da199045fa71fa099d33f3aa885c1c70eb8fec7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/multiflexi-mail/zipball/8e429703219ff692fbc45c5ef37d902f691e80b9",
-                "reference": "8e429703219ff692fbc45c5ef37d902f691e80b9",
+                "url": "https://api.github.com/repos/VitexSoftware/multiflexi-mail/zipball/6da199045fa71fa099d33f3aa885c1c70eb8fec7",
+                "reference": "6da199045fa71fa099d33f3aa885c1c70eb8fec7",
                 "shasum": ""
             },
             "require": {
@@ -7095,7 +7095,7 @@
                 "issues": "https://github.com/VitexSoftware/multiflexi-mail/issues",
                 "source": "https://github.com/VitexSoftware/multiflexi-mail/tree/main"
             },
-            "time": "2026-03-02T18:00:44+00:00"
+            "time": "2026-03-11T16:50:30+00:00"
         },
         {
             "name": "vitexsoftware/multiflexi-raiffeisenbank",
@@ -7103,12 +7103,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/multiflexi-raiffeisenbank.git",
-                "reference": "2c87f3cb8c2077f6d340d407939e538a03c1f8b9"
+                "reference": "368735bb8bc9bea5594345eaf525342e94c7ed1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/multiflexi-raiffeisenbank/zipball/2c87f3cb8c2077f6d340d407939e538a03c1f8b9",
-                "reference": "2c87f3cb8c2077f6d340d407939e538a03c1f8b9",
+                "url": "https://api.github.com/repos/VitexSoftware/multiflexi-raiffeisenbank/zipball/368735bb8bc9bea5594345eaf525342e94c7ed1a",
+                "reference": "368735bb8bc9bea5594345eaf525342e94c7ed1a",
                 "shasum": ""
             },
             "require": {
@@ -7144,7 +7144,7 @@
                 "issues": "https://github.com/VitexSoftware/multiflexi-raiffeisenbank/issues",
                 "source": "https://github.com/VitexSoftware/multiflexi-raiffeisenbank/tree/main"
             },
-            "time": "2026-03-02T17:58:53+00:00"
+            "time": "2026-03-11T16:51:16+00:00"
         },
         {
             "name": "vitexsoftware/multiflexi-vaultwarden",
@@ -7152,12 +7152,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/multiflexi-vaultwarden.git",
-                "reference": "2d73afc66140bd92a5b4a38151b7885cd29cd5c6"
+                "reference": "7937cb9ab002f55577215c7e28eb5bcf42fb3e19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/multiflexi-vaultwarden/zipball/2d73afc66140bd92a5b4a38151b7885cd29cd5c6",
-                "reference": "2d73afc66140bd92a5b4a38151b7885cd29cd5c6",
+                "url": "https://api.github.com/repos/VitexSoftware/multiflexi-vaultwarden/zipball/7937cb9ab002f55577215c7e28eb5bcf42fb3e19",
+                "reference": "7937cb9ab002f55577215c7e28eb5bcf42fb3e19",
                 "shasum": ""
             },
             "require": {
@@ -7194,7 +7194,7 @@
                 "issues": "https://github.com/VitexSoftware/multiflexi-vaultwarden/issues",
                 "source": "https://github.com/VitexSoftware/multiflexi-vaultwarden/tree/main"
             },
-            "time": "2026-03-02T17:58:59+00:00"
+            "time": "2026-03-11T16:51:14+00:00"
         },
         {
             "name": "ybelenko/openapi-data-mocker",
@@ -8044,23 +8044,23 @@
         },
         {
             "name": "ergebnis/php-cs-fixer-config",
-            "version": "6.60.1",
+            "version": "6.60.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/php-cs-fixer-config.git",
-                "reference": "d6957cdb6f6b365dcdcbc271e75739c194db5dc5"
+                "reference": "ca7a85e4b2123d11f3b7deabc18e64bd377fc75c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/php-cs-fixer-config/zipball/d6957cdb6f6b365dcdcbc271e75739c194db5dc5",
-                "reference": "d6957cdb6f6b365dcdcbc271e75739c194db5dc5",
+                "url": "https://api.github.com/repos/ergebnis/php-cs-fixer-config/zipball/ca7a85e4b2123d11f3b7deabc18e64bd377fc75c",
+                "reference": "ca7a85e4b2123d11f3b7deabc18e64bd377fc75c",
                 "shasum": ""
             },
             "require": {
                 "erickskrauch/php-cs-fixer-custom-fixers": "~1.3.1",
                 "ext-filter": "*",
                 "friendsofphp/php-cs-fixer": "~3.94.2",
-                "kubawerlos/php-cs-fixer-custom-fixers": "~3.36.0",
+                "kubawerlos/php-cs-fixer-custom-fixers": "~3.36.1",
                 "php": "~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0"
             },
             "require-dev": {
@@ -8068,16 +8068,16 @@
                 "ergebnis/data-provider": "^3.6.0",
                 "ergebnis/license": "^2.7.0",
                 "ergebnis/phpstan-rules": "^2.13.1",
-                "ergebnis/phpunit-slow-test-detector": "^2.22.2",
+                "ergebnis/phpunit-slow-test-detector": "^2.23.0",
                 "ergebnis/rector-rules": "^1.9.0",
                 "fakerphp/faker": "^1.24.1",
                 "phpstan/extension-installer": "^1.4.3",
-                "phpstan/phpstan": "^2.1.37",
+                "phpstan/phpstan": "^2.1.40",
                 "phpstan/phpstan-deprecation-rules": "^2.0.4",
                 "phpstan/phpstan-phpunit": "^2.0.16",
                 "phpstan/phpstan-strict-rules": "^2.0.10",
                 "phpunit/phpunit": "^9.6.33",
-                "rector/rector": "^2.3.7",
+                "rector/rector": "^2.3.8",
                 "symfony/filesystem": "^5.0.0 || ^6.0.0",
                 "symfony/process": "^5.0.0 || ^6.0.0"
             },
@@ -8111,7 +8111,7 @@
                 "security": "https://github.com/ergebnis/php-cs-fixer-config/blob/main/.github/SECURITY.md",
                 "source": "https://github.com/ergebnis/php-cs-fixer-config"
             },
-            "time": "2026-02-21T14:22:00+00:00"
+            "time": "2026-03-09T20:59:51+00:00"
         },
         {
             "name": "erickskrauch/php-cs-fixer-custom-fixers",
@@ -8696,8 +8696,8 @@
             "version": "2.2.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/67951c3b192a95664ca262f80c44f0415008aa21",
-                "reference": "67951c3b192a95664ca262f80c44f0415008aa21",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/fa55dcf528f59f0cd6d7e3ce423af0cec3b9580d",
+                "reference": "fa55dcf528f59f0cd6d7e3ce423af0cec3b9580d",
                 "shasum": ""
             },
             "require": {
@@ -8743,7 +8743,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-08T11:11:16+00:00"
+            "time": "2026-03-12T16:27:41+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -8807,12 +8807,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "2129de0153a3ed3c33d085edb7a40ae9bee277b5"
+                "reference": "0479d14a38402c973f203e85642c7ca741d3f974"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/2129de0153a3ed3c33d085edb7a40ae9bee277b5",
-                "reference": "2129de0153a3ed3c33d085edb7a40ae9bee277b5",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/0479d14a38402c973f203e85642c7ca741d3f974",
+                "reference": "0479d14a38402c973f203e85642c7ca741d3f974",
                 "shasum": ""
             },
             "require": {
@@ -8889,7 +8889,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-03-06T10:09:56+00:00"
+            "time": "2026-03-10T07:37:19+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -9194,12 +9194,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "7d26bdd5d9ae5499ef4191cd79567c550d0b8ca0"
+                "reference": "a9fe6264b749ddc9a226610ed940cade33df7895"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7d26bdd5d9ae5499ef4191cd79567c550d0b8ca0",
-                "reference": "7d26bdd5d9ae5499ef4191cd79567c550d0b8ca0",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a9fe6264b749ddc9a226610ed940cade33df7895",
+                "reference": "a9fe6264b749ddc9a226610ed940cade33df7895",
                 "shasum": ""
             },
             "require": {
@@ -9278,7 +9278,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2026-03-08T09:30:07+00:00"
+            "time": "2026-03-10T08:54:28+00:00"
         },
         {
             "name": "react/child-process",
@@ -9524,12 +9524,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/complexity.git",
-                "reference": "c5651c795c98093480df79350cb050813fc7a2f3"
+                "reference": "729c61bc6d9320adb9f0513627740663f42fd4dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/complexity/zipball/c5651c795c98093480df79350cb050813fc7a2f3",
-                "reference": "c5651c795c98093480df79350cb050813fc7a2f3",
+                "url": "https://api.github.com/repos/sebastianbergmann/complexity/zipball/729c61bc6d9320adb9f0513627740663f42fd4dc",
+                "reference": "729c61bc6d9320adb9f0513627740663f42fd4dc",
                 "shasum": ""
             },
             "require": {
@@ -9567,7 +9567,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/complexity/issues",
                 "security": "https://github.com/sebastianbergmann/complexity/security/policy",
-                "source": "https://github.com/sebastianbergmann/complexity/tree/6.0.0"
+                "source": "https://github.com/sebastianbergmann/complexity/tree/main"
             },
             "funding": [
                 {
@@ -9587,7 +9587,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-02-06T04:41:32+00:00"
+            "time": "2026-03-10T07:05:56+00:00"
         },
         {
             "name": "sebastian/diff",

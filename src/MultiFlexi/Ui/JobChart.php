@@ -165,9 +165,9 @@ class JobChart extends \Ease\Html\DivTag
         }
 
         $wrapper = '<div class="d-flex align-items-stretch w-100">'
-            . '<div class="flex-grow-1" style="min-width:0">' . $graph->fetch('StackedBarGraph', false) . '</div>'
-            . '<div class="ps-2 ms-1 d-flex flex-column justify-content-center border-start" style="min-width:85px">' . $legendHtml . '</div>'
-            . '</div>';
+            .'<div class="flex-grow-1" style="min-width:0">'.$graph->fetch('StackedBarGraph', false).'</div>'
+            .'<div class="ps-2 ms-1 d-flex flex-column justify-content-center border-start" style="min-width:85px">'.$legendHtml.'</div>'
+            .'</div>';
 
         parent::__construct($wrapper, $properties);
     }

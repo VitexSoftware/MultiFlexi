@@ -55,7 +55,7 @@ class EnvironmentEditor extends \Ease\Html\TableTag
                     'data-url' => 'companyenv.php',
                     'data-title' => _('Update Keyname'),
                     'data-emptytext' => _('Empty'),
-                ]
+                ],
             );
             $tableRow->addItem(new \Ease\Html\TdTag($keyInput, ['class' => 'align-middle', 'style' => 'width: 28%']));
 
@@ -64,7 +64,7 @@ class EnvironmentEditor extends \Ease\Html\TableTag
 
             // Mask sensitive values
             if (stristr($field->getCode(), 'pass') || stristr($field->getCode(), 'secret') || stristr($field->getCode(), 'token')) {
-                $displayValue = str_repeat('•', min(12, strlen($displayValue)));
+                $displayValue = str_repeat('•', min(12, \strlen($displayValue)));
             }
 
             $valueInput = new \Ease\Html\ATag(
@@ -77,7 +77,7 @@ class EnvironmentEditor extends \Ease\Html\TableTag
                     'data-url' => 'companyenv.php',
                     'data-title' => _('Update value'),
                     'data-emptytext' => _('Empty'),
-                ]
+                ],
             );
             $tableRow->addItem(new \Ease\Html\TdTag($valueInput, ['class' => 'align-middle']));
 
@@ -89,7 +89,7 @@ class EnvironmentEditor extends \Ease\Html\TableTag
                     'class' => 'btn-env-delete',
                     'data-keyword' => $field->getCode(),
                     'title' => _('Remove').' '.$field->getCode(),
-                ]
+                ],
             );
             $tableRow->addItem(new \Ease\Html\TdTag($deleteBtn, ['class' => 'align-middle text-center', 'style' => 'width: 3em']));
 
@@ -99,54 +99,55 @@ class EnvironmentEditor extends \Ease\Html\TableTag
         // Create modern form for adding new fields
         $newItemForm = new SecureForm(['class' => 'p-3']);
         $formRow = new \Ease\Html\DivTag(null, ['class' => 'row g-2 align-items-end']);
-        
+
         // Keyword input
         $keyCol = new \Ease\Html\DivTag(null, ['class' => 'col-sm-4']);
         $keyCol->addItem(new \Ease\Html\LabelTag('env-newkey', '<i class="fas fa-key me-1"></i>'._('Keyword'), ['class' => 'form-label small text-muted mb-1']));
         $keyCol->addItem(new \Ease\Html\InputTextTag('env[newkey]', '', ['class' => 'form-control', 'id' => 'env-newkey', 'placeholder' => _('Enter keyword')]));
         $formRow->addItem($keyCol);
-        
+
         // Value input
         $valueCol = new \Ease\Html\DivTag(null, ['class' => 'col-sm-5']);
         $valueCol->addItem(new \Ease\Html\LabelTag('env-newvalue', '<i class="fas fa-tag me-1"></i>'._('Value'), ['class' => 'form-label small text-muted mb-1']));
         $valueCol->addItem(new \Ease\Html\InputTextTag('env[newvalue]', '', ['class' => 'form-control', 'id' => 'env-newvalue', 'placeholder' => _('Enter value')]));
         $formRow->addItem($valueCol);
-        
+
         // Submit button
         $btnCol = new \Ease\Html\DivTag(null, ['class' => 'col-sm-3']);
         $btnCol->addItem(new \Ease\Html\SpanTag('&nbsp;', ['class' => 'form-label small d-block mb-1']));
         $btnCol->addItem(new \Ease\TWB4\SubmitButton(
             '<i class="fas fa-plus-circle me-1"></i>'._('Add Field'),
             'success',
-            ['title' => _('Add new environment field'), 'id' => 'addnewenvfieldbutton', 'class' => 'btn-block w-100']
+            ['title' => _('Add new environment field'), 'id' => 'addnewenvfieldbutton', 'class' => 'btn-block w-100'],
         ));
         $formRow->addItem($btnCol);
-        
+
         $newItemForm->addItem($formRow);
 
         // Build footer manually with colspan to span full table width
         $footerRow = $this->getFoot()->addItem(new \Ease\Html\TrTag());
         $footerCell = new \Ease\Html\ThTag(null, ['colspan' => '3', 'class' => 'p-0']);
-        
+
         $footerWrapper = new \Ease\Html\DivTag(null, ['class' => 'bg-light border-top']);
         $footerWrapper->addItem($newItemForm);
         $footerWrapper->addItem(new \Ease\Html\DivTag(
             new \Ease\Html\SmallTag(
                 '<i class="fas fa-database me-1"></i>'.sprintf(_('%s items'), \count($this->fields)),
-                ['class' => 'text-muted']
+                ['class' => 'text-muted'],
             ),
-            ['class' => 'text-end px-3 pb-2']
+            ['class' => 'text-end px-3 pb-2'],
         ));
-        
+
         $footerCell->addItem($footerWrapper);
         $footerRow->addItem($footerCell);
-        
+
         // Include required assets
         $this->includeJavaScript('js/bootstrap-editable.js');
         $this->includeCss('css/bootstrap-editable.css');
-        
+
         // Add custom CSS for modern look
-        $this->addCss(<<<'CSS'
+        $this->addCss(
+            <<<'CSS'
 .environment-editor-table {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     border-radius: 8px;
@@ -206,8 +207,8 @@ class EnvironmentEditor extends \Ease\Html\TableTag
     width: 3em;
 }
 CSS
-);
-        
+        );
+
         // Configure editable with CSRF token
         $csrfToken = '';
 

@@ -91,17 +91,16 @@ CSS);
                                 '</div></div>');
                         } else {
                             $formGroup = $this->addInput(new \Ease\Html\InputFileTag($code), $field->getDescription());
-                            $this->addFieldFlags($formGroup, $field);
+                            self::addFieldFlags($formGroup, $field);
                         }
 
                         break;
-
                     case 'bool':
                         $formGroup = $this->addInput(
                             new \Ease\Html\DivTag(new \Ease\TWB4\Widgets\Toggle($code, false, 'true', ['data-size' => 'small'])),
                             $field->getDescription(),
                         );
-                        $this->addFieldFlags($formGroup, $field);
+                        self::addFieldFlags($formGroup, $field);
 
                         break;
 
@@ -113,7 +112,7 @@ CSS);
                         }
 
                         $formGroup = $this->addInput($input, $field->getDescription());
-                        $this->addFieldFlags($formGroup, $field);
+                        self::addFieldFlags($formGroup, $field);
 
                         break;
                 }
@@ -121,10 +120,17 @@ CSS);
         }
     }
 
+    public function timeSelect(): void
+    {
+        $this->addInput(new \Ease\Html\InputDateTimeLocalTag('when', WebPage::isPosted() ? WebPage::getRequestValue('when') : new \DateTime()), _('Launch after'));
+    }
+
     /**
      * Append flag badges and hint to a form group.
+     *
+     * @param mixed $formGroup
      */
-    private function addFieldFlags($formGroup, \MultiFlexi\ConfigField $field): void
+    private static function addFieldFlags($formGroup, \MultiFlexi\ConfigField $field): void
     {
         $flags = new \Ease\Html\SpanTag(null, ['class' => 'field-flags']);
 
@@ -135,12 +141,12 @@ CSS);
 
         if ($field->isSecret()) {
             $formGroup->addTagClass('secret-field');
-            $flags->addItem(new \Ease\TWB4\Badge('dark', '🔒 ' . _('secret')));
+            $flags->addItem(new \Ease\TWB4\Badge('dark', '🔒 '._('secret')));
         }
 
         if ($field->isExpiring()) {
             $formGroup->addTagClass('expiring-field');
-            $flags->addItem(new \Ease\TWB4\Badge('warning', '⏳ ' . _('expiring')));
+            $flags->addItem(new \Ease\TWB4\Badge('warning', '⏳ '._('expiring')));
         }
 
         if ($field->isMultiLine()) {
@@ -156,10 +162,5 @@ CSS);
         if (!empty($hint)) {
             $formGroup->addItem(new \Ease\Html\SmallTag($hint, ['class' => 'form-text text-muted']));
         }
-    }
-
-    public function timeSelect(): void
-    {
-        $this->addInput(new \Ease\Html\InputDateTimeLocalTag('when', WebPage::isPosted() ? WebPage::getRequestValue('when') : new \DateTime()), _('Launch after'));
     }
 }

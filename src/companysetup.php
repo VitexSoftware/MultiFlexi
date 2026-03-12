@@ -36,6 +36,7 @@ if (WebPage::singleton()->isPosted()) {
             $companyEnver->addEnv($_POST['env']['newkey'], $_POST['env']['newvalue']);
             $companies->addStatusMessage(_('Environment variable added'), 'success');
         }
+
         // Redirect to prevent form resubmission and CSRF token reuse
         WebPage::singleton()->redirect('?id='.$companies->getMyKey());
     } else {

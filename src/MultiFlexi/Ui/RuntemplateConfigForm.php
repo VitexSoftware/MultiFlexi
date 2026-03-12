@@ -84,7 +84,7 @@ CSS);
                 if (\Ease\Euri::isValid($runTemplateFieldSource)) {
                     $credential = \Ease\Euri::toObject($runTemplateFieldSource);
 
-                    if ($credential && (\Ease\Euri::getClass($runTemplateFieldSource) === 'MultiFlexi\\Credential')) {
+                    if ($credential && ($credential::class === 'MultiFlexi\\Credential')) {
                         $credentialType = $credential->getCredentialType();
 
                         $credentialLink = new \Ease\Html\ATag('credential.php?id='.$credential->getMyKey(), new \Ease\Html\SmallTag($credential->getRecordName()));
@@ -115,12 +115,12 @@ CSS);
 
             if ($field->isSecret()) {
                 $formGroup->addTagClass('secret-field');
-                $flags->addItem(new \Ease\TWB4\Badge('dark', '🔒 ' . _('secret')));
+                $flags->addItem(new \Ease\TWB4\Badge('dark', '🔒 '._('secret')));
             }
 
             if ($field->isExpiring()) {
                 $formGroup->addTagClass('expiring-field');
-                $flags->addItem(new \Ease\TWB4\Badge('warning', '⏳ ' . _('expiring')));
+                $flags->addItem(new \Ease\TWB4\Badge('warning', '⏳ '._('expiring')));
             }
 
             if ($field->isMultiLine()) {

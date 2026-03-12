@@ -25,7 +25,7 @@ namespace MultiFlexi\Ui;
 class EventSourceForm extends SecureForm
 {
     /**
-     * @param \MultiFlexi\EventSource $eventSource EventSource object
+     * @param \MultiFlexi\EventSource $eventSource    EventSource object
      * @param array                   $formProperties Additional form properties
      */
     public function __construct(\MultiFlexi\EventSource $eventSource, array $formProperties = [])
