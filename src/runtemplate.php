@@ -39,7 +39,7 @@ if (WebPage::getRequestValue('new', 'int') === 1) {
     $runTemplate->dbsync();
 }
 
-if (WebPage::getRequestValue('delete', 'int') === 2) {
+if (WebPage::getRequestValue('action') === 'delete') {
     $runTemplate->deleteFromSQL();
     WebPage::singleton()->redirect('companyapp.php?company_id='.$runTemplate->getDataValue('company_id').'&app_id='.$runTemplate->getDataValue('app_id'));
 }
