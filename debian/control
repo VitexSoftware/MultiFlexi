@@ -56,31 +56,31 @@ Description: Zabbix support for MultiFlexi
 #Description: MultiFlexi support for RaiffeisenBank
 # RaiffeisenBank connection dialog
 
-Package: multiflexi-web
-Multi-Arch: foreign
-Architecture: all
-Depends: ${misc:Depends},
- multiflexi-common,
- php-vitexsoftware-multiflexi-core,
- php-vitexsoftware-ease-html-widgets (>=1.1.1),
- php-vitexsoftware-ease-bootstrap4-widgets (>=1.7),
- php-goat1000-svggraph,
- php-sensiolabs-ansiconverter,
- libjs-jquery-datatables,
- libjs-jquery-selectize.js,
- libjs-font-awesome,
- php-cli,
- php-mcrypt | php-sodium | php8.1-sodium | php8.2-sodium | php8.3-sodium | php8.4-sodium | libsodium23
-Description: MultiFlexi web interface core components
- Core PHP classes and web interface components for MultiFlexi.
- Contains the main application logic and web interface files including
- dashboard, company management, job management, administrative tools,
- and GDPR-compliant consent management system with cookie policy support.
- Includes GDPR Article 16 compliance features for data rectification,
- user profile management, approval workflows, and comprehensive audit logging.
- GDPR Phase 3 Security Enhancements: comprehensive security audit logging,
- AES-256 data encryption for sensitive information, API rate limiting with
- configurable endpoint protection, and IP whitelisting for administrative access control.
+#Package: multiflexi-web
+#Multi-Arch: foreign
+#Architecture: all
+#Depends: ${misc:Depends},
+# multiflexi-common,
+# php-vitexsoftware-multiflexi-core,
+# php-vitexsoftware-ease-html-widgets (>=1.1.1),
+# php-vitexsoftware-ease-bootstrap4-widgets (>=1.7),
+# php-goat1000-svggraph,
+# php-sensiolabs-ansiconverter,
+# libjs-jquery-datatables,
+# libjs-jquery-selectize.js,
+# libjs-font-awesome,
+# php-cli,
+# php-mcrypt | php-sodium | php8.1-sodium | php8.2-sodium | php8.3-sodium | php8.4-sodium | libsodium23
+#Description: MultiFlexi web interface core components
+# Core PHP classes and web interface components for MultiFlexi.
+# Contains the main application logic and web interface files including
+# dashboard, company management, job management, administrative tools,
+# and GDPR-compliant consent management system with cookie policy support.
+# Includes GDPR Article 16 compliance features for data rectification,
+# user profile management, approval workflows, and comprehensive audit logging.
+# GDPR Phase 3 Security Enhancements: comprehensive security audit logging,
+# AES-256 data encryption for sensitive information, API rate limiting with
+# configurable endpoint protection, and IP whitelisting for administrative access control.
 
 #Package: multiflexi-dev
 #Depends: ${misc:Depends}, multiflexi, jq, php-phpunit-phpunit-mock-objects | phpunit, composer, nodejs, mocha, chai
