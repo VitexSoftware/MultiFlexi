@@ -21,29 +21,3 @@ export DB_PASSWORD = dummy
 #override_dh_auto_install:
 #       dh_auto_install -- prefix=/usr
 
-override_dh_install:
-	mkdir -p debian/tmp/
-	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/conf/composer.json |sponge debian/tmp/composer.json
-	dh_install
-	# Install Debian autoloader for multiflexi-web
-	install -D -m 0644 debian/autoload.php debian/multiflexi-web/usr/share/php/multiflexi/autoload.php
-	# Register autoloader for pkg-php-tools
-	install -m0755 -d debian/multiflexi-web/usr/share/pkg-php-tools/autoloaders
-	echo 'vitexsoftware multiflexi multiflexi/autoload.php' > debian/multiflexi-web/usr/share/pkg-php-tools/autoloaders/multiflexi-web
-	# Fix vendor references to use Debian autoloader path
-	sed -i -e 's/.\.\/vendor\/autoload\.php/\/usr\/share\/php\/multiflexi\/autoload.php/g' debian/multiflexi-web/usr/share/multiflexi/init.php
-	sed -i -e 's/.\.\/vendor\/autoload\.php/\/usr\/share\/php\/multiflexi\/autoload.php/g' debian/multiflexi*/usr/lib/multiflexi*/*.php
-	sed -i -e 's/\.\.\/\.env/\/etc\/multiflexi\/\multiflexi\.env/g' debian/multiflex*/usr/lib/multiflexi*/*.php
-	sed -i -e '/dirname(__DIR__)/c\    "\/etc\/multiflexi\/multiflexi\.env"' debian/multiflexi-web/usr/share/multiflexi/init.php
-	sed -i -e 's/composer\.json/\/usr\/lib\/multiflexi-web\/composer\.json/g' debian/multiflexi-web/usr/lib/multiflexi-web/MultiFlexi/Ui/PageBottom.php
-	sed -i -e 's/js\/jquery.dataTables.js/\/javascript\/jquery-datatables\/jquery.dataTables.js/g' debian/multiflexi-web/usr/lib/multiflexi-web/MultiFlexi/Ui/DBDataTable.php
-	sed -i -e 's/js\/dataTables.bootstrap4.js/\/javascript\/jquery-datatables\/dataTables.bootstrap4.js/g' debian/multiflexi-web/usr/lib/multiflexi-web/MultiFlexi/Ui/DBDataTable.php
-	sed -i -e 's/css\/dataTables.bootstrap4.css/\/javascript\/jquery-datatables\/css\/dataTables.bootstrap4.css/g' debian/multiflexi-web/usr/lib/multiflexi-web/MultiFlexi/Ui/DBDataTable.php
-	sed -i 's/css\/selectize/\/javascript\/selectize.js\/css\/selectize/' debian/multiflexi-web/usr/lib/multiflexi-web/MultiFlexi/Ui/DBDataTable.php
-	sed -i -e 's/css\/font-awesome.min.css/\/javascript\/font-awesome\/css\/font-awesome.min.css/g' debian/multiflexi-web/usr/lib/multiflexi-web/MultiFlexi/Ui/WebPage.php
-	sed -i -e 's/\.\.\/i18n/\/usr\/share\/locale/g'            	     debian/multiflexi-web/usr/share/multiflexi/init.php
-	sed -i "s/'';/'$$(echo $${BUILD_NUMBER})';/"  src/MultiFlexi/Ui/PageBottom.php
-	sed -i "/require_once __DIR__/crequire_once '/usr/share/php/multiflexi/autoload.php'; "               debian/multiflexi-api/usr/share/multiflexi/api/index.php
-	sed -i "/loadConfig/c\\\\\Ease\\\\Shared::singleton()->loadConfig('/etc/multiflexi/multiflexi.env', true);"    debian/multiflexi-api/usr/share/multiflexi/api/index.php
-
-#	rm  debian/multiflexi/usr/lib/multiflexi/MultiFlexi/ZabbixSender.php
