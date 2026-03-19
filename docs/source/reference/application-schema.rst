@@ -44,7 +44,7 @@ Setting up an application involves three main steps:
 2. **Configuration**: Provide required settings like database connections, API keys, file paths
 3. **Scheduling**: Set when and how often the application should run
 
-.. image:: appconfigfieldseditor.png
+.. image:: ../_static/images/screenshots/appconfigfieldseditor.png
     :alt: Configuration interface showing application settings
 
 Configuration Field Types
@@ -79,6 +79,7 @@ You can find MultiFlexi applications in several ways:
 .. tip::
 
     To install all available applications at once, ask your system administrator to install the `multiflexi-all` meta package.
+
 Special Variables for Monitoring
 ---------------------------------
 
@@ -111,7 +112,7 @@ If you're interested in developing your own MultiFlexi applications, you'll find
 - Detailed examples and templates
 - Code samples in multiple languages
 
-See the :doc:`development` section for complete technical documentation.
+See the :doc:`/development` section for complete technical documentation.
 
 .. note::
 

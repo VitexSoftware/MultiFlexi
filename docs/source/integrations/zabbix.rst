@@ -103,12 +103,12 @@ MultiFlexi sends metrics as Zabbix trapper items. For each metric, create a trap
 
 **3. Import MultiFlexi Template** (recommended)
 
-Import the provided Zabbix template with pre-configured items, triggers, and graphs:
+Import the provided Zabbix template from the `multiflexi-zabbix` repository. This template includes pre-configured items, triggers, and graphs.
 
 .. code-block:: bash
 
-   # Template location in MultiFlexi package
-   /usr/share/multiflexi/zabbix-templates/multiflexi-template.xml
+   # Repository
+   https://github.com/VitexSoftware/multiflexi-zabbix
 
 The template includes:
 
@@ -131,7 +131,7 @@ The template includes:
 
 **Zabbix Agent Configuration:**
 
-The Zabbix agent configuration is automatically installed at ``/etc/zabbix/zabbix_agent2.d/multiflexi.conf`` with the following UserParameters:
+The Zabbix agent configuration and LLD scripts are now part of the dedicated `multiflexi-zabbix` package. Installation provides UserParameters at ``/etc/zabbix/zabbix_agent2.d/multiflexi.conf``:
 
 - ``multiflexi.company.lld`` - Company discovery
 - ``multiflexi.job.lld`` - Job/task discovery
@@ -666,10 +666,10 @@ MultiFlexi supports both Zabbix and OpenTelemetry for monitoring. Choose based o
 See Also
 --------
 
-- :doc:`opentelemetry` - OpenTelemetry integration documentation
-- :doc:`configuration` - General configuration options
+- :doc:`/integrations/opentelemetry` - OpenTelemetry integration documentation
+- :doc:`/reference/configuration` - General configuration options
 - :doc:`apps` - Application development guide (including metrics)
-- :doc:`multiflexi-cli` - CLI commands including status checking
+- :doc:`/multiflexi-cli` - CLI commands including status checking
 - `Zabbix Documentation <https://www.zabbix.com/documentation/current/>`_
 - `Zabbix Sender Protocol <https://www.zabbix.com/documentation/current/en/manual/appendix/protocols/header_datalen>`_
 
@@ -680,7 +680,7 @@ The MultiFlexi Zabbix integration source code:
 
 - **Action Handler**: ``php-vitexsoftware-multiflexi-core/src/MultiFlexi/Action/Zabbix.php``
 - **Zabbix Sender**: ``php-vitexsoftware-multiflexi-core/src/MultiFlexi/ZabbixSender.php``
-- **LLD Scripts**: ``MultiFlexi/lib/zabbix*.php``
+- **LLD Scripts & Templates**: ``https://github.com/VitexSoftware/multiflexi-zabbix``
 - **Protocol Implementation**: ``php-vitexsoftware-multiflexi-core/src/MultiFlexi/Zabbix/``
 
 For development and customization examples, refer to the source code repository.

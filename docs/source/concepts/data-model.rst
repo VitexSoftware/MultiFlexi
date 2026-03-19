@@ -226,9 +226,9 @@ Database Schema Highlights
     CREATE TABLE artifacts (id, job_id, filename, content);
     
     -- Foreign keys enforce referential integrity
-    runtemplate.app_id → application.id
-    runtemplate.company_id → company.id
-    job.runtemplate_id → runtemplate.id
+    runtemplate.app_id -> application.id
+    runtemplate.company_id -> company.id
+    job.runtemplate_id -> runtemplate.id
 
 See Also
 --------

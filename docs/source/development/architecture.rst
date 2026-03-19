@@ -29,7 +29,12 @@ Core Components
 - **multiflexi-server**
   (https://github.com/VitexSoftware/multiflexi-server)
 
-  The main backend server providing REST API and web UI for MultiFlexi. It orchestrates job scheduling, user management, and integrates with the core library and database.
+  The main backend server providing REST API for MultiFlexi. It orchestrates job scheduling, user management, and integrates with the core library and database. It serves as the data provider for the web and CLI interfaces.
+
+- **multiflexi-web**
+  (https://github.com/VitexSoftware/multiflexi-web)
+
+  The primary web interface for MultiFlexi. It provides a responsive dashboard, application configuration tools, and real-time monitoring of job execution.
 
 - **multiflexi-executor**
   (https://github.com/VitexSoftware/multiflexi-executor)
@@ -41,6 +46,11 @@ Core Components
 
   An Ansible collection providing playbooks and roles for deploying and managing MultiFlexi components in various environments.
 
+- **multiflexi-zabbix**
+  (https://github.com/VitexSoftware/multiflexi-zabbix)
+
+  Contains Zabbix monitoring integration, including Low-Level Discovery (LLD) scripts and pre-configured Zabbix templates.
+
 - **multiflexi-all**
   (https://github.com/VitexSoftware/multiflexi-all)
 
@@ -51,14 +61,14 @@ Project Relationships
 
 - The **core** library is a dependency for the CLI, server, and executor.
 - The **database** project provides schema and migrations for all components that require persistent storage.
-- The **CLI** and **server** both interact with the database and core library, but serve different user interfaces (command-line vs. web/API).
+- The **CLI** and **web** both interact with the **server** (via REST API), database, and core library, but serve different user interfaces.
 - The **executor** is managed by the server and is responsible for running jobs in a secure and isolated manner.
 - The **ansible-collection** is used to automate deployment and configuration of all components.
 - The **all** meta-repo is used for orchestration, CI/CD, and as a reference for the complete MultiFlexi stack.
 
 This modular architecture allows for flexible deployment, scaling, and maintenance of the MultiFlexi platform.
 
-.. figure:: multiflexi-components.svg
+.. figure:: ../_static/images/diagrams/multiflexi-components.svg
    :align: center
    :width: 800px
    :alt: MultiFlexi Components Relationship Diagram
@@ -162,7 +172,7 @@ The execution daemon (``/usr/lib/multiflexi-executor/daemon.php``) runs continuo
   - Sends final metrics to Zabbix and OpenTelemetry
   - Logs the execution to the SQL logging system
 
-.. figure:: multiflexi-scheduling-execution-diagram.svg
+.. figure:: ../_static/images/diagrams/multiflexi-scheduling-execution-diagram.svg
    :align: center
    :width: 100%
    :alt: MultiFlexi Scheduling and Execution Process

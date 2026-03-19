@@ -1,0 +1,7 @@
+Alias /multiflexi-doc /usr/share/doc/multiflexi/html
+
+<Directory /usr/share/doc/multiflexi/html>
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Require all granted
+</Directory>

@@ -22,57 +22,57 @@ MultiFlexi provides a comprehensive set of actions, each with its distinctive ic
    * - Icon
      - Action Name
      - Description
-   * - .. image:: _static/images/actions/ToDo.svg
+   * - .. image:: ../_static/images/actions/ToDo.svg
           :width: 48px
           :height: 48px
      - **ToDo**
      - Microsoft Office 365 integration for task management
-   * - .. image:: _static/images/actions/Reschedule.svg
+   * - .. image:: ../_static/images/actions/Reschedule.svg
           :width: 48px
           :height: 48px
      - **Reschedule**
      - Dynamic job scheduling and timing control
-   * - .. image:: _static/images/actions/WebHook.svg
+   * - .. image:: ../_static/images/actions/WebHook.svg
           :width: 48px
           :height: 48px
      - **WebHook**
      - HTTP POST requests to external endpoints
-   * - .. image:: _static/images/actions/RedmineIssue.svg
+   * - .. image:: ../_static/images/actions/RedmineIssue.svg
           :width: 48px
           :height: 48px
      - **RedmineIssue**
      - Redmine project management integration
-   * - .. image:: _static/images/actions/Github.svg
+   * - .. image:: ../_static/images/actions/Github.svg
           :width: 48px
           :height: 48px
      - **Github**
      - GitHub repository management and issue creation
-   * - .. image:: _static/images/actions/TriggerJenkins.svg
+   * - .. image:: ../_static/images/actions/TriggerJenkins.svg
           :width: 48px
           :height: 48px
      - **TriggerJenkins**
      - Jenkins CI/CD pipeline triggering
-   * - .. image:: _static/images/actions/LaunchJob.svg
+   * - .. image:: ../_static/images/actions/LaunchJob.svg
           :width: 48px
           :height: 48px
      - **LaunchJob**
      - MultiFlexi job launching and workflow orchestration
-   * - .. image:: _static/images/actions/Stop.svg
+   * - .. image:: ../_static/images/actions/Stop.svg
           :width: 48px
           :height: 48px
      - **Stop**
      - Process and service termination control
-   * - .. image:: _static/images/actions/Zabbix.svg
+   * - .. image:: ../_static/images/actions/Zabbix.svg
           :width: 48px
           :height: 48px
      - **Zabbix**
      - Monitoring system integration
-   * - .. image:: _static/images/actions/CustomCommand.svg
+   * - .. image:: ../_static/images/actions/CustomCommand.svg
           :width: 48px
           :height: 48px
      - **CustomCommand**
      - Arbitrary shell command execution
-   * - .. image:: _static/images/actions/Sleep.svg
+   * - .. image:: ../_static/images/actions/Sleep.svg
           :width: 48px
           :height: 48px
      - **Sleep**
@@ -89,12 +89,12 @@ Actions can be triggered at different points in the job lifecycle:
 Each action is implemented as a PHP class that inherits from ``MultiFlexi\CommonAction`` and provides both a backend execution component and a UI configuration component.
 
 Available Actions
-----------------
+-----------------
 
 ToDo Action
 ~~~~~~~~~~~
 
-.. image:: _static/images/actions/ToDo.svg
+.. image:: ../_static/images/actions/ToDo.svg
    :width: 64px
    :height: 64px
    :align: left
@@ -144,7 +144,7 @@ This method uses application credentials and can access any user's ToDo lists wi
     OFFICE365_USER_ID=5cded639-0b8d-4abc-8976-d202aa1770fa
 
 Required Azure API Permissions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For the ToDo Action to work properly, your Azure App Registration must have the appropriate Microsoft Graph API permissions configured.
 
@@ -197,7 +197,7 @@ For the ToDo Action to work properly, your Azure App Registration must have the 
    - **User Object ID**: Go to **Azure Active Directory** → **Users** → Select user → Copy **Object ID**
 
 Configuration Parameters
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 When configuring a ToDo Action in MultiFlexi, you can customize the following parameters:
 
@@ -234,7 +234,7 @@ When configuring a ToDo Action in MultiFlexi, you can customize the following pa
   Example: ``Job: {job_name}\nCompany: {company}\nStatus: {status}\nTime: {timestamp}``
 
 Authentication Methods Comparison
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. list-table:: Authentication Methods
    :header-rows: 1
@@ -263,7 +263,7 @@ Authentication Methods Comparison
      - Production, enterprise environments
 
 Troubleshooting
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 **Common Issues and Solutions**:
 
@@ -302,9 +302,9 @@ MultiFlexi provides detailed debug information when ToDo Action fails:
 - Specific error codes and messages
 
 Reschedule Action
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
-.. image:: _static/images/actions/Reschedule.svg
+.. image:: ../_static/images/actions/Reschedule.svg
    :width: 64px
    :height: 64px
    :align: left
@@ -332,9 +332,9 @@ The Reschedule Action allows you to modify the scheduling of jobs, changing when
 - Implement business logic-based scheduling
 
 WebHook Action
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
-.. image:: _static/images/actions/WebHook.svg
+.. image:: ../_static/images/actions/WebHook.svg
    :width: 64px
    :height: 64px
    :align: left
@@ -372,9 +372,9 @@ The WebHook Action sends HTTP POST requests to external endpoints, enabling inte
 - Integration with chat systems (Slack, Teams, Discord)
 
 RedmineIssue Action
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
-.. image:: _static/images/actions/RedmineIssue.svg
+.. image:: ../_static/images/actions/RedmineIssue.svg
    :width: 64px
    :height: 64px
    :align: left
@@ -413,9 +413,9 @@ Requires a valid Redmine API key with permissions to create issues in the target
 - Create bug reports from monitoring alerts
 
 Github Action
-~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
-.. image:: _static/images/actions/Github.svg
+.. image:: ../_static/images/actions/Github.svg
    :width: 64px
    :height: 64px
    :align: left
@@ -456,9 +456,9 @@ The GitHub token must have appropriate permissions:
 - Integrate with development workflows
 
 TriggerJenkins Action
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
-.. image:: _static/images/actions/TriggerJenkins.svg
+.. image:: ../_static/images/actions/TriggerJenkins.svg
    :width: 64px
    :height: 64px
    :align: left
@@ -495,9 +495,9 @@ The TriggerJenkins Action starts builds and jobs on Jenkins CI/CD servers, enabl
 - Automated CI/CD integration
 
 LaunchJob Action
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
-.. image:: _static/images/actions/LaunchJob.svg
+.. image:: ../_static/images/actions/LaunchJob.svg
    :width: 64px
    :height: 64px
    :align: left
@@ -536,9 +536,9 @@ The LaunchJob Action starts other MultiFlexi jobs or external processes, enablin
 - Orchestrate data processing pipelines
 
 Stop Action
-~~~~~~~~~~
+~~~~~~~~~~~
 
-.. image:: _static/images/actions/Stop.svg
+.. image:: ../_static/images/actions/Stop.svg
    :width: 64px
    :height: 64px
    :align: left
@@ -574,9 +574,9 @@ The Stop Action terminates running processes, jobs, or services, providing contr
 - Automated system maintenance
 
 Zabbix Action
-~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
-.. image:: _static/images/actions/Zabbix.svg
+.. image:: ../_static/images/actions/Zabbix.svg
    :width: 64px
    :height: 64px
    :align: left
@@ -615,9 +615,9 @@ The Zabbix Action sends monitoring data, alerts, and metrics to Zabbix monitorin
 - Integration with existing monitoring infrastructure
 
 CustomCommand Action
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
-.. image:: _static/images/actions/CustomCommand.svg
+.. image:: ../_static/images/actions/CustomCommand.svg
    :width: 64px
    :height: 64px
    :align: left
@@ -656,9 +656,9 @@ The CustomCommand Action executes arbitrary shell commands or scripts, providing
 - Custom automation workflows
 
 Sleep Action
-~~~~~~~~~~~
+~~~~~~~~~~~~
 
-.. image:: _static/images/actions/Sleep.svg
+.. image:: ../_static/images/actions/Sleep.svg
    :width: 64px
    :height: 64px
    :align: left
@@ -693,7 +693,7 @@ The Sleep Action pauses workflow execution for a specified duration, useful for 
 - Implementing retry delays
 
 Action Configuration Best Practices
-----------------------------------
+-----------------------------------
 
 When configuring actions, follow these best practices:
 

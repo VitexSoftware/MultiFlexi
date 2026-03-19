@@ -1,7 +1,0 @@
-# phpstan.neon
-parameters:
-    type_coverage:
-        return: 50
-        param: 35.5
-        property: 70
-        constant: 85

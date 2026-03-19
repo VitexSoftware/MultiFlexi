@@ -474,7 +474,7 @@ Further Reading
 See Also
 --------
 
-* :doc:`configuration` - General MultiFlexi configuration
+* :doc:`/reference/configuration` - General MultiFlexi configuration
 * :doc:`commandline` - CLI commands reference
 * :doc:`docker` - Docker deployment guide
-* :doc:`ansible` - Ansible deployment automation
+* :doc:`/integrations/ansible` - Ansible deployment automation

@@ -78,7 +78,7 @@ html_show_copyright = True
 # -- Options for EPUB output
 epub_show_urls = 'footnote'
 
-html_logo = "../../src/images/project-logo.svg"
+html_logo = "_static/project-logo.svg"
 
 # HTML context for version info
 html_context = {

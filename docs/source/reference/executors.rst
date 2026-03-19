@@ -33,6 +33,6 @@ Features:
 - Requires Docker to be installed on the host machine
 
 
-.. image::  installedexecutormodules.png
+.. image::  ../_static/images/screenshots/installedexecutormodules.png
     :alt: Installed executor modules listing
 

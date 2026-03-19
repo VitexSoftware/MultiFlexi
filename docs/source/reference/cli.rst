@@ -518,7 +518,7 @@ The retention commands integrate with MultiFlexi's comprehensive GDPR compliance
 - **Archive Management**: Secure archival with integrity verification
 - **Compliance Reporting**: Generate reports for regulatory requirements
 
-For complete GDPR compliance documentation, see :doc:`gdpr-compliance`.
+For complete GDPR compliance documentation, see :doc:`/gdpr-compliance`.
 
 completion
 ----------
@@ -638,7 +638,7 @@ This command will:
 2. Attempt to export sample metrics (counters, histograms, and optionally gauges)
 3. Report success or failure with detailed error information
 
-For complete OpenTelemetry integration documentation, see :doc:`opentelemetry`.
+For complete OpenTelemetry integration documentation, see :doc:`/integrations/opentelemetry`.
 
 Credential Type Import
 ----------------------

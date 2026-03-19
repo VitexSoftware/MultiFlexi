@@ -3,7 +3,7 @@
 Welcome to MultiFlexi's documentation!
 ======================================
 
-.. image:: ../../src/images/project-logo.svg
+.. image:: _static/project-logo.svg
    :alt: MultiFlexi Logo
    :align: center
 
@@ -21,7 +21,7 @@ Key Features
 - **Comprehensive Logging**: Detailed execution logs with Zabbix and OpenTelemetry monitoring integration and real-time tracking
 - **Multi-Interface Support**:
   
-  - Responsive Bootstrap 4 web interface with real-time monitoring and charts
+  - Responsive Bootstrap 4 web interface `multiflexi-web <https://github.com/VitexSoftware/multiflexi-web/>`_ with real-time monitoring and charts
   - Rich command-line interface with extensive management commands
   - RESTful API with OAuth2 authentication and multiple output formats (JSON, XML, HTML, YAML)
 

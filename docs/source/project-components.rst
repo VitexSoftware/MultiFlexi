@@ -123,18 +123,19 @@ multiflexi-api
     # Validate OpenAPI schema
     swagger-codegen validate -i openapi-schema.yaml
 
-multiflexi-server
-~~~~~~~~~~~~~~~~~
+multiflexi-server (API Backend)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Location**: ``~/Projects/Multi/multiflexi-server``
+**Location**: ``https://github.com/VitexSoftware/multiflexi-server``
 
-**Purpose**: REST API server implementation built on PHP Slim 4 framework.
+**Purpose**: REST API server implementation built on PHP Slim 4 framework. It serves as the primary backend for both the web interface and CLI tools.
 
 **Key Features**:
 - RESTful API endpoints
-- HTTP Basic authentication
+- HTTP Basic and Token authentication
 - Request/response handling
 - API versioning support
+- Serving data for `multiflexi-web` and `multiflexi-cli`
 
 **API Endpoints**:
 - ``/apps`` - Application management
@@ -219,15 +220,16 @@ multiflexi-executor
 Web Interface Components
 ------------------------
 
-MultiFlexi (Main Application)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+multiflexi-web
+~~~~~~~~~~~~~~
 
-**Location**: ``~/Projects/Multi/MultiFlexi``
+**Location**: ``https://github.com/VitexSoftware/multiflexi-web/``
 
 **Purpose**: Primary web interface providing dashboard, management tools, and user interface.
 
 **Key Features**:
 - Bootstrap 4-based responsive UI
+- Dashboard with real-time monitoring
 - Company management interface
 - Job monitoring and control
 - Application configuration tools
@@ -238,17 +240,29 @@ MultiFlexi (Main Application)
 .. code-block:: text
 
     MultiFlexi\Ui\     → src/MultiFlexi/Ui/
-    MultiFlexi\Api\    → src/MultiFlexi/Api/
 
 **Developer Usage**:
 
 .. code-block:: bash
 
     # Development server
-    php -S localhost:8080
+    php -S localhost:8080 -t src/
     
     # Access web interface
-    http://localhost:8080/MultiFlexi/
+    http://localhost:8080/
+
+multiflexi-zabbix
+~~~~~~~~~~~~~~~~~
+
+**Location**: ``https://github.com/VitexSoftware/multiflexi-zabbix``
+
+**Purpose**: Zabbix monitoring integration, including Low-Level Discovery (LLD) scripts and Zabbix templates.
+
+**Key Features**:
+- Low-Level Discovery (LLD) for companies, apps, and jobs
+- Pre-configured Zabbix templates
+- Integration with MultiFlexi API for monitoring data
+- Automated alerting based on job status
 
 Deployment and Infrastructure
 -----------------------------
@@ -290,7 +304,7 @@ Source Code vs Vendor Dependencies
     ~/Projects/Multi/multiflexi-database/
     ~/Projects/Multi/multiflexi-server/
     ~/Projects/Multi/multiflexi-cli/
-    ~/Projects/Multi/MultiFlexi/src/MultiFlexi/
+    ~/Projects/Multi/multiflexi-web/src/MultiFlexi/
 
 **Vendor Dependencies** (Read-only, prefer modifying source):
 

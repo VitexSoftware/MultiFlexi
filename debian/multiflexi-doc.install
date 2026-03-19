@@ -1,1 +1,2 @@
-docs/build/html/* usr/share/doc/multiflexi/html
+docs/_build/html/* /usr/share/doc/multiflexi/html
+multiflexi.svg /usr/share/doc/multiflexi/html/_static/project-logo.svg

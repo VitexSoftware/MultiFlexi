@@ -92,7 +92,7 @@ MultiFlexi utilizes a typed configuration system to ensure valid data input:
 - **File**: File upload widget.
 - **Directory**: Server-side directory path selector.
 
-.. image:: appconfigfieldseditor.png
+.. image:: ../_static/images/screenshots/appconfigfieldseditor.png
     :alt: Application Configuration Editor
     :align: center
 
@@ -106,7 +106,7 @@ MultiFlexi includes built-in tools to assist with GDPR compliance.
 - **Retention Policies**: Configurable automated data cleanup schedules.
 - **Anonymization**: Tools to anonymize personal data after retention periods expire.
 
-Refer to :doc:`gdpr-compliance` for a detailed implementation guide.
+Refer to :doc:`/gdpr-compliance` for a detailed implementation guide.
 
 OpenTelemetry
 -------------
@@ -117,7 +117,7 @@ For enterprise observability, MultiFlexi supports OpenTelemetry.
 - **Collector Endpoint**: URL of your OTLP collector.
 - **Protocol**: gRPC or HTTP.
 
-See :doc:`opentelemetry` for configuration details.
+See :doc:`/integrations/opentelemetry` for configuration details.
 
 Logging
 -------
