@@ -106,7 +106,7 @@ RunTemplate
 
 - ``app_id``: Reference to Application
 - ``company_id``: Reference to Company
-- ``interv``: Scheduling interval (``h``=hourly, ``d``=daily, ``w``=weekly, ``m``=monthly, ``c``=custom cron)
+- ``interv``: Scheduling interval (``h``\ =hourly, ``d``\ =daily, ``w``\ =weekly, ``m``\ =monthly, ``c``\ =custom cron)
 - ``executor``: Execution environment (Native, Podman, Docker, Azure, Kubernetes)
 - ``configuration``: Key-value pairs for environment variables (database URLs, API keys, file paths)
 
@@ -223,12 +223,21 @@ Database Schema Highlights
     CREATE TABLE runtemplate (id, app_id, company_id, interv, active);
     CREATE TABLE job (id, runtemplate_id, schedule, begin, end, exitcode);
     CREATE TABLE schedule (id, job_id, after);  -- Scheduling queue
-    CREATE TABLE artifacts (id, job_id, filename, content);
+
+    -- Artifact system
+    CREATE TABLE app_artifacts (id, app_id, path, type);          -- Artifact definitions from app manifest
+    CREATE TABLE app_artifact_translations (id, app_artifact_id,  -- Localized names/descriptions
+                                            lang, name, description);
+    CREATE TABLE artifacts (id, job_id, filename, content_type,   -- Collected job output files
+                            artifact, note, created_at);
     
     -- Foreign keys enforce referential integrity
     runtemplate.app_id -> application.id
     runtemplate.company_id -> company.id
     job.runtemplate_id -> runtemplate.id
+    app_artifacts.app_id -> application.id
+    app_artifact_translations.app_artifact_id -> app_artifacts.id
+    artifacts.job_id -> job.id
 
 See Also
 --------

@@ -252,6 +252,9 @@ Phase 6: Artifact Preservation
 
 **Automatically Executed:** After job completion
 
+MultiFlexi preserves all output from a completed job — both standard streams
+and any output files the application produces.
+
 **What Gets Preserved:**
 
 1. **Standard Output** (``stdout.txt``):
@@ -266,21 +269,87 @@ Phase 6: Artifact Preservation
    - Contains complete stderr stream
    - Essential for troubleshooting failures
 
-3. **Application Result Files:**
+3. **Application Result Files** (multi-file):
    
-   - Files created in job's output directory
-   - MIME types auto-detected
-   - Original filenames preserved
+   MultiFlexi collects output files from **two sources**, in order:
+
+   a. **Legacy RESULT_FILE variable** — If the application defines a
+      ``RESULT_FILE`` environment variable, the file at that path is
+      collected (backward-compatible with older applications).
+
+   b. **Artifact definitions from the app manifest** — Each entry in the
+      ``artifacts`` array of the application JSON contains a ``path``
+      field that is a **regex pattern**. After the job finishes, MultiFlexi
+      scans the temp directory and stores every file whose name matches
+      at least one of these patterns.
+
+   For every matched file:
+
+   - MIME type is auto-detected
+   - Original filename is preserved
+   - Content is stored in the ``artifacts`` table
+   - Duplicates are skipped (a file already collected via ``RESULT_FILE``
+     will not be stored again)
+
+**Artifact Collection Flow:**
+
+.. code-block:: text
+
+    Job finishes
+        │
+        ├── stdout / stderr → stored as artifacts
+        │
+        ├── RESULT_FILE env var set?
+        │       └── Yes → resolve path → store file (if it exists)
+        │
+        └── app_artifacts definitions exist?
+                └── Yes → for each definition:
+                        scan temp dir with path regex
+                            └── store every matching file
+
+**Example Artifact Definition (in application JSON):**
+
+.. code-block:: json
+
+    "artifacts": [
+      {
+        "name": {"en": "JSON Report", "cs": "JSON zpráva"},
+        "type": "file",
+        "path": ".*\\.json$",
+        "description": {"en": "Output report in JSON format"}
+      },
+      {
+        "name": {"en": "CSV Export", "cs": "CSV export"},
+        "type": "file",
+        "path": ".*\\.csv$",
+        "description": {"en": "Exported data in CSV format"}
+      }
+    ]
+
+With this definition, MultiFlexi will automatically collect **all** ``.json``
+and ``.csv`` files from the temp directory after every job execution.
 
 **Database Storage:**
 
 .. code-block:: sql
 
-    INSERT INTO artifacts (job_id, filename, content_type, content, note, created)
+    -- Artifact definitions (imported from app JSON, stored per-application)
+    INSERT INTO app_artifacts (app_id, path, type)
+    VALUES (8, '.*\.json$', 'file'),
+           (8, '.*\.csv$',  'file');
+
+    INSERT INTO app_artifact_translations (app_artifact_id, lang, name, description)
+    VALUES (1, 'en', 'JSON Report', 'Output report in JSON format'),
+           (1, 'cs', 'JSON zpráva', NULL),
+           (2, 'en', 'CSV Export',  'Exported data in CSV format');
+
+    -- Collected artifacts (stored per-job after execution)
+    INSERT INTO artifacts (job_id, filename, content_type, artifact, note, created_at)
     VALUES
       (12345, 'stdout.txt', 'text/plain', 'Bank import completed...', 'Standard output', NOW()),
       (12345, 'stderr.txt', 'text/plain', '', 'Standard error', NOW()),
-      (12345, 'import-results.json', 'application/json', '{...}', 'Import results', NOW());
+      (12345, 'import-results.json', 'application/json', '{...}', 'Result file', NOW()),
+      (12345, 'transactions.csv', 'text/csv', 'id,amount,...', 'Result file', NOW());
 
 **Access Methods:**
 
@@ -474,7 +543,8 @@ See Also
 - :doc:`data-model` - Job entity relationships
 - :doc:`execution-architecture` - Scheduler and executor daemons
 - :doc:`../howto/debugging-failed-jobs` - Troubleshooting guide
-- :doc:`../reference/cli-job-commands` - CLI job management
+- :doc:`../reference/cli`
+ - CLI job management
 
 .. tip::
 

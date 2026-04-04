@@ -1,6 +1,6 @@
-=================================
+==================================
 MultiFlexi Application Development
-=================================
+==================================
 
 This guide explains how to create MultiFlexi applications that can be managed and executed by the MultiFlexi platform.
 
@@ -96,6 +96,49 @@ Required Fields
 * **homepage** - Project homepage URL
 * **executable** - Name of the command to execute
 * **environment** - Environment variable definitions
+
+Defining Output Artifacts
+--------------------------
+
+If your application produces output files (reports, exports, documents),
+declare them in the ``artifacts`` array. MultiFlexi will automatically collect
+all matching files after each job execution.
+
+Each artifact entry has these fields:
+
+* **name** *(required)* — Localized display name
+* **path** *(required)* — Regex pattern matched against filenames in the temp directory
+* **type** *(required)* — Type of artifact (e.g. ``"file"``)
+* **description** — Localized description
+
+**Example:**
+
+.. code-block:: json
+
+    "artifacts": [
+      {
+        "name": {"en": "JSON Report", "cs": "JSON zpráva"},
+        "type": "file",
+        "path": ".*\\.json$",
+        "description": {
+          "en": "Output report in JSON format",
+          "cs": "Výstupní zpráva ve formátu JSON"
+        }
+      }
+    ]
+
+The ``path`` is a regex pattern. Common examples:
+
+* ``".*\.json$"`` — matches any ``.json`` file
+* ``"invoice_.*\.pdf$"`` — matches files like ``invoice_2025.pdf``
+* ``"report\.csv"`` — matches exactly ``report.csv``
+
+.. note::
+
+    The ``artifacts`` array replaces the older ``RESULT_FILE`` environment
+    variable approach for declaring output files. ``RESULT_FILE`` is still
+    supported for backward compatibility, but new applications should use
+    ``artifacts`` to declare all output files.
 
 Environment Variable Types
 --------------------------
@@ -621,7 +664,18 @@ Application JSON (blocknet.multiflexi.app.json)
           "required": false,
           "category": "Behavior"
         }
-      }
+      },
+      "artifacts": [
+        {
+          "name": {"en": "Block Report", "cs": "Zpráva o blokování"},
+          "type": "file",
+          "path": "blocknet_.*\\.json$",
+          "description": {
+            "en": "JSON report of blocked clients",
+            "cs": "JSON zpráva o zablokovaných klientech"
+          }
+        }
+      ]
     }
 
 Executable Script (bin/blocknet)

@@ -80,12 +80,53 @@ You can find MultiFlexi applications in several ways:
 
     To install all available applications at once, ask your system administrator to install the `multiflexi-all` meta package.
 
+Defining Output Artifacts
+--------------------------
+
+Applications can declare the output files they produce using the ``artifacts``
+array in their JSON definition. Each artifact entry tells MultiFlexi what kind
+of file to look for after the job completes.
+
+**Artifact Fields:**
+
+- ``name`` *(required)* — Localized display name (string or ``{"en": "...", "cs": "..."}``)
+- ``path`` *(required)* — Regex pattern matched against filenames in the temp directory
+- ``type`` *(required)* — Artifact type (e.g. ``"file"``)
+- ``description`` — Localized description of the artifact
+
+**Example:**
+
+.. code-block:: json
+
+    "artifacts": [
+      {
+        "name": {"en": "JSON Report", "cs": "JSON zpráva"},
+        "type": "file",
+        "path": ".*\\.json$",
+        "description": {"en": "Output report in JSON format"}
+      },
+      {
+        "name": {"en": "PDF Invoice", "cs": "PDF faktura"},
+        "type": "file",
+        "path": "invoice_.*\\.pdf$",
+        "description": {"en": "Generated invoice document"}
+      }
+    ]
+
+After each job execution, MultiFlexi scans the temp directory and stores every
+file whose name matches one of the defined patterns. This replaces the need to
+rely solely on the ``RESULT_FILE`` environment variable (which is still
+supported for backward compatibility).
+
+See :doc:`/concepts/job-lifecycle` (Phase 6) for the full artifact collection
+flow.
+
 Special Variables for Monitoring
 ---------------------------------
 
 Some applications can send their results to monitoring systems like Zabbix. These applications use special environment variables:
 
-- ``RESULT_FILE``: Where the application saves its output data
+- ``RESULT_FILE``: Where the application saves its output data (legacy; prefer ``artifacts`` for new apps)
 - ``ZABBIX_KEY``: The name used to identify this data in Zabbix monitoring
 
 These are automatically configured by MultiFlexi when you set up monitoring integration.
@@ -112,9 +153,9 @@ If you're interested in developing your own MultiFlexi applications, you'll find
 - Detailed examples and templates
 - Code samples in multiple languages
 
-See the :doc:`/development` section for complete technical documentation.
+See the :doc:`/apps_development`
+ section for complete technical documentation.
 
 .. note::
 
     For end users, focus on configuring and using existing applications. Application development requires programming knowledge and is covered in the developer documentation.
-
