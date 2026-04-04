@@ -77,6 +77,7 @@ Contents
    concepts/job-lifecycle
    concepts/credential-management
    concepts/execution-architecture
+   project-components
 
 .. toctree::
    :maxdepth: 2
@@ -99,6 +100,7 @@ Contents
    integrations/abraflexi
    integrations/pohoda
    integrations/ansible
+   integrations/kubernetes
 
 .. toctree::
    :maxdepth: 2
