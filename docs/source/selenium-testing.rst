@@ -477,17 +477,17 @@ Run with visible browser for debugging:
    HEADLESS=false npm test
 
 Performance Optimization
------------------------
+------------------------
 
 Test Execution Speed
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 - Use ``simple-smoke`` for rapid development feedback
 - Run full scenarios only when needed  
 - Use headless mode for CI: ``HEADLESS=true npm test``
 
 Resource Management
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 - Proper WebDriver cleanup in ``after()`` hooks
 - Efficient element waiting strategies
@@ -497,14 +497,14 @@ Best Practices
 --------------
 
 Test Organization
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 - Group related tests in describe blocks
 - Use clear, descriptive test names in English
 - Implement proper setup and teardown
 
 Code Quality
-~~~~~~~~~~~
+~~~~~~~~~~~~
 
 - Follow consistent coding standards
 - Use meaningful variable names
@@ -512,7 +512,7 @@ Code Quality
 - Handle errors gracefully
 
 Maintenance
-~~~~~~~~~~
+~~~~~~~~~~~
 
 - Keep ChromeDriver updated
 - Regular dependency updates  
@@ -520,7 +520,7 @@ Maintenance
 - Review and update documentation
 
 Further Reading
---------------
+---------------
 
 **Documentation**
 

@@ -7,7 +7,7 @@ Authentication Issues
 ---------------------
 
 Invalid Security Token Error
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you encounter an "Invalid security token." error when trying to log in, this typically indicates a CSRF token mismatch. Here are the steps to resolve it:
 
