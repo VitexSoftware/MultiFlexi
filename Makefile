@@ -8,7 +8,7 @@ docs: ## 📚 Build Sphinx HTML documentation
 	@if [ -x .venv/bin/python ]; then \
 		.venv/bin/python -m sphinx -b html docs/source docs/_build/html; \
 	else \
-		python -m sphinx -b html docs/source docs/_build/html; \
+		python3 -m sphinx -b html docs/source docs/_build/html; \
 	fi
 
 debs: ## 📦 Build debian packages
