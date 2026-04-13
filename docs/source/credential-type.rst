@@ -76,6 +76,8 @@ Benefits of Three-Tier System
   - PHP-based instances for complex business logic
   - Clear separation of concerns between definition and implementation
 
+.. _credential-type-schema:
+
 Credential Type Schema
 ======================
 
@@ -371,5 +373,5 @@ The credential management system implements several security features:
 
 See Also:
 ---------
-- :doc:`multiflexi-cli`
-- :doc:`commandline`
+- :doc:`reference/cli`
+- :doc:`reference/cli`

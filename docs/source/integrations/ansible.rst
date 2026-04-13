@@ -37,7 +37,7 @@ Prerequisites
 Before using the Ansible collection, ensure:
 
 1. **MultiFlexi Server**: A running MultiFlexi installation (see :doc:`/install`)
-2. **multiflexi-cli**: The command-line interface must be available in PATH (see :doc:`/multiflexi-cli`)
+2. **multiflexi-cli**: The command-line interface must be available in PATH (see :doc:`/reference/cli`)
 3. **Python**: Python 3.6 or higher must be installed on the Ansible control machine
 4. **Permissions**: Appropriate access rights for the Ansible user
 
@@ -114,7 +114,7 @@ The collection follows standard Ansible practices with:
 
 - **Roles**: Server installation and configuration management
 - **Modules**: Entity management (users, companies, applications, etc.)
-- **CLI Integration**: All operations use :doc:`/multiflexi-cli` for consistency
+- **CLI Integration**: All operations use :doc:`/reference/cli` for consistency
 - **Idempotency**: Safe, repeatable automation without side effects
 
 Available Components

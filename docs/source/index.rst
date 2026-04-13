@@ -9,23 +9,26 @@ Welcome to MultiFlexi's documentation!
 
 **MultiFlexi** is a comprehensive PHP-based task scheduling and automation framework designed for accounting and business system integrations. It enables scheduled execution of applications and tools across multiple companies and platforms, with primary focus on systems like `AbraFlexi <https://www.abra.eu/flexi/>`_ and `Stormware Pohoda <https://www.stormware.cz/>`_.
 
-**Version 1.29.0** brings enhanced monitoring capabilities with the new MultiFlexi Probe application for system health checks and monitoring.
+**Version 2.3.0** introduces event-driven job triggering, an expanded credential plugin ecosystem, automatic artifact preservation for all jobs, and the new MultiFlexi TUI terminal interface.
 
 Key Features
 ------------
 
-- **Multi-Platform Integration**: Native support for AbraFlexi, Pohoda, and other business systems with extensible credential types
-- **Flexible Job Scheduling**: Automated task execution with customizable intervals (hourly, daily, weekly, monthly, yearly) and dependencies
-- **Three-Tier Credential Management**: Sophisticated credential system with CredentialPrototype → CredentialType → Credential architecture for secure, reusable authentication across companies and applications. Includes VaultWarden integration, banking APIs (FioBank, RaiffeisenBank, CSAS), and Office365 support
-- **Multiple Execution Environments**: Support for native execution, Docker containers, Kubernetes pods, Azure cloud, and Podman
-- **Comprehensive Logging**: Detailed execution logs with Zabbix and OpenTelemetry monitoring integration and real-time tracking
-- **Multi-Interface Support**:
-  
-  - Responsive Bootstrap 4 web interface `multiflexi-web <https://github.com/VitexSoftware/multiflexi-web/>`_ with real-time monitoring and charts
-  - Rich command-line interface with extensive management commands
-  - RESTful API with OAuth2 authentication and multiple output formats (JSON, XML, HTML, YAML)
+- **Multi-Platform Integration**: Native support for AbraFlexi, Pohoda, ČSAS, Raiffeisenbank, and other business systems via an extensible credential plugin ecosystem
+- **Flexible Job Scheduling**: Time-based scheduling (hourly, daily, weekly, monthly, yearly) plus event-driven triggering via the event processor daemon
+- **Three-Tier Credential Management**: ``CredentialPrototype → CredentialType → Credential`` architecture for secure, company-scoped authentication. Plugins available for ERP, banking APIs, SMTP, VaultWarden/Bitwarden, and more
+- **Universal Artifact Preservation**: Every job automatically stores its stdout, stderr, and result files as searchable artifacts — regardless of which actions are configured
+- **Multiple Execution Environments**: Native, Docker, Podman, Kubernetes pods, and Azure Container Instances
+- **Comprehensive Observability**: Zabbix LLD integration, OpenTelemetry support, live job output via WebSocket, structured logging
+- **Multiple Interfaces**:
 
-- **Enterprise-Ready**: User authentication, API tokens, multi-tenant data isolation, and comprehensive security features
+  - Web UI (`MultiFlexi <https://github.com/VitexSoftware/MultiFlexi/>`_) — Bootstrap 5, real-time dashboard
+  - CLI (`multiflexi-cli <https://github.com/VitexSoftware/multiflexi-cli/>`_) — full management from the terminal
+  - TUI (`multiflexi-tui <https://github.com/VitexSoftware/multiflexi-tui/>`_) — interactive terminal UI (Bubbletea/Go)
+  - REST API — JSON/XML/YAML/HTML output formats, HTTP Basic + token auth
+  - MCP Server (`multiflexi-mcp-server <https://github.com/VitexSoftware/multiflexi-mcp-server/>`_) — AI agent integration
+
+- **Enterprise-Ready**: Multi-tenant data isolation, RBAC, AES-256 credential encryption, GDPR compliance tools, Ansible deployment collection
 
 Getting Started
 ---------------

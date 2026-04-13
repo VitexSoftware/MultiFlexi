@@ -115,7 +115,7 @@ What's Next?
 - **Learn the Data Model:** Understand Applications, Companies, RunTemplates, and Jobs (:doc:`concepts/data-model`)
 - **Follow the Full Tutorial:** Build a complete integration from scratch (:doc:`tutorial-first-job`)
 - **Explore Applications:** Install real-world applications (:doc:`apps_overview`)
-- **Set Up Monitoring:** Integrate Zabbix or OpenTelemetry (:doc:`zabbix`)
+- **Set Up Monitoring:** Integrate Zabbix or OpenTelemetry- :doc:`integrations/zabbix`
 
 Troubleshooting
 ---------------

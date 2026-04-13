@@ -475,6 +475,7 @@ See Also
 --------
 
 * :doc:`/reference/configuration` - General MultiFlexi configuration
-* :doc:`commandline` - CLI commands reference
-* :doc:`docker` - Docker deployment guide
+* :doc:`/reference/cli` - CLI commands reference
+* :doc:`/concepts/execution-architecture` - Execution architecture concepts
+* :doc:`/concepts/execution-architecture` - Docker deployment guide
 * :doc:`/integrations/ansible` - Ansible deployment automation

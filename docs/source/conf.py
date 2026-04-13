@@ -12,8 +12,8 @@ project = 'MultiFlexi'
 copyright = '2024-2025, VitexSoftware'
 author = 'Vitex'
 
-release = '1.29.0'
-version = '1.29.0'
+release = '2.3.0'
+version = '2.3.0'
 
 # -- General configuration
 

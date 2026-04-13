@@ -52,7 +52,7 @@ Configuration
 -------------
 
 Environment Variables
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 Configure Zabbix integration using environment variables in ``/etc/multiflexi/multiflexi.env`` or ``.env``:
 
@@ -668,8 +668,8 @@ See Also
 
 - :doc:`/integrations/opentelemetry` - OpenTelemetry integration documentation
 - :doc:`/reference/configuration` - General configuration options
-- :doc:`apps` - Application development guide (including metrics)
-- :doc:`/multiflexi-cli` - CLI commands including status checking
+- :doc:`/apps_overview` - Application development guide (including metrics)
+- :doc:`/reference/cli` - CLI commands including status checking
 - `Zabbix Documentation <https://www.zabbix.com/documentation/current/>`_
 - `Zabbix Sender Protocol <https://www.zabbix.com/documentation/current/en/manual/appendix/protocols/header_datalen>`_
 

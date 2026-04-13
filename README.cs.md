@@ -4,180 +4,69 @@ MultiFlexi
 ![MFB](multiflexi-social-preview.svg?raw=true)
 
 [![ReadTheDocs](https://readthedocs.org/projects/multiflexi/badge/)](https://multiflexi.readthedocs.io/)
-[![wakatime](https://wakatime.com/badge/user/5abba9ca-813e-43ac-9b5f-b1cfdf3dc1c7/project/28a38241-3585-4ce7-b365-d7341c69e635.svg)](https://wakatime.com/badge/user/5abba9ca-813e-43ac-9b5f-b1cfdf3dc1c7/project/28a38241-3585-4ce7-b365-d7341c69e635)
-[![CodeFactor](https://www.codefactor.io/repository/github/vitexsoftware/multiflexi/badge)](https://www.codefactor.io/repository/github/vitexsoftware/multiflexi)
 [![GitHub license](https://img.shields.io/github/license/VitexSoftware/MultiFlexi)](https://opensource.org/licenses/MIT)
-[![GitHub release](https://img.shields.io/github/v/release/VitexSoftware/MultiFlexi)](https://github.com/VitexSoftware/MultiFlexi/releases)
 
+MultiFlexi je komplexní PHP framework pro plánování úloh a automatizaci, navržený pro integraci účetních a obchodních systémů (AbraFlexi, Stormware Pohoda, aj.). Umožňuje plánované spouštění aplikací napříč více firmami, disponuje bohatým systémem přihlašovacích údajů, REST API, webovým rozhraním a nástroji pro příkazovou řádku.
 
-Umožňuje spouštět zvolené nástroje nad určitými účetními jednotkami AbraFlexi v daných intervalech.
+Projekt je rozdělen do několika specializovaných podprojektů:
 
-**Verze 1.29.0** přináší vylepšené možnosti monitorování s novou aplikací MultiFlexi Probe pro kontrolu stavu systému a testování.
+## Členské projekty
 
-Nastavené úlohy jsou pravidelně spouštěny ze systémovécho plánovače.
-Protokol spouštění je zapisován do systémového logu.
+### Jádro systému
+- [multiflexi-common](https://github.com/VitexSoftware/multiflexi-common) - Společná dokumentace, sdílené prostředky a Zabbix LLD skripty (tento repozitář)
+- [php-vitexsoftware-multiflexi-core](https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core) - Centrální knihovna s jádrem obchodní logiky (ORM, Job, RunTemplate, Credential, systém artefaktů)
+- [multiflexi-database](https://github.com/VitexSoftware/multiflexi-database) - Schéma databáze a Phinx migrace (MySQL, PostgreSQL, SQLite)
+- [multiflexi-database-connection](https://github.com/VitexSoftware/multiflexi-database-connection) - Podpora PDO databázového připojení jako typ přihlašovacích údajů
+- [multiflexi-server](https://github.com/VitexSoftware/multiflexi-server) - REST API backend (PHP Slim 4)
+- [multiflexi-api](https://github.com/VitexSoftware/multiflexi-api) - OpenAPI specifikace a generátor serverového kódu
+- [MultiFlexi](https://github.com/VitexSoftware/MultiFlexi) - Hlavní webové rozhraní (přehled, správa firem a úloh)
+- [multiflexi-web](https://github.com/VitexSoftware/multiflexi-web) - Webové prostředky a frontend balíček
+- [multiflexi-ui](https://github.com/VitexSoftware/multiflexi-ui) - React/TypeScript/Vite UI komponenty
+- [multiflexi-cli](https://github.com/VitexSoftware/multiflexi-cli) - Příkazová řádka pro správu aplikací, firem, přihlašovacích údajů a úloh
 
-Spouštěným skriptům jsou nastavoavány například tyto proměnné prostředí:
+### Služby a spouštění
+- [multiflexi-scheduler](https://github.com/VitexSoftware/multiflexi-scheduler) - Systemd démon pro plánování úloh (cron)
+- [multiflexi-executor](https://github.com/VitexSoftware/multiflexi-executor) - Systemd démon pro vykonávání úloh
+- [multiflexi-event-processor](https://github.com/VitexSoftware/multiflexi-event-processor) - Démon pro spouštění úloh na základě událostí
 
+### Uživatelská rozhraní
+- [multiflexi-tui](https://github.com/VitexSoftware/multiflexi-tui) - Terminálové rozhraní (TUI) postavené na Charmbracelet Bubbletea
+- [multiflexi-probe](https://github.com/VitexSoftware/multiflexi-probe) - Testovací a ladicí nástroj pro spouštěč úloh MultiFlexi
 
-* **ABRAFLEXI_URL**
-* **ABRAFLEXI_LOGIN**
-* **ABRAFLEXI_PASSWORD**
-* **ABRAFLEXI_COMPANY**
+### Pluginy přihlašovacích údajů
+- [multiflexi-abraflexi](https://github.com/VitexSoftware/multiflexi-abraflexi) - Prototyp přihlašovacích údajů pro AbraFlexi ERP
+- [multiflexi-csas](https://github.com/VitexSoftware/multiflexi-csas) - Prototyp přihlašovacích údajů pro API Česká Spořitelna / ČSAS / Erste
+- [multiflexi-raiffeisenbank](https://github.com/VitexSoftware/multiflexi-raiffeisenbank) - Prototyp přihlašovacích údajů pro Raiffeisenbank Premium API
+- [multiflexi-mail](https://github.com/VitexSoftware/multiflexi-mail) - Podpora SMTP/e-mail přihlašovacích údajů (Symfony Mailer)
+- [multiflexi-vaultwarden](https://github.com/VitexSoftware/multiflexi-vaultwarden) - Podpora přihlašovacích údajů z VaultWarden/Bitwarden
+- [multiflexi-mtr](https://github.com/VitexSoftware/multiflexi-mtr) - Integrace síťové diagnostiky MTR
 
-nebo
+### Monitoring a pozorovatelnost
+- [multiflexi-zabbix](https://github.com/VitexSoftware/multiflexi-zabbix) - Integrace monitorování Zabbix (LLD discovery a šablony)
+- [multiflexi-zabbix-selenium](https://github.com/VitexSoftware/multiflexi-zabbix-selenium) - Integrace výsledků Mocha/Selenium testů do Zabbix
 
-* **POHODA_ICO**
-* **POHODA_URL**
-* **POHODA_USERNAME**
-* **POHODA_PASSWORD**
+### Integrace a nasazení
+- [multiflexi-ansible-collection](https://github.com/VitexSoftware/multiflexi-ansible-collection) - Ansible kolekce pro automatizované nasazení
+- [multiflexi-all](https://github.com/VitexSoftware/multiflexi-all) - Meta-balíček pro kompletní instalaci
 
-⊕ proměnné prostředí dle individuální konfigurace každého modulu pro každou firmu
+### MCP integrace
+- [multiflexi-mcp-server](https://github.com/VitexSoftware/multiflexi-mcp-server) - MCP server (Model Context Protocol) pro přístup AI agentů k MultiFlexi API
 
-**Konfigurace monitorování:**
+### Ukázkové aplikace
+- [MultiFlexi-Golang-App-Example](https://github.com/VitexSoftware/MultiFlexi-Golang-App-Example) - Ukázková MultiFlexi aplikace v jazyce Go
+- [MultiFlexi-Java-App-Example](https://github.com/VitexSoftware/MultiFlexi-Java-App-Example) - Ukázková MultiFlexi aplikace v jazyce Java
+- [multiflexi-node-app](https://github.com/VitexSoftware/multiflexi-node-app) - Ukázková MultiFlexi aplikace v Node.js / Express
 
-- `ZABBIX_SERVER` - Adresa Zabbix serveru pro monitorování infrastruktury
-- `ZABBIX_HOST` - Hostname pro Zabbix metriky
-- `OTEL_ENABLED` - Povolit export metrik do OpenTelemetry (výchozí: false)
-- `OTEL_SERVICE_NAME` - Název služby pro OpenTelemetry (výchozí: multiflexi)
-- `OTEL_EXPORTER_OTLP_ENDPOINT` - Endpoint OTLP collectoru (výchozí: http://localhost:4318)
-- `OTEL_EXPORTER_OTLP_PROTOCOL` - Protokol pro OTLP (http/json nebo grpc)
+### Dokumentace a lokalizace
+- [multiflexi-doc-en](https://github.com/VitexSoftware/multiflexi-doc-en) - Anglický dokumentační balíček
+- [MultiFlexi-cz](https://github.com/VitexSoftware/MultiFlexi-cz) - Česká lokalizace dokumentace MultiFlexi
 
-## Monitorování a Observability
+## Dokumentace
 
-MultiFlexi poskytuje komplexní monitorování pomocí dvou komplementárních systémů:
+Kompletní dokumentaci, návody a tutoriály naleznete na [https://multiflexi.readthedocs.io/](https://multiflexi.readthedocs.io/).
 
-### Zabbix integrace
+## Demo
 
-Monitorování infrastruktury v reálném čase s:
-- Sledování vykonávání úloh a fází běhu
-- Metriky aplikací a firem
-- Automatické generování upozornění
-- LLD (Low-Level Discovery) podpora pro dynamické monitorování
-
-Konfigurace:
-```bash
-ZABBIX_SERVER=zabbix.example.com
-ZABBIX_HOST=multiflexi-server
-```
-
-Více informací v [Zabbix dokumentaci](https://multiflexi.readthedocs.io/en/latest/zabbix.html).
-
-### OpenTelemetry integrace
-
-Moderní observability s vendor-neutrálním exportem metrik do:
-- Prometheus + Grafana
-- OpenTelemetry Collector
-- Cloud-native monitoring stacků
-
-**Dostupné metriky:**
-- `multiflexi.jobs.total` - Celkový počet spuštění úloh
-- `multiflexi.jobs.success` - Úspěšné úlohy
-- `multiflexi.jobs.failed` - Neúspěšné úlohy
-- `multiflexi.job.duration` - Doba trvání úlohy
-- `multiflexi.jobs.running` - Aktuálně běžící úlohy
-- `multiflexi.applications.total` - Počet aplikací
-- `multiflexi.companies.total` - Počet firem
-
-Konfigurace:
-```bash
-OTEL_ENABLED=true
-OTEL_SERVICE_NAME=multiflexi
-OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
-OTEL_EXPORTER_OTLP_PROTOCOL=http/json
-```
-
-Testování konfigurace:
-```bash
-multiflexi-cli telemetry:test
-```
-
-Více informací v [OpenTelemetry dokumentaci](https://multiflexi.readthedocs.io/en/latest/opentelemetry.html) včetně příkladů nasazení, Grafana dashboardů a kompletního průvodce integrací.
-
-See the https://multiflexi.readthedocs.io/ for complete documentation
-
-Demo
-----
-
-K dispozici je [ukázková instance](https://demo.multiflexi.eu/?login=demo\&password=demo)
+K dispozici je [ukázková instance](https://demo.multiflexi.eu/?login=demo&password=demo) pro testování.
 
 ![demo screenshot](doc/index-1.10.4.314.png?raw=true)
-
-instalace
----------
-
-K dispozici jsou balíčky pro Debian. Více informací o instalaci naleznete v [instalační dokumentaci](INSTALL.md)
-
-Ovládání z příkazového řádku
-============================
-
-ve složce bin se nacházejí tyto spouštěče různých funkcí:
-
-* `multiflexi-app2json` - exportuje definici aplikace do souboru
-* `multiflexi-executor` - periodický spouštěč aplikací
-* `multiflexi-job2script` - vygeneruje skript s nastavením prostředí a příkazem pro běhu úlohy dle jejího čísla
-* `multiflexi-json-app-remover` - na základě json definice odstraní aplikaci z MultiFlexi
-* `multiflexi-json2app` - načte definice aplikace ze souboru
-* `multiflexi-probe` - sonda pro monitorování systému a kontrolu stavu MultiFlexi
-
-multiflexi-cli
---------------
-
-MultiFlexi CLI poskytuje komplexní možnosti správy s podporou pro aplikace, firmy, úlohy, šablony spuštění a další.
-
-Použití: multiflexi-cli <příkaz> [akce] [možnosti]
-
-Klíčové příkazy: application, company, job, runtemplate, version
-
-**Správa aplikací:**
-- `multiflexi-cli application validate-json --file app.json` - validace JSON aplikace proti schématu
-- `multiflexi-cli application import-json --file app.json` - import aplikace z JSON
-- `multiflexi-cli application list` - seznam všech aplikací
-
-
-Pluginy
--------
-
-Jako plugin je možné použít jakýkoliv spustitelný skript nebo binárku. Uvádíme zde některé, připravené k použití:
-
-|Jméno|Popis|Domovská stránka|
-|-----|-----|----------------|
-|MultiFlexi Probe|Sonda pro monitorování systému a testování funkcí|https://github.com/VitexSoftware/MultiFlexi|
-|Email Importer|Načítá doklady z mailboxu do FlexiBee|https://github.com/VitexSoftware/AbraFlexi-email-importer|
-|discomp2abraflexi|Import Pricelist from Discomp to AbraFlexi|https://github.com/Spoje-NET/discomp2abraflexi|
-|AbraFlexi Revolut statements import|Import Revolut bank statemetnts into AbraFlexi|https://github.com/VitexSoftware/AbraFlexi-Revolut|
-|AbraFlexi Checker|Kontrola dostupnosti AbraFlexi|https://github.com/VitexSoftware/php-abraflexi-config|
-|Vůbec přehled|přehled vašeho účetnictví od začátku do nynějška|https://github.com/VitexSoftware/AbraFlexi-Digest/|
-|Dení přehled|každodení přehled vašeho účetnictví|https://github.com/VitexSoftware/AbraFlexi-Digest/|
-|Měsíční přehled|měsíční přehled vašeho účetnictví|https://github.com/VitexSoftware/AbraFlexi-Digest/|
-|Týdení přehled|přehled vašeho účetnictví každý týden|https://github.com/VitexSoftware/AbraFlexi-Digest/|
-|Roční přehed|Každoroční AbraFlexi přehled|https://github.com/VitexSoftware/AbraFlexi-Digest/|
-|Hromadná pošta z AbraFlexi|Na základě dotazu zvolí příjmce z adresáře a odesílá mail na základě šablony|https://github.com/VitexSoftware/abraflexi-mailer/|
-|AbraFlexi odesílač|Odešle všechny doklady vydaných faktur které ještě nebyly odeslány|https://github.com/VitexSoftware/abraflexi-mailer/|
-|Odesílač pošty|Odešli neodeslané dokumenty s přílohami|https://github.com/VitexSoftware/abraflexi-mailer/|
-|Ukaž neodeslané|Zobraz neodeslané dokumenty|https://github.com/VitexSoftware/abraflexi-mailer/|
-|Smlouvy na Faktury|Spustí generování faktur ze smluv v AbraFlexi|https://github.com/VitexSoftware/abraflexi-contract-invoices|
-|AbraFlexi Benchmark|AbraFlexi Server Benchmark|https://github.com/VitexSoftware/AbraFlexi-Tools|
-|AbraFlexi Copy|Copy Company data between two AbraFlexi servers|https://github.com/VitexSoftware/AbraFlexi-Tools|
-|AbraFlexi transaction report|obtain AbraFlexi bank transaction report|https://github.com/VitexSoftware/abraflexi-matcher/|
-|AbraFlexi Bank statements puller|Stahni bankovní výpisy do AbraFlexi|https://github.com/VitexSoftware/abraflexi-matcher/|
-|AbraFlexi Issued invoices Matcher|Ne pouze párovač faktur|https://github.com/VitexSoftware/abraflexi-matcher/|
-|Párovač přijatých Faktur|Páruj přijaté faktury s odchozími platbami|https://github.com/VitexSoftware/abraflexi-matcher/|
-|Subreg to AbraFlexi|Import Subreg Pricelist into AbraFlexi|https://github.com/Spoje-NET/subreg2abraflexi/|
-|Fio Statement Downloader|Download FioBank statements to disk|https://github.com/Spoje-NET/fiobank-statement-downloader|
-|Fio transaction report|FioBank transaction report|https://github.com/Spoje-NET/fiobank-statement-downloader|
-|RB statement downloader|Download Raiffeisenbank statements in given format|Download your Statements to directory|
-|RB transaction report|Raiffeisenbank transaction report|Download your Statements to directory|
-|abraflexi-raiffeisenbank|Stahovač bankovních výpisů z Raiffeisen banky|https://github.com/VitexSoftware/abraflexi-raiffeisenbank|
-|Redmine do AbraFlexi|Človekohodiny v Redmine do faktury v AbraFlexi|https://github.com/VitexSoftware/Redmine2AbraFlexi/|
-|Čistič štítků upomínače|Vymaže štítky dlužníků|https://github.com/VitexSoftware/abraflexi-reminder|
-|Přehled pohledávek|Získá neuhrazené faktury|https://github.com/VitexSoftware/abraflexi-reminder|
-|Notify Customers|Zasílat inventarizaci|https://github.com/VitexSoftware/abraflexi-reminder|
-|Upomínač|Upomínač neuhrazených faktur|https://github.com/VitexSoftware/abraflexi-reminder|
-|Realpad do Mailkitu|Synchronizuje kontakty z Realpadu do Mailkitu |https://github.com/Spoje-NET/realpad2mailkit/|
-
-Kompletní seznam naleznete na [stránce projektu](https://www.multiflexi.eu/apps.php).
-
-See the full list of ready-to-run applications within the MultiFlexi platform on the [application list page](https://www.multiflexi.eu/apps.php).
-
-[![MultiFlexi App](https://github.com/VitexSoftware/MultiFlexi/blob/main/doc/multiflexi-app.svg)](https://www.multiflexi.eu/apps.php)

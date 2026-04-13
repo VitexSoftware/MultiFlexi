@@ -8,27 +8,26 @@ MultiFlexi is a comprehensive PHP-based task scheduling and automation framework
 
 ### Core Components
 
-- **php-vitexsoftware-multiflexi-core** (external library): The central library containing core functionality
-- **multiflexi-web**: Bootstrap 4 web interface with real-time monitoring
-- **multiflexi-cli**: Command-line interface for management operations
-- **multiflexi-scheduler**: Systemd service daemon that continuously schedules jobs (v2.x+)
-- **multiflexi-executor**: Systemd service daemon that continuously executes scheduled jobs (v2.x+)
-- **multiflexi-database**: Database schema and migration management
-- **multiflexi-server**: Optional server component for advanced deployments
-- **ansible-collection**: Ansible automation collection for infrastructure deployment
+- **multiflexi-common**: (This repository) Documentation, common assets, and Zabbix integration
+- **php-vitexsoftware-multiflexi-core**: (External) The central library containing core functionality
+- **multiflexi-web**: (External) Bootstrap 4 web interface with real-time monitoring
+- **multiflexi-cli**: (External) Command-line interface for management operations
+- **multiflexi-scheduler**: (External) Systemd service daemon that continuously schedules jobs
+- **multiflexi-executor**: (External) Systemd service daemon that continuously executes scheduled jobs
+- **multiflexi-database**: (External) Database schema and migration management
+- **multiflexi-server**: (External) Optional server component for advanced deployments
+- **multiflexi-zabbix**: (External) Zabbix integration components (moved from core)
+- **ansible-collection**: (External) Ansible automation collection for infrastructure deployment
 
 ### Directory Structure
 
-- `bin/`: Command-line executables and launchers
-- `src/MultiFlexi/`: Core application source code organized by functionality:
-  - `Action/`: Action handlers (GitHub, RedmineIssue)
-  - `Command/`: CLI command implementations
-  - `CredentialType/`: Credential type definitions (CSAS, Office365, VaultWarden)
-  - `Ui/`: Web interface components and widgets
-- `debian/`: Debian package build configuration
-- `tests/`: Test files including application definitions
-- `.devcontainer/`: Development container configuration
-- `.vscode/`: VS Code workspace settings
+- `bin/`: Common executables and Zabbix LLD launchers
+- `debian/`: Debian package build configuration for documentation and common assets
+- `docs/`: Sphinx documentation source
+- `lib/`: PHP scripts for Zabbix LLD and other common utilities
+- `zabbix/`: Zabbix templates and configuration files
+- `gdpr/`: GDPR compliance policies and documentation
+- `tools/`: Miscellaneous helper scripts
 
 ### Application Architecture
 
@@ -98,9 +97,10 @@ Scheduled jobs display their current position in the execution queue:
 - `DashboardRecentJobsTable`: Status badge with queue info
 
 **Code Locations:**
-- Core: `php-vitexsoftware-multiflexi-core/src/MultiFlexi/Job.php` (newJob method)
-- CLI: `multiflexi-cli/src/multiflexi-cli.php` (UnixUser instantiation)
-- UI: `src/MultiFlexi/Ui/JobInfo.php`, `JobHistoryTable.php`, `DashboardRecentJobsTable.php`
+- Core: `https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core`
+- Web UI: `https://github.com/VitexSoftware/multiflexi-web`
+- CLI: `https://github.com/VitexSoftware/multiflexi-cli`
+- Zabbix Integration: `https://github.com/VitexSoftware/multiflexi-zabbix`
 
 ## Database Access
 
@@ -202,29 +202,7 @@ curl -u username:password "http://localhost/MultiFlexi/src/api/VitexSoftware/Mul
 
 **Using Session Cookies (JavaScript):**
 
-For JavaScript code running on MultiFlexi web pages, no special authentication is needed:
-
-```javascript
-// Simple fetch - automatically uses session cookie
-fetch('/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/apps.json')
-  .then(response => response.json())
-  .then(data => console.log(data));
-
-// jQuery AJAX - also uses session cookie automatically
-$.ajax({
-  url: '/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/runtemplates.json',
-  method: 'GET',
-  dataType: 'json',
-  success: function(data) {
-    console.log(data);
-  }
-});
-
-// With pagination parameters
-fetch('/MultiFlexi/src/api/VitexSoftware/MultiFlexi/1.0.0/jobs.json?limit=20&offset=0&order=-id')
-  .then(response => response.json())
-  .then(data => console.log(data));
-```
+For JavaScript code running on MultiFlexi web pages, session cookie authentication is used automatically by the browser.
 
 ## Development Commands
 
@@ -415,200 +393,16 @@ MultiFlexi implements GDPR compliance in phases:
 - `RETENTION_ARCHIVE_PATH`: Path for archived data storage (default: /var/lib/multiflexi/archives)
 - `RETENTION_CLEANUP_SCHEDULE`: Cron expression for automated cleanup (default: 0 2 * * *)
 
-## User Interface Design
+## Code Migration Notice
 
-### Dashboard Widgets
+Most of the logic previously contained in this repository has been moved to specialized repositories:
 
-The dashboard (`src/dashboard.php`) is built using modular, reusable widget components located in `src/MultiFlexi/Ui/`:
+1. **Web Interface & Widgets**: Now in `multiflexi-web`
+2. **CLI Commands**: Now in `multiflexi-cli`
+3. **Zabbix Integration**: Now in `multiflexi-zabbix`
+4. **Database Migrations**: Now in `multiflexi-database`
 
-**Widget Components:**
-- `DashboardMetricsCards` - Main metrics cards (Total Jobs, Active Applications, Active Companies, Run Templates)
-- `DashboardStatusCards` - Job status cards (Successful, Failed, Running, Today's Jobs)
-- `DashboardJobsByAppChart` - Bar chart showing top 10 applications by job count
-- `DashboardJobsByCompanyChart` - Pie chart showing top 10 companies by job count
-- `DashboardTimelineChart` - Multi-line graph of job execution timeline (last 7 days)
-- `DashboardIntervalChart` - Bar chart showing run templates by interval (hourly, daily, etc.)
-- `DashboardRecentJobsTable` - Table of last 20 jobs with clickable links and emoticons
-- `DashboardStyles` - Static CSS styles for dashboard components
-
-**Design Pattern:**
-Each widget is a self-contained class that:
-1. Extends appropriate Ease Framework base class (`\Ease\TWB4\Row`, `\Ease\Html\DivTag`, etc.)
-2. Fetches its own data in the constructor
-3. Handles its own rendering and error states
-4. Can be instantiated with a simple `new WidgetName()` call
-
-**Recent Jobs Table Features:**
-- Clickable links with emoticons:
-  - 📦 Applications → `app.php?id=X`
-  - 🏢 Companies → `company.php?id=X`
-  - ⚙️ RunTemplates → `runtemplate.php?id=X`
-- Status badges with visual indicators (Running, Pending, Success, Failed)
-- Formatted timestamps
-
-### JobChart Widget
-
-`JobChart` (`src/MultiFlexi/Ui/JobChart.php`) is the base class for all stacked bar charts showing job execution history.
-It is extended by `CompanyJobChart`, `AllJobsLastMonthChart`, `AppLastMonthChart`, `CompanyAppJobsLastMonthChart`, and `RunTemplateJobsLastMonthChart`.
-
-**Key behaviour:**
-
-- **Always 30 columns** — the chart pre-populates every day in the last 30-day window (today − 29 days through today) with zero counts before querying the database. Days without any jobs produce a zero-height column so gaps in activity are clearly visible on the x-axis.
-- **DB query filtered to 30 days** — `getJobs()` adds `WHERE begin >= 'YYYY-MM-DD'` (midnight of 29 days ago) so the query never loads older data unnecessarily.
-- **HTML legend beside the chart** — the built-in SVGGraph legend is disabled (`legend_type = none`). A Bootstrap flex column containing coloured HTML swatches is rendered to the right of the SVG. This prevents the legend from overlapping the first bar columns.
-
-**Legend colours (pastel):**
-- `#B3E5FC` — waiting (light blue)
-- `#FFCDD2` — fail (light red)
-- `#C8E6C9` — success (light green)
-- `#E0E0E0` — exception (light grey)
-
-**Date calculation:** uses `DateTimeImmutable('today')` for DST-safe arithmetic instead of `strtotime`.
-
-**Code location:** `src/MultiFlexi/Ui/JobChart.php`
-
-### Activation Wizard
-
-The Activation Wizard (`src/activation-wizard.php`) provides a guided 7-step process for activating applications in companies:
-
-**Step 1: Choose Company** - Select the company where the application will be activated
-**Step 2: Choose Application** - Select an enabled application from the catalog
-**Step 3: Create RunTemplate** - Define the RunTemplate name and execution interval
-**Step 4: Assign Credentials** - Bind required credentials (mServer, SQLServer, etc.) to the RunTemplate
-**Step 5: Configure** - Set application-specific configuration parameters
-  - Fields populated from credentials are displayed as disabled with credential type logos
-  - Values are automatically inherited from assigned credentials
-**Step 6: Actions** - Configure success and failure actions (Zabbix, WebHook, Custom Commands, etc.)
-**Step 7: Summary** - Review complete configuration with action buttons:
-  - ⚗️ View RunTemplate - Navigate to the RunTemplate detail page
-  - 📅 Schedule - Launch the scheduling interface for this RunTemplate
-  - 📋 All RunTemplates - View the complete list of RunTemplates
-  - 🌟 New Activation - Start a new activation wizard
-
-**Key Features:**
-- Session-based wizard state management
-- Credential-aware configuration with visual indicators
-- Real-time validation and error handling
-- Support for credential binding and credential type logos
-- Prevents duplicate credential bindings
-- Automatic cleanup of wizard session data on completion
-
-**Navigation:**
-- Access from main menu: "🧙 Activation Wizard"
-- Access from RunTemplates page: "Activation Wizard" button
-- Access from Company panel: "🧙🏽‍♂️ Launch wizard" button
-- Direct URL: `activation-wizard.php?reset=1` (starts fresh)
-
-**Implementation:**
-- Component: `src/MultiFlexi/Ui/ActivationWizard.php`
-- Handler: `src/activation-wizard.php`
-- Related: Credential assignment via `MultiFlexi\RunTplCreds`
-
-### Responsive Menu Implementation
-
-The main navigation menu (`src/MultiFlexi/Ui/MainMenu.php`) implements a responsive Bootstrap 4 navbar with the following design:
-
-**Desktop Layout:**
-- Full horizontal menu bar with dropdown menus
-- Search form visible inline on the right side
-- Language selector on far right
-
-**Mobile Layout:**
-- Hamburger toggle button for collapsible menu
-- Search form remains visible outside the collapsible section
-- Compact layout with 100px search input width
-- All menu items collapse into hamburger menu
-
-**Search Form Placement:**
-The search form is intentionally placed outside the navbar collapse div using `$nav->addItem()` rather than `$nav->addMenuItem()`. This ensures the search functionality remains accessible on all screen sizes without being hidden in the collapsed mobile menu.
-
-**Styling Considerations:**
-- Form uses `flex-wrap: nowrap` to prevent element wrapping
-- Compact spacing (`mr-1`, `ml-1`) for tight mobile layout
-- Fixed input width (100px) optimized for mobile screens
-
-### Job Listing and Filtering
-
-The job listing page (`src/joblist.php`) provides a comprehensive view of job execution history with advanced filtering capabilities.
-
-**Available Filters:**
-- `success`: Show only successful jobs (exitcode = 0)
-- `failed`: Show only failed jobs (exitcode ≠ 0 and not NULL)
-- `running`: Show jobs currently executing (begin IS NOT NULL and end IS NULL)
-- `today`: Show jobs executed today
-
-**Usage:**
-```
-http://localhost/MultiFlexi/src/joblist.php?filter=failed
-http://localhost/MultiFlexi/src/joblist.php?filter=success
-http://localhost/MultiFlexi/src/joblist.php?filter=running
-http://localhost/MultiFlexi/src/joblist.php?filter=today
-```
-
-**Implementation Details:**
-
-The filtering system uses a specialized approach to persist filter state across AJAX DataTable requests:
-
-1. **Filter Storage**: The `CompanyJobLister` class stores the filter type in:
-   - `$this->filterType` property for internal use
-   - `$this->filter['_jobfilter']` array for URL parameter persistence
-
-2. **AJAX Persistence**: The `DBDataTable::dataSourceURI()` method automatically includes the `$filter` array in AJAX request URLs, ensuring filters persist across pagination and sorting.
-
-3. **SQL Application**: Filters are applied in the `addSelectizeValues()` method using FluentPDO's query builder:
-   ```php
-   case 'failed':
-       $query->where('(job.exitcode <> 0 AND job.exitcode <> "0")');
-       $query->where('job.exitcode IS NOT NULL');
-       break;
-   ```
-
-4. **Parameter Exclusion**: The `getAllForDataTable()` method extracts and removes `_jobfilter` from conditions before parent processing to prevent it from being treated as a database column in WHERE clauses.
-
-**Visual Indicators:**
-Job rows are color-coded by exit status:
-- Green (bg-success): Exit code 0 (success)
-- Yellow (bg-warning): Exit code 1
-- Red (bg-danger): Exit code 255 (failure)
-- Blue (bg-primary): Exit code 127
-- Cyan (bg-info): Exit code -1
-
-### Bulk Actions for RunTemplates
-
-The Company-Application page (`src/companyapp.php`) provides bulk operations for managing multiple RunTemplates simultaneously.
-
-**Implementation:**
-- Uses `DBDataTable` with `CompanyAppRunTemplateLister` engine for efficient data handling
-- Row selection via click (excluding link clicks)
-- Dropdown menu "⚙️ Bulk Actions" (disabled until rows selected)
-
-**Available Bulk Actions:**
-
-1. **🔧 Bulk Reconfigure**
-   - Opens modal dialog for mass configuration update
-   - Loads configuration fields from API: `GET /api/VitexSoftware/MultiFlexi/1.0.0/app/{appId}.json`
-   - Allows selection of configuration key and new value
-   - Updates `configuration` table for all selected RunTemplates
-   - Endpoint: `bulk-reconfigure.php` (temporary, will migrate to API)
-
-2. **▶️ Bulk Execute**
-   - Schedules adhoc jobs for all selected RunTemplates
-   - Validates RunTemplate active status
-   - Uses `Job::prepareJob()` with executor "Native"
-   - Endpoint: `bulk-execute.php` (temporary, will migrate to API)
-
-**Future API Migration:**
-
-Both bulk endpoints are temporary implementations in `src/` and will be migrated to the REST API when POST/PUT support is added:
-- `POST /api/VitexSoftware/MultiFlexi/1.0.0/runtemplates/bulk-reconfigure`
-- `POST /api/VitexSoftware/MultiFlexi/1.0.0/runtemplates/bulk-execute`
-
-TODO comments in code mark locations requiring update during migration.
-
-**Code Locations:**
-- Frontend: `src/companyapp.php` (JavaScript for row selection and AJAX calls)
-- Backend: `src/bulk-reconfigure.php`, `src/bulk-execute.php`
-- Engine: `src/MultiFlexi/CompanyAppRunTemplateLister.php`
+This repository (`multiflexi-common`) now serves as the central point for documentation and common assets that are shared across the ecosystem.
 
 ## Code Quality Standards
 
@@ -726,12 +520,14 @@ This design allows packages to be reinstalled and application definitions to be 
 ## Member Projects
 
 MultiFlexi is part of a larger ecosystem of related projects:
-- multiflexi-scheduler
-- multiflexi-executor  
-- php-vitexsoftware-multiflexi-core
-- multiflexi-cli
-- multiflexi-database
-- multiflexi-ansible-collection
+- [multiflexi-scheduler](https://github.com/VitexSoftware/multiflexi-scheduler)
+- [multiflexi-executor](https://github.com/VitexSoftware/multiflexi-executor)
+- [php-vitexsoftware-multiflexi-core](https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core)
+- [multiflexi-cli](https://github.com/VitexSoftware/multiflexi-cli)
+- [multiflexi-database](https://github.com/VitexSoftware/multiflexi-database)
+- [multiflexi-ansible-collection](https://github.com/VitexSoftware/multiflexi-ansible-collection)
+- [multiflexi-web](https://github.com/VitexSoftware/multiflexi-web)
+- [multiflexi-zabbix](https://github.com/VitexSoftware/multiflexi-zabbix)
 
 When making changes, consider impacts on these related components and ensure compatibility across the ecosystem.
 

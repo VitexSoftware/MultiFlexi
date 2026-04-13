@@ -69,3 +69,5 @@ debian/multiflexi-doc/
 debian/multiflexi-doc.substvars
 debian/multiflexi-dev/
 debian/multiflexi-dev.substvars
+debian/multiflexi-doc/
+debian/multiflexi-doc.substvars

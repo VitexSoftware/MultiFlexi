@@ -124,7 +124,7 @@ multiflexi-api
     swagger-codegen validate -i openapi-schema.yaml
 
 multiflexi-server (API Backend)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Location**: ``https://github.com/VitexSoftware/multiflexi-server``
 
@@ -220,36 +220,205 @@ multiflexi-executor
 Web Interface Components
 ------------------------
 
+MultiFlexi (main web UI)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Location**: ``~/Projects/Multi/MultiFlexi``
+
+**Purpose**: Primary web interface — dashboard, company management, application assignment, RunTemplate and job management, credentials UI.
+
+**Key Features**:
+- Bootstrap 5-based responsive UI
+- Dashboard with system status and recent jobs
+- Company, application, RunTemplate, and job management
+- Credential and CredentialType management
+- Live job output via WebSocket
+
+**Key Namespace**: ``MultiFlexi\Ui\`` → ``src/MultiFlexi/Ui/``
+
 multiflexi-web
 ~~~~~~~~~~~~~~
 
 **Location**: ``https://github.com/VitexSoftware/multiflexi-web/``
 
-**Purpose**: Primary web interface providing dashboard, management tools, and user interface.
+**Purpose**: Web assets and frontend package (Bootstrap 5 styles, compiled JS/CSS).
+
+multiflexi-ui
+~~~~~~~~~~~~~
+
+**Location**: ``~/Projects/Multi/multiflexi-ui``
+
+**Purpose**: React/TypeScript/Vite UI components for a modern frontend alternative.
 
 **Key Features**:
-- Bootstrap 4-based responsive UI
-- Dashboard with real-time monitoring
-- Company management interface
-- Job monitoring and control
-- Application configuration tools
-- User authentication and authorization
-
-**Key Namespaces**:
-
-.. code-block:: text
-
-    MultiFlexi\Ui\     → src/MultiFlexi/Ui/
+- Component library built with Vite + TypeScript
+- Communicates with MultiFlexi REST API
+- Hot-module replacement for development
 
 **Developer Usage**:
 
 .. code-block:: bash
 
-    # Development server
-    php -S localhost:8080 -t src/
-    
-    # Access web interface
-    http://localhost:8080/
+    cd multiflexi-ui/
+    npm install
+    npm run dev    # Development server with HMR
+    npm run build  # Production build
+
+Monitoring & Observability
+--------------------------
+
+multiflexi-probe
+~~~~~~~~~~~~~~~~
+
+**Location**: ``~/Projects/Multi/multiflexi-probe``
+
+**Purpose**: Testing and debugging tool for the MultiFlexi task launcher. Executes a simple health-check to verify the execution pipeline works end-to-end.
+
+**Install**:
+
+.. code-block:: bash
+
+    sudo apt install multiflexi-probe
+
+multiflexi-zabbix
+~~~~~~~~~~~~~~~~~
+
+**Location**: ``~/Projects/Multi/multiflexi-zabbix``
+
+**Purpose**: Zabbix monitoring integration, including Low-Level Discovery (LLD) scripts and Zabbix templates.
+
+**Key Features**:
+- Low-Level Discovery (LLD) for companies, apps, and run templates
+- Pre-configured Zabbix templates
+- Integration with MultiFlexi API for monitoring data
+- Automated alerting based on job status
+
+See :doc:`integrations/zabbix` for configuration details.
+
+multiflexi-zabbix-selenium
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Location**: ``~/Projects/Multi/multiflexi-zabbix-selenium``
+
+**Purpose**: Production-ready integration of Mocha/Selenium web test results into Zabbix monitoring.
+
+Credential Plugins
+------------------
+
+Each of the following packages provides a **CredentialPrototype** — a JSON-defined template that describes how to connect to an external system.
+
+multiflexi-abraflexi
+~~~~~~~~~~~~~~~~~~~~~
+
+AbraFlexi ERP credential prototype. Fields: ``ABRAFLEXI_URL``, ``ABRAFLEXI_USER``, ``ABRAFLEXI_PASSWORD``, ``ABRAFLEXI_COMPANY``.
+
+multiflexi-csas
+~~~~~~~~~~~~~~~
+
+Česká Spořitelna / ČSAS / Erste API credential prototype.
+
+multiflexi-raiffeisenbank
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Raiffeisenbank Premium API credential prototype.
+
+multiflexi-mail
+~~~~~~~~~~~~~~~
+
+SMTP/e-mail credential prototype (Symfony Mailer). Fields: ``SMTP_HOST``, ``SMTP_PORT``, ``SMTP_USER``, ``SMTP_PASSWORD``, ``MAIL_FROM``.
+
+multiflexi-database-connection
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+PDO database connection credential prototype. Useful for jobs that need direct database access.
+
+multiflexi-vaultwarden
+~~~~~~~~~~~~~~~~~~~~~~~
+
+VaultWarden / Bitwarden credential prototype. Allows storing sensitive secrets externally in Bitwarden-compatible vault instead of in the MultiFlexi database.
+
+multiflexi-mtr
+~~~~~~~~~~~~~~
+
+MTR network diagnostics credential prototype for network monitoring jobs.
+
+MCP Integration
+---------------
+
+multiflexi-mcp-server
+~~~~~~~~~~~~~~~~~~~~~
+
+**Location**: ``~/Projects/Multi/multiflexi-mcp-server``
+
+**Purpose**: Model Context Protocol (MCP) server that exposes the MultiFlexi REST API as MCP tools, enabling AI agents (Claude, etc.) to manage MultiFlexi directly.
+
+**Install**:
+
+.. code-block:: bash
+
+    pip install multiflexi-mcp-server
+
+**Configure** (``MULTIFLEXI_HOST`` environment variable):
+
+.. code-block:: bash
+
+    export MULTIFLEXI_HOST=https://multiflexi.example.com
+
+**Features**: Tools for apps, jobs, companies, users, run templates, GDPR data exports.
+
+Event-Driven Processing
+-----------------------
+
+multiflexi-event-processor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Location**: ``~/Projects/Multi/multiflexi-event-processor``
+
+**Purpose**: Event-driven job triggering daemon (``multiflexi-eventor``). Complements the time-based scheduler by firing jobs in response to external events.
+
+**Service**: ``multiflexi-eventor.service``
+
+**Install**:
+
+.. code-block:: bash
+
+    sudo apt install multiflexi-event-processor
+
+Example Applications
+--------------------
+
+These repositories demonstrate how to build MultiFlexi-compatible applications:
+
+**MultiFlexi-Golang-App-Example** — ``~/Projects/Multi/MultiFlexi-Golang-App-Example``
+  Demonstrates the Go pattern: read environment variables, perform work, output structured JSON.
+
+**MultiFlexi-Java-App-Example** — ``~/Projects/Multi/MultiFlexi-Java-App-Example``
+  Comprehensive Java example with environment variable handling and JSON result output.
+
+**multiflexi-node-app** — ``~/Projects/Multi/multiflexi-node-app``
+  Node.js / Express template for building MultiFlexi applications.
+
+Terminal User Interface
+-----------------------
+
+multiflexi-tui
+~~~~~~~~~~~~~~
+
+**Location**: ``~/Projects/Multi/multiflexi-tui``
+
+**Purpose**: A modern terminal UI frontend for ``multiflexi-cli``, built with the `Charmbracelet Bubbletea <https://github.com/charmbracelet/bubbletea>`_ framework (Go).
+
+**Install**:
+
+.. code-block:: bash
+
+    sudo apt install multiflexi-tui
+
+**Launch**:
+
+.. code-block:: bash
+
+    multiflexi-tui
 
 multiflexi-zabbix
 ~~~~~~~~~~~~~~~~~

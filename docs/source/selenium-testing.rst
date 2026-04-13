@@ -105,7 +105,7 @@ Quick frontend validation without database operations:
 **Coverage**: Homepage, forms, navigation, responsive design
 
 Full Smoke Tests
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 Complete system validation with database operations:
 
@@ -145,7 +145,7 @@ Multi-Company Setup
 **Coverage**: Company isolation, concurrent jobs, data separation
 
 Job Error Recovery
-^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
 
@@ -161,7 +161,7 @@ Multi-Environment Support
 The test suite supports three distinct environments:
 
 Development Environment
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 **URL**: ``http://localhost/MultiFlexi/src/``
 **Purpose**: Source code testing during development
@@ -193,7 +193,7 @@ Local Environment
    npm run local:full
 
 Staging Environment
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 **URL**: ``https://vyvojar.spoje.net/multiflexi/``
 **Purpose**: Remote testing server validation
@@ -208,7 +208,7 @@ Configuration
 -------------
 
 Environment Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The test suite uses ``.env`` files for configuration:
 
@@ -233,7 +233,7 @@ The test suite uses ``.env`` files for configuration:
    STAGING_DB_NAME=multiflexi_staging_test
 
 Dynamic Configuration Loading
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The ``EnvironmentManager`` class automatically:
 
@@ -243,7 +243,7 @@ The ``EnvironmentManager`` class automatically:
 - Provides runtime environment information
 
 Interactive Test Runners
------------------------
+------------------------
 
 Development Runner
 ~~~~~~~~~~~~~~~~~~
@@ -272,7 +272,7 @@ Provides an interactive menu for development environment testing:
    0) Exit
 
 Multi-Environment Runner
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
@@ -286,7 +286,7 @@ Page Object Model
 The test suite uses the Page Object Model pattern for maintainable and reusable test code:
 
 Base Page Structure
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: javascript
 
@@ -303,7 +303,7 @@ Base Page Structure
    }
 
 Authentication Page
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: javascript
 
@@ -321,7 +321,7 @@ Authentication Page
    }
 
 Dashboard Page
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 .. code-block:: javascript
 
@@ -334,10 +334,10 @@ Dashboard Page
    }
 
 Development Guidelines
----------------------
+----------------------
 
 Adding New Tests
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 1. Create test files in ``tests/`` directory
 2. Follow Page Object Model pattern
@@ -365,7 +365,7 @@ Adding New Tests
    });
 
 Error Handling Best Practices
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: javascript
 
@@ -378,7 +378,7 @@ Error Handling Best Practices
    }
 
 Internationalization Standards
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 All test components follow English-first standards:
 
@@ -388,12 +388,12 @@ All test components follow English-first standards:
 - **Documentation**: English documentation throughout
 
 CI/CD Integration
-----------------
+-----------------
 
 The test suite is designed for continuous integration:
 
 GitHub Actions Example
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: yaml
 
@@ -412,7 +412,7 @@ GitHub Actions Example
          - run: cd tests/selenium && npm run test:ci
 
 Headless Mode
-~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 For automated environments:
 
@@ -422,10 +422,10 @@ For automated environments:
    npm run test:headless
 
 Troubleshooting
---------------
+---------------
 
 Common Issues
-~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 **ChromeDriver Version Mismatch**
 
@@ -458,7 +458,7 @@ Common Issues
    npm run config:check
 
 Debug Mode
-~~~~~~~~~
+~~~~~~~~~~
 
 Enable detailed logging:
 
@@ -524,9 +524,9 @@ Further Reading
 
 **Documentation**
 
-- :doc:`development` - General development guide
+- :doc:`apps_development` - General development guide
 - :doc:`project-components` - Project architecture
-- :doc:`api` - API documentation
+- :doc:`reference/api` - API documentation
 
 **External Resources**
 

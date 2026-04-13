@@ -59,7 +59,9 @@ The ``multiflexi-cli`` tool allows for efficient system management directly from
 - ``multiflexi-cli run <job_id>``: Manually trigger a specific job.
 - ``multiflexi-cli status``: Check the health of the scheduler daemon.
 
-For a complete command reference, see :doc:`multiflexi-cli` or :doc:`commandline`.
+For a complete command reference, see- :doc:`reference/cli`
+- :doc:`reference/cli`
+.
 
 API Integration
 ---------------
@@ -70,7 +72,8 @@ MultiFlexi exposes a RESTful API for external integrations.
 - **Authentication**: OAuth2 or API Tokens.
 - **Format**: JSON, XML.
 
-Developers should refer to the :doc:`api` documentation for endpoint details and usage examples.
+Developers should refer to the- :doc:`reference/api`
+ documentation for endpoint details and usage examples.
 
 Common Workflows
 ----------------

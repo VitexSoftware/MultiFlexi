@@ -650,7 +650,8 @@ MultiFlexi supports importing credential type definitions via the CLI. This allo
     multiflexi-cli credtype import --file example.credential-type.json
 
 - The command reads the credential type from the specified file and imports it into MultiFlexi.
-- The JSON file must conform to the :ref:`credential-type-schema`.
-- Imported credential types are available for assignment to apps and integrations.
+- The JSON file must conform to the- :ref:`credential-type-schema`
+- :doc:`/credential-type`
+s are available for assignment to apps and integrations.
 
-See :doc:`credential-type` for schema details and examples.
+See :doc:`/credential-type` for schema details and examples.

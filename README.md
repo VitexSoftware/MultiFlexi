@@ -4,196 +4,69 @@ MultiFlexi
 ![MFB](multiflexi-social-preview.svg?raw=true)
 
 [![ReadTheDocs](https://readthedocs.org/projects/multiflexi/badge/)](https://multiflexi.readthedocs.io/)
-[![wakatime](https://wakatime.com/badge/user/5abba9ca-813e-43ac-9b5f-b1cfdf3dc1c7/project/28a38241-3585-4ce7-b365-d7341c69e635.svg)](https://wakatime.com/badge/user/5abba9ca-813e-43ac-9b5f-b1cfdf3dc1c7/project/28a38241-3585-4ce7-b365-d7341c69e635)
-[![CodeFactor](https://www.codefactor.io/repository/github/vitexsoftware/multiflexi/badge)](https://www.codefactor.io/repository/github/vitexsoftware/multiflexi)
 [![GitHub license](https://img.shields.io/github/license/VitexSoftware/MultiFlexi)](https://opensource.org/licenses/MIT)
-[![GitHub release](https://img.shields.io/github/v/release/VitexSoftware/MultiFlexi)](https://github.com/VitexSoftware/MultiFlexi/releases)
 
-MultiFlexi is a comprehensive PHP-based task scheduling and automation framework designed for accounting and business system integrations. It enables scheduled execution of applications and tools across multiple companies and platforms, with primary focus on systems like AbraFlexi and Pohoda.
+MultiFlexi is a comprehensive PHP-based task scheduling and automation framework designed for accounting and business system integrations (AbraFlexi, Stormware Pohoda, etc.). It enables scheduled execution of applications across multiple companies, with a rich credential system, REST API, web UI, and CLI tools.
 
-**Version 1.32.0** introduces comprehensive security enhancements as part of GDPR Phase 3 compliance, including security audit logging, data encryption, API rate limiting, and IP whitelisting.
+The MultiFlexi project is divided into several specialized subprojects:
 
-## Key Features
+## Member Projects
 
-- **Multi-Platform Integration**: Native support for AbraFlexi, Pohoda, and other business systems
-- **Flexible Job Scheduling**: Automated task execution with customizable intervals and dependencies
-- **Advanced Credential Management**: Secure handling of authentication credentials with extensible credential types
-- **Multiple Execution Environments**: Support for native execution, containerized deployments, and cloud environments
-- **Comprehensive Logging**: Detailed execution logs with Zabbix and OpenTelemetry monitoring integration
-- **Multi-Interface Support**:
-  - Responsive Bootstrap 4 web interface with real-time monitoring
-  - Rich command-line interface with extensive management commands
-  - RESTful API with OAuth2 authentication and multiple output formats
-- **Enterprise-Ready**: User authentication, API tokens, data isolation, and comprehensive monitoring (Zabbix + OpenTelemetry)
-- **Privacy & GDPR Compliance**: Comprehensive consent management, self-hosted analytics support, and European privacy standards
-- **Security Features**: AES-256 data encryption, comprehensive audit logging, API rate limiting, IP whitelisting, and advanced security monitoring
+### Core Ecosystem
+- [multiflexi-common](https://github.com/VitexSoftware/multiflexi-common) - Common documentation, shared assets, Zabbix LLD scripts (this repository)
+- [php-vitexsoftware-multiflexi-core](https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core) - Central library with core business logic (ORM, Job, RunTemplate, Credential, Artifact system)
+- [multiflexi-database](https://github.com/VitexSoftware/multiflexi-database) - Database schema and Phinx migrations (MySQL, PostgreSQL, SQLite)
+- [multiflexi-database-connection](https://github.com/VitexSoftware/multiflexi-database-connection) - PDO database connection credential support
+- [multiflexi-server](https://github.com/VitexSoftware/multiflexi-server) - REST API backend (PHP Slim 4)
+- [multiflexi-api](https://github.com/VitexSoftware/multiflexi-api) - OpenAPI specification and server code generator
+- [MultiFlexi](https://github.com/VitexSoftware/MultiFlexi) - Main web interface (dashboard, company and job management)
+- [multiflexi-web](https://github.com/VitexSoftware/multiflexi-web) - Web assets and frontend package
+- [multiflexi-ui](https://github.com/VitexSoftware/multiflexi-ui) - React/TypeScript/Vite UI components
+- [multiflexi-cli](https://github.com/VitexSoftware/multiflexi-cli) - Command-line interface for managing apps, companies, credentials, and jobs
 
-## Architecture
+### Services & Execution
+- [multiflexi-scheduler](https://github.com/VitexSoftware/multiflexi-scheduler) - Systemd daemon for cron-based job scheduling
+- [multiflexi-executor](https://github.com/VitexSoftware/multiflexi-executor) - Systemd daemon for job execution
+- [multiflexi-event-processor](https://github.com/VitexSoftware/multiflexi-event-processor) - Event-driven job triggering daemon
 
-MultiFlexi features a layered architecture with:
+### User Interfaces
+- [multiflexi-tui](https://github.com/VitexSoftware/multiflexi-tui) - Terminal UI (TUI) frontend built with Charmbracelet Bubbletea
+- [multiflexi-probe](https://github.com/VitexSoftware/multiflexi-probe) - Testing and debugging tool for the MultiFlexi task launcher
 
-- **Database Layer**: ORM with migrations managing applications, companies, run templates, and jobs
-- **Application Management**: External app definitions, metadata validation, and lifecycle management
-- **Job Execution System**: Multi-environment execution with environment variable injection
-- **Credential Framework**: Extensible credential types for various system integrations
-- **Configuration Management**: Environment-based configuration with type-safe field definitions
-- **Security Layer**: Authentication, authorization, secure credential handling, data encryption, audit logging, rate limiting, and IP access control
+### Credential Plugins
+- [multiflexi-abraflexi](https://github.com/VitexSoftware/multiflexi-abraflexi) - AbraFlexi ERP credential prototype
+- [multiflexi-csas](https://github.com/VitexSoftware/multiflexi-csas) - Česká Spořitelna / ČSAS / Erste API credential prototype
+- [multiflexi-raiffeisenbank](https://github.com/VitexSoftware/multiflexi-raiffeisenbank) - Raiffeisenbank Premium API credential prototype
+- [multiflexi-mail](https://github.com/VitexSoftware/multiflexi-mail) - SMTP/Mail credential support (Symfony Mailer)
+- [multiflexi-vaultwarden](https://github.com/VitexSoftware/multiflexi-vaultwarden) - VaultWarden/Bitwarden secrets credential support
+- [multiflexi-mtr](https://github.com/VitexSoftware/multiflexi-mtr) - MTR network diagnostics integration
 
-# Member Projects
+### Monitoring & Observability
+- [multiflexi-zabbix](https://github.com/VitexSoftware/multiflexi-zabbix) - Zabbix monitoring integration (LLD discovery & templates)
+- [multiflexi-zabbix-selenium](https://github.com/VitexSoftware/multiflexi-zabbix-selenium) - Mocha/Selenium test results integration into Zabbix
 
-- <https://github.com/VitexSoftware/multiflexi-scheduler>
-- <https://github.com/VitexSoftware/multiflexi-executor>
-- <https://github.com/VitexSoftware/php-vitexsoftware-multiflexi-core>
-- <https://github.com/VitexSoftware/multiflexi-cli>
-- <https://github.com/VitexSoftware/multiflexi-database>
-- <https://github.com/VitexSoftware/multiflexi-ansible-collection>
+### Integration & Deployment
+- [multiflexi-ansible-collection](https://github.com/VitexSoftware/multiflexi-ansible-collection) - Ansible collection for automated deployment
+- [multiflexi-all](https://github.com/VitexSoftware/multiflexi-all) - Meta-package for full-stack installation
 
-## Environment Variables
+### MCP Integration
+- [multiflexi-mcp-server](https://github.com/VitexSoftware/multiflexi-mcp-server) - Model Context Protocol (MCP) server for AI agent access to MultiFlexi API
 
-**Privacy & Analytics:**
-- `ENABLE_GOOGLE_ANALYTICS` - Enable/disable Google Analytics (default: false for European self-hosting)
+### Example Applications
+- [MultiFlexi-Golang-App-Example](https://github.com/VitexSoftware/MultiFlexi-Golang-App-Example) - Example MultiFlexi application in Go
+- [MultiFlexi-Java-App-Example](https://github.com/VitexSoftware/MultiFlexi-Java-App-Example) - Example MultiFlexi application in Java
+- [multiflexi-node-app](https://github.com/VitexSoftware/multiflexi-node-app) - Example MultiFlexi application in Node.js / Express
 
-**Security Configuration (GDPR Phase 3):**
-- `SECURITY_AUDIT_ENABLED` - Enable comprehensive security event logging (default: true)
-- `DATA_ENCRYPTION_ENABLED` - Enable AES-256 data encryption for sensitive information (default: true)
-- `RATE_LIMITING_ENABLED` - Enable API rate limiting protection (default: true)
-- `IP_WHITELIST_ENABLED` - Enable IP whitelisting for administrative access (default: false)
-- `ENCRYPTION_MASTER_KEY` - Master key for data encryption at rest (automatically generated during installation)
+### Documentation & Localization
+- [multiflexi-doc-en](https://github.com/VitexSoftware/multiflexi-doc-en) - English documentation package
+- [MultiFlexi-cz](https://github.com/VitexSoftware/MultiFlexi-cz) - Czech localization for MultiFlexi documentation
 
-**Encryption Configuration:**
+## Documentation
 
-MultiFlexi uses AES-256-GCM encryption to protect sensitive credentials and personal data. The encryption system requires a master key configured via `ENCRYPTION_MASTER_KEY` in `/etc/multiflexi/multiflexi.env`.
+See [https://multiflexi.readthedocs.io/](https://multiflexi.readthedocs.io/) for complete documentation, integration guides, and tutorials.
 
-- **Automatic Setup**: Master key is automatically generated during package installation
-- **Manual Configuration**: `openssl rand -base64 32` to generate a new key
-- **Status Check**: Use `multiflexi-cli appstatus` or `multiflexi-cli encryption status`
-- **Key Management**: Encryption keys are wrapped with the master key and stored in the database
+## Demo
 
-See [INSTALL.md](INSTALL.md) for detailed encryption configuration and security notes.
-
-**Monitoring Configuration:**
-
-- `ZABBIX_SERVER` - Zabbix server address for infrastructure monitoring
-- `ZABBIX_HOST` - Hostname for Zabbix metrics
-- `OTEL_ENABLED` - Enable OpenTelemetry metrics export (default: false)
-- `OTEL_SERVICE_NAME` - Service name for OpenTelemetry (default: multiflexi)
-- `OTEL_EXPORTER_OTLP_ENDPOINT` - OTLP collector endpoint (default: http://localhost:4318)
-- `OTEL_EXPORTER_OTLP_PROTOCOL` - Protocol for OTLP (http/json or grpc)
-
-**Custom Variables:** Individual module configurations per company with extensible variable definitions.
-
-## Monitoring & Observability
-
-MultiFlexi provides comprehensive monitoring through two complementary systems:
-
-### Zabbix Integration
-
-Real-time infrastructure monitoring with:
-- Job execution tracking and phase monitoring
-- Application and company metrics
-- Automatic alert generation
-- LLD (Low-Level Discovery) support for dynamic monitoring
-
-Configuration:
-```bash
-ZABBIX_SERVER=zabbix.example.com
-ZABBIX_HOST=multiflexi-server
-```
-
-See [Zabbix documentation](https://multiflexi.readthedocs.io/en/latest/zabbix.html) for detailed setup.
-
-### OpenTelemetry Integration
-
-Modern observability with vendor-neutral metrics export to:
-- Prometheus + Grafana
-- OpenTelemetry Collector
-- Cloud-native monitoring stacks
-
-**Available Metrics:**
-- `multiflexi.jobs.total` - Total job executions
-- `multiflexi.jobs.success` - Successful jobs
-- `multiflexi.jobs.failed` - Failed jobs
-- `multiflexi.job.duration` - Job execution time
-- `multiflexi.jobs.running` - Currently running jobs
-- `multiflexi.applications.total` - Application count
-- `multiflexi.companies.total` - Company count
-
-Configuration:
-```bash
-OTEL_ENABLED=true
-OTEL_SERVICE_NAME=multiflexi
-OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
-OTEL_EXPORTER_OTLP_PROTOCOL=http/json
-```
-
-Test your configuration:
-```bash
-multiflexi-cli telemetry:test
-```
-
-See [OpenTelemetry documentation](https://multiflexi.readthedocs.io/en/latest/opentelemetry.html) for deployment examples, Grafana dashboards, and complete integration guide.
-
-See the <https://multiflexi.readthedocs.io/> for complete documentation
-
-
-Demo
-----
-
-A [demo instance](https://demo.multiflexi.eu/?login=demo&password=demo) is available
+A [demo instance](https://demo.multiflexi.eu/?login=demo&password=demo) is available.
 
 ![demo screenshot](doc/index-1.10.4.314.png?raw=true)
-
-Installation
-------------
-
-Debian packages are available. For more information about installation, see the [installation documentation](INSTALL.md)
-
-Command Line Usage
-==================
-
-In the `bin` directory, you will find the following launchers for various functions:
-
-- `multiflexi-app2json` - exports the application definition to a file
-- `multiflexi-executor` - periodic application launcher
-- `multiflexi-job2script` - generates a script with environment settings and a command to run a job by its number
-- `multiflexi-json-app-remover` - removes an application from MultiFlexi based on a JSON definition
-- `multiflexi-json2app` - loads application definitions from a file
-- `multiflexi-probe` - system monitoring and health check probe for MultiFlexi functionality testing
-
-multiflexi-cli
---------------
-
-The MultiFlexi CLI provides comprehensive management capabilities with support for applications, companies, jobs, run templates, and more.
-
-Usage: multiflexi-cli <command> [action] [options]
-
-Key commands: application, company, job, runtemplate, version
-
-**Application management:**
-- `multiflexi-cli application validate-json --file app.json` - validate application JSON against schema
-- `multiflexi-cli application import-json --file app.json` - import application from JSON
-- `multiflexi-cli application list` - list all applications
-
-Example:
-
-```
-$ multiflexi-cli remove app 15
-02/20/2024 23:48:51 🌼 ❲MultiFlexi cli⦒(15)AbraFlexi send@MultiFlexi\Application❳ Unassigned from 3 companies
-02/20/2024 23:48:53 🌼 ❲MultiFlexi cli⦒(15)AbraFlexi send@MultiFlexi\Application❳ 2 RunTemplate removal
-02/20/2024 23:48:56 🌼 ❲MultiFlexi cli⦒(15)AbraFlexi send@MultiFlexi\Application❳ 2 Config fields removed
-02/20/2024 23:48:57 🌼 ❲MultiFlexi cli⦒(15)AbraFlexi send@MultiFlexi\Application❳ 881 Jobs removed
-Done.
-```
-
-Plugins
--------
-
-Any executable script or binary can be used as a plugin.
-
-![App Listing page](docs/source/applisting.png?raw=true)
-
-You can find the complete list on the [project page](https://www.multiflexi.eu/apps.php).
-
-See the full list of ready-to-run applications within the MultiFlexi platform on the [application list page](https://www.multiflexi.eu/apps.php).
-
-[![MultiFlexi App](https://github.com/VitexSoftware/MultiFlexi/blob/main/doc/multiflexi-app.svg)](https://www.multiflexi.eu/apps.php)

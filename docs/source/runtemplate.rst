@@ -30,7 +30,7 @@ Name and Identification
 Each RunTemplate has a unique name that helps identify its purpose and scope. The name should be descriptive and reflect the specific use case or business process it represents.
 
 Application Assignment
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 RunTemplates are linked to specific applications from the MultiFlexi application catalog. This defines what code will be executed when the template runs.
 
@@ -44,7 +44,7 @@ RunTemplates are associated with:
 - **Credentials**: Authentication and connection information required by the application
 
 Scheduling Configuration
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 RunTemplates support flexible scheduling options:
 
@@ -54,7 +54,7 @@ RunTemplates support flexible scheduling options:
 - **Conditional Execution**: Execution based on specific triggers or events
 
 Environment Variables
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 RunTemplates can define custom environment variables that will be available to the application during execution:
 
@@ -64,7 +64,7 @@ RunTemplates can define custom environment variables that will be available to t
 - Debugging and logging levels
 
 Documentation and Notes
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 **Rich Text Notes** *(New in v2.1.1)*:
 
@@ -85,7 +85,7 @@ The note editor supports:
 - **History**: Version tracking of note changes
 
 Actions Configuration
---------------------
+---------------------
 
 RunTemplates can be configured with actions that execute when specific events occur during job execution. Actions provide integration with external systems and services.
 
@@ -102,13 +102,13 @@ RunTemplates can be configured with actions that execute when specific events oc
 4. Configure the action parameters and credentials
 5. Save the configuration
 
-For detailed information about available actions and their configuration, see the :doc:`actions` section.
+For detailed information about available actions and their configuration, see the :doc:`reference/actions` section.
 
 Creating RunTemplates
 ---------------------
 
 Web Interface
-~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 1. **Navigate to RunTemplates**: Access the RunTemplate management section from the main dashboard
 2. **Create New Template**: Click "New RunTemplate" or similar creation button
@@ -144,7 +144,7 @@ Web Interface
    - Test action configurations
 
 Command Line Interface
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 RunTemplates can also be managed via CLI tools:
 
@@ -160,10 +160,10 @@ RunTemplates can also be managed via CLI tools:
    multiflexi-run-template --execute template_id
 
 Best Practices
--------------
+--------------
 
 Naming Conventions
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 Use clear, descriptive names that include:
 
@@ -179,7 +179,7 @@ Use clear, descriptive names that include:
 - ``Hourly_Data_Sync_CustomerXYZ_DEV``
 
 Environment Management
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 **Security**: 
 
@@ -196,7 +196,7 @@ Environment Management
 - Implement validation for critical parameters
 
 Documentation Standards
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 **Comprehensive Notes**:
 
@@ -215,7 +215,7 @@ Documentation Standards
 - Link to related documentation and resources
 
 Monitoring and Maintenance
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Regular Reviews**:
 
@@ -235,7 +235,7 @@ Troubleshooting
 ---------------
 
 Common Issues
-~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 **Execution Failures**:
 
@@ -259,7 +259,7 @@ Common Issues
 - Review action execution logs for detailed error information
 
 Debugging Tools
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 **Logging**:
 
@@ -276,7 +276,7 @@ Debugging Tools
 - Validate action configurations separately
 
 Integration Examples
--------------------
+--------------------
 
 Business Process Automation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -323,7 +323,7 @@ Business Process Automation
        message: "Data sync failed for Customer Database"
 
 Advanced Configuration
----------------------
+----------------------
 
 Conditional Execution
 ~~~~~~~~~~~~~~~~~~~~~
@@ -336,7 +336,7 @@ RunTemplates can be configured with conditional logic:
 - **Time-based Conditions**: Execute only during specific time windows or business hours
 
 Multi-Environment Management
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Environment Promotion**:
 
@@ -352,5 +352,5 @@ Multi-Environment Management
 - Track configuration drift and compliance
 - Automate configuration backup and recovery
 
-For comprehensive information about configuring actions within RunTemplates, see the :doc:`actions` section.
+For comprehensive information about configuring actions within RunTemplates, see the :doc:`reference/actions` section.
 
