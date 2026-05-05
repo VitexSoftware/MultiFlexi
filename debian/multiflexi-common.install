@@ -1,1 +1,3 @@
 debian/conf/multiflexi.env etc/multiflexi
+multiflexi-common.svg	usr/share/icons/hicolor/scalable/apps/
+cz.vitexsoftware.multiflexi_common.metainfo.xml	usr/share/metainfo/
